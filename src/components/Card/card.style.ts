@@ -1,12 +1,14 @@
-.card-box {
+import styled from 'styled-components';
+
+export const CardBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 
   margin: 10px 0;
-}
+`;
 
-.empty-card {
+export const EmptyCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,9 +25,9 @@
   border-radius: 5px;
 
   user-select: none;
-}
+`;
 
-.small-card {
+export const SmallCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,9 +39,9 @@
   background: #94dacd;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-}
+`;
 
-.small-card__chip {
+export const SmallCardChip = styled.div`
   width: 40px;
   height: 26px;
   left: 95px;
@@ -47,9 +49,9 @@
 
   background: #cbba64;
   border-radius: 4px;
-}
+`;
 
-.big-card {
+export const BigCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,9 +63,9 @@
   background: #94dacd;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-}
+`;
 
-.big-card__chip {
+export const BigCardChip = styled.div`
   width: 55.04px;
   height: 35.77px;
 
@@ -71,66 +73,68 @@
   border-radius: 4px;
 
   font-size: 24px;
-}
+`;
 
-.card-top {
+export const CardTop = styled.div`
   width: 100%;
   height: 100%;
 
   display: flex;
   align-items: center;
-}
+`;
 
-.card-middle {
+export const CardMiddle = styled.div`
   width: 100%;
   height: 100%;
   margin-left: 30px;
 
   display: flex;
   align-items: center;
-}
+`;
 
-.card-bottom {
+export const CardBottom = styled.div`
   width: 100%;
   height: 100%;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+`;
 
-.card-bottom__number {
+export const CardBottomNumber = styled.div`
   width: 100%;
   height: 100%;
 
   display: flex;
   align-items: center;
   justify-content: center;
-}
+`;
 
-.card-bottom__info {
+export const CardBottomInfo = styled.div`
   width: 100%;
   height: 100%;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
+`;
 
-.card-text {
+export const CardText = styled.span`
   margin: 0 16px;
 
   font-size: 14px;
   line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
-}
+`;
 
-.card-text__big {
+export const CardTextBig = styled.span`
   margin: 0 16px;
 
   font-size: 18px;
   line-height: 20px;
   vertical-align: middle;
   font-weight: 400;
-}
+`;
+
+export const CardNickname = styled.span``;
