@@ -1,4 +1,4 @@
-import styles from './Card.module.css'
+import styles from './index.module.css'
 
 const CardTypeAccordingToStartsWith = {
   1: '포코',
@@ -17,7 +17,7 @@ type CardType =
 interface CardProps {
   type: CardType | ''
   number: string
-  expireData: string
+  validDate: string
   owner: string
   cvc: string
   password: string
@@ -27,7 +27,7 @@ const Card = ({
   type,
   number,
   owner,
-  expireData,
+  validDate,
 }: Omit<CardProps, 'password' | 'cvc'>) => {
   return (
     <div className={styles['card-box']}>
@@ -47,7 +47,7 @@ const Card = ({
           <div className={styles['card-bottom__info']}>
             <span className={styles['card-text']}>{owner || 'NAME'}</span>
             <span className={styles['card-text']}>
-              {expireData || 'MM / YY'}
+              {validDate || 'MM / YY'}
             </span>
           </div>
         </div>
