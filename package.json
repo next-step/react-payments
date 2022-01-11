@@ -21,12 +21,24 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "commit": "git add . && cz"
+    "commit": "git add . && cz",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   },
   "browserslist": {
@@ -49,7 +61,16 @@
     }
   },
   "devDependencies": {
+    "@storybook/addon-actions": "^6.4.10",
+    "@storybook/addon-essentials": "^6.4.10",
+    "@storybook/addon-links": "^6.4.10",
+    "@storybook/builder-webpack5": "^6.4.10",
+    "@storybook/manager-webpack5": "^6.4.10",
+    "@storybook/node-logger": "^6.4.10",
+    "@storybook/preset-create-react-app": "^4.0.0",
+    "@storybook/react": "^6.4.10",
     "commitizen": "^4.2.4",
-    "cz-conventional-changelog": "^3.3.0"
+    "cz-conventional-changelog": "^3.3.0",
+    "webpack": "^5.65.0"
   }
 }
