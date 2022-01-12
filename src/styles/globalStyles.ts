@@ -13,6 +13,13 @@ const GlobalStyle = createGlobalStyle`
   input {
     font-size: 16px;
   }
+  input[type="number"]::-webkit-outer-spin-button, 
+  input[type="number"]::-webkit-inner-spin-button { 
+    -webkit-appearance: none; -moz-appearance: none; appearance: none; 
+  }
+  input[type=number] { 
+    -moz-appearance: textfield; 
+  }
 `;
 
 export default GlobalStyle;

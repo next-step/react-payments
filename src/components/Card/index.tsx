@@ -12,14 +12,32 @@ import {
 } from './card.style';
 
 interface CardProps {
+  /**
+   * 카드 이름
+   */
   cardName: string;
+  /**
+   * 유효기간 (월)
+   */
   expiredMonth: string;
+  /**
+   * 유효기간 (년)
+   */
   expiredYear: string;
+  /**
+   * 카드번호
+   */
   cardNumber: string;
+  /**
+   * 카드 소유자 이름
+   */
   userName: string;
 }
 
-const Card: React.VFC<CardProps> = ({
+/**
+ * SmallCard에 isEmpty 속성 포함
+ */
+export const Card: React.VFC<CardProps> = ({
   cardName,
   expiredMonth,
   expiredYear,

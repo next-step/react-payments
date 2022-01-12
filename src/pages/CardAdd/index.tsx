@@ -1,11 +1,17 @@
 import React, { useCallback, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { Root, PageTitle, App, InputTitle } from 'components/UI';
-import Input from 'components/Input';
 import { InputBox, InputContainer } from 'components/Input/input.style';
-import { ButtonBox, ButtonText } from 'components/Button/button.style';
+import { ButtonBox } from 'components/Button/button.style';
+import Input from 'components/Input';
 import Card from 'components/Card';
+import Button from 'components/Button';
+
+const EXPIRED_DATE_MAX_LENGTH = 2;
 
 const CardAddContainer: React.VFC = () => {
+  const navigate = useNavigate();
   const [cardName, setCardName] = useState('');
   const [expiredDate, setExpiredDate] = useState({
     month: '',
@@ -38,9 +44,17 @@ const CardAddContainer: React.VFC = () => {
 
   const updateExpiredDate = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { value, name } = e.target;
+      if (value.length > EXPIRED_DATE_MAX_LENGTH) {
+        setExpiredDate({
+          ...expiredDate,
+          [name]: value.substring(0, EXPIRED_DATE_MAX_LENGTH),
+        });
+        return;
+      }
       setExpiredDate({
         ...expiredDate,
-        [e.target.name]: e.target.value,
+        [name]: value,
       });
     },
     [expiredDate],
@@ -61,7 +75,9 @@ const CardAddContainer: React.VFC = () => {
       {/* 수정 중인 곳 */}
       <Root>
         <App>
-          <PageTitle>&#60; 카드 추가</PageTitle>
+          <PageTitle onClick={() => navigate('/card-list')}>
+            &#60; 카드 추가
+          </PageTitle>
           <Card
             cardName={cardName}
             expiredMonth={expiredDate.month}
@@ -107,13 +123,17 @@ const CardAddContainer: React.VFC = () => {
                 name="month"
                 value={expiredDate.month}
                 onChange={updateExpiredDate}
+                min={1}
+                max={12}
+                maxLength={2}
               />
               <Input
-                type="text"
+                type="number"
                 placeholder="YY"
                 name="year"
                 value={expiredDate.year}
                 onChange={updateExpiredDate}
+                maxLength={2}
               />
             </InputBox>
           </InputContainer>
@@ -167,7 +187,7 @@ const CardAddContainer: React.VFC = () => {
             />
           </InputContainer>
           <ButtonBox>
-            <ButtonText>다음</ButtonText>
+            <Button />
           </ButtonBox>
         </App>
       </Root>

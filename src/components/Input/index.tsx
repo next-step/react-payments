@@ -8,6 +8,9 @@ interface InputProps {
   width?: number;
   name?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  min?: number;
+  max?: number;
+  maxLength?: number;
 }
 
 const InputBasic = styled.input<{ width?: number }>`
@@ -29,6 +32,9 @@ const Input: React.VFC<InputProps> = ({
   width,
   name,
   onChange,
+  min,
+  max,
+  maxLength,
 }) => {
   return (
     <InputBasic
@@ -38,6 +44,9 @@ const Input: React.VFC<InputProps> = ({
       width={width}
       name={name}
       onChange={onChange}
+      min={min}
+      max={max}
+      maxLength={maxLength}
     />
   );
 };

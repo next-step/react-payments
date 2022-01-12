@@ -8,7 +8,7 @@ import {
   ModalItemName,
 } from './modal.style';
 
-const ModalComponent = () => {
+const ModalComponent: React.VFC = () => {
   return (
     <>
       <ModalDimmed>

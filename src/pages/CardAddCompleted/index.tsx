@@ -1,3 +1,4 @@
+import React from 'react';
 import { ButtonBox, ButtonText } from 'components/Button/button.style';
 import {
   BigCard,
@@ -12,7 +13,6 @@ import {
 } from 'components/Card/card.style';
 import { InputContainer, InputUnderline } from 'components/Input/input.style';
 import { Root, PageTitle, FlexCenter, App } from 'components/UI';
-import React from 'react';
 
 const CardAddCompletedContainer: React.VFC = () => {
   return (
