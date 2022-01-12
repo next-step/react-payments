@@ -1,0 +1,15 @@
+{
+  "extends": ["plugin:prettier/recommended"],
+  "plugins": ["react", "prettier"],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "prettier/prettier": ["error", { "singleQuote": true }],
+    "react/jsx-uses-vars": "error"
+  },
+  "ignorePatterns": ["*.config.js"]
+}
