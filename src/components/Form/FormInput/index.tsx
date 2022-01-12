@@ -1,20 +1,38 @@
-import styles from './index.module.css'
+import { ReactNode } from 'react'
+import { CardProps } from '../../Card'
+import Styled from './index.style'
 
 interface FormInputProps {
+  card: CardProps
+  children: ReactNode
   label: string
-  type: 'number' | 'string'
+  errorMessage?: string
+  maxLength?: number
 }
 
-const FormInput = <T extends any>({ label, type }: FormInputProps) => {
-  const state = ''
-
+const FormInput = ({
+  label,
+  children,
+  errorMessage,
+  maxLength,
+}: FormInputProps) => {
   return (
-    <div className={styles.container}>
-      <label>
-        {label}
-        <input type={type}></input>
-      </label>
-    </div>
+    <Styled.Container>
+      {maxLength ? (
+        <Styled.LabelContainer>
+          <Styled.Label>{label}</Styled.Label>
+          <Styled.Label>
+            {maxLength} / {maxLength}
+          </Styled.Label>
+        </Styled.LabelContainer>
+      ) : (
+        <Styled.Label>{label}</Styled.Label>
+      )}
+      {children}
+      {errorMessage && (
+        <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
+      )}
+    </Styled.Container>
   )
 }
 

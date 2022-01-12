@@ -11,4 +11,16 @@ const Container = styled.div`
   align-items: center;
 `
 
-export default { Container }
+const TestInput = styled.input`
+  background-color: #ecebf1;
+  height: 45px;
+  width: 100%;
+  text-align: center;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: #9ca3af;
+  border: none;
+  border-radius: 0.25rem;
+`
+
+export default { Container, TestInput }

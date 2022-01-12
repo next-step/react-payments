@@ -14,7 +14,7 @@ const CardTypeAccordingToStartsWith = {
 type CardType =
   typeof CardTypeAccordingToStartsWith[keyof typeof CardTypeAccordingToStartsWith]
 
-interface CardProps {
+export interface CardProps {
   type: CardType | ''
   number: string
   validDate: string
