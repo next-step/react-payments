@@ -6,7 +6,6 @@ import {
   CardBox,
   CardMiddle,
   CardTop,
-  EmptyCard,
   SmallCard,
   SmallCardChip,
   CardText,
@@ -45,7 +44,7 @@ const CardListContainers: React.VFC = () => {
           </CardBox>
           <CardNickname>법인카드</CardNickname>
           <CardBox>
-            <EmptyCard>+</EmptyCard>
+            <SmallCard isEmpty={true}>+</SmallCard>
           </CardBox>
         </App>
       </Root>

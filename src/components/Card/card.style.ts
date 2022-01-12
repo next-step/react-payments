@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const CardBox = styled.div`
   display: flex;
@@ -8,6 +8,9 @@ export const CardBox = styled.div`
   margin: 10px 0;
 `;
 
+/**
+ * OriginCardUI 에서만 사용
+ */
 export const EmptyCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -27,7 +30,7 @@ export const EmptyCard = styled.div`
   user-select: none;
 `;
 
-export const SmallCard = styled.div`
+export const SmallCard = styled.div<{ isEmpty?: boolean; bgColor?: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,9 +39,20 @@ export const SmallCard = styled.div`
   width: 208px;
   height: 130px;
 
-  background: #94dacd;
+  background: ${({ bgColor }) => (bgColor ? bgColor : '#94dacd')};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+
+  ${({ isEmpty }) =>
+    isEmpty &&
+    css`
+      font-size: 30px;
+      color: #575757;
+
+      background: #e5e5e5;
+
+      user-select: none;
+    `}
 `;
 
 export const SmallCardChip = styled.div`
@@ -83,39 +97,19 @@ export const CardTop = styled.div`
   align-items: center;
 `;
 
-export const CardMiddle = styled.div`
-  width: 100%;
-  height: 100%;
+export const CardMiddle = styled(CardTop)`
   margin-left: 30px;
-
-  display: flex;
-  align-items: center;
 `;
 
-export const CardBottom = styled.div`
-  width: 100%;
-  height: 100%;
-
-  display: flex;
+export const CardBottom = styled(CardTop)`
   flex-direction: column;
-  align-items: center;
 `;
 
-export const CardBottomNumber = styled.div`
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  align-items: center;
+export const CardBottomNumber = styled(CardTop)`
   justify-content: center;
 `;
 
-export const CardBottomInfo = styled.div`
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  align-items: center;
+export const CardBottomInfo = styled(CardTop)`
   justify-content: space-between;
 `;
 
@@ -137,4 +131,12 @@ export const CardTextBig = styled.span`
   font-weight: 400;
 `;
 
-export const CardNickname = styled.span``;
+export const CardNickname = styled.span`
+  margin-bottom: 26px;
+
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: bold;
+  opacity: 0.9;
+  color: #575757;
+`;

@@ -1,9 +1,9 @@
-import App from 'App';
-import CardAddContainer from 'containers/CardAdd';
-import CardAddCompletedContainer from 'containers/CardAddCompleted';
-import CardListContainers from 'containers/CardList';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import App from 'App';
+import CardAddContainer from 'pages/CardAdd';
+import CardAddCompletedContainer from 'pages/CardAddCompleted';
+import CardListContainers from 'pages/CardList';
 
 interface PagesModel {
   path: string;
@@ -30,7 +30,7 @@ const RoutesInfo: React.VFC = () => {
   return (
     <Routes>
       {pages.map((page) => (
-        <Route path={page.path} element={page.element} />
+        <Route key={page.path} path={page.path} element={page.element} />
       ))}
     </Routes>
   );

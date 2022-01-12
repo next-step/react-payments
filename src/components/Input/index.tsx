@@ -2,11 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface InputProps {
-  type: 'text' | 'password';
+  type: 'text' | 'password' | 'number';
   placeholder?: string;
   value?: string;
-  className?: string;
   width?: number;
+  name?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const InputBasic = styled.input<{ width?: number }>`
@@ -25,16 +26,18 @@ const Input: React.VFC<InputProps> = ({
   type = 'text',
   placeholder,
   value,
-  className,
   width,
+  name,
+  onChange,
 }) => {
   return (
     <InputBasic
-      className={className}
       type={type}
       placeholder={placeholder}
       value={value}
       width={width}
+      name={name}
+      onChange={onChange}
     />
   );
 };

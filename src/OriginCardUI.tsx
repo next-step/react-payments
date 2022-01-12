@@ -1,30 +1,38 @@
 import React from 'react';
-import { Root, PageTitle, App, InputTitle } from 'components/UI';
+import { Root, PageTitle, App, InputTitle, FlexCenter } from 'components/UI';
 import Input from 'components/Input';
-import { InputBox, InputContainer } from 'components/Input/input.style';
+import {
+  InputBox,
+  InputContainer,
+  InputUnderline,
+} from 'components/Input/input.style';
 import { ButtonBox, ButtonText } from 'components/Button/button.style';
 import {
+  BigCard,
+  BigCardChip,
   CardBottom,
   CardBottomInfo,
   CardBottomNumber,
   CardBox,
   CardMiddle,
+  CardNickname,
   CardText,
+  CardTextBig,
   CardTop,
   EmptyCard,
   SmallCard,
   SmallCardChip,
 } from 'components/Card/card.style';
 
-const CardAddContainer: React.VFC = () => {
+const OriginCardContainer: React.VFC = () => {
   return (
     <>
       {/* PAGE 01 */}
-
       <h2>1️⃣ 카드 추가</h2>
       <Root>
         <App>
-          <PageTitle> 카드 추가</PageTitle>
+          <PageTitle>&#60; 카드 추가</PageTitle>
+
           <CardBox>
             <EmptyCard>
               <CardTop />
@@ -39,6 +47,7 @@ const CardAddContainer: React.VFC = () => {
               </CardBottom>
             </EmptyCard>
           </CardBox>
+
           <InputContainer>
             <InputTitle>카드 번호</InputTitle>
             <InputBox>
@@ -84,7 +93,8 @@ const CardAddContainer: React.VFC = () => {
       <h2>2️⃣ 카드 추가 - 카드사 선택</h2>
       <Root>
         <App>
-          <PageTitle>카드 추가</PageTitle>
+          <PageTitle>&#60; 카드 추가</PageTitle>
+
           <CardBox>
             <SmallCard>
               <CardTop>
@@ -104,6 +114,7 @@ const CardAddContainer: React.VFC = () => {
               </CardBottom>
             </SmallCard>
           </CardBox>
+
           <InputContainer>
             <InputTitle>카드 번호</InputTitle>
             <InputBox>
@@ -149,7 +160,8 @@ const CardAddContainer: React.VFC = () => {
       <h2>3️⃣ 카드 추가 - 입력 완료</h2>
       <Root>
         <App>
-          <PageTitle>카드 추가</PageTitle>
+          <PageTitle>&#60; 카드 추가</PageTitle>
+
           <CardBox>
             <SmallCard>
               <CardTop>
@@ -169,6 +181,7 @@ const CardAddContainer: React.VFC = () => {
               </CardBottom>
             </SmallCard>
           </CardBox>
+
           <InputContainer>
             <InputTitle>카드 번호</InputTitle>
             <InputBox>
@@ -205,8 +218,80 @@ const CardAddContainer: React.VFC = () => {
           </ButtonBox>
         </App>
       </Root>
+
+      {/* PAGE 04 */}
+      <h2>4️⃣ 카드 추가 완료</h2>
+      <Root>
+        <App flexColumnCenter>
+          <FlexCenter>
+            <PageTitle mb={10}>카드등록이 완료되었습니다.</PageTitle>
+          </FlexCenter>
+          <CardBox>
+            <BigCard>
+              <CardTop>
+                <CardTextBig>클린카드</CardTextBig>
+              </CardTop>
+              <CardMiddle>
+                <BigCardChip />
+              </CardMiddle>
+              <CardBottom>
+                <CardBottomNumber>
+                  <CardTextBig>1111 - 2222 - oooo - oooo</CardTextBig>
+                </CardBottomNumber>
+                <CardBottomInfo>
+                  <CardTextBig>YUJO</CardTextBig>
+                  <CardTextBig>12 / 23</CardTextBig>
+                </CardBottomInfo>
+              </CardBottom>
+            </BigCard>
+          </CardBox>
+          <InputContainer width={100} flexCenter>
+            <InputUnderline
+              width={75}
+              type="text"
+              placeholder="카드의 별칭을 입력해주세요."
+            />
+          </InputContainer>
+          <ButtonBox mt={50}>
+            <ButtonText>다음</ButtonText>
+          </ButtonBox>
+        </App>
+      </Root>
+
+      {/* PAGE 05 */}
+      <h2>5️⃣ 카드 목록</h2>
+      <Root>
+        <App flexColumnCenter>
+          <FlexCenter>
+            <PageTitle mb={10}>보유 카드</PageTitle>
+          </FlexCenter>
+          <CardBox>
+            <SmallCard>
+              <CardTop>
+                <CardText>클린카드</CardText>
+              </CardTop>
+              <CardMiddle>
+                <SmallCardChip />
+              </CardMiddle>
+              <CardBottom>
+                <CardBottomNumber>
+                  <CardText>1111 - 2222 - oooo - oooo</CardText>
+                </CardBottomNumber>
+                <CardBottomInfo>
+                  <CardText>YUJO</CardText>
+                  <CardText>12 / 23</CardText>
+                </CardBottomInfo>
+              </CardBottom>
+            </SmallCard>
+          </CardBox>
+          <CardNickname>법인카드</CardNickname>
+          <CardBox>
+            <EmptyCard>+</EmptyCard>
+          </CardBox>
+        </App>
+      </Root>
     </>
   );
 };
 
-export default CardAddContainer;
+export default OriginCardContainer;
