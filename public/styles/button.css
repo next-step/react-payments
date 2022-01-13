@@ -3,6 +3,9 @@
   text-align: right;
 }
 
-.button-text {
+.button {
   margin-right: 10px;
+  border: 0;
+  background-color: inherit;
+  font-size: inherit;
 }
