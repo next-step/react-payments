@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
 
-const Hello = () => <h1>hello</h1>;
+import App from "./App";
 
-ReactDOM.render(<Hello />, document.querySelector("#app"));
+ReactDOM.render(<App />, document.querySelector("#app"));
