@@ -10,7 +10,6 @@ import { CardAddPageProps } from 'models/page.model';
 import { FlexSpaceBetween } from 'components/UI/Utils';
 import { InputErrorMessage } from 'components/UI/Typography';
 import { ERROR_MESSAGE } from 'utils/validation';
-import { replaceCardNumToDot } from 'utils';
 
 const CardAddPage: React.VFC<CardAddPageProps> = ({
   cardCompany,
@@ -112,11 +111,7 @@ const CardAddPage: React.VFC<CardAddPageProps> = ({
             cardCompany={cardCompany}
             expiredMonth={expiredDate.month}
             expiredYear={expiredDate.year}
-            cardNumber={`${cardNum.first} ${
-              cardNum.second
-            } ${replaceCardNumToDot(cardNum.third)} ${replaceCardNumToDot(
-              cardNum.forth,
-            )}`}
+            cardNum={cardNum}
             userName={userName}
           />
           <form>

@@ -1,3 +1,5 @@
+import { CardNumber } from 'models/page.model';
+
 export const enum MAX_LENGTH {
   CARD_NUMBER = 4,
   EXPIRED_DATE = 2,
@@ -12,3 +14,12 @@ export const enum ERROR_MESSAGE {
   CVC = '보안코드를 입력해주세요',
   CARD_PASSWORD = '카드 비밀번호 앞 두자리를 입력해주세요',
 }
+
+export const checkHasCardNumber = (cardNum: CardNumber) => {
+  return (
+    cardNum.first.length > 0 ||
+    cardNum.second.length > 0 ||
+    cardNum.third.length > 0 ||
+    cardNum.forth.length > 0
+  );
+};

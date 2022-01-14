@@ -7,7 +7,6 @@ const GlobalStyle = createGlobalStyle`
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
-    background-color: #e5e5e5;
   }
 
   input {
@@ -15,7 +14,8 @@ const GlobalStyle = createGlobalStyle`
   }
   input[type="number"]::-webkit-outer-spin-button, 
   input[type="number"]::-webkit-inner-spin-button { 
-    -webkit-appearance: none; -moz-appearance: none; appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; appearance: none; 
   }
   input[type=number] { 
     -moz-appearance: textfield; 

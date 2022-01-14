@@ -15,9 +15,15 @@ const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 
 export const EmptyCard = Template.bind({});
 EmptyCard.args = {
-  cardCompany: '',
+  userName: '',
   expiredMonth: '',
   expiredYear: '',
+  cardNum: {
+    first: '',
+    second: '',
+    third: '',
+    forth: '',
+  },
 };
 
 export const SmallCard = Template.bind({});
@@ -26,5 +32,25 @@ SmallCard.args = {
   userName: '김민정',
   expiredMonth: '6',
   expiredYear: '26',
-  cardNumber: '123123123123',
+  cardNum: {
+    first: '1243',
+    second: '3455',
+    third: '1235',
+    forth: '4533',
+  },
+};
+
+export const BigCard = Template.bind({});
+BigCard.args = {
+  size: 'big',
+  cardCompany: '노리체크',
+  userName: '김민정',
+  expiredMonth: '6',
+  expiredYear: '26',
+  cardNum: {
+    first: '1243',
+    second: '3455',
+    third: '1235',
+    forth: '4533',
+  },
 };

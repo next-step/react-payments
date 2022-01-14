@@ -1,7 +1,6 @@
 import React from 'react';
 import { ButtonBox, ButtonText } from 'components/Button/button.style';
 import {
-  BigCard,
   BigCardChip,
   CardBottom,
   CardBottomInfo,
@@ -10,6 +9,7 @@ import {
   CardMiddle,
   CardTextBig,
   CardTop,
+  CardWrap,
 } from 'components/Card/card.style';
 import { InputContainer, InputUnderline } from 'components/Input/input.style';
 import { Root, PageTitle, FlexCenter, App } from 'components/UI';
@@ -38,7 +38,7 @@ const CardAddCompletedPage: React.VFC<CardAddCompletedPageProps> = ({
           <PageTitle mb={10}>카드등록이 완료되었습니다.</PageTitle>
         </FlexCenter>
         <CardBox>
-          <BigCard>
+          <CardWrap size="big">
             <CardTop>
               <CardTextBig>{cardCompany}</CardTextBig>
             </CardTop>
@@ -60,7 +60,7 @@ const CardAddCompletedPage: React.VFC<CardAddCompletedPageProps> = ({
                 </CardTextBig>
               </CardBottomInfo>
             </CardBottom>
-          </BigCard>
+          </CardWrap>
         </CardBox>
         <InputContainer width={100} flexCenter>
           <InputUnderline
@@ -72,7 +72,9 @@ const CardAddCompletedPage: React.VFC<CardAddCompletedPageProps> = ({
           />
         </InputContainer>
         <ButtonBox mt={50}>
-          <ButtonText onClick={goToCardListPage}>다음</ButtonText>
+          <ButtonText onClick={goToCardListPage} disabled={!cardNickname}>
+            다음
+          </ButtonText>
         </ButtonBox>
       </App>
     </Root>

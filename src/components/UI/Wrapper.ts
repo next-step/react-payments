@@ -7,6 +7,7 @@ export const Root = styled.div`
   min-height: 700px;
   position: relative;
   border-radius: 15px;
+  border: 1px solid #e5e5e5;
 `;
 
 export const App = styled.div<{ flexColumnCenter?: boolean }>`

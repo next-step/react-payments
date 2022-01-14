@@ -1,11 +1,13 @@
+export interface CardNumber {
+  first: string;
+  second: string;
+  third: string;
+  forth: string;
+}
+
 export interface CardInfo {
   expiredDate: { month: string; year: string };
-  cardNum: {
-    first: string;
-    second: string;
-    third: string;
-    forth: string;
-  };
+  cardNum: CardNumber;
   userName: string;
 }
 

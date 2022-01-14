@@ -6,7 +6,7 @@ import {
   CardBox,
   CardMiddle,
   CardTop,
-  SmallCard,
+  CardWrap,
   SmallCardChip,
   CardText,
   CardNickname,
@@ -31,7 +31,7 @@ const CardListPage: React.VFC<CardAddCompletedPageProps> = ({
             <PageTitle mb={10}>보유 카드</PageTitle>
           </FlexCenter>
           <CardBox>
-            <SmallCard>
+            <CardWrap>
               <CardTop>
                 <CardText>{cardCompany}</CardText>
               </CardTop>
@@ -49,16 +49,15 @@ const CardListPage: React.VFC<CardAddCompletedPageProps> = ({
                 <CardBottomInfo>
                   <CardText>{userName}</CardText>
                   <CardText>
-                    {' '}
                     {expiredDate.month} / {expiredDate.year}
                   </CardText>
                 </CardBottomInfo>
               </CardBottom>
-            </SmallCard>
+            </CardWrap>
           </CardBox>
           <CardNickname>{cardNickname}</CardNickname>
           <CardBox>
-            <SmallCard isEmpty={true}>+</SmallCard>
+            <CardWrap isEmpty={true}>+</CardWrap>
           </CardBox>
         </App>
       </Root>

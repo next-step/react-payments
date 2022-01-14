@@ -1,5 +1,9 @@
+import { CardNumber } from 'models/page.model';
 import React from 'react';
+import { replaceCardNumToDot } from 'utils';
+import { checkHasCardNumber } from 'utils/validation';
 import {
+  BigCardChip,
   CardBottom,
   CardBottomInfo,
   CardBottomNumber,
@@ -7,15 +11,19 @@ import {
   CardMiddle,
   CardText,
   CardTop,
-  SmallCard,
+  CardWrap,
   SmallCardChip,
 } from './card.style';
 
 interface CardProps {
   /**
+   * 카드 크기
+   */
+  size?: 'small' | 'big';
+  /**
    * 카드사
    */
-  cardCompany: string;
+  cardCompany?: string;
   /**
    * 유효기간 (월)
    */
@@ -27,7 +35,7 @@ interface CardProps {
   /**
    * 카드번호
    */
-  cardNumber: string;
+  cardNum: CardNumber;
   /**
    * 카드 소유자 이름
    */
@@ -38,16 +46,17 @@ interface CardProps {
  * SmallCard에 isEmpty 속성 포함
  */
 export const Card: React.VFC<CardProps> = ({
+  size = 'small',
   cardCompany,
   expiredMonth,
   expiredYear,
-  cardNumber,
+  cardNum,
   userName,
 }) => {
   const isEmptyCard = () => {
     const hasUserName = userName.length > 0;
     const hasExpiredDate = expiredMonth.length > 0 || expiredYear.length > 0;
-    const hasCardNum = cardNumber.length > 3;
+    const hasCardNum = checkHasCardNumber(cardNum);
     return !(hasUserName || hasExpiredDate || hasCardNum);
   };
   const getUserName = () => {
@@ -61,15 +70,19 @@ export const Card: React.VFC<CardProps> = ({
 
   return (
     <CardBox>
-      <SmallCard isEmpty={isEmptyCard()}>
+      <CardWrap size={size} isEmpty={isEmptyCard()}>
         <CardTop>{!!cardCompany && <CardText>{cardCompany}</CardText>}</CardTop>
         <CardMiddle>
-          <SmallCardChip />
+          {size === 'small' ? <SmallCardChip /> : <BigCardChip />}
         </CardMiddle>
         <CardBottom>
-          {!!cardNumber && (
+          {!!cardNum && (
             <CardBottomNumber>
-              <CardText>{cardNumber}</CardText>
+              <CardText size={size}>{`${cardNum.first} ${
+                cardNum.second
+              } ${replaceCardNumToDot(cardNum.third)} ${replaceCardNumToDot(
+                cardNum.forth,
+              )}`}</CardText>
             </CardBottomNumber>
           )}
           <CardBottomInfo>
@@ -77,7 +90,7 @@ export const Card: React.VFC<CardProps> = ({
             <CardText>{getExpiredDate()}</CardText>
           </CardBottomInfo>
         </CardBottom>
-      </SmallCard>
+      </CardWrap>
     </CardBox>
   );
 };

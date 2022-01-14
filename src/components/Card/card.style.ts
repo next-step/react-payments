@@ -8,7 +8,11 @@ export const CardBox = styled.div`
   margin: 10px 0;
 `;
 
-export const SmallCard = styled.div<{ isEmpty?: boolean; bgColor?: string }>`
+export const CardWrap = styled.div<{
+  size?: 'small' | 'big';
+  isEmpty?: boolean;
+  bgColor?: string;
+}>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,6 +24,13 @@ export const SmallCard = styled.div<{ isEmpty?: boolean; bgColor?: string }>`
   background: ${({ bgColor }) => (bgColor ? bgColor : '#94dacd')};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+
+  ${({ size }) =>
+    size === 'big' &&
+    css`
+      width: 290px;
+      height: 180px;
+    `}
 
   ${({ isEmpty }) =>
     isEmpty &&
@@ -41,20 +52,6 @@ export const SmallCardChip = styled.div`
 
   background: #cbba64;
   border-radius: 4px;
-`;
-
-export const BigCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 290px;
-  height: 180px;
-
-  background: #94dacd;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
 `;
 
 export const BigCardChip = styled.div`
@@ -91,10 +88,10 @@ export const CardBottomInfo = styled(CardTop)`
   justify-content: space-between;
 `;
 
-export const CardText = styled.span`
+export const CardText = styled.span<{ size?: 'small' | 'big' }>`
   margin: 0 16px;
 
-  font-size: 14px;
+  font-size: ${({ size }) => (size === 'big' ? '18px' : '14px')};
   line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
