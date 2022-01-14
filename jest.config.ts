@@ -1,7 +1,7 @@
 export default {
   preset: 'ts-jest',
   clearMocks: true,
-  testEnvironment: "jsdom",
+  testEnvironment: 'jsdom',
   setupFilesAfterEnv: [
     '<rootDir>/jest.setup.ts',
     'given2/setup',
