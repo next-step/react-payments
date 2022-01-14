@@ -9,6 +9,7 @@ const Item = styled.div`
   border-radius: 5px;
   background: #d2d2d2;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  letter-spacing: 2px;
 
   & + & {
     margin-top: 20px;
