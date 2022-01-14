@@ -1,33 +1,15 @@
-import React from 'react'
-import { FormInput } from './components/Form/FormInput'
-import GlobalStyles from './GlobalStyles'
-import Styled from './App.style'
-import { CardProps } from './components/Card'
+import { Route, Routes } from 'react-router-dom'
+import CardList from './pages/CardList'
+import CreateCard from './pages/CreateCard'
+import SubmitCard from './pages/SubmitCard'
 
 function App() {
-  const card: CardProps = {
-    cvc: '',
-    number: '',
-    owner: '',
-    password: '',
-    type: '공원',
-    validDate: '',
-  }
-
   return (
-    <>
-      <GlobalStyles />
-      <Styled.Container>
-        <FormInput
-          label="카드번호"
-          card={card}
-          errorMessage="안뇽"
-          maxLength={30}
-        >
-          <Styled.TestInput />
-        </FormInput>
-      </Styled.Container>
-    </>
+    <Routes>
+      <Route path="/" element={<CardList />} />
+      <Route path="/create" element={<CreateCard />} />
+      <Route path="/submit" element={<SubmitCard />} />
+    </Routes>
   )
 }
 
