@@ -1,4 +1,4 @@
-import cracoAlias from 'craco-alias';
+const cracoAlias = require('craco-alias');
 
 module.exports = {
   plugins: [
