@@ -9,7 +9,7 @@ export default {
       control: { type: "select" },
     },
     width: {
-      options: [15, 25, 100],
+      options: ["15%", "25%", "100%"],
       control: { type: "select" },
     },
   },
