@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import AddCardButton from "../Card/AddCardButton/AddCardButton";
+import AddCardButton from "../AddCardButton";
 
 import Card from "../Card";
 

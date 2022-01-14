@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { Item } from "../CardItem/CardItem";
+
+import Item from "../style/card";
 
 const AddCardButton = () => {
   return (
