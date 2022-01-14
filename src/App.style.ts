@@ -23,4 +23,20 @@ const TestInput = styled.input`
   border-radius: 0.25rem;
 `
 
-export default { Container, TestInput }
+const App = styled.div`
+  max-width: 500px;
+  min-width: 375px;
+  width: 100%;
+  min-height: 100vh;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  width: 375px;
+  min-width: 375px;
+  height: 700px;
+  position: relative;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+`
+
+export default { Container, TestInput, App }

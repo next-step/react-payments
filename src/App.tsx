@@ -1,15 +1,22 @@
 import { Route, Routes } from 'react-router-dom'
+import Styled from './App.style'
+import GlobalStyles from './GlobalStyles'
+import CardCreate from './pages/CardCreate'
 import CardList from './pages/CardList'
-import CreateCard from './pages/CreateCard'
-import SubmitCard from './pages/SubmitCard'
+import CardSubmit from './pages/CardSubmit'
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<CardList />} />
-      <Route path="/create" element={<CreateCard />} />
-      <Route path="/submit" element={<SubmitCard />} />
-    </Routes>
+    <>
+      <GlobalStyles />
+      <Styled.App>
+        <Routes>
+          <Route path="/" element={<CardList />} />
+          <Route path="/create" element={<CardCreate />} />
+          <Route path="/submit" element={<CardSubmit />} />
+        </Routes>
+      </Styled.App>
+    </>
   )
 }
 
