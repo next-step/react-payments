@@ -1,12 +1,14 @@
 import { render } from "@testing-library/react";
 
+import isPublic from "./utils/isPublic";
+
 import Card from "./Card";
 
 describe("Card", () => {
   const CARD = {
     id: 1,
     name: "포코카드",
-    number: "1111 2222 **** ****",
+    number: "1111 2222 3333 4444",
     owner: "SUN",
     expiryDate: "04/21",
     nickname: "엄카",
@@ -20,10 +22,20 @@ describe("Card", () => {
     expect(queryByText("포코카드")).toBeInTheDocument();
   });
 
-  it("카드 번호를 표시합니다", () => {
-    const { queryByText } = makeCard();
+  it("카드 번호를 앞 8자리만 숫자로 표시하고 나머지는 '●'로 표시합니다", () => {
+    const { queryByText, queryAllByText } = makeCard();
 
-    expect(queryByText("1111 2222 **** ****")).toBeInTheDocument();
+    const numbers = CARD.number.split(" ");
+
+    for (const [index, text] of numbers.entries()) {
+      if (!isPublic(index)) {
+        return;
+      }
+
+      expect(queryByText(text)).toBeInTheDocument();
+    }
+
+    expect(queryAllByText("●●●●")).toHaveLength(2);
   });
 
   it("카드 소유자 이름을 표시합니다", () => {

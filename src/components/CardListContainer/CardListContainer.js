@@ -1,14 +1,23 @@
-import CardList from "../CardList";
+import styled from "@emotion/styled";
 
 import CARDS from "../../../fixtures/cards";
 
+import CardList from "../CardList";
+
 const CardListContainer = () => {
   return (
-    <section>
-      <h1>보유카드</h1>
+    <>
+      <Title>보유카드</Title>
       <CardList cards={CARDS} />
-    </section>
+    </>
   );
 };
+
+const Title = styled.h1`
+  position: relative;
+  font-size: 16px;
+  font-weight: normal;
+  color: #383838;
+`;
 
 export default CardListContainer;

@@ -1,13 +1,19 @@
+import styled from "@emotion/styled";
+
 import Card from "../Card";
 
 const CardList = ({ cards }) => {
   return (
-    <ul>
+    <List>
       {cards.map((card) => (
         <Card key={card.id} card={card} />
       ))}
-    </ul>
+    </List>
   );
 };
+
+const List = styled.ul`
+  margin: auto;
+`;
 
 export default CardList;
