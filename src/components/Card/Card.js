@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import CardItem from "./CardItem";
+import CardItem from "../CardItem";
 
 const Card = ({ card }) => {
   const { name, number, owner, expiryDate, nickname } = card;

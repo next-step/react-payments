@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import Item from "../../style/card";
+import Item from "../style/card";
 
 import isPublic from "./utils/isPublic";
 
