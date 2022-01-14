@@ -11,6 +11,9 @@ const AddCardButton = () => {
 };
 
 const Button = styled(Item)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 20px;
   font-size: 30px;
   color: #575757;
