@@ -25,6 +25,19 @@ const globalCss = css`
     margin: 0;
   }
 
+  input {
+    background: none;
+    border: none;
+    color: inherit;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
   * {
     box-sizing: border-box;
   }

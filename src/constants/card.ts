@@ -42,4 +42,6 @@ const CARD_SIZE: { [K in CardSize]: CardSizeContent } = {
   },
 };
 
-export { CARD_COLOR, CARD_SIZE, CARD_NAME };
+const MAX_CARD_NUMBER_LENGTH = 4;
+
+export { CARD_COLOR, CARD_SIZE, CARD_NAME, MAX_CARD_NUMBER_LENGTH };
