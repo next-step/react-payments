@@ -23,3 +23,8 @@ export const InputTitle = styled.span`
 
   color: #525252;
 `;
+
+export const InputErrorMessage = styled.span`
+  font-size: 12px;
+  color: #fe4f6e;
+`;

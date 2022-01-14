@@ -15,14 +15,14 @@ const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 
 export const EmptyCard = Template.bind({});
 EmptyCard.args = {
-  cardName: '',
+  cardCompany: '',
   expiredMonth: '',
   expiredYear: '',
 };
 
 export const SmallCard = Template.bind({});
 SmallCard.args = {
-  cardName: '청춘대로',
+  cardCompany: '청춘대로',
   userName: '김민정',
   expiredMonth: '6',
   expiredYear: '26',

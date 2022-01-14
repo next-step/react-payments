@@ -13,9 +13,9 @@ import {
 
 interface CardProps {
   /**
-   * 카드 이름
+   * 카드사
    */
-  cardName: string;
+  cardCompany: string;
   /**
    * 유효기간 (월)
    */
@@ -38,14 +38,17 @@ interface CardProps {
  * SmallCard에 isEmpty 속성 포함
  */
 export const Card: React.VFC<CardProps> = ({
-  cardName,
+  cardCompany,
   expiredMonth,
   expiredYear,
   cardNumber,
   userName,
 }) => {
   const isEmptyCard = () => {
-    return !userName || !expiredMonth || !expiredYear;
+    const hasUserName = userName.length > 0;
+    const hasExpiredDate = expiredMonth.length > 0 || expiredYear.length > 0;
+    const hasCardNum = cardNumber.length > 3;
+    return !(hasUserName || hasExpiredDate || hasCardNum);
   };
   const getUserName = () => {
     return !!userName ? userName : 'NAME';
@@ -59,7 +62,7 @@ export const Card: React.VFC<CardProps> = ({
   return (
     <CardBox>
       <SmallCard isEmpty={isEmptyCard()}>
-        <CardTop>{!!cardName && <CardText>{cardName}</CardText>}</CardTop>
+        <CardTop>{!!cardCompany && <CardText>{cardCompany}</CardText>}</CardTop>
         <CardMiddle>
           <SmallCardChip />
         </CardMiddle>
