@@ -8,8 +8,8 @@ type CardType = typeof CARD_TYPES[number];
 type CardSize = typeof CARD_SIZE[number];
 
 interface CardExpiration {
-  month?: string;
-  year?: string;
+  month: string;
+  year: string;
 }
 
 interface CardSizeContent {
