@@ -24,6 +24,12 @@ const commonStyle = css`
   li {
     list-style: none;
   }
+
+  button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
 `;
 
 export default commonStyle;
