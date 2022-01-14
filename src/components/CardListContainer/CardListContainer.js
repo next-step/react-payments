@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import CARDS from "../../../fixtures/cards";
+import { CARDS } from "../../../fixtures/cards";
 
 import CardList from "../CardList";
 

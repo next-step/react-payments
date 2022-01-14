@@ -1,14 +1,12 @@
 import { render } from "@testing-library/react";
 
+import * as fixtures from "../../../fixtures/cards";
+
 import Card from "./Card";
 
 describe("Card", () => {
   const CARD = {
-    id: 1,
-    name: "포코카드",
-    number: "1111 2222 3333 4444",
-    owner: "SUN",
-    expiryDate: "04/21",
+    ...fixtures.CARD,
     nickname: "엄카",
   };
 

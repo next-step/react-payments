@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 
-import CARDS from "../../../fixtures/cards";
+import { CARDS } from "../../../fixtures/cards";
 
 import CardList from "./CardList";
 

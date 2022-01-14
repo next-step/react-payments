@@ -3,13 +3,13 @@ import styled from "@emotion/styled";
 import CardItem from "../CardItem";
 
 const Card = ({ card }) => {
-  const { name, number, owner, expiryDate, nickname } = card;
+  const { name, numbers, owner, expiryDate, nickname } = card;
 
-  const cardItem = { name, number, owner, expiryDate };
+  const data = { name, numbers, owner, expiryDate };
 
   return (
     <Wrap>
-      <CardItem cardItem={cardItem} />
+      <CardItem data={data} />
       <Nickname>{nickname}</Nickname>
     </Wrap>
   );

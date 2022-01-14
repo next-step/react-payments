@@ -4,14 +4,14 @@ import Item from "../style/card";
 
 import isPublic from "./utils/isPublic";
 
-const Card = ({ cardItem }) => {
-  const { name, number, owner, expiryDate } = cardItem;
+const CardItem = ({ data }) => {
+  const { name, numbers, owner, expiryDate } = data;
 
   return (
     <Item>
       <Top>{name}</Top>
       <Middle>
-        {number.split(" ").map((text, index) => (
+        {numbers.map((text, index) => (
           <span key={index}>{isPublic(index) ? text : "●●●●"}</span>
         ))}
       </Middle>
@@ -42,7 +42,6 @@ const Middle = styled.p`
   font-size: 12px;
 
   span {
-    letter-spacing: 2px;
     vertical-align: middle;
   }
 `;
@@ -55,4 +54,4 @@ const Bottom = styled.p`
   font-size: 12px;
 `;
 
-export default Card;
+export default CardItem;
