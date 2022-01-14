@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 
 const Item = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 210px;
   height: 130px;
   padding: 15px;

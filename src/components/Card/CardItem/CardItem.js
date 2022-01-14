@@ -49,9 +49,9 @@ const Middle = styled.p`
 
 const Bottom = styled.p`
   display: flex;
+  margin-top: auto;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
   font-size: 12px;
 `;
 
