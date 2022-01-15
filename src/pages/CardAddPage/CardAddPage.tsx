@@ -1,3 +1,4 @@
+import { Button } from 'components/Button'
 import { Card } from 'components/Card'
 import { IconCircleQuestion, IconLeftArrow } from 'components/svgs'
 
@@ -9,13 +10,9 @@ export default function CardAddPage({ setPage }: Props) {
   return (
     <div>
       <header>
-        <button
-          onClick={() => {
-            setPage('CardListPage')
-          }}
-        >
+        <Button onClick={() => setPage('CardListPage')}>
           <IconLeftArrow />
-        </button>
+        </Button>
         <h1>카드 추가</h1>
       </header>
       <Card>+</Card>
@@ -91,7 +88,8 @@ export default function CardAddPage({ setPage }: Props) {
             <input id="secretNum2" name="secretNum2" type="password" maxLength={1} required />
           </fieldset>
         </div>
-        <button type="submit">다음</button>
+
+        <Button type="submit">다음</Button>
       </form>
     </div>
   )

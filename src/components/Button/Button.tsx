@@ -1,4 +1,9 @@
 import * as S from './style'
-export default function Button() {
-  return <S.Button>안녕하세요</S.Button>
+
+export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  color?: string
+}
+
+export function Button({ children, ...props }: Props) {
+  return <S.Box {...props}>{children}</S.Box>
 }
