@@ -1,8 +1,17 @@
 import { useState } from 'react';
-import Header from './components/Header';
 
-function App() {
+import CardForm from './components/CardForm/CardForm';
+import CardFormDomain from './domains/cardFormDomain';
+
+type Props = {
+  domains: {
+    cardFormDomain: CardFormDomain
+  }
+}
+
+function App({ domains }: Props) {
   const [step, setStep] = useState('card-form');
+  const { cardFormDomain } = domains;
 
   const handleClickGoBack = () => {
     setStep('card-list');
@@ -12,7 +21,10 @@ function App() {
     <div className="App">
       {step === 'card-list' && <h1>카드 목록</h1>}
       {step === 'card-form' && (
-        <Header onClickGoBack={handleClickGoBack} />
+        <CardForm
+          onClickGoBack={handleClickGoBack}
+          cardFormDomain={cardFormDomain}
+        />
       )}
     </div>
   );

@@ -2,13 +2,21 @@ import { fireEvent, render } from '@testing-library/react';
 
 import App from './App';
 
+import CardFormDomain from './domains/cardFormDomain';
+
+const DOMAINS = {
+  cardFormDomain: new CardFormDomain(),
+};
+
 describe('App', () => {
+  const renderApp = () => render(<App domains={DOMAINS} />);
+
   it('renders without crash', () => {
-    render(<App />);
+    renderApp();
   });
 
   it('renders card-form title', () => {
-    const { getByTitle, getByRole } = render(<App />);
+    const { getByTitle, getByRole } = renderApp();
 
     fireEvent.click(getByTitle('back'));
 
