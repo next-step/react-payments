@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
-import { CardSize, CardType } from "../../../@types";
-import { CARD_COLOR, CARD_SIZE } from "../../../constants/card";
+import { CardSize, CardType } from "../../@types";
+import { CARD_COLOR, CARD_SIZE } from "../../constants/card";
 
 interface CardSizeProp {
   size: CardSize;

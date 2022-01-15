@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 
-import BaseInputWrapper from "../@shared/InputWrapper/InputWrapper";
+import BaseInputWrapper from "../InputWrapper/InputWrapper";
 
 const InputWrapper = styled(BaseInputWrapper)`
   color: #04c09e;

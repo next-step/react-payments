@@ -1,5 +1,5 @@
-import { CardExpiration, CardNumber, CardSize, CardType } from "../../../@types";
-import { CARD_NAME } from "../../../constants/card";
+import { CardExpiration, CardNumber, CardSize, CardType } from "../../@types";
+import { CARD_NAME } from "../../constants/card";
 import Styled from "./Card.styles";
 
 interface Props {
