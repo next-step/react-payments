@@ -2,18 +2,12 @@ import { ChangeEvent, useState, useEffect } from "react";
 
 import { CardNumber } from "../../@types";
 import { MAX_CARD_NUMBER_LENGTH } from "../../constants/card";
+import { hasNonNumberChar } from "../../utils/validations";
 import Styled from "./CardNumberInput.styles";
 
 interface Props {
   onCardNumberChange: (cardNumber: CardNumber) => void;
 }
-
-const isInvalidCardNumber = (value: string) => {
-  const hasInvalidToken = /[^0-9]|[-.]/.test(value);
-  const isExceededCardNumberLimit = value.length > MAX_CARD_NUMBER_LENGTH;
-
-  return hasInvalidToken || isExceededCardNumberLimit;
-};
 
 const CardNumberInput = ({ onCardNumberChange }: Props) => {
   const [cardNumber, setCardNumber] = useState<CardNumber>(["", "", "", ""]);
@@ -22,7 +16,7 @@ const CardNumberInput = ({ onCardNumberChange }: Props) => {
     const updatedCardNumber: CardNumber = [...cardNumber];
     const { value } = event.target;
 
-    if (isInvalidCardNumber(value)) {
+    if (hasNonNumberChar(value)) {
       return;
     }
 
@@ -36,13 +30,37 @@ const CardNumberInput = ({ onCardNumberChange }: Props) => {
 
   return (
     <Styled.InputWrapper label={"카드번호"}>
-      <input type="text" inputMode="numeric" value={cardNumber[0]} onChange={makeChangeHandlerByIndex(0)} />
+      <input
+        type="text"
+        inputMode="numeric"
+        value={cardNumber[0]}
+        onChange={makeChangeHandlerByIndex(0)}
+        maxLength={MAX_CARD_NUMBER_LENGTH}
+      />
       -
-      <input type="text" inputMode="numeric" value={cardNumber[1]} onChange={makeChangeHandlerByIndex(1)} />
+      <input
+        type="text"
+        inputMode="numeric"
+        value={cardNumber[1]}
+        onChange={makeChangeHandlerByIndex(1)}
+        maxLength={MAX_CARD_NUMBER_LENGTH}
+      />
       -
-      <input type="password" inputMode="numeric" value={cardNumber[2]} onChange={makeChangeHandlerByIndex(2)} />
+      <input
+        type="password"
+        inputMode="numeric"
+        value={cardNumber[2]}
+        onChange={makeChangeHandlerByIndex(2)}
+        maxLength={MAX_CARD_NUMBER_LENGTH}
+      />
       -
-      <input type="password" inputMode="numeric" value={cardNumber[3]} onChange={makeChangeHandlerByIndex(3)} />
+      <input
+        type="password"
+        inputMode="numeric"
+        value={cardNumber[3]}
+        onChange={makeChangeHandlerByIndex(3)}
+        maxLength={MAX_CARD_NUMBER_LENGTH}
+      />
     </Styled.InputWrapper>
   );
 };

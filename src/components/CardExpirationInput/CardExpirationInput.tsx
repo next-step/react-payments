@@ -1,18 +1,12 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { CardExpiration } from "../../@types";
 import { MAX_CARD_EXPIRATION_VALUE_LENGTH } from "../../constants/card";
+import { hasNonNumberChar } from "../../utils/validations";
 import Styled from "./CardExpirationInput.styles";
 
 interface Props {
   onCardExpirationChange: (month: string, year: string) => void;
 }
-
-const isInvalidExpirationValue = (value: string) => {
-  const hasInvalidToken = /[^0-9]|[-.]/.test(value);
-  const isExceededValueLengthLimit = value.length > MAX_CARD_EXPIRATION_VALUE_LENGTH;
-
-  return hasInvalidToken || isExceededValueLengthLimit;
-};
 
 const CardExpirationInput = ({ onCardExpirationChange }: Props) => {
   const [expiration, setExpiration] = useState<CardExpiration>({ month: "", year: "" });
@@ -20,7 +14,7 @@ const CardExpirationInput = ({ onCardExpirationChange }: Props) => {
   const makeChangeHandlerByKey = (key: keyof CardExpiration) => (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
-    if (isInvalidExpirationValue(value)) {
+    if (hasNonNumberChar(value)) {
       return;
     }
 
@@ -36,9 +30,19 @@ const CardExpirationInput = ({ onCardExpirationChange }: Props) => {
 
   return (
     <Styled.InputWrapper label="만료일">
-      <input type="text" value={expiration.month} onChange={makeChangeHandlerByKey("month")} />
+      <input
+        type="text"
+        value={expiration.month}
+        onChange={makeChangeHandlerByKey("month")}
+        maxLength={MAX_CARD_EXPIRATION_VALUE_LENGTH}
+      />
       /
-      <input type="text" value={expiration.year} onChange={makeChangeHandlerByKey("year")} />
+      <input
+        type="text"
+        value={expiration.year}
+        onChange={makeChangeHandlerByKey("year")}
+        max={MAX_CARD_EXPIRATION_VALUE_LENGTH}
+      />
     </Styled.InputWrapper>
   );
 };
