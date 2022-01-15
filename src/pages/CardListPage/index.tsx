@@ -1,11 +1,14 @@
-import { ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CardListPage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="flex-column-center">
       <CardListTitle>보유 카드</CardListTitle>
       <Card />
-      <AddCardButton />
+      <AddCardButton onClick={() => navigate('/registration')} />
     </div>
   );
 };
@@ -45,9 +48,9 @@ const Card = () => {
   );
 };
 
-const AddCardButton = () => {
+const AddCardButton = (props: HTMLAttributes<HTMLDivElement>) => {
   return (
-    <div className="card-box">
+    <div {...props} style={{ cursor: 'pointer' }} className="card-box">
       <div className="empty-card">+</div>
     </div>
   );

@@ -1,12 +1,19 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CardRegistrationPage = () => {
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
       <div>
-        <h2 className="page-title"> {'<'} 카드 추가</h2>
+        <h2 className="page-title">
+          <span style={{ cursor: 'pointer', marginRight: '1rem' }} onClick={() => navigate('/')}>
+            {'<'}
+          </span>
+          카드 추가
+        </h2>
         <div className="card-box">
           <div className="empty-card">
             <div className="card-top"></div>
