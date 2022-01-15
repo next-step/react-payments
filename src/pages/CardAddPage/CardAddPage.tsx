@@ -1,5 +1,5 @@
 import { Button } from 'components/Button'
-import { Card } from 'components/Card'
+import { BlankCard, Card } from 'components/Card'
 import { IconCircleQuestion, IconLeftArrow } from 'components/svgs'
 
 interface Props {
@@ -15,7 +15,7 @@ export default function CardAddPage({ setPage }: Props) {
         </Button>
         <h1>카드 추가</h1>
       </header>
-      <Card>+</Card>
+      <BlankCard />
       <form>
         <div>
           <fieldset>

@@ -1,10 +1,8 @@
 import React from 'react'
 import * as S from './style'
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   big?: boolean
-  onClick?: React.MouseEventHandler<HTMLDivElement>
-  children: React.ReactNode
 }
 
 export function Card({ children, ...props }: Props) {

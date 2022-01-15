@@ -9,7 +9,9 @@ export default function CardListPage({ setPage }: PageProps) {
       </S.Header>
       <main>
         <section>
-          <Card onClick={() => setPage('CardAddPage')}>+</Card>
+          <Card onClick={() => setPage('CardAddPage')}>
+            <S.AlignCenter>+</S.AlignCenter>
+          </Card>
         </section>
       </main>
     </S.CardListPage>

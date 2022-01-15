@@ -9,3 +9,10 @@ export const Header = styled.header`
   font-size: 20px;
   padding: 8px 0;
 `
+
+export const AlignCenter = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
