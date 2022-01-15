@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components'
 
-export const Card = styled.div<{ big: string }>`
+export const Card = styled.div<{ big?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px 0;
+  margin: 12px 0;
   width: 208px;
   height: 130px;
   color: #575757;

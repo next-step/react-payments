@@ -1,7 +1,9 @@
+import React from 'react'
 import * as S from './style'
 
 interface Props {
-  big?: string | boolean
+  big?: boolean
+  onClick?: React.MouseEventHandler<HTMLDivElement>
   children: React.ReactNode
 }
 

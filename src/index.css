@@ -35,5 +35,7 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #e5e5e5;
-  border: 1px solid blue;
+}
+fieldset {
+  border: none;
 }
