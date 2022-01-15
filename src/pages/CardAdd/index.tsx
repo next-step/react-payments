@@ -93,6 +93,10 @@ const CardAddPage: React.VFC<CardAddPageProps> = ({
     }
   };
 
+  const goToListPage = () => {
+    navigate('/list', { state: 'reset' });
+  };
+
   const goNextStepToAddCard = () => {
     const isValidated = checkValidationInputs();
     if (isValidated) {
@@ -104,9 +108,7 @@ const CardAddPage: React.VFC<CardAddPageProps> = ({
     <>
       <Root>
         <App>
-          <PageTitle onClick={() => navigate('/list')}>
-            &#60; 카드 추가
-          </PageTitle>
+          <PageTitle onClick={goToListPage}>&#60; 카드 추가</PageTitle>
           <Card
             cardCompany={cardCompany}
             expiredMonth={expiredDate.month}

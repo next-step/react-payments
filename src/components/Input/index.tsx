@@ -2,12 +2,21 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 interface InputProps {
+  /**
+   * 타입
+   */
   type: 'text' | 'password' | 'number';
   placeholder?: string;
   value?: string;
   width?: number;
+  /**
+   * Input attr name
+   */
   name?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  /**
+   * type이 text일 때 마스킹 처리 할 때 사용
+   */
   isPassword?: boolean;
   readOnly?: boolean;
   ref?: any;

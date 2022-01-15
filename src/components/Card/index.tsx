@@ -43,7 +43,7 @@ interface CardProps {
 }
 
 /**
- * SmallCard에 isEmpty 속성 포함
+ * Card (Empty, Small, Big)
  */
 export const Card: React.VFC<CardProps> = ({
   size = 'small',

@@ -31,7 +31,10 @@ export interface CardAddPageProps extends CardInfoWithCardCompany {
   updateCardPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export interface CardAddCompletedPageProps extends CardInfoWithCardCompany {
+export interface CardListPageProps extends CardInfoWithCardCompany {
   cardNickname: string;
+}
+
+export interface CardAddCompletedPageProps extends CardListPageProps {
   updateCardNickname: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

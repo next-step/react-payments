@@ -1,7 +1,12 @@
-import React, { useCallback, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { MAX_LENGTH } from 'utils/validation';
 import { CardAddPage, CardAddCompletedPage, CardListPage } from 'pages/index';
+import {
+  initialCardNumValue,
+  initialCardPasswordValue,
+  initialExpiredDateValue,
+} from 'models/card.model';
 
 interface PagesModel {
   path: string;
@@ -9,27 +14,28 @@ interface PagesModel {
 }
 
 const App = () => {
+  const location = useLocation();
   const [cardCompany, setCardCompany] = useState('');
-  const [expiredDate, setExpiredDate] = useState({
-    month: '',
-    year: '',
-  });
-  const [cardNum, setCardNum] = useState({
-    first: '',
-    second: '',
-    third: '',
-    forth: '',
-  });
+  const [expiredDate, setExpiredDate] = useState(initialExpiredDateValue);
+  const [cardNum, setCardNum] = useState(initialCardNumValue);
   const [userName, setUserName] = useState('');
   const [CVC, setCVC] = useState('');
-  const [cardPassword, setCardPassword] = useState({
-    first: '',
-    second: '',
-    third: '1',
-    forth: '1',
-  });
+  const [cardPassword, setCardPassword] = useState(initialCardPasswordValue);
   const [cardNickname, setCardNickname] = useState('');
 
+  useEffect(() => {
+    if (location.state === 'reset') {
+      setCardCompany('');
+      setExpiredDate(initialExpiredDateValue);
+      setCardNum(initialCardNumValue);
+      setUserName('');
+      setCVC('');
+      setCardPassword(initialCardPasswordValue);
+      setCardNickname('');
+    }
+  }, [location]);
+
+  // TODO: 시간 될 때 카드사 자동 추정 기능 추가 예정
   const updateCardCompany = (name: string) => {
     setCardCompany(name);
   };
@@ -154,7 +160,6 @@ const App = () => {
           cardNum={cardNum}
           userName={userName}
           cardNickname={cardNickname}
-          updateCardNickname={updateCardNickname}
         />
       ),
     },

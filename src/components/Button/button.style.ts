@@ -11,5 +11,5 @@ export const ButtonText = styled.span<{ disabled?: boolean }>`
   margin-right: 10px;
 
   color: ${({ disabled }) => disabled && '#808080'};
-  cursor: ${({ disabled }) => disabled && 'not-allowed'};
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 `;
