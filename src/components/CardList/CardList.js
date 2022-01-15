@@ -1,24 +1,13 @@
-import styled from "@emotion/styled";
-
-import AddCardButton from "../AddCardButton";
-
 import Card from "../Card";
 
 const CardList = ({ cards }) => {
   return (
-    <List>
-      <>
-        {cards.map((card) => (
-          <Card key={card.id} card={card} />
-        ))}
-        <AddCardButton />
-      </>
-    </List>
+    <ul>
+      {cards.map((card) => (
+        <Card key={card.id} card={card} />
+      ))}
+    </ul>
   );
 };
-
-const List = styled.ul`
-  margin: auto;
-`;
 
 export default CardList;

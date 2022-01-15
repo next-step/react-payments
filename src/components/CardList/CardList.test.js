@@ -14,14 +14,4 @@ describe("CardList", () => {
       expect(queryAllByText(name)).not.toHaveLength(0);
     });
   });
-
-  it("카드 추가 버튼을 렌더링합니다", () => {
-    const { queryByRole } = makeCardList();
-
-    expect(
-      queryByRole("button", {
-        name: "카드 추가",
-      })
-    ).toBeInTheDocument();
-  });
 });
