@@ -40,6 +40,7 @@ const Chip = styled.div<CardSizeProp>`
 
 const CardName = styled.div`
   font-size: 0.7em;
+  height: 13%;
 `;
 
 const CardNumber = styled.ul`
