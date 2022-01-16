@@ -1,35 +1,53 @@
 import { useState } from 'react';
 
 export type CardNumber = [string, string, string, string];
+export type ExpireDate = [string, string];
 
 export interface CardForm {
   cardNumber: CardNumber;
-  expireDate: Date | null;
+  expireDate: ExpireDate;
+  userName?: string;
 }
 
 const useCardForm = () => {
   const [form, setForm] = useState<CardForm>({
     cardNumber: ['', '', '', ''],
-    expireDate: null,
+    expireDate: ['', ''],
   });
 
-  const setCardNumber = (cardNumber: string, index: 0 | 1 | 2 | 3) => {
-    if (cardNumber.length > 4 || cardNumber.match(/[^0-9]/)) return;
+  const setCardNumber = (value: string, index: 0 | 1 | 2 | 3) => {
+    if (value.length > 4 || value.match(/[^\d]/)) return;
 
     const newForm = { ...form, cardNumber: [...form.cardNumber] as CardNumber };
 
-    newForm.cardNumber[index] = cardNumber;
+    newForm.cardNumber[index] = value;
 
     setForm(newForm);
   };
 
-  const setExpireMonth = (month: number) => {
-    if (month < 1 || month > 12) return;
+  const setExpireMonth = (value: string) => {
+    const month = Number(value);
+    const isInRange = !Number.isNaN(month) && month >= 1 && month <= 12;
+
+    if (value !== '' && !isInRange) return;
+
+    setForm({ ...form, expireDate: [value, form.expireDate[1]] });
   };
 
-  const setExpireDay = (day: number) => {};
+  const setExpireYear = (value: string) => {
+    const year = Number(value);
+    const isInRange = !Number.isNaN(year) && year >= 1 && year <= 99;
 
-  return { form, setCardNumber, setExpireMonth, setExpireDay };
+    if (value !== '' && !isInRange) return;
+
+    setForm({ ...form, expireDate: [form.expireDate[0], value] });
+  };
+
+  const setUserName = (value: string) => {
+    setForm({ ...form, userName: value });
+  };
+
+  return { form, setCardNumber, setExpireMonth, setExpireYear, setUserName };
 };
 
 export default useCardForm;

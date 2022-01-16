@@ -1,3 +1,4 @@
+import { format } from 'path/posix';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useCardForm, { CardForm, CardNumber } from './useCardForm';
@@ -6,7 +7,7 @@ const CardRegistrationPage = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { form, setCardNumber } = useCardForm();
+  const { form, setCardNumber, setExpireMonth, setExpireYear } = useCardForm();
 
   return (
     <>
@@ -54,8 +55,21 @@ const CardRegistrationPage = () => {
         <div className="input-container">
           <span className="input-title">만료일</span>
           <div className="input-box w-50">
-            <input className="input-basic" type="text" placeholder="MM" />
-            <input className="input-basic" type="text" placeholder="YY" />
+            <input
+              className="input-basic"
+              type="tel"
+              placeholder="MM"
+              value={form.expireDate[0]}
+              onChange={({ target }) => setExpireMonth(target.value)}
+            />
+            {form.expireDate[0].length ? '/' : ''}
+            <input
+              className="input-basic"
+              type="tel"
+              placeholder="YY"
+              value={form.expireDate[1]}
+              onChange={({ target }) => setExpireYear(target.value)}
+            />
           </div>
         </div>
         <div className="input-container">
@@ -110,7 +124,9 @@ const Card = ({ card }: { card: CardForm }) => {
             </div>
             <div className="card-bottom__info">
               <span className="card-text">NAME</span>
-              <span className="card-text">MM / YY</span>
+              <span className="card-text">
+                {card.expireDate[0]} {card.expireDate[0].length ? '/' : ''} {card.expireDate[1]}
+              </span>
             </div>
           </div>
         </div>
