@@ -1,17 +1,14 @@
 import { useEffect, useMemo, useState } from 'react'
 import { CardFormProps } from '..'
-import { CardProps } from '../../../components/Card/Card'
+import Card from '../../../components/Card'
+import { CardBaseFormProps } from '../../../components/Form'
 import { useFormChangedState } from '../../../context/Form/hooks'
-import CardExpire from './CardExpire'
-import CardNumber from './CardNumber'
-import CardOwner from './CardOnwer'
-import Styled from './index.style'
 
-type CardModelKeys = (keyof CardProps)[]
-interface CardProp {
+type CardModelKeys = (keyof CardBaseFormProps)[]
+interface CreateCardProp {
   formRef: React.RefObject<CardFormProps>
 }
-const Card = ({ formRef }: CardProp) => {
+const CreateCard = ({ formRef }: CreateCardProp) => {
   const state = useFormChangedState()
   const [number1, setNumber1] = useState('')
   const [number2, setNumber2] = useState('')
@@ -56,31 +53,17 @@ const Card = ({ formRef }: CardProp) => {
     }
   }, [formRef, state, stateKeys])
 
-  useEffect(() => {
-    console.log('parameter is changed', month, year)
-  }, [year, month])
   return (
-    <Styled.Card>
-      <Styled.CardTop>
-        <Styled.CardText>클린카드</Styled.CardText>
-      </Styled.CardTop>
-      <Styled.CardMiddle>
-        <Styled.CardSmallChip />
-      </Styled.CardMiddle>
-      <Styled.CardBottom>
-        <CardNumber
-          number1={number1}
-          number2={number2}
-          number3={number3}
-          number4={number4}
-        />
-        <Styled.CardBottomInfo>
-          <CardOwner name={name} />
-          <CardExpire month={month} year={year} />
-        </Styled.CardBottomInfo>
-      </Styled.CardBottom>
-    </Styled.Card>
+    <Card
+      number1={number1}
+      number2={number2}
+      number3={number3}
+      number4={number4}
+      month={month}
+      year={year}
+      name={name}
+    />
   )
 }
 
-export default Card
+export default CreateCard

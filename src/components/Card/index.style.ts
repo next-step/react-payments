@@ -9,11 +9,12 @@ import {
   cardTopStyle,
   smallCardStyle,
   smallChipStyle,
-} from '../../../css/card'
+} from '../../css/card'
 
-const Card = styled.div`
+const Card = styled.div<{ bgColor?: string }>`
   ${smallCardStyle}
   ${CardStyle}
+  ${({ bgColor }) => bgColor && { backgroundColor: bgColor }}
   margin-bottom: 25px;
 `
 

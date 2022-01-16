@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import Header from '../../components/Layout/Header'
 import FormContextProvider from '../../context/Form/FormChangeContext'
-import Card from './Card'
+import CreateCard from './Card'
 import CreateCardForm from './Form'
 import Styled from './index.style'
 
@@ -26,7 +26,7 @@ const CardCreate = () => {
       <FormContextProvider>
         <Header title="카드추가" lintTo="/" />
         <Styled.CardCreateContainer>
-          <Card formRef={formRef} />
+          <CreateCard formRef={formRef} />
           <CreateCardForm ref={formRef} />
         </Styled.CardCreateContainer>
       </FormContextProvider>

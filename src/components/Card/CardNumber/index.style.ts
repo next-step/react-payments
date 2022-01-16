@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cardBottomNumberStyle } from '../../../../css/card'
+import { cardBottomNumberStyle } from '../../../css/card'
 
 const CardNumberContainer = styled.div`
   ${cardBottomNumberStyle}

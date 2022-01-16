@@ -1,7 +1,7 @@
 import { createContext, Dispatch, ReactNode, useReducer } from 'react'
-import { CardProps } from '../../components/Card/Card'
+import { CardBaseFormProps } from '../../components/Form'
 
-type PropName = keyof CardProps
+type PropName = keyof CardBaseFormProps
 type Payload = { name: PropName }
 type Action = { type: 'CHANGE'; payload: Payload }
 type FormChangedContextProps = Record<PropName, boolean>

@@ -7,12 +7,13 @@ const CardTypeAccordingToStartsWith = {
   6: '도비',
   7: '콜린',
   8: '썬',
+  9: '썬',
 } as const
 
-type CardType =
+export type CardType =
   typeof CardTypeAccordingToStartsWith[keyof typeof CardTypeAccordingToStartsWith]
 
-export interface CardProps {
+export interface CardBaseFormProps {
   type: CardType | ''
   number1: string
   number2: string

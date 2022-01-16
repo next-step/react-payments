@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cardTextStyle } from '../../../../css/card'
+import { cardTextStyle } from '../../../css/card'
 
 const CardTextContainer = styled.div`
   padding-left: 18px;
