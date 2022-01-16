@@ -18,7 +18,6 @@ const commonStyle = css`
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #e5e5e5;
   }
 
   li {
