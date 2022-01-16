@@ -4,7 +4,7 @@ const Input = ({ field, onChange, isFullField, separator = "-" }) => {
   const { ariaLabel, ref, type, id, name, placeholder, value } = field;
 
   return (
-    <AutoFocus>
+    <Wrap>
       {isFullField && <em>{separator}</em>}
       <Item
         id={id}
@@ -16,11 +16,11 @@ const Input = ({ field, onChange, isFullField, separator = "-" }) => {
         value={value}
         onChange={onChange}
       />
-    </AutoFocus>
+    </Wrap>
   );
 };
 
-const AutoFocus = styled.li`
+const Wrap = styled.li`
   position: relative;
   display: flex;
   align-items: center;
