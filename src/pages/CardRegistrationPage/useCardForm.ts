@@ -12,6 +12,8 @@ const useCardForm = () => {
   });
 
   const setCardNumber = (cardNumber: string, index: 0 | 1 | 2 | 3) => {
+    if (cardNumber.length > 4 || cardNumber.match(/[^0-9]/)) return;
+
     const newForm = { ...form, cardNumber: [...form.cardNumber] as CardNumber };
 
     newForm.cardNumber[index] = cardNumber;
