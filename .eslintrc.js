@@ -20,5 +20,12 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react", "@typescript-eslint"],
-  rules: {},
+  rules: {
+    "@typescript-eslint/no-empty-interface": [
+      "warn",
+      {
+        allowSingleExtends: false,
+      },
+    ],
+  },
 };
