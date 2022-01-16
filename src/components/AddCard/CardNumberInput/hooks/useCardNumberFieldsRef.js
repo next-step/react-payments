@@ -1,14 +1,6 @@
 import { useEffect, useRef } from "react";
 
-import { MAX_LENGTH } from "../../constants";
-
-const moveTarget = ({ currentField, target }) => {
-  if (!target || currentField.length !== MAX_LENGTH) {
-    return;
-  }
-
-  target.focus();
-};
+import moveFocus from "../../utils/moveFocus";
 
 const useCardNumberFieldsRef = ({ fields }) => {
   const { firstField, secondField, thirdField } = fields;
@@ -25,15 +17,27 @@ const useCardNumberFieldsRef = ({ fields }) => {
   };
 
   useEffect(() => {
-    moveTarget({ currentField: firstField, target: targets.firstInput });
+    moveFocus({
+      currentField: firstField,
+      target: targets.firstInput,
+      maxLength: 4,
+    });
   }, [firstField]);
 
   useEffect(() => {
-    moveTarget({ currentField: secondField, target: targets.secondInput });
+    moveFocus({
+      currentField: secondField,
+      target: targets.secondInput,
+      maxLength: 4,
+    });
   }, [secondField]);
 
   useEffect(() => {
-    moveTarget({ currentField: thirdField, target: targets.thirdInput });
+    moveFocus({
+      currentField: thirdField,
+      target: targets.thirdInput,
+      maxLength: 4,
+    });
   }, [thirdField]);
 
   return {
