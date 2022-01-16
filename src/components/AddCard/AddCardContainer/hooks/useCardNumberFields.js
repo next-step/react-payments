@@ -11,6 +11,10 @@ const useCardNumberFields = () => {
       thirdField: "",
       fourthField: "",
     },
+    expiryDate: {
+      monthField: "",
+      yearField: "",
+    },
   });
 
   const handleChangeSingleInput = ({ maxLength, name, value }) => {

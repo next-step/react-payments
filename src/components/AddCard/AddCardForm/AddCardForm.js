@@ -1,15 +1,25 @@
+import styled from "@emotion/styled";
+
 import CardNumberInput from "../CardNumberInput";
+import ExpiryDateInput from "../ExpiryDateInput";
 
 const AddCardForm = ({
-  fields,
-  handleChangeSingleInput,
+  fields: { cardNumbers, expiryDate },
   handleChangeMultipleInput,
 }) => (
-  <form>
+  <Form>
     <CardNumberInput
-      fields={fields.cardNumbers}
+      fields={cardNumbers}
       onChange={handleChangeMultipleInput}
     />
-  </form>
+    <ExpiryDateInput fields={expiryDate} onChange={handleChangeMultipleInput} />
+  </Form>
 );
+
+const Form = styled.form`
+  & > div + div {
+    margin-top: 20px;
+  }
+`;
+
 export default AddCardForm;
