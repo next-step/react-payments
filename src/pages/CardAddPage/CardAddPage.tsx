@@ -1,6 +1,10 @@
 import { Button } from 'components/Button'
-import { BlankCard, Card } from 'components/Card'
+import { BlankCard } from 'components/Card'
+import { CardPasswordFieldSet, CardSerialNumsFieldSet } from 'components/Form/FieldSet'
+import { CardInput } from 'components/Form/Input'
+import { CardModal } from 'components/Modal'
 import { IconCircleQuestion, IconLeftArrow } from 'components/svgs'
+import * as S from './style'
 
 interface Props {
   setPage: React.Dispatch<React.SetStateAction<string>>
@@ -9,88 +13,66 @@ interface Props {
 export default function CardAddPage({ setPage }: Props) {
   return (
     <div>
-      <header>
+      <S.Header>
         <Button onClick={() => setPage('CardListPage')}>
           <IconLeftArrow />
         </Button>
-        <h1>카드 추가</h1>
-      </header>
-      <BlankCard />
-      <form>
-        <div>
-          <fieldset>
-            <legend>카드 번호</legend>
-            <label htmlFor="cardNums1" />
-            <input
-              id="cardNums1"
-              name="cardNums2"
-              type="number"
-              minLength={4}
-              maxLength={4}
-              required
-            />
-            <label htmlFor="cardNums2" />
-            <input
-              id="cardNums2"
-              name="cardNums2"
-              type="number"
-              minLength={4}
-              maxLength={4}
-              required
-            />
-            <label htmlFor="cardNums3" />
-            <input
-              id="cardNums3"
-              name="cardNums3"
-              type="password"
-              minLength={4}
-              maxLength={4}
-              required
-            />
-            <label htmlFor="cardNums4" />
-            <input
-              id="cardNums4"
-              name="cardNums4"
-              type="password"
-              minLength={4}
-              maxLength={4}
-              required
-            />
-            <span>err</span>
-          </fieldset>
+        <S.H1>카드 추가</S.H1>
+      </S.Header>
 
-          <div>
-            <label htmlFor="expiredDate">만료일</label>
-            <input
-              id="expiredDate"
-              name="expiredDate"
-              type="text"
-              minLength={25}
-              maxLength={25}
+      <S.FlexRowCenter>
+        <BlankCard />
+      </S.FlexRowCenter>
+
+      <S.Form>
+        <CardSerialNumsFieldSet />
+        <S.FlexColumn width="40%">
+          <CardInput
+            labelName="만료일"
+            id="expiredDate"
+            name="expiredDate"
+            type="text"
+            placeholder="MM/YY"
+            minLength={5}
+            maxLength={5}
+            required
+          />
+        </S.FlexColumn>
+        <S.FlexColumn>
+          <CardInput
+            labelName="카드 소유자 이름(선택)"
+            id="userName"
+            name="userName"
+            type="text"
+            placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+            maxLength={30}
+            required
+          />
+        </S.FlexColumn>
+
+        <S.FlexRowAlignCenter>
+          <S.FlexColumn width="30%">
+            <CardInput
+              labelName="보안 코드(CVC/CVV)"
+              id="cvc"
+              name="cvc"
+              type="password"
+              minLength={3}
+              maxLength={3}
               required
             />
-            <span>err</span>
-          </div>
-          <div>
-            <label htmlFor="userName">카드 소유자 이름(선택)</label>
-            <input id="userName" name="userName" type="text" maxLength={30} required />
-          </div>
-          <div>
-            <label htmlFor="cvc">보안 코드(CVC/CVV)</label>
-            <input id="cvc" name="cvc" type="password" minLength={3} maxLength={3} required />
+          </S.FlexColumn>
+          <S.IconWrapper>
             <IconCircleQuestion />
-          </div>
-          <fieldset>
-            <legend>카드 비밀번호</legend>
-            <label htmlFor="secretNum1" />
-            <input id="secretNum1" name="secretNum1" type="password" maxLength={1} required />
-            <label htmlFor="secretNum2" />
-            <input id="secretNum2" name="secretNum2" type="password" maxLength={1} required />
-          </fieldset>
-        </div>
+          </S.IconWrapper>
+        </S.FlexRowAlignCenter>
+        <CardPasswordFieldSet />
 
-        <Button type="submit">다음</Button>
-      </form>
+        <S.ButtonWrapper>
+          <Button type="submit">다음</Button>
+        </S.ButtonWrapper>
+      </S.Form>
+      <CardModal close={true} />
     </div>
   )
 }

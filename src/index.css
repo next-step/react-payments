@@ -19,6 +19,7 @@ label,
 article,
 footer,
 header,
+fieldset,
 nav {
   margin: 0;
   padding: 0;
