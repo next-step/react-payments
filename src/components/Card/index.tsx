@@ -16,7 +16,10 @@ type CardType =
 
 export interface CardProps {
   type: CardType | ''
-  number: string
+  number1: string
+  number2: string
+  number3: string
+  number4: string
   validDate: string
   owner: string
   cvc: string
@@ -25,7 +28,10 @@ export interface CardProps {
 
 const Card = ({
   type,
-  number,
+  number1,
+  number2,
+  number3,
+  number4,
   owner,
   validDate,
 }: Omit<CardProps, 'password' | 'cvc'>) => {
@@ -41,7 +47,8 @@ const Card = ({
         <div className={styles['card-bottom']}>
           <div className={styles['card-bottom__number']}>
             <span className={styles['card-text']}>
-              {number && '1111 - 2222 - oooo - oooo'}
+              {number1.padEnd(4, '')} - {number2.padEnd(4, '')} -
+              {number3.padEnd(4, '')} - {number4.padEnd(4, '')}
             </span>
           </div>
           <div className={styles['card-bottom__info']}>

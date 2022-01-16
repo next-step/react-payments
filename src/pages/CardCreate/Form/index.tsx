@@ -11,8 +11,17 @@ const CreateCardForm = forwardRef<CardFormProps, {}>((_, ref) => {
   const cardNumberRef = useRef<React.ElementRef<typeof CardNumberInput>>(null)
 
   useImperativeHandle(ref, () => ({
-    cardNumber() {
-      return cardNumberRef.current?.cardNumber() ?? ''
+    cardNumber1() {
+      return cardNumberRef.current?.cardNumber1() ?? ''
+    },
+    cardNumber2() {
+      return cardNumberRef.current?.cardNumber2() ?? ''
+    },
+    cardNumber3() {
+      return cardNumberRef.current?.cardNumber3() ?? ''
+    },
+    cardNumber4() {
+      return cardNumberRef.current?.cardNumber4() ?? ''
     },
     cvc() {
       return ''

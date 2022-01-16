@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Styled from './index.style'
 
@@ -6,13 +7,15 @@ interface HeaderProps {
   title: string
 }
 
-const Header = ({ title, lintTo }: HeaderProps) => (
-  <>
-    <Styled.Header>
-      {lintTo && <Link to={lintTo}>{'< '}</Link>}
-      {title}
-    </Styled.Header>
-  </>
-)
+const Header = ({ title, lintTo }: HeaderProps) => {
+  return (
+    <>
+      <Styled.Header>
+        {lintTo && <Link to={lintTo}>{'< '}</Link>}
+        {title}
+      </Styled.Header>
+    </>
+  )
+}
 
 export default Header
