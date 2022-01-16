@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
 const Label = styled.label`
-  display: inline-block;
+  display: block;
   margin-bottom: 7px;
   font-size: 12px;
   color: #525252;

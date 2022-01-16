@@ -10,7 +10,7 @@ const InputWrapper = ({ label, labelFor, children, ...args }: Props) => {
   return (
     <div {...args}>
       <Styled.Label htmlFor={labelFor}>{label}</Styled.Label>
-      <Styled.InputArea>{children}</Styled.InputArea>
+      <Styled.InputArea className="input-area">{children}</Styled.InputArea>
     </div>
   );
 };
