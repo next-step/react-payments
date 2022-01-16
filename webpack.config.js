@@ -11,6 +11,7 @@ module.exports = {
   },
   devServer: {
     port: 3000,
+    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -24,6 +25,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "index.html",
+      publicPath: "/",
     }),
   ],
   resolve: {

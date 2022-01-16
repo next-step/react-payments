@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react";
 
 import AddCardContainer from ".";
 
-import CARD_NUMBER_LABEL from "../constants/cardNumberLabel";
+import { CARD_NUMBER_LABEL } from "../constants";
 
 describe("AddCardContainer", () => {
   const makeAddCardContainer = () => render(<AddCardContainer />);

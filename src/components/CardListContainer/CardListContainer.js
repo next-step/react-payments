@@ -1,32 +1,29 @@
-import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 
 import { CARDS } from "../../../fixtures/cards";
 
-import AddCardButton from "../AddCardButton/AddCardButton";
+import { Main, Title } from "../style/layout";
+
+import AddCardButton from "../AddCardButton";
 
 import CardList from "../CardList";
 
 const CardListContainer = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/add/card");
+  };
+
   return (
     <>
       <Title>보유카드</Title>
       <Main>
         <CardList cards={CARDS} />
-        <AddCardButton />
+        <AddCardButton onClick={handleClick} />
       </Main>
     </>
   );
 };
-
-const Title = styled.h1`
-  position: relative;
-  font-size: 16px;
-  font-weight: normal;
-  color: #383838;
-`;
-
-const Main = styled.main`
-  margin: auto;
-`;
 
 export default CardListContainer;

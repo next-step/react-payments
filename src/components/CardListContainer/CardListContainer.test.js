@@ -1,6 +1,15 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 
 import CardListContainer from "./CardListContainer";
+
+const mockNavigate = jest.fn();
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate() {
+    return mockNavigate;
+  },
+}));
 
 describe("CardListContainer", () => {
   const makeCardListContainer = () => render(<CardListContainer />);
@@ -19,5 +28,17 @@ describe("CardListContainer", () => {
         name: "카드 추가",
       })
     ).toBeInTheDocument();
+  });
+
+  it("카드 추가 버튼을 클릭하면 카드 추가 페이지로 이동합니다", () => {
+    const { getByRole } = makeCardListContainer();
+
+    fireEvent.click(
+      getByRole("button", {
+        name: "카드 추가",
+      })
+    );
+
+    expect(mockNavigate).toBeCalledWith("/add/card");
   });
 });

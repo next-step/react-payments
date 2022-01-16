@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 
 import Item from "../style/card";
 
-const AddCardButton = () => {
+const AddCardButton = ({ onClick }) => {
   return (
-    <Button as="button" aria-label="카드 추가">
+    <Button as="button" aria-label="카드 추가" onClick={onClick}>
       +
     </Button>
   );
