@@ -36,6 +36,7 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^27.4.5",
+    "jest-plugin-context": "^2.7.0",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.6.0"
