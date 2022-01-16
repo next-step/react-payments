@@ -1,5 +1,3 @@
-import { MAX_LENGTH } from "../constants";
-
-const isFullField = (field) => field.length === MAX_LENGTH;
+const isFullField = ({ field, maxLength }) => field.length === maxLength;
 
 export default isFullField;
