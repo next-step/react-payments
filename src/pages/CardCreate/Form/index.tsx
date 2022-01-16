@@ -5,7 +5,7 @@ import CardNumberInput from './Number'
 import CardExpireInput from './Expire'
 import CardCvcInput from './Cvc'
 import CardPasswordInput from './Password'
-import CardNameInput from './Name'
+import CardOnwerInput from './Owner'
 
 const CreateCardForm = forwardRef<CardFormProps, {}>((_, ref) => {
   const cardNumberRef = useRef<React.ElementRef<typeof CardNumberInput>>(null)
@@ -13,7 +13,8 @@ const CreateCardForm = forwardRef<CardFormProps, {}>((_, ref) => {
   const cardCvcRef = useRef<React.ElementRef<typeof CardCvcInput>>(null)
   const cardPasswordRef =
     useRef<React.ElementRef<typeof CardPasswordInput>>(null)
-  const cardNameInput = useRef<React.ElementRef<typeof CardNameInput>>(null)
+  const CardOnwerInputRef =
+    useRef<React.ElementRef<typeof CardOnwerInput>>(null)
 
   useImperativeHandle(ref, () => ({
     cardNumber1() {
@@ -43,8 +44,8 @@ const CreateCardForm = forwardRef<CardFormProps, {}>((_, ref) => {
     password2() {
       return cardPasswordRef.current?.password2() ?? ''
     },
-    name() {
-      return ''
+    owner() {
+      return CardOnwerInputRef.current?.owner() ?? ''
     },
   }))
 
@@ -54,7 +55,7 @@ const CreateCardForm = forwardRef<CardFormProps, {}>((_, ref) => {
       <Styled.ExpireWrapper>
         <CardExpireInput ref={cardExpireRef} />
       </Styled.ExpireWrapper>
-      <CardNameInput ref={cardNameInput} />
+      <CardOnwerInput ref={CardOnwerInputRef} />
       <Styled.CvcWrapper>
         <CardCvcInput ref={cardCvcRef} />
       </Styled.CvcWrapper>

@@ -6,44 +6,44 @@ import FormInput, {
 } from '../../../../components/Form/FormInput'
 import { useFormChangedDispatch } from '../../../../context/Form/hooks'
 
-type CardNameHandle = {
-  name: () => string
+type CardOwnerHandle = {
+  owner: () => string
 }
 
-const CardNameInput = forwardRef<CardNameHandle, {}>((props, ref) => {
-  const inputName = useRef<FormInputElementRef | null>(null)
-  const [nameLength, setNameLength] = useState(0)
+const CardOwnerInput = forwardRef<CardOwnerHandle, {}>((props, ref) => {
+  const inputOwner = useRef<FormInputElementRef | null>(null)
+  const [ownerNameLength, setOwnerNameLength] = useState(0)
 
   const dispatch = useFormChangedDispatch()
 
   useImperativeHandle(ref, () => ({
-    name() {
-      return inputName.current?.value() ?? ''
+    owner() {
+      return inputOwner.current?.value() ?? ''
     },
   }))
 
-  const onChange = (name: 'name') => () => {
+  const onChange = (name: 'owner') => () => {
     dispatch({ type: 'CHANGE', payload: { name } })
-    setNameLength((inputName.current?.value() ?? '').length)
+    setOwnerNameLength((inputOwner.current?.value() ?? '').length)
   }
 
   return (
     <FormArea
       label="카드 소유자 이름(선택)"
       maxLength={30}
-      currentLength={nameLength}
+      currentLength={ownerNameLength}
     >
       <FormInputBox>
         <FormInput
           numberOnly={false}
-          ref={inputName}
+          ref={inputOwner}
           maxLength={30}
           textAlign="left"
-          onChange={onChange('name')}
+          onChange={onChange('owner')}
         />
       </FormInputBox>
     </FormArea>
   )
 })
 
-export default React.memo(CardNameInput)
+export default React.memo(CardOwnerInput)

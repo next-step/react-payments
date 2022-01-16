@@ -12,7 +12,7 @@ export interface CardFormProps {
   cardNumber4: () => string
   expiredAtMonth: () => string
   expiredAtYear: () => string
-  name: () => string
+  owner: () => string
   cvc: () => string
   password1: () => string
   password2: () => string

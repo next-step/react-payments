@@ -4,6 +4,7 @@ import { CardProps } from '../../../components/Card/Card'
 import { useFormChangedState } from '../../../context/Form/hooks'
 import CardExpire from './CardExpire'
 import CardNumber from './CardNumber'
+import CardOwner from './CardOnwer'
 import Styled from './index.style'
 
 type CardModelKeys = (keyof CardProps)[]
@@ -16,6 +17,8 @@ const Card = ({ formRef }: CardProp) => {
   const [number2, setNumber2] = useState('')
   const [number3, setNumber3] = useState('')
   const [number4, setNumber4] = useState('')
+
+  const [name, setName] = useState('')
 
   const [month, setMonth] = useState('')
   const [year, setYear] = useState('')
@@ -44,6 +47,9 @@ const Card = ({ formRef }: CardProp) => {
       case 'expireAtYear':
         setYear(formRef.current?.expiredAtYear() ?? '')
         break
+      case 'owner':
+        setName(formRef.current?.owner() ?? '')
+        break
 
       default:
         break
@@ -69,7 +75,7 @@ const Card = ({ formRef }: CardProp) => {
           number4={number4}
         />
         <Styled.CardBottomInfo>
-          <Styled.CardText>NAME</Styled.CardText>
+          <CardOwner name={name} />
           <CardExpire month={month} year={year} />
         </Styled.CardBottomInfo>
       </Styled.CardBottom>
