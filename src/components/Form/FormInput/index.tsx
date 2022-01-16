@@ -1,39 +1,61 @@
+import React, { forwardRef, KeyboardEvent } from 'react'
+import { useImperativeHandle } from 'react'
 import { ReactNode } from 'react'
-import { CardProps } from '../../Card'
+import { useCallback } from 'react'
+import { useRef } from 'react'
+import { ChangeEvent, MutableRefObject } from 'react'
 import Styled from './index.style'
 
 interface FormInputProps {
-  card: CardProps
-  children: ReactNode
-  label: string
-  errorMessage?: string
+  ref?: MutableRefObject<HTMLInputElement | null>
+  type: 'number' | 'password'
   maxLength?: number
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-const FormInput = ({
-  label,
-  children,
-  errorMessage,
-  maxLength,
-}: FormInputProps) => {
-  return (
-    <Styled.Container>
-      {maxLength ? (
-        <Styled.LabelContainer>
-          <Styled.Label>{label}</Styled.Label>
-          <Styled.Label>
-            {maxLength} / {maxLength}
-          </Styled.Label>
-        </Styled.LabelContainer>
-      ) : (
-        <Styled.Label>{label}</Styled.Label>
-      )}
-      {children}
-      {errorMessage && (
-        <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
-      )}
-    </Styled.Container>
-  )
+type FormInputHandle = {
+  value: () => string
 }
 
-export { FormInput }
+export type FormInputElementRef = React.ElementRef<typeof FormInput>
+
+const FormInput = forwardRef<FormInputHandle, FormInputProps>(
+  ({ maxLength, ...rest }, ref) => {
+    const inputRef = useRef<HTMLInputElement | null>(null)
+
+    const onKeyPress = useCallback(
+      (event: KeyboardEvent<HTMLInputElement>) => {
+        if (isNaN(+event.key)) {
+          event.preventDefault()
+        }
+
+        if (!maxLength) {
+          return
+        }
+
+        if (maxLength <= event.currentTarget.value.length) {
+          event.preventDefault()
+        }
+      },
+      [maxLength]
+    )
+
+    useImperativeHandle(ref, () => ({
+      value() {
+        return inputRef.current?.value ?? ''
+      },
+    }))
+
+    return <Styled.Input ref={inputRef} {...rest} onKeyPress={onKeyPress} />
+  }
+)
+
+const FormInputBox = ({ children }: { children: ReactNode }) => (
+  <Styled.InputBox>{children}</Styled.InputBox>
+)
+
+const InputDividerText = ({ children }: { children: ReactNode }) => (
+  <Styled.InputDivider>{children}</Styled.InputDivider>
+)
+
+export { FormInput, FormInputBox, InputDividerText }

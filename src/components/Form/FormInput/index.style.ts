@@ -1,34 +1,37 @@
 import styled from 'styled-components'
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
+const Input = styled.input`
+  background-color: #ecebf1;
+  height: 45px;
+  width: 100%;
+  text-align: center;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: #9ca3af;
+  border: none;
+  border-radius: 0.25rem;
+  color: #04c09e;
+  font-size: 16px;
 `
-
-const LabelContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
-
-const Label = styled.span`
+const InputBox = styled.div`
   display: flex;
   align-items: center;
-  font-size: 12px;
-  line-height: 14px;
-  margin-bottom: 4px;
-  color: #525252;
+  margin-top: 0.375rem;
+  color: #d3d3d3;
+  border-radius: 0.25rem;
+  background-color: #ecebf1;
 `
 
-const ErrorMessage = styled.span`
-  color: #cc0000;
-  font-size: 12px;
-  line-height: 14px;
-  margin-top: 4px;
+const InputDivider = styled.span`
+  color: black;
+  height: 100%;
+  font-size: 14px;
+  color: #04c09e;
+  font-size: 16px;
 `
 
 export default {
-  Container,
-  Label,
-  LabelContainer,
-  ErrorMessage,
+  Input,
+  InputBox,
+  InputDivider,
 }
