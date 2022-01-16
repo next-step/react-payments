@@ -10,6 +10,7 @@ interface FormInputProps {
   ref?: MutableRefObject<HTMLInputElement | null>
   placeholder?: string
   type: 'number' | 'password'
+  max?: number
   maxLength?: number
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
@@ -21,12 +22,13 @@ type FormInputHandle = {
 export type FormInputElementRef = React.ElementRef<typeof FormInput>
 
 const FormInput = forwardRef<FormInputHandle, FormInputProps>(
-  ({ maxLength, ...rest }, ref) => {
+  ({ maxLength, max, ...rest }, ref) => {
     const inputRef = useRef<HTMLInputElement | null>(null)
 
     const onKeyPress = useCallback(
       (event: KeyboardEvent<HTMLInputElement>) => {
-        if (isNaN(+event.key)) {
+        const typedNumber = +event.key
+        if (isNaN(typedNumber)) {
           event.preventDefault()
         }
 
@@ -37,8 +39,14 @@ const FormInput = forwardRef<FormInputHandle, FormInputProps>(
         if (maxLength <= event.currentTarget.value.length) {
           event.preventDefault()
         }
+
+        if (max) {
+          if (max < +event.currentTarget.value * 10 + typedNumber) {
+            event.preventDefault()
+          }
+        }
       },
-      [maxLength]
+      [maxLength, max]
     )
 
     useImperativeHandle(ref, () => ({

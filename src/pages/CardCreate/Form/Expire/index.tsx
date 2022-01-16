@@ -37,6 +37,7 @@ const CardExpireInput = forwardRef<CardExpireHandle, {}>((props, ref) => {
           type="number"
           ref={inputMonth}
           maxLength={2}
+          max={12}
           onChange={onChange('expireAtMonth')}
           placeholder="MM"
         />
