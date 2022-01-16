@@ -24,7 +24,8 @@ function getInitialValue() {
     expireAtYear: false,
     expireAtMonth: false,
     owner: false,
-    password: false,
+    password1: false,
+    password2: false,
     type: false,
   }
 }

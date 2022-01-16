@@ -4,15 +4,14 @@ import Styled from './index.style'
 import CardNumberInput from './Number'
 import CardExpireInput from './Expire'
 import CardCvcInput from './Cvc'
-
-// interface CreateCardFormProps {
-//   ref: MutableRefObject<CardFormProps | null>
-// }
+import CardPasswordInput from './Password'
 
 const CreateCardForm = forwardRef<CardFormProps, {}>((_, ref) => {
   const cardNumberRef = useRef<React.ElementRef<typeof CardNumberInput>>(null)
   const cardExpireRef = useRef<React.ElementRef<typeof CardExpireInput>>(null)
   const cardCvcRef = useRef<React.ElementRef<typeof CardCvcInput>>(null)
+  const cardPasswordRef =
+    useRef<React.ElementRef<typeof CardPasswordInput>>(null)
 
   useImperativeHandle(ref, () => ({
     cardNumber1() {
@@ -36,8 +35,11 @@ const CreateCardForm = forwardRef<CardFormProps, {}>((_, ref) => {
     expiredAtYear() {
       return cardExpireRef.current?.expireAtYear() ?? ''
     },
-    password() {
-      return ''
+    password1() {
+      return cardPasswordRef.current?.password1() ?? ''
+    },
+    password2() {
+      return cardPasswordRef.current?.password2() ?? ''
     },
     name() {
       return ''
@@ -53,15 +55,9 @@ const CreateCardForm = forwardRef<CardFormProps, {}>((_, ref) => {
       <Styled.CvcWrapper>
         <CardCvcInput ref={cardCvcRef} />
       </Styled.CvcWrapper>
+      <CardPasswordInput ref={cardPasswordRef} />
     </div>
   )
 })
-// const CreateCardForm = ({ ref }: CreateCardFormProps) => {
-//   return (
-//     <div>
-//       <CardNumberInput ref={ref} />
-//     </div>
-//   )
-// }
 
 export default CreateCardForm

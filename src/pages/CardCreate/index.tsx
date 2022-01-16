@@ -14,7 +14,8 @@ export interface CardFormProps {
   expiredAtYear: () => string
   name?: () => string
   cvc: () => string
-  password: () => string
+  password1: () => string
+  password2: () => string
 }
 
 const CardCreate = () => {

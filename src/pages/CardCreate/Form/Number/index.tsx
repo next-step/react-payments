@@ -45,14 +45,12 @@ const CardNumberInput = forwardRef<CardNumberHandle, {}>((props, ref) => {
     <FormArea label="카드번호">
       <FormInputBox>
         <FormInput
-          type="number"
           ref={inputRef1}
           maxLength={4}
           onChange={onChange('number1')}
         />
         <InputDividerText color="green">-</InputDividerText>
         <FormInput
-          type="number"
           ref={inputRef2}
           maxLength={4}
           onChange={onChange('number2')}

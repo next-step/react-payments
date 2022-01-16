@@ -34,7 +34,6 @@ const CardExpireInput = forwardRef<CardExpireHandle, {}>((props, ref) => {
     <FormArea label="만료일">
       <FormInputBox>
         <FormInput
-          type="number"
           ref={inputMonth}
           maxLength={2}
           max={12}
@@ -43,7 +42,6 @@ const CardExpireInput = forwardRef<CardExpireHandle, {}>((props, ref) => {
         />
         <InputDividerText color="black">/</InputDividerText>
         <FormInput
-          type="number"
           ref={inputYear}
           maxLength={2}
           onChange={onChange('expireAtYear')}

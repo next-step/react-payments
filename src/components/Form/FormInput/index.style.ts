@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-const Input = styled.input`
+const Input = styled.input<{ backgroundColor?: string }>`
   background-color: #ecebf1;
   height: 45px;
   width: 100%;
@@ -12,6 +12,7 @@ const Input = styled.input`
   border-radius: 0.25rem;
   color: #04c09e;
   font-size: 16px;
+  ${({ backgroundColor }) => backgroundColor && { backgroundColor }}
 `
 const InputBox = styled.div`
   display: flex;
@@ -29,7 +30,6 @@ const InputDivider = styled.span<{ color: 'black' | 'green' }>`
   color: ${({ color }) => (color === 'green' ? '#04c09e' : 'black')};
   font-size: 16px;
 `
-
 export default {
   Input,
   InputBox,

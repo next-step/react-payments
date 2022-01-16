@@ -9,9 +9,11 @@ import Styled from './index.style'
 interface FormInputProps {
   ref?: MutableRefObject<HTMLInputElement | null>
   placeholder?: string
-  type: 'number' | 'password'
+  type?: 'number' | 'password' | 'text'
   max?: number
   maxLength?: number
+  value?: string
+  backgroundColor?: string
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
@@ -22,7 +24,7 @@ type FormInputHandle = {
 export type FormInputElementRef = React.ElementRef<typeof FormInput>
 
 const FormInput = forwardRef<FormInputHandle, FormInputProps>(
-  ({ maxLength, max, ...rest }, ref) => {
+  ({ maxLength, max, type = 'text', ...rest }, ref) => {
     const inputRef = useRef<HTMLInputElement | null>(null)
 
     const onKeyPress = useCallback(
@@ -55,7 +57,14 @@ const FormInput = forwardRef<FormInputHandle, FormInputProps>(
       },
     }))
 
-    return <Styled.Input ref={inputRef} {...rest} onKeyPress={onKeyPress} />
+    return (
+      <Styled.Input
+        type={type}
+        ref={inputRef}
+        {...rest}
+        onKeyPress={onKeyPress}
+      />
+    )
   }
 )
 

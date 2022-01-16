@@ -5,7 +5,6 @@ import FormInput, {
   FormInputElementRef,
 } from '../../../../components/Form/FormInput'
 import Styled from './index.style'
-import { useFormChangedDispatch } from '../../../../context/Form/hooks'
 import { ReactComponent as Icon } from '../../../../assets/target.svg'
 
 type CardCvcHandle = {
@@ -14,7 +13,6 @@ type CardCvcHandle = {
 
 const CardCvcInput = forwardRef<CardCvcHandle, {}>((props, ref) => {
   const inputCvc = useRef<FormInputElementRef | null>(null)
-  const dispatch = useFormChangedDispatch()
 
   useImperativeHandle(ref, () => ({
     cvc() {
@@ -22,21 +20,12 @@ const CardCvcInput = forwardRef<CardCvcHandle, {}>((props, ref) => {
     },
   }))
 
-  const onChange = (name: 'cvc') => () => {
-    dispatch({ type: 'CHANGE', payload: { name } })
-  }
-
   return (
     <Styled.CvcContainer>
       <Styled.CvcInputContainer>
         <FormArea label="보안코드(CVC/CVV)">
           <FormInputBox>
-            <FormInput
-              type="password"
-              ref={inputCvc}
-              maxLength={3}
-              onChange={onChange('cvc')}
-            />
+            <FormInput type="password" ref={inputCvc} maxLength={3} />
           </FormInputBox>
         </FormArea>
       </Styled.CvcInputContainer>
