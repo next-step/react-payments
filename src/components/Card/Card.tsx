@@ -24,4 +24,5 @@ export interface CardProps {
   cvc: string
   password1: string
   password2: string
+  name: string
 }

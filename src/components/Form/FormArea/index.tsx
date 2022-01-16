@@ -5,6 +5,7 @@ interface FormAreaProps {
   children: ReactNode
   label: string
   errorMessage?: string
+  currentLength?: number
   maxLength?: number
 }
 
@@ -13,6 +14,7 @@ const FormArea = ({
   children,
   errorMessage,
   maxLength,
+  currentLength = 0,
 }: FormAreaProps) => {
   return (
     <Styled.Container>
@@ -20,7 +22,7 @@ const FormArea = ({
         <Styled.LabelContainer>
           <Styled.Label>{label}</Styled.Label>
           <Styled.Label>
-            {maxLength} / {maxLength}
+            {currentLength} / {maxLength}
           </Styled.Label>
         </Styled.LabelContainer>
       ) : (

@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 import { useCallback } from 'react'
 import { useRef } from 'react'
 import { ChangeEvent, MutableRefObject } from 'react'
-import Styled from './index.style'
+import Styled, { TextAlign } from './index.style'
 
 interface FormInputProps {
   ref?: MutableRefObject<HTMLInputElement | null>
@@ -12,6 +12,8 @@ interface FormInputProps {
   type?: 'number' | 'password' | 'text'
   max?: number
   maxLength?: number
+  textAlign?: TextAlign
+  numberOnly?: boolean
   value?: string
   backgroundColor?: string
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
@@ -24,13 +26,23 @@ type FormInputHandle = {
 export type FormInputElementRef = React.ElementRef<typeof FormInput>
 
 const FormInput = forwardRef<FormInputHandle, FormInputProps>(
-  ({ maxLength, max, type = 'text', ...rest }, ref) => {
+  (
+    {
+      maxLength,
+      max,
+      type = 'text',
+      textAlign = 'center',
+      numberOnly = true,
+      ...rest
+    },
+    ref
+  ) => {
     const inputRef = useRef<HTMLInputElement | null>(null)
 
     const onKeyPress = useCallback(
       (event: KeyboardEvent<HTMLInputElement>) => {
         const typedNumber = +event.key
-        if (isNaN(typedNumber)) {
+        if (numberOnly && isNaN(typedNumber)) {
           event.preventDefault()
         }
 
@@ -60,6 +72,7 @@ const FormInput = forwardRef<FormInputHandle, FormInputProps>(
     return (
       <Styled.Input
         type={type}
+        textAlign={textAlign}
         ref={inputRef}
         {...rest}
         onKeyPress={onKeyPress}

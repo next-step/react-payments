@@ -27,6 +27,7 @@ function getInitialValue() {
     password1: false,
     password2: false,
     type: false,
+    name: false,
   }
 }
 function formReducer(

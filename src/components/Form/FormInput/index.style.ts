@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 
-const Input = styled.input<{ backgroundColor?: string }>`
+export type TextAlign = 'start' | 'end' | 'left' | 'right' | 'center'
+const Input = styled.input<{ backgroundColor?: string; textAlign: TextAlign }>`
   background-color: #ecebf1;
   height: 45px;
   width: 100%;
-  text-align: center;
+  ${({ textAlign }) => ({ textAlign: textAlign })}
   outline: 2px solid transparent;
   outline-offset: 2px;
   border-color: #9ca3af;
@@ -12,6 +13,7 @@ const Input = styled.input<{ backgroundColor?: string }>`
   border-radius: 0.25rem;
   color: #04c09e;
   font-size: 16px;
+  padding: 0 12px;
   ${({ backgroundColor }) => backgroundColor && { backgroundColor }}
 `
 const InputBox = styled.div`
