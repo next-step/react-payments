@@ -7,12 +7,14 @@ export interface CardForm {
   cardNumber: CardNumber;
   expireDate: ExpireDate;
   userName?: string;
+  CVC: string;
 }
 
 const useCardForm = () => {
   const [form, setForm] = useState<CardForm>({
     cardNumber: ['', '', '', ''],
     expireDate: ['', ''],
+    CVC: '',
   });
 
   const setCardNumber = (value: string, index: 0 | 1 | 2 | 3) => {
@@ -49,7 +51,13 @@ const useCardForm = () => {
     setForm({ ...form, userName: value });
   };
 
-  return { form, setCardNumber, setExpireMonth, setExpireYear, setUserName };
+  const setCVC = (value: string) => {
+    if (value.match(/[^\d]/)) return;
+
+    setForm({ ...form, CVC: value });
+  };
+
+  return { form, setCardNumber, setExpireMonth, setExpireYear, setUserName, setCVC };
 };
 
 export default useCardForm;

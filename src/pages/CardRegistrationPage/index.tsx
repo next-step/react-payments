@@ -1,4 +1,3 @@
-import { format } from 'path/posix';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useCardForm, { CardForm, CardNumber } from './useCardForm';
@@ -7,7 +6,7 @@ const CardRegistrationPage = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { form, setCardNumber, setExpireMonth, setExpireYear, setUserName } = useCardForm();
+  const { form, setCardNumber, setExpireMonth, setExpireYear, setUserName, setCVC } = useCardForm();
 
   return (
     <>
@@ -87,7 +86,12 @@ const CardRegistrationPage = () => {
         </div>
         <div className="input-container">
           <span className="input-title">보안코드(CVC/CVV)</span>
-          <input className="input-basic w-25" type="password" />
+          <input
+            className="input-basic w-25"
+            type="password"
+            value={form.CVC}
+            onChange={({ target }) => setCVC(target.value)}
+          />
         </div>
         <div className="input-container">
           <span className="input-title">카드 비밀번호</span>
