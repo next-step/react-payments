@@ -96,7 +96,7 @@ const CardRegistrationPage = () => {
           <input className="input-basic w-15" type="password" />
           <input className="input-basic w-15" type="password" />
         </div>
-        <div className="button-box">
+        <div className="button-box" onClick={() => navigate('/registration/complete')}>
           <span className="button-text">다음</span>
         </div>
       </div>
