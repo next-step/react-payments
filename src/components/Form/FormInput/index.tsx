@@ -8,6 +8,7 @@ import Styled from './index.style'
 
 interface FormInputProps {
   ref?: MutableRefObject<HTMLInputElement | null>
+  placeholder?: string
   type: 'number' | 'password'
   maxLength?: number
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
@@ -54,9 +55,13 @@ const FormInputBox = ({ children }: { children: ReactNode }) => (
   <Styled.InputBox>{children}</Styled.InputBox>
 )
 
-const InputDividerText = ({ children }: { children: ReactNode }) => (
-  <Styled.InputDivider>{children}</Styled.InputDivider>
-)
+const InputDividerText = ({
+  color,
+  children,
+}: {
+  color: 'black' | 'green'
+  children: ReactNode
+}) => <Styled.InputDivider color={color}>{children}</Styled.InputDivider>
 
 export { FormInputBox, InputDividerText }
 

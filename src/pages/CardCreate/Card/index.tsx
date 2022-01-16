@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { CardFormProps } from '..'
-import { CardProps } from '../../../components/Card'
+import { CardProps } from '../../../components/Card/Card'
 import { useFormChangedState } from '../../../context/Form/hooks'
+import CardExpire from './CardExpire'
 import CardNumber from './CardNumber'
 import Styled from './index.style'
 
@@ -15,6 +16,9 @@ const Card = ({ formRef }: CardProp) => {
   const [number2, setNumber2] = useState('')
   const [number3, setNumber3] = useState('')
   const [number4, setNumber4] = useState('')
+
+  const [month, setMonth] = useState('')
+  const [year, setYear] = useState('')
 
   const stateKeys = useMemo(() => Object.keys(state) as CardModelKeys, [state])
 
@@ -34,9 +38,18 @@ const Card = ({ formRef }: CardProp) => {
       case 'number4':
         setNumber4(formRef.current?.cardNumber4() ?? '')
         break
+      case 'expireAtMonth':
+        setMonth(formRef.current?.expiredAtMonth() ?? '')
+        break
+      case 'expireAtYear':
+        setYear(formRef.current?.expiredAtYear() ?? '')
+        break
     }
   }, [formRef, state, stateKeys])
 
+  useEffect(() => {
+    console.log('parameter is changed', month, year)
+  }, [year, month])
   return (
     <Styled.Card>
       <Styled.CardTop>
@@ -46,11 +59,6 @@ const Card = ({ formRef }: CardProp) => {
         <Styled.CardSmallChip />
       </Styled.CardMiddle>
       <Styled.CardBottom>
-        {/* <Styled.CardBottomNumber>
-          <Styled.CardText>
-            {number1} - {number2} - {number3} - {number4}
-          </Styled.CardText>
-        </Styled.CardBottomNumber> */}
         <CardNumber
           number1={number1}
           number2={number2}
@@ -59,7 +67,7 @@ const Card = ({ formRef }: CardProp) => {
         />
         <Styled.CardBottomInfo>
           <Styled.CardText>NAME</Styled.CardText>
-          <Styled.CardText>MM / YY</Styled.CardText>
+          <CardExpire month={month} year={year} />
         </Styled.CardBottomInfo>
       </Styled.CardBottom>
     </Styled.Card>

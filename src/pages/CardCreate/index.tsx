@@ -10,7 +10,8 @@ export interface CardFormProps {
   cardNumber2: () => string
   cardNumber3: () => string
   cardNumber4: () => string
-  expiredAt: () => string
+  expiredAtMonth: () => string
+  expiredAtYear: () => string
   name?: () => string
   cvc: () => string
   password: () => string
@@ -19,9 +20,6 @@ export interface CardFormProps {
 const CardCreate = () => {
   const formRef = useRef<React.ElementRef<typeof CreateCardForm>>(null)
 
-  const handleSubmit = () => {
-    console.log(formRef.current?.cardNumber1())
-  }
   return (
     <>
       <FormContextProvider>
@@ -29,7 +27,6 @@ const CardCreate = () => {
         <Styled.CardCreateContainer>
           <Card formRef={formRef} />
           <CreateCardForm ref={formRef} />
-          <button onClick={handleSubmit}>submit</button>
         </Styled.CardCreateContainer>
       </FormContextProvider>
     </>

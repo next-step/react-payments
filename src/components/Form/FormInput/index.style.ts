@@ -22,11 +22,11 @@ const InputBox = styled.div`
   background-color: #ecebf1;
 `
 
-const InputDivider = styled.span`
+const InputDivider = styled.span<{ color: 'black' | 'green' }>`
   color: black;
   height: 100%;
   font-size: 14px;
-  color: #04c09e;
+  color: ${({ color }) => (color === 'green' ? '#04c09e' : 'black')};
   font-size: 16px;
 `
 

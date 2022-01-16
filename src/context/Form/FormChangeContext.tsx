@@ -1,5 +1,5 @@
 import { createContext, Dispatch, ReactNode, useReducer } from 'react'
-import { CardProps } from '../../components/Card'
+import { CardProps } from '../../components/Card/Card'
 
 type PropName = keyof CardProps
 type Payload = { name: PropName }
@@ -21,10 +21,11 @@ function getInitialValue() {
     number2: false,
     number3: false,
     number4: false,
+    expireAtYear: false,
+    expireAtMonth: false,
     owner: false,
     password: false,
     type: false,
-    validDate: false,
   }
 }
 function formReducer(

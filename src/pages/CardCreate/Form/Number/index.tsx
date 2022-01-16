@@ -50,21 +50,21 @@ const CardNumberInput = forwardRef<CardNumberHandle, {}>((props, ref) => {
           maxLength={4}
           onChange={onChange('number1')}
         />
-        <InputDividerText>-</InputDividerText>
+        <InputDividerText color="green">-</InputDividerText>
         <FormInput
           type="number"
           ref={inputRef2}
           maxLength={4}
           onChange={onChange('number2')}
         />
-        <InputDividerText>-</InputDividerText>
+        <InputDividerText color="green">-</InputDividerText>
         <FormInput
           type="password"
           ref={inputRef3}
           maxLength={4}
           onChange={onChange('number3')}
         />
-        <InputDividerText>-</InputDividerText>
+        <InputDividerText color="green">-</InputDividerText>
         <FormInput
           type="password"
           ref={inputRef4}

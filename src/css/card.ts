@@ -27,6 +27,9 @@ const cardBottomNumberStyle = css`
 `
 
 const cardBottomInfoStyle = css`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
   margin: 0 16px;
   font-size: 18px;
   line-height: 20px;

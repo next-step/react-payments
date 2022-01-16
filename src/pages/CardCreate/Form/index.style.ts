@@ -2,4 +2,8 @@ import styled from 'styled-components'
 
 const Input = styled.div``
 
-export default { Input }
+const ExpireWrapper = styled.div`
+  width: 120px;
+`
+
+export default { Input, ExpireWrapper }
