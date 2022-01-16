@@ -44,6 +44,8 @@ const useCardForm = () => {
   };
 
   const setUserName = (value: string) => {
+    if (value.length > 30) return;
+
     setForm({ ...form, userName: value });
   };
 

@@ -7,7 +7,7 @@ const CardRegistrationPage = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { form, setCardNumber, setExpireMonth, setExpireYear } = useCardForm();
+  const { form, setCardNumber, setExpireMonth, setExpireYear, setUserName } = useCardForm();
 
   return (
     <>
@@ -73,11 +73,16 @@ const CardRegistrationPage = () => {
           </div>
         </div>
         <div className="input-container">
-          <span className="input-title">카드 소유자 이름(선택)</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <span className="input-title">카드 소유자 이름(선택)</span>
+            <span className="subtext">{form.userName?.length ?? 0} / 30</span>
+          </div>
           <input
             type="text"
-            className="input-basic"
+            className="input-basic w-70"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+            value={form.userName}
+            onChange={({ target }) => setUserName(target.value)}
           />
         </div>
         <div className="input-container">
@@ -109,6 +114,9 @@ const getMaskedCardNumberStr = (cardNumber: CardNumber) => {
 
 const Card = ({ card }: { card: CardForm }) => {
   const cardNumberStr = getMaskedCardNumberStr(card.cardNumber);
+  const expireDateStr = `${card.expireDate[0]} ${card.expireDate[0].length ? '/' : ''} ${
+    card.expireDate[1]
+  }`;
 
   return (
     <>
@@ -123,9 +131,11 @@ const Card = ({ card }: { card: CardForm }) => {
               <span className="card-text">{cardNumberStr}</span>
             </div>
             <div className="card-bottom__info">
-              <span className="card-text">NAME</span>
-              <span className="card-text">
-                {card.expireDate[0]} {card.expireDate[0].length ? '/' : ''} {card.expireDate[1]}
+              <div className="card-text" style={{ boxSizing: 'border-box', width: '60%' }}>
+                {card.userName}
+              </div>
+              <span className="card-text" style={{ fontSize: '0.75rem' }}>
+                {expireDateStr}
               </span>
             </div>
           </div>

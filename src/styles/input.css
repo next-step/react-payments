@@ -46,3 +46,10 @@
 
   border-bottom: 1px solid #383838;
 }
+
+.subtext {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  vertical-align: bottom;
+  margin-left: 0.25rem;
+}
