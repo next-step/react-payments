@@ -6,8 +6,8 @@ import {
   useRef,
   useState,
 } from 'react'
-import {
-  FormInput,
+import FormArea from '../../../../components/Form/FormArea'
+import FormInput, {
   FormInputBox,
   FormInputElementRef,
   InputDividerText,
@@ -35,15 +35,17 @@ const CardNumberInput = forwardRef<CardNumberHandle, {}>((props, ref) => {
   }))
 
   return (
-    <FormInputBox>
-      <FormInput type="number" ref={inputRef1} maxLength={4} />
-      <InputDividerText>-</InputDividerText>
-      <FormInput type="number" ref={inputRef2} maxLength={4} />
-      <InputDividerText>-</InputDividerText>
-      <FormInput type="number" ref={inputRef3} maxLength={4} />
-      <InputDividerText>-</InputDividerText>
-      <FormInput type="number" ref={inputRef4} maxLength={4} />
-    </FormInputBox>
+    <FormArea label="카드번호" errorMessage="dd">
+      <FormInputBox>
+        <FormInput type="number" ref={inputRef1} maxLength={4} />
+        <InputDividerText>-</InputDividerText>
+        <FormInput type="number" ref={inputRef2} maxLength={4} />
+        <InputDividerText>-</InputDividerText>
+        <FormInput type="number" ref={inputRef3} maxLength={4} />
+        <InputDividerText>-</InputDividerText>
+        <FormInput type="number" ref={inputRef4} maxLength={4} />
+      </FormInputBox>
+    </FormArea>
   )
 })
 

@@ -58,4 +58,6 @@ const InputDividerText = ({ children }: { children: ReactNode }) => (
   <Styled.InputDivider>{children}</Styled.InputDivider>
 )
 
-export { FormInput, FormInputBox, InputDividerText }
+export { FormInputBox, InputDividerText }
+
+export default FormInput

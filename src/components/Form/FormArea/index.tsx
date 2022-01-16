@@ -1,9 +1,7 @@
 import { ReactNode } from 'react'
-import { CardProps } from '../../Card'
 import Styled from './index.style'
 
 interface FormAreaProps {
-  card: CardProps
   children: ReactNode
   label: string
   errorMessage?: string
@@ -29,11 +27,9 @@ const FormArea = ({
         <Styled.Label>{label}</Styled.Label>
       )}
       {children}
-      {errorMessage && (
-        <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
-      )}
+      <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
     </Styled.Container>
   )
 }
 
-export { FormArea }
+export default FormArea
