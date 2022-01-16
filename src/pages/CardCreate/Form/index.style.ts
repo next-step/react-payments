@@ -6,4 +6,8 @@ const ExpireWrapper = styled.div`
   width: 120px;
 `
 
-export default { Input, ExpireWrapper }
+const CvcWrapper = styled.div`
+  width: 100px;
+`
+
+export default { Input, ExpireWrapper, CvcWrapper }

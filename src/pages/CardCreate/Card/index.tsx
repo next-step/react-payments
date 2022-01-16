@@ -44,6 +44,9 @@ const Card = ({ formRef }: CardProp) => {
       case 'expireAtYear':
         setYear(formRef.current?.expiredAtYear() ?? '')
         break
+
+      default:
+        break
     }
   }, [formRef, state, stateKeys])
 

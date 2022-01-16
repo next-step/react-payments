@@ -3,6 +3,7 @@ import { CardFormProps } from '..'
 import Styled from './index.style'
 import CardNumberInput from './Number'
 import CardExpireInput from './Expire'
+import CardCvcInput from './Cvc'
 
 // interface CreateCardFormProps {
 //   ref: MutableRefObject<CardFormProps | null>
@@ -11,6 +12,7 @@ import CardExpireInput from './Expire'
 const CreateCardForm = forwardRef<CardFormProps, {}>((_, ref) => {
   const cardNumberRef = useRef<React.ElementRef<typeof CardNumberInput>>(null)
   const cardExpireRef = useRef<React.ElementRef<typeof CardExpireInput>>(null)
+  const cardCvcRef = useRef<React.ElementRef<typeof CardCvcInput>>(null)
 
   useImperativeHandle(ref, () => ({
     cardNumber1() {
@@ -26,7 +28,7 @@ const CreateCardForm = forwardRef<CardFormProps, {}>((_, ref) => {
       return cardNumberRef.current?.cardNumber4() ?? ''
     },
     cvc() {
-      return ''
+      return cardCvcRef.current?.cvc() ?? ''
     },
     expiredAtMonth() {
       return cardExpireRef.current?.expireAtMonth() ?? ''
@@ -48,6 +50,9 @@ const CreateCardForm = forwardRef<CardFormProps, {}>((_, ref) => {
       <Styled.ExpireWrapper>
         <CardExpireInput ref={cardExpireRef} />
       </Styled.ExpireWrapper>
+      <Styled.CvcWrapper>
+        <CardCvcInput ref={cardCvcRef} />
+      </Styled.CvcWrapper>
     </div>
   )
 })
