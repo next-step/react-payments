@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import CardRegistrationPage from './pages/CardRegistrationPage';
 import CardListPage from './pages/CardListPage';
-import CardRegistrationComplete from './pages/CardRegistrationPage/Complete';
+import CardRegistrationCompletePage from './pages/CardRegistrationPage/Complete';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<CardListPage />} />
         <Route path="/registration" element={<CardRegistrationPage />} />
-        <Route path="/registration/complete" element={<CardRegistrationComplete />} />
+        <Route path="/registration/complete" element={<CardRegistrationCompletePage />} />
       </Routes>
     </div>
   );
