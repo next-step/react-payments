@@ -1,7 +1,11 @@
 import { useEffect, useMemo, useState } from 'react'
 import { CardFormProps } from '..'
 import Card from '../../../components/Card'
-import { CardBaseFormProps } from '../../../components/Form'
+import {
+  CardBaseFormProps,
+  CardType,
+  CardTypeAccordingToStartsWith,
+} from '../../../components/Form'
 import { useFormChangedState } from '../../../context/Form/hooks'
 
 type CardModelKeys = (keyof CardBaseFormProps)[]
@@ -10,6 +14,7 @@ interface CreateCardProp {
 }
 const CreateCard = ({ formRef }: CreateCardProp) => {
   const state = useFormChangedState()
+  const [type, setType] = useState<CardType>()
   const [number1, setNumber1] = useState('')
   const [number2, setNumber2] = useState('')
   const [number3, setNumber3] = useState('')
@@ -19,6 +24,14 @@ const CreateCard = ({ formRef }: CreateCardProp) => {
 
   const [month, setMonth] = useState('')
   const [year, setYear] = useState('')
+
+  useEffect(() => {
+    if (number1.length === 4 && number2.length === 4) {
+      const startNumber =
+        +number1[0] as keyof typeof CardTypeAccordingToStartsWith
+      setType(CardTypeAccordingToStartsWith[startNumber])
+    }
+  }, [number1, number2])
 
   const stateKeys = useMemo(() => Object.keys(state) as CardModelKeys, [state])
 
@@ -55,6 +68,7 @@ const CreateCard = ({ formRef }: CreateCardProp) => {
 
   return (
     <Card
+      type={type}
       number1={number1}
       number2={number2}
       number3={number3}

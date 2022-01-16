@@ -27,7 +27,7 @@ const App = styled.div`
   max-width: 500px;
   min-width: 375px;
   width: 100%;
-  min-height: 100vh;
+  max-height: 700px;
   padding: 1rem 2rem;
   background-color: #fff;
   width: 375px;

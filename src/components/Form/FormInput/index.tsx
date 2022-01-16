@@ -7,6 +7,8 @@ import { ChangeEvent, MutableRefObject } from 'react'
 import Styled, { TextAlign } from './index.style'
 
 interface FormInputProps {
+  id?: string
+  name?: string
   ref?: MutableRefObject<HTMLInputElement | null>
   placeholder?: string
   type?: 'number' | 'password' | 'text'
@@ -60,7 +62,7 @@ const FormInput = forwardRef<FormInputHandle, FormInputProps>(
           }
         }
       },
-      [maxLength, max]
+      [numberOnly, maxLength, max]
     )
 
     useImperativeHandle(ref, () => ({

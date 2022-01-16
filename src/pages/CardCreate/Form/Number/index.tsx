@@ -6,6 +6,7 @@ import FormInput, {
   InputDividerText,
 } from '../../../../components/Form/FormInput'
 import { useFormChangedDispatch } from '../../../../context/Form/hooks'
+import { CREATE_EXPIRE_MONTH } from '../constants/id'
 
 type CardNumberHandle = {
   cardNumber1: () => string
@@ -37,8 +38,24 @@ const CardNumberInput = forwardRef<CardNumberHandle, {}>((props, ref) => {
   }))
 
   const onChange =
-    (name: 'number1' | 'number2' | 'number3' | 'number4') => () => {
+    (name: 'number1' | 'number2' | 'number3' | 'number4') =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       dispatch({ type: 'CHANGE', payload: { name } })
+
+      if (event.currentTarget.value.length !== 4) {
+        return
+      }
+
+      const nextElement = event.currentTarget.nextElementSibling
+        ?.nextElementSibling as HTMLInputElement
+
+      if (!nextElement) {
+        document.getElementById(CREATE_EXPIRE_MONTH)?.focus()
+
+        return
+      }
+
+      nextElement.focus()
     }
 
   return (

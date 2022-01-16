@@ -5,6 +5,7 @@ import FormInput, {
   FormInputElementRef,
 } from '../../../../components/Form/FormInput'
 import { useFormChangedDispatch } from '../../../../context/Form/hooks'
+import { CREATE_CARD_CVC, CREATE_OWNER_NAME } from '../constants/id'
 
 type CardOwnerHandle = {
   owner: () => string
@@ -22,10 +23,17 @@ const CardOwnerInput = forwardRef<CardOwnerHandle, {}>((props, ref) => {
     },
   }))
 
-  const onChange = (name: 'owner') => () => {
-    dispatch({ type: 'CHANGE', payload: { name } })
-    setOwnerNameLength((inputOwner.current?.value() ?? '').length)
-  }
+  const onChange =
+    (name: 'owner') => (event: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch({ type: 'CHANGE', payload: { name } })
+      setOwnerNameLength((inputOwner.current?.value() ?? '').length)
+
+      if (event.currentTarget.value.length !== 30) {
+        return
+      }
+
+      document.getElementById(CREATE_CARD_CVC)?.focus()
+    }
 
   return (
     <FormArea
@@ -35,6 +43,7 @@ const CardOwnerInput = forwardRef<CardOwnerHandle, {}>((props, ref) => {
     >
       <FormInputBox>
         <FormInput
+          id={CREATE_OWNER_NAME}
           numberOnly={false}
           ref={inputOwner}
           maxLength={30}

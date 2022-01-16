@@ -1,4 +1,5 @@
-const CardTypeAccordingToStartsWith = {
+export const CardTypeAccordingToStartsWith = {
+  0: '포코',
   1: '포코',
   2: '준',
   3: '공원',
