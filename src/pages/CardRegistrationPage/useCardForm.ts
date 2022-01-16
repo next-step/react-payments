@@ -4,11 +4,13 @@ export type CardNumber = [string, string, string, string];
 
 export interface CardForm {
   cardNumber: CardNumber;
+  expireDate: Date | null;
 }
 
 const useCardForm = () => {
   const [form, setForm] = useState<CardForm>({
     cardNumber: ['', '', '', ''],
+    expireDate: null,
   });
 
   const setCardNumber = (cardNumber: string, index: 0 | 1 | 2 | 3) => {
@@ -21,7 +23,13 @@ const useCardForm = () => {
     setForm(newForm);
   };
 
-  return { form, setCardNumber };
+  const setExpireMonth = (month: number) => {
+    if (month < 1 || month > 12) return;
+  };
+
+  const setExpireDay = (day: number) => {};
+
+  return { form, setCardNumber, setExpireMonth, setExpireDay };
 };
 
 export default useCardForm;
