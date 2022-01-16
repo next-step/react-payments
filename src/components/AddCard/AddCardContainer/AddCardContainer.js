@@ -1,6 +1,6 @@
 import AddCardForm from "../AddCardForm";
 
-import { Title, Main } from "../../style/layout";
+import { Title } from "../../style/layout";
 
 import useCardNumberFields from "./hooks/useCardNumberFields";
 
@@ -10,9 +10,9 @@ const AddCardContainer = () => {
   return (
     <>
       <Title>카드 추가</Title>
-      <Main>
+      <main>
         <AddCardForm fields={fields} onChange={handleChange} />
-      </Main>
+      </main>
     </>
   );
 };
