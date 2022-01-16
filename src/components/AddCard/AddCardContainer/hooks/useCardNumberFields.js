@@ -1,17 +1,20 @@
 import { useState } from "react";
 
-import { MAX_LENGTH } from "../../constants";
+const isMaximumLength = ({ maxLength, value }) =>
+  maxLength && value.length > maxLength;
 
 const useCardNumberFields = () => {
   const [fields, setFields] = useState({
-    firstField: "",
-    secondField: "",
-    thirdField: "",
-    fourthField: "",
+    cardNumbers: {
+      firstField: "",
+      secondField: "",
+      thirdField: "",
+      fourthField: "",
+    },
   });
 
-  const handleChange = ({ name, value }) => {
-    if (value.length > MAX_LENGTH) {
+  const handleChangeSingleInput = ({ maxLength, name, value }) => {
+    if (isMaximumLength({ maxLength, value })) {
       return;
     }
 
@@ -21,9 +24,24 @@ const useCardNumberFields = () => {
     }));
   };
 
+  const handleChangeMultipleInput = ({ maxLength, key, name, value }) => {
+    if (isMaximumLength({ maxLength, value })) {
+      return;
+    }
+
+    setFields((prev) => ({
+      ...prev,
+      [key]: {
+        ...prev[key],
+        [name]: value,
+      },
+    }));
+  };
+
   return {
     fields,
-    handleChange,
+    handleChangeSingleInput,
+    handleChangeMultipleInput,
   };
 };
 

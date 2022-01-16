@@ -1,31 +1,22 @@
 import { fireEvent, render } from "@testing-library/react";
 
-import AddCardForm from "../AddCardForm";
+import CardNumberInput from "../CardNumberInput";
 
-describe("AddCardForm", () => {
-  const handleChangeSingleInput = jest.fn();
-  const handleChangeMultipleInput = jest.fn();
+describe("CardNumberInput", () => {
+  const handleChange = jest.fn();
 
   const initialFields = {
-    cardNumbers: {
-      firstField: "",
-      secondField: "",
-      thirdField: "",
-      fourthField: "",
-    },
+    firstField: "",
+    secondField: "",
+    thirdField: "",
+    fourthField: "",
   };
 
-  const makeAddCardForm = (fields = initialFields) =>
-    render(
-      <AddCardForm
-        fields={fields}
-        onChangeSingleInput={handleChangeSingleInput}
-        handleChangeMultipleInput={handleChangeMultipleInput}
-      />
-    );
+  const makeCardNumberInput = (fields = initialFields) =>
+    render(<CardNumberInput fields={fields} onChange={handleChange} />);
 
   it("카드 번호 Input 4개를 렌더링합니다", () => {
-    const { queryByLabelText } = makeAddCardForm();
+    const { queryByLabelText } = makeCardNumberInput();
 
     expect(queryByLabelText("첫번째 카드 번호 4자리")).toBeInTheDocument();
     expect(queryByLabelText("두번째 카드 번호 4자리")).toBeInTheDocument();
@@ -34,7 +25,7 @@ describe("AddCardForm", () => {
   });
 
   it("input 값이 변경되었을때 onChange 이벤트 핸들러를 실행합니다", () => {
-    const { getByLabelText } = makeAddCardForm();
+    const { getByLabelText } = makeCardNumberInput();
 
     const labels = [
       {
@@ -66,7 +57,7 @@ describe("AddCardForm", () => {
         },
       });
 
-      expect(handleChangeMultipleInput).toBeCalledWith({
+      expect(handleChange).toBeCalledWith({
         maxLength: 4,
         key: "cardNumbers",
         name,
