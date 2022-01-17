@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Card as CardType } from 'src/types/card'
 
 import AddPageHeader from '$components/add/AddPageHeader'
 import AddPageNextButton from '$components/add/AddPageNextButton'
+import CardCompanyModal from '$components/add/CardCompanyModal'
 import CardCvcInput from '$components/add/CardCvcInput'
 import CardExpireDateInput from '$components/add/CardExpireDateInput'
 import CardHolderNameInput from '$components/add/CardHolderNameInput'
@@ -17,14 +18,12 @@ function AddPage() {
   const [cardHolderName, setCardHolderName] = useState<CardType['holderName']>('')
   const [cardCvc, setCardCvc] = useState<CardType['cvc']>('')
   const [cardPassword, setCardPassword] = useState<CardType['password']>(['', ''])
+  const [cardCompany, setCardCompany] = useState<CardType['company']>({ name: '', color: '' })
+  const [isModalOpen, setModalOpen] = useState(true)
 
-  console.log({
-    cardNumber,
-    cardExpireDate,
-    cardHolderName,
-    cardCvc,
-    cardPassword,
-  })
+  const closeModal = useCallback(() => {
+    setModalOpen(false)
+  }, [])
 
   return (
     <PageLayout>
@@ -35,7 +34,7 @@ function AddPage() {
         holderName={cardHolderName}
         expireMonth={cardExpireDate.month}
         expireYear={cardExpireDate.year}
-        company={{ name: '', color: '' }}
+        company={cardCompany}
       />
       <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
       <CardExpireDateInput cardExpireDate={cardExpireDate} setCardExpireDate={setCardExpireDate} />
@@ -43,6 +42,7 @@ function AddPage() {
       <CardCvcInput cardCvc={cardCvc} setCardCvc={setCardCvc} />
       <CardPasswordInput cardPassword={cardPassword} setCardPassword={setCardPassword} />
       <AddPageNextButton />
+      {isModalOpen && <CardCompanyModal setCardCompany={setCardCompany} closeModal={closeModal} />}
     </PageLayout>
   )
 }

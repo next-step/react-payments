@@ -4,4 +4,5 @@ export interface Card {
   holderName: string
   cvc: string
   password: [string, string]
+  company: { name: string; color: string }
 }
