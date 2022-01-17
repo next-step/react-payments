@@ -2,7 +2,6 @@ import React from 'react';
 import { FlexCenter, PageTitle } from '../common/styles';
 import Layout from '../components/Layout';
 import Card from '../components/Card';
-import EmptyCard from '../components/Card/Empty';
 
 const data = {
   cardNumber: ['1234', '1234', '2345', '4567'],
@@ -17,10 +16,11 @@ const List = () => {
       </FlexCenter>
       <Card
         type="list"
+        size="small"
         cardNumber={data.cardNumber}
         expirationNumber={data.expirationNumber}
       />
-      <EmptyCard />
+      <Card type="empty" size="small" />
     </Layout>
   );
 };

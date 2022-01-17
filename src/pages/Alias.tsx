@@ -19,6 +19,7 @@ const Alias = () => {
       </FlexCenter>
       <Card
         type="alias"
+        size="big"
         cardNumber={data.cardNumber}
         expirationNumber={data.expirationNumber}
       />

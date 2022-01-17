@@ -132,6 +132,17 @@ const Add = () => {
     else copyPasswordError[1] = false;
 
     setPasswordError([...copyPasswordError]);
+
+    if (
+      !cardNumberPasswordError[0] &&
+      !cardNumberPasswordError[1] &&
+      !expirationMonthError &&
+      !cvcError &&
+      !passwordError[0] &&
+      !passwordError[1]
+    ) {
+      history('/alias');
+    }
   };
 
   return (
@@ -143,6 +154,7 @@ const Add = () => {
 
       <Card
         type="add"
+        size="small"
         cardNumber={cardNumber}
         expirationNumber={expirationNumber}
         owner={owner}
@@ -276,7 +288,7 @@ const Add = () => {
           )}
         </InputContainer>
 
-        <Button label="다음" onClick={onClickNextButton} />
+        <Button label="다음" />
       </form>
       <Modal
         open={isModalOpen}
