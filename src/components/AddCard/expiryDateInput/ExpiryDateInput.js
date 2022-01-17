@@ -1,6 +1,6 @@
 import { EXPIRY_DATE_LABEL } from "../constants";
 
-import InputWithLabel from "../InputBox/InputWithLabel";
+import InputWithLabel from "../InputWithLabel";
 
 import isFullField from "../utils/isFullField";
 

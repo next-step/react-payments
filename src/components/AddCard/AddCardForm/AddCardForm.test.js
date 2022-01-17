@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 
 import AddCardForm from "../AddCardForm";
 
@@ -38,5 +38,11 @@ describe("AddCardForm", () => {
     const { queryByLabelText } = makeAddCardForm();
 
     expect(queryByLabelText("만료일")).toBeInTheDocument();
+  });
+
+  it("보안코드 Input을 렌더링합니다", () => {
+    const { queryByLabelText } = makeAddCardForm();
+
+    expect(queryByLabelText("보안코드")).toBeInTheDocument();
   });
 });

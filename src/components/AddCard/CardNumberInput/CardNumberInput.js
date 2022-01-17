@@ -2,7 +2,7 @@ import useCardNumberFieldsRef from "./hooks/useCardNumberFieldsRef";
 
 import { CARD_NUMBER_LABEL } from "../constants";
 
-import InputWithLabel from "../InputBox/InputWithLabel";
+import InputWithLabel from "../InputWithLabel";
 
 import isFullField from "../utils/isFullField";
 import Input from "../Input";
