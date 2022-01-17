@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-export const CardBox = styled.div`
+export const CardBox = styled.div<{ color?: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,7 +8,7 @@ export const CardBox = styled.div`
   margin: 10px 0px;
 `;
 
-export const EmptyCard = styled.div`
+export const CardBasic = styled.div<{ size: string; color?: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,58 +20,34 @@ export const EmptyCard = styled.div`
   font-size: 30px;
   color: #575757;
 
-  background: #e5e5e5;
+  ${({ color }) => (color ? `background: ${color};` : `background: #d2d2d2;`)}
+
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
   user-select: none;
+  ${({ size }) =>
+    size === 'small'
+      ? `width: 208px;
+  height: 130px;`
+      : `width: 290px;
+  height: 180px;`}
 `;
 
-export const SmallCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 208px;
-  height: 130px;
-
-  background: #94dacd;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-`;
-export const SmallCardChip = styled.div`
+export const CardChip = styled.div<{ size: string }>`
   width: 40px;
   height: 26px;
-  left: 95px;
-  top: 122px;
 
-  background: #cbba64;
-  border-radius: 4px;
-`;
-
-export const BigCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 290px;
-  height: 180px;
-
-  background: #94dacd;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-`;
-
-export const BigCardChip = styled.div`
-  width: 55.04px;
+  ${({ size }) =>
+    size === 'small'
+      ? `left: 95px;
+  top: 122px;`
+      : `width: 55.04px;
   height: 35.77px;
+  font-size: 24px;`}
 
   background: #cbba64;
   border-radius: 4px;
-
-  font-size: 24px;
 `;
 
 export const CardTop = styled.div`
@@ -118,20 +94,16 @@ export const CardBottomInfo = styled.div`
   justify-content: space-between;
 `;
 
-export const CardText = styled.span`
+export const CardText = styled.span<{ size: string }>`
   margin: 0 16px;
 
-  font-size: 14px;
-  line-height: 16px;
-  vertical-align: middle;
-  font-weight: 400;
-`;
+  ${({ size }) =>
+    size === 'small'
+      ? `font-size: 14px;
+  line-height: 16px;`
+      : `font-size: 18px;
+  line-height: 20px;`}
 
-export const CardTextBig = styled.div`
-  margin: 0 16px;
-
-  font-size: 18px;
-  line-height: 20px;
   vertical-align: middle;
   font-weight: 400;
 `;
@@ -140,10 +112,15 @@ export const SecurityText = styled.span`
   -webkit-text-security: disc;
 `;
 
-export const CardNumber = styled.span`
+export const CardNumber = styled.span<{ size: string }>`
   display: inline-block;
   text-align: center;
-  font-size: 14px;
-  margin: 0px 5px;
   width: 30px;
+  ${({ size }) =>
+    size === 'small'
+      ? `font-size: 14px;
+  margin: 0px 5px;`
+      : `font-size: 18px;
+      margin: 0px 12px;
+  `}
 `;
