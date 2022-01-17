@@ -1,0 +1,25 @@
+{
+  "plugins": ["prettier", "react"],
+  "extends": ["react-app","react-app/jest", "plugin:prettier/recommended"],
+  "rules": {
+    "prettier/prettier": "error",
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc" },
+        "groups": ["builtin", "external", ["parent", "sibling", "index"]]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/*.stories.*"
+      ],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ]
+}
