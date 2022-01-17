@@ -1,19 +1,8 @@
 import { useState } from 'react';
-
-export type CardNumber = [string, string, string, string];
-export type ExpireDate = [string, string];
-export type Password = [string, string];
-
-export interface CardForm {
-  cardNumber: CardNumber;
-  expireDate: ExpireDate;
-  userName?: string;
-  CVC: string;
-  password: Password;
-}
+import { Card, CardNumber, Password } from '../../types';
 
 const useCardForm = () => {
-  const [form, setForm] = useState<CardForm>({
+  const [form, setForm] = useState<Card>({
     cardNumber: ['', '', '', ''],
     expireDate: ['', ''],
     CVC: '',

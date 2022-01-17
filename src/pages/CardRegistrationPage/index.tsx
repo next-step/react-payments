@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useCardForm, { CardForm, CardNumber } from './useCardForm';
+import CardItem from '../../components/Card/Card';
+import CompanySelectBottomSheet from '../../components/Registration/CompanySelectBottomSheet';
+import useCardForm from './useCardForm';
 
 const CardRegistrationPage = () => {
   const navigate = useNavigate();
@@ -17,7 +19,7 @@ const CardRegistrationPage = () => {
         </span>
         카드 추가
       </h2>
-      <Card card={form} />
+      <CardItem card={form} />
       <div>
         <div className="input-container">
           <span className="input-title">카드 번호</span>
@@ -115,93 +117,8 @@ const CardRegistrationPage = () => {
           <span className="button-text">다음</span>
         </div>
       </div>
-      {isModalOpen && <CompanySelectionBottomSheet />}
+      {isModalOpen && <CompanySelectBottomSheet />}
     </>
-  );
-};
-
-const getMaskedCardNumberStr = (cardNumber: CardNumber) => {
-  cardNumber[2] = '*'.repeat(cardNumber[2].length);
-  cardNumber[3] = '*'.repeat(cardNumber[3].length);
-
-  return cardNumber.filter(Boolean).join(' - ');
-};
-
-const Card = ({ card }: { card: CardForm }) => {
-  const cardNumberStr = getMaskedCardNumberStr(card.cardNumber);
-  const expireDateStr = `${card.expireDate[0]} ${card.expireDate[0].length ? '/' : ''} ${
-    card.expireDate[1]
-  }`;
-
-  return (
-    <>
-      <div className="card-box">
-        <div className="empty-card">
-          <div className="card-top"></div>
-          <div className="card-middle">
-            <div className="small-card__chip"></div>
-          </div>
-          <div className="card-bottom">
-            <div className="card-bottom__number">
-              <span className="card-text">{cardNumberStr}</span>
-            </div>
-            <div className="card-bottom__info">
-              <div className="card-text" style={{ boxSizing: 'border-box', width: '60%' }}>
-                {card.userName}
-              </div>
-              <span className="card-text" style={{ fontSize: '0.75rem' }}>
-                {expireDateStr}
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-};
-
-const CompanySelectionBottomSheet = () => {
-  return (
-    <div className="modal-dimmed">
-      <div className="modal">
-        <div className="flex-center">
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-        </div>
-        <div className="flex-center">
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린카드</span>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 };
 
