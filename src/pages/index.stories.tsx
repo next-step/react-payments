@@ -1,11 +1,10 @@
-import AddPage from '@pages/add'
-import AliasPage from '@pages/alias'
-import ListPage from '@pages/list'
+import AddPage from '@/pages/add'
+import AliasPage from '@/pages/alias'
+import ListPage from '@/pages/list'
 import { ComponentStory } from '@storybook/react'
-import '/public/styles/index.css'
 
 export default {
-  title: '3. Pages',
+  title: '2. Pages',
 }
 
 const AddPageTemplate: ComponentStory<typeof AddPage> = args => (

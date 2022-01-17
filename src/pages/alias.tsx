@@ -1,6 +1,6 @@
 import { SyntheticEvent, useRef } from 'react'
-import { CardData, PageProps } from '@common/constants'
-import Card from '@components/card'
+import { CardData, PageProps } from '@/common/constants'
+import Card from '@/components/card'
 
 type AliasPageProps = PageProps & { payload: { cardData: CardData } }
 

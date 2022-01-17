@@ -1,4 +1,4 @@
-import { InputDefaultProps, LIMITS } from '@common/constants'
+import { InputDefaultProps, LIMITS } from '@/common/constants'
 
 const UserNameInput = ({ elRef }: InputDefaultProps) => (
   <input
@@ -10,6 +10,7 @@ const UserNameInput = ({ elRef }: InputDefaultProps) => (
     className="input-basic"
     placeholder="카드에 표시된 이름과 동일하게 입력하세요."
     maxLength={LIMITS.MAX_NAME_SIZE}
+    data-testid="input-user-name"
   />
 )
 

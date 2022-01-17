@@ -1,10 +1,10 @@
-import { CardData, CardType } from '@common/constants'
+import { CardData, CardType } from '@/common/constants'
 
 const NormalCard = ({ type, cardData }: { type: CardType; cardData: CardData }) => {
   const { cardName, cardNumber, expired, userName, alias } = cardData
   return (
-    <div className="card-box">
-      <div className={`${type}-card`}>
+    <div className="card-box" data-testid="card-wrap">
+      <div className={`${type}-card`} data-testid="card">
         <div className="card-top">
           <span className="card-text">{cardName}</span>
         </div>

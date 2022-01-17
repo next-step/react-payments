@@ -1,6 +1,6 @@
 const EmptyCard = () => (
   <div className="card-box">
-    <div className="empty-card">
+    <div className="empty-card" data-testid="card">
       <div className="card-top" />
       <div className="card-middle">
         <div className="card-middle__chip" />

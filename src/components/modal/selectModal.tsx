@@ -8,8 +8,7 @@ const SelectModal = ({ selectCard, closeModal }: { selectCard: (name: string) =>
   return (
     <ModalPortal>
       <div className="modal-dimmed" onClick={closeModal} />
-      <div className="modal">
-        <input type="text" autoFocus className="hidden-input" />
+      <div className="modal" data-testid="select-modal">
         <div className="flex-center flex-wrap">
           {cards.map((card, i) => (
             <div className="modal-item-container" key={i} onClick={handleClick(card)}>

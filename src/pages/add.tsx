@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { CardData, PageProps } from '@common/constants'
-import Card from '@components/card'
-import CardForm from '@components/cardForm'
+import { CardData, PageProps } from '@/common/constants'
+import Card from '@/components/card'
+import CardForm from '@/components/cardForm'
 
 const AddPage = ({ setCards, setRoute }: PageProps) => {
   const [cardData, setCardData] = useState<CardData | null>(null)

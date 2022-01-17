@@ -1,7 +1,5 @@
-import Card from '@components/card/index'
 import { ComponentStory } from '@storybook/react'
-import '/public/styles/index.css'
-import { getCustomValidity } from '@common/formServices'
+import { getCustomValidity } from '@/common/formServices'
 import {
   CardNumberInput,
   CardNumberAnonymousInput,
@@ -10,48 +8,11 @@ import {
   CvcInput,
   PasswordInput,
   UserNameInput,
-} from '@components/cardForm/input'
-import SelectModal from '@components/modal/selectModal'
+} from '@/components/cardForm/input'
 import { ReactChild, SyntheticEvent } from 'react'
 
 export default {
-  title: '1. Components',
-}
-
-const CardTemplate: ComponentStory<typeof Card> = args => <Card {...args} />
-
-export const CardNew = CardTemplate.bind({})
-CardNew.args = {
-  type: 'new',
-  cardData: null,
-  setRoute: () => {},
-}
-
-export const CardEmpty = CardTemplate.bind({})
-CardEmpty.args = {
-  type: 'small',
-  cardData: null,
-}
-
-const cardData = {
-  cardName: '그린카드',
-  cardNumber: '1234 - 1234 - **** - ****',
-  expired: '10 / 24',
-  userName: 'JAENAM',
-  alias: '법카',
-}
-
-export const CardBig = CardTemplate.bind({})
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-CardBig.args = {
-  type: 'big',
-  cardData,
-}
-
-export const CardSmall = CardTemplate.bind({})
-CardSmall.args = {
-  type: 'small',
-  cardData,
+  title: '1. Components/CardForm',
 }
 
 const Form = ({ children }: { children: ReactChild }) => {
@@ -62,7 +23,11 @@ const Form = ({ children }: { children: ReactChild }) => {
     $target.setCustomValidity(validityResult)
     $target.reportValidity()
   }
-  return <form onChange={handleChange}>{children}</form>
+  return (
+    <form data-testid="form" onChange={handleChange}>
+      {children}
+    </form>
+  )
 }
 
 const CardNumberTemplate: ComponentStory<typeof CardNumberInput> = args => (
@@ -113,21 +78,3 @@ const UserNameTemplate: ComponentStory<typeof UserNameInput> = args => (
   </Form>
 )
 export const InputUserName = UserNameTemplate.bind({})
-
-const ToggleModal = ({ show }: { show: boolean }) => {
-  if (show) return <SelectModal selectCard={() => {}} closeModal={() => {}} />
-  return null
-}
-const ModalTemplate: ComponentStory<typeof ToggleModal> = args => {
-  const { show } = args
-  return (
-    <>
-      <ToggleModal show={show} />
-      <div id="modalRoot"></div>
-    </>
-  )
-}
-export const ModalSelect = ModalTemplate.bind({})
-ModalSelect.args = {
-  show: true,
-}

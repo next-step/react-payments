@@ -6,9 +6,9 @@ module.exports = {
   webpackFinal: async config => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@components': resolve(__dirname, '../src/components'),
-      '@pages': resolve(__dirname, '../src/pages'),
-      '@common': resolve(__dirname, '../src/common'),
+      '@/components': resolve(__dirname, '../src/components'),
+      '@/pages': resolve(__dirname, '../src/pages'),
+      '@/common': resolve(__dirname, '../src/common'),
     }
     return config
   },

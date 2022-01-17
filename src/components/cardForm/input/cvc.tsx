@@ -1,4 +1,4 @@
-import { InputDefaultProps, LIMITS } from '@common/constants'
+import { InputDefaultProps, LIMITS } from '@/common/constants'
 
 const CvcInput = ({ elRef }: InputDefaultProps) => (
   <input
@@ -11,6 +11,7 @@ const CvcInput = ({ elRef }: InputDefaultProps) => (
     maxLength={LIMITS.CVC_SIZE}
     type="password"
     pattern="^\d{3}$"
+    data-testid="input-cvc"
   />
 )
 

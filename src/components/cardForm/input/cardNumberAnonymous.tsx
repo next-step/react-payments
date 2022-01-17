@@ -1,4 +1,4 @@
-import { InputDefaultProps, LIMITS } from '@common/constants'
+import { InputDefaultProps, LIMITS } from '@/common/constants'
 
 const CardNumberAnonymousInput = ({
   name,
@@ -20,6 +20,7 @@ const CardNumberAnonymousInput = ({
     required
     pattern="^\d{4}$"
     {...props}
+    data-testid="input-card-number"
   />
 )
 export default CardNumberAnonymousInput

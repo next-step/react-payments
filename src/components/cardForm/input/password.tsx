@@ -1,4 +1,4 @@
-import { InputDefaultProps, LIMITS } from '@common/constants'
+import { InputDefaultProps, LIMITS } from '@/common/constants'
 
 const PasswordInput = ({
   name,
@@ -18,6 +18,7 @@ const PasswordInput = ({
     type="password"
     pattern="^\d{1}$"
     {...props}
+    data-testid="input-password"
   />
 )
 

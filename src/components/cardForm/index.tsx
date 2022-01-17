@@ -1,6 +1,6 @@
 import { createRef, SyntheticEvent, useMemo, useRef, useState } from 'react'
-import { CardData, LIMITS } from '@common/constants'
-import { getCustomValidity, convertFormData } from '@common/formServices'
+import { CardData, LIMITS } from '@/common/constants'
+import { getCustomValidity, convertFormData } from '@/common/formServices'
 import SelectModal from '../modal/selectModal'
 import {
   CardNumberInput,

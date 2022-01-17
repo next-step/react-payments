@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Root from '@pages/index'
+import Root from '@/pages/index'
 
 ReactDOM.render(
   <React.StrictMode>

@@ -1,5 +1,5 @@
-import { PageProps } from '@common/constants'
-import Card from '@components/card'
+import { PageProps } from '@/common/constants'
+import Card from '@/components/card'
 
 const ListPage = ({ cards, setRoute }: PageProps) => {
   return (

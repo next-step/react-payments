@@ -1,4 +1,4 @@
-import { InputDefaultProps } from '@common/constants'
+import { InputDefaultProps } from '@/common/constants'
 
 const CardNumberInput = ({
   name,
@@ -18,6 +18,7 @@ const CardNumberInput = ({
     minLength={4}
     maxLength={4}
     {...props}
+    data-testid="input-card-number"
   />
 )
 

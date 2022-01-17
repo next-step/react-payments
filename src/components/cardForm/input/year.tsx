@@ -1,4 +1,4 @@
-import { InputDefaultProps, LIMITS } from '@common/constants'
+import { InputDefaultProps, LIMITS } from '@/common/constants'
 
 const YearInput = ({ elRef }: InputDefaultProps) => (
   <input
@@ -11,6 +11,7 @@ const YearInput = ({ elRef }: InputDefaultProps) => (
     pattern="^(2[2-9]|[3-9][0-9])$"
     maxLength={LIMITS.YEAR_SIZE}
     minLength={LIMITS.YEAR_SIZE}
+    data-testid="input-year"
   />
 )
 

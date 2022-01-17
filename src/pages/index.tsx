@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Route, RouteState } from '@common/constants'
+import { Route, RouteState } from '@/common/constants'
 import AddPage from './add'
 import ListPage from './list'
 import AliasPage from './alias'

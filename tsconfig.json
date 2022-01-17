@@ -17,9 +17,7 @@
     "noImplicitAny": true,
     "jsx": "react-jsx",
     "paths": {
-      "@components/*": ["./src/components/*"],
-      "@pages/*": ["./src/pages/*"],
-      "@common/*": ["./src/common/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["./src"]
