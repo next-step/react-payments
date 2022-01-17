@@ -15,11 +15,11 @@ export const Modal = styled.div`
   z-index: 10;
 `;
 
-export const ModalDimmed = styled.div`
+export const ModalDimmed = styled.div<{ open: boolean }>`
   width: 100%;
   height: 100%;
 
-  display: flex;
+  ${({ open }) => (open ? `display: flex;` : `display: none;`)}
   flex-direction: column;
   justify-content: flex-end;
 
@@ -41,12 +41,21 @@ export const ModalItemConatainer = styled.div`
   align-items: center;
 `;
 
-export const ModalItemDot = styled.div`
+export const ModalItemButton = styled.button`
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  padding: 0px;
+`;
+
+export const ModalItemDot = styled.div<{ color?: string }>`
   margin: 0.5rem 1rem;
   border-radius: 50%;
   width: 2.8rem;
   height: 2.8rem;
+
   background-color: #94dacd;
+  ${({ color }) => color && `background-color: ${color};`}
 `;
 
 export const ModalItemName = styled.div`

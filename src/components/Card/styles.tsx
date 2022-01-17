@@ -63,6 +63,7 @@ export const BigCard = styled.div`
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 `;
+
 export const BigCardChip = styled.div`
   width: 55.04px;
   height: 35.77px;
@@ -72,6 +73,7 @@ export const BigCardChip = styled.div`
 
   font-size: 24px;
 `;
+
 export const CardTop = styled.div`
   width: 100%;
   height: 100%;
@@ -79,6 +81,7 @@ export const CardTop = styled.div`
   display: flex;
   align-items: center;
 `;
+
 export const CardMiddle = styled.div`
   width: 100%;
   height: 100%;
@@ -87,6 +90,7 @@ export const CardMiddle = styled.div`
   display: flex;
   align-items: center;
 `;
+
 export const CardBottom = styled.div`
   width: 100%;
   height: 100%;
@@ -95,6 +99,7 @@ export const CardBottom = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
 export const CardBottomNumber = styled.div`
   width: 100%;
   height: 100%;
@@ -103,6 +108,7 @@ export const CardBottomNumber = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
 export const CardBottomInfo = styled.div`
   width: 100%;
   height: 100%;
@@ -111,6 +117,7 @@ export const CardBottomInfo = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+
 export const CardText = styled.span`
   margin: 0 16px;
 
@@ -119,6 +126,7 @@ export const CardText = styled.span`
   vertical-align: middle;
   font-weight: 400;
 `;
+
 export const CardTextBig = styled.div`
   margin: 0 16px;
 
@@ -126,4 +134,16 @@ export const CardTextBig = styled.div`
   line-height: 20px;
   vertical-align: middle;
   font-weight: 400;
+`;
+
+export const SecurityText = styled.span`
+  -webkit-text-security: disc;
+`;
+
+export const CardNumber = styled.span`
+  display: inline-block;
+  text-align: center;
+  font-size: 14px;
+  margin: 0px 5px;
+  width: 30px;
 `;
