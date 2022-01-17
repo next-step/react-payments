@@ -20,6 +20,7 @@ function AddPage() {
   const [cardPassword, setCardPassword] = useState<CardType['password']>(['', ''])
   const [cardCompany, setCardCompany] = useState<CardType['company']>({ name: '', color: '' })
   const [isModalOpen, setModalOpen] = useState(false)
+  const [isReadyToCreate, setReadyToCreate] = useState(false)
 
   const closeModal = useCallback(() => {
     setModalOpen(false)
@@ -30,6 +31,16 @@ function AddPage() {
       cardNumber[1].length === 4 &&
       setCardCompany(COMPANY_LIST[Number(cardNumber[0] + cardNumber[1]) % 7])
   }, [cardNumber])
+
+  useEffect(() => {
+    setReadyToCreate(
+      cardNumber.join('').length === 16 &&
+        cardExpireDate.month.length === 2 &&
+        cardExpireDate.year.length === 2 &&
+        cardCvc.length === 3 &&
+        cardPassword.join('').length === 2,
+    )
+  }, [cardCvc.length, cardExpireDate.month.length, cardExpireDate.year.length, cardNumber, cardPassword])
 
   return (
     <PageLayout>
@@ -47,7 +58,7 @@ function AddPage() {
       <CardHolderNameInput cardHolderName={cardHolderName} setCardHolderName={setCardHolderName} />
       <CardCvcInput cardCvc={cardCvc} setCardCvc={setCardCvc} />
       <CardPasswordInput cardPassword={cardPassword} setCardPassword={setCardPassword} />
-      <AddPageNextButton />
+      <AddPageNextButton disabled={!isReadyToCreate} />
       {isModalOpen && <CardCompanyModal setCardCompany={setCardCompany} closeModal={closeModal} />}
     </PageLayout>
   )

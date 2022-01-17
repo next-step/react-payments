@@ -26,7 +26,7 @@ function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
       return true
     }
 
-    setWarning(true)
+    !checkNumberString(value) && setWarning(true)
     return false
   }, [])
 
