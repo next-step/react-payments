@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import CardForm from './components/CardForm/CardForm';
+import CardForm from './components/CardForm';
 import CardFormDomain from './domains/cardFormDomain';
 
 type Props = {
