@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+
 import Card from '../components/Card';
 import Input from '../components/Input';
 import Button from '../components/Button';
@@ -14,8 +15,11 @@ import {
   OwnerLength,
 } from '../components/Input/styles';
 import { ERROR_MESSAGE } from '../constants';
+import { useNavigate } from 'react-router';
 
 const Add = () => {
+  const history = useNavigate();
+
   const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);
   const [expirationNumber, setExpirationNumber] = useState<string[]>(['', '']);
   const [owner, setOwner] = useState<string>('');
@@ -85,6 +89,14 @@ const Add = () => {
     setIsCardColorSelected(false);
   };
 
+  const onClickBackButton = () => {
+    history('/list');
+  };
+
+  const onClickNextButton = () => {
+    history('/alias');
+  };
+
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
 
@@ -125,7 +137,7 @@ const Add = () => {
   return (
     <Layout>
       <PageTitle>
-        <Button label="<" />
+        <Button label="<" width={7} onClick={onClickBackButton} />
         카드 추가
       </PageTitle>
 
@@ -263,9 +275,8 @@ const Add = () => {
             <ErrorMessage>{ERROR_MESSAGE.ONLY_NUMBER}</ErrorMessage>
           )}
         </InputContainer>
-        <ButtonBox>
-          <Button label="다음" />
-        </ButtonBox>
+
+        <Button label="다음" onClick={onClickNextButton} />
       </form>
       <Modal
         open={isModalOpen}
