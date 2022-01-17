@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Card as CardType } from 'src/types/card'
 
 import CardExpireDateInput from '$components/add/CardExpireDateInput'
+import CardHolderNameInput from '$components/add/CardHolderNameInput'
 import CardNumberInput from '$components/add/CardNumberInput'
 import Card from '$components/common/Card'
 import PageLayout from '$components/common/PageLayout'
@@ -9,6 +10,7 @@ import PageLayout from '$components/common/PageLayout'
 function AddPage() {
   const [cardNumber, setCardNumber] = useState<CardType['number']>(['', '', '', ''])
   const [cardExpireDate, setCardExpireDate] = useState<CardType['expireDate']>({ month: '', year: '' })
+  const [cardHolderName, setCardHolderName] = useState<CardType['holderName']>('')
 
   return (
     <PageLayout>
@@ -22,6 +24,7 @@ function AddPage() {
       />
       <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
       <CardExpireDateInput cardExpireDate={cardExpireDate} setCardExpireDate={setCardExpireDate} />
+      <CardHolderNameInput cardHolderName={cardHolderName} setCardHolderName={setCardHolderName} />
     </PageLayout>
   )
 }
