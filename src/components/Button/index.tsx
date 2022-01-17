@@ -2,15 +2,25 @@ import React from 'react';
 import { ButtonBox, ButtonText } from './styles';
 
 interface ButtonProps {
+  /**
+   * 버튼 내용
+   */
+  label: string;
+
+  width?: number;
   mt50?: boolean;
+  onClick: () => void;
 }
 
-const index = ({ mt50 = false }: ButtonProps) => {
+/**
+ * 카드 하단에 '다음' 버튼
+ */
+const Button = ({ label, width, mt50, onClick }: ButtonProps) => {
   return (
-    <ButtonBox mt50={mt50}>
-      <ButtonText>다음</ButtonText>
+    <ButtonBox width={width} mt50={mt50} onClick={onClick}>
+      <ButtonText>{label}</ButtonText>
     </ButtonBox>
   );
 };
 
-export default index;
+export default Button;
