@@ -1,6 +1,12 @@
 import styled from "@emotion/styled";
 
-const Input = ({ field, onChange, isFullField, separator = "-" }) => {
+const Input = ({
+  field,
+  onChange,
+  isFullField,
+  separator = "-",
+  background,
+}) => {
   const { ariaLabel, ref, type, id, name, placeholder, value } = field;
 
   return (
@@ -15,12 +21,13 @@ const Input = ({ field, onChange, isFullField, separator = "-" }) => {
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        background={background}
       />
     </Wrap>
   );
 };
 
-const Wrap = styled.li`
+const Wrap = styled.p`
   position: relative;
   display: flex;
   align-items: center;
@@ -31,12 +38,12 @@ const Wrap = styled.li`
     left: 0;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 1;
   }
 `;
 
 const Item = styled.input`
   flex: 1;
-
   position: relative;
   display: block;
   width: 100%;

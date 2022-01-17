@@ -4,12 +4,18 @@ const InputWithLabel = ({ id, label, children }) => {
   const isMultiple = Array.isArray(children);
 
   return (
-    <div>
+    <Wrap>
       <Label htmlFor={id}>{label}</Label>
-      {isMultiple ? <Wrap>{children}</Wrap> : children}
-    </div>
+      {isMultiple ? <InputGroup>{children}</InputGroup> : children}
+    </Wrap>
   );
 };
+
+const Wrap = styled.div`
+  & + & {
+    margin-top: 10px;
+  }
+`;
 
 const Label = styled.label`
   display: block;
@@ -17,7 +23,7 @@ const Label = styled.label`
   margin-bottom: 7px;
 `;
 
-const Wrap = styled.ul`
+const InputGroup = styled.div`
   display: flex;
   background: #ecebf1;
   border-radius: 5px;

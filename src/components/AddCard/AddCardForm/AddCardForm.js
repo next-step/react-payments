@@ -7,19 +7,13 @@ const AddCardForm = ({
   fields: { cardNumbers, expiryDate },
   handleChangeMultipleInput,
 }) => (
-  <Form>
+  <form>
     <CardNumberInput
       fields={cardNumbers}
       onChange={handleChangeMultipleInput}
     />
     <ExpiryDateInput fields={expiryDate} onChange={handleChangeMultipleInput} />
-  </Form>
+  </form>
 );
-
-const Form = styled.form`
-  & > div + div {
-    margin-top: 20px;
-  }
-`;
 
 export default AddCardForm;
