@@ -11,10 +11,14 @@ export const InputBox = ({ className, children }: PropsWithChildren<{ className?
   <div className={cx('input-box', className)}>{children}</div>
 )
 
-export const BasicInput = forwardRef<HTMLInputElement, PropsWithChildren<{ className?: string }>>(
-  ({ className, ...props }, ref) => <input className={cx('input-basic', className)} ref={ref} {...props} />,
-)
+interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
+  className?: string
+}
 
-export const UnderlineInput = forwardRef<HTMLInputElement, PropsWithChildren<{ className?: string }>>(
-  ({ className, ...props }, ref) => <input className={cx('input-underline', className)} ref={ref} {...props} />,
-)
+export const BasicInput = forwardRef<HTMLInputElement, InputProps>(({ className, ...props }, ref) => (
+  <input className={cx('input-basic', className)} ref={ref} {...props} />
+))
+
+export const UnderlineInput = forwardRef<HTMLInputElement, InputProps>(({ className, ...props }, ref) => (
+  <input className={cx('input-underline', className)} ref={ref} {...props} />
+))

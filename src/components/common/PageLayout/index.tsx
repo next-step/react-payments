@@ -6,7 +6,7 @@ import styles from './style.module.scss'
 const cx = classNames.bind(styles)
 
 interface PageLayoutProps {
-  className: string
+  className?: string
   children: ReactNode
 }
 

@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind'
+import { Card as CardType } from 'src/types/card'
 
 import styles from './style.module.scss'
 
@@ -7,7 +8,7 @@ const cx = classNames.bind(styles)
 interface CardProps {
   type: 'small' | 'big'
   holderName: string
-  cardNumber: [string, string, string, string]
+  cardNumber: CardType['number']
   expireMonth: string
   expireYear: string
   company: { name: string; color: string }
