@@ -1,18 +1,13 @@
-import styled from "@emotion/styled";
-
 import CardNumberInput from "../CardNumberInput";
 import ExpiryDateInput from "../ExpiryDateInput";
 
 const AddCardForm = ({
   fields: { cardNumbers, expiryDate },
-  handleChangeMultipleInput,
+  onChangeMultipleInput,
 }) => (
   <form>
-    <CardNumberInput
-      fields={cardNumbers}
-      onChange={handleChangeMultipleInput}
-    />
-    <ExpiryDateInput fields={expiryDate} onChange={handleChangeMultipleInput} />
+    <CardNumberInput fields={cardNumbers} onChange={onChangeMultipleInput} />
+    <ExpiryDateInput fields={expiryDate} onChange={onChangeMultipleInput} />
   </form>
 );
 

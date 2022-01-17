@@ -15,7 +15,7 @@ const AddCardContainer = () => {
         <AddCardForm
           fields={fields}
           onChangeSingleInput={handleChangeSingleInput}
-          handleChangeMultipleInput={handleChangeMultipleInput}
+          onChangeMultipleInput={handleChangeMultipleInput}
         />
       </main>
     </>
