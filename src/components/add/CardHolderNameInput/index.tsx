@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Card } from 'src/types/card'
 
 import { BasicInput, Input, InputTitle } from '$components/common/Input'
+import { checkLength } from '$utils/validate'
 
 interface CardHolderNameInputProps {
   cardHolderName: Card['holderName']
@@ -12,7 +13,10 @@ function CardHolderNameInput({ cardHolderName, setCardHolderName }: CardHolderNa
   const [holderName, setHolderName] = useState(cardHolderName)
 
   const isValidInput = useCallback((value) => {
-    if (value.length <= 30) return true
+    if (checkLength(value, 0, 30)) {
+      return true
+    }
+
     return false
   }, [])
 

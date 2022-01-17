@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Card } from 'src/types/card'
 
-import { BasicInput, Input, InputTitle } from '$components/common/Input'
+import { BasicInput, Input, InputTitle, InputWarning } from '$components/common/Input'
+import { checkLength, checkNumberString } from '$utils/validate'
 
 interface CardPasswordInputProps {
   cardPassword: Card['password']
@@ -11,9 +12,15 @@ interface CardPasswordInputProps {
 function CardPasswordInput({ cardPassword, setCardPassword }: CardPasswordInputProps) {
   const [password1, setPassword1] = useState('')
   const [password2, setPassword2] = useState('')
+  const [showsWarning, setWarning] = useState(false)
 
   const isValidInput = useCallback((value) => {
-    if (/^\d{0,1}$/g.test(value)) return true
+    if (checkLength(value, 0, 1) && checkNumberString(value)) {
+      setWarning(false)
+      return true
+    }
+
+    !checkNumberString(value) && setWarning(true)
     return false
   }, [])
 
@@ -49,6 +56,7 @@ function CardPasswordInput({ cardPassword, setCardPassword }: CardPasswordInputP
       <BasicInput className="w-15" type="password" value={password2} onChange={handlePassword2Change} />
       <BasicInput className="w-15" type="password" value="*" disabled />
       <BasicInput className="w-15" type="password" value="*" disabled />
+      {showsWarning && <InputWarning>숫자만 입력가능해요</InputWarning>}
     </Input>
   )
 }

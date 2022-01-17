@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Card } from 'src/types/card'
 
-import { BasicInput, Input, InputBox, InputTitle } from '$components/common/Input'
+import { BasicInput, Input, InputBox, InputTitle, InputWarning } from '$components/common/Input'
+import { checkLength, checkNumberString } from '$utils/validate'
 
 interface CardNumberInputProps {
   cardNumber: Card['number']
@@ -17,9 +18,15 @@ function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
   const [number2, setNumber2] = useState('')
   const [number3, setNumber3] = useState('')
   const [number4, setNumber4] = useState('')
+  const [showsWarning, setWarning] = useState(false)
 
   const isValidInput = useCallback((value) => {
-    if (/^\d{0,4}$/g.test(value)) return true
+    if (checkLength(value, 0, 4) && checkNumberString(value)) {
+      setWarning(false)
+      return true
+    }
+
+    setWarning(true)
     return false
   }, [])
 
@@ -77,6 +84,7 @@ function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
         <BasicInput type="password" value={number3} onChange={handleNumber3Change} ref={ref3} placeholder="0000" />
         <BasicInput type="password" value={number4} onChange={handleNumber4Change} ref={ref4} placeholder="0000" />
       </InputBox>
+      {showsWarning && <InputWarning>숫자만 입력가능해요</InputWarning>}
     </Input>
   )
 }

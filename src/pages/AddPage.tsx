@@ -18,6 +18,14 @@ function AddPage() {
   const [cardCvc, setCardCvc] = useState<CardType['cvc']>('')
   const [cardPassword, setCardPassword] = useState<CardType['password']>(['', ''])
 
+  console.log({
+    cardNumber,
+    cardExpireDate,
+    cardHolderName,
+    cardCvc,
+    cardPassword,
+  })
+
   return (
     <PageLayout>
       <AddPageHeader />

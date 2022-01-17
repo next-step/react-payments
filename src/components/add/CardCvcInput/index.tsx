@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Card } from 'src/types/card'
 
-import { BasicInput, Input, InputTitle } from '$components/common/Input'
+import { BasicInput, Input, InputTitle, InputWarning } from '$components/common/Input'
+import { checkLength, checkNumberString } from '$utils/validate'
 
 interface CardCvcInputProps {
   cardCvc: Card['cvc']
@@ -10,9 +11,15 @@ interface CardCvcInputProps {
 
 function CardCvcInput({ cardCvc, setCardCvc }: CardCvcInputProps) {
   const [cvc, setCvc] = useState<Card['cvc']>(cardCvc)
+  const [showsWarning, setWarning] = useState(false)
 
   const isValidInput = useCallback((value) => {
-    if (/^\d{0,3}$/g.test(value)) return true
+    if (checkLength(value, 0, 3) && checkNumberString(value)) {
+      setWarning(false)
+      return true
+    }
+
+    !checkNumberString(value) && setWarning(true)
     return false
   }, [])
 
@@ -32,6 +39,7 @@ function CardCvcInput({ cardCvc, setCardCvc }: CardCvcInputProps) {
     <Input>
       <InputTitle>보안코드(CVC/CVV)</InputTitle>
       <BasicInput className="w-25" type="password" value={cvc} onChange={handleChange} />
+      {showsWarning && <InputWarning>숫자만 입력가능해요</InputWarning>}
     </Input>
   )
 }

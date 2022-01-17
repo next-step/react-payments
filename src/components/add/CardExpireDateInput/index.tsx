@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Card } from 'src/types/card'
 
-import { BasicInput, Input, InputBox, InputTitle } from '$components/common/Input'
+import { BasicInput, Input, InputBox, InputTitle, InputWarning } from '$components/common/Input'
+import { checkLength, checkNumberString } from '$utils/validate'
 
 interface CardExpireDateInputProps {
   cardExpireDate: Card['expireDate']
@@ -13,9 +14,15 @@ function CardExpireDateInput({ cardExpireDate, setCardExpireDate }: CardExpireDa
   const yearRef = useRef<HTMLInputElement>(null)
   const [month, setMonth] = useState('')
   const [year, setYear] = useState('')
+  const [showsWarning, setWarning] = useState(false)
 
   const isValidInput = useCallback((value) => {
-    if (/^\d{0,2}$/g.test(value)) return true
+    if (checkLength(value, 0, 2) && checkNumberString(value)) {
+      setWarning(false)
+      return true
+    }
+
+    !checkNumberString(value) && setWarning(true)
     return false
   }, [])
 
@@ -53,6 +60,7 @@ function CardExpireDateInput({ cardExpireDate, setCardExpireDate }: CardExpireDa
         <BasicInput type="text" value={month} onChange={handleMonthChange} ref={monthRef} placeholder="MM" />
         <BasicInput type="text" value={year} onChange={handleYearChange} ref={yearRef} placeholder="YY" />
       </InputBox>
+      {showsWarning && <InputWarning>숫자만 입력가능해요</InputWarning>}
     </Input>
   )
 }
