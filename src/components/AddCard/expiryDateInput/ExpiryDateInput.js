@@ -48,7 +48,7 @@ const ExpiryDateInput = ({ fields, onChange }) => {
         }}
         onChange={handleChange}
         isFullField={isFullField({ field: monthField, maxLength: 2 })}
-        separator="-"
+        separator="/"
       />
     </InputWithLabel>
   );

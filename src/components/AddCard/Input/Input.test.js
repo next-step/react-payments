@@ -70,10 +70,10 @@ describe("Input", () => {
   });
 
   context("구분자를 설정하지 않았을때", () => {
-    it("기본 구분자인 '/'를 렌더링합니다", () => {
-      const { queryByText } = makeInput({ isFullField: true, separator: "/" });
+    it("기본 구분자인 '-'를 렌더링합니다", () => {
+      const { queryByText } = makeInput({ isFullField: true });
 
-      expect(queryByText("/")).toBeInTheDocument();
+      expect(queryByText("-")).toBeInTheDocument();
     });
   });
 
