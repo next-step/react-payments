@@ -2,12 +2,14 @@ import { useState } from 'react';
 
 export type CardNumber = [string, string, string, string];
 export type ExpireDate = [string, string];
+export type Password = [string, string];
 
 export interface CardForm {
   cardNumber: CardNumber;
   expireDate: ExpireDate;
   userName?: string;
   CVC: string;
+  password: Password;
 }
 
 const useCardForm = () => {
@@ -15,16 +17,17 @@ const useCardForm = () => {
     cardNumber: ['', '', '', ''],
     expireDate: ['', ''],
     CVC: '',
+    password: ['', ''],
   });
 
   const setCardNumber = (value: string, index: 0 | 1 | 2 | 3) => {
     if (value.length > 4 || value.match(/[^\d]/)) return;
 
-    const newForm = { ...form, cardNumber: [...form.cardNumber] as CardNumber };
+    const cardNumber: CardNumber = [...form.cardNumber];
 
-    newForm.cardNumber[index] = value;
+    cardNumber[index] = value;
 
-    setForm(newForm);
+    setForm({ ...form, cardNumber });
   };
 
   const setExpireMonth = (value: string) => {
@@ -57,7 +60,17 @@ const useCardForm = () => {
     setForm({ ...form, CVC: value });
   };
 
-  return { form, setCardNumber, setExpireMonth, setExpireYear, setUserName, setCVC };
+  const setPassword = (value: string, index: 0 | 1) => {
+    if (value.match(/[^\d]/)) return;
+
+    const password: Password = [...form.password];
+
+    password[index] = value;
+
+    setForm({ ...form, password });
+  };
+
+  return { form, setCardNumber, setExpireMonth, setExpireYear, setUserName, setCVC, setPassword };
 };
 
 export default useCardForm;

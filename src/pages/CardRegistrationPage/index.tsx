@@ -6,7 +6,8 @@ const CardRegistrationPage = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { form, setCardNumber, setExpireMonth, setExpireYear, setUserName, setCVC } = useCardForm();
+  const { form, setCardNumber, setExpireMonth, setExpireYear, setUserName, setCVC, setPassword } =
+    useCardForm();
 
   return (
     <>
@@ -95,10 +96,20 @@ const CardRegistrationPage = () => {
         </div>
         <div className="input-container">
           <span className="input-title">카드 비밀번호</span>
-          <input className="input-basic w-15" type="password" />
-          <input className="input-basic w-15" type="password" />
-          <input className="input-basic w-15" type="password" />
-          <input className="input-basic w-15" type="password" />
+          <input
+            className="input-basic w-15"
+            type="password"
+            value={form.password[0]}
+            onChange={({ target }) => setPassword(target.value, 0)}
+          />
+          <input
+            className="input-basic w-15"
+            type="password"
+            value={form.password[1]}
+            onChange={({ target }) => setPassword(target.value, 1)}
+          />
+          <input className="input-basic w-15" type="password" readOnly value="*" />
+          <input className="input-basic w-15" type="password" readOnly value="*" />
         </div>
         <div className="button-box" onClick={() => navigate('/registration/complete')}>
           <span className="button-text">다음</span>
