@@ -28,6 +28,7 @@ function CardForm({ onClickGoBack, cardFormDomain }: Props) {
       />
       <label htmlFor="card-number">카드 번호</label>
       <input id="card-number" type="text" onChange={handleChangeCardNumber} value={cardNumber} />
+      {cardNumber.length === 4 && <span>-</span>}
     </>
   );
 }

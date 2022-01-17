@@ -1,11 +1,14 @@
 import { fireEvent, render } from '@testing-library/react';
+
+import given from 'given2';
+
 import CardFormDomain from '../../domains/cardFormDomain';
 
 import CardForm from './CardForm';
 
 describe('CardForm', () => {
   const presenter = {
-    cardNumber: '',
+    cardNumber: given?.cardNumber || '',
     changeCardNumber: jest.fn(),
   };
 
@@ -15,6 +18,10 @@ describe('CardForm', () => {
       cardFormDomain={presenter as CardFormDomain}
     />,
   );
+
+  beforeEach(() => {
+    given('cardNumber', () => '');
+  });
 
   it('renders without crash', () => {
     renderCardForm();
@@ -36,5 +43,11 @@ describe('CardForm', () => {
     });
 
     expect(presenter.changeCardNumber).toBeCalledTimes(1);
+  });
+
+  it('renders "-" every 4 digit', () => {
+    const { queryByText } = renderCardForm();
+
+    expect(queryByText('-')).toBeInTheDocument();
   });
 });

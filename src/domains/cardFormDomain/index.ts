@@ -6,6 +6,8 @@ export default class CardFormDomain {
   }
 
   changeCardNumber(newCardNumber: string) {
-    this.cardNumber = newCardNumber;
+    if (Number(newCardNumber) || Number(newCardNumber) === 0) {
+      this.cardNumber = newCardNumber;
+    }
   }
 }
