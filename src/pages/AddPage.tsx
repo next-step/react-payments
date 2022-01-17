@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Card as CardType } from 'src/types/card'
 
+import AddPageHeader from '$components/add/AddPageHeader'
+import AddPageNextButton from '$components/add/AddPageNextButton'
 import CardCvcInput from '$components/add/CardCvcInput'
 import CardExpireDateInput from '$components/add/CardExpireDateInput'
 import CardHolderNameInput from '$components/add/CardHolderNameInput'
@@ -18,6 +20,7 @@ function AddPage() {
 
   return (
     <PageLayout>
+      <AddPageHeader />
       <Card
         type="small"
         cardNumber={cardNumber}
@@ -31,6 +34,7 @@ function AddPage() {
       <CardHolderNameInput cardHolderName={cardHolderName} setCardHolderName={setCardHolderName} />
       <CardCvcInput cardCvc={cardCvc} setCardCvc={setCardCvc} />
       <CardPasswordInput cardPassword={cardPassword} setCardPassword={setCardPassword} />
+      <AddPageNextButton />
     </PageLayout>
   )
 }
