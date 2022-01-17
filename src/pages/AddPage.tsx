@@ -5,6 +5,7 @@ import CardCvcInput from '$components/add/CardCvcInput'
 import CardExpireDateInput from '$components/add/CardExpireDateInput'
 import CardHolderNameInput from '$components/add/CardHolderNameInput'
 import CardNumberInput from '$components/add/CardNumberInput'
+import CardPasswordInput from '$components/add/CardPasswordInput'
 import Card from '$components/common/Card'
 import PageLayout from '$components/common/PageLayout'
 
@@ -13,13 +14,7 @@ function AddPage() {
   const [cardExpireDate, setCardExpireDate] = useState<CardType['expireDate']>({ month: '', year: '' })
   const [cardHolderName, setCardHolderName] = useState<CardType['holderName']>('')
   const [cardCvc, setCardCvc] = useState<CardType['cvc']>('')
-
-  console.log({
-    cardNumber,
-    cardExpireDate,
-    cardHolderName,
-    cardCvc,
-  })
+  const [cardPassword, setCardPassword] = useState<CardType['password']>(['', ''])
 
   return (
     <PageLayout>
@@ -35,6 +30,7 @@ function AddPage() {
       <CardExpireDateInput cardExpireDate={cardExpireDate} setCardExpireDate={setCardExpireDate} />
       <CardHolderNameInput cardHolderName={cardHolderName} setCardHolderName={setCardHolderName} />
       <CardCvcInput cardCvc={cardCvc} setCardCvc={setCardCvc} />
+      <CardPasswordInput cardPassword={cardPassword} setCardPassword={setCardPassword} />
     </PageLayout>
   )
 }

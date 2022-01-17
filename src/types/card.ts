@@ -3,4 +3,5 @@ export interface Card {
   expireDate: { month: string; year: string }
   holderName: string
   cvc: string
+  password: [string, string]
 }
