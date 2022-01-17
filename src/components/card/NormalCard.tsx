@@ -10,7 +10,7 @@ const NormalCard = ({ type, cardData }: NormalCardProps) => {
           <span className="card-text">{cardName}</span>
         </div>
         <div className="card-middle">
-          <div className="card-middle__chip" />
+          <div className={`${type}-card__chip`} />
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">

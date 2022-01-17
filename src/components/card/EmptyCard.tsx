@@ -3,7 +3,7 @@ const EmptyCard = () => (
     <div className="empty-card">
       <div className="card-top" />
       <div className="card-middle">
-        <div className="card-middle__chip" />
+        <div className="small-card__chip" />
       </div>
       <div className="card-bottom">
         <div className="card-bottom__info">

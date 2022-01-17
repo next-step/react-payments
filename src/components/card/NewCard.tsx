@@ -1,7 +1,9 @@
 const NewCard = ({ onClick }: NewCardProps) => {
   return (
-    <div className="card-box" onClick={() => onClick?.call(null)}>
-      <div className="empty-card">+</div>
+    <div className="card-box">
+      <div className="empty-card" onClick={onClick}>
+        +
+      </div>
     </div>
   );
 };
