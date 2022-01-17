@@ -1,6 +1,6 @@
 {
   "plugins": ["prettier", "react"],
-  "extends": ["react-app","react-app/jest", "plugin:prettier/recommended"],
+  "extends": ["react-app", "react-app/jest", "plugin:prettier/recommended"],
   "rules": {
     "prettier/prettier": "error",
     "import/order": [
@@ -8,7 +8,19 @@
       {
         "newlines-between": "always",
         "alphabetize": { "order": "asc" },
-        "groups": ["builtin", "external", ["parent", "sibling", "index"]]
+        "groups": ["builtin", "external", ["parent", "sibling", "index"]],
+        "pathGroups": [
+          {
+            "pattern": "$*/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "$*",
+            "group": "external",
+            "position": "after"
+          }
+        ]
       }
     ]
   },

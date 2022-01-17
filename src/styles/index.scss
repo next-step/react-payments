@@ -1,0 +1,40 @@
+@import './utils.scss';
+
+@font-face {
+  font-family: 'IBMPlexSansKR-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5e5e5;
+
+  font-family: IBMPlexSansKR-Regular, -apple-system, sans-serif;
+}
+
+input {
+  font-size: 16px;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: 0;
+}
+
+#root {
+  background-color: #fff;
+  width: 375px;
+  min-width: 375px;
+  height: 700px;
+  position: relative;
+  border-radius: 15px;
+}
+
