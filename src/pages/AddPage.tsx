@@ -1,9 +1,9 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Card as CardType } from 'src/types/card'
 
 import AddPageHeader from '$components/add/AddPageHeader'
 import AddPageNextButton from '$components/add/AddPageNextButton'
-import CardCompanyModal from '$components/add/CardCompanyModal'
+import CardCompanyModal, { COMPANY_LIST } from '$components/add/CardCompanyModal'
 import CardCvcInput from '$components/add/CardCvcInput'
 import CardExpireDateInput from '$components/add/CardExpireDateInput'
 import CardHolderNameInput from '$components/add/CardHolderNameInput'
@@ -19,11 +19,17 @@ function AddPage() {
   const [cardCvc, setCardCvc] = useState<CardType['cvc']>('')
   const [cardPassword, setCardPassword] = useState<CardType['password']>(['', ''])
   const [cardCompany, setCardCompany] = useState<CardType['company']>({ name: '', color: '' })
-  const [isModalOpen, setModalOpen] = useState(true)
+  const [isModalOpen, setModalOpen] = useState(false)
 
   const closeModal = useCallback(() => {
     setModalOpen(false)
   }, [])
+
+  useEffect(() => {
+    cardNumber[0].length === 4 &&
+      cardNumber[1].length === 4 &&
+      setCardCompany(COMPANY_LIST[Number(cardNumber[0] + cardNumber[1]) % 7])
+  }, [cardNumber])
 
   return (
     <PageLayout>
