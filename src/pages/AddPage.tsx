@@ -24,7 +24,7 @@ function AddPage() {
       <Card
         type="small"
         cardNumber={cardNumber}
-        holderName=""
+        holderName={cardHolderName}
         expireMonth={cardExpireDate.month}
         expireYear={cardExpireDate.year}
         company={{ name: '', color: '' }}
