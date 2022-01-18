@@ -1,6 +1,14 @@
 import Card from './index'
 import { ComponentStory } from '@storybook/react'
 
+const cardData = {
+  cardName: '그린카드',
+  cardNumber: '1234 - 1234 - **** - ****',
+  expired: '10 / 24',
+  userName: 'JAENAM',
+  alias: '법카',
+}
+
 export default {
   title: '1. Components/Card',
 }
@@ -20,16 +28,7 @@ CardEmpty.args = {
   cardData: null,
 }
 
-export const cardData = {
-  cardName: '그린카드',
-  cardNumber: '1234 - 1234 - **** - ****',
-  expired: '10 / 24',
-  userName: 'JAENAM',
-  alias: '법카',
-}
-
 export const CardBig = CardTemplate.bind({})
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 CardBig.args = {
   type: 'big',
   cardData,

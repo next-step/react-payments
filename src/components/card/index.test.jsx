@@ -1,7 +1,15 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { CardNew, CardEmpty, CardBig, CardSmall, cardData } from './index.stories'
+import { CardNew, CardEmpty, CardBig, CardSmall } from './index.stories'
 import '@testing-library/jest-dom'
+
+const cardData = {
+  cardName: '그린카드',
+  cardNumber: '1234 - 1234 - **** - ****',
+  expired: '10 / 24',
+  userName: 'JAENAM',
+  alias: '법카',
+}
 
 describe('Card', () => {
   it('render CardNew', () => {
