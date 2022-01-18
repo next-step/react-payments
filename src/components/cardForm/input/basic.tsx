@@ -1,25 +1,30 @@
 import { InputDefaultProps } from '@/common/constants'
 
-const CardNumberInput = ({
+const BasicInput = ({
   name,
+  size,
+  pattern,
+  testId,
   elRef,
   ...props
 }: InputDefaultProps & {
   name: string
+  pattern?: string
+  autoFocus?: boolean
   [key: string]: any
 }) => (
   <input
+    id={name}
     name={name}
     ref={elRef}
     className="input-basic"
     type="text"
-    required
-    pattern="^\d{4}$"
-    minLength={4}
-    maxLength={4}
+    pattern={pattern}
+    minLength={size}
+    maxLength={size}
+    data-testid={testId}
     {...props}
-    data-testid="input-card-number"
   />
 )
 
-export default CardNumberInput
+export default BasicInput

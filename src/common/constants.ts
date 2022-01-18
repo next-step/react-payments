@@ -12,12 +12,14 @@ export const LIMITS = {
 }
 
 export type InputDefaultProps = {
+  name: string
+  testId: string
   elRef: RefObject<HTMLInputElement>
 }
 
 export type Route = 'ADD' | 'ALIAS' | 'LIST'
 
-export type CardType = 'big' | 'small' | 'new'
+export type CardType = 'big' | 'small' | 'new' | 'empty'
 
 type Payload = { [key: string]: any }
 
