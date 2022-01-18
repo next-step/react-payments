@@ -93,14 +93,15 @@ const Add = () => {
     history('/list');
   };
 
-  const onClickNextButton = () => {
-    history('/alias');
+  const setDivisionValue = (
+    target: string,
+    length: number,
+    returnValue: string
+  ) => {
+    return target.length === length ? returnValue : '';
   };
 
-  const onSubmit = (event: FormEvent) => {
-    event.preventDefault();
-
-    // 카드 번호 뒤의 비밀번호 유효성 검사
+  const checkCardNumberPasswordValidation = () => {
     const copyCardNumberPasswordError = [...cardNumberPasswordError];
 
     if (isNaN(Number(cardNumber[2]))) copyCardNumberPasswordError[0] = true;
@@ -110,19 +111,21 @@ const Add = () => {
     else copyCardNumberPasswordError[1] = false;
 
     setCardNumberPasswordError([...copyCardNumberPasswordError]);
+  };
 
-    // 만료일 (월) 유효성 검사
+  const checkExpirationNumberValidation = () => {
     const mm = Number(expirationNumber[0]);
 
     if (mm >= 1 && mm <= 12) setExpirationMonthError(false);
     else setExpirationMonthError(true);
+  };
 
-    // cvc 비밀번호 유효성 검사
+  const checkCvcValidation = () => {
     if (isNaN(Number(cvc))) setCvcError(true);
     else setCvcError(false);
+  };
 
-    // 비밀번호 유효성 검사
-    // 카드 번호 뒤의 비밀번호 유효성 검사
+  const checkPasswordValidation = () => {
     const copyPasswordError = [...passwordError];
 
     if (isNaN(Number(password[0]))) copyPasswordError[0] = true;
@@ -132,6 +135,15 @@ const Add = () => {
     else copyPasswordError[1] = false;
 
     setPasswordError([...copyPasswordError]);
+  };
+
+  const onSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    checkCardNumberPasswordValidation();
+    checkExpirationNumberValidation();
+    checkCvcValidation();
+    checkPasswordValidation();
 
     if (
       !cardNumberPasswordError[0] &&
@@ -170,14 +182,14 @@ const Add = () => {
               onChange={(e) => onChangeCardNumber(e, 0)}
               required
             />
-            {cardNumber[0].length === 4 ? '-' : ''}
+            {setDivisionValue(cardNumber[0], 4, '-')}
             <Input
               type="number"
               value={cardNumber[1]}
               onChange={(e) => onChangeCardNumber(e, 1)}
               required
             />
-            {cardNumber[1].length === 4 ? '-' : ''}
+            {setDivisionValue(cardNumber[1], 4, '-')}
             <Input
               type="password"
               value={cardNumber[2]}
@@ -187,7 +199,7 @@ const Add = () => {
               error={cardNumberPasswordError[0]}
               required
             />
-            {cardNumber[2].length === 4 ? '-' : ''}
+            {setDivisionValue(cardNumber[2], 4, '-')}
             <Input
               type="password"
               value={cardNumber[3]}
@@ -215,7 +227,7 @@ const Add = () => {
               error={expirationMonthError}
               required
             />
-            {expirationNumber[0].length === 2 ? '/' : ''}
+            {setDivisionValue(expirationNumber[0], 2, '/')}
             <Input
               type="number"
               value={expirationNumber[1]}
