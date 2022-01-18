@@ -20,9 +20,18 @@ interface InputProps {
   isPassword?: boolean;
   readOnly?: boolean;
   ref?: any;
+  /**
+   * display 설정: 'block'
+   */
+  display?: 'block';
 }
 
-const InputBasic = styled.input<{ width?: number; isPassword?: boolean }>`
+const InputBasic = styled.input<{
+  width?: number;
+  isPassword?: boolean;
+  display?: 'block';
+}>`
+  display: ${({ display }) => display && display};
   background-color: #ecebf1;
   height: 45px;
   width: ${({ width }) => (width ? `${width}%` : '100%')};
@@ -51,6 +60,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       onChange,
       isPassword,
       readOnly,
+      display,
     },
     ref,
   ) => {
@@ -65,6 +75,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         isPassword={isPassword}
         readOnly={readOnly}
         ref={ref}
+        display={display}
       />
     );
   },

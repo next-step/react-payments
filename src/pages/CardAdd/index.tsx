@@ -1,14 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Root, PageTitle, App, InputTitle } from 'components/UI';
-import { InputBox, InputContainer } from 'components/Input/input.style';
+import { InputContainer } from 'components/Input/input.style';
 import { ButtonBox } from 'components/Button/button.style';
-import Input from 'components/Input';
-import Card from 'components/Card';
-import Button from 'components/Button';
+import { Input, InputWrapper, Card, Button } from 'components/index';
 import { CardAddPageProps } from 'models/page.model';
 import { FlexSpaceBetween } from 'components/UI/Utils';
-import { InputErrorMessage } from 'components/UI/Typography';
 import { ERROR_MESSAGE } from 'utils/validation';
 
 const CardAddPage: React.VFC<CardAddPageProps> = ({
@@ -117,70 +114,64 @@ const CardAddPage: React.VFC<CardAddPageProps> = ({
             userName={userName}
           />
           <form>
-            <InputContainer>
-              <InputTitle>카드 번호</InputTitle>
-              <InputBox>
-                <Input
-                  type="number"
-                  name="first"
-                  value={cardNum.first}
-                  onChange={updateCardNumber}
-                />
-                {createDashBetweenCardNumber(cardNum.first)}
-                <Input
-                  type="number"
-                  name="second"
-                  value={cardNum.second}
-                  onChange={updateCardNumber}
-                />
-                {createDashBetweenCardNumber(cardNum.second)}
-                <Input
-                  type="number"
-                  name="third"
-                  value={cardNum.third}
-                  onChange={updateCardNumber}
-                  isPassword
-                />
-                {createDashBetweenCardNumber(cardNum.third)}
-                <Input
-                  type="number"
-                  name="forth"
-                  value={cardNum.forth}
-                  onChange={updateCardNumber}
-                  isPassword
-                />
-              </InputBox>
-              {cardNumError && (
-                <InputErrorMessage>
-                  {ERROR_MESSAGE.CARD_NUMBER}
-                </InputErrorMessage>
-              )}
-            </InputContainer>
-            <InputContainer>
-              <InputTitle>만료일</InputTitle>
-              <InputBox width={50}>
-                <Input
-                  type="number"
-                  placeholder="MM"
-                  name="month"
-                  value={expiredDate.month}
-                  onChange={updateExpiredDate}
-                />
-                {expiredDate.month.length === 2 && '/'}
-                <Input
-                  type="number"
-                  placeholder="YY"
-                  name="year"
-                  value={expiredDate.year}
-                  onChange={updateExpiredDate}
-                />
-              </InputBox>
-              {expiredDateError && (
-                <InputErrorMessage>
-                  {ERROR_MESSAGE.EXPIRED_DATES}
-                </InputErrorMessage>
-              )}
-            </InputContainer>
+            <InputWrapper
+              title="카드 번호"
+              hasError={cardNumError}
+              errorMessage={ERROR_MESSAGE.CARD_NUMBER}
+            >
+              <Input
+                type="number"
+                name="first"
+                value={cardNum.first}
+                onChange={updateCardNumber}
+              />
+              {createDashBetweenCardNumber(cardNum.first)}
+              <Input
+                type="number"
+                name="second"
+                value={cardNum.second}
+                onChange={updateCardNumber}
+              />
+              {createDashBetweenCardNumber(cardNum.second)}
+              <Input
+                type="number"
+                name="third"
+                value={cardNum.third}
+                onChange={updateCardNumber}
+                isPassword
+              />
+              {createDashBetweenCardNumber(cardNum.third)}
+              <Input
+                type="number"
+                name="forth"
+                value={cardNum.forth}
+                onChange={updateCardNumber}
+                isPassword
+              />
+            </InputWrapper>
+            <InputWrapper
+              title="만료일"
+              width={50}
+              hasError={expiredDateError}
+              errorMessage={ERROR_MESSAGE.EXPIRED_DATES}
+            >
+              <Input
+                type="number"
+                placeholder="MM"
+                name="month"
+                value={expiredDate.month}
+                onChange={updateExpiredDate}
+              />
+              {expiredDate.month.length === 2 && '/'}
+              <Input
+                type="number"
+                placeholder="YY"
+                name="year"
+                value={expiredDate.year}
+                onChange={updateExpiredDate}
+              />
+            </InputWrapper>
+
             <InputContainer>
               <FlexSpaceBetween>
                 <InputTitle>카드 소유자 이름(선택)</InputTitle>
@@ -193,66 +184,61 @@ const CardAddPage: React.VFC<CardAddPageProps> = ({
                 onChange={updateUserName}
               />
             </InputContainer>
-            <InputContainer>
-              <InputTitle>보안코드(CVC/CVV)</InputTitle>
-              <div>
-                <Input
-                  width={25}
-                  type="number"
-                  value={CVC}
-                  onChange={updateCVC}
-                  ref={cvcRef}
-                  isPassword
-                />
-              </div>
-              {cvcError && (
-                <InputErrorMessage>{ERROR_MESSAGE.CVC}</InputErrorMessage>
-              )}
-            </InputContainer>
-            <InputContainer>
-              <InputTitle>카드 비밀번호</InputTitle>
-              <div>
-                <Input
-                  width={15}
-                  type="number"
-                  name="first"
-                  value={cardPassword.first}
-                  onChange={updateCardPassword}
-                  ref={passwordFirstRef}
-                  isPassword
-                />
-                <Input
-                  width={15}
-                  type="number"
-                  name="second"
-                  value={cardPassword.second}
-                  onChange={updateCardPassword}
-                  ref={passwordSecondRef}
-                  isPassword
-                />
-                <Input
-                  width={15}
-                  type="number"
-                  name="third"
-                  value={cardPassword.third}
-                  isPassword
-                  readOnly
-                />
-                <Input
-                  width={15}
-                  type="number"
-                  name="forth"
-                  value={cardPassword.forth}
-                  isPassword
-                  readOnly
-                />
-              </div>
-              {passwordError && (
-                <InputErrorMessage>
-                  {ERROR_MESSAGE.CARD_PASSWORD}
-                </InputErrorMessage>
-              )}
-            </InputContainer>
+            <InputWrapper
+              title="보안코드(CVC/CVV)"
+              width={25}
+              hasError={cvcError}
+              errorMessage={ERROR_MESSAGE.CVC}
+            >
+              <Input
+                type="number"
+                value={CVC}
+                onChange={updateCVC}
+                ref={cvcRef}
+                isPassword
+              />
+            </InputWrapper>
+            <InputWrapper
+              title="카드 비밀번호"
+              hasError={passwordError}
+              errorMessage={ERROR_MESSAGE.CARD_PASSWORD}
+              hasBox={false}
+            >
+              <Input
+                width={15}
+                type="number"
+                name="first"
+                value={cardPassword.first}
+                onChange={updateCardPassword}
+                ref={passwordFirstRef}
+                isPassword
+              />
+              <Input
+                width={15}
+                type="number"
+                name="second"
+                value={cardPassword.second}
+                onChange={updateCardPassword}
+                ref={passwordSecondRef}
+                isPassword
+              />
+              <Input
+                width={15}
+                type="number"
+                name="third"
+                value={cardPassword.third}
+                isPassword
+                readOnly
+              />
+              <Input
+                width={15}
+                type="number"
+                name="forth"
+                value={cardPassword.forth}
+                isPassword
+                readOnly
+              />
+            </InputWrapper>
           </form>
           <ButtonBox>
             <Button onClick={goNextStepToAddCard} />

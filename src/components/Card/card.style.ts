@@ -92,16 +92,7 @@ export const CardText = styled.span<{ size?: 'small' | 'big' }>`
   margin: 0 16px;
 
   font-size: ${({ size }) => (size === 'big' ? '18px' : '14px')};
-  line-height: 16px;
-  vertical-align: middle;
-  font-weight: 400;
-`;
-
-export const CardTextBig = styled.span`
-  margin: 0 16px;
-
-  font-size: 18px;
-  line-height: 20px;
+  line-height: ${({ size }) => (size === 'big' ? '20px' : '16px')};
   vertical-align: middle;
   font-weight: 400;
 `;

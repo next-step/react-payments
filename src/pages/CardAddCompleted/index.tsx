@@ -1,21 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ButtonBox, ButtonText } from 'components/Button/button.style';
-import {
-  BigCardChip,
-  CardBottom,
-  CardBottomInfo,
-  CardBottomNumber,
-  CardBox,
-  CardMiddle,
-  CardTextBig,
-  CardTop,
-  CardWrap,
-} from 'components/Card/card.style';
 import { InputContainer, InputUnderline } from 'components/Input/input.style';
 import { Root, PageTitle, FlexCenter, App } from 'components/UI';
 import { CardAddCompletedPageProps } from 'models/page.model';
-import { replaceCardNumToDot } from 'utils';
-import { useNavigate } from 'react-router-dom';
+import { Card } from 'components/index';
 
 const CardAddCompletedPage: React.VFC<CardAddCompletedPageProps> = ({
   cardCompany,
@@ -37,31 +26,14 @@ const CardAddCompletedPage: React.VFC<CardAddCompletedPageProps> = ({
         <FlexCenter>
           <PageTitle mb={10}>카드등록이 완료되었습니다.</PageTitle>
         </FlexCenter>
-        <CardBox>
-          <CardWrap size="big">
-            <CardTop>
-              <CardTextBig>{cardCompany}</CardTextBig>
-            </CardTop>
-            <CardMiddle>
-              <BigCardChip />
-            </CardMiddle>
-            <CardBottom>
-              <CardBottomNumber>
-                <CardTextBig>{`${cardNum.first} ${
-                  cardNum.second
-                } ${replaceCardNumToDot(cardNum.third)} ${replaceCardNumToDot(
-                  cardNum.forth,
-                )}`}</CardTextBig>
-              </CardBottomNumber>
-              <CardBottomInfo>
-                <CardTextBig>{userName}</CardTextBig>
-                <CardTextBig>
-                  {expiredDate.month} / {expiredDate.year}
-                </CardTextBig>
-              </CardBottomInfo>
-            </CardBottom>
-          </CardWrap>
-        </CardBox>
+        <Card
+          size="big"
+          cardCompany={cardCompany}
+          cardNum={cardNum}
+          userName={userName}
+          expiredMonth={expiredDate.month}
+          expiredYear={expiredDate.year}
+        />
         <InputContainer width={100} flexCenter>
           <InputUnderline
             width={75}

@@ -1,20 +1,9 @@
 import React from 'react';
-import {
-  CardBottom,
-  CardBottomNumber,
-  CardBottomInfo,
-  CardBox,
-  CardMiddle,
-  CardTop,
-  CardWrap,
-  SmallCardChip,
-  CardText,
-  CardNickname,
-} from 'components/Card/card.style';
+import { CardBox, CardWrap, CardNickname } from 'components/Card/card.style';
 import { Root, PageTitle, FlexCenter, App } from 'components/UI';
 import { CardListPageProps } from 'models/page.model';
-import { replaceCardNumToDot } from 'utils';
 import { useNavigate } from 'react-router-dom';
+import { Card } from 'components';
 
 const CardListPage: React.VFC<CardListPageProps> = ({
   cardCompany,
@@ -26,7 +15,7 @@ const CardListPage: React.VFC<CardListPageProps> = ({
   const navigate = useNavigate();
 
   const goToCardAddPage = () => {
-    navigate('/');
+    navigate('/', { state: 'reset' });
   };
   return (
     <>
@@ -37,31 +26,15 @@ const CardListPage: React.VFC<CardListPageProps> = ({
           </FlexCenter>
           {cardNickname && (
             <>
-              <CardBox>
-                <CardWrap>
-                  <CardTop>
-                    <CardText>{cardCompany}</CardText>
-                  </CardTop>
-                  <CardMiddle>
-                    <SmallCardChip />
-                  </CardMiddle>
-                  <CardBottom>
-                    <CardBottomNumber>
-                      <CardText>{`${cardNum.first} ${
-                        cardNum.second
-                      } ${replaceCardNumToDot(
-                        cardNum.third,
-                      )} ${replaceCardNumToDot(cardNum.forth)}`}</CardText>
-                    </CardBottomNumber>
-                    <CardBottomInfo>
-                      <CardText>{userName}</CardText>
-                      <CardText>
-                        {expiredDate.month} / {expiredDate.year}
-                      </CardText>
-                    </CardBottomInfo>
-                  </CardBottom>
-                </CardWrap>
-              </CardBox>
+              <Card
+                size="small"
+                cardCompany={cardCompany}
+                expiredMonth={expiredDate.month}
+                expiredYear={expiredDate.year}
+                cardNum={cardNum}
+                userName={userName}
+                isListPage
+              />
               <CardNickname>{cardNickname}</CardNickname>
             </>
           )}

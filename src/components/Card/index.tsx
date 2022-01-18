@@ -40,6 +40,10 @@ interface CardProps {
    * 카드 소유자 이름
    */
   userName: string;
+  /**
+   * 카드 목록 페이지 여부
+   */
+  isListPage?: boolean;
 }
 
 /**
@@ -52,6 +56,7 @@ export const Card: React.VFC<CardProps> = ({
   expiredYear,
   cardNum,
   userName,
+  isListPage,
 }) => {
   const isEmptyCard = () => {
     const hasUserName = userName.length > 0;
@@ -60,7 +65,7 @@ export const Card: React.VFC<CardProps> = ({
     return !(hasUserName || hasExpiredDate || hasCardNum);
   };
   const getUserName = () => {
-    return !!userName ? userName : 'NAME';
+    return !!userName ? userName : isListPage ? '' : 'NAME';
   };
   const getExpiredDate = () => {
     const month = !!expiredMonth ? expiredMonth : 'MM';
@@ -86,8 +91,8 @@ export const Card: React.VFC<CardProps> = ({
             </CardBottomNumber>
           )}
           <CardBottomInfo>
-            <CardText>{getUserName()}</CardText>
-            <CardText>{getExpiredDate()}</CardText>
+            <CardText size={size}>{getUserName()}</CardText>
+            <CardText size={size}>{getExpiredDate()}</CardText>
           </CardBottomInfo>
         </CardBottom>
       </CardWrap>

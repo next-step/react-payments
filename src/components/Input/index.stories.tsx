@@ -37,9 +37,12 @@ export const InputWithErrorMessage = () => {
   return (
     <InputContainer>
       <InputTitle>이름</InputTitle>
-      <div>
-        <BasicInput type="text" placeholder="이름을 입력해주세요" width={25} />
-      </div>
+      <BasicInput
+        type="text"
+        placeholder="이름을 입력해주세요"
+        width={25}
+        display="block"
+      />
       <InputErrorMessage>{ERROR_MESSAGE.CARD_NUMBER}</InputErrorMessage>
     </InputContainer>
   );
