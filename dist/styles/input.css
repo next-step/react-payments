@@ -10,6 +10,9 @@
   border-radius: 0.25rem;
   background-color: #ecebf1;
 }
+.input-box > * {
+  flex: 1 1 0;
+}
 
 .input-title {
   display: flex;
@@ -25,8 +28,8 @@
 
 .input-basic {
   background-color: #ecebf1;
-  height: 45px;
   width: 100%;
+  height: 45px;
   text-align: center;
   outline: none;
   border: 0;
