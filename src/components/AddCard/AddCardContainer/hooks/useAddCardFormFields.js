@@ -3,7 +3,7 @@ import { useState } from "react";
 const isMaximumLength = ({ maxLength, value }) =>
   maxLength && value.length > maxLength;
 
-const useCardNumberFields = () => {
+const useAddCardFormFields = () => {
   const [fields, setFields] = useState({
     cardNumbers: {
       firstField: "",
@@ -49,4 +49,4 @@ const useCardNumberFields = () => {
   };
 };
 
-export default useCardNumberFields;
+export default useAddCardFormFields;

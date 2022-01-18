@@ -2,11 +2,11 @@ import AddCardForm from "../AddCardForm";
 
 import { Title } from "../../style/layout";
 
-import useCardNumberFields from "./hooks/useCardNumberFields";
+import useAddCardFormFields from "./hooks/useAddCardFormFields";
 
 const AddCardContainer = () => {
   const { fields, handleChangeSingleInput, handleChangeMultipleInput } =
-    useCardNumberFields();
+    useAddCardFormFields();
 
   return (
     <>

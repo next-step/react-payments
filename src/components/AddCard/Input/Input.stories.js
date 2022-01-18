@@ -5,9 +5,9 @@ export default {
   component: Input,
 };
 
-export const input = (args) => <Input {...args} />;
+export const Basic = (args) => <Input {...args} />;
 
-input.args = {
+Basic.args = {
   field: {
     id: "expiry-date",
     ariaLabel: "월 2자리",

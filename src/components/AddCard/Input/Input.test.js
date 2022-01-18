@@ -15,19 +15,8 @@ describe("Input", () => {
     value: "12",
   };
 
-  const makeInput = ({
-    field = initialField,
-    isFullField = false,
-    separator,
-  } = {}) =>
-    render(
-      <Input
-        field={field}
-        onChange={handleChange}
-        isFullField={isFullField}
-        separator={separator}
-      />
-    );
+  const makeInput = ({ field = initialField } = {}) =>
+    render(<Input field={field} onChange={handleChange} />);
 
   it("Input을 렌더링합니다", () => {
     const { queryByLabelText } = makeInput();
@@ -51,37 +40,5 @@ describe("Input", () => {
     });
 
     expect(handleChange).toHaveBeenCalled();
-  });
-
-  context("입력된 Input 값이 최대 길이인 경우", () => {
-    it("구분자를 렌더링합니다", () => {
-      const { queryByText } = makeInput({ isFullField: true });
-
-      expect(queryByText("-")).toBeInTheDocument();
-    });
-  });
-
-  context("입력된 Input 값이 최대 길이가 아닌 경우", () => {
-    it("구분자를 렌더링합니다", () => {
-      const { queryByText } = makeInput({ isFullField: false });
-
-      expect(queryByText("-")).not.toBeInTheDocument();
-    });
-  });
-
-  context("구분자를 설정하지 않았을때", () => {
-    it("기본 구분자인 '-'를 렌더링합니다", () => {
-      const { queryByText } = makeInput({ isFullField: true });
-
-      expect(queryByText("-")).toBeInTheDocument();
-    });
-  });
-
-  context("구분자를 '/'으로 설정한 경우", () => {
-    it("'/'를 렌더링합니다", () => {
-      const { queryByText } = makeInput({ isFullField: true, separator: "/" });
-
-      expect(queryByText("/")).toBeInTheDocument();
-    });
   });
 });
