@@ -30,10 +30,12 @@ function Card({ type = 'small', holderName, cardNumber, expireMonth, expireYear,
           {hasCardNumber && (
             <div className={cx('card-bottom__number')}>
               <span className={cx(`${type}-card__text`)}>
-                {cardNumber.map((section, index) => {
-                  if (index < 2) return section
-                  return '*'.repeat(section.length)
-                })}
+                {cardNumber
+                  .map((section, index) => {
+                    if (index < 2) return section
+                    return '*'.repeat(section.length)
+                  })
+                  .join(' - ')}
               </span>
             </div>
           )}
