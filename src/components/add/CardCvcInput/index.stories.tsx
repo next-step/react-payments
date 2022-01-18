@@ -1,4 +1,6 @@
+import { expect } from '@storybook/jest'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
+import { userEvent, screen } from '@storybook/testing-library'
 import { useState } from 'react'
 import { Card } from 'src/types/card'
 
@@ -16,3 +18,21 @@ const Template: ComponentStory<typeof CardCvcInput> = () => {
 }
 
 export const Index = Template.bind({})
+
+Index.play = async () => {
+  const cvcInput = screen.getByTestId('cvc')
+
+  expect(screen.queryByText('숫자만 입력가능해요')).toBeNull()
+
+  await userEvent.type(cvcInput, 'abcde', {
+    delay: 100,
+  })
+
+  await screen.findByText('숫자만 입력가능해요')
+
+  await userEvent.type(cvcInput, '1234', {
+    delay: 100,
+  })
+
+  expect(screen.queryByText('숫자만 입력가능해요')).toBeNull()
+}

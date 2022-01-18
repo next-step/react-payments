@@ -38,7 +38,7 @@ function CardCvcInput({ cardCvc, setCardCvc }: CardCvcInputProps) {
   return (
     <Input>
       <InputTitle>보안코드(CVC/CVV)</InputTitle>
-      <BasicInput className="w-25" type="password" value={cvc} onChange={handleChange} />
+      <BasicInput className="w-25" type="password" value={cvc} onChange={handleChange} data-testid="cvc" />
       {showsWarning && <InputWarning>숫자만 입력가능해요</InputWarning>}
     </Input>
   )
