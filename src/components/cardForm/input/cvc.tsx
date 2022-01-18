@@ -1,12 +1,14 @@
 import { InputDefaultProps, LIMITS } from '@/common/constants'
+import KeypadWrapper from './keypadWrapper'
 
-const CvcInput = ({ elRef }: InputDefaultProps) => (
+const CvcInput = ({ elRef, handleFocus }: InputDefaultProps & { handleFocus: () => void }) => (
   <input
     id="cvc"
     name="cvc"
     ref={elRef}
-    className="input-basic w-25"
+    className="input-basic"
     required
+    onFocus={handleFocus}
     minLength={LIMITS.CVC_SIZE}
     maxLength={LIMITS.CVC_SIZE}
     type="password"
@@ -15,4 +17,4 @@ const CvcInput = ({ elRef }: InputDefaultProps) => (
   />
 )
 
-export default CvcInput
+export default KeypadWrapper(CvcInput)

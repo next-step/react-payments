@@ -25,6 +25,7 @@
     "@vitejs/plugin-react": "^1.0.7",
     "babel-jest": "^27.4.6",
     "babel-loader": "^8.2.3",
+    "chromatic": "^6.4.0",
     "jest": "^27.4.7",
     "storybook": "^6.4.10",
     "storybook-builder-vite": "^0.1.13",
@@ -38,6 +39,7 @@
     "preview": "vite preview",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
+    "publish-storybook": "npx chromatic --project-token=10c5d2bf8dca",
     "test": "jest"
   },
   "version": "0.0.0"

@@ -9,7 +9,7 @@ import {
   PasswordInput,
   UserNameInput,
 } from '@/components/cardForm/input'
-import { ReactChild, SyntheticEvent } from 'react'
+import { createRef, ReactChild, SyntheticEvent } from 'react'
 
 export default {
   title: '1. Components/CardForm',
@@ -25,8 +25,19 @@ const Form = ({ children }: { children: ReactChild }) => {
   }
   return (
     <form data-testid="form" onChange={handleChange}>
-      {children}
+      <div className="input-box">{children}</div>
     </form>
+  )
+}
+
+const InputWithKeypad = (name: string, Component: any) => (args: any) => {
+  const ref = createRef<HTMLInputElement>()
+  return (
+    <div style={{ marginTop: '150px' }}>
+      <Form>
+        <Component name={name} elRef={ref} {...args} />
+      </Form>
+    </div>
   )
 }
 
@@ -37,11 +48,10 @@ const CardNumberTemplate: ComponentStory<typeof CardNumberInput> = args => (
 )
 export const InputCardNumber = CardNumberTemplate.bind({})
 
-const CardNumberAnonymousTemplate: ComponentStory<typeof CardNumberAnonymousInput> = args => (
-  <Form>
-    <CardNumberAnonymousInput {...args} name="cardNumber3" />
-  </Form>
-)
+const CardNumberAnonymousTemplate: ComponentStory<typeof CardNumberAnonymousInput> = args => {
+  const Component = InputWithKeypad('cardNumber3', CardNumberAnonymousInput)
+  return <Component {...args} />
+}
 export const InputCardNumberAnonymous = CardNumberAnonymousTemplate.bind({})
 
 const MonthTemplate: ComponentStory<typeof MonthInput> = args => (
@@ -58,18 +68,16 @@ const YearTemplate: ComponentStory<typeof YearInput> = args => (
 )
 export const InputYear = YearTemplate.bind({})
 
-const CvcTemplate: ComponentStory<typeof CvcInput> = args => (
-  <Form>
-    <CvcInput {...args} />
-  </Form>
-)
+const CvcTemplate: ComponentStory<typeof CvcInput> = args => {
+  const Component = InputWithKeypad('cvc', CvcInput)
+  return <Component {...args} />
+}
 export const InputCvc = CvcTemplate.bind({})
 
-const PasswordTemplate: ComponentStory<typeof PasswordInput> = args => (
-  <Form>
-    <PasswordInput {...args} name="pw1" />
-  </Form>
-)
+const PasswordTemplate: ComponentStory<typeof PasswordInput> = args => {
+  const Component = InputWithKeypad('pw1', PasswordInput)
+  return <Component {...args} />
+}
 export const InputPassword = PasswordTemplate.bind({})
 
 const UserNameTemplate: ComponentStory<typeof UserNameInput> = args => (

@@ -15,7 +15,13 @@ import {
 const TotalInputCount = 10
 const InputArray = Array.from({ length: TotalInputCount })
 
-const CardForm = ({ saveCard, setCardData }: { saveCard: () => void; setCardData: (v: CardData) => void }) => {
+const CardForm = ({
+  saveCard,
+  setCardData,
+}: {
+  saveCard: () => void
+  setCardData: (v: CardData) => void
+}) => {
   const formData = useMemo(() => new Map(), [])
   const inputRefs = InputArray.map(() => createRef<HTMLInputElement>())
   const buttonRef = useRef<HTMLButtonElement>(null)
@@ -75,14 +81,18 @@ const CardForm = ({ saveCard, setCardData }: { saveCard: () => void; setCardData
     if (nextInput) nextInput.focus()
   }
 
-  const selectCard = (name: string) => {
-    setDataValue('cardName', name)
+  const closeCardModal = () => {
     toggleModal(false)
     const $currentInput = inputRefs[1].current
     const $nextInput = inputRefs[2].current
     if ($currentInput && $nextInput) {
       $nextInput.focus()
     }
+  }
+
+  const selectCard = async (name: string) => {
+    setDataValue('cardName', name)
+    closeCardModal()
   }
 
   return (
@@ -125,23 +135,25 @@ const CardForm = ({ saveCard, setCardData }: { saveCard: () => void; setCardData
         <label htmlFor="cvc" className="input-title">
           보안코드(CVC/CVV)
         </label>
-        <CvcInput elRef={inputRefs[6]} />
+        <CvcInput name="cvc" elRef={inputRefs[6]} />
       </div>
       <div className="input-container">
         <label htmlFor="pw1" className="input-title">
           카드 비밀번호
         </label>
-        <PasswordInput id="pw1" name="pw1" elRef={inputRefs[7]} />
-        <PasswordInput name="pw2" elRef={inputRefs[8]} />
-        <input className="input-basic w-15" disabled value="*" type="password" />
-        <input className="input-basic w-15" disabled value="*" type="password" />
+        <div className="input-box w-50">
+          <PasswordInput id="pw1" name="pw1" elRef={inputRefs[7]} />
+          <PasswordInput name="pw2" elRef={inputRefs[8]} />
+          <input className="input-basic" disabled value="*" type="password" />
+          <input className="input-basic" disabled value="*" type="password" />
+        </div>
       </div>
       <div className="button-box">
         <button type="submit" className="button" ref={buttonRef}>
           다음
         </button>
       </div>
-      {showModal ? <SelectModal selectCard={selectCard} closeModal={() => toggleModal(false)} /> : null}
+      {showModal ? <SelectModal selectCard={selectCard} closeModal={closeCardModal} /> : null}
     </form>
   )
 }

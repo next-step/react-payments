@@ -1,8 +1,10 @@
 import { InputDefaultProps, LIMITS } from '@/common/constants'
+import KeypadWrapper from './keypadWrapper'
 
 const CardNumberAnonymousInput = ({
   name,
   elRef,
+  handleFocus,
   ...props
 }: InputDefaultProps & {
   name: string
@@ -14,6 +16,7 @@ const CardNumberAnonymousInput = ({
     className="input-basic"
     type="password"
     inputMode="numeric"
+    onFocus={handleFocus}
     minLength={LIMITS.CARD_NUMBER_SIZE}
     maxLength={LIMITS.CARD_NUMBER_SIZE}
     size={LIMITS.CARD_NUMBER_SIZE}
@@ -23,4 +26,5 @@ const CardNumberAnonymousInput = ({
     data-testid="input-card-number"
   />
 )
-export default CardNumberAnonymousInput
+
+export default KeypadWrapper(CardNumberAnonymousInput)

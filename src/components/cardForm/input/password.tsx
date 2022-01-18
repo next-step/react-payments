@@ -1,8 +1,10 @@
 import { InputDefaultProps, LIMITS } from '@/common/constants'
+import KeypadWrapper from './keypadWrapper'
 
 const PasswordInput = ({
   name,
   elRef,
+  handleFocus,
   ...props
 }: InputDefaultProps & {
   name: string
@@ -11,10 +13,11 @@ const PasswordInput = ({
   <input
     name={name}
     ref={elRef}
-    className="input-basic w-15"
+    className="input-basic"
     required
     minLength={LIMITS.PASSWORD_SIZE}
     maxLength={LIMITS.PASSWORD_SIZE}
+    onFocus={handleFocus}
     type="password"
     pattern="^\d{1}$"
     {...props}
@@ -22,4 +25,4 @@ const PasswordInput = ({
   />
 )
 
-export default PasswordInput
+export default KeypadWrapper(PasswordInput)
