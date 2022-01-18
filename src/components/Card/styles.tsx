@@ -8,7 +8,7 @@ export const CardBox = styled.div<{ color?: string }>`
   margin: 10px 0px;
 `;
 
-export const CardBasic = styled.div<{ size: string; color?: string }>`
+export const CardBasic = styled.div<{ size: 'small' | 'big'; color?: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;

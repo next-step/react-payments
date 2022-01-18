@@ -1,14 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
-interface AppProps {
-  flexColumnCenter?: boolean;
-}
-
-interface PageTitleProps {
-  mb10?: boolean;
-}
-
 export const GlobalStyles = css`
   body {
     display: flex;
@@ -24,7 +16,7 @@ export const GlobalStyles = css`
   }
 `;
 
-export const PageTitle = styled.h2`
+export const PageTitle = styled.h2<{ mb10?: boolean }>`
   font-weight: 500;
   font-size: 20px;
   line-height: 22px;
@@ -33,14 +25,14 @@ export const PageTitle = styled.h2`
 
   color: #383838;
 
-  ${({ mb10 }: PageTitleProps) => mb10 && `margin-bottom: 2.5rem;`}
+  ${({ mb10 }) => mb10 && `margin-bottom: 2.5rem;`}
 `;
 
-export const App = styled.div`
+export const App = styled.div<{ flexColumnCenter?: boolean }>`
   height: 100%;
   padding: 16px 24px;
 
-  ${({ flexColumnCenter }: AppProps) =>
+  ${({ flexColumnCenter }) =>
     flexColumnCenter &&
     `
     display: flex;
