@@ -17,22 +17,14 @@ const useAddCardFormFields = () => {
     },
   });
 
-  const handleChangeSingleInput = ({ maxLength, name, value }) => {
-    if (isMaximumLength({ maxLength, value })) {
-      return;
-    }
-
+  const handleChangeSingleInput = ({ name, value }) => {
     setFields((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  const handleChangeMultipleInput = ({ maxLength, key, name, value }) => {
-    if (isMaximumLength({ maxLength, value })) {
-      return;
-    }
-
+  const handleChangeMultipleInput = ({ key, name, value }) => {
     setFields((prev) => ({
       ...prev,
       [key]: {

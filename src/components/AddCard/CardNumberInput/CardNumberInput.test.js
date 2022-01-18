@@ -58,7 +58,6 @@ describe("CardNumberInput", () => {
       });
 
       expect(handleChange).toBeCalledWith({
-        maxLength: 4,
         key: "cardNumbers",
         name,
         value,

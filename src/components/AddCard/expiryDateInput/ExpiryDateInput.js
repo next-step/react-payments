@@ -14,10 +14,8 @@ const ExpiryDateInput = ({ fields, onChange }) => {
     fields,
   });
 
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-
-    onChange({ maxLength: 2, key: "expiryDate", name, value });
+  const handleChange = ({ name, value }) => {
+    onChange({ key: "expiryDate", name, value });
   };
 
   const monthInputAttribute = {

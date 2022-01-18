@@ -3,11 +3,19 @@ import styled from "@emotion/styled";
 const Input = ({ field, onChange, background }) => {
   const { ariaLabel, ...rest } = field;
 
+  const handleChange = ({ target: { name, value, maxLength } }) => {
+    if (maxLength < value.length) {
+      return;
+    }
+
+    onChange({ name, value });
+  };
+
   return (
     <Item
       aria-label={ariaLabel}
       {...rest}
-      onChange={onChange}
+      onChange={handleChange}
       background={background}
     />
   );

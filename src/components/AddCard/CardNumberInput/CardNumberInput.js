@@ -17,10 +17,8 @@ const CardNumberInput = ({ fields, onChange }) => {
       fields,
     });
 
-  const handleChange = ({ target }) => {
-    const { name, value } = target;
-
-    onChange({ maxLength: 4, key: "cardNumbers", name, value });
+  const handleChange = ({ name, value }) => {
+    onChange({ key: "cardNumbers", name, value });
   };
 
   const firstInputData = {
@@ -30,6 +28,7 @@ const CardNumberInput = ({ fields, onChange }) => {
     type: "number",
     name: "firstField",
     value: firstField,
+    maxLength: 4,
   };
 
   const secondInputData = {
@@ -38,6 +37,7 @@ const CardNumberInput = ({ fields, onChange }) => {
     type: "number",
     name: "secondField",
     value: secondField,
+    maxLength: 4,
   };
 
   const thirdInputData = {
@@ -46,6 +46,7 @@ const CardNumberInput = ({ fields, onChange }) => {
     type: "password",
     name: "thirdField",
     value: thirdField,
+    maxLength: 4,
   };
 
   const fourthInputData = {
@@ -54,6 +55,7 @@ const CardNumberInput = ({ fields, onChange }) => {
     type: "password",
     name: "fourthField",
     value: fourthField,
+    maxLength: 4,
   };
 
   return (

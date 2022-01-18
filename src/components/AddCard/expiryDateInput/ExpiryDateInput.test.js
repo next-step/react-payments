@@ -46,7 +46,6 @@ describe("ExpiryDateInput", () => {
       });
 
       expect(handleChange).toBeCalledWith({
-        maxLength: 2,
         key: "expiryDate",
         name,
         value,
