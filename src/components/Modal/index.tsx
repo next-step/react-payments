@@ -15,62 +15,29 @@ interface ModalProps {
   onClickSpace: () => void;
 }
 
+const cards = [
+  { color: '#e24141', name: '포코 카드' },
+  { color: '#547ce4', name: '준 카드' },
+  { color: '#73BC6D', name: '공원 카드' },
+  { color: '#DE59B9', name: '브랜 카드' },
+  { color: '#04C09E', name: '로이드 카드' },
+  { color: '#E76E9A', name: '도비 카드' },
+  { color: '#F37D3B', name: '콜린 카드' },
+  { color: '#FBCD58', name: '썬 카드' },
+];
+
 const index = ({ open, onClose, onClickSpace }: ModalProps) => {
   return (
     <ModalDimmed open={open} onClick={onClickSpace}>
       <Modal>
-        <FlexCenter>
-          <ModalItemConatainer>
+        {cards.map((card) => (
+          <FlexCenter key={card.name}>
             <ModalItemButton onClick={onClose}>
-              <ModalItemDot color="#e24141"></ModalItemDot>
-              <ModalItemName>포코 카드</ModalItemName>
+              <ModalItemDot color={card.color}></ModalItemDot>
+              <ModalItemName>{card.name}</ModalItemName>
             </ModalItemButton>
-          </ModalItemConatainer>
-          <ModalItemConatainer>
-            <ModalItemButton onClick={onClose}>
-              <ModalItemDot color="#547ce4"></ModalItemDot>
-              <ModalItemName>준 카드</ModalItemName>
-            </ModalItemButton>
-          </ModalItemConatainer>
-          <ModalItemConatainer>
-            <ModalItemButton onClick={onClose}>
-              <ModalItemDot color="#73BC6D"></ModalItemDot>
-              <ModalItemName>공원 카드</ModalItemName>
-            </ModalItemButton>
-          </ModalItemConatainer>
-          <ModalItemConatainer>
-            <ModalItemButton onClick={onClose}>
-              <ModalItemDot color="#DE59B9"></ModalItemDot>
-              <ModalItemName>브랜 카드</ModalItemName>
-            </ModalItemButton>
-          </ModalItemConatainer>
-        </FlexCenter>
-        <FlexCenter>
-          <ModalItemConatainer>
-            <ModalItemButton onClick={onClose}>
-              <ModalItemDot color="#04C09E"></ModalItemDot>
-              <ModalItemName>로이드 카드</ModalItemName>
-            </ModalItemButton>
-          </ModalItemConatainer>
-          <ModalItemConatainer>
-            <ModalItemButton onClick={onClose}>
-              <ModalItemDot color="#E76E9A"></ModalItemDot>
-              <ModalItemName>도비 카드</ModalItemName>
-            </ModalItemButton>
-          </ModalItemConatainer>
-          <ModalItemConatainer>
-            <ModalItemButton onClick={onClose}>
-              <ModalItemDot color="#F37D3B"></ModalItemDot>
-              <ModalItemName>콜린 카드</ModalItemName>
-            </ModalItemButton>
-          </ModalItemConatainer>
-          <ModalItemConatainer>
-            <ModalItemButton onClick={onClose}>
-              <ModalItemDot color="#FBCD58"></ModalItemDot>
-              <ModalItemName>썬 카드</ModalItemName>
-            </ModalItemButton>
-          </ModalItemConatainer>
-        </FlexCenter>
+          </FlexCenter>
+        ))}
       </Modal>
     </ModalDimmed>
   );
