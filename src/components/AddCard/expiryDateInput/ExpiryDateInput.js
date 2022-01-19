@@ -2,6 +2,8 @@ import { EXPIRY_DATE_LABEL } from "../constants";
 
 import useExpiryDateFieldsRef from "./hooks/useExpiryDateFieldsRef";
 
+import isFullField from "../utils/isFullField";
+
 import InputGroup from "../InputGroup";
 import Input from "../Input";
 
@@ -41,10 +43,15 @@ const ExpiryDateInput = ({ fields, onChange }) => {
 
   return (
     <InputStyle.Container>
-      <InputStyle.Label htmlFor="expiry-date">만료일</InputStyle.Label>
+      <InputStyle.Label htmlFor="expiry-date">
+        만료일
+      </InputStyle.Label>
       <InputStyle.Group>
         <InputGroup>
-          <Input field={monthInputAttribute} onChange={handleChange} />
+          <Input
+            field={monthInputAttribute}
+            onChange={handleChange}
+          />
         </InputGroup>
         <InputGroup>
           <Input field={yearInputAttribute} onChange={handleChange} />

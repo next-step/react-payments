@@ -5,8 +5,11 @@ import { Title } from "../../style/layout";
 import useAddCardFormFields from "./hooks/useAddCardFormFields";
 
 const AddCardContainer = () => {
-  const { fields, handleChangeSingleInput, handleChangeMultipleInput } =
-    useAddCardFormFields();
+  const {
+    fields,
+    handleChangeSingleInput,
+    handleChangeMultipleInput,
+  } = useAddCardFormFields();
 
   return (
     <>
