@@ -25,7 +25,7 @@ const CardPasswordInput = ({ fields, onChange }) => {
     id: "first-password",
     ariaLabel: "비밀번호 첫번째 자리",
     ref: firstInput,
-    type: "number",
+    type: "password",
     name: "firstField",
     value: firstField,
     maxLength: 1,
@@ -34,7 +34,7 @@ const CardPasswordInput = ({ fields, onChange }) => {
   const secondInputAttribute = {
     ariaLabel: "비밀번호 두번째 자리",
     ref: secondInput,
-    type: "number",
+    type: "password",
     name: "secondField",
     value: secondField,
     maxLength: 1,
@@ -71,7 +71,7 @@ const FakeInput = styled.p`
   padding: 12px 0;
   width: 43px;
   border: none;
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
   letter-spacing: 2px;
 `;
