@@ -1,8 +1,5 @@
 import { useState } from "react";
 
-const isMaximumLength = ({ maxLength, value }) =>
-  maxLength && value.length > maxLength;
-
 const useAddCardFormFields = () => {
   const [fields, setFields] = useState({
     cardNumbers: {
@@ -15,6 +12,7 @@ const useAddCardFormFields = () => {
       monthField: "",
       yearField: "",
     },
+    cardOwner: "",
   });
 
   const handleChangeSingleInput = ({ name, value }) => {
