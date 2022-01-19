@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+## 🚀 Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Component-Driven Development 에 따라 UI를 구성하고 재사용 가능한 Component를 작성합니다.
 
-## Available Scripts
+✔️ 모바일 타겟의 웹 앱을 구현하며 사용하기 편리한 모바일 UI/UX에 대해 고민해봅니다.
+✔️ 다른 라이브러리나 프레임워크 없이 오로지 React만으로 상태를 관리하고 컴포넌트를 설계합니다.
+✔️ 재사용 가능한 Component를 직접 작성하고 사용합니다.
+✔️ Github Repository
+✔️ Figma
 
-In the project directory, you can run:
+## 📝 Requirements
 
-### `npm start`
+### 필수 요구사항
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+[] Storybook 상호 작용 테스트
+[] 재사용 가능한 Component 작성
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 카드 추가
 
-### `npm test`
+[] <(뒤로가기) 버튼 클릭 시, 카드 목록 페이지로 이동한다.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[] 카드 번호를 입력 받을 수 있다.
+[] 카드 번호는 숫자만 입력가능하다.
+[] 카드 번호 4자리마다 -가 삽입된다.
+[] 카드 번호는 실시간으로 카드 UI에 반영된다.
+[] 카드 번호는 앞 8자리만 숫자로 보여지고, 나머지 숫자는 \*로 보여진다.
 
-### `npm run build`
+[] 만료일을 입력 받을 수 있다.
+[] MM / YY 로 placeholder를 적용한다.
+[] 월, 년 사이에 자동으로 /가 삽입된다.
+[] 만료일은 실시간으로 카드 UI에 반영된다.
+[] 월은 1이상 12이하 숫자여야 한다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[] 보안코드를 입력 받을 수 있다.
+[] 보안코드는 \*으로 보여진다.
+[] 보안코드는 숫자만 입력가능하다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+[] 카드 비밀번호의 앞 2자리를 입력 받을 수 있다.
+[] 카드 비밀번호는 각 폼마다 한자리 숫자만 입력가능하다.
+[] 카드 번호 입력 시, \*으로 보여진다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[] 카드 소유자 이름을 입력 받을 수 있다.
+[] 이름은 30자리까지 입력할 수 있다.
+[] 이름 입력 폼 위에, 현재 입력 자릿수와 최대 입력 자릿수를 실시간으로 보여준다.
 
-### `npm run eject`
+[] 카드 추가 완료시 카드 등록 완료 페이지로 이동한다.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 심화 요구사항 (선택사항)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+[] Storybook 단위 테스트
+[] 유효성 검증 실패에 대한 UI/UX 추가
+[] 유효한 값 입력시 다음 필드로 Input Focusing
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+[] 카드사 선택
+[] 카드 번호 앞 8자리로 카드사를 추정하여 그 테마를 카드 UI에 반영한다.
+[] 카드사를 선택하지 않아도 모달을 닫을 수 있다.
+[] 카드사가 선택되고 유효한 카드 번호 16자리를 모두 입력하면, 자동으로 만료일로 focus된다.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+[] 보안코드 툴팁
+[] 클릭 시, 보안코드 관련 안내 메시지를 보여준다.
+[] focusout 시, 툴팁이 닫힌다.
 
-## Learn More
+[] 가상 키보드
+[] 마스킹 처리된 값 입력시 사용
+[] 숫자를 랜덤으로 배열
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 리뷰 포인트
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Component
+  - CDD (컴포넌트 주도 개발 방법)을 시도했는가
+  - 재사용 or 확장 가능성을 고려한 Component인가
+  - Component 분리 기준을 가지고 있는가
+- Hooks API
+  - Component와 Hook의 역할이 적절하게 나누어져있는가
+  - Custom Hooks를 적절하게 활용했는가
+- UI/UX
+  - 모바일에서의 사용성에 문제가 있는가
+  - 유저의 흐름을 끊지않는 편리한 사용성을 지니고 있는가
