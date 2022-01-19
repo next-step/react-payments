@@ -1,6 +1,6 @@
-import { CardType } from "@common/constants";
+import { RoutePath } from "@common/constants";
+import AddCardForm from "@components/addCardForm/AddCardForm";
 import BackButton from "@components/button/BackButton";
-import Card from "@components/card";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -9,11 +9,16 @@ const AddCardPage: React.FC = () => {
 
   return (
     <>
-      <h2 className="page-title">
-        <BackButton onClick={() => navigate(-1)} />
+      <h2 className="page-title p-10">
+        <BackButton onClick={() => navigate(RoutePath.CardList)} />
         카드 추가
       </h2>
-      <Card type={CardType.small} cardData={undefined} />
+      <AddCardForm
+        className="p-10"
+        onSubmit={() => {
+          console.log("on submit");
+        }}
+      />
     </>
   );
 };
