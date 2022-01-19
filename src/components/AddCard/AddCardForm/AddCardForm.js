@@ -5,7 +5,7 @@ import Input from "../Input";
 import * as InputStyle from "../../style/input";
 
 const AddCardForm = ({
-  fields: { cardNumbers, expiryDate, cardOwner },
+  fields: { cardNumbers, expiryDate, cardOwner, securityNumber },
   onChangeMultipleInput,
   onChangeSingleInput,
 }) => {
@@ -34,6 +34,22 @@ const AddCardForm = ({
             name: "cardOwner",
             value: cardOwner,
             maxLength: 30,
+          }}
+          onChange={handleChangeSingleInput}
+          background
+        />
+      </InputStyle.Container>
+      <InputStyle.Container>
+        <InputStyle.Label htmlFor="security-number">
+          보안코드(CVC/CVV)
+        </InputStyle.Label>
+        <Input
+          field={{
+            id: "security-number",
+            type: "password",
+            name: "securityNumber",
+            value: securityNumber,
+            maxLength: 3,
           }}
           onChange={handleChangeSingleInput}
           background

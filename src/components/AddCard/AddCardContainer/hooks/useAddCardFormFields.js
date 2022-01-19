@@ -13,6 +13,7 @@ const useAddCardFormFields = () => {
       yearField: "",
     },
     cardOwner: "",
+    securityNumber: "",
   });
 
   const handleChangeSingleInput = ({ name, value }) => {
