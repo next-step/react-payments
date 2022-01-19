@@ -1,0 +1,86 @@
+#modalRoot {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+#modalRoot.show {
+  display: block;
+  z-index: 5;
+}
+
+.modal-dimmed {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 5;
+}
+#modalRoot.show .modal-dimmed {
+  animation: 0.2s ease-out forwards fadeIn;
+}
+
+.modal {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 220px;
+  border-radius: 5px 5px 15px 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #fff;
+  z-index: 10;
+  transform: translateY(100%);
+}
+#modalRoot.show .modal {
+  animation: 0.2s 0.1s ease-out forwards slideIn;
+}
+
+.modal-item-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-item-dot {
+  margin: 0.5rem 1rem;
+  border-radius: 50%;
+  width: 2.8rem;
+  height: 2.8rem;
+  background-color: #94dacd;
+}
+
+.modal-item-name {
+  font-size: 12px;
+  letter-spacing: -0.085rem;
+}
+
+@keyframes fadeIn {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,14 @@
+.button-box {
+  width: 100%;
+  text-align: right;
+}
+
+.button {
+  margin-right: 10px;
+  border: 0;
+  background-color: inherit;
+  font-size: inherit;
+}
+.button:focus {
+  outline: 2px solid #59f;
+}

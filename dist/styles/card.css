@@ -1,8 +1,8 @@
 .card-box {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-
   margin: 10px 0;
 }
 
@@ -39,16 +39,6 @@
   border-radius: 5px;
 }
 
-.small-card__chip {
-  width: 40px;
-  height: 26px;
-  left: 95px;
-  top: 122px;
-
-  background: #cbba64;
-  border-radius: 4px;
-}
-
 .big-card {
   display: flex;
   flex-direction: column;
@@ -61,16 +51,6 @@
   background: #94dacd;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-}
-
-.big-card__chip {
-  width: 55.04px;
-  height: 35.77px;
-
-  background: #cbba64;
-  border-radius: 4px;
-
-  font-size: 24px;
 }
 
 .card-top {
@@ -88,6 +68,22 @@
 
   display: flex;
   align-items: center;
+}
+
+.card-middle__chip {
+  width: 40px;
+  height: 26px;
+  left: 95px;
+  top: 122px;
+
+  background: #cbba64;
+  border-radius: 4px;
+}
+
+.big-card .card-middle__chip {
+  width: 55.04px;
+  height: 35.77px;
+  font-size: 24px;
 }
 
 .card-bottom {
@@ -119,18 +115,18 @@
 
 .card-text {
   margin: 0 16px;
-
   font-size: 14px;
   line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
 }
 
-.card-text__big {
-  margin: 0 16px;
-
+.big-card .card-text {
   font-size: 18px;
   line-height: 20px;
-  vertical-align: middle;
-  font-weight: 400;
+}
+
+.card-nickname {
+  display: block;
+  margin: 10px 0;
 }

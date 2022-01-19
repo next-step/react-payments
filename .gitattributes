@@ -1,0 +1,3 @@
+dist/**/* linguist-generated=true
+yarn.lock linguist-generated=true
+*.md linguist-generated=true

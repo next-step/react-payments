@@ -1,0 +1,49 @@
+.keypad-wrap {
+  display: inline-block;
+  position: relative;
+}
+
+.keypad-modal {
+  position: absolute;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #777;
+  z-index: 10;
+}
+
+.keypads {
+  display: grid;
+  width: 150px;
+  height: 150px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 4px;
+}
+
+.item {
+  border: 1px solid #777;
+  border-radius: 3px;
+  outline: 0;
+  background-color: #f0f0f0;
+}
+.item--back {
+  border: 1px solid #777;
+  border-radius: 3px;
+  outline: 0;
+  background-color: #fff;
+  grid-column: 3 / 4;
+  grid-row: 3 / 5;
+}
+.item:hover {
+  background-color: #f0f0aa;
+}
+.item--back:hover {
+  background-color: #ddf;
+}
