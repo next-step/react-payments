@@ -14,6 +14,10 @@ const useAddCardFormFields = () => {
     },
     cardOwner: "",
     securityNumber: "",
+    cardPassword: {
+      firstField: "",
+      secondField: "",
+    },
   });
 
   const handleChangeSingleInput = ({ name, value }) => {

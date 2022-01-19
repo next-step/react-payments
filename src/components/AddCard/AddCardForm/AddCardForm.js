@@ -1,11 +1,18 @@
 import CardNumberInput from "../CardNumberInput";
 import ExpiryDateInput from "../ExpiryDateInput";
+import CardPasswordInput from "../CardPasswordInput";
 import Input from "../Input";
 
 import * as InputStyle from "../../style/input";
 
 const AddCardForm = ({
-  fields: { cardNumbers, expiryDate, cardOwner, securityNumber },
+  fields: {
+    cardNumbers,
+    expiryDate,
+    cardOwner,
+    securityNumber,
+    cardPassword,
+  },
   onChangeMultipleInput,
   onChangeSingleInput,
 }) => {
@@ -55,6 +62,10 @@ const AddCardForm = ({
           background
         />
       </InputStyle.Container>
+      <CardPasswordInput
+        fields={cardPassword}
+        onChange={onChangeMultipleInput}
+      />
     </form>
   );
 };

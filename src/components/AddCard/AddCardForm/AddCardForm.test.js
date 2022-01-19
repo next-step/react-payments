@@ -19,6 +19,10 @@ describe("AddCardForm", () => {
     },
     cardOwner: "",
     securityNumber: "",
+    cardPassword: {
+      firstField: "",
+      secondField: "",
+    },
   };
 
   const makeAddCardForm = (fields = initialFields) =>
@@ -95,5 +99,11 @@ describe("AddCardForm", () => {
       name: "securityNumber",
       value: "11",
     });
+  });
+
+  it("카드 비밀번호 Input을 렌더링합니다", () => {
+    const { queryByLabelText } = makeAddCardForm();
+
+    expect(queryByLabelText("카드 비밀번호")).toBeInTheDocument();
   });
 });

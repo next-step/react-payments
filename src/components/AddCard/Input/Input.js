@@ -1,9 +1,15 @@
 import styled from "@emotion/styled";
 
-const Input = ({ field, onChange, background }) => {
+const Input = ({
+  field,
+  onChange,
+  background,
+}) => {
   const { ariaLabel, ...rest } = field;
 
-  const handleChange = ({ target: { name, value, maxLength } }) => {
+  const handleChange = ({
+    target: { name, value, maxLength },
+  }) => {
     if (maxLength < value.length) {
       return;
     }
@@ -22,16 +28,15 @@ const Input = ({ field, onChange, background }) => {
 };
 
 const Item = styled.input`
-  flex: 1;
-  position: relative;
   display: block;
   width: 100%;
   padding: 12px 0;
   border: none;
-  background: ${({ background }) => (background ? "#ecebf1" : "none")};
+  background: ${({ background }) =>
+    background ? "#ecebf1" : "none"};
   font-size: 18px;
   text-align: center;
-  letter-spacing: 10px;
+  letter-spacing: 2px;
 
   &[type="number"]::-webkit-outer-spin-button,
   &[type="number"]::-webkit-inner-spin-button {
