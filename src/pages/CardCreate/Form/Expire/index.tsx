@@ -65,6 +65,7 @@ const CardExpireInput = forwardRef<CardExpireHandle, {}>((props, ref) => {
           id={CREATE_EXPIRE_YEAR}
           ref={inputYear}
           maxLength={2}
+          max={31}
           onChange={onChange('expireAtYear')}
           placeholder="YY"
         />

@@ -1,9 +1,10 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import Header from '../../components/Layout/Header'
 import FormContextProvider from '../../context/Form/FormChangeContext'
 import CreateCard from './Card'
 import CreateCardForm from './Form'
 import Styled from './index.style'
+import CardCreateModal from './Modal'
 
 export interface CardFormProps {
   cardNumber1: () => string
@@ -20,6 +21,7 @@ export interface CardFormProps {
 
 const CardCreate = () => {
   const formRef = useRef<React.ElementRef<typeof CreateCardForm>>(null)
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
     <>
@@ -28,6 +30,8 @@ const CardCreate = () => {
         <Styled.CardCreateContainer>
           <CreateCard formRef={formRef} />
           <CreateCardForm ref={formRef} />
+          <button onClick={() => setIsOpen((open) => !open)}>버튼</button>
+          <CardCreateModal isOpen={isOpen} />
         </Styled.CardCreateContainer>
       </FormContextProvider>
     </>

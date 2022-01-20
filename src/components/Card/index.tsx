@@ -50,7 +50,7 @@ const Card = ({
 
 export default Card
 
-const BackgroundColorAccordingToStartsWith = {
+export const BackgroundColorAccordingToStartsWith = {
   포코: '#E24141',
   준: '#547CE4',
   공원: '#73BC6D',

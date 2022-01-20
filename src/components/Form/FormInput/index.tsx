@@ -35,6 +35,7 @@ const FormInput = forwardRef<FormInputHandle, FormInputProps>(
       type = 'text',
       textAlign = 'center',
       numberOnly = true,
+      onChange = () => {},
       ...rest
     },
     ref
@@ -76,8 +77,9 @@ const FormInput = forwardRef<FormInputHandle, FormInputProps>(
         type={type}
         textAlign={textAlign}
         ref={inputRef}
-        {...rest}
+        onChange={onChange}
         onKeyPress={onKeyPress}
+        {...rest}
       />
     )
   }
