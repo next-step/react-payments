@@ -1,11 +1,17 @@
-import React from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AddCard from "./pages/AddCard";
 import "./index.css";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <StrictMode>
+    <Router>
+      <Routes>
+        <Route path="/" element={<AddCard />} />
+        <Route path="/add-card" />
+      </Routes>
+    </Router>
+  </StrictMode>,
   document.getElementById("root")
 );

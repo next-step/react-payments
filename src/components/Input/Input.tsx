@@ -1,4 +1,3 @@
-import React from "react";
 import { ForwardedRef, forwardRef, InputHTMLAttributes } from "react";
 import cx from "classnames";
 
