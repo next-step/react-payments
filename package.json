@@ -25,8 +25,10 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.{ts,tsx}",
-    "lint:fix": "eslint src/**/*.{ts,tsx} --fix",
+    "lint": "eslint \"**/*.{js,ts,tsx}\" \"./.storybook/*.{js,ts,tsx}\"",
+    "lint:fix": "eslint \"**/*.{js,ts,tsx}\" \"./.storybook/*.{js,ts,tsx}\" --fix",
+    "format": "prettier '**/*.{json,md}' --check",
+    "format:fix": "prettier '**/*.{json,md}' --write",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "chromatic": "npx chromatic --project-token=f7959f04f847"
