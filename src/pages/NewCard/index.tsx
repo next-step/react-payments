@@ -1,24 +1,24 @@
 import { useState, useRef } from 'react';
 import { INIT_CARD_STATE } from '@/constants/index';
-import InputContainer from '@/components/Forms/InputContainer/InputContainer';
 import PageTitle from '@/components/PageTitle';
 import Card from '@/components/Card/Card';
-import CardNumberField from '@/pages/NewCard/CardNumberField';
+import CardForm from './cardForm';
 
 const NewCard = () => {
-  const [cardState, setCardState] = useState(INIT_CARD_STATE);
+  const [cardState, setCardState] = useState({ ...INIT_CARD_STATE });
+
+  const changeCardState = (
+    state: typeof INIT_CARD_STATE[keyof typeof INIT_CARD_STATE],
+    key: keyof typeof INIT_CARD_STATE
+  ) => {
+    setCardState({ ...cardState, [key]: state });
+  };
 
   return (
     <>
       <PageTitle className='mb-10'>{'< 카드 추가'}</PageTitle>
       <Card {...cardState} />
-      <InputContainer title='카드번호'>
-        <CardNumberField
-          setCardState={(state) =>
-            setCardState({ ...cardState, cardNumber: state })
-          }
-        />
-      </InputContainer>
+      <CardForm cardState={cardState} changeCardState={changeCardState} />
     </>
   );
 };

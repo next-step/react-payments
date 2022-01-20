@@ -1,8 +1,44 @@
 import { initCardState } from '@components/Card/type';
 
+export const CARD_NUMBER = 'cardNumber';
+export const EXPIRY_DATE = 'expiryDate';
+export const OWNER = 'owner';
+export const CVC = 'cvc';
+export const PASSWORD = 'password';
+export const COMPANY = 'company';
+
+export const CARD_NUMBER_DIGITS = 4;
+export const EXPIRY_DATE_DIGITS = 2;
+export const CARD_PW = {
+  DIGITS: 2,
+  LENGTH: 1,
+};
+
+export const DIGITS = {
+  [CARD_NUMBER]: 4,
+  [OWNER]: 1,
+  [EXPIRY_DATE]: 2,
+  [PASSWORD]: 2,
+  [CVC]: 1,
+  [COMPANY]: -1,
+};
+
+export const INPUT_LENGTH = {
+  [CARD_NUMBER]: 4,
+  [OWNER]: 30,
+  [EXPIRY_DATE]: 2,
+  [PASSWORD]: 1,
+  [CVC]: 3,
+  [COMPANY]: -1,
+};
+
 export const INIT_CARD_STATE: initCardState = Object.freeze({
-  company: '',
-  cardNumber: ['', '', '', ''],
-  owner: '',
-  expiryDate: ['', ''],
+  [CARD_NUMBER]: Array(DIGITS[CARD_NUMBER]).fill(''),
+  [EXPIRY_DATE]: Array(DIGITS[EXPIRY_DATE]).fill(''),
+  [OWNER]: '',
+  [CVC]: '',
+  [PASSWORD]: Array(DIGITS[PASSWORD]).fill(''),
+  [COMPANY]: '',
 });
+
+export const FIELD_ORDERS = Object.keys(INIT_CARD_STATE);

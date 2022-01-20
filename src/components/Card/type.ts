@@ -5,6 +5,8 @@ export interface initCardState {
   cardNumber: (number | string)[];
   owner: string;
   expiryDate: (number | string)[];
+  cvc: number | string;
+  password: number[];
 }
 
 export interface CardProps extends Partial<initCardState> {

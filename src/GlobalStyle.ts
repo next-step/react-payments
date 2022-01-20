@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
+import utilsStyle from './assets/utils.style';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -11,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
     -moz-appearance: none; 
     -webkit-appearance: none; 
   }
+  ${utilsStyle}
 `;
 
 export default GlobalStyle;

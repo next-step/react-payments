@@ -1,12 +1,16 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 const InputContainer: FC<{
   title?: string;
-}> = ({ title = '', children }) => {
+  titleAfterNode?: React.ReactNode;
+}> = ({ title = '', titleAfterNode, children }) => {
   return (
     <InputContainerEl>
-      {title && <InputTitle>{title}</InputTitle>}
+      <InputLabel>
+        {title && <InputTitle>{title}</InputTitle>}
+        {title && titleAfterNode}
+      </InputLabel>
       {children}
     </InputContainerEl>
   );
@@ -18,11 +22,15 @@ const InputContainerEl = styled.div`
   margin: 16px 0;
 `;
 
-const InputTitle = styled.span`
+const InputLabel = styled.label`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   font-size: 12px;
   line-height: 14px;
   margin-bottom: 4px;
+`;
+
+const InputTitle = styled.span`
   color: #525252;
 `;
