@@ -19,7 +19,6 @@ export const CardNew = CardTemplate.bind({})
 CardNew.args = {
   type: 'new',
   cardData: null,
-  setRoute: () => {},
 }
 
 export const CardEmpty = CardTemplate.bind({})

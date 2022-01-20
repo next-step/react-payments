@@ -1,8 +1,9 @@
-import { SetRoute } from '@/common/constants'
+import { useRouter } from '@/contexts/route'
 
-const NewCard = ({ setRoute }: { setRoute?: SetRoute }) => {
+const NewCard = () => {
+  const { setRoute } = useRouter()
   const toAddPage = () => {
-    setRoute && setRoute({ route: 'ADD' })
+    setRoute('ADD')
   }
 
   return (

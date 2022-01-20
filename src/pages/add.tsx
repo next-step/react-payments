@@ -1,19 +1,14 @@
-import { useState } from 'react'
-import { CardData, PageProps } from '@/common/constants'
 import Card from '@/components/card'
 import CardForm from '@/components/cardForm'
+import { useCardList } from '@/contexts/cardList'
+import { useRouter } from '@/contexts/route'
 
-const AddPage = ({ setCards, setRoute }: PageProps) => {
-  const [cardData, setCardData] = useState<CardData | null>(null)
+const AddPage = () => {
+  const { setRoute } = useRouter()
+  const { editingCard } = useCardList()
+
   const handleBack = () => {
-    setRoute({ route: 'LIST' })
-  }
-  const saveCard = () => {
-    setCards(prev => {
-      if (cardData) prev.add(cardData)
-      return prev
-    })
-    setRoute({ route: 'ALIAS', payload: { cardData } })
+    setRoute('LIST')
   }
 
   return (
@@ -25,8 +20,8 @@ const AddPage = ({ setCards, setRoute }: PageProps) => {
           </button>{' '}
           카드 추가
         </h2>
-        <Card type="small" cardData={cardData} />
-        <CardForm saveCard={saveCard} setCardData={setCardData} />
+        <Card type="small" cardData={editingCard} />
+        <CardForm />
       </div>
     </>
   )

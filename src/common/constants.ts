@@ -17,24 +17,7 @@ export type InputDefaultProps = {
   elRef: RefObject<HTMLInputElement>
 }
 
-export type Route = 'ADD' | 'ALIAS' | 'LIST'
-
 export type CardType = 'big' | 'small' | 'new' | 'empty'
-
-type Payload = { [key: string]: any }
-
-export type SetRoute = React.Dispatch<React.SetStateAction<RouteState>>
-
-export type PageProps = {
-  cards: CardData[]
-  setCards: React.Dispatch<React.SetStateAction<Set<CardData>>>
-  setRoute: SetRoute
-}
-
-export type RouteState = {
-  route: Route
-  payload?: Payload
-}
 
 export type CardData = {
   cardName: string
