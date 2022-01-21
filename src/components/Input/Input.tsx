@@ -19,13 +19,13 @@ const classes = /* @tw */ {
     "px-4",
     "bg-neutral-200",
     "border-none",
-    "text-lg",
+    "text-base",
     "rounded-lg",
     "leading-none",
     "font-bold",
     "text-[#04c09e]",
     "placeholder:text-neutral-600",
-    "placeholder:font-normal",
+    "read-only:focus:bg-white",
     "focus:bg-neutral-300",
     "focus:outline-none",
   ],
@@ -38,7 +38,7 @@ function Input(props: Props, ref: ForwardedRef<HTMLInputElement>) {
       type="text"
       ref={ref}
       {...rest}
-      className={cx(isFullWidth && "w-full", classes.container)}
+      className={cx(isFullWidth && "w-full", classes.container, className)}
     />
   );
 }

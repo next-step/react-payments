@@ -62,7 +62,8 @@ function Card(props: Props) {
     <dl
       className={cx(
         "relative",
-        "flex",
+        "w-full",
+        "inline-flex",
         "flex-col",
         "aspect-[1.58/1]",
         "font-semibold",
