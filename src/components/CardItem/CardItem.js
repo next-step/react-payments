@@ -2,18 +2,22 @@ import styled from "@emotion/styled";
 
 import Item from "../style/card";
 
-import isPublic from "./utils/isPublic";
-
 const CardItem = ({ data }) => {
-  const { name, numbers, owner, expiryDate } = data;
+  const {
+    name,
+    numbers: [firstField, secondField],
+    owner,
+    expiryDate,
+  } = data;
 
   return (
     <Item>
       <Top>{name}</Top>
       <Middle>
-        {numbers.map((text, index) => (
-          <span key={index}>{isPublic(index) ? text : "●●●●"}</span>
-        ))}
+        <span>{firstField}</span>
+        <span>{secondField}</span>
+        <span>●●●●</span>
+        <span>●●●●</span>
       </Middle>
       <Bottom>
         <span>{owner}</span>
