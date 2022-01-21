@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components'
 import { cardBottomNumberStyle } from '../../../css/card'
 
@@ -6,8 +7,8 @@ const CardNumberContainer = styled.div`
   padding: 0px 24px;
 `
 
-const CardTextContainer = styled.div`
+const CardTextContainer = React.memo(styled.div`
   flex: 1 1 0px;
-`
+`)
 
 export default { CardNumberContainer, CardTextContainer }

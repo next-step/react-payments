@@ -11,11 +11,12 @@ import {
   smallChipStyle,
 } from '../../css/card'
 
-const Card = styled.div<{ bgColor?: string }>`
+const Card = styled.div<{ bgColor?: string; ableToModalOpen?: boolean }>`
   ${smallCardStyle}
   ${CardStyle}
-  ${({ bgColor }) => bgColor && { backgroundColor: bgColor }}
   margin-bottom: 25px;
+  ${({ bgColor }) => bgColor && { backgroundColor: bgColor }}
+  ${({ ableToModalOpen }) => ableToModalOpen && { cursor: 'pointer' }}
 `
 
 const CardTop = styled.div`

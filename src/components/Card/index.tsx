@@ -13,6 +13,7 @@ interface CardProp {
   name: string
   month: string
   year: string
+  setModalIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
 const Card = ({
   type,
@@ -23,9 +24,12 @@ const Card = ({
   month,
   name,
   year,
+  setModalIsOpen,
 }: CardProp) => (
   <Styled.Card
     {...(type && { bgColor: BackgroundColorAccordingToStartsWith[type] })}
+    {...(setModalIsOpen && { ableToModalOpen: true })}
+    {...(setModalIsOpen && { onClick: () => setModalIsOpen(true) })}
   >
     <Styled.CardTop>
       <Styled.CardText>{type || '클린'}카드</Styled.CardText>

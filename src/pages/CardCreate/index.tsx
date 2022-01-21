@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import { CardType } from '../../components/Form'
 import Header from '../../components/Layout/Header'
 import FormContextProvider from '../../context/Form/FormChangeContext'
 import CreateCard from './Card'
@@ -21,17 +22,26 @@ export interface CardFormProps {
 
 const CardCreate = () => {
   const formRef = useRef<React.ElementRef<typeof CreateCardForm>>(null)
-  const [isOpen, setIsOpen] = useState(false)
+  const [isModalOpen, setModalIsOpen] = useState(false)
+  const [cardType, setCardType] = useState<CardType>()
 
   return (
     <>
       <FormContextProvider>
         <Header title="카드추가" lintTo="/" />
         <Styled.CardCreateContainer>
-          <CreateCard formRef={formRef} />
+          <CreateCard
+            formRef={formRef}
+            cardType={cardType}
+            setCardType={setCardType}
+            setModalIsOpen={setModalIsOpen}
+          />
           <CreateCardForm ref={formRef} />
-          <button onClick={() => setIsOpen((open) => !open)}>버튼</button>
-          <CardCreateModal isOpen={isOpen} />
+          <CardCreateModal
+            isOpen={isModalOpen}
+            setIsOpen={setModalIsOpen}
+            setCardType={setCardType}
+          />
         </Styled.CardCreateContainer>
       </FormContextProvider>
     </>

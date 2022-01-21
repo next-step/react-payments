@@ -11,10 +11,17 @@ import { useFormChangedState } from '../../../context/Form/hooks'
 type CardModelKeys = (keyof CardBaseFormProps)[]
 interface CreateCardProp {
   formRef: React.RefObject<CardFormProps>
+  cardType: CardType | undefined
+  setCardType: React.Dispatch<React.SetStateAction<CardType | undefined>>
+  setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
-const CreateCard = ({ formRef }: CreateCardProp) => {
+const CreateCard = ({
+  formRef,
+  cardType,
+  setCardType,
+  setModalIsOpen,
+}: CreateCardProp) => {
   const state = useFormChangedState()
-  const [type, setType] = useState<CardType>()
   const [number1, setNumber1] = useState('')
   const [number2, setNumber2] = useState('')
   const [number3, setNumber3] = useState('')
@@ -29,9 +36,9 @@ const CreateCard = ({ formRef }: CreateCardProp) => {
     if (number1.length === 4 && number2.length === 4) {
       const startNumber =
         +number1[0] as keyof typeof CardTypeAccordingToStartsWith
-      setType(CardTypeAccordingToStartsWith[startNumber])
+      setCardType(CardTypeAccordingToStartsWith[startNumber])
     }
-  }, [number1, number2])
+  }, [number1, number2, setCardType])
 
   const stateKeys = useMemo(() => Object.keys(state) as CardModelKeys, [state])
 
@@ -68,7 +75,7 @@ const CreateCard = ({ formRef }: CreateCardProp) => {
 
   return (
     <Card
-      type={type}
+      type={cardType}
       number1={number1}
       number2={number2}
       number3={number3}
@@ -76,6 +83,7 @@ const CreateCard = ({ formRef }: CreateCardProp) => {
       month={month}
       year={year}
       name={name}
+      setModalIsOpen={setModalIsOpen}
     />
   )
 }

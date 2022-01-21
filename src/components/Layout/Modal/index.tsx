@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react'
+import { ReactNode, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import Styled from './index.style'
 

@@ -1,21 +1,54 @@
+import React from 'react'
+import { MouseEvent, MouseEventHandler, useCallback, useRef } from 'react'
 import { BackgroundColorAccordingToStartsWith } from '../../../components/Card'
 import { CardType } from '../../../components/Form'
 import Modal from '../../../components/Layout/Modal'
 import Styled from './index.style'
 interface CardCreateModalProps {
   isOpen: boolean
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setCardType: React.Dispatch<React.SetStateAction<CardType | undefined>>
 }
 
-const TouchableCardColorPicker = ({ type }: { type: CardType }) => {
-  return (
-    <Styled.CardTypeContainer>
-      <Styled.CardTypeColorCircle cardType={type} />
-      <Styled.CardTypeText>{type} 카드</Styled.CardTypeText>
-    </Styled.CardTypeContainer>
-  )
+interface TouchableCardColorPickerProps {
+  cardType: CardType
+  setCardType: React.Dispatch<React.SetStateAction<CardType | undefined>>
+  onClicked: () => void
 }
 
-const CardCreateModal = ({ isOpen }: CardCreateModalProps) => {
+type TouchableCardColorPickerAreEqualsType = (
+  prevProps: Readonly<React.PropsWithChildren<TouchableCardColorPickerProps>>,
+  nextProps: Readonly<React.PropsWithChildren<TouchableCardColorPickerProps>>
+) => boolean
+
+const TouchableCardColorPickerAreEquals: TouchableCardColorPickerAreEqualsType =
+  (prev, curr) => prev.cardType === curr.cardType
+const TouchableCardColorPicker = React.memo(
+  ({ cardType, setCardType, onClicked }: TouchableCardColorPickerProps) => {
+    const onClickColorCircle = useCallback(() => {
+      setCardType(cardType)
+      onClicked()
+    }, [cardType, onClicked, setCardType])
+
+    return (
+      <Styled.CardTypeContainer>
+        <Styled.CardTypeColorCircle
+          cardType={cardType}
+          onClick={onClickColorCircle}
+        />
+        <Styled.CardTypeText>{cardType} 카드</Styled.CardTypeText>
+      </Styled.CardTypeContainer>
+    )
+  },
+  TouchableCardColorPickerAreEquals
+)
+
+const CardCreateModal = ({
+  isOpen,
+  setIsOpen,
+  setCardType,
+}: CardCreateModalProps) => {
+  const modalRef = useRef<HTMLDivElement>(null)
   const cardTypes = Object.keys(
     BackgroundColorAccordingToStartsWith
   ) as CardType[]
@@ -23,20 +56,43 @@ const CardCreateModal = ({ isOpen }: CardCreateModalProps) => {
   const line1 = cardTypes.slice(0, 4)
   const line2 = cardTypes.slice(4)
 
+  const onClickModalOutside: MouseEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      if (event.target === modalRef.current) {
+        setIsOpen(false)
+      }
+    },
+    [modalRef, setIsOpen]
+  )
+
+  const onColorCircleClicked = useCallback(() => {
+    setIsOpen(false)
+  }, [])
+
   return (
     <Modal isOpen={isOpen} onClose={() => console.log('hi')}>
-      <Styled.Container>
+      <Styled.Container ref={modalRef} onClick={onClickModalOutside}>
         <Styled.ModalContainer>
           <Styled.ContentContainer>
             <Styled.ContentLineContainer>
               {line1.map((cardType) => (
-                <TouchableCardColorPicker key={cardType} type={cardType} />
+                <TouchableCardColorPicker
+                  key={cardType}
+                  cardType={cardType}
+                  setCardType={setCardType}
+                  onClicked={onColorCircleClicked}
+                />
               ))}
             </Styled.ContentLineContainer>
             <Styled.ContentLineSpace />
             <Styled.ContentLineContainer>
               {line2.map((cardType) => (
-                <TouchableCardColorPicker key={cardType} type={cardType} />
+                <TouchableCardColorPicker
+                  key={cardType}
+                  cardType={cardType}
+                  setCardType={setCardType}
+                  onClicked={onColorCircleClicked}
+                />
               ))}
             </Styled.ContentLineContainer>
           </Styled.ContentContainer>
