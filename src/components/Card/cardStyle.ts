@@ -1,4 +1,4 @@
-import { CardProps } from './type';
+import { CardProps, cardSize } from './type';
 import styled, { css } from 'styled-components';
 
 export const CardBoxEl = styled.div`
@@ -64,19 +64,42 @@ export const CardInfo = styled(InnerLayout)`
   justify-content: space-between;
 `;
 
-export const CardChip = styled.div`
-  width: 40px;
-  height: 26px;
+export const CardChip = styled.div<{
+  size?: cardSize;
+}>`
+  ${({ size = 'small' }) => css`
+    ${size === 'small' &&
+    `
+      width: 40px;
+      height: 26px;
+    `}
+    ${size === 'big' &&
+    `
+      width: 55.04px;
+      height: 35.77px;
+    `}
+  `}
 
   background: #cbba64;
   border-radius: 4px;
 `;
 
-export const CardText = styled.span`
+export const CardText = styled.span<{
+  size?: cardSize;
+}>`
   margin: 0 16px;
-
-  font-size: 14px;
-  line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
+  ${({ size = 'small' }) => css`
+    ${size === 'small' &&
+    `
+      font-size: 14px;
+      line-height: 16px;
+    `}
+    ${size === 'big' &&
+    `
+      font-size: 18px;
+      line-height: 20px;
+    `}
+  `}
 `;

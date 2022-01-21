@@ -8,8 +8,8 @@ import {
   INPUT_LENGTH,
 } from '@/constants/index';
 import { Input } from '@/components/Forms/Input/index';
-import InputBox from '@/components/Forms/InputBox/InputBox';
-import InputContainer from '@/components/Forms/InputContainer/InputContainer';
+import InputBox from '@/components/Forms/InputBox';
+import InputContainer from '@/components/Forms/InputContainer';
 import useNextFieldIdRef from '@/hooks/useNextFieldIdRef';
 
 const CardForm = ({
@@ -30,10 +30,9 @@ const CardForm = ({
       dataset: { index, id },
     },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    const fieldKey = id as keyof typeof INIT_CARD_STATE;
+    const fieldKey = id as keyof typeof INPUT_LENGTH;
     const prevState = cardState[fieldKey];
 
-    console.log(value, index);
     if (INPUT_LENGTH[fieldKey] > 0 && value?.length > INPUT_LENGTH[fieldKey])
       return;
 
@@ -56,7 +55,7 @@ const CardForm = ({
   };
 
   return (
-    <>
+    <form>
       <InputContainer title='카드번호'>
         <InputBox>
           <Input
@@ -68,6 +67,7 @@ const CardForm = ({
             onChange={onChangeHandler}
             ref={nextFieldId.current === `${CARD_NUMBER}${0}` ? inputRef : null}
           />
+          {cardState[CARD_NUMBER][0] && ' - '}
           <Input
             type='number'
             data-index={1}
@@ -77,6 +77,7 @@ const CardForm = ({
             onChange={onChangeHandler}
             ref={nextFieldId.current === `${CARD_NUMBER}${1}` ? inputRef : null}
           />
+          {cardState[CARD_NUMBER][1] && ' - '}
           <Input
             type='password'
             data-index={2}
@@ -87,6 +88,7 @@ const CardForm = ({
             onChange={onChangeHandler}
             ref={nextFieldId.current === `${CARD_NUMBER}${2}` ? inputRef : null}
           />
+          {cardState[CARD_NUMBER][2] && ' - '}
           <Input
             type='password'
             data-index={3}
@@ -191,7 +193,7 @@ const CardForm = ({
           readOnly
         />
       </InputContainer>
-    </>
+    </form>
   );
 };
 

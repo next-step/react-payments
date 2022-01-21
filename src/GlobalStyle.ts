@@ -12,6 +12,10 @@ const GlobalStyle = createGlobalStyle`
     -moz-appearance: none; 
     -webkit-appearance: none; 
   }
+  button {
+    border: 0 none;
+    padding: 0;
+  }
   ${utilsStyle}
 `;
 

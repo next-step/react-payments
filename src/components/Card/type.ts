@@ -1,4 +1,4 @@
-type cardSize = 'small' | 'big';
+export type cardSize = 'small' | 'big';
 
 export interface initCardState {
   company: string;
@@ -7,6 +7,7 @@ export interface initCardState {
   expiryDate: (number | string)[];
   cvc: number | string;
   password: number[];
+  nickname: string;
 }
 
 export interface CardProps extends Partial<initCardState> {

@@ -2,11 +2,12 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 const InputContainer: FC<{
+  className?: string;
   title?: string;
   titleAfterNode?: React.ReactNode;
-}> = ({ title = '', titleAfterNode, children }) => {
+}> = ({ title = '', titleAfterNode, children, ...others }) => {
   return (
-    <InputContainerEl>
+    <InputContainerEl {...others}>
       <InputLabel>
         {title && <InputTitle>{title}</InputTitle>}
         {title && titleAfterNode}

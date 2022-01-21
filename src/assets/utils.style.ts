@@ -14,6 +14,11 @@ export default css`
     align-items: center;
   }
 
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+  }
+
   .mt-10 {
     margin-top: 2.5rem;
   }
@@ -34,8 +39,16 @@ export default css`
     margin-top: 11.5rem;
   }
 
+  .mt-auto {
+    margin-top: auto;
+  }
+
   .mb-10 {
     margin-bottom: 2.5rem;
+  }
+
+  .pr-5 {
+    padding-right: 1.25rem;
   }
 
   .w-100 {

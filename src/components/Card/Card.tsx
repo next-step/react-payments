@@ -12,27 +12,27 @@ import {
 } from './cardStyle';
 import useCardProps from './useCardProps';
 
-const Card = (props: CardProps) => {
+export const Card = (props: CardProps) => {
   const { size, bgColor, company, cardNumber, owner, expiryDate } =
     useCardProps(props);
   return (
     <CardBoxEl>
       <CardEl size={size} bgColor={bgColor}>
         <InnerTop>
-          <CardText>{company}</CardText>
+          <CardText size={size}>{company}</CardText>
         </InnerTop>
 
         <InnerMiddle>
-          <CardChip />
+          <CardChip size={size} />
         </InnerMiddle>
 
         <InnerBottom>
           <CardNumber>
-            <CardText>{cardNumber}</CardText>
+            <CardText size={size}>{cardNumber}</CardText>
           </CardNumber>
           <CardInfo>
-            <CardText>{owner}</CardText>
-            <CardText>{expiryDate}</CardText>
+            <CardText size={size}>{owner}</CardText>
+            <CardText size={size}>{expiryDate}</CardText>
           </CardInfo>
         </InnerBottom>
       </CardEl>
