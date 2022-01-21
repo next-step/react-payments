@@ -1,3 +1,4 @@
+import React from 'react'
 import { CardType } from '../Form'
 import CardExpire from './CardExpire'
 import CardNumber from './CardNumber'
@@ -15,6 +16,25 @@ interface CardProp {
   year: string
   setModalIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
+
+const CardTop = React.memo(
+  ({ type }: { type?: CardType }) => (
+    <Styled.CardTop>
+      <Styled.CardText>{type || '클린'}카드</Styled.CardText>
+    </Styled.CardTop>
+  ),
+  (prev, cur) => prev.type === cur.type
+)
+
+const CardMiddle = React.memo(
+  () => (
+    <Styled.CardMiddle>
+      <Styled.CardSmallChip />
+    </Styled.CardMiddle>
+  ),
+  () => true
+)
+
 const Card = ({
   type,
   number1,
@@ -31,12 +51,8 @@ const Card = ({
     {...(setModalIsOpen && { ableToModalOpen: true })}
     {...(setModalIsOpen && { onClick: () => setModalIsOpen(true) })}
   >
-    <Styled.CardTop>
-      <Styled.CardText>{type || '클린'}카드</Styled.CardText>
-    </Styled.CardTop>
-    <Styled.CardMiddle>
-      <Styled.CardSmallChip />
-    </Styled.CardMiddle>
+    <CardTop type={type} />
+    <CardMiddle />
     <Styled.CardBottom>
       <CardNumber
         number1={number1}

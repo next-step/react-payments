@@ -28,4 +28,4 @@ const CardNumber = ({
   )
 }
 
-export default CardNumber
+export default React.memo(CardNumber)

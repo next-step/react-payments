@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components'
 import {
   cardBottomInfoStyle,
@@ -23,9 +24,11 @@ const CardTop = styled.div`
   ${cardTopStyle}
 `
 
-const CardMiddle = styled.div`
-  ${CardMiddleStyle}
-`
+const CardMiddle = React.memo(
+  styled.div`
+    ${CardMiddleStyle}
+  `
+)
 
 const CardBottom = styled.div`
   ${cardBottomStyle}
