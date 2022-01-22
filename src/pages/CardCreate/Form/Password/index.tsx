@@ -48,7 +48,7 @@ const CardPasswordInput = forwardRef<CardPasswordHandle, FormInputProps>(
             <FormInput
               id={CREATE_CARD_PASSWORD2}
               type="password"
-              ref={inputPassword1}
+              ref={inputPassword2}
               maxLength={1}
             />
           </Styled.PasswordInputContainer>

@@ -67,7 +67,7 @@ const CardCreateModal = ({
 
   const onColorCircleClicked = useCallback(() => {
     setIsOpen(false)
-  }, [])
+  }, [setIsOpen])
 
   return (
     <Modal isOpen={isOpen} onClose={() => console.log('hi')}>

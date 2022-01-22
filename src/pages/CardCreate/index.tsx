@@ -63,7 +63,7 @@ const CardCreate = () => {
   }, [])
 
   const isCvcIsValid = useCallback(() => {
-    return formRef.current?.cvc.length === 3
+    return formRef.current?.cvc().length === 3
   }, [])
 
   const isPasswordValid = useCallback(() => {
@@ -72,6 +72,8 @@ const CardCreate = () => {
     const password1Valid = isPasswordValid(formRef.current?.password1())
     const password2Valid = isPasswordValid(formRef.current?.password2())
 
+    console.log(password1Valid, 'password1Valid')
+    console.log(password2Valid, 'password1Valid22')
     return password1Valid && password2Valid
   }, [])
 
@@ -80,6 +82,13 @@ const CardCreate = () => {
     const cardExpireDateValid = isExpireDateValid()
     const cardCvcValid = isCvcIsValid()
     const cardPasswordValid = isPasswordValid()
+
+    setError({
+      isCardNumberError: !cardNumberValid,
+      isCardExpireDateError: !cardExpireDateValid,
+      isCardCvcError: !cardCvcValid,
+      isCardPasswordError: !cardPasswordValid,
+    })
 
     if (
       cardNumberValid &&
@@ -90,19 +99,6 @@ const CardCreate = () => {
       console.log('submited')
       return
     }
-
-    console.log('submited error', {
-      isCardNumberError: !cardNumberValid,
-      isCardExpireDateError: !cardExpireDateValid,
-      isCardCvcError: !cardCvcValid,
-      isCardPasswordError: !cardPasswordValid,
-    })
-    setError({
-      isCardNumberError: !cardNumberValid,
-      isCardExpireDateError: !cardExpireDateValid,
-      isCardCvcError: !cardCvcValid,
-      isCardPasswordError: !cardPasswordValid,
-    })
   }
 
   return (
@@ -131,21 +127,6 @@ const CardCreate = () => {
       </FormContextProvider>
     </>
   )
-
-  // function isCardNumberValid() {
-  //   const isValidNumber = (number: string | undefined) => number?.length === 4
-  //   const cardNumber1Valid = isValidNumber(formRef.current?.cardNumber1())
-  //   const cardNumber2Valid = isValidNumber(formRef.current?.cardNumber2())
-  //   const cardNumber3Valid = isValidNumber(formRef.current?.cardNumber3())
-  //   const cardNumber4Valid = isValidNumber(formRef.current?.cardNumber4())
-
-  //   return (
-  //     cardNumber1Valid &&
-  //     cardNumber2Valid &&
-  //     cardNumber3Valid &&
-  //     cardNumber4Valid
-  //   )
-  // }
 }
 
 export default CardCreate
