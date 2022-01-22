@@ -6,6 +6,8 @@ function AddCard() {
   const [cardNumberCompany, setCardNumberCompany] = useState("");
   const [cardNumberIndividual, setCardNumberIndividual] = useState("");
   const [cardNumberCode, setCardNumberCode] = useState("");
+  const [dueMonth, setDueMonth] = useState("");
+  const [dueYear, setDueYear] = useState("");
 
   const checkNumber = (event) => {
     if (typeof event.target.value !== Number) {
@@ -13,28 +15,47 @@ function AddCard() {
     }
   };
 
-  const seriesNumber = (event) => {
+  const masking = (value) => {
+    return value.replaceAll(/[0-9]/g, "*");
+  };
+
+  const handleSeriesNumber = (event) => {
     checkNumber(event);
     setCardNumberSeries(event.target.value);
   };
 
-  const companyNumber = (event) => {
+  const handleCompanyNumber = (event) => {
     checkNumber(event);
     setCardNumberCompany(event.target.value);
   };
 
-  const individualNumber = (event) => {
+  const handleIndividualNumber = (event) => {
     checkNumber(event);
     setCardNumberIndividual(event.target.value);
   };
 
-  const codeNumber = (event) => {
+  const handleCodeNumber = (event) => {
     checkNumber(event);
     setCardNumberCode(event.target.value);
   };
 
-  const masking = (value) => {
-    return value.replaceAll(/[0-9]/g, "*");
+  const handleMonth = (event) => {
+    console.log(event.target.value.length);
+    checkNumber(event);
+    if (
+      !(event.target.value >= 0 && event.target.value <= 12) ||
+      event.target.value === "00"
+    ) {
+      setDueMonth("");
+      event.target.value = "";
+      return;
+    }
+    setDueMonth(event.target.value);
+  };
+
+  const handleYear = (event) => {
+    checkNumber(event);
+    setDueYear(event.target.value);
   };
 
   return (
@@ -62,7 +83,9 @@ function AddCard() {
               </div>
               <div className="card-bottom__info">
                 <span className="card-text">NAME</span>
-                <span className="card-text">MM / YY</span>
+                <span className="card-text">
+                  {dueMonth} {dueMonth && "/"} {dueYear}
+                </span>
               </div>
             </div>
           </div>
@@ -73,28 +96,28 @@ function AddCard() {
             <input
               className="input-basic"
               type="text"
-              onKeyUp={(event) => seriesNumber(event)}
+              onKeyUp={(event) => handleSeriesNumber(event)}
               maxLength="4"
             />
             {cardNumberSeries.length === 4 && "-"}
             <input
               className="input-basic"
               type="text"
-              onKeyUp={(event) => companyNumber(event)}
+              onKeyUp={(event) => handleCompanyNumber(event)}
               maxLength="4"
             />
             {cardNumberCompany.length === 4 && "-"}
             <input
               className="input-basic"
               type="password"
-              onKeyUp={(event) => individualNumber(event)}
+              onKeyUp={(event) => handleIndividualNumber(event)}
               maxLength="4"
             />
             {cardNumberIndividual.length === 4 && "-"}
             <input
               className="input-basic"
               type="paswword"
-              onKeyUp={(event) => codeNumber(event)}
+              onKeyUp={(event) => handleCodeNumber(event)}
               maxLength="4"
             />
           </div>
@@ -102,8 +125,21 @@ function AddCard() {
         <div className="input-container">
           <span className="input-title">만료일</span>
           <div className="input-box w-50">
-            <input className="input-basic" type="text" placeholder="MM" />
-            <input className="input-basic" type="text" placeholder="YY" />
+            <input
+              className="input-basic"
+              type="text"
+              placeholder="MM"
+              onKeyUp={(event) => handleMonth(event)}
+              maxLength="2"
+            />
+            {dueMonth && "/"}
+            <input
+              className="input-basic"
+              type="text"
+              placeholder="YY"
+              onKeyUp={(event) => handleYear(event)}
+              maxLength="2"
+            />
           </div>
         </div>
         <div className="input-container">
