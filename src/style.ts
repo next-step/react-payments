@@ -14,6 +14,5 @@ export const Root = styled.div`
 
 export const App = styled.div`
   height: 100%;
-  padding: 24px 16px;
-  border: 1px solid red;
+  width: 100%;
 `

@@ -1,9 +1,13 @@
 import styled, { css } from 'styled-components'
 
+export const Box = styled.div`
+  height: 100%;
+  padding: 20px 24px;
+`
+
 export const Header = styled.header`
   display: flex;
   align-items: center;
-  margin-top: 16px;
 `
 
 export const H1 = styled.h1`
@@ -41,7 +45,7 @@ export const IconWrapper = styled.div`
 `
 
 export const ButtonWrapper = styled.div`
-  margin-top: 40px;
+  margin-top: 20px;
   display: flex;
   justify-content: end;
 `

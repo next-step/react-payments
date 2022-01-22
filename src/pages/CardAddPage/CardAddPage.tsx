@@ -12,7 +12,7 @@ interface Props {
 
 export default function CardAddPage({ setPage }: Props) {
   return (
-    <div>
+    <S.Box>
       <S.Header>
         <Button onClick={() => setPage('CardListPage')}>
           <IconLeftArrow />
@@ -69,10 +69,10 @@ export default function CardAddPage({ setPage }: Props) {
         <CardPasswordFieldSet />
 
         <S.ButtonWrapper>
-          <Button type="submit">다음</Button>
+          <Button type="submit" onClick={() => setPage('CardA')}>다음</Button>
         </S.ButtonWrapper>
       </S.Form>
       <CardModal close={true} />
-    </div>
+    </S.Box>
   )
 }
