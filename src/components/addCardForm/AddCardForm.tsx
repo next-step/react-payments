@@ -48,7 +48,6 @@ const AddCardForm = (props: AddCardFormProps) => {
 
   const ownerNameInputState = useInput({
     inputRegex: alphabetRegex,
-    validator: (val) => val.length > 0,
   });
 
   const securityCodeInputState = useInput({
