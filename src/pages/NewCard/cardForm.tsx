@@ -6,7 +6,6 @@ import {
   OWNER,
   CVC,
   PASSWORD,
-  COMPANY,
   INPUT_LENGTH,
 } from '@/constants/index';
 import { Input } from '@/components/Forms/Input/index';
