@@ -7,15 +7,12 @@ export default {
   component: Header,
 };
 
-const Template: Story<Props> = (args) => <Header {...args} />;
+const Template: Story<Props> = (args) => <Header {...args}>카드추가</Header>;
 
 export const Default = Template.bind({});
-Default.args = {
-  title: "카드추가",
-};
+Default.args = {};
 
 export const WithGoBackButton = Template.bind({});
 WithGoBackButton.args = {
-  title: "카드추가",
   goBackLink: "#",
 };

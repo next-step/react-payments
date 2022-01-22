@@ -1,19 +1,19 @@
 import Styled from "./Header.styles";
 
 interface Props {
-  title: string;
+  children?: React.ReactNode;
   goBackLink?: string;
 }
 
-const Header = ({ title, goBackLink }: Props) => {
+const Header = ({ children, goBackLink, ...restProps }: Props) => {
   return (
-    <Styled.Header>
+    <Styled.Header {...restProps}>
       {goBackLink && (
         <Styled.GoBackLink to={goBackLink}>
           <Styled.GoBackIcon />
         </Styled.GoBackLink>
       )}
-      <Styled.Title>{title}</Styled.Title>
+      <Styled.Title>{children}</Styled.Title>
     </Styled.Header>
   );
 };

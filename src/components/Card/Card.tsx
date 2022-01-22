@@ -12,11 +12,11 @@ interface Props {
 
 const emptyCardNumber = ["", "", "", ""];
 
-const Card = ({ size, cardNumber, cardType, userName, expiration }: Props) => {
+const Card = ({ size, cardNumber, cardType, userName, expiration, ...restProps }: Props) => {
   const [firstNumber, secondNumber, thirdNumber, fourthNumber] = cardNumber ?? emptyCardNumber;
 
   return (
-    <Styled.Container size={size} type={cardType}>
+    <Styled.Container size={size} type={cardType} {...restProps}>
       <Styled.CardName>{cardType && CARD_NAME[cardType]}</Styled.CardName>
       <Styled.Chip size={size} />
       <Styled.CardNumber>

@@ -5,10 +5,11 @@ import CardNumberInput from "../CardNumberInput/CardNumberInput";
 import CardPasswordInput from "../CardPasswordInput/CardPasswordInput";
 import CardSecurityCodeInput from "../CardSecurityCodeInput/CardSecurityCodeInput";
 import LabeledTextInput from "../LabeledTextInput/LabeledTextInput";
+import SimpleButton from "../SimpleButton/SimpleButton";
 import Styled from "./CardForm.styles";
 
 interface Props {
-  onSubmit: (cardFormField: CardFormField) => void;
+  onSubmit?: (cardFormField: CardFormField) => void;
 }
 
 const CardForm = ({ onSubmit }: Props) => {
@@ -30,7 +31,7 @@ const CardForm = ({ onSubmit }: Props) => {
     setCardPassword(firstNumber + secondNumber);
 
   const handleSubmit = () => {
-    onSubmit({
+    onSubmit?.({
       cardNumber,
       cardExpiration,
       cardUserName,
@@ -46,6 +47,7 @@ const CardForm = ({ onSubmit }: Props) => {
       <LabeledTextInput label="카드소유자이름(선택)" onChange={handleCardUserNameChange} maxLength={30} />
       <CardSecurityCodeInput onChange={handleCardSecurityCodeChange} />
       <CardPasswordInput onChange={handleCardPasswordChange} dotColor="#04c09e" />
+      <SimpleButton>다음</SimpleButton>
     </Styled.Form>
   );
 };

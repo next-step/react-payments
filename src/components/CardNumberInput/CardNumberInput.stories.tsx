@@ -12,7 +12,7 @@ const Template: Story<Props> = (args) => <CardNumberInput {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  onCardNumberChange: (cardNumber: CardNumber) => {
+  onChange: (cardNumber: CardNumber) => {
     console.log(cardNumber);
   },
 };
