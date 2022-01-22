@@ -9,17 +9,6 @@ export default {
 } as ComponentMeta<typeof Card>;
 
 const CardTemplate: ComponentStory<typeof Card> = (args) => <Card {...args} />;
-
-export const NewCardTemp = CardTemplate.bind({});
-NewCardTemp.args = {
-  type: CardType.new,
-};
-
-export const EmptyCardTemp = CardTemplate.bind({});
-EmptyCardTemp.args = {
-  type: CardType.small,
-};
-
 const cardData: CardData = {
   cardName: "TestCardName",
   cardNumber: "1234 - 5678 - **** - ****",

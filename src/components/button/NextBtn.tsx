@@ -1,8 +1,6 @@
 import React from "react";
 
-const NextButton: React.FC<React.HTMLAttributes<HTMLButtonElement>> = (
-  props
-) => {
+const NextBtn: React.FC<React.HTMLAttributes<HTMLButtonElement>> = (props) => {
   return (
     <div className="button-box">
       <button className="button button-text " {...props}>
@@ -12,4 +10,4 @@ const NextButton: React.FC<React.HTMLAttributes<HTMLButtonElement>> = (
   );
 };
 
-export default NextButton;
+export default NextBtn;

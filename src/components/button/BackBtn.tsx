@@ -1,8 +1,6 @@
 import React from "react";
 
-const BackButton: React.FC<React.HTMLAttributes<HTMLButtonElement>> = (
-  props
-) => {
+const BackBtn: React.FC<React.HTMLAttributes<HTMLButtonElement>> = (props) => {
   return (
     <button className="button" {...props}>
       {"<"}
@@ -10,4 +8,4 @@ const BackButton: React.FC<React.HTMLAttributes<HTMLButtonElement>> = (
   );
 };
 
-export default BackButton;
+export default BackBtn;

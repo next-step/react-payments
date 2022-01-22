@@ -1,4 +1,4 @@
-const NewCard = ({ onClick }: NewCardProps) => {
+const AddCardBtn = ({ onClick }: NewCardProps) => {
   return (
     <div className="card-box">
       <div className="empty-card" onClick={onClick}>
@@ -12,4 +12,4 @@ export interface NewCardProps {
   onClick?: () => void;
 }
 
-export default NewCard;
+export default AddCardBtn;

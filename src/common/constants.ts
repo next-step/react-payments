@@ -7,7 +7,6 @@ export const RoutePath = {
 export const CardType = {
   big: "big",
   small: "small",
-  new: "new",
 } as const;
 
 export type CardData = {

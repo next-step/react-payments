@@ -1,5 +1,5 @@
 import { CardType } from "@common/constants";
-import NextButton from "@components/button/NextButton";
+import NextBtn from "@components/button/NextBtn";
 import Card from "@components/card";
 import { FormEvent, FormEventHandler } from "react";
 import CardExpirationInput from "./CardExpirationInput";
@@ -24,7 +24,7 @@ const AddCardForm = (props: AddCardFormProps) => {
       <CardOwnerNameInput />
       <CardPasswordInput />
       <SecurityCodeInput />
-      <NextButton />
+      <NextBtn />
     </form>
   );
 };
