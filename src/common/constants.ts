@@ -10,11 +10,11 @@ export const CardType = {
 } as const;
 
 export type CardData = {
-  cardName: string;
-  cardNumber: string;
-  expired: string;
-  userName: string;
-  alias: string;
+  cardName?: string;
+  cardNumber?: string;
+  expired?: string;
+  userName?: string;
+  alias?: string;
 };
 
 export const MaxLength = {
@@ -24,3 +24,10 @@ export const MaxLength = {
   CardSecurityCodeInput: 3,
   CardPasswordInput: 1,
 } as const;
+
+export const InputType = {
+  text: "text",
+  password: "password",
+} as const;
+
+export type InputTypeAttribute = keyof typeof InputType;

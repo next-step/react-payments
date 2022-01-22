@@ -13,10 +13,11 @@ const CardNumberInput = ({ cardNumInputStateList }: CardNumberInputProps) => {
         {cardNumInputStateList.map((carNumInputState, i) => (
           <input
             className="input-basic"
-            type={i < 2 ? "text" : "password"}
+            type={carNumInputState.type}
             maxLength={MaxLength.CardNumberInput}
             value={carNumInputState.value}
             onChange={carNumInputState.onChange}
+            key={i}
           />
         ))}
       </div>

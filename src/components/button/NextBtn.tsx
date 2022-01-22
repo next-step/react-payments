@@ -1,6 +1,10 @@
 import React from "react";
 
-const NextBtn: React.FC<React.HTMLAttributes<HTMLButtonElement>> = (props) => {
+interface NextBtnProps extends React.HTMLAttributes<HTMLButtonElement> {
+  disabled?: boolean;
+}
+
+const NextBtn: React.FC<NextBtnProps> = (props) => {
   return (
     <div className="button-box">
       <button className="button button-text " {...props}>
