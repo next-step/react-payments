@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEventHandler, useState } from "react";
 import { CardExpiration, CardFormField, CardNumber } from "../../@types";
 import CardExpirationInput from "../CardExpirationInput/CardExpirationInput";
 import CardNumberInput from "../CardNumberInput/CardNumberInput";
@@ -30,7 +30,9 @@ const CardForm = ({ onSubmit }: Props) => {
   const handleCardPasswordChange = (firstNumber: string, secondNumber: string) =>
     setCardPassword(firstNumber + secondNumber);
 
-  const handleSubmit = () => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+
     onSubmit?.({
       cardNumber,
       cardExpiration,

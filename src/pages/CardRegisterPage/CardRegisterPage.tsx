@@ -15,8 +15,8 @@ const isCardFormFilled = (formField: CardFormField) => {
 
   return (
     cardNumber.every((cardCell) => cardCell.length === MAX_CARD_NUMBER_LENGTH) &&
-    Object.keys(cardExpiration).every((expiration) => expiration.length === MAX_CARD_EXPIRATION_VALUE_LENGTH) &&
-    cardUserName &&
+    Object.values(cardExpiration).every((expiration) => expiration.length === MAX_CARD_EXPIRATION_VALUE_LENGTH) &&
+    cardUserName.length > 0 &&
     cardSecurityCode.length === MAX_CARD_SECURITY_CODE_LENGTH &&
     cardPassword.length === 2
   );
@@ -39,7 +39,7 @@ const CardRegisterPage = () => {
 
   return (
     <>
-      <Styled.Header goBackLink={PATH.HOME}>카드추가</Styled.Header>
+      <Styled.Header goBackLink={PATH.CARD_LIST}>카드추가</Styled.Header>
       <Styled.Card size="SMALL" />
       <CardForm onSubmit={handleCardFormSubmit} />
     </>

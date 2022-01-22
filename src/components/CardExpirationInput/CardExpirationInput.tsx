@@ -41,7 +41,7 @@ const CardExpirationInput = ({ onChange }: Props) => {
         type="text"
         value={expiration.year}
         onChange={makeChangeHandlerByKey("year")}
-        max={MAX_CARD_EXPIRATION_VALUE_LENGTH}
+        maxLength={MAX_CARD_EXPIRATION_VALUE_LENGTH}
       />
     </Styled.InputWrapper>
   );
