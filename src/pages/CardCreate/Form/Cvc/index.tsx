@@ -7,12 +7,13 @@ import FormInput, {
 import Styled from './index.style'
 import { ReactComponent as Icon } from '../../../../assets/target.svg'
 import { CREATE_CARD_CVC, CREATE_CARD_PASSWORD1 } from '../constants/id'
+import { FormInputProps } from '..'
 
 type CardCvcHandle = {
   cvc: () => string
 }
 
-const CardCvcInput = forwardRef<CardCvcHandle, {}>((props, ref) => {
+const CardCvcInput = forwardRef<CardCvcHandle, FormInputProps>((props, ref) => {
   const inputCvc = useRef<FormInputElementRef | null>(null)
 
   useImperativeHandle(ref, () => ({
@@ -31,7 +32,7 @@ const CardCvcInput = forwardRef<CardCvcHandle, {}>((props, ref) => {
   return (
     <Styled.CvcContainer>
       <Styled.CvcInputContainer>
-        <FormArea label="보안코드(CVC/CVV)">
+        <FormArea label="보안코드(CVC/CVV)" errorMessage={props.errorMessage}>
           <FormInputBox>
             <FormInput
               id={CREATE_CARD_CVC}

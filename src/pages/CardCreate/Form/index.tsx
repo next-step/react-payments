@@ -1,13 +1,26 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react'
-import { CardFormProps } from '..'
+import { CardErrorStateProps, CardFormProps } from '..'
 import Styled from './index.style'
 import CardNumberInput from './Number'
 import CardExpireInput from './Expire'
 import CardCvcInput from './Cvc'
 import CardPasswordInput from './Password'
 import CardOnwerInput from './Owner'
+import {
+  CARD_CVC_ERROR,
+  CARD_EXPIRE_ERROR,
+  CARD_NUMBER_ERROR,
+  CARD_PASSWORD_ERROR,
+} from '../../../constants/error/formErrorMessage'
 
-const CreateCardForm = forwardRef<CardFormProps, {}>((_, ref) => {
+export interface FormInputProps {
+  errorMessage?: string
+}
+
+const CreateCardForm = forwardRef<
+  CardFormProps,
+  { error: CardErrorStateProps }
+>(({ error }, ref) => {
   const cardNumberRef = useRef<React.ElementRef<typeof CardNumberInput>>(null)
   const cardExpireRef = useRef<React.ElementRef<typeof CardExpireInput>>(null)
   const cardCvcRef = useRef<React.ElementRef<typeof CardCvcInput>>(null)
@@ -51,15 +64,31 @@ const CreateCardForm = forwardRef<CardFormProps, {}>((_, ref) => {
 
   return (
     <div>
-      <CardNumberInput ref={cardNumberRef} />
+      <CardNumberInput
+        ref={cardNumberRef}
+        {...(error.isCardNumberError && { errorMessage: CARD_NUMBER_ERROR })}
+      />
       <Styled.ExpireWrapper>
-        <CardExpireInput ref={cardExpireRef} />
+        <CardExpireInput
+          ref={cardExpireRef}
+          {...(error.isCardExpireDateError && {
+            errorMessage: CARD_EXPIRE_ERROR,
+          })}
+        />
       </Styled.ExpireWrapper>
       <CardOnwerInput ref={CardOnwerInputRef} />
       <Styled.CvcWrapper>
-        <CardCvcInput ref={cardCvcRef} />
+        <CardCvcInput
+          ref={cardCvcRef}
+          {...(error.isCardCvcError && { errorMessage: CARD_CVC_ERROR })}
+        />
       </Styled.CvcWrapper>
-      <CardPasswordInput ref={cardPasswordRef} />
+      <CardPasswordInput
+        ref={cardPasswordRef}
+        {...(error.isCardPasswordError && {
+          errorMessage: CARD_PASSWORD_ERROR,
+        })}
+      />
     </div>
   )
 })

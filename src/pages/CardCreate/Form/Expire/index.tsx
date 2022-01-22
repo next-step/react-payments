@@ -1,4 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react'
+import { FormInputProps } from '..'
 import FormArea from '../../../../components/Form/FormArea'
 import FormInput, {
   FormInputBox,
@@ -17,61 +18,63 @@ type CardExpireHandle = {
   expireAtYear: () => string
 }
 
-const CardExpireInput = forwardRef<CardExpireHandle, {}>((props, ref) => {
-  const inputMonth = useRef<FormInputElementRef | null>(null)
-  const inputYear = useRef<FormInputElementRef | null>(null)
-  const dispatch = useFormChangedDispatch()
+const CardExpireInput = forwardRef<CardExpireHandle, FormInputProps>(
+  (props, ref) => {
+    const inputMonth = useRef<FormInputElementRef | null>(null)
+    const inputYear = useRef<FormInputElementRef | null>(null)
+    const dispatch = useFormChangedDispatch()
 
-  useImperativeHandle(ref, () => ({
-    expireAtMonth() {
-      return inputMonth.current?.value() ?? ''
-    },
-    expireAtYear() {
-      return inputYear.current?.value() ?? ''
-    },
-  }))
+    useImperativeHandle(ref, () => ({
+      expireAtMonth() {
+        return inputMonth.current?.value() ?? ''
+      },
+      expireAtYear() {
+        return inputYear.current?.value() ?? ''
+      },
+    }))
 
-  const onChange =
-    (name: 'expireAtMonth' | 'expireAtYear') =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      dispatch({ type: 'CHANGE', payload: { name } })
+    const onChange =
+      (name: 'expireAtMonth' | 'expireAtYear') =>
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch({ type: 'CHANGE', payload: { name } })
 
-      if (event.currentTarget.value.length !== 2) {
-        return
-      }
-
-      switch (name) {
-        case 'expireAtMonth':
-          document.getElementById(CREATE_EXPIRE_YEAR)?.focus()
+        if (event.currentTarget.value.length !== 2) {
           return
-        case 'expireAtYear':
-          document.getElementById(CREATE_OWNER_NAME)?.focus()
-      }
-    }
+        }
 
-  return (
-    <FormArea label="만료일">
-      <FormInputBox>
-        <FormInput
-          id={CREATE_EXPIRE_MONTH}
-          ref={inputMonth}
-          maxLength={2}
-          max={12}
-          onChange={onChange('expireAtMonth')}
-          placeholder="MM"
-        />
-        <InputDividerText color="black">/</InputDividerText>
-        <FormInput
-          id={CREATE_EXPIRE_YEAR}
-          ref={inputYear}
-          maxLength={2}
-          max={31}
-          onChange={onChange('expireAtYear')}
-          placeholder="YY"
-        />
-      </FormInputBox>
-    </FormArea>
-  )
-})
+        switch (name) {
+          case 'expireAtMonth':
+            document.getElementById(CREATE_EXPIRE_YEAR)?.focus()
+            return
+          case 'expireAtYear':
+            document.getElementById(CREATE_OWNER_NAME)?.focus()
+        }
+      }
+
+    return (
+      <FormArea label="만료일" errorMessage={props.errorMessage}>
+        <FormInputBox>
+          <FormInput
+            id={CREATE_EXPIRE_MONTH}
+            ref={inputMonth}
+            maxLength={2}
+            max={12}
+            onChange={onChange('expireAtMonth')}
+            placeholder="MM"
+          />
+          <InputDividerText color="black">/</InputDividerText>
+          <FormInput
+            id={CREATE_EXPIRE_YEAR}
+            ref={inputYear}
+            maxLength={2}
+            max={31}
+            onChange={onChange('expireAtYear')}
+            placeholder="YY"
+          />
+        </FormInputBox>
+      </FormArea>
+    )
+  }
+)
 
 export default React.memo(CardExpireInput)

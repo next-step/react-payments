@@ -20,7 +20,14 @@ const Label = styled.span`
   color: #525252;
 `
 
+const ErrorBox = styled.div`
+  position: relative;
+  width: 100%;
+`
+
 const ErrorMessage = styled.span`
+  position: absolute;
+  width: 300px;
   color: #cc0000;
   font-size: 12px;
   line-height: 14px;
@@ -31,5 +38,6 @@ export default {
   Container,
   Label,
   LabelContainer,
+  ErrorBox,
   ErrorMessage,
 }

@@ -29,7 +29,9 @@ const FormArea = ({
         <Styled.Label>{label}</Styled.Label>
       )}
       {children}
-      <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
+      <Styled.ErrorBox>
+        <Styled.ErrorMessage>{errorMessage}</Styled.ErrorMessage>
+      </Styled.ErrorBox>
     </Styled.Container>
   )
 }
