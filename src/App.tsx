@@ -8,6 +8,10 @@ import Done from '@/pages/Done';
 function App() {
   const element = useRoutes([
     { path: '/', element: <List /> },
+    {
+      path: '/react-payments',
+      element: <List />,
+    },
     { path: 'list', element: <List /> },
     { path: 'new', element: <NewCard /> },
     { path: 'done', element: <Done /> },
