@@ -1,6 +1,42 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function addCard() {
+function AddCard() {
+  const [cardNumberSeries, setCardNumberSeries] = useState("");
+  const [cardNumberCompany, setCardNumberCompany] = useState("");
+  const [cardNumberIndividual, setCardNumberIndividual] = useState("");
+  const [cardNumberCode, setCardNumberCode] = useState("");
+
+  const checkNumber = (event) => {
+    if (typeof event.target.value !== Number) {
+      event.target.value = event.target.value.replace(/[^0-9.]/g, "");
+    }
+  };
+
+  const seriesNumber = (event) => {
+    checkNumber(event);
+    setCardNumberSeries(event.target.value);
+  };
+
+  const companyNumber = (event) => {
+    checkNumber(event);
+    setCardNumberCompany(event.target.value);
+  };
+
+  const individualNumber = (event) => {
+    checkNumber(event);
+    setCardNumberIndividual(event.target.value);
+  };
+
+  const codeNumber = (event) => {
+    checkNumber(event);
+    setCardNumberCode(event.target.value);
+  };
+
+  const masking = (value) => {
+    return value.replaceAll(/[0-9]/g, "*");
+  };
+
   return (
     <div className="root">
       <div className="app">
@@ -17,6 +53,13 @@ function addCard() {
               <div className="small-card__chip"></div>
             </div>
             <div className="card-bottom">
+              <div className="card-bottom__number">
+                <span className="card-text">
+                  {cardNumberSeries}&nbsp;{cardNumberCompany}&nbsp;
+                  {masking(cardNumberIndividual)}&nbsp;
+                  {masking(cardNumberCode)}
+                </span>
+              </div>
               <div className="card-bottom__info">
                 <span className="card-text">NAME</span>
                 <span className="card-text">MM / YY</span>
@@ -27,10 +70,33 @@ function addCard() {
         <div className="input-container">
           <span className="input-title">카드 번호</span>
           <div className="input-box">
-            <input className="input-basic" type="text" />
-            <input className="input-basic" type="text" />
-            <input className="input-basic" type="password" />
-            <input className="input-basic" type="password" />
+            <input
+              className="input-basic"
+              type="text"
+              onKeyUp={(event) => seriesNumber(event)}
+              maxLength="4"
+            />
+            {cardNumberSeries.length === 4 && "-"}
+            <input
+              className="input-basic"
+              type="text"
+              onKeyUp={(event) => companyNumber(event)}
+              maxLength="4"
+            />
+            {cardNumberCompany.length === 4 && "-"}
+            <input
+              className="input-basic"
+              type="password"
+              onKeyUp={(event) => individualNumber(event)}
+              maxLength="4"
+            />
+            {cardNumberIndividual.length === 4 && "-"}
+            <input
+              className="input-basic"
+              type="paswword"
+              onKeyUp={(event) => codeNumber(event)}
+              maxLength="4"
+            />
           </div>
         </div>
         <div className="input-container">
@@ -67,4 +133,4 @@ function addCard() {
   );
 }
 
-export default addCard;
+export default AddCard;
