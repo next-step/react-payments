@@ -21,4 +21,12 @@ interface CardSizeContent {
   FONT_SIZE: string;
 }
 
-export { CardNumber, CardType, CardSize, CardExpiration, CardSizeContent };
+interface CardFormField {
+  cardNumber: CardNumber;
+  cardExpiration: CardExpiration;
+  cardUserName: string;
+  cardSecurityCode: string;
+  cardPassword: string;
+}
+
+export { CardNumber, CardType, CardSize, CardExpiration, CardSizeContent, CardFormField };

@@ -3,8 +3,6 @@ import styled from "@emotion/styled";
 import BaseInputWrapper from "../InputWrapper/InputWrapper";
 
 const InputWrapper = styled(BaseInputWrapper)`
-  color: #04c09e;
-
   input {
     width: 40px;
     margin: 0 5px;

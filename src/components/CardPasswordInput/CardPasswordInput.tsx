@@ -4,10 +4,10 @@ import Styled from "./CardPasswordInput.styles";
 
 interface Props {
   dotColor?: string;
-  onPasswordChange?: (firstNumber: number, secondNumber: number) => void;
+  onChange?: (firstNumber: string, secondNumber: string) => void;
 }
 
-const CardPasswordInput = ({ dotColor, onPasswordChange }: Props) => {
+const CardPasswordInput = ({ dotColor, onChange }: Props) => {
   const [password, setPassword] = useState<[string, string]>(["", ""]);
 
   const makeChangeHandler = (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
@@ -23,9 +23,9 @@ const CardPasswordInput = ({ dotColor, onPasswordChange }: Props) => {
   };
 
   useEffect(() => {
-    const [firstNumber, secondNumber] = password.map((p) => Number(p));
+    const [firstNumber, secondNumber] = password;
 
-    onPasswordChange?.(firstNumber, secondNumber);
+    onChange?.(firstNumber, secondNumber);
   }, [password]);
 
   return (

@@ -5,10 +5,10 @@ import { hasNonNumberChar } from "../../utils/validations";
 import Styled from "./CardExpirationInput.styles";
 
 interface Props {
-  onCardExpirationChange: (month: string, year: string) => void;
+  onChange?: (month: string, year: string) => void;
 }
 
-const CardExpirationInput = ({ onCardExpirationChange }: Props) => {
+const CardExpirationInput = ({ onChange }: Props) => {
   const [expiration, setExpiration] = useState<CardExpiration>({ month: "", year: "" });
 
   const makeChangeHandlerByKey = (key: keyof CardExpiration) => (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +25,7 @@ const CardExpirationInput = ({ onCardExpirationChange }: Props) => {
   };
 
   useEffect(() => {
-    onCardExpirationChange(expiration.month, expiration.year);
+    onChange?.(expiration.month, expiration.year);
   }, [expiration]);
 
   return (

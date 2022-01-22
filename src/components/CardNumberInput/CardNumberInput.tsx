@@ -6,10 +6,10 @@ import { hasNonNumberChar } from "../../utils/validations";
 import Styled from "./CardNumberInput.styles";
 
 interface Props {
-  onCardNumberChange: (cardNumber: CardNumber) => void;
+  onChange?: (cardNumber: CardNumber) => void;
 }
 
-const CardNumberInput = ({ onCardNumberChange }: Props) => {
+const CardNumberInput = ({ onChange }: Props) => {
   const [cardNumber, setCardNumber] = useState<CardNumber>(["", "", "", ""]);
 
   const makeChangeHandlerByIndex = (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
@@ -25,7 +25,7 @@ const CardNumberInput = ({ onCardNumberChange }: Props) => {
   };
 
   useEffect(() => {
-    onCardNumberChange(cardNumber);
+    onChange?.(cardNumber);
   }, [cardNumber]);
 
   return (
