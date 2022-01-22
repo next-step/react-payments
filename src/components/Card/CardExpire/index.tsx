@@ -9,9 +9,9 @@ interface CardExpireProps {
 const CardExpire = ({ month, year }: CardExpireProps) => (
   <Styled.CardExpireContainer>
     <Styled.CardTextContainer>
-      <Styled.CardText>{month}</Styled.CardText>
+      <Styled.CardText>{month.slice(0, 2)}</Styled.CardText>
       <Styled.CardText>/</Styled.CardText>
-      <Styled.CardText>{year}</Styled.CardText>
+      <Styled.CardText>{year.slice(0, 2)}</Styled.CardText>
     </Styled.CardTextContainer>
   </Styled.CardExpireContainer>
 )

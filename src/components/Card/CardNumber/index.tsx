@@ -16,13 +16,13 @@ const CardNumber = ({
 }: CardNumberProps) => {
   return (
     <Styled.CardNumberContainer>
-      <Styled.CardTextContainer>{number1}</Styled.CardTextContainer>
-      <Styled.CardTextContainer>{number2}</Styled.CardTextContainer>
+      <Styled.CardTextContainer>{number1.slice(0, 4)}</Styled.CardTextContainer>
+      <Styled.CardTextContainer>{number2.slice(0, 4)}</Styled.CardTextContainer>
       <Styled.CardTextContainer>
-        {(number3 ?? '').replace(/[0-9]/g, '*')}
+        {(number3 ?? '').replace(/[0-9]/g, '*').slice(0, 4)}
       </Styled.CardTextContainer>
       <Styled.CardTextContainer>
-        {(number4 ?? '').replace(/[0-9]/g, '*')}
+        {(number4 ?? '').replace(/[0-9]/g, '*').slice(0, 4)}
       </Styled.CardTextContainer>
     </Styled.CardNumberContainer>
   )
