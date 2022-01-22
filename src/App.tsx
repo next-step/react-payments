@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import styled from "@emotion/styled";
 
 import { PATH } from "./constants/route";
@@ -11,17 +11,16 @@ const AppContainer = styled.div`
 `;
 
 const App = () => {
+  const home = <CardRegisterPage />;
   return (
     <AppContainer style={{ width: "500px" }}>
       <BrowserRouter>
-        <Switch>
-          <Route path={PATH.HOME}>
-            <CardRegisterPage />
-          </Route>
-          <Route path={PATH.CARD_REGISTER_COMPLETE}>카드 추가 완료 페이지</Route>
-          <Route path={PATH.CARD_LIST}>카드 목록 페이지</Route>
-          <Redirect to={PATH.HOME} />
-        </Switch>
+        <Routes>
+          <Route path={PATH.HOME} element={home} />
+          <Route path={PATH.CARD_REGISTER_COMPLETE} element={<>카드 등록 완료 페이지</>} />
+          <Route path={PATH.CARD_LIST} element={<>카드 목록 페이지</>} />
+          <Route path="*" element={home} />
+        </Routes>
       </BrowserRouter>
     </AppContainer>
   );

@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { PATH } from "../../constants/route";
 import CardForm from "../../components/CardForm/CardForm";
@@ -23,7 +23,7 @@ const isCardFormFilled = (formField: CardFormField) => {
 };
 
 const CardRegisterPage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleCardFormSubmit = (formField: CardFormField) => {
     if (!isCardFormFilled(formField)) {
@@ -34,7 +34,7 @@ const CardRegisterPage = () => {
 
     // register card
 
-    history.push(PATH.CARD_REGISTER_COMPLETE);
+    navigate(PATH.CARD_REGISTER_COMPLETE);
   };
 
   return (
