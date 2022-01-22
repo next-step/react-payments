@@ -67,7 +67,6 @@ const AddCardForm = (props: AddCardFormProps) => {
     cardNumInputStateList.every((state) => state.isValid) &&
     monthInputState.isValid &&
     yearInputState.isValid &&
-    ownerNameInputState.isValid &&
     passwordInputStateList.every((state) => state.isValid) &&
     securityCodeInputState.isValid;
 
@@ -76,7 +75,6 @@ const AddCardForm = (props: AddCardFormProps) => {
   )}
     monthInputState: ${monthInputState.isValid} 
     yearInputState:${yearInputState.isValid} 
-    ownerNameInputState: ${ownerNameInputState.isValid}
     passwordInputStateList: ${passwordInputStateList.every(
       (state) => state.isValid
     )}

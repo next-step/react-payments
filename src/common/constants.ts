@@ -1,7 +1,7 @@
 export const RoutePath = {
   CardList: "/",
-  AddCard: "add-card",
-  AddCardComplete: "add-card-complete",
+  AddCard: "/add-card",
+  AddCardComplete: "/add-card-complete",
 } as const;
 
 export const CardType = {

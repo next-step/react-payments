@@ -2,7 +2,7 @@ import { RoutePath } from "@common/constants";
 import AddCardForm from "@components/addCardForm/AddCardForm";
 import BackBtn from "@components/button/BackBtn";
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { NavigationType, useNavigate } from "react-router-dom";
 
 const AddCardPage: React.FC = () => {
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ const AddCardPage: React.FC = () => {
         className="p-10"
         onSubmit={() => {
           console.log("on submit");
+          navigate(RoutePath.AddCardComplete);
         }}
       />
     </>
