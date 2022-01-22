@@ -63,11 +63,21 @@ export default css`
     width: 50% !important;
   }
 
+  .w-30 {
+    width: 30% !important;
+  }
+
   .w-25 {
     width: 25% !important;
   }
 
   .w-15 {
     width: 15% !important;
+  }
+
+  .text-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 `;

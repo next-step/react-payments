@@ -31,7 +31,9 @@ export const Card = (props: CardProps) => {
             <CardText size={size}>{cardNumber}</CardText>
           </CardNumber>
           <CardInfo>
-            <CardText size={size}>{owner}</CardText>
+            <CardText className='w-30 text-ellipsis' size={size}>
+              {owner}
+            </CardText>
             <CardText size={size}>{expiryDate}</CardText>
           </CardInfo>
         </InnerBottom>
