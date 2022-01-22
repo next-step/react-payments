@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { cardTextStyle } from '../../../css/card'
 
 const CardExpireContainer = styled.div`
   display: flex;

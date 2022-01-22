@@ -1,5 +1,5 @@
 import React from 'react'
-import { MouseEvent, MouseEventHandler, useCallback, useRef } from 'react'
+import { MouseEventHandler, useCallback, useRef } from 'react'
 import { BackgroundColorAccordingToStartsWith } from '../../../components/Card'
 import { CardType } from '../../../components/Form'
 import Modal from '../../../components/Layout/Modal'
