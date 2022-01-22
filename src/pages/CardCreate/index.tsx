@@ -1,7 +1,11 @@
 import React, { useCallback, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { CardType } from '../../components/Form'
 import Header from '../../components/Layout/Header'
+import { LocalCardProps } from '../../context/Card/CardContext'
+import { useCardDispatch } from '../../context/Card/hooks'
 import FormContextProvider from '../../context/Form/FormChangeContext'
+import { uuidv4 } from '../../utils/crypto'
 import CreateCard from './Card'
 import CreateCardForm from './Form'
 import Styled from './index.style'
@@ -22,6 +26,9 @@ export interface CardFormProps {
 
 const CardCreate = () => {
   const formRef = useRef<React.ElementRef<typeof CreateCardForm>>(null)
+  const cardDispatch = useCardDispatch()
+  const navigate = useNavigate()
+
   const [isModalOpen, setModalIsOpen] = useState(false)
   const [cardType, setCardType] = useState<CardType>()
   const [error, setError] = useState<CardErrorStateProps>({
@@ -72,10 +79,31 @@ const CardCreate = () => {
     const password1Valid = isPasswordValid(formRef.current?.password1())
     const password2Valid = isPasswordValid(formRef.current?.password2())
 
-    console.log(password1Valid, 'password1Valid')
-    console.log(password2Valid, 'password1Valid22')
     return password1Valid && password2Valid
   }, [])
+
+  const getLocalCardProps = useCallback(() => {
+    const number1 = formRef.current?.cardNumber1() as string
+    const number2 = formRef.current?.cardNumber2() as string
+    const number3 = formRef.current?.cardNumber3() as string
+    const number4 = formRef.current?.cardNumber4() as string
+
+    const year = formRef.current?.expiredAtYear() as string
+    const month = formRef.current?.expiredAtMonth() as string
+
+    const owner = formRef.current?.owner() as string
+
+    return {
+      number1,
+      number2,
+      number3,
+      number4,
+      year,
+      month,
+      owner,
+      type: cardType,
+    }
+  }, [cardType])
 
   const onSubmit = () => {
     const cardNumberValid = isCardNumberValid()
@@ -96,8 +124,14 @@ const CardCreate = () => {
       cardCvcValid &&
       cardPasswordValid
     ) {
-      console.log('submited')
-      return
+      const id = crypto.randomUUID ? crypto.randomUUID() : uuidv4()
+
+      cardDispatch({
+        type: 'ADD',
+        payload: { id, card: getLocalCardProps() },
+      })
+
+      navigate('/submit')
     }
   }
 

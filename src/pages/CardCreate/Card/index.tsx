@@ -27,7 +27,7 @@ const CreateCard = ({
   const [number3, setNumber3] = useState('')
   const [number4, setNumber4] = useState('')
 
-  const [name, setName] = useState('')
+  const [owner, setOwner] = useState('')
 
   const [month, setMonth] = useState('')
   const [year, setYear] = useState('')
@@ -65,7 +65,7 @@ const CreateCard = ({
         setYear(formRef.current?.expiredAtYear() ?? '')
         break
       case 'owner':
-        setName(formRef.current?.owner() ?? '')
+        setOwner(formRef.current?.owner() ?? '')
         break
 
       default:
@@ -82,7 +82,7 @@ const CreateCard = ({
       number4={number4}
       month={month}
       year={year}
-      name={name}
+      owner={owner}
       setModalIsOpen={setModalIsOpen}
     />
   )

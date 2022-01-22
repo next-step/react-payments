@@ -11,5 +11,5 @@ const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />
 export const FormAreaStory = Template.bind({})
 
 FormAreaStory.args = {
-  name: '김철수',
+  owner: '김철수',
 }

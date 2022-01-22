@@ -8,8 +8,11 @@ interface CardExpireProps {
 
 const CardExpire = ({ month, year }: CardExpireProps) => (
   <Styled.CardExpireContainer>
-    <Styled.CardTextContainer>{month}</Styled.CardTextContainer>/
-    <Styled.CardTextContainer>{year}</Styled.CardTextContainer>
+    <Styled.CardTextContainer>
+      <Styled.CardText>{month}</Styled.CardText>
+      <Styled.CardText>/</Styled.CardText>
+      <Styled.CardText>{year}</Styled.CardText>
+    </Styled.CardTextContainer>
   </Styled.CardExpireContainer>
 )
 

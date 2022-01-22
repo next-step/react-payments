@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {
+  bigCardStyle,
   cardBottomInfoStyle,
   cardBottomNumberStyle,
   cardBottomStyle,
@@ -12,8 +13,12 @@ import {
   smallChipStyle,
 } from '../../css/card'
 
-const Card = styled.div<{ bgColor?: string; ableToModalOpen?: boolean }>`
-  ${smallCardStyle}
+const Card = styled.div<{
+  bgColor?: string
+  ableToModalOpen?: boolean
+  size: 'small' | 'big'
+}>`
+  ${({ size }) => (size === 'big' ? bigCardStyle : smallCardStyle)}
   ${CardStyle}
   margin-bottom: 25px;
   ${({ bgColor }) => bgColor && { backgroundColor: bgColor }}

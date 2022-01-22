@@ -5,15 +5,16 @@ import CardNumber from './CardNumber'
 import CardOwner from './CardOnwer'
 import Styled from './index.style'
 
-interface CardProp {
+export interface CardProp {
   type?: CardType
   number1: string
   number2: string
   number3: string
   number4: string
-  name: string
+  owner: string
   month: string
   year: string
+  size?: 'big' | 'small'
   setModalIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -36,13 +37,14 @@ const CardMiddle = React.memo(
 )
 
 const Card = ({
+  size = 'small',
   type,
   number1,
   number2,
   number3,
   number4,
   month,
-  name,
+  owner,
   year,
   setModalIsOpen,
 }: CardProp) => (
@@ -50,6 +52,7 @@ const Card = ({
     {...(type && { bgColor: BackgroundColorAccordingToStartsWith[type] })}
     {...(setModalIsOpen && { ableToModalOpen: true })}
     {...(setModalIsOpen && { onClick: () => setModalIsOpen(true) })}
+    size={size}
   >
     <CardTop type={type} />
     <CardMiddle />
@@ -61,7 +64,7 @@ const Card = ({
         number4={number4}
       />
       <Styled.CardBottomInfo>
-        <CardOwner name={name} />
+        <CardOwner name={owner} />
         <CardExpire month={month} year={year} />
       </Styled.CardBottomInfo>
     </Styled.CardBottom>

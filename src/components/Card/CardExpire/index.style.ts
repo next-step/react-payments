@@ -4,15 +4,13 @@ import { cardTextStyle } from '../../../css/card'
 const CardExpireContainer = styled.div`
   display: flex;
   width: 40px;
-  margin-right: 14px;
+  margin-right: 20px;
 `
 
-const CardTextContainer = styled.div`
-  width: 17px;
-`
+const CardTextContainer = styled.div``
 
 const CardText = styled.span`
-  ${cardTextStyle}
+  margin-right: 2px;
 `
 
 export default { CardExpireContainer, CardTextContainer, CardText }
