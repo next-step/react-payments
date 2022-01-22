@@ -1,4 +1,5 @@
-import { addDecorator } from '@storybook/react';
+import { MemoryRouter } from "react-router-dom";
+import { addDecorator } from "@storybook/react";
 import { Global } from "@emotion/react";
 
 import globalCss from "../src/globalCss";
@@ -18,17 +19,16 @@ export const parameters = {
             width: "375px",
             height: "812px",
           },
-        }
-      }
+        },
+      },
     },
-    layout: 'fullscreen',
+    layout: "fullscreen",
   },
-}
+};
 
-addDecorator(Story => (
-  <>
+addDecorator((Story) => (
+  <MemoryRouter>
     <Global styles={globalCss} />
     <Story />
-  </>     
-  )
-);
+  </MemoryRouter>
+));
