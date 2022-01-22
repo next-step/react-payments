@@ -7,19 +7,16 @@ export const CVC = 'cvc';
 export const PASSWORD = 'password';
 export const COMPANY = 'company';
 export const NICKNAME = 'nickname';
+export const BG_COLOR = 'bgColor';
 
 export const DIGITS = {
   [CARD_NUMBER]: 4,
-  [OWNER]: 1,
   [EXPIRY_DATE]: 2,
   [PASSWORD]: 2,
-  [CVC]: 1,
-  [COMPANY]: -1,
-  [NICKNAME]: 1,
 };
 
 export const INPUT_LENGTH: {
-  [k in keyof Omit<initCardState, typeof COMPANY>]: number;
+  [k in keyof Omit<initCardState, typeof COMPANY | typeof BG_COLOR>]: number;
 } = {
   [CARD_NUMBER]: 4,
   [OWNER]: 30,
@@ -37,6 +34,7 @@ export const INIT_CARD_STATE: initCardState = Object.freeze({
   [PASSWORD]: Array(DIGITS[PASSWORD]).fill(''),
   [COMPANY]: '',
   [NICKNAME]: '',
+  [BG_COLOR]: '',
 });
 
 export const FIELD_ORDERS = Object.keys(INIT_CARD_STATE);

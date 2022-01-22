@@ -7,19 +7,18 @@ import PageBottom, { PageBottomText } from '@components/PageBottom';
 import Button from '@components/Button';
 import { Card } from '@components/Card';
 import CardForm from './cardForm';
+import { changeCardStateType } from '@/pages/NewCard/type';
 
 const NewCard = () => {
   const navigate = useNavigate();
+
   const [cardState, setCardState] = useState({ ...INIT_CARD_STATE });
 
   const goListPage = () => navigate('/list');
   const goDonePage = () => navigate('/done');
 
-  const changeCardState = (
-    state: typeof INIT_CARD_STATE[keyof typeof INIT_CARD_STATE],
-    key: keyof typeof INIT_CARD_STATE
-  ) => {
-    setCardState({ ...cardState, [key]: state });
+  const changeCardState: changeCardStateType = (newState) => {
+    setCardState({ ...cardState, ...newState });
   };
 
   return (

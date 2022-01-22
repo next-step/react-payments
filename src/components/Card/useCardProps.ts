@@ -1,5 +1,5 @@
 import { CardProps } from './type';
-import { INIT_CARD_STATE } from '@/constants/index';
+import { INIT_CARD_STATE, DIGITS } from '@/constants/index';
 
 const useCardProps = ({
   cardNumber,
@@ -7,36 +7,38 @@ const useCardProps = ({
   owner,
   ...others
 }: CardProps) => {
-  const getTextWithHyphenAndAsterisk = (
-    cardNumber: CardProps['cardNumber']
-  ) => {
+  const getCardNumberFormat = (cardNumber: CardProps['cardNumber']) => {
     return cardNumber
       ?.reduce((arr, v, i) => {
         arr[i] = v && i > 1 ? Array(`${v}`.length).fill('o').join('') : v;
         return arr;
-      }, Array(cardNumber.length).fill(''))
+      }, Array(DIGITS['cardNumber']).fill(''))
       .filter((v) => v)
       .join(' - ');
   };
 
-  const getExpiryDateWithSlash = (expiryDate: CardProps['expiryDate']) => {
-    return expiryDate?.every((v) => v)
-      ? expiryDate.join(' / ')
+  const getExpiryDateFormatWithSlash = (
+    expiryDate: CardProps['expiryDate']
+  ) => {
+    return Array.isArray(expiryDate) && expiryDate?.every((v) => v)
+      ? expiryDate?.join(' / ')
       : expiryDate?.join('');
   };
 
   const defaultProps: CardProps = {
-    ...INIT_CARD_STATE,
+    cardNumber: INIT_CARD_STATE['cardNumber'],
+    expiryDate: INIT_CARD_STATE['expiryDate'],
+    company: INIT_CARD_STATE['company'],
+    owner: 'NAME',
     size: 'small',
     bgColor: '',
-    owner: 'NAME',
   };
 
   return {
     ...defaultProps,
     ...others,
-    cardNumber: getTextWithHyphenAndAsterisk(cardNumber),
-    expiryDate: getExpiryDateWithSlash(expiryDate) || 'MM / YY',
+    cardNumber: getCardNumberFormat(cardNumber),
+    expiryDate: getExpiryDateFormatWithSlash(expiryDate) || 'MM / YY',
     owner: owner || 'NAME',
   };
 };

@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "noImplicitAny": true,
     "strictNullChecks": true,
     "allowJs": true,
@@ -24,7 +20,9 @@
   },
   "include": [
     "src",
-    "craco.config.js"
+    "craco.config.js",
+    "styles/utils.style.ts",
+    "styles/GlobalStyle.ts"
   ],
-  "extends": "./tsconfig.paths.json",
+  "extends": "./tsconfig.paths.json"
 }

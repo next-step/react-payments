@@ -60,14 +60,14 @@ export default css`
   }
 
   .w-50 {
-    width: 50%;
+    width: 50% !important;
   }
 
   .w-25 {
-    width: 25%;
+    width: 25% !important;
   }
 
   .w-15 {
-    width: 15%;
+    width: 15% !important;
   }
 `;

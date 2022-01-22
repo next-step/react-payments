@@ -17,7 +17,7 @@ function App() {
   return <Root>{element}</Root>;
 }
 
-const Root = styled.div`
+export const Root = styled.div`
   background-color: #fff;
   width: 100vw;
   min-width: 375px;
