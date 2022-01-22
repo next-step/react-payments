@@ -13,27 +13,30 @@ export default {
 
 const CardExpirationInputTemplate: ComponentStory<
   typeof CardExpirationInput
-> = (args) => <CardExpirationInput />;
+> = (args) => <CardExpirationInput {...args} />;
+
 export const CardExpirationInputTemp = CardExpirationInputTemplate.bind({});
+
+CardExpirationInputTemp.args = {};
 
 const CardNumberInputTemplate: ComponentStory<typeof CardNumberInput> = (
   args
-) => <CardNumberInput />;
+) => <CardNumberInput {...args} />;
 export const CardNumberInputTemp = CardNumberInputTemplate.bind({});
 
 const CardOwnerNameInputTemplate: ComponentStory<typeof CardOwnerNameInput> = (
   args
-) => <CardOwnerNameInput />;
+) => <CardOwnerNameInput {...args} />;
 export const InputCardOwnerNameTemp = CardOwnerNameInputTemplate.bind({});
 
 const CardPasswordInputTemplate: ComponentStory<typeof CardPasswordInput> = (
   args
-) => <CardPasswordInput />;
+) => <CardPasswordInput {...args} />;
 export const CardPasswordInputTemp = CardPasswordInputTemplate.bind({});
 
 const SecurityCodeInputTemplate: ComponentStory<typeof SecurityCodeInput> = (
   args
-) => <SecurityCodeInput />;
+) => <SecurityCodeInput {...args} />;
 export const SecurityInputTemp = SecurityCodeInputTemplate.bind({});
 
 const AddCardFormTemplate: ComponentStory<typeof AddCardForm> = (args) => (

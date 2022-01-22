@@ -18,6 +18,7 @@ module.exports = {
       "@pages": resolve(__dirname, "../src/pages"),
       "@common": resolve(__dirname, "../src/common"),
       "@styles": resolve(__dirname, "../src/styles"),
+      "@hooks": resolve(__dirname, "../src/hooks"),
     };
     return config;
   },

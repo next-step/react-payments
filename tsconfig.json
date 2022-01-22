@@ -24,7 +24,9 @@
       "@common": ["src/common"],
       "@common/*": ["src/common/*"],
       "@styles": ["src/styles"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@hooks": ["src/hooks"],
+      "@hooks/*": ["src/hooks/*"]
     }
   },
   "include": ["src", "craco.config.js"]

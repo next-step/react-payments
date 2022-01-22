@@ -16,3 +16,11 @@ export type CardData = {
   userName: string;
   alias: string;
 };
+
+export const MaxLength = {
+  CardNumberInput: 4,
+  CardExpirationInput: 2,
+  OwnerNameInput: 30,
+  CardSecurityCodeInput: 3,
+  CardPasswordInput: 1,
+} as const;
