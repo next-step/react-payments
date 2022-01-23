@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
 import { Button } from 'components/Button'
 import { DigitalCard } from 'components/Card'

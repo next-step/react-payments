@@ -3,6 +3,7 @@ import { CARD } from 'styles/colors'
 import { CircleDot } from 'components/Icons/Dot'
 import Modal from '../Modal'
 import * as S from './style'
+import { Button } from 'components/Button'
 
 interface Props {
   isOpen: boolean
@@ -25,8 +26,10 @@ export default function CardModal({ isOpen, openModal, selectCard }: Props) {
               </Fragment>
             ))}
           </S.Patterns>
+          <S.Wrapper>
+            <Button onClick={() => openModal(false)}>닫기</Button>
+          </S.Wrapper>
         </S.Container>
-        <button onClick={() => openModal(false)}>close</button>
       </S.Background>
     </Modal>
   )

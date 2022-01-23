@@ -7,7 +7,7 @@ import { PAGES } from './constants'
 import { PageProps, Card } from 'type'
 
 function App() {
-  const [page, setPage] = useState(PAGES.CARD_LIST)
+  const [page, setPage] = useState(PAGES.CARD_ADD)
   const [cards, setCards] = useState<Card[]>([])
   return (
     <S.Root>
