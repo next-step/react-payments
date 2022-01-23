@@ -13,6 +13,7 @@
 
 .input-title {
   display: flex;
+  justify-content: space-between;
   align-items: center;
 
   font-size: 12px;
@@ -45,8 +46,4 @@
   padding: 4px 0;
 
   border-bottom: 1px solid #383838;
-}
-
-.input-tooltip {
-  float: right;
 }

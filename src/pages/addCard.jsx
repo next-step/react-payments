@@ -60,6 +60,9 @@ function AddCard() {
   };
 
   const handleName = (event) => {
+    if (event.target.value.length > 30) {
+      event.target.value = event.target.value.slice(0, 30);
+    }
     setName(event.target.value);
   };
 
@@ -67,7 +70,7 @@ function AddCard() {
     <div className="root">
       <div className="app">
         <h2 className="page-title">
-          <Link to="/list" style={{ textDecoration: "none" }}>
+          <Link to="/list" style={{ textDecoration: "none", color: "black" }}>
             &lt;&nbsp;
           </Link>
           카드 추가
@@ -87,7 +90,10 @@ function AddCard() {
                 </span>
               </div>
               <div className="card-bottom__info">
-                <span className="card-text">NAME</span>
+                <span className="card-text">
+                  {name.length === 0 && "NAME"}
+                  {name.length !== 0 && name}
+                </span>
                 <span className="card-text">
                   {dueMonth} {dueMonth && "/"} {dueYear}
                 </span>
@@ -148,10 +154,10 @@ function AddCard() {
           </div>
         </div>
         <div className="input-container">
-          <span className="input-title">카드 소유자 이름(선택)</span>
-          {name.length !== 0 && (
-            <span className="input-tooltip">{`${name.length} / 30`}</span>
-          )}
+          <span className="input-title">
+            카드 소유자 이름(선택)
+            {name.length !== 0 && <span>{`${name.length}/30`}</span>}
+          </span>
           <input
             type="text"
             className="input-basic"
@@ -166,6 +172,7 @@ function AddCard() {
             className="input-basic w-25"
             type="password"
             onKeyUp={(event) => checkNumber(event)}
+            maxLength="3"
           />
         </div>
         <div className="input-container">
@@ -196,7 +203,12 @@ function AddCard() {
           />
         </div>
         <div className="button-box">
-          <span className="button-text">다음</span>
+          <Link
+            to="complete"
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <span className="button-text">다음</span>
+          </Link>
         </div>
       </div>
     </div>
