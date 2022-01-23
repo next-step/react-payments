@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import Add from './pages/Add';
-import Page02 from './pages/Page02';
-import Confirm from './pages/Confirm';
 import Complete from './pages/Complete';
 import CardList from './pages/CardList';
 
