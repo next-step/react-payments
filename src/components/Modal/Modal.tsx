@@ -1,11 +1,11 @@
 import { createPortal } from 'react-dom'
 
 interface Props {
-  close: boolean
+  isOpen: boolean
   children: React.ReactNode
 }
 
-export default function Modal({ close = true, children }: Props) {
-  if (close) return null
+export default function Modal({ isOpen = false, children }: Props) {
+  if (!isOpen) return null
   return createPortal(<>{children}</>, document.getElementById('modal')!)
 }

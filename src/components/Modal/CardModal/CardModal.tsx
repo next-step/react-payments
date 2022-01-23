@@ -1,20 +1,26 @@
 import { useState, Fragment } from 'react'
-import styled from 'styled-components'
 import { CARD } from 'style/colors'
 import { CircleDot } from 'components/Icons/Dot'
 import Modal from '../Modal'
 import * as S from './style'
 
-export default function CardModal({ close }: { close: boolean }) {
-  const [isClose, setIsClose] = useState(close)
+interface Props {
+  isOpen: boolean
+  openModal: React.Dispatch<React.SetStateAction<boolean>>
+  selectCard?: (e: React.MouseEvent<HTMLDivElement>) => void
+}
+
+export default function CardModal({ isOpen, openModal, selectCard }: Props) {
+  // const [isClose, setIsClose] = useState(close)
+
   return (
-    <Modal close={isClose}>
+    <Modal isOpen={isOpen}>
       <S.Background>
         <S.Container>
-          <S.Patterns>
+          <S.Patterns onClick={selectCard}>
             {Object.keys(CARD).map((name, i) => (
               <Fragment key={`${name}-${i}`}>
-                <S.Pattern>
+                <S.Pattern data-name={name}>
                   <CircleDot width={36} height={36} bgColor={CARD[name]} />
                   <S.Name>{name} 카드</S.Name>
                 </S.Pattern>
@@ -22,7 +28,7 @@ export default function CardModal({ close }: { close: boolean }) {
             ))}
           </S.Patterns>
         </S.Container>
-        <button onClick={() => setIsClose(true)}>close</button>
+        <button onClick={() => openModal(false)}>close</button>
       </S.Background>
     </Modal>
   )

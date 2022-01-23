@@ -32,5 +32,5 @@ export const Input = styled.input`
 
 export const Divider = styled.span`
   font-size: 18px;
-  padding-top 2px;
+  padding: 2px 4px 0;
 `

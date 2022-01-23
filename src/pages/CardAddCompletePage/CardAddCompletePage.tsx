@@ -12,7 +12,7 @@ export default function CardAddCompletePage(props: Props) {
     <Main>
       <Section>
         <Title>카드 등록이 완료되었습니다</Title>
-        <DigitalCard big name="" serialNums="" userName="" expiredDate="" />
+        {/* <DigitalCard big name="" serialNums="" userName="" expiredDate="" /> */}
         <Label id="userName">
           <Input name="userName" id="userName" type="text" maxLength={30} required />
         </Label>

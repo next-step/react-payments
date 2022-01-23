@@ -3,21 +3,16 @@ import * as S from './style'
 import CardAddPage from './pages/CardAddPage'
 import CardListPage from './pages/CardListPage'
 import CardAddCompletePage from 'pages/CardAddCompletePage'
+import { PAGES } from './constants'
 import { PageProps } from 'type'
 
 function App() {
-  const [page, setPage] = useState(PAGES.CARD_LIST)
+  const [page, setPage] = useState(PAGES.CARD_ADD)
   return (
     <S.Root>
       <S.App>{cardPages[page]({ setPage })}</S.App>
     </S.Root>
   )
-}
-
-const PAGES = {
-  CARD_LIST: 'CardListPage',
-  CARD_ADD: 'CardAddPage',
-  CARD_ADD_COMPLETE: 'CardAddCompletePage',
 }
 
 const cardPages = {
