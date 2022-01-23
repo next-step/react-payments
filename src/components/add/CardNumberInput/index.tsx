@@ -35,7 +35,7 @@ function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
   const handleNumberChange = useCallback(
     (index: keyof typeof number, value: string) => {
       if (!isValidInput(value)) return
-      if (value.length === 4 && index < 3) refs[index].current?.focus()
+      if (value.length === NUMBER_EACH_LENGTH.MAX && index < 3) refs[index].current?.focus()
 
       setNumber((prev) => ({ ...prev, [index]: value }))
     },
