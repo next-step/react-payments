@@ -1,5 +1,5 @@
-const App = ({ appClass, children }) => {
-  return <div className={`app ${appClass || ""}`}>{children}</div>;
+const App = ({ appClass = '', children = null }) => {
+  return <div className={`app ${appClass}`}>{children}</div>;
 };
 
 export default App;

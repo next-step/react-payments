@@ -1,16 +1,14 @@
 import { useContext } from 'react';
-import { CardContext } from '../App';
+import { AppContext } from '../AppContext';
 
 const Card = (card) => {
   const { nickName } = card;
-  const { inputCard } = useContext(CardContext);
+  const { inputCard } = useContext(AppContext);
   const {
     cardNumbers = ['', '', '', ''],
     expirationMonth = '',
     expirationYear = '',
     cardHolder = '',
-    cvc = '',
-    passwords = ['', '', '', ''],
     companyName = '',
   } = inputCard;
 

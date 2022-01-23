@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { CardContext } from '../../App';
+import { AppContext } from '../../AppContext';
 
 const ToList = () => {
-  const { setStatus } = useContext(CardContext);
+  const { setStatus } = useContext(AppContext);
   return (
     <h2 className="page-title" onClick={() => setStatus('list')}>
       &lt; 카드 추가

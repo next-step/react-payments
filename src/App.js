@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Add from './pages/Add';
 import Complete from './pages/Complete';
 import CardList from './pages/CardList';
+import { AppContext, initialInputCard } from './AppContext';
 
-export const CardContext = React.createContext();
 export const companyList = [
   '신한카드',
   '현대카드',
@@ -20,18 +20,10 @@ export const companyList = [
 function App() {
   const [status, setStatus] = useState('list');
   const [cardList, setCardList] = useState([]);
-  const [inputCard, setInputCard] = useState({
-    cardNumbers: ['', '', '', ''],
-    expirationMonth: '',
-    expirationYear: '',
-    cardHolder: '',
-    cvc: '',
-    passwords: ['', '', '', ''],
-    companyName: '',
-  });
+  const [inputCard, setInputCard] = useState(initialInputCard);
 
   return (
-    <CardContext.Provider
+    <AppContext.Provider
       value={{
         status,
         setStatus,
@@ -52,7 +44,7 @@ function App() {
           'Error: 관리자에게 문의해 주세요'
         )}
       </div>
-    </CardContext.Provider>
+    </AppContext.Provider>
   );
 }
 

@@ -1,12 +1,12 @@
 import { useState, useContext } from 'react';
 import uuid from 'react-uuid';
-import { CardContext } from '../App';
+import { AppContext } from '../AppContext';
 import Input from './container/Input';
 import _ from 'lodash';
 
 const CardInputForm = () => {
   const [cardHolderInfo, setCardHolerInfo] = useState('');
-  const { inputCard, setInputCard } = useContext(CardContext);
+  const { inputCard, setInputCard } = useContext(AppContext);
   const {
     cardNumbers = ['', '', '', ''],
     expirationMonth = '',

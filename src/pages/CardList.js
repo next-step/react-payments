@@ -1,14 +1,14 @@
-import Card from '../components/Card';
+import Card from '../components/CardPlus';
 import CardPlus from '../components/CardPlus';
 import PageTitle from '../components/PageTitle';
 import RootContainer from '../components/container/Root';
 import AppContainer from '../components/container/App';
 import { useContext } from 'react';
-import { CardContext } from '../App';
+import { AppContext } from '../AppContext';
 import uuid from 'react-uuid';
 
 const CardList = () => {
-  const { cardList = [] } = useContext(CardContext);
+  const { cardList = [] } = useContext(AppContext);
 
   return (
     <RootContainer>

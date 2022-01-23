@@ -4,10 +4,10 @@ import NavToNext from '../components/nav/ToNext';
 import RootContainer from '../components/container/Root';
 import AppContainer from '../components/container/App';
 import { useContext } from 'react';
-import { CardContext } from '../App';
+import { AppContext } from '../AppContext';
 
 const Complete = ({ nextStatus }) => {
-  const { setStatus } = useContext(CardContext);
+  const { setStatus } = useContext(AppContext);
 
   const nextStep = () => {
     setStatus(nextStatus);

@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { CardContext } from '../App';
+import { AppContext } from '../AppContext';
 
 const CardPlus = () => {
-  const { setStatus } = useContext(CardContext);
+  const { setStatus } = useContext(AppContext);
   return (
     <div className="card-box" onClick={() => setStatus('add')}>
       <div className="empty-card">+</div>
