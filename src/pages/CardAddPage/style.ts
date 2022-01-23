@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Box = styled.div`
   height: 100%;
@@ -10,16 +10,20 @@ export const Header = styled.header`
   align-items: center;
 `
 
+export const Main = styled.main`
+  margin-top: 20px;
+`
+
 export const H1 = styled.h1`
   padding-bottom: 1px;
 `
 
-export const FlexRowCenter = styled.div`
+export const DigitalCardBlock = styled.div`
   display: flex;
   justify-content: center;
 `
 
-export const FlexRowAlignCenter = styled.div`
+export const CardInputCVCBlock = styled.div`
   display: flex;
   align-items: center;
   width: 40%;
@@ -30,11 +34,11 @@ export const Form = styled.form`
   color: #525252;
 `
 
-export const IconWrapper = styled.div`
+export const IconBlock = styled.div`
   margin: 20px 8px 0;
 `
 
-export const ButtonWrapper = styled.div`
+export const ButtonBlock = styled.div`
   margin-top: 20px;
   display: flex;
   justify-content: end;

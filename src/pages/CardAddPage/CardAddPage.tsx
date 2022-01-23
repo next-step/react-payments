@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from 'components/Button'
-import { BlankCard, DigitalCard } from 'components/Card'
+import { DigitalCard } from 'components/Card'
 import {
   CardPasswordFieldSet,
   CardSerialNumsFieldSet,
@@ -10,13 +10,17 @@ import { CardInput } from 'components/Form/Input'
 import { CardModal } from 'components/Modal'
 import { IconCircleQuestion, IconLeftArrow } from 'components/svgs'
 import { PAGES } from '../../constants'
-import { SERIAL_NUMS, PASSWORD, EXPIRED_DATE } from './constants'
+import {
+  SERIAL_NUMS,
+  PASSWORD,
+  EXPIRED_DATE,
+  USER_NAME_PROPERTYS,
+  CVC_PROPERTYS,
+} from './constants'
 import { CARD } from 'style/colors'
-import * as S from './style'
-import { PageProps } from '../../type'
 import { useFieldSet, useInput } from './hooks'
-
-type ReactInputEvent = React.ChangeEvent<HTMLInputElement>
+import { PageProps } from '../../type'
+import * as S from './style'
 
 export default function CardAddPage({ cards, setPage, setCards }: PageProps) {
   const [serialNums, setSerialNums] = useFieldSet(SERIAL_NUMS)
@@ -62,51 +66,39 @@ export default function CardAddPage({ cards, setPage, setCards }: PageProps) {
         <S.H1>카드 추가</S.H1>
       </S.Header>
 
-      <S.FlexRowCenter>
-        <DigitalCard
-          type={type}
-          serialNums={serialNums}
-          ownerName={ownerName}
-          expiredDate={expiredDate}
-        />
-      </S.FlexRowCenter>
-
-      <S.Form onSubmit={handleSubmit}>
-        <CardSerialNumsFieldSet serialNums={serialNums} onChange={setSerialNums} />
-        <CardExpiredDateFieldSet expiredDate={expiredDate} onChange={setExpiredDate} />
-        <CardInput
-          labelName="카드 소유자 이름(선택)"
-          id="userName"
-          name="userName"
-          type="text"
-          value={ownerName}
-          onChange={setOwnerName}
-          labelRight={<span>{ownerName.length}/30</span>}
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          maxLength={30}
-          required
-        />
-        <S.FlexRowAlignCenter>
-          <CardInput
-            labelName="보안 코드(CVC/CVV)"
-            id="cvc"
-            name="cvc"
-            type="password"
-            value={cvc}
-            onChange={setCvc}
-            maxLength={3}
-            required
+      <S.Main>
+        <S.DigitalCardBlock>
+          <DigitalCard
+            type={type}
+            serialNums={serialNums}
+            ownerName={ownerName}
+            expiredDate={expiredDate}
           />
-          <S.IconWrapper>
-            <IconCircleQuestion />
-          </S.IconWrapper>
-        </S.FlexRowAlignCenter>
-        <CardPasswordFieldSet password={password} onChange={setPassword} />
+        </S.DigitalCardBlock>
 
-        <S.ButtonWrapper>
-          <Button type="submit">다음</Button>
-        </S.ButtonWrapper>
-      </S.Form>
+        <S.Form onSubmit={handleSubmit}>
+          <CardSerialNumsFieldSet serialNums={serialNums} onChange={setSerialNums} />
+          <CardExpiredDateFieldSet expiredDate={expiredDate} onChange={setExpiredDate} />
+          <CardInput
+            {...USER_NAME_PROPERTYS}
+            value={ownerName}
+            onChange={setOwnerName}
+            labelRight={<span>{ownerName.length}/30</span>}
+          />
+          <S.CardInputCVCBlock>
+            <CardInput {...CVC_PROPERTYS} value={cvc} onChange={setCvc} />
+            <S.IconBlock>
+              <IconCircleQuestion />
+            </S.IconBlock>
+          </S.CardInputCVCBlock>
+          <CardPasswordFieldSet password={password} onChange={setPassword} />
+
+          <S.ButtonBlock>
+            <Button type="submit">다음</Button>
+          </S.ButtonBlock>
+        </S.Form>
+      </S.Main>
+
       <CardModal isOpen={isModalOpen} openModal={setIsModalOpen} selectCard={handleType} />
     </S.Box>
   )
