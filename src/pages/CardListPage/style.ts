@@ -10,14 +10,15 @@ export const Header = styled.header`
   padding: 8px 0;
 `
 
-export const Section = styled.section`
+export const Main = styled.main`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 `
 
-export const AlignCenter = styled.div`
+export const AddCard = styled.div`
+  font-size: 32px;
   min-height: 130px;
   display: flex;
   align-items: center;
