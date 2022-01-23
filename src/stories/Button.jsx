@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
-function Button({ text }) {
-  return <ButtonText>{text}</ButtonText>;
+function Button({ children }) {
+  return <ButtonText>{children}</ButtonText>;
 }
 
 export default Button;

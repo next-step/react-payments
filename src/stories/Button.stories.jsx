@@ -5,4 +5,4 @@ export default {
   component: Button,
 };
 
-export const Next = () => <Button text="다음" />;
+export const Next = () => <Button>다음</Button>;

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../stories/Button";
+import Input from "../stories/Input";
 
 function AddCard() {
   const [cardNumberSeries, setCardNumberSeries] = useState("");
@@ -105,52 +106,46 @@ function AddCard() {
         <div className="input-container">
           <span className="input-title">카드 번호</span>
           <div className="input-box">
-            <input
-              className="input-basic"
+            <Input
               type="text"
-              onKeyUp={(event) => handleSeriesNumber(event)}
               maxLength="4"
+              handle={(event) => handleSeriesNumber(event)}
             />
             {cardNumberSeries.length === 4 && "-"}
-            <input
-              className="input-basic"
+            <Input
               type="text"
-              onKeyUp={(event) => handleCompanyNumber(event)}
               maxLength="4"
+              handle={(event) => handleCompanyNumber(event)}
             />
             {cardNumberCompany.length === 4 && "-"}
-            <input
-              className="input-basic"
+            <Input
               type="password"
-              onKeyUp={(event) => handleIndividualNumber(event)}
               maxLength="4"
+              handle={(event) => handleIndividualNumber(event)}
             />
             {cardNumberIndividual.length === 4 && "-"}
-            <input
-              className="input-basic"
-              type="paswword"
-              onKeyUp={(event) => handleCodeNumber(event)}
+            <Input
+              type="password"
               maxLength="4"
+              handle={(event) => handleCodeNumber(event)}
             />
           </div>
         </div>
         <div className="input-container">
           <span className="input-title">만료일</span>
           <div className="input-box w-50">
-            <input
-              className="input-basic"
+            <Input
               type="text"
               placeholder="MM"
-              onKeyUp={(event) => handleMonth(event)}
               maxLength="2"
+              handle={(event) => handleMonth(event)}
             />
             {dueMonth && "/"}
-            <input
-              className="input-basic"
+            <Input
               type="text"
               placeholder="YY"
-              onKeyUp={(event) => handleYear(event)}
               maxLength="2"
+              handle={(event) => handleYear(event)}
             />
           </div>
         </div>
@@ -159,56 +154,45 @@ function AddCard() {
             카드 소유자 이름(선택)
             {name.length !== 0 && <span>{`${name.length}/30`}</span>}
           </span>
-          <input
+          <Input
             type="text"
-            className="input-basic"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-            onKeyUp={(event) => handleName(event)}
             maxLength="30"
+            handle={(event) => handleName(event)}
           />
         </div>
         <div className="input-container">
           <span className="input-title">보안코드(CVC/CVV)</span>
-          <input
-            className="input-basic w-25"
+          <Input
             type="password"
-            onKeyUp={(event) => checkNumber(event)}
+            width="25%"
             maxLength="3"
+            handle={(event) => checkNumber(event)}
           />
         </div>
         <div className="input-container">
           <span className="input-title">카드 비밀번호</span>
-          <input
-            className="input-basic w-15"
+          <Input
             type="password"
-            onKeyUp={(event) => checkNumber(event)}
+            width="15%"
             maxLength="1"
+            handle={(event) => checkNumber(event)}
           />
-          <input
-            className="input-basic w-15"
+          <Input
             type="password"
-            onKeyUp={(event) => checkNumber(event)}
+            width="15%"
             maxLength="1"
+            handle={(event) => checkNumber(event)}
           />
-          <input
-            className="input-basic w-15"
-            type="password"
-            value="0"
-            disabled
-          />
-          <input
-            className="input-basic w-15"
-            type="password"
-            value="0"
-            disabled
-          />
+          <Input type="password" width="15%" value="0" disabled />
+          <Input type="password" width="15%" value="0" disabled />
         </div>
         <div className="button-box">
           <Link
             to="complete"
             style={{ textDecoration: "none", color: "black" }}
           >
-            <Button text="다음" />
+            <Button>다음</Button>
           </Link>
         </div>
       </div>
