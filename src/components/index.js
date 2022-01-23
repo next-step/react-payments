@@ -1,8 +1,8 @@
-import { Input } from './Input.jsx';
-import { InputContainer } from './InputContainer.jsx';
-import { BasicCard, EmptyCard } from './Card.jsx';
-import { Center } from './Utils.jsx';
-import { Title } from './Title.jsx';
-import { Button } from './Button.jsx';
+import { Input } from './Input.js';
+import { InputContainer } from './InputContainer.js';
+import { BasicCard, EmptyCard } from './Card.js';
+import { Center } from './Utils.js';
+import { Title } from './Title.js';
+import { Button } from './Button.js';
 
 export { Input, InputContainer, BasicCard, Center, Title, Button, EmptyCard };
