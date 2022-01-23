@@ -1,4 +1,4 @@
-import { SerialNums } from 'pages/CardAddPage/constants'
+import { SERIAL_NUMS, EXPIRED_DATE } from 'pages/CardAddPage/constants'
 
 export interface PageProps {
   cards: Card[]
@@ -8,8 +8,8 @@ export interface PageProps {
 
 export type Card = {
   type: string
-  serialNums: SerialNums
+  serialNums: typeof SERIAL_NUMS
   ownerName: string
-  expiredDate: string
+  expiredDate: typeof EXPIRED_DATE
   nickName: string
 }

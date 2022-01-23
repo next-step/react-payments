@@ -1,19 +1,16 @@
-export type SerialNums = {
-  [key in 'first' | 'second' | 'third' | 'fourth']: string
-}
-
-export type Password = {
-  [key in 'first' | 'second']: string
-}
-
-export const SERIAL_NUMS: SerialNums = {
+export const SERIAL_NUMS = {
   first: '',
   second: '',
   third: '',
   fourth: '',
 }
 
-export const PASSWORD: Password = {
+export const PASSWORD = {
   first: '',
   second: '',
+}
+
+export const EXPIRED_DATE = {
+  mm: '',
+  yy: '',
 }

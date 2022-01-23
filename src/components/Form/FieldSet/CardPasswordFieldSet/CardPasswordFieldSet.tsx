@@ -1,11 +1,11 @@
 import FieldSet from '../FieldSet'
 import { CircleDot } from 'components/Icons/Dot'
 import { MINT } from 'style/colors'
+import { PASSWORD } from 'pages/CardAddPage/constants'
 import * as S from './style'
-import { Password } from 'pages/CardAddPage/constants'
 
 interface Props {
-  password: Password
+  password: typeof PASSWORD
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 

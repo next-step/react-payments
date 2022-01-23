@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from 'components/Button'
 import { BlankCard, DigitalCard } from 'components/Card'
-import { CardPasswordFieldSet, CardSerialNumsFieldSet } from 'components/Form/FieldSet'
+import {
+  CardPasswordFieldSet,
+  CardSerialNumsFieldSet,
+  CardExpiredDateFieldSet,
+} from 'components/Form/FieldSet'
 import { CardInput } from 'components/Form/Input'
 import { CardModal } from 'components/Modal'
 import { IconCircleQuestion, IconLeftArrow } from 'components/svgs'
 import { PAGES } from '../../constants'
-import { SERIAL_NUMS, PASSWORD, SerialNums, Password } from './constants'
+import { SERIAL_NUMS, PASSWORD, EXPIRED_DATE } from './constants'
 import { CARD } from 'style/colors'
 import * as S from './style'
 import { PageProps } from '../../type'
@@ -14,11 +18,11 @@ import { PageProps } from '../../type'
 type ReactInputEvent = React.ChangeEvent<HTMLInputElement>
 
 export default function CardAddPage({ cards, setPage, setCards }: PageProps) {
-  const [serialNums, setSerialNums] = useState<SerialNums>(SERIAL_NUMS)
-  const [expiredDate, setExpiredDate] = useState<string>('')
+  const [serialNums, setSerialNums] = useState<typeof SERIAL_NUMS>(SERIAL_NUMS)
+  const [expiredDate, setExpiredDate] = useState<typeof EXPIRED_DATE>(EXPIRED_DATE)
   const [ownerName, setOwnerName] = useState<string>('')
   const [cvc, setCvc] = useState<string>('')
-  const [password, setPassword] = useState<Password>(PASSWORD)
+  const [password, setPassword] = useState<typeof PASSWORD>(PASSWORD)
   const [type, setType] = useState<string>('')
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
@@ -29,8 +33,8 @@ export default function CardAddPage({ cards, setPage, setCards }: PageProps) {
   const handleSerialNums = ({ target: { name, value } }: ReactInputEvent) => {
     setSerialNums({ ...serialNums, [name]: value })
   }
-  const handleExpiredDate = ({ target: { value } }: ReactInputEvent) => {
-    value.length === 2 ? setExpiredDate(`${value}/`) : setExpiredDate(value)
+  const handleExpiredDate = ({ target: { name, value } }: ReactInputEvent) => {
+    setExpiredDate({ ...expiredDate, [name]: value })
   }
   const handleCVC = ({ target: { value } }: ReactInputEvent) => setCvc(value)
   const handleOwnerName = ({ target: { value } }: ReactInputEvent) => setOwnerName(value)
@@ -79,20 +83,7 @@ export default function CardAddPage({ cards, setPage, setCards }: PageProps) {
 
       <S.Form onSubmit={handleSubmit}>
         <CardSerialNumsFieldSet serialNums={serialNums} onChange={handleSerialNums} />
-        <S.FlexColumn width="40%">
-          <CardInput
-            labelName="만료일"
-            id="expiredDate"
-            name="expiredDate"
-            type="text"
-            value={expiredDate}
-            onChange={handleExpiredDate}
-            placeholder="MM/YY"
-            pattern="^(0[1-9]|1[0-2])\/?([0-9]{2})$"
-            maxLength={7}
-            required
-          />
-        </S.FlexColumn>
+        <CardExpiredDateFieldSet expiredDate={expiredDate} onChange={handleExpiredDate} />
         <S.FlexColumn>
           <CardInput
             labelName="카드 소유자 이름(선택)"

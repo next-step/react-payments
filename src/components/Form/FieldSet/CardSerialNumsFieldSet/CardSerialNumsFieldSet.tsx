@@ -1,9 +1,9 @@
-import { SerialNums } from 'pages/CardAddPage/constants'
+import { SERIAL_NUMS } from 'pages/CardAddPage/constants'
 import FieldSet from '../FieldSet'
 import * as S from './style'
 
 interface Props {
-  serialNums: SerialNums
+  serialNums: typeof SERIAL_NUMS
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 

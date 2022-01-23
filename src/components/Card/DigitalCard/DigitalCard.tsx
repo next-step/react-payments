@@ -1,17 +1,18 @@
-import { SerialNums } from 'pages/CardAddPage/constants'
+import { SERIAL_NUMS, EXPIRED_DATE } from 'pages/CardAddPage/constants'
 import { Card } from '../Card'
 import * as S from './style'
 
 interface Props {
   big?: boolean
   type: string
-  serialNums: SerialNums
+  serialNums: typeof SERIAL_NUMS
   ownerName: string
-  expiredDate: string
+  expiredDate: typeof EXPIRED_DATE
 }
 
 export function DigitalCard({ big = false, type, serialNums, ownerName, expiredDate }: Props) {
   const [first, second, third, fourth] = Object.values(serialNums)
+  const [mm, yy] = Object.values(expiredDate)
   return (
     <Card big={big}>
       <S.Box type={type}>
@@ -27,7 +28,7 @@ export function DigitalCard({ big = false, type, serialNums, ownerName, expiredD
         </S.SerialNums>
         <S.Info>
           <S.OwnerName>{ownerName ? ownerName : 'NAME'}</S.OwnerName>
-          <S.ExpiredDate>{expiredDate ? expiredDate : 'MM/YY'}</S.ExpiredDate>
+          <S.ExpiredDate>{mm ? `${mm}${yy}` : 'MM/YY'}</S.ExpiredDate>
         </S.Info>
       </S.Box>
     </Card>
