@@ -46,3 +46,7 @@
 
   border-bottom: 1px solid #383838;
 }
+
+.input-tooltip {
+  float: right;
+}

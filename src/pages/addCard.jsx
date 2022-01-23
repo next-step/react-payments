@@ -8,6 +8,7 @@ function AddCard() {
   const [cardNumberCode, setCardNumberCode] = useState("");
   const [dueMonth, setDueMonth] = useState("");
   const [dueYear, setDueYear] = useState("");
+  const [name, setName] = useState("");
 
   const checkNumber = (event) => {
     if (typeof event.target.value !== Number) {
@@ -56,6 +57,10 @@ function AddCard() {
   const handleYear = (event) => {
     checkNumber(event);
     setDueYear(event.target.value);
+  };
+
+  const handleName = (event) => {
+    setName(event.target.value);
   };
 
   return (
@@ -144,10 +149,15 @@ function AddCard() {
         </div>
         <div className="input-container">
           <span className="input-title">카드 소유자 이름(선택)</span>
+          {name.length !== 0 && (
+            <span className="input-tooltip">{`${name.length} / 30`}</span>
+          )}
           <input
             type="text"
             className="input-basic"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+            onKeyUp={(event) => handleName(event)}
+            maxLength="30"
           />
         </div>
         <div className="input-container">
