@@ -22,22 +22,12 @@ export const FlexRowCenter = styled.div`
 export const FlexRowAlignCenter = styled.div`
   display: flex;
   align-items: center;
+  width: 40%;
 `
 
 export const Form = styled.form`
   font-size: 12px;
   color: #525252;
-`
-
-export const FlexColumn = styled.div<{ width?: string }>`
-  display: flex;
-  flex-direction: column;
-  padding: 12px 0;
-  ${({ width }) =>
-    width &&
-    css`
-      width: ${width};
-    `}
 `
 
 export const IconWrapper = styled.div`

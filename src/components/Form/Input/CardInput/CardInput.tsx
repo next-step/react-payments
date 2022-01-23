@@ -10,9 +10,11 @@ interface Props extends LabelProps {
 
 export default function CardInput({ labelName, errMessages, labelRight, ...props }: Props) {
   return (
-    <Label labelName={labelName} labelRight={labelRight}>
-      <S.Input {...props} />
-      {errMessages && <span>{errMessages}</span>}
-    </Label>
+    <S.Box>
+      <Label labelName={labelName} labelRight={labelRight}>
+        <S.Input {...props} />
+        {errMessages && <span>{errMessages}</span>}
+      </Label>
+    </S.Box>
   )
 }

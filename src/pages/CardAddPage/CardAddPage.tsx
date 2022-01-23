@@ -14,15 +14,16 @@ import { SERIAL_NUMS, PASSWORD, EXPIRED_DATE } from './constants'
 import { CARD } from 'style/colors'
 import * as S from './style'
 import { PageProps } from '../../type'
+import { useFieldSet, useInput } from './hooks'
 
 type ReactInputEvent = React.ChangeEvent<HTMLInputElement>
 
 export default function CardAddPage({ cards, setPage, setCards }: PageProps) {
-  const [serialNums, setSerialNums] = useState<typeof SERIAL_NUMS>(SERIAL_NUMS)
-  const [expiredDate, setExpiredDate] = useState<typeof EXPIRED_DATE>(EXPIRED_DATE)
-  const [ownerName, setOwnerName] = useState<string>('')
-  const [cvc, setCvc] = useState<string>('')
-  const [password, setPassword] = useState<typeof PASSWORD>(PASSWORD)
+  const [serialNums, setSerialNums] = useFieldSet(SERIAL_NUMS)
+  const [expiredDate, setExpiredDate] = useFieldSet(EXPIRED_DATE)
+  const [ownerName, setOwnerName] = useInput()
+  const [cvc, setCvc] = useInput()
+  const [password, setPassword] = useFieldSet(PASSWORD)
   const [type, setType] = useState<string>('')
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
@@ -30,17 +31,6 @@ export default function CardAddPage({ cards, setPage, setCards }: PageProps) {
     if (Object.keys(CARD).includes(type)) completeFormSubmit()
   }, [type])
 
-  const handleSerialNums = ({ target: { name, value } }: ReactInputEvent) => {
-    setSerialNums({ ...serialNums, [name]: value })
-  }
-  const handleExpiredDate = ({ target: { name, value } }: ReactInputEvent) => {
-    setExpiredDate({ ...expiredDate, [name]: value })
-  }
-  const handleCVC = ({ target: { value } }: ReactInputEvent) => setCvc(value)
-  const handleOwnerName = ({ target: { value } }: ReactInputEvent) => setOwnerName(value)
-  const handlePassword = ({ target: { name, value } }: ReactInputEvent) => {
-    setPassword({ ...password, [name]: value })
-  }
   //prettier-ignore
   const handleType = ({ target }: React.MouseEvent<HTMLDivElement>) => {
     const { parentNode } = target as HTMLDivElement
@@ -82,41 +72,36 @@ export default function CardAddPage({ cards, setPage, setCards }: PageProps) {
       </S.FlexRowCenter>
 
       <S.Form onSubmit={handleSubmit}>
-        <CardSerialNumsFieldSet serialNums={serialNums} onChange={handleSerialNums} />
-        <CardExpiredDateFieldSet expiredDate={expiredDate} onChange={handleExpiredDate} />
-        <S.FlexColumn>
+        <CardSerialNumsFieldSet serialNums={serialNums} onChange={setSerialNums} />
+        <CardExpiredDateFieldSet expiredDate={expiredDate} onChange={setExpiredDate} />
+        <CardInput
+          labelName="카드 소유자 이름(선택)"
+          id="userName"
+          name="userName"
+          type="text"
+          value={ownerName}
+          onChange={setOwnerName}
+          labelRight={<span>{ownerName.length}/30</span>}
+          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          maxLength={30}
+          required
+        />
+        <S.FlexRowAlignCenter>
           <CardInput
-            labelName="카드 소유자 이름(선택)"
-            id="userName"
-            name="userName"
-            type="text"
-            value={ownerName}
-            onChange={handleOwnerName}
-            labelRight={<span>{ownerName.length}/30</span>}
-            placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-            maxLength={30}
+            labelName="보안 코드(CVC/CVV)"
+            id="cvc"
+            name="cvc"
+            type="password"
+            value={cvc}
+            onChange={setCvc}
+            maxLength={3}
             required
           />
-        </S.FlexColumn>
-
-        <S.FlexRowAlignCenter>
-          <S.FlexColumn width="30%">
-            <CardInput
-              labelName="보안 코드(CVC/CVV)"
-              id="cvc"
-              name="cvc"
-              type="password"
-              value={cvc}
-              onChange={handleCVC}
-              maxLength={3}
-              required
-            />
-          </S.FlexColumn>
           <S.IconWrapper>
             <IconCircleQuestion />
           </S.IconWrapper>
         </S.FlexRowAlignCenter>
-        <CardPasswordFieldSet password={password} onChange={handlePassword} />
+        <CardPasswordFieldSet password={password} onChange={setPassword} />
 
         <S.ButtonWrapper>
           <Button type="submit">다음</Button>
