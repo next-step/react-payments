@@ -1,4 +1,3 @@
-import React from 'react';
 import './utils.css';
 
 export const Center = ({ children }) => {

@@ -1,8 +1,5 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-
 import './card.css';
-
 import { replaceNumberToDot } from '../utils/index';
 
 export const BasicCard = ({ name, expireDate, cardName, cardNumber, size = 'empty', nickName }) => {
