@@ -18,22 +18,37 @@ import {
   CVC_PROPERTYS,
 } from './constants'
 import { CARD } from 'styles/colors'
-import { useFieldSet, useInput } from 'hooks'
+import { useInput } from 'hooks/useInput'
 import { PageProps } from '../../type'
+import { limitRangeOfMonthAndYear, limitRangeOfSerialNums } from './helpers'
 import * as S from './style'
 
 export default function CardAddPage({ cards, setPage, setCards }: PageProps) {
-  const [serialNums, setSerialNums] = useFieldSet(SERIAL_NUMS)
-  const [expiredDate, setExpiredDate] = useFieldSet(EXPIRED_DATE)
+  const [serialNums, setSerialNums] = useState<typeof SERIAL_NUMS>(SERIAL_NUMS)
+  const [expiredDate, setExpiredDate] = useState<typeof EXPIRED_DATE>(EXPIRED_DATE)
   const [ownerName, setOwnerName] = useInput()
   const [cvc, setCvc] = useInput()
-  const [password, setPassword] = useFieldSet(PASSWORD)
+  const [password, setPassword] = useState<typeof PASSWORD>(PASSWORD)
   const [type, setType] = useState<string>('')
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
   useEffect(() => {
     if (Object.keys(CARD).includes(type)) completeFormSubmit()
   }, [type])
+
+  const handleSerialNums = ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) => {
+    const filteredValue = limitRangeOfSerialNums(name, value)
+    setSerialNums({ ...serialNums, [name]: filteredValue })
+  }
+
+  const handleExpiredDate = ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) => {
+    const filteredValue = limitRangeOfMonthAndYear(name, value)
+    setExpiredDate({ ...expiredDate, [name]: filteredValue })
+  }
+
+  const handlePassword = ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword({ ...password, [name]: value })
+  }
 
   //prettier-ignore
   const handleType = ({ target }: React.MouseEvent<HTMLDivElement>) => {
@@ -77,8 +92,8 @@ export default function CardAddPage({ cards, setPage, setCards }: PageProps) {
         </S.DigitalCardBlock>
 
         <S.Form onSubmit={handleSubmit}>
-          <CardSerialNumsFieldSet serialNums={serialNums} onChange={setSerialNums} />
-          <CardExpiredDateFieldSet expiredDate={expiredDate} onChange={setExpiredDate} />
+          <CardSerialNumsFieldSet serialNums={serialNums} onChange={handleSerialNums} />
+          <CardExpiredDateFieldSet expiredDate={expiredDate} onChange={handleExpiredDate} />
           <CardInput
             {...USER_NAME_PROPERTYS}
             value={ownerName}
@@ -91,7 +106,7 @@ export default function CardAddPage({ cards, setPage, setCards }: PageProps) {
               <IconCircleQuestion />
             </S.IconBlock>
           </S.CardInputCVCBlock>
-          <CardPasswordFieldSet password={password} onChange={setPassword} />
+          <CardPasswordFieldSet password={password} onChange={handlePassword} />
 
           <S.ButtonBlock>
             <Button type="submit">다음</Button>

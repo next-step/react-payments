@@ -19,9 +19,23 @@ export default function CardSerialNumsFieldSet({ serialNums, onChange }: Props) 
           <S.Divider> - </S.Divider>
           <S.Input type="number" name={second} value={secondVal} onChange={onChange} required />
           <S.Divider> - </S.Divider>
-          <S.Input type="password" name={third} value={thirdVal} onChange={onChange} required />
+          <S.Input
+            type="password"
+            name={third}
+            value={thirdVal}
+            onChange={onChange}
+            maxLength={4}
+            required
+          />
           <S.Divider> - </S.Divider>
-          <S.Input type="password" name={fourth} value={fourthVal} onChange={onChange} required />
+          <S.Input
+            type="password"
+            name={fourth}
+            value={fourthVal}
+            onChange={onChange}
+            maxLength={4}
+            required
+          />
         </S.Wrapper>
       </FieldSet>
     </S.Box>

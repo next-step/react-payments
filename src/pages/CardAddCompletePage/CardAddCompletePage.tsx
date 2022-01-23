@@ -1,7 +1,7 @@
 import { Button } from 'components/Button'
 import { DigitalCard } from 'components/Card'
 import { Label } from 'components/Form/Input'
-import { useInput } from 'hooks'
+import { useInput } from 'hooks/useInput'
 import { PageProps, Card } from '../../type'
 import { PAGES } from '../../constants'
 import * as S from './style'

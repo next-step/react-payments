@@ -26,7 +26,7 @@ export const USER_NAME_PROPERTYS = Object.freeze({
 })
 
 export const CVC_PROPERTYS = Object.freeze({
-  labelName: "보안 코드(CVC/CVV)",
+  labelName: '보안 코드(CVC/CVV)',
   id: 'cvc',
   name: 'cvc',
   type: 'password',
