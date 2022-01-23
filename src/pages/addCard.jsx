@@ -152,14 +152,38 @@ function AddCard() {
         </div>
         <div className="input-container">
           <span className="input-title">보안코드(CVC/CVV)</span>
-          <input className="input-basic w-25" type="password" />
+          <input
+            className="input-basic w-25"
+            type="password"
+            onKeyUp={(event) => checkNumber(event)}
+          />
         </div>
         <div className="input-container">
           <span className="input-title">카드 비밀번호</span>
-          <input className="input-basic w-15" type="password" />
-          <input className="input-basic w-15" type="password" />
-          <input className="input-basic w-15" type="password" />
-          <input className="input-basic w-15" type="password" />
+          <input
+            className="input-basic w-15"
+            type="password"
+            onKeyUp={(event) => checkNumber(event)}
+            maxLength="1"
+          />
+          <input
+            className="input-basic w-15"
+            type="password"
+            onKeyUp={(event) => checkNumber(event)}
+            maxLength="1"
+          />
+          <input
+            className="input-basic w-15"
+            type="password"
+            value="0"
+            disabled
+          />
+          <input
+            className="input-basic w-15"
+            type="password"
+            value="0"
+            disabled
+          />
         </div>
         <div className="button-box">
           <span className="button-text">다음</span>
