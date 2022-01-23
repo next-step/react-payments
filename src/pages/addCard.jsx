@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Button from "../stories/Button";
 
 function AddCard() {
   const [cardNumberSeries, setCardNumberSeries] = useState("");
@@ -207,7 +208,7 @@ function AddCard() {
             to="complete"
             style={{ textDecoration: "none", color: "black" }}
           >
-            <span className="button-text">다음</span>
+            <Button text="다음" />
           </Link>
         </div>
       </div>
