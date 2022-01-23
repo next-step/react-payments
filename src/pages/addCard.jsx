@@ -44,7 +44,6 @@ function AddCard() {
   };
 
   const handleMonth = (event) => {
-    console.log(event.target.value.length);
     checkNumber(event);
     if (
       !(event.target.value >= 0 && event.target.value <= 12) ||
