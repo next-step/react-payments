@@ -8,7 +8,7 @@ import * as S from './style'
 
 export default function CardAddCompletePage({ cards, setCards, setPage }: PageProps) {
   const [nickName, setNickName] = useState<string>('')
-  const { type, serialNums, ownerName, expiredDate } = cards[cards.length - 1]
+  const lastCard = cards[cards.length - 1]
 
   const handleChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     setNickName(value)
@@ -19,9 +19,9 @@ export default function CardAddCompletePage({ cards, setCards, setPage }: PagePr
     setCards(updateCardNickName(cards))
   }
   const updateCardNickName = (cards: Card[]): Card[] => {
+    const { serialNums } = lastCard
     return cards.map((card, i) => {
-      if (cards.length - 1 === i)
-        return { type, serialNums: { ...serialNums }, ownerName, expiredDate, nickName }
+      if (cards.length - 1 === i) return { ...lastCard, serialNums: { ...serialNums }, nickName }
       return card
     })
   }
@@ -32,7 +32,7 @@ export default function CardAddCompletePage({ cards, setCards, setPage }: PagePr
         <S.Title>카드 등록이 완료되었습니다</S.Title>
 
         <S.Form onSubmit={handleSubmit}>
-          <DigitalCard big {...cards[cards.length - 1]} />
+          <DigitalCard big {...lastCard} />
           <Label id="nickName">
             <S.Input {...NICKNAME_PROPERTYS} value={nickName} onChange={handleChange} />
           </Label>
