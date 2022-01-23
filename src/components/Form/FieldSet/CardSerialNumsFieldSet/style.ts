@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { MINT, CARD_INPUT_BACKGROUND as BACKGROUND } from 'style/colors'
+import { MINT, CARD_INPUT_BACKGROUND as BACKGROUND } from 'styles/colors'
 
 export const Box = styled.div`
   padding: 12px 0;
@@ -10,7 +10,7 @@ const COLOR = css`
   color: ${MINT};
 `
 
-export const Container = styled.div`
+export const Wrapper = styled.div`
   width: 100%;
   padding: 8px 0px;
   margin-top: 4px;

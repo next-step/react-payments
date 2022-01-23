@@ -1,17 +1,17 @@
 import styled, { css } from 'styled-components'
-import { CARD } from 'style/colors'
+import { CARD } from 'styles/colors'
 
-export const Box = styled.div<{ type: string }>`
+export const Box = styled.div<{ bgColor: string }>`
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   font-size: 14px;
   border-radius: 8px;
-  ${({ type }) =>
-    type &&
+  ${({ bgColor }) =>
+    bgColor &&
     css`
-      background: ${CARD[type]};
+      background: ${CARD[bgColor]};
     `}
 `
 export const Type = styled.span`
@@ -32,11 +32,12 @@ export const SerialNums = styled.span`
   padding: 8px 0;
 `
 
-export const InputWrapper = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   width: 100%;
   padding: 0 12px;
 `
+
 export const Input = styled.input`
   width: 20%;
   text-align: center;

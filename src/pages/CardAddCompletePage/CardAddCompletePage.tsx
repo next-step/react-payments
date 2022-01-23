@@ -1,18 +1,15 @@
-import { useState } from 'react'
 import { Button } from 'components/Button'
 import { DigitalCard } from 'components/Card'
 import { Label } from 'components/Form/Input'
+import { useInput } from 'hooks'
 import { PageProps, Card } from '../../type'
 import { PAGES } from '../../constants'
 import * as S from './style'
 
 export default function CardAddCompletePage({ cards, setCards, setPage }: PageProps) {
-  const [nickName, setNickName] = useState<string>('')
+  const [nickName, setNickName] = useInput()
   const lastCard = cards[cards.length - 1]
 
-  const handleChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
-    setNickName(value)
-  }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setPage(PAGES.CARD_LIST)
@@ -34,7 +31,7 @@ export default function CardAddCompletePage({ cards, setCards, setPage }: PagePr
         <S.Form onSubmit={handleSubmit}>
           <DigitalCard big {...lastCard} />
           <Label id="nickName">
-            <S.Input {...NICKNAME_PROPERTYS} value={nickName} onChange={handleChange} />
+            <S.Input {...NICKNAME_PROPERTYS} value={nickName} onChange={setNickName} />
           </Label>
           <S.ButtonBlock>
             <Button type="submit">확인</Button>

@@ -1,6 +1,6 @@
 import FieldSet from '../FieldSet'
 import { CircleDot } from 'components/Icons/Dot'
-import { MINT } from 'style/colors'
+import { MINT } from 'styles/colors'
 import { PASSWORD } from 'pages/CardAddPage/constants'
 import * as S from './style'
 
@@ -14,7 +14,7 @@ export default function CardPasswordFieldSet({ password, onChange }: Props) {
   const [firstVal, secondVal] = Object.values(password)
   return (
     <FieldSet legend="카드 비밀번호">
-      <S.Container>
+      <S.Box>
         <S.Input
           type="password"
           name={first}
@@ -33,7 +33,7 @@ export default function CardPasswordFieldSet({ password, onChange }: Props) {
         />
         <CircleDot bgColor={MINT} />
         <CircleDot bgColor={MINT} />
-      </S.Container>
+      </S.Box>
     </FieldSet>
   )
 }

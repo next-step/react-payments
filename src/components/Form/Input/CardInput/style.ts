@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { MINT, CARD_INPUT_BACKGROUND as BACKGROUND } from 'style/colors'
+import { MINT, CARD_INPUT_BACKGROUND as BACKGROUND } from 'styles/colors'
 
 export const Box = styled.div`
   width: 100%;

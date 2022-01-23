@@ -1,7 +1,5 @@
-import React from 'react'
 import Label from '../Label'
 import * as S from './style'
-
 import { LabelProps } from '../Label'
 
 interface Props extends LabelProps {

@@ -17,8 +17,8 @@ import {
   USER_NAME_PROPERTYS,
   CVC_PROPERTYS,
 } from './constants'
-import { CARD } from 'style/colors'
-import { useFieldSet, useInput } from './hooks'
+import { CARD } from 'styles/colors'
+import { useFieldSet, useInput } from 'hooks'
 import { PageProps } from '../../type'
 import * as S from './style'
 

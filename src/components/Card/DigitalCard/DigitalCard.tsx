@@ -15,20 +15,20 @@ export function DigitalCard({ big = false, type, serialNums, ownerName, expiredD
   const [mm, yy] = Object.values(expiredDate)
   return (
     <Card big={big}>
-      <S.Box type={type}>
+      <S.Box bgColor={type}>
         <S.Type>{type && `${type}카드`}</S.Type>
         <S.Chip />
         <S.SerialNums>
-          <S.InputWrapper>
+          <S.Wrapper>
             <S.Input value={first} readOnly />
             <S.Input value={second} readOnly />
             <S.Input type="password" value={third} readOnly />
             <S.Input type="password" value={fourth} readOnly />
-          </S.InputWrapper>
+          </S.Wrapper>
         </S.SerialNums>
         <S.Info>
           <S.OwnerName>{ownerName ? ownerName : 'NAME'}</S.OwnerName>
-          <S.ExpiredDate>{mm ? `${mm}${yy}` : 'MM/YY'}</S.ExpiredDate>
+          <S.ExpiredDate>{mm ? `${mm} / ${yy}` : 'MM/YY'}</S.ExpiredDate>
         </S.Info>
       </S.Box>
     </Card>

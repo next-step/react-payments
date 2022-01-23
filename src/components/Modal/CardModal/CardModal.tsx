@@ -1,5 +1,5 @@
-import { useState, Fragment } from 'react'
-import { CARD } from 'style/colors'
+import { Fragment } from 'react'
+import { CARD } from 'styles/colors'
 import { CircleDot } from 'components/Icons/Dot'
 import Modal from '../Modal'
 import * as S from './style'
