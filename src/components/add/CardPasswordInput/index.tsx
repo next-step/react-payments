@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Card } from 'src/types/card'
 
 import { BasicInput, Input, InputTitle, InputWarning } from '$components/common/Input'
+import { PASSWORD_EACH_LENGTH } from '$constants/card'
 import { checkLength, checkNumberString } from '$utils/validate'
 
 interface CardPasswordInputProps {
@@ -15,7 +16,7 @@ function CardPasswordInput({ cardPassword, setCardPassword }: CardPasswordInputP
   const [showsWarning, setWarning] = useState(false)
 
   const isValidInput = useCallback((value) => {
-    if (checkLength(value, 0, 1) && checkNumberString(value)) {
+    if (checkLength(value, PASSWORD_EACH_LENGTH.MIN, PASSWORD_EACH_LENGTH.MAX) && checkNumberString(value)) {
       setWarning(false)
       return true
     }

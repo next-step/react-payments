@@ -4,8 +4,9 @@
     "paths": {
       "$pages/*": ["src/pages/*"],
       "$components/*": ["src/components/*"],
+      "$constants/*": ["src/constants/*"],
       "$utils/*": ["src/utils/*"],
-      "$styles/*": ["src/styles/*"]
+      "$styles/*": ["src/styles/*"],
     }
   }
 }

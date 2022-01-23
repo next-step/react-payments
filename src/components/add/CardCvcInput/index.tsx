@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Card } from 'src/types/card'
 
 import { BasicInput, Input, InputTitle, InputWarning } from '$components/common/Input'
+import { CVC_LENGTH } from '$constants/card'
 import { checkLength, checkNumberString } from '$utils/validate'
 
 interface CardCvcInputProps {
@@ -14,7 +15,7 @@ function CardCvcInput({ cardCvc, setCardCvc }: CardCvcInputProps) {
   const [showsWarning, setWarning] = useState(false)
 
   const isValidInput = useCallback((value) => {
-    if (checkLength(value, 0, 3) && checkNumberString(value)) {
+    if (checkLength(value, CVC_LENGTH.MIN, CVC_LENGTH.MAX) && checkNumberString(value)) {
       setWarning(false)
       return true
     }

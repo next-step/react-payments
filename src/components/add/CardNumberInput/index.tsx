@@ -2,6 +2,7 @@ import { createRef, useCallback, useEffect, useState } from 'react'
 import { Card } from 'src/types/card'
 
 import { BasicInput, Input, InputBox, InputTitle, InputWarning } from '$components/common/Input'
+import { NUMBER_EACH_LENGTH } from '$constants/card'
 import { checkLength, checkNumberString } from '$utils/validate'
 
 interface CardNumberInputProps {
@@ -22,7 +23,7 @@ function CardNumberInput({ cardNumber, setCardNumber }: CardNumberInputProps) {
   const [showsWarning, setWarning] = useState(false)
 
   const isValidInput = useCallback((value) => {
-    if (checkLength(value, 0, 4) && checkNumberString(value)) {
+    if (checkLength(value, NUMBER_EACH_LENGTH.MIN, NUMBER_EACH_LENGTH.MAX) && checkNumberString(value)) {
       setWarning(false)
       return true
     }
