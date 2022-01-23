@@ -12,11 +12,13 @@ export const Header = styled.header`
 
 export const Section = styled.section`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 `
 
 export const AlignCenter = styled.div`
-  height: 100%;
+  min-height: 130px;
   display: flex;
   align-items: center;
   justify-content: center;

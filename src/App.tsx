@@ -4,13 +4,14 @@ import CardAddPage from './pages/CardAddPage'
 import CardListPage from './pages/CardListPage'
 import CardAddCompletePage from 'pages/CardAddCompletePage'
 import { PAGES } from './constants'
-import { PageProps } from 'type'
+import { PageProps, Card } from 'type'
 
 function App() {
-  const [page, setPage] = useState(PAGES.CARD_ADD)
+  const [page, setPage] = useState(PAGES.CARD_LIST)
+  const [cards, setCards] = useState<Card[]>([])
   return (
     <S.Root>
-      <S.App>{cardPages[page]({ setPage })}</S.App>
+      <S.App>{cardPages[page]({ cards, setPage, setCards })}</S.App>
     </S.Root>
   )
 }

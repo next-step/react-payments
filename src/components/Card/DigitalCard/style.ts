@@ -1,11 +1,18 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { CARD } from 'style/colors'
 
-export const Box = styled.div`
+export const Box = styled.div<{ type: string }>`
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   font-size: 14px;
   border-radius: 8px;
+  ${({ type }) =>
+    type &&
+    css`
+      background: ${CARD[type]};
+    `}
 `
 export const Type = styled.span`
   padding: 12px 16px;
@@ -46,8 +53,8 @@ export const Info = styled.div`
   justify-content: space-between;
 `
 
-export const UserName = styled.span`
+export const OwnerName = styled.span`
   padding: 0 16px;
 `
 
-export const ExpiredDate = styled(UserName)``
+export const ExpiredDate = styled(OwnerName)``

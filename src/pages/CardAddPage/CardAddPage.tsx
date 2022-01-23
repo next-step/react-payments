@@ -9,14 +9,11 @@ import { PAGES } from '../../constants'
 import { SERIAL_NUMS, PASSWORD, SerialNums, Password } from './constants'
 import { CARD } from 'style/colors'
 import * as S from './style'
-
-interface Props {
-  setPage: React.Dispatch<React.SetStateAction<string>>
-}
+import { PageProps } from '../../type'
 
 type ReactInputEvent = React.ChangeEvent<HTMLInputElement>
 
-export default function CardAddPage({ setPage }: Props) {
+export default function CardAddPage({ cards, setPage, setCards }: PageProps) {
   const [serialNums, setSerialNums] = useState<SerialNums>(SERIAL_NUMS)
   const [expiredDate, setExpiredDate] = useState<string>('')
   const [ownerName, setOwnerName] = useState<string>('')
@@ -26,7 +23,7 @@ export default function CardAddPage({ setPage }: Props) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
 
   useEffect(() => {
-    if (Object.keys(CARD).includes(type)) setPage(PAGES.CARD_ADD_COMPLETE)
+    if (Object.keys(CARD).includes(type)) completeFormSubmit()
   }, [type])
 
   const handleSerialNums = ({ target: { name, value } }: ReactInputEvent) => {
@@ -51,7 +48,15 @@ export default function CardAddPage({ setPage }: Props) {
   }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!type) setIsModalOpen(true)
+    if (!type) {
+      setIsModalOpen(true)
+      return
+    }
+    completeFormSubmit()
+  }
+  const completeFormSubmit = () => {
+    setCards([...cards, { type, serialNums, ownerName, expiredDate, nickName: '' }])
+    setPage(PAGES.CARD_ADD_COMPLETE)
   }
 
   return (
@@ -67,7 +72,7 @@ export default function CardAddPage({ setPage }: Props) {
         <DigitalCard
           type={type}
           serialNums={serialNums}
-          userName={ownerName}
+          ownerName={ownerName}
           expiredDate={expiredDate}
         />
       </S.FlexRowCenter>

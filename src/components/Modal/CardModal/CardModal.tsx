@@ -11,8 +11,6 @@ interface Props {
 }
 
 export default function CardModal({ isOpen, openModal, selectCard }: Props) {
-  // const [isClose, setIsClose] = useState(close)
-
   return (
     <Modal isOpen={isOpen}>
       <S.Background>
