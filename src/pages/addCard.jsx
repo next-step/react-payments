@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Title from "../stories/Title";
 import Button from "../stories/Button";
 import Input from "../stories/Input";
 
@@ -71,12 +72,12 @@ function AddCard() {
   return (
     <div className="root">
       <div className="app">
-        <h2 className="page-title">
+        <Title>
           <Link to="/list" style={{ textDecoration: "none", color: "black" }}>
             &lt;&nbsp;
           </Link>
           카드 추가
-        </h2>
+        </Title>
         <div className="card-box">
           <div className="empty-card">
             <div className="card-top"></div>
