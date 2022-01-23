@@ -18,7 +18,6 @@ export default function CardAddCompletePage({ cards, setCards, setPage }: PagePr
     setPage(PAGES.CARD_LIST)
     setCards(updateCardNickName(cards))
   }
-
   const updateCardNickName = (cards: Card[]): Card[] => {
     return cards.map((card, i) => {
       if (cards.length - 1 === i)
@@ -26,34 +25,30 @@ export default function CardAddCompletePage({ cards, setCards, setPage }: PagePr
       return card
     })
   }
+
   return (
     <S.Main>
       <S.Section>
         <S.Title>카드 등록이 완료되었습니다</S.Title>
+
         <S.Form onSubmit={handleSubmit}>
-          <DigitalCard
-            big
-            type={type}
-            serialNums={serialNums}
-            ownerName={ownerName}
-            expiredDate={expiredDate}
-          />
+          <DigitalCard big {...cards[cards.length - 1]} />
           <Label id="nickName">
-            <S.Input
-              id="nickName"
-              name="nickName"
-              type="text"
-              value={nickName}
-              onChange={handleChange}
-              maxLength={30}
-              required
-            />
+            <S.Input {...NICKNAME_PROPERTYS} value={nickName} onChange={handleChange} />
           </Label>
-          <S.ButtonWrapper>
+          <S.ButtonBlock>
             <Button type="submit">확인</Button>
-          </S.ButtonWrapper>
+          </S.ButtonBlock>
         </S.Form>
       </S.Section>
     </S.Main>
   )
+}
+
+const NICKNAME_PROPERTYS = {
+  id: 'nickName',
+  name: 'nickName',
+  type: 'text',
+  maxLength: 30,
+  required: true,
 }

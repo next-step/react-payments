@@ -29,7 +29,7 @@ export const Input = styled.input`
   outline: none;
 `
 
-export const ButtonWrapper = styled.div`
+export const ButtonBlock = styled.div`
   position: absolute;
   bottom: 16px;
   right: 25px;
