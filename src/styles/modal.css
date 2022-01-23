@@ -1,6 +1,6 @@
 .modal {
   width: 375px;
-  height: 220px;
+  min-height: 220px;
 
   border-radius: 5px 5px 15px 15px;
 
@@ -11,6 +11,8 @@
 
   background: #fff;
   z-index: 10;
+  overflow: auto;
+  padding: 15px 0;
 }
 
 .modal-dimmed {

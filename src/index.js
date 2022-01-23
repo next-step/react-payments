@@ -4,6 +4,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./styles/index.css";
 
+const CTT = React.createContext();
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
