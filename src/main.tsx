@@ -6,6 +6,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 import CreditCards from "./pages/credit-card/List";
 import NewCreditCard from "./pages/credit-card/New";
@@ -15,16 +16,18 @@ import "./index.css";
 
 ReactDOM.render(
   <StrictMode>
-    <Router>
-      <Routes>
-        <Route path="credit-card">
-          <Route index element={<CreditCards />} />
-          <Route path="new" element={<NewCreditCard />} />
-          <Route path="registered" element={<RegisteredCreditCard />} />
-        </Route>
-        <Route path="*" element={<Navigate to="credit-card" />}></Route>
-      </Routes>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <Routes>
+          <Route path="credit-card">
+            <Route index element={<CreditCards />} />
+            <Route path="new" element={<NewCreditCard />} />
+            <Route path="registered" element={<RegisteredCreditCard />} />
+          </Route>
+          <Route path="*" element={<Navigate to="credit-card" />}></Route>
+        </Routes>
+      </Router>
+    </HelmetProvider>
   </StrictMode>,
   document.getElementById("root")
 );

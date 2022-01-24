@@ -1,4 +1,6 @@
+import { Helmet } from "react-helmet-async";
 import cx from "classnames";
+import { title } from "../../constants";
 import SingleLayout, { TitleBar } from "../../layotus/Single";
 import Card from "../../components/Card";
 import Input from "../../components/Input";
@@ -14,6 +16,9 @@ function NewCreditCard() {
 
   return (
     <SingleLayout renderHeader={renderHeader}>
+      <Helmet>
+        <title>카드 추가 - {title}</title>
+      </Helmet>
       <form>
         <div className="my-10 text-center">
           <Card />
