@@ -48,7 +48,7 @@ const App = () => {
     return (
         <Routes>
             {pages.map((page) => (
-                <Route key={page.path} path={page.path} element={page.component} />
+                <Route key={page.path} path={process.env.PUBLIC_URL + page.path} element={page.component} />
             ))}
         </Routes>
     );
