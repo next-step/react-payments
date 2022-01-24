@@ -1,4 +1,4 @@
-import { CardNumber } from 'models/page.model';
+import { CardNumber } from 'models/card.model';
 import React from 'react';
 import { replaceCardNumToDot } from 'utils';
 import { checkHasCardNumber } from 'utils/validation';

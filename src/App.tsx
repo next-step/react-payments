@@ -3,10 +3,12 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { MAX_LENGTH } from 'utils/validation';
 import { CardAddPage, CardAddCompletedPage, CardListPage } from 'pages/index';
 import {
+  CardProps,
   initialCardNumValue,
   initialCardPasswordValue,
   initialExpiredDateValue,
 } from 'models/card.model';
+import { CardListContext, CurrentCardContext } from 'utils/cardsUtils';
 
 interface PagesModel {
   path: string;
@@ -15,6 +17,9 @@ interface PagesModel {
 
 const App = () => {
   const location = useLocation();
+
+  const [cardList, setCardList] = useState<CardProps[]>([]);
+
   const [cardCompany, setCardCompany] = useState('');
   const [expiredDate, setExpiredDate] = useState(initialExpiredDateValue);
   const [cardNum, setCardNum] = useState(initialCardNumValue);
@@ -22,18 +27,23 @@ const App = () => {
   const [CVC, setCVC] = useState('');
   const [cardPassword, setCardPassword] = useState(initialCardPasswordValue);
   const [cardNickname, setCardNickname] = useState('');
+  const [createdAt, setCreatedAt] = useState<Date>();
 
   useEffect(() => {
     if (location.state === 'reset') {
-      setCardCompany('');
-      setExpiredDate(initialExpiredDateValue);
-      setCardNum(initialCardNumValue);
-      setUserName('');
-      setCVC('');
-      setCardPassword(initialCardPasswordValue);
-      setCardNickname('');
+      resetCard();
     }
-  }, [location]);
+  }, [location.state]);
+
+  const resetCard = () => {
+    setCardCompany('');
+    setExpiredDate(initialExpiredDateValue);
+    setCardNum(initialCardNumValue);
+    setUserName('');
+    setCVC('');
+    setCardPassword(initialCardPasswordValue);
+    setCardNickname('');
+  };
 
   // TODO: 시간 될 때 카드사 자동 추정 기능 추가 예정
   const updateCardCompany = (name: string) => {
@@ -116,61 +126,103 @@ const App = () => {
   );
 
   const updateCardNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardNickname(e.target.value);
+    const { value } = e.target;
+    if (value.length > MAX_LENGTH.CARD_NICKNAME) {
+      setCardNickname(value.substring(0, MAX_LENGTH.CARD_NICKNAME));
+      return;
+    }
+    setCardNickname(value);
+  };
+
+  const setDefaultCardNickname = () => {
+    setCardNickname('국민카드');
+  };
+
+  const addCard = () => {
+    setCardList([
+      ...cardList,
+      {
+        cardNum,
+        userName,
+        CVC,
+        cardPassword,
+        expiredDate,
+        cardNickname,
+        cardCompany,
+        createdAt: new Date(),
+      },
+    ]);
+  };
+
+  const setCard = (currentCard: CardProps) => {
+    setCVC(currentCard.CVC);
+    setCardCompany(currentCard.cardCompany || '');
+    setCardNickname(currentCard.cardNickname);
+    setUserName(currentCard.userName);
+    setExpiredDate(currentCard.expiredDate);
+    setCardPassword(currentCard.cardPassword);
+    setCardNum(currentCard.cardNum);
+    setCardPassword(currentCard.cardPassword);
+    setCreatedAt(currentCard.createdAt);
+  };
+
+  const deleteCard = (currentCard: CardProps) => {
+    const remainCards = cardList.filter(
+      (card) => card.createdAt?.getTime() !== currentCard.createdAt?.getTime(),
+    );
+    setCardList(remainCards);
   };
 
   const pages: PagesModel[] = [
     {
       path: '/',
-      element: (
-        <CardAddPage
-          cardCompany={cardCompany}
-          expiredDate={expiredDate}
-          cardNum={cardNum}
-          userName={userName}
-          CVC={CVC}
-          cardPassword={cardPassword}
-          updateCardNumber={updateCardNumber}
-          updateExpiredDate={updateExpiredDate}
-          updateUserName={updateUserName}
-          updateCVC={updateCVC}
-          updateCardPassword={updateCardPassword}
-        />
-      ),
+      element: <CardAddPage />,
     },
     {
       path: '/completed',
-      element: (
-        <CardAddCompletedPage
-          cardCompany={cardCompany}
-          expiredDate={expiredDate}
-          cardNum={cardNum}
-          userName={userName}
-          cardNickname={cardNickname}
-          updateCardNickname={updateCardNickname}
-        />
-      ),
+      element: <CardAddCompletedPage />,
     },
     {
       path: '/list',
-      element: (
-        <CardListPage
-          cardCompany={cardCompany}
-          expiredDate={expiredDate}
-          cardNum={cardNum}
-          userName={userName}
-          cardNickname={cardNickname}
-        />
-      ),
+      element: <CardListPage />,
     },
   ];
 
   return (
-    <Routes>
-      {pages.map((page) => (
-        <Route key={page.path} path={page.path} element={page.element} />
-      ))}
-    </Routes>
+    <CardListContext.Provider value={cardList}>
+      <CurrentCardContext.Provider
+        value={{
+          card: {
+            cardNum,
+            userName,
+            CVC,
+            cardPassword,
+            expiredDate,
+            cardNickname,
+            cardCompany,
+            createdAt,
+          },
+          reset: resetCard,
+          setCard,
+          updateCVC,
+          updateCardCompany,
+          updateCardNickname,
+          updateCardNumber,
+          updateCardPassword,
+          updateExpiredDate,
+          updateUserName,
+          setDefaultCardNickname,
+          addCard,
+          deleteCard,
+        }}
+      >
+        <Routes>
+          {pages.map((page) => (
+            <Route key={page.path} path={page.path} element={page.element} />
+          ))}
+        </Routes>
+      </CurrentCardContext.Provider>
+    </CardListContext.Provider>
   );
 };
 
