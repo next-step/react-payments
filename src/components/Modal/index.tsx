@@ -58,6 +58,8 @@ const ModalEl = styled.div`
   width: 100%;
   height: 220px;
   margin-top: auto;
+  padding: 0 0 calc(constant(safe-area-inset-bottom) + 100px);
+  padding: 0 0 calc(env(safe-area-inset-bottom) + 100px);
 
   border-radius: 5px 5px 0 0;
 

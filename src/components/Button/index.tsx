@@ -23,6 +23,7 @@ const Button: VFC<
 const ButtonEl = styled.button`
   background: transparent;
   cursor: pointer;
+  color: #383838;
 `;
 
 export default Button;
