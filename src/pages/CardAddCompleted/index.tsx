@@ -6,13 +6,14 @@ import { Root, PageTitle, FlexCenter, App } from 'components/UI';
 import { Card } from 'components/index';
 import { CurrentCardContext } from 'utils/cardsUtils';
 
-const CardAddCompletedPage: React.VFC = () => {
+const CardAddCompletedPage: React.VFC<{
+  nicknameRef: React.RefObject<HTMLInputElement>;
+}> = ({ nicknameRef }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const currentCard = useContext(CurrentCardContext);
-  const { updateCardNickname, addCard, setDefaultCardNickname, deleteCard } =
-    currentCard;
+  const { addCard, deleteCard } = currentCard;
   const { cardNum, userName, expiredDate, cardCompany, cardNickname } =
     currentCard.card;
 
@@ -29,13 +30,8 @@ const CardAddCompletedPage: React.VFC = () => {
   };
 
   const goToCardListPage = () => {
-    if (cardNickname) {
-      if (cardNickname.length === 0) {
-        setDefaultCardNickname();
-      }
-      addCard();
-      navigate('/list');
-    }
+    addCard();
+    navigate('/list');
   };
 
   const deleteCurrentCard = () => {
@@ -62,8 +58,7 @@ const CardAddCompletedPage: React.VFC = () => {
             width={75}
             type="text"
             placeholder="카드의 별칭 (선택)"
-            value={cardNickname}
-            onChange={updateCardNickname}
+            ref={nicknameRef}
           />
         </InputContainer>
         <ButtonBox mt={50}>

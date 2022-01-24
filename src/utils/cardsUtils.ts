@@ -16,8 +16,6 @@ interface CurrentCardProps {
   updateUserName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   updateCVC: (e: React.ChangeEvent<HTMLInputElement>) => void;
   updateCardPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  updateCardNickname: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  setDefaultCardNickname: () => void;
   addCard: () => void;
   deleteCard: (card: CardProps) => void;
 }
@@ -39,11 +37,9 @@ export const CurrentCardContext = createContext<CurrentCardProps>({
   updateCardCompany: () => {},
   updateCardNumber: () => {},
   updateCVC: () => {},
-  updateCardNickname: () => {},
   updateCardPassword: () => {},
   updateExpiredDate: () => {},
   updateUserName: () => {},
-  setDefaultCardNickname: () => {},
   addCard: () => {},
   deleteCard: () => {},
 });

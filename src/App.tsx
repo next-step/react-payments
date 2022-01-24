@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { MAX_LENGTH } from 'utils/validation';
 import { CardAddPage, CardAddCompletedPage, CardListPage } from 'pages/index';
@@ -28,6 +28,8 @@ const App = () => {
   const [cardPassword, setCardPassword] = useState(initialCardPasswordValue);
   const [cardNickname, setCardNickname] = useState('');
   const [createdAt, setCreatedAt] = useState<Date>();
+
+  const nicknameRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (location.state === 'reset') {
@@ -125,17 +127,14 @@ const App = () => {
     [cardPassword],
   );
 
-  const updateCardNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    if (value.length > MAX_LENGTH.CARD_NICKNAME) {
-      setCardNickname(value.substring(0, MAX_LENGTH.CARD_NICKNAME));
-      return;
+  const updateCardNickname = (nickname: string) => {
+    if (nickname.length === 0) {
+      return '국민카드';
     }
-    setCardNickname(value);
-  };
-
-  const setDefaultCardNickname = () => {
-    setCardNickname('국민카드');
+    if (nickname.length > MAX_LENGTH.CARD_NICKNAME) {
+      return nickname.substring(0, MAX_LENGTH.CARD_NICKNAME);
+    }
+    return nickname;
   };
 
   const addCard = () => {
@@ -147,8 +146,8 @@ const App = () => {
         CVC,
         cardPassword,
         expiredDate,
-        cardNickname,
-        cardCompany,
+        cardNickname: updateCardNickname(nicknameRef.current?.value || ''),
+        cardCompany: cardCompany || '국민카드',
         createdAt: new Date(),
       },
     ]);
@@ -180,7 +179,7 @@ const App = () => {
     },
     {
       path: '/completed',
-      element: <CardAddCompletedPage />,
+      element: <CardAddCompletedPage nicknameRef={nicknameRef} />,
     },
     {
       path: '/list',
@@ -206,12 +205,10 @@ const App = () => {
           setCard,
           updateCVC,
           updateCardCompany,
-          updateCardNickname,
           updateCardNumber,
           updateCardPassword,
           updateExpiredDate,
           updateUserName,
-          setDefaultCardNickname,
           addCard,
           deleteCard,
         }}
