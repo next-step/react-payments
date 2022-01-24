@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const InputContainer: FC<{
   className?: string;
   title?: string;
   titleAfterNode?: React.ReactNode;
-}> = ({ title = '', titleAfterNode, children, ...others }) => {
+  isError?: boolean;
+}> = ({ title = '', titleAfterNode, children, isError, ...others }) => {
   return (
     <InputContainerEl {...others}>
       <InputLabel>
-        {title && <InputTitle>{title}</InputTitle>}
+        {title && <InputTitle isError={isError}>{title}</InputTitle>}
         {title && titleAfterNode}
       </InputLabel>
       {children}
@@ -32,6 +33,8 @@ const InputLabel = styled.label`
   margin-bottom: 4px;
 `;
 
-const InputTitle = styled.span`
-  color: #525252;
+const InputTitle = styled.span<{ isError?: boolean }>`
+  ${({ isError }) => css`
+    color: ${isError ? 'red' : '#525252'};
+  `}
 `;

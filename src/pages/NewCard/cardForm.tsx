@@ -7,6 +7,8 @@ import {
   CVC,
   PASSWORD,
   INPUT_LENGTH,
+  INPUT_INFO,
+  ERROR_MESSAGES,
 } from '@/constants/index';
 import { Input } from '@/components/Forms/Input/index';
 import InputBox from '@/components/Forms/InputBox';
@@ -14,6 +16,8 @@ import InputContainer from '@/components/Forms/InputContainer';
 import Modal from '@/components/Modal';
 import useNextFieldRef from '@/hooks/useNextFieldRef';
 import { newStateProps, changeCardStateType } from '@/pages/NewCard/type';
+import { isValueOverMaximumLength } from '@/helper/isValid';
+import useInputValidStates from '@/hooks/useInputValidStates';
 
 const CardForm = ({
   cardState,
@@ -24,16 +28,28 @@ const CardForm = ({
 }) => {
   const [isShowModal, setVisibleModal] = useState(false);
   const { nextFieldId, inputRef, setNext } = useNextFieldRef();
+  const { validState, setInputValidStates, isValidField } =
+    useInputValidStates();
+  const cardNumberFstScd = cardState[CARD_NUMBER].filter((_, i) => i < 2);
 
   useEffect(() => {
     if (
-      cardState[CARD_NUMBER].filter((_, i) => i < 2).every(
-        (v) => `${v}`.length === INPUT_LENGTH[CARD_NUMBER]
-      )
+      cardNumberFstScd.every((v) => `${v}`.length === INPUT_LENGTH[CARD_NUMBER])
     ) {
+      nextFieldId.current = null;
       setVisibleModal(!isShowModal);
     }
-  }, [cardState[CARD_NUMBER][0], cardState[CARD_NUMBER][1]]);
+  }, cardNumberFstScd);
+
+  const onCloseModal = () => {
+    setVisibleModal(!isShowModal);
+    setNext(
+      CARD_NUMBER,
+      Array.isArray(cardState[CARD_NUMBER])
+        ? cardState[CARD_NUMBER].findIndex((v) => !v)
+        : -1
+    );
+  };
 
   const onChangeHandler = ({
     currentTarget: {
@@ -44,16 +60,32 @@ const CardForm = ({
     const fieldKey = id as keyof typeof INPUT_LENGTH;
     const prevState = cardState[fieldKey];
 
-    if (INPUT_LENGTH[fieldKey] > 0 && value?.length > INPUT_LENGTH[fieldKey])
-      return;
+    if (isValueOverMaximumLength(value, fieldKey)) return;
 
-    changeCardState({
+    const newState = {
       [fieldKey]: Array.isArray(prevState)
         ? prevState.map((v, i) => (i === Number(index) ? value : v))
         : value,
-    } as newStateProps);
+    } as unknown as newStateProps;
 
-    if (value?.length === INPUT_LENGTH[fieldKey]) {
+    setInputValidStates({
+      value: value,
+      fieldKey: fieldKey as keyof typeof ERROR_MESSAGES,
+      index: Number(index),
+    });
+
+    changeCardState(newState);
+
+    if (fieldKey === CARD_NUMBER && Number(index) === 1) return;
+
+    if (
+      INPUT_INFO[fieldKey].require &&
+      isValidField({
+        value: value,
+        fieldKey: fieldKey as keyof typeof ERROR_MESSAGES,
+        index: Number(index),
+      })
+    ) {
       setNext(
         fieldKey,
         Array.isArray(prevState)
@@ -66,14 +98,17 @@ const CardForm = ({
   return (
     <>
       <form>
-        <InputContainer title='카드번호'>
+        <InputContainer
+          isError={validState[CARD_NUMBER].some((v) => v === 'invalidValue')}
+          title='카드번호'
+        >
           <InputBox>
             <Input
               type='number'
               data-index={0}
               data-id={CARD_NUMBER}
               value={cardState[CARD_NUMBER][0]}
-              pattern='^[0-9]+$'
+              pattern='/^[0-9]+$/'
               onChange={onChangeHandler}
               ref={
                 nextFieldId.current === `${CARD_NUMBER}${0}` ? inputRef : null
@@ -119,14 +154,17 @@ const CardForm = ({
             />
           </InputBox>
         </InputContainer>
-        <InputContainer title='만료일'>
+        <InputContainer
+          isError={validState[EXPIRY_DATE].some((v) => v === 'invalidValue')}
+          title='만료일'
+        >
           <InputBox className='w-50'>
             <Input
               type='number'
               data-index={0}
               data-id={EXPIRY_DATE}
               value={cardState[EXPIRY_DATE][0]}
-              pattern='^(0[1-9]|1[012])$'
+              pattern='/^(0[1-9]|1[012])$/'
               placeholder='MM'
               onChange={onChangeHandler}
               ref={
@@ -164,7 +202,10 @@ const CardForm = ({
             ref={nextFieldId.current === `${OWNER}${0}` ? inputRef : null}
           />
         </InputContainer>
-        <InputContainer title='보안코드(CVC/CVV)'>
+        <InputContainer
+          isError={validState[CVC] === 'invalidValue'}
+          title='보안코드(CVC/CVV)'
+        >
           <Input
             type='password'
             className='w-25'
@@ -177,7 +218,10 @@ const CardForm = ({
             ref={nextFieldId.current === `${CVC}${0}` ? inputRef : null}
           />
         </InputContainer>
-        <InputContainer title='카드 비밀번호'>
+        <InputContainer
+          isError={validState[PASSWORD].some((v) => v === 'invalidValue')}
+          title='카드 비밀번호'
+        >
           <Input
             type='password'
             className='w-15'
@@ -217,10 +261,7 @@ const CardForm = ({
         </InputContainer>
       </form>
       {isShowModal && (
-        <Modal
-          changeCardState={changeCardState}
-          onClose={() => setVisibleModal(!isShowModal)}
-        />
+        <Modal changeCardState={changeCardState} onClose={onCloseModal} />
       )}
     </>
   );
