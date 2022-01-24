@@ -1,12 +1,25 @@
-import { MaxLength } from "@common/constants";
-import { IUseInputState } from "@hooks/useInput";
+import { AlphabetRegex, MaxLength } from "@common/constants";
+import useInput, { IUseInputState } from "@hooks/useInput";
+import { useEffect } from "react";
+import { OnChangeInputState } from "./AddCardForm";
 
 interface CardOwnerNameInputProps {
-  ownerNameInputState: IUseInputState;
+  onChangeInputState?: OnChangeInputState;
 }
-const CardOwnerNameInput = ({
-  ownerNameInputState,
-}: CardOwnerNameInputProps) => {
+const CardOwnerNameInput = (props: CardOwnerNameInputProps) => {
+  const ownerNameInputState = useInput({
+    inputRegex: AlphabetRegex,
+  });
+
+  useEffect(() => {
+    props?.onChangeInputState?.call(null, {
+      value: ownerNameInputState.value,
+      displayValue: ownerNameInputState.value,
+      isValid: ownerNameInputState.isValid,
+      name: CardOwnerNameInput.name,
+    });
+  }, [ownerNameInputState.value]);
+
   return (
     <div className="input-container">
       <span className="input-title">
@@ -15,7 +28,7 @@ const CardOwnerNameInput = ({
         {MaxLength.OwnerNameInput})
       </span>
       <input
-        type="text"
+        type={ownerNameInputState.type}
         className="input-basic"
         maxLength={MaxLength.OwnerNameInput}
         value={ownerNameInputState.value}

@@ -31,3 +31,6 @@ export const InputType = {
 } as const;
 
 export type InputTypeAttribute = keyof typeof InputType;
+
+export const DigitRegex = /^$|^\d*$/;
+export const AlphabetRegex = /^$|^[A-Za-z]*$/;

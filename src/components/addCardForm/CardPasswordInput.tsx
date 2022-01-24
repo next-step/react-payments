@@ -1,13 +1,39 @@
-import { MaxLength } from "@common/constants";
-import { IUseInputState } from "@hooks/useInput";
+import { DigitRegex, InputType, MaxLength } from "@common/constants";
+import useInput, { IUseInputConfig, IUseInputState } from "@hooks/useInput";
+import { useEffect } from "react";
+import { OnChangeInputState } from "./AddCardForm";
 
 interface CardPasswordInputProps {
-  passwordInputStateList: IUseInputState[];
+  onChangeInputState?: OnChangeInputState;
 }
 
-const CardPasswordInput = ({
-  passwordInputStateList,
-}: CardPasswordInputProps) => {
+const CardPasswordInput = (props: CardPasswordInputProps) => {
+  const passwordInputConfig: IUseInputConfig = {
+    inputRegex: DigitRegex,
+    validator: (val) => val.length === MaxLength.CardPasswordInput,
+    type: InputType.password,
+  };
+
+  const passwordInputStateList: IUseInputState[] = [
+    useInput(passwordInputConfig),
+    useInput(passwordInputConfig),
+  ];
+
+  useEffect(
+    () => {
+      const value = passwordInputStateList
+        .map((inputState) => inputState.value)
+        .join("");
+      props?.onChangeInputState?.call(null, {
+        value,
+        displayValue: "",
+        isValid: passwordInputStateList.every((state) => state.isValid),
+        name: CardPasswordInput.name,
+      });
+    },
+    passwordInputStateList.map((inputState) => inputState.value)
+  );
+
   return (
     <div className="input-container">
       <span className="input-title">카드 비밀번호</span>

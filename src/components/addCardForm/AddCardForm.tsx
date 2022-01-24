@@ -1,61 +1,16 @@
-import { CardData, CardType, InputType, MaxLength } from "@common/constants";
+import { CardData, CardType } from "@common/constants";
 import NextBtn from "@components/button/NextBtn";
 import Card from "@components/card";
-import useInput, { IUseInputConfig, IUseInputState } from "@hooks/useInput";
-import { FormEvent, FormEventHandler } from "react";
+import { FormEvent, FormEventHandler, useState } from "react";
 import CardExpirationInput from "./CardExpirationInput";
 import CardNumberInput from "./CardNumberInput";
 import CardOwnerNameInput from "./CardOwnerNameInput";
 import CardPasswordInput from "./CardPasswordInput";
 import SecurityCodeInput from "./SecurityCodeInput";
 
+const inputStateMap = new Map<string, IInputState>();
+
 const AddCardForm = (props: AddCardFormProps) => {
-  const digitRegex = /^$|^\d*$/;
-  const alphabetRegex = /^$|^[A-Za-z]*$/;
-
-  const cardNumConfig: IUseInputConfig = {
-    inputRegex: digitRegex,
-    validator: (val) => val.length === MaxLength.CardNumberInput,
-  };
-
-  const cardNumInputStateList: IUseInputState[] = [
-    useInput(cardNumConfig),
-    useInput(cardNumConfig),
-    useInput({ ...cardNumConfig, type: InputType.password }),
-    useInput({ ...cardNumConfig, type: InputType.password }),
-  ];
-
-  const monthInputState = useInput({
-    inputRegex: digitRegex,
-    validator: (val) => +val > 0 && +val <= 12,
-  });
-
-  const yearInputState = useInput({
-    inputRegex: digitRegex,
-    validator: (val) => val.length === MaxLength.CardExpirationInput,
-  });
-
-  const passwordInputConfig: IUseInputConfig = {
-    inputRegex: digitRegex,
-    validator: (val) => val.length === MaxLength.CardPasswordInput,
-    type: InputType.password,
-  };
-
-  const passwordInputStateList: IUseInputState[] = [
-    useInput(passwordInputConfig),
-    useInput(passwordInputConfig),
-  ];
-
-  const ownerNameInputState = useInput({
-    inputRegex: alphabetRegex,
-  });
-
-  const securityCodeInputState = useInput({
-    inputRegex: digitRegex,
-    validator: (val) => val.length === MaxLength.CardSecurityCodeInput,
-    type: InputType.password,
-  });
-
   const onSubmit: FormEventHandler<HTMLFormElement> = (
     e: FormEvent<HTMLFormElement>
   ) => {
@@ -63,61 +18,49 @@ const AddCardForm = (props: AddCardFormProps) => {
     props?.onSubmit && props.onSubmit(e);
   };
 
-  const isValidForm =
-    cardNumInputStateList.every((state) => state.isValid) &&
-    monthInputState.isValid &&
-    yearInputState.isValid &&
-    passwordInputStateList.every((state) => state.isValid) &&
-    securityCodeInputState.isValid;
+  const [isValidForm, setIsValidForm] = useState(false);
+  const [cardData, setCardData] = useState<CardData>({});
 
-  console.log(`isValidForm: ${isValidForm}, cardNum: ${cardNumInputStateList.every(
-    (state) => state.isValid
-  )}
-    monthInputState: ${monthInputState.isValid} 
-    yearInputState:${yearInputState.isValid} 
-    passwordInputStateList: ${passwordInputStateList.every(
-      (state) => state.isValid
-    )}
-    securityCodeInputState: ${securityCodeInputState.isValid}
-    `);
+  const onChangeInputState: OnChangeInputState = (inputState: IInputState) => {
+    inputStateMap.set(inputState.name, { ...inputState });
 
-  const cardData: CardData = {
-    cardNumber: cardNumInputStateList
-      .map((numInputState) =>
-        numInputState.type === InputType.password
-          ? "*".repeat(numInputState.value.length)
-          : numInputState.value
-      )
-      .filter((inputVal) => inputVal.length > 0)
-      .join(" - "),
-    expired: [monthInputState.value, yearInputState.value]
-      .filter((inputVal) => inputVal.length > 0)
-      .join(" / "),
-    userName: ownerNameInputState.value,
+    const validForm = Array.from(inputStateMap.entries()).every(
+      ([key, value]) => {
+        console.log(key, value);
+        return value.isValid;
+      }
+    );
+    console.log(inputState, validForm);
+    setIsValidForm(validForm);
+
+    setCardData({
+      cardNumber: inputStateMap.get(CardNumberInput.name)?.displayValue ?? "",
+      expired: inputStateMap.get(CardExpirationInput.name)?.displayValue ?? "",
+      userName: inputStateMap.get(CardOwnerNameInput.name)?.displayValue ?? "",
+    });
   };
-  const hasCardData: boolean =
-    cardData.cardNumber!.length > 0 ||
-    cardData.expired!.length > 0 ||
-    cardData.userName!.length > 0;
 
   return (
     <form onSubmit={onSubmit} className={props.className}>
-      <Card
-        type={CardType.small}
-        cardData={hasCardData ? cardData : undefined}
-      />
-      <CardNumberInput cardNumInputStateList={cardNumInputStateList} />
-      <CardExpirationInput
-        monthInputState={monthInputState}
-        yearInputState={yearInputState}
-      />
-      <CardOwnerNameInput ownerNameInputState={ownerNameInputState} />
-      <CardPasswordInput passwordInputStateList={passwordInputStateList} />
-      <SecurityCodeInput securityCodeInputState={securityCodeInputState} />
+      <Card type={CardType.small} cardData={cardData} />
+      <CardNumberInput onChangeInputState={onChangeInputState} />
+      <CardExpirationInput onChangeInputState={onChangeInputState} />
+      <CardOwnerNameInput onChangeInputState={onChangeInputState} />
+      <CardPasswordInput onChangeInputState={onChangeInputState} />
+      <SecurityCodeInput onChangeInputState={onChangeInputState} />
       <NextBtn disabled={!isValidForm} />
     </form>
   );
 };
+
+export type OnChangeInputState = (inputState: IInputState) => void;
+
+export interface IInputState {
+  value: string;
+  displayValue: string;
+  isValid: boolean;
+  name: string;
+}
 
 export interface AddCardFormProps
   extends React.HTMLAttributes<HTMLFormElement> {}
