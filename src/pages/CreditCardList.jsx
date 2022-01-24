@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import { BasicCard, Title, EmptyCard } from '../components/index.js';
 
-const CreditCardList = ({ state, dispatch, initform }) => {
+const CreditCardList = ({ state, dispatch, initForm }) => {
     const navigate = useNavigate();
     const { cardNumber, expireDate, name, nickName } = state;
 
     const goCreditCardAdd = () => {
-        dispatch({ initform });
+        dispatch(initForm);
         navigate('/');
     };
 
@@ -16,15 +16,13 @@ const CreditCardList = ({ state, dispatch, initform }) => {
             <div className="root">
                 <div className="app flex-column-center">
                     <Title title={'보유카드'} />
-                    {name && (
-                        <BasicCard
-                            title={'작업예정'}
-                            cardNumber={cardNumber}
-                            name={name}
-                            expireDate={expireDate}
-                            nickName={nickName}
-                        />
-                    )}
+                    <BasicCard
+                        title={'작업예정'}
+                        cardNumber={cardNumber}
+                        name={name}
+                        expireDate={expireDate}
+                        nickName={nickName}
+                    />
                     <EmptyCard onClick={goCreditCardAdd} />
                 </div>
             </div>

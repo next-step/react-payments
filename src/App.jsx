@@ -37,11 +37,11 @@ const App = () => {
         },
         {
             path: '/creditCardList',
-            component: <CreditCardList state={state} dispatch={dispatch} />,
+            component: <CreditCardList state={state} dispatch={dispatch} initForm={initForm}/>,
         },
         {
             path: '/creditCardRegister',
-            component: <CreditCardRegister state={state} dispatch={dispatch} initForm={initForm} />,
+            component: <CreditCardRegister state={state} dispatch={dispatch} />,
         },
     ];
 
