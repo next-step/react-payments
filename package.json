@@ -63,5 +63,5 @@
     "@storybook/react": "^6.4.12",
     "webpack": "^5.66.0"
   },
-  "homepage": "https://austinpark420.github.io/react-payments/"
+  "homepage": "https://austinpark420.github.io/react-payments"
 }
