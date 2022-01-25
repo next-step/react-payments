@@ -1,6 +1,6 @@
 import { DigitRegex, MaxLength } from "@common/constants";
 import { useEffect } from "react";
-import useInput from "src/hooks/useInput";
+import useInput from "@hooks/useInput";
 import { OnChangeInputState } from "./AddCardForm";
 
 interface CardExpirationInputProps {

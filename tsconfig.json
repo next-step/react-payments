@@ -14,20 +14,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
-    "baseUrl": ".",
-    "paths": {
-      "@components": ["src/components"],
-      "@components/*": ["src/components/*"],
-      "@pages": ["src/pages"],
-      "@pages/*": ["src/pages/*"],
-      "@common": ["src/common"],
-      "@common/*": ["src/common/*"],
-      "@styles": ["src/styles"],
-      "@styles/*": ["src/styles/*"],
-      "@hooks": ["src/hooks"],
-      "@hooks/*": ["src/hooks/*"]
-    }
+    "jsx": "react-jsx"
   },
+  "extends": "./tsconfig.paths.json",
   "include": ["src", "craco.config.js"]
 }

@@ -6,7 +6,7 @@ import { RoutePath } from "@common/constants";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path={RoutePath.CardList} element={<CardListPage />} />
         <Route path={RoutePath.AddCard} element={<AddCardPage />} />
