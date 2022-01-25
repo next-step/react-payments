@@ -18,9 +18,9 @@ const DeletableCard = ({
   }
 
   return (
-    <div className="deletable">
+    <div className="deletable" data-testid="card-deletable">
       <Card type={type} cardData={cardData} {...props} />
-      <button type="button" className="button" onClick={handleDelete}>
+      <button type="button" className="button" onClick={handleDelete} data-testid="delete-card">
         삭제
       </button>
     </div>
