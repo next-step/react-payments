@@ -1,5 +1,7 @@
+import isFullField from "./isFullField";
+
 const moveFocus = ({ currentField, target, maxLength }) => {
-  if (!target || currentField.length !== maxLength) {
+  if (!target || !isFullField({ field: currentField, maxLength })) {
     return;
   }
 
