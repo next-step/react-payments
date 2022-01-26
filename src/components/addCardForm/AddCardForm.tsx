@@ -27,6 +27,8 @@ const AddCardForm = (props: AddCardFormProps) => {
       Array.from(inputStateMap.entries()).every(([_, value]) => value.isValid)
     );
 
+    console.log(cardData, inputState);
+
     setCardData({
       cardNumber:
         inputStateMap.get(CardNumberInput.displayName)?.displayValue ?? "",
