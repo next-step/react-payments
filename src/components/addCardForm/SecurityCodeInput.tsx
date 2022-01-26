@@ -19,7 +19,7 @@ const SecurityCodeInput = (props: SecurityCodeInputProps) => {
       value: securityCodeInputState.value,
       displayValue: "*".repeat(securityCodeInputState.value.length),
       isValid: securityCodeInputState.isValid,
-      name: SecurityCodeInput.name,
+      displayName: SecurityCodeInput.displayName,
     });
   }, [securityCodeInputState.value]);
 
@@ -36,5 +36,7 @@ const SecurityCodeInput = (props: SecurityCodeInputProps) => {
     </div>
   );
 };
+
+SecurityCodeInput.displayName = "SecurityCodeInput";
 
 export default SecurityCodeInput;

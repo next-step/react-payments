@@ -28,7 +28,7 @@ const CardPasswordInput = (props: CardPasswordInputProps) => {
         value,
         displayValue: "",
         isValid: passwordInputStateList.every((state) => state.isValid),
-        name: CardPasswordInput.name,
+        displayName: CardPasswordInput.displayName,
       });
     },
     passwordInputStateList.map((inputState) => inputState.value)
@@ -52,5 +52,7 @@ const CardPasswordInput = (props: CardPasswordInputProps) => {
     </div>
   );
 };
+
+CardPasswordInput.displayName = "CardPasswordInput";
 
 export default CardPasswordInput;

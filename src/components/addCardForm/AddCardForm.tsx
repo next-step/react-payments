@@ -22,7 +22,7 @@ const AddCardForm = (props: AddCardFormProps) => {
   const [cardData, setCardData] = useState<CardData>({});
 
   const onChangeInputState: OnChangeInputState = (inputState: IInputState) => {
-    inputStateMap.set(inputState.name, { ...inputState });
+    inputStateMap.set(inputState.displayName, { ...inputState });
     setIsValidForm(
       Array.from(inputStateMap.entries()).every(([_, value]) => value.isValid)
     );
@@ -58,7 +58,7 @@ export interface IInputState {
   value: string;
   displayValue: string;
   isValid: boolean;
-  name: string;
+  displayName: string;
 }
 
 export interface AddCardFormProps

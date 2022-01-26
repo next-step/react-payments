@@ -27,7 +27,7 @@ const CardExpirationInput = (props: CardExpirationInputProps) => {
       value,
       displayValue: value,
       isValid: monthInputState.isValid && yearInputState.isValid,
-      name: CardExpirationInput.name,
+      displayName: CardExpirationInput.displayName,
     });
   }, [monthInputState.value, yearInputState.value]);
 

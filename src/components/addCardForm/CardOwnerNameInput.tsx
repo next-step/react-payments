@@ -16,7 +16,7 @@ const CardOwnerNameInput = (props: CardOwnerNameInputProps) => {
       value: ownerNameInputState.value,
       displayValue: ownerNameInputState.value,
       isValid: ownerNameInputState.isValid,
-      name: CardOwnerNameInput.name,
+      displayName: CardOwnerNameInput.displayName,
     });
   }, [ownerNameInputState.value]);
 

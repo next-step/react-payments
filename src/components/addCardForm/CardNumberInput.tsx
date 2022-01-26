@@ -40,7 +40,7 @@ const CardNumberInput = (props: CardNumberInputProps) => {
         value,
         displayValue,
         isValid: cardNumInputStateList.every((state) => state.isValid),
-        name: CardNumberInput.name,
+        displayName: CardNumberInput.displayName,
       });
     },
     cardNumInputStateList.map((inputState) => inputState.value)
