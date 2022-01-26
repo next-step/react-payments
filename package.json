@@ -10,7 +10,8 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -b glassyi-build -d build"
+    "deploy": "gh-pages -b glassyi-build -d build",
+    "chromatic": "npx chromatic --project-token=4b5d4967bce0"
   },
   "eslintConfig": {
     "extends": [
@@ -70,6 +71,7 @@
     "@types/styled-components": "^5.1.20",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
     "@typescript-eslint/parser": "^5.9.1",
+    "chromatic": "^6.4.1",
     "craco-alias": "^3.0.1",
     "eslint": "^8.6.0",
     "eslint-plugin-storybook": "^0.5.5",
