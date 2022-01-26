@@ -1,4 +1,4 @@
-import Title from "./Title";
+import Title from "../components/Title";
 
 export default {
   title: "Components/Title",
