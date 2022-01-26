@@ -38,4 +38,6 @@ const CardOwnerNameInput = (props: CardOwnerNameInputProps) => {
   );
 };
 
+CardOwnerNameInput.displayName = "CardOwnerNameInput";
+
 export default CardOwnerNameInput;

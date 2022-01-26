@@ -23,20 +23,17 @@ const AddCardForm = (props: AddCardFormProps) => {
 
   const onChangeInputState: OnChangeInputState = (inputState: IInputState) => {
     inputStateMap.set(inputState.name, { ...inputState });
-
-    const validForm = Array.from(inputStateMap.entries()).every(
-      ([key, value]) => {
-        console.log(key, value);
-        return value.isValid;
-      }
+    setIsValidForm(
+      Array.from(inputStateMap.entries()).every(([_, value]) => value.isValid)
     );
-    console.log(inputState, validForm);
-    setIsValidForm(validForm);
 
     setCardData({
-      cardNumber: inputStateMap.get(CardNumberInput.name)?.displayValue ?? "",
-      expired: inputStateMap.get(CardExpirationInput.name)?.displayValue ?? "",
-      userName: inputStateMap.get(CardOwnerNameInput.name)?.displayValue ?? "",
+      cardNumber:
+        inputStateMap.get(CardNumberInput.displayName)?.displayValue ?? "",
+      expired:
+        inputStateMap.get(CardExpirationInput.displayName)?.displayValue ?? "",
+      userName:
+        inputStateMap.get(CardOwnerNameInput.displayName)?.displayValue ?? "",
     });
   };
 

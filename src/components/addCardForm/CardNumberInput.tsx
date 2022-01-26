@@ -65,4 +65,6 @@ const CardNumberInput = (props: CardNumberInputProps) => {
   );
 };
 
+CardNumberInput.displayName = "CardNumberInput";
+
 export default CardNumberInput;

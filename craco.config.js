@@ -1,5 +1,10 @@
 const CracoAlias = require("craco-alias");
 module.exports = {
+  webpack: {
+    optimization: {
+      minimize: false,
+    },
+  },
   plugins: [
     {
       plugin: CracoAlias,

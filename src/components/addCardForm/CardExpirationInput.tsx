@@ -56,4 +56,6 @@ const CardExpirationInput = (props: CardExpirationInputProps) => {
   );
 };
 
+CardExpirationInput.displayName = "CardExpirationInput";
+
 export default CardExpirationInput;
