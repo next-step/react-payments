@@ -6,4 +6,5 @@ export default {
 };
 
 export const Text = () => <Input type="text" />;
+export const Number = () => <Input type="number" />;
 export const Password = () => <Input type="password" />;

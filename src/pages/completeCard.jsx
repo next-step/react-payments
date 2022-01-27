@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Title from "../components/Title";
-import Next from "../components/Next";
+import Button from "../components/Button";
 
 function CompleteCard() {
   return (
@@ -37,9 +37,7 @@ function CompleteCard() {
             placeholder="카드의 별칭을 입력해주세요."
           />
         </div>
-        <div className="button-box mt-50">
-          <Next>다음</Next>
-        </div>
+        <Button marginTop="11.5rem">다음</Button>
       </div>
     </div>
   );

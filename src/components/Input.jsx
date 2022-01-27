@@ -4,8 +4,12 @@ function Input({
   type,
   width,
   placeholder,
+  required,
   maxLength,
-  handle,
+  min,
+  max,
+  pattern,
+  onKeyUp,
   value,
   disabled,
 }) {
@@ -14,8 +18,12 @@ function Input({
       type={type}
       width={width}
       placeholder={placeholder}
+      required={required}
       maxLength={maxLength}
-      onKeyUp={handle}
+      min={min}
+      max={max}
+      pattern={pattern}
+      onKeyUp={onKeyUp}
       value={value}
       disabled={disabled}
     />
