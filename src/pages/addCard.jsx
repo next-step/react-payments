@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Title from "../components/Title";
-import Button from "../components/Button";
+import Card from "../components/Card";
 import Input from "../components/Input";
+import Next from "../components/Next";
 
 function AddCard() {
   const [cardNumberSeries, setCardNumberSeries] = useState("");
@@ -17,10 +18,6 @@ function AddCard() {
     if (typeof event.target.value !== Number) {
       event.target.value = event.target.value.replace(/[^0-9.]/g, "");
     }
-  };
-
-  const masking = (value) => {
-    return value.replaceAll(/[0-9]/g, "*");
   };
 
   const handleSeriesNumber = (event) => {
@@ -77,32 +74,15 @@ function AddCard() {
           </Link>
           카드 추가
         </Title>
-        <div className="card-box">
-          <div className="empty-card">
-            <div className="card-top"></div>
-            <div className="card-middle">
-              <div className="small-card__chip"></div>
-            </div>
-            <div className="card-bottom">
-              <div className="card-bottom__number">
-                <span className="card-text">
-                  {cardNumberSeries}&nbsp;{cardNumberCompany}&nbsp;
-                  {masking(cardNumberIndividual)}&nbsp;
-                  {masking(cardNumberCode)}
-                </span>
-              </div>
-              <div className="card-bottom__info">
-                <span className="card-text">
-                  {name.length === 0 && "NAME"}
-                  {name.length !== 0 && name}
-                </span>
-                <span className="card-text">
-                  {dueMonth} {dueMonth && "/"} {dueYear}
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Card
+          cardNumberSeries={cardNumberSeries}
+          cardNumberCompany={cardNumberCompany}
+          cardNumberIndividual={cardNumberIndividual}
+          cardNumberCode={cardNumberCode}
+          name={name}
+          dueMonth={dueMonth}
+          dueYear={dueYear}
+        />
         <div className="input-container">
           <span className="input-title">카드 번호</span>
           <div className="input-box">
@@ -192,7 +172,7 @@ function AddCard() {
             to="complete"
             style={{ textDecoration: "none", color: "black" }}
           >
-            <Button>다음</Button>
+            <Next>다음</Next>
           </Link>
         </div>
       </div>

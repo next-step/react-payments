@@ -1,31 +1,35 @@
+import styled from "styled-components";
+import Title from "../components/Title";
+import Next from "../components/Next";
+
 function CompleteCard() {
   return (
     <div className="root">
       <div className="app flex-column-center">
         <div className="flex-center">
-          <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
+          <Title marginBottom="2.5rem">카드등록이 완료되었습니다.</Title>
         </div>
-        <div className="card-box">
+        <CardBox>
           <div className="big-card">
-            <div className="card-top">
+            <CardTop>
               <span className="card-text__big">클린카드</span>
-            </div>
-            <div className="card-middle">
+            </CardTop>
+            <CardMiddle>
               <div className="big-card__chip"></div>
-            </div>
-            <div className="card-bottom">
-              <div className="card-bottom__number">
+            </CardMiddle>
+            <CardBottom>
+              <CardBottomNumber>
                 <span className="card-text__big">
                   1111 - 2222 - oooo - oooo
                 </span>
-              </div>
-              <div className="card-bottom__info">
+              </CardBottomNumber>
+              <CardBottomInfo>
                 <span className="card-text__big">YUJO</span>
                 <span className="card-text__big">12 / 23</span>
-              </div>
-            </div>
+              </CardBottomInfo>
+            </CardBottom>
           </div>
-        </div>
+        </CardBox>
         <div className="input-container flex-center w-100">
           <input
             className="input-underline w-75"
@@ -34,7 +38,7 @@ function CompleteCard() {
           />
         </div>
         <div className="button-box mt-50">
-          <span className="button-text">다음</span>
+          <Next>다음</Next>
         </div>
       </div>
     </div>
@@ -42,3 +46,49 @@ function CompleteCard() {
 }
 
 export default CompleteCard;
+
+const CardBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+`;
+
+const CardTop = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+const CardMiddle = styled.div`
+  width: 100%;
+  height: 100%;
+  margin-left: 30px;
+  display: flex;
+  align-items: center;
+`;
+
+const CardBottom = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const CardBottomNumber = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const CardBottomInfo = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
