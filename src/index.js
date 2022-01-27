@@ -9,7 +9,6 @@ ReactDOM.render(
     <BrowserRouter>
       <GlobalStyle />
       <Routes>
-        <Route path='/' element={<App />} />
         <Route path='/react-payments/*' element={<App />} />
       </Routes>
     </BrowserRouter>
