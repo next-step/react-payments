@@ -1,24 +1,31 @@
-import { useRoutes } from 'react-router-dom';
+import { createContext } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import PageContainer from '@components/PageContainer';
 import NewCard from '@/pages/NewCard';
 import List from '@/pages/List';
 import Done from '@/pages/Done';
+import { INIT_CARD_STATE } from '@/constants/index';
+
+const CardContext = createContext({});
 
 function App() {
-  const element = useRoutes([
-    { path: '/', element: <List /> },
-    {
-      path: '/react-payments',
-      element: <List />,
-    },
-    { path: 'list', element: <List /> },
-    { path: 'new', element: <NewCard /> },
-    { path: 'done', element: <Done /> },
-    { path: '*', element: <PageContainer>Not Found Page 🙅</PageContainer> },
-  ]);
-
-  return <Root>{element}</Root>;
+  return (
+    <Root>
+      <CardContext.Provider value={INIT_CARD_STATE}>
+        <Routes>
+          <Route path='/' element={<List />} />
+          <Route path='list' element={<List />} />
+          <Route path='new' element={<NewCard />} />
+          <Route path='done' element={<Done />} />
+          <Route
+            path='*'
+            element={<PageContainer>Not Found Page 🙅</PageContainer>}
+          />
+        </Routes>
+      </CardContext.Provider>
+    </Root>
+  );
 }
 
 export const Root = styled.div`

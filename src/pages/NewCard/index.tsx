@@ -6,7 +6,7 @@ import PageTitle from '@components/PageTitle';
 import PageBottom, { PageBottomText } from '@components/PageBottom';
 import Button from '@components/Button';
 import { Card } from '@components/Card';
-import CardForm from './cardForm';
+import CardForm from '@/pages/NewCard/cardForm';
 import { changeCardStateType } from '@/pages/NewCard/type';
 
 const NewCard = () => {
@@ -14,8 +14,8 @@ const NewCard = () => {
 
   const [cardState, setCardState] = useState({ ...INIT_CARD_STATE });
 
-  const goListPage = () => navigate('/list');
-  const goDonePage = () => navigate('/done');
+  const goListPage = () => navigate('../list');
+  const goDonePage = () => navigate('../done');
 
   const changeCardState: changeCardStateType = (newState) => {
     setCardState({ ...cardState, ...newState });

@@ -13,7 +13,7 @@ const List = () => {
         <PageTitle className='mb-10'>보유 카드</PageTitle>
       </div>
       <CardBoxEl>
-        <Button onClick={() => navigate('/new')} type='button'>
+        <Button onClick={() => navigate('../new')} type='button'>
           <CardEl size='small'>+</CardEl>
         </Button>
       </CardBoxEl>

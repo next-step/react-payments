@@ -28,7 +28,7 @@ const Done = () => {
         />
       </InputContainer>
       <PageBottom className='mt-50'>
-        <Button onClick={() => navigate('/list')}>
+        <Button onClick={() => navigate('../list')}>
           <PageBottomText>다음</PageBottomText>
         </Button>
       </PageBottom>
