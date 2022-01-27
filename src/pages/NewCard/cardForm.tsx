@@ -10,7 +10,7 @@ import {
   INPUT_INFO,
   ERROR_MESSAGES,
 } from '@/constants/index';
-import { Input } from '@/components/Forms/Input/index';
+import Input from '@/components/Forms/Input/index';
 import InputBox from '@/components/Forms/InputBox';
 import InputContainer from '@/components/Forms/InputContainer';
 import Modal from '@/components/Modal';

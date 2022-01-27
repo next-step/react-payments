@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { normalize } from 'styled-normalize';
-import utilsStyle from './utils.style';
+import utilsStyle from './utilsStyle';
+import animationStyle from './animationStyle';
 
 const GlobalStyle = createGlobalStyle`
   ${normalize}
@@ -17,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
   ${utilsStyle}
+  ${animationStyle}
 `;
 
 export default GlobalStyle;

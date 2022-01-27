@@ -1,7 +1,7 @@
 import { ComponentStory, Meta } from '@storybook/react';
 import { INIT_CARD_STATE } from '@/constants';
 
-import { Card } from '@/components/Card';
+import Card from '@/components/Card';
 
 export default {
   title: 'components/Card',

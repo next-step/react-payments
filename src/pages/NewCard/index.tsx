@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { INIT_CARD_STATE } from '@/constants/index';
 import PageContainer from '@components/PageContainer';
 import PageTitle from '@components/PageTitle';
-import PageBottom, { PageBottomText } from '@components/PageBottom';
+import PageBottom, { PageBottomText } from '@components/PageBottom/index';
 import Button from '@components/Button';
-import { Card } from '@components/Card';
+import Card from '@components/Card';
 import CardForm from '@/pages/NewCard/cardForm';
 import { changeCardStateType } from '@/pages/NewCard/type';
 

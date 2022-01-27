@@ -1,5 +1,9 @@
 import React, { FC } from 'react';
-import styled, { css } from 'styled-components';
+import {
+  InputContainerEl,
+  InputLabel,
+  InputTitle,
+} from './inputContainerStyle';
 
 const InputContainer: FC<{
   className?: string;
@@ -19,22 +23,3 @@ const InputContainer: FC<{
 };
 
 export default InputContainer;
-
-const InputContainerEl = styled.div`
-  margin: 16px 0;
-`;
-
-const InputLabel = styled.label`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 12px;
-  line-height: 14px;
-  margin-bottom: 4px;
-`;
-
-const InputTitle = styled.span<{ isError?: boolean }>`
-  ${({ isError }) => css`
-    color: ${isError ? 'red' : '#525252'};
-  `}
-`;

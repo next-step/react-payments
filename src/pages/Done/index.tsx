@@ -4,8 +4,8 @@ import PageContainer from '@components/PageContainer';
 import PageTitle from '@/components/PageTitle';
 import PageBottom, { PageBottomText } from '@components/PageBottom';
 import Button from '@components/Button';
-import { Card } from '@/components/Card';
-import { Input } from '@components/Forms/Input';
+import Card from '@/components/Card';
+import Input from '@components/Forms/Input';
 import InputContainer from '@/components/Forms/InputContainer';
 
 const Done = () => {

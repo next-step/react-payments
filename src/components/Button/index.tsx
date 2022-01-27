@@ -1,5 +1,5 @@
 import { VFC, ReactNode } from 'react';
-import styled from 'styled-components';
+import { ButtonEl } from './buttonStyle';
 
 export interface ButtonProps
   extends React.DetailedHTMLProps<
@@ -19,11 +19,5 @@ const Button: VFC<
     </ButtonEl>
   );
 };
-
-const ButtonEl = styled.button`
-  background: transparent;
-  cursor: pointer;
-  color: #383838;
-`;
 
 export default Button;
