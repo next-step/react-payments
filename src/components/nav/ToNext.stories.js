@@ -1,9 +1,10 @@
 import React from 'react';
+import { GROUP } from '../../constants';
 import ToNext from './ToNext';
 
 export default {
   component: ToNext,
-  title: 'ToNext',
+  title: `${GROUP.NAV}/ToNext`,
 };
 
 const Template = (args) => <ToNext {...args} />;

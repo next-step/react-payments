@@ -1,10 +1,11 @@
 import React from 'react';
 import { AppContext, initialAppContext } from '../AppContext';
+import { GROUP } from '../constants';
 import Add from './Add';
 
 export default {
   component: Add,
-  title: 'Add',
+  title: `${GROUP.PAGES}/Add`,
 };
 
 const Template = (args) => <Add {...args} />;

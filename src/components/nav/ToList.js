@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import { AppContext } from '../../AppContext';
 
 const ToList = () => {
-  const { setStatus } = useContext(AppContext);
+  const { setRouteStatus } = useContext(AppContext);
   return (
-    <h2 className="page-title" onClick={() => setStatus('list')}>
+    <h2 className="page-title" onClick={() => setRouteStatus('list')}>
       &lt; 카드 추가
     </h2>
   );

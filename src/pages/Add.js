@@ -11,7 +11,7 @@ import _ from 'lodash';
 
 const Add = ({ nextStatus }) => {
   const [showModal, setShowModal] = useState(true);
-  const { setStatus } = useContext(AppContext);
+  const { setRouteStatus } = useContext(AppContext);
 
   const { inputCard, setInputCard } = useContext(AppContext);
 
@@ -26,7 +26,7 @@ const Add = ({ nextStatus }) => {
   };
 
   const nextStep = () => {
-    setStatus(nextStatus);
+    setRouteStatus(nextStatus);
   };
 
   return (

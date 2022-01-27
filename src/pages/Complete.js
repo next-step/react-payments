@@ -7,10 +7,10 @@ import { useContext } from 'react';
 import { AppContext } from '../AppContext';
 
 const Complete = ({ nextStatus }) => {
-  const { setStatus } = useContext(AppContext);
+  const { setRouteStatus } = useContext(AppContext);
 
   const nextStep = () => {
-    setStatus(nextStatus);
+    setRouteStatus(nextStatus);
   };
 
   return (

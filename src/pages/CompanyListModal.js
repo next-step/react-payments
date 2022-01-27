@@ -2,15 +2,14 @@ import Modal from '../components/modal/Modal';
 import ModalItems from '../components/modal/ModalItems';
 import { companyList } from '../App';
 import ModalItem from '../components/modal/ModalItem';
-import uuid from 'react-uuid';
 
 const CompanyListModal = ({ onClickHandler }) => {
   return (
     <Modal onClickHandler={onClickHandler}>
       <ModalItems>
-        {companyList.map((company) => (
+        {companyList.map((company, i) => (
           <ModalItem
-            key={uuid()}
+            key={`ModalItem-${i}`}
             name={company}
             onClickHandler={onClickHandler}
           />

@@ -1,5 +1,4 @@
 import { useState, useContext } from 'react';
-import uuid from 'react-uuid';
 import { AppContext } from '../AppContext';
 import Input from './container/Input';
 import _ from 'lodash';

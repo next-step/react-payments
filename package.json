@@ -21,7 +21,8 @@
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "chromatic": "npx chromatic --project-token=6713242194a1"
   },
   "eslintConfig": {
     "extends": [
@@ -60,6 +61,7 @@
     "@storybook/node-logger": "^6.4.14",
     "@storybook/preset-create-react-app": "^4.0.0",
     "@storybook/react": "^6.4.14",
+    "chromatic": "^6.4.1",
     "gh-pages": "^3.2.3",
     "prettier": "2.5.1",
     "webpack": "^5.67.0"

@@ -1,9 +1,10 @@
 import React from 'react';
+import { GROUP } from '../../constants';
 import RootContainer from './Root';
 
 export default {
   component: RootContainer,
-  title: 'RootContainer',
+  title: `${GROUP.CONTAINER}/RootContainer`,
 };
 
 const Template = (args) => <RootContainer {...args} />;

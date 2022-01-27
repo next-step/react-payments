@@ -1,9 +1,10 @@
 import React from 'react';
+import { GROUP } from '../constants';
 import PageTitle from './PageTitle';
 
 export default {
   component: PageTitle,
-  title: 'PageTitle',
+  title: `${GROUP.COMPONENTS}/PageTitle`,
 };
 
 const Template = (args) => <PageTitle {...args} />;

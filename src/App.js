@@ -18,7 +18,7 @@ export const companyList = [
 ];
 
 function App() {
-  const [status, setStatus] = useState('list');
+  const [status, setRouteStatus] = useState('list');
   const [cardList, setCardList] = useState([]);
   const [inputCard, setInputCard] = useState(initialInputCard);
 
@@ -26,7 +26,7 @@ function App() {
     <AppContext.Provider
       value={{
         status,
-        setStatus,
+        setRouteStatus,
         cardList,
         setCardList,
         inputCard,
