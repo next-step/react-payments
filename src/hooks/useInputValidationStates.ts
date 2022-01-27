@@ -4,15 +4,15 @@ import { isValidValue, isValueValidLength } from '@/helper/isValid';
 
 type stateCode = 'invalidLength' | 'invalidValue' | 'pass' | '';
 
-const useInputValidStates = () => {
-  const [validState, setValidState] = useState({
+const useInputValidationStates = () => {
+  const [validationStates, setValidationState] = useState({
     cardNumber: ['', '', '', ''],
     expiryDate: ['', ''],
     cvc: '',
     password: ['', ''],
   });
 
-  const setInputValidStates = ({
+  const setInputValidationStates = ({
     value,
     fieldKey,
     index,
@@ -21,24 +21,22 @@ const useInputValidStates = () => {
     fieldKey: keyof typeof ERROR_MESSAGES;
     index: number;
   }) => {
-    const stateCode: stateCode =
+    const currentValidationState: stateCode =
       (!isValueValidLength(value, fieldKey) && 'invalidLength') ||
       (!isValidValue(value, fieldKey, index) && 'invalidValue') ||
       'pass';
 
-    if (
-      (Array.isArray(validState[fieldKey]) &&
-        validState[fieldKey][index] === stateCode) ||
-      validState[fieldKey] === stateCode
-    )
-      return;
-    setValidState({
-      ...validState,
-      [fieldKey]: Array.isArray(validState[fieldKey])
-        ? Array.from(validState[fieldKey]).map((v, i) =>
-            i === index ? stateCode : v
-          )
-        : stateCode,
+    const prevValidationState =
+      validationStates[fieldKey][index] || validationStates[fieldKey];
+
+    if (prevValidationState === currentValidationState) return;
+
+    setValidationState({
+      ...validationStates,
+      [fieldKey]:
+        Array.from(validationStates[fieldKey])?.map((v, i) =>
+          i === index ? currentValidationState : v
+        ) || currentValidationState,
     });
   };
 
@@ -53,7 +51,8 @@ const useInputValidStates = () => {
   }) =>
     isValidValue(value, fieldKey, index) && isValueValidLength(value, fieldKey);
 
-  const isAllValid = () => Object.values(validState).every((v) => v === 'pass');
+  const isAllValid = () =>
+    Object.values(validationStates).every((v) => v === 'pass');
 
   const getErrorMessage = ({
     stateCode,
@@ -81,12 +80,12 @@ const useInputValidStates = () => {
   };
 
   return {
-    validState,
-    setInputValidStates,
+    validationStates,
+    setInputValidationStates,
     getErrorMessage,
     isValidField,
     isAllValid,
   };
 };
 
-export default useInputValidStates;
+export default useInputValidationStates;

@@ -12,6 +12,8 @@ export const BG_COLOR = 'bgColor';
 export const DIGITS = {
   [CARD_NUMBER]: 4,
   [EXPIRY_DATE]: 2,
+  [OWNER]: 1,
+  [CVC]: 1,
   [PASSWORD]: 2,
 };
 
@@ -19,8 +21,8 @@ export const INPUT_LENGTH: {
   [k in keyof Omit<initCardState, typeof COMPANY | typeof BG_COLOR>]: number;
 } = {
   [CARD_NUMBER]: 4,
-  [OWNER]: 30,
   [EXPIRY_DATE]: 2,
+  [OWNER]: 30,
   [PASSWORD]: 1,
   [CVC]: 3,
   [NICKNAME]: 30,
@@ -43,12 +45,12 @@ export const INPUT_INFO = {
   [CARD_NUMBER]: {
     require: true,
     valueLength: INPUT_LENGTH[CARD_NUMBER],
-    pattern: /^[0-9]+$/,
+    pattern: '^[0-9]+$',
   },
   [EXPIRY_DATE]: {
     require: true,
     valueLength: INPUT_LENGTH[EXPIRY_DATE],
-    pattern: [/^(0[1-9]|1[012])$/, /^[0-9]+$/],
+    pattern: ['^(0[1-9]|1[012])$', '^[0-9]+$'],
   },
   [OWNER]: {
     require: false,
@@ -58,12 +60,12 @@ export const INPUT_INFO = {
   [CVC]: {
     require: true,
     valueLength: INPUT_LENGTH[CVC],
-    pattern: /^[0-9]+$/,
+    pattern: '^[0-9]+$',
   },
   [PASSWORD]: {
     require: true,
     valueLength: INPUT_LENGTH[PASSWORD],
-    pattern: /^[0-9]+$/,
+    pattern: '^[0-9]+$',
   },
   [NICKNAME]: {
     require: false,

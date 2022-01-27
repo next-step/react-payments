@@ -17,7 +17,7 @@ import Modal from '@/components/Modal';
 import useNextFieldRef from '@/hooks/useNextFieldRef';
 import { newStateProps, changeCardStateType } from '@/pages/NewCard/type';
 import { isValueOverMaximumLength } from '@/helper/isValid';
-import useInputValidStates from '@/hooks/useInputValidStates';
+import useInputValidationStates from '@/hooks/useInputValidationStates';
 
 const CardForm = ({
   cardState,
@@ -28,8 +28,8 @@ const CardForm = ({
 }) => {
   const [isShowModal, setVisibleModal] = useState(false);
   const { nextFieldId, inputRef, setNext } = useNextFieldRef();
-  const { validState, setInputValidStates, isValidField } =
-    useInputValidStates();
+  const { validationStates, setInputValidationStates, isValidField } =
+    useInputValidationStates();
   const cardNumberFstScd = cardState[CARD_NUMBER].filter((_, i) => i < 2);
 
   useEffect(() => {
@@ -68,7 +68,7 @@ const CardForm = ({
         : value,
     } as unknown as newStateProps;
 
-    setInputValidStates({
+    setInputValidationStates({
       value: value,
       fieldKey: fieldKey as keyof typeof ERROR_MESSAGES,
       index: Number(index),
@@ -99,7 +99,9 @@ const CardForm = ({
     <>
       <form>
         <InputContainer
-          isError={validState[CARD_NUMBER].some((v) => v === 'invalidValue')}
+          isError={validationStates[CARD_NUMBER].some(
+            (v) => v === 'invalidValue'
+          )}
           title='카드번호'
         >
           <InputBox>
@@ -108,7 +110,7 @@ const CardForm = ({
               data-index={0}
               data-id={CARD_NUMBER}
               value={cardState[CARD_NUMBER][0]}
-              pattern='/^[0-9]+$/'
+              pattern={INPUT_INFO[CARD_NUMBER].pattern}
               onChange={onChangeHandler}
               ref={
                 nextFieldId.current === `${CARD_NUMBER}${0}` ? inputRef : null
@@ -120,7 +122,7 @@ const CardForm = ({
               data-index={1}
               data-id={CARD_NUMBER}
               value={cardState[CARD_NUMBER][1]}
-              pattern='^[0-9]+$'
+              pattern={INPUT_INFO[CARD_NUMBER].pattern}
               onChange={onChangeHandler}
               ref={
                 nextFieldId.current === `${CARD_NUMBER}${1}` ? inputRef : null
@@ -133,7 +135,7 @@ const CardForm = ({
               data-id={CARD_NUMBER}
               value={cardState[CARD_NUMBER][2]}
               maxLength={INPUT_LENGTH[CARD_NUMBER]}
-              pattern='^[0-9]+$'
+              pattern={INPUT_INFO[CARD_NUMBER].pattern}
               onChange={onChangeHandler}
               ref={
                 nextFieldId.current === `${CARD_NUMBER}${2}` ? inputRef : null
@@ -146,7 +148,7 @@ const CardForm = ({
               data-id={CARD_NUMBER}
               value={cardState[CARD_NUMBER][3]}
               maxLength={INPUT_LENGTH[CARD_NUMBER]}
-              pattern='^[0-9]+$'
+              pattern={INPUT_INFO[CARD_NUMBER].pattern}
               onChange={onChangeHandler}
               ref={
                 nextFieldId.current === `${CARD_NUMBER}${3}` ? inputRef : null
@@ -155,7 +157,9 @@ const CardForm = ({
           </InputBox>
         </InputContainer>
         <InputContainer
-          isError={validState[EXPIRY_DATE].some((v) => v === 'invalidValue')}
+          isError={validationStates[EXPIRY_DATE].some(
+            (v) => v === 'invalidValue'
+          )}
           title='만료일'
         >
           <InputBox className='w-50'>
@@ -164,7 +168,7 @@ const CardForm = ({
               data-index={0}
               data-id={EXPIRY_DATE}
               value={cardState[EXPIRY_DATE][0]}
-              pattern='/^(0[1-9]|1[012])$/'
+              pattern={INPUT_INFO[EXPIRY_DATE].pattern[0]}
               placeholder='MM'
               onChange={onChangeHandler}
               ref={
@@ -177,7 +181,7 @@ const CardForm = ({
               data-index={1}
               data-id={EXPIRY_DATE}
               value={cardState[EXPIRY_DATE][1]}
-              pattern='^[0-9]+$'
+              pattern={INPUT_INFO[EXPIRY_DATE].pattern[1]}
               placeholder='YY'
               onChange={onChangeHandler}
               ref={
@@ -196,14 +200,14 @@ const CardForm = ({
             data-id={OWNER}
             value={cardState[OWNER]}
             maxLength={INPUT_LENGTH[OWNER]}
-            pattern='^[a-zA-Z]*'
+            pattern={INPUT_INFO[OWNER].pattern}
             placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
             onChange={onChangeHandler}
             ref={nextFieldId.current === `${OWNER}${0}` ? inputRef : null}
           />
         </InputContainer>
         <InputContainer
-          isError={validState[CVC] === 'invalidValue'}
+          isError={validationStates[CVC] === 'invalidValue'}
           title='보안코드(CVC/CVV)'
         >
           <Input
@@ -213,13 +217,13 @@ const CardForm = ({
             data-id={CVC}
             value={cardState[CVC]}
             maxLength={INPUT_LENGTH[CVC]}
-            pattern='^[0-9]+'
+            pattern={INPUT_INFO[CVC].pattern}
             onChange={onChangeHandler}
             ref={nextFieldId.current === `${CVC}${0}` ? inputRef : null}
           />
         </InputContainer>
         <InputContainer
-          isError={validState[PASSWORD].some((v) => v === 'invalidValue')}
+          isError={validationStates[PASSWORD].some((v) => v === 'invalidValue')}
           title='카드 비밀번호'
         >
           <Input
@@ -229,7 +233,7 @@ const CardForm = ({
             data-id={PASSWORD}
             value={cardState[PASSWORD][0]}
             maxLength={INPUT_LENGTH[PASSWORD]}
-            pattern='^[0-9]+$'
+            pattern={INPUT_INFO[PASSWORD].pattern}
             onChange={onChangeHandler}
             ref={nextFieldId.current === `${PASSWORD}${0}` ? inputRef : null}
           />{' '}
@@ -240,7 +244,7 @@ const CardForm = ({
             data-id={PASSWORD}
             value={cardState[PASSWORD][1]}
             maxLength={INPUT_LENGTH[PASSWORD]}
-            pattern='^[0-9]+$'
+            pattern={INPUT_INFO[PASSWORD].pattern}
             onChange={onChangeHandler}
             ref={nextFieldId.current === `${PASSWORD}${1}` ? inputRef : null}
           />{' '}
