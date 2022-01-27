@@ -13,7 +13,7 @@ export const CardEl = styled.div<Pick<CardProps, 'size' | 'bgColor'>>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  ${({ size = 'small' }) => css`
+  ${({ size }) => css`
     ${size === 'small' &&
     `
       width: 208px;
@@ -67,7 +67,7 @@ export const CardInfo = styled(InnerLayout)`
 export const CardChip = styled.div<{
   size?: cardSize;
 }>`
-  ${({ size = 'small' }) => css`
+  ${({ size }) => css`
     ${size === 'small' &&
     `
       width: 40px;
@@ -90,7 +90,7 @@ export const CardText = styled.span<{
   margin: 0 16px;
   vertical-align: middle;
   font-weight: 400;
-  ${({ size = 'small' }) => css`
+  ${({ size }) => css`
     ${size === 'small' &&
     `
       font-size: 14px;
