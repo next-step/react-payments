@@ -9,7 +9,9 @@ function Input({
   min,
   max,
   pattern,
-  onKeyUp,
+  onChange,
+  onBlur,
+  onClick,
   value,
   disabled,
 }) {
@@ -23,7 +25,9 @@ function Input({
       min={min}
       max={max}
       pattern={pattern}
-      onKeyUp={onKeyUp}
+      onChange={onChange}
+      onBlur={onBlur}
+      onClick={onClick}
       value={value}
       disabled={disabled}
     />

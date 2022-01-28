@@ -3,8 +3,8 @@ import styled from "styled-components";
 function Card({
   cardNumberSeries,
   cardNumberCompany,
-  cardNumberIndividual,
-  cardNumberCode,
+  individualMasking,
+  codeMasking,
   name,
   dueMonth,
   dueYear,
@@ -19,15 +19,21 @@ function Card({
         <CardBottom>
           <CardBottomNumber>
             <CardText>
-              {cardNumberSeries}&nbsp;{cardNumberCompany}&nbsp;
-              {cardNumberIndividual}&nbsp;
-              {cardNumberCode}
+              {cardNumberSeries}
+              {cardNumberSeries && " "}
+              {cardNumberCompany}
+              {cardNumberCompany && " "}
+              {individualMasking}
+              {individualMasking && " "}
+              {codeMasking}
             </CardText>
           </CardBottomNumber>
           <CardBottomInfo>
             <CardText>{name.length === 0 ? "NAME" : name}</CardText>
             <CardText>
-              {dueMonth} {dueMonth && "/"} {dueYear}
+              {dueMonth}
+              {dueMonth && dueYear && " / "}
+              {dueYear}
             </CardText>
           </CardBottomInfo>
         </CardBottom>

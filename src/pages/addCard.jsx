@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Title from "../components/Title";
 import Card from "../components/Card";
@@ -9,17 +9,39 @@ function AddCard() {
   const [cardNumberSeries, setCardNumberSeries] = useState("");
   const [cardNumberCompany, setCardNumberCompany] = useState("");
   const [cardNumberIndividual, setCardNumberIndividual] = useState("");
+  const [individualMasking, setIndividualMasking] = useState("");
   const [cardNumberCode, setCardNumberCode] = useState("");
+  const [codeMasking, setCodeMasking] = useState("");
   const [dueMonth, setDueMonth] = useState("");
   const [dueYear, setDueYear] = useState("");
   const [name, setName] = useState("");
   const [cvc, setCvc] = useState("");
+  const [cvcMasking, setCvcMasking] = useState("");
   const [passwordFirst, setPasswordFirst] = useState("");
+  const [firstMasking, setFirstMasking] = useState("");
   const [passwordSecond, setPasswordSecond] = useState("");
+  const [secondMasking, setSecondMasking] = useState("");
 
   const handleSetState = (event, setState) => {
     setState(event.target.value);
   };
+
+  const handleSetStateWithMasking = (event, setState, setMaskingState) => {
+    setState(event.target.value);
+    setMaskingState(event.target.value);
+  };
+
+  const masking = (maskingState, setMasking) => {
+    setMasking(maskingState.replaceAll(/[\d]/g, "*"));
+  };
+
+  const resetState = (setState, setMaskingState) => {
+    setState("");
+    setMaskingState("");
+  };
+
+  //WARNING 임시 제거
+  useEffect(() => {}, [cardNumberCode, cvc, passwordFirst, passwordSecond]);
 
   return (
     <div className="root">
@@ -33,8 +55,8 @@ function AddCard() {
         <Card
           cardNumberSeries={cardNumberSeries}
           cardNumberCompany={cardNumberCompany}
-          cardNumberIndividual={cardNumberIndividual}
-          cardNumberCode={cardNumberCode}
+          individualMasking={individualMasking}
+          codeMasking={codeMasking}
           name={name}
           dueMonth={dueMonth}
           dueYear={dueYear}
@@ -49,7 +71,7 @@ function AddCard() {
                 required
                 maxLength="4"
                 pattern="\d{4}"
-                onKeyUp={(event) => handleSetState(event, setCardNumberSeries)}
+                onChange={(event) => handleSetState(event, setCardNumberSeries)}
               />
               {cardNumberSeries.length === 4 && "-"}
               <Input
@@ -58,27 +80,47 @@ function AddCard() {
                 required
                 maxLength="4"
                 pattern="\d{4}"
-                onKeyUp={(event) => handleSetState(event, setCardNumberCompany)}
+                onChange={(event) =>
+                  handleSetState(event, setCardNumberCompany)
+                }
               />
               {cardNumberCompany.length === 4 && "-"}
               <Input
-                type="password"
+                type="text"
                 placeholder="4자리 숫자"
                 required
                 maxLength="4"
-                pattern="\d{4}"
-                onKeyUp={(event) =>
-                  handleSetState(event, setCardNumberIndividual)
+                pattern="[*]{4}"
+                onChange={(event) =>
+                  handleSetStateWithMasking(
+                    event,
+                    setCardNumberIndividual,
+                    setIndividualMasking
+                  )
                 }
+                onBlur={() => masking(individualMasking, setIndividualMasking)}
+                onClick={() =>
+                  resetState(setCardNumberIndividual, setIndividualMasking)
+                }
+                value={individualMasking}
               />
               {cardNumberIndividual.length === 4 && "-"}
               <Input
-                type="password"
+                type="text"
                 placeholder="4자리 숫자"
                 required
                 maxLength="4"
-                pattern="\d{4}"
-                onKeyUp={(event) => handleSetState(event, setCardNumberCode)}
+                pattern="[*]{4}"
+                onChange={(event) =>
+                  handleSetStateWithMasking(
+                    event,
+                    setCardNumberCode,
+                    setCodeMasking
+                  )
+                }
+                onBlur={() => masking(codeMasking, setCodeMasking)}
+                onClick={() => resetState(setCardNumberCode, setCodeMasking)}
+                value={codeMasking}
               />
             </div>
           </div>
@@ -93,7 +135,7 @@ function AddCard() {
                 min="1"
                 max="12"
                 pattern="\d{2}"
-                onKeyUp={(event) => handleSetState(event, setDueMonth)}
+                onChange={(event) => handleSetState(event, setDueMonth)}
               />
               {dueMonth && "/"}
               <Input
@@ -102,7 +144,7 @@ function AddCard() {
                 required
                 maxLength="2"
                 pattern="\d{2}"
-                onKeyUp={(event) => handleSetState(event, setDueYear)}
+                onChange={(event) => handleSetState(event, setDueYear)}
               />
             </div>
           </div>
@@ -117,40 +159,63 @@ function AddCard() {
               required
               maxLength="30"
               pattern=".{1,30}"
-              onKeyUp={(event) => handleSetState(event, setName)}
+              onChange={(event) => handleSetState(event, setName)}
             />
           </div>
           <div className="input-container">
             <span className="input-title">보안코드(CVC/CVV)</span>
             <Input
-              type="password"
+              type="text"
               width="25%"
               placeholder="3자리 숫자"
               required
               maxLength="3"
-              pattern="\d{3}"
-              onKeyUp={(event) => handleSetState(event, setCvc)}
+              pattern="[*]{3}"
+              onChange={(event) =>
+                handleSetStateWithMasking(event, setCvc, setCvcMasking)
+              }
+              onBlur={() => masking(cvcMasking, setCvcMasking)}
+              onClick={() => resetState(setCvc, setCvcMasking)}
+              value={cvcMasking}
             />
           </div>
           <div className="input-container">
             <span className="input-title">카드 비밀번호</span>
             <Input
-              type="password"
+              type="text"
               width="15%"
               placeholder="숫자"
               required
               maxLength="1"
-              pattern="\d{1}"
-              onKeyUp={(event) => handleSetState(event, setPasswordFirst)}
+              pattern="[*]{1}"
+              onChange={(event) =>
+                handleSetStateWithMasking(
+                  event,
+                  setPasswordFirst,
+                  setFirstMasking
+                )
+              }
+              onBlur={() => masking(firstMasking, setFirstMasking)}
+              onClick={() => resetState(setPasswordFirst, setFirstMasking)}
+              value={firstMasking}
             />
             <Input
-              type="password"
+              type="text"
               width="15%"
               placeholder="숫자"
               required
               maxLength="1"
-              pattern="\d{1}"
-              onKeyUp={(event) => handleSetState(event, setPasswordSecond)}
+              pattern="[*]{1}"
+              onChange={(event) =>
+                handleSetStateWithMasking(
+                  event,
+                  setPasswordSecond,
+                  setSecondMasking
+                )
+              }
+              onBlur={() => masking(secondMasking, setSecondMasking)}
+              onClick={() => resetState(setPasswordSecond, setSecondMasking)}
+              value={secondMasking}
             />
             <Input type="password" width="15%" value="0" disabled />
             <Input type="password" width="15%" value="0" disabled />
