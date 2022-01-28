@@ -13,6 +13,7 @@
 
 .input-title {
   display: flex;
+  justify-content: space-between;
   align-items: center;
 
   font-size: 12px;
@@ -21,18 +22,6 @@
   margin-bottom: 4px;
 
   color: #525252;
-}
-
-.input-basic {
-  background-color: #ecebf1;
-  height: 45px;
-  width: 100%;
-  text-align: center;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  border-color: #9ca3af;
-  border: none;
-  border-radius: 0.25rem;
 }
 
 .input-underline {
