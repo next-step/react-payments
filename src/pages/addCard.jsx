@@ -71,6 +71,7 @@ function AddCard() {
                 required
                 maxLength="4"
                 pattern="\d{4}"
+                title="4자리 숫자를 입력하세요."
                 onChange={(event) => handleSetState(event, setCardNumberSeries)}
               />
               {cardNumberSeries.length === 4 && "-"}
@@ -80,6 +81,7 @@ function AddCard() {
                 required
                 maxLength="4"
                 pattern="\d{4}"
+                title="4자리 숫자를 입력하세요."
                 onChange={(event) =>
                   handleSetState(event, setCardNumberCompany)
                 }
@@ -91,6 +93,7 @@ function AddCard() {
                 required
                 maxLength="4"
                 pattern="[*]{4}"
+                title="4자리 숫자를 입력하세요."
                 onChange={(event) =>
                   handleSetStateWithMasking(
                     event,
@@ -111,6 +114,7 @@ function AddCard() {
                 required
                 maxLength="4"
                 pattern="[*]{4}"
+                title="4자리 숫자를 입력하세요."
                 onChange={(event) =>
                   handleSetStateWithMasking(
                     event,
@@ -144,6 +148,7 @@ function AddCard() {
                 required
                 maxLength="2"
                 pattern="\d{2}"
+                title="2자리 숫자를 입력하세요."
                 onChange={(event) => handleSetState(event, setDueYear)}
               />
             </div>
@@ -171,6 +176,7 @@ function AddCard() {
               required
               maxLength="3"
               pattern="[*]{3}"
+              title="3자리 숫자를 입력하세요."
               onChange={(event) =>
                 handleSetStateWithMasking(event, setCvc, setCvcMasking)
               }
@@ -188,6 +194,7 @@ function AddCard() {
               required
               maxLength="1"
               pattern="[*]{1}"
+              title="1자리 숫자를 입력하세요."
               onChange={(event) =>
                 handleSetStateWithMasking(
                   event,
@@ -206,6 +213,7 @@ function AddCard() {
               required
               maxLength="1"
               pattern="[*]{1}"
+              title="1자리 숫자를 입력하세요."
               onChange={(event) =>
                 handleSetStateWithMasking(
                   event,

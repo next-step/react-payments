@@ -9,6 +9,7 @@ function Input({
   min,
   max,
   pattern,
+  title,
   onChange,
   onBlur,
   onClick,
@@ -25,6 +26,7 @@ function Input({
       min={min}
       max={max}
       pattern={pattern}
+      title={title}
       onChange={onChange}
       onBlur={onBlur}
       onClick={onClick}

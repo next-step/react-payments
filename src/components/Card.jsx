@@ -29,7 +29,15 @@ function Card({
             </CardText>
           </CardBottomNumber>
           <CardBottomInfo>
-            <CardText>{name.length === 0 ? "NAME" : name}</CardText>
+            <CardText
+              style={{
+                width: "100px",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {name.length === 0 ? "NAME" : name}
+            </CardText>
             <CardText>
               {dueMonth}
               {dueMonth && dueYear && " / "}
