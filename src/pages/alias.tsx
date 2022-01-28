@@ -1,20 +1,29 @@
 import { SyntheticEvent, useRef } from 'react'
-import { CardData, PageProps } from '@/common/constants'
 import Card from '@/components/card'
+import { useCardList } from '@/contexts/cardList'
+import { useRouter } from '@/contexts/route'
 
-type AliasPageProps = PageProps & { payload: { cardData: CardData } }
-
-const AliasPage = ({ setRoute, setCards, payload: { cardData } }: AliasPageProps) => {
+const AliasPage = () => {
+  const { setRoute } = useRouter()
+  const { editingCard, setEditingCard, setCards } = useCardList()
   const inputRef = useRef<HTMLInputElement>(null)
 
   const patchCard = (e: SyntheticEvent) => {
     e.preventDefault()
-    if (inputRef.current && cardData) cardData.alias = inputRef.current.value
+    if (!editingCard) return
     setCards(prev => {
-      prev.add(cardData)
-      return prev
+      const prevIndex = prev.indexOf(editingCard)
+      const newCard = { ...editingCard }
+      newCard.alias = (inputRef.current && inputRef.current.value) || newCard.cardName
+      if (prevIndex > -1) {
+        const next = [...prev]
+        next.splice(prevIndex, 1, newCard)
+        return next
+      }
+      return [newCard, ...prev]
     })
-    setRoute({ route: 'LIST' })
+    setEditingCard(null)
+    setRoute('LIST')
   }
 
   return (
@@ -22,14 +31,17 @@ const AliasPage = ({ setRoute, setCards, payload: { cardData } }: AliasPageProps
       <div className="flex-center">
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
-      <Card type="big" cardData={cardData} />
+      <Card type="big" cardData={editingCard} />
       <form onSubmit={patchCard}>
         <div className="input-container flex-center w-100">
           <input
             ref={inputRef}
             className="input-underline w-75"
             type="text"
-            placeholder="카드의 별칭을 입력해주세요."
+            placeholder="카드 별칭"
+            defaultValue={editingCard?.alias}
+            maxLength={10}
+            size={10}
           />
         </div>
         <div className="button-box mt-50">
@@ -41,4 +53,5 @@ const AliasPage = ({ setRoute, setCards, payload: { cardData } }: AliasPageProps
     </div>
   )
 }
+
 export default AliasPage

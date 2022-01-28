@@ -1,3 +1,17 @@
+.deletable {
+  position: relative;
+}
+.deletable .button {
+  position: absolute;
+  right: 0;
+  bottom: 16px;
+  padding: 5px 7px 4px;
+  background-color: #c21;
+  color: #fff;
+  border-radius: 3px;
+  margin: 0;
+}
+
 .card-box {
   display: flex;
   flex-direction: column;

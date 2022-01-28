@@ -1,8 +1,10 @@
 import { createRef, SyntheticEvent, useMemo, useRef, useState } from 'react'
-import { CardData, LIMITS } from '@/common/constants'
+import { LIMITS } from '@/common/constants'
 import { getCustomValidity, convertFormData } from '@/common/formServices'
 import SelectModal from '../modal/selectModal'
 import { BasicInput, PasswordInput } from './input'
+import { useCardList } from '@/contexts/cardList'
+import { useRouter } from '@/contexts/route'
 
 const InputNames = [
   'cardNumber1',
@@ -19,13 +21,9 @@ const InputNames = [
 const InputArray = Array.from({ length: InputNames.length })
 const isNameMatched = (index: number, name: string) => InputNames[index] === name
 
-const CardForm = ({
-  saveCard,
-  setCardData,
-}: {
-  saveCard: () => void
-  setCardData: (v: CardData) => void
-}) => {
+const CardForm = () => {
+  const { setRoute } = useRouter()
+  const { setEditingCard } = useCardList()
   const formData = useMemo(() => new Map(), [])
   const inputRefs = InputArray.map(() => createRef<HTMLInputElement>())
   const buttonRef = useRef<HTMLButtonElement>(null)
@@ -33,10 +31,24 @@ const CardForm = ({
   const [showModal, setModalVisibility] = useState(false)
   const [nameSize, setNameSize] = useState(0)
 
+  const fillForm = () => {
+    ;[1234, 1234, 1234, 1234, 12, 33, 444, 5, 5, 'roy'].forEach((v, i) => {
+      formData.set(inputRefs[i].current!.name, v + '')
+    })
+    formData.set('cardName', '크린카드')
+    const cardData = convertFormData(formData)
+    if (cardData) setEditingCard(cardData)
+    saveCard()
+  }
+
+  const saveCard = () => {
+    setRoute('ALIAS')
+  }
+
   const setDataValue = (key: string, val: string) => {
     formData.set(key, val)
     const cardData = convertFormData(formData)
-    if (cardData) setCardData(cardData)
+    if (cardData) setEditingCard(cardData)
   }
 
   const toggleModal = (flag: boolean) => {
@@ -227,6 +239,9 @@ const CardForm = ({
         </div>
       </div>
       <div className="button-box">
+        <button type="button" className="button" onClick={fillForm}>
+          [테스트]_폼채우기
+        </button>
         <button type="submit" className="button" ref={buttonRef}>
           다음
         </button>

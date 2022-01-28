@@ -1,4 +1,5 @@
 import Card from './index'
+import DeletableCard from './deletable'
 import { ComponentStory } from '@storybook/react'
 
 const cardData = {
@@ -19,7 +20,6 @@ export const CardNew = CardTemplate.bind({})
 CardNew.args = {
   type: 'new',
   cardData: null,
-  setRoute: () => {},
 }
 
 export const CardEmpty = CardTemplate.bind({})
@@ -36,6 +36,13 @@ CardBig.args = {
 
 export const CardSmall = CardTemplate.bind({})
 CardSmall.args = {
+  type: 'small',
+  cardData,
+}
+
+const DeletableTemplate: ComponentStory<typeof DeletableCard> = args => <DeletableCard {...args} />
+export const CardDeletable = DeletableTemplate.bind({})
+CardDeletable.args = {
   type: 'small',
   cardData,
 }

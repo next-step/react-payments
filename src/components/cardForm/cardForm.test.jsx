@@ -8,7 +8,7 @@ import {
   InputCvc,
   InputPassword,
   InputUserName,
-} from './index.stories'
+} from './cardForm.stories'
 import '@testing-library/jest-dom'
 
 const inputTest = ({ description, Elem, inputTestId, invalidValues, validValues }) => {
