@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import './card.css';
 import { replaceNumberToDot } from '../utils/index';
 
-export const BasicCard = ({ name, expireDate, cardName, cardNumber, size = 'empty', nickName }) => {
+export const BasicCard = ({ name, expireDate, cardName, cardNumber, size, nickName }) => {
     const maskingCardNumber = [];
 
     Object.entries(cardNumber).forEach(([key, value]) => {
@@ -59,25 +59,10 @@ BasicCard.propTypes = {
      * 카드 소유자
      */
     name: PropTypes.string,
-    /**
-     * 카드 이름
-     */
     cardName: PropTypes.string,
-    /**
-     * 카드 번호
-     */
     cardNumber: PropTypes.object,
-    /**
-     * 만료일
-     */
     expireDate: PropTypes.object,
-    /**
-     * 닉테임
-     */
     nickName: PropTypes.string,
-    /**
-     * 카드 크기
-     */
     size: PropTypes.number,
 };
 
@@ -92,4 +77,5 @@ BasicCard.defaultProps = {
         yy: 22,
         mm: 11,
     },
+    size: 'empty',
 };

@@ -3,16 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { Input, InputContainer, BasicCard, Title, Button } from '../components/index';
 import { validateNumber } from '../utils/index';
 
+const initErrorMsg = {
+    number: '',
+    expireDate: '',
+    cvc: '',
+    password: '',
+};
+
 const CreditCardAdd = ({ state, dispatch }) => {
     const navigate = useNavigate();
     const { cardNumber, expireDate, name, cvc, password } = state;
-
-    const initErrorMsg = {
-        number: '',
-        expireDate: '',
-        cvc: '',
-        password: '',
-    };
 
     const [cardInfoErrorMessage, setCardInfoErrorMessage] = useState(initErrorMsg);
 

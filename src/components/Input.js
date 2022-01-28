@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import './input.css';
 
-export const Input = ({ type, size, value, placeholder, onChange, shape = 'basic', maxLength }) => {
-    size ? (size = `w-${size}`) : (size = undefined);
+export const Input = ({ type, size, value, placeholder, onChange, shape, maxLength }) => {
+    if (size) size = `w-${size}`;
 
     return (
         <input
@@ -17,9 +17,6 @@ export const Input = ({ type, size, value, placeholder, onChange, shape = 'basic
 };
 
 Input.propTypes = {
-    /**
-     * 값
-     */
     value: PropTypes.string,
     /**
      * input 모양
@@ -29,17 +26,8 @@ Input.propTypes = {
      * input 타입
      */
     type: PropTypes.string,
-    /**
-     * 너비
-     */
     size: PropTypes.number,
-    /**
-     * placeholder
-     */
     placeholder: PropTypes.string,
-    /**
-     * onChange 핸들러
-     */
     onChange: PropTypes.func,
     /**
      * 최대 자릿수
@@ -48,9 +36,7 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
-    value: undefined,
     type: 'text',
-    size: undefined,
-    placeholder: undefined,
+    size: 'basic',
     onChange: () => {},
 };

@@ -12,6 +12,7 @@ export default {
 const Template = (args) => <Input {...args} />;
 
 export const Basic = Template.bind({});
+
 Basic.args = {
     type: 'text',
     size: 15,

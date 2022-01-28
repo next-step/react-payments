@@ -1,32 +1,21 @@
 import PropTypes from 'prop-types';
 import './index.css';
 
-export const Title = ({ title, bottom, onClick }) => {
-    bottom ? (bottom = `mb-${bottom}`) : (bottom = undefined);
+export const Title = ({ title, marginBottom, onClick }) => {
+    if (marginBottom) marginBottom = `mb-${marginBottom}`;
 
     return (
-        <h2 className={[`page-title`, bottom].join(' ')} onClick={onClick}>
+        <h2 className={[`page-title`, marginBottom].join(' ')} onClick={onClick}>
             {title}
         </h2>
     );
 };
 
 Title.propTypes = {
-    /**
-     * title
-     */
     title: PropTypes.string,
     /**
-     * margin bottom 값
+     * margin marginBottom 값
      */
-    bottom: PropTypes.number,
-    /**
-     * 클릭 이벤트
-     */
+    marginBottom: PropTypes.number,
     onClick: PropTypes.func,
-};
-
-Title.defaultProps = {
-    title: undefined,
-    bottom: undefined,
 };

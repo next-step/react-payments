@@ -27,17 +27,9 @@ export const InputContainer = ({
 };
 
 InputContainer.propTypes = {
-    /**
-     * 타이틀
-     */
     title: PropTypes.string,
-    /**
-     * 에러메세지
-     */
+
     errorMsg: PropTypes.string,
-    /**
-     * 크기
-     */
     size: PropTypes.number,
     /**
      * 배경색 여부
@@ -53,8 +45,4 @@ InputContainer.propTypes = {
     limitCharacter: PropTypes.number,
 };
 
-InputContainer.defaultProps = {
-    title: undefined,
-    errorMsg: undefined,
-    size: undefined,
-};
+InputContainer.defaultProps = {};

@@ -3,24 +3,24 @@ import { Routes, Route } from 'react-router-dom';
 
 import { CreditCardAdd, CreditCardList, CreditCardRegister } from './pages/index';
 
-const App = () => {
-    const initForm = {
-        cardNumber: {
-            first: '',
-            second: '',
-            third: '',
-            forth: '',
-        },
-        expireDate: { yy: '', mm: '' },
-        name: '',
-        cvc: '',
-        password: {
-            first: '',
-            second: '',
-        },
-        nickName: '',
-    };
+const initForm = {
+    cardNumber: {
+        first: '',
+        second: '',
+        third: '',
+        forth: '',
+    },
+    expireDate: { yy: '', mm: '' },
+    name: '',
+    cvc: '',
+    password: {
+        first: '',
+        second: '',
+    },
+    nickName: '',
+};
 
+const App = () => {
     const reducer = (state, action) => {
         return {
             ...state,
@@ -37,7 +37,7 @@ const App = () => {
         },
         {
             path: '/creditCardList',
-            component: <CreditCardList state={state} dispatch={dispatch} initForm={initForm}/>,
+            component: <CreditCardList state={state} dispatch={dispatch} initForm={initForm} />,
         },
         {
             path: '/creditCardRegister',

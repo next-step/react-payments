@@ -14,5 +14,5 @@ export const Basic = Template.bind({});
 
 Basic.args = {
     title: '버튼',
-    size: 15,
+    marginTop: 15,
 };

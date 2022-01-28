@@ -30,7 +30,7 @@ const CreditCardRegister = ({ state, dispatch }) => {
                         placeholder={'카드의 별칭을 입력해주세요.'}
                         onChange={(text) => dispatch({ nickName: text })}
                     />
-                    <Button title={'다음'} onClick={clickNext} size={50} />
+                    <Button title={'다음'} onClick={clickNext} marginTop={50} />
                 </div>
             </div>
         </>

@@ -11,4 +11,3 @@ export default {
 const Template = (args) => <BasicCard {...args} />;
 
 export const Basic = Template.bind({});
-Basic.args = {};
