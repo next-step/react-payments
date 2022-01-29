@@ -2,36 +2,30 @@ import styled from "styled-components";
 
 function Input({
   type,
-  width,
   placeholder,
   required,
   maxLength,
-  min,
-  max,
   pattern,
   title,
   onChange,
-  onBlur,
-  onClick,
-  value,
-  disabled,
+  ...otherProps
 }) {
   return (
     <InputBasic
       type={type}
-      width={width}
       placeholder={placeholder}
       required={required}
       maxLength={maxLength}
-      min={min}
-      max={max}
       pattern={pattern}
       title={title}
       onChange={onChange}
-      onBlur={onBlur}
-      onClick={onClick}
-      value={value}
-      disabled={disabled}
+      width={otherProps.width}
+      min={otherProps.min}
+      max={otherProps.max}
+      onBlur={otherProps.onBlur}
+      onClick={otherProps.onClick}
+      value={otherProps.value}
+      disabled={otherProps.disabled}
     />
   );
 }

@@ -29,13 +29,7 @@ function Card({
             </CardText>
           </CardBottomNumber>
           <CardBottomInfo>
-            <CardText
-              style={{
-                width: "100px",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-              }}
-            >
+            <CardText narrow={true}>
               {name.length === 0 ? "NAME" : name}
             </CardText>
             <CardText>
@@ -128,4 +122,11 @@ const CardText = styled.span`
   line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
+  ${(props) =>
+    props.narrow &&
+    `
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `}
 `;
