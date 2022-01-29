@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import './input.css';
 
-export const Input = ({ type, size, value, placeholder, onChange, shape, maxLength }) => {
+export const Input = ({ type, size = 'basic', value, placeholder, onChange, shape, maxLength }) => {
     if (size) size = `w-${size}`;
 
     return (
@@ -37,6 +37,6 @@ Input.propTypes = {
 
 Input.defaultProps = {
     type: 'text',
-    size: 'basic',
+    shape: 'basic',
     onChange: () => {},
 };
