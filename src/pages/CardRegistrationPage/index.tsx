@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CardItem from '../../components/Card/Card';
-import CompanySelectBottomSheet from '../../components/Registration/CompanySelectBottomSheet';
 import useCardForm from './useCardForm';
 
 const CardRegistrationPage = () => {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { form, setCardNumber, setExpireMonth, setExpireYear, setUserName, setCVC, setPassword } =
     useCardForm();
@@ -14,9 +11,12 @@ const CardRegistrationPage = () => {
   return (
     <>
       <h2 className="page-title">
-        <span style={{ cursor: 'pointer', marginRight: '1rem' }} onClick={() => navigate('/')}>
+        <button
+          style={{ all: 'unset', cursor: 'pointer', marginRight: '1rem' }}
+          onClick={() => navigate('/')}
+        >
           {'<'}
-        </span>
+        </button>
         카드 추가
       </h2>
       <CardItem card={form} />
@@ -117,7 +117,6 @@ const CardRegistrationPage = () => {
           <span className="button-text">다음</span>
         </div>
       </div>
-      {isModalOpen && <CompanySelectBottomSheet />}
     </>
   );
 };
