@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { retrieveCards, updateCards } from '../../service/card';
-import { Card } from '../../types';
+import { retrieveCards, updateCards } from '../service/card';
+import { Card } from '../types';
 
 const sortByCreatedAt = (cards: Card[]) => {
   return [...cards].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
