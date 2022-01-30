@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { CardContext } from "../Payments";
 import Title from "../components/Title";
 import InputCard from "../components/InputCard";
@@ -88,8 +89,8 @@ function AddCard() {
   };
 
   return (
-    <div className="root">
-      <div className="app">
+    <Root>
+      <App>
         <Title>
           <Link to="/list" style={{ textDecoration: "none", color: "black" }}>
             &lt;&nbsp;
@@ -106,9 +107,9 @@ function AddCard() {
           dueYear={dueYear}
         />
         <form onSubmit={submit}>
-          <div className="input-container">
-            <span className="input-title">카드 번호</span>
-            <div className="input-box">
+          <InputContainer>
+            <InputTitle>카드 번호</InputTitle>
+            <InputBox>
               <Input
                 type="text"
                 placeholder="4자리 숫자"
@@ -170,11 +171,11 @@ function AddCard() {
                 onClick={() => resetState(setCardNumberCode, setCodeMasking)}
                 value={codeMasking}
               />
-            </div>
-          </div>
-          <div className="input-container">
-            <span className="input-title">만료일</span>
-            <div className="input-box w-50">
+            </InputBox>
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>만료일</InputTitle>
+            <InputBox width="50%">
               <Input
                 type="number"
                 placeholder="MM"
@@ -201,13 +202,13 @@ function AddCard() {
                   checkNumber(event, 2) && handleSetState(event, setDueYear)
                 }
               />
-            </div>
-          </div>
-          <div className="input-container">
-            <span className="input-title">
+            </InputBox>
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>
               카드 소유자 이름(선택)
               {name.length !== 0 && <span>{`${name.length}/30`}</span>}
-            </span>
+            </InputTitle>
             <Input
               type="text"
               placeholder="카드에 표시된 이름과 동일하게 입력하세요."
@@ -216,9 +217,9 @@ function AddCard() {
               pattern=".{1,30}"
               onChange={(event) => handleSetState(event, setName)}
             />
-          </div>
-          <div className="input-container">
-            <span className="input-title">보안코드(CVC/CVV)</span>
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>보안코드(CVC/CVV)</InputTitle>
             <Input
               type="text"
               width="25%"
@@ -235,9 +236,9 @@ function AddCard() {
               onClick={() => resetState(setCvc, setCvcMasking)}
               value={cvcMasking}
             />
-          </div>
-          <div className="input-container">
-            <span className="input-title">카드 비밀번호</span>
+          </InputContainer>
+          <InputContainer>
+            <InputTitle>카드 비밀번호</InputTitle>
             <Input
               type="text"
               width="15%"
@@ -274,12 +275,50 @@ function AddCard() {
             />
             <Input type="text" width="15%" value="*" disabled />
             <Input type="text" width="15%" value="*" disabled />
-          </div>
+          </InputContainer>
           <Button>다음</Button>
         </form>
-      </div>
-    </div>
+      </App>
+    </Root>
   );
 }
+
+const Root = styled.div`
+  background-color: #fff;
+  width: 375px;
+  min-width: 375px;
+  height: 700px;
+  position: relative;
+  border-radius: 15px;
+`;
+
+const App = styled.div`
+  height: 100%;
+  padding: 16px 24px;
+`;
+
+const InputContainer = styled.div`
+  margin: 16px 0;
+`;
+
+const InputBox = styled.div`
+  display: flex;
+  width: ${(props) => (props.width ? props.width : "100%")};
+  align-items: center;
+  margin-top: 0.375rem;
+  color: #d3d3d3;
+  border-radius: 0.25rem;
+  background-color: #ecebf1;
+`;
+
+const InputTitle = styled.span`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  line-height: 14px;
+  margin-bottom: 4px;
+  color: #525252;
+`;
 
 export default AddCard;

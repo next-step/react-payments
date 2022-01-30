@@ -25,8 +25,9 @@ export default Input;
 
 const InputBasic = styled.input`
   background-color: #ecebf1;
-  height: 45px;
   width: ${(props) => (props.width ? props.width : "100%")};
+  height: 45px;
+  font-size: 16px;
   text-align: center;
   outline: 2px solid transparent;
   outline-offset: 2px;

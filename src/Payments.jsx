@@ -31,6 +31,7 @@ function Payments() {
             <CardContext.Provider
               value={{
                 cards,
+                setCards,
               }}
             >
               <CompleteCard />
