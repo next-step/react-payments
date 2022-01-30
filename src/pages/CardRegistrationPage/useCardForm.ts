@@ -58,7 +58,7 @@ const useCardForm = () => {
   };
 
   const setPassword = (value: string, index: 0 | 1) => {
-    if (value.match(/[^\d]/)) return;
+    if (value.match(/[^\d]/) || value.length > 1) return;
 
     const password: Password = [...form.password];
 
