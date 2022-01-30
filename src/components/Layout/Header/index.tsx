@@ -2,15 +2,15 @@ import { Link } from 'react-router-dom'
 import Styled from './index.style'
 
 interface HeaderProps {
-  lintTo?: string
+  linkTo?: string
   title: string
 }
 
-const Header = ({ title, lintTo }: HeaderProps) => {
+const Header = ({ title, linkTo }: HeaderProps) => {
   return (
     <>
       <Styled.Header>
-        {lintTo && <Link to={lintTo}>{'< '}</Link>}
+        {linkTo && <Link to={linkTo}>{'< '}</Link>}
         {title}
       </Styled.Header>
     </>

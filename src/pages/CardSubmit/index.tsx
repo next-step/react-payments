@@ -7,7 +7,6 @@ const CardSubmit = () => {
   const cardState = useCardState()
 
   const card = cardState[cardState.length - 1].card
-  console.log(cardState)
   return (
     <Styled.Container>
       <Styled.HeaderContainer>

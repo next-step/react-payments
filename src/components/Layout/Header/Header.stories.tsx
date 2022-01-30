@@ -18,5 +18,5 @@ export const IncludeLink = Template.bind({})
 
 IncludeLink.args = {
   title: '카드 추가',
-  lintTo: '/',
+  linkTo: '/',
 }
