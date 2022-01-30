@@ -23,6 +23,7 @@ const CardEditPage = () => {
     }
 
     setCard(card);
+    setNickname(card.nickname ?? '');
   }, [cardId, navigate]);
 
   const handleNicknameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
