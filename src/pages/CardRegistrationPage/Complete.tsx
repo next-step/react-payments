@@ -1,29 +1,22 @@
+import { useNavigate } from 'react-router-dom';
+import { CardItem } from '../../components/Card/CardItem';
+import { useCard } from '../../store/CardContext';
+
 const CardRegistrationCompletePage = () => {
+  const { card } = useCard();
+  const navigate = useNavigate();
+
+  if (!card) {
+    return <></>;
+  }
+
   return (
     <>
       <div>
         <div className="flex-center">
           <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
         </div>
-        <div className="card-box">
-          <div className="big-card">
-            <div className="card-top">
-              <span className="card-text__big">클린카드</span>
-            </div>
-            <div className="card-middle">
-              <div className="big-card__chip"></div>
-            </div>
-            <div className="card-bottom">
-              <div className="card-bottom__number">
-                <span className="card-text__big">1111 - 2222 - oooo - oooo</span>
-              </div>
-              <div className="card-bottom__info">
-                <span className="card-text__big">YUJO</span>
-                <span className="card-text__big">12 / 23</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <CardItem card={card} />
         <div className="input-container flex-center w-100">
           <input
             className="input-underline w-75"

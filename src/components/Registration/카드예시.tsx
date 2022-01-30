@@ -7,10 +7,10 @@ const getMaskedCardNumberStr = (cardNumber: CardNumber) => {
   return cardNumber.filter(Boolean).join(' - ');
 };
 
-const CardItem = ({ card }: { card: CardForm }) => {
-  const cardNumberStr = getMaskedCardNumberStr(card.cardNumber);
-  const expireDateStr = `${card.expireDate[0]} ${card.expireDate[0].length ? '/' : ''} ${
-    card.expireDate[1]
+export const 카드예시 = ({ cardForm }: { cardForm: CardForm }) => {
+  const cardNumberStr = getMaskedCardNumberStr(cardForm.cardNumber);
+  const expireDateStr = `${cardForm.expireDate[0]} ${cardForm.expireDate[0].length ? '/' : ''} ${
+    cardForm.expireDate[1]
   }`;
 
   return (
@@ -27,7 +27,7 @@ const CardItem = ({ card }: { card: CardForm }) => {
             </div>
             <div className="card-bottom__info">
               <div className="card-text" style={{ boxSizing: 'border-box', width: '60%' }}>
-                {card.userName}
+                {cardForm.userName}
               </div>
               <span className="card-text" style={{ fontSize: '0.75rem' }}>
                 {expireDateStr}
@@ -39,5 +39,3 @@ const CardItem = ({ card }: { card: CardForm }) => {
     </>
   );
 };
-
-export default CardItem;
