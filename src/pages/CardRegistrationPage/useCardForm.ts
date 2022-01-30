@@ -21,18 +21,26 @@ const useCardForm = () => {
 
   const setExpireMonth = (value: string) => {
     const month = Number(value);
-    const isInRange = !Number.isNaN(month) && month >= 1 && month <= 12;
+    const isInRange = !Number.isNaN(month) && month >= 0 && month <= 12;
 
     if (value !== '' && !isInRange) return;
+
+    if (value === '0') value = '';
+    if (month > 0 && month < 10) value = value.padStart(2, '0');
+    if (month > 10) value = Number(value).toString();
 
     setForm({ ...form, expireDate: [value, form.expireDate[1]] });
   };
 
   const setExpireYear = (value: string) => {
     const year = Number(value);
-    const isInRange = !Number.isNaN(year) && year >= 1 && year <= 99;
+    const isInRange = !Number.isNaN(year) && year >= 0 && year <= 99;
 
     if (value !== '' && !isInRange) return;
+
+    if (value === '0') value = '';
+    if (year > 0 && year < 10) value = value.padStart(2, '0');
+    if (year > 10) value = Number(value).toString();
 
     setForm({ ...form, expireDate: [form.expireDate[0], value] });
   };
