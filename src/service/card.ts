@@ -12,10 +12,22 @@ export const convertFormDataToCard = (cardForm: CardForm): Card => {
     password: cardForm.password.join(''),
     userName: cardForm.userName,
     nickname: null,
+    createdAt: new Date(),
   };
 };
 
 export const storeCard = (card: Card) => {
-  const cardsStored = getLocalStorage('cards') ?? [];
-  setLocalStorage('cards', [...cardsStored, card]);
+  const cardsStored = retrieveCards();
+
+  setLocalStorage('cards', [...cardsStored, { ...card, createdAt: new Date() }]);
+};
+
+export const retrieveCards = () => {
+  const items = getLocalStorage('cards') ?? [];
+
+  return items.map((item: any) => ({
+    ...item,
+    expireDate: new Date(item.expireDate),
+    createdAt: new Date(item.createdAt),
+  }));
 };
