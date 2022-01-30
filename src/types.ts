@@ -9,3 +9,11 @@ export interface CardForm {
   CVC: string;
   password: Password;
 }
+
+export interface Card {
+  cardNumber: string;
+  expireDate: Date;
+  userName?: string;
+  CVC: string;
+  password: string;
+}

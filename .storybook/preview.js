@@ -1,4 +1,6 @@
 import { BrowserRouter, Router } from 'react-router-dom';
+import { withReactContext } from 'storybook-react-context';
+import { CardProvider } from '../src/store/CardContext';
 import '../src/styles/index.css';
 
 export const parameters = {
@@ -14,7 +16,9 @@ export const parameters = {
 export const decorators = [
   (Story, context) => (
     <BrowserRouter>
-      <Story />
+      <CardProvider>
+        <Story />
+      </CardProvider>
     </BrowserRouter>
   ),
 ];

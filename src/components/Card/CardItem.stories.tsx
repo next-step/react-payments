@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import CardItem from './Card';
+import { CardItem } from './CardItem';
 
 export default {
   title: 'components/cardItem',
@@ -12,9 +12,9 @@ export const Default = Template.bind({});
 
 Default.args = {
   card: {
-    cardNumber: ['1234', '1234', '1234', '1234'],
+    cardNumber: '1234-1234-1234-1234',
     CVC: '123',
-    expireDate: ['12', '21'],
-    password: ['1', '2'],
+    expireDate: new Date(),
+    password: '12',
   },
 };
