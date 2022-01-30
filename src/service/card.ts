@@ -8,5 +8,6 @@ export const convertToCard = (cardForm: CardForm): Card => {
     expireDate: parse(cardForm.expireDate.join(''), 'MMyy', new Date()),
     password: cardForm.password.join(''),
     userName: cardForm.userName,
+    nickname: null,
   };
 };
