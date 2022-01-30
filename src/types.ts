@@ -11,6 +11,7 @@ export interface CardForm {
 }
 
 export interface Card {
+  id: string;
   cardNumber: string;
   expireDate: Date;
   userName?: string;

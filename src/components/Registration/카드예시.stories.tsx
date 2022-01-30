@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { 카드예시 } from './카드예시';
 
 export default {
-  title: 'components/cardFormItem',
+  title: 'components/카드예시',
   component: 카드예시,
 } as ComponentMeta<typeof 카드예시>;
 
