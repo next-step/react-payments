@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import { CardForm, CardNumber, Password } from '../../types';
 
+const MAX_LENGTH = {
+  CVC: 3,
+  CARD_NUMBER: 4,
+  EXPIRE_DATE: 2,
+  PASSWORD: 1,
+};
+
 const useCardForm = () => {
   const [form, setForm] = useState<CardForm>({
     cardNumber: ['', '', '', ''],
@@ -10,7 +17,7 @@ const useCardForm = () => {
   });
 
   const setCardNumber = (value: string, index: 0 | 1 | 2 | 3) => {
-    if (value.length > 4 || value.match(/[^\d]/)) return;
+    if (value.length > MAX_LENGTH.CARD_NUMBER || value.match(/[^\d]/)) return;
 
     const cardNumber: CardNumber = [...form.cardNumber];
 
@@ -52,13 +59,13 @@ const useCardForm = () => {
   };
 
   const setCVC = (value: string) => {
-    if (value.match(/[^\d]/) || value.length > 3) return;
+    if (value.match(/[^\d]/) || value.length > MAX_LENGTH.CVC) return;
 
     setForm({ ...form, CVC: value });
   };
 
   const setPassword = (value: string, index: 0 | 1) => {
-    if (value.match(/[^\d]/) || value.length > 1) return;
+    if (value.match(/[^\d]/) || value.length > MAX_LENGTH.PASSWORD) return;
 
     const password: Password = [...form.password];
 
@@ -67,7 +74,22 @@ const useCardForm = () => {
     setForm({ ...form, password });
   };
 
-  return { form, setCardNumber, setExpireMonth, setExpireYear, setUserName, setCVC, setPassword };
+  const isFormFilled =
+    form.CVC.length === MAX_LENGTH.CVC &&
+    form.cardNumber.every((part) => part.length === MAX_LENGTH.CARD_NUMBER) &&
+    form.expireDate.every((part) => part.length === MAX_LENGTH.EXPIRE_DATE) &&
+    form.password.every((part) => part.length === MAX_LENGTH.PASSWORD);
+
+  return {
+    form,
+    setCardNumber,
+    setExpireMonth,
+    setExpireYear,
+    setUserName,
+    setCVC,
+    setPassword,
+    isFormFilled,
+  };
 };
 
 export default useCardForm;

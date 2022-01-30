@@ -5,8 +5,16 @@ import useCardForm from './useCardForm';
 const CardRegistrationPage = () => {
   const navigate = useNavigate();
 
-  const { form, setCardNumber, setExpireMonth, setExpireYear, setUserName, setCVC, setPassword } =
-    useCardForm();
+  const {
+    form,
+    setCardNumber,
+    setExpireMonth,
+    setExpireYear,
+    setUserName,
+    setCVC,
+    setPassword,
+    isFormFilled,
+  } = useCardForm();
 
   return (
     <>
@@ -117,7 +125,9 @@ const CardRegistrationPage = () => {
           <input className="input-basic w-15" type="password" readOnly value="*" />
         </div>
         <div className="button-box" onClick={() => navigate('/registration/complete')}>
-          <span className="button-text">다음</span>
+          <button className="button-text" style={{ all: 'unset' }} disabled={!isFormFilled}>
+            다음
+          </button>
         </div>
       </div>
     </>
