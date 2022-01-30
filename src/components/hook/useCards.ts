@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { retrieveCards, storeCard, updateCards } from '../../service/card';
+import { retrieveCards, updateCards } from '../../service/card';
 import { Card } from '../../types';
 
 const sortByCreatedAt = (cards: Card[]) => {
