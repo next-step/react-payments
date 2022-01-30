@@ -1,7 +1,7 @@
 import { Fragment, HTMLAttributes, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CardItem } from '../../components/Card/CardItem';
-import { useCards } from '../../components/hook/useCards';
+import { useCards } from '../../hook/useCards';
 
 const CardListPage = () => {
   const navigate = useNavigate();
