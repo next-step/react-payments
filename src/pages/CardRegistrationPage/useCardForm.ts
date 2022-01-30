@@ -52,7 +52,7 @@ const useCardForm = () => {
   };
 
   const setCVC = (value: string) => {
-    if (value.match(/[^\d]/)) return;
+    if (value.match(/[^\d]/) || value.length > 3) return;
 
     setForm({ ...form, CVC: value });
   };
