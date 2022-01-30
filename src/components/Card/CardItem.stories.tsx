@@ -16,5 +16,6 @@ Default.args = {
     CVC: '123',
     expireDate: new Date(),
     password: '12',
+    nickname: 'hi',
   },
 };

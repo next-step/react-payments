@@ -1,5 +1,5 @@
 import format from 'date-fns/format';
-import { Card, CardForm, CardNumber } from '../../types';
+import { Card } from '../../types';
 
 const getMaskedCardNumberStr = (cardNumber: string) => {
   const numbers = cardNumber.split('-');

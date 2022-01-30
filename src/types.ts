@@ -16,4 +16,5 @@ export interface Card {
   userName?: string;
   CVC: string;
   password: string;
+  nickname: string | null;
 }
