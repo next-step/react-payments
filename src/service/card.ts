@@ -31,3 +31,7 @@ export const retrieveCards = () => {
     createdAt: new Date(item.createdAt),
   }));
 };
+
+export const updateCards = (cards: Card[]) => {
+  setLocalStorage('cards', cards);
+};
