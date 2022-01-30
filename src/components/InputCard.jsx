@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function Card({
+function InputCard({
   cardNumberSeries,
   cardNumberCompany,
   individualMasking,
@@ -44,7 +44,7 @@ function Card({
   );
 }
 
-export default Card;
+export default InputCard;
 
 const CardBox = styled.div`
   display: flex;

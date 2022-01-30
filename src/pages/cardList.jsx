@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { CardContext } from "../Payments";
 import Title from "../components/Title";
 
 function CardList() {
+  const { cards } = useContext(CardContext);
+  console.log(cards);
   return (
     <div className="root">
       <div className="app flex-column-center">

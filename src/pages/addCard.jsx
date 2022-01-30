@@ -1,11 +1,16 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { CardContext } from "../Payments";
 import Title from "../components/Title";
-import Card from "../components/Card";
+import InputCard from "../components/InputCard";
 import Input from "../components/Input";
 import Button from "../components/Button";
 
 function AddCard() {
+  const navigate = useNavigate();
+
+  const { cards, setCards } = useContext(CardContext);
+
   const [cardNumberSeries, setCardNumberSeries] = useState("");
   const [cardNumberCompany, setCardNumberCompany] = useState("");
   const [cardNumberIndividual, setCardNumberIndividual] = useState("");
@@ -62,8 +67,25 @@ function AddCard() {
     }
   };
 
-  //WARNING 임시 제거
-  useEffect(() => {}, [cardNumberCode, cvc, passwordFirst, passwordSecond]);
+  const submit = (event) => {
+    event.preventDefault();
+    setCards([
+      ...cards,
+      {
+        cardNumberSeries,
+        cardNumberCompany,
+        cardNumberIndividual,
+        cardNumberCode,
+        dueMonth,
+        dueYear,
+        name,
+        cvc,
+        passwordFirst,
+        passwordSecond,
+      },
+    ]);
+    navigate("/complete");
+  };
 
   return (
     <div className="root">
@@ -74,7 +96,7 @@ function AddCard() {
           </Link>
           카드 추가
         </Title>
-        <Card
+        <InputCard
           cardNumberSeries={cardNumberSeries}
           cardNumberCompany={cardNumberCompany}
           individualMasking={individualMasking}
@@ -83,7 +105,7 @@ function AddCard() {
           dueMonth={dueMonth}
           dueYear={dueYear}
         />
-        <form action="/complete">
+        <form onSubmit={submit}>
           <div className="input-container">
             <span className="input-title">카드 번호</span>
             <div className="input-box">
@@ -162,7 +184,9 @@ function AddCard() {
                 onChange={(event) =>
                   event.target.value >= 1 &&
                   event.target.value <= 12 &&
-                  handleSetState(event, setDueMonth)
+                  event.target.value.length === 2
+                    ? handleSetState(event, setDueMonth)
+                    : setDueMonth("0".concat(event.target.value))
                 }
               />
               {dueMonth && "/"}
