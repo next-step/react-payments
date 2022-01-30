@@ -1,5 +1,6 @@
 import { parse } from 'date-fns';
 import { Card, CardForm } from '../types';
+import { getLocalStorage, setLocalStorage } from '../utils/storage';
 
 export const convertToCard = (cardForm: CardForm): Card => {
   return {
@@ -10,4 +11,9 @@ export const convertToCard = (cardForm: CardForm): Card => {
     userName: cardForm.userName,
     nickname: null,
   };
+};
+
+export const storeCard = (card: Card) => {
+  const cardsStored = getLocalStorage('cards') ?? [];
+  setLocalStorage('cards', [...cardsStored, card]);
 };

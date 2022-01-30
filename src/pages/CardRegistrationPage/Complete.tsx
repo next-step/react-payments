@@ -1,14 +1,21 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CardItem } from '../../components/Card/CardItem';
+import { storeCard } from '../../service/card';
 import { useCard } from '../../store/CardContext';
 
 const NICKNAME_MAX_LENGTH = 10;
 
 const CardRegistrationCompletePage = () => {
-  const { card, setNickname: setNickname최종 } = useCard();
+  const { card } = useCard();
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
+
+  if (!card) {
+    alert('잘못된 접근입니다.');
+    navigate('/');
+    return <></>;
+  }
 
   const handleNicknameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target.value.length > NICKNAME_MAX_LENGTH) return;
@@ -21,15 +28,9 @@ const CardRegistrationCompletePage = () => {
 
     const nickname최종 = nickname.length === 0 ? '환오은행' : nickname;
 
-    setNickname최종(nickname최종);
+    storeCard({ ...card, nickname: nickname최종 });
     navigate('/');
   };
-
-  if (!card) {
-    alert('잘못된 접근입니다.');
-    navigate('/');
-    return <></>;
-  }
 
   return (
     <form onSubmit={handleSubmit}>
