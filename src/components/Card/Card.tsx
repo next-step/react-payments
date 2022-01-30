@@ -1,4 +1,4 @@
-import { Card, CardNumber } from '../../types';
+import { CardForm, CardNumber } from '../../types';
 
 const getMaskedCardNumberStr = (cardNumber: CardNumber) => {
   cardNumber[2] = '*'.repeat(cardNumber[2].length);
@@ -7,7 +7,7 @@ const getMaskedCardNumberStr = (cardNumber: CardNumber) => {
   return cardNumber.filter(Boolean).join(' - ');
 };
 
-const CardItem = ({ card }: { card: Card }) => {
+const CardItem = ({ card }: { card: CardForm }) => {
   const cardNumberStr = getMaskedCardNumberStr(card.cardNumber);
   const expireDateStr = `${card.expireDate[0]} ${card.expireDate[0].length ? '/' : ''} ${
     card.expireDate[1]

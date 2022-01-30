@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Card, CardNumber, Password } from '../../types';
+import { CardForm, CardNumber, Password } from '../../types';
 
 const useCardForm = () => {
-  const [form, setForm] = useState<Card>({
+  const [form, setForm] = useState<CardForm>({
     cardNumber: ['', '', '', ''],
     expireDate: ['', ''],
     CVC: '',

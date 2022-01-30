@@ -31,6 +31,7 @@ const CardRegistrationPage = () => {
               value={form.cardNumber[0]}
               onChange={({ target }) => setCardNumber(target.value, 0)}
             />
+            {form.cardNumber[0].length === 4 && '-'}
             <input
               className="input-basic"
               type="tel"
@@ -38,6 +39,7 @@ const CardRegistrationPage = () => {
               value={form.cardNumber[1]}
               onChange={({ target }) => setCardNumber(target.value, 1)}
             />
+            {form.cardNumber[1].length === 4 && '-'}
             <input
               className="input-basic"
               type="password"
@@ -45,6 +47,7 @@ const CardRegistrationPage = () => {
               value={form.cardNumber[2]}
               onChange={({ target }) => setCardNumber(target.value, 2)}
             />
+            {form.cardNumber[2].length === 4 && '-'}
             <input
               className="input-basic"
               type="password"
