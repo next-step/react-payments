@@ -12,10 +12,12 @@ export const Default = Template.bind({});
 
 Default.args = {
   card: {
+    id: '',
     cardNumber: '1234-1234-1234-1234',
     CVC: '123',
     expireDate: new Date(),
     password: '12',
     nickname: 'hi',
+    createdAt: new Date(),
   },
 };

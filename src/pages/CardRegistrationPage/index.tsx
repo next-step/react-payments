@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { 카드예시 } from '../../components/Registration/카드예시';
-import { convertToCard } from '../../service/card';
+import { convertFormDataToCard } from '../../service/card';
 import { useCard } from '../../store/CardContext';
 import useCardForm from './useCardForm';
 
@@ -130,7 +130,7 @@ const CardRegistrationPage = () => {
         <div
           className="button-box"
           onClick={() => {
-            setCard(convertToCard(form));
+            setCard(convertFormDataToCard(form));
             navigate('/registration/complete');
           }}
         >

@@ -18,4 +18,5 @@ export interface Card {
   CVC: string;
   password: string;
   nickname: string | null;
+  createdAt: Date;
 }
