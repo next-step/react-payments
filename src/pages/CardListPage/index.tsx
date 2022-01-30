@@ -1,7 +1,7 @@
 import { Fragment, HTMLAttributes, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CardItem } from '../../components/Card/CardItem';
-import { useCards } from './useCards';
+import { useCards } from '../../components/hook/useCards';
 
 const CardListPage = () => {
   const navigate = useNavigate();
@@ -11,11 +11,23 @@ const CardListPage = () => {
     <div className="flex-column-center">
       <CardListTitle>보유 카드</CardListTitle>
       {cards.map((card) => (
-        <Fragment key={card.id}>
+        <div
+          style={{
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            marginBottom: '2rem',
+          }}
+          key={card.id}
+        >
           <CardItem card={card} />
-          <span>{card.nickname}</span>
-          <button onClick={() => removeCard(card.id)}>삭제</button>
-        </Fragment>
+          <span style={{ cursor: 'alias' }} onClick={() => navigate(`/edit?id=${card.id}`)}>
+            {card.nickname}
+          </span>
+          <button style={{ cursor: 'pointer' }} onClick={() => removeCard(card.id)}>
+            삭제
+          </button>
+        </div>
       ))}
       <AddCardButton onClick={() => navigate('/registration')} />
     </div>

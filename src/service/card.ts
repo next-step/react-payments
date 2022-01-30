@@ -22,7 +22,7 @@ export const storeCard = (card: Card) => {
   setLocalStorage('cards', [...cardsStored, { ...card, createdAt: new Date() }]);
 };
 
-export const retrieveCards = () => {
+export const retrieveCards = (): Card[] => {
   const items = getLocalStorage('cards') ?? [];
 
   return items.map((item: any) => ({
@@ -34,4 +34,21 @@ export const retrieveCards = () => {
 
 export const updateCards = (cards: Card[]) => {
   setLocalStorage('cards', cards);
+};
+
+export const retrieveCardById = (cardId: string) => {
+  const cards = retrieveCards();
+
+  return cards.find((card) => card.id === cardId);
+};
+
+export const updateCardNickname = (cardId: string, nickname: string) => {
+  const cards = retrieveCards();
+
+  const targetIndex = cards.findIndex((card) => card.id === cardId);
+  const targetCard = cards[targetIndex];
+
+  targetCard.nickname = nickname;
+
+  updateCards(cards);
 };
