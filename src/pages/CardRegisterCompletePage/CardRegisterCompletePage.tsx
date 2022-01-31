@@ -50,23 +50,25 @@ const CardRegisterCompletePage = () => {
   }, [errorMessage]);
 
   return (
-    <Styled.Form onSubmit={handleSubmit}>
-      <Styled.H1>카드등록이 완료되었습니다.</Styled.H1>
-      <Card
-        size="BIG"
-        cardNumber={pendingCard.cardNumber}
-        cardType={pendingCard.cardType}
-        userName={pendingCard.cardUserName}
-        expiration={pendingCard.cardExpiration}
-      />
-      <Styled.CardNameInput
-        value={cardName}
-        onChange={handleChangeCardName}
-        placeholder="카드 별칭 (선택)"
-        maxLength={10}
-      />
-      <SimpleButton>확인</SimpleButton>
-    </Styled.Form>
+    <main>
+      <Styled.Form onSubmit={handleSubmit}>
+        <Styled.H1>카드등록이 완료되었습니다.</Styled.H1>
+        <Card
+          size="BIG"
+          cardNumber={pendingCard.cardNumber}
+          cardType={pendingCard.cardType}
+          userName={pendingCard.cardUserName}
+          expiration={pendingCard.cardExpiration}
+        />
+        <Styled.CardNameInput
+          value={cardName}
+          onChange={handleChangeCardName}
+          placeholder="카드 별칭 (선택)"
+          maxLength={10}
+        />
+        <SimpleButton>확인</SimpleButton>
+      </Styled.Form>
+    </main>
   );
 };
 

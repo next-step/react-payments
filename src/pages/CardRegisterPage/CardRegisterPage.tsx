@@ -22,17 +22,19 @@ const CardRegisterPage = () => {
   };
 
   return (
-    <main>
+    <>
       <Styled.Header goBackLink={PATH.HOME}>카드추가</Styled.Header>
-      <Styled.Card
-        cardNumber={cardNumber}
-        cardType={cardType}
-        userName={cardUserName}
-        expiration={cardExpiration}
-        size="SMALL"
-      />
-      <CardForm onSubmit={handleCardFormSubmit} />
-    </main>
+      <main>
+        <Styled.Card
+          cardNumber={cardNumber}
+          cardType={cardType}
+          userName={cardUserName}
+          expiration={cardExpiration}
+          size="SMALL"
+        />
+        <CardForm onSubmit={handleCardFormSubmit} />
+      </main>
+    </>
   );
 };
 
