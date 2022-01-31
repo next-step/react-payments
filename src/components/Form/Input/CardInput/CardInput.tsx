@@ -10,7 +10,7 @@ export default function CardInput({ labelName, errMessages, labelRight, ...props
   return (
     <S.Box>
       <Label labelName={labelName} labelRight={labelRight}>
-        <S.Input {...props} />
+        <S.Input id={labelName} {...props} />
         {errMessages && <span>{errMessages}</span>}
       </Label>
     </S.Box>

@@ -52,17 +52,20 @@
   "devDependencies": {
     "@storybook/addon-actions": "^6.4.12",
     "@storybook/addon-essentials": "^6.4.12",
+    "@storybook/addon-interactions": "^6.4.17",
     "@storybook/addon-links": "^6.4.12",
     "@storybook/builder-webpack5": "^6.4.12",
+    "@storybook/jest": "^0.0.5",
     "@storybook/manager-webpack5": "^6.4.12",
     "@storybook/node-logger": "^6.4.12",
     "@storybook/preset-create-react-app": "^4.0.0",
     "@storybook/react": "^6.4.12",
-    "@types/styled-components": "^5.1.20",
+    "@storybook/testing-library": "^0.0.8",
     "@types/jest": "^27.4.0",
     "@types/node": "^16.11.19",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "@types/styled-components": "^5.1.20",
     "webpack": "^5.65.0"
   }
 }
