@@ -1,18 +1,20 @@
 import { NameRegex, MaxLength } from "@common/constants";
-import useInput, { IUseInputState } from "@hooks/useInput";
+import useInput from "@hooks/useInput";
 import { useEffect } from "react";
 import { OnChangeInputState } from "./AddCardForm";
 
 interface CardOwnerNameInputProps {
   onChangeInputState?: OnChangeInputState;
 }
-const CardOwnerNameInput = (props: CardOwnerNameInputProps) => {
+const CardOwnerNameInput = ({
+  onChangeInputState,
+}: CardOwnerNameInputProps) => {
   const ownerNameInputState = useInput({
     inputRegex: NameRegex,
   });
 
   useEffect(() => {
-    props?.onChangeInputState?.call(null, {
+    onChangeInputState?.({
       value: ownerNameInputState.value,
       displayValue: ownerNameInputState.value,
       isValid: ownerNameInputState.isValid,

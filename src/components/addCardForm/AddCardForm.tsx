@@ -10,12 +10,12 @@ import SecurityCodeInput from "./SecurityCodeInput";
 
 const inputStateMap = new Map<string, IInputState>();
 
-const AddCardForm = (props: AddCardFormProps) => {
-  const onSubmit: FormEventHandler<HTMLFormElement> = (
+const AddCardForm = ({ onSubmit, className }: AddCardFormProps) => {
+  const handleSubmit: FormEventHandler<HTMLFormElement> = (
     e: FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
-    props?.onSubmit && props.onSubmit(e);
+    onSubmit?.(e);
   };
 
   const [isValidForm, setIsValidForm] = useState(false);
@@ -40,7 +40,7 @@ const AddCardForm = (props: AddCardFormProps) => {
   };
 
   return (
-    <form onSubmit={onSubmit} className={props.className}>
+    <form onSubmit={handleSubmit} className={className}>
       <Card type={CardType.small} cardData={cardData} />
       <CardNumberInput onChangeInputState={onChangeInputState} />
       <CardExpirationInput onChangeInputState={onChangeInputState} />

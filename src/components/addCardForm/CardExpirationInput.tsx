@@ -7,7 +7,9 @@ interface CardExpirationInputProps {
   onChangeInputState?: OnChangeInputState;
 }
 
-const CardExpirationInput = (props: CardExpirationInputProps) => {
+const CardExpirationInput = ({
+  onChangeInputState,
+}: CardExpirationInputProps) => {
   const monthInputState = useInput({
     inputRegex: DigitRegex,
     validator: (val) => +val > 0 && +val <= 12,
@@ -23,7 +25,7 @@ const CardExpirationInput = (props: CardExpirationInputProps) => {
       .filter((inputVal) => inputVal.length > 0)
       .join(" / ");
 
-    props?.onChangeInputState?.call(null, {
+    onChangeInputState?.({
       value,
       displayValue: value,
       isValid: monthInputState.isValid && yearInputState.isValid,

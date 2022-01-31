@@ -7,7 +7,7 @@ interface CardNumberInputProps {
   onChangeInputState?: OnChangeInputState;
 }
 
-const CardNumberInput = (props: CardNumberInputProps) => {
+const CardNumberInput = ({ onChangeInputState }: CardNumberInputProps) => {
   const cardNumConfig: IUseInputConfig = {
     inputRegex: DigitRegex,
     validator: (val) => val.length === MaxLength.CardNumberInput,
@@ -36,7 +36,7 @@ const CardNumberInput = (props: CardNumberInputProps) => {
         .filter((inputVal) => inputVal.length > 0)
         .join(" - ");
 
-      props?.onChangeInputState?.call(null, {
+      onChangeInputState?.({
         value,
         displayValue,
         isValid: cardNumInputStateList.every((state) => state.isValid),

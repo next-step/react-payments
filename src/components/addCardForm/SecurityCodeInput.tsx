@@ -7,7 +7,7 @@ interface SecurityCodeInputProps {
   onChangeInputState?: OnChangeInputState;
 }
 
-const SecurityCodeInput = (props: SecurityCodeInputProps) => {
+const SecurityCodeInput = ({ onChangeInputState }: SecurityCodeInputProps) => {
   const securityCodeInputState = useInput({
     inputRegex: DigitRegex,
     validator: (val) => val.length === MaxLength.CardSecurityCodeInput,
@@ -15,7 +15,7 @@ const SecurityCodeInput = (props: SecurityCodeInputProps) => {
   });
 
   useEffect(() => {
-    props?.onChangeInputState?.call(null, {
+    onChangeInputState?.({
       value: securityCodeInputState.value,
       displayValue: "*".repeat(securityCodeInputState.value.length),
       isValid: securityCodeInputState.isValid,

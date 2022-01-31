@@ -7,7 +7,7 @@ interface CardPasswordInputProps {
   onChangeInputState?: OnChangeInputState;
 }
 
-const CardPasswordInput = (props: CardPasswordInputProps) => {
+const CardPasswordInput = ({ onChangeInputState }: CardPasswordInputProps) => {
   const passwordInputConfig: IUseInputConfig = {
     inputRegex: DigitRegex,
     validator: (val) => val.length === MaxLength.CardPasswordInput,
@@ -24,7 +24,7 @@ const CardPasswordInput = (props: CardPasswordInputProps) => {
       const value = passwordInputStateList
         .map((inputState) => inputState.value)
         .join("");
-      props?.onChangeInputState?.call(null, {
+      onChangeInputState?.({
         value,
         displayValue: "",
         isValid: passwordInputStateList.every((state) => state.isValid),
