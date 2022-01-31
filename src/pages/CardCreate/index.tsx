@@ -60,24 +60,25 @@ const SubmitButton = ({
     if (isValidCardForm) {
       const id = crypto.randomUUID ? crypto.randomUUID() : uuidv4()
 
+      const newCard = {
+        id,
+        card: {
+          number1: cardNumber.cardNumber1,
+          number2: cardNumber.cardNumber2,
+          number3: cardNumber.cardNumber3,
+          number4: cardNumber.cardNumber4,
+          year: cardExpire.expireAtYear,
+          month: cardExpire.expireAtMonth,
+          owner,
+          type: cardType,
+        },
+      }
       cardDispatch({
         type: 'ADD',
-        payload: {
-          id,
-          card: {
-            number1: cardNumber.cardNumber1,
-            number2: cardNumber.cardNumber2,
-            number3: cardNumber.cardNumber3,
-            number4: cardNumber.cardNumber4,
-            year: cardExpire.expireAtYear,
-            month: cardExpire.expireAtMonth,
-            owner,
-            type: cardType,
-          },
-        },
+        payload: newCard,
       })
 
-      navigate('/submit')
+      navigate('/submit', { state: { newCard } })
     }
   }
 
