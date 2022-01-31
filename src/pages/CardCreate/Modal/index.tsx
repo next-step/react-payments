@@ -15,9 +15,6 @@ const CardCreateModal = ({
     BackgroundColorAccordingToStartsWith
   ) as CardType[]
 
-  const line1 = cardTypes.slice(0, 4)
-  const line2 = cardTypes.slice(4)
-
   const onClickModalOutside: MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
       if (event.target === modalRef.current) {
@@ -37,18 +34,7 @@ const CardCreateModal = ({
         <Styled.ModalContainer>
           <Styled.ContentContainer>
             <Styled.ContentLineContainer>
-              {line1.map((cardType) => (
-                <TouchableCardColorPicker
-                  key={cardType}
-                  cardType={cardType}
-                  setCardType={setCardType}
-                  onClicked={onColorCircleClicked}
-                />
-              ))}
-            </Styled.ContentLineContainer>
-            <Styled.ContentLineSpace />
-            <Styled.ContentLineContainer>
-              {line2.map((cardType) => (
+              {cardTypes.map((cardType) => (
                 <TouchableCardColorPicker
                   key={cardType}
                   cardType={cardType}
