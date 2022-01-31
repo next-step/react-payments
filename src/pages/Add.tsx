@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useContext, useEffect, useState } from 'react';
 
 import Card from '../components/Card';
 import Input from '../components/Input';
@@ -6,25 +6,30 @@ import Button from '../components/Button';
 import Layout from '../components/Layout';
 import Modal from '../components/Modal';
 import { PageTitle } from '../common/styles';
-import { ButtonBox } from '../components/Button/styles';
 import {
   InputContainer,
   InputTitle,
   InputBox,
   ErrorMessage,
-  OwnerLength,
 } from '../components/Input/styles';
 import { ERROR_MESSAGE } from '../constants';
 import { useNavigate } from 'react-router';
+import { CardContext } from '../context/CardContext';
 
 const Add = () => {
   const history = useNavigate();
+  const {
+    card,
+    onChangeCardCompany,
+    onChangeCardNumber,
+    onChangeExpirationNumber,
+    onChangeOwner,
+    onChangeCvc,
+    onChangePassword,
+  } = useContext(CardContext);
+  const { cardNumber, expirationNumber, ownerName, cvc, password, company } =
+    card;
 
-  const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);
-  const [expirationNumber, setExpirationNumber] = useState<string[]>(['', '']);
-  const [owner, setOwner] = useState<string>('');
-  const [cvc, setCvc] = useState<string>('');
-  const [password, setPassword] = useState<string[]>(['', '']);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [expirationMonthError, setExpirationMonthError] =
     useState<boolean>(false);
@@ -44,40 +49,6 @@ const Add = () => {
     )
       setIsModalOpen(true);
   }, [cardNumber]);
-
-  const onChangeCardNumber = (
-    event: ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const updatedCardNumber = [...cardNumber];
-    updatedCardNumber[index] = event.target.value.substring(0, 4);
-    setCardNumber([...updatedCardNumber]);
-  };
-
-  const onChangeExpirationNumber = (
-    event: ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const updatedCvcNumber = [...expirationNumber];
-    updatedCvcNumber[index] = event.target.value.substring(0, 2);
-    setExpirationNumber([...updatedCvcNumber]);
-  };
-
-  const onChangeOwner = (event: ChangeEvent<HTMLInputElement>) => {
-    setOwner(event.target.value);
-  };
-  const onChangeCvc = (event: ChangeEvent<HTMLInputElement>) => {
-    setCvc(event.target.value.substring(0, 3));
-  };
-
-  const onChangePassword = (
-    event: ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const updatedPasswordNumber = [...password];
-    updatedPasswordNumber[index] = event.target.value;
-    setPassword([...updatedPasswordNumber]);
-  };
 
   const onCloseModal = () => {
     setIsModalOpen(false);
@@ -153,7 +124,11 @@ const Add = () => {
       !passwordError[0] &&
       !passwordError[1]
     ) {
-      history('/alias');
+      history('/alias', {
+        state: {
+          type: 'add',
+        },
+      });
     }
   };
 
@@ -169,8 +144,9 @@ const Add = () => {
         size="small"
         cardNumber={cardNumber}
         expirationNumber={expirationNumber}
-        owner={owner}
+        owner={ownerName}
         onClick={onClickChangeColorCard}
+        company={company}
       />
       <form onSubmit={onSubmit}>
         <InputContainer>
@@ -243,11 +219,11 @@ const Add = () => {
         <InputContainer>
           <InputTitle>
             <span>카드 소유자 이름(선택)</span>
-            <span>{owner.length}/30</span>
+            <span>{ownerName.length}/30</span>
           </InputTitle>
           <Input
             type="text"
-            value={owner}
+            value={ownerName}
             maxLength={30}
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
             onChange={onChangeOwner}
@@ -305,7 +281,7 @@ const Add = () => {
       <Modal
         open={isModalOpen}
         onClose={onCloseModal}
-        onClickSpace={onCloseModal}
+        setCardCompany={onChangeCardCompany}
       />
     </Layout>
   );

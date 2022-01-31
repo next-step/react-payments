@@ -1,10 +1,10 @@
 import React from 'react';
 import { FlexCenter } from '../../common/styles';
+import { Company } from '../../type';
 import {
   Modal,
   ModalDimmed,
   ModalItemButton,
-  ModalItemConatainer,
   ModalItemDot,
   ModalItemName,
 } from './styles';
@@ -12,7 +12,7 @@ import {
 interface ModalProps {
   open: boolean;
   onClose: () => void;
-  onClickSpace: () => void;
+  setCardCompany: (company: Company) => void;
 }
 
 const cards = [
@@ -26,13 +26,17 @@ const cards = [
   { color: '#FBCD58', name: '썬 카드' },
 ];
 
-const index = ({ open, onClose, onClickSpace }: ModalProps) => {
+const index = ({ open, onClose, setCardCompany }: ModalProps) => {
+  const onClickCompany = (card: Company) => {
+    setCardCompany(card);
+    onClose();
+  };
   return (
-    <ModalDimmed open={open} onClick={onClickSpace}>
+    <ModalDimmed open={open} onClick={onClose}>
       <Modal>
         {cards.map((card) => (
           <FlexCenter key={card.name}>
-            <ModalItemButton onClick={onClose}>
+            <ModalItemButton onClick={() => onClickCompany(card)}>
               <ModalItemDot color={card.color}></ModalItemDot>
               <ModalItemName>{card.name}</ModalItemName>
             </ModalItemButton>
