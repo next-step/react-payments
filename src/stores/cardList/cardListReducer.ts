@@ -18,7 +18,7 @@ const cardListReducer: Reducer<CardMap, UnionActionTypeOfCardListAction> = (stat
       const id = uuid();
       const addedState = {
         ...state,
-        id: {
+        [id]: {
           ...action.payload.card,
           id,
           createdAt: Date.now(),
