@@ -17,6 +17,7 @@ const Label = styled.label`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 
   input {
     position: absolute;
