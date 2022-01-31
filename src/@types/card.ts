@@ -1,4 +1,4 @@
-const CARD_TYPES = ["POCO", "JUN", "GONG_WON", "BRAN", "LLOYD", "DOBY", "COLIN", "SUN"] as const;
+const CARD_TYPES = ["NONE", "POCO", "JUN", "GONG_WON", "BRAN", "LLOYD", "DOBY", "COLIN", "SUN"] as const;
 const CARD_SIZE = ["SMALL", "BIG"] as const;
 
 type CardNumber = [string, string, string, string];
@@ -21,7 +21,9 @@ interface CardSizeContent {
   FONT_SIZE: string;
 }
 
-interface CardFormField {
+interface Card {
+  cardName: string;
+  cardType: CardType;
   cardNumber: CardNumber;
   cardExpiration: CardExpiration;
   cardUserName: string;
@@ -29,4 +31,6 @@ interface CardFormField {
   cardPassword: string;
 }
 
-export { CardNumber, CardType, CardSize, CardExpiration, CardSizeContent, CardFormField };
+interface CardFormField extends Omit<Card, "cardName"> {}
+
+export { CardNumber, CardType, CardSize, CardExpiration, CardSizeContent, Card, CardFormField };

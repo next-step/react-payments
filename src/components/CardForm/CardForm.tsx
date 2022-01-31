@@ -1,5 +1,9 @@
-import { FormEventHandler, useState } from "react";
-import { CardExpiration, CardFormField, CardNumber } from "../../@types";
+import { FormEventHandler } from "react";
+import { CardFormField, CardNumber } from "../../@types";
+import useIsShown from "../../hooks/useIsShown";
+import cardActions from "../../stores/card/CardActions";
+import useCardDispatch from "../../stores/card/hooks/useCardDispatch";
+import useCardSelector from "../../stores/card/hooks/useCardSelector";
 import CardExpirationInput from "../CardExpirationInput/CardExpirationInput";
 import CardNumberInput from "../CardNumberInput/CardNumberInput";
 import CardPasswordInput from "../CardPasswordInput/CardPasswordInput";
@@ -13,28 +17,31 @@ interface Props {
 }
 
 const CardForm = ({ onSubmit }: Props) => {
-  const [cardNumber, setCardNumberChange] = useState<CardNumber>(["", "", "", ""]);
-  const [cardExpiration, setCardExpiration] = useState<CardExpiration>({ month: "", year: "" });
-  const [cardUserName, setCardUserName] = useState("");
-  const [cardSecurityCode, setCardSecurityCode] = useState("");
-  const [cardPassword, setCardPassword] = useState("");
+  const { cardNumber, cardType, cardExpiration, cardUserName, cardSecurityCode, cardPassword } = useCardSelector(
+    (state) => state
+  );
+  const cardDispatch = useCardDispatch();
 
-  const handleCardNumberChange = (cardNumber: CardNumber) => setCardNumberChange(cardNumber);
+  const handleCardNumberChange = (cardNumber: CardNumber) => cardDispatch(cardActions.setCardNumber({ cardNumber }));
 
-  const handleCardExpirationChange = (month: string, year: string) => setCardExpiration({ month, year });
+  const handleCardExpirationChange = (month: string, year: string) =>
+    cardDispatch(cardActions.setCardExpiration({ cardExpiration: { month, year } }));
 
-  const handleCardUserNameChange = (userName: string) => setCardUserName(userName);
+  const handleCardUserNameChange = (cardUserName: string) =>
+    cardDispatch(cardActions.setCardUserName({ cardUserName }));
 
-  const handleCardSecurityCodeChange = (code: string) => setCardSecurityCode(code);
+  const handleCardSecurityCodeChange = (cardSecurityCode: string) =>
+    cardDispatch(cardActions.setCardSecurityCode({ cardSecurityCode }));
 
   const handleCardPasswordChange = (firstNumber: string, secondNumber: string) =>
-    setCardPassword(firstNumber + secondNumber);
+    cardDispatch(cardActions.setCardPassword({ cardPassword: firstNumber + secondNumber }));
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
     onSubmit?.({
       cardNumber,
+      cardType,
       cardExpiration,
       cardUserName,
       cardSecurityCode,

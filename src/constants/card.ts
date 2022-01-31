@@ -1,7 +1,7 @@
 import { CardSize, CardSizeContent, CardType } from "../@types";
 
-const CARD_COLOR: { [K in CardType | "DEFAULT"]: string } = {
-  DEFAULT: "#D2D2D2",
+const CARD_COLOR: { [K in CardType]: string } = {
+  NONE: "#D2D2D2",
   POCO: "#E24141",
   JUN: "#547CE4",
   GONG_WON: "#73BC6D",
@@ -13,6 +13,7 @@ const CARD_COLOR: { [K in CardType | "DEFAULT"]: string } = {
 };
 
 const CARD_NAME: { [K in CardType]: string } = {
+  NONE: "",
   POCO: "포코카드",
   JUN: "준카드",
   GONG_WON: "공원카드",

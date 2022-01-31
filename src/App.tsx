@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 
 import { PATH } from "./constants/route";
 import CardRegisterPage from "./pages/CardRegisterPage/CardRegisterPage";
+import CardStore from "./stores/card/CardStore";
 
 const AppContainer = styled.div`
   width: 500px;
@@ -11,7 +12,11 @@ const AppContainer = styled.div`
 `;
 
 const App = () => {
-  const home = <CardRegisterPage />;
+  const home = (
+    <CardStore>
+      <CardRegisterPage />;
+    </CardStore>
+  );
   return (
     <AppContainer style={{ width: "500px" }}>
       <BrowserRouter>
