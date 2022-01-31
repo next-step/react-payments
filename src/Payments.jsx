@@ -7,6 +7,7 @@ import CardList from "./pages/cardList";
 export const CardContext = createContext();
 
 function Payments() {
+  const [id, setId] = useState(1);
   const [cards, setCards] = useState([]);
 
   return (
@@ -18,7 +19,9 @@ function Payments() {
             <CardContext.Provider
               value={{
                 cards,
+                id,
                 setCards,
+                setId,
               }}
             >
               <AddCard />
@@ -44,6 +47,7 @@ function Payments() {
             <CardContext.Provider
               value={{
                 cards,
+                setCards,
               }}
             >
               <CardList />

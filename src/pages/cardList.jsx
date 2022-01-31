@@ -5,7 +5,12 @@ import Title from "../components/Title";
 import CompletedCard from "../components/CompletedCard";
 
 function CardList() {
-  const { cards } = useContext(CardContext);
+  const { cards, setCards } = useContext(CardContext);
+
+  const deleteCard = (event, id) => {
+    event.preventDefault();
+    setCards(cards.filter((card) => card.id !== id));
+  };
 
   return (
     <Root>
@@ -13,12 +18,19 @@ function CardList() {
         <FlexCenter>
           <Title marginBottom="2.5rem">보유 카드</Title>
         </FlexCenter>
-        {cards.map((card, index) => (
-          <React.Fragment key={index}>
-            <CompletedCard completedCard={card} small smallChip />
-            <span>법인카드</span>
-          </React.Fragment>
-        ))}
+        {cards
+          .sort((a, b) => b.id - a.id)
+          .map((card) => (
+            <React.Fragment key={card.id}>
+              <CompletedCard completedCard={card} small smallChip />
+              <span>
+                {card.nickName}{" "}
+                <button onClick={(event) => deleteCard(event, card.id)}>
+                  카드 삭제
+                </button>
+              </span>
+            </React.Fragment>
+          ))}
         <CardBox>
           <EmptyCard>+</EmptyCard>
         </CardBox>

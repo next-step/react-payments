@@ -10,7 +10,7 @@ import Button from "../components/Button";
 function AddCard() {
   const navigate = useNavigate();
 
-  const { cards, setCards } = useContext(CardContext);
+  const { cards, setCards, id, setId } = useContext(CardContext);
 
   const [cardNumberSeries, setCardNumberSeries] = useState("");
   const [cardNumberCompany, setCardNumberCompany] = useState("");
@@ -73,6 +73,7 @@ function AddCard() {
     setCards([
       ...cards,
       {
+        id,
         cardNumberSeries,
         cardNumberCompany,
         cardNumberIndividual,
@@ -85,6 +86,7 @@ function AddCard() {
         passwordSecond,
       },
     ]);
+    setId(id + 1);
     navigate("/complete");
   };
 
