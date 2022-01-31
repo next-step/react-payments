@@ -1,12 +1,18 @@
+import styled from 'styled-components'
+
 interface Props extends React.HTMLAttributes<HTMLFieldSetElement> {
   legend: string
 }
 
 export default function FieldSet({ legend = '', children }: Props) {
   return (
-    <fieldset>
+    <Fieldset>
       <legend>{legend}</legend>
       {children}
-    </fieldset>
+    </Fieldset>
   )
 }
+
+const Fieldset = styled.fieldset`
+  border: none;
+`

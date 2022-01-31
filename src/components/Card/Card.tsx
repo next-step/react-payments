@@ -13,6 +13,7 @@ export const Box = styled.div<{ big?: boolean }>`
   margin: 12px 0;
   width: 208px;
   min-height: 130px;
+  height: 130px;
   color: #575757;
   background: #e5e5e5;
   border-radius: 5px;
@@ -20,6 +21,7 @@ export const Box = styled.div<{ big?: boolean }>`
     big &&
     css`
       width: 290px;
+      height: 180px;
       min-height: 180px;
     `}
 `
