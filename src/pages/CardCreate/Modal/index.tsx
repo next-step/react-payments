@@ -29,7 +29,7 @@ const CardCreateModal = ({
   }, [setIsOpen])
 
   return (
-    <Modal isOpen={isOpen} onClose={() => console.log('hi')}>
+    <Modal isOpen={isOpen}>
       <Styled.Container ref={modalRef} onClick={onClickModalOutside}>
         <Styled.ModalContainer>
           <Styled.ContentContainer>

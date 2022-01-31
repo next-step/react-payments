@@ -26,25 +26,6 @@ const ContentContainer = styled.div`
   height: 100%;
 `
 
-// const ContentLineContainer = styled.div`
-//   height: 62px;
-//   width: 100%;
-//   display: flex;
-//   justify-content: space-between;
-// `
-// const ContentLineSpace = styled.div`
-//   height: 26px;
-//   width: 100%;
-// `
-
-// const CardTypeContainer = styled.div`
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-
-//   cursor: pointer;
-// `
 const ContentLineContainer = styled.div`
   column-count: 4;
   column-width: 25%;

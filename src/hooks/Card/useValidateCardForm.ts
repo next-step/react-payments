@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { CardFormProps } from '../../context/Form/CardFormContext'
 
 interface CardErrorStateProps {
@@ -20,51 +20,85 @@ const useValidateCardForm = ({ formRef }: UseValidateCardFormProps) => {
     isCardPasswordError: undefined,
   })
 
-  //   const isCardNumberValid = useCallback(() => {
-  //     const isValidNumber = (number: string | undefined) => number?.length === 4
-  //     const cardNumber1Valid = isValidNumber(formRef.current?.cardNumber1())
-  //     const cardNumber2Valid = isValidNumber(formRef.current?.cardNumber2())
-  //     const cardNumber3Valid = isValidNumber(formRef.current?.cardNumber3())
-  //     const cardNumber4Valid = isValidNumber(formRef.current?.cardNumber4())
+  const isCardNumberValid = useCallback(() => {
+    const isValidNumber = (number: string | undefined) => number?.length === 4
+    const { cardNumber1, cardNumber2, cardNumber3, cardNumber4 } =
+      formRef.current?.cardNumber() ?? {
+        cardNumber1: '',
+        cardNumber2: '',
+        cardNumber3: '',
+        cardNumber4: '',
+      }
 
-  //     return (
-  //       cardNumber1Valid &&
-  //       cardNumber2Valid &&
-  //       cardNumber3Valid &&
-  //       cardNumber4Valid
-  //     )
-  //   }, [])
+    const cardNumber1Valid = isValidNumber(cardNumber1)
+    const cardNumber2Valid = isValidNumber(cardNumber2)
+    const cardNumber3Valid = isValidNumber(cardNumber3)
+    const cardNumber4Valid = isValidNumber(cardNumber4)
 
-  //   const isExpireDateValid = useCallback(() => {
-  //     const isValidExpireDate = (date: string | undefined) => date?.length === 2
-  //     const month = Number(formRef.current?.expiredAtMonth())
+    return (
+      cardNumber1Valid &&
+      cardNumber2Valid &&
+      cardNumber3Valid &&
+      cardNumber4Valid
+    )
+  }, [formRef])
 
-  //     const isMonthScopeValid = 1 <= month && month <= 12
+  const isExpireDateValid = useCallback(() => {
+    const isValidExpireDate = (date: string | undefined) => date?.length === 2
+    const month = Number(formRef.current?.cardExpire().expireAtMonth)
 
-  //     const cardExpireMonthValid =
-  //       isValidExpireDate(formRef.current?.expiredAtMonth()) && isMonthScopeValid
+    const isMonthScopeValid = 1 <= month && month <= 12
 
-  //     const cardExpireYearValid = isValidExpireDate(
-  //       formRef.current?.expiredAtYear()
-  //     )
+    const cardExpireMonthValid =
+      isValidExpireDate(formRef.current?.cardExpire().expireAtMonth) &&
+      isMonthScopeValid
 
-  //     return cardExpireMonthValid && cardExpireYearValid
-  //   }, [formRef])
+    const cardExpireYearValid = isValidExpireDate(
+      formRef.current?.cardExpire().expireAtYear
+    )
 
-  //   const isCvcIsValid = useCallback(() => {
-  //     return formRef.current?.cvc().length === 3
-  //   }, [formRef])
+    return cardExpireMonthValid && cardExpireYearValid
+  }, [formRef])
 
-  //   const isPasswordValid = useCallback(() => {
-  //     const isPasswordValid = (password: string | undefined) =>
-  //       password?.length === 1
-  //     const password1Valid = isPasswordValid(formRef.current?.password1())
-  //     const password2Valid = isPasswordValid(formRef.current?.password2())
+  const isCvcIsValid = useCallback(() => {
+    return formRef.current?.cvc().length === 3
+  }, [formRef])
 
-  //     return password1Valid && password2Valid
-  //   }, [formRef])
+  const isPasswordValid = useCallback(() => {
+    const isPasswordValid = (password: string | undefined) =>
+      password?.length === 1
+    const password1Valid = isPasswordValid(
+      formRef.current?.password().password1
+    )
+    const password2Valid = isPasswordValid(
+      formRef.current?.password().password2
+    )
 
-  return [error]
+    return password1Valid && password2Valid
+  }, [formRef])
+
+  const validateCardForm = useCallback(() => {
+    const cardNumberValid = isCardNumberValid()
+    const cardExpireDateValid = isExpireDateValid()
+    const cardCvcValid = isCvcIsValid()
+    const cardPasswordValid = isPasswordValid()
+
+    setError({
+      isCardNumberError: !cardNumberValid,
+      isCardExpireDateError: !cardExpireDateValid,
+      isCardCvcError: !cardCvcValid,
+      isCardPasswordError: !cardPasswordValid,
+    })
+
+    return (
+      cardNumberValid &&
+      cardExpireDateValid &&
+      cardCvcValid &&
+      cardPasswordValid
+    )
+  }, [isCardNumberValid, isCvcIsValid, isExpireDateValid, isPasswordValid])
+
+  return { error, validateCardForm }
 }
 
 export { useValidateCardForm }
