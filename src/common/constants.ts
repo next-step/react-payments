@@ -22,5 +22,15 @@ export const InputType = {
   password: "password",
 } as const;
 
-export const DigitRegex = /^$|^\d*$/;
-export const NameRegex = /^[a-zA-Z\s]+$/;
+export const InputFieldName = {
+  CardNumber1: "CardNumber1",
+  CardNumber2: "CardNumber2",
+  CardNumber3: "CardNumber3",
+  CardNumber4: "CardNumber4",
+  MonthExpiration: "MonthExpiration",
+  YearExpiration: "YearExpiration",
+  OwnerName: "OwnerName",
+  CardPassword1: "CardPassword1",
+  CardPassword2: "CardPassword2",
+  SecurityCode: "SecurityCode",
+} as const;

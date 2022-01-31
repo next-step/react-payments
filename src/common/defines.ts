@@ -6,6 +6,8 @@ export type CardData = {
   expired?: string;
   userName?: string;
   alias?: string;
+  id?: number;
+  createdAt?: number;
 };
 
 export type InputTypeAttribute = keyof typeof InputType;

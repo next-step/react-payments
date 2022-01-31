@@ -1,42 +1,29 @@
-import { DigitRegex, InputType, MaxLength } from "@common/constants";
-import useInput, { IUseInputState } from "@hooks/useInput";
-import { useEffect } from "react";
-import { OnChangeInputState } from "./AddCardForm";
+import { InputFieldName, InputType, MaxLength } from "@common/constants";
+import { UseFormRegister } from "@hooks/useForm";
 
 interface SecurityCodeInputProps {
-  onChangeInputState?: OnChangeInputState;
+  register?: UseFormRegister;
 }
 
-const SecurityCodeInput = ({ onChangeInputState }: SecurityCodeInputProps) => {
-  const securityCodeInputState = useInput({
-    inputRegex: DigitRegex,
-    validator: (val) => val.length === MaxLength.CardSecurityCodeInput,
-    type: InputType.password,
-  });
+const securityCodePattern = `\\d{${MaxLength.CardSecurityCodeInput}}`;
+const invalidMessage = `input SecurityCode format, digit ${MaxLength.CardSecurityCodeInput}`;
 
-  useEffect(() => {
-    onChangeInputState?.({
-      value: securityCodeInputState.value,
-      displayValue: "*".repeat(securityCodeInputState.value.length),
-      isValid: securityCodeInputState.isValid,
-      displayName: SecurityCodeInput.displayName,
-    });
-  }, [securityCodeInputState.value]);
-
+const SecurityCodeInput = ({ register }: SecurityCodeInputProps) => {
   return (
     <div className="input-container">
       <span className="input-title">보안코드(CVC/CVV)</span>
       <input
         className="input-basic w-25"
-        type={securityCodeInputState.type}
+        type={InputType.password}
         maxLength={MaxLength.CardSecurityCodeInput}
-        value={securityCodeInputState.value}
-        onChange={securityCodeInputState.onChange}
+        {...register?.(InputFieldName.SecurityCode, {
+          pattern: securityCodePattern,
+          required: true,
+          invalidMessage,
+        })}
       />
     </div>
   );
 };
-
-SecurityCodeInput.displayName = "SecurityCodeInput";
 
 export default SecurityCodeInput;

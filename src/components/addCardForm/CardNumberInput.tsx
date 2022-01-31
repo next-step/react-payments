@@ -1,70 +1,67 @@
-import { DigitRegex, InputType, MaxLength } from "@common/constants";
-import useInput, { IUseInputConfig, IUseInputState } from "@hooks/useInput";
-import { useEffect } from "react";
-import { OnChangeInputState } from "./AddCardForm";
+import { InputFieldName, InputType, MaxLength } from "@common/constants";
+import { UseFormRegister, UseFormWatch } from "@hooks/useForm";
 
 interface CardNumberInputProps {
-  onChangeInputState?: OnChangeInputState;
+  register?: UseFormRegister;
+  watch?: UseFormWatch;
 }
 
-const CardNumberInput = ({ onChangeInputState }: CardNumberInputProps) => {
-  const cardNumConfig: IUseInputConfig = {
-    inputRegex: DigitRegex,
-    validator: (val) => val.length === MaxLength.CardNumberInput,
-  };
+const CardNumberPattern = `\\d{${MaxLength.CardNumberInput}}`;
+const invalidMessage = `Input cardNumber format, ${MaxLength.CardNumberInput} digit`;
 
-  const cardNumInputStateList: IUseInputState[] = [
-    useInput(cardNumConfig),
-    useInput(cardNumConfig),
-    useInput({ ...cardNumConfig, type: InputType.password }),
-    useInput({ ...cardNumConfig, type: InputType.password }),
-  ];
-
-  useEffect(
-    () => {
-      const value = cardNumInputStateList
-        .map((numInputState) => numInputState.value)
-        .filter((inputVal) => inputVal.length > 0)
-        .join(" - ");
-
-      const displayValue = cardNumInputStateList
-        .map((numInputState) =>
-          numInputState.type === InputType.password
-            ? "*".repeat(numInputState.value.length)
-            : numInputState.value
-        )
-        .filter((inputVal) => inputVal.length > 0)
-        .join(" - ");
-
-      onChangeInputState?.({
-        value,
-        displayValue,
-        isValid: cardNumInputStateList.every((state) => state.isValid),
-        displayName: CardNumberInput.displayName,
-      });
-    },
-    cardNumInputStateList.map((inputState) => inputState.value)
-  );
+const CardNumberInput = ({ register, watch }: CardNumberInputProps) => {
+  watch?.(InputFieldName.CardNumber1);
+  watch?.(InputFieldName.CardNumber2);
+  watch?.(InputFieldName.CardNumber3);
+  watch?.(InputFieldName.CardNumber4);
 
   return (
     <div className="input-container">
       <span className="input-title">카드 번호</span>
       <div className="input-box">
-        {cardNumInputStateList.map((cardNumInputState, i) => (
-          <input
-            className="input-basic"
-            type={cardNumInputState.type}
-            maxLength={MaxLength.CardNumberInput}
-            value={cardNumInputState.value}
-            onChange={cardNumInputState.onChange}
-            key={i}
-          />
-        ))}
+        <input
+          className="input-basic"
+          type={InputType.text}
+          maxLength={MaxLength.CardNumberInput}
+          {...register?.(InputFieldName.CardNumber1, {
+            pattern: CardNumberPattern,
+            required: true,
+            invalidMessage,
+          })}
+        />
+        <input
+          className="input-basic"
+          type={InputType.text}
+          maxLength={MaxLength.CardNumberInput}
+          {...register?.(InputFieldName.CardNumber2, {
+            pattern: CardNumberPattern,
+            required: true,
+            invalidMessage,
+          })}
+        />
+        <input
+          className="input-basic"
+          type={InputType.password}
+          maxLength={MaxLength.CardNumberInput}
+          {...register?.(InputFieldName.CardNumber3, {
+            pattern: CardNumberPattern,
+            required: true,
+            invalidMessage,
+          })}
+        />
+        <input
+          className="input-basic"
+          type={InputType.password}
+          maxLength={MaxLength.CardNumberInput}
+          {...register?.(InputFieldName.CardNumber4, {
+            pattern: CardNumberPattern,
+            required: true,
+            invalidMessage,
+          })}
+        />
       </div>
     </div>
   );
 };
-
-CardNumberInput.displayName = "CardNumberInput";
 
 export default CardNumberInput;

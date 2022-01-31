@@ -1,45 +1,36 @@
-import { NameRegex, MaxLength } from "@common/constants";
-import useInput from "@hooks/useInput";
-import { useEffect } from "react";
-import { OnChangeInputState } from "./AddCardForm";
+import { MaxLength, InputType, InputFieldName } from "@common/constants";
+import { UseFormRegister, UseFormWatch } from "@hooks/useForm";
 
 interface CardOwnerNameInputProps {
-  onChangeInputState?: OnChangeInputState;
+  register?: UseFormRegister;
+  watch?: UseFormWatch;
 }
-const CardOwnerNameInput = ({
-  onChangeInputState,
-}: CardOwnerNameInputProps) => {
-  const ownerNameInputState = useInput({
-    inputRegex: NameRegex,
-  });
+const namePattern = "^[a-zA-Z]+|[a-zA-Z]+ [a-zA-Z]+$";
+const invalidMessage = `input Name format:{firstName} {LastName} (only alphabet)`;
 
-  useEffect(() => {
-    onChangeInputState?.({
-      value: ownerNameInputState.value,
-      displayValue: ownerNameInputState.value,
-      isValid: ownerNameInputState.isValid,
-      displayName: CardOwnerNameInput.displayName,
-    });
-  }, [ownerNameInputState.value]);
+const CardOwnerNameInput = ({ register, watch }: CardOwnerNameInputProps) => {
+  const formData = watch?.(InputFieldName.OwnerName) ?? {};
+  const currentInputLength: number =
+    formData[InputFieldName.OwnerName]?.length ?? 0;
 
   return (
     <div className="input-container">
       <span className="input-title">
-        카드 소유자 이름(선택) (현재 입력 자릿수:{" "}
-        {ownerNameInputState.value.length}, 최대 입력 자릿수:{" "}
-        {MaxLength.OwnerNameInput})
+        카드 소유자 이름(선택) (현재 입력 자릿수: {currentInputLength}) 최대
+        입력 자릿수: {MaxLength.OwnerNameInput})
       </span>
       <input
-        type={ownerNameInputState.type}
+        type={InputType.text}
         className="input-basic"
         maxLength={MaxLength.OwnerNameInput}
-        value={ownerNameInputState.value}
-        onChange={ownerNameInputState.onChange}
+        {...register?.(InputFieldName.OwnerName, {
+          required: false,
+          pattern: namePattern,
+          invalidMessage,
+        })}
       />
     </div>
   );
 };
-
-CardOwnerNameInput.displayName = "CardOwnerNameInput";
 
 export default CardOwnerNameInput;
