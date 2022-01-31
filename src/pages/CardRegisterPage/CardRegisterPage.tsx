@@ -41,7 +41,7 @@ const CardRegisterPage = () => {
   };
 
   return (
-    <>
+    <div>
       <Styled.Header goBackLink={PATH.CARD_LIST}>카드추가</Styled.Header>
       <Styled.Card
         cardNumber={cardNumber}
@@ -51,7 +51,7 @@ const CardRegisterPage = () => {
         size="SMALL"
       />
       <CardForm onSubmit={handleCardFormSubmit} />
-    </>
+    </div>
   );
 };
 

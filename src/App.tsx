@@ -14,7 +14,7 @@ const AppContainer = styled.div`
 const App = () => {
   const home = (
     <CardStore>
-      <CardRegisterPage />;
+      <CardRegisterPage />
     </CardStore>
   );
   return (

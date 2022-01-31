@@ -12,12 +12,12 @@ const Template: Story<Props> = (args) => <CardTypeRadio {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  selected: "",
-  onCardTypeChange: (type: CardType) => console.log(type),
+  selected: "NONE",
+  onChange: (type: CardType) => console.log(type),
 };
 
 export const Selected = Template.bind({});
 Selected.args = {
   selected: "BRAN",
-  onCardTypeChange: (type: CardType) => console.log(type),
+  onChange: (type: CardType) => console.log(type),
 };
