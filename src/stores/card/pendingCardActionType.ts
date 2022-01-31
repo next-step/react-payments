@@ -1,4 +1,4 @@
-enum CardActionType {
+enum PendingCardActionType {
   SET_CARD_NAME = "setCardName",
   SET_CARD_TYPE = "setCardType",
   SET_CARD_NUMBER = "setCardNumber",
@@ -8,4 +8,4 @@ enum CardActionType {
   SET_CARD_PASSWORD = "setCardPassword",
 }
 
-export default CardActionType;
+export default PendingCardActionType;

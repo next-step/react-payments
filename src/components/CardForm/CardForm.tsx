@@ -2,9 +2,9 @@ import { FormEventHandler } from "react";
 import { CardFormField, CardNumber, CardType } from "../../@types";
 import { MAX_CARD_NUMBER_LENGTH } from "../../constants/card";
 import useIsShown from "../../hooks/useIsShown";
-import cardActions from "../../stores/card/CardActions";
-import useCardDispatch from "../../stores/card/hooks/useCardDispatch";
-import useCardSelector from "../../stores/card/hooks/useCardSelector";
+import cardActions from "../../stores/card/pendingCardActions";
+import usePendingCardDispatch from "../../stores/card/hooks/usePendingCardDispatch";
+import usePendingCardSelector from "../../stores/card/hooks/usePendingCardSelector";
 import BottomModalPortal from "../BottomModal/BottomModal";
 import CardExpirationInput from "../CardExpirationInput/CardExpirationInput";
 import CardNumberInput from "../CardNumberInput/CardNumberInput";
@@ -21,34 +21,34 @@ interface Props {
 
 const CardForm = ({ onSubmit }: Props) => {
   const [isCardTypeSelectModalShown, showCardTypeSelectModal, hideCardTypeSelectModal] = useIsShown();
-  const { cardNumber, cardType, cardExpiration, cardUserName, cardSecurityCode, cardPassword } = useCardSelector(
+  const { cardNumber, cardType, cardExpiration, cardUserName, cardSecurityCode, cardPassword } = usePendingCardSelector(
     (state) => state
   );
-  const cardDispatch = useCardDispatch();
+  const pendingCardDispatch = usePendingCardDispatch();
 
   const handleCardNumberChange = (cardNumber: CardNumber) => {
     if (cardNumber.every((cardCell) => cardCell.length === MAX_CARD_NUMBER_LENGTH)) {
       showCardTypeSelectModal();
     }
-    cardDispatch(cardActions.setCardNumber({ cardNumber }));
+    pendingCardDispatch(cardActions.setCardNumber({ cardNumber }));
   };
 
   const handleCardTypeChange = (cardType: CardType) => {
-    cardDispatch(cardActions.setCardType({ cardType }));
+    pendingCardDispatch(cardActions.setCardType({ cardType }));
     hideCardTypeSelectModal();
   };
 
   const handleCardExpirationChange = (month: string, year: string) =>
-    cardDispatch(cardActions.setCardExpiration({ cardExpiration: { month, year } }));
+    pendingCardDispatch(cardActions.setCardExpiration({ cardExpiration: { month, year } }));
 
   const handleCardUserNameChange = (cardUserName: string) =>
-    cardDispatch(cardActions.setCardUserName({ cardUserName }));
+    pendingCardDispatch(cardActions.setCardUserName({ cardUserName }));
 
   const handleCardSecurityCodeChange = (cardSecurityCode: string) =>
-    cardDispatch(cardActions.setCardSecurityCode({ cardSecurityCode }));
+    pendingCardDispatch(cardActions.setCardSecurityCode({ cardSecurityCode }));
 
   const handleCardPasswordChange = (firstNumber: string, secondNumber: string) =>
-    cardDispatch(cardActions.setCardPassword({ cardPassword: firstNumber + secondNumber }));
+    pendingCardDispatch(cardActions.setCardPassword({ cardPassword: firstNumber + secondNumber }));
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();

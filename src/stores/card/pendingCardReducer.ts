@@ -1,26 +1,26 @@
 import { Reducer } from "react";
 import { Card } from "../../@types";
-import CardActionType from "./CardActionType";
-import type { UnionActionTypeOfCardAction } from "./CardActions";
+import PendingCardActionType from "./pendingCardActionType";
+import type { UnionActionTypeOfPendingCardAction } from "./pendingCardActions";
 
-const CardReducer: Reducer<Card, UnionActionTypeOfCardAction> = (state, action) => {
+const CardReducer: Reducer<Card, UnionActionTypeOfPendingCardAction> = (state, action) => {
   switch (action.type) {
-    case CardActionType.SET_CARD_NAME:
+    case PendingCardActionType.SET_CARD_NAME:
       return {
         ...state,
         cardName: action.payload.cardName,
       };
-    case CardActionType.SET_CARD_TYPE:
+    case PendingCardActionType.SET_CARD_TYPE:
       return {
         ...state,
         cardType: action.payload.cardType,
       };
-    case CardActionType.SET_CARD_NUMBER:
+    case PendingCardActionType.SET_CARD_NUMBER:
       return {
         ...state,
         cardNumber: [...action.payload.cardNumber],
       };
-    case CardActionType.SET_CARD_EXPIRATION:
+    case PendingCardActionType.SET_CARD_EXPIRATION:
       return {
         ...state,
         cardExpiration: {
@@ -28,17 +28,17 @@ const CardReducer: Reducer<Card, UnionActionTypeOfCardAction> = (state, action) 
           ...action.payload.cardExpiration,
         },
       };
-    case CardActionType.SET_CARD_USER_NAME:
+    case PendingCardActionType.SET_CARD_USER_NAME:
       return {
         ...state,
         cardUserName: action.payload.cardUserName,
       };
-    case CardActionType.SET_CARD_SECURITY_CODE:
+    case PendingCardActionType.SET_CARD_SECURITY_CODE:
       return {
         ...state,
         cardSecurityCode: action.payload.cardSecurityCode,
       };
-    case CardActionType.SET_CARD_PASSWORD:
+    case PendingCardActionType.SET_CARD_PASSWORD:
       return {
         ...state,
         cardPassword: action.payload.cardPassword,

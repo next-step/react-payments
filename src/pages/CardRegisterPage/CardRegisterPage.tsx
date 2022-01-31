@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { PATH } from "../../constants/route";
 import CardForm from "../../components/CardForm/CardForm";
 import { CardFormField } from "../../@types";
-import useCardSelector from "../../stores/card/hooks/useCardSelector";
+import usePendingCardSelector from "../../stores/card/hooks/usePendingCardSelector";
 import Styled from "./CardRegisterPage.styles";
 import {
   MAX_CARD_EXPIRATION_VALUE_LENGTH,
@@ -26,7 +26,7 @@ const isCardFormFilled = (formField: CardFormField) => {
 
 const CardRegisterPage = () => {
   const navigate = useNavigate();
-  const { cardNumber, cardType, cardUserName, cardExpiration } = useCardSelector((state) => state);
+  const { cardNumber, cardType, cardUserName, cardExpiration } = usePendingCardSelector((state) => state);
 
   const handleCardFormSubmit = (formField: CardFormField) => {
     if (!isCardFormFilled(formField)) {

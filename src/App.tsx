@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 import { PATH } from "./constants/route";
 import CardRegisterPage from "./pages/CardRegisterPage/CardRegisterPage";
-import CardStore from "./stores/card/CardStore";
+import PendingCardStore from "./stores/card/pendingCardStore";
 
 const AppContainer = styled.div`
   width: 500px;
@@ -13,9 +13,9 @@ const AppContainer = styled.div`
 
 const App = () => {
   const home = (
-    <CardStore>
+    <PendingCardStore>
       <CardRegisterPage />
-    </CardStore>
+    </PendingCardStore>
   );
   return (
     <AppContainer style={{ width: "500px" }}>

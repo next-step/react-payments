@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { CardStoreContext } from "../CardStore";
+import { PendingCardStoreContext } from "../pendingCardStore";
 
 const useCardDispatch = () => {
-  const { dispatch } = useContext(CardStoreContext);
+  const { dispatch } = useContext(PendingCardStoreContext);
 
   return dispatch;
 };
