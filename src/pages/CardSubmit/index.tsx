@@ -17,10 +17,6 @@ const CardSubmit = () => {
     }
   }, [navigate, navigateState])
 
-  useEffect(() => {
-    console.log(navigateState)
-  }, [navigateState])
-
   return (
     <>
       {navigateState && (

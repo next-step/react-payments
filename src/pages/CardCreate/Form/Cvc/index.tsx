@@ -8,6 +8,7 @@ import Styled from './index.style'
 import { ReactComponent as Icon } from '../../../../assets/target.svg'
 import { CREATE_CARD_CVC, CREATE_CARD_PASSWORD1 } from '../constants/id'
 import { FormInputProps } from '..'
+import { useCardFormDispatch } from '../../../../context/Form/hooks'
 
 type CardCvcHandle = {
   cvc: () => string
@@ -15,6 +16,7 @@ type CardCvcHandle = {
 
 const CardCvcInput = forwardRef<CardCvcHandle, FormInputProps>((props, ref) => {
   const inputCvc = useRef<FormInputElementRef | null>(null)
+  const dispatch = useCardFormDispatch()
 
   useImperativeHandle(ref, () => ({
     cvc() {
@@ -23,6 +25,7 @@ const CardCvcInput = forwardRef<CardCvcHandle, FormInputProps>((props, ref) => {
   }))
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ type: 'RERENDER' })
     if (event.currentTarget.value.length !== 3) {
       return
     }

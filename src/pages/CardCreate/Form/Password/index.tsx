@@ -5,6 +5,7 @@ import FormInput, {
   FormInputElementRef,
 } from '../../../../components/Form/FormInput'
 import { CardFormProps } from '../../../../context/Form/CardFormContext'
+import { useCardFormDispatch } from '../../../../context/Form/hooks'
 import { CREATE_CARD_PASSWORD1, CREATE_CARD_PASSWORD2 } from '../constants/id'
 import Styled from './index.style'
 
@@ -14,6 +15,7 @@ const CardPasswordInput = forwardRef<
 >((props, ref) => {
   const inputPassword1 = useRef<FormInputElementRef | null>(null)
   const inputPassword2 = useRef<FormInputElementRef | null>(null)
+  const dispatch = useCardFormDispatch()
 
   useImperativeHandle(ref, () => ({
     password() {
@@ -25,6 +27,7 @@ const CardPasswordInput = forwardRef<
   }))
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ type: 'RERENDER' })
     if (event.currentTarget.id !== CREATE_CARD_PASSWORD1) {
       return
     }
