@@ -16,7 +16,7 @@ const CardRegisterCompletePage = () => {
   const handleSubmit: FormEventHandler = (event) => {
     event.preventDefault();
 
-    navigate(PATH.CARD_LIST);
+    navigate(PATH.HOME);
   };
 
   useEffect(() => {

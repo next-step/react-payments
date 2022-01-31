@@ -1,9 +1,9 @@
 import { Reducer } from "react";
-import { Card } from "../../@types";
+import { PendingCard } from "../../@types";
 import PendingCardActionType from "./pendingCardActionType";
 import type { UnionActionTypeOfPendingCardAction } from "./pendingCardActions";
 
-const CardReducer: Reducer<Card, UnionActionTypeOfPendingCardAction> = (state, action) => {
+const pendingCardReducer: Reducer<PendingCard, UnionActionTypeOfPendingCardAction> = (state, action) => {
   switch (action.type) {
     case PendingCardActionType.SET_CARD_NAME:
       return {
@@ -48,4 +48,4 @@ const CardReducer: Reducer<Card, UnionActionTypeOfPendingCardAction> = (state, a
   }
 };
 
-export default CardReducer;
+export default pendingCardReducer;

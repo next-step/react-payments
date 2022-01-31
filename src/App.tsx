@@ -5,6 +5,7 @@ import { PATH } from "./constants/route";
 import CardRegisterPage from "./pages/CardRegisterPage/CardRegisterPage";
 import PendingCardStore from "./stores/card/pendingCardStore";
 import CardRegisterCompletePage from "./pages/CardRegisterCompletePage/CardRegisterCompletePage";
+import CardListStore from "./stores/cardList/cardListStore";
 
 const AppContainer = styled.div`
   width: 380px;
@@ -14,19 +15,28 @@ const AppContainer = styled.div`
 
 const App = () => {
   const home = (
+    <CardListStore>
+      <Outlet />
+    </CardListStore>
+  );
+
+  const cardRegisterRoutes = (
     <PendingCardStore>
       <Outlet />
     </PendingCardStore>
   );
+
   return (
     <AppContainer>
       <BrowserRouter>
         <Routes>
           <Route path={PATH.HOME} element={home}>
-            <Route index element={<CardRegisterPage />} />
-            <Route path={PATH.CARD_REGISTER_COMPLETE} element={<CardRegisterCompletePage />} />
+            <Route index element={<>카드 목록 페이지</>} />
+            <Route path={PATH.CARD_REGISTER} element={cardRegisterRoutes}>
+              <Route index element={<CardRegisterPage />} />
+              <Route path={PATH.CARD_REGISTER_COMPLETE} element={<CardRegisterCompletePage />} />
+            </Route>
           </Route>
-          <Route path={PATH.CARD_LIST} element={<>카드 목록 페이지</>} />
           <Route path="*" element={home} />
         </Routes>
       </BrowserRouter>

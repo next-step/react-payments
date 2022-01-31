@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { Card } from "../../../@types";
+import { PendingCard } from "../../../@types";
 import { SelectFunction } from "../../../utils/storeUtills";
 import { PendingCardStoreContext } from "../pendingCardStore";
 
-const useCardSelector = (selectFunction: SelectFunction<Card>) => {
+const useCardSelector = (selectFunction: SelectFunction<PendingCard>) => {
   const { state } = useContext(PendingCardStoreContext);
 
   return selectFunction(state);

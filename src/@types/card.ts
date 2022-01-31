@@ -22,6 +22,8 @@ interface CardSizeContent {
 }
 
 interface Card {
+  id: string;
+  createdAt: number;
   cardName: string;
   cardType: CardType;
   cardNumber: CardNumber;
@@ -31,6 +33,12 @@ interface Card {
   cardPassword: string;
 }
 
-interface CardFormField extends Omit<Card, "cardName"> {}
+type CardMap = {
+  [Id in Card["id"]]: Card;
+};
 
-export { CardNumber, CardType, CardSize, CardExpiration, CardSizeContent, Card, CardFormField };
+interface PendingCard extends Omit<Card, "id" | "createdAt"> {}
+
+interface CardFormField extends Omit<PendingCard, "cardName"> {}
+
+export { CardNumber, CardType, CardSize, CardExpiration, CardSizeContent, Card, CardMap, PendingCard, CardFormField };

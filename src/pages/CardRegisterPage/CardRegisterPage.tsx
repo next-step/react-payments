@@ -23,7 +23,7 @@ const CardRegisterPage = () => {
 
   return (
     <main>
-      <Styled.Header goBackLink={PATH.CARD_LIST}>카드추가</Styled.Header>
+      <Styled.Header goBackLink={PATH.HOME}>카드추가</Styled.Header>
       <Styled.Card
         cardNumber={cardNumber}
         cardType={cardType}

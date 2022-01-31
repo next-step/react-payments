@@ -19,15 +19,15 @@ interface SetCardExpirationPaylaod {
   cardExpiration: Partial<CardExpiration>;
 }
 
-interface SetCardUserName {
+interface SetCardUserNamePayload {
   cardUserName: string;
 }
 
-interface SetCardSecurityCode {
+interface SetCardSecurityCodePayload {
   cardSecurityCode: string;
 }
 
-interface SetCardPassword {
+interface SetCardPasswordPayload {
   cardPassword: string;
 }
 
@@ -36,9 +36,9 @@ const pendingCardActions = {
   setCardType: makeActionCreator(PendingCardActionType.SET_CARD_TYPE)<SetCardTypePayload>(),
   setCardNumber: makeActionCreator(PendingCardActionType.SET_CARD_NUMBER)<SetCardNumberPayload>(),
   setCardExpiration: makeActionCreator(PendingCardActionType.SET_CARD_EXPIRATION)<SetCardExpirationPaylaod>(),
-  setCardUserName: makeActionCreator(PendingCardActionType.SET_CARD_USER_NAME)<SetCardUserName>(),
-  setCardSecurityCode: makeActionCreator(PendingCardActionType.SET_CARD_SECURITY_CODE)<SetCardSecurityCode>(),
-  setCardPassword: makeActionCreator(PendingCardActionType.SET_CARD_PASSWORD)<SetCardPassword>(),
+  setCardUserName: makeActionCreator(PendingCardActionType.SET_CARD_USER_NAME)<SetCardUserNamePayload>(),
+  setCardSecurityCode: makeActionCreator(PendingCardActionType.SET_CARD_SECURITY_CODE)<SetCardSecurityCodePayload>(),
+  setCardPassword: makeActionCreator(PendingCardActionType.SET_CARD_PASSWORD)<SetCardPasswordPayload>(),
 } as const;
 
 type ActionTypeOfPendingCardAction = ActionTypeMap<typeof pendingCardActions>;

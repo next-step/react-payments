@@ -1,14 +1,14 @@
 import { createContext, useReducer } from "react";
 import pendingCardReducer from "./pendingCardReducer";
-import type { Card, CardNumber, StoreContextValue, StoreProps } from "../../@types";
+import type { CardNumber, PendingCard, StoreContextValue, StoreProps } from "../../@types";
 import { UnionActionTypeOfPendingCardAction } from "./pendingCardActions";
 
-const PendingCardStoreContext = createContext<StoreContextValue<Card, UnionActionTypeOfPendingCardAction>>(
-  {} as StoreContextValue<Card, UnionActionTypeOfPendingCardAction>
+const PendingCardStoreContext = createContext<StoreContextValue<PendingCard, UnionActionTypeOfPendingCardAction>>(
+  {} as StoreContextValue<PendingCard, UnionActionTypeOfPendingCardAction>
 );
 
 const initialCardNumber: CardNumber = ["", "", "", ""];
-const initialState: Card = {
+const initialState: PendingCard = {
   cardName: "",
   cardType: "NONE",
   cardNumber: initialCardNumber,
