@@ -29,9 +29,7 @@ function InputCard({
             </CardText>
           </CardBottomNumber>
           <CardBottomInfo>
-            <CardText narrow={true}>
-              {name.length === 0 ? "NAME" : name}
-            </CardText>
+            <CardText narrow>{name.length === 0 ? "NAME" : name}</CardText>
             <CardText>
               {dueMonth}
               {dueMonth && dueYear && " / "}

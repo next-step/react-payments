@@ -1,18 +1,21 @@
 import styled from "styled-components";
 
-function CompletedCard({ completedCard }) {
+function CompletedCard({ completedCard, ...otherProps }) {
   return (
     <CardBox>
-      <BigCard>
+      <Card big={otherProps.big} small={otherProps.small}>
         <CardTop>
-          <CardTextBig>클린카드</CardTextBig>
+          <CardText textBig={otherProps.big}>클린카드</CardText>
         </CardTop>
         <CardMiddle>
-          <BigCardChip />
+          <CardChip
+            bigChip={otherProps.bigChip}
+            smallChip={otherProps.smallChip}
+          />
         </CardMiddle>
         <CardBottom>
           <CardBottomNumber>
-            <CardTextBig>{`${
+            <CardText textBig={otherProps.big}>{`${
               completedCard?.cardNumberSeries
                 ? completedCard.cardNumberSeries
                 : "1111"
@@ -20,20 +23,20 @@ function CompletedCard({ completedCard }) {
               completedCard?.cardNumberCompany
                 ? completedCard.cardNumberCompany
                 : "2222"
-            } - **** - ****`}</CardTextBig>
+            } - **** - ****`}</CardText>
           </CardBottomNumber>
           <CardBottomInfo>
-            <CardTextBig>
+            <CardText textBig={otherProps.big}>
               {completedCard?.name ? completedCard.name : "SUN"}
-            </CardTextBig>
-            <CardTextBig>{`${
+            </CardText>
+            <CardText textBig={otherProps.big}>{`${
               completedCard?.dueMonth ? completedCard.dueMonth : "04"
             } / ${
               completedCard?.dueYear ? completedCard.dueYear : "21"
-            }`}</CardTextBig>
+            }`}</CardText>
           </CardBottomInfo>
         </CardBottom>
-      </BigCard>
+      </Card>
     </CardBox>
   );
 }
@@ -47,13 +50,24 @@ const CardBox = styled.div`
   margin: 10px 0;
 `;
 
-const BigCard = styled.div`
+const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 290px;
-  height: 180px;
+  ${(props) =>
+    props.big &&
+    `
+    width: 290px;
+    height: 180px;
+  `}
+  ${(props) =>
+    props.small &&
+    `
+    width: 208px;
+    height: 130px;
+  `}
+
   background: #94dacd;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -66,10 +80,16 @@ const CardTop = styled.div`
   align-items: center;
 `;
 
-const CardTextBig = styled.span`
+const CardText = styled.span`
   margin: 0 16px;
-  font-size: 18px;
-  line-height: 20px;
+  font-size: 14px;
+  line-height: 16px;
+  ${(props) =>
+    props.textBig &&
+    `
+    font-size: 18px;
+    line-height: 20px;
+  `}
   vertical-align: middle;
   font-weight: 400;
 `;
@@ -82,12 +102,24 @@ const CardMiddle = styled.div`
   align-items: center;
 `;
 
-const BigCardChip = styled.div`
-  width: 55.04px;
-  height: 35.77px;
+const CardChip = styled.div`
   background: #cbba64;
   border-radius: 4px;
-  font-size: 24px;
+  ${(props) =>
+    props.bigChip &&
+    `
+    width: 55.04px;
+    height: 35.77px;
+    font-size: 24px;
+  `}
+  ${(props) =>
+    props.smallChip &&
+    `
+    width: 40px;
+    height: 26px;
+    left: 95px;
+    top: 122px;
+  `}
 `;
 
 const CardBottom = styled.div`
