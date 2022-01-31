@@ -6,6 +6,7 @@ import CardRegisterPage from "./pages/CardRegisterPage/CardRegisterPage";
 import PendingCardStore from "./stores/card/pendingCardStore";
 import CardRegisterCompletePage from "./pages/CardRegisterCompletePage/CardRegisterCompletePage";
 import CardListStore from "./stores/cardList/cardListStore";
+import CardListPage from "./pages/CardListPage/CardListPage";
 
 const AppContainer = styled.div`
   width: 380px;
@@ -31,7 +32,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path={PATH.HOME} element={home}>
-            <Route index element={<>카드 목록 페이지</>} />
+            <Route index element={<CardListPage />} />
             <Route path={PATH.CARD_REGISTER} element={cardRegisterRoutes}>
               <Route index element={<CardRegisterPage />} />
               <Route path={PATH.CARD_REGISTER_COMPLETE} element={<CardRegisterCompletePage />} />
