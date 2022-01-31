@@ -1,6 +1,4 @@
 import { FormEventHandler } from "react";
-import { CardFormField, CardNumber, CardType } from "../../@types";
-import { MAX_CARD_NUMBER_LENGTH } from "../../constants/card";
 import useIsShown from "../../hooks/useIsShown";
 import cardActions from "../../stores/card/pendingCardActions";
 import usePendingCardDispatch from "../../stores/card/hooks/usePendingCardDispatch";
@@ -14,6 +12,8 @@ import CardTypeRadio from "../CardTypeRadio/CardTypeRadio";
 import LabeledTextInput from "../LabeledTextInput/LabeledTextInput";
 import SimpleButton from "../SimpleButton/SimpleButton";
 import Styled from "./CardForm.styles";
+import { isCardNumberFormFilled } from "../../utils/validations";
+import type { CardFormField, CardNumber, CardType } from "../../@types";
 
 interface Props {
   onSubmit?: (cardFormField: CardFormField) => void;
@@ -27,7 +27,7 @@ const CardForm = ({ onSubmit }: Props) => {
   const pendingCardDispatch = usePendingCardDispatch();
 
   const handleCardNumberChange = (cardNumber: CardNumber) => {
-    if (cardNumber.every((cardCell) => cardCell.length === MAX_CARD_NUMBER_LENGTH)) {
+    if (isCardNumberFormFilled(cardNumber)) {
       showCardTypeSelectModal();
     }
     pendingCardDispatch(cardActions.setCardNumber({ cardNumber }));

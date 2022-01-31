@@ -1,12 +1,13 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import styled from "@emotion/styled";
 
 import { PATH } from "./constants/route";
 import CardRegisterPage from "./pages/CardRegisterPage/CardRegisterPage";
 import PendingCardStore from "./stores/card/pendingCardStore";
+import CardRegisterCompletePage from "./pages/CardRegisterCompletePage/CardRegisterCompletePage";
 
 const AppContainer = styled.div`
-  width: 500px;
+  width: 380px;
   margin: 0 auto;
   padding: 40px;
 `;
@@ -14,15 +15,17 @@ const AppContainer = styled.div`
 const App = () => {
   const home = (
     <PendingCardStore>
-      <CardRegisterPage />
+      <Outlet />
     </PendingCardStore>
   );
   return (
-    <AppContainer style={{ width: "500px" }}>
+    <AppContainer>
       <BrowserRouter>
         <Routes>
-          <Route path={PATH.HOME} element={home} />
-          <Route path={PATH.CARD_REGISTER_COMPLETE} element={<>카드 등록 완료 페이지</>} />
+          <Route path={PATH.HOME} element={home}>
+            <Route index element={<CardRegisterPage />} />
+            <Route path={PATH.CARD_REGISTER_COMPLETE} element={<CardRegisterCompletePage />} />
+          </Route>
           <Route path={PATH.CARD_LIST} element={<>카드 목록 페이지</>} />
           <Route path="*" element={home} />
         </Routes>

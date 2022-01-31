@@ -5,24 +5,7 @@ import CardForm from "../../components/CardForm/CardForm";
 import { CardFormField } from "../../@types";
 import usePendingCardSelector from "../../stores/card/hooks/usePendingCardSelector";
 import Styled from "./CardRegisterPage.styles";
-import {
-  MAX_CARD_EXPIRATION_VALUE_LENGTH,
-  MAX_CARD_NUMBER_LENGTH,
-  MAX_CARD_SECURITY_CODE_LENGTH,
-} from "../../constants/card";
-
-const isCardFormFilled = (formField: CardFormField) => {
-  const { cardNumber, cardType, cardExpiration, cardUserName, cardSecurityCode, cardPassword } = formField;
-
-  return (
-    cardNumber.every((cardCell) => cardCell.length === MAX_CARD_NUMBER_LENGTH) &&
-    cardType !== "NONE" &&
-    Object.values(cardExpiration).every((expiration) => expiration.length === MAX_CARD_EXPIRATION_VALUE_LENGTH) &&
-    cardUserName.length > 0 &&
-    cardSecurityCode.length === MAX_CARD_SECURITY_CODE_LENGTH &&
-    cardPassword.length === 2
-  );
-};
+import { isCardFormFilled } from "../../utils/validations";
 
 const CardRegisterPage = () => {
   const navigate = useNavigate();
@@ -35,13 +18,11 @@ const CardRegisterPage = () => {
       return;
     }
 
-    // register card
-
     navigate(PATH.CARD_REGISTER_COMPLETE);
   };
 
   return (
-    <div>
+    <main>
       <Styled.Header goBackLink={PATH.CARD_LIST}>카드추가</Styled.Header>
       <Styled.Card
         cardNumber={cardNumber}
@@ -51,7 +32,7 @@ const CardRegisterPage = () => {
         size="SMALL"
       />
       <CardForm onSubmit={handleCardFormSubmit} />
-    </div>
+    </main>
   );
 };
 
