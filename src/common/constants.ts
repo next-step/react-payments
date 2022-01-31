@@ -33,4 +33,4 @@ export const InputType = {
 export type InputTypeAttribute = keyof typeof InputType;
 
 export const DigitRegex = /^$|^\d*$/;
-export const AlphabetRegex = /^$|^[A-Za-z]*$/;
+export const NameRegex = /^[a-zA-Z\s]+$/;

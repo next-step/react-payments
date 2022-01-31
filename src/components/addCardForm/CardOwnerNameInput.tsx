@@ -1,4 +1,4 @@
-import { AlphabetRegex, MaxLength } from "@common/constants";
+import { NameRegex, MaxLength } from "@common/constants";
 import useInput, { IUseInputState } from "@hooks/useInput";
 import { useEffect } from "react";
 import { OnChangeInputState } from "./AddCardForm";
@@ -8,7 +8,7 @@ interface CardOwnerNameInputProps {
 }
 const CardOwnerNameInput = (props: CardOwnerNameInputProps) => {
   const ownerNameInputState = useInput({
-    inputRegex: AlphabetRegex,
+    inputRegex: NameRegex,
   });
 
   useEffect(() => {

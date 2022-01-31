@@ -50,13 +50,13 @@ const CardNumberInput = (props: CardNumberInputProps) => {
     <div className="input-container">
       <span className="input-title">카드 번호</span>
       <div className="input-box">
-        {cardNumInputStateList.map((carNumInputState, i) => (
+        {cardNumInputStateList.map((cardNumInputState, i) => (
           <input
             className="input-basic"
-            type={carNumInputState.type}
+            type={cardNumInputState.type}
             maxLength={MaxLength.CardNumberInput}
-            value={carNumInputState.value}
-            onChange={carNumInputState.onChange}
+            value={cardNumInputState.value}
+            onChange={cardNumInputState.onChange}
             key={i}
           />
         ))}
