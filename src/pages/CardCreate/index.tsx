@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { CardType } from '../../components/Form'
 import Header from '../../components/Layout/Header'
 import { useCardDispatch } from '../../context/Card/hooks'
+import CardFormContextProvider from '../../context/Form/CardFormContext'
 import FormContextProvider from '../../context/Form/FormChangeContext'
 import { uuidv4 } from '../../utils/crypto'
 import CreateCard from './Card'
@@ -10,21 +11,9 @@ import CreateCardForm from './Form'
 import Styled from './index.style'
 import CardCreateModal from './Modal'
 
-export interface CardFormProps {
-  cardNumber1: () => string
-  cardNumber2: () => string
-  cardNumber3: () => string
-  cardNumber4: () => string
-  expiredAtMonth: () => string
-  expiredAtYear: () => string
-  owner: () => string
-  cvc: () => string
-  password1: () => string
-  password2: () => string
-}
-
 const CardCreate = () => {
   const formRef = useRef<React.ElementRef<typeof CreateCardForm>>(null)
+
   const cardDispatch = useCardDispatch()
   const navigate = useNavigate()
 
@@ -39,10 +28,18 @@ const CardCreate = () => {
 
   const isCardNumberValid = useCallback(() => {
     const isValidNumber = (number: string | undefined) => number?.length === 4
-    const cardNumber1Valid = isValidNumber(formRef.current?.cardNumber1())
-    const cardNumber2Valid = isValidNumber(formRef.current?.cardNumber2())
-    const cardNumber3Valid = isValidNumber(formRef.current?.cardNumber3())
-    const cardNumber4Valid = isValidNumber(formRef.current?.cardNumber4())
+    const { cardNumber1, cardNumber2, cardNumber3, cardNumber4 } =
+      formRef.current?.cardNumber() ?? {
+        cardNumber1: '',
+        cardNumber2: '',
+        cardNumber3: '',
+        cardNumber4: '',
+      }
+
+    const cardNumber1Valid = isValidNumber(cardNumber1)
+    const cardNumber2Valid = isValidNumber(cardNumber2)
+    const cardNumber3Valid = isValidNumber(cardNumber3)
+    const cardNumber4Valid = isValidNumber(cardNumber4)
 
     return (
       cardNumber1Valid &&
@@ -54,15 +51,16 @@ const CardCreate = () => {
 
   const isExpireDateValid = useCallback(() => {
     const isValidExpireDate = (date: string | undefined) => date?.length === 2
-    const month = Number(formRef.current?.expiredAtMonth())
+    const month = Number(formRef.current?.cardExpire().expireAtMonth)
 
     const isMonthScopeValid = 1 <= month && month <= 12
 
     const cardExpireMonthValid =
-      isValidExpireDate(formRef.current?.expiredAtMonth()) && isMonthScopeValid
+      isValidExpireDate(formRef.current?.cardExpire().expireAtMonth) &&
+      isMonthScopeValid
 
     const cardExpireYearValid = isValidExpireDate(
-      formRef.current?.expiredAtYear()
+      formRef.current?.cardExpire().expireAtYear
     )
 
     return cardExpireMonthValid && cardExpireYearValid
@@ -75,28 +73,35 @@ const CardCreate = () => {
   const isPasswordValid = useCallback(() => {
     const isPasswordValid = (password: string | undefined) =>
       password?.length === 1
-    const password1Valid = isPasswordValid(formRef.current?.password1())
-    const password2Valid = isPasswordValid(formRef.current?.password2())
+    const password1Valid = isPasswordValid(
+      formRef.current?.password().password1
+    )
+    const password2Valid = isPasswordValid(
+      formRef.current?.password().password2
+    )
 
     return password1Valid && password2Valid
   }, [])
 
   const getLocalCardProps = useCallback(() => {
-    const number1 = formRef.current?.cardNumber1() as string
-    const number2 = formRef.current?.cardNumber2() as string
-    const number3 = formRef.current?.cardNumber3() as string
-    const number4 = formRef.current?.cardNumber4() as string
+    const { cardNumber1, cardNumber2, cardNumber3, cardNumber4 } =
+      formRef.current?.cardNumber() ?? {
+        cardNumber1: '',
+        cardNumber2: '',
+        cardNumber3: '',
+        cardNumber4: '',
+      }
 
-    const year = formRef.current?.expiredAtYear() as string
-    const month = formRef.current?.expiredAtMonth() as string
+    const year = formRef.current?.cardExpire().expireAtYear as string
+    const month = formRef.current?.cardExpire().expireAtMonth as string
 
     const owner = formRef.current?.owner() as string
 
     return {
-      number1,
-      number2,
-      number3,
-      number4,
+      number1: cardNumber1,
+      number2: cardNumber2,
+      number3: cardNumber3,
+      number4: cardNumber4,
       year,
       month,
       owner,
@@ -137,26 +142,27 @@ const CardCreate = () => {
   return (
     <>
       <FormContextProvider>
-        <Header title="카드추가" lintTo="/" />
-        <Styled.CardCreateContainer>
-          <CreateCard
-            formRef={formRef}
-            cardType={cardType}
-            setCardType={setCardType}
-            setModalIsOpen={setModalIsOpen}
-          />
-          <CreateCardForm ref={formRef} error={error} />
-          <Styled.ButtonContaienr>
-            <Styled.CreateCardButton onClick={onSubmit}>
-              다음
-            </Styled.CreateCardButton>
-          </Styled.ButtonContaienr>
-          <CardCreateModal
-            isOpen={isModalOpen}
-            setIsOpen={setModalIsOpen}
-            setCardType={setCardType}
-          />
-        </Styled.CardCreateContainer>
+        <CardFormContextProvider formRef={formRef}>
+          <Header title="카드추가" linkTo="/" />
+          <Styled.CardCreateContainer>
+            <CreateCard
+              cardType={cardType}
+              setCardType={setCardType}
+              setModalIsOpen={setModalIsOpen}
+            />
+            <CreateCardForm ref={formRef} error={error} />
+            <Styled.ButtonContaienr>
+              <Styled.CreateCardButton onClick={onSubmit}>
+                다음
+              </Styled.CreateCardButton>
+            </Styled.ButtonContaienr>
+            <CardCreateModal
+              isOpen={isModalOpen}
+              setIsOpen={setModalIsOpen}
+              setCardType={setCardType}
+            />
+          </Styled.CardCreateContainer>
+        </CardFormContextProvider>
       </FormContextProvider>
     </>
   )

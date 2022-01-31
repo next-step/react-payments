@@ -5,37 +5,6 @@ import CardNumber from './CardNumber'
 import CardOwner from './CardOnwer'
 import Styled from './index.style'
 
-export interface CardProp {
-  type?: CardType
-  number1: string
-  number2: string
-  number3: string
-  number4: string
-  owner: string
-  month: string
-  year: string
-  size?: 'big' | 'small'
-  setModalIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-const CardTop = React.memo(
-  ({ type }: { type?: CardType }) => (
-    <Styled.CardTop>
-      <Styled.CardText>{type || '클린'}카드</Styled.CardText>
-    </Styled.CardTop>
-  ),
-  (prev, cur) => prev.type === cur.type
-)
-
-const CardMiddle = React.memo(
-  () => (
-    <Styled.CardMiddle>
-      <Styled.CardSmallChip />
-    </Styled.CardMiddle>
-  ),
-  () => true
-)
-
 const Card = ({
   size = 'small',
   type,
@@ -71,6 +40,24 @@ const Card = ({
   </Styled.Card>
 )
 
+const CardTop = React.memo(
+  ({ type }: { type?: CardType }) => (
+    <Styled.CardTop>
+      <Styled.CardText>{type || '클린'}카드</Styled.CardText>
+    </Styled.CardTop>
+  ),
+  (prev, cur) => prev.type === cur.type
+)
+
+const CardMiddle = React.memo(
+  () => (
+    <Styled.CardMiddle>
+      <Styled.CardSmallChip />
+    </Styled.CardMiddle>
+  ),
+  () => true
+)
+
 export default Card
 
 export const BackgroundColorAccordingToStartsWith = {
@@ -83,3 +70,16 @@ export const BackgroundColorAccordingToStartsWith = {
   콜린: '#F37D3B',
   썬: '#FBCD58',
 } as const
+
+export interface CardProp {
+  type?: CardType
+  number1: string
+  number2: string
+  number3: string
+  number4: string
+  owner: string
+  month: string
+  year: string
+  size?: 'big' | 'small'
+  setModalIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
+}

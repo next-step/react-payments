@@ -4,7 +4,7 @@ import FormInput, {
   FormInputBox,
   FormInputElementRef,
 } from '../../../../components/Form/FormInput'
-import { useFormChangedDispatch } from '../../../../context/Form/hooks'
+import { useCardFormDispatch } from '../../../../context/Form/hooks'
 import { CREATE_CARD_CVC, CREATE_OWNER_NAME } from '../constants/id'
 
 type CardOwnerHandle = {
@@ -14,8 +14,7 @@ type CardOwnerHandle = {
 const CardOwnerInput = forwardRef<CardOwnerHandle, {}>((props, ref) => {
   const inputOwner = useRef<FormInputElementRef | null>(null)
   const [ownerNameLength, setOwnerNameLength] = useState(0)
-
-  const dispatch = useFormChangedDispatch()
+  const dispatch = useCardFormDispatch()
 
   useImperativeHandle(ref, () => ({
     owner() {
@@ -23,17 +22,16 @@ const CardOwnerInput = forwardRef<CardOwnerHandle, {}>((props, ref) => {
     },
   }))
 
-  const onChange =
-    (name: 'owner') => (event: React.ChangeEvent<HTMLInputElement>) => {
-      dispatch({ type: 'CHANGE', payload: { name } })
-      setOwnerNameLength((inputOwner.current?.value() ?? '').length)
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ type: 'RERENDER' })
+    setOwnerNameLength((inputOwner.current?.value() ?? '').length)
 
-      if (event.currentTarget.value.length !== 30) {
-        return
-      }
-
-      document.getElementById(CREATE_CARD_CVC)?.focus()
+    if (event.currentTarget.value.length !== 30) {
+      return
     }
+
+    document.getElementById(CREATE_CARD_CVC)?.focus()
+  }
 
   return (
     <FormArea
@@ -48,7 +46,7 @@ const CardOwnerInput = forwardRef<CardOwnerHandle, {}>((props, ref) => {
           ref={inputOwner}
           maxLength={30}
           textAlign="left"
-          onChange={onChange('owner')}
+          onChange={onChange}
         />
       </FormInputBox>
     </FormArea>

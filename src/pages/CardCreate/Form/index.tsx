@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useRef } from 'react'
-import { CardErrorStateProps, CardFormProps } from '..'
+import { CardErrorStateProps } from '..'
 import Styled from './index.style'
 import CardNumberInput from './Number'
 import CardExpireInput from './Expire'
@@ -12,10 +12,7 @@ import {
   CARD_NUMBER_ERROR,
   CARD_PASSWORD_ERROR,
 } from '../../../constants/error/formErrorMessage'
-
-export interface FormInputProps {
-  errorMessage?: string
-}
+import { CardFormProps } from '../../../context/Form/CardFormContext'
 
 const CreateCardForm = forwardRef<
   CardFormProps,
@@ -29,38 +26,57 @@ const CreateCardForm = forwardRef<
   const CardOnwerInputRef =
     useRef<React.ElementRef<typeof CardOnwerInput>>(null)
 
-  useImperativeHandle(ref, () => ({
-    cardNumber1() {
-      return cardNumberRef.current?.cardNumber1() ?? ''
-    },
-    cardNumber2() {
-      return cardNumberRef.current?.cardNumber2() ?? ''
-    },
-    cardNumber3() {
-      return cardNumberRef.current?.cardNumber3() ?? ''
-    },
-    cardNumber4() {
-      return cardNumberRef.current?.cardNumber4() ?? ''
-    },
-    cvc() {
-      return cardCvcRef.current?.cvc() ?? ''
-    },
-    expiredAtMonth() {
-      return cardExpireRef.current?.expireAtMonth() ?? ''
-    },
-    expiredAtYear() {
-      return cardExpireRef.current?.expireAtYear() ?? ''
-    },
-    password1() {
-      return cardPasswordRef.current?.password1() ?? ''
-    },
-    password2() {
-      return cardPasswordRef.current?.password2() ?? ''
-    },
-    owner() {
-      return CardOnwerInputRef.current?.owner() ?? ''
-    },
-  }))
+  useImperativeHandle(ref, () => {
+    return {
+      cardNumber: () => {
+        const { cardNumber1, cardNumber2, cardNumber3, cardNumber4 } =
+          cardNumberRef.current?.cardNumber() ?? {
+            cardNumber1: '',
+            cardNumber2: '',
+            cardNumber3: '',
+            cardNumber4: '',
+          }
+
+        return {
+          cardNumber1,
+          cardNumber2,
+          cardNumber3,
+          cardNumber4,
+        }
+      },
+      cvc() {
+        return cardCvcRef.current?.cvc() ?? ''
+      },
+      cardExpire: () => {
+        const { expireAtMonth, expireAtYear } =
+          cardExpireRef.current?.cardExpire() ?? {
+            expireAtMonth: '',
+            expireAtYear: '',
+          }
+
+        return {
+          expireAtMonth,
+          expireAtYear,
+        }
+      },
+
+      password: () => {
+        const { password1, password2 } =
+          cardPasswordRef.current?.password() ?? {
+            password1: '',
+            password2: '',
+          }
+
+        return {
+          password1,
+          password2,
+        }
+      },
+      owner() {
+        return CardOnwerInputRef.current?.owner() ?? ''
+      },
+    }
+  })
 
   return (
     <div>
@@ -94,3 +110,7 @@ const CreateCardForm = forwardRef<
 })
 
 export default CreateCardForm
+
+export interface FormInputProps {
+  errorMessage?: string
+}

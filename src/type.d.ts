@@ -4,6 +4,4 @@ declare global {
   }
 }
 
-console.log(crypto.randomUUID())
-
 export {}

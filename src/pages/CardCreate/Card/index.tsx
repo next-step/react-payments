@@ -1,87 +1,51 @@
-import { useEffect, useMemo, useState } from 'react'
-import { CardFormProps } from '..'
+import { useEffect } from 'react'
 import Card from '../../../components/Card'
 import {
-  CardBaseFormProps,
   CardType,
   CardTypeAccordingToStartsWith,
 } from '../../../components/Form'
-import { useFormChangedState } from '../../../context/Form/hooks'
+import { useCardFormState } from '../../../context/Form/hooks'
 
-type CardModelKeys = (keyof CardBaseFormProps)[]
-interface CreateCardProp {
-  formRef: React.RefObject<CardFormProps>
-  cardType: CardType | undefined
-  setCardType: React.Dispatch<React.SetStateAction<CardType | undefined>>
-  setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
 const CreateCard = ({
-  formRef,
   cardType,
   setCardType,
   setModalIsOpen,
 }: CreateCardProp) => {
-  const state = useFormChangedState()
-  const [number1, setNumber1] = useState('')
-  const [number2, setNumber2] = useState('')
-  const [number3, setNumber3] = useState('')
-  const [number4, setNumber4] = useState('')
-
-  const [owner, setOwner] = useState('')
-
-  const [month, setMonth] = useState('')
-  const [year, setYear] = useState('')
+  const { cardNumber, cardExpire, owner } = useCardFormState()
+  const { cardNumber1, cardNumber2, cardNumber3, cardNumber4 } = cardNumber
+  const { expireAtMonth, expireAtYear } = cardExpire
 
   useEffect(() => {
-    if (number1.length === 4 && number2.length === 4) {
+    if (isValidCardNumbers()) {
       const startNumber =
-        +number1[0] as keyof typeof CardTypeAccordingToStartsWith
+        +cardNumber1[0] as keyof typeof CardTypeAccordingToStartsWith
+
       setCardType(CardTypeAccordingToStartsWith[startNumber])
     }
-  }, [number1, number2, setCardType])
 
-  const stateKeys = useMemo(() => Object.keys(state) as CardModelKeys, [state])
-
-  useEffect(() => {
-    const key = stateKeys.filter((key) => state[key] === true)[0]
-
-    switch (key) {
-      case 'number1':
-        setNumber1(formRef.current?.cardNumber1() ?? '')
-        break
-      case 'number2':
-        setNumber2(formRef.current?.cardNumber2() ?? '')
-        break
-      case 'number3':
-        setNumber3(formRef.current?.cardNumber3() ?? '')
-        break
-      case 'number4':
-        setNumber4(formRef.current?.cardNumber4() ?? '')
-        break
-      case 'expireAtMonth':
-        setMonth(formRef.current?.expiredAtMonth() ?? '')
-        break
-      case 'expireAtYear':
-        setYear(formRef.current?.expiredAtYear() ?? '')
-        break
-      case 'owner':
-        setOwner(formRef.current?.owner() ?? '')
-        break
-
-      default:
-        break
+    function isValidCardNumbers() {
+      return (
+        isValidLength(cardNumber1) &&
+        isValidLength(cardNumber2) &&
+        isValidLength(cardNumber3) &&
+        isValidLength(cardNumber4)
+      )
     }
-  }, [formRef, state, stateKeys])
+
+    function isValidLength(number: string) {
+      return number.length === 4
+    }
+  }, [cardNumber1, cardNumber2, cardNumber3, cardNumber4, setCardType])
 
   return (
     <Card
       type={cardType}
-      number1={number1}
-      number2={number2}
-      number3={number3}
-      number4={number4}
-      month={month}
-      year={year}
+      number1={cardNumber1}
+      number2={cardNumber2}
+      number3={cardNumber3}
+      number4={cardNumber4}
+      month={expireAtMonth}
+      year={expireAtYear}
       owner={owner}
       setModalIsOpen={setModalIsOpen}
     />
@@ -89,3 +53,9 @@ const CreateCard = ({
 }
 
 export default CreateCard
+
+interface CreateCardProp {
+  cardType: CardType | undefined
+  setCardType: React.Dispatch<React.SetStateAction<CardType | undefined>>
+  setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+}

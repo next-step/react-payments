@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { cardFormContext, cardFormDispatcherContext } from '../CardFormContext'
 import {
   formChangedContext,
   formChangeedDispatcherContext,
@@ -16,4 +17,21 @@ function useFormChangedDispatch() {
   return dispatch
 }
 
-export { useFormChangedDispatch, useFormChangedState }
+function useCardFormState() {
+  const state = useContext(cardFormContext)
+  if (!state) throw new Error('State Not Found!')
+  return state
+}
+
+function useCardFormDispatch() {
+  const dispatch = useContext(cardFormDispatcherContext)
+  if (!dispatch) throw new Error('Dispatcher Not Founct!')
+  return dispatch
+}
+
+export {
+  useFormChangedDispatch,
+  useFormChangedState,
+  useCardFormState,
+  useCardFormDispatch,
+}
