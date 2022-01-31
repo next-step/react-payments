@@ -1,8 +1,8 @@
-import { ChangeEvent, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { CardNumber } from "../../@types";
 import { MAX_CARD_NUMBER_LENGTH } from "../../constants/card";
-import { hasNonNumberChar } from "../../utils/validations";
+import IntegerInput from "../IntegerInput/IntegerInput";
 import Styled from "./CardNumberInput.styles";
 
 interface Props {
@@ -12,13 +12,8 @@ interface Props {
 const CardNumberInput = ({ onChange }: Props) => {
   const [cardNumber, setCardNumber] = useState<CardNumber>(["", "", "", ""]);
 
-  const makeChangeHandlerByIndex = (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
+  const makeChangeHandlerByIndex = (index: number) => (value: string) => {
     const updatedCardNumber: CardNumber = [...cardNumber];
-    const { value } = event.target;
-
-    if (hasNonNumberChar(value)) {
-      return;
-    }
 
     updatedCardNumber[index] = value;
     setCardNumber(updatedCardNumber);
@@ -30,7 +25,7 @@ const CardNumberInput = ({ onChange }: Props) => {
 
   return (
     <Styled.InputWrapper label={"카드번호"}>
-      <input
+      <IntegerInput
         type="text"
         inputMode="numeric"
         value={cardNumber[0]}
@@ -38,7 +33,7 @@ const CardNumberInput = ({ onChange }: Props) => {
         maxLength={MAX_CARD_NUMBER_LENGTH}
       />
       -
-      <input
+      <IntegerInput
         type="text"
         inputMode="numeric"
         value={cardNumber[1]}
@@ -46,7 +41,7 @@ const CardNumberInput = ({ onChange }: Props) => {
         maxLength={MAX_CARD_NUMBER_LENGTH}
       />
       -
-      <input
+      <IntegerInput
         type="password"
         inputMode="numeric"
         value={cardNumber[2]}
@@ -54,7 +49,7 @@ const CardNumberInput = ({ onChange }: Props) => {
         maxLength={MAX_CARD_NUMBER_LENGTH}
       />
       -
-      <input
+      <IntegerInput
         type="password"
         inputMode="numeric"
         value={cardNumber[3]}

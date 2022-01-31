@@ -5,10 +5,6 @@ import {
   MAX_CARD_SECURITY_CODE_LENGTH,
 } from "../constants/card";
 
-const hasNonNumberChar = (value: string) => {
-  return /[^0-9]/.test(value);
-};
-
 const isCardNumberFormFilled = (cardNumber: CardNumber) =>
   cardNumber.every((cardCell) => cardCell.length === MAX_CARD_NUMBER_LENGTH);
 
@@ -37,7 +33,6 @@ const isCardFormFilled = (formField: CardFormField) => {
 };
 
 export {
-  hasNonNumberChar,
   isCardNumberFormFilled,
   isCardTypeSelected,
   isCardExpirationFormFilled,

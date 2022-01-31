@@ -1,7 +1,7 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CardExpiration } from "../../@types";
 import { MAX_CARD_EXPIRATION_VALUE_LENGTH } from "../../constants/card";
-import { hasNonNumberChar } from "../../utils/validations";
+import IntegerInput from "../IntegerInput/IntegerInput";
 import Styled from "./CardExpirationInput.styles";
 
 interface Props {
@@ -11,13 +11,7 @@ interface Props {
 const CardExpirationInput = ({ onChange }: Props) => {
   const [expiration, setExpiration] = useState<CardExpiration>({ month: "", year: "" });
 
-  const makeChangeHandlerByKey = (key: keyof CardExpiration) => (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-
-    if (hasNonNumberChar(value)) {
-      return;
-    }
-
+  const makeChangeHandlerByKey = (key: keyof CardExpiration) => (value: string) => {
     setExpiration((prev) => ({
       ...prev,
       [key]: value,
@@ -30,14 +24,14 @@ const CardExpirationInput = ({ onChange }: Props) => {
 
   return (
     <Styled.InputWrapper label="만료일">
-      <input
+      <IntegerInput
         type="text"
         value={expiration.month}
         onChange={makeChangeHandlerByKey("month")}
         maxLength={MAX_CARD_EXPIRATION_VALUE_LENGTH}
       />
       /
-      <input
+      <IntegerInput
         type="text"
         value={expiration.year}
         onChange={makeChangeHandlerByKey("year")}
