@@ -1,6 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { CardData, CardType } from "@common/constants";
+import { CardType } from "@common/constants";
+import { CardData } from "@common/defines";
 import Card from "@components/card";
 
 export default {

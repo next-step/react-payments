@@ -1,4 +1,5 @@
-import { CardData, CardType } from "@common/constants";
+import { CardType } from "@common/constants";
+import { CardData } from "@common/defines";
 import EmptyCard from "./EmptyCard";
 import NormalCard from "./NormalCard";
 

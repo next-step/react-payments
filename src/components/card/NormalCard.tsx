@@ -1,5 +1,5 @@
 import { CardProps } from ".";
-import { CardData } from "@common/constants";
+import { CardData } from "@common/defines";
 
 const NormalCard = ({ type, cardData }: NormalCardProps) => {
   const { cardName, cardNumber, expired, userName, alias } = cardData;

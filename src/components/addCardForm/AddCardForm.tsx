@@ -1,6 +1,7 @@
-import { CardData, CardType } from "@common/constants";
+import { CardType } from "@common/constants";
 import NextBtn from "@components/button/NextBtn";
 import Card from "@components/card";
+import { useCardData } from "@context/cardData";
 import { FormEvent, FormEventHandler, useState } from "react";
 import CardExpirationInput from "./CardExpirationInput";
 import CardNumberInput from "./CardNumberInput";
@@ -19,7 +20,7 @@ const AddCardForm = ({ onSubmit, className }: AddCardFormProps) => {
   };
 
   const [isValidForm, setIsValidForm] = useState(false);
-  const [cardData, setCardData] = useState<CardData>({});
+  const { cardData, setCardData } = useCardData();
 
   const onChangeInputState: OnChangeInputState = (inputState: IInputState) => {
     inputStateMap.set(inputState.displayName, { ...inputState });

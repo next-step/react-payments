@@ -11,7 +11,9 @@
       "@styles": ["styles"],
       "@styles/*": ["styles/*"],
       "@hooks": ["hooks"],
-      "@hooks/*": ["hooks/*"]
+      "@hooks/*": ["hooks/*"],
+      "@context": ["context"],
+      "@context/*": ["context/*"]
     }
   }
 }

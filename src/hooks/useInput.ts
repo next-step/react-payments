@@ -1,4 +1,5 @@
-import { InputType, InputTypeAttribute } from "@common/constants";
+import { InputType } from "@common/constants";
+import { InputTypeAttribute } from "@common/defines";
 import React, { useState } from "react";
 
 const useInput = ({

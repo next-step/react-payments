@@ -19,6 +19,7 @@ module.exports = {
       "@common": resolve(__dirname, "../src/common"),
       "@styles": resolve(__dirname, "../src/styles"),
       "@hooks": resolve(__dirname, "../src/hooks"),
+      "@context": resolve(__dirname, "../src/context"),
     };
     return config;
   },
