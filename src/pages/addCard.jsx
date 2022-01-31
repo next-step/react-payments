@@ -87,7 +87,21 @@ function AddCard() {
       },
     ]);
     setId(id + 1);
-    navigate("/complete");
+    navigate("/complete", {
+      state: {
+        id,
+        cardNumberSeries,
+        cardNumberCompany,
+        cardNumberIndividual,
+        cardNumberCode,
+        dueMonth,
+        dueYear,
+        name,
+        cvc,
+        passwordFirst,
+        passwordSecond,
+      },
+    });
   };
 
   return (

@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CardContext } from "../Payments";
 import Title from "../components/Title";
@@ -6,6 +7,8 @@ import CompletedCard from "../components/CompletedCard";
 
 function CardList() {
   const { cards, setCards } = useContext(CardContext);
+
+  const _cards = [...cards];
 
   const deleteCard = (event, id) => {
     event.preventDefault();
@@ -18,11 +21,17 @@ function CardList() {
         <FlexCenter>
           <Title marginBottom="2.5rem">보유 카드</Title>
         </FlexCenter>
-        {cards
+        {_cards
           .sort((a, b) => b.id - a.id)
           .map((card) => (
             <React.Fragment key={card.id}>
-              <CompletedCard completedCard={card} small smallChip />
+              <Link
+                to="/complete"
+                state={card}
+                style={{ textDecoration: "none", color: "black" }}
+              >
+                <CompletedCard completedCard={card} small smallChip />
+              </Link>
               <span>
                 {card.nickName}{" "}
                 <button onClick={(event) => deleteCard(event, card.id)}>
@@ -31,9 +40,11 @@ function CardList() {
               </span>
             </React.Fragment>
           ))}
-        <CardBox>
-          <EmptyCard>+</EmptyCard>
-        </CardBox>
+        <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+          <CardBox>
+            <EmptyCard>+</EmptyCard>
+          </CardBox>
+        </Link>
       </App>
     </Root>
   );
@@ -45,7 +56,8 @@ const Root = styled.div`
   background-color: #fff;
   width: 375px;
   min-width: 375px;
-  height: 700px;
+  height: auto;
+  min-height: 700px;
   position: relative;
   border-radius: 15px;
 `;
