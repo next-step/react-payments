@@ -73,6 +73,7 @@ export const BackgroundColorAccordingToStartsWith = {
 
 export interface CardProp {
   type?: CardType
+  name?: string
   number1: string
   number2: string
   number3: string

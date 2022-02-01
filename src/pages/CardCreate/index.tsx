@@ -50,7 +50,7 @@ const SubmitButton = ({
   validateCardForm,
   cardType,
 }: CardSubmitButtonProps) => {
-  const { cardExpire, cardNumber, owner } = useCardFormState()
+  const { cardExpire, cardNumber, owner, cvc, password } = useCardFormState()
   const cardDispatch = useCardDispatch()
   const navigate = useNavigate()
 
@@ -63,6 +63,7 @@ const SubmitButton = ({
       const newCard = {
         id,
         card: {
+          name: (cardType ?? '클린') + '카드',
           number1: cardNumber.cardNumber1,
           number2: cardNumber.cardNumber2,
           number3: cardNumber.cardNumber3,
@@ -72,8 +73,12 @@ const SubmitButton = ({
           owner,
           type: cardType,
           createAt: Date.now(),
+          cvc,
+          password1: password.password1,
+          password2: password.password2,
         },
       }
+
       cardDispatch({
         type: 'ADD',
         payload: newCard,

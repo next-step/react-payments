@@ -14,6 +14,15 @@ const CardContainer = styled.div`
   margin: 10px 0;
 `
 
+const CardNameText = styled.span`
+  font-weight: 700;
+  color: #575757;
+  font-size: 14px;
+
+  margin-top: 5px;
+  margin-bottom: 25px;
+`
+
 const EmptyCard = styled.div`
   ${CardStyle}
   width: 208px;
@@ -27,4 +36,4 @@ const EmptyCard = styled.div`
   user-select: none;
 `
 
-export default { CardListContainer, CardContainer, EmptyCard }
+export default { CardListContainer, CardContainer, EmptyCard, CardNameText }

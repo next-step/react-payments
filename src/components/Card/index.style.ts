@@ -20,7 +20,6 @@ const Card = styled.div<{
 }>`
   ${({ size }) => (size === 'big' ? bigCardStyle : smallCardStyle)}
   ${CardStyle}
-  margin-bottom: 25px;
   ${({ bgColor }) => bgColor && { backgroundColor: bgColor }}
   ${({ ableToModalOpen }) => ableToModalOpen && { cursor: 'pointer' }}
 `

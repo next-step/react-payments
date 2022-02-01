@@ -5,6 +5,7 @@ import {
   CardTypeAccordingToStartsWith,
 } from '../../../components/Form'
 import { useCardFormState } from '../../../context/Form/hooks'
+import Styled from './index.style'
 
 const CreateCard = ({
   cardType,
@@ -38,17 +39,19 @@ const CreateCard = ({
   }, [cardNumber1, cardNumber2, cardNumber3, cardNumber4, setCardType])
 
   return (
-    <Card
-      type={cardType}
-      number1={cardNumber1}
-      number2={cardNumber2}
-      number3={cardNumber3}
-      number4={cardNumber4}
-      month={expireAtMonth}
-      year={expireAtYear}
-      owner={owner}
-      setModalIsOpen={setModalIsOpen}
-    />
+    <Styled.CardContainer>
+      <Card
+        type={cardType}
+        number1={cardNumber1}
+        number2={cardNumber2}
+        number3={cardNumber3}
+        number4={cardNumber4}
+        month={expireAtMonth}
+        year={expireAtYear}
+        owner={owner}
+        setModalIsOpen={setModalIsOpen}
+      />
+    </Styled.CardContainer>
   )
 }
 

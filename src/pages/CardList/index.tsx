@@ -47,7 +47,10 @@ const CardList = () => {
         ) : (
           <>
             {cardList.map((card) => (
-              <Card key={card.id} {...card} />
+              <>
+                <Card key={card.id} {...card} />
+                <Styled.CardNameText>{card.name}</Styled.CardNameText>
+              </>
             ))}
           </>
         )}

@@ -1,5 +1,6 @@
 import { createContext, Dispatch, ReactNode, useReducer } from 'react'
 import { CardProp } from '../../components/Card'
+import { appendCard } from '../../server/cardApi'
 
 export type ServerCardProps = Omit<CardProp, 'setModalIsOpen' | 'size'> & {
   createAt: number
@@ -32,7 +33,9 @@ function cardReducer(
       return action.payload
 
     case 'ADD':
+      appendCard(action.payload)
       clonedState[action.payload.id] = action.payload.card
+
       return clonedState
   }
 }
