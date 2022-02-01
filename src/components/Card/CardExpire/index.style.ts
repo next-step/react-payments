@@ -3,7 +3,7 @@ import styled from 'styled-components'
 const CardExpireContainer = styled.div`
   display: flex;
   width: 40px;
-  margin-right: 20px;
+  margin-right: 30px;
 `
 
 const CardTextContainer = styled.div``

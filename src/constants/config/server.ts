@@ -1,3 +1,3 @@
-const SERVER_URL = 'https://react-payments-server.herokuapp.com/'
+const SERVER_URL = 'http://3.36.219.120/'
 
 export { SERVER_URL }

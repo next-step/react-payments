@@ -1,7 +1,9 @@
 import { createContext, Dispatch, ReactNode, useReducer } from 'react'
 import { CardProp } from '../../components/Card'
 
-export type ServerCardProps = Omit<CardProp, 'setModalIsOpen' | 'size'>
+export type ServerCardProps = Omit<CardProp, 'setModalIsOpen' | 'size'> & {
+  createAt: number
+}
 
 export type CardDispatchAddType = { id: string; card: ServerCardProps }
 type CardContextProps = Record<string, ServerCardProps>

@@ -71,6 +71,7 @@ const SubmitButton = ({
           month: cardExpire.expireAtMonth,
           owner,
           type: cardType,
+          createAt: Date.now(),
         },
       }
       cardDispatch({
