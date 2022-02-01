@@ -14,6 +14,7 @@ const UL = styled.ul`
 
   li {
     margin-bottom: 30px;
+    position: relative;
   }
 
   li:last-child {
@@ -26,9 +27,20 @@ const CardName = styled.p`
   font-weight: 700;
   color: #575757;
   text-align: center;
-
   margin-top: 10px;
+
   padding: 5px;
+`;
+
+const DeleteButton = styled.button`
+  display: flex;
+  align-items: center;
+  color: #8f8f8f;
+  font-size: 18px;
+
+  position: absolute;
+  top: -20px;
+  right: -20px;
 `;
 
 const AddCardButton = styled(Link)`
@@ -54,5 +66,6 @@ export default {
   Header,
   UL,
   CardName,
+  DeleteButton,
   AddCardButton,
 };

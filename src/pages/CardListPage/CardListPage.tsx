@@ -1,3 +1,4 @@
+import { MdCancel } from "react-icons/md";
 import useCardListSelector from "../../stores/cardList/hooks/useCardListSelector";
 import Styled from "./CardListPage.styles";
 import type { Card as CardModel } from "../../@types";
@@ -12,6 +13,12 @@ const CardListPage = () => {
   const cardList: CardModel[] = useCardListSelector((state) =>
     Object.values(state).sort((left, right) => right.createdAt - left.createdAt)
   );
+
+  const makeHandleClickDeleteButton = (cardId: CardModel["id"]) => () => {
+    if (confirm("정말 카드를 삭제하시겠습니까?")) {
+      cardListDispatch(cardListActions.deleteCard({ id: cardId }));
+    }
+  };
 
   useEffect(() => {
     cardListDispatch(cardListActions.getCardList());
@@ -32,6 +39,9 @@ const CardListPage = () => {
                 expiration={card.cardExpiration}
               />
               <Styled.CardName>{card.cardName}</Styled.CardName>
+              <Styled.DeleteButton onClick={makeHandleClickDeleteButton(card.id)}>
+                <MdCancel />
+              </Styled.DeleteButton>
             </li>
           ))}
           <li>
