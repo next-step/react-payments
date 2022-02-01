@@ -1,8 +1,9 @@
 import { createContext, Dispatch, ReactNode, useReducer } from 'react'
 import { CardProp } from '../../components/Card'
 
-export type LocalCardProps = Omit<CardProp, 'setModalIsOpen'>
-type CardStoredType = { id: string; card: LocalCardProps }
+export type ServerCardProps = Omit<CardProp, 'setModalIsOpen' | 'size'>
+
+export type CardStoredType = { id: string; card: ServerCardProps }
 type CardContextProps = CardStoredType[]
 type Payload = CardStoredType
 type Action = { type: 'ADD'; payload: Payload }

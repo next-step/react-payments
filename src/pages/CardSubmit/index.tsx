@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Card from '../../components/Card'
 import Header from '../../components/Layout/Header'
-import { LocalCardProps } from '../../context/Card/CardContext'
+import { ServerCardProps } from '../../context/Card/CardContext'
 import Styled from './index.styled'
 
-type SubmitStateType = { newCard: { id: string; card: LocalCardProps } } | null
+type SubmitStateType = { newCard: { id: string; card: ServerCardProps } } | null
 const CardSubmit = () => {
   const navigate = useNavigate()
   const { state } = useLocation()
