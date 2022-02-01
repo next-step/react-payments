@@ -11,7 +11,7 @@ const LabelContainer = styled.div`
   justify-content: space-between;
 `
 
-const Label = styled.span`
+const Label = styled.label`
   display: flex;
   align-items: center;
   font-size: 12px;

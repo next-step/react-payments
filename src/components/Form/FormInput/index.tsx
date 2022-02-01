@@ -1,4 +1,4 @@
-import React, { forwardRef, KeyboardEvent } from 'react'
+import React, { forwardRef, InputHTMLAttributes, KeyboardEvent } from 'react'
 import { useImperativeHandle } from 'react'
 import { ReactNode } from 'react'
 import { useCallback } from 'react'
@@ -6,17 +6,13 @@ import { useRef } from 'react'
 import { ChangeEvent, MutableRefObject } from 'react'
 import Styled, { TextAlign } from './index.style'
 
-interface FormInputProps {
-  id?: string
-  name?: string
+interface FormInputProps extends InputHTMLAttributes<HTMLInputElement> {
   ref?: MutableRefObject<HTMLInputElement | null>
-  placeholder?: string
   type?: 'number' | 'password' | 'text'
   max?: number
   maxLength?: number
   textAlign?: TextAlign
   numberOnly?: boolean
-  value?: string
   backgroundColor?: string
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
 }

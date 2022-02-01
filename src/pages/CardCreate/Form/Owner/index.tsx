@@ -6,6 +6,9 @@ import FormInput, {
 } from '../../../../components/Form/FormInput'
 import { useCardFormDispatch } from '../../../../context/Form/hooks'
 import { CREATE_CARD_CVC, CREATE_OWNER_NAME } from '../constants/id'
+import Styled from './index.style'
+
+const MAX_OWNER_NAME_LENGTH = 30
 
 type CardOwnerHandle = {
   owner: () => string
@@ -33,11 +36,17 @@ const CardOwnerInput = forwardRef<CardOwnerHandle, {}>((props, ref) => {
     document.getElementById(CREATE_CARD_CVC)?.focus()
   }
 
+  const MaxLengthLabel = (
+    <Styled.Label>
+      {ownerNameLength} / {MAX_OWNER_NAME_LENGTH}
+    </Styled.Label>
+  )
+
   return (
     <FormArea
       label="카드 소유자 이름(선택)"
-      maxLength={30}
-      currentLength={ownerNameLength}
+      maxLength={MAX_OWNER_NAME_LENGTH}
+      rightLabel={MaxLengthLabel}
     >
       <FormInputBox>
         <FormInput
