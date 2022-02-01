@@ -3,10 +3,13 @@ import { CardProp } from '../../components/Card'
 
 export type ServerCardProps = Omit<CardProp, 'setModalIsOpen' | 'size'>
 
-export type CardStoredType = { id: string; card: ServerCardProps }
-type CardContextProps = CardStoredType[]
-type Payload = CardStoredType
-type Action = { type: 'ADD'; payload: Payload }
+export type CardDispatchAddType = { id: string; card: ServerCardProps }
+type CardContextProps = Record<string, ServerCardProps>
+type AddPayload = CardDispatchAddType
+type Action =
+  | { type: 'ADD'; payload: AddPayload }
+  | { type: 'INIT'; payload: CardContextProps }
+
 type CardDispatcher = Dispatch<Action>
 
 export const cardContext = createContext<CardContextProps | undefined>(
@@ -20,9 +23,15 @@ function cardReducer(
   state: CardContextProps,
   action: Action
 ): CardContextProps {
+  const clonedState = JSON.parse(JSON.stringify(state))
+
   switch (action.type) {
+    case 'INIT':
+      return action.payload
+
     case 'ADD':
-      return [...state, action.payload]
+      clonedState[action.payload.id] = action.payload.card
+      return clonedState
   }
 }
 
@@ -31,7 +40,7 @@ export default function CardContextProvider({
 }: {
   children: ReactNode
 }) {
-  const [state, dispatch] = useReducer(cardReducer, [])
+  const [state, dispatch] = useReducer(cardReducer, {})
 
   return (
     <cardDispatcherContext.Provider value={dispatch}>

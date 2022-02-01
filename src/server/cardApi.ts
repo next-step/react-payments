@@ -1,14 +1,17 @@
 import { drop, get, post, update } from '.'
-import { CardStoredType, ServerCardProps } from '../context/Card/CardContext'
+import {
+  CardDispatchAddType,
+  ServerCardProps,
+} from '../context/Card/CardContext'
 
 const CARDS = 'cards/'
 const CARD = 'card/'
 
 const getCards = async () => {
-  return await get<GetCardResponse>({ path: CARDS })
+  return await get<GetCardResponse | null>({ path: CARDS })
 }
 
-const appendCard = async (card: CardStoredType) => {
+const appendCard = async (card: CardDispatchAddType) => {
   return await post({ path: CARD, body: card })
 }
 
@@ -16,10 +19,10 @@ const deleteCard = async (id: string) => {
   return await drop({ path: CARD + id })
 }
 
-const editCard = async (card: CardStoredType) => {
+const editCard = async (card: CardDispatchAddType) => {
   return await update({ path: CARD, body: card })
 }
 
 export { getCards, appendCard, deleteCard, editCard }
 
-type GetCardResponse = Record<string, ServerCardProps>
+export type GetCardResponse = Record<string, ServerCardProps>
