@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import Card from '../../components/Card'
 import Header from '../../components/Layout/Header'
@@ -10,6 +10,7 @@ const CardSubmit = () => {
   const navigate = useNavigate()
   const { state } = useLocation()
   const navigateState = state as SubmitStateType
+  const nameRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (!navigateState) {
@@ -17,17 +18,35 @@ const CardSubmit = () => {
     }
   }, [navigate, navigateState])
 
+  const newCard = navigateState !== null ? navigateState.newCard.card : null
+  const onSubmit = () => {
+    const name = nameRef.current?.value || (newCard?.type ?? '클린') + '카드'
+
+    navigate('/')
+  }
+
   return (
     <>
-      {navigateState && (
-        <Styled.Container>
-          <Styled.HeaderContainer>
-            <Header title="카드등록이 완료되었습니다." />
-          </Styled.HeaderContainer>
-          <Styled.CardBox>
-            <Card {...navigateState.newCard.card} size="big" />
-          </Styled.CardBox>
-        </Styled.Container>
+      {newCard && (
+        <>
+          <Styled.Container>
+            <Styled.HeaderContainer>
+              <Header title="카드등록이 완료되었습니다." />
+            </Styled.HeaderContainer>
+            <Styled.CenterBox>
+              <Card {...newCard} size="big" />
+            </Styled.CenterBox>
+            <Styled.CenterBox>
+              <Styled.CardNameInput
+                ref={nameRef}
+                placeholder={(newCard.type ?? '클린') + '카드'}
+              />
+            </Styled.CenterBox>
+          </Styled.Container>
+          <Styled.SubmitButtonBox>
+            <Styled.SubmitButton onClick={onSubmit}>확인</Styled.SubmitButton>
+          </Styled.SubmitButtonBox>
+        </>
       )}
     </>
   )
