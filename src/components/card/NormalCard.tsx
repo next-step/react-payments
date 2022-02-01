@@ -1,10 +1,10 @@
 import { CardProps } from ".";
 import { CardData } from "@common/defines";
 
-const NormalCard = ({ type, cardData }: NormalCardProps) => {
+const NormalCard = ({ type, cardData, onClick }: NormalCardProps) => {
   const { cardName, cardNumber, expired, userName, alias, id } = cardData;
   return (
-    <div className="card-box" data-id={id}>
+    <div className="card-box" data-id={id} onClick={onClick}>
       <div className={`${type}-card`}>
         <div className="card-top">
           <span className="card-text">{cardName}</span>
@@ -22,7 +22,7 @@ const NormalCard = ({ type, cardData }: NormalCardProps) => {
           </div>
         </div>
       </div>
-      {alias ? <span className="card-nickname">{alias}</span> : null}
+      {alias && <span className="card-nickname">{alias}</span>}
     </div>
   );
 };

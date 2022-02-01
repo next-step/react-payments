@@ -6,16 +6,30 @@ import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AddCardCompletePage: React.FC = () => {
-  const { tempCardData, addCardData } = useCardData();
+  const { tempCardData, addCardData, hasCardData, updateCardData } =
+    useCardData();
   const aliasInputRef = useRef<HTMLInputElement>(null);
-
   const navigator = useNavigate();
 
-  const handleOnClick = () => {
-    addCardData({
+  const addOrUpdateCardData = () => {
+    const cardDataId = tempCardData.id ?? 0;
+    const alias = aliasInputRef.current?.value || "DefaultCompany";
+
+    const cardData = {
       ...tempCardData,
-      alias: aliasInputRef.current?.value ?? "DefaultCompany",
-    });
+      alias,
+    };
+    console.log(cardData);
+
+    if (hasCardData(cardDataId)) {
+      updateCardData(cardDataId, cardData);
+    } else {
+      addCardData(cardData);
+    }
+  };
+
+  const handleOnClick = () => {
+    addOrUpdateCardData();
     navigator(RoutePath.CardList);
   };
 

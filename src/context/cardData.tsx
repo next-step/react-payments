@@ -15,6 +15,7 @@ interface IContextState {
   addCardData: (newCardData: CardData) => void;
   updateCardData: (id: number, updatedCardData: CardData) => void;
   removeCardData: (id: number) => void;
+  hasCardData: (id: number) => boolean;
 }
 
 const defaultContextState: IContextState = {
@@ -24,6 +25,7 @@ const defaultContextState: IContextState = {
   addCardData: (newCardData: CardData) => {},
   updateCardData: (id: number, updatedCardData: CardData) => {},
   removeCardData: (id: number) => {},
+  hasCardData: (id: number) => false,
 };
 
 export const CardDataContext =
@@ -49,6 +51,10 @@ export function CardDataProvider({ children }: { children: ReactChild }) {
     setCurDataList(cardDataList.filter((cardData) => id !== cardData.id));
   };
 
+  const hasCardData = (id: number) => {
+    return cardDataList.some((cardData) => cardData.id === id);
+  };
+
   return (
     <CardDataContext.Provider
       value={{
@@ -58,6 +64,7 @@ export function CardDataProvider({ children }: { children: ReactChild }) {
         addCardData,
         updateCardData,
         removeCardData,
+        hasCardData,
       }}
     >
       {children}
