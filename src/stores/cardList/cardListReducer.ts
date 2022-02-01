@@ -10,6 +10,7 @@ import type { CardMap } from "../../@types";
 const cardListReducer: Reducer<CardMap, UnionActionTypeOfCardListAction> = (state, action) => {
   switch (action.type) {
     case CardListActionType.GET_CARD_LIST:
+      console.log("hey");
       return {
         ...state,
         ...JSON.parse(localStorage.getItem(cardLocalStorageKey) ?? "{}"),
@@ -27,6 +28,17 @@ const cardListReducer: Reducer<CardMap, UnionActionTypeOfCardListAction> = (stat
       localStorage.setItem(cardLocalStorageKey, JSON.stringify(addedState));
 
       return addedState;
+    case CardListActionType.UPDATE_CARD_NAME:
+      const updatedState = {
+        ...state,
+        [action.payload.id]: {
+          ...state[action.payload.id],
+          cardName: action.payload.cardName,
+        },
+      };
+      localStorage.setItem(cardLocalStorageKey, JSON.stringify(updatedState));
+
+      return updatedState;
     case CardListActionType.DELETE_CARD:
       const deletedState = { ...state };
       delete deletedState[action.payload.id];

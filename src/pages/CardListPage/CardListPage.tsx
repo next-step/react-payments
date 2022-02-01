@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
+
 import useCardListSelector from "../../stores/cardList/hooks/useCardListSelector";
-import Styled from "./CardListPage.styles";
 import type { Card as CardModel } from "../../@types";
 import Card from "../../components/Card/Card";
-import { useEffect } from "react";
 import useCardListDispatch from "../../stores/cardList/hooks/useCardListDispatch";
 import cardListActions from "../../stores/cardList/cardListActions";
 import { PATH } from "../../constants/route";
+import Styled from "./CardListPage.styles";
 
 const CardListPage = () => {
   const cardListDispatch = useCardListDispatch();
@@ -20,29 +21,27 @@ const CardListPage = () => {
     }
   };
 
-  useEffect(() => {
-    cardListDispatch(cardListActions.getCardList());
-  }, []);
-
   return (
     <>
       <Styled.Header>보유카드</Styled.Header>
       <main>
         <Styled.UL>
           {cardList.map((card) => (
-            <li key={card.id}>
-              <Card
-                size="SMALL"
-                cardNumber={card.cardNumber}
-                cardType={card.cardType}
-                userName={card.cardUserName}
-                expiration={card.cardExpiration}
-              />
+            <Styled.LI key={card.id}>
+              <Link to={PATH.CARD_NAME_UPDATE(card.id)}>
+                <Card
+                  size="SMALL"
+                  cardNumber={card.cardNumber}
+                  cardType={card.cardType}
+                  userName={card.cardUserName}
+                  expiration={card.cardExpiration}
+                />
+              </Link>
               <Styled.CardName>{card.cardName}</Styled.CardName>
               <Styled.DeleteButton onClick={makeHandleClickDeleteButton(card.id)}>
                 <MdCancel />
               </Styled.DeleteButton>
-            </li>
+            </Styled.LI>
           ))}
           <li>
             <Styled.AddCardButton to={PATH.CARD_REGISTER}>

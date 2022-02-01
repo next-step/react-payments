@@ -50,9 +50,9 @@ const CardRegisterCompletePage = () => {
   }, [errorMessage]);
 
   return (
-    <main>
+    <Styled.Main>
+      <Styled.H1>카드등록이 완료되었습니다.</Styled.H1>
       <Styled.Form onSubmit={handleSubmit}>
-        <Styled.H1>카드등록이 완료되었습니다.</Styled.H1>
         <Card
           size="BIG"
           cardNumber={pendingCard.cardNumber}
@@ -68,7 +68,7 @@ const CardRegisterCompletePage = () => {
         />
         <SimpleButton>확인</SimpleButton>
       </Styled.Form>
-    </main>
+    </Styled.Main>
   );
 };
 

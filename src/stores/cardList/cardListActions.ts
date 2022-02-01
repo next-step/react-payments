@@ -6,6 +6,11 @@ interface AddCardPayload {
   card: PendingCard;
 }
 
+interface UpdateCardNamePayload {
+  id: Card["id"];
+  cardName: Card["cardName"];
+}
+
 interface DeleteCardPayload {
   id: Card["id"];
 }
@@ -13,6 +18,7 @@ interface DeleteCardPayload {
 const cardListActions = {
   getCardList: makeActionCreator(CardListActionType.GET_CARD_LIST)(),
   addCard: makeActionCreator(CardListActionType.ADD_CARD)<AddCardPayload>(),
+  updateCardName: makeActionCreator(CardListActionType.UPDATE_CARD_NAME)<UpdateCardNamePayload>(),
   deleteCard: makeActionCreator(CardListActionType.DELETE_CARD)<DeleteCardPayload>(),
 };
 

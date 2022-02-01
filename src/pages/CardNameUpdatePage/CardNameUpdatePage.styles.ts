@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 
 const Main = styled.main`
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: center;
+  padding: 200px 0;
 `;
 
 const Form = styled.form`
@@ -14,12 +14,6 @@ const Form = styled.form`
   button {
     align-self: flex-end;
   }
-`;
-
-const H1 = styled.h1`
-  color: #383838;
-  font-size: 24px;
-  margin: 100px 0 80px;
 `;
 
 const CardNameInput = styled.input`
@@ -36,6 +30,5 @@ const CardNameInput = styled.input`
 export default {
   Main,
   Form,
-  H1,
   CardNameInput,
 };

@@ -12,12 +12,16 @@ const UL = styled.ul`
   flex-direction: column;
   align-items: center;
 
-  li {
-    margin-bottom: 30px;
-    position: relative;
+  a {
+    text-decoration: none;
   }
+`;
 
-  li:last-child {
+const LI = styled.li`
+  margin-bottom: 30px;
+  position: relative;
+
+  &:last-child {
     margin-bottom: 0;
   }
 `;
@@ -65,6 +69,7 @@ const AddCardButton = styled(Link)`
 export default {
   Header,
   UL,
+  LI,
   CardName,
   DeleteButton,
   AddCardButton,
