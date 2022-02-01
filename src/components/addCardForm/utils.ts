@@ -15,7 +15,7 @@ export function getDisplayCardExpiration(month: string, year: string) {
   return [month, year].filter((inputVal) => inputVal.length > 0).join(" / ");
 }
 
-export function convertFormDataToCardData(formData: FieldValues): CardData {
+export function createCardDataByFormData(formData: FieldValues): CardData {
   const cardNumberList: string[] = [
     formData[InputFieldName.CardNumber1] ?? "",
     formData[InputFieldName.CardNumber2] ?? "",
@@ -28,9 +28,11 @@ export function convertFormDataToCardData(formData: FieldValues): CardData {
   const year = formData[InputFieldName.YearExpiration] ?? "";
   const expired = getDisplayCardExpiration(month, year);
   const userName = formData[InputFieldName.OwnerName] ?? "";
+  const id = Date.now();
   const createdAt = Date.now();
 
   return {
+    id,
     cardNumber,
     expired,
     userName,

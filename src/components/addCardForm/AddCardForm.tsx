@@ -7,7 +7,7 @@ import CardNumberInput from "./CardNumberInput";
 import CardOwnerNameInput from "./CardOwnerNameInput";
 import CardPasswordInput from "./CardPasswordInput";
 import SecurityCodeInput from "./SecurityCodeInput";
-import { convertFormDataToCardData } from "./utils";
+import { createCardDataByFormData } from "./utils";
 
 const AddCardForm = ({ className, handleFormData }: AddCardFormProps) => {
   const { handleSubmit, register, watch, addOnWatchEvent } = useForm();
@@ -15,8 +15,7 @@ const AddCardForm = ({ className, handleFormData }: AddCardFormProps) => {
 
   const onWatch = () => {
     const formData = watch();
-    const cardData = convertFormDataToCardData(formData);
-    console.log(cardData);
+    const cardData = createCardDataByFormData(formData);
     setTempCardData(cardData);
   };
 

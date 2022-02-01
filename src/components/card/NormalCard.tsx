@@ -2,9 +2,9 @@ import { CardProps } from ".";
 import { CardData } from "@common/defines";
 
 const NormalCard = ({ type, cardData }: NormalCardProps) => {
-  const { cardName, cardNumber, expired, userName, alias } = cardData;
+  const { cardName, cardNumber, expired, userName, alias, id } = cardData;
   return (
-    <div className="card-box">
+    <div className="card-box" data-id={id}>
       <div className={`${type}-card`}>
         <div className="card-top">
           <span className="card-text">{cardName}</span>

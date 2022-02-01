@@ -15,6 +15,7 @@ export const MaxLength = {
   OwnerNameInput: 30,
   CardSecurityCodeInput: 3,
   CardPasswordInput: 1,
+  Alias: 10,
 } as const;
 
 export const InputType = {
