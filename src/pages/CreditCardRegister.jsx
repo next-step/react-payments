@@ -11,25 +11,30 @@ const CreditCardRegister = () => {
     const { state, dispatch, setCardList, cardList } = useContext(CardInfoContext);
     const { cardNumber, expireDate, name } = state;
 
-    const clickNext = () => {
-        if (cardList.find((item) => item.cardNumber === cardNumber)) {
-            setCardList(
-                cardList.map((item) => {
-                    if (item.cardNumber === cardNumber)
-                        return {
-                            ...state,
-                            nickName: !state.nickName ? emptyCardNickName : state.nickName,
-                        };
+    const addCardList = () => {
+        setCardList([
+            ...cardList,
+            { ...state, nickName: !state.nickName ? emptyCardNickName : state.nickName },
+        ]);
+    };
 
-                    return item;
-                })
-            );
-        } else {
-            setCardList([
-                ...cardList,
-                { ...state, nickName: !state.nickName ? emptyCardNickName : state.nickName },
-            ]);
-        }
+    const updateCardList = () => {
+        setCardList(
+            cardList.map((item) => {
+                if (item.cardNumber === cardNumber)
+                    return {
+                        ...state,
+                        nickName: !state.nickName ? emptyCardNickName : state.nickName,
+                    };
+
+                return item;
+            })
+        );
+    };
+
+    const goCreditCardList = () => {
+        if (cardList.find((item) => item.cardNumber === cardNumber)) updateCardList();
+        else addCardList();
 
         navigate('/creditCardList');
     };
@@ -49,7 +54,7 @@ const CreditCardRegister = () => {
                         placeholder={'카드의 별칭을 입력해주세요.'}
                         onChange={(text) => dispatch({ nickName: text })}
                     />
-                    <Button title={'다음'} onClick={clickNext} marginTop={50} />
+                    <Button title={'다음'} onClick={goCreditCardList} marginTop={50} />
                 </div>
             </div>
         </>

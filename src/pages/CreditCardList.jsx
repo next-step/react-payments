@@ -20,6 +20,7 @@ const CreditCardList = ({ initForm }) => {
     const deleteCard = (cardNumber) => {
         setCardList(cardList.filter((item) => item.cardNumber !== cardNumber));
     };
+
     return (
         <>
             <h2>5️⃣ 카드 목록</h2>
