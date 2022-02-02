@@ -29,6 +29,7 @@ const CardNameInput = styled.input`
   text-align: center;
   font-size: 18px;
   line-height: 21px;
+  margin-top: 15px;
   outline: none;
 `
 

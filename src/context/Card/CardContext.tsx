@@ -1,6 +1,6 @@
 import { createContext, Dispatch, ReactNode, useReducer } from 'react'
 import { CardProp } from '../../components/Card'
-import { appendCard, deleteCard } from '../../server/cardApi'
+import { appendCard, deleteCard, editCard } from '../../server/cardApi'
 
 export type ServerCardProps = Omit<CardProp, 'setModalIsOpen' | 'size'> & {
   createAt: number
@@ -13,6 +13,7 @@ type Action =
   | { type: 'ADD'; payload: AddPayload }
   | { type: 'INIT'; payload: CardContextProps }
   | { type: 'DELETE'; payload: { cardId: string } }
+  | { type: 'EDIT'; payload: AddPayload }
 
 type CardDispatcher = Dispatch<Action>
 
@@ -42,6 +43,11 @@ function cardReducer(
     case 'DELETE':
       deleteCard(action.payload.cardId)
       delete clonedState[action.payload.cardId]
+      return clonedState
+
+    case 'EDIT':
+      editCard(action.payload)
+      clonedState[action.payload.id] = action.payload.card
       return clonedState
   }
 }

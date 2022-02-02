@@ -3,14 +3,18 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Card from '../../components/Card'
 import Header from '../../components/Layout/Header'
 import { ServerCardProps } from '../../context/Card/CardContext'
+import { useCardDispatch } from '../../context/Card/hooks'
 import Styled from './index.styled'
 
 type SubmitStateType = { newCard: { id: string; card: ServerCardProps } } | null
+
 const CardSubmit = () => {
   const navigate = useNavigate()
   const { state } = useLocation()
   const navigateState = state as SubmitStateType
   const nameRef = useRef<HTMLInputElement>(null)
+
+  const dispatch = useCardDispatch()
 
   useEffect(() => {
     if (!navigateState) {
@@ -20,8 +24,21 @@ const CardSubmit = () => {
 
   const newCard = navigateState !== null ? navigateState.newCard.card : null
   const onSubmit = () => {
-    const name = nameRef.current?.value || (newCard?.type ?? '클린') + '카드'
+    if (!nameRef.current?.value || !navigateState?.newCard.id) {
+      return
+    }
 
+    const name = nameRef.current?.value
+
+    const editedCard = JSON.parse(JSON.stringify(newCard)) as ServerCardProps
+
+    console.log(editedCard)
+
+    editedCard.name = name
+    dispatch({
+      type: 'EDIT',
+      payload: { id: navigateState?.newCard.id, card: editedCard },
+    })
     navigate('/')
   }
 
