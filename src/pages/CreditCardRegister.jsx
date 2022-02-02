@@ -35,7 +35,6 @@ const CreditCardRegister = () => {
     const goCreditCardList = () => {
         if (cardList.find((item) => item.cardNumber === cardNumber)) updateCardList();
         else addCardList();
-
         navigate('/creditCardList');
     };
 
