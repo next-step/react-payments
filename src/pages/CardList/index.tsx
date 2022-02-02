@@ -1,14 +1,12 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Card from '../../components/Card'
 import Header from '../../components/Layout/Header'
-import { ServerCardProps } from '../../context/Card/CardContext'
 import { useCardDispatch, useCardState } from '../../context/Card/hooks'
 import { useAsync } from '../../hooks/Axios/useAsync'
 import { getCards } from '../../server/cardApi'
+import CardListCard, { CardListCardProps } from './Card'
 import Styled from './index.style'
-
-export type CardListProps = ServerCardProps & { id: string }
 
 const CardList = () => {
   const cards = useCardState()
@@ -23,6 +21,8 @@ const CardList = () => {
     }
   }, [dispatch, state.data])
 
+  const [clicedCardId, setClickedCardId] = useState('')
+
   const cardList = useMemo(() => {
     if (state.loading) {
       return []
@@ -31,7 +31,7 @@ const CardList = () => {
 
     const cardList = cardKeys.reduce(
       (prev, cur) => [...prev, { ...cards[cur], id: cur }],
-      [] as CardListProps[]
+      [] as CardListCardProps[]
     )
 
     cardList.sort((cardA, cardB) => cardB.createAt - cardA.createAt)
@@ -47,10 +47,11 @@ const CardList = () => {
         ) : (
           <>
             {cardList.map((card) => (
-              <>
-                <Card key={card.id} {...card} />
-                <Styled.CardNameText>{card.name}</Styled.CardNameText>
-              </>
+              <CardListCard
+                {...card}
+                clicked={clicedCardId === card.id}
+                setClickedCardId={setClickedCardId}
+              />
             ))}
           </>
         )}
