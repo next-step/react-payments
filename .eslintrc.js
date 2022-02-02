@@ -3,25 +3,19 @@ module.exports = {
     browser: true,
     es2021: true,
     amd: true,
-    node: true,
+    node: true
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'prettier',
-  ],
+  extends: ["eslint:recommended", "plugin:react/recommended", "plugin:react-hooks/recommended", "plugin:@typescript-eslint/recommended", "prettier", "plugin:storybook/recommended"],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
     ecmaVersion: 12,
-    sourceType: 'module',
+    sourceType: 'module'
   },
   plugins: ['react', 'react-hooks', '@typescript-eslint'],
   rules: {
-    '@typescript-eslint/explicit-function-return-type': 'off',
-  },
+    '@typescript-eslint/explicit-function-return-type': 'off'
+  }
 };

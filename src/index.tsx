@@ -1,9 +1,11 @@
-import React, { StrictMode } from "react";
-import { render } from "react-dom";
+import React, { StrictMode } from 'react';
+import { render } from 'react-dom';
+import App from './app';
+import './index.pcss';
 
 render(
   <StrictMode>
-    <h1>Hello Parcel Bundler</h1>
+    <App />
   </StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
