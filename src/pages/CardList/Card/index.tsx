@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Card from '../../../components/Card'
 import { ServerCardProps } from '../../../context/Card/CardContext'
 import { useCardDispatch } from '../../../context/Card/hooks'
@@ -18,6 +19,7 @@ const CardListCard = ({
   ...rest
 }: CardListCardProps & CardClickProps) => {
   const dispatch = useCardDispatch()
+  const navigate = useNavigate()
   const onCardClick = useCallback(() => {
     if (!clicked) {
       setClickedCardId(rest.id)
@@ -30,6 +32,14 @@ const CardListCard = ({
     dispatch({ type: 'DELETE', payload: { cardId: rest.id } })
   }, [dispatch, rest.id])
 
+  const onCardEdit = useCallback(() => {
+    console.log({ ...rest })
+
+    navigate('/submit', {
+      state: { newCard: { id: rest.id, card: { ...rest } } },
+    })
+  }, [navigate, rest])
+
   return (
     <>
       <Styled.CardContainer onClick={onCardClick}>
@@ -38,7 +48,9 @@ const CardListCard = ({
         </Styled.CardOpacityContainer>
         <Styled.CardClickedContainer clicked={clicked}>
           <Styled.CardClickButtonConatiner>
-            <Styled.CardEditButton>수정</Styled.CardEditButton>
+            <Styled.CardEditButton onClick={onCardEdit}>
+              수정
+            </Styled.CardEditButton>
             <Styled.CardDeleteButton onClick={onCardDelete}>
               삭제
             </Styled.CardDeleteButton>

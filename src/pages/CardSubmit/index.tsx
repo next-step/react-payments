@@ -25,12 +25,15 @@ const CardSubmit = () => {
   const newCard = navigateState !== null ? navigateState.newCard.card : null
   const onSubmit = () => {
     if (!nameRef.current?.value || !navigateState?.newCard.id) {
+      navigate('/')
       return
     }
 
     const name = nameRef.current?.value
 
     const editedCard = JSON.parse(JSON.stringify(newCard)) as ServerCardProps
+
+    console.log('아이디는?', navigateState?.newCard.id)
 
     console.log(editedCard)
 

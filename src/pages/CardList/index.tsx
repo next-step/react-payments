@@ -48,6 +48,7 @@ const CardList = () => {
           <>
             {cardList.map((card) => (
               <CardListCard
+                key={card.id}
                 {...card}
                 clicked={clicedCardId === card.id}
                 setClickedCardId={setClickedCardId}
