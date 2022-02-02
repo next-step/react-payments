@@ -5,6 +5,7 @@ export const ButtonBox = styled.button<{ mt50?: boolean; width?: number }>`
   background-color: white;
   border: none;
   font-size: 16px;
+  cursor: pointer;
 
   width: ${({ width }) => (width ? `${width}%` : `100%`)};
   ${({ mt50 }) => mt50 && `margin-top: 11.5rem;`}
