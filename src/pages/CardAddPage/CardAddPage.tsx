@@ -24,7 +24,7 @@ import { PageProps } from '../../type'
 import { limitRangeOfMonthAndYear, limitRangeOfSerialNums } from './helpers'
 import * as S from './style'
 
-export default function CardAddPage({ cards, setPage, setCards }: PageProps) {
+export default function CardAddPage({ cards, setPage, setCards, setEditCardIndex }: PageProps) {
   const [serialNums, setSerialNums] = useState<typeof SERIAL_NUMS>(SERIAL_NUMS)
   const [expiredDate, setExpiredDate] = useState<typeof EXPIRED_DATE>(EXPIRED_DATE)
   const [ownerName, setOwnerName] = useInput()
@@ -70,6 +70,7 @@ export default function CardAddPage({ cards, setPage, setCards }: PageProps) {
   }
   const completeFormSubmit = () => {
     setCards([...cards, { type, serialNums, ownerName, expiredDate, nickName: '' }])
+    setEditCardIndex(cards.length)
     setPage(PAGES.CARD_ADD_COMPLETE)
   }
 

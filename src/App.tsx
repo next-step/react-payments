@@ -9,9 +9,12 @@ import { PageProps, Card } from 'type'
 function App() {
   const [page, setPage] = useState(PAGES.CARD_ADD)
   const [cards, setCards] = useState<Card[]>([])
+  const [editCardIndex, setEditCardIndex] = useState(0)
   return (
     <S.Root>
-      <S.App>{cardPages[page]({ cards, setPage, setCards })}</S.App>
+      <S.App>
+        {cardPages[page]({ cards, editCardIndex, setEditCardIndex, setPage, setCards })}
+      </S.App>
     </S.Root>
   )
 }
