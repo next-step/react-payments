@@ -58,6 +58,7 @@ const CardSubmit = () => {
             </Styled.CenterBox>
             <Styled.CenterBox>
               <Styled.CardNameInput
+                maxLength={10}
                 ref={nameRef}
                 placeholder={(newCard.type ?? '클린') + '카드'}
               />

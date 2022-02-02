@@ -5,13 +5,17 @@ import { verticalCenterContainer } from '../../css/layout'
 const CardListContainer = styled.div`
   ${verticalCenterContainer}
   align-items: center;
+  height: 100%;
+  overflow-y: scroll;
+  max-height: 600px;
 `
 
-const CardContainer = styled.div`
+const AddCardContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 10px 0;
+  padding-bottom: 15px;
 `
 
 const CardNameText = styled.span`
@@ -36,4 +40,4 @@ const EmptyCard = styled.div`
   user-select: none;
 `
 
-export default { CardListContainer, CardContainer, EmptyCard, CardNameText }
+export default { CardListContainer, AddCardContainer, EmptyCard, CardNameText }

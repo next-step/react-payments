@@ -46,6 +46,11 @@ const CardList = () => {
           <div>로딩중 ...</div>
         ) : (
           <>
+            <Styled.AddCardContainer>
+              <Link to="/create">
+                <Styled.EmptyCard>+</Styled.EmptyCard>
+              </Link>
+            </Styled.AddCardContainer>
             {cardList.map((card) => (
               <CardListCard
                 key={card.id}
@@ -56,11 +61,6 @@ const CardList = () => {
             ))}
           </>
         )}
-        <Styled.CardContainer>
-          <Link to="/create">
-            <Styled.EmptyCard>+</Styled.EmptyCard>
-          </Link>
-        </Styled.CardContainer>
       </Styled.CardListContainer>
     </>
   )
