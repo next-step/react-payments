@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useCallback } from 'react'
 import Card from '../../../components/Card'
 import { ServerCardProps } from '../../../context/Card/CardContext'
+import { useCardDispatch } from '../../../context/Card/hooks'
 import Styled from './index.style'
 
 type CardClickProps = {
@@ -16,6 +17,7 @@ const CardListCard = ({
   setClickedCardId,
   ...rest
 }: CardListCardProps & CardClickProps) => {
+  const dispatch = useCardDispatch()
   const onCardClick = useCallback(() => {
     if (!clicked) {
       setClickedCardId(rest.id)
@@ -23,6 +25,10 @@ const CardListCard = ({
     }
     setClickedCardId('')
   }, [clicked, rest.id, setClickedCardId])
+
+  const onCardDelete = useCallback(() => {
+    dispatch({ type: 'DELETE', payload: { cardId: rest.id } })
+  }, [dispatch, rest.id])
 
   return (
     <>
@@ -33,7 +39,9 @@ const CardListCard = ({
         <Styled.CardClickedContainer clicked={clicked}>
           <Styled.CardClickButtonConatiner>
             <Styled.CardEditButton>수정</Styled.CardEditButton>
-            <Styled.CardDeleteButton>삭제</Styled.CardDeleteButton>
+            <Styled.CardDeleteButton onClick={onCardDelete}>
+              삭제
+            </Styled.CardDeleteButton>
           </Styled.CardClickButtonConatiner>
         </Styled.CardClickedContainer>
       </Styled.CardContainer>
