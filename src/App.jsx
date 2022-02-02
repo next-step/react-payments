@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, createContext, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { CreditCardAdd, CreditCardList, CreditCardRegister } from './pages/index';
@@ -20,37 +20,42 @@ const initForm = {
     nickName: '',
 };
 
-const App = () => {
-    const reducer = (state, action) => {
-        return {
-            ...state,
-            ...action,
-        };
+const reducer = (state, action) => {
+    return {
+        ...state,
+        ...action,
     };
+};
 
+export const CardInfoContext = createContext(null);
+
+const App = () => {
+    const [cardList, setCardList] = useState([]);
     const [state, dispatch] = useReducer(reducer, initForm);
 
     const pages = [
         {
             path: '/',
-            component: <CreditCardAdd state={state} dispatch={dispatch} />,
+            component: <CreditCardAdd />,
         },
         {
             path: '/creditCardList',
-            component: <CreditCardList state={state} dispatch={dispatch} initForm={initForm} />,
+            component: <CreditCardList initForm={initForm} />,
         },
         {
             path: '/creditCardRegister',
-            component: <CreditCardRegister state={state} dispatch={dispatch} />,
+            component: <CreditCardRegister />,
         },
     ];
 
     return (
-        <Routes>
-            {pages.map((page) => (
-                <Route key={page.path} path={page.path} element={page.component} />
-            ))}
-        </Routes>
+        <CardInfoContext.Provider value={{ state, dispatch, cardList, setCardList }}>
+            <Routes>
+                {pages.map((page) => (
+                    <Route key={page.path} path={page.path} element={page.component} />
+                ))}
+            </Routes>
+        </CardInfoContext.Provider>
     );
 };
 

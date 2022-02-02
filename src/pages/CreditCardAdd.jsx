@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Input, InputContainer, BasicCard, Title, Button } from '../components/index';
 import { validateNumber } from '../utils/index';
+import { CardInfoContext } from '../App';
 
 const initErrorMsg = {
     number: '',
@@ -10,10 +11,10 @@ const initErrorMsg = {
     password: '',
 };
 
-const CreditCardAdd = ({ state, dispatch }) => {
+const CreditCardAdd = () => {
     const navigate = useNavigate();
+    const { state, dispatch } = useContext(CardInfoContext);
     const { cardNumber, expireDate, name, cvc, password } = state;
-
     const [cardInfoErrorMessage, setCardInfoErrorMessage] = useState(initErrorMsg);
 
     const setCardInfo = ({ name, position, text }) => {
@@ -54,7 +55,7 @@ const CreditCardAdd = ({ state, dispatch }) => {
         }
     };
 
-    const clickNext = () => {
+    const goCreditCardRegister = () => {
         if (validateCardInfo()) return;
 
         navigate('/creditCardRegister');
@@ -173,7 +174,7 @@ const CreditCardAdd = ({ state, dispatch }) => {
                         <Input type={'password'} value={'*'} maxLength={1} />
                         <Input type={'password'} value={'*'} maxLength={1} />
                     </InputContainer>
-                    <Button title={'다음'} onClick={clickNext} />
+                    <Button title={'다음'} onClick={goCreditCardRegister} />
                 </div>
             </div>
         </>

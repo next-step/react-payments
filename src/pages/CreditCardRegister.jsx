@@ -1,12 +1,36 @@
 import '../css/index.css';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Input, InputContainer, Center, Title, Button, BasicCard } from '../components/index.js';
+import { Input, Center, Title, Button, BasicCard } from '../components/index.js';
+import { CardInfoContext } from '../App';
 
-const CreditCardRegister = ({ state, dispatch }) => {
+const emptyCardNickName = '클린카드';
+
+const CreditCardRegister = () => {
     const navigate = useNavigate();
+    const { state, dispatch, setCardList, cardList } = useContext(CardInfoContext);
     const { cardNumber, expireDate, name } = state;
 
     const clickNext = () => {
+        if (cardList.find((item) => item.cardNumber === cardNumber)) {
+            setCardList(
+                cardList.map((item) => {
+                    if (item.cardNumber === cardNumber)
+                        return {
+                            ...state,
+                            nickName: !state.nickName ? emptyCardNickName : state.nickName,
+                        };
+
+                    return item;
+                })
+            );
+        } else {
+            setCardList([
+                ...cardList,
+                { ...state, nickName: !state.nickName ? emptyCardNickName : state.nickName },
+            ]);
+        }
+
         navigate('/creditCardList');
     };
 
@@ -18,12 +42,7 @@ const CreditCardRegister = ({ state, dispatch }) => {
                     <Center>
                         <Title title={'카드등록이 완료되었습니다.'} />
                     </Center>
-                    <BasicCard
-                        cardName={'작업예정'}
-                        name={name}
-                        expireDate={expireDate}
-                        cardNumber={cardNumber}
-                    />
+                    <BasicCard name={name} expireDate={expireDate} cardNumber={cardNumber} />
                     <Input
                         shape={'underline'}
                         size={75}
