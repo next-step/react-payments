@@ -9,12 +9,12 @@ const emptyCardNickName = '클린카드';
 const CreditCardRegister = () => {
     const navigate = useNavigate();
     const { state, dispatch, setCardList, cardList } = useContext(CardInfoContext);
-    const { cardNumber, expireDate, name } = state;
+    const { cardNumber, expireDate, name, nickName } = state;
 
     const addCardList = () => {
         setCardList([
-            ...cardList,
             { ...state, nickName: !state.nickName ? emptyCardNickName : state.nickName },
+            ...cardList,
         ]);
     };
 
@@ -51,6 +51,7 @@ const CreditCardRegister = () => {
                         shape={'underline'}
                         size={75}
                         placeholder={'카드의 별칭을 입력해주세요.'}
+                        value={nickName}
                         onChange={(text) => dispatch({ nickName: text })}
                     />
                     <Button title={'다음'} onClick={goCreditCardList} marginTop={50} />
