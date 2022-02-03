@@ -14,10 +14,10 @@ const Card = ({ data, className }) => {
     <Item className={className}>
       <Top>{name}</Top>
       <Middle>
-        <span>{firstField}</span>
-        <span>{secondField}</span>
-        <span>●●●●</span>
-        <span>●●●●</span>
+        <Number>{firstField}</Number>
+        <Number>{secondField}</Number>
+        <Dot>●●●●</Dot>
+        <Dot>●●●●</Dot>
       </Middle>
       <Bottom>
         <span>{owner}</span>
@@ -44,10 +44,20 @@ const Middle = styled.p`
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-
-  span {
-    vertical-align: middle;
+  span + span {
+    margin-left: 4px;
   }
+`;
+
+const Number = styled.span`
+  vertical-align: middle;
+  flex: 1;
+  text-align: center;
+  letter-spacing: 4px;
+`;
+
+const Dot = styled(Number)`
+  font-size: 10px;
 `;
 
 const Bottom = styled.p`
