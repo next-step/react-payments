@@ -4,6 +4,15 @@ import AddCardContainer from ".";
 
 import { CARD_NUMBER_LABEL, EXPIRY_DATE_LABEL } from "../constants";
 
+const mockNavigate = jest.fn();
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate() {
+    return mockNavigate;
+  },
+}));
+
 describe("AddCardContainer", () => {
   const makeAddCardContainer = () => render(<AddCardContainer />);
 
@@ -11,6 +20,28 @@ describe("AddCardContainer", () => {
     const { queryByRole } = makeAddCardContainer();
 
     expect(queryByRole("heading")).toHaveTextContent("카드 추가");
+  });
+
+  it("뒤로가기 버튼을 렌더링합니다", () => {
+    const { queryByRole } = makeAddCardContainer();
+
+    expect(
+      queryByRole("button", {
+        name: "뒤로가기",
+      })
+    ).toBeInTheDocument();
+  });
+
+  it("뒤로가기 버튼 클릭 시, 카드 목록 페이지로 이동한다.", () => {
+    const { queryByRole } = makeAddCardContainer();
+
+    fireEvent.click(
+      queryByRole("button", {
+        name: "뒤로가기",
+      })
+    );
+
+    expect(mockNavigate).toBeCalledWith("/");
   });
 
   it("입력된 Input 값이 4자리면 다음 Input으로 focus가 이동됩니다", () => {
