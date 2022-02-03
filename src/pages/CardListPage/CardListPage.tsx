@@ -3,8 +3,10 @@ import { Card, DigitalCard } from 'components/Card'
 import { PageProps } from 'type'
 import * as S from './style'
 import { PAGES } from '../../constants'
+import { useAppContext } from 'AppContext'
 
-export default function CardListPage({ cards, setCards, setPage, setEditCardIndex }: PageProps) {
+export default function CardListPage({ setPage }: PageProps) {
+  const { cards, setCards, setEditCardIndex } = useAppContext()
   const handleClick = (index: number) => () => {
     setEditCardIndex(index)
     setPage(PAGES.CARD_ADD_COMPLETE)
@@ -16,8 +18,8 @@ export default function CardListPage({ cards, setCards, setPage, setEditCardInde
     <S.Box>
       <S.Header>보유카드</S.Header>
       <S.Main>
-        {[...cards].reverse().map(({ nickName, ...card }, i) => (
-          <Fragment key={`card-${i}`}>
+        {[...cards].reverse().map(({ nickName, id, ...card }, i) => (
+          <Fragment key={`${id}`}>
             <S.Wrapper>
               <S.DigitalCardBlock onClick={handleClick(cards.length - 1 - i)}>
                 <DigitalCard {...card} />

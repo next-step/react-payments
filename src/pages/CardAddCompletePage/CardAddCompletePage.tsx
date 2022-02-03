@@ -6,13 +6,10 @@ import { PageProps } from '../../type'
 import { PAGES } from '../../constants'
 import { updateCardNickName } from './helpers'
 import * as S from './style'
+import { useAppContext } from 'AppContext'
 
-export default function CardAddCompletePage({
-  cards,
-  editCardIndex,
-  setCards,
-  setPage,
-}: PageProps) {
+export default function CardAddCompletePage({ setPage }: PageProps) {
+  const { cards, setCards, editCardIndex } = useAppContext()
   const [nickName, setNickName] = useInput(cards[editCardIndex].nickName)
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()

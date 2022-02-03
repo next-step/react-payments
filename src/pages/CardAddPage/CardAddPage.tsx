@@ -23,8 +23,10 @@ import { useInput } from 'hooks/useInput'
 import { PageProps } from '../../type'
 import { limitRangeOfMonthAndYear, limitRangeOfSerialNums } from './helpers'
 import * as S from './style'
+import { useAppContext } from 'AppContext'
 
-export default function CardAddPage({ cards, setPage, setCards, setEditCardIndex }: PageProps) {
+export default function CardAddPage({ setPage }: PageProps) {
+  const { cards, setCards, setEditCardIndex } = useAppContext()
   const [serialNums, setSerialNums] = useState<typeof SERIAL_NUMS>(SERIAL_NUMS)
   const [expiredDate, setExpiredDate] = useState<typeof EXPIRED_DATE>(EXPIRED_DATE)
   const [ownerName, setOwnerName] = useInput()
@@ -69,7 +71,10 @@ export default function CardAddPage({ cards, setPage, setCards, setEditCardIndex
     completeFormSubmit()
   }
   const completeFormSubmit = () => {
-    setCards([...cards, { type, serialNums, ownerName, expiredDate, nickName: '' }])
+    setCards([
+      ...cards,
+      { type, serialNums, ownerName, expiredDate, nickName: '', id: Math.random().toString(36) },
+    ])
     setEditCardIndex(cards.length)
     setPage(PAGES.CARD_ADD_COMPLETE)
   }

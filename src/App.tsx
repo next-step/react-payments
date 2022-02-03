@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import * as S from './style'
 import CardAddPage from './pages/CardAddPage'
 import CardListPage from './pages/CardListPage'
 import CardAddCompletePage from 'pages/CardAddCompletePage'
 import { PAGES } from './constants'
-import { PageProps, Card } from 'type'
+import { PageProps } from 'type'
+import AppProvider from 'AppContext'
 
 function App() {
   const [page, setPage] = useState(PAGES.CARD_ADD)
-  const [cards, setCards] = useState<Card[]>([])
-  const [editCardIndex, setEditCardIndex] = useState(0)
+
   return (
     <S.Root>
       <S.App>
-        {cardPages[page]({ cards, editCardIndex, setEditCardIndex, setPage, setCards })}
+        <AppProvider>{cardPages[page]({ setPage })}</AppProvider>
       </S.App>
     </S.Root>
   )
