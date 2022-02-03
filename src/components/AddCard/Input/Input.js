@@ -1,16 +1,13 @@
 import styled from "@emotion/styled";
 
-const Input = ({
-  field,
-  onChange,
-  background,
-}) => {
+const isOverMaxLength = ({ maxLength, valueLength }) =>
+  maxLength < valueLength;
+
+const Input = ({ field, onChange, background }) => {
   const { ariaLabel, ...rest } = field;
 
-  const handleChange = ({
-    target: { name, value, maxLength },
-  }) => {
-    if (maxLength < value.length) {
+  const handleChange = ({ target: { name, value, maxLength } }) => {
+    if (isOverMaxLength({ maxLength, valueLength: value.length })) {
       return;
     }
 
