@@ -2,8 +2,6 @@ import { EXPIRY_DATE_LABEL } from "../constants";
 
 import useExpiryDateFieldsRef from "./hooks/useExpiryDateFieldsRef";
 
-import isFullField from "../utils/isFullField";
-
 import InputGroup from "../InputGroup";
 import Input from "../Input";
 
