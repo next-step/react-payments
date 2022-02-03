@@ -1,6 +1,8 @@
-import AddCardForm from "../AddCardForm";
+import styled from "@emotion/styled";
 
 import useAddCardFormFields from "./hooks/useAddCardFormFields";
+
+import AddCardForm from "../AddCardForm";
 
 import { Title } from "../../style/layout";
 
@@ -23,7 +25,7 @@ const AddCardContainer = () => {
     <>
       <Title>카드 추가</Title>
       <main>
-        <Card
+        <FormCard
           data={{
             numbers: [firstField, secondField],
             expiryDate: `${monthField}/${yearField}`,
@@ -39,4 +41,9 @@ const AddCardContainer = () => {
     </>
   );
 };
+
+const FormCard = styled(Card)`
+  margin: 0 auto 40px;
+`;
+
 export default AddCardContainer;

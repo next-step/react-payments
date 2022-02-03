@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 import Item from "../style/card";
 
-const CardItem = ({ data }) => {
+const Card = ({ data, className }) => {
   const {
     name,
     numbers: [firstField, secondField],
@@ -11,7 +11,7 @@ const CardItem = ({ data }) => {
   } = data;
 
   return (
-    <Item>
+    <Item className={className}>
       <Top>{name}</Top>
       <Middle>
         <span>{firstField}</span>
@@ -58,4 +58,4 @@ const Bottom = styled.p`
   font-size: 12px;
 `;
 
-export default CardItem;
+export default Card;
