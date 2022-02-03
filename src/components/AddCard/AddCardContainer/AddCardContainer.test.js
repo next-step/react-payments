@@ -2,7 +2,7 @@ import { fireEvent, render } from "@testing-library/react";
 
 import AddCardContainer from ".";
 
-import { CARD_NUMBER_LABEL } from "../constants";
+import { CARD_NUMBER_LABEL, EXPIRY_DATE_LABEL } from "../constants";
 
 describe("AddCardContainer", () => {
   const makeAddCardContainer = () => render(<AddCardContainer />);
@@ -60,5 +60,54 @@ describe("AddCardContainer", () => {
     });
 
     expect(fourthInput).toHaveFocus();
+  });
+
+  it("카드번호 Input에 값을 입력하면 해당 값이 카드 UI에 표시됩니다", () => {
+    const { getByLabelText, getByText } = makeAddCardContainer();
+
+    const fourthInput = getByLabelText(CARD_NUMBER_LABEL.first);
+
+    fireEvent.change(fourthInput, {
+      target: {
+        value: 4444,
+      },
+    });
+
+    expect(getByText("4444")).toBeInTheDocument();
+  });
+
+  it("유효기간 Input에 값을 입력하면 해당 값이 카드 UI에 표시됩니다", () => {
+    const { getByLabelText, getByText } = makeAddCardContainer();
+
+    const monthInput = getByLabelText(EXPIRY_DATE_LABEL.month);
+    const yearInput = getByLabelText(EXPIRY_DATE_LABEL.year);
+
+    fireEvent.change(monthInput, {
+      target: {
+        value: "04",
+      },
+    });
+
+    fireEvent.change(yearInput, {
+      target: {
+        value: "21",
+      },
+    });
+
+    expect(getByText("04/21")).toBeInTheDocument();
+  });
+
+  it("카드 소유자이름 Input에 값을 입력하면 해당 값이 카드 UI에 표시됩니다", () => {
+    const { getByLabelText, getByText } = makeAddCardContainer();
+
+    const ownerInput = getByLabelText("카드 소유자이름(선택)");
+
+    fireEvent.change(ownerInput, {
+      target: {
+        value: "HEAEUN",
+      },
+    });
+
+    expect(getByText("HEAEUN")).toBeInTheDocument();
   });
 });
