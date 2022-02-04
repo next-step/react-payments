@@ -1,14 +1,9 @@
-import { initialExpiredDateValue } from './../models/card.model';
-import {
-  CardProps,
-  initialCardNumValue,
-  initialCardPasswordValue,
-} from 'models/card.model';
+import { initialCardValue } from './../models/card.model';
+import { CardProps } from 'models/card.model';
 import { createContext } from 'react';
 
 interface CurrentCardProps {
   card: CardProps;
-  reset: () => void;
   setCard: (card: CardProps) => void;
   updateCardCompany: (name: string) => void;
   updateCardNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -23,16 +18,7 @@ interface CurrentCardProps {
 export const CardListContext = createContext<CardProps[]>([]);
 
 export const CurrentCardContext = createContext<CurrentCardProps>({
-  card: {
-    cardNum: initialCardNumValue,
-    userName: '',
-    CVC: '',
-    cardPassword: initialCardPasswordValue,
-    cardNickname: '',
-    expiredDate: initialExpiredDateValue,
-    cardCompany: '',
-  },
-  reset: () => {},
+  card: initialCardValue,
   setCard: () => {},
   updateCardCompany: () => {},
   updateCardNumber: () => {},

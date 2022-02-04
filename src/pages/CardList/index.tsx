@@ -39,29 +39,27 @@ const CardListPage: React.VFC = () => {
               +
             </CardWrap>
           </CardBox>
-          {cardList
-            .map((card, index) => {
-              return (
-                card.cardNickname && (
-                  <CardContainer
-                    key={`${card.cardNickname}_${card.cardCompany}_${index}`}
-                    onClick={() => goEditCardNickname(card)}
-                  >
-                    <Card
-                      size="small"
-                      cardCompany={card.cardCompany}
-                      expiredMonth={card.expiredDate.month}
-                      expiredYear={card.expiredDate.year}
-                      cardNum={card.cardNum}
-                      userName={card.userName}
-                      isListPage
-                    />
-                    <CardNickname>{card.cardNickname}</CardNickname>
-                  </CardContainer>
-                )
-              );
-            })
-            .reverse()}
+          {cardList.map((card, index) => {
+            return (
+              card.cardNickname && (
+                <CardContainer
+                  key={`${card.cardNickname}_${card.cardCompany}_${index}`}
+                  onClick={() => goEditCardNickname(card)}
+                >
+                  <Card
+                    size="small"
+                    cardCompany={card.cardCompany}
+                    expiredMonth={card.expiredDate.month}
+                    expiredYear={card.expiredDate.year}
+                    cardNum={card.cardNum}
+                    userName={card.userName}
+                    isListPage
+                  />
+                  <CardNickname>{card.cardNickname}</CardNickname>
+                </CardContainer>
+              )
+            );
+          })}
         </App>
       </Root>
     </>

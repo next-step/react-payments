@@ -32,3 +32,13 @@ export interface CardProps {
   cardCompany?: string;
   createdAt?: Date;
 }
+
+export const initialCardValue: CardProps = {
+  cardCompany: '',
+  expiredDate: initialExpiredDateValue,
+  cardNum: initialCardNumValue,
+  userName: '',
+  CVC: '',
+  cardPassword: initialCardPasswordValue,
+  cardNickname: '',
+};
