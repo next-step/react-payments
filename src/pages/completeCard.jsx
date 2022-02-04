@@ -38,7 +38,7 @@ function CompleteCard() {
         <FlexCenter>
           <Title marginBottom="2.5rem">카드등록이 완료되었습니다.</Title>
         </FlexCenter>
-        <CompletedCard completedCard={recentCard} big textBig bigChip />
+        <CompletedCard completedCard={recentCard} size="big" />
         <Form onSubmit={submit}>
           <InputContainer flexCenter width="100%">
             <UnderlineInput

@@ -1,38 +1,37 @@
 import styled from "styled-components";
 
-function CompletedCard({ completedCard, ...otherProps }) {
+function CompletedCard({ completedCard, size }) {
   return (
     <CardBox>
-      <Card big={otherProps.big} small={otherProps.small}>
+      <Card size={size}>
         <CardTop>
-          <CardText textBig={otherProps.big}>클린카드</CardText>
+          <CardText size={size}>클린카드</CardText>
         </CardTop>
         <CardMiddle>
-          <CardChip
-            bigChip={otherProps.bigChip}
-            smallChip={otherProps.smallChip}
-          />
+          <CardChip size={size} />
         </CardMiddle>
         <CardBottom>
           <CardBottomNumber>
-            <CardText textBig={otherProps.big}>{`${
+            <CardText size={size}>{`${
               completedCard?.cardNumberSeries
                 ? completedCard.cardNumberSeries
-                : "1111"
+                : ""
             } - ${
               completedCard?.cardNumberCompany
                 ? completedCard.cardNumberCompany
-                : "2222"
-            } - **** - ****`}</CardText>
+                : ""
+            } - ${completedCard?.cardNumberIndividual ? "****" : ""} - ${
+              completedCard?.cardNumberCode ? "****" : ""
+            }`}</CardText>
           </CardBottomNumber>
           <CardBottomInfo>
-            <CardText textBig={otherProps.big}>
-              {completedCard?.name ? completedCard.name : "SUN"}
+            <CardText size={size}>
+              {completedCard?.name ? completedCard.name : ""}
             </CardText>
-            <CardText textBig={otherProps.big}>{`${
-              completedCard?.dueMonth ? completedCard.dueMonth : "04"
+            <CardText size={size}>{`${
+              completedCard?.dueMonth ? completedCard.dueMonth : ""
             } / ${
-              completedCard?.dueYear ? completedCard.dueYear : "21"
+              completedCard?.dueYear ? completedCard.dueYear : ""
             }`}</CardText>
           </CardBottomInfo>
         </CardBottom>
@@ -56,18 +55,17 @@ const Card = styled.div`
   align-items: center;
   justify-content: center;
   ${(props) =>
-    props.big &&
+    props.size === "small" &&
     `
-    width: 290px;
-    height: 180px;
+      width: 208px;
+      height: 130px;
   `}
   ${(props) =>
-    props.small &&
+    props.size === "big" &&
     `
-    width: 208px;
-    height: 130px;
+      width: 290px;
+      height: 180px;
   `}
-
   background: #94dacd;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -82,13 +80,17 @@ const CardTop = styled.div`
 
 const CardText = styled.span`
   margin: 0 16px;
-  font-size: 14px;
-  line-height: 16px;
   ${(props) =>
-    props.textBig &&
+    props.size === "small" &&
     `
-    font-size: 18px;
-    line-height: 20px;
+      font-size: 14px;
+      line-height: 16px;
+  `}
+  ${(props) =>
+    props.size === "big" &&
+    `
+      font-size: 18px;
+      line-height: 20px;
   `}
   vertical-align: middle;
   font-weight: 400;
@@ -106,19 +108,19 @@ const CardChip = styled.div`
   background: #cbba64;
   border-radius: 4px;
   ${(props) =>
-    props.bigChip &&
-    `
-    width: 55.04px;
-    height: 35.77px;
-    font-size: 24px;
-  `}
-  ${(props) =>
-    props.smallChip &&
+    props.size === "small" &&
     `
     width: 40px;
     height: 26px;
     left: 95px;
     top: 122px;
+  `}
+  ${(props) =>
+    props.size === "big" &&
+    `
+    width: 55.04px;
+    height: 35.77px;
+    font-size: 24px;
   `}
 `;
 

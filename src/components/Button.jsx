@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-function Button({ children, ...otherProps }) {
+function Button({ children, marginTop }) {
   return (
-    <ButtonBox marginTop={otherProps.marginTop}>
+    <ButtonBox marginTop={marginTop}>
       <ButtonText>{children}</ButtonText>
     </ButtonBox>
   );

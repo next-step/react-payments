@@ -6,5 +6,5 @@ export default {
 };
 
 export const AddCard = () => <InputCard name="NAME" />;
-export const BigCard = () => <CompletedCard big textBig bigChip />;
-export const SmallCard = () => <CompletedCard small smallChip />;
+export const SmallCard = () => <CompletedCard size="small" />;
+export const BigCard = () => <CompletedCard size="big" />;

@@ -30,7 +30,7 @@ function CardList() {
                 state={card}
                 style={{ textDecoration: "none", color: "black" }}
               >
-                <CompletedCard completedCard={card} small smallChip />
+                <CompletedCard completedCard={card} size="small" />
               </Link>
               <span>
                 {card.nickName}{" "}
