@@ -16,7 +16,7 @@ export const Demo = Template.bind({})
 Base.args = {
   labelName: '입력 제목',
   labelRight: <span>입력 오른쪽 공간</span>,
-  errMessages: '에러메시지',
+  errorMessage: '에러메시지',
 }
 
 Demo.args = {

@@ -4,14 +4,15 @@ import * as S from './style'
 
 interface Props {
   expiredDate: typeof EXPIRED_DATE
+  errorMessage?: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export default function CardExpiredDateFieldSet({ expiredDate, onChange }: Props) {
+export default function CardExpiredDateFieldSet({ expiredDate, errorMessage, onChange }: Props) {
   const [mm, yy] = Object.keys(expiredDate)
   const [mmValue, yyValue] = Object.values(expiredDate)
   return (
-    <FieldSet legend="만료일">
+    <FieldSet legend="만료일" errorMessage={errorMessage}>
       <S.Wrapper>
         <S.Input
           type="number"

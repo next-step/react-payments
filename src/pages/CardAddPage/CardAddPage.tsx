@@ -24,6 +24,7 @@ import { PageProps } from '../../type'
 import { limitRangeOfMonthAndYear, limitRangeOfSerialNums } from './helpers'
 import * as S from './style'
 import { useAppContext } from 'AppContext'
+import { validateFormValues, hasCardFormErrors, ERRORS } from './validation'
 
 export default function CardAddPage({ setPage }: PageProps) {
   const { cards, setCards, setEditCardIndex } = useAppContext()
@@ -34,6 +35,7 @@ export default function CardAddPage({ setPage }: PageProps) {
   const [password, setPassword] = useState<typeof PASSWORD>(PASSWORD)
   const [type, setType] = useState<string>('')
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [errors, setErrors] = useState<typeof ERRORS>(ERRORS)
 
   useEffect(() => {
     if (Object.keys(CARD).includes(type)) completeFormSubmit()
@@ -42,15 +44,26 @@ export default function CardAddPage({ setPage }: PageProps) {
   const handleSerialNums = ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) => {
     const filteredValue = limitRangeOfSerialNums(name, value)
     setSerialNums({ ...serialNums, [name]: filteredValue })
+    if (errors.serialNumsError) setErrors({ ...errors, serialNumsError: '' })
   }
 
   const handleExpiredDate = ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) => {
     const filteredValue = limitRangeOfMonthAndYear(name, value)
     setExpiredDate({ ...expiredDate, [name]: filteredValue })
+    if (errors.expiredDateError) setErrors({ ...errors, expiredDateError: '' })
   }
 
   const handlePassword = ({ target: { name, value } }: React.ChangeEvent<HTMLInputElement>) => {
     setPassword({ ...password, [name]: value })
+    if (errors.passwordError) setErrors({ ...errors, passwordError: '' })
+  }
+  const handleCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCvc(e)
+    if (errors.cvcError) setErrors({ ...errors, cvcError: '' })
+  }
+  const handleOwnerName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOwnerName(e)
+    if (errors.ownerNameError) setErrors({ ...errors, ownerNameError: '' })
   }
 
   //prettier-ignore
@@ -70,7 +83,13 @@ export default function CardAddPage({ setPage }: PageProps) {
     }
     completeFormSubmit()
   }
+
   const completeFormSubmit = () => {
+    const _errors = validateFormValues({ serialNums, expiredDate, ownerName, cvc, password })
+    if (hasCardFormErrors(_errors)) {
+      setErrors(_errors)
+      return
+    }
     setCards([
       ...cards,
       { type, serialNums, ownerName, expiredDate, nickName: '', id: Math.random().toString(36) },
@@ -99,21 +118,39 @@ export default function CardAddPage({ setPage }: PageProps) {
         </S.DigitalCardBlock>
 
         <S.Form onSubmit={handleSubmit}>
-          <CardSerialNumsFieldSet serialNums={serialNums} onChange={handleSerialNums} />
-          <CardExpiredDateFieldSet expiredDate={expiredDate} onChange={handleExpiredDate} />
+          <CardSerialNumsFieldSet
+            serialNums={serialNums}
+            errorMessage={errors.serialNumsError}
+            onChange={handleSerialNums}
+          />
+          <CardExpiredDateFieldSet
+            expiredDate={expiredDate}
+            errorMessage={errors.expiredDateError}
+            onChange={handleExpiredDate}
+          />
           <CardInput
             {...USER_NAME_PROPERTYS}
             value={ownerName}
-            onChange={setOwnerName}
+            onChange={handleOwnerName}
+            errorMessage={errors.ownerNameError}
             labelRight={<span>{ownerName.length}/30</span>}
           />
           <S.CardInputCVCBlock>
-            <CardInput {...CVC_PROPERTYS} value={cvc} onChange={setCvc} />
+            <CardInput
+              {...CVC_PROPERTYS}
+              value={cvc}
+              errorMessage={errors.cvcError}
+              onChange={handleCVC}
+            />
             <S.IconBlock>
               <IconCircleQuestion />
             </S.IconBlock>
           </S.CardInputCVCBlock>
-          <CardPasswordFieldSet password={password} onChange={handlePassword} />
+          <CardPasswordFieldSet
+            password={password}
+            errorMessage={errors.passwordError}
+            onChange={handlePassword}
+          />
 
           <S.ButtonBlock>
             <Button type="submit">다음</Button>

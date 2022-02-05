@@ -4,16 +4,17 @@ import * as S from './style'
 
 interface Props {
   serialNums: typeof SERIAL_NUMS
+  errorMessage?: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-export default function CardSerialNumsFieldSet({ serialNums, onChange }: Props) {
+export default function CardSerialNumsFieldSet({ serialNums, errorMessage, onChange }: Props) {
   const [first, second, third, fourth] = Object.keys(serialNums)
   const [firstVal, secondVal, thirdVal, fourthVal] = Object.values(serialNums)
 
   return (
     <S.Box>
-      <FieldSet legend="카드번호">
+      <FieldSet legend="카드번호" errorMessage={errorMessage}>
         <S.Wrapper>
           <S.Input type="number" name={first} value={firstVal} onChange={onChange} required />
           <S.Divider> - </S.Divider>
