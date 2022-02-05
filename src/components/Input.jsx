@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
-function Input({ type, placeholder, required, onChange, ...otherProps }) {
+function Input({ type, placeholder, onChange, ...otherProps }) {
   return (
     <InputBasic
       type={type}
       placeholder={placeholder}
-      required={required}
       onChange={onChange}
       {...otherProps}
     />
