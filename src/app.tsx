@@ -1,12 +1,11 @@
-import React from 'react';
-import CardCreatePage from './pages/CardCreatePage/CardCreatePage';
+import { useState } from "react";
 
 function App() {
+  const [count, setCount] = useState(0);
+
   return (
-    <div className="root mt-20">
-      <div className="app">
-        <CardCreatePage />
-      </div>
+    <div className="root">
+      <div className="app mt-20"></div>
     </div>
   );
 }
