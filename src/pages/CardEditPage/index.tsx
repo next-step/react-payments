@@ -1,21 +1,30 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { CardItem } from '../../components/Card/CardItem';
-import { storeCard } from '../../service/card';
-import { useCard } from '../../store/CardContext';
+import { retrieveCardById, updateCardNickname } from '../../service/card';
+import { Card } from '../../types';
 
 const NICKNAME_MAX_LENGTH = 10;
 
-const CardRegistrationCompletePage = () => {
-  const { card } = useCard();
+const CardEditPage = () => {
+  const [searchParam] = useSearchParams();
   const [nickname, setNickname] = useState('');
   const navigate = useNavigate();
+  const [card, setCard] = useState<Card | null>(null);
+  const cardId = searchParam.get('id');
 
-  if (!card) {
-    alert('잘못된 접근입니다.');
-    navigate('/');
-    return <></>;
-  }
+  useEffect(() => {
+    const card = retrieveCardById(cardId!);
+
+    if (!card) {
+      alert('잘못된 접근 입니다.');
+      navigate('/');
+      return;
+    }
+
+    setCard(card);
+    setNickname(card.nickname ?? '');
+  }, [cardId, navigate]);
 
   const handleNicknameChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target.value.length > NICKNAME_MAX_LENGTH) return;
@@ -28,16 +37,18 @@ const CardRegistrationCompletePage = () => {
 
     const nickname최종 = nickname.length === 0 ? '환오은행' : nickname;
 
-    storeCard({ ...card, nickname: nickname최종 });
+    updateCardNickname(cardId!, nickname최종);
     navigate('/');
   };
+
+  if (!card) return <></>;
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="flex-center">
-        <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
+        <h2 className="page-title mb-10">카드이름을 수정해주세요</h2>
       </div>
-      <CardItem card={card} />
+      <CardItem card={card!} />
       <div className="input-container flex-center w-100">
         <input
           className="input-underline w-75"
@@ -56,4 +67,4 @@ const CardRegistrationCompletePage = () => {
   );
 };
 
-export default CardRegistrationCompletePage;
+export default CardEditPage;

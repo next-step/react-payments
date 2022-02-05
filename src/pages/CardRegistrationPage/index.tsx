@@ -1,9 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import CardItem from '../../components/Card/Card';
+import { 카드예시 } from '../../components/Registration/카드예시';
+import { convertFormDataToCard } from '../../service/card';
+import { useCard } from '../../store/CardContext';
 import useCardForm from './useCardForm';
 
 const CardRegistrationPage = () => {
   const navigate = useNavigate();
+  const { setCard } = useCard();
 
   const {
     form,
@@ -27,7 +30,7 @@ const CardRegistrationPage = () => {
         </button>
         카드 추가
       </h2>
-      <CardItem card={form} />
+      <카드예시 cardForm={form} />
       <div>
         <div className="input-container">
           <span className="input-title">카드 번호</span>
@@ -124,7 +127,13 @@ const CardRegistrationPage = () => {
           <input className="input-basic w-15" type="password" readOnly value="*" />
           <input className="input-basic w-15" type="password" readOnly value="*" />
         </div>
-        <div className="button-box" onClick={() => navigate('/registration/complete')}>
+        <div
+          className="button-box"
+          onClick={() => {
+            setCard(convertFormDataToCard(form));
+            navigate('/registration/complete');
+          }}
+        >
           <button className="button-text" style={{ all: 'unset' }} disabled={!isFormFilled}>
             다음
           </button>
