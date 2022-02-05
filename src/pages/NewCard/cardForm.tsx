@@ -1,6 +1,13 @@
-import { useState, useEffect, useContext, FormEventHandler } from 'react';
+import {
+  useState,
+  useEffect,
+  useContext,
+  FormEventHandler,
+  Fragment,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
+  INIT_CARD_STATE,
   CARD_NUMBER,
   EXPIRY_DATE,
   OWNER,
@@ -130,55 +137,24 @@ const CardForm = () => {
           title='카드번호'
         >
           <InputBox>
-            <Input
-              type='number'
-              data-index={0}
-              data-id={CARD_NUMBER}
-              value={cardState[CARD_NUMBER][0]}
-              pattern={INPUT_INFO[CARD_NUMBER].pattern}
-              onChange={onChangeHandler}
-              ref={
-                nextFieldId.current === `${CARD_NUMBER}${0}` ? inputRef : null
-              }
-            />
-            {cardState[CARD_NUMBER][0] && ' - '}
-            <Input
-              type='number'
-              data-index={1}
-              data-id={CARD_NUMBER}
-              value={cardState[CARD_NUMBER][1]}
-              pattern={INPUT_INFO[CARD_NUMBER].pattern}
-              onChange={onChangeHandler}
-              ref={
-                nextFieldId.current === `${CARD_NUMBER}${1}` ? inputRef : null
-              }
-            />
-            {cardState[CARD_NUMBER][1] && ' - '}
-            <Input
-              type='password'
-              data-index={2}
-              data-id={CARD_NUMBER}
-              value={cardState[CARD_NUMBER][2]}
-              maxLength={INPUT_LENGTH[CARD_NUMBER]}
-              pattern={INPUT_INFO[CARD_NUMBER].pattern}
-              onChange={onChangeHandler}
-              ref={
-                nextFieldId.current === `${CARD_NUMBER}${2}` ? inputRef : null
-              }
-            />
-            {cardState[CARD_NUMBER][2] && ' - '}
-            <Input
-              type='password'
-              data-index={3}
-              data-id={CARD_NUMBER}
-              value={cardState[CARD_NUMBER][3]}
-              maxLength={INPUT_LENGTH[CARD_NUMBER]}
-              pattern={INPUT_INFO[CARD_NUMBER].pattern}
-              onChange={onChangeHandler}
-              ref={
-                nextFieldId.current === `${CARD_NUMBER}${3}` ? inputRef : null
-              }
-            />
+            {INIT_CARD_STATE[CARD_NUMBER].map((_, i, arr) => (
+              <Fragment key={`${CARD_NUMBER}${i}`}>
+                <Input
+                  type={i < 2 ? 'number' : 'password'}
+                  data-index={i}
+                  data-id={CARD_NUMBER}
+                  value={cardState[CARD_NUMBER][i]}
+                  pattern={INPUT_INFO[CARD_NUMBER].pattern}
+                  onChange={onChangeHandler}
+                  ref={
+                    nextFieldId.current === `${CARD_NUMBER}${i}`
+                      ? inputRef
+                      : null
+                  }
+                />
+                {i !== arr.length - 1 && cardState[CARD_NUMBER][i] && ' - '}
+              </Fragment>
+            ))}
           </InputBox>
           <div className='error-message'>
             {getErrorMessage({
@@ -192,31 +168,27 @@ const CardForm = () => {
           title='만료일'
         >
           <InputBox className='w-50'>
-            <Input
-              type='number'
-              data-index={0}
-              data-id={EXPIRY_DATE}
-              value={cardState[EXPIRY_DATE][0]}
-              pattern={INPUT_INFO[EXPIRY_DATE].pattern[0]}
-              placeholder='MM'
-              onChange={onChangeHandler}
-              ref={
-                nextFieldId.current === `${EXPIRY_DATE}${0}` ? inputRef : null
-              }
-            />
-            {cardState[EXPIRY_DATE]?.every((v) => v) && ' / '}
-            <Input
-              type='number'
-              data-index={1}
-              data-id={EXPIRY_DATE}
-              value={cardState[EXPIRY_DATE][1]}
-              pattern={INPUT_INFO[EXPIRY_DATE].pattern[1]}
-              placeholder='YY'
-              onChange={onChangeHandler}
-              ref={
-                nextFieldId.current === `${EXPIRY_DATE}${1}` ? inputRef : null
-              }
-            />
+            {INIT_CARD_STATE[EXPIRY_DATE].map((_, i, arr) => (
+              <Fragment key={`${EXPIRY_DATE}${i}`}>
+                <Input
+                  type='number'
+                  data-index={i}
+                  data-id={EXPIRY_DATE}
+                  value={cardState[EXPIRY_DATE][i]}
+                  pattern={INPUT_INFO[EXPIRY_DATE].pattern[i]}
+                  placeholder={i === 0 ? 'MM' : 'YY'}
+                  onChange={onChangeHandler}
+                  ref={
+                    nextFieldId.current === `${EXPIRY_DATE}${i}`
+                      ? inputRef
+                      : null
+                  }
+                />
+                {i !== arr.length - 1 &&
+                  cardState[EXPIRY_DATE]?.every((v) => v) &&
+                  ' / '}
+              </Fragment>
+            ))}
           </InputBox>
           <div className='error-message'>
             {getErrorMessage({
@@ -268,28 +240,23 @@ const CardForm = () => {
           title='카드 비밀번호'
         >
           <>
-            <Input
-              type='password'
-              className='w-15'
-              data-index={0}
-              data-id={PASSWORD}
-              value={cardState[PASSWORD][0]}
-              maxLength={INPUT_LENGTH[PASSWORD]}
-              pattern={INPUT_INFO[PASSWORD].pattern}
-              onChange={onChangeHandler}
-              ref={nextFieldId.current === `${PASSWORD}${0}` ? inputRef : null}
-            />{' '}
-            <Input
-              type='password'
-              className='w-15'
-              data-index={1}
-              data-id={PASSWORD}
-              value={cardState[PASSWORD][1]}
-              maxLength={INPUT_LENGTH[PASSWORD]}
-              pattern={INPUT_INFO[PASSWORD].pattern}
-              onChange={onChangeHandler}
-              ref={nextFieldId.current === `${PASSWORD}${1}` ? inputRef : null}
-            />{' '}
+            {INIT_CARD_STATE[PASSWORD].map((_, i) => (
+              <Fragment key={`${PASSWORD}${i}`}>
+                <Input
+                  type='password'
+                  className='w-15'
+                  data-index={i}
+                  data-id={PASSWORD}
+                  value={cardState[PASSWORD][i]}
+                  maxLength={INPUT_LENGTH[PASSWORD]}
+                  pattern={INPUT_INFO[PASSWORD].pattern}
+                  onChange={onChangeHandler}
+                  ref={
+                    nextFieldId.current === `${PASSWORD}${i}` ? inputRef : null
+                  }
+                />{' '}
+              </Fragment>
+            ))}
             <Input
               type='password'
               className='w-15'
