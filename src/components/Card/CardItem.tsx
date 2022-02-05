@@ -1,17 +1,9 @@
 import format from 'date-fns/format';
-import { Card } from '../../types';
-
-const getMaskedCardNumberStr = (cardNumber: string) => {
-  const numbers = cardNumber.split('-');
-
-  numbers[2] = '*'.repeat(numbers[2].length);
-  numbers[3] = '*'.repeat(numbers[3].length);
-
-  return numbers.filter(Boolean).join(' - ');
-};
+import { Card, CardNumber } from '../../types';
+import { getMaskedCardNumberStr } from '../../utils/card';
 
 export const CardItem = ({ card }: { card: Card }) => {
-  const cardNumberStr = getMaskedCardNumberStr(card.cardNumber);
+  const cardNumberStr = getMaskedCardNumberStr(card.cardNumber.split('-') as CardNumber);
   const expireDateStr = format(card.expireDate, 'MM / yy');
 
   return (

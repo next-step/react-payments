@@ -1,4 +1,4 @@
-import { Fragment, HTMLAttributes, ReactNode } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CardItem } from '../../components/Card/CardItem';
 import { useCards } from '../../hook/useCards';

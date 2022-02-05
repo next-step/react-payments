@@ -1,11 +1,5 @@
-import { CardForm, CardNumber } from '../../types';
-
-const getMaskedCardNumberStr = (cardNumber: CardNumber) => {
-  cardNumber[2] = '*'.repeat(cardNumber[2].length);
-  cardNumber[3] = '*'.repeat(cardNumber[3].length);
-
-  return cardNumber.filter(Boolean).join(' - ');
-};
+import { CardForm } from '../../types';
+import { getMaskedCardNumberStr } from '../../utils/card';
 
 export const 카드예시 = ({ cardForm }: { cardForm: CardForm }) => {
   const cardNumberStr = getMaskedCardNumberStr(cardForm.cardNumber);
