@@ -35,7 +35,7 @@ module.exports = {
         133: '133px',
         183: '183px',
         227: '227px',
-        701: '701px',
+        700: '700px',
       },
       minHeight: {
         '1/20': '5%',
@@ -71,6 +71,9 @@ module.exports = {
         },
         green: {
           350: '#04C09E',
+        },
+        white: {
+          100: '#fafafa',
         },
       },
       fontSize: {

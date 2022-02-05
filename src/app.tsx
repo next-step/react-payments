@@ -1,7 +1,14 @@
 import React from 'react';
+import CardCreatePage from './pages/CardCreatePage/CardCreatePage';
 
 function App() {
-  return <h1 className="flex text-red-300">Hello Parcel Bundler</h1>;
+  return (
+    <div className="root mt-20">
+      <div className="app">
+        <CardCreatePage />
+      </div>
+    </div>
+  );
 }
 
 export default App;
