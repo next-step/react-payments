@@ -11,51 +11,22 @@ function Payments() {
   const [cards, setCards] = useState([]);
 
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <CardContext.Provider
-              value={{
-                cards,
-                id,
-                setCards,
-                setId,
-              }}
-            >
-              <AddCard />
-            </CardContext.Provider>
-          }
-        />
-        <Route
-          path="/complete"
-          element={
-            <CardContext.Provider
-              value={{
-                cards,
-                setCards,
-              }}
-            >
-              <CompleteCard />
-            </CardContext.Provider>
-          }
-        />
-        <Route
-          path="/list"
-          element={
-            <CardContext.Provider
-              value={{
-                cards,
-                setCards,
-              }}
-            >
-              <CardList />
-            </CardContext.Provider>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <CardContext.Provider
+      value={{
+        cards,
+        id,
+        setCards,
+        setId,
+      }}
+    >
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <Routes>
+          <Route path="/" element={<AddCard />} />
+          <Route path="/complete" element={<CompleteCard />} />
+          <Route path="/list" element={<CardList />} />
+        </Routes>
+      </BrowserRouter>
+    </CardContext.Provider>
   );
 }
 

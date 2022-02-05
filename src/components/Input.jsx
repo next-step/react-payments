@@ -7,16 +7,7 @@ function Input({ type, placeholder, required, onChange, ...otherProps }) {
       placeholder={placeholder}
       required={required}
       onChange={onChange}
-      maxLength={otherProps.maxLength}
-      min={otherProps.min}
-      max={otherProps.max}
-      pattern={otherProps.pattern}
-      title={otherProps.title}
-      width={otherProps.width}
-      onBlur={otherProps.onBlur}
-      onClick={otherProps.onClick}
-      value={otherProps.value}
-      disabled={otherProps.disabled}
+      {...otherProps}
     />
   );
 }

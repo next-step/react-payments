@@ -6,8 +6,7 @@ function UnderlineInput({ type, placeholder, onChange, ...otherProps }) {
       type={type}
       placeholder={placeholder}
       onChange={onChange}
-      maxLength={otherProps.maxLength}
-      width={otherProps.width}
+      {...otherProps}
     ></InputUnderline>
   );
 }

@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CardContext } from "../Payments";
 import Title from "../components/Title";
@@ -9,14 +9,10 @@ import Button from "../components/Button";
 
 function CompleteCard() {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const { cards, setCards } = useContext(CardContext);
 
-  const { state: recentCard } = location;
-
   const [nickName, setNickName] = useState("클린카드");
-  const [cardsLessRecent, SetCardsLessRecent] = useState([]);
 
   const handleSetState = (event, setState) => {
     setState(event.target.value);
@@ -24,13 +20,9 @@ function CompleteCard() {
 
   const submit = (event) => {
     event.preventDefault();
-    setCards([...cardsLessRecent, { ...recentCard, nickName }]);
+    setCards([{ ...cards[0], nickName }, ...cards.slice(1)]);
     navigate("/list");
   };
-
-  useEffect(() => {
-    SetCardsLessRecent(cards.filter((card) => card.id !== recentCard.id));
-  }, [cards, recentCard]);
 
   return (
     <Root>
@@ -38,15 +30,15 @@ function CompleteCard() {
         <FlexCenter>
           <Title marginBottom="2.5rem">카드등록이 완료되었습니다.</Title>
         </FlexCenter>
-        <CompletedCard completedCard={recentCard} size="big" />
+        <CompletedCard completedCard={cards[0]} size="big" />
         <Form onSubmit={submit}>
           <InputContainer flexCenter width="100%">
             <UnderlineInput
               type="text"
               placeholder="카드 별칭 (선택)"
               onChange={(event) => handleSetState(event, setNickName)}
-              maxLength="10"
               width="75%"
+              maxLength="10"
             />
           </InputContainer>
           <Button marginTop="11.5rem">다음</Button>

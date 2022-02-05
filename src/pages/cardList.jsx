@@ -8,8 +8,6 @@ import CompletedCard from "../components/CompletedCard";
 function CardList() {
   const { cards, setCards } = useContext(CardContext);
 
-  const _cards = [...cards];
-
   const deleteCard = (event, id) => {
     event.preventDefault();
     setCards(cards.filter((card) => card.id !== id));
@@ -21,25 +19,23 @@ function CardList() {
         <FlexCenter>
           <Title marginBottom="2.5rem">보유 카드</Title>
         </FlexCenter>
-        {_cards
-          .sort((a, b) => b.id - a.id)
-          .map((card) => (
-            <React.Fragment key={card.id}>
-              <Link
-                to="/complete"
-                state={card}
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                <CompletedCard completedCard={card} size="small" />
-              </Link>
-              <span>
-                {card.nickName}{" "}
-                <button onClick={(event) => deleteCard(event, card.id)}>
-                  카드 삭제
-                </button>
-              </span>
-            </React.Fragment>
-          ))}
+        {cards.map((card) => (
+          <React.Fragment key={card.id}>
+            <Link
+              to="/complete"
+              state={card}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <CompletedCard completedCard={card} size="small" />
+            </Link>
+            <span>
+              {card.nickName}{" "}
+              <button onClick={(event) => deleteCard(event, card.id)}>
+                카드 삭제
+              </button>
+            </span>
+          </React.Fragment>
+        ))}
         <Link to="/" style={{ textDecoration: "none", color: "black" }}>
           <CardBox>
             <EmptyCard>+</EmptyCard>
