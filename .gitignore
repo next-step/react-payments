@@ -3,3 +3,4 @@ yarn-error.log
 build-storybook.log
 .vscode
 storybook-static
+.DS_Store

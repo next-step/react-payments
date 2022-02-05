@@ -1,30 +1,39 @@
-import { createContext } from 'react';
+import { useRef, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
+import { CardContext } from '@/context/cardContext';
 import PageContainer from '@components/PageContainer';
 import NewCard from '@/pages/NewCard';
 import List from '@/pages/List';
 import Done from '@/pages/Done';
 import { INIT_CARD_STATE } from '@/constants/index';
 
-const CardContext = createContext({});
-
 function App() {
+  const [cardState, setCardState] = useState(INIT_CARD_STATE);
+  const [cardList, setCardList] = useState([] as typeof cardState[]);
+
   return (
-    <Root>
-      <CardContext.Provider value={INIT_CARD_STATE}>
+    <CardContext.Provider
+      value={{ cardState, setCardState, cardList, setCardList }}
+    >
+      <Root>
         <Routes>
           <Route path='/' element={<List />} />
           <Route path='list' element={<List />} />
           <Route path='new' element={<NewCard />} />
-          <Route path='done' element={<Done />} />
+          <Route path='done' element={<Done />}>
+            <Route path=':id' element={<Done />} />
+          </Route>
+          <Route path='edit' element={<Done />}>
+            <Route path=':id' element={<Done />} />
+          </Route>
           <Route
             path='*'
             element={<PageContainer>Not Found Page 🙅</PageContainer>}
           />
         </Routes>
-      </CardContext.Provider>
-    </Root>
+      </Root>
+    </CardContext.Provider>
   );
 }
 

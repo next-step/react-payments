@@ -1,14 +1,13 @@
 import { useState } from 'react';
-import { ERROR_MESSAGES } from '@/constants';
+import { INPUT_INFO } from '@/constants';
 import { isValidValue, isValueValidLength } from '@/helper/isValid';
-
-type stateCode = 'invalidLength' | 'invalidValue' | 'pass' | '';
 
 const useInputValidationStates = () => {
   const [validationStates, setValidationState] = useState({
     cardNumber: ['', '', '', ''],
     expiryDate: ['', ''],
-    cvc: '',
+    owner: [''],
+    cvc: [''],
     password: ['', ''],
   });
 
@@ -18,25 +17,22 @@ const useInputValidationStates = () => {
     index,
   }: {
     value: number | string;
-    fieldKey: keyof typeof ERROR_MESSAGES;
+    fieldKey: keyof Omit<typeof INPUT_INFO, 'nickname'>;
     index: number;
   }) => {
-    const currentValidationState: stateCode =
+    const currentValidationState =
+      (!INPUT_INFO[fieldKey].require && 'pass') ||
       (!isValueValidLength(value, fieldKey) && 'invalidLength') ||
       (!isValidValue(value, fieldKey, index) && 'invalidValue') ||
       'pass';
 
-    const prevValidationState =
-      validationStates[fieldKey][index] || validationStates[fieldKey];
-
-    if (prevValidationState === currentValidationState) return;
+    if (currentValidationState === validationStates[fieldKey][index]) return;
 
     setValidationState({
       ...validationStates,
-      [fieldKey]:
-        Array.from(validationStates[fieldKey])?.map((v, i) =>
-          i === index ? currentValidationState : v
-        ) || currentValidationState,
+      [fieldKey]: validationStates[fieldKey].map((v, i) =>
+        i === index ? currentValidationState : v
+      ),
     });
   };
 
@@ -46,36 +42,41 @@ const useInputValidationStates = () => {
     index,
   }: {
     value: number | string;
-    fieldKey: keyof typeof ERROR_MESSAGES;
+    fieldKey: keyof Omit<typeof INPUT_INFO, 'nickname'>;
     index: number;
   }) =>
     isValidValue(value, fieldKey, index) && isValueValidLength(value, fieldKey);
 
   const isAllValid = () =>
-    Object.values(validationStates).every((v) => v === 'pass');
+    Object.values(validationStates).every((v) => v.every((v) => v === 'pass'));
+
+  const hasInvalidState = (validationState: string) =>
+    validationState === 'invalidLength' || validationState === 'invalidValue';
 
   const getErrorMessage = ({
-    stateCode,
     fieldKey,
     index,
   }: {
-    stateCode: stateCode;
-    fieldKey: keyof typeof ERROR_MESSAGES;
+    fieldKey: keyof Omit<typeof INPUT_INFO, 'nickname'>;
     index: number;
   }) => {
-    if (stateCode === '' || stateCode === 'pass') return;
+    const stateCode = validationStates[fieldKey][index];
 
-    if (stateCode === 'invalidLength' || stateCode === 'invalidValue') {
-      return ERROR_MESSAGES[fieldKey][stateCode];
+    if (
+      !stateCode ||
+      stateCode === 'pass' ||
+      !INPUT_INFO[fieldKey].errorMessage
+    )
+      return '';
+
+    if (stateCode === 'invalidLength') {
+      return INPUT_INFO[fieldKey].errorMessage?.invalidLength || '';
     }
-
-    if (fieldKey === 'expiryDate') {
-      if (stateCode[index] === 'invalidValue') {
-        return ERROR_MESSAGES.expiryDate[stateCode][index];
-      }
-      if (stateCode[index] === 'invalidLength') {
-        return ERROR_MESSAGES.expiryDate[stateCode];
-      }
+    if (fieldKey === 'expiryDate' && stateCode === 'invalidValue') {
+      return INPUT_INFO.expiryDate.errorMessage[stateCode][index];
+    }
+    if (stateCode === 'invalidValue') {
+      return INPUT_INFO[fieldKey].errorMessage?.invalidValue || '';
     }
   };
 
@@ -85,6 +86,7 @@ const useInputValidationStates = () => {
     getErrorMessage,
     isValidField,
     isAllValid,
+    hasInvalidState,
   };
 };
 

@@ -24,3 +24,14 @@ export const isValueValidLength = (
   value: number | string,
   fieldKey: keyof typeof INPUT_LENGTH
 ) => `${value}`?.length === INPUT_LENGTH[fieldKey];
+
+export const hasSameKey = () => {
+  const keySet = new Set();
+
+  return (newKey: string) => {
+    const hasSameKey = keySet.has(newKey);
+    if (hasSameKey) return hasSameKey;
+    keySet.add(newKey);
+    return false;
+  };
+};

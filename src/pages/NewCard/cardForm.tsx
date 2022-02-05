@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext, FormEventHandler } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
-  INIT_CARD_STATE,
   CARD_NUMBER,
   EXPIRY_DATE,
   OWNER,
@@ -8,28 +8,34 @@ import {
   PASSWORD,
   INPUT_LENGTH,
   INPUT_INFO,
-  ERROR_MESSAGES,
 } from '@/constants/index';
+import { CardContext } from '@/context/cardContext';
 import Input from '@/components/Forms/Input/index';
 import InputBox from '@/components/Forms/InputBox';
 import InputContainer from '@/components/Forms/InputContainer';
 import Modal from '@/components/Modal';
+import PageBottom, { PageBottomText } from '@components/PageBottom/index';
+import Button from '@components/Button';
 import useNextFieldRef from '@/hooks/useNextFieldRef';
-import { newStateProps, changeCardStateType } from '@/pages/NewCard/type';
+import { newStateProps } from '@/pages/NewCard/type';
 import { isValueOverMaximumLength } from '@/helper/isValid';
 import useInputValidationStates from '@/hooks/useInputValidationStates';
 
-const CardForm = ({
-  cardState,
-  changeCardState,
-}: {
-  cardState: typeof INIT_CARD_STATE;
-  changeCardState: changeCardStateType;
-}) => {
+const CardForm = () => {
+  const { cardState, setCardState, cardList, setCardList } =
+    useContext(CardContext);
   const [isShowModal, setVisibleModal] = useState(false);
   const { nextFieldId, inputRef, setNext } = useNextFieldRef();
-  const { validationStates, setInputValidationStates, isValidField } =
-    useInputValidationStates();
+  const {
+    validationStates,
+    setInputValidationStates,
+    getErrorMessage,
+    isValidField,
+    isAllValid,
+    hasInvalidState,
+  } = useInputValidationStates();
+  const navigate = useNavigate();
+  const goDonePage = (id: number) => navigate(`../done/${id}`);
   const cardNumberFstScd = cardState[CARD_NUMBER].filter((_, i) => i < 2);
 
   useEffect(() => {
@@ -57,7 +63,7 @@ const CardForm = ({
       dataset: { index, id },
     },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    const fieldKey = id as keyof typeof INPUT_LENGTH;
+    const fieldKey = id as keyof Omit<typeof INPUT_INFO, 'nickname'>;
     const prevState = cardState[fieldKey];
 
     if (isValueOverMaximumLength(value, fieldKey)) return;
@@ -70,11 +76,11 @@ const CardForm = ({
 
     setInputValidationStates({
       value: value,
-      fieldKey: fieldKey as keyof typeof ERROR_MESSAGES,
+      fieldKey,
       index: Number(index),
     });
 
-    changeCardState(newState);
+    setCardState({ ...cardState, ...newState });
 
     if (fieldKey === CARD_NUMBER && Number(index) === 1) return;
 
@@ -82,7 +88,7 @@ const CardForm = ({
       INPUT_INFO[fieldKey].require &&
       isValidField({
         value: value,
-        fieldKey: fieldKey as keyof typeof ERROR_MESSAGES,
+        fieldKey,
         index: Number(index),
       })
     ) {
@@ -95,13 +101,30 @@ const CardForm = ({
     }
   };
 
+  const submitCardStates: FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    if (isAllValid()) {
+      const cardId = Number(cardList[cardList.length - 1]?.id || 0) + 1;
+
+      setCardList([
+        {
+          ...cardState,
+          id: cardId,
+        },
+        ...cardList,
+      ]);
+
+      goDonePage(cardId);
+      return;
+    }
+  };
+
   return (
     <>
-      <form>
+      <form onSubmit={submitCardStates}>
         <InputContainer
-          isError={validationStates[CARD_NUMBER].some(
-            (v) => v === 'invalidValue'
-          )}
+          isError={validationStates[CARD_NUMBER].some(hasInvalidState)}
           title='카드번호'
         >
           <InputBox>
@@ -155,11 +178,15 @@ const CardForm = ({
               }
             />
           </InputBox>
+          <div className='error-message'>
+            {getErrorMessage({
+              fieldKey: CARD_NUMBER,
+              index: validationStates[CARD_NUMBER].findIndex(hasInvalidState),
+            })}
+          </div>
         </InputContainer>
         <InputContainer
-          isError={validationStates[EXPIRY_DATE].some(
-            (v) => v === 'invalidValue'
-          )}
+          isError={validationStates[EXPIRY_DATE].some(hasInvalidState)}
           title='만료일'
         >
           <InputBox className='w-50'>
@@ -189,6 +216,12 @@ const CardForm = ({
               }
             />
           </InputBox>
+          <div className='error-message'>
+            {getErrorMessage({
+              fieldKey: EXPIRY_DATE,
+              index: validationStates[EXPIRY_DATE].findIndex(hasInvalidState),
+            })}
+          </div>
         </InputContainer>
         <InputContainer
           title='카드 소유자 이름(선택)'
@@ -200,14 +233,14 @@ const CardForm = ({
             data-id={OWNER}
             value={cardState[OWNER]}
             maxLength={INPUT_LENGTH[OWNER]}
-            pattern={INPUT_INFO[OWNER].pattern}
             placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
             onChange={onChangeHandler}
             ref={nextFieldId.current === `${OWNER}${0}` ? inputRef : null}
           />
+          <div className='error-message'></div>
         </InputContainer>
         <InputContainer
-          isError={validationStates[CVC] === 'invalidValue'}
+          isError={validationStates[CVC].some(hasInvalidState)}
           title='보안코드(CVC/CVV)'
         >
           <Input
@@ -221,52 +254,70 @@ const CardForm = ({
             onChange={onChangeHandler}
             ref={nextFieldId.current === `${CVC}${0}` ? inputRef : null}
           />
+          <div className='error-message'>
+            {getErrorMessage({
+              fieldKey: CVC,
+              index: validationStates[CVC].findIndex(hasInvalidState),
+            })}
+          </div>
         </InputContainer>
         <InputContainer
-          isError={validationStates[PASSWORD].some((v) => v === 'invalidValue')}
+          isError={validationStates[PASSWORD].some(hasInvalidState)}
           title='카드 비밀번호'
         >
-          <Input
-            type='password'
-            className='w-15'
-            data-index={0}
-            data-id={PASSWORD}
-            value={cardState[PASSWORD][0]}
-            maxLength={INPUT_LENGTH[PASSWORD]}
-            pattern={INPUT_INFO[PASSWORD].pattern}
-            onChange={onChangeHandler}
-            ref={nextFieldId.current === `${PASSWORD}${0}` ? inputRef : null}
-          />{' '}
-          <Input
-            type='password'
-            className='w-15'
-            data-index={1}
-            data-id={PASSWORD}
-            value={cardState[PASSWORD][1]}
-            maxLength={INPUT_LENGTH[PASSWORD]}
-            pattern={INPUT_INFO[PASSWORD].pattern}
-            onChange={onChangeHandler}
-            ref={nextFieldId.current === `${PASSWORD}${1}` ? inputRef : null}
-          />{' '}
-          <Input
-            type='password'
-            className='w-15'
-            defaultValue='•'
-            variant='empty'
-            readOnly
-          />{' '}
-          <Input
-            type='password'
-            className='w-15'
-            defaultValue='•'
-            variant='empty'
-            readOnly
-          />
+          <>
+            <Input
+              type='password'
+              className='w-15'
+              data-index={0}
+              data-id={PASSWORD}
+              value={cardState[PASSWORD][0]}
+              maxLength={INPUT_LENGTH[PASSWORD]}
+              pattern={INPUT_INFO[PASSWORD].pattern}
+              onChange={onChangeHandler}
+              ref={nextFieldId.current === `${PASSWORD}${0}` ? inputRef : null}
+            />{' '}
+            <Input
+              type='password'
+              className='w-15'
+              data-index={1}
+              data-id={PASSWORD}
+              value={cardState[PASSWORD][1]}
+              maxLength={INPUT_LENGTH[PASSWORD]}
+              pattern={INPUT_INFO[PASSWORD].pattern}
+              onChange={onChangeHandler}
+              ref={nextFieldId.current === `${PASSWORD}${1}` ? inputRef : null}
+            />{' '}
+            <Input
+              type='password'
+              className='w-15'
+              defaultValue='•'
+              variant='empty'
+              readOnly
+            />{' '}
+            <Input
+              type='password'
+              className='w-15'
+              defaultValue='•'
+              variant='empty'
+              readOnly
+            />
+          </>
+          <div className='error-message'>
+            {getErrorMessage({
+              fieldKey: PASSWORD,
+              index: validationStates[PASSWORD].findIndex(hasInvalidState),
+            })}
+          </div>
         </InputContainer>
+
+        <PageBottom className='mt-auto'>
+          <Button type='submit' disabled={!isAllValid()}>
+            <PageBottomText>다음</PageBottomText>
+          </Button>
+        </PageBottom>
       </form>
-      {isShowModal && (
-        <Modal changeCardState={changeCardState} onClose={onCloseModal} />
-      )}
+      {isShowModal && <Modal onClose={onCloseModal} />}
     </>
   );
 };

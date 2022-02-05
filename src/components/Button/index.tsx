@@ -1,4 +1,4 @@
-import { VFC, ReactNode } from 'react';
+import { FC } from 'react';
 import { ButtonEl } from './buttonStyle';
 
 export interface ButtonProps
@@ -8,13 +8,20 @@ export interface ButtonProps
     >,
     React.AriaAttributes {}
 
-const Button: VFC<
-  ButtonProps & {
-    children: ReactNode;
-  }
-> = ({ className = '', children, type = 'submit', onClick }) => {
+const Button: FC<ButtonProps> = ({
+  className = '',
+  children,
+  type = 'submit',
+  onClick,
+  disabled = false,
+}) => {
   return (
-    <ButtonEl type={type} className={className} onClick={onClick}>
+    <ButtonEl
+      type={type}
+      className={className}
+      onClick={onClick}
+      disabled={disabled}
+    >
       {children}
     </ButtonEl>
   );

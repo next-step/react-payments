@@ -19,8 +19,8 @@ export const ModalEl = styled.div`
   width: 100%;
   height: 220px;
   margin-top: auto;
-  padding: 0 0 calc(constant(safe-area-inset-bottom) + 100px);
-  padding: 0 0 calc(env(safe-area-inset-bottom) + 100px);
+  padding-bottom: calc(1rem + constant(safe-area-inset-bottom));
+  padding-bottom: calc(1rem + env(safe-area-inset-bottom));
 
   border-radius: 5px 5px 0 0;
 
