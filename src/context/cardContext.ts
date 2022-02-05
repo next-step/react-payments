@@ -1,4 +1,4 @@
-import { createContext, Dispatch, Ref, SetStateAction } from 'react';
+import { createContext, Dispatch, SetStateAction } from 'react';
 import { INIT_CARD_STATE } from '@/constants/index';
 import { initCardState } from '@components/Card/index';
 

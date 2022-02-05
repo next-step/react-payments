@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { CardContext } from '@/context/cardContext';
