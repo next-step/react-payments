@@ -6,7 +6,6 @@ const useInputValidationStates = () => {
   const [validationStates, setValidationState] = useState({
     cardNumber: ['', '', '', ''],
     expiryDate: ['', ''],
-    owner: [''],
     cvc: [''],
     password: ['', ''],
   });
@@ -17,7 +16,7 @@ const useInputValidationStates = () => {
     index,
   }: {
     value: number | string;
-    fieldKey: keyof Omit<typeof INPUT_INFO, 'nickname'>;
+    fieldKey: keyof Omit<typeof INPUT_INFO, 'nickname' | 'owner'>;
     index: number;
   }) => {
     const currentValidationState =
@@ -42,7 +41,7 @@ const useInputValidationStates = () => {
     index,
   }: {
     value: number | string;
-    fieldKey: keyof Omit<typeof INPUT_INFO, 'nickname'>;
+    fieldKey: keyof Omit<typeof INPUT_INFO, 'nickname' | 'owner'>;
     index: number;
   }) =>
     isValidValue(value, fieldKey, index) && isValueValidLength(value, fieldKey);
@@ -57,7 +56,7 @@ const useInputValidationStates = () => {
     fieldKey,
     index,
   }: {
-    fieldKey: keyof Omit<typeof INPUT_INFO, 'nickname'>;
+    fieldKey: keyof Omit<typeof INPUT_INFO, 'nickname' | 'owner'>;
     index: number;
   }) => {
     const stateCode = validationStates[fieldKey][index];

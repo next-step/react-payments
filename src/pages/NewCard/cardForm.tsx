@@ -63,7 +63,7 @@ const CardForm = () => {
       dataset: { index, id },
     },
   }: React.ChangeEvent<HTMLInputElement>) => {
-    const fieldKey = id as keyof Omit<typeof INPUT_INFO, 'nickname'>;
+    const fieldKey = id as keyof Omit<typeof INPUT_INFO, 'nickname' | 'owner'>;
     const prevState = cardState[fieldKey];
 
     if (isValueOverMaximumLength(value, fieldKey)) return;
@@ -74,11 +74,13 @@ const CardForm = () => {
         : value,
     } as unknown as newStateProps;
 
-    setInputValidationStates({
-      value: value,
-      fieldKey,
-      index: Number(index),
-    });
+    if (INPUT_INFO[fieldKey].require) {
+      setInputValidationStates({
+        value: value,
+        fieldKey,
+        index: Number(index),
+      });
+    }
 
     setCardState({ ...cardState, ...newState });
 
@@ -105,7 +107,7 @@ const CardForm = () => {
     e.preventDefault();
 
     if (isAllValid()) {
-      const cardId = Number(cardList[cardList.length - 1]?.id || 0) + 1;
+      const cardId = Number(cardList[0]?.id || 0) + 1;
 
       setCardList([
         {
