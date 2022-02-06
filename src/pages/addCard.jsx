@@ -22,18 +22,15 @@ function AddCard() {
   const [dueYear, setDueYear] = useState("");
   const [name, setName] = useState("");
   const [cvc, setCvc] = useState("");
-  const [cvcMasking, setCvcMasking] = useState("");
   const [passwordFirst, setPasswordFirst] = useState("");
-  const [firstMasking, setFirstMasking] = useState("");
   const [passwordSecond, setPasswordSecond] = useState("");
-  const [secondMasking, setSecondMasking] = useState("");
 
   const handleSetState = (event, setState) => {
     setState(event.target.value);
   };
 
-  const masking = (maskingState, setMasking) => {
-    setMasking(maskingState.replaceAll(/[\d]/g, "*"));
+  const handleSetMaskingState = (event, setMaskingState) => {
+    setMaskingState(event.target.value.replaceAll(/[\d]/g, "*"));
   };
 
   const resetState = (setState, setMaskingState) => {
@@ -103,10 +100,7 @@ function AddCard() {
               <Input
                 type="text"
                 placeholder="4자리 숫자"
-                onChange={(event) =>
-                  checkNumber(event, 4) &&
-                  handleSetState(event, setCardNumberSeries)
-                }
+                onChange={(event) => handleSetState(event, setCardNumberSeries)}
                 required
                 maxLength="4"
                 pattern="\d{4}"
@@ -120,7 +114,6 @@ function AddCard() {
                 type="text"
                 placeholder="4자리 숫자"
                 onChange={(event) =>
-                  checkNumber(event, 4) &&
                   handleSetState(event, setCardNumberCompany)
                 }
                 required
@@ -133,45 +126,41 @@ function AddCard() {
               />
               {cardNumberCompany.length === 4 && "-"}
               <Input
-                type="text"
+                type="password"
                 placeholder="4자리 숫자"
                 onChange={(event) => {
-                  checkNumber(event, 4) &&
-                    handleSetState(event, setCardNumberIndividual);
-                  handleSetState(event, setIndividualMasking);
+                  handleSetState(event, setCardNumberIndividual);
+                  handleSetMaskingState(event, setIndividualMasking);
                 }}
                 required
                 maxLength="4"
-                pattern="[*]{4}"
+                pattern="\d{4}"
                 title="4자리 숫자를 입력하세요."
                 onBlur={(event) => {
                   !checkNumber(event, 4) && alert(event.target.title);
-                  masking(individualMasking, setIndividualMasking);
                 }}
                 onClick={() =>
                   resetState(setCardNumberIndividual, setIndividualMasking)
                 }
-                value={individualMasking}
+                value={cardNumberIndividual}
               />
               {cardNumberIndividual.length === 4 && "-"}
               <Input
-                type="text"
+                type="password"
                 placeholder="4자리 숫자"
                 onChange={(event) => {
-                  checkNumber(event, 4) &&
-                    handleSetState(event, setCardNumberCode);
-                  handleSetState(event, setCodeMasking);
+                  handleSetState(event, setCardNumberCode);
+                  handleSetMaskingState(event, setCodeMasking);
                 }}
                 required
                 maxLength="4"
-                pattern="[*]{4}"
+                pattern="\d{4}"
                 title="4자리 숫자를 입력하세요."
                 onBlur={(event) => {
                   !checkNumber(event, 4) && alert(event.target.title);
-                  masking(codeMasking, setCodeMasking);
                 }}
                 onClick={() => resetState(setCardNumberCode, setCodeMasking)}
-                value={codeMasking}
+                value={cardNumberCode}
               />
             </InputBox>
           </InputContainer>
@@ -204,9 +193,7 @@ function AddCard() {
               <Input
                 type="text"
                 placeholder="YY"
-                onChange={(event) =>
-                  checkNumber(event, 2) && handleSetState(event, setDueYear)
-                }
+                onChange={(event) => handleSetState(event, setDueYear)}
                 required
                 maxLength="2"
                 pattern="\d{2}"
@@ -233,66 +220,58 @@ function AddCard() {
           <InputContainer>
             <InputTitle>보안코드(CVC/CVV)</InputTitle>
             <Input
-              type="text"
+              type="password"
               placeholder="3자리 숫자"
               onChange={(event) => {
-                checkNumber(event, 3) && handleSetState(event, setCvc);
-                handleSetState(event, setCvcMasking);
+                handleSetState(event, setCvc);
               }}
               required
               width="25%"
               maxLength="3"
-              pattern="[*]{3}"
+              pattern="\d{3}"
               title="3자리 숫자를 입력하세요."
               onBlur={(event) => {
                 !checkNumber(event, 3) && alert(event.target.title);
-                masking(cvcMasking, setCvcMasking);
               }}
-              onClick={() => resetState(setCvc, setCvcMasking)}
-              value={cvcMasking}
+              onClick={() => setCvc("")}
+              value={cvc}
             />
           </InputContainer>
           <InputContainer>
             <InputTitle>카드 비밀번호</InputTitle>
             <Input
-              type="text"
+              type="password"
               placeholder="숫자"
               onChange={(event) => {
-                checkNumber(event, 1) &&
-                  handleSetState(event, setPasswordFirst);
-                handleSetState(event, setFirstMasking);
+                handleSetState(event, setPasswordFirst);
               }}
               required
               width="15%"
               maxLength="1"
-              pattern="[*]{1}"
+              pattern="\d{1}"
               title="1자리 숫자를 입력하세요."
               onBlur={(event) => {
                 !checkNumber(event, 1) && alert(event.target.title);
-                masking(firstMasking, setFirstMasking);
               }}
-              onClick={() => resetState(setPasswordFirst, setFirstMasking)}
-              value={firstMasking}
+              onClick={() => setPasswordFirst("")}
+              value={passwordFirst}
             />
             <Input
-              type="text"
+              type="password"
               placeholder="숫자"
               onChange={(event) => {
-                checkNumber(event, 1) &&
-                  handleSetState(event, setPasswordSecond);
-                handleSetState(event, setSecondMasking);
+                handleSetState(event, setPasswordSecond);
               }}
               required
               width="15%"
               maxLength="1"
-              pattern="[*]{1}"
+              pattern="\d{1}"
               title="1자리 숫자를 입력하세요."
               onBlur={(event) => {
                 !checkNumber(event, 1) && alert(event.target.title);
-                masking(secondMasking, setSecondMasking);
               }}
-              onClick={() => resetState(setPasswordSecond, setSecondMasking)}
-              value={secondMasking}
+              onClick={() => setPasswordSecond("")}
+              value={passwordSecond}
             />
             <Input type="text" width="15%" value="*" disabled />
             <Input type="text" width="15%" value="*" disabled />
