@@ -3,9 +3,12 @@ import Card from "components/Card/Card";
 import Header from "components/Header/Header";
 import Layout from "components/Layout/Layout";
 import React from "react";
+import { useNavigate } from "react-router";
 
 const CardListPage = (): JSX.Element => {
   // const cards = JSON.parse(localStorage.getItem(KEY.CARDS)) ?? [];
+
+  const naviatge = useNavigate();
 
   return (
     <Layout>
@@ -25,7 +28,9 @@ const CardListPage = (): JSX.Element => {
 
         <li className="mt-5">
           <div className="flex items-center justify-center w-208 h-130 bg-gray-350 rounded-xl">
-            <button className="text-4xl">+</button>
+            <button className="text-4xl" onClick={() => naviatge("/add")}>
+              +
+            </button>
           </div>
         </li>
       </ul>
