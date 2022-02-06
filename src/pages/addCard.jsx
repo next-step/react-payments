@@ -38,21 +38,6 @@ function AddCard() {
     setMaskingState("");
   };
 
-  const checkNumber = (event, number) => {
-    switch (number) {
-      case 1:
-        return /\d{1}/.test(event.target.value);
-      case 2:
-        return /\d{2}/.test(event.target.value);
-      case 3:
-        return /\d{3}/.test(event.target.value);
-      case 4:
-        return /\d{4}/.test(event.target.value);
-      default:
-        return false;
-    }
-  };
-
   const submit = (event) => {
     event.preventDefault();
     setCards([
@@ -105,9 +90,6 @@ function AddCard() {
                 maxLength="4"
                 pattern="\d{4}"
                 title="4자리 숫자를 입력하세요."
-                onBlur={(event) =>
-                  !checkNumber(event, 4) && alert(event.target.title)
-                }
               />
               {cardNumberSeries.length === 4 && "-"}
               <Input
@@ -120,9 +102,6 @@ function AddCard() {
                 maxLength="4"
                 pattern="\d{4}"
                 title="4자리 숫자를 입력하세요."
-                onBlur={(event) =>
-                  !checkNumber(event, 4) && alert(event.target.title)
-                }
               />
               {cardNumberCompany.length === 4 && "-"}
               <Input
@@ -136,9 +115,6 @@ function AddCard() {
                 maxLength="4"
                 pattern="\d{4}"
                 title="4자리 숫자를 입력하세요."
-                onBlur={(event) => {
-                  !checkNumber(event, 4) && alert(event.target.title);
-                }}
                 onClick={() =>
                   resetState(setCardNumberIndividual, setIndividualMasking)
                 }
@@ -156,12 +132,10 @@ function AddCard() {
                 maxLength="4"
                 pattern="\d{4}"
                 title="4자리 숫자를 입력하세요."
-                onBlur={(event) => {
-                  !checkNumber(event, 4) && alert(event.target.title);
-                }}
                 onClick={() => resetState(setCardNumberCode, setCodeMasking)}
                 value={cardNumberCode}
               />
+              <TooltipText>4자리씩 16자리 숫자를 입력해주세요.</TooltipText>
             </InputBox>
           </InputContainer>
           <InputContainer>
@@ -181,13 +155,6 @@ function AddCard() {
                 min="1"
                 max="12"
                 title="1이상 12이하 숫자를 입력하세요."
-                onBlur={(event) =>
-                  !(
-                    event.target.value >= 1 &&
-                    event.target.value <= 12 &&
-                    event.target.value.length === 2
-                  ) && alert(event.target.title)
-                }
               />
               {dueMonth && "/"}
               <Input
@@ -198,10 +165,8 @@ function AddCard() {
                 maxLength="2"
                 pattern="\d{2}"
                 title="2자리 숫자를 입력하세요."
-                onBlur={(event) =>
-                  !checkNumber(event, 2) && alert(event.target.title)
-                }
               />
+              <TooltipText>월/년을 2자리 숫자로 입력해주세요.</TooltipText>
             </InputBox>
           </InputContainer>
           <InputContainer>
@@ -209,72 +174,70 @@ function AddCard() {
               카드 소유자 이름(선택)
               {name.length !== 0 && <span>{`${name.length}/30`}</span>}
             </InputTitle>
-            <Input
-              type="text"
-              placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-              onChange={(event) => handleSetState(event, setName)}
-              maxLength="30"
-              pattern=".{1,30}"
-            />
+            <InputBox>
+              <Input
+                type="text"
+                placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+                onChange={(event) => handleSetState(event, setName)}
+                maxLength="30"
+                pattern=".{1,30}"
+              />
+            </InputBox>
           </InputContainer>
           <InputContainer>
             <InputTitle>보안코드(CVC/CVV)</InputTitle>
-            <Input
-              type="password"
-              placeholder="3자리 숫자"
-              onChange={(event) => {
-                handleSetState(event, setCvc);
-              }}
-              required
-              width="25%"
-              maxLength="3"
-              pattern="\d{3}"
-              title="3자리 숫자를 입력하세요."
-              onBlur={(event) => {
-                !checkNumber(event, 3) && alert(event.target.title);
-              }}
-              onClick={() => setCvc("")}
-              value={cvc}
-            />
+            <InputBox width="25%">
+              <Input
+                type="password"
+                placeholder="3자리 숫자"
+                onChange={(event) => {
+                  handleSetState(event, setCvc);
+                }}
+                required
+                maxLength="3"
+                pattern="\d{3}"
+                title="3자리 숫자를 입력하세요."
+                onClick={() => setCvc("")}
+                value={cvc}
+              />
+              <TooltipText>3자리 숫자를 입력해 주세요.</TooltipText>
+            </InputBox>
           </InputContainer>
           <InputContainer>
             <InputTitle>카드 비밀번호</InputTitle>
-            <Input
-              type="password"
-              placeholder="숫자"
-              onChange={(event) => {
-                handleSetState(event, setPasswordFirst);
-              }}
-              required
-              width="15%"
-              maxLength="1"
-              pattern="\d{1}"
-              title="1자리 숫자를 입력하세요."
-              onBlur={(event) => {
-                !checkNumber(event, 1) && alert(event.target.title);
-              }}
-              onClick={() => setPasswordFirst("")}
-              value={passwordFirst}
-            />
-            <Input
-              type="password"
-              placeholder="숫자"
-              onChange={(event) => {
-                handleSetState(event, setPasswordSecond);
-              }}
-              required
-              width="15%"
-              maxLength="1"
-              pattern="\d{1}"
-              title="1자리 숫자를 입력하세요."
-              onBlur={(event) => {
-                !checkNumber(event, 1) && alert(event.target.title);
-              }}
-              onClick={() => setPasswordSecond("")}
-              value={passwordSecond}
-            />
-            <Input type="text" width="15%" value="*" disabled />
-            <Input type="text" width="15%" value="*" disabled />
+            <InputBox width="60%">
+              <Input
+                type="password"
+                placeholder="숫자"
+                onChange={(event) => {
+                  handleSetState(event, setPasswordFirst);
+                }}
+                required
+                maxLength="1"
+                pattern="\d{1}"
+                title="1자리 숫자를 입력하세요."
+                onClick={() => setPasswordFirst("")}
+                value={passwordFirst}
+              />
+              <Input
+                type="password"
+                placeholder="숫자"
+                onChange={(event) => {
+                  handleSetState(event, setPasswordSecond);
+                }}
+                required
+                maxLength="1"
+                pattern="\d{1}"
+                title="1자리 숫자를 입력하세요."
+                onClick={() => setPasswordSecond("")}
+                value={passwordSecond}
+              />
+              <Input type="password" value="0" disabled />
+              <Input type="password" value="0" disabled />
+              <TooltipText>
+                비밀번호 숫자 앞 2자리를 1자리씩 입력해주세요.
+              </TooltipText>
+            </InputBox>
           </InputContainer>
           <Button>다음</Button>
         </form>
@@ -301,7 +264,21 @@ const InputContainer = styled.div`
   margin: 16px 0;
 `;
 
+const TooltipText = styled.span`
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  top: 45px;
+  z-index: 1;
+`;
+
 const InputBox = styled.div`
+  position: relative;
   display: flex;
   width: ${(props) => (props.width ? props.width : "100%")};
   align-items: center;
@@ -309,6 +286,9 @@ const InputBox = styled.div`
   color: #d3d3d3;
   border-radius: 0.25rem;
   background-color: #ecebf1;
+  &:focus-within ${TooltipText} {
+    visibility: visible;
+  }
 `;
 
 const InputTitle = styled.span`
