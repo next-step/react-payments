@@ -17,7 +17,7 @@ const BackButton = ({ onClick }: Props): JSX.Element => {
         <path
           d="M8.30426 1L1.36476 8.78658L9.15134 15.7261"
           stroke="#525252"
-          strokeWidth="1.5"
+          strokeWidth="2"
         />
       </svg>
     </button>
