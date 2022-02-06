@@ -1,4 +1,4 @@
-import Card from '../components/CardPlus';
+import Card from '../components/Card';
 import CardPlus from '../components/CardPlus';
 import PageTitle from '../components/PageTitle';
 import RootContainer from '../components/container/Root';
@@ -8,7 +8,6 @@ import { AppContext } from '../AppContext';
 
 const CardList = () => {
   const { cardList = [] } = useContext(AppContext);
-
   return (
     <RootContainer>
       <AppContainer appClass="flex-column-center">

@@ -3,7 +3,8 @@ import { AppContext } from '../AppContext';
 import Input from './container/Input';
 import _ from 'lodash';
 
-const CardInputForm = () => {
+const CardInputForm = (props) => {
+  const { setType } = props;
   const [cardHolderInfo, setCardHolerInfo] = useState('');
   const { inputCard, setInputCard } = useContext(AppContext);
   const {
@@ -12,8 +13,7 @@ const CardInputForm = () => {
     expirationYear = '',
     cardHolder = '',
     cvc = '',
-    passwords = ['', '', '', ''],
-    companyName = '',
+    passwords = ['', ''],
   } = inputCard;
 
   const onlyNumber = (val) => {
@@ -30,19 +30,22 @@ const CardInputForm = () => {
       return;
     }
 
+    const card = _.cloneDeep(inputCard);
+
     if (['cardNumbers', 'passwords'].includes(key)) {
-      inputCard[key][i] = onlyNumber(value);
+      card[key][i] = onlyNumber(value);
     } else if (['expirationMonth', 'expirationYear', 'cvc'].includes(key)) {
-      inputCard[key] = onlyNumber(value);
+      card[key] = onlyNumber(value);
     } else if (key === 'cardHolder') {
-      inputCard[key] = value;
+      card[key] = value;
       if (value === '') {
         setCardHolerInfo('');
       } else {
         setCardHolerInfo(`입력글자수 : ${value.length} / 30`);
       }
     }
-    setInputCard(_.cloneDeep(inputCard));
+    setType('small');
+    setInputCard(_.cloneDeep(card));
   };
 
   return (
@@ -120,6 +123,20 @@ const CardInputForm = () => {
             }
           />
         ))}
+        <input
+          className="input-basic w-15 password-filled-wrapper"
+          type="password"
+          maxLength={1}
+          value={0}
+          disabled={true}
+        />
+        <input
+          className="input-basic w-15 password-filled-wrapper"
+          type="password"
+          maxLength={1}
+          value={0}
+          disabled={true}
+        />
       </Input>
     </>
   );

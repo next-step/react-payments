@@ -5,16 +5,14 @@ import CardList from './pages/CardList';
 import { AppContext, initialInputCard } from './AppContext';
 
 export const companyList = [
-  '신한카드',
-  '현대카드',
-  '삼성카드',
-  'KB국민카드',
-  '하나카드',
-  'BC카드',
-  'NH농협카드',
-  '우리카드',
-  '롯데카드',
-  '씨티카드',
+  { name: '신한카드', color: '#E24141' },
+  { name: '삼성카드', color: '#547CE4' },
+  { name: 'KB국민카드', color: '#73BC6D' },
+  { name: '하나카드', color: '#DE59B9' },
+  { name: 'BC카드', color: '#04C09E' },
+  { name: 'NH농협카드', color: '#E76E9A' },
+  { name: '우리카드', color: '#F37D3B' },
+  { name: '씨티카드', color: '#FBCD58' },
 ];
 
 function App() {
@@ -37,7 +35,7 @@ function App() {
         {status === 'list' ? (
           <CardList />
         ) : status === 'add' ? (
-          <Add nextStatus="complete" inputCard={inputCard} />
+          <Add nextStatus="complete" />
         ) : status === 'complete' ? (
           <Complete nextStatus="list" />
         ) : (
