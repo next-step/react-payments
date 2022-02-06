@@ -1,5 +1,6 @@
 import CardNumberInput from "../CardNumberInput";
 import ExpiryDateInput from "../ExpiryDateInput";
+import CardOwnerInput from "../CardOwnerInput/CardOwnerInput";
 import CardPasswordInput from "../CardPasswordInput";
 import Input from "../Input";
 
@@ -25,22 +26,10 @@ const AddCardForm = ({
       fields={expiryDate}
       onChange={onChangeMultipleInput}
     />
-    <InputStyle.Container>
-      <InputStyle.LabelGroup>
-        <label htmlFor="card-owner">카드 소유자이름(선택)</label>
-        <span>{cardOwner?.length}/30</span>
-      </InputStyle.LabelGroup>
-      <Input
-        field={{
-          id: "card-owner",
-          name: "cardOwner",
-          value: cardOwner,
-          maxLength: 30,
-        }}
-        onChange={onChangeSingleInput}
-        background
-      />
-    </InputStyle.Container>
+    <CardOwnerInput
+      value={cardOwner}
+      onChange={onChangeSingleInput}
+    />
     <InputStyle.Container>
       <InputStyle.Label htmlFor="security-number">
         보안코드(CVC/CVV)
