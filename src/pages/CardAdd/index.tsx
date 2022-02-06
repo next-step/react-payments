@@ -1,27 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Root, PageTitle, App, InputTitle } from 'components/UI';
 import { InputContainer } from 'components/Input/input.style';
 import { ButtonBox } from 'components/Button/button.style';
 import { Input, InputWrapper, Card, Button } from 'components/index';
-import { CardAddPageProps } from 'models/page.model';
 import { FlexSpaceBetween } from 'components/UI/Utils';
 import { ERROR_MESSAGE } from 'utils/validation';
+import { CurrentCardContext } from 'utils/cardsUtils';
 
-const CardAddPage: React.VFC<CardAddPageProps> = ({
-  cardCompany,
-  expiredDate,
-  cardNum,
-  userName,
-  CVC,
-  cardPassword,
-  updateCardNumber,
-  updateExpiredDate,
-  updateUserName,
-  updateCVC,
-  updateCardPassword,
-}) => {
+const CardAddPage: React.VFC = () => {
   const navigate = useNavigate();
+
+  const currentCard = useContext(CurrentCardContext);
+
+  const {
+    updateCVC,
+    updateCardNumber,
+    updateCardPassword,
+    updateExpiredDate,
+    updateUserName,
+  } = currentCard;
+  const { expiredDate, CVC, cardPassword, cardNum, cardCompany, userName } =
+    currentCard.card;
 
   const cvcRef = useRef<HTMLInputElement>(null);
   const passwordFirstRef = useRef<HTMLInputElement>(null);
@@ -226,7 +226,7 @@ const CardAddPage: React.VFC<CardAddPageProps> = ({
                 width={15}
                 type="number"
                 name="third"
-                value={cardPassword.third}
+                value={'1'}
                 isPassword
                 readOnly
               />
@@ -234,7 +234,7 @@ const CardAddPage: React.VFC<CardAddPageProps> = ({
                 width={15}
                 type="number"
                 name="forth"
-                value={cardPassword.forth}
+                value={'1'}
                 isPassword
                 readOnly
               />

@@ -1,4 +1,4 @@
-import { CardNumber } from 'models/page.model';
+import { CardNumber } from 'models/card.model';
 
 export const enum MAX_LENGTH {
   CARD_NUMBER = 4,
@@ -6,6 +6,7 @@ export const enum MAX_LENGTH {
   USER_NAME = 30,
   CVC = 3,
   CARD_PASSWORD = 1,
+  CARD_NICKNAME = 10,
 }
 
 export const enum ERROR_MESSAGE {

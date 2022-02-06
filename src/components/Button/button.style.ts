@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const ButtonBox = styled.div<{ mt?: number }>`
   width: 100%;
@@ -7,9 +7,16 @@ export const ButtonBox = styled.div<{ mt?: number }>`
   margin-top: ${({ mt }) => mt && `${mt * 40 * 0.00625}rem`};
 `;
 
-export const ButtonText = styled.span<{ disabled?: boolean }>`
+export const ButtonText = styled.span<{ disabled?: boolean; warn?: boolean }>`
   margin-right: 10px;
+  cursor: pointer;
 
-  color: ${({ disabled }) => disabled && '#808080'};
-  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  color: ${({ warn }) => warn && 'red'};
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      color: #808080;
+      cursor: not-allowed;
+    `}
 `;
