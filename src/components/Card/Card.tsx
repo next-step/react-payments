@@ -1,27 +1,35 @@
 import React from "react";
-import { CardCompany, CardNumbers } from "types/common";
+import {
+  CardCompany,
+  CardExpiration,
+  CardName,
+  CardNumbers,
+} from "types/common";
 
 interface Props {
   size?: "default" | "small" | "large";
-  name?: string;
-  expiration?: string;
+  name?: CardName;
+  expiration?: CardExpiration;
   cardCompany?: CardCompany;
   cardNumbers?: CardNumbers;
 }
 
 const Card = ({
   size = "default",
-  name = "NAME",
-  expiration = "MM/YY",
-  cardCompany = {
-    name: "",
-    color: "",
-  },
   cardNumbers = {
     first: "",
     second: "",
     third: "",
     fourth: "",
+  },
+  expiration = {
+    month: "MM",
+    year: "YY",
+  },
+  name = "NAME",
+  cardCompany = {
+    name: "",
+    color: "",
   },
 }: Props) => {
   const sizeTable = {
@@ -38,7 +46,7 @@ const Card = ({
 
   return (
     <div
-      className={`${sizeTable[size]} px-4 py-2 rounded-xl bg-gray-350 ${cardCompany.color} shadow-lg font-mono tracking-wide`}
+      className={`${sizeTable[size]} rounded-xl bg-gray-350 px-4 py-2 ${cardCompany.color} font-mono tracking-wide shadow-lg`}
     >
       <span
         className={`${
@@ -48,12 +56,12 @@ const Card = ({
         {cardCompany.name}
       </span>
       <div
-        className={`w-1/5 h-1/5 ${
+        className={`h-1/5 w-1/5 ${
           size === "large" ? "mt-8" : "mt-4"
         } rounded-md bg-yellow-450`}
       ></div>
       <ul
-        className={`flex mt-3 text-sm ${heightTable[size]} items-center mx-1`}
+        className={`mt-3 flex text-sm ${heightTable[size]} mx-1 items-center`}
       >
         {Object.keys(cardNumbers).map((_, index) => {
           const currentKey = Object.keys(cardNumbers)[index];
@@ -61,8 +69,8 @@ const Card = ({
             <li
               key={`cardNumber-${currentKey}`}
               className={`${
-                size === "large" ? "text-lg mr-9" : "text-sm mr-3"
-              } text-black-700 w-8`}
+                size === "large" ? "mr-9 text-lg" : "mr-3 text-sm"
+              } w-8 text-black-700`}
             >
               {/* <div>
                 {index > 1
@@ -76,10 +84,12 @@ const Card = ({
       <div
         className={`flex justify-between ${
           size === "large" ? "text-base" : "text-xs"
-        } text-black-700 mt-1 mx-0.5`}
+        } mx-0.5 mt-1 text-black-700`}
       >
         <div>{name}</div>
-        <div>{expiration}</div>
+        <div>
+          {expiration.month} / {expiration.year}
+        </div>
       </div>
     </div>
   );

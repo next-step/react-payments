@@ -11,12 +11,12 @@ const InputContainer = ({
   className,
 }: PropsWithChildren<Props>): JSX.Element => {
   return (
-    <div className="flex flex-col mt-5 w-full">
+    <div className="mt-5 flex w-full flex-col">
       <div className="flex items-center">
         <label className="text-xs">{title}</label>
       </div>
       <div
-        className={`flex items-center mt-1.5 font-gray-350 rounded ${className}`}
+        className={`font-gray-350 mt-1.5 flex items-center rounded ${className}`}
       >
         {children}
       </div>

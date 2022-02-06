@@ -6,7 +6,7 @@ interface Props {
 
 const BackButton = ({ onClick }: Props): JSX.Element => {
   return (
-    <button className="w-4 h-4" onClick={onClick}>
+    <button className="h-4 w-4" onClick={onClick}>
       <svg
         width="17"
         height="17"

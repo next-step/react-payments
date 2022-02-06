@@ -27,7 +27,7 @@ const CardListPage = (): JSX.Element => {
         ))} */}
 
         <li className="mt-5">
-          <div className="flex items-center justify-center w-208 h-130 bg-gray-350 rounded-xl">
+          <div className="flex h-130 w-208 items-center justify-center rounded-xl bg-gray-350">
             <button className="text-4xl" onClick={() => naviatge("/add")}>
               +
             </button>
