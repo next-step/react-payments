@@ -1,19 +1,19 @@
 import '../css/index.css';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Input, Center, Title, Button, BasicCard } from '../components/index.js';
-import { CardInfoContext } from '../App';
+import { Input, Center, Title, Button, BasicCard } from '../components';
+import { CardInfoContext } from '../context/cardInfoContext';
 
 const emptyCardNickName = '클린카드';
 
 const CreditCardRegister = () => {
     const navigate = useNavigate();
-    const { state, dispatch, setCardList, cardList } = useContext(CardInfoContext);
-    const { cardNumber, expireDate, name, nickName } = state;
+    const { cardInfo, setCardInfo, setCardList, cardList } = useContext(CardInfoContext);
+    const { cardNumber, expireDate, name, nickName } = cardInfo;
 
     const addCardList = () => {
         setCardList([
-            { ...state, nickName: !state.nickName ? emptyCardNickName : state.nickName },
+            { ...cardInfo, nickName: !cardInfo.nickName ? emptyCardNickName : cardInfo.nickName },
             ...cardList,
         ]);
     };
@@ -23,8 +23,8 @@ const CreditCardRegister = () => {
             cardList.map((item) => {
                 if (item.cardNumber === cardNumber)
                     return {
-                        ...state,
-                        nickName: !state.nickName ? emptyCardNickName : state.nickName,
+                        ...cardInfo,
+                        nickName: !cardInfo.nickName ? emptyCardNickName : cardInfo.nickName,
                     };
 
                 return item;
@@ -52,7 +52,7 @@ const CreditCardRegister = () => {
                         size={75}
                         placeholder={'카드의 별칭을 입력해주세요.'}
                         value={nickName}
-                        onChange={(text) => dispatch({ nickName: text })}
+                        onChange={(text) => setCardInfo({ nickName: text })}
                     />
                     <Button title={'다음'} onClick={goCreditCardList} marginTop={50} />
                 </div>

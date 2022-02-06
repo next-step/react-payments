@@ -1,7 +1,7 @@
-import React, { useReducer, createContext, useState } from 'react';
+import React, { useReducer, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-
-import { CreditCardAdd, CreditCardList, CreditCardRegister } from './pages/index';
+import { CreditCardAdd, CreditCardList, CreditCardRegister } from './pages';
+import { CardInfoContext } from './context/cardInfoContext';
 
 const initForm = {
     cardNumber: {
@@ -27,11 +27,9 @@ const reducer = (state, action) => {
     };
 };
 
-export const CardInfoContext = createContext(null);
-
 const App = () => {
     const [cardList, setCardList] = useState([]);
-    const [state, dispatch] = useReducer(reducer, initForm);
+    const [cardInfo, setCardInfo] = useReducer(reducer, initForm);
 
     const pages = [
         {
@@ -49,7 +47,7 @@ const App = () => {
     ];
 
     return (
-        <CardInfoContext.Provider value={{ state, dispatch, cardList, setCardList }}>
+        <CardInfoContext.Provider value={{ cardInfo, setCardInfo, cardList, setCardList }}>
             <Routes>
                 {pages.map((page) => (
                     <Route key={page.path} path={page.path} element={page.component} />

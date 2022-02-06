@@ -1,19 +1,19 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BasicCard, Title, EmptyCard, Button, Center } from '../components/index.js';
-import { CardInfoContext } from '../App';
+import { BasicCard, Title, EmptyCard, Button, Center } from '../components';
+import { CardInfoContext } from '../context/cardInfoContext';
 
 const CreditCardList = ({ initForm }) => {
     const navigate = useNavigate();
-    const { dispatch, cardList, setCardList } = useContext(CardInfoContext);
+    const { setCardInfo, cardList, setCardList } = useContext(CardInfoContext);
 
     const goCreditCardAdd = () => {
-        dispatch(initForm);
+        setCardInfo(initForm);
         navigate('/');
     };
 
-    const goCreditRegister = (state) => {
-        dispatch(state);
+    const goCreditRegister = (cardInfo) => {
+        setCardInfo(cardInfo);
         navigate('/creditCardRegister');
     };
 
