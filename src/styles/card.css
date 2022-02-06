@@ -134,3 +134,29 @@
   vertical-align: middle;
   font-weight: 400;
 }
+
+.input-basic.password-filled-wrapper {
+  background-color: transparent;
+  color: #04c09e;
+}
+
+.password-filled {
+  width: 5px;
+  height: 5px;
+  background: #04c09e;
+}
+
+.input-cardholder {
+  word-break: break-all;
+  overflow: hidden;
+  margin-right: 0px;
+}
+
+.small-card .input-cardholder {
+  max-width: 113px;
+  max-height: 32px;
+}
+
+.big-card .input-cardholder {
+  max-width: 200px;
+}

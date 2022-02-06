@@ -8,8 +8,10 @@ export const initialInputCard = {
   expirationYear: '',
   cardHolder: '',
   cvc: '',
-  passwords: ['', '', '', ''],
+  passwords: ['', ''],
   companyName: '',
+  color: '',
+  nickName: '',
 };
 
 export const initialAppContext = {

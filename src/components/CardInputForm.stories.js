@@ -1,19 +1,17 @@
 import React from 'react';
 import { AppContext, initialAppContext } from '../AppContext';
 import { GROUP } from '../constants';
-import Add from './Add';
+import CardInputForm from './CardInputForm';
 
 export default {
-  component: Add,
-  title: `${GROUP.PAGES}/Add`,
+  component: CardInputForm,
+  title: `${GROUP.COMPONENTS}/CardInputForm`,
 };
-
-const Template = (args) => <Add {...args} />;
 
 export const Default = () => {
   return (
     <AppContext.Provider value={initialAppContext}>
-      <Add />
+      <CardInputForm />
     </AppContext.Provider>
   );
 };

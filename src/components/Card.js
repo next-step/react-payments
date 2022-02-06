@@ -1,32 +1,35 @@
-import { useContext } from 'react';
-import { AppContext } from '../AppContext';
-
-const Card = (card) => {
-  const { nickName } = card;
-  const { inputCard } = useContext(AppContext);
+const Card = (props) => {
+  const { type = 'small', card } = props;
   const {
     cardNumbers = ['', '', '', ''],
     expirationMonth = '',
     expirationYear = '',
     cardHolder = '',
     companyName = '',
-  } = inputCard;
+    color = '',
+    nickName = '',
+  } = card;
 
   const mask = (val) => val.replace(/\s/g, '').replace(/\S/g, 'o');
-
+  const cardTextType = type === 'big' ? 'card-text__big' : 'card-text';
   return (
     <>
       <div className="card-box">
-        <div className="small-card">
+        <div
+          className={`${type}-card`}
+          style={color ? { backgroundColor: color } : null}
+        >
           <div className="card-top">
-            <span className="card-text">{companyName}</span>
+            <span className={cardTextType}>{companyName}</span>
           </div>
           <div className="card-middle">
-            <div className="small-card__chip"></div>
+            <div
+              className={`${type === 'big' ? 'big' : 'small'}-card__chip`}
+            ></div>
           </div>
           <div className="card-bottom">
             <div className="card-bottom__number">
-              <span className="card-text">
+              <span className={cardTextType}>
                 {cardNumbers[0]} {cardNumbers[0] ? '- ' : null}
                 {cardNumbers[1]} {cardNumbers[1] ? '- ' : null}
                 {mask(cardNumbers[2])} {cardNumbers[2] ? '- ' : null}
@@ -34,8 +37,10 @@ const Card = (card) => {
               </span>
             </div>
             <div className="card-bottom__info">
-              <span className="card-text">{cardHolder}</span>
-              <span className="card-text">
+              <span className={cardTextType + ' input-cardholder'}>
+                {cardHolder}
+              </span>
+              <span className={cardTextType}>
                 {expirationMonth} {expirationMonth ? ' / ' : ''}{' '}
                 {expirationYear}
               </span>
@@ -43,7 +48,7 @@ const Card = (card) => {
           </div>
         </div>
       </div>
-      {nickName ? <span className="card-nickname">{nickName}</span> : null}
+      {nickName ? <span className="card-nickname flex">{nickName}</span> : null}
     </>
   );
 };
