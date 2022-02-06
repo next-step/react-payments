@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Button } from 'components/Button'
 import { DigitalCard } from 'components/Card'
 import {
@@ -10,7 +11,6 @@ import {
 import { CardInput } from 'components/Form/Input'
 import { CardModal } from 'components/Modal'
 import { IconCircleQuestion, IconLeftArrow } from 'components/svgs'
-import { PAGES } from '../../constants'
 import {
   SERIAL_NUMS,
   PASSWORD,
@@ -20,13 +20,13 @@ import {
 } from './constants'
 import { CARD } from 'styles/colors'
 import { useInput } from 'hooks/useInput'
-import { PageProps } from '../../type'
 import { limitRangeOfMonthAndYear, limitRangeOfSerialNums } from './helpers'
 import * as S from './style'
-import { useAppContext } from 'AppContext'
+import { useAppContext } from 'App'
 import { validateFormValues, hasCardFormErrors, ERRORS } from './validation'
 
-export default function CardAddPage({ setPage }: PageProps) {
+export default function CardAddPage() {
+  const navigate = useNavigate()
   const { cards, setCards, setEditCardIndex } = useAppContext()
   const [serialNums, setSerialNums] = useState<typeof SERIAL_NUMS>(SERIAL_NUMS)
   const [expiredDate, setExpiredDate] = useState<typeof EXPIRED_DATE>(EXPIRED_DATE)
@@ -95,13 +95,13 @@ export default function CardAddPage({ setPage }: PageProps) {
       { type, serialNums, ownerName, expiredDate, nickName: '', id: Math.random().toString(36) },
     ])
     setEditCardIndex(cards.length)
-    setPage(PAGES.CARD_ADD_COMPLETE)
+    navigate(`/add-complete`)
   }
 
   return (
     <S.Box>
       <S.Header>
-        <Button onClick={() => setPage(PAGES.CARD_LIST)}>
+        <Button onClick={() => navigate(-1)}>
           <IconLeftArrow />
         </Button>
         <S.H1>카드 추가</S.H1>

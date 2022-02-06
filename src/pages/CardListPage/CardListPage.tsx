@@ -1,15 +1,15 @@
 import { Fragment } from 'react'
+import { useAppContext } from 'App'
+import { useNavigate } from 'react-router-dom'
 import { Card, DigitalCard } from 'components/Card'
-import { PageProps } from 'type'
 import * as S from './style'
-import { PAGES } from '../../constants'
-import { useAppContext } from 'AppContext'
 
-export default function CardListPage({ setPage }: PageProps) {
+export default function CardListPage() {
   const { cards, setCards, setEditCardIndex } = useAppContext()
+  const navigate = useNavigate()
   const handleClick = (index: number) => () => {
     setEditCardIndex(index)
-    setPage(PAGES.CARD_ADD_COMPLETE)
+    navigate('/add-complete')
   }
   const handleDeleteClick = (index: number) => () => {
     setCards(cards.filter((card, i) => cards.length - 1 - i !== index))
@@ -29,7 +29,7 @@ export default function CardListPage({ setPage }: PageProps) {
             </S.Wrapper>
           </Fragment>
         ))}
-        <Card onClick={() => setPage(PAGES.CARD_ADD)}>
+        <Card onClick={() => navigate('add')}>
           <S.AddCard>+</S.AddCard>
         </Card>
       </S.Main>

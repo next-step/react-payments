@@ -1,28 +1,39 @@
-import { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import * as S from './style'
-import CardAddPage from './pages/CardAddPage'
-import CardListPage from './pages/CardListPage'
-import CardAddCompletePage from 'pages/CardAddCompletePage'
-import { PAGES } from './constants'
-import { PageProps } from 'type'
-import AppProvider from 'AppContext'
+import { Card } from 'type'
+import ErrorBoundary from 'components/ErrorBoundary'
 
-function App() {
-  const [page, setPage] = useState(PAGES.CARD_ADD)
+interface Props {
+  children: React.ReactNode
+}
 
+interface Context {
+  cards: Card[]
+  editCardIndex: number
+  setEditCardIndex: React.Dispatch<React.SetStateAction<number>>
+  setCards: React.Dispatch<React.SetStateAction<Card[]>>
+}
+
+const AppContext = React.createContext<Context | null>(null)
+
+export default function App({ children }: Props) {
+  const [cards, setCards] = useState<Card[]>([])
+  const [editCardIndex, setEditCardIndex] = useState(0)
   return (
-    <S.Root>
-      <S.App>
-        <AppProvider>{cardPages[page]({ setPage })}</AppProvider>
-      </S.App>
-    </S.Root>
+    <ErrorBoundary>
+      <S.Root>
+        <S.App>
+          <AppContext.Provider value={{ cards, editCardIndex, setEditCardIndex, setCards }}>
+            {children}
+          </AppContext.Provider>
+        </S.App>
+      </S.Root>
+    </ErrorBoundary>
   )
 }
 
-const cardPages = {
-  [PAGES.CARD_ADD]: (props: PageProps) => <CardAddPage {...props} />,
-  [PAGES.CARD_LIST]: (props: PageProps) => <CardListPage {...props} />,
-  [PAGES.CARD_ADD_COMPLETE]: (props: PageProps) => <CardAddCompletePage {...props} />,
+export const useAppContext = () => {
+  const appContext = useContext(AppContext)
+  if (!appContext) throw new Error('Cannot find ContextProvier')
+  return appContext
 }
-
-export default App

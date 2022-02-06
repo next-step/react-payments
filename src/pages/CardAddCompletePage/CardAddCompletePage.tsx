@@ -1,20 +1,20 @@
+import { useNavigate } from 'react-router-dom'
 import { Button } from 'components/Button'
 import { DigitalCard } from 'components/Card'
 import { Label } from 'components/Form/Input'
 import { useInput } from 'hooks/useInput'
-import { PageProps } from '../../type'
-import { PAGES } from '../../constants'
 import { updateCardNickName } from './helpers'
 import * as S from './style'
-import { useAppContext } from 'AppContext'
+import { useAppContext } from 'App'
 
-export default function CardAddCompletePage({ setPage }: PageProps) {
+export default function CardAddCompletePage() {
+  const navigate = useNavigate()
   const { cards, setCards, editCardIndex } = useAppContext()
   const [nickName, setNickName] = useInput(cards[editCardIndex].nickName)
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setPage(PAGES.CARD_LIST)
     setCards(updateCardNickName(cards, nickName))
+    navigate('/')
   }
 
   return (

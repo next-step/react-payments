@@ -1,9 +1,5 @@
 import { SERIAL_NUMS, EXPIRED_DATE } from 'pages/CardAddPage/constants'
 
-export interface PageProps {
-  setPage: React.Dispatch<React.SetStateAction<string>>
-}
-
 export type Card = {
   id: string
   type: string
