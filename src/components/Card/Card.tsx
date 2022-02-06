@@ -1,16 +1,5 @@
 import React from "react";
-
-interface CardCompany {
-  name: string;
-  color: string;
-}
-
-interface CardNumbers {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-}
+import { CardCompany, CardNumbers } from "types/common";
 
 interface Props {
   size?: "default" | "small" | "large";
