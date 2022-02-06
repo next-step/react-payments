@@ -17,7 +17,7 @@ export default function CardInput({ labelName, errorMessage, labelRight, ...prop
     </S.Box>
   )
 }
-
+  
 const Error = styled.span`
   display: inline-block;
   padding: 4px 0;

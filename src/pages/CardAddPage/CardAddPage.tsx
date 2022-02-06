@@ -83,7 +83,7 @@ export default function CardAddPage() {
     }
     completeFormSubmit()
   }
-
+  
   const completeFormSubmit = () => {
     const _errors = validateFormValues({ serialNums, expiredDate, ownerName, cvc, password })
     if (hasCardFormErrors(_errors)) {
