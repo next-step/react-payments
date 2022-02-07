@@ -54,30 +54,15 @@ describe("AddCardForm", () => {
     ).toBeInTheDocument();
   });
 
-  it("보안코드 Input을 렌더링합니다", () => {
-    const { queryByLabelText } = makeAddCardForm();
-
-    expect(queryByLabelText("보안코드(CVC/CVV)")).toBeInTheDocument();
-  });
-
-  it("보안코드 Input을 값이 변경되면 change 이벤트 핸들러가 실행됩니다", () => {
-    const { getByLabelText } = makeAddCardForm();
-
-    fireEvent.change(getByLabelText("보안코드(CVC/CVV)"), {
-      target: {
-        value: 11,
-      },
-    });
-
-    expect(handleChangeSingleInput).toBeCalledWith({
-      name: "securityNumber",
-      value: "11",
-    });
-  });
-
   it("카드 비밀번호 Input을 렌더링합니다", () => {
     const { queryByLabelText } = makeAddCardForm();
 
     expect(queryByLabelText("카드 비밀번호")).toBeInTheDocument();
+  });
+
+  it("보안코드 Input을 렌더링합니다", () => {
+    const { queryByLabelText } = makeAddCardForm();
+
+    expect(queryByLabelText("보안코드(CVC/CVV)")).toBeInTheDocument();
   });
 });

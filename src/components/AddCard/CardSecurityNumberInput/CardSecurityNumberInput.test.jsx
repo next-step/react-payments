@@ -16,7 +16,7 @@ describe("CardSecurityNumberInput", () => {
     expect(queryByLabelText("보안코드(CVC/CVV)")).toBeInTheDocument();
   });
 
-  context("보안코드 Input 값으로 숫자를 입력했을 경우", () => {
+  context("Input 값으로 숫자를 입력했을 경우", () => {
     it("change 이벤트 핸들러가 실행됩니다", () => {
       const { getByLabelText } = makeCardSecurityNumberInput();
 
@@ -33,7 +33,7 @@ describe("CardSecurityNumberInput", () => {
     });
   });
 
-  context("보안코드 Input 값으로 숫자를 입력하지 않았을 경우", () => {
+  context("Input 값으로 숫자를 입력하지 않았을 경우", () => {
     it("change 이벤트 핸들러가 실행되지 않습니다", () => {
       const { getByLabelText } = makeCardSecurityNumberInput();
 
