@@ -2,9 +2,9 @@ import * as InputStyle from "../../style/input";
 
 import Input from "../Input";
 
-import CARD_OWNER_MAX_LENGTH from "./constants";
-
 export default function CardOwnerInput({ value, onChange }) {
+  const MAX_LENGTH = 30;
+
   return (
     <InputStyle.Container>
       <InputStyle.LabelGroup>
@@ -12,12 +12,10 @@ export default function CardOwnerInput({ value, onChange }) {
         <span>{value.length}/30</span>
       </InputStyle.LabelGroup>
       <Input
-        field={{
-          id: "card-owner",
-          name: "cardOwner",
-          value,
-          maxLength: CARD_OWNER_MAX_LENGTH,
-        }}
+        id="card-owner"
+        name="cardOwner"
+        value={value}
+        maxLength={MAX_LENGTH}
         onChange={onChange}
         background
       />

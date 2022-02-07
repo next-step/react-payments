@@ -1,28 +1,33 @@
+import React from "react";
+
 import styled from "@emotion/styled";
 
 const isOverMaxLength = ({ maxLength, valueLength }) =>
   maxLength < valueLength;
 
-const Input = ({ field, onChange, background }) => {
-  const { ariaLabel, ...rest } = field;
+const Input = React.forwardRef(
+  ({ onChange, background, ...property }, ref) => {
+    const { ariaLabel, ...rest } = property;
 
-  const handleChange = ({ target: { name, value, maxLength } }) => {
-    if (isOverMaxLength({ maxLength, valueLength: value.length })) {
-      return;
-    }
+    const handleChange = ({ target: { name, value, maxLength } }) => {
+      if (isOverMaxLength({ maxLength, valueLength: value.length })) {
+        return;
+      }
 
-    onChange({ name, value });
-  };
+      onChange({ name, value });
+    };
 
-  return (
-    <Item
-      aria-label={ariaLabel}
-      {...rest}
-      onChange={handleChange}
-      background={background}
-    />
-  );
-};
+    return (
+      <Item
+        aria-label={ariaLabel}
+        {...rest}
+        ref={ref}
+        onChange={handleChange}
+        background={background}
+      />
+    );
+  }
+);
 
 const Item = styled.input`
   display: block;

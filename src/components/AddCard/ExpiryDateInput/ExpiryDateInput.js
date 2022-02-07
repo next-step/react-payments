@@ -7,6 +7,8 @@ import Input from "../Input";
 
 import * as InputStyle from "../../style/input";
 
+import isFullField from "../utils/isFullField";
+
 const ExpiryDateInput = ({ fields, onChange }) => {
   const { monthField, yearField } = fields;
 
@@ -18,26 +20,27 @@ const ExpiryDateInput = ({ fields, onChange }) => {
     onChange({ key: "expiryDate", name, value });
   };
 
-  const monthInputAttribute = {
-    id: "expiry-date",
-    ariaLabel: EXPIRY_DATE_LABEL.month,
-    ref: monthInput,
-    type: "number",
-    name: "monthField",
-    placeholder: "MM",
-    value: monthField,
-    maxLength: 2,
-  };
-
-  const yearInputAttribute = {
-    ariaLabel: EXPIRY_DATE_LABEL.year,
-    ref: yearInput,
-    type: "number",
-    name: "yearField",
-    placeholder: "YY",
-    value: yearField,
-    maxLength: 2,
-  };
+  const inputProperties = [
+    {
+      id: "expiry-date",
+      ariaLabel: EXPIRY_DATE_LABEL.month,
+      ref: monthInput,
+      type: "number",
+      name: "monthField",
+      placeholder: "MM",
+      value: monthField,
+      maxLength: 2,
+    },
+    {
+      ariaLabel: EXPIRY_DATE_LABEL.year,
+      ref: yearInput,
+      type: "number",
+      name: "yearField",
+      placeholder: "YY",
+      value: yearField,
+      maxLength: 2,
+    },
+  ];
 
   return (
     <InputStyle.Container>
@@ -45,15 +48,28 @@ const ExpiryDateInput = ({ fields, onChange }) => {
         만료일
       </InputStyle.Label>
       <InputStyle.Group>
-        <InputGroup>
-          <Input
-            field={monthInputAttribute}
-            onChange={handleChange}
-          />
-        </InputGroup>
-        <InputGroup>
-          <Input field={yearInputAttribute} onChange={handleChange} />
-        </InputGroup>
+        {inputProperties.map((property, index) => {
+          const { name, maxLength, ref } = property;
+
+          const prevInput = inputProperties[index - 1];
+
+          const isVisible =
+            index !== 0 &&
+            isFullField({
+              field: prevInput.value,
+              maxLength,
+            });
+
+          return (
+            <InputGroup key={name} separator={isVisible && "/"}>
+              <Input
+                {...property}
+                ref={ref}
+                onChange={handleChange}
+              />
+            </InputGroup>
+          );
+        })}
       </InputStyle.Group>
     </InputStyle.Container>
   );

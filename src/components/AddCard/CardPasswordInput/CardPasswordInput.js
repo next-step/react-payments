@@ -21,24 +21,25 @@ const CardPasswordInput = ({ fields, onChange }) => {
     });
   };
 
-  const firstInputAttribute = {
-    id: "first-password",
-    ariaLabel: "비밀번호 첫번째 자리",
-    ref: firstInput,
-    type: "password",
-    name: "firstField",
-    value: firstField,
-    maxLength: 1,
-  };
-
-  const secondInputAttribute = {
-    ariaLabel: "비밀번호 두번째 자리",
-    ref: secondInput,
-    type: "password",
-    name: "secondField",
-    value: secondField,
-    maxLength: 1,
-  };
+  const inputProperties = [
+    {
+      id: "first-password",
+      ariaLabel: "비밀번호 첫번째 자리",
+      ref: firstInput,
+      type: "password",
+      name: "firstField",
+      value: firstField,
+      maxLength: 1,
+    },
+    {
+      ariaLabel: "비밀번호 두번째 자리",
+      ref: secondInput,
+      type: "password",
+      name: "secondField",
+      value: secondField,
+      maxLength: 1,
+    },
+  ];
 
   return (
     <InputStyle.Container>
@@ -46,16 +47,18 @@ const CardPasswordInput = ({ fields, onChange }) => {
         카드 비밀번호
       </InputStyle.Label>
       <InputStyle.Group pin>
-        <Input
-          field={firstInputAttribute}
-          onChange={handleChange}
-          background
-        />
-        <Input
-          field={secondInputAttribute}
-          onChange={handleChange}
-          background
-        />
+        {inputProperties.map((property) => {
+          const { name, ref } = property;
+          return (
+            <Input
+              {...property}
+              key={name}
+              ref={ref}
+              onChange={handleChange}
+              background
+            />
+          );
+        })}
         <FakeInput>●</FakeInput>
         <FakeInput>●</FakeInput>
       </InputStyle.Group>

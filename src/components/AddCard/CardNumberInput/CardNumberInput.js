@@ -10,6 +10,8 @@ import Input from "../Input";
 import * as InputStyle from "../../style/input";
 
 const CardNumberInput = ({ fields, onChange }) => {
+  const MAX_LENGTH = 4;
+
   const { firstField, secondField, thirdField, fourthField } = fields;
 
   const { firstInput, secondInput, thirdInput, fourthInput } =
@@ -21,65 +23,71 @@ const CardNumberInput = ({ fields, onChange }) => {
     onChange({ key: "cardNumbers", name, value });
   };
 
-  const firstInputData = {
-    id: "card-number",
-    ariaLabel: CARD_NUMBER_LABEL.first,
-    ref: firstInput,
-    type: "number",
-    name: "firstField",
-    value: firstField,
-    maxLength: 4,
-  };
-
-  const secondInputData = {
-    ariaLabel: CARD_NUMBER_LABEL.second,
-    ref: secondInput,
-    type: "number",
-    name: "secondField",
-    value: secondField,
-    maxLength: 4,
-  };
-
-  const thirdInputData = {
-    ariaLabel: CARD_NUMBER_LABEL.third,
-    ref: thirdInput,
-    type: "password",
-    name: "thirdField",
-    value: thirdField,
-    maxLength: 4,
-  };
-
-  const fourthInputData = {
-    ariaLabel: CARD_NUMBER_LABEL.fourth,
-    ref: fourthInput,
-    type: "password",
-    name: "fourthField",
-    value: fourthField,
-    maxLength: 4,
-  };
+  const inputProperties = [
+    {
+      id: "card-number",
+      ariaLabel: CARD_NUMBER_LABEL.first,
+      ref: firstInput,
+      type: "number",
+      name: "firstField",
+      value: firstField,
+      maxLength: MAX_LENGTH,
+    },
+    {
+      ariaLabel: CARD_NUMBER_LABEL.second,
+      ref: secondInput,
+      type: "number",
+      name: "secondField",
+      value: secondField,
+      maxLength: MAX_LENGTH,
+    },
+    {
+      ariaLabel: CARD_NUMBER_LABEL.third,
+      ref: thirdInput,
+      type: "password",
+      name: "thirdField",
+      value: thirdField,
+      maxLength: MAX_LENGTH,
+    },
+    {
+      ariaLabel: CARD_NUMBER_LABEL.fourth,
+      ref: fourthInput,
+      type: "password",
+      name: "fourthField",
+      value: fourthField,
+      maxLength: MAX_LENGTH,
+    },
+  ];
 
   return (
     <InputStyle.Container>
-      <InputStyle.Label htmlFor="card-number">카드 번호</InputStyle.Label>
+      <InputStyle.Label htmlFor="card-number">
+        카드 번호
+      </InputStyle.Label>
+
       <InputStyle.Group>
-        <InputGroup>
-          <Input field={firstInputData} onChange={handleChange} />
-        </InputGroup>
-        <InputGroup
-          separator={isFullField({ field: firstField, maxLength: 4 }) && "-"}
-        >
-          <Input field={secondInputData} onChange={handleChange} />
-        </InputGroup>
-        <InputGroup
-          separator={isFullField({ field: secondField, maxLength: 4 }) && "-"}
-        >
-          <Input field={thirdInputData} onChange={handleChange} />
-        </InputGroup>
-        <InputGroup
-          separator={isFullField({ field: thirdField, maxLength: 4 }) && "-"}
-        >
-          <Input field={fourthInputData} onChange={handleChange} />
-        </InputGroup>
+        {inputProperties.map((property, index) => {
+          const { name, maxLength, ref } = property;
+
+          const prevInput = inputProperties[index - 1];
+
+          const isVisible =
+            index !== 0 &&
+            isFullField({
+              field: prevInput.value,
+              maxLength,
+            });
+
+          return (
+            <InputGroup key={name} separator={isVisible && "-"}>
+              <Input
+                {...property}
+                ref={ref}
+                onChange={handleChange}
+              />
+            </InputGroup>
+          );
+        })}
       </InputStyle.Group>
     </InputStyle.Container>
   );

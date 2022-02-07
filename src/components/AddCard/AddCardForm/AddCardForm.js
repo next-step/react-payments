@@ -35,13 +35,11 @@ const AddCardForm = ({
         보안코드(CVC/CVV)
       </InputStyle.Label>
       <Input
-        field={{
-          id: "security-number",
-          type: "password",
-          name: "securityNumber",
-          value: securityNumber,
-          maxLength: 3,
-        }}
+        id="security-number"
+        type="password"
+        name="securityNumber"
+        value={securityNumber}
+        maxLength={3}
         onChange={onChangeSingleInput}
         background
       />

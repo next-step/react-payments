@@ -1,3 +1,0 @@
-const CARD_OWNER_MAX_LENGTH = 30;
-
-export default CARD_OWNER_MAX_LENGTH;
