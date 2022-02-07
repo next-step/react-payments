@@ -2,13 +2,13 @@ import { useNavigate } from "react-router-dom";
 
 import { CARDS } from "../../../fixtures/cards";
 
-import { Main, Title } from "../style/layout";
+import { Main, Title } from "../../components/style/layout";
 
-import AddCardButton from "../AddCardButton";
+import AddCardButton from "../../components/AddCardButton";
 
-import CardList from "../CardList";
+import CardList from "../../components/CardList";
 
-const CardListContainer = () => {
+const CardListPage = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -26,4 +26,4 @@ const CardListContainer = () => {
   );
 };
 
-export default CardListContainer;
+export default CardListPage;

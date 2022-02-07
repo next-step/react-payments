@@ -6,14 +6,14 @@ import styled from "@emotion/styled";
 import commonStyle from "./commonStyle";
 
 import AddCardContainer from "./components/AddCard/AddCardContainer";
-import CardListContainer from "./components/CardListContainer";
+import CardListPage from "./page/CardListPage";
 
 const App = () => {
   return (
     <Container>
       <Global styles={commonStyle} />
       <Routes>
-        <Route path="/" element={<CardListContainer />} />
+        <Route path="/" element={<CardListPage />} />
         <Route path="/add/card" element={<AddCardContainer />} />
       </Routes>
     </Container>

@@ -1,6 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 
-import CardListContainer from "./CardListContainer";
+import CardListPage from "./CardListPage";
 
 const mockNavigate = jest.fn();
 
@@ -11,17 +11,17 @@ jest.mock("react-router-dom", () => ({
   },
 }));
 
-describe("CardListContainer", () => {
-  const makeCardListContainer = () => render(<CardListContainer />);
+describe("CardListPage", () => {
+  const makeCardListPage = () => render(<CardListPage />);
 
   it("페이지 타이틀을 표시합니다", () => {
-    const { queryByText } = makeCardListContainer();
+    const { queryByText } = makeCardListPage();
 
     expect(queryByText("보유카드")).toBeInTheDocument();
   });
 
   it("카드 추가 버튼을 렌더링합니다", () => {
-    const { queryByRole } = makeCardListContainer();
+    const { queryByRole } = makeCardListPage();
 
     expect(
       queryByRole("button", {
@@ -31,7 +31,7 @@ describe("CardListContainer", () => {
   });
 
   it("카드 추가 버튼을 클릭하면 카드 추가 페이지로 이동합니다", () => {
-    const { getByRole } = makeCardListContainer();
+    const { getByRole } = makeCardListPage();
 
     fireEvent.click(
       getByRole("button", {
