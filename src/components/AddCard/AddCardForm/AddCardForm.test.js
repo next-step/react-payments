@@ -23,6 +23,9 @@ describe("AddCardForm", () => {
       firstField: "",
       secondField: "",
     },
+    error: {
+      expiryDate: false,
+    },
   };
 
   const makeAddCardForm = (fields = initialFields) =>

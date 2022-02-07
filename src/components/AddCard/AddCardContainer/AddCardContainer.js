@@ -20,6 +20,7 @@ const AddCardContainer = () => {
     fields,
     handleChangeSingleInput,
     handleChangeMultipleInput,
+    handleErrorChange,
   } = useAddCardFormFields();
 
   const {
@@ -45,6 +46,7 @@ const AddCardContainer = () => {
           fields={fields}
           onChangeSingleInput={handleChangeSingleInput}
           onChangeMultipleInput={handleChangeMultipleInput}
+          onErrorChange={handleErrorChange}
         />
       </main>
     </>

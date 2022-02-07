@@ -18,6 +18,9 @@ const useAddCardFormFields = () => {
       firstField: "",
       secondField: "",
     },
+    error: {
+      expiryDate: false,
+    },
   });
 
   const handleChangeSingleInput = ({ name, value }) => {
@@ -37,10 +40,21 @@ const useAddCardFormFields = () => {
     }));
   };
 
+  const handleErrorChange = ({ key, error }) => {
+    setFields((prev) => ({
+      ...prev,
+      error: {
+        ...error,
+        [key]: error,
+      },
+    }));
+  };
+
   return {
     fields,
     handleChangeSingleInput,
     handleChangeMultipleInput,
+    handleErrorChange,
   };
 };
 

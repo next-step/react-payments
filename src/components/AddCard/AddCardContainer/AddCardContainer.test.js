@@ -4,6 +4,8 @@ import AddCardContainer from ".";
 
 import { CARD_NUMBER_LABEL, EXPIRY_DATE_LABEL } from "../constants";
 
+import VALIDATIONS from "../validations";
+
 const mockNavigate = jest.fn();
 
 jest.mock("react-router-dom", () => ({
@@ -140,5 +142,47 @@ describe("AddCardContainer", () => {
     });
 
     expect(getByText("HEAEUN")).toBeInTheDocument();
+  });
+
+  context("만료일 Input의 월이 1이상 12이하인 경우", () => {
+    it("error message를 화면에 표시하지 않습니다", () => {
+      const { getByLabelText, queryByText } = makeAddCardContainer();
+
+      fireEvent.change(getByLabelText(EXPIRY_DATE_LABEL.month), {
+        target: {
+          value: "1",
+        },
+      });
+
+      expect(
+        queryByText(VALIDATIONS.expiryDateMonth)
+      ).not.toBeInTheDocument();
+    });
+  });
+
+  context("만료일 Input의 월이 1이상 12이하가 아닌 경우", () => {
+    it("error message를 화면에 표시합니다", () => {
+      const { getByLabelText, getByText } = makeAddCardContainer();
+
+      fireEvent.change(getByLabelText(EXPIRY_DATE_LABEL.month), {
+        target: {
+          value: "13",
+        },
+      });
+
+      expect(
+        getByText(VALIDATIONS.expiryDateMonth)
+      ).toBeInTheDocument();
+
+      fireEvent.change(getByLabelText(EXPIRY_DATE_LABEL.month), {
+        target: {
+          value: "0",
+        },
+      });
+
+      expect(
+        getByText(VALIDATIONS.expiryDateMonth)
+      ).toBeInTheDocument();
+    });
   });
 });

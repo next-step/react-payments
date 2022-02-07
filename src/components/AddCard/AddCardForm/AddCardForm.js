@@ -11,9 +11,11 @@ const AddCardForm = ({
     cardOwner,
     securityNumber,
     cardPassword,
+    error,
   },
   onChangeMultipleInput,
   onChangeSingleInput,
+  onErrorChange,
 }) => (
   <form>
     <CardNumberInput
@@ -22,7 +24,9 @@ const AddCardForm = ({
     />
     <ExpiryDateInput
       fields={expiryDate}
+      error={error.expiryDate}
       onChange={onChangeMultipleInput}
+      onErrorChange={onErrorChange}
     />
     <CardOwnerInput
       value={cardOwner}

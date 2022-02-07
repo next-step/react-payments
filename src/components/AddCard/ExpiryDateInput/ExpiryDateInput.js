@@ -9,8 +9,14 @@ import * as InputStyle from "../../style/input";
 
 import isFullField from "../utils/isFullField";
 import isNotNumber from "../utils/isNotNumber";
+import VALIDATIONS from "../validations";
 
-const ExpiryDateInput = ({ fields, onChange }) => {
+const ExpiryDateInput = ({
+  fields,
+  error,
+  onChange,
+  onErrorChange,
+}) => {
   const { monthField, yearField } = fields;
 
   const { monthInput, yearInput } = useExpiryDateFieldsRef({
@@ -20,6 +26,16 @@ const ExpiryDateInput = ({ fields, onChange }) => {
   const handleChange = ({ name, value }) => {
     if (isNotNumber(value)) {
       return;
+    }
+
+    if (name === "monthField") {
+      const isError =
+        value !== "" && (Number(value) > 12 || Number(value) < 1);
+
+      onErrorChange({
+        key: "expiryDate",
+        error: isError,
+      });
     }
 
     onChange({ key: "expiryDate", name, value });
@@ -76,6 +92,7 @@ const ExpiryDateInput = ({ fields, onChange }) => {
           );
         })}
       </InputStyle.Group>
+      {error && <p>{VALIDATIONS.expiryDateMonth}</p>}
     </InputStyle.Container>
   );
 };
