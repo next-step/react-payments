@@ -12,7 +12,9 @@ describe("ExpiryDateInput", () => {
   };
 
   const makeExpiryDateInput = (fields = initialFields) =>
-    render(<ExpiryDateInput fields={fields} onChange={handleChange} />);
+    render(
+      <ExpiryDateInput fields={fields} onChange={handleChange} />
+    );
 
   it("만료일을 렌더링합니다", () => {
     const { queryByLabelText } = makeExpiryDateInput();
@@ -22,33 +24,64 @@ describe("ExpiryDateInput", () => {
     expect(queryByLabelText("연도 2자리")).toBeInTheDocument();
   });
 
-  it("만료일값을 변경하면 onChange 이벤트 핸들러를 실행합니다", () => {
-    const { getByLabelText } = makeExpiryDateInput();
+  context("input 값으로 숫자를 입력했을 경우", () => {
+    it("onChange 이벤트 핸들러를 실행합니다", () => {
+      const { getByLabelText } = makeExpiryDateInput();
 
-    const labels = [
-      {
-        label: EXPIRY_DATE_LABEL.month,
-        name: "monthField",
-        value: "11",
-      },
-      {
-        label: EXPIRY_DATE_LABEL.year,
-        name: "yearField",
-        value: "25",
-      },
-    ];
-
-    labels.forEach(({ label, name, value }) => {
-      fireEvent.change(getByLabelText(label), {
-        target: {
-          value,
+      const labels = [
+        {
+          label: EXPIRY_DATE_LABEL.month,
+          name: "monthField",
+          value: "11",
         },
-      });
+        {
+          label: EXPIRY_DATE_LABEL.year,
+          name: "yearField",
+          value: "25",
+        },
+      ];
 
-      expect(handleChange).toBeCalledWith({
-        key: "expiryDate",
-        name,
-        value,
+      labels.forEach(({ label, name, value }) => {
+        fireEvent.change(getByLabelText(label), {
+          target: {
+            value,
+          },
+        });
+
+        expect(handleChange).toBeCalledWith({
+          key: "expiryDate",
+          name,
+          value,
+        });
+      });
+    });
+  });
+
+  context("input 값으로 숫자를 입력하지 않았을 경우", () => {
+    it("onChange 이벤트 핸들러를 실행하지 않습니다", () => {
+      const { getByLabelText } = makeExpiryDateInput();
+
+      const labels = [
+        {
+          label: EXPIRY_DATE_LABEL.month,
+          name: "monthField",
+          value: "STRING",
+        },
+        {
+          label: EXPIRY_DATE_LABEL.year,
+          name: "yearField",
+          value: "STRING",
+        },
+      ];
+
+      labels.forEach(({ label, value }) => {
+        fireEvent.change(getByLabelText(label), {
+          target: {
+            value,
+          },
+        });
+
+        expect(handleChange).not.toBeCalled();
       });
     });
   });

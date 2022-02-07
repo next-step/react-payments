@@ -8,6 +8,7 @@ import Input from "../Input";
 import * as InputStyle from "../../style/input";
 
 import isFullField from "../utils/isFullField";
+import isNotNumber from "../utils/isNotNumber";
 
 const ExpiryDateInput = ({ fields, onChange }) => {
   const { monthField, yearField } = fields;
@@ -17,6 +18,10 @@ const ExpiryDateInput = ({ fields, onChange }) => {
   });
 
   const handleChange = ({ name, value }) => {
+    if (isNotNumber(value)) {
+      return;
+    }
+
     onChange({ key: "expiryDate", name, value });
   };
 
