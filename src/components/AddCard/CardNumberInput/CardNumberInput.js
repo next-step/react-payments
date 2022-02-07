@@ -3,6 +3,7 @@ import useCardNumberFieldsRef from "./hooks/useCardNumberFieldsRef";
 import { CARD_NUMBER_LABEL } from "../constants";
 
 import isFullField from "../utils/isFullField";
+import isNotNumber from "../utils/isNotNumber";
 
 import InputGroup from "../InputGroup";
 import Input from "../Input";
@@ -20,9 +21,7 @@ const CardNumberInput = ({ fields, onChange }) => {
     });
 
   const handleChange = ({ name, value }) => {
-    const isNotNumber = value.match(/[^0-9-\s]/g);
-
-    if (isNotNumber) {
+    if (isNotNumber(value)) {
       return;
     }
 
