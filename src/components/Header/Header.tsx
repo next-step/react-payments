@@ -1,6 +1,6 @@
 import React from "react";
 
-interface Props {
+export interface Props {
   title: string;
   className?: string;
 }

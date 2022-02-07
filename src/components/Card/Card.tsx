@@ -1,7 +1,7 @@
 import React from "react";
 import { CardCompany, CardExpiration, CardName, CardNumbers } from "types/common";
 
-interface Props {
+export interface Props {
   size?: "default" | "small" | "large";
   name?: CardName;
   expiration?: CardExpiration;
