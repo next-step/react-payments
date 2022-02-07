@@ -7,10 +7,11 @@ import { MdOutlineArrowBackIosNew } from "react-icons/md";
 import useAddCardFormFields from "./hooks/useAddCardFormFields";
 
 import AddCardForm from "../../components/AddCard/AddCardForm";
+import Card from "../../components/Card";
+import Button from "../../components/Button";
 
 import { Title } from "../../components/style/layout";
-
-import Card from "../../components/Card";
+import ButtonGroup from "../../components/style/button";
 
 const AddCardPage = () => {
   const navigate = useNavigate();
@@ -72,17 +73,6 @@ const FormCard = styled(Card)`
 
 const PrevButton = styled.button`
   padding: 10px 10px 10px 0;
-`;
-
-const Button = styled.button`
-  padding: 10px;
-  color: #04c09e;
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
 `;
 
 export default AddCardPage;
