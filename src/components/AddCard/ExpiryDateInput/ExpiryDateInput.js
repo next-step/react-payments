@@ -10,6 +10,7 @@ import * as InputStyle from "../../style/input";
 import isFullField from "../utils/isFullField";
 import isNotNumber from "../utils/isNotNumber";
 import VALIDATIONS from "../validations";
+import styled from "@emotion/styled";
 
 const ExpiryDateInput = ({
   fields,
@@ -92,9 +93,16 @@ const ExpiryDateInput = ({
           );
         })}
       </InputStyle.Group>
-      {error && <p>{VALIDATIONS.expiryDateMonth}</p>}
+      {error && (
+        <ErrorMessage>{VALIDATIONS.expiryDateMonth}</ErrorMessage>
+      )}
     </InputStyle.Container>
   );
 };
+
+const ErrorMessage = styled.p`
+  margin-top: 5px;
+  color: red;
+`;
 
 export default ExpiryDateInput;
