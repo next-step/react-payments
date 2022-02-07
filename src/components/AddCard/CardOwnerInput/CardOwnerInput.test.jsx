@@ -2,9 +2,8 @@ import { fireEvent, render } from "@testing-library/react";
 
 import CardOwnerInput from "./CardOwnerInput";
 
-import CARD_OWNER_MAX_LENGTH from "./constants";
-
 describe("CardOwnerInput", () => {
+  const MAX_LENGTH = 30;
   const CARD_OWNER = "HEAEUN";
 
   const handleChange = jest.fn();
@@ -24,7 +23,7 @@ describe("CardOwnerInput", () => {
     const { queryByText } = makeCardOwnerInput(CARD_OWNER);
 
     expect(
-      queryByText(`${CARD_OWNER.length}/${CARD_OWNER_MAX_LENGTH}`)
+      queryByText(`${CARD_OWNER.length}/${MAX_LENGTH}`)
     ).toBeInTheDocument();
   });
 
