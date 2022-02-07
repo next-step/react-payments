@@ -7,6 +7,7 @@ import Layout from "components/Layout/Layout";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { CardExpiration, CardName, CardNumbers, CardPassword, CardSecurityCode } from "types/common";
+import { isNumber } from "utils/validator";
 
 const matchKey = (i: number): keyof CardNumbers => {
   return i === 0 ? "first" : i === 1 ? "second" : i === 2 ? "third" : "fourth";
@@ -39,7 +40,11 @@ const CardAddPage = (): JSX.Element => {
   };
 
   const handleCardExpiration = (e: React.ChangeEvent<HTMLInputElement>, key: string): void => {
-    setCardExpiration({ ...cardExpiration, [key]: e.target.value });
+    const { value } = e.target;
+
+    if (key === "month" && Number(value) > 12) return;
+
+    setCardExpiration({ ...cardExpiration, [key]: value });
   };
 
   const handleCardName = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -47,7 +52,11 @@ const CardAddPage = (): JSX.Element => {
   };
 
   const handleSecurityCode = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setSecurityCode(e.target.value);
+    const { value } = e.target;
+
+    if (!isNumber(value)) return;
+
+    setSecurityCode(value);
   };
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>, key: string): void => {
