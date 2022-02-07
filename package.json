@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack serve",
     "build": "webpack",
-    "test": "jest --watchAll --coverage",
+    "test": "jest --watchAll --coverage --verbose",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
