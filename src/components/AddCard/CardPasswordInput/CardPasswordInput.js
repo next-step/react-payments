@@ -4,6 +4,8 @@ import usePasswordDateFieldsRef from "./hooks/usePasswordDateFieldsRef";
 
 import Input from "../Input";
 
+import isNotNumber from "../utils/isNotNumber";
+
 import * as InputStyle from "../../style/input";
 
 const CardPasswordInput = ({ fields, onChange }) => {
@@ -14,6 +16,10 @@ const CardPasswordInput = ({ fields, onChange }) => {
   });
 
   const handleChange = ({ name, value }) => {
+    if (isNotNumber(value)) {
+      return;
+    }
+
     onChange({
       key: "cardPassword",
       name,

@@ -27,33 +27,64 @@ describe("CardPasswordInput", () => {
     ).toBeInTheDocument();
   });
 
-  it("만료일값을 변경하면 onChange 이벤트 핸들러를 실행합니다", () => {
-    const { getByLabelText } = makeCardPasswordInput();
+  context("Input 값으로 숫자를 입력했을 경우", () => {
+    it("onChange 이벤트 핸들러를 실행합니다", () => {
+      const { getByLabelText } = makeCardPasswordInput();
 
-    const labels = [
-      {
-        label: "비밀번호 첫번째 자리",
-        name: "firstField",
-        value: "1",
-      },
-      {
-        label: "비밀번호 두번째 자리",
-        name: "secondField",
-        value: "2",
-      },
-    ];
-
-    labels.forEach(({ label, name, value }) => {
-      fireEvent.change(getByLabelText(label), {
-        target: {
-          value,
+      const labels = [
+        {
+          label: "비밀번호 첫번째 자리",
+          name: "firstField",
+          value: "1",
         },
-      });
+        {
+          label: "비밀번호 두번째 자리",
+          name: "secondField",
+          value: "2",
+        },
+      ];
 
-      expect(handleChange).toBeCalledWith({
-        key: "cardPassword",
-        name,
-        value,
+      labels.forEach(({ label, name, value }) => {
+        fireEvent.change(getByLabelText(label), {
+          target: {
+            value,
+          },
+        });
+
+        expect(handleChange).toBeCalledWith({
+          key: "cardPassword",
+          name,
+          value,
+        });
+      });
+    });
+  });
+
+  context("Input 값으로 숫자를 입력하지 않았을 경우", () => {
+    it("onChange 이벤트 핸들러를 실행합니다", () => {
+      const { getByLabelText } = makeCardPasswordInput();
+
+      const labels = [
+        {
+          label: "비밀번호 첫번째 자리",
+          name: "firstField",
+          value: "a",
+        },
+        {
+          label: "비밀번호 두번째 자리",
+          name: "secondField",
+          value: "a",
+        },
+      ];
+
+      labels.forEach(({ label, value }) => {
+        fireEvent.change(getByLabelText(label), {
+          target: {
+            value,
+          },
+        });
+
+        expect(handleChange).not.toBeCalled();
       });
     });
   });
