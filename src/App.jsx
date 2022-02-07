@@ -7,6 +7,7 @@ import commonStyle from "./commonStyle";
 
 import AddCardPage from "./page/AddCardPage";
 import CardListPage from "./page/CardListPage";
+import AddCardCompletePage from "./page/AddCardCompletePage";
 
 const App = () => {
   return (
@@ -15,6 +16,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<CardListPage />} />
         <Route path="/add/card" element={<AddCardPage />} />
+        <Route
+          path="/add/card/complete"
+          element={<AddCardCompletePage />}
+        />
       </Routes>
     </Container>
   );

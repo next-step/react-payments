@@ -188,4 +188,26 @@ describe("AddCardPage", () => {
       ).toBeInTheDocument();
     });
   });
+
+  it("다음 버튼을 렌더링합니다", () => {
+    const { queryByRole } = makeAddCardPage();
+
+    expect(
+      queryByRole("button", {
+        name: "다음",
+      })
+    ).toBeInTheDocument();
+  });
+
+  it("다음 버튼을 클릭하면 카드 등록 완료 페이지로 이동합니다", () => {
+    const { queryByRole } = makeAddCardPage();
+
+    fireEvent.click(
+      queryByRole("button", {
+        name: "다음",
+      })
+    );
+
+    expect(mockNavigate).toBeCalledWith("/add/card/complete");
+  });
 });

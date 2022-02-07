@@ -19,6 +19,10 @@ const AddCardPage = () => {
     navigate("/");
   };
 
+  const handleNextClick = () => {
+    navigate("/add/card/complete");
+  };
+
   const {
     fields,
     handleChangeSingleInput,
@@ -54,6 +58,9 @@ const AddCardPage = () => {
           onChangeMultipleInput={handleChangeMultipleInput}
           onErrorChange={handleErrorChange}
         />
+        <ButtonGroup>
+          <Button onClick={handleNextClick}>다음</Button>
+        </ButtonGroup>
       </main>
     </>
   );
@@ -65,6 +72,17 @@ const FormCard = styled(Card)`
 
 const PrevButton = styled.button`
   padding: 10px 10px 10px 0;
+`;
+
+const Button = styled.button`
+  padding: 10px;
+  color: #04c09e;
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
 `;
 
 export default AddCardPage;
