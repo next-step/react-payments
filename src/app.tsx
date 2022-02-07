@@ -1,5 +1,6 @@
 import CardAddPage from "pages/CardAddPage/CardAddPage";
 import CardListPage from "pages/CardListPage/CardListPage";
+import CardRegisterPage from "pages/CardRegisterPage/CardRegisterPage";
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<CardListPage />} />
           <Route path="/add" element={<CardAddPage />} />
+          <Route path="/add/complete" element={<CardRegisterPage />} />
         </Routes>
       </BrowserRouter>
     </div>

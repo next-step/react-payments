@@ -13,7 +13,7 @@ const matchKey = (i: number): keyof CardNumbers => {
 };
 
 const CardAddPage = (): JSX.Element => {
-  const naviate = useNavigate();
+  const navigate = useNavigate();
 
   const [cardNumbers, setCardNumbers] = useState<CardNumbers>({
     first: "",
@@ -55,13 +55,15 @@ const CardAddPage = (): JSX.Element => {
   };
 
   const handleSubmit = (): void => {
-    naviate("/");
+    navigate("/add/complete", {
+      state: { card: { numbers: cardNumbers, expiration: cardExpiration, name: cardName } },
+    });
   };
 
   return (
     <Layout>
       <div className="flex items-center">
-        <BackButton onClick={() => naviate("/")} />
+        <BackButton onClick={() => navigate("/")} />
         <Header title="카드 추가" className="ml-1" />
       </div>
 
