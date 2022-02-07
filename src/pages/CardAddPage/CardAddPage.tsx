@@ -6,13 +6,7 @@ import InputContainer from "components/InputContainer/InputContainer";
 import Layout from "components/Layout/Layout";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
-import {
-  CardExpiration,
-  CardName,
-  CardNumbers,
-  CardPassword,
-  CardSecurityCode,
-} from "types/common";
+import { CardExpiration, CardName, CardNumbers, CardPassword, CardSecurityCode } from "types/common";
 
 const matchKey = (i: number): keyof CardNumbers => {
   return i === 0 ? "first" : i === 1 ? "second" : i === 2 ? "third" : "fourth";
@@ -40,17 +34,11 @@ const CardAddPage = (): JSX.Element => {
     fourth: "",
   });
 
-  const handleCardNumbers = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    key: keyof CardNumbers
-  ): void => {
+  const handleCardNumbers = (e: React.ChangeEvent<HTMLInputElement>, key: keyof CardNumbers): void => {
     setCardNumbers({ ...cardNumbers, [key]: e.target.value });
   };
 
-  const handleCardExpiration = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    key: string
-  ): void => {
+  const handleCardExpiration = (e: React.ChangeEvent<HTMLInputElement>, key: string): void => {
     setCardExpiration({ ...cardExpiration, [key]: e.target.value });
   };
 
@@ -62,15 +50,11 @@ const CardAddPage = (): JSX.Element => {
     setSecurityCode(e.target.value);
   };
 
-  const handlePassword = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    key: string
-  ): void => {
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>, key: string): void => {
     setPassword({ ...password, [key]: e.target.value });
   };
 
   const handleSubmit = (): void => {
-    console.log(cardNumbers, cardExpiration, cardName, securityCode, password);
     naviate("/");
   };
 
@@ -82,11 +66,7 @@ const CardAddPage = (): JSX.Element => {
       </div>
 
       <div className="my-7 flex justify-center">
-        <Card
-          cardNumbers={cardNumbers}
-          expiration={cardExpiration}
-          name={cardName}
-        />
+        <Card cardNumbers={cardNumbers} expiration={cardExpiration} name={cardName} />
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -130,6 +110,7 @@ const CardAddPage = (): JSX.Element => {
         <InputContainer title="카드 소유자 이름(선택)">
           <Input
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+            maxLength={15}
             value={cardName}
             onChange={handleCardName}
             className="pl-4"
