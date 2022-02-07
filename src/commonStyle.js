@@ -27,6 +27,7 @@ const commonStyle = css`
   button {
     border: none;
     outline: none;
+    background: none;
     cursor: pointer;
   }
 `;
