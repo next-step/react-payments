@@ -2,30 +2,27 @@ import BackButton from "components/BackButton/BackButton";
 import Card from "components/Card/Card";
 import Header from "components/Header/Header";
 import Layout from "components/Layout/Layout";
+import { LOCAL_STORAGE_KEY } from "constants/key";
 import React from "react";
 import { useNavigate } from "react-router";
+import { LocalCard } from "types/common";
+import { getLocalStorageItem } from "utils/localStorage";
 
 const CardListPage = (): JSX.Element => {
-  // const cards = JSON.parse(localStorage.getItem(KEY.CARDS)) ?? [];
-
   const naviatge = useNavigate();
+
+  const cards = getLocalStorageItem({ key: LOCAL_STORAGE_KEY.CARDS, defaultValue: [] }) as LocalCard[];
 
   return (
     <Layout>
       <Header title="카드 목록" />
       <ul className="flex flex-col items-center">
-        {/* {cards.map((card, index) => (
-          <li key={index} className="mt-5">
-            <Card
-              size="small"
-              cardNumbers={card.cardNumbers}
-              cardCompany={card.cardCompany}
-              expiration={card.expiration.month + '/' + card.expiration.year}
-            />
-            <h2 className="mt-2 text-center">{card.cardName}</h2>
+        {cards.map(({ numbers, expiration, name, nickname }, i) => (
+          <li key={i} className="mt-5">
+            <Card size="small" name={name} cardNumbers={numbers} expiration={expiration} />
+            <h2 className="mt-2 text-center">{nickname}</h2>
           </li>
-        ))} */}
-
+        ))}
         <li className="mt-5">
           <div className="flex h-130 w-208 items-center justify-center rounded-xl bg-gray-350">
             <button className="text-4xl" onClick={() => naviatge("/add")}>

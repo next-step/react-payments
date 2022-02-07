@@ -1,7 +1,7 @@
 import Layout from "components/Layout/Layout";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { CardExpiration, CardName, CardNumbers } from "types/common";
+import { CardExpiration, CardName, CardNumbers, LocalCard } from "types/common";
 import { Location } from "history";
 import Card from "components/Card/Card";
 import { getLocalStorageItem, setLocalStorageItem } from "utils/localStorage";
@@ -11,10 +11,6 @@ interface Card {
   numbers: CardNumbers;
   expiration: CardExpiration;
   name: CardName;
-}
-
-interface LocalCard extends Card {
-  nickname: string;
 }
 
 const CardRegisterPage = (): JSX.Element => {

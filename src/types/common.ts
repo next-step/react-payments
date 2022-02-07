@@ -25,3 +25,10 @@ export interface CardPassword {
   third: string;
   fourth: string;
 }
+
+export interface LocalCard {
+  numbers: CardNumbers;
+  expiration: CardExpiration;
+  name: CardName;
+  nickname: string;
+}
