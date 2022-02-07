@@ -5,7 +5,7 @@ import styled from "@emotion/styled";
 
 import commonStyle from "./commonStyle";
 
-import AddCardContainer from "./components/AddCard/AddCardContainer";
+import AddCardPage from "./page/AddCardPage";
 import CardListPage from "./page/CardListPage";
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
       <Global styles={commonStyle} />
       <Routes>
         <Route path="/" element={<CardListPage />} />
-        <Route path="/add/card" element={<AddCardContainer />} />
+        <Route path="/add/card" element={<AddCardPage />} />
       </Routes>
     </Container>
   );

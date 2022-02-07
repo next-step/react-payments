@@ -1,17 +1,18 @@
 import { useNavigate } from "react-router-dom";
+
 import styled from "@emotion/styled";
 
 import { MdOutlineArrowBackIosNew } from "react-icons/md";
 
 import useAddCardFormFields from "./hooks/useAddCardFormFields";
 
-import AddCardForm from "../AddCardForm";
+import AddCardForm from "../../components/AddCard/AddCardForm";
 
-import { Title } from "../../style/layout";
+import { Title } from "../../components/style/layout";
 
-import Card from "../../Card";
+import Card from "../../components/Card";
 
-const AddCardContainer = () => {
+const AddCardPage = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -66,4 +67,4 @@ const PrevButton = styled.button`
   padding: 10px 10px 10px 0;
 `;
 
-export default AddCardContainer;
+export default AddCardPage;

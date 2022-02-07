@@ -1,10 +1,13 @@
 import { fireEvent, render } from "@testing-library/react";
 
-import AddCardContainer from ".";
+import AddCardPage from ".";
 
-import { CARD_NUMBER_LABEL, EXPIRY_DATE_LABEL } from "../constants";
+import VALIDATIONS from "../../components/AddCard/validations";
 
-import VALIDATIONS from "../validations";
+import {
+  CARD_NUMBER_LABEL,
+  EXPIRY_DATE_LABEL,
+} from "../../components/AddCard/constants";
 
 const mockNavigate = jest.fn();
 
@@ -15,17 +18,17 @@ jest.mock("react-router-dom", () => ({
   },
 }));
 
-describe("AddCardContainer", () => {
-  const makeAddCardContainer = () => render(<AddCardContainer />);
+describe("AddCardPage", () => {
+  const makeAddCardPage = () => render(<AddCardPage />);
 
   it("페이지 타이틀을 렌더링합니다", () => {
-    const { queryByRole } = makeAddCardContainer();
+    const { queryByRole } = makeAddCardPage();
 
     expect(queryByRole("heading")).toHaveTextContent("카드 추가");
   });
 
   it("뒤로가기 버튼을 렌더링합니다", () => {
-    const { queryByRole } = makeAddCardContainer();
+    const { queryByRole } = makeAddCardPage();
 
     expect(
       queryByRole("button", {
@@ -35,7 +38,7 @@ describe("AddCardContainer", () => {
   });
 
   it("뒤로가기 버튼 클릭 시, 카드 목록 페이지로 이동한다.", () => {
-    const { queryByRole } = makeAddCardContainer();
+    const { queryByRole } = makeAddCardPage();
 
     fireEvent.click(
       queryByRole("button", {
@@ -47,7 +50,7 @@ describe("AddCardContainer", () => {
   });
 
   it("입력된 Input 값이 4자리면 다음 Input으로 focus가 이동됩니다", () => {
-    const { getByLabelText } = makeAddCardContainer();
+    const { getByLabelText } = makeAddCardPage();
 
     const firstInput = getByLabelText(CARD_NUMBER_LABEL.first);
     const secondInput = getByLabelText(CARD_NUMBER_LABEL.second);
@@ -80,7 +83,7 @@ describe("AddCardContainer", () => {
   });
 
   it("입력된 Input 값이 4자리일때 다음 Input이 없다면 focus가 이동되지 않습니다", () => {
-    const { getByLabelText } = makeAddCardContainer();
+    const { getByLabelText } = makeAddCardPage();
 
     const fourthInput = getByLabelText(CARD_NUMBER_LABEL.fourth);
 
@@ -96,7 +99,7 @@ describe("AddCardContainer", () => {
   });
 
   it("카드번호 Input에 값을 입력하면 해당 값이 카드 UI에 표시됩니다", () => {
-    const { getByLabelText, getByText } = makeAddCardContainer();
+    const { getByLabelText, getByText } = makeAddCardPage();
 
     const fourthInput = getByLabelText(CARD_NUMBER_LABEL.first);
 
@@ -110,7 +113,7 @@ describe("AddCardContainer", () => {
   });
 
   it("유효기간 Input에 값을 입력하면 해당 값이 카드 UI에 표시됩니다", () => {
-    const { getByLabelText, getByText } = makeAddCardContainer();
+    const { getByLabelText, getByText } = makeAddCardPage();
 
     const monthInput = getByLabelText(EXPIRY_DATE_LABEL.month);
     const yearInput = getByLabelText(EXPIRY_DATE_LABEL.year);
@@ -131,7 +134,7 @@ describe("AddCardContainer", () => {
   });
 
   it("카드 소유자이름 Input에 값을 입력하면 해당 값이 카드 UI에 표시됩니다", () => {
-    const { getByLabelText, getByText } = makeAddCardContainer();
+    const { getByLabelText, getByText } = makeAddCardPage();
 
     const ownerInput = getByLabelText("카드 소유자이름(선택)");
 
@@ -146,7 +149,7 @@ describe("AddCardContainer", () => {
 
   context("만료일 Input의 월이 1이상 12이하인 경우", () => {
     it("error message를 화면에 표시하지 않습니다", () => {
-      const { getByLabelText, queryByText } = makeAddCardContainer();
+      const { getByLabelText, queryByText } = makeAddCardPage();
 
       fireEvent.change(getByLabelText(EXPIRY_DATE_LABEL.month), {
         target: {
@@ -162,7 +165,7 @@ describe("AddCardContainer", () => {
 
   context("만료일 Input의 월이 1이상 12이하가 아닌 경우", () => {
     it("error message를 화면에 표시합니다", () => {
-      const { getByLabelText, getByText } = makeAddCardContainer();
+      const { getByLabelText, getByText } = makeAddCardPage();
 
       fireEvent.change(getByLabelText(EXPIRY_DATE_LABEL.month), {
         target: {
