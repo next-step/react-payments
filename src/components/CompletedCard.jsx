@@ -54,18 +54,18 @@ const Card = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  ${(props) =>
-    props.size === "small" &&
-    `
-      width: 208px;
-      height: 130px;
-  `}
-  ${(props) =>
-    props.size === "big" &&
-    `
-      width: 290px;
-      height: 180px;
-  `}
+  ${(props) => {
+    if (props.size === "small")
+      return `
+        width: 208px;
+        height: 130px;
+      `;
+    if (props.size === "big")
+      return `
+        width: 290px;
+        height: 180px;
+      `;
+  }}
   background: #94dacd;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -80,18 +80,18 @@ const CardTop = styled.div`
 
 const CardText = styled.span`
   margin: 0 16px;
-  ${(props) =>
-    props.size === "small" &&
-    `
-      font-size: 14px;
-      line-height: 16px;
-  `}
-  ${(props) =>
-    props.size === "big" &&
-    `
-      font-size: 18px;
-      line-height: 20px;
-  `}
+  ${(props) => {
+    if (props.size === "small")
+      return `
+        font-size: 14px;
+        line-height: 16px;
+      `;
+    if (props.size === "big")
+      return `
+        font-size: 18px;
+        line-height: 20px;
+      `;
+  }}
   vertical-align: middle;
   font-weight: 400;
 `;
@@ -107,21 +107,19 @@ const CardMiddle = styled.div`
 const CardChip = styled.div`
   background: #cbba64;
   border-radius: 4px;
-  ${(props) =>
-    props.size === "small" &&
-    `
-    width: 40px;
-    height: 26px;
-    left: 95px;
-    top: 122px;
-  `}
-  ${(props) =>
-    props.size === "big" &&
-    `
-    width: 55.04px;
-    height: 35.77px;
-    font-size: 24px;
-  `}
+  ${(props) => {
+    if (props.size === "small")
+      return `
+        width: 40px;
+        height: 26px;
+      `;
+    if (props.size === "big")
+      return `
+        width: 55.04px;
+        height: 35.77px;
+        font-size: 24px;
+      `;
+  }}
 `;
 
 const CardBottom = styled.div`
