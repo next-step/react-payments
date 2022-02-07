@@ -20,7 +20,17 @@ const CardNumberInput = ({ fields, onChange }) => {
     });
 
   const handleChange = ({ name, value }) => {
-    onChange({ key: "cardNumbers", name, value });
+    const isNotNumber = value.match(/[^0-9-\s]/g);
+
+    if (isNotNumber) {
+      return;
+    }
+
+    onChange({
+      key: "cardNumbers",
+      name,
+      value,
+    });
   };
 
   const inputProperties = [
@@ -28,7 +38,6 @@ const CardNumberInput = ({ fields, onChange }) => {
       id: "card-number",
       ariaLabel: CARD_NUMBER_LABEL.first,
       ref: firstInput,
-      type: "number",
       name: "firstField",
       value: firstField,
       maxLength: MAX_LENGTH,
@@ -36,7 +45,6 @@ const CardNumberInput = ({ fields, onChange }) => {
     {
       ariaLabel: CARD_NUMBER_LABEL.second,
       ref: secondInput,
-      type: "number",
       name: "secondField",
       value: secondField,
       maxLength: MAX_LENGTH,
