@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import './card.css';
 import { replaceNumberToDot } from '../utils/index';
 
-export const BasicCard = ({ name, expireDate, cardName, cardNumber, size, nickName }) => {
+export const BasicCard = ({ name, expireDate, cardName, cardNumber, size, nickName, onClick }) => {
     const maskingCardNumber = [];
 
     Object.entries(cardNumber).forEach(([key, value]) => {
@@ -12,12 +12,12 @@ export const BasicCard = ({ name, expireDate, cardName, cardNumber, size, nickNa
 
     return (
         <>
-            <div className="card-box">
+            <div className="card-box" onClick={onClick}>
                 <div className={`${size}-card`}>
-                    <div className="card-top">{cardName}</div>
+                    <div className="card-top"></div>
                     <div className="card-middle">
                         {size === 'big' ? (
-                            <span className="card-text-big">{cardName}</span>
+                            <span className="card-text-big"></span>
                         ) : (
                             <div className="small-card__chip"></div>
                         )}
@@ -63,7 +63,8 @@ BasicCard.propTypes = {
     cardNumber: PropTypes.object,
     expireDate: PropTypes.object,
     nickName: PropTypes.string,
-    size: PropTypes.number,
+    size: PropTypes.string,
+    onClick: PropTypes.func,
 };
 
 BasicCard.defaultProps = {

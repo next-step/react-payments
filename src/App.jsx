@@ -1,7 +1,7 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-
-import { CreditCardAdd, CreditCardList, CreditCardRegister } from './pages/index';
+import { CreditCardAdd, CreditCardList, CreditCardRegister } from './pages';
+import { CardInfoContext } from './context/cardInfoContext';
 
 const initForm = {
     cardNumber: {
@@ -20,37 +20,40 @@ const initForm = {
     nickName: '',
 };
 
-const App = () => {
-    const reducer = (state, action) => {
-        return {
-            ...state,
-            ...action,
-        };
+const reducer = (state, action) => {
+    return {
+        ...state,
+        ...action,
     };
+};
 
-    const [state, dispatch] = useReducer(reducer, initForm);
+const App = () => {
+    const [cardList, setCardList] = useState([]);
+    const [cardInfo, setCardInfo] = useReducer(reducer, initForm);
 
     const pages = [
         {
             path: '/',
-            component: <CreditCardAdd state={state} dispatch={dispatch} />,
+            component: <CreditCardAdd />,
         },
         {
             path: '/creditCardList',
-            component: <CreditCardList state={state} dispatch={dispatch} initForm={initForm} />,
+            component: <CreditCardList initForm={initForm} />,
         },
         {
             path: '/creditCardRegister',
-            component: <CreditCardRegister state={state} dispatch={dispatch} />,
+            component: <CreditCardRegister />,
         },
     ];
 
     return (
-        <Routes>
-            {pages.map((page) => (
-                <Route key={page.path} path={page.path} element={page.component} />
-            ))}
-        </Routes>
+        <CardInfoContext.Provider value={{ cardInfo, setCardInfo, cardList, setCardList }}>
+            <Routes>
+                {pages.map((page) => (
+                    <Route key={page.path} path={page.path} element={page.component} />
+                ))}
+            </Routes>
+        </CardInfoContext.Provider>
     );
 };
 

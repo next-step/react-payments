@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Input, InputContainer, BasicCard, Title, Button } from '../components/index';
-import { validateNumber } from '../utils/index';
+import { Input, InputContainer, BasicCard, Title, Button } from '../components';
+import { validateNumber } from '../utils';
+import { CardInfoContext } from '../context/cardInfoContext';
 
 const initErrorMsg = {
     number: '',
@@ -10,14 +11,14 @@ const initErrorMsg = {
     password: '',
 };
 
-const CreditCardAdd = ({ state, dispatch }) => {
+const CreditCardAdd = () => {
     const navigate = useNavigate();
-    const { cardNumber, expireDate, name, cvc, password } = state;
-
+    const { cardInfo, setCardInfo } = useContext(CardInfoContext);
+    const { cardNumber, expireDate, name, cvc, password } = cardInfo;
     const [cardInfoErrorMessage, setCardInfoErrorMessage] = useState(initErrorMsg);
 
-    const setCardInfo = ({ name, position, text }) => {
-        dispatch({ [name]: { ...state[name], [position]: validateNumber(text) } });
+    const changeCardInfo = ({ name, position, text }) => {
+        setCardInfo({ [name]: { ...cardInfo[name], [position]: validateNumber(text) } });
     };
 
     const validateCardInfo = () => {
@@ -54,7 +55,7 @@ const CreditCardAdd = ({ state, dispatch }) => {
         }
     };
 
-    const clickNext = () => {
+    const goCreditCardRegister = () => {
         if (validateCardInfo()) return;
 
         navigate('/creditCardRegister');
@@ -77,7 +78,7 @@ const CreditCardAdd = ({ state, dispatch }) => {
                         <Input
                             value={cardNumber.first}
                             onChange={(text) =>
-                                setCardInfo({ name: 'cardNumber', position: 'first', text })
+                                changeCardInfo({ name: 'cardNumber', position: 'first', text })
                             }
                             maxLength={4}
                         />
@@ -85,7 +86,7 @@ const CreditCardAdd = ({ state, dispatch }) => {
                         <Input
                             value={cardNumber.second}
                             onChange={(text) =>
-                                setCardInfo({ name: 'cardNumber', position: 'second', text })
+                                changeCardInfo({ name: 'cardNumber', position: 'second', text })
                             }
                             maxLength={4}
                         />
@@ -94,7 +95,7 @@ const CreditCardAdd = ({ state, dispatch }) => {
                             value={cardNumber.third}
                             type={'password'}
                             onChange={(text) =>
-                                setCardInfo({ name: 'cardNumber', position: 'third', text })
+                                changeCardInfo({ name: 'cardNumber', position: 'third', text })
                             }
                             maxLength={4}
                         />
@@ -103,7 +104,7 @@ const CreditCardAdd = ({ state, dispatch }) => {
                             value={cardNumber.forth}
                             type={'password'}
                             onChange={(text) =>
-                                setCardInfo({ name: 'cardNumber', position: 'forth', text })
+                                changeCardInfo({ name: 'cardNumber', position: 'forth', text })
                             }
                             maxLength={4}
                         />
@@ -116,14 +117,14 @@ const CreditCardAdd = ({ state, dispatch }) => {
                         <Input
                             placeholder={'MM'}
                             onChange={(text) =>
-                                setCardInfo({ name: 'expireDate', position: 'mm', text })
+                                changeCardInfo({ name: 'expireDate', position: 'mm', text })
                             }
                             maxLength={2}
                         />
                         <Input
                             placeholder={'YY'}
                             onChange={(text) =>
-                                setCardInfo({ name: 'expireDate', position: 'yy', text })
+                                changeCardInfo({ name: 'expireDate', position: 'yy', text })
                             }
                             maxLength={2}
                         />
@@ -137,7 +138,7 @@ const CreditCardAdd = ({ state, dispatch }) => {
                             placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
                             value={name}
                             maxLength={30}
-                            onChange={(text) => dispatch({ name: text })}
+                            onChange={(text) => changeCardInfo({ name: text })}
                         />
                     </InputContainer>
                     <InputContainer
@@ -147,7 +148,7 @@ const CreditCardAdd = ({ state, dispatch }) => {
                     >
                         <Input
                             type={'password'}
-                            onChange={(text) => dispatch({ cvc: text })}
+                            onChange={(text) => changeCardInfo({ cvc: text })}
                             maxLength={3}
                         />
                     </InputContainer>
@@ -159,21 +160,21 @@ const CreditCardAdd = ({ state, dispatch }) => {
                         <Input
                             type={'password'}
                             onChange={(text) =>
-                                setCardInfo({ name: 'password', position: 'first', text })
+                                changeCardInfo({ name: 'password', position: 'first', text })
                             }
                             maxLength={1}
                         />
                         <Input
                             type={'password'}
                             onChange={(text) =>
-                                setCardInfo({ name: 'password', position: 'second', text })
+                                changeCardInfo({ name: 'password', position: 'second', text })
                             }
                             maxLength={1}
                         />
                         <Input type={'password'} value={'*'} maxLength={1} />
                         <Input type={'password'} value={'*'} maxLength={1} />
                     </InputContainer>
-                    <Button title={'다음'} onClick={clickNext} />
+                    <Button title={'다음'} onClick={goCreditCardRegister} />
                 </div>
             </div>
         </>

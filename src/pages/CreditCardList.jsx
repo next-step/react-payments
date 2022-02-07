@@ -1,13 +1,24 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BasicCard, Title, EmptyCard } from '../components/index.js';
+import { BasicCard, Title, EmptyCard, Button, Center } from '../components';
+import { CardInfoContext } from '../context/cardInfoContext';
 
-const CreditCardList = ({ state, dispatch, initForm }) => {
+const CreditCardList = ({ initForm }) => {
     const navigate = useNavigate();
-    const { cardNumber, expireDate, name, nickName } = state;
+    const { setCardInfo, cardList, setCardList } = useContext(CardInfoContext);
 
     const goCreditCardAdd = () => {
-        dispatch(initForm);
+        setCardInfo(initForm);
         navigate('/');
+    };
+
+    const goCreditRegister = (cardInfo) => {
+        setCardInfo(cardInfo);
+        navigate('/creditCardRegister');
+    };
+
+    const deleteCard = (cardNumber) => {
+        setCardList(cardList.filter((item) => item.cardNumber !== cardNumber));
     };
 
     return (
@@ -16,13 +27,24 @@ const CreditCardList = ({ state, dispatch, initForm }) => {
             <div className="root">
                 <div className="app flex-column-center">
                     <Title title={'보유카드'} />
-                    <BasicCard
-                        title={'작업예정'}
-                        cardNumber={cardNumber}
-                        name={name}
-                        expireDate={expireDate}
-                        nickName={nickName}
-                    />
+                    {cardList.map((card, index) => (
+                        <>
+                            <BasicCard
+                                key={`${card.cardNumber}_${index}`}
+                                cardNumber={card.cardNumber}
+                                name={card.name}
+                                expireDate={card.expireDate}
+                                nickName={card.nickName}
+                                onClick={() => goCreditRegister(card)}
+                            />
+                            <Center>
+                                <Button
+                                    onClick={() => deleteCard(card.cardNumber)}
+                                    title={'삭제'}
+                                />
+                            </Center>
+                        </>
+                    ))}
                     <EmptyCard onClick={goCreditCardAdd} />
                 </div>
             </div>
