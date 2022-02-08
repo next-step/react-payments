@@ -6,6 +6,7 @@ export const CardBox = styled.div<{ color?: string }>`
   justify-content: center;
 
   margin: 10px 0px;
+  position: relative;
 `;
 
 export const CardBasic = styled.div<{ size: 'small' | 'big'; color?: string }>`
@@ -32,6 +33,15 @@ export const CardBasic = styled.div<{ size: 'small' | 'big'; color?: string }>`
   height: 130px;`
       : `width: 290px;
   height: 180px;`}
+`;
+
+export const RemoveButton = styled.button`
+  position: absolute;
+  top: -9px;
+  right: -11px;
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
 `;
 
 export const CardChip = styled.div<{ size: string }>`

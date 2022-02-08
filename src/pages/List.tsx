@@ -46,10 +46,11 @@ const List = () => {
               company={card.company}
               alias={card.alias}
               onClick={() => onClickCard(card)}
+              removeButton
+              onClickRemoveCard={() => onClickRemoveCard(card)}
             />
             <div>
               <span>{card.alias || card.company?.name}</span>
-              <button onClick={() => onClickRemoveCard(card)}>삭제</button>
             </div>
           </Fragment>
         ))

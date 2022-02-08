@@ -15,6 +15,7 @@ import {
   CardBasic,
   CardChip,
   CardNumber,
+  RemoveButton,
 } from './styles';
 
 interface CardProps {
@@ -58,7 +59,20 @@ interface CardProps {
    */
   company?: Company;
 
+  /**
+   * 카드 별칭
+   */
   alias?: string;
+
+  /**
+   * 카드 삭제 버튼 유무
+   */
+  removeButton?: boolean;
+
+  /**
+   * 카드 삭제 버튼 있을 시 실행 할 함수
+   */
+  onClickRemoveCard?: () => void;
 }
 
 const Card = ({
@@ -71,6 +85,8 @@ const Card = ({
   company,
   size,
   alias,
+  removeButton,
+  onClickRemoveCard,
 }: CardProps) => {
   const setSecurityText = (number: string) => {
     return number
@@ -82,6 +98,9 @@ const Card = ({
   return (
     <>
       <CardBox>
+        {removeButton && (
+          <RemoveButton onClick={onClickRemoveCard}>x</RemoveButton>
+        )}
         <CardBasic size={size} color={company?.color} onClick={onClick}>
           {type === 'empty' ? (
             '+'
