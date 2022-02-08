@@ -156,9 +156,7 @@ const Add = () => {
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    const isFormError = Object.values(formErrors)
-      .flat()
-      .filter((value) => value).length;
+    const isFormError = Object.values(formErrors).flat().some(Boolean);
 
     if (!isFormError) {
       history('/alias', {
