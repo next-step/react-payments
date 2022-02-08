@@ -100,11 +100,10 @@ const Add = () => {
 
   const checkExpirationNumberValidation = useCallback(() => {
     const mm = Number(expirationNumber[0]);
-    if (!mm || (mm >= 1 && mm <= 12) !== formErrors.expirationMonth) return;
+    const isValid = mm >= 1 && mm <= 12;
+    if (!mm || isValid !== formErrors.expirationMonth) return;
 
-    if (mm >= 1 && mm <= 12)
-      setFormErrors({ ...formErrors, expirationMonth: false });
-    else setFormErrors({ ...formErrors, expirationMonth: true });
+    setFormErrors({ ...formErrors, expirationMonth: !isValid });
   }, [expirationNumber, formErrors]);
 
   const checkCvcValidation = useCallback(() => {
