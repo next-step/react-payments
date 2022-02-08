@@ -1,5 +1,4 @@
-const Card = (props) => {
-  const { type = 'small', card } = props;
+const Card = ({ type = 'small', card }) => {
   const {
     cardNumbers = ['', '', '', ''],
     expirationMonth = '',

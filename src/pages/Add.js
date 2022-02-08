@@ -23,7 +23,7 @@ const Add = ({ nextStatus = '' }) => {
       const card = _.cloneDeep(inputCard);
       card.companyName = companyName;
       card.color = color;
-      setInputCard(_.cloneDeep(card));
+      setInputCard(card);
     }
     setShowModal(false);
   };
@@ -33,7 +33,6 @@ const Add = ({ nextStatus = '' }) => {
       cardNumbers,
       expirationMonth,
       expirationYear,
-      cardHolder,
       cvc,
       passwords,
       companyName,
@@ -42,7 +41,6 @@ const Add = ({ nextStatus = '' }) => {
       cardNumbers.includes('') ||
       !expirationMonth ||
       !expirationYear ||
-      !cardHolder ||
       !cvc ||
       !companyName ||
       passwords.includes('')

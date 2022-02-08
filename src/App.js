@@ -4,21 +4,11 @@ import Complete from './pages/Complete';
 import CardList from './pages/CardList';
 import { AppContext, initialInputCard } from './AppContext';
 
-export const companyList = [
-  { name: '신한카드', color: '#E24141' },
-  { name: '삼성카드', color: '#547CE4' },
-  { name: 'KB국민카드', color: '#73BC6D' },
-  { name: '하나카드', color: '#DE59B9' },
-  { name: 'BC카드', color: '#04C09E' },
-  { name: 'NH농협카드', color: '#E76E9A' },
-  { name: '우리카드', color: '#F37D3B' },
-  { name: '씨티카드', color: '#FBCD58' },
-];
-
 function App() {
   const [status, setRouteStatus] = useState('list');
   const [cardList, setCardList] = useState([]);
   const [inputCard, setInputCard] = useState(initialInputCard);
+  const [targetCard, setTargetCard] = useState({});
 
   return (
     <AppContext.Provider
@@ -29,6 +19,8 @@ function App() {
         setCardList,
         inputCard,
         setInputCard,
+        targetCard,
+        setTargetCard,
       }}
     >
       <div className="App">
@@ -38,6 +30,8 @@ function App() {
           <Add nextStatus="complete" />
         ) : status === 'complete' ? (
           <Complete nextStatus="list" />
+        ) : status === 'modify' ? (
+          <Complete nextStatus="list" mode="modify" />
         ) : (
           'Error: 관리자에게 문의해 주세요'
         )}

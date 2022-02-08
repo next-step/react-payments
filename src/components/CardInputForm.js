@@ -44,8 +44,7 @@ const CardInputForm = (props) => {
         setCardHolerInfo(`입력글자수 : ${value.length} / 30`);
       }
     }
-    setType('small');
-    setInputCard(_.cloneDeep(card));
+    setInputCard(card);
   };
 
   return (

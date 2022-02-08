@@ -3,6 +3,7 @@ import React from 'react';
 export const AppContext = React.createContext();
 
 export const initialInputCard = {
+  id: '',
   cardNumbers: ['', '', '', ''],
   expirationMonth: '',
   expirationYear: '',

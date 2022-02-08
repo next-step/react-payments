@@ -1,7 +1,7 @@
 import Modal from './Modal';
 import ModalItems from './ModalItems';
-import { companyList } from '../../App';
 import ModalItem from './ModalItem';
+import companyList from '../../companyList';
 
 const CompanyListModal = ({ onClickHandler }) => {
   return (
