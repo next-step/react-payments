@@ -109,6 +109,12 @@ const Add = () => {
     setFormErrors({ ...formErrors, passwords: copyPasswords });
   };
 
+  const checkCardNumberError = () =>
+    formErrors.cardNumbers[0] ||
+    formErrors.cardNumbers[1] ||
+    formErrors.cardNumbers[2] ||
+    formErrors.cardNumbers[3];
+
   useEffect(() => {
     checkCardNumberValidation();
   }, [cardNumber]);
@@ -201,10 +207,7 @@ const Add = () => {
               required
             />
           </InputBox>
-          {(formErrors.cardNumbers[0] ||
-            formErrors.cardNumbers[1] ||
-            formErrors.cardNumbers[2] ||
-            formErrors.cardNumbers[3]) && (
+          {checkCardNumberError() && (
             <ErrorMessage>{ERROR_MESSAGE.ONLY_NUMBER}</ErrorMessage>
           )}
         </InputContainer>
