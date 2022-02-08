@@ -3,27 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { PATH } from "../../constants/route";
 import CardForm from "../../components/CardForm/CardForm";
 import { CardFormField } from "../../@types";
-import {
-  MAX_CARD_EXPIRATION_VALUE_LENGTH,
-  MAX_CARD_NUMBER_LENGTH,
-  MAX_CARD_SECURITY_CODE_LENGTH,
-} from "../../constants/card";
+import usePendingCardSelector from "../../stores/card/hooks/usePendingCardSelector";
 import Styled from "./CardRegisterPage.styles";
-
-const isCardFormFilled = (formField: CardFormField) => {
-  const { cardNumber, cardExpiration, cardUserName, cardSecurityCode, cardPassword } = formField;
-
-  return (
-    cardNumber.every((cardCell) => cardCell.length === MAX_CARD_NUMBER_LENGTH) &&
-    Object.values(cardExpiration).every((expiration) => expiration.length === MAX_CARD_EXPIRATION_VALUE_LENGTH) &&
-    cardUserName.length > 0 &&
-    cardSecurityCode.length === MAX_CARD_SECURITY_CODE_LENGTH &&
-    cardPassword.length === 2
-  );
-};
+import { isCardFormFilled } from "../../utils/validations";
 
 const CardRegisterPage = () => {
   const navigate = useNavigate();
+  const { cardNumber, cardType, cardUserName, cardExpiration } = usePendingCardSelector((state) => state);
 
   const handleCardFormSubmit = (formField: CardFormField) => {
     if (!isCardFormFilled(formField)) {
@@ -32,16 +18,22 @@ const CardRegisterPage = () => {
       return;
     }
 
-    // register card
-
     navigate(PATH.CARD_REGISTER_COMPLETE);
   };
 
   return (
     <>
-      <Styled.Header goBackLink={PATH.CARD_LIST}>카드추가</Styled.Header>
-      <Styled.Card size="SMALL" />
-      <CardForm onSubmit={handleCardFormSubmit} />
+      <Styled.Header goBackLink={PATH.HOME}>카드추가</Styled.Header>
+      <main>
+        <Styled.Card
+          cardNumber={cardNumber}
+          cardType={cardType}
+          userName={cardUserName}
+          expiration={cardExpiration}
+          size="SMALL"
+        />
+        <CardForm onSubmit={handleCardFormSubmit} />
+      </main>
     </>
   );
 };

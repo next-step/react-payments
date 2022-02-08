@@ -24,6 +24,7 @@
     ],
     "rules": {
         "react/react-in-jsx-scope": "off",
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "@typescript-eslint/no-empty-interface": "off"
     }
 }

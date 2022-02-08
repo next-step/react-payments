@@ -1,5 +1,5 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { hasNonNumberChar } from "../../utils/validations";
+import { useEffect, useState } from "react";
+import IntegerInput from "../IntegerInput/IntegerInput";
 import Styled from "./CardPasswordInput.styles";
 
 interface Props {
@@ -10,13 +10,8 @@ interface Props {
 const CardPasswordInput = ({ dotColor, onChange }: Props) => {
   const [password, setPassword] = useState<[string, string]>(["", ""]);
 
-  const makeChangeHandler = (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
+  const makeChangeHandler = (index: number) => (value: string) => {
     const updatedPassword: [string, string] = [...password];
-    const { value } = event.target;
-
-    if (hasNonNumberChar(value)) {
-      return;
-    }
 
     updatedPassword[index] = value;
     setPassword(updatedPassword);
@@ -33,10 +28,10 @@ const CardPasswordInput = ({ dotColor, onChange }: Props) => {
       <Styled.Label>카드비밀번호</Styled.Label>
       <Styled.FlexWrapper>
         <Styled.InputArea color={dotColor}>
-          <input type="password" value={password[0]} onChange={makeChangeHandler(0)} maxLength={1} />
+          <IntegerInput type="password" value={password[0]} onChange={makeChangeHandler(0)} maxLength={1} />
         </Styled.InputArea>
         <Styled.InputArea color={dotColor}>
-          <input type="password" value={password[1]} onChange={makeChangeHandler(1)} maxLength={1} />
+          <IntegerInput type="password" value={password[1]} onChange={makeChangeHandler(1)} maxLength={1} />
         </Styled.InputArea>
         <Styled.DisabledInputArea>
           <Styled.Dot color={dotColor} />

@@ -1,40 +1,61 @@
-import { FormEventHandler, useState } from "react";
-import { CardExpiration, CardFormField, CardNumber } from "../../@types";
+import { FormEventHandler } from "react";
+import useIsShown from "../../hooks/useIsShown";
+import cardActions from "../../stores/card/pendingCardActions";
+import usePendingCardDispatch from "../../stores/card/hooks/usePendingCardDispatch";
+import usePendingCardSelector from "../../stores/card/hooks/usePendingCardSelector";
+import BottomModalPortal from "../BottomModal/BottomModal";
 import CardExpirationInput from "../CardExpirationInput/CardExpirationInput";
 import CardNumberInput from "../CardNumberInput/CardNumberInput";
 import CardPasswordInput from "../CardPasswordInput/CardPasswordInput";
 import CardSecurityCodeInput from "../CardSecurityCodeInput/CardSecurityCodeInput";
+import CardTypeRadio from "../CardTypeRadio/CardTypeRadio";
 import LabeledTextInput from "../LabeledTextInput/LabeledTextInput";
 import SimpleButton from "../SimpleButton/SimpleButton";
 import Styled from "./CardForm.styles";
+import { isCardNumberFormFilled } from "../../utils/validations";
+import type { CardFormField, CardNumber, CardType } from "../../@types";
 
 interface Props {
   onSubmit?: (cardFormField: CardFormField) => void;
 }
 
 const CardForm = ({ onSubmit }: Props) => {
-  const [cardNumber, setCardNumberChange] = useState<CardNumber>(["", "", "", ""]);
-  const [cardExpiration, setCardExpiration] = useState<CardExpiration>({ month: "", year: "" });
-  const [cardUserName, setCardUserName] = useState("");
-  const [cardSecurityCode, setCardSecurityCode] = useState("");
-  const [cardPassword, setCardPassword] = useState("");
+  const [isCardTypeSelectModalShown, showCardTypeSelectModal, hideCardTypeSelectModal] = useIsShown();
+  const { cardNumber, cardType, cardExpiration, cardUserName, cardSecurityCode, cardPassword } = usePendingCardSelector(
+    (state) => state
+  );
+  const pendingCardDispatch = usePendingCardDispatch();
 
-  const handleCardNumberChange = (cardNumber: CardNumber) => setCardNumberChange(cardNumber);
+  const handleCardNumberChange = (cardNumber: CardNumber) => {
+    if (isCardNumberFormFilled(cardNumber)) {
+      showCardTypeSelectModal();
+    }
+    pendingCardDispatch(cardActions.setCardNumber({ cardNumber }));
+  };
 
-  const handleCardExpirationChange = (month: string, year: string) => setCardExpiration({ month, year });
+  const handleCardTypeChange = (cardType: CardType) => {
+    pendingCardDispatch(cardActions.setCardType({ cardType }));
+    hideCardTypeSelectModal();
+  };
 
-  const handleCardUserNameChange = (userName: string) => setCardUserName(userName);
+  const handleCardExpirationChange = (month: string, year: string) =>
+    pendingCardDispatch(cardActions.setCardExpiration({ cardExpiration: { month, year } }));
 
-  const handleCardSecurityCodeChange = (code: string) => setCardSecurityCode(code);
+  const handleCardUserNameChange = (cardUserName: string) =>
+    pendingCardDispatch(cardActions.setCardUserName({ cardUserName }));
+
+  const handleCardSecurityCodeChange = (cardSecurityCode: string) =>
+    pendingCardDispatch(cardActions.setCardSecurityCode({ cardSecurityCode }));
 
   const handleCardPasswordChange = (firstNumber: string, secondNumber: string) =>
-    setCardPassword(firstNumber + secondNumber);
+    pendingCardDispatch(cardActions.setCardPassword({ cardPassword: firstNumber + secondNumber }));
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
     onSubmit?.({
       cardNumber,
+      cardType,
       cardExpiration,
       cardUserName,
       cardSecurityCode,
@@ -50,6 +71,9 @@ const CardForm = ({ onSubmit }: Props) => {
       <CardSecurityCodeInput onChange={handleCardSecurityCodeChange} />
       <CardPasswordInput onChange={handleCardPasswordChange} dotColor="#04c09e" />
       <SimpleButton>다음</SimpleButton>
+      <BottomModalPortal isShown={isCardTypeSelectModalShown} onClose={hideCardTypeSelectModal}>
+        <CardTypeRadio selected={cardType} onChange={handleCardTypeChange} />
+      </BottomModalPortal>
     </Styled.Form>
   );
 };

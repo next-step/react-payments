@@ -17,6 +17,7 @@ const Label = styled.label`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 20px;
 
   input {
     position: absolute;
@@ -34,7 +35,7 @@ const RadioDisc = styled.div<RadioDiscProps>`
   width: 37px;
   height: 37px;
   border-radius: 50%;
-  background-color: ${({ cardType }) => CARD_COLOR[cardType ?? "DEFAULT"]};
+  background-color: ${({ cardType }) => CARD_COLOR[cardType ?? "NONE"]};
 `;
 
 const CardName = styled.p`

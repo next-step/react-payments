@@ -17,7 +17,7 @@ const Container = styled.div<ContainerProps>`
     height: ${CARD_SIZE[size].HEIGHT};
     padding: ${CARD_SIZE[size].PADDING};
     font-size: ${CARD_SIZE[size].FONT_SIZE};
-    background-color: ${CARD_COLOR[type ?? "DEFAULT"]};
+    background-color: ${CARD_COLOR[type ?? "NONE"]};
   `}
 
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
