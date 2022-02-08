@@ -9,7 +9,11 @@ export const CardBox = styled.div<{ color?: string }>`
   position: relative;
 `;
 
-export const CardBasic = styled.div<{ size: 'small' | 'big'; color?: string }>`
+export const CardBasic = styled.div<{
+  size: 'small' | 'big';
+  color?: string;
+  onClick?: () => void;
+}>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,6 +37,8 @@ export const CardBasic = styled.div<{ size: 'small' | 'big'; color?: string }>`
   height: 130px;`
       : `width: 290px;
   height: 180px;`}
+
+  ${({ onClick }) => onClick && `cursor: pointer;`}
 `;
 
 export const RemoveButton = styled.button`
