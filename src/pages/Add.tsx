@@ -1,4 +1,10 @@
-import React, { FormEvent, useContext, useEffect, useState } from 'react';
+import React, {
+  FormEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import Card from '../components/Card';
 import Input from '../components/Input';
@@ -74,7 +80,7 @@ const Add = () => {
     return target.length === length ? returnValue : '';
   };
 
-  const checkCardNumberValidation = () => {
+  const checkCardNumberValidation = useCallback(() => {
     const copyCardNumbers = [...formErrors.cardNumbers];
 
     cardNumber.forEach((number, index) => {
@@ -82,23 +88,33 @@ const Add = () => {
       else copyCardNumbers[index] = false;
     });
 
-    setFormErrors({ ...formErrors, cardNumbers: [...copyCardNumbers] });
-  };
+    if (
+      formErrors.cardNumbers.every(
+        (value, index) => value === copyCardNumbers[index]
+      )
+    )
+      return;
 
-  const checkExpirationNumberValidation = () => {
+    setFormErrors({ ...formErrors, cardNumbers: [...copyCardNumbers] });
+  }, [cardNumber, formErrors]);
+
+  const checkExpirationNumberValidation = useCallback(() => {
     const mm = Number(expirationNumber[0]);
+    if (!mm || (mm >= 1 && mm <= 12) !== formErrors.expirationMonth) return;
 
     if (mm >= 1 && mm <= 12)
       setFormErrors({ ...formErrors, expirationMonth: false });
     else setFormErrors({ ...formErrors, expirationMonth: true });
-  };
+  }, [expirationNumber, formErrors]);
 
-  const checkCvcValidation = () => {
+  const checkCvcValidation = useCallback(() => {
+    if (isValidNumber(cvc) === formErrors.cvc) return;
+
     if (isValidNumber(cvc)) setFormErrors({ ...formErrors, cvc: true });
     else setFormErrors({ ...formErrors, cvc: false });
-  };
+  }, [cvc, formErrors]);
 
-  const checkPasswordValidation = () => {
+  const checkPasswordValidation = useCallback(() => {
     const copyPasswords = [...formErrors.passwords];
 
     password.forEach((value, index) => {
@@ -106,8 +122,15 @@ const Add = () => {
       else copyPasswords[index] = false;
     });
 
+    if (
+      formErrors.passwords.every(
+        (value, index) => value === copyPasswords[index]
+      )
+    )
+      return;
+
     setFormErrors({ ...formErrors, passwords: copyPasswords });
-  };
+  }, [formErrors, password]);
 
   const checkCardNumberError = () =>
     formErrors.cardNumbers[0] ||
@@ -117,19 +140,19 @@ const Add = () => {
 
   useEffect(() => {
     checkCardNumberValidation();
-  }, [cardNumber]);
+  }, [cardNumber, checkCardNumberValidation]);
 
   useEffect(() => {
     checkExpirationNumberValidation();
-  }, [expirationNumber]);
+  }, [expirationNumber, checkExpirationNumberValidation]);
 
   useEffect(() => {
     checkCvcValidation();
-  }, [cvc]);
+  }, [cvc, checkCvcValidation]);
 
   useEffect(() => {
     checkPasswordValidation();
-  }, [password]);
+  }, [password, checkPasswordValidation]);
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
