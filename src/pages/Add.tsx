@@ -1,4 +1,10 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, {
+  FormEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 
 import Card from '../components/Card';
 import Input from '../components/Input';
@@ -6,33 +12,40 @@ import Button from '../components/Button';
 import Layout from '../components/Layout';
 import Modal from '../components/Modal';
 import { PageTitle } from '../common/styles';
-import { ButtonBox } from '../components/Button/styles';
 import {
   InputContainer,
   InputTitle,
   InputBox,
   ErrorMessage,
-  OwnerLength,
 } from '../components/Input/styles';
 import { ERROR_MESSAGE } from '../constants';
 import { useNavigate } from 'react-router';
+import { CardContext } from '../context/CardContext';
+import { isValidNumber } from '../utils';
 
 const Add = () => {
   const history = useNavigate();
 
-  const [cardNumber, setCardNumber] = useState<string[]>(['', '', '', '']);
-  const [expirationNumber, setExpirationNumber] = useState<string[]>(['', '']);
-  const [owner, setOwner] = useState<string>('');
-  const [cvc, setCvc] = useState<string>('');
-  const [password, setPassword] = useState<string[]>(['', '']);
+  const {
+    card,
+    onChangeCardCompany,
+    onChangeCardNumber,
+    onChangeExpirationNumber,
+    onChangeOwner,
+    onChangeCvc,
+    onChangePassword,
+  } = useContext(CardContext);
+  const { cardNumber, expirationNumber, ownerName, cvc, password, company } =
+    card;
+
+  const [formErrors, setFormErrors] = useState({
+    cardNumbers: [false, false, false, false],
+    expirationMonth: false,
+    cvc: false,
+    passwords: [false, false],
+  });
+
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [expirationMonthError, setExpirationMonthError] =
-    useState<boolean>(false);
-  const [cardNumberPasswordError, setCardNumberPasswordError] = useState<
-    boolean[]
-  >([false, false]);
-  const [cvcError, setCvcError] = useState<boolean>(false);
-  const [passwordError, setPasswordError] = useState<boolean[]>([false, false]);
   const [isCardColorSelected, setIsCardColorSelected] =
     useState<boolean>(false);
 
@@ -43,41 +56,7 @@ const Add = () => {
       !isCardColorSelected
     )
       setIsModalOpen(true);
-  }, [cardNumber]);
-
-  const onChangeCardNumber = (
-    event: ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const updatedCardNumber = [...cardNumber];
-    updatedCardNumber[index] = event.target.value.substring(0, 4);
-    setCardNumber([...updatedCardNumber]);
-  };
-
-  const onChangeExpirationNumber = (
-    event: ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const updatedCvcNumber = [...expirationNumber];
-    updatedCvcNumber[index] = event.target.value.substring(0, 2);
-    setExpirationNumber([...updatedCvcNumber]);
-  };
-
-  const onChangeOwner = (event: ChangeEvent<HTMLInputElement>) => {
-    setOwner(event.target.value);
-  };
-  const onChangeCvc = (event: ChangeEvent<HTMLInputElement>) => {
-    setCvc(event.target.value.substring(0, 3));
-  };
-
-  const onChangePassword = (
-    event: ChangeEvent<HTMLInputElement>,
-    index: number
-  ) => {
-    const updatedPasswordNumber = [...password];
-    updatedPasswordNumber[index] = event.target.value;
-    setPassword([...updatedPasswordNumber]);
-  };
+  }, [cardNumber, isCardColorSelected]);
 
   const onCloseModal = () => {
     setIsModalOpen(false);
@@ -101,59 +80,90 @@ const Add = () => {
     return target.length === length ? returnValue : '';
   };
 
-  const checkCardNumberPasswordValidation = () => {
-    const copyCardNumberPasswordError = [...cardNumberPasswordError];
+  const checkCardNumberValidation = useCallback(() => {
+    const copyCardNumbers = [...formErrors.cardNumbers];
 
-    if (isNaN(Number(cardNumber[2]))) copyCardNumberPasswordError[0] = true;
-    else copyCardNumberPasswordError[0] = false;
+    cardNumber.forEach((number, index) => {
+      if (isValidNumber(number)) copyCardNumbers[index] = true;
+      else copyCardNumbers[index] = false;
+    });
 
-    if (isNaN(Number(cardNumber[3]))) copyCardNumberPasswordError[1] = true;
-    else copyCardNumberPasswordError[1] = false;
+    if (
+      formErrors.cardNumbers.every(
+        (value, index) => value === copyCardNumbers[index]
+      )
+    )
+      return;
 
-    setCardNumberPasswordError([...copyCardNumberPasswordError]);
-  };
+    setFormErrors({ ...formErrors, cardNumbers: [...copyCardNumbers] });
+  }, [cardNumber, formErrors]);
 
-  const checkExpirationNumberValidation = () => {
+  const checkExpirationNumberValidation = useCallback(() => {
     const mm = Number(expirationNumber[0]);
+    const isValid = mm >= 1 && mm <= 12;
+    if (!mm || isValid !== formErrors.expirationMonth) return;
 
-    if (mm >= 1 && mm <= 12) setExpirationMonthError(false);
-    else setExpirationMonthError(true);
-  };
+    setFormErrors({ ...formErrors, expirationMonth: !isValid });
+  }, [expirationNumber, formErrors]);
 
-  const checkCvcValidation = () => {
-    if (isNaN(Number(cvc))) setCvcError(true);
-    else setCvcError(false);
-  };
+  const checkCvcValidation = useCallback(() => {
+    if (isValidNumber(cvc) === formErrors.cvc) return;
 
-  const checkPasswordValidation = () => {
-    const copyPasswordError = [...passwordError];
+    if (isValidNumber(cvc)) setFormErrors({ ...formErrors, cvc: true });
+    else setFormErrors({ ...formErrors, cvc: false });
+  }, [cvc, formErrors]);
 
-    if (isNaN(Number(password[0]))) copyPasswordError[0] = true;
-    else copyPasswordError[0] = false;
+  const checkPasswordValidation = useCallback(() => {
+    const copyPasswords = [...formErrors.passwords];
 
-    if (isNaN(Number(password[1]))) copyPasswordError[1] = true;
-    else copyPasswordError[1] = false;
+    password.forEach((value, index) => {
+      if (isValidNumber(value)) copyPasswords[index] = true;
+      else copyPasswords[index] = false;
+    });
 
-    setPasswordError([...copyPasswordError]);
-  };
+    if (
+      formErrors.passwords.every(
+        (value, index) => value === copyPasswords[index]
+      )
+    )
+      return;
+
+    setFormErrors({ ...formErrors, passwords: copyPasswords });
+  }, [formErrors, password]);
+
+  const checkCardNumberError = () =>
+    formErrors.cardNumbers[0] ||
+    formErrors.cardNumbers[1] ||
+    formErrors.cardNumbers[2] ||
+    formErrors.cardNumbers[3];
+
+  useEffect(() => {
+    checkCardNumberValidation();
+  }, [cardNumber, checkCardNumberValidation]);
+
+  useEffect(() => {
+    checkExpirationNumberValidation();
+  }, [expirationNumber, checkExpirationNumberValidation]);
+
+  useEffect(() => {
+    checkCvcValidation();
+  }, [cvc, checkCvcValidation]);
+
+  useEffect(() => {
+    checkPasswordValidation();
+  }, [password, checkPasswordValidation]);
 
   const onSubmit = (event: FormEvent) => {
     event.preventDefault();
 
-    checkCardNumberPasswordValidation();
-    checkExpirationNumberValidation();
-    checkCvcValidation();
-    checkPasswordValidation();
+    const isFormError = Object.values(formErrors).flat().some(Boolean);
 
-    if (
-      !cardNumberPasswordError[0] &&
-      !cardNumberPasswordError[1] &&
-      !expirationMonthError &&
-      !cvcError &&
-      !passwordError[0] &&
-      !passwordError[1]
-    ) {
-      history('/alias');
+    if (!isFormError) {
+      history('/alias', {
+        state: {
+          type: 'add',
+        },
+      });
     }
   };
 
@@ -169,24 +179,31 @@ const Add = () => {
         size="small"
         cardNumber={cardNumber}
         expirationNumber={expirationNumber}
-        owner={owner}
+        owner={ownerName}
         onClick={onClickChangeColorCard}
+        company={company}
       />
       <form onSubmit={onSubmit}>
         <InputContainer>
           <InputTitle>카드 번호</InputTitle>
           <InputBox>
             <Input
-              type="number"
+              type="text"
               value={cardNumber[0]}
+              maxLength={4}
+              minLength={4}
               onChange={(e) => onChangeCardNumber(e, 0)}
+              error={formErrors.cardNumbers[0]}
               required
             />
             {setDivisionValue(cardNumber[0], 4, '-')}
             <Input
-              type="number"
+              type="text"
+              maxLength={4}
+              minLength={4}
               value={cardNumber[1]}
               onChange={(e) => onChangeCardNumber(e, 1)}
+              error={formErrors.cardNumbers[1]}
               required
             />
             {setDivisionValue(cardNumber[1], 4, '-')}
@@ -196,7 +213,7 @@ const Add = () => {
               maxLength={4}
               minLength={4}
               onChange={(e) => onChangeCardNumber(e, 2)}
-              error={cardNumberPasswordError[0]}
+              error={formErrors.cardNumbers[2]}
               required
             />
             {setDivisionValue(cardNumber[2], 4, '-')}
@@ -206,11 +223,11 @@ const Add = () => {
               maxLength={4}
               minLength={4}
               onChange={(e) => onChangeCardNumber(e, 3)}
-              error={cardNumberPasswordError[1]}
+              error={formErrors.cardNumbers[3]}
               required
             />
           </InputBox>
-          {(cardNumberPasswordError[0] || cardNumberPasswordError[1]) && (
+          {checkCardNumberError() && (
             <ErrorMessage>{ERROR_MESSAGE.ONLY_NUMBER}</ErrorMessage>
           )}
         </InputContainer>
@@ -224,7 +241,7 @@ const Add = () => {
               min={1}
               onChange={(e) => onChangeExpirationNumber(e, 0)}
               placeholder="MM"
-              error={expirationMonthError}
+              error={formErrors.expirationMonth}
               required
             />
             {setDivisionValue(expirationNumber[0], 2, '/')}
@@ -236,18 +253,18 @@ const Add = () => {
               required
             />
           </InputBox>
-          {expirationMonthError && (
+          {formErrors.expirationMonth && (
             <ErrorMessage>{ERROR_MESSAGE.MONTH_OUT_OF_RANGE}</ErrorMessage>
           )}
         </InputContainer>
         <InputContainer>
           <InputTitle>
             <span>카드 소유자 이름(선택)</span>
-            <span>{owner.length}/30</span>
+            <span>{ownerName.length}/30</span>
           </InputTitle>
           <Input
             type="text"
-            value={owner}
+            value={ownerName}
             maxLength={30}
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
             onChange={onChangeOwner}
@@ -262,10 +279,14 @@ const Add = () => {
             value={cvc}
             onChange={onChangeCvc}
             required
+            maxLength={3}
+            minLength={3}
             width={25}
-            error={cvcError}
+            error={formErrors.cvc}
           />
-          {cvcError && <ErrorMessage>{ERROR_MESSAGE.ONLY_NUMBER}</ErrorMessage>}
+          {formErrors.cvc && (
+            <ErrorMessage>{ERROR_MESSAGE.ONLY_NUMBER}</ErrorMessage>
+          )}
         </InputContainer>
         <InputContainer>
           <InputTitle>카드 비밀번호</InputTitle>
@@ -276,7 +297,7 @@ const Add = () => {
             minLength={1}
             onChange={(e) => onChangePassword(e, 0)}
             width={15}
-            error={passwordError[0]}
+            error={formErrors.passwords[0]}
             required
           />
           &nbsp;
@@ -287,7 +308,7 @@ const Add = () => {
             minLength={1}
             onChange={(e) => onChangePassword(e, 1)}
             width={15}
-            error={passwordError[1]}
+            error={formErrors.passwords[1]}
             required
           />
           &nbsp;
@@ -295,7 +316,7 @@ const Add = () => {
           &nbsp;
           <Input type="password" value={' '} onChange={() => {}} width={15} />
           &nbsp;
-          {(passwordError[0] || passwordError[1]) && (
+          {(formErrors.passwords[0] || formErrors.passwords[1]) && (
             <ErrorMessage>{ERROR_MESSAGE.ONLY_NUMBER}</ErrorMessage>
           )}
         </InputContainer>
@@ -305,7 +326,7 @@ const Add = () => {
       <Modal
         open={isModalOpen}
         onClose={onCloseModal}
-        onClickSpace={onCloseModal}
+        setCardCompany={onChangeCardCompany}
       />
     </Layout>
   );

@@ -95,7 +95,8 @@ export const InputUnderline = styled.input`
 `;
 
 export const ErrorMessage = styled.p`
-  font-size: 12px;
+  position: absolute;
+  font-size: 10px;
   color: red;
   margin: 0px;
 `;

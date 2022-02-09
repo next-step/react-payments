@@ -1,5 +1,10 @@
 import React from 'react';
 import {
+  CardNumber as TypeCardNumber,
+  Company,
+  ExpirationNumber,
+} from '../../type';
+import {
   CardBottom,
   CardBottomInfo,
   CardBottomNumber,
@@ -10,6 +15,7 @@ import {
   CardBasic,
   CardChip,
   CardNumber,
+  RemoveButton,
 } from './styles';
 
 interface CardProps {
@@ -26,12 +32,12 @@ interface CardProps {
   /**
    * 총 16자리의 카드 넘버
    */
-  cardNumber?: string[];
+  cardNumber?: TypeCardNumber;
 
   /**
    * 카드 유효기간, 월(MM), 연(YY)
    */
-  expirationNumber?: string[];
+  expirationNumber?: ExpirationNumber;
 
   /**
    * 카드 소유자
@@ -51,15 +57,22 @@ interface CardProps {
   /**
    * 카드 배경 색상 설정
    */
-  color?:
-    | '#e24141'
-    | '#547ce4'
-    | '#73BC6D'
-    | '#DE59B9'
-    | '#04C09E'
-    | '#E76E9A'
-    | '#F37D3B'
-    | '#FBCD58';
+  company?: Company;
+
+  /**
+   * 카드 별칭
+   */
+  alias?: string;
+
+  /**
+   * 카드 삭제 버튼 유무
+   */
+  removeButton?: boolean;
+
+  /**
+   * 카드 삭제 버튼 있을 시 실행 할 함수
+   */
+  onClickRemoveCard?: () => void;
 }
 
 const Card = ({
@@ -69,8 +82,11 @@ const Card = ({
   owner,
   cardName,
   onClick,
-  color,
+  company,
   size,
+  alias,
+  removeButton,
+  onClickRemoveCard,
 }: CardProps) => {
   const setSecurityText = (number: string) => {
     return number
@@ -81,14 +97,17 @@ const Card = ({
 
   return (
     <>
-      <CardBox onClick={onClick}>
-        <CardBasic size={size} color={color}>
+      <CardBox>
+        {removeButton && (
+          <RemoveButton onClick={onClickRemoveCard}>x</RemoveButton>
+        )}
+        <CardBasic size={size} color={company?.color} onClick={onClick}>
           {type === 'empty' ? (
             '+'
           ) : (
             <>
               <CardTop>
-                <CardText size={size}>{cardName}</CardText>
+                <CardText size={size}>{company?.name}</CardText>
               </CardTop>
               <CardMiddle>
                 <CardChip size={size}></CardChip>
@@ -121,7 +140,6 @@ const Card = ({
           )}
         </CardBasic>
       </CardBox>
-      {type === 'list' && <span>법인카드</span>}
     </>
   );
 };
