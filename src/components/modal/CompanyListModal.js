@@ -1,7 +1,7 @@
-import Modal from '../components/modal/Modal';
-import ModalItems from '../components/modal/ModalItems';
-import ModalItem from '../components/modal/ModalItem';
-import companyList from '../companyList';
+import Modal from './Modal';
+import ModalItems from './ModalItems';
+import ModalItem from './ModalItem';
+import companyList from '../../companyList';
 
 const CompanyListModal = ({ onClickHandler }) => {
   return (
@@ -10,8 +10,9 @@ const CompanyListModal = ({ onClickHandler }) => {
         {companyList.map((company, i) => (
           <ModalItem
             key={`ModalItem-${i}`}
-            name={company}
+            name={company.name}
             onClickHandler={onClickHandler}
+            color={company.color}
           />
         ))}
       </ModalItems>
