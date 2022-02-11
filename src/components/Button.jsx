@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function Button({ marginTop, children }) {
+function Button({ children, marginTop }) {
   return (
     <ButtonBox marginTop={marginTop}>
       <ButtonText>{children}</ButtonText>

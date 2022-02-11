@@ -1,37 +1,12 @@
 import styled from "styled-components";
 
-function Input({
-  type,
-  width,
-  placeholder,
-  required,
-  maxLength,
-  min,
-  max,
-  pattern,
-  title,
-  onChange,
-  onBlur,
-  onClick,
-  value,
-  disabled,
-}) {
+function Input({ type, placeholder, onChange, ...otherProps }) {
   return (
     <InputBasic
       type={type}
-      width={width}
       placeholder={placeholder}
-      required={required}
-      maxLength={maxLength}
-      min={min}
-      max={max}
-      pattern={pattern}
-      title={title}
       onChange={onChange}
-      onBlur={onBlur}
-      onClick={onClick}
-      value={value}
-      disabled={disabled}
+      {...otherProps}
     />
   );
 }
@@ -40,8 +15,9 @@ export default Input;
 
 const InputBasic = styled.input`
   background-color: #ecebf1;
+  width: 100%;
   height: 45px;
-  width: ${(props) => (props.width ? props.width : "100%")};
+  font-size: 16px;
   text-align: center;
   outline: 2px solid transparent;
   outline-offset: 2px;

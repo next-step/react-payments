@@ -1,8 +1,4 @@
-@import "./card.css";
-@import "./input.css";
-@import "./button.css";
 @import "./modal.css";
-@import "./utils.css";
 
 body {
   display: flex;
@@ -11,22 +7,4 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #e5e5e5;
-}
-
-input {
-  font-size: 16px;
-}
-
-.root {
-  background-color: #fff;
-  width: 375px;
-  min-width: 375px;
-  height: 700px;
-  position: relative;
-  border-radius: 15px;
-}
-
-.app {
-  height: 100%;
-  padding: 16px 24px;
 }

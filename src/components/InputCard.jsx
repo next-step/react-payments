@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function Card({
+function InputCard({
   cardNumberSeries,
   cardNumberCompany,
   individualMasking,
@@ -29,15 +29,7 @@ function Card({
             </CardText>
           </CardBottomNumber>
           <CardBottomInfo>
-            <CardText
-              style={{
-                width: "100px",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-              }}
-            >
-              {name.length === 0 ? "NAME" : name}
-            </CardText>
+            <CardText narrow>{name.length === 0 ? "NAME" : name}</CardText>
             <CardText>
               {dueMonth}
               {dueMonth && dueYear && " / "}
@@ -50,7 +42,7 @@ function Card({
   );
 }
 
-export default Card;
+export default InputCard;
 
 const CardBox = styled.div`
   display: flex;
@@ -128,4 +120,11 @@ const CardText = styled.span`
   line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
+  ${(props) =>
+    props.narrow &&
+    `
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  `}
 `;
