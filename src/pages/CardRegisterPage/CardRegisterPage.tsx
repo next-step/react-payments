@@ -1,11 +1,12 @@
-import Layout from "components/Layout/Layout";
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { CardExpiration, CardName, CardNickName, CardNumbers, LocalCard } from "types/common";
-import { Location } from "history";
 import Card from "components/Card/Card";
-import { getLocalStorageItem, setLocalStorageItem } from "utils/localStorage";
+import Layout from "components/Layout/Layout";
 import { LOCAL_STORAGE_KEY } from "constants/key";
+import useCardContext from "hooks/useCardContext";
+import { CardContext } from "provider/CardProvider";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { CardExpiration, CardName, CardNumbers, LocalCard } from "types/common";
+import { getLocalStorageItem, setLocalStorageItem } from "utils/localStorage";
 
 interface Card {
   numbers: CardNumbers;
@@ -15,21 +16,16 @@ interface Card {
 
 const CardRegisterPage = (): JSX.Element => {
   const navigate = useNavigate();
-  const {
-    state: { card },
-  } = useLocation() as { state: { card: Card } };
-  const { numbers, expiration, name } = card;
 
-  const [nickname, setNickname] = useState<CardNickName>("");
-
-  const handleNickname = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    setNickname(e.target.value);
-  };
+  const { cardName, cardNumbers, cardExpiration, cardNickname, onChangeCardContextValue } = useCardContext(CardContext);
 
   const handleSubmit = (): void => {
     const localCards = getLocalStorageItem({ key: LOCAL_STORAGE_KEY.CARDS, defaultValue: [] }) as LocalCard[];
 
-    setLocalStorageItem({ key: LOCAL_STORAGE_KEY.CARDS, item: [...localCards, { ...card, nickname }] });
+    setLocalStorageItem({
+      key: LOCAL_STORAGE_KEY.CARDS,
+      item: [...localCards, { cardName, cardNumbers, cardExpiration, cardNickname }],
+    });
     navigate("/");
   };
 
@@ -38,7 +34,7 @@ const CardRegisterPage = (): JSX.Element => {
       <form className="flex h-full flex-col items-center p-5" onSubmit={handleSubmit}>
         <h1 className="mt-20 text-2xl text-gray-600">카드 등록이 완료되었습니다.</h1>
         <div className="mb-10 mt-20">
-          <Card size="large" cardNumbers={numbers} expiration={expiration} name={name} />
+          <Card size="large" cardNumbers={cardNumbers} expiration={cardExpiration} name={cardName} />
         </div>
         <input
           className="input-underline w-5/6 text-xl"
@@ -47,8 +43,9 @@ const CardRegisterPage = (): JSX.Element => {
           minLength={1}
           maxLength={15}
           required
-          value={nickname}
-          onChange={handleNickname}
+          name="cardNickname"
+          value={cardNickname}
+          onChange={onChangeCardContextValue}
         />
         <div className="mt-6 flex justify-end">
           <button className="absolute right-6 mt-24 text-lg">완료</button>

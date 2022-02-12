@@ -42,9 +42,7 @@ const CardAddPage = (): JSX.Element => {
   };
 
   const handleSubmit = (): void => {
-    navigate("/add/complete", {
-      state: { card: { numbers: cardNumbers, expiration: cardExpiration, name: cardName } },
-    });
+    navigate("/add/complete");
   };
 
   return (

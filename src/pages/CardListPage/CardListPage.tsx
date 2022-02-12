@@ -1,4 +1,3 @@
-import BackButton from "components/BackButton/BackButton";
 import Card from "components/Card/Card";
 import Header from "components/Header/Header";
 import Layout from "components/Layout/Layout";
@@ -17,10 +16,10 @@ const CardListPage = (): JSX.Element => {
     <Layout>
       <Header title="카드 목록" />
       <ul className="flex flex-col items-center">
-        {cards.map(({ numbers, expiration, name, nickname }, i) => (
+        {cards.map(({ cardNumbers, cardExpiration, cardName, cardNickname }, i) => (
           <li key={i} className="mt-5">
-            <Card size="small" name={name} cardNumbers={numbers} expiration={expiration} />
-            <h2 className="mt-2 text-center">{nickname}</h2>
+            <Card size="small" name={cardName} cardNumbers={cardNumbers} expiration={cardExpiration} />
+            <h2 className="mt-2 text-center">{cardNickname}</h2>
           </li>
         ))}
         <li className="mt-5">

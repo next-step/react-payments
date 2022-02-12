@@ -29,8 +29,8 @@ export interface CardPassword {
 }
 
 export interface LocalCard {
-  numbers: CardNumbers;
-  expiration: CardExpiration;
-  name: CardName;
-  nickname: string;
+  cardNumbers: CardNumbers;
+  cardExpiration: CardExpiration;
+  cardName: CardName;
+  cardNickname: string;
 }
