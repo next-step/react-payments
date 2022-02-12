@@ -2,24 +2,40 @@ import Card from "components/Card/Card";
 import Header from "components/Header/Header";
 import Layout from "components/Layout/Layout";
 import { LOCAL_STORAGE_KEY } from "constants/key";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { LocalCard } from "types/common";
-import { getLocalStorageItem } from "utils/localStorage";
+import { getLocalStorageItem, setLocalStorageItem } from "utils/localStorage";
 
 const CardListPage = (): JSX.Element => {
   const naviatge = useNavigate();
 
-  const cards = getLocalStorageItem({ key: LOCAL_STORAGE_KEY.CARDS, defaultValue: [] }) as LocalCard[];
+  const [cards, setCards] = useState<LocalCard[]>([]);
+
+  const handleDeleteCard = (id: number): void => {
+    if (!window.confirm("카드를 삭제하시겠습니까?")) return;
+
+    setLocalStorageItem({ key: LOCAL_STORAGE_KEY.CARDS, item: cards.filter((card) => card.id !== id) });
+    setCards(cards.filter((card) => card.id !== id));
+  };
+
+  useEffect(() => {
+    setCards(getLocalStorageItem({ key: LOCAL_STORAGE_KEY.CARDS, defaultValue: [] }) as LocalCard[]);
+  }, []);
 
   return (
     <Layout>
       <Header title="카드 목록" />
       <ul className="flex flex-col items-center">
-        {cards.map(({ cardNumbers, cardExpiration, cardName, cardNickname }, i) => (
+        {cards.map(({ id, cardNumbers, cardExpiration, cardName, cardNickname }, i) => (
           <li key={i} className="mt-5">
             <Card size="small" name={cardName} cardNumbers={cardNumbers} expiration={cardExpiration} />
-            <h2 className="mt-2 text-center">{cardNickname}</h2>
+            <div className="flex-center mt-2 flex flex-col">
+              <h2 className="text-center">{cardNickname}</h2>
+              <button className="ml text-xs text-red-300" onClick={() => handleDeleteCard(id)}>
+                삭제
+              </button>
+            </div>
           </li>
         ))}
         <li className="mt-5">

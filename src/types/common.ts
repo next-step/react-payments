@@ -29,6 +29,7 @@ export interface CardPassword {
 }
 
 export interface LocalCard {
+  id: number;
   cardNumbers: CardNumbers;
   cardExpiration: CardExpiration;
   cardName: CardName;

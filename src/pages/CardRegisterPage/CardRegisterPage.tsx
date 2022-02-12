@@ -24,7 +24,7 @@ const CardRegisterPage = (): JSX.Element => {
 
     setLocalStorageItem({
       key: LOCAL_STORAGE_KEY.CARDS,
-      item: [...localCards, { cardName, cardNumbers, cardExpiration, cardNickname }],
+      item: [...localCards, { id: Date.now(), cardName, cardNumbers, cardExpiration, cardNickname }],
     });
     navigate("/");
   };
