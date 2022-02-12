@@ -16,7 +16,7 @@ interface CardContextValue {
   onChangeCardContextValue: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CardContext = createContext<CardContextValue | null>(null);
+export const CardContext = createContext<CardContextValue | null>(null);
 
 const CardProvider = ({ children }: Props): JSX.Element => {
   const [{ cardNumbers, cardExpiration, cardName, securityCode, password, cardNickname }, onChangeCardContextValue] =
