@@ -1,7 +1,7 @@
 import Layout from "components/Layout/Layout";
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { CardExpiration, CardName, CardNumbers, LocalCard } from "types/common";
+import { CardExpiration, CardName, CardNickName, CardNumbers, LocalCard } from "types/common";
 import { Location } from "history";
 import Card from "components/Card/Card";
 import { getLocalStorageItem, setLocalStorageItem } from "utils/localStorage";
@@ -20,7 +20,7 @@ const CardRegisterPage = (): JSX.Element => {
   } = useLocation() as { state: { card: Card } };
   const { numbers, expiration, name } = card;
 
-  const [nickname, setNickname] = useState<string>("");
+  const [nickname, setNickname] = useState<CardNickName>("");
 
   const handleNickname = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setNickname(e.target.value);

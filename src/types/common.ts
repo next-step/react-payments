@@ -17,6 +17,8 @@ export interface CardExpiration {
 
 export type CardName = string;
 
+export type CardNickname = string;
+
 export type CardSecurityCode = string;
 
 export interface CardPassword {
