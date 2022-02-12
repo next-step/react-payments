@@ -6,7 +6,7 @@ import InputContainer from "components/InputContainer/InputContainer";
 import Layout from "components/Layout/Layout";
 import useCardContext from "hooks/useCardContext";
 import { CardContext } from "provider/CardProvider";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { useNavigate } from "react-router";
 import { CardNumbers } from "types/common";
 
@@ -24,8 +24,22 @@ const CardAddPage = (): JSX.Element => {
     securityCode,
     password,
     onChangeCardContextValue,
-    setDeepCardContextValue,
+    setCardContextValue,
   } = useCardContext(CardContext);
+
+  const setDeepCardContextValue = (e: ChangeEvent<HTMLInputElement>, key: string): void => {
+    const { name, value } = e.target as { name: "cardNumbers" | "cardExpiration" | "password"; value: string };
+
+    if (!["cardNumbers", "cardExpiration", "password"].includes(name)) return;
+
+    setCardContextValue((prevValues) => ({
+      ...prevValues,
+      [name]: {
+        ...prevValues[name],
+        [key]: value,
+      },
+    }));
+  };
 
   const handleSubmit = (): void => {
     navigate("/add/complete", {

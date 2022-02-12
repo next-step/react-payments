@@ -37,7 +37,6 @@ interface CardContextValue {
       cardNickname: string;
     }>
   >;
-  setDeepCardContextValue: (e: ChangeEvent<HTMLInputElement>, key: string) => void;
 }
 
 export const CardContext = createContext<CardContextValue | null>(null);
@@ -69,21 +68,6 @@ const CardProvider = ({ children }: Props): JSX.Element => {
     cardNickname: "",
   });
 
-  const setDeepCardContextValue = (e: ChangeEvent<HTMLInputElement>, key: string): void => {
-    const { name, value } = e.target as {
-      name: "cardNumbers" | "cardExpiration" | "password";
-      value: string;
-    };
-
-    setCardContextValue((prevValues) => ({
-      ...prevValues,
-      [name]: {
-        ...prevValues[name],
-        [key]: value,
-      },
-    }));
-  };
-
   return (
     <CardContext.Provider
       value={{
@@ -95,7 +79,6 @@ const CardProvider = ({ children }: Props): JSX.Element => {
         cardNickname,
         onChangeCardContextValue,
         setCardContextValue,
-        setDeepCardContextValue,
       }}
     >
       {children}
