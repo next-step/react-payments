@@ -15,14 +15,45 @@ interface Card {
 const CardRegisterPage = (): JSX.Element => {
   const navigate = useNavigate();
 
-  const { cards, setCards, cardName, cardNumbers, cardExpiration, cardNickname, onChangeCardContextValue } =
-    useCardContext(CardContext);
+  const {
+    cards,
+    setCards,
+    cardName,
+    cardNumbers,
+    cardExpiration,
+    cardNickname,
+    onChangeCardContextValue,
+    setCardContextValue,
+  } = useCardContext(CardContext);
 
   const handleSubmit = (): void => {
     setCards([
       ...cards,
       { id: Date.now(), cardName, cardNumbers, cardExpiration, cardNickname: cardNickname || "클린카드" },
     ]);
+
+    setCardContextValue({
+      cardNumbers: {
+        first: "",
+        second: "",
+        third: "",
+        fourth: "",
+      },
+      cardExpiration: {
+        month: "",
+        year: "",
+      },
+      cardName: "",
+      securityCode: "",
+      password: {
+        first: "",
+        second: "",
+        third: "",
+        fourth: "",
+      },
+      cardNickname: "",
+    });
+
     navigate("/");
   };
 

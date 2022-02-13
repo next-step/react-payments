@@ -35,6 +35,8 @@ const CardAddPage = (): JSX.Element => {
 
     if (key === "month" && Number(value) > 12) return;
 
+    if (!isNumber(value)) return;
+
     setCardContextValue((prevValues) => ({
       ...prevValues,
       [name]: {
