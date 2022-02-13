@@ -17,7 +17,13 @@ const CardListPage = (): JSX.Element => {
     setCards(cards.filter((card) => card.id !== id));
   };
 
-  const handleEditCard = (id: number): void => {};
+  const handleEditCard = (id: number): void => {
+    naviatge("/edit", {
+      state: {
+        id,
+      },
+    });
+  };
 
   return (
     <Layout>

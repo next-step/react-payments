@@ -19,7 +19,10 @@ const CardRegisterPage = (): JSX.Element => {
     useCardContext(CardContext);
 
   const handleSubmit = (): void => {
-    setCards([...cards, { id: Date.now(), cardName, cardNumbers, cardExpiration, cardNickname }]);
+    setCards([
+      ...cards,
+      { id: Date.now(), cardName, cardNumbers, cardExpiration, cardNickname: cardNickname || "클린카드" },
+    ]);
     navigate("/");
   };
 
@@ -36,7 +39,6 @@ const CardRegisterPage = (): JSX.Element => {
           placeholder="카드의 별칭을 입력해주세요."
           minLength={1}
           maxLength={15}
-          required
           name="cardNickname"
           value={cardNickname}
           onChange={onChangeCardContextValue}

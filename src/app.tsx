@@ -1,4 +1,5 @@
 import CardAddPage from "pages/CardAddPage/CardAddPage";
+import CardEditPage from "pages/CardEditPage/CardEditPage";
 import CardListPage from "pages/CardListPage/CardListPage";
 import CardRegisterPage from "pages/CardRegisterPage/CardRegisterPage";
 import CardProvider from "provider/CardProvider";
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<CardListPage />} />
             <Route path="/add" element={<CardAddPage />} />
             <Route path="/add/complete" element={<CardRegisterPage />} />
+            <Route path="/edit" element={<CardEditPage />} />
           </Routes>
         </CardProvider>
       </BrowserRouter>
