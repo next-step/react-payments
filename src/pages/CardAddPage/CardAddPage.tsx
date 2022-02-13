@@ -9,6 +9,7 @@ import { CardContext } from "provider/CardProvider";
 import React, { ChangeEvent } from "react";
 import { useNavigate } from "react-router";
 import { CardNumbers } from "types/common";
+import { isNumber } from "utils/validator";
 
 const matchKey = (i: number): keyof CardNumbers => {
   return i === 0 ? "first" : i === 1 ? "second" : i === 2 ? "third" : "fourth";
@@ -32,6 +33,8 @@ const CardAddPage = (): JSX.Element => {
 
     if (!["cardNumbers", "cardExpiration", "password"].includes(name)) return;
 
+    if (key === "month" && Number(value) > 12) return;
+
     setCardContextValue((prevValues) => ({
       ...prevValues,
       [name]: {
@@ -39,6 +42,12 @@ const CardAddPage = (): JSX.Element => {
         [key]: value,
       },
     }));
+  };
+
+  const handleSecurityCode = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { value } = e.target;
+
+    isNumber(value) && onChangeCardContextValue(e);
   };
 
   const handleSubmit = (): void => {
@@ -115,7 +124,7 @@ const CardAddPage = (): JSX.Element => {
             minLength={3}
             maxLength={3}
             value={securityCode}
-            onChange={onChangeCardContextValue}
+            onChange={handleSecurityCode}
             className="text-center"
             required
           />
