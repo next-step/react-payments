@@ -1,11 +1,10 @@
 import Card from "components/Card/Card";
 import Layout from "components/Layout/Layout";
-import { LOCAL_STORAGE_KEY } from "constants/key";
 import useCardContext from "hooks/useCardContext";
 import { CardContext } from "provider/CardProvider";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { CardExpiration, CardName, CardNumbers, LocalCard } from "types/common";
+import { CardExpiration, CardName, CardNumbers } from "types/common";
 
 interface Card {
   numbers: CardNumbers;
@@ -16,15 +15,11 @@ interface Card {
 const CardRegisterPage = (): JSX.Element => {
   const navigate = useNavigate();
 
-  const { cardName, cardNumbers, cardExpiration, cardNickname, onChangeCardContextValue } = useCardContext(CardContext);
+  const { cards, setCards, cardName, cardNumbers, cardExpiration, cardNickname, onChangeCardContextValue } =
+    useCardContext(CardContext);
 
   const handleSubmit = (): void => {
-    // const localCards = getLocalStorageItem({ key: LOCAL_STORAGE_KEY.CARDS, defaultValue: [] }) as LocalCard[];
-
-    // setLocalStorageItem({
-    //   key: LOCAL_STORAGE_KEY.CARDS,
-    //   item: [...localCards, { id: Date.now(), cardName, cardNumbers, cardExpiration, cardNickname }],
-    // });
+    setCards([...cards, { id: Date.now(), cardName, cardNumbers, cardExpiration, cardNickname }]);
     navigate("/");
   };
 

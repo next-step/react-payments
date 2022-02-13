@@ -1,28 +1,23 @@
 import Card from "components/Card/Card";
 import Header from "components/Header/Header";
 import Layout from "components/Layout/Layout";
-import { LOCAL_STORAGE_KEY } from "constants/key";
-import React, { useEffect, useState } from "react";
+import useCardContext from "hooks/useCardContext";
+import { CardContext } from "provider/CardProvider";
+import React from "react";
 import { useNavigate } from "react-router";
-import { LocalCard } from "types/common";
 
 const CardListPage = (): JSX.Element => {
   const naviatge = useNavigate();
 
-  const [cards, setCards] = useState<LocalCard[]>([]);
+  const { cards, setCards } = useCardContext(CardContext);
 
   const handleDeleteCard = (id: number): void => {
     if (!window.confirm("카드를 삭제하시겠습니까?")) return;
 
-    // setLocalStorageItem({ key: LOCAL_STORAGE_KEY.CARDS, item: cards.filter((card) => card.id !== id) });
     setCards(cards.filter((card) => card.id !== id));
   };
 
   const handleEditCard = (id: number): void => {};
-
-  useEffect(() => {
-    // setCards(getLocalStorageItem({ key: LOCAL_STORAGE_KEY.CARDS, defaultValue: [] }) as LocalCard[]);
-  }, []);
 
   return (
     <Layout>

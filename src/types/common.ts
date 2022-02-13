@@ -28,7 +28,7 @@ export interface CardPassword {
   fourth: string;
 }
 
-export interface LocalCard {
+export interface Card {
   id: number;
   cardNumbers: CardNumbers;
   cardExpiration: CardExpiration;

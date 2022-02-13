@@ -1,12 +1,22 @@
 import useInputs from "hooks/useInputs";
-import { ChangeEvent, createContext, Dispatch, ReactNode, SetStateAction } from "react";
-import { CardExpiration, CardName, CardNickname, CardNumbers, CardPassword, CardSecurityCode } from "types/common";
+import { ChangeEvent, createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
+import {
+  Card,
+  CardExpiration,
+  CardName,
+  CardNickname,
+  CardNumbers,
+  CardPassword,
+  CardSecurityCode,
+} from "types/common";
 
 interface Props {
   children: ReactNode;
 }
 
 interface CardContextValue {
+  cards: Card[];
+  setCards: Dispatch<SetStateAction<Card[]>>;
   cardNumbers: CardNumbers;
   cardExpiration: CardExpiration;
   cardName: CardName;
@@ -68,9 +78,13 @@ const CardProvider = ({ children }: Props): JSX.Element => {
     cardNickname: "",
   });
 
+  const [cards, setCards] = useState<Card[]>([]);
+
   return (
     <CardContext.Provider
       value={{
+        cards,
+        setCards,
         cardNumbers,
         cardExpiration,
         cardName,
