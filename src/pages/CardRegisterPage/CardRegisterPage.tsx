@@ -5,7 +5,7 @@ import { CardContext } from "provider/CardProvider";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CardExpiration, CardName, CardNumbers } from "types/common";
-
+        
 interface Card {
   numbers: CardNumbers;
   expiration: CardExpiration;
