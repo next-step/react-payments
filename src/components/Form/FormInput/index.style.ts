@@ -14,6 +14,17 @@ const Input = styled.input<{ backgroundColor?: string; textAlign: TextAlign }>`
   color: #04c09e;
   font-size: 16px;
   padding: 0 12px;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+
   ${({ backgroundColor }) => backgroundColor && { backgroundColor }}
 `
 const InputBox = styled.div`

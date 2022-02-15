@@ -53,9 +53,19 @@ const CardNumberInput = forwardRef<
   return (
     <FormArea label="카드번호" errorMessage={props.errorMessage}>
       <FormInputBox>
-        <FormInput ref={inputRef1} maxLength={4} onChange={onChange} />
+        <FormInput
+          type="number"
+          ref={inputRef1}
+          maxLength={4}
+          onChange={onChange}
+        />
         <InputDividerText color="green">-</InputDividerText>
-        <FormInput ref={inputRef2} maxLength={4} onChange={onChange} />
+        <FormInput
+          type="number"
+          ref={inputRef2}
+          maxLength={4}
+          onChange={onChange}
+        />
         <InputDividerText color="green">-</InputDividerText>
         <FormInput
           type="password"

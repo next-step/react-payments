@@ -53,6 +53,7 @@ const CardExpireInput = forwardRef<
     <FormArea label="만료일" errorMessage={props.errorMessage}>
       <FormInputBox>
         <FormInput
+          type="number"
           id={CREATE_EXPIRE_MONTH}
           ref={inputMonth}
           maxLength={2}
@@ -62,6 +63,7 @@ const CardExpireInput = forwardRef<
         />
         <InputDividerText color="black">/</InputDividerText>
         <FormInput
+          type="number"
           id={CREATE_EXPIRE_YEAR}
           ref={inputYear}
           maxLength={2}
