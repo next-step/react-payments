@@ -21,7 +21,7 @@ const CardList = () => {
     }
   }, [dispatch, state.data])
 
-  const [clicedCardId, setClickedCardId] = useState('')
+  const [clickedCardId, setClickedCardId] = useState('')
 
   const cardList = useMemo(() => {
     if (state.loading) {
@@ -53,7 +53,7 @@ const CardList = () => {
               <CardListCard
                 key={card.id}
                 {...card}
-                clicked={clicedCardId === card.id}
+                clicked={clickedCardId === card.id}
                 setClickedCardId={setClickedCardId}
               />
             ))}
