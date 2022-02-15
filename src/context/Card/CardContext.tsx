@@ -28,7 +28,7 @@ function cardReducer(
   state: CardContextProps,
   action: Action
 ): CardContextProps {
-  const clonedState = JSON.parse(JSON.stringify(state))
+  const prevState = JSON.parse(JSON.stringify(state))
 
   switch (action.type) {
     case 'INIT':
@@ -36,19 +36,19 @@ function cardReducer(
 
     case 'ADD':
       appendCard(action.payload)
-      clonedState[action.payload.id] = action.payload.card
+      prevState[action.payload.id] = action.payload.card
 
-      return clonedState
+      return prevState
 
     case 'DELETE':
       deleteCard(action.payload.cardId)
-      delete clonedState[action.payload.cardId]
-      return clonedState
+      delete prevState[action.payload.cardId]
+      return prevState
 
     case 'EDIT':
       editCard(action.payload)
-      clonedState[action.payload.id] = action.payload.card
-      return clonedState
+      prevState[action.payload.id] = action.payload.card
+      return prevState
   }
 }
 
