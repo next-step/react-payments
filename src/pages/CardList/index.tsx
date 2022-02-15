@@ -29,14 +29,12 @@ const CardList = () => {
     }
     const cardKeys = Object.keys(cards)
 
-    const cardList = cardKeys.reduce(
-      (prev, cur) => [...prev, { ...cards[cur], id: cur }],
-      [] as CardListCardProps[]
-    )
-
-    cardList.sort((cardA, cardB) => cardB.createAt - cardA.createAt)
-
-    return cardList
+    return cardKeys
+      .reduce(
+        (prev, cur) => [...prev, { ...cards[cur], id: cur }],
+        [] as CardListCardProps[]
+      )
+      .sort((cardA, cardB) => cardB.createAt - cardA.createAt)
   }, [state.loading, cards])
   return (
     <>
