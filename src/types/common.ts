@@ -33,5 +33,5 @@ export interface Card {
   cardNumbers: CardNumbers;
   cardExpiration: CardExpiration;
   cardName: CardName;
-  cardNickname: string;
+  cardNickname: CardNickname;
 }

@@ -19,6 +19,8 @@ const CardAddPage = (): JSX.Element => {
   const navigate = useNavigate();
 
   const {
+    cards,
+    setCards,
     cardNumbers,
     cardExpiration,
     cardName,
@@ -53,7 +55,36 @@ const CardAddPage = (): JSX.Element => {
   };
 
   const handleSubmit = (): void => {
-    navigate("/add/complete");
+    const cardId = Date.now();
+
+    setCards([...cards, { id: cardId, cardName, cardNumbers, cardExpiration, cardNickname: "클린카드" }]);
+    setCardContextValue({
+      cardNumbers: {
+        first: "",
+        second: "",
+        third: "",
+        fourth: "",
+      },
+      cardExpiration: {
+        month: "",
+        year: "",
+      },
+      cardName: "",
+      securityCode: "",
+      password: {
+        first: "",
+        second: "",
+        third: "",
+        fourth: "",
+      },
+      cardNickname: "",
+    });
+
+    navigate("/add/complete", {
+      state: {
+        currentCardId: cardId,
+      },
+    });
   };
 
   return (

@@ -3,9 +3,10 @@ import Layout from "components/Layout/Layout";
 import useCardContext from "hooks/useCardContext";
 import { CardContext } from "provider/CardProvider";
 import React from "react";
+import { useLocation } from "react-router";
 import { useNavigate } from "react-router-dom";
 import { CardExpiration, CardName, CardNumbers } from "types/common";
-        
+
 interface Card {
   numbers: CardNumbers;
   expiration: CardExpiration;
@@ -14,45 +15,19 @@ interface Card {
 
 const CardRegisterPage = (): JSX.Element => {
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const {
-    cards,
-    setCards,
-    cardName,
-    cardNumbers,
-    cardExpiration,
-    cardNickname,
-    onChangeCardContextValue,
-    setCardContextValue,
-  } = useCardContext(CardContext);
+  const { currentCardId } = location.state as { currentCardId: number };
+
+  const { cards, setCards, cardName, cardNumbers, cardExpiration, cardNickname, onChangeCardContextValue } =
+    useCardContext(CardContext);
 
   const handleSubmit = (): void => {
-    setCards([
-      ...cards,
-      { id: Date.now(), cardName, cardNumbers, cardExpiration, cardNickname: cardNickname || "클린카드" },
-    ]);
-
-    setCardContextValue({
-      cardNumbers: {
-        first: "",
-        second: "",
-        third: "",
-        fourth: "",
-      },
-      cardExpiration: {
-        month: "",
-        year: "",
-      },
-      cardName: "",
-      securityCode: "",
-      password: {
-        first: "",
-        second: "",
-        third: "",
-        fourth: "",
-      },
-      cardNickname: "",
-    });
+    setCards(
+      cards.map((card) => {
+        return card.id === currentCardId ? { ...card, cardNickname: cardNickname || "클린카드" } : card;
+      })
+    );
 
     navigate("/");
   };
