@@ -80,7 +80,7 @@ const CardAddPage = (): JSX.Element => {
       cardNickname: "",
     });
 
-    navigate("/add/complete", {
+    navigate("/register", {
       state: {
         currentCardId: cardId,
       },

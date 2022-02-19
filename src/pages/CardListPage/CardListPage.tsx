@@ -18,9 +18,10 @@ const CardListPage = (): JSX.Element => {
   };
 
   const handleEditCard = (id: number): void => {
-    naviatge("/edit", {
+    naviatge("/register", {
       state: {
-        id,
+        currentCardId: id,
+        isEdit: true,
       },
     });
   };

@@ -14,7 +14,7 @@ function App() {
           <Routes>
             <Route path="/" element={<CardListPage />} />
             <Route path="/add" element={<CardAddPage />} />
-            <Route path="/add/complete" element={<CardRegisterPage />} />
+            <Route path="/register" element={<CardRegisterPage />} />
             <Route path="/edit" element={<CardEditPage />} />
           </Routes>
         </CardProvider>

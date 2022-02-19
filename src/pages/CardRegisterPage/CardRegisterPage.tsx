@@ -17,10 +17,12 @@ const CardRegisterPage = (): JSX.Element => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { currentCardId } = location.state as { currentCardId: number };
+  const { currentCardId, isEdit } = location.state as { currentCardId: number; isEdit: boolean | undefined };
 
   const { cards, setCards, cardName, cardNumbers, cardExpiration, cardNickname, onChangeCardContextValue } =
     useCardContext(CardContext);
+
+  const targetCard = cards.find((card) => card.id === currentCardId);
 
   const handleSubmit = (): void => {
     setCards(
@@ -37,7 +39,12 @@ const CardRegisterPage = (): JSX.Element => {
       <form className="flex h-full flex-col items-center p-5" onSubmit={handleSubmit}>
         <h1 className="mt-20 text-2xl text-gray-600">카드 등록이 완료되었습니다.</h1>
         <div className="mb-10 mt-20">
-          <Card size="large" cardNumbers={cardNumbers} expiration={cardExpiration} name={cardName} />
+          <Card
+            size="large"
+            cardNumbers={targetCard?.cardNumbers}
+            expiration={targetCard?.cardExpiration}
+            name={targetCard?.cardName}
+          />
         </div>
         <input
           className="input-underline w-5/6 text-xl"
@@ -50,7 +57,7 @@ const CardRegisterPage = (): JSX.Element => {
           onChange={onChangeCardContextValue}
         />
         <div className="mt-6 flex justify-end">
-          <button className="absolute right-6 mt-24 text-lg">완료</button>
+          <button className="absolute right-6 mt-24 text-lg">{isEdit ? "수정" : "다음"}</button>
         </div>
       </form>
     </Layout>
