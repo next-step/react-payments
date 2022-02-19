@@ -47,6 +47,18 @@ const Card = ({
     return "*".repeat(numbers.length);
   };
 
+  const getName = (name: string): string => {
+    if (name.length > 10) {
+      return name.slice(0, 10) + "...";
+    }
+
+    if (name.length === 0) {
+      return "NAME";
+    }
+
+    return name;
+  };
+
   return (
     <div
       className={`${sizeTable[size]} rounded-xl bg-gray-350 px-4 py-2 ${cardCompany.color} font-mono tracking-wide shadow-lg`}
@@ -63,7 +75,7 @@ const Card = ({
         ))}
       </ul>
       <div className={`flex justify-between ${size === "large" ? "text-base" : "text-xs"} mx-0.5 mt-1 text-black-700`}>
-        <div>{name || "NAME"}</div>
+        <div className="h-fit max-w-70 text-ellipsis break-words">{getName(name)}</div>
         <div>
           {expiration.month || "MM"}/{expiration.year || "YY"}
         </div>
