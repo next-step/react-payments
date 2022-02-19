@@ -30,12 +30,32 @@ const CardAddPage = (): JSX.Element => {
     setCardContextValue,
   } = useCardContext(CardContext);
 
+  const handleMonth = (value: string) => {
+    if (Number(value) > 12) return;
+
+    if (value.length === 1) value = "0" + value;
+
+    if (!Number(value)) value = "";
+
+    setCardContextValue((prevValues) => ({
+      ...prevValues,
+      cardExpiration: {
+        ...prevValues.cardExpiration,
+        month: Number(value) >= 10 ? value.slice(-2) : value,
+      },
+    }));
+  };
+
   const setDeepCardContextValue = (e: ChangeEvent<HTMLInputElement>, key: string): void => {
     const { name, value } = e.target as { name: "cardNumbers" | "cardExpiration" | "password"; value: string };
 
     if (!["cardNumbers", "cardExpiration", "password"].includes(name)) return;
 
-    if (key === "month" && Number(value) > 12) return;
+    if (key === "month") {
+      handleMonth(value);
+
+      return;
+    }
 
     if (!isNumber(value)) return;
 
@@ -121,7 +141,6 @@ const CardAddPage = (): JSX.Element => {
             name="cardExpiration"
             placeholder="MM"
             minLength={2}
-            maxLength={2}
             value={cardExpiration.month}
             onChange={(e) => setDeepCardContextValue(e, "month")}
             className="text-center"
