@@ -51,7 +51,7 @@ const CardRegisterPage = (): JSX.Element => {
           type="text"
           placeholder="카드의 별칭을 입력해주세요."
           minLength={1}
-          maxLength={15}
+          maxLength={10}
           name="cardNickname"
           value={cardNickname}
           onChange={onChangeCardContextValue}
