@@ -30,24 +30,22 @@ const CardListPage = (): JSX.Element => {
     <Layout>
       <Header title="카드 목록" />
       <ul className="flex flex-col items-center">
-        {cards
-          .sort((a, b) => b.id - a.id)
-          .map(({ id, cardNumbers, cardExpiration, cardName, cardNickname }, i) => (
-            <li key={i} className="mt-5">
-              <Card size="small" name={cardName} cardNumbers={cardNumbers} expiration={cardExpiration} />
-              <div className="flex-center mt-2 flex flex-col">
-                <h2 className="text-center">{cardNickname}</h2>
-                <div className="mt-1 flex gap-2">
-                  <button className="ml text-xs text-gray-500" onClick={() => handleEditCard(id)}>
-                    수정
-                  </button>
-                  <button className="ml text-xs text-red-300" onClick={() => handleDeleteCard(id)}>
-                    삭제
-                  </button>
-                </div>
+        {cards.map(({ id, cardNumbers, cardExpiration, cardName, cardNickname }, i) => (
+          <li key={i} className="mt-5">
+            <Card size="small" name={cardName} cardNumbers={cardNumbers} expiration={cardExpiration} />
+            <div className="flex-center mt-2 flex flex-col">
+              <h2 className="text-center">{cardNickname}</h2>
+              <div className="mt-1 flex gap-2">
+                <button className="ml text-xs text-gray-500" onClick={() => handleEditCard(id)}>
+                  수정
+                </button>
+                <button className="ml text-xs text-red-300" onClick={() => handleDeleteCard(id)}>
+                  삭제
+                </button>
               </div>
-            </li>
-          ))}
+            </div>
+          </li>
+        ))}
         <li className="mt-5">
           <div className="flex h-130 w-208 items-center justify-center rounded-xl bg-gray-350">
             <button className="text-4xl" onClick={() => naviatge("/add")}>

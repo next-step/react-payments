@@ -77,7 +77,7 @@ const CardAddPage = (): JSX.Element => {
   const handleSubmit = (): void => {
     const cardId = Date.now();
 
-    setCards([...cards, { id: cardId, cardName, cardNumbers, cardExpiration, cardNickname: "클린카드" }]);
+    setCards([{ id: cardId, cardName, cardNumbers, cardExpiration, cardNickname: "클린카드" }, ...cards]);
     setCardContextValue({
       cardNumbers: {
         first: "",
