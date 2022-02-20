@@ -17,6 +17,8 @@ export interface CardExpiration {
 
 export type CardName = string;
 
+export type CardNickname = string;
+
 export type CardSecurityCode = string;
 
 export interface CardPassword {
@@ -26,9 +28,10 @@ export interface CardPassword {
   fourth: string;
 }
 
-export interface LocalCard {
-  numbers: CardNumbers;
-  expiration: CardExpiration;
-  name: CardName;
-  nickname: string;
+export interface Card {
+  id: number;
+  cardNumbers: CardNumbers;
+  cardExpiration: CardExpiration;
+  cardName: CardName;
+  cardNickname: CardNickname;
 }
