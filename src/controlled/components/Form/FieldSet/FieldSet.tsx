@@ -18,6 +18,8 @@ export default function FieldSet({ legend = '', children, errorMessage }: Props)
 
 const Fieldset = styled.fieldset`
   border: none;
+  font-size: 12px;
+  color: #525252;
 `
 const Error = styled.span`
   display: inline-block;

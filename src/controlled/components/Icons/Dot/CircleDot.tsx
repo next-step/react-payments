@@ -17,4 +17,5 @@ const Dot = styled.div<Props>`
   background-color: ${({ bgColor }) => bgColor};
   border-radius: 50%;
   display: inline-block;
+  border: 1px solid red;
 `

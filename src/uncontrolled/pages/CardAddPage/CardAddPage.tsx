@@ -1,7 +1,12 @@
 import React, { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import DigitalCard from 'uncontrolled/components/Card/DigitalCard'
+import CardExpiredDateFieldSet from 'uncontrolled/components/Form/FieldSet/CardExpiredDateFieldSet'
 import CardNumsFieldSet from 'uncontrolled/components/Form/FieldSet/CardNumsFieldSet'
+import CardPasswordFieldSet from 'uncontrolled/components/Form/FieldSet/CardPasswordFieldSet'
+import CardOwnerNameInput from 'uncontrolled/components/Form/Input/CardOwnerNameInput'
+import CardCvcInput from 'uncontrolled/components/Form/Input/CardCvcInput'
 
 export default function UnControlledCardAddPage() {
   const navigate = useNavigate()
@@ -10,16 +15,20 @@ export default function UnControlledCardAddPage() {
     expiredDate: ['', ''],
     ownerName: '',
   })
-  const cardNumsInputRef = useRef<any>([])
+
+  const cardInputRef = useRef<any>({})
 
   const handleFormChange = (e: React.FormEvent) => {
     if (!(e.target instanceof HTMLInputElement)) return
-    const [fieldName, fieldIndex] = e.target.name.split('-')
-    const fieldIndexInt = parseInt(fieldIndex)
-    if (fieldName === 'cardNums' && fieldIndexInt <= 2) {
-      const cardNums = cardNumsInputRef.current.getFirstAndSecondCardNums()
+    const [fieldName, fieldIndexValue] = e.target.name.split('-')
+    const fieldIndex = parseInt(fieldIndexValue, 10)
+    if (fieldName === 'cardNums' && fieldIndex <= 2) {
+      const cardNums = cardInputRef.current.getFirstAndSecondCardNums()
       setCardsData({ ...cardsData, cardNums })
     }
+  }
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
   }
 
   return (
@@ -29,9 +38,16 @@ export default function UnControlledCardAddPage() {
         <H1>카드 추가</H1>
       </Header>
       <Main>
-        <form onChange={handleFormChange}>
-          <CardNumsFieldSet ref={cardNumsInputRef} />
-          <button>hello</button>
+        <form onSubmit={handleFormSubmit} onChange={handleFormChange}>
+          <DigitalCardBlock>
+            <DigitalCard />
+          </DigitalCardBlock>
+          <CardNumsFieldSet ref={cardInputRef} />
+          <CardExpiredDateFieldSet ref={cardInputRef} />
+          <CardOwnerNameInput ref={cardInputRef} />
+          <CardCvcInput ref={cardInputRef} />
+          <CardPasswordFieldSet ref={cardInputRef} />
+          <NextButton ref={(el) => (cardInputRef.current.nextButton = el)}>다음</NextButton>
         </form>
       </Main>
     </Box>
@@ -49,7 +65,6 @@ const Header = styled.header`
 `
 
 const Button = styled.button`
-  border: 1px solid red;
   border: none;
   background: none;
   font-size: 20px;
@@ -62,4 +77,19 @@ const H1 = styled.h1`
 
 const Main = styled.main`
   margin-top: 20px;
+  position: relative;
+`
+
+const DigitalCardBlock = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+const NextButton = styled.button`
+  border: none;
+  background: none;
+  font-size: 14px;
+  color: #04c09e;
+  position: absolute;
+  right: 0;
 `
