@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import urlcat from 'urlcat'
 
 import BottomButton from '$components/common/BottomButton'
+import ROUTES from '$constants/routes'
 import { useCardForm } from '$contexts/CardFormContext'
 
 function AddPageNextButton() {
@@ -11,7 +13,7 @@ function AddPageNextButton() {
 
   const handleClick = () => {
     if (!isReadyToCreate) return
-    navigate('/add/complete')
+    navigate(urlcat(ROUTES.DETAIL, { id: '' }))
   }
 
   useEffect(() => {
