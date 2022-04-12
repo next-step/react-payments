@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind'
+import { MouseEventHandler } from 'react'
 import { Card as CardType } from 'src/types/card'
 
 import styles from './style.module.scss'
@@ -7,21 +8,36 @@ const cx = classNames.bind(styles)
 
 interface CardProps {
   type: 'small' | 'big'
+  alias?: string
   holderName: string
   cardNumber: CardType['number']
   expireMonth: string
   expireYear: string
   company: { name: string; color: string }
+  onClick?: MouseEventHandler
 }
 
-function Card({ type = 'small', holderName, cardNumber, expireMonth, expireYear, company }: CardProps) {
+function Card({
+  type = 'small',
+  alias,
+  holderName,
+  cardNumber,
+  expireMonth,
+  expireYear,
+  company,
+  onClick = () => {},
+}: CardProps) {
   const hasCardNumber = cardNumber?.join('').length > 0
 
   return (
-    <div className={cx('card-box')}>
+    <div className={cx('card-box')} onClick={onClick}>
       <div className={cx(`${type}-card`)} style={{ background: company.color || '#e5e5e5' }}>
         <div className={cx('card-top')}>
-          {company.name && <span className={cx(`${type}-card__text`)}>{company.name}</span>}
+          {company.name && (
+            <span className={cx(`${type}-card__text`)}>
+              {company.name} {alias && `(${alias})`}
+            </span>
+          )}
         </div>
         <div className={cx('card-middle')}>
           <div className={cx(`${type}-card__chip`)} />

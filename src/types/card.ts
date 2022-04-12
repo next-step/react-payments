@@ -1,4 +1,6 @@
 export interface Card {
+  id: string
+  alias?: string
   number: [string, string, string, string]
   expireDate: { month: string; year: string }
   holderName: string
