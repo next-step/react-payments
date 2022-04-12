@@ -15,5 +15,5 @@ export const NUMBER_EACH_LENGTH = {
 
 export const PASSWORD_EACH_LENGTH = {
   MIN: 0,
-  MAX: 4,
+  MAX: 1,
 }

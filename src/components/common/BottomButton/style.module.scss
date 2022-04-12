@@ -1,6 +1,12 @@
 .button-box {
   width: 100%;
   text-align: right;
+  cursor: pointer;
+}
+
+.button-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .button-text {

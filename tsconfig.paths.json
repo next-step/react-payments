@@ -7,6 +7,8 @@
       "$constants/*": ["src/constants/*"],
       "$utils/*": ["src/utils/*"],
       "$styles/*": ["src/styles/*"],
+      "$types/*": ["src/types/*"],
+      "$contexts/*": ["src/contexts/*"]
     }
   }
 }
