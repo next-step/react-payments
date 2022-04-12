@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
 import { useCallback } from 'react'
 
-import { COMPANY_LIST } from '$components/add/CardCompanyModal'
+import { COMPANY_LIST } from '$constants/card'
 import { Card } from '$types/card'
 
 const initialCardFormState: Card = {
