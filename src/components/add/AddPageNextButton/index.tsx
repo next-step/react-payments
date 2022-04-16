@@ -5,15 +5,18 @@ import urlcat from 'urlcat'
 import BottomButton from '$components/common/BottomButton'
 import ROUTES from '$constants/routes'
 import { useCardForm } from '$contexts/CardFormContext'
+import { useCardList } from '$contexts/CardListContext'
 
 function AddPageNextButton() {
   const { cardForm } = useCardForm()
+  const { addCard } = useCardList()
   const navigate = useNavigate()
   const [isReadyToCreate, setReadyToCreate] = useState(false)
 
   const handleClick = () => {
     if (!isReadyToCreate) return
-    navigate(urlcat(ROUTES.DETAIL, { id: '' }))
+    const { id } = addCard(cardForm)
+    navigate(urlcat(ROUTES.DETAIL, { id }))
   }
 
   useEffect(() => {
