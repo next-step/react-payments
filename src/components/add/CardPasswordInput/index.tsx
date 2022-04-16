@@ -11,8 +11,8 @@ interface CardPasswordInputProps {
 }
 
 function CardPasswordInput({ cardPassword, setCardPassword }: CardPasswordInputProps) {
-  const [password1, setPassword1] = useState('')
-  const [password2, setPassword2] = useState('')
+  const [password1, setPassword1] = useState(cardPassword[0])
+  const [password2, setPassword2] = useState(cardPassword[1])
   const [showsWarning, setWarning] = useState(false)
 
   const isValidInput = useCallback((value) => {
@@ -43,12 +43,6 @@ function CardPasswordInput({ cardPassword, setCardPassword }: CardPasswordInputP
   useEffect(() => {
     setCardPassword([password1, password2])
   }, [password1, password2, setCardPassword])
-
-  useEffect(() => {
-    const [cardPassword1, cardPassword2] = cardPassword
-    setPassword1(cardPassword1)
-    setPassword2(cardPassword2)
-  }, [setPassword1, cardPassword])
 
   return (
     <Input>

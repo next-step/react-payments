@@ -12,8 +12,8 @@ interface CardExpireDateInputProps {
 function CardExpireDateInput({ cardExpireDate, setCardExpireDate }: CardExpireDateInputProps) {
   const monthRef = useRef<HTMLInputElement>(null)
   const yearRef = useRef<HTMLInputElement>(null)
-  const [month, setMonth] = useState('')
-  const [year, setYear] = useState('')
+  const [month, setMonth] = useState(cardExpireDate.month)
+  const [year, setYear] = useState(cardExpireDate.year)
   const [showsWarning, setWarning] = useState(false)
 
   const isValidInput = useCallback((value) => {
@@ -45,13 +45,6 @@ function CardExpireDateInput({ cardExpireDate, setCardExpireDate }: CardExpireDa
   useEffect(() => {
     setCardExpireDate({ month, year })
   }, [month, year, setCardExpireDate])
-
-  useEffect(() => {
-    const { month, year } = cardExpireDate
-
-    setMonth(month)
-    setYear(year)
-  }, [cardExpireDate])
 
   return (
     <Input>
