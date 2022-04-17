@@ -9,20 +9,13 @@ export const CardType = {
   small: "small",
 } as const;
 
-export type CardData = {
-  cardName?: string;
-  cardNumber?: string;
-  expired?: string;
-  userName?: string;
-  alias?: string;
-};
-
 export const MaxLength = {
   CardNumberInput: 4,
   CardExpirationInput: 2,
   OwnerNameInput: 30,
   CardSecurityCodeInput: 3,
   CardPasswordInput: 1,
+  Alias: 10,
 } as const;
 
 export const InputType = {
@@ -30,7 +23,15 @@ export const InputType = {
   password: "password",
 } as const;
 
-export type InputTypeAttribute = keyof typeof InputType;
-
-export const DigitRegex = /^$|^\d*$/;
-export const AlphabetRegex = /^$|^[A-Za-z]*$/;
+export const InputFieldName = {
+  CardNumber1: "CardNumber1",
+  CardNumber2: "CardNumber2",
+  CardNumber3: "CardNumber3",
+  CardNumber4: "CardNumber4",
+  MonthExpiration: "MonthExpiration",
+  YearExpiration: "YearExpiration",
+  OwnerName: "OwnerName",
+  CardPassword1: "CardPassword1",
+  CardPassword2: "CardPassword2",
+  SecurityCode: "SecurityCode",
+} as const;

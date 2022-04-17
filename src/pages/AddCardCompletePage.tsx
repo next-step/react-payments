@@ -1,7 +1,62 @@
-import React from "react";
+import { CardType, MaxLength, RoutePath } from "@common/constants";
+import NextBtn from "@components/button/NextBtn";
+import Card from "@components/card";
+import { useCardData } from "@context/cardData";
+import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AddCardCompletePage: React.FC = () => {
-  return <div>Add Card Complete Page</div>;
+  const { tempCardData, addCardData, hasCardData, updateCardData } =
+    useCardData();
+  const aliasInputRef = useRef<HTMLInputElement>(null);
+  const navigator = useNavigate();
+
+  const addOrUpdateCardData = () => {
+    const cardDataId = tempCardData.id ?? 0;
+    const alias = aliasInputRef.current?.value || "DefaultCompany";
+
+    const cardData = {
+      ...tempCardData,
+      alias,
+    };
+    console.log(cardData);
+
+    if (hasCardData(cardDataId)) {
+      updateCardData(cardDataId, cardData);
+    } else {
+      addCardData(cardData);
+    }
+  };
+
+  const handleOnClick = () => {
+    addOrUpdateCardData();
+    navigator(RoutePath.CardList);
+  };
+
+  return (
+    <div className="root">
+      <div className="app flex-column-center">
+        <div className="flex-center">
+          <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
+        </div>
+
+        <Card type={CardType.big} cardData={tempCardData} />
+
+        <div className="input-container flex-column-center w-100">
+          <input
+            ref={aliasInputRef}
+            className="input-underline w-75"
+            maxLength={MaxLength.Alias}
+            type="text"
+            placeholder="카드의 별칭을 입력해주세요. (선택)"
+          />
+          <div className="button-box mt-50">
+            <NextBtn onClick={handleOnClick} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default AddCardCompletePage;

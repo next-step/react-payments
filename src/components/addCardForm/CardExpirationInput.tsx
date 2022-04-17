@@ -1,35 +1,21 @@
-import { DigitRegex, MaxLength } from "@common/constants";
-import { useEffect } from "react";
-import useInput from "@hooks/useInput";
-import { OnChangeInputState } from "./AddCardForm";
+import { InputFieldName, MaxLength } from "@common/constants";
+import { UseFormRegister, UseFormWatch } from "@hooks/useForm";
+import { InvalidEvent } from "react";
 
 interface CardExpirationInputProps {
-  onChangeInputState?: OnChangeInputState;
+  register?: UseFormRegister;
+  watch?: UseFormWatch;
 }
 
-const CardExpirationInput = (props: CardExpirationInputProps) => {
-  const monthInputState = useInput({
-    inputRegex: DigitRegex,
-    validator: (val) => +val > 0 && +val <= 12,
-  });
+const monthPattern = "^0?[1-9]|1[012]$";
+const monthInvalidMessage = "Input month format, 1 ~ 12";
 
-  const yearInputState = useInput({
-    inputRegex: DigitRegex,
-    validator: (val) => val.length === MaxLength.CardExpirationInput,
-  });
+const yearPattern = "^0?[1-9]|[1-9][0-9]$";
+const yearInvalidMessage = "Input year format, 0 ~ 99";
 
-  useEffect(() => {
-    const value = [monthInputState.value, yearInputState.value]
-      .filter((inputVal) => inputVal.length > 0)
-      .join(" / ");
-
-    props?.onChangeInputState?.call(null, {
-      value,
-      displayValue: value,
-      isValid: monthInputState.isValid && yearInputState.isValid,
-      displayName: CardExpirationInput.displayName,
-    });
-  }, [monthInputState.value, yearInputState.value]);
+const CardExpirationInput = ({ register, watch }: CardExpirationInputProps) => {
+  watch?.(InputFieldName.MonthExpiration);
+  watch?.(InputFieldName.YearExpiration);
 
   return (
     <div className="input-container">
@@ -39,23 +25,33 @@ const CardExpirationInput = (props: CardExpirationInputProps) => {
           className="input-basic"
           type="text"
           placeholder="MM"
+          onInvalidCapture={(e: InvalidEvent<HTMLInputElement>) =>
+            e.target.setCustomValidity(monthInvalidMessage)
+          }
           maxLength={MaxLength.CardExpirationInput}
-          value={monthInputState.value}
-          onChange={monthInputState.onChange}
+          {...register?.(InputFieldName.MonthExpiration, {
+            required: true,
+            pattern: monthPattern,
+            invalidMessage: monthInvalidMessage,
+          })}
         />
         <input
           className="input-basic"
           type="text"
           placeholder="YY"
           maxLength={MaxLength.CardExpirationInput}
-          value={yearInputState.value}
-          onChange={yearInputState.onChange}
+          onInvalidCapture={(e: InvalidEvent<HTMLInputElement>) =>
+            e.target.setCustomValidity(yearInvalidMessage)
+          }
+          {...register?.(InputFieldName.YearExpiration, {
+            required: true,
+            pattern: yearPattern,
+            invalidMessage: yearInvalidMessage,
+          })}
         />
       </div>
     </div>
   );
 };
-
-CardExpirationInput.displayName = "CardExpirationInput";
 
 export default CardExpirationInput;

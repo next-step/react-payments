@@ -1,11 +1,19 @@
-import { RoutePath } from "@common/constants";
+import { CardType, RoutePath } from "@common/constants";
+import { CardData } from "@common/defines";
 import AddCardForm from "@components/addCardForm/AddCardForm";
 import BackBtn from "@components/button/BackBtn";
-import React from "react";
+import Card from "@components/card";
+import { useCardData } from "@context/cardData";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AddCardPage: React.FC = () => {
   const navigate = useNavigate();
+  const { tempCardData, setTempCardData } = useCardData();
+
+  useEffect(() => {
+    setTempCardData({});
+  }, []);
 
   return (
     <>
@@ -13,9 +21,10 @@ const AddCardPage: React.FC = () => {
         <BackBtn onClick={() => navigate(RoutePath.CardList)} />
         카드 추가
       </h2>
+      <Card type={CardType.small} cardData={tempCardData} />
       <AddCardForm
         className="p-10"
-        onSubmit={() => {
+        handleFormData={(formData) => {
           console.log("on submit");
           navigate(RoutePath.AddCardComplete);
         }}
