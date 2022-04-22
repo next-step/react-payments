@@ -1,3 +1,3 @@
-const SERVER_URL = 'http://3.36.219.120/'
+const SERVER_URL = 'https://terareact.com/'
 
 export { SERVER_URL }

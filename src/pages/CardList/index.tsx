@@ -1,14 +1,12 @@
-import { useEffect, useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Card from '../../components/Card'
 import Header from '../../components/Layout/Header'
-import { ServerCardProps } from '../../context/Card/CardContext'
 import { useCardDispatch, useCardState } from '../../context/Card/hooks'
 import { useAsync } from '../../hooks/Axios/useAsync'
 import { getCards } from '../../server/cardApi'
+import CardListCard, { CardListCardProps } from './Card'
 import Styled from './index.style'
-
-export type CardListProps = ServerCardProps & { id: string }
 
 const CardList = () => {
   const cards = useCardState()
@@ -23,20 +21,20 @@ const CardList = () => {
     }
   }, [dispatch, state.data])
 
+  const [clickedCardId, setClickedCardId] = useState('')
+
   const cardList = useMemo(() => {
     if (state.loading) {
       return []
     }
     const cardKeys = Object.keys(cards)
 
-    const cardList = cardKeys.reduce(
-      (prev, cur) => [...prev, { ...cards[cur], id: cur }],
-      [] as CardListProps[]
-    )
-
-    cardList.sort((cardA, cardB) => cardB.createAt - cardA.createAt)
-
-    return cardList
+    return cardKeys
+      .reduce(
+        (prev, cur) => [...prev, { ...cards[cur], id: cur }],
+        [] as CardListCardProps[]
+      )
+      .sort((cardA, cardB) => cardB.createAt - cardA.createAt)
   }, [state.loading, cards])
   return (
     <>
@@ -46,16 +44,21 @@ const CardList = () => {
           <div>로딩중 ...</div>
         ) : (
           <>
+            <Styled.AddCardContainer>
+              <Link to="/create">
+                <Styled.EmptyCard>+</Styled.EmptyCard>
+              </Link>
+            </Styled.AddCardContainer>
             {cardList.map((card) => (
-              <Card key={card.id} {...card} />
+              <CardListCard
+                key={card.id}
+                {...card}
+                clicked={clickedCardId === card.id}
+                setClickedCardId={setClickedCardId}
+              />
             ))}
           </>
         )}
-        <Styled.CardContainer>
-          <Link to="/create">
-            <Styled.EmptyCard>+</Styled.EmptyCard>
-          </Link>
-        </Styled.CardContainer>
       </Styled.CardListContainer>
     </>
   )
