@@ -12,7 +12,7 @@ const InputContainer: FC<{
   isError?: boolean;
 }> = ({ title = '', titleAfterNode, children, isError, ...others }) => {
   return (
-    <InputContainerEl {...others}>
+    <InputContainerEl isError={isError} {...others}>
       <InputLabel>
         {title && <InputTitle isError={isError}>{title}</InputTitle>}
         {title && titleAfterNode}

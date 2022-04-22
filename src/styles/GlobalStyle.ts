@@ -17,6 +17,9 @@ const GlobalStyle = createGlobalStyle`
     border: 0 none;
     padding: 0;
   }
+  a {
+    text-decoration: none;
+  }
   ${utilsStyle}
   ${animationStyle}
 `;

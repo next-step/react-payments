@@ -1,7 +1,17 @@
 import styled, { css } from 'styled-components';
 
-export const InputContainerEl = styled.div`
+export const InputContainerEl = styled.div<{ isError?: boolean }>`
   margin: 16px 0;
+
+  .error-message {
+    ${({ isError }) => css`
+      margin-top: 4px;
+      font-size: 12px;
+      line-height: 14px;
+      height: 14px;
+      ${isError ? `color: red;` : ''}
+    `}
+  }
 `;
 
 export const InputLabel = styled.label`

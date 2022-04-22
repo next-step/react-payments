@@ -103,3 +103,40 @@ export const CardText = styled.span<{
     `}
   `}
 `;
+
+export const CardItemWrap = styled.div`
+  position: relative;
+  margin-bottom: 16px;
+  a {
+    color: #575757;
+  }
+  .card-nickname {
+    text-align: center;
+  }
+  .btn-delete {
+    position: absolute;
+    top: 1rem;
+    left: -2rem;
+    display: inline-flex;
+    align-items: center;
+    align-content: center;
+    width: 20px;
+    height: 20px;
+    font-size: 0;
+    box-shadow: 3px 3px 5px rgb(0 0 0 / 25%);
+    border-radius: 10px;
+    border: 1px solid #bf2727;
+    text-align: center;
+    &:before {
+      width: 20px;
+      height: 20px;
+
+      color: #bf2727;
+      box-sizing: border-box;
+      line-height: 20px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      content: '-';
+    }
+  }
+`;

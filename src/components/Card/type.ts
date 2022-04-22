@@ -3,6 +3,7 @@ import { CVC, PASSWORD, NICKNAME } from '@/constants/index';
 export type cardSize = 'small' | 'big';
 
 export interface initCardState {
+  id: number;
   company: string;
   cardNumber: (number | string)[];
   owner: string;
