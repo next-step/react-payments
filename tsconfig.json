@@ -9,6 +9,7 @@
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "strictBindCallApply": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
     "moduleResolution": "Node",
@@ -19,12 +20,9 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": [
-      "node",
-      "vite/client"
-    ],
+    "types": ["vitest/globals", "node", "jest", "@testing-library/jest-dom"],
     "typeRoots": ["./types"]
   },
-  "include": ["src"],
+  "include": ["src", "**/*.ts","**/*.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
