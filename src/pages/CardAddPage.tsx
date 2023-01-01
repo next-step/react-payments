@@ -1,3 +1,5 @@
+import { Button } from '@/components';
+
 export default function CardAddPage() {
   return (
     <div className="app">
@@ -52,7 +54,7 @@ export default function CardAddPage() {
         <input className="input-basic w-15" type="password" />
       </div>
       <div className="button-box">
-        <span className="button-text">다음</span>
+        <Button disabled={true}>다음</Button>
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+import { Button } from '@/components';
+
 export default function CardConfirmPage() {
   return (
     <div className="app flex-column-center">
@@ -31,7 +33,7 @@ export default function CardConfirmPage() {
         />
       </div>
       <div className="button-box mt-50">
-        <span className="button-text">다음</span>
+        <Button disabled={true}>다음</Button>
       </div>
     </div>
   );
