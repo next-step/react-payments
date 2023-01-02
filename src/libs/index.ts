@@ -1,1 +1,1 @@
-export { default as TestA11y } from './accessibility';
+export * from './utils';

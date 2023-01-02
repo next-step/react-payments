@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { composeStories } from '@storybook/testing-react';
-import { TestA11y } from '@/libs';
+import TestA11y from '@/libs/accessibility';
 
 import * as ButtonStories from './Button.stories';
 

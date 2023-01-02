@@ -1,5 +1,26 @@
+.input-wrapper {
+  width: 100%;
+  position: relative;
+}
+
 input {
   font-size: 16px;
+  transition: all 0.3s ease-in-out;
+}
+
+.underline {
+  height: 2px;
+  background-color: #2196F3;
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  transition: 0.2s cubic-bezier(0, 0, 0.3, 1);
+}
+
+input:focus + .underline {
+  width: 100%;
 }
 
 .input-container {
@@ -13,6 +34,7 @@ input {
   color: #d3d3d3;
   border-radius: 0.25rem;
   background-color: #ecebf1;
+  position: relative;
 }
 
 .input-title {
@@ -34,9 +56,13 @@ input {
   text-align: center;
   outline: 2px solid transparent;
   outline-offset: 2px;
-  border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-sizing: border-box;
+
+  transition: all 0.2s ease;
 }
 
 .input-underline {

@@ -1,7 +1,12 @@
-import { InputProps } from './Input.types';
+import { forwardRef, InputHTMLAttributes } from 'react';
 
-const InputBase: InputProps<never> = ({ className, ...props }) => (
-  <input className={`input-basic ${className}`} {...props} />
+const InputBase = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(
+  ({ className = '', ...props }, ref) => (
+    <div className="input-wrapper">
+      <input ref={ref} className={`input-basic ${className}`.trim()} {...props} />
+      <span className="underline"></span>
+    </div>
+  ),
 );
 
 export default InputBase;

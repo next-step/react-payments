@@ -1,4 +1,5 @@
 import { Button, Input } from '@/components';
+import { InputCardNumbers } from '@/templates/CardAddPage';
 
 export default function CardAddPage() {
   return (
@@ -18,14 +19,7 @@ export default function CardAddPage() {
           </div>
         </div>
       </div>
-      <Input title="카드 번호">
-        <Input.Box>
-          <Input.Base type="text" />
-          <Input.Base type="text" />
-          <Input.Base type="password" />
-          <Input.Base type="password" />
-        </Input.Box>
-      </Input>
+      <InputCardNumbers />
       <Input title="만료일">
         <Input.Box className="w-50">
           <Input.Base type="text" placeholder="MM" />

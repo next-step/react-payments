@@ -6,7 +6,7 @@ import { isValidElement, ReactElement } from 'react';
 expect.extend(toHaveNoViolations);
 expect.extend(matchers);
 
-export default async function testA11y(
+export default async function TestA11y(
   ui: ReactElement | HTMLElement,
   options: RenderOptions & { axeOptions?: JestAxeConfigureOptions } = {},
 ) {
