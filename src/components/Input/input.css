@@ -1,3 +1,7 @@
+input {
+  font-size: 16px;
+}
+
 .input-container {
   margin: 16px 0;
 }
