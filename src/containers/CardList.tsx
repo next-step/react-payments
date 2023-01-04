@@ -1,8 +1,18 @@
-import React from "react";
+import { MouseEventHandler, useCallback } from "react";
+import { Pages, useRouteContext } from "../providers";
 
 interface IProps {}
 
 export default function CardList(props: IProps) {
+  const { setPage } = useRouteContext();
+  const handleClickCardAdd: MouseEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      event.preventDefault();
+      setPage(Pages.CARD_ADD);
+    },
+    [setPage]
+  );
+
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
@@ -29,7 +39,9 @@ export default function CardList(props: IProps) {
       </div>
       <span className="card-nickname">법인카드</span>
       <div className="card-box">
-        <div className="empty-card">+</div>
+        <div className="empty-card" onClick={handleClickCardAdd}>
+          +
+        </div>
       </div>
     </div>
   );
