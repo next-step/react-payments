@@ -7,19 +7,27 @@ const InputCardNumbers = () => {
   const dispatch = useCardDispatch();
 
   const inputRefs = Array.from({ length: 4 }).map(() => createRef<HTMLInputElement>());
-  const [inputValids, setInputValids] = useState(Array.from({ length: 4 }).map(() => false));
+  const [inputsValid, setInputsValid] = useState(Array.from({ length: 4 }).map(() => false));
 
   const handleChangeInput = (event: KeyboardEvent<HTMLInputElement>) => {
     const $target = event.target as HTMLInputElement;
 
-    if ($target.value.length !== 4) {
-      return;
-    }
-
     const index = inputRefs.findIndex(({ current }) => current === $target);
+
+    if (event.key === 'Backspace') {
+      if ($target.value.length === 0 && index - 1 <= inputRefs.length) {
+        return inputRefs[index - 1].current?.focus();
+      }
+
+      dispatch({ type: 'SUB_CARD_NUMBER' });
+    } else {
+      dispatch({ type: 'ADD_CARD_NUMBER', cardNumber: event.key });
+    }
+    if ($target.value.length !== 4) return;
+
     const isValid = $target.reportValidity();
 
-    setInputValids((prev) => {
+    setInputsValid((prev) => {
       const next = [...prev];
       next[index] = isValid;
       return next;
@@ -31,12 +39,6 @@ const InputCardNumbers = () => {
 
     if (index + 1 > inputRefs.length) {
       return;
-    }
-
-    const isInvalid = inputRefs.some(({ current }) => current?.value.length !== 4);
-    if (!isInvalid) {
-      const cardNumber = inputRefs.map(({ current }) => current?.value).join('');
-      return dispatch({ type: 'SET_CARD_NUMBER', cardNumber });
     }
 
     inputRefs[index + 1].current?.focus();
@@ -53,7 +55,7 @@ const InputCardNumbers = () => {
           maxLength={4}
           minLength={4}
         />
-        {getDash(inputValids[0])}
+        {getDash(inputsValid[0])}
         <Input.Base
           id="card-numbers-2"
           type="text"
@@ -61,7 +63,7 @@ const InputCardNumbers = () => {
           ref={inputRefs[1]}
           maxLength={4}
         />
-        {getDash(inputValids[1])}
+        {getDash(inputsValid[1])}
         <Input.Base
           id="card-numbers-3"
           type="password"
@@ -69,7 +71,7 @@ const InputCardNumbers = () => {
           ref={inputRefs[2]}
           maxLength={4}
         />
-        {getDash(inputValids[2])}
+        {getDash(inputsValid[2])}
         <Input.Base
           id="card-numbers-4"
           type="password"
