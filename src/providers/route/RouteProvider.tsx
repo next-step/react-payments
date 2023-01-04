@@ -31,13 +31,21 @@ export default function RouteProvider({ children }: IProps) {
     history.pushState(null, "", page);
   }, []);
 
-  const routeContext = useMemo(() => ({ page, pushRoute }), [page]);
-
-  useEffect(() => {
+  const syncPage = useCallback(() => {
     const { pathname } = window.location;
     if (isPages(pathname)) {
       setPage(pathname);
     }
+  }, []);
+
+  const routeContext = useMemo(() => ({ page, pushRoute }), [page]);
+
+  useEffect(() => {
+    syncPage();
+
+    window.addEventListener("popstate", syncPage);
+
+    return () => window.removeEventListener("popstate", syncPage);
   }, []);
 
   return (
