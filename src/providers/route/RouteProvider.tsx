@@ -1,9 +1,10 @@
-import React, { createContext, ReactNode, useMemo, useState } from "react";
+import { createContext, ReactNode, useMemo, useState } from "react";
+import { TPages } from "./types";
 import { Pages } from "./const";
 
 interface IRouteContext {
-  page: string;
-  pushRoute: (page: string) => void;
+  page: TPages;
+  pushRoute: (page: TPages) => void;
 }
 
 export const RouteContext = createContext<IRouteContext>({
@@ -12,11 +13,11 @@ export const RouteContext = createContext<IRouteContext>({
 });
 
 interface IProps {
-  children: (page: string) => ReactNode;
+  children: (page: TPages) => ReactNode;
 }
 
 export default function RouteProvider({ children }: IProps) {
-  const [page, pushRoute] = useState(Pages.CARD_LIST);
+  const [page, pushRoute] = useState<TPages>(Pages.CARD_LIST);
 
   const routeContext = useMemo(() => ({ page, pushRoute }), [page]);
 
