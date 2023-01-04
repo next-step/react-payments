@@ -4,13 +4,14 @@ import { Pages, useRouteContext } from "../providers";
 interface IProps {}
 
 export default function CardList(props: IProps) {
-  const { setPage } = useRouteContext();
+  const { pushRoute } = useRouteContext();
+
   const handleClickCardAdd: MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
       event.preventDefault();
-      setPage(Pages.CARD_ADD);
+      pushRoute(Pages.CARD_ADD);
     },
-    [setPage]
+    [pushRoute]
   );
 
   return (

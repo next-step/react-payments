@@ -1,11 +1,23 @@
-import React from "react";
+import React, { MouseEventHandler, useCallback } from "react";
+import { Pages, useRouteContext } from "../providers";
 
 interface IProps {}
 
 export default function CardAdd(props: IProps) {
+  const { pushRoute } = useRouteContext();
+  const handleClickBack: MouseEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      event.preventDefault();
+      pushRoute(Pages.CARD_LIST);
+    },
+    [pushRoute]
+  );
+
   return (
     <div className="app">
-      <h2 className="page-title">&lt; 카드 추가</h2>
+      <h2 className="page-title" onClick={handleClickBack}>
+        &lt; 카드 추가
+      </h2>
       <div className="card-box">
         <div className="empty-card">
           <div className="card-top"></div>
