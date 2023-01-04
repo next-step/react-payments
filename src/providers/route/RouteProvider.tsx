@@ -1,13 +1,6 @@
-import {
-  createContext,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import { isPages, TPages } from "./types";
-import { Pages } from "./const";
+import { createContext, ReactNode, useMemo } from "react";
+import { TPages } from "./types";
+import { useRoute } from "./hooks";
 
 interface IRouteContext {
   page: TPages;
@@ -24,29 +17,8 @@ interface IProps {
 }
 
 export default function RouteProvider({ children }: IProps) {
-  const [page, setPage] = useState<TPages>(Pages.CARD_LIST);
-
-  const pushRoute = useCallback((page: TPages) => {
-    setPage(page);
-    history.pushState(null, "", page);
-  }, []);
-
-  const syncPage = useCallback(() => {
-    const { pathname } = window.location;
-    if (isPages(pathname)) {
-      setPage(pathname);
-    }
-  }, []);
-
-  const routeContext = useMemo(() => ({ page, pushRoute }), [page]);
-
-  useEffect(() => {
-    syncPage();
-
-    window.addEventListener("popstate", syncPage);
-
-    return () => window.removeEventListener("popstate", syncPage);
-  }, []);
+  const { page, pushRoute } = useRoute();
+  const routeContext = useMemo(() => ({ page, pushRoute }), [page, pushRoute]);
 
   return (
     <RouteContext.Provider value={routeContext}>
