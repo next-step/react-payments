@@ -11,21 +11,8 @@ const InputCardNumbers = () => {
 
   const handleChangeInput = (event: KeyboardEvent<HTMLInputElement>) => {
     const $target = event.target as HTMLInputElement;
-
+    const isValid = $target.checkValidity();
     const index = inputRefs.findIndex(({ current }) => current === $target);
-
-    if (event.key === 'Backspace') {
-      if ($target.value.length === 0 && index - 1 <= inputRefs.length) {
-        return inputRefs[index - 1].current?.focus();
-      }
-
-      dispatch({ type: 'SUB_CARD_NUMBER' });
-    } else {
-      dispatch({ type: 'ADD_CARD_NUMBER', cardNumber: event.key });
-    }
-    if ($target.value.length !== 4) return;
-
-    const isValid = $target.reportValidity();
 
     setInputsValid((prev) => {
       const next = [...prev];
@@ -33,15 +20,13 @@ const InputCardNumbers = () => {
       return next;
     });
 
-    if (!isValid) {
-      return;
-    }
+    if ($target.value.length === 4) {
+      if (inputRefs.length - 1 === index) {
+        return;
+      }
 
-    if (index + 1 > inputRefs.length) {
-      return;
+      return inputRefs[index + 1].current?.focus();
     }
-
-    inputRefs[index + 1].current?.focus();
   };
 
   return (
@@ -50,34 +35,46 @@ const InputCardNumbers = () => {
         <Input.Base
           id="card-numbers-1"
           type="text"
-          onKeyUp={handleChangeInput}
+          // onKeyUp={handleChangeInput}
           ref={inputRefs[0]}
-          maxLength={4}
+          pattern="[0-9]+"
           minLength={4}
+          maxLength={4}
+          autoFocus
+          required
         />
         {getDash(inputsValid[0])}
         <Input.Base
           id="card-numbers-2"
           type="text"
-          onKeyUp={handleChangeInput}
+          // onKeyUp={handleChangeInput}
           ref={inputRefs[1]}
+          pattern="[0-9]+"
+          minLength={4}
           maxLength={4}
+          required
         />
         {getDash(inputsValid[1])}
         <Input.Base
           id="card-numbers-3"
           type="password"
-          onKeyUp={handleChangeInput}
+          // onKeyUp={handleChangeInput}
           ref={inputRefs[2]}
+          pattern="[0-9]+"
+          minLength={4}
           maxLength={4}
+          required
         />
         {getDash(inputsValid[2])}
         <Input.Base
           id="card-numbers-4"
           type="password"
-          onKeyUp={handleChangeInput}
+          // onKeyUp={handleChangeInput}
           ref={inputRefs[3]}
+          pattern="[0-9]+"
+          minLength={4}
           maxLength={4}
+          required
         />
       </Input.Box>
     </Input>

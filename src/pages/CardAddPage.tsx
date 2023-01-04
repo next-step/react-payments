@@ -1,12 +1,38 @@
-import { Button, Card, Input } from '@/components';
+import { Button, Card, Form, Input } from '@/components';
 import { CardProvider, InputCardNumbers } from '@/templates/CardAddPage';
+import { ChangeEvent } from 'react';
 
 export default function CardAddPage() {
+  const onSubmit = (data: FormData) => {
+    console.log(Object.fromEntries(data.entries()));
+  };
+
+  const onChange = (event: ChangeEvent<HTMLFormElement>) => {
+    const $target = event.target;
+    if (!($target instanceof HTMLInputElement)) {
+      return;
+    }
+
+    const isValid = $target.checkValidity();
+    if (!isValid) {
+      return;
+    }
+
+    const $elements = event.currentTarget.elements;
+    const index = [...$elements].findIndex((element) => element === $target);
+    if (index === -1) {
+      return;
+    }
+
+    const $nextElement = $elements[index + 1] as HTMLElement;
+    $nextElement.focus();
+  };
+
   return (
     <div className="app">
       <h2 className="page-title">{'< 카드 추가'}</h2>
-      <form>
-        <CardProvider>
+      <CardProvider>
+        <Form onSubmit={onSubmit} onChange={onChange}>
           <Card />
           <InputCardNumbers />
           <Input title="만료일">
@@ -37,13 +63,11 @@ export default function CardAddPage() {
               <Input.Base className="w-15" type="password" />
             </Input.Box>
           </Input>
-        </CardProvider>
-        <div className="button-box">
-          <Button type="submit" disabled>
-            다음
-          </Button>
-        </div>
-      </form>
+          <div className="button-box">
+            <Button type="submit">다음</Button>
+          </div>
+        </Form>
+      </CardProvider>
     </div>
   );
 }

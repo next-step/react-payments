@@ -1,4 +1,4 @@
-import { forwardRef, InputHTMLAttributes } from 'react';
+import { forwardRef, InputHTMLAttributes, memo } from 'react';
 
 const InputBase = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(
   ({ className = '', ...props }, ref) => (
@@ -9,4 +9,4 @@ const InputBase = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElem
   ),
 );
 
-export default InputBase;
+export default memo(InputBase);
