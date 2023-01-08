@@ -1,1 +1,1 @@
-export const getDash = (flag: boolean) => flag && ' - ';
+export const getIndicator = (flag: boolean, indicator = ' - ') => flag && indicator;

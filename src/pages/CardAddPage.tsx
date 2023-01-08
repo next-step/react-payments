@@ -1,62 +1,92 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, Dispatch, FocusEvent, SetStateAction, useState } from 'react';
 //
+import { getIndicator } from '@/libs';
 import { Button, Card, Form, Input } from '@/components';
 import CardCompanyModal from '@/templates/_Common/CardCompany.modal';
-import { CardProvider } from '@/templates/CardAddPage';
-import { getDash } from '@/libs';
+import { CardProvider, useCardState } from '@/templates/CardAddPage';
+//
+import type { FormSameNameFromTargetValidatorCallbackProps } from 'components';
 
 export default function CardAddPage() {
+  const cardData = useCardState();
   const [isOpen, setIsOpen] = useState(false);
-  const [inputsValid, setInputsValid] = useState(Array.from({ length: 4 }).map(() => false));
+  const [[cardNumbersError, cardExpirationError, cardOwnerError], setFieldError] = useState(
+    Array.from({ length: 5 }).map(() => false),
+  );
+  const [inputsValid, setInputsValid] = useState(Array.from({ length: 6 }).map(() => false));
 
   const onSubmit = (data: FormData) => {
     console.log(Object.fromEntries(data.entries()));
   };
 
+  /**
+   * 실시간 UI 렌더링
+   * @param event
+   */
   const onChange = (event: ChangeEvent<HTMLFormElement>) => {
     const $target = event.target;
-    if (!($target instanceof HTMLInputElement)) {
-      return;
-    }
-
-    if ($target.name === 'card-owner') {
-      return;
-    }
-
-    const isValid = $target.checkValidity();
-    if (!isValid) {
-      return;
-    }
+    if (!Form.isInputElement($target)) return;
 
     const $elements = event.currentTarget.elements;
-    // const namedGroupIndex = (
-    //   [...$elements].filter((element) => element.name.includes($target.name)) as HTMLInputElement[]
-    // ).findIndex(({ validity: { valid } }) => !valid);
+    Form.sameNameFromTargetValidator({ $elements, $target, name: 'card-numbers' }, (props) =>
+      cardNumberChangeHandler(props, setInputsValid),
+    );
 
-    // console.log(namedGroupIndex);
-    const index = [...$elements].findIndex((element) => element === $target);
-    if (index === -1) {
-      return;
-    }
+    Form.sameNameFromTargetValidator(
+      { $elements, $target, name: 'card-expiration' },
+      ({ targetIndex }) => {
+        const isValidLength = $target.value.length === 2;
+        setInputsValid((prev) => {
+          const next = [...prev];
+          next[targetIndex] = isValidLength;
+          return next;
+        });
 
-    // if (namedGroupIndex === -1) {
-    //   const $nextElement = $elements[index + 1] as HTMLElement;
-    //   $nextElement.focus();
-    //   return;
-    // }
+        if (!isValidLength) return;
 
-    const $nextElement = $elements[index + 1] as HTMLElement;
-    $nextElement.focus();
+        const $nextElement = $elements[targetIndex + 1] as HTMLElement;
+        $nextElement.focus();
+      },
+    );
+  };
+
+  /**
+   * 필드 에러 체크
+   * @param event
+   */
+  const onBlur = (event: FocusEvent<HTMLFormElement>) => {
+    const $target = event.target;
+    if (!Form.isInputElement($target)) return;
+
+    const $elements = event.currentTarget.elements;
+    Form.sameNameFromTargetValidator({ $elements, $target, name: 'card-numbers' }, (props) =>
+      cardNumberBlurHandler(props, setFieldError),
+    );
+
+    Form.sameNameFromTargetValidator(
+      { $elements, $target, name: 'card-expiration' },
+      ({ sameNamesElements, targetIndex }) => {
+        const isValid = sameNamesElements.every((element, $index) =>
+          targetIndex < $index ? true : element.checkValidity(),
+        );
+
+        setFieldError((prev) => {
+          const next = [...prev];
+          next[1] = !isValid;
+          return next;
+        });
+      },
+    );
   };
 
   return (
     <div className="app">
       <h2 className="page-title">{'< 카드 추가'}</h2>
       <CardProvider>
-        <Form onSubmit={onSubmit} onChange={onChange}>
-          <Card />
+        <Form onSubmit={onSubmit} onChange={onChange} onBlur={onBlur}>
+          <Card {...cardData} />
           <Input title="카드 번호">
-            <Input.Box errorMessage={inputsValid[0] ? '' : '형식이 올바르지 않습니다.'}>
+            <Input.Box error={cardNumbersError} errorMessage="형식이 올바르지 않습니다.">
               <Input.Base
                 id="card-numbers-1"
                 name="card-numbers"
@@ -67,7 +97,7 @@ export default function CardAddPage() {
                 autoFocus
                 required
               />
-              {getDash(inputsValid[0])}
+              {getIndicator(inputsValid[0])}
               <Input.Base
                 id="card-numbers-2"
                 name="card-numbers"
@@ -77,7 +107,7 @@ export default function CardAddPage() {
                 maxLength={4}
                 required
               />
-              {getDash(inputsValid[1])}
+              {getIndicator(inputsValid[1])}
               <Input.Base
                 id="card-numbers-3"
                 name="card-numbers"
@@ -87,7 +117,7 @@ export default function CardAddPage() {
                 maxLength={4}
                 required
               />
-              {getDash(inputsValid[2])}
+              {getIndicator(inputsValid[2])}
               <Input.Base
                 id="card-numbers-4"
                 name="card-numbers"
@@ -100,19 +130,26 @@ export default function CardAddPage() {
             </Input.Box>
           </Input>
           <Input title="만료일">
-            <Input.Box className="w-50">
+            <Input.Box
+              className="w-50"
+              error={cardExpirationError}
+              errorMessage="형식이 올바르지 않습니다."
+            >
               <Input.Base
                 type="text"
+                name="card-expiration"
                 placeholder="MM"
-                pattern="[0-2]+"
+                pattern="^(0[1-9]|1[012])$"
                 minLength={2}
                 maxLength={2}
                 required
               />
+              {getIndicator(inputsValid[4], ' / ')}
               <Input.Base
                 type="text"
+                name="card-expiration"
                 placeholder="YY"
-                pattern="[0-9]+"
+                pattern="^(2[3-9]|[3-9][0-9])$"
                 minLength={2}
                 maxLength={2}
                 required
@@ -120,7 +157,7 @@ export default function CardAddPage() {
             </Input.Box>
           </Input>
           <Input title="카드 소유자 이름(선택)">
-            <Input.Box>
+            <Input.Box error={cardOwnerError} errorMessage="값을 입력해주세요.">
               <Input.Base
                 name="card-owner"
                 className="input-basic"
@@ -174,3 +211,45 @@ export default function CardAddPage() {
     </div>
   );
 }
+
+const cardNumberChangeHandler = (
+  {
+    $elements,
+    $target,
+    sameNamesElements,
+    targetIndex,
+  }: FormSameNameFromTargetValidatorCallbackProps,
+  setInputsValid: Dispatch<SetStateAction<boolean[]>>,
+) => {
+  const isValidLength = $target.value.length === 4;
+  setInputsValid((prev) => {
+    const next = [...prev];
+    next[targetIndex] = isValidLength;
+    return next;
+  });
+
+  if (!isValidLength) return;
+
+  const $nextElement = $elements[targetIndex + 1] as HTMLElement;
+  $nextElement.focus();
+};
+
+const cardNumberBlurHandler = (
+  {
+    $elements,
+    $target,
+    sameNamesElements,
+    targetIndex,
+  }: FormSameNameFromTargetValidatorCallbackProps,
+  setFieldError: Dispatch<SetStateAction<boolean[]>>,
+) => {
+  const isValid = sameNamesElements.every((element, $index) =>
+    targetIndex < $index ? true : element.checkValidity(),
+  );
+
+  setFieldError((prev) => {
+    const next = [...prev];
+    next[0] = !isValid;
+    return next;
+  });
+};

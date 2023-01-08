@@ -2,6 +2,17 @@ declare module 'components' {
   import { ReactNode } from 'react';
 
   type ChildrenProps = { children: ReactNode };
+
+  type FormSameNameFromTargetValidatorProps = {
+    $elements: HTMLFormControlsCollection;
+    $target: EventTarget & HTMLFormElement & HTMLInputElement;
+    name: string;
+  };
+
+  type FormSameNameFromTargetValidatorCallbackProps = FormSameNameFromTargetValidatorProps & {
+    sameNamesElements: HTMLInputElement[];
+    targetIndex: number;
+  };
 }
 
 declare module 'literal' {

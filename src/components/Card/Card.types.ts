@@ -9,4 +9,6 @@ export type CardProps = {
   cardOwner?: string;
   cardMonth?: string;
   cardYear?: string;
+  cardSecurityCode?: string;
+  cardPassword?: string;
 };
