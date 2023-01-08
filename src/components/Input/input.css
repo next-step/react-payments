@@ -23,6 +23,10 @@ input:focus + .underline {
   width: 100%;
 }
 
+/* input:invalid:focus + .underline {
+  background-color: #ff0000;
+} */
+
 .input-container {
   margin: 16px 0;
 }
@@ -35,6 +39,11 @@ input:focus + .underline {
   border-radius: 0.25rem;
   background-color: #ecebf1;
   position: relative;
+}
+
+.input-error-message {
+  font-size: 12px;
+  color: #ff0000;
 }
 
 .input-title {

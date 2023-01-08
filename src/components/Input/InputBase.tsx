@@ -4,7 +4,7 @@ const InputBase = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElem
   ({ className = '', ...props }, ref) => (
     <div className="input-wrapper">
       <input ref={ref} className={`input-basic ${className}`.trim()} {...props} />
-      <span className="underline"></span>
+      <span className="underline" />
     </div>
   ),
 );

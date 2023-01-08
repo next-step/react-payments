@@ -14,12 +14,9 @@ const Form: FunctionComponent<FormProps> = ({ action, children, onChange, onSubm
     const formElement = e.target as HTMLFormElement;
     const isValid = formElement.checkValidity();
 
-    // focusing the first invalid field
     const firstInvalidField = formElement.querySelector(':invalid') as HTMLInputElement;
-
     firstInvalidField?.focus();
 
-    // submit the dataObject if isValid===true
     if (isValid) {
       const dataObject = new FormData(formElement);
       onSubmit(dataObject);
