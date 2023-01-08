@@ -1,5 +1,6 @@
-import { HomePage, CardAddPage, CardConfirmPage } from '@/pages';
 import { Route, Routes as ReactRouterRoutes, Navigate } from 'react-router-dom';
+//
+import { HomePage, CardAddPage, CardConfirmPage } from '@/pages';
 
 export default function Routes() {
   return (

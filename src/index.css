@@ -11,7 +11,7 @@ body {
   background-color: #fff;
   width: 375px;
   min-width: 375px;
-  height: 700px;
+  height: 800px;
   position: relative;
   border-radius: 15px;
 }
@@ -29,4 +29,99 @@ body {
   align-items: center;
 
   color: #383838;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-column-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.mt-20 {
+  margin-top: 5rem;
+}
+
+.mt-30 {
+  margin-top: 7.5rem;
+}
+
+.mt-40 {
+  margin-top: 9rem;
+}
+
+.mt-50 {
+  margin-top: 11.5rem;
+}
+
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-75 {
+  width: 75%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-25 {
+  width: 25%;
+}
+
+.w-15 {
+  width: 15%;
+}
+
+.moon > div {
+  background-color: #fddc69;
+}
+
+.wave > div {
+  background-color: #99c4ff;
+}
+
+.cherry-blossom > div {
+  background-color: #ffafd2;
+}
+
+.parang > div {
+  color: #ffffff !important;
+  background-color: #003899;
+}
+
+.leaf > div {
+  background-color: #022d0d;
+}
+
+.unicorn > div {
+  background-color: #00ebe6;
+}
+
+.star > div {
+  background-color: #ffd250;
+}
+
+
+.sky > div {
+  background-color: #87CEEB;
 }

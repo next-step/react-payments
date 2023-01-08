@@ -68,16 +68,17 @@ module.exports = {
     '@typescript-eslint/ban-types': 'warn',
     '@typescript-eslint/no-inferrable-types': 'warn',
     '@typescript-eslint/no-empty-function': 'off',
+
     '@typescript-eslint/naming-convention': [
       'error',
       {
-        format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+        format: ['camelCase', 'UPPER_CASE', 'PascalCase', 'snake_case'],
         selector: 'variable',
         leadingUnderscore: 'allow',
       },
-      { format: ['camelCase', 'PascalCase'], selector: 'function' },
-      { format: ['PascalCase'], selector: 'interface' },
-      { format: ['PascalCase'], selector: 'typeAlias' },
+      { format: ['camelCase', 'PascalCase', 'snake_case'], selector: 'function' },
+      { format: ['PascalCase', 'snake_case'], selector: 'interface' },
+      { format: ['PascalCase', 'snake_case'], selector: 'typeAlias' },
     ],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/array-type': ['error', { default: 'array-simple' }],
