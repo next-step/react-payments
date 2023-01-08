@@ -1,14 +1,14 @@
-import { useRouter } from '@/libs';
+import { useRouteDispatch } from '@/hooks';
 
 export default function HomePage() {
-  const router = useRouter();
+  const dispatch = useRouteDispatch();
 
   const handleConfirmation = () => {
-    router.push('/confirmation');
+    dispatch({ type: 'PUSH', route: '/confirmation' });
   };
 
   const handleAddCard = () => {
-    router.push('/add-card');
+    dispatch({ type: 'PUSH', route: '/add-card' });
   };
 
   return (

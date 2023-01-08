@@ -107,7 +107,6 @@ module.exports = {
     ],
     'prefer-const': 'error',
     'no-var': 'error',
-    curly: ['error', 'all'],
     eqeqeq: ['error', 'always', { null: 'ignore' }],
     'import/no-duplicates': 'error',
 

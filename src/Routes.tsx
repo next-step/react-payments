@@ -1,14 +1,25 @@
-import { Route, Routes as ReactRouterRoutes, Navigate } from 'react-router-dom';
-//
-import { HomePage, CardAddPage, CardConfirmPage } from '@/pages';
+import { useRouteState } from './hooks';
+import { HomePage, CardAddPage, CardConfirmPage } from './pages';
+
+const parsedPathname = (targetPath: string) =>
+  targetPath.includes('http') ? new URL(targetPath) : { pathname: targetPath };
 
 export default function Routes() {
-  return (
-    <ReactRouterRoutes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/add-card" element={<CardAddPage />} />
-      <Route path="/confirmation" element={<CardConfirmPage />} />
-      <Route path="*" element={<Navigate replace to="/" />} />
-    </ReactRouterRoutes>
-  );
+  const { currentRoute } = useRouteState();
+  const { pathname } = parsedPathname(currentRoute);
+
+  switch (pathname) {
+    case '/': {
+      return <HomePage />;
+    }
+    case '/add-card': {
+      return <CardAddPage />;
+    }
+    case '/confirmation': {
+      return <CardConfirmPage />;
+    }
+    default: {
+      return <HomePage />;
+    }
+  }
 }

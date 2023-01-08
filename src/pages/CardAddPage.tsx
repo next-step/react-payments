@@ -1,6 +1,7 @@
 import { ChangeEvent, Dispatch, FocusEvent, SetStateAction, useState } from 'react';
 //
 import { getIndicator } from '@/libs';
+import { useRouter } from '@/hooks';
 import { Button, Card, Form, Input } from '@/components';
 import CardCompanyModal from '@/templates/_Common/CardCompany.modal';
 import { CardProvider, useCardState } from '@/templates/CardAddPage';
@@ -9,6 +10,7 @@ import type { FormSameNameFromTargetValidatorCallbackProps } from 'components';
 
 export default function CardAddPage() {
   const cardData = useCardState();
+  const { back } = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [[cardNumbersError, cardExpirationError, cardOwnerError], setFieldError] = useState(
     Array.from({ length: 5 }).map(() => false),
@@ -81,7 +83,9 @@ export default function CardAddPage() {
 
   return (
     <div className="app">
-      <h2 className="page-title">{'< 카드 추가'}</h2>
+      <h2 className="page-title" onClick={() => back()}>
+        {'< 카드 추가'}
+      </h2>
       <CardProvider>
         <Form onSubmit={onSubmit} onChange={onChange} onBlur={onBlur}>
           <Card {...cardData} />
