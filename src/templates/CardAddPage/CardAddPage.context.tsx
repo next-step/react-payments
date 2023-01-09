@@ -17,9 +17,9 @@ type State = {
   cardPassword: string;
 };
 
-type Action =
+export type Action =
   | { type: 'SET_CARD_TITLE'; cardTitle: string }
-  | { type: 'ADD_CARD_NUMBER'; cardNumber: string }
+  | { type: 'SET_CARD_NUMBER'; cardNumber: string }
   | { type: 'SET_CARD_OWNER'; cardOwner: string }
   | { type: 'SET_CARD_MONTH'; cardMonth: string }
   | { type: 'SET_CARD_YEAR'; cardYear: string }
@@ -44,8 +44,8 @@ const cardReducer = (state: State, action: Action) => {
     case 'SET_CARD_TITLE': {
       return { ...state, cardTitle: action.cardTitle };
     }
-    case 'ADD_CARD_NUMBER': {
-      return { ...state, cardNumber: `${state.cardNumber}${action.cardNumber}` };
+    case 'SET_CARD_NUMBER': {
+      return { ...state, cardNumber: action.cardNumber };
     }
     case 'SET_CARD_OWNER': {
       return { ...state, cardOwner: action.cardOwner };
