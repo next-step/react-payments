@@ -1,6 +1,6 @@
 import './card.css';
 //
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 //
 import { 카드_기본번호, 카드_테마 } from '@/constants';
 //
@@ -19,14 +19,10 @@ const Card = ({ size = 'small', theme = '기본', isEmpty = false, ...props }: C
 
   useEffect(() => {
     const parsed = cardNumber.replace('-', '');
-    if (parsed.length < 8) {
-      return;
-    }
+    if (parsed.length < 8) return;
 
     const cardCompany = 카드_기본번호[parsed.substring(0, 8)];
-    if (!cardCompany) {
-      return;
-    }
+    if (!cardCompany) return;
 
     setCardTheme(cardCompany);
   }, [cardNumber]);
@@ -77,4 +73,4 @@ const Card = ({ size = 'small', theme = '기본', isEmpty = false, ...props }: C
   );
 };
 
-export default Card;
+export default memo(Card);

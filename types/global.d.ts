@@ -1,3 +1,17 @@
+declare module 'contexts' {
+  type CardState = {
+    cardTitle: string;
+    cardNumber: string;
+    cardOwner: string;
+    cardMonth: string;
+    cardYear: string;
+    cardSecurityCode: string;
+    cardPassword: string;
+  };
+
+  type CardAction = { type: 'ADD_CARD'; card: State } | { type: 'DEL_CARD'; cardNumber: string };
+}
+
 declare module 'components' {
   import { ReactNode } from 'react';
 

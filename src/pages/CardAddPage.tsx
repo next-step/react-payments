@@ -4,14 +4,23 @@ import { getIndicator } from '@/libs';
 import { useRouter } from '@/hooks';
 import { Button, Card, Form, Input } from '@/components';
 import CardCompanyModal from '@/templates/_Common/CardCompany.modal';
-import { Action, useCardDispatch, useCardState } from '@/templates/CardAddPage';
 //
 import type { FormSameNameFromTargetValidatorCallbackProps } from 'components';
+import type { CardState } from 'contexts';
+
+const 카드_초깃값 = {
+  cardTitle: '',
+  cardNumber: '',
+  cardOwner: '',
+  cardMonth: '',
+  cardYear: '',
+  cardSecurityCode: '',
+  cardPassword: '',
+};
 
 export default function CardAddPage() {
-  const cardData = useCardState();
-  const cardDataDispatch = useCardDispatch();
   const { back } = useRouter();
+  const [cardData, setCardData] = useState<CardState>(카드_초깃값);
   const [isOpen, setIsOpen] = useState(false);
   const [[cardNumbersError, cardExpirationError, cardOwnerError], setFieldError] = useState(
     Array.from({ length: 5 }).map(() => false),
@@ -32,7 +41,7 @@ export default function CardAddPage() {
 
     const $elements = event.currentTarget.elements;
     Form.sameNameFromTargetValidator({ $elements, $target, name: 'card-numbers' }, (props) =>
-      cardNumberChangeHandler(props, setInputsValid, cardDataDispatch),
+      cardNumberChangeHandler(props, setInputsValid, setCardData),
     );
 
     Form.sameNameFromTargetValidator(
@@ -223,7 +232,7 @@ const cardNumberChangeHandler = (
     targetIndex,
   }: FormSameNameFromTargetValidatorCallbackProps,
   setInputsValid: Dispatch<SetStateAction<boolean[]>>,
-  dispatch: (value: Action) => void,
+  setCardData: Dispatch<SetStateAction<CardState>>,
 ) => {
   const cardNumberString = sameNamesElements
     .map(({ value }) => value)
@@ -233,7 +242,7 @@ const cardNumberChangeHandler = (
       return cardNumbers;
     }, []);
 
-  dispatch({ type: 'SET_CARD_NUMBER', cardNumber: cardNumberString.join(' - ') });
+  setCardData((prev) => ({ ...prev, cardNumber: cardNumberString.join(' - ') }));
 
   const isValidLength = $target.value.length === 4;
   setInputsValid((prev) => {
@@ -251,12 +260,7 @@ const cardNumberChangeHandler = (
 };
 
 const cardNumberBlurHandler = (
-  {
-    $elements,
-    $target,
-    sameNamesElements,
-    targetIndex,
-  }: FormSameNameFromTargetValidatorCallbackProps,
+  { sameNamesElements, targetIndex }: FormSameNameFromTargetValidatorCallbackProps,
   setFieldError: Dispatch<SetStateAction<boolean[]>>,
 ) => {
   const isValid = sameNamesElements.every((element, $index) =>
