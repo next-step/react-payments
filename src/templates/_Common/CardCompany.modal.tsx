@@ -8,7 +8,7 @@ type CardCompanyModalProps = {
   onClose?: (event: KeyboardEvent | MouseEvent) => void;
 };
 
-const 카드_목록 = Object.entries(카드_테마).filter(([company]) => company !== '기본');
+const 카드_목록 = Object.entries(카드_테마).filter(([company]) => company !== '');
 
 const CardCompanyModal = ({ open, onClose }: CardCompanyModalProps) => {
   const clickRef = useRef<HTMLDivElement>(null);
@@ -17,7 +17,7 @@ const CardCompanyModal = ({ open, onClose }: CardCompanyModalProps) => {
       <div className="modal-dimmed" />
       <div className="modal" data-testid="select-modal" ref={clickRef}>
         <div className="flex-center flex-wrap">
-          {카드_목록.map(([company, className]) => (
+          {카드_목록.map(([className, company]) => (
             <div key={className} className={`modal-item-container ${className}`}>
               <div className="modal-item-dot" />
               <span className="modal-item-name">{company}</span>

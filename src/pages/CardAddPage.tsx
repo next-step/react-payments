@@ -2,25 +2,29 @@ import { ChangeEvent, Dispatch, FocusEvent, SetStateAction, useState } from 'rea
 //
 import { getIndicator } from '@/libs';
 import { useRouter } from '@/hooks';
+import { 카드_기본번호 } from '@/constants';
 import { Button, Card, Form, Input } from '@/components';
 import CardCompanyModal from '@/templates/_Common/CardCompany.modal';
 //
 import type { FormSameNameFromTargetValidatorCallbackProps } from 'components';
 import type { CardState } from 'contexts';
+import { 카드_테마_키 } from 'literal';
 
-const 카드_초깃값 = {
+type CardProps = CardState & { theme: 카드_테마_키 };
+
+const 카드_초깃값: CardProps = {
+  theme: '기본',
   cardTitle: '',
   cardNumber: '',
   cardOwner: '',
-  cardMonth: '',
-  cardYear: '',
+  cardExpiration: '',
   cardSecurityCode: '',
   cardPassword: '',
 };
 
 export default function CardAddPage() {
   const { back } = useRouter();
-  const [cardData, setCardData] = useState<CardState>(카드_초깃값);
+  const [cardData, setCardData] = useState<CardProps>(카드_초깃값);
   const [isOpen, setIsOpen] = useState(false);
   const [[cardNumbersError, cardExpirationError, cardOwnerError], setFieldError] = useState(
     Array.from({ length: 5 }).map(() => false),
@@ -46,7 +50,7 @@ export default function CardAddPage() {
 
     Form.sameNameFromTargetValidator(
       { $elements, $target, name: 'card-expiration' },
-      ({ targetIndex }) => {
+      ({ targetIndex, sameNamesElements }) => {
         const isValidLength = $target.value.length === 2;
         setInputsValid((prev) => {
           const next = [...prev];
@@ -55,6 +59,37 @@ export default function CardAddPage() {
         });
 
         if (!isValidLength) return;
+
+        const cardExpiration = sameNamesElements.map(({ value }) => value);
+
+        setCardData((prev) => ({ ...prev, cardExpiration: cardExpiration.join(' / ') }));
+
+        const $nextElement = $elements[targetIndex + 1] as HTMLElement;
+        $nextElement.focus();
+      },
+    );
+
+    Form.sameNameFromTargetValidator({ $elements, $target, name: 'card-owner' }, () => {
+      setCardData((prev) => ({ ...prev, cardOwner: $target.value }));
+    });
+
+    Form.sameNameFromTargetValidator(
+      { $elements, $target, name: 'card-security-code' },
+      ({ targetIndex }) => {
+        setCardData((prev) => ({ ...prev, cardSecurityCode: $target.value }));
+
+        const isValidLength = $target.value.length === 3;
+        if (!isValidLength) return;
+
+        const $nextElement = $elements[targetIndex + 1] as HTMLElement;
+        $nextElement.focus();
+      },
+    );
+
+    Form.sameNameFromTargetValidator(
+      { $elements, $target, name: 'card-password' },
+      ({ targetIndex }) => {
+        setCardData((prev) => ({ ...prev, cardPassword: $target.value }));
 
         const $nextElement = $elements[targetIndex + 1] as HTMLElement;
         $nextElement.focus();
@@ -149,8 +184,8 @@ export default function CardAddPage() {
             errorMessage="형식이 올바르지 않습니다."
           >
             <Input.Base
-              type="text"
               name="card-expiration"
+              type="text"
               placeholder="MM"
               pattern="^(0[1-9]|1[012])$"
               minLength={2}
@@ -159,8 +194,8 @@ export default function CardAddPage() {
             />
             {getIndicator(inputsValid[4], ' / ')}
             <Input.Base
-              type="text"
               name="card-expiration"
+              type="text"
               placeholder="YY"
               pattern="^(2[3-9]|[3-9][0-9])$"
               minLength={2}
@@ -184,6 +219,7 @@ export default function CardAddPage() {
         <Input title="보안코드(CVC/CVV)">
           <Input.Box>
             <Input.Base
+              name="card-security-code"
               type="password"
               className="w-25"
               pattern="[0-9]+"
@@ -196,6 +232,7 @@ export default function CardAddPage() {
         <Input title="카드 비밀번호">
           <Input.Box>
             <Input.Base
+              name="card-password"
               type="password"
               className="w-15"
               pattern="[0-9]+"
@@ -204,6 +241,7 @@ export default function CardAddPage() {
               required
             />
             <Input.Base
+              name="card-password"
               type="password"
               className="w-15"
               pattern="[0-9]+"
@@ -232,7 +270,7 @@ const cardNumberChangeHandler = (
     targetIndex,
   }: FormSameNameFromTargetValidatorCallbackProps,
   setInputsValid: Dispatch<SetStateAction<boolean[]>>,
-  setCardData: Dispatch<SetStateAction<CardState>>,
+  setCardData: Dispatch<SetStateAction<CardProps>>,
 ) => {
   const cardNumberString = sameNamesElements
     .map(({ value }) => value)
@@ -242,7 +280,12 @@ const cardNumberChangeHandler = (
       return cardNumbers;
     }, []);
 
-  setCardData((prev) => ({ ...prev, cardNumber: cardNumberString.join(' - ') }));
+  const theme = 카드_기본번호[cardNumberString.slice(0, 2).join('')];
+  setCardData((prev) => ({
+    ...prev,
+    cardNumber: cardNumberString.join(' - '),
+    theme,
+  }));
 
   const isValidLength = $target.value.length === 4;
   setInputsValid((prev) => {

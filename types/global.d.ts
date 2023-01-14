@@ -3,8 +3,7 @@ declare module 'contexts' {
     cardTitle: string;
     cardNumber: string;
     cardOwner: string;
-    cardMonth: string;
-    cardYear: string;
+    cardExpiration: string;
     cardSecurityCode: string;
     cardPassword: string;
   };
@@ -32,7 +31,7 @@ declare module 'components' {
 declare module 'literal' {
   type 타입_라우터_프로퍼티 = '/' | '/add-card' | '/confirmation';
 
-  export type 카드_테마_키 =
+  type 카드_테마_키 =
     | '기본'
     | '달'
     | '별'
@@ -43,7 +42,7 @@ declare module 'literal' {
     | '파도'
     | '벚꽃';
 
-  export type 카드_테마_타입 =
+  type 카드_테마_타입 =
     | ''
     | 'moon'
     | 'star'

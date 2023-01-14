@@ -1,32 +1,20 @@
 import './card.css';
 //
-import { memo, useEffect, useState } from 'react';
+import { memo } from 'react';
 //
-import { 카드_기본번호, 카드_테마 } from '@/constants';
+import { 카드_테마 } from '../../constants';
 //
-import type { 카드_테마_타입 } from 'literal';
 import type { CardProps } from './Card.types';
 
-const Card = ({ size = 'small', theme = '기본', isEmpty = false, ...props }: CardProps) => {
-  const {
-    cardTitle,
-    cardNumber = '',
-    cardOwner = 'NAME',
-    cardMonth = 'MM',
-    cardYear = 'YY',
-  } = props;
-  const [cardTheme, setCardTheme] = useState<카드_테마_타입>(카드_테마[theme]);
-
-  useEffect(() => {
-    const parsed = cardNumber.replace('-', '');
-    if (parsed.length < 8) return;
-
-    const cardCompany = 카드_기본번호[parsed.substring(0, 8)];
-    if (!cardCompany) return;
-
-    setCardTheme(cardCompany);
-  }, [cardNumber]);
-
+const Card = ({
+  size = 'small',
+  theme = '',
+  isEmpty = false,
+  cardTitle,
+  cardNumber = '',
+  cardOwner = 'NAME',
+  cardExpiration = 'MM / YY',
+}: CardProps) => {
   if (isEmpty) {
     return (
       <div className="card-box">
@@ -47,11 +35,11 @@ const Card = ({ size = 'small', theme = '기본', isEmpty = false, ...props }: C
   }
 
   return (
-    <div className={`card-box ${cardTheme}`.trim()}>
+    <div className={`card-box ${theme}`.trim()}>
       <div className={`${size}-card`}>
         <div className="card-top">
           <span className="card-text" data-testid="card-title">
-            {cardTitle || theme !== '기본' ? theme : ''}
+            {cardTitle || 카드_테마[theme] || '기본'}
           </span>
         </div>
         <div className="card-middle">
@@ -63,9 +51,7 @@ const Card = ({ size = 'small', theme = '기본', isEmpty = false, ...props }: C
           </div>
           <div className="card-bottom__info">
             <span className="card-text">{cardOwner}</span>
-            <span className="card-text">
-              {cardMonth} / {cardYear}
-            </span>
+            <span className="card-text">{cardExpiration}</span>
           </div>
         </div>
       </div>
