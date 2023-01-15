@@ -1,25 +1,37 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { ICard } from "../../domain";
 
-interface IProps {}
+export default function Card({
+  type,
+  numbers,
+  owner,
+  expiredMonth,
+  expiredYear,
+}: ICard) {
+  const cardNumbers = useMemo(
+    () => [...numbers, "****", "****"].join(" - "),
+    [numbers]
+  );
 
-export default function Card(props: IProps) {
   return (
     <>
       <div className="card-box">
         <div className="small-card">
           <div className="card-top">
-            <span className="card-text">클린카드</span>
+            <span className="card-text">{type} 카드</span>
           </div>
           <div className="card-middle">
-            <div className="small-card__chip"></div>
+            <div className="small-card__chip" />
           </div>
           <div className="card-bottom">
             <div className="card-bottom__number">
-              <span className="card-text">1111 - 2222 - oooo - oooo</span>
+              <span className="card-text">{cardNumbers}</span>
             </div>
             <div className="card-bottom__info">
-              <span className="card-text">YUJO</span>
-              <span className="card-text">12 / 23</span>
+              <span className="card-text">{owner}</span>
+              <span className="card-text">
+                {expiredMonth} / {expiredYear}
+              </span>
             </div>
           </div>
         </div>

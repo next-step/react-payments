@@ -1,8 +1,17 @@
 import { MouseEventHandler, useCallback } from "react";
 import { Pages, useRouteContext } from "../providers";
 import { Card } from "../components";
+import { ICard } from "../domain";
 
 interface IProps {}
+
+const cardItem: ICard = {
+  type: "로이드",
+  numbers: ["1234", "5678"],
+  owner: "김로이드",
+  expiredMonth: "12",
+  expiredYear: "25",
+};
 
 export default function CardList(props: IProps) {
   const { pushRoute } = useRouteContext();
@@ -20,7 +29,7 @@ export default function CardList(props: IProps) {
       <div className="flex-center">
         <h2 className="page-title mb-10">보유 카드</h2>
       </div>
-      <Card />
+      <Card {...cardItem} />
       <div className="card-box">
         <div className="empty-card" onClick={handleClickCardAdd}>
           +
