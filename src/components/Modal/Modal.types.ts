@@ -1,8 +1,7 @@
-import type { ReactNode, RefObject } from 'react';
+import type { KeyboardEvent, MouseEvent, ReactNode } from 'react';
 
 export type ModalProps = {
-  modalRef: RefObject<HTMLElement | null>;
   open?: boolean;
-  onClose?: (event: KeyboardEvent | MouseEvent) => void;
+  onClose?: <T extends HTMLElement>(event: KeyboardEvent<T> | MouseEvent<T>) => void;
   children: ReactNode;
 };

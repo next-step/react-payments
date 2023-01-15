@@ -46,6 +46,31 @@ input:focus + .underline {
   color: #ff0000;
 }
 
+.input-label {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  
+  display: flex;
+  
+  color: #525252;
+  font-size: 12px;
+}
+
+.input-label a {
+  cursor:pointer;
+  border: 1px solid transparent;
+  padding: 0 5px;
+  border-radius: 16px;
+  background-color: #ffeebf;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.input-label a:hover, .input-label a:active {
+  transform: translateY(-2px);
+}
+
 .input-title {
   display: flex;
   align-items: center;

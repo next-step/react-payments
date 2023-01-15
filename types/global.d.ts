@@ -43,7 +43,7 @@ declare module 'literal' {
     | '벚꽃';
 
   type 카드_테마_타입 =
-    | ''
+    | 'base-theme'
     | 'moon'
     | 'star'
     | 'wave'

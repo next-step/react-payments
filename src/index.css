@@ -111,6 +111,7 @@ body {
 
 .leaf > div {
   background-color: #022d0d;
+  color: #ffff !important;
 }
 
 .unicorn > div {

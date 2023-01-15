@@ -8,7 +8,7 @@ import type { CardProps } from './Card.types';
 
 const Card = ({
   size = 'small',
-  theme = '',
+  theme = 'base-theme',
   isEmpty = false,
   cardTitle,
   cardNumber = '',
@@ -39,7 +39,7 @@ const Card = ({
       <div className={`${size}-card`}>
         <div className="card-top">
           <span className="card-text" data-testid="card-title">
-            {cardTitle || 카드_테마[theme] || '기본'}
+            {cardTitle || 카드_테마[theme]}
           </span>
         </div>
         <div className="card-middle">

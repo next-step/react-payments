@@ -1,13 +1,15 @@
 import './modal.css';
 //
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 //
 import { useClickAway } from '@/hooks';
 import Portal from '../Portal';
 //
 import type { ModalProps } from './Modal.types';
 
-const Modal = ({ modalRef, open, onClose, children }: ModalProps) => {
+const Modal = ({ open, onClose, children }: ModalProps) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
   const onModalClose = useCallback(
     (event: KeyboardEvent | MouseEvent) => onClose && onClose(event),
     [onClose],
@@ -22,7 +24,18 @@ const Modal = ({ modalRef, open, onClose, children }: ModalProps) => {
     return () => document.body.removeEventListener('keydown', closeOnEscapeKey);
   }, [onModalClose]);
 
-  return <Portal.Consumer>{open && children}</Portal.Consumer>;
+  return (
+    <Portal.Consumer>
+      {open && (
+        <>
+          <div className="modal-dimmed" />
+          <div className="modal" data-testid="select-modal" ref={modalRef}>
+            {children}
+          </div>
+        </>
+      )}
+    </Portal.Consumer>
+  );
 };
 
 export default Modal;
