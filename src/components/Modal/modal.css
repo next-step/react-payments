@@ -36,7 +36,8 @@
   border-radius: 15px;
 
   z-index: 5;
-  transition: all 0.3s ease-in-out
+  transition: all 0.3s ease-in-out;
+  pointer-event: none;
 }
 
 .modal-item-container {
@@ -50,7 +51,8 @@
   cursor: pointer;
 }
 
-.modal-item-container:hover > div {
+.modal-item-container:hover > div, .modal-item-container:hover > span,
+.modal-item-container:active > div, .modal-item-container:active > span {
   opacity: 0.6;
 }
 
@@ -66,4 +68,28 @@
 .modal-item-name {
   font-size: 12px;
   letter-spacing: -0.085rem;
+}
+
+.modal-item-container.numpad {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-item-name.numpad {
+  width: 20px;
+  height: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px;
+  border: 1px solid #eeeeee;
+
+  font-size: 16px;
+  font-weight: 700;
+  background-color: #dedede;
+
+  transition: all 0.2s ease-in-out;
 }

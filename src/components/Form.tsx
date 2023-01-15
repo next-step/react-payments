@@ -7,7 +7,7 @@ import type {
 type FormProps = {
   action?: string;
   children: ReactNode;
-  onSubmit: (data: FormData) => void;
+  onSubmit: (data: Record<string, string[]>) => void;
   onChange?: (e: ChangeEvent<HTMLFormElement>) => void;
   onBlur?: (e: FocusEvent<HTMLFormElement>) => void;
 };
@@ -31,10 +31,10 @@ const Form = ({ action, children, onSubmit, onChange, onBlur }: FormProps) => {
     const firstInvalidField = formElement.querySelector(':invalid') as HTMLInputElement;
     firstInvalidField?.focus();
 
-    if (isValid) {
-      const dataObject = new FormData(formElement);
-      onSubmit(dataObject);
-    }
+    if (!isValid) return;
+
+    const formInnerData = generateElementValue(formElement);
+    onSubmit(formInnerData);
   };
 
   const handleChange = (e: ChangeEvent<HTMLFormElement>) => {
@@ -56,6 +56,20 @@ const Form = ({ action, children, onSubmit, onChange, onBlur }: FormProps) => {
       {children}
     </form>
   );
+};
+
+const generateElementValue = (formElement: HTMLFormElement) => {
+  const entries = new FormData(formElement).entries();
+
+  return Array.from(entries).reduce((acc, [key, value]) => {
+    const emptyValue = !acc[key];
+    const $value = value as string; // FIXME: FormDataEntryValue에서 타입 단언
+
+    if (emptyValue) acc[key] = [$value];
+    else acc[key].push($value);
+
+    return acc;
+  }, {} as Record<string, string[]>);
 };
 
 Form.isInputElement = (

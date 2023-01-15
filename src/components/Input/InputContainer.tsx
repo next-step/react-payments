@@ -15,7 +15,7 @@ const InputContainer = ({ title = '', children }: InputContainerProps) => {
 };
 
 function getInputBox(children: ReactNode) {
-  const InputBoxType = (<InputBox />).type;
+  const InputBoxType = (<InputBox>{children}</InputBox>).type;
   const childrenArray = Children.toArray(children);
   return childrenArray.find(
     (child) => isValidElement(child) && child.type === InputBoxType,

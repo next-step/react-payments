@@ -7,6 +7,10 @@ body {
   background-color: #e5e5e5;
 }
 
+input::placeholder{
+  font-size: 12px;
+}
+
 #root {
   background-color: #fff;
   width: 375px;
@@ -31,6 +35,11 @@ body {
   color: #383838;
 }
 
+.grid-wrap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -46,6 +55,17 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.flex-space-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gap-5 {
+  gap: 0.5rem;
 }
 
 .mt-10 {

@@ -1,4 +1,3 @@
-import { CardAction, CardState } from 'contexts';
 import {
   createContext,
   Dispatch,
@@ -7,6 +6,20 @@ import {
   useContext,
   useReducer,
 } from 'react';
+//
+import type { 카드_테마_타입 } from 'literal';
+
+export type CardState = {
+  theme?: 카드_테마_타입;
+  cardTitle?: string;
+  cardNumber: string;
+  cardExpiration: string;
+  cardOwner: string;
+  cardSecurityCode: string;
+  cardPassword: string;
+};
+
+type CardAction = { type: 'ADD_CARD'; card: CardState } | { type: 'DEL_CARD'; cardNumber: string };
 
 const CardStateContext = createContext<CardState[]>([]);
 const CardDispatchContext = createContext<Dispatch<CardAction> | null>(null);

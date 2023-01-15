@@ -1,7 +1,8 @@
 import { Modal } from '@/components';
 import { 카드_테마 } from '@/constants';
-import { 카드_테마_키, 카드_테마_타입 } from 'literal';
+//
 import type { KeyboardEvent, MouseEvent } from 'react';
+import type { 카드_테마_키, 카드_테마_타입 } from 'literal';
 
 type CardCompanyModalProps = {
   open: boolean;

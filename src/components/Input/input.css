@@ -23,10 +23,6 @@ input:focus + .underline {
   width: 100%;
 }
 
-/* input:invalid:focus + .underline {
-  background-color: #ff0000;
-} */
-
 .input-container {
   margin: 16px 0;
 }

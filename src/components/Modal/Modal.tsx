@@ -11,7 +11,10 @@ const Modal = ({ open, onClose, children }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const onModalClose = useCallback(
-    (event: KeyboardEvent | MouseEvent) => onClose && onClose(event),
+    (event: KeyboardEvent | MouseEvent) => {
+      event.preventDefault();
+      onClose && onClose(event);
+    },
     [onClose],
   );
 
