@@ -33,6 +33,7 @@ const 카드_초깃값: CardProps = {
 export default function CardAddPage() {
   const { push, back } = useRouter();
   const dispatch = useCardDispatch();
+  const formRef = useRef<HTMLFormElement>();
   const [firstRef, secondRef, thirdRef, fourthRef] = Array.from({ length: 4 }).map(
     createRef<HTMLInputElement>,
   );
@@ -199,21 +200,44 @@ export default function CardAddPage() {
     event.preventDefault();
 
     focusInputRef.current = event.target;
+    if (focusInputRef.current.name === 'card-number' && focusInputRef.current.value.length === 4) {
+      focusInputRef.current.value = '';
+    }
+
+    if (
+      focusInputRef.current.name === 'card-security-code' &&
+      focusInputRef.current.value.length === 3
+    ) {
+      focusInputRef.current.value = '';
+    }
+
     setNumpadModalOpen(true);
   };
 
   const handleNumpadSelect = (keypad: string) => {
     if (!focusInputRef.current) return;
 
+    if (!formRef.current) return;
     focusInputRef.current.value = `${focusInputRef.current.value}${keypad}`;
+    if (focusInputRef.current.name === 'card-number') {
+      setCardData((prev) => ({
+        ...prev,
+        cardNumber: new FormData(formRef.current)
+          .getAll('card-number')
+          .filter((item) => item !== '')
+          .map((item) => item.replace(/./g, '*'))
+          .join(' - '),
+      }));
 
-    if (focusInputRef.current.name === 'card-number' && focusInputRef.current.value.length === 4) {
-      setFieldError((prev) => {
-        const next = [...prev];
-        next[1] = false;
-        return next;
-      });
-      setNumpadModalOpen(false);
+      if (focusInputRef.current.value.length === 4) {
+        setFieldError((prev) => {
+          const next = [...prev];
+          next[1] = false;
+          return next;
+        });
+
+        setNumpadModalOpen(false);
+      }
       return;
     }
 
@@ -236,7 +260,7 @@ export default function CardAddPage() {
       <h2 className="page-title" onClick={back}>
         {'< 카드 추가'}
       </h2>
-      <Form onSubmit={onSubmit} onChange={onChange} onBlur={onBlur}>
+      <Form onSubmit={onSubmit} onChange={onChange} onBlur={onBlur} ref={formRef}>
         <Card {...cardData} />
         <Input title="카드 번호">
           <Input.Box error={cardNumberError} errorMessage="형식이 올바르지 않습니다.">
@@ -389,8 +413,8 @@ export default function CardAddPage() {
       />
       <NumpadModal
         open={isNumpadModalOpen}
-        onClose={() => setNumpadModalOpen(false)}
         onSelect={handleNumpadSelect}
+        onClose={() => setNumpadModalOpen(false)}
       />
     </div>
   );

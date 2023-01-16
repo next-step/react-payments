@@ -1,4 +1,4 @@
-import type { ChangeEvent, FormEvent, ReactNode, FocusEvent } from 'react';
+import { ChangeEvent, FormEvent, ReactNode, FocusEvent, forwardRef } from 'react';
 import type {
   FormSameNameFromTargetValidatorProps,
   FormSameNameFromTargetValidatorCallbackProps,
@@ -21,42 +21,45 @@ type FormProps = {
  * @param onBlur 각 필드별 유효성 검사(Row 단위)
  * @constructor
  */
-const Form = ({ action, children, onSubmit, onChange, onBlur }: FormProps) => {
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+const Form = forwardRef<HTMLFormElement, FormProps>(
+  ({ action, children, onSubmit, onChange, onBlur }, ref) => {
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
 
-    const formElement = e.target as HTMLFormElement;
-    const isValid = formElement.checkValidity();
+      const formElement = e.target as HTMLFormElement;
+      const isValid = formElement.checkValidity();
 
-    const firstInvalidField = formElement.querySelector(':invalid') as HTMLInputElement;
-    firstInvalidField?.focus();
+      const firstInvalidField = formElement.querySelector(':invalid') as HTMLInputElement;
+      firstInvalidField?.focus();
 
-    if (!isValid) return;
+      if (!isValid) return;
 
-    const formInnerData = generateElementValue(formElement);
-    onSubmit(formInnerData);
-  };
+      const formInnerData = generateElementValue(formElement);
+      onSubmit(formInnerData);
+    };
 
-  const handleChange = (e: ChangeEvent<HTMLFormElement>) => {
-    onChange && onChange(e);
-  };
+    const handleChange = (e: ChangeEvent<HTMLFormElement>) => {
+      onChange && onChange(e);
+    };
 
-  const handleBlur = (e: FocusEvent<HTMLFormElement>) => {
-    onBlur && onBlur(e);
-  };
+    const handleBlur = (e: FocusEvent<HTMLFormElement>) => {
+      onBlur && onBlur(e);
+    };
 
-  return (
-    <form
-      noValidate
-      action={action}
-      onSubmit={handleSubmit}
-      onChange={handleChange}
-      onBlur={handleBlur}
-    >
-      {children}
-    </form>
-  );
-};
+    return (
+      <form
+        ref={ref}
+        noValidate
+        action={action}
+        onSubmit={handleSubmit}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      >
+        {children}
+      </form>
+    );
+  },
+);
 
 const generateElementValue = (formElement: HTMLFormElement) => {
   const entries = new FormData(formElement).entries();
@@ -72,11 +75,11 @@ const generateElementValue = (formElement: HTMLFormElement) => {
   }, {} as Record<string, string[]>);
 };
 
-Form.isInputElement = (
+const isInputElement = (
   $target: (EventTarget & HTMLFormElement) | HTMLInputElement,
 ): $target is HTMLInputElement => $target instanceof HTMLInputElement;
 
-Form.sameNameFromTargetValidator = (
+const sameNameFromTargetValidator = (
   { $elements, $target, name }: FormSameNameFromTargetValidatorProps,
   callback: (props: FormSameNameFromTargetValidatorCallbackProps) => void,
 ) => {
@@ -93,4 +96,13 @@ Form.sameNameFromTargetValidator = (
   callback && callback({ $elements, $target, name, sameNamesElements, targetIndex });
 };
 
-export default Form;
+type CompoundedType = typeof Form & {
+  isInputElement: typeof isInputElement;
+  sameNameFromTargetValidator: typeof sameNameFromTargetValidator;
+};
+
+const CompoundedForm = Form as CompoundedType;
+CompoundedForm.isInputElement = isInputElement;
+CompoundedForm.sameNameFromTargetValidator = sameNameFromTargetValidator;
+
+export default CompoundedForm;

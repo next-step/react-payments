@@ -23,6 +23,10 @@ input:focus + .underline {
   width: 100%;
 }
 
+input:disabled {
+  background-color: #d6d5db;
+}
+
 .input-container {
   margin: 16px 0;
 }
