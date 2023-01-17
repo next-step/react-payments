@@ -1,62 +1,12 @@
-import React, {
-  MouseEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
+import React, { MouseEventHandler, useCallback } from "react";
 import { Pages, useRouteContext } from "../providers";
+import { useCardNumbers } from "./hooks";
 
 interface IProps {}
 
 export default function CardAdd(props: IProps) {
   const { pushRoute } = useRouteContext();
-  console.log("CardAdd");
-
-  const $cardNumber = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if ($cardNumber.current === null) {
-      return;
-    }
-
-    const $cardNumberInput: HTMLInputElement = $cardNumber.current;
-
-    const numberStack: number[] = [];
-    const computeCardNumbers = () =>
-      [
-        numberStack.slice(0, 4).join(""),
-        numberStack.slice(4, 8).join(""),
-        numberStack
-          .slice(8, 12)
-          .map(() => "*")
-          .join(""),
-        numberStack
-          .slice(12, 16)
-          .map(() => "*")
-          .join(""),
-      ]
-        .filter(Boolean)
-        .join("-");
-
-    function handleKeyDown(event: KeyboardEvent) {
-      const { key } = event;
-      const numberValue = Number(key);
-      if (!key.includes("Arrow")) {
-        event.preventDefault();
-      }
-      if (key === "Backspace") {
-        numberStack.pop();
-      }
-      if (!isNaN(numberValue) && numberStack.length < 16) {
-        numberStack.push(numberValue);
-      }
-      $cardNumberInput.value = computeCardNumbers();
-    }
-
-    $cardNumberInput.addEventListener("keydown", handleKeyDown);
-
-    return () => $cardNumberInput.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  const { $cardNumber } = useCardNumbers();
 
   const handleClickBack: MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {

@@ -8,10 +8,11 @@ export type TCardTypes =
   | "콜린"
   | "썬";
 
-export type TNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-export type TTwoDigitNumber = `${TNumber}${TNumber}`;
+export type TSingleNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+export type TTwoDigitNumber = `${TSingleNumber}${TSingleNumber}`;
 
-export type TCardNumber = `${TNumber}${TNumber}${TNumber}${TNumber}`;
+export type TCardNumber =
+  `${TSingleNumber}${TSingleNumber}${TSingleNumber}${TSingleNumber}`;
 export type TCardNumbers = [TCardNumber, TCardNumber];
 
 export interface ICard {
