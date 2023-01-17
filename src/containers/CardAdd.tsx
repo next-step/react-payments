@@ -1,10 +1,63 @@
-import React, { MouseEventHandler, useCallback } from "react";
+import React, {
+  MouseEventHandler,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 import { Pages, useRouteContext } from "../providers";
 
 interface IProps {}
 
 export default function CardAdd(props: IProps) {
   const { pushRoute } = useRouteContext();
+  console.log("CardAdd");
+
+  const $cardNumber = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if ($cardNumber.current === null) {
+      return;
+    }
+
+    const $cardNumberInput: HTMLInputElement = $cardNumber.current;
+
+    const numberStack: number[] = [];
+    const computeCardNumbers = () =>
+      [
+        numberStack.slice(0, 4).join(""),
+        numberStack.slice(4, 8).join(""),
+        numberStack
+          .slice(8, 12)
+          .map(() => "*")
+          .join(""),
+        numberStack
+          .slice(12, 16)
+          .map(() => "*")
+          .join(""),
+      ]
+        .filter(Boolean)
+        .join("-");
+
+    function handleKeyDown(event: KeyboardEvent) {
+      const { key } = event;
+      const numberValue = Number(key);
+      if (!key.includes("Arrow")) {
+        event.preventDefault();
+      }
+      if (key === "Backspace") {
+        numberStack.pop();
+      }
+      if (!isNaN(numberValue) && numberStack.length < 16) {
+        numberStack.push(numberValue);
+      }
+      $cardNumberInput.value = computeCardNumbers();
+    }
+
+    $cardNumberInput.addEventListener("keydown", handleKeyDown);
+
+    return () => $cardNumberInput.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   const handleClickBack: MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
       event.preventDefault();
@@ -35,10 +88,7 @@ export default function CardAdd(props: IProps) {
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
-          <input className="input-basic" type="text" />
-          <input className="input-basic" type="text" />
-          <input className="input-basic" type="password" />
-          <input className="input-basic" type="password" />
+          <input ref={$cardNumber} className="input-basic" type="text" />
         </div>
       </div>
       <div className="input-container">
