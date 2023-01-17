@@ -1,6 +1,7 @@
 import React, { MouseEventHandler, useCallback } from "react";
 import { Pages, useRouteContext } from "../providers";
 import { useCardNumbers } from "./hooks";
+import { Card } from "../components";
 
 interface IProps {}
 
@@ -21,6 +22,7 @@ export default function CardAdd(props: IProps) {
       <h2 className="page-title" onClick={handleClickBack}>
         &lt; 카드 추가
       </h2>
+      <Card />
       <div className="card-box">
         <div className="empty-card">
           <div className="card-top"></div>

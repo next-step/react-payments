@@ -13,7 +13,7 @@ export type TTwoDigitNumber = `${TSingleNumber}${TSingleNumber}`;
 
 export type TCardNumber =
   `${TSingleNumber}${TSingleNumber}${TSingleNumber}${TSingleNumber}`;
-export type TCardNumbers = [TCardNumber, TCardNumber];
+export type TCardNumbers = TCardNumber[];
 
 export interface ICard {
   type: TCardTypes;

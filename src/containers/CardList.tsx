@@ -7,7 +7,7 @@ interface IProps {}
 
 const cardItem: ICard = {
   type: "로이드",
-  numbers: ["1234", "5678"],
+  numbers: ["1234", "5678", "1234", "5678"],
   owner: "김로이드",
   expiredMonth: "12",
   expiredYear: "25",

@@ -1,22 +1,9 @@
 import { useEffect, useRef } from "react";
-import { isSingleNumber, TSingleNumber } from "../../domain";
-
-function computeCardNumbers(numberStack: TSingleNumber[]) {
-  return [
-    numberStack.slice(0, 4).join(""),
-    numberStack.slice(4, 8).join(""),
-    numberStack
-      .slice(8, 12)
-      .map(() => "*")
-      .join(""),
-    numberStack
-      .slice(12, 16)
-      .map(() => "*")
-      .join(""),
-  ]
-    .filter(Boolean)
-    .join("-");
-}
+import {
+  convertToCardNumbers,
+  isSingleNumber,
+  TSingleNumber,
+} from "../../domain";
 
 export default function useCardNumbers() {
   const $cardNumber = useRef<HTMLInputElement>(null);
@@ -48,7 +35,7 @@ export default function useCardNumbers() {
         numberStack.push(numberValue);
       }
 
-      $cardNumberInput.value = computeCardNumbers(numberStack);
+      $cardNumberInput.value = convertToCardNumbers(numberStack);
     };
 
     $cardNumberInput.addEventListener("keydown", handleKeyDown);
