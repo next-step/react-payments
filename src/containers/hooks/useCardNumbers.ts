@@ -1,12 +1,26 @@
-import { useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import {
   convertToCardNumbers,
+  ICard,
+  isCardNumbers,
   isSingleNumber,
   TSingleNumber,
 } from "../../domain";
 
-export default function useCardNumbers() {
+export default function useCardNumbers(
+  changeCardState: (newCardState: Partial<ICard>) => void
+) {
   const $cardNumber = useRef<HTMLInputElement>(null);
+
+  const changeCardNumbers = useCallback(
+    (numberStack: TSingleNumber[]) => {
+      const numbers = convertToCardNumbers(numberStack).split("-");
+      if (isCardNumbers(numbers)) {
+        changeCardState({ numbers });
+      }
+    },
+    [changeCardState]
+  );
 
   useEffect(() => {
     if ($cardNumber.current === null) {
@@ -36,6 +50,7 @@ export default function useCardNumbers() {
       }
 
       $cardNumberInput.value = convertToCardNumbers(numberStack);
+      changeCardNumbers(numberStack);
     };
 
     $cardNumberInput.addEventListener("keydown", handleKeyDown);

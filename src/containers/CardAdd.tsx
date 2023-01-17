@@ -1,13 +1,14 @@
 import React, { MouseEventHandler, useCallback } from "react";
-import { Pages, useRouteContext } from "../providers";
-import { useCardNumbers } from "./hooks";
 import { Card } from "../components";
+import { Pages, useRouteContext } from "../providers";
+import { useCardNumbers, useCardState } from "./hooks";
 
 interface IProps {}
 
 export default function CardAdd(props: IProps) {
   const { pushRoute } = useRouteContext();
-  const { $cardNumber } = useCardNumbers();
+  const { cardState, changeCardState } = useCardState();
+  const { $cardNumber } = useCardNumbers(changeCardState);
 
   const handleClickBack: MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
@@ -22,21 +23,9 @@ export default function CardAdd(props: IProps) {
       <h2 className="page-title" onClick={handleClickBack}>
         &lt; 카드 추가
       </h2>
-      <Card />
-      <div className="card-box">
-        <div className="empty-card">
-          <div className="card-top"></div>
-          <div className="card-middle">
-            <div className="small-card__chip"></div>
-          </div>
-          <div className="card-bottom">
-            <div className="card-bottom__info">
-              <span className="card-text">NAME</span>
-              <span className="card-text">MM / YY</span>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <Card {...cardState} />
+
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">

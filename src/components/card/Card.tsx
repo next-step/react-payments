@@ -17,11 +17,9 @@ export default function Card({
     <>
       <div className="card-box">
         <div className="small-card">
-          {type && (
-            <div className="card-top">
-              <span className="card-text">{type} 카드</span>
-            </div>
-          )}
+          <div className="card-top">
+            {type && <span className="card-text">{type} 카드</span>}
+          </div>
           <div className="card-middle">
             <div className="small-card__chip" />
           </div>
