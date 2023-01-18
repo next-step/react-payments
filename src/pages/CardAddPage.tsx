@@ -224,8 +224,7 @@ export default function CardAddPage() {
         ...prev,
         cardNumber: new FormData(formRef.current)
           .getAll('card-number')
-          .filter((item) => item !== '')
-          .map((item) => item.replace(/./g, '*'))
+          .map((item, index) => (index === 3 || index === 2 ? item.replace(/./g, '*') : item))
           .join(' - '),
       }));
 

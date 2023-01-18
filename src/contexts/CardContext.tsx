@@ -19,7 +19,11 @@ export type CardState = {
   cardPassword: string;
 };
 
-type CardAction = { type: 'ADD_CARD'; card: CardState } | { type: 'DEL_CARD'; cardNumber: string };
+export type SecureCardState = Omit<CardState, 'cardSecurityCode' | 'cardPassword'>;
+
+type CardAction =
+  | { type: 'ADD_CARD'; card: CardState }
+  | { type: 'DEL_CARD'; card: SecureCardState };
 
 const CardStateContext = createContext<CardState[]>([]);
 const CardDispatchContext = createContext<Dispatch<CardAction> | null>(null);
@@ -30,7 +34,17 @@ const cardReducer = (state: CardState[], action: CardAction) => {
       return [...state, action.card];
     }
     case 'DEL_CARD': {
-      const removedCardList = state.filter(({ cardNumber }) => cardNumber !== action.cardNumber);
+      const removedCardList = state.filter(
+        ({ theme, cardTitle, cardNumber, cardExpiration, cardOwner }) => {
+          return !(
+            theme === action.card.theme &&
+            cardTitle === action.card.cardTitle &&
+            cardNumber === action.card.cardNumber &&
+            cardExpiration === action.card.cardExpiration &&
+            cardOwner === action.card.cardOwner
+          );
+        },
+      );
       return removedCardList;
     }
     default: {

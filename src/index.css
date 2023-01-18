@@ -64,6 +64,10 @@ input::placeholder{
   align-items: center;
 }
 
+.flex-space-between>*:only-child{
+  margin-left: auto;
+}
+
 .gap-5 {
   gap: 0.5rem;
 }

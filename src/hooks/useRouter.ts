@@ -22,8 +22,8 @@ export const useRouter = () => {
   const dispatch = useRouteDispatch();
   return useMemo(
     () => ({
-      push: (경로: 라우터_키) => {
-        dispatch({ type: 'PUSH', route: 경로 });
+      push: (경로: 라우터_키, params?: Record<string, any>) => {
+        dispatch({ type: 'PUSH', route: 경로, params });
       },
       back: () => {
         dispatch({ type: 'BACK' });

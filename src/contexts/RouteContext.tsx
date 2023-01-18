@@ -3,18 +3,20 @@ import { createContext, Dispatch, useReducer } from 'react';
 import { 라우터_프로퍼티 } from '@/constants';
 import { ChildrenProps } from 'components';
 
-export type 라우터_키 = typeof 라우터_프로퍼티[keyof typeof 라우터_프로퍼티];
+export type 라우터_키 = (typeof 라우터_프로퍼티)[keyof typeof 라우터_프로퍼티];
 
 type State = {
   prevRoute: string[];
   currentRoute: 라우터_키;
+  params?: Record<string, any>;
 };
 
-type Action = { type: 'PUSH'; route: 라우터_키 } | { type: 'BACK' };
+type Action = { type: 'PUSH'; route: 라우터_키; params?: Record<string, any> } | { type: 'BACK' };
 
 const 라우터_초깃값: State = {
   prevRoute: [],
   currentRoute: '/',
+  params: {},
 };
 
 export const RouteStateContext = createContext<State>(라우터_초깃값);
@@ -28,6 +30,7 @@ const routeReducer = (state: State, action: Action) => {
         ...state,
         prevRoute: [...state.prevRoute, location.href],
         currentRoute: action.route,
+        params: action.params,
       };
     case 'BACK': {
       const currentRoute = (state.prevRoute.pop() || '/') as 라우터_키;

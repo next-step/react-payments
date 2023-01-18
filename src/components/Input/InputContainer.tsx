@@ -3,11 +3,11 @@ import { Children, cloneElement, isValidElement, ReactElement, ReactNode } from 
 import InputBox from './InputBox';
 import type { InputContainerProps } from './Input.types';
 
-const InputContainer = ({ title = '', children }: InputContainerProps) => {
+const InputContainer = ({ title = '', className, children }: InputContainerProps) => {
   const inputBox = cloneElement(getInputBox(children), {});
 
   return (
-    <div className="input-container">
+    <div className={`input-container ${className}`}>
       {title && <span className="input-title">{title}</span>}
       {inputBox}
     </div>

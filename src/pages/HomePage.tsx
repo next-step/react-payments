@@ -1,17 +1,17 @@
 import { Card } from '@/components';
-import { useRouteDispatch } from '@/hooks';
-import { useCardState } from '@/contexts/CardContext';
+import { useRouter } from '@/hooks';
+import { SecureCardState, useCardState } from '@/contexts/CardContext';
 
 export default function HomePage() {
+  const { push } = useRouter();
   const cardList = useCardState();
-  const dispatch = useRouteDispatch();
 
-  const handleConfirmation = () => {
-    dispatch({ type: 'PUSH', route: '/confirmation' });
+  const handleConfirmation = (card: SecureCardState) => {
+    push('/confirmation', { card });
   };
 
   const handleAddCard = () => {
-    dispatch({ type: 'PUSH', route: '/add-card' });
+    push('/add-card');
   };
 
   return (
@@ -20,8 +20,13 @@ export default function HomePage() {
         <h2 className="page-title mb-10">보유 카드</h2>
       </div>
       <Card isAdd onClick={handleAddCard} />
-      {cardList.map((card) => (
-        <Card key={card.cardNumber} onClick={handleConfirmation} size="small" {...card} />
+      {cardList.map(({ cardSecurityCode, cardPassword, ...card }) => (
+        <Card
+          key={card.cardNumber}
+          onClick={() => handleConfirmation(card)}
+          size="small"
+          {...card}
+        />
       ))}
     </div>
   );
