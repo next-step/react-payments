@@ -2,6 +2,7 @@ import React, { MouseEventHandler, useCallback } from "react";
 import { Card, CardNumberInputs, InputContainer } from "../components";
 import { Pages, useRouteContext } from "../providers";
 import { useCardState } from "./hooks";
+import CardExpired from "../components/card-form/CardExpired";
 
 interface IProps {}
 
@@ -29,13 +30,10 @@ export default function CardAdd(props: IProps) {
         <CardNumberInputs changeCardState={changeCardState} />
       </InputContainer>
 
-      <div className="input-container">
-        <span className="input-title">만료일</span>
-        <div className="input-box w-50">
-          <input className="input-basic" type="text" placeholder="MM" />
-          <input className="input-basic" type="text" placeholder="YY" />
-        </div>
-      </div>
+      <InputContainer title="만료일">
+        <CardExpired />
+      </InputContainer>
+
       <div className="input-container">
         <span className="input-title">카드 소유자 이름(선택)</span>
         <input
