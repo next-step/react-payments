@@ -262,7 +262,11 @@ export default function CardAddPage() {
       <Form onSubmit={onSubmit} onChange={onChange} onBlur={onBlur} ref={formRef}>
         <Card {...cardData} />
         <Input title="카드 번호">
-          <Input.Box error={cardNumberError} errorMessage="형식이 올바르지 않습니다.">
+          <Input.Box
+            className="input-box"
+            error={cardNumberError}
+            errorMessage="형식이 올바르지 않습니다."
+          >
             <Input.Label>
               <a onClick={handleCardCompanyModal}>카드 선택</a>
             </Input.Label>
@@ -318,7 +322,7 @@ export default function CardAddPage() {
         </Input>
         <Input title="만료일">
           <Input.Box
-            className="w-50"
+            className="input-box w-50"
             error={cardExpirationError}
             errorMessage="형식이 올바르지 않습니다."
           >
@@ -344,7 +348,7 @@ export default function CardAddPage() {
           </Input.Box>
         </Input>
         <Input title="카드 소유자 이름(선택)">
-          <Input.Box error={cardOwnerError} errorMessage="값을 입력해주세요.">
+          <Input.Box className="input-box" error={cardOwnerError} errorMessage="값을 입력해주세요.">
             <Input.Label>
               {카드_소유자_이름_길이} / {30}
             </Input.Label>
@@ -360,7 +364,7 @@ export default function CardAddPage() {
         </Input>
         <Input title="보안코드(CVC/CVV)">
           <Input.Box
-            className="w-25"
+            className="input-box w-25"
             error={cardSecurityCodeError}
             errorMessage="숫자를 입력해주세요."
           >
@@ -378,7 +382,11 @@ export default function CardAddPage() {
           </Input.Box>
         </Input>
         <Input title="카드 비밀번호">
-          <Input.Box error={cardPasswordError} errorMessage="숫자를 입력해주세요.">
+          <Input.Box
+            className="input-box"
+            error={cardPasswordError}
+            errorMessage="숫자를 입력해주세요."
+          >
             <Input.Base
               name="card-password"
               type="password"

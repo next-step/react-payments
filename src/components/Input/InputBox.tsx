@@ -7,7 +7,7 @@ const InputBox = ({
   children,
 }: InputBoxProps) => (
   <>
-    <div className={`input-box ${className}`.trim()}>{children}</div>
+    <div className={className}>{children}</div>
     {error && <span className="input-error-message">{errorMessage}</span>}
   </>
 );

@@ -98,15 +98,3 @@ input:disabled {
 
   transition: all 0.2s ease;
 }
-
-.input-underline {
-  text-align: center;
-  border: none;
-  background: none;
-  outline: none;
-
-  margin: 16px 0;
-  padding: 4px 0;
-
-  border-bottom: 1px solid #383838;
-}
