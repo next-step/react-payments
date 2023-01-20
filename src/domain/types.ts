@@ -9,7 +9,10 @@ export type TCardTypes =
   | "썬";
 
 export type TSingleNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-export type TTwoDigitNumber = `${TSingleNumber}${TSingleNumber}`;
+export type TTwoDigitNumber =
+  | ``
+  | `${TSingleNumber}`
+  | `${TSingleNumber}${TSingleNumber}`;
 
 export type TCardNumber =
   | ``

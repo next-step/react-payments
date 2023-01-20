@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useCallback } from "react";
+import React, { MouseEventHandler, useCallback, useRef } from "react";
 import { Card, CardNumberInputs, InputContainer } from "../components";
 import { Pages, useRouteContext } from "../providers";
 import { useCardState } from "./hooks";
@@ -9,6 +9,7 @@ interface IProps {}
 export default function CardAdd(props: IProps) {
   const { pushRoute } = useRouteContext();
   const { cardState, changeCardState } = useCardState();
+  const $cardExpired = useRef<HTMLInputElement>(null);
 
   const handleClickBack: MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
@@ -27,11 +28,14 @@ export default function CardAdd(props: IProps) {
       <Card {...cardState} />
 
       <InputContainer title="카드 번호">
-        <CardNumberInputs changeCardState={changeCardState} />
+        <CardNumberInputs
+          changeCardState={changeCardState}
+          focusNext={() => $cardExpired.current?.focus()}
+        />
       </InputContainer>
 
       <InputContainer title="만료일">
-        <CardExpired />
+        <CardExpired ref={$cardExpired} changeCardState={changeCardState} />
       </InputContainer>
 
       <div className="input-container">
