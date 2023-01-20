@@ -10,7 +10,7 @@ export function isSingleNumber(
 export function isCardNumber(cardNumber: unknown): cardNumber is TCardNumber {
   return Boolean(
     typeof cardNumber === "string" &&
-      cardNumber.length === 4 &&
+      cardNumber.length <= 4 &&
       Array.from(cardNumber)
         .map(Number)
         .filter((singleNumber) => !isNaN(singleNumber))
