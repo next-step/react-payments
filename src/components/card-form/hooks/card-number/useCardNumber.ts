@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { leaveOnlyNumber } from "../../../../utils";
 
 export default function useCardNumber(
   changeNumbers: () => void,
@@ -13,7 +14,7 @@ export default function useCardNumber(
     }
 
     const handleInput = () => {
-      $cardNumberInput.value = $cardNumberInput.value.replace(/[^0-9]*/g, "");
+      $cardNumberInput.value = leaveOnlyNumber($cardNumberInput.value);
       changeNumbers();
       if ($cardNumberInput.value.length === 4) {
         focusNext?.();
@@ -23,6 +24,8 @@ export default function useCardNumber(
     $cardNumberInput.addEventListener("input", handleInput);
 
     return () => $cardNumberInput.removeEventListener("input", handleInput);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return $cardNumber;
