@@ -4,6 +4,7 @@ import {
   CardExpired,
   CardNumbers,
   CardOwner,
+  CardPassword,
   CardSecurityCode,
   InputContainer,
 } from "../components";
@@ -15,6 +16,7 @@ export default function CardAdd() {
   const { cardState, changeCardState } = useCardState();
   const $cardExpired = useRef<HTMLInputElement>(null);
   const $cardOwner = useRef<HTMLInputElement>(null);
+  const $cardPassword = useRef<HTMLInputElement>(null);
 
   const handleClickBack: MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
@@ -52,16 +54,15 @@ export default function CardAdd() {
       </InputContainer>
 
       <InputContainer title="보안코드(CVC/CVV)">
-        <CardSecurityCode changeCardState={changeCardState} />
+        <CardSecurityCode
+          changeCardState={changeCardState}
+          focusNext={() => $cardPassword.current?.focus()}
+        />
       </InputContainer>
 
-      <div className="input-container">
-        <span className="input-title">카드 비밀번호</span>
-        <input className="input-basic w-15" type="password" />
-        <input className="input-basic w-15" type="password" />
-        <input className="input-basic w-15" type="password" />
-        <input className="input-basic w-15" type="password" />
-      </div>
+      <InputContainer title="카드 비밀번호">
+        <CardPassword ref={$cardPassword} />
+      </InputContainer>
 
       <div className="button-box">
         <span className="button-text">다음</span>

@@ -5,17 +5,24 @@ import { leaveOnlyNumber } from "../../utils";
 
 interface IProps {
   changeCardState: (newCardState: Partial<ICard>) => void;
+  focusNext: () => void;
 }
 
 const MAX_LENGTH = 3;
 
-export default function CardSecurityCode({ changeCardState }: IProps) {
+export default function CardSecurityCode({
+  changeCardState,
+  focusNext,
+}: IProps) {
   const handleInputSecurityCode = useCallback(
     ({ target }: ChangeEvent<HTMLInputElement>) => {
       target.value = leaveOnlyNumber(target.value);
       changeCardState({ securityCode: target.value });
+      if (target.value.length === MAX_LENGTH) {
+        focusNext();
+      }
     },
-    [changeCardState]
+    [changeCardState, focusNext]
   );
 
   return (

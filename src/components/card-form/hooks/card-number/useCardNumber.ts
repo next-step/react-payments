@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import { leaveOnlyNumber } from "../../../../utils";
 
+const MAX_LENGTH = 4;
+
 export default function useCardNumber(
   changeNumbers: () => void,
   focusNext?: () => void
@@ -16,11 +18,12 @@ export default function useCardNumber(
     const handleInput = () => {
       $cardNumberInput.value = leaveOnlyNumber($cardNumberInput.value);
       changeNumbers();
-      if ($cardNumberInput.value.length === 4) {
+      if ($cardNumberInput.value.length === MAX_LENGTH) {
         focusNext?.();
       }
     };
 
+    $cardNumberInput.maxLength = MAX_LENGTH;
     $cardNumberInput.addEventListener("input", handleInput);
 
     return () => $cardNumberInput.removeEventListener("input", handleInput);
