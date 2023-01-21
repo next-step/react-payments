@@ -2,25 +2,21 @@ import { Input } from "../atoms";
 import { ForwardedRef, forwardRef, useImperativeHandle } from "react";
 import { useCardPassword } from "./hooks";
 
-interface IProps {}
+const CardPassword = forwardRef((_, ref: ForwardedRef<HTMLInputElement>) => {
+  const $first = useCardPassword(() => $second.current?.focus());
+  const $second = useCardPassword();
 
-const MAX_LENGTH = 1;
+  useImperativeHandle(ref, () => $first.current!);
 
-const CardPassword = forwardRef(
-  (props: IProps, ref: ForwardedRef<HTMLInputElement>) => {
-    const $first = useCardPassword(() => $second.current?.focus());
-    const $second = useCardPassword();
-
-    useImperativeHandle(ref, () => $first.current!);
-
-    return (
-      <>
-        <Input ref={$first} className="w-15" type="password" />
-        <Input ref={$second} className="w-15" type="password" />
-      </>
-    );
-  }
-);
+  return (
+    <div style={{ display: "flex", gap: "5px" }}>
+      <Input ref={$first} className="w-15" type="password" />
+      <Input ref={$second} className="w-15" type="password" />
+      <div className="flex-center w-15">•</div>
+      <div className="flex-center w-15">•</div>
+    </div>
+  );
+});
 
 CardPassword.displayName = "CardPassword";
 

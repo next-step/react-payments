@@ -15,13 +15,13 @@ export default function CardNumbers({ changeCardState, focusNext }: IProps) {
 
   return (
     <InputBox>
-      <Input ref={$first} />
+      <Input ref={$first} required />
       -
-      <Input ref={$second} />
+      <Input ref={$second} required />
       -
-      <Input ref={$third} type="password" />
+      <Input ref={$third} type="password" required />
       -
-      <Input ref={$fourth} type="password" />
+      <Input ref={$fourth} type="password" required />
     </InputBox>
   );
 }

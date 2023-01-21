@@ -29,7 +29,9 @@ export default function CardList(props: IProps) {
       <div className="flex-center">
         <h2 className="page-title mb-10">보유 카드</h2>
       </div>
+
       <Card {...cardItem} />
+
       <div className="card-box">
         <div className="empty-card" onClick={handleClickCardAdd}>
           +

@@ -23,7 +23,9 @@ export default function useCardNumber(
       }
     };
 
+    $cardNumberInput.minLength = MAX_LENGTH;
     $cardNumberInput.maxLength = MAX_LENGTH;
+    $cardNumberInput.pattern = "[0-9]{4}";
     $cardNumberInput.addEventListener("input", handleInput);
 
     return () => $cardNumberInput.removeEventListener("input", handleInput);

@@ -30,9 +30,12 @@
   text-align: center;
   outline: 2px solid transparent;
   outline-offset: 2px;
-  border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;
+}
+
+.input-basic:valid {
+  color: #04C09E;
 }
 
 .input-underline {

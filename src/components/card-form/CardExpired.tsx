@@ -27,13 +27,19 @@ const CardExpired = forwardRef(
           <Input
             ref={$expirationMonth}
             placeholder="MM"
+            minLength={MAX_LENGTH}
             maxLength={MAX_LENGTH}
+            pattern="[0-9]{2}"
+            required
           />
           /
           <Input
             ref={$expirationYear}
             placeholder="YY"
+            minLength={MAX_LENGTH}
             maxLength={MAX_LENGTH}
+            pattern="[0-9]{2}"
+            required
           />
         </InputBox>
         <InputInvalidMessage {...invalidProps} />

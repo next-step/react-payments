@@ -11,6 +11,14 @@
   align-items: center;
 }
 
+.inline-block {
+  display: inline-block;
+}
+
+.align-center {
+  text-align: center;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }

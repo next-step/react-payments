@@ -12,7 +12,7 @@ type TProps = DetailedHTMLProps<
 
 const Input = forwardRef(
   (
-    { type = "text", className, ...props }: TProps,
+    { type = "text", className = "", ...props }: TProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
