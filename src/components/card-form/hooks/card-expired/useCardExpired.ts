@@ -7,7 +7,8 @@ const INVALID_MONTH_MESSAGE = "만료 월은 1이상 12이하 숫자로 입력�
 const INVALID_YEAR_MESSAGE = "년도는 올해보단 큰 숫자여야합니다.";
 
 export default function useCardExpired(
-  changeCardState: (newCardState: Partial<ICard>) => void
+  changeCardState: (newCardState: Partial<ICard>) => void,
+  focusNext: () => void
 ) {
   const [monthCondition, setMonthCondition] = useState(true);
   const [yearCondition, setYearCondition] = useState(true);
@@ -26,11 +27,12 @@ export default function useCardExpired(
   const $expirationMonth = useMonthExpired({
     changeExpired,
     validate: setMonthCondition,
-    nextFocus: () => $expirationYear.current?.focus(),
+    focusNext: () => $expirationYear.current?.focus(),
   });
   const $expirationYear = useYearExpired({
     changeExpired,
     validate: setYearCondition,
+    focusNext,
   });
 
   // prettier-ignore

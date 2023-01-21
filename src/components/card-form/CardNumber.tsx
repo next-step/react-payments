@@ -1,5 +1,5 @@
-import React, { ComponentProps, ForwardedRef, forwardRef } from "react";
-import { Input } from "../atoms/forms";
+import { ComponentProps, ForwardedRef, forwardRef } from "react";
+import { Input } from "../atoms";
 
 type TProps = ComponentProps<typeof Input>;
 

@@ -4,11 +4,11 @@ import { leaveOnlyNumber } from "../../../../utils";
 export default function useMonthExpired({
   changeExpired,
   validate,
-  nextFocus,
+  focusNext,
 }: {
   changeExpired: () => void;
   validate: (condition: boolean) => void;
-  nextFocus: () => void;
+  focusNext: () => void;
 }) {
   const $expirationMonth = useRef<HTMLInputElement>(null);
 
@@ -24,14 +24,14 @@ export default function useMonthExpired({
       validate(valid);
       changeExpired();
       if (valid) {
-        nextFocus();
+        focusNext();
       }
     };
 
     $target.addEventListener("input", handleInput);
 
     return () => $target.removeEventListener("input", handleInput);
-  }, [changeExpired, validate]);
+  }, [changeExpired, focusNext, validate]);
 
   return $expirationMonth;
 }

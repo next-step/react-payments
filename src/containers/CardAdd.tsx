@@ -1,5 +1,11 @@
 import { MouseEventHandler, useCallback, useRef } from "react";
-import { Card, CardExpired, CardNumbers, InputContainer } from "../components";
+import {
+  Card,
+  CardExpired,
+  CardNumbers,
+  CardOwner,
+  InputContainer,
+} from "../components";
 import { Pages, useRouteContext } from "../providers";
 import { useCardState } from "./hooks";
 
@@ -7,6 +13,7 @@ export default function CardAdd() {
   const { pushRoute } = useRouteContext();
   const { cardState, changeCardState } = useCardState();
   const $cardExpired = useRef<HTMLInputElement>(null);
+  const $cardOwner = useRef<HTMLInputElement>(null);
 
   const handleClickBack: MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
@@ -32,15 +39,15 @@ export default function CardAdd() {
       </InputContainer>
 
       <InputContainer title="만료일">
-        <CardExpired ref={$cardExpired} changeCardState={changeCardState} />
+        <CardExpired
+          ref={$cardExpired}
+          changeCardState={changeCardState}
+          focusNext={() => $cardOwner.current?.focus()}
+        />
       </InputContainer>
 
       <InputContainer title="카드 소유자 이름(선택)">
-        <input
-          type="text"
-          className="input-basic"
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        />
+        <CardOwner ref={$cardOwner} changeCardState={changeCardState} />
       </InputContainer>
 
       <div className="input-container">
