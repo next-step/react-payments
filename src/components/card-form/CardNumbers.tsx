@@ -1,5 +1,4 @@
-import React from "react";
-import CardNumberInput from "./CardNumberInput";
+import CardNumberInput from "./CardNumber";
 import { useCardNumbers } from "./hooks";
 import { ICard } from "../../domain";
 
@@ -8,10 +7,7 @@ interface IProps {
   focusNext: () => void;
 }
 
-export default function CardNumberInputs({
-  changeCardState,
-  focusNext,
-}: IProps) {
+export default function CardNumbers({ changeCardState, focusNext }: IProps) {
   const [$first, $second, $third, $fourth] = useCardNumbers(
     changeCardState,
     focusNext

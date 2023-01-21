@@ -1,12 +1,9 @@
-import React, { MouseEventHandler, useCallback, useRef } from "react";
-import { Card, CardNumberInputs, InputContainer } from "../components";
+import { MouseEventHandler, useCallback, useRef } from "react";
+import { Card, CardExpired, CardNumbers, InputContainer } from "../components";
 import { Pages, useRouteContext } from "../providers";
 import { useCardState } from "./hooks";
-import CardExpired from "../components/card-form/CardExpired";
 
-interface IProps {}
-
-export default function CardAdd(props: IProps) {
+export default function CardAdd() {
   const { pushRoute } = useRouteContext();
   const { cardState, changeCardState } = useCardState();
   const $cardExpired = useRef<HTMLInputElement>(null);
@@ -28,7 +25,7 @@ export default function CardAdd(props: IProps) {
       <Card {...cardState} />
 
       <InputContainer title="카드 번호">
-        <CardNumberInputs
+        <CardNumbers
           changeCardState={changeCardState}
           focusNext={() => $cardExpired.current?.focus()}
         />
@@ -38,14 +35,14 @@ export default function CardAdd(props: IProps) {
         <CardExpired ref={$cardExpired} changeCardState={changeCardState} />
       </InputContainer>
 
-      <div className="input-container">
-        <span className="input-title">카드 소유자 이름(선택)</span>
+      <InputContainer title="카드 소유자 이름(선택)">
         <input
           type="text"
           className="input-basic"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         />
-      </div>
+      </InputContainer>
+
       <div className="input-container">
         <span className="input-title">보안코드(CVC/CVV)</span>
         <input className="input-basic w-25" type="password" />
