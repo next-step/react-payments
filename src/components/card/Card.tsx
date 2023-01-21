@@ -13,6 +13,15 @@ export default function Card({
     [numbers]
   );
 
+  const ownerWithLineClamp = useMemo(() => {
+    if (!owner) {
+      return "NAME";
+    }
+
+    const maxLength = 10;
+    return owner.length > maxLength ? `${owner.slice(0, maxLength)}...` : owner;
+  }, [owner]);
+
   return (
     <>
       <div className="card-box">
@@ -30,7 +39,7 @@ export default function Card({
               </div>
             )}
             <div className="card-bottom__info">
-              <span className="card-text">{owner || "NAME"}</span>
+              <span className="card-text">{ownerWithLineClamp}</span>
               <span className="card-text">
                 {expiredMonth || "MM"} / {expiredYear || "YY"}
               </span>
