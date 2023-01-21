@@ -27,5 +27,6 @@ export interface ICard {
   numbers: TCardNumbers;
   expiredMonth: TTwoDigitNumber;
   expiredYear: TTwoDigitNumber;
+  securityCode?: string;
   owner: string;
 }

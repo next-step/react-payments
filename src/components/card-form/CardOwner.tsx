@@ -12,7 +12,6 @@ import CardOwnerLength from "./CardOwnerLength";
 
 interface IProps {
   changeCardState: (newCardState: Partial<ICard>) => void;
-  // focusNext: () => void;
 }
 
 const MAX_LENGTH = 30;

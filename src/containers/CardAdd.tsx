@@ -4,6 +4,7 @@ import {
   CardExpired,
   CardNumbers,
   CardOwner,
+  CardSecurityCode,
   InputContainer,
 } from "../components";
 import { Pages, useRouteContext } from "../providers";
@@ -50,10 +51,10 @@ export default function CardAdd() {
         <CardOwner ref={$cardOwner} changeCardState={changeCardState} />
       </InputContainer>
 
-      <div className="input-container">
-        <span className="input-title">보안코드(CVC/CVV)</span>
-        <input className="input-basic w-25" type="password" />
-      </div>
+      <InputContainer title="보안코드(CVC/CVV)">
+        <CardSecurityCode changeCardState={changeCardState} />
+      </InputContainer>
+
       <div className="input-container">
         <span className="input-title">카드 비밀번호</span>
         <input className="input-basic w-15" type="password" />
@@ -61,6 +62,7 @@ export default function CardAdd() {
         <input className="input-basic w-15" type="password" />
         <input className="input-basic w-15" type="password" />
       </div>
+
       <div className="button-box">
         <span className="button-text">다음</span>
       </div>
