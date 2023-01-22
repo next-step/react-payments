@@ -1,4 +1,4 @@
-import { InputBox } from "../../../atoms";
+import { InputBox } from "../../../../../components/atoms";
 import { useCardNumbers } from "./hooks";
 import CardNumber from "./CardNumber";
 

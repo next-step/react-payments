@@ -1,5 +1,9 @@
 import { ForwardedRef, forwardRef, useImperativeHandle } from "react";
-import { Input, InputBox, InputInvalidMessage } from "../../../atoms";
+import {
+  Input,
+  InputBox,
+  InputInvalidMessage,
+} from "../../../../../components/atoms";
 import { useCardExpired } from "./hooks";
 
 interface IProps {

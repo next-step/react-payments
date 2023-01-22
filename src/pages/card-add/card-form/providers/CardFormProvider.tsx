@@ -12,7 +12,7 @@ import {
   isValidCardData,
   isValidExpiryDateBy,
   TInvalidCode,
-} from "../../../domain";
+} from "../../../../domain";
 
 interface ICardFormContext {
   cardState: ICardDTO;

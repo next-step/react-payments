@@ -1,6 +1,7 @@
 import { MouseEventHandler, useCallback } from "react";
-import { Pages, useRouteContext } from "../providers";
-import CardForm from "../components/card-form/CardForm";
+import { Pages, useRouteContext } from "../../providers";
+import { PageTitle } from "../../components";
+import { CardForm } from "./card-form";
 
 export default function CardAdd() {
   const { pushRoute } = useRouteContext();
@@ -15,9 +16,7 @@ export default function CardAdd() {
 
   return (
     <div className="app">
-      <h2 className="page-title" onClick={handleClickBack}>
-        &lt; 카드 추가
-      </h2>
+      <PageTitle onClick={handleClickBack}>&lt; 카드 추가</PageTitle>
 
       <CardForm />
     </div>

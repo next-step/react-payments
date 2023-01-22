@@ -6,7 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { leaveOnlyNumber } from "../../../utils";
+import { leaveOnlyNumber } from "../../../../utils";
 
 interface IProps {
   valueLength: number;

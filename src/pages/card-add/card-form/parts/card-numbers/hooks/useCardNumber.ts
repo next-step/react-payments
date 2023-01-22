@@ -1,5 +1,5 @@
 import { ChangeEvent, useCallback } from "react";
-import { isCardNumber } from "../../../../../domain";
+import { isCardNumber } from "../../../../../../domain";
 import { useFocusNext, useNumberInput } from "../../../hooks";
 
 const MAX_LENGTH = 4;

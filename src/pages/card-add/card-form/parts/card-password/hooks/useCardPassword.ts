@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback } from "react";
 import { useFocusNext, useNumberInput } from "../../../hooks";
-import { isSingleNumber } from "../../../../../domain";
+import { isSingleNumber } from "../../../../../../domain";
 import { useCardFormContext } from "../../../providers";
 
 const MAX_LENGTH = 1;

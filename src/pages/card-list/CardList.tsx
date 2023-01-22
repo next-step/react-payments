@@ -1,9 +1,10 @@
 import { MouseEventHandler, useCallback } from "react";
-import { Pages, useRouteContext } from "../providers";
-import { Card } from "../components";
-import { ICard } from "../domain";
+import { Pages, useRouteContext } from "../../providers";
+import { Card, FlexCenter, PageTitle } from "../../components";
+import { ICard } from "../../domain";
 
 const cardItem: ICard = {
+  id: "1234",
   type: "로이드",
   numbers: ["1234", "5678", "1234", "5678"],
   owner: "김로이드",
@@ -24,9 +25,9 @@ export default function CardList() {
 
   return (
     <div className="app flex-column-center">
-      <div className="flex-center">
-        <h2 className="page-title mb-10">보유 카드</h2>
-      </div>
+      <FlexCenter>
+        <PageTitle className="mb-10">보유 카드</PageTitle>
+      </FlexCenter>
 
       <Card {...cardItem} />
 

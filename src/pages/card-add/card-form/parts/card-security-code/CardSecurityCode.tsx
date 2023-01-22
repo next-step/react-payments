@@ -1,4 +1,4 @@
-import { Input } from "../../../atoms";
+import { Input } from "../../../../../components/atoms";
 import { useCardSecurityCode } from "./hooks";
 
 interface IProps {

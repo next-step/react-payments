@@ -3,7 +3,7 @@ import {
   isTwoDigitNumber,
   isValidMonth,
   isValidYear,
-} from "../../../../../domain";
+} from "../../../../../../domain";
 import { useCardFormContext } from "../../../providers";
 import { useFocusNext, useNumberInput } from "../../../hooks";
 

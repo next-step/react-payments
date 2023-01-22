@@ -1,4 +1,4 @@
-import { CardAdd, CardList } from "./containers";
+import { CardAdd, CardList } from "./pages";
 import { Pages, RouteProvider } from "./providers";
 import { MyCardsProvider } from "./providers/my-cards";
 

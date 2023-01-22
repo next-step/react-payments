@@ -1,5 +1,10 @@
-import { Button, ButtonBox, Form, InputContainer } from "../atoms";
-import { Card } from "../card";
+import {
+  Button,
+  ButtonBox,
+  Form,
+  InputContainer,
+} from "../../../components/atoms";
+import { Card } from "../../../components/card";
 import { useFocusHandler, useInputRefs } from "./hooks";
 import { CardFormProvider } from "./providers";
 import {

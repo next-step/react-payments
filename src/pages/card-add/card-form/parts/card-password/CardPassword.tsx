@@ -1,5 +1,5 @@
 import { ForwardedRef, forwardRef, useImperativeHandle } from "react";
-import { Input } from "../../../atoms";
+import { Input } from "../../../../../components/atoms";
 import useCardPassword from "./hooks/useCardPassword";
 
 const CardPassword = forwardRef((_, ref: ForwardedRef<HTMLInputElement>) => {

@@ -1,5 +1,5 @@
 import { ForwardedRef, forwardRef } from "react";
-import { Input, InputBox } from "../../../atoms";
+import { Input, InputBox } from "../../../../../components/atoms";
 import { useCardOwner } from "./hooks";
 import CardOwnerLength from "./CardOwnerLength";
 
