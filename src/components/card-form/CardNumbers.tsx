@@ -1,17 +1,12 @@
-import { ICard } from "../../domain";
 import { Input, InputBox } from "../atoms";
 import { useCardNumbers } from "./hooks";
 
 interface IProps {
-  changeCardState: (newCardState: Partial<ICard>) => void;
   focusNext: () => void;
 }
 
-export default function CardNumbers({ changeCardState, focusNext }: IProps) {
-  const [$first, $second, $third, $fourth] = useCardNumbers(
-    changeCardState,
-    focusNext
-  );
+export default function CardNumbers({ focusNext }: IProps) {
+  const [$first, $second, $third, $fourth] = useCardNumbers(focusNext);
 
   return (
     <InputBox>

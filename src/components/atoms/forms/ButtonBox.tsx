@@ -9,7 +9,7 @@ export default function InputBox({
   DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
 >) {
   return (
-    <div className={classnames("input-box", className)} {...props}>
+    <div className={classnames("button-box", className)} {...props}>
       {children}
     </div>
   );

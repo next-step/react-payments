@@ -6,3 +6,13 @@
 .button-text {
   margin-right: 10px;
 }
+
+.button {
+  border: none;
+  background: none;
+  font-size: 14px;
+}
+
+.button-type-transparent {
+  font-weight: bold;
+}

@@ -6,43 +6,37 @@ import {
   useRef,
 } from "react";
 import { Input, InputBox } from "../atoms";
-import { ICard } from "../../domain";
 import { useCardOwner } from "./hooks";
 import CardOwnerLength from "./CardOwnerLength";
-
-interface IProps {
-  changeCardState: (newCardState: Partial<ICard>) => void;
-}
+import { useCardFormContext } from "./providers";
 
 const MAX_LENGTH = 30;
 
-const CardOwner = forwardRef(
-  ({ changeCardState }: IProps, ref: ForwardedRef<HTMLInputElement>) => {
-    const $input = useRef<HTMLInputElement>(null);
-    const { owner, ownerLength, handleInputOwner } = useCardOwner();
+const CardOwner = forwardRef((_, ref: ForwardedRef<HTMLInputElement>) => {
+  const $input = useRef<HTMLInputElement>(null);
+  const { owner, ownerLength, handleInputOwner } = useCardOwner();
+  const { changeCardState } = useCardFormContext();
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    useImperativeHandle(ref, () => $input.current!);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  useImperativeHandle(ref, () => $input.current!);
 
-    useEffect(() => {
-      changeCardState({ owner });
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [owner]);
+  useEffect(() => {
+    changeCardState({ owner });
+  }, [changeCardState, owner]);
 
-    return (
-      <InputBox style={{ position: "relative" }}>
-        <CardOwnerLength ownerLength={ownerLength} maxLength={MAX_LENGTH} />
-        <Input
-          ref={$input}
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          maxLength={MAX_LENGTH}
-          onInput={handleInputOwner}
-          defaultValue={owner}
-        />
-      </InputBox>
-    );
-  }
-);
+  return (
+    <InputBox style={{ position: "relative" }}>
+      <CardOwnerLength ownerLength={ownerLength} maxLength={MAX_LENGTH} />
+      <Input
+        ref={$input}
+        placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+        maxLength={MAX_LENGTH}
+        onInput={handleInputOwner}
+        defaultValue={owner}
+      />
+    </InputBox>
+  );
+});
 
 CardOwner.displayName = "CardOwner";
 

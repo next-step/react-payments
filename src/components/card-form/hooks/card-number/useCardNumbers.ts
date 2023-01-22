@@ -1,10 +1,9 @@
-import { ICard, isCardNumber } from "../../../../domain";
+import { isCardNumber } from "../../../../domain";
+import { useCardFormContext } from "../../providers";
 import useCardNumber from "./useCardNumber";
 
-export default function useCardNumbers(
-  changeCardState: (newCardState: Partial<ICard>) => void,
-  focusNext: () => void
-) {
+export default function useCardNumbers(focusNext: () => void) {
+  const { changeCardState } = useCardFormContext();
   const changeNumbers = () => {
     const cardNumbers = [
       $first.current?.value || "",
