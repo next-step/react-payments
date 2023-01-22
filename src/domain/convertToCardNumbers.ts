@@ -1,21 +1,19 @@
-import { TCardNumbers, TSingleNumber } from "./types";
-import { isCardNumbers } from "./typeGuard";
+import { TCardNumbers } from "./types";
+import { isCardNumber } from "./typeGuard";
 
 export default function convertToCardNumbers(
-  numbers: TCardNumbers | TSingleNumber[]
+  cardNumbers: TCardNumbers | string[]
 ) {
-  const numberStack = !isCardNumbers(numbers)
-    ? numbers
-    : numbers.join("").split("");
+  const numbers = cardNumbers.join("").split("").filter(isCardNumber);
 
   return [
-    numberStack.slice(0, 4).join(""),
-    numberStack.slice(4, 8).join(""),
-    numberStack
+    numbers.slice(0, 4).join(""),
+    numbers.slice(4, 8).join(""),
+    numbers
       .slice(8, 12)
       .map(() => "*")
       .join(""),
-    numberStack
+    numbers
       .slice(12, 16)
       .map(() => "*")
       .join(""),

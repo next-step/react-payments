@@ -1,28 +1,64 @@
-import { useEffect, useRef } from "react";
-import { leaveOnlyNumber } from "../../../../../utils";
+import { ChangeEvent, useCallback } from "react";
+import { useFocusNext, useNumberInput } from "../../../hooks";
+import { isSingleNumber } from "../../../../../domain";
+import { useCardFormContext } from "../../../providers";
 
 const MAX_LENGTH = 1;
-export default function useCardPassword(focusNext?: () => void) {
-  const $cardPassword = useRef<HTMLInputElement>(null);
+export default function useCardPassword() {
+  const { changeCardState } = useCardFormContext();
+  const [$first, firstProps] = useNumberInput({
+    valueLength: MAX_LENGTH,
+    isValid: isSingleNumber,
+  });
 
-  useEffect(() => {
-    const $input = $cardPassword.current;
-    if (!$input) {
-      return;
-    }
+  const [$second, secondProps] = useNumberInput({
+    valueLength: MAX_LENGTH,
+    isValid: isSingleNumber,
+  });
 
-    const handleInputPassword = () => {
-      $input.value = leaveOnlyNumber($input.value);
-      if ($input.value.length === MAX_LENGTH) {
-        focusNext?.();
-      }
-    };
+  useFocusNext({
+    invalid: firstProps.invalid,
+    focusNext: () => $second.current?.focus(),
+  });
 
-    $input.maxLength = MAX_LENGTH;
-    $input.addEventListener("input", handleInputPassword);
+  const updatePassword = useCallback(
+    () =>
+      changeCardState({
+        password: `${$first.current?.value || ""}${
+          $second.current?.value || ""
+        }`,
+      }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
-    return () => $input.removeEventListener("input", handleInputPassword);
-  }, [focusNext]);
+  const handleInputFirstPassword = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      firstProps.handleInput(event);
+      updatePassword();
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
 
-  return $cardPassword;
+  const handleInputSecondPassword = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      secondProps.handleInput(event);
+      updatePassword();
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  return {
+    refs: [$first, $second],
+    firstProps: {
+      invalid: firstProps.invalid,
+      handleInput: handleInputFirstPassword,
+    },
+    secondProps: {
+      invalid: secondProps.invalid,
+      handleInput: handleInputSecondPassword,
+    },
+  } as const;
 }

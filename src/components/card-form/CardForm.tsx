@@ -18,8 +18,8 @@ export default function CardForm() {
 
   return (
     <CardFormProvider>
-      {(cardState) => (
-        <Form>
+      {(cardState, onSubmit) => (
+        <Form onSubmit={onSubmit}>
           <Card {...cardState} />
 
           <InputContainer title="카드 번호">

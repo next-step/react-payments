@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { convertToCardNumbers, ICard } from "../../domain";
+import { convertToCardNumbers, ICardDTO } from "../../domain";
 
 export default function Card({
   type,
@@ -7,7 +7,7 @@ export default function Card({
   owner,
   expiredMonth,
   expiredYear,
-}: Partial<ICard>) {
+}: ICardDTO) {
   const cardNumbers = useMemo(
     () => (numbers ? convertToCardNumbers(numbers) : ""),
     [numbers]

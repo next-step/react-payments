@@ -10,13 +10,9 @@ interface IProps {
 }
 
 export default function useCardNumber({ focusNext, onInput }: IProps) {
-  const isValid = useCallback((value: string) => {
-    return isCardNumber(value) && value.length === MAX_LENGTH;
-  }, []);
-
   const [$cardNumber, { handleInput, invalid }] = useNumberInput({
     valueLength: MAX_LENGTH,
-    isValid,
+    isValid: isCardNumber,
   });
 
   const handleNumberInput = useCallback(

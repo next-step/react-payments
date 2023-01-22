@@ -1,26 +1,23 @@
-import { isTwoDigitNumber } from "./typeGuard";
+import { isCardNumbers, isSecurityCode, isTwoDigitNumber } from "./typeGuard";
+import { ICardDTO, TInvalidCode } from "./types";
 
 const JANUARY = 1;
 const DECEMBER = 12;
-const TWO_DIGIT_NUMBER_LENGTH = 2;
+
 function getShortYear() {
   return new Date().getFullYear() - 2000;
 }
 
-function isFullyTwoDigitNumber(value: string) {
-  return isTwoDigitNumber(value) && value.length == TWO_DIGIT_NUMBER_LENGTH;
-}
-
 export function isValidMonth(value: string) {
   return (
-    isFullyTwoDigitNumber(value) &&
+    isTwoDigitNumber(value) &&
     Number(value) >= JANUARY &&
     Number(value) <= DECEMBER
   );
 }
 
 export function isValidYear(value: string) {
-  return isFullyTwoDigitNumber(value) && Number(value) >= getShortYear();
+  return isTwoDigitNumber(value) && Number(value) >= getShortYear();
 }
 
 export function isValidExpiryDateBy(year?: string, month?: string) {
@@ -35,4 +32,31 @@ export function isValidExpiryDateBy(year?: string, month?: string) {
     expiryDate.getFullYear() >= nowDate.getFullYear() &&
     expiryDate.getMonth() >= nowDate.getMonth()
   );
+}
+
+export function isValidCardData(card: ICardDTO) {
+  const invalidCodes: TInvalidCode[] = [];
+
+  if (!card.numbers || !isCardNumbers(card.numbers)) {
+    invalidCodes.push("InvalidCardNumbers");
+  }
+
+  if (!isValidExpiryDateBy(card.expiredYear, card.expiredMonth)) {
+    invalidCodes.push("InvalidExpiryDate");
+  }
+
+  if (!card.owner) {
+    console.log({ "card.owner": card.owner });
+    invalidCodes.push("InvalidOwner");
+  }
+
+  if (!card.securityCode || !isSecurityCode(card.securityCode)) {
+    invalidCodes.push("InvalidSecurityCode");
+  }
+
+  if (!card.password || !isTwoDigitNumber(card.password)) {
+    invalidCodes.push("InvalidPassword");
+  }
+
+  return invalidCodes;
 }

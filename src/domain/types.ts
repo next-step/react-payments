@@ -9,24 +9,33 @@ export type TCardTypes =
   | "썬";
 
 export type TSingleNumber = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-export type TTwoDigitNumber =
-  | ``
-  | `${TSingleNumber}`
-  | `${TSingleNumber}${TSingleNumber}`;
-
+export type TTwoDigitNumber = `${TSingleNumber}${TSingleNumber}`;
+export type TSecurityCode = `${TSingleNumber}${TSingleNumber}${TSingleNumber}`;
 export type TCardNumber =
-  | ``
-  | `${TSingleNumber}`
-  | `${TSingleNumber}${TSingleNumber}`
-  | `${TSingleNumber}${TSingleNumber}${TSingleNumber}`
   | `${TSingleNumber}${TSingleNumber}${TSingleNumber}${TSingleNumber}`;
 export type TCardNumbers = TCardNumber[];
+
+export type TInvalidCode = `Invalid${
+  | "CardNumbers"
+  | "ExpiryDate"
+  | "SecurityCode"
+  | "Owner"
+  | "Password"}`;
 
 export interface ICard {
   type: TCardTypes;
   numbers: TCardNumbers;
   expiredMonth: TTwoDigitNumber;
   expiredYear: TTwoDigitNumber;
-  securityCode?: string;
   owner: string;
+}
+
+export interface ICardDTO {
+  type?: TCardTypes;
+  numbers?: string[];
+  expiredMonth?: string;
+  expiredYear?: string;
+  securityCode?: string;
+  owner?: string;
+  password?: string;
 }
