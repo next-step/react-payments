@@ -21,7 +21,7 @@ const initValue: IMyCardsContext = {
   deleteCard: () => null,
 };
 
-const MyCardsContext = createContext(initValue);
+export const MyCardsContext = createContext(initValue);
 
 export default function MyCardsProvider({ children }: PropsWithChildren) {
   const [myCards, setMyCards] = useState(myCardsStorage.getData());
