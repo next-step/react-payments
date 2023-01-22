@@ -1,16 +1,6 @@
 import { Card, FlexCenter, PageTitle } from "../../components";
-import { ICard } from "../../domain";
 import { useNavigation } from "../hooks";
 import { useMyCardsContext } from "../../providers/my-cards";
-
-const cardItem: ICard = {
-  id: "1234",
-  type: "로이드",
-  numbers: ["1234", "5678", "1234", "5678"],
-  owner: "김로이드",
-  expiredMonth: "12",
-  expiredYear: "25",
-};
 
 export default function CardList() {
   const { handleClickCardAdd } = useNavigation();
