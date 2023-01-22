@@ -11,8 +11,8 @@ const CardPassword = forwardRef((_, ref: ForwardedRef<HTMLInputElement>) => {
 
   return (
     <div style={{ display: "flex", gap: "5px" }}>
-      <Input ref={$first} className="w-15" type="password" />
-      <Input ref={$second} className="w-15" type="password" />
+      <Input ref={$first} className="w-15" type="password" required />
+      <Input ref={$second} className="w-15" type="password" required />
       <div className="flex-center w-15">•</div>
       <div className="flex-center w-15">•</div>
     </div>

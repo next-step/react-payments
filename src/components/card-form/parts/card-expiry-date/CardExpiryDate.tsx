@@ -21,9 +21,9 @@ const CardExpiryDate = forwardRef(
     return (
       <>
         <InputBox className="w-50">
-          <Input ref={$month} {...monthProps} />
+          <Input ref={$month} {...monthProps} required />
           /
-          <Input ref={$year} {...yearProps} />
+          <Input ref={$year} {...yearProps} required />
         </InputBox>
         <InputInvalidMessage>{invalidMessage}</InputInvalidMessage>
       </>

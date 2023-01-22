@@ -17,6 +17,7 @@ const CardOwner = forwardRef((_, ref: ForwardedRef<HTMLInputElement>) => {
         maxLength={MAX_LENGTH}
         onInput={handleInputOwner}
         defaultValue={owner}
+        required
       />
     </InputBox>
   );
