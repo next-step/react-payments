@@ -23,6 +23,7 @@ export type TInvalidCode = `Invalid${
   | "Password"}`;
 
 export interface ICard {
+  id: string;
   type: TCardTypes;
   numbers: TCardNumbers;
   expiredMonth: TTwoDigitNumber;
