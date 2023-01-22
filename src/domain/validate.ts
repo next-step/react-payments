@@ -34,7 +34,7 @@ export function isValidExpiryDateBy(year?: string, month?: string) {
   );
 }
 
-export function isValidCardData(card: ICardDTO) {
+export function getInvalidCodes(card: ICardDTO) {
   const invalidCodes: TInvalidCode[] = [];
 
   if (!card.numbers || !isCardNumbers(card.numbers)) {
