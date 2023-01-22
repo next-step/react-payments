@@ -2,11 +2,13 @@ import { Button, ButtonBox, Form, InputContainer } from "../atoms";
 import { Card } from "../card";
 import { CardFormProvider } from "./providers";
 import { useCardFormFocus } from "./hooks";
-import CardNumbers from "./CardNumbers";
-import CardExpired from "./CardExpired";
-import CardSecurityCode from "./CardSecurityCode";
-import CardOwner from "./CardOwner";
-import CardPassword from "./CardPassword";
+import {
+  CardNumbers,
+  CardExpired,
+  CardSecurityCode,
+  CardOwner,
+  CardPassword,
+} from "./parts";
 
 const REF_SIZE = 3;
 

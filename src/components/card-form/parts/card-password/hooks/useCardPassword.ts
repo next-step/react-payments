@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { leaveOnlyNumber } from "../../../../utils";
+import { leaveOnlyNumber } from "../../../../../utils";
 
 const MAX_LENGTH = 1;
 export default function useCardPassword(focusNext?: () => void) {

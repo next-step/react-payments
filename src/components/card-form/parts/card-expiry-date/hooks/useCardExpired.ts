@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
-import { TTwoDigitNumber } from "../../../../domain";
-import { useCardFormContext } from "../../providers";
+import { useCallback, useMemo, useState } from "react";
+import { TTwoDigitNumber } from "../../../../../domain";
+import { useCardFormContext } from "../../../providers";
 import useMonthExpired from "./useMonthExpired";
 import useYearExpired from "./useYearExpired";
 
@@ -12,7 +12,7 @@ export default function useCardExpired(focusNext: () => void) {
   const [monthCondition, setMonthCondition] = useState(true);
   const [yearCondition, setYearCondition] = useState(true);
 
-  const changeExpired = () => {
+  const changeExpired = useCallback(() => {
     if (!$expirationMonth.current || !$expirationYear.current) {
       return;
     }
@@ -21,7 +21,9 @@ export default function useCardExpired(focusNext: () => void) {
     const expiredYear = $expirationYear.current.value as TTwoDigitNumber;
 
     changeCardState({ expiredMonth, expiredYear });
-  };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [changeCardState]);
 
   const $expirationMonth = useMonthExpired({
     changeExpired,

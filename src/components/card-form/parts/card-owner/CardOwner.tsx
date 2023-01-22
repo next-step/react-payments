@@ -5,10 +5,10 @@ import {
   useImperativeHandle,
   useRef,
 } from "react";
-import { Input, InputBox } from "../atoms";
-import { useCardOwner } from "./hooks";
+import { Input, InputBox } from "../../../atoms";
+import { useCardOwner } from "../../hooks";
+import { useCardFormContext } from "../../providers";
 import CardOwnerLength from "./CardOwnerLength";
-import { useCardFormContext } from "./providers";
 
 const MAX_LENGTH = 30;
 

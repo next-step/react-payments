@@ -1,5 +1,5 @@
 import { ForwardedRef, forwardRef, useImperativeHandle } from "react";
-import { Input } from "../atoms";
+import { Input } from "../../../atoms";
 import { useCardNumber } from "./hooks";
 
 interface IProps {

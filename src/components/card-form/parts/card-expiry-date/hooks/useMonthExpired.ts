@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { leaveOnlyNumber } from "../../../../utils";
+import { leaveOnlyNumber } from "../../../../../utils";
 
-export default function useYearExpired({
+export default function useMonthExpired({
   changeExpired,
   validate,
   focusNext,
@@ -10,20 +10,17 @@ export default function useYearExpired({
   validate: (condition: boolean) => void;
   focusNext: () => void;
 }) {
-  const $expirationYear = useRef<HTMLInputElement>(null);
+  const $expirationMonth = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const $target = $expirationYear.current;
+    const $target = $expirationMonth.current;
     if (!$target) {
       return;
     }
 
-    const currentYear = new Date().getFullYear() - 2000;
-
     const handleInput = () => {
       $target.value = leaveOnlyNumber($target.value);
-      const valid =
-        $target.value.length === 2 && Number($target.value) >= currentYear;
+      const valid = $target.value.length === 2 && Number($target.value) <= 12;
       validate(valid);
       changeExpired();
       if (valid) {
@@ -36,5 +33,5 @@ export default function useYearExpired({
     return () => $target.removeEventListener("input", handleInput);
   }, [changeExpired, focusNext, validate]);
 
-  return $expirationYear;
+  return $expirationMonth;
 }

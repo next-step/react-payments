@@ -8,7 +8,6 @@ import {
 import { ICard } from "../../../domain";
 
 interface ICardFormContext {
-  cardState: Partial<ICard>;
   changeCardState: (cardState: Partial<ICard>) => void;
 }
 
@@ -17,7 +16,6 @@ interface IProps {
 }
 
 const initValue: ICardFormContext = {
-  cardState: {},
   changeCardState: () => null,
 };
 
@@ -32,10 +30,7 @@ export default function CardFormProvider({ children }: IProps) {
     }));
   }, []);
 
-  const contextValue = useMemo(
-    () => ({ cardState, changeCardState }),
-    [cardState, changeCardState]
-  );
+  const contextValue = useMemo(() => ({ changeCardState }), [changeCardState]);
 
   return (
     <CardFormContext.Provider value={contextValue}>

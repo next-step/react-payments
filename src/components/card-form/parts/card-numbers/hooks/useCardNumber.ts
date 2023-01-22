@@ -6,8 +6,8 @@ import {
   useRef,
   useState,
 } from "react";
-import { leaveOnlyNumber } from "../../../../utils";
-import { isCardNumber, TCardNumber } from "../../../../domain";
+import { leaveOnlyNumber } from "../../../../../utils";
+import { isCardNumber, TCardNumber } from "../../../../../domain";
 
 const MAX_LENGTH = 4;
 

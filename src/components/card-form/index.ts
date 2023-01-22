@@ -1,5 +1,6 @@
-export { default as CardNumbers } from "./CardNumbers";
-export { default as CardExpired } from "./CardExpired";
-export { default as CardOwner } from "./CardOwner";
-export { default as CardSecurityCode } from "./CardSecurityCode";
-export { default as CardPassword } from "./CardPassword";
+export * from "./parts/card-numbers";
+export * from "./parts/card-expiry-date";
+export * from "./parts/card-owner";
+export * from "./parts/card-security-code";
+export * from "./parts/card-password";
+export { default as CardForm } from "./CardForm";

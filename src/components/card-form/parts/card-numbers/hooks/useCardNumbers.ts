@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useCardFormFocus } from "../card-form-focus";
-import { useCardFormContext } from "../../providers";
-import { isCardNumber } from "../../../../domain";
+import { useCardFormContext } from "../../../providers";
+import { isCardNumber } from "../../../../../domain";
 
 const REF_SIZE = 4;
 export default function useCardNumbers() {
@@ -12,8 +12,7 @@ export default function useCardNumbers() {
     const numbers = refs.map((ref) => ref.current?.value).filter(isCardNumber);
 
     changeCardState({ numbers });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [changeCardState]);
+  }, [changeCardState, refs]);
 
   return {
     refs,
