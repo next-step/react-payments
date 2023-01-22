@@ -37,7 +37,7 @@ export function isCardNumber(cardNumber: unknown): cardNumber is TCardNumber {
 }
 
 export function isCardNumbers(
-  cardNumbers: unknown[]
+  cardNumbers?: unknown[]
 ): cardNumbers is TCardNumbers {
-  return cardNumbers.filter(isCardNumber).length === 4;
+  return cardNumbers?.filter(isCardNumber).length === 4;
 }
