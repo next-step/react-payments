@@ -7,6 +7,7 @@ export default function Card({
   owner,
   expiredMonth,
   expiredYear,
+  nickname,
 }: ICardDTO) {
   const cardNumbers = useMemo(
     () => (numbers ? convertToCardNumbers(numbers) : ""),
@@ -45,7 +46,7 @@ export default function Card({
           </div>
         </div>
       </div>
-      <span className="card-nickname">법인카드</span>
+      {nickname && <span className="card-nickname">{nickname}</span>}
     </>
   );
 }
