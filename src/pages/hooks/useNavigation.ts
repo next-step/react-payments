@@ -8,6 +8,10 @@ export default function useNavigation() {
     pushRoute(Pages.CARD_LIST);
   }, [pushRoute]);
 
+  const goToCardAdd = useCallback(() => {
+    pushRoute(Pages.CARD_ADD);
+  }, [pushRoute]);
+
   const handleClickCardList: MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
       event.preventDefault();
@@ -16,5 +20,13 @@ export default function useNavigation() {
     [goToCardList]
   );
 
-  return { handleClickCardList, goToCardList };
+  const handleClickCardAdd: MouseEventHandler<HTMLDivElement> = useCallback(
+    (event) => {
+      event.preventDefault();
+      goToCardAdd();
+    },
+    [goToCardAdd]
+  );
+
+  return { handleClickCardList, handleClickCardAdd, goToCardList, goToCardAdd };
 }

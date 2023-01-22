@@ -1,7 +1,7 @@
-import { MouseEventHandler, useCallback } from "react";
-import { Pages, useRouteContext } from "../../providers";
 import { Card, FlexCenter, PageTitle } from "../../components";
 import { ICard } from "../../domain";
+import { useNavigation } from "../hooks";
+import { useMyCardsContext } from "../../providers/my-cards";
 
 const cardItem: ICard = {
   id: "1234",
@@ -13,15 +13,8 @@ const cardItem: ICard = {
 };
 
 export default function CardList() {
-  const { pushRoute } = useRouteContext();
-
-  const handleClickCardAdd: MouseEventHandler<HTMLDivElement> = useCallback(
-    (event) => {
-      event.preventDefault();
-      pushRoute(Pages.CARD_ADD);
-    },
-    [pushRoute]
-  );
+  const { handleClickCardAdd } = useNavigation();
+  const { myCards } = useMyCardsContext();
 
   return (
     <div className="app flex-column-center">
@@ -29,7 +22,9 @@ export default function CardList() {
         <PageTitle className="mb-10">보유 카드</PageTitle>
       </FlexCenter>
 
-      <Card {...cardItem} />
+      {myCards.map((card) => (
+        <Card key={card.id} {...card} />
+      ))}
 
       <div className="card-box">
         <div className="empty-card" onClick={handleClickCardAdd}>
