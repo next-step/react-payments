@@ -6,8 +6,8 @@ import {
   useRef,
 } from "react";
 import { Input, InputBox } from "../../../atoms";
-import { useCardOwner } from "../../hooks";
 import { useCardFormContext } from "../../providers";
+import { useCardOwner } from "./hooks";
 import CardOwnerLength from "./CardOwnerLength";
 
 const MAX_LENGTH = 30;
