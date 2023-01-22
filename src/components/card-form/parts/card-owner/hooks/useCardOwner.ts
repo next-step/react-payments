@@ -1,14 +1,16 @@
-import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useMemo } from "react";
+import { useCardFormContext } from "../../../providers";
 
 export default function useCardOwner() {
-  const [owner, setOwner] = useState("");
+  const { cardState, changeCardState } = useCardFormContext();
+  const owner = useMemo(() => cardState.owner || "", [cardState.owner]);
   const ownerLength = useMemo(() => owner.length, [owner]);
 
   const handleInputOwner = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setOwner(event.target.value);
+    ({ target }: ChangeEvent<HTMLInputElement>) => {
+      changeCardState({ owner: target.value });
     },
-    []
+    [changeCardState]
   );
 
   return {

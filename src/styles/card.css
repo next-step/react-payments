@@ -134,3 +134,11 @@
   vertical-align: middle;
   font-weight: 400;
 }
+
+.card-owner-length {
+  position: absolute;
+  right: 0;
+  top: -20px;
+  font-size: 12px;
+  color: #525252;
+}

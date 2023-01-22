@@ -62,3 +62,7 @@
 .w-15 {
   width: 15%;
 }
+
+.relative {
+  position: relative;
+}

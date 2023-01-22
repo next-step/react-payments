@@ -8,6 +8,7 @@ import {
 import { ICard, isValidExpiryDateBy } from "../../../domain";
 
 interface ICardFormContext {
+  cardState: Partial<ICard>;
   changeCardState: (cardState: Partial<ICard>) => void;
   isValidExpiryDate: () => boolean;
 }
@@ -17,6 +18,7 @@ interface IProps {
 }
 
 const initValue: ICardFormContext = {
+  cardState: {},
   changeCardState: () => null,
   isValidExpiryDate: () => false,
 };
@@ -37,8 +39,8 @@ export default function CardFormProvider({ children }: IProps) {
   }, [cardState.expiredMonth, cardState.expiredYear]);
 
   const contextValue = useMemo(
-    () => ({ changeCardState, isValidExpiryDate }),
-    [changeCardState, isValidExpiryDate]
+    () => ({ cardState, changeCardState, isValidExpiryDate }),
+    [cardState, changeCardState, isValidExpiryDate]
   );
 
   return (
