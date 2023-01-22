@@ -2,15 +2,11 @@ import { ReactNode, useCallback } from "react";
 import { useModalContext } from "../providers";
 
 export default function useModal(modal: (closeModal: () => void) => ReactNode) {
-  const { setModal } = useModalContext();
-
-  const closeModal = useCallback(() => {
-    setModal(null);
-  }, [setModal]);
+  const { openModal, closeModal } = useModalContext();
 
   const showModal = useCallback(() => {
-    setModal(modal(closeModal));
-  }, [closeModal, modal, setModal]);
+    openModal(modal(closeModal));
+  }, [closeModal, modal, openModal]);
 
   return {
     showModal,

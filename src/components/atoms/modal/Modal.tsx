@@ -1,46 +1,23 @@
-import { PropsWithChildren } from "react";
+import { MouseEvent, PropsWithChildren, useCallback } from "react";
 
-export default function Modal({ children }: PropsWithChildren) {
+interface IProps {
+  onClose: () => void;
+}
+
+export default function Modal({
+  children,
+  onClose,
+}: PropsWithChildren<IProps>) {
+  const handleClickContent = useCallback(
+    (event: MouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+    },
+    []
+  );
   return (
-    <div className="modal-dimmed">
-      <div className="modal">
+    <div className="modal-dimmed" onClick={onClose}>
+      <div className="modal" onClick={handleClickContent}>
         {children}
-        <div className="flex-center">
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-        </div>
-        <div className="flex-center">
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-          <div className="modal-item-container">
-            <div className="modal-item-dot"></div>
-            <span className="modal-item-name">클린 카드</span>
-          </div>
-        </div>
       </div>
     </div>
   );
