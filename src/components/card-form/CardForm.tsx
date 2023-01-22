@@ -1,13 +1,13 @@
 import { Button, ButtonBox, Form, InputContainer } from "../atoms";
 import { Card } from "../card";
+import { useRefsWithFocusHandler } from "./hooks";
 import { CardFormProvider } from "./providers";
-import { useCardFormFocus } from "./hooks";
 import {
+  CardExpiryDate,
   CardNumbers,
-  CardExpired,
-  CardSecurityCode,
   CardOwner,
   CardPassword,
+  CardSecurityCode,
 } from "./parts";
 
 const REF_SIZE = 3;
@@ -16,7 +16,7 @@ export default function CardForm() {
   const {
     refs: [$cardExpired, $cardOwner, $cardPassword],
     createFocusHandler,
-  } = useCardFormFocus(REF_SIZE);
+  } = useRefsWithFocusHandler(REF_SIZE);
 
   return (
     <CardFormProvider>
@@ -29,7 +29,7 @@ export default function CardForm() {
           </InputContainer>
 
           <InputContainer title="만료일">
-            <CardExpired
+            <CardExpiryDate
               ref={$cardExpired}
               focusNext={createFocusHandler($cardOwner)}
             />
