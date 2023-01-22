@@ -15,10 +15,8 @@ export default function useCardNumbers() {
   const handleSelectCardType = useCallback(
     (pattern?: [TCardNumber, TCardNumber]) => {
       const [$first, $second] = refs;
-      if ($first.current) {
+      if ($first.current && $second.current) {
         $first.current.value = pattern?.[0] || "";
-      }
-      if ($second.current) {
         $second.current.value = pattern?.[1] || "";
       }
     },

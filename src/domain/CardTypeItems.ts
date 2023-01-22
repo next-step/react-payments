@@ -49,4 +49,23 @@ const CardTypeItems: ICardTypeItem[] = [
   },
 ];
 
+export function splitGroupCardTypes(size: number) {
+  const groupCount = Math.ceil(CardTypeItems.length / size);
+  return Array.from({ length: groupCount }).map((_, key) => {
+    const start = key * size;
+    const end = start + size;
+    return CardTypeItems.slice(start, end);
+  });
+}
+
+export function findCardTypeByLabel(label: string) {
+  return CardTypeItems.find((item) => item.label === label);
+}
+
+export function findCardTypeByPattern([first, second]: string[]) {
+  return CardTypeItems.find(({ pattern }) => {
+    return pattern[0] === first && pattern[1] === second;
+  });
+}
+
 export default CardTypeItems;
