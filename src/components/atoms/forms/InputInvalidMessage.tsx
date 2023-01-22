@@ -1,11 +1,8 @@
-interface IProps {
-  condition: boolean;
-  message?: string;
-}
+import { PropsWithChildren } from "react";
 
-export default function InputInvalidMessage({ condition, message }: IProps) {
-  if (condition) {
+export default function InputInvalidMessage({ children }: PropsWithChildren) {
+  if (!children) {
     return null;
   }
-  return <div>{message}</div>;
+  return <div className="input-invalid-message">{children}</div>;
 }

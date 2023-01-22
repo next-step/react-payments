@@ -1,1 +1,1 @@
-export { default as CardExpired } from "./CardExpired";
+export { default as CardExpiryDate } from "./CardExpiryDate";

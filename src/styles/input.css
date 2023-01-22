@@ -49,3 +49,9 @@
 
   border-bottom: 1px solid #383838;
 }
+
+.input-invalid-message {
+  position: absolute;
+  color: #F09;
+  font-size: 11px;
+}
