@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { TCardNumber } from "../../../../../../domain";
-import { useCardStateContext } from "../../../../providers";
 import {
   findCardTypeByLabel,
   findCardTypeByPattern,
   splitGroupCardTypes,
-} from "../../../../../../domain/CardTypeItems";
+  TCardNumber,
+} from "../../../../../../domain";
+import { useCardStateContext } from "../../../../providers";
 
 export default function useCardTypes(
   onSelect: (pattern?: [TCardNumber, TCardNumber]) => void
