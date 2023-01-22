@@ -1,11 +1,12 @@
 import { useCallback } from "react";
 import { useCardFormContext } from "../../../providers";
 import { isCardNumber } from "../../../../../domain";
-import { useRefsWithFocusHandler } from "../../../hooks";
+import { useFocusHandler, useInputRefs } from "../../../hooks";
 
 const REF_SIZE = 4;
 export default function useCardNumbers() {
-  const { refs, createFocusHandler } = useRefsWithFocusHandler(REF_SIZE);
+  const refs = useInputRefs(REF_SIZE);
+  const createFocusHandler = useFocusHandler();
   const { changeCardState } = useCardFormContext();
 
   const handleInputNumber = useCallback(() => {
