@@ -45,6 +45,11 @@
   width: 2.8rem;
   height: 2.8rem;
   background-color: #94dacd;
+  transition: 0.15s;
+}
+
+.modal-item-dot.selected {
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .modal-item-name {

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { convertToCardNumbers, ICardDTO } from "../../domain";
+import { CardTypeItems, convertToCardNumbers, ICardDTO } from "../../domain";
 
 export default function Card({
   type,
@@ -23,10 +23,20 @@ export default function Card({
     return owner.length > maxLength ? `${owner.slice(0, maxLength)}...` : owner;
   }, [owner]);
 
+  const selectedType = useMemo(() => {
+    return CardTypeItems.find(
+      ({ pattern }) =>
+        pattern[0] === numbers?.[0] && pattern[1] === numbers?.[1]
+    );
+  }, [numbers]);
+
   return (
     <>
       <div className="card-box">
-        <div className="small-card">
+        <div
+          className="small-card"
+          style={{ backgroundColor: selectedType?.colorStyle }}
+        >
           <div className="card-top">
             {type && <span className="card-text">{type} 카드</span>}
           </div>
