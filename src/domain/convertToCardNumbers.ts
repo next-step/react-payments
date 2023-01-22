@@ -1,10 +1,10 @@
 import { TCardNumbers } from "./types";
-import { isCardNumber } from "./typeGuard";
+import { isSingleNumber } from "./typeGuard";
 
 export default function convertToCardNumbers(
   cardNumbers: TCardNumbers | string[]
 ) {
-  const numbers = cardNumbers.join("").split("").filter(isCardNumber);
+  const numbers = cardNumbers.join("").split("").filter(isSingleNumber);
 
   return [
     numbers.slice(0, 4).join(""),
