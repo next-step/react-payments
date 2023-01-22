@@ -8,10 +8,14 @@ import { useCardExpired } from "./hooks";
 
 interface IProps {
   focusNext: () => void;
+  invalidMessage?: string;
 }
 
 const CardExpiryDate = forwardRef(
-  ({ focusNext }: IProps, ref: ForwardedRef<HTMLInputElement>) => {
+  (
+    { focusNext, invalidMessage: defaultInvalidMessage }: IProps,
+    ref: ForwardedRef<HTMLInputElement>
+  ) => {
     const {
       refs: [$month, $year],
       monthProps,
@@ -29,7 +33,9 @@ const CardExpiryDate = forwardRef(
           /
           <Input ref={$year} {...yearProps} required />
         </InputBox>
-        <InputInvalidMessage>{invalidMessage}</InputInvalidMessage>
+        <InputInvalidMessage>
+          {defaultInvalidMessage || invalidMessage}
+        </InputInvalidMessage>
       </>
     );
   }

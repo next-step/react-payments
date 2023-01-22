@@ -1,6 +1,7 @@
 import { CardAdd, CardList } from "./pages";
 import { Pages, RouteProvider } from "./providers";
 import { MyCardsProvider } from "./providers/my-cards";
+import { CardStateProvider } from "./pages/card-add/providers";
 
 function App() {
   return (
@@ -10,7 +11,11 @@ function App() {
           {(page) => (
             <>
               {page === Pages.CARD_LIST && <CardList />}
-              {page === Pages.CARD_ADD && <CardAdd />}
+              {page === Pages.CARD_ADD && (
+                <CardStateProvider>
+                  <CardAdd />
+                </CardStateProvider>
+              )}
             </>
           )}
         </RouteProvider>

@@ -1,12 +1,12 @@
 import { ChangeEvent, useCallback } from "react";
 import { useFocusNext, useNumberInput } from "../../../hooks";
 import { isSecurityCode } from "../../../../../../domain";
-import { useCardFormContext } from "../../../providers";
+import { useCardStateContext } from "../../../../providers";
 
 const MAX_LENGTH = 3;
 
 export default function useCardSecurityCode(focusNext: () => void) {
-  const { changeCardState } = useCardFormContext();
+  const { changeCardState } = useCardStateContext();
   const [$ref, { invalid, handleInput }] = useNumberInput({
     valueLength: MAX_LENGTH,
     isValid: isSecurityCode,

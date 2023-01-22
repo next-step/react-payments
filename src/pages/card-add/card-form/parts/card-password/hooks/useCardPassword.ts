@@ -1,11 +1,11 @@
 import { ChangeEvent, useCallback } from "react";
 import { useFocusNext, useNumberInput } from "../../../hooks";
 import { isSingleNumber } from "../../../../../../domain";
-import { useCardFormContext } from "../../../providers";
+import { useCardStateContext } from "../../../../providers";
 
 const MAX_LENGTH = 1;
 export default function useCardPassword() {
-  const { changeCardState } = useCardFormContext();
+  const { changeCardState } = useCardStateContext();
   const [$first, firstProps] = useNumberInput({
     valueLength: MAX_LENGTH,
     isValid: isSingleNumber,

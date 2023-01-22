@@ -4,7 +4,7 @@ import {
   isValidMonth,
   isValidYear,
 } from "../../../../../../domain";
-import { useCardFormContext } from "../../../providers";
+import { useCardStateContext } from "../../../../providers";
 import { useFocusNext, useNumberInput } from "../../../hooks";
 
 const MAX_LENGTH = 2;
@@ -14,7 +14,7 @@ const INVALID_YEAR_MESSAGE = "년도는 올해보단 큰 숫자여야합니다."
 const INVALID_EXPIRY_DATE_MESSAGE = "이미 지난 만료일입니다.";
 
 export default function useCardExpired(focusNext: () => void) {
-  const { changeCardState, isValidExpiryDate } = useCardFormContext();
+  const { changeCardState, isValidExpiryDate } = useCardStateContext();
 
   const [$month, monthProps] = useNumberInput({
     valueLength: MAX_LENGTH,

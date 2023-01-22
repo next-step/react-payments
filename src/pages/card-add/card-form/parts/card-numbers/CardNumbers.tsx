@@ -1,12 +1,14 @@
 import { InputBox } from "../../../../../components/atoms";
+import { InputInvalidMessage } from "../../../../../components";
 import { useCardNumbers } from "./hooks";
 import CardNumber from "./CardNumber";
 
 interface IProps {
   focusNext: () => void;
+  invalidMessage?: string;
 }
 
-export default function CardNumbers({ focusNext }: IProps) {
+export default function CardNumbers({ focusNext, invalidMessage }: IProps) {
   const {
     refs: [$first, $second, $third, $fourth],
     createFocusHandler,
@@ -18,32 +20,35 @@ export default function CardNumbers({ focusNext }: IProps) {
   const focusFourth = createFocusHandler($fourth);
 
   return (
-    <InputBox>
-      <CardNumber
-        ref={$first}
-        focusNext={focusSecond}
-        onInput={handleInputNumber}
-      />
-      -
-      <CardNumber
-        ref={$second}
-        focusNext={focusThird}
-        onInput={handleInputNumber}
-      />
-      -
-      <CardNumber
-        ref={$third}
-        type="password"
-        focusNext={focusFourth}
-        onInput={handleInputNumber}
-      />
-      -
-      <CardNumber
-        ref={$fourth}
-        type="password"
-        focusNext={focusNext}
-        onInput={handleInputNumber}
-      />
-    </InputBox>
+    <>
+      <InputBox>
+        <CardNumber
+          ref={$first}
+          focusNext={focusSecond}
+          onInput={handleInputNumber}
+        />
+        -
+        <CardNumber
+          ref={$second}
+          focusNext={focusThird}
+          onInput={handleInputNumber}
+        />
+        -
+        <CardNumber
+          ref={$third}
+          type="password"
+          focusNext={focusFourth}
+          onInput={handleInputNumber}
+        />
+        -
+        <CardNumber
+          ref={$fourth}
+          type="password"
+          focusNext={focusNext}
+          onInput={handleInputNumber}
+        />
+      </InputBox>
+      <InputInvalidMessage>{invalidMessage}</InputInvalidMessage>
+    </>
   );
 }
