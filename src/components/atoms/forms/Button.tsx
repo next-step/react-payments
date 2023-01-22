@@ -13,6 +13,7 @@ type TButtonProps = DetailedHTMLProps<
 interface IProps extends Omit<TButtonProps, "type"> {
   nativeType?: TButtonProps["type"];
   type?: "transparent";
+  invalid?: boolean;
 }
 
 export default function Button({
@@ -20,11 +21,14 @@ export default function Button({
   className,
   nativeType = "button",
   type = "transparent",
+  invalid,
   ...props
 }: PropsWithChildren<IProps>) {
   return (
     <button
-      className={classnames(`button`, `button-type-${type}`, className)}
+      className={classnames(`button`, `button-type-${type}`, className, {
+        invalid,
+      })}
       type={nativeType}
       {...props}
     >
