@@ -13,7 +13,7 @@ const CardNumber = forwardRef(
     { focusNext, type = "text", onInput }: IProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
-    const { $cardNumber, invalid, handleInput } = useCardNumber({
+    const { $cardNumber, invalid, handleNumberInput } = useCardNumber({
       focusNext,
       onInput,
     });
@@ -27,7 +27,7 @@ const CardNumber = forwardRef(
         type={type}
         invalid={invalid}
         required
-        onInput={handleInput}
+        onInput={handleNumberInput}
       />
     );
   }

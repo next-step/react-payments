@@ -1,13 +1,6 @@
-import {
-  ChangeEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { leaveOnlyNumber } from "../../../../../utils";
-import { isCardNumber, TCardNumber } from "../../../../../domain";
+import { ChangeEvent, useCallback } from "react";
+import { isCardNumber } from "../../../../../domain";
+import { useFocusNext, useNumberInput } from "../../../hooks";
 
 const MAX_LENGTH = 4;
 
@@ -17,41 +10,28 @@ interface IProps {
 }
 
 export default function useCardNumber({ focusNext, onInput }: IProps) {
-  const $cardNumber = useRef<HTMLInputElement>(null);
-  const [cardNumber, setCardNumber] = useState<TCardNumber>("");
-  const invalid = useMemo(
-    () => !isCardNumber(cardNumber) || cardNumber.length < MAX_LENGTH,
-    [cardNumber]
-  );
+  const isValid = useCallback((value: string) => {
+    return isCardNumber(value) && value.length === MAX_LENGTH;
+  }, []);
 
-  const handleInput = useCallback(
-    ({ target }: ChangeEvent<HTMLInputElement>) => {
-      target.value = leaveOnlyNumber(target.value);
-      if (isCardNumber(target.value)) {
-        setCardNumber(target.value);
-      }
+  const [$cardNumber, { handleInput, invalid }] = useNumberInput({
+    valueLength: MAX_LENGTH,
+    isValid,
+  });
+
+  const handleNumberInput = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      handleInput(event);
       onInput();
     },
-    [onInput]
+    [handleInput, onInput]
   );
 
-  useEffect(() => {
-    if (!invalid) {
-      focusNext();
-    }
-  }, [focusNext, invalid]);
-
-  useEffect(() => {
-    if (!$cardNumber.current) {
-      return;
-    }
-    $cardNumber.current.minLength = MAX_LENGTH;
-    $cardNumber.current.maxLength = MAX_LENGTH;
-  }, []);
+  useFocusNext({ invalid, focusNext });
 
   return {
     $cardNumber,
-    handleInput,
+    handleNumberInput,
     invalid,
   };
 }
