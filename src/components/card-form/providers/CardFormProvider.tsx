@@ -25,20 +25,18 @@ export const CardFormContext = createContext(initValue);
 
 export default function CardFormProvider({ children }: IProps) {
   const [cardState, setCardState] = useState<Partial<ICard>>({});
-  const changeCardState = useCallback(
-    (newCardState: Partial<ICard>) => {
-      setCardState({
-        ...cardState,
-        ...newCardState,
-      });
-    },
-    [cardState]
-  );
+  const changeCardState = useCallback((newCardState: Partial<ICard>) => {
+    setCardState((cardState) => ({
+      ...cardState,
+      ...newCardState,
+    }));
+  }, []);
 
   const contextValue = useMemo(
     () => ({ cardState, changeCardState }),
     [cardState, changeCardState]
   );
+
   return (
     <CardFormContext.Provider value={contextValue}>
       {children(cardState)}

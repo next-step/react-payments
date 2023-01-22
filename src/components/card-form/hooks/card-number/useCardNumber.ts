@@ -1,37 +1,57 @@
-import { useEffect, useRef } from "react";
+import {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { leaveOnlyNumber } from "../../../../utils";
+import { isCardNumber, TCardNumber } from "../../../../domain";
 
 const MAX_LENGTH = 4;
 
-export default function useCardNumber(
-  changeNumbers: () => void,
-  focusNext?: () => void
-) {
+interface IProps {
+  focusNext: () => void;
+  onInput: () => void;
+}
+
+export default function useCardNumber({ focusNext, onInput }: IProps) {
   const $cardNumber = useRef<HTMLInputElement>(null);
+  const [cardNumber, setCardNumber] = useState<TCardNumber>("");
+  const invalid = useMemo(
+    () => !isCardNumber(cardNumber) || cardNumber.length < MAX_LENGTH,
+    [cardNumber]
+  );
+
+  const handleInput = useCallback(
+    ({ target }: ChangeEvent<HTMLInputElement>) => {
+      target.value = leaveOnlyNumber(target.value);
+      if (isCardNumber(target.value)) {
+        setCardNumber(target.value);
+      }
+      onInput();
+    },
+    [onInput]
+  );
 
   useEffect(() => {
-    const $cardNumberInput = $cardNumber.current;
-    if (!$cardNumberInput) {
+    if (!invalid) {
+      focusNext();
+    }
+  }, [focusNext, invalid]);
+
+  useEffect(() => {
+    if (!$cardNumber.current) {
       return;
     }
-
-    const handleInput = () => {
-      $cardNumberInput.value = leaveOnlyNumber($cardNumberInput.value);
-      changeNumbers();
-      if ($cardNumberInput.value.length === MAX_LENGTH) {
-        focusNext?.();
-      }
-    };
-
-    $cardNumberInput.minLength = MAX_LENGTH;
-    $cardNumberInput.maxLength = MAX_LENGTH;
-    $cardNumberInput.pattern = "[0-9]{4}";
-    $cardNumberInput.addEventListener("input", handleInput);
-
-    return () => $cardNumberInput.removeEventListener("input", handleInput);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    $cardNumber.current.minLength = MAX_LENGTH;
+    $cardNumber.current.maxLength = MAX_LENGTH;
   }, []);
 
-  return $cardNumber;
+  return {
+    $cardNumber,
+    handleInput,
+    invalid,
+  };
 }

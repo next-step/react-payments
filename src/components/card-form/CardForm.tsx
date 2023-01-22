@@ -1,17 +1,20 @@
-import { useRef } from "react";
 import { Button, ButtonBox, Form, InputContainer } from "../atoms";
 import { Card } from "../card";
 import { CardFormProvider } from "./providers";
+import { useCardFormFocus } from "./hooks";
 import CardNumbers from "./CardNumbers";
 import CardExpired from "./CardExpired";
 import CardSecurityCode from "./CardSecurityCode";
 import CardOwner from "./CardOwner";
 import CardPassword from "./CardPassword";
 
+const REF_SIZE = 3;
+
 export default function CardForm() {
-  const $cardExpired = useRef<HTMLInputElement>(null);
-  const $cardOwner = useRef<HTMLInputElement>(null);
-  const $cardPassword = useRef<HTMLInputElement>(null);
+  const {
+    refs: [$cardExpired, $cardOwner, $cardPassword],
+    createFocusHandler,
+  } = useCardFormFocus(REF_SIZE);
 
   return (
     <CardFormProvider>
@@ -20,13 +23,13 @@ export default function CardForm() {
           <Card {...cardState} />
 
           <InputContainer title="카드 번호">
-            <CardNumbers focusNext={() => $cardExpired.current?.focus()} />
+            <CardNumbers focusNext={createFocusHandler($cardExpired)} />
           </InputContainer>
 
           <InputContainer title="만료일">
             <CardExpired
               ref={$cardExpired}
-              focusNext={() => $cardOwner.current?.focus()}
+              focusNext={createFocusHandler($cardOwner)}
             />
           </InputContainer>
 
@@ -35,9 +38,7 @@ export default function CardForm() {
           </InputContainer>
 
           <InputContainer title="보안코드(CVC/CVV)">
-            <CardSecurityCode
-              focusNext={() => $cardPassword.current?.focus()}
-            />
+            <CardSecurityCode focusNext={createFocusHandler($cardPassword)} />
           </InputContainer>
 
           <InputContainer title="카드 비밀번호">

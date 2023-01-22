@@ -34,7 +34,7 @@
   border-radius: 0.25rem;
 }
 
-.input-basic:valid {
+.input-basic:not(.invalid) {
   color: #04C09E;
 }
 
