@@ -1,10 +1,21 @@
-import { TCardNumber, TCardNumbers, TSingleNumber } from "./types";
+import {
+  TCardNumber,
+  TCardNumbers,
+  TSingleNumber,
+  TTwoDigitNumber,
+} from "./types";
 
 export function isSingleNumber(
   singleNumber: unknown
 ): singleNumber is TSingleNumber {
   const numberValue = Number(singleNumber);
   return !isNaN(numberValue) && 0 < numberValue && numberValue <= 9;
+}
+export function isTwoDigitNumber(
+  twoDigitNumber: unknown
+): twoDigitNumber is TTwoDigitNumber {
+  const numberValue = Number(twoDigitNumber);
+  return !isNaN(numberValue) && 0 < numberValue && numberValue <= 99;
 }
 
 export function isCardNumber(cardNumber: unknown): cardNumber is TCardNumber {
