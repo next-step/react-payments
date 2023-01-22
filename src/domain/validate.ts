@@ -46,7 +46,6 @@ export function isValidCardData(card: ICardDTO) {
   }
 
   if (!card.owner) {
-    console.log({ "card.owner": card.owner });
     invalidCodes.push("InvalidOwner");
   }
 
