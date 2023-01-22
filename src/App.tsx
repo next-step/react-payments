@@ -1,17 +1,20 @@
 import { CardAdd, CardList } from "./containers";
 import { Pages, RouteProvider } from "./providers";
+import { MyCardsProvider } from "./providers/my-cards";
 
 function App() {
   return (
     <div className="root">
-      <RouteProvider>
-        {(page) => (
-          <>
-            {page === Pages.CARD_LIST && <CardList />}
-            {page === Pages.CARD_ADD && <CardAdd />}
-          </>
-        )}
-      </RouteProvider>
+      <MyCardsProvider>
+        <RouteProvider>
+          {(page) => (
+            <>
+              {page === Pages.CARD_LIST && <CardList />}
+              {page === Pages.CARD_ADD && <CardAdd />}
+            </>
+          )}
+        </RouteProvider>
+      </MyCardsProvider>
     </div>
   );
 }
