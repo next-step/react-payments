@@ -21,6 +21,7 @@ const CardOwner = forwardRef(
     const $input = useRef<HTMLInputElement>(null);
     const { owner, ownerLength, handleInputOwner } = useCardOwner();
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     useImperativeHandle(ref, () => $input.current!);
 
     useEffect(() => {

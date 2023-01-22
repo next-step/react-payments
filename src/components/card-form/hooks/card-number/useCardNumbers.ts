@@ -1,5 +1,5 @@
-import useCardNumber from "./useCardNumber";
 import { ICard, isCardNumber } from "../../../../domain";
+import useCardNumber from "./useCardNumber";
 
 export default function useCardNumbers(
   changeCardState: (newCardState: Partial<ICard>) => void,

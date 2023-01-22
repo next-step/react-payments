@@ -1,11 +1,12 @@
-import { Input } from "../atoms";
 import { ForwardedRef, forwardRef, useImperativeHandle } from "react";
+import { Input } from "../atoms";
 import { useCardPassword } from "./hooks";
 
 const CardPassword = forwardRef((_, ref: ForwardedRef<HTMLInputElement>) => {
   const $first = useCardPassword(() => $second.current?.focus());
   const $second = useCardPassword();
 
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   useImperativeHandle(ref, () => $first.current!);
 
   return (

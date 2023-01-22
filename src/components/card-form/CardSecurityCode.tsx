@@ -1,6 +1,6 @@
+import { ChangeEvent, useCallback } from "react";
 import { Input } from "../atoms";
 import { ICard } from "../../domain";
-import { ChangeEvent, useCallback } from "react";
 import { leaveOnlyNumber } from "../../utils";
 
 interface IProps {

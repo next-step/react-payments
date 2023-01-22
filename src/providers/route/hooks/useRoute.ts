@@ -23,7 +23,7 @@ export default function useRoute() {
     window.addEventListener("popstate", syncRoute);
 
     return () => window.removeEventListener("popstate", syncRoute);
-  }, []);
+  }, [syncRoute]);
 
   return { page, pushRoute };
 }

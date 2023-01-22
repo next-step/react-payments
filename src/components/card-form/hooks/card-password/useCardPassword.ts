@@ -22,7 +22,7 @@ export default function useCardPassword(focusNext?: () => void) {
     $input.addEventListener("input", handleInputPassword);
 
     return () => $input.removeEventListener("input", handleInputPassword);
-  }, []);
+  }, [focusNext]);
 
   return $cardPassword;
 }

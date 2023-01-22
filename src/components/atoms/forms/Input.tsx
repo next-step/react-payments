@@ -4,21 +4,25 @@ import {
   forwardRef,
   InputHTMLAttributes,
 } from "react";
+import classNames from "classnames";
 
-type TProps = DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->;
+interface IProps
+  extends DetailedHTMLProps<
+    InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  > {
+  invalid?: boolean;
+}
 
 const Input = forwardRef(
   (
-    { type = "text", className = "", ...props }: TProps,
+    { type = "text", className = "", invalid, ...props }: IProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
       <input
         ref={ref}
-        className={`input-basic ${className}`}
+        className={classNames("input-basic", className, { invalid })}
         type={type}
         {...props}
       />

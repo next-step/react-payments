@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { convertToCardNumbers, ICard } from "../../domain";
 
 export default function Card({

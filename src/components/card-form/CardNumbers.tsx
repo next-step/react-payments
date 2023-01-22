@@ -1,6 +1,6 @@
-import { useCardNumbers } from "./hooks";
 import { ICard } from "../../domain";
 import { Input, InputBox } from "../atoms";
+import { useCardNumbers } from "./hooks";
 
 interface IProps {
   changeCardState: (newCardState: Partial<ICard>) => void;

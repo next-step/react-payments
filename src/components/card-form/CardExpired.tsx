@@ -1,7 +1,7 @@
 import { ForwardedRef, forwardRef, useImperativeHandle } from "react";
 import { Input, InputBox, InputInvalidMessage } from "../atoms";
-import { useCardExpired } from "./hooks";
 import { ICard } from "../../domain";
+import { useCardExpired } from "./hooks";
 
 interface IProps {
   changeCardState: (newCardState: Partial<ICard>) => void;
@@ -19,6 +19,7 @@ const CardExpired = forwardRef(
       focusNext
     );
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     useImperativeHandle(ref, () => $expirationMonth.current!);
 
     return (

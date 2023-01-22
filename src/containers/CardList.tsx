@@ -3,8 +3,6 @@ import { Pages, useRouteContext } from "../providers";
 import { Card } from "../components";
 import { ICard } from "../domain";
 
-interface IProps {}
-
 const cardItem: ICard = {
   type: "로이드",
   numbers: ["1234", "5678", "1234", "5678"],
@@ -13,7 +11,7 @@ const cardItem: ICard = {
   expiredYear: "25",
 };
 
-export default function CardList(props: IProps) {
+export default function CardList() {
   const { pushRoute } = useRouteContext();
 
   const handleClickCardAdd: MouseEventHandler<HTMLDivElement> = useCallback(
