@@ -33,11 +33,9 @@ export default function Card({
             <div className="small-card__chip" />
           </div>
           <div className="card-bottom">
-            {numbers && (
-              <div className="card-bottom__number">
-                <span className="card-text">{cardNumbers}</span>
-              </div>
-            )}
+            <div className="card-bottom__number">
+              <span className="card-text">{cardNumbers}</span>
+            </div>
             <div className="card-bottom__info">
               <span className="card-text">{ownerWithLineClamp}</span>
               <span className="card-text">
