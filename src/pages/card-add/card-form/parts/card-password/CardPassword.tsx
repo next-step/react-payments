@@ -26,7 +26,7 @@ const CardPassword = forwardRef(
             invalid={firstProps.invalid}
             onInput={firstProps.handleInput}
             className="w-15"
-            type="password"
+            nativeType="password"
             required
           />
           <Input
@@ -34,7 +34,7 @@ const CardPassword = forwardRef(
             invalid={secondProps.invalid}
             onInput={secondProps.handleInput}
             className="w-15"
-            type="password"
+            nativeType="password"
             required
           />
           <div className="flex-center w-15">•</div>

@@ -1,3 +1,8 @@
+.form {
+  display: block;
+  width: 100%;
+}
+
 .input-container {
   margin: 16px 0;
 }

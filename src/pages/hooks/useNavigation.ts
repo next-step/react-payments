@@ -4,13 +4,17 @@ import { Pages, useRouteContext } from "../../providers";
 export default function useNavigation() {
   const { pushRoute } = useRouteContext();
 
-  const goToCardList: MouseEventHandler<HTMLDivElement> = useCallback(
+  const goToCardList = useCallback(() => {
+    pushRoute(Pages.CARD_LIST);
+  }, [pushRoute]);
+
+  const handleClickCardList: MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
       event.preventDefault();
-      pushRoute(Pages.CARD_LIST);
+      goToCardList();
     },
-    [pushRoute]
+    [goToCardList]
   );
 
-  return { goToCardList };
+  return { handleClickCardList, goToCardList };
 }

@@ -31,7 +31,7 @@ export default function useCardAdd() {
     [invalidCodes]
   );
 
-  const handleSubmit = useCallback(
+  const handleSubmitBaseForm = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       if (invalidCodes.length === 0) {
@@ -41,5 +41,5 @@ export default function useCardAdd() {
     [invalidCodes.length]
   );
 
-  return { handleSubmit, step, cardState, invalidMessages };
+  return { handleSubmitBaseForm, step, cardState, invalidMessages };
 }

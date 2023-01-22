@@ -24,7 +24,7 @@ export type TInvalidCode = `Invalid${
 
 export interface ICard {
   id: string;
-  type: TCardTypes;
+  type?: TCardTypes;
   numbers: TCardNumbers;
   expiredMonth: TTwoDigitNumber;
   expiredYear: TTwoDigitNumber;

@@ -4,3 +4,4 @@ export * from "./parts/card-owner";
 export * from "./parts/card-security-code";
 export * from "./parts/card-password";
 export { default as CardAddBaseForm } from "./CardAddBaseForm";
+export { default as CardNicknameForm } from "./CardNicknameForm";

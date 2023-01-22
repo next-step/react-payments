@@ -6,24 +6,33 @@ import {
 } from "react";
 import classNames from "classnames";
 
-interface IProps
-  extends DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
+type TBaseInputProps = DetailedHTMLProps<
+  InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
+
+interface IProps extends Omit<TBaseInputProps, "type"> {
+  nativeType?: TBaseInputProps["type"];
+  type?: "basic" | "underline";
   invalid?: boolean;
 }
 
 const Input = forwardRef(
   (
-    { type = "text", className = "", invalid, ...props }: IProps,
+    {
+      nativeType = "text",
+      type = "basic",
+      className = "",
+      invalid,
+      ...props
+    }: IProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
       <input
         ref={ref}
-        className={classNames("input-basic", className, { invalid })}
-        type={type}
+        className={classNames(`input-${type}`, className, { invalid })}
+        type={nativeType}
         {...props}
       />
     );

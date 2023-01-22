@@ -17,7 +17,7 @@ export default function CardSecurityCode({
       <Input
         ref={$ref}
         className="w-25"
-        type="password"
+        nativeType="password"
         invalid={invalid}
         onInput={handleInput}
         required

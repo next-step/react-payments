@@ -36,14 +36,14 @@ export default function CardNumbers({ focusNext, invalidMessage }: IProps) {
         -
         <CardNumber
           ref={$third}
-          type="password"
+          nativeType="password"
           focusNext={focusFourth}
           onInput={handleInputNumber}
         />
         -
         <CardNumber
           ref={$fourth}
-          type="password"
+          nativeType="password"
           focusNext={focusNext}
           onInput={handleInputNumber}
         />

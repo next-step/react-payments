@@ -24,7 +24,7 @@ const initValue: IMyCardsContext = {
 export const MyCardsContext = createContext(initValue);
 
 export default function MyCardsProvider({ children }: PropsWithChildren) {
-  const [myCards, setMyCards] = useState(myCardsStorage.getData());
+  const [myCards, setMyCards] = useState(myCardsStorage.getData() || []);
 
   const addCard = useCallback((card: ICard) => {
     setMyCards((myCards) => [...myCards, card]);

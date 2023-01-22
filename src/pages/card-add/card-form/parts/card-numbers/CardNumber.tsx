@@ -4,13 +4,13 @@ import { useCardNumber } from "./hooks";
 
 interface IProps {
   focusNext: () => void;
-  type?: string;
+  nativeType?: string;
   onInput: () => void;
 }
 
 const CardNumber = forwardRef(
   (
-    { focusNext, type = "text", onInput }: IProps,
+    { focusNext, nativeType = "text", onInput }: IProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     const { $cardNumber, invalid, handleNumberInput } = useCardNumber({
@@ -24,7 +24,7 @@ const CardNumber = forwardRef(
     return (
       <Input
         ref={$cardNumber}
-        type={type}
+        nativeType={nativeType}
         invalid={invalid}
         required
         onInput={handleNumberInput}

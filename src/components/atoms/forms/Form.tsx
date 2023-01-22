@@ -10,5 +10,9 @@ export default function Form({
 }: PropsWithChildren<
   DetailedHTMLProps<FormHTMLAttributes<HTMLFormElement>, HTMLFormElement>
 >) {
-  return <form {...props}>{children}</form>;
+  return (
+    <form className="form" {...props}>
+      {children}
+    </form>
+  );
 }
