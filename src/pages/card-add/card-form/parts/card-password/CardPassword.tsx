@@ -2,6 +2,7 @@ import { ForwardedRef, forwardRef, useImperativeHandle } from "react";
 import { Input } from "../../../../../components/atoms";
 import { InputInvalidMessage } from "../../../../../components";
 import useCardPassword from "./hooks/useCardPassword";
+import { usePasswordVirtualKeypad } from "./hooks";
 
 interface IProps {
   invalidMessage?: string;
@@ -13,7 +14,10 @@ const CardPassword = forwardRef(
       refs: [$first, $second],
       firstProps,
       secondProps,
+      updatePassword,
     } = useCardPassword();
+
+    const { handleFocus } = usePasswordVirtualKeypad(updatePassword);
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     useImperativeHandle(ref, () => $first.current!);
@@ -25,6 +29,7 @@ const CardPassword = forwardRef(
             ref={$first}
             invalid={firstProps.invalid}
             onInput={firstProps.handleInput}
+            onFocus={handleFocus}
             className="w-15"
             nativeType="password"
             required
@@ -33,6 +38,7 @@ const CardPassword = forwardRef(
             ref={$second}
             invalid={secondProps.invalid}
             onInput={secondProps.handleInput}
+            onFocus={handleFocus}
             className="w-15"
             nativeType="password"
             required

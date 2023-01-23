@@ -52,6 +52,7 @@ export default function useCardPassword() {
 
   return {
     refs: [$first, $second],
+    updatePassword,
     firstProps: {
       invalid: firstProps.invalid,
       handleInput: handleInputFirstPassword,
