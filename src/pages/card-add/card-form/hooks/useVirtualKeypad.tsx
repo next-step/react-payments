@@ -10,8 +10,8 @@ import { useModal } from "../../hooks";
 
 interface IProps {
   maxSize: number;
-  onClickKeypad?: () => void;
-  onDeleteKeypad?: () => void;
+  onClickKeypad?: (value: string) => void;
+  onDeleteKeypad?: (value: string) => void;
 }
 
 export default function useVirtualKeypad({
@@ -44,7 +44,7 @@ export default function useVirtualKeypad({
     const $ref = $currentRef.current;
     if ($ref) {
       $ref.value = [...$ref.value].slice(0, -1).join("");
-      onDeleteKeypad?.();
+      onDeleteKeypad?.($ref.value);
     }
   }, [onDeleteKeypad]);
 
@@ -54,8 +54,8 @@ export default function useVirtualKeypad({
       const { value: eventValue } = event.currentTarget;
       if ($ref) {
         $ref.value = ($ref.value + eventValue).substring(0, maxSize);
+        onClickKeypad?.($ref.value);
       }
-      onClickKeypad?.();
       closeIfMaxSize();
     },
     [closeIfMaxSize, maxSize, onClickKeypad]
