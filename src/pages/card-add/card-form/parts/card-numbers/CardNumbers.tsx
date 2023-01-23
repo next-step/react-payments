@@ -1,11 +1,5 @@
-import { FocusEventHandler, useCallback } from "react";
-import {
-  InputBox,
-  InputInvalidMessage,
-  VirtualKeypad,
-} from "../../../../../components";
-import { useModal } from "../../../hooks";
-import { useCardNumbers } from "./hooks";
+import { InputBox, InputInvalidMessage } from "../../../../../components";
+import { useCardNumbers, useCardNumberVirtualKeypad } from "./hooks";
 import CardNumber from "./CardNumber";
 
 interface IProps {
@@ -15,14 +9,7 @@ interface IProps {
 
 export default function CardNumbers({ focusNext, invalidMessage }: IProps) {
   const { refs, handleInputNumber, focusHandlers } = useCardNumbers();
-
-  const { showModal } = useModal(() => (
-    <VirtualKeypad onClick={handleInputNumber} />
-  ));
-
-  const handleFocus: FocusEventHandler<HTMLInputElement> = useCallback(() => {
-    showModal();
-  }, [showModal]);
+  const { handleFocus } = useCardNumberVirtualKeypad(handleInputNumber);
 
   return (
     <>
@@ -52,6 +39,7 @@ export default function CardNumbers({ focusNext, invalidMessage }: IProps) {
           nativeType="password"
           focusNext={focusNext}
           onInput={handleInputNumber}
+          onFocus={handleFocus}
         />
       </InputBox>
       <InputInvalidMessage>{invalidMessage}</InputInvalidMessage>

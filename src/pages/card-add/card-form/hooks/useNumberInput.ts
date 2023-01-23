@@ -1,11 +1,4 @@
-import {
-  ChangeEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEvent, useCallback, useEffect, useMemo, useRef } from "react";
 import { leaveOnlyNumber } from "../../../../utils";
 
 interface IProps {
@@ -15,24 +8,28 @@ interface IProps {
 
 export default function useNumberInput({ valueLength, isValid }: IProps) {
   const $ref = useRef<HTMLInputElement>(null);
-  const [value, setValue] = useState("");
-  const invalid = useMemo(() => !isValid(value), [isValid, value]);
+  const invalid = useMemo(
+    () => !isValid($ref.current?.value || ""),
 
-  useEffect(() => {
-    if (!$ref.current) {
-      return;
-    }
-    $ref.current.minLength = valueLength;
-    $ref.current.maxLength = valueLength;
-  }, [valueLength]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isValid, $ref.current?.value]
+  );
 
   const handleInput = useCallback(
     ({ target }: ChangeEvent<HTMLInputElement>) => {
       target.value = leaveOnlyNumber(target.value);
-      setValue(target.value);
     },
     []
   );
+
+  useEffect(() => {
+    const $target = $ref.current;
+    if (!$target) {
+      return;
+    }
+    $target.minLength = valueLength;
+    $target.maxLength = valueLength;
+  }, [handleInput, valueLength]);
 
   return [$ref, { invalid, handleInput }] as const;
 }

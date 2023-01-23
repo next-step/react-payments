@@ -49,9 +49,7 @@ export default function useCardNumbers() {
   );
 
   const handleInputNumber = useCallback(() => {
-    const numbers = refs
-      .map((ref) => ref.current?.value)
-      .filter((value): value is string => Boolean(value));
+    const numbers = refs.map((ref) => ref.current?.value || "");
 
     changeCardState({ numbers });
   }, [changeCardState, refs]);
