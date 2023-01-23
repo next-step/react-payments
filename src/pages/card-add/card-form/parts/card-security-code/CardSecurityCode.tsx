@@ -1,6 +1,10 @@
 import { Button, Input, InputInvalidMessage } from "../../../../../components";
 import CardSecurityCodeTooltip from "./CardSecurityCodeTooltip";
-import { useCardSecurityCode, useCardSecurityTooltip } from "./hooks";
+import {
+  useCardSecurityCode,
+  useCardSecurityTooltip,
+  useCardSecurityVirtualKeypad,
+} from "./hooks";
 
 interface IProps {
   focusNext: () => void;
@@ -13,6 +17,7 @@ export default function CardSecurityCode({
 }: IProps) {
   const [$ref, { handleInput, invalid }] = useCardSecurityCode(focusNext);
   const { handleClickTooltip } = useCardSecurityTooltip();
+  const { handleFocus } = useCardSecurityVirtualKeypad();
 
   return (
     <>
@@ -23,6 +28,7 @@ export default function CardSecurityCode({
           nativeType="password"
           invalid={invalid}
           onInput={handleInput}
+          onFocus={handleFocus}
           required
         />
         <Button onClick={handleClickTooltip}>
