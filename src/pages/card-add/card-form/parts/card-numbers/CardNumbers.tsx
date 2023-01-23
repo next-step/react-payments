@@ -9,40 +9,32 @@ interface IProps {
 }
 
 export default function CardNumbers({ focusNext, invalidMessage }: IProps) {
-  const {
-    refs: [$first, $second, $third, $fourth],
-    createFocusHandler,
-    handleInputNumber,
-  } = useCardNumbers();
-
-  const focusSecond = createFocusHandler($second);
-  const focusThird = createFocusHandler($third);
-  const focusFourth = createFocusHandler($fourth);
+  const { refs, handleInputNumber, focusHandlers } = useCardNumbers();
 
   return (
     <>
       <InputBox>
         <CardNumber
-          ref={$first}
-          focusNext={focusSecond}
+          ref={refs[0]}
+          focusNext={focusHandlers[0]}
           onInput={handleInputNumber}
         />
         -
         <CardNumber
-          ref={$second}
-          focusNext={focusThird}
+          ref={refs[1]}
+          focusNext={focusHandlers[1]}
           onInput={handleInputNumber}
         />
         -
         <CardNumber
-          ref={$third}
+          ref={refs[2]}
           nativeType="password"
-          focusNext={focusFourth}
+          focusNext={focusHandlers[2]}
           onInput={handleInputNumber}
         />
         -
         <CardNumber
-          ref={$fourth}
+          ref={refs[3]}
           nativeType="password"
           focusNext={focusNext}
           onInput={handleInputNumber}

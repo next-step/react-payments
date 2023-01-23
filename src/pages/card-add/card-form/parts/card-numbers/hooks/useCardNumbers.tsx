@@ -2,12 +2,13 @@ import { useCallback, useState } from "react";
 import { useCardStateContext } from "../../../../providers";
 import { useFocusHandler, useInputRefs } from "../../../hooks";
 import CardBrands from "../CardBrands";
-import { isCardNumber, TCardNumber } from "../../../../../../domain";
+import { TCardNumber } from "../../../../../../domain";
 import { useModal } from "../../../../hooks";
 
 const REF_SIZE = 4;
 export default function useCardNumbers() {
   const refs = useInputRefs(REF_SIZE);
+  const [$first, $second, $third, $fourth] = refs;
   const createFocusHandler = useFocusHandler();
   const { changeCardState } = useCardStateContext();
   const [showedModal, setShowedModal] = useState(false);
@@ -16,38 +17,48 @@ export default function useCardNumbers() {
     <CardBrands onSelect={handleSelectCardBrand} />
   ));
 
+  const focusSecond = createFocusHandler($second);
+  const focusThird = createFocusHandler($third);
+  const focusFourth = createFocusHandler($fourth);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const blurSecond = useCallback(() => $second.current?.blur(), []);
+
+  const blurOrFocusThird = useCallback(() => {
+    if (!showedModal) {
+      blurSecond();
+      showModal({ onClose: () => focusThird() });
+      setShowedModal(true);
+    } else {
+      focusThird();
+    }
+  }, [showedModal, blurSecond, showModal, focusThird]);
+
   const handleSelectCardBrand = useCallback(
     (pattern?: [TCardNumber, TCardNumber]) => {
-      const [$first, $second, $third] = refs;
-      if ($first.current && $second.current && $third.current) {
+      if ($first.current && $second.current) {
         $first.current.value = pattern?.[0] || "";
         $second.current.value = pattern?.[1] || "";
-        $third.current.focus();
       }
       closeModal();
+      focusThird();
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [closeModal]
+    [closeModal, focusThird]
   );
 
   const handleInputNumber = useCallback(() => {
-    closeModal();
     const numbers = refs
       .map((ref) => ref.current?.value)
       .filter((value): value is string => Boolean(value));
 
     changeCardState({ numbers });
-
-    if (!showedModal && numbers.slice(0, 2).filter(isCardNumber).length === 2) {
-      showModal();
-      setShowedModal(true);
-    }
-  }, [changeCardState, closeModal, refs, showModal, showedModal]);
+  }, [changeCardState, refs]);
 
   return {
     refs,
     handleInputNumber,
-    createFocusHandler,
+    focusHandlers: [focusSecond, blurOrFocusThird, focusFourth],
   };
 }

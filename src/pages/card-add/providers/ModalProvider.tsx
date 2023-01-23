@@ -8,39 +8,64 @@ import {
 } from "react";
 import { Modal } from "../../../components";
 
+interface IModalProps {
+  onClose?: () => void;
+  onOpen?: () => void;
+}
+
 interface IModalContext {
-  modal: ReactNode;
-  openModal: (modal: ReactNode) => void;
+  modal?: {
+    children: ReactNode;
+    props: IModalProps;
+  };
+  openModal: (component: ReactNode, props: IModalProps) => void;
   closeModal: () => void;
 }
 
 export const ModalContext = createContext<IModalContext>({
-  modal: null,
+  modal: {
+    children: null,
+    props: {},
+  },
   openModal: () => null,
   closeModal: () => null,
 });
 
 export default function ModalProvider({ children }: PropsWithChildren) {
-  const [modal, setModal] = useState<ReactNode>(null);
+  const [modalChildren, setModalChildren] = useState<ReactNode>(null);
+  const [modalProps, setModalProps] = useState<IModalProps>({});
+  const modal = useMemo(
+    () => ({
+      children: modalChildren,
+      props: modalProps,
+    }),
+    [modalChildren, modalProps]
+  );
 
-  const openModal = useCallback((modal: ReactNode) => {
-    if (modal) {
-      setModal(modal);
-    }
+  const openModal = useCallback((children: ReactNode, props: IModalProps) => {
+    setModalChildren(children);
+    setModalProps(props);
+    props.onOpen?.();
   }, []);
 
   const closeModal = useCallback(() => {
-    setModal(null);
-  }, []);
+    modalProps.onClose?.();
+    setModalChildren(null);
+    setModalProps({});
+  }, [modalProps]);
 
-  const contextValue = useMemo(() => {
-    return { modal, openModal, closeModal };
+  const contextValue: IModalContext = useMemo(() => {
+    return {
+      modal,
+      openModal,
+      closeModal,
+    };
   }, [modal, openModal, closeModal]);
 
   return (
     <ModalContext.Provider value={contextValue}>
       {children}
-      {modal && <Modal onClose={closeModal}>{modal}</Modal>}
+      {modalChildren && <Modal onClose={closeModal}>{modalChildren}</Modal>}
     </ModalContext.Provider>
   );
 }

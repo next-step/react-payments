@@ -1,7 +1,6 @@
 import { Button, Input, InputInvalidMessage } from "../../../../../components";
-import useModal from "../../../hooks/useModal";
 import CardSecurityCodeTooltip from "./CardSecurityCodeTooltip";
-import { useCardSecurityCode } from "./hooks";
+import { useCardSecurityCode, useCardSecurityTooltip } from "./hooks";
 
 interface IProps {
   focusNext: () => void;
@@ -13,12 +12,7 @@ export default function CardSecurityCode({
   invalidMessage,
 }: IProps) {
   const [$ref, { handleInput, invalid }] = useCardSecurityCode(focusNext);
-  const { showModal } = useModal((closeModal) => (
-    <div className="flex-column-center">
-      <p>보안코드는 3자리 숫자로 입력해주세요.</p>
-      <Button onClick={closeModal}>확인</Button>
-    </div>
-  ));
+  const { handleClickTooltip } = useCardSecurityTooltip();
 
   return (
     <>
@@ -31,7 +25,7 @@ export default function CardSecurityCode({
           onInput={handleInput}
           required
         />
-        <Button onClick={showModal}>
+        <Button onClick={handleClickTooltip}>
           <CardSecurityCodeTooltip />
         </Button>
       </div>
