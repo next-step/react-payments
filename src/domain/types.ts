@@ -1,4 +1,4 @@
-export type TCardTypes =
+export type TCardBrandLabels =
   | "포코"
   | "준"
   | "공원"
@@ -24,7 +24,7 @@ export type TInvalidCode = `Invalid${
 
 export interface ICard {
   id: string;
-  type?: TCardTypes;
+  brand?: TCardBrandLabels;
   numbers: TCardNumbers;
   expiredMonth: TTwoDigitNumber;
   expiredYear: TTwoDigitNumber;
@@ -33,7 +33,7 @@ export interface ICard {
 }
 
 export interface ICardDTO {
-  type?: TCardTypes;
+  brand?: TCardBrandLabels;
   numbers?: string[];
   expiredMonth?: string;
   expiredYear?: string;

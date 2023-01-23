@@ -1,8 +1,8 @@
 import { useMemo } from "react";
-import { CardTypeItems, convertToCardNumbers, ICardDTO } from "../../domain";
+import { CardBrandItems, convertToCardNumbers, ICardDTO } from "../../domain";
 
 export default function Card({
-  type,
+  brand,
   numbers,
   owner,
   expiredMonth,
@@ -24,7 +24,7 @@ export default function Card({
   }, [owner]);
 
   const selectedType = useMemo(() => {
-    return CardTypeItems.find(
+    return CardBrandItems.find(
       ({ pattern }) =>
         pattern[0] === numbers?.[0] && pattern[1] === numbers?.[1]
     );
@@ -38,7 +38,7 @@ export default function Card({
           style={{ backgroundColor: selectedType?.colorStyle }}
         >
           <div className="card-top">
-            {type && <span className="card-text">{type} 카드</span>}
+            {brand && <span className="card-text">{brand} 카드</span>}
           </div>
           <div className="card-middle">
             <div className="small-card__chip" />

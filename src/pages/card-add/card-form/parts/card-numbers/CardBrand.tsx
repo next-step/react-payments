@@ -8,7 +8,7 @@ interface IProps {
   colorStyle: string;
 }
 
-export default function CardType({
+export default function CardBrand({
   label,
   colorStyle,
   selected,

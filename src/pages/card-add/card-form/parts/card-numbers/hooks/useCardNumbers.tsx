@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
 import { useCardStateContext } from "../../../../providers";
 import { useFocusHandler, useInputRefs } from "../../../hooks";
-import useModal from "../../../../hooks/useModal";
-import CardTypes from "../CardTypes";
+import CardBrands from "../CardBrands";
 import { isCardNumber, TCardNumber } from "../../../../../../domain";
+import { useModal } from "../../../../hooks";
 
 const REF_SIZE = 4;
 export default function useCardNumbers() {
@@ -12,7 +12,7 @@ export default function useCardNumbers() {
   const { changeCardState } = useCardStateContext();
   const [showedModal, setShowedModal] = useState(false);
 
-  const handleSelectCardType = useCallback(
+  const handleSelectCardBrand = useCallback(
     (pattern?: [TCardNumber, TCardNumber]) => {
       const [$first, $second] = refs;
       if ($first.current && $second.current) {
@@ -26,7 +26,7 @@ export default function useCardNumbers() {
   );
 
   const { showModal } = useModal(() => (
-    <CardTypes onSelect={handleSelectCardType} />
+    <CardBrands onSelect={handleSelectCardBrand} />
   ));
 
   const handleInputNumber = useCallback(() => {

@@ -1,12 +1,12 @@
-import { TCardNumber, TCardTypes } from "./types";
+import { TCardBrandLabels, TCardNumber } from "./types";
 
-interface ICardTypeItem {
-  label: `${TCardTypes} 카드`;
+interface ICardBrand {
+  label: `${TCardBrandLabels} 카드`;
   pattern: [TCardNumber, TCardNumber];
   colorStyle: string;
 }
 
-const CardTypeItems: ICardTypeItem[] = [
+const CardBrandItems: ICardBrand[] = [
   {
     label: "포코 카드",
     pattern: ["1111", "1111"],
@@ -49,23 +49,23 @@ const CardTypeItems: ICardTypeItem[] = [
   },
 ];
 
-export function splitGroupCardTypes(size: number) {
-  const groupCount = Math.ceil(CardTypeItems.length / size);
+export function splitGroupCardBrands(size: number) {
+  const groupCount = Math.ceil(CardBrandItems.length / size);
   return Array.from({ length: groupCount }).map((_, key) => {
     const start = key * size;
     const end = start + size;
-    return CardTypeItems.slice(start, end);
+    return CardBrandItems.slice(start, end);
   });
 }
 
-export function findCardTypeByLabel(label: string) {
-  return CardTypeItems.find((item) => item.label === label);
+export function findCardBrandByLabel(label: string) {
+  return CardBrandItems.find((item) => item.label === label);
 }
 
-export function findCardTypeByPattern([first, second]: string[]) {
-  return CardTypeItems.find(({ pattern }) => {
+export function findCardBrandByPattern([first, second]: string[]) {
+  return CardBrandItems.find(({ pattern }) => {
     return pattern[0] === first && pattern[1] === second;
   });
 }
 
-export default CardTypeItems;
+export default CardBrandItems;
