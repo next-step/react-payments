@@ -1,4 +1,3 @@
-import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from "react";
 import {
   Button,
   ButtonBox,
@@ -6,39 +5,11 @@ import {
   Input,
   InputContainer,
 } from "../../../components";
-import { useCardStateContext } from "../providers";
-import { useMyCardsContext } from "../../../providers/my-cards";
-import { convertToCard } from "../../../domain";
-import { useNavigation } from "../../hooks";
+import { useCardNicknameForm } from "./hooks";
 
 export default function CardNicknameForm() {
-  const [nickname, setNickname] = useState("");
-  const { cardState } = useCardStateContext();
-  const { addCard } = useMyCardsContext();
-  const { goToCardList } = useNavigation();
-
-  const handleInputNickname = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setNickname(event.target.value);
-    },
-    []
-  );
-
-  const handleSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-
-      const card = convertToCard({ ...cardState, nickname });
-      console.log({ card });
-      if (card) {
-        addCard(card);
-        goToCardList();
-      }
-    },
-    [addCard, cardState, goToCardList, nickname]
-  );
-
-  const invalidButton = useMemo(() => nickname.length === 0, [nickname]);
+  const { handleSubmit, handleInputNickname, invalidButton } =
+    useCardNicknameForm();
 
   return (
     <Form onSubmit={handleSubmit}>

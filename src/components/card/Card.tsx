@@ -1,5 +1,9 @@
 import { useMemo } from "react";
-import { CardBrandItems, convertToCardNumbers, ICardDTO } from "../../domain";
+import {
+  convertToCardNumbers,
+  findCardBrandByPattern,
+  ICardDTO,
+} from "../../domain";
 
 export default function Card({
   brand,
@@ -23,12 +27,10 @@ export default function Card({
     return owner.length > maxLength ? `${owner.slice(0, maxLength)}...` : owner;
   }, [owner]);
 
-  const selectedType = useMemo(() => {
-    return CardBrandItems.find(
-      ({ pattern }) =>
-        pattern[0] === numbers?.[0] && pattern[1] === numbers?.[1]
-    );
-  }, [numbers]);
+  const selectedType = useMemo(
+    () => findCardBrandByPattern(numbers || []),
+    [numbers]
+  );
 
   return (
     <>
