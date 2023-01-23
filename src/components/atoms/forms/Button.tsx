@@ -12,7 +12,7 @@ type TButtonProps = DetailedHTMLProps<
 
 interface IProps extends Omit<TButtonProps, "type"> {
   nativeType?: TButtonProps["type"];
-  type?: "transparent";
+  type?: "transparent" | "keypad";
   invalid?: boolean;
 }
 

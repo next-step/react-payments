@@ -1,4 +1,9 @@
-import { ForwardedRef, forwardRef, useImperativeHandle } from "react";
+import {
+  FocusEventHandler,
+  ForwardedRef,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import { Input } from "../../../../../components/atoms";
 import { useCardNumber } from "./hooks";
 
@@ -6,11 +11,12 @@ interface IProps {
   focusNext: () => void;
   nativeType?: string;
   onInput: () => void;
+  onFocus?: FocusEventHandler<HTMLInputElement>;
 }
 
 const CardNumber = forwardRef(
   (
-    { focusNext, nativeType = "text", onInput }: IProps,
+    { focusNext, nativeType = "text", onInput, onFocus }: IProps,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     const { $cardNumber, invalid, handleNumberInput } = useCardNumber({
@@ -28,6 +34,7 @@ const CardNumber = forwardRef(
         invalid={invalid}
         required
         onInput={handleNumberInput}
+        onFocus={onFocus}
       />
     );
   }

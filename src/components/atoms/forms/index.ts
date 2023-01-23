@@ -5,3 +5,4 @@ export { default as InputInvalidMessage } from "./InputInvalidMessage";
 export { default as Form } from "./Form";
 export { default as Button } from "./Button";
 export { default as ButtonBox } from "./ButtonBox";
+export { default as VirtualKeypad } from "./VirtualKeypad";
