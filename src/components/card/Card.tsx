@@ -6,7 +6,6 @@ import {
 } from "../../domain";
 
 export default function Card({
-  brand,
   numbers,
   owner,
   expiredMonth,
@@ -27,20 +26,17 @@ export default function Card({
     return owner.length > maxLength ? `${owner.slice(0, maxLength)}...` : owner;
   }, [owner]);
 
-  const selectedType = useMemo(
-    () => findCardBrandByPattern(numbers || []),
-    [numbers]
-  );
+  const brand = useMemo(() => findCardBrandByPattern(numbers || []), [numbers]);
 
   return (
     <>
       <div className="card-box">
         <div
           className="small-card"
-          style={{ backgroundColor: selectedType?.colorStyle }}
+          style={{ backgroundColor: brand?.colorStyle }}
         >
           <div className="card-top">
-            {brand && <span className="card-text">{brand} 카드</span>}
+            {brand && <span className="card-text">{brand.label} 카드</span>}
           </div>
           <div className="card-middle">
             <div className="small-card__chip" />

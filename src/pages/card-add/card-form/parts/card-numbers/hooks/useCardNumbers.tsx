@@ -12,24 +12,27 @@ export default function useCardNumbers() {
   const { changeCardState } = useCardStateContext();
   const [showedModal, setShowedModal] = useState(false);
 
-  const handleSelectCardBrand = useCallback(
-    (pattern?: [TCardNumber, TCardNumber]) => {
-      const [$first, $second] = refs;
-      if ($first.current && $second.current) {
-        $first.current.value = pattern?.[0] || "";
-        $second.current.value = pattern?.[1] || "";
-      }
-    },
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
-
-  const { showModal } = useModal(() => (
+  const { showModal, closeModal } = useModal(() => (
     <CardBrands onSelect={handleSelectCardBrand} />
   ));
 
+  const handleSelectCardBrand = useCallback(
+    (pattern?: [TCardNumber, TCardNumber]) => {
+      const [$first, $second, $third] = refs;
+      if ($first.current && $second.current && $third.current) {
+        $first.current.value = pattern?.[0] || "";
+        $second.current.value = pattern?.[1] || "";
+        $third.current.focus();
+      }
+      closeModal();
+    },
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [closeModal]
+  );
+
   const handleInputNumber = useCallback(() => {
+    closeModal();
     const numbers = refs
       .map((ref) => ref.current?.value)
       .filter((value): value is string => Boolean(value));
@@ -40,7 +43,7 @@ export default function useCardNumbers() {
       showModal();
       setShowedModal(true);
     }
-  }, [changeCardState, refs, showModal, showedModal]);
+  }, [changeCardState, closeModal, refs, showModal, showedModal]);
 
   return {
     refs,

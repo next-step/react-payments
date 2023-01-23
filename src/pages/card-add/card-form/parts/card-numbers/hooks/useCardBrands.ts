@@ -12,31 +12,29 @@ export default function useCardBrands(
 ) {
   const { cardState, changeCardState } = useCardStateContext();
   const groups = useMemo(() => splitGroupCardBrands(4), []);
-  const [selectedLabel, selectLabel] = useState("");
+  const [brandLabel, setBrandLabel] = useState("");
 
   const handleSelect = useCallback(
     (label: string) => {
       const numbers = findCardBrandByLabel(label)?.pattern;
-      selectLabel(label);
-      changeCardState({ numbers });
+      setBrandLabel(label);
+      changeCardState({ numbers, brand: label });
       onSelect(numbers);
     },
     [changeCardState, onSelect]
   );
 
   useEffect(() => {
-    if (selectedLabel !== "") {
+    if (brandLabel !== "") {
       return;
     }
-    const { label = "" } =
-      findCardBrandByPattern(cardState.numbers || []) || {};
-    selectLabel(label);
+    setBrandLabel(findCardBrandByPattern(cardState.numbers || [])?.label || "");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardState.numbers]);
 
   return {
     groups,
-    selectedLabel,
+    selectedLabel: brandLabel,
     handleSelect,
   };
 }

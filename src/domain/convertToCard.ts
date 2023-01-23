@@ -1,13 +1,19 @@
 import { ICard, ICardDTO } from "./types";
-import { isCardNumbers, isTwoDigitNumber } from "./typeGuard";
+import { isBrand, isCardNumbers, isTwoDigitNumber } from "./typeGuard";
+
+function createCardId() {
+  return Math.random().toString(36).substring(2);
+}
 
 export default function convertToCard(cardState: ICardDTO): ICard | undefined {
-  const { numbers, expiredMonth, expiredYear, owner, nickname } = cardState;
+  const { numbers, expiredMonth, expiredYear, owner, nickname, brand } =
+    cardState;
 
   if (
     !isCardNumbers(numbers) ||
     !isTwoDigitNumber(expiredMonth) ||
     !isTwoDigitNumber(expiredYear) ||
+    !isBrand(brand) ||
     !owner ||
     !nickname
   ) {
@@ -15,11 +21,12 @@ export default function convertToCard(cardState: ICardDTO): ICard | undefined {
   }
 
   return {
-    id: Math.random().toString(36).substring(2),
+    id: createCardId(),
     numbers,
     expiredMonth,
     expiredYear,
     owner,
     nickname,
+    brand,
   };
 }

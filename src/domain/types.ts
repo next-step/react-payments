@@ -1,4 +1,5 @@
 export type TCardBrandLabels =
+  | ""
   | "포코"
   | "준"
   | "공원"
@@ -33,7 +34,7 @@ export interface ICard {
 }
 
 export interface ICardDTO {
-  brand?: TCardBrandLabels;
+  brand?: string;
   numbers?: string[];
   expiredMonth?: string;
   expiredYear?: string;

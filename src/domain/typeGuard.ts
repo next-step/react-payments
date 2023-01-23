@@ -1,4 +1,5 @@
 import {
+  TCardBrandLabels,
   TCardNumber,
   TCardNumbers,
   TSecurityCode,
@@ -40,4 +41,13 @@ export function isCardNumbers(
   cardNumbers?: unknown[]
 ): cardNumbers is TCardNumbers {
   return cardNumbers?.filter(isCardNumber).length === 4;
+}
+
+export function isBrand(brand: unknown): brand is TCardBrandLabels {
+  return (
+    typeof brand === "string" &&
+    ["포코", "준", "공원", "브랜", "로이드", "도비", "콜린", "썬"].includes(
+      brand
+    )
+  );
 }
