@@ -1,12 +1,12 @@
 import { MouseEvent, PropsWithChildren, useCallback } from "react";
 
 interface IProps {
-  onClose: () => void;
+  onClickDimmed?: () => void;
 }
 
 export default function Modal({
   children,
-  onClose,
+  onClickDimmed,
 }: PropsWithChildren<IProps>) {
   const handleClickContent = useCallback(
     (event: MouseEvent<HTMLDivElement>) => {
@@ -15,7 +15,7 @@ export default function Modal({
     []
   );
   return (
-    <div className="modal-dimmed" onClick={onClose}>
+    <div className="modal-dimmed" onClick={onClickDimmed}>
       <div className="modal" onClick={handleClickContent}>
         {children}
       </div>

@@ -65,7 +65,9 @@ export default function ModalProvider({ children }: PropsWithChildren) {
   return (
     <ModalContext.Provider value={contextValue}>
       {children}
-      {modalChildren && <Modal onClose={closeModal}>{modalChildren}</Modal>}
+      {modalChildren && (
+        <Modal onClickDimmed={closeModal}>{modalChildren}</Modal>
+      )}
     </ModalContext.Provider>
   );
 }
