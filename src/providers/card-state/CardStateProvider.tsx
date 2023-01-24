@@ -5,7 +5,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { ICardDTO, isValidExpiryDateBy } from "../../../domain";
+import { ICardDTO, isValidExpiryDateBy } from "../../domain";
 
 interface ICardFormContext {
   cardState: ICardDTO;

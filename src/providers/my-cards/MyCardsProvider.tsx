@@ -15,6 +15,10 @@ interface IMyCardsContext {
   deleteCard: (id: string) => void;
 }
 
+interface IProps {
+  initData?: ICard[];
+}
+
 const initValue: IMyCardsContext = {
   myCards: [],
   addCard: () => null,
@@ -23,8 +27,11 @@ const initValue: IMyCardsContext = {
 
 export const MyCardsContext = createContext(initValue);
 
-export default function MyCardsProvider({ children }: PropsWithChildren) {
-  const [myCards, setMyCards] = useState(myCardsStorage.getData() || []);
+export default function MyCardsProvider({
+  children,
+  initData = myCardsStorage.getData(),
+}: PropsWithChildren<IProps>) {
+  const [myCards, setMyCards] = useState(initData || []);
 
   const addCard = useCallback((card: ICard) => {
     setMyCards((myCards) => [...myCards, card]);

@@ -5,7 +5,7 @@ import {
   splitGroupCardBrands,
   TCardNumber,
 } from "../../../../../../domain";
-import { useCardStateContext } from "../../../../providers";
+import { useCardStateContext } from "../../../../../../providers";
 
 export default function useCardBrands(
   onSelect: (pattern?: [TCardNumber, TCardNumber]) => void

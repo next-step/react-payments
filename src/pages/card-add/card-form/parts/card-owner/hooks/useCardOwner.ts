@@ -1,5 +1,5 @@
 import { ChangeEvent, useCallback, useMemo } from "react";
-import { useCardStateContext } from "../../../../providers";
+import { useCardStateContext } from "../../../../../../providers";
 
 export default function useCardOwner() {
   const { cardState, changeCardState } = useCardStateContext();

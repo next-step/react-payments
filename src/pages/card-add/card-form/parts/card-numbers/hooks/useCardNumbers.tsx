@@ -1,9 +1,9 @@
 import { useCallback, useState } from "react";
-import { useCardStateContext } from "../../../../providers";
 import { useFocusHandler, useInputRefs } from "../../../hooks";
 import CardBrands from "../CardBrands";
 import { TCardNumber } from "../../../../../../domain";
 import { useModal } from "../../../../hooks";
+import { useCardStateContext } from "../../../../../../providers";
 
 const REF_SIZE = 4;
 export default function useCardNumbers() {

@@ -1,7 +1,10 @@
 import { CardAdd, CardList } from "./pages";
-import { Pages, RouteProvider } from "./providers";
-import { MyCardsProvider } from "./providers/my-cards";
-import { CardStateProvider } from "./pages/card-add/providers";
+import {
+  CardStateProvider,
+  MyCardsProvider,
+  Pages,
+  RouteProvider,
+} from "./providers";
 
 function App() {
   return (

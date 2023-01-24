@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from "react";
-import { useCardStateContext } from "../../providers";
 import { useMyCardsContext } from "../../../../providers/my-cards";
 import { useNavigation } from "../../../hooks";
 import { convertToCard } from "../../../../domain";
+import { useCardStateContext } from "../../../../providers";
 
 export default function useCardNicknameForm() {
   const [nickname, setNickname] = useState("");

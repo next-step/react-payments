@@ -1,7 +1,7 @@
 import { ChangeEvent, useCallback } from "react";
 import { useFocusNext, useNumberInput } from "../../../hooks";
 import { isSingleNumber } from "../../../../../../domain";
-import { useCardStateContext } from "../../../../providers";
+import { useCardStateContext } from "../../../../../../providers";
 
 const MAX_LENGTH = 1;
 export default function useCardPassword() {

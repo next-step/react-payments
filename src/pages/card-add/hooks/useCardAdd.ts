@@ -1,6 +1,6 @@
 import { FormEvent, useCallback, useMemo, useState } from "react";
-import { useCardStateContext } from "../providers";
 import { getInvalidCodes, TInvalidCode } from "../../../domain";
+import { useCardStateContext } from "../../../providers";
 
 type TCardFormStep = "input-card-base" | "input-card-nickname";
 
