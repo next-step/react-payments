@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { CardStateProvider, ModalProvider } from "../providers";
+import { ModalProvider } from "../providers";
 import { useCardAdd } from "../hooks";
+import { CardStateProvider } from "../../../providers";
 import CardAddBaseForm from "./CardAddBaseForm";
 
 export default {

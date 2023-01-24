@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { CardStateProvider } from "../providers";
+import { CardStateProvider } from "../../../providers";
 import CardNicknameForm from "./CardNicknameForm";
 
 export default {
