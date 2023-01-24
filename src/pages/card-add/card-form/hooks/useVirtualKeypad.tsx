@@ -1,10 +1,4 @@
-import {
-  FocusEventHandler,
-  MouseEvent,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
+import { FocusEventHandler, useCallback, useEffect, useRef } from "react";
 import { VirtualKeypad } from "../../../../components";
 import { useModal } from "../../hooks";
 
@@ -49,11 +43,10 @@ export default function useVirtualKeypad({
   }, [onDeleteKeypad]);
 
   const handleClickKeypad = useCallback(
-    (event: MouseEvent<HTMLButtonElement>) => {
+    (value: number) => {
       const $ref = $currentRef.current;
-      const { value: eventValue } = event.currentTarget;
       if ($ref) {
-        $ref.value = ($ref.value + eventValue).substring(0, maxSize);
+        $ref.value = ($ref.value + value).substring(0, maxSize);
         onClickKeypad?.($ref.value);
       }
       closeIfMaxSize();

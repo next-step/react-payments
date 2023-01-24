@@ -3,7 +3,7 @@ import { shuffle } from "../../../utils";
 import Button from "./Button";
 
 interface IProps {
-  onClick?: MouseEventHandler<HTMLButtonElement>;
+  onClick?: (value: number) => void;
   onDelete?: () => void;
 }
 
@@ -35,7 +35,7 @@ export default function VirtualKeypad({ onClick, onDelete }: IProps) {
         onDelete?.();
         return;
       }
-      onClick?.(event);
+      onClick?.(Number(value));
     },
     [onClick, onDelete]
   );

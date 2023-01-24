@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { MouseEventHandler, useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import VirtualKeypad from "./VirtualKeypad";
 import Input from "./Input";
 import Button from "./Button";
@@ -26,14 +26,11 @@ const Template: ComponentStory<typeof VirtualKeypad> = () => {
     setCount((count) => count + 1);
   }, []);
 
-  const handleClick: MouseEventHandler<HTMLButtonElement> = useCallback(
-    (event) => {
-      if ($inputRef.current) {
-        $inputRef.current.value += event.currentTarget.value;
-      }
-    },
-    []
-  );
+  const handleClick = useCallback((value: number) => {
+    if ($inputRef.current) {
+      $inputRef.current.value += value;
+    }
+  }, []);
 
   const handleDelete = useCallback(() => {
     if ($inputRef.current) {
