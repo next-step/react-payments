@@ -9,7 +9,24 @@ export default {
   args: {},
 } as ComponentMeta<typeof CardList>;
 
-const initData: ICard[] = [];
+const initData: ICard[] = [
+  {
+    id: "id1",
+    numbers: ["1111", "1111", "1234", "1234"],
+    owner: "owner",
+    expiredMonth: "01",
+    expiredYear: "24",
+    nickname: "type1 nickname",
+  },
+  {
+    id: "id2",
+    numbers: ["2222", "2222", "1234", "1234"],
+    owner: "owner",
+    expiredMonth: "01",
+    expiredYear: "24",
+    nickname: "type2 nickname",
+  },
+];
 
 const Template: ComponentStory<typeof CardList> = () => {
   return (
