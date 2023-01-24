@@ -3,7 +3,7 @@ import { VirtualKeypad } from "../forms";
 import Modal from "./Modal";
 
 export default {
-  title: "페이먼츠 미션/Components/Modal",
+  title: "페이먼츠 미션/Components/Modal/Modal",
   component: Modal,
   args: {
     onClickDimmed: () => {

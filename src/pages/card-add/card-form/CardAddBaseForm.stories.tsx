@@ -4,7 +4,7 @@ import { useCardAdd } from "../hooks";
 import CardAddBaseForm from "./CardAddBaseForm";
 
 export default {
-  title: "페이먼츠 미션/Components/CardAddBaseForm",
+  title: "페이먼츠 미션/Components/Container/CardAddBaseForm",
   component: CardAddBaseForm,
   args: {},
 } as ComponentMeta<typeof CardAddBaseForm>;
