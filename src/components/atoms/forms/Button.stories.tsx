@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Button from "./Button";
 
 export default {
-  title: "페이먼츠 미션/Components/Button",
+  title: "페이먼츠 미션/Components/Form/Button",
   component: Button,
   argTypes: {
     type: {},
@@ -16,7 +16,7 @@ export default {
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = (props) => (
-  <Button {...props}></Button>
+  <Button {...props}>버튼</Button>
 );
 
 export const transparent = Template.bind({});

@@ -5,7 +5,7 @@ import InputBox from "./InputBox";
 import InputInvalidMessage from "./InputInvalidMessage";
 
 export default {
-  title: "페이먼츠 미션/Components/InputInvalidMessage",
+  title: "페이먼츠 미션/Components/Form/InputInvalidMessage",
   component: InputInvalidMessage,
 } as ComponentMeta<typeof InputInvalidMessage>;
 

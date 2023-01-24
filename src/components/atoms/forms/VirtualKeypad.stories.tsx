@@ -5,7 +5,7 @@ import Input from "./Input";
 import Button from "./Button";
 
 export default {
-  title: "페이먼츠 미션/Components/VirtualKeypad",
+  title: "페이먼츠 미션/Components/Form/VirtualKeypad",
   component: VirtualKeypad,
   argTypes: {
     type: {},

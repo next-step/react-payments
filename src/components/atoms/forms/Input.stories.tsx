@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import Input from "./Input";
 
 export default {
-  title: "페이먼츠 미션/Components/Input",
+  title: "페이먼츠 미션/Components/Form/Input",
   component: Input,
   argTypes: {
     nativeType: {

@@ -4,7 +4,7 @@ import InputBox from "./InputBox";
 import Input from "./Input";
 
 export default {
-  title: "페이먼츠 미션/Components/InputContainer",
+  title: "페이먼츠 미션/Components/Form/InputContainer",
   component: InputContainer,
 } as ComponentMeta<typeof InputContainer>;
 

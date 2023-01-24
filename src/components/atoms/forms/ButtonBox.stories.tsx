@@ -3,7 +3,7 @@ import ButtonBox from "./ButtonBox";
 import Button from "./Button";
 
 export default {
-  title: "페이먼츠 미션/Components/ButtonBox",
+  title: "페이먼츠 미션/Components/Form/ButtonBox",
   component: ButtonBox,
 } as ComponentMeta<typeof ButtonBox>;
 

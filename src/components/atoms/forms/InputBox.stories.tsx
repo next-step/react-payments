@@ -3,7 +3,7 @@ import InputBox from "./InputBox";
 import Input from "./Input";
 
 export default {
-  title: "페이먼츠 미션/Components/InputBox",
+  title: "페이먼츠 미션/Components/Form/InputBox",
   component: InputBox,
 } as ComponentMeta<typeof InputBox>;
 
@@ -23,5 +23,5 @@ const Template: ComponentStory<typeof InputBox> = (props) => (
   </>
 );
 
-export const Primary = Template.bind({});
-Primary.args = {};
+export const example = Template.bind({});
+example.args = {};
