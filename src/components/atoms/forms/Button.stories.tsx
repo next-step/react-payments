@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { Button } from "../../index";
+import Button from "./Button";
 
 export default {
   title: "페이먼츠 미션/Components/Button",
@@ -15,16 +15,16 @@ export default {
   },
 } as ComponentMeta<typeof Button>;
 
-const ButtonTemplate: ComponentStory<typeof Button> = (props) => (
-  <Button {...props}>버튼</Button>
+const Template: ComponentStory<typeof Button> = (props) => (
+  <Button {...props}></Button>
 );
 
-export const transparent = ButtonTemplate.bind({});
+export const transparent = Template.bind({});
 transparent.args = {
   type: "transparent",
 };
 
-export const keypad = ButtonTemplate.bind({});
+export const keypad = Template.bind({});
 keypad.args = {
   type: "keypad",
 };
