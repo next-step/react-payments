@@ -11,7 +11,8 @@
     "test": "vitest",
     "test:watch": "vitest --watch",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic --project-token=ef6ad00f0f13"
   },
   "dependencies": {
     "classnames": "^2.3.2",
@@ -34,6 +35,7 @@
     "@vitejs/plugin-basic-ssl": "^1.0.1",
     "@vitejs/plugin-react-swc": "^3.0.0",
     "babel-loader": "^8.3.0",
+    "chromatic": "^6.15.0",
     "eslint": "^8.0.1",
     "eslint-config-standard-with-typescript": "^24.0.0",
     "eslint-import-resolver-typescript": "^3.5.3",
@@ -50,5 +52,7 @@
     "typescript": "*",
     "vite": "^4.0.0",
     "vitest": "^0.27.3"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "react-payments@0.0.0"
 }
