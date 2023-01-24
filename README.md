@@ -18,7 +18,7 @@
 
 ### 필수 요구사항
 
-- [ ] Storybook 상호 작용 테스트
+- [X] Storybook 상호 작용 테스트
 - [X] 재사용 가능한 Component 작성
 
 ### 카드 추가
@@ -47,7 +47,7 @@
 
 ### 심화 요구사항 (선택사항)
 
-- [ ] Storybook 단위 테스트
+- [X] Storybook 단위 테스트
 - [X] 유효성 검증 실패에 대한 UI/UX 추가
 - [X] 유효한 값 입력시 다음 필드로 Input Focusing
 - [X] 카드사 선택
