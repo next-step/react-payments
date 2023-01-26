@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import { composeStories } from '@storybook/testing-react';
 //
-import TestA11y from '@/libs/accessibility';
+import TestA11y from '@/utils/accessibility';
 import { 카드_테마, 카드_기본번호 } from '@/constants';
 import * as CardStories from './Card.stories';
 

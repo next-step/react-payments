@@ -10,7 +10,7 @@ import type { ModalProps } from './Modal.types';
 const Modal = ({ open, onClose, children }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const onModalClose = useCallback(
+  const handleModalClose = useCallback(
     (event: KeyboardEvent | MouseEvent) => {
       event.preventDefault();
       onClose && onClose(event);
@@ -18,14 +18,16 @@ const Modal = ({ open, onClose, children }: ModalProps) => {
     [onClose],
   );
 
-  useClickAway(modalRef, onModalClose);
+  useClickAway<KeyboardEvent | MouseEvent>(modalRef, handleModalClose);
 
   useEffect(() => {
     const closeOnEscapeKey = (event: KeyboardEvent) =>
-      event.key === 'Escape' ? onModalClose(event) : null;
+      event.key === 'Escape' && handleModalClose(event);
+
     document.body.addEventListener('keydown', closeOnEscapeKey);
+
     return () => document.body.removeEventListener('keydown', closeOnEscapeKey);
-  }, [onModalClose]);
+  }, [handleModalClose]);
 
   return (
     <Portal.Consumer>

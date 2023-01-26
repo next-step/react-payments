@@ -1,12 +1,11 @@
 import { Modal } from '@/components';
 import { 카드_테마 } from '@/constants';
 //
-import type { KeyboardEvent, MouseEvent } from 'react';
 import type { 카드_테마_키, 카드_테마_타입 } from 'literal';
 
 type CardCompanyModalProps = {
   open: boolean;
-  onClose: <T extends HTMLElement>(event: KeyboardEvent<T> | MouseEvent<T>) => void;
+  onClose: (event: KeyboardEvent | MouseEvent) => void;
   onSelect: (params: { className: 카드_테마_타입; company: 카드_테마_키 }) => void;
 };
 

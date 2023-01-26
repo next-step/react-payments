@@ -3,15 +3,10 @@ declare module 'components' {
 
   type ChildrenProps = { children: ReactNode };
 
-  type FormSameNameFromTargetValidatorProps = {
-    $elements: HTMLFormControlsCollection;
-    $target: EventTarget & HTMLFormElement & HTMLInputElement;
-    name: string;
-  };
-
-  type FormSameNameFromTargetValidatorCallbackProps = FormSameNameFromTargetValidatorProps & {
-    sameNamesElements: HTMLInputElement[];
-    targetIndex: number;
+  type FormGetNameValidatorCallbackProps = {
+    target: HTMLInputElement;
+    sameNames: HTMLInputElement[];
+    index: number;
   };
 }
 

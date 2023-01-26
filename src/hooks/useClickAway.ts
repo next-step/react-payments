@@ -1,10 +1,10 @@
 import { RefObject, useEffect, useRef } from 'react';
 
-const defaultEvents = ['mousedown', 'touchstart'];
+const 기본_이벤트_리스트 = ['mousedown', 'touchstart'];
 
 function on<T extends Window | Document | HTMLElement | EventTarget>(
   obj: T | null,
-  ...args: Parameters<T['addEventListener']> | [string, Function | null, ...any]
+  ...args: Parameters<T['addEventListener']> | [string, (params: any) => any | null, ...any]
 ): void {
   if (obj && obj.addEventListener) {
     obj.addEventListener(...(args as Parameters<HTMLElement['addEventListener']>));
@@ -13,7 +13,7 @@ function on<T extends Window | Document | HTMLElement | EventTarget>(
 
 function off<T extends Window | Document | HTMLElement | EventTarget>(
   obj: T | null,
-  ...args: Parameters<T['removeEventListener']> | [string, Function | null, ...any]
+  ...args: Parameters<T['removeEventListener']> | [string, (params: any) => any | null, ...any]
 ): void {
   if (obj && obj.removeEventListener) {
     obj.removeEventListener(...(args as Parameters<HTMLElement['removeEventListener']>));
@@ -23,7 +23,7 @@ function off<T extends Window | Document | HTMLElement | EventTarget>(
 const useClickAway = <E extends Event = Event>(
   ref: RefObject<HTMLElement | null>,
   onClickAway: (event: E) => void,
-  events: string[] = defaultEvents,
+  events: string[] = 기본_이벤트_리스트,
 ) => {
   const savedCallback = useRef(onClickAway);
 
