@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 import { useMyCardsContext } from "../../../../providers/my-cards";
 import { useNavigation } from "../../../hooks";
 import { convertToCard } from "../../../../domain";
@@ -30,11 +30,8 @@ export default function useCardNicknameForm() {
     [addCard, cardState, goToCardList, nickname]
   );
 
-  const invalidButton = useMemo(() => nickname.length === 0, [nickname]);
-
   return {
     handleInputNickname,
     handleSubmit,
-    invalidButton,
   };
 }

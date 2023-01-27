@@ -27,6 +27,10 @@ export default function Card({
   }, [owner]);
 
   const brand = useMemo(() => findCardBrandByPattern(numbers || []), [numbers]);
+  const nicknameOrBrand = useMemo(
+    () => nickname || brand?.label,
+    [brand, nickname]
+  );
 
   return (
     <>
@@ -54,7 +58,9 @@ export default function Card({
           </div>
         </div>
       </div>
-      {nickname && <span className="card-nickname">{nickname}</span>}
+      {nicknameOrBrand && (
+        <span className="card-nickname">{nicknameOrBrand}</span>
+      )}
     </>
   );
 }

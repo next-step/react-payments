@@ -7,9 +7,10 @@ import {
 } from "../../../components";
 import { useCardNicknameForm } from "./hooks";
 
+const MAX_LENGTH = 10;
+
 export default function CardNicknameForm() {
-  const { handleSubmit, handleInputNickname, invalidButton } =
-    useCardNicknameForm();
+  const { handleSubmit, handleInputNickname } = useCardNicknameForm();
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -17,18 +18,14 @@ export default function CardNicknameForm() {
         <Input
           className="w-75"
           type="underline"
-          placeholder="카드의 별칭을 입력해주세요."
+          placeholder="카드 별칭 (선택)"
+          maxLength={MAX_LENGTH}
           onInput={handleInputNickname}
         />
       </InputContainer>
 
       <ButtonBox className="mt-50">
-        <Button
-          nativeType="submit"
-          className="button-text"
-          invalid={invalidButton}
-          disabled={invalidButton}
-        >
+        <Button nativeType="submit" className="button-text">
           다음
         </Button>
       </ButtonBox>

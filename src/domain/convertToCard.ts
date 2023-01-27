@@ -6,16 +6,14 @@ function createCardId() {
 }
 
 export default function convertToCard(cardState: ICardDTO): ICard | undefined {
-  const { numbers, expiredMonth, expiredYear, owner, nickname, brand } =
-    cardState;
+  const { numbers, expiredMonth, expiredYear, owner, brand } = cardState;
 
   if (
     !isCardNumbers(numbers) ||
     !isTwoDigitNumber(expiredMonth) ||
     !isTwoDigitNumber(expiredYear) ||
     !isBrand(brand) ||
-    !owner ||
-    !nickname
+    !owner
   ) {
     return;
   }
@@ -26,7 +24,6 @@ export default function convertToCard(cardState: ICardDTO): ICard | undefined {
     expiredMonth,
     expiredYear,
     owner,
-    nickname,
     brand,
   };
 }
