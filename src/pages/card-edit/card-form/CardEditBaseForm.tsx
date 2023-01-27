@@ -17,7 +17,10 @@ interface IProps {
   invalidMessages: Partial<Record<TInvalidCode, string>>;
 }
 
-export default function CardAddBaseForm({ onSubmit, invalidMessages }: IProps) {
+export default function CardEditBaseForm({
+  onSubmit,
+  invalidMessages,
+}: IProps) {
   const [$cardExpired, $cardOwner, $cardPassword] = useInputRefs(REF_SIZE);
   const createFocusHandler = useFocusHandler();
   const invalidButton = useMemo(

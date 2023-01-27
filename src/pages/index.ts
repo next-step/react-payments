@@ -1,2 +1,2 @@
 export * from "./card-list";
-export * from "./card-add";
+export * from "./card-edit";

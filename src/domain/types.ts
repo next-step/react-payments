@@ -34,6 +34,7 @@ export interface ICard {
 }
 
 export interface ICardDTO {
+  id?: string;
   brand?: string;
   numbers?: string[];
   expiredMonth?: string;

@@ -6,7 +6,8 @@ function createCardId() {
 }
 
 export default function convertToCard(cardState: ICardDTO): ICard | undefined {
-  const { numbers, expiredMonth, expiredYear, owner, brand } = cardState;
+  const { id, numbers, expiredMonth, expiredYear, owner, brand, nickname } =
+    cardState;
 
   if (
     !isCardNumbers(numbers) ||
@@ -19,11 +20,12 @@ export default function convertToCard(cardState: ICardDTO): ICard | undefined {
   }
 
   return {
-    id: createCardId(),
+    id: id || createCardId(),
     numbers,
     expiredMonth,
     expiredYear,
     owner,
     brand,
+    nickname,
   };
 }

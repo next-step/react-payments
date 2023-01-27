@@ -1,10 +1,9 @@
 import { createContext, ReactNode, useMemo } from "react";
-import { TPages } from "./types";
 import { useRoute } from "./hooks";
 
 interface IRouteContext {
-  page: TPages;
-  pushRoute: (page: TPages) => void;
+  page: string;
+  pushRoute: (page: string) => void;
 }
 
 export const RouteContext = createContext<IRouteContext>({
@@ -13,7 +12,7 @@ export const RouteContext = createContext<IRouteContext>({
 });
 
 interface IProps {
-  children: (page: TPages) => ReactNode;
+  children: (page: string) => ReactNode;
 }
 
 export default function RouteProvider({ children }: IProps) {

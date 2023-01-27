@@ -1,24 +1,24 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ModalProvider } from "../providers";
-import { useCardAdd } from "../hooks";
+import { useCardEdit } from "../hooks";
 import { CardStateProvider } from "../../../providers";
-import CardAddBaseForm from "./CardAddBaseForm";
+import CardEditBaseForm from "./CardEditBaseForm";
 
 export default {
-  title: "페이먼츠 미션/Components/Container/CardAddBaseForm",
-  component: CardAddBaseForm,
+  title: "페이먼츠 미션/Components/Container/CardEditBaseForm",
+  component: CardEditBaseForm,
   args: {},
-} as ComponentMeta<typeof CardAddBaseForm>;
+} as ComponentMeta<typeof CardEditBaseForm>;
 
-const Template: ComponentStory<typeof CardAddBaseForm> = () => {
-  const { handleSubmitBaseForm, invalidMessages } = useCardAdd();
+const Template: ComponentStory<typeof CardEditBaseForm> = () => {
+  const { handleSubmitBaseForm, invalidMessages } = useCardEdit();
 
   return (
     <div className="root">
       <CardStateProvider>
         <div className="app">
           <ModalProvider>
-            <CardAddBaseForm
+            <CardEditBaseForm
               onSubmit={handleSubmitBaseForm}
               invalidMessages={invalidMessages}
             />

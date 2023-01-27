@@ -11,7 +11,7 @@ import { myCardsStorage } from "../../storage";
 
 interface IMyCardsContext {
   myCards: ICard[];
-  addCard: (card: ICard) => void;
+  saveCard: (card: ICard) => void;
   deleteCard: (id: string) => void;
 }
 
@@ -21,7 +21,7 @@ interface IProps {
 
 const initValue: IMyCardsContext = {
   myCards: [],
-  addCard: () => null,
+  saveCard: () => null,
   deleteCard: () => null,
 };
 
@@ -33,7 +33,7 @@ export default function MyCardsProvider({
 }: PropsWithChildren<IProps>) {
   const [myCards, setMyCards] = useState(initData || []);
 
-  const addCard = useCallback((card: ICard) => {
+  const saveCard = useCallback((card: ICard) => {
     setMyCards((myCards) => [...myCards, card]);
   }, []);
 
@@ -42,8 +42,8 @@ export default function MyCardsProvider({
   }, []);
 
   const contextValue = useMemo(
-    () => ({ myCards, addCard, deleteCard }),
-    [myCards, addCard, deleteCard]
+    () => ({ myCards, saveCard, deleteCard }),
+    [myCards, saveCard, deleteCard]
   );
 
   useEffect(() => {

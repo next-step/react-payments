@@ -7,7 +7,7 @@ import { useCardStateContext } from "../../../../providers";
 export default function useCardNicknameForm() {
   const [nickname, setNickname] = useState("");
   const { cardState } = useCardStateContext();
-  const { addCard } = useMyCardsContext();
+  const { saveCard } = useMyCardsContext();
   const { goToCardList } = useNavigation();
 
   const handleInputNickname = useCallback(
@@ -23,11 +23,11 @@ export default function useCardNicknameForm() {
 
       const card = convertToCard({ ...cardState, nickname });
       if (card) {
-        addCard(card);
+        saveCard(card);
         goToCardList();
       }
     },
-    [addCard, cardState, goToCardList, nickname]
+    [saveCard, cardState, goToCardList, nickname]
   );
 
   return {

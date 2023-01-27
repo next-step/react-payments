@@ -22,7 +22,7 @@ function convertToMessage(invalidCodes: TInvalidCode[]) {
   );
 }
 
-export default function useCardAdd() {
+export default function useCardEdit() {
   const { cardState } = useCardStateContext();
   const [step, setStep] = useState<TCardFormStep>("input-card-base");
   const invalidCodes = useMemo(() => getInvalidCodes(cardState), [cardState]);

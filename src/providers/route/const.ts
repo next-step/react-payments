@@ -1,4 +1,4 @@
 export const Pages = {
   CARD_LIST: "/",
-  CARD_ADD: "/card-add",
+  CARD_EDIT: "/card-edit",
 } as const;

@@ -1,14 +1,14 @@
 import classnames from "classnames";
 import { Card, FlexCenter, PageTitle } from "../../components";
 import { useNavigation } from "../hooks";
-import { CardAddBaseForm, CardNicknameForm } from "./card-form";
-import { useCardAdd } from "./hooks";
+import { CardEditBaseForm, CardNicknameForm } from "./card-form";
+import { useCardEdit } from "./hooks";
 import { ModalProvider } from "./providers";
 
-export default function CardAdd() {
+export default function CardEdit() {
   const { handleClickCardList } = useNavigation();
   const { cardState, handleSubmitBaseForm, step, invalidMessages } =
-    useCardAdd();
+    useCardEdit();
 
   return (
     <div
@@ -23,7 +23,7 @@ export default function CardAdd() {
           <Card {...cardState} />
 
           <ModalProvider>
-            <CardAddBaseForm
+            <CardEditBaseForm
               onSubmit={handleSubmitBaseForm}
               invalidMessages={invalidMessages}
             />

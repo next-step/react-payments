@@ -8,9 +8,12 @@ export default function useNavigation() {
     pushRoute(Pages.CARD_LIST);
   }, [pushRoute]);
 
-  const goToCardAdd = useCallback(() => {
-    pushRoute(Pages.CARD_ADD);
-  }, [pushRoute]);
+  const goToCardEdit = useCallback(
+    (id?: string) => {
+      pushRoute([Pages.CARD_EDIT, id].filter(Boolean).join("/"));
+    },
+    [pushRoute]
+  );
 
   const handleClickCardList: MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
@@ -23,10 +26,15 @@ export default function useNavigation() {
   const handleClickCardAdd: MouseEventHandler<HTMLDivElement> = useCallback(
     (event) => {
       event.preventDefault();
-      goToCardAdd();
+      goToCardEdit();
     },
-    [goToCardAdd]
+    [goToCardEdit]
   );
 
-  return { handleClickCardList, handleClickCardAdd, goToCardList, goToCardAdd };
+  return {
+    handleClickCardList,
+    handleClickCardAdd,
+    goToCardList,
+    goToCardEdit,
+  };
 }

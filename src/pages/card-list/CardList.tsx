@@ -1,16 +1,23 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { Card, FlexCenter, PageTitle } from "../../components";
 import { useNavigation } from "../hooks";
 import { useMyCardsContext } from "../../providers/my-cards";
 
 export default function CardList() {
-  const { handleClickCardAdd } = useNavigation();
+  const { handleClickCardAdd, goToCardEdit } = useNavigation();
   const { myCards } = useMyCardsContext();
   const sortedCards = useMemo(() => [...myCards].reverse(), [myCards]);
 
+  const handleClickCard = useCallback(
+    (id: string) => {
+      goToCardEdit(id);
+    },
+    [goToCardEdit]
+  );
+
   return (
     <div style={{ height: "100%", overflow: "auto" }}>
-      <div className="app flex-column-center">
+      <div className="app">
         <FlexCenter>
           <PageTitle className="mb-10">보유 카드</PageTitle>
         </FlexCenter>
@@ -22,7 +29,7 @@ export default function CardList() {
         </div>
 
         {sortedCards.map((card) => (
-          <Card key={card.id} {...card} />
+          <Card onClick={handleClickCard} key={card.id} {...card} />
         ))}
       </div>
     </div>

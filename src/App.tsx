@@ -1,4 +1,4 @@
-import { CardAdd, CardList } from "./pages";
+import { CardEdit, CardList } from "./pages";
 import {
   CardStateProvider,
   MyCardsProvider,
@@ -14,9 +14,9 @@ function App() {
           {(page) => (
             <>
               {page === Pages.CARD_LIST && <CardList />}
-              {page === Pages.CARD_ADD && (
+              {page.startsWith(Pages.CARD_EDIT) && (
                 <CardStateProvider>
-                  <CardAdd />
+                  <CardEdit />
                 </CardStateProvider>
               )}
             </>
