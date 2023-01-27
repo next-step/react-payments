@@ -1,6 +1,6 @@
-import { FormEvent, useCallback, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { getInvalidCodes, TInvalidCode } from "../../../domain";
-import { useCardStateContext } from "../../../providers";
+import { useCardStateContext, useMyCardsContext } from "../../../providers";
 
 type TCardFormStep = "input-card-base" | "input-card-nickname";
 
@@ -22,14 +22,19 @@ function convertToMessage(invalidCodes: TInvalidCode[]) {
   );
 }
 
-export default function useCardEdit() {
-  const { cardState } = useCardStateContext();
+export default function useCardEdit(cardId?: string) {
+  const { cardState, changeCardState } = useCardStateContext();
+  const { myCards } = useMyCardsContext();
   const [step, setStep] = useState<TCardFormStep>("input-card-base");
   const invalidCodes = useMemo(() => getInvalidCodes(cardState), [cardState]);
   const invalidMessages = useMemo(
     () => convertToMessage(invalidCodes),
     [invalidCodes]
   );
+  const currentCard = useMemo(() => {
+    console.log(myCards, cardId);
+    return myCards.find((card) => card.id === cardId);
+  }, [cardId, myCards]);
 
   const handleSubmitBaseForm = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
@@ -40,6 +45,14 @@ export default function useCardEdit() {
     },
     [invalidCodes.length]
   );
+
+  useEffect(() => {
+    if (!currentCard) {
+      return;
+    }
+    changeCardState(currentCard);
+    setStep("input-card-nickname");
+  }, [changeCardState, currentCard]);
 
   return { handleSubmitBaseForm, step, cardState, invalidMessages };
 }

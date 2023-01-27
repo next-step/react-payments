@@ -1,4 +1,5 @@
 import classnames from "classnames";
+import { useMemo } from "react";
 import { Card, FlexCenter, PageTitle } from "../../components";
 import { useNavigation } from "../hooks";
 import { CardEditBaseForm, CardNicknameForm } from "./card-form";
@@ -6,9 +7,14 @@ import { useCardEdit } from "./hooks";
 import { ModalProvider } from "./providers";
 
 export default function CardEdit() {
-  const { handleClickCardList } = useNavigation();
+  const { handleClickCardList, cardId } = useNavigation();
   const { cardState, handleSubmitBaseForm, step, invalidMessages } =
-    useCardEdit();
+    useCardEdit(cardId);
+
+  const nicknameFormTitle = useMemo(
+    () => (cardId ? "카드 별칭 수정" : "카드 별칭 등록"),
+    [cardId]
+  );
 
   return (
     <div
@@ -32,7 +38,7 @@ export default function CardEdit() {
       ) : (
         <>
           <FlexCenter>
-            <PageTitle className="mb-10">카드등록이 완료되었습니다.</PageTitle>
+            <PageTitle className="mb-10">{nicknameFormTitle}</PageTitle>
           </FlexCenter>
 
           <Card {...cardState} />

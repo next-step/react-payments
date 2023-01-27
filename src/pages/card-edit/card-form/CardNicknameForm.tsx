@@ -10,7 +10,8 @@ import { useCardNicknameForm } from "./hooks";
 const MAX_LENGTH = 10;
 
 export default function CardNicknameForm() {
-  const { handleSubmit, handleInputNickname } = useCardNicknameForm();
+  const { handleSubmit, handleInputNickname, defaultValue } =
+    useCardNicknameForm();
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -20,6 +21,7 @@ export default function CardNicknameForm() {
           type="underline"
           placeholder="카드 별칭 (선택)"
           maxLength={MAX_LENGTH}
+          defaultValue={defaultValue}
           onInput={handleInputNickname}
         />
       </InputContainer>

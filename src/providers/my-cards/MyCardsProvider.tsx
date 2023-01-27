@@ -33,8 +33,15 @@ export default function MyCardsProvider({
 }: PropsWithChildren<IProps>) {
   const [myCards, setMyCards] = useState(initData || []);
 
-  const saveCard = useCallback((card: ICard) => {
-    setMyCards((myCards) => [...myCards, card]);
+  const saveCard = useCallback((newCard: ICard) => {
+    setMyCards((myCards) => {
+      const existsCard = myCards.find((card) => card.id === newCard.id);
+      if (existsCard) {
+        return myCards.map((card) => (card === existsCard ? newCard : card));
+      } else {
+        return [...myCards, newCard];
+      }
+    });
   }, []);
 
   const deleteCard = useCallback((id: string) => {

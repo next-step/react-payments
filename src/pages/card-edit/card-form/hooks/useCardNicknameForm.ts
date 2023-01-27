@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useCallback, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useMemo, useState } from "react";
 import { useMyCardsContext } from "../../../../providers/my-cards";
 import { useNavigation } from "../../../hooks";
 import { convertToCard } from "../../../../domain";
@@ -9,6 +9,8 @@ export default function useCardNicknameForm() {
   const { cardState } = useCardStateContext();
   const { saveCard } = useMyCardsContext();
   const { goToCardList } = useNavigation();
+
+  const defaultValue = useMemo(() => cardState.nickname, [cardState.nickname]);
 
   const handleInputNickname = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
@@ -33,5 +35,6 @@ export default function useCardNicknameForm() {
   return {
     handleInputNickname,
     handleSubmit,
+    defaultValue,
   };
 }

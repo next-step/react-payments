@@ -1,8 +1,15 @@
-import { MouseEventHandler, useCallback } from "react";
+import { MouseEventHandler, useCallback, useMemo } from "react";
 import { Pages, useRouteContext } from "../../providers";
 
 export default function useNavigation() {
-  const { pushRoute } = useRouteContext();
+  const { pushRoute, page } = useRouteContext();
+
+  const cardId = useMemo(() => {
+    if (page.startsWith(Pages.CARD_EDIT)) {
+      return page.replace(`${Pages.CARD_EDIT}/`, "");
+    }
+    return undefined;
+  }, [page]);
 
   const goToCardList = useCallback(() => {
     pushRoute(Pages.CARD_LIST);
@@ -36,5 +43,6 @@ export default function useNavigation() {
     handleClickCardAdd,
     goToCardList,
     goToCardEdit,
+    cardId,
   };
 }
