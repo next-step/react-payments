@@ -1,7 +1,12 @@
-import { useCallback, useMemo } from "react";
+import { CSSProperties, useCallback, useMemo } from "react";
 import { Card, FlexCenter, PageTitle } from "../../components";
 import { useNavigation } from "../hooks";
 import { useMyCardsContext } from "../../providers/my-cards";
+import CardDeleteButton from "./CardDeleteButton";
+
+const CARD_WRAPPER_STYLE: CSSProperties = {
+  position: "relative",
+};
 
 export default function CardList() {
   const { handleClickCardAdd, goToCardEdit } = useNavigation();
@@ -29,7 +34,10 @@ export default function CardList() {
         </div>
 
         {sortedCards.map((card) => (
-          <Card onClick={handleClickCard} key={card.id} {...card} />
+          <div key={card.id} style={CARD_WRAPPER_STYLE}>
+            <Card onClick={handleClickCard} {...card} />
+            <CardDeleteButton id={card.id} />
+          </div>
         ))}
       </div>
     </div>

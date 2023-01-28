@@ -13,7 +13,7 @@ function App() {
         <RouteProvider>
           {(page) => (
             <>
-              {page === Pages.CARD_LIST && <CardList />}
+              {[Pages.CARD_LIST, ""].includes(page) && <CardList />}
               {page.startsWith(Pages.CARD_EDIT) && (
                 <CardStateProvider>
                   <CardEdit />
