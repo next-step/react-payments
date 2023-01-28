@@ -1,6 +1,6 @@
 import { useMemo, useContext } from 'react';
 //
-import { RouteStateContext, RouteDispatchContext, 라우터_키 } from '@/contexts';
+import { RouteStateContext, RouteDispatchContext, RouterKeys } from '@/contexts';
 
 export const useRouteState = () => {
   const context = useContext(RouteStateContext);
@@ -19,16 +19,20 @@ export const useRouteDispatch = () => {
 };
 
 export const useRouter = () => {
+  const state = useRouteState();
   const dispatch = useRouteDispatch();
   return useMemo(
     () => ({
-      push: (경로: 라우터_키, params?: Record<string, any>) => {
-        dispatch({ type: 'PUSH', route: 경로, params });
+      getRouterState: () => {
+        return state;
+      },
+      push: (route: RouterKeys, params?: Record<string, any>) => {
+        dispatch({ type: 'PUSH', route, params });
       },
       back: () => {
         dispatch({ type: 'BACK' });
       },
     }),
-    [dispatch],
+    [state, dispatch],
   );
 };

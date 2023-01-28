@@ -1,5 +1,6 @@
 declare module 'components' {
-  import { ReactNode } from 'react';
+  import type { HTMLAttributes, ReactNode } from 'react';
+  import type { CardSizeTypes, CardThemeTypes } from 'literal';
 
   type ChildrenProps = { children: ReactNode };
 
@@ -8,12 +9,37 @@ declare module 'components' {
     sameNames: HTMLInputElement[];
     index: number;
   };
+
+  type CardProps = {
+    size?: CardSizeTypes;
+    theme?: CardThemeTypes;
+    isAdd?: boolean;
+    isEmpty?: boolean;
+    cardTitle?: string;
+    cardNumber?: string;
+    cardOwner?: string;
+    cardExpiration?: string;
+  } & HTMLAttributes<HTMLDivElement>;
 }
 
 declare module 'literal' {
-  type 타입_라우터_프로퍼티 = '/' | '/add-card' | '/confirmation';
+  type RouterPaths = '/' | '/add-card' | '/confirmation';
 
-  type 카드_테마_키 =
+  type CardSizeTypes = 'small' | 'big';
+
+  type CardState = {
+    theme?: CardThemeTypes;
+    cardTitle?: string;
+    cardNumber: string;
+    cardExpiration: string;
+    cardOwner: string;
+    cardSecurityCode: string;
+    cardPassword: string;
+  };
+
+  type SecureCardState = Omit<CardState, 'cardSecurityCode' | 'cardPassword'>;
+
+  type CardThemeKeys =
     | '기본'
     | '달'
     | '별'
@@ -24,7 +50,7 @@ declare module 'literal' {
     | '파도'
     | '벚꽃';
 
-  type 카드_테마_타입 =
+  type CardThemeTypes =
     | 'base-theme'
     | 'moon'
     | 'star'

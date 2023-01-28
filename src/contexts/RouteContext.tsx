@@ -1,29 +1,14 @@
 import { createContext, Dispatch, useReducer } from 'react';
+//
+import { 라우터_초깃값 } from '@/constants';
+//
+import type { ChildrenProps } from 'components';
+import type { RouterState, RouterAction, RouterKeys } from './contexts.types';
 
-import { 라우터_프로퍼티 } from '@/constants';
-import { ChildrenProps } from 'components';
+export const RouteStateContext = createContext<RouterState>(라우터_초깃값);
+export const RouteDispatchContext = createContext<Dispatch<RouterAction> | null>(null);
 
-export type 라우터_키 = (typeof 라우터_프로퍼티)[keyof typeof 라우터_프로퍼티];
-
-type State = {
-  prevRoute: string[];
-  currentRoute: 라우터_키;
-  params?: Record<string, any>;
-};
-
-type Action = { type: 'PUSH'; route: 라우터_키; params?: Record<string, any> } | { type: 'BACK' };
-
-const 라우터_초깃값: State = {
-  prevRoute: [],
-  currentRoute: '/',
-  params: {},
-};
-
-export const RouteStateContext = createContext<State>(라우터_초깃값);
-
-export const RouteDispatchContext = createContext<Dispatch<Action> | null>(null);
-
-const routeReducer = (state: State, action: Action) => {
+const routeReducer = (state: RouterState, action: RouterAction) => {
   switch (action.type) {
     case 'PUSH':
       return {
@@ -33,7 +18,7 @@ const routeReducer = (state: State, action: Action) => {
         params: action.params,
       };
     case 'BACK': {
-      const currentRoute = (state.prevRoute.pop() || '/') as 라우터_키;
+      const currentRoute = (state.prevRoute.pop() || '/') as RouterKeys;
       return { ...state, prevRoute: state.prevRoute, currentRoute };
     }
     default:

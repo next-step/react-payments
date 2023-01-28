@@ -1,24 +1,7 @@
 import { RefObject, useEffect, useRef } from 'react';
-
-const 기본_이벤트_리스트 = ['mousedown', 'touchstart'];
-
-function on<T extends Window | Document | HTMLElement | EventTarget>(
-  obj: T | null,
-  ...args: Parameters<T['addEventListener']> | [string, (params: any) => any | null, ...any]
-): void {
-  if (obj && obj.addEventListener) {
-    obj.addEventListener(...(args as Parameters<HTMLElement['addEventListener']>));
-  }
-}
-
-function off<T extends Window | Document | HTMLElement | EventTarget>(
-  obj: T | null,
-  ...args: Parameters<T['removeEventListener']> | [string, (params: any) => any | null, ...any]
-): void {
-  if (obj && obj.removeEventListener) {
-    obj.removeEventListener(...(args as Parameters<HTMLElement['removeEventListener']>));
-  }
-}
+//
+import { eventAdd, eventRemove } from '@/utils';
+import { 기본_이벤트_리스트 } from '@/constants';
 
 const useClickAway = <E extends Event = Event>(
   ref: RefObject<HTMLElement | null>,
@@ -37,10 +20,10 @@ const useClickAway = <E extends Event = Event>(
       el && !el.contains(event.target) && savedCallback.current(event);
     };
 
-    events.forEach((eventName) => on(document, eventName, handler));
+    events.forEach((eventName) => eventAdd(document, eventName, handler));
 
     return () => {
-      events.forEach((eventName) => off(document, eventName, handler));
+      events.forEach((eventName) => eventRemove(document, eventName, handler));
     };
   }, [events, ref]);
 };

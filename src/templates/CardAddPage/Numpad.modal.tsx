@@ -1,15 +1,16 @@
-import { KeyboardEvent, MouseEvent, useMemo } from 'react';
+import { useMemo } from 'react';
 //
 import { Modal } from '@/components';
 
 type NumpadModalProps = {
   open: boolean;
-  onClose: <T extends HTMLElement>(event: KeyboardEvent<T> | MouseEvent<T>) => void;
+  onClose: (event: KeyboardEvent | MouseEvent) => void;
   onSelect: (keypad: string) => void;
 };
 
 const NumpadModal = ({ open, onClose, onSelect }: NumpadModalProps) => {
   const 가상_키보드 = useMemo(getVirtualKeyboard, [open]);
+
   return (
     <Modal open={open} onClose={onClose}>
       <div className="grid-wrap gap-5">

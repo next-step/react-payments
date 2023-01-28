@@ -1,14 +1,17 @@
 import { Card } from '@/components';
-import { useRouter } from '@/hooks';
-import { SecureCardState, useCardState } from '@/contexts/CardContext';
+import { 카드_확인_페이지 } from '@/constants';
+import { useCardStore, useRouter } from '@/hooks';
+import { SecureCardState } from 'literal';
 
 const CardList = () => {
   const { push } = useRouter();
-  const cardList = useCardState();
+  const { getCardList } = useCardStore();
+
+  const cardList = getCardList();
 
   const handleAddCard = () => push('/add-card');
 
-  const handleConfirmation = (card: SecureCardState) => push('/confirmation', { card });
+  const handleConfirmation = (card: SecureCardState) => push(카드_확인_페이지, { card });
 
   return (
     <>

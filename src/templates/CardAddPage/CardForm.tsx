@@ -1,34 +1,39 @@
 import { ChangeEvent, createRef, FocusEvent, useRef, useState } from 'react';
 //
-import { useRouter } from '@/hooks';
+import { useCardStore, useRouter } from '@/hooks';
 import { Button, Card, Form, Input } from '@/components';
-import { 카드_기본번호, 카드_테마 } from '@/constants';
-import { useCardDispatch } from '@/contexts';
-import { condIndicator, flip, splitToCount } from '@/utils';
-import cardFormService from './CardForm.service';
+import {
+  카드_넘버,
+  카드_넘버_개별_길이,
+  카드_만료일,
+  카드_만료일_개별_길이,
+  카드_번호_영역_개수,
+  카드_보안코드,
+  카드_비밀번호,
+  카드_소유자,
+  카드_소유자_최대_길이,
+  카드_입력칸_유효성_초깃값,
+  카드_추가_초깃값,
+  카드_필드_에러_초깃값,
+  카드_확인_페이지,
+} from '@/constants';
+import { condIndicator } from '@/utils';
+import * as Service from './CardForm.service';
 import CardCompanyModal from './CardCompany.modal';
 import NumpadModal from './Numpad.modal';
 //
-import type { 카드_테마_키 } from 'literal';
-import type { CardProps } from '@/components/Card/Card.types';
-
-const 카드_초깃값: CardProps = {
-  theme: 'base-theme',
-  cardTitle: '',
-  cardNumber: '',
-  cardOwner: '',
-  cardExpiration: '',
-};
+import type { CardProps } from 'components';
+import type { CardThemeKeys } from 'literal';
 
 const CardForm = () => {
   const { push } = useRouter();
-  const dispatch = useCardDispatch();
+  const { addCard } = useCardStore();
 
   const formRef = useRef<HTMLFormElement | null>(null);
   const focusInputRef = useRef<HTMLInputElement>();
-  const cardNumberRefs = Array.from({ length: 4 }).map(createRef<HTMLInputElement>);
+  const cardNumberRefs = Array.from(카드_번호_영역_개수).map(createRef<HTMLInputElement>);
 
-  const [cardData, setCardData] = useState<CardProps>(카드_초깃값);
+  const [cardData, setCardData] = useState<CardProps>(카드_추가_초깃값);
   const [
     [
       cardNumberError,
@@ -38,29 +43,19 @@ const CardForm = () => {
       cardPasswordError,
     ],
     setFieldError,
-  ] = useState(Array.from({ length: 5 }).map(() => false));
-  const [inputsValid, setInputsValid] = useState(Array.from({ length: 6 }).map(() => false));
+  ] = useState(카드_필드_에러_초깃값);
+  const [inputsValid, setInputsValid] = useState(카드_입력칸_유효성_초깃값);
   const [isCardCompanyModalOpen, setCardCompanyModalOpen] = useState(false);
   const [isNumpadModalOpen, setNumpadModalOpen] = useState(false);
 
   const 카드_소유자_이름_길이 = cardData.cardOwner?.length;
 
-  const handleCardCompanyModal = () => {
-    setCardCompanyModalOpen(true);
-  };
+  const handleCardCompanyModal = () => setCardCompanyModalOpen(true);
 
-  const handleCardCompanySelect = ({ company }: { company: 카드_테마_키 }) => {
+  const handleCardCompanySelect = ({ company }: { company: CardThemeKeys }) => {
     if (cardNumberRefs.some(({ current }) => !current)) return;
 
-    const theme = flip(카드_테마)[company];
-    const [first, second] = splitToCount(flip(카드_기본번호)[theme]);
-    cardNumberRefs.forEach((cardNumberInputRef, index) => {
-      if (!cardNumberInputRef.current) return;
-      let value = '';
-      if (index === 0) value = first;
-      if (index === 1) value = second;
-      cardNumberInputRef.current.value = value;
-    });
+    const [first, second, theme] = Service.changeCardCompanyNumber(company, cardNumberRefs);
 
     setCardCompanyModalOpen(false);
     setCardData((prev) => ({ ...prev, cardNumber: `${first} - ${second}`, theme }));
@@ -68,18 +63,9 @@ const CardForm = () => {
 
   const handleVirtualKeypad = (event: FocusEvent<HTMLInputElement>) => {
     event.preventDefault();
-
     focusInputRef.current = event.target;
-    if (focusInputRef.current.name === 'card-number' && focusInputRef.current.value.length === 4) {
-      focusInputRef.current.value = '';
-    }
 
-    if (
-      focusInputRef.current.name === 'card-security-code' &&
-      focusInputRef.current.value.length === 3
-    ) {
-      focusInputRef.current.value = '';
-    }
+    Service.resetCardAreaValue(focusInputRef);
 
     setNumpadModalOpen(true);
   };
@@ -90,56 +76,42 @@ const CardForm = () => {
 
     focusInputRef.current.value = `${focusInputRef.current.value}${keypad}`;
 
-    if (focusInputRef.current.name === 'card-number') {
-      setCardData((prev) => ({
-        ...prev,
-        cardNumber: new FormData(formRef.current as HTMLFormElement)
-          .getAll('card-number')
-          .map((item, index) =>
-            index === 3 || index === 2 ? item.toString().replace(/./g, '*') : item,
-          )
-          .join(' - '),
-      }));
+    const targetIsCardNumber = Service.isValidFieldLength(focusInputRef, 카드_넘버, () =>
+      setCardData((prev) => ({ ...prev, cardNumber: Service.parseCardNumber(formRef) })),
+    );
 
-      if (focusInputRef.current.value.length === 4) {
-        if (focusInputRef.current.id === 'card-number-3') {
-          setInputsValid((prev) => {
-            const next = [...prev];
-            next[2] = true;
-            return next;
-          });
-        }
+    if (targetIsCardNumber) {
+      setFieldError((prev) => {
+        const next = [...prev];
+        next[1] = false;
+        return next;
+      });
 
-        setFieldError((prev) => {
-          const next = [...prev];
-          next[1] = false;
-          return next;
-        });
+      setInputsValid((prev) => {
+        const next = [...prev];
+        next[2] = true;
+        return next;
+      });
 
-        setNumpadModalOpen(false);
-      }
-      return;
+      return setNumpadModalOpen(false);
     }
 
-    if (
-      focusInputRef.current.name === 'card-security-code' &&
-      focusInputRef.current.value.length === 3
-    ) {
+    if (Service.isValidFieldLength(focusInputRef, 카드_보안코드)) {
       setFieldError((prev) => {
         const next = [...prev];
         next[3] = false;
         return next;
       });
-      setNumpadModalOpen(false);
-      return;
+
+      return setNumpadModalOpen(false);
     }
   };
 
   const onSubmit = (data: Record<string, string[]>) => {
-    const card = cardFormService.cardStateGenerator(data, cardData);
-    dispatch({ type: 'ADD_CARD', card: { ...card, theme: cardData.theme } });
+    const newCard = Service.cardStateGenerator(data, cardData);
 
-    push('/confirmation');
+    addCard({ ...newCard, theme: cardData.theme });
+    push(카드_확인_페이지);
   };
 
   /**
@@ -152,8 +124,8 @@ const CardForm = () => {
 
     const nextFocus = Form.nextInputFocus(event);
 
-    Form.getNameValidator(event, 'card-number', (params) => {
-      const { cardNumber, theme, isValidLength } = cardFormService.cardNumberChangeHandler(params);
+    Form.getNameValidator(event, 카드_넘버, (params) => {
+      const { cardNumber, theme, isValidLength } = Service.cardNumberChangeHandler(params);
 
       setCardData((prev) => ({ ...prev, cardNumber, theme }));
       setInputsValid((prev) => {
@@ -167,8 +139,8 @@ const CardForm = () => {
       nextFocus(params.index);
     });
 
-    Form.getNameValidator(event, 'card-expiration', (params) => {
-      const { cardExpiration, isValidLength } = cardFormService.cardExpirationChangeHandler(params);
+    Form.getNameValidator(event, 카드_만료일, (params) => {
+      const { cardExpiration, isValidLength } = Service.cardExpirationChangeHandler(params);
 
       setCardData((prev) => ({ ...prev, cardExpiration }));
       setInputsValid((prev) => {
@@ -182,18 +154,18 @@ const CardForm = () => {
       nextFocus(params.index);
     });
 
-    Form.getNameValidator(event, 'card-owner', () =>
+    Form.getNameValidator(event, 카드_소유자, () =>
       setCardData((prev) => ({ ...prev, cardOwner: $target.value })),
     );
 
-    Form.getNameValidator(event, 'card-security-code', ({ index }) => {
+    Form.getNameValidator(event, 카드_보안코드, ({ index }) => {
       const isValidLength = $target.value.length === 3;
       if (!isValidLength) return;
 
       nextFocus(index);
     });
 
-    Form.getNameValidator(event, 'card-password', ({ index }) => {
+    Form.getNameValidator(event, 카드_비밀번호, ({ index }) => {
       const isValidLength = $target.value.length === 1;
       if (!isValidLength) return;
 
@@ -206,8 +178,8 @@ const CardForm = () => {
    * @param event
    */
   const onBlur = (event: FocusEvent<HTMLFormElement>) => {
-    Form.getNameValidator(event, 'card-number', (params) => {
-      const isValid = cardFormService.fieldCheckValidity(params);
+    Form.getNameValidator(event, 카드_넘버, (params) => {
+      const isValid = Service.fieldCheckValidity(params);
 
       setFieldError((prev) => {
         const next = [...prev];
@@ -216,8 +188,8 @@ const CardForm = () => {
       });
     });
 
-    Form.getNameValidator(event, 'card-expiration', (params) => {
-      const isValid = cardFormService.fieldCheckValidity(params);
+    Form.getNameValidator(event, 카드_만료일, (params) => {
+      const isValid = Service.fieldCheckValidity(params);
 
       setFieldError((prev) => {
         const next = [...prev];
@@ -226,7 +198,7 @@ const CardForm = () => {
       });
     });
 
-    Form.getNameValidator(event, 'card-security-code', () => {
+    Form.getNameValidator(event, 카드_보안코드, () => {
       const isValid = event.target.checkValidity();
 
       setFieldError((prev) => {
@@ -236,7 +208,7 @@ const CardForm = () => {
       });
     });
 
-    Form.getNameValidator(event, 'card-password', () => {
+    Form.getNameValidator(event, 카드_비밀번호, () => {
       const isValid = event.target.checkValidity();
 
       setFieldError((prev) => {
@@ -262,35 +234,32 @@ const CardForm = () => {
             </Input.Label>
             <Input.Base
               ref={cardNumberRefs[0]}
-              id="card-number-1"
-              name="card-number"
+              name={카드_넘버}
               type="text"
               pattern="[0-9]+"
-              minLength={4}
-              maxLength={4}
+              minLength={카드_넘버_개별_길이}
+              maxLength={카드_넘버_개별_길이}
               autoFocus
               required
             />
             {condIndicator(inputsValid[0])}
             <Input.Base
               ref={cardNumberRefs[1]}
-              id="card-number-2"
-              name="card-number"
+              name={카드_넘버}
               type="text"
               pattern="[0-9]+"
-              minLength={4}
-              maxLength={4}
+              minLength={카드_넘버_개별_길이}
+              maxLength={카드_넘버_개별_길이}
               required
             />
             {condIndicator(inputsValid[1])}
             <Input.Base
               ref={cardNumberRefs[2]}
-              id="card-number-3"
-              name="card-number"
+              name={카드_넘버}
               type="password"
               pattern="[0-9]+"
-              minLength={4}
-              maxLength={4}
+              minLength={카드_넘버_개별_길이}
+              maxLength={카드_넘버_개별_길이}
               required
               readOnly
               onFocus={handleVirtualKeypad}
@@ -298,12 +267,11 @@ const CardForm = () => {
             {condIndicator(inputsValid[2])}
             <Input.Base
               ref={cardNumberRefs[3]}
-              id="card-number-4"
-              name="card-number"
+              name={카드_넘버}
               type="password"
               pattern="[0-9]+"
-              minLength={4}
-              maxLength={4}
+              minLength={카드_넘버_개별_길이}
+              maxLength={카드_넘버_개별_길이}
               required
               readOnly
               onFocus={handleVirtualKeypad}
@@ -317,22 +285,22 @@ const CardForm = () => {
             errorMessage="형식이 올바르지 않습니다."
           >
             <Input.Base
-              name="card-expiration"
+              name={카드_만료일}
               type="text"
               placeholder="MM"
               pattern="^(0[1-9]|1[012])$"
-              minLength={2}
-              maxLength={2}
+              minLength={카드_만료일_개별_길이}
+              maxLength={카드_만료일_개별_길이}
               required
             />
             {condIndicator(inputsValid[4], ' / ')}
             <Input.Base
-              name="card-expiration"
+              name={카드_만료일}
               type="text"
               placeholder="YY"
               pattern="^(2[3-9]|[3-9][0-9])$"
-              minLength={2}
-              maxLength={2}
+              minLength={카드_만료일_개별_길이}
+              maxLength={카드_만료일_개별_길이}
               required
             />
           </Input.Box>
@@ -343,11 +311,11 @@ const CardForm = () => {
               {카드_소유자_이름_길이} / {30}
             </Input.Label>
             <Input.Base
-              name="card-owner"
+              name={카드_소유자}
               className="input-basic"
               type="text"
               placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-              maxLength={30}
+              maxLength={카드_소유자_최대_길이}
               required
             />
           </Input.Box>
@@ -359,7 +327,7 @@ const CardForm = () => {
             errorMessage="숫자를 입력해주세요."
           >
             <Input.Base
-              name="card-security-code"
+              name={카드_보안코드}
               type="password"
               className="w-25"
               pattern="[0-9]+"
@@ -378,7 +346,7 @@ const CardForm = () => {
             errorMessage="숫자를 입력해주세요."
           >
             <Input.Base
-              name="card-password"
+              name={카드_비밀번호}
               type="password"
               className="w-15"
               pattern="[0-9]+"
@@ -387,7 +355,7 @@ const CardForm = () => {
               required
             />
             <Input.Base
-              name="card-password"
+              name={카드_비밀번호}
               type="password"
               className="w-15"
               pattern="[0-9]+"

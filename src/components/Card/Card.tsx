@@ -2,9 +2,9 @@ import './card.css';
 //
 import { memo } from 'react';
 //
-import { 카드_테마 } from '../../constants';
+import { 카드_테마 } from '@/constants';
 //
-import type { CardProps } from './Card.types';
+import type { CardProps } from 'components';
 
 const Card = ({
   isAdd = false,

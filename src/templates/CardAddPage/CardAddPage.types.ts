@@ -1,10 +1,10 @@
 import type { FormGetNameValidatorCallbackProps } from 'components';
-import type { 카드_테마_타입 } from 'literal';
+import type { CardThemeKeys, CardThemeTypes } from 'literal';
 
 export type HandlerType<T = void> = (data: FormGetNameValidatorCallbackProps) => T;
 
 export type CardNumberChangeHandlerProps = HandlerType<{
-  theme: 카드_테마_타입;
+  theme: CardThemeTypes;
   cardNumber: string;
   isValidLength: boolean;
 }>;
@@ -13,3 +13,9 @@ export type CardExpirationChangeHandlerProps = HandlerType<{
   cardExpiration: string;
   isValidLength: boolean;
 }>;
+
+export type CardCompanyModalProps = {
+  open: boolean;
+  onClose: (event: KeyboardEvent | MouseEvent) => void;
+  onSelect: (params: { className: CardThemeTypes; company: CardThemeKeys }) => void;
+};

@@ -37,7 +37,7 @@
 
   z-index: 5;
   transition: all 0.3s ease-in-out;
-  pointer-event: none;
+  pointer-events: none;
 }
 
 .modal-item-container {

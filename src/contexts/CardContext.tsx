@@ -1,33 +1,10 @@
-import {
-  createContext,
-  Dispatch,
-  FunctionComponent,
-  ReactNode,
-  useContext,
-  useReducer,
-} from 'react';
+import { createContext, Dispatch, FunctionComponent, ReactNode, useReducer } from 'react';
 //
-import type { 카드_테마_타입 } from 'literal';
+import type { CardState } from 'literal';
+import type { CardAction } from './contexts.types';
 
-export type CardState = {
-  theme?: 카드_테마_타입;
-  cardTitle?: string;
-  cardNumber: string;
-  cardExpiration: string;
-  cardOwner: string;
-  cardSecurityCode: string;
-  cardPassword: string;
-};
-
-export type SecureCardState = Omit<CardState, 'cardSecurityCode' | 'cardPassword'>;
-
-type CardAction =
-  | { type: 'ADD_CARD'; card: CardState }
-  | { type: 'EDIT_CARD'; card: SecureCardState }
-  | { type: 'DEL_CARD'; card: SecureCardState };
-
-const CardStateContext = createContext<CardState[]>([]);
-const CardDispatchContext = createContext<Dispatch<CardAction> | null>(null);
+export const CardStateContext = createContext<CardState[]>([]);
+export const CardDispatchContext = createContext<Dispatch<CardAction> | null>(null);
 
 const cardReducer = (state: CardState[], action: CardAction) => {
   switch (action.type) {
@@ -65,20 +42,4 @@ export const CardProvider: FunctionComponent<{ children: ReactNode }> = ({ child
       <CardDispatchContext.Provider value={dispatch}>{children}</CardDispatchContext.Provider>
     </CardStateContext.Provider>
   );
-};
-
-export const useCardState = () => {
-  const context = useContext(CardStateContext);
-  if (!context) {
-    throw new Error('useAppState must be used within the AppProvider');
-  }
-  return context;
-};
-
-export const useCardDispatch = () => {
-  const context = useContext(CardDispatchContext);
-  if (!context) {
-    throw new Error('useAppDispatch must be used within the AppProvider');
-  }
-  return context;
 };
