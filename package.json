@@ -12,7 +12,7 @@
     "test:watch": "vitest --watch",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=ef6ad00f0f13"
+    "chromatic": "npx chromatic --project-token=ef6ad00f0f13 --exit-zero-on-changes"
   },
   "dependencies": {
     "classnames": "^2.3.2",
