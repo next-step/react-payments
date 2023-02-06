@@ -57,4 +57,4 @@ export const 카드_번호_영역_개수 = ['', '', '', ''];
 
 export const 카드_필드_에러_초깃값 = Array.from({ length: 5 }).map(() => false);
 
-export const 카드_입력칸_유효성_초깃값 = Array.from({ length: 6 }).map(() => false);
+export const 카드_입력칸_유효성_초깃값 = Array.from({ length: 4 }).map(() => false);
