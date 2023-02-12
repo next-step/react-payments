@@ -1,0 +1,35 @@
+.button-box {
+  width: 100%;
+  text-align: right;
+}
+
+.button-text {
+  margin-right: 10px;
+}
+
+.button {
+  border: none;
+  background: none;
+  font-size: 14px;
+  transition: color 0.15s;
+}
+
+.button:not(.invalid) {
+  color: #04C09E;
+}
+
+.button-type-transparent {
+  font-weight: bold;
+}
+
+.button-type-keypad {
+  margin: 3px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #fff;
+}
+
+.button-type-keypad:focus {
+  background: #04C09E;
+  color: #fff;
+}
