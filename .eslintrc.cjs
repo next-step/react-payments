@@ -22,8 +22,10 @@ module.exports = {
     },
   },
   rules: {
-    indent: ['error', 2],
+    indent: 0,
+    '@typescript-eslint/indent': ['error', 2],
     'max-depth': ['error', 1],
+    'no-restricted-exports': 'off',
     'no-trailing-spaces': 'error',
     curly: 'error',
     'brace-style': 'error',
@@ -44,13 +46,6 @@ module.exports = {
     'key-spacing': ['error', { mode: 'strict' }],
     'arrow-spacing': ['error', { before: true, after: true }],
     'react/jsx-one-expression-per-line': 'off',
-    'react/function-component-definition': [
-      2,
-      {
-        namedComponents: 'arrow-function',
-        unnamedComponents: 'arrow-function',
-      },
-    ],
     'import/no-extraneous-dependencies': [
       'error',
       {
