@@ -11,16 +11,12 @@ function App() {
           <span className="input-title">카드 번호</span>
           <div className="input-box">
             <BaseInput/>
-            <BaseInput/>
-            <BaseInput type="password"/>
-            <BaseInput type="password"/>
           </div>
         </div>
         <div className="input-container">
           <span className="input-title">만료일</span>
           <div className="input-box w-50">
-            <BaseInput placeholder="MM"/>
-            <BaseInput placeholder="YY"/>
+            <BaseInput placeholder="MM / YY"/>
           </div>
         </div>
         <div className="input-container">
