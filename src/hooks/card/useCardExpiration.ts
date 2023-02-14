@@ -1,4 +1,4 @@
-import { isValidExpirationMonth } from '@/domain/Card';
+import { isValidExpirationMonth } from '@/domain/card';
 import { isNumber } from '@/utils';
 import { ChangeEvent, useState } from 'react';
 

@@ -1,4 +1,4 @@
-import { CARD_NUMBER } from '@/constants/Card';
+import { CARD_NUMBER } from '@/constants/card';
 
 export function isShowHyphen(prevCardNumber: string, nextCardNumber: string) {
   return prevCardNumber.length === CARD_NUMBER.MAX_LENGTH && nextCardNumber.length > 0;

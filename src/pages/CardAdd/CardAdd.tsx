@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom';
 
 import { Input, Box, Button } from '@/components/Common';
-import { CardBox, CardNumberInput } from '@/components/Card';
+import { CardBox, CardNumberInputBox, CardExpirationInputBox, CardSecretCodeInputBox } from '@/components/Card';
 
-import useCardNumber from '@/hooks/useCardNumber';
-import CardExpirationInput from '@/components/Card/CardExpirationInput';
-import useCardExpiration from '@/hooks/useCardExpiration';
+import { useCardNumber, useCardExpiration } from '@/hooks/card';
 
 export default function CardAdd() {
   const { cardNumber, handleChangeCardNumber } = useCardNumber();
@@ -21,17 +19,15 @@ export default function CardAdd() {
           </h2>
           <CardBox cardNumber={cardNumber} cardExpiration={cardExpiration} />
 
-          <CardNumberInput cardNumber={cardNumber} onChange={handleChangeCardNumber} />
+          <CardNumberInputBox cardNumber={cardNumber} onChange={handleChangeCardNumber} />
 
-          <CardExpirationInput cardExpiration={cardExpiration} onChange={handleChangeExpiration} />
+          <CardExpirationInputBox cardExpiration={cardExpiration} onChange={handleChangeExpiration} />
 
           <Box title="카드 소유자 이름(선택)" className="input-container">
             <Input type="text" className="input-basic" placeholder="카드에 표시된 이름과 동일하게 입력하세요." />
           </Box>
 
-          <Box title="보안코드(CVC/CVV)" className="input-container">
-            <Input className="input-basic w-25" type="password" />
-          </Box>
+          <CardSecretCodeInputBox />
 
           <Box title="카드 비밀번호" className="input-container">
             <Input className="input-basic w-15" type="password" />

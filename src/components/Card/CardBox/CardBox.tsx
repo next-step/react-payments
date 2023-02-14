@@ -1,5 +1,5 @@
-import { CARD_EXPIRATION } from '@/constants/Card';
-import { isShowHyphen, maskingNumber } from '@/domain/Card';
+import { CARD_EXPIRATION } from '@/constants/card';
+import { isShowHyphen, maskingNumber } from '@/domain/card';
 import { CardExpiration, CardNumber } from '@/types/Card';
 
 type CardBoxProps = {

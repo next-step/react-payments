@@ -2,14 +2,14 @@ import { ChangeEvent } from 'react';
 
 import { Box, Input } from '@/components/Common';
 import { CardExpiration } from '@/types/Card';
-import { CARD_EXPIRATION } from '@/constants/Card';
+import { CARD_EXPIRATION } from '@/constants/card';
 
 type CardExpirationInputTypes = {
   cardExpiration: CardExpiration;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function CardExpirationInput({ cardExpiration, onChange }: CardExpirationInputTypes) {
+export default function CardExpirationInputBox({ cardExpiration, onChange }: CardExpirationInputTypes) {
   const { month, year } = cardExpiration;
 
   return (

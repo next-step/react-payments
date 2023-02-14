@@ -9,3 +9,7 @@ export const CARD_EXPIRATION = {
     YEAR: 'YY',
   },
 };
+
+export const CARD_SECRET_CODE = {
+  MAX_LENGTH: 3,
+};
