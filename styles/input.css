@@ -36,6 +36,18 @@
   padding: 0px;
 }
 
+.input-fixed {
+  height: 45px;
+  width: 100%;
+  text-align: center;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: #9ca3af;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0px;
+}
+
 .input-underline {
   text-align: center;
   border: none;

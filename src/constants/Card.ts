@@ -13,3 +13,7 @@ export const CARD_EXPIRATION = {
 export const CARD_SECRET_CODE = {
   MAX_LENGTH: 3,
 };
+
+export const CARD_PASSWORD = {
+  MAX_LENGTH: 1,
+};

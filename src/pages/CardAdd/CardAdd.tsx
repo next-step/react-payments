@@ -1,7 +1,14 @@
 import { Link } from 'react-router-dom';
 
-import { Input, Box, Button } from '@/components/Common';
-import { CardBox, CardNumberInputBox, CardExpirationInputBox, CardSecretCodeInputBox } from '@/components/Card';
+import { Box, Button } from '@/components/Common';
+import {
+  CardBox,
+  CardNumberInputBox,
+  CardExpirationInputBox,
+  CardSecretCodeInputBox,
+  CardPasswordInputBox,
+  CardOwnerNameInputBox,
+} from '@/components/Card';
 
 import { useCardNumber, useCardExpiration } from '@/hooks/card';
 
@@ -23,18 +30,11 @@ export default function CardAdd() {
 
           <CardExpirationInputBox cardExpiration={cardExpiration} onChange={handleChangeExpiration} />
 
-          <Box title="카드 소유자 이름(선택)" className="input-container">
-            <Input type="text" className="input-basic" placeholder="카드에 표시된 이름과 동일하게 입력하세요." />
-          </Box>
+          <CardOwnerNameInputBox />
 
           <CardSecretCodeInputBox />
 
-          <Box title="카드 비밀번호" className="input-container">
-            <Input className="input-basic w-15" type="password" />
-            <Input className="input-basic w-15" type="password" />
-            <Input className="input-basic w-15" type="password" />
-            <Input className="input-basic w-15" type="password" />
-          </Box>
+          <CardPasswordInputBox />
 
           <Box className="button-box">
             <Button type="button" className="button-text">
