@@ -1,15 +1,15 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import CardList from "./routes/CardList";
+import List from "@/routes/card/List";
 
 function Router() {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/list">
-          <CardList></CardList>
+          <List></List>
         </Route>
         <Route path="/">
-          <CardList></CardList>
+          <List></List>
         </Route>
       </Switch>
     </BrowserRouter>
