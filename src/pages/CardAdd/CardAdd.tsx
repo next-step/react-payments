@@ -1,6 +1,13 @@
 import { Link } from 'react-router-dom';
 
+import { Input, Box, Button } from '@/components/Common';
+import { CardBox, CardNumberInput } from '@/components/Card';
+
+import useCardNumber from '@/hooks/useCardNumber';
+
 export default function CardAdd() {
+  const { cardNumber, handleChangeCardNumber } = useCardNumber();
+
   return (
     <div>
       <div className="root">
@@ -9,54 +16,35 @@ export default function CardAdd() {
             <Link to="/">&lt;</Link>
             <div className="ml-5">카드 추가</div>
           </h2>
-          <div className="card-box">
-            <div className="empty-card">
-              <div className="card-top" />
-              <div className="card-middle">
-                <div className="small-card__chip" />
-              </div>
-              <div className="card-bottom">
-                <div className="card-bottom__info">
-                  <span className="card-text">NAME</span>
-                  <span className="card-text">MM / YY</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="input-container">
-            <span className="input-title">카드 번호</span>
-            <div className="input-box">
-              <input className="input-basic" type="text" />
-              <input className="input-basic" type="text" />
-              <input className="input-basic" type="password" />
-              <input className="input-basic" type="password" />
-            </div>
-          </div>
-          <div className="input-container">
-            <span className="input-title">만료일</span>
-            <div className="input-box w-50">
-              <input className="input-basic" type="text" placeholder="MM" />
-              <input className="input-basic" type="text" placeholder="YY" />
-            </div>
-          </div>
-          <div className="input-container">
-            <span className="input-title">카드 소유자 이름(선택)</span>
-            <input type="text" className="input-basic" placeholder="카드에 표시된 이름과 동일하게 입력하세요." />
-          </div>
-          <div className="input-container">
-            <span className="input-title">보안코드(CVC/CVV)</span>
-            <input className="input-basic w-25" type="password" />
-          </div>
-          <div className="input-container">
-            <span className="input-title">카드 비밀번호</span>
-            <input className="input-basic w-15" type="password" />
-            <input className="input-basic w-15" type="password" />
-            <input className="input-basic w-15" type="password" />
-            <input className="input-basic w-15" type="password" />
-          </div>
-          <div className="button-box">
-            <span className="button-text">다음</span>
-          </div>
+          <CardBox cardNumber={cardNumber} />
+
+          <CardNumberInput cardNumber={cardNumber} onChange={handleChangeCardNumber} />
+
+          <Box title="만료일" className="input-container">
+            <Input className="input-basic w-25" type="text" placeholder="MM" />
+            <Input className="input-basic w-25" type="text" placeholder="YY" />
+          </Box>
+
+          <Box title="카드 소유자 이름(선택)" className="input-container">
+            <Input type="text" className="input-basic" placeholder="카드에 표시된 이름과 동일하게 입력하세요." />
+          </Box>
+
+          <Box title="보안코드(CVC/CVV)" className="input-container">
+            <Input className="input-basic w-25" type="password" />
+          </Box>
+
+          <Box title="카드 비밀번호" className="input-container">
+            <Input className="input-basic w-15" type="password" />
+            <Input className="input-basic w-15" type="password" />
+            <Input className="input-basic w-15" type="password" />
+            <Input className="input-basic w-15" type="password" />
+          </Box>
+
+          <Box className="button-box">
+            <Button type="button" className="button-text">
+              다음
+            </Button>
+          </Box>
         </div>
       </div>
     </div>

@@ -2,9 +2,8 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    jest: true,
   },
-  extends: ['airbnb', 'plugin:react/recommended', 'plugin:react/jsx-runtime'],
+  extends: ['airbnb', 'plugin:react/recommended', 'plugin:react/jsx-runtime', 'plugin:prettier/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -23,12 +22,15 @@ module.exports = {
   },
   rules: {
     indent: 0,
+    curly: 'error',
     '@typescript-eslint/indent': ['error', 2],
+    'react/require-default-props': 'off',
+    'react/button-has-type': 'off',
     'max-depth': ['error', 1],
     'no-restricted-exports': 'off',
     'no-trailing-spaces': 'error',
-    curly: 'error',
     'brace-style': 'error',
+    'react/jsx-props-no-spreading': 'off',
     'no-multi-spaces': 'error',
     'space-infix-ops': 'error',
     'space-unary-ops': 'error',

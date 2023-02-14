@@ -11,6 +11,10 @@
   align-items: center;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }

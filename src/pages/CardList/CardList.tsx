@@ -30,7 +30,9 @@ export default function CardList() {
           <span className="card-nickname">법인카드</span>
           <div className="card-box">
             <div className="empty-card">
-              <Link to="/card-add">+</Link>
+              <Link className="w-25 text-center" to="/card-add">
+                +
+              </Link>
             </div>
           </div>
         </div>
