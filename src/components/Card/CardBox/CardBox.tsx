@@ -1,12 +1,15 @@
+import { CARD_EXPIRATION } from '@/constants/Card';
 import { isShowHyphen, maskingNumber } from '@/domain/Card';
-import { CardNumber } from '@/types/Card';
+import { CardExpiration, CardNumber } from '@/types/Card';
 
 type CardBoxProps = {
   cardNumber: CardNumber;
+  cardExpiration: CardExpiration;
 };
 
-export default function CardBox({ cardNumber }: CardBoxProps) {
+export default function CardBox({ cardNumber, cardExpiration }: CardBoxProps) {
   const { num1, num2, num3, num4 } = cardNumber;
+  const { month, year } = cardExpiration;
 
   return (
     <div className="card-box">
@@ -30,7 +33,9 @@ export default function CardBox({ cardNumber }: CardBoxProps) {
         <div className="card-bottom">
           <div className="card-bottom__info">
             <span className="card-text">NAME</span>
-            <span className="card-text">MM / YY</span>
+            <span className="card-text">
+              {month || CARD_EXPIRATION.PLACEHOLDER.MONTH} / {year || CARD_EXPIRATION.PLACEHOLDER.YEAR}
+            </span>
           </div>
         </div>
       </div>

@@ -4,3 +4,8 @@ export type CardNumber = {
   num3: string;
   num4: string;
 };
+
+export type CardExpiration = {
+  month: string;
+  year: string;
+};

@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 
-import { isValidCardNumber } from '@/domain/Card';
+import { isNumber } from '@/utils';
 
 export default function useCardNumber() {
   const [cardNumber, setCardNumber] = useState({
@@ -13,7 +13,7 @@ export default function useCardNumber() {
   const handleChangeCardNumber = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    if (!isValidCardNumber(value)) return;
+    if (!isNumber(value) && value !== '') return;
 
     setCardNumber((prev) => ({
       ...prev,

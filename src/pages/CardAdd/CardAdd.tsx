@@ -4,9 +4,12 @@ import { Input, Box, Button } from '@/components/Common';
 import { CardBox, CardNumberInput } from '@/components/Card';
 
 import useCardNumber from '@/hooks/useCardNumber';
+import CardExpirationInput from '@/components/Card/CardExpirationInput';
+import useCardExpiration from '@/hooks/useCardExpiration';
 
 export default function CardAdd() {
   const { cardNumber, handleChangeCardNumber } = useCardNumber();
+  const { cardExpiration, handleChangeExpiration } = useCardExpiration();
 
   return (
     <div>
@@ -16,14 +19,11 @@ export default function CardAdd() {
             <Link to="/">&lt;</Link>
             <div className="ml-5">카드 추가</div>
           </h2>
-          <CardBox cardNumber={cardNumber} />
+          <CardBox cardNumber={cardNumber} cardExpiration={cardExpiration} />
 
           <CardNumberInput cardNumber={cardNumber} onChange={handleChangeCardNumber} />
 
-          <Box title="만료일" className="input-container">
-            <Input className="input-basic w-25" type="text" placeholder="MM" />
-            <Input className="input-basic w-25" type="text" placeholder="YY" />
-          </Box>
+          <CardExpirationInput cardExpiration={cardExpiration} onChange={handleChangeExpiration} />
 
           <Box title="카드 소유자 이름(선택)" className="input-container">
             <Input type="text" className="input-basic" placeholder="카드에 표시된 이름과 동일하게 입력하세요." />
