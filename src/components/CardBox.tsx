@@ -1,18 +1,36 @@
-export default function CardBox() {
+interface Props {
+  cardCompany?: string;
+  cardNumber?: string;
+  userName?: string;
+  expiredDate?: string;
+  type?: 'empty' | 'small' | 'big';
+}
+
+const config = {
+  type: {
+    'empty': 'empty-card',
+    'small': 'small-card',
+    'big': 'big-card',
+  }
+};
+
+export default function CardBox({ cardCompany, cardNumber, userName, expiredDate, type }: Props) {
   return (
     <div className="card-box">
-      <div className="empty-card">
-        <div className="card-top"></div>
+      <div className={config.type[type] || config.type.empty}>
+        <div className="card-top">
+          <span className="card-text">{cardCompany}</span>
+        </div>
         <div className="card-middle">
           <div className="small-card__chip"></div>
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">1111 - 2222 - oooo - oooo</span>
+            <span className="card-text">{cardNumber}</span>
           </div>
           <div className="card-bottom__info">
-            <span className="card-text">NAME</span>
-            <span className="card-text">MM / YY</span>
+            <span className="card-text">{userName}</span>
+            <span className="card-text">{expiredDate}</span>
           </div>
         </div>
       </div>
