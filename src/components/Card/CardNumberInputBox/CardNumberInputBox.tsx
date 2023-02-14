@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useRef } from 'react';
 
 import { Box, Input } from '@/components/Common';
-import { CardNumber } from '@/types/Card';
+import { CardNumber } from '@/types/card';
 import { CARD_NUMBER } from '@/constants/card';
 
 type CardNumberInputProps = {

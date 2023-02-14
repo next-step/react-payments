@@ -1,6 +1,6 @@
 import { CARD_EXPIRATION, CARD_OWNER_NAME } from '@/constants/card';
 import { isShowHyphen, maskingNumber } from '@/domain/card';
-import { CardExpiration, CardNumber, CardOwnerName } from '@/types/Card';
+import { CardExpiration, CardNumber, CardOwnerName } from '@/types/card';
 
 type CardBoxProps = {
   cardNumber: CardNumber;

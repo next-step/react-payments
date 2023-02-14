@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 
 import { Box, Input } from '@/components/Common';
-import { CardOwnerName } from '@/types/Card';
+import { CardOwnerName } from '@/types/card';
 import { CARD_OWNER_NAME } from '@/constants/card';
 
 type CardOwnerNameInputBoxProps = {

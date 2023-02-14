@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 
 import { Box, Input } from '@/components/Common';
-import { CardExpiration } from '@/types/Card';
+import { CardExpiration } from '@/types/card';
 import { CARD_EXPIRATION } from '@/constants/card';
 
 type CardExpirationInputTypes = {
