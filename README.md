@@ -50,7 +50,7 @@
 - 보유 카드 리스트에서 +를 클릭해서 카드를 생성하는 페이지로 넘어갈 때 +의 영역을 텍스트가 차지하는 것보다 크게 주어 정확히 클릭하지 않아도 이동할 수 있게 했다.
 - Input과 Button들을 자식으로 하는 스타일링 용도의 컨테이너가 하나 있으면 좋을 것 같다는 생각이 들었다. 그래서 Box 컴포넌트를 만들었다.
 - CardBox 컴포넌트와 CardNumberInput 컴포넌트가 동일한 상태가 필요하여 그들의 부모인 CardAdd 컴포넌트에서 상태를 선언하고 props로 내려주었다.
-- CardBox 컴포넌트 내부의 JSX도 컴포넌트로 빼보면 좋을 것 같은데 아직은 빼MAX_LIMIT지는 않았다.
+- CardBox 컴포넌트 내부의 JSX도 컴포넌트로 빼보면 좋을 것 같은데 아직은 빼지는 않았다.
 - CardBox 컴포넌트서 카드 번호를 4개 입력하면 하이푼을 보여주는 이 로직도 `{isShowHyphen(num1, num2) && <span>-</span>}` renderHyphen(num1, num2) 이렇게 한번 더 분리할까 싶다.
 - 카드 추가 페이지에 처음 들어갔을 때 카드번호에 focus가 가는게 UI/UX적으로 좋은게 맞나?
 - input 검증을 JS 로직으로 하지 않고 input의 attribute인 pattern과 maxLength로 하려고 했는데 절반만 되길래... 일부는 JS 로직을 이용했다.
