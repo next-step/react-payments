@@ -142,3 +142,10 @@
   vertical-align: middle;
   font-weight: 400;
 }
+
+.card-text__ellipsis {
+  width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

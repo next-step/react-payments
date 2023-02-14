@@ -1,4 +1,4 @@
-import { CardList, CardAdd } from '@/pages';
+import { CardList, CardAdd, CardCompleted } from '@/pages';
 
 const routes = [
   {
@@ -8,6 +8,10 @@ const routes = [
   {
     path: 'card-add',
     element: <CardAdd />,
+  },
+  {
+    path: 'card-completed',
+    element: <CardCompleted />,
   },
 ];
 

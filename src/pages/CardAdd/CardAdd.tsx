@@ -10,11 +10,12 @@ import {
   CardOwnerNameInputBox,
 } from '@/components/Card';
 
-import { useCardNumber, useCardExpiration } from '@/hooks/card';
+import { useCardNumber, useCardExpiration, useCardOwnerName } from '@/hooks/card';
 
 export default function CardAdd() {
   const { cardNumber, handleChangeCardNumber } = useCardNumber();
   const { cardExpiration, handleChangeExpiration } = useCardExpiration();
+  const { cardOwnerName, handleChangeCardOwnerName } = useCardOwnerName();
 
   return (
     <div>
@@ -24,22 +25,24 @@ export default function CardAdd() {
             <Link to="/">&lt;</Link>
             <div className="ml-5">카드 추가</div>
           </h2>
-          <CardBox cardNumber={cardNumber} cardExpiration={cardExpiration} />
+          <CardBox cardNumber={cardNumber} cardExpiration={cardExpiration} cardOwnerName={cardOwnerName} />
 
           <CardNumberInputBox cardNumber={cardNumber} onChange={handleChangeCardNumber} />
 
           <CardExpirationInputBox cardExpiration={cardExpiration} onChange={handleChangeExpiration} />
 
-          <CardOwnerNameInputBox />
+          <CardOwnerNameInputBox cardOwnerName={cardOwnerName} onChange={handleChangeCardOwnerName} />
 
           <CardSecretCodeInputBox />
 
           <CardPasswordInputBox />
 
           <Box className="button-box">
-            <Button type="button" className="button-text">
-              다음
-            </Button>
+            <Link to="/card-completed">
+              <Button type="button" className="button-text">
+                다음
+              </Button>
+            </Link>
           </Box>
         </div>
       </div>

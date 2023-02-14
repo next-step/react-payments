@@ -17,3 +17,8 @@ export const CARD_SECRET_CODE = {
 export const CARD_PASSWORD = {
   MAX_LENGTH: 1,
 };
+
+export const CARD_OWNER_NAME = {
+  MAX_LENGTH: 30,
+  PLACEHOLDER: 'NAME',
+};

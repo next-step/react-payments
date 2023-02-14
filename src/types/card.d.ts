@@ -9,3 +9,5 @@ export type CardExpiration = {
   month: string;
   year: string;
 };
+
+export type CardOwnerName = string;
