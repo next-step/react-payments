@@ -1,11 +1,12 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, memo } from 'react';
 
 interface Props {
   maxLength?: number;
   type?: string;
-  placeholder?: string;
   className?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  formatter?: (value: string) => string;
+  placeholder?: string;
 }
 
 const config = {
@@ -13,13 +14,26 @@ const config = {
   BASIC_CLASS: 'input-basic',
 };
 
-export default function BaseInput({ type, placeholder, className, ...props }: Props) {
+function BaseInput({ type, className, onChange, formatter, ...props }: Props) {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (formatter) {
+      e.target.value = formatter(e.target.value);
+      onChange?.(e);
+
+      return;
+    }
+
+    onChange?.(e);
+  };
+
   return (
     <input
       className={`${config.BASIC_CLASS} ${className}`}
-      placeholder={placeholder}
       type={type || config.BASIC_TYPE}
+      onChange={handleChange}
       {...props}
     />
   );
 }
+
+export default memo(BaseInput);

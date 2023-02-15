@@ -1,16 +1,25 @@
 import './styles/index.css';
 import { BaseInput, CardBox } from './components';
+import { useInput } from './hooks';
+import { Formatter } from './domain';
+
+const { formatCardNumber } = Formatter;
 
 function App() {
+  const cardNumber = useInput('');
+
   return (
     <div className="root">
       <div className="app">
         <h2 className="page-title">&lt; 카드 추가</h2>
-        <CardBox/>
+        <CardBox cardNumber={cardNumber.value}/>
         <div className="input-container">
           <span className="input-title">카드 번호</span>
           <div className="input-box">
-            <BaseInput/>
+            <BaseInput
+              {...cardNumber}
+              formatter={formatCardNumber}
+            />
           </div>
         </div>
         <div className="input-container">
