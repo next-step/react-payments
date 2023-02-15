@@ -9,7 +9,7 @@ export default function useInput<T>(initialState: T): ReturnObject<T> {
   const [state, setState] = useState(initialState);
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value as unknown as T;
+    const newValue = e.target.value as T;
     setState(newValue);
   }, []);
 

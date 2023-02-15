@@ -1,11 +1,10 @@
 export default class Formatter {
-  static formatCardNumber(cardNumber: string): string {
-    const splitCardNumber: string[] = cardNumber.match(/[0-9*]{1,4}/g);
+  static formatCardNumber(cardNumber: string[]): string {
+    return cardNumber.flatMap((item, index) => {
+      if (!item.length) return [];
 
-    if (!splitCardNumber) return '';
-    return splitCardNumber
-      .map((item, index) => (
-        index > 1 ? item.replace(/[0-9]/g, '*') : item
-      )).join('-');
+      if (index > 1) return item.replace(/[0-9]/g, '*');
+      return item;
+    }).join('-');
   }
 }
