@@ -5,7 +5,6 @@ interface Props {
   type?: string;
   className?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  formatter?: (value: string) => string;
   placeholder?: string;
 }
 
@@ -14,23 +13,11 @@ const config = {
   BASIC_CLASS: 'input-basic',
 };
 
-function BaseInput({ type, className, onChange, formatter, ...props }: Props) {
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (formatter) {
-      e.target.value = formatter(e.target.value);
-      onChange?.(e);
-
-      return;
-    }
-
-    onChange?.(e);
-  };
-
+function BaseInput({ type, className, ...props }: Props) {
   return (
     <input
       className={`${config.BASIC_CLASS} ${className}`}
       type={type || config.BASIC_TYPE}
-      onChange={handleChange}
       {...props}
     />
   );
