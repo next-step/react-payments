@@ -1,6 +1,6 @@
 interface Props {
   cardCompany?: string;
-  cardNumber?: string;
+  cardNumber?: number;
   userName?: string;
   expiredDate?: string;
   type?: 'empty' | 'small' | 'big';

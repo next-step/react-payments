@@ -1,20 +1,20 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 
-interface ReturnType<T> {
+interface ReturnObject<T> {
   value: T;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function useInput<T extends ReturnType<T>>(initialState: T | string): T {
+export default function useInput<T>(initialState: T): ReturnObject<T> {
   const [state, setState] = useState(initialState);
 
-  const onChange = useCallback(({ target }: ChangeEvent<HTMLInputElement>) => {
-    const newState = target.value;
-    setState(newState);
-  }, [state]);
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value as unknown as T;
+    setState(newValue);
+  }, []);
 
   return {
     value: state,
     onChange,
-  } as T;
+  };
 }
