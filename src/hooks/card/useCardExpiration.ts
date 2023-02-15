@@ -10,7 +10,6 @@ export default function useCardExpiration() {
 
   const handleChangeExpiration = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    console.log(value);
 
     if (!isNumber(value) && value !== '') return;
 
