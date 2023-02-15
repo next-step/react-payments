@@ -1,29 +1,55 @@
 import styled from "styled-components";
 
 type CardProps = {
-  title: string;
-  cardNumber: string;
-  name?: string;
-  expire?: string;
+  bankName?: string;
+  cardNumber?: string;
+  userName?: string;
+  expireMonth?: string;
+  expireYear?: string;
+  size?: "big" | "small";
 };
 
-function Card({ title, cardNumber, name, expire }: CardProps) {
+type WrapperProps = {
+  size?: "big" | "small";
+  isTyping?: boolean;
+};
+
+function Card({
+  bankName,
+  cardNumber,
+  userName,
+  expireMonth,
+  expireYear,
+  size = "small",
+}: CardProps) {
+  const isTyping =
+    cardNumber !== undefined &&
+    expireMonth !== undefined &&
+    expireYear !== undefined &&
+    userName !== undefined;
+
   return (
     <CardBox>
-      <CardWrapper>
+      <CardWrapper size={size} isTyping={isTyping}>
         <CardTop>
-          <CardText>{title}</CardText>
+          <CardText>{bankName}</CardText>
         </CardTop>
         <CardMiddle>
           <CardChip />
         </CardMiddle>
         <CardBottom>
-          <CardBottomNumber>
-            <CardText>{cardNumber}</CardText>
-          </CardBottomNumber>
+          {cardNumber ? (
+            <CardBottomNumber>
+              <CardText>{cardNumber}</CardText>
+            </CardBottomNumber>
+          ) : (
+            ""
+          )}
           <CardBottomInfo>
-            <CardText>{name}</CardText>
-            <CardText>{expire}</CardText>
+            <CardText>{userName ?? "NAME"}</CardText>
+            <CardText>
+              {expireMonth ?? "MM"} / {expireYear ?? "YY"}
+            </CardText>
           </CardBottomInfo>
         </CardBottom>
       </CardWrapper>
@@ -38,15 +64,16 @@ const CardBox = styled.div`
   margin: 10px 0;
 `;
 
-const CardWrapper = styled.div`
+const CardWrapper = styled.div<WrapperProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 290px;
-  height: 180px;
-  background: #94dacd;
+  width: ${(props) => (props.size === "big" ? "290px" : "208px")};
+  height: ${(props) => (props.size === "big" ? "180px" : "130px")};
+  background: ${(props) => (props.isTyping ? "#94dacd" : "#e5e5e5")};
   box-shadow: 3px 3px 5px rgb(0 0 0 / 25%);
+  color: ${(props) => (props.isTyping ? "black" : "#575757")};
   border-radius: 5px;
 `;
 

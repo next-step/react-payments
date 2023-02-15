@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 function Header() {
-  return <H2>카드 추가</H2>;
+  return <H2>&lt; 카드 추가</H2>;
 }
 
 const H2 = styled.h2`
@@ -12,3 +12,5 @@ const H2 = styled.h2`
   align-items: center;
   color: #383838;
 `;
+
+export default Header;
