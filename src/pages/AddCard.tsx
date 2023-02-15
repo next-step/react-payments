@@ -1,7 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+
 const AddCard = () => {
+  const navigate = useNavigate();
   return (
     <div className="app">
-      <h2 className="page-title">← 카드 추가</h2>
+      <h2 className="page-title">
+        <button className="button-prev" onClick={() => navigate('/card-list')}>
+          <PrevIcon />
+        </button>
+        카드 추가
+      </h2>
       <div className="card-box">
         <div className="empty-card">
           <div className="card-top"></div>
@@ -59,3 +67,21 @@ const AddCard = () => {
 };
 
 export default AddCard;
+
+const PrevIcon = () => {
+  return (
+    <svg
+      width="10"
+      height="17"
+      viewBox="0 0 10 17"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M8.30426 1L1.36476 8.78658L9.15134 15.7261"
+        stroke="#525252"
+        strokeWidth="1.5"
+      />
+    </svg>
+  );
+};

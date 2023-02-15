@@ -36,6 +36,7 @@ input {
   font-size: 20px;
   line-height: 22px;
   display: flex;
+  gap: 1rem;
   align-items: center;
 
   color: #383838;
