@@ -1,6 +1,5 @@
-import CardList from '@pages/CardList/CardList';
-import AddCard from '@pages/AddCard/AddCard';
-import Complete from '@pages/Complete/Complete';
+import { AddCard, CardList, Complete } from '@pages';
+
 import { createBrowserRouter } from 'react-router-dom';
 
 const ROUTERS = [
