@@ -3,10 +3,6 @@ import styled from "styled-components";
 import Footer from "./Footer";
 import Header from "./Header";
 
-type ComponentProps = {
-  children: JSX.Element | JSX.Element[];
-};
-
 function Layout({ children }: ComponentProps) {
   return (
     <Root>
@@ -18,6 +14,10 @@ function Layout({ children }: ComponentProps) {
     </Root>
   );
 }
+
+type ComponentProps = {
+  children: JSX.Element | JSX.Element[];
+};
 
 const Root = styled.div`
   background-color: #fff;

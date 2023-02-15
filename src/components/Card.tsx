@@ -1,19 +1,5 @@
 import styled from "styled-components";
 
-type CardProps = {
-  bankName?: string;
-  cardNumber?: string;
-  userName?: string;
-  expireMonth?: string;
-  expireYear?: string;
-  size?: "big" | "small";
-};
-
-type WrapperProps = {
-  size?: "big" | "small";
-  isTyping?: boolean;
-};
-
 function Card({
   bankName,
   cardNumber,
@@ -29,8 +15,8 @@ function Card({
     userName !== undefined;
 
   return (
-    <CardBox>
-      <CardWrapper size={size} isTyping={isTyping}>
+    <CardContainer>
+      <CardBox size={size} isTyping={isTyping}>
         <CardTop>
           <CardText>{bankName}</CardText>
         </CardTop>
@@ -50,19 +36,33 @@ function Card({
             </CardText>
           </CardBottomInfo>
         </CardBottom>
-      </CardWrapper>
-    </CardBox>
+      </CardBox>
+    </CardContainer>
   );
 }
 
-const CardBox = styled.div`
+type CardProps = {
+  bankName?: string;
+  cardNumber?: string;
+  userName?: string;
+  expireMonth?: string;
+  expireYear?: string;
+  size?: "big" | "small";
+};
+
+type WrapperProps = {
+  size?: "big" | "small";
+  isTyping?: boolean;
+};
+
+const CardContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 10px 0;
 `;
 
-const CardWrapper = styled.div<WrapperProps>`
+const CardBox = styled.div<WrapperProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
