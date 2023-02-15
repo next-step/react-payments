@@ -42,9 +42,7 @@ function Card({
             <CardBottomNumber>
               <CardText>{cardNumber}</CardText>
             </CardBottomNumber>
-          ) : (
-            ""
-          )}
+          ) : null}
           <CardBottomInfo>
             <CardText>{userName ?? "NAME"}</CardText>
             <CardText>
