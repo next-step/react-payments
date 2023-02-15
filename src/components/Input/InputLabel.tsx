@@ -1,8 +1,7 @@
-import React from "react";
 import styled from "styled-components";
 
 type ComponentProps = {
-  children: React.ReactChild;
+  children: string;
 };
 
 function InputLabel({ children }: ComponentProps) {

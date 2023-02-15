@@ -1,9 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import Footer from "./Footer";
 import Header from "./Header";
 
 type ComponentProps = {
-  children: React.ReactChild;
+  children: JSX.Element | JSX.Element[];
 };
 
 function Layout({ children }: ComponentProps) {
@@ -12,6 +13,7 @@ function Layout({ children }: ComponentProps) {
       <Wrapper>
         <Header />
         {children}
+        <Footer />
       </Wrapper>
     </Root>
   );

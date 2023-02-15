@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import List from "./routes/card/List";
 import Layout from "./components/Layout";
+import Add from "./routes/card/Add";
 
 function Router() {
   return (
@@ -8,7 +9,7 @@ function Router() {
       <Switch>
         <Route path="/add">
           <Layout>
-            <List></List>
+            <Add></Add>
           </Layout>
         </Route>
         <Route path="/list">
