@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
+function InputBox({ children, medium = false }: ComponentProps) {
+  return <Box medium={medium}>{children}</Box>;
+}
+
 type ComponentProps = {
   children: JSX.Element | JSX.Element[];
   medium?: boolean;
 };
-
-function InputBox({ children, medium = false }: ComponentProps) {
-  return <Box medium={medium}>{children}</Box>;
-}
 
 type BoxProps = {
   medium?: boolean;

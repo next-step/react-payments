@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-type ComponentProps = {
-  children: string;
-};
-
 function InputLabel({ children }: ComponentProps) {
   return <Label>{children}</Label>;
 }
+
+type ComponentProps = {
+  children: string;
+};
 
 const Label = styled.span`
   display: flex;
