@@ -2,7 +2,7 @@ import { AddCard, CardList, Complete } from '@pages';
 
 import { createBrowserRouter } from 'react-router-dom';
 
-const ROUTERS = [
+const routes = [
   {
     path: '/',
     element: <CardList />,
@@ -17,6 +17,6 @@ const ROUTERS = [
   },
 ];
 
-const router = createBrowserRouter(ROUTERS);
+const router = createBrowserRouter(routes);
 
 export default router;
