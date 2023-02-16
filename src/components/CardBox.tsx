@@ -1,4 +1,4 @@
-interface Props {
+export interface CardBoxType {
   cardCompany?: string;
   cardNumber?: string;
   userName?: string;
@@ -14,7 +14,7 @@ const config = {
   }
 };
 
-export default function CardBox({ cardCompany, cardNumber, userName, expiredDate, type }: Props) {
+export default function CardBox({ cardCompany, cardNumber, userName, expiredDate, type }: CardBoxType) {
   return (
     <div className="card-box">
       <div className={config.type[type] || config.type.empty}>

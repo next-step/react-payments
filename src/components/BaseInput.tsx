@@ -8,6 +8,7 @@ interface Props {
   placeholder?: string;
   value?: string | number;
   nextFocus?: HTMLInputElement;
+  name?: string;
 }
 
 const config = {

@@ -1,49 +1,63 @@
 import { BaseInput, CardBox } from './../components';
 import { useEffect, useRef } from 'react';
-import { useCard, useInput } from '../hooks';
+import { useCard, useForm } from '../hooks';
 
 export default function RegisterCard() {
-  const { cardState, setCardState } = useCard('');
+  const { cardState, setCardState } = useCard({
+    cardCompany: '',
+    cardNumber: '',
+    userName: '',
+    expiredDate: '',
+    type: 'small',
+  });
 
-  const cardNumber = {
-    first: useInput(''),
-    second: useInput(''),
-    third: useInput(''),
-    fourth: useInput(''),
-  };
+  const [cardNumber, setCardNumber] = useForm({
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+  });
 
-  const form = {
-    expiredDate: useInput(''),
-    expiredYear: useInput(''),
-  };
+  const [expired, setExpired] = useForm({
+    month: '',
+    year: '',
+  });
 
   const secondInput = useRef(null);
   const thirdInput = useRef(null);
   const fourthInput = useRef(null);
 
+  const expiredMonth = useRef(null);
   const expiredYear = useRef(null);
 
   useEffect(() => {
-    const newCardState = Object.values(cardNumber).map((item) => item.value);
+    const newCardNumber = Object.values(cardNumber).map((item) => item.value);
+    const newExpiredDate = Object.values(expired).map((item) => item.value);
 
-    setCardState(newCardState);
-  }, [cardNumber]);
+    setCardState({
+      ...cardState,
+      expiredDate: newExpiredDate.join(''),
+      cardNumber: newCardNumber,
+    });
+  }, [cardNumber, expired]);
 
   return (
     <div className="app">
       <h2 className="page-title">&lt; 카드 추가</h2>
-      <CardBox cardNumber={cardState}/>
+      <CardBox {...cardState} />
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
           <BaseInput
             {...cardNumber.first}
+            onChange={setCardNumber}
             maxLength={4}
             nextFocus={secondInput.current}
           />
           -
           <BaseInput
             {...cardNumber.second}
+            onChange={setCardNumber}
             ref={secondInput}
             maxLength={4}
             nextFocus={thirdInput.current}
@@ -51,6 +65,7 @@ export default function RegisterCard() {
           -
           <BaseInput
             {...cardNumber.third}
+            onChange={setCardNumber}
             ref={thirdInput}
             type="password"
             maxLength={4}
@@ -59,9 +74,11 @@ export default function RegisterCard() {
           -
           <BaseInput
             {...cardNumber.fourth}
+            onChange={setCardNumber}
             ref={fourthInput}
             type="password"
             maxLength={4}
+            nextFocus={expiredMonth.current}
           />
         </div>
       </div>
@@ -69,17 +86,20 @@ export default function RegisterCard() {
         <span className="input-title">만료일</span>
         <div className="input-box w-50">
           <BaseInput
+            ref={expiredMonth}
             placeholder="MM"
             nextFocus={expiredYear.current}
             maxLength={2}
-            {...form.expiredDate}
+            {...expired.month}
+            onChange={setExpired}
           />
           /
           <BaseInput
             ref={expiredYear}
             placeholder="YY"
             maxLength={2}
-            {...form.expiredYear}
+            {...expired.year}
+            onChange={setExpired}
           />
         </div>
       </div>
