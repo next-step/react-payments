@@ -11,11 +11,11 @@ const CardNumbersInput = () => {
   };
 
   return (
-    <div class="input-container">
-      <span class="input-title">카드 번호</span>
-      <div class="input-box">
+    <div className="input-container">
+      <span className="input-title">카드 번호</span>
+      <div className="input-box">
         <input
-          class="input-basic"
+          className="input-basic"
           type="text"
           value={cardNumbers[0]}
           onChange={setCardNumberByIndex(0)}
@@ -23,7 +23,7 @@ const CardNumbersInput = () => {
         />
         -
         <input
-          class="input-basic"
+          className="input-basic"
           type="text"
           value={cardNumbers[1]}
           onChange={setCardNumberByIndex(1)}
@@ -31,7 +31,7 @@ const CardNumbersInput = () => {
         />
         -
         <input
-          class="input-basic"
+          className="input-basic"
           type="password"
           value={cardNumbers[2]}
           onChange={setCardNumberByIndex(2)}
@@ -39,7 +39,7 @@ const CardNumbersInput = () => {
         />
         -
         <input
-          class="input-basic"
+          className="input-basic"
           type="password"
           value={cardNumbers[3]}
           onChange={setCardNumberByIndex(3)}
