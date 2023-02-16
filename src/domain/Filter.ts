@@ -1,4 +1,4 @@
-export default class Formatter {
+export default class Filter {
   static cardNumber(cardNumber: string[]): string {
     return cardNumber.flatMap((item, index) => {
       if (!item.length) return [];

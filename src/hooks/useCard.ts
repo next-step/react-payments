@@ -1,13 +1,13 @@
 import { useCallback, useState } from 'react';
-import { Formatter } from '../domain';
+import { Filter } from '../domain';
 import { CardBoxType } from '../components/CardBox';
 
 export default function useCard(initialState: CardBoxType) {
   const [cardState, setState] = useState(initialState);
 
   const setCardState = useCallback((newState) => {
-    const cardNumber = Formatter.cardNumber(newState.cardNumber);
-    const expiredDate = Formatter.expiredDate(newState.expiredDate);
+    const cardNumber = Filter.cardNumber(newState.cardNumber);
+    const expiredDate = Filter.expiredDate(newState.expiredDate);
 
     setState({
       ...cardState,

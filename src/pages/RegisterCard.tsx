@@ -1,9 +1,9 @@
 import { BaseInput, CardBox } from './../components';
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useCard, useForm } from '../hooks';
-import { Formatter } from '../domain';
+import { Filter } from '../domain';
 
-const { onlyNumber } = Formatter;
+const { onlyNumber } = Filter;
 
 export default function RegisterCard() {
   const { cardState, setCardState } = useCard({
@@ -30,16 +30,20 @@ export default function RegisterCard() {
   const thirdInput = useRef(null);
   const fourthInput = useRef(null);
 
-  const expiredMonth = useRef(null);
-  const expiredYear = useRef(null);
+  const expiredMonthInput = useRef(null);
+  const expiredYearInput = useRef(null);
+
+  const cvcInput = useRef(null);
+  const passwordInput = useRef();
+  const passwordInput2 = useRef();
+
+  const newCardNumber = useMemo(() => Object.values(cardNumber).map((item) => item.value), [cardNumber]);
+  const newExpiredDate = useMemo(() => Object.values(expired).map((item) => item.value).join(''), [expired]);
 
   useEffect(() => {
-    const newCardNumber = Object.values(cardNumber).map((item) => item.value);
-    const newExpiredDate = Object.values(expired).map((item) => item.value);
-
     setCardState({
       ...cardState,
-      expiredDate: newExpiredDate.join(''),
+      expiredDate: newExpiredDate,
       cardNumber: newCardNumber,
     });
   }, [cardNumber, expired]);
@@ -82,9 +86,9 @@ export default function RegisterCard() {
             {...cardNumber.fourth}
             onChange={setCardNumber}
             ref={fourthInput}
-            type="password"
+            type="passwordInput"
             maxLength={4}
-            nextFocus={expiredMonth.current}
+            nextFocus={expiredMonthInput.current}
             filter={onlyNumber}
           />
         </div>
@@ -93,9 +97,9 @@ export default function RegisterCard() {
         <span className="input-title">만료일</span>
         <div className="input-box w-50">
           <BaseInput
-            ref={expiredMonth}
+            ref={expiredMonthInput}
             placeholder="MM"
-            nextFocus={expiredYear.current}
+            nextFocus={expiredYearInput.current}
             maxLength={2}
             {...expired.month}
             onChange={setExpired}
@@ -103,7 +107,7 @@ export default function RegisterCard() {
           />
           /
           <BaseInput
-            ref={expiredYear}
+            ref={expiredYearInput}
             placeholder="YY"
             maxLength={2}
             {...expired.year}
@@ -114,17 +118,42 @@ export default function RegisterCard() {
       </div>
       <div className="input-container">
         <span className="input-title">카드 소유자 이름(선택)</span>
-        <BaseInput placeholder="카드에 표시된 이름과 동일하게 입력하세요."/>
+        <BaseInput
+          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          nextFocus={cvcInput.current}
+          maxLength={30}
+        />
       </div>
       <div className="input-container">
         <span className="input-title">보안코드(CVC/CVV)</span>
-        <BaseInput type="password" className="w-25"/>
+        <BaseInput
+          type="password"
+          className="w-25"
+          maxLength={3}
+          filter={onlyNumber}
+          ref={cvcInput}
+          nextFocus={passwordInput.current}
+        />
       </div>
       <div className="input-container">
         <span className="input-title">카드 비밀번호</span>
         <div className="flex-start">
-          <BaseInput type="password" className="w-15"/>
-          <BaseInput type="password" className="w-15"/>
+          <BaseInput
+            type="password"
+            filter={onlyNumber}
+            maxLength={1}
+            className="w-15"
+            ref={passwordInput}
+            nextFocus={passwordInput2.current}
+
+          />
+          <BaseInput
+            ref={passwordInput2}
+            type="password"
+            filter={onlyNumber}
+            maxLength={1}
+            className="w-15"
+          />
           <p className="flex-center w-15">•</p>
           <p className="flex-center w-15">•</p>
         </div>

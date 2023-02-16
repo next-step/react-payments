@@ -17,15 +17,16 @@ const config = {
   BASIC_CLASS: 'input-basic',
 };
 
-const BaseInput = forwardRef(({
-                                type,
-                                className,
-                                onChange,
-                                maxLength,
-                                nextFocus,
-                                filter,
-                                ...props
-                              }: Props, inputRef) => {
+const BaseInput = forwardRef((
+  {
+    type,
+    className,
+    onChange,
+    maxLength,
+    nextFocus,
+    filter,
+    ...props
+  }: Props, inputRef) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (filter) e.target.value = filter(e.target.value);
     const value = e.target.value;
