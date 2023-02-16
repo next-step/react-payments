@@ -11,6 +11,9 @@
   align-items: center;
 }
 
+.ml-10 {
+  margin-left: 2.5rem;
+}
 .mr-10 {
   margin-right: 2.5rem;
 }

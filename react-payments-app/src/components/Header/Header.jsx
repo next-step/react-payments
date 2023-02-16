@@ -1,10 +1,11 @@
 const Header = ({ pageTitle, headerIcon }) => {
   return (
-    <div className="flex-center">
-      <h2 class="page-title">
-        {headerIcon} {pageTitle}
-      </h2>
-    </div>
+    <>
+      <div id="header" className="page-title mb-10">
+        <div>{headerIcon}</div>
+        <div className="ml-10">{pageTitle}</div>
+      </div>
+    </>
   );
 };
 
