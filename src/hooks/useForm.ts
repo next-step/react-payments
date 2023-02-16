@@ -13,22 +13,17 @@ interface FormChangeHandler {
 }
 
 export default function useForm<T>(initialState: FormState<T>): [StateType<T>, FormChangeHandler] {
-  const refactorState = {};
-
-  Object.keys(initialState).forEach((key) => {
-    refactorState[key] = {
-      name: key,
-      value: initialState[key],
-    };
-  });
-
-  const [formState, setState] = useState(refactorState);
+  const [formState, setState] = useState(Object.fromEntries(
+    Object.entries(initialState).map(([key, value]) => [
+      key, { name: key, value },
+    ])
+  ));
 
   const handleChange: FormChangeHandler = useCallback((e) => {
     const { name, value } = e.target;
     const newFormState = Object.freeze(formState);
 
-    newFormState[name].value = value;
+    newFormState[name].value = value as T;
     setState({ ...newFormState });
   }, []);
 
