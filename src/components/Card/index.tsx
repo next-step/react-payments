@@ -7,44 +7,50 @@ type CardProps = {
   size: CardSizeType;
 };
 type fontSizeType = "xs" | "s" | "m" | "lg";
-
 type CardThemeType = "empty" | "primary" | "add";
 type CardSizeType = "small" | "big";
 const Card = ({ fontSize, theme, size }: CardProps) => {
   return (
-    <Layout theme={theme} size={size}>
-      <Top>
-        <Text fontSize={fontSize} weight="normal"></Text>
-      </Top>
-      {theme === "add" ? (
-        <Middle theme="add">
-          <Add>+</Add>
-        </Middle>
-      ) : (
-        <Middle>
-          <Chip />
-        </Middle>
-      )}
-      <Bottom>
-        <NumberBox>
+    <>
+      <CardLayout theme={theme} size={size}>
+        <Top>
           <Text fontSize={fontSize} weight="normal"></Text>
-        </NumberBox>
-        <InfoBox>
-          <Text fontSize={fontSize} weight="normal"></Text>
-          <Text fontSize={fontSize} weight="normal"></Text>
-        </InfoBox>
-      </Bottom>
-    </Layout>
+        </Top>
+        {theme === "add" ? (
+          <Middle theme="add">
+            <Add>+</Add>
+          </Middle>
+        ) : (
+          <Middle>
+            <Chip />
+          </Middle>
+        )}
+        <Bottom>
+          <NumberWrapper>
+            <Text fontSize={fontSize} weight="normal"></Text>
+          </NumberWrapper>
+          <InfoContainer>
+            <Text fontSize={fontSize} weight="normal"></Text>
+            <Text fontSize={fontSize} weight="normal"></Text>
+          </InfoContainer>
+        </Bottom>
+      </CardLayout>
+      <CardNameWrapper>
+        <Text fontSize="m" weight="normal">
+          법인카드
+        </Text>
+      </CardNameWrapper>
+    </>
   );
 };
 export default Card;
 
-type LayoutProps = {
+type CardLayoutProps = {
   theme: CardThemeType;
   size: CardSizeType;
 };
 
-const Layout = styled.div<LayoutProps>`
+const CardLayout = styled.div<CardLayoutProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -100,7 +106,7 @@ const Bottom = styled.div`
   height: 100%;
 `;
 
-const NumberBox = styled.div`
+const NumberWrapper = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -108,13 +114,19 @@ const NumberBox = styled.div`
   height: 100%;
   justify-content: center;
 `;
-const InfoBox = styled.div`
+const InfoContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   width: 100%;
   height: 100%;
   justify-content: space-between;
+`;
+
+const CardNameWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 const Chip = styled.div`
   width: 40px;

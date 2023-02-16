@@ -10,8 +10,8 @@ const CompletePage = () => {
           보유 카드
         </Text>
         <CardContainer>
-          {/* <Card fontSize="s" theme="primary" size="small" />
-          <Card fontSize="s" theme="primary" size="small" /> */}
+          <Card fontSize="s" theme="primary" size="small" />
+          <Card fontSize="s" theme="primary" size="small" />
           <Card fontSize="s" theme="add" size="small" />
         </CardContainer>
       </Container>
