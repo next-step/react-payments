@@ -1,10 +1,10 @@
-import React, { ReactNode, InputHTMLAttributes } from "react";
+import React, { InputHTMLAttributes, ReactNode } from "react";
 
 import {
-  InputEl,
-  InputWrapper,
-  InputLabel,
   InputContainer,
+  InputEl,
+  InputLabel,
+  InputWrapper,
 } from "./input.style";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {

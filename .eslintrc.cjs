@@ -18,4 +18,9 @@ module.exports = {
   ],
   plugins: ["@typescript-eslint", "react", "simple-import-sort"],
   ignorePatterns: ["!.storybook"],
+
+  rules: {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+  },
 };
