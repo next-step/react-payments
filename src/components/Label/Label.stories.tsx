@@ -14,7 +14,7 @@ const Template: ComponentStory<typeof Label> = (args) => <Label {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  label: '카드번호',
+  labelText: '카드번호',
   children: (
     <input
       type="text"
@@ -27,7 +27,7 @@ Default.args = {
 export const WithLimit = Template.bind({});
 
 WithLimit.args = {
-  label: '카드번호',
+  labelText: '카드번호',
   textLimit: 30,
   textLength: 10,
   children: (
