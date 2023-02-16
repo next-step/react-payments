@@ -23,7 +23,7 @@ const AddPage = () => {
       </Modal>
       <Layout>
         <TextWrapper>
-          <Text fontSize="page-title" weight="bold">
+          <Text fontSize="xs" weight="bold">
             카드추가
           </Text>
         </TextWrapper>

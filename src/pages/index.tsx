@@ -8,7 +8,7 @@ function App() {
   return (
     <Layout>
       <GlobalStyle />
-      <AddPage />
+      <CompletedPage />
     </Layout>
   );
 }

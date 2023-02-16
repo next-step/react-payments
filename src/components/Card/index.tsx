@@ -6,7 +6,7 @@ type CardProps = {
   theme: CardThemeType;
   size: CardSizeType;
 };
-type fontSizeType = "s" | "m";
+type fontSizeType = "xs" | "s" | "m" | "lg";
 
 type CardThemeType = "empty" | "primary" | "add";
 type CardSizeType = "small" | "big";

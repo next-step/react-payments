@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import Card from "components/Card";
 import Text from "components/Text";
-import Input from "components/Input/Item";
+import Input from "components/Form/Input/Item";
 import Button from "components/Button/index";
 
 const CompletedPage = () => {
   return (
     <Layout>
       <TextWrapper>
-        <Text fontSize="page-title" weight="bold">
+        <Text fontSize="lg" weight="bold">
           카드 등록이 완료되었습니다.
         </Text>
       </TextWrapper>

@@ -15,7 +15,7 @@ const Text = ({ fontSize, weight, children }: TextProps) => {
 };
 
 // size가 s일떄 특정 css 적용 , l일떄 특정 css 적용하게 구현
-type fontSizeType = "s" | "m" | "page-title" | "input-title";
+type fontSizeType = "xs" | "s" | "m" | "lg";
 type WeightType = "normal" | "bold";
 type LayoutProps = {
   fontSize: fontSizeType;
@@ -35,7 +35,7 @@ const Layout = styled.span<LayoutProps>`
           font-size: 18px;
           line-height: 20px;
         `
-      : fontSize === "page-title"
+      : fontSize === "lg"
       ? css`
           font-size: 20px;
           line-height: 22px;

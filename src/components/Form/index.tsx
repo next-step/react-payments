@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import Card from "components/Card";
 import Text from "components/Text";
-import InputContainer from "components/Input/Container";
-import Input from "components/Input/Item";
+import InputContainer from "components/Form/Input/Container";
+import Input from "components/Form/Input/Item";
 import Button from "../Button/index";
 
 export const Form = () => {
@@ -12,7 +12,7 @@ export const Form = () => {
         <Card fontSize="s" theme="empty" size="small" />
       </CardWrapper>
       <InputLayout>
-        <InputTitle fontSize="input-title" weight="normal">
+        <InputTitle fontSize="xs" weight="normal">
           카드 번호
         </InputTitle>
         <InputContainer>
@@ -23,7 +23,7 @@ export const Form = () => {
         </InputContainer>
       </InputLayout>
       <InputLayout>
-        <InputTitle fontSize="input-title" weight="normal">
+        <InputTitle fontSize="xs" weight="normal">
           만료일
         </InputTitle>
         <InputContainer width={50}>
@@ -32,13 +32,13 @@ export const Form = () => {
         </InputContainer>
       </InputLayout>
       <InputLayout>
-        <InputTitle fontSize="input-title" weight="normal">
+        <InputTitle fontSize="xs" weight="normal">
           카드 소유자 이름(선택)
         </InputTitle>
         <Input type="text" theme="primary" placeholder="카드에 표시된 이름과 동일하게 입력하세요." />
       </InputLayout>
       <InputLayout>
-        <InputTitle fontSize="input-title" weight="normal">
+        <InputTitle fontSize="xs" weight="normal">
           보안코드 (CVC/CVV)
         </InputTitle>
         <InputContainer width={25}>
@@ -46,7 +46,7 @@ export const Form = () => {
         </InputContainer>
       </InputLayout>
       <InputLayout>
-        <InputTitle fontSize="input-title" weight="normal">
+        <InputTitle fontSize="xs" weight="normal">
           카드 비밀번호
         </InputTitle>
         <InputContainer width={70}>

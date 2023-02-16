@@ -6,7 +6,7 @@ const CompletePage = () => {
   return (
     <Layout>
       <Container>
-        <Text fontSize="page-title" weight="bold">
+        <Text fontSize="lg" weight="bold">
           보유 카드
         </Text>
         <CardContainer>
