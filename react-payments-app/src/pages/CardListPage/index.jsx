@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
-import CardShapedButton from "../../components/Card/CardShapedButton/card";
+import CardShapedButton from "../../components/Card/CardShapedButton/Card";
 
 const CardListPage = () => {
   return (
@@ -13,7 +13,6 @@ const CardListPage = () => {
         expirationDate={"12/34"}
         cardName={"현정카드"}
         cardNumbers={"1234-5678-****-****"}
-        cardNickname={"생활비카드"}
       />
       <CardShapedButton />
     </div>
