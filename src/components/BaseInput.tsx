@@ -19,10 +19,8 @@ const config = {
 const BaseInput = forwardRef(({ type, className = '', onChange, maxLength, nextFocus, ...props }: Props, inputRef) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    console.log('asd');
 
     if (maxLength && value.length === maxLength) {
-      console.log('aa');
       nextFocus && nextFocus.focus();
     }
     onChange?.(e);
