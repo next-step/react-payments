@@ -4,6 +4,7 @@ import CardExpiration from '../components/CardExpiration';
 import CardNumberInput from '../components/CardNumberInput';
 import CardPassword from '../components/CardPassword';
 import '../styles/index.css';
+import CardholderName from '../components/CardholderName';
 
 const AddCard = () => {
   const [state, setState] = useState({
@@ -66,11 +67,7 @@ const AddCard = () => {
           </div>
           <CardNumberInput numbers={state} onChange={getCardNumber} />
           <CardExpiration expiration={expiration} onChange={getExpirationMonth} />
-
-          <div className="input-container">
-            <span className="input-title">카드 소유자 이름(선택)</span>
-            <input type="text" className="input-basic" placeholder="카드에 표시된 이름과 동일하게 입력하세요." />
-          </div>
+          <CardholderName />
           <CardSecurityCode security={security} onChange={getSecurity} />
           <CardPassword cardPassword={cardPassword} onChange={getCardPassword} />
           <div className="button-box">
