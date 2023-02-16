@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { onNumericKeyDownOnly } from '../../domain/payments/listeners';
 import { replaceNumberOnly } from '../../util/number';
+import '../../styles/input.css';
 
 type TCardNumberInputProps = {
   onCardNumberChange?: (cardNumbers: string[]) => void;

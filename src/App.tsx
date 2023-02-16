@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card } from './components/Card';
 import { CardNumberInput } from './components/CardNumberInput';
-import CVCInput from './components/CVCInput/CVCInput';
+import { CvcInput } from './components/CvcInput';
 import { ExpiredInput } from './components/ExpiredInput';
 import { Frame } from './components/Frame';
 import { OwnerInput } from './components/OwnerInput';
@@ -39,7 +39,7 @@ function App() {
       <CardNumberInput onCardNumberChange={handleCardNumberChange} />
       <ExpiredInput onExpiredChange={handleExpiredChange} />
       <OwnerInput onOwnerChanged={handleOwnerChange} />
-      <CVCInput onCvcChange={handleCvcChange} />
+      <CvcInput onCvcChange={handleCvcChange} />
       <PasswordInput />
     </Frame>
   );

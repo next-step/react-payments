@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { onNumericKeyDownOnly } from '../../domain/payments/listeners';
+import '../../styles/input.css';
 
 const PASSWORD_LENGTH = 4;
 const INPUTABLE_PASSWORD_LENGTH = 2;

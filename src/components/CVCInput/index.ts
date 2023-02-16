@@ -1,1 +1,1 @@
-export { default as CVCInput } from './CVCInput';
+export { default as CvcInput } from './CvcInput';
