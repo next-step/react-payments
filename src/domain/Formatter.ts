@@ -1,5 +1,5 @@
 export default class Formatter {
-  static formatCardNumber(cardNumber: string[]): string {
+  static cardNumber(cardNumber: string[]): string {
     return cardNumber.flatMap((item, index) => {
       if (!item.length) return [];
 
@@ -8,7 +8,11 @@ export default class Formatter {
     }).join('-');
   }
 
-  static formatExpiredDate(expiredDate: string): string {
+  static expiredDate(expiredDate: string): string {
     return expiredDate.match(/[0-9]{1,2}/g)?.join('/');
+  }
+
+  static onlyNumber(text: string): string {
+    return text.replace(/[^0-9]/g, '');
   }
 }

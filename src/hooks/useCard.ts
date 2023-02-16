@@ -6,8 +6,8 @@ export default function useCard(initialState: CardBoxType) {
   const [cardState, setState] = useState(initialState);
 
   const setCardState = useCallback((newState) => {
-    const cardNumber = Formatter.formatCardNumber(newState.cardNumber);
-    const expiredDate = Formatter.formatExpiredDate(newState.expiredDate);
+    const cardNumber = Formatter.cardNumber(newState.cardNumber);
+    const expiredDate = Formatter.expiredDate(newState.expiredDate);
 
     setState({
       ...cardState,

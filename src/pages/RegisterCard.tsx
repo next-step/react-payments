@@ -1,6 +1,9 @@
 import { BaseInput, CardBox } from './../components';
 import { useEffect, useRef } from 'react';
 import { useCard, useForm } from '../hooks';
+import { Formatter } from '../domain';
+
+const { onlyNumber } = Formatter;
 
 export default function RegisterCard() {
   const { cardState, setCardState } = useCard({
@@ -53,6 +56,7 @@ export default function RegisterCard() {
             onChange={setCardNumber}
             maxLength={4}
             nextFocus={secondInput.current}
+            filter={onlyNumber}
           />
           -
           <BaseInput
@@ -61,6 +65,7 @@ export default function RegisterCard() {
             ref={secondInput}
             maxLength={4}
             nextFocus={thirdInput.current}
+            filter={onlyNumber}
           />
           -
           <BaseInput
@@ -70,6 +75,7 @@ export default function RegisterCard() {
             type="password"
             maxLength={4}
             nextFocus={fourthInput.current}
+            filter={onlyNumber}
           />
           -
           <BaseInput
@@ -79,6 +85,7 @@ export default function RegisterCard() {
             type="password"
             maxLength={4}
             nextFocus={expiredMonth.current}
+            filter={onlyNumber}
           />
         </div>
       </div>
@@ -92,6 +99,7 @@ export default function RegisterCard() {
             maxLength={2}
             {...expired.month}
             onChange={setExpired}
+            filter={onlyNumber}
           />
           /
           <BaseInput
@@ -100,6 +108,7 @@ export default function RegisterCard() {
             maxLength={2}
             {...expired.year}
             onChange={setExpired}
+            filter={onlyNumber}
           />
         </div>
       </div>
