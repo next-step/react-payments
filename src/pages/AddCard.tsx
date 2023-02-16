@@ -1,4 +1,5 @@
 import { useState, ChangeEvent } from 'react';
+import CardExpiration from '../components/CardExpiration';
 import CardNumberInput from '../components/CardNumberInput';
 import '../styles/index.css';
 
@@ -9,9 +10,21 @@ const AddCard = () => {
     num3: '',
     num4: '',
   });
+  const [expiration, setExpiration] = useState({
+    month: '',
+    year: '',
+  });
+
   const getCardNumber = (e: ChangeEvent<HTMLInputElement>) => {
     setState({
       ...state,
+      [e.currentTarget.name]: e.currentTarget.value.replace(/[^0-9]/g, ''),
+    });
+  };
+
+  const getExpirationMonth = (e: ChangeEvent<HTMLInputElement>) => {
+    setExpiration({
+      ...expiration,
       [e.currentTarget.name]: e.currentTarget.value.replace(/[^0-9]/g, ''),
     });
   };
@@ -36,13 +49,8 @@ const AddCard = () => {
             </div>
           </div>
           <CardNumberInput numbers={state} onChange={getCardNumber} />
-          <div className="input-container">
-            <span className="input-title">만료일</span>
-            <div className="input-box w-50">
-              <input className="input-basic" type="text" placeholder="MM" />
-              <input className="input-basic" type="text" placeholder="YY" />
-            </div>
-          </div>
+          <CardExpiration expiration={expiration} onChange={getExpirationMonth} />
+
           <div className="input-container">
             <span className="input-title">카드 소유자 이름(선택)</span>
             <input type="text" className="input-basic" placeholder="카드에 표시된 이름과 동일하게 입력하세요." />
