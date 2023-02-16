@@ -17,11 +17,13 @@ const underlinedInputStyle = css`
   border-bottom: 1px solid #383838;
 `;
 
-export const InputEl = styled.input<Pick<InputProps, "textAlign">>`
+export const InputEl = styled.input<Pick<InputProps, "textAlign" | "color">>`
   height: 45px;
   width: 100%;
   text-align: ${(props) => props.textAlign};
+  caret-color: #000000;
   border: none;
+  color: ${(props) => props.color};
 `;
 
 export const InputLabel = styled.label`
