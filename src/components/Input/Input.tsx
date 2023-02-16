@@ -1,11 +1,19 @@
 import styled from "styled-components";
 
-function Input({ type = "text", placeholder, size = "full" }: InputProps) {
+function Input({
+  type = "text",
+  placeholder,
+  size = "full",
+  onChange,
+  maxLength,
+}: InputProps) {
   return (
     <StyledInput
       type={type}
       placeholder={placeholder}
       widthSize={size}
+      onChange={onChange}
+      maxLength={maxLength}
     ></StyledInput>
   );
 }
@@ -14,6 +22,8 @@ type InputProps = {
   type?: "text" | "password";
   placeholder?: string;
   size?: "full" | "medium" | "small";
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  maxLength?: number;
 };
 
 type StyledInputProps = {

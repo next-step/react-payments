@@ -28,5 +28,33 @@
   - [ ] 카드 번호 입력 시, \*으로 보여진다.
 - [ ] 카드 소유자 이름을 입력 받을 수 있다.
   - [ ] 이름은 30자리까지 입력할 수 있다.
-  - [ ] 이름 입력 폼 위에, 현재 입력 자릿수와 최대 입력 자릿수를 실시간으로 보여준다.
+  - [ ] 이름 입력 폼 **위에**, 현재 입력 자릿수와 최대 입력 자릿수를 실시간으로 보여준다.
 - [ ] 카드 추가 완료시 카드 등록 완료 페이지로 이동한다.
+
+---
+
+## 과제를 하면서 생긴 질문
+
+1. 지난 계산기 미션에서 styled component 를 컴포넌트의 아래로 내리는 편이 나을 것 같다고 말씀 주셨는데 (물론 취향차이라고 하심!!)  
+    그렇다면 type 도 아래로 내리는 편이 나을까?  
+    예시)
+
+   ```tsx
+   // 첫번째 구현 방법
+   function Input({ type = "text" }: InputProps) {
+     return <StyledInput type={type}></StyledInput>;
+   }
+
+   type InputProps = {
+     type: string;
+   };
+
+   // 두번째 구현 방법
+   type InputProps = {
+     type: string;
+   };
+
+   function Input({ type = "text" }: InputProps) {
+     return <StyledInput type={type}></StyledInput>;
+   }
+   ```
