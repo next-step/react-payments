@@ -16,6 +16,9 @@ const CardRegistration = () => {
   const goBackToListPage = (e) => {
     navigate("/");
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <>
@@ -29,13 +32,7 @@ const CardRegistration = () => {
         userName={"JEONG"}
         expirationDate={"12/34"}
       />
-      <CardForm>
-        <CardNumbersInput />
-        <CardExpirationDateInput />
-        <CardOwnerInput />
-        <CardCVCInput />
-        <CardPasswordInput />
-      </CardForm>
+      <CardForm handleSubmit={handleSubmit} />
     </>
   );
 };
