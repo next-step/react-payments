@@ -7,4 +7,8 @@ export default class Formatter {
       return item;
     }).join('-');
   }
+
+  static formatExpiredDate(expiredDate: string): string {
+    return expiredDate.match(/[0-9]{1,2}/g)?.join('/');
+  }
 }
