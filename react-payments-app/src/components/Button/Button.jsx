@@ -1,5 +1,9 @@
-const Button = (props) => {
-  return <button onClick={props.handleClick}>{props.name}</button>;
+const Button = ({ title }) => {
+  return (
+    <div className="button-box mt-50">
+      <span className="button-text">{title}</span>
+    </div>
+  );
 };
 
 export default Button;

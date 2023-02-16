@@ -7,8 +7,11 @@ export default {
 
 const Template = (args) => <Button {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
-  name: "click me",
-  handleClick: () => alert("clicked"),
+export const NextButton = Template.bind({});
+NextButton.args = {
+  title: "다음",
+};
+export const FinishButton = Template.bind({});
+FinishButton.args = {
+  title: "완료",
 };
