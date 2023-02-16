@@ -1,12 +1,12 @@
 import styled, { css } from "styled-components";
 
-type BoxProps = {
+type ContainerProps = {
   children: any;
   width?: number;
   margin?: number;
 };
 
-export const Box = ({ children, width, margin }: BoxProps) => {
+export const Container = ({ children, width, margin }: ContainerProps) => {
   return (
     <Layout width={width} margin={margin}>
       {children}
@@ -14,7 +14,7 @@ export const Box = ({ children, width, margin }: BoxProps) => {
   );
 };
 
-export default Box;
+export default Container;
 type LayoutProps = {
   width?: number;
   margin?: number;

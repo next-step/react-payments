@@ -16,7 +16,7 @@ const Text = ({ fontSize, weight, children }: TextProps) => {
 
 // size가 s일떄 특정 css 적용 , l일떄 특정 css 적용하게 구현
 type fontSizeType = "s" | "m" | "page-title" | "input-title";
-type WeightType = "primary" | "bold";
+type WeightType = "normal" | "bold";
 type LayoutProps = {
   fontSize: fontSizeType;
   weight: WeightType;

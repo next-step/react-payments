@@ -9,11 +9,11 @@ const CompletePage = () => {
         <Text fontSize="page-title" weight="bold">
           보유 카드
         </Text>
-        <CardBox>
+        <CardContainer>
           {/* <Card fontSize="s" theme="primary" size="small" />
           <Card fontSize="s" theme="primary" size="small" /> */}
           <Card fontSize="s" theme="add" size="small" />
-        </CardBox>
+        </CardContainer>
       </Container>
     </Layout>
   );
@@ -36,7 +36,7 @@ const Container = styled.div`
   margin-bottom: 20px;
 `;
 
-const CardBox = styled.div`
+const CardContainer = styled.div`
   margin: 20px;
   & > div {
     margin: 20px 0px;

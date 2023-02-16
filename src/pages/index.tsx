@@ -8,14 +8,13 @@ function App() {
   return (
     <Layout>
       <GlobalStyle />
-      <MainPage />
+      <AddPage />
     </Layout>
   );
 }
 
 const Layout = styled.div`
   background-color: #fff;
-
   width: 375px;
   min-width: 375px;
   height: 700px;

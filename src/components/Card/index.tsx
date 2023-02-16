@@ -14,7 +14,7 @@ const Card = ({ fontSize, theme, size }: CardProps) => {
   return (
     <Layout theme={theme} size={size}>
       <Top>
-        <Text fontSize={fontSize} weight="primary"></Text>
+        <Text fontSize={fontSize} weight="normal"></Text>
       </Top>
       {theme === "add" ? (
         <Middle theme="add">
@@ -27,11 +27,11 @@ const Card = ({ fontSize, theme, size }: CardProps) => {
       )}
       <Bottom>
         <NumberBox>
-          <Text fontSize={fontSize} weight="primary"></Text>
+          <Text fontSize={fontSize} weight="normal"></Text>
         </NumberBox>
         <InfoBox>
-          <Text fontSize={fontSize} weight="primary"></Text>
-          <Text fontSize={fontSize} weight="primary"></Text>
+          <Text fontSize={fontSize} weight="normal"></Text>
+          <Text fontSize={fontSize} weight="normal"></Text>
         </InfoBox>
       </Bottom>
     </Layout>

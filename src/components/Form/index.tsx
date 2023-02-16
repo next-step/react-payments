@@ -1,61 +1,61 @@
 import styled from "styled-components";
 import Card from "components/Card";
 import Text from "components/Text";
-import InputBox from "components/Input/Box";
+import InputContainer from "components/Input/Container";
 import Input from "components/Input/Item";
 import Button from "../Button/index";
 
 export const Form = () => {
   return (
     <>
-      <CardBox>
+      <CardWrapper>
         <Card fontSize="s" theme="empty" size="small" />
-      </CardBox>
-      <InputContainer>
-        <InputTitle fontSize="input-title" weight="primary">
+      </CardWrapper>
+      <InputLayout>
+        <InputTitle fontSize="input-title" weight="normal">
           카드 번호
         </InputTitle>
-        <InputBox>
+        <InputContainer>
           <Input type="text" theme="primary"></Input>
           <Input type="text" theme="primary"></Input>
           <Input type="password" theme="primary"></Input>
           <Input type="password" theme="primary"></Input>
-        </InputBox>
-      </InputContainer>
-      <InputContainer>
-        <InputTitle fontSize="input-title" weight="primary">
+        </InputContainer>
+      </InputLayout>
+      <InputLayout>
+        <InputTitle fontSize="input-title" weight="normal">
           만료일
         </InputTitle>
-        <InputBox width={50}>
+        <InputContainer width={50}>
           <Input type="text" placeholder="MM" theme="primary"></Input>
           <Input type="text" placeholder="YY" theme="primary"></Input>
-        </InputBox>
-      </InputContainer>
-      <InputContainer>
-        <InputTitle fontSize="input-title" weight="primary">
+        </InputContainer>
+      </InputLayout>
+      <InputLayout>
+        <InputTitle fontSize="input-title" weight="normal">
           카드 소유자 이름(선택)
         </InputTitle>
         <Input type="text" theme="primary" placeholder="카드에 표시된 이름과 동일하게 입력하세요." />
-      </InputContainer>
-      <InputContainer>
-        <InputTitle fontSize="input-title" weight="primary">
+      </InputLayout>
+      <InputLayout>
+        <InputTitle fontSize="input-title" weight="normal">
           보안코드 (CVC/CVV)
         </InputTitle>
-        <InputBox width={25}>
+        <InputContainer width={25}>
           <Input theme="primary" type="text" />
-        </InputBox>
-      </InputContainer>
-      <InputContainer>
-        <InputTitle fontSize="input-title" weight="primary">
+        </InputContainer>
+      </InputLayout>
+      <InputLayout>
+        <InputTitle fontSize="input-title" weight="normal">
           카드 비밀번호
         </InputTitle>
-        <InputBox width={70}>
+        <InputContainer width={70}>
           <Input theme="primary" type="password" />
           <Input theme="primary" type="password" />
           <Input theme="primary" type="password" />
           <Input theme="primary" type="password" />
-        </InputBox>
-      </InputContainer>
+        </InputContainer>
+      </InputLayout>
       <ButtonBox>
         <Button size="s">Next</Button>
       </ButtonBox>
@@ -70,11 +70,11 @@ const InputTitle = styled(Text)`
   color: #525252;
 `;
 
-const InputContainer = styled.div`
+const InputLayout = styled.div`
   margin: 16px 0;
 `;
 
-const CardBox = styled.div`
+const CardWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
