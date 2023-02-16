@@ -1,4 +1,4 @@
-import CardShapedButton from "./card";
+import CardShapedButton from "./Card";
 import "../card.css";
 
 export default {
