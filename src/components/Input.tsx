@@ -17,7 +17,7 @@ const config = {
   BASIC_CLASS: 'input-basic',
 };
 
-const BaseInput = forwardRef((
+const Input = forwardRef((
   {
     type,
     className,
@@ -49,6 +49,6 @@ const BaseInput = forwardRef((
   );
 });
 
-BaseInput.displayName = 'BaseInput';
+Input.displayName = 'BaseInput';
 
-export default memo(BaseInput);
+export default memo(Input);

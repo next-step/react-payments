@@ -1,7 +1,8 @@
-import { BaseInput, CardBox } from './../components';
+import { CardBox, Input } from './../components';
 import { useEffect, useMemo, useRef } from 'react';
 import { useCard, useForm } from '../hooks';
 import { Filter } from '../domain';
+import { InputContainer } from '../container';
 
 const { onlyNumber } = Filter;
 
@@ -52,112 +53,100 @@ export default function RegisterCard() {
     <div className="app">
       <h2 className="page-title">&lt; 카드 추가</h2>
       <CardBox {...cardState} />
-      <div className="input-container">
-        <span className="input-title">카드 번호</span>
-        <div className="input-box">
-          <BaseInput
-            {...cardNumber.first}
-            onChange={setCardNumber}
-            maxLength={4}
-            nextFocus={secondInput.current}
-            filter={onlyNumber}
-          />
-          -
-          <BaseInput
-            {...cardNumber.second}
-            onChange={setCardNumber}
-            ref={secondInput}
-            maxLength={4}
-            nextFocus={thirdInput.current}
-            filter={onlyNumber}
-          />
-          -
-          <BaseInput
-            {...cardNumber.third}
-            onChange={setCardNumber}
-            ref={thirdInput}
-            type="password"
-            maxLength={4}
-            nextFocus={fourthInput.current}
-            filter={onlyNumber}
-          />
-          -
-          <BaseInput
-            {...cardNumber.fourth}
-            onChange={setCardNumber}
-            ref={fourthInput}
-            type="passwordInput"
-            maxLength={4}
-            nextFocus={expiredMonthInput.current}
-            filter={onlyNumber}
-          />
-        </div>
-      </div>
-      <div className="input-container">
-        <span className="input-title">만료일</span>
-        <div className="input-box w-50">
-          <BaseInput
-            ref={expiredMonthInput}
-            placeholder="MM"
-            nextFocus={expiredYearInput.current}
-            maxLength={2}
-            {...expired.month}
-            onChange={setExpired}
-            filter={onlyNumber}
-          />
-          /
-          <BaseInput
-            ref={expiredYearInput}
-            placeholder="YY"
-            maxLength={2}
-            {...expired.year}
-            onChange={setExpired}
-            filter={onlyNumber}
-          />
-        </div>
-      </div>
-      <div className="input-container">
-        <span className="input-title">카드 소유자 이름(선택)</span>
-        <BaseInput
+      <InputContainer title="카드 번호">
+        <Input
+          {...cardNumber.first}
+          onChange={setCardNumber}
+          maxLength={4}
+          nextFocus={secondInput.current}
+          filter={onlyNumber}
+        />
+        -
+        <Input
+          {...cardNumber.second}
+          onChange={setCardNumber}
+          ref={secondInput}
+          maxLength={4}
+          nextFocus={thirdInput.current}
+          filter={onlyNumber}
+        />
+        -
+        <Input
+          {...cardNumber.third}
+          onChange={setCardNumber}
+          ref={thirdInput}
+          type="password"
+          maxLength={4}
+          nextFocus={fourthInput.current}
+          filter={onlyNumber}
+        />
+        -
+        <Input
+          {...cardNumber.fourth}
+          onChange={setCardNumber}
+          ref={fourthInput}
+          type="passwordInput"
+          maxLength={4}
+          nextFocus={expiredMonthInput.current}
+          filter={onlyNumber}
+        />
+      </InputContainer>
+      <InputContainer title="만료일" className="w-50">
+        <Input
+          ref={expiredMonthInput}
+          placeholder="MM"
+          nextFocus={expiredYearInput.current}
+          maxLength={2}
+          {...expired.month}
+          onChange={setExpired}
+          filter={onlyNumber}
+        />
+        /
+        <Input
+          ref={expiredYearInput}
+          placeholder="YY"
+          maxLength={2}
+          {...expired.year}
+          onChange={setExpired}
+          filter={onlyNumber}
+        />
+      </InputContainer>
+      <InputContainer title="카드 소유자 이름(선택)">
+        <Input
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           nextFocus={cvcInput.current}
           maxLength={30}
         />
-      </div>
-      <div className="input-container">
-        <span className="input-title">보안코드(CVC/CVV)</span>
-        <BaseInput
+      </InputContainer>
+      <InputContainer title="보안코드(CVC/CVV)" className="w-25">
+        <Input
           type="password"
-          className="w-25"
           maxLength={3}
           filter={onlyNumber}
           ref={cvcInput}
           nextFocus={passwordInput.current}
         />
-      </div>
-      <div className="input-container">
-        <span className="input-title">카드 비밀번호</span>
-        <div className="flex-start">
-          <BaseInput
-            type="password"
-            filter={onlyNumber}
-            maxLength={1}
-            className="w-15"
-            ref={passwordInput}
-            nextFocus={passwordInput2.current}
+      </InputContainer>
+      <InputContainer title="카드 비밀번호" className="flex-start" notInputBox={true}>
+        <Input
+          type="password"
+          filter={onlyNumber}
+          maxLength={1}
+          className="w-15"
+          ref={passwordInput}
+          nextFocus={passwordInput2.current}
 
-          />
-          <BaseInput
-            ref={passwordInput2}
-            type="password"
-            filter={onlyNumber}
-            maxLength={1}
-            className="w-15"
-          />
-          <p className="flex-center w-15">•</p>
-          <p className="flex-center w-15">•</p>
-        </div>
-      </div>
+        />
+        <Input
+          ref={passwordInput2}
+          type="password"
+          filter={onlyNumber}
+          maxLength={1}
+          className="w-15"
+        />
+        <p className="flex-center w-15">•</p>
+        <p className="flex-center w-15">•</p>
+      </InputContainer>
       <div className="button-box">
         <span className="button-text">다음</span>
       </div>
