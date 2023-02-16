@@ -1,8 +1,39 @@
-const CardCVCInput = () => {
+import { useState, useEffect } from "react";
+
+const MAX_CVC_LENGTH = 3;
+
+const CardCVCInput = ({ onChange }) => {
+  const [CVC, setCVC] = useState("");
+  const [error, setError] = useState("");
+
+  const setCVCByInput = (e) => {
+    let updatedCVC = CVC;
+    const { value } = e.target;
+
+    if (Number.isNaN(+value)) {
+      setError("숫자만 입력해주세요.");
+      return;
+    }
+
+    updatedCVC = value;
+    setCVC(updatedCVC);
+  };
+
+  useEffect(() => {
+    onChange(CVC, error);
+  }, [CVC, error]);
+
   return (
     <div className="input-container">
       <span className="input-title">보안코드(CVC/CVV)</span>
-      <input className="input-basic w-25" type="password" />
+      <input
+        className="input-basic w-25"
+        type="password"
+        maxLength={MAX_CVC_LENGTH}
+        value={CVC}
+        onChange={setCVCByInput}
+        required
+      />
       {/** TODO: CVC 섦명 아이콘 추가 */}
     </div>
   );
