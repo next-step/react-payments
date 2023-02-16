@@ -20,7 +20,7 @@ export const globalStyleCss = css`
     outline: none;
   }
 
-  .root {
+  #root {
     background-color: #fff;
     width: 375px;
     min-width: 375px;
