@@ -10,7 +10,7 @@ type TextInputProps = {
   textAlign?: 'left' | 'center' | 'right';
   width?: string;
   fontColor: Colors;
-};
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
 const TextInput = ({
   label,
@@ -20,6 +20,7 @@ const TextInput = ({
   textAlign = 'left',
   width = '100%',
   fontColor,
+  ...InputProps
 }: TextInputProps) => {
   const handleChange = () => {
     onChange(value);
@@ -27,15 +28,17 @@ const TextInput = ({
   return (
     <TextInputContainer width={width}>
       <TextInputStyle
+        type="text"
         color={colors[fontColor]}
         textAlign={textAlign}
         placeholder={placeholder}
         aria-label={label}
         onChange={handleChange}
         value={value}
+        {...InputProps}
       />
     </TextInputContainer>
   );
 };
 
-export default TextInput;
+export default React.memo(TextInput);

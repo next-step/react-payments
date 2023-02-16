@@ -18,7 +18,5 @@ export const TextInputStyle = styled.input<{
   text-align: ${({ textAlign }) => textAlign};
   width: 100%;
   color: ${({ color }) => color};
-  display: flex;
-  align-items: center;
   background-color: transparent;
 `;
