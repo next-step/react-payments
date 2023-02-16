@@ -12,9 +12,16 @@ export default function RegisterCard() {
     fourth: useInput(''),
   };
 
+  const form = {
+    expiredDate: useInput(''),
+    expiredYear: useInput(''),
+  };
+
   const secondInput = useRef(null);
   const thirdInput = useRef(null);
   const fourthInput = useRef(null);
+
+  const expiredYear = useRef(null);
 
   useEffect(() => {
     const newCardState = Object.values(cardNumber).map((item) => item.value);
@@ -61,7 +68,19 @@ export default function RegisterCard() {
       <div className="input-container">
         <span className="input-title">만료일</span>
         <div className="input-box w-50">
-          <BaseInput placeholder="MM / YY"/>
+          <BaseInput
+            placeholder="MM"
+            nextFocus={expiredYear.current}
+            maxLength={2}
+            {...form.expiredDate}
+          />
+          /
+          <BaseInput
+            ref={expiredYear}
+            placeholder="YY"
+            maxLength={2}
+            {...form.expiredYear}
+          />
         </div>
       </div>
       <div className="input-container">
@@ -74,10 +93,12 @@ export default function RegisterCard() {
       </div>
       <div className="input-container">
         <span className="input-title">카드 비밀번호</span>
-        <BaseInput type="password" className="w-15"/>
-        <BaseInput type="password" className="w-15"/>
-        <BaseInput type="password" value="0" disabled className="w-15"/>
-        <BaseInput type="password" value="0" disabled className="w-15"/>
+        <div className="flex-start">
+          <BaseInput type="password" className="w-15"/>
+          <BaseInput type="password" className="w-15"/>
+          <p className="flex-center w-15">•</p>
+          <p className="flex-center w-15">•</p>
+        </div>
       </div>
       <div className="button-box">
         <span className="button-text">다음</span>

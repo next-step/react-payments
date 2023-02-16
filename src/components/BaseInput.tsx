@@ -1,4 +1,4 @@
-import { ChangeEvent, forwardRef } from 'react';
+import { ChangeEvent, forwardRef, memo } from 'react';
 
 interface Props {
   maxLength?: number;
@@ -7,7 +7,6 @@ interface Props {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   value?: string | number;
-  disabled?: boolean;
   nextFocus?: HTMLInputElement;
 }
 
@@ -16,7 +15,7 @@ const config = {
   BASIC_CLASS: 'input-basic',
 };
 
-const BaseInput = forwardRef(({ type, className = '', onChange, maxLength, nextFocus, ...props }: Props, inputRef) => {
+const BaseInput = forwardRef(({ type, className, onChange, maxLength, nextFocus, ...props }: Props, inputRef) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
 
@@ -29,7 +28,7 @@ const BaseInput = forwardRef(({ type, className = '', onChange, maxLength, nextF
   return (
     <input
       ref={inputRef}
-      className={`${config.BASIC_CLASS} ${className}`}
+      className={`${config.BASIC_CLASS} ${className || ''}`}
       type={type || config.BASIC_TYPE}
       onChange={handleChange}
       maxLength={maxLength}
@@ -40,4 +39,4 @@ const BaseInput = forwardRef(({ type, className = '', onChange, maxLength, nextF
 
 BaseInput.displayName = 'BaseInput';
 
-export default BaseInput;
+export default memo(BaseInput);
