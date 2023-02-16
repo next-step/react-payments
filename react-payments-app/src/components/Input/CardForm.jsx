@@ -9,6 +9,7 @@ import CardPasswordInput from "./CardPassword/input";
 const CardForm = ({ handleSubmit }) => {
   const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
   const [expirationDate, setExpirationDate] = useState(["", ""]);
+  const [cardOwner, setCardOwner] = useState("");
   const [error, setError] = useState("");
 
   const handleCardNumbersChange = (cardNumbers, error) => {
@@ -21,13 +22,18 @@ const CardForm = ({ handleSubmit }) => {
     setError(error);
   };
 
+  const handleCardOwnerChange = (cardOwner, error) => {
+    setCardOwner(cardOwner);
+    setError(error);
+  };
+
   return (
     <>
       <div id="card-form" className="w-100">
         <form onSubmit={handleSubmit}>
           <CardNumbersInput onChange={handleCardNumbersChange} />
           <CardExpirationDateInput onChange={handleExpirationDateChange} />
-          <CardOwnerInput />
+          <CardOwnerInput onChange={handleCardOwnerChange} />
           <CardCVCInput />
           <CardPasswordInput />
         </form>
