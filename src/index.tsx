@@ -4,7 +4,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import './styles/button.css';
-import './styles/card.css';
 import './styles/index.css';
 import './styles/input.css';
 import './styles/modal.css';
