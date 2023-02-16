@@ -9,16 +9,16 @@ const AddPage = () => {
     <>
       <Modal>
         <DotContainer>
-          <Dot />
-          <Dot />
-          <Dot />
-          <Dot />
+          <Dot color="red" text="하나카드" />
+          <Dot color="pink" text="국민카드" />
+          <Dot color="cyon" text="신한카드" />
+          <Dot color="purple" text="클린카드" />
         </DotContainer>
         <DotContainer>
-          <Dot />
-          <Dot />
-          <Dot />
-          <Dot />
+          <Dot color="blue" text="토스카드" />
+          <Dot color="green" text="네이버카드" />
+          <Dot color="yellow" text="카카오카드" />
+          <Dot color="orange" text="오렌지카드" />
         </DotContainer>
       </Modal>
       <Layout>
