@@ -8,11 +8,7 @@ function Card({
   expireYear,
   size = "small",
 }: CardProps) {
-  const isTyping =
-    cardNumber !== undefined &&
-    expireMonth !== undefined &&
-    expireYear !== undefined &&
-    userName !== undefined;
+  const isTyping = !!cardNumber || !!expireMonth || !!expireYear || !!userName;
 
   return (
     <CardContainer>
@@ -50,7 +46,7 @@ type CardProps = {
   size?: "big" | "small";
 };
 
-type WrapperProps = {
+type CardBoxProps = {
   size?: "big" | "small";
   isTyping?: boolean;
 };
@@ -62,7 +58,7 @@ const CardContainer = styled.div`
   margin: 10px 0;
 `;
 
-const CardBox = styled.div<WrapperProps>`
+const CardBox = styled.div<CardBoxProps>`
   display: flex;
   flex-direction: column;
   align-items: center;

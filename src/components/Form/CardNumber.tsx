@@ -9,6 +9,7 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
   const cardNumber = hasCardNumber
     ? `${cardNumbers[0]}-${cardNumbers[1]}-${cardNumbers[2]}-${cardNumbers[3]}`
     : "";
+
   useEffect(() => {
     onCardNumberChange(cardNumber);
   }, [onCardNumberChange, cardNumber]);
