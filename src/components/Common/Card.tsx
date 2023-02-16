@@ -45,9 +45,9 @@ function Card({ owner, cardCompany, cardNumber, expiration, cardNickname, isEmpt
             </span>
           </div>
           <div className="card-bottom__info">
-            <span className={isBig ? 'card-text__big' : 'card-text'}>{owner}</span>
+            <span className={isBig ? 'card-text__big' : 'card-text'}>{owner ?? 'Name'}</span>
             <span className={isBig ? 'card-text__big' : 'card-text'}>
-              {expiration?.month} / {expiration?.year}
+              {expiration?.month ?? 'MM'} / {expiration?.year ?? 'YY'}
             </span>
           </div>
         </div>

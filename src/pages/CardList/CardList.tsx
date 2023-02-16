@@ -9,7 +9,7 @@ function CardList() {
           <div className="flex-center">
             <h2 className="page-title mb-10">보유 카드</h2>
           </div>
-          <Card isBig />
+          <Card />
           <Link to="/add">
             <Card isEmpty />
           </Link>

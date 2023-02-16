@@ -1,30 +1,36 @@
-import React, { HTMLInputTypeAttribute } from 'react';
+import React, { ChangeEvent, HTMLInputTypeAttribute } from 'react';
 import FieldContainer from './FieldContainer';
 import { Input } from '../Common';
-import { Width } from '../Common/Input';
 
-function TextField({
+function CVCField({
   title,
   placeholder,
   maxLength,
   value,
   name,
-  width = 'w-100',
   type = 'text',
+  onChange,
 }: {
   title: string;
   placeholder?: string;
   maxLength?: number;
   value: string;
   name: string;
-  width?: Width;
   type?: HTMLInputTypeAttribute;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
     <FieldContainer title={title}>
-      <Input type={type} name={name} placeholder={placeholder} maxLength={maxLength} width={width} value={value} />
+      <Input
+        type={type}
+        name={name}
+        value={value}
+        placeholder={placeholder}
+        maxLength={maxLength}
+        onChange={onChange}
+      />
     </FieldContainer>
   );
 }
 
-export default TextField;
+export default CVCField;
