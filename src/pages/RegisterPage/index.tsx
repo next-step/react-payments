@@ -2,7 +2,8 @@ import Text from "components/Text";
 import styled from "styled-components";
 import Card from "components/Card";
 
-const CompletePage = () => {
+const RegisterPage = () => {
+  // add 버튼을 누르면 카드 추가 페이지를 보여준다.
   return (
     <Layout>
       <Container>
@@ -10,15 +11,15 @@ const CompletePage = () => {
           보유 카드
         </Text>
         <CardContainer>
-          <Card fontSize="s" theme="primary" size="small" />
-          <Card fontSize="s" theme="primary" size="small" />
+          {/* <Card fontSize="s" theme="primary" size="small" />
+          <Card fontSize="s" theme="primary" size="small" /> */}
           <Card fontSize="s" theme="add" size="small" />
         </CardContainer>
       </Container>
     </Layout>
   );
 };
-export default CompletePage;
+export default RegisterPage;
 const Layout = styled.div`
   height: 100%;
   display: flex;

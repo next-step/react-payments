@@ -36,9 +36,9 @@ const Card = ({ fontSize, theme, size }: CardProps) => {
         </Bottom>
       </CardLayout>
       <CardNameWrapper>
-        <Text fontSize="m" weight="normal">
+        {/* <Text fontSize="m" weight="normal">
           법인카드
-        </Text>
+        </Text> */}
       </CardNameWrapper>
     </>
   );
@@ -54,10 +54,10 @@ const CardLayout = styled.div<CardLayoutProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   font-size: 30px;
   box-shadow: 3px 3px 5px rgb(0 0 0 / 25%);
   border-radius: 5px;
+  cursor: pointer;
 
   ${({ theme }) =>
     theme === "empty"

@@ -3,11 +3,16 @@ import Form from "components/Form";
 import Modal from "components/Modal";
 import Text from "components/Text";
 import styled from "styled-components";
+import IconButton from "../../components/IconButton/index";
 
 const AddPage = () => {
+  const handleLeftButton = () => {
+    console.log("left");
+  };
+
   return (
     <>
-      <Modal>
+      {/* <Modal>
         <DotContainer>
           <Dot color="red" text="하나카드" />
           <Dot color="pink" text="국민카드" />
@@ -20,13 +25,14 @@ const AddPage = () => {
           <Dot color="yellow" text="카카오카드" />
           <Dot color="orange" text="오렌지카드" />
         </DotContainer>
-      </Modal>
+      </Modal> */}
       <Layout>
-        <TextWrapper>
-          <Text fontSize="xs" weight="bold">
+        <Header>
+          <IconButton onClick={handleLeftButton} name="arrowLeft" size="2xl" color="#575757" />
+          <Text fontSize="lg" weight="bold">
             카드추가
           </Text>
-        </TextWrapper>
+        </Header>
         <Form />
       </Layout>
     </>
@@ -37,12 +43,13 @@ const Layout = styled.div`
   height: 100%;
   padding: 16px 24px;
 `;
-const TextWrapper = styled.div`
+const Header = styled.div`
   display: flex;
   align-items: center;
   color: #383838;
-  padding: 10px;
+  margin-top: 10px;
   margin-bottom: 20px;
+  gap: 10px;
 `;
 const DotContainer = styled.div`
   display: flex;

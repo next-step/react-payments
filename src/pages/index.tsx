@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import GlobalStyle from "styles/GlobalStyle";
 import AddPage from "./AddPage";
-import MainPage from "./MainPage";
 import CompletedPage from "./CompletedPage";
+import RegisterPage from "./RegisterPage/index";
 
 function App() {
   return (
     <Layout>
       <GlobalStyle />
-      <MainPage />
+      <AddPage />
     </Layout>
   );
 }
