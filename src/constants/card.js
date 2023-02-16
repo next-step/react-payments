@@ -4,13 +4,14 @@ export const CARD_NUMBER = {
 };
 
 export const CARD_EXPIRATION = {
+  MAX_LENGTH: 2,
   PLACEHOLDER: {
     MONTH: "MM",
     YEAR: "YY",
   },
 };
 
-export const CARD_SECRET_CODE = {
+export const CARD_SECURITY_CODE = {
   MAX_LENGTH: 3,
 };
 

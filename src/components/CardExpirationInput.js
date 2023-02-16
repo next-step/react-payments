@@ -1,22 +1,25 @@
-import { useState, useRef } from "react";
-import { CARD_NUMBER } from "../constants/card";
+import { useState } from "react";
+import { CARD_EXPIRATION } from "../constants/card";
 
-export default function Input({ className, type, placeholder, maxLength }) {
+export default function CardExpirationInput({
+  className,
+  type,
+  placeholder,
+  maxLength,
+}) {
   const [inputValue, setInputValue] = useState("");
-
-  // TODO : 카드번호, 만료일, 보안코드, 카드 비밀번호, 카드 소유자이름 구분
-  // TODO : Input 컴포넌트로 통합?
 
   function handleChange() {
     setInputValue(inputValue);
   }
   function isValidValue(data) {
+    if (isNaN(parseInt(data))) return false;
+    // TODO : 월(1~12) & 일(1~31)
     return true;
   }
   function handleKeyDown({ key }) {
     const data = key;
     if (!isValidValue(data)) return;
-    // console.log(className, data, inputValue);
   }
   return (
     <input
@@ -25,6 +28,7 @@ export default function Input({ className, type, placeholder, maxLength }) {
       placeholder={placeholder}
       onKeyDown={handleKeyDown}
       onChange={handleChange}
+      defaultValue={inputValue}
       maxLength={maxLength}
     ></input>
   );

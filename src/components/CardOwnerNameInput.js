@@ -1,22 +1,29 @@
-import { useState, useRef } from "react";
-import { CARD_NUMBER } from "../constants/card";
+import { useState } from "react";
+import { CARD_OWNER_NAME } from "../constants/card";
 
-export default function Input({ className, type, placeholder, maxLength }) {
+export default function CardOwnerNameInput({
+  className,
+  type,
+  placeholder,
+  maxLength,
+}) {
   const [inputValue, setInputValue] = useState("");
-
-  // TODO : 카드번호, 만료일, 보안코드, 카드 비밀번호, 카드 소유자이름 구분
-  // TODO : Input 컴포넌트로 통합?
 
   function handleChange() {
     setInputValue(inputValue);
   }
+
+  // TODO : 유효성 검사
+  // 숫자 입력 불가능
+  // 문자열 maxlength 제어
   function isValidValue(data) {
+    if (inputValue.length >= CARD_OWNER_NAME.MAX_LENGTH) return false;
     return true;
   }
   function handleKeyDown({ key }) {
     const data = key;
+    console.log(inputValue.length, CARD_OWNER_NAME.MAX_LENGTH);
     if (!isValidValue(data)) return;
-    // console.log(className, data, inputValue);
   }
   return (
     <input
@@ -25,6 +32,7 @@ export default function Input({ className, type, placeholder, maxLength }) {
       placeholder={placeholder}
       onKeyDown={handleKeyDown}
       onChange={handleChange}
+      defaultValue={inputValue}
       maxLength={maxLength}
     ></input>
   );
