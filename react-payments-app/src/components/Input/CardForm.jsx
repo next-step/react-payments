@@ -11,6 +11,7 @@ const CardForm = ({ handleSubmit }) => {
   const [expirationDate, setExpirationDate] = useState(["", ""]);
   const [cardOwner, setCardOwner] = useState("");
   const [CVC, setCVC] = useState("");
+  const [password, setPassword] = useState(["", ""]);
   const [error, setError] = useState("");
 
   const handleCardNumbersChange = (cardNumbers, error) => {
@@ -33,6 +34,11 @@ const CardForm = ({ handleSubmit }) => {
     setError(error);
   };
 
+  const handlePasswordChange = (password, error) => {
+    setPassword(password);
+    setError(error);
+  };
+
   return (
     <>
       <div id="card-form" className="w-100">
@@ -41,7 +47,7 @@ const CardForm = ({ handleSubmit }) => {
           <CardExpirationDateInput onChange={handleExpirationDateChange} />
           <CardOwnerInput onChange={handleCardOwnerChange} />
           <CardCVCInput onChange={handleCVCChange} />
-          <CardPasswordInput />
+          <CardPasswordInput onChange={handlePasswordChange} />
         </form>
         <div id="card-form-label" style={{ color: "red" }}>
           {error}
