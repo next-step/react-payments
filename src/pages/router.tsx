@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import CardListPage from './CardListPage';
-import CreateCardPage from './CreateCardPage';
+import { CreateCardPage } from './CreateCardPage';
 
 const router = createBrowserRouter([
   {
