@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
 import CardForm from "../../components/Input/CardForm";
@@ -9,9 +11,19 @@ import CardCVCInput from "../../components/Input/CardSecurityCode/input";
 import CardPasswordInput from "../../components/Input/CardPassword/input";
 
 const CardRegistration = () => {
+  const navigate = useNavigate();
+
+  const goBackToListPage = (e) => {
+    navigate("/");
+  };
+
   return (
     <>
-      <Header pageTitle={"카드추가"} headerIcon={"<"} />
+      <Header
+        pageTitle={"카드추가"}
+        headerIcon={"<"}
+        onClick={goBackToListPage}
+      />
       <Card
         cardStatus={"empty-card"}
         userName={"JEONG"}

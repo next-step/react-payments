@@ -60,3 +60,7 @@
 .w-15 {
   width: 15%;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
