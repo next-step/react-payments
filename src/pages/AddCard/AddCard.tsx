@@ -1,7 +1,8 @@
+import { Input } from '@/components/Common';
+
 function AddCard() {
   return (
     <div>
-      <h2>1️⃣ 카드 추가</h2>
       <div className="root">
         <div className="app">
           <h2 className="page-title"> 카드 추가</h2>
@@ -49,6 +50,8 @@ function AddCard() {
             <input className="input-basic w-15" type="password" />
             <input className="input-basic w-15" type="password" />
             <input className="input-basic w-15" type="password" />
+            <Input type="password" kind="basic" />
+            <Input type="number" kind="basic" />
           </div>
           <div className="button-box">
             <span className="button-text">다음</span>

@@ -1,13 +1,15 @@
+import { Card } from '@/components/Common';
+
 function Complete() {
   return (
     <div>
-      <h2>4️⃣ 카드 추가 완료</h2>
       <div className="root">
         <div className="app flex-column-center">
           <div className="flex-center">
             <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
           </div>
-          <div className="card-box">
+          <Card isEmpty isBig />
+          {/* <div className="card-box">
             <div className="big-card">
               <div className="card-top">
                 <span className="card-text__big">클린카드</span>
@@ -25,7 +27,7 @@ function Complete() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="input-container flex-center w-100">
             <input className="input-underline w-75" type="text" placeholder="카드의 별칭을 입력해주세요." />
           </div>
