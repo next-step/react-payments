@@ -3,16 +3,16 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
 
 body,html {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+ 
+  background-color: #e5e5e5;
 
 }
 *{
   box-sizing: border-box;
-
 }
 
 `;

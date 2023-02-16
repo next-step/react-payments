@@ -1,0 +1,44 @@
+import Text from "components/Text";
+import styled from "styled-components";
+import Card from "components/Card";
+
+const CompletePage = () => {
+  return (
+    <Layout>
+      <Container>
+        <Text fontSize="page-title" weight="bold">
+          보유 카드
+        </Text>
+        <CardBox>
+          {/* <Card fontSize="s" theme="primary" size="small" />
+          <Card fontSize="s" theme="primary" size="small" /> */}
+          <Card fontSize="s" theme="add" size="small" />
+        </CardBox>
+      </Container>
+    </Layout>
+  );
+};
+export default CompletePage;
+const Layout = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: #383838;
+  padding: 10px;
+  margin-bottom: 20px;
+`;
+
+const CardBox = styled.div`
+  margin: 20px;
+  & > div {
+    margin: 20px 0px;
+  }
+`;
