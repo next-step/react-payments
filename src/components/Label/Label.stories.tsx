@@ -9,7 +9,6 @@ export default {
   component: Label,
 } as ComponentMeta<typeof Label>;
 
-//👇 We create a “template” of how args map to rendering
 const Template: ComponentStory<typeof Label> = (args) => <Label {...args} />;
 
 export const Default = Template.bind({});

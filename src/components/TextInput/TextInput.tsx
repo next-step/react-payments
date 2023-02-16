@@ -4,12 +4,14 @@ import { Colors, colors } from '@/styles/colors';
 
 type TextInputProps = {
   label: string;
-  value: string;
   onChange: (value: string) => void;
+  value?: string;
   placeholder?: string;
+  select?: (value: string) => string;
   textAlign?: 'left' | 'center' | 'right';
   width?: string;
   fontColor: Colors;
+  type?: 'text' | 'password';
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const TextInput = ({
@@ -17,24 +19,27 @@ const TextInput = ({
   value,
   onChange,
   placeholder,
+  fontColor,
+  select,
   textAlign = 'left',
   width = '100%',
-  fontColor,
+  type = 'text',
   ...InputProps
 }: TextInputProps) => {
   const handleChange = () => {
-    onChange(value);
+    value && onChange(value);
   };
+
   return (
     <TextInputContainer width={width}>
       <TextInputStyle
-        type="text"
+        type={type}
         color={colors[fontColor]}
         textAlign={textAlign}
         placeholder={placeholder}
         aria-label={label}
         onChange={handleChange}
-        value={value}
+        value={value && (select ? select(value) : value)}
         {...InputProps}
       />
     </TextInputContainer>
