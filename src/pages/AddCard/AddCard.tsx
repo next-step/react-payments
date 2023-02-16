@@ -1,4 +1,7 @@
 import { Input } from '@/components/Common';
+import CardNumberField from '@/components/Field/CardNumberField';
+import PasswordField from '@/components/Field/PasswordField';
+import TextField from '@/components/Field/TextField';
 
 function AddCard() {
   return (
@@ -50,9 +53,17 @@ function AddCard() {
             <input className="input-basic w-15" type="password" />
             <input className="input-basic w-15" type="password" />
             <input className="input-basic w-15" type="password" />
-            <Input type="password" kind="basic" />
-            <Input type="number" kind="basic" />
           </div>
+          <TextField title="보안코드(CVC/CCV)" value="1" maxLength={3} name="cvc" width="w-25" type="password" />
+          <TextField
+            title="카드 소유자 이름(선택)"
+            placeholder="카드에 표시된 이름과 동일하게 입력하세요"
+            value="1"
+            maxLength={30}
+            name="owner"
+          />
+          <CardNumberField title="카드 번호" />
+          <PasswordField title="비밀번호" />
           <div className="button-box">
             <span className="button-text">다음</span>
           </div>
