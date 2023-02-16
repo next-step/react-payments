@@ -19,9 +19,10 @@
     "isolatedModules": true,
     "jsxImportSource": "@emotion/react",
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
   },
   "include": [
     "src"
-  ]
+  ],
+  "extends": "./tsconfig.paths.json",
 }
