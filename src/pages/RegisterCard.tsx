@@ -1,29 +1,26 @@
 import { BaseInput, CardBox } from './../components';
-import { useInput } from './../hooks';
-import { useEffect } from 'react';
-import useCard from '../hooks/useCard';
+import { useEffect, useRef } from 'react';
+import { useCard, useInput } from '../hooks';
 
 export default function RegisterCard() {
   const { cardState, setCardState } = useCard('');
 
-  const cardNumber = useInput('');
-  const cardNumber2 = useInput('');
-  const cardNumber3 = useInput('');
-  const cardNumber4 = useInput('');
+  const cardNumber = {
+    first: useInput(''),
+    second: useInput(''),
+    third: useInput(''),
+    fourth: useInput(''),
+  };
+
+  const secondInput = useRef(null);
+  const thirdInput = useRef(null);
+  const fourthInput = useRef(null);
 
   useEffect(() => {
-    setCardState([
-      cardNumber.value,
-      cardNumber2.value,
-      cardNumber3.value,
-      cardNumber4.value,
-    ]);
-  }, [
-    cardNumber,
-    cardNumber2,
-    cardNumber3,
-    cardNumber4,
-  ]);
+    const newCardState = Object.values(cardNumber).map((item) => item.value);
+
+    setCardState(newCardState);
+  }, [cardNumber]);
 
   return (
     <div className="app">
@@ -32,13 +29,33 @@ export default function RegisterCard() {
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
-          <BaseInput {...cardNumber} maxLength={4}/>
+          <BaseInput
+            {...cardNumber.first}
+            maxLength={4}
+            nextFocus={secondInput.current}
+          />
           -
-          <BaseInput {...cardNumber2} maxLength={4}/>
+          <BaseInput
+            {...cardNumber.second}
+            ref={secondInput}
+            maxLength={4}
+            nextFocus={thirdInput.current}
+          />
           -
-          <BaseInput {...cardNumber3} type="password" maxLength={4}/>
+          <BaseInput
+            {...cardNumber.third}
+            ref={thirdInput}
+            type="password"
+            maxLength={4}
+            nextFocus={fourthInput.current}
+          />
           -
-          <BaseInput {...cardNumber4} type="password" maxLength={4}/>
+          <BaseInput
+            {...cardNumber.fourth}
+            ref={fourthInput}
+            type="password"
+            maxLength={4}
+          />
         </div>
       </div>
       <div className="input-container">

@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import { Formatter } from '../domain';
 
-type CardState = [string, string, string, string];
+type CardState = string[];
 
 export default function useCard(initialState: string) {
   const [cardState, setState] = useState(initialState);
