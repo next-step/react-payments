@@ -3,16 +3,16 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
 import App from "./App";
-import { CardContext } from "./store/CardContext";
+import { CardProvider } from "./store/CardContext";
 import "./styles/index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <CardContext>
+      <CardProvider>
         <App />
-      </CardContext>
+      </CardProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
