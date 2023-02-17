@@ -44,3 +44,28 @@ input {
 .mr-3 {
   margin-right: 3px;
 }
+.mr-20 {
+  margin-right: 20px;
+}
+.link-button {
+  text-decoration: none;
+  color: #525252;
+}
+
+.content-align {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.favorite-card {
+  border: none;
+  border-bottom: 1px solid #383838;
+  text-align: center;
+}
+
+.favorite-card:focus {
+  outline: none;
+  border-bottom: 1px solid #383838;
+}

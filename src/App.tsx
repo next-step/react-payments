@@ -1,11 +1,21 @@
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AddCard from './pages/AddCard';
+import CardList from './pages/CardList';
+import CompleteAddCard from './pages/CompleteAddCard';
+
+import './App.css';
 
 const App = () => {
   return (
-    <div className="App">
-      <AddCard />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<CardList />} />
+          <Route path="/add-card" element={<AddCard />} />
+          <Route path="/complete-card" element={<CompleteAddCard />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 };
 

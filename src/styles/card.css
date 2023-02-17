@@ -90,6 +90,12 @@
   align-items: center;
 }
 
+.text-align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .card-bottom {
   width: 100%;
   height: 100%;

@@ -1,10 +1,11 @@
 import { useState, ChangeEvent } from 'react';
+import { Link } from 'react-router-dom';
 import CardSecurityCode from '../components/CardSecurityCode';
 import CardExpiration from '../components/CardExpiration';
 import CardNumberInput from '../components/CardNumberInput';
 import CardPassword from '../components/CardPassword';
-import '../styles/index.css';
 import CardholderName from '../components/CardholderName';
+import '../styles/index.css';
 
 const AddCard = () => {
   const [state, setState] = useState({
@@ -50,7 +51,13 @@ const AddCard = () => {
       <h2>1️⃣ 카드 추가</h2>
       <div className="root">
         <div className="app">
-          <h2 className="page-title"> 카드 추가 </h2>
+          <h2 className="page-title">
+            {' '}
+            <Link to="/" className="link-button mr-20">
+              &lt;
+            </Link>{' '}
+            카드 추가{' '}
+          </h2>
           <div className="card-box">
             <div className="empty-card">
               <div className="card-top" />
@@ -71,7 +78,9 @@ const AddCard = () => {
           <CardSecurityCode security={security} onChange={getSecurity} />
           <CardPassword cardPassword={cardPassword} onChange={getCardPassword} />
           <div className="button-box">
-            <span className="button-text">다음</span>
+            <Link to="/complete-card" className="link-button">
+              다음
+            </Link>
           </div>
         </div>
       </div>
