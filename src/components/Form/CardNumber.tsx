@@ -24,7 +24,11 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
   return (
     <InputContainer label="카드 번호">
       <InputBox>
-        <Input onChange={(event) => onChange(event, 0)} maxLength={4}></Input>
+        <Input
+          onChange={(event) => onChange(event, 0)}
+          maxLength={4}
+          name="card1"
+        ></Input>
         <Input onChange={(event) => onChange(event, 1)} maxLength={4}></Input>
         <Input
           type="password"

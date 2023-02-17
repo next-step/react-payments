@@ -6,6 +6,7 @@ function Input({
   size = "full",
   onChange,
   maxLength,
+  name,
 }: InputProps) {
   return (
     <StyledInput
@@ -14,6 +15,7 @@ function Input({
       widthSize={size}
       onChange={onChange}
       maxLength={maxLength}
+      name={name}
     ></StyledInput>
   );
 }
@@ -24,6 +26,7 @@ type InputProps = {
   size?: "full" | "medium" | "small";
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   maxLength?: number;
+  name?: string;
 };
 
 type StyledInputProps = {

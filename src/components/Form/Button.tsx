@@ -13,8 +13,11 @@ const Box = styled.div`
   text-align: right;
 `;
 
-const Text = styled.span`
+const Text = styled.button`
   margin-right: 10px;
+  background-color: white;
+  border: none;
+  font-size: 17px;
 `;
 
 export default Footer;

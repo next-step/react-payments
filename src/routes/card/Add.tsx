@@ -4,7 +4,8 @@ import ExpiredDate from "../../components/Form/ExpiredDate";
 import UserName from "../../components/Form/UserName";
 import Code from "../../components/Form/Code";
 import Password from "../../components/Form/Password";
-import { useState } from "react";
+import Button from "../../components/Form/Button";
+import React, { useState } from "react";
 
 function Add() {
   const [cardNumber, setCardNumber] = useState("");
@@ -35,6 +36,11 @@ function Add() {
     const formattedPassword = Object.values(password).join();
     setPassword(formattedPassword);
   };
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // const card1 = e.currentTarget["card1"].value
+    // console.log(e.currentTarget["card1"].value);
+  };
 
   return (
     <>
@@ -44,12 +50,13 @@ function Add() {
         expireYear={expireYear}
         userName={userName}
       ></Card>
-      <form>
+      <form onSubmit={submitHandler}>
         <CardNumber onCardNumberChange={onCardNumberChange}></CardNumber>
         <ExpiredDate onExpiredDateChange={onExpiredDateChange}></ExpiredDate>
         <UserName onUserNameChange={onUserNameChange}></UserName>
         <Code onCodeChange={onCodeChange}></Code>
         <Password onPasswordChange={onPasswordChange}></Password>
+        <Button />
       </form>
     </>
   );
