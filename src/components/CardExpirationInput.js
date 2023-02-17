@@ -2,7 +2,6 @@ import { useState, useRef } from "react";
 import { CARD_EXPIRATION } from "../constants/card";
 import Span from "./Span";
 
-// TODO : placeholder
 // TODO : 월(1~12) & 일(1~31)
 export default function CardExpirationInput({
   className,
@@ -32,9 +31,9 @@ export default function CardExpirationInput({
 
   function handleChange(event) {
     const { value } = event.target;
-    console.log(inputValue);
+    console.log(event.target, inputValue, value); // TODO : inputValue 갱신 안되는 버그
     if (inputValue[0] == event.target) {
-      if (inputValue > 12) {
+      if (inputValue[0] > 12) {
         alert("만료 월은 1~12 사이 값만 입력 가능합니다.");
         event.preventDefault();
         return false;
@@ -58,6 +57,7 @@ export default function CardExpirationInput({
             <input
               className="input-basic card-expiration"
               type="text"
+              placeholder={index == 0 ? "MM" : "YY"}
               key={dataId}
               onKeyDown={handleKeyDown}
               onChange={handleChange}
