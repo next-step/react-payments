@@ -39,10 +39,10 @@ function Card({
 
 type CardProps = {
   bankName?: string;
-  cardNumber?: string;
+  cardNumber: string;
   userName?: string;
-  expireMonth?: string;
-  expireYear?: string;
+  expireMonth: number;
+  expireYear: number;
   size?: "big" | "small";
 };
 
