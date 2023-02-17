@@ -1,7 +1,7 @@
-@import "./card.css";
-@import "./input.css";
-@import "./button.css";
-@import "./modal.css";
+@import "../components/Card/card.css";
+@import "../components/Input/input.css";
+@import "../components/Button/button.css";
+@import "../components/Modal/modal.css";
 @import "./utils.css";
 
 body {
