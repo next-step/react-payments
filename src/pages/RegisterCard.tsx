@@ -1,12 +1,14 @@
-import { CardBox, Input } from './../components';
-import { useEffect, useMemo, useRef } from 'react';
+import { CardBox, Input, Modal } from './../components';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useCard, useForm } from '../hooks';
 import { Filter } from '../domain';
 import { InputContainer } from '../container';
+import SelectCard from '../components/SelectCard';
 
 const { onlyNumber } = Filter;
 
 export default function RegisterCard() {
+  const [openCardPopup, setOpenCardPopup] = useState(false);
   const { cardState, setCardState } = useCard({
     cardCompany: '',
     cardNumber: '',
@@ -27,19 +29,30 @@ export default function RegisterCard() {
     year: '',
   });
 
-  const secondInput = useRef(null);
-  const thirdInput = useRef(null);
-  const fourthInput = useRef(null);
+  const [cardInfo, setCardInfo] = useForm({
+    cardUserName: '',
+    cvcNumber: '',
+    cardPassword1: '',
+    cardPassword2: '',
+  });
 
-  const expiredMonthInput = useRef(null);
-  const expiredYearInput = useRef(null);
+  const secondInput = useRef();
+  const thirdInput = useRef();
+  const fourthInput = useRef();
 
-  const cvcInput = useRef(null);
+  const expiredMonthInput = useRef();
+  const expiredYearInput = useRef();
+
+  const cvcInput = useRef();
   const passwordInput = useRef();
   const passwordInput2 = useRef();
 
   const newCardNumber = useMemo(() => Object.values(cardNumber).map((item) => item.value), [cardNumber]);
   const newExpiredDate = useMemo(() => Object.values(expired).map((item) => item.value).join(''), [expired]);
+
+  const toggleOpenCardPopup = () => {
+    setOpenCardPopup(!openCardPopup);
+  };
 
   useEffect(() => {
     setCardState({
@@ -114,8 +127,9 @@ export default function RegisterCard() {
       <InputContainer title="카드 소유자 이름(선택)">
         <Input
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          nextFocus={cvcInput.current}
           maxLength={30}
+          {...cardInfo.cardUserName}
+          onChange={setCardInfo}
         />
       </InputContainer>
       <InputContainer title="보안코드(CVC/CVV)" className="w-25">
@@ -125,9 +139,11 @@ export default function RegisterCard() {
           filter={onlyNumber}
           ref={cvcInput}
           nextFocus={passwordInput.current}
+          {...cardInfo.cvcNumber}
+          onChange={setCardInfo}
         />
       </InputContainer>
-      <InputContainer title="카드 비밀번호" className="flex-start" notInputBox={true}>
+      <InputContainer title="카드 비밀번호" className="flex-start" notInputBox>
         <Input
           type="password"
           filter={onlyNumber}
@@ -135,7 +151,8 @@ export default function RegisterCard() {
           className="w-15"
           ref={passwordInput}
           nextFocus={passwordInput2.current}
-
+          {...cardInfo.cardPassword1}
+          onChange={setCardInfo}
         />
         <Input
           ref={passwordInput2}
@@ -143,6 +160,8 @@ export default function RegisterCard() {
           filter={onlyNumber}
           maxLength={1}
           className="w-15"
+          {...cardInfo.cardPassword2}
+          onChange={setCardInfo}
         />
         <p className="flex-center w-15">•</p>
         <p className="flex-center w-15">•</p>
@@ -150,6 +169,9 @@ export default function RegisterCard() {
       <div className="button-box">
         <span className="button-text">다음</span>
       </div>
+      <Modal open={true}>
+        <SelectCard/>
+      </Modal>
     </div>
   );
 }
