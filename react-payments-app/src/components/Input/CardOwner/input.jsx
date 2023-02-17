@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
+import { MAX_INPUT_LENGTH } from "../../../common/constant";
 
-const MAX_NAME_LENGTH = 30;
 const CardOwnerInput = ({ onChange }) => {
   const [cardOwner, setCardOwner] = useState("");
   const [length, setLength] = useState("");
@@ -13,7 +13,7 @@ const CardOwnerInput = ({ onChange }) => {
     setCardOwner(updatedCardOwner);
     setLength(cardOwner.length);
 
-    if (length === MAX_NAME_LENGTH) {
+    if (length === MAX_INPUT_LENGTH.NAME) {
       setError("이름은 30자까지만 입력할 수 있습니다.");
       return;
     }
@@ -32,7 +32,7 @@ const CardOwnerInput = ({ onChange }) => {
         type="text"
         className="input-basic input-bigger-text"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        maxLength={MAX_NAME_LENGTH + 2}
+        maxLength={MAX_INPUT_LENGTH.NAME + 2}
         value={cardOwner}
         onChange={setCardOwnerByInput}
       />

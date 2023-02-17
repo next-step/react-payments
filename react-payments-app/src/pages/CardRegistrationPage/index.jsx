@@ -1,23 +1,41 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useCard } from "../../store/CardContext";
+import { MAX_INPUT_LENGTH } from "../../common/constant";
+
 import Header from "../../components/Header/Header";
 import Card from "../../components/Card/Card";
 import CardForm from "../../components/Input/CardForm";
-import CardNumbersInput from "../../components/Input/CardNumbers/input";
-import CardExpirationDateInput from "../../components/Input/CardExpirationDate/input";
-import CardOwnerInput from "../../components/Input/CardOwner/input";
-import CardCVCInput from "../../components/Input/CardSecurityCode/input";
-import CardPasswordInput from "../../components/Input/CardPassword/input";
 
 const CardRegistration = () => {
   const navigate = useNavigate();
+  const { card, setCard } = useCard();
 
   const goBackToListPage = (e) => {
     navigate("/");
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
+
+  const isAllFilledOut = (cardInfo) => {
+    const { cardNumbers, expirationDate, password, CVC } = cardInfo;
+
+    return (
+      CVC.length === MAX_INPUT_LENGTH.CVC &&
+      cardNumbers.every(
+        (part) => part.length === MAX_INPUT_LENGTH.CARD_NUMBER
+      ) &&
+      expirationDate.every((part) => part.length === MAX_INPUT_LENGTH.DATE)
+      // TODO: fix. pw[1] is empty.
+      // &&password.every((part) => part.length === MAX_INPUT_LENGTH.PW)
+    );
+  };
+
+  const handleSubmit = (cardInfo) => {
+    console.log(cardInfo);
+    if (!isAllFilledOut(cardInfo)) {
+    }
+    setCard(cardInfo);
+    //open modal
   };
 
   return (
@@ -32,7 +50,7 @@ const CardRegistration = () => {
         userName={"JEONG"}
         expirationDate={"12/34"}
       />
-      <CardForm handleSubmit={handleSubmit} />
+      <CardForm onSubmit={handleSubmit} />
     </>
   );
 };

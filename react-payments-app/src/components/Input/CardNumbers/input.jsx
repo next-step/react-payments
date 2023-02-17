@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
-const MAX_CARD_NUMBER_LENGTH = 4;
+import { MAX_INPUT_LENGTH } from "../../../common/constant";
 
 const CardNumbersInput = ({ onChange }) => {
   const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
@@ -42,7 +41,7 @@ const CardNumbersInput = ({ onChange }) => {
           type="text"
           value={cardNumbers[0]}
           onChange={setCardNumberByIndex(0)}
-          maxLength={MAX_CARD_NUMBER_LENGTH}
+          maxLength={MAX_INPUT_LENGTH.CARD_NUMBER}
         />
         -
         <input
@@ -51,7 +50,7 @@ const CardNumbersInput = ({ onChange }) => {
           type="text"
           value={cardNumbers[1]}
           onChange={setCardNumberByIndex(1)}
-          maxLength={MAX_CARD_NUMBER_LENGTH}
+          maxLength={MAX_INPUT_LENGTH.CARD_NUMBER}
         />
         -
         <input
@@ -60,7 +59,7 @@ const CardNumbersInput = ({ onChange }) => {
           type="password"
           value={cardNumbers[2]}
           onChange={setCardNumberByIndex(2)}
-          maxLength={MAX_CARD_NUMBER_LENGTH}
+          maxLength={MAX_INPUT_LENGTH.CARD_NUMBER}
         />
         -
         <input
@@ -69,7 +68,7 @@ const CardNumbersInput = ({ onChange }) => {
           type="password"
           value={cardNumbers[3]}
           onChange={setCardNumberByIndex(3)}
-          maxLength={MAX_CARD_NUMBER_LENGTH}
+          maxLength={MAX_INPUT_LENGTH.CARD_NUMBER}
         />
       </div>
     </div>

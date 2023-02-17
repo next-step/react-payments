@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-
-const MAX_CVC_LENGTH = 3;
+import { MAX_INPUT_LENGTH } from "../../../common/constant";
 
 const CardCVCInput = ({ onChange }) => {
   const [CVC, setCVC] = useState("");
@@ -29,7 +28,7 @@ const CardCVCInput = ({ onChange }) => {
       <input
         className="input-basic w-25"
         type="password"
-        maxLength={MAX_CVC_LENGTH}
+        maxLength={MAX_INPUT_LENGTH.CVC}
         value={CVC}
         onChange={setCVCByInput}
         required
