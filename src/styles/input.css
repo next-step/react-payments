@@ -33,6 +33,18 @@
   border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;
+  margin: 0.1rem;
+}
+.input-disabled {
+  background-color: #dee2e6;
+  height: 45px;
+  width: 100%;
+  text-align: center;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: #9ca3af;
+  border: none;
+  border-radius: 0.25rem;
 }
 
 .input-underline {

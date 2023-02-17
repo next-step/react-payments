@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { CARD_SECURITY_CODE } from "../constants/card";
+import Span from "./Span";
 
+// TODO : 마지막 입력값을 구분하기 위한 keydown, state 변경을 위한 onchange 구분은 불가피한건가?
 export default function CardSecurityCodeInput({
   className,
   type,
@@ -9,26 +11,36 @@ export default function CardSecurityCodeInput({
 }) {
   const [inputValue, setInputValue] = useState("");
 
-  function handleChange() {
-    setInputValue(inputValue);
+  function isValidSecurityCode(value) {
+    const pattern_num = /[0-9]/;
+    if (pattern_num.test(value)) return true;
+    if (value === "Backspace" || value === "Tab" || value == "Meta")
+      return true;
+    else return false;
   }
-  function isValidValue(data) {
-    if (isNaN(parseInt(data))) return false;
-    return true;
+  function handleKeyDown(event) {
+    const { key } = event;
+    if (!isValidSecurityCode(key)) {
+      alert("숫자만 입력 가능합니다.");
+      event.preventDefault();
+      return false;
+    }
   }
-  function handleKeyDown({ key }) {
-    const data = key;
-    if (!isValidValue(data)) return;
+  function handleChange(event) {
+    const { value } = event.target;
+    setInputValue(value);
   }
   return (
-    <input
-      className={className}
-      type={type}
-      placeholder={placeholder}
-      onKeyDown={handleKeyDown}
-      onChange={handleChange}
-      defaultValue={inputValue}
-      maxLength={maxLength}
-    ></input>
+    <div className="input-container">
+      <Span className="input-title">보안코드(CVC/CVV)</Span>
+      <input
+        className="input-basic w-25 card-cvc-code"
+        type="password"
+        onKeyDown={handleKeyDown}
+        onChange={handleChange}
+        defaultValue={inputValue}
+        maxLength={CARD_SECURITY_CODE.MAX_LENGTH}
+      ></input>
+    </div>
   );
 }

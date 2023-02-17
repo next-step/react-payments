@@ -21,5 +21,5 @@ export const CARD_PASSWORD = {
 
 export const CARD_OWNER_NAME = {
   MAX_LENGTH: 30,
-  PLACEHOLDER: "NAME",
+  PLACEHOLDER: "카드에 표시된 이름과 동일하게 입력하세요.",
 };
