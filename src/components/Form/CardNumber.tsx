@@ -16,6 +16,11 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
     event: React.ChangeEvent<HTMLInputElement>,
     order: number
   ) => {
+    console.log(Number(event.currentTarget.value));
+    if (!event.currentTarget.value) {
+      console.log("test");
+      return;
+    }
     let newArr = [...cardNumbers];
     newArr[order] = Number(event.currentTarget.value);
     setCardNumbers(newArr);
@@ -30,6 +35,7 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
             maxLength={4}
             name={`card-${index}`}
             key={`card-${index}`}
+            type={index < 2 ? "text" : "password"}
           ></Input>
         ))}
       </InputBox>
