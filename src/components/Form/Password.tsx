@@ -35,24 +35,28 @@ function Password({ onPasswordChange }: PasswordProps) {
         type="password"
         maxLength={1}
         onChange={(e) => onChange(e, 1)}
+        name="password1"
       ></Input>
       <Input
         size="small"
         type="password"
         maxLength={1}
         onChange={(e) => onChange(e, 2)}
+        name="password2"
       ></Input>
       <Input
         size="small"
         type="password"
         maxLength={1}
         onChange={(e) => onChange(e, 3)}
+        name="password3"
       ></Input>
       <Input
         size="small"
         type="password"
         maxLength={1}
         onChange={(e) => onChange(e, 4)}
+        name="password4"
       ></Input>
     </InputContainer>
   );

@@ -7,6 +7,21 @@ import Password from "../../components/Form/Password";
 import Button from "../../components/Form/Button";
 import React, { useState } from "react";
 
+const INPUT_NAMES = [
+  "card-0",
+  "card-1",
+  "card-2",
+  "card-3",
+  "month",
+  "year",
+  "username",
+  "code",
+  "password1",
+  "password2",
+  "password3",
+  "password4",
+];
+
 function Add() {
   const [cardNumber, setCardNumber] = useState("");
   const [expireMonth, setExpireMonth] = useState(0);
@@ -32,14 +47,28 @@ function Add() {
   const onCodeChange = (code: number) => {
     setCode(code);
   };
-  const onPasswordChange = (password: PasswordType): void => {
+  const onPasswordChange = (password: ObjectType): void => {
     const formattedPassword = Object.values(password).join();
     setPassword(formattedPassword);
   };
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // const card1 = e.currentTarget["card1"].value
-    // console.log(e.currentTarget["card1"].value);
+    const inputData: ObjectType = {};
+
+    INPUT_NAMES.some((inputName) => {
+      if (!e.currentTarget[inputName]?.value && inputName !== "username") {
+        let prefix = inputName;
+        if (inputName.startsWith("card-")) {
+          prefix = "카드";
+        }
+        if (inputName.startsWith("password-")) {
+          prefix = "비밀번호";
+        }
+        alert(`필수값 누락 (${prefix})`);
+        return true;
+      }
+      inputData[inputName] = e.currentTarget[inputName]?.value;
+    });
   };
 
   return (
@@ -62,8 +91,8 @@ function Add() {
   );
 }
 
-type PasswordType = {
-  [key: number]: string;
+type ObjectType = {
+  [key: number | string]: string;
 };
 
 export default Add;

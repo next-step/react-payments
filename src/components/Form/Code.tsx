@@ -8,7 +8,7 @@ function Code({ onCodeChange }: CodeProps) {
 
   return (
     <InputContainer label="보안코드(CVC/CVV)">
-      <Input size="medium" onChange={onChange}></Input>
+      <Input size="medium" onChange={onChange} name="code"></Input>
     </InputContainer>
   );
 }

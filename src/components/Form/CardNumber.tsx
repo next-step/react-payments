@@ -24,22 +24,36 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
   return (
     <InputContainer label="카드 번호">
       <InputBox>
-        <Input
+        {cardNumbers.map((cardNumber, index) => (
+          <Input
+            onChange={(event) => onChange(event, index)}
+            maxLength={4}
+            name={`card-${index}`}
+            key={`card-${index}`}
+          ></Input>
+        ))}
+        {/* <Input
           onChange={(event) => onChange(event, 0)}
           maxLength={4}
-          name="card1"
+          name="card-1"
         ></Input>
-        <Input onChange={(event) => onChange(event, 1)} maxLength={4}></Input>
+        <Input
+          onChange={(event) => onChange(event, 1)}
+          maxLength={4}
+          name="card-2"
+        ></Input>
         <Input
           type="password"
           onChange={(event) => onChange(event, 2)}
           maxLength={4}
+          name="card-3"
         ></Input>
         <Input
           type="password"
           onChange={(event) => onChange(event, 3)}
           maxLength={4}
-        ></Input>
+          name="card-4"
+        ></Input> */}
       </InputBox>
     </InputContainer>
   );

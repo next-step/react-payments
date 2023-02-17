@@ -26,11 +26,13 @@ function ExpiredDate({ onExpiredDateChange }: ExpiredDateProps) {
           placeholder="MM"
           maxLength={2}
           onChange={(e) => onChange(e, 0)}
+          name="month"
         />
         <Input
           placeholder="YY"
           maxLength={2}
           onChange={(e) => onChange(e, 1)}
+          name="year"
         />
       </InputBox>
     </InputContainer>
