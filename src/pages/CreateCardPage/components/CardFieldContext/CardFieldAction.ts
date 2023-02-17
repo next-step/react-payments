@@ -1,6 +1,6 @@
 import { CardFieldAction } from './CardFieldReducer';
 
-type ActionTypes = "APPEND_CARD_NUM" | "DELETE_CARD_NUM" | "UPDATE_CARD_OWNER_NAME" | "UPDATE_CARD_CVC"
+type ActionTypes = "APPEND_CARD_NUM" | "DELETE_CARD_NUM" | "UPDATE_CARD_OWNER_NAME" | "UPDATE_CARD_CVC" | "UPDATE_CARD_PASSWORD"
 
 export const ACTION = {
   APPEND_CARD_NUM: (value: string) => ({
@@ -34,4 +34,12 @@ export const ACTION = {
             value,
         },
     }),
+
+    UPDATE_CARD_PASSWORD : (value: string) => ({
+      type: 'UPDATE',
+      payload: {
+          key: 'cardPassword',
+          value,
+      },
+  }),
 } satisfies Record<ActionTypes, (value: any) => CardFieldAction>;
