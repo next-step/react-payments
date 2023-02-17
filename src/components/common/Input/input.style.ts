@@ -24,6 +24,7 @@ export const InputEl = styled.input<Pick<InputProps, "textAlign" | "color">>`
   caret-color: #000000;
   border: none;
   color: ${(props) => props.color};
+  font-size: 16px;
 `;
 
 export const InputWrapper = styled.div<Pick<InputProps, "variant">>`
