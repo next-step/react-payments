@@ -1,7 +1,7 @@
-import { Label, TextInput } from '@/components';
 import React from 'react';
-import { useCardFieldDispatchContext } from '../../CardFieldContext/CardFieldContext';
-import { ACTION } from '../../CardFieldContext/CardFieldAction';
+
+import { Label, TextInput } from '@/components';
+import { ACTION, useCardFieldDispatchContext } from '../../CardFieldContext';
 
 type CardOwnerNameFieldProps = {
   ownerName: string;
