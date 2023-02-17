@@ -19,11 +19,15 @@ function CardNumberField({ cardNumber }: CardNumberFieldProps) {
 
     const newValue = value.slice(-1);
 
-    const backspace = value.length < addDashes(cardNumber).length;
-    if (backspace) {
+    const onBackspace = value.length < addDashes(cardNumber).length;
+    if (onBackspace) {
       dispatch(ACTION.DELETE_CARD_NUM());
       return;
     }
+
+    const isNotNumber = Number.isNaN(+newValue) || newValue === ' ';
+
+    if (isNotNumber) return;
 
     dispatch(ACTION.APPEND_CARD_NUM(newValue));
   };
