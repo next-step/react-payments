@@ -1,6 +1,6 @@
 import { ChangeEvent, forwardRef, memo } from 'react';
 
-interface Props {
+export interface Props {
   maxLength?: number;
   type?: string;
   className?: string;

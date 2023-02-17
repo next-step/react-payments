@@ -2,7 +2,7 @@ import { useForm } from '../../hooks';
 import { InputContainer } from '../index';
 import { useRef } from 'react';
 import { Input } from '../../components';
-import { FormProps } from '../../pages';
+import { FormProps } from '../../pages/RegisterCard';
 
 export default function CardNumberContainer({ filter }: FormProps) {
   const cardNumber2 = useRef();
