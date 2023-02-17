@@ -32,7 +32,7 @@ const Input = forwardRef((
     const value = e.target.value;
 
     if (maxLength && value.length === maxLength) {
-      nextFocus && nextFocus.focus();
+      nextFocus?.focus();
     }
     onChange?.(e);
   };

@@ -12,7 +12,7 @@ import {
   SecurityCodeContainer
 } from '../container/RegisterCard';
 
-const { onlyNumber } = Filter;
+const { onlyNumber, onlyString } = Filter;
 
 export interface FormProps {
   filter?: (value: string) => string;
@@ -34,7 +34,7 @@ export default function RegisterCard() {
       <CardBox {...cardState} />
       <CardNumberContainer filter={onlyNumber}/>
       <ExpiredDateContainer filter={onlyNumber}/>
-      <CardHolderContainer/>
+      <CardHolderContainer filter={onlyString}/>
       <SecurityCodeContainer filter={onlyNumber}/>
       <CardPasswordContainer filter={onlyNumber}/>
 

@@ -1,8 +1,12 @@
 import { useForm } from '../../hooks';
 import { InputContainer } from '../index';
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { Input } from '../../components';
 import { FormProps } from '../../pages/RegisterCard';
+import { Validator } from '../../domain';
+
+const MAX_LENGTH = 4;
+const VALIDATE_ERROR = '카드 번호를 입력 해 주세요.';
 
 export default function CardNumberContainer({ filter }: FormProps) {
   const cardNumber2 = useRef();
@@ -15,12 +19,19 @@ export default function CardNumberContainer({ filter }: FormProps) {
     fourth: '',
   });
 
+  const isValidateCard = useMemo(() => (
+    Validator.isEnterCardNumber(cardNumber, MAX_LENGTH)
+  ), [cardNumber]);
+
   return (
-    <InputContainer title="카드 번호">
+    <InputContainer
+      title="카드 번호"
+      errorMessage={!isValidateCard && VALIDATE_ERROR}
+    >
       <Input
         {...cardNumber.first}
         onChange={setCardNumber}
-        maxLength={4}
+        maxLength={MAX_LENGTH}
         nextFocus={cardNumber2.current}
         filter={filter}
       />
@@ -29,7 +40,7 @@ export default function CardNumberContainer({ filter }: FormProps) {
         {...cardNumber.second}
         onChange={setCardNumber}
         ref={cardNumber2}
-        maxLength={4}
+        maxLength={MAX_LENGTH}
         nextFocus={cardNumber3.current}
         filter={filter}
       />
@@ -39,7 +50,7 @@ export default function CardNumberContainer({ filter }: FormProps) {
         onChange={setCardNumber}
         ref={cardNumber3}
         type="password"
-        maxLength={4}
+        maxLength={MAX_LENGTH}
         nextFocus={cardNumber4.current}
         filter={filter}
       />
@@ -49,7 +60,7 @@ export default function CardNumberContainer({ filter }: FormProps) {
         onChange={setCardNumber}
         ref={cardNumber4}
         type="passwordInput"
-        maxLength={4}
+        maxLength={MAX_LENGTH}
         filter={filter}
       />
     </InputContainer>

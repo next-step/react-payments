@@ -1,10 +1,13 @@
 import { InputContainer } from '../index';
 import { Input } from '../../components';
 import { FormProps } from '../../pages/RegisterCard';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from '../../hooks';
-import { useRef } from 'react';
+
+const MAX_LENGTH = 1;
 
 export default function CardPasswordContainer({ filter }: FormProps) {
+  const [errorMessage, setErrorMessage] = useState('');
   const passwordRef1 = useRef();
   const passwordRef2 = useRef();
   const [cardPassword, setCardPassword] = useForm({
@@ -12,12 +15,29 @@ export default function CardPasswordContainer({ filter }: FormProps) {
     second: '',
   });
 
+  useEffect(() => {
+    const { first, second } = cardPassword;
+    const passwordLength = first.value.length + second.value.length;
+
+    if (passwordLength !== MAX_LENGTH * 2) {
+      setErrorMessage('카드 비밀번호 앞 2자리를 입력 해 주세요.');
+      return;
+    }
+
+    setErrorMessage('');
+  });
+
   return (
-    <InputContainer title="카드 비밀번호" className="flex-start" notInputBox>
+    <InputContainer
+      title="카드 비밀번호"
+      className="flex-start"
+      notInputBox
+      errorMessage={errorMessage}
+    >
       <Input
         type="password"
         filter={filter}
-        maxLength={1}
+        maxLength={MAX_LENGTH}
         className="w-15"
         ref={passwordRef1}
         nextFocus={passwordRef2.current}
@@ -28,7 +48,7 @@ export default function CardPasswordContainer({ filter }: FormProps) {
         ref={passwordRef2}
         type="password"
         filter={filter}
-        maxLength={1}
+        maxLength={MAX_LENGTH}
         className="w-15"
         {...cardPassword.second}
         onChange={setCardPassword}

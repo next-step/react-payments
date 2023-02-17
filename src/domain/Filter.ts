@@ -15,4 +15,8 @@ export default class Filter {
   static onlyNumber(text: string): string {
     return text.replace(/[^0-9]/g, '');
   }
+
+  static onlyString(text: string): string {
+    return text.replace(/[^a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣\s]/g, '');
+  }
 }
