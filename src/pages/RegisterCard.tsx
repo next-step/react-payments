@@ -169,7 +169,7 @@ export default function RegisterCard() {
       <div className="button-box">
         <span className="button-text">다음</span>
       </div>
-      <Modal open={true}>
+      <Modal open={openCardPopup}>
         <SelectCard/>
       </Modal>
     </div>

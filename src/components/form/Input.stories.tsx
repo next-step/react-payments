@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { Input } from '../../components';
+import { Input } from '../index';
 
 export default {
   title: 'Payments/BaseInput',

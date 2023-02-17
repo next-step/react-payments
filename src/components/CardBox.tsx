@@ -3,12 +3,11 @@ export interface CardBoxType {
   cardNumber?: string;
   userName?: string;
   expiredDate?: string;
-  type?: 'empty' | 'small' | 'big';
+  type?: 'small' | 'big';
 }
 
 const config = {
   type: {
-    'empty': 'empty-card',
     'small': 'small-card',
     'big': 'big-card',
   }
@@ -17,7 +16,7 @@ const config = {
 export default function CardBox({ cardCompany, cardNumber, userName, expiredDate, type }: CardBoxType) {
   return (
     <div className="card-box">
-      <div className={config.type[type] || config.type.empty}>
+      <div className={config.type[type] || config.type.small}>
         <div className="card-top">
           <span className="card-text">{cardCompany}</span>
         </div>
