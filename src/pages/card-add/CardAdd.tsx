@@ -1,22 +1,24 @@
+import { useState } from 'react'
+
+import { Card } from '@/components/card'
+
 function CardAdd() {
+  const [cardInfo, setCardInfo] = useState({
+    cardNumber: 0,
+    name: '',
+    expiratedYear: 0,
+    expiratedMonth: 0,
+  })
   return (
     <div className="root">
       <div className="app">
-        <h2 className="page-title">카드 추가</h2>
-        <div className="card-box">
-          <div className="empty-card">
-            <div className="card-top" />
-            <div className="card-middle">
-              <div className="small-card__chip" />
-            </div>
-            <div className="card-bottom">
-              <div className="card-bottom__info">
-                <span className="card-text">NAME</span>
-                <span className="card-text">MM / YY</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <h2 className="page-title">&#60; 카드 추가</h2>
+        <Card
+          cardNumber={cardInfo.cardNumber}
+          name={cardInfo.name}
+          expiratedYear={cardInfo.expiratedYear}
+          expiratedMonth={cardInfo.expiratedMonth}
+        />
         <div className="input-container">
           <span className="input-title">카드 번호</span>
           <div className="input-box">
