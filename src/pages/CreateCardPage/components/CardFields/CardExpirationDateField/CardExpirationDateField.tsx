@@ -3,22 +3,25 @@ import React from 'react';
 import { ACTION, useCardFieldDispatchContext } from '../../CardFieldContext';
 import { SEPARATOR, addSeparator, isNotNumber } from '@/utils/formatter';
 import { isMonth } from '@/utils/validate';
+import { LABEL_TEXT, PLACEHOLDER_TEXT } from '@/constants/createCard';
+import { Colors } from '@/styles/colors';
 
 type CardExpirationDateFieldProps = {
   expirationMonth: string;
   expirationYear: string;
+  fontColor: Colors;
 };
 
 const CardExpirationDateField = ({
   expirationMonth,
   expirationYear,
+  fontColor,
 }: CardExpirationDateFieldProps) => {
   const dispatch = useCardFieldDispatchContext();
 
   const EXPIRATION_DATE_INPUT_LENGTH = 4 + SEPARATOR.length;
   const EXPIRATION_DATE_INPUT_WIDTH = '137px';
 
-  const placeholder = 'MM / YY';
   const handleChange = (value: string) => {
     if (!dispatch) return;
 
@@ -38,12 +41,12 @@ const CardExpirationDateField = ({
 
   // TODO : input 2개로 관리하는 것이 더 좋은가? (month, year)
   return (
-    <Label labelText="만료일">
+    <Label labelText={LABEL_TEXT.EXPIRATION_DATE}>
       <TextInput
         value={expirationMonth + expirationYear}
-        fontColor="blue"
+        fontColor={fontColor}
         label="expirationDate"
-        placeholder={placeholder}
+        placeholder={PLACEHOLDER_TEXT.EXPIRATION_DATE}
         select={addSeparator}
         maxLength={EXPIRATION_DATE_INPUT_LENGTH}
         width={EXPIRATION_DATE_INPUT_WIDTH}

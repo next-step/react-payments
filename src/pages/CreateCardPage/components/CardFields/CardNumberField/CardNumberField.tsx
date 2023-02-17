@@ -7,16 +7,18 @@ import {
   addCardNumberDashes,
   replaceCardNumberToDot,
 } from '@/utils/formatter';
+import { LABEL_TEXT } from '@/constants/createCard';
+import { Colors } from '@/styles/colors';
 
 type CardNumberFieldProps = {
   cardNumber: string;
+  fontColor: Colors;
 };
 
-function CardNumberField({ cardNumber }: CardNumberFieldProps) {
+function CardNumberField({ cardNumber, fontColor }: CardNumberFieldProps) {
   const dispatch = useCardFieldDispatchContext();
 
   const CARD_NUMBER_LENGTH = 16 + DASH.length * 3;
-  const cardNumberLabelText = '카드번호';
 
   const handleChange = (value: string) => {
     if (dispatch === null) return;
@@ -42,11 +44,11 @@ function CardNumberField({ cardNumber }: CardNumberFieldProps) {
   );
 
   return (
-    <Label labelText={cardNumberLabelText}>
+    <Label labelText={LABEL_TEXT.CARD_NUMBER}>
       <TextInput
         value={cardNumber}
         select={cardNumberSelector}
-        fontColor="blue"
+        fontColor={fontColor}
         label="cardNumber"
         inputMode="numeric"
         maxLength={CARD_NUMBER_LENGTH}

@@ -2,15 +2,18 @@ import React from 'react';
 
 import { Label, TextInput } from '@/components';
 import { ACTION, useCardFieldDispatchContext } from '../../CardFieldContext';
+import { Colors } from '@/styles/colors';
+import { LABEL_TEXT, PLACEHOLDER_TEXT } from '@/constants/createCard';
 
 type CardOwnerNameFieldProps = {
   ownerName: string;
+  fontColor: Colors;
 };
-const CardOwnerNameField = ({ ownerName }: CardOwnerNameFieldProps) => {
+const CardOwnerNameField = ({
+  ownerName,
+  fontColor,
+}: CardOwnerNameFieldProps) => {
   const TEXT_LIMIT = 30;
-  const cardOwnerNameLabelText = '카드 소유자 이름 (선택)';
-  const cardOwnerNamePlaceholderText =
-    '카드에 표시된 이름과 동일하게 입력하세요.';
 
   const dispatch = useCardFieldDispatchContext();
 
@@ -20,16 +23,16 @@ const CardOwnerNameField = ({ ownerName }: CardOwnerNameFieldProps) => {
 
   return (
     <Label
-      labelText={cardOwnerNameLabelText}
+      labelText={LABEL_TEXT.CARD_OWNER_NAME}
       textLength={ownerName.length}
       textLimit={TEXT_LIMIT}
     >
       <TextInput
         maxLength={30}
-        fontColor="blue"
+        fontColor={fontColor}
         label="ownerName"
         value={ownerName}
-        placeholder={cardOwnerNamePlaceholderText}
+        placeholder={PLACEHOLDER_TEXT.CARD_OWNER_NAME}
         onChange={handleOwnerNameChange}
         textAlign="left"
       />

@@ -8,16 +8,30 @@ import { CardExpirationDateField } from './CardExpirationDateField';
 
 const CardFields = () => {
   const data = useCardFieldContext();
+
+  if (data === null) return null;
+
+  const {
+    cardNumber,
+    cardPassword,
+    cvc,
+    expirationMonth,
+    expirationYear,
+    ownerName,
+  } = data;
+
+  const fontColor = 'blue';
   return (
     <form>
-      <CardNumberField cardNumber={data?.cardNumber || ''} />
+      <CardNumberField cardNumber={cardNumber} fontColor={fontColor} />
       <CardExpirationDateField
-        expirationMonth={data?.expirationMonth || ''}
-        expirationYear={data?.expirationYear || ''}
+        expirationMonth={expirationMonth}
+        expirationYear={expirationYear}
+        fontColor={fontColor}
       />
-      <CardOwnerNameField ownerName={data?.ownerName || ''} />
-      <CardCVCNumberField cvc={data?.cvc || ''} />
-      <CardPasswordField cardPassword={data?.cardPassword || ''} />
+      <CardOwnerNameField ownerName={ownerName} fontColor={fontColor} />
+      <CardCVCNumberField cvc={cvc} fontColor={fontColor} />
+      <CardPasswordField cardPassword={cardPassword} fontColor={fontColor} />
     </form>
   );
 };

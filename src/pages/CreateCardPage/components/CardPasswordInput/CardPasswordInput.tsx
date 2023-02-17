@@ -1,5 +1,5 @@
 import { TextInput } from '@/components';
-import { colors } from '@/styles/colors';
+import { Colors, colors } from '@/styles/colors';
 import React from 'react';
 import {
   CardPasswordDot,
@@ -9,9 +9,14 @@ import {
 type CardPasswordInputProps = {
   onChange: (value: string) => void;
   password: string;
+  fontColor: Colors;
 };
 
-const CardPasswordInput = ({ onChange, password }: CardPasswordInputProps) => {
+const CardPasswordInput = ({
+  onChange,
+  password,
+  fontColor,
+}: CardPasswordInputProps) => {
   const InputRefs = React.useRef<HTMLInputElement[]>([]);
   const CARD_PASSWORD_WIDTH = '45px';
   const cardPasswordArray = ['PASSWORD', 'PASSWORD', 'DOT', 'DOT'];
@@ -44,8 +49,9 @@ const CardPasswordInput = ({ onChange, password }: CardPasswordInputProps) => {
                 if (!ref) return;
                 InputRefs.current[index] = ref;
               }}
+              fontColor={fontColor}
               inputMode="numeric"
-              fontColor="blue"
+              type="password"
               label="cardPassword"
               onChange={handleChange}
               value={password[index] || ''}
@@ -58,7 +64,7 @@ const CardPasswordInput = ({ onChange, password }: CardPasswordInputProps) => {
         return (
           <CardPasswordDot
             key={`dot-${index}`}
-            color={colors['blue']}
+            color={colors[fontColor]}
             size={CARD_PASSWORD_WIDTH}
           >
             <span>•</span>
@@ -69,4 +75,4 @@ const CardPasswordInput = ({ onChange, password }: CardPasswordInputProps) => {
   );
 };
 
-export default CardPasswordInput;
+export default React.memo(CardPasswordInput);

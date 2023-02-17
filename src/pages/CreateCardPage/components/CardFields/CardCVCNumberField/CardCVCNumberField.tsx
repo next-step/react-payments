@@ -4,13 +4,17 @@ import styled from '@emotion/styled';
 import { Label, TextInput } from '@/components';
 import { ReactComponent as CircleQuestion } from '@/assets/circle_question.svg';
 import { ACTION, useCardFieldDispatchContext } from '../../CardFieldContext';
+import { LABEL_TEXT } from '@/constants/createCard';
+import { Colors } from '@/styles/colors';
 
 type CardCVCNumberFieldProps = {
   cvc: string;
+  fontColor: Colors;
 };
 
-const CardCVCNumberField = ({ cvc }: CardCVCNumberFieldProps) => {
+const CardCVCNumberField = ({ cvc, fontColor }: CardCVCNumberFieldProps) => {
   const CVC_NUMBER_LIMIT = 3;
+  const CVC_NUMBER_INPUT_WIDTH = '84px';
 
   const dispatch = useCardFieldDispatchContext();
 
@@ -21,12 +25,12 @@ const CardCVCNumberField = ({ cvc }: CardCVCNumberFieldProps) => {
   };
 
   return (
-    <Label labelText="보안 코드(CVC/CVV)">
+    <Label labelText={LABEL_TEXT.CVC}>
       <CardCVCNumberInputContainer>
         <TextInput
-          fontColor="blue"
+          fontColor={fontColor}
           inputMode="numeric"
-          width="84px"
+          width={CVC_NUMBER_INPUT_WIDTH}
           type="password"
           maxLength={CVC_NUMBER_LIMIT}
           label="cvc"
