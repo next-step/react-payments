@@ -1,10 +1,11 @@
 import styled from '@emotion/styled';
 
 export const CardPasswordDot = styled.div<{
+  size: string;
   color: string;
 }>`
-  width: 45px;
-  high: 45px;
+  width: ${({ size }) => size};
+  height: ${({ size }) => size};
   display: flex;
   justify-content: center;
   align-items: center;

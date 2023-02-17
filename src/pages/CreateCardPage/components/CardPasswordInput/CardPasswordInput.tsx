@@ -12,16 +12,22 @@ type CardPasswordInputProps = {
 };
 
 const CardPasswordInput = ({ onChange, password }: CardPasswordInputProps) => {
-  const secondInputRef = React.useRef<HTMLInputElement>(null);
+  const InputRefs = React.useRef<HTMLInputElement[]>([]);
+  const CARD_PASSWORD_WIDTH = '45px';
+  const cardPasswordArray = ['PASSWORD', 'PASSWORD', 'DOT', 'DOT'];
 
   const handleChange = (value: string) => {
-    if (!value) {
+    const backspace = value === '';
+    if (backspace) {
+      if (!InputRefs.current[1].value) {
+        InputRefs.current[0] && InputRefs.current[0].focus();
+      }
       password && onChange(password.slice(0, -1));
       return;
     }
 
-    if (password.length === 0) {
-      secondInputRef.current && secondInputRef.current.focus();
+    if (InputRefs.current[0].value) {
+      InputRefs.current[1] && InputRefs.current[1].focus();
     }
 
     onChange(password + value);
@@ -29,31 +35,36 @@ const CardPasswordInput = ({ onChange, password }: CardPasswordInputProps) => {
 
   return (
     <CardPasswordInputContainer>
-      <TextInput
-        fontColor="blue"
-        label="cardPassword"
-        onChange={handleChange}
-        value={password[0] || ''}
-        maxLength={1}
-        width="40px"
-        textAlign="center"
-      />
-      <TextInput
-        ref={secondInputRef}
-        value={password[1] || ''}
-        fontColor="blue"
-        label="cardPassword"
-        onChange={handleChange}
-        maxLength={1}
-        width="45px"
-        textAlign="center"
-      />
-      <CardPasswordDot color={colors['blue']}>
-        <span>•</span>
-      </CardPasswordDot>
-      <CardPasswordDot color={colors['blue']}>
-        <span>•</span>
-      </CardPasswordDot>
+      {cardPasswordArray.map((item, index) => {
+        if (item === 'PASSWORD') {
+          return (
+            <TextInput
+              key={`password-${index}`}
+              ref={(ref) => {
+                if (!ref) return;
+                InputRefs.current[index] = ref;
+              }}
+              inputMode="numeric"
+              fontColor="blue"
+              label="cardPassword"
+              onChange={handleChange}
+              value={password[index] || ''}
+              maxLength={1}
+              width={CARD_PASSWORD_WIDTH}
+              textAlign="center"
+            />
+          );
+        }
+        return (
+          <CardPasswordDot
+            key={`dot-${index}`}
+            color={colors['blue']}
+            size={CARD_PASSWORD_WIDTH}
+          >
+            <span>•</span>
+          </CardPasswordDot>
+        );
+      })}
     </CardPasswordInputContainer>
   );
 };
