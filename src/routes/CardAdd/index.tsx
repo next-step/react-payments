@@ -1,10 +1,26 @@
 import { Link } from 'react-router-dom'
-import CardDesign from '../../components/Card/CardDesign'
-import CardNumber from '../../components/Card/CardNumber'
-import { UseCardNumber } from '../../hooks/useCardNumber'
+import {
+  CardDesign,
+  CardExpirationDate,
+  CardNumber,
+  CardOwnerName,
+  CardPassword,
+  CardSecurityCode,
+} from '../../components/Card'
+import {
+  CARD_EXPIRATION_DATE_LENGTH_MAX,
+  CARD_NUMBER_LENGTH_MAX,
+  CARD_PSSWORD_LENGTH_MAX,
+  CARD_SECURITY_CODE_LENGTH_MAX,
+} from '../../constants/Card'
+import { useCardNumberData } from '../../hooks/useCardNumber'
 
 const CardAdd = () => {
-  const { cardNumber, cardNumberHandler } = UseCardNumber()
+  const cardNumber = useCardNumberData(CARD_NUMBER_LENGTH_MAX)
+  const cardExpirationDate = useCardNumberData(CARD_EXPIRATION_DATE_LENGTH_MAX)
+  const cardSecurityCode = useCardNumberData(CARD_SECURITY_CODE_LENGTH_MAX)
+  const cardPassword = useCardNumberData(CARD_PSSWORD_LENGTH_MAX)
+
   return (
     <div>
       <div className='root'>
@@ -12,30 +28,24 @@ const CardAdd = () => {
           <h2 className='page-title'>
             <Link to='/'>&lt;</Link>카드 추가
           </h2>
-          <CardDesign />
-          <CardNumber cardNumber={cardNumber} cardNumberHandler={cardNumberHandler} />
-          <div className='input-container'>
-            <span className='input-title'>만료일</span>
-            <div className='input-box w-50'>
-              <input className='input-basic' type='text' placeholder='MM' />
-              <input className='input-basic' type='text' placeholder='YY' />
-            </div>
-          </div>
-          <div className='input-container'>
-            <span className='input-title'>카드 소유자 이름(선택)</span>
-            <input type='text' className='input-basic' placeholder='카드에 표시된 이름과 동일하게 입력하세요.' />
-          </div>
-          <div className='input-container'>
-            <span className='input-title'>보안코드(CVC/CVV)</span>
-            <input className='input-basic w-25' type='password' />
-          </div>
-          <div className='input-container'>
-            <span className='input-title'>카드 비밀번호</span>
-            <input className='input-basic w-15' type='password' />
-            <input className='input-basic w-15' type='password' />
-            <input className='input-basic w-15' type='password' />
-            <input className='input-basic w-15' type='password' />
-          </div>
+          <CardDesign cardNumber={cardNumber.cardNumberData} cardExpirationDate={cardExpirationDate.cardNumberData} />
+          <CardNumber
+            cardNumberData={cardNumber.cardNumberData}
+            cardNumberDataHandler={cardNumber.cardNumberDataHandler}
+          />
+          <CardExpirationDate
+            cardExpirationDate={cardExpirationDate.cardNumberData}
+            cardExpirationDateHandler={cardExpirationDate.cardNumberDataHandler}
+          />
+          <CardOwnerName />
+          <CardSecurityCode
+            cardSecurityCode={cardSecurityCode.cardNumberData}
+            cardSecurityCodeandler={cardSecurityCode.cardNumberDataHandler}
+          />
+          <CardPassword
+            cardPassword={cardPassword.cardNumberData}
+            cardPasswordHandler={cardPassword.cardNumberDataHandler}
+          />
           <div className='button-box'>
             <Link to='/card-add-complete' className='button-text'>
               다음

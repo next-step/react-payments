@@ -1,16 +1,17 @@
 import { ChangeEvent, useState } from 'react'
-import { CARD_NUMBER_LENGTH_MAX, INIT_NUMBER_VALUE } from '../constants/Card'
+import { INIT_NUMBER_VALUE } from '../constants/Card'
 
-export const UseCardNumber = () => {
-  const [cardNumber, setInputValue] = useState(INIT_NUMBER_VALUE)
-  const cardNumberHandler = (e: ChangeEvent<HTMLInputElement>) => {
+export const useCardNumberData = (valueLengthMax: number) => {
+  const [cardNumberData, setCardNumberData] = useState(INIT_NUMBER_VALUE)
+  const cardNumberDataHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.currentTarget
-    if (Number(value) && value.length < CARD_NUMBER_LENGTH_MAX) {
-      setInputValue((prev) => ({
+    if (isNaN(Number(value))) return
+    if (value.length < valueLengthMax) {
+      setCardNumberData((prev) => ({
         ...prev,
         [id]: value,
       }))
     }
   }
-  return { cardNumber, cardNumberHandler }
+  return { cardNumberData, cardNumberDataHandler }
 }

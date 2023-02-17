@@ -1,7 +1,8 @@
-export interface InputProps {
+interface InputProps {
   type?: string
   className?: string
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   value: string
   id: string
+  placeholder?: string
 }
