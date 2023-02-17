@@ -8,7 +8,8 @@ const CardFieldDispatchContext =
 
 const initialState = {
   cardNumber: '',
-  expirationDate: '',
+  expirationMonth: '',
+  expirationYear: '',
   ownerName: '',
   cvc: '',
   cardPassword: '',

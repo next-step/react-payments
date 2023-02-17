@@ -1,6 +1,7 @@
 export type CardField = {
   cardNumber: string;
-  expirationDate: string;
+  expirationMonth: string;
+  expirationYear: string;
   ownerName: string;
   cvc: string;
   cardPassword: string;
