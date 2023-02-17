@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 export const CardContext = createContext(null);
 
 export const CardProvider = ({ children }) => {
-  const [card, setCard] = useState({});
+  const [card, setCard] = useState(null);
 
   //TODO: 닉네임 상태관리
 
@@ -18,7 +18,7 @@ export function useCard() {
   const context = useContext(CardContext);
 
   if (!context) {
-    throw Error("Need to be within CardContext to use useCard.");
+    throw new Error("Need to be within CardContext to use useCard.");
   }
 
   return context;

@@ -17,9 +17,9 @@ const CardNicknamePage = () => {
           cardNumbers={"1234-5678-****-****"}
           cardNickname={"생활비카드"}
         />
-        <CardForm>
-          <CardNickname />
-        </CardForm>
+
+        <CardNickname />
+
         <Button title="완료" />
       </div>
     </div>

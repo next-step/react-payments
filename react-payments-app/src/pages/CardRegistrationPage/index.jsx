@@ -31,11 +31,12 @@ const CardRegistration = () => {
   };
 
   const handleSubmit = (cardInfo) => {
-    console.log(cardInfo);
     if (!isAllFilledOut(cardInfo)) {
+      alert("빈칸을 모두 채워주세요.");
+      return;
     }
     setCard(cardInfo);
-    //open modal
+    navigate("/registration/setCardNickname");
   };
 
   return (

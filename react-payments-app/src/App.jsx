@@ -9,7 +9,10 @@ function App() {
       <Routes>
         <Route path="/" element={<CardListPage />} />
         <Route path="/registration" element={<CardRegistration />} />
-        <Route path="/registration/completed" element={<CardNicknamePage />} />
+        <Route
+          path="/registration/setCardNickname"
+          element={<CardNicknamePage />}
+        />
       </Routes>
     </div>
   );
