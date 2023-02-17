@@ -5,7 +5,6 @@ type SecurityCodeProps = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 const CardSecurityCode = ({ security, onChange }: SecurityCodeProps) => {
-  console.log(security);
   return (
     <div className="input-container">
       <span className="input-title">보안코드(CVC/CVV)</span>
