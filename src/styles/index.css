@@ -21,7 +21,7 @@ input {
     background-color: #fff;
     width: 375px;
     min-width: 375px;
-    height: 700px;
+    max-height: 800px;
     position: relative;
     border-radius: 15px;
 }
@@ -39,6 +39,11 @@ input {
     align-items: center;
 
     color: #383838;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
 }
 
 
