@@ -39,7 +39,6 @@ export default function RegisterCard() {
   };
 
   const handleExpiredDate = (expiredDate: string) => {
-    console.log(cardState);
     setCardState({
       ...cardState,
       expiredDate,
@@ -47,7 +46,6 @@ export default function RegisterCard() {
   };
 
   const handleCardHolder = (cardHolder: string) => {
-    console.log(cardHolder);
     setCardState({
       ...cardState,
       cardHolder,
