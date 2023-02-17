@@ -1,10 +1,3 @@
-export default function Span({ className, handlePrevButtonClick, children }) {
-  // function handlePrevButtonClick() {
-  //   console.log("prevButton clicked");
-  // }
-  return (
-    <span className={className} onClick={handlePrevButtonClick}>
-      {children}
-    </span>
-  );
+export default function Span({ className, children }) {
+  return <span className={className}>{children}</span>;
 }
