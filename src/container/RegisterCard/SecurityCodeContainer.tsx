@@ -4,7 +4,7 @@ import { FormProps } from '../../pages/RegisterCard';
 import { useRef } from 'react';
 import { useInput } from '../../hooks';
 
-export default function SecurityCode({ filter }: FormProps) {
+export default function SecurityCodeContainer({ filter }: FormProps) {
   const securityCodeRef = useRef();
   const securityCode = useInput('');
 

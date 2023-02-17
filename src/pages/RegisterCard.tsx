@@ -7,9 +7,9 @@ import SelectCard from '../components/SelectCard';
 import {
   CardHolderContainer,
   CardNumberContainer,
-  CardPassword,
+  CardPasswordContainer,
   ExpiredDateContainer,
-  SecurityCode
+  SecurityCodeContainer
 } from '../container/RegisterCard';
 
 const { onlyNumber } = Filter;
@@ -35,8 +35,8 @@ export default function RegisterCard() {
       <CardNumberContainer filter={onlyNumber}/>
       <ExpiredDateContainer filter={onlyNumber}/>
       <CardHolderContainer/>
-      <SecurityCode filter={onlyNumber}/>
-      <CardPassword filter={onlyNumber}/>
+      <SecurityCodeContainer filter={onlyNumber}/>
+      <CardPasswordContainer filter={onlyNumber}/>
 
       <div className="button-box">
         <span className="button-text">다음</span>

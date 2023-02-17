@@ -4,7 +4,7 @@ import { FormProps } from '../../pages/RegisterCard';
 import { useForm } from '../../hooks';
 import { useRef } from 'react';
 
-export default function CardPassword({ filter }: FormProps) {
+export default function CardPasswordContainer({ filter }: FormProps) {
   const passwordRef1 = useRef();
   const passwordRef2 = useRef();
   const [cardPassword, setCardPassword] = useForm({
