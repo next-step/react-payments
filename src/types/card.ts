@@ -14,7 +14,7 @@ export type ExpiredDate = {
   month: string;
 };
 
-export type SerialNumber = {
+export type CardNumber = {
   num1: string;
   num2: string;
   num3: string;

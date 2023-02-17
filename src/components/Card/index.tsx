@@ -1,14 +1,14 @@
-import { CardCompany, ExpiredDate, SerialNumber } from 'types/card';
+import { CardCompany, ExpiredDate, CardNumber } from 'types/card';
 
 interface CardProps {
   company: CardCompany;
   name: string;
-  serialNumber: SerialNumber;
+  cardNumber: CardNumber;
   expiredDate: ExpiredDate;
 }
 
-function Card({ company, name, serialNumber, expiredDate }: CardProps) {
-  const { num1, num2, num3, num4 } = serialNumber;
+function Card({ company, name, cardNumber, expiredDate }: CardProps) {
+  const { num1, num2, num3, num4 } = cardNumber;
   const { year, month } = expiredDate;
 
   return (
