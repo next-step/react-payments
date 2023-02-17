@@ -1,30 +1,17 @@
+import { Card, CardNumberContainer } from 'components';
+
+import { useCardNumber } from './hooks';
+import { CardCompany } from 'types/card';
+
 function AddingCard() {
+  const { cardNumber, updateCardNumber } = useCardNumber();
+
   return (
     <div className="app">
       <h2 className="page-title">{`<`} 카드 추가</h2>
-      <div className="card-box">
-        <div className="empty-card">
-          <div className="card-top"></div>
-          <div className="card-middle">
-            <div className="small-card__chip"></div>
-          </div>
-          <div className="card-bottom">
-            <div className="card-bottom__info">
-              <span className="card-text">NAME</span>
-              <span className="card-text">MM / YY</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="input-container">
-        <span className="input-title">카드 번호</span>
-        <div className="input-box">
-          <input className="input-basic" type="text" />
-          <input className="input-basic" type="text" />
-          <input className="input-basic" type="password" />
-          <input className="input-basic" type="password" />
-        </div>
-      </div>
+      <span className="input-title">카드사 선택</span>
+      <Card cardNumber={cardNumber} name="YOUNG" company={CardCompany.Hana} expiredDate={{ month: '08', year: '11' }} />
+      <CardNumberContainer cardNumber={cardNumber} updateCardNumber={updateCardNumber} />
       <div className="input-container">
         <span className="input-title">만료일</span>
         <div className="input-box w-50">
