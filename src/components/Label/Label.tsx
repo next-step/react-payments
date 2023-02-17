@@ -12,7 +12,7 @@ const Label = ({ labelText, children, textLimit, textLength }: LabelProps) => {
     <label>
       <LabelText>
         <span>{labelText}</span>
-        {textLimit && textLength && (
+        {!!textLimit && (
           <span>
             {textLength}/{textLimit}
           </span>
