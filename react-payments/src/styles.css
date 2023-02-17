@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  font-size: 2.285vh;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  height: 4.5rem;
+}
+
+.header-title {
+  font-size: 1rem;
+  flex-grow: 1;
+  margin-left: 2.25rem;
+}
+
+.has-header-back {
+  margin-left: 1.5rem;
+}
+
+.header-back {
+  display: flex;
+  align-items: center;
+  margin-left: 1.5rem;
+  cursor: pointer;
+}
