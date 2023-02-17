@@ -2,7 +2,11 @@ import { Label, TextInput } from '@/components';
 import React, { useCallback } from 'react';
 import { useCardFieldDispatchContext } from '../../CardFieldContext/CardFieldContext';
 import { ACTION } from '../../CardFieldContext/CardFieldAction';
-import { DASH, addDashes, replaceDot } from './CardNumberField.utils';
+import {
+  DASH,
+  addCardNumberDashes,
+  replaceCardNumberToDot,
+} from '@/utils/formatter';
 
 type CardNumberFieldProps = {
   cardNumber: string;
@@ -19,7 +23,7 @@ function CardNumberField({ cardNumber }: CardNumberFieldProps) {
 
     const newValue = value.slice(-1);
 
-    const onBackspace = value.length < addDashes(cardNumber).length;
+    const onBackspace = value.length < addCardNumberDashes(cardNumber).length;
     if (onBackspace) {
       dispatch(ACTION.DELETE_CARD_NUM());
       return;
@@ -33,7 +37,7 @@ function CardNumberField({ cardNumber }: CardNumberFieldProps) {
   };
 
   const cardNumberSelector = useCallback(
-    (str: string) => replaceDot(addDashes(str)),
+    (str: string) => replaceCardNumberToDot(addCardNumberDashes(str)),
     []
   );
 
