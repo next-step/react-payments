@@ -5,6 +5,7 @@ import Card from '.';
 export default {
   title: 'Card',
   component: Card,
+  argTypes: { onCardClick: { action: 'clicked' } },
 } as ComponentMeta<typeof Card>;
 
 const Template: ComponentStory<typeof Card> = args => <Card {...args} />;
