@@ -1,4 +1,4 @@
-import LeftArrow from "../Icon/LeftArrow";
+import LeftArrow from '../Icon/LeftArrow';
 
 interface HeaderProps {
   title: string;
@@ -12,11 +12,15 @@ const Header = (props: HeaderProps) => {
   return (
     <header>
       {hasBackButton && (
-        <div className="header-back" onClick={backButtonPress}>
+        <button
+          type="button"
+          className="header-back-button"
+          onClick={backButtonPress}
+        >
           <LeftArrow />
-        </div>
+        </button>
       )}
-      <div className={`header-title ${hasBackButton ? "has-header-back" : ""}`}>
+      <div className={`header-title ${hasBackButton ? 'has-header-back' : ''}`}>
         {title}
       </div>
     </header>

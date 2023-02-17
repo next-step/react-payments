@@ -1,6 +1,12 @@
-body {
+html,
+body,
+main {
+  -webkit-tap-highlight-color: transparent;
   margin: 0;
+  height: 100vh;
   font-size: 2.285vh;
+  font-family: 'Pretendard';
+  overflow: hidden;
 }
 
 /* Header */
@@ -20,11 +26,13 @@ header {
   margin-left: 1.5rem;
 }
 
-.header-back {
+.header-back-button {
   display: flex;
   align-items: center;
   margin-left: 1.5rem;
   cursor: pointer;
+  border: none;
+  background-color: transparent;
 }
 
 /* Card */
