@@ -1,9 +1,14 @@
+import { NextButtonBox, PageTitle } from '@/components/layouts'
+
 function CardCompleted() {
   return (
     <div className="root">
       <div className="app flex-column-center">
         <div className="flex-center">
-          <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
+          <PageTitle
+            addtionalClassName="mb-10"
+            title="카드등록이 완료되었습니다."
+          />
         </div>
         <div className="card-box">
           <div className="big-card">
@@ -33,9 +38,7 @@ function CardCompleted() {
             placeholder="카드의 별칭을 입력해주세요."
           />
         </div>
-        <div className="button-box mt-50">
-          <span className="button-text">다음</span>
-        </div>
+        <NextButtonBox additionalClassNames="mt-50" />
       </div>
     </div>
   )

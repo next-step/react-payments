@@ -1,9 +1,15 @@
+import { PageTitle } from '@/components/layouts'
+
 function CardList() {
   return (
     <div className="root">
       <div className="app flex-column-center">
         <div className="flex-center">
-          <h2 className="page-title mb-10">보유 카드</h2>
+          <PageTitle
+            addtionalClassName="mb-10"
+            title="보유 카드"
+            hasBackButton={false}
+          />
         </div>
         <div className="card-box">
           <div className="small-card">

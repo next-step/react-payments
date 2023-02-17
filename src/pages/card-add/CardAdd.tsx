@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { Card } from '@/components/card'
+import { NextButtonBox, PageTitle } from '@/components/layouts'
 import { CardForm } from '@/pages/card-add/card-form'
 
 function CardAdd() {
@@ -14,18 +15,11 @@ function CardAdd() {
   return (
     <div className="root">
       <div className="app">
-        <h2 className="page-title">&#60; 카드 추가</h2>
-        <Card
-          cardNumber={cardInfo.cardNumber}
-          name={cardInfo.name}
-          expiratedYear={cardInfo.expiratedYear}
-          expiratedMonth={cardInfo.expiratedMonth}
-        />
+        <PageTitle title="카드 추가" />
+        <Card {...cardInfo} />
         {/* Todo: Composition Pattern으로 바꿔보자 */}
         <CardForm />
-        <div className="button-box">
-          <span className="button-text">다음</span>
-        </div>
+        <NextButtonBox />
       </div>
     </div>
   )
