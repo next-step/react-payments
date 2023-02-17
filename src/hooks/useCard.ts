@@ -10,7 +10,7 @@ export default function useCard(initialState: CardBoxType) {
     const expiredDate = Filter.expiredDate(newState.expiredDate);
 
     setState({
-      ...cardState,
+      ...newState,
       expiredDate,
       cardNumber,
     });

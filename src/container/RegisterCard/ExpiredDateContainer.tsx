@@ -1,11 +1,11 @@
 import { useForm } from '../../hooks';
 import { InputContainer } from '../index';
 import { Input } from '../../components';
-import { useEffect, useRef, useState } from 'react';
-import { FormProps } from '../../pages/RegisterCard';
-import { Validator } from '../../domain';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { RegisterCardType } from '../../pages/RegisterCard';
+import { Filter, Validator } from '../../domain';
 
-export default function ExpiredDateContainer({ filter }: FormProps) {
+export default function ExpiredDateContainer<T>({ filter, onChange }: RegisterCardType<T>) {
   const [errorMessage, setErrorMessage] = useState('');
   const monthRef = useRef();
   const yearRef = useRef();
@@ -14,7 +14,11 @@ export default function ExpiredDateContainer({ filter }: FormProps) {
     year: '',
   });
 
+  const expiredDate = useMemo(() => Filter.formToArray(expired).join(''), [expired]);
+
   useEffect(() => {
+    onChange?.(expiredDate);
+
     const month = expired.month.value;
     const year = expired.year.value;
 

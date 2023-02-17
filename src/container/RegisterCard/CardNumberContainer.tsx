@@ -1,14 +1,15 @@
 import { useForm } from '../../hooks';
 import { InputContainer } from '../index';
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Input } from '../../components';
-import { FormProps } from '../../pages/RegisterCard';
-import { Validator } from '../../domain';
+import { RegisterCardType } from '../../pages/RegisterCard';
+import { Filter, Validator } from '../../domain';
 
 const MAX_LENGTH = 4;
 const VALIDATE_ERROR = '카드 번호를 입력 해 주세요.';
 
-export default function CardNumberContainer({ filter }: FormProps) {
+export default function CardNumberContainer({ filter, onChange }: RegisterCardType) {
+  const [errorMessage, setErrorMessage] = useState(VALIDATE_ERROR);
   const cardNumber2 = useRef();
   const cardNumber3 = useRef();
   const cardNumber4 = useRef();
@@ -22,11 +23,25 @@ export default function CardNumberContainer({ filter }: FormProps) {
   const isValidateCard = useMemo(() => (
     Validator.isEnterCardNumber(cardNumber, MAX_LENGTH)
   ), [cardNumber]);
+  const cardNumbers = useMemo(() => (
+    Filter.formToArray(cardNumber).join('')
+  ), [cardNumber]);
+
+  useEffect(() => {
+    onChange(cardNumbers);
+
+    if (!isValidateCard) {
+      setErrorMessage(VALIDATE_ERROR);
+      return;
+    }
+
+    setErrorMessage('');
+  }, [cardNumber]);
 
   return (
     <InputContainer
       title="카드 번호"
-      errorMessage={!isValidateCard && VALIDATE_ERROR}
+      errorMessage={errorMessage}
     >
       <Input
         {...cardNumber.first}
@@ -59,7 +74,7 @@ export default function CardNumberContainer({ filter }: FormProps) {
         {...cardNumber.fourth}
         onChange={setCardNumber}
         ref={cardNumber4}
-        type="passwordInput"
+        type="password"
         maxLength={MAX_LENGTH}
         filter={filter}
       />

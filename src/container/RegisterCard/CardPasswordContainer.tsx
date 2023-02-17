@@ -1,12 +1,12 @@
 import { InputContainer } from '../index';
 import { Input } from '../../components';
-import { FormProps } from '../../pages/RegisterCard';
+import { RegisterCardType } from '../../pages/RegisterCard';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from '../../hooks';
 
 const MAX_LENGTH = 1;
 
-export default function CardPasswordContainer({ filter }: FormProps) {
+export default function CardPasswordContainer({ filter, onChange }: RegisterCardType) {
   const [errorMessage, setErrorMessage] = useState('');
   const passwordRef1 = useRef();
   const passwordRef2 = useRef();
@@ -17,9 +17,11 @@ export default function CardPasswordContainer({ filter }: FormProps) {
 
   useEffect(() => {
     const { first, second } = cardPassword;
-    const passwordLength = first.value.length + second.value.length;
+    const password = first.value + second.value;
 
-    if (passwordLength !== MAX_LENGTH * 2) {
+    onChange(password);
+
+    if (password.length !== MAX_LENGTH * 2) {
       setErrorMessage('카드 비밀번호 앞 2자리를 입력 해 주세요.');
       return;
     }
