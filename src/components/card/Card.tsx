@@ -1,5 +1,5 @@
 interface CardProps {
-  cardNumber: number
+  cardNumber: { first: string; second: string; third: string; fourth: string }
   name: string
   expiratedYear: number
   expiratedMonth: number
@@ -14,7 +14,7 @@ function Card({ cardNumber, name, expiratedYear, expiratedMonth }: CardProps) {
         <div className="card-middle">
           <div className="small-card__chip" />
           <div className="card-number">
-            <span>{convertedCardNumber || null}</span>
+            <span>{convertedCardNumber.first || null}</span>
           </div>
         </div>
         <div className="card-bottom">
