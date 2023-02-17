@@ -1,5 +1,7 @@
 import { CardFieldAction } from './CardFieldReducer';
 
+type ActionTypes = "APPEND_CARD_NUM" | "DELETE_CARD_NUM" | "UPDATE_CARD_OWNER_NAME"
+
 export const ACTION = {
   APPEND_CARD_NUM: (value: string) => ({
     type: 'APPEND',
@@ -14,5 +16,13 @@ export const ACTION = {
       key: 'cardNumber',
       value: '',
     },
+
   }),
-} satisfies Record<"APPEND_CARD_NUM" | "DELETE_CARD_NUM", (value: any) => CardFieldAction>;
+  UPDATE_CARD_OWNER_NAME: (value: string) => ({
+    type: 'UPDATE',
+    payload: {
+        key: 'ownerName',
+        value,
+    },
+    }),
+} satisfies Record<ActionTypes, (value: any) => CardFieldAction>;
