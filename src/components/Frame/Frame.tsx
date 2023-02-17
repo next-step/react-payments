@@ -1,18 +1,20 @@
 import React from 'react';
 
 type TFrameProps = {
+  title?: string;
+  backClickable?: boolean;
   children: React.ReactNode;
 };
 
-function Frame({ children }: TFrameProps) {
+function Frame({ title, backClickable, children }: TFrameProps) {
   return (
     <div className="root">
       <div className="app">
-        <h2 className="page-title">&lt; 카드 추가</h2>
+        <h2 className="page-title">
+          {backClickable && <span>&lt;</span>}
+          {title}
+        </h2>
         {children}
-        <div className="button-box">
-          <div className="button-text">다음</div>
-        </div>
       </div>
     </div>
   );
