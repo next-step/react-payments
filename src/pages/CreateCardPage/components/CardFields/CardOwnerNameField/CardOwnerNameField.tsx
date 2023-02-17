@@ -37,4 +37,4 @@ const CardOwnerNameField = ({ ownerName }: CardOwnerNameFieldProps) => {
   );
 };
 
-export default CardOwnerNameField;
+export default React.memo(CardOwnerNameField);

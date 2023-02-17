@@ -40,7 +40,7 @@ const CardCVCNumberField = ({ cvc }: CardCVCNumberFieldProps) => {
   );
 };
 
-export default CardCVCNumberField;
+export default React.memo(CardCVCNumberField);
 
 const CardCVCNumberInputContainer = styled.div`
   display: flex;
