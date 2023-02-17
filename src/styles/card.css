@@ -25,6 +25,10 @@
   user-select: none;
 }
 
+.empty-card:hover {
+  cursor: pointer;
+}
+
 .small-card {
   display: flex;
   flex-direction: column;
