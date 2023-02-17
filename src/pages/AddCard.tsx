@@ -6,6 +6,7 @@ import CardNumberInput from '../components/CardNumberInput';
 import CardPassword from '../components/CardPassword';
 import CardholderName from '../components/CardholderName';
 import '../styles/index.css';
+import CardBox from './CardBox';
 
 const AddCard = () => {
   const [state, setState] = useState({
@@ -20,6 +21,7 @@ const AddCard = () => {
       [e.currentTarget.name]: e.currentTarget.value.replace(/[^0-9]/g, ''),
     });
   };
+
   const [expiration, setExpiration] = useState({
     month: '',
     year: '',
@@ -30,6 +32,16 @@ const AddCard = () => {
       [e.currentTarget.name]: e.currentTarget.value.replace(/[^0-9]/g, ''),
     });
   };
+
+  const [name, setName] = useState('');
+  const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (name.length > 30) {
+      return;
+    }
+    setName(value.slice(0, 30));
+  };
+
   const [security, setSecurity] = useState('');
   const getSecurity = (e: ChangeEvent<HTMLInputElement>) => {
     setSecurity(e.currentTarget.value.replace(/[^0-9]/g, ''));
@@ -58,23 +70,10 @@ const AddCard = () => {
             </Link>{' '}
             카드 추가{' '}
           </h2>
-          <div className="card-box">
-            <div className="empty-card">
-              <div className="card-top" />
-              <div className="card-middle">
-                <div className="small-card__chip" />
-              </div>
-              <div className="card-bottom">
-                <div className="card-bottom__info">
-                  <span className="card-text">NAME</span>
-                  <span className="card-text">MM / YY</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <CardBox numbers={state} expiration={expiration} name={name} />
           <CardNumberInput numbers={state} onChange={getCardNumber} />
           <CardExpiration expiration={expiration} onChange={getExpirationMonth} />
-          <CardholderName />
+          <CardholderName name={name} onChange={onChangeName} />
           <CardSecurityCode security={security} onChange={getSecurity} />
           <CardPassword cardPassword={cardPassword} onChange={getCardPassword} />
           <div className="button-box">
