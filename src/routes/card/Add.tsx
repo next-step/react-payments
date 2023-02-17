@@ -10,6 +10,9 @@ function Add() {
   const [cardNumber, setCardNumber] = useState("");
   const [expireMonth, setExpireMonth] = useState(0);
   const [expireYear, setExpireYear] = useState(0);
+  const [userName, setUserName] = useState("");
+  const [code, setCode] = useState(0);
+  const [password, setPassword] = useState("");
 
   const onCardNumberChange = (cardNumbers: number[]) => {
     const hasCardNumber = cardNumbers.some((cardNumber) => cardNumber);
@@ -22,6 +25,16 @@ function Add() {
     setExpireMonth(expiredDates[0]);
     setExpireYear(expiredDates[1]);
   };
+  const onUserNameChange = (userName: string) => {
+    setUserName(userName);
+  };
+  const onCodeChange = (code: number) => {
+    setCode(code);
+  };
+  const onPasswordChange = (password: PasswordType): void => {
+    const formattedPassword = Object.values(password).join();
+    setPassword(formattedPassword);
+  };
 
   return (
     <>
@@ -29,16 +42,21 @@ function Add() {
         cardNumber={cardNumber}
         expireMonth={expireMonth}
         expireYear={expireYear}
+        userName={userName}
       ></Card>
       <form>
         <CardNumber onCardNumberChange={onCardNumberChange}></CardNumber>
         <ExpiredDate onExpiredDateChange={onExpiredDateChange}></ExpiredDate>
-        <UserName></UserName>
-        <Code></Code>
-        <Password></Password>
+        <UserName onUserNameChange={onUserNameChange}></UserName>
+        <Code onCodeChange={onCodeChange}></Code>
+        <Password onPasswordChange={onPasswordChange}></Password>
       </form>
     </>
   );
 }
+
+type PasswordType = {
+  [key: number]: string;
+};
 
 export default Add;
