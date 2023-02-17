@@ -2,10 +2,24 @@ import Card from '../components/Card';
 import Header from '../components/Header';
 
 const Home = () => (
-  <>
-    <Header title="보유 카드" hasBackButton backButtonPress={() => {}} />
-    <Card />
-  </>
+  <main>
+    <Header title="보유 카드" />
+    <div className="content">
+      <div className="card-list">
+        <Card
+          cardInfo={{
+            bgColor: 'skyblue',
+            title: '윤상 카드',
+            customerName: 'YOON',
+            expirationDate: '02/21',
+            creditNumber: '1234-5678-1234-0123',
+          }}
+          alias="윤카"
+        />
+        <Card empty />
+      </div>
+    </div>
+  </main>
 );
 
 export default Home;

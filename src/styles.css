@@ -9,6 +9,12 @@ main {
   overflow: hidden;
 }
 
+.content {
+  overflow-y: scroll;
+  height: 100%;
+  padding-top: 3rem;
+}
+
 /* Header */
 header {
   display: flex;
@@ -37,10 +43,20 @@ header {
 
 /* Card */
 .card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
   width: 13rem;
   height: 7.68rem;
   border-radius: 0.3rem;
   background-color: #e5e5e5;
+  padding: 0.8rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
 }
 
 .new-card {
@@ -50,4 +66,53 @@ header {
   align-items: center;
   color: #575757;
   font-size: 1.875rem;
+}
+
+.card-title {
+  font-size: 0.625rem;
+  color: #525252;
+}
+
+.card-ic-chip {
+  background-color: #cbba64;
+  width: 2.44rem;
+  height: 1.59rem;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+}
+
+.card-credit-number {
+  color: #525252;
+  font-size: 0.8rem;
+  display: flex;
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.card-bottom {
+  color: #525252;
+  margin-top: 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.625rem;
+  padding-bottom: 15rem;
+}
+
+.card-alias {
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+  margin-top: 0.25rem;
+  color: #575757;
 }
