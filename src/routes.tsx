@@ -1,4 +1,5 @@
 import { CardAdd, CardCompleted, CardList } from '@/pages'
+
 const routes = [
   { path: '/', element: <CardList /> },
   { path: '/card-add', element: <CardAdd /> },

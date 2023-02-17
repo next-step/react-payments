@@ -1,13 +1,13 @@
-const CardAdd = () => {
+function CardAdd() {
   return (
     <div className="root">
       <div className="app">
         <h2 className="page-title">카드 추가</h2>
         <div className="card-box">
           <div className="empty-card">
-            <div className="card-top"></div>
+            <div className="card-top" />
             <div className="card-middle">
-              <div className="small-card__chip"></div>
+              <div className="small-card__chip" />
             </div>
             <div className="card-bottom">
               <div className="card-bottom__info">
@@ -35,7 +35,11 @@ const CardAdd = () => {
         </div>
         <div className="input-container">
           <span className="input-title">카드 소유자 이름(선택)</span>
-          <input type="text" className="input-basic" placeholder="카드에 표시된 이름과 동일하게 입력하세요." />
+          <input
+            type="text"
+            className="input-basic"
+            placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          />
         </div>
         <div className="input-container">
           <span className="input-title">보안코드(CVC/CVV)</span>

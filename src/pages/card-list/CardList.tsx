@@ -1,4 +1,4 @@
-const CardList = () => {
+function CardList() {
   return (
     <div className="root">
       <div className="app flex-column-center">
@@ -11,7 +11,7 @@ const CardList = () => {
               <span className="card-text">클린카드</span>
             </div>
             <div className="card-middle">
-              <div className="small-card__chip"></div>
+              <div className="small-card__chip" />
             </div>
             <div className="card-bottom">
               <div className="card-bottom__number">

@@ -1,4 +1,4 @@
-const CardCompleted = () => {
+function CardCompleted() {
   return (
     <div className="root">
       <div className="app flex-column-center">
@@ -11,11 +11,13 @@ const CardCompleted = () => {
               <span className="card-text__big">클린카드</span>
             </div>
             <div className="card-middle">
-              <div className="big-card__chip"></div>
+              <div className="big-card__chip" />
             </div>
             <div className="card-bottom">
               <div className="card-bottom__number">
-                <span className="card-text__big">1111 - 2222 - oooo - oooo</span>
+                <span className="card-text__big">
+                  1111 - 2222 - oooo - oooo
+                </span>
               </div>
               <div className="card-bottom__info">
                 <span className="card-text__big">YUJO</span>
@@ -25,7 +27,11 @@ const CardCompleted = () => {
           </div>
         </div>
         <div className="input-container flex-center w-100">
-          <input className="input-underline w-75" type="text" placeholder="카드의 별칭을 입력해주세요." />
+          <input
+            className="input-underline w-75"
+            type="text"
+            placeholder="카드의 별칭을 입력해주세요."
+          />
         </div>
         <div className="button-box mt-50">
           <span className="button-text">다음</span>
