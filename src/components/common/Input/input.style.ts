@@ -26,15 +26,6 @@ export const InputEl = styled.input<Pick<InputProps, "textAlign" | "color">>`
   color: ${(props) => props.color};
 `;
 
-export const InputLabel = styled.label`
-  display: flex;
-  align-items: center;
-  font-size: 12px;
-  line-height: 14px;
-  margin-bottom: 4px;
-  color: #525252;
-`;
-
 export const InputWrapper = styled.div<Pick<InputProps, "variant">>`
   display: flex;
   align-items: center;

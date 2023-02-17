@@ -1,11 +1,7 @@
 import React, { InputHTMLAttributes, ReactNode } from "react";
 
-import {
-  InputContainer,
-  InputEl,
-  InputLabel,
-  InputWrapper,
-} from "./input.style";
+import { Label } from "..";
+import { InputContainer, InputEl, InputWrapper } from "./input.style";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   textAlign?: "left" | "center" | "right";
@@ -24,7 +20,7 @@ export default function Input({
 }: InputProps) {
   return (
     <InputContainer className={className}>
-      {label && <InputLabel>{label}</InputLabel>}
+      {label && <Label>{label}</Label>}
       <InputWrapper variant={variant}>
         <InputEl textAlign={textAlign} color={color} {...props} />
       </InputWrapper>
