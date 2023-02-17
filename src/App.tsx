@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import AddCardPage from "./AddCardPage";
+import AddCardPage from "./pages/RegistPage/AddCardPage";
 import AfterCardPage from "./AfterCardPage";
 import AddCardModal from "./AddCardModal";
-import CardListPage from "./CardListPage";
+import CardListPage from "./pages/ListPage/CardListPage";
 import ComplateCard from "./ComplateCard";
 import "../src/styles/index.css";
 
