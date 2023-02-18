@@ -1,14 +1,8 @@
-import { ChangeEvent, forwardRef, memo } from 'react';
+import { ChangeEvent, forwardRef, InputHTMLAttributes, memo } from 'react';
 
-export interface Props {
-  maxLength?: number;
-  type?: string;
+export interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-  placeholder?: string;
-  value?: string | number;
   nextFocus?: HTMLInputElement;
-  name?: string;
   filter?: (text: string) => string;
 }
 
