@@ -4,14 +4,14 @@ import { useCardNumber } from './hooks';
 import { CardCompany } from 'types/card';
 
 function AddingCard() {
-  const { cardNumber, updateCardNumber } = useCardNumber();
+  const { cardNumber, handleChangeCardNumber } = useCardNumber();
 
   return (
     <div className="app">
       <h2 className="page-title">{`<`} 카드 추가</h2>
       <span className="input-title">카드사 선택</span>
       <Card cardNumber={cardNumber} name="YOUNG" company={CardCompany.Hana} expiredDate={{ month: '08', year: '11' }} />
-      <CardNumberContainer cardNumber={cardNumber} updateCardNumber={updateCardNumber} />
+      <CardNumberContainer cardNumber={cardNumber} handleChangeCardNumber={handleChangeCardNumber} />
       <div className="input-container">
         <span className="input-title">만료일</span>
         <div className="input-box w-50">

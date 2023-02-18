@@ -12,7 +12,9 @@ const INITIAL_STATE: CardNumber = {
 const useCardNumber = () => {
   const [cardNumber, setCardNumber] = useState(INITIAL_STATE);
 
-  const updateCardNumber = (name: string, value: string) => {
+  const handleChangeCardNumber: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { name, value } = e.currentTarget;
+
     if (value !== '' && !isNumber(value)) {
       return;
     }
@@ -20,7 +22,7 @@ const useCardNumber = () => {
     setCardNumber((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  return { cardNumber, updateCardNumber };
+  return { cardNumber, handleChangeCardNumber };
 };
 
 const isNumber = (value: string) => /^\d+$/.test(value);
