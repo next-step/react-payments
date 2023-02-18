@@ -1,19 +1,17 @@
-import Repository from '../core/Repository';
+import { cardRepository } from '../repository';
 import { useMemo } from 'react';
 import { CardBox, PageTitle } from '../components';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button, Input } from '../components/form';
 import { useInput } from '../hooks';
-import { CARD_REPOSITORY } from '../constants';
 
 export default function RegisterComplete() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   const cardNumber = searchParams.get('card');
-  const cardList = useMemo(() => Repository.get('card-list'), []);
+  const cardList = useMemo(() => cardRepository.getItem(), []);
   const cardData = useMemo(() => cardList.find((item) => item.cardNumber === cardNumber), []);
-
   const nickName = useInput('');
 
   const endRegisterCard = () => {
@@ -23,7 +21,7 @@ export default function RegisterComplete() {
         nickName: item.cardNumber === cardNumber ? nickName.value : item.nickName,
       }));
 
-      Repository.set(CARD_REPOSITORY, updateCardData);
+      cardRepository.setItem(updateCardData);
     }
 
     navigate('/');

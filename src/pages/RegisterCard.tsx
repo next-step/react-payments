@@ -11,9 +11,8 @@ import {
   SecurityCodeContainer
 } from '../container/RegisterCard';
 import { Button } from '../components/form';
-import Repository from '../core/Repository';
+import { cardRepository } from '../repository';
 import { useNavigate } from 'react-router-dom';
-import { CARD_REPOSITORY } from '../constants';
 
 export interface RegisterCardType {
   filter?: (value: string) => string;
@@ -74,13 +73,13 @@ export default function RegisterCard() {
       cardPassword,
     };
 
-    const cardList = Repository.get(CARD_REPOSITORY) || [];
+    const cardList = cardRepository.getItem() || [];
     const newCardList = [
       ...cardList,
       saveData,
     ];
 
-    Repository.set(CARD_REPOSITORY, newCardList);
+    cardRepository.setItem(newCardList);
     navigate(`/register-complete?card=${saveData.cardNumber}`);
   };
 

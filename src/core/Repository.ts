@@ -1,15 +1,26 @@
-export default class Repository {
-  static storage: Storage = localStorage;
+export class Repository {
+  private readonly _key: string;
+  private readonly _storage: Storage;
 
-  static get(key) {
-    return JSON.parse(this.storage.getItem(key));
+  constructor(key: string, storage: Storage = localStorage) {
+    this._key = key;
+    this._storage = storage;
   }
 
-  static set(key, data) {
-    this.storage.setItem(key, JSON.stringify(data));
+  get storage() {
+    return this._storage;
   }
 
-  static remove(key) {
-    this.storage.removeItem(key);
+  get key() {
+    return this._key;
+  }
+
+  public getItem() {
+  }
+
+  public setItem(item: object) {
+  }
+
+  public removeItem() {
   }
 }
