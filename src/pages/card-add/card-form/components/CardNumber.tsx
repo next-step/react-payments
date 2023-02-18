@@ -13,3 +13,4 @@ const CardNumber = () => {
 }
 
 export default CardNumber
+export const CardNumberType = (<CardNumber />).type

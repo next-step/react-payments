@@ -1,14 +1,11 @@
 const CardSecurityCode = () => {
   return (
     <div className="input-container">
-      <span className="input-title">카드 소유자 이름(선택)</span>
-      <input
-        type="text"
-        className="input-basic"
-        placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-      />
+      <span className="input-title">보안코드(CVC/CVV)</span>
+      <input className="input-basic w-25" type="password" />
     </div>
   )
 }
 
 export default CardSecurityCode
+export const CardSecurityCodeType = (<CardSecurityCode />).type

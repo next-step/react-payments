@@ -12,3 +12,4 @@ const CardOwner = () => {
 }
 
 export default CardOwner
+export const CardOwnerType = (<CardOwner />).type

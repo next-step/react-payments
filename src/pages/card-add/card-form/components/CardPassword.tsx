@@ -11,3 +11,4 @@ const CardPassword = () => {
 }
 
 export default CardPassword
+export const CardPasswordType = (<CardPassword />).type

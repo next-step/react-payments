@@ -17,8 +17,13 @@ function CardAdd() {
       <div className="app">
         <PageTitle title="카드 추가" />
         <Card {...cardInfo} />
-        {/* Todo: Composition Pattern으로 바꿔보자 */}
-        <CardForm />
+        <CardForm>
+          <CardForm.CardNumber />
+          <CardForm.CardExpiredDate />
+          <CardForm.CardOwner />
+          <CardForm.CardSecurityCode />
+          <CardForm.CardPassword />
+        </CardForm>
         <NextButtonBox />
       </div>
     </div>

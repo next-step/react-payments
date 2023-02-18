@@ -11,3 +11,4 @@ const CardExpiredDate = () => {
 }
 
 export default CardExpiredDate
+export const CardExpiredDateType = (<CardExpiredDate />).type
