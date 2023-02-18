@@ -26,3 +26,21 @@ export const checkCardSecurityInput = (string: string) => {
   let newString = string.replace(/[^0-9\*]/g, ""); //숫자 or *
   return newString.replaceAll(/[0-9]/g, "*");
 };
+export const checkMonth = (string: string) => {
+  if (string.length > 2) return string[0] + string[1];
+  let newString = string.replace(/[^0-9\/]/g, ""); //숫자만 받기
+  let month = parseInt(newString);
+  if ((newString.length === 2 && month > 12) || (newString[1] === "0" && month < 10)) {
+    return "";
+  }
+  return newString;
+};
+export const checkYear = (string: string) => {
+  if (string.length > 2) return string[0] + string[1];
+  let newString = string.replace(/[^0-9\/]/g, ""); //숫자만 받기
+  let year = parseInt(newString);
+  if (newString.length === 2 && year === 0) {
+    return "";
+  }
+  return newString;
+};
