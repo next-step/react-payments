@@ -11,6 +11,7 @@ import {
   ExpiredDateContainer,
   SecurityCodeContainer
 } from '../container/RegisterCard';
+import { Button } from '../components/form';
 
 const { onlyNumber, onlyString } = Filter;
 
@@ -62,9 +63,7 @@ export default function RegisterCard() {
       <SecurityCodeContainer filter={onlyNumber} onChange={setSecurityCode}/>
       <CardPasswordContainer filter={onlyNumber} onChange={setCardPassword}/>
 
-      <div className="button-box">
-        <span className="button-text">다음</span>
-      </div>
+      <Button>다음</Button>
       <Modal open={openCardPopup}>
         <SelectCard/>
       </Modal>

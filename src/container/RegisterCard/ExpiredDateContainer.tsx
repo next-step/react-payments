@@ -1,6 +1,6 @@
 import { useForm } from '../../hooks';
 import { InputContainer } from '../index';
-import { Input } from '../../components';
+import { Input } from '../../components/form';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { RegisterCardType } from '../../pages/RegisterCard';
 import { Filter, Validator } from '../../domain';

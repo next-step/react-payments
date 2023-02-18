@@ -1,6 +1,6 @@
 import { InputContainer } from '../index';
 import { useInput } from '../../hooks';
-import { Input } from '../../components';
+import { Input } from '../../components/form';
 import { RegisterCardType } from '../../pages/RegisterCard';
 import { useEffect } from 'react';
 
