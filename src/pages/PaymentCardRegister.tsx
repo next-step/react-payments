@@ -1,10 +1,11 @@
 import React from 'react';
+import { Title } from '../components/Title';
 
 const PaymentCardRegister = () => {
   return (
     // 카드 등록
     <>
-      <h2 className="page-title">{'< 카드 추가'}</h2>
+      <Title />
       <div className="card-box">
         <div className="empty-card">
           <div className="card-top"></div>
