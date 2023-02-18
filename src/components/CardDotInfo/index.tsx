@@ -7,7 +7,7 @@ type DotProps = {
 };
 type ColorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange";
 
-const CardList = ({ color, text }: DotProps) => {
+const CardDotInfo = ({ color, text }: DotProps) => {
   return (
     <Layout>
       <Circle color={color} />
@@ -17,7 +17,7 @@ const CardList = ({ color, text }: DotProps) => {
     </Layout>
   );
 };
-export default CardList;
+export default CardDotInfo;
 const Layout = styled.div`
   display: flex;
   flex-direction: column;
@@ -32,6 +32,7 @@ const Circle = styled.div<CircleProps>`
   border-radius: 50%;
   width: 2.8rem;
   height: 2.8rem;
+  cursor: pointer;
   background-color: #94dacd;
   ${({ color }) =>
     color === "red"

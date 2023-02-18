@@ -11,13 +11,23 @@ import CardPasswordInput from "./CardPasswordInput";
 import CardOwnerInput from "./CardOwnerInput/index";
 import CardExpirationDateInput from "./CardExpirationDateInput/index";
 import useFormInput from "hooks/useFormInput";
+import CardDotList from "./CardDotInfoList";
 
 export const Form = () => {
   const { cardNumber, setCardNumber, expirationDate, setExpirationDate, ownerName, setOwnerName } = useFormInput();
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
   return (
     <>
-      <Card theme="empty" size="small" cardNumber={cardNumber} expirationDate={expirationDate} ownerName={ownerName} />
+      {isOpenModal ? <CardDotList close={setIsOpenModal} /> : <></>}
+      <Card
+        theme="empty"
+        size="small"
+        cardNumber={cardNumber}
+        expirationDate={expirationDate}
+        ownerName={ownerName}
+        onClick={() => setIsOpenModal(true)}
+      />
       <CardNumberInput setCardNumber={setCardNumber} />
       <CardExpirationDateInput setExpirationDate={setExpirationDate} />
       <CardOwnerInput setOwnerName={setOwnerName} />

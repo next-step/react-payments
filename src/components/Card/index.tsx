@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import Text from "components/Text";
-import { useState } from "react";
+import { ReactEventHandler, useState } from "react";
 
 type CardProps = {
   theme: CardThemeType;
@@ -8,6 +8,7 @@ type CardProps = {
   cardNumber?: string;
   expirationDate?: exprationProps;
   ownerName?: string;
+  onClick?: ReactEventHandler<HTMLDivElement>;
 };
 type CardThemeType = "empty" | "primary" | "add";
 type CardSizeType = "small" | "big";
@@ -16,11 +17,11 @@ type exprationProps = {
   year: string;
 };
 
-const Card = ({ theme, size, cardNumber, expirationDate, ownerName }: CardProps) => {
+const Card = ({ theme, size, cardNumber, expirationDate, ownerName, onClick }: CardProps) => {
   const [companyInfo, setCompanyInfo] = useState("Empty");
 
   return (
-    <Layout>
+    <Layout onClick={onClick}>
       <Container theme={theme} size={size}>
         <Top>
           <Text fontSize="s" weight="bold">

@@ -1,12 +1,18 @@
 import styled, { css } from "styled-components";
+import { ReactEventHandler } from "react";
 
 type ButtonProps = {
   size: "s" | "m" | "lg";
+  onClick?: ReactEventHandler<HTMLButtonElement>;
   children: any;
 };
 
-export const Button = ({ children, size }: ButtonProps) => {
-  return <StyledButton size={size}>{children}</StyledButton>;
+export const Button = ({ children, size, onClick }: ButtonProps) => {
+  return (
+    <StyledButton size={size} onClick={onClick}>
+      {children}
+    </StyledButton>
+  );
 };
 export default Button;
 
