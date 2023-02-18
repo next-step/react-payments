@@ -19,8 +19,12 @@ Small.args = {
   onClick: undefined,
   input: {
     title: "title",
-    number: "1111 - 2222 - **** - ****",
+    number1: "1111",
+    number2: "2222",
+    number3: "3333",
+    number4: "4444",
     name: "name",
-    expiry: "10 / 25",
+    month: "05",
+    year: "25",
   },
 };

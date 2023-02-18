@@ -7,12 +7,17 @@ interface CardProps {
 }
 
 const Card = ({ input, backgroundColor, onClick }: CardProps) => {
-  const mode = input ? "small-card" : "empty-card";
+  const mode =
+    input && Object.values(input).length > 0 ? "small-card" : "empty-card";
   const newCard = typeof onClick === "function" && "+";
 
   return (
     <div className="card-box">
-      <div className={mode} style={{ backgroundColor }} onClick={onClick}>
+      <div
+        className={`${mode} ${newCard && "cursor-pointer"}`}
+        style={{ backgroundColor }}
+        onClick={onClick}
+      >
         {newCard || (
           <>
             <div className="card-top">
@@ -23,11 +28,20 @@ const Card = ({ input, backgroundColor, onClick }: CardProps) => {
             </div>
             <div className="card-bottom">
               <div className="card-bottom__number">
-                <span className="card-text">{input?.number}</span>
+                <span className="card-text">
+                  {[
+                    input?.number1,
+                    input?.number2,
+                    input?.number3,
+                    input?.number4,
+                  ].join("-")}
+                </span>
               </div>
               <div className="card-bottom__info">
                 <span className="card-text">{input?.name || "NAME"}</span>
-                <span className="card-text">{input?.expiry || "MM / YY"}</span>
+                <span className="card-text">
+                  {`${input?.month || "MM"}/${input?.year || "YY"}`}
+                </span>
               </div>
             </div>
           </>
