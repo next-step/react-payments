@@ -15,7 +15,7 @@ import {
 
 type CardInfo = {
   cardName: string;
-  cardNumber: [string, string, string, string];
+  cardNumber: string[];
   cardOwnerName: string;
   expireDate: string;
 };

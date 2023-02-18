@@ -13,7 +13,7 @@ const bigCardTextStyle = css`
 `;
 
 export const CardText = styled.div`
-  margin: 0 16px;
+  margin: 0 10px;
   color: #525252;
   vertical-align: middle;
   font-weight: 400;
