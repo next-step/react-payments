@@ -1,10 +1,12 @@
-import React, { useMemo } from "react";
+import React, { InputHTMLAttributes, useMemo } from "react";
 
 import { Input } from "@/components/common";
 
 import { CardOwnerInputContainer } from "./cardOwnerInput.style";
 
-export default function CardOwnerInput({ ...props }) {
+export default function CardOwnerInput({
+  ...props
+}: InputHTMLAttributes<HTMLInputElement>) {
   const CardOwnerInputLabel = useMemo(
     () => (
       <CardOwnerInputContainer>

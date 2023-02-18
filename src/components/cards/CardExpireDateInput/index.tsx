@@ -1,8 +1,10 @@
-import React from "react";
+import React, { InputHTMLAttributes } from "react";
 
 import { CardExpireDateInputEl } from "./cardExpireDateInput.style";
 
-export default function CardExpireDateInput({ ...props }) {
+export default function CardExpireDateInput({
+  ...props
+}: InputHTMLAttributes<HTMLInputElement>) {
   return (
     <CardExpireDateInputEl
       label="만료일"
