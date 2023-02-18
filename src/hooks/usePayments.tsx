@@ -30,7 +30,7 @@ export const usePayments = () => {
     if (newCardInfo[id as keyof CardInput]) {
       copiedNewCardInfo = {
         ...newCardInfo,
-        [id]: newCardInfo[id as keyof CardInput] + value,
+        [id]: value,
       };
     } else {
       copiedNewCardInfo[id as keyof CardInput] = value;
