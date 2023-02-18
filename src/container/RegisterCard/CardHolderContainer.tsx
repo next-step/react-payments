@@ -1,11 +1,12 @@
 import { Input, InputContainer } from '../../components/form';
-import { useInput } from '../../hooks';
+import { useFilter, useInput } from '../../hooks';
 import { RegisterCardType } from '../../pages/RegisterCard';
 import { useEffect } from 'react';
 
 const MAX_LENGTH = 30;
 
-export default function CardHolderContainer({ filter, onChange }: RegisterCardType) {
+export default function CardHolderContainer({ onChange }: RegisterCardType) {
+  const { onlyString } = useFilter();
   const cardHolder = useInput('');
   const countValue = cardHolder.value.length;
 
@@ -19,7 +20,7 @@ export default function CardHolderContainer({ filter, onChange }: RegisterCardTy
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         maxLength={MAX_LENGTH}
         {...cardHolder}
-        filter={filter}
+        filter={onlyString}
       />
     </InputContainer>
   );

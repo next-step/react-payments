@@ -5,7 +5,7 @@ interface Props {
   children: ReactNode;
 }
 
-function Model({ children, open }: Props) {
+function Modal({ children, open }: Props) {
   if (!open) return;
 
   return (
@@ -17,4 +17,4 @@ function Model({ children, open }: Props) {
   );
 }
 
-export default memo(Model);
+export default memo(Modal);

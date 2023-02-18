@@ -1,11 +1,12 @@
 import { Input, InputContainer } from '../../components/form';
 import { RegisterCardType } from '../../pages/RegisterCard';
 import { useEffect, useRef, useState } from 'react';
-import { useForm } from '../../hooks';
+import { useFilter, useForm } from '../../hooks';
 
 const MAX_LENGTH = 1;
 
-export default function CardPasswordContainer({ filter, onChange }: RegisterCardType) {
+export default function CardPasswordContainer({ onChange }: RegisterCardType) {
+  const { onlyNumber } = useFilter();
   const [errorMessage, setErrorMessage] = useState('');
   const passwordRef1 = useRef();
   const passwordRef2 = useRef();
@@ -37,7 +38,7 @@ export default function CardPasswordContainer({ filter, onChange }: RegisterCard
     >
       <Input
         type="password"
-        filter={filter}
+        filter={onlyNumber}
         maxLength={MAX_LENGTH}
         className="w-15"
         ref={passwordRef1}
@@ -48,7 +49,7 @@ export default function CardPasswordContainer({ filter, onChange }: RegisterCard
       <Input
         ref={passwordRef2}
         type="password"
-        filter={filter}
+        filter={onlyNumber}
         maxLength={MAX_LENGTH}
         className="w-15"
         {...cardPassword.second}

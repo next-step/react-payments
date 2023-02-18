@@ -1,14 +1,14 @@
-import { useForm } from '../../hooks';
+import { useFilter, useForm } from '../../hooks';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Input, InputContainer } from '../../components/form';
 import { RegisterCardType } from '../../pages/RegisterCard';
-import { Filter, Validator } from '../../domain';
+import { Validator } from '../../domain';
 
 const MAX_LENGTH = 4;
 const VALIDATE_ERROR = '카드 번호를 입력 해 주세요.';
 
-export default function CardNumberContainer({ filter, onChange }: RegisterCardType) {
-  const { formToArray } = Filter();
+export default function CardNumberContainer({ onChange }: RegisterCardType) {
+  const { formToArray, onlyNumber } = useFilter();
   const [errorMessage, setErrorMessage] = useState(VALIDATE_ERROR);
   const cardNumber2 = useRef();
   const cardNumber3 = useRef();
@@ -48,7 +48,7 @@ export default function CardNumberContainer({ filter, onChange }: RegisterCardTy
         onChange={setCardNumber}
         maxLength={MAX_LENGTH}
         nextFocus={cardNumber2.current}
-        filter={filter}
+        filter={onlyNumber}
       />
       -
       <Input
@@ -57,7 +57,7 @@ export default function CardNumberContainer({ filter, onChange }: RegisterCardTy
         ref={cardNumber2}
         maxLength={MAX_LENGTH}
         nextFocus={cardNumber3.current}
-        filter={filter}
+        filter={onlyNumber}
       />
       -
       <Input
@@ -67,7 +67,7 @@ export default function CardNumberContainer({ filter, onChange }: RegisterCardTy
         type="password"
         maxLength={MAX_LENGTH}
         nextFocus={cardNumber4.current}
-        filter={filter}
+        filter={onlyNumber}
       />
       -
       <Input
@@ -76,7 +76,7 @@ export default function CardNumberContainer({ filter, onChange }: RegisterCardTy
         ref={cardNumber4}
         type="password"
         maxLength={MAX_LENGTH}
-        filter={filter}
+        filter={onlyNumber}
       />
     </InputContainer>
   );

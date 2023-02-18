@@ -1,7 +1,6 @@
 import { CardBox, Modal } from '../components';
 import { useState } from 'react';
 import { useCard } from '../hooks';
-import { Filter } from '../domain';
 import CardSelection from '../components/CardSelection';
 import {
   CardHolderContainer,
@@ -15,12 +14,10 @@ import { cardRepository } from '../repository';
 import { useNavigate } from 'react-router-dom';
 
 export interface RegisterCardType {
-  filter?: (value: string) => string;
   onChange: (value: string) => void;
 }
 
 export default function RegisterCard() {
-  const { filterOnlyNumber, filterOnlyString } = Filter();
   const navigate = useNavigate();
   const [openCardPopup, setOpenCardPopup] = useState(false);
   const [securityCode, setSecurityCode] = useState('');
@@ -87,11 +84,11 @@ export default function RegisterCard() {
     <div className="app">
       <h2 className="page-title">&lt; 카드 추가</h2>
       <CardBox {...cardState} />
-      <CardNumberContainer filter={filterOnlyNumber} onChange={handleCardNumber}/>
-      <ExpiredDateContainer filter={filterOnlyNumber} onChange={handleExpiredDate}/>
-      <CardHolderContainer filter={filterOnlyString} onChange={handleCardHolder}/>
-      <SecurityCodeContainer filter={filterOnlyNumber} onChange={setSecurityCode}/>
-      <CardPasswordContainer filter={filterOnlyNumber} onChange={setCardPassword}/>
+      <CardNumberContainer onChange={handleCardNumber}/>
+      <ExpiredDateContainer onChange={handleExpiredDate}/>
+      <CardHolderContainer onChange={handleCardHolder}/>
+      <SecurityCodeContainer onChange={setSecurityCode}/>
+      <CardPasswordContainer onChange={setCardPassword}/>
       <Button onClick={saveCardData}>다음</Button>
       <Modal open={openCardPopup}>
         <CardSelection onChange={handleCardCompany}/>

@@ -1,11 +1,11 @@
-import { useForm } from '../../hooks';
+import { useFilter, useForm } from '../../hooks';
 import { Input, InputContainer } from '../../components/form';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { RegisterCardType } from '../../pages/RegisterCard';
-import { Filter, Validator } from '../../domain';
+import { Validator } from '../../domain';
 
-export default function ExpiredDateContainer<T>({ filter, onChange }: RegisterCardType<T>) {
-  const { formToArray } = Filter();
+export default function ExpiredDateContainer({ onChange }: RegisterCardType) {
+  const { formToArray, onlyNumber } = useFilter();
   const [errorMessage, setErrorMessage] = useState('');
   const monthRef = useRef();
   const yearRef = useRef();
@@ -44,7 +44,7 @@ export default function ExpiredDateContainer<T>({ filter, onChange }: RegisterCa
         maxLength={2}
         {...expired.month}
         onChange={setExpired}
-        filter={filter}
+        filter={onlyNumber}
       />
       /
       <Input
@@ -53,7 +53,7 @@ export default function ExpiredDateContainer<T>({ filter, onChange }: RegisterCa
         maxLength={2}
         {...expired.year}
         onChange={setExpired}
-        filter={filter}
+        filter={onlyNumber}
       />
     </InputContainer>
   );
