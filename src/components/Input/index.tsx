@@ -1,12 +1,14 @@
 import { css, cx } from '@emotion/css';
+import { forwardRef } from 'react';
 
 import type { CombineElementProps } from 'types/utils';
 
 type InputProps = CombineElementProps<'input'>;
 
-function Input({ className, ...props }: InputProps) {
+const Input = forwardRef<HTMLInputElement, InputProps>(({ className, ...props }, ref) => {
   return (
     <input
+      ref={ref}
       {...props}
       className={cx(
         css`
@@ -24,6 +26,6 @@ function Input({ className, ...props }: InputProps) {
       )}
     />
   );
-}
+});
 
 export default Input;
