@@ -3,7 +3,7 @@ import Repository from '../core/Repository';
 import { CardBox } from '../components';
 
 export default function CardList() {
-  const cardList = Repository.get('card-list');
+  const cardList = Repository.get('card-list') || [];
 
   return (
     <div className="app flex-column-center">
