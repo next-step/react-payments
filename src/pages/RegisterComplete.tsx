@@ -4,6 +4,7 @@ import { CardBox } from '../components';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button, Input } from '../components/form';
 import { useInput } from '../hooks';
+import { CARD_REPOSITORY } from '../constants';
 
 export default function RegisterComplete() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function RegisterComplete() {
         nickName: item.cardNumber === cardNumber ? nickName.value : item.nickName,
       }));
 
-      Repository.set('card-list', updateCardData);
+      Repository.set(CARD_REPOSITORY, updateCardData);
     }
 
     navigate('/');

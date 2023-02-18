@@ -13,6 +13,7 @@ import {
 import { Button } from '../components/form';
 import Repository from '../core/Repository';
 import { useNavigate } from 'react-router-dom';
+import { CARD_REPOSITORY } from '../constants';
 
 const { onlyNumber, onlyString } = Filter;
 
@@ -31,7 +32,6 @@ export default function RegisterCard() {
     cardNumber: '',
     cardHolder: '',
     expiredDate: '',
-    type: 'small',
   });
 
   const handleCardNumber = (cardNumber: string) => {
@@ -73,16 +73,15 @@ export default function RegisterCard() {
       ...cardState,
       securityCode,
       cardPassword,
-      type: null
     };
 
-    const cardList = Repository.get('card-list') || [];
+    const cardList = Repository.get(CARD_REPOSITORY) || [];
     const newCardList = [
       ...cardList,
       saveData,
     ];
 
-    Repository.set('card-list', newCardList);
+    Repository.set(CARD_REPOSITORY, newCardList);
     navigate(`/register-complete?card=${saveData.cardNumber}`);
   };
 
