@@ -17,4 +17,6 @@ Default.args = {
   expirationMonth: '12',
   expirationYear: '23',
   ownerName: '홍길동',
+  cardName: '신한카드',
+  cardColor: 'primary',
 };

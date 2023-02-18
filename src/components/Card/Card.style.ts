@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 
 export const CardContainer = styled.div<{
   size: 'small' | 'big';
+  cardColor: string;
 }>`
   display: flex;
   flex-direction: column;
@@ -11,7 +12,7 @@ export const CardContainer = styled.div<{
   width: ${({ size }) => (size === 'big' ? '290px' : '208px')};
   height: ${({ size }) => (size === 'big' ? '180px' : '130px')};
 
-  background: #94dacd;
+  background: ${({ cardColor }) => cardColor};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   padding-bottom: 10px;
