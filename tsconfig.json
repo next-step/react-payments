@@ -22,7 +22,8 @@
     "jsx": "react-jsx",
   },
   "include": [
-    "src"
+    "src",
+    "src/router.tsx"
   ],
   "extends": "./tsconfig.paths.json",
 }
