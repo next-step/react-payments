@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import styled from '@emotion/styled';
 import { EmptyCardButton } from '@/components/Button';
 import { CardListContainer } from './CardList.style';
 

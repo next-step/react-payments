@@ -1,11 +1,9 @@
 import React from 'react';
-import { CardFieldProvider } from './components/CardFieldContext';
-import { CardFields } from './components/CardFields';
-import { PreviewCard } from './components/PreviewCard';
-import { Header } from '@/components/Header';
-import { RightArrowIcon } from '@/assets';
 import { useNavigate } from 'react-router-dom';
-import TextButton from '@/components/Button/TextButton';
+
+import { Header, TextButton } from '@/components';
+import { RightArrowIcon } from '@/assets';
+import { CardFields, PreviewCard, CardFieldProvider } from './components';
 
 const CreateCardPage = () => {
   const navigate = useNavigate();
