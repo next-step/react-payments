@@ -11,20 +11,30 @@ const Payments = () => {
     newCardInfo,
     handleCardInputChange,
     handleCardTypeClick,
+    handleCardAddClick,
   } = usePayments();
 
   switch (step) {
     case 1:
+    case 2:
       return (
         <CardForm
           newCardInfo={newCardInfo}
+          step={step}
           setStep={setStep}
           handleCardInputChange={handleCardInputChange}
           handleCardTypeClick={handleCardTypeClick}
+          handleCardAddClick={handleCardAddClick}
         />
       );
-    case 2:
-      return <Completed />;
+    case 3:
+      return (
+        <Completed
+          newCardInfo={newCardInfo}
+          setStep={setStep}
+          handleCardInputChange={handleCardInputChange}
+        />
+      );
     default:
       return <CardList cardList={cardList} setStep={setStep} />;
   }

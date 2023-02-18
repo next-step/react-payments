@@ -7,16 +7,20 @@ import Modal from "../../common/Modal";
 
 interface CardFormProps {
   newCardInfo: CardInput;
+  step: number;
   setStep: Dispatch<SetStateAction<number>>;
   handleCardInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleCardTypeClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+  handleCardAddClick: () => void;
 }
 
 const CardForm = ({
   newCardInfo,
+  step,
   setStep,
   handleCardInputChange,
   handleCardTypeClick,
+  handleCardAddClick,
 }: CardFormProps) => {
   const {
     number1,
@@ -37,7 +41,7 @@ const CardForm = ({
 
   return (
     <>
-      <h2>1️⃣ 카드 추가</h2>
+      {step === 1 ? <h2>1️⃣ 카드 추가</h2> : <h2>3️⃣ 카드 추가 - 입력 완료</h2>}
       <div className="root">
         <div className="app">
           <h2 className="page-title">
@@ -122,13 +126,21 @@ const CardForm = ({
 
           <Button
             label="다음"
-            onClick={() => setShowModal((prev: boolean) => !prev)}
+            onClick={() => {
+              if (step === 1) {
+                setShowModal((prev: boolean) => !prev);
+                return;
+              }
+              handleCardAddClick();
+              setStep(3);
+            }}
           />
         </div>
         {showModal && (
           <Modal
             onClick={(e) => {
               handleCardTypeClick(e);
+              setShowModal((prev: boolean) => !prev);
               setStep(2);
             }}
             modalItem={[
