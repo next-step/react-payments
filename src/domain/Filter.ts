@@ -1,13 +1,11 @@
 export default class Filter {
   static cardNumber(cardNumber: string): string {
-    const a = cardNumber?.match(/[0-9]{1,4}/g)?.flatMap((item, index) => {
+    return cardNumber?.match(/[0-9*]{1,4}/g)?.flatMap((item, index) => {
       if (!item.length) return [];
 
       if (index > 1) return item.replace(/[0-9]/g, '*');
       return item;
     }).join('-');
-    console.log(a);
-    return a;
   }
 
   static expiredDate(expiredDate: string): string {
