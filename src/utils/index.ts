@@ -49,3 +49,9 @@ export const checkPassword = (string: string): string => {
   if (string.length > 1) return "*";
   return newString.replaceAll(/[0-9]/g, "*");
 };
+
+export const checkOwnerName = (string: string): string => {
+  if (string.length > 30) return string.slice(0, 30);
+
+  return string;
+};
