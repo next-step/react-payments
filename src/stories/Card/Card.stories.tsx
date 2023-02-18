@@ -1,4 +1,3 @@
-import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import Card from "../../components/common/Card";
@@ -14,12 +13,10 @@ export default {
 const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 
 export const Empty = Template.bind({});
-Empty.args = {
-  input: {},
-};
 
 export const Small = Template.bind({});
 Small.args = {
+  onClick: undefined,
   input: {
     title: "title",
     number: "1111 - 2222 - **** - ****",
