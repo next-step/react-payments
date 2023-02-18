@@ -4,8 +4,24 @@ import Text from "components/Text";
 import InputContainer from "components/Form/Input/Container";
 import Input from "components/Form/Input/Item";
 import Button from "../Button/index";
+import { convertToValidationCardNumber } from '../../utils/index';
+import { useRef, useState } from "react";
+
 
 export const Form = () => {
+  const cardNumberInputREf=useRef<HTMLInputElement>(null)
+
+
+  const handleCardNumberInput=()=>{
+      // 카드번호는 숫자만 입력가능 , 카드번호는 4자리마다 - 가 삽입 , 카드번호는 앞 9자리만 숫자로 보여지고 나머지는 숫자 *로
+    const ref=cardNumberInputREf.current
+    if(ref===null)return 
+    const value=ref.value
+    ref.value=convertToValidationCardNumber(value)
+
+  }
+
+
   return (
     <>
       <CardWrapper>
@@ -16,10 +32,7 @@ export const Form = () => {
           카드 번호
         </InputTitle>
         <InputContainer>
-          <Input type="text" theme="primary"></Input>
-          <Input type="text" theme="primary"></Input>
-          <Input type="password" theme="primary"></Input>
-          <Input type="password" theme="primary"></Input>
+          <Input ref={cardNumberInputREf} type="text" theme="primary" onChange={handleCardNumberInput}></Input>
         </InputContainer>
       </InputLayout>
       <InputLayout>
@@ -50,10 +63,10 @@ export const Form = () => {
           카드 비밀번호
         </InputTitle>
         <InputContainer width={70}>
-          <Input theme="primary" type="password" />
-          <Input theme="primary" type="password" />
-          <Input theme="primary" type="password" />
-          <Input theme="primary" type="password" />
+          <Input theme="primary" type="text" />
+          <Input theme="primary" type="text" />
+          <Input theme="primary" type="text" />
+          <Input theme="primary" type="text" />
         </InputContainer>
       </InputLayout>
       <ButtonBox>

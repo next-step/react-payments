@@ -49,7 +49,7 @@ const Header = styled.div`
   color: #383838;
   margin-top: 10px;
   margin-bottom: 20px;
-  gap: 10px;
+  gap: 20px;
 `;
 const DotContainer = styled.div`
   display: flex;

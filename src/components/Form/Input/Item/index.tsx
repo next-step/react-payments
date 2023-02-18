@@ -1,16 +1,19 @@
+import { forwardRef, ReactEventHandler } from "react";
 import styled, { css } from "styled-components";
 
 type InputProps = {
   type: string;
   placeholder?: string;
   theme: "underline" | "primary";
+  onChange?:React.ChangeEventHandler<HTMLInputElement>
 };
 
-export const Input = ({ type, placeholder, theme }: InputProps) => {
-  return <Layout type={type} placeholder={placeholder} theme={theme} />;
+
+export const Input = ({ type, placeholder, theme,onChange}: InputProps,ref:React.RefObject<HTMLInputElement>) => {
+  return <Layout type={type} placeholder={placeholder} theme={theme} onChange={onChange} ref={ref}/>;
 };
 
-export default Input;
+export default forwardRef(Input);
 
 type LayoutProps = {
   theme: "underline" | "primary";
