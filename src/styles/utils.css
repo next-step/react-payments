@@ -54,3 +54,15 @@
 .w-15 {
   width: 15%;
 }
+
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
