@@ -15,7 +15,7 @@ function AddingCard() {
         cardNumber={cardNumber}
         name="YOUNG"
         company={CardCompany.Hana}
-        expiredDate={{ month: '08', year: '11' }}
+        expiredDate={expiredDate}
       />
       <CardNumberContainer
         cardNumber={cardNumber}
