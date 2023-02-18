@@ -5,6 +5,7 @@ import { PreviewCard } from './components/PreviewCard';
 import { Header } from '@/components/Header';
 import { RightArrowIcon } from '@/assets';
 import { useNavigate } from 'react-router-dom';
+import TextButton from '@/components/Button/TextButton';
 
 const CreateCardPage = () => {
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ const CreateCardPage = () => {
         <PreviewCard />
         <CardFields />
       </CardFieldProvider>
+      <TextButton text="다음" onClick={() => console.log('clicked')} />
     </>
   );
 };

@@ -20,7 +20,7 @@ const CardFields = () => {
     ownerName,
   } = data;
 
-  const fontColor = 'blue';
+  const fontColor = 'primary';
   return (
     <form>
       <CardNumberField cardNumber={cardNumber} fontColor={fontColor} />
