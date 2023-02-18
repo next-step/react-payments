@@ -13,7 +13,13 @@ export default {
 
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
+export const Base = Template.bind({});
+Base.args = {
+  label: "Base",
+};
+
 export const Primary = Template.bind({});
 Primary.args = {
-  label: "Button",
+  label: "Primary",
+  color: "#94dacd",
 };
