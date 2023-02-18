@@ -8,18 +8,18 @@ import {
   CardSecurityCode,
 } from '../../components/Card'
 import {
-  CARD_EXPIRATION_DATE_LENGTH_MAX,
-  CARD_NUMBER_LENGTH_MAX,
-  CARD_PSSWORD_LENGTH_MAX,
-  CARD_SECURITY_CODE_LENGTH_MAX,
+  EXPIRATION_DATE_LENGTH_MAX,
+  NUMBER_LENGTH_MAX,
+  PASSWORD_LENGTH_MAX,
+  SECURITY_CODE_LENGTH_MAX,
 } from '../../constants/Card'
 import { useCardNumberData } from '../../hooks/useCardNumber'
 
 const CardAdd = () => {
-  const cardNumber = useCardNumberData(CARD_NUMBER_LENGTH_MAX)
-  const cardExpirationDate = useCardNumberData(CARD_EXPIRATION_DATE_LENGTH_MAX)
-  const cardSecurityCode = useCardNumberData(CARD_SECURITY_CODE_LENGTH_MAX)
-  const cardPassword = useCardNumberData(CARD_PSSWORD_LENGTH_MAX)
+  const cardNumber = useCardNumberData(NUMBER_LENGTH_MAX)
+  const cardExpirationDate = useCardNumberData(EXPIRATION_DATE_LENGTH_MAX)
+  const cardSecurityCode = useCardNumberData(SECURITY_CODE_LENGTH_MAX)
+  const cardPassword = useCardNumberData(PASSWORD_LENGTH_MAX)
 
   return (
     <div>

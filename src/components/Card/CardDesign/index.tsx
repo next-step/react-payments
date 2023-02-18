@@ -1,5 +1,7 @@
+import { useMarkCardNumber } from '../../../hooks/useMarkCardNumber'
+
 const CardDesign = ({ cardNumber, cardExpirationDate }: CardDesignProps) => {
-  const number = cardNumber
+  const markNumber = useMarkCardNumber(cardNumber)
   const expirationDate = cardExpirationDate
 
   return (
@@ -11,9 +13,7 @@ const CardDesign = ({ cardNumber, cardExpirationDate }: CardDesignProps) => {
         </div>
         <div className='card-bottom'>
           <div className='card-bottom__cardcardNumberberber'>
-            <span className='card-text'>
-              {number.num1}-{number.num2}-{number.num3}-{number.num4}
-            </span>
+            <span className='card-text'>{markNumber}</span>
           </div>
           <div className='card-bottom__info'>
             <span className='card-text'>NAME</span>
