@@ -40,3 +40,11 @@ input {
 
   color: #383838;
 }
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+a {
+  text-decoration: none;
+}
