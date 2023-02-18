@@ -2,10 +2,10 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 import { Label, TextInput } from '@/components';
-import { ReactComponent as CircleQuestion } from '@/assets/circle_question.svg';
 import { ACTION, useCardFieldDispatchContext } from '../../CardFieldContext';
 import { LABEL_TEXT } from '@/constants/createCard';
 import { Colors } from '@/styles/colors';
+import { CircleQuestionIcon } from '@/assets';
 
 type CardCVCNumberFieldProps = {
   cvc: string;
@@ -38,7 +38,7 @@ const CardCVCNumberField = ({ cvc, fontColor }: CardCVCNumberFieldProps) => {
           textAlign="center"
           value={cvc}
         />
-        <CircleQuestion />
+        <CircleQuestionIcon />
       </CardCVCNumberInputContainer>
     </Label>
   );
