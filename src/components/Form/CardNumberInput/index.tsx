@@ -1,19 +1,19 @@
 import Text from "components/Text";
 import { useRef, useState } from "react";
 import styled from "styled-components";
-import { convertToValidationCardNumber } from "utils";
+import { checkCardNumber } from "utils";
 import Input from "../../Input/Item";
 import InputContainer from "components/Input/Container";
 
 const CardNumberInput = () => {
-  const cardNumberInputREf = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleCardNumberInput = () => {
+  const handleInput = () => {
     // 카드번호는 숫자만 입력가능 , 카드번호는 4자리마다 - 가 삽입 , 카드번호는 앞 8자리만 숫자로 보여지고 나머지는 숫자 *로
-    const ref = cardNumberInputREf.current;
+    const ref = inputRef.current;
     if (ref === null) return;
     const value = ref.value;
-    ref.value = convertToValidationCardNumber(value);
+    ref.value = checkCardNumber(value);
   };
 
   return (
@@ -22,7 +22,7 @@ const CardNumberInput = () => {
         카드 번호
       </Title>
       <InputContainer>
-        <Input ref={cardNumberInputREf} type="text" theme="primary" onChange={handleCardNumberInput}></Input>
+        <Input ref={inputRef} type="text" theme="primary" onChange={handleInput}></Input>
       </InputContainer>
     </Layout>
   );
