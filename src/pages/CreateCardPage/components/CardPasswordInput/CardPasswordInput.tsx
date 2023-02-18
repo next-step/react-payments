@@ -5,6 +5,7 @@ import {
   CardPasswordDot,
   CardPasswordInputContainer,
 } from './CardPasswordInput.style';
+import { isNotNumber } from '@/utils/validate';
 
 type CardPasswordInputProps = {
   onChange: (value: string) => void;
@@ -22,6 +23,7 @@ const CardPasswordInput = ({
   const cardPasswordArray = ['PASSWORD', 'PASSWORD', 'DOT', 'DOT'];
 
   const handleChange = (value: string) => {
+    if (isNotNumber(value)) return;
     const backspace = value === '';
     if (backspace) {
       if (!InputRefs.current[1].value) {

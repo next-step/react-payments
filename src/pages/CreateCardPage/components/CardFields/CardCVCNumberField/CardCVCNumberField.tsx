@@ -6,6 +6,7 @@ import { ACTION, useCardFieldDispatchContext } from '../../CardFieldContext';
 import { LABEL_TEXT } from '@/constants/createCard';
 import { Colors } from '@/styles/colors';
 import { CircleQuestionIcon } from '@/assets';
+import { isNotNumber } from '@/utils/validate';
 
 type CardCVCNumberFieldProps = {
   cvc: string;
@@ -20,6 +21,7 @@ const CardCVCNumberField = ({ cvc, fontColor }: CardCVCNumberFieldProps) => {
 
   const handleChange = (value: string) => {
     if (dispatch === null) return;
+    if (isNotNumber(value)) return;
 
     dispatch(ACTION.UPDATE_CARD_CVC(value));
   };

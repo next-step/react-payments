@@ -11,9 +11,6 @@ export const addSeparator = (str: string) => {
   return formatted;
 };
 
-export const isNotNumber = (str: string) =>
-  Number.isNaN(Number(str)) || str === ' ';
-
 export const DASH = ' - ';
 const CardNumberSectionLength = 4;
 

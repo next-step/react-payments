@@ -1,8 +1,8 @@
 import { Label, TextInput } from '@/components';
 import React from 'react';
 import { ACTION, useCardFieldDispatchContext } from '../../CardFieldContext';
-import { SEPARATOR, addSeparator, isNotNumber } from '@/utils/formatter';
-import { isMonth } from '@/utils/validate';
+import { SEPARATOR, addSeparator } from '@/utils/formatter';
+import { isMonth, isNotNumber } from '@/utils/validate';
 import { LABEL_TEXT, PLACEHOLDER_TEXT } from '@/constants/createCard';
 import { Colors } from '@/styles/colors';
 
