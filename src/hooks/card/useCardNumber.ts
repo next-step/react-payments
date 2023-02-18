@@ -13,6 +13,9 @@ export default function useCardNumber() {
   const handleChangeCardNumber = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
+    if (!(name in cardNumber)) {
+      throw new Error(`input element에 지정되지 않은 name이 주입되었습니다. [injected name with '${name}']`);
+    }
     if (!isNumber(value) && value !== '') return;
 
     setCardNumber((prev) => ({

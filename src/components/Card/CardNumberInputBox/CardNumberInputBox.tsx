@@ -3,6 +3,7 @@ import { ChangeEvent, useEffect, useRef } from 'react';
 import { Box, Input } from '@/components/Common';
 import { CardNumber } from '@/types/card';
 import { CARD_NUMBER } from '@/constants/card';
+import { useInputFocus } from '@/hooks/card';
 
 type CardNumberInputProps = {
   cardNumber: CardNumber;
@@ -17,21 +18,7 @@ export default function CardNumberInputBox({ cardNumber, onChange }: CardNumberI
   const num3Ref = useRef<HTMLInputElement>(null);
   const num4Ref = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    num1Ref.current?.focus();
-  }, []);
-
-  useEffect(() => {
-    num1.length === CARD_NUMBER.MAX_LENGTH && num2Ref.current?.focus();
-  }, [num1]);
-
-  useEffect(() => {
-    num2.length === CARD_NUMBER.MAX_LENGTH && num3Ref.current?.focus();
-  }, [num2]);
-
-  useEffect(() => {
-    num3.length === CARD_NUMBER.MAX_LENGTH && num4Ref.current?.focus();
-  }, [num3]);
+  useInputFocus({ cardNumber, num1Ref, num2Ref, num3Ref, num4Ref });
 
   return (
     <Box title="카드 번호" className="input-container">

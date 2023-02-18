@@ -40,8 +40,8 @@ export default function CardPasswordInputBox() {
         type="password"
       />
 
-      <Input className="input-fixed w-15" readOnly value="•" type="password" />
-      <Input className="input-fixed w-15" readOnly value="•" type="password" />
+      <Input className="input-fixed w-15" disabled value="•" type="password" />
+      <Input className="input-fixed w-15" disabled value="•" type="password" />
     </Box>
   );
 }
