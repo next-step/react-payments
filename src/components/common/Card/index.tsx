@@ -1,12 +1,5 @@
 import "./card.css";
-
-type CardInput = {
-  title?: string;
-  number?: string;
-  name?: string;
-  expiry?: string;
-};
-
+import { CardInput } from "./card.type";
 interface CardProps {
   input?: CardInput;
   backgroundColor?: string;

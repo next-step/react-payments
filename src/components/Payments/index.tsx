@@ -4,7 +4,7 @@ import CardList from "./CardList";
 import Completed from "./Completed";
 
 const Payments = () => {
-  const { step, setStep } = usePayments();
+  const { step, setStep, cardList } = usePayments();
 
   switch (step) {
     case 1:
@@ -12,7 +12,7 @@ const Payments = () => {
     case 2:
       return <Completed />;
     default:
-      return <CardList setStep={setStep} />;
+      return <CardList cardList={cardList} setStep={setStep} />;
   }
 };
 
