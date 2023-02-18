@@ -1,19 +1,22 @@
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import Button from "../../common/Button";
 import Card from "../../common/Card";
 import { CardInput } from "../../common/Card/card.type";
 import InputContainer from "../../common/Input/InputContainer";
+import Modal from "../../common/Modal";
 
 interface CardFormProps {
   newCardInfo: CardInput;
   setStep: Dispatch<SetStateAction<number>>;
   handleCardInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCardTypeClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 }
 
 const CardForm = ({
   newCardInfo,
   setStep,
   handleCardInputChange,
+  handleCardTypeClick,
 }: CardFormProps) => {
   const {
     number1,
@@ -29,6 +32,9 @@ const CardForm = ({
     password3,
     password4,
   } = newCardInfo;
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+
   return (
     <>
       <h2>1️⃣ 카드 추가</h2>
@@ -114,8 +120,29 @@ const CardForm = ({
             onChange={handleCardInputChange}
           />
 
-          <Button label="다음" onClick={() => setStep(2)} />
+          <Button
+            label="다음"
+            onClick={() => setShowModal((prev: boolean) => !prev)}
+          />
         </div>
+        {showModal && (
+          <Modal
+            onClick={(e) => {
+              handleCardTypeClick(e);
+              setStep(2);
+            }}
+            modalItem={[
+              { item: "레드 카드", backgroundColor: "red" },
+              { item: "블루 카드", backgroundColor: "blue" },
+              { item: "그린 카드", backgroundColor: "green" },
+              { item: "바이 카드", backgroundColor: "violet" },
+              { item: "민트 카드", backgroundColor: "#98ff98" },
+              { item: "핑크 카드", backgroundColor: "pink" },
+              { item: "오뤤 카드", backgroundColor: "orange" },
+              { item: "옐로 카드", backgroundColor: "yellow" },
+            ]}
+          />
+        )}
       </div>
     </>
   );

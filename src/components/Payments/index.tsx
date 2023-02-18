@@ -4,8 +4,14 @@ import CardList from "./CardList";
 import Completed from "./Completed";
 
 const Payments = () => {
-  const { step, setStep, cardList, newCardInfo, handleCardInputChange } =
-    usePayments();
+  const {
+    step,
+    setStep,
+    cardList,
+    newCardInfo,
+    handleCardInputChange,
+    handleCardTypeClick,
+  } = usePayments();
 
   switch (step) {
     case 1:
@@ -14,6 +20,7 @@ const Payments = () => {
           newCardInfo={newCardInfo}
           setStep={setStep}
           handleCardInputChange={handleCardInputChange}
+          handleCardTypeClick={handleCardTypeClick}
         />
       );
     case 2:

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { CardInput } from "../components/common/Card/card.type";
 import { CardListType } from "../types/payments";
 
@@ -40,6 +40,11 @@ export const usePayments = () => {
     setNewCardInfo(copiedNewCardInfo);
   };
 
+  const handleCardTypeClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { id } = e.currentTarget;
+    setNewCardInfo((prev) => ({ ...prev, type: id }));
+  };
+
   const handleCardAddClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setCardList((prev) => ({ ...prev, newCardInfo }));
     setNewCardInfo({});
@@ -51,6 +56,7 @@ export const usePayments = () => {
     cardList,
     newCardInfo,
     handleCardInputChange,
+    handleCardTypeClick,
     handleCardAddClick,
   };
 };

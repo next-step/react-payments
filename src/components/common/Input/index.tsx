@@ -8,7 +8,6 @@ const Input = ({
   placeholder,
   onChange,
 }: React.InputHTMLAttributes<HTMLInputElement>) => {
-  console.log(className);
   return (
     <input
       className={`input-basic ${className}`}
