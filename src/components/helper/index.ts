@@ -1,3 +1,7 @@
 export function isNumber(variable: string) {
-  return !Number.isNaN(parseInt(variable));
+  return (
+    variable !== undefined &&
+    variable !== null &&
+    !Number.isNaN(Number(variable))
+  );
 }

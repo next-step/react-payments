@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 
 import { LeftPointArrow } from "@/assets/icons";
 import {
@@ -9,9 +9,10 @@ import {
   CardOwnerInput,
   CardPasswordInput,
 } from "@/components/cards";
+import { useCardCvcInput } from "@/components/cards/CardCvcInput/hook";
 import { useCardExpireDateInput } from "@/components/cards/CardExpireDateInput/hook";
-import { useCardNumberInput } from "@/components/cards/CardNumberInput/hooks";
-import useCardOwnerInput from "@/components/cards/CardOwnerInput/hook/useCardOwnerInput";
+import { useCardNumberInput } from "@/components/cards/CardNumberInput/hook";
+import { useCardOwnerInput } from "@/components/cards/CardOwnerInput/hook";
 import { Header } from "@/components/common";
 
 import {
@@ -26,13 +27,17 @@ export default function AddCard() {
   const { cardNumber, onCardNumberChange } = useCardNumberInput("");
   const { cardExpireDate, onCardExpireDateChange } = useCardExpireDateInput("");
   const { cardOwnerName, onCardOwnerNameChange } = useCardOwnerInput("");
+  const { cvcNumber, onCvcNumberChange } = useCardCvcInput("");
 
-  const cardInfo = {
-    cardName: cardOwnerName,
-    cardNumber: cardNumber.split("-"),
-    cardOwnerName: "NAME",
-    expireDate: cardExpireDate || "MM/YY",
-  };
+  const cardInfo = useMemo(
+    () => ({
+      cardName: cardOwnerName,
+      cardNumber: cardNumber.split("-"),
+      cardOwnerName: "NAME",
+      expireDate: cardExpireDate || "MM/YY",
+    }),
+    [cardNumber, cardExpireDate, cardOwnerName]
+  );
 
   return (
     <AddCardPageContainer>
@@ -52,7 +57,7 @@ export default function AddCard() {
             value={cardOwnerName}
             onChange={onCardOwnerNameChange}
           />
-          <CardCvcInput />
+          <CardCvcInput value={cvcNumber} onChange={onCvcNumberChange} />
           <CardPasswordInput />
         </AddCardFormInputWrapper>
       </AddCardForm>

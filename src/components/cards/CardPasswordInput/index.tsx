@@ -8,7 +8,7 @@ import {
   CardPasswordInputWrapper,
 } from "./cardPasswordInput";
 
-export default function CardPasswordInput({ ...args }) {
+export default function CardPasswordInput({ ...props }) {
   return (
     <CardPasswordInputContainer>
       <Label>비밀번호</Label>
