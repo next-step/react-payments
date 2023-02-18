@@ -1,8 +1,13 @@
 import { ReactNode } from 'react';
 
-export default function Button({ children }: { children: ReactNode }) {
+interface Props {
+  children?: ReactNode;
+  onClick?: () => void;
+}
+
+export default function Button({ children, onClick }: Props) {
   return (
-    <div className="button-box">
+    <div className="button-box" onClick={onClick}>
       <span className="button-text">{children}</span>
     </div>
   );

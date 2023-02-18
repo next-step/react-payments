@@ -57,14 +57,17 @@ export default function RegisterCard() {
     });
   };
 
-  const handleCardCompany = ({ cardCompany, color }: object) => {
+  const handleCardCompany = (cardCompany: object) => {
     setCardState({
       ...cardState,
-      cardCompany,
-      color,
+      ...cardCompany,
     });
 
     setOpenCardPopup(false);
+  };
+
+  const saveCardData = () => {
+    console.log('saveCardData');
   };
 
   return (
@@ -76,8 +79,7 @@ export default function RegisterCard() {
       <CardHolderContainer filter={onlyString} onChange={handleCardHolder}/>
       <SecurityCodeContainer filter={onlyNumber} onChange={setSecurityCode}/>
       <CardPasswordContainer filter={onlyNumber} onChange={setCardPassword}/>
-
-      <Button>다음</Button>
+      <Button onClick={saveCardData}>다음</Button>
       <Modal open={openCardPopup}>
         <SelectCard onChange={handleCardCompany}/>
       </Modal>

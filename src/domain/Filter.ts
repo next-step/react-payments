@@ -9,7 +9,7 @@ export default class Filter {
   }
 
   static expiredDate(expiredDate: string): string {
-    return expiredDate?.match(/[0-9]{1,2}/g)?.join('/');
+    return expiredDate?.match(/[0-9]{1,2}/g)?.join(' / ');
   }
 
   static onlyNumber(text: string): string {
