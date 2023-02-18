@@ -2,7 +2,7 @@ import { Repository } from '../core/Repository';
 
 class CardRepository extends Repository {
   getItem() {
-    return JSON.parse(this.storage.getItem(this.key));
+    return JSON.parse(this.storage.getItem(this.key)) || [];
   }
 
   setItem(item: object) {
@@ -14,5 +14,5 @@ class CardRepository extends Repository {
   }
 }
 
-export default new CardRepository('card', localStorage);
+export default new CardRepository('card-list', localStorage);
 

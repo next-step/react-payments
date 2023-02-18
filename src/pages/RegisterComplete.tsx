@@ -30,7 +30,6 @@ export default function RegisterComplete() {
   return (
     <div className="app flex-column-center">
       <PageTitle title="카드등록이 완료되었습니다."></PageTitle>
-      <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       <CardBox {...cardData} type="big"/>
       <Input
         className="input-underline"

@@ -1,9 +1,9 @@
 import { NavLink } from 'react-router-dom';
-import Repository from '../core/Repository';
+import { cardRepository } from '../repository';
 import { CardBox, PageTitle } from '../components';
 
 export default function CardList() {
-  const cardList = Repository.get('card-list') || [];
+  const cardList = cardRepository.getItem();
 
   return (
     <div className="app flex-column-center">

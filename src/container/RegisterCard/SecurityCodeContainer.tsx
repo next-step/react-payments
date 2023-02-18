@@ -1,5 +1,4 @@
-import { InputContainer } from '../index';
-import { Input } from '../../components/form';
+import { Input, InputContainer } from '../../components/form';
 import { RegisterCardType } from '../../pages/RegisterCard';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useInput } from '../../hooks';
