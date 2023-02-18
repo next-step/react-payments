@@ -15,8 +15,9 @@ const S = {
 
 interface ITitle {
   onClick?: () => void;
+  title: string;
 }
 
-export const Title = ({ onClick }: ITitle) => {
-  return <S.Title onClick={onClick}>{'< 카드 추가'}</S.Title>;
+export const Title = ({ onClick, title }: ITitle) => {
+  return <S.Title onClick={onClick}>{title}</S.Title>;
 };

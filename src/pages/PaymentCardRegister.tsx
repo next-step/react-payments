@@ -1,11 +1,14 @@
 import React from 'react';
 import { Title } from '../components/Title';
+import { Link } from 'react-router-dom';
 
 const PaymentCardRegister = () => {
   return (
     // 카드 등록
     <>
-      <Title />
+      <Link to={'/'}>
+        <Title title={'< 카드 추가'} />
+      </Link>
       <div className="card-box">
         <div className="empty-card">
           <div className="card-top"></div>
