@@ -35,6 +35,13 @@
   border-radius: 0.25rem;
 }
 
+.input-basic.w-25 {
+  width: 25%;
+}
+.input-basic.w-15 {
+  width: 15%;
+}
+
 .input-underline {
   text-align: center;
   border: none;

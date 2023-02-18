@@ -7,7 +7,8 @@ export type InputClassName = {
 };
 
 export type InputList = {
-  value: string;
-  type: HTMLInputTypeAttribute;
+  value?: string;
+  type?: HTMLInputTypeAttribute;
+  id?: string;
   placeholder?: string;
 };

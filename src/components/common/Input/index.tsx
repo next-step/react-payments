@@ -1,22 +1,20 @@
 import "./input.css";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  value: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
 const Input = ({
   className,
   type = "text",
   value,
+  id,
   placeholder,
   onChange,
-}: InputProps) => {
+}: React.InputHTMLAttributes<HTMLInputElement>) => {
+  console.log(className);
   return (
     <input
       className={`input-basic ${className}`}
       type={type}
       value={value}
+      id={id}
       placeholder={placeholder}
       onChange={onChange}
     />

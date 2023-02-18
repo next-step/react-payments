@@ -9,7 +9,7 @@ export default {
 } as ComponentMeta<typeof Input>;
 
 const Template: ComponentStory<typeof Input> = (args) => {
-  const [value, setValue] = useState<string>(args.value);
+  const [value, setValue] = useState<string>(args.value as string);
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setValue(value);
