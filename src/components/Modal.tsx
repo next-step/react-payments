@@ -1,11 +1,11 @@
-import { ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 
 interface Props {
   open: boolean;
   children: ReactNode;
 }
 
-export default function Model({ children, open }: Props) {
+function Model({ children, open }: Props) {
   if (!open) return;
 
   return (
@@ -16,3 +16,5 @@ export default function Model({ children, open }: Props) {
     </div>
   );
 }
+
+export default memo(Model);

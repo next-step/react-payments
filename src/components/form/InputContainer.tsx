@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 
 interface Props {
   children: ReactNode;
@@ -9,7 +9,7 @@ interface Props {
   errorMessage?: string;
 }
 
-export default function InputContainer({ children, className = '', title, notInputBox, anchor, errorMessage }: Props) {
+function InputContainer({ children, className = '', title, notInputBox, anchor, errorMessage }: Props) {
   return (
     <div className="input-container">
       <div className="flex-between">
@@ -27,3 +27,5 @@ export default function InputContainer({ children, className = '', title, notInp
     </div>
   );
 }
+
+export default memo(InputContainer);

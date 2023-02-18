@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 type CardData = { cardCompany: string, color: string };
 
 interface Props {
@@ -17,7 +19,7 @@ const CARD_DATA2 = [
   { cardCompany: '클린카드8', color: '#ffa726' },
 ];
 
-export default function SelectCard({ onChange }: Props) {
+function CardSelection({ onChange }: Props) {
   const handleClick = (data) => {
     onChange(data);
   };
@@ -43,3 +45,5 @@ export default function SelectCard({ onChange }: Props) {
     </>
   );
 }
+
+export default memo(CardSelection);

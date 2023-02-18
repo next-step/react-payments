@@ -1,5 +1,5 @@
 import { Filter } from '../domain';
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 
 export interface CardBoxType {
   cardCompany?: string;
@@ -17,7 +17,7 @@ const config = {
   }
 };
 
-export default function CardBox({ cardCompany, cardNumber, cardHolder, expiredDate, type, color }: CardBoxType) {
+function CardBox({ cardCompany, cardNumber, cardHolder, expiredDate, type, color }: CardBoxType) {
   const { filterCardNumber, filterExpiredDate } = Filter();
   const aCardNumber = useMemo(() => filterCardNumber(cardNumber), [cardNumber]);
   const aExpiredDate = useMemo(() => filterExpiredDate(expiredDate), [expiredDate]);
@@ -43,3 +43,5 @@ export default function CardBox({ cardCompany, cardNumber, cardHolder, expiredDa
     </div>
   );
 }
+
+export default memo(CardBox);

@@ -2,7 +2,7 @@ import { CardBox, Modal } from '../components';
 import { useState } from 'react';
 import { useCard } from '../hooks';
 import { Filter } from '../domain';
-import SelectCard from '../components/SelectCard';
+import CardSelection from '../components/CardSelection';
 import {
   CardHolderContainer,
   CardNumberContainer,
@@ -94,7 +94,7 @@ export default function RegisterCard() {
       <CardPasswordContainer filter={filterOnlyNumber} onChange={setCardPassword}/>
       <Button onClick={saveCardData}>다음</Button>
       <Modal open={openCardPopup}>
-        <SelectCard onChange={handleCardCompany}/>
+        <CardSelection onChange={handleCardCompany}/>
       </Modal>
     </div>
   );
