@@ -4,7 +4,7 @@ import InputBox from "../InputBox";
 
 interface InputContainerProps {
   className?: InputClassName;
-  title: string;
+  title?: string;
   inputList: InputList[];
   hasInputBox?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -19,7 +19,7 @@ const InputContainer = ({
 }: InputContainerProps) => {
   return (
     <div className={`input-container ${className?.inputContainerClassName}`}>
-      <span className="input-title">{title}</span>
+      {title && <span className="input-title">{title}</span>}
       {hasInputBox ? (
         <InputBox
           inputList={inputList}
