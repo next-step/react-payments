@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { memo, ReactNode } from "react";
 
 import { HeaderEl, StartDecoratorWrapper } from "./header.style";
 
@@ -8,7 +8,7 @@ interface HeaderProps {
   className?: string;
 }
 
-export default function Header({
+export default memo(function Header({
   startDecorator,
   children,
   className,
@@ -21,4 +21,4 @@ export default function Header({
       {children}
     </HeaderEl>
   );
-}
+});
