@@ -26,7 +26,7 @@ export default function useFilter() {
     text.replace(/[^a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣\s]/g, '')
   ), []);
 
-  const formToArray = useCallback((data: object[]): string[] => (
+  const formToArray = useCallback((data: object): string[] => (
     Object.values(data).map((item) => item.value)
   ), []);
 
