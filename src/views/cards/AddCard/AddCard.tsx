@@ -9,6 +9,7 @@ import {
   CardOwnerInput,
   CardPasswordInput,
 } from "@/components/cards";
+import { useCardNumberInput } from "@/components/cards/CardNumberInput/hooks";
 import { Header } from "@/components/common";
 
 import {
@@ -17,25 +18,27 @@ import {
   AddCardPageContainer,
 } from "./addCard.style";
 
+const HeaderLeftPointArrow = <LeftPointArrow />;
+
 export default function AddCard() {
+  const { cardNumber, onCardNumberChange } = useCardNumberInput("");
+
+  const cardInfo = {
+    cardName: "",
+    cardNumber: cardNumber.split("-"),
+    cardOwnerName: "NAME",
+    expireDate: "MM/YY",
+  };
+
   return (
     <AddCardPageContainer>
-      <Header className="add-form-header" startDecorator={<LeftPointArrow />}>
+      <Header className="add-form-header" startDecorator={HeaderLeftPointArrow}>
         카드추가
       </Header>
       <AddCardForm>
-        <Card
-          className="add-form-card"
-          size="big"
-          cardInfo={{
-            cardName: "",
-            cardNumber: ["", "", "", ""],
-            cardOwnerName: "NAME",
-            expireDate: "MM/YY",
-          }}
-        />
+        <Card className="add-form-card" size="big" cardInfo={cardInfo} />
         <AddCardFormInputWrapper>
-          <CardNumberInput />
+          <CardNumberInput value={cardNumber} onKeyDown={onCardNumberChange} />
           <CardExpireDateInput />
           <CardOwnerInput />
           <CardCvcInput />
