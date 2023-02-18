@@ -1,6 +1,7 @@
 .button-box {
   width: 100%;
   text-align: right;
+  cursor: pointer;
 }
 
 .button-text {
