@@ -1,0 +1,76 @@
+.input {
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.filled {
+  border: 0;
+  color: #fff;
+}
+
+.filled.primary {
+  background-color: #94dacd;
+}
+
+.filled.secondary {
+  background-color: #383838;
+}
+
+.filled.danger {
+  background-color: tomato;
+}
+
+.outlined {
+  background-color: transparent;
+}
+
+.outlined.primary {
+  border: 1px solid #94dacd;
+  color: #94dacd;
+}
+
+.outlined.secondary {
+  border: 1px solid #383838;
+  color: #383838;
+}
+
+.outlined.danger {
+  border: 1px solid tomato;
+  color: tomato;
+}
+
+.ghost {
+  border: 0;
+  background-color: transparent;
+}
+
+.ghost.primary {
+  color: #94dacd;
+}
+
+.ghost.secondary {
+  color: #383838;
+}
+
+.ghost.danger {
+  color: tomato;
+}
+
+.small {
+  font-size: 1em;
+}
+
+.medium {
+  font-size: 1.5rem;
+}
+
+.large {
+  font-size: 2rem;
+}
+
+.disabled {
+  cursor: default;
+  opacity: 0.7;
+}
