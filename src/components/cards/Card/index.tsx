@@ -1,5 +1,3 @@
-import "@/styles/card.css";
-
 import React from "react";
 
 import {
