@@ -1,9 +1,9 @@
-export default class Validator {
-  static isEnterCardNumber(cardNumberData: object, maxLength: number): boolean {
+export default function Validator() {
+  function isEnterCardNumber(cardNumberData: object, maxLength: number): boolean {
     return Object.values(cardNumberData).every((item) => item.value.length === maxLength);
   }
 
-  static isPreviousDate(year: string, month: string): boolean {
+  function isPreviousDate(year: string, month: string): boolean {
     if (year.length < 2 || month.length < 2) {
       return true;
     }
@@ -14,4 +14,9 @@ export default class Validator {
 
     return date.getTime() < currentDate.getTime();
   }
+
+  return {
+    isEnterCardNumber,
+    isPreviousDate,
+  };
 }

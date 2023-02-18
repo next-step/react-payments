@@ -6,6 +6,7 @@ import { Validator } from '../../domain';
 
 export default function ExpiredDateContainer({ onChange }: RegisterCardType) {
   const { formToArray, onlyNumber } = useFilter();
+  const { isPreviousDate } = Validator();
   const [errorMessage, setErrorMessage] = useState('');
   const monthRef = useRef();
   const yearRef = useRef();
@@ -27,7 +28,7 @@ export default function ExpiredDateContainer({ onChange }: RegisterCardType) {
       return;
     }
 
-    if (Validator.isPreviousDate(year, month)) {
+    if (isPreviousDate(year, month)) {
       setErrorMessage('현재 날짜보다 이전 날짜는 입력할 수 없습니다.');
       return;
     }

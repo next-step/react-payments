@@ -9,6 +9,7 @@ const VALIDATE_ERROR = '카드 번호를 입력 해 주세요.';
 
 export default function CardNumberContainer({ onChange }: RegisterCardType) {
   const { formToArray, onlyNumber } = useFilter();
+  const { isEnterCardNumber } = Validator();
   const [errorMessage, setErrorMessage] = useState(VALIDATE_ERROR);
   const cardNumber2 = useRef();
   const cardNumber3 = useRef();
@@ -21,7 +22,7 @@ export default function CardNumberContainer({ onChange }: RegisterCardType) {
   });
 
   const isValidateCard = useMemo(() => (
-    Validator.isEnterCardNumber(cardNumber, MAX_LENGTH)
+    isEnterCardNumber(cardNumber, MAX_LENGTH)
   ), [cardNumber]);
   const cardNumbers = useMemo(() => (
     formToArray(cardNumber).join('')
