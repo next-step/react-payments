@@ -1,6 +1,6 @@
 import './styles/index.css';
 import { Route, Routes } from 'react-router-dom';
-import { CardList, RegisterCard } from './pages';
+import { CardList, RegisterCard, RegisterComplete } from './pages';
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
         <Route path="/">
           <Route index element={<CardList/>}></Route>
           <Route path="register" element={<RegisterCard/>}></Route>
+          <Route path="register-complete" element={<RegisterComplete/>}></Route>
         </Route>
       </Routes>
     </div>

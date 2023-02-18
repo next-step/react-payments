@@ -21,7 +21,7 @@ input {
     background-color: #fff;
     width: 375px;
     min-width: 375px;
-    max-height: 800px;
+    min-height: 700px;
     position: relative;
     border-radius: 15px;
 }

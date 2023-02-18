@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useCard } from '../hooks';
 import { Filter } from '../domain';
 import SelectCard from '../components/SelectCard';
-
 import {
   CardHolderContainer,
   CardNumberContainer,
@@ -12,6 +11,8 @@ import {
   SecurityCodeContainer
 } from '../container/RegisterCard';
 import { Button } from '../components/form';
+import Repository from '../core/Repository';
+import { useNavigate } from 'react-router-dom';
 
 const { onlyNumber, onlyString } = Filter;
 
@@ -21,6 +22,7 @@ export interface RegisterCardType {
 }
 
 export default function RegisterCard() {
+  const navigate = useNavigate();
   const [openCardPopup, setOpenCardPopup] = useState(false);
   const [securityCode, setSecurityCode] = useState('');
   const [cardPassword, setCardPassword] = useState('');
@@ -67,7 +69,21 @@ export default function RegisterCard() {
   };
 
   const saveCardData = () => {
-    console.log('saveCardData');
+    const saveData = {
+      ...cardState,
+      securityCode,
+      cardPassword,
+      type: null
+    };
+
+    const cardList = Repository.get('card-list') || [];
+    const newCardList = [
+      ...cardList,
+      saveData,
+    ];
+
+    Repository.set('card-list', newCardList);
+    navigate(`/register-complete?card=${saveData.cardNumber}`);
   };
 
   return (
