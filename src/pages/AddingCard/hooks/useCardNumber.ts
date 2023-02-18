@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { isNumber } from 'utils';
 import type { CardNumber } from 'types/card';
 
 const INITIAL_STATE: CardNumber = {
@@ -24,7 +25,5 @@ const useCardNumber = () => {
 
   return { cardNumber, handleChangeCardNumber };
 };
-
-const isNumber = (value: string) => /^\d+$/.test(value);
 
 export default useCardNumber;
