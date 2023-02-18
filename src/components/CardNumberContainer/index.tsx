@@ -32,6 +32,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
       <div className="input-box">
         <Input
           ref={num1Ref}
+          placeholder="1234"
           type="text"
           value={num1}
           name="num1"
@@ -41,6 +42,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
         <Dash visible={num1.length === MAX_LENGTH.CARD_NUMBER} />
         <Input
           ref={num2Ref}
+          placeholder="5678"
           type="text"
           value={num2}
           name="num2"
@@ -50,6 +52,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
         <Dash visible={num2.length === MAX_LENGTH.CARD_NUMBER} />
         <Input
           ref={num3Ref}
+          placeholder="1234"
           type="password"
           value={num3}
           name="num3"
@@ -59,6 +62,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
         <Dash visible={num3.length === MAX_LENGTH.CARD_NUMBER} />
         <Input
           ref={num4Ref}
+          placeholder="5678"
           type="password"
           value={num4}
           name="num4"

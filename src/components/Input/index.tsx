@@ -21,6 +21,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ className, ...props },
           border-color: #9ca3af;
           border: none;
           border-radius: 0.25rem;
+          &::placeholder {
+            color: #9ca3af;
+          }
         `,
         className
       )}

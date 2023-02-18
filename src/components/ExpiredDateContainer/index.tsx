@@ -30,7 +30,6 @@ function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredD
       <div className="input-box w-50">
         <Input
           ref={monthRef}
-          className="input-basic"
           placeholder="MM"
           type="text"
           value={month}
@@ -48,7 +47,6 @@ function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredD
         </span>
         <Input
           ref={yearRef}
-          className="input-basic"
           placeholder="YY"
           type="text"
           value={year}
