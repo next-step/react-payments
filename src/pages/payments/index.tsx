@@ -1,5 +1,7 @@
-const index = () => {
-  return <div></div>;
+import Payments from "../../components/Payments";
+
+const payments = () => {
+  return <Payments />;
 };
 
-export default index;
+export default payments;
