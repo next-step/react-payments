@@ -13,7 +13,7 @@ const CompletedPage = () => {
         </Text>
       </TextWrapper>
       <CardWrapper>
-        <Card fontSize="m" theme="primary" size="big" />
+        <Card theme="primary" size="big" />
       </CardWrapper>
 
       <InputWrapper>

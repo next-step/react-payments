@@ -4,7 +4,7 @@ import Input from "../../Input/Item";
 import { useRef, useState } from "react";
 import { checkOwnerName } from "utils";
 
-const CardOwnerInput = () => {
+const CardOwnerInput = ({ setOwnerName }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [length, setLength] = useState(0);
 
@@ -14,6 +14,7 @@ const CardOwnerInput = () => {
     const value = ref.value;
     const ownerName = checkOwnerName(value);
     ref.value = ownerName;
+    setOwnerName(ownerName);
     setLength(ownerName.length);
   };
   return (

@@ -5,21 +5,29 @@ import styled from "styled-components";
 import { useRef } from "react";
 import { checkMonth, checkYear } from "../../../utils/index";
 
-const CardExpirationDateInput = () => {
+const CardExpirationDateInput = ({ setExpirationDate }) => {
   const inputMonthRef = useRef<HTMLInputElement>(null);
   const inputYearRef = useRef<HTMLInputElement>(null);
 
   const handleMonthInput = () => {
     const ref = inputMonthRef.current;
     if (ref === null) return;
-    const value = ref.value;
-    ref.value = checkMonth(value);
+    const month = checkMonth(ref.value);
+    ref.value = checkMonth(month);
+    setExpirationDate((prev) => ({
+      ...prev,
+      month,
+    }));
   };
   const handleYearInput = () => {
     const ref = inputYearRef.current;
     if (ref === null) return;
-    const value = ref.value;
-    ref.value = checkYear(value);
+    const year = checkYear(ref.value);
+    ref.value = year;
+    setExpirationDate((prev) => ({
+      ...prev,
+      year,
+    }));
   };
 
   return (

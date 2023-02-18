@@ -32,7 +32,7 @@ const Layout = styled.span<LayoutProps>`
         `
       : fontSize === "m"
       ? css`
-          font-size: 18px;
+          font-size: 16px;
           line-height: 20px;
         `
       : fontSize === "lg"

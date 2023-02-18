@@ -1,20 +1,45 @@
 import styled, { css } from "styled-components";
 import Text from "components/Text";
+import { useEffect, useState } from "react";
 
 type CardProps = {
-  fontSize: fontSizeType;
   theme: CardThemeType;
   size: CardSizeType;
+  cardNumber?: string;
+  expirationDate?: exprationProps;
+  ownerName?: string;
 };
-type fontSizeType = "xs" | "s" | "m" | "lg";
 type CardThemeType = "empty" | "primary" | "add";
 type CardSizeType = "small" | "big";
-const Card = ({ fontSize, theme, size }: CardProps) => {
+type exprationProps = {
+  month: string;
+  year: string;
+};
+
+const Card = ({ theme, size, cardNumber, expirationDate, ownerName }: CardProps) => {
+  const [companyInfo, setCompanyInfo] = useState("Empty");
+  const [ownerNameInfo, setownerNameInfo] = useState(ownerName);
+  const [expirationDateInfo, setExpirationDateInfo] = useState(expirationDate);
+  const [cardNumberInfo, setCardNumberInfo] = useState(cardNumber);
+
+  console.log(expirationDate);
+  useEffect(() => {
+    setCardNumberInfo(cardNumber);
+  }, [cardNumber]);
+  useEffect(() => {
+    setExpirationDateInfo(expirationDate);
+  }, [expirationDate]);
+  useEffect(() => {
+    setownerNameInfo(ownerName);
+  }, [ownerName]);
+
   return (
     <Layout>
       <Container theme={theme} size={size}>
         <Top>
-          <Text fontSize={fontSize} weight="normal"></Text>
+          <Text fontSize="s" weight="bold">
+            {companyInfo}
+          </Text>
         </Top>
         {theme === "add" ? (
           <Middle theme="add">
@@ -26,23 +51,23 @@ const Card = ({ fontSize, theme, size }: CardProps) => {
           </Middle>
         )}
         <Bottom>
-          <NumberWrapper>
-            <Text fontSize={fontSize} weight="normal"></Text>
-          </NumberWrapper>
+          <Text fontSize="m" weight="bold">
+            {cardNumberInfo}
+          </Text>
           <InfoContainer>
-            <Text fontSize={fontSize} weight="normal"></Text>
-            <Text fontSize={fontSize} weight="normal"></Text>
+            <Text fontSize="s" weight="bold">
+              {ownerNameInfo}
+            </Text>
+            <Text fontSize="s" weight="bold">
+              {expirationDate && `${expirationDate.month}/${expirationDate.year}`}
+            </Text>
           </InfoContainer>
         </Bottom>
       </Container>
-      <CardNameWrapper>
-        {/* <Text fontSize="m" weight="normal">
-          법인카드
-        </Text> */}
-      </CardNameWrapper>
     </Layout>
   );
 };
+
 export default Card;
 
 type ContainerProps = {
@@ -67,6 +92,7 @@ const Container = styled.div<ContainerProps>`
       ? css`
           user-select: none;
           background: #e5e5e5;
+          cursor: pointer;
         `
       : theme === "add"
       ? css`
@@ -93,6 +119,7 @@ const Top = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
+  padding: 0px 10px;
 `;
 const Middle = styled.div`
   display: flex;
@@ -100,6 +127,7 @@ const Middle = styled.div`
   width: 100%;
   height: 100%;
   margin-left: ${(props) => (props.theme !== "add" ? "30px" : "0px")};
+  padding-bottom: 10px;
 `;
 const Bottom = styled.div`
   display: flex;
@@ -109,28 +137,16 @@ const Bottom = styled.div`
   height: 100%;
 `;
 
-const NumberWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-`;
 const InfoContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
   width: 100%;
   height: 100%;
+  padding: 10px 20px;
   justify-content: space-between;
 `;
 
-const CardNameWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 const Chip = styled.div`
   width: 40px;
   height: 26px;

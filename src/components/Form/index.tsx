@@ -4,20 +4,23 @@ import Text from "components/Text";
 import InputContainer from "components/Input/Container";
 import Input from "components/Input/Item";
 import Button from "../Button/index";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CardNumberInput from "./CardNumberInput";
 import CardSecurityInput from "./CardSecurityInput";
 import CardPasswordInput from "./CardPasswordInput";
 import CardOwnerInput from "./CardOwnerInput/index";
 import CardExpirationDateInput from "./CardExpirationDateInput/index";
+import useFormInput from "hooks/useFormInput";
 
 export const Form = () => {
+  const { cardNumber, setCardNumber, expirationDate, setExpirationDate, ownerName, setOwnerName } = useFormInput();
+
   return (
     <>
-      <Card fontSize="s" theme="empty" size="small" />
-      <CardNumberInput />
-      <CardExpirationDateInput />
-      <CardOwnerInput />
+      <Card theme="empty" size="small" cardNumber={cardNumber} expirationDate={expirationDate} ownerName={ownerName} />
+      <CardNumberInput setCardNumber={setCardNumber} />
+      <CardExpirationDateInput setExpirationDate={setExpirationDate} />
+      <CardOwnerInput setOwnerName={setOwnerName} />
       <CardSecurityInput />
       <CardPasswordInput />
       <ButtonBox>

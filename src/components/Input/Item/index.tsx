@@ -13,6 +13,7 @@ export const Input = (
   { type, placeholder, theme, onChange, active }: InputProps,
   ref: React.ForwardedRef<HTMLInputElement>
 ) => {
+  // console.log(onChange, ref);
   return (
     <Layout
       type={type}
