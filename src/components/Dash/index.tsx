@@ -6,11 +6,11 @@ interface DashProps {
   height?: number;
 }
 
-function Dash({ visible = false, width = 30, height = 3 }: DashProps) {
+function Dash({ visible = false, width = 6, height = 3 }: DashProps) {
   return (
     <span
       className={css`
-        width: ${width}px;
+        padding: 0 ${width / 2}px;
         height: ${height}px;
         background-color: ${visible ? '#000' : 'transparent'};
       `}

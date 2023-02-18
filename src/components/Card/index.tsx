@@ -1,3 +1,7 @@
+import Dash from 'components/Dash';
+
+import { MAX_LENGTH } from 'constants/card';
+import { masking } from 'model/card';
 import { CardCompany, ExpiredDate, CardNumber } from 'types/card';
 
 interface CardProps {
@@ -22,9 +26,13 @@ function Card({ company, name, cardNumber, expiredDate }: CardProps) {
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">
-              {num1} - {num2} - {num3} - {num4}
-            </span>
+            <span className="card-number">{num1}</span>
+            <Dash visible={num1.length === MAX_LENGTH.CARD_NUMBER} width={4} height={1} />
+            <span className="card-number">{num2}</span>
+            <Dash visible={num2.length === MAX_LENGTH.CARD_NUMBER} width={4} height={1} />
+            <span className="card-number">{masking(num3)}</span>
+            <Dash visible={num3.length === MAX_LENGTH.CARD_NUMBER} width={4} height={1} />
+            <span className="card-number">{masking(num4)}</span>
           </div>
           <div className="card-bottom__info">
             <span className="card-text">{name}</span>

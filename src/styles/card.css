@@ -126,6 +126,15 @@
   font-weight: 400;
 }
 
+.card-number {
+  margin: 0 6px;
+
+  font-size: 14px;
+  line-height: 16px;
+  vertical-align: middle;
+  font-weight: 400;
+}
+
 .card-text__big {
   margin: 0 16px;
 
