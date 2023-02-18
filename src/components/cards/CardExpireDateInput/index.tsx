@@ -9,7 +9,7 @@ export default function CardExpireDateInput({
     <CardExpireDateInputEl
       label="만료일"
       textAlign="center"
-      placeholder="MM / YY"
+      placeholder="MM/YY"
       {...props}
     />
   );
