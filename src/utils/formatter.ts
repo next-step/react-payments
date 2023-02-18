@@ -34,14 +34,18 @@ export const addCardNumberDashes = (str: string) => {
   return formatted;
 };
 
-export const replaceCardNumberToDot = (str: string) => {
+const replaceCardNumber = (replaceStr: string) => (str: string) => {
   const visibleSectionCount = 2;
   if (str.length <= visibleSectionCount * CardNumberSectionLength) return str;
   return str
     .split(DASH)
     .map((v, i) => {
-      if (i === 2 || i === 3) return '•'.repeat(v.length);
+      if (i === 2 || i === 3) return replaceStr.repeat(v.length);
       return v;
     })
     .join(DASH);
 };
+
+export const replaceCardNumberToDot = replaceCardNumber('•');
+
+export const replaceCardNumberToO = replaceCardNumber('o');
