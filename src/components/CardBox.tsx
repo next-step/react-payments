@@ -4,6 +4,7 @@ export interface CardBoxType {
   cardHolder?: string;
   expiredDate?: string;
   type?: 'small' | 'big';
+  color?: string;
 }
 
 const config = {
@@ -13,10 +14,10 @@ const config = {
   }
 };
 
-export default function CardBox({ cardCompany, cardNumber, cardHolder, expiredDate, type }: CardBoxType) {
+export default function CardBox({ cardCompany, cardNumber, cardHolder, expiredDate, type, color }: CardBoxType) {
   return (
     <div className="card-box">
-      <div className={config.type[type] || config.type.small}>
+      <div className={config.type[type] || config.type.small} style={{ backgroundColor: color }}>
         <div className="card-top">
           <span className="card-text">{cardCompany}</span>
         </div>

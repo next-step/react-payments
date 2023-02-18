@@ -37,6 +37,10 @@ export default function RegisterCard() {
       ...cardState,
       cardNumber,
     });
+
+    if (cardNumber.length === 8) {
+      setOpenCardPopup(true);
+    }
   };
 
   const handleExpiredDate = (expiredDate: string) => {
@@ -53,6 +57,16 @@ export default function RegisterCard() {
     });
   };
 
+  const handleCardCompany = ({ cardCompany, color }: object) => {
+    setCardState({
+      ...cardState,
+      cardCompany,
+      color,
+    });
+
+    setOpenCardPopup(false);
+  };
+
   return (
     <div className="app">
       <h2 className="page-title">&lt; 카드 추가</h2>
@@ -65,7 +79,7 @@ export default function RegisterCard() {
 
       <Button>다음</Button>
       <Modal open={openCardPopup}>
-        <SelectCard/>
+        <SelectCard onChange={handleCardCompany}/>
       </Modal>
     </div>
   );
