@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+// import { useState, useRef } from "react";
 import { CARD_EXPIRATION } from "../constants/card";
 import Span from "./Span";
 import useCardExpiration from "../hooks/useCardExpiration";
@@ -7,7 +7,7 @@ export default function CardExpirationInput() {
   const [inputValue, onChange] = useCardExpiration();
 
   // TODO : nextsibling auto focus & key 값 제어 (useRef)
-  const dataId = useRef(0);
+  // const dataId = useRef(0);
 
   return (
     <div className="input-container">
