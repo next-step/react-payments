@@ -1,5 +1,5 @@
-export default class Filter {
-  static cardNumber(cardNumber: string): string {
+export default function Filter() {
+  function filterCardNumber(cardNumber: string): string {
     return cardNumber?.match(/[0-9*]{1,4}/g)?.flatMap((item, index) => {
       if (!item.length) return [];
       if (index > 1) return item.replace(/[0-9]/g, '*');
@@ -8,19 +8,27 @@ export default class Filter {
     }).join('-');
   }
 
-  static expiredDate(expiredDate: string): string {
+  function filterExpiredDate(expiredDate: string): string {
     return expiredDate?.match(/[0-9]{1,2}/g)?.join(' / ');
   }
 
-  static onlyNumber(text: string): string {
+  function onlyNumber(text: string): string {
     return text.replace(/[^0-9]/g, '');
   }
 
-  static onlyString(text: string): string {
+  function onlyString(text: string): string {
     return text.replace(/[^a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣\s]/g, '');
   }
 
-  static formToArray(data: object[]): string[] {
+  function formToArray(data: object[]): string[] {
     return Object.values(data).map((item) => item.value);
   }
+
+  return {
+    filterCardNumber,
+    filterExpiredDate,
+    onlyNumber,
+    onlyString,
+    formToArray,
+  };
 }

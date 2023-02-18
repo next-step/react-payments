@@ -1,22 +1,18 @@
 import { NavLink } from 'react-router-dom';
 import Repository from '../core/Repository';
-import { CardBox } from '../components';
+import { CardBox, PageTitle } from '../components';
 
 export default function CardList() {
   const cardList = Repository.get('card-list') || [];
 
   return (
     <div className="app flex-column-center">
-      <div className="flex-center">
-        <h2 className="page-title mb-10">보유 카드</h2>
-      </div>
+      <PageTitle title="보유 카드"></PageTitle>
       {cardList.map((item) => (
-        <>
-          <CardBox {...item} key={item.cardNumber}/>
-          {item.nickName && (
-            <span className="card-nickname">{item.nickName}</span>
-          )}
-        </>
+        <div className="flex-column-center" key={item.cardNumber}>
+          <CardBox {...item} />
+          {item.nickName && <span className="card-nickname">{item.nickName}</span>}
+        </div>
       ))}
       <div className="card-box">
         <NavLink to="register">

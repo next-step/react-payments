@@ -1,6 +1,6 @@
 import Repository from '../core/Repository';
 import { useMemo } from 'react';
-import { CardBox } from '../components';
+import { CardBox, PageTitle } from '../components';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button, Input } from '../components/form';
 import { useInput } from '../hooks';
@@ -31,6 +31,7 @@ export default function RegisterComplete() {
 
   return (
     <div className="app flex-column-center">
+      <PageTitle title="카드등록이 완료되었습니다."></PageTitle>
       <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       <CardBox {...cardData} type="big"/>
       <Input

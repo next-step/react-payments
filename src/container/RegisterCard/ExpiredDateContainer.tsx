@@ -6,6 +6,7 @@ import { RegisterCardType } from '../../pages/RegisterCard';
 import { Filter, Validator } from '../../domain';
 
 export default function ExpiredDateContainer<T>({ filter, onChange }: RegisterCardType<T>) {
+  const { formToArray } = Filter();
   const [errorMessage, setErrorMessage] = useState('');
   const monthRef = useRef();
   const yearRef = useRef();
@@ -14,7 +15,7 @@ export default function ExpiredDateContainer<T>({ filter, onChange }: RegisterCa
     year: '',
   });
 
-  const expiredDate = useMemo(() => Filter.formToArray(expired).join(''), [expired]);
+  const expiredDate = useMemo(() => formToArray(expired).join(''), [expired]);
 
   useEffect(() => {
     onChange?.(expiredDate);

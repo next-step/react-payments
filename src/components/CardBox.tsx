@@ -18,8 +18,9 @@ const config = {
 };
 
 export default function CardBox({ cardCompany, cardNumber, cardHolder, expiredDate, type, color }: CardBoxType) {
-  const filterCardNumber = useMemo(() => Filter.cardNumber(cardNumber), [cardNumber]);
-  const filterExpiredDate = useMemo(() => Filter.expiredDate(expiredDate), [expiredDate]);
+  const { filterCardNumber, filterExpiredDate } = Filter();
+  const aCardNumber = useMemo(() => filterCardNumber(cardNumber), [cardNumber]);
+  const aExpiredDate = useMemo(() => filterExpiredDate(expiredDate), [expiredDate]);
   return (
     <div className="card-box">
       <div className={config.type[type] || config.type.small} style={{ backgroundColor: color }}>
@@ -31,11 +32,11 @@ export default function CardBox({ cardCompany, cardNumber, cardHolder, expiredDa
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">{filterCardNumber}</span>
+            <span className="card-text">{aCardNumber}</span>
           </div>
           <div className="card-bottom__info">
             <span className="card-text">{cardHolder}</span>
-            <span className="card-text">{filterExpiredDate}</span>
+            <span className="card-text">{aExpiredDate}</span>
           </div>
         </div>
       </div>

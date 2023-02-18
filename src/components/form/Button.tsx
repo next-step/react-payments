@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 
 interface Props {
   children?: ReactNode;
@@ -6,10 +6,12 @@ interface Props {
   className?: string;
 }
 
-export default function Button({ children, onClick, className }: Props) {
+function Button({ children, onClick, className }: Props) {
   return (
     <div className={`button-box ${className || ''}`} onClick={onClick}>
       <span className="button-text">{children}</span>
     </div>
   );
 }
+
+export default memo(Button);
