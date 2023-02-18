@@ -2,11 +2,17 @@ import "./card.css";
 import { CardInput } from "./card.type";
 interface CardProps {
   input?: CardInput;
+  isBigCard?: boolean;
   backgroundColor?: string;
   onClick?: () => void;
 }
 
-const Card = ({ input, backgroundColor, onClick }: CardProps) => {
+const Card = ({
+  input,
+  isBigCard = false,
+  backgroundColor,
+  onClick,
+}: CardProps) => {
   const mode =
     input && Object.values(input).length > 0 ? "small-card" : "empty-card";
   const newCard = typeof onClick === "function" && "+";
@@ -14,7 +20,9 @@ const Card = ({ input, backgroundColor, onClick }: CardProps) => {
   return (
     <div className="card-box">
       <div
-        className={`${mode} ${newCard && "cursor-pointer"}`}
+        className={`${isBigCard ? "big-card" : mode} ${
+          newCard && "cursor-pointer"
+        }`}
         style={{ backgroundColor }}
         onClick={onClick}
       >

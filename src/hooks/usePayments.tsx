@@ -45,8 +45,8 @@ export const usePayments = () => {
     setNewCardInfo((prev) => ({ ...prev, type: id }));
   };
 
-  const handleCardAddClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setCardList((prev) => ({ ...prev, newCardInfo }));
+  const handleCardAddClick = () => {
+    setCardList((prev) => [...prev, { ...newCardInfo }]);
     setNewCardInfo({});
   };
 
