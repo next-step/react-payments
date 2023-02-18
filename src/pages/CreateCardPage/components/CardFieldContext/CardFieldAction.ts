@@ -54,7 +54,7 @@ export const ACTION = {
     type: 'UPDATE',
     payload: {
       key: 'expirationMonth',
-      value,
+      value : value || '',
     },
   }),
 
@@ -62,7 +62,7 @@ export const ACTION = {
     type: 'UPDATE',
     payload: {
       key: 'expirationYear',
-      value,
+      value : value || '',
     },
   }),
 } satisfies Record<ActionTypes, (value: any) => CardFieldAction>;

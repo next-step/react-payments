@@ -27,7 +27,7 @@ export const CardFieldProvider = ({ children }: CardFieldProviderProps) => {
   );
 };
 
-type CardFieldProviderProps = { children: JSX.Element };
+type CardFieldProviderProps = { children: JSX.Element | JSX.Element[] };
 
 export const useCardFieldContext = () => useContext(CardFieldContext);
 export const useCardFieldDispatchContext = () =>
