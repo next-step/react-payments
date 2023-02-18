@@ -15,8 +15,7 @@ const defaultCardInfo = {
   cvc: "123",
   password1: "1",
   password2: "2",
-  password3: "3",
-  password4: "4",
+  backgroundColor: "#94dacd",
 };
 
 export const usePayments = () => {
@@ -40,21 +39,29 @@ export const usePayments = () => {
     setNewCardInfo(copiedNewCardInfo);
   };
 
-  const handleCardTypeClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    const { id } = e.currentTarget;
-    setNewCardInfo((prev) => ({ ...prev, type: id }));
+  const handleCardTypeClick = (e: React.MouseEvent<HTMLElement>) => {
+    const event = e.target as HTMLDivElement;
+    const { id, style } = event;
+
+    setNewCardInfo((prev) => ({
+      ...prev,
+      title: id,
+      backgroundColor: style.backgroundColor,
+    }));
   };
 
   const handleCardAddClick = () => {
     setCardList((prev) => [...prev, { ...newCardInfo }]);
-    setNewCardInfo({});
   };
+
+  const clearCardInfo = () => setNewCardInfo({});
 
   return {
     step,
     setStep,
     cardList,
     newCardInfo,
+    clearCardInfo,
     handleCardInputChange,
     handleCardTypeClick,
     handleCardAddClick,

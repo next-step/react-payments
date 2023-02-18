@@ -1,11 +1,6 @@
 @import "./utils.css";
 
 body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
   background-color: #e5e5e5;
 }
 
@@ -20,6 +15,14 @@ input {
   height: 700px;
   position: relative;
   border-radius: 15px;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .app {

@@ -20,7 +20,11 @@ const Completed = ({ newCardInfo, setStep }: CompletedProps) => {
             <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
           </div>
 
-          <Card input={newCardInfo} isBigCard />
+          <Card
+            input={newCardInfo}
+            backgroundColor={newCardInfo?.backgroundColor}
+            isBigCard
+          />
 
           <InputContainer
             inputList={[

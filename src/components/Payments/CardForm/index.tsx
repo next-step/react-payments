@@ -33,8 +33,6 @@ const CardForm = ({
     year,
     password1,
     password2,
-    password3,
-    password4,
   } = newCardInfo;
 
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -51,7 +49,10 @@ const CardForm = ({
             카드 추가
           </h2>
 
-          <Card input={newCardInfo} />
+          <Card
+            input={newCardInfo}
+            backgroundColor={newCardInfo.backgroundColor}
+          />
 
           <InputContainer
             hasInputBox
@@ -117,8 +118,6 @@ const CardForm = ({
             inputList={[
               { value: password1, type: "password", id: "password1" },
               { value: password2, type: "password", id: "password2" },
-              { value: password3, type: "password", id: "password3" },
-              { value: password4, type: "password", id: "password4" },
             ]}
             className={{ inputClassName: "w-15 mr-1" }}
             onChange={handleCardInputChange}

@@ -9,6 +9,7 @@ const Payments = () => {
     setStep,
     cardList,
     newCardInfo,
+    clearCardInfo,
     handleCardInputChange,
     handleCardTypeClick,
     handleCardAddClick,
@@ -36,7 +37,13 @@ const Payments = () => {
         />
       );
     default:
-      return <CardList cardList={cardList} setStep={setStep} />;
+      return (
+        <CardList
+          clearCardInfo={clearCardInfo}
+          cardList={cardList}
+          setStep={setStep}
+        />
+      );
   }
 };
 

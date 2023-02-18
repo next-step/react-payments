@@ -10,6 +10,5 @@ export type CardInput = {
   cvc?: string;
   password1?: string;
   password2?: string;
-  password3?: string;
-  password4?: string;
+  backgroundColor?: string;
 };
