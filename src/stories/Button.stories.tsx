@@ -7,6 +7,7 @@ import { Button } from './Button';
 export default {
   title: 'Example/Button',
   component: Button,
+
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     backgroundColor: { control: 'color' },
