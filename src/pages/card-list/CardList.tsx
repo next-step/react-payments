@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import { PageTitle } from '@/components/layouts'
 
 function CardList() {
@@ -31,9 +33,11 @@ function CardList() {
           </div>
         </div>
         <span className="card-nickname">법인카드</span>
-        <div className="card-box">
-          <div className="empty-card">+</div>
-        </div>
+        <Link to="/card-add" style={{ textDecoration: 'none' }}>
+          <div className="card-box">
+            <div className="empty-card">+</div>
+          </div>
+        </Link>
       </div>
     </div>
   )
