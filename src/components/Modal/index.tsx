@@ -1,4 +1,4 @@
-import Dot from "components/Dot";
+import Dot from "components/CardList";
 import styled from "styled-components";
 
 type ModalProps = {

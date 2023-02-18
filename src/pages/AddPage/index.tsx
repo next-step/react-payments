@@ -1,4 +1,4 @@
-import Dot from "components/Dot";
+import Dot from "components/CardList";
 import Form from "components/Form";
 import Modal from "components/Modal";
 import Text from "components/Text";

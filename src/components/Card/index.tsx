@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import Text from "components/Text";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type CardProps = {
   theme: CardThemeType;
@@ -18,20 +18,6 @@ type exprationProps = {
 
 const Card = ({ theme, size, cardNumber, expirationDate, ownerName }: CardProps) => {
   const [companyInfo, setCompanyInfo] = useState("Empty");
-  const [ownerNameInfo, setownerNameInfo] = useState(ownerName);
-  const [expirationDateInfo, setExpirationDateInfo] = useState(expirationDate);
-  const [cardNumberInfo, setCardNumberInfo] = useState(cardNumber);
-
-  console.log(expirationDate);
-  useEffect(() => {
-    setCardNumberInfo(cardNumber);
-  }, [cardNumber]);
-  useEffect(() => {
-    setExpirationDateInfo(expirationDate);
-  }, [expirationDate]);
-  useEffect(() => {
-    setownerNameInfo(ownerName);
-  }, [ownerName]);
 
   return (
     <Layout>
@@ -52,11 +38,11 @@ const Card = ({ theme, size, cardNumber, expirationDate, ownerName }: CardProps)
         )}
         <Bottom>
           <Text fontSize="m" weight="bold">
-            {cardNumberInfo}
+            {cardNumber}
           </Text>
           <InfoContainer>
             <Text fontSize="s" weight="bold">
-              {ownerNameInfo}
+              {ownerName}
             </Text>
             <Text fontSize="s" weight="bold">
               {expirationDate && `${expirationDate.month}/${expirationDate.year}`}
