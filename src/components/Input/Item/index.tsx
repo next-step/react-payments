@@ -5,22 +5,37 @@ type InputProps = {
   type: string;
   placeholder?: string;
   theme: "underline" | "primary";
-  onChange?:React.ChangeEventHandler<HTMLInputElement>
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  active?: boolean;
 };
 
-
-export const Input = ({ type, placeholder, theme,onChange}: InputProps,ref:React.ForwardedRef<HTMLInputElement>) => {
-  return <Layout type={type} placeholder={placeholder} theme={theme} onChange={onChange} ref={ref}/>;
+export const Input = (
+  { type, placeholder, theme, onChange, active }: InputProps,
+  ref: React.ForwardedRef<HTMLInputElement>
+) => {
+  return (
+    <Layout
+      type={type}
+      placeholder={placeholder}
+      theme={theme}
+      onChange={onChange}
+      ref={ref}
+      active={active}
+      disabled={active}
+    />
+  );
 };
 
 export default forwardRef(Input);
 
 type LayoutProps = {
   theme: "underline" | "primary";
+  active?: boolean;
 };
 
 const Layout = styled.input<LayoutProps>`
   font-size: 16px;
+  opacity: ${(props) => (!props.active ? 1 : 0.5)};
   ${({ theme }) =>
     theme === "underline"
       ? css`
@@ -43,5 +58,5 @@ const Layout = styled.input<LayoutProps>`
           border: none;
           border-radius: 0.25rem;
           margin-left: 2px;
-        `}
+        `};
 `;

@@ -44,3 +44,8 @@ export const checkYear = (string: string) => {
   }
   return newString;
 };
+export const checkPassword = (string: string): string => {
+  let newString = string.replace(/[^0-9]/g, ""); //숫자만 받기
+  if (string.length > 1) return "*";
+  return newString.replaceAll(/[0-9]/g, "*");
+};
