@@ -4,11 +4,18 @@ import CardList from "./CardList";
 import Completed from "./Completed";
 
 const Payments = () => {
-  const { step, setStep, cardList } = usePayments();
+  const { step, setStep, cardList, newCardInfo, handleCardInputChange } =
+    usePayments();
 
   switch (step) {
     case 1:
-      return <CardForm />;
+      return (
+        <CardForm
+          newCardInfo={newCardInfo}
+          setStep={setStep}
+          handleCardInputChange={handleCardInputChange}
+        />
+      );
     case 2:
       return <Completed />;
     default:
