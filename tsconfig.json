@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "global.d.ts", "stitches.config.ts"],
+  "include": ["src", "src/global.d.ts", "stitches.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

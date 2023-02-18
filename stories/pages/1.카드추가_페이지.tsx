@@ -1,5 +1,3 @@
-import { CreditCard } from '../components/CreditCard';
-
 export const 카드추가_페이지 = () => {
   return (
     <>
@@ -8,7 +6,6 @@ export const 카드추가_페이지 = () => {
         <div className="app">
           <h2 className="page-title">카드 추가</h2>
           <div className="card-box">
-            <CreditCard />
           </div>
           <div className="input-container">
             <span className="input-title">카드 번호</span>
