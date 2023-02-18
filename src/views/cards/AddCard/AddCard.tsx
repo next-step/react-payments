@@ -9,6 +9,7 @@ import {
   CardOwnerInput,
   CardPasswordInput,
 } from "@/components/cards";
+import { useCardExpireDateInput } from "@/components/cards/CardExpireDateInput/hook";
 import { useCardNumberInput } from "@/components/cards/CardNumberInput/hooks";
 import { Header } from "@/components/common";
 
@@ -22,12 +23,13 @@ const HeaderLeftPointArrow = <LeftPointArrow />;
 
 export default function AddCard() {
   const { cardNumber, onCardNumberChange } = useCardNumberInput("");
+  const { cardExpireDate, onCardExpireDateChange } = useCardExpireDateInput("");
 
   const cardInfo = {
     cardName: "",
     cardNumber: cardNumber.split("-"),
     cardOwnerName: "NAME",
-    expireDate: "MM/YY",
+    expireDate: cardExpireDate || "MM/YY",
   };
 
   return (
@@ -39,7 +41,10 @@ export default function AddCard() {
         <Card className="add-form-card" size="big" cardInfo={cardInfo} />
         <AddCardFormInputWrapper>
           <CardNumberInput value={cardNumber} onKeyDown={onCardNumberChange} />
-          <CardExpireDateInput />
+          <CardExpireDateInput
+            value={cardExpireDate}
+            onChange={onCardExpireDateChange}
+          />
           <CardOwnerInput />
           <CardCvcInput />
           <CardPasswordInput />
