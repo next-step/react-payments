@@ -14,7 +14,7 @@ export default function CardList() {
         <>
           <CardBox {...item} key={item.cardNumber}/>
           {item.nickName && (
-            <span className="card-nickname">법인카드</span>
+            <span className="card-nickname">{item.nickName}</span>
           )}
         </>
       ))}
