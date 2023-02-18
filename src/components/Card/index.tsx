@@ -11,8 +11,8 @@ type CardThemeType = "empty" | "primary" | "add";
 type CardSizeType = "small" | "big";
 const Card = ({ fontSize, theme, size }: CardProps) => {
   return (
-    <>
-      <CardLayout theme={theme} size={size}>
+    <Layout>
+      <Container theme={theme} size={size}>
         <Top>
           <Text fontSize={fontSize} weight="normal"></Text>
         </Top>
@@ -34,23 +34,26 @@ const Card = ({ fontSize, theme, size }: CardProps) => {
             <Text fontSize={fontSize} weight="normal"></Text>
           </InfoContainer>
         </Bottom>
-      </CardLayout>
+      </Container>
       <CardNameWrapper>
         {/* <Text fontSize="m" weight="normal">
           법인카드
         </Text> */}
       </CardNameWrapper>
-    </>
+    </Layout>
   );
 };
 export default Card;
 
-type CardLayoutProps = {
+type ContainerProps = {
   theme: CardThemeType;
   size: CardSizeType;
 };
-
-const CardLayout = styled.div<CardLayoutProps>`
+const Layout = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;

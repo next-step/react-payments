@@ -9,7 +9,7 @@ type InputProps = {
 };
 
 
-export const Input = ({ type, placeholder, theme,onChange}: InputProps,ref:React.RefObject<HTMLInputElement>) => {
+export const Input = ({ type, placeholder, theme,onChange}: InputProps,ref:React.ForwardedRef<HTMLInputElement>) => {
   return <Layout type={type} placeholder={placeholder} theme={theme} onChange={onChange} ref={ref}/>;
 };
 

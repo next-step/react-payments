@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Card from "components/Card";
 import Text from "components/Text";
-import Input from "components/Form/Input/Item";
+import Input from "components/Input/Item";
 import Button from "components/Button/index";
 
 const CompletedPage = () => {
