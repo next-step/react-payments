@@ -12,9 +12,9 @@ const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />
 
 export const Basic = Template.bind({})
 Basic.args = {
-  type: 'primary',
-  variant: 'filled',
+  variant: 'fill',
   children: 'Button',
   size: 'small',
+  color: '#94dacd',
   isDisabled: false,
 }
