@@ -1,21 +1,21 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { HeaderContainer, RightIconButton } from './Header.style';
+import { HeaderContainer, LeftIconButton } from './Header.style';
 
 type HeaderProps = {
   title: string;
-  rightIcon?: React.ReactNode;
+  leftIcon?: React.ReactNode;
   onIconClick?: () => void;
 };
 
-const Header = ({ title, rightIcon, onIconClick }: HeaderProps) => {
+const Header = ({ title, leftIcon, onIconClick }: HeaderProps) => {
   const handleClick = () => {
     onIconClick && onIconClick();
   };
   return (
     <HeaderContainer>
-      {rightIcon && (
-        <RightIconButton onClick={handleClick}>{rightIcon}</RightIconButton>
+      {leftIcon && (
+        <LeftIconButton onClick={handleClick}>{leftIcon}</LeftIconButton>
       )}
       <h2>{title}</h2>
     </HeaderContainer>

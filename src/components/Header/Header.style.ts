@@ -13,7 +13,7 @@ export const HeaderContainer = styled.nav`
   }
 `;
 
-export const RightIconButton = styled.button`
+export const LeftIconButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
