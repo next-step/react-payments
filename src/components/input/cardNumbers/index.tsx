@@ -1,10 +1,20 @@
-import { usePayments } from "../../../store/context";
-
 const MAX_CARD_NUMBER_LENGTH = 4;
 
-const CardNumbersInput = () => {
-  const { cardNumbers, handleCardNumberInput, nextElement } = usePayments();
+type CardNumbersInputProps = {
+  cardNumbers: string[];
+  onChange: (
+    index: number
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  nextElement: {
+    current: HTMLInputElement[];
+  };
+};
 
+const CardNumbersInput = ({
+  cardNumbers,
+  onChange,
+  nextElement,
+}: CardNumbersInputProps) => {
   return (
     <div className="input-container">
       <span className="input-title">카드 번호</span>
@@ -14,7 +24,7 @@ const CardNumbersInput = () => {
           type="text"
           maxLength={MAX_CARD_NUMBER_LENGTH}
           value={cardNumbers[0]}
-          onChange={handleCardNumberInput(0)}
+          onChange={onChange(0)}
         />
         <input
           ref={(el: HTMLInputElement) => (nextElement.current[0] = el)}
@@ -22,7 +32,7 @@ const CardNumbersInput = () => {
           type="text"
           maxLength={MAX_CARD_NUMBER_LENGTH}
           value={cardNumbers[1]}
-          onChange={handleCardNumberInput(1)}
+          onChange={onChange(1)}
         />
         <input
           ref={(el: HTMLInputElement) => (nextElement.current[1] = el)}
@@ -30,7 +40,7 @@ const CardNumbersInput = () => {
           type="password"
           maxLength={MAX_CARD_NUMBER_LENGTH}
           value={cardNumbers[2]}
-          onChange={handleCardNumberInput(2)}
+          onChange={onChange(2)}
         />
         <input
           ref={(el: HTMLInputElement) => (nextElement.current[2] = el)}
@@ -38,7 +48,7 @@ const CardNumbersInput = () => {
           type="password"
           maxLength={MAX_CARD_NUMBER_LENGTH}
           value={cardNumbers[3]}
-          onChange={handleCardNumberInput(3)}
+          onChange={onChange(3)}
         />
       </div>
     </div>

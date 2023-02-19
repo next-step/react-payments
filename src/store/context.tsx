@@ -16,6 +16,8 @@ type PaymentsContext = {
   handleCardOwnerInput: (e: ChangeEvent<HTMLInputElement>) => void;
   cvc: string;
   handleCvcInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  password: string[];
+  setPasswordByInput: (index: number) => (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare

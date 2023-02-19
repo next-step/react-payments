@@ -1,10 +1,16 @@
-import { usePayments } from "../../../store/context";
-
 const MAX_DATE_LENGTH = 2;
 
-const CardExpirationDateInput = () => {
-  const { expirationDate, handleExpirationDateInput } = usePayments();
+type CardExpirationDateInputProps = {
+  expirationDate: string[];
+  onChange: (
+    index: number
+  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
+const CardExpirationDateInput = ({
+  expirationDate,
+  onChange,
+}: CardExpirationDateInputProps) => {
   return (
     <div className="input-container">
       <span className="input-title">만료일</span>
@@ -15,7 +21,7 @@ const CardExpirationDateInput = () => {
           placeholder="MM"
           maxLength={MAX_DATE_LENGTH}
           value={expirationDate[0]}
-          onChange={handleExpirationDateInput(0)}
+          onChange={onChange(0)}
           required
         />
         {"/"}
@@ -25,7 +31,7 @@ const CardExpirationDateInput = () => {
           placeholder="YY"
           maxLength={MAX_DATE_LENGTH}
           value={expirationDate[1]}
-          onChange={handleExpirationDateInput(1)}
+          onChange={onChange(1)}
           required
         />
       </div>

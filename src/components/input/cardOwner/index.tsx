@@ -1,7 +1,12 @@
-import { usePayments } from "../../../store/context";
+type CardOwnerInputProps = {
+  cardOwnerName: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
 
-const CardOwnerInput = () => {
-  const { cardOwnerName, handleCardOwnerInput } = usePayments();
+const CardOwnerInput = ({
+  cardOwnerName,
+  onChange,
+}: CardOwnerInputProps) => {
   return (
     <div className="input-container">
       <span className="input-title">카드 소유자 이름(선택)</span>
@@ -10,7 +15,7 @@ const CardOwnerInput = () => {
         className="input-basic"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         value={cardOwnerName}
-        onChange={handleCardOwnerInput}
+        onChange={onChange}
       />
     </div>
   );

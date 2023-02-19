@@ -1,9 +1,13 @@
-import { usePayments } from "../../../store/context";
+import { type } from "os";
 
 const MAX_CVC_LENGTH = 3;
 
-const CardCVCInput = () => {
-  const { cvc, handleCvcInput } = usePayments();
+type CardCVCInputProps = {
+  cvc: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+const CardCVCInput = ({ cvc, onChange }: CardCVCInputProps) => {
   return (
     <div className="input-container">
       <span className="input-title">보안코드(CVC/CVV)</span>
@@ -11,7 +15,7 @@ const CardCVCInput = () => {
         className="input-basic w-25"
         type="password"
         value={cvc}
-        onChange={handleCvcInput}
+        onChange={onChange}
         maxLength={MAX_CVC_LENGTH}
         required
       />

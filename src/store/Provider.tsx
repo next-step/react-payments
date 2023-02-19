@@ -37,7 +37,7 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
       const updatedExpirationDate = [...expirationDate];
       const { value } = e.target as HTMLInputElement;
-      
+
       if (Number.isNaN(+value)) {
         alert("카드 유효기간은 숫자만 입력해주세요!");
         return;
@@ -83,6 +83,22 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     setCvc(value);
   };
 
+  const [password, setPassword] = useState(["", ""]);
+
+  const setPasswordByInput =
+    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+      const updatedPassword = [...password];
+      const { value } = e.target;
+
+      if (Number.isNaN(+value)) {
+        alert("숫자만 입력해주세요.");
+        return;
+      }
+
+      updatedPassword[index] = value;
+      setPassword(updatedPassword);
+    };
+
   const value = {
     cardNumbers,
     handleCardNumberInput,
@@ -93,6 +109,8 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     cardOwnerName,
     handleCvcInput,
     cvc,
+    setPasswordByInput,
+    password,
   };
 
   return (
