@@ -21,8 +21,6 @@ const INPUT_NAMES = [
   "code",
   "password1",
   "password2",
-  "password3",
-  "password4",
 ];
 
 const formatNumber = (number: number) => {
@@ -89,7 +87,7 @@ function Add() {
         if (inputName.startsWith("card-")) {
           prefix = "카드";
         }
-        if (inputName.startsWith("password-")) {
+        if (inputName.startsWith("password")) {
           prefix = "비밀번호";
         }
         alert(`필수값 누락 (${prefix})`);
