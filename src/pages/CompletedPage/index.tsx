@@ -4,6 +4,7 @@ import Text from "components/Text";
 import Input from "components/Input/Item";
 import Button from "components/Button/index";
 
+//미션2
 const CompletedPage = () => {
   return (
     <Layout>
@@ -12,9 +13,7 @@ const CompletedPage = () => {
           카드 등록이 완료되었습니다.
         </Text>
       </TextWrapper>
-      <CardWrapper>
-        <Card theme="primary" size="big" />
-      </CardWrapper>
+      <CardWrapper>{/* <Card theme="primary" size="big" /> */}</CardWrapper>
 
       <InputWrapper>
         <Input type="text" placeholder="카드의 별칭을 입력해주세요." theme="underline" />

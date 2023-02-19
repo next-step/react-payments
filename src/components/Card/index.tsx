@@ -2,44 +2,52 @@ import styled, { css } from "styled-components";
 import Text from "components/Text";
 import { ReactEventHandler, useState } from "react";
 
-type CardProps = {
-  theme: CardThemeType;
-  size: CardSizeType;
-  cardNumber?: string;
-  expirationDate?: exprationProps;
-  ownerName?: string;
-  onClick?: ReactEventHandler<HTMLDivElement>;
+type colorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange" | "empty";
+type companyType =
+  | "하나카드"
+  | "국민카드"
+  | "신한카드"
+  | "클린카드"
+  | "토스카드"
+  | "네이버카드"
+  | "카카오카드"
+  | "오렌지카드"
+  | "";
+
+type infoType = {
+  company: companyType;
+  color: colorType;
 };
-type CardThemeType = "empty" | "primary" | "add";
-type CardSizeType = "small" | "big";
+type sizeType = "small" | "big";
 type exprationProps = {
   month: string;
   year: string;
 };
 
-const Card = ({ theme, size, cardNumber, expirationDate, ownerName, onClick }: CardProps) => {
-  const [companyInfo, setCompanyInfo] = useState("Empty");
+type CardProps = {
+  info: infoType;
+  size: sizeType;
+  number?: string;
+  expirationDate?: exprationProps;
+  ownerName?: string;
+  onClick?: ReactEventHandler<HTMLDivElement>;
+};
 
+const Card = ({ info, size, number, expirationDate, ownerName, onClick }: CardProps) => {
   return (
     <Layout onClick={onClick}>
-      <Container theme={theme} size={size}>
+      <Container color={info.color} size={size}>
         <Top>
-          <Text fontSize="s" weight="bold">
-            {companyInfo}
+          <Text fontSize="s" weight="bold" fontColor={info.color}>
+            {info.company}
           </Text>
         </Top>
-        {theme === "add" ? (
-          <Middle theme="add">
-            <Add>+</Add>
-          </Middle>
-        ) : (
-          <Middle>
-            <Chip />
-          </Middle>
-        )}
+        <Middle>
+          <Chip />
+        </Middle>
         <Bottom>
           <Text fontSize="m" weight="bold">
-            {cardNumber}
+            {number}
           </Text>
           <InfoContainer>
             <Text fontSize="s" weight="bold">
@@ -58,8 +66,8 @@ const Card = ({ theme, size, cardNumber, expirationDate, ownerName, onClick }: C
 export default Card;
 
 type ContainerProps = {
-  theme: CardThemeType;
-  size: CardSizeType;
+  color: colorType;
+  size: sizeType;
 };
 const Layout = styled.div`
   display: flex;
@@ -74,20 +82,41 @@ const Container = styled.div<ContainerProps>`
   border-radius: 5px;
   cursor: pointer;
 
-  ${({ theme }) =>
-    theme === "empty"
+  ${({ color }) =>
+    color === "red"
       ? css`
-          user-select: none;
-          background: #e5e5e5;
-          cursor: pointer;
+          background: #e14141;
         `
-      : theme === "add"
+      : color === "cyon"
       ? css`
-          background: #e5e5e5;
-          cursor: pointer;
+          background: #92e3d5;
+        `
+      : color === "blue"
+      ? css`
+          background: #557ce5;
+        `
+      : color === "green"
+      ? css`
+          background: #73bc6d;
+        `
+      : color === "pink"
+      ? css`
+          background: #e76e9b;
+        `
+      : color === "yellow"
+      ? css`
+          background: #fbcc58;
+        `
+      : color === "orange"
+      ? css`
+          background: #f37e3b;
+        `
+      : color === "purple"
+      ? css`
+          background: #df59ba;
         `
       : css`
-          background: #94dacd;
+          background: #e5e5e5;
         `}
   ${({ size }) =>
     size === "small"
@@ -141,7 +170,4 @@ const Chip = styled.div`
   top: 122px;
   background-color: #cbba64;
   border-radius: 4px;
-`;
-const Add = styled.div`
-  margin: 0 auto;
 `;

@@ -1,15 +1,17 @@
 import Text from "components/Text";
+import React from "react";
 import styled, { css } from "styled-components";
 
 type DotProps = {
   color: ColorType;
   text: string;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
 };
 type ColorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange";
 
-const CardDotInfo = ({ color, text }: DotProps) => {
+const CardDotInfo = ({ color, text, onClick }: DotProps) => {
   return (
-    <Layout>
+    <Layout onClick={onClick}>
       <Circle color={color} />
       <Text fontSize="s" weight="bold">
         {text}

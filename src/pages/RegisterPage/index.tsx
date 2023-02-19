@@ -2,6 +2,7 @@ import Text from "components/Text";
 import styled from "styled-components";
 import Card from "components/Card";
 
+//미션 2
 const RegisterPage = () => {
   // add 버튼을 누르면 카드 추가 페이지를 보여준다.
   return (
@@ -13,7 +14,7 @@ const RegisterPage = () => {
         <CardContainer>
           {/* <Card fontSize="s" theme="primary" size="small" />
           <Card fontSize="s" theme="primary" size="small" /> */}
-          <Card theme="add" size="small" />
+          {/* <Card size="small" /> */}
         </CardContainer>
       </Container>
     </Layout>

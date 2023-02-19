@@ -1,10 +1,9 @@
-import Dot from "components/CardDotInfo";
 import Form from "components/Form";
-import Modal from "components/Modal";
 import Text from "components/Text";
 import styled from "styled-components";
 import IconButton from "../../components/IconButton/index";
 
+// 미션 1
 const AddPage = () => {
   const handleLeftButton = () => {
     console.log("left");

@@ -2,13 +2,14 @@ import styled, { css } from "styled-components";
 
 type TextProps = {
   fontSize: fontSizeType;
-  weight: WeightType;
+  weight?: WeightType;
   children?: any;
+  fontColor?: fontColorType;
 };
 
-const Text = ({ fontSize, weight, children }: TextProps) => {
+const Text = ({ fontSize, weight, children, fontColor }: TextProps) => {
   return (
-    <Layout fontSize={fontSize} weight={weight}>
+    <Layout fontSize={fontSize} weight={weight} fontColor={fontColor}>
       {children}
     </Layout>
   );
@@ -17,9 +18,12 @@ const Text = ({ fontSize, weight, children }: TextProps) => {
 // size가 s일떄 특정 css 적용 , l일떄 특정 css 적용하게 구현
 type fontSizeType = "xs" | "s" | "m" | "lg";
 type WeightType = "normal" | "bold";
+type fontColorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange" | "empty";
+
 type LayoutProps = {
   fontSize: fontSizeType;
-  weight: WeightType;
+  weight?: WeightType;
+  fontColor?: fontColorType;
 };
 
 // 어떤식으로 처리할지..
@@ -41,6 +45,7 @@ const Layout = styled.span<LayoutProps>`
           line-height: 22px;
         `
       : css`
+          //xs일떄
           font-size: 12px;
           line-height: 14px;
         `}
@@ -55,6 +60,43 @@ const Layout = styled.span<LayoutProps>`
         `}
 
     vertical-align:middle;
+
+  ${({ fontColor }) =>
+    fontColor === "red"
+      ? css`
+          color: #e14141;
+        `
+      : fontColor === "cyon"
+      ? css`
+          color: #92e3d5;
+        `
+      : fontColor === "blue"
+      ? css`
+          color: #557ce5;
+        `
+      : fontColor === "green"
+      ? css`
+          color: #73bc6d;
+        `
+      : fontColor === "pink"
+      ? css`
+          color: #e76e9b;
+        `
+      : fontColor === "yellow"
+      ? css`
+          color: #fbcc58;
+        `
+      : fontColor === "orange"
+      ? css`
+          color: #f37e3b;
+        `
+      : fontColor === "purple"
+      ? css`
+          color: #df59ba;
+        `
+      : css`
+          color: #575757;
+        `}
   color: #575757;
 `;
 export default Text;
