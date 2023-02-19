@@ -12,6 +12,11 @@ import CardForm from '../../components/Input/CardForm';
 const CardRegistration = () => {
   const navigate = useNavigate();
   const { card, setCard } = useCard();
+  const [cardNumbers, setCardNumbers] = useState([]);
+  const [cardExpirationDate, setCardExpirationDate] = useState([]);
+  const [cardOwner, setCardOwner] = useState([]);
+  const [cardCVC, setCardCVC] = useState([]);
+  const [cardPassword, setCardPassword] = useState([]);
 
   const goBackToListPage = (e) => {
     navigate('/');
@@ -25,9 +30,8 @@ const CardRegistration = () => {
       cardNumbers.every(
         (part) => part.length === MAX_INPUT_LENGTH.CARD_NUMBER
       ) &&
-      expirationDate.every((part) => part.length === MAX_INPUT_LENGTH.DATE)
-      // TODO: fix. pw[1] is empty.
-      // &&password.every((part) => part.length === MAX_INPUT_LENGTH.PW)
+      expirationDate.every((part) => part.length === MAX_INPUT_LENGTH.DATE) &&
+      password.every((part) => part.length === MAX_INPUT_LENGTH.PW)
     );
   };
 
@@ -40,6 +44,23 @@ const CardRegistration = () => {
     navigate('/registration/setCardNickname');
   };
 
+  const handleChange = (inputInfo) => {
+    const {
+      cardNumbers,
+      cardExpirationDate,
+      cardOwner,
+      cardCVC,
+      cardPassword,
+    } = inputInfo;
+
+    if (inputInfo) {
+      setCardNumbers(cardNumbers);
+      setCardExpirationDate(cardExpirationDate);
+      setCardOwner(cardOwner);
+      setCardCVC(cardCVC);
+      setCardPassword(cardPassword);
+    }
+  };
   return (
     <>
       <Header
@@ -49,10 +70,11 @@ const CardRegistration = () => {
       />
       <Card
         cardStatus={'empty-card'}
-        userName={'JEONG'}
-        expirationDate={'12/34'}
+        cardNumbers={cardNumbers}
+        cardExpirationDate={cardExpirationDate}
+        cardOwner={cardOwner}
       />
-      <CardForm onSubmit={handleSubmit} />
+      <CardForm onSubmit={handleSubmit} onChange={handleChange} />
     </>
   );
 };

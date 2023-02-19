@@ -1,8 +1,8 @@
 const Card = ({
   cardName,
   cardNumbers,
-  userName,
-  expirationDate,
+  cardOwner,
+  cardExpirationDate,
   cardNickname,
   cardStatus,
 }) => {
@@ -19,11 +19,21 @@ const Card = ({
             </div>
             <div className='card-bottom'>
               <div className='card-bottom__number'>
-                <span className='card-text'>{cardNumbers}</span>
+                <span className='card-text'>
+                  {/* TODO: 데이터가 없을 떈 대시(-)가 붙지 않도록 */}
+                  {cardNumbers.map((fourDigits, idx) =>
+                    idx === cardNumbers.length - 1
+                      ? fourDigits
+                      : fourDigits + '-'
+                  )}
+                </span>
               </div>
               <div className='card-bottom__info'>
-                <span className='card-text'>{userName}</span>
-                <span className='card-text'>{expirationDate}</span>
+                <span className='card-text'>{cardOwner}</span>
+                <span className='card-text'>
+                  {/* TODO: 데이터가 없을 떈 대시(/)가 붙지 않도록 */}
+                  {cardExpirationDate.join('/')}
+                </span>
               </div>
             </div>
           </div>
