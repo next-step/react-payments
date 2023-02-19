@@ -4,14 +4,14 @@ type Expiration = {
 };
 
 type CardNumber = {
-  first: string;
-  second: string;
-  third: string;
-  forth: string;
+  cardNumber1: string;
+  cardNumber2: string;
+  cardNumber3: string;
+  cardNumber4: string;
 };
 
 type CardProps = {
-  owner?: string;
+  cardOwner?: string;
   cardCompany?: string;
   cardNumber?: CardNumber;
   expiration?: Expiration;
@@ -20,7 +20,7 @@ type CardProps = {
   isBig?: boolean;
 };
 
-function Card({ owner, cardCompany, cardNumber, expiration, cardNickname, isEmpty, isBig }: CardProps) {
+function Card({ cardOwner, cardCompany, cardNumber, expiration, cardNickname, isEmpty, isBig }: CardProps) {
   if (isEmpty) {
     return (
       <div className="card-box">
@@ -41,11 +41,11 @@ function Card({ owner, cardCompany, cardNumber, expiration, cardNickname, isEmpt
         <div className="card-bottom">
           <div className="card-bottom__number">
             <span className="card-text">
-              {cardNumber?.first} - {cardNumber?.second} - {cardNumber?.third} - {cardNumber?.forth}
+              {cardNumber?.cardNumber1} {cardNumber?.cardNumber2} {cardNumber?.cardNumber3} {cardNumber?.cardNumber4}
             </span>
           </div>
           <div className="card-bottom__info">
-            <span className={isBig ? 'card-text__big' : 'card-text'}>{owner ?? 'Name'}</span>
+            <span className={isBig ? 'card-text__big' : 'card-text'}>{cardOwner ?? 'Name'}</span>
             <span className={isBig ? 'card-text__big' : 'card-text'}>
               {expiration?.month ?? 'MM'} / {expiration?.year ?? 'YY'}
             </span>
