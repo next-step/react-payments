@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { styled } from '../../lib/stitches.config';
+import { styled } from '@/lib/stitches.config';
 
 const TopNavigation = () => {
   const navigate = useNavigate();

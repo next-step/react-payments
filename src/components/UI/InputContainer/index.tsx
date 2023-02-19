@@ -1,4 +1,4 @@
-import { styled } from '../../../lib/stitches.config';
+import { styled } from '@/lib/stitches.config';
 
 export type Props = {
   label?: string;

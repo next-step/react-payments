@@ -3,10 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { CardForm, CreditCard, TopNavigation } from '@/components';
 import { Button } from '@/components/UI';
+import { styled } from '@/lib/stitches.config';
 import { getItem, setItem } from '@/storage/storage';
 import { CardKey, CardObj } from '@/types';
-
-import { styled } from '../lib/stitches.config';
 export const initialCardState = {
   [CardKey.CARD_NUMBERS]: {
     val: {
