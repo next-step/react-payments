@@ -28,7 +28,8 @@ function Card({
           <CardBottomInfo>
             <CardText>{userName ?? "NAME"}</CardText>
             <CardText>
-              {expireMonth ?? "MM"} / {expireYear ?? "YY"}
+              {expireMonth && expireMonth > 0 ? expireMonth : "MM"} /{" "}
+              {expireYear && expireYear > 0 ? expireYear : "YY"}
             </CardText>
           </CardBottomInfo>
         </CardBottom>

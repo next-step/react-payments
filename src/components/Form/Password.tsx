@@ -14,6 +14,11 @@ function Password({ onPasswordChange }: PasswordProps) {
     event: React.ChangeEvent<HTMLInputElement>,
     passwordIdx: number
   ) => {
+    event.currentTarget.value = event.currentTarget.value.replace(
+      /[^0-9]/g,
+      ""
+    );
+
     let newObj = {
       ...password,
       [passwordIdx]: event.currentTarget.value,

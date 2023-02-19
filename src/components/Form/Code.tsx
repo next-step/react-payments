@@ -3,6 +3,8 @@ import InputContainer from "../Input/InputContainer";
 
 function Code({ onCodeChange }: CodeProps) {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "");
+
     onCodeChange(Number(e.currentTarget.value));
   };
 

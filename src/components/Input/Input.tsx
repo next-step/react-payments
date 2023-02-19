@@ -1,3 +1,4 @@
+import { RefObject } from "react";
 import styled from "styled-components";
 
 function Input({
@@ -7,6 +8,7 @@ function Input({
   onChange,
   maxLength,
   name,
+  forwardRef,
 }: InputProps) {
   return (
     <StyledInput
@@ -16,6 +18,7 @@ function Input({
       onChange={onChange}
       maxLength={maxLength}
       name={name}
+      ref={forwardRef}
     ></StyledInput>
   );
 }
@@ -27,6 +30,7 @@ type InputProps = {
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   maxLength?: number;
   name?: string;
+  forwardRef?: any;
 };
 
 type StyledInputProps = {

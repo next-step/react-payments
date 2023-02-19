@@ -10,8 +10,36 @@ function ExpiredDate({ onExpiredDateChange }: ExpiredDateProps) {
     event: React.ChangeEvent<HTMLInputElement>,
     order: number
   ) => {
+    event.currentTarget.value = event.currentTarget.value.replace(
+      /[^0-9]/g,
+      ""
+    );
+
     let newArr = [...dates];
     newArr[order] = Number(event.currentTarget.value);
+
+    if (order === 0) {
+      if (newArr[order] === 0 || newArr[order] > 12) {
+        event.currentTarget.value = event.currentTarget.value.replace(
+          event.currentTarget.value,
+          ""
+        );
+      }
+    }
+
+    if (order === 1) {
+      if (
+        newArr[order] === 0 ||
+        (String(newArr[order]).length > 1 && newArr[order] < 23)
+      ) {
+        event.currentTarget.value = event.currentTarget.value.replace(
+          event.currentTarget.value,
+          ""
+        );
+      }
+    }
+    newArr[order] = Number(event.currentTarget.value);
+
     setDates(newArr);
   };
 
