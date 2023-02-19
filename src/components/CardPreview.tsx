@@ -1,9 +1,18 @@
-import React, { useContext } from 'react';
-import { CardDispatch } from '../context/cardDispatch';
+import React from 'react';
+interface ICardProps {
+  digit1: string;
+  digit2: string;
+  digit3: string;
+  digit4: string;
+  name: string;
+  expire: string;
+}
 
-const CardPreview = () => {
-  const { state } = useContext(CardDispatch);
+interface IProps {
+  data: ICardProps;
+}
 
+const CardPreview = ({ data }: IProps) => {
   return (
     <div className="card-box">
       <div className="empty-card">
@@ -13,14 +22,14 @@ const CardPreview = () => {
         </div>
         <div className="card-bottom">
           <span className="card-text">
-            {state.digit1 && state.digit1}
-            {state.digit2 && '-' + state.digit2}
-            {state.digit3 && '-' + '*'.repeat(state.digit3.length)}
-            {state.digit4 && '-' + '*'.repeat(state.digit4.length)}
+            {data.digit1 && data.digit1}
+            {data.digit2 && '-' + data.digit2}
+            {data.digit3 && '-' + '*'.repeat(data.digit3.length)}
+            {data.digit4 && '-' + '*'.repeat(data.digit4.length)}
           </span>
           <div className="card-bottom__info">
-            <span className="card-text">{state.name || 'NAME'}</span>
-            <span className="card-text">{state.expire || 'MM / YY'}</span>
+            <span className="card-text">{data.name || 'NAME'}</span>
+            <span className="card-text">{data.expire || 'MM / YY'}</span>
           </div>
         </div>
       </div>
