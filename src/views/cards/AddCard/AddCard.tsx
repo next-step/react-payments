@@ -1,4 +1,5 @@
 import React, { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { LeftPointArrow } from "@/assets/icons";
 import {
@@ -21,7 +22,15 @@ import {
   AddCardPageContainer,
 } from "./addCard.style";
 
-const HeaderLeftPointArrow = <LeftPointArrow />;
+function HeaderLeftPointArrow() {
+  const navigate = useNavigate();
+
+  const moveToCardsPage = () => {
+    navigate("/cards");
+  };
+
+  return <LeftPointArrow onClick={moveToCardsPage} />;
+}
 
 export default function AddCard() {
   const { cardNumber, onCardNumberChange } = useCardNumberInput("");
@@ -39,9 +48,11 @@ export default function AddCard() {
     [cardNumber, cardExpireDate, cardOwnerName]
   );
 
+  const HeaderStartDecorator = useMemo(() => <HeaderLeftPointArrow />, []);
+
   return (
     <AddCardPageContainer>
-      <Header className="add-form-header" startDecorator={HeaderLeftPointArrow}>
+      <Header className="add-form-header" startDecorator={HeaderStartDecorator}>
         카드추가
       </Header>
       <AddCardForm>

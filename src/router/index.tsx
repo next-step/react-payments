@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
-import { AddCard } from "@/views/cards";
+import { AddCard, Cards } from "@/views/cards";
 
 const router = createBrowserRouter([
   {
@@ -10,7 +10,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/cards",
-    element: <div>TEST</div>,
+    element: <Cards />,
   },
   {
     path: "/cards/add",
