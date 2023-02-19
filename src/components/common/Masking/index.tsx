@@ -15,6 +15,7 @@ function Masking({ count, width = 4, height = 4, gap = 2, color = '#000' }: Mask
       className={css`
         display: flex;
         align-items: center;
+        gap: ${gap}px;
       `}
     >
       {Array.from({ length: count }).map((_, index) => (
@@ -26,9 +27,6 @@ function Masking({ count, width = 4, height = 4, gap = 2, color = '#000' }: Mask
             height: ${height}px;
             border-radius: 50px;
             background-color: ${color};
-            &:not(:last-child) {
-              margin-right: ${gap}px;
-            }
           `}
         ></span>
       ))}
