@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Input from "../Input/Input";
 import InputContainer from "../Input/InputContainer";
 
@@ -9,6 +9,8 @@ function Password({ onPasswordChange }: PasswordProps) {
     3: "",
     4: "",
   });
+
+  const itemsRef = useRef<any>([]);
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -23,6 +25,12 @@ function Password({ onPasswordChange }: PasswordProps) {
       ...password,
       [passwordIdx]: event.currentTarget.value,
     };
+
+    if (String(newObj[passwordIdx]).length) {
+      if (passwordIdx < 4) {
+        itemsRef.current[passwordIdx + 1].focus();
+      }
+    }
     setPassword(newObj);
   };
 
@@ -41,6 +49,7 @@ function Password({ onPasswordChange }: PasswordProps) {
         maxLength={1}
         onChange={(e) => onChange(e, 1)}
         name="password1"
+        forwardRef={(el: HTMLInputElement) => (itemsRef.current[1] = el)}
       ></Input>
       <Input
         size="small"
@@ -48,6 +57,7 @@ function Password({ onPasswordChange }: PasswordProps) {
         maxLength={1}
         onChange={(e) => onChange(e, 2)}
         name="password2"
+        forwardRef={(el: HTMLInputElement) => (itemsRef.current[2] = el)}
       ></Input>
       <Input
         size="small"
@@ -55,6 +65,7 @@ function Password({ onPasswordChange }: PasswordProps) {
         maxLength={1}
         onChange={(e) => onChange(e, 3)}
         name="password3"
+        forwardRef={(el: HTMLInputElement) => (itemsRef.current[3] = el)}
       ></Input>
       <Input
         size="small"
@@ -62,6 +73,7 @@ function Password({ onPasswordChange }: PasswordProps) {
         maxLength={1}
         onChange={(e) => onChange(e, 4)}
         name="password4"
+        forwardRef={(el: HTMLInputElement) => (itemsRef.current[4] = el)}
       ></Input>
     </InputContainer>
   );

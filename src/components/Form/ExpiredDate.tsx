@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Input from "../Input/Input";
 import InputBox from "../Input/InputBox";
 import InputContainer from "../Input/InputContainer";
 
 function ExpiredDate({ onExpiredDateChange }: ExpiredDateProps) {
   const [dates, setDates] = useState<number[]>([]);
+
+  const itemsRef = useRef<any>([]);
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -40,6 +42,12 @@ function ExpiredDate({ onExpiredDateChange }: ExpiredDateProps) {
     }
     newArr[order] = Number(event.currentTarget.value);
 
+    if (String(newArr[order]).length > 1) {
+      if (order < 1) {
+        itemsRef.current[order + 1].focus();
+      }
+    }
+
     setDates(newArr);
   };
 
@@ -55,12 +63,14 @@ function ExpiredDate({ onExpiredDateChange }: ExpiredDateProps) {
           maxLength={2}
           onChange={(e) => onChange(e, 0)}
           name="month"
+          forwardRef={(el: HTMLInputElement) => (itemsRef.current[0] = el)}
         />
         <Input
           placeholder="YY"
           maxLength={2}
           onChange={(e) => onChange(e, 1)}
           name="year"
+          forwardRef={(el: HTMLInputElement) => (itemsRef.current[1] = el)}
         />
       </InputBox>
     </InputContainer>
