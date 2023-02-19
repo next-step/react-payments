@@ -2,14 +2,8 @@ import React, { useContext } from 'react';
 import { CardDispatch } from '../context/cardDispatch';
 import Input from './common/Input';
 import { handleDigit, handleExpire, handlePassword } from '../utils/form';
-import styled from '@emotion/styled';
 import InputCvc from './form/InputCvc';
-
-const S = {
-  Hyphen: styled.span`
-    color: #000;
-  `,
-};
+import InputDigit from './form/InputDigit';
 
 const CardRegisterForm = () => {
   const { state, dispatch } = useContext(CardDispatch);
@@ -48,46 +42,13 @@ const CardRegisterForm = () => {
 
   return (
     <>
-      <div className="input-container">
-        <span className="input-title">카드 번호</span>
-        <div className="input-box">
-          <Input
-            id={'digit1'}
-            name={'digit1'}
-            onChange={(e: React.ChangeEvent) => onChangeDigit(e)}
-            type={'text'}
-            value={state.digit1}
-            maxLength={4}
-          />
-          {state.digit1.length === 4 && <S.Hyphen>-</S.Hyphen>}
-          <Input
-            id={'digit2'}
-            name={'digit2'}
-            onChange={(e: React.ChangeEvent) => onChangeDigit(e)}
-            type={'text'}
-            value={state.digit2}
-            maxLength={4}
-          />
-          {state.digit2.length === 4 && <S.Hyphen>-</S.Hyphen>}
-          <Input
-            id={'digit3'}
-            name={'digit3'}
-            onChange={(e: React.ChangeEvent) => onChangeDigit(e)}
-            type={'password'}
-            value={state.digit3}
-            maxLength={4}
-          />
-          {state.digit3.length === 4 && <S.Hyphen>-</S.Hyphen>}
-          <Input
-            id={'digit4'}
-            name={'digit4'}
-            onChange={(e: React.ChangeEvent) => onChangeDigit(e)}
-            type={'password'}
-            value={state.digit4}
-            maxLength={4}
-          />
-        </div>
-      </div>
+      <InputDigit
+        onChange={(e: React.ChangeEvent) => onChangeDigit(e)}
+        value1={state.digit1}
+        value2={state.digit2}
+        value3={state.digit3}
+        value4={state.digit4}
+      />
 
       <div className="input-container">
         <span className="input-title">만료일</span>
