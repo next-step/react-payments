@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { routes } from './router';
+import { routes } from './routes';
 
 function CardList() {
   return (

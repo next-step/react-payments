@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 
 import type { CardNumbersState } from '@/types/types';
+import { filterNumber } from '@/utils/utils';
 
 interface CardNumberInputProps {
   cardNumbersStateBundle: [CardNumbersState, React.Dispatch<React.SetStateAction<CardNumbersState>>];
@@ -36,11 +37,10 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
                   cardNumberInputsRef.current[i] = inputRef;
                 }}
                 onChange={(e) => {
-                  const inputValue = e.currentTarget.value;
-                  const numberValue = inputValue.replace(/\D/g, '');
-                  const fourString = numberValue.substring(0, 4);
+                  const numberValue = filterNumber(e.currentTarget.value);
+                  const fourString = Math.floor(numberValue / 1000);
                   setCardNumbers((prev) => {
-                    const inputNumber = fourString ? Number(fourString) : undefined;
+                    const inputNumber = fourString || undefined;
                     if (prev[i].value === inputNumber) {
                       return prev;
                     }

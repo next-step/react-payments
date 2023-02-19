@@ -2,7 +2,8 @@ import React, { useRef, useState } from 'react';
 import { styled } from '@stitches/react';
 import { Link } from 'react-router-dom';
 
-import { routes } from './router';
+import { routes } from '@/routes';
+import { filterNumber } from '@/utils/utils';
 import Card from './Card';
 import { padNumber } from './utils/utils';
 import { cardNumbersInit, expireDatesInit, passwordsInit } from './CardCreatorInits';
@@ -68,10 +69,7 @@ function CardCreator() {
                       value={padNumber(2, value) || ''}
                       placeholder={placeholder}
                       onChange={(e) => {
-                        const inputValue = e.currentTarget.value;
-                        // TODO: number가 아닌 값 골라내기 util함수 가능
-                        const numberValue = inputValue.replace(/\D/g, '');
-                        let inputVal = Number(numberValue);
+                        let inputVal = filterNumber(e.currentTarget.value);
                         // TODO: 클린코드 필요.
                         if (inputVal > 12 && key === 'card-expired-month') {
                           inputVal %= 10;
@@ -133,8 +131,7 @@ function CardCreator() {
               type="password"
               value={securityCode || ''}
               onChange={(e) => {
-                const inputValue = e.currentTarget.value;
-                const numberValue = inputValue.replace(/\D/g, '');
+                const numberValue = filterNumber(e.currentTarget.value);
                 const inputVal = numberValue ? Number(numberValue) : undefined;
                 if (inputVal && inputVal > 1000) {
                   return;
@@ -174,8 +171,7 @@ function CardCreator() {
                       passwordInputsRef.current[i] = ref;
                     }}
                     onChange={(e) => {
-                      const inputValue = e.currentTarget.value;
-                      const numberValue = inputValue.replace(/\D/g, '');
+                      const numberValue = filterNumber(e.currentTarget.value);
                       const inputVal = numberValue ? Number(numberValue) : undefined;
                       if (inputVal && inputVal > 10) {
                         return;

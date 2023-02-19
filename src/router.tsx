@@ -1,13 +1,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import { routes } from '@/routes';
+
 import CardList from './CardList';
 import CardCreator from './CardCreator';
-
-export const routes = {
-  home: '/',
-  cardCreator: '/add',
-};
 
 function Router() {
   return (

@@ -17,3 +17,7 @@ export function padNumber(amountOfNumber: number, number?: number) {
 
   return stringNumber;
 }
+
+export function filterNumber(inputString: string) {
+  return Number(inputString.replace(/\D/g, ''));
+}
