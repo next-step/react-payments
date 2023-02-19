@@ -1,13 +1,7 @@
 import { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 
-type ButtonProps = {
-  type: 'button' | 'submit' | 'reset';
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default function Button({ type = 'button', children, ...props }: PropsWithChildren<ButtonProps>) {
-  return (
-    <button type={type} {...props}>
-      {children}
-    </button>
-  );
+export default function Button({ children, ...props }: PropsWithChildren<ButtonProps>) {
+  return <button {...props}>{children}</button>;
 }
