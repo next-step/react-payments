@@ -1,13 +1,13 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Header from '../components/Header';
+import Title from '../components/common/Title';
 
 export default {
   title: 'Common/Title',
-  component: Header,
-} as ComponentMeta<typeof Header>;
+  component: Title,
+} as ComponentMeta<typeof Title>;
 
-const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
+const Template: ComponentStory<typeof Title> = (args) => <Title {...args} />;
 
 export const Default = Template.bind({});
 

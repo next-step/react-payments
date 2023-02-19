@@ -7,3 +7,8 @@
 button {background:none;border:0;cursor:pointer;}
 a {text-decoration:none}
 /*table {border-collapse:collapse;border-spacing:0}*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

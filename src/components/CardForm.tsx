@@ -1,49 +1,176 @@
-import React from 'react';
+import React, { useContext } from 'react';
+
+import { CardDispatch } from '../pages/PaymentCardRegister';
+import Input from './Input';
+import { handleDigit, trimExpireToSlash, trimPassword } from '../utils/form';
 import styled from '@emotion/styled';
 
 interface IProps {
   onClick?: () => void;
-  title?: string;
 }
 
-const CardRegisterForm = ({ onClick, title }: IProps) => {
+const S = {
+  Hyphen: styled.span`
+    color: #000;
+  `,
+};
+
+const CardRegisterForm = ({ onClick }: IProps) => {
+  const { state, dispatch } = useContext(CardDispatch);
+
+  const onChangeInput = (e: React.ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    dispatch({
+      ...state,
+      [target.name]: target.value,
+    });
+  };
+
+  const onChangeDigit = (e: React.ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    dispatch({
+      ...state,
+      [target.name]: handleDigit(target.value, target.name),
+    });
+  };
+
+  const onChangeExpire = (e: React.ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    dispatch({
+      ...state,
+      [target.name]: trimExpireToSlash(target.value),
+    });
+  };
+
+  const onChangePassword = (e: React.ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    dispatch({
+      ...state,
+      [target.name]: trimPassword(target.value, target.name),
+    });
+  };
+
   return (
     <>
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
-          <input className="input-basic" type="text" />
-          <input className="input-basic" type="text" />
-          <input className="input-basic" type="password" />
-          <input className="input-basic" type="password" />
+          <Input
+            id={'digit1'}
+            name={'digit1'}
+            onChange={(e: React.ChangeEvent) => onChangeDigit(e)}
+            type={'text'}
+            value={state.digit1}
+            maxLength={4}
+          />
+          {state.digit1.length === 4 && <S.Hyphen>-</S.Hyphen>}
+          <Input
+            id={'digit2'}
+            name={'digit2'}
+            onChange={(e: React.ChangeEvent) => onChangeDigit(e)}
+            type={'text'}
+            value={state.digit2}
+            maxLength={4}
+          />
+          {state.digit2.length === 4 && <S.Hyphen>-</S.Hyphen>}
+          <Input
+            id={'digit3'}
+            name={'digit3'}
+            onChange={(e: React.ChangeEvent) => onChangeDigit(e)}
+            type={'password'}
+            value={state.digit3}
+            maxLength={4}
+          />
+          {state.digit3.length === 4 && <S.Hyphen>-</S.Hyphen>}
+          <Input
+            id={'digit4'}
+            name={'digit4'}
+            onChange={(e: React.ChangeEvent) => onChangeDigit(e)}
+            type={'password'}
+            value={state.digit4}
+            maxLength={4}
+          />
         </div>
       </div>
 
       <div className="input-container">
         <span className="input-title">만료일</span>
         <div className="input-box w-50">
-          <input className="input-basic" type="text" placeholder="MM" />
-          <input className="input-basic" type="text" placeholder="YY" />
+          <Input
+            id={'expire'}
+            name={'expire'}
+            onChange={(e: React.ChangeEvent) => onChangeExpire(e)}
+            type={'text'}
+            placeholder={'MM / YY'}
+            value={state.expire}
+          />
         </div>
       </div>
+
       <div className="input-container">
-        <span className="input-title">카드 소유자 이름(선택)</span>
-        <input
-          type="text"
-          className="input-basic"
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+        <span className="input-title">카드 소유자 이름(선택)</span>{' '}
+        <span className="input-title">{state.name.length + '/30'}</span>
+        <Input
+          id={'name'}
+          name={'name'}
+          onChange={(e: React.ChangeEvent) => onChangeInput(e)}
+          type={'text'}
+          placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
+          maxLength={29}
+          value={state.name}
         />
       </div>
+
       <div className="input-container">
         <span className="input-title">보안코드(CVC/CVV)</span>
-        <input className="input-basic w-25" type="password" />
+
+        <Input
+          id={'cvc'}
+          name={'cvc'}
+          onChange={(e: React.ChangeEvent) => onChangePassword(e)}
+          type={'password'}
+          className={'w-25'}
+          maxLength={3}
+          value={state.cvc}
+        />
       </div>
+
       <div className="input-container">
         <span className="input-title">카드 비밀번호</span>
-        <input className="input-basic w-15" type="password" />
-        <input className="input-basic w-15" type="password" />
-        <input className="input-basic w-15" type="password" />
-        <input className="input-basic w-15" type="password" />
+        <Input
+          id={'ps1'}
+          name={'ps1'}
+          onChange={(e: React.ChangeEvent) => onChangePassword(e)}
+          type={'password'}
+          className={'w-15'}
+          maxLength={1}
+          value={state.ps1}
+        />
+        <Input
+          id={'ps2'}
+          name={'ps2'}
+          onChange={(e: React.ChangeEvent) => onChangePassword(e)}
+          type={'password'}
+          className={'w-15'}
+          maxLength={1}
+          value={state.ps2}
+        />
+        <Input
+          id={'ps3'}
+          name={'ps3'}
+          type={'password'}
+          className={'w-15'}
+          disabled={true}
+          placeholder={'*'}
+        />
+        <Input
+          id={'ps4'}
+          name={'ps4'}
+          type={'password'}
+          className={'w-15'}
+          disabled={true}
+          placeholder={'*'}
+        />
       </div>
     </>
   );

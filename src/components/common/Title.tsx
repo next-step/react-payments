@@ -20,7 +20,7 @@ interface ITitle {
   path: string;
 }
 
-const Header = ({ onClick, title, path }: ITitle) => {
+const Title = ({ onClick, title, path }: ITitle) => {
   return (
     <Link to={path}>
       <S.Title onClick={onClick}>{title}</S.Title>
@@ -28,4 +28,4 @@ const Header = ({ onClick, title, path }: ITitle) => {
   );
 };
 
-export default Header;
+export default Title;

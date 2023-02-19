@@ -5,7 +5,7 @@ interface IFooter {
   text: string;
 }
 
-const Footer = ({ onClick, text }: IFooter) => {
+const Button = ({ onClick, text }: IFooter) => {
   return (
     <div className="button-box" onClick={onClick}>
       <span className="button-text">{text}</span>
@@ -13,4 +13,4 @@ const Footer = ({ onClick, text }: IFooter) => {
   );
 };
 
-export default Footer;
+export default Button;
