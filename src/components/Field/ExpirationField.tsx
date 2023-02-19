@@ -21,7 +21,15 @@ function ExpirationField({
   const { month, year } = value;
   return (
     <FieldContainer title={title}>
-      <Input type={type} name="month" maxLength={maxLength} value={month} placeholder="MM" onChange={onChange} />
+      <Input
+        type={type}
+        name="month"
+        maxLength={maxLength}
+        value={month}
+        placeholder="MM"
+        onChange={onChange}
+        pattern="[0-9]+"
+      />
       <Input type={type} name="year" maxLength={maxLength} value={year} placeholder="YY" onChange={onChange} />
     </FieldContainer>
   );

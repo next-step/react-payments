@@ -8,6 +8,11 @@
   align-items: center;
 }
 
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
 .flex-between {
   display: flex;
   justify-content: space-between;
