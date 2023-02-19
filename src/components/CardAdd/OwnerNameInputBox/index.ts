@@ -1,1 +1,1 @@
-export { default } from './CardOwnerNameInputBox';
+export { default } from './OwnerNameInputBox';

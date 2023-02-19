@@ -2,15 +2,15 @@ import { ChangeEvent } from 'react';
 
 import { Box, Input } from '@/components/Common';
 import { CardOwnerName } from '@/types/card';
-import { CARD_OWNER_NAME } from '@/constants/card';
+import { CARD } from '@/constants/card';
 
-type CardOwnerNameInputBoxProps = {
+type OwnerNameInputBoxProps = {
   cardOwnerName: CardOwnerName;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function CardOwnerNameInputBox({ cardOwnerName, onChange }: CardOwnerNameInputBoxProps) {
-  const subTitle = `${cardOwnerName.length}/${CARD_OWNER_NAME.LENGTH}`;
+export default function OwnerNameInputBox({ cardOwnerName, onChange }: OwnerNameInputBoxProps) {
+  const subTitle = `${cardOwnerName.length}/${CARD.OWNER_NAME.LENGTH}`;
 
   return (
     <Box className="input-container">
@@ -21,7 +21,7 @@ export default function CardOwnerNameInputBox({ cardOwnerName, onChange }: CardO
       <Input
         type="text"
         className="input-basic"
-        maxLength={CARD_OWNER_NAME.LENGTH}
+        maxLength={CARD.OWNER_NAME.LENGTH}
         value={cardOwnerName}
         onChange={onChange}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."

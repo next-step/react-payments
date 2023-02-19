@@ -1,13 +1,13 @@
-import CardSecretCodeInputBox from './CardSecretCodeInputBox';
+import SecretCodeInputBox from './SecretCodeInputBox';
 
 import type { ComponentStory, Meta } from '@storybook/react';
 
 export default {
-  title: 'CardSecretCodeInputBox',
-  component: CardSecretCodeInputBox,
+  title: 'SecretCodeInputBox',
+  component: SecretCodeInputBox,
 } as Meta;
 
-const Template: ComponentStory<typeof CardSecretCodeInputBox> = (args) => <CardSecretCodeInputBox {...args} />;
+const Template: ComponentStory<typeof SecretCodeInputBox> = (args) => <SecretCodeInputBox {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {};

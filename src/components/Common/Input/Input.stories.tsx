@@ -1,6 +1,6 @@
-import Input from './Input';
-
 import type { ComponentStory, Meta } from '@storybook/react';
+
+import Input from './Input';
 
 export default {
   title: 'Input',

@@ -2,14 +2,14 @@ import { ChangeEvent } from 'react';
 
 import { Box, Input } from '@/components/Common';
 import { CardExpiration } from '@/types/card';
-import { CARD_EXPIRATION } from '@/constants/card';
+import { CARD } from '@/constants/card';
 
-type CardExpirationInputBoxTypes = {
+type ExpirationInputBoxTypes = {
   cardExpiration: CardExpiration;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function CardExpirationInputBox({ cardExpiration, onChange }: CardExpirationInputBoxTypes) {
+export default function ExpirationInputBox({ cardExpiration, onChange }: ExpirationInputBoxTypes) {
   const { month, year } = cardExpiration;
 
   return (
@@ -21,8 +21,8 @@ export default function CardExpirationInputBox({ cardExpiration, onChange }: Car
         value={month}
         onChange={onChange}
         type="text"
-        maxLength={2}
-        placeholder={CARD_EXPIRATION.PLACEHOLDER.MONTH}
+        maxLength={CARD.EXPIRATION.LENGTH}
+        placeholder={CARD.EXPIRATION.PLACEHOLDER.MONTH}
       />
       <Input
         className="input-basic w-25"
@@ -30,8 +30,8 @@ export default function CardExpirationInputBox({ cardExpiration, onChange }: Car
         value={year}
         onChange={onChange}
         type="text"
-        maxLength={2}
-        placeholder={CARD_EXPIRATION.PLACEHOLDER.YEAR}
+        maxLength={CARD.EXPIRATION.LENGTH}
+        placeholder={CARD.EXPIRATION.PLACEHOLDER.YEAR}
       />
     </Box>
   );

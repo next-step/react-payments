@@ -1,6 +1,6 @@
-import CardSelectButton from './CardSelectButton';
-
 import type { ComponentStory, Meta } from '@storybook/react';
+
+import CardSelectButton from './CardSelectButton';
 
 export default {
   title: 'CardSelectButton',

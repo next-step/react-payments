@@ -1,12 +1,12 @@
 import { useState, ChangeEvent } from 'react';
 
 import { isNumber } from '@/utils';
-import { CARD_SECRET_CODE } from '@/constants/card';
+import { CARD } from '@/constants/card';
 
 export default function useCardSecretCode() {
   const [cardSecretCode, setCardSecretCode] = useState('');
 
-  const 카드CVC가모두입력된 = cardSecretCode.length === CARD_SECRET_CODE.LENGTH;
+  const 카드CVC가모두입력된 = cardSecretCode.length === CARD.SECRET_CODE.LENGTH;
 
   const handleChangeCardSecretCode = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;

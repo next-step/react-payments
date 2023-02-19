@@ -1,6 +1,6 @@
 import { ElementType, PropsWithChildren } from 'react';
 
-type InputBoxProps<T extends ElementType> = {
+type BoxProps<T extends ElementType> = {
   as?: T;
 
   className?: string;
@@ -11,7 +11,7 @@ export default function Box<T extends ElementType = 'div'>({
 
   className,
   children,
-}: PropsWithChildren<InputBoxProps<T>>) {
+}: PropsWithChildren<BoxProps<T>>) {
   const Element = as || 'div';
 
   return <Element className={className}>{children}</Element>;

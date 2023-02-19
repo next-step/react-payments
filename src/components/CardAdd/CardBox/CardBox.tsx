@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
-import { CARD_EXPIRATION, CARD_OWNER_NAME } from '@/constants/card';
+
+import { CARD } from '@/constants/card';
 import { isShowHyphen, maskingNumber } from '@/domain/card';
 import { CardExpiration, CardNumber, CardOwnerName, SelectedCard } from '@/types/card';
 
@@ -40,9 +41,9 @@ export default function CardBox({ cardNumber, cardExpiration, cardOwnerName, sel
         </div>
         <div className="card-bottom">
           <div className="card-bottom__info">
-            <span className="card-text card-text__ellipsis">{cardOwnerName || CARD_OWNER_NAME.PLACEHOLDER}</span>
+            <span className="card-text card-text__ellipsis">{cardOwnerName || CARD.OWNER_NAME.PLACEHOLDER}</span>
             <span className="card-text">
-              {month || CARD_EXPIRATION.PLACEHOLDER.MONTH} / {year || CARD_EXPIRATION.PLACEHOLDER.YEAR}
+              {month || CARD.EXPIRATION.PLACEHOLDER.MONTH} / {year || CARD.EXPIRATION.PLACEHOLDER.YEAR}
             </span>
           </div>
         </div>

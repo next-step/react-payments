@@ -1,6 +1,6 @@
 import { useEffect, RefObject } from 'react';
 
-import { CARD_NUMBER } from '@/constants/card';
+import { CARD } from '@/constants/card';
 import { CardNumber } from '@/types/card';
 
 type UseInputFocusProps = {
@@ -19,14 +19,14 @@ export default function useInputFocus({ cardNumber, num1Ref, num2Ref, num3Ref, n
   }, [num1Ref]);
 
   useEffect(() => {
-    num1.length === CARD_NUMBER.LENGTH && num2Ref.current?.focus();
+    num1.length === CARD.NUMBER.LENGTH && num2Ref.current?.focus();
   }, [num1, num2Ref]);
 
   useEffect(() => {
-    num2.length === CARD_NUMBER.LENGTH && num3Ref.current?.focus();
+    num2.length === CARD.NUMBER.LENGTH && num3Ref.current?.focus();
   }, [num2, num3Ref]);
 
   useEffect(() => {
-    num3.length === CARD_NUMBER.LENGTH && num4Ref.current?.focus();
+    num3.length === CARD.NUMBER.LENGTH && num4Ref.current?.focus();
   }, [num3, num4Ref]);
 }

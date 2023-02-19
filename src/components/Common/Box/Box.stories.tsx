@@ -1,6 +1,6 @@
-import Box from './Box';
-
 import type { ComponentStory, Meta } from '@storybook/react';
+
+import Box from './Box';
 
 export default {
   title: 'Box',

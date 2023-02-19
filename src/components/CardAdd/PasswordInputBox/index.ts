@@ -1,1 +1,1 @@
-export { default } from './CardPasswordInputBox';
+export { default } from './PasswordInputBox';

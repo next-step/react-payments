@@ -1,6 +1,6 @@
-import CardBox from './CardBox';
-
 import type { ComponentStory, Meta } from '@storybook/react';
+
+import CardBox from './CardBox';
 
 export default {
   title: 'CardBox',

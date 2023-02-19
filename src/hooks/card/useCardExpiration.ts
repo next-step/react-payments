@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react';
 
 import { isValidExpirationMonth, isValidExpirationYear } from '@/domain/card';
 import { isNumber } from '@/utils';
-import { CARD_EXPIRATION } from '@/constants/card';
+import { CARD } from '@/constants/card';
 
 export default function useCardExpiration() {
   const [cardExpiration, setCardExpiration] = useState({
@@ -11,7 +11,7 @@ export default function useCardExpiration() {
   });
 
   const cardExpirationsLength = Object.values(cardExpiration).map((expiration) => expiration.length);
-  const 만료일이모두입력된 = cardExpirationsLength.every((length) => length === CARD_EXPIRATION.LENGTH);
+  const 만료일이모두입력된 = cardExpirationsLength.every((length) => length === CARD.EXPIRATION.LENGTH);
 
   const handleChangeExpiration = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

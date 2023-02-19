@@ -1,1 +1,1 @@
-export { default } from './CardExpirationInputBox';
+export { default } from './ExpirationInputBox';

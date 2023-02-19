@@ -1,6 +1,6 @@
-import CardSelectModal from './CardSelectModal';
-
 import type { ComponentStory, Meta } from '@storybook/react';
+
+import CardSelectModal from './CardSelectModal';
 
 export default {
   title: 'CardSelectModal',

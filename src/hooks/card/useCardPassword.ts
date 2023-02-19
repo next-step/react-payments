@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from 'react';
 
 import { isNumber } from '@/utils';
-import { CARD_PASSWORD } from '@/constants/card';
+import { CARD } from '@/constants/card';
 
 export default function useCardPassword() {
   const [cardPassword, setCardPassword] = useState({
@@ -9,7 +9,7 @@ export default function useCardPassword() {
     num2: '',
   });
   const cardPasswordsLength = Object.values(cardPassword).map((password) => password.length);
-  const 카드비밀번호가모두입력된 = cardPasswordsLength.every((length) => length === CARD_PASSWORD.LENGTH);
+  const 카드비밀번호가모두입력된 = cardPasswordsLength.every((length) => length === CARD.PASSWORD.LENGTH);
 
   const handleChangeCardPassword = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

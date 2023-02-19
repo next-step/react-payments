@@ -1,1 +1,1 @@
-export { default } from './CardNumberInputBox';
+export { default } from './NumberInputBox';
