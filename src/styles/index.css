@@ -5,6 +5,7 @@
 @import "./utils.css";
 
 body {
+  font-family: Noto Sans KR, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -18,10 +19,12 @@ input {
 }
 
 .root {
+  overflow: hidden;
   background-color: #fff;
   width: 375px;
   min-width: 375px;
-  height: 700px;
+  height: 800px;
+  /* height: 700px; */
   position: relative;
   border-radius: 15px;
 }
