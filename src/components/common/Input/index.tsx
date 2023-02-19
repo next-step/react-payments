@@ -7,6 +7,7 @@ const Input = ({
   id,
   placeholder,
   onChange,
+  maxLength,
 }: React.InputHTMLAttributes<HTMLInputElement>) => {
   return (
     <input
@@ -16,6 +17,7 @@ const Input = ({
       id={id}
       placeholder={placeholder}
       onChange={onChange}
+      maxLength={maxLength}
     />
   );
 };

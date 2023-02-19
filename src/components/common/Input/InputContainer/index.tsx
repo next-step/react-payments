@@ -8,6 +8,7 @@ interface InputContainerProps {
   inputList: InputList[];
   hasInputBox?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  maxLength?: number;
 }
 
 const InputContainer = ({
@@ -16,6 +17,7 @@ const InputContainer = ({
   inputList,
   hasInputBox = false,
   onChange,
+  maxLength,
 }: InputContainerProps) => {
   return (
     <div className={`input-container ${className?.inputContainerClassName}`}>
@@ -25,6 +27,7 @@ const InputContainer = ({
           inputList={inputList}
           className={className}
           onChange={onChange}
+          maxLength={maxLength}
         />
       ) : (
         inputList.map(({ value, type, id, placeholder }) => (
@@ -36,6 +39,7 @@ const InputContainer = ({
             placeholder={placeholder}
             className={className?.inputClassName}
             onChange={onChange}
+            maxLength={maxLength}
           />
         ))
       )}

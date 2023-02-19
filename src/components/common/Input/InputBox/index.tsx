@@ -5,9 +5,15 @@ interface InputBoxProps {
   inputList: InputList[];
   className?: Omit<InputClassName, "inputContainerClassName">;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  maxLength?: number;
 }
 
-const InputBox = ({ inputList, className, onChange }: InputBoxProps) => {
+const InputBox = ({
+  inputList,
+  className,
+  onChange,
+  maxLength,
+}: InputBoxProps) => {
   return (
     <div className={`input-box ${className?.inputBoxClassName}`}>
       {inputList.map(({ value, type, id, placeholder }) => (
@@ -19,6 +25,7 @@ const InputBox = ({ inputList, className, onChange }: InputBoxProps) => {
           placeholder={placeholder}
           className={className?.inputClassName}
           onChange={onChange}
+          maxLength={maxLength}
         />
       ))}
     </div>
