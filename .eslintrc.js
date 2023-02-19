@@ -10,7 +10,7 @@ module.exports = {
     sourceType: 'module',
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['react', 'prettier', '@typescript-eslint'],
+  plugins: ['react', 'prettier', 'import', '@typescript-eslint'],
   extends: [
     'airbnb',
     'airbnb/hooks',
@@ -20,6 +20,7 @@ module.exports = {
   ],
   rules: {
     'prettier/prettier': 'error',
+    'import/no-unresolved': 0,
     'react/jsx-filename-extension': [
       1,
       {
@@ -37,7 +38,14 @@ module.exports = {
     'import/prefer-default-export': 0,
   },
   settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
     'import/resolver': {
+      typescript: {
+        alwaysTryTypes: true,
+        project: 'src/*',
+      },
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
