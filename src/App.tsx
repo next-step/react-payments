@@ -22,14 +22,7 @@ function App() {
 
   const handleCardInformation = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value, validity } = e.target;
-    // const isInvalid = Object.values({ ...validity }).includes(true);
-    // console.log(isInvalid, validity, Object.values(validity), { ...validity }, Object.keys(validity));
-
-    console.log(name, value);
-    console.log(!validity.valid);
-    console.log(validity);
     if (!validity.valid) return;
-    console.log('hello?');
 
     setCardInformation(prev => ({ ...prev, [name]: value }));
   };
@@ -42,8 +35,6 @@ function App() {
     e.preventDefault();
     initializedState();
   };
-
-  console.log(cardInformation);
 
   const routes = [
     {
