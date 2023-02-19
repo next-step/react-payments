@@ -1,8 +1,12 @@
 {
   "devDependencies": {
-    "husky": "^8.0.3"
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2"
   },
   "scripts": {
     "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.jsx": "npm run lint"
   }
 }
