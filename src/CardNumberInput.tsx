@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 
 import type { CardNumbersState } from '@/types/types';
-import { filterNumber } from '@/utils/utils';
+import { filterNumber, updateArray, updateObject } from '@/utils/utils';
 
 interface CardNumberInputProps {
   cardNumbersStateBundle: [CardNumbersState, React.Dispatch<React.SetStateAction<CardNumbersState>>];
@@ -45,13 +45,7 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
                       return prev;
                     }
 
-                    const newVal = [...prev];
-                    newVal[i] = {
-                      type,
-                      key,
-                      value: inputNumber,
-                    };
-                    return newVal;
+                    return updateArray(prev, i, updateObject(prev[i], 'value', inputNumber));
                   });
                 }}
               />

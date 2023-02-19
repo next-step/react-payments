@@ -3,7 +3,7 @@ import { styled } from '@stitches/react';
 import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
-import { filterNumber } from '@/utils/utils';
+import { filterNumber, updateArray, updateObject } from '@/utils/utils';
 import Card from './Card';
 import { padNumber } from './utils/utils';
 import { cardNumbersInit, expireDatesInit, passwordsInit } from './CardCreatorInits';
@@ -86,14 +86,11 @@ function CardCreator() {
                             return prevExpireDates;
                           }
 
-                          // TODO: 나머지는 그대로 지키면서 특정 property만 바꿔주는 함수 추상화 가능
-                          const newExpireDates = [...prevExpireDates];
-                          newExpireDates[i] = {
-                            key,
-                            placeholder,
-                            value: inputVal || undefined,
-                          };
-                          return newExpireDates;
+                          return updateArray(
+                            prevExpireDates,
+                            i,
+                            updateObject(prevExpireDates[i], 'value', inputVal || undefined)
+                          );
                         });
                       }}
                     />
@@ -182,12 +179,8 @@ function CardCreator() {
                         if (inputVal === prevVal) {
                           return prevPasswords;
                         }
-                        const newPasswords = [...prevPasswords];
-                        newPasswords[i] = {
-                          key,
-                          value: inputVal,
-                        };
-                        return newPasswords;
+
+                        return updateArray(prevPasswords, i, updateObject(prevPasswords[i], 'value', inputVal));
                       });
                     }}
                   />

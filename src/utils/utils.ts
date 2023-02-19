@@ -21,3 +21,15 @@ export function padNumber(amountOfNumber: number, number?: number) {
 export function filterNumber(inputString: string) {
   return Number(inputString.replace(/\D/g, ''));
 }
+
+export function updateObject<T extends { [key: string]: any }, K extends keyof T>(object: T, key: K, newValue: T[K]) {
+  const newObject = { ...object };
+  newObject[key] = newValue;
+  return newObject;
+}
+
+export function updateArray<T extends Array<unknown>, K extends keyof T>(array: T, key: K, newValue: T[K]) {
+  const newObject = array.slice() as T;
+  newObject[key] = newValue;
+  return newObject;
+}
