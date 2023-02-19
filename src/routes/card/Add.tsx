@@ -25,6 +25,10 @@ const INPUT_NAMES = [
   "password4",
 ];
 
+const formatNumber = (number: number) => {
+  return number.toString().replaceAll(/[0-9]/g, "*");
+};
+
 function Add() {
   const [cardNumber, setCardNumber] = useState("");
   const [expireMonth, setExpireMonth] = useState(0);
@@ -55,7 +59,9 @@ function Add() {
   const onCardNumberChange = (cardNumbers: number[]) => {
     const hasCardNumber = cardNumbers.some((cardNumber) => cardNumber);
     const formattedCardNumber = hasCardNumber
-      ? `${cardNumbers[0]}-${cardNumbers[1]}-${cardNumbers[2]}-${cardNumbers[3]}`
+      ? `${cardNumbers[0]}-${cardNumbers[1]}-${formatNumber(
+          cardNumbers[2]
+        )}-${formatNumber(cardNumbers[3])}`
       : "";
     setCardNumber(formattedCardNumber);
   };

@@ -8,6 +8,7 @@ function Input({
   maxLength,
   name,
   forwardRef,
+  readonly,
 }: InputProps) {
   return (
     <StyledInput
@@ -18,6 +19,8 @@ function Input({
       maxLength={maxLength}
       name={name}
       ref={forwardRef}
+      readOnly={readonly}
+      value={readonly ? "1" : undefined}
     ></StyledInput>
   );
 }
@@ -30,6 +33,7 @@ type InputProps = {
   maxLength?: number;
   name?: string;
   forwardRef?: any;
+  readonly?: boolean;
 };
 
 type StyledInputProps = {

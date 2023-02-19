@@ -6,8 +6,6 @@ function Password({ onPasswordChange }: PasswordProps) {
   const [password, setPassword] = useState<PasswordType>({
     1: "",
     2: "",
-    3: "",
-    4: "",
   });
 
   const itemsRef = useRef<any>([]);
@@ -27,7 +25,7 @@ function Password({ onPasswordChange }: PasswordProps) {
     };
 
     if (String(newObj[passwordIdx]).length) {
-      if (passwordIdx < 4) {
+      if (passwordIdx < 2) {
         itemsRef.current[passwordIdx + 1].focus();
       }
     }
@@ -59,22 +57,8 @@ function Password({ onPasswordChange }: PasswordProps) {
         name="password2"
         forwardRef={(el: HTMLInputElement) => (itemsRef.current[2] = el)}
       ></Input>
-      <Input
-        size="small"
-        type="password"
-        maxLength={1}
-        onChange={(e) => onChange(e, 3)}
-        name="password3"
-        forwardRef={(el: HTMLInputElement) => (itemsRef.current[3] = el)}
-      ></Input>
-      <Input
-        size="small"
-        type="password"
-        maxLength={1}
-        onChange={(e) => onChange(e, 4)}
-        name="password4"
-        forwardRef={(el: HTMLInputElement) => (itemsRef.current[4] = el)}
-      ></Input>
+      <Input size="small" type="password" readonly={true}></Input>
+      <Input size="small" type="password" readonly={true}></Input>
     </InputContainer>
   );
 }
