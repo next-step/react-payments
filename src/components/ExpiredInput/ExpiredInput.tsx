@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { onNumericKeyDownOnly } from '../../domain/payments/listeners';
-import { isAllowedNumberKeys } from '../../util/inputKey';
 import { replaceNumberOnly } from '../../util/number';
 
 const MAX_LENGTH = 2;
@@ -22,12 +21,18 @@ function ExpiredInput({ onExpiredChange }: TExpiredInputChange) {
       placeholder: 'MM',
       maxLength: MAX_LENGTH,
       onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = Number(event.target.value);
-        if (value < 1) {
+        const value = event.target.value;
+        if (value === '') {
+          return;
+        }
+
+        const parsedValue = parseInt(value);
+        if (parsedValue < 1) {
           event.target.value = '1';
-        } else if (value > 12) {
+        } else if (parsedValue > 12) {
           event.target.value = '12';
         }
+
         setExpiredMonth(Number(event.target.value));
       },
     },
