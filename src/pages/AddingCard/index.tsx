@@ -3,6 +3,7 @@ import {
   CardNumberContainer,
   ExpiredDateContainer,
   CardOwnerContainer,
+  CardPasswordContainer,
 } from 'components/domain';
 
 import { useCardNumber, useExpiredDate, useCardOwner } from './hooks';
@@ -34,13 +35,7 @@ function AddingCard() {
       />
       <CardOwnerContainer cardOwner={cardOwner} handleChangeCardOwner={handleChangeCardOwner} />
       <SecretCodeContainer />
-      <div className="input-container">
-        <span className="input-title">카드 비밀번호</span>
-        <input className="input-basic w-15" type="password" />
-        <input className="input-basic w-15" type="password" />
-        <input className="input-basic w-15" type="password" />
-        <input className="input-basic w-15" type="password" />
-      </div>
+      <CardPasswordContainer />
       <div className="button-box">
         <span className="button-text">다음</span>
       </div>

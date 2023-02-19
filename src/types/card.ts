@@ -20,3 +20,8 @@ export type CardNumber = {
   num3: string;
   num4: string;
 };
+
+export type CardPassword = {
+  password1: string;
+  password2: string;
+};

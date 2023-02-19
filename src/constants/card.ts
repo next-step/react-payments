@@ -3,4 +3,5 @@ export const MAX_LENGTH = {
   EXPIRED_DATE: 2,
   CARD_OWNER: 30,
   SECRET_CODE: 3,
+  PASSWORD: 1,
 };
