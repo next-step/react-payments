@@ -1,9 +1,27 @@
 import { useNavigate } from 'react-router-dom';
 
+import useRefs from '../hooks/useRefs';
+
 const AddCard = () => {
   const navigate = useNavigate();
+  const cardRefs = useRefs<HTMLInputElement>(4);
+
+  const handleCardNumber = (index: number) => {
+    const currentInput = cardRefs[index].current;
+
+    if (!currentInput) return;
+
+    currentInput.value = currentInput.value.replace(/[^0-9]/g, '');
+
+    if (currentInput.value.length === 4) {
+      if (index < cardRefs.length - 1) {
+        cardRefs[index + 1].current?.focus();
+      }
+    }
+  };
+
   return (
-    <div className="app">
+    <section className="app">
       <h2 className="page-title">
         <button className="button-prev" onClick={() => navigate('/card-list')}>
           <PrevIcon />
@@ -27,10 +45,34 @@ const AddCard = () => {
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
-          <input className="input-basic" type="text" />
-          <input className="input-basic" type="text" />
-          <input className="input-basic" type="password" />
-          <input className="input-basic" type="password" />
+          <input
+            className="input-basic"
+            type="text"
+            maxLength={4}
+            ref={cardRefs[0]}
+            onChange={() => handleCardNumber(0)}
+          />
+          <input
+            className="input-basic"
+            type="text"
+            maxLength={4}
+            ref={cardRefs[1]}
+            onChange={() => handleCardNumber(1)}
+          />
+          <input
+            className="input-basic"
+            type="password"
+            maxLength={4}
+            ref={cardRefs[2]}
+            onChange={() => handleCardNumber(2)}
+          />
+          <input
+            className="input-basic"
+            type="password"
+            maxLength={4}
+            ref={cardRefs[3]}
+            onChange={() => handleCardNumber(3)}
+          />
         </div>
       </div>
       <div className="input-container">
@@ -62,7 +104,7 @@ const AddCard = () => {
       <div className="button-box">
         <span className="button-text">다음</span>
       </div>
-    </div>
+    </section>
   );
 };
 
