@@ -3,7 +3,7 @@ import { usePayments } from "../../../store/context";
 const MAX_CARD_NUMBER_LENGTH = 4;
 
 const CardNumbersInput = () => {
-  const { cardNumbers, setCardNumberByIndex, nextElement } = usePayments();
+  const { cardNumbers, handleCardNumberInput, nextElement } = usePayments();
 
   return (
     <div className="input-container">
@@ -14,7 +14,7 @@ const CardNumbersInput = () => {
           type="text"
           maxLength={MAX_CARD_NUMBER_LENGTH}
           value={cardNumbers[0]}
-          onChange={setCardNumberByIndex(0)}
+          onChange={handleCardNumberInput(0)}
         />
         <input
           ref={(el: HTMLInputElement) => (nextElement.current[0] = el)}
@@ -22,7 +22,7 @@ const CardNumbersInput = () => {
           type="text"
           maxLength={MAX_CARD_NUMBER_LENGTH}
           value={cardNumbers[1]}
-          onChange={setCardNumberByIndex(1)}
+          onChange={handleCardNumberInput(1)}
         />
         <input
           ref={(el: HTMLInputElement) => (nextElement.current[1] = el)}
@@ -30,7 +30,7 @@ const CardNumbersInput = () => {
           type="password"
           maxLength={MAX_CARD_NUMBER_LENGTH}
           value={cardNumbers[2]}
-          onChange={setCardNumberByIndex(2)}
+          onChange={handleCardNumberInput(2)}
         />
         <input
           ref={(el: HTMLInputElement) => (nextElement.current[2] = el)}
@@ -38,7 +38,7 @@ const CardNumbersInput = () => {
           type="password"
           maxLength={MAX_CARD_NUMBER_LENGTH}
           value={cardNumbers[3]}
-          onChange={setCardNumberByIndex(3)}
+          onChange={handleCardNumberInput(3)}
         />
       </div>
     </div>

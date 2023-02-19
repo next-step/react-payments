@@ -1,19 +1,9 @@
-import { ChangeEvent, useState } from "react";
+import { usePayments } from "../../../store/context";
 
 const MAX_CVC_LENGTH = 3;
 
 const CardCVCInput = () => {
-  const [cvc, setCvc] = useState("");
-
-  const handleCvcInput = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target as HTMLInputElement;
-    if (Number.isNaN(+value)) {
-      alert("보안코드는 숫자만 입력해주세요!");
-      return;
-    }
-    setCvc(value);
-  };
-
+  const { cvc, handleCvcInput } = usePayments();
   return (
     <div className="input-container">
       <span className="input-title">보안코드(CVC/CVV)</span>

@@ -1,16 +1,20 @@
 import { usePayments } from "../../store/context";
 
 const Card = () => {
-  const { cardNumbers } = usePayments();
+  const { cardNumbers, expirationDate, cardOwnerName } = usePayments();
 
-  const showCardNumbers = (number: string) => number.length === 4 ? number + " - " : "";
+  const showCardNumbers = (number: string) =>
+    number.length === 4 ? number + " - " : "";
 
   const maskingCardNumbers = (number: string, isLastPlace: boolean) =>
-    number.length === 4 ? number.replace(/./g, "*") + (isLastPlace ? "" : " - ") : "";
+    number.length === 4
+      ? number.replace(/./g, "*") + (isLastPlace ? "" : " - ")
+      : "";
 
-  const cardName = (name: string) => name ? name : "NAME";
+  const showCardName = (name: string) => (name ? name : "NAME");
 
-  const cardExpiry = (expiry: string) => expiry ? expiry : "MM / YY";
+  const showCardExpiry = (cardExpiry: string[]) =>
+    cardExpiry[0] ? `${cardExpiry[0]} / ${cardExpiry[1] || "YY"}` : "MM / YY";
 
   return (
     <div className="card-box">
@@ -29,8 +33,8 @@ const Card = () => {
             </span>
           </div>
           <div className="card-bottom__info">
-            <span className="card-text">{cardName("")}</span>
-            <span className="card-text">{cardExpiry("")}</span>
+            <span className="card-text">{showCardName(cardOwnerName)}</span>
+            <span className="card-text">{showCardExpiry(expirationDate)}</span>
           </div>
         </div>
       </div>
