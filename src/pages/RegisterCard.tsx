@@ -12,6 +12,7 @@ import {
 import { Button } from '../components/form';
 import { cardRepository } from '../repository';
 import { useNavigate } from 'react-router-dom';
+import { CardCompanyType } from '../domain/types';
 
 export interface RegisterCardType {
   onChange: (value: string) => void;
@@ -56,7 +57,7 @@ export default function RegisterCard() {
     });
   };
 
-  const handleCardCompany = (cardCompany: object) => {
+  const handleCardCompany = (cardCompany: CardCompanyType) => {
     setCardState({
       ...cardState,
       ...cardCompany,

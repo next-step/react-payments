@@ -6,7 +6,7 @@ export interface Props {
 }
 
 function Modal({ children, open }: Props) {
-  if (!open) return;
+  if (!open) return null;
 
   return (
     <div className="modal-dimmed">

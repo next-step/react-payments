@@ -17,12 +17,12 @@ const defaultData = {
   cardNumber: '1234123412341234',
   cardHolder: 'TEST',
   expiredDate: '1223',
-  type: 'small'
 };
 
 export const Small = Template.bind({});
 Small.args = {
   ...defaultData,
+  type: 'small'
 };
 
 export const Big = Template.bind({});

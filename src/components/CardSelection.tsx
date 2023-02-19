@@ -1,9 +1,8 @@
 import { memo } from 'react';
-
-type CardData = { cardCompany: string, color: string };
+import { CardCompanyType } from '../domain/types';
 
 export interface Props {
-  onChange: (data: CardData) => void;
+  onChange: (data: object) => object;
 }
 
 const CARD_DATA1 = [
@@ -20,7 +19,7 @@ const CARD_DATA2 = [
 ];
 
 function CardSelection({ onChange }: Props) {
-  const handleClick = (data) => {
+  const handleClick = (data: CardCompanyType) => {
     onChange(data);
   };
 
