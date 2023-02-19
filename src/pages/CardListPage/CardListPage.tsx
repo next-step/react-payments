@@ -5,7 +5,7 @@ import { Header } from 'components/ui/Header'
 import { EmptyCard } from 'components/EmptyCard'
 
 type CardListPageProps = {
-  onClickAddCard: (isAdd: boolean) => void
+  onClickAddCard: () => void
 }
 
 export const CardListPage: React.FC<CardListPageProps> = ({ onClickAddCard }) => {
@@ -14,16 +14,13 @@ export const CardListPage: React.FC<CardListPageProps> = ({ onClickAddCard }) =>
   if (error) return <p>error</p>
   if (!cards) return <p></p>
 
-  const addCard = () => {
-    onClickAddCard(true)
-  }
   return (
-    <div className='flex-column-center'>
+    <>
       <Header title='보유 카드' />
       {cards.map((card) => (
         <Card key={card.id} card={card} />
       ))}
-      <EmptyCard onClick={addCard} />
-    </div>
+      <EmptyCard onClick={onClickAddCard} />
+    </>
   )
 }

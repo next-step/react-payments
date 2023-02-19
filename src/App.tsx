@@ -12,7 +12,11 @@ function App() {
   }
   return (
     <MobileTemplate>
-      {isAddCard ? <AddCardPage /> : <CardListPage onClickAddCard={toggleIsAddCard} />}
+      {isAddCard ? (
+        <AddCardPage onNavigate={() => toggleIsAddCard(false)} />
+      ) : (
+        <CardListPage onClickAddCard={() => toggleIsAddCard(true)} />
+      )}
     </MobileTemplate>
   )
 }
