@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import AddCardPage from "./pages/RegistPage/AddCardPage";
-import AfterCardPage from "./AfterCardPage";
-import AddCardModal from "./AddCardModal";
+import AfterCardPage from "./pages/confirmPage/AfterCardPage";
+import AddCardModal from "./components/modal/AddCardModal";
 import CardListPage from "./pages/ListPage/CardListPage";
-import ComplateCard from "./ComplateCard";
+import ComplateCard from "./pages/complePage/ComplateCard";
 import "../src/styles/index.css";
 
 function App() {

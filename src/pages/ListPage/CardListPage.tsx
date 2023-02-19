@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
 const CardListPage = () => {
-  // 페이지 이동 함수 만들기 (리액트 라우터)
   const navigate = useNavigate();
+  
   const moveRegistCard = () => {
     navigate('regist-card')
   };

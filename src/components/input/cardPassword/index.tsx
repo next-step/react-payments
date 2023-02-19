@@ -20,12 +20,14 @@ const CardPasswordInput = ({
           type="password"
           maxLength={MAX_PASSWORD_LENGTH}
           onChange={onChange(0)}
+          value={password[0]}
         />
         <input
           className="input-basic w-15"
           type="password"
           maxLength={MAX_PASSWORD_LENGTH}
           onChange={onChange(1)}
+          value={password[1]}
         />
         <input
           className="input-basic w-15 card-pass-word__disabled"
