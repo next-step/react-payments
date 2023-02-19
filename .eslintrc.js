@@ -34,6 +34,7 @@ module.exports = {
     'react/no-array-index-key': 1,
     'import/no-extraneous-dependencies': 0,
     'import/extensions': 0,
+    'import/prefer-default-export': 0,
   },
   settings: {
     'import/resolver': {
