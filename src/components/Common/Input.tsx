@@ -6,10 +6,10 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   width?: Width;
 }
 
-function Input({ kind = 'basic', width = 'w-25', ...props }: InputProps) {
+function Input({ className, kind = 'basic', width = 'w-25', ...props }: InputProps) {
   const inputStyle = kind === 'basic' ? 'input-basic' : 'input-underline';
 
-  return <input {...props} className={`${inputStyle} ${width}`} />;
+  return <input {...props} className={`${className} ${inputStyle} ${width}`} />;
 }
 
 export default Input;

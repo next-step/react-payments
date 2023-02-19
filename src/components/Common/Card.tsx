@@ -1,3 +1,5 @@
+import { renderTextDivider } from '@/utils';
+
 type Expiration = {
   month: string;
   year: string;
@@ -47,7 +49,13 @@ function Card({ cardOwner, cardCompany, cardNumber, expiration, cardNickname, is
           <div className="card-bottom__info">
             <span className={isBig ? 'card-text__big' : 'card-text'}>{cardOwner ?? 'Name'}</span>
             <span className={isBig ? 'card-text__big' : 'card-text'}>
-              {expiration?.month ?? 'MM'} / {expiration?.year ?? 'YY'}
+              {expiration?.month ?? 'MM'}
+              {renderTextDivider({
+                formerValue: expiration?.month ?? '',
+                latterValue: expiration?.year ?? '',
+                divider: '/',
+              })}
+              {expiration?.year ?? 'YY'}
             </span>
           </div>
         </div>

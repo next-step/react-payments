@@ -1,11 +1,3 @@
-const pick = <T>(obj: T, keys: (keyof T)[]): Partial<T> => {
-  const result: Partial<T> = {};
+import { renderTextDivider, checkRequiredValues } from './form';
 
-  keys.forEach(key => {
-    result[key] = obj[key];
-  });
-
-  return result || {};
-};
-
-export { pick };
+export { renderTextDivider, checkRequiredValues };

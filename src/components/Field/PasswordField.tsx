@@ -26,8 +26,8 @@ function PasswordField({ title, value, onChange }: Props) {
         value={value.password2}
         onChange={onChange}
       />
-      <Input className="w-15" type="password" maxLength={1} />
-      <Input className="w-15" type="password" maxLength={1} />
+      <Input className="w-15" type="password" maxLength={1} value="*" disabled />
+      <Input className="w-15" type="password" maxLength={1} value="*" disabled />
     </FieldContainer>
   );
 }
