@@ -13,7 +13,8 @@
     "storybook": "start-storybook -p 6006",
     "predeploy": "npm run build-storybook",
     "deploy-storybook": "gh-pages -d storybook-static",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic --project-token=28b846695d09"
   },
   "homepage": "https://minhyeok0328.github.io/react-payments",
   "dependencies": {
@@ -43,6 +44,7 @@
     "@vitejs/plugin-react": "^3.1.0",
     "@vitest/coverage-c8": "^0.28.4",
     "babel-loader": "^8.3.0",
+    "chromatic": "^6.17.0",
     "eslint": "^8.33.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-storybook": "^0.6.10",
@@ -52,5 +54,7 @@
     "vite": "^4.1.0",
     "vite-plugin-eslint": "^1.8.1",
     "vitest": "^0.28.4"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "react-payments@0.0.0"
 }

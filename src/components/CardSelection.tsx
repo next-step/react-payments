@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { CardCompanyType } from '../domain/types';
 
 export interface Props {
-  onChange: (data: object) => object;
+  onChange: (data: object) => void;
 }
 
 const CARD_DATA1 = [
