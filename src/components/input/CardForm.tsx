@@ -1,3 +1,4 @@
+import NextButton from "../button/nextButton";
 import CardExpirationDateInput from "./cardExpireDate";
 import CardNumbersInput from "./cardNumbers";
 import CardOwnerInput from "./cardOwner";
@@ -19,6 +20,7 @@ const CardForm = () => {
         <CardCVCInput />
         <CardPasswordInput />
       </form>
+      <NextButton path={"/card-add"} />
     </div>
   );
 };

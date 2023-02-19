@@ -11,7 +11,7 @@ function App() {
     <Routes>
       <Route path="/" element={<CardListPage />} />
       <Route path="/1" element={<AddCardPage />} />
-      <Route path="/2" element={<AfterCardPage />} />
+      <Route path="/card-add" element={<AfterCardPage />} />
       <Route path="/3" element={<AddCardModal />} />
       <Route path="/5" element={<ComplateCard />} />
     </Routes>

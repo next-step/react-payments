@@ -3,13 +3,11 @@ import { usePayments } from "../../store/context";
 const Card = () => {
   const { cardNumbers, expirationDate, cardOwnerName } = usePayments();
 
-  const showCardNumbers = (number: string) =>
-    number.length === 4 ? number + " - " : "";
+  const isHypen = (number: string) => {
+    return number.length === 4 ? " - " : "";
+  };
 
-  const maskingCardNumbers = (number: string, isLastPlace: boolean) =>
-    number.length === 4
-      ? number.replace(/./g, "*") + (isLastPlace ? "" : " - ")
-      : "";
+  const maskingCardNumbers = (number: string) => number.replace(/./g, "*");
 
   const showCardName = (name: string) => (name ? name : "NAME");
 
@@ -26,10 +24,10 @@ const Card = () => {
         <div className="card-bottom">
           <div className="card-bottom__number">
             <span className="card-text">
-              {showCardNumbers(cardNumbers[0])}
-              {showCardNumbers(cardNumbers[1])}
-              {maskingCardNumbers(cardNumbers[2], false)}
-              {maskingCardNumbers(cardNumbers[3], true)}
+              {cardNumbers[0]} {isHypen(cardNumbers[0])}
+              {cardNumbers[1]} {isHypen(cardNumbers[1])}
+              {maskingCardNumbers(cardNumbers[2])} {isHypen(cardNumbers[2])}
+              {maskingCardNumbers(cardNumbers[3])}
             </span>
           </div>
           <div className="card-bottom__info">
