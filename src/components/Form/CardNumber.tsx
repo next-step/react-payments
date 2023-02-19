@@ -10,7 +10,6 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
 
   useEffect(() => {
     onCardNumberChange(cardNumbers);
-    console.log(itemsRef.current);
   }, [cardNumbers, onCardNumberChange]);
 
   const onChange = (

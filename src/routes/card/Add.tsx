@@ -5,7 +5,8 @@ import UserName from "../../components/Form/UserName";
 import Code from "../../components/Form/Code";
 import Password from "../../components/Form/Password";
 import Button from "../../components/Form/Button";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ModalContext } from "../../components/Layout";
 
 const INPUT_NAMES = [
   "card-0",
@@ -29,6 +30,7 @@ function Add() {
   const [userName, setUserName] = useState("");
   const [code, setCode] = useState(0);
   const [password, setPassword] = useState("");
+  const { toggleModal } = useContext(ModalContext);
 
   const onCardNumberChange = (cardNumbers: number[]) => {
     const hasCardNumber = cardNumbers.some((cardNumber) => cardNumber);
@@ -55,7 +57,7 @@ function Add() {
     e.preventDefault();
     const inputData: ObjectType = {};
 
-    INPUT_NAMES.some((inputName) => {
+    const isInvalid = INPUT_NAMES.some((inputName) => {
       if (!e.currentTarget[inputName]?.value && inputName !== "username") {
         let prefix = inputName;
         if (inputName.startsWith("card-")) {
@@ -68,7 +70,12 @@ function Add() {
         return true;
       }
       inputData[inputName] = e.currentTarget[inputName]?.value;
+      return false;
     });
+
+    if (!isInvalid) {
+      toggleModal();
+    }
   };
 
   return (
