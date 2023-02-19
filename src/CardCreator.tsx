@@ -52,6 +52,8 @@ function CardCreator() {
 
   const [expireDates, setExpireDates] = useState(expireDatesInit);
 
+  const [securityCode, setSecurityCode] = useState<number>();
+
   // 클린코드를 위한 의견!
   // TODO: 보여지는 카드는 통째로 컴포넌트로 분리
   // TODO: 스타일도 컴포넌트와 함께 두기
@@ -226,7 +228,26 @@ function CardCreator() {
           </div>
           <div className="input-container">
             <span className="input-title">보안코드(CVC/CVV)</span>
-            <input className="input-basic w-25" type="password" />
+            <input
+              className="input-basic w-25"
+              type="password"
+              value={securityCode || ''}
+              onChange={(e) => {
+                const inputValue = e.currentTarget.value;
+                const numberValue = inputValue.replace(/\D/g, '');
+                const inputVal = numberValue ? Number(numberValue) : undefined;
+                if (inputVal && inputVal > 1000) {
+                  return;
+                }
+
+                setSecurityCode((prevSecurityCode) => {
+                  if (inputVal === prevSecurityCode) {
+                    return prevSecurityCode;
+                  }
+                  return inputVal;
+                });
+              }}
+            />
           </div>
           <div className="input-container">
             <span className="input-title">카드 비밀번호</span>
