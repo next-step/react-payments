@@ -58,9 +58,7 @@ export const AddCardForm = () => {
       <CardSecurityInput fontColor={color} setSecurityCode={setSecurityCode} />
       <CardPasswordInput fontColor={color} setPassword={setPassword} />
       <ButtonBox>
-        <Button size="s" onClick={submit}>
-          Next
-        </Button>
+        <Button fontSize="s" onClick={submit} label="Next" />
       </ButtonBox>
     </>
   );

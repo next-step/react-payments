@@ -20,7 +20,7 @@ const CompletedPage = () => {
       </InputWrapper>
 
       <ButtonWrapper>
-        <Button size="lg">Next</Button>
+        <Button fontSize="lg" label="Next" />
       </ButtonWrapper>
     </Layout>
   );
