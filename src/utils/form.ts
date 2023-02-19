@@ -8,7 +8,7 @@ export const handleDigit = (digit: string, targetName: string) => {
   return value;
 };
 
-export const trimExpireToSlash = (digit: string) => {
+export const handleExpire = (digit: string) => {
   const value = digit.replace(/\D+/g, '');
   const length = value.length;
 
@@ -32,7 +32,7 @@ export const trimExpireToSlash = (digit: string) => {
   return result;
 };
 
-export const trimPassword = (digit: string, targetName: string) => {
+export const handlePassword = (digit: string, targetName: string) => {
   const value = digit.replace(/\D+/g, '');
   const length = value.length;
   const nextId = Number(targetName.split('ps')[1]) + 1;

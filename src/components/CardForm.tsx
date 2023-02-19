@@ -1,13 +1,8 @@
 import React, { useContext } from 'react';
-
 import { CardDispatch } from '../context/cardDispatch';
 import Input from './common/Input';
-import { handleDigit, trimExpireToSlash, trimPassword } from '../utils/form';
+import { handleDigit, handleExpire, handlePassword } from '../utils/form';
 import styled from '@emotion/styled';
-
-interface IProps {
-  onClick?: () => void;
-}
 
 const S = {
   Hyphen: styled.span`
@@ -15,7 +10,7 @@ const S = {
   `,
 };
 
-const CardRegisterForm = ({ onClick }: IProps) => {
+const CardRegisterForm = () => {
   const { state, dispatch } = useContext(CardDispatch);
 
   const onChangeInput = (e: React.ChangeEvent) => {
@@ -38,7 +33,7 @@ const CardRegisterForm = ({ onClick }: IProps) => {
     const target = e.target as HTMLInputElement;
     dispatch({
       ...state,
-      [target.name]: trimExpireToSlash(target.value),
+      [target.name]: handleExpire(target.value),
     });
   };
 
@@ -46,7 +41,7 @@ const CardRegisterForm = ({ onClick }: IProps) => {
     const target = e.target as HTMLInputElement;
     dispatch({
       ...state,
-      [target.name]: trimPassword(target.value, target.name),
+      [target.name]: handlePassword(target.value, target.name),
     });
   };
 
