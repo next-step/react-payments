@@ -1,13 +1,18 @@
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { Box } from 'components/@common';
+import type { CreditCardProps } from './CreditCard.types';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<CreditCardProps>`
   margin: 0 auto;
   border-radius: 5px;
   box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
   padding: 15px;
 
-  background-color: ${({ theme }) => theme.color.brand01};
+  ${({ theme, color }) => css`
+    background-color: ${theme.color[color]};
+  `}
+
   width: 70%;
   height: 140px;
 `;

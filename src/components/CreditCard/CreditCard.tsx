@@ -1,21 +1,25 @@
-import { Box } from 'components/@common';
 import * as Styled from './CreditCard.styles';
+import type { CreditCardProps } from './CreditCard.types';
 
-const CreditCard = () => {
+const CreditCard = ({
+  color,
+  name,
+  number,
+  holderName,
+  expiration,
+}: CreditCardProps) => {
   return (
-    <Styled.Wrapper>
-      <Styled.Name>포코 카드</Styled.Name>
+    <Styled.Wrapper color={color}>
+      <Styled.Name>{name}</Styled.Name>
       <Styled.Chip />
-      <Styled.Number>1111-2222-****-****</Styled.Number>
+      <Styled.Number>{number}</Styled.Number>
       <Styled.FlexWrapper
         display="flex"
         alignItems="flex-end"
         justifyContent="space-between"
       >
-        <Styled.HolderName>
-          카드 소유자 30글자까지 가능하다.30글자까지 가능하다!!
-        </Styled.HolderName>
-        <Styled.Expiration>01/23</Styled.Expiration>
+        <Styled.HolderName>{holderName}</Styled.HolderName>
+        <Styled.Expiration>{expiration}</Styled.Expiration>
       </Styled.FlexWrapper>
     </Styled.Wrapper>
   );
