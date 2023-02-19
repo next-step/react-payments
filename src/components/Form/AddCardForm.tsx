@@ -23,9 +23,8 @@ function AddCardForm({ cardInformation, onChange, onSubmit }: Props) {
     year,
     month,
   };
-  console.log('expirationDate', expirationDate);
-
   const password = { password1, password2 };
+
   const isValid = checkRequiredValues(cardInformation);
 
   return (
