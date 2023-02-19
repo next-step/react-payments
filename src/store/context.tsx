@@ -8,6 +8,7 @@ type PaymentsContext = {
   setCardNumberByIndex: (index: number) => (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 const PaymentsContext = createContext<PaymentsContext | null>(null);
 
 export default PaymentsContext;

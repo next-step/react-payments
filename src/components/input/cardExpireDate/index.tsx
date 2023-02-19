@@ -1,12 +1,10 @@
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 
 const CURRENT_YEAR = Number(new Date().getFullYear().toString().slice(-2));
 const MAX_DATE_LENGTH = 2;
 
 const CardExpirationDateInput = () => {
   const [expirationDate, setExpirationDate] = useState(["", ""]);
-  const [error, setError] = useState("");
-  const nextElement = useRef<HTMLInputElement>(null);
 
   const setExpirationDateByIndex =
     (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,21 +14,16 @@ const CardExpirationDateInput = () => {
 
       if (index === 0) {
         if (Number(value) > 12) {
-          setError("월은 1이상 12이하 숫자여야 합니다.");
+          alert("월은 1이상 12이하 숫자여야 합니다.");
           expirationDate[index] = "";
           return;
-        }
-        if (updatedExpirationDate[index].length === MAX_DATE_LENGTH) {
-          if (nextElement.current) {
-            nextElement.current.focus();
-          }
         }
       }
 
       if (index === 1) {
         if (updatedExpirationDate[index].length === MAX_DATE_LENGTH) {
           if (Number(value) < CURRENT_YEAR) {
-            setError("년도는 현재년도보다 적을 수 없습니다.");
+            alert("년도는 현재년도보다 적을 수 없습니다.");
             expirationDate[index] = "";
             return;
           }
@@ -40,9 +33,6 @@ const CardExpirationDateInput = () => {
       setExpirationDate(updatedExpirationDate);
     };
 
-  useEffect(() => {
-    // onChange(expirationDate, error);
-  }, [expirationDate, error]);
   return (
     <div className="input-container">
       <span className="input-title">만료일</span>
