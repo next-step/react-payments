@@ -51,6 +51,12 @@ input {
   align-items: center;
 }
 
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .mr-10 {
   margin-right: 10px;
 }

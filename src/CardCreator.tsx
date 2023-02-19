@@ -66,6 +66,8 @@ function CardCreator() {
 
   const [expireDates, setExpireDates] = useState(expireDatesInit);
 
+  const [ownerName, setOwnerName] = useState<string>();
+
   const [securityCode, setSecurityCode] = useState<number>();
 
   const [passwords, setPasswords] = useState(passwordsInit);
@@ -107,20 +109,17 @@ function CardCreator() {
                 <div className="card-bottom__number">
                   {cardNumbers.map(({ type, key, value }) => {
                     return (
-                      <span key={`${key}-card`} className="card-number-wrapper">
+                      <span key={`${key}-card-number-wrapper`} className="card-number-wrapper card-number-spacing">
                         {value &&
                           String(value)
                             .split('')
-                            .map(
-                              (number) =>
-                                number && <span className="card-number">{type === 'password' ? '*' : number}</span>
-                            )}
+                            .map((cardNum) => (type === 'password' ? '*' : cardNum))}
                       </span>
                     );
                   })}
                 </div>
                 <div className="card-bottom__info">
-                  <span className="card-text">NAME</span>
+                  <span className="card-text card-name-spacing">{ownerName || 'NAME'}</span>
                   <span className="card-text">
                     <span className="card-text card-expire-date">
                       {expireDates[0].value && expireDates[0].value < 10
@@ -147,12 +146,15 @@ function CardCreator() {
                 const dashComponentClassName = isOverThousand && isNotLast ? 'dash' : 'dash hide';
 
                 if (isNotLast && isOverThousand) {
-                  cardNumberInputsRef.current[i + 1]?.focus();
+                  if (document.activeElement === cardNumberInputsRef.current[i]) {
+                    cardNumberInputsRef.current[i + 1]?.focus();
+                  }
                 }
 
                 return (
                   <>
                     <input
+                      key={key}
                       type={type ?? 'text'}
                       value={value ?? ''}
                       className="input-basic text-black"
@@ -199,7 +201,7 @@ function CardCreator() {
                       key={key}
                       className="input-basic"
                       type="text"
-                      value={value && value < 10 ? `0${value}` : value}
+                      value={value && value < 10 ? `0${value}` : value || ''}
                       placeholder={placeholder}
                       onChange={(e) => {
                         const inputValue = e.currentTarget.value;
@@ -240,8 +242,25 @@ function CardCreator() {
             </div>
           </div>
           <div className="input-container">
-            <span className="input-title">카드 소유자 이름(선택)</span>
-            <input type="text" className="input-basic" placeholder="카드에 표시된 이름과 동일하게 입력하세요." />
+            <div className="flex-between">
+              <span className="input-title">카드 소유자 이름(선택)</span>
+              <div className="input-title">
+                <span>{ownerName?.length || 0}</span>
+                <span>/</span>
+                <span>30</span>
+              </div>
+            </div>
+            <input
+              type="text"
+              className="input-basic"
+              value={ownerName || ''}
+              maxLength={30}
+              placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+              onChange={(e) => {
+                const inputName = e.currentTarget.value;
+                setOwnerName(inputName);
+              }}
+            />
           </div>
           <div className="input-container">
             <span className="input-title">보안코드(CVC/CVV)</span>
@@ -272,10 +291,12 @@ function CardCreator() {
               {passwords.map(({ key, value }, i) => {
                 const isLast = i >= passwords.length - 1;
                 if (value && value < 10) {
-                  if (isLast) {
-                    passwordInputsRef.current[i]?.blur();
-                  } else {
-                    passwordInputsRef.current[i + 1]?.focus();
+                  if (document.activeElement === passwordInputsRef.current[i]) {
+                    if (isLast) {
+                      passwordInputsRef.current[i]?.blur();
+                    } else {
+                      passwordInputsRef.current[i + 1]?.focus();
+                    }
                   }
                 }
 

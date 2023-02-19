@@ -163,3 +163,11 @@
   vertical-align: middle;
   font-weight: 400;
 }
+
+.card-number-spacing {
+  letter-spacing: 2px;
+}
+
+.card-name-spacing {
+  letter-spacing: 2px;
+}
