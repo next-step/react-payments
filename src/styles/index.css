@@ -41,6 +41,16 @@ input {
   color: #383838;
 }
 
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .mr-10 {
   margin-right: 10px;
 }

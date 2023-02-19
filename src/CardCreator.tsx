@@ -46,6 +46,20 @@ const expireDatesInit: {
   },
 ];
 
+const passwordsInit: {
+  key: string;
+  value?: number;
+}[] = [
+  {
+    key: 'card-password-first',
+    value: undefined,
+  },
+  {
+    key: 'card-password-second',
+    value: undefined,
+  },
+];
+
 function CardCreator() {
   const [cardNumbers, setCardNumbers] = useState(cardNumbersInit);
   const cardNumberInputsRef = useRef<(HTMLInputElement | null)[]>([]);
@@ -53,6 +67,9 @@ function CardCreator() {
   const [expireDates, setExpireDates] = useState(expireDatesInit);
 
   const [securityCode, setSecurityCode] = useState<number>();
+
+  const [passwords, setPasswords] = useState(passwordsInit);
+  const passwordInputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
   // 클린코드를 위한 의견!
   // TODO: 보여지는 카드는 통째로 컴포넌트로 분리
@@ -251,10 +268,53 @@ function CardCreator() {
           </div>
           <div className="input-container">
             <span className="input-title">카드 비밀번호</span>
-            <input className="input-basic w-15" type="password" />
-            <input className="input-basic w-15" type="password" />
-            <input className="input-basic w-15" type="password" />
-            <input className="input-basic w-15" type="password" />
+            <div className="flex">
+              {passwords.map(({ key, value }, i) => {
+                const isLast = i >= passwords.length - 1;
+                if (value && value < 10) {
+                  if (isLast) {
+                    passwordInputsRef.current[i]?.blur();
+                  } else {
+                    passwordInputsRef.current[i + 1]?.focus();
+                  }
+                }
+
+                return (
+                  <input
+                    key={key}
+                    type="password"
+                    className="input-basic w-15 mr-10"
+                    value={value || ''}
+                    ref={(ref) => {
+                      passwordInputsRef.current[i] = ref;
+                    }}
+                    onChange={(e) => {
+                      const inputValue = e.currentTarget.value;
+                      const numberValue = inputValue.replace(/\D/g, '');
+                      const inputVal = numberValue ? Number(numberValue) : undefined;
+                      if (inputVal && inputVal > 10) {
+                        return;
+                      }
+
+                      setPasswords((prevPasswords) => {
+                        const prevVal = prevPasswords[i].value;
+                        if (inputVal === prevVal) {
+                          return prevPasswords;
+                        }
+                        const newPasswords = [...prevPasswords];
+                        newPasswords[i] = {
+                          key,
+                          value: inputVal,
+                        };
+                        return newPasswords;
+                      });
+                    }}
+                  />
+                );
+              })}
+              <span className="flex-center w-15 mr-10">•</span>
+              <span className="flex-center w-15 mr-10">•</span>
+            </div>
           </div>
           <div className="button-box">
             <span className="button-text">다음</span>
