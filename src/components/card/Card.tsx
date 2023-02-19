@@ -1,12 +1,12 @@
 interface CardProps {
-  cardNumber: { first: string; second: string; third: string; fourth: string }
+  cardNumbers: { first: string; second: string; third: string; fourth: string }
   name: string
   expiratedYear: number
   expiratedMonth: number
 }
 
-function Card({ cardNumber, name, expiratedYear, expiratedMonth }: CardProps) {
-  const convertedCardNumber = cardNumber
+function Card({ cardNumbers, name, expiratedYear, expiratedMonth }: CardProps) {
+  const { first, second, third, fourth } = cardNumbers
   return (
     <div className="card-box">
       <div className="empty-card">
@@ -14,7 +14,7 @@ function Card({ cardNumber, name, expiratedYear, expiratedMonth }: CardProps) {
         <div className="card-middle">
           <div className="small-card__chip" />
           <div className="card-number">
-            <span>{convertedCardNumber.first || null}</span>
+            <span>{`${first} ${second} ${third} ${fourth}`}</span>
           </div>
         </div>
         <div className="card-bottom">

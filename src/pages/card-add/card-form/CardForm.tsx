@@ -3,12 +3,12 @@ import { ReactNode } from 'react'
 import { getCardFormSubElement } from '@/domain'
 
 import {
-  CardNumber,
+  CardNumbers,
   CardExpiredDate,
   CardOwner,
   CardSecurityCode,
   CardPassword,
-  CardNumberType,
+  CardNumbersType,
   CardExpiredDateType,
   CardOwnerType,
   CardSecurityCodeType,
@@ -21,7 +21,7 @@ interface CardFormProps {
 }
 
 const CardForm = ({ children }: CardFormProps) => {
-  const cardNumber = getCardFormSubElement(children, CardNumberType)
+  const cardNumber = getCardFormSubElement(children, CardNumbersType)
   const cardExpiredDateType = getCardFormSubElement(
     children,
     CardExpiredDateType,
@@ -40,7 +40,7 @@ const CardForm = ({ children }: CardFormProps) => {
   )
 }
 
-CardForm.CardNumber = CardNumber
+CardForm.CardNumbers = CardNumbers
 CardForm.CardExpiredDate = CardExpiredDate
 CardForm.CardOwner = CardOwner
 CardForm.CardSecurityCode = CardSecurityCode

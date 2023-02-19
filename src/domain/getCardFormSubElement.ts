@@ -1,7 +1,7 @@
 import { ReactNode, Children, isValidElement } from 'react'
 
 import {
-  CardNumber,
+  CardNumbers,
   CardExpiredDate,
   CardOwner,
   CardSecurityCode,
@@ -9,7 +9,7 @@ import {
 } from '@/pages/card-add/card-form/components'
 
 type CardSubElementType =
-  | typeof CardNumber
+  | typeof CardNumbers
   | typeof CardExpiredDate
   | typeof CardOwner
   | typeof CardSecurityCode

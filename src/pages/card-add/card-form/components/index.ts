@@ -1,4 +1,4 @@
-export { default as CardNumber, CardNumberType } from './CardNumber'
+export { default as CardNumbers, CardNumbersType } from './CardNumbers'
 export {
   default as CardExpiredDate,
   CardExpiredDateType,
