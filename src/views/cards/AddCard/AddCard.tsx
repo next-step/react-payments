@@ -45,7 +45,7 @@ export default function AddCard() {
         카드추가
       </Header>
       <AddCardForm>
-        <Card className="add-form-card" size="big" cardInfo={cardInfo} />
+        <Card className="add-form-card" size="small" cardInfo={cardInfo} />
         <AddCardFormInputWrapper>
           <CardNumberInput value={cardNumber} onKeyDown={onCardNumberChange} />
           <CardExpireDateInput
