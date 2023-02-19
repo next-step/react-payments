@@ -1,4 +1,11 @@
-const CardOwner = () => {
+import { ChangeEvent } from 'react'
+
+interface CardOwnerProps {
+  owner: string
+  handleChange(event: ChangeEvent<HTMLInputElement>): void
+}
+
+const CardOwner = ({ owner, handleChange }: CardOwnerProps) => {
   return (
     <div className="input-container">
       <span className="input-title">카드 소유자 이름(선택)</span>
@@ -6,10 +13,19 @@ const CardOwner = () => {
         type="text"
         className="input-basic"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+        value={owner}
+        onChange={handleChange}
       />
     </div>
   )
 }
 
 export default CardOwner
-export const CardOwnerType = (<CardOwner />).type
+export const CardOwnerType = (
+  <CardOwner
+    owner=""
+    handleChange={(event: ChangeEvent<HTMLInputElement>) => {
+      console.log(event)
+    }}
+  />
+).type

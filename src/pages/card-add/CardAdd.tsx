@@ -18,6 +18,7 @@ function CardAdd() {
     name: '',
     expiratedYear: '',
     expiratedMonth: '',
+    owner: '',
   })
 
   const handleCardNumber = (event: ChangeEvent<HTMLInputElement>) => {
@@ -75,6 +76,10 @@ function CardAdd() {
     }
   }
 
+  const handleCardOwner = (event: ChangeEvent<HTMLInputElement>) => {
+    setCardInfo((prev) => ({ ...prev, owner: event.target.value }))
+  }
+
   return (
     <div className="root">
       <div className="app">
@@ -90,7 +95,10 @@ function CardAdd() {
             expiratedMonth={cardInfo.expiratedMonth}
             handleChange={handleCardExpiredDate}
           />
-          <CardForm.CardOwner />
+          <CardForm.CardOwner
+            owner={cardInfo.owner}
+            handleChange={handleCardOwner}
+          />
           <CardForm.CardSecurityCode />
           <CardForm.CardPassword />
         </CardForm>
