@@ -6,7 +6,7 @@ import { ExpiredInput } from '../../components/ExpiredInput';
 import { Frame } from '../../components/Frame';
 import { Link } from '../../components/Link';
 import { OwnerInput } from '../../components/OwnerInput';
-import { PasswordInput } from '../../components/PasswordInput';
+import { PinInput } from '../../components/PinInput';
 
 function CardList() {
   const [cardNumbers, setCardNumbers] = useState<string[]>([]);
@@ -34,13 +34,13 @@ function CardList() {
     setCvc(cvc);
   };
   return (
-    <Frame title="카드 추가" backClickable={true}>
+    <Frame title="카드 추가" backLink={'/'}>
       <Card owner={owner} expiredMonth={expiredMonth} expiredYear={expiredYear} numbers={cardNumbers} cvc={cvc} />
       <CardNumberInput onCardNumberChange={handleCardNumberChange} />
       <ExpiredInput onExpiredChange={handleExpiredChange} />
       <OwnerInput onOwnerChanged={handleOwnerChange} />
       <CvcInput onCvcChange={handleCvcChange} />
-      <PasswordInput />
+      <PinInput />
       <div className="button-box">
         <div className="button-text">
           <Link to="/card-detail">다음</Link>
