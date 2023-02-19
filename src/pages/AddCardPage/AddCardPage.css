@@ -1,0 +1,8 @@
+#add-card-container {
+}
+
+.modal-container {
+  position: fixed;
+  width: 100%;
+  background-color: while;
+}

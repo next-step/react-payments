@@ -1,0 +1,36 @@
+.card-company-list {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+
+  position: absolute;
+  bottom: 0;
+}
+
+.card-company-item {
+}
+
+.card-company-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.card-company-color {
+  margin: 0.5rem 1rem;
+  border-radius: 50%;
+  width: 2.8rem;
+  height: 2.8rem;
+  background-color: #94dacd;
+}
+
+.card-company-name {
+  font-size: 12px;
+  letter-spacing: -0.085rem;
+}
