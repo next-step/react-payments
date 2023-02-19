@@ -23,15 +23,17 @@ const CardRegistration = () => {
   };
 
   const isAllFilledOut = (cardInfo) => {
-    const { cardNumbers, expirationDate, password, CVC } = cardInfo;
+    const { cardNumbers, cardExpirationDate, cardPassword, cardCVC } = cardInfo;
 
     return (
-      CVC.length === MAX_INPUT_LENGTH.CVC &&
+      cardCVC.length === MAX_INPUT_LENGTH.CVC &&
       cardNumbers.every(
         (part) => part.length === MAX_INPUT_LENGTH.CARD_NUMBER
       ) &&
-      expirationDate.every((part) => part.length === MAX_INPUT_LENGTH.DATE) &&
-      password.every((part) => part.length === MAX_INPUT_LENGTH.PW)
+      cardExpirationDate.every(
+        (part) => part.length === MAX_INPUT_LENGTH.DATE
+      ) &&
+      cardPassword.every((part) => part.length === MAX_INPUT_LENGTH.PW)
     );
   };
 

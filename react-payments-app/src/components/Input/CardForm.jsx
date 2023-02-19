@@ -11,8 +11,8 @@ const CardForm = ({ onSubmit, onChange }) => {
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [cardExpirationDate, setCardExpirationDate] = useState(['', '']);
   const [cardOwner, setCardOwner] = useState('');
-  const [CVC, setCVC] = useState('');
-  const [password, setPassword] = useState(['', '']);
+  const [cardCVC, setCardCVC] = useState('');
+  const [cardPassword, setCardPassword] = useState(['', '']);
   const [error, setError] = useState('');
 
   const handleCardNumbersChange = (cardNumbers, error) => {
@@ -30,13 +30,13 @@ const CardForm = ({ onSubmit, onChange }) => {
     setError(error);
   };
 
-  const handleCVCChange = (CVC, error) => {
-    setCVC(CVC);
+  const handleCardCVCChange = (cardCVC, error) => {
+    setCardCVC(cardCVC);
     setError(error);
   };
 
-  const handlePasswordChange = (password, error) => {
-    setPassword(password);
+  const handleCardPasswordChange = (password, error) => {
+    setCardPassword(password);
     setError(error);
   };
 
@@ -44,13 +44,25 @@ const CardForm = ({ onSubmit, onChange }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    onSubmit({ cardNumbers, cardExpirationDate, cardOwner, CVC, password });
+    onSubmit({
+      cardNumbers,
+      cardExpirationDate,
+      cardOwner,
+      cardCVC,
+      cardPassword,
+    });
   };
 
   // change가 일어나면 -> 카드UI에 실시간 반영. 아직 검증x 이므로 카드 정보 저장되는 건 x
   useEffect(() => {
-    onChange({ cardNumbers, cardExpirationDate, cardOwner, CVC, password });
-  }, [cardNumbers, cardExpirationDate, cardOwner, CVC, password]);
+    onChange({
+      cardNumbers,
+      cardExpirationDate,
+      cardOwner,
+      cardCVC,
+      cardPassword,
+    });
+  }, [cardNumbers, cardExpirationDate, cardOwner, cardCVC, cardPassword]);
 
   return (
     <>
@@ -59,8 +71,8 @@ const CardForm = ({ onSubmit, onChange }) => {
           <CardNumbersInput onChange={handleCardNumbersChange} />
           <CardExpirationDateInput onChange={handleCardExpirationDateChange} />
           <CardOwnerInput onChange={handleCardOwnerChange} />
-          <CardCVCInput onChange={handleCVCChange} />
-          <CardPasswordInput onChange={handlePasswordChange} />
+          <CardCVCInput onChange={handleCardCVCChange} />
+          <CardPasswordInput onChange={handleCardPasswordChange} />
           <Button title='다음' type='submit' onClick={handleSubmit} />
         </form>
         <div id='card-form-label' style={{ color: 'red' }}>
