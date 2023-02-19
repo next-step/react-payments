@@ -5,7 +5,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 
-import { AddingCard, HoldingCards } from 'pages';
+import { AddingCard, ConfirmCard, HoldingCards } from 'pages';
 import { Layout } from 'components/common';
 
 const router = createBrowserRouter(
@@ -13,6 +13,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index element={<HoldingCards />} />
       <Route path="new" element={<AddingCard />} />
+      <Route path="confirm" element={<ConfirmCard />} />
     </Route>
   )
 );
