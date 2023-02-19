@@ -1,70 +1,16 @@
-import React, { useRef, useState, InputHTMLAttributes } from 'react';
+import React, { useRef, useState } from 'react';
 import { styled } from '@stitches/react';
 import { Link } from 'react-router-dom';
 
 import { routes } from './router';
 import Card from './Card';
 import { padNumber } from './utils/utils';
-
-const cardNumbersInit: {
-  type?: InputHTMLAttributes<HTMLInputElement>['type'];
-  key: string;
-  value?: number;
-}[] = [
-  {
-    key: 'card-first-num',
-    value: undefined,
-  },
-  {
-    key: 'card-second-num',
-    value: undefined,
-  },
-  {
-    type: 'password',
-    key: 'card-third-num',
-    value: undefined,
-  },
-  {
-    type: 'password',
-    key: 'card-forth-num',
-    value: undefined,
-  },
-];
-
-const expireDatesInit: {
-  key: string;
-  value?: number;
-  placeholder: string;
-}[] = [
-  {
-    key: 'card-expired-month',
-    value: undefined,
-    placeholder: 'MM',
-  },
-  {
-    key: 'card-expired-year',
-    value: undefined,
-    placeholder: 'YY',
-  },
-];
-
-const passwordsInit: {
-  key: string;
-  value?: number;
-}[] = [
-  {
-    key: 'card-password-first',
-    value: undefined,
-  },
-  {
-    key: 'card-password-second',
-    value: undefined,
-  },
-];
+import { cardNumbersInit, expireDatesInit, passwordsInit } from './CardCreatorInits';
+import { CardNumberInput } from './CardNumberInput';
 
 function CardCreator() {
-  const [cardNumbers, setCardNumbers] = useState(cardNumbersInit);
-  const cardNumberInputsRef = useRef<(HTMLInputElement | null)[]>([]);
+  const cardNumbersStateBundle = useState(cardNumbersInit);
+  const [cardNumbers] = cardNumbersStateBundle;
 
   const [expireDates, setExpireDates] = useState(expireDatesInit);
 
@@ -76,8 +22,6 @@ function CardCreator() {
   const passwordInputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
   // 클린코드를 위한 의견!
-  // TODO: 카드 번호 input 부분도 component로 빼기
-
   // TODO: 모든 input을 받아 i번의 다음으로 넘기는 부분은 공통 hook으로 묶을 수 있겠다.
   // TODO: useForm처럼 form을 간단하게 만들 수 있는 방법은 없을까?
   // input들을 children에 받고 그것을 읽어서 value와 onChange를 알아서 이어주는 식으로 가능할 것이다. 하지만 그게 꼭 필요할까?
@@ -106,56 +50,7 @@ function CardCreator() {
               ownerName={ownerName}
             />
           </div>
-          <div className="input-container">
-            <span className="input-title">카드 번호</span>
-            <div className="input-box">
-              {cardNumbers.map(({ key, type, value }, i) => {
-                const isNotLast = i < cardNumbers.length - 1;
-                const isOverThousand = value && value > 1000;
-                const dashComponentClassName = isOverThousand && isNotLast ? 'dash' : 'dash hide';
-
-                if (isNotLast && isOverThousand) {
-                  if (document.activeElement === cardNumberInputsRef.current[i]) {
-                    cardNumberInputsRef.current[i + 1]?.focus();
-                  }
-                }
-
-                return (
-                  <>
-                    <input
-                      key={key}
-                      type={type ?? 'text'}
-                      value={value ?? ''}
-                      className="input-basic text-black"
-                      ref={(inputRef) => {
-                        cardNumberInputsRef.current[i] = inputRef;
-                      }}
-                      onChange={(e) => {
-                        const inputValue = e.currentTarget.value;
-                        const numberValue = inputValue.replace(/\D/g, '');
-                        const fourString = numberValue.substring(0, 4);
-                        setCardNumbers((prev) => {
-                          const inputNumber = fourString ? Number(fourString) : undefined;
-                          if (prev[i].value === inputNumber) {
-                            return prev;
-                          }
-
-                          const newVal = [...prev];
-                          newVal[i] = {
-                            type,
-                            key,
-                            value: inputNumber,
-                          };
-                          return newVal;
-                        });
-                      }}
-                    />
-                    {isNotLast && <div className={`text-black ${dashComponentClassName}`}>-</div>}
-                  </>
-                );
-              })}
-            </div>
-          </div>
+          <CardNumberInput cardNumbersStateBundle={cardNumbersStateBundle} />
           <div className="input-container">
             <span className="input-title">만료일</span>
             <div className="input-box w-50">

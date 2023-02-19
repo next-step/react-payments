@@ -12,8 +12,8 @@ interface CardProps {
 }
 
 // TODO: 보여지는 큰 카드는 스토리북 컴포넌트로 분리 가능.
-// TODO: number를 padding해서 반환해주는 util함수 만들기
 function Card({ cardNumbers, expireDates, ownerName }: CardProps) {
+  console.log(cardNumbers);
   return (
     <div className="empty-card">
       <div className="card-top" />
