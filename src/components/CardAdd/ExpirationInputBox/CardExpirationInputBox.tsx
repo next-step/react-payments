@@ -4,12 +4,12 @@ import { Box, Input } from '@/components/Common';
 import { CardExpiration } from '@/types/card';
 import { CARD_EXPIRATION } from '@/constants/card';
 
-type CardExpirationInputTypes = {
+type CardExpirationInputBoxTypes = {
   cardExpiration: CardExpiration;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function CardExpirationInputBox({ cardExpiration, onChange }: CardExpirationInputTypes) {
+export default function CardExpirationInputBox({ cardExpiration, onChange }: CardExpirationInputBoxTypes) {
   const { month, year } = cardExpiration;
 
   return (
