@@ -22,18 +22,7 @@ const CardForm = ({
   handleCardTypeClick,
   handleCardAddClick,
 }: CardFormProps) => {
-  const {
-    number1,
-    number2,
-    number3,
-    number4,
-    name,
-    cvc,
-    month,
-    year,
-    password1,
-    password2,
-  } = newCardInfo;
+  const { number, name, cvc, month, year, password1, password2 } = newCardInfo;
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -57,12 +46,7 @@ const CardForm = ({
           <InputContainer
             hasInputBox
             title="카드 번호"
-            inputList={[
-              { value: number1, type: "text", id: "number1" },
-              { value: number2, type: "text", id: "number2" },
-              { value: number3, type: "password", id: "number3" },
-              { value: number4, type: "password", id: "number4" },
-            ]}
+            inputList={[{ value: number, type: "text", id: "number" }]}
             onChange={handleCardInputChange}
           />
 

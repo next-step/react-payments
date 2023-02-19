@@ -36,14 +36,7 @@ const Card = ({
             </div>
             <div className="card-bottom">
               <div className="card-bottom__number">
-                <span className="card-text">
-                  {[
-                    input?.number1,
-                    input?.number2,
-                    input?.number3,
-                    input?.number4,
-                  ].join("-")}
-                </span>
+                <span className="card-text">{input?.number}</span>
               </div>
               <div className="card-bottom__info">
                 <span className="card-text">{input?.name || "NAME"}</span>

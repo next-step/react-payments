@@ -19,10 +19,7 @@ Small.args = {
   onClick: undefined,
   input: {
     title: "title",
-    number1: "1111",
-    number2: "2222",
-    number3: "3333",
-    number4: "4444",
+    number: "1111",
     name: "name",
     month: "05",
     year: "25",
