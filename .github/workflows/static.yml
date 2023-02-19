@@ -8,7 +8,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.build-publish.outputs.page_url }}
+      url: https://minhyeok0328.github.io/react-payments
     runs-on: ubuntu-latest
     steps:
     - id: build-publish
