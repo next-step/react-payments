@@ -13,5 +13,4 @@ export const Default = Template.bind({});
 
 Default.args = {
   title: '< 카드 추가',
-  path: '/',
 };
