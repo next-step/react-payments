@@ -1,9 +1,9 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import Input from '../components/common/Input';
+import Input from '../../components/common/Input';
 
 export default {
-  title: 'Form',
+  title: 'Common/Form',
   component: Input,
 } as ComponentMeta<typeof Input>;
 
