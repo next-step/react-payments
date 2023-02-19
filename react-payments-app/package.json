@@ -62,5 +62,17 @@
     "babel-plugin-named-exports-order": "^0.0.2",
     "prop-types": "^15.8.1",
     "webpack": "^5.75.0"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jlee0505/react-payments.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jlee0505/react-payments/issues"
+  },
+  "homepage": "https://github.com/jlee0505/react-payments#readme",
+  "description": ""
 }
