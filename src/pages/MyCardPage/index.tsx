@@ -1,26 +1,29 @@
 import Text from "components/Text";
 import styled from "styled-components";
 import Card from "components/Card";
+import AddCard from "../../components/Card/AddCard/index";
+import { useNavigate } from "react-router-dom";
 
-//미션 2
-const RegisterPage = () => {
+const MyCardPage = () => {
   // add 버튼을 누르면 카드 추가 페이지를 보여준다.
+  const navigate = useNavigate();
+
+  const handleAddCard = () => {
+    navigate("/add");
+  };
+
   return (
     <Layout>
       <Container>
         <Text fontSize="lg" weight="bold">
           보유 카드
         </Text>
-        <CardContainer>
-          {/* <Card fontSize="s" theme="primary" size="small" />
-          <Card fontSize="s" theme="primary" size="small" /> */}
-          {/* <Card size="small" /> */}
-        </CardContainer>
+        <AddCard onClick={handleAddCard} />
       </Container>
     </Layout>
   );
 };
-export default RegisterPage;
+export default MyCardPage;
 const Layout = styled.div`
   height: 100%;
   display: flex;

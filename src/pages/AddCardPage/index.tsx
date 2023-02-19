@@ -1,24 +1,25 @@
-import CardAddForm from "components/CardAddForm";
+import AddCardForm from "components/AddCardForm";
 import Text from "components/Text";
 import styled from "styled-components";
 import IconButton from "../../components/IconButton/index";
+import { useNavigate } from "react-router-dom";
 
-// 미션 1
-const AddPage = () => {
-  const handleLeftButton = () => {
-    console.log("left");
+const AddCardPage = () => {
+  const navigate = useNavigate();
+  const handleBackButton = () => {
+    navigate("/");
   };
 
   return (
     <>
       <Layout>
         <Header>
-          <IconButton onClick={handleLeftButton} name="arrowLeft" size="2xl" color="#575757" />
+          <IconButton onClick={handleBackButton} name="arrowLeft" size="2xl" color="#575757" />
           <Text fontSize="lg" weight="bold">
             카드추가
           </Text>
         </Header>
-        <CardAddForm />
+        <AddCardForm />
       </Layout>
     </>
   );
@@ -37,4 +38,4 @@ const Header = styled.div`
   gap: 20px;
 `;
 
-export default AddPage;
+export default AddCardPage;

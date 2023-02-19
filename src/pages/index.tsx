@@ -1,17 +1,17 @@
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyle from "styles/GlobalStyle";
-import AddPage from "./AddPage";
+import AddPage from "./AddCardPage";
 import CompletedPage from "./CompletedPage";
-import RegisterPage from "./RegisterPage/index";
+import MyCardPage from "./MyCardPage/index";
 
 function App() {
   return (
     <Layout>
       <GlobalStyle />
       <Routes>
-        <Route element={<AddPage />} path="/"></Route>
-        <Route element={<RegisterPage />} path="/register"></Route>
+        <Route element={<AddPage />} path="/add"></Route>
+        <Route element={<MyCardPage />} path="/"></Route>
         <Route element={<CompletedPage />} path="/complete"></Route>
       </Routes>
     </Layout>

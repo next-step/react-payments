@@ -12,7 +12,7 @@ import Button from "../Button/index";
 import { useNavigate } from "react-router-dom";
 import { checkCardFormValidation } from "utils";
 
-export const CardAddForm = () => {
+export const AddCardForm = () => {
   const navigate = useNavigate();
   const {
     setCardNumber,
@@ -31,9 +31,10 @@ export const CardAddForm = () => {
     setPassword,
   } = useCardTextControl();
 
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(true);
 
   const submit = () => {
+    // 몇가지 validation 아직 추가 x
     const isValid = checkCardFormValidation({ cardNumber, expirationDate, ownerName, company });
     if (!isValid) return;
     navigate("/complete");
@@ -70,4 +71,4 @@ const ButtonBox = styled.div`
   text-align: right;
 `;
 
-export default CardAddForm;
+export default AddCardForm;
