@@ -45,6 +45,11 @@ input {
   margin-right: 10px;
 }
 
+.mx-5 {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .text-black {
   color: black;
 }

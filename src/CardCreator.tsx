@@ -29,9 +29,28 @@ const cardNumbersInit: {
   },
 ];
 
+const expireDatesInit: {
+  key: string;
+  value?: number;
+  placeholder: string;
+}[] = [
+  {
+    key: 'card-expired-month',
+    value: undefined,
+    placeholder: 'MM',
+  },
+  {
+    key: 'card-expired-year',
+    value: undefined,
+    placeholder: 'YY',
+  },
+];
+
 function CardCreator() {
   const [cardNumbers, setCardNumbers] = useState(cardNumbersInit);
   const cardNumberInputsRef = useRef<(HTMLInputElement | null)[]>([]);
+
+  const [expireDates, setExpireDates] = useState(expireDatesInit);
 
   // 클린코드를 위한 의견!
   // TODO: 보여지는 카드는 통째로 컴포넌트로 분리
@@ -83,7 +102,19 @@ function CardCreator() {
                 </div>
                 <div className="card-bottom__info">
                   <span className="card-text">NAME</span>
-                  <span className="card-text">MM / YY</span>
+                  <span className="card-text">
+                    <span className="card-text card-expire-date">
+                      {expireDates[0].value && expireDates[0].value < 10
+                        ? `0${expireDates[0].value}`
+                        : expireDates[0].value}
+                    </span>
+                    <span className="card-text mx-5">/</span>
+                    <span className="card-text card-expire-date">
+                      {expireDates[1].value && expireDates[1].value < 10
+                        ? `0${expireDates[1].value}`
+                        : expireDates[1].value}
+                    </span>
+                  </span>
                 </div>
               </div>
             </div>
@@ -138,8 +169,55 @@ function CardCreator() {
           <div className="input-container">
             <span className="input-title">만료일</span>
             <div className="input-box w-50">
-              <input className="input-basic" type="text" placeholder="MM" />
-              <input className="input-basic" type="text" placeholder="YY" />
+              {expireDates.map(({ key, value, placeholder }, i) => {
+                // TODO: 추상화 가능
+                const isNotLast = i < expireDates.length - 1;
+                // 각 값은 valid한 값의 조건이 다 다르다.
+                const isValueValid = value && value <= 12;
+                return (
+                  <>
+                    <input
+                      key={key}
+                      className="input-basic"
+                      type="text"
+                      value={value && value < 10 ? `0${value}` : value}
+                      placeholder={placeholder}
+                      onChange={(e) => {
+                        const inputValue = e.currentTarget.value;
+                        // TODO: number가 아닌 값 골라내기 util함수 가능
+                        const numberValue = inputValue.replace(/\D/g, '');
+                        let inputVal = Number(numberValue);
+                        // TODO: 클린코드 필요.
+                        if (inputVal > 12 && key === 'card-expired-month') {
+                          inputVal %= 10;
+                        }
+
+                        if (inputVal > 100 && key === 'card-expired-year') {
+                          inputVal %= 100;
+                        }
+
+                        setExpireDates((prevExpireDates) => {
+                          // TODO: 특정 객체의 값으로 state 갱신 막는 추상화 가능.
+                          const prevValue = prevExpireDates[i].value;
+                          if (prevValue === inputVal) {
+                            return prevExpireDates;
+                          }
+
+                          // TODO: 나머지는 그대로 지키면서 특정 property만 바꿔주는 함수 추상화 가능
+                          const newExpireDates = [...prevExpireDates];
+                          newExpireDates[i] = {
+                            key,
+                            placeholder,
+                            value: inputVal || undefined,
+                          };
+                          return newExpireDates;
+                        });
+                      }}
+                    />
+                    {isNotLast && isValueValid && <div className="text-black">/</div>}
+                  </>
+                );
+              })}
             </div>
           </div>
           <div className="input-container">
