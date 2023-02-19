@@ -12,7 +12,7 @@ export const { styled, css, theme, config } = createStitches({
       grey3: '#666666',
       grey4: '#333333',
       shadow0: '#0000001a',
-      danger: '#EF6F6F'
+      danger: '#EF6F6F',
     },
   },
 });

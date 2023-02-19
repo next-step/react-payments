@@ -61,7 +61,6 @@ const ExpiredDateInput = (props: Props) => {
         placeholder="MM"
         name="month"
         min={1}
-        max={12}
         maxLength={2}
         onKeyPress={numberKeyPressInterceptor}
         onChange={handleChangeExpiredDate}
@@ -73,7 +72,6 @@ const ExpiredDateInput = (props: Props) => {
         placeholder="YY"
         name="year"
         min={1}
-        max={12}
         maxLength={2}
         onKeyPress={numberKeyPressInterceptor}
         onChange={handleChangeExpiredDate}

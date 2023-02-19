@@ -1,12 +1,13 @@
 import './styles/index.css';
-import Route from '@/route'
+
+import Route from '@/route';
 
 function App() {
-  return <>
+  return (
     <div className="root">
       <Route />
     </div>
-  </>
+  );
 }
 
 export default App;

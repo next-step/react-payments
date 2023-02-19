@@ -25,7 +25,6 @@ const CardPwdInput = (props: Props) => {
     () => Boolean(Object.values(pwd).join('').length == MIN_PWD_LENGTH),
     [pwd]
   );
-  console.log(Object.values(pwd).join(''), isPwdValid);
 
   const errorMessage = useMemo(() => {
     if (!isPwdValid) return ERROR_MESSAGE.NO_EMPTY;
