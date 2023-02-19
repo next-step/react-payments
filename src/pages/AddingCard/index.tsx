@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import {
   Card,
   CardNumberContainer,
@@ -7,17 +9,29 @@ import {
   SecretCodeContainer,
   CardCompanyPicker,
 } from 'components/domain';
+import { Button, Header } from 'components/common';
+
 import { useCardNumber, useExpiredDate, useCardOwner, useCompanyPicker } from './hooks';
 
 function AddingCard() {
+  const navigate = useNavigate();
   const { cardNumber, handleChangeCardNumber } = useCardNumber();
   const { expiredDate, handleChangeExpiredDate } = useExpiredDate();
   const { cardOwner, handleChangeCardOwner } = useCardOwner();
   const { open, company, updateCompany, openPicker } = useCompanyPicker();
 
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    navigate('/confirm');
+  };
+
   return (
     <div className="app">
-      <h2 className="page-title">{`<`} 카드 추가</h2>
+      <Header
+        title="카드 추가"
+        prefix={<Button fontSize={24} onClick={() => navigate(-1)}>{`<`}</Button>}
+      />
       <span className="input-title">카드사 선택</span>
       <div onClick={openPicker}>
         <Card
@@ -27,7 +41,7 @@ function AddingCard() {
           expiredDate={expiredDate}
         />
       </div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <CardNumberContainer
           cardNumber={cardNumber}
           handleChangeCardNumber={handleChangeCardNumber}
@@ -40,7 +54,9 @@ function AddingCard() {
         <SecretCodeContainer />
         <CardPasswordContainer />
         <div className="button-box">
-          <span className="button-text">다음</span>
+          <Button type="submit" fontSize={16}>
+            다음
+          </Button>
         </div>
       </form>
       {open && <CardCompanyPicker updateCompany={updateCompany} />}
