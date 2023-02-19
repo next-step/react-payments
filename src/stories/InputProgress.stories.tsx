@@ -1,6 +1,7 @@
 import { Story } from '@storybook/react';
+
 import { InputProgress } from 'components';
-import { InputProgressProps } from 'components/InputProgress';
+import type { InputProgressProps } from 'components/InputProgress';
 
 export default {
   title: 'InputProgress',
