@@ -4,7 +4,7 @@
 
 ## 필수 요구사항
 
-- [ ] Storybook 상호 작용 테스트
+- [x] Storybook 상호 작용 테스트
 - [x] 재사용 가능한 Component 작성
 
 ## 카드 추가
