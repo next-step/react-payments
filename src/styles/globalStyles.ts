@@ -1,5 +1,4 @@
 import { css } from '@emotion/react';
-import './common.css';
 
 export const globalStyles = css`
   body,

@@ -1,8 +1,16 @@
 import Routes from 'routes';
-import './styles/index.css';
+import { Global, ThemeProvider } from '@emotion/react';
+import { theme } from 'styles/theme';
+import { globalStyles } from 'styles/globalStyles';
+// import './styles/index.css';
 
 const App = () => {
-  return <Routes />;
+  return (
+    <ThemeProvider theme={theme}>
+      <Global styles={globalStyles} />
+      <Routes />
+    </ThemeProvider>
+  );
 };
 
 export default App;
