@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components";
 
+type fontSizeType = "xs" | "s" | "m" | "lg";
+type WeightType = "normal" | "bold";
+type fontColorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange" | "empty";
+
 type TextProps = {
   fontSize: fontSizeType;
   weight?: WeightType;
@@ -15,18 +19,13 @@ const Text = ({ fontSize, weight, children, fontColor }: TextProps) => {
   );
 };
 
-// size가 s일떄 특정 css 적용 , l일떄 특정 css 적용하게 구현
-type fontSizeType = "xs" | "s" | "m" | "lg";
-type WeightType = "normal" | "bold";
-type fontColorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange" | "empty";
-
 type LayoutProps = {
   fontSize: fontSizeType;
   weight?: WeightType;
   fontColor?: fontColorType;
 };
 
-// 어떤식으로 처리할지..
+// size가 s일떄 특정 css 적용 , l일떄 특정 css 적용하게 구현
 const Layout = styled.span<LayoutProps>`
   ${({ fontSize }) =>
     fontSize === "s"
@@ -95,8 +94,7 @@ const Layout = styled.span<LayoutProps>`
           color: #df59ba;
         `
       : css`
-          color: #575757;
+          color: black;
         `}
-  color: #575757;
 `;
 export default Text;

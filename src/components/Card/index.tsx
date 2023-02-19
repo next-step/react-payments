@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 import Text from "components/Text";
-import { ReactEventHandler, useState } from "react";
+import { ReactEventHandler } from "react";
 
-type colorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange" | "empty";
+type colorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange" | "";
 type companyType =
   | "하나카드"
   | "국민카드"
@@ -14,39 +14,36 @@ type companyType =
   | "오렌지카드"
   | "";
 
-type infoType = {
-  company: companyType;
-  color: colorType;
-};
 type sizeType = "small" | "big";
-type exprationProps = {
+type exprationDateType = {
   month: string;
   year: string;
 };
 
 type CardProps = {
-  info: infoType;
   size: sizeType;
   number?: string;
-  expirationDate?: exprationProps;
+  expirationDate?: exprationDateType;
   ownerName?: string;
   onClick?: ReactEventHandler<HTMLDivElement>;
+  color?: colorType;
+  company?: companyType;
 };
 
-const Card = ({ info, size, number, expirationDate, ownerName, onClick }: CardProps) => {
+const Card = ({ color, company, size, number, expirationDate, ownerName, onClick }: CardProps) => {
   return (
     <Layout onClick={onClick}>
-      <Container color={info.color} size={size}>
+      <Container color={color} size={size}>
         <Top>
-          <Text fontSize="s" weight="bold" fontColor={info.color}>
-            {info.company}
+          <Text fontSize="s" weight="normal">
+            {company}
           </Text>
         </Top>
         <Middle>
           <Chip />
         </Middle>
         <Bottom>
-          <Text fontSize="m" weight="bold">
+          <Text fontSize="m" weight="normal">
             {number}
           </Text>
           <InfoContainer>
@@ -66,7 +63,7 @@ const Card = ({ info, size, number, expirationDate, ownerName, onClick }: CardPr
 export default Card;
 
 type ContainerProps = {
-  color: colorType;
+  color?: colorType;
   size: sizeType;
 };
 const Layout = styled.div`

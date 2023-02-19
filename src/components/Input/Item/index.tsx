@@ -1,19 +1,21 @@
 import { forwardRef, ReactEventHandler } from "react";
 import styled, { css } from "styled-components";
 
+type fontColorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange";
+
 type InputProps = {
   type: string;
   placeholder?: string;
   theme: "underline" | "primary";
+  fontColor?: fontColorType;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  active?: boolean;
+  active: boolean;
 };
 
 export const Input = (
-  { type, placeholder, theme, onChange, active }: InputProps,
+  { type, placeholder, theme, onChange, active, fontColor }: InputProps,
   ref: React.ForwardedRef<HTMLInputElement>
 ) => {
-  // console.log(onChange, ref);
   return (
     <Layout
       type={type}
@@ -22,7 +24,8 @@ export const Input = (
       onChange={onChange}
       ref={ref}
       active={active}
-      disabled={active}
+      disabled={!active}
+      fontColor={fontColor}
     />
   );
 };
@@ -32,11 +35,13 @@ export default forwardRef(Input);
 type LayoutProps = {
   theme: "underline" | "primary";
   active?: boolean;
+  fontColor?: fontColorType;
 };
 
 const Layout = styled.input<LayoutProps>`
   font-size: 16px;
-  opacity: ${(props) => (!props.active ? 1 : 0.5)};
+  opacity: ${(props) => (props.active ? 1 : 0.5)};
+  font-weight: 700;
   ${({ theme }) =>
     theme === "underline"
       ? css`
@@ -60,4 +65,40 @@ const Layout = styled.input<LayoutProps>`
           border-radius: 0.25rem;
           margin-left: 2px;
         `};
+  ${({ fontColor }) =>
+    fontColor === "red"
+      ? css`
+          color: #e14141;
+        `
+      : fontColor === "cyon"
+      ? css`
+          color: #92e3d5;
+        `
+      : fontColor === "blue"
+      ? css`
+          color: #557ce5;
+        `
+      : fontColor === "green"
+      ? css`
+          color: #73bc6d;
+        `
+      : fontColor === "pink"
+      ? css`
+          color: #e76e9b;
+        `
+      : fontColor === "yellow"
+      ? css`
+          color: #fbcc58;
+        `
+      : fontColor === "orange"
+      ? css`
+          color: #f37e3b;
+        `
+      : fontColor === "purple"
+      ? css`
+          color: #df59ba;
+        `
+      : css`
+          color: black;
+        `}
 `;

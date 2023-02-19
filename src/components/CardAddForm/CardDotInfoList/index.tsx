@@ -1,15 +1,13 @@
 import CardDotInfo from "components/CardDotInfo";
 import Modal from "components/Modal";
 import styled from "styled-components";
-const CardDotInfoList = ({ close, setCardInfo }) => {
+const CardDotInfoList = ({ close, setColor, setCardCompnay }) => {
   // 모달 바깥영역클릭시 닫치게 만들기
   const handleDotInfo = (e) => {
     const color = e.currentTarget.children[0].getAttribute("color");
     const company = e.currentTarget.children[1].textContent;
-    setCardInfo({
-      color,
-      company,
-    });
+    setColor(color);
+    setCardCompnay(company);
     close();
   };
 

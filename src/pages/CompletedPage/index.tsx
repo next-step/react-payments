@@ -16,7 +16,7 @@ const CompletedPage = () => {
       <CardWrapper>{/* <Card theme="primary" size="big" /> */}</CardWrapper>
 
       <InputWrapper>
-        <Input type="text" placeholder="카드의 별칭을 입력해주세요." theme="underline" />
+        <Input type="text" placeholder="카드의 별칭을 입력해주세요." theme="underline" active={true} />
       </InputWrapper>
 
       <ButtonWrapper>

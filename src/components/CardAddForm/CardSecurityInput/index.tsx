@@ -5,7 +5,7 @@ import Input from "../../Input/Item";
 import { useRef } from "react";
 import { checkCardSecurityInput } from "utils";
 
-const CardSecurityInput = () => {
+const CardSecurityInput = ({ fontColor }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInput = () => {
@@ -21,7 +21,7 @@ const CardSecurityInput = () => {
         보안코드 (CVC/CVV)
       </Title>
       <InputContainer width={25}>
-        <Input theme="primary" type="text" ref={inputRef} onChange={handleInput} />
+        <Input theme="primary" type="text" ref={inputRef} onChange={handleInput} fontColor={fontColor} active={true} />
       </InputContainer>
     </Layout>
   );

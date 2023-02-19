@@ -1,4 +1,4 @@
-import Form from "components/Form";
+import Form from "components/CardAddForm";
 import Text from "components/Text";
 import styled from "styled-components";
 import IconButton from "../../components/IconButton/index";

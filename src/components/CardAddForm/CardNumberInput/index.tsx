@@ -5,7 +5,7 @@ import { checkCardNumber } from "utils";
 import Input from "../../Input/Item";
 import InputContainer from "components/Input/Container";
 
-const CardNumberInput = ({ setCardNumber }) => {
+const CardNumberInput = ({ setCardNumber, fontColor }) => {
   const ref = useRef<HTMLInputElement>(null);
 
   const handleInput = () => {
@@ -22,7 +22,7 @@ const CardNumberInput = ({ setCardNumber }) => {
         카드 번호
       </Title>
       <InputContainer>
-        <Input ref={ref} type="text" theme="primary" onChange={handleInput}></Input>
+        <Input ref={ref} type="text" theme="primary" onChange={handleInput} fontColor={fontColor} active={true}></Input>
       </InputContainer>
     </Layout>
   );

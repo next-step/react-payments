@@ -6,39 +6,46 @@ import CardSecurityInput from "./CardSecurityInput";
 import CardPasswordInput from "./CardPasswordInput";
 import CardOwnerInput from "./CardOwnerInput/index";
 import CardExpirationDateInput from "./CardExpirationDateInput/index";
-import useFormInput from "hooks/useFormControl";
+import useCardTextControl from "hooks/useCardTextControl";
 import CardDotInfoList from "./CardDotInfoList";
 import Button from "../Button/index";
 
-export const Form = () => {
+export const CardAddForm = () => {
   const {
-    cardNumber,
     setCardNumber,
+    cardNumber,
     expirationDate,
     setExpirationDate,
     ownerName,
     setOwnerName,
-    cardInfo,
-    setCardInfo,
-  } = useFormInput();
+    color,
+    setcolor,
+    cardCompany,
+    setCardCompnay,
+  } = useCardTextControl();
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   return (
     <>
-      {isOpenModal ? <CardDotInfoList close={setIsOpenModal} setCardInfo={setCardInfo} /> : <></>}
+      {isOpenModal ? (
+        <CardDotInfoList close={setIsOpenModal} setColor={setcolor} setCardCompnay={setCardCompnay} />
+      ) : (
+        <></>
+      )}
       <Card
-        info={cardInfo}
+        color={color}
+        company={cardCompany}
         size="small"
         number={cardNumber}
         expirationDate={expirationDate}
         ownerName={ownerName}
         onClick={() => setIsOpenModal(true)}
       />
-      <CardNumberInput setCardNumber={setCardNumber} />
-      <CardExpirationDateInput setExpirationDate={setExpirationDate} />
-      <CardOwnerInput setOwnerName={setOwnerName} />
-      <CardSecurityInput />
-      <CardPasswordInput />
+      <CardNumberInput setCardNumber={setCardNumber} fontColor={color} />
+      <CardExpirationDateInput setExpirationDate={setExpirationDate} fontColor={color} />
+      <CardOwnerInput setOwnerName={setOwnerName} fontColor={color} />
+      <CardSecurityInput fontColor={color} />
+      <CardPasswordInput fontColor={color} />
       <ButtonBox>
         <Button size="s">Next</Button>
       </ButtonBox>
@@ -51,4 +58,4 @@ const ButtonBox = styled.div`
   text-align: right;
 `;
 
-export default Form;
+export default CardAddForm;

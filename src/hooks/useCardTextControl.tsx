@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-type colorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange" | "empty";
+type colorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange" | "";
 type companyType =
   | "하나카드"
   | "국민카드"
@@ -12,22 +12,15 @@ type companyType =
   | "오렌지카드"
   | "";
 
-type cardInfoType = {
-  company: companyType;
-  color: colorType;
-};
-
-export const useFormControl = () => {
+export const useCardTextControl = () => {
   const [cardNumber, setCardNumber] = useState<string>("");
   const [expirationDate, setExpirationDate] = useState({
     month: "MM",
     year: "YY",
   });
+  const [color, setcolor] = useState<colorType>("");
+  const [cardCompany, setCardCompnay] = useState<companyType>("");
   const [ownerName, setOwnerName] = useState<string>("Name");
-  const [cardInfo, setCardInfo] = useState<cardInfoType>({
-    company: "",
-    color: "empty",
-  });
 
   return {
     setCardNumber,
@@ -36,9 +29,11 @@ export const useFormControl = () => {
     setExpirationDate,
     ownerName,
     setOwnerName,
-    cardInfo,
-    setCardInfo,
+    color,
+    setcolor,
+    cardCompany,
+    setCardCompnay,
   };
 };
 
-export default useFormControl;
+export default useCardTextControl;

@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { useRef } from "react";
 import { checkMonth, checkYear } from "../../../utils/index";
 
-const CardExpirationDateInput = ({ setExpirationDate }) => {
+const CardExpirationDateInput = ({ setExpirationDate, fontColor }) => {
   const inputMonthRef = useRef<HTMLInputElement>(null);
   const inputYearRef = useRef<HTMLInputElement>(null);
 
@@ -36,8 +36,24 @@ const CardExpirationDateInput = ({ setExpirationDate }) => {
         만료일
       </Title>
       <InputContainer width={50}>
-        <Input type="text" placeholder="MM" theme="primary" onChange={handleMonthInput} ref={inputMonthRef}></Input>
-        <Input type="text" placeholder="YY" theme="primary" onChange={handleYearInput} ref={inputYearRef}></Input>
+        <Input
+          type="text"
+          placeholder="MM"
+          theme="primary"
+          onChange={handleMonthInput}
+          ref={inputMonthRef}
+          fontColor={fontColor}
+          active={true}
+        ></Input>
+        <Input
+          type="text"
+          placeholder="YY"
+          theme="primary"
+          onChange={handleYearInput}
+          ref={inputYearRef}
+          fontColor={fontColor}
+          active={true}
+        ></Input>
       </InputContainer>
     </Layout>
   );

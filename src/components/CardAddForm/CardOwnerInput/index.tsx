@@ -4,7 +4,7 @@ import Input from "../../Input/Item";
 import { useRef, useState } from "react";
 import { checkOwnerName } from "utils";
 
-const CardOwnerInput = ({ setOwnerName }) => {
+const CardOwnerInput = ({ setOwnerName, fontColor }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [length, setLength] = useState(0);
 
@@ -33,6 +33,8 @@ const CardOwnerInput = ({ setOwnerName }) => {
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         ref={inputRef}
         onChange={handleInput}
+        fontColor={fontColor}
+        active={true}
       />
     </Layout>
   );

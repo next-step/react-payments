@@ -5,7 +5,7 @@ import InputContainer from "components/Input/Container";
 import { useRef } from "react";
 import { checkPassword } from "utils";
 
-const CardPasswordInput = () => {
+const CardPasswordInput = ({ fontColor }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const inputRef2 = useRef<HTMLInputElement>(null);
 
@@ -28,10 +28,24 @@ const CardPasswordInput = () => {
         카드 비밀번호
       </Title>
       <InputContainer width={70}>
-        <Input theme="primary" type="text" ref={inputRef} onChange={handleInputOne} />
-        <Input theme="primary" type="text" ref={inputRef2} onChange={handleInputTwo} />
-        <Input theme="primary" type="text" active={true} />
-        <Input theme="primary" type="text" active={true} />
+        <Input
+          theme="primary"
+          type="text"
+          active={true}
+          ref={inputRef}
+          onChange={handleInputOne}
+          fontColor={fontColor}
+        />
+        <Input
+          theme="primary"
+          type="text"
+          active={true}
+          ref={inputRef2}
+          onChange={handleInputTwo}
+          fontColor={fontColor}
+        />
+        <Input theme="primary" type="text" active={false} />
+        <Input theme="primary" type="text" active={false} />
       </InputContainer>
     </Layout>
   );
