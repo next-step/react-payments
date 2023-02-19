@@ -26,10 +26,10 @@ const CardForm = ({
   const {
     number = "",
     name = "",
-    cvc,
-    expiry,
-    password1,
-    password2,
+    cvc = "",
+    expiry = "",
+    password1 = "",
+    password2 = "",
   } = newCardInfo;
 
   const [showModal, setShowModal] = useState<boolean>(false);

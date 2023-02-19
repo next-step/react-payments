@@ -16,16 +16,7 @@ const defaultCardInfo = {
   backgroundColor: "#94dacd",
 };
 
-const defaultNewCardInfo = {
-  title: "",
-  number: "",
-  expiry: "",
-  year: "",
-  nickname: "",
-  cvc: "",
-  password1: "",
-  password2: "",
-};
+const defaultNewCardInfo = {};
 
 export const usePayments = () => {
   const [step, setStep] = useState<number>(0);
