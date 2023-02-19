@@ -35,7 +35,7 @@ const Completed = ({
           <InputContainer
             inputList={[
               {
-                value: newCardInfo.nickname,
+                value: newCardInfo.nickname || "",
                 id: "nickname",
                 type: "text",
                 placeholder: "카드의 별칭을 입력해주세요.",
@@ -43,7 +43,7 @@ const Completed = ({
             ]}
             className={{
               inputContainerClassName: "flex-center w-100",
-              inputClassName: "input-underline w-75",
+              inputClassName: "input-underline",
             }}
             onChange={handleCardInputChange}
           />
