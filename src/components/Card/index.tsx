@@ -54,8 +54,8 @@ Card.defaultProps = {
   cardInfo: {
     title: '',
     bgColor: '',
-    customerName: '',
-    expirationDate: '',
+    customerName: 'NAME',
+    expirationDate: 'MM/YY',
     creditNumber: '',
   },
   alias: '',

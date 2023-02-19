@@ -116,3 +116,39 @@ header {
   margin-top: 0.25rem;
   color: #575757;
 }
+
+/* Input */
+
+input {
+  border: none;
+  background-color: #ecebf1;
+  color: #04c09e;
+  padding: 1rem 0.75rem;
+  border-radius: 0.43rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.input-container {
+  margin-top: 1.19rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.75rem;
+  color: #525252;
+  font-weight: 500;
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+}
+
+.input-container.md {
+  width: 8.5rem;
+}
+
+.input-container.sm {
+  width: 5.25rem;
+}
+
+.input-label {
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+}
