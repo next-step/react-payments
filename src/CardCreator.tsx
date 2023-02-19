@@ -8,18 +8,19 @@ import Card from './Card';
 import { padNumber } from './utils/utils';
 import { cardNumbersInit, expireDatesInit, passwordsInit } from './CardCreatorInits';
 import { CardNumberInput } from './CardNumberInput';
+import useExtendedState from './hooks/useExtendedState';
 
 function CardCreator() {
-  const cardNumbersStateBundle = useState(cardNumbersInit);
+  const cardNumbersStateBundle = useExtendedState(cardNumbersInit);
   const [cardNumbers] = cardNumbersStateBundle;
 
-  const [expireDates, setExpireDates] = useState(expireDatesInit);
+  const [expireDates, setExpireDates] = useExtendedState(expireDatesInit);
 
   const [ownerName, setOwnerName] = useState<string>();
 
   const [securityCode, setSecurityCode] = useState<number>();
 
-  const [passwords, setPasswords] = useState(passwordsInit);
+  const [passwords, setPasswords] = useExtendedState(passwordsInit);
   const passwordInputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
   // 클린코드를 위한 의견!
@@ -69,7 +70,7 @@ function CardCreator() {
                       value={padNumber(2, value) || ''}
                       placeholder={placeholder}
                       onChange={(e) => {
-                        let inputVal = filterNumber(e.currentTarget.value);
+                        let inputVal = Number(filterNumber(e.currentTarget.value));
                         // TODO: 클린코드 필요.
                         if (inputVal > 12 && key === 'card-expired-month') {
                           inputVal %= 10;
@@ -79,19 +80,20 @@ function CardCreator() {
                           inputVal %= 100;
                         }
 
-                        setExpireDates((prevExpireDates) => {
-                          // TODO: 특정 객체의 값으로 state 갱신 막는 추상화 가능.
-                          const prevValue = prevExpireDates[i].value;
-                          if (prevValue === inputVal) {
-                            return prevExpireDates;
+                        setExpireDates(
+                          (prevExpireDates) =>
+                            updateArray(
+                              prevExpireDates,
+                              i,
+                              updateObject(prevExpireDates[i], 'value', inputVal || undefined)
+                            ),
+                          {
+                            stateRefreshValidator: (prevExpireDates) => {
+                              const prevValue = prevExpireDates[i].value;
+                              return prevValue !== inputVal;
+                            },
                           }
-
-                          return updateArray(
-                            prevExpireDates,
-                            i,
-                            updateObject(prevExpireDates[i], 'value', inputVal || undefined)
-                          );
-                        });
+                        );
                       }}
                     />
                     {isNotLast && isValueValid && <div className="text-black">/</div>}
@@ -174,14 +176,16 @@ function CardCreator() {
                         return;
                       }
 
-                      setPasswords((prevPasswords) => {
-                        const prevVal = prevPasswords[i].value;
-                        if (inputVal === prevVal) {
-                          return prevPasswords;
+                      setPasswords(
+                        (prevPasswords) =>
+                          updateArray(prevPasswords, i, updateObject(prevPasswords[i], 'value', inputVal)),
+                        {
+                          stateRefreshValidator: (prevPasswords) => {
+                            const prevVal = prevPasswords[i].value;
+                            return inputVal !== prevVal;
+                          },
                         }
-
-                        return updateArray(prevPasswords, i, updateObject(prevPasswords[i], 'value', inputVal));
-                      });
+                      );
                     }}
                   />
                 );

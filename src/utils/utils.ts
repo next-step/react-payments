@@ -19,7 +19,7 @@ export function padNumber(amountOfNumber: number, number?: number) {
 }
 
 export function filterNumber(inputString: string) {
-  return Number(inputString.replace(/\D/g, ''));
+  return inputString.replace(/\D/g, '');
 }
 
 export function updateObject<T extends { [key: string]: any }, K extends keyof T>(object: T, key: K, newValue: T[K]) {

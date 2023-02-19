@@ -5,7 +5,7 @@ import { padNumber } from './utils/utils';
 interface CardProps {
   cardNumbers: {
     isHide: boolean;
-    value?: number;
+    value?: string;
   }[];
   ownerName?: string;
   expireDates: (number | undefined)[];
@@ -13,7 +13,6 @@ interface CardProps {
 
 // TODO: 보여지는 큰 카드는 스토리북 컴포넌트로 분리 가능.
 function Card({ cardNumbers, expireDates, ownerName }: CardProps) {
-  console.log(cardNumbers);
   return (
     <div className="empty-card">
       <div className="card-top" />

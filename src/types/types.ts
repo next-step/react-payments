@@ -1,14 +1,14 @@
 import type { InputHTMLAttributes } from 'react';
 
-type InputStateType = {
+type InputStateType<T> = {
   type?: InputHTMLAttributes<HTMLInputElement>['type'];
   key: string;
-  value?: number;
+  value?: T;
   placeholder?: string;
 };
 
-export type CardNumbersState = Omit<InputStateType, 'placeholder'>[];
+export type CardNumbersState = Omit<InputStateType<string>, 'placeholder'>[];
 
-export type ExpireDatesState = Omit<InputStateType, 'type'>[];
+export type ExpireDatesState = Omit<InputStateType<number>, 'type'>[];
 
-export type PasswordsState = Omit<InputStateType, 'type' | 'placeholder'>[];
+export type PasswordsState = Omit<InputStateType<number>, 'type' | 'placeholder'>[];

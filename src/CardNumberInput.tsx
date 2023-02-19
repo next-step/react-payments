@@ -2,9 +2,12 @@ import React, { useRef } from 'react';
 
 import type { CardNumbersState } from '@/types/types';
 import { filterNumber, updateArray, updateObject } from '@/utils/utils';
+import useExtendedState from './hooks/useExtendedState';
 
 interface CardNumberInputProps {
-  cardNumbersStateBundle: [CardNumbersState, React.Dispatch<React.SetStateAction<CardNumbersState>>];
+  // prettier-ignore
+// eslint-disable-next-line
+  cardNumbersStateBundle: ReturnType<typeof useExtendedState<CardNumbersState>>;
 }
 
 function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
@@ -17,7 +20,7 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
       <div className="input-box">
         {cardNumbers.map(({ key, type, value }, i) => {
           const isNotLast = i < cardNumbers.length - 1;
-          const isOverThousand = value && value > 1000;
+          const isOverThousand = value && value.length > 4;
           const dashComponentClassName = isOverThousand && isNotLast ? 'dash' : 'dash hide';
 
           if (isNotLast && isOverThousand) {
@@ -37,15 +40,14 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
                   cardNumberInputsRef.current[i] = inputRef;
                 }}
                 onChange={(e) => {
-                  const numberValue = filterNumber(e.currentTarget.value);
-                  const fourString = Math.floor(numberValue / 1000);
+                  const numberString = filterNumber(e.currentTarget.value);
+                  const fourString = numberString.substring(0, 4);
                   setCardNumbers((prev) => {
-                    const inputNumber = fourString || undefined;
-                    if (prev[i].value === inputNumber) {
-                      return prev;
+                    return updateArray(prev, i, updateObject(prev[i], 'value', fourString));
+                  }, {
+                    stateRefreshValidator: (prev) => {
+                      return prev[i].value !== fourString
                     }
-
-                    return updateArray(prev, i, updateObject(prev[i], 'value', inputNumber));
                   });
                 }}
               />
