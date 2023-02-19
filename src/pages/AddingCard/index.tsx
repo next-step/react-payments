@@ -7,6 +7,7 @@ import {
 
 import { useCardNumber, useExpiredDate, useCardOwner } from './hooks';
 import { CardCompany } from 'types/card';
+import SecretCodeContainer from 'components/domain/SecretCodeContainer';
 
 function AddingCard() {
   const { cardNumber, handleChangeCardNumber } = useCardNumber();
@@ -32,10 +33,7 @@ function AddingCard() {
         handleChangeExpiredDate={handleChangeExpiredDate}
       />
       <CardOwnerContainer cardOwner={cardOwner} handleChangeCardOwner={handleChangeCardOwner} />
-      <div className="input-container">
-        <span className="input-title">보안코드(CVC/CVV)</span>
-        <input className="input-basic w-25" type="password" />
-      </div>
+      <SecretCodeContainer />
       <div className="input-container">
         <span className="input-title">카드 비밀번호</span>
         <input className="input-basic w-15" type="password" />
