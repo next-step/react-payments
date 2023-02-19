@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CardInput } from "../components/common/Card/card.type";
 import { cardInfo } from "../constants/Payments";
 import { CardListType } from "../types/payments";
-import { formatNumber, isNumber } from "../utils";
+import { formatNumber, isNumber, monthConverter } from "../utils";
 
 const defaultCardInfo = {
   title: "클린카드",
@@ -50,11 +50,14 @@ export const usePayments = () => {
     id: string,
     maxLength: number
   ): string => {
-    if (input.length < maxLength) {
+    if (input && input.length < maxLength) {
       switch (id) {
         case cardInfo.NUMBER:
           return formatNumber(input, 5);
         case cardInfo.EXPIRY:
+          if (input.length === 2) {
+            return formatNumber(monthConverter(input), 3, "/");
+          }
           return formatNumber(input, 3, "/");
       }
     }

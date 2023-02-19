@@ -27,3 +27,12 @@ export const formatNumber = (
 
   return input;
 };
+
+export const monthConverter = (input: string) => {
+  if (parseInt(input) < 1) {
+    return "1";
+  } else if (parseInt(input) > 12) {
+    return "12";
+  }
+  return input;
+};
