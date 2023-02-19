@@ -12,13 +12,13 @@ export default function RegisterComplete() {
   const cardNumber = searchParams.get('card');
   const cardList = useMemo(() => cardRepository.getItem(), []);
   const cardData = useMemo(() => cardList.find((item) => item.cardNumber === cardNumber), []);
-  const nickName = useInput('');
+  const nickname = useInput('');
 
   const endRegisterCard = () => {
-    if (nickName.value.length) {
+    if (nickname.value.length) {
       const updateCardData = cardList.map((item) => ({
         ...item,
-        nickName: item.cardNumber === cardNumber ? nickName.value : item.nickName,
+        nickname: item.cardNumber === cardNumber ? nickname.value : item.nickname,
       }));
 
       cardRepository.setItem(updateCardData);
@@ -34,7 +34,7 @@ export default function RegisterComplete() {
       <Input
         className="input-underline"
         placeholder="카드의 별칭을 입력해주세요."
-        {...nickName}
+        {...nickname}
       />
 
       <Button className="mt-50" onClick={endRegisterCard}>다음</Button>
