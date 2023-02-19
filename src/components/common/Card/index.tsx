@@ -1,5 +1,7 @@
+import { displayNumber } from "../../../utils";
 import "./card.css";
 import { CardInput } from "./card.type";
+
 interface CardProps {
   input?: CardInput;
   isBigCard?: boolean;
@@ -36,7 +38,11 @@ const Card = ({
             </div>
             <div className="card-bottom">
               <div className="card-bottom__number">
-                <span className="card-text">{input?.number}</span>
+                <span className="card-text">
+                  {input?.number
+                    ? displayNumber({ input: input.number, startPoint: 2 })
+                    : input?.number}
+                </span>
               </div>
               <div className="card-bottom__info">
                 <span className="card-text">{input?.name || "NAME"}</span>

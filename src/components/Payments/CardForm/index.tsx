@@ -1,5 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { characterCount } from "../../../utils";
+import { characterCount, displayNumber } from "../../../utils";
 import Button from "../../common/Button";
 import Card from "../../common/Card";
 import { CardInput } from "../../common/Card/card.type";
@@ -23,7 +23,14 @@ const CardForm = ({
   handleCardTypeClick,
   handleCardAddClick,
 }: CardFormProps) => {
-  const { number, name = "", cvc, expiry, password1, password2 } = newCardInfo;
+  const {
+    number = "",
+    name = "",
+    cvc,
+    expiry,
+    password1,
+    password2,
+  } = newCardInfo;
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -47,7 +54,13 @@ const CardForm = ({
           <InputContainer
             hasInputBox
             title="카드 번호"
-            inputList={[{ value: number, type: "text", id: "number" }]}
+            inputList={[
+              {
+                value: displayNumber({ input: number, startPoint: 2 }),
+                type: "text",
+                id: "number",
+              },
+            ]}
             onChange={handleCardInputChange}
             maxLength={19}
           />
