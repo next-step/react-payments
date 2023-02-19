@@ -3,8 +3,9 @@ import { ChangeEvent, useRef, useState } from "react";
 const MAX_CARD_NUMBER_LENGTH = 4;
 
 const CardNumbersInput = () => {
+  // 이부분하고 
   const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
-  const [error, setError] = useState("");
+  
   const nextElement = useRef<HTMLInputElement[]>([]);
 
   const autoFocus = (updatedCardNumbers: string[], index: number) => {
@@ -17,17 +18,18 @@ const CardNumbersInput = () => {
 
   const setCardNumberByIndex =
     (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
-      console.log("cardNumbers", cardNumbers);
       const updatedCardNumbers = [...cardNumbers];
       const { value } = e.target as HTMLInputElement;
 
       if (Number.isNaN(+value)) {
-        setError("카드번호는 숫자만 입력해주세요!");
+        alert("카드번호는 숫자만 입력해주세요!");
         return;
       }
 
       updatedCardNumbers[index] = value;
       autoFocus(updatedCardNumbers, index);
+
+      // 이부분만
       setCardNumbers(updatedCardNumbers);
     };
 

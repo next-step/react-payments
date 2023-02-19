@@ -4,7 +4,6 @@ const MAX_PASSWORD_LENGTH = 1;
 
 const CardPasswordInput = () => {
   const [password, setPassword] = useState(["", ""]);
-  const [error, setError] = useState("");
   const nextElement = useRef<HTMLInputElement>(null);
 
   const setPasswordByInput = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
@@ -12,7 +11,7 @@ const CardPasswordInput = () => {
     const { value } = e.target;
 
     if (Number.isNaN(+value)) {
-      setError("숫자만 입력해주세요.");
+      alert("숫자만 입력해주세요.");
       return;
     }
 

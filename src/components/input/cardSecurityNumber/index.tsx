@@ -4,12 +4,11 @@ const MAX_CVC_LENGTH = 3;
 
 const CardCVCInput = () => {
   const [cvc, setCvc] = useState("");
-  const [error, setError] = useState("");
 
   const handleCvcInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
     if (Number.isNaN(+value)) {
-      setError("보안코드는 숫자만 입력해주세요!");
+      alert("보안코드는 숫자만 입력해주세요!");
       return;
     }
     setCvc(value);

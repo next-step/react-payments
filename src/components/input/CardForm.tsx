@@ -1,8 +1,8 @@
-import CardExpirationDateInput from "./cardExpireDate/input";
-import CardNumbersInput from "./cardNumbers/input";
-import CardOwnerInput from "./cardOwner/input";
-import CardPasswordInput from "./cardPassword/input";
-import CardCVCInput from "./cardSecurityNumber/input";
+import CardExpirationDateInput from "./cardExpireDate";
+import CardNumbersInput from "./cardNumbers";
+import CardOwnerInput from "./cardOwner";
+import CardPasswordInput from "./cardPassword";
+import CardCVCInput from "./cardSecurityNumber";
 
 const CardForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
