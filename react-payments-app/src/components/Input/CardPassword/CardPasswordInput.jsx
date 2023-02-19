@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { MAX_INPUT_LENGTH } from '../../../common/constant';
 
-const CardPasswordInput = ({ onChange, handleSubmit }) => {
+const CardPasswordInput = ({ onChange }) => {
   const [password, setPassword] = useState(['', '']);
   const [error, setError] = useState('');
   const nextElement = useRef(null);
@@ -27,10 +27,6 @@ const CardPasswordInput = ({ onChange, handleSubmit }) => {
 
   useEffect(() => {
     onChange(password, error);
-    if (password[1]) {
-      console.log(password[1]);
-      handleSubmit(event);
-    }
   }, [password, error]);
 
   return (

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import Button from '../Button/Button';
 import CardNumbersInput from './CardNumbers/CardNumbersInput';
 import CardExpirationDateInput from './CardExpirationDate/CardExpirationDateInput';
 import CardOwnerInput from './CardOwner/CardOwnerInput';
@@ -49,15 +50,13 @@ const CardForm = ({ onSubmit }) => {
   return (
     <>
       <div id='card-form' className='w-100'>
-        <form onSubmit={handleSubmit}>
+        <form>
           <CardNumbersInput onChange={handleCardNumbersChange} />
           <CardExpirationDateInput onChange={handleExpirationDateChange} />
           <CardOwnerInput onChange={handleCardOwnerChange} />
           <CardCVCInput onChange={handleCVCChange} />
-          <CardPasswordInput
-            onChange={handlePasswordChange}
-            handleSubmit={handleSubmit}
-          />
+          <CardPasswordInput onChange={handlePasswordChange} />
+          <Button title='다음' type='submit' onClick={handleSubmit} />
         </form>
         <div id='card-form-label' style={{ color: 'red' }}>
           {error}

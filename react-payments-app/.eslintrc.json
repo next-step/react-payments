@@ -19,6 +19,7 @@
     "react/prop-types": "off",
     "max-depth": 2,
     // "max-lines": ["error", 15],
-    "no-var": "error"
+    "no-var": "error",
+    "no-unused-vars": "off"
   }
 }
