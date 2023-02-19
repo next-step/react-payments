@@ -1,9 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import Header from '../../components/Header/Header';
 import Card from '../../components/Card/Card';
 import CardShapedButton from '../../components/Card/CardShapedButton/CardShapedButton';
 
 const CardListPage = () => {
+  const navigate = useNavigate();
+
   return (
     <div className='app flex-column-center'>
       <Header pageTitle={'보유카드'} headerIcon={''} />
@@ -14,7 +18,10 @@ const CardListPage = () => {
         cardName={'현정카드'}
         cardNumbers={'1234-5678-****-****'}
       />
-      <CardShapedButton />
+      <CardShapedButton
+        // TODO: add style (cursor pointer)
+        onClick={() => navigate('/registration')}
+      />
     </div>
   );
 };

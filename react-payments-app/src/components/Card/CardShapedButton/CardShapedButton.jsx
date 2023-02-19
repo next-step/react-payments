@@ -1,8 +1,8 @@
 import '../card.css';
 
-const CardShapedButton = () => {
+const CardShapedButton = ({ onClick }) => {
   return (
-    <div className='card-box'>
+    <div role='button' onClick={onClick} className='card-box'>
       <div className='empty-card'>+</div>
     </div>
   );
