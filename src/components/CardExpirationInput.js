@@ -21,7 +21,6 @@ export default function CardExpirationInput() {
               placeholder={index == 0 ? "MM" : "YY"}
               key={number}
               onKeyDown={onChange}
-              onChange={onChange}
               defaultValue={number}
               maxLength={CARD_EXPIRATION.MAX_LENGTH}
             ></input>
