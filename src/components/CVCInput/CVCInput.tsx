@@ -5,7 +5,7 @@ type TCVCInputProps = {
   onCvcChange?: (cvc: string) => void;
 };
 
-function CVCInput({ onCvcChange }: TCVCInputProps) {
+function CvcInput({ onCvcChange }: TCVCInputProps) {
   const [cvc, setCvc] = useState<string>('');
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,4 +30,4 @@ function CVCInput({ onCvcChange }: TCVCInputProps) {
   );
 }
 
-export default CVCInput;
+export default CvcInput;

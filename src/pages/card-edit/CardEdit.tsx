@@ -4,6 +4,7 @@ import { CardNumberInput } from '../../components/CardNumberInput';
 import { CvcInput } from '../../components/CvcInput';
 import { ExpiredInput } from '../../components/ExpiredInput';
 import { Frame } from '../../components/Frame';
+import { Link } from '../../components/Link';
 import { OwnerInput } from '../../components/OwnerInput';
 import { PasswordInput } from '../../components/PasswordInput';
 
@@ -41,7 +42,9 @@ function CardList() {
       <CvcInput onCvcChange={handleCvcChange} />
       <PasswordInput />
       <div className="button-box">
-        <div className="button-text">다음</div>
+        <div className="button-text">
+          <Link to="/card-detail">다음</Link>
+        </div>
       </div>
     </Frame>
   );
