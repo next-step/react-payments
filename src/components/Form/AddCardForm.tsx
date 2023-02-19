@@ -7,6 +7,7 @@ import OwnerField from '../Field/OwnerField';
 import { CardInformation } from '@/types';
 import { Button } from '../Common';
 import { checkRequiredValues } from '@/utils';
+import { LIMIT_INPUT_LENGTH } from '@/constants';
 
 type Props = {
   cardInformation: CardInformation;
@@ -29,12 +30,23 @@ function AddCardForm({ cardInformation, onChange, onSubmit }: Props) {
 
   return (
     <form onSubmit={onSubmit}>
-      <CardNumberField title="카드 번호" value={cardNumber} onChange={onChange} />
-      <ExpirationField title="만료일" maxLength={2} value={expirationDate} onChange={onChange} />
+      <CardNumberField
+        title="카드 번호"
+        value={cardNumber}
+        onChange={onChange}
+        minLength={LIMIT_INPUT_LENGTH.CARD_NUMBER.MIN}
+        maxLength={LIMIT_INPUT_LENGTH.CARD_NUMBER.MAX}
+      />
+      <ExpirationField
+        title="만료일"
+        maxLength={LIMIT_INPUT_LENGTH.EXPIRATION}
+        value={expirationDate}
+        onChange={onChange}
+      />
       <OwnerField
         title="카드 소유자 이름(선택)"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요"
-        maxLength={30}
+        maxLength={LIMIT_INPUT_LENGTH.OWNER_NAME}
         name="cardOwner"
         value={cardOwner}
         onChange={onChange}

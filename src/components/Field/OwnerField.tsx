@@ -2,7 +2,6 @@ import { ChangeEvent } from 'react';
 import FieldContainer from './FieldContainer';
 import { Input } from '../Common';
 import { Width } from '../Common/Input';
-import { MAX_INPUT_LENGTH } from '@/constants';
 
 function OwnerField({
   title,
@@ -22,7 +21,7 @@ function OwnerField({
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }) {
   return (
-    <FieldContainer title={title} textLength={`${value?.length}/${MAX_INPUT_LENGTH.OWNER_NAME}`}>
+    <FieldContainer title={title} textLength={`${value?.length}/${maxLength}`}>
       <Input
         name={name}
         placeholder={placeholder}

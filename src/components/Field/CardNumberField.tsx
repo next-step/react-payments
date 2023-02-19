@@ -14,9 +14,13 @@ function CardNumberField({
   title,
   value,
   onChange,
+  minLength = 0,
+  maxLength = 4,
 }: {
   title: string;
   value: CardNumber;
+  minLength: number;
+  maxLength: number;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }) {
   const { cardNumber1, cardNumber2, cardNumber3, cardNumber4 } = value;
@@ -25,8 +29,8 @@ function CardNumberField({
       <div className="input-box flex-center">
         <Input
           type="text"
-          minLength={0}
-          maxLength={4}
+          minLength={minLength}
+          maxLength={maxLength}
           pattern="[0-9]*"
           value={cardNumber1}
           name="cardNumber1"
