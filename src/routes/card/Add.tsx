@@ -8,6 +8,7 @@ import Button from "../../components/Form/Button";
 import React, { useContext, useMemo, useState } from "react";
 import { ModalContext } from "../../components/Layout";
 import { BANKS, DEFAULT_BANK_COLOR } from "../../constants/bank";
+import { useHistory } from "react-router-dom";
 
 const INPUT_NAMES = [
   "card-0",
@@ -34,6 +35,8 @@ function Add() {
   const { toggleModal } = useContext(ModalContext);
   const isTyping = !!cardNumber || !!expireMonth || !!expireYear || !!userName;
   const { bankId } = useContext(ModalContext);
+  const history = useHistory();
+
   const color = useMemo(() => {
     if (bankId) {
       const selectedBank = BANKS.find((bank) => bank.ID === bankId);
@@ -48,8 +51,6 @@ function Add() {
       return selectedBank ? selectedBank.NAME : "";
     }
   }, [bankId]);
-
-  // rops.color ? "#94dacd" : "#e5e5e5"
 
   const onCardNumberChange = (cardNumbers: number[]) => {
     const hasCardNumber = cardNumbers.some((cardNumber) => cardNumber);
@@ -93,6 +94,10 @@ function Add() {
     });
 
     if (!isInvalid) {
+      if (bankId) {
+        history.push("/complete");
+        return;
+      }
       toggleModal();
     }
   };

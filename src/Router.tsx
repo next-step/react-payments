@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import List from "./routes/card/List";
 import Layout from "./components/Layout";
 import Add from "./routes/card/Add";
+import Complete from "./routes/card/Complete";
 
 function Router() {
   return (
@@ -11,6 +12,9 @@ function Router() {
           <Layout>
             <Add></Add>
           </Layout>
+        </Route>
+        <Route path="/complete">
+          <Complete></Complete>
         </Route>
         <Route path="/list">
           <List></List>

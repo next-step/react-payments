@@ -1,5 +1,5 @@
 function CardList() {
-  return <div>목록페이지</div>;
+  return <div>완료페이지</div>;
 }
 
 export default CardList;

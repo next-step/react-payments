@@ -1,7 +1,13 @@
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 function Header() {
-  return <H2>&lt; 카드 추가</H2>;
+  const history = useHistory();
+
+  const onClick = () => {
+    history.push("/list");
+  };
+  return <H2 onClick={onClick}>&lt; 카드 추가</H2>;
 }
 
 const H2 = styled.h2`
