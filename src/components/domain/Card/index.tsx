@@ -1,3 +1,5 @@
+import { css, cx } from '@emotion/css';
+
 import { Dash, Masking } from 'components/common';
 
 import { MAX_LENGTH } from 'constants/card';
@@ -34,7 +36,19 @@ function Card({ company, name, cardNumber, expiredDate }: CardProps) {
             <Masking count={num4.length} />
           </div>
           <div className="card-bottom__info">
-            <span className="card-text">{name}</span>
+            <span
+              className={cx(
+                'card-text',
+                css`
+                  max-width: 100px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                `
+              )}
+            >
+              {name}
+            </span>
             <span className="card-text">
               {month} / {year}
             </span>

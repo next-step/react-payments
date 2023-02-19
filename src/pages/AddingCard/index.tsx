@@ -1,11 +1,17 @@
-import { Card, CardNumberContainer, ExpiredDateContainer } from 'components/domain';
+import {
+  Card,
+  CardNumberContainer,
+  ExpiredDateContainer,
+  CardOwnerContainer,
+} from 'components/domain';
 
-import { useCardNumber, useExpiredDate } from './hooks';
+import { useCardNumber, useExpiredDate, useCardOwner } from './hooks';
 import { CardCompany } from 'types/card';
 
 function AddingCard() {
   const { cardNumber, handleChangeCardNumber } = useCardNumber();
   const { expiredDate, handleChangeExpiredDate } = useExpiredDate();
+  const { cardOwner, handleChangeCardOwner } = useCardOwner();
 
   return (
     <div className="app">
@@ -13,7 +19,7 @@ function AddingCard() {
       <span className="input-title">카드사 선택</span>
       <Card
         cardNumber={cardNumber}
-        name="YOUNG"
+        name={cardOwner}
         company={CardCompany.Hana}
         expiredDate={expiredDate}
       />
@@ -25,14 +31,7 @@ function AddingCard() {
         expiredDate={expiredDate}
         handleChangeExpiredDate={handleChangeExpiredDate}
       />
-      <div className="input-container">
-        <span className="input-title">카드 소유자 이름(선택)</span>
-        <input
-          type="text"
-          className="input-basic"
-          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        />
-      </div>
+      <CardOwnerContainer cardOwner={cardOwner} handleChangeCardOwner={handleChangeCardOwner} />
       <div className="input-container">
         <span className="input-title">보안코드(CVC/CVV)</span>
         <input className="input-basic w-25" type="password" />
