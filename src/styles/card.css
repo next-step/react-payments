@@ -139,3 +139,7 @@
   background-color: white !important;
   color: #06C09E;
 }
+
+.hide-under-line {
+  text-decoration: none
+}

@@ -20,7 +20,7 @@ const CardForm = () => {
         <CardCVCInput />
         <CardPasswordInput />
       </form>
-      <NextButton path={"/card-add"} />
+      <NextButton path={"/complete-add-card"} />
     </div>
   );
 };

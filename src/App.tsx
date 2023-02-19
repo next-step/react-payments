@@ -10,10 +10,10 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<CardListPage />} />
-      <Route path="/1" element={<AddCardPage />} />
+      <Route path="/regist-card" element={<AddCardPage />} />
       <Route path="/card-add" element={<AfterCardPage />} />
       <Route path="/3" element={<AddCardModal />} />
-      <Route path="/5" element={<ComplateCard />} />
+      <Route path="/complete-add-card" element={<ComplateCard />} />
     </Routes>
   );
 }

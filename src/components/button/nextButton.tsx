@@ -7,7 +7,7 @@ type NextButtonProps = {
 const NextButton = ({ path }: NextButtonProps) => {
   return (
     <div className="button-box">
-      <Link to={path}>
+      <Link to={path} className="hide-under-line">
         <span className="button-text">다음</span>
       </Link>
     </div>
