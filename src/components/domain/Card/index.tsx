@@ -1,5 +1,4 @@
-import Dash from 'components/Dash';
-import Masking from 'components/Masking';
+import { Dash, Masking } from 'components/common';
 
 import { MAX_LENGTH } from 'constants/card';
 import type { CardCompany, ExpiredDate, CardNumber } from 'types/card';

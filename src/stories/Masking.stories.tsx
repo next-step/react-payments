@@ -1,7 +1,7 @@
 import { Story } from '@storybook/react';
 
-import { Masking } from 'components';
-import type { MaskingProps } from 'components/Masking';
+import { Masking } from 'components/common';
+import type { MaskingProps } from 'components/common/Masking';
 
 export default {
   title: 'Masking',

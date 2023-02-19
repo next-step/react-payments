@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { Input, Dash } from 'components';
+import { Input, Dash } from 'components/common';
 
 import { useInputFocusing } from 'hooks';
 

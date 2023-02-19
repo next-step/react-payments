@@ -1,7 +1,12 @@
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from 'react-router-dom';
 
-import { Layout } from 'components';
 import { AddingCard, HoldingCards } from 'pages';
+import { Layout } from 'components/common';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

@@ -1,7 +1,8 @@
 import { useRef } from 'react';
 import { css } from '@emotion/css';
 
-import Input from 'components/Input';
+import { Input } from 'components/common';
+
 import { useInputFocusing } from 'hooks';
 
 import { MAX_LENGTH } from 'constants/card';

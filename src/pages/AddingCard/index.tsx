@@ -1,4 +1,4 @@
-import { Card, CardNumberContainer, ExpiredDateContainer } from 'components';
+import { Card, CardNumberContainer, ExpiredDateContainer } from 'components/domain';
 
 import { useCardNumber, useExpiredDate } from './hooks';
 import { CardCompany } from 'types/card';

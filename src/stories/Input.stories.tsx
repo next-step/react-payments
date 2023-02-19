@@ -1,7 +1,8 @@
-import { Story } from '@storybook/react';
-import { Input } from 'components';
-import { InputProps } from 'components/Input';
 import { useRef } from 'react';
+import { Story } from '@storybook/react';
+
+import { Input } from 'components/common';
+import type { InputProps } from 'components/common/Input';
 
 export default {
   title: 'Input',
