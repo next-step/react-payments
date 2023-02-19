@@ -10,7 +10,11 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ icon, onClickIcon, title }) => {
   return (
     <header className='header'>
-      {icon && <span className={`icon ${icon}`} onClick={onClickIcon}></span>}
+      {icon && (
+        <button type='button' className='icon' onClick={onClickIcon}>
+          {icon}
+        </button>
+      )}
       <span className='title'>{title}</span>
     </header>
   )
