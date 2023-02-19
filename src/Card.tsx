@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { padNumber } from './utils/utils';
+
 interface CardProps {
   cardNumbers: {
     isHide: boolean;
@@ -34,13 +36,9 @@ function Card({ cardNumbers, expireDates, ownerName }: CardProps) {
         <div className="card-bottom__info">
           <span className="card-text card-name-spacing">{ownerName || 'NAME'}</span>
           <span className="card-text">
-            <span className="card-text card-expire-date">
-              {expireDates[0] && expireDates[0] < 10 ? `0${expireDates[0]}` : expireDates[0]}
-            </span>
+            <span className="card-text card-expire-date">{padNumber(2, expireDates[0])}</span>
             <span className="card-text mx-5">/</span>
-            <span className="card-text card-expire-date">
-              {expireDates[1] && expireDates[1] < 10 ? `0${expireDates[1]}` : expireDates[1]}
-            </span>
+            <span className="card-text card-expire-date">{padNumber(2, expireDates[1])}</span>
           </span>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { routes } from './router';
 import Card from './Card';
+import { padNumber } from './utils/utils';
 
 const cardNumbersInit: {
   type?: InputHTMLAttributes<HTMLInputElement>['type'];
@@ -169,7 +170,7 @@ function CardCreator() {
                       key={key}
                       className="input-basic"
                       type="text"
-                      value={value && value < 10 ? `0${value}` : value || ''}
+                      value={padNumber(2, value) || ''}
                       placeholder={placeholder}
                       onChange={(e) => {
                         const inputValue = e.currentTarget.value;
