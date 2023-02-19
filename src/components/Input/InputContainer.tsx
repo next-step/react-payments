@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import InputLabel from "./InputLabel";
 
-function InputContainer({ children, label }: ComponentProps) {
+function InputContainer({ children, label, rightLabel }: ComponentProps) {
   return (
     <StyledContainer>
-      <InputLabel>{label}</InputLabel>
+      <InputLabel rightLabel={rightLabel}>{label}</InputLabel>
       {children}
     </StyledContainer>
   );
@@ -13,6 +13,7 @@ function InputContainer({ children, label }: ComponentProps) {
 type ComponentProps = {
   children: JSX.Element | JSX.Element[];
   label: string;
+  rightLabel?: string;
 };
 
 const StyledContainer = styled.div`

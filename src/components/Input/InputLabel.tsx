@@ -1,11 +1,17 @@
 import styled from "styled-components";
 
-function InputLabel({ children }: ComponentProps) {
-  return <Label>{children}</Label>;
+function InputLabel({ children, rightLabel }: ComponentProps) {
+  return (
+    <Label>
+      {children}
+      {rightLabel ? <RightLabel>{rightLabel}</RightLabel> : null}
+    </Label>
+  );
 }
 
 type ComponentProps = {
   children: string;
+  rightLabel?: string;
 };
 
 const Label = styled.span`
@@ -15,6 +21,10 @@ const Label = styled.span`
   line-height: 14px;
   margin-bottom: 4px;
   color: #525252;
+`;
+
+const RightLabel = styled.div`
+  margin-left: auto;
 `;
 
 export default InputLabel;
