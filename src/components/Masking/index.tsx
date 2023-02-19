@@ -9,9 +9,14 @@ export interface MaskingProps {
   color?: CSSProperties['color'];
 }
 
-function Masking({ count, width = 4, height = 4, gap = 4, color = '#000' }: MaskingProps) {
+function Masking({ count, width = 4, height = 4, gap = 2, color = '#000' }: MaskingProps) {
   return (
-    <div>
+    <div
+      className={css`
+        display: flex;
+        align-items: center;
+      `}
+    >
       {Array.from({ length: count }).map((_, index) => (
         <span
           key={index}

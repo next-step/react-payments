@@ -14,5 +14,5 @@ export default {
 };
 
 export const Template: Story<MaskingProps> = (args) => <Masking {...args} />;
-Template.args = { count: 4, width: 4, height: 4, color: '#000' };
+Template.args = { count: 4, width: 4, height: 4, gap: 2, color: '#000' };
 Template.storyName = 'Playground';
