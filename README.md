@@ -2,6 +2,9 @@
 
 > `Component-Driven Development` 에 따라 UI를 구성하고 재사용 가능한 `Component`를 작성합니다.
 
+- 테스트 페이지: https://react-payments-ochre.vercel.app/add
+- Storybook: https://www.chromatic.com/build?appId=63f1c8d0f1f8848cfd488732
+
 ## 필수 요구사항
 
 - [x] Storybook 상호 작용 테스트
