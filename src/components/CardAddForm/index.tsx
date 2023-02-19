@@ -4,7 +4,7 @@ import { useState } from "react";
 import CardNumberInput from "./CardNumberInput";
 import CardSecurityInput from "./CardSecurityInput";
 import CardPasswordInput from "./CardPasswordInput";
-import CardOwnerInput from "./CardOwnerInput/index";
+import CardOwnerNameInput from "./CardOwnerNameInput/index";
 import CardExpirationDateInput from "./CardExpirationDateInput/index";
 import useCardTextControl from "hooks/useCardTextControl";
 import CardDotInfoList from "./CardDotInfoList";
@@ -43,7 +43,7 @@ export const CardAddForm = () => {
       />
       <CardNumberInput setCardNumber={setCardNumber} fontColor={color} />
       <CardExpirationDateInput setExpirationDate={setExpirationDate} fontColor={color} />
-      <CardOwnerInput setOwnerName={setOwnerName} fontColor={color} />
+      <CardOwnerNameInput setOwnerName={setOwnerName} fontColor={color} />
       <CardSecurityInput fontColor={color} />
       <CardPasswordInput fontColor={color} />
       <ButtonBox>

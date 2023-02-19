@@ -12,8 +12,12 @@ const CardExpirationDateInput = ({ setExpirationDate, fontColor }) => {
   const handleMonthInput = () => {
     const ref = inputMonthRef.current;
     if (ref === null) return;
-    const month = checkMonth(ref.value);
+    let month = checkMonth(ref.value);
     ref.value = checkMonth(month);
+
+    if (!month.length) {
+      month = "MM";
+    }
     setExpirationDate((prev) => ({
       ...prev,
       month,
@@ -22,8 +26,11 @@ const CardExpirationDateInput = ({ setExpirationDate, fontColor }) => {
   const handleYearInput = () => {
     const ref = inputYearRef.current;
     if (ref === null) return;
-    const year = checkYear(ref.value);
+    let year = checkYear(ref.value);
     ref.value = year;
+    if (!year.length) {
+      year = "YY";
+    }
     setExpirationDate((prev) => ({
       ...prev,
       year,
