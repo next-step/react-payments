@@ -5,7 +5,6 @@ import Input from '.';
 export default {
   title: 'Input',
   component: Input,
-  argTypes: { backButtonPress: { action: 'clicked' } },
 } as ComponentMeta<typeof Input>;
 
 const Template: ComponentStory<typeof Input> = args => <Input {...args} />;

@@ -152,3 +152,16 @@ input {
   margin-bottom: 0.5rem;
   white-space: nowrap;
 }
+
+/* Text Button */
+.text-button {
+  border: none;
+  background-color: transparent;
+  color: #04c09e;
+  font-size: 0.875rem;
+  font-weight: 700;
+  position: absolute;
+  bottom: 1rem;
+  right: 1.57rem;
+  cursor: pointer;
+}

@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import Card from 'src/components/Card';
 import Header from 'src/components/Header';
 import Input from 'src/components/Input';
+import TextButton from 'src/components/TextButton';
 
 const New = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const New = () => {
       <Input label="만료일" widthSize="md" />
       <Input label="카드 소유자 이름(선택)" textAlign="left" />
       <Input label="보안 코드(CVC/CVV)" widthSize="sm" />
+      <TextButton text="다음" onClick={() => console.log('hi')} />
     </main>
   );
 };
