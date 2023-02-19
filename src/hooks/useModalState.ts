@@ -2,13 +2,13 @@ import { useState } from "react";
 
 function useModalState() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [cardId, setCardId] = useState("");
+  const [bankId, setBankId] = useState("");
 
   const toggleModal = () => {
     setIsModalOpen((isOpen) => !isOpen);
   };
 
-  return { toggleModal, isModalOpen, cardId, setCardId };
+  return { toggleModal, isModalOpen, bankId, setBankId };
 }
 
 export default useModalState;

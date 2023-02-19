@@ -7,12 +7,11 @@ function Card({
   expireMonth,
   expireYear,
   size = "small",
+  color,
 }: CardProps) {
-  const isTyping = !!cardNumber || !!expireMonth || !!expireYear || !!userName;
-
   return (
     <CardContainer>
-      <CardBox size={size} isTyping={isTyping}>
+      <CardBox size={size} color={color}>
         <CardTop>
           <CardText>{bankName}</CardText>
         </CardTop>
@@ -45,11 +44,12 @@ type CardProps = {
   expireMonth: number;
   expireYear: number;
   size?: "big" | "small";
+  color?: string;
 };
 
 type CardBoxProps = {
   size?: "big" | "small";
-  isTyping?: boolean;
+  color?: string;
 };
 
 const CardContainer = styled.div`
@@ -66,9 +66,9 @@ const CardBox = styled.div<CardBoxProps>`
   justify-content: center;
   width: ${(props) => (props.size === "big" ? "290px" : "208px")};
   height: ${(props) => (props.size === "big" ? "180px" : "130px")};
-  background: ${(props) => (props.isTyping ? "#94dacd" : "#e5e5e5")};
+  background: ${(props) => (props.color !== "" ? props.color : "#e5e5e5")};
   box-shadow: 3px 3px 5px rgb(0 0 0 / 25%);
-  color: ${(props) => (props.isTyping ? "black" : "#575757")};
+  color: ${(props) => (props.color ? "black" : "#575757")};
   border-radius: 5px;
 `;
 

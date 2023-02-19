@@ -5,8 +5,9 @@ import UserName from "../../components/Form/UserName";
 import Code from "../../components/Form/Code";
 import Password from "../../components/Form/Password";
 import Button from "../../components/Form/Button";
-import React, { useContext, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { ModalContext } from "../../components/Layout";
+import { BANKS, DEFAULT_BANK_COLOR } from "../../constants/bank";
 
 const INPUT_NAMES = [
   "card-0",
@@ -31,6 +32,24 @@ function Add() {
   const [code, setCode] = useState(0);
   const [password, setPassword] = useState("");
   const { toggleModal } = useContext(ModalContext);
+  const isTyping = !!cardNumber || !!expireMonth || !!expireYear || !!userName;
+  const { bankId } = useContext(ModalContext);
+  const color = useMemo(() => {
+    if (bankId) {
+      const selectedBank = BANKS.find((bank) => bank.ID === bankId);
+      return selectedBank ? selectedBank.COLOR : "";
+    } else {
+      return isTyping ? DEFAULT_BANK_COLOR : "";
+    }
+  }, [bankId, isTyping]);
+  const bankName = useMemo(() => {
+    if (bankId) {
+      const selectedBank = BANKS.find((bank) => bank.ID === bankId);
+      return selectedBank ? selectedBank.NAME : "";
+    }
+  }, [bankId]);
+
+  // rops.color ? "#94dacd" : "#e5e5e5"
 
   const onCardNumberChange = (cardNumbers: number[]) => {
     const hasCardNumber = cardNumbers.some((cardNumber) => cardNumber);
@@ -85,6 +104,8 @@ function Add() {
         expireMonth={expireMonth}
         expireYear={expireYear}
         userName={userName}
+        color={color}
+        bankName={bankName}
       ></Card>
       <form onSubmit={submitHandler}>
         <CardNumber onCardNumberChange={onCardNumberChange}></CardNumber>

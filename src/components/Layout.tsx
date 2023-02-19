@@ -7,23 +7,23 @@ import Modal from "./Modal";
 type ContextProps = {
   isModalOpen: boolean;
   toggleModal: () => void;
-  cardId: String;
-  setCardId: Dispatch<SetStateAction<string>>;
+  bankId: String;
+  setBankId: Dispatch<SetStateAction<string>>;
 };
 
 export const ModalContext = createContext<ContextProps>({
   isModalOpen: false,
   toggleModal: () => {},
-  cardId: "",
-  setCardId: () => {},
+  bankId: "",
+  setBankId: () => {},
 });
 
 function Layout({ children }: ComponentProps) {
-  const { toggleModal, isModalOpen, cardId, setCardId } = useModalState();
+  const { toggleModal, isModalOpen, bankId, setBankId } = useModalState();
 
   return (
     <ModalContext.Provider
-      value={{ isModalOpen, toggleModal, cardId, setCardId }}
+      value={{ isModalOpen, toggleModal, bankId, setBankId }}
     >
       <Root>
         <Wrapper>
