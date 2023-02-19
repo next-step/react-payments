@@ -3,6 +3,7 @@ import { CardDispatch } from '../context/cardDispatch';
 import Input from './common/Input';
 import { handleDigit, handleExpire, handlePassword } from '../utils/form';
 import styled from '@emotion/styled';
+import InputCvc from './form/InputCvc';
 
 const S = {
   Hyphen: styled.span`
@@ -116,19 +117,10 @@ const CardRegisterForm = () => {
         />
       </div>
 
-      <div className="input-container">
-        <span className="input-title">보안코드(CVC/CVV)</span>
-
-        <Input
-          id={'cvc'}
-          name={'cvc'}
-          onChange={(e: React.ChangeEvent) => onChangePassword(e)}
-          type={'password'}
-          className={'w-25'}
-          maxLength={3}
-          value={state.cvc}
-        />
-      </div>
+      <InputCvc
+        onChange={(e: React.ChangeEvent) => onChangePassword(e)}
+        value={state.cvc}
+      />
 
       <div className="input-container">
         <span className="input-title">카드 비밀번호</span>
