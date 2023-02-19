@@ -13,7 +13,8 @@ export default function CardExpirationInputBox({ cardExpiration, onChange }: Car
   const { month, year } = cardExpiration;
 
   return (
-    <Box title="만료일" className="input-container">
+    <Box className="input-container">
+      <span className="input-title">만료일</span>
       <Input
         className="input-basic w-25"
         name="month"

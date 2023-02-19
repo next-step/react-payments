@@ -1,36 +1,35 @@
 module.exports = {
+  root: true,
+
   env: {
+    es6: true,
+    node: true,
     browser: true,
-    es2021: true,
+    jest: true,
   },
-  extends: ['airbnb', 'plugin:react/recommended', 'plugin:react/jsx-runtime', 'plugin:prettier/recommended'],
+
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 12,
-    sourceType: 'module',
+    ecmaFeatures: { jsx: true },
+    jsx: true,
+    useJSXTextNode: true,
   },
-  plugins: ['react', '@typescript-eslint'],
-  settings: {
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
-    },
-  },
+
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'eslint-config-prettier',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+  ],
+  plugins: ['@typescript-eslint', 'import', 'prettier', 'react', 'react-hooks'],
+  settings: { react: { version: 'detect' } },
+
   rules: {
-    indent: 0,
+    indent: ['error', 2],
     curly: 'error',
-    '@typescript-eslint/indent': ['error', 2],
-    'react/require-default-props': 'off',
-    'react/button-has-type': 'off',
-    'max-depth': ['error', 1],
-    'no-restricted-exports': 'off',
     'no-trailing-spaces': 'error',
     'brace-style': 'error',
-    'react/jsx-props-no-spreading': 'off',
     'no-multi-spaces': 'error',
     'space-infix-ops': 'error',
     'space-unary-ops': 'error',
@@ -47,28 +46,5 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'key-spacing': ['error', { mode: 'strict' }],
     'arrow-spacing': ['error', { before: true, after: true }],
-    'react/jsx-one-expression-per-line': 'off',
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: ['**/*.test.js', '**/*.test.jsx', '**/*.test.ts', '**/*.test.tsx'],
-      },
-    ],
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      {
-        js: 'never',
-        jsx: 'never',
-        ts: 'never',
-        tsx: 'never',
-      },
-    ],
-    'react/jsx-filename-extension': [
-      2,
-      {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
-    ],
   },
 };

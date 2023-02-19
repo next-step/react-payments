@@ -48,6 +48,10 @@
   padding: 0px;
 }
 
+.input-fixed[disabled] {
+  background-color: #e0e0e0;
+}
+
 .input-underline {
   text-align: center;
   border: none;
@@ -58,4 +62,10 @@
   padding: 4px 0;
 
   border-bottom: 1px solid #383838;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

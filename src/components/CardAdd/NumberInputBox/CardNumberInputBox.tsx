@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useRef } from 'react';
+import { ChangeEvent, useRef } from 'react';
 
 import { Box, Input } from '@/components/Common';
 import { CardNumber } from '@/types/card';
@@ -21,21 +21,22 @@ export default function CardNumberInputBox({ cardNumber, onChange }: CardNumberI
   useInputFocus({ cardNumber, num1Ref, num2Ref, num3Ref, num4Ref });
 
   return (
-    <Box title="카드 번호" className="input-container">
+    <Box className="input-container">
+      <span className="input-title">카드 번호</span>
       <Input
-        type="text"
+        type="number"
         name="num1"
         ref={num1Ref}
-        maxLength={CARD_NUMBER.MAX_LENGTH}
+        maxLength={CARD_NUMBER.LENGTH}
         value={num1}
         onChange={onChange}
         className="input-basic w-25"
       />
       <Input
-        type="text"
+        type="number"
         name="num2"
         ref={num2Ref}
-        maxLength={CARD_NUMBER.MAX_LENGTH}
+        maxLength={CARD_NUMBER.LENGTH}
         value={num2}
         onChange={onChange}
         className="input-basic w-25"
@@ -44,7 +45,7 @@ export default function CardNumberInputBox({ cardNumber, onChange }: CardNumberI
         type="password"
         name="num3"
         ref={num3Ref}
-        maxLength={CARD_NUMBER.MAX_LENGTH}
+        maxLength={CARD_NUMBER.LENGTH}
         value={num3}
         onChange={onChange}
         className="input-basic w-25"
@@ -53,7 +54,7 @@ export default function CardNumberInputBox({ cardNumber, onChange }: CardNumberI
         type="password"
         name="num4"
         ref={num4Ref}
-        maxLength={CARD_NUMBER.MAX_LENGTH}
+        maxLength={CARD_NUMBER.LENGTH}
         value={num4}
         onChange={onChange}
         className="input-basic w-25"

@@ -1,26 +1,23 @@
+import { ChangeEvent } from 'react';
+
 import { Box, Input } from '@/components/Common';
 import { CARD_SECRET_CODE } from '@/constants/card';
-import { isNumber } from '@/utils';
-import { useState, ChangeEvent } from 'react';
+import { CardSecretCode } from '@/types/card';
 
-export default function CardSecretCodeInputBox() {
-  const [secretCode, setSecretCode] = useState('');
+type CardSecretCodeInputBoxProps = {
+  cardSecretCode: CardSecretCode;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
 
-  const handleChangeSecretCode = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-
-    if (!isNumber(value) && value !== '') return;
-
-    setSecretCode(e.target.value);
-  };
-
+export default function CardSecretCodeInputBox({ cardSecretCode, onChange }: CardSecretCodeInputBoxProps) {
   return (
-    <Box title="보안코드(CVC/CVV)" className="input-container">
+    <Box className="input-container">
+      <span className="input-title">보안코드(CVC/CVV)</span>
       <Input
         className="input-basic w-25"
-        maxLength={CARD_SECRET_CODE.MAX_LENGTH}
-        value={secretCode}
-        onChange={handleChangeSecretCode}
+        maxLength={CARD_SECRET_CODE.LENGTH}
+        value={cardSecretCode}
+        onChange={onChange}
         type="password"
       />
     </Box>

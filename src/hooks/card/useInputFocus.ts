@@ -16,17 +16,17 @@ export default function useInputFocus({ cardNumber, num1Ref, num2Ref, num3Ref, n
 
   useEffect(() => {
     num1Ref.current?.focus();
-  }, []);
+  }, [num1Ref]);
 
   useEffect(() => {
-    num1.length === CARD_NUMBER.MAX_LENGTH && num2Ref.current?.focus();
-  }, [num1]);
+    num1.length === CARD_NUMBER.LENGTH && num2Ref.current?.focus();
+  }, [num1, num2Ref]);
 
   useEffect(() => {
-    num2.length === CARD_NUMBER.MAX_LENGTH && num3Ref.current?.focus();
-  }, [num2]);
+    num2.length === CARD_NUMBER.LENGTH && num3Ref.current?.focus();
+  }, [num2, num3Ref]);
 
   useEffect(() => {
-    num3.length === CARD_NUMBER.MAX_LENGTH && num4Ref.current?.focus();
-  }, [num3]);
+    num3.length === CARD_NUMBER.LENGTH && num4Ref.current?.focus();
+  }, [num3, num4Ref]);
 }

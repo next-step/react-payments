@@ -11,3 +11,15 @@ export type CardExpiration = {
 };
 
 export type CardOwnerName = string;
+
+export type CardSecretCode = string;
+
+export type CardPassword = {
+  num1: string;
+  num2: string;
+};
+
+export type SelectedCard = {
+  name: string;
+  color: string;
+};

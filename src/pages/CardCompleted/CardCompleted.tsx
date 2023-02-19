@@ -11,7 +11,7 @@ export default function CardCompleted() {
               <span className="card-text__big">클린카드</span>
             </div>
             <div className="card-middle">
-              <div className="big-card__chip"></div>
+              <div className="big-card__chip" />
             </div>
             <div className="card-bottom">
               <div className="card-bottom__number">

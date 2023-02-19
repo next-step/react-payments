@@ -1,21 +1,28 @@
+import { useMemo } from 'react';
 import { CARD_EXPIRATION, CARD_OWNER_NAME } from '@/constants/card';
 import { isShowHyphen, maskingNumber } from '@/domain/card';
-import { CardExpiration, CardNumber, CardOwnerName } from '@/types/card';
+import { CardExpiration, CardNumber, CardOwnerName, SelectedCard } from '@/types/card';
 
 type CardBoxProps = {
   cardNumber: CardNumber;
   cardExpiration: CardExpiration;
   cardOwnerName: CardOwnerName;
+  selectedCard: SelectedCard;
 };
 
-export default function CardBox({ cardNumber, cardExpiration, cardOwnerName }: CardBoxProps) {
+export default function CardBox({ cardNumber, cardExpiration, cardOwnerName, selectedCard }: CardBoxProps) {
   const { num1, num2, num3, num4 } = cardNumber;
   const { month, year } = cardExpiration;
+  const { name, color } = selectedCard;
+
+  const cardStyle = useMemo(() => {
+    return { backgroundColor: color };
+  }, [color]);
 
   return (
     <div className="card-box">
-      <div className="empty-card">
-        <div className="card-top" />
+      <div className="empty-card" style={cardStyle}>
+        <div className="card-top">{name} 카드</div>
         <div className="card-middle">
           <div className="small-card__chip" />
         </div>

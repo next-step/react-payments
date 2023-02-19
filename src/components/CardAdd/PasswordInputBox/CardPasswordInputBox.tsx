@@ -1,42 +1,34 @@
+import { ChangeEvent } from 'react';
+
 import { Box, Input } from '@/components/Common';
 import { CARD_PASSWORD } from '@/constants/card';
-import { isNumber } from '@/utils';
-import { ChangeEvent, useState } from 'react';
+import { CardPassword } from '@/types/card';
 
-export default function CardPasswordInputBox() {
-  const [password, setPassword] = useState({
-    password1: '',
-    password2: '',
-  });
-  const { password1, password2 } = password;
+type CardPasswordInputBoxProps = {
+  cardPassword: CardPassword;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
 
-  const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    if (!isNumber(value) && value !== '') return;
-
-    setPassword((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+export default function CardPasswordInputBox({ cardPassword, onChange }: CardPasswordInputBoxProps) {
+  const { num1, num2 } = cardPassword;
 
   return (
-    <Box title="카드 비밀번호" className="input-container">
+    <Box className="input-container">
+      <span className="input-title">카드 비밀번호</span>
       <Input
         className="input-basic w-15"
-        maxLength={CARD_PASSWORD.MAX_LENGTH}
-        name="password1"
-        value={password1}
-        onChange={handleChangePassword}
+        maxLength={CARD_PASSWORD.LENGTH}
+        name="num1"
+        value={num1}
+        onChange={onChange}
         type="password"
       />
       <Input
         className="input-basic w-15"
-        maxLength={CARD_PASSWORD.MAX_LENGTH}
-        name="password2"
-        value={password2}
-        onChange={handleChangePassword}
+        maxLength={CARD_PASSWORD.LENGTH}
+        name="num2"
+        value={num2}
+        onChange={onChange}
         type="password"
       />
 

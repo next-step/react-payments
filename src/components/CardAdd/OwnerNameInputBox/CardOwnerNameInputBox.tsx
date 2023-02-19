@@ -10,14 +10,18 @@ type CardOwnerNameInputBoxProps = {
 };
 
 export default function CardOwnerNameInputBox({ cardOwnerName, onChange }: CardOwnerNameInputBoxProps) {
-  const subTitle = `${cardOwnerName.length}/${CARD_OWNER_NAME.MAX_LENGTH}`;
+  const subTitle = `${cardOwnerName.length}/${CARD_OWNER_NAME.LENGTH}`;
 
   return (
-    <Box title="카드 소유자 이름(선택)" subTitle={subTitle} className="input-container">
+    <Box className="input-container">
+      <Box className="flex-between">
+        <span className="input-title">카드 소유자 이름(선택)</span>
+        <span className="input-title">{subTitle}</span>
+      </Box>
       <Input
         type="text"
         className="input-basic"
-        maxLength={CARD_OWNER_NAME.MAX_LENGTH}
+        maxLength={CARD_OWNER_NAME.LENGTH}
         value={cardOwnerName}
         onChange={onChange}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
