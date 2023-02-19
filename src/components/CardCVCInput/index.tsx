@@ -2,7 +2,7 @@ import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
 import { useBlur } from '@/hooks/useBlur';
-import { useKeyInterceptor } from '@/hooks/useKeyInterceptor';
+import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
 import { CardObj } from '@/types';
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 const CardCVCInput = (props: Props) => {
   const [cvc, setCVC] = useState('');
   const { dirtyState, toggleDirtyState } = useBlur();
-  const keyPressInterceptor = useKeyInterceptor();
+  const keyPressInterceptor = useNumberKeyInterceptor();
 
   const isCVCValid = useMemo(
     () => Boolean(cvc.length === CVC_MIN_LENGTH),

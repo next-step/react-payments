@@ -2,7 +2,7 @@ import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
 import { useBlur } from '@/hooks/useBlur';
-import { useKeyInterceptor } from '@/hooks/useKeyInterceptor';
+import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
 import { CardObj } from '@/types';
 
 const initialState = {
@@ -19,7 +19,7 @@ type Props = {
 const CardNumberInput = (props: Props) => {
   const [cardNumbers, setCardNumbers] = useState(initialState);
   const { dirtyState, toggleDirtyState } = useBlur();
-  const keyPressInterceptor = useKeyInterceptor();
+  const keyPressInterceptor = useNumberKeyInterceptor();
 
   const isValidCardNumberLength =
     Object.values(cardNumbers).join('').length === 16;

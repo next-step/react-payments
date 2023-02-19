@@ -55,11 +55,6 @@ const Card = styled('div', {
         height: '190px',
       },
     },
-    move: {
-      left: {
-        left: '60px',
-      },
-    },
   },
 });
 

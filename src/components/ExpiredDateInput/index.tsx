@@ -2,7 +2,7 @@ import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
 import { useBlur } from '@/hooks/useBlur';
-import { useKeyInterceptor } from '@/hooks/useKeyInterceptor';
+import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
 import { CardObj } from '@/types';
 
 const initialState = {
@@ -17,7 +17,7 @@ type Props = {
 const ExpiredDateInput = (props: Props) => {
   const [expiredDate, setExpiredDate] = useState(initialState);
   const { dirtyState, toggleDirtyState } = useBlur();
-  const numberKeyPressInterceptor = useKeyInterceptor();
+  const numberKeyPressInterceptor = useNumberKeyInterceptor();
 
   const isExpiredDateValid = Boolean(
     Number(expiredDate.month) <= MAX_MONTH &&

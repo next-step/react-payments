@@ -2,7 +2,7 @@ import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
 import { useBlur } from '@/hooks/useBlur';
-import { useKeyInterceptor } from '@/hooks/useKeyInterceptor';
+import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
 import { CardObj } from '@/types';
 
 type Props = {
@@ -19,7 +19,7 @@ const initialState = {
 const CardPwdInput = (props: Props) => {
   const [pwd, setPwd] = useState(initialState);
   const { dirtyState, toggleDirtyState } = useBlur();
-  const keyPressInterceptor = useKeyInterceptor();
+  const keyPressInterceptor = useNumberKeyInterceptor();
 
   const isPwdValid = useMemo(
     () => Boolean(Object.values(pwd).join('').length == MIN_PWD_LENGTH),
