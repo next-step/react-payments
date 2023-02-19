@@ -38,6 +38,7 @@ input {
   display: flex;
   gap: 1rem;
   align-items: center;
+  cursor: default;
 
   color: #383838;
 }
