@@ -1,4 +1,5 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
+import { characterCount } from "../../../utils";
 import Button from "../../common/Button";
 import Card from "../../common/Card";
 import { CardInput } from "../../common/Card/card.type";
@@ -67,19 +68,24 @@ const CardForm = ({
             maxLength={5}
           />
 
-          <InputContainer
-            title="카드 소유자 이름(선택)"
-            inputList={[
-              {
-                value: name,
-                type: "text",
-                id: "name",
-                placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
-              },
-            ]}
-            onChange={handleCardInputChange}
-            maxLength={30}
-          />
+          <div className="relative">
+            <InputContainer
+              title="카드 소유자 이름(선택)"
+              inputList={[
+                {
+                  value: name,
+                  type: "text",
+                  id: "name",
+                  placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
+                },
+              ]}
+              onChange={handleCardInputChange}
+              maxLength={30}
+            />
+            <span className="absolute t-0 r-0 input-title">
+              {characterCount(name)}/30
+            </span>
+          </div>
 
           <InputContainer
             title="보안코드(CVC/CVV)"

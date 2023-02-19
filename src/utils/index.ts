@@ -36,3 +36,11 @@ export const monthConverter = (input: string) => {
   }
   return input;
 };
+
+export const characterCount = (text: string): number => {
+  if (!text) {
+    return 0;
+  }
+
+  return text.trim().length;
+};

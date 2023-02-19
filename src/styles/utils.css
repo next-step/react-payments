@@ -66,3 +66,19 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.t-0 {
+  top: 0;
+}
+
+.r-0 {
+  right: 0;
+}
