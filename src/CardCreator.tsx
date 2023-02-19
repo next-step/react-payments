@@ -3,6 +3,7 @@ import { styled } from '@stitches/react';
 import { Link } from 'react-router-dom';
 
 import { routes } from './router';
+import Card from './Card';
 
 const cardNumbersInit: {
   type?: InputHTMLAttributes<HTMLInputElement>['type'];
@@ -74,11 +75,6 @@ function CardCreator() {
   const passwordInputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
   // 클린코드를 위한 의견!
-  // TODO: 보여지는 카드는 통째로 컴포넌트로 분리
-  // TODO: 스타일도 컴포넌트와 함께 두기
-  // TODO: 카드 번호 부분도 하위 컴포넌트로 분리해서 관심사 분리
-  // TODO: 보여지는 큰 카드는 스토리북 컴포넌트로 분리 가능.
-
   // TODO: 카드 번호 input 부분도 component로 빼기
 
   // TODO: 모든 input을 받아 i번의 다음으로 넘기는 부분은 공통 hook으로 묶을 수 있겠다.
@@ -100,42 +96,14 @@ function CardCreator() {
             <Link to={routes.home} className="mr-10">{`<`}</Link> 카드 추가
           </h2>
           <div className="card-box">
-            <div className="empty-card">
-              <div className="card-top" />
-              <div className="card-middle">
-                <div className="small-card__chip" />
-              </div>
-              <div className="card-bottom">
-                <div className="card-bottom__number">
-                  {cardNumbers.map(({ type, key, value }) => {
-                    return (
-                      <span key={`${key}-card-number-wrapper`} className="card-number-wrapper card-number-spacing">
-                        {value &&
-                          String(value)
-                            .split('')
-                            .map((cardNum) => (type === 'password' ? '*' : cardNum))}
-                      </span>
-                    );
-                  })}
-                </div>
-                <div className="card-bottom__info">
-                  <span className="card-text card-name-spacing">{ownerName || 'NAME'}</span>
-                  <span className="card-text">
-                    <span className="card-text card-expire-date">
-                      {expireDates[0].value && expireDates[0].value < 10
-                        ? `0${expireDates[0].value}`
-                        : expireDates[0].value}
-                    </span>
-                    <span className="card-text mx-5">/</span>
-                    <span className="card-text card-expire-date">
-                      {expireDates[1].value && expireDates[1].value < 10
-                        ? `0${expireDates[1].value}`
-                        : expireDates[1].value}
-                    </span>
-                  </span>
-                </div>
-              </div>
-            </div>
+            <Card
+              cardNumbers={cardNumbers.map(({ type, value }) => ({
+                isHide: type === 'password',
+                value,
+              }))}
+              expireDates={expireDates.map(({ value }) => value)}
+              ownerName={ownerName}
+            />
           </div>
           <div className="input-container">
             <span className="input-title">카드 번호</span>
