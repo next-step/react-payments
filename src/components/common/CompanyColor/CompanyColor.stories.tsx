@@ -24,7 +24,11 @@ const PaletteLayout = styled.div`
   box-sizing: border-box;
 `;
 
-export const Template: Story<CompanyColorProps> = (args) => <CompanyColor {...args} />;
+export const Template: Story<CompanyColorProps> = (args) => (
+  <PaletteLayout>
+    <CompanyColor {...args} />
+  </PaletteLayout>
+);
 Template.args = { company: CardCompany.Hana };
 Template.storyName = 'Playground';
 
