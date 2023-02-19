@@ -9,8 +9,11 @@ import CardExpirationDateInput from "./CardExpirationDateInput/index";
 import useCardTextControl from "hooks/useCardTextControl";
 import CardDotInfoList from "./CardDotInfoList";
 import Button from "../Button/index";
+import { useNavigate } from "react-router-dom";
+import { checkCardFormValidation } from "utils";
 
 export const CardAddForm = () => {
+  const navigate = useNavigate();
   const {
     setCardNumber,
     cardNumber,
@@ -20,21 +23,28 @@ export const CardAddForm = () => {
     setOwnerName,
     color,
     setcolor,
-    cardCompany,
-    setCardCompnay,
+    company,
+    setcompany,
+    securityCode,
+    setSecurityCode,
+    password,
+    setPassword,
   } = useCardTextControl();
+
   const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const submit = () => {
+    const isValid = checkCardFormValidation({ cardNumber, expirationDate, ownerName, company });
+    if (!isValid) return;
+    navigate("/complete");
+  };
 
   return (
     <>
-      {isOpenModal ? (
-        <CardDotInfoList close={setIsOpenModal} setColor={setcolor} setCardCompnay={setCardCompnay} />
-      ) : (
-        <></>
-      )}
+      {isOpenModal ? <CardDotInfoList close={setIsOpenModal} setColor={setcolor} setCardCompnay={setcompany} /> : <></>}
       <Card
         color={color}
-        company={cardCompany}
+        company={company}
         size="small"
         number={cardNumber}
         expirationDate={expirationDate}
@@ -44,10 +54,12 @@ export const CardAddForm = () => {
       <CardNumberInput setCardNumber={setCardNumber} fontColor={color} />
       <CardExpirationDateInput setExpirationDate={setExpirationDate} fontColor={color} />
       <CardOwnerNameInput setOwnerName={setOwnerName} fontColor={color} />
-      <CardSecurityInput fontColor={color} />
-      <CardPasswordInput fontColor={color} />
+      <CardSecurityInput fontColor={color} setSecurityCode={setSecurityCode} />
+      <CardPasswordInput fontColor={color} setPassword={setPassword} />
       <ButtonBox>
-        <Button size="s">Next</Button>
+        <Button size="s" onClick={submit}>
+          Next
+        </Button>
       </ButtonBox>
     </>
   );

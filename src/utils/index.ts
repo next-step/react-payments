@@ -55,3 +55,55 @@ export const checkOwnerName = (string: string): string => {
 
   return string;
 };
+
+type cardFormObjType = {
+  cardNumber: string;
+  expirationDate: expirationDateType;
+  ownerName: string;
+  company: companyType;
+};
+
+type expirationDateType = {
+  month: string;
+  year: string;
+};
+type companyType =
+  | "하나카드"
+  | "국민카드"
+  | "신한카드"
+  | "클린카드"
+  | "토스카드"
+  | "네이버카드"
+  | "카카오카드"
+  | "오렌지카드"
+  | "";
+
+export const checkCardFormValidation = (cardFormObj: cardFormObjType): boolean => {
+  const { month, year } = cardFormObj.expirationDate;
+
+  try {
+    if (!isValidexpirationDate(month, year)) throw new Error("카드 번호가 올바른지 확인하세요 ! ");
+    if (!isValidCompany(cardFormObj.company)) throw new Error("카드를 선택해 주세요!");
+    if (!isValidOwnerName(cardFormObj.ownerName)) throw new Error("소유자 이름을 작성해주세요!");
+    if (!isValidCardNumber(cardFormObj.cardNumber)) throw new Error("카드번호가 올바르지 않습니다!");
+  } catch (error) {
+    //나중에 타입 다시처리 스토리북먼저
+    alert(error);
+    return false;
+  }
+
+  return true;
+};
+
+const isValidexpirationDate = (month: string, year: string) => {
+  return month.length === 2 && year.length == 2;
+};
+const isValidCompany = (company: string) => {
+  return company.length;
+};
+const isValidOwnerName = (owenerName: string) => {
+  return owenerName.length;
+};
+const isValidCardNumber = (cardNumber: string) => {
+  return cardNumber.length === 19;
+};

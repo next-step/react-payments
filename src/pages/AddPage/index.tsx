@@ -1,4 +1,4 @@
-import Form from "components/CardAddForm";
+import CardAddForm from "components/CardAddForm";
 import Text from "components/Text";
 import styled from "styled-components";
 import IconButton from "../../components/IconButton/index";
@@ -18,7 +18,7 @@ const AddPage = () => {
             카드추가
           </Text>
         </Header>
-        <Form />
+        <CardAddForm />
       </Layout>
     </>
   );

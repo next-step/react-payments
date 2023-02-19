@@ -5,14 +5,15 @@ import Input from "../../Input/Item";
 import { useRef } from "react";
 import { checkCardSecurityInput } from "utils";
 
-const CardSecurityInput = ({ fontColor }) => {
+const CardSecurityInput = ({ fontColor, setSecurityCode }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleInput = () => {
     const ref = inputRef.current;
     if (ref === null) return;
-    const value = ref.value;
-    ref.value = checkCardSecurityInput(value);
+    const securityCode = ref.value;
+    ref.value = checkCardSecurityInput(securityCode);
+    setSecurityCode(securityCode);
   };
 
   return (

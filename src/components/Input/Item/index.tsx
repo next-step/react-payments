@@ -26,6 +26,7 @@ export const Input = (
       active={active}
       disabled={!active}
       fontColor={fontColor}
+      required
     />
   );
 };

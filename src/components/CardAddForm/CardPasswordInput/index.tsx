@@ -5,21 +5,23 @@ import InputContainer from "components/Input/Container";
 import { useRef } from "react";
 import { checkPassword } from "utils";
 
-const CardPasswordInput = ({ fontColor }) => {
+const CardPasswordInput = ({ fontColor, setPassword }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const inputRef2 = useRef<HTMLInputElement>(null);
 
   const handleInputOne = () => {
     const ref = inputRef.current;
     if (ref === null) return;
-    const value = ref.value;
-    ref.value = checkPassword(value);
+    const password = ref.value;
+    ref.value = checkPassword(password);
+    setPassword(password);
   };
   const handleInputTwo = () => {
     const ref = inputRef2.current;
     if (ref === null) return;
-    const value = ref.value;
-    ref.value = checkPassword(value);
+    const password = ref.value;
+    ref.value = checkPassword(password);
+    setPassword(password);
   };
 
   return (

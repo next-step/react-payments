@@ -19,8 +19,10 @@ export const useCardTextControl = () => {
     year: "YY",
   });
   const [color, setcolor] = useState<colorType>("");
-  const [cardCompany, setCardCompnay] = useState<companyType>("");
+  const [company, setcompany] = useState<companyType>("");
   const [ownerName, setOwnerName] = useState<string>("Name");
+  const [securityCode, setSecurityCode] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   return {
     setCardNumber,
@@ -31,8 +33,12 @@ export const useCardTextControl = () => {
     setOwnerName,
     color,
     setcolor,
-    cardCompany,
-    setCardCompnay,
+    company,
+    setcompany,
+    securityCode,
+    setSecurityCode,
+    password,
+    setPassword,
   };
 };
 

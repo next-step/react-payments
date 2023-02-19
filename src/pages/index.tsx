@@ -1,3 +1,4 @@
+import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyle from "styles/GlobalStyle";
 import AddPage from "./AddPage";
@@ -8,7 +9,11 @@ function App() {
   return (
     <Layout>
       <GlobalStyle />
-      <AddPage />
+      <Routes>
+        <Route element={<AddPage />} path="/"></Route>
+        <Route element={<RegisterPage />} path="/register"></Route>
+        <Route element={<CompletedPage />} path="/complete"></Route>
+      </Routes>
     </Layout>
   );
 }
