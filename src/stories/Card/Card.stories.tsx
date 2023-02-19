@@ -21,7 +21,6 @@ Small.args = {
     title: "title",
     number: "1111",
     name: "name",
-    month: "05",
-    year: "25",
+    expiry: "05/25",
   },
 };

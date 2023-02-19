@@ -6,9 +6,9 @@ import { formatNumber, isNumber } from "../utils";
 
 const defaultCardInfo = {
   title: "클린카드",
-  number: "1111222233334444",
+  number: "1111-2222-3333-4444",
   name: "YUJO",
-  expiry: "1025",
+  expiry: "10/25",
   nickname: "법인카드",
   cvc: "123",
   password1: "1",
@@ -35,8 +35,7 @@ export const usePayments = () => {
   const validateInput = (input: string, id: string): boolean => {
     if (
       id === cardInfo.NUMBER ||
-      id === cardInfo.MONTH ||
-      id === cardInfo.YEAR ||
+      id === cardInfo.EXPIRY ||
       id === cardInfo.CVC ||
       id === cardInfo.PASSWORD1 ||
       id === cardInfo.PASSWORD2
@@ -46,19 +45,27 @@ export const usePayments = () => {
     return true;
   };
 
-  const formatInput = (input: string, id: string): string => {
-    if (id === cardInfo.NUMBER) {
-      return formatNumber(input, 5);
+  const formatInput = (
+    input: string,
+    id: string,
+    maxLength: number
+  ): string => {
+    if (input.length < maxLength) {
+      switch (id) {
+        case cardInfo.NUMBER:
+          return formatNumber(input, 5);
+        case cardInfo.EXPIRY:
+          return formatNumber(input, 3, "/");
+      }
     }
-
     return input;
   };
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let { value, id } = e.target;
+    let { value, id, maxLength } = e.target;
 
     if (validateInput(value, id)) {
-      value = formatInput(value, id);
+      value = formatInput(value, id, maxLength);
 
       let copiedNewCardInfo: CardInput = { ...newCardInfo };
       if (newCardInfo[id as keyof CardInput]) {

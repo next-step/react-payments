@@ -22,7 +22,7 @@ const CardForm = ({
   handleCardTypeClick,
   handleCardAddClick,
 }: CardFormProps) => {
-  const { number, name, cvc, month, year, password1, password2 } = newCardInfo;
+  const { number, name = "", cvc, expiry, password1, password2 } = newCardInfo;
 
   const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -48,6 +48,7 @@ const CardForm = ({
             title="카드 번호"
             inputList={[{ value: number, type: "text", id: "number" }]}
             onChange={handleCardInputChange}
+            maxLength={19}
           />
 
           <InputContainer
@@ -55,20 +56,15 @@ const CardForm = ({
             title="만료일"
             inputList={[
               {
-                value: month,
+                value: expiry,
                 type: "text",
-                id: "month",
-                placeholder: "MM",
-              },
-              {
-                value: year,
-                type: "text",
-                id: "year",
-                placeholder: "YY",
+                id: "expiry",
+                placeholder: "MM / YY",
               },
             ]}
             className={{ inputBoxClassName: "w-50" }}
             onChange={handleCardInputChange}
+            maxLength={5}
           />
 
           <InputContainer
@@ -82,6 +78,7 @@ const CardForm = ({
               },
             ]}
             onChange={handleCardInputChange}
+            maxLength={30}
           />
 
           <InputContainer
@@ -95,6 +92,7 @@ const CardForm = ({
             ]}
             className={{ inputClassName: "w-25" }}
             onChange={handleCardInputChange}
+            maxLength={3}
           />
 
           <InputContainer
@@ -105,6 +103,7 @@ const CardForm = ({
             ]}
             className={{ inputClassName: "w-15 mr-1" }}
             onChange={handleCardInputChange}
+            maxLength={1}
           />
 
           <Button

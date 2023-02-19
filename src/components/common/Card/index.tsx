@@ -41,7 +41,7 @@ const Card = ({
               <div className="card-bottom__info">
                 <span className="card-text">{input?.name || "NAME"}</span>
                 <span className="card-text">
-                  {`${input?.month || "MM"}/${input?.year || "YY"}`}
+                  {`${input?.expiry || "MM / YY"}`}
                 </span>
               </div>
             </div>
