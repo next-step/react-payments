@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function Footer() {
+function Button() {
   return (
     <Box>
       <Text>다음</Text>
@@ -20,4 +20,4 @@ const Text = styled.button`
   font-size: 17px;
 `;
 
-export default Footer;
+export default Button;
