@@ -19,6 +19,8 @@ function CardAdd() {
     expiratedYear: '',
     expiratedMonth: '',
     owner: '',
+    securityCode: '',
+    password: '',
   })
 
   const handleCardNumber = (event: ChangeEvent<HTMLInputElement>) => {
@@ -80,6 +82,19 @@ function CardAdd() {
     setCardInfo((prev) => ({ ...prev, owner: event.target.value }))
   }
 
+  const handleSecurityCode = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!isNumber(event.target.value)) return
+    if (event.target.value.length > 3) {
+      alert('보안코드는 세자리수 입니다.')
+      return
+    }
+    setCardInfo((prev) => ({ ...prev, securityCode: event.target.value }))
+  }
+
+  const handlePassword = (event: ChangeEvent<HTMLInputElement>) => {
+    setCardInfo((prev) => ({ ...prev, password: event.target.value }))
+  }
+
   return (
     <div className="root">
       <div className="app">
@@ -99,8 +114,14 @@ function CardAdd() {
             owner={cardInfo.owner}
             handleChange={handleCardOwner}
           />
-          <CardForm.CardSecurityCode />
-          <CardForm.CardPassword />
+          <CardForm.CardSecurityCode
+            securityCode={cardInfo.securityCode}
+            handleChange={handleSecurityCode}
+          />
+          <CardForm.CardPassword
+            password={cardInfo.password}
+            handleChange={handlePassword}
+          />
         </CardForm>
         <NextButtonBox />
       </div>
