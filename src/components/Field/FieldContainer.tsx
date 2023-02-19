@@ -4,18 +4,18 @@ function FieldContainer({
   title,
   children,
   addOn,
-  subTitle,
+  textLength,
 }: {
   title: string;
   children: ReactNode;
   addOn?: ReactNode;
-  subTitle?: string;
+  textLength?: string;
 }) {
   return (
     <div className="input-container">
       <div className="flex-between">
         <span className="input-title">{title}</span>
-        {subTitle ? <span className="input-title">{subTitle}</span> : null}
+        {textLength ? <span className="input-title">{textLength}</span> : null}
       </div>
       <div className="flex">
         {children}

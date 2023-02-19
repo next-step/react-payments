@@ -3,7 +3,7 @@ import CVCField from '../Field/CVCField';
 import CardNumberField from '../Field/CardNumberField';
 import ExpirationField from '../Field/ExpirationField';
 import PasswordField from '../Field/PasswordField';
-import TextField from '../Field/TextField';
+import OwnerField from '../Field/OwnerField';
 import { CardInformation } from '@/types';
 import { Button } from '../Common';
 import { checkRequiredValues } from '@/utils';
@@ -22,6 +22,7 @@ function AddCardForm({ cardInformation, onChange, onSubmit }: Props) {
     year,
     month,
   };
+  console.log('expirationDate', expirationDate);
 
   const password = { password1, password2 };
   const isValid = checkRequiredValues(cardInformation);
@@ -30,7 +31,7 @@ function AddCardForm({ cardInformation, onChange, onSubmit }: Props) {
     <form onSubmit={onSubmit}>
       <CardNumberField title="카드 번호" value={cardNumber} onChange={onChange} />
       <ExpirationField title="만료일" maxLength={2} value={expirationDate} onChange={onChange} />
-      <TextField
+      <OwnerField
         title="카드 소유자 이름(선택)"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요"
         maxLength={30}

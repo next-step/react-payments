@@ -19,18 +19,27 @@ function ExpirationField({
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }) {
   const { month, year } = value;
+
   return (
     <FieldContainer title={title}>
       <Input
         type={type}
         name="month"
-        maxLength={maxLength}
-        value={month}
         placeholder="MM"
+        maxLength={maxLength}
+        pattern="0[0-9]{1}"
+        value={month}
         onChange={onChange}
-        pattern="[0-9]+"
       />
-      <Input type={type} name="year" maxLength={maxLength} value={year} placeholder="YY" onChange={onChange} />
+      <Input
+        type={type}
+        name="year"
+        placeholder="YY"
+        pattern="^(\d\d)$"
+        maxLength={maxLength}
+        value={year}
+        onChange={onChange}
+      />
     </FieldContainer>
   );
 }

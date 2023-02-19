@@ -21,7 +21,16 @@ function App() {
   const [cardInformation, setCardInformation] = useState<CardInformation>(initCardInformation);
 
   const handleCardInformation = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    const { name, value, validity } = e.target;
+    // const isInvalid = Object.values({ ...validity }).includes(true);
+    // console.log(isInvalid, validity, Object.values(validity), { ...validity }, Object.keys(validity));
+
+    console.log(name, value);
+    console.log(!validity.valid);
+    console.log(validity);
+    if (!validity.valid) return;
+    console.log('hello?');
+
     setCardInformation(prev => ({ ...prev, [name]: value }));
   };
 

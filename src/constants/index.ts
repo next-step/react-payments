@@ -1,3 +1,9 @@
-import {} from './form';
-
-export {};
+const MAX_INPUT_LENGTH = {
+  CVC: 3,
+  CARD_NUMBER: 3,
+  MONTH: 2,
+  YEAR: 2,
+  PASSWORD: 1,
+  OWNER_NAME: 30,
+};
+export { MAX_INPUT_LENGTH };

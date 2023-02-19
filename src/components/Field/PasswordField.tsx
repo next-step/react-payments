@@ -14,6 +14,7 @@ function PasswordField({ title, value, onChange }: Props) {
         className="w-15"
         type="password"
         name="password1"
+        pattern="[0-9]*"
         maxLength={1}
         value={value.password1}
         onChange={onChange}
@@ -22,6 +23,7 @@ function PasswordField({ title, value, onChange }: Props) {
         className="w-15"
         type="password"
         name="password2"
+        pattern="[0-9]*"
         maxLength={1}
         value={value.password2}
         onChange={onChange}

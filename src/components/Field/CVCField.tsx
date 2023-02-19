@@ -24,6 +24,7 @@ function CVCField({
       <Input
         type={type}
         name={name}
+        pattern="[0-9]*"
         value={value}
         placeholder={placeholder}
         maxLength={maxLength}
