@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { Card } from 'models/card.model'
+import { CardType } from 'models/card.model'
 
 const useCards = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<{ code: number; message: string } | null>(null)
-  const [cards, setCards] = useState<Card[]>([])
+  const [cards, setCards] = useState<CardType[]>([])
 
   useEffect(() => {
     setLoading(true)
     setError(null)
     fetch(`http://localhost:3004/cards`)
       .then((res) => res.json())
-      .then((data) => setCards(data))
+      .then((data: CardType[]) => setCards(data))
       .catch((e) =>
         setError({
           code: 500,
@@ -23,7 +23,7 @@ const useCards = () => {
       })
   }, [])
 
-  return [loading, error, cards]
+  return { loading, error, cards }
 }
 
 export default useCards

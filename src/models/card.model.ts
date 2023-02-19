@@ -1,7 +1,7 @@
 import { CARD_COMPNAYS_CODE } from 'constants/card'
 
 export type CardCompanyCodeType = (typeof CARD_COMPNAYS_CODE)[keyof typeof CARD_COMPNAYS_CODE]
-export interface Card {
+export interface CardType {
   id: number
   cardNumber: string
   expireDate: string
