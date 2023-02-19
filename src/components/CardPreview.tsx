@@ -1,24 +1,7 @@
 import React, { useContext } from 'react';
-import styled from '@emotion/styled';
-import { CardDispatch } from '../pages/PaymentCardRegister';
+import { CardDispatch } from '../context/cardDispatch';
 
-const S = {
-  Title: styled.h2`
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 22px;
-    display: flex;
-    align-items: center;
-    color: #383838;
-    cursor: pointer;
-  `,
-};
-
-interface IProps {
-  onClick?: () => void;
-}
-
-const CardPreview = ({ onClick }: IProps) => {
+const CardPreview = () => {
   const { state } = useContext(CardDispatch);
 
   return (

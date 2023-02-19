@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
-import { CardDispatch } from '../pages/PaymentCardRegister';
-import Input from './Input';
+import { CardDispatch } from '../context/cardDispatch';
+import Input from './common/Input';
 import { handleDigit, trimExpireToSlash, trimPassword } from '../utils/form';
 import styled from '@emotion/styled';
 
@@ -116,7 +116,7 @@ const CardRegisterForm = ({ onClick }: IProps) => {
           onChange={(e: React.ChangeEvent) => onChangeInput(e)}
           type={'text'}
           placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
-          maxLength={29}
+          maxLength={30}
           value={state.name}
         />
       </div>

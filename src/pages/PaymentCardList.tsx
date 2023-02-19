@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const PaymentCardList = () => {
   return (
-    <>
+    <div className="app flex-column-center">
       <div className="flex-center">
         <h2 className="page-title mb-10">보유 카드</h2>
       </div>
@@ -32,7 +32,7 @@ const PaymentCardList = () => {
           <div className="empty-card">+</div>
         </div>
       </Link>
-    </>
+    </div>
   );
 };
 

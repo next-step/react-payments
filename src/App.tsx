@@ -3,7 +3,6 @@ import './styles/index.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PaymentCardList from './pages/PaymentCardList';
 import PaymentCardRegister from './pages/PaymentCardRegister';
-import PaymentCardComplete from './pages/PaymentCardComplete';
 import Layout from './components/common/Layout';
 
 function App() {
@@ -11,14 +10,8 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route
-            path={'/'}
-            element={<Layout className={'flex-column-center'} />}
-          >
-            <Route index element={<PaymentCardList />} />
-            <Route path={'/complete'} element={<PaymentCardComplete />} />{' '}
-          </Route>
           <Route path={'/'} element={<Layout />}>
+            <Route index element={<PaymentCardList />} />
             <Route path={'/register'} element={<PaymentCardRegister />} />
           </Route>
         </Routes>

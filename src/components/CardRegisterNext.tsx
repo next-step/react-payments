@@ -1,17 +1,14 @@
 import React from 'react';
 import CardPreview from '../components/CardPreview';
+import Button from '../components/common/Button';
 
-const PaymentCardRegister = () => {
+const PaymentCardRegisterNext = () => {
   return (
-    // 카드 등록
-
-    <>
+    <div className="app flex-column-center">
       <div className="flex-center">
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
-
-      {/*<CardPreview />*/}
-
+      <CardPreview />
       <div className="input-container flex-center w-100">
         <input
           className="input-underline w-75"
@@ -19,11 +16,9 @@ const PaymentCardRegister = () => {
           placeholder="카드의 별칭을 입력해주세요."
         />
       </div>
-      <div className="button-box mt-50">
-        <span className="button-text">다음</span>
-      </div>
-    </>
+      <Button text={'확인'} />
+    </div>
   );
 };
 
-export default PaymentCardRegister;
+export default PaymentCardRegisterNext;
