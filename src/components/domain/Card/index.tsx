@@ -3,10 +3,11 @@ import { css, cx } from '@emotion/css';
 import { Dash, Masking } from 'components/common';
 
 import { MAX_LENGTH } from 'constants/card';
+import { theme } from 'constants/colors';
 import type { CardCompany, ExpiredDate, CardNumber } from 'types/card';
 
 interface CardProps {
-  company: CardCompany;
+  company: CardCompany | null;
   name: string;
   cardNumber: CardNumber;
   expiredDate: ExpiredDate;
@@ -18,9 +19,16 @@ function Card({ company, name, cardNumber, expiredDate }: CardProps) {
 
   return (
     <div className="card-box">
-      <div className="small-card">
+      <div
+        className={cx(
+          'small-card',
+          css`
+            background-color: ${company ? theme[company] : '#d2d2d2'};
+          `
+        )}
+      >
         <div className="card-top">
-          <span className="card-text">{company}</span>
+          <span className="card-text">{company ?? ''}</span>
         </div>
         <div className="card-middle">
           <div className="small-card__chip"></div>

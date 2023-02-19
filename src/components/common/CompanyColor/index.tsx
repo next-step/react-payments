@@ -18,17 +18,16 @@ function CompanyColor({ company, onClick }: CompanyColorProps) {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 47px;
         cursor: pointer;
       `}
     >
       <div
         className={css`
-          width: 37px;
-          height: 37px;
-          border-radius: 50px;
+          margin: 0.5rem 1rem;
+          border-radius: 50%;
+          width: 2.8rem;
+          height: 2.8rem;
           background-color: ${theme[company]};
-          margin: 0 0 10px;
         `}
       ></div>
       <p
@@ -36,6 +35,7 @@ function CompanyColor({ company, onClick }: CompanyColorProps) {
           color: #525252;
           font-size: 12px;
           line-height: 14px;
+          letter-spacing: -0.04rem;
           margin: 0;
           padding: 0;
         `}
