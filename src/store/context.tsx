@@ -5,19 +5,15 @@ type PaymentsContext = {
   nextElement: {
     current: HTMLInputElement[];
   };
-  handleCardNumberInput: (
-    index: number
-  ) => (e: ChangeEvent<HTMLInputElement>) => void;
   expirationDate: string[];
-  handleExpirationDateInput: (
-    index: number
-  ) => (e: ChangeEvent<HTMLInputElement>) => void;
   cardOwnerName: string;
-  handleCardOwnerInput: (e: ChangeEvent<HTMLInputElement>) => void;
   cvc: string;
-  handleCvcInput: (e: ChangeEvent<HTMLInputElement>) => void;
   password: string[];
-  setPasswordByInput: (index: number) => (e: ChangeEvent<HTMLInputElement>) => void;
+  handleCardNumberInput: (index: number) => (e: ChangeEvent<HTMLInputElement>) => void;
+  handleExpirationDateInput: (index: number) => (e: ChangeEvent<HTMLInputElement>) => void;
+  handleCardOwnerInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleCvcInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  handlePasswordByInput: (index: number) => (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare

@@ -47,3 +47,15 @@
 
   border-bottom: 1px solid #383838;
 }
+
+.input-card-name-title-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-elipsis {
+  width: 72px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

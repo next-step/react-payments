@@ -31,7 +31,7 @@ const Card = () => {
             </span>
           </div>
           <div className="card-bottom__info">
-            <span className="card-text">{showCardName(cardOwnerName)}</span>
+            <span className="card-text text-elipsis">{showCardName(cardOwnerName)}</span>
             <span className="card-text">{showCardExpiry(expirationDate)}</span>
           </div>
         </div>

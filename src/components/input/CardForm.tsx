@@ -18,7 +18,7 @@ const CardForm = () => {
     handleExpirationDateInput,
     handleCardOwnerInput,
     handleCvcInput,
-    setPasswordByInput,
+    handlePasswordByInput,
   } = usePayments();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -43,7 +43,7 @@ const CardForm = () => {
           onChange={handleCardOwnerInput}
         />
         <CardCVCInput cvc={cvc} onChange={handleCvcInput} />
-        <CardPasswordInput password={password} onChange={setPasswordByInput} />
+        <CardPasswordInput password={password} onChange={handlePasswordByInput} />
       </form>
       <NextButton path={"/complete-add-card"} />
     </div>

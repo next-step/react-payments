@@ -5,8 +5,12 @@ const CURRENT_YEAR = Number(new Date().getFullYear().toString().slice(-2));
 const MAX_DATE_LENGTH = 2;
 
 export const PaymentsProvider = ({ children }: PropsWithChildren) => {
-  const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
   const nextElement = useRef<HTMLInputElement[]>([]);
+  const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
+  const [expirationDate, setExpirationDate] = useState<string[]>(["", ""]);
+  const [cardOwnerName, setCardOwnerName] = useState<string>("");
+  const [password, setPassword] = useState<string[]>(["", ""]);
+  const [cvc, setCvc] = useState<string>("");
 
   const autoFocus = (updatedCardNumbers: string[], index: number) => {
     if (updatedCardNumbers[index].length === 4) {
@@ -16,8 +20,7 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     }
   };
 
-  const handleCardNumberInput =
-    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+  const handleCardNumberInput = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
       const updatedCardNumbers = [...cardNumbers];
       const { value } = e.target as HTMLInputElement;
 
@@ -31,10 +34,7 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
       setCardNumbers(updatedCardNumbers);
     };
 
-  const [expirationDate, setExpirationDate] = useState(["", ""]);
-
-  const handleExpirationDateInput =
-    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+  const handleExpirationDateInput = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
       const updatedExpirationDate = [...expirationDate];
       const { value } = e.target as HTMLInputElement;
 
@@ -66,14 +66,11 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
       setExpirationDate(updatedExpirationDate);
     };
 
-  const [cardOwnerName, setCardOwnerName] = useState<string>("");
-
-  const handleCardOwnerInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleCardOwnerInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setCardOwnerName(value);
   };
 
-  const [cvc, setCvc] = useState<string>("");
   const handleCvcInput = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
     if (Number.isNaN(+value)) {
@@ -83,10 +80,7 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     setCvc(value);
   };
 
-  const [password, setPassword] = useState(["", ""]);
-
-  const setPasswordByInput =
-    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+  const handlePasswordByInput = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
       const updatedPassword = [...password];
       const { value } = e.target;
 
@@ -101,16 +95,16 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
 
   const value = {
     cardNumbers,
-    handleCardNumberInput,
     nextElement,
-    handleExpirationDateInput,
     expirationDate,
-    handleCardOwnerInput,
     cardOwnerName,
-    handleCvcInput,
     cvc,
-    setPasswordByInput,
     password,
+    handleCardNumberInput,
+    handleExpirationDateInput,
+    handleCardOwnerInput,
+    handleCvcInput,
+    handlePasswordByInput,
   };
 
   return (

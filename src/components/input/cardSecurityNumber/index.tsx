@@ -1,5 +1,3 @@
-import { type } from "os";
-
 const MAX_CVC_LENGTH = 3;
 
 type CardCVCInputProps = {
