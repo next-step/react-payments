@@ -7,7 +7,6 @@ export default {
   title: 'Payments/CardBox',
   component: CardBox,
   parameters: {
-    // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'centered',
   }
 } as ComponentMeta<typeof CardBox>;
@@ -15,14 +14,10 @@ const Template: ComponentStory<typeof CardBox> = (args) => <CardBox {...args} />
 
 const defaultData = {
   cardCompany: '클린카드',
-  cardNumber: '1111 - 2222 - oooo - oooo',
-  userName: 'YUJO',
-  expiredDate: '12 / 23',
-};
-
-export const Empty = Template.bind({});
-Empty.args = {
-  type: 'empty',
+  cardNumber: '1234123412341234',
+  cardHolder: 'TEST',
+  expiredDate: '1223',
+  type: 'small'
 };
 
 export const Small = Template.bind({});

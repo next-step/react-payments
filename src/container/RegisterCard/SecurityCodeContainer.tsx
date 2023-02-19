@@ -8,7 +8,7 @@ const MAX_LENGTH = 3;
 export default function SecurityCodeContainer({ onChange }: RegisterCardType) {
   const { onlyNumber } = useFilter();
   const [errorMessage, setErrorMessage] = useState('');
-  const securityCodeRef = useRef();
+  const securityCodeRef = useRef(null);
   const securityCode = useInput('');
   const isEnterSecurityCode = useMemo(() => securityCode.value.length === MAX_LENGTH, [securityCode]);
 

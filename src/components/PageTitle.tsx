@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-interface Props {
+export interface Props {
   title: string;
   onClick?: () => void;
   className?: string;

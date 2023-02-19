@@ -11,9 +11,9 @@ export default function CardNumberContainer({ onChange }: RegisterCardType) {
   const { formToArray, onlyNumber } = useFilter();
   const { isEnterCardNumber } = Validator();
   const [errorMessage, setErrorMessage] = useState(VALIDATE_ERROR);
-  const cardNumber2 = useRef();
-  const cardNumber3 = useRef();
-  const cardNumber4 = useRef();
+  const cardNumber2 = useRef(null);
+  const cardNumber3 = useRef(null);
+  const cardNumber4 = useRef(null);
   const [cardNumber, setCardNumber] = useForm({
     first: '',
     second: '',

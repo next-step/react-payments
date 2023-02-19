@@ -1,15 +1,21 @@
 import { memo, ReactNode } from 'react';
 
-interface Props {
+export interface Props {
   children?: ReactNode;
   onClick?: () => void;
   className?: string;
+  color?: string;
 }
 
-function Button({ children, onClick, className }: Props) {
+function Button({ children, onClick, className, color }: Props) {
   return (
-    <div className={`button-box ${className || ''}`} onClick={onClick}>
-      <span className="button-text">{children}</span>
+    <div className={`button-box ${className || ''}`}>
+      <button
+        type="button"
+        className="button-text"
+        style={{ backgroundColor: color }}
+        onClick={onClick}
+      >{children}</button>
     </div>
   );
 }

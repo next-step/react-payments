@@ -1,4 +1,4 @@
-import { CardBox, Modal } from '../components';
+import { CardBox, Modal, PageTitle } from '../components';
 import { useState } from 'react';
 import { useCard } from '../hooks';
 import CardSelection from '../components/CardSelection';
@@ -28,6 +28,8 @@ export default function RegisterCard() {
     cardHolder: '',
     expiredDate: '',
   });
+
+  const moveCardList = () => navigate('/');
 
   const handleCardNumber = (cardNumber: string) => {
     setCardState({
@@ -82,7 +84,7 @@ export default function RegisterCard() {
 
   return (
     <div className="app">
-      <h2 className="page-title">&lt; 카드 추가</h2>
+      <PageTitle title="&lt; 카드 추가" onClick={moveCardList}/>
       <CardBox {...cardState} />
       <CardNumberContainer onChange={handleCardNumber}/>
       <ExpiredDateContainer onChange={handleExpiredDate}/>

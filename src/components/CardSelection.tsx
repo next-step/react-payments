@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 type CardData = { cardCompany: string, color: string };
 
-interface Props {
+export interface Props {
   onChange: (data: CardData) => void;
 }
 

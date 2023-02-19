@@ -8,8 +8,8 @@ const MAX_LENGTH = 1;
 export default function CardPasswordContainer({ onChange }: RegisterCardType) {
   const { onlyNumber } = useFilter();
   const [errorMessage, setErrorMessage] = useState('');
-  const passwordRef1 = useRef();
-  const passwordRef2 = useRef();
+  const passwordRef1 = useRef(null);
+  const passwordRef2 = useRef(null);
   const [cardPassword, setCardPassword] = useForm({
     first: '',
     second: '',
@@ -40,7 +40,7 @@ export default function CardPasswordContainer({ onChange }: RegisterCardType) {
         type="password"
         filter={onlyNumber}
         maxLength={MAX_LENGTH}
-        className="w-15"
+        className="w-15 mr-5"
         ref={passwordRef1}
         nextFocus={passwordRef2.current}
         {...cardPassword.first}

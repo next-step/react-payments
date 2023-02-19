@@ -8,8 +8,8 @@ export default function ExpiredDateContainer({ onChange }: RegisterCardType) {
   const { formToArray, onlyNumber } = useFilter();
   const { isPreviousDate } = Validator();
   const [errorMessage, setErrorMessage] = useState('');
-  const monthRef = useRef();
-  const yearRef = useRef();
+  const monthRef = useRef(null);
+  const yearRef = useRef(null);
   const [expired, setExpired] = useForm({
     month: '',
     year: '',

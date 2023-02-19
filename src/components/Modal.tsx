@@ -1,6 +1,6 @@
 import { memo, ReactNode } from 'react';
 
-interface Props {
+export interface Props {
   open: boolean;
   children: ReactNode;
 }
