@@ -19,6 +19,9 @@ export const S = {
     color: #d3d3d3;
     border-radius: 0.25rem;
     background-color: #ecebf1;
+    &.w-50 {
+      width: 50%;
+    }
   `,
   Hyphen: styled.span`
     color: #000;
