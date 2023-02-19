@@ -7,4 +7,5 @@ export type CardInput = {
   password1?: string;
   password2?: string;
   backgroundColor?: string;
+  nickname?: string;
 };

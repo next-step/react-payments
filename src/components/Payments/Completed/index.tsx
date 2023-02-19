@@ -8,9 +8,15 @@ interface CompletedProps {
   newCardInfo: CardInput;
   setStep: Dispatch<SetStateAction<number>>;
   handleCardInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleCardNicknameAddClick: ({ nickname }: { nickname?: string }) => void;
 }
 
-const Completed = ({ newCardInfo, setStep }: CompletedProps) => {
+const Completed = ({
+  newCardInfo,
+  setStep,
+  handleCardInputChange,
+  handleCardNicknameAddClick,
+}: CompletedProps) => {
   return (
     <>
       <h2>4️⃣ 카드 추가 완료</h2>
@@ -29,6 +35,7 @@ const Completed = ({ newCardInfo, setStep }: CompletedProps) => {
           <InputContainer
             inputList={[
               {
+                value: newCardInfo.nickname,
                 id: "nickname",
                 type: "text",
                 placeholder: "카드의 별칭을 입력해주세요.",
@@ -38,10 +45,17 @@ const Completed = ({ newCardInfo, setStep }: CompletedProps) => {
               inputContainerClassName: "flex-center w-100",
               inputClassName: "input-underline w-75",
             }}
+            onChange={handleCardInputChange}
           />
 
           <div className="mt-50">
-            <Button label="다음" onClick={() => setStep(0)} />
+            <Button
+              label="다음"
+              onClick={() => {
+                handleCardNicknameAddClick({ nickname: newCardInfo?.nickname });
+                setStep(0);
+              }}
+            />
           </div>
         </div>
       </div>

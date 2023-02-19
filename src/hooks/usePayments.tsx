@@ -96,6 +96,15 @@ export const usePayments = () => {
     setCardList((prev) => [...prev, { ...newCardInfo }]);
   };
 
+  const handleCardNicknameAddClick = ({ nickname }: { nickname?: string }) => {
+    const copiedList = [...cardList];
+    copiedList[copiedList.length - 1] = {
+      ...copiedList[copiedList.length - 1],
+      nickname,
+    };
+    setCardList(copiedList);
+  };
+
   const clearCardInfo = () => setNewCardInfo(defaultNewCardInfo);
 
   return {
@@ -107,5 +116,6 @@ export const usePayments = () => {
     handleCardInputChange,
     handleCardTypeClick,
     handleCardAddClick,
+    handleCardNicknameAddClick,
   };
 };

@@ -13,6 +13,7 @@ const Payments = () => {
     handleCardInputChange,
     handleCardTypeClick,
     handleCardAddClick,
+    handleCardNicknameAddClick,
   } = usePayments();
 
   switch (step) {
@@ -34,6 +35,7 @@ const Payments = () => {
           newCardInfo={newCardInfo}
           setStep={setStep}
           handleCardInputChange={handleCardInputChange}
+          handleCardNicknameAddClick={handleCardNicknameAddClick}
         />
       );
     default:
