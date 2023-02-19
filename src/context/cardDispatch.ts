@@ -1,4 +1,4 @@
-import { ICardData } from '../type/CardType';
+import { ICardData } from '../type';
 import React, { Dispatch } from 'react';
 
 interface IContext {
