@@ -1,9 +1,7 @@
-import { useState, ChangeEvent } from 'react'
-
 import { Card } from '@/components/card'
 import { NextButtonBox, PageTitle } from '@/components/layouts'
 import { CardForm } from '@/pages/card-add/card-form'
-import { isNumber } from '@/utils'
+import { useCardInfo } from '@/pages/card-add/card-form/hooks'
 
 /**
  * 카드 추가에 필요한 상태들을 useCardInfo 훅으로 관리할 것
@@ -13,87 +11,14 @@ import { isNumber } from '@/utils'
  * 카드 이미지에서 보여야 하는 상태 -> 카드 번호, 카드 주인, 카드 만료일
  */
 function CardAdd() {
-  const [cardInfo, setCardInfo] = useState({
-    cardNumbers: { first: '', second: '', third: '', fourth: '' },
-    name: '',
-    expiratedYear: '',
-    expiratedMonth: '',
-    owner: '',
-    securityCode: '',
-    password: '',
-  })
-
-  const handleCardNumber = (event: ChangeEvent<HTMLInputElement>) => {
-    const {
-      dataset: { name },
-      value,
-    } = event.target
-    if (!isNumber(value)) return
-    switch (name) {
-      case 'first':
-        if (value.length > 4) return
-        setCardInfo((prev) => ({
-          ...prev,
-          cardNumbers: { ...prev.cardNumbers, first: value },
-        }))
-        break
-      case 'second':
-        if (value.length > 4) return
-        setCardInfo((prev) => ({
-          ...prev,
-          cardNumbers: { ...prev.cardNumbers, second: value },
-        }))
-        break
-      case 'third':
-        if (value.length > 4) return
-        setCardInfo((prev) => ({
-          ...prev,
-          cardNumbers: { ...prev.cardNumbers, third: value },
-        }))
-        break
-      case 'fourth':
-        if (value.length > 4) return
-        setCardInfo((prev) => ({
-          ...prev,
-          cardNumbers: { ...prev.cardNumbers, fourth: value },
-        }))
-        break
-    }
-  }
-
-  const handleCardExpiredDate = (event: ChangeEvent<HTMLInputElement>) => {
-    const {
-      dataset: { name },
-      value,
-    } = event.target
-    if (!isNumber(value)) return
-    switch (name) {
-      case 'YY':
-        setCardInfo((prev) => ({ ...prev, expiratedYear: value }))
-        break
-      case 'MM':
-        //Todo: 월은 1 이상 12 엣지케이스 고려
-        setCardInfo((prev) => ({ ...prev, expiratedMonth: value }))
-        break
-    }
-  }
-
-  const handleCardOwner = (event: ChangeEvent<HTMLInputElement>) => {
-    setCardInfo((prev) => ({ ...prev, owner: event.target.value }))
-  }
-
-  const handleSecurityCode = (event: ChangeEvent<HTMLInputElement>) => {
-    if (!isNumber(event.target.value)) return
-    if (event.target.value.length > 3) {
-      alert('보안코드는 세자리수 입니다.')
-      return
-    }
-    setCardInfo((prev) => ({ ...prev, securityCode: event.target.value }))
-  }
-
-  const handlePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setCardInfo((prev) => ({ ...prev, password: event.target.value }))
-  }
+  const {
+    cardInfo,
+    handleNumber,
+    handleExpiredDate,
+    handleOwner,
+    handleSecurityCode,
+    handlePassword,
+  } = useCardInfo()
 
   return (
     <div className="root">
@@ -103,16 +28,16 @@ function CardAdd() {
         <CardForm>
           <CardForm.CardNumbers
             numbers={cardInfo.cardNumbers}
-            handleChange={handleCardNumber}
+            handleChange={handleNumber}
           />
           <CardForm.CardExpiredDate
             expiratedYear={cardInfo.expiratedYear}
             expiratedMonth={cardInfo.expiratedMonth}
-            handleChange={handleCardExpiredDate}
+            handleChange={handleExpiredDate}
           />
           <CardForm.CardOwner
             owner={cardInfo.owner}
-            handleChange={handleCardOwner}
+            handleChange={handleOwner}
           />
           <CardForm.CardSecurityCode
             securityCode={cardInfo.securityCode}
