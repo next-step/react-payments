@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { CardInput } from "../components/common/Card/card.type";
 import { cardInfo } from "../constants/Payments";
 import { CardListType } from "../types/payments";
-import { isNumber } from "../utils";
+import { formatNumber, isNumber } from "../utils";
 
 const defaultCardInfo = {
   title: "클린카드",
-  number: "1111",
+  number: "1111222233334444",
   name: "YUJO",
-  month: "12",
-  year: "23",
+  expiry: "1025",
   nickname: "법인카드",
   cvc: "123",
   password1: "1",
@@ -20,8 +19,7 @@ const defaultCardInfo = {
 const defaultNewCardInfo = {
   title: "",
   number: "",
-  name: "",
-  month: "",
+  expiry: "",
   year: "",
   nickname: "",
   cvc: "",
@@ -48,10 +46,20 @@ export const usePayments = () => {
     return true;
   };
 
+  const formatInput = (input: string, id: string): string => {
+    if (id === cardInfo.NUMBER) {
+      return formatNumber(input, 5);
+    }
+
+    return input;
+  };
+
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, id } = e.target;
+    let { value, id } = e.target;
 
     if (validateInput(value, id)) {
+      value = formatInput(value, id);
+
       let copiedNewCardInfo: CardInput = { ...newCardInfo };
       if (newCardInfo[id as keyof CardInput]) {
         copiedNewCardInfo = {
