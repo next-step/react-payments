@@ -31,6 +31,7 @@ module.exports = {
     'react/require-default-props': 0,
     'react/function-component-definition': 0,
     'react/no-unescaped-entities': 1,
+    'react/no-array-index-key': 1,
     'import/no-extraneous-dependencies': 0,
     'import/extensions': 0,
   },
