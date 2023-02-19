@@ -1,6 +1,4 @@
-import { useState } from 'react';
-
-import { styled } from '../../lib/stitches.config';
+import { styled } from '../../../lib/stitches.config';
 
 export type Props = {
   label?: string;
@@ -10,7 +8,6 @@ export type Props = {
 };
 
 const InputContainer = (props: Props) => {
-  const [dirty, setDirty] = useState(false);
   return (
     <Container>
       <div
