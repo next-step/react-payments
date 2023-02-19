@@ -16,8 +16,8 @@ function CardAdd() {
   const [cardInfo, setCardInfo] = useState({
     cardNumbers: { first: '', second: '', third: '', fourth: '' },
     name: '',
-    expiratedYear: 0,
-    expiratedMonth: 0,
+    expiratedYear: '',
+    expiratedMonth: '',
   })
 
   const handleCardNumber = (event: ChangeEvent<HTMLInputElement>) => {
@@ -58,6 +58,23 @@ function CardAdd() {
     }
   }
 
+  const handleCardExpiredDate = (event: ChangeEvent<HTMLInputElement>) => {
+    const {
+      dataset: { name },
+      value,
+    } = event.target
+    if (!isNumber(value)) return
+    switch (name) {
+      case 'YY':
+        setCardInfo((prev) => ({ ...prev, expiratedYear: value }))
+        break
+      case 'MM':
+        //Todo: 월은 1 이상 12 엣지케이스 고려
+        setCardInfo((prev) => ({ ...prev, expiratedMonth: value }))
+        break
+    }
+  }
+
   return (
     <div className="root">
       <div className="app">
@@ -68,7 +85,11 @@ function CardAdd() {
             numbers={cardInfo.cardNumbers}
             handleChange={handleCardNumber}
           />
-          <CardForm.CardExpiredDate />
+          <CardForm.CardExpiredDate
+            expiratedYear={cardInfo.expiratedYear}
+            expiratedMonth={cardInfo.expiratedMonth}
+            handleChange={handleCardExpiredDate}
+          />
           <CardForm.CardOwner />
           <CardForm.CardSecurityCode />
           <CardForm.CardPassword />

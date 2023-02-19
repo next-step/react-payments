@@ -1,8 +1,8 @@
 interface CardProps {
   cardNumbers: { first: string; second: string; third: string; fourth: string }
   name: string
-  expiratedYear: number
-  expiratedMonth: number
+  expiratedYear: string
+  expiratedMonth: string
 }
 
 function Card({ cardNumbers, name, expiratedYear, expiratedMonth }: CardProps) {
@@ -20,8 +20,8 @@ function Card({ cardNumbers, name, expiratedYear, expiratedMonth }: CardProps) {
         <div className="card-bottom">
           <div className="card-bottom__info">
             <span className="card-text">{name || 'Name'}</span>
-            <span className="card-text">{`${expiratedYear || 'YY'} / ${
-              expiratedMonth || 'MM'
+            <span className="card-text">{`${expiratedMonth || 'MM'} / ${
+              expiratedYear || 'YY'
             }`}</span>
           </div>
         </div>
