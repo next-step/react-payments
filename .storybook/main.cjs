@@ -1,4 +1,7 @@
-// .storybook/main.js
+const viteTsconfig = require('vite-tsconfig-paths');
+const tsconfigPaths = viteTsconfig.default;
+const { mergeConfig } = require('vite');
+
 module.exports = {
   stories: [
     '../stories/**/*.stories.mdx',
@@ -18,5 +21,11 @@ module.exports = {
         prop.parent ? !/node_modules/.test(prop.parent.fileName) : true,
     },
   },
+  async viteFinal(config) {
+    return mergeConfig(config, {
+      plugins: [tsconfigPaths()],
+    });
+  },
+
 };
 
