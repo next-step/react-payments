@@ -42,6 +42,19 @@ export const AddCardPage: React.FC<AddCardPageProps> = ({ onNavigate }) => {
     setIsOpenModal(false)
   }
 
+  const initCard = () => {
+    onNavigate()
+    setCard({
+      cardNumber: '',
+      expireDate: '',
+      cardOwner: '',
+      pinCode: '',
+      password: '',
+      cardNickname: '',
+      cardCompanyCode: 'C000',
+    })
+  }
+
   const { cardCompanyCode, cardOwner, cardNickname, cardNumber, password, pinCode, expireDate } =
     card
   const isCompleteRegister =
@@ -50,7 +63,7 @@ export const AddCardPage: React.FC<AddCardPageProps> = ({ onNavigate }) => {
   return (
     <main id='add-card-container'>
       {isCompleteRegister ? (
-        <CompleteCardPage />
+        <CompleteCardPage card={card} changeValue={changeValue} initCard={initCard} />
       ) : (
         <RegisterCardPage card={card} onNavigate={onNavigate} changeValue={changeValue} />
       )}
