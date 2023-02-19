@@ -1,0 +1,2 @@
+const E={LENGTH:4,MASKING_TEXT:"*"},o={PLACEHOLDER:{MONTH:"MM",YEAR:"YY"},LENGTH:2},A={LENGTH:3},C={LENGTH:1},a={LENGTH:30,PLACEHOLDER:"NAME"},c=[{name:"은규",color:"#FBCD58"},{name:"포코",color:"#E24141"},{name:"준",color:"#547CE4"},{name:"현석",color:"#73BC6D"},{name:"윤호",color:"#DE5AB9"},{name:"환오",color:"#75DCCA"},{name:"태은",color:"#E76E9A"},{name:"준일",color:"#F37D3B"}];export{E as C,a,o as b,c,C as d,A as e};
+//# sourceMappingURL=card-d0999f2f.js.map
