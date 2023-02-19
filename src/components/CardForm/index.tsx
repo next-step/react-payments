@@ -1,12 +1,14 @@
 import { memo, useCallback } from 'react';
 
-import { styled } from '../../lib/stitches.config';
-import { CardKey, CardObj } from '../../types';
-import CVCInput from '../CardCVCInput';
-import CardNumberInput from '../CardNumberInput';
-import CardOwnerInput from '../CardOwnerInput';
-import CardPwdInput from '../CardPwdInput';
-import ExpiredDateInput from '../ExpiredDateInput';
+import {
+    CardCVCInput,
+    CardNumberInput,
+    CardOwnerInput,
+    CardPwdInput,
+    ExpiredDateInput,
+} from '@/components';
+import { styled } from '@/lib/stitches.config';
+import { CardKey, CardObj } from '@/types';
 
 export type Props = {
   onChangeCardForm: (key: CardKey, state: CardObj) => void;
@@ -18,16 +20,16 @@ const CardForm = (props: Props) => {
 
   return (
     <FormWrapper>
-      <CardNumberInput
+          <CardNumberInput
         onChangeCardNumbers={(args) => handleChange(args, CardKey.CARD_NUMBERS)}
-      />
+          />
       <ExpiredDateInput
         onChangeExpiredDate={(args) => handleChange(args, CardKey.EXPIRE_DATE)}
       />
       <CardOwnerInput
         onChangeOwner={(args) => handleChange(args, CardKey.OWNER_NAME)}
       />
-      <CVCInput onChangeCVC={(args) => handleChange(args, CardKey.CVC)} />
+          <CardCVCInput onChangeCVC={(args) => handleChange(args, CardKey.CVC)} />
       <CardPwdInput
         onChangePwd={(args) => handleChange(args, CardKey.PASSWORD)}
       />

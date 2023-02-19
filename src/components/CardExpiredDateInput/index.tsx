@@ -1,8 +1,8 @@
-import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, memo, useMemo, useState } from 'react';
+
+import { CardObj } from '@/types';
 
 import { InputContainer } from '@/components/UI';
-import { useBlur } from '@/hooks/useBlur';
-import { CardObj } from '@/types';
 
 type Props = {
   onChangeOwner: (state: CardObj) => void;
@@ -10,7 +10,7 @@ type Props = {
 
 const CardOwnerInput = (props: Props) => {
   const [owner, setOwner] = useState('');
-  const { dirtyState, toggleDirtyState } = useBlur();
+  const [dirtyState, setDirtyState] = useState(false);
 
   const isOwnerValid = useMemo(
     () => Boolean(owner && owner.length < MAX_OWNER_NAME_LENGTH),
@@ -25,11 +25,8 @@ const CardOwnerInput = (props: Props) => {
 
   const handleChangeOwner = (e: ChangeEvent<HTMLInputElement>) => {
     setOwner(e.target.value);
-  };
-
-  useEffect(() => {
     props.onChangeOwner({ val: owner, isValid: isOwnerValid });
-  }, [owner]);
+  };
 
   return (
     <InputContainer
@@ -41,7 +38,7 @@ const CardOwnerInput = (props: Props) => {
         type="text"
         placeholder="Dahye"
         onChange={handleChangeOwner}
-        onBlur={toggleDirtyState}
+        onBlur={() => setDirtyState(true)}
         maxLength={MAX_OWNER_NAME_LENGTH}
       />
       <span>

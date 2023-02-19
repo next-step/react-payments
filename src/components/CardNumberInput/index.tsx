@@ -1,10 +1,9 @@
-import React, { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
 
+import { InputContainer } from '@/components/UI';
 import { useBlur } from '@/hooks/useBlur';
 import { useKeyInterceptor } from '@/hooks/useKeyInterceptor';
 import { CardObj } from '@/types';
-
-import { InputContainer } from '../../components';
 
 const initialState = {
   1: '',

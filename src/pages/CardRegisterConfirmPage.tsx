@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { CreditCard } from '@/components';
-import { Button } from '@/components/UI/Button';
+import { Button } from '@/components/UI';
 import { getItem } from '@/storage/storage';
 
 import { styled } from '../lib/stitches.config';
@@ -25,8 +25,8 @@ export const CardRegisterConfirmPage = () => {
     useEffect(() => {
         const newCard = getItem('cardList').at(-1);
 
-        setCard(newCard);
-    }, []);
+      setCard(newCard);
+  }, []);
     return (
         <CardRegisterConfirmPageLayout>
             <h2>카드 등록이 완료되었습니다.</h2>

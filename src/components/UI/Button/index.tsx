@@ -8,7 +8,7 @@ interface ButtonProps {
   onClick?: () => void;
 }
 
-export const Button = ({
+const Button = ({
   primary = false,
   size = 'medium',
   children,
@@ -34,3 +34,5 @@ export const StyledButton = styled('button', {
     color: '#BBBBBB',
   },
 });
+
+export default Button;

@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { CardForm, CreditCard, TopNavigation } from '@/components';
-import { Button } from '@/components/UI/Button';
+import { Button } from '@/components/UI';
 import { getItem, setItem } from '@/storage/storage';
 import { CardKey, CardObj } from '@/types';
 
