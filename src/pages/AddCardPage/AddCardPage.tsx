@@ -1,19 +1,46 @@
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import useAddCard from 'hooks/use-addCard'
-import { Header } from 'components/ui/Header'
-import { AiOutlineLeft } from 'react-icons/ai'
+
+import { CardType } from 'models/card.model'
+
+import RegisterCardPage from 'pages/RegisterCardPage/RegisterCardPage'
+import CompleteCardPage from 'pages/CompleteCardPage/CompleteCardPage'
 
 type AddCardPageProps = {
   onNavigate: () => void
 }
 
 export const AddCardPage: React.FC<AddCardPageProps> = ({ onNavigate }) => {
-  const [card, setCard] = useAddCard()
+  const [card, setCard] = useState<CardType>({
+    cardNumber: '',
+    expireDate: '',
+    cardOwner: '',
+    pinCode: '',
+    password: '',
+    cardNickname: '',
+    cardCompanyCode: 'C000',
+  })
+
+  const changeValue = (e: ChangeEvent, key: keyof CardType) => {
+    const { value } = e.target as HTMLInputElement
+    setCard({
+      ...card,
+      [key]: value,
+    })
+  }
+
+  const { cardCompanyCode, cardOwner, cardNickname, cardNumber, password, pinCode, expireDate } =
+    card
+  const isCompleteRegister =
+    cardNumber && cardCompanyCode !== 'C000' && password && pinCode && expireDate
+
   return (
     <>
-      <Header title='카드 추가' icon={<AiOutlineLeft />} onClickIcon={onNavigate} />
-
-      <div>AddCardPage</div>
+      {isCompleteRegister ? (
+        <CompleteCardPage />
+      ) : (
+        <RegisterCardPage card={card} onNavigate={onNavigate} changeValue={changeValue} />
+      )}
     </>
   )
 }

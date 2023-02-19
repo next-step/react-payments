@@ -2,30 +2,37 @@ import React from 'react'
 import { CardType } from 'models/card.model'
 import './Card.css'
 import { CARD_COMPANYS } from 'constants/card'
+import { UiSize } from 'models/ui.model'
 
 type CardProps = {
   card: CardType
+  size: Omit<UiSize, 'medium'>
 }
 
-const Card: React.FC<CardProps> = ({ card }) => {
+const Card: React.FC<CardProps> = ({ card, size }) => {
   const cardCompnayInfo = CARD_COMPANYS[card.cardCompanyCode]
-  const [firstCardNumber, secondCardNumber] = card.cardNumber.split('-')
+  const [first, second, third, fourth] = card.cardNumber.split('-')
+
   return (
     <div className='card-box'>
-      <div className='small-card' style={{ backgroundColor: cardCompnayInfo.color }}>
+      <div className={`${size}-card`} style={{ backgroundColor: cardCompnayInfo.color }}>
         <div className='card-top'>
           <span className='card-text'>{cardCompnayInfo.name}</span>
         </div>
         <div className='card-middle'>
-          <div className='small-card__chip'></div>
+          <div className={`${size}-card__chip`}></div>
         </div>
         <div className='card-bottom'>
           <div className='card-bottom__number'>
             <span className='card-text'>
-              <span className='card-number'>{firstCardNumber}</span>
-              <span className='card-number'>{secondCardNumber}</span>
-              <span className='card-number'>●●●●</span>
-              <span className='card-number'>●●●●</span>
+              {card.cardNumber && (
+                <>
+                  <input type='text' value={first} className='card-number' readOnly />
+                  <input type='text' value={second} className='card-number' readOnly />
+                  <input type='password' value={third} className='card-number' readOnly />
+                  <input type='password' value={fourth} className='card-number' readOnly />
+                </>
+              )}
             </span>
           </div>
           <div className='card-bottom__info'>

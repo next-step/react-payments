@@ -1,4 +1,5 @@
 export const CARD_COMPNAYS_CODE = {
+  NULL: 'C000',
   LOTTE: 'C001',
   BC: 'C002',
   SAMSUNG: 'C003',
@@ -10,6 +11,11 @@ export const CARD_COMPNAYS_CODE = {
 } as const
 
 export const CARD_COMPANYS = {
+  C000: {
+    code: 'C000',
+    name: '',
+    color: '#e5e5e5',
+  },
   C001: {
     code: 'C001',
     name: '롯데카드',
