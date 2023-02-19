@@ -25,12 +25,14 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
 
       updatedCardNumbers[index] = value;
       autoFocus(updatedCardNumbers, index);
-
-      // 이부분만
       setCardNumbers(updatedCardNumbers);
     };
 
-  const value = { cardNumbers, setCardNumberByIndex };
+  const value = { cardNumbers, setCardNumberByIndex, nextElement };
 
-  return <PaymentsContext.Provider value={value}>{children}</PaymentsContext.Provider>;
+  return (
+    <PaymentsContext.Provider value={value}>
+      {children}
+    </PaymentsContext.Provider>
+  );
 };

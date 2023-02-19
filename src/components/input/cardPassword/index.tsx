@@ -6,24 +6,25 @@ const CardPasswordInput = () => {
   const [password, setPassword] = useState(["", ""]);
   const nextElement = useRef<HTMLInputElement>(null);
 
-  const setPasswordByInput = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
-    const updatedPassword = [...password];
-    const { value } = e.target;
+  const setPasswordByInput =
+    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+      const updatedPassword = [...password];
+      const { value } = e.target;
 
-    if (Number.isNaN(+value)) {
-      alert("숫자만 입력해주세요.");
-      return;
-    }
-
-    updatedPassword[index] = value;
-    setPassword(updatedPassword);
-
-    if (index === 0) {
-      if(nextElement.current) {
-        nextElement.current.focus();
+      if (Number.isNaN(+value)) {
+        alert("숫자만 입력해주세요.");
+        return;
       }
-    }
-  };
+
+      updatedPassword[index] = value;
+      setPassword(updatedPassword);
+
+      if (index === 0) {
+        if (nextElement.current) {
+          nextElement.current.focus();
+        }
+      }
+    };
 
   return (
     <div className="input-container">
@@ -40,18 +41,8 @@ const CardPasswordInput = () => {
         maxLength={MAX_PASSWORD_LENGTH}
         onChange={setPasswordByInput(1)}
       />
-      <input
-        className="input-basic w-15"
-        type="password"
-        readOnly
-        value="*"
-      />
-      <input
-        className="input-basic w-15"
-        type="password"
-        readOnly
-        value="*"
-      />
+      <input className="input-basic w-15" type="password" readOnly value="*" />
+      <input className="input-basic w-15" type="password" readOnly value="*" />
     </div>
   );
 };

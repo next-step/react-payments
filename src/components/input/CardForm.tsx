@@ -11,17 +11,15 @@ const CardForm = () => {
   };
 
   return (
-    <>
-      <div>
-        <form id="card-from" onSubmit={handleSubmit}>
-          <CardNumbersInput />
-          <CardExpirationDateInput />
-          <CardOwnerInput />
-          <CardCVCInput />
-          <CardPasswordInput />
-        </form>
-      </div>
-    </>
+    <div>
+      <form id="card-from" onSubmit={handleSubmit}>
+        <CardNumbersInput />
+        <CardExpirationDateInput />
+        <CardOwnerInput />
+        <CardCVCInput />
+        <CardPasswordInput />
+      </form>
+    </div>
   );
 };
 

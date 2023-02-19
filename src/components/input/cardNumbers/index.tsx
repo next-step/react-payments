@@ -1,37 +1,9 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { usePayments } from "../../../store/context";
 
 const MAX_CARD_NUMBER_LENGTH = 4;
 
 const CardNumbersInput = () => {
-  // 이부분하고 
-  const [cardNumbers, setCardNumbers] = useState(["", "", "", ""]);
-  
-  const nextElement = useRef<HTMLInputElement[]>([]);
-
-  const autoFocus = (updatedCardNumbers: string[], index: number) => {
-    if (updatedCardNumbers[index].length === 4) {
-      if (nextElement.current[index]) {
-        nextElement.current[index].focus();
-      }
-    }
-  };
-
-  const setCardNumberByIndex =
-    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
-      const updatedCardNumbers = [...cardNumbers];
-      const { value } = e.target as HTMLInputElement;
-
-      if (Number.isNaN(+value)) {
-        alert("카드번호는 숫자만 입력해주세요!");
-        return;
-      }
-
-      updatedCardNumbers[index] = value;
-      autoFocus(updatedCardNumbers, index);
-
-      // 이부분만
-      setCardNumbers(updatedCardNumbers);
-    };
+  const { cardNumbers, setCardNumberByIndex, nextElement } = usePayments();
 
   return (
     <div className="input-container">
