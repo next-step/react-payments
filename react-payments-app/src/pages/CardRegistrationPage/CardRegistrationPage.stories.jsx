@@ -1,7 +1,7 @@
-import CardRegistrationPage from "./index";
+import CardRegistrationPage from './index';
 
 export default {
-  title: "Pages/CardRegistrationPage",
+  title: 'Pages/CardRegistrationPage',
   component: CardRegistrationPage,
 };
 

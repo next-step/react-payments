@@ -1,8 +1,8 @@
-import CardShapedButton from "./Card";
-import "../card.css";
+import CardShapedButton from './Card';
+import '../card.css';
 
 export default {
-  title: "Components/Card/CardShapedButton",
+  title: 'Components/Card/CardShapedButton',
   component: CardShapedButton,
 };
 

@@ -1,9 +1,9 @@
-import "../card.css";
+import '../card.css';
 
 const CardShapedButton = () => {
   return (
-    <div class="card-box">
-      <div class="empty-card">+</div>
+    <div className='card-box'>
+      <div className='empty-card'>+</div>
     </div>
   );
 };

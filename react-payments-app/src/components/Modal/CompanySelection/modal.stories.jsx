@@ -1,7 +1,7 @@
-import CompanySelectionModal from "./modal";
+import CompanySelectionModal from './modal';
 
 export default {
-  title: "Components/Modal",
+  title: 'Components/Modal',
   component: CompanySelectionModal,
 };
 

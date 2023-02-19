@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 
 export const CardContext = createContext(null);
 
@@ -18,7 +18,7 @@ export function useCard() {
   const context = useContext(CardContext);
 
   if (!context) {
-    throw new Error("Need to be within CardContext to use useCard.");
+    throw new Error('Need to be within CardContext to use useCard.');
   }
 
   return context;

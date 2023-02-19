@@ -1,19 +1,20 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+/* eslint-disable no-unused-vars */
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { useCard } from "../../store/CardContext";
-import { MAX_INPUT_LENGTH } from "../../common/constant";
+import { useCard } from '../../store/CardContext';
+import { MAX_INPUT_LENGTH } from '../../common/constant';
 
-import Header from "../../components/Header/Header";
-import Card from "../../components/Card/Card";
-import CardForm from "../../components/Input/CardForm";
+import Header from '../../components/Header/Header';
+import Card from '../../components/Card/Card';
+import CardForm from '../../components/Input/CardForm';
 
 const CardRegistration = () => {
   const navigate = useNavigate();
   const { card, setCard } = useCard();
 
   const goBackToListPage = (e) => {
-    navigate("/");
+    navigate('/');
   };
 
   const isAllFilledOut = (cardInfo) => {
@@ -32,24 +33,24 @@ const CardRegistration = () => {
 
   const handleSubmit = (cardInfo) => {
     if (!isAllFilledOut(cardInfo)) {
-      alert("빈칸을 모두 채워주세요.");
+      alert('빈칸을 모두 채워주세요.');
       return;
     }
     setCard(cardInfo);
-    navigate("/registration/setCardNickname");
+    navigate('/registration/setCardNickname');
   };
 
   return (
     <>
       <Header
-        pageTitle={"카드추가"}
-        headerIcon={"<"}
+        pageTitle={'카드추가'}
+        headerIcon={'<'}
         onClick={goBackToListPage}
       />
       <Card
-        cardStatus={"empty-card"}
-        userName={"JEONG"}
-        expirationDate={"12/34"}
+        cardStatus={'empty-card'}
+        userName={'JEONG'}
+        expirationDate={'12/34'}
       />
       <CardForm onSubmit={handleSubmit} />
     </>

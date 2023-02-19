@@ -7,6 +7,9 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.jsx": "npm run lint"
+    "*.jsx": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   }
 }

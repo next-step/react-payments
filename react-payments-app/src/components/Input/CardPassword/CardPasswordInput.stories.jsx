@@ -1,10 +1,10 @@
-import CardPasswordInput from "./input";
+import CardPasswordInput from './CardPasswordInput';
 
-import "../input.css";
-import "/src/styles/utils.css";
+import '../input.css';
+import '/src/styles/utils.css';
 
 export default {
-  title: "Components/Input/CardPasswordInput",
+  title: 'Components/Input/CardPasswordInput',
   component: CardPasswordInput,
 };
 

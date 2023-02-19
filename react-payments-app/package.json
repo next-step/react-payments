@@ -66,9 +66,15 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "husky": "^8.0.0",
+    "lint-staged": "^13.1.2",
     "prettier": "^2.8.4",
     "prop-types": "^15.8.1",
     "webpack": "^5.75.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix"
+    ]
   },
   "main": "index.js",
   "repository": {
