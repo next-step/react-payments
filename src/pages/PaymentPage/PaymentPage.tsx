@@ -7,11 +7,11 @@ import { ErrorIcon } from 'components/atoms/ErrorIcon'
 import useCards from 'hooks/useCards'
 
 const PaymentPage = () => {
-  const [isAddCard, setIsAddCard] = useState(false)
+  const [isAddEditCard, setIsAddEditCard] = useState(false)
   const { loading, error, cards, addCard } = useCards()
 
   const toggleIsAddCard = (isAdd: boolean) => {
-    setIsAddCard(isAdd)
+    setIsAddEditCard(isAdd)
   }
 
   if (loading) {
@@ -22,16 +22,20 @@ const PaymentPage = () => {
     return <ErrorIcon message={error.message} />
   }
 
+  const onAddEditCard = (id?: number) => {
+    toggleIsAddCard(true)
+  }
+
   return (
     <>
-      {isAddCard ? (
+      {isAddEditCard ? (
         <AddEditCraditCard
           onNavigate={() => toggleIsAddCard(false)}
           addCard={addCard}
         />
       ) : (
         <PaymentMain
-          onClickAddCard={() => toggleIsAddCard(true)}
+          onClick={(id?: number) => onAddEditCard(id)}
           cards={cards}
         />
       )}

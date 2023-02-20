@@ -60,7 +60,19 @@ export const CARD_COMPANYS = {
   },
 } as const
 
+export const EMPTY_CARD_VIEW_ID = 'EmptyCardView' as const
 export const INIT_CARD_VALUE: CardType = {
+  cardNumber: '',
+  expireDate: '',
+  cardOwner: '',
+  pinCode: '',
+  password: '',
+  cardNickname: '',
+  cardCompanyCode: CARD_COMPNAYS_CODE.NULL,
+}
+
+export const ADD_CARD_VIEW_VALUE: CardType = {
+  id: EMPTY_CARD_VIEW_ID,
   cardNumber: '',
   expireDate: '',
   cardOwner: '',

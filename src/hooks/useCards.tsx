@@ -14,7 +14,7 @@ const useCards = () => {
   useEffect(() => {
     setLoading(true)
     setError(null)
-    fetch(`http://localhost:3004/cards`)
+    fetch(`/cards`)
       .then((res) => res.json())
       .then((data: CardType[]) => setCards(data ?? []))
       .catch((e) =>
