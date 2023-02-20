@@ -1,6 +1,6 @@
 import Text from "components/Text";
 import styled from "styled-components";
-import Input from "../../Input/Item";
+import Input from "../../Input";
 import { useRef, useState } from "react";
 import { checkOwnerName } from "utils";
 import { ColorType } from "types";
@@ -26,12 +26,8 @@ const CardOwnerNameInput = ({ setOwnerName, fontColor }: CardOwnerNameInputProps
   return (
     <Layout>
       <Box>
-        <Title fontSize="xs" weight="normal">
-          카드 소유자 이름(선택)
-        </Title>
-        <Text fontSize="s" weight="normal">
-          {`${length}/30`}
-        </Text>
+        <Title fontSize="xs" weight="normal" label="카드 소유자 이름(선택)" />
+        <Text fontSize="s" weight="normal" label={`${length}/30`} />
       </Box>
       <Input
         type="text"

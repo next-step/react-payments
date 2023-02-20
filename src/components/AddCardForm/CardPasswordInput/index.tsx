@@ -1,6 +1,6 @@
 import Text from "components/Text";
 import styled from "styled-components";
-import Input from "../../Input/Item";
+import Input from "../../Input";
 import InputContainer from "components/Input/Container";
 import { useRef } from "react";
 import { checkPassword } from "utils";
@@ -32,9 +32,7 @@ const CardPasswordInput = ({ fontColor, setPassword }: CardPasswordInputProps) =
 
   return (
     <Layout>
-      <Title fontSize="xs" weight="normal">
-        카드 비밀번호
-      </Title>
+      <Title fontSize="xs" weight="normal" label="카드 비밀번호" />
       <InputContainer width={70}>
         <Input
           theme="primary"

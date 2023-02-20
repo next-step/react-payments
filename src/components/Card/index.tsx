@@ -6,12 +6,12 @@ type sizeType = "small" | "big";
 
 export type CardProps = {
   size: sizeType;
-  number?: string;
-  expirationMonth?: string;
-  expirationYear?: string;
-  ownerName?: string;
-  color?: ColorType;
-  company?: CompanyType;
+  number: string;
+  expirationMonth: string;
+  expirationYear: string;
+  ownerName: string;
+  color: ColorType;
+  company: CompanyType;
 };
 
 const Card = ({ color, company, size, number, expirationMonth, expirationYear, ownerName }: CardProps) => {
@@ -19,24 +19,16 @@ const Card = ({ color, company, size, number, expirationMonth, expirationYear, o
     <Layout>
       <Container color={color} size={size}>
         <Top>
-          <Text fontSize="s" weight="normal">
-            {company}
-          </Text>
+          <Text fontSize="s" weight="normal" label={company} />
         </Top>
         <Middle>
           <Chip />
         </Middle>
         <Bottom>
-          <Text fontSize="m" weight="normal">
-            {number}
-          </Text>
+          <Text fontSize="m" weight="normal" label={number} />
           <InfoContainer>
-            <Text fontSize="s" weight="bold">
-              {ownerName}
-            </Text>
-            <Text fontSize="s" weight="bold">
-              {`${expirationMonth}/${expirationYear}`}
-            </Text>
+            <Text fontSize="s" weight="bold" label={ownerName} />
+            <Text fontSize="s" weight="bold" label={`${expirationMonth}/${expirationYear}`} />
           </InfoContainer>
         </Bottom>
       </Container>

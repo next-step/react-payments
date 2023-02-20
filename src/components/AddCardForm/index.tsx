@@ -6,10 +6,9 @@ import CardSecurityInput from "./CardSecurityInput";
 import CardPasswordInput from "./CardPasswordInput";
 import CardOwnerNameInput from "./CardOwnerNameInput/index";
 import CardExpirationDateInput from "./CardExpirationDateInput/index";
-import CardDotInfoList from "./CardDotInfoList";
+import DotList from "./DotList";
 import Button from "../Button/index";
 import { useNavigate } from "react-router-dom";
-import { checkCardFormValidation } from "utils";
 import { useHandleCardText } from "hooks/useHandleCardText";
 
 export const AddCardForm = () => {
@@ -44,7 +43,7 @@ export const AddCardForm = () => {
 
   return (
     <>
-      {isOpenModal ? <CardDotInfoList close={setIsOpenModal} setColor={setcolor} setCardCompnay={setcompany} /> : <></>}
+      {isOpenModal ? <DotList close={setIsOpenModal} setColor={setcolor} setCardCompnay={setcompany} /> : <></>}
       <Card
         color={color}
         company={company}

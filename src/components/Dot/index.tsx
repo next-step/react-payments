@@ -1,25 +1,23 @@
 import Text from "components/Text";
 import React from "react";
 import styled, { css } from "styled-components";
+import { ColorType, CompanyType } from "types";
 
-type DotProps = {
+export type DotProps = {
   color: ColorType;
-  text: string;
+  value: CompanyType;
   onClick: React.MouseEventHandler<HTMLDivElement>;
 };
-type ColorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange";
 
-const CardDotInfo = ({ color, text, onClick }: DotProps) => {
+const Dot = ({ color, value, onClick }: DotProps) => {
   return (
     <Layout onClick={onClick}>
       <Circle color={color} />
-      <Text fontSize="s" weight="bold">
-        {text}
-      </Text>
+      <Text fontSize="s" weight="bold" label={value} />
     </Layout>
   );
 };
-export default CardDotInfo;
+export default Dot;
 const Layout = styled.div`
   display: flex;
   flex-direction: column;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Card from "components/Card";
 import Text from "components/Text";
-import Input from "components/Input/Item";
+import Input from "components/Input";
 import Button from "components/Button/index";
 
 //미션2
@@ -9,9 +9,7 @@ const CompletedPage = () => {
   return (
     <Layout>
       <TextWrapper>
-        <Text fontSize="lg" weight="bold">
-          카드 등록이 완료되었습니다.
-        </Text>
+        <Text fontSize="lg" weight="bold" label="카드 등록이 완료되었습니다."></Text>
       </TextWrapper>
       <CardWrapper>{/* <Card theme="primary" size="big" /> */}</CardWrapper>
 

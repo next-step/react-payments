@@ -2,7 +2,7 @@ import Text from "components/Text";
 import { useRef } from "react";
 import styled from "styled-components";
 import { checkCardNumber } from "utils";
-import Input from "../../Input/Item";
+import Input from "../../Input";
 import InputContainer from "components/Input/Container";
 import { ColorType } from "types";
 
@@ -24,9 +24,7 @@ const CardNumberInput = ({ setCardNumber, fontColor }: CardNumberInputProps) => 
 
   return (
     <Layout>
-      <Title fontSize="xs" weight="normal">
-        카드 번호
-      </Title>
+      <Title fontSize="xs" weight="normal" label="카드 번호" />
       <InputContainer>
         <Input ref={ref} type="text" theme="primary" onChange={handleInput} fontColor={fontColor} active={true}></Input>
       </InputContainer>

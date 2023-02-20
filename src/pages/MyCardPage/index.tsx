@@ -15,9 +15,7 @@ const MyCardPage = () => {
   return (
     <Layout>
       <Container>
-        <Text fontSize="lg" weight="bold">
-          보유 카드
-        </Text>
+        <Text fontSize="lg" weight="bold" label="보유카드" />
         <AddCard onClick={handleAddCard} />
       </Container>
     </Layout>

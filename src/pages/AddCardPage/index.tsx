@@ -15,9 +15,7 @@ const AddCardPage = () => {
       <Layout>
         <Header>
           <IconButton onClick={handleBackButton} name="arrowLeft" size="2xl" color="#575757" />
-          <Text fontSize="lg" weight="bold">
-            카드추가
-          </Text>
+          <Text fontSize="lg" weight="bold" label="카드추가" />
         </Header>
         <AddCardForm />
       </Layout>

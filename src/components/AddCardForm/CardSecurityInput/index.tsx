@@ -1,7 +1,7 @@
 import Text from "components/Text";
 import styled from "styled-components";
 import InputContainer from "../../Input/Container";
-import Input from "../../Input/Item";
+import Input from "../../Input";
 import { useRef } from "react";
 import { checkCardSecurityInput } from "utils";
 import { ColorType } from "types";
@@ -24,9 +24,7 @@ const CardSecurityInput = ({ fontColor, setSecurityCode }: CardPasswordInputProp
 
   return (
     <Layout>
-      <Title fontSize="xs" weight="normal">
-        보안코드 (CVC/CVV)
-      </Title>
+      <Title fontSize="xs" weight="normal" label="보안코드 (CVC/CVV)" />
       <InputContainer width={25}>
         <Input theme="primary" type="text" ref={inputRef} onChange={handleInput} fontColor={fontColor} active={true} />
       </InputContainer>

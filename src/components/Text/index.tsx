@@ -2,17 +2,17 @@ import styled, { css } from "styled-components";
 
 import { FontSizeType, FontWeightType, ColorType } from "types";
 
-type TextProps = {
+export type TextProps = {
   fontSize: FontSizeType;
+  label: string;
   weight?: FontWeightType;
-  children?: any;
   fontColor?: ColorType;
 };
 
-const Text = ({ fontSize, weight, children, fontColor }: TextProps) => {
+const Text = ({ fontSize, weight, label, fontColor }: TextProps) => {
   return (
     <Layout fontSize={fontSize} weight={weight} fontColor={fontColor}>
-      {children}
+      {label}
     </Layout>
   );
 };

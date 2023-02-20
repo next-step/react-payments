@@ -1,5 +1,5 @@
 import InputContainer from "components/Input/Container";
-import Input from "components/Input/Item";
+import Input from "components/Input";
 import Text from "components/Text";
 import styled from "styled-components";
 import { useRef } from "react";
@@ -38,9 +38,7 @@ const CardExpirationDateInput = ({ setExpriationYear, setExpriationMonth, fontCo
 
   return (
     <Layout>
-      <Title fontSize="xs" weight="normal">
-        만료일
-      </Title>
+      <Title fontSize="xs" weight="normal" label="만료일" />
       <InputContainer width={50}>
         <Input
           type="text"
