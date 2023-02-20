@@ -1,6 +1,7 @@
 import React, { InputHTMLAttributes, useMemo } from "react";
 
 import { Input } from "@/components/common";
+import { CARD_INPUT_VARIABLES } from "@/constants/variables";
 
 import { CardOwnerInputContainer } from "./cardOwnerInput.style";
 
@@ -16,7 +17,9 @@ export default function CardOwnerInput({
     () => (
       <CardOwnerInputContainer>
         <span>카드 소유자 이름(선택)</span>
-        <span>{cardOwnerName.length}/30</span>
+        <span>
+          {cardOwnerName.length}/{CARD_INPUT_VARIABLES.OWNER_NAME_MAX_LENGTH}
+        </span>
       </CardOwnerInputContainer>
     ),
     [cardOwnerName]

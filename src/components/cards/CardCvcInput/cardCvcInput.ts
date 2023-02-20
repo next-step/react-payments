@@ -2,6 +2,6 @@ import styled from "styled-components";
 
 import { Input } from "@/components/common";
 
-export const CardCvcInputEl = styled(Input)`
+export const CardCvcInput = styled(Input)`
   width: 20%;
 `;

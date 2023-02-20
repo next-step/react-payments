@@ -43,7 +43,9 @@ export default function AddCard() {
     month: "",
     year: "",
   });
-  const { cardOwnerName, onCardOwnerNameChange } = useCardOwnerInput("");
+  const { cardOwnerName, onCardOwnerNameChange } = useCardOwnerInput({
+    ownerName: "",
+  });
   const { cvcNumber, onCvcNumberChange } = useCardCvcInput("");
 
   const cardNumberWithDash = useMemo(
@@ -72,7 +74,7 @@ export default function AddCard() {
 
   const cardInfo = useMemo(
     () => ({
-      cardName: cardOwnerName,
+      cardName: cardOwnerName.ownerName,
       cardNumber: cardNumberWithDash,
       cardOwnerName: "NAME",
       expireDate: cardExpireDateWithSlash || "MM/YY",
@@ -99,8 +101,7 @@ export default function AddCard() {
             onChange={onCardExpireDateChange}
           />
           <CardOwnerInput
-            ownerNameLength={cardOwnerName.length}
-            value={cardOwnerName}
+            cardOwnerName={cardOwnerName.ownerName}
             onChange={onCardOwnerNameChange}
           />
           <CardCvcInput value={cvcNumber} onChange={onCvcNumberChange} />

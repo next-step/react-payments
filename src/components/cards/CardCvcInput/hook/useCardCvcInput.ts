@@ -1,8 +1,17 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { isNumber } from "@/components/helper";
-import { CVC_NUMBER_MAX_LENGTH } from "@/constants/variables";
+import { CARD_VALIDATION_ERROR_MESSAGES } from "@/constants/alertMessages";
+import { CARD_INPUT_VARIABLES } from "@/constants/variables";
+import { isNumber } from "@/helper";
 import useInput from "@/hooks/useInput";
+
+const validateCvcNumber = (value: string) => {
+  if (value.length > CARD_INPUT_VARIABLES.CVC_NUMBER_MAX_LENGTH) {
+    alert(CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER);
+    return false;
+  }
+  return true;
+};
 
 const useCardCvcInput = (initialValue: string) => {
   const { value, onChange } = useInput(initialValue);
@@ -11,15 +20,9 @@ const useCardCvcInput = (initialValue: string) => {
     (e: ChangeEvent<HTMLInputElement>) => {
       const { target } = e;
 
-      if (!(target instanceof HTMLInputElement)) return;
+      if (!validateCvcNumber(target.value)) return;
 
-      console.log(isNumber(target.value));
-
-      if (target.value && !isNumber(target.value)) return;
-
-      if (target.value.length > CVC_NUMBER_MAX_LENGTH) return;
-
-      onChange(target.value);
+      onChange(e);
     },
     [value]
   );
