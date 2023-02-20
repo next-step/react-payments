@@ -3,7 +3,7 @@ import type { HTMLAttributes, ElementType } from 'react';
 export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
   as?: ElementType;
 
-  display?: 'flex' | 'inline-flex';
+  display?: 'flex' | 'inline-flex' | 'grid';
   flexDirection?: 'column-reverse' | 'column' | 'row-reverse' | 'row';
   justifyContent?:
     | 'center'

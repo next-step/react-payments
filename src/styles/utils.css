@@ -22,6 +22,9 @@
 }
 
 /* margin */
+.mt-20 {
+  margin-top: 20px;
+}
 .mr-5 {
   margin-right: 5px;
 }
