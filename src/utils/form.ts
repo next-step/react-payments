@@ -39,8 +39,8 @@ const expirationMonthFormatter = (month: string) => {
   return month.replace(/\D+/g, '');
 };
 
-const expirationYearFormatter = (year: string) => {
-  return year.replace(/\D+/g, '');
+const textOnlyFormatter = (str: string) => {
+  return str.replace(/\D+/g, '');
 };
 
-export { renderTextDivider, checkRequiredValues, expirationMonthFormatter, expirationYearFormatter };
+export { renderTextDivider, checkRequiredValues, expirationMonthFormatter, textOnlyFormatter };

@@ -13,11 +13,6 @@ function Input({ className, kind = 'basic', width = 'w-25', onChange, formatter,
 
   const onChangeWithFormatter = (e: ChangeEvent<HTMLInputElement>) => {
     if (formatter) {
-      console.log(e.target.value);
-
-      console.log(formatter);
-
-      console.log(formatter(e.target.value));
       e.target.value = formatter(e.target.value);
     }
 
