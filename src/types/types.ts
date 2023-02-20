@@ -5,6 +5,8 @@ type InputStateType<T> = {
   key: string;
   value?: T;
   placeholder?: string;
+  checkIsValid: (value?: T) => boolean;
+  checkIsAllowInput: (input?: T) => boolean;
 };
 
 export type CardNumbersState = Omit<InputStateType<string>, 'placeholder'>[];

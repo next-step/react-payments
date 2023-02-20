@@ -23,12 +23,12 @@ function CardCreator() {
   const passwordInputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
   // 클린코드를 위한 의견!
+  // TODO: 작은 컴포넌트로 쪼개기
+
   // TODO: 모든 input을 받아 i번의 다음으로 넘기는 부분은 공통 hook으로 묶을 수 있겠다.
   // TODO: useForm처럼 form을 간단하게 만들 수 있는 방법은 없을까?
   // input들을 children에 받고 그것을 읽어서 value와 onChange를 알아서 이어주는 식으로 가능할 것이다. 하지만 그게 꼭 필요할까?
   // 우선은 구현 먼저 ㅇㅇ
-
-  // TODO: 숫자인지 아닌지 판단하는 것들은 util로 뺄 수 있다.
 
   // TODO: 카드 소유자는 컴포넌트로 빼기
   // TODO: 카드 소유자 modal은 portal이용해서 관심사 분리
@@ -55,11 +55,10 @@ function CardCreator() {
           <div className="input-container">
             <span className="input-title">만료일</span>
             <div className="input-box w-50">
-              {expireDates.map(({ key, value, placeholder }, i) => {
+              {expireDates.map(({ key, value, placeholder, checkIsValid, checkIsAllowInput }, i) => {
                 const isLast = checkIsArrayLast(expireDates, i);
-                // 각 값은 valid한 값의 조건이 다 다르다.
-                // TODO: 따라서 각 state마다 valid 조건을 넣어주자.
-                const isValueValid = Number(value) <= 12;
+                const isValueValid = checkIsValid(value);
+
                 return (
                   <>
                     <input
@@ -69,14 +68,9 @@ function CardCreator() {
                       value={value ?? ''}
                       placeholder={placeholder}
                       onChange={(e) => {
-                        let inputVal = filterNumber(e.currentTarget.value);
-                        // TODO: 클린코드 필요.
-                        if (inputVal.length >= 2 && Number(inputVal) > 12 && key === 'card-expired-month') {
-                          inputVal = inputVal.substring(0, 1);
-                        }
-
-                        if (inputVal.length >= 3 && key === 'card-expired-year') {
-                          inputVal = inputVal.substring(0, 2);
+                        const inputVal = filterNumber(e.currentTarget.value);
+                        if (!checkIsAllowInput(inputVal)) {
+                          return;
                         }
 
                         setExpireDates(
@@ -165,7 +159,7 @@ function CardCreator() {
           <div className="input-container">
             <span className="input-title">카드 비밀번호</span>
             <div className="flex">
-              {passwords.map(({ key, value }, i) => {
+              {passwords.map(({ key, value, checkIsValid, checkIsAllowInput }, i) => {
                 const isLast = checkIsArrayLast(passwords, i);
                 if (value && value.length < 2) {
                   if (document.activeElement === passwordInputsRef.current[i]) {
@@ -188,7 +182,7 @@ function CardCreator() {
                     }}
                     onChange={(e) => {
                       const numberValue = filterNumber(e.currentTarget.value);
-                      if (numberValue.length > 2) {
+                      if (!checkIsAllowInput(numberValue)) {
                         return;
                       }
 

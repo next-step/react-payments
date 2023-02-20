@@ -18,9 +18,9 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
     <div className="input-container">
       <span className="input-title">카드 번호</span>
       <div className="input-box">
-        {cardNumbers.map(({ key, type, value }, i) => {
+        {cardNumbers.map(({ key, type, value, checkIsValid, checkIsAllowInput }, i) => {
           const isLast = checkIsArrayLast(cardNumbers, i);
-          const isOverFourNumber = value && value.length >= 4;
+          const isOverFourNumber = checkIsValid(value);
           const dashComponentClassName = isOverFourNumber && !isLast ? 'dash' : 'dash hide';
 
           if (!isLast && isOverFourNumber) {
@@ -41,12 +41,15 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
                 }}
                 onChange={(e) => {
                   const numberString = filterNumber(e.currentTarget.value);
-                  const fourString = numberString.substring(0, 4);
+                  if (!checkIsAllowInput(numberString)) {
+                    return;
+                  }
+
                   setCardNumbers((prev) => {
-                    return updateArray(prev, i, updateObject(prev[i], 'value', fourString));
+                    return updateArray(prev, i, updateObject(prev[i], 'value', numberString));
                   }, {
                     stateRefreshValidator: (prev) => {
-                      return prev[i].value !== fourString
+                      return prev[i].value !== numberString
                     }
                   });
                 }}
