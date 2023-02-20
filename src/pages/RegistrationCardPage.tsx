@@ -11,6 +11,7 @@ const RegistrationCardPage = () => {
   const [number, setNumber] = useState('');
   const [expiration, setExpiration] = useState('');
   const [cvc, setCvc] = useState('');
+  const [passwords, setPasswords] = useState<string[]>([]);
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
@@ -33,6 +34,18 @@ const RegistrationCardPage = () => {
     const { value } = e.target as HTMLInputElement;
     const sanitizedValue = value.replace(/[^0-9]/g, '');
     setCvc(sanitizedValue);
+  };
+
+  const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const regex = /[0-9]/g;
+    const target = e.target as HTMLInputElement;
+    const { value } = target;
+    const { name } = target;
+
+    if (!regex.test(value) || !name) return;
+    let copyPassword = [...passwords];
+    copyPassword[Number(name) - 1] = value;
+    setPasswords(copyPassword);
   };
 
   return (
@@ -107,11 +120,44 @@ const RegistrationCardPage = () => {
 
         <FormControl>
           <FormControl.Label>카드 비밀번호</FormControl.Label>
-          <Box display="flex" className="gap-x-5">
-            <TextField type="password" inputMode="numeric" className="w-10" />
-            <TextField type="password" inputMode="numeric" className="w-10" />
-            <TextField type="password" inputMode="numeric" className="w-10" />
-            <TextField type="password" inputMode="numeric" className="w-10" />
+          <Box display="flex" className="gap-x-5" onChange={handlePassword}>
+            <TextField
+              type="password"
+              inputMode="numeric"
+              maxLength={1}
+              name="1"
+              value={passwords[0] || ''}
+              onChange={handlePassword}
+              className="w-10 text-center"
+            />
+            <TextField
+              type="password"
+              inputMode="numeric"
+              maxLength={1}
+              name="2"
+              value={passwords[1] || ''}
+              onChange={handlePassword}
+              className="w-10 text-center"
+            />
+            <TextField
+              type="password"
+              inputMode="numeric"
+              maxLength={1}
+              name="3"
+              value={passwords[2] || ''}
+              onChange={handlePassword}
+              className="w-10 text-center"
+            />
+            <TextField
+              type="password"
+              inputMode="numeric"
+              maxLength={1}
+              name="4"
+              value={passwords[3] || ''}
+              onBlur={handlePassword}
+              onChange={handlePassword}
+              className="w-10 text-center"
+            />
           </Box>
         </FormControl>
       </Wrapper>
