@@ -23,9 +23,7 @@ function SecurityCodeInput({
         value={securityCode ?? ''}
         onChange={(e) => {
           const numberValue = filterNumber(e.currentTarget.value);
-          if (numberValue.length > 3) {
-            return;
-          }
+          if (numberValue.length > 3) return;
 
           setSecurityCode((prevSecurityCode) => {
             if (numberValue === prevSecurityCode) {

@@ -41,9 +41,7 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
                 }}
                 onChange={(e) => {
                   const numberString = filterNumber(e.currentTarget.value);
-                  if (!checkIsAllowInput(numberString)) {
-                    return;
-                  }
+                  if (!checkIsAllowInput(numberString)) return;
 
                   setCardNumbers((prev) => {
                     return updateArray(prev, i, updateObject(prev[i], 'value', numberString));

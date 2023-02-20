@@ -32,9 +32,7 @@ function ExpireDateInput({
                 placeholder={placeholder}
                 onChange={(e) => {
                   const inputVal = filterNumber(e.currentTarget.value);
-                  if (!checkIsAllowInput(inputVal)) {
-                    return;
-                  }
+                  if (!checkIsAllowInput(inputVal)) return;
 
                   setExpireDates(
                     (prevExpireDates) =>
@@ -49,21 +47,20 @@ function ExpireDateInput({
                 }}
                 onBlur={(e) => {
                   const blurValue = e.currentTarget.value;
-                  if (blurValue && blurValue.length !== 0) {
-                    if (blurValue.length === 1) {
-                      const paddedValue = blurValue.padStart(2, '0');
-                      setExpireDates(
-                        (prevExpireDates) =>
-                          updateArray(prevExpireDates, i, updateObject(prevExpireDates[i], 'value', paddedValue)),
-                        {
-                          stateRefreshValidator: (prevExpireDates) => {
-                            const prevValue = prevExpireDates[i].value;
-                            return prevValue !== paddedValue;
-                          },
-                        }
-                      );
-                      e.currentTarget.value = paddedValue;
-                    }
+                  if (blurValue && blurValue.length === 1) {
+                    const paddedValue = blurValue.padStart(2, '0');
+                    e.currentTarget.value = paddedValue;
+
+                    setExpireDates(
+                      (prevExpireDates) =>
+                        updateArray(prevExpireDates, i, updateObject(prevExpireDates[i], 'value', paddedValue)),
+                    {
+                        stateRefreshValidator: (prevExpireDates) => {
+                          const prevValue = prevExpireDates[i].value;
+                          return prevValue !== paddedValue;
+                        },
+                      }
+                    );
                   }
                 }}
               />

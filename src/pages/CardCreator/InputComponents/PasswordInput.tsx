@@ -43,9 +43,7 @@ function PasswordInput({
               }}
               onChange={(e) => {
                 const numberValue = filterNumber(e.currentTarget.value);
-                if (!checkIsAllowInput(numberValue)) {
-                  return;
-                }
+                if (!checkIsAllowInput(numberValue)) return;
 
                 setPasswords(
                   (prevPasswords) =>
