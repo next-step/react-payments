@@ -8,4 +8,5 @@ const LIMIT_INPUT_LENGTH = {
   PASSWORD: 1,
   OWNER_NAME: 30,
 };
+
 export { LIMIT_INPUT_LENGTH };

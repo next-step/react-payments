@@ -1,6 +1,7 @@
 import React, { ChangeEvent, HTMLInputTypeAttribute } from 'react';
 import FieldContainer from './FieldContainer';
 import Input from '../Common/Input';
+import { expirationMonthFormatter, expirationYearFormatter } from '@/utils/form';
 
 function ExpirationField({
   title,
@@ -27,9 +28,9 @@ function ExpirationField({
         name="month"
         placeholder="MM"
         maxLength={maxLength}
-        // pattern="0[0-9]{1}"
         value={month}
         onChange={onChange}
+        formatter={expirationMonthFormatter}
       />
       <Input
         type={type}
@@ -39,6 +40,7 @@ function ExpirationField({
         maxLength={maxLength}
         value={year}
         onChange={onChange}
+        formatter={expirationYearFormatter}
       />
     </FieldContainer>
   );
