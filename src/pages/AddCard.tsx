@@ -7,6 +7,7 @@ const AddCard = () => {
   const navigate = useNavigate();
   const cardRefs = useRefs<HTMLInputElement>(4);
   const expirationDateRef = useRef<HTMLInputElement>(null);
+  const securityCodeRef = useRef<HTMLInputElement>(null);
 
   const handleCardNumber = (index: number) => {
     const currentInput = cardRefs[index].current;
@@ -53,6 +54,14 @@ const AddCard = () => {
     }
 
     checkExpiration();
+  };
+
+  const handleSecurityCode = () => {
+    if (!securityCodeRef.current) return;
+    securityCodeRef.current.value = securityCodeRef.current.value.replace(
+      /[^0-9]/g,
+      ''
+    );
   };
 
   return (
@@ -133,7 +142,13 @@ const AddCard = () => {
       </div>
       <div className="input-container">
         <span className="input-title">보안코드(CVC/CVV)</span>
-        <input className="input-basic w-25" type="password" />
+        <input
+          className="input-basic w-25"
+          type="password"
+          maxLength={3}
+          ref={securityCodeRef}
+          onChange={handleSecurityCode}
+        />
       </div>
       <div className="input-container">
         <span className="input-title">카드 비밀번호</span>
