@@ -5,27 +5,29 @@ import { Input } from "@/components/common";
 import { CardOwnerInputContainer } from "./cardOwnerInput.style";
 
 interface CardOwnerInputProps extends InputHTMLAttributes<HTMLInputElement> {
-  ownerNameLength?: number;
+  cardOwnerName: string;
 }
 
 export default function CardOwnerInput({
-  ownerNameLength = 0,
+  cardOwnerName,
   ...props
 }: CardOwnerInputProps) {
   const CardOwnerInputLabel = useMemo(
     () => (
       <CardOwnerInputContainer>
         <span>카드 소유자 이름(선택)</span>
-        <span>{ownerNameLength}/30</span>
+        <span>{cardOwnerName.length}/30</span>
       </CardOwnerInputContainer>
     ),
-    [ownerNameLength]
+    [cardOwnerName]
   );
 
   return (
     <Input
+      id="ownerName"
       label={CardOwnerInputLabel}
       placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+      value={cardOwnerName}
       {...props}
     />
   );
