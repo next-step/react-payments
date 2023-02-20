@@ -5,9 +5,11 @@
   flex-wrap: wrap;
   background-color: white;
   position: relative;
-  z-index: 1;
   margin-bottom: 0;
   margin-top: 0;
+  justify-content: center;
+  padding: 15px 0;
+  border-radius: 8px;
 }
 
 .card-company-item {
