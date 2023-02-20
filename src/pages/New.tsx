@@ -6,8 +6,11 @@ import TextButton from 'src/components/TextButton';
 
 const New = () => {
   const navigate = useNavigate();
+  const goNextPage = () => {
+    navigate('/alias', { replace: true });
+  };
   return (
-    <main>
+    <>
       <Header
         title="카드 추가"
         hasBackButton
@@ -18,8 +21,8 @@ const New = () => {
       <Input label="만료일" widthSize="md" />
       <Input label="카드 소유자 이름(선택)" textAlign="left" />
       <Input label="보안 코드(CVC/CVV)" widthSize="sm" />
-      <TextButton text="다음" onClick={() => console.log('hi')} />
-    </main>
+      <TextButton text="다음" onClick={goNextPage} />
+    </>
   );
 };
 

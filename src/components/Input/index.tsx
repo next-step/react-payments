@@ -11,7 +11,7 @@ const Input = (props: InputProps) => {
   return (
     <div className={`input-container ${widthSize}`}>
       <div className="input-label">{label}</div>
-      <input {...rest} style={{ textAlign }} />
+      <input className="input-form" {...rest} style={{ textAlign }} />
     </div>
   );
 };

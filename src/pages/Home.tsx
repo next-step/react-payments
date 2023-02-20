@@ -5,7 +5,7 @@ import Header from '../components/Header';
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <main>
+    <>
       <Header title="보유 카드" />
       <div className="content">
         <div className="card-list">
@@ -22,7 +22,7 @@ const Home = () => {
           <Card empty newCardClick={() => navigate('/new')} />
         </div>
       </div>
-    </main>
+    </>
   );
 };
 

@@ -119,7 +119,7 @@ header {
 
 /* Input */
 
-input {
+.input-form {
   border: none;
   background-color: #ecebf1;
   color: #04c09e;
@@ -164,4 +164,27 @@ input {
   bottom: 1rem;
   right: 1.57rem;
   cursor: pointer;
+}
+
+/* Alias */
+
+.alias-page {
+  margin-top: 8.125rem;
+  text-align: center;
+}
+
+.alias-page-title {
+  font-size: 1.5rem;
+  color: #383838;
+  margin-bottom: 4.8rem;
+}
+
+.alias-input {
+  display: flex;
+  border: none;
+  border-bottom: 1.5px solid #737373;
+  text-align: center;
+  font-size: 1.125rem;
+  margin: 0 auto;
+  margin-top: 2rem;
 }
