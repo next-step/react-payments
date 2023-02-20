@@ -18,22 +18,20 @@ function AddCard({ cardInformation, onChange, onSubmit }: Props) {
         <Layout headerTitle="카드 추가" goBack="/">
           {
             <>
-              <div className="card-box">
-                <Card
-                  cardCompany=""
-                  cardOwner={cardOwner}
-                  cardNumber={{
-                    cardNumber1,
-                    cardNumber2,
-                    cardNumber3,
-                    cardNumber4,
-                  }}
-                  expiration={{
-                    year,
-                    month,
-                  }}
-                />
-              </div>
+              <Card
+                cardCompany=""
+                cardOwner={cardOwner}
+                cardNumber={{
+                  cardNumber1,
+                  cardNumber2,
+                  cardNumber3,
+                  cardNumber4,
+                }}
+                expiration={{
+                  year,
+                  month,
+                }}
+              />
               <AddCardForm cardInformation={cardInformation} onChange={onChange} onSubmit={onSubmit} />
             </>
           }

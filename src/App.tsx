@@ -15,6 +15,7 @@ const initCardInformation = {
   password1: '',
   password2: '',
   cardOwner: '',
+  nickname: '',
 };
 
 function App() {

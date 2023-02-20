@@ -27,7 +27,7 @@ function ExpirationField({
         name="month"
         placeholder="MM"
         maxLength={maxLength}
-        pattern="0[0-9]{1}"
+        // pattern="0[0-9]{1}"
         value={month}
         onChange={onChange}
       />
@@ -35,7 +35,7 @@ function ExpirationField({
         type={type}
         name="year"
         placeholder="YY"
-        pattern="^(\d\d)$"
+        // pattern="^(\d\d)$"
         maxLength={maxLength}
         value={year}
         onChange={onChange}

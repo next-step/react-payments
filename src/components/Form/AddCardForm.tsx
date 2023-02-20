@@ -8,6 +8,7 @@ import { CardInformation } from '@/types';
 import { Button } from '../Common';
 import { checkRequiredValues } from '@/utils';
 import { LIMIT_INPUT_LENGTH } from '@/constants';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   cardInformation: CardInformation;
@@ -16,6 +17,8 @@ type Props = {
 };
 
 function AddCardForm({ cardInformation, onChange, onSubmit }: Props) {
+  const navigate = useNavigate();
+
   const { cardNumber1, cardNumber2, cardNumber3, cardNumber4, year, month, password1, password2, cvc, cardOwner } =
     cardInformation;
   const cardNumber = { cardNumber1, cardNumber2, cardNumber3, cardNumber4 };
@@ -27,8 +30,13 @@ function AddCardForm({ cardInformation, onChange, onSubmit }: Props) {
 
   const isValid = checkRequiredValues(cardInformation);
 
+  const onSubmitWithRedirect = (e: FormEvent<HTMLFormElement>) => {
+    onSubmit(e);
+    navigate('/complete');
+  };
+
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmitWithRedirect}>
       <CardNumberField
         title="카드 번호"
         value={cardNumber}

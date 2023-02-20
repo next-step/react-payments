@@ -9,6 +9,8 @@ type CardInformation = {
   password1: string;
   password2: string;
   cardOwner?: string;
+  nickname?: string;
+  cardCompany?: string;
 };
 
 type Expiration = {
