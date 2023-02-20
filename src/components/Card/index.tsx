@@ -16,6 +16,7 @@ interface CardProps {
 const Card = (props: Partial<CardProps>) => {
   const { empty, cardInfo, alias, newCardClick } = props;
   const creditNumberList = cardInfo?.creditNumber?.split('-');
+  const expirationDateValid = cardInfo?.expirationDate?.split('/').length === 2;
   return (
     <div className="card-container">
       {empty ? (
@@ -27,19 +28,20 @@ const Card = (props: Partial<CardProps>) => {
           <div className="card-title">{cardInfo?.title}</div>
           <div className="card-ic-chip" />
           <div className="card-credit-number">
-            {creditNumberList?.map((creditNumber, index) => (
-              <div
-                key={creditNumber + index.toString()}
-                className="card-credit-number-item"
-              >
-                {index < 2 ? creditNumber : creditNumber.replace(/\d/g, '#')}
-              </div>
-            ))}
+            {creditNumberList?.length === 4 &&
+              creditNumberList?.map((creditNumber, index) => (
+                <div
+                  key={creditNumber + index.toString()}
+                  className="card-credit-number-item"
+                >
+                  {index < 2 ? creditNumber : creditNumber.replace(/\d/g, '*')}
+                </div>
+              ))}
           </div>
           <div className="card-bottom">
             <div className="card-customer-name">{cardInfo?.customerName}</div>
             <div className="card-expiration-date">
-              {cardInfo?.expirationDate}
+              {expirationDateValid && cardInfo?.expirationDate}
             </div>
           </div>
         </div>
