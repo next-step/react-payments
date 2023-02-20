@@ -8,4 +8,4 @@ export default {
 
 export const Default = () => <Button>버튼</Button>;
 
-export const DefaultDisabled = () => <Button disabled>버튼</Button>;
+export const DisabledButton = () => <Button disabled>버튼</Button>;

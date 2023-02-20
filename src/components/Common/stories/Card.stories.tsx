@@ -1,6 +1,5 @@
 import type { ComponentMeta } from '@storybook/react';
 import Card from '../Card';
-import '../../../styles/index.css';
 
 export default {
   title: 'Common/Card',
