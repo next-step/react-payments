@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { styled } from '@stitches/react';
 import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
@@ -23,7 +22,7 @@ function CardCreator() {
 
   const passwordsStateBundle = useExtendedState(passwordsInit);
 
-  // 클린코드를 위한 의견!
+  // 클린코드와 추상화를 위한 의견!
   // TODO: 모든 input을 받아 i번의 다음으로 focus를 넘기는 부분은 공통 hook으로 묶을 수 있겠다.
   // TODO: useForm처럼 form을 간단하게 만들 수 있는 방법은 없을까? -> [{}] state를 기준으로 input에 여러 event 함수들을 미리 preset하고 input을 전달해주면 좋을듯 하다.
 
