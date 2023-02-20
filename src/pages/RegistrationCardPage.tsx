@@ -2,7 +2,13 @@ import { useState } from 'react';
 import styled from '@emotion/styled';
 
 import { CreditCard } from 'components';
-import { Box, Header, TextField, FormControl } from 'components/@common';
+import {
+  Box,
+  Header,
+  TextField,
+  FormControl,
+  Button,
+} from 'components/@common';
 
 import { formatCardNumber, formatMMYY } from 'utils/format';
 
@@ -53,11 +59,12 @@ const RegistrationCardPage = () => {
       <Header showBackIcon>카드 추가</Header>
       <CreditCard
         color="brand02"
+        name="파란색 카드"
         holderName={holderName}
         number={number}
         expiration={expiration}
       />
-      <Wrapper>
+      <Form as="form">
         <FormControl>
           <FormControl.Label>카드 번호</FormControl.Label>
           <Box
@@ -160,13 +167,19 @@ const RegistrationCardPage = () => {
             />
           </Box>
         </FormControl>
-      </Wrapper>
+
+        <Box display="flex" justifyContent="flex-end">
+          <Button type="submit" color="brand02" disabled>
+            카드 생성 완료하기
+          </Button>
+        </Box>
+      </Form>
     </>
   );
 };
 
 export default RegistrationCardPage;
 
-const Wrapper = styled.div`
+const Form = styled(Box)`
   margin: 30px;
 `;
