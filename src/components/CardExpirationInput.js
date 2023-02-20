@@ -3,9 +3,7 @@ import { CARD_EXPIRATION } from "../constants/card";
 import Span from "./Span";
 import useCardExpiration from "../hooks/useCardExpiration";
 
-export default function CardExpirationInput() {
-  const [expiration, handleExpiration] = useCardExpiration();
-
+export default function CardExpirationInput({cardExpiration, onChange}) {
   // TODO : nextsibling auto focus & key 값 제어 (useRef)
   // const dataId = useRef(0);
 
@@ -21,8 +19,8 @@ export default function CardExpirationInput() {
               name={name}
               placeholder={index == 0 ? "MM" : "YY"}
               key={index}
-              onChange={handleExpiration}
-              value={expiration[name]}
+              onChange={onChange}
+              value={cardExpiration[name]}
               maxLength={CARD_EXPIRATION.MAX_LENGTH}
             ></input>
           );

@@ -2,8 +2,7 @@ import { CARD_PASSWORD } from "../constants/card";
 import Span from "./Span";
 import useCardPassword from "../hooks/useCardPassword";
 
-export default function CardPasswordInput() {
-  const [password, handlePassword] = useCardPassword();
+export default function CardPasswordInput({cardPassword, onChange}) {
   // const dataId = useRef(0); // TODO : nextsibling auto focus & key 값 제어 (useRef)
 
   return (
@@ -19,8 +18,8 @@ export default function CardPasswordInput() {
             type="password"
             name={name}
             key={index}
-            onChange={handlePassword}
-            value={index > 1? "*" : password[name]}
+            onChange={onChange}
+            value={index > 1? "*" : cardPassword[name]}
             maxLength={CARD_PASSWORD.MAX_LENGTH}
             disabled={index > 1 ? true : false}
           ></input>

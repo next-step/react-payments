@@ -3,8 +3,7 @@ import Span from "./Span";
 import useCardNumber from "../hooks/useCardNumber";
 
 // TODO : {"-"} 구분자 입력
-export default function CardNumberInput() {
-  const [cardNumber, handleCardNumber] = useCardNumber();
+export default function CardNumberInput({cardNumber, onChange}) {
   // const dataId = useRef(0); // TODO : nextsibling auto focus & key 값 제어 (useRef)
 
   return (
@@ -15,10 +14,10 @@ export default function CardNumberInput() {
           return (
             <input
               className="input-basic card-number"
-              type="text"
+              type={(index < 2)? "text" : "password"}
               name={name}
               key={index}
-              onChange={handleCardNumber}
+              onChange={onChange}
               value={cardNumber[name]}
               maxLength={CARD_NUMBER.MAX_LENGTH}
             ></input>

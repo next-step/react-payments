@@ -12,6 +12,8 @@ export default function useCardOwnerName() {
   function handleOwnerName(event) {
     const { value } = event.target;
     if (isValidOwnerName(value)) setOwnerName(value);
+    //console.log("handleOwnerName -value : ", value);
+    //console.log("handleOwnerName - ownerName : ", ownerName);
   }
 
   return [ownerName, handleOwnerName];
