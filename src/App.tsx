@@ -1,13 +1,13 @@
 import React from 'react'
-import { MobileTemplate } from 'components/MobileTemplate/MobileTemplate'
-import { CardPage } from 'pages/CardPage'
+import { MobileTemplate } from 'templates/MobileTemplate'
+import { PaymentPage } from 'pages/PaymentPage'
 
 import './App.css'
 
 const App = () => {
   return (
     <MobileTemplate>
-      <CardPage />
+      <PaymentPage />
     </MobileTemplate>
   )
 }

@@ -6,7 +6,7 @@ import { CardListPage } from 'pages/CardListPage/CardListPage'
 import { Loading } from 'components/ui/Loading'
 import { Error } from 'components/ui/Error'
 
-const CardPage = () => {
+const PaymentPage = () => {
   const [isAddCard, setIsAddCard] = useState(false)
   const { loading, error, cards, addCard } = useCards()
 
@@ -25,12 +25,18 @@ const CardPage = () => {
   return (
     <>
       {isAddCard ? (
-        <AddCardPage onNavigate={() => toggleIsAddCard(false)} addCard={addCard} />
+        <AddCardPage
+          onNavigate={() => toggleIsAddCard(false)}
+          addCard={addCard}
+        />
       ) : (
-        <CardListPage onClickAddCard={() => toggleIsAddCard(true)} cards={cards} />
+        <CardListPage
+          onClickAddCard={() => toggleIsAddCard(true)}
+          cards={cards}
+        />
       )}
     </>
   )
 }
 
-export default CardPage
+export default PaymentPage
