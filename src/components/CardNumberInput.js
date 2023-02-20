@@ -1,11 +1,8 @@
 import { CARD_NUMBER } from "../constants/card";
 import Span from "./Span";
-import useCardNumber from "../hooks/useCardNumber";
 
-// TODO : {"-"} 구분자 입력
+// TODO : nextsibling auto focus
 export default function CardNumberInput({cardNumber, onChange}) {
-  // const dataId = useRef(0); // TODO : nextsibling auto focus & key 값 제어 (useRef)
-
   return (
     <div className="input-container">
       <Span className="input-title">카드 번호</Span>

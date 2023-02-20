@@ -1,9 +1,6 @@
 import { useState } from "react";
 
 export default function useCardPassword() {
-  // TODO : inputValue가 개별 input 태그에 들어가있음. 상위 상태와 개별 상태 구분 필요
-  // TODO : disabled 선택적으로 주기
-  // TODO : 배열 값 불변성 유지 - spread operator
   const [password, setPassword] = useState({num0:"", num1:"", num2:"", num3:""});
 
   function isNumber(value) {

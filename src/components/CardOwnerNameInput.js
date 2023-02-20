@@ -1,11 +1,7 @@
 import { CARD_OWNER_NAME } from "../constants/card";
 import Span from "./Span";
-import useCardOwnerName from "../hooks/useCardOwnerName";
 
-// TODO : inputValue 상태명이 명시적인가?
-// TODO : 유효성 검사 함수명이 너무 비슷하진 않은지
 // TODO : 현재 입력 자릿수와 최대 입력 자릿수 위치 조정
-// TODO : state를 컴포넌트 내부로 가져와도 되나? 의미가 있는걸까?
 export default function CardOwnerNameInput({cardOwnerName, onChange}) {
   return (
     <div className="input-container">

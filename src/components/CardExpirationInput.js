@@ -4,9 +4,6 @@ import Span from "./Span";
 import useCardExpiration from "../hooks/useCardExpiration";
 
 export default function CardExpirationInput({cardExpiration, onChange}) {
-  // TODO : nextsibling auto focus & key 값 제어 (useRef)
-  // const dataId = useRef(0);
-
   return (
     <div className="input-container">
       <Span className="input-title">만료일</Span>
