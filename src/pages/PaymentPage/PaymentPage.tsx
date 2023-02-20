@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import useCards from 'hooks/use-cards'
-import { AddCardPage } from 'pages/AddCardPage/AddCardPage'
+import { AddEditCraditCard } from 'pages/AddEditCraditCard'
 import { PaymentMain } from 'pages/PaymentMain'
 import { Loading } from 'components/ui/Loading'
 import { Error } from 'components/ui/Error'
@@ -25,7 +25,7 @@ const PaymentPage = () => {
   return (
     <>
       {isAddCard ? (
-        <AddCardPage
+        <AddEditCraditCard
           onNavigate={() => toggleIsAddCard(false)}
           addCard={addCard}
         />

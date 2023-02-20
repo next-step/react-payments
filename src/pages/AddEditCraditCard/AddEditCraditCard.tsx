@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useState } from 'react'
 import useAddCard from 'hooks/use-addCard'
-
 import {
   CardCompanyCodeType,
   CardType,
@@ -11,15 +10,15 @@ import RegisterCardPage from 'pages/RegisterCardPage/RegisterCardPage'
 import CompleteCardPage from 'pages/CompleteCardPage/CompleteCardPage'
 import { Modal } from 'components/ui/Modal'
 import { CardCompanyList } from 'components/CardCompanyList'
-import './AddCardPage'
+import './AddEditCraditCard'
 import { INIT_CARD_VALUE } from 'constants/card'
 
-type AddCardPageProps = {
+type AddEditCraditCardProps = {
   onNavigate: () => void
   addCard: (card: CardType) => void
 }
 
-export const AddCardPage: React.FC<AddCardPageProps> = ({
+const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
   onNavigate,
   addCard,
 }) => {
@@ -68,3 +67,5 @@ export const AddCardPage: React.FC<AddCardPageProps> = ({
     </main>
   )
 }
+
+export default AddEditCraditCard
