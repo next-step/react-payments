@@ -1,17 +1,17 @@
+import { useState } from 'react';
 import styled from '@emotion/styled';
+
 import { CreditCard } from 'components';
 import { Box, Header, TextField, FormControl } from 'components/@common';
-import { useState } from 'react';
+
+import { formatCardNumber } from 'utils/format';
 
 const RegistrationCardPage = () => {
   const [number, setNumber] = useState('');
 
   const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
-    const formattedValue = value
-      .replace(/[^0-9]/g, '')
-      .replace(/^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3-$4')
-      .replace(/(-{1,3})$/g, '');
+    const formattedValue = formatCardNumber(value);
     setNumber(formattedValue);
   };
 

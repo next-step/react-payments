@@ -1,6 +1,8 @@
 import * as Styled from './CreditCard.styles';
 import type { CreditCardProps } from './CreditCard.types';
 
+import { maskLastEight } from 'utils/format';
+
 const CreditCard = ({
   color,
   name,
@@ -12,7 +14,7 @@ const CreditCard = ({
     <Styled.Wrapper color={color}>
       <Styled.Name>{name}</Styled.Name>
       <Styled.Chip />
-      <Styled.Number>{number}</Styled.Number>
+      <Styled.Number>{maskLastEight(number)}</Styled.Number>
       <Styled.FlexWrapper
         display="flex"
         alignItems="flex-end"
