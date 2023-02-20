@@ -2,7 +2,7 @@ import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { AiOutlineLeft } from 'react-icons/ai'
 
-import { Header } from '../components/ui/Header'
+import { Header } from '../components/molecules/Header'
 
 export default {
   title: 'Header',

@@ -1,9 +1,8 @@
 import React, { ChangeEvent } from 'react'
-import { InputBox } from 'components/ui/InputBox'
-import { Input } from 'components/ui/Input'
+import { InputBox } from 'components/molecules/InputBox'
+import { Input } from 'components/atoms/Input'
 import { CardType } from 'models/card.model'
 import './FormGroup.css'
-import { kMaxLength } from 'buffer'
 
 type FormGroupProps = {
   label: string

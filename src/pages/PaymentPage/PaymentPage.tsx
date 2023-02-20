@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import useCards from 'hooks/use-cards'
 import { AddEditCraditCard } from 'pages/AddEditCraditCard'
 import { PaymentMain } from 'pages/PaymentMain'
-import { Loading } from 'components/ui/Loading'
-import { Error } from 'components/ui/Error'
+import { Loading } from 'components/atoms/Loading'
+import { ErrorIcon } from 'components/atoms/ErrorIcon'
 
 const PaymentPage = () => {
   const [isAddCard, setIsAddCard] = useState(false)
@@ -19,7 +19,7 @@ const PaymentPage = () => {
   }
 
   if (error) {
-    return <Error message={error.message} />
+    return <ErrorIcon message={error.message} />
   }
 
   return (

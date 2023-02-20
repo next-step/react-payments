@@ -8,8 +8,8 @@ import {
 
 import { RegisterCard } from 'organisms/RegisterCard'
 import { CompleteRegisterCard } from 'organisms/CompleteRegisterCard'
-import { Modal } from 'components/ui/Modal'
-import { CardCompanyList } from 'components/CardCompanyList'
+import { Modal } from 'components/atoms/Modal'
+import { CardCompanyList } from 'components/molecules/CardCompanyList'
 import './AddEditCraditCard'
 import { INIT_CARD_VALUE } from 'constants/card'
 

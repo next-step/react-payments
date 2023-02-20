@@ -1,12 +1,12 @@
 import React, { ChangeEvent } from 'react'
-import { Header } from 'components/ui/Header'
+import { Header } from 'components/molecules/Header'
 import { AiOutlineLeft } from 'react-icons/ai'
 import { CardType, UpdateCardParams } from 'models/card.model'
-import { Card } from 'components/Card'
+import { Card } from 'components/atoms/Card'
 import { UI_SIZE } from 'constants/ui.constant'
 import INPUTS from 'utils/inputs'
 import './RegisterCard.css'
-import { FormGroup } from 'components/FromGroup'
+import { FormGroup } from 'components/molecules/FromGroup'
 
 type RegisterCardProps = {
   card: CardType

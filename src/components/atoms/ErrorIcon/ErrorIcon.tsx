@@ -1,12 +1,12 @@
 import React from 'react'
 import { MdError } from 'react-icons/md'
-import './Error.css'
+import './ErrorIcon.css'
 
-type ErrorProps = {
+type ErrorIconProps = {
   message: string
 }
 
-const Error: React.FC<ErrorProps> = ({ message }) => {
+const ErrorIcon: React.FC<ErrorIconProps> = ({ message }) => {
   return (
     <div className='error-container'>
       <MdError />
@@ -15,4 +15,4 @@ const Error: React.FC<ErrorProps> = ({ message }) => {
   )
 }
 
-export default Error
+export default ErrorIcon

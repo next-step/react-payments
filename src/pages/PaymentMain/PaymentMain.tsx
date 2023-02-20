@@ -1,8 +1,8 @@
 import React from 'react'
-import { Header } from 'components/ui/Header'
+import { Header } from 'components/molecules/Header'
 import { EmptyCard } from 'components/EmptyCard'
 import { UI_SIZE } from 'constants/ui.constant'
-import { Card } from 'components/Card'
+import { Card } from 'components/atoms/Card'
 import { CardType } from 'models/card.model'
 
 type PaymentMainProps = {
