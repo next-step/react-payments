@@ -8,7 +8,10 @@ interface CardOwnerProps {
 const CardOwner = ({ owner, handleChange }: CardOwnerProps) => {
   return (
     <div className="input-container">
-      <span className="input-title">카드 소유자 이름(선택)</span>
+      <div className="input-title">
+        <span>카드 소유자 이름(선택)</span>
+        <span>{`${owner.length}`}/30</span>
+      </div>
       <input
         type="text"
         className="input-basic"
