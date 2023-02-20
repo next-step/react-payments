@@ -1,9 +1,16 @@
+import Button from './Common/Button';
+
 const Card = ({ isRegistered, cardInfo }) => (
   <>
     <div className="card-box">
-      {!isRegistered && <div className="empty-card">+</div>}
+      {!isRegistered && (
+        <Button to="/regist" children="+" className="empty-card button-box" />
+      )}
       {isRegistered && (
-        <div className="small-card">
+        <div
+          className="small-card"
+          style={{ backgroundColor: cardInfo.backgroundColor }}
+        >
           <div className="card-top">
             <span className="card-text">{cardInfo.company}</span>
           </div>
@@ -16,9 +23,7 @@ const Card = ({ isRegistered, cardInfo }) => (
             </div>
             <div className="card-bottom__info">
               <span className="card-text">{cardInfo.owner}</span>
-              <span className="card-text">
-                {cardInfo.expire.month} / {cardInfo.expire.year}
-              </span>
+              <span className="card-text">{cardInfo.expiry}</span>
             </div>
           </div>
         </div>

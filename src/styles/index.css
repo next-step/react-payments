@@ -1,8 +1,8 @@
-@import "./card.css";
-@import "./input.css";
-@import "./button.css";
-@import "./modal.css";
-@import "./utils.css";
+@import './card.css';
+@import './input.css';
+@import './button.css';
+@import './modal.css';
+@import './utils.css';
 
 body {
   display: flex;
@@ -39,4 +39,20 @@ input {
   align-items: center;
 
   color: #383838;
+}
+
+.page-navigator {
+  position: absolute;
+  left: 20px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 22px;
+  margin-top: 16.6px;
+  cursor: pointer;
+
+  color: #383838;
+}
+
+form {
+  position: relative;
 }

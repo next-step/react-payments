@@ -1,8 +1,10 @@
 import Card from '../components/Card';
 
-const CardList = ({ cardInfo }) => (
+const CardList = ({ cardList }) => (
   <div className="flex-column-center">
-    <Card isRegistered={true} cardInfo={cardInfo} />
+    {cardList.map((cardInfo) => (
+      <Card isRegistered={true} cardInfo={cardInfo} key={cardInfo.number} />
+    ))}
     <Card isRegistered={false} />
   </div>
 );

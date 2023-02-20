@@ -1,3 +1,5 @@
+import Button from './Common/Button';
+
 const CardRegist = () => {
   return (
     <>
@@ -34,9 +36,7 @@ const CardRegist = () => {
               placeholder="카드의 별칭을 입력해주세요."
             />
           </div>
-          <div className="button-box mt-50">
-            <span className="button-text">다음</span>
-          </div>
+          <Button className="button-box registor-button" children="다음" />
         </div>
       </div>
     </>

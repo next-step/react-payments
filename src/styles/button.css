@@ -1,8 +1,8 @@
 .button-box {
-  width: 100%;
-  text-align: right;
+  border: none;
+  cursor: pointer;
 }
-
-.button-text {
-  margin-right: 10px;
+.registor-button {
+  position: absolute;
+  right: 0;
 }
