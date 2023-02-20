@@ -23,7 +23,9 @@ const CardExpiredDate = ({
           value={expiratedMonth}
           onChange={handleChange}
         />
-        {(expiratedYear || expiratedMonth) && <span>/</span>}
+        {(expiratedYear.length === 2 || expiratedMonth.length === 2) && (
+          <span>/</span>
+        )}
         <input
           className="input-basic"
           type="text"

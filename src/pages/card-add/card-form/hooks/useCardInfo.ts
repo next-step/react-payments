@@ -59,10 +59,15 @@ const useCardInfo = () => {
     if (!isNumber(value)) return
     switch (name) {
       case 'YY':
+        if (value.length > 2) return
         setCardInfo((prev) => ({ ...prev, expiratedYear: value }))
         break
       case 'MM':
-        //Todo: 월은 1 이상 12 엣지케이스 고려
+        if (value.length > 2) return
+        if (Number(value) > 12 || Number(value) < 0) {
+          alert('월은 1이상 12이하여야 합니다.')
+          return
+        }
         setCardInfo((prev) => ({ ...prev, expiratedMonth: value }))
         break
     }
