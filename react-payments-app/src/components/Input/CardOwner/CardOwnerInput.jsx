@@ -17,6 +17,7 @@ const CardOwnerInput = ({ onChange }) => {
       setError('이름은 30자까지만 입력할 수 있습니다.');
       return;
     }
+    setError(null);
   };
   useEffect(() => {
     onChange(cardOwner, error);

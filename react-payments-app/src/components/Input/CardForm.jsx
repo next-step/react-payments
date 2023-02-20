@@ -14,7 +14,7 @@ const CardForm = ({ onSubmit, onChange }) => {
   const [cardCVC, setCardCVC] = useState('');
   const [cardPassword, setCardPassword] = useState(['', '']);
   const [error, setError] = useState('');
-
+  console.log(error);
   const handleCardNumbersChange = (cardNumbers, error) => {
     setCardNumbers(cardNumbers);
     setError(error);

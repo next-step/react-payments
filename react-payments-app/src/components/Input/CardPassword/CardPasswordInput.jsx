@@ -15,6 +15,7 @@ const CardPasswordInput = ({ onChange }) => {
       setError('숫자만 입력해주세요.');
       return;
     }
+    setError(null);
 
     setEvent(e);
     updatedPassword[index] = value;

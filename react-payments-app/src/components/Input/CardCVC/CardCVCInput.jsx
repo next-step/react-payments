@@ -13,6 +13,7 @@ const CardCVCInput = ({ onChange }) => {
       setError('숫자만 입력해주세요.');
       return;
     }
+    setError(null);
 
     updatedCVC = value;
     setCVC(updatedCVC);

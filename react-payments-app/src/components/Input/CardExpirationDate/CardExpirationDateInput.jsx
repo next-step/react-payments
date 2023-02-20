@@ -34,6 +34,7 @@ const CardExpirationDateInput = ({ onChange }) => {
         }
       }
     }
+    setError(null);
 
     setExpirationDate(updatedExpirationDate);
   };

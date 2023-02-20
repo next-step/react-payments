@@ -4,7 +4,7 @@ const Button = ({ title, type, onClick }) => {
       role='button'
       type={type}
       onClick={onClick}
-      className='button-box mt-50'
+      className='button-box mt-10'
     >
       <span className='button-text'>{title}</span>
     </div>

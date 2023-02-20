@@ -18,9 +18,10 @@ const CardNumbersInput = ({ onChange }) => {
     const { value } = e.target;
 
     if (Number.isNaN(+value)) {
-      setError('카드번호는 숫자만 입력해주세요!');
+      setError('카드번호는 숫자만 입력해주세요.');
       return;
     }
+    setError(null);
 
     updatedCardNumbers[index] = value;
     autoFocus(updatedCardNumbers, index);
