@@ -1,7 +1,14 @@
 import styled from "styled-components";
 
-import { Input } from "@/components/common";
+import { resetInputBorderRadius } from "@/styles/GlobalStyle";
 
-export const CardExpireDateInputEl = styled(Input)`
+export const CardExpireDateInputContainer = styled.div``;
+
+export const CardExpireDateInputWrapper = styled.div`
+  display: flex;
+  align-items: center;
   width: 30%;
+  height: 100%;
+
+  ${resetInputBorderRadius}
 `;

@@ -1,44 +1,50 @@
 import { ChangeEvent, useCallback } from "react";
 
-import { OVER_MAX_MONTH } from "@/constants/alertMessages";
-import {
-  CARD_EXPIRE_DATE_MAX_LENGTH,
-  MONTH_RANGE,
-} from "@/constants/variables";
+import { CARD_VALIDATION_ERROR_MESSAGES } from "@/constants/alertMessages";
+import { CARD_INPUT_VARIABLES } from "@/constants/variables";
+import { isNumber } from "@/helper";
 import useInput from "@/hooks/useInput";
 
-const expireDateFormatter = (value: string) => {
-  return value.match(/[0-9]{1,2}/g)?.join("/") ?? "";
+export type CardExpireDate = {
+  month: string;
+  year: string;
 };
 
-const isValidMonth = (month: number) => {
-  return MONTH_RANGE.min <= month && month <= MONTH_RANGE.max;
+const validateCardExpireDateInput = (element: HTMLInputElement) => {
+  const { value, id } = element;
+
+  if (value.length > CARD_INPUT_VARIABLES.DATE_MAX_LENGTH) return false;
+
+  if (!isNumber(value)) {
+    alert(CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER);
+    return false;
+  }
+
+  if (id === "month") {
+    const expireMonth = parseInt(value);
+
+    if (
+      expireMonth < CARD_INPUT_VARIABLES.MIN_MONTH ||
+      expireMonth > CARD_INPUT_VARIABLES.MAX_MONTH
+    ) {
+      alert(CARD_VALIDATION_ERROR_MESSAGES.MONTH_RANGE);
+      return false;
+    }
+  }
+
+  return true;
 };
 
-const isFilledExpireDate = (value: string) => {
-  return value.length >= CARD_EXPIRE_DATE_MAX_LENGTH;
-};
-
-const useCardExpireDateInput = (initialValue: string) => {
+const useCardExpireDateInput = (initialValue: CardExpireDate) => {
   const { value, onChange } = useInput(initialValue);
 
   const handleCardExpireDateChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const { target } = e;
 
-      if (!(target instanceof HTMLInputElement)) return;
+      if (!validateCardExpireDateInput(target)) return;
 
-      const newExpireDate = expireDateFormatter(target.value);
-      const [month, year] = newExpireDate.split("/");
-
-      if (isFilledExpireDate(newExpireDate)) return;
-
-      if (month && year && !isValidMonth(parseInt(month))) {
-        alert(OVER_MAX_MONTH);
-        return;
-      }
-
-      onChange(expireDateFormatter(target.value));
+      onChange(e);
     },
     [value]
   );

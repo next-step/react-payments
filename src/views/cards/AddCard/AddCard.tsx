@@ -39,7 +39,10 @@ export default function AddCard() {
     num3: "",
     num4: "",
   });
-  const { cardExpireDate, onCardExpireDateChange } = useCardExpireDateInput("");
+  const { cardExpireDate, onCardExpireDateChange } = useCardExpireDateInput({
+    month: "",
+    year: "",
+  });
   const { cardOwnerName, onCardOwnerNameChange } = useCardOwnerInput("");
   const { cvcNumber, onCvcNumberChange } = useCardCvcInput("");
 
@@ -58,12 +61,21 @@ export default function AddCard() {
     [cardNumber]
   );
 
+  const cardExpireDateWithSlash = useMemo(
+    () =>
+      Object.keys(cardExpireDate)
+        .map((fieldId) => cardExpireDate[fieldId])
+        .filter((data) => data !== "")
+        .join("/"),
+    [cardExpireDate]
+  );
+
   const cardInfo = useMemo(
     () => ({
       cardName: cardOwnerName,
       cardNumber: cardNumberWithDash,
       cardOwnerName: "NAME",
-      expireDate: cardExpireDate || "MM/YY",
+      expireDate: cardExpireDateWithSlash || "MM/YY",
     }),
     [cardNumber, cardExpireDate, cardOwnerName]
   );
@@ -83,7 +95,7 @@ export default function AddCard() {
             onChange={onCardNumberChange}
           />
           <CardExpireDateInput
-            value={cardExpireDate}
+            cardExpireDate={cardExpireDate}
             onChange={onCardExpireDateChange}
           />
           <CardOwnerInput
