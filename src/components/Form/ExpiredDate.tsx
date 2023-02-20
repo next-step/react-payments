@@ -48,7 +48,7 @@ function ExpiredDate({ onExpiredDateChange }: ExpiredDateProps) {
     event: React.ChangeEvent<HTMLInputElement>,
     type: string
   ) => {
-    event.currentTarget.value = remainOnlyNumber(event.target.value);
+    event.currentTarget.value = remainOnlyNumber(event.currentTarget.value);
 
     event.currentTarget.value = blockInvalidValue(
       event.currentTarget.value,
