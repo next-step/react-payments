@@ -68,6 +68,7 @@
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "chromatic": "^6.17.0",
     "craco-alias": "^3.0.1",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
@@ -78,5 +79,7 @@
     "prop-types": "^15.8.1",
     "tsconfig-paths-webpack-plugin": "^4.0.0",
     "webpack": "^5.75.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "react-payments@0.1.0"
 }

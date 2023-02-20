@@ -17,6 +17,8 @@
 ## 데모 사이트
 
 <a href='https://react-payments-gilt.vercel.app' target="__blank">리액트 페이먼츠</a>
+<br/>
+<a href='https://63f3ad2683ec21dc9f02d0de-tdzxdujtao.chromatic.com' target="__blank">리액트 페이먼츠 스토리북</a>
 
 ## 📝 Requirements
 
