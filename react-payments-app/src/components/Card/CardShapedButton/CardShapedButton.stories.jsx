@@ -1,11 +1,11 @@
-import CardShapedButton from './Card';
+import { CardShapedButton as CardShapedButtonComponent } from './CardShapedButton';
 import '../card.css';
 
 export default {
   title: 'Components/Card/CardShapedButton',
-  component: CardShapedButton,
+  component: CardShapedButtonComponent,
 };
 
 const Template = (args) => <CardShapedButton {...args} />;
 
-export const Default = Template.bind({});
+export const CardShapedButton = Template.bind({});
