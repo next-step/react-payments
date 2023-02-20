@@ -11,7 +11,7 @@ const CardOwnerInput = ({ onChange }) => {
 
     updatedCardOwner = e.target.value;
     setCardOwner(updatedCardOwner);
-    setLength(cardOwner.length);
+    setLength(updatedCardOwner.length);
 
     if (length === MAX_INPUT_LENGTH.NAME) {
       setError('이름은 30자까지만 입력할 수 있습니다.');
@@ -27,7 +27,7 @@ const CardOwnerInput = ({ onChange }) => {
     <div className='input-container'>
       <div className='input-title-box'>
         <span className='input-title'>카드 소유자 이름(선택)</span>
-        <span className='input-title'>{length} / 30</span>
+        <span className='input-title'>{length ? length : 0} / 30</span>
       </div>
       <input
         type='text'
