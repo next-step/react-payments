@@ -12,7 +12,7 @@ type Props = {
 
 const CardCVCInput = (props: Props) => {
   const [cvc, setCVC] = useState('');
-  const { dirtyState, toggleDirtyState } = useBlur();
+  const { dirtyState, makeDirty } = useBlur();
   const keyPressInterceptor = useNumberKeyInterceptor();
 
   const isCVCValid = useMemo(
@@ -44,7 +44,7 @@ const CardCVCInput = (props: Props) => {
         type="password"
         onKeyPress={keyPressInterceptor}
         onChange={handleChangeCVC}
-        onBlur={toggleDirtyState}
+        onBlur={makeDirty}
         maxLength={3}
       />
     </InputContainer>

@@ -21,7 +21,7 @@ type Props = {
 
 const CardNumberInput = (props: Props) => {
   const [cardNumbers, setCardNumbers] = useState(initialState);
-  const { dirtyState, toggleDirtyState } = useBlur();
+  const { dirtyState, makeDirty } = useBlur();
   const keyPressInterceptor = useNumberKeyInterceptor();
 
   const isValidCardNumberLength =
@@ -58,7 +58,7 @@ const CardNumberInput = (props: Props) => {
         maxLength={4}
         onKeyPress={keyPressInterceptor}
         onChange={(e) => handleChangeCardNumber(e)}
-        onBlur={toggleDirtyState}
+        onBlur={makeDirty}
         required
       />
       <input
@@ -68,7 +68,7 @@ const CardNumberInput = (props: Props) => {
         maxLength={4}
         onKeyPress={keyPressInterceptor}
         onChange={handleChangeCardNumber}
-        onBlur={toggleDirtyState}
+        onBlur={makeDirty}
       />
       <input
         type="password"
@@ -77,7 +77,7 @@ const CardNumberInput = (props: Props) => {
         maxLength={4}
         onKeyPress={keyPressInterceptor}
         onChange={handleChangeCardNumber}
-        onBlur={toggleDirtyState}
+        onBlur={makeDirty}
       />
       <input
         type="password"
@@ -86,7 +86,7 @@ const CardNumberInput = (props: Props) => {
         maxLength={4}
         onKeyPress={keyPressInterceptor}
         onChange={handleChangeCardNumber}
-        onBlur={toggleDirtyState}
+        onBlur={makeDirty}
       />
     </InputContainer>
   );

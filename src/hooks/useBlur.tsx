@@ -1,13 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 export const useBlur = () => {
   const [dirtyState, setDirtyState] = useState(false);
 
-  return useMemo(
-    () => ({
-      dirtyState,
-      toggleDirtyState: () => setDirtyState(true),
-    }),
-    [dirtyState]
-  );
+  return {
+    dirtyState,
+    makeDirty: () => setDirtyState(true),
+  };
 };

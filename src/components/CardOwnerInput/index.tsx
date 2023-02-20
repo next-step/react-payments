@@ -11,7 +11,7 @@ type Props = {
 
 const CardOwnerInput = (props: Props) => {
   const [owner, setOwner] = useState('');
-  const { dirtyState, toggleDirtyState } = useBlur();
+  const { dirtyState, makeDirty } = useBlur();
 
   const isOwnerValid = useMemo(
     () => Boolean(owner && owner.length < MAX_OWNER_NAME_LENGTH),
@@ -42,7 +42,7 @@ const CardOwnerInput = (props: Props) => {
         type="text"
         placeholder="Dahye"
         onChange={handleChangeOwner}
-        onBlur={toggleDirtyState}
+        onBlur={makeDirty}
         maxLength={MAX_OWNER_NAME_LENGTH}
       />
       <span>

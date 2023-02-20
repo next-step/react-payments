@@ -19,7 +19,7 @@ type Props = {
 
 const ExpiredDateInput = (props: Props) => {
   const [expiredDate, setExpiredDate] = useState(initialState);
-  const { dirtyState, toggleDirtyState } = useBlur();
+  const { dirtyState, makeDirty } = useBlur();
   const numberKeyPressInterceptor = useNumberKeyInterceptor();
 
   const isExpiredDateValid = Boolean(
@@ -67,7 +67,7 @@ const ExpiredDateInput = (props: Props) => {
         maxLength={2}
         onKeyPress={numberKeyPressInterceptor}
         onChange={handleChangeExpiredDate}
-        onBlur={toggleDirtyState}
+        onBlur={makeDirty}
       />
       /
       <input
@@ -78,7 +78,7 @@ const ExpiredDateInput = (props: Props) => {
         maxLength={2}
         onKeyPress={numberKeyPressInterceptor}
         onChange={handleChangeExpiredDate}
-        onBlur={toggleDirtyState}
+        onBlur={makeDirty}
       />
     </InputContainer>
   );

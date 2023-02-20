@@ -1,6 +1,7 @@
 import { ChangeEvent, memo, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
+import { useBlur } from '@/hooks/useBlur';
 import { initialCardState } from '@/pages/CardRegisterPage';
 import { CardKey } from '@/types';
 
@@ -10,7 +11,7 @@ type Props = {
 
 const CardOwnerInput = (props: Props) => {
   const [owner, setOwner] = useState('');
-  const [dirtyState, setDirtyState] = useState(false);
+  const { dirtyState, makeDirty } = useBlur();
 
   const isOwnerValid = useMemo(
     () => Boolean(owner && owner.length < MAX_OWNER_NAME_LENGTH),
@@ -38,7 +39,7 @@ const CardOwnerInput = (props: Props) => {
         type="text"
         placeholder="Dahye"
         onChange={handleChangeOwner}
-        onBlur={() => setDirtyState(true)}
+        onBlur={makeDirty}
         maxLength={MAX_OWNER_NAME_LENGTH}
       />
       <span>

@@ -19,7 +19,7 @@ const initialState = {
 
 const CardPwdInput = (props: Props) => {
   const [pwd, setPwd] = useState(initialState);
-  const { dirtyState, toggleDirtyState } = useBlur();
+  const { dirtyState, makeDirty } = useBlur();
   const keyPressInterceptor = useNumberKeyInterceptor();
 
   const isPwdValid = useMemo(
@@ -53,7 +53,7 @@ const CardPwdInput = (props: Props) => {
         name="1"
         onKeyPress={keyPressInterceptor}
         onChange={handleChangePwd}
-        onBlur={toggleDirtyState}
+        onBlur={makeDirty}
         maxLength={1}
       />
       <input
@@ -61,7 +61,7 @@ const CardPwdInput = (props: Props) => {
         name="2"
         onKeyPress={keyPressInterceptor}
         onChange={handleChangePwd}
-        onBlur={toggleDirtyState}
+        onBlur={makeDirty}
         maxLength={1}
       />
       <input
@@ -69,7 +69,7 @@ const CardPwdInput = (props: Props) => {
         name="3"
         onKeyPress={keyPressInterceptor}
         onChange={handleChangePwd}
-        onBlur={toggleDirtyState}
+        onBlur={makeDirty}
         maxLength={1}
       />
       <input
@@ -77,7 +77,7 @@ const CardPwdInput = (props: Props) => {
         name="4"
         onKeyPress={keyPressInterceptor}
         onChange={handleChangePwd}
-        onBlur={toggleDirtyState}
+        onBlur={makeDirty}
         maxLength={1}
       />
     </InputContainer>
