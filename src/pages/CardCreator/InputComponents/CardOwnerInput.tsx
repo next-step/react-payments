@@ -37,4 +37,4 @@ function CardOwnerInput({
   );
 }
 
-export default CardOwnerInput;
+export { CardOwnerInput };

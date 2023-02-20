@@ -3,8 +3,8 @@ import { Route, Routes } from 'react-router-dom';
 
 import { routes } from '@/routes';
 
-import CardList from './CardList';
-import CardCreator from './CardCreator';
+import { CardList } from '@/pages/CardList';
+import { CardCreator } from '@/pages/CardCreator';
 
 function Router() {
   return (

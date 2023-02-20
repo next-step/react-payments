@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 
-import type useExtendedState from './hooks/useExtendedState';
-import { PasswordsState } from './types/types';
-import { checkIsArrayLast, filterNumber, updateArray, updateObject } from './utils/utils';
+import type useExtendedState from '../../../hooks/useExtendedState';
+import { PasswordsState } from '../../../types/types';
+import { checkIsArrayLast, filterNumber, updateArray, updateObject } from '../../../utils/utils';
 
 interface PasswordInputProps {
   // prettier-ignore
@@ -68,4 +68,4 @@ function PasswordInput({
   );
 }
 
-export default PasswordInput;
+export { PasswordInput };

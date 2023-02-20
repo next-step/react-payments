@@ -3,14 +3,11 @@ import { styled } from '@stitches/react';
 import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
-import Card from './Card';
+import Card from '@/components/Card';
+import useExtendedState from '@/hooks/useExtendedState';
+
+import { CardNumberInput, CardOwnerInput, ExpireDateInput, PasswordInput, SecurityCodeInput } from './InputComponents';
 import { cardNumbersInit, expireDatesInit, passwordsInit } from './CardCreatorInits';
-import { CardNumberInput } from './CardNumberInput';
-import useExtendedState from './hooks/useExtendedState';
-import ExpireDateInput from './ExpireDateInput';
-import CardOwnerInput from './CardOwnerInput';
-import PasswordInput from './PasswordInput';
-import { SecurityCodeInput } from './SecurityCodeInput';
 
 function CardCreator() {
   const cardNumbersStateBundle = useExtendedState(cardNumbersInit);
@@ -67,4 +64,4 @@ function CardCreator() {
   );
 }
 
-export default CardCreator;
+export { CardCreator };

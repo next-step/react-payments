@@ -1,8 +1,8 @@
 import React from 'react';
 
-import useExtendedState from './hooks/useExtendedState';
-import { ExpireDatesState } from './types/types';
-import { checkIsArrayLast, filterNumber, updateArray, updateObject } from './utils/utils';
+import useExtendedState from '../../../hooks/useExtendedState';
+import { ExpireDatesState } from '../../../types/types';
+import { checkIsArrayLast, filterNumber, updateArray, updateObject } from '../../../utils/utils';
 
 interface ExpireDateInputProps {
   // prettier-ignore
@@ -76,4 +76,4 @@ function ExpireDateInput({
   );
 }
 
-export default ExpireDateInput;
+export { ExpireDateInput };

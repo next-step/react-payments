@@ -35,6 +35,7 @@ module.exports = {
     'react/no-array-index-key': 1,
     'import/no-extraneous-dependencies': 0,
     'import/extensions': 0,
+    'import/export': 0,
     'import/prefer-default-export': 0,
     '@typescript-eslint/no-empty-interface': 0,
   },

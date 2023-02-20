@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 
 import type { CardNumbersState } from '@/types/types';
 import { checkIsArrayLast, filterNumber, updateArray, updateObject } from '@/utils/utils';
-import useExtendedState from './hooks/useExtendedState';
+import useExtendedState from '../../../hooks/useExtendedState';
 
 interface CardNumberInputProps {
   // prettier-ignore

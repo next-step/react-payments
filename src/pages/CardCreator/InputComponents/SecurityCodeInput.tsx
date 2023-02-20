@@ -1,7 +1,7 @@
 import React from 'react';
 import type { useState } from 'react';
 
-import { filterNumber } from './utils/utils';
+import { filterNumber } from '../../../utils/utils';
 
 interface SecurityCodeInputProps {
   // prettier-ignore
