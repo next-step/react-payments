@@ -8,6 +8,6 @@ export const setItem = (key: string, value: unknown) => {
 
 export const getItem = (key: string) => {
   const json = localStorage.getItem(key);
-  if (json === null) return null;
+  if (!json) return null;
   return JSON.parse(json);
 };
