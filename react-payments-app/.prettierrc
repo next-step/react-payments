@@ -1,5 +1,5 @@
 {
   "singleQuote": true,
   "jsxSingleQuote": true,
-  "endOfLine": "auto"
+  "endOfLine": "lf"
 }
