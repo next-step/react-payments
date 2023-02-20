@@ -24,8 +24,9 @@ const validateCardExpireDateInput = (element: HTMLInputElement) => {
     const expireMonth = parseInt(value);
 
     if (
-      expireMonth < CARD_INPUT_VARIABLES.MIN_MONTH ||
-      expireMonth > CARD_INPUT_VARIABLES.MAX_MONTH
+      value.length === CARD_INPUT_VARIABLES.DATE_MAX_LENGTH &&
+      (expireMonth < CARD_INPUT_VARIABLES.MIN_MONTH ||
+        expireMonth > CARD_INPUT_VARIABLES.MAX_MONTH)
     ) {
       alert(CARD_VALIDATION_ERROR_MESSAGES.MONTH_RANGE);
       return false;
