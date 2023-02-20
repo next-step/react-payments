@@ -3,8 +3,6 @@ import AddCard from './pages/AddCard';
 import CardList from './pages/CardList';
 import CompleteAddCard from './pages/CompleteAddCard';
 
-import './App.css';
-
 const App = () => {
   return (
     <BrowserRouter>
