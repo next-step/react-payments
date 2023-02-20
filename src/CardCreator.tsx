@@ -132,7 +132,7 @@ function CardCreator() {
             <input
               type="text"
               className="input-basic"
-              value={ownerName || ''}
+              value={ownerName ?? ''}
               maxLength={30}
               placeholder="카드에 표시된 이름과 동일하게 입력하세요."
               onChange={(e) => {
@@ -146,7 +146,7 @@ function CardCreator() {
             <input
               className="input-basic w-25"
               type="password"
-              value={securityCode || ''}
+              value={securityCode ?? ''}
               onChange={(e) => {
                 const numberValue = filterNumber(e.currentTarget.value);
                 if (numberValue.length > 3) {
@@ -182,7 +182,7 @@ function CardCreator() {
                     key={key}
                     type="password"
                     className="input-basic w-15 mr-10"
-                    value={value || ''}
+                    value={value ?? ''}
                     ref={(ref) => {
                       passwordInputsRef.current[i] = ref;
                     }}
