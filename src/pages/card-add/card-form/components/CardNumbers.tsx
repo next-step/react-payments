@@ -42,6 +42,7 @@ const CardNumbers = ({ numbers, handleChange }: CardNumbersProps) => {
           value={numbers.first}
           onChange={handleChange}
         />
+        {first.length === 4 && <span>-</span>}
         <input
           ref={secondRef}
           className="input-basic"
@@ -50,6 +51,7 @@ const CardNumbers = ({ numbers, handleChange }: CardNumbersProps) => {
           value={numbers.second}
           onChange={handleChange}
         />
+        {second.length === 4 && <span>-</span>}
         <input
           ref={thirdRef}
           className="input-basic"
@@ -58,6 +60,7 @@ const CardNumbers = ({ numbers, handleChange }: CardNumbersProps) => {
           value={numbers.third}
           onChange={handleChange}
         />
+        {third.length === 4 && <span>-</span>}
         <input
           ref={fourthRef}
           className="input-basic"

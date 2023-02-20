@@ -1,3 +1,5 @@
+import { getConvertedStringsByStars } from '@/domain'
+
 interface CardProps {
   cardNumbers: { first: string; second: string; third: string; fourth: string }
   name: string
@@ -7,6 +9,7 @@ interface CardProps {
 
 function Card({ cardNumbers, name, expiratedYear, expiratedMonth }: CardProps) {
   const { first, second, third, fourth } = cardNumbers
+
   return (
     <div className="card-box">
       <div className="empty-card">
@@ -14,7 +17,9 @@ function Card({ cardNumbers, name, expiratedYear, expiratedMonth }: CardProps) {
         <div className="card-middle">
           <div className="small-card__chip" />
           <div className="card-number">
-            <span>{`${first} ${second} ${third} ${fourth}`}</span>
+            <span>{`${first} ${second} ${getConvertedStringsByStars(
+              third,
+            )} ${getConvertedStringsByStars(fourth)}`}</span>
           </div>
         </div>
         <div className="card-bottom">
