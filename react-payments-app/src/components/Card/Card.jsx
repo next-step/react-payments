@@ -6,6 +6,9 @@ const Card = ({
   cardNickname,
   cardStatus,
 }) => {
+  // TODO: 카드UI 표시 더 자연스럽게 로직 수정
+  const cardNumbersToDisplay = hideLastEightNumbers(cardNumbers);
+
   return (
     <div id='card'>
       <div className='flex-column-center mb-10'>
@@ -20,19 +23,13 @@ const Card = ({
             <div className='card-bottom'>
               <div className='card-bottom__number'>
                 <span className='card-text'>
-                  {/* TODO: 데이터가 없을 떈 대시(-)가 붙지 않도록 */}
-                  {cardNumbers.map((fourDigits, idx) =>
-                    idx === cardNumbers.length - 1
-                      ? fourDigits
-                      : fourDigits + '-'
-                  )}
+                  {cardNumbersToDisplay[0] && cardNumbersToDisplay.join('-')}
                 </span>
               </div>
               <div className='card-bottom__info'>
                 <span className='card-text'>{cardOwner}</span>
                 <span className='card-text'>
-                  {/* TODO: 데이터가 없을 떈 대시(/)가 붙지 않도록 */}
-                  {cardExpirationDate.join('/')}
+                  {cardExpirationDate[0] && cardExpirationDate.join('/')}
                 </span>
               </div>
             </div>
@@ -44,3 +41,13 @@ const Card = ({
   );
 };
 export default Card;
+
+const hideLastEightNumbers = (cardNumbers) => {
+  const copy = [...cardNumbers];
+
+  const lastEightDigits = copy.slice(-2).map((digits) => digits && '****');
+  copy[copy.length - 2] = lastEightDigits[0];
+  copy[copy.length - 1] = lastEightDigits[1];
+
+  return copy;
+};
