@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useRefs from '../hooks/useRefs';
@@ -5,10 +6,10 @@ import useRefs from '../hooks/useRefs';
 const AddCard = () => {
   const navigate = useNavigate();
   const cardRefs = useRefs<HTMLInputElement>(4);
+  const expirationDateRef = useRef<HTMLInputElement>(null);
 
   const handleCardNumber = (index: number) => {
     const currentInput = cardRefs[index].current;
-
     if (!currentInput) return;
 
     currentInput.value = currentInput.value.replace(/[^0-9]/g, '');
@@ -18,6 +19,38 @@ const AddCard = () => {
         cardRefs[index + 1].current?.focus();
       }
     }
+  };
+
+  const checkExpiration = () => {
+    if (!expirationDateRef.current) return;
+
+    const currentValue = expirationDateRef.current.value.replace(/[^0-9]/g, '');
+    if (currentValue === '') return;
+
+    const month = currentValue.slice(0, 2);
+    if (month >= '01' && month <= '12') {
+      const date =
+        month + (currentValue.length > 2 ? '/' + currentValue.slice(2, 4) : '');
+      expirationDateRef.current.value = date;
+      return;
+    }
+
+    alert('유효하지 않아요');
+    expirationDateRef.current.value = '';
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value === '') return;
+    if (!expirationDateRef.current) return;
+
+    if ((e.nativeEvent as InputEvent).inputType === 'deleteContentBackward') {
+      if (e.target.value.length === 2) {
+        expirationDateRef.current.value = e.target.value.slice(0, 1);
+      }
+      return;
+    }
+
+    checkExpiration();
   };
 
   return (
@@ -78,8 +111,14 @@ const AddCard = () => {
       <div className="input-container">
         <span className="input-title">만료일</span>
         <div className="input-box w-50">
-          <input className="input-basic" type="text" placeholder="MM" />
-          <input className="input-basic" type="text" placeholder="YY" />
+          <input
+            className="input-basic"
+            type="text"
+            placeholder="MM / YY"
+            maxLength={5}
+            ref={expirationDateRef}
+            onChange={handleChange}
+          />
         </div>
       </div>
       <div className="input-container">
