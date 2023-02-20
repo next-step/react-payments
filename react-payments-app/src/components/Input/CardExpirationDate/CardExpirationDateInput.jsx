@@ -8,7 +8,7 @@ const CardExpirationDateInput = ({ onChange }) => {
   const [error, setError] = useState('');
   const nextElement = useRef(null);
 
-  const setExpirationDateByIndex = (index) => (e) => {
+  const handleCardExpirationDateChange = (index) => (e) => {
     const updatedExpirationDate = [...expirationDate];
     const { value } = e.target;
 
@@ -53,7 +53,7 @@ const CardExpirationDateInput = ({ onChange }) => {
           placeholder='MM'
           maxLength={MAX_INPUT_LENGTH.DATE}
           value={expirationDate[0]}
-          onChange={setExpirationDateByIndex(0)}
+          onChange={handleCardExpirationDateChange(0)}
           required
         />
         /
@@ -64,7 +64,7 @@ const CardExpirationDateInput = ({ onChange }) => {
           placeholder='YY'
           maxLength={MAX_INPUT_LENGTH.DATE}
           value={expirationDate[1]}
-          onChange={setExpirationDateByIndex(1)}
+          onChange={handleCardExpirationDateChange(1)}
           required
         />
       </div>

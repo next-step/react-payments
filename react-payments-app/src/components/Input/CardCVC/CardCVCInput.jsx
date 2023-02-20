@@ -5,7 +5,7 @@ const CardCVCInput = ({ onChange }) => {
   const [CVC, setCVC] = useState('');
   const [error, setError] = useState('');
 
-  const setCVCByInput = (e) => {
+  const hanldeCVCChange = (e) => {
     let updatedCVC = CVC;
     const { value } = e.target;
 
@@ -31,7 +31,7 @@ const CardCVCInput = ({ onChange }) => {
         type='password'
         maxLength={MAX_INPUT_LENGTH.CVC}
         value={CVC}
-        onChange={setCVCByInput}
+        onChange={hanldeCVCChange}
         required
       />
       {/** TODO: CVC 섦명 아이콘 추가 */}

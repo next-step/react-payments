@@ -6,7 +6,7 @@ const CardOwnerInput = ({ onChange }) => {
   const [length, setLength] = useState('');
   const [error, setError] = useState('');
 
-  const setCardOwnerByInput = (e) => {
+  const handleCardOwnerChange = (e) => {
     let updatedCardOwner = cardOwner;
 
     updatedCardOwner = e.target.value;
@@ -35,7 +35,7 @@ const CardOwnerInput = ({ onChange }) => {
         placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
         maxLength={MAX_INPUT_LENGTH.NAME + 2}
         value={cardOwner}
-        onChange={setCardOwnerByInput}
+        onChange={handleCardOwnerChange}
       />
     </div>
   );
