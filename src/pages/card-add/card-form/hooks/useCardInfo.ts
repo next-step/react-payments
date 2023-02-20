@@ -10,7 +10,7 @@ const useCardInfo = () => {
     expiratedMonth: '',
     owner: '',
     securityCode: '',
-    password: '',
+    password: { first: '', second: '' },
   })
 
   const handleNumber = (event: ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +91,24 @@ const useCardInfo = () => {
   }
 
   const handlePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    setCardInfo((prev) => ({ ...prev, password: event.target.value }))
+    const {
+      dataset: { name },
+      value,
+    } = event.target
+    if (value.length > 1) return
+    switch (name) {
+      case 'first':
+        setCardInfo((prev) => ({
+          ...prev,
+          password: { ...prev.password, first: value },
+        }))
+        break
+      case 'second':
+        setCardInfo((prev) => ({
+          ...prev,
+          password: { ...prev.password, second: value },
+        }))
+    }
   }
   return {
     cardInfo,

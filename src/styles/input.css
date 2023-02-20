@@ -24,6 +24,11 @@
   color: #525252;
 }
 
+.input-password-container {
+  display: flex;
+  gap: 8px;
+}
+
 .input-basic {
   background-color: #ecebf1;
   height: 45px;
