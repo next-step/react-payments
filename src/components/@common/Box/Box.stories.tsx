@@ -32,7 +32,7 @@ export const Primary: ComponentStory<typeof Box> = (args) => (
 );
 
 const Box1 = styled.div`
-  width: 300px;
+  width: 250px;
   height: 100px;
   background-color: red;
 `;
