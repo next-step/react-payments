@@ -1,17 +1,24 @@
-import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { CreditCard } from 'components';
 import { Box, Header, TextField, FormControl } from 'components/@common';
-
-const textFieldCSS = css`
-  width: 20%;
-`;
+import { useState } from 'react';
 
 const RegistrationCardPage = () => {
+  const [number, setNumber] = useState('');
+
+  const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target as HTMLInputElement;
+    const formattedValue = value
+      .replace(/[^0-9]/g, '')
+      .replace(/^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})$/g, '$1-$2-$3-$4')
+      .replace(/(-{1,3})$/g, '');
+    setNumber(formattedValue);
+  };
+
   return (
     <>
       <Header showBackIcon>카드 추가</Header>
-      <CreditCard color="brand02" />
+      <CreditCard color="brand02" number={number} />
       <Wrapper>
         <FormControl>
           <FormControl.Label>카드 번호</FormControl.Label>
@@ -20,13 +27,16 @@ const RegistrationCardPage = () => {
             justifyContent="space-between"
             alignItems="center"
           >
-            <TextField placeholder="0000" className="w-20" />
-            <FormControl.Separator>-</FormControl.Separator>
-            <TextField placeholder="0000" className="w-20" />
-            <FormControl.Separator>-</FormControl.Separator>
-            <TextField placeholder="0000" className="w-20" />
-            <FormControl.Separator>-</FormControl.Separator>
-            <TextField placeholder="0000" className="w-20" />
+            <TextField
+              placeholder="0000 0000 0000 0000"
+              type="text"
+              inputMode="numeric"
+              pattern="\d*"
+              maxLength={19}
+              value={number}
+              onChange={handleNumber}
+              className="w-100"
+            />
           </Box>
         </FormControl>
 
