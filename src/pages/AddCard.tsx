@@ -8,6 +8,7 @@ const AddCard = () => {
   const cardRefs = useRefs<HTMLInputElement>(4);
   const expirationDateRef = useRef<HTMLInputElement>(null);
   const securityCodeRef = useRef<HTMLInputElement>(null);
+  const cardPasswordRefs = useRefs<HTMLInputElement>(2);
 
   const handleCardNumber = (index: number) => {
     const currentInput = cardRefs[index].current;
@@ -18,6 +19,19 @@ const AddCard = () => {
     if (currentInput.value.length === 4) {
       if (index < cardRefs.length - 1) {
         cardRefs[index + 1].current?.focus();
+      }
+    }
+  };
+
+  const handleCardPassword = (index: number) => {
+    const currentInput = cardPasswordRefs[index].current;
+    if (!currentInput) return;
+
+    currentInput.value = currentInput.value.replace(/[^0-9]/g, '');
+
+    if (currentInput.value.length === 1) {
+      if (index < cardPasswordRefs.length - 1) {
+        cardPasswordRefs[index + 1].current?.focus();
       }
     }
   };
@@ -152,10 +166,32 @@ const AddCard = () => {
       </div>
       <div className="input-container">
         <span className="input-title">카드 비밀번호</span>
-        <input className="input-basic w-15" type="password" />
-        <input className="input-basic w-15" type="password" />
-        <input className="input-basic w-15" type="password" />
-        <input className="input-basic w-15" type="password" />
+        <input
+          className="input-basic w-15"
+          type="password"
+          maxLength={1}
+          ref={cardPasswordRefs[0]}
+          onChange={() => handleCardPassword(0)}
+        />
+        <input
+          className="input-basic w-15"
+          type="password"
+          maxLength={1}
+          ref={cardPasswordRefs[1]}
+          onChange={() => handleCardPassword(1)}
+        />
+        <input
+          className="input-basic w-15"
+          type="password"
+          placeholder="*"
+          disabled
+        />
+        <input
+          className="input-basic w-15"
+          type="password"
+          placeholder="*"
+          disabled
+        />
       </div>
       <div className="button-box">
         <span className="button-text">다음</span>
