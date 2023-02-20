@@ -1,4 +1,29 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, css } from "styled-components";
+
+export const resetRightSideBorderRadius = css`
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+`;
+
+export const resetLeftSideBorderRadius = css`
+  border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+`;
+
+export const resetInputBorderRadius = css`
+  .right-side-none-border-radius input {
+    ${resetRightSideBorderRadius}
+  }
+
+  .left-side-none-border-radius input {
+    ${resetLeftSideBorderRadius}
+  }
+
+  .both-side-none-border-radius input {
+    ${resetRightSideBorderRadius}
+    ${resetLeftSideBorderRadius}
+  }
+`;
 
 const GlobalStyle = createGlobalStyle`
     body {

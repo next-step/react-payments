@@ -27,10 +27,10 @@ export const InputEl = styled.input<Pick<InputProps, "textAlign" | "color">>`
   font-size: 16px;
 `;
 
-export const InputWrapper = styled.div<Pick<InputProps, "variant">>`
+export const InputWrapper = styled.div<Pick<InputProps, "variant" | "label">>`
   display: flex;
   align-items: center;
-  margin-top: 0.375rem;
+  margin-top: ${(props) => (props.label ? "0.375rem" : "0px")};
   color: #d3d3d3;
   border-radius: 0.25rem;
   background-color: ${(props) =>

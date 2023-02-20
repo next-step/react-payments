@@ -33,15 +33,35 @@ function HeaderLeftPointArrow() {
 }
 
 export default function AddCard() {
-  const { cardNumber, onCardNumberChange } = useCardNumberInput("");
+  const { cardNumber, onCardNumberChange } = useCardNumberInput({
+    num1: "",
+    num2: "",
+    num3: "",
+    num4: "",
+  });
   const { cardExpireDate, onCardExpireDateChange } = useCardExpireDateInput("");
   const { cardOwnerName, onCardOwnerNameChange } = useCardOwnerInput("");
   const { cvcNumber, onCvcNumberChange } = useCardCvcInput("");
 
+  const cardNumberWithDash = useMemo(
+    () =>
+      Object.keys(cardNumber)
+        .map((fieldId, idx) => {
+          if (idx <= 1) {
+            return cardNumber[fieldId];
+          } else {
+            return cardNumber[fieldId].replaceAll(/[0-9]/g, "•");
+          }
+        })
+        .filter((number) => number !== "")
+        .join("-"),
+    [cardNumber]
+  );
+
   const cardInfo = useMemo(
     () => ({
       cardName: cardOwnerName,
-      cardNumber: cardNumber.split("-"),
+      cardNumber: cardNumberWithDash,
       cardOwnerName: "NAME",
       expireDate: cardExpireDate || "MM/YY",
     }),
@@ -58,7 +78,10 @@ export default function AddCard() {
       <AddCardForm>
         <Card className="add-form-card" size="small" cardInfo={cardInfo} />
         <AddCardFormInputWrapper>
-          <CardNumberInput value={cardNumber} onKeyDown={onCardNumberChange} />
+          <CardNumberInput
+            cardNumber={cardNumber}
+            onChange={onCardNumberChange}
+          />
           <CardExpireDateInput
             value={cardExpireDate}
             onChange={onCardExpireDateChange}

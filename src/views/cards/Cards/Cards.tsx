@@ -17,7 +17,7 @@ export default function Cards() {
               key={id}
               cardInfo={{
                 cardName,
-                cardNumber: cardNumber.split("-"),
+                cardNumber,
                 cardOwnerName,
                 expireDate,
               }}

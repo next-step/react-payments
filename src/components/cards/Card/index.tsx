@@ -13,7 +13,7 @@ import {
 
 type CardInfo = {
   cardName: string;
-  cardNumber: string[];
+  cardNumber: string;
   cardOwnerName: string;
   expireDate: string;
 };
@@ -43,9 +43,7 @@ export default function Card({
       </CardMiddleWrapper>
       <CardBottomWrapper>
         <CardNumberWrapper>
-          {cardNumber.map((number, idx) => (
-            <CardText key={idx}>{number}</CardText>
-          ))}
+          <CardText>{cardNumber}</CardText>
         </CardNumberWrapper>
         <CardInfoWrapper>
           <CardText>{cardOwnerName}</CardText>
