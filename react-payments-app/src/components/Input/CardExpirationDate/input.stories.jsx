@@ -1,10 +1,10 @@
-import CardExpirationDateInput from "./input";
+import CardExpirationDateInput from './input';
 
-import "../input.css";
-import "../../../styles/index.css";
+import '../input.css';
+import '../../../styles/index.css';
 
 export default {
-  title: "Components/Input/CardExpirationDateInput",
+  title: 'Components/Input/CardExpirationDateInput',
   component: CardExpirationDateInput,
 };
 

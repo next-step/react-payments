@@ -1,9 +1,9 @@
-import CardOwnerInput from "./input";
+import CardOwnerInput from './input';
 
-import "../input.css";
+import '../input.css';
 
 export default {
-  title: "Components/Input/CardOwnerInput",
+  title: 'Components/Input/CardOwnerInput',
   component: CardOwnerInput,
 };
 

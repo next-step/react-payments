@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
-import { MAX_INPUT_LENGTH } from "../../../common/constant";
+import { useState, useEffect } from 'react';
+import { MAX_INPUT_LENGTH } from '../../../common/constant';
 
 const CardCVCInput = ({ onChange }) => {
-  const [CVC, setCVC] = useState("");
-  const [error, setError] = useState("");
+  const [CVC, setCVC] = useState('');
+  const [error, setError] = useState('');
 
   const setCVCByInput = (e) => {
     let updatedCVC = CVC;
     const { value } = e.target;
 
     if (Number.isNaN(+value)) {
-      setError("숫자만 입력해주세요.");
+      setError('숫자만 입력해주세요.');
       return;
     }
 
@@ -23,11 +23,11 @@ const CardCVCInput = ({ onChange }) => {
   }, [CVC, error]);
 
   return (
-    <div className="input-container">
-      <span className="input-title">보안코드(CVC/CVV)</span>
+    <div className='input-container'>
+      <span className='input-title'>보안코드(CVC/CVV)</span>
       <input
-        className="input-basic w-25"
-        type="password"
+        className='input-basic w-25'
+        type='password'
         maxLength={MAX_INPUT_LENGTH.CVC}
         value={CVC}
         onChange={setCVCByInput}

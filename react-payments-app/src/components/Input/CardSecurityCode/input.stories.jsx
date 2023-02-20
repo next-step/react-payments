@@ -1,10 +1,10 @@
-import CardCVCInput from "./input";
+import CardCVCInput from './input';
 
-import "../input.css";
-import "/src/styles/utils.css";
+import '../input.css';
+import '/src/styles/utils.css';
 
 export default {
-  title: "Components/Input/CardCVCInput",
+  title: 'Components/Input/CardCVCInput',
   component: CardCVCInput,
 };
 

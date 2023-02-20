@@ -1,10 +1,15 @@
-@import "../components/Card/card.css";
-@import "../components/Input/input.css";
-@import "../components/Button/button.css";
-@import "../components/Modal/modal.css";
-@import "./utils.css";
+@import '../components/Card/card.css';
+@import '../components/Input/input.css';
+@import '../components/Button/button.css';
+@import '../components/Modal/modal.css';
+@import './utils.css';
+@import './wrap.css';
+
+/* TODO: margin:0 적용해도 height 스크롤 생기는 이유?*/
 
 body {
+  height: 100%;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

@@ -1,10 +1,10 @@
-import CardNickname from "./input";
+import CardNickname from './input';
 
-import "../input.css";
-import "../../../styles/index.css";
+import '../input.css';
+import '../../../styles/index.css';
 
 export default {
-  title: "Components/Input/CardNickname",
+  title: 'Components/Input/CardNickname',
   component: CardNickname,
 };
 
