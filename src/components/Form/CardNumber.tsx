@@ -1,7 +1,11 @@
 import { useEffect, useState, useRef } from "react";
+import { remainOnlyNumber } from "../../utils/format";
 import Input from "../Input/Input";
 import InputBox from "../Input/InputBox";
 import InputContainer from "../Input/InputContainer";
+
+const CARD_MAX_LENGTH = 4; // 카드에 들어가는 최대 길이
+const PASSWORD_TYPE_START_INDEX = 2; // 패스워드 타입 시작 인덱스
 
 function CardNumber({ onCardNumberChange }: CardNumberProps) {
   const [cardNumbers, setCardNumbers] = useState([0, 0, 0, 0]);
@@ -16,18 +20,15 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
     event: React.ChangeEvent<HTMLInputElement>,
     order: number
   ) => {
-    event.currentTarget.value = event.currentTarget.value.replace(
-      /[^0-9]/g,
-      ""
-    );
+    event.currentTarget.value = remainOnlyNumber(event.currentTarget.value);
 
     let newArr = [...cardNumbers];
     newArr[order] = Number(event.currentTarget.value);
 
-    if (String(newArr[order]).length > 3) {
-      if (order < 3) {
-        itemsRef.current[order + 1].focus();
-      }
+    const isMaxLength = String(newArr[order]).length === CARD_MAX_LENGTH;
+    const isLastCardNumberIndex = order === cardNumbers.length - 1;
+    if (isMaxLength && !isLastCardNumberIndex) {
+      itemsRef.current[order + 1].focus();
     }
 
     setCardNumbers(newArr);
@@ -39,10 +40,10 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
         {cardNumbers.map((cardNumber, index) => (
           <Input
             onChange={(event) => onChange(event, index)}
-            maxLength={4}
+            maxLength={CARD_MAX_LENGTH}
             name={`card-${index}`}
             key={`card-${index}`}
-            type={index < 2 ? "text" : "password"}
+            type={index < PASSWORD_TYPE_START_INDEX ? "text" : "password"}
             forwardRef={(el: HTMLInputElement) =>
               (itemsRef.current[index] = el)
             }
