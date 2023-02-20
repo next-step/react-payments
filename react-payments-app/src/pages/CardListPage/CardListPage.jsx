@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import Card from '../../components/Card/Card';
 import CardShapedButton from '../../components/Card/CardShapedButton/CardShapedButton';
+import { useCard } from '../../store/CardContext';
 
 const CardListPage = () => {
   const navigate = useNavigate();
@@ -11,13 +12,14 @@ const CardListPage = () => {
   return (
     <div className='app flex-column-center'>
       <Header pageTitle={'보유카드'} headerIcon={''} />
-      <Card
+      {/** TODO: deal with registered card shown up on the ListPage */}
+      {/* <Card
         cardStatus={'small-card'}
-        userName={'JEONG'}
-        expirationDate={'12/34'}
+        userName={card.cardNumbers? }
+        expirationDate={card.expirationDate}
         cardName={'현정카드'}
-        cardNumbers={'1234-5678-****-****'}
-      />
+        cardNumbers={card.cardNumbers}
+      /> */}
       <CardShapedButton
         // TODO: add style (cursor pointer)
         onClick={() => navigate('/registration')}
