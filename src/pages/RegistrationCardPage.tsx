@@ -161,7 +161,6 @@ const RegistrationCardPage = () => {
               maxLength={1}
               name="4"
               value={passwords[3] || ''}
-              onBlur={handlePassword}
               onChange={handlePassword}
               className="w-10 text-center"
             />
