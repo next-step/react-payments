@@ -4,21 +4,27 @@ import styled from '@emotion/styled';
 import { CreditCard } from 'components';
 import { Box, Header, TextField, FormControl } from 'components/@common';
 
-import { formatCardNumber } from 'utils/format';
+import { formatCardNumber, formatMMYY } from 'utils/format';
 
 const RegistrationCardPage = () => {
   const [number, setNumber] = useState('');
+  const [expiration, setExpiration] = useState('');
 
   const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
     const formattedValue = formatCardNumber(value);
     setNumber(formattedValue);
   };
+  const handleExpiration = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target as HTMLInputElement;
+    const formattedValue = formatMMYY(value);
+    setExpiration(formattedValue);
+  };
 
   return (
     <>
       <Header showBackIcon>카드 추가</Header>
-      <CreditCard color="brand02" number={number} />
+      <CreditCard color="brand02" number={number} expiration={expiration} />
       <Wrapper>
         <FormControl>
           <FormControl.Label>카드 번호</FormControl.Label>
@@ -28,7 +34,7 @@ const RegistrationCardPage = () => {
             alignItems="center"
           >
             <TextField
-              placeholder="0000 0000 0000 0000"
+              placeholder="0000-0000-0000-0000"
               type="text"
               inputMode="numeric"
               pattern="\d*"
@@ -41,11 +47,15 @@ const RegistrationCardPage = () => {
         </FormControl>
 
         <FormControl>
-          <FormControl.Label>만료 일자</FormControl.Label>
+          <FormControl.Label>만료일</FormControl.Label>
           <Box display="flex" alignItems="center">
-            <TextField placeholder="MM" className="w-20" />
-            <FormControl.Separator>/</FormControl.Separator>
-            <TextField placeholder="YY" className="w-20" />
+            <TextField
+              placeholder="MM / YY"
+              maxLength={5}
+              value={expiration}
+              onChange={handleExpiration}
+              className="w-30"
+            />
           </Box>
         </FormControl>
 
