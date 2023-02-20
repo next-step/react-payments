@@ -36,6 +36,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     'import/extensions': 0,
     'import/prefer-default-export': 0,
+    '@typescript-eslint/no-empty-interface': 0,
   },
   settings: {
     'import/parsers': {
