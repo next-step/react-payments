@@ -27,6 +27,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "chromatic": "^6.17.0",
     "eslint": "^8.34.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
@@ -73,5 +74,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "react-payments@0.1.0"
 }
