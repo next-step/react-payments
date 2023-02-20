@@ -8,12 +8,14 @@ import Card from './Card';
 import { cardNumbersInit, expireDatesInit, passwordsInit } from './CardCreatorInits';
 import { CardNumberInput } from './CardNumberInput';
 import useExtendedState from './hooks/useExtendedState';
+import ExpireDateInput from './ExpireDateInput';
 
 function CardCreator() {
   const cardNumbersStateBundle = useExtendedState(cardNumbersInit);
   const [cardNumbers] = cardNumbersStateBundle;
 
-  const [expireDates, setExpireDates] = useExtendedState(expireDatesInit);
+  const expireDatesStateBundle = useExtendedState(expireDatesInit);
+  const [expireDates] = expireDatesStateBundle;
 
   const [ownerName, setOwnerName] = useState<string>();
 
@@ -52,68 +54,7 @@ function CardCreator() {
             />
           </div>
           <CardNumberInput cardNumbersStateBundle={cardNumbersStateBundle} />
-          <div className="input-container">
-            <span className="input-title">만료일</span>
-            <div className="input-box w-50">
-              {expireDates.map(({ key, value, placeholder, checkIsValid, checkIsAllowInput }, i) => {
-                const isLast = checkIsArrayLast(expireDates, i);
-                const isValueValid = checkIsValid(value);
-
-                return (
-                  <>
-                    <input
-                      key={key}
-                      className="input-basic"
-                      type="text"
-                      value={value ?? ''}
-                      placeholder={placeholder}
-                      onChange={(e) => {
-                        const inputVal = filterNumber(e.currentTarget.value);
-                        if (!checkIsAllowInput(inputVal)) {
-                          return;
-                        }
-
-                        setExpireDates(
-                          (prevExpireDates) =>
-                            updateArray(
-                              prevExpireDates,
-                              i,
-                              updateObject(prevExpireDates[i], 'value', inputVal || undefined)
-                            ),
-                          {
-                            stateRefreshValidator: (prevExpireDates) => {
-                              const prevValue = prevExpireDates[i].value;
-                              return prevValue !== inputVal;
-                            },
-                          }
-                        );
-                      }}
-                      onBlur={(e) => {
-                        const blurValue = e.currentTarget.value;
-                        if (blurValue && blurValue.length !== 0) {
-                          if (blurValue.length === 1) {
-                            const paddedValue = blurValue.padStart(2, '0');
-                            setExpireDates(
-                              (prevExpireDates) =>
-                                updateArray(prevExpireDates, i, updateObject(prevExpireDates[i], 'value', paddedValue)),
-                              {
-                                stateRefreshValidator: (prevExpireDates) => {
-                                  const prevValue = prevExpireDates[i].value;
-                                  return prevValue !== paddedValue;
-                                },
-                              }
-                            );
-                            e.currentTarget.value = paddedValue;
-                          }
-                        }
-                      }}
-                    />
-                    {!isLast && isValueValid && <div className="text-black">/</div>}
-                  </>
-                );
-              })}
-            </div>
-          </div>
+          <ExpireDateInput expireDatesStateBundle={expireDatesStateBundle} />
           <div className="input-container">
             <div className="flex-between">
               <span className="input-title">카드 소유자 이름(선택)</span>

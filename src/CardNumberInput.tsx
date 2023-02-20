@@ -6,7 +6,7 @@ import useExtendedState from './hooks/useExtendedState';
 
 interface CardNumberInputProps {
   // prettier-ignore
-// eslint-disable-next-line
+  // eslint-disable-next-line
   cardNumbersStateBundle: ReturnType<typeof useExtendedState<CardNumbersState>>;
 }
 
