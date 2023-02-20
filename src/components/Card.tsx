@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Size } from "../types/common";
 
 function Card({
   bankName,
@@ -6,7 +7,7 @@ function Card({
   userName,
   expireMonth,
   expireYear,
-  size = "small",
+  size = Size.Small,
   color,
 }: CardProps) {
   return (
@@ -37,18 +38,20 @@ function Card({
   );
 }
 
+type CardSize = Exclude<Size, Size.Medium>;
+
 type CardProps = {
   bankName?: string;
   cardNumber: string;
   userName?: string;
   expireMonth: number;
   expireYear: number;
-  size?: "big" | "small";
+  size?: CardSize;
   color?: string;
 };
 
 type CardBoxProps = {
-  size?: "big" | "small";
+  size?: CardSize;
   color?: string;
 };
 
@@ -64,8 +67,8 @@ const CardBox = styled.div<CardBoxProps>`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: ${(props) => (props.size === "big" ? "290px" : "208px")};
-  height: ${(props) => (props.size === "big" ? "180px" : "130px")};
+  width: ${(props) => (props.size === Size.Big ? "290px" : "208px")};
+  height: ${(props) => (props.size === Size.Big ? "180px" : "130px")};
   background: ${(props) => (!!props.color ? props.color : "#e5e5e5")};
   box-shadow: 3px 3px 5px rgb(0 0 0 / 25%);
   color: ${(props) => (props.color ? "black" : "#575757")};

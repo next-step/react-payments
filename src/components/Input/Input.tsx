@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { Size } from "../../types/common";
 
 function Input({
   type = "text",
   placeholder,
-  size = "full",
+  size = Size.Big,
   onChange,
   maxLength,
   name,
@@ -28,7 +29,7 @@ function Input({
 type InputProps = {
   type?: "text" | "password";
   placeholder?: string;
-  size?: "full" | "medium" | "small";
+  size?: Size;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   maxLength?: number;
   name?: string;
@@ -37,7 +38,7 @@ type InputProps = {
 };
 
 type StyledInputProps = {
-  widthSize?: "full" | "medium" | "small";
+  widthSize?: Size;
 };
 
 const StyledInput = styled.input<StyledInputProps>`

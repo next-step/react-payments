@@ -1,3 +1,4 @@
+import { Size } from "../../types/common";
 import Input from "../Input/Input";
 import InputContainer from "../Input/InputContainer";
 
@@ -11,7 +12,7 @@ function Code({ onCodeChange }: CodeProps) {
   return (
     <InputContainer label="보안코드(CVC/CVV)">
       <Input
-        size="medium"
+        size={Size.Medium}
         onChange={onChange}
         name="code"
         maxLength={3}

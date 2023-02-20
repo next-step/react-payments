@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { Size } from "../../types/common";
 import Input from "../Input/Input";
 import InputContainer from "../Input/InputContainer";
 
@@ -42,7 +43,7 @@ function Password({ onPasswordChange }: PasswordProps) {
   return (
     <InputContainer label="카드 비밀번호">
       <Input
-        size="small"
+        size={Size.Small}
         type="password"
         maxLength={1}
         onChange={(e) => onChange(e, 1)}
@@ -50,15 +51,15 @@ function Password({ onPasswordChange }: PasswordProps) {
         forwardRef={(el: HTMLInputElement) => (itemsRef.current[1] = el)}
       ></Input>
       <Input
-        size="small"
+        size={Size.Small}
         type="password"
         maxLength={1}
         onChange={(e) => onChange(e, 2)}
         name="password2"
         forwardRef={(el: HTMLInputElement) => (itemsRef.current[2] = el)}
       ></Input>
-      <Input size="small" type="password" readonly={true}></Input>
-      <Input size="small" type="password" readonly={true}></Input>
+      <Input size={Size.Small} type="password" readonly={true}></Input>
+      <Input size={Size.Small} type="password" readonly={true}></Input>
     </InputContainer>
   );
 }
