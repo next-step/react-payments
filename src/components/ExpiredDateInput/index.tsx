@@ -21,7 +21,7 @@ const ExpiredDateInput = (props: Props) => {
 
   const isExpiredDateValid = Boolean(
     Number(expiredDate.month) <= MAX_MONTH &&
-    expiredDate.month &&
+      expiredDate.month &&
     expiredDate.year
   );
 

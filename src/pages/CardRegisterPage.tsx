@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { CardForm, CreditCard, TopNavigation } from '@/components';
 import { Button } from '@/components/UI';
+import { useRouter } from '@/hooks/useRouter';
 import { styled } from '@/lib/stitches.config';
 import { getItem, setItem } from '@/storage/storage';
 import { CardKey, CardObj } from '@/types';
@@ -38,7 +38,7 @@ export const initialCardState = {
 } as const;
 
 export const CardRegisterPage = () => {
-  const navigate = useNavigate();
+  const { go } = useRouter();
   const [cardState, setCardState] = useState(initialCardState);
   const cardDisplayInfo = useMemo(
     () => ({
@@ -64,7 +64,7 @@ export const CardRegisterPage = () => {
     }, {});
 
     setItem('cardList', [...(getItem('cardList') ?? []), newCard]);
-    navigate('/register-confirm');
+    go('/register-confirm');
   };
 
   return (

@@ -1,13 +1,13 @@
 import { memo } from 'react';
-import { useNavigate } from 'react-router-dom';
 
+import { useRouter } from '@/hooks/useRouter';
 import { styled } from '@/lib/stitches.config';
 
 const TopNavigation = () => {
-  const navigate = useNavigate();
+  const { back } = useRouter();
   return (
     <Navigation>
-      <BackButton onClick={() => navigate(-1)}>⬅</BackButton>
+      <BackButton onClick={back}>⬅</BackButton>
       <Title>카드 추가하기</Title>
     </Navigation>
   );
