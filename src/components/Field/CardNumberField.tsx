@@ -1,14 +1,9 @@
-import { ChangeEvent } from 'react';
-import { Input } from '../Common';
-import FieldContainer from './FieldContainer';
+import { Input } from '@components/Common';
 import { renderTextDivider } from '@/utils';
+import { CardNumber } from '@/types';
+import FieldContainer from './FieldContainer';
 
-type CardNumber = {
-  cardNumber1: string;
-  cardNumber2: string;
-  cardNumber3: string;
-  cardNumber4: string;
-};
+import type { ChangeEvent } from 'react';
 
 function CardNumberField({
   title,

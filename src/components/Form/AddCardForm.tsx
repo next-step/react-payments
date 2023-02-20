@@ -1,14 +1,12 @@
-import { ChangeEvent, FormEvent } from 'react';
-import CVCField from '../Field/CVCField';
-import CardNumberField from '../Field/CardNumberField';
-import ExpirationField from '../Field/ExpirationField';
-import PasswordField from '../Field/PasswordField';
-import OwnerField from '../Field/OwnerField';
-import { CardInformation } from '@/types';
-import { Button } from '../Common';
+import { useNavigate } from 'react-router-dom';
+
+import { CVCField, CardNumberField, ExpirationField, PasswordField, OwnerField } from '@components/Field';
+import { Button } from '@components/Common';
 import { checkRequiredValues } from '@/utils';
 import { LIMIT_INPUT_LENGTH } from '@/constants';
-import { useNavigate } from 'react-router-dom';
+
+import type { CardInformation } from '@/types';
+import type { ChangeEvent, FormEvent } from 'react';
 
 type Props = {
   cardInformation: CardInformation;

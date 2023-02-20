@@ -38,6 +38,7 @@ const expirationMonthFormatter = (month: string) => {
 
   return month.replace(/\D+/g, '');
 };
+
 const expirationYearFormatter = (year: string) => {
   return year.replace(/\D+/g, '');
 };

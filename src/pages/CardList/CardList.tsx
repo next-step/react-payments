@@ -1,5 +1,5 @@
-import { Card } from '@/components/Common';
 import { Link } from 'react-router-dom';
+import { Card } from '@/components/Common';
 
 function CardList() {
   return (

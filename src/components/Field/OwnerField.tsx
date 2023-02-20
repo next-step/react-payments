@@ -1,7 +1,8 @@
-import { ChangeEvent } from 'react';
 import FieldContainer from './FieldContainer';
-import { Input } from '../Common';
-import { Width } from '../Common/Input';
+import { Input } from '@components/Common';
+
+import type { Width } from '@components/Common/Input';
+import type { ChangeEvent } from 'react';
 
 function OwnerField({
   title,

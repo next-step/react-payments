@@ -1,6 +1,7 @@
-import React, { ChangeEvent, HTMLInputTypeAttribute } from 'react';
 import FieldContainer from './FieldContainer';
 import { Input } from '../Common';
+
+import type { ChangeEvent, HTMLInputTypeAttribute } from 'react';
 
 function CVCField({
   title,

@@ -1,7 +1,8 @@
-import React, { ChangeEvent, HTMLInputTypeAttribute } from 'react';
+import { Input } from '@components/Common';
+import { expirationMonthFormatter, expirationYearFormatter } from '@/utils';
 import FieldContainer from './FieldContainer';
-import Input from '../Common/Input';
-import { expirationMonthFormatter, expirationYearFormatter } from '@/utils/form';
+
+import type { ChangeEvent, HTMLInputTypeAttribute } from 'react';
 
 function ExpirationField({
   title,

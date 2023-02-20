@@ -1,7 +1,8 @@
 import { Card } from '@/components/Common';
 import AddCardForm from '@/components/Form/AddCardForm';
 import Layout from '@/components/Layout';
-import { CardInformation } from '@/types';
+
+import type { CardInformation } from '@/types';
 import type { ChangeEvent, FormEvent } from 'react';
 
 type Props = {

@@ -1,3 +1,3 @@
-import { renderTextDivider, checkRequiredValues } from './form';
+import { renderTextDivider, checkRequiredValues, expirationMonthFormatter, expirationYearFormatter } from './form';
 
-export { renderTextDivider, checkRequiredValues };
+export { renderTextDivider, checkRequiredValues, expirationMonthFormatter, expirationYearFormatter };

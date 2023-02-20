@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { AddCard, CardList, Complete } from '@pages';
+
 import './styles/index.css';
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { CardInformation } from './types';
+
+import type { ChangeEvent, FormEvent } from 'react';
+import type { CardInformation } from './types';
 
 const initCardInformation = {
   cardNumber1: '',
