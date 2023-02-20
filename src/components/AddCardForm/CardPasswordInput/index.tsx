@@ -4,8 +4,14 @@ import Input from "../../Input/Item";
 import InputContainer from "components/Input/Container";
 import { useRef } from "react";
 import { checkPassword } from "utils";
+import { ColorType } from "types";
 
-const CardPasswordInput = ({ fontColor, setPassword }) => {
+type CardPasswordInputProps = {
+  fontColor: ColorType;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const CardPasswordInput = ({ fontColor, setPassword }: CardPasswordInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const inputRef2 = useRef<HTMLInputElement>(null);
 

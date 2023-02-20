@@ -1,14 +1,12 @@
 import styled, { css } from "styled-components";
 
-type fontSizeType = "xs" | "s" | "m" | "lg";
-type WeightType = "normal" | "bold";
-type fontColorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange" | "empty";
+import { FontSizeType, FontWeightType, ColorType } from "types";
 
 type TextProps = {
-  fontSize: fontSizeType;
-  weight?: WeightType;
+  fontSize: FontSizeType;
+  weight?: FontWeightType;
   children?: any;
-  fontColor?: fontColorType;
+  fontColor?: ColorType;
 };
 
 const Text = ({ fontSize, weight, children, fontColor }: TextProps) => {
@@ -20,9 +18,9 @@ const Text = ({ fontSize, weight, children, fontColor }: TextProps) => {
 };
 
 type LayoutProps = {
-  fontSize: fontSizeType;
-  weight?: WeightType;
-  fontColor?: fontColorType;
+  fontSize: FontSizeType;
+  weight?: FontWeightType;
+  fontColor?: ColorType;
 };
 
 // size가 s일떄 특정 css 적용 , l일떄 특정 css 적용하게 구현

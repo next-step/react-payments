@@ -6,19 +6,19 @@ import CardSecurityInput from "./CardSecurityInput";
 import CardPasswordInput from "./CardPasswordInput";
 import CardOwnerNameInput from "./CardOwnerNameInput/index";
 import CardExpirationDateInput from "./CardExpirationDateInput/index";
-import useCardTextControl from "hooks/useCardTextControl";
 import CardDotInfoList from "./CardDotInfoList";
 import Button from "../Button/index";
 import { useNavigate } from "react-router-dom";
 import { checkCardFormValidation } from "utils";
+import { useHandleCardText } from "hooks/useHandleCardText";
 
 export const AddCardForm = () => {
   const navigate = useNavigate();
   const {
     setCardNumber,
     cardNumber,
-    expirationDate,
-    setExpirationDate,
+    expirationMonth,
+    expirationYear,
     ownerName,
     setOwnerName,
     color,
@@ -29,14 +29,16 @@ export const AddCardForm = () => {
     setSecurityCode,
     password,
     setPassword,
-  } = useCardTextControl();
+    setExpriationMonth,
+    setExpriationYear,
+  } = useHandleCardText();
 
   const [isOpenModal, setIsOpenModal] = useState(true);
 
   const submit = () => {
     // 몇가지 validation 아직 추가 x
-    const isValid = checkCardFormValidation({ cardNumber, expirationDate, ownerName, company });
-    if (!isValid) return;
+    // const isValid = checkCardFormValidation({ cardNumber, expirationDate, ownerName, company });
+    // if (!isValid) return;
     navigate("/complete");
   };
 
@@ -48,12 +50,16 @@ export const AddCardForm = () => {
         company={company}
         size="small"
         number={cardNumber}
-        expirationDate={expirationDate}
+        expirationMonth={expirationMonth}
+        expirationYear={expirationYear}
         ownerName={ownerName}
-        onClick={() => setIsOpenModal(true)}
       />
       <CardNumberInput setCardNumber={setCardNumber} fontColor={color} />
-      <CardExpirationDateInput setExpirationDate={setExpirationDate} fontColor={color} />
+      <CardExpirationDateInput
+        setExpriationMonth={setExpriationMonth}
+        setExpriationYear={setExpriationYear}
+        fontColor={color}
+      />
       <CardOwnerNameInput setOwnerName={setOwnerName} fontColor={color} />
       <CardSecurityInput fontColor={color} setSecurityCode={setSecurityCode} />
       <CardPasswordInput fontColor={color} setPassword={setPassword} />

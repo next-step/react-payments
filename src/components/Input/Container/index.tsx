@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 type ContainerProps = {
-  children: any;
+  children: React.ReactNode;
   width?: number;
   margin?: number;
 };

@@ -1,6 +1,11 @@
 import styled from "styled-components";
+import { ReactEventHandler } from "react";
 
-export const AddCard = ({ onClick }) => {
+type AddCardProps = {
+  onClick: ReactEventHandler<HTMLDivElement>;
+};
+
+export const AddCard = ({ onClick }: AddCardProps) => {
   return <Layout onClick={onClick}>+</Layout>;
 };
 

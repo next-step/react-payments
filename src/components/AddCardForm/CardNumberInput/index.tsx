@@ -1,11 +1,17 @@
 import Text from "components/Text";
-import { forwardRef, useRef, useState } from "react";
+import { useRef } from "react";
 import styled from "styled-components";
 import { checkCardNumber } from "utils";
 import Input from "../../Input/Item";
 import InputContainer from "components/Input/Container";
+import { ColorType } from "types";
 
-const CardNumberInput = ({ setCardNumber, fontColor }) => {
+type CardNumberInputProps = {
+  setCardNumber: React.Dispatch<React.SetStateAction<string>>;
+  fontColor: ColorType;
+};
+
+const CardNumberInput = ({ setCardNumber, fontColor }: CardNumberInputProps) => {
   const ref = useRef<HTMLInputElement>(null);
 
   const handleInput = () => {

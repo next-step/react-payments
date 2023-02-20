@@ -1,8 +1,7 @@
-import Dot from "components/CardDotInfo";
 import styled from "styled-components";
 
 type ModalProps = {
-  children: any;
+  children: React.ReactNode;
 };
 
 export const Modal = ({ children }: ModalProps) => {

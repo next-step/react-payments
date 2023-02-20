@@ -1,38 +1,22 @@
 import styled, { css } from "styled-components";
 import Text from "components/Text";
-import { ReactEventHandler } from "react";
-
-type colorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange" | "";
-type companyType =
-  | "하나카드"
-  | "국민카드"
-  | "신한카드"
-  | "클린카드"
-  | "토스카드"
-  | "네이버카드"
-  | "카카오카드"
-  | "오렌지카드"
-  | "";
+import { ColorType, CompanyType } from "types";
 
 type sizeType = "small" | "big";
-type exprationDateType = {
-  month: string;
-  year: string;
-};
 
-type CardProps = {
+export type CardProps = {
   size: sizeType;
   number?: string;
-  expirationDate?: exprationDateType;
+  expirationMonth?: string;
+  expirationYear?: string;
   ownerName?: string;
-  onClick?: ReactEventHandler<HTMLDivElement>;
-  color?: colorType;
-  company?: companyType;
+  color?: ColorType;
+  company?: CompanyType;
 };
 
-const Card = ({ color, company, size, number, expirationDate, ownerName, onClick }: CardProps) => {
+const Card = ({ color, company, size, number, expirationMonth, expirationYear, ownerName }: CardProps) => {
   return (
-    <Layout onClick={onClick}>
+    <Layout>
       <Container color={color} size={size}>
         <Top>
           <Text fontSize="s" weight="normal">
@@ -51,7 +35,7 @@ const Card = ({ color, company, size, number, expirationDate, ownerName, onClick
               {ownerName}
             </Text>
             <Text fontSize="s" weight="bold">
-              {expirationDate && `${expirationDate.month}/${expirationDate.year}`}
+              {`${expirationMonth}/${expirationYear}`}
             </Text>
           </InfoContainer>
         </Bottom>
@@ -63,7 +47,7 @@ const Card = ({ color, company, size, number, expirationDate, ownerName, onClick
 export default Card;
 
 type ContainerProps = {
-  color?: colorType;
+  color?: ColorType;
   size: sizeType;
 };
 const Layout = styled.div`

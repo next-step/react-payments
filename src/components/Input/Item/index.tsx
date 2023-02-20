@@ -1,13 +1,12 @@
 import { forwardRef, ReactEventHandler } from "react";
 import styled, { css } from "styled-components";
-
-type fontColorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange";
+import { ColorType } from "types";
 
 type InputProps = {
   type: string;
   placeholder?: string;
   theme: "underline" | "primary";
-  fontColor?: fontColorType;
+  fontColor?: ColorType;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   active: boolean;
 };
@@ -36,7 +35,7 @@ export default forwardRef(Input);
 type LayoutProps = {
   theme: "underline" | "primary";
   active?: boolean;
-  fontColor?: fontColorType;
+  fontColor?: ColorType;
 };
 
 const Layout = styled.input<LayoutProps>`

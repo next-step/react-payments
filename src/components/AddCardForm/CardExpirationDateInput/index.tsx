@@ -5,7 +5,12 @@ import styled from "styled-components";
 import { useRef } from "react";
 import { checkMonth, checkYear } from "../../../utils/index";
 
-const CardExpirationDateInput = ({ setExpirationDate, fontColor }) => {
+export type CardExpirationDateInputProps = {
+  setExpriationYear: React.Dispatch<React.SetStateAction<string>>;
+  setExpriationMonth: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const CardExpirationDateInput = ({ setExpriationYear, setExpriationMonth, fontColor }) => {
   const inputMonthRef = useRef<HTMLInputElement>(null);
   const inputYearRef = useRef<HTMLInputElement>(null);
 
@@ -18,10 +23,7 @@ const CardExpirationDateInput = ({ setExpirationDate, fontColor }) => {
     if (!month.length) {
       month = "MM";
     }
-    setExpirationDate((prev) => ({
-      ...prev,
-      month,
-    }));
+    setExpriationMonth(month);
   };
   const handleYearInput = () => {
     const ref = inputYearRef.current;
@@ -31,10 +33,7 @@ const CardExpirationDateInput = ({ setExpirationDate, fontColor }) => {
     if (!year.length) {
       year = "YY";
     }
-    setExpirationDate((prev) => ({
-      ...prev,
-      year,
-    }));
+    setExpriationYear(year);
   };
 
   return (
