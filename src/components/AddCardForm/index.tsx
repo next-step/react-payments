@@ -21,9 +21,9 @@ export const AddCardForm = () => {
     ownerName,
     setOwnerName,
     color,
-    setcolor,
+    setColor,
     company,
-    setcompany,
+    setCompany,
     securityCode,
     setSecurityCode,
     password,
@@ -32,19 +32,29 @@ export const AddCardForm = () => {
     setExpriationYear,
   } = useHandleCardText();
 
-  const [isOpenModal, setIsOpenModal] = useState(true);
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(true);
 
   const submit = () => {
-    // 몇가지 validation 아직 추가 x
-    // const isValid = checkCardFormValidation({ cardNumber, expirationDate, ownerName, company });
-    // if (!isValid) return;
-    navigate("/complete");
+    navigate("/complete"); // Input validation 추가 필요
+  };
+
+  const selectedDot = (e) => {
+    const color = e.currentTarget.children[0].getAttribute("color");
+    const company = e.currentTarget.children[1].textContent;
+    setColor(color);
+    setCompany(company);
+    setIsOpenModal(false);
+  };
+
+  const openModal = () => {
+    setIsOpenModal(true);
   };
 
   return (
     <>
-      {isOpenModal ? <DotList close={setIsOpenModal} setColor={setcolor} setCardCompnay={setcompany} /> : <></>}
+      {isOpenModal ? <DotList onSelectedDot={selectedDot} /> : <></>}
       <Card
+        onClick={openModal}
         color={color}
         company={company}
         size="small"

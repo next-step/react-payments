@@ -7,8 +7,8 @@ export const useHandleCardText = () => {
   const [expirationMonth, setExpriationMonth] = useState<string>("MM");
   const [expirationYear, setExpriationYear] = useState<string>("YY");
 
-  const [color, setcolor] = useState<ColorType>("");
-  const [company, setcompany] = useState<CompanyType>("");
+  const [color, setColor] = useState<ColorType>("");
+  const [company, setCompany] = useState<CompanyType>("");
   const [ownerName, setOwnerName] = useState<string>("Name");
   const [securityCode, setSecurityCode] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -21,9 +21,9 @@ export const useHandleCardText = () => {
     ownerName,
     setOwnerName,
     color,
-    setcolor,
+    setColor,
     company,
-    setcompany,
+    setCompany,
     securityCode,
     setSecurityCode,
     password,

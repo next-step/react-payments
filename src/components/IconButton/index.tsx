@@ -8,12 +8,12 @@ export const FontAwesomeIcons = {
 };
 
 type FontAweSomeIconType = keyof typeof FontAwesomeIcons;
-interface IconButtonPropsType {
+export type IconButtonPropsType = {
   name: FontAweSomeIconType;
   size: FontAwesomeIconProps["size"];
   color: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-}
+};
 const IconButton = ({ onClick, name, size, color }: IconButtonPropsType) => {
   return (
     <Button onClick={onClick}>

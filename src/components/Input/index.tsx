@@ -2,7 +2,7 @@ import { forwardRef, ReactEventHandler } from "react";
 import styled, { css } from "styled-components";
 import { ColorType } from "types";
 
-type InputProps = {
+export type InputProps = {
   type: string;
   placeholder?: string;
   theme: "underline" | "primary";

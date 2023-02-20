@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import Text from "components/Text";
 import { ColorType, CompanyType } from "types";
+import { ReactEventHandler } from "react";
 
 type sizeType = "small" | "big";
 
@@ -12,11 +13,12 @@ export type CardProps = {
   ownerName: string;
   color: ColorType;
   company: CompanyType;
+  onClick: ReactEventHandler<HTMLDivElement>;
 };
 
-const Card = ({ color, company, size, number, expirationMonth, expirationYear, ownerName }: CardProps) => {
+const Card = ({ color, company, size, number, expirationMonth, expirationYear, ownerName, onClick }: CardProps) => {
   return (
-    <Layout>
+    <Layout onClick={onClick}>
       <Container color={color} size={size}>
         <Top>
           <Text fontSize="s" weight="normal" label={company} />
@@ -38,14 +40,15 @@ const Card = ({ color, company, size, number, expirationMonth, expirationYear, o
 
 export default Card;
 
-type ContainerProps = {
-  color?: ColorType;
-  size: sizeType;
-};
 const Layout = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+type ContainerProps = {
+  color?: ColorType;
+  size: sizeType;
+};
 const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
@@ -53,6 +56,7 @@ const Container = styled.div<ContainerProps>`
   font-size: 30px;
   box-shadow: 3px 3px 5px rgb(0 0 0 / 25%);
   border-radius: 5px;
+  padding: 0px 10px;
   cursor: pointer;
 
   ${({ color }) =>
@@ -108,7 +112,6 @@ const Top = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 0px 10px;
 `;
 const Middle = styled.div`
   display: flex;
@@ -116,7 +119,6 @@ const Middle = styled.div`
   width: 100%;
   height: 100%;
   margin-left: ${(props) => (props.theme !== "add" ? "30px" : "0px")};
-  padding-bottom: 10px;
 `;
 const Bottom = styled.div`
   display: flex;
@@ -132,7 +134,6 @@ const InfoContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 10px 20px;
   justify-content: space-between;
 `;
 
