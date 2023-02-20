@@ -1,8 +1,8 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-  type: 'button' | 'submit';
+  children: ReactNode | string;
+  type?: 'button' | 'submit';
   disabled?: boolean;
 }
 function Button({ children, type = 'button', disabled = false }: ButtonProps) {
