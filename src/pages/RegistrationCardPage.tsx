@@ -10,6 +10,7 @@ const RegistrationCardPage = () => {
   const [holderName, setHolderName] = useState('');
   const [number, setNumber] = useState('');
   const [expiration, setExpiration] = useState('');
+  const [cvc, setCvc] = useState('');
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
@@ -21,10 +22,17 @@ const RegistrationCardPage = () => {
     const formattedValue = formatCardNumber(value);
     setNumber(formattedValue);
   };
+
   const handleExpiration = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
     const formattedValue = formatMMYY(value);
     setExpiration(formattedValue);
+  };
+
+  const handleCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target as HTMLInputElement;
+    const sanitizedValue = value.replace(/[^0-9]/g, '');
+    setCvc(sanitizedValue);
   };
 
   return (
@@ -86,16 +94,24 @@ const RegistrationCardPage = () => {
 
         <FormControl>
           <FormControl.Label>보안 코드 (CVC/CVV)</FormControl.Label>
-          <TextField placeholder="123" className="w-30" />
+          <TextField
+            type="password"
+            inputMode="numeric"
+            maxLength={3}
+            placeholder="123"
+            value={cvc}
+            onChange={handleCVC}
+            className="w-30"
+          />
         </FormControl>
 
         <FormControl>
-          <FormControl.Label>보안 코드 (CVC/CVV)</FormControl.Label>
+          <FormControl.Label>카드 비밀번호</FormControl.Label>
           <Box display="flex" className="gap-x-5">
-            <TextField type="password" className="w-10" />
-            <TextField className="w-10" />
-            <TextField className="w-10" />
-            <TextField className="w-10" />
+            <TextField type="password" inputMode="numeric" className="w-10" />
+            <TextField type="password" inputMode="numeric" className="w-10" />
+            <TextField type="password" inputMode="numeric" className="w-10" />
+            <TextField type="password" inputMode="numeric" className="w-10" />
           </Box>
         </FormControl>
       </Wrapper>
