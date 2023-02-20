@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { CardType } from 'models/card.model'
 
+type ErrorDataType = {
+  code: number
+  message: string
+}
+
 const useCards = () => {
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<{ code: number; message: string } | null>(null)
+  const [error, setError] = useState<ErrorDataType | null>(null)
   const [cards, setCards] = useState<CardType[]>([])
 
   useEffect(() => {
