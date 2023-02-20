@@ -4,9 +4,10 @@
   display: flex;
   flex-wrap: wrap;
   background-color: white;
-
-  position: absolute;
-  bottom: 0;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .card-company-item {

@@ -1,18 +1,17 @@
 import React from 'react'
-import ContextPortal from 'hooks/use-contextPortal'
+import './Modal.css'
 
 type LayerProps = {
   children: React.ReactNode
-  wrapperId: string
+  isOpen: boolean
 }
 
-const Modal: React.FC<LayerProps> = ({ children, wrapperId }) => {
+const Modal: React.FC<LayerProps> = ({ children, isOpen }) => {
+  if (!isOpen) return null
   return (
-    <ContextPortal wrapperId={wrapperId}>
-      <div className='modal-wrap'>
-        <div className='modal-content'>{children}</div>
-      </div>
-    </ContextPortal>
+    <div className='modal-wrap'>
+      <div className='modal-content'>{children}</div>
+    </div>
   )
 }
 

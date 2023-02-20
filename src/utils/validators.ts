@@ -2,8 +2,6 @@ import { CardTypeKeys } from './../models/card.model'
 import { CARD_COMPNAYS_CODE } from 'constants/card'
 
 const cardNumberValidator = (value: string) => {
-  console.log(value.replace(/\D/g, '').length === 16)
-
   return value.replace(/\D/g, '').length === 16
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import useCardItem from 'hooks/useCardItem'
 import { CardType, CardTypeKeys } from 'models/card.model'
 import { RegisterCard } from 'organisms/RegisterCard'
@@ -19,7 +19,6 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
 }) => {
   const { card, resetCard, updateCard, validator } =
     useCardItem(INIT_CARD_VALUE)
-  const [isOpenModal, setIsOpenModal] = useState(false)
 
   const completeCardRegistor = () => {
     addCard(card)
@@ -28,9 +27,6 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
   }
 
   const changeValue = (value: string, name: CardTypeKeys) => {
-    if (name === 'cardCompanyCode') {
-      setIsOpenModal(false)
-    }
     updateCard(value, name)
   }
 
@@ -43,27 +39,27 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
     expireDate
 
   return (
-    <main id='add-card-container'>
-      {isCompleteRegister ? (
-        <CompleteRegisterCard
-          card={card}
-          changeValue={changeValue}
-          submit={completeCardRegistor}
-        />
-      ) : (
-        <RegisterCard
-          card={card}
-          onNavigate={onNavigate}
-          changeValue={changeValue}
-        />
-      )}
+    <>
+      <main id='add-card-container'>
+        {isCompleteRegister ? (
+          <CompleteRegisterCard
+            card={card}
+            changeValue={changeValue}
+            submit={completeCardRegistor}
+          />
+        ) : (
+          <RegisterCard
+            card={card}
+            onNavigate={onNavigate}
+            changeValue={changeValue}
+          />
+        )}
 
-      {validator.cardNumber && !validator.cardCompanyCode && (
-        <div className='modal-container'>
+        <Modal isOpen={validator.cardNumber && !validator.cardCompanyCode}>
           <CardCompanyList onClick={changeValue} />
-        </div>
-      )}
-    </main>
+        </Modal>
+      </main>
+    </>
   )
 }
 
