@@ -6,8 +6,8 @@ import {
   UpdateCardParams,
 } from 'models/card.model'
 
-import RegisterCardPage from 'pages/RegisterCardPage/RegisterCardPage'
-import CompleteCardPage from 'pages/CompleteCardPage/CompleteCardPage'
+import { RegisterCard } from 'organisms/RegisterCard'
+import { CompleteRegisterCard } from 'organisms/CompleteRegisterCard'
 import { Modal } from 'components/ui/Modal'
 import { CardCompanyList } from 'components/CardCompanyList'
 import './AddEditCraditCard'
@@ -46,13 +46,13 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
   return (
     <main id='add-card-container'>
       {isCompleteRegister ? (
-        <CompleteCardPage
+        <CompleteRegisterCard
           card={card}
           changeValue={changeValue}
           submit={completeCardRegistor}
         />
       ) : (
-        <RegisterCardPage
+        <RegisterCard
           card={card}
           onNavigate={onNavigate}
           changeValue={changeValue}

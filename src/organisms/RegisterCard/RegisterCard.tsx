@@ -5,16 +5,16 @@ import { CardType, UpdateCardParams } from 'models/card.model'
 import { Card } from 'components/Card'
 import { UI_SIZE } from 'constants/ui.constant'
 import INPUTS from 'utils/inputs'
-import './RegisterCardPage.css'
+import './RegisterCard.css'
 import { FormGroup } from 'components/FromGroup'
 
-type RegisterCardPageProps = {
+type RegisterCardProps = {
   card: CardType
   onNavigate: () => void
   changeValue: (params: UpdateCardParams) => void
 }
 
-const RegisterCardPage: React.FC<RegisterCardPageProps> = ({
+const RegisterCard: React.FC<RegisterCardProps> = ({
   card,
   onNavigate,
   changeValue,
@@ -83,4 +83,4 @@ const RegisterCardPage: React.FC<RegisterCardPageProps> = ({
   )
 }
 
-export default RegisterCardPage
+export default RegisterCard

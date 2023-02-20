@@ -5,13 +5,13 @@ import { UI_SIZE, UI_VARIANT } from 'constants/ui.constant'
 import { Card } from 'components/Card'
 import { Button } from 'components/ui/Button'
 
-type CompleteCardPageProps = {
+type CompleteRegisterCardProps = {
   card: CardType
   changeValue: (params: UpdateCardParams) => void
   submit: () => void
 }
 
-const CompleteCardPage: React.FC<CompleteCardPageProps> = ({
+const CompleteRegisterCard: React.FC<CompleteRegisterCardProps> = ({
   card,
   changeValue,
   submit,
@@ -61,4 +61,4 @@ const CompleteCardPage: React.FC<CompleteCardPageProps> = ({
   )
 }
 
-export default CompleteCardPage
+export default CompleteRegisterCard
