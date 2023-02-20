@@ -1,3 +1,8 @@
+export type WithChild = {
+  children: React.ReactNode;
+};
+export type StrictPropsWithChildren<P = unknown> = P & WithChild;
+
 export type CardObj = {
   val: string | string | { [key: string]: number | string };
   isValid?: boolean;

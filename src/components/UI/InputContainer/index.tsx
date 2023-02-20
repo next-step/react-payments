@@ -1,13 +1,13 @@
 import { styled } from '@/lib/stitches.config';
+import type { StrictPropsWithChildren } from '@/types';
 
 export type Props = {
   label?: string;
   isError?: boolean;
   errorMessage?: string;
-  children: React.ReactNode;
 };
 
-const InputContainer = (props: Props) => {
+const InputContainer = (props: StrictPropsWithChildren<Props>) => {
   return (
     <Container>
       <div
