@@ -1,14 +1,12 @@
 import React from 'react';
 
-import { padNumber } from './utils/utils';
-
 interface CardProps {
   cardNumbers: {
     isHide: boolean;
     value?: string;
   }[];
   ownerName?: string;
-  expireDates: (number | undefined)[];
+  expireDates: (string | undefined)[];
 }
 
 // TODO: 보여지는 큰 카드는 스토리북 컴포넌트로 분리 가능.
@@ -35,9 +33,9 @@ function Card({ cardNumbers, expireDates, ownerName }: CardProps) {
         <div className="card-bottom__info">
           <span className="card-text card-name-spacing">{ownerName || 'NAME'}</span>
           <span className="card-text">
-            <span className="card-text card-expire-date">{padNumber(2, expireDates[0])}</span>
+            <span className="card-text card-expire-date">{expireDates[0]?.padStart(2, '0')}</span>
             <span className="card-text mx-5">/</span>
-            <span className="card-text card-expire-date">{padNumber(2, expireDates[1])}</span>
+            <span className="card-text card-expire-date">{expireDates[1]?.padStart(2, '0')}</span>
           </span>
         </div>
       </div>

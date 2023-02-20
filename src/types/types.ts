@@ -9,6 +9,6 @@ type InputStateType<T> = {
 
 export type CardNumbersState = Omit<InputStateType<string>, 'placeholder'>[];
 
-export type ExpireDatesState = Omit<InputStateType<number>, 'type'>[];
+export type ExpireDatesState = Omit<InputStateType<string>, 'type'>[];
 
-export type PasswordsState = Omit<InputStateType<number>, 'type' | 'placeholder'>[];
+export type PasswordsState = Omit<InputStateType<string>, 'type' | 'placeholder'>[];

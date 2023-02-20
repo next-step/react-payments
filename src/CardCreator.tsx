@@ -3,9 +3,8 @@ import { styled } from '@stitches/react';
 import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
-import { filterNumber, updateArray, updateObject } from '@/utils/utils';
+import { filterNumber, updateArray, updateObject, checkIsArrayLast } from '@/utils/utils';
 import Card from './Card';
-import { padNumber } from './utils/utils';
 import { cardNumbersInit, expireDatesInit, passwordsInit } from './CardCreatorInits';
 import { CardNumberInput } from './CardNumberInput';
 import useExtendedState from './hooks/useExtendedState';
@@ -18,7 +17,7 @@ function CardCreator() {
 
   const [ownerName, setOwnerName] = useState<string>();
 
-  const [securityCode, setSecurityCode] = useState<number>();
+  const [securityCode, setSecurityCode] = useState<string>();
 
   const [passwords, setPasswords] = useExtendedState(passwordsInit);
   const passwordInputsRef = useRef<(HTMLInputElement | null)[]>([]);
@@ -57,27 +56,27 @@ function CardCreator() {
             <span className="input-title">만료일</span>
             <div className="input-box w-50">
               {expireDates.map(({ key, value, placeholder }, i) => {
-                // TODO: 추상화 가능
-                const isNotLast = i < expireDates.length - 1;
+                const isLast = checkIsArrayLast(expireDates, i);
                 // 각 값은 valid한 값의 조건이 다 다르다.
-                const isValueValid = value && value <= 12;
+                // TODO: 따라서 각 state마다 valid 조건을 넣어주자.
+                const isValueValid = Number(value) <= 12;
                 return (
                   <>
                     <input
                       key={key}
                       className="input-basic"
                       type="text"
-                      value={padNumber(2, value) || ''}
+                      value={value ?? ''}
                       placeholder={placeholder}
                       onChange={(e) => {
-                        let inputVal = Number(filterNumber(e.currentTarget.value));
+                        let inputVal = filterNumber(e.currentTarget.value);
                         // TODO: 클린코드 필요.
-                        if (inputVal > 12 && key === 'card-expired-month') {
-                          inputVal %= 10;
+                        if (inputVal.length >= 2 && Number(inputVal) > 12 && key === 'card-expired-month') {
+                          inputVal = inputVal.substring(0, 1);
                         }
 
-                        if (inputVal > 100 && key === 'card-expired-year') {
-                          inputVal %= 100;
+                        if (inputVal.length >= 3 && key === 'card-expired-year') {
+                          inputVal = inputVal.substring(0, 2);
                         }
 
                         setExpireDates(
@@ -95,8 +94,27 @@ function CardCreator() {
                           }
                         );
                       }}
+                      onBlur={(e) => {
+                        const blurValue = e.currentTarget.value;
+                        if (blurValue && blurValue.length !== 0) {
+                          if (blurValue.length === 1) {
+                            const paddedValue = blurValue.padStart(2, '0');
+                            setExpireDates(
+                              (prevExpireDates) =>
+                                updateArray(prevExpireDates, i, updateObject(prevExpireDates[i], 'value', paddedValue)),
+                              {
+                                stateRefreshValidator: (prevExpireDates) => {
+                                  const prevValue = prevExpireDates[i].value;
+                                  return prevValue !== paddedValue;
+                                },
+                              }
+                            );
+                            e.currentTarget.value = paddedValue;
+                          }
+                        }
+                      }}
                     />
-                    {isNotLast && isValueValid && <div className="text-black">/</div>}
+                    {!isLast && isValueValid && <div className="text-black">/</div>}
                   </>
                 );
               })}
@@ -131,16 +149,15 @@ function CardCreator() {
               value={securityCode || ''}
               onChange={(e) => {
                 const numberValue = filterNumber(e.currentTarget.value);
-                const inputVal = numberValue ? Number(numberValue) : undefined;
-                if (inputVal && inputVal > 1000) {
+                if (numberValue.length > 3) {
                   return;
                 }
 
                 setSecurityCode((prevSecurityCode) => {
-                  if (inputVal === prevSecurityCode) {
+                  if (numberValue === prevSecurityCode) {
                     return prevSecurityCode;
                   }
-                  return inputVal;
+                  return numberValue;
                 });
               }}
             />
@@ -149,8 +166,8 @@ function CardCreator() {
             <span className="input-title">카드 비밀번호</span>
             <div className="flex">
               {passwords.map(({ key, value }, i) => {
-                const isLast = i >= passwords.length - 1;
-                if (value && value < 10) {
+                const isLast = checkIsArrayLast(passwords, i);
+                if (value && value.length < 2) {
                   if (document.activeElement === passwordInputsRef.current[i]) {
                     if (isLast) {
                       passwordInputsRef.current[i]?.blur();
@@ -171,18 +188,17 @@ function CardCreator() {
                     }}
                     onChange={(e) => {
                       const numberValue = filterNumber(e.currentTarget.value);
-                      const inputVal = numberValue ? Number(numberValue) : undefined;
-                      if (inputVal && inputVal > 10) {
+                      if (numberValue.length > 2) {
                         return;
                       }
 
                       setPasswords(
                         (prevPasswords) =>
-                          updateArray(prevPasswords, i, updateObject(prevPasswords[i], 'value', inputVal)),
+                          updateArray(prevPasswords, i, updateObject(prevPasswords[i], 'value', numberValue)),
                         {
                           stateRefreshValidator: (prevPasswords) => {
                             const prevVal = prevPasswords[i].value;
-                            return inputVal !== prevVal;
+                            return numberValue !== prevVal;
                           },
                         }
                       );

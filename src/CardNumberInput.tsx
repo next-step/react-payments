@@ -20,10 +20,10 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
       <div className="input-box">
         {cardNumbers.map(({ key, type, value }, i) => {
           const isLast = checkIsArrayLast(cardNumbers, i);
-          const isOverThousand = value && value.length > 4;
-          const dashComponentClassName = isOverThousand && !isLast ? 'dash' : 'dash hide';
+          const isOverFourNumber = value && value.length >= 4;
+          const dashComponentClassName = isOverFourNumber && !isLast ? 'dash' : 'dash hide';
 
-          if (!isLast && isOverThousand) {
+          if (!isLast && isOverFourNumber) {
             if (document.activeElement === cardNumberInputsRef.current[i]) {
               cardNumberInputsRef.current[i + 1]?.focus();
             }
