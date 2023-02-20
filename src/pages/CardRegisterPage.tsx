@@ -5,7 +5,7 @@ import { Button } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
 import { styled } from '@/lib/stitches.config';
 import { getItem, setItem } from '@/storage/storage';
-import { CardKey, CardObj } from '@/types';
+import { CardKey } from '@/types';
 
 export const initialCardState = {
   [CardKey.CARD_NUMBERS]: {
@@ -36,7 +36,7 @@ export const initialCardState = {
     val: '',
     isValid: false,
   },
-} as const;
+};
 
 export const CardRegisterPage = () => {
   const { go } = useRouter();
@@ -50,12 +50,15 @@ export const CardRegisterPage = () => {
     [cardState]
   );
 
-  const handleCardState = useCallback((key: CardKey, state: CardObj) => {
-    setCardState((prev) => ({
-      ...prev,
-      [key]: { ...state },
-    }));
-  }, []);
+  const handleCardState = useCallback(
+    <T extends CardKey>(state: typeof initialCardState[T], key: T) => {
+      setCardState((prev) => ({
+        ...prev,
+        [key]: { ...state },
+      }));
+    },
+    []
+  );
 
   const isAllValid = Object.values(cardState).every((input) => input.isValid);
 

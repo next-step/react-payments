@@ -3,7 +3,8 @@ import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
 import { InputContainer } from '@/components/UI';
 import { useBlur } from '@/hooks/useBlur';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
-import { CardObj } from '@/types';
+import { initialCardState } from '@/pages/CardRegisterPage';
+import { CardKey } from '@/types';
 
 const initialState = {
   1: '',
@@ -13,7 +14,9 @@ const initialState = {
 } as const;
 
 type Props = {
-  onChangeCardNumbers: (state: CardObj) => void;
+  onChangeCardNumbers: <T extends CardKey>(
+    state: typeof initialCardState[T]
+  ) => void;
 };
 
 const CardNumberInput = (props: Props) => {

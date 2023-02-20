@@ -1,11 +1,11 @@
 import { ChangeEvent, memo, useMemo, useState } from 'react';
 
-import { CardObj } from '@/types';
-
 import { InputContainer } from '@/components/UI';
+import { initialCardState } from '@/pages/CardRegisterPage';
+import { CardKey } from '@/types';
 
 type Props = {
-  onChangeOwner: (state: CardObj) => void;
+  onChangeOwner: <T extends CardKey>(state: typeof initialCardState[T]) => void;
 };
 
 const CardOwnerInput = (props: Props) => {
