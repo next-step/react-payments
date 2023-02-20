@@ -11,6 +11,7 @@ import {
 } from 'components/@common';
 
 import { formatCardNumber, formatMMYY } from 'utils/format';
+import { setLocalStorageItem } from 'utils/localStorage';
 
 const RegistrationCardPage = () => {
   const [holderName, setHolderName] = useState('');
@@ -65,7 +66,14 @@ const RegistrationCardPage = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLDivElement>) => {
     e.preventDefault();
-    console.log(holderName);
+    const cardValues = {
+      holderName,
+      number,
+      expiration,
+      cvc,
+      password: passwords.join(''),
+    };
+    setLocalStorageItem('CardValues', cardValues);
   };
 
   return (
@@ -90,7 +98,6 @@ const RegistrationCardPage = () => {
               placeholder="0000-0000-0000-0000"
               type="text"
               inputMode="numeric"
-              pattern="\d*"
               maxLength={19}
               value={number}
               onChange={handleNumber}
