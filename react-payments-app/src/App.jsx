@@ -1,10 +1,9 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import CardListPage from '../src/pages/CardListPage/CardListPage';
 import CardNicknamePage from './pages/CardNicknamePage/CardNicknamePage';
 import CardRegistration from './pages/CardRegistrationPage/CardRegistrationPage';
 
-function App() {
+const App = () => {
   return (
     <div id='app' className='flex-column-center'>
       <div className='wrap'>
@@ -19,6 +18,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;
