@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react'
 import { Header } from 'components/molecules/Header'
 import { AiOutlineLeft } from 'react-icons/ai'
-import { CardType, UpdateCardParams } from 'models/card.model'
+import { CardType, CardTypeKeys, OnChangeEventParams } from 'models/card.model'
 import { Card } from 'components/atoms/Card'
 import { UI_SIZE } from 'constants/ui.constant'
 import INPUTS from 'utils/inputs'
@@ -11,7 +11,7 @@ import { FormGroup } from 'components/molecules/FromGroup'
 type RegisterCardProps = {
   card: CardType
   onNavigate: () => void
-  changeValue: (params: UpdateCardParams) => void
+  changeValue: (value: string, name: CardTypeKeys) => void
 }
 
 const RegisterCard: React.FC<RegisterCardProps> = ({
@@ -21,16 +21,13 @@ const RegisterCard: React.FC<RegisterCardProps> = ({
 }) => {
   const onChange = (
     e: ChangeEvent,
-    params: Omit<UpdateCardParams, 'value'>,
+    { formatter, name }: OnChangeEventParams,
   ) => {
     const { value } = e.target as HTMLInputElement
 
-    const currentvalue = params.formatter ? params.formatter(value) : value
+    const currentvalue = formatter ? formatter(value) : value
 
-    changeValue({
-      ...params,
-      value: currentvalue,
-    })
+    changeValue(currentvalue, name)
   }
 
   const onMultipleValue = (e: ChangeEvent, i: number) => {
@@ -62,9 +59,7 @@ const RegisterCard: React.FC<RegisterCardProps> = ({
         maxLength={maxLength}
         isRequire={isRequire}
         isMarkValueLength={isMarkValueLength}
-        onChange={(e: ChangeEvent) =>
-          onChange(e, { name: key, maxLength, isRequire, formatter })
-        }
+        onChange={(e: ChangeEvent) => onChange(e, { name: key, formatter })}
         width={width}
         placeholder={placeholder}
       />

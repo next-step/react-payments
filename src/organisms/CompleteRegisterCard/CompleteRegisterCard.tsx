@@ -1,13 +1,13 @@
 import React, { ChangeEvent } from 'react'
 import { FormGroup } from 'components/molecules/FromGroup'
-import { CardType, UpdateCardParams } from 'models/card.model'
+import { CardType, CardTypeKeys } from 'models/card.model'
 import { UI_SIZE, UI_VARIANT } from 'constants/ui.constant'
 import { Card } from 'components/atoms/Card'
 import { Button } from 'components/atoms/Button'
 
 type CompleteRegisterCardProps = {
   card: CardType
-  changeValue: (params: UpdateCardParams) => void
+  changeValue: (value: string, name: CardTypeKeys) => void
   submit: () => void
 }
 
@@ -16,15 +16,9 @@ const CompleteRegisterCard: React.FC<CompleteRegisterCardProps> = ({
   changeValue,
   submit,
 }) => {
-  const onChange = (
-    e: ChangeEvent,
-    params: Omit<UpdateCardParams, 'value'>,
-  ) => {
+  const onChange = (e: ChangeEvent, name: CardTypeKeys) => {
     const { value } = e.target as HTMLInputElement
-    changeValue({
-      ...params,
-      value,
-    })
+    changeValue(value, name)
   }
 
   return (
@@ -38,13 +32,7 @@ const CompleteRegisterCard: React.FC<CompleteRegisterCardProps> = ({
         type='text'
         maxLength={10}
         isRequire={true}
-        onChange={(e: ChangeEvent) =>
-          onChange(e, {
-            name: 'cardNickname',
-            isRequire: true,
-            maxLength: 30,
-          })
-        }
+        onChange={(e: ChangeEvent) => onChange(e, 'cardNickname')}
         width={'100%'}
       />
       <div className='button-box'>

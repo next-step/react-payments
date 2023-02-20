@@ -13,10 +13,9 @@ export interface CardType {
   cardNickname: string
 }
 
-export interface UpdateCardParams {
-  value: string
+export interface OnChangeEventParams {
   name: keyof CardType
-  formatter?: (str: string) => string
-  maxLength?: number
-  isRequire?: boolean
+  formatter: (str: string) => string
 }
+
+export type CardTypeKeys = keyof CardType

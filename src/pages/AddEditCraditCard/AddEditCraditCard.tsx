@@ -1,17 +1,12 @@
-import React, { ChangeEvent, useState } from 'react'
-import useAddCard from 'hooks/use-addCard'
-import {
-  CardCompanyCodeType,
-  CardType,
-  UpdateCardParams,
-} from 'models/card.model'
-
+import React, { useState } from 'react'
+import useCardItem from 'hooks/useCardItem'
+import { CardType, CardTypeKeys } from 'models/card.model'
 import { RegisterCard } from 'organisms/RegisterCard'
 import { CompleteRegisterCard } from 'organisms/CompleteRegisterCard'
-import { Modal } from 'components/atoms/Modal'
 import { CardCompanyList } from 'components/molecules/CardCompanyList'
-import './AddEditCraditCard'
-import { INIT_CARD_VALUE } from 'constants/card'
+import { CARD_COMPNAYS_CODE, INIT_CARD_VALUE } from 'constants/card'
+import { Modal } from 'components/atoms/Modal'
+import './AddEditCraditCard.css'
 
 type AddEditCraditCardProps = {
   onNavigate: () => void
@@ -22,7 +17,8 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
   onNavigate,
   addCard,
 }) => {
-  const { card, resetCard, updateCard } = useAddCard(INIT_CARD_VALUE)
+  const { card, resetCard, updateCard, validator } =
+    useCardItem(INIT_CARD_VALUE)
   const [isOpenModal, setIsOpenModal] = useState(false)
 
   const completeCardRegistor = () => {
@@ -31,14 +27,17 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
     resetCard(INIT_CARD_VALUE)
   }
 
-  const changeValue = (params: UpdateCardParams) => {
-    updateCard(params)
+  const changeValue = (value: string, name: CardTypeKeys) => {
+    if (name === 'cardCompanyCode') {
+      setIsOpenModal(false)
+    }
+    updateCard(value, name)
   }
 
   const { cardCompanyCode, cardNumber, password, pinCode, expireDate } = card
   const isCompleteRegister =
     cardNumber &&
-    cardCompanyCode !== 'C000' &&
+    cardCompanyCode !== CARD_COMPNAYS_CODE.NULL &&
     password &&
     pinCode &&
     expireDate
@@ -59,7 +58,7 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
         />
       )}
 
-      {cardNumber && cardCompanyCode === 'C000' && isOpenModal && (
+      {validator.cardNumber && !validator.cardCompanyCode && (
         <div className='modal-container'>
           <CardCompanyList onClick={changeValue} />
         </div>

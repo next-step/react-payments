@@ -1,10 +1,10 @@
 import React from 'react'
 import { CARD_COMPANYS, CARD_COMPNAYS_CODE } from 'constants/card'
-import { CardCompanyCodeType, UpdateCardParams } from 'models/card.model'
+import { CardCompanyCodeType, CardTypeKeys } from 'models/card.model'
 import './CardCompanyList.css'
 
 type CardCompanyListProps = {
-  onClick: (params: UpdateCardParams) => void
+  onClick: (value: string, name: CardTypeKeys) => void
 }
 
 const CardCompanyList: React.FC<CardCompanyListProps> = ({ onClick }) => {
@@ -15,9 +15,7 @@ const CardCompanyList: React.FC<CardCompanyListProps> = ({ onClick }) => {
           cardCode !== 'C000' && (
             <li className='card-company-item' key={cardCode}>
               <button
-                onClick={() =>
-                  onClick({ value: cardCode, name: 'cardCompanyCode' })
-                }
+                onClick={() => onClick(cardCode, 'cardCompanyCode')}
                 className='card-company-button'
               >
                 <span
