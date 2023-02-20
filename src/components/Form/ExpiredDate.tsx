@@ -1,75 +1,93 @@
 import { useEffect, useRef, useState } from "react";
+import { blockInput, remainOnlyNumber } from "../../utils/format";
 import Input from "../Input/Input";
 import InputBox from "../Input/InputBox";
 import InputContainer from "../Input/InputContainer";
 
+type Date = {
+  month: string;
+  year: string;
+};
+
+enum ExpiredDateType {
+  Month = "month",
+  Year = "year",
+}
+
+const DATE_MAX_LENGTH = 2;
+const MAX_MONTH = 12;
+const MIN_YEAR = 23;
+
+const blockInvalidValue = (inputValue: string, type: string) => {
+  const value = Number(inputValue);
+
+  if (type === ExpiredDateType.Month) {
+    const isValidMonth = value !== 0 && value <= MAX_MONTH;
+    if (!isValidMonth) {
+      return blockInput(String(value));
+    }
+  }
+
+  if (type === ExpiredDateType.Year) {
+    const isValidYear =
+      value !== 0 && !(String(value).length > 1 && value < MIN_YEAR);
+    if (!isValidYear) {
+      return blockInput(String(value));
+    }
+  }
+
+  return inputValue;
+};
+
 function ExpiredDate({ onExpiredDateChange }: ExpiredDateProps) {
-  const [dates, setDates] = useState<number[]>([]);
+  const [expiredDate, setExpiredDate] = useState<Date>({ month: "", year: "" });
 
   const itemsRef = useRef<any>([]);
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    order: number
+    type: string
   ) => {
-    event.currentTarget.value = event.currentTarget.value.replace(
-      /[^0-9]/g,
-      ""
+    event.currentTarget.value = remainOnlyNumber(event.target.value);
+
+    event.currentTarget.value = blockInvalidValue(
+      event.currentTarget.value,
+      type
     );
 
-    let newArr = [...dates];
-    newArr[order] = Number(event.currentTarget.value);
+    const date: Date = {
+      ...expiredDate,
+      [type]: event.currentTarget.value,
+    };
 
-    if (order === 0) {
-      if (newArr[order] === 0 || newArr[order] > 12) {
-        event.currentTarget.value = event.currentTarget.value.replace(
-          event.currentTarget.value,
-          ""
-        );
+    if (type === ExpiredDateType.Month) {
+      if (event.currentTarget.value.length > 1) {
+        itemsRef.current[1].focus();
       }
     }
 
-    if (order === 1) {
-      if (
-        newArr[order] === 0 ||
-        (String(newArr[order]).length > 1 && newArr[order] < 23)
-      ) {
-        event.currentTarget.value = event.currentTarget.value.replace(
-          event.currentTarget.value,
-          ""
-        );
-      }
-    }
-    newArr[order] = Number(event.currentTarget.value);
-
-    if (String(newArr[order]).length > 1) {
-      if (order < 1) {
-        itemsRef.current[order + 1].focus();
-      }
-    }
-
-    setDates(newArr);
+    setExpiredDate(date);
   };
 
   useEffect(() => {
-    onExpiredDateChange(dates);
-  }, [dates, onExpiredDateChange]);
+    onExpiredDateChange(expiredDate);
+  }, [expiredDate, onExpiredDateChange]);
 
   return (
     <InputContainer label="만료일">
       <InputBox medium>
         <Input
           placeholder="MM"
-          maxLength={2}
-          onChange={(e) => onChange(e, 0)}
-          name="month"
+          maxLength={DATE_MAX_LENGTH}
+          onChange={(e) => onChange(e, ExpiredDateType.Month)}
+          name={ExpiredDateType.Month}
           forwardRef={(el: HTMLInputElement) => (itemsRef.current[0] = el)}
         />
         <Input
           placeholder="YY"
-          maxLength={2}
-          onChange={(e) => onChange(e, 1)}
-          name="year"
+          maxLength={DATE_MAX_LENGTH}
+          onChange={(e) => onChange(e, ExpiredDateType.Year)}
+          name={ExpiredDateType.Year}
           forwardRef={(el: HTMLInputElement) => (itemsRef.current[1] = el)}
         />
       </InputBox>

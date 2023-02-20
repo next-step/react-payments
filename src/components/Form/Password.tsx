@@ -20,7 +20,7 @@ function Password({ onPasswordChange }: PasswordProps) {
       ""
     );
 
-    let newObj = {
+    const newObj = {
       ...password,
       [passwordIdx]: event.currentTarget.value,
     };
