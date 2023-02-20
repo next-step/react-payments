@@ -10,12 +10,12 @@ export default {
 const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />
 
 export const Basic = Template.bind({})
-Basic.args = {
-  placeholdaer: '텍스트를 입력하세요',
-  size: 'small',
-  variant: 'fill',
-  color: '#e5e5e5',
-  onChange: () => {
-    return
-  },
-}
+// Basic.args = {
+//   placeholdaer: '텍스트를 입력하세요',
+//   size: 'small',
+//   variant: 'fill',
+//   color: '#e5e5e5',
+//   onChange: () => {
+//     return
+//   },
+// }

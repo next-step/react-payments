@@ -1,22 +1,13 @@
+import React from 'react'
 import { MobileTemplate } from 'components/MobileTemplate/MobileTemplate'
-import { AddCardPage } from 'pages/AddCardPage/AddCardPage'
-import { CardListPage } from 'pages/CardListPage/CardListPage'
-import React, { useState } from 'react'
+import { CardPage } from 'pages/CardPage'
+
 import './App.css'
 
-function App() {
-  const [isAddCard, setIsAddCard] = useState(false)
-
-  const toggleIsAddCard = (isAdd: boolean) => {
-    setIsAddCard(isAdd)
-  }
+const App = () => {
   return (
     <MobileTemplate>
-      {isAddCard ? (
-        <AddCardPage onNavigate={() => toggleIsAddCard(false)} />
-      ) : (
-        <CardListPage onClickAddCard={() => toggleIsAddCard(true)} />
-      )}
+      <CardPage />
     </MobileTemplate>
   )
 }

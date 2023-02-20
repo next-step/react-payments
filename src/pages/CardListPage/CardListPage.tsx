@@ -1,20 +1,16 @@
-import { Card } from 'components/Card'
-import useCards from 'hooks/use-cards'
 import React from 'react'
 import { Header } from 'components/ui/Header'
 import { EmptyCard } from 'components/EmptyCard'
 import { UI_SIZE } from 'constants/ui.constant'
+import { Card } from 'components/Card'
+import { CardType } from 'models/card.model'
 
 type CardListPageProps = {
   onClickAddCard: () => void
+  cards: CardType[]
 }
 
-export const CardListPage: React.FC<CardListPageProps> = ({ onClickAddCard }) => {
-  const { loading, error, cards } = useCards()
-  if (loading) return <p>loading</p>
-  if (error) return <p>error</p>
-  if (!cards) return <p></p>
-
+export const CardListPage: React.FC<CardListPageProps> = ({ onClickAddCard, cards }) => {
   return (
     <>
       <Header title='보유 카드' />

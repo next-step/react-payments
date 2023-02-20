@@ -4,7 +4,7 @@ import './Input.css'
 
 type InputProps = {
   placeholder?: string
-  onChange: (e: ChangeEvent, key: keyof CardType) => void
+  onChange: (e: ChangeEvent) => void
   width?: string
   type: string
   value: string
@@ -28,7 +28,7 @@ const Input: React.FC<InputProps> = ({
       type={type}
       value={value}
       placeholder={placeholder}
-      onChange={(e: ChangeEvent) => onChange(e, name)}
+      onChange={(e: ChangeEvent) => onChange(e)}
       name={name}
       maxLength={maxLength}
       style={{ width }}

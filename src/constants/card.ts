@@ -1,3 +1,5 @@
+import { CardType } from 'models/card.model'
+
 export const CARD_COMPNAYS_CODE = {
   NULL: 'C000',
   LOTTE: 'C001',
@@ -57,3 +59,13 @@ export const CARD_COMPANYS = {
     color: '#F55555',
   },
 } as const
+
+export const INIT_CARD_VALUE: CardType = {
+  cardNumber: '',
+  expireDate: '',
+  cardOwner: '',
+  pinCode: '',
+  password: '',
+  cardNickname: '',
+  cardCompanyCode: CARD_COMPNAYS_CODE.NULL,
+}

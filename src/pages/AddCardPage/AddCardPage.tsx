@@ -1,76 +1,68 @@
 import React, { ChangeEvent, useState } from 'react'
 import useAddCard from 'hooks/use-addCard'
 
-import { CardCompanyCodeType, CardType } from 'models/card.model'
+import {
+  CardCompanyCodeType,
+  CardType,
+  UpdateCardParams,
+} from 'models/card.model'
 
 import RegisterCardPage from 'pages/RegisterCardPage/RegisterCardPage'
 import CompleteCardPage from 'pages/CompleteCardPage/CompleteCardPage'
 import { Modal } from 'components/ui/Modal'
 import { CardCompanyList } from 'components/CardCompanyList'
 import './AddCardPage'
+import { INIT_CARD_VALUE } from 'constants/card'
 
 type AddCardPageProps = {
   onNavigate: () => void
+  addCard: (card: CardType) => void
 }
 
-export const AddCardPage: React.FC<AddCardPageProps> = ({ onNavigate }) => {
-  const [card, setCard] = useState<CardType>({
-    cardNumber: '',
-    expireDate: '',
-    cardOwner: '',
-    pinCode: '',
-    password: '',
-    cardNickname: '',
-    cardCompanyCode: 'C000',
-  })
+export const AddCardPage: React.FC<AddCardPageProps> = ({
+  onNavigate,
+  addCard,
+}) => {
+  const { card, resetCard, updateCard } = useAddCard(INIT_CARD_VALUE)
   const [isOpenModal, setIsOpenModal] = useState(false)
 
-  const changeValue = (e: ChangeEvent, key: keyof CardType) => {
-    const { value } = e.target as HTMLInputElement
-    setIsOpenModal(true)
-    setCard({
-      ...card,
-      [key]: value,
-    })
-  }
-
-  const clickCardCompany = (value: CardCompanyCodeType) => {
-    setCard({
-      ...card,
-      cardCompanyCode: value,
-    })
-    setIsOpenModal(false)
-  }
-
-  const initCard = () => {
+  const completeCardRegistor = () => {
+    addCard(card)
     onNavigate()
-    setCard({
-      cardNumber: '',
-      expireDate: '',
-      cardOwner: '',
-      pinCode: '',
-      password: '',
-      cardNickname: '',
-      cardCompanyCode: 'C000',
-    })
+    resetCard(INIT_CARD_VALUE)
   }
 
-  const { cardCompanyCode, cardOwner, cardNickname, cardNumber, password, pinCode, expireDate } =
-    card
+  const changeValue = (params: UpdateCardParams) => {
+    updateCard(params)
+  }
+
+  const { cardCompanyCode, cardNumber, password, pinCode, expireDate } = card
   const isCompleteRegister =
-    cardNumber && cardCompanyCode !== 'C000' && password && pinCode && expireDate
+    cardNumber &&
+    cardCompanyCode !== 'C000' &&
+    password &&
+    pinCode &&
+    expireDate
 
   return (
     <main id='add-card-container'>
       {isCompleteRegister ? (
-        <CompleteCardPage card={card} changeValue={changeValue} initCard={initCard} />
+        <CompleteCardPage
+          card={card}
+          changeValue={changeValue}
+          submit={completeCardRegistor}
+        />
       ) : (
-        <RegisterCardPage card={card} onNavigate={onNavigate} changeValue={changeValue} />
+        <RegisterCardPage
+          card={card}
+          onNavigate={onNavigate}
+          changeValue={changeValue}
+        />
       )}
 
       {cardNumber && cardCompanyCode === 'C000' && isOpenModal && (
         <div className='modal-container'>
-          <CardCompanyList onClick={clickCardCompany} />
+          <CardCompanyList onClick={changeValue} />
         </div>
       )}
     </main>

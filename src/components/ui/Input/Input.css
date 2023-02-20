@@ -10,6 +10,10 @@
   border-radius: 0.25rem;
 }
 
+.input-basic:invalid {
+  background-color: red;
+}
+
 /* 
 .input {
   display: flex;

@@ -11,7 +11,7 @@ const useCards = () => {
     setError(null)
     fetch(`http://localhost:3004/cards`)
       .then((res) => res.json())
-      .then((data: CardType[]) => setCards(data))
+      .then((data: CardType[]) => setCards(data ?? []))
       .catch((e) =>
         setError({
           code: 500,
@@ -23,7 +23,11 @@ const useCards = () => {
       })
   }, [])
 
-  return { loading, error, cards }
+  const addCard = (cardItem: CardType) => {
+    setCards([...cards, cardItem])
+  }
+
+  return { loading, error, cards, addCard }
 }
 
 export default useCards
