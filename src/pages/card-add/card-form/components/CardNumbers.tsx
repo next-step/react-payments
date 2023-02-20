@@ -20,15 +20,15 @@ const CardNumbers = ({ numbers, handleChange }: CardNumbersProps) => {
   const { first, second, third } = numbers
 
   //Todo: 다 쓰고나서 특정칸 수정할 때 에러 발생함
-  if (first.length >= 4 && secondRef.current) {
-    secondRef.current.focus()
-  }
-  if (second.length >= 4 && thirdRef.current) {
-    thirdRef.current.focus()
-  }
-  if (third.length >= 4 && fourthRef.current) {
-    fourthRef.current.focus()
-  }
+  // if (first.length >= 4 && secondRef.current) {
+  //   secondRef.current.focus()
+  // }
+  // if (second.length >= 4 && thirdRef.current) {
+  //   thirdRef.current.focus()
+  // }
+  // if (third.length >= 4 && fourthRef.current) {
+  //   fourthRef.current.focus()
+  // }
 
   return (
     <div className="input-container">

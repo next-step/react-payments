@@ -38,7 +38,7 @@ function CardCompleted() {
             placeholder="카드의 별칭을 입력해주세요."
           />
         </div>
-        <NextButtonBox additionalClassNames="mt-50" />
+        <NextButtonBox additionalClassNames="mt-50" to="/card-add" />
       </div>
     </div>
   )
