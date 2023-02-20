@@ -11,7 +11,7 @@ const Header = ({ showBackIcon, children }: PropsWithChildren<HeaderProps>) => {
 
   return (
     <Styled.Header as="header" display="flex">
-      {showBackIcon && <BackIcon onClick={() => push('card-list')} />}
+      {showBackIcon && <BackIcon onClick={() => push('/card-list')} />}
       {children}
     </Styled.Header>
   );

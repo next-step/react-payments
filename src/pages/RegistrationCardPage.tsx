@@ -10,10 +10,12 @@ import {
   Button,
 } from 'components/@common';
 
+import useRouter from 'routes/useRouter';
 import { formatCardNumber, formatMMYY } from 'utils/format';
 import { setLocalStorageItem } from 'utils/localStorage';
 
 const RegistrationCardPage = () => {
+  const { push } = useRouter();
   const [holderName, setHolderName] = useState('');
   const [number, setNumber] = useState('');
   const [expiration, setExpiration] = useState('');
@@ -74,6 +76,7 @@ const RegistrationCardPage = () => {
       password: passwords.join(''),
     };
     setLocalStorageItem('CardValues', cardValues);
+    push('/card-name-input');
   };
 
   return (
@@ -190,7 +193,7 @@ const RegistrationCardPage = () => {
 
         <Box display="flex" justifyContent="flex-end">
           <Button type="submit" color="brand02" disabled={!isSubmitEnabled}>
-            카드 생성 완료하기
+            다음 단계로
           </Button>
         </Box>
       </Form>
