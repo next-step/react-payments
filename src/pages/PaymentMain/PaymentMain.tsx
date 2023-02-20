@@ -5,12 +5,12 @@ import { UI_SIZE } from 'constants/ui.constant'
 import { Card } from 'components/Card'
 import { CardType } from 'models/card.model'
 
-type CardListPageProps = {
+type PaymentMainProps = {
   onClickAddCard: () => void
   cards: CardType[]
 }
 
-export const CardListPage: React.FC<CardListPageProps> = ({ onClickAddCard, cards }) => {
+const PaymentMain: React.FC<PaymentMainProps> = ({ onClickAddCard, cards }) => {
   return (
     <>
       <Header title='보유 카드' />
@@ -21,3 +21,5 @@ export const CardListPage: React.FC<CardListPageProps> = ({ onClickAddCard, card
     </>
   )
 }
+
+export default PaymentMain

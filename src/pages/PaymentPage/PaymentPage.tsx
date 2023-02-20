@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import useCards from 'hooks/use-cards'
 import { AddCardPage } from 'pages/AddCardPage/AddCardPage'
-import { CardListPage } from 'pages/CardListPage/CardListPage'
+import { PaymentMain } from 'pages/PaymentMain'
 import { Loading } from 'components/ui/Loading'
 import { Error } from 'components/ui/Error'
 
@@ -30,7 +30,7 @@ const PaymentPage = () => {
           addCard={addCard}
         />
       ) : (
-        <CardListPage
+        <PaymentMain
           onClickAddCard={() => toggleIsAddCard(true)}
           cards={cards}
         />
