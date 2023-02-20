@@ -8,6 +8,9 @@ main {
   font-family: 'Pretendard';
   overflow: hidden;
 }
+input {
+  outline: none;
+}
 
 .content {
   overflow-y: scroll;
@@ -71,6 +74,7 @@ header {
 .card-title {
   font-size: 0.625rem;
   color: #525252;
+  height: 1.125rem;
 }
 
 .card-ic-chip {
@@ -82,16 +86,25 @@ header {
 }
 
 .card-credit-number {
+  height: 0.625rem;
   color: #525252;
   font-size: 0.8rem;
   display: flex;
   padding-left: 0.625rem;
   padding-right: 0.625rem;
-  justify-content: space-between;
   margin-top: 0.5rem;
+  justify-content: flex-start;
+}
+
+.card-credit-number-item {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-bottom {
+  overflow: hidden;
   color: #525252;
   margin-top: 0.4rem;
   display: flex;
@@ -99,6 +112,11 @@ header {
   font-size: 0.8rem;
   padding-left: 0.3rem;
   padding-right: 0.3rem;
+}
+
+.card-customer-name {
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .card-list {
@@ -123,7 +141,7 @@ header {
   border: none;
   background-color: #ecebf1;
   color: #04c09e;
-  padding: 1rem 0.75rem;
+  padding: 0.75rem;
   border-radius: 0.43rem;
   font-size: 1.125rem;
   font-weight: 500;
@@ -151,6 +169,12 @@ header {
 .input-label {
   margin-bottom: 0.5rem;
   white-space: nowrap;
+  display: flex;
+  justify-content: space-between;
+}
+
+#input-customer-name::placeholder {
+  font-size: 0.9rem;
 }
 
 /* Text Button */
@@ -187,4 +211,27 @@ header {
   font-size: 1.125rem;
   margin: 0 auto;
   margin-top: 2rem;
+}
+
+/* Card Password */
+
+.card-password-input-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card-password-input {
+  border: none;
+  background-color: #ecebf1;
+  color: #04c09e;
+  padding: 0.75rem;
+  border-radius: 0.43rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  width: 1rem;
+  text-align: center;
+}
+
+.card-password-input.disabled {
+  background-color: transparent;
 }
