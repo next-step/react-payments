@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 
 import type { CardNumbersState } from '@/types/types';
-import { filterNumber, updateArray, updateObject } from '@/utils/utils';
+import { checkIsArrayLast, filterNumber, updateArray, updateObject } from '@/utils/utils';
 import useExtendedState from './hooks/useExtendedState';
 
 interface CardNumberInputProps {
@@ -19,11 +19,11 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
       <span className="input-title">카드 번호</span>
       <div className="input-box">
         {cardNumbers.map(({ key, type, value }, i) => {
-          const isNotLast = i < cardNumbers.length - 1;
+          const isLast = checkIsArrayLast(cardNumbers, i);
           const isOverThousand = value && value.length > 4;
-          const dashComponentClassName = isOverThousand && isNotLast ? 'dash' : 'dash hide';
+          const dashComponentClassName = isOverThousand && !isLast ? 'dash' : 'dash hide';
 
-          if (isNotLast && isOverThousand) {
+          if (!isLast && isOverThousand) {
             if (document.activeElement === cardNumberInputsRef.current[i]) {
               cardNumberInputsRef.current[i + 1]?.focus();
             }
@@ -51,7 +51,7 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
                   });
                 }}
               />
-              {isNotLast && <div className={`text-black ${dashComponentClassName}`}>-</div>}
+              {!isLast && <div className={`text-black ${dashComponentClassName}`}>-</div>}
             </>
           );
         })}

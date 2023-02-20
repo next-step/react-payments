@@ -33,3 +33,7 @@ export function updateArray<T extends Array<unknown>, K extends keyof T>(array: 
   newObject[key] = newValue;
   return newObject;
 }
+
+export function checkIsArrayLast(array: any[], index: number) {
+  return index >= array.length - 1;
+}
