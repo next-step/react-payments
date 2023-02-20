@@ -39,7 +39,9 @@ const AddCard = () => {
     expirationDateRef.current.value = '';
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeExpirationDate = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     if (e.target.value === '') return;
     if (!expirationDateRef.current) return;
 
@@ -117,7 +119,7 @@ const AddCard = () => {
             placeholder="MM / YY"
             maxLength={5}
             ref={expirationDateRef}
-            onChange={handleChange}
+            onChange={handleChangeExpirationDate}
           />
         </div>
       </div>
