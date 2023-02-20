@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-type Destination = '/card-add' | '/card-completed'
+type Destination = '/card-add' | '/card-completed' | '/'
 
 interface ButtonBoxProps {
   additionalClassNames?: '' | 'mt-50'

@@ -1,5 +1,7 @@
 import { useRef, ChangeEvent } from 'react'
 
+import { useInputFocus } from '@/pages/card-add/card-form/hooks'
+
 interface CardNumbersProps {
   numbers: {
     first: string
@@ -16,19 +18,14 @@ const CardNumbers = ({ numbers, handleChange }: CardNumbersProps) => {
   const secondRef = useRef<HTMLInputElement>(null)
   const thirdRef = useRef<HTMLInputElement>(null)
   const fourthRef = useRef<HTMLInputElement>(null)
+  useInputFocus([
+    { ref: firstRef, maxLength: 4 },
+    { ref: secondRef, maxLength: 4 },
+    { ref: thirdRef, maxLength: 4 },
+    { ref: fourthRef, maxLength: 4 },
+  ])
 
   const { first, second, third } = numbers
-
-  //Todo: 다 쓰고나서 특정칸 수정할 때 에러 발생함
-  // if (first.length >= 4 && secondRef.current) {
-  //   secondRef.current.focus()
-  // }
-  // if (second.length >= 4 && thirdRef.current) {
-  //   thirdRef.current.focus()
-  // }
-  // if (third.length >= 4 && fourthRef.current) {
-  //   fourthRef.current.focus()
-  // }
 
   return (
     <div className="input-container">

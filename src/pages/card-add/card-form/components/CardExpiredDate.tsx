@@ -1,4 +1,6 @@
-import { ChangeEvent } from 'react'
+import { useRef, ChangeEvent } from 'react'
+
+import { useInputFocus } from '@/pages/card-add/card-form/hooks'
 
 interface CardExpiredDateProps {
   expiratedYear: string
@@ -11,11 +13,18 @@ const CardExpiredDate = ({
   expiratedMonth,
   handleChange,
 }: CardExpiredDateProps) => {
+  const firstRef = useRef<HTMLInputElement>(null)
+  const secondRef = useRef<HTMLInputElement>(null)
+  useInputFocus([
+    { ref: firstRef, maxLength: 2 },
+    { ref: secondRef, maxLength: 2 },
+  ])
   return (
     <div className="input-container">
       <span className="input-title">만료일</span>
       <div className="input-box w-50">
         <input
+          ref={firstRef}
           className="input-basic"
           type="text"
           placeholder="MM"
@@ -27,6 +36,7 @@ const CardExpiredDate = ({
           <span>/</span>
         )}
         <input
+          ref={secondRef}
           className="input-basic"
           type="text"
           placeholder="YY"
