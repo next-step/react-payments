@@ -27,6 +27,23 @@ const formatNumber = (number: number) => {
   return number.toString().replaceAll(/[0-9]/g, "*");
 };
 
+const checkValid = (eventTarget: any) => {
+  return INPUT_NAMES.some((inputName) => {
+    if (!eventTarget[inputName]?.value && inputName !== "username") {
+      let prefix = inputName;
+      if (inputName.startsWith("card-")) {
+        prefix = "카드";
+      }
+      if (inputName.startsWith("password")) {
+        prefix = "비밀번호";
+      }
+      alert(`필수값 누락 (${prefix})`);
+      return true;
+    }
+    return false;
+  });
+};
+
 function Add() {
   const [cardNumber, setCardNumber] = useState("");
   const [expireMonth, setExpireMonth] = useState(0);
@@ -79,23 +96,7 @@ function Add() {
   };
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const inputData: ObjectType = {};
-
-    const isInvalid = INPUT_NAMES.some((inputName) => {
-      if (!e.currentTarget[inputName]?.value && inputName !== "username") {
-        let prefix = inputName;
-        if (inputName.startsWith("card-")) {
-          prefix = "카드";
-        }
-        if (inputName.startsWith("password")) {
-          prefix = "비밀번호";
-        }
-        alert(`필수값 누락 (${prefix})`);
-        return true;
-      }
-      inputData[inputName] = e.currentTarget[inputName]?.value;
-      return false;
-    });
+    const isInvalid = checkValid(e.currentTarget);
 
     if (!isInvalid) {
       if (bankId) {
