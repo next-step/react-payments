@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import styled from '@emotion/styled';
 
 import { CreditCard } from 'components';
@@ -18,6 +18,15 @@ const RegistrationCardPage = () => {
   const [expiration, setExpiration] = useState('');
   const [cvc, setCvc] = useState('');
   const [passwords, setPasswords] = useState<string[]>([]);
+
+  const isSubmitEnabled = useMemo(() => {
+    if (holderName && number && expiration && cvc) {
+      if (passwords[0] && passwords[1] && passwords[2] && passwords[3]) {
+        return true;
+      }
+    }
+    return false;
+  }, [holderName, number, expiration, cvc, passwords]);
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
@@ -54,6 +63,11 @@ const RegistrationCardPage = () => {
     setPasswords(copyPassword);
   };
 
+  const onSubmit = (e: React.FormEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    console.log(holderName);
+  };
+
   return (
     <>
       <Header showBackIcon>카드 추가</Header>
@@ -64,7 +78,7 @@ const RegistrationCardPage = () => {
         number={number}
         expiration={expiration}
       />
-      <Form as="form">
+      <Form as="form" onSubmit={onSubmit}>
         <FormControl>
           <FormControl.Label>카드 번호</FormControl.Label>
           <Box
@@ -168,7 +182,7 @@ const RegistrationCardPage = () => {
         </FormControl>
 
         <Box display="flex" justifyContent="flex-end">
-          <Button type="submit" color="brand02" disabled>
+          <Button type="submit" color="brand02" disabled={!isSubmitEnabled}>
             카드 생성 완료하기
           </Button>
         </Box>
