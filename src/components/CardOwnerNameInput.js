@@ -7,22 +7,22 @@ import useCardOwnerName from "../hooks/useCardOwnerName";
 // TODO : 현재 입력 자릿수와 최대 입력 자릿수 위치 조정
 // TODO : state를 컴포넌트 내부로 가져와도 되나? 의미가 있는걸까?
 export default function CardOwnerNameInput() {
-  const [inputValue, onChange] = useCardOwnerName();
+  const [ownerName, handleOwnerName] = useCardOwnerName();
 
   return (
     <div className="input-container">
       <Span className="input-title">
         카드 소유자 이름(선택)
         {"    "}
-        {inputValue.length} {" / "}
+        {ownerName.length} {" / "}
         {CARD_OWNER_NAME.MAX_LENGTH}
       </Span>
       <input
         className="input-basic card-owner-name"
         type="text"
         placeholder={CARD_OWNER_NAME.PLACEHOLDER}
-        onChange={onChange}
-        defaultValue={inputValue}
+        onChange={handleOwnerName}
+        value={ownerName}
         maxLength={CARD_OWNER_NAME.MAX_LENGTH}
       ></input>
     </div>

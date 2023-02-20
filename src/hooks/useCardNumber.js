@@ -1,29 +1,25 @@
 import { useState } from "react";
 
 export default function useCardNumber() {
-  const [inputValue, setInputValue] = useState([null, null, null, null]);
+  const [cardNumber, setCardNumber] = useState({num0:"", num1:"", num2:"", num3:""});
+
+  function isNumber(value) {
+    return !isNaN(Number(value));
+  }
 
   function isValidCardNumber(value) {
-    const pattern_num = /[0-9]/;
-    const pattern_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
-
-    if (value === "Backspace" || value === "Tab") return true;
-    if (pattern_spc.test(value) || pattern_num.test(value)) return true;
+    if(isNumber(value)) return true;
     return false;
   }
 
-  function handleKeyDown(event) {
-    const { key } = event;
-    if (!isValidCardNumber(key)) {
+  function handleCardNumber(event) {
+    const {name, value} = event.target;
+    if (!isValidCardNumber(value)) {
       alert("숫자만 입력 가능합니다");
-      event.preventDefault();
       return false;
     }
-    setInputValue([...inputValue]);
-
-    // TODO : inputValue 상태 갱신 안되는중
-    // console.log(inputValue);
+    setCardNumber({...cardNumber, [name] : value});
   }
 
-  return [inputValue, handleKeyDown];
+  return [cardNumber, handleCardNumber];
 }

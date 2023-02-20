@@ -3,13 +3,13 @@ import Span from "./Span";
 import useCardPassword from "../hooks/useCardPassword";
 
 export default function CardPasswordInput() {
-  const [inputValue, onChange] = useCardPassword();
+  const [password, handlePassword] = useCardPassword();
   // const dataId = useRef(0); // TODO : nextsibling auto focus & key 값 제어 (useRef)
 
   return (
     <div className="input-container">
       <Span className="input-title">카드 비밀번호</Span>
-      {inputValue.map((number, index) => {
+      {["num0","num1","num2","num3"].map((name, index) => {
         return (
           <input
             className={
@@ -17,9 +17,10 @@ export default function CardPasswordInput() {
               (index > 1 ? " input-disabled" : null)
             }
             type="password"
-            key={number}
-            onKeyDown={onChange}
-            defaultValue={number}
+            name={name}
+            key={index}
+            onChange={handlePassword}
+            value={index > 1? "*" : password[name]}
             maxLength={CARD_PASSWORD.MAX_LENGTH}
             disabled={index > 1 ? true : false}
           ></input>

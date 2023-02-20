@@ -4,7 +4,7 @@ import Span from "./Span";
 import useCardExpiration from "../hooks/useCardExpiration";
 
 export default function CardExpirationInput() {
-  const [inputValue, onChange] = useCardExpiration();
+  const [expiration, handleExpiration] = useCardExpiration();
 
   // TODO : nextsibling auto focus & key 값 제어 (useRef)
   // const dataId = useRef(0);
@@ -13,15 +13,16 @@ export default function CardExpirationInput() {
     <div className="input-container">
       <Span className="input-title">만료일</Span>
       <div className="input-box w-50">
-        {inputValue.map((number, index) => {
+        {["month", "year"].map((name, index) => {
           return (
             <input
               className="input-basic card-expiration"
               type="text"
+              name={name}
               placeholder={index == 0 ? "MM" : "YY"}
-              key={number}
-              onKeyDown={onChange}
-              defaultValue={number}
+              key={index}
+              onChange={handleExpiration}
+              value={expiration[name]}
               maxLength={CARD_EXPIRATION.MAX_LENGTH}
             ></input>
           );

@@ -1,26 +1,25 @@
 import { useState } from "react";
 
 export default function useSecurityCode() {
-  const [inputValue, setInputValue] = useState("");
+  const [securityCode, setSecurityCode] = useState("");
+
+  function isNumber(value) {
+    return !isNaN(Number(value));
+  }
 
   function isValidSecurityCode(value) {
-    const pattern_num = /[0-9]/;
-    if (pattern_num.test(value)) return true;
-    if (value === "Backspace" || value === "Tab" || value == "Meta")
-      return true;
-    else return false;
+    if(isNumber(value)) return true;
+    return false;
   }
 
-  function handleKeyDown(event) {
-    const { key } = event;
+  function handleSecurityCode(event) {
     const { value } = event.target;
-    if (!isValidSecurityCode(key)) {
+    if (!isValidSecurityCode(value)) {
       alert("숫자만 입력 가능합니다.");
-      event.preventDefault();
       return false;
     }
-    setInputValue(value);
+    setSecurityCode(value);
   }
 
-  return [inputValue, handleKeyDown];
+  return [securityCode, handleSecurityCode];
 }
