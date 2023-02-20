@@ -13,7 +13,7 @@ const CardNumbersInput = ({ onChange }) => {
       }
     }
   };
-  const setCardNumberByIndex = (index) => (e) => {
+  const handleCardNumbersChange = (index) => (e) => {
     const updatedCardNumbers = [...cardNumbers];
     const { value } = e.target;
 
@@ -41,7 +41,7 @@ const CardNumbersInput = ({ onChange }) => {
           className='input-basic'
           type='text'
           value={cardNumbers[0]}
-          onChange={setCardNumberByIndex(0)}
+          onChange={handleCardNumbersChange(0)}
           maxLength={MAX_INPUT_LENGTH.CARD_NUMBER}
         />
         -
@@ -50,7 +50,7 @@ const CardNumbersInput = ({ onChange }) => {
           className='input-basic'
           type='text'
           value={cardNumbers[1]}
-          onChange={setCardNumberByIndex(1)}
+          onChange={handleCardNumbersChange(1)}
           maxLength={MAX_INPUT_LENGTH.CARD_NUMBER}
         />
         -
@@ -59,7 +59,7 @@ const CardNumbersInput = ({ onChange }) => {
           className='input-basic'
           type='password'
           value={cardNumbers[2]}
-          onChange={setCardNumberByIndex(2)}
+          onChange={handleCardNumbersChange(2)}
           maxLength={MAX_INPUT_LENGTH.CARD_NUMBER}
         />
         -
@@ -68,7 +68,7 @@ const CardNumbersInput = ({ onChange }) => {
           className='input-basic'
           type='password'
           value={cardNumbers[3]}
-          onChange={setCardNumberByIndex(3)}
+          onChange={handleCardNumbersChange(3)}
           maxLength={MAX_INPUT_LENGTH.CARD_NUMBER}
         />
       </div>

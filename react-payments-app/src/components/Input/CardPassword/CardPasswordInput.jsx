@@ -7,7 +7,7 @@ const CardPasswordInput = ({ onChange }) => {
   const nextElement = useRef(null);
   const [event, setEvent] = useState(null);
 
-  const setPasswordByInput = (index) => (e) => {
+  const handleCardPasswordChange = (index) => (e) => {
     const updatedPassword = [...password];
     const { value } = e.target;
 
@@ -38,14 +38,14 @@ const CardPasswordInput = ({ onChange }) => {
         type='password'
         maxLength={MAX_INPUT_LENGTH.PW}
         value={password[0]}
-        onChange={setPasswordByInput(0)}
+        onChange={handleCardPasswordChange(0)}
       />
       <input
         className='input-basic w-15 mr-10'
         type='password'
         maxLength={MAX_INPUT_LENGTH.PW}
         value={password[1]}
-        onChange={setPasswordByInput(1)}
+        onChange={handleCardPasswordChange(1)}
         ref={nextElement}
       />
       <input

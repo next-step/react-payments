@@ -14,7 +14,7 @@ const CardForm = ({ onSubmit, onChange }) => {
   const [cardCVC, setCardCVC] = useState('');
   const [cardPassword, setCardPassword] = useState(['', '']);
   const [error, setError] = useState('');
-  console.log(error);
+
   const handleCardNumbersChange = (cardNumbers, error) => {
     setCardNumbers(cardNumbers);
     setError(error);
@@ -65,21 +65,19 @@ const CardForm = ({ onSubmit, onChange }) => {
   }, [cardNumbers, cardExpirationDate, cardOwner, cardCVC, cardPassword]);
 
   return (
-    <>
-      <div id='card-form' className='w-100'>
-        <form>
-          <CardNumbersInput onChange={handleCardNumbersChange} />
-          <CardExpirationDateInput onChange={handleCardExpirationDateChange} />
-          <CardOwnerInput onChange={handleCardOwnerChange} />
-          <CardCVCInput onChange={handleCardCVCChange} />
-          <CardPasswordInput onChange={handleCardPasswordChange} />
-          <Button title='다음' type='submit' onClick={handleSubmit} />
-        </form>
-        <div id='card-form-label' style={{ color: 'red' }}>
-          {error}
-        </div>
+    <div id='card-form' className='w-100'>
+      <form>
+        <CardNumbersInput onChange={handleCardNumbersChange} />
+        <CardExpirationDateInput onChange={handleCardExpirationDateChange} />
+        <CardOwnerInput onChange={handleCardOwnerChange} />
+        <CardCVCInput onChange={handleCardCVCChange} />
+        <CardPasswordInput onChange={handleCardPasswordChange} />
+        <Button title='다음' type='submit' onClick={handleSubmit} />
+      </form>
+      <div id='card-form-label' style={{ color: 'red' }}>
+        {error}
       </div>
-    </>
+    </div>
   );
 };
 
