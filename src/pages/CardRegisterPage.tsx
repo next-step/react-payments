@@ -59,8 +59,8 @@ export const CardRegisterPage = () => {
   const isAllValid = Object.values(cardState).every((input) => input.isValid);
 
   const handleSubmit = () => {
-    const newCard = Object.entries(cardState).reduce((acc, cur) => {
-      return { ...acc, [cur[0]]: cur[1].val };
+    const newCard = Object.entries(cardState).reduce((cardState, [cardKey, form]) => {
+      return { ...cardState, cardKey: form.val };
     }, {});
 
     setItem('cardList', [...(getItem('cardList') ?? []), newCard]);
