@@ -6,6 +6,7 @@ import { useRouter } from '@/hooks/useRouter';
 import { styled } from '@/lib/stitches.config';
 import { getItem, setItem } from '@/storage/storage';
 import { CardKey, CardObj } from '@/types';
+
 export const initialCardState = {
   [CardKey.CARD_NUMBERS]: {
     val: {
@@ -59,9 +60,12 @@ export const CardRegisterPage = () => {
   const isAllValid = Object.values(cardState).every((input) => input.isValid);
 
   const handleSubmit = () => {
-    const newCard = Object.entries(cardState).reduce((cardState, [cardKey, form]) => {
-      return { ...cardState, cardKey: form.val };
-    }, {});
+    const newCard = Object.entries(cardState).reduce(
+      (cardState, [cardKey, form]) => {
+        return { ...cardState, [cardKey]: form.val };
+      },
+      {}
+    );
 
     setItem('cardList', [...(getItem('cardList') ?? []), newCard]);
     go('/register-confirm');
