@@ -7,8 +7,14 @@ import { Box, Header, TextField, FormControl } from 'components/@common';
 import { formatCardNumber, formatMMYY } from 'utils/format';
 
 const RegistrationCardPage = () => {
+  const [holderName, setHolderName] = useState('');
   const [number, setNumber] = useState('');
   const [expiration, setExpiration] = useState('');
+
+  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target as HTMLInputElement;
+    setHolderName(value);
+  };
 
   const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
@@ -24,7 +30,12 @@ const RegistrationCardPage = () => {
   return (
     <>
       <Header showBackIcon>카드 추가</Header>
-      <CreditCard color="brand02" number={number} expiration={expiration} />
+      <CreditCard
+        color="brand02"
+        holderName={holderName}
+        number={number}
+        expiration={expiration}
+      />
       <Wrapper>
         <FormControl>
           <FormControl.Label>카드 번호</FormControl.Label>
@@ -62,10 +73,13 @@ const RegistrationCardPage = () => {
         <FormControl>
           <Box display="flex" justifyContent="space-between">
             <FormControl.Label>카드 소유자 이름 (선택)</FormControl.Label>
-            <FormControl.Label>0/30</FormControl.Label>
+            <FormControl.Label>{holderName.length}/30</FormControl.Label>
           </Box>
           <TextField
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+            maxLength={30}
+            value={holderName}
+            onChange={handleName}
             className="w-100"
           />
         </FormControl>
@@ -78,7 +92,7 @@ const RegistrationCardPage = () => {
         <FormControl>
           <FormControl.Label>보안 코드 (CVC/CVV)</FormControl.Label>
           <Box display="flex" className="gap-x-5">
-            <TextField className="w-10" />
+            <TextField type="password" className="w-10" />
             <TextField className="w-10" />
             <TextField className="w-10" />
             <TextField className="w-10" />
