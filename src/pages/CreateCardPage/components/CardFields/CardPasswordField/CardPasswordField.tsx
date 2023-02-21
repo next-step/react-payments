@@ -24,7 +24,7 @@ const CardPasswordField = ({
     <Label labelText={LABEL_TEXT.CARD_PASSWORD}>
       <CardPasswordInput
         fontColor={fontColor}
-        password={cardPassword}
+        value={cardPassword}
         onChange={handleChange}
       />
     </Label>

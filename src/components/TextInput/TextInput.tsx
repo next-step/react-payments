@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import { StyledTextInput } from './TextInput.style';
 import { Colors, colors } from '@/styles/colors';
 
-type TextInputProps = {
+export type TextInputProps = {
   label: string;
   onChange: (value: string) => void;
   value?: string;

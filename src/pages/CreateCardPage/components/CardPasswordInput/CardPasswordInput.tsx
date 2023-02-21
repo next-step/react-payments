@@ -1,35 +1,33 @@
 import { TextInput } from '@/components';
-import { Colors, colors } from '@/styles/colors';
-import React from 'react';
+import { colors } from '@/styles/colors';
+import React, { useMemo } from 'react';
 import {
   CardPasswordDot,
   CardPasswordInputContainer,
 } from './CardPasswordInput.style';
 import { isNotNumber } from '@/utils/validate';
-
-type CardPasswordInputProps = {
-  onChange: (value: string) => void;
-  password: string;
-  fontColor: Colors;
-};
+import { TextInputProps } from '@/components/TextInput/TextInput';
 
 const CardPasswordInput = ({
   onChange,
-  password,
+  value,
   fontColor,
-}: CardPasswordInputProps) => {
+}: Pick<TextInputProps, 'onChange' | 'value' | 'fontColor'>) => {
   const InputRefs = React.useRef<HTMLInputElement[]>([]);
-  const CARD_PASSWORD_WIDTH = '45px';
-  const cardPasswordArray = ['PASSWORD', 'PASSWORD', 'DOT', 'DOT'];
+  const cardPasswordWidth = '45px';
+  const cardPasswordArray = useMemo(
+    () => ['PASSWORD', 'PASSWORD', 'DOT', 'DOT'],
+    []
+  );
 
-  const handleChange = (value: string) => {
-    if (isNotNumber(value)) return;
-    const backspace = value === '';
+  const handleChange = (password: string) => {
+    if (isNotNumber(password)) return;
+    const backspace = password === '';
     if (backspace) {
       if (!InputRefs.current[1].value) {
         InputRefs.current[0] && InputRefs.current[0].focus();
       }
-      password && onChange(password.slice(0, -1));
+      value && onChange(value.slice(0, -1));
       return;
     }
 
@@ -37,41 +35,47 @@ const CardPasswordInput = ({
       InputRefs.current[1] && InputRefs.current[1].focus();
     }
 
-    onChange(password + value);
+    onChange(value + password);
   };
 
   return (
     <CardPasswordInputContainer>
       {cardPasswordArray.map((item, index) => {
-        if (item === 'PASSWORD') {
-          return (
-            <TextInput
-              key={`password-${index}`}
-              ref={(ref) => {
-                if (!ref) return;
-                InputRefs.current[index] = ref;
-              }}
-              fontColor={fontColor}
-              inputMode="numeric"
-              type="password"
-              label="cardPassword"
-              onChange={handleChange}
-              value={password[index] || ''}
-              maxLength={1}
-              width={CARD_PASSWORD_WIDTH}
-              textAlign="center"
-            />
-          );
+        switch (item) {
+          case 'PASSWORD':
+            return (
+              <TextInput
+                key={index}
+                ref={(ref) => {
+                  if (!ref) return;
+                  InputRefs.current[index] = ref;
+                }}
+                fontColor={fontColor}
+                inputMode="numeric"
+                type="password"
+                label="cardPassword"
+                onChange={handleChange}
+                value={value?.[index] || ''}
+                maxLength={1}
+                width={cardPasswordWidth}
+                textAlign="center"
+              />
+            );
+
+          case 'DOT':
+            return (
+              <CardPasswordDot
+                key={index}
+                color={colors[fontColor]}
+                size={cardPasswordWidth}
+              >
+                <span>•</span>
+              </CardPasswordDot>
+            );
+
+          default:
+            return null;
         }
-        return (
-          <CardPasswordDot
-            key={`dot-${index}`}
-            color={colors[fontColor]}
-            size={CARD_PASSWORD_WIDTH}
-          >
-            <span>•</span>
-          </CardPasswordDot>
-        );
       })}
     </CardPasswordInputContainer>
   );
