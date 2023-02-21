@@ -15,13 +15,9 @@ import { useCardExpireDateInput } from "@/components/cards/CardExpireDateInput/h
 import { useCardNumberInput } from "@/components/cards/CardNumberInput/hook";
 import { useCardOwnerInput } from "@/components/cards/CardOwnerInput/hook";
 import { useCardPasswordInput } from "@/components/cards/CardPasswordInput/hook";
-import { Header } from "@/components/common";
+import { Button, Header } from "@/components/common";
 
-import {
-  AddCardForm,
-  AddCardFormInputWrapper,
-  AddCardPageContainer,
-} from "./addCard.style";
+import * as S from "./addCard.style";
 
 function HeaderLeftPointArrow() {
   const navigate = useNavigate();
@@ -90,13 +86,13 @@ export default function AddCard() {
   const HeaderStartDecorator = useMemo(() => <HeaderLeftPointArrow />, []);
 
   return (
-    <AddCardPageContainer>
+    <S.AddCardPageContainer>
       <Header className="add-form-header" startDecorator={HeaderStartDecorator}>
         카드추가
       </Header>
-      <AddCardForm>
+      <S.AddCardForm>
         <Card className="add-form-card" size="small" cardInfo={cardInfo} />
-        <AddCardFormInputWrapper>
+        <S.AddCardFormInputWrapper>
           <CardNumberInput
             cardNumber={cardNumber}
             onChange={onCardNumberChange}
@@ -114,8 +110,11 @@ export default function AddCard() {
             cardPassword={cardPassword}
             onChange={onCardPasswordChange}
           />
-        </AddCardFormInputWrapper>
-      </AddCardForm>
-    </AddCardPageContainer>
+        </S.AddCardFormInputWrapper>
+        <S.AddCardFormSubmitButtonWrapper>
+          <Button variant="text">다음</Button>
+        </S.AddCardFormSubmitButtonWrapper>
+      </S.AddCardForm>
+    </S.AddCardPageContainer>
   );
 }

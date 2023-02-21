@@ -17,3 +17,9 @@ export const AddCardFormInputWrapper = styled.div`
   flex-direction: column;
   gap: 15px;
 `;
+
+export const AddCardFormSubmitButtonWrapper = styled.div`
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+`;
