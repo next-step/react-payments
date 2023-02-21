@@ -1,0 +1,2 @@
+var o=Object.defineProperty;var r=(e,a)=>o(e,"name",{value:a,configurable:!0});import{j as l}from"./jsx-runtime-cd98d61a.js";function s({as:e,className:a,children:t}){const n=e||"div";return l.jsx(n,{className:a,children:t})}r(s,"Box");try{s.displayName="Box",s.__docgenInfo={description:"",displayName:"Box",props:{as:{defaultValue:null,description:"",name:"as",required:!1,type:{name:"ElementType<any>"}},className:{defaultValue:null,description:"",name:"className",required:!1,type:{name:"string"}}}}}catch{}export{s as B};
+//# sourceMappingURL=Box-5350e976.js.map

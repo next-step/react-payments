@@ -1,6 +1,16 @@
+.flex {
+  display: flex;
+}
+
 .flex-center {
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -9,6 +19,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.grid-center {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .mt-10 {
@@ -33,6 +52,10 @@
 
 .mb-10 {
   margin-bottom: 2.5rem;
+}
+
+.ml-5 {
+  margin-left: 1.25rem;
 }
 
 .w-100 {
