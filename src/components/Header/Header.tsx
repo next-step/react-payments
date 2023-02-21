@@ -9,7 +9,7 @@ type HeaderProps = {
 
 const Header = ({ title, leftIcon, onIconClick }: HeaderProps) => {
   const handleClick = () => {
-    onIconClick && onIconClick();
+    onIconClick?.();
   };
   return (
     <HeaderContainer>
