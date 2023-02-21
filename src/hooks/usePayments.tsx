@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { CardInput } from "../components/common/Card/card.type";
-import { cardInfo } from "../constants/Payments";
-import { CardListType } from "../types/payments";
-import { formatNumber, isNumber, monthConverter } from "../utils";
+import { CardInput } from "components/common/Card/card.type";
+import { cardInfo } from "constants/Payments";
+import { CardListType } from "types/payments";
+import { formatNumber, isNumber, monthConverter } from "utils";
 
 const defaultCardInfo = {
   title: "클린카드",

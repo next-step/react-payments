@@ -1,6 +1,6 @@
 import { Dispatch, Fragment, SetStateAction } from "react";
-import { CardListType } from "../../../types/payments";
-import Card from "../../common/Card";
+import { CardListType } from "types/payments";
+import Card from "components/common/Card";
 
 interface CardListProps {
   cardList: CardListType[];

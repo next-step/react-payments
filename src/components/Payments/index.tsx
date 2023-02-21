@@ -1,7 +1,7 @@
-import { usePayments } from "../../hooks/usePayments";
-import CardForm from "./CardForm";
-import CardList from "./CardList";
-import Completed from "./Completed";
+import { usePayments } from "hooks/usePayments";
+import CardForm from "components/Payments/CardForm";
+import CardList from "components/Payments/CardList";
+import Completed from "components/Payments/Completed";
 
 const Payments = () => {
   const {

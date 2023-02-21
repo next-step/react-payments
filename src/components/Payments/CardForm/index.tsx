@@ -1,10 +1,10 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
-import { characterCount, displayNumber } from "../../../utils";
-import Button from "../../common/Button";
-import Card from "../../common/Card";
-import { CardInput } from "../../common/Card/card.type";
-import InputContainer from "../../common/Input/InputContainer";
-import Modal from "../../common/Modal";
+import { characterCount, displayNumber } from "utils";
+import Button from "components/common/Button";
+import Card from "components/common/Card";
+import { CardInput } from "components/common/Card/card.type";
+import InputContainer from "components/common/Input/InputContainer";
+import Modal from "components/common/Modal";
 
 interface CardFormProps {
   newCardInfo: CardInput;

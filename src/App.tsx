@@ -1,4 +1,4 @@
-import Payments from "./pages/payments";
+import Payments from "pages/payments";
 
 function App() {
   return (

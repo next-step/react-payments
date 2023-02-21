@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React, { useState } from "react";
 
-import Input from "../../components/common/Input";
+import Input from "components/common/Input";
 
 export default {
   title: "Input",

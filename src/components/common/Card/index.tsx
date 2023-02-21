@@ -1,4 +1,4 @@
-import { displayNumber } from "../../../utils";
+import { displayNumber } from "utils";
 import "./card.css";
 import { CardInput } from "./card.type";
 
