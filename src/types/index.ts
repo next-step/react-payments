@@ -24,4 +24,6 @@ type CardInformation = Expiration &
     cardCompany?: string;
   };
 
-export type { CardInformation, Expiration, CardNumber, Password };
+type Destination = '/' | '/add' | '/complete';
+
+export type { CardInformation, Expiration, CardNumber, Password, Destination };

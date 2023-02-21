@@ -6,6 +6,7 @@ import './styles/index.css';
 
 import type { ChangeEvent, FormEvent } from 'react';
 import type { CardInformation } from './types';
+import { ROUTES } from './constants';
 
 const initCardInformation = {
   cardNumber1: '',
@@ -42,15 +43,15 @@ function App() {
 
   const routes = [
     {
-      path: '/',
+      path: ROUTES.HOME,
       element: <CardList />,
     },
     {
-      path: '/add',
+      path: ROUTES.ADD,
       element: <AddCard cardInformation={cardInformation} onChange={handleCardInformation} onSubmit={onSubmit} />,
     },
     {
-      path: '/complete',
+      path: ROUTES.COMPLETE,
       element: <Complete />,
     },
   ];

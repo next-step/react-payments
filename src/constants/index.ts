@@ -9,4 +9,10 @@ const LIMIT_INPUT_LENGTH = {
   OWNER_NAME: 30,
 };
 
-export { LIMIT_INPUT_LENGTH };
+const ROUTES = {
+  HOME: '/',
+  ADD: '/add',
+  COMPLETE: '/complete',
+} as const;
+
+export { LIMIT_INPUT_LENGTH, ROUTES };
