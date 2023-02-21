@@ -16,7 +16,7 @@ export const CardPasswordDot = styled.div<{
 export const CardPasswordInputContainer = styled.div`
   display: flex;
   flex-direction: row;
-  div {
+  input {
     margin-right: 8px;
   }
 `;

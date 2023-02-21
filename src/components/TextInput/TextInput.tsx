@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { TextInputContainer, TextInputStyle } from './TextInput.style';
+import { StyledTextInput } from './TextInput.style';
 import { Colors, colors } from '@/styles/colors';
 
 type TextInputProps = {
@@ -34,19 +34,18 @@ const TextInput = (
   };
 
   return (
-    <TextInputContainer width={width}>
-      <TextInputStyle
-        ref={ref}
-        type={type}
-        color={colors[fontColor]}
-        textAlign={textAlign}
-        placeholder={placeholder}
-        aria-label={label}
-        onChange={handleChange}
-        value={value && (select ? select(value) : value)}
-        {...InputProps}
-      />
-    </TextInputContainer>
+    <StyledTextInput
+      width={width}
+      ref={ref}
+      type={type}
+      color={colors[fontColor]}
+      textAlign={textAlign}
+      placeholder={placeholder}
+      aria-label={label}
+      onChange={handleChange}
+      value={value && (select ? select(value) : value)}
+      {...InputProps}
+    />
   );
 };
 
