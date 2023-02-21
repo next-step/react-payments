@@ -11,26 +11,28 @@ export type CardFieldAction = {
 };
 
 const cardFieldReducer = (state: CardField, action: CardFieldAction) => {
-  const copyState = { ...state };
-
-  const nonKey = !(action.payload.key in copyState);
-  if (nonKey) throw new Error(`nonKey: ${action.payload.key}`);
+  const hasKey = action.payload.key in state;
+  if (!hasKey)
+    throw new Error(`${action.payload.key} is not a key of CardFieldReducer`);
 
   switch (action.type) {
     case 'UPDATE':
-      copyState[action.payload.key] = action.payload.value;
-      return copyState;
+      return {
+        ...state,
+        [action.payload.key]: action.payload.value,
+      };
+
     case 'APPEND':
-      copyState[action.payload.key] =
-        copyState[action.payload.key] + action.payload.value;
-      return copyState;
+      return {
+        ...state,
+        [action.payload.key]: state[action.payload.key] + action.payload.value,
+      };
 
     case 'DELETE':
-      copyState[action.payload.key] = copyState[action.payload.key].slice(
-        0,
-        -1
-      );
-      return copyState;
+      return {
+        ...state,
+        [action.payload.key]: state[action.payload.key].slice(0, -1),
+      };
   }
 };
 
