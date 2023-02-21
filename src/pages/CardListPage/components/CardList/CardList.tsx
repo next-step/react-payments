@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { EmptyCardButton } from '@/components/Button';
+import { EmptyCardButton } from '@/components/buttons';
 import { CardListContainer } from './CardList.style';
 import { ROUTE } from '@/constants/route';
 
