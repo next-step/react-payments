@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { ChangeEvent, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useRefs from '../hooks/useRefs';
@@ -55,9 +55,7 @@ const AddCard = () => {
     expirationDateRef.current.value = date;
   };
 
-  const handleChangeExpirationDate = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChangeExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value === '') return;
     if (!expirationDateRef.current) return;
 
