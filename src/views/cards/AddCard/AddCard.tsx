@@ -14,6 +14,7 @@ import { useCardCvcInput } from "@/components/cards/CardCvcInput/hook";
 import { useCardExpireDateInput } from "@/components/cards/CardExpireDateInput/hook";
 import { useCardNumberInput } from "@/components/cards/CardNumberInput/hook";
 import { useCardOwnerInput } from "@/components/cards/CardOwnerInput/hook";
+import { useCardPasswordInput } from "@/components/cards/CardPasswordInput/hook";
 import { Header } from "@/components/common";
 
 import {
@@ -47,6 +48,10 @@ export default function AddCard() {
     ownerName: "",
   });
   const { cvcNumber, onCvcNumberChange } = useCardCvcInput({ cvc: "" });
+  const { cardPassword, onCardPasswordChange } = useCardPasswordInput({
+    password1: "",
+    password2: "",
+  });
 
   const cardNumberWithDash = useMemo(
     () =>
@@ -105,7 +110,10 @@ export default function AddCard() {
             onChange={onCardOwnerNameChange}
           />
           <CardCvcInput cardCvc={cvcNumber.cvc} onChange={onCvcNumberChange} />
-          <CardPasswordInput />
+          <CardPasswordInput
+            cardPassword={cardPassword}
+            onChange={onCardPasswordChange}
+          />
         </AddCardFormInputWrapper>
       </AddCardForm>
     </AddCardPageContainer>
