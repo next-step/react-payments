@@ -1,7 +1,7 @@
-import Payments from "../../components/Payments";
+import Payment from "../../components/Payments";
 
-const payments = () => {
-  return <Payments />;
+const Payments = () => {
+  return <Payment />;
 };
 
-export default payments;
+export default Payments;
