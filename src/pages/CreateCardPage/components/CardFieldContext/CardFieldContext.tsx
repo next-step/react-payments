@@ -2,8 +2,8 @@ import { CardField } from '@/types';
 import React, { createContext, useContext, useMemo, useReducer } from 'react';
 import cardFieldReducer, { CardFieldAction } from './CardFieldReducer';
 
-const CardFieldContext = createContext<CardField | null>(null);
-const CardFieldDispatchContext =
+export const CardFieldContext = createContext<CardField | null>(null);
+export const CardFieldDispatchContext =
   createContext<React.Dispatch<CardFieldAction> | null>(null);
 
 const initialState = {
@@ -29,6 +29,22 @@ export const CardFieldProvider = ({ children }: CardFieldProviderProps) => {
 
 type CardFieldProviderProps = { children: JSX.Element | JSX.Element[] };
 
-export const useCardFieldContext = () => useContext(CardFieldContext);
-export const useCardFieldDispatchContext = () =>
-  useContext(CardFieldDispatchContext);
+export const useCardFieldContext = () => {
+  const context = useContext(CardFieldContext);
+  if (!context) {
+    throw new Error(
+      'useCardFieldContext must be used within a CardFieldProvider'
+    );
+  }
+  return context;
+};
+
+export const useCardFieldDispatchContext = () => {
+  const context = useContext(CardFieldDispatchContext);
+  if (!context) {
+    throw new Error(
+      'useCardFieldDispatchContext must be used within a CardFieldProvider'
+    );
+  }
+  return context;
+};
