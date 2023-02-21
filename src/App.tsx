@@ -8,14 +8,12 @@ import Layout from './components/common/Layout';
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
-        <Routes>
-          <Route path={'/'} element={<Layout />}>
-            <Route index element={<PaymentCardList />} />
-            <Route path={'/register'} element={<PaymentCardRegister />} />
-          </Route>
-        </Routes>
-      </div>
+      <Routes>
+        <Route path={'/'} element={<Layout />}>
+          <Route index element={<PaymentCardList />} />
+          <Route path={'/register'} element={<PaymentCardRegister />} />
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }
