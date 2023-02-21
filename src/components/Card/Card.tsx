@@ -4,7 +4,16 @@ import {
   addSeparator,
   replaceCardNumberToO,
 } from '@/utils/formatter';
-import { CardContainer } from './Card.style';
+import {
+  CardBottom,
+  CardChip,
+  CardContainer,
+  CardMiddle,
+  CardTop,
+  CardText,
+  CardBottomNumber,
+  CardBottomInfo,
+} from './Card.style';
 import { CardField } from '@/types';
 import { Colors, colors } from '@/styles/colors';
 
@@ -27,25 +36,25 @@ const Card = ({
 
   return (
     <CardContainer cardColor={colors[cardColor]} size={size}>
-      <div className="card-top">
+      <CardTop>
         {cardName && <span className={textClassName}>{cardName}</span>}
-      </div>
-      <div className="card-middle">
-        <div className={`${size}-card__chip`}></div>
-      </div>
-      <div className="card-bottom">
-        <div className="card-bottom__number">
-          <span className={textClassName}>
+      </CardTop>
+      <CardMiddle>
+        <CardChip size={size} />
+      </CardMiddle>
+      <CardBottom>
+        <CardBottomNumber>
+          <CardText size={size}>
             {replaceCardNumberToO(addCardNumberDashes(cardNumber))}
-          </span>
-        </div>
-        <div className="card-bottom__info">
-          <span className={textClassName}>{ownerName}</span>
-          <span className={textClassName}>
+          </CardText>
+        </CardBottomNumber>
+        <CardBottomInfo>
+          <CardText size={size}>{ownerName}</CardText>
+          <CardText size={size}>
             {addSeparator(expirationMonth + expirationYear)}
-          </span>
-        </div>
-      </div>
+          </CardText>
+        </CardBottomInfo>
+      </CardBottom>
     </CardContainer>
   );
 };
