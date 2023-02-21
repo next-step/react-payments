@@ -1,6 +1,7 @@
 import { ChangeEvent, RefObject, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import Button from '../components/Button';
 import useRefs from '../hooks/useRefs';
 import { extractNumbers } from '../utils';
 
@@ -81,9 +82,9 @@ const AddCard = () => {
   return (
     <section className="app">
       <h2 className="page-title">
-        <button className="button-text" onClick={() => navigate('/card-list')}>
+        <Button onClick={() => navigate('/card-list')}>
           <PrevIcon />
-        </button>
+        </Button>
         카드 추가
       </h2>
       <div className="card-box">
@@ -198,9 +199,7 @@ const AddCard = () => {
         />
       </div>
       <div className="button-box">
-        <button className="button-text" onClick={() => navigate('/card-added')}>
-          다음
-        </button>
+        <Button onClick={() => navigate('/card-added')}>다음</Button>
       </div>
     </section>
   );
