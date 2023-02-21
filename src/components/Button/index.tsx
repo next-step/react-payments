@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 
 interface ButtonProp {
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Button = ({ children, onClick }: PropsWithChildren<ButtonProp>) => {
