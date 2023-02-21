@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useRefs from '../hooks/useRefs';
+import { extractNumbers } from '../utils';
 
 const AddCard = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const AddCard = () => {
     const currentInput = cardRefs[index].current;
     if (!currentInput) return;
 
-    currentInput.value = currentInput.value.replace(/[^0-9]/g, '');
+    currentInput.value = extractNumbers(currentInput.value);
 
     if (currentInput.value.length === 4) {
       if (index < cardRefs.length - 1) {
@@ -27,7 +28,7 @@ const AddCard = () => {
     const currentInput = cardPasswordRefs[index].current;
     if (!currentInput) return;
 
-    currentInput.value = currentInput.value.replace(/[^0-9]/g, '');
+    currentInput.value = extractNumbers(currentInput.value);
 
     if (currentInput.value.length === 1) {
       if (index < cardPasswordRefs.length - 1) {
@@ -39,7 +40,7 @@ const AddCard = () => {
   const checkExpiration = () => {
     if (!expirationDateRef.current) return;
 
-    const currentValue = expirationDateRef.current.value.replace(/[^0-9]/g, '');
+    const currentValue = extractNumbers(expirationDateRef.current.value);
     if (currentValue === '') return;
 
     const month = currentValue.slice(0, 2);
@@ -72,9 +73,8 @@ const AddCard = () => {
 
   const handleSecurityCode = () => {
     if (!securityCodeRef.current) return;
-    securityCodeRef.current.value = securityCodeRef.current.value.replace(
-      /[^0-9]/g,
-      ''
+    securityCodeRef.current.value = extractNumbers(
+      securityCodeRef.current.value
     );
   };
 
@@ -152,6 +152,7 @@ const AddCard = () => {
           type="text"
           className="input-basic"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          maxLength={30}
         />
       </div>
       <div className="input-container">
