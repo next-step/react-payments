@@ -1,19 +1,22 @@
 import { ChangeEvent, useCallback } from "react";
 
 import { CARD_VALIDATION_ERROR_MESSAGES } from "@/constants/alertMessages";
-import { CARD_INPUT_VARIABLES } from "@/constants/variables";
 import { isNumber } from "@/helper";
 import useInput from "@/hooks/useInput";
 
 const validateCvcNumber = (value: string) => {
-  if (value.length > CARD_INPUT_VARIABLES.CVC_NUMBER_MAX_LENGTH) {
+  if (!isNumber(value)) {
     alert(CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER);
     return false;
   }
   return true;
 };
 
-const useCardCvcInput = (initialValue: string) => {
+type CardCvc = {
+  cvc: string;
+};
+
+const useCardCvcInput = (initialValue: CardCvc) => {
   const { value, onChange } = useInput(initialValue);
 
   const handleCvcNumberChange = useCallback(

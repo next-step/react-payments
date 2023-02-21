@@ -13,8 +13,6 @@ export type CardExpireDate = {
 const validateCardExpireDateInput = (element: HTMLInputElement) => {
   const { value, id } = element;
 
-  if (value.length > CARD_INPUT_VARIABLES.DATE_MAX_LENGTH) return false;
-
   if (!isNumber(value)) {
     alert(CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER);
     return false;

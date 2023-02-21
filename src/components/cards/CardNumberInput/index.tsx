@@ -1,6 +1,7 @@
 import React, { InputHTMLAttributes } from "react";
 
 import { Input, Label } from "@/components/common";
+import { CARD_INPUT_VARIABLES } from "@/constants/variables";
 
 import CardInputDivider from "../CardInputDivider";
 import * as S from "./cardNumberInput.style";
@@ -24,6 +25,7 @@ export default function CardNumberInput({
           id="num1"
           value={num1}
           className="right-side-none-border-radius"
+          maxLength={CARD_INPUT_VARIABLES.PARTIAL_NUMBER_MAX_LENGTH}
           textAlign="center"
           {...props}
         />
@@ -32,6 +34,7 @@ export default function CardNumberInput({
           id="num2"
           value={num2}
           className="both-side-none-border-radius"
+          maxLength={CARD_INPUT_VARIABLES.PARTIAL_NUMBER_MAX_LENGTH}
           textAlign="center"
           {...props}
         />
@@ -41,6 +44,7 @@ export default function CardNumberInput({
           value={num3}
           type="password"
           className="both-side-none-border-radius"
+          maxLength={CARD_INPUT_VARIABLES.PARTIAL_NUMBER_MAX_LENGTH}
           textAlign="center"
           {...props}
         />
@@ -50,6 +54,7 @@ export default function CardNumberInput({
           value={num4}
           type="password"
           className="left-side-none-border-radius"
+          maxLength={CARD_INPUT_VARIABLES.PARTIAL_NUMBER_MAX_LENGTH}
           textAlign="center"
           {...props}
         />

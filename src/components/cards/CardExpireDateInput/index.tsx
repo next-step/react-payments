@@ -1,6 +1,7 @@
 import React, { InputHTMLAttributes } from "react";
 
 import { Input, Label } from "@/components/common";
+import { CARD_INPUT_VARIABLES } from "@/constants/variables";
 
 import CardInputDivider from "../CardInputDivider";
 import * as S from "./cardExpireDateInput.style";
@@ -25,6 +26,7 @@ export default function CardExpireDateInput({
           className="right-side-none-border-radius"
           textAlign="center"
           placeholder="MM"
+          maxLength={CARD_INPUT_VARIABLES.DATE_MAX_LENGTH}
           value={month}
           {...props}
         />
@@ -34,6 +36,7 @@ export default function CardExpireDateInput({
           className="left-side-none-border-radius"
           textAlign="center"
           placeholder="YY"
+          maxLength={CARD_INPUT_VARIABLES.DATE_MAX_LENGTH}
           value={year}
           {...props}
         />

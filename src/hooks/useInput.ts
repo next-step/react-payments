@@ -12,6 +12,10 @@ const useInput = (initialValue: any) => {
         return;
       } else {
         const { target } = e;
+
+        if (!target.id) {
+          throw new Error("Insert id attribute in input element.");
+        }
         setValue((prev: any) => ({ ...prev, [target.id]: target.value }));
       }
     },
