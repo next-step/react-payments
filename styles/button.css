@@ -4,12 +4,8 @@
 }
 
 .button-text {
-  margin-right: 10px;
-}
-
-.button-prev {
   background-color: white;
   border: none;
   cursor: pointer;
-  display: flex;
+  font-weight: bold;
 }

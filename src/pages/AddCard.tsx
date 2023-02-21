@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef } from 'react';
+import { ChangeEvent, RefObject, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useRefs from '../hooks/useRefs';
@@ -13,7 +13,7 @@ const AddCard = () => {
 
   const handleInputChange = (
     index: number,
-    refs: React.RefObject<HTMLInputElement>[],
+    refs: RefObject<HTMLInputElement>[],
     maxLength: number
   ) => {
     const currentInput = refs[index].current;
@@ -77,7 +77,7 @@ const AddCard = () => {
   return (
     <section className="app">
       <h2 className="page-title">
-        <button className="button-prev" onClick={() => navigate('/card-list')}>
+        <button className="button-text" onClick={() => navigate('/card-list')}>
           <PrevIcon />
         </button>
         카드 추가
@@ -191,7 +191,9 @@ const AddCard = () => {
         />
       </div>
       <div className="button-box">
-        <span className="button-text">다음</span>
+        <button className="button-text" onClick={() => navigate('/card-added')}>
+          다음
+        </button>
       </div>
     </section>
   );
