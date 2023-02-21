@@ -11,30 +11,30 @@ const AddCard = () => {
   const securityCodeRef = useRef<HTMLInputElement>(null);
   const cardPasswordRefs = useRefs<HTMLInputElement>(2);
 
-  const handleCardNumber = (index: number) => {
-    const currentInput = cardRefs[index].current;
+  const handleInputChange = (
+    index: number,
+    refs: React.RefObject<HTMLInputElement>[],
+    maxLength: number
+  ) => {
+    const currentInput = refs[index].current;
     if (!currentInput) return;
 
-    currentInput.value = extractNumbers(currentInput.value);
+    const value = extractNumbers(currentInput.value);
+    currentInput.value = value;
 
-    if (currentInput.value.length === 4) {
-      if (index < cardRefs.length - 1) {
-        cardRefs[index + 1].current?.focus();
+    if (value.length === maxLength) {
+      if (index < refs.length - 1) {
+        refs[index + 1].current?.focus();
       }
     }
   };
 
+  const handleCardNumber = (index: number) => {
+    handleInputChange(index, cardRefs, 4);
+  };
+
   const handleCardPassword = (index: number) => {
-    const currentInput = cardPasswordRefs[index].current;
-    if (!currentInput) return;
-
-    currentInput.value = extractNumbers(currentInput.value);
-
-    if (currentInput.value.length === 1) {
-      if (index < cardPasswordRefs.length - 1) {
-        cardPasswordRefs[index + 1].current?.focus();
-      }
-    }
+    handleInputChange(index, cardPasswordRefs, 1);
   };
 
   const checkExpiration = () => {
@@ -44,15 +44,15 @@ const AddCard = () => {
     if (currentValue === '') return;
 
     const month = currentValue.slice(0, 2);
-    if (month >= '01' && month <= '12') {
-      const date =
-        month + (currentValue.length > 2 ? '/' + currentValue.slice(2, 4) : '');
-      expirationDateRef.current.value = date;
+    if (month < '01' || month > '12') {
+      alert('유효하지 않아요');
+      expirationDateRef.current.value = '';
       return;
     }
 
-    alert('유효하지 않아요');
-    expirationDateRef.current.value = '';
+    const date =
+      month + (currentValue.length > 2 ? '/' + currentValue.slice(2, 4) : '');
+    expirationDateRef.current.value = date;
   };
 
   const handleChangeExpirationDate = (
