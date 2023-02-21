@@ -4,9 +4,6 @@ interface ButtonProp {
   onClick?: () => void;
 }
 
-/**
- * Primary UI component for user interaction
- */
 export const Button = ({
   children,
   onClick,
