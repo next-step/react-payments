@@ -29,13 +29,11 @@ const AddCard = () => {
     }
   };
 
-  const handleCardNumber = (index: number) => {
+  const handleCardNumber = (index: number) =>
     handleInputChange(index, cardRefs, 4);
-  };
 
-  const handleCardPassword = (index: number) => {
+  const handleCardPassword = (index: number) =>
     handleInputChange(index, cardPasswordRefs, 1);
-  };
 
   const checkExpiration = () => {
     if (!expirationDateRef.current) return;
@@ -56,13 +54,13 @@ const AddCard = () => {
   };
 
   const handleChangeExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.value === '') return;
-    if (!expirationDateRef.current) return;
+    if (!expirationDateRef.current || e.target.value === '') return;
 
-    if ((e.nativeEvent as InputEvent).inputType === 'deleteContentBackward') {
-      if (e.target.value.length === 2) {
-        expirationDateRef.current.value = e.target.value.slice(0, 1);
-      }
+    if (
+      (e.nativeEvent as InputEvent).inputType === 'deleteContentBackward' &&
+      e.target.value.length === 2
+    ) {
+      expirationDateRef.current.value = e.target.value.slice(0, 1);
       return;
     }
 
