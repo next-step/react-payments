@@ -1,10 +1,26 @@
 import Card from "../components/Card";
+import CardSelectPopup from "../components/CardSelectPopup";
 import Button from "../components/Common/Button";
 import InputContainer from "../components/InputContainer";
+import { useEffect } from "react";
 
-const CardRegist = ({ cardInfo, onChange, onSubmit }) => {
+const CardRegist = ({
+  cardInfo,
+  onChange,
+  onSubmit,
+  cardCompanyList,
+  onClickPopup,
+  isShowPopup,
+  onReset,
+  onShow,
+}) => {
+  useEffect(() => {
+    onReset();
+    onShow(true);
+  }, []);
+
   return (
-    <>
+    <div>
       <Card isRegistered={true} cardInfo={cardInfo} />
       <form onSubmit={onSubmit}>
         <InputContainer
@@ -87,7 +103,13 @@ const CardRegist = ({ cardInfo, onChange, onSubmit }) => {
         />
         <Button className="button-box registor-button" children="다음"></Button>
       </form>
-    </>
+      {isShowPopup && (
+        <CardSelectPopup
+          cardCompanyList={cardCompanyList}
+          onClick={onClickPopup}
+        />
+      )}
+    </div>
   );
 };
 

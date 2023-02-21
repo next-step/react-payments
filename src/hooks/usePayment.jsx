@@ -17,9 +17,50 @@ const digitTypeInput = ["cvc", "password1", "password2"];
 
 const formatDigitTypeInput = ["number", "expiry"];
 
+const cardCompanyList = [
+  {
+    company: "포코카드",
+    backgroundColor: "red",
+  },
+  {
+    company: "준카드",
+    backgroundColor: "palegreen",
+  },
+  {
+    company: "혜원카드",
+    backgroundColor: "skyblue",
+  },
+  {
+    company: "윤호카드",
+    backgroundColor: "yellow",
+  },
+  // {
+  //   company: "다빈카드",
+  //   backgroundColor: "pink",
+  // },
+  // {
+  //   company: "나나카드",
+  //   backgroundColor: "yellowgreen",
+  // },
+  // {
+  //   company: "치치카드",
+  //   backgroundColor: "plum",
+  // },
+  // {
+  //   company: "사나카드",
+  //   backgroundColor: "lightseagreen",
+  // },
+  // {
+  //   company: "랄랄카드",
+  //   backgroundColor: "burlywood",
+  // },
+];
+
 const usePayment = () => {
   const [cardInfo, setCardInfo] = useState(defaultCardInfo);
   const [cardList, setCardList] = useState([]);
+  const [isShowPopup, setIsShowPopup] = useState(true);
+
   const navigate = useNavigate();
 
   const onHandleCardInfoInput = evt => {
@@ -33,11 +74,9 @@ const usePayment = () => {
     setCardInfo(defaultCardInfo);
   };
 
-  const onHandleRegist = evt => {
+  const onHandleSubmit = evt => {
     evt.preventDefault();
-    setCardList([...cardList, cardInfo]);
-    onHandleResetCardInfo();
-    navigate("/");
+    navigate("/save");
   };
 
   const checkValidInputValue = (value, id) => {
@@ -46,6 +85,25 @@ const usePayment = () => {
       return false;
     }
     return true;
+  };
+
+  const onHandleCompanyPopupClick = evt => {
+    const clickedElement = evt.target.closest(".modal-item-container");
+    if (clickedElement) {
+      const { id } = clickedElement;
+      const [owner, backgroundColor] = id.split("-");
+      setCardInfo({
+        ...cardInfo,
+        owner,
+        backgroundColor,
+      });
+    }
+    setIsShowPopup(false);
+  };
+
+  const onHandleSave = () => {
+    setCardList([...cardList, cardInfo]);
+    navigate("/");
   };
 
   const formatInputValue = (value, id) => {
@@ -76,8 +134,14 @@ const usePayment = () => {
   return {
     cardInfo,
     onHandleCardInfoInput,
-    onHandleRegist,
+    onHandleSave,
     cardList,
+    cardCompanyList,
+    onHandleCompanyPopupClick,
+    onHandleSubmit,
+    isShowPopup,
+    onHandleResetCardInfo,
+    setIsShowPopup,
   };
 };
 

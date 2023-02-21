@@ -1,6 +1,6 @@
-import Button from './Common/Button';
+import Button from "./Common/Button";
 
-const Card = ({ isRegistered, cardInfo }) => (
+const Card = ({ isRegistered, cardInfo, size = "small" }) => (
   <>
     <div className="card-box">
       {!isRegistered && (
@@ -8,7 +8,7 @@ const Card = ({ isRegistered, cardInfo }) => (
       )}
       {isRegistered && (
         <div
-          className="small-card"
+          className={`${size}-card`}
           style={{ backgroundColor: cardInfo.backgroundColor }}
         >
           <div className="card-top">

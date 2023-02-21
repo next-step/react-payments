@@ -1,8 +1,8 @@
-@import './card.css';
-@import './input.css';
-@import './button.css';
-@import './modal.css';
-@import './utils.css';
+@import "./card.css";
+@import "./input.css";
+@import "./button.css";
+@import "./modal.css";
+@import "./utils.css";
 
 body {
   display: flex;
@@ -29,6 +29,7 @@ input {
 .app {
   height: 100%;
   padding: 16px 24px;
+  position: relative;
 }
 
 .page-title {

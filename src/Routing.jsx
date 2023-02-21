@@ -1,22 +1,22 @@
 import CardList from "./pages/CardList";
 import CardRegist from "./pages/CardRegist";
 import { Routes, Route } from "react-router-dom";
-import InputSample from "./pages/InputSample";
 import usePayment from "./hooks/usePayment";
-// const cardList = [
-//   {
-//     nickname: "법인카드",
-//     company: "클린카드",
-//     number: "1111 - 2222 - oooo - oooo",
-//     owner: "HYEWON",
-//     expiry: "08/23",
-//     backgroundColor: "#94dacd",
-//   },
-// ];
+import CardSave from "./pages/CardSave";
 
 const Routing = () => {
-  const { cardInfo, onHandleCardInfoInput, onHandleRegist, cardList } =
-    usePayment();
+  const {
+    cardInfo,
+    onHandleCardInfoInput,
+    onHandleSave,
+    onHandleSubmit,
+    cardList,
+    cardCompanyList,
+    onHandleCompanyPopupClick,
+    isShowPopup,
+    onHandleResetCardInfo,
+    setIsShowPopup,
+  } = usePayment();
 
   return (
     <Routes>
@@ -27,11 +27,25 @@ const Routing = () => {
           <CardRegist
             cardInfo={cardInfo}
             onChange={onHandleCardInfoInput}
-            onSubmit={onHandleRegist}
+            onSubmit={onHandleSubmit}
+            cardCompanyList={cardCompanyList}
+            onClickPopup={onHandleCompanyPopupClick}
+            isShowPopup={isShowPopup}
+            onReset={onHandleResetCardInfo}
+            onShow={setIsShowPopup}
           />
         }
       />
-      <Route path="/sample" element={<InputSample />} />
+      <Route
+        path="/save"
+        element={
+          <CardSave
+            onSave={onHandleSave}
+            cardInfo={cardInfo}
+            onChange={onHandleCardInfoInput}
+          />
+        }
+      />
     </Routes>
   );
 };
