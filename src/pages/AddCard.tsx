@@ -2,15 +2,15 @@ import { ChangeEvent, RefObject, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Button from '../components/Button';
-import useRefs from '../hooks/useRefs';
+import useImmutableRefs from '../hooks/useImmutableRefs';
 import { extractNumbers } from '../utils';
 
 const AddCard = () => {
   const navigate = useNavigate();
-  const cardRefs = useRefs<HTMLInputElement>(4);
+  const cardRefs = useImmutableRefs<HTMLInputElement>(4);
   const expirationDateRef = useRef<HTMLInputElement>(null);
   const securityCodeRef = useRef<HTMLInputElement>(null);
-  const cardPasswordRefs = useRefs<HTMLInputElement>(2);
+  const cardPasswordRefs = useImmutableRefs<HTMLInputElement>(2);
   const [name, setName] = useState('');
 
   const handleInputChange = (
