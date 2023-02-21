@@ -3,11 +3,7 @@ import React, { InputHTMLAttributes } from "react";
 import { Label } from "@/components/common";
 import { CARD_INPUT_VARIABLES } from "@/constants/variables";
 
-import {
-  CardPasswordInputContainer,
-  CardPasswordInputEl,
-  CardPasswordInputWrapper,
-} from "./cardPasswordInput";
+import * as S from "./cardPasswordInput.style";
 import type { CardPassword } from "./hook/useCardPasswordInput";
 
 interface CardPasswordProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -19,10 +15,10 @@ export default function CardPasswordInput({
   ...props
 }: CardPasswordProps) {
   return (
-    <CardPasswordInputContainer>
+    <S.CardPasswordInputContainer>
       <Label>비밀번호</Label>
-      <CardPasswordInputWrapper>
-        <CardPasswordInputEl
+      <S.CardPasswordInputWrapper>
+        <S.CardPasswordInput
           id="password1"
           textAlign="center"
           type="password"
@@ -30,7 +26,7 @@ export default function CardPasswordInput({
           value={cardPassword.password1}
           {...props}
         />
-        <CardPasswordInputEl
+        <S.CardPasswordInput
           id="password2"
           textAlign="center"
           type="password"
@@ -38,21 +34,21 @@ export default function CardPasswordInput({
           value={cardPassword.password2}
           {...props}
         />
-        <CardPasswordInputEl
+        <S.CardPasswordInput
           textAlign="center"
           type="password"
           value="*"
           disabled
           {...props}
         />
-        <CardPasswordInputEl
+        <S.CardPasswordInput
           textAlign="center"
           type="password"
           value="*"
           disabled
           {...props}
         />
-      </CardPasswordInputWrapper>
-    </CardPasswordInputContainer>
+      </S.CardPasswordInputWrapper>
+    </S.CardPasswordInputContainer>
   );
 }

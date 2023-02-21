@@ -55,12 +55,12 @@ export default function AddCard() {
 
   const cardNumberWithDash = useMemo(
     () =>
-      Object.keys(cardNumber)
-        .map((fieldId, idx) => {
+      Object.entries(cardNumber)
+        .map(([_, value], idx) => {
           if (idx <= 1) {
-            return cardNumber[fieldId];
+            return value;
           } else {
-            return cardNumber[fieldId].replaceAll(/[0-9]/g, "•");
+            return value.replaceAll(/[0-9]/g, "•");
           }
         })
         .filter((number) => number !== "")
@@ -70,8 +70,8 @@ export default function AddCard() {
 
   const cardExpireDateWithSlash = useMemo(
     () =>
-      Object.keys(cardExpireDate)
-        .map((fieldId) => cardExpireDate[fieldId])
+      Object.entries(cardExpireDate)
+        .map(([_, value]) => value)
         .filter((data) => data !== "")
         .join("/"),
     [cardExpireDate]

@@ -10,6 +10,6 @@ export const CardPasswordInputWrapper = styled.div`
   gap: 7px;
 `;
 
-export const CardPasswordInputEl = styled(Input)`
+export const CardPasswordInput = styled(Input)`
   width: 45px;
 `;
