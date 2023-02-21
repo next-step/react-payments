@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
-export const AddCardPageContainer = styled.div`
-  .add-form-header {
-    margin-bottom: 25px;
-  }
+import { Header } from "@/components/common";
+
+export const AddCardPageHeader = styled(Header)`
+  margin-bottom: 25px;
 `;
 
 export const AddCardForm = styled.form`
+  height: 100%;
   .add-form-card {
     margin: 0 auto 20px;
   }
