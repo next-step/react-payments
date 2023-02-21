@@ -23,6 +23,15 @@
   color: #525252;
 }
 
+.input-title:last-child {
+  color: #000;
+}
+
+.input-title-box {
+  display: flex;
+  justify-content: space-between;
+}
+
 .input-basic {
   background-color: #ecebf1;
   height: 45px;
@@ -33,6 +42,14 @@
   border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;
+}
+
+.input-of-pw {
+  background: none;
+}
+
+.input-bigger-text {
+  font-size: 150%;
 }
 
 .input-underline {
