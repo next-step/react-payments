@@ -13,9 +13,9 @@ export const EmptyCardButtonContainer = styled.button`
   height: 130px;
 
   font-size: 30px;
-  color: ${({ theme }) => theme.colors.gray};
+  color: ${({ theme }) => theme.colors.gray3};
 
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.gray0};
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 

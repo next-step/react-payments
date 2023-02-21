@@ -9,5 +9,5 @@ export const LabelText = styled.p`
   line-height: 14px;
 
   margin-bottom: 4px;
-  color: #525252;
+  color: ${({ theme }) => theme.colors.gray2};
 `;

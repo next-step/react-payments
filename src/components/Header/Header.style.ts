@@ -8,7 +8,7 @@ export const HeaderContainer = styled.nav`
     font-size: 20px;
     line-height: 22px;
     margin: 0;
-    color: #383838;
+    color: ${({ theme }) => theme.colors.gray4};
     line-height: 1.5;
   }
 `;

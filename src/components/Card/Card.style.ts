@@ -34,7 +34,7 @@ export const CardChip = styled.div<{
 
   font-size: 24px;
 
-  background: #cbba64;
+  background: ${({ theme }) => theme.colors.brown};
   border-radius: 4px;
 `;
 

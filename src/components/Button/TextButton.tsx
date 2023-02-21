@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextButtonContainer } from './TextButton.style';
+import { StyledTextButton } from './TextButton.style';
 
 type TextButtonProps = {
   onClick: () => void;
@@ -7,11 +7,7 @@ type TextButtonProps = {
 };
 
 const TextButton = ({ onClick, text }: TextButtonProps) => {
-  return (
-    <TextButtonContainer>
-      <button onClick={onClick}>{text}</button>
-    </TextButtonContainer>
-  );
+  return <StyledTextButton onClick={onClick}>{text}</StyledTextButton>;
 };
 
 export default React.memo(TextButton);

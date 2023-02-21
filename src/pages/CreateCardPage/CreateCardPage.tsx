@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Header, TextButton } from '@/components';
 import { RightArrowIcon } from '@/assets';
 import { CardFields, PreviewCard, CardFieldProvider } from './components';
+import styled from '@emotion/styled';
 
 const CreateCardPage = () => {
   const navigate = useNavigate();
@@ -22,9 +23,16 @@ const CreateCardPage = () => {
         <PreviewCard />
         <CardFields />
       </CardFieldProvider>
-      <TextButton text="다음" onClick={() => console.log('clicked')} />
+      <TextButtonContainer>
+        <TextButton text="다음" onClick={() => console.log('clicked')} />
+      </TextButtonContainer>
     </>
   );
 };
 
 export default CreateCardPage;
+
+const TextButtonContainer = styled.div`
+  width: 100%;
+  text-align: right;
+`;

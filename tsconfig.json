@@ -23,7 +23,8 @@
   },
   "include": [
     "src",
-    "src/router.tsx"
+    "src/router.tsx",
+    "emotion.d.ts"
   ],
   "extends": "./tsconfig.paths.json",
 }
