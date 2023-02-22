@@ -1,5 +1,4 @@
 import { memo } from 'react';
-import { useFilter } from '../hooks';
 import { CardBoxType } from '../domain/types';
 
 const config = {
@@ -10,10 +9,6 @@ const config = {
 };
 
 function CardBox({ cardCompany, cardNumber, cardHolder, expiredDate, type = 'small', color }: CardBoxType) {
-  const { filterCardNumber, filterExpiredDate } = useFilter();
-  const memoCardNumber = filterCardNumber(cardNumber || '');
-  const memoExpiredDate = filterExpiredDate(expiredDate || '');
-
   return (
     <div className="card-box">
       <div className={config.type[type]} style={{ backgroundColor: color }}>
@@ -25,11 +20,11 @@ function CardBox({ cardCompany, cardNumber, cardHolder, expiredDate, type = 'sma
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">{memoCardNumber}</span>
+            <span className="card-text">{cardNumber}</span>
           </div>
           <div className="card-bottom__info">
             <span className="card-text">{cardHolder}</span>
-            <span className="card-text">{memoExpiredDate}</span>
+            <span className="card-text">{expiredDate}</span>
           </div>
         </div>
       </div>

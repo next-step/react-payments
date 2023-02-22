@@ -1,12 +1,12 @@
 import { Input, InputContainer } from '../../components/form';
 import { RegisterCardType } from '../../pages/RegisterCard';
 import { useEffect, useRef, useState } from 'react';
-import { useFilter, useForm } from '../../hooks';
+import { useForm } from '../../hooks';
+import { onlyNumber } from '../../utils/filter';
 
 const MAX_LENGTH = 1;
 
 export default function CardPasswordContainer({ onChange }: RegisterCardType) {
-  const { onlyNumber } = useFilter();
   const [errorMessage, setErrorMessage] = useState('');
   const passwordRef1 = useRef(null);
   const passwordRef2 = useRef(null);
