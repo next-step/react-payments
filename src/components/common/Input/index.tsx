@@ -3,9 +3,7 @@ import { CSSProperties, forwardRef } from 'react';
 
 import type { CombineElementProps } from 'types/utils';
 
-export type ButtonSize = 'small' | 'medium' | 'large' | 'full';
-
-const inputSize = {
+const INPUT_SIZE = {
   small: '15%',
   medium: '25%',
   large: '50%',
@@ -14,13 +12,13 @@ const inputSize = {
 
 interface InputBaseProps {
   textAlign?: CSSProperties['textAlign'];
-  size?: ButtonSize;
+  size?: keyof typeof INPUT_SIZE;
 }
-export type InputProps = CombineElementProps<'input', InputBaseProps>;
+export interface InputProps extends CombineElementProps<'input', InputBaseProps> {}
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, textAlign = 'center', size = 'full', ...props }, ref) => {
-    const width = inputSize[size];
+    const width = INPUT_SIZE[size];
 
     return (
       <input

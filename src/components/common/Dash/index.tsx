@@ -1,6 +1,8 @@
 import { css } from '@emotion/css';
 import { CSSProperties } from 'react';
 
+import { pixelOf } from 'utils';
+
 export interface DashProps {
   width?: CSSProperties['width'];
   height?: CSSProperties['height'];
@@ -21,7 +23,5 @@ function Dash({ width = 6, height = 3 }: DashProps) {
     ></span>
   );
 }
-
-const pixelOf = (value: string | number) => (typeof value === 'number' ? `${value}px` : value);
 
 export default Dash;

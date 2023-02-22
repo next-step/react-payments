@@ -1,4 +1,3 @@
-export { default as Layout } from './Layout';
 export { default as Dash } from './Dash';
 export { default as Input } from './Input';
 export { default as InputProgress } from './InputProgress';
