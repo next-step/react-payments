@@ -29,7 +29,7 @@ const useCards = () => {
   }, [])
 
   const addCard = (cardItem: CardType) => {
-    setCards([...cards, cardItem])
+    setCards([...cards, { ...cardItem, id: cards.length + 1 + '' }])
   }
 
   return { loading, error, cards, addCard }
