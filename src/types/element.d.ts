@@ -5,7 +5,7 @@ export interface InputProps {
   className?: string
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   value: string
-  id: string
+  id?: string
   placeholder?: string
   inputRef?: ForwardedRef<HTMLInputElement>
   onBlur?: (e: FocusEvent<HTMLInputElement>) => void

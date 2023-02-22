@@ -26,6 +26,11 @@ interface CardExpirationDateProps {
   fetchedTwoLettersDataHanlder: (e: FocusEvent<HTMLInputElement>) => void
 }
 
+interface CardOwnerNameProps {
+  ownerName: string
+  ownerNameValueHandler: (e: ChangeEvent<HTMLInputElement>) => void
+}
+
 interface CardSecurityCodeProps {
   cardSecurityCode: NumberData
   cardSecurityCodeandler: (e: ChangeEvent<HTMLInputElement>) => void

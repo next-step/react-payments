@@ -7,13 +7,20 @@ import {
   CardPassword,
   CardSecurityCode,
 } from '../../components/Card'
-import { NUMBER_LENGTH_MAX, PASSWORD_LENGTH_MAX, SECURITY_CODE_LENGTH_MAX } from '../../constants/Card'
+import {
+  NUMBER_LENGTH_MAX,
+  ONWER_NAME_LENGTH_MAX,
+  PASSWORD_LENGTH_MAX,
+  SECURITY_CODE_LENGTH_MAX,
+} from '../../constants/Card'
 import { useCardNumberData } from '../../hooks/useCardNumber'
 import { useExpirationDate } from '../../hooks/useExpirationDate'
+import { useOwnerName } from '../../hooks/useOnwerName'
 
 const CardAdd = () => {
   const cardNumber = useCardNumberData(NUMBER_LENGTH_MAX)
   const cardExpirationDate = useExpirationDate()
+  const ownerName = useOwnerName(ONWER_NAME_LENGTH_MAX)
   const cardSecurityCode = useCardNumberData(SECURITY_CODE_LENGTH_MAX)
   const cardPassword = useCardNumberData(PASSWORD_LENGTH_MAX)
 
@@ -37,7 +44,7 @@ const CardAdd = () => {
             cardExpirationDateHandler={cardExpirationDate.cardExpirationDateHandler}
             fetchedTwoLettersDataHanlder={cardExpirationDate.fetchedTwoLettersDataHanlder}
           />
-          <CardOwnerName />
+          <CardOwnerName ownerName={ownerName.onwerName} ownerNameValueHandler={ownerName.onwerNameValueHandler} />
           <CardSecurityCode
             cardSecurityCode={cardSecurityCode.cardNumberData}
             cardSecurityCodeandler={cardSecurityCode.cardNumberDataHandler}
