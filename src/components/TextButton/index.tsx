@@ -1,17 +1,22 @@
-import React from 'react';
+import {
+  ButtonHTMLAttributes,
+  DetailedHTMLProps,
+  PropsWithChildren,
+} from 'react';
 
-interface ButtonProps {
-  text: string;
-  onClick: () => void;
-}
+type ButtonProps = DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+>;
 
-const TextButton = (props: ButtonProps) => {
-  const { text, onClick } = props;
-  return (
-    <button type="button" className="text-button" onClick={onClick}>
-      {text}
-    </button>
-  );
-};
+const TextButton = ({
+  className = '',
+  children,
+  ...props
+}: PropsWithChildren<ButtonProps>) => (
+  <button {...props} type="button" className={`text-button ${className}`}>
+    {children}
+  </button>
+);
 
 export default TextButton;

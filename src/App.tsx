@@ -1,7 +1,5 @@
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import Alias from './pages/Alias';
-import Home from './pages/Home';
-import New from './pages/New';
+import { Home, CardNew, CardAlias } from './pages';
 
 function App() {
   return (
@@ -9,8 +7,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/new" element={<New />} />
-          <Route path="/alias" element={<Alias />} />
+          <Route path="/new" element={<CardNew />} />
+          <Route path="/alias" element={<CardAlias />} />
         </Routes>
       </BrowserRouter>
     </main>

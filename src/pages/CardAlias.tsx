@@ -1,22 +1,23 @@
 import { useNavigate } from 'react-router-dom';
-import Card from 'src/components/Card';
+import EmptyCard from 'src/components/EmptyCard/EmptyCard';
 import TextButton from 'src/components/TextButton';
 
-const Alias = () => {
+const CardAlias = () => {
   const navigate = useNavigate();
 
-  const okayButtonPress = () => {
+  const onClickConfirmBtn = () => {
     navigate('/', { replace: true });
   };
 
   return (
     <div className="alias-page">
       <div className="alias-page-title">카드 등록이 완료되었습니다.</div>
-      <Card />
+      {/* TO DO : Change Card Component with Card Info Data */}
+      <EmptyCard onClick={() => {}} />
       <input className="alias-input" />
-      <TextButton text="확인" onClick={okayButtonPress} />
+      <TextButton onClick={onClickConfirmBtn}>확인</TextButton>
     </div>
   );
 };
 
-export default Alias;
+export default CardAlias;

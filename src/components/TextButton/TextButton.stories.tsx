@@ -9,11 +9,9 @@ export default {
 } as ComponentMeta<typeof TextButton>;
 
 const Template: ComponentStory<typeof TextButton> = args => (
-  <TextButton {...args} />
+  <TextButton {...args}>
+    <div>Button</div>
+  </TextButton>
 );
 
 export const Default = Template.bind({});
-
-Default.args = {
-  text: 'Text',
-};

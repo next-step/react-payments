@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import '../../styles.css';
 import { useState } from 'react';
-import CardPasswordInput from '.';
+import CardPasswordInput from './CardPasswordInput';
 
 export default {
   title: 'CardPasswordInput',
@@ -9,22 +9,27 @@ export default {
 } as ComponentMeta<typeof CardPasswordInput>;
 
 const Template: ComponentStory<typeof CardPasswordInput> = args => {
-  const [password0, setPassword0] = useState('');
-  const [password1, setPassword1] = useState('');
-  const password0Handler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword0(e.target.value);
-  };
-  const password1Handler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword1(e.target.value);
+  const [firstPassword, setFirstPassword] = useState('');
+  const [secondPassword, setSecondPassword] = useState('');
+
+  const handleFirstPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFirstPassword(e.target.value);
   };
 
+  const handleSecondPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSecondPassword(e.target.value);
+  };
   return (
     <CardPasswordInput
       {...args}
-      password0={password0}
-      password0Handler={password0Handler}
-      password1={password1}
-      password1Handler={password1Handler}
+      firstPasswordProps={{
+        value: firstPassword,
+        onChange: handleFirstPassword,
+      }}
+      secondPasswordProps={{
+        value: secondPassword,
+        onChange: handleSecondPassword,
+      }}
     />
   );
 };
@@ -33,8 +38,12 @@ export const Default = Template.bind({});
 
 Default.args = {
   label: 'Label',
-  password0: '',
-  password1: '',
-  password0Handler: () => {},
-  password1Handler: () => {},
+  firstPasswordProps: {
+    value: '',
+    onChange: () => {},
+  },
+  secondPasswordProps: {
+    value: '',
+    onChange: () => {},
+  },
 };

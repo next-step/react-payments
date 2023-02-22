@@ -1,14 +1,14 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import '../../styles.css';
 import { useState } from 'react';
-import Input from '.';
+import CardInput from './NewCardInput';
 
 export default {
-  title: 'Input',
-  component: Input,
-} as ComponentMeta<typeof Input>;
+  title: 'CardInput',
+  component: CardInput,
+} as ComponentMeta<typeof CardInput>;
 
-const Template: ComponentStory<typeof Input> = args => {
+const Template: ComponentStory<typeof CardInput> = args => {
   const [inputCount, setInputCount] = useState(0);
   const [value, setValue] = useState('');
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +17,7 @@ const Template: ComponentStory<typeof Input> = args => {
   };
 
   return (
-    <Input
+    <CardInput
       {...args}
       inputCount={inputCount}
       value={value}

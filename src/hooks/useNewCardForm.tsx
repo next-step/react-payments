@@ -7,10 +7,10 @@ const useNewCardForm = () => {
   const [expirationDate, setExpirationDate] = useState('');
   const [customerName, setCustomerName] = useState('');
   const [cvc, setCvc] = useState('');
-  const [password0, setPassword0] = useState('');
-  const [password1, setPassword1] = useState('');
+  const [firstPassword, setFirstPassword] = useState('');
+  const [secondPassword, setSecondPassword] = useState('');
 
-  const creditNumberHandler = (e: InputType) => {
+  const handleChangeCreditNumber = (e: InputType) => {
     let targetValue = e.target.value.trim();
     targetValue = targetValue
       .replace(/[^0-9]/g, '')
@@ -18,7 +18,7 @@ const useNewCardForm = () => {
     setCreditNumber(targetValue);
   };
 
-  const expirationDateHandler = (e: InputType) => {
+  const handleChangeExpirationDate = (e: InputType) => {
     let targetValue = e.target.value.trim();
     if (targetValue.length === 2) {
       if (Number(targetValue) > 12 || Number(targetValue) < 1) {
@@ -33,20 +33,20 @@ const useNewCardForm = () => {
     setExpirationDate(targetValue);
   };
 
-  const customerNameHandler = (e: InputType) => {
+  const handleChangeCustomerName = (e: InputType) => {
     setCustomerName(e.target.value);
   };
 
-  const cvcHandler = (e: InputType) => {
+  const handleChangeCvc = (e: InputType) => {
     setCvc(e.target.value);
   };
 
-  const password0Handler = (e: InputType) => {
-    setPassword0(e.target.value);
+  const handleChangeFirstPassword = (e: InputType) => {
+    setFirstPassword(e.target.value);
   };
 
-  const password1Handler = (e: InputType) => {
-    setPassword1(e.target.value);
+  const handleChangeSecondPassword = (e: InputType) => {
+    setSecondPassword(e.target.value);
   };
 
   const state = {
@@ -54,18 +54,22 @@ const useNewCardForm = () => {
     expirationDate,
     customerName,
     cvc,
-    password0,
-    password1,
+    firstPassword,
+    secondPassword,
+  };
+
+  const handlers = {
+    handleChangeCreditNumber,
+    handleChangeCustomerName,
+    handleChangeCvc,
+    handleChangeExpirationDate,
+    handleChangeFirstPassword,
+    handleChangeSecondPassword,
   };
 
   return {
     state,
-    creditNumberHandler,
-    expirationDateHandler,
-    customerNameHandler,
-    cvcHandler,
-    password0Handler,
-    password1Handler,
+    handlers,
   };
 };
 

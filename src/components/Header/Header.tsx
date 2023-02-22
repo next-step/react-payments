@@ -3,11 +3,11 @@ import LeftArrow from '../Icon/LeftArrow';
 interface HeaderProps {
   title: string;
   hasBackButton?: boolean;
-  backButtonPress?: () => void;
+  onClickBackbutton?: () => void;
 }
 
 const Header = (props: HeaderProps) => {
-  const { title, hasBackButton, backButtonPress } = props;
+  const { title, hasBackButton, onClickBackbutton } = props;
 
   return (
     <header>
@@ -15,7 +15,7 @@ const Header = (props: HeaderProps) => {
         <button
           type="button"
           className="header-back-button"
-          onClick={backButtonPress}
+          onClick={onClickBackbutton}
         >
           <LeftArrow />
         </button>
@@ -29,7 +29,7 @@ const Header = (props: HeaderProps) => {
 
 Header.defaultProps = {
   hasBackButton: false,
-  backButtonPress: () => {},
+  onClickBackbutton: () => {},
 };
 
 export default Header;
