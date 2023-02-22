@@ -12,4 +12,4 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-export default Button;
+export default React.memo(Button);

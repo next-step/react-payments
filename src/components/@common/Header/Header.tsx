@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import useRouter from 'routes/useRouter';
 import { ReactComponent as BackIcon } from 'assets/BackIcon.svg';
@@ -17,4 +17,4 @@ const Header = ({ showBackIcon, children }: PropsWithChildren<HeaderProps>) => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

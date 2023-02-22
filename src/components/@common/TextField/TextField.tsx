@@ -8,4 +8,4 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
   }
 );
 
-export default TextField;
+export default React.memo(TextField);
