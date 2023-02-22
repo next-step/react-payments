@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CardInput } from "components/common/Card/card.type";
-import { cardInfo } from "constants/Payments";
+import { CARD_INFO } from "constants/Payments";
 import { CardListType } from "types/payments";
 import { formatNumber, isNumber, monthConverter } from "utils";
 
@@ -25,11 +25,11 @@ export const usePayments = () => {
 
   const validateInput = (input: string, id: string): boolean => {
     if (
-      id === cardInfo.NUMBER ||
-      id === cardInfo.EXPIRY ||
-      id === cardInfo.CVC ||
-      id === cardInfo.PASSWORD1 ||
-      id === cardInfo.PASSWORD2
+      id === CARD_INFO.NUMBER ||
+      id === CARD_INFO.EXPIRY ||
+      id === CARD_INFO.CVC ||
+      id === CARD_INFO.PASSWORD1 ||
+      id === CARD_INFO.PASSWORD2
     ) {
       return isNumber(input);
     }
@@ -43,9 +43,9 @@ export const usePayments = () => {
   ): string => {
     if (input && input.length < maxLength) {
       switch (id) {
-        case cardInfo.NUMBER:
+        case CARD_INFO.NUMBER:
           return formatNumber(input, 5);
-        case cardInfo.EXPIRY:
+        case CARD_INFO.EXPIRY:
           if (input.length === 2) {
             return formatNumber(monthConverter(input), 3, "/");
           }

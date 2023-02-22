@@ -5,6 +5,7 @@ import Card from "components/common/Card";
 import { CardInput } from "components/common/Card/card.type";
 import InputContainer from "components/common/Input/InputContainer";
 import Modal from "components/common/Modal";
+import { STEP } from "../../../constants/Payments";
 
 interface CardFormProps {
   newCardInfo: CardInput;
@@ -36,7 +37,11 @@ const CardForm = ({
 
   return (
     <>
-      {step === 1 ? <h2>1️⃣ 카드 추가</h2> : <h2>3️⃣ 카드 추가 - 입력 완료</h2>}
+      {step === STEP.SECOND ? (
+        <h2>1️⃣ 카드 추가</h2>
+      ) : (
+        <h2>3️⃣ 카드 추가 - 입력 완료</h2>
+      )}
       <div className="root">
         <div className="app">
           <h2 className="page-title">
@@ -128,7 +133,7 @@ const CardForm = ({
           <Button
             label="다음"
             onClick={() => {
-              if (step === 1) {
+              if (step === STEP.SECOND) {
                 setShowModal((prev: boolean) => !prev);
                 return;
               }

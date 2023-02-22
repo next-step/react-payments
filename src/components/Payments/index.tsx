@@ -2,6 +2,7 @@ import { usePayments } from "hooks/usePayments";
 import CardForm from "components/Payments/CardForm";
 import CardList from "components/Payments/CardList";
 import Completed from "components/Payments/Completed";
+import { STEP } from "../../constants/Payments";
 
 const Payments = () => {
   const {
@@ -17,8 +18,8 @@ const Payments = () => {
   } = usePayments();
 
   switch (step) {
-    case 1:
-    case 2:
+    case STEP.SECOND:
+    case STEP.THIRD:
       return (
         <CardForm
           newCardInfo={newCardInfo}
@@ -29,7 +30,7 @@ const Payments = () => {
           handleCardAddClick={handleCardAddClick}
         />
       );
-    case 3:
+    case STEP.FOURTH:
       return (
         <Completed
           newCardInfo={newCardInfo}
@@ -38,6 +39,7 @@ const Payments = () => {
           handleCardNicknameAddClick={handleCardNicknameAddClick}
         />
       );
+    case STEP.FIRST:
     default:
       return (
         <CardList
