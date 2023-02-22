@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function AddedCardList() {
+export default function RegistedCardListPage() {
   return (
     <div className="app flex-column-center">
       <div className="flex-center">

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function AddedCard() {
+export default function CardRegistrationCompletedPage() {
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
@@ -32,7 +32,7 @@ export default function AddedCard() {
           placeholder="카드의 별칭을 입력해주세요."
         />
       </div>
-      <Link className="button-text" to={`/AddedCardList`}>
+      <Link className="button-text" to={`/registed-card-list`}>
         <div className="button-box mt-50">
           <span className="button-text">다음</span>
         </div>

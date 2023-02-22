@@ -1,23 +1,23 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import AddCard from "../src/pages/AddCard";
-import AddedCardList from "../src/pages/AddedCardList";
-import AddedCard from "../src/pages/AddedCard";
+import CardRegistrationPage from "../src/pages/CardRegistrationPage";
+import RegistedCardListPage from "../src/pages/RegistedCardListPage";
+import CardRegistrationCompletedPage from "../src/pages/CardRegistrationCompletedPage";
 
 import "./styles/index.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <AddCard></AddCard>,
+    element: <CardRegistrationPage></CardRegistrationPage>,
   },
   {
-    path: "AddedCardList",
-    element: <AddedCardList />,
+    path: "registed-card-list",
+    element: <RegistedCardListPage />,
   },
   {
-    path: "AddedCard",
-    element: <AddedCard />,
+    path: "card-registration-completed",
+    element: <CardRegistrationCompletedPage />,
   },
 ]);
 

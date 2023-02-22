@@ -14,7 +14,7 @@ import useSecurityCode from "../hooks/useSecurityCode";
 import useCardPassword from "../hooks/useCardPassword";
 
 
-export default function AddCard() {
+export default function CardRegistrationPage() {
 /*
   const [cardInfo, setCardInfo] = useState({
    cardNumber: cardNumber,
@@ -34,7 +34,7 @@ const [cardPassword, handleCardPassword] = useCardPassword();
   return (
     <>
       <h2 className="page-title">
-        <Link className="button-text" to={`/AddedCardList`}>
+        <Link className="button-text" to={`/registed-card-list`}>
           &lt;
         </Link>
         <span className="button-text">카드 추가</span>
@@ -49,7 +49,7 @@ const [cardPassword, handleCardPassword] = useCardPassword();
       <CardSecurityCodeInput cardSecurityCode={cardSecurityCode} onChange={handleCardSecurityCode}></CardSecurityCodeInput>
       <CardPasswordInput cardPassword={cardPassword} onChange={handleCardPassword}/>
 
-      <Link className="button-text" to={`/AddedCard`}>
+      <Link className="button-text" to={`/card-registration-completed`}>
         <div className="button-box">
           <span className="button-text">다음</span>
         </div>
