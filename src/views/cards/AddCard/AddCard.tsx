@@ -50,21 +50,6 @@ export default function AddCard() {
     password2: "",
   });
 
-  const cardNumberWithDash = useMemo(
-    () =>
-      Object.entries(cardNumber)
-        .map(([_, value], idx) => {
-          if (idx <= 1) {
-            return value;
-          } else {
-            return value.replaceAll(/[0-9]/g, "•");
-          }
-        })
-        .filter((number) => number !== "")
-        .join("-"),
-    [cardNumber]
-  );
-
   const cardExpireDateWithSlash = useMemo(
     () =>
       Object.entries(cardExpireDate)
@@ -77,7 +62,7 @@ export default function AddCard() {
   const cardInfo = useMemo(
     () => ({
       cardName: "",
-      cardNumber: cardNumberWithDash,
+      cardNumber,
       cardOwnerName: cardOwnerName.ownerName || "NAME",
       expireDate: cardExpireDateWithSlash || "MM/YY",
     }),

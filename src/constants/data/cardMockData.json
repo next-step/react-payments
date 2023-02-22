@@ -2,7 +2,12 @@
   {
     "id": 1,
     "cardName": "포코카드",
-    "cardNumber": "1111-2222-••••-••••",
+    "cardNumber": {
+      "num1": "1111",
+      "num2": "1111",
+      "num3": "1111",
+      "num4": "1111"
+    },
     "cardOwnerName": "SUN",
     "expireDate": "04/21",
     "color": "#547CE4"
@@ -10,7 +15,12 @@
   {
     "id": 2,
     "cardName": "현석카드",
-    "cardNumber": "1111-2222-••••-••••",
+    "cardNumber": {
+      "num1": "1111",
+      "num2": "1111",
+      "num3": "1111",
+      "num4": "1111"
+    },
     "cardOwnerName": "SUN",
     "expireDate": "04/21",
     "color": "#94DACD"

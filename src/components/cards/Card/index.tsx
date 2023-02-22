@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useMemo } from "react";
 
+import type { CardNumber } from "../CardNumberInput/hook/useCardNumberInput";
 import {
   CardBottomWrapper,
   CardChip,
@@ -11,9 +12,9 @@ import {
   CardTopWrapper,
 } from "./card.style";
 
-type CardInfo = {
+export type CardInfo = {
   cardName: string;
-  cardNumber: string;
+  cardNumber: CardNumber;
   cardOwnerName: string;
   expireDate: string;
 };
@@ -33,6 +34,21 @@ export default function Card({
 }: CardProps) {
   const { cardName, cardNumber, cardOwnerName, expireDate } = cardInfo;
 
+  const cardNumberWithDash = useMemo(
+    () =>
+      Object.entries(cardNumber)
+        .map(([_, value], idx) => {
+          if (idx <= 1) {
+            return value;
+          } else {
+            return value.replaceAll(/[0-9]/g, "•");
+          }
+        })
+        .filter((number) => number !== "")
+        .join("-"),
+    [cardNumber]
+  );
+
   return (
     <CardContainer className={className} size={size} color={color}>
       <CardTopWrapper>
@@ -43,7 +59,7 @@ export default function Card({
       </CardMiddleWrapper>
       <CardBottomWrapper>
         <CardNumberWrapper>
-          <CardText>{cardNumber}</CardText>
+          <CardText>{cardNumberWithDash}</CardText>
         </CardNumberWrapper>
         <CardInfoWrapper>
           <CardText>{cardOwnerName}</CardText>

@@ -1,7 +1,7 @@
 import React from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
-import { AddCard, Cards } from "@/views/cards";
+import { AddCard, Cards, CompleteAddCard } from "@/views/cards";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/cards/add",
     element: <AddCard />,
-    action: () => console.log("hi"),
+  },
+  {
+    path: "/cards/complete",
+    element: <CompleteAddCard />,
   },
 ]);
 
