@@ -14,6 +14,8 @@ import useRouter from 'routes/useRouter';
 import { formatCardNumber, formatMMYY } from 'utils/format';
 import { setLocalStorageItem } from 'utils/localStorage';
 
+import { ReactComponent as CVCIcon } from 'assets/CVCIcon.svg';
+
 const RegistrationCardPage = () => {
   const { push } = useRouter();
   const [holderName, setHolderName] = useState('');
@@ -137,7 +139,17 @@ const RegistrationCardPage = () => {
         </FormControl>
 
         <FormControl>
-          <FormControl.Label>보안 코드 (CVC/CVV)</FormControl.Label>
+          <FormControl.Label
+            help={
+              <>
+                <p>카드 뒷면의 서명란 카드번호 중</p>
+                <p>맨 뒤 3자리 숫자를 입력해주세요.</p>
+                <CVCIcon />
+              </>
+            }
+          >
+            보안 코드 (CVC/CVV)
+          </FormControl.Label>
           <TextField
             type="password"
             inputMode="numeric"
