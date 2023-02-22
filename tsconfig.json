@@ -17,5 +17,5 @@
     "jsx": "react-jsx",
     "baseUrl": "src"
   },
-  "include": ["src", "types/emotion.d.ts"]
+  "include": ["src", "./types/assets.d.ts", "./types/emotion.d.ts"]
 }
