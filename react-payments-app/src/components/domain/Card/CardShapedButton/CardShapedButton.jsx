@@ -1,5 +1,3 @@
-import '../card.css';
-
 const CardShapedButton = ({ onClick }) => {
   return (
     <div role='button' onClick={onClick} className='card-box'>

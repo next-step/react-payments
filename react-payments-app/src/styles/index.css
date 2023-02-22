@@ -1,7 +1,7 @@
-@import '../components/Card/card.css';
-@import '../components/Input/input.css';
-@import '../components/Button/button.css';
-@import '../components/Modal/modal.css';
+@import '../components/domain/Card/card.css';
+@import '../components/common/Input/input.css';
+@import '../components/common/Button/button.css';
+@import '../components/common/Modal/modal.css';
 @import './utils.css';
 @import './wrap.css';
 
