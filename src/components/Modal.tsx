@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { ModalContext } from "./Layout";
 import { BANKS } from "../constants/bank";
+import { ModalContext } from "./ModalProvider";
 
 function Modal() {
   const context = useContext(ModalContext);

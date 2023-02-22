@@ -6,9 +6,9 @@ import Code from "../../components/Form/Code";
 import Password from "../../components/Form/Password";
 import Button from "../../components/Form/Button";
 import React, { useContext, useMemo, useState } from "react";
-import { ModalContext } from "../../components/Layout";
 import { BANKS, DEFAULT_BANK_COLOR } from "../../constants/bank";
 import { useHistory } from "react-router-dom";
+import { ModalContext } from "../../components/ModalProvider";
 
 const INPUT_NAMES = [
   "card-0",

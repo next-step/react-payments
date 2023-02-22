@@ -3,36 +3,20 @@ import styled from "styled-components";
 import useModalState from "../hooks/useModalState";
 import Header from "./Header";
 import Modal from "./Modal";
-
-type ContextProps = {
-  isModalOpen: boolean;
-  toggleModal: () => void;
-  bankId: String;
-  setBankId: Dispatch<SetStateAction<string>>;
-};
-
-export const ModalContext = createContext<ContextProps | null>({
-  isModalOpen: false,
-  toggleModal: () => {},
-  bankId: "",
-  setBankId: () => {},
-});
+import ModalProvider from "./ModalProvider";
 
 function Layout({ children }: ComponentProps) {
   const { toggleModal, isModalOpen, bankId, setBankId } = useModalState();
 
   return (
-    <ModalContext.Provider
-      value={{ isModalOpen, toggleModal, bankId, setBankId }}
-    >
+    <ModalProvider>
       <Root>
         <Wrapper>
           <Header />
           {children}
         </Wrapper>
-        {isModalOpen ? <Modal /> : null}
       </Root>
-    </ModalContext.Provider>
+    </ModalProvider>
   );
 }
 
