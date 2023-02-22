@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Card } from "@/components/cards";
-import type { CardInfo } from "@/components/cards/Card";
+import type { CardInfo } from "@/components/cards/Card/Card";
 import { Button, Input } from "@/components/common";
 import { CardPageLayout } from "@/layouts/cards";
 

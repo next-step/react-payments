@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import type { CardProps } from ".";
+import type { CardProps } from "./Card";
 
 const smallCardTextStyle = css`
   font-size: 14px;

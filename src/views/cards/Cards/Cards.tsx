@@ -1,12 +1,19 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-import { Card } from "@/components/cards";
+import { Card, EmptyCard } from "@/components/cards";
 import { Header } from "@/components/common";
 import cards from "@/constants/data/cardMockData.json";
 
 import { CardWrapper } from "./card.style";
 
 export default function Cards() {
+  const navigate = useNavigate();
+
+  const handleMoveToAddCardPage = () => {
+    navigate("/cards/add");
+  };
+
   return (
     <div>
       <Header>보유카드</Header>
@@ -26,6 +33,7 @@ export default function Cards() {
             />
           )
         )}
+        <EmptyCard size="small" onClick={handleMoveToAddCardPage} />
       </CardWrapper>
     </div>
   );

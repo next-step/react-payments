@@ -1,16 +1,7 @@
-import React, { useMemo } from "react";
+import React, { MouseEvent, useMemo } from "react";
 
 import type { CardNumber } from "../CardNumberInput/hook/useCardNumberInput";
-import {
-  CardBottomWrapper,
-  CardChip,
-  CardContainer,
-  CardInfoWrapper,
-  CardMiddleWrapper,
-  CardNumberWrapper,
-  CardText,
-  CardTopWrapper,
-} from "./card.style";
+import * as S from "./card.style";
 
 export type CardInfo = {
   cardName: string;
@@ -24,6 +15,7 @@ export interface CardProps {
   className?: string;
   color?: string;
   cardInfo: CardInfo;
+  onClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function Card({
@@ -50,22 +42,22 @@ export default function Card({
   );
 
   return (
-    <CardContainer className={className} size={size} color={color}>
-      <CardTopWrapper>
-        <CardText>{cardName}</CardText>
-      </CardTopWrapper>
-      <CardMiddleWrapper>
-        <CardChip />
-      </CardMiddleWrapper>
-      <CardBottomWrapper>
-        <CardNumberWrapper>
-          <CardText>{cardNumberWithDash}</CardText>
-        </CardNumberWrapper>
-        <CardInfoWrapper>
-          <CardText>{cardOwnerName}</CardText>
-          <CardText>{expireDate}</CardText>
-        </CardInfoWrapper>
-      </CardBottomWrapper>
-    </CardContainer>
+    <S.CardContainer className={className} size={size} color={color}>
+      <S.CardTopWrapper>
+        <S.CardText>{cardName}</S.CardText>
+      </S.CardTopWrapper>
+      <S.CardMiddleWrapper>
+        <S.CardChip />
+      </S.CardMiddleWrapper>
+      <S.CardBottomWrapper>
+        <S.CardNumberWrapper>
+          <S.CardText>{cardNumberWithDash}</S.CardText>
+        </S.CardNumberWrapper>
+        <S.CardInfoWrapper>
+          <S.CardText>{cardOwnerName}</S.CardText>
+          <S.CardText>{expireDate}</S.CardText>
+        </S.CardInfoWrapper>
+      </S.CardBottomWrapper>
+    </S.CardContainer>
   );
 }
