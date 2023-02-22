@@ -4,7 +4,7 @@ import { Input, Dash } from 'components/common';
 
 import { useInputFocusing } from 'hooks';
 
-import { MAX_LENGTH } from 'constants/card';
+import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
 import type { CardNumber } from 'types/card';
 
 interface CardNumberContainerProps {
@@ -35,7 +35,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
           placeholder="1234"
           type="text"
           value={num1}
-          name="num1"
+          name={INPUT_NAME.NUM1}
           onChange={handleChangeCardNumber}
           maxLength={MAX_LENGTH.CARD_NUMBER}
         />
@@ -46,7 +46,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
           placeholder="5678"
           type="text"
           value={num2}
-          name="num2"
+          name={INPUT_NAME.NUM2}
           onChange={handleChangeCardNumber}
           maxLength={MAX_LENGTH.CARD_NUMBER}
         />
@@ -56,7 +56,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
           placeholder="1234"
           type="password"
           value={num3}
-          name="num3"
+          name={INPUT_NAME.NUM3}
           onChange={handleChangeCardNumber}
           maxLength={MAX_LENGTH.CARD_NUMBER}
         />
@@ -66,7 +66,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
           placeholder="5678"
           type="password"
           value={num4}
-          name="num4"
+          name={INPUT_NAME.NUM4}
           onChange={handleChangeCardNumber}
           maxLength={MAX_LENGTH.CARD_NUMBER}
         />

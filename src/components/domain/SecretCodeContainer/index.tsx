@@ -4,7 +4,7 @@ import { css } from '@emotion/css';
 import { Input } from 'components/common';
 
 import { isNumber } from 'utils';
-import { MAX_LENGTH } from 'constants/card';
+import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
 
 function SecretCodeContainer() {
   const [secretCode, setSecretCode] = useState('');
@@ -28,7 +28,7 @@ function SecretCodeContainer() {
         `}
         type="password"
         value={secretCode}
-        name="secretCode"
+        name={INPUT_NAME.SECRET_CODE}
         onChange={handleChangeSecretCode}
         maxLength={MAX_LENGTH.SECRET_CODE}
         size="medium"

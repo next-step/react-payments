@@ -6,7 +6,7 @@ import { Masking } from 'components/domain';
 import { useInputFocusing } from 'hooks';
 
 import { isNumber } from 'utils';
-import { MAX_LENGTH } from 'constants/card';
+import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
 import type { CardPassword } from 'types/card';
 
 const INITIAL_STATE: CardPassword = {
@@ -50,7 +50,7 @@ function CardPasswordContainer() {
           ref={password1Ref}
           type="password"
           value={password1}
-          name="password1"
+          name={INPUT_NAME.PASSWORD1}
           onChange={handleChangePassword}
           maxLength={MAX_LENGTH.PASSWORD}
           size="small"
@@ -59,7 +59,7 @@ function CardPasswordContainer() {
           ref={password2Ref}
           type="password"
           value={password2}
-          name="password2"
+          name={INPUT_NAME.PASSWORD2}
           onChange={handleChangePassword}
           maxLength={MAX_LENGTH.PASSWORD}
           size="small"

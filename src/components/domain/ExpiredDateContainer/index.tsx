@@ -5,7 +5,7 @@ import { Input } from 'components/common';
 
 import { useInputFocusing } from 'hooks';
 
-import { MAX_LENGTH } from 'constants/card';
+import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
 import type { ExpiredDate } from 'types/card';
 
 interface ExpiredDateContainerProps {
@@ -34,7 +34,7 @@ function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredD
           placeholder="MM"
           type="text"
           value={month}
-          name="month"
+          name={INPUT_NAME.MONTH}
           onChange={handleChangeExpiredDate}
           maxLength={MAX_LENGTH.EXPIRED_DATE}
         />
@@ -51,7 +51,7 @@ function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredD
           placeholder="YY"
           type="text"
           value={year}
-          name="year"
+          name={INPUT_NAME.YEAR}
           onChange={handleChangeExpiredDate}
           maxLength={MAX_LENGTH.EXPIRED_DATE}
         />

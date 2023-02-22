@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 
 import { Input, InputProgress } from 'components/common';
 
-import { MAX_LENGTH } from 'constants/card';
+import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
 
 interface CardOwnerContainerProps {
   cardOwner: string;
@@ -25,7 +25,7 @@ function CardOwnerContainer({ cardOwner, handleChangeCardOwner }: CardOwnerConta
         textAlign="left"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         type="text"
-        name="owner"
+        name={INPUT_NAME.OWNER}
         value={cardOwner}
         onChange={handleChangeCardOwner}
         maxLength={30}

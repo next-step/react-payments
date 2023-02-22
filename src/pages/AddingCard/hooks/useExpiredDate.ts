@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { isNumber } from 'utils';
+import { INPUT_NAME } from 'constants/card';
 import type { ExpiredDate } from 'types/card';
 
 const INITIAL_STATE: ExpiredDate = {
@@ -18,7 +19,7 @@ const useExpiredDate = () => {
       return;
     }
 
-    if (name === 'month' && isOutOfRangeMonth(value)) {
+    if (name === INPUT_NAME.MONTH && isOutOfRangeMonth(value)) {
       return;
     }
 
