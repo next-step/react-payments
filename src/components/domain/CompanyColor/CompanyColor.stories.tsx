@@ -2,10 +2,10 @@ import { Story } from '@storybook/react';
 import { styled } from '@storybook/theming';
 import { action } from '@storybook/addon-actions';
 
-import { CompanyColor } from 'components/common';
+import { CompanyColor } from 'components/domain';
 
 import { CardCompany } from 'types/card';
-import type { CompanyColorProps } from 'components/common/CompanyColor';
+import type { CompanyColorProps } from 'components/domain/CompanyColor';
 
 const handleClickCompanyColor = action('click');
 
