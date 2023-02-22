@@ -1,5 +1,4 @@
-import type { Meta, ComponentStory } from '@storybook/react';
-// import styled from '@emotion/styled';
+import type { Meta } from '@storybook/react';
 
 import { Button } from '../Button';
 import Tooltip from './Tooltip';

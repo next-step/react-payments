@@ -1,5 +1,4 @@
 import type { Meta, ComponentStory } from '@storybook/react';
-import styled from '@emotion/styled';
 
 import Button from './Button';
 import type { ButtonProps } from './Button.types';
