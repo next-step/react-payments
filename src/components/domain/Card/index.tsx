@@ -37,11 +37,11 @@ function Card({ company, name, cardNumber, expiredDate }: CardProps) {
         <div className="card-bottom">
           <div className="card-bottom__number">
             <span className="card-number">{num1}</span>
-            <Dash visible={num1.length === MAX_LENGTH.CARD_NUMBER} width={4} height={1} />
+            {num1.length === MAX_LENGTH.CARD_NUMBER && <Dash width={4} height={1} />}
             <span className="card-number">{num2}</span>
-            <Dash visible={num2.length === MAX_LENGTH.CARD_NUMBER} width={4} height={1} />
+            {num2.length === MAX_LENGTH.CARD_NUMBER && <Dash width={4} height={1} />}
             <Masking count={num3.length} />
-            <Dash visible={num3.length === MAX_LENGTH.CARD_NUMBER} width={4} height={1} />
+            {num3.length === MAX_LENGTH.CARD_NUMBER && <Dash width={4} height={1} />}
             <Masking count={num4.length} />
           </div>
           <div className="card-bottom__info">

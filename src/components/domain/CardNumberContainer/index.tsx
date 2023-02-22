@@ -39,7 +39,8 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
           onChange={handleChangeCardNumber}
           maxLength={MAX_LENGTH.CARD_NUMBER}
         />
-        <Dash visible={num1.length === MAX_LENGTH.CARD_NUMBER} />
+        {num1.length === MAX_LENGTH.CARD_NUMBER && <Dash />}
+
         <Input
           ref={num2Ref}
           placeholder="5678"
@@ -49,7 +50,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
           onChange={handleChangeCardNumber}
           maxLength={MAX_LENGTH.CARD_NUMBER}
         />
-        <Dash visible={num2.length === MAX_LENGTH.CARD_NUMBER} />
+        {num2.length === MAX_LENGTH.CARD_NUMBER && <Dash />}
         <Input
           ref={num3Ref}
           placeholder="1234"
@@ -59,7 +60,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
           onChange={handleChangeCardNumber}
           maxLength={MAX_LENGTH.CARD_NUMBER}
         />
-        <Dash visible={num3.length === MAX_LENGTH.CARD_NUMBER} />
+        {num3.length === MAX_LENGTH.CARD_NUMBER && <Dash />}
         <Input
           ref={num4Ref}
           placeholder="5678"
