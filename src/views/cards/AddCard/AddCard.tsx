@@ -23,11 +23,11 @@ import * as S from "./addCard.style";
 function HeaderLeftPointArrow() {
   const navigate = useNavigate();
 
-  const moveToCardsPage = () => {
+  const handleMoveToCardsPage = () => {
     navigate("/cards");
   };
 
-  return <LeftPointArrow onClick={moveToCardsPage} />;
+  return <LeftPointArrow onClick={handleMoveToCardsPage} />;
 }
 
 export default function AddCard() {
@@ -59,10 +59,19 @@ export default function AddCard() {
     [cardExpireDate]
   );
 
+  const cardNumberWithDash = useMemo(
+    () =>
+      Object.entries(cardNumber)
+        .map(([_, value]) => value)
+        .filter((number) => number !== "")
+        .join("-"),
+    [cardNumber]
+  );
+
   const cardInfo = useMemo(
     () => ({
       cardName: "",
-      cardNumber,
+      cardNumber: cardNumberWithDash,
       cardOwnerName: cardOwnerName.ownerName || "NAME",
       expireDate: cardExpireDateWithSlash || "MM/YY",
     }),

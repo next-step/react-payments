@@ -1,11 +1,10 @@
 import React, { MouseEvent, useMemo } from "react";
 
-import type { CardNumber } from "../CardNumberInput/hook/useCardNumberInput";
 import * as S from "./card.style";
 
 export type CardInfo = {
   cardName: string;
-  cardNumber: CardNumber;
+  cardNumber: string;
   cardOwnerName: string;
   expireDate: string;
 };
@@ -26,17 +25,17 @@ export default function Card({
 }: CardProps) {
   const { cardName, cardNumber, cardOwnerName, expireDate } = cardInfo;
 
-  const cardNumberWithDash = useMemo(
+  const cardNumberWithMasking = useMemo(
     () =>
-      Object.entries(cardNumber)
-        .map(([_, value], idx) => {
-          if (idx <= 1) {
+      cardNumber
+        .split("-")
+        .map((value, idx) => {
+          if (idx < 2) {
             return value;
           } else {
             return value.replaceAll(/[0-9]/g, "•");
           }
         })
-        .filter((number) => number !== "")
         .join("-"),
     [cardNumber]
   );
@@ -51,7 +50,7 @@ export default function Card({
       </S.CardMiddleWrapper>
       <S.CardBottomWrapper>
         <S.CardNumberWrapper>
-          <S.CardText>{cardNumberWithDash}</S.CardText>
+          <S.CardText>{cardNumberWithMasking}</S.CardText>
         </S.CardNumberWrapper>
         <S.CardInfoWrapper>
           <S.CardText>{cardOwnerName}</S.CardText>

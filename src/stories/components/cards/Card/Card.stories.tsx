@@ -10,12 +10,7 @@ export default {
     size: "big",
     cardInfo: {
       cardName: "My Card",
-      cardNumber: {
-        num1: "1111",
-        num2: "1111",
-        num3: "1111",
-        num4: "1111",
-      },
+      cardNumber: "1111-1111-1111-1111",
       cardOwnerName: "Lee Jae Yun",
       expireDate: "11/11",
     },

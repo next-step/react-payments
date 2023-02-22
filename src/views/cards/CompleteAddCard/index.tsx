@@ -11,12 +11,7 @@ const mockCardInfo: CardInfo = {
   cardName: "",
   cardOwnerName: "LeeJaeyun",
   expireDate: "11/22",
-  cardNumber: {
-    num1: "1111",
-    num2: "1111",
-    num3: "1111",
-    num4: "1111",
-  },
+  cardNumber: "1111-1111-1111-1111",
 };
 
 export default function CompleteAddCard() {
