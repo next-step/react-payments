@@ -3,6 +3,7 @@ import Button from "components/common/Button";
 import Card from "components/common/Card";
 import { CardInput } from "components/common/Card/card.type";
 import InputContainer from "components/common/Input/InputContainer";
+import Input from "components/common/Input";
 
 interface CompletedProps {
   newCardInfo: CardInput;
@@ -33,20 +34,19 @@ const Completed = ({
           />
 
           <InputContainer
-            inputList={[
-              {
-                value: newCardInfo.nickname || "",
-                id: "nickname",
-                type: "text",
-                placeholder: "카드의 별칭을 입력해주세요.",
-              },
-            ]}
             className={{
               inputContainerClassName: "flex-center w-100",
-              inputClassName: "input-underline",
             }}
-            onChange={handleCardInputChange}
-          />
+          >
+            <Input
+              className="input-underline"
+              value={newCardInfo.nickname || ""}
+              type={"text"}
+              id={"nickname"}
+              placeholder={"카드의 별칭을 입력해주세요."}
+              onChange={handleCardInputChange}
+            />
+          </InputContainer>
 
           <div className="mt-50">
             <Button

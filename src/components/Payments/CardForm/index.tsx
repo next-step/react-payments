@@ -6,6 +6,7 @@ import { CardInput } from "components/common/Card/card.type";
 import InputContainer from "components/common/Input/InputContainer";
 import Modal from "components/common/Modal";
 import { STEP } from "../../../constants/Payments";
+import Input from "components/common/Input";
 
 interface CardFormProps {
   newCardInfo: CardInput;
@@ -56,79 +57,78 @@ const CardForm = ({
             backgroundColor={newCardInfo.backgroundColor}
           />
 
-          <InputContainer
-            hasInputBox
-            title="카드 번호"
-            inputList={[
-              {
-                value: displayNumber({ input: number, startPoint: 2 }),
-                type: "text",
-                id: "number",
-              },
-            ]}
-            onChange={handleCardInputChange}
-            maxLength={19}
-          />
+          <InputContainer hasInputBox title="카드 번호">
+            <Input
+              value={displayNumber({ input: number, startPoint: 2 })}
+              type={"text"}
+              id={"number"}
+              onChange={handleCardInputChange}
+              maxLength={19}
+            />
+          </InputContainer>
 
           <InputContainer
             hasInputBox
             title="만료일"
-            inputList={[
-              {
-                value: expiry,
-                type: "text",
-                id: "expiry",
-                placeholder: "MM / YY",
-              },
-            ]}
             className={{ inputBoxClassName: "w-50" }}
-            onChange={handleCardInputChange}
-            maxLength={5}
-          />
+          >
+            <Input
+              value={expiry}
+              type={"text"}
+              id={"expiry"}
+              placeholder={"MM / YY"}
+              onChange={handleCardInputChange}
+              maxLength={5}
+            />
+          </InputContainer>
 
           <div className="relative">
-            <InputContainer
-              title="카드 소유자 이름(선택)"
-              inputList={[
-                {
-                  value: name,
-                  type: "text",
-                  id: "name",
-                  placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
-                },
-              ]}
-              onChange={handleCardInputChange}
-              maxLength={30}
-            />
+            <InputContainer title="카드 소유자 이름(선택)">
+              <Input
+                value={name}
+                type={"text"}
+                id={"name"}
+                placeholder={"카드에 표시된 이름과 동일하게 입력하세요."}
+                onChange={handleCardInputChange}
+                maxLength={30}
+              />
+            </InputContainer>
             <span className="absolute t-0 r-0 input-title">
               {characterCount(name)}/30
             </span>
           </div>
 
-          <InputContainer
-            title="보안코드(CVC/CVV)"
-            inputList={[
-              {
-                value: cvc,
-                type: "password",
-                id: "cvc",
-              },
-            ]}
-            className={{ inputClassName: "w-25" }}
-            onChange={handleCardInputChange}
-            maxLength={3}
-          />
+          <InputContainer title="보안코드(CVC/CVV)">
+            <Input
+              className="w-25"
+              value={cvc}
+              type={"password"}
+              id={"cvc"}
+              onChange={handleCardInputChange}
+              maxLength={3}
+            />
+          </InputContainer>
 
-          <InputContainer
-            title="카드 비밀번호"
-            inputList={[
-              { value: password1, type: "password", id: "password1" },
-              { value: password2, type: "password", id: "password2" },
-            ]}
-            className={{ inputClassName: "w-15 mr-1" }}
-            onChange={handleCardInputChange}
-            maxLength={1}
-          />
+          <InputContainer title="카드 비밀번호">
+            <>
+              <Input
+                className="w-15 mr-1"
+                value={password1}
+                type={"password"}
+                id={"password1"}
+                onChange={handleCardInputChange}
+                maxLength={1}
+              />
+              <Input
+                className="w-15 mr-1"
+                value={password2}
+                type={"password"}
+                id={"password2"}
+                onChange={handleCardInputChange}
+                maxLength={1}
+              />
+            </>
+          </InputContainer>
 
           <Button
             label="다음"

@@ -1,33 +1,14 @@
-import Input from "..";
-import { InputClassName, InputList } from "../input.type";
+import { InputClassName } from "../input.type";
 
 interface InputBoxProps {
-  inputList: InputList[];
   className?: Omit<InputClassName, "inputContainerClassName">;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  maxLength?: number;
+  children?: React.ReactElement;
 }
 
-const InputBox = ({
-  inputList,
-  className,
-  onChange,
-  maxLength,
-}: InputBoxProps) => {
+const InputBox = ({ className, children }: InputBoxProps) => {
   return (
     <div className={`input-box ${className?.inputBoxClassName}`}>
-      {inputList.map(({ value, type, id, placeholder }) => (
-        <Input
-          key={id}
-          value={value}
-          type={type}
-          id={id}
-          placeholder={placeholder}
-          className={className?.inputClassName}
-          onChange={onChange}
-          maxLength={maxLength}
-        />
-      ))}
+      {children}
     </div>
   );
 };
