@@ -8,6 +8,7 @@ const Input = ({
   id,
   placeholder,
   inputRef,
+  onBlur,
 }: InputProps) => {
   return (
     <input
@@ -18,6 +19,7 @@ const Input = ({
       className={className}
       onChange={onChange}
       type={type}
+      onBlur={onBlur}
     />
   )
 }

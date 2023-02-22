@@ -7,17 +7,13 @@ import {
   CardPassword,
   CardSecurityCode,
 } from '../../components/Card'
-import {
-  EXPIRATION_DATE_LENGTH_MAX,
-  NUMBER_LENGTH_MAX,
-  PASSWORD_LENGTH_MAX,
-  SECURITY_CODE_LENGTH_MAX,
-} from '../../constants/Card'
+import { NUMBER_LENGTH_MAX, PASSWORD_LENGTH_MAX, SECURITY_CODE_LENGTH_MAX } from '../../constants/Card'
 import { useCardNumberData } from '../../hooks/useCardNumber'
+import { useExpirationDate } from '../../hooks/useExpirationDate'
 
 const CardAdd = () => {
   const cardNumber = useCardNumberData(NUMBER_LENGTH_MAX)
-  const cardExpirationDate = useCardNumberData(EXPIRATION_DATE_LENGTH_MAX)
+  const cardExpirationDate = useExpirationDate()
   const cardSecurityCode = useCardNumberData(SECURITY_CODE_LENGTH_MAX)
   const cardPassword = useCardNumberData(PASSWORD_LENGTH_MAX)
 
@@ -28,14 +24,18 @@ const CardAdd = () => {
           <h2 className='page-title'>
             <Link to='/'>&lt;</Link>카드 추가
           </h2>
-          <CardDesign cardNumber={cardNumber.cardNumberData} cardExpirationDate={cardExpirationDate.cardNumberData} />
+          <CardDesign
+            cardNumber={cardNumber.cardNumberData}
+            cardExpirationDate={cardExpirationDate.cardExpirationDate}
+          />
           <CardNumber
             cardNumberData={cardNumber.cardNumberData}
             cardNumberDataHandler={cardNumber.cardNumberDataHandler}
           />
           <CardExpirationDate
-            cardExpirationDate={cardExpirationDate.cardNumberData}
-            cardExpirationDateHandler={cardExpirationDate.cardNumberDataHandler}
+            cardExpirationDate={cardExpirationDate.cardExpirationDate}
+            cardExpirationDateHandler={cardExpirationDate.cardExpirationDateHandler}
+            fetchedTwoLettersDataHanlder={cardExpirationDate.fetchedTwoLettersDataHanlder}
           />
           <CardOwnerName />
           <CardSecurityCode

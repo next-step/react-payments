@@ -8,4 +8,5 @@ export interface InputProps {
   id: string
   placeholder?: string
   inputRef?: ForwardedRef<HTMLInputElement>
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void
 }

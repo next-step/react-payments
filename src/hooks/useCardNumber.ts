@@ -13,5 +13,5 @@ export const useCardNumberData = (valueLengthMax: number) => {
       }))
     }
   }
-  return { cardNumberData, cardNumberDataHandler }
+  return { cardNumberData, cardNumberDataHandler, setCardNumberData }
 }

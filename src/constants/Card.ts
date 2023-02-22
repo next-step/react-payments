@@ -5,6 +5,8 @@ export const INIT_NUMBER_VALUE = {
   num4: '',
 }
 
+export const CARD_NUMBER_LENGTH_MAX = 4
+
 export const NUMBER_LENGTH_MAX = 5
 
 export const EXPIRATION_DATE_LENGTH_MAX = 3
@@ -12,3 +14,7 @@ export const EXPIRATION_DATE_LENGTH_MAX = 3
 export const SECURITY_CODE_LENGTH_MAX = 4
 
 export const PASSWORD_LENGTH_MAX = 2
+
+export const MONTH_MAX = 12
+
+export const SINGLE_DIGIT_MAX = 9

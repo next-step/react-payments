@@ -5,6 +5,8 @@ interface NumberData {
   num4: string
 }
 
+interface CardExpirationDate extends Pick<NumberData, 'num1' | 'num2'> {}
+
 interface CardNumberProps {
   cardNumberData: NumberData
   cardNumberDataHandler: (e: ChangeEvent<HTMLInputElement>) => void
@@ -12,12 +14,13 @@ interface CardNumberProps {
 
 interface CardDesignProps {
   cardNumber: NumberData
-  cardExpirationDate: NumberData
+  cardExpirationDate: CardExpirationDate
 }
 
 interface CardExpirationDateProps {
-  cardExpirationDate: NumberData
+  cardExpirationDate: CardExpirationDate
   cardExpirationDateHandler: (e: ChangeEvent<HTMLInputElement>) => void
+  fetchedTwoLettersDataHanlder: (e: FocusEvent<HTMLInputElement>) => void
 }
 
 interface CardSecurityCodeProps {
