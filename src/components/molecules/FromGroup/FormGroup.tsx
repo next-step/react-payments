@@ -25,18 +25,7 @@ const FormGroup: React.FC<FormGroupProps> = (props) => {
           {props.value.length}/{props.maxLength}
         </span>
       )}
-      {props.name !== 'password' ? (
-        <Input {...props} />
-      ) : (
-        <div>
-          <Input {...props} />
-          <Input {...props} />
-          <span>o</span>
-          <span>o</span>
-        </div>
-      )}
-
-      {/* {props.name === 'password' && <Input {...props} />} */}
+      <Input {...props} />
     </InputBox>
   )
 }

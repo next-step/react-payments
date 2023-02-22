@@ -4,7 +4,7 @@ import { CardType, CardTypeKeys } from 'models/card.model'
 import { RegisterCard } from 'organisms/RegisterCard'
 import { CompleteRegisterCard } from 'organisms/CompleteRegisterCard'
 import { CardCompanyList } from 'components/molecules/CardCompanyList'
-import { CARD_COMPNAYS_CODE, INIT_CARD_VALUE } from 'constants/card'
+import { INIT_CARD_VALUE } from 'constants/card'
 import { Modal } from 'components/atoms/Modal'
 import './AddEditCraditCard.css'
 
@@ -30,13 +30,12 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
     updateCard(value, name)
   }
 
-  const { cardCompanyCode, cardNumber, password, pinCode, expireDate } = card
   const isCompleteRegister =
-    cardNumber &&
-    cardCompanyCode !== CARD_COMPNAYS_CODE.NULL &&
-    password &&
-    pinCode &&
-    expireDate
+    validator.cardNumber &&
+    validator.cardCompanyCode &&
+    validator.password &&
+    validator.pinCode &&
+    validator.expireDate
 
   return (
     <>

@@ -23,6 +23,7 @@ const useCardItem = (initCard: CardType) => {
       ...card,
       [name]: value,
     })
+
     setValidator({
       ...validator,
       [name]: validatorFn(value, name),

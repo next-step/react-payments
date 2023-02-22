@@ -7,6 +7,7 @@ import { UI_SIZE } from 'constants/ui.constant'
 import INPUTS from 'utils/inputs'
 import './RegisterCard.css'
 import { FormGroup } from 'components/molecules/FromGroup'
+import { PasswordFormGroup } from 'components/molecules/PasswordFormGroup'
 
 type RegisterCardProps = {
   card: CardType
@@ -26,16 +27,11 @@ const RegisterCard: React.FC<RegisterCardProps> = ({
     const { value } = e.target as HTMLInputElement
 
     const currentvalue = formatter ? formatter(value) : value
-
     changeValue(currentvalue, name)
   }
 
-  const onMultipleValue = (e: ChangeEvent, i: number) => {
-    //const value = value splice 기능 사용해서 추가추가 해서 업데이트하기
-    // changeValue({
-    //   ...params,
-    //   value: currentvalue,
-    // })
+  const onChangePassword = (value: string, name: CardTypeKeys) => {
+    changeValue(value, name)
   }
 
   const inputLayout = INPUTS.map(
@@ -73,7 +69,10 @@ const RegisterCard: React.FC<RegisterCardProps> = ({
         onClickIcon={onNavigate}
       />
       <Card card={card} size={UI_SIZE.SMALL} />
-      <div className='card-form'>{inputLayout}</div>
+      <div className='card-form'>
+        {inputLayout}
+        <PasswordFormGroup onChange={onChangePassword}></PasswordFormGroup>
+      </div>
     </>
   )
 }

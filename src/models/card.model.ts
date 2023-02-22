@@ -15,7 +15,7 @@ export interface CardType {
 
 export interface OnChangeEventParams {
   name: keyof CardType
-  formatter: (str: string) => string
+  formatter?: (str: string) => string
 }
 
 export type CardTypeKeys = keyof CardType

@@ -1,14 +1,14 @@
-import { CardType } from 'models/card.model'
 import React, { ChangeEvent } from 'react'
 import './Input.css'
 
+// 정리필요
 type InputProps = {
   placeholder?: string
   onChange: (e: ChangeEvent) => void
   width?: string
   type: string
   value: string
-  name: keyof CardType
+  name: string
   maxLength?: number
   isRequire?: boolean
 }

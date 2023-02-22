@@ -61,16 +61,16 @@ const INPUTS: InputType[] = [
     isRequire: true,
     placeholder: '',
   },
-  {
-    key: 'password',
-    formatter: (value: string) => onlyNumberFormat(value),
-    label: '카드비밀번호',
-    type: 'password',
-    maxLength: 1,
-    width: '15%',
-    isRequire: true,
-    placeholder: '',
-  },
+  // {
+  //   key: 'password',
+  //   formatter: (value: string) => onlyNumberFormat(value),
+  //   label: '카드비밀번호',
+  //   type: 'password',
+  //   maxLength: 1,
+  //   width: '15%',
+  //   isRequire: true,
+  //   placeholder: '',
+  // },
 ]
 
 export default INPUTS
