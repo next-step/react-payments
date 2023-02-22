@@ -21,5 +21,5 @@ export const Primary = ({ children }: PropsWithChildren) => (
 );
 
 Primary.args = {
-  children: '신용 카드 앞면의 16자를 입력해주세요.',
+  children: '신용카드 앞면의 16자를 입력해주세요.',
 };
