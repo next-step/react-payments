@@ -5,13 +5,17 @@ export default function useCardOwnerName() {
   const [ownerName, setOwnerName] = useState("");
 
   function isValidOwnerName(value) {
-    if (value.length <= CARD_OWNER_NAME.MAX_LENGTH) return true;
+    if (value.length <= CARD_OWNER_NAME.MAX_LENGTH){
+      return true;
+    }
     return false;
   }
 
   function handleOwnerName(event) {
     const { value } = event.target;
-    if (isValidOwnerName(value)) setOwnerName(value);
+    if (isValidOwnerName(value)) {
+      setOwnerName(value);
+    } 
     //console.log("handleOwnerName -value : ", value);
     //console.log("handleOwnerName - ownerName : ", ownerName);
   }

@@ -1,22 +1,16 @@
 import { useState } from "react";
 
+import { isNumber } from "../utils/card"
+import { MESSAGE } from "../constants/card";
+
 export default function useSecurityCode() {
   const [securityCode, setSecurityCode] = useState("");
 
-  function isNumber(value) {
-    return !isNaN(Number(value));
-  }
-
-  function isValidSecurityCode(value) {
-    if(isNumber(value)) return true;
-    return false;
-  }
-
   function handleSecurityCode(event) {
     const { value } = event.target;
-    if (!isValidSecurityCode(value)) {
-      alert("숫자만 입력 가능합니다.");
-      return false;
+    if (!isNumber(value)) {
+      alert(MESSAGE.ALERT_NUMBER);
+      return;
     }
     setSecurityCode(value);
   }

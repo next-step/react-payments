@@ -1,22 +1,16 @@
 import { useState } from "react";
 
+import { isNumber } from "../utils/card";
+import { MESSAGE } from "../constants/card";
+
 export default function useCardPassword() {
   const [password, setPassword] = useState({num0:"", num1:"", num2:"", num3:""});
 
-  function isNumber(value) {
-    return !isNaN(Number(value));
-  }
-
-  function isValidPassword(value) {
-    if(isNumber(value)) return true;
-    return false;
-  }
-
   function handlePassword(event) {
     const { name, value } = event.target;
-    if (!isValidPassword(value)) {
-      alert("숫자만 입력 가능합니다");
-      return false;
+    if (!isNumber(value)) {
+      alert(MESSAGE.ALERT_NUMBER);
+      return;
     }
     setPassword({...password, [name]: value });
   }
