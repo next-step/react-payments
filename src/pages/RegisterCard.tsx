@@ -33,10 +33,7 @@ export default function RegisterCard() {
   const moveCardList = () => navigate('/');
 
   const handleCardNumber = (cardNumber: string) => {
-    setCardState({
-      ...cardState,
-      cardNumber,
-    });
+    setCardState({ cardNumber });
 
     if (cardNumber.length === 8) {
       setOpenCardPopup(true);
@@ -44,24 +41,15 @@ export default function RegisterCard() {
   };
 
   const handleExpiredDate = (expiredDate: string) => {
-    setCardState({
-      ...cardState,
-      expiredDate,
-    });
+    setCardState({ expiredDate });
   };
 
   const handleCardHolder = (cardHolder: string) => {
-    setCardState({
-      ...cardState,
-      cardHolder,
-    });
+    setCardState({ cardHolder });
   };
 
   const handleCardCompany = (cardCompany: CardCompanyType) => {
-    setCardState({
-      ...cardState,
-      ...cardCompany,
-    });
+    setCardState({ ...cardCompany });
 
     setOpenCardPopup(false);
   };
