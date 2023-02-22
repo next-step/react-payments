@@ -1,7 +1,8 @@
 import { useRef, useState } from 'react';
 import { css } from '@emotion/css';
 
-import { Input, Masking } from 'components/common';
+import { Input } from 'components/common';
+import { Masking } from 'components/domain';
 import { useInputFocusing } from 'hooks';
 
 import { isNumber } from 'utils';

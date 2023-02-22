@@ -1,6 +1,7 @@
 import { css, cx } from '@emotion/css';
 
-import { Dash, Masking } from 'components/common';
+import { Dash } from 'components/common';
+import { Masking } from 'components/domain';
 
 import { MAX_LENGTH } from 'constants/card';
 import { theme } from 'constants/colors';

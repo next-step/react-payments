@@ -1,5 +1,6 @@
 import { css, cx } from '@emotion/css';
-import { CompanyColor } from 'components/common';
+
+import { CompanyColor } from 'components/domain';
 
 import { CardCompany } from 'types/card';
 
