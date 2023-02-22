@@ -1,10 +1,9 @@
 import { CARD_SECURITY_CODE } from "../constants/card";
-import Span from "./Span";
 
 export default function CardSecurityCodeInput({cardSecurityCode, onChange}) {
   return (
     <div className="input-container">
-      <Span className="input-title">보안코드(CVC/CVV)</Span>
+      <span className="input-title">보안코드(CVC/CVV)</span>
       <input
         className="input-basic w-25 card-cvc-code"
         type="password"

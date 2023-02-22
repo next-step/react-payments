@@ -1,10 +1,9 @@
 import { CARD_PASSWORD } from "../constants/card";
-import Span from "./Span";
 
 export default function CardPasswordInput({cardPassword, onChange}) {
   return (
     <div className="input-container">
-      <Span className="input-title">카드 비밀번호</Span>
+      <span className="input-title">카드 비밀번호</span>
       {["num0","num1","num2","num3"].map((name, index) => {
         return (
           <input

@@ -1,11 +1,10 @@
-// import { useState, useRef } from "react";
 import { CARD_EXPIRATION } from "../constants/card";
-import Span from "./Span";
+
 
 export default function CardExpirationInput({cardExpiration, onChange}) {
   return (
     <div className="input-container">
-      <Span className="input-title">만료일</Span>
+      <span className="input-title">만료일</span>
       <div className="input-box w-50">
         {["month", "year"].map((name, index) => {
           return (

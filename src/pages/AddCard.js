@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import CardBox from "../components/CardBox";
-import PageTitle from "../components/PageTitle";
 
 import CardNumberInput from "../components/CardNumberInput";
 import CardPasswordInput from "../components/CardPasswordInput";
@@ -34,12 +33,12 @@ const [cardPassword, handleCardPassword] = useCardPassword();
 
   return (
     <>
-      <PageTitle className="page-title">
+      <h2 className="page-title">
         <Link className="button-text" to={`/AddedCardList`}>
           &lt;
         </Link>
         <span className="button-text">카드 추가</span>
-      </PageTitle>
+      </h2>
       <CardBox cardNumber={cardNumber}
           cardExpiration={cardExpiration}
           cardOwnerName={cardOwnerName}
