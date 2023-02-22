@@ -31,6 +31,8 @@ function HeaderLeftPointArrow() {
 }
 
 export default function AddCard() {
+  const navigate = useNavigate();
+
   const { cardNumber, onCardNumberChange } = useCardNumberInput({
     num1: "",
     num2: "",
@@ -49,6 +51,8 @@ export default function AddCard() {
     password1: "",
     password2: "",
   });
+
+  const HeaderStartDecorator = useMemo(() => <HeaderLeftPointArrow />, []);
 
   const cardExpireDateWithSlash = useMemo(
     () =>
@@ -78,7 +82,9 @@ export default function AddCard() {
     [cardNumber, cardExpireDate, cardOwnerName]
   );
 
-  const HeaderStartDecorator = useMemo(() => <HeaderLeftPointArrow />, []);
+  const handleMoveToCompleteAddPage = () => {
+    navigate("/cards/complete");
+  };
 
   return (
     <CardPageLayout>
@@ -108,7 +114,9 @@ export default function AddCard() {
         </S.AddCardFormInputWrapper>
       </S.AddCardForm>
       <S.AddCardFormSubmitButtonWrapper>
-        <Button variant="text">다음</Button>
+        <Button variant="text" onClick={handleMoveToCompleteAddPage}>
+          다음
+        </Button>
       </S.AddCardFormSubmitButtonWrapper>
     </CardPageLayout>
   );
