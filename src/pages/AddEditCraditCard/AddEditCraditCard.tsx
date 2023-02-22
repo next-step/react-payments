@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import useCardItem from 'hooks/useCardItem'
 import { CardType, CardTypeKeys } from 'models/card.model'
 import { RegisterCard } from 'organisms/RegisterCard'
@@ -19,6 +19,7 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
 }) => {
   const { card, resetCard, updateCard, validator } =
     useCardItem(INIT_CARD_VALUE)
+  const [isComplete, setIsComplete] = useState(false)
 
   const completeCardRegistor = () => {
     addCard(card)
@@ -28,6 +29,10 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
 
   const changeValue = (value: string, name: CardTypeKeys) => {
     updateCard(value, name)
+  }
+
+  const onNavigateNextStep = () => {
+    setIsComplete(true)
   }
 
   const isCompleteRegister =
@@ -40,7 +45,7 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
   return (
     <>
       <main id='add-card-container'>
-        {isCompleteRegister ? (
+        {isComplete ? (
           <CompleteRegisterCard
             card={card}
             changeValue={changeValue}
@@ -50,7 +55,9 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
           <RegisterCard
             card={card}
             onNavigate={onNavigate}
+            onClickNextBtn={onNavigateNextStep}
             changeValue={changeValue}
+            isCompleteRegister={isCompleteRegister}
           />
         )}
 

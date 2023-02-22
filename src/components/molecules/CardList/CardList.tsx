@@ -26,6 +26,7 @@ const CardList: React.FC<CardListProps> = ({
           card={card}
           size={UI_SIZE.SMALL}
           onClick={onClick}
+          isShowNickname
         />
       ))}
     </>

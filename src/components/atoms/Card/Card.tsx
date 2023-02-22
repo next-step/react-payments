@@ -7,10 +7,16 @@ import './Card.css'
 type CardProps = {
   card: CardType
   size: Omit<UiSize, 'medium'>
+  isShowNickname?: boolean
   onClick?: () => void
 }
 
-const Card: React.FC<CardProps> = ({ card, size, onClick }) => {
+const Card: React.FC<CardProps> = ({
+  card,
+  size,
+  onClick,
+  isShowNickname = false,
+}) => {
   const cardCompnayInfo = CARD_COMPANYS[card.cardCompanyCode]
   const [first, second, third, fourth] = card.cardNumber.split('-')
 
@@ -48,7 +54,9 @@ const Card: React.FC<CardProps> = ({ card, size, onClick }) => {
             </div>
           </div>
         </div>
-        <span className='card-nickname'>{card.cardNickname}</span>
+        {isShowNickname && (
+          <span className='card-nickname'>{card.cardNickname}</span>
+        )}
       </>
     )
 

@@ -3,22 +3,27 @@ import { Header } from 'components/molecules/Header'
 import { AiOutlineLeft } from 'react-icons/ai'
 import { CardType, CardTypeKeys, OnChangeEventParams } from 'models/card.model'
 import { Card } from 'components/atoms/Card'
-import { UI_SIZE } from 'constants/ui.constant'
+import { UI_SIZE, UI_VARIANT } from 'constants/ui.constant'
 import INPUTS from 'utils/inputs'
 import './RegisterCard.css'
 import { FormGroup } from 'components/molecules/FromGroup'
 import { PasswordFormGroup } from 'components/molecules/PasswordFormGroup'
+import { Button } from 'components/atoms/Button'
 
 type RegisterCardProps = {
   card: CardType
   onNavigate: () => void
   changeValue: (value: string, name: CardTypeKeys) => void
+  isCompleteRegister: boolean
+  onClickNextBtn: () => void
 }
 
 const RegisterCard: React.FC<RegisterCardProps> = ({
   card,
   onNavigate,
   changeValue,
+  isCompleteRegister,
+  onClickNextBtn,
 }) => {
   const onChange = (
     e: ChangeEvent,
@@ -68,11 +73,23 @@ const RegisterCard: React.FC<RegisterCardProps> = ({
         icon={<AiOutlineLeft />}
         onClickIcon={onNavigate}
       />
-      <Card card={card} size={UI_SIZE.SMALL} />
+      <Card card={card} size={UI_SIZE.SMALL} isShowNickname={false} />
       <div className='card-form'>
         {inputLayout}
         <PasswordFormGroup onChange={onChangePassword}></PasswordFormGroup>
       </div>
+      {isCompleteRegister && (
+        <div className='button-box'>
+          <Button
+            size={UI_SIZE.MEDIUM}
+            variant={UI_VARIANT.GHOST}
+            color='green'
+            onClick={onClickNextBtn}
+          >
+            다음
+          </Button>
+        </div>
+      )}
     </>
   )
 }

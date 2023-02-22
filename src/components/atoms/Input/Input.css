@@ -14,42 +14,8 @@
   background-color: red;
 }
 
-/* 
-.input {
-  display: flex;
-  align-items: center;
-  padding: 4px 8px;
-  border-radius: 8px;
-  outline: none;
-}
-
-.filled {
-  border: 0;
-  color: #fff;
-}
-
-.outlined {
+.outline {
   background-color: transparent;
+  border-bottom: 2px solid #9ca3af;
+  border-radius: 0;
 }
-
-.ghost {
-  border: 0;
-  background-color: transparent;
-}
-
-.small {
-  font-size: 1em;
-}
-
-.medium {
-  font-size: 1.5rem;
-}
-
-.large {
-  font-size: 2rem;
-}
-
-.disabled {
-  cursor: default;
-  opacity: 0.7;
-} */

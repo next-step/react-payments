@@ -3,6 +3,7 @@ import { InputBox } from 'components/molecules/InputBox'
 import { Input } from 'components/atoms/Input'
 import { CardType } from 'models/card.model'
 import './FormGroup.css'
+import { UiVariant } from 'models/ui.model'
 
 type FormGroupProps = {
   label: string
@@ -15,6 +16,7 @@ type FormGroupProps = {
   placeholder?: string
   isMarkValueLength?: boolean
   value: string
+  variant?: UiVariant
 }
 
 const FormGroup: React.FC<FormGroupProps> = (props) => {

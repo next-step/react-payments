@@ -1,3 +1,4 @@
+import { UiVariant } from 'models/ui.model'
 import React, { ChangeEvent } from 'react'
 import './Input.css'
 
@@ -11,6 +12,7 @@ type InputProps = {
   name: string
   maxLength?: number
   isRequire?: boolean
+  variant?: UiVariant
 }
 
 const Input: React.FC<InputProps> = ({
@@ -21,10 +23,11 @@ const Input: React.FC<InputProps> = ({
   value,
   name,
   maxLength,
+  variant = 'fill',
 }) => {
   return (
     <input
-      className='input-basic'
+      className={`input-basic ${variant}`}
       type={type}
       value={value}
       placeholder={placeholder}
