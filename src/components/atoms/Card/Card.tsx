@@ -30,14 +30,14 @@ const Card: React.FC<CardProps> = ({
           style={{ backgroundColor: cardCompnayInfo.color }}
         >
           <div className='card-top'>
-            <span className='card-text'>{cardCompnayInfo.name}</span>
+            <span className={`card-text-${size}`}>{cardCompnayInfo.name}</span>
           </div>
           <div className='card-middle'>
             <div className={`${size}-card__chip`}></div>
           </div>
           <div className='card-bottom'>
             <div className='card-bottom__number'>
-              <span className='card-text'>
+              <span className={`card-text-${size}`}>
                 {card.cardNumber && (
                   <>
                     <span className='card-number'>{first}</span>
@@ -49,8 +49,12 @@ const Card: React.FC<CardProps> = ({
               </span>
             </div>
             <div className='card-bottom__info'>
-              <span className='card-text'>{card.cardOwner}</span>
-              <span className='card-text'>{card.expireDate}</span>
+              <span className={`card-text-${size} card-owner`}>
+                <span className='card-owner-text'>{card.cardOwner}</span>
+              </span>
+              <span className={`card-text-${size} card-expire`}>
+                {card.expireDate}
+              </span>
             </div>
           </div>
         </div>
