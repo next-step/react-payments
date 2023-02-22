@@ -23,12 +23,7 @@ export default function RegisterCard() {
   const [openCardPopup, setOpenCardPopup] = useState(false);
   const [securityCode, setSecurityCode] = useState('');
   const [cardPassword, setCardPassword] = useState('');
-  const { cardState, setCardState } = useCard({
-    cardCompany: '',
-    cardNumber: '',
-    cardHolder: '',
-    expiredDate: '',
-  });
+  const { cardState, setCardState } = useCard();
 
   const moveCardList = () => navigate('/');
 
@@ -61,7 +56,7 @@ export default function RegisterCard() {
       cardPassword,
     };
 
-    const cardList = cardRepository.getItem() || [];
+    const cardList = cardRepository.getItem();
     const newCardList = [
       ...cardList,
       saveData,
