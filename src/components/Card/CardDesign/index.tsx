@@ -1,9 +1,7 @@
-import { useMarkCardNumber } from '../../../hooks/useMarkCardNumber'
+import { expirationDateMark } from '../../../domain/expirationdateMark'
+import { markCardNumber } from '../../../domain/markCardNumber'
 
 const CardDesign = ({ cardNumber, cardExpirationDate }: CardDesignProps) => {
-  const markNumber = useMarkCardNumber(cardNumber)
-  const expirationDate = cardExpirationDate
-
   return (
     <div className='card-box'>
       <div className='empty-card'>
@@ -13,13 +11,11 @@ const CardDesign = ({ cardNumber, cardExpirationDate }: CardDesignProps) => {
         </div>
         <div className='card-bottom'>
           <div className='card-bottom__cardcardNumberberber'>
-            <span className='card-text'>{markNumber}</span>
+            <span className='card-text'>{markCardNumber(cardNumber)}</span>
           </div>
           <div className='card-bottom__info'>
             <span className='card-text'>NAME</span>
-            <span className='card-text'>
-              {expirationDate.num1} / {expirationDate.num2}
-            </span>
+            <span className='card-text'>{expirationDateMark(cardExpirationDate)}</span>
           </div>
         </div>
       </div>

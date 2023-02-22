@@ -5,6 +5,11 @@ export const INIT_NUMBER_VALUE = {
   num4: '',
 }
 
+export const INIT_EXPIRATION_VALUE = {
+  MM: '',
+  YY: '',
+}
+
 export const CARD_NUMBER_LENGTH_MAX = 4
 
 export const NUMBER_LENGTH_MAX = 5

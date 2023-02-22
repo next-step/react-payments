@@ -1,13 +1,13 @@
 import { ChangeEvent, useState, FocusEvent } from 'react'
-import { EXPIRATION_DATE_LENGTH_MAX, MONTH_MAX, SINGLE_DIGIT_MAX } from '../constants/Card'
+import { EXPIRATION_DATE_LENGTH_MAX, INIT_EXPIRATION_VALUE, MONTH_MAX, SINGLE_DIGIT_MAX } from '../constants/Card'
 
 export const useExpirationDate = () => {
-  const [cardExpirationDate, setCardExpirationDate] = useState({ num1: '', num2: '' })
+  const [cardExpirationDate, setCardExpirationDate] = useState(INIT_EXPIRATION_VALUE)
   const cardExpirationDateHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, id } = e.currentTarget
     if (isNaN(Number(value))) return
-    if (id === 'num1' && Number(value) > MONTH_MAX) return
-    if (value.length < EXPIRATION_DATE_LENGTH_MAX) {
+    if (id === 'MM' && Number(value) > MONTH_MAX) return
+    if (value !== '0' && value.length < EXPIRATION_DATE_LENGTH_MAX) {
       setCardExpirationDate((prev) => ({
         ...prev,
         [id]: value,

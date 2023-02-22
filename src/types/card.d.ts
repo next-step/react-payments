@@ -5,7 +5,10 @@ interface NumberData {
   num4: string
 }
 
-interface CardExpirationDate extends Pick<NumberData, 'num1' | 'num2'> {}
+interface CardExpirationDate {
+  MM: string
+  YY: string
+}
 
 interface CardNumberProps {
   cardNumberData: NumberData

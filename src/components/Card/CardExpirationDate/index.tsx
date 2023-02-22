@@ -5,21 +5,21 @@ const CardExpirationDate = ({
   cardExpirationDateHandler,
   fetchedTwoLettersDataHanlder,
 }: CardExpirationDateProps) => {
-  const { num1, num2 } = cardExpirationDate
+  const { MM, YY } = cardExpirationDate
   return (
     <div className='input-container'>
       <span className='input-title'>만료일</span>
       <div className='input-box w-50'>
         <Input
-          id='num1'
-          value={num1}
+          id='MM'
+          value={MM}
           onBlur={fetchedTwoLettersDataHanlder}
           placeholder='MM'
           onChange={cardExpirationDateHandler}
         />
         <Input
-          id='num2'
-          value={num2}
+          id='YY'
+          value={YY}
           onBlur={fetchedTwoLettersDataHanlder}
           placeholder='YY'
           onChange={cardExpirationDateHandler}

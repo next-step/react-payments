@@ -1,7 +1,7 @@
 import { CARD_NUMBER_LENGTH_MAX } from '../constants/Card'
-import { changeSerectNumber } from '../domain/changeSecretNumber'
+import { changeSerectNumber } from './changeSecretNumber'
 
-export const useMarkCardNumber = (numberData: NumberData) => {
+export const markCardNumber = (numberData: NumberData) => {
   const { num1, num2, num3, num4 } = numberData
 
   const number1 = num1.length === CARD_NUMBER_LENGTH_MAX ? `${num1}-` : num1
