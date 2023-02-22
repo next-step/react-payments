@@ -11,7 +11,7 @@ type ContextProps = {
   setBankId: Dispatch<SetStateAction<string>>;
 };
 
-export const ModalContext = createContext<ContextProps>({
+export const ModalContext = createContext<ContextProps | null>({
   isModalOpen: false,
   toggleModal: () => {},
   bankId: "",

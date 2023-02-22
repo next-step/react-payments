@@ -51,10 +51,17 @@ function Add() {
   const [userName, setUserName] = useState("");
   const [code, setCode] = useState(0);
   const [password, setPassword] = useState("");
-  const { toggleModal } = useContext(ModalContext);
   const isTyping = !!cardNumber || !!expireMonth || !!expireYear || !!userName;
-  const { bankId } = useContext(ModalContext);
   const history = useHistory();
+
+  const context = useContext(ModalContext);
+
+  if (!context) {
+    alert("context 누락");
+    throw Error("context 필수값 누락");
+  }
+
+  const { bankId, toggleModal } = context;
 
   const color = useMemo(() => {
     if (bankId) {

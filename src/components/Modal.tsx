@@ -4,7 +4,14 @@ import { ModalContext } from "./Layout";
 import { BANKS } from "../constants/bank";
 
 function Modal() {
-  const { setBankId, toggleModal } = useContext(ModalContext);
+  const context = useContext(ModalContext);
+
+  if (!context) {
+    alert("context 누락");
+    throw Error("context 필수값 누락");
+  }
+
+  const { setBankId, toggleModal } = context;
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget.dataset.id) {
