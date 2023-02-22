@@ -9,11 +9,15 @@ export const isNumber = (input: string): boolean => {
   return true;
 };
 
-export const formatNumber = (
-  input: string,
-  nth: number,
-  formatter: string = "-"
-): string => {
+export const formatNumber = ({
+  input,
+  nth,
+  formatter = "-",
+}: {
+  input: string;
+  nth: number;
+  formatter?: string;
+}): string => {
   const length = input?.length;
 
   // 처음 이후로 formatter가 붙을 때

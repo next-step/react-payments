@@ -44,12 +44,16 @@ export const usePayments = () => {
     if (input && input.length < maxLength) {
       switch (id) {
         case CARD_INFO.NUMBER:
-          return formatNumber(input, 5);
+          return formatNumber({ input, nth: 5 });
         case CARD_INFO.EXPIRY:
           if (input.length === 2) {
-            return formatNumber(monthConverter(input), 3, "/");
+            return formatNumber({
+              input: monthConverter(input),
+              nth: 3,
+              formatter: "/",
+            });
           }
-          return formatNumber(input, 3, "/");
+          return formatNumber({ input, nth: 3, formatter: "/" });
       }
     }
     return input;
