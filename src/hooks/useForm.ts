@@ -25,7 +25,7 @@ export default function useForm<T>(initialState: FormState<T>): [StateType<T>, F
     setState((prevState) => {
       prevState[name].value = value as T;
 
-      return prevState;
+      return { ...prevState };
     });
   }, []);
 

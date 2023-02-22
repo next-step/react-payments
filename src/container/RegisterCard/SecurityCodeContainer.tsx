@@ -13,7 +13,7 @@ export default function SecurityCodeContainer({ onChange }: RegisterCardType) {
   const isEnterSecurityCode = useMemo(() => securityCode.value.length === MAX_LENGTH, [securityCode]);
 
   useEffect(() => {
-    onChange(securityCode.value);
+    onChange({ cardSecurityCode: Number(securityCode.value) });
 
     if (!isEnterSecurityCode) {
       setErrorMessage('보안코드를 올바르게 입력 해 주세요.');

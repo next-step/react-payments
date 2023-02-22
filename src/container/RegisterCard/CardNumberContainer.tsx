@@ -29,7 +29,7 @@ export default function CardNumberContainer({ onChange }: RegisterCardType) {
   ), [cardNumber]);
 
   useEffect(() => {
-    onChange(cardNumbers);
+    onChange({ cardNumber: cardNumbers });
 
     if (!isValidateCard) {
       setErrorMessage(VALIDATE_ERROR);

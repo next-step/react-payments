@@ -5,6 +5,7 @@ import { useForm } from '../../hooks';
 import { onlyNumber } from '../../utils/filter';
 
 const MAX_LENGTH = 1;
+const VALIDATE_ERROR = '카드 비밀번호 앞 2자리를 입력 해 주세요.';
 
 export default function CardPasswordContainer({ onChange }: RegisterCardType) {
   const [errorMessage, setErrorMessage] = useState('');
@@ -19,15 +20,15 @@ export default function CardPasswordContainer({ onChange }: RegisterCardType) {
     const { first, second } = cardPassword;
     const password = first.value + second.value;
 
-    onChange(password);
+    onChange({ cardPassword: Number(password) });
 
     if (password.length !== MAX_LENGTH * 2) {
-      setErrorMessage('카드 비밀번호 앞 2자리를 입력 해 주세요.');
+      setErrorMessage(VALIDATE_ERROR);
       return;
     }
 
     setErrorMessage('');
-  });
+  }, [cardPassword]);
 
   return (
     <InputContainer

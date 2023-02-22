@@ -1,5 +1,5 @@
 import { CardBox, Modal, PageTitle } from '../components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useCard } from '../hooks';
 import CardSelection from '../components/CardSelection';
 import {
@@ -12,72 +12,52 @@ import {
 import { Button } from '../components/form';
 import { cardRepository } from '../repository';
 import { useNavigate } from 'react-router-dom';
-import { CardCompanyType } from '../domain/types';
+import { CardBoxType } from '../domain/types';
 
 export interface RegisterCardType {
-  onChange: (value: string) => void;
+  onChange: (data: CardBoxType) => void;
 }
 
 export default function RegisterCard() {
   const navigate = useNavigate();
   const [openCardPopup, setOpenCardPopup] = useState(false);
-  const [securityCode, setSecurityCode] = useState('');
-  const [cardPassword, setCardPassword] = useState('');
   const { cardState, setCardState } = useCard();
 
-  const moveCardList = () => navigate('/');
-
-  const handleCardNumber = (cardNumber: string) => {
-    setCardState({ cardNumber });
-
-    if (cardNumber.length === 8) {
+  useEffect(() => {
+    const { cardNumber, brand } = cardState;
+    if (cardNumber?.length === 8) {
       setOpenCardPopup(true);
     }
-  };
 
-  const handleExpiredDate = (expiredDate: string) => {
-    setCardState({ expiredDate });
-  };
+    if (brand) {
+      setOpenCardPopup(false);
+    }
+  }, [cardState]);
 
-  const handleCardHolder = (cardHolder: string) => {
-    setCardState({ cardHolder });
-  };
-
-  const handleCardCompany = (cardCompany: CardCompanyType) => {
-    setCardState({ ...cardCompany });
-
-    setOpenCardPopup(false);
-  };
-
+  const moveCardList = () => navigate('/');
   const saveCardData = () => {
-    const saveData = {
-      ...cardState,
-      securityCode,
-      cardPassword
-    };
-
     const cardList = cardRepository.getItem();
     const newCardList = [
       ...cardList,
-      saveData
+      { ...cardState }
     ];
 
     cardRepository.setItem(newCardList);
-    navigate(`/register-complete?card=${saveData.cardNumber}`);
+    navigate(`/register-complete?card=${cardState.cardNumber}`);
   };
 
   return (
     <div className="app">
       <PageTitle title="&lt; 카드 추가" onClick={moveCardList}/>
       <CardBox {...cardState} />
-      <CardNumberContainer onChange={handleCardNumber}/>
-      <ExpiredDateContainer onChange={handleExpiredDate}/>
-      <CardHolderContainer onChange={handleCardHolder}/>
-      <SecurityCodeContainer onChange={setSecurityCode}/>
-      <CardPasswordContainer onChange={setCardPassword}/>
+      <CardNumberContainer onChange={setCardState}/>
+      <ExpiredDateContainer onChange={setCardState}/>
+      <CardHolderContainer onChange={setCardState}/>
+      <SecurityCodeContainer onChange={setCardState}/>
+      <CardPasswordContainer onChange={setCardState}/>
       <Button onClick={saveCardData}>다음</Button>
       <Modal open={openCardPopup}>
-        <CardSelection onChange={handleCardCompany}/>
+        <CardSelection onChange={setCardState}/>
       </Modal>
     </div>
   );

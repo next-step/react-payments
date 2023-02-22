@@ -1,11 +1,12 @@
 export interface CardBoxType {
-  cardCompany?: string;
+  brand?: string;
   cardNumber?: string;
   cardHolder?: string;
   expiredDate?: string;
   type?: 'small' | 'big';
   color?: string;
   nickname?: string;
+  cardPassword?: number;
+  cardSecurityCode?: number;
 }
 
-export type CardCompanyType = { cardCompany: string, color: string };

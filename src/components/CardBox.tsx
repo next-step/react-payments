@@ -8,12 +8,12 @@ const config = {
   }
 };
 
-function CardBox({ cardCompany, cardNumber, cardHolder, expiredDate, type = 'small', color }: CardBoxType) {
+function CardBox({ cardNumber, cardHolder, expiredDate, type = 'small', color, brand }: CardBoxType) {
   return (
     <div className="card-box">
       <div className={config.type[type]} style={{ backgroundColor: color }}>
         <div className="card-top">
-          <span className="card-text">{cardCompany}</span>
+          <span className="card-text">{brand}</span>
         </div>
         <div className="card-middle">
           <div className="small-card__chip"></div>

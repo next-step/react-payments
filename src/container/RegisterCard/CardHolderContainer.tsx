@@ -11,7 +11,7 @@ export default function CardHolderContainer({ onChange }: RegisterCardType) {
   const countValue = cardHolder.value.length;
 
   useEffect(() => {
-    onChange(cardHolder.value);
+    onChange({ cardHolder: cardHolder.value });
   }, [cardHolder.value]);
 
   return (
