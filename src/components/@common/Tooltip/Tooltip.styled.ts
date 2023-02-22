@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
-export const Tooltip = styled.div``;
+export const Tooltip = styled.div`
+  cursor: pointer;
+`;
 
 export const Content = styled.div`
   position: absolute;
