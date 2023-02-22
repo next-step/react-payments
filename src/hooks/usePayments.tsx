@@ -56,22 +56,22 @@ export const usePayments = () => {
   };
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let { value, id, maxLength } = e.target;
+    const { value, id, maxLength } = e.target;
 
     if (validateInput(value, id)) {
-      value = formatInput(value, id, maxLength);
+      const formedValue = formatInput(value, id, maxLength);
 
-      let copiedNewCardInfo: CardInput = { ...newCardInfo };
       if (newCardInfo[id as keyof CardInput]) {
-        copiedNewCardInfo = {
+        const copiedNewCardInfo: CardInput = {
           ...newCardInfo,
-          [id]: value,
+          [id]: formedValue,
         };
+        setNewCardInfo(copiedNewCardInfo);
       } else {
-        copiedNewCardInfo[id as keyof CardInput] = value;
+        const copiedNewCardInfo: CardInput = { ...newCardInfo };
+        copiedNewCardInfo[id as keyof CardInput] = formedValue;
+        setNewCardInfo(copiedNewCardInfo);
       }
-
-      setNewCardInfo(copiedNewCardInfo);
     }
   };
 
