@@ -16,7 +16,7 @@ const defaultData = {
   cardCompany: '클린카드',
   cardNumber: '1234123412341234',
   cardHolder: 'TEST',
-  expiredDate: '1223',
+  expiredDate: '1223'
 };
 
 export const Small = Template.bind({});
@@ -28,5 +28,5 @@ Small.args = {
 export const Big = Template.bind({});
 Big.args = {
   ...defaultData,
-  type: 'big',
+  type: 'big'
 };

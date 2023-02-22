@@ -7,7 +7,7 @@ export default {
   title: 'Payments/CardSelection-Modal',
   component: CardSelection,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   }
 } as ComponentMeta<typeof CardSelection>;
 const Template: ComponentStory<typeof CardSelection> = (args) => (
@@ -18,5 +18,5 @@ const Template: ComponentStory<typeof CardSelection> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  onChange: (data: object) => console.log(data),
+  onChange: (data: object) => console.log(data)
 };

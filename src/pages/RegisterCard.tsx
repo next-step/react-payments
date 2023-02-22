@@ -53,13 +53,13 @@ export default function RegisterCard() {
     const saveData = {
       ...cardState,
       securityCode,
-      cardPassword,
+      cardPassword
     };
 
     const cardList = cardRepository.getItem();
     const newCardList = [
       ...cardList,
-      saveData,
+      saveData
     ];
 
     cardRepository.setItem(newCardList);

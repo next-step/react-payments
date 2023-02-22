@@ -16,12 +16,12 @@ export default function useCard(initialState: CardBoxType = {}) {
         ...prevState,
         ...newState,
         cardNumber,
-        expiredDate,
+        expiredDate
       };
     });
   }, []);
   return {
     cardState,
-    setCardState,
+    setCardState
   };
 }

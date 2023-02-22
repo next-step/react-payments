@@ -18,7 +18,7 @@ export default function CardNumberContainer({ onChange }: RegisterCardType) {
     first: '',
     second: '',
     third: '',
-    fourth: '',
+    fourth: ''
   });
 
   const isValidateCard = useMemo(() => (

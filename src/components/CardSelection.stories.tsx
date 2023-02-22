@@ -7,7 +7,7 @@ export default {
   title: 'Payments/CardSelection',
   component: CardSelection,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   }
 } as ComponentMeta<typeof CardSelection>;
 const Template: ComponentStory<typeof CardSelection> = (args) => <CardSelection {...args} />;

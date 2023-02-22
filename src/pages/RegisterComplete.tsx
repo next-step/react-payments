@@ -18,7 +18,7 @@ export default function RegisterComplete() {
     if (nickname.value.length) {
       const updateCardData = cardList.map((item) => ({
         ...item,
-        nickname: item.cardNumber === cardNumber ? nickname.value : item.nickname,
+        nickname: item.cardNumber === cardNumber ? nickname.value : item.nickname
       }));
 
       cardRepository.setItem(updateCardData);

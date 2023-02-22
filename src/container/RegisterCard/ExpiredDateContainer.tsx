@@ -12,7 +12,7 @@ export default function ExpiredDateContainer({ onChange }: RegisterCardType) {
   const yearRef = useRef(null);
   const [expired, setExpired] = useForm({
     month: '',
-    year: '',
+    year: ''
   });
 
   const expiredDate = useMemo(() => formToArray(expired).join(''), [expired]);

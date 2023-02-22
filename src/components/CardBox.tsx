@@ -4,7 +4,7 @@ import { CardBoxType } from '../domain/types';
 const config = {
   type: {
     'small': 'small-card',
-    'big': 'big-card',
+    'big': 'big-card'
   }
 };
 

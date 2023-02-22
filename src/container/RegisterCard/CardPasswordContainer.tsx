@@ -12,7 +12,7 @@ export default function CardPasswordContainer({ onChange }: RegisterCardType) {
   const passwordRef2 = useRef(null);
   const [cardPassword, setCardPassword] = useForm({
     first: '',
-    second: '',
+    second: ''
   });
 
   useEffect(() => {
