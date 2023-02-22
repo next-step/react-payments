@@ -10,6 +10,11 @@
   border-radius: 0.25rem;
   background-color: #ecebf1;
 }
+.input-title-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .input-title {
   display: flex;

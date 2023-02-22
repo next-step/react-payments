@@ -7,6 +7,7 @@ import {
   CardPassword,
   CardSecurityCode,
 } from '../../components/Card'
+import CardShape from '../../components/Card/CardShape'
 import {
   NUMBER_LENGTH_MAX,
   ONWER_NAME_LENGTH_MAX,
@@ -31,7 +32,7 @@ const CardAdd = () => {
           <h2 className='page-title'>
             <Link to='/'>&lt;</Link>카드 추가
           </h2>
-          <CardDesign
+          <CardShape
             cardNumber={cardNumber.cardNumberData}
             cardExpirationDate={cardExpirationDate.cardExpirationDate}
           />
@@ -59,6 +60,7 @@ const CardAdd = () => {
             </Link>
           </div>
         </div>
+        {/* <CardDesign /> */}
       </div>
     </div>
   )

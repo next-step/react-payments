@@ -11,17 +11,19 @@ const CardExpirationDate = ({
       <span className='input-title'>만료일</span>
       <div className='input-box w-50'>
         <Input
-          id='MM'
+          name='MM'
           value={MM}
-          onBlur={fetchedTwoLettersDataHanlder}
           placeholder='MM'
+          className='input-basic'
+          onBlur={fetchedTwoLettersDataHanlder}
           onChange={cardExpirationDateHandler}
         />
         <Input
-          id='YY'
+          name='YY'
           value={YY}
-          onBlur={fetchedTwoLettersDataHanlder}
           placeholder='YY'
+          className='input-basic'
+          onBlur={fetchedTwoLettersDataHanlder}
           onChange={cardExpirationDateHandler}
         />
       </div>

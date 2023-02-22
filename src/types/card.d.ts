@@ -15,7 +15,7 @@ interface CardNumberProps {
   cardNumberDataHandler: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-interface CardDesignProps {
+interface CardShapeProps {
   cardNumber: NumberData
   cardExpirationDate: CardExpirationDate
 }

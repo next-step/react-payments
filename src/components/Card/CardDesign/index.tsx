@@ -1,21 +1,43 @@
-import { expirationDateMark } from '../../../domain/expirationdateMark'
-import { markCardNumber } from '../../../domain/markCardNumber'
+const CARD_NAME = ['포토 카드', '준 카드', '윤호 카드', '환오 카드', '태은 카드', '준일 카드', '은규 카드']
 
-const CardDesign = ({ cardNumber, cardExpirationDate }: CardDesignProps) => {
+const CardDesign = () => {
   return (
-    <div className='card-box'>
-      <div className='empty-card'>
-        <div className='card-top' />
-        <div className='card-middle'>
-          <div className='small-card__chip' />
-        </div>
-        <div className='card-bottom'>
-          <div className='card-bottom__cardcardNumberberber'>
-            <span className='card-text'>{markCardNumber(cardNumber)}</span>
+    <div className='modal-dimmed'>
+      <div className='modal'>
+        <div className='flex-center'>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot card-color1' />
+            <span className='modal-item-name'>포코 카드</span>
           </div>
-          <div className='card-bottom__info'>
-            <span className='card-text'>NAME</span>
-            <span className='card-text'>{expirationDateMark(cardExpirationDate)}</span>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot card-color2' />
+            <span className='modal-item-name'>준 카드</span>
+          </div>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot card-color3' />
+            <span className='modal-item-name'>현석 카드</span>
+          </div>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot card-color4' />
+            <span className='modal-item-name'>윤호 카드</span>
+          </div>
+        </div>
+        <div className='flex-center'>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot card-color5' />
+            <span className='modal-item-name'>환오 카드</span>
+          </div>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot card-color6' />
+            <span className='modal-item-name'>태은 카드</span>
+          </div>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot card-color7' />
+            <span className='modal-item-name'>준일 카드</span>
+          </div>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot card-color8' />
+            <span className='modal-item-name'>은규 카드</span>
           </div>
         </div>
       </div>

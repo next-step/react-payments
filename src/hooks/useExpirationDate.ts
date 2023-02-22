@@ -4,21 +4,21 @@ import { EXPIRATION_DATE_LENGTH_MAX, INIT_EXPIRATION_VALUE, MONTH_MAX, SINGLE_DI
 export const useExpirationDate = () => {
   const [cardExpirationDate, setCardExpirationDate] = useState(INIT_EXPIRATION_VALUE)
   const cardExpirationDateHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value, id } = e.currentTarget
+    const { value, name } = e.currentTarget
     if (isNaN(Number(value))) return
-    if (id === 'MM' && Number(value) > MONTH_MAX) return
+    if (name === 'MM' && Number(value) > MONTH_MAX) return
     if (value !== '0' && value.length < EXPIRATION_DATE_LENGTH_MAX) {
       setCardExpirationDate((prev) => ({
         ...prev,
-        [id]: value,
+        [name]: value,
       }))
     }
   }
   const fetchedTwoLettersDataHanlder = (e: FocusEvent<HTMLInputElement>) => {
-    const { value, id } = e.currentTarget
+    const { value, name } = e.currentTarget
     setCardExpirationDate((prev) => ({
       ...prev,
-      [id]: Number(value) <= SINGLE_DIGIT_MAX ? `0${Number(value)}` : value,
+      [name]: Number(value) <= SINGLE_DIGIT_MAX ? `0${Number(value)}` : value,
     }))
   }
   return { cardExpirationDate, cardExpirationDateHandler, fetchedTwoLettersDataHanlder }

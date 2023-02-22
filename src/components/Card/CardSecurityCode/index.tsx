@@ -6,7 +6,7 @@ const CardSecurityCode = ({ cardSecurityCode, cardSecurityCodeandler }: CardSecu
   return (
     <div className='input-container'>
       <span className='input-title'>보안코드(CVC/CVV)</span>
-      <Input id='num1' className='input-basic w-25' type='password' onChange={cardSecurityCodeandler} value={num1} />
+      <Input name='num1' className='input-basic w-25' type='password' onChange={cardSecurityCodeandler} value={num1} />
     </div>
   )
 }

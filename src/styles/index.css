@@ -3,6 +3,7 @@
 @import './button.css';
 @import './modal.css';
 @import './utils.css';
+@import './cardColors.css';
 
 body {
   height: 100vh;

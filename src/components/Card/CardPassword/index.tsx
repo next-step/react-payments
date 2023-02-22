@@ -6,10 +6,24 @@ const CardPassword = ({ cardPassword, cardPasswordHandler }: CardPasswordProps) 
   return (
     <div className='input-container'>
       <span className='input-title'>카드 비밀번호</span>
-      <Input id='num1' className='input-basic w-15' type='password' onChange={cardPasswordHandler} value={num1} />
-      <Input id='num2' className='input-basic w-15' type='password' onChange={cardPasswordHandler} value={num2} />
-      <Input id='num3' className='input-basic w-15' type='password' onChange={cardPasswordHandler} value='0' />
-      <Input id='num4' className='input-basic w-15' type='password' onChange={cardPasswordHandler} value='0' />
+      <Input name='num1' className='input-basic w-15' type='password' onChange={cardPasswordHandler} value={num1} />
+      <Input name='num2' className='input-basic w-15' type='password' onChange={cardPasswordHandler} value={num2} />
+      <Input
+        name='num3'
+        className='input-basic w-15'
+        type='password'
+        onChange={cardPasswordHandler}
+        value='0'
+        disabled
+      />
+      <Input
+        name='num4'
+        className='input-basic w-15'
+        type='password'
+        onChange={cardPasswordHandler}
+        value='0'
+        disabled
+      />
     </div>
   )
 }
