@@ -28,6 +28,7 @@
     "@typescript-eslint/eslint-plugin": "^5.51.0",
     "@typescript-eslint/parser": "^5.51.0",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "chromatic": "^6.17.0",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.6.0",
     "prettier": "^2.8.3",
@@ -69,5 +70,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "_id": "payment@0.1.0"
 }
