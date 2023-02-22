@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import {ROUTE_PATH} from "../src/constants/page"
 import CardRegistrationPage from "../src/pages/CardRegistrationPage";
 import RegistedCardListPage from "../src/pages/RegistedCardListPage";
 import CardRegistrationCompletedPage from "../src/pages/CardRegistrationCompletedPage";
@@ -8,15 +9,15 @@ import "./styles/index.css";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: ROUTE_PATH.CARD_REGISTRATION,
     element: <CardRegistrationPage></CardRegistrationPage>,
   },
   {
-    path: "registed-card-list",
+    path: ROUTE_PATH.REGISTED_CARD_LIST,
     element: <RegistedCardListPage />,
   },
   {
-    path: "card-registration-completed",
+    path: ROUTE_PATH.CARD_REGISTRATION_COMPLETED,
     element: <CardRegistrationCompletedPage />,
   },
 ]);

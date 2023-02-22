@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import CardBox from "../components/CardBox";
 
+import {ROUTE_PATH} from "../constants/page"
 import CardNumberInput from "../components/CardNumberInput";
 import CardPasswordInput from "../components/CardPasswordInput";
 import CardExpirationInput from "../components/CardExpirationInput";
@@ -34,7 +35,7 @@ const [cardPassword, handleCardPassword] = useCardPassword();
   return (
     <>
       <h2 className="page-title">
-        <Link className="button-text" to={`/registed-card-list`}>
+        <Link className="button-text" to={ROUTE_PATH.REGISTED_CARD_LIST}>
           &lt;
         </Link>
         <span className="button-text">카드 추가</span>
@@ -49,7 +50,7 @@ const [cardPassword, handleCardPassword] = useCardPassword();
       <CardSecurityCodeInput cardSecurityCode={cardSecurityCode} onChange={handleCardSecurityCode}></CardSecurityCodeInput>
       <CardPasswordInput cardPassword={cardPassword} onChange={handleCardPassword}/>
 
-      <Link className="button-text" to={`/card-registration-completed`}>
+      <Link className="button-text" to={ROUTE_PATH.CARD_REGISTRATION_COMPLETED}>
         <div className="button-box">
           <span className="button-text">다음</span>
         </div>
