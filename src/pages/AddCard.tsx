@@ -48,7 +48,7 @@ const AddCard = () => {
 
     const month = currentValue.slice(0, 2);
     if (month < JANUARY || month > DECEMBER) {
-      alert('유효하지 않아요');
+      alert(MONTH_VALIDITY_MESSAGE);
       expirationDateRef.current.value = '';
       return;
     }
@@ -227,3 +227,4 @@ const PrevIcon = () => {
 
 const JANUARY = '01';
 const DECEMBER = '12';
+const MONTH_VALIDITY_MESSAGE = '유효하지 않아요';
