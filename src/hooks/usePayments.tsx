@@ -97,7 +97,7 @@ export const usePayments = () => {
   const handleCardNicknameAddClick = ({ nickname }: { nickname?: string }) => {
     const copiedList = [...cardList];
     copiedList[copiedList.length - 1] = {
-      ...copiedList[copiedList.length - 1],
+      ...copiedList.at(-1),
       nickname,
     };
     setCardList(copiedList);
