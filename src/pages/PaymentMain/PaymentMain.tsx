@@ -1,10 +1,10 @@
 import React from 'react'
 import { Header } from 'components/molecules/Header'
-import { CardType } from 'models/card.model'
+import { CardType, CardTypeKeys } from 'models/card.model'
 import { CardList } from 'components/molecules/CardList'
 
 type PaymentMainProps = {
-  onClick: () => void
+  onClick: (card?: CardType) => void
   cards: CardType[]
 }
 

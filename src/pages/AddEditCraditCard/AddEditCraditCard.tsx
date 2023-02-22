@@ -11,14 +11,15 @@ import './AddEditCraditCard.css'
 type AddEditCraditCardProps = {
   onNavigate: () => void
   addCard: (card: CardType) => void
+  initCardValue?: CardType
 }
 
 const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
   onNavigate,
   addCard,
+  initCardValue = INIT_CARD_VALUE,
 }) => {
-  const { card, resetCard, updateCard, validator } =
-    useCardItem(INIT_CARD_VALUE)
+  const { card, resetCard, updateCard, validator } = useCardItem(initCardValue)
   const [isComplete, setIsComplete] = useState(false)
 
   const completeCardRegistor = () => {

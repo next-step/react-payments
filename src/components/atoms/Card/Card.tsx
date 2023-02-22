@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardType } from 'models/card.model'
+import { CardType, CardTypeKeys } from 'models/card.model'
 import { CARD_COMPANYS, EMPTY_CARD_VIEW_ID } from 'constants/card'
 import { UiSize } from 'models/ui.model'
 import './Card.css'
@@ -8,7 +8,7 @@ type CardProps = {
   card: CardType
   size: Omit<UiSize, 'medium'>
   isShowNickname?: boolean
-  onClick?: () => void
+  onClick?: (card?: CardType) => void
 }
 
 const Card: React.FC<CardProps> = ({
@@ -19,6 +19,15 @@ const Card: React.FC<CardProps> = ({
 }) => {
   const cardCompnayInfo = CARD_COMPANYS[card.cardCompanyCode]
   const [first, second, third, fourth] = card.cardNumber.split('-')
+
+  const onUpdateOrAddCard = (card: CardType) => {
+    if (!onClick) return
+    if (card.id === EMPTY_CARD_VIEW_ID) {
+      onClick()
+    } else {
+      onClick(card)
+    }
+  }
 
   const cardLayout =
     card.id === EMPTY_CARD_VIEW_ID ? (
@@ -71,7 +80,7 @@ const Card: React.FC<CardProps> = ({
         className={`card-btn ${
           card.id === EMPTY_CARD_VIEW_ID ? 'empty-card' : ''
         }`}
-        onClick={onClick}
+        onClick={() => onUpdateOrAddCard(card)}
         disabled={Boolean(!onClick)}
       >
         {cardLayout}

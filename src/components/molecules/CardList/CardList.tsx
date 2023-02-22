@@ -6,7 +6,7 @@ import { ADD_CARD_VIEW_VALUE } from 'constants/card'
 
 type CardListProps = {
   cards: CardType[]
-  onClick: () => void
+  onClick: (card?: CardType) => void
   isIncludeAddCardView?: boolean
 }
 
