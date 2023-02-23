@@ -1,1 +1,1 @@
-export { default } from './NextButtonBox'
+export { default } from './ButtonBox'

@@ -1,5 +1,5 @@
 import { Card } from '@/components/card'
-import { NextButtonBox, PageTitle } from '@/components/layouts'
+import { ButtonBox, PageTitle } from '@/components/layouts'
 import { CardForm } from '@/pages/card-add/card-form'
 import { useCardInfo } from '@/pages/card-add/card-form/hooks'
 
@@ -22,7 +22,7 @@ function CardAdd() {
           <CardForm.CardSecurityCode securityCode={cardInfo.securityCode} handleChange={handleSecurityCode} />
           <CardForm.CardPassword password={cardInfo.password} handleChange={handlePassword} />
         </CardForm>
-        <NextButtonBox to="/card-completed" storage={cardInfo} />
+        <ButtonBox to="/card-completed" storage={cardInfo} text="다음" />
       </div>
     </div>
   )

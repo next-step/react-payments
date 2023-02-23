@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom'
 type Destination = '/card-add' | '/card-completed' | '/'
 
 interface ButtonBoxProps {
-  additionalClassNames?: '' | 'mt-50'
-  text?: '다음' | '이전'
+  additionalClassNames?: string
+  text: string
   to: Destination
   storage?: unknown
 }
 
-const ButtonBox = ({ additionalClassNames = '', text = '다음', to, storage }: ButtonBoxProps) => {
+const ButtonBox = ({ additionalClassNames = '', text, to, storage }: ButtonBoxProps) => {
   const navigate = useNavigate()
 
   const goToNextPage = (to: Destination) => {
