@@ -37,9 +37,6 @@ const AddCard = () => {
   const handleCardPassword = (index: number) =>
     handleInputChange(index, cardPasswordRefs, 1);
 
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) =>
-    setName(e.target.value);
-
   const checkExpiration = () => {
     if (!expirationDateRef.current) return;
 
@@ -156,7 +153,7 @@ const AddCard = () => {
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           maxLength={30}
           value={name}
-          onChange={handleNameChange}
+          onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div className="input-container">
