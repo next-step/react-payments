@@ -58,7 +58,9 @@ export const usePayments = () => {
         }
         return formatNumber({ input, nth: 3, formatter: "/" });
       case CARD_INFO.CVC:
-      case CARD_INFO.EXPIRY:
+      case CARD_INFO.PASSWORD1:
+      case CARD_INFO.PASSWORD2:
+      case CARD_INFO.NICKNAME:
       default:
         return input;
     }
