@@ -10,6 +10,10 @@ interface CardExpirationDate {
   YY: string
 }
 
+interface CardDesignProps {
+  cardDesignNameHandler: (e: MouseEvent<HTMLButtonElement>) => void
+}
+
 interface CardNumberProps {
   cardNumberData: NumberData
   cardNumberDataHandler: (e: ChangeEvent<HTMLInputElement>) => void
@@ -18,6 +22,7 @@ interface CardNumberProps {
 interface CardShapeProps {
   cardNumber: NumberData
   cardExpirationDate: CardExpirationDate
+  cardDesign: string
 }
 
 interface CardExpirationDateProps {

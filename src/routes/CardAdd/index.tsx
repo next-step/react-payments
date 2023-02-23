@@ -15,11 +15,13 @@ import {
   PASSWORD_LENGTH_MAX,
   SECURITY_CODE_LENGTH_MAX,
 } from '../../constants/Card'
+import { useCardDesign } from '../../hooks/useCardDesign'
 import { useCardNumberData } from '../../hooks/useCardNumber'
 import { useExpirationDate } from '../../hooks/useExpirationDate'
 import { useOwnerName } from '../../hooks/useOwnerName'
 
 const CardAdd = () => {
+  const cardDesign = useCardDesign()
   const cardNumber = useCardNumberData(NUMBER_LENGTH_MAX)
   const cardExpirationDate = useExpirationDate()
   const ownerName = useOwnerName(OWNER_NAME_LENGTH_MAX)
@@ -36,8 +38,9 @@ const CardAdd = () => {
           <CardShape
             cardNumber={cardNumber.cardNumberData}
             cardExpirationDate={cardExpirationDate.cardExpirationDate}
+            cardDesign={cardDesign.cardDesign}
           />
-          <Button>카드선택</Button>
+          <Button onClick={cardDesign.toggleModalHandler}>카드선택</Button>
           <CardNumber
             cardNumberData={cardNumber.cardNumberData}
             cardNumberDataHandler={cardNumber.cardNumberDataHandler}
@@ -62,7 +65,7 @@ const CardAdd = () => {
             </Link>
           </div>
         </div>
-        {/* <CardDesign /> */}
+        {cardDesign.toggleModal && <CardDesign cardDesignNameHandler={cardDesign.cardDesignNameHandler} />}
       </div>
     </div>
   )
