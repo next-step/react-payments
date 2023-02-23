@@ -7,7 +7,7 @@ import { MobileTemplate } from 'templates/MobileTemplate'
 import { action } from '@storybook/addon-actions'
 
 export default {
-  title: 'ui/Header',
+  title: 'components/Header',
   component: Header,
   parameters: {
     componentSubtitle: '헤더 컴포넌트',

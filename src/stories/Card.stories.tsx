@@ -6,7 +6,7 @@ import { action } from '@storybook/addon-actions'
 import { ADD_CARD_VIEW_VALUE, CARD_COMPNAYS_CODE } from 'constants/card'
 
 export default {
-  title: 'ui/Card',
+  title: 'components/Card',
   component: Card,
   parameters: {
     componentSubtitle: '카드 컴포넌트',

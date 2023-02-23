@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Loading } from 'components/atoms/Loading'
 
 export default {
-  title: 'ui/Loading',
+  title: 'components/Loading',
   component: Loading,
   parameters: {
     componentSubtitle: '로딩 컴포넌트',
