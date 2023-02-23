@@ -41,41 +41,46 @@ export const usePayments = () => {
     id: string,
     maxLength: number
   ): string => {
-    if (input && input.length < maxLength) {
-      switch (id) {
-        case CARD_INFO.NUMBER:
-          return formatNumber({ input, nth: 5 });
-        case CARD_INFO.EXPIRY:
-          if (input.length === 2) {
-            return formatNumber({
-              input: monthConverter(input),
-              nth: 3,
-              formatter: "/",
-            });
-          }
-          return formatNumber({ input, nth: 3, formatter: "/" });
-      }
+    if (!input || input.length >= maxLength) {
+      return input;
     }
-    return input;
+
+    switch (id) {
+      case CARD_INFO.NUMBER:
+        return formatNumber({ input, nth: 5 });
+      case CARD_INFO.EXPIRY:
+        if (input.length === 2) {
+          return formatNumber({
+            input: monthConverter(input),
+            nth: 3,
+            formatter: "/",
+          });
+        }
+        return formatNumber({ input, nth: 3, formatter: "/" });
+      default:
+        return input;
+    }
   };
 
   const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, id, maxLength } = e.target;
 
-    if (validateInput(value, id)) {
-      const formedValue = formatInput(value, id, maxLength);
+    if (!validateInput(value, id)) {
+      return;
+    }
 
-      if (newCardInfo[id as keyof CardInput]) {
-        const copiedNewCardInfo: CardInput = {
-          ...newCardInfo,
-          [id]: formedValue,
-        };
-        setNewCardInfo(copiedNewCardInfo);
-      } else {
-        const copiedNewCardInfo: CardInput = { ...newCardInfo };
-        copiedNewCardInfo[id as keyof CardInput] = formedValue;
-        setNewCardInfo(copiedNewCardInfo);
-      }
+    const formedValue = formatInput(value, id, maxLength);
+
+    if (newCardInfo[id as keyof CardInput]) {
+      const copiedNewCardInfo: CardInput = {
+        ...newCardInfo,
+        [id]: formedValue,
+      };
+      setNewCardInfo(copiedNewCardInfo);
+    } else {
+      const copiedNewCardInfo: CardInput = { ...newCardInfo };
+      copiedNewCardInfo[id as keyof CardInput] = formedValue;
+      setNewCardInfo(copiedNewCardInfo);
     }
   };
 
