@@ -3,6 +3,7 @@ import { Input, InputContainer } from '../../components/form';
 import { useCallback, useState } from 'react';
 import { IRegisterCard } from '../../pages/RegisterCard';
 import { Validator } from '../../domain';
+import { onlyNumber } from '../../utils/filter';
 
 const MAX_LENGTH = 2;
 const VALIDATE_ERROR = {
@@ -13,10 +14,13 @@ const VALIDATE_ERROR = {
 export default function ExpiredDateContainer({ onChange }: IRegisterCard) {
   const { isPreviousDate } = Validator();
   const [errorMessage, setErrorMessage] = useState('');
-  const [expiredRef, getRefs] = useRefs<HTMLInputElement>(['month', 'year']);
+  const [expiredDateRef, getExpiredDateRefs] = useRefs<HTMLInputElement>(['month', 'year']);
 
   const handleChange = useCallback(() => {
-    const expiredDate = getRefs().map((item) => item.value);
+    const expiredDate = getExpiredDateRefs().map((item) => {
+      item.value = onlyNumber(item.value);
+      return item.value;
+    });
     const [month, year] = expiredDate;
 
     onChange({ expiredDate: expiredDate.join('') });
@@ -32,15 +36,15 @@ export default function ExpiredDateContainer({ onChange }: IRegisterCard) {
   return (
     <InputContainer title="만료일" className="w-50" errorMessage={errorMessage}>
       <Input
-        ref={expiredRef.month}
+        ref={expiredDateRef.month}
         placeholder="MM"
-        nextFocus={() => expiredRef.year.current?.focus()}
+        nextFocus={() => expiredDateRef.year.current?.focus()}
         maxLength={MAX_LENGTH}
         onChange={handleChange}
       />
       /
       <Input
-        ref={expiredRef.year}
+        ref={expiredDateRef.year}
         placeholder="YY"
         maxLength={MAX_LENGTH}
         onChange={handleChange}

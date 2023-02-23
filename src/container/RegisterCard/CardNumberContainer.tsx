@@ -13,8 +13,7 @@ export default function CardNumberContainer({ onChange }: IRegisterCard) {
   const [cardNumberRef, getCardRefs] = useRefs<HTMLInputElement>([0, 1, 2, 3]);
 
   const handleChange = useCallback(() => {
-    const cardRefs = getCardRefs();
-    const cardNumber = cardRefs.map((item) => {
+    const cardNumber = getCardRefs().map((item) => {
       item.value = onlyNumber(item.value);
       return item.value;
     }).join('');
