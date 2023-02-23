@@ -1,3 +1,4 @@
+import { BackButton } from '@/components/button'
 import { ButtonBox, PageTitle } from '@/components/layouts'
 
 function CardCompleted() {
@@ -5,7 +6,7 @@ function CardCompleted() {
     <div className="root">
       <div className="app flex-column-center">
         <div className="flex-center">
-          <PageTitle addtionalClassName="mb-10" title="카드등록이 완료되었습니다." />
+          <PageTitle buttonElement={<BackButton />} addtionalClassName="mb-10" title="카드등록이 완료되었습니다." />
         </div>
         <div className="card-box">
           <div className="big-card">

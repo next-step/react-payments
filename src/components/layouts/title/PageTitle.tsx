@@ -1,16 +1,19 @@
-import { useNavigate } from 'react-router-dom'
+import { ReactNode } from 'react'
+
+import { pageTitles } from '@/contants'
+
+type Title = (typeof pageTitles)[number]
 
 interface PageTitleProps {
-  title: '카드 추가' | '카드등록이 완료되었습니다.' | '보유 카드'
-  addtionalClassName?: '' | 'mb-10'
-  hasBackButton?: boolean
+  title: Title
+  addtionalClassName?: string
+  buttonElement?: ReactNode
 }
 
-const PageTitle = ({ title, addtionalClassName = '', hasBackButton = true }: PageTitleProps) => {
-  const navigate = useNavigate()
+const PageTitle = ({ title, addtionalClassName, buttonElement }: PageTitleProps) => {
   return (
     <h2 className={`page-title ${addtionalClassName}`}>
-      {hasBackButton && <button onClick={() => navigate(-1)}>&#60;</button>}
+      {buttonElement}
       <span>{title}</span>
     </h2>
   )

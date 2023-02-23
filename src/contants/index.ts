@@ -1,0 +1,1 @@
+export { pageTitles } from './title'

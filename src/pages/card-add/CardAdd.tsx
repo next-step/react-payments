@@ -1,3 +1,4 @@
+import { BackButton } from '@/components/button'
 import { Card } from '@/components/card'
 import { ButtonBox, PageTitle } from '@/components/layouts'
 import { CardForm } from '@/pages/card-add/card-form'
@@ -9,7 +10,7 @@ function CardAdd() {
   return (
     <div className="root">
       <div className="app">
-        <PageTitle title="카드 추가" />
+        <PageTitle title="카드 추가" buttonElement={<BackButton />} />
         <Card {...cardInfo} />
         <CardForm>
           <CardForm.CardNumbers numbers={cardInfo.cardNumbers} handleChange={handleNumber} />
