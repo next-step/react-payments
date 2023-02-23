@@ -17,17 +17,21 @@ function Card({ cardNumbers, name, expiratedYear, expiratedMonth }: CardProps) {
         <div className="card-middle">
           <div className="small-card__chip" />
           <div className="card-number">
-            <span>{`${first} ${second} ${getConvertedStringsByStars(
-              third,
-            )} ${getConvertedStringsByStars(fourth)}`}</span>
+            <span>
+              {`${first} 
+                ${second} 
+                ${getConvertedStringsByStars(third)} 
+                ${getConvertedStringsByStars(fourth)}`}
+            </span>
           </div>
         </div>
         <div className="card-bottom">
           <div className="card-bottom__info">
             <span className="card-text">{name || 'Name'}</span>
-            <span className="card-text">{`${expiratedMonth || 'MM'} / ${
-              expiratedYear || 'YY'
-            }`}</span>
+            <span className="card-text">
+              {`${expiratedMonth || 'MM'} 
+              / ${expiratedYear || 'YY'}`}
+            </span>
           </div>
         </div>
       </div>
