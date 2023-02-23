@@ -3,11 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Card } from 'components/atoms/Card'
 import { UI_SIZE } from 'constants/ui.constant'
 import { action } from '@storybook/addon-actions'
-import {
-  ADD_CARD_VIEW_VALUE,
-  CARD_COMPNAYS_CODE,
-  INIT_CARD_VALUE,
-} from 'constants/card'
+import { ADD_CARD_VIEW_VALUE, CARD_COMPNAYS_CODE } from 'constants/card'
 
 export default {
   title: 'Card',
