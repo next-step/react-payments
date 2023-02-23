@@ -2,20 +2,20 @@ import { useEffect, RefObject } from 'react'
 
 interface InputRef {
   ref: RefObject<HTMLInputElement>
-  maxLength: number
+  isFocus: boolean
 }
 
 //Todo: 입력하면 바로 다음 Input에 포커싱 될 수 있게
-const useInputFocus = (inputs: InputRef[]) => {
+const useSequentialInputFocus = (inputs: InputRef[]) => {
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent, index: number) => {
       const {
-        maxLength,
+        isFocus,
         ref: { current: input },
       } = inputs[index]
 
       if (event.key === 'Backspace') return
-      if (!input || input.value.length !== maxLength) return
+      if (!input || !isFocus) return
 
       const nextInput = inputs[index + 1]?.ref.current
       if (!nextInput) return
@@ -34,4 +34,4 @@ const useInputFocus = (inputs: InputRef[]) => {
   }, [inputs])
 }
 
-export default useInputFocus
+export default useSequentialInputFocus

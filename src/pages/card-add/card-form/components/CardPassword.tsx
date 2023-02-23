@@ -1,6 +1,6 @@
 import { useRef, ChangeEvent } from 'react'
 
-import { useInputFocus } from '@/pages/card-add/card-form/hooks'
+import { useSequentialInputFocus } from '@/pages/card-add/card-form/hooks'
 
 interface CardPasswordProps {
   password: { first: string; second: string }
@@ -10,9 +10,9 @@ interface CardPasswordProps {
 const CardPassword = ({ password, handleChange }: CardPasswordProps) => {
   const firstRef = useRef<HTMLInputElement>(null)
   const secondRef = useRef<HTMLInputElement>(null)
-  useInputFocus([
-    { ref: firstRef, maxLength: 1 },
-    { ref: secondRef, maxLength: 1 },
+  useSequentialInputFocus([
+    { ref: firstRef, isFocus: password.first.length === 1 },
+    { ref: secondRef, isFocus: password.second.length === 1 },
   ])
   return (
     <div className="input-container">

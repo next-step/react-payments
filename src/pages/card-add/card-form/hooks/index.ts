@@ -1,2 +1,2 @@
 export { default as useCardInfo } from './useCardInfo'
-export { default as useInputFocus } from './useInputFocus'
+export { default as useSequentialInputFocus } from './useSequentialInputFocus'

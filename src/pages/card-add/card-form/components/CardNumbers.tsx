@@ -1,6 +1,6 @@
 import { useRef, ChangeEvent } from 'react'
 
-import { useInputFocus } from '@/pages/card-add/card-form/hooks'
+import { useSequentialInputFocus } from '@/pages/card-add/card-form/hooks'
 
 interface CardNumbersProps {
   numbers: {
@@ -18,11 +18,11 @@ const CardNumbers = ({ numbers, handleChange }: CardNumbersProps) => {
   const secondRef = useRef<HTMLInputElement>(null)
   const thirdRef = useRef<HTMLInputElement>(null)
   const fourthRef = useRef<HTMLInputElement>(null)
-  useInputFocus([
-    { ref: firstRef, maxLength: 4 },
-    { ref: secondRef, maxLength: 4 },
-    { ref: thirdRef, maxLength: 4 },
-    { ref: fourthRef, maxLength: 4 },
+  useSequentialInputFocus([
+    { ref: firstRef, isFocus: numbers.first.length === 4 },
+    { ref: secondRef, isFocus: numbers.second.length === 4 },
+    { ref: thirdRef, isFocus: numbers.third.length === 4 },
+    { ref: fourthRef, isFocus: numbers.fourth.length === 4 },
   ])
 
   const { first, second, third } = numbers
