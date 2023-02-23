@@ -1,5 +1,6 @@
 import Card from "../../components/Card";
 import CardNumber from "../../components/Form/CardNumber";
+import type { CardNumbers } from "../../components/Form/CardNumber";
 import ExpiredDate from "../../components/Form/ExpiredDate";
 import UserName from "../../components/Form/UserName";
 import Code from "../../components/Form/Code";
@@ -23,8 +24,8 @@ const INPUT_NAMES = [
   "password2",
 ];
 
-const formatNumber = (number: number) => {
-  return number.toString().replaceAll(/[0-9]/g, "*");
+const formatNumber = (number: string) => {
+  return number.replaceAll(/[0-9]/g, "*");
 };
 
 const checkValid = (eventTarget: any) => {
@@ -78,8 +79,10 @@ function Add() {
     }
   }, [bankId]);
 
-  const onCardNumberChange = (cardNumbers: number[]) => {
-    const hasCardNumber = cardNumbers.some((cardNumber) => cardNumber);
+  const onCardNumberChange = (cardNumbers: CardNumbers) => {
+    const hasCardNumber = Object.values(cardNumbers).some(
+      (cardNumber) => cardNumber
+    );
     const formattedCardNumber = hasCardNumber
       ? `${cardNumbers[0]}-${cardNumbers[1]}-${formatNumber(
           cardNumbers[2]
