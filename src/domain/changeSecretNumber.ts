@@ -1,8 +1,8 @@
-export const changeSerectNumber = (number: string) => {
-  const serectNumber = number
+export const changeSecretNumber = (number: string) => {
+  const secretNumber = number
     .split('')
     .map((data) => data.replace(data, '*'))
     .join('')
 
-  return serectNumber
+  return secretNumber
 }

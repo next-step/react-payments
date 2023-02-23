@@ -1,8 +1,7 @@
 import { ButtonHTMLAttributes } from 'react'
-import { ButtonProps } from '../../../types/element.d'
 
-const Button = ({ ...props }: ButtonHTMLAttributes<HTMLButtonElement>, { value }: ButtonProps) => {
-  return <button {...props}>{value}</button>
+const Button = ({ children, ...props }: ButtonHTMLAttributes<HTMLButtonElement>) => {
+  return <button {...props}>{children}</button>
 }
 
 export default Button

@@ -3,7 +3,7 @@ import { Input } from '../../Element'
 const CardExpirationDate = ({
   cardExpirationDate,
   cardExpirationDateHandler,
-  fetchedTwoLettersDataHanlder,
+  fetchedTwoLettersDataHandler,
 }: CardExpirationDateProps) => {
   const { MM, YY } = cardExpirationDate
   return (
@@ -15,7 +15,7 @@ const CardExpirationDate = ({
           value={MM}
           placeholder='MM'
           className='input-basic'
-          onBlur={fetchedTwoLettersDataHanlder}
+          onBlur={fetchedTwoLettersDataHandler}
           onChange={cardExpirationDateHandler}
         />
         <Input
@@ -23,7 +23,7 @@ const CardExpirationDate = ({
           value={YY}
           placeholder='YY'
           className='input-basic'
-          onBlur={fetchedTwoLettersDataHanlder}
+          onBlur={fetchedTwoLettersDataHandler}
           onChange={cardExpirationDateHandler}
         />
       </div>

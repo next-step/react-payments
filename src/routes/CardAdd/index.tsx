@@ -8,20 +8,21 @@ import {
   CardSecurityCode,
 } from '../../components/Card'
 import CardShape from '../../components/Card/CardShape'
+import Button from '../../components/Element/Button'
 import {
   NUMBER_LENGTH_MAX,
-  ONWER_NAME_LENGTH_MAX,
+  OWNER_NAME_LENGTH_MAX,
   PASSWORD_LENGTH_MAX,
   SECURITY_CODE_LENGTH_MAX,
 } from '../../constants/Card'
 import { useCardNumberData } from '../../hooks/useCardNumber'
 import { useExpirationDate } from '../../hooks/useExpirationDate'
-import { useOwnerName } from '../../hooks/useOnwerName'
+import { useOwnerName } from '../../hooks/useOwnerName'
 
 const CardAdd = () => {
   const cardNumber = useCardNumberData(NUMBER_LENGTH_MAX)
   const cardExpirationDate = useExpirationDate()
-  const ownerName = useOwnerName(ONWER_NAME_LENGTH_MAX)
+  const ownerName = useOwnerName(OWNER_NAME_LENGTH_MAX)
   const cardSecurityCode = useCardNumberData(SECURITY_CODE_LENGTH_MAX)
   const cardPassword = useCardNumberData(PASSWORD_LENGTH_MAX)
 
@@ -36,6 +37,7 @@ const CardAdd = () => {
             cardNumber={cardNumber.cardNumberData}
             cardExpirationDate={cardExpirationDate.cardExpirationDate}
           />
+          <Button>카드선택</Button>
           <CardNumber
             cardNumberData={cardNumber.cardNumberData}
             cardNumberDataHandler={cardNumber.cardNumberDataHandler}
@@ -43,12 +45,12 @@ const CardAdd = () => {
           <CardExpirationDate
             cardExpirationDate={cardExpirationDate.cardExpirationDate}
             cardExpirationDateHandler={cardExpirationDate.cardExpirationDateHandler}
-            fetchedTwoLettersDataHanlder={cardExpirationDate.fetchedTwoLettersDataHanlder}
+            fetchedTwoLettersDataHandler={cardExpirationDate.fetchedTwoLettersDataHanlder}
           />
-          <CardOwnerName ownerName={ownerName.onwerName} ownerNameValueHandler={ownerName.onwerNameValueHandler} />
+          <CardOwnerName ownerName={ownerName.ownerName} ownerNameValueHandler={ownerName.ownerNameValueHandler} />
           <CardSecurityCode
             cardSecurityCode={cardSecurityCode.cardNumberData}
-            cardSecurityCodeandler={cardSecurityCode.cardNumberDataHandler}
+            cardSecurityCodeHandler={cardSecurityCode.cardNumberDataHandler}
           />
           <CardPassword
             cardPassword={cardPassword.cardNumberData}

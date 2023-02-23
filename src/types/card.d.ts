@@ -23,7 +23,7 @@ interface CardShapeProps {
 interface CardExpirationDateProps {
   cardExpirationDate: CardExpirationDate
   cardExpirationDateHandler: (e: ChangeEvent<HTMLInputElement>) => void
-  fetchedTwoLettersDataHanlder: (e: FocusEvent<HTMLInputElement>) => void
+  fetchedTwoLettersDataHandler: (e: FocusEvent<HTMLInputElement>) => void
 }
 
 interface CardOwnerNameProps {
@@ -33,7 +33,7 @@ interface CardOwnerNameProps {
 
 interface CardSecurityCodeProps {
   cardSecurityCode: NumberData
-  cardSecurityCodeandler: (e: ChangeEvent<HTMLInputElement>) => void
+  cardSecurityCodeHandler: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 interface CardPasswordProps {
