@@ -1,32 +1,42 @@
-import React from 'react';
+import React, { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import NewCardInputContainer from './NewCardInputContainer';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+type ButtonProps = DetailedHTMLProps<
+  InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
+
+interface InputProps extends ButtonProps {
   label: string;
   widthSize?: 'lg' | 'md' | 'sm';
   textAlign?: 'center' | 'left';
-  hasInputCount?: boolean;
+  inputLimitCount?: number;
   inputCount?: number;
 }
 
-const Input = (props: InputProps) => {
-  const { label, widthSize, textAlign, hasInputCount, inputCount, ...rest } =
-    props;
-  return (
-    <div className={`input-container ${widthSize}`}>
-      <div className="input-label">
-        {label}
-        {hasInputCount && <div className="input-count">{inputCount} / 30</div>}
-      </div>
-      <input className="input-form" {...rest} style={{ textAlign }} />
-    </div>
-  );
-};
+const NewCardInput = ({
+  label,
+  widthSize,
+  textAlign,
+  inputLimitCount,
+  inputCount,
+  ...rest
+}: InputProps) => (
+  <NewCardInputContainer
+    widthSize={widthSize}
+    inputLabel={label}
+    inputLimitCount={inputLimitCount}
+    inputCount={inputCount}
+  >
+    <input className="input-form" {...rest} style={{ textAlign }} />
+  </NewCardInputContainer>
+);
 
-Input.defaultProps = {
+NewCardInput.defaultProps = {
   widthSize: 'lg',
   textAlign: 'center',
-  hasInputCount: false,
+  inputLimitCount: 0,
   inputCount: 0,
 };
 
-export default Input;
+export default NewCardInput;

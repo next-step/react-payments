@@ -3,8 +3,10 @@ import Card from 'src/components/Card/Card';
 import CardPasswordInput from 'src/components/CardPasswordInput/CardPasswordInput';
 import Header from 'src/components/Header/Header';
 import NewCardInput from 'src/components/NewCardInput/NewCardInput';
-import TextButton from 'src/components/TextButton';
+import TextButton from 'src/components/TextButton/TextButton';
 import useNewCardForm from 'src/hooks/useNewCardForm';
+
+const CUSTOMER_NAME_LIMIT_COUNT = 30;
 
 const CardNew = () => {
   const navigate = useNavigate();
@@ -48,9 +50,9 @@ const CardNew = () => {
         id="input-customer-name"
         value={state.customerName}
         onChange={handlers.handleChangeCustomerName}
-        hasInputCount
+        inputLimitCount={CUSTOMER_NAME_LIMIT_COUNT}
         inputCount={state.customerName.length}
-        maxLength={30}
+        maxLength={CUSTOMER_NAME_LIMIT_COUNT}
       />
       <NewCardInput
         label="보안 코드(CVC/CVV)"

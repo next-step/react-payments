@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import '../../styles.css';
-import TextButton from '.';
+import TextButton from './TextButton';
 
 export default {
   title: 'TextButton',

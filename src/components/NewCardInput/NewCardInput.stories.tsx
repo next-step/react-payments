@@ -32,6 +32,6 @@ Default.args = {
   label: 'Label',
   widthSize: 'lg',
   textAlign: 'center',
-  hasInputCount: false,
+  inputLimitCount: 0,
   inputCount: 0,
 };

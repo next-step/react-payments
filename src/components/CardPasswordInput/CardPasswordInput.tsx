@@ -1,4 +1,6 @@
 import React from 'react';
+import { NewCardInputContainer } from '../NewCardInput';
+import SingleInput from './SingleInput';
 
 type TPasswordProps = {
   value: string;
@@ -16,37 +18,20 @@ const CardPasswordInput = ({
   secondPasswordProps,
   label,
 }: CardPasswordInputProps) => (
-  <div className="input-container">
-    <div className="input-label">{label}</div>
+  <NewCardInputContainer inputLabel={label}>
     <div className="card-password-input-container">
-      <input
-        className="card-password-input"
-        type="password"
-        maxLength={1}
+      <SingleInput
         value={firstPasswordProps.value}
         onChange={firstPasswordProps.onChange}
       />
-      <input
-        className="card-password-input"
-        type="password"
-        maxLength={1}
+      <SingleInput
         value={secondPasswordProps.value}
         onChange={secondPasswordProps.onChange}
       />
-      <input
-        value="*"
-        type="password"
-        className="card-password-input disabled"
-        disabled
-      />
-      <input
-        value="*"
-        type="password"
-        className="card-password-input disabled"
-        disabled
-      />
+      <SingleInput value="*" disabled />
+      <SingleInput value="*" disabled />
     </div>
-  </div>
+  </NewCardInputContainer>
 );
 
 export default CardPasswordInput;

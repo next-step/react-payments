@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import EmptyCard from 'src/components/EmptyCard/EmptyCard';
-import TextButton from 'src/components/TextButton';
+import TextButton from 'src/components/TextButton/TextButton';
 
 const CardAlias = () => {
   const navigate = useNavigate();
