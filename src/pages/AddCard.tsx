@@ -5,6 +5,8 @@ import Button from '../components/Button';
 import useRefObjects from '../hooks/useRefObjects';
 import { extractNumbers } from '../utils';
 
+const cardNumberInputTypes = ['text', 'text', 'password', 'password'];
+
 const AddCard = () => {
   const navigate = useNavigate();
   const cardRefs = useRefObjects<HTMLInputElement>(4);
@@ -101,34 +103,16 @@ const AddCard = () => {
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
-          <input
-            className="input-basic"
-            type="text"
-            maxLength={4}
-            ref={cardRefs[0]}
-            onChange={() => handleCardNumber(0)}
-          />
-          <input
-            className="input-basic"
-            type="text"
-            maxLength={4}
-            ref={cardRefs[1]}
-            onChange={() => handleCardNumber(1)}
-          />
-          <input
-            className="input-basic"
-            type="password"
-            maxLength={4}
-            ref={cardRefs[2]}
-            onChange={() => handleCardNumber(2)}
-          />
-          <input
-            className="input-basic"
-            type="password"
-            maxLength={4}
-            ref={cardRefs[3]}
-            onChange={() => handleCardNumber(3)}
-          />
+          {cardNumberInputTypes.map((type, index) => (
+            <input
+              key={index}
+              className="input-basic"
+              type={type}
+              maxLength={4}
+              ref={cardRefs[index]}
+              onChange={() => handleCardNumber(index)}
+            />
+          ))}
         </div>
       </div>
       <div className="input-container">
