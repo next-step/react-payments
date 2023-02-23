@@ -8,11 +8,7 @@ interface CardExpiredDateProps {
   handleChange(event: ChangeEvent<HTMLInputElement>): void
 }
 
-const CardExpiredDate = ({
-  expiratedYear,
-  expiratedMonth,
-  handleChange,
-}: CardExpiredDateProps) => {
+const CardExpiredDate = ({ expiratedYear, expiratedMonth, handleChange }: CardExpiredDateProps) => {
   const firstRef = useRef<HTMLInputElement>(null)
   const secondRef = useRef<HTMLInputElement>(null)
   useInputFocus([
@@ -32,9 +28,7 @@ const CardExpiredDate = ({
           value={expiratedMonth}
           onChange={handleChange}
         />
-        {(expiratedYear.length === 2 || expiratedMonth.length === 2) && (
-          <span>/</span>
-        )}
+        {(expiratedYear.length === 2 || expiratedMonth.length === 2) && <span>/</span>}
         <input
           ref={secondRef}
           className="input-basic"
@@ -51,9 +45,5 @@ const CardExpiredDate = ({
 
 export default CardExpiredDate
 export const CardExpiredDateType = (
-  <CardExpiredDate
-    expiratedYear=""
-    expiratedMonth=""
-    handleChange={(_: ChangeEvent<HTMLInputElement>) => _}
-  />
+  <CardExpiredDate expiratedYear="" expiratedMonth="" handleChange={(_: ChangeEvent<HTMLInputElement>) => _} />
 ).type

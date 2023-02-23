@@ -9,12 +9,7 @@ interface ButtonBoxProps {
   storage?: unknown
 }
 
-const ButtonBox = ({
-  additionalClassNames = '',
-  text = '다음',
-  to,
-  storage,
-}: ButtonBoxProps) => {
+const ButtonBox = ({ additionalClassNames = '', text = '다음', to, storage }: ButtonBoxProps) => {
   const navigate = useNavigate()
 
   const goToNextPage = (to: Destination) => {
@@ -22,10 +17,7 @@ const ButtonBox = ({
     const cards = localStorage.getItem('cards')
     if (storage) {
       if (cards) {
-        localStorage.setItem(
-          'cards',
-          JSON.stringify([...JSON.parse(cards), storage]),
-        )
+        localStorage.setItem('cards', JSON.stringify([...JSON.parse(cards), storage]))
       } else {
         localStorage.setItem('cards', JSON.stringify([storage]))
       }

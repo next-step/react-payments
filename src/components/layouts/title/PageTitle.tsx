@@ -6,11 +6,7 @@ interface PageTitleProps {
   hasBackButton?: boolean
 }
 
-const PageTitle = ({
-  title,
-  addtionalClassName = '',
-  hasBackButton = true,
-}: PageTitleProps) => {
+const PageTitle = ({ title, addtionalClassName = '', hasBackButton = true }: PageTitleProps) => {
   const navigate = useNavigate()
   return (
     <h2 className={`page-title ${addtionalClassName}`}>

@@ -22,10 +22,7 @@ interface CardFormProps {
 
 const CardForm = ({ children }: CardFormProps) => {
   const cardNumber = getCardFormSubElement(children, CardNumbersType)
-  const cardExpiredDateType = getCardFormSubElement(
-    children,
-    CardExpiredDateType,
-  )
+  const cardExpiredDateType = getCardFormSubElement(children, CardExpiredDateType)
   const cardOwnerType = getCardFormSubElement(children, CardOwnerType)
   const cardSecurityCode = getCardFormSubElement(children, CardSecurityCodeType)
   const cardPassword = getCardFormSubElement(children, CardPasswordType)

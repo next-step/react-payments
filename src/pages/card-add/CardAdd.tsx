@@ -4,14 +4,7 @@ import { CardForm } from '@/pages/card-add/card-form'
 import { useCardInfo } from '@/pages/card-add/card-form/hooks'
 
 function CardAdd() {
-  const {
-    cardInfo,
-    handleNumber,
-    handleExpiredDate,
-    handleOwner,
-    handleSecurityCode,
-    handlePassword,
-  } = useCardInfo()
+  const { cardInfo, handleNumber, handleExpiredDate, handleOwner, handleSecurityCode, handlePassword } = useCardInfo()
 
   return (
     <div className="root">
@@ -19,27 +12,15 @@ function CardAdd() {
         <PageTitle title="카드 추가" />
         <Card {...cardInfo} />
         <CardForm>
-          <CardForm.CardNumbers
-            numbers={cardInfo.cardNumbers}
-            handleChange={handleNumber}
-          />
+          <CardForm.CardNumbers numbers={cardInfo.cardNumbers} handleChange={handleNumber} />
           <CardForm.CardExpiredDate
             expiratedYear={cardInfo.expiratedYear}
             expiratedMonth={cardInfo.expiratedMonth}
             handleChange={handleExpiredDate}
           />
-          <CardForm.CardOwner
-            owner={cardInfo.owner}
-            handleChange={handleOwner}
-          />
-          <CardForm.CardSecurityCode
-            securityCode={cardInfo.securityCode}
-            handleChange={handleSecurityCode}
-          />
-          <CardForm.CardPassword
-            password={cardInfo.password}
-            handleChange={handlePassword}
-          />
+          <CardForm.CardOwner owner={cardInfo.owner} handleChange={handleOwner} />
+          <CardForm.CardSecurityCode securityCode={cardInfo.securityCode} handleChange={handleSecurityCode} />
+          <CardForm.CardPassword password={cardInfo.password} handleChange={handlePassword} />
         </CardForm>
         <NextButtonBox to="/card-completed" storage={cardInfo} />
       </div>

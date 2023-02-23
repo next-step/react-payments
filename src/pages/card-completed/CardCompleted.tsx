@@ -5,10 +5,7 @@ function CardCompleted() {
     <div className="root">
       <div className="app flex-column-center">
         <div className="flex-center">
-          <PageTitle
-            addtionalClassName="mb-10"
-            title="카드등록이 완료되었습니다."
-          />
+          <PageTitle addtionalClassName="mb-10" title="카드등록이 완료되었습니다." />
         </div>
         <div className="card-box">
           <div className="big-card">
@@ -20,9 +17,7 @@ function CardCompleted() {
             </div>
             <div className="card-bottom">
               <div className="card-bottom__number">
-                <span className="card-text__big">
-                  1111 - 2222 - oooo - oooo
-                </span>
+                <span className="card-text__big">1111 - 2222 - oooo - oooo</span>
               </div>
               <div className="card-bottom__info">
                 <span className="card-text__big">YUJO</span>
@@ -32,11 +27,7 @@ function CardCompleted() {
           </div>
         </div>
         <div className="input-container flex-center w-100">
-          <input
-            className="input-underline w-75"
-            type="text"
-            placeholder="카드의 별칭을 입력해주세요."
-          />
+          <input className="input-underline w-75" type="text" placeholder="카드의 별칭을 입력해주세요." />
         </div>
         <NextButtonBox additionalClassNames="mt-50" to="/" />
       </div>

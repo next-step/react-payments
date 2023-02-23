@@ -15,14 +15,9 @@ type CardSubElementType =
   | typeof CardSecurityCode
   | typeof CardPassword
 
-const getCardFormSubElement = (
-  children: ReactNode,
-  type: CardSubElementType,
-) => {
+const getCardFormSubElement = (children: ReactNode, type: CardSubElementType) => {
   const childrenArray = Children.toArray(children)
-  return childrenArray
-    .filter((child) => isValidElement(child) && child.type === type)
-    .slice(0, 2)
+  return childrenArray.filter((child) => isValidElement(child) && child.type === type).slice(0, 2)
 }
 
 export default getCardFormSubElement

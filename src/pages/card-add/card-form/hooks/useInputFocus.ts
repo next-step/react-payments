@@ -23,16 +23,12 @@ const useInputFocus = (inputs: InputRef[]) => {
     }
 
     inputs.forEach((ref, index) => {
-      ref.ref.current?.addEventListener('keydown', (event) =>
-        handleKeyPress(event, index),
-      )
+      ref.ref.current?.addEventListener('keydown', (event) => handleKeyPress(event, index))
     })
 
     return () => {
       inputs.forEach(({ ref }, index) => {
-        ref.current?.removeEventListener('keydown', (event) =>
-          handleKeyPress(event, index),
-        )
+        ref.current?.removeEventListener('keydown', (event) => handleKeyPress(event, index))
       })
     }
   }, [inputs])

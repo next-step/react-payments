@@ -7,11 +7,7 @@ function CardList() {
     <div className="root">
       <div className="app flex-column-center">
         <div className="flex-center">
-          <PageTitle
-            addtionalClassName="mb-10"
-            title="보유 카드"
-            hasBackButton={false}
-          />
+          <PageTitle addtionalClassName="mb-10" title="보유 카드" hasBackButton={false} />
         </div>
         <div className="card-box">
           <div className="small-card">

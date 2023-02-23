@@ -34,18 +34,8 @@ const CardPassword = ({ password, handleChange }: CardPasswordProps) => {
           data-name="second"
           onChange={handleChange}
         />
-        <input
-          className="input-basic w-15 bg-white"
-          type="password"
-          value="x"
-          readOnly
-        />
-        <input
-          className="input-basic w-15 bg-white"
-          type="password"
-          value="x"
-          readOnly
-        />
+        <input className="input-basic w-15 bg-white" type="password" value="x" readOnly />
+        <input className="input-basic w-15 bg-white" type="password" value="x" readOnly />
       </div>
     </div>
   )
@@ -53,8 +43,5 @@ const CardPassword = ({ password, handleChange }: CardPasswordProps) => {
 
 export default CardPassword
 export const CardPasswordType = (
-  <CardPassword
-    password={{ first: '', second: '' }}
-    handleChange={(_: ChangeEvent<HTMLInputElement>) => _}
-  />
+  <CardPassword password={{ first: '', second: '' }} handleChange={(_: ChangeEvent<HTMLInputElement>) => _} />
 ).type
