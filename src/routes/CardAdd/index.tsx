@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   CardDesign,
   CardExpirationDate,
@@ -10,7 +10,7 @@ import {
 import CardShape from '../../components/Card/CardShape'
 import Button from '../../components/Element/Button'
 import {
-  NUMBER_LENGTH_MAX,
+  CARD_NUMBER_LENGTH_MAX,
   OWNER_NAME_LENGTH_MAX,
   PASSWORD_LENGTH_MAX,
   SECURITY_CODE_LENGTH_MAX,
@@ -21,12 +21,29 @@ import { useExpirationDate } from '../../hooks/useExpirationDate'
 import { useOwnerName } from '../../hooks/useOwnerName'
 
 const CardAdd = () => {
+  const navigate = useNavigate()
+
   const cardDesign = useCardDesign()
-  const cardNumber = useCardNumberData(NUMBER_LENGTH_MAX)
+  const cardNumber = useCardNumberData(CARD_NUMBER_LENGTH_MAX)
   const cardExpirationDate = useExpirationDate()
   const ownerName = useOwnerName(OWNER_NAME_LENGTH_MAX)
   const cardSecurityCode = useCardNumberData(SECURITY_CODE_LENGTH_MAX)
   const cardPassword = useCardNumberData(PASSWORD_LENGTH_MAX)
+
+  const validationNavigate = () => {
+    const design = cardDesign.validation
+    const number = !cardNumber.validation.includes(false)
+    const expiration = !cardExpirationDate.validation.includes(false)
+    const owner = ownerName.validation
+    const security = cardSecurityCode.validation[0]
+    const password = cardPassword.validation[0] && cardPassword.validation[1]
+
+    if (design && number && expiration && owner && security && password) {
+      navigate('/card-add-complete')
+    } else {
+      alert('입력한 값을 확인해주세요.')
+    }
+  }
 
   return (
     <div>
@@ -39,6 +56,7 @@ const CardAdd = () => {
             cardNumber={cardNumber.cardNumberData}
             cardExpirationDate={cardExpirationDate.cardExpirationDate}
             cardDesign={cardDesign.cardDesign}
+            ownerName={ownerName.ownerName}
           />
           <Button onClick={cardDesign.toggleModalHandler}>카드선택</Button>
           <CardNumber
@@ -48,7 +66,7 @@ const CardAdd = () => {
           <CardExpirationDate
             cardExpirationDate={cardExpirationDate.cardExpirationDate}
             cardExpirationDateHandler={cardExpirationDate.cardExpirationDateHandler}
-            fetchedTwoLettersDataHandler={cardExpirationDate.fetchedTwoLettersDataHanlder}
+            fetchedTwoLettersDataHandler={cardExpirationDate.fetchedTwoLettersDataHandler}
           />
           <CardOwnerName ownerName={ownerName.ownerName} ownerNameValueHandler={ownerName.ownerNameValueHandler} />
           <CardSecurityCode
@@ -60,9 +78,7 @@ const CardAdd = () => {
             cardPasswordHandler={cardPassword.cardNumberDataHandler}
           />
           <div className='button-box'>
-            <Link to='/card-add-complete' className='button-text'>
-              다음
-            </Link>
+            <Button onClick={validationNavigate}>다음</Button>
           </div>
         </div>
         {cardDesign.toggleModal && <CardDesign cardDesignNameHandler={cardDesign.cardDesignNameHandler} />}

@@ -2,7 +2,7 @@ import { CARD_NAME } from '../../../constants/Card'
 import { expirationDateMark } from '../../../domain/expirationdateMark'
 import { markCardNumber } from '../../../domain/markCardNumber'
 
-const CardShape = ({ cardNumber, cardExpirationDate, cardDesign }: CardShapeProps) => {
+const CardShape = ({ cardNumber, cardExpirationDate, cardDesign, ownerName }: CardShapeProps) => {
   return (
     <div className='card-box'>
       <div className={`empty-card card-color${CARD_NAME.indexOf(cardDesign)}`}>
@@ -15,7 +15,7 @@ const CardShape = ({ cardNumber, cardExpirationDate, cardDesign }: CardShapeProp
             <span className='card-text'>{markCardNumber(cardNumber)}</span>
           </div>
           <div className='card-bottom__info'>
-            <span className='card-text'>NAME</span>
+            <span className='card-text text-hidden'>{ownerName}</span>
             <span className='card-text'>{expirationDateMark(cardExpirationDate)}</span>
           </div>
         </div>

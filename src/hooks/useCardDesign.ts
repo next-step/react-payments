@@ -13,5 +13,7 @@ export const useCardDesign = () => {
     setToggleModal((prev) => !prev)
   }
 
-  return { cardDesign, toggleModal, cardDesignNameHandler, toggleModalHandler }
+  const validation = cardDesign !== ''
+
+  return { cardDesign, toggleModal, cardDesignNameHandler, toggleModalHandler, validation }
 }

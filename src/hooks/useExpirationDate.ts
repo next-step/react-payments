@@ -4,7 +4,6 @@ import { getThisYear } from '../utils/getThisYear'
 
 export const useExpirationDate = () => {
   const [cardExpirationDate, setCardExpirationDate] = useState(INIT_EXPIRATION_VALUE)
-
   const { currentYearFirstDigit, currentYearToDigit } = getThisYear()
 
   const cardExpirationDateHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -13,15 +12,15 @@ export const useExpirationDate = () => {
     if (name === 'MM' && Number(value) > MONTH_MAX) return
     if (name === 'YY' && value.length === 1 && Number(value) < currentYearFirstDigit) return
     if (name === 'YY' && value.length === 2 && Number(value) < currentYearToDigit) return
-    if (value !== '0' && value.length < EXPIRATION_DATE_LENGTH_MAX) {
-      setCardExpirationDate((prev) => ({
-        ...prev,
-        [name]: value,
-      }))
-    }
+    if (value !== '0' && value.length > EXPIRATION_DATE_LENGTH_MAX) return
+
+    setCardExpirationDate((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
   }
 
-  const fetchedTwoLettersDataHanlder = (e: FocusEvent<HTMLInputElement>) => {
+  const fetchedTwoLettersDataHandler = (e: FocusEvent<HTMLInputElement>) => {
     const { value, name } = e.currentTarget
     setCardExpirationDate((prev) => ({
       ...prev,
@@ -29,5 +28,7 @@ export const useExpirationDate = () => {
     }))
   }
 
-  return { cardExpirationDate, cardExpirationDateHandler, fetchedTwoLettersDataHanlder }
+  const validation = Object.values(cardExpirationDate).map((data) => data.length === EXPIRATION_DATE_LENGTH_MAX)
+
+  return { cardExpirationDate, cardExpirationDateHandler, fetchedTwoLettersDataHandler, validation }
 }

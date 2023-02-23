@@ -3,6 +3,7 @@ import { Input } from '../../Element'
 
 const CardPassword = ({ cardPassword, cardPasswordHandler }: CardPasswordProps) => {
   const { num1, num2 } = cardPassword
+
   return (
     <div className='input-container'>
       <span className='input-title'>카드 비밀번호</span>

@@ -23,6 +23,7 @@ interface CardShapeProps {
   cardNumber: NumberData
   cardExpirationDate: CardExpirationDate
   cardDesign: string
+  ownerName: string
 }
 
 interface CardExpirationDateProps {
