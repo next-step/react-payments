@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import useCardItem from 'hooks/useCardItem'
-import { CardType, CardTypeKeys } from 'models/card.model'
+import { CardCompanyCodeType, CardType, CardTypeKeys } from 'models/card.model'
 import { RegisterCard } from 'organisms/RegisterCard'
 import { CompleteRegisterCard } from 'organisms/CompleteRegisterCard'
 import { CardCompanyList } from 'components/molecules/CardCompanyList'
@@ -30,6 +30,10 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
 
   const changeValue = (value: string, name: CardTypeKeys) => {
     updateCard(value, name)
+  }
+
+  const changeCardCompanyValue = (value: CardCompanyCodeType) => {
+    updateCard(value, 'cardCompanyCode')
   }
 
   const onNavigateNextStep = () => {
@@ -63,7 +67,7 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
         )}
 
         <Modal isOpen={validator.cardNumber && !validator.cardCompanyCode}>
-          <CardCompanyList onClick={changeValue} />
+          <CardCompanyList onClick={changeCardCompanyValue} />
         </Modal>
       </main>
     </>

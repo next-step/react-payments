@@ -5,7 +5,7 @@ import './CardCompanyItem.css'
 
 type CardCompanyItemProps = {
   cardCode: CardCompanyCodeType
-  onClick: (value: string, name: CardTypeKeys) => void
+  onClick: (value: CardCompanyCodeType) => void
 }
 
 const CardCompanyItem: React.FC<CardCompanyItemProps> = ({
@@ -13,10 +13,7 @@ const CardCompanyItem: React.FC<CardCompanyItemProps> = ({
   onClick,
 }) => {
   return (
-    <button
-      onClick={() => onClick(cardCode, 'cardCompanyCode')}
-      className='card-company-button'
-    >
+    <button onClick={() => onClick(cardCode)} className='card-company-button'>
       <span
         className='card-company-color'
         style={{ backgroundColor: CARD_COMPANYS[cardCode].color }}

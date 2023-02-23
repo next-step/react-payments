@@ -1,11 +1,11 @@
 import React from 'react'
 import { CARD_COMPNAYS_CODE } from 'constants/card'
-import { CardTypeKeys } from 'models/card.model'
+import { CardCompanyCodeType } from 'models/card.model'
 import './CardCompanyList.css'
 import { CardCompanyItem } from 'components/atoms/CardCompanyItem'
 
 type CardCompanyListProps = {
-  onClick: (value: string, name: CardTypeKeys) => void
+  onClick: (value: CardCompanyCodeType) => void
 }
 
 const CardCompanyList: React.FC<CardCompanyListProps> = ({ onClick }) => {
