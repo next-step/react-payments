@@ -3,6 +3,8 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { AiOutlineLeft } from 'react-icons/ai'
 
 import { Header } from '../components/molecules/Header'
+import { MobileTemplate } from 'templates/MobileTemplate'
+import { action } from '@storybook/addon-actions'
 
 export default {
   title: 'Header',
@@ -14,13 +16,20 @@ export default {
   // },
 } as ComponentMeta<typeof Header>
 
-const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />
+const Template: ComponentStory<typeof Header> = (args) => (
+  <MobileTemplate>
+    <Header {...args} />
+  </MobileTemplate>
+)
 
-export const Basic = Template.bind({})
-Basic.args = {
+export const Default = Template.bind({})
+Default.args = {
+  title: '카드 추가',
+}
+
+export const IconHeader = Template.bind({})
+IconHeader.args = {
   title: '카드 추가',
   icon: <AiOutlineLeft />,
-  onClickIcon: () => {
-    console.log('뒤로 가기')
-  },
+  onClickIcon: action('onClickIcon'),
 }
