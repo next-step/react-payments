@@ -5,7 +5,7 @@ import Header from '../components/Header/Header';
 const Home = () => {
   const navigate = useNavigate();
   const onClickEmptyCard = () => {
-    navigate('/new');
+    navigate('/card-new');
   };
   return (
     <>

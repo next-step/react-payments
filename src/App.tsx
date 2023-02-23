@@ -7,8 +7,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/new" element={<CardNew />} />
-          <Route path="/alias" element={<CardAlias />} />
+          <Route path="/card-new" element={<CardNew />} />
+          <Route path="/card-alias" element={<CardAlias />} />
         </Routes>
       </BrowserRouter>
     </main>

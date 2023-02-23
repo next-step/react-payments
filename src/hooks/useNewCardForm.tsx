@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useState } from 'react';
 
 type InputType = React.ChangeEvent<HTMLInputElement>;
@@ -14,22 +15,34 @@ const useNewCardForm = () => {
     let targetValue = e.target.value.trim();
     targetValue = targetValue
       .replace(/[^0-9]/g, '')
-      .replace(/^(\d{4})(\d{4})(\d{4})(\d{4})/, `$1-$2-$3-$4`);
+      .replace(/^(\d{0,4})(\d{0,4})(\d{0,4})(\d{0,4})/, `$1-$2-$3-$4`)
+      .replace(/-{1,3}$/g, '');
     setCreditNumber(targetValue);
   };
 
   const handleChangeExpirationDate = (e: InputType) => {
     let targetValue = e.target.value.trim();
     if (targetValue.length === 2) {
-      if (Number(targetValue) > 12 || Number(targetValue) < 1) {
-        // eslint-disable-next-line no-alert
+      // ? 1월부터 12월 사이 값 입력 Validation
+      const month = Number(targetValue);
+      if (month > 12 || month < 1) {
         alert('월은 1이상 12이하 숫자를 입력하세요.');
+        return;
+      }
+    }
+    if (targetValue.length === 5) {
+      // ? 과거 연도 입력 Validation
+      const year = Number(targetValue.split('/')[1]);
+      const thisYear = Number(new Date().getFullYear().toString().slice(2, 4));
+      if (year < thisYear) {
+        alert('과거 연도를 입력할 수 없습니다.');
         return;
       }
     }
     targetValue = targetValue
       .replace(/[^0-9]/g, '')
-      .replace(/^(\d{2})(\d{2})/, `$1/$2`);
+      .replace(/^(\d{0,2})(\d{0,2})/, `$1/$2`)
+      .replace(/\/{1}$/g, '');
     setExpirationDate(targetValue);
   };
 

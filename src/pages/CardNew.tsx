@@ -10,7 +10,7 @@ const CardNew = () => {
   const navigate = useNavigate();
   const { state, handlers } = useNewCardForm();
   const goNextPage = () => {
-    navigate('/alias', { replace: true });
+    navigate('/card-alias', { replace: true });
   };
   return (
     <>
