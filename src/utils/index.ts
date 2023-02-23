@@ -47,36 +47,24 @@ export const checkYear = (string: string) => {
 };
 export const changePassword = (string: string): string => {
   let newString = string.replaceAll(/[^0-9]/g, ""); //숫자만 받기
-
-  return !newString.length ? "*" : "*";
+  if (newString.length >= 1) {
+    return "*";
+  }
+  return string.includes("*") ? "*" : "";
 };
 
 export const checkOwnerName = (string: string): string => {
-  if (string.length > 30) return string.slice(0, 30);
-
-  return string;
+  return string.length > 30 ? string.slice(0, 30) : string;
 };
 
-type cardFormObjType = {
-  cardNumber: string;
-  expirationDate: expirationDateType;
-  ownerName: string;
-  company: CompanyType;
-};
-
-type expirationDateType = {
-  month: string;
-  year: string;
-};
-
-export const checkCardFormValidation = (cardFormObj: cardFormObjType): boolean => {
-  const { month, year } = cardFormObj.expirationDate;
+export const checkCardFormValidation = (form: CardStateType): boolean => {
+  const { month, year } = form.expireDate;
 
   try {
     if (!isValidexpirationDate(month, year)) throw new Error("카드 번호가 올바른지 확인하세요 ! ");
-    if (!isValidCompany(cardFormObj.company)) throw new Error("카드를 선택해 주세요!");
-    if (!isValidOwnerName(cardFormObj.ownerName)) throw new Error("소유자 이름을 작성해주세요!");
-    if (!isValidCardNumber(cardFormObj.cardNumber)) throw new Error("카드번호가 올바르지 않습니다!");
+    if (!isValidCompany(form.company)) throw new Error("카드를 선택해 주세요!");
+    if (!isValidOwnerName(form.ownerName)) throw new Error("소유자 이름을 작성해주세요!");
+    if (!isValidCardNumber(form.cardNumbers)) throw new Error("카드번호가 올바르지 않습니다!");
   } catch (error) {
     //나중에 타입 다시처리 스토리북먼저
     alert(error);

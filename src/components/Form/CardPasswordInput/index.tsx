@@ -19,9 +19,7 @@ const CardPasswordInput = ({ fontColor, setPassword }: CardPasswordInputProps) =
     if (inputRef.current === null || inputRef2.current === null) return;
     const passwordOne = inputRef.current.value;
     const passwordTwo = inputRef2.current.value;
-    if (passwordOne.length > 2) return;
     inputRef.current.value = changePassword(passwordOne);
-    if (passwordTwo.length > 2) return;
     inputRef2.current.value = changePassword(passwordTwo);
 
     setPassword((prev) => ({
