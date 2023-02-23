@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
-import {ROUTE_PATH} from "../constants/page"
+import { ROUTE_PATH } from "../constants/page";
 
+// TODO : 컴포넌트로 분리
 export default function CardRegistrationCompletedPage() {
   return (
     <div className="app flex-column-center">
