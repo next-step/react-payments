@@ -5,45 +5,37 @@ import { ReactEventHandler } from "react";
 
 type CardSizeType = "small" | "big";
 type CardType = "primary" | "add";
+type EexpireDateType = {
+  month: string;
+  year: string;
+};
 
 export type CardProps = {
   size: CardSizeType;
   type: CardType;
   number?: string;
-  expirationMonth?: string;
-  expirationYear?: string;
+  expireMonth?: string;
+  expireYear?: string;
   ownerName?: string;
   color?: ColorType;
   company?: CompanyType;
   onClick?: ReactEventHandler<HTMLDivElement>;
 };
 
-const Card = ({
-  type,
-  color,
-  company,
-  size,
-  number,
-  expirationMonth,
-  expirationYear,
-  ownerName,
-  onClick,
-}: CardProps) => {
+const Card = ({ type, color, company, size, number, expireMonth, expireYear, ownerName, onClick }: CardProps) => {
   return (
     <Layout onClick={onClick}>
       {type === "primary" ? (
         <Container color={color} size={size}>
-          <Top>
-            <Text fontSize="s" weight="normal" label={company} />
-          </Top>
+          <Top>{company && <Text fontSize="s" weight="normal" label={company} />}</Top>
           <Middle>
             <Chip />
           </Middle>
           <Bottom>
-            <Text fontSize="m" weight="normal" label={number} />
+            {number && <Text fontSize="m" weight="normal" label={number} />}
             <InfoContainer>
-              <Text fontSize="s" weight="bold" label={ownerName} />
-              <Text fontSize="s" weight="bold" label={`${expirationMonth}/${expirationYear}`} />
+              {ownerName && <Text fontSize="s" weight="bold" label={ownerName} />}
+              {expireMonth && expireYear && <Text fontSize="s" weight="bold" label={`${expireMonth}/${expireYear}`} />}
             </InfoContainer>
           </Bottom>
         </Container>

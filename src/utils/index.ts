@@ -66,7 +66,7 @@ export const checkCardFormValidation = (form: CardStateType): boolean => {
     if (!isValidOwnerName(form.ownerName)) throw new Error("소유자 이름을 작성해주세요!");
     if (!isValidCardNumber(form.cardNumbers)) throw new Error("카드번호가 올바르지 않습니다!");
   } catch (error) {
-    //나중에 타입 다시처리 스토리북먼저
+    // Todo : 나중에 타입 다시처리 스토리북먼저
     alert(error);
     return false;
   }
@@ -98,7 +98,7 @@ export const inistalCardState: CardStateType = {
     two: "",
   },
   cvc: "",
-  ownerName: "",
+  ownerName: "empty",
   color: "",
   company: "",
 };

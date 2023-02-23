@@ -46,8 +46,8 @@ export const Form = () => {
         company={state.company}
         size="small"
         number={state.cardNumbers}
-        expirationMonth={state.expireDate.month}
-        expirationYear={state.expireDate.year}
+        expireMonth={state.expireDate.month}
+        expireYear={state.expireDate.year}
         ownerName={state.ownerName}
       />
       <CardNumberInput setCardNumber={setState} fontColor={state.color} />

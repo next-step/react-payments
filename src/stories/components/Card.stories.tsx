@@ -16,17 +16,21 @@ export const Small = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Small.args = {
   size: "small",
-  company: "국민카드",
-  ownerName: "Name",
-  expirationMonth: "MM",
-  expirationYear: "YY",
+  type: "primary",
 };
 
 export const Big = Template.bind({});
 Big.args = {
   size: "big",
-  company: "국민카드",
-  ownerName: "Name",
-  expirationMonth: "MM",
-  expirationYear: "YY",
+  type: "primary",
+};
+export const Primary = Template.bind({});
+Primary.args = {
+  size: "big",
+  type: "primary",
+};
+export const Add = Template.bind({});
+Add.args = {
+  size: "big",
+  type: "add",
 };

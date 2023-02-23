@@ -4,7 +4,7 @@ import { FontSizeType, FontWeightType, ColorType } from "types";
 
 export type TextProps = {
   fontSize: FontSizeType;
-  label?: string;
+  label: string;
   weight?: FontWeightType;
   fontColor?: ColorType;
 };

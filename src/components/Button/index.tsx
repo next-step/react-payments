@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 import { ReactEventHandler } from "react";
-
+import { FontSizeType } from "types";
 export type ButtonProps = {
-  fontSize: "s" | "m" | "lg";
+  fontSize: FontSizeType;
   label: string;
   onClick?: ReactEventHandler<HTMLButtonElement>;
 };
@@ -17,7 +17,7 @@ export const Button = ({ label, fontSize, onClick }: ButtonProps) => {
 export default Button;
 
 type StyledButtonProps = {
-  fontSize: "s" | "m" | "lg";
+  fontSize: FontSizeType;
 };
 
 const StyledButton = styled.button<StyledButtonProps>`
@@ -33,13 +33,22 @@ const StyledButton = styled.button<StyledButtonProps>`
   ${({ fontSize }) =>
     fontSize === "s"
       ? css`
-          font-size: 16px;
+          font-size: 14px;
+          line-height: 16px;
         `
       : fontSize === "m"
       ? css`
-          font-size: 18px;
+          font-size: 16px;
+          line-height: 20px;
+        `
+      : fontSize === "lg"
+      ? css`
+          font-size: 20px;
+          line-height: 22px;
         `
       : css`
-          font-size: 20px;
+          //xs일떄
+          font-size: 12px;
+          line-height: 14px;
         `}
 `;
