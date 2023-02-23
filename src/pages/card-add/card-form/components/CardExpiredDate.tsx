@@ -54,8 +54,6 @@ export const CardExpiredDateType = (
   <CardExpiredDate
     expiratedYear=""
     expiratedMonth=""
-    handleChange={() => {
-      console.log()
-    }}
+    handleChange={(_: ChangeEvent<HTMLInputElement>) => _}
   />
 ).type

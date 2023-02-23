@@ -23,8 +23,6 @@ export default CardSecurityCode
 export const CardSecurityCodeType = (
   <CardSecurityCode
     securityCode=""
-    handleChange={(event: ChangeEvent<HTMLInputElement>) => {
-      console.log(event)
-    }}
+    handleChange={(_: ChangeEvent<HTMLInputElement>) => _}
   />
 ).type
