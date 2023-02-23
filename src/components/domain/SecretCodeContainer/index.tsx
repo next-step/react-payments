@@ -1,23 +1,12 @@
-import { useState } from 'react';
 import { css } from '@emotion/css';
 
 import { Input, Label } from 'components/common';
+import { useSecretCode } from 'pages/AddingCard/hooks';
 
-import { isNumber } from 'utils';
 import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
 
 function SecretCodeContainer() {
-  const [secretCode, setSecretCode] = useState('');
-
-  const handleChangeSecretCode: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value } = e.target;
-
-    if (value !== '' && !isNumber(value)) {
-      return;
-    }
-
-    setSecretCode(value);
-  };
+  const { secretCode, handleChangeSecretCode } = useSecretCode();
 
   return (
     <div className="input-container">
