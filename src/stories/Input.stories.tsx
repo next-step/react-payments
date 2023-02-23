@@ -4,7 +4,7 @@ import { Input } from 'components/atoms/Input'
 import { UI_VARIANT } from 'constants/ui.constant'
 
 export default {
-  title: 'Input',
+  title: 'ui/Input',
   component: Input,
   parameters: {
     componentSubtitle: '인풋 컴포넌트',

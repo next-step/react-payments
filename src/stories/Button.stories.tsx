@@ -6,7 +6,7 @@ import { Button } from '../components/atoms/Button'
 import { UI_SIZE, UI_VARIANT } from 'constants/ui.constant'
 
 export default {
-  title: 'Button',
+  title: 'ui/Button',
   component: Button,
   parameters: {
     componentSubtitle: '버튼 컴포넌트',

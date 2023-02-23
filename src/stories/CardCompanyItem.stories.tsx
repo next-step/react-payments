@@ -5,7 +5,7 @@ import { CARD_COMPNAYS_CODE } from 'constants/card'
 import React from 'react'
 
 export default {
-  title: 'CardCompanyItem',
+  title: 'ui/CardCompanyItem',
   component: CardCompanyItem,
   parameters: {
     componentSubtitle: '카드 회사 컬러 버튼 컴포넌트',

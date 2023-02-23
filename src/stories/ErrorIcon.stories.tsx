@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { ErrorIcon } from 'components/atoms/ErrorIcon'
 
 export default {
-  title: 'ErrorIcon',
+  title: 'ui/ErrorIcon',
   component: ErrorIcon,
   parameters: {
     componentSubtitle: '에러 아이콘 컴포넌트',
