@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
 import { characterCount, displayNumber } from "utils";
 import Button from "components/common/Button";
 import Card from "components/common/Card";
@@ -35,6 +35,15 @@ const CardForm = ({
   } = newCardInfo;
 
   const [showModal, setShowModal] = useState<boolean>(false);
+
+  const handleNextButtonClick = () => {
+    if (step === STEP.SECOND) {
+      setShowModal((prev: boolean) => !prev);
+      return;
+    }
+    handleCardAddClick();
+    setStep(3);
+  };
 
   return (
     <>
@@ -130,17 +139,7 @@ const CardForm = ({
             </>
           </InputContainer>
 
-          <Button
-            label="다음"
-            onClick={() => {
-              if (step === STEP.SECOND) {
-                setShowModal((prev: boolean) => !prev);
-                return;
-              }
-              handleCardAddClick();
-              setStep(3);
-            }}
-          />
+          <Button label="다음" onClick={handleNextButtonClick} />
         </div>
         {showModal && (
           <Modal
