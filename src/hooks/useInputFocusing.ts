@@ -8,14 +8,18 @@ interface UseInputFocusingProps {
 
 const useInputFocusing = ({ refs, deps, maxLength }: UseInputFocusingProps) => {
   useEffect(() => {
-    const focusedInput = refs.find((ref) => document.activeElement === ref.current);
+    const focusedInput = refs.find(findActiveElement);
+    const focusedInputIndex = refs.findIndex(findActiveElement);
 
     if (!focusedInput) {
       return;
     }
 
     const value = focusedInput.current?.value;
-    const focusedInputIndex = refs.findIndex((ref) => document.activeElement === ref.current);
+
+    if (maxLength === 0) {
+      return;
+    }
 
     if (value?.length === maxLength) {
       const nextInput = refs[focusedInputIndex + 1];
@@ -32,5 +36,8 @@ const useInputFocusing = ({ refs, deps, maxLength }: UseInputFocusingProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [...deps, maxLength]);
 };
+
+const findActiveElement = (ref: React.RefObject<HTMLInputElement>) =>
+  document.activeElement === ref.current;
 
 export default useInputFocusing;

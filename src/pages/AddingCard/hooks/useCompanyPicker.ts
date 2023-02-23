@@ -4,7 +4,7 @@ import { CardCompany } from 'types/card';
 
 const useCompanyPicker = () => {
   const [open, setOpen] = useState(true);
-  const [company, setCompany] = useState<CardCompany | null>(null);
+  const [company, setCompany] = useState<CardCompany>(CardCompany.Hana);
 
   const updateCompany = (company: CardCompany) => {
     setCompany(company);

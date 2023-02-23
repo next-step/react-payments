@@ -1,11 +1,13 @@
 import { css } from '@emotion/css';
 import { CSSProperties } from 'react';
 
+import { pixelOf } from 'utils';
+
 export interface MaskingProps {
   count: number;
-  width?: number;
-  height?: number;
-  gap?: number;
+  width?: CSSProperties['width'];
+  height?: CSSProperties['height'];
+  gap?: CSSProperties['gap'];
   color?: CSSProperties['color'];
 }
 
@@ -23,8 +25,8 @@ function Masking({ count, width = 4, height = 4, gap = 2, color = '#000' }: Mask
           key={index}
           className={css`
             display: inline-block;
-            width: ${width}px;
-            height: ${height}px;
+            width: ${pixelOf(width)};
+            height: ${pixelOf(height)};
             border-radius: 50px;
             background-color: ${color};
           `}

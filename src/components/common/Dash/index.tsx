@@ -1,19 +1,24 @@
 import { css } from '@emotion/css';
+import { CSSProperties } from 'react';
+
+import { pixelOf } from 'utils';
 
 export interface DashProps {
-  visible?: boolean;
-  width?: number;
-  height?: number;
+  width?: CSSProperties['width'];
+  height?: CSSProperties['height'];
 }
 
-function Dash({ visible = false, width = 6, height = 3 }: DashProps) {
+function Dash({ width = 6, height = 3 }: DashProps) {
   return (
     <span
       className={css`
-        display: inline-block;
-        padding: 0 ${width / 2}px;
-        height: ${height}px;
-        background-color: ${visible ? '#000' : 'transparent'};
+        &::after {
+          display: block;
+          content: '';
+          width: ${pixelOf(width)};
+          height: ${pixelOf(height)};
+          background-color: #000;
+        }
       `}
     ></span>
   );

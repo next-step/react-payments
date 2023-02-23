@@ -9,5 +9,5 @@ export default {
 };
 
 export const Template: Story<DashProps> = (args) => <Dash {...args} />;
-Template.args = { visible: true, width: 6, height: 3 };
+Template.args = { width: 6, height: 3 };
 Template.storyName = 'Playground';

@@ -2,6 +2,7 @@ import { CSSProperties } from 'react';
 import { css, cx } from '@emotion/css';
 
 import { CombineElementProps } from 'types/utils';
+import { pixelOf } from 'utils';
 
 interface ButtonBaseProps {
   weight?: CSSProperties['fontWeight'];
@@ -24,7 +25,7 @@ function Button({
       className={cx(
         css`
           font-weight: ${weight};
-          font-size: ${typeof fontSize === 'number' ? fontSize + 'px' : fontSize};
+          font-size: ${pixelOf(fontSize)};
           color: ${color};
           background-color: transparent;
           border: none;

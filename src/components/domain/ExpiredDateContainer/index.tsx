@@ -1,11 +1,10 @@
-import { useRef } from 'react';
 import { css } from '@emotion/css';
 
-import { Input } from 'components/common';
+import { Input, Label } from 'components/common';
 
-import { useInputFocusing } from 'hooks';
+import { useInputFocusing, useRefs } from 'hooks';
 
-import { MAX_LENGTH } from 'constants/card';
+import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
 import type { ExpiredDate } from 'types/card';
 
 interface ExpiredDateContainerProps {
@@ -16,8 +15,7 @@ interface ExpiredDateContainerProps {
 function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredDateContainerProps) {
   const { month, year } = expiredDate;
 
-  const monthRef = useRef<HTMLInputElement>(null);
-  const yearRef = useRef<HTMLInputElement>(null);
+  const [monthRef, yearRef] = useRefs<HTMLInputElement>(2);
 
   useInputFocusing({
     refs: [monthRef, yearRef],
@@ -27,31 +25,34 @@ function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredD
 
   return (
     <div className="input-container">
-      <span className="input-title">만료일</span>
+      <Label>만료일</Label>
       <div className="input-box w-50">
         <Input
           ref={monthRef}
           placeholder="MM"
           type="text"
           value={month}
-          name="month"
+          name={INPUT_NAME.MONTH}
           onChange={handleChangeExpiredDate}
           maxLength={MAX_LENGTH.EXPIRED_DATE}
         />
-        <span
-          className={css`
-            color: #000;
-            padding: 4px 0 0;
-          `}
-        >
-          /
-        </span>
+        {month.length === MAX_LENGTH.EXPIRED_DATE && (
+          <span
+            className={css`
+              color: #000;
+              padding: 4px 0 0;
+            `}
+          >
+            /
+          </span>
+        )}
+
         <Input
           ref={yearRef}
           placeholder="YY"
           type="text"
           value={year}
-          name="year"
+          name={INPUT_NAME.YEAR}
           onChange={handleChangeExpiredDate}
           maxLength={MAX_LENGTH.EXPIRED_DATE}
         />

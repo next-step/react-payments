@@ -2,10 +2,12 @@ import { Story } from '@storybook/react';
 import { styled } from '@storybook/theming';
 import { action } from '@storybook/addon-actions';
 
-import { CompanyColor } from 'components/common';
+import { CompanyColor } from 'components/domain';
 
 import { CardCompany } from 'types/card';
-import type { CompanyColorProps } from 'components/common/CompanyColor';
+import type { CompanyColorProps } from 'components/domain/CompanyColor';
+
+const COMPANIES = Object.values(CardCompany);
 
 const handleClickCompanyColor = action('click');
 
@@ -35,7 +37,7 @@ Template.storyName = 'Playground';
 export const Palette = () => {
   return (
     <PaletteLayout>
-      {Object.values(CardCompany).map((company) => (
+      {COMPANIES.map((company) => (
         <CompanyColor
           key={company}
           company={company as CardCompany}

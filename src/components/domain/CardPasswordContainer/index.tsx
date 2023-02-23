@@ -1,11 +1,12 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { css } from '@emotion/css';
 
-import { Input, Masking } from 'components/common';
-import { useInputFocusing } from 'hooks';
+import { Input, Label } from 'components/common';
+import { Masking } from 'components/domain';
+import { useInputFocusing, useRefs } from 'hooks';
 
 import { isNumber } from 'utils';
-import { MAX_LENGTH } from 'constants/card';
+import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
 import type { CardPassword } from 'types/card';
 
 const INITIAL_STATE: CardPassword = {
@@ -17,8 +18,7 @@ function CardPasswordContainer() {
   const [password, setPassword] = useState(INITIAL_STATE);
   const { password1, password2 } = password;
 
-  const password1Ref = useRef<HTMLInputElement>(null);
-  const password2Ref = useRef<HTMLInputElement>(null);
+  const [password1Ref, password2Ref] = useRefs<HTMLInputElement>(2);
 
   useInputFocusing({
     refs: [password1Ref, password2Ref],
@@ -38,18 +38,19 @@ function CardPasswordContainer() {
 
   return (
     <div className="input-container">
-      <span className="input-title">카드 비밀번호</span>
+      <Label>카드 비밀번호</Label>
       <div
         className={css`
           display: flex;
           gap: 10px;
+          margin: 0.375rem 0 0;
         `}
       >
         <Input
           ref={password1Ref}
           type="password"
           value={password1}
-          name="password1"
+          name={INPUT_NAME.PASSWORD1}
           onChange={handleChangePassword}
           maxLength={MAX_LENGTH.PASSWORD}
           size="small"
@@ -58,7 +59,7 @@ function CardPasswordContainer() {
           ref={password2Ref}
           type="password"
           value={password2}
-          name="password2"
+          name={INPUT_NAME.PASSWORD2}
           onChange={handleChangePassword}
           maxLength={MAX_LENGTH.PASSWORD}
           size="small"
