@@ -5,17 +5,17 @@ interface IInputContainer {
   title: string;
   className?: string;
   notInputBox?: boolean;
-  anchor?: string;
+  charLength?: string;
   errorMessage?: string;
 }
 
-function InputContainer({ children, className = '', title, notInputBox, anchor, errorMessage }: IInputContainer) {
+function InputContainer({ children, className = '', title, notInputBox, charLength, errorMessage }: IInputContainer) {
   return (
     <div className="input-container">
       <div className="flex-between">
         <span className="input-title">{title}</span>
-        {anchor && (
-          <span className="input-title">{anchor}</span>
+        {charLength && (
+          <span className="input-title">{charLength}</span>
         )}
       </div>
       <div className={`${notInputBox ? '' : 'input-box'} ${className}`}>
