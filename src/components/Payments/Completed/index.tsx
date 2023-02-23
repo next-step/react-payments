@@ -4,6 +4,7 @@ import Card from "components/common/Card";
 import { CardInput } from "components/common/Card/card.type";
 import InputContainer from "components/common/Input/InputContainer";
 import Input from "components/common/Input";
+import { STEP } from "../../../constants/Payments";
 
 interface CompletedProps {
   newCardInfo: CardInput;
@@ -53,7 +54,7 @@ const Completed = ({
               label="다음"
               onClick={() => {
                 handleCardNicknameAddClick({ nickname: newCardInfo?.nickname });
-                setStep(0);
+                setStep(STEP.FIRST);
               }}
             />
           </div>

@@ -42,7 +42,15 @@ const CardForm = ({
       return;
     }
     handleCardAddClick();
-    setStep(3);
+    setStep(STEP.FOURTH);
+  };
+
+  const handleGoBackClick = () => setStep(STEP.FIRST);
+
+  const handleCompanyModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    handleCardTypeClick(e);
+    setShowCompanyModal((prev: boolean) => !prev);
+    setStep(STEP.THIRD);
   };
 
   return (
@@ -55,7 +63,7 @@ const CardForm = ({
       <div className="root">
         <div className="app">
           <h2 className="page-title">
-            <span className="mr-2 cursor-pointer" onClick={() => setStep(0)}>
+            <span className="mr-2 cursor-pointer" onClick={handleGoBackClick}>
               {"<"}
             </span>
             카드 추가
@@ -143,11 +151,7 @@ const CardForm = ({
         </div>
         {showCompanyModal && (
           <CompanyModal
-            onClick={(e) => {
-              handleCardTypeClick(e);
-              setShowCompanyModal((prev: boolean) => !prev);
-              setStep(2);
-            }}
+            onClick={handleCompanyModalClick}
             modalItem={[
               { item: "레드 카드", backgroundColor: "red" },
               { item: "블루 카드", backgroundColor: "blue" },
