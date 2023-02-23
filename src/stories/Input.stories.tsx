@@ -1,8 +1,7 @@
-import React, { ChangeEvent, useState } from 'react'
+import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Input } from 'components/atoms/Input'
 import { UI_VARIANT } from 'constants/ui.constant'
-import { action } from '@storybook/addon-actions'
 
 export default {
   title: 'Input',
