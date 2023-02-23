@@ -1,13 +1,13 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import AddCardForm from "components/AddCardForm";
+import AddCardForm from "components/Form";
 
 import { withRouter } from "storybook-addon-react-router-v6";
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
-import MyCardPage from "pages/MyCardPage";
+import MyCardPage from "pages/MyCardListPage";
 import CompletedPage from "pages/CompletedPage";
-import AddCardPage from "pages/AddCardPage";
+import AddCardPage from "pages/FormPage";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

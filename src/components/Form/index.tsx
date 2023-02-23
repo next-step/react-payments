@@ -11,7 +11,7 @@ import Button from "../Button/index";
 import { useNavigate } from "react-router-dom";
 import { useHandleCardText } from "hooks/useHandleCardText";
 
-export const AddCardForm = () => {
+export const Form = () => {
   const navigate = useNavigate();
   const {
     setCardNumber,
@@ -85,4 +85,4 @@ const ButtonBox = styled.div`
   text-align: right;
 `;
 
-export default AddCardForm;
+export default Form;

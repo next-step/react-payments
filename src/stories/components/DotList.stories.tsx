@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import DotListComponent from "components/AddCardForm/DotList";
-import DotListProps from "components/AddCardForm/DotList";
+import DotListComponent from "components/Form/DotList";
+import DotListProps from "components/Form/DotList";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

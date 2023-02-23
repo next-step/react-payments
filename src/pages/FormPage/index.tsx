@@ -1,10 +1,10 @@
-import AddCardForm from "components/AddCardForm";
+import Form from "components/Form";
 import Text from "components/Text";
 import styled from "styled-components";
 import IconButton from "../../components/IconButton/index";
 import { useNavigate } from "react-router-dom";
 
-const AddCardPage = () => {
+const FormPage = () => {
   const navigate = useNavigate();
   const handleBackButton = () => {
     navigate("/");
@@ -17,7 +17,7 @@ const AddCardPage = () => {
           <IconButton onClick={handleBackButton} name="arrowLeft" size="2xl" color="#575757" />
           <Text fontSize="lg" weight="bold" label="카드추가" />
         </Header>
-        <AddCardForm />
+        <Form />
       </Layout>
     </>
   );
@@ -36,4 +36,4 @@ const Header = styled.div`
   gap: 20px;
 `;
 
-export default AddCardPage;
+export default FormPage;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Card from "components/Card";
 import { useNavigate } from "react-router-dom";
 
-const MyCardPage = () => {
+const MyCardListPage = () => {
   // add 버튼을 누르면 카드 추가 페이지를 보여준다.
   const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ const MyCardPage = () => {
     </Layout>
   );
 };
-export default MyCardPage;
+export default MyCardListPage;
 const Layout = styled.div`
   height: 100%;
   display: flex;
