@@ -1,7 +1,7 @@
 import { Input, InputContainer } from '../../components/form';
 import { IRegisterCard } from '../../pages/RegisterCard';
-import { useEffect, useRef, useState } from 'react';
-import { useForm } from '../../hooks';
+import { useCallback, useState } from 'react';
+import { useRefs } from '../../hooks';
 import { onlyNumber } from '../../utils/filter';
 
 const MAX_LENGTH = 1;
@@ -9,26 +9,17 @@ const VALIDATE_ERROR = '카드 비밀번호 앞 2자리를 입력 해 주세요.
 
 export default function CardPasswordContainer({ onChange }: IRegisterCard) {
   const [errorMessage, setErrorMessage] = useState('');
-  const passwordRef1 = useRef(null);
-  const passwordRef2 = useRef(null);
-  const [cardPassword, setCardPassword] = useForm({
-    first: '',
-    second: ''
-  });
+  const [passwordRef, getPasswordRef] = useRefs<HTMLInputElement>([0, 1]);
 
-  useEffect(() => {
-    const { first, second } = cardPassword;
-    const password = first.value + second.value;
+  const handleChange = useCallback(() => {
+    const cardPassword = getPasswordRef().map((item) => {
+      item.value = onlyNumber(item.value);
+      return item.value;
+    }).join('');
 
-    onChange({ cardPassword: Number(password) });
-
-    if (password.length !== MAX_LENGTH * 2) {
-      setErrorMessage(VALIDATE_ERROR);
-      return;
-    }
-
-    setErrorMessage('');
-  }, [cardPassword]);
+    onChange({ cardPassword: Number(cardPassword) });
+    setErrorMessage(cardPassword.length !== MAX_LENGTH * 2 ? VALIDATE_ERROR : '');
+  }, []);
 
   return (
     <InputContainer
@@ -39,22 +30,18 @@ export default function CardPasswordContainer({ onChange }: IRegisterCard) {
     >
       <Input
         type="password"
-        filter={onlyNumber}
         maxLength={MAX_LENGTH}
         className="w-15 mr-5"
-        ref={passwordRef1}
-        nextFocus={passwordRef2.current}
-        {...cardPassword.first}
-        onChange={setCardPassword}
+        ref={passwordRef[0]}
+        nextFocus={() => passwordRef[1].current.focus()}
+        onChange={handleChange}
       />
       <Input
-        ref={passwordRef2}
+        ref={passwordRef[1]}
         type="password"
-        filter={onlyNumber}
         maxLength={MAX_LENGTH}
         className="w-15"
-        {...cardPassword.second}
-        onChange={setCardPassword}
+        onChange={handleChange}
       />
       <p className="flex-center w-15">•</p>
       <p className="flex-center w-15">•</p>

@@ -1,7 +1,6 @@
 import { Input, InputContainer } from '../../components/form';
 import { IRegisterCard } from '../../pages/RegisterCard';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { useInput } from '../../hooks';
+import { useCallback, useRef, useState } from 'react';
 import { onlyNumber } from '../../utils/filter';
 
 const MAX_LENGTH = 3;
@@ -9,24 +8,23 @@ const VALIDATE_ERROR = '보안코드를 올바르게 입력 해 주세요.';
 
 export default function SecurityCodeContainer({ onChange }: IRegisterCard) {
   const [errorMessage, setErrorMessage] = useState('');
-  const securityCodeRef = useRef(null);
-  const securityCode = useInput('');
-  const isEnterSecurityCode = useMemo(() => securityCode.value.length === MAX_LENGTH, [securityCode]);
+  const securityCodeRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    onChange({ cardSecurityCode: Number(securityCode.value) });
+  const handleChange = useCallback(() => {
+    const cardSecurityCode = onlyNumber(securityCodeRef.current.value);
+    securityCodeRef.current.value = cardSecurityCode;
 
-    setErrorMessage(!isEnterSecurityCode ? VALIDATE_ERROR : '');
-  }, [securityCode.value]);
+    onChange({ cardSecurityCode: Number(cardSecurityCode) });
+    setErrorMessage(cardSecurityCode.length !== MAX_LENGTH ? VALIDATE_ERROR : '');
+  }, []);
 
   return (
     <InputContainer title="보안코드(CVC/CVV)" className="w-25" errorMessage={errorMessage}>
       <Input
         type="password"
         maxLength={3}
-        filter={onlyNumber}
         ref={securityCodeRef}
-        {...securityCode}
+        onChange={handleChange}
       />
     </InputContainer>
   );
