@@ -1,8 +1,7 @@
-import { ChangeEvent, forwardRef, InputHTMLAttributes, memo, Ref } from 'react';
+import { forwardRef, InputHTMLAttributes, memo } from 'react';
 
 export interface IInput extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
-  nextFocus?: HTMLInputElement;
   filter?: (text: string) => string;
 }
 
@@ -11,36 +10,29 @@ const config = {
   BASIC_CLASS: 'input-basic',
 };
 
-const Input = forwardRef<Ref<HTMLInputElement>, IInput>((
+const Input = forwardRef<HTMLInputElement, IInput>((
   {
     type,
-    className,
+    className = '',
     onChange,
     maxLength,
-    nextFocus,
     filter,
     ...props
   }, inputRef) => {
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (maxLength && e.target.value.length === maxLength) {
-      nextFocus?.focus();
-    }
-
-    onChange?.(e);
-  };
 
   return (
     <input
       ref={inputRef}
-      className={`${config.BASIC_CLASS} ${className || ''}`}
+      className={`${config.BASIC_CLASS} ${className}`}
       type={type || config.BASIC_TYPE}
-      onChange={handleChange}
+      onChange={onChange}
       maxLength={maxLength}
       {...props}
     />
   );
 });
 
-Input.displayName = 'BaseInput';
+
+Input.displayName = 'Input';
 
 export default memo(Input);

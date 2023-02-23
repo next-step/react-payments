@@ -1,10 +1,11 @@
-export function cardNumber(cardNumber: string) {
-  return cardNumber?.match(/[0-9*]{1,4}/g)?.flatMap((item, index) => {
+export function cardNumber(cardNumber: string): string {
+  const changeValue = cardNumber?.match(/[0-9*]{1,4}/g)?.flatMap((item, index) => {
     if (!item.length) return [];
     if (index > 1) return item.replace(/[0-9]/g, '*');
 
     return item;
   }).join('-');
+  return changeValue || '';
 }
 
 export function expiredDate(expiredDate: string) {
