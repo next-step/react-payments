@@ -9,11 +9,9 @@ import { action } from '@storybook/addon-actions'
 export default {
   title: 'Header',
   component: Header,
-
-  // parameters: {
-  //   // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
-  //   layout: 'fullscreen',
-  // },
+  parameters: {
+    componentSubtitle: '헤더 컴포넌트',
+  },
 } as ComponentMeta<typeof Header>
 
 const Template: ComponentStory<typeof Header> = (args) => (

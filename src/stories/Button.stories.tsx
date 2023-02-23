@@ -8,6 +8,9 @@ import { UI_SIZE, UI_VARIANT } from 'constants/ui.constant'
 export default {
   title: 'Button',
   component: Button,
+  parameters: {
+    componentSubtitle: '버튼 컴포넌트',
+  },
 } as ComponentMeta<typeof Button>
 
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />
