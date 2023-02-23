@@ -81,6 +81,15 @@
   align-items: center;
 }
 
+.card-name {
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
 .card-middle {
   width: 100%;
   height: 100%;
