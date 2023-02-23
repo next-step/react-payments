@@ -1,10 +1,10 @@
-import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { characterCount, displayNumber } from "utils";
 import Button from "components/common/Button";
 import Card from "components/common/Card";
 import { CardInput } from "components/common/Card/card.type";
 import InputContainer from "components/common/Input/InputContainer";
-import Modal from "components/common/Modal";
+import CompanyModal from "components/common/Modal";
 import { STEP } from "../../../constants/Payments";
 import Input from "components/common/Input";
 
@@ -34,11 +34,11 @@ const CardForm = ({
     password2 = "",
   } = newCardInfo;
 
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showCompanyModal, setShowCompanyModal] = useState<boolean>(false);
 
   const handleNextButtonClick = () => {
     if (step === STEP.SECOND) {
-      setShowModal((prev: boolean) => !prev);
+      setShowCompanyModal((prev: boolean) => !prev);
       return;
     }
     handleCardAddClick();
@@ -141,11 +141,11 @@ const CardForm = ({
 
           <Button label="다음" onClick={handleNextButtonClick} />
         </div>
-        {showModal && (
-          <Modal
+        {showCompanyModal && (
+          <CompanyModal
             onClick={(e) => {
               handleCardTypeClick(e);
-              setShowModal((prev: boolean) => !prev);
+              setShowCompanyModal((prev: boolean) => !prev);
               setStep(2);
             }}
             modalItem={[
