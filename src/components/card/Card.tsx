@@ -1,4 +1,4 @@
-import { getConvertedStringsByStars } from '@/domain'
+import { getConvertedStringsByStars } from '@/utils'
 
 interface CardProps {
   cardNumbers: { first: string; second: string; third: string; fourth: string }
