@@ -4,5 +4,8 @@
 }
 
 .button-text {
-  margin-right: 10px;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
 }
