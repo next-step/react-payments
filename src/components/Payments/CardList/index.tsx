@@ -10,6 +10,11 @@ interface CardListProps {
 }
 
 const CardList = ({ cardList, clearCardInfo, setStep }: CardListProps) => {
+  const handleCardAddClick = () => {
+    clearCardInfo();
+    setStep(STEP.SECOND);
+  };
+
   return (
     <>
       <h2>카드 목록</h2>
@@ -28,12 +33,7 @@ const CardList = ({ cardList, clearCardInfo, setStep }: CardListProps) => {
             );
           })}
 
-          <Card
-            onClick={() => {
-              clearCardInfo();
-              setStep(STEP.SECOND);
-            }}
-          />
+          <Card onClick={handleCardAddClick} />
         </div>
       </div>
     </>

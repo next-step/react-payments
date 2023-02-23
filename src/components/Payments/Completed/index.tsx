@@ -19,6 +19,11 @@ const Completed = ({
   handleCardInputChange,
   handleCardNicknameAddClick,
 }: CompletedProps) => {
+  const handleNextButtonClick = () => {
+    handleCardNicknameAddClick({ nickname: newCardInfo?.nickname });
+    setStep(STEP.FIRST);
+  };
+
   return (
     <>
       <h2>4️⃣ 카드 추가 완료</h2>
@@ -50,13 +55,7 @@ const Completed = ({
           </InputContainer>
 
           <div className="mt-50">
-            <Button
-              label="다음"
-              onClick={() => {
-                handleCardNicknameAddClick({ nickname: newCardInfo?.nickname });
-                setStep(STEP.FIRST);
-              }}
-            />
+            <Button label="다음" onClick={handleNextButtonClick} />
           </div>
         </div>
       </div>
