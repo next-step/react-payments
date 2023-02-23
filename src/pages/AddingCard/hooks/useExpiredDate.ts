@@ -29,14 +29,4 @@ const useExpiredDate = () => {
   return { expiredDate, handleChangeExpiredDate };
 };
 
-// const isOutOfRangeMonth = (month: string) => {
-//   if (month.length === 1) {
-//     return month !== '0' && month !== '1';
-//   }
-
-//   if (month.length === 2) {
-//     return +month <= 0 || +month > 12;
-//   }
-// };
-
 export default useExpiredDate;

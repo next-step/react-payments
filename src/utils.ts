@@ -12,6 +12,6 @@ export const isOutOfRangeMonth = (month: string) => {
   }
 
   if (month.length === 2) {
-    return +month <= MAX_MONTH || +month > MIN_MONTH;
+    return +month <= MIN_MONTH || +month > MAX_MONTH;
   }
 };
