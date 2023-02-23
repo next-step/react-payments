@@ -1,15 +1,15 @@
 import { memo, ReactNode } from 'react';
 
-export interface Props {
+export interface IButton {
   children?: ReactNode;
   onClick?: () => void;
   className?: string;
   color?: string;
 }
 
-function Button({ children, onClick, className, color }: Props) {
+function Button({ children, onClick, className = '', color }: IButton) {
   return (
-    <div className={`button-box ${className || ''}`}>
+    <div className={`button-box ${className}`}>
       <button
         type="button"
         className="button-text"

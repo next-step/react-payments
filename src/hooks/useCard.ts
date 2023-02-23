@@ -1,11 +1,11 @@
 import { useCallback, useState } from 'react';
-import { CardBoxType } from '../domain/types';
+import { ICardBox } from '../domain/types';
 import { cardNumber as filterCardNumber, expiredDate as filterExpiredDate } from '../utils/filter';
 
-export default function useCard(initialState: CardBoxType = {}) {
+export default function useCard(initialState: ICardBox = {}) {
   const [cardState, setState] = useState(initialState);
 
-  const setCardState = useCallback((newState: CardBoxType) => {
+  const setCardState = useCallback((newState: ICardBox) => {
     setState((prevState) => {
       let { cardNumber, expiredDate } = newState;
 

@@ -1,11 +1,11 @@
 import { memo, ReactNode } from 'react';
 
-export interface Props {
+export interface IModal {
   open: boolean;
   children: ReactNode;
 }
 
-function Modal({ children, open }: Props) {
+function Modal({ children, open }: IModal) {
   if (!open) return null;
 
   return (

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { cardRepository } from '../repository';
 import { CardBox, PageTitle } from '../components';
-import { CardBoxType } from '../domain/types';
+import { ICardBox } from '../domain/types';
 
 export default function CardList() {
   const cardList = cardRepository.getItem();
@@ -9,7 +9,7 @@ export default function CardList() {
   return (
     <div className="app flex-column-center">
       <PageTitle title="보유 카드"></PageTitle>
-      {cardList.map((item: CardBoxType) => (
+      {cardList.map((item: ICardBox) => (
         <div className="flex-column-center" key={item.cardNumber}>
           <CardBox {...item} />
           {item.nickname && <span className="card-nickname">{item.nickname}</span>}

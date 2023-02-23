@@ -1,11 +1,11 @@
 import { useForm } from '../../hooks';
 import { Input, InputContainer } from '../../components/form';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { RegisterCardType } from '../../pages/RegisterCard';
+import { IRegisterCard } from '../../pages/RegisterCard';
 import { Validator } from '../../domain';
 import { formToArray, onlyNumber } from '../../utils/filter';
 
-export default function ExpiredDateContainer({ onChange }: RegisterCardType) {
+export default function ExpiredDateContainer({ onChange }: IRegisterCard) {
   const { isPreviousDate } = Validator();
   const [errorMessage, setErrorMessage] = useState('');
   const monthRef = useRef(null);

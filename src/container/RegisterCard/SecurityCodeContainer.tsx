@@ -1,12 +1,12 @@
 import { Input, InputContainer } from '../../components/form';
-import { RegisterCardType } from '../../pages/RegisterCard';
+import { IRegisterCard } from '../../pages/RegisterCard';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useInput } from '../../hooks';
 import { onlyNumber } from '../../utils/filter';
 
 const MAX_LENGTH = 3;
 
-export default function SecurityCodeContainer({ onChange }: RegisterCardType) {
+export default function SecurityCodeContainer({ onChange }: IRegisterCard) {
   const [errorMessage, setErrorMessage] = useState('');
   const securityCodeRef = useRef(null);
   const securityCode = useInput('');

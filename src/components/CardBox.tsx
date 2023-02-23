@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { CardBoxType } from '../domain/types';
+import { ICardBox } from '../domain/types';
 
 const config = {
   type: {
@@ -8,7 +8,7 @@ const config = {
   }
 };
 
-function CardBox({ cardNumber, cardHolder, expiredDate, type = 'small', color, brand }: CardBoxType) {
+function CardBox({ cardNumber, cardHolder, expiredDate, type = 'small', color, brand }: ICardBox) {
   return (
     <div className="card-box">
       <div className={config.type[type]} style={{ backgroundColor: color }}>

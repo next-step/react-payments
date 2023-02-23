@@ -1,6 +1,6 @@
 import { memo, ReactNode } from 'react';
 
-interface Props {
+interface IInputContainer {
   children: ReactNode;
   title: string;
   className?: string;
@@ -9,7 +9,7 @@ interface Props {
   errorMessage?: string;
 }
 
-function InputContainer({ children, className = '', title, notInputBox, anchor, errorMessage }: Props) {
+function InputContainer({ children, className = '', title, notInputBox, anchor, errorMessage }: IInputContainer) {
   return (
     <div className="input-container">
       <div className="flex-between">

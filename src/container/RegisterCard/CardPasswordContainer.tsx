@@ -1,5 +1,5 @@
 import { Input, InputContainer } from '../../components/form';
-import { RegisterCardType } from '../../pages/RegisterCard';
+import { IRegisterCard } from '../../pages/RegisterCard';
 import { useEffect, useRef, useState } from 'react';
 import { useForm } from '../../hooks';
 import { onlyNumber } from '../../utils/filter';
@@ -7,7 +7,7 @@ import { onlyNumber } from '../../utils/filter';
 const MAX_LENGTH = 1;
 const VALIDATE_ERROR = '카드 비밀번호 앞 2자리를 입력 해 주세요.';
 
-export default function CardPasswordContainer({ onChange }: RegisterCardType) {
+export default function CardPasswordContainer({ onChange }: IRegisterCard) {
   const [errorMessage, setErrorMessage] = useState('');
   const passwordRef1 = useRef(null);
   const passwordRef2 = useRef(null);

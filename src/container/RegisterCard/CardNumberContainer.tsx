@@ -1,14 +1,14 @@
 import { useForm } from '../../hooks';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Input, InputContainer } from '../../components/form';
-import { RegisterCardType } from '../../pages/RegisterCard';
+import { IRegisterCard } from '../../pages/RegisterCard';
 import { Validator } from '../../domain';
 import { formToArray, onlyNumber } from '../../utils/filter';
 
 const MAX_LENGTH = 4;
 const VALIDATE_ERROR = '카드 번호를 입력 해 주세요.';
 
-export default function CardNumberContainer({ onChange }: RegisterCardType) {
+export default function CardNumberContainer({ onChange }: IRegisterCard) {
   const { isEnterCardNumber } = Validator();
   const [errorMessage, setErrorMessage] = useState(VALIDATE_ERROR);
   const cardNumber2 = useRef(null);

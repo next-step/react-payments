@@ -1,8 +1,8 @@
 import { memo, useCallback } from 'react';
-import { CardBoxType } from '../domain/types';
+import { ICardBox } from '../domain/types';
 
-export interface Props {
-  onChange: (data: CardBoxType) => void;
+export interface ICardSelection {
+  onChange: (data: ICardBox) => void;
 }
 
 const CARD_DATA1 = [
@@ -18,8 +18,8 @@ const CARD_DATA2 = [
   { brand: '클린카드8', color: '#ffa726' }
 ];
 
-function CardSelection({ onChange }: Props) {
-  const handleClick = useCallback((data: CardBoxType) => {
+function CardSelection({ onChange }: ICardSelection) {
+  const handleClick = useCallback((data: ICardBox) => {
     onChange(data);
   }, []);
 

@@ -1,6 +1,6 @@
 import { ChangeEvent, forwardRef, InputHTMLAttributes, memo, Ref } from 'react';
 
-export interface Props extends InputHTMLAttributes<HTMLInputElement> {
+export interface IInput extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   nextFocus?: HTMLInputElement;
   filter?: (text: string) => string;
@@ -20,7 +20,7 @@ const Input = forwardRef((
     nextFocus,
     filter,
     ...props
-  }: Props, inputRef: Ref<HTMLInputElement>) => {
+  }: IInput, inputRef: Ref<HTMLInputElement>) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (filter) e.target.value = filter(e.target.value);
     const value = e.target.value;

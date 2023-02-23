@@ -1,12 +1,12 @@
 import { Input, InputContainer } from '../../components/form';
 import { useInput } from '../../hooks';
 import { onlyString } from '../../utils/filter';
-import { RegisterCardType } from '../../pages/RegisterCard';
+import { IRegisterCard } from '../../pages/RegisterCard';
 import { useEffect } from 'react';
 
 const MAX_LENGTH = 30;
 
-export default function CardHolderContainer({ onChange }: RegisterCardType) {
+export default function CardHolderContainer({ onChange }: IRegisterCard) {
   const cardHolder = useInput('');
   const countValue = cardHolder.value.length;
 

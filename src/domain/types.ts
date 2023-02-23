@@ -1,4 +1,4 @@
-export interface CardBoxType {
+export interface ICardBox {
   brand?: string;
   cardNumber?: string;
   cardHolder?: string;
