@@ -6,6 +6,7 @@ const CardExpirationDate = ({
   fetchedTwoLettersDataHandler,
 }: CardExpirationDateProps) => {
   const { MM, YY } = cardExpirationDate
+
   return (
     <div className='input-container'>
       <span className='input-title'>만료일</span>

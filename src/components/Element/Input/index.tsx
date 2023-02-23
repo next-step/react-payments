@@ -1,8 +1,7 @@
-import { InputHTMLAttributes } from 'react'
-import { InputProps } from '../../../types/element.d'
+import { ForwardedRef, forwardRef, InputHTMLAttributes } from 'react'
 
-const Input = ({ ...props }: InputHTMLAttributes<HTMLInputElement>, { inputRef }: InputProps) => {
-  return <input {...props} ref={inputRef} />
+const Input = ({ ...props }: InputHTMLAttributes<HTMLInputElement>, ref: ForwardedRef<HTMLInputElement>) => {
+  return <input ref={ref} {...props} />
 }
 
-export default Input
+export default forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(Input)
