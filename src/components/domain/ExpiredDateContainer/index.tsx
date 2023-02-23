@@ -1,9 +1,8 @@
-import { useRef } from 'react';
 import { css } from '@emotion/css';
 
 import { Input, Label } from 'components/common';
 
-import { useInputFocusing } from 'hooks';
+import { useInputFocusing, useRefs } from 'hooks';
 
 import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
 import type { ExpiredDate } from 'types/card';
@@ -16,8 +15,7 @@ interface ExpiredDateContainerProps {
 function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredDateContainerProps) {
   const { month, year } = expiredDate;
 
-  const monthRef = useRef<HTMLInputElement>(null);
-  const yearRef = useRef<HTMLInputElement>(null);
+  const [monthRef, yearRef] = useRefs<HTMLInputElement>(2);
 
   useInputFocusing({
     refs: [monthRef, yearRef],

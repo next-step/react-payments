@@ -1,8 +1,6 @@
-import { useRef } from 'react';
-
 import { Input, Dash, Label } from 'components/common';
 
-import { useInputFocusing } from 'hooks';
+import { useInputFocusing, useRefs } from 'hooks';
 
 import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
 import type { CardNumber } from 'types/card';
@@ -15,10 +13,7 @@ interface CardNumberContainerProps {
 function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberContainerProps) {
   const { num1, num2, num3, num4 } = cardNumber;
 
-  const num1Ref = useRef<HTMLInputElement>(null);
-  const num2Ref = useRef<HTMLInputElement>(null);
-  const num3Ref = useRef<HTMLInputElement>(null);
-  const num4Ref = useRef<HTMLInputElement>(null);
+  const [num1Ref, num2Ref, num3Ref, num4Ref] = useRefs<HTMLInputElement>(4);
 
   useInputFocusing({
     refs: [num1Ref, num2Ref, num3Ref, num4Ref],

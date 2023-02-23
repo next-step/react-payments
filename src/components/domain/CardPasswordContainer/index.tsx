@@ -1,9 +1,9 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { css } from '@emotion/css';
 
 import { Input, Label } from 'components/common';
 import { Masking } from 'components/domain';
-import { useInputFocusing } from 'hooks';
+import { useInputFocusing, useRefs } from 'hooks';
 
 import { isNumber } from 'utils';
 import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
@@ -18,8 +18,7 @@ function CardPasswordContainer() {
   const [password, setPassword] = useState(INITIAL_STATE);
   const { password1, password2 } = password;
 
-  const password1Ref = useRef<HTMLInputElement>(null);
-  const password2Ref = useRef<HTMLInputElement>(null);
+  const [password1Ref, password2Ref] = useRefs<HTMLInputElement>(2);
 
   useInputFocusing({
     refs: [password1Ref, password2Ref],
