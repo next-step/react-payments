@@ -54,6 +54,7 @@ export const AddCardForm = () => {
     <>
       {isOpenModal ? <DotList onSelectedDot={selectedDot} /> : <></>}
       <Card
+        type="primary"
         onClick={openModal}
         color={color}
         company={company}

@@ -3,37 +3,55 @@ import Text from "components/Text";
 import { ColorType, CompanyType } from "types";
 import { ReactEventHandler } from "react";
 
-type sizeType = "small" | "big";
+type CardSizeType = "small" | "big";
+type CardType = "primary" | "add";
 
 export type CardProps = {
-  size: sizeType;
-  number: string;
-  expirationMonth: string;
-  expirationYear: string;
-  ownerName: string;
-  color: ColorType;
-  company: CompanyType;
-  onClick: ReactEventHandler<HTMLDivElement>;
+  size: CardSizeType;
+  type: CardType;
+  number?: string;
+  expirationMonth?: string;
+  expirationYear?: string;
+  ownerName?: string;
+  color?: ColorType;
+  company?: CompanyType;
+  onClick?: ReactEventHandler<HTMLDivElement>;
 };
 
-const Card = ({ color, company, size, number, expirationMonth, expirationYear, ownerName, onClick }: CardProps) => {
+const Card = ({
+  type,
+  color,
+  company,
+  size,
+  number,
+  expirationMonth,
+  expirationYear,
+  ownerName,
+  onClick,
+}: CardProps) => {
   return (
     <Layout onClick={onClick}>
-      <Container color={color} size={size}>
-        <Top>
-          <Text fontSize="s" weight="normal" label={company} />
-        </Top>
-        <Middle>
-          <Chip />
-        </Middle>
-        <Bottom>
-          <Text fontSize="m" weight="normal" label={number} />
-          <InfoContainer>
-            <Text fontSize="s" weight="bold" label={ownerName} />
-            <Text fontSize="s" weight="bold" label={`${expirationMonth}/${expirationYear}`} />
-          </InfoContainer>
-        </Bottom>
-      </Container>
+      {type === "primary" ? (
+        <Container color={color} size={size}>
+          <Top>
+            <Text fontSize="s" weight="normal" label={company} />
+          </Top>
+          <Middle>
+            <Chip />
+          </Middle>
+          <Bottom>
+            <Text fontSize="m" weight="normal" label={number} />
+            <InfoContainer>
+              <Text fontSize="s" weight="bold" label={ownerName} />
+              <Text fontSize="s" weight="bold" label={`${expirationMonth}/${expirationYear}`} />
+            </InfoContainer>
+          </Bottom>
+        </Container>
+      ) : (
+        <Container color={color} size={size}>
+          +
+        </Container>
+      )}
     </Layout>
   );
 };
@@ -47,11 +65,12 @@ const Layout = styled.div`
 
 type ContainerProps = {
   color?: ColorType;
-  size: sizeType;
+  size: CardSizeType;
 };
 const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-size: 30px;
   box-shadow: 3px 3px 5px rgb(0 0 0 / 25%);
