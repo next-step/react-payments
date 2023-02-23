@@ -5,6 +5,7 @@ import { useInput } from '../../hooks';
 import { onlyNumber } from '../../utils/filter';
 
 const MAX_LENGTH = 3;
+const VALIDATE_ERROR = '보안코드를 올바르게 입력 해 주세요.';
 
 export default function SecurityCodeContainer({ onChange }: IRegisterCard) {
   const [errorMessage, setErrorMessage] = useState('');
@@ -15,12 +16,7 @@ export default function SecurityCodeContainer({ onChange }: IRegisterCard) {
   useEffect(() => {
     onChange({ cardSecurityCode: Number(securityCode.value) });
 
-    if (!isEnterSecurityCode) {
-      setErrorMessage('보안코드를 올바르게 입력 해 주세요.');
-      return;
-    }
-
-    setErrorMessage('');
+    setErrorMessage(!isEnterSecurityCode ? VALIDATE_ERROR : '');
   }, [securityCode.value]);
 
   return (

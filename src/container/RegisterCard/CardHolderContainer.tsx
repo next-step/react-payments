@@ -1,26 +1,28 @@
 import { Input, InputContainer } from '../../components/form';
-import { useInput } from '../../hooks';
 import { onlyString } from '../../utils/filter';
 import { IRegisterCard } from '../../pages/RegisterCard';
-import { useEffect } from 'react';
+import { useRef } from 'react';
 
 const MAX_LENGTH = 30;
 
 export default function CardHolderContainer({ onChange }: IRegisterCard) {
-  const cardHolder = useInput('');
-  const countValue = cardHolder.value.length;
+  const cardHolderRef = useRef<HTMLInputElement>(null);
+  const countValue = cardHolderRef.current?.value.length;
 
-  useEffect(() => {
-    onChange({ cardHolder: cardHolder.value });
-  }, [cardHolder.value]);
+  const handleChange = () => {
+    const cardHolder = onlyString(cardHolderRef?.current.value);
+
+    cardHolderRef.current.value = cardHolder;
+    onChange({ cardHolder });
+  };
 
   return (
     <InputContainer title="카드 소유자 이름(선택)" charLength={`(${countValue}/30)`}>
       <Input
+        ref={cardHolderRef}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         maxLength={MAX_LENGTH}
-        {...cardHolder}
-        filter={onlyString}
+        onChange={handleChange}
       />
     </InputContainer>
   );

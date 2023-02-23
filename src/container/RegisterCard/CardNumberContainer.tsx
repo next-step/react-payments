@@ -1,43 +1,27 @@
-import { useForm } from '../../hooks';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { Input, InputContainer } from '../../components/form';
 import { IRegisterCard } from '../../pages/RegisterCard';
-import { Validator } from '../../domain';
-import { formToArray, onlyNumber } from '../../utils/filter';
+import { onlyNumber } from '../../utils/filter';
+import { useRefs } from '../../hooks';
 
 const MAX_LENGTH = 4;
+const CARD_LENGTH = 16;
 const VALIDATE_ERROR = '카드 번호를 입력 해 주세요.';
 
-export default function CardNumberContainer({ onChange }: IRegisterCard) {
-  const { isEnterCardNumber } = Validator();
+function CardNumberContainer({ onChange }: IRegisterCard) {
   const [errorMessage, setErrorMessage] = useState(VALIDATE_ERROR);
-  const cardNumber2 = useRef(null);
-  const cardNumber3 = useRef(null);
-  const cardNumber4 = useRef(null);
-  const [cardNumber, setCardNumber] = useForm({
-    first: '',
-    second: '',
-    third: '',
-    fourth: ''
-  });
+  const [cardNumberRef, getCardRefs] = useRefs<HTMLInputElement>([0, 1, 2, 3]);
 
-  const isValidateCard = useMemo(() => (
-    isEnterCardNumber(cardNumber, MAX_LENGTH)
-  ), [cardNumber]);
-  const cardNumbers = useMemo(() => (
-    formToArray(cardNumber).join('')
-  ), [cardNumber]);
+  const handleCardNumber = useCallback(() => {
+    const cardRefs = getCardRefs();
+    const cardNumber = cardRefs.map((item) => {
+      item.value = onlyNumber(item.value);
+      return item.value;
+    }).join('');
 
-  useEffect(() => {
-    onChange({ cardNumber: cardNumbers });
-
-    if (!isValidateCard) {
-      setErrorMessage(VALIDATE_ERROR);
-      return;
-    }
-
-    setErrorMessage('');
-  }, [cardNumber]);
+    onChange({ cardNumber });
+    setErrorMessage(cardNumber.length === CARD_LENGTH ? '' : VALIDATE_ERROR);
+  }, []);
 
   return (
     <InputContainer
@@ -45,40 +29,35 @@ export default function CardNumberContainer({ onChange }: IRegisterCard) {
       errorMessage={errorMessage}
     >
       <Input
-        {...cardNumber.first}
-        onChange={setCardNumber}
+        ref={cardNumberRef[0]}
+        onChange={handleCardNumber}
         maxLength={MAX_LENGTH}
-        nextFocus={cardNumber2.current}
-        filter={onlyNumber}
+        nextFocus={() => cardNumberRef[1].current?.focus()}
       />
       -
       <Input
-        {...cardNumber.second}
-        onChange={setCardNumber}
-        ref={cardNumber2}
+        ref={cardNumberRef[1]}
+        onChange={handleCardNumber}
         maxLength={MAX_LENGTH}
-        nextFocus={cardNumber3.current}
-        filter={onlyNumber}
+        nextFocus={() => cardNumberRef[2].current?.focus()}
       />
       -
       <Input
-        {...cardNumber.third}
-        onChange={setCardNumber}
-        ref={cardNumber3}
+        ref={cardNumberRef[2]}
+        onChange={handleCardNumber}
         type="password"
         maxLength={MAX_LENGTH}
-        nextFocus={cardNumber4.current}
-        filter={onlyNumber}
+        nextFocus={() => cardNumberRef[3].current?.focus()}
       />
       -
       <Input
-        {...cardNumber.fourth}
-        onChange={setCardNumber}
-        ref={cardNumber4}
+        ref={cardNumberRef[3]}
+        onChange={handleCardNumber}
         type="password"
         maxLength={MAX_LENGTH}
-        filter={onlyNumber}
       />
     </InputContainer>
   );
 }
+
+export default memo(CardNumberContainer);

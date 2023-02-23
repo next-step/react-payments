@@ -25,12 +25,13 @@ export default function RegisterCard() {
 
   useEffect(() => {
     const { cardNumber, brand } = cardState;
-    if (cardNumber?.length === 8) {
-      setOpenCardPopup(true);
-    }
 
     if (brand) {
       setOpenCardPopup(false);
+      return;
+    }
+    if (cardNumber?.length) {
+      setOpenCardPopup(true);
     }
   }, [cardState]);
 
