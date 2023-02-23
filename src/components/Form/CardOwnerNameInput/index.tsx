@@ -3,11 +3,11 @@ import styled from "styled-components";
 import Input from "../../Input";
 import { useRef, useState } from "react";
 import { checkOwnerName } from "utils";
-import { ColorType } from "types";
+import { ColorType, CardStateType } from "types";
 
 type CardOwnerNameInputProps = {
   fontColor: ColorType;
-  setOwnerName: React.Dispatch<React.SetStateAction<string>>;
+  setOwnerName: React.Dispatch<React.SetStateAction<CardStateType>>;
 };
 
 const CardOwnerNameInput = ({ setOwnerName, fontColor }: CardOwnerNameInputProps) => {
@@ -21,7 +21,15 @@ const CardOwnerNameInput = ({ setOwnerName, fontColor }: CardOwnerNameInputProps
     const ownerName = checkOwnerName(value);
     ref.value = ownerName;
     setLength(ownerName.length);
-    return !ownerName.length ? setOwnerName("Name") : setOwnerName(ownerName);
+    return !ownerName.length
+      ? setOwnerName((prev) => ({
+          ...prev,
+          ownerName: "Name",
+        }))
+      : setOwnerName((prev) => ({
+          ...prev,
+          ownerName,
+        }));
   };
   return (
     <Layout>

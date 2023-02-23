@@ -13,26 +13,8 @@ import { useHandleCardText } from "hooks/useHandleCardText";
 
 export const Form = () => {
   const navigate = useNavigate();
-  const {
-    setCardNumber,
-    cardNumber,
-    expirationMonth,
-    expirationYear,
-    ownerName,
-    setOwnerName,
-    color,
-    setColor,
-    company,
-    setCompany,
-    securityCode,
-    setSecurityCode,
-    password,
-    setPassword,
-    setExpriationMonth,
-    setExpriationYear,
-  } = useHandleCardText();
-
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(true);
+  const { state, setState } = useHandleCardText();
+  const [isOpenModal, setIsOpenModal] = useState(true);
 
   const submit = () => {
     navigate("/complete"); // Input validation 추가 필요
@@ -41,8 +23,12 @@ export const Form = () => {
   const selectedDot = (e) => {
     const color = e.currentTarget.children[0].getAttribute("color");
     const company = e.currentTarget.children[1].textContent;
-    setColor(color);
-    setCompany(company);
+
+    setState((prev) => ({
+      ...prev,
+      company,
+      color,
+    }));
     setIsOpenModal(false);
   };
 
@@ -56,23 +42,19 @@ export const Form = () => {
       <Card
         type="primary"
         onClick={openModal}
-        color={color}
-        company={company}
+        color={state.color}
+        company={state.company}
         size="small"
-        number={cardNumber}
-        expirationMonth={expirationMonth}
-        expirationYear={expirationYear}
-        ownerName={ownerName}
+        number={state.cardNumbers}
+        expirationMonth={state.expireDate.month}
+        expirationYear={state.expireDate.year}
+        ownerName={state.ownerName}
       />
-      <CardNumberInput setCardNumber={setCardNumber} fontColor={color} />
-      <CardExpirationDateInput
-        setExpriationMonth={setExpriationMonth}
-        setExpriationYear={setExpriationYear}
-        fontColor={color}
-      />
-      <CardOwnerNameInput setOwnerName={setOwnerName} fontColor={color} />
-      <CardSecurityInput fontColor={color} setSecurityCode={setSecurityCode} />
-      <CardPasswordInput fontColor={color} setPassword={setPassword} />
+      <CardNumberInput setCardNumber={setState} fontColor={state.color} />
+      <CardExpirationDateInput setExprireDate={setState} fontColor={state.color} />
+      <CardOwnerNameInput setOwnerName={setState} fontColor={state.color} />
+      <CardSecurityInput fontColor={state.color} setSecurityCode={setState} />
+      <CardPasswordInput fontColor={state.color} setPassword={setState} />
       <ButtonBox>
         <Button fontSize="s" onClick={submit} label="Next" />
       </ButtonBox>

@@ -1,3 +1,4 @@
+import { CompanyType, CardStateType } from "types";
 export const checkCardNumber = (string: string): string => {
   let newString = string.replace(/[^0-9\-\*]/g, ""); //숫자만입력받기
   if (/^(\d{4})(\d)/.test(newString)) {
@@ -44,10 +45,10 @@ export const checkYear = (string: string) => {
   }
   return newString;
 };
-export const checkPassword = (string: string): string => {
-  let newString = string.replace(/[^0-9]/g, ""); //숫자만 받기
-  if (string.length > 1) return "*";
-  return newString.replaceAll(/[0-9]/g, "*");
+export const changePassword = (string: string): string => {
+  let newString = string.replaceAll(/[^0-9]/g, ""); //숫자만 받기
+
+  return !newString.length ? "*" : "*";
 };
 
 export const checkOwnerName = (string: string): string => {
@@ -60,23 +61,13 @@ type cardFormObjType = {
   cardNumber: string;
   expirationDate: expirationDateType;
   ownerName: string;
-  company: companyType;
+  company: CompanyType;
 };
 
 type expirationDateType = {
   month: string;
   year: string;
 };
-type companyType =
-  | "하나카드"
-  | "국민카드"
-  | "신한카드"
-  | "클린카드"
-  | "토스카드"
-  | "네이버카드"
-  | "카카오카드"
-  | "오렌지카드"
-  | "";
 
 export const checkCardFormValidation = (cardFormObj: cardFormObjType): boolean => {
   const { month, year } = cardFormObj.expirationDate;
@@ -106,4 +97,20 @@ const isValidOwnerName = (owenerName: string) => {
 };
 const isValidCardNumber = (cardNumber: string) => {
   return cardNumber.length === 19;
+};
+
+export const inistalCardState: CardStateType = {
+  cardNumbers: "",
+  expireDate: {
+    month: "MM",
+    year: "YY",
+  },
+  password: {
+    one: "",
+    two: "",
+  },
+  cvc: "",
+  ownerName: "",
+  color: "",
+  company: "",
 };

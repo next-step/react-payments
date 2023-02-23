@@ -11,3 +11,18 @@ export type CompanyType =
   | "";
 export type FontSizeType = "xs" | "s" | "m" | "lg";
 export type FontWeightType = "normal" | "bold";
+export type CardStateType = {
+  cardNumbers: string;
+  expireDate: {
+    month: string;
+    year: string;
+  };
+  password: {
+    one: string;
+    two: string;
+  };
+  cvc: string;
+  ownerName: string;
+  color: ColorType;
+  company: CompanyType;
+};

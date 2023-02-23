@@ -4,38 +4,36 @@ import Text from "components/Text";
 import styled from "styled-components";
 import { useRef } from "react";
 import { checkMonth, checkYear } from "../../../utils/index";
-
+import { CardStateType } from "types";
 export type CardExpirationDateInputProps = {
-  setExpriationYear: React.Dispatch<React.SetStateAction<string>>;
-  setExpriationMonth: React.Dispatch<React.SetStateAction<string>>;
+  setExprireDate: React.Dispatch<React.SetStateAction<CardStateType>>;
 };
 
-const CardExpirationDateInput = ({ setExpriationYear, setExpriationMonth, fontColor }) => {
+const CardExpirationDateInput = ({ setExprireDate, fontColor }) => {
   const inputMonthRef = useRef<HTMLInputElement>(null);
   const inputYearRef = useRef<HTMLInputElement>(null);
 
-  const handleMonthInput = () => {
-    const ref = inputMonthRef.current;
-    if (ref === null) return;
-    let month = checkMonth(ref.value);
-    ref.value = checkMonth(month);
+  const handleInput = () => {
+    if (inputMonthRef.current === null || inputYearRef.current === null) return;
+    let month = checkMonth(inputMonthRef.current.value);
+    let year = checkYear(inputYearRef.current.value);
+    inputMonthRef.current.value = checkMonth(month);
+    inputYearRef.current.value = checkYear(year);
 
     if (!month.length) {
       month = "MM";
     }
-    setExpriationMonth(month);
-  };
-  const handleYearInput = () => {
-    const ref = inputYearRef.current;
-    if (ref === null) return;
-    let year = checkYear(ref.value);
-    ref.value = year;
     if (!year.length) {
       year = "YY";
     }
-    setExpriationYear(year);
+    setExprireDate((prev) => ({
+      ...prev,
+      expireDate: {
+        month: month,
+        year: year,
+      },
+    }));
   };
-
   return (
     <Layout>
       <Title fontSize="xs" weight="normal" label="만료일" />
@@ -44,7 +42,7 @@ const CardExpirationDateInput = ({ setExpriationYear, setExpriationMonth, fontCo
           type="text"
           placeholder="MM"
           theme="primary"
-          onChange={handleMonthInput}
+          onChange={handleInput}
           ref={inputMonthRef}
           fontColor={fontColor}
           active={true}
@@ -53,7 +51,7 @@ const CardExpirationDateInput = ({ setExpriationYear, setExpriationMonth, fontCo
           type="text"
           placeholder="YY"
           theme="primary"
-          onChange={handleYearInput}
+          onChange={handleInput}
           ref={inputYearRef}
           fontColor={fontColor}
           active={true}

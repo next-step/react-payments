@@ -4,10 +4,9 @@ import styled from "styled-components";
 import { checkCardNumber } from "utils";
 import Input from "../../Input";
 import InputContainer from "components/Input/Container";
-import { ColorType } from "types";
-
+import { ColorType, CardStateType } from "types";
 type CardNumberInputProps = {
-  setCardNumber: React.Dispatch<React.SetStateAction<string>>;
+  setCardNumber: React.Dispatch<React.SetStateAction<CardStateType>>;
   fontColor: ColorType;
 };
 
@@ -17,9 +16,12 @@ const CardNumberInput = ({ setCardNumber, fontColor }: CardNumberInputProps) => 
   const handleInput = () => {
     const currentRef = ref.current;
     if (currentRef === null) return;
-    const cardNumber = checkCardNumber(currentRef.value);
-    currentRef.value = cardNumber;
-    setCardNumber(cardNumber);
+    const cardNumbers = checkCardNumber(currentRef.value);
+    currentRef.value = cardNumbers;
+    setCardNumber((prev) => ({
+      ...prev,
+      cardNumbers,
+    }));
   };
 
   return (
