@@ -6,6 +6,8 @@ import { CreditCard, PaymentsContext } from '../context/PaymentsContext';
 import useRefObjects from '../hooks/useRefObjects';
 import { extractNumbers } from '../utils';
 
+const cardNumberInputTypes = ['text', 'text', 'password', 'password'];
+
 const AddCard = () => {
   const { addCard } = useContext(PaymentsContext);
   const navigate = useNavigate();
