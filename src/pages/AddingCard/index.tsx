@@ -9,7 +9,7 @@ import {
   SecretCodeContainer,
   CardCompanyPicker,
 } from 'components/domain';
-import { Button, Header } from 'components/common';
+import { Button, Header, Label } from 'components/common';
 
 import { useCardNumber, useExpiredDate, useCardOwner, useCompanyPicker } from './hooks';
 
@@ -32,7 +32,7 @@ function AddingCard() {
         title="카드 추가"
         prefix={<Button fontSize={24} onClick={() => navigate(-1)}>{`<`}</Button>}
       />
-      <span className="input-title">카드사 선택</span>
+      <Label>카드사 선택</Label>
       <div onClick={openPicker}>
         <Card
           cardNumber={cardNumber}

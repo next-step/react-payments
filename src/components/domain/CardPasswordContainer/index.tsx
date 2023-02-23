@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { css } from '@emotion/css';
 
-import { Input } from 'components/common';
+import { Input, Label } from 'components/common';
 import { Masking } from 'components/domain';
 import { useInputFocusing } from 'hooks';
 
@@ -39,11 +39,12 @@ function CardPasswordContainer() {
 
   return (
     <div className="input-container">
-      <span className="input-title">카드 비밀번호</span>
+      <Label>카드 비밀번호</Label>
       <div
         className={css`
           display: flex;
           gap: 10px;
+          margin: 0.375rem 0 0;
         `}
       >
         <Input

@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { Input, Dash } from 'components/common';
+import { Input, Dash, Label } from 'components/common';
 
 import { useInputFocusing } from 'hooks';
 
@@ -28,7 +28,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
 
   return (
     <div className="input-container">
-      <span className="input-title">카드 번호</span>
+      <Label>카드 번호</Label>
       <div className="input-box">
         <Input
           ref={num1Ref}
@@ -40,7 +40,6 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
           maxLength={MAX_LENGTH.CARD_NUMBER}
         />
         {num1.length === MAX_LENGTH.CARD_NUMBER && <Dash />}
-
         <Input
           ref={num2Ref}
           placeholder="5678"

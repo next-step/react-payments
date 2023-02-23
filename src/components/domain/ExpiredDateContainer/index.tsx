@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { css } from '@emotion/css';
 
-import { Input } from 'components/common';
+import { Input, Label } from 'components/common';
 
 import { useInputFocusing } from 'hooks';
 
@@ -27,7 +27,7 @@ function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredD
 
   return (
     <div className="input-container">
-      <span className="input-title">만료일</span>
+      <Label>만료일</Label>
       <div className="input-box w-50">
         <Input
           ref={monthRef}
@@ -38,14 +38,17 @@ function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredD
           onChange={handleChangeExpiredDate}
           maxLength={MAX_LENGTH.EXPIRED_DATE}
         />
-        <span
-          className={css`
-            color: #000;
-            padding: 4px 0 0;
-          `}
-        >
-          /
-        </span>
+        {month.length === MAX_LENGTH.EXPIRED_DATE && (
+          <span
+            className={css`
+              color: #000;
+              padding: 4px 0 0;
+            `}
+          >
+            /
+          </span>
+        )}
+
         <Input
           ref={yearRef}
           placeholder="YY"
