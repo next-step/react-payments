@@ -7,6 +7,8 @@ import { CompanyColor } from 'components/domain';
 import { CardCompany } from 'types/card';
 import type { CompanyColorProps } from 'components/domain/CompanyColor';
 
+const COMPANIES = Object.values(CardCompany);
+
 const handleClickCompanyColor = action('click');
 
 export default {
@@ -35,7 +37,7 @@ Template.storyName = 'Playground';
 export const Palette = () => {
   return (
     <PaletteLayout>
-      {Object.values(CardCompany).map((company) => (
+      {COMPANIES.map((company) => (
         <CompanyColor
           key={company}
           company={company as CardCompany}

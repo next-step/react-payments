@@ -4,6 +4,8 @@ import { CompanyColor } from 'components/domain';
 
 import { CardCompany } from 'types/card';
 
+const COMPANIES = Object.values(CardCompany);
+
 interface CardCompanyPickerProps {
   updateCompany: (company: CardCompany) => void;
 }
@@ -20,7 +22,7 @@ function CardCompanyPicker({ updateCompany }: CardCompanyPickerProps) {
             `
           )}
         >
-          {Object.values(CardCompany).map((company) => (
+          {COMPANIES.map((company) => (
             <CompanyColor key={company} company={company} onClick={() => updateCompany(company)} />
           ))}
         </div>
