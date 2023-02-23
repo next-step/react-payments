@@ -12,16 +12,12 @@ function InputProgress({ current, max }: InputProgressProps) {
         color: #525252;
         font-size: 12px;
         line-height: 14px;
+        display: flex;
+        gap: 1px;
       `}
     >
       <span>{current}</span>
-      <span
-        className={css`
-          margin: 0 1px;
-        `}
-      >
-        /
-      </span>
+      <span>/</span>
       <span>{max}</span>
     </div>
   );

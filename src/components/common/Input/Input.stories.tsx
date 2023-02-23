@@ -15,7 +15,14 @@ export const Template: Story<InputProps> = (args) => {
 
   return <Input {...args} ref={ref} />;
 };
-Template.args = { value: 'Sample', textAlign: 'left', size: 'medium' };
+Template.args = {
+  value: 'Sample',
+  textAlign: 'left',
+  size: 'medium',
+  label: 'This is label',
+  hasProgress: true,
+  maxLength: 30,
+};
 Template.storyName = 'Playground';
 
 const Wrapper = styled.div`
@@ -34,4 +41,19 @@ export const Size = () => {
       <Input value="full" size="full" textAlign="left" />
     </Wrapper>
   );
+};
+
+export const Default = Template.bind({});
+Default.args = { value: 'Sample', textAlign: 'left', size: 'medium' };
+
+export const WithLabel = Template.bind({});
+WithLabel.args = { value: 'Sample', textAlign: 'left', size: 'medium', label: 'This is label' };
+
+export const WithProgress = Template.bind({});
+WithProgress.args = {
+  value: 'Sample',
+  textAlign: 'left',
+  size: 'medium',
+  hasProgress: true,
+  maxLength: 30,
 };
