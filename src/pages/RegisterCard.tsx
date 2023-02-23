@@ -10,7 +10,7 @@ import {
   SecurityCodeContainer
 } from '../container/RegisterCard';
 import { Button } from '../components/form';
-import { cardRepository } from '../repository';
+import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
 import { ICardBox } from '../domain/types';
 

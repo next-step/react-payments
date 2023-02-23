@@ -1,4 +1,4 @@
-import { cardRepository } from '../repository';
+import { cardRepository } from '../repositories';
 import { useMemo } from 'react';
 import { CardBox, PageTitle } from '../components';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -8,7 +8,6 @@ import { useInput } from '../hooks';
 export default function RegisterComplete() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-
   const cardNumber = searchParams.get('card');
   const cardList = useMemo(() => cardRepository.getItem(), []);
   const cardData = useMemo(() => cardList.find((item) => item.cardNumber === cardNumber), []);

@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { cardRepository } from '../repository';
+import { cardRepository } from '../repositories';
 import { CardBox, PageTitle } from '../components';
 import { ICardBox } from '../domain/types';
 

@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import { ICardBox } from '../domain/types';
 
 export interface ICardSelection {
@@ -19,28 +19,18 @@ const CARD_DATA2 = [
 ];
 
 function CardSelection({ onChange }: ICardSelection) {
-  const handleClick = useCallback((data: ICardBox) => {
-    onChange(data);
-  }, []);
-
   return (
     <>
-      <div className="flex-center">
-        {CARD_DATA1.map(({ brand, color }) => (
-          <div className="modal-item-container" key={color} onClick={() => handleClick({ brand, color })}>
-            <div className="modal-item-dot" style={{ backgroundColor: color }}></div>
-            <span className="modal-item-name">{brand}</span>
-          </div>
-        ))}
-      </div>
-      <div className="flex-center">
-        {CARD_DATA2.map(({ brand, color }) => (
-          <div className="modal-item-container" key={color} onClick={() => handleClick({ brand, color })}>
-            <div className="modal-item-dot" style={{ backgroundColor: color }}></div>
-            <span className="modal-item-name">{brand}</span>
-          </div>
-        ))}
-      </div>
+      {[CARD_DATA1, CARD_DATA2].map((cardData, key) => (
+        <div className="flex-center" key={key}>
+          {cardData.map((cardCompany) => (
+            <div className="modal-item-container" key={cardCompany.color} onClick={() => onChange(cardCompany)}>
+              <div className="modal-item-dot" style={{ backgroundColor: cardCompany.color }}></div>
+              <span className="modal-item-name">{cardCompany.brand}</span>
+            </div>
+          ))}
+        </div>
+      ))}
     </>
   );
 }

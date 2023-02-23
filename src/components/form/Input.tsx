@@ -11,7 +11,7 @@ const config = {
   BASIC_CLASS: 'input-basic',
 };
 
-const Input = forwardRef((
+const Input = forwardRef<Ref<HTMLInputElement>, IInput>((
   {
     type,
     className,
@@ -20,14 +20,12 @@ const Input = forwardRef((
     nextFocus,
     filter,
     ...props
-  }: IInput, inputRef: Ref<HTMLInputElement>) => {
+  }, inputRef) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (filter) e.target.value = filter(e.target.value);
-    const value = e.target.value;
-
-    if (maxLength && value.length === maxLength) {
+    if (maxLength && e.target.value.length === maxLength) {
       nextFocus?.focus();
     }
+
     onChange?.(e);
   };
 
