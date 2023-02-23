@@ -1,4 +1,5 @@
-import { UiVariant } from 'models/ui.model'
+import { UI_TEXT_ALIGN, UI_VARIANT } from 'constants/ui.constant'
+import { UiVariant, UiTextAlign } from 'models/ui.model'
 import React, { ChangeEvent } from 'react'
 import './Input.css'
 
@@ -6,13 +7,22 @@ import './Input.css'
 type InputProps = {
   placeholder?: string
   onChange: (e: ChangeEvent) => void
+  /** Input width 값으로 단위도 함께 설정가능 */
   width?: string
+  /** Input 타입으로 html attribute 타입 호환 */
   type: string
+  /** 컨트롤할 input의 값 */
   value: string
+  /** 컨트롤할 input의 이름*/
   name: string
+  /** 최대 글자수 */
   maxLength?: number
+  /** 필수값 유무 */
   isRequire?: boolean
+  /** Input 종류 */
   variant?: UiVariant
+  /** Input text 정렬 */
+  textAlign?: UiTextAlign
 }
 
 const Input: React.FC<InputProps> = ({
@@ -23,7 +33,8 @@ const Input: React.FC<InputProps> = ({
   value,
   name,
   maxLength,
-  variant = 'fill',
+  variant = UI_VARIANT.FILL,
+  textAlign = UI_TEXT_ALIGN.CENTER,
 }) => {
   return (
     <input
@@ -34,7 +45,7 @@ const Input: React.FC<InputProps> = ({
       onChange={(e: ChangeEvent) => onChange(e)}
       name={name}
       maxLength={maxLength}
-      style={{ width }}
+      style={{ width, textAlign }}
     />
   )
 }

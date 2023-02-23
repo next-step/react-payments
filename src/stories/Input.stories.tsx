@@ -1,21 +1,42 @@
-import React from 'react'
+import React, { ChangeEvent, useState } from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Input } from 'components/atoms/Input'
+import { UI_VARIANT } from 'constants/ui.constant'
+import { action } from '@storybook/addon-actions'
 
 export default {
   title: 'Input',
   component: Input,
+  parameters: {
+    componentSubtitle: '인풋 컴포넌트',
+  },
 } as ComponentMeta<typeof Input>
 
 const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />
 
-export const Basic = Template.bind({})
-// Basic.args = {
-//   placeholdaer: '텍스트를 입력하세요',
-//   size: 'small',
-//   variant: 'fill',
-//   color: '#e5e5e5',
-//   onChange: () => {
-//     return
-//   },
-// }
+export const Fill = Template.bind({})
+Fill.args = {
+  placeholder: '텍스트를 입력하세요',
+  variant: UI_VARIANT.FILL,
+  type: 'text',
+  maxLength: 20,
+  width: '300px',
+}
+
+export const Outline = Template.bind({})
+Outline.args = {
+  placeholder: '텍스트를 입력하세요',
+  variant: UI_VARIANT.OUTLINE,
+  type: 'text',
+  maxLength: 20,
+  width: '300px',
+}
+
+export const Ghost = Template.bind({})
+Ghost.args = {
+  placeholder: '텍스트를 입력하세요',
+  variant: UI_VARIANT.GHOST,
+  type: 'text',
+  maxLength: 20,
+  width: '300px',
+}
