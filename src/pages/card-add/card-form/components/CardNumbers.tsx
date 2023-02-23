@@ -72,9 +72,3 @@ const CardNumbers = ({ numbers, handleChange }: CardNumbersProps) => {
 }
 
 export default CardNumbers
-export const CardNumbersType = (
-  <CardNumbers
-    numbers={{ first: '', second: '', third: '', fourth: '' }}
-    handleChange={(_: ChangeEvent<HTMLInputElement>) => _}
-  />
-).type

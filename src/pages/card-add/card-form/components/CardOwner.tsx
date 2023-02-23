@@ -24,4 +24,3 @@ const CardOwner = ({ owner, handleChange }: CardOwnerProps) => {
 }
 
 export default CardOwner
-export const CardOwnerType = (<CardOwner owner="" handleChange={(_: ChangeEvent<HTMLInputElement>) => _} />).type

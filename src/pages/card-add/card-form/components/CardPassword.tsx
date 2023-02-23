@@ -42,6 +42,3 @@ const CardPassword = ({ password, handleChange }: CardPasswordProps) => {
 }
 
 export default CardPassword
-export const CardPasswordType = (
-  <CardPassword password={{ first: '', second: '' }} handleChange={(_: ChangeEvent<HTMLInputElement>) => _} />
-).type

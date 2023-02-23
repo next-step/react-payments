@@ -15,6 +15,3 @@ const CardSecurityCode = ({ securityCode, handleChange }: CardSecurityCode) => {
 }
 
 export default CardSecurityCode
-export const CardSecurityCodeType = (
-  <CardSecurityCode securityCode="" handleChange={(_: ChangeEvent<HTMLInputElement>) => _} />
-).type

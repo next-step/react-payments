@@ -2,18 +2,7 @@ import { ReactNode } from 'react'
 
 import { getCardFormSubElement } from '@/domain'
 
-import {
-  CardNumbers,
-  CardExpiredDate,
-  CardOwner,
-  CardSecurityCode,
-  CardPassword,
-  CardNumbersType,
-  CardExpiredDateType,
-  CardOwnerType,
-  CardSecurityCodeType,
-  CardPasswordType,
-} from './components'
+import { CardNumbers, CardExpiredDate, CardOwner, CardSecurityCode, CardPassword } from './components'
 
 interface CardFormProps {
   //Learning Point: ReactNode와 ReactElement의 차이점
@@ -21,11 +10,12 @@ interface CardFormProps {
 }
 
 const CardForm = ({ children }: CardFormProps) => {
-  const cardNumber = getCardFormSubElement(children, CardNumbersType)
-  const cardExpiredDateType = getCardFormSubElement(children, CardExpiredDateType)
-  const cardOwnerType = getCardFormSubElement(children, CardOwnerType)
-  const cardSecurityCode = getCardFormSubElement(children, CardSecurityCodeType)
-  const cardPassword = getCardFormSubElement(children, CardPasswordType)
+  const cardNumber = getCardFormSubElement(children, CardNumbers)
+  const cardExpiredDateType = getCardFormSubElement(children, CardExpiredDate)
+  const cardOwnerType = getCardFormSubElement(children, CardOwner)
+  const cardSecurityCode = getCardFormSubElement(children, CardSecurityCode)
+  const cardPassword = getCardFormSubElement(children, CardPassword)
+
   return (
     <>
       {cardNumber && cardNumber}
