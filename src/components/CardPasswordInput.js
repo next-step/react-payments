@@ -1,10 +1,12 @@
 import { CARD_PASSWORD } from "../constants/card";
 
-export default function CardPasswordInput({cardPassword, onChange}) {
+const cardPasswordArray = ["num0", "num1", "num2", "num3"];
+
+export default function CardPasswordInput({ cardPassword, onChange }) {
   return (
     <div className="input-container">
       <span className="input-title">카드 비밀번호</span>
-      {["num0","num1","num2","num3"].map((name, index) => {
+      {cardPasswordArray.map((name, index) => {
         return (
           <input
             className={
@@ -15,7 +17,7 @@ export default function CardPasswordInput({cardPassword, onChange}) {
             name={name}
             key={index}
             onChange={onChange}
-            value={index > 1? "*" : cardPassword[name]}
+            value={index > 1 ? "*" : cardPassword[name]}
             maxLength={CARD_PASSWORD.MAX_LENGTH}
             disabled={index > 1 ? true : false}
           ></input>
