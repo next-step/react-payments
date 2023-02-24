@@ -24,7 +24,8 @@
     "eject": "craco eject",
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx src",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "chromatic": "npx chromatic --project-token=3a2a9705e804"
   },
   "eslintConfig": {
     "extends": [
@@ -69,6 +70,7 @@
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.52.0",
     "babel-plugin-named-exports-order": "^0.0.2",
+    "chromatic": "^6.17.0",
     "eslint": "^8.34.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.6.0",
@@ -86,5 +88,7 @@
   },
   "resolutions": {
     "esquery": "1.4.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "my-app@0.1.0"
 }
