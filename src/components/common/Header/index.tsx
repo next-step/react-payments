@@ -2,11 +2,11 @@ import { ReactNode } from 'react';
 import { css } from '@emotion/css';
 
 export interface HeaderProps {
-  prefix?: ReactNode;
+  leftSideComponent?: ReactNode;
   title: string;
 }
 
-function Header({ prefix, title }: HeaderProps) {
+function Header({ leftSideComponent, title }: HeaderProps) {
   return (
     <h2
       className={css`
@@ -15,7 +15,7 @@ function Header({ prefix, title }: HeaderProps) {
         gap: 18px;
       `}
     >
-      {prefix}
+      {leftSideComponent}
       <span
         className={css`
           font-weight: 500;
