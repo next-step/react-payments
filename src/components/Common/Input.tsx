@@ -2,7 +2,7 @@ import { ChangeEvent, InputHTMLAttributes } from 'react';
 
 export type Width = 'w-15' | 'w-25' | 'w-50' | 'w-75' | 'w-100';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   kind?: 'basic' | 'underline';
   width?: Width;
   formatter?: (str: string) => string;

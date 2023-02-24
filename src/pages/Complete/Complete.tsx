@@ -1,4 +1,5 @@
 import { Card } from '@/components/Common';
+import CompleteForm from '@/components/Form/CompleteForm';
 import { useCardForm } from '@/context/CardFormContext';
 
 function Complete() {
@@ -25,12 +26,13 @@ function Complete() {
               month: value.month,
             }}
           />
-          <div className="input-container flex-center w-100">
-            <input className="input-underline w-75" type="text" placeholder="카드의 별칭을 입력해주세요." />
+          <CompleteForm />
+          {/* <div className="input-container flex-center w-100">
+            <input className="input-underline w-75" type="text" placeholder="카드 별칭 (선택)." maxLength={10} />
           </div>
           <div className="button-box mt-50">
             <span className="button-text">다음</span>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

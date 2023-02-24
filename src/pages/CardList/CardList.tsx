@@ -1,7 +1,10 @@
 import EmptyCard from '@/components/Common/EmptyCard';
+import { useCardList } from '@/context/CardListContext';
 import { Link } from 'react-router-dom';
 
 function CardList() {
+  const cardList = useCardList();
+
   return (
     <div>
       <div className="root">
@@ -9,6 +12,11 @@ function CardList() {
           <div className="flex-center">
             <h2 className="page-title mb-10">보유 카드</h2>
           </div>
+          {cardList.map((card, index) => (
+            <Link key={index} to="/complete">
+              Card
+            </Link>
+          ))}
           <Link to="/add">
             <EmptyCard />
           </Link>

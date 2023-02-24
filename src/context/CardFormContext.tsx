@@ -50,7 +50,9 @@ function CardFormProvider({ children }: CardFormProviderProps) {
   const handlers = useMemo(
     () => ({
       onChange(e: ChangeEvent<HTMLInputElement>) {
-        const { name, value } = e.target;
+        const { name, value, validity } = e.target;
+        if (!validity.valid) return;
+
         setCardForm(prev => ({ ...prev, [name]: value }));
       },
       onReset() {

@@ -1,44 +1,33 @@
 import { Card } from '@/components/Common';
 import AddCardForm from '@/components/Form/AddCardForm';
 import Layout from '@/components/Layout';
-import { useCardForm, useCardFormHandler } from '@/context/CardFormContext';
-import { useCardListHandler } from '@/context/CardListContext';
-import { FormEvent, useMemo } from 'react';
+import { useCardForm } from '@/context/CardFormContext';
+import { useMemo } from 'react';
 
 function AddCard() {
-  const { addCard } = useCardListHandler();
   const card = useCardForm();
-  const { onReset } = useCardFormHandler();
 
   const { cardNumber1, cardNumber2, cardNumber3, cardNumber4, year, month, cardOwner } = useMemo(() => card, [card]);
-
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    addCard(card);
-    onReset();
-  };
 
   return (
     <div>
       <div className="root">
         <Layout headerTitle="카드 추가" goBack="/">
-          <>
-            <Card
-              cardCompany=""
-              cardOwner={cardOwner}
-              cardNumber={{
-                cardNumber1,
-                cardNumber2,
-                cardNumber3,
-                cardNumber4,
-              }}
-              expiration={{
-                year,
-                month,
-              }}
-            />
-            <AddCardForm onSubmit={onSubmit} />
-          </>
+          <Card
+            cardCompany=""
+            cardOwner={cardOwner}
+            cardNumber={{
+              cardNumber1,
+              cardNumber2,
+              cardNumber3,
+              cardNumber4,
+            }}
+            expiration={{
+              year,
+              month,
+            }}
+          />
+          <AddCardForm />
         </Layout>
       </div>
     </div>

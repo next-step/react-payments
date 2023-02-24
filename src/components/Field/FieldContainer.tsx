@@ -1,12 +1,12 @@
 import type { ReactNode } from 'react';
 
 function FieldContainer({
-  title,
+  title = '',
   children,
   addOn,
   textLength,
 }: {
-  title: string;
+  title?: string;
   children: ReactNode;
   addOn?: ReactNode;
   textLength?: string;
@@ -14,7 +14,7 @@ function FieldContainer({
   return (
     <div className="input-container">
       <div className="flex-between">
-        <span className="input-title">{title}</span>
+        {title && <span className="input-title">{title}</span>}
         {textLength ? <span className="input-title">{textLength}</span> : null}
       </div>
       <div className="flex">

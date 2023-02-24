@@ -1,30 +1,18 @@
 import FieldContainer from './FieldContainer';
 import { Input } from '@components/Common';
 
-import type { Width } from '@components/Common/Input';
-import type { ChangeEvent } from 'react';
+import type { InputProps } from '@components/Common/Input';
 
-function OwnerField({
-  title,
-  placeholder,
-  maxLength,
-  value,
-  name,
-  width = 'w-100',
-  onChange,
-}: {
-  title: string;
-  placeholder?: string;
-  maxLength?: number;
+interface NameFieldProps extends InputProps {
   value?: string;
-  name: string;
-  width?: Width;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}) {
+}
+
+function NameField({ title, placeholder, maxLength, value, name, width = 'w-100', kind, onChange }: NameFieldProps) {
   return (
     <FieldContainer title={title} textLength={`${value?.length}/${maxLength}`}>
       <Input
         name={name}
+        kind={kind}
         placeholder={placeholder}
         maxLength={maxLength}
         width={width}
@@ -35,4 +23,4 @@ function OwnerField({
   );
 }
 
-export default OwnerField;
+export default NameField;

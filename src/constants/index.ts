@@ -7,6 +7,7 @@ export const LIMIT_INPUT_LENGTH = {
   EXPIRATION: 2,
   PASSWORD: 1,
   OWNER_NAME: 30,
+  NICKNAME: 10,
 };
 
 export const ROUTES = {

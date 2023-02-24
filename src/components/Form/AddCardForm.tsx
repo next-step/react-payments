@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { CVCField, CardNumberField, ExpirationField, PasswordField, OwnerField } from '@components/Field';
+import { CVCField, CardNumberField, ExpirationField, PasswordField, NameField } from '@components/Field';
 import { Button } from '@components/Common';
 import { checkRequiredValues } from '@/utils';
 import { LIMIT_INPUT_LENGTH } from '@/constants';
@@ -8,11 +8,7 @@ import { LIMIT_INPUT_LENGTH } from '@/constants';
 import type { FormEvent } from 'react';
 import { useCardForm, useCardFormHandler } from '@/context/CardFormContext';
 
-type Props = {
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-};
-
-function AddCardForm({ onSubmit }: Props) {
+function AddCardForm() {
   const navigate = useNavigate();
 
   const { onChange } = useCardFormHandler();
@@ -39,13 +35,13 @@ function AddCardForm({ onSubmit }: Props) {
     cardOwner,
   });
 
-  const onSubmitWithRedirect = (e: FormEvent<HTMLFormElement>) => {
-    onSubmit(e);
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     navigate('/complete');
   };
 
   return (
-    <form onSubmit={onSubmitWithRedirect}>
+    <form onSubmit={onSubmit}>
       <CardNumberField
         title="카드 번호"
         value={cardNumber}
@@ -59,7 +55,7 @@ function AddCardForm({ onSubmit }: Props) {
         value={expirationDate}
         onChange={onChange}
       />
-      <OwnerField
+      <NameField
         title="카드 소유자 이름(선택)"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요"
         maxLength={LIMIT_INPUT_LENGTH.OWNER_NAME}
