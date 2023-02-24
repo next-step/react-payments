@@ -6,8 +6,8 @@ import {
   CardOwnerName,
   CardPassword,
   CardSecurityCode,
+  CardShape,
 } from '../../components/Card'
-import CardShape from '../../components/Card/CardShape'
 import Button from '../../components/Element/Button'
 import {
   CARD_NUMBER_LENGTH_MAX,
