@@ -8,6 +8,7 @@ import { CardFormProvider } from './context/CardFormContext';
 import { CardListProvider } from './context/CardListContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
 root.render(
   <React.StrictMode>
     <CardListProvider>

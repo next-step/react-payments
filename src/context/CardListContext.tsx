@@ -51,7 +51,7 @@ function CardListProvider({ children }: CardListContextProps) {
 
   return (
     <CardListHandlerContext.Provider value={handlers}>
-      <CardListContext.Provider value={cardList}>{children}</CardListContext.Provider>;
+      <CardListContext.Provider value={cardList}>{children}</CardListContext.Provider>
     </CardListHandlerContext.Provider>
   );
 }

@@ -62,7 +62,7 @@ function CardFormProvider({ children }: CardFormProviderProps) {
 
   return (
     <CardFormHandlerContext.Provider value={handlers}>
-      <CardFormContext.Provider value={cardForm}>{children}</CardFormContext.Provider>;
+      <CardFormContext.Provider value={cardForm}>{children}</CardFormContext.Provider>
     </CardFormHandlerContext.Provider>
   );
 }

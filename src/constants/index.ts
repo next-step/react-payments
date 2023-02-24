@@ -11,8 +11,8 @@ export const LIMIT_INPUT_LENGTH = {
 
 export const ROUTES = {
   HOME: '/',
-  ADD: '/add/:id',
-  COMPLETE: '/complete/:id',
+  ADD: '/add',
+  COMPLETE: '/complete',
   NOT_FOUND: '*',
 } as const;
 
