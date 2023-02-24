@@ -27,6 +27,7 @@ function useCardFormHandler() {
 }
 
 const initCardInformation = {
+  id: '',
   cardNumber1: '',
   cardNumber2: '',
   cardNumber3: '',

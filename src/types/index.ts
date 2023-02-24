@@ -18,6 +18,7 @@ export interface Password {
 export type CardInformation = Expiration &
   Password &
   CardNumber & {
+    id: string;
     cvc: string;
     cardOwner?: string;
     nickname?: string;

@@ -1,9 +1,16 @@
 import EmptyCard from '@/components/Common/EmptyCard';
+import { useCardFormHandler } from '@/context/CardFormContext';
 import { useCardList } from '@/context/CardListContext';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function CardList() {
   const cardList = useCardList();
+  const { onReset } = useCardFormHandler();
+
+  useEffect(() => {
+    onReset();
+  }, []);
 
   return (
     <div>
@@ -12,8 +19,8 @@ function CardList() {
           <div className="flex-center">
             <h2 className="page-title mb-10">보유 카드</h2>
           </div>
-          {cardList.map((card, index) => (
-            <Link key={index} to="/complete">
+          {cardList.map(card => (
+            <Link key={card.id} to={`/complete/${card.id}`}>
               Card
             </Link>
           ))}

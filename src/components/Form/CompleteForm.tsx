@@ -1,19 +1,21 @@
 import { LIMIT_INPUT_LENGTH } from '@/constants';
 import { Button } from '../Common';
 import { useNavigate } from 'react-router-dom';
-import { FormEvent } from 'react';
+import { FormEvent, useId } from 'react';
 import { useCardListHandler } from '@/context/CardListContext';
 import { useCardForm, useCardFormHandler } from '@/context/CardFormContext';
 
 function CompleteForm() {
   const navigate = useNavigate();
+  const id = useId();
 
   const { onChange, onReset } = useCardFormHandler();
   const { addCard } = useCardListHandler();
   const cardFormValue = useCardForm();
+
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addCard(cardFormValue);
+    addCard({ ...cardFormValue, id });
     onReset();
     navigate('/');
   };

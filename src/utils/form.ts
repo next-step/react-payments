@@ -13,8 +13,8 @@ export const renderTextDivider = ({
   return formerValue || latterValue ? divider : '';
 };
 
-export const checkRequiredValues = (data: CardInformation) => {
-  const REQUIRED_FORM_KEYS: (keyof CardInformation)[] = [
+export const checkRequiredValues = (data: Omit<CardInformation, 'id'>) => {
+  const REQUIRED_FORM_KEYS: (keyof Omit<CardInformation, 'id'>)[] = [
     'cardNumber1',
     'cardNumber2',
     'cardNumber3',
