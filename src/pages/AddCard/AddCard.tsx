@@ -1,16 +1,23 @@
 import { Card } from '@/components/Common';
 import AddCardForm from '@/components/Form/AddCardForm';
 import Layout from '@/components/Layout';
-import { useCardForm } from '@/context/CardFormContext';
+import { useCardForm, useCardFormHandler } from '@/context/CardFormContext';
+import { useCardListHandler } from '@/context/CardListContext';
+import { FormEvent, useMemo } from 'react';
 
-import type { FormEvent } from 'react';
+function AddCard() {
+  const { addCard } = useCardListHandler();
+  const card = useCardForm();
+  const { onReset } = useCardFormHandler();
 
-type Props = {
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-};
+  const { cardNumber1, cardNumber2, cardNumber3, cardNumber4, year, month, cardOwner } = useMemo(() => card, [card]);
 
-function AddCard({ onSubmit }: Props) {
-  const { cardNumber1, cardNumber2, cardNumber3, cardNumber4, year, month, cardOwner } = useCardForm();
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    addCard(card);
+    onReset();
+  };
+
   return (
     <div>
       <div className="root">
