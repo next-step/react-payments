@@ -30,11 +30,11 @@ export default function Card({
       cardNumber
         .split("-")
         .map((value, idx) => {
-          if (idx < 2) {
-            return value;
-          } else {
-            return value.replaceAll(/[0-9]/g, "•");
-          }
+          const MASKING_NEEDED_MIN_IDX = 2;
+
+          return idx < MASKING_NEEDED_MIN_IDX
+            ? value
+            : value.replaceAll(/[0-9]/g, "•");
         })
         .join("-"),
     [cardNumber]
