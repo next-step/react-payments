@@ -9,28 +9,27 @@ const Input = ({
   placeholder,
   maxLength,
   isRequired,
+  ref,
+  readOnly,
 }) => {
   return (
-    <>
-      <label htmlFor={name}>{name}</label>
-      <input
-        name={name}
-        className={className}
-        type={type}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        maxLength={maxLength}
-        required={isRequired}
-      ></input>
-    </>
+    <input
+      className={className}
+      type={type}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      maxLength={maxLength}
+      required={isRequired}
+      ref={ref}
+      readOnly={readOnly}
+    />
   );
 };
 
 export default Input;
 
 Input.propTypes = {
-  name: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
@@ -38,4 +37,5 @@ Input.propTypes = {
   placeholder: PropTypes.string.isRequired,
   maxLength: PropTypes.number,
   required: PropTypes.bool,
+  ref: PropTypes.func || PropTypes.array,
 };

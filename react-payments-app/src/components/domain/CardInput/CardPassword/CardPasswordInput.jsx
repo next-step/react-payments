@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
-import { MAX_INPUT_LENGTH } from '../../../common/constant';
+
+import Input from '../../../common/Input/Input';
+import InputBox from '../../../common/Input/InputBox';
+import { MAX_INPUT_LENGTH } from '../../../../constants/numbers';
 
 const CardPasswordInput = ({ onChange }) => {
   const [password, setPassword] = useState(['', '']);
@@ -21,9 +24,10 @@ const CardPasswordInput = ({ onChange }) => {
     updatedPassword[index] = value;
     setPassword(updatedPassword);
 
-    if (index === 0) {
-      nextElement.current.focus();
-    }
+    //TODO: 스토리북 액션 테스트 실패
+    // if (index === 0) {
+    //   nextElement.current.focus();
+    // }
   };
 
   useEffect(() => {
@@ -31,16 +35,15 @@ const CardPasswordInput = ({ onChange }) => {
   }, [password, error]);
 
   return (
-    <div className='input-container'>
-      <span className='input-title'>카드 비밀번호</span>
-      <input
+    <InputBox name='카드 비밀번호'>
+      <Input
         className='input-basic w-15 mr-10'
         type='password'
         maxLength={MAX_INPUT_LENGTH.PW}
         value={password[0]}
         onChange={handleCardPasswordChange(0)}
       />
-      <input
+      <Input
         className='input-basic w-15 mr-10'
         type='password'
         maxLength={MAX_INPUT_LENGTH.PW}
@@ -48,19 +51,19 @@ const CardPasswordInput = ({ onChange }) => {
         onChange={handleCardPasswordChange(1)}
         ref={nextElement}
       />
-      <input
+      <Input
         className='input-basic w-15 mr-10 input-of-pw'
         type='password'
         readOnly
         value='*'
       />
-      <input
+      <Input
         className='input-basic w-15 mr-10 input-of-pw'
         type='password'
         readOnly
         value='*'
       />
-    </div>
+    </InputBox>
   );
 };
 

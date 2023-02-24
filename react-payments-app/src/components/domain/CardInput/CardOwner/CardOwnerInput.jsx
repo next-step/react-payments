@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
-import { MAX_INPUT_LENGTH } from '../../../common/constant';
+
+import Input from '../../../common/Input/Input';
+import InputBox from '../../../common/Input/InputBox';
+import { MAX_INPUT_LENGTH } from '../../../../constants/numbers';
 
 const CardOwnerInput = ({ onChange }) => {
   const [cardOwner, setCardOwner] = useState('');
@@ -13,7 +16,7 @@ const CardOwnerInput = ({ onChange }) => {
     setCardOwner(updatedCardOwner);
     setLength(updatedCardOwner.length);
 
-    if (length === MAX_INPUT_LENGTH.NAME) {
+    if (length === MAX_INPUT_LENGTH.CARD_OWNER) {
       setError('이름은 30자까지만 입력할 수 있습니다.');
       return;
     }
@@ -24,20 +27,17 @@ const CardOwnerInput = ({ onChange }) => {
   }, [cardOwner, error]);
 
   return (
-    <div className='input-container'>
-      <div className='input-title-box'>
-        <span className='input-title'>카드 소유자 이름(선택)</span>
-        <span className='input-title'>{length ? length : 0} / 30</span>
-      </div>
-      <input
+    <InputBox name='카드 소유자 이름(선택)'>
+      <Input
+        name='카드 소유자 이름(선택)'
         type='text'
-        className='input-basic input-bigger-text'
+        className='input-basic'
         placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
-        maxLength={MAX_INPUT_LENGTH.NAME + 2}
+        maxLength={MAX_INPUT_LENGTH.CARD_OWNER + 2}
         value={cardOwner}
         onChange={handleCardOwnerChange}
       />
-    </div>
+    </InputBox>
   );
 };
 

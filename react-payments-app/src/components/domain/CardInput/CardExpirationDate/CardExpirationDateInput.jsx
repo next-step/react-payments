@@ -1,5 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
-import { MAX_INPUT_LENGTH, VALID_INPUT } from '../../../common/constant';
+
+import Input from '../../../common/Input/Input';
+import InputBox from '../../../common/Input/InputBox';
+import { MAX_INPUT_LENGTH, VALID_INPUT } from '../../../../constants/numbers';
 
 const CURRENT_YEAR = Number(new Date().getFullYear().toString().slice(-2));
 
@@ -44,31 +47,28 @@ const CardExpirationDateInput = ({ onChange }) => {
   }, [expirationDate, error]);
 
   return (
-    <div className='input-container'>
-      <span className='input-title'>만료일</span>
-      <div className='input-box w-50'>
-        <input
-          className='input-basic w-50'
-          type='text'
-          placeholder='MM'
-          maxLength={MAX_INPUT_LENGTH.DATE}
-          value={expirationDate[0]}
-          onChange={handleCardExpirationDateChange(0)}
-          required
-        />
-        /
-        <input
-          ref={nextElement}
-          className='input-basic w-50'
-          type='text'
-          placeholder='YY'
-          maxLength={MAX_INPUT_LENGTH.DATE}
-          value={expirationDate[1]}
-          onChange={handleCardExpirationDateChange(1)}
-          required
-        />
-      </div>
-    </div>
+    <InputBox name='만료일' boxClassName="'input-box w-50'">
+      <Input
+        className='input-basic w-25'
+        type='text'
+        placeholder='MM'
+        maxLength={MAX_INPUT_LENGTH.DATE}
+        value={expirationDate[0]}
+        onChange={handleCardExpirationDateChange(0)}
+        required
+      />
+      /
+      <Input
+        ref={nextElement}
+        className='input-basic w-25'
+        type='text'
+        placeholder='YY'
+        maxLength={MAX_INPUT_LENGTH.DATE}
+        value={expirationDate[1]}
+        onChange={handleCardExpirationDateChange(1)}
+        required
+      />
+    </InputBox>
   );
 };
 

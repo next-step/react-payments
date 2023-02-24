@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react';
-import { MAX_INPUT_LENGTH } from '../../../common/constant';
+
+import Input from '../../../common/Input/Input';
+import InputBox from '../../../common/Input/InputBox';
+import { MAX_INPUT_LENGTH } from '../../../../constants/numbers';
 
 const CardCVCInput = ({ onChange }) => {
   const [CVC, setCVC] = useState('');
   const [error, setError] = useState('');
 
-  const hanldeCVCChange = (e) => {
+  const handleCVCChange = (e) => {
     let updatedCVC = CVC;
     const { value } = e.target;
 
@@ -24,18 +27,17 @@ const CardCVCInput = ({ onChange }) => {
   }, [CVC, error]);
 
   return (
-    <div className='input-container'>
-      <span className='input-title'>보안코드(CVC/CVV)</span>
-      <input
+    <InputBox name='보안코드(CVC/CVV)'>
+      <Input
+        name='보안코드(CVC/CVV)'
         className='input-basic w-25'
         type='password'
+        onChange={handleCVCChange}
+        placeholder='***'
         maxLength={MAX_INPUT_LENGTH.CVC}
-        value={CVC}
-        onChange={hanldeCVCChange}
-        required
+        required={true}
       />
-      {/** TODO: CVC 섦명 아이콘 추가 */}
-    </div>
+    </InputBox>
   );
 };
 

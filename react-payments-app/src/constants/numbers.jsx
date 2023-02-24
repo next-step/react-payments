@@ -1,7 +1,7 @@
 export const MAX_INPUT_LENGTH = {
   DATE: 2,
   CARD_NUMBER: 4,
-  NAME: 30,
+  CARD_OWNER: 30,
   PW: 1,
   CVC: 3,
 };

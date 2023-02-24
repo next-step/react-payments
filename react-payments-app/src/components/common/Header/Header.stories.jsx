@@ -2,7 +2,7 @@ import Header from './Header';
 import './header.css';
 
 export default {
-  title: 'Components/Header',
+  title: 'Component/Common/Header',
   components: Header,
 };
 

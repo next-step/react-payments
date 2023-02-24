@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 
-import Button from '../Button/Button';
-import CardNumbersInput from './CardNumbers/CardNumbersInput';
-import CardExpirationDateInput from './CardExpirationDate/CardExpirationDateInput';
-import CardOwnerInput from './CardOwner/CardOwnerInput';
-import CardCVCInput from './CardCVC/CardCVCInput';
-import CardPasswordInput from './CardPassword/CardPasswordInput';
+// import Button from '../../common/Button/Button';
+import CardNumbersInput from '../CardInput/CardNumbers/CardNumbersInput';
+import CardExpirationDateInput from '../CardInput/CardExpirationDate/CardExpirationDateInput';
+import CardOwnerInput from '../CardInput/CardOwner/CardOwnerInput';
+import CardCVCInput from '../CardInput/CardCVCInput/CardCVCInput';
+import CardPasswordInput from '../CardInput/CardPassword/CardPasswordInput';
 
 const CardForm = ({ onSubmit, onChange }) => {
+  //TODO: 로직 구현
+
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [cardExpirationDate, setCardExpirationDate] = useState(['', '']);
   const [cardOwner, setCardOwner] = useState('');
@@ -40,29 +42,27 @@ const CardForm = ({ onSubmit, onChange }) => {
     setError(error);
   };
 
-  // submit이 일어나면 -> validation 후 카드 정보로 저장
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
-    onSubmit({
-      cardNumbers,
-      cardExpirationDate,
-      cardOwner,
-      cardCVC,
-      cardPassword,
-    });
-  };
+  //   onSubmit({
+  //     cardNumbers,
+  //     cardExpirationDate,
+  //     cardOwner,
+  //     cardCVC,
+  //     cardPassword,
+  //   });
+  // };
 
-  // change가 일어나면 -> 카드UI에 실시간 반영. 아직 검증x 이므로 카드 정보 저장되는 건 x
-  useEffect(() => {
-    onChange({
-      cardNumbers,
-      cardExpirationDate,
-      cardOwner,
-      cardCVC,
-      cardPassword,
-    });
-  }, [cardNumbers, cardExpirationDate, cardOwner, cardCVC, cardPassword]);
+  // useEffect(() => {
+  //   onChange({
+  //     cardNumbers,
+  //     cardExpirationDate,
+  //     cardOwner,
+  //     cardCVC,
+  //     cardPassword,
+  //   });
+  // }, [cardNumbers, cardExpirationDate, cardOwner, cardCVC, cardPassword]);
 
   return (
     <div id='card-form' className='w-100'>
@@ -72,10 +72,14 @@ const CardForm = ({ onSubmit, onChange }) => {
         <CardOwnerInput onChange={handleCardOwnerChange} />
         <CardCVCInput onChange={handleCardCVCChange} />
         <CardPasswordInput onChange={handleCardPasswordChange} />
-        <Button title='다음' type='submit' onClick={handleSubmit} />
+        {/* 
+        
+        
+       
+        <Button title='다음' type='submit' onClick={handleSubmit} /> */}
       </form>
       <div id='card-form-label' style={{ color: 'red' }}>
-        {error}
+        {/* {error} */}
       </div>
     </div>
   );
