@@ -1,20 +1,27 @@
-import { ChangeEvent, useCallback } from "react";
+import { ChangeEvent, useCallback, useMemo } from "react";
 
-import { CARD_VALIDATION_ERROR_MESSAGES } from "@/constants/alertMessages";
-import { isNumber } from "@/helper";
+import { CARD_VALIDATION_ERROR_MESSAGES } from "@/constants/messages/error";
+import { CARD_INPUT_VARIABLES } from "@/constants/variables";
+import { checkValidator, isNumber } from "@/helper";
 import useInput from "@/hooks/useInput";
+import { ValidationError } from "@/services/errors";
+import { ValidationResult } from "@/types";
 
 export type CardPassword = {
   password1: string;
   password2: string;
 };
 
-const validateCardPassword = (value: string) => {
+const validateCardPassword = (value: string): ValidationResult => {
   if (!isNumber(value)) {
-    alert(CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER);
-    return false;
+    return {
+      success: false,
+      error: new ValidationError(CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER),
+    };
   }
-  return true;
+  return {
+    success: true,
+  };
 };
 
 const useCardPasswordInput = (initialValue: CardPassword) => {
@@ -24,15 +31,27 @@ const useCardPasswordInput = (initialValue: CardPassword) => {
     (e: ChangeEvent<HTMLInputElement>) => {
       const { target } = e;
 
-      if (!validateCardPassword(target.value)) return;
-
-      onChange(e);
+      checkValidator(
+        target.value,
+        validateCardPassword,
+        onChange.bind(this, e)
+      );
     },
+    [value]
+  );
+
+  const isPasswordValid = useMemo(
+    () =>
+      !Object.entries(value).some(
+        ([_, password]) =>
+          password.length < CARD_INPUT_VARIABLES.PARTIAL_PASSWORD_MAX_LENGTH
+      ),
     [value]
   );
 
   return {
     cardPassword: value,
+    isPasswordValid,
     onCardPasswordChange: handleCardPasswordChange,
   };
 };

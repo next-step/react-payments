@@ -33,24 +33,30 @@ function HeaderLeftPointArrow() {
 export default function AddCard() {
   const navigate = useNavigate();
 
-  const { cardNumber, onCardNumberChange } = useCardNumberInput({
-    num1: "",
-    num2: "",
-    num3: "",
-    num4: "",
+  const { cardNumber, isValidCardNumber, onCardNumberChange } =
+    useCardNumberInput({
+      num1: "",
+      num2: "",
+      num3: "",
+      num4: "",
+    });
+  const { cardExpireDate, isValidExpireDate, onCardExpireDateChange } =
+    useCardExpireDateInput({
+      month: "",
+      year: "",
+    });
+  const { cardOwnerName, isValidOwnerName, onCardOwnerNameChange } =
+    useCardOwnerInput({
+      ownerName: "",
+    });
+  const { cvcNumber, isValidCvcNumber, onCvcNumberChange } = useCardCvcInput({
+    cvc: "",
   });
-  const { cardExpireDate, onCardExpireDateChange } = useCardExpireDateInput({
-    month: "",
-    year: "",
-  });
-  const { cardOwnerName, onCardOwnerNameChange } = useCardOwnerInput({
-    ownerName: "",
-  });
-  const { cvcNumber, onCvcNumberChange } = useCardCvcInput({ cvc: "" });
-  const { cardPassword, onCardPasswordChange } = useCardPasswordInput({
-    password1: "",
-    password2: "",
-  });
+  const { cardPassword, isPasswordValid, onCardPasswordChange } =
+    useCardPasswordInput({
+      password1: "",
+      password2: "",
+    });
 
   const HeaderStartDecorator = useMemo(() => <HeaderLeftPointArrow />, []);
 
@@ -83,7 +89,15 @@ export default function AddCard() {
   );
 
   const handleMoveToCompleteAddPage = () => {
-    navigate("/cards/complete");
+    const isSubmittable = [
+      isValidCardNumber,
+      isValidExpireDate,
+      isValidOwnerName,
+      isValidCvcNumber,
+      isPasswordValid,
+    ].every((value) => value);
+
+    if (isSubmittable) navigate("/cards/complete");
   };
 
   return (

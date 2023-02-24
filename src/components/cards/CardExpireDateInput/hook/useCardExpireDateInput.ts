@@ -1,21 +1,27 @@
-import { ChangeEvent, useCallback } from "react";
+import { ChangeEvent, useCallback, useMemo } from "react";
 
-import { CARD_VALIDATION_ERROR_MESSAGES } from "@/constants/alertMessages";
+import { CARD_VALIDATION_ERROR_MESSAGES } from "@/constants/messages/error";
 import { CARD_INPUT_VARIABLES } from "@/constants/variables";
-import { isNumber } from "@/helper";
+import { checkValidator, isNumber } from "@/helper";
 import useInput from "@/hooks/useInput";
+import { ValidationError } from "@/services/errors";
+import { ValidationResult } from "@/types";
 
 export type CardExpireDate = {
   month: string;
   year: string;
 };
 
-const validateCardExpireDateInput = (element: HTMLInputElement) => {
+const validateCardExpireDateInput = (
+  element: HTMLInputElement
+): ValidationResult => {
   const { value, id } = element;
 
   if (!isNumber(value)) {
-    alert(CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER);
-    return false;
+    return {
+      success: false,
+      error: new ValidationError(CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER),
+    };
   }
 
   if (id === "month") {
@@ -26,12 +32,16 @@ const validateCardExpireDateInput = (element: HTMLInputElement) => {
       (expireMonth < CARD_INPUT_VARIABLES.MIN_MONTH ||
         expireMonth > CARD_INPUT_VARIABLES.MAX_MONTH)
     ) {
-      alert(CARD_VALIDATION_ERROR_MESSAGES.MONTH_RANGE);
-      return false;
+      return {
+        success: false,
+        error: new ValidationError(CARD_VALIDATION_ERROR_MESSAGES.MONTH_RANGE),
+      };
     }
   }
 
-  return true;
+  return {
+    success: true,
+  };
 };
 
 const useCardExpireDateInput = (initialValue: CardExpireDate) => {
@@ -41,15 +51,25 @@ const useCardExpireDateInput = (initialValue: CardExpireDate) => {
     (e: ChangeEvent<HTMLInputElement>) => {
       const { target } = e;
 
-      if (!validateCardExpireDateInput(target)) return;
-
-      onChange(e);
+      checkValidator(
+        target,
+        validateCardExpireDateInput,
+        onChange.bind(this, e)
+      );
     },
+    [value]
+  );
+
+  const isValidExpireDate = useMemo(
+    () =>
+      value.month.length === CARD_INPUT_VARIABLES.DATE_MAX_LENGTH &&
+      value.year.length === CARD_INPUT_VARIABLES.DATE_MAX_LENGTH,
     [value]
   );
 
   return {
     cardExpireDate: value,
+    isValidExpireDate,
     onCardExpireDateChange: handleCardExpireDateChange,
   };
 };
