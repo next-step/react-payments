@@ -1,11 +1,17 @@
 import Router from "./Router";
 import { createGlobalStyle } from "styled-components";
+import ModalProvider from "./components/ModalProvider";
+import CardProvider from "./components/CardProvider";
 
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <Router />
+      <ModalProvider>
+        <CardProvider>
+          <GlobalStyle />
+          <Router />
+        </CardProvider>
+      </ModalProvider>
     </>
   );
 }

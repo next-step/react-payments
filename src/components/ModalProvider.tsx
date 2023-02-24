@@ -1,36 +1,29 @@
-import { createContext, Dispatch, SetStateAction } from "react";
-import useModalState from "../hooks/useModalState";
+import { createContext, Dispatch, SetStateAction, useState } from "react";
 import Modal from "./Modal";
 
 type ComponentProps = {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[] | string;
 };
 
 type ContextProps = {
-  isModalOpen: boolean;
-  toggleModal: () => void;
-  bankId: String;
-  setBankId: Dispatch<SetStateAction<string>>;
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 export const ModalContext = createContext<ContextProps | null>({
-  isModalOpen: false,
-  toggleModal: () => {},
-  bankId: "",
-  setBankId: () => {},
+  isOpen: false,
+  setIsOpen: () => {},
 });
 
-function Layout({ children }: ComponentProps) {
-  const { toggleModal, isModalOpen, bankId, setBankId } = useModalState();
+function ModalProvider({ children }: ComponentProps) {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <ModalContext.Provider
-      value={{ isModalOpen, toggleModal, bankId, setBankId }}
-    >
+    <ModalContext.Provider value={{ isOpen, setIsOpen }}>
       {children}
-      {isModalOpen ? <Modal /> : null}
+      {isOpen ?? <Modal />}
     </ModalContext.Provider>
   );
 }
 
-export default Layout;
+export default ModalProvider;

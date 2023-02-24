@@ -2,67 +2,49 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { BANKS } from "../constants/bank";
 import { ModalContext } from "./ModalProvider";
+import { CardContext } from "./CardProvider";
+import { Card } from "../types/common";
 
 function Modal() {
-  const context = useContext(ModalContext);
+  const modalContext = useContext(ModalContext);
+  const cardContext = useContext(CardContext);
 
-  if (!context) {
+  if (!modalContext || !cardContext) {
     alert("context 누락");
     throw Error("context 필수값 누락");
   }
 
-  const { setBankId, toggleModal } = context;
+  const { setIsOpen } = modalContext;
+  const { setCard } = cardContext;
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget.dataset.id) {
-      setBankId(e.currentTarget.dataset.id);
+      // setBankId(e.currentTarget.dataset.id);
+      setCard((card: Card) => {
+        return {
+          ...card,
+          bankId: e.currentTarget.dataset.id,
+        };
+      });
     }
-    toggleModal();
+    setIsOpen(false);
   };
 
   return (
-    <Dimmed>
-      <Box>
-        {BANKS.map((bank, index) => (
-          <ModalItem key={`modal-${index}`} data-id={bank.ID} onClick={onClick}>
-            <Dot color={bank.COLOR} />
-            <Name>{bank.NAME}</Name>
-          </ModalItem>
-        ))}
-      </Box>
-    </Dimmed>
+    <>
+      {BANKS.map((bank, index) => (
+        <ModalItem key={`modal-${index}`} data-id={bank.ID} onClick={onClick}>
+          <Dot color={bank.COLOR} />
+          <Name>{bank.NAME}</Name>
+        </ModalItem>
+      ))}
+    </>
   );
 }
 
 type DotProps = {
   color: string;
 };
-
-const Dimmed = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 15px;
-  z-index: 5;
-`;
-
-const Box = styled.div`
-  width: 375px;
-  height: 220px;
-  border-radius: 5px 5px 15px 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  background: #fff;
-  z-index: 10;
-`;
 
 const ModalItem = styled.div`
   display: flex;

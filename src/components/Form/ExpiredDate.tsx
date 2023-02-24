@@ -4,7 +4,7 @@ import Input from "../Input/Input";
 import InputBox from "../Input/InputBox";
 import InputContainer from "../Input/InputContainer";
 
-type Date = {
+export type Date = {
   month: string;
   year: string;
 };

@@ -64,7 +64,7 @@ function Password({ onPasswordChange }: PasswordProps) {
   );
 }
 
-type PasswordType = {
+export type PasswordType = {
   [key: number]: string;
 };
 

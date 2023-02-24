@@ -10,6 +10,7 @@ import React, { useContext, useMemo, useState } from "react";
 import { BANKS, DEFAULT_BANK_COLOR } from "../../constants/bank";
 import { useHistory } from "react-router-dom";
 import { ModalContext } from "../../components/ModalProvider";
+import { CardContext } from "../../components/CardProvider";
 
 const INPUT_NAMES = [
   "card-0",
@@ -55,29 +56,31 @@ function Add() {
   const isTyping = !!cardNumber || !!expireMonth || !!expireYear || !!userName;
   const history = useHistory();
 
-  const context = useContext(ModalContext);
+  const modalContext = useContext(ModalContext);
+  const cardContext = useContext(CardContext);
 
-  if (!context) {
+  if (!modalContext || !cardContext) {
     alert("context 누락");
     throw Error("context 필수값 누락");
   }
 
-  const { bankId, toggleModal } = context;
+  const { setIsOpen } = modalContext;
+  const { card } = cardContext;
 
   const color = useMemo(() => {
-    if (bankId) {
-      const selectedBank = BANKS.find((bank) => bank.ID === bankId);
+    if (card.bankId) {
+      const selectedBank = BANKS.find((bank) => bank.ID === card.bankId);
       return selectedBank ? selectedBank.COLOR : "";
     } else {
       return isTyping ? DEFAULT_BANK_COLOR : "";
     }
-  }, [bankId, isTyping]);
+  }, [card.bankId, isTyping]);
   const bankName = useMemo(() => {
-    if (bankId) {
-      const selectedBank = BANKS.find((bank) => bank.ID === bankId);
+    if (card.bankId) {
+      const selectedBank = BANKS.find((bank) => bank.ID === card.bankId);
       return selectedBank ? selectedBank.NAME : "";
     }
-  }, [bankId]);
+  }, [card.bankId]);
 
   const onCardNumberChange = (cardNumbers: CardNumbers) => {
     const hasCardNumber = Object.values(cardNumbers).some(
@@ -109,11 +112,11 @@ function Add() {
     const isInvalid = checkValid(e.currentTarget);
 
     if (!isInvalid) {
-      if (bankId) {
+      if (card.bankId) {
         history.push("/complete");
         return;
       }
-      toggleModal();
+      setIsOpen(true);
     }
   };
 

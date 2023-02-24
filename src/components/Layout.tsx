@@ -1,22 +1,19 @@
-import { createContext, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import useModalState from "../hooks/useModalState";
 import Header from "./Header";
 import Modal from "./Modal";
-import ModalProvider from "./ModalProvider";
+import ModalContainer from "./ModalContainer";
 
 function Layout({ children }: ComponentProps) {
-  const { toggleModal, isModalOpen, bankId, setBankId } = useModalState();
-
   return (
-    <ModalProvider>
-      <Root>
-        <Wrapper>
-          <Header />
-          {children}
-        </Wrapper>
-      </Root>
-    </ModalProvider>
+    <Root>
+      <Wrapper>
+        <Header />
+        {children}
+      </Wrapper>
+      <ModalContainer>
+        <Modal></Modal>
+      </ModalContainer>
+    </Root>
   );
 }
 
