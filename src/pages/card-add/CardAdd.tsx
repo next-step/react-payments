@@ -1,6 +1,6 @@
-import { BackButton } from '@/components/button'
+import { BackButton, NavigationTextButton } from '@/components/button'
 import { Card } from '@/components/card'
-import { ButtonBox, PageTitle } from '@/components/layouts'
+import { PageTitle } from '@/components/layouts'
 import { CardForm } from '@/pages/card-add/card-form'
 import { useCardInfo } from '@/pages/card-add/card-form/hooks'
 
@@ -23,7 +23,7 @@ function CardAdd() {
           <CardForm.CardSecurityCode securityCode={cardInfo.securityCode} handleChange={handleSecurityCode} />
           <CardForm.CardPassword password={cardInfo.password} handleChange={handlePassword} />
         </CardForm>
-        <ButtonBox to="/card-completed" storage={cardInfo} text="다음" />
+        <NavigationTextButton to="/card-completed" storage={cardInfo} text="다음" />
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
-import { BackButton } from '@/components/button'
-import { ButtonBox, PageTitle } from '@/components/layouts'
+import { BackButton, NavigationTextButton } from '@/components/button'
+import { PageTitle } from '@/components/layouts'
 
 function CardCompleted() {
   return (
@@ -30,7 +30,7 @@ function CardCompleted() {
         <div className="input-container flex-center w-100">
           <input className="input-underline w-75" type="text" placeholder="카드의 별칭을 입력해주세요." />
         </div>
-        <ButtonBox additionalClassNames="mt-50" to="/" text="다음" />
+        <NavigationTextButton additionalClassNames="mt-50" to="/" text="다음" />
       </div>
     </div>
   )
