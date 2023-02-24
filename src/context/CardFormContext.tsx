@@ -12,16 +12,16 @@ const CardFormHandlerContext = createContext<FormHandler | null>(null);
 
 function useCardForm() {
   const value = useContext(CardFormContext);
-  if (value === undefined) {
-    throw new Error('useCardForm should be used within CardFormProvider');
+  if (!value) {
+    throw new Error('useCardForm는 CardFormProvider에서 사용해야합니다.');
   }
   return value;
 }
 
 function useCardFormHandler() {
   const value = useContext(CardFormHandlerContext);
-  if (value === undefined) {
-    throw new Error('useCardFormHandler should be used within CardFormProvider');
+  if (!value) {
+    throw new Error('useCardFormHandler CardFormProvider에서 사용해야합니다.');
   }
   return value;
 }

@@ -1,21 +1,21 @@
-interface Expiration {
+export interface Expiration {
   month: string;
   year: string;
 }
 
-interface CardNumber {
+export interface CardNumber {
   cardNumber1: string;
   cardNumber2: string;
   cardNumber3: string;
   cardNumber4: string;
 }
 
-interface Password {
+export interface Password {
   password1: string;
   password2: string;
 }
 
-type CardInformation = Expiration &
+export type CardInformation = Expiration &
   Password &
   CardNumber & {
     cvc: string;
@@ -24,6 +24,6 @@ type CardInformation = Expiration &
     cardCompany?: string;
   };
 
-type Destination = '/' | '/add' | '/complete';
+export type Destination = '/' | '/add' | '/complete';
 
-export type { CardInformation, Expiration, CardNumber, Password, Destination };
+export type CardList = CardInformation[];

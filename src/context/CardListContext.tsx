@@ -1,14 +1,59 @@
-import { createContext } from 'react';
+import { CardInformation } from '@/types';
+import { createContext, useContext, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 
-const CardListContext = createContext<any | null>(null);
+type CardList = CardInformation[];
+
+const initialCardList: CardList = [];
+
+type CardListHandler = {
+  addCard(card: CardInformation): void;
+};
+
+const CardListContext = createContext<CardList | null>(null);
+const CardListHandlerContext = createContext<CardListHandler | null>(null);
 
 interface CardListContextProps {
   children: ReactNode;
 }
 
-function CardListProvider({ children }: CardListContextProps) {
-  return <CardListContext.Provider value={'hello'}>{children}</CardListContext.Provider>;
+function useCardList() {
+  const value = useContext(CardListContext);
+
+  if (!value) {
+    throw new Error('useCardList는 CardListProvider에서 사용해야 합니다');
+  }
+
+  return value;
 }
 
-export { CardListProvider, CardListContext };
+function useCardListHandler() {
+  const value = useContext(CardListHandlerContext);
+
+  if (!value) {
+    throw new Error('useCardListHandler CardListProvider에서 사용해야 합니다');
+  }
+
+  return value;
+}
+
+function CardListProvider({ children }: CardListContextProps) {
+  const [cardList, setCardList] = useState(initialCardList);
+
+  const handlers = useMemo(
+    () => ({
+      addCard(newCard: CardInformation) {
+        setCardList(prev => [...prev, newCard]);
+      },
+    }),
+    [],
+  );
+
+  return (
+    <CardListHandlerContext.Provider value={handlers}>
+      <CardListContext.Provider value={cardList}>{children}</CardListContext.Provider>;
+    </CardListHandlerContext.Provider>
+  );
+}
+
+export { CardListProvider, CardListContext, useCardList, useCardListHandler };

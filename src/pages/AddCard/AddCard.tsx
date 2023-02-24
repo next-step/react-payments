@@ -1,18 +1,16 @@
 import { Card } from '@/components/Common';
 import AddCardForm from '@/components/Form/AddCardForm';
 import Layout from '@/components/Layout';
+import { useCardForm } from '@/context/CardFormContext';
 
-import type { CardInformation } from '@/types';
-import type { ChangeEvent, FormEvent } from 'react';
+import type { FormEvent } from 'react';
 
 type Props = {
-  cardInformation: CardInformation;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 };
 
-function AddCard({ cardInformation, onChange, onSubmit }: Props) {
-  const { cardNumber1, cardNumber2, cardNumber3, cardNumber4, year, month, cardOwner } = cardInformation;
+function AddCard({ onSubmit }: Props) {
+  const { cardNumber1, cardNumber2, cardNumber3, cardNumber4, year, month, cardOwner } = useCardForm();
   return (
     <div>
       <div className="root">
@@ -32,7 +30,7 @@ function AddCard({ cardInformation, onChange, onSubmit }: Props) {
                 month,
               }}
             />
-            <AddCardForm cardInformation={cardInformation} onChange={onChange} onSubmit={onSubmit} />
+            <AddCardForm onSubmit={onSubmit} />
           </>
         </Layout>
       </div>

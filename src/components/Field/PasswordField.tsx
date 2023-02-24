@@ -7,6 +7,7 @@ type Props = {
   value: { password1: string; password2: string };
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
+
 function PasswordField({ title, value, onChange }: Props) {
   return (
     <FieldContainer title={title}>

@@ -5,20 +5,20 @@ import { Button } from '@components/Common';
 import { checkRequiredValues } from '@/utils';
 import { LIMIT_INPUT_LENGTH } from '@/constants';
 
-import type { CardInformation } from '@/types';
-import type { ChangeEvent, FormEvent } from 'react';
+import type { FormEvent } from 'react';
+import { useCardForm, useCardFormHandler } from '@/context/CardFormContext';
 
 type Props = {
-  cardInformation: CardInformation;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
 };
 
-function AddCardForm({ cardInformation, onChange, onSubmit }: Props) {
+function AddCardForm({ onSubmit }: Props) {
   const navigate = useNavigate();
 
+  const { onChange } = useCardFormHandler();
   const { cardNumber1, cardNumber2, cardNumber3, cardNumber4, year, month, password1, password2, cvc, cardOwner } =
-    cardInformation;
+    useCardForm();
+
   const cardNumber = { cardNumber1, cardNumber2, cardNumber3, cardNumber4 };
   const expirationDate = {
     year,
@@ -26,7 +26,18 @@ function AddCardForm({ cardInformation, onChange, onSubmit }: Props) {
   };
   const password = { password1, password2 };
 
-  const isValid = checkRequiredValues(cardInformation);
+  const isValid = checkRequiredValues({
+    cardNumber1,
+    cardNumber2,
+    cardNumber3,
+    cardNumber4,
+    year,
+    month,
+    password1,
+    password2,
+    cvc,
+    cardOwner,
+  });
 
   const onSubmitWithRedirect = (e: FormEvent<HTMLFormElement>) => {
     onSubmit(e);

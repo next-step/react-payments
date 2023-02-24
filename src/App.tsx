@@ -1,45 +1,23 @@
-import { useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { AddCard, CardList, Complete } from '@pages';
+import { AddCard, CardList, Complete, NotFound } from '@pages';
+
+import { ROUTES } from './constants';
+import { CardFormProvider, useCardForm, useCardFormHandler } from './context/CardFormContext';
+import { CardListProvider, useCardListHandler } from './context/CardListContext';
+
+import type { FormEvent } from 'react';
 
 import './styles/index.css';
 
-import type { ChangeEvent, FormEvent } from 'react';
-import type { CardInformation } from './types';
-import { ROUTES } from './constants';
-import { CardFormProvider } from './context/CardFormContext';
-
-const initCardInformation = {
-  cardNumber1: '',
-  cardNumber2: '',
-  cardNumber3: '',
-  cardNumber4: '',
-  year: '',
-  month: '',
-  cvc: '',
-  password1: '',
-  password2: '',
-  cardOwner: '',
-  nickname: '',
-};
-
 function App() {
-  const [cardInformation, setCardInformation] = useState<CardInformation>(initCardInformation);
-
-  const handleCardInformation = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value, validity } = e.target;
-    if (!validity.valid) return;
-
-    setCardInformation(prev => ({ ...prev, [name]: value }));
-  };
-
-  const initializedState = () => {
-    setCardInformation(initCardInformation);
-  };
+  const { addCard } = useCardListHandler();
+  const card = useCardForm();
+  const { onReset } = useCardFormHandler();
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    initializedState();
+    addCard(card);
+    onReset();
   };
 
   const routes = [
@@ -49,20 +27,26 @@ function App() {
     },
     {
       path: ROUTES.ADD,
-      element: <AddCard cardInformation={cardInformation} onChange={handleCardInformation} onSubmit={onSubmit} />,
+      element: <AddCard onSubmit={onSubmit} />,
     },
     {
       path: ROUTES.COMPLETE,
       element: <Complete />,
+    },
+    {
+      path: ROUTES.NOT_FOUND,
+      element: <NotFound />,
     },
   ];
 
   const router = createBrowserRouter(routes);
 
   return (
-    <CardFormProvider>
-      <RouterProvider router={router} />;
-    </CardFormProvider>
+    <CardListProvider>
+      <CardFormProvider>
+        <RouterProvider router={router} />;
+      </CardFormProvider>
+    </CardListProvider>
   );
 }
 
