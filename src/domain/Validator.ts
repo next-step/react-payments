@@ -4,6 +4,10 @@ export default function Validator() {
   }
 
   function isPreviousDate(year: string, month: string): boolean {
+    if (isNaN(Number(year)) || isNaN(Number(month))) {
+      return true;
+    }
+
     if (year.length < 2 || month.length < 2) {
       return true;
     }
