@@ -7,7 +7,7 @@ const MAX_LENGTH = 30;
 
 export default function CardHolderContainer({ onChange }: IRegisterCard) {
   const cardHolderRef = useRef<HTMLInputElement>(null);
-  const countValue = cardHolderRef.current?.value.length;
+  const countValue = cardHolderRef.current?.value.length || 0;
 
   const handleChange = () => {
     const cardHolder = onlyString(cardHolderRef?.current.value);
