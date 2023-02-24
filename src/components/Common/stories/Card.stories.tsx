@@ -6,10 +6,20 @@ export default {
   component: Card,
 } as ComponentMeta<typeof Card>;
 
-export const EmptyCard = <Card isEmpty />;
-
-export const BigEmptyCard = <Card isBig isEmpty />;
-
-export const NotEmptyCard = <Card />;
-
-export const BigNotEmptyCard = <Card isBig />;
+export const DefaultCard = (
+  <Card
+    isBig
+    cardCompany=""
+    cardOwner={''}
+    cardNumber={{
+      cardNumber1: '',
+      cardNumber2: '',
+      cardNumber3: '',
+      cardNumber4: '',
+    }}
+    expiration={{
+      year: '',
+      month: '',
+    }}
+  />
+);

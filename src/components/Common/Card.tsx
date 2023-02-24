@@ -1,36 +1,17 @@
+import { CardNumber, Expiration } from '@/types';
 import { renderTextDivider } from '@/utils';
 
-type Expiration = {
-  month: string;
-  year: string;
-};
-
-type CardNumber = {
-  cardNumber1: string;
-  cardNumber2: string;
-  cardNumber3: string;
-  cardNumber4: string;
-};
-
 type CardProps = {
+  cardNumber: CardNumber;
+  expiration: Expiration;
   cardOwner?: string;
   cardCompany?: string;
-  cardNumber?: CardNumber;
-  expiration?: Expiration;
   cardNickname?: string;
   isEmpty?: boolean;
   isBig?: boolean;
 };
 
-function Card({ cardOwner, cardCompany, cardNumber, expiration, cardNickname, isEmpty, isBig }: CardProps) {
-  if (isEmpty) {
-    return (
-      <div className="card-box">
-        <div className="empty-card">+</div>
-      </div>
-    );
-  }
-
+function Card({ cardOwner, cardCompany, cardNumber, expiration, cardNickname, isBig }: CardProps) {
   return (
     <div className="card-box">
       <div className="flex-column-center card-box">
@@ -44,7 +25,7 @@ function Card({ cardOwner, cardCompany, cardNumber, expiration, cardNickname, is
           <div className="card-bottom">
             <div className="card-bottom__number">
               <span className="card-text">
-                {cardNumber?.cardNumber1} {cardNumber?.cardNumber2} {cardNumber?.cardNumber3} {cardNumber?.cardNumber4}
+                {cardNumber.cardNumber1} {cardNumber.cardNumber2} {cardNumber.cardNumber3} {cardNumber.cardNumber4}
               </span>
             </div>
             <div className="card-bottom__info">
@@ -52,8 +33,8 @@ function Card({ cardOwner, cardCompany, cardNumber, expiration, cardNickname, is
               <span className={isBig ? 'card-text__big' : 'card-text'}>
                 {expiration?.month ?? 'MM'}
                 {renderTextDivider({
-                  formerValue: expiration?.month ?? '',
-                  latterValue: expiration?.year ?? '',
+                  formerValue: expiration.month,
+                  latterValue: expiration.year,
                   divider: '/',
                 })}
                 {expiration?.year ?? 'YY'}

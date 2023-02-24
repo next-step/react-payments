@@ -1,5 +1,5 @@
+import EmptyCard from '@/components/Common/EmptyCard';
 import { Link } from 'react-router-dom';
-import { Card } from '@/components/Common';
 
 function CardList() {
   return (
@@ -10,7 +10,7 @@ function CardList() {
             <h2 className="page-title mb-10">보유 카드</h2>
           </div>
           <Link to="/add">
-            <Card isEmpty />
+            <EmptyCard />
           </Link>
         </div>
       </div>

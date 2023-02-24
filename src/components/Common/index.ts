@@ -1,5 +1,4 @@
-import Button from './Button';
-import Input from './Input';
-import Card from './Card';
-
-export { Button, Input, Card };
+export { default as Button } from './Button';
+export { default as Input } from './Input';
+export { default as Card } from './Card';
+export { default as EmptyCard } from './EmptyCard';
