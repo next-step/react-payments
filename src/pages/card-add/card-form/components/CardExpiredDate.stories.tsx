@@ -5,7 +5,7 @@ import { useCardInfo } from '@/pages/card-add/card-form/hooks'
 import CardExpiredDate from './CardExpiredDate'
 
 export default {
-  title: '페이먼츠 미션/Pages/CardAdd/CardForm/Components',
+  title: '페이먼츠 미션/Pages/CardAdd/CardForm/CardExpiredDate',
   component: CardExpiredDate,
 } as ComponentMeta<typeof CardExpiredDate>
 
