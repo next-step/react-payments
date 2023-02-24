@@ -16,8 +16,8 @@ const Template: ComponentStory<typeof CardExpiredDate> = (props) => {
       <div className="app">
         <CardExpiredDate
           {...props}
-          expiratedMonth={cardInfo.expiratedMonth}
-          expiratedYear={cardInfo.expiratedYear}
+          expiredMonth={cardInfo.expiredMonth}
+          expiredYear={cardInfo.expiredYear}
           handleChange={handleExpiredDate}
         />
       </div>

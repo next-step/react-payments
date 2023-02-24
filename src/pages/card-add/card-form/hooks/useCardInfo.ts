@@ -6,8 +6,8 @@ const useCardInfo = () => {
   const [cardInfo, setCardInfo] = useState({
     cardNumbers: { first: '', second: '', third: '', fourth: '' },
     name: '',
-    expiratedYear: '',
-    expiratedMonth: '',
+    expiredYear: '',
+    expiredMonth: '',
     owner: '',
     securityCode: '',
     password: { first: '', second: '' },
@@ -60,7 +60,7 @@ const useCardInfo = () => {
     switch (name) {
       case 'YY':
         if (value.length > 2) return
-        setCardInfo((prev) => ({ ...prev, expiratedYear: value }))
+        setCardInfo((prev) => ({ ...prev, expiredYear: value }))
         break
       case 'MM':
         if (value.length > 2) return
@@ -68,7 +68,7 @@ const useCardInfo = () => {
           alert('월은 1이상 12이하여야 합니다.')
           return
         }
-        setCardInfo((prev) => ({ ...prev, expiratedMonth: value }))
+        setCardInfo((prev) => ({ ...prev, expiredMonth: value }))
         break
     }
   }

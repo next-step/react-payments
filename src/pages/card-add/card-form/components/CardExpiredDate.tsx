@@ -3,17 +3,17 @@ import { useRef, ChangeEvent } from 'react'
 import { useSequentialInputFocus } from '@/pages/card-add/card-form/hooks'
 
 interface CardExpiredDateProps {
-  expiratedYear: string
-  expiratedMonth: string
+  expiredYear: string
+  expiredMonth: string
   handleChange(event: ChangeEvent<HTMLInputElement>): void
 }
 
-const CardExpiredDate = ({ expiratedYear, expiratedMonth, handleChange }: CardExpiredDateProps) => {
+const CardExpiredDate = ({ expiredYear, expiredMonth, handleChange }: CardExpiredDateProps) => {
   const firstRef = useRef<HTMLInputElement>(null)
   const secondRef = useRef<HTMLInputElement>(null)
   useSequentialInputFocus([
-    { ref: firstRef, isFocus: expiratedMonth.length === 2 },
-    { ref: secondRef, isFocus: expiratedYear.length === 2 },
+    { ref: firstRef, isFocus: expiredMonth.length === 2 },
+    { ref: secondRef, isFocus: expiredYear.length === 2 },
   ])
   return (
     <div className="input-container">
@@ -25,17 +25,17 @@ const CardExpiredDate = ({ expiratedYear, expiratedMonth, handleChange }: CardEx
           type="text"
           placeholder="MM"
           data-name="MM"
-          value={expiratedMonth}
+          value={expiredMonth}
           onChange={handleChange}
         />
-        {(expiratedYear.length === 2 || expiratedMonth.length === 2) && <span>/</span>}
+        {(expiredYear.length === 2 || expiredMonth.length === 2) && <span>/</span>}
         <input
           ref={secondRef}
           className="input-basic"
           type="text"
           placeholder="YY"
           data-name="YY"
-          value={expiratedYear}
+          value={expiredYear}
           onChange={handleChange}
         />
       </div>

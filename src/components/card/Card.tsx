@@ -3,11 +3,11 @@ import { getConvertedStringsByStars } from '@/utils'
 interface CardProps {
   cardNumbers: { first: string; second: string; third: string; fourth: string }
   name: string
-  expiratedYear: string
-  expiratedMonth: string
+  expiredYear: string
+  expiredMonth: string
 }
 
-function Card({ cardNumbers, name, expiratedYear, expiratedMonth }: CardProps) {
+function Card({ cardNumbers, name, expiredYear, expiredMonth }: CardProps) {
   const { first, second, third, fourth } = cardNumbers
 
   return (
@@ -29,8 +29,8 @@ function Card({ cardNumbers, name, expiratedYear, expiratedMonth }: CardProps) {
           <div className="card-bottom__info">
             <span className="card-text">{name || 'Name'}</span>
             <span className="card-text">
-              {`${expiratedMonth || 'MM'} 
-              / ${expiratedYear || 'YY'}`}
+              {`${expiredMonth || 'MM'} 
+              / ${expiredYear || 'YY'}`}
             </span>
           </div>
         </div>

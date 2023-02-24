@@ -8,8 +8,8 @@ export default {
   args: {
     cardNumbers: { first: '1234', second: '5678', third: '9123', fourth: '4567' },
     name: '김희열',
-    expiratedMonth: '02',
-    expiratedYear: '20',
+    expiredMonth: '02',
+    expiredYear: '20',
   },
 } as ComponentMeta<typeof Card>
 

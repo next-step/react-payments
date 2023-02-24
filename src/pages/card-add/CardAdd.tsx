@@ -15,8 +15,8 @@ function CardAdd() {
         <CardForm>
           <CardForm.CardNumbers numbers={cardInfo.cardNumbers} handleChange={handleNumber} />
           <CardForm.CardExpiredDate
-            expiratedYear={cardInfo.expiratedYear}
-            expiratedMonth={cardInfo.expiratedMonth}
+            expiredYear={cardInfo.expiredYear}
+            expiredMonth={cardInfo.expiredMonth}
             handleChange={handleExpiredDate}
           />
           <CardForm.CardOwner owner={cardInfo.owner} handleChange={handleOwner} />
