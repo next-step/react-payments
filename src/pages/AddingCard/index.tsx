@@ -30,7 +30,7 @@ function AddingCard() {
     <div className="app">
       <Header
         title="카드 추가"
-        prefix={<Button fontSize={24} onClick={() => navigate(-1)}>{`<`}</Button>}
+        leftSideComponent={<Button fontSize={24} onClick={() => navigate(-1)}>{`<`}</Button>}
       />
       <Label>카드사 선택</Label>
       <div onClick={openPicker}>

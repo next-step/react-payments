@@ -17,10 +17,13 @@ export const Template: Story<HeaderProps> = (args) => <Header {...args} />;
 Template.args = { title: 'Sample Header' };
 Template.storyName = 'Playground';
 
-export const WithPrefix = () => {
+export const WithLeftSideComponent = () => {
   return (
     <Layout>
-      <Header title="Sample Header With Prefix" prefix={<button>👈</button>} />
+      <Header
+        title="Sample Header With Left Side Component"
+        leftSideComponent={<button>👈</button>}
+      />
     </Layout>
   );
 };
