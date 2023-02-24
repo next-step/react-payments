@@ -32,12 +32,10 @@ const Card = ({
   cardColor,
   ownerName,
 }: CardProps) => {
-  const textClassName = `card-text` + (size === 'big' ? '__big' : '');
-
   return (
     <CardContainer cardColor={colors[cardColor]} size={size}>
       <CardTop>
-        {cardName && <span className={textClassName}>{cardName}</span>}
+        {cardName && <CardText size={size}>{cardName}</CardText>}
       </CardTop>
       <CardMiddle>
         <CardChip size={size} />
