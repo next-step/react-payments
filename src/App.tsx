@@ -7,6 +7,7 @@ import './styles/index.css';
 import type { ChangeEvent, FormEvent } from 'react';
 import type { CardInformation } from './types';
 import { ROUTES } from './constants';
+import { CardFormProvider } from './context/CardFormContext';
 
 const initCardInformation = {
   cardNumber1: '',
@@ -58,7 +59,11 @@ function App() {
 
   const router = createBrowserRouter(routes);
 
-  return <RouterProvider router={router} />;
+  return (
+    <CardFormProvider>
+      <RouterProvider router={router} />;
+    </CardFormProvider>
+  );
 }
 
 export default App;
