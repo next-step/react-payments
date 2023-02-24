@@ -1,6 +1,7 @@
 import { ChangeEvent, InputHTMLAttributes } from 'react';
 
 export type Width = 'w-15' | 'w-25' | 'w-50' | 'w-75' | 'w-100';
+
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   kind?: 'basic' | 'underline';
   width?: Width;
@@ -16,7 +17,7 @@ function Input({ className, kind = 'basic', width = 'w-25', onChange, formatter,
       e.target.value = formatter(e.target.value);
     }
 
-    onChange && onChange(e);
+    onChange?.(e);
   };
 
   return <input {...props} onChange={onChangeWithFormatter} className={`${className} ${inputStyle} ${width}`} />;

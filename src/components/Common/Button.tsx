@@ -2,10 +2,8 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode | string;
-  type?: 'button' | 'submit';
-  disabled?: boolean;
 }
-function Button({ children, type = 'button', disabled = false }: ButtonProps) {
+function Button({ children, type = 'button', disabled = false, ...props }: ButtonProps) {
   return (
     <button
       type={type}
@@ -17,6 +15,7 @@ function Button({ children, type = 'button', disabled = false }: ButtonProps) {
         cursor: 'pointer',
         color: `${disabled ? 'gray' : 'black'}`,
       }}
+      {...props}
     >
       {children}
     </button>

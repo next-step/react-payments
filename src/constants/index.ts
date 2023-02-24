@@ -1,4 +1,4 @@
-const LIMIT_INPUT_LENGTH = {
+export const LIMIT_INPUT_LENGTH = {
   CVC: 3,
   CARD_NUMBER: {
     MIN: 0,
@@ -9,10 +9,12 @@ const LIMIT_INPUT_LENGTH = {
   OWNER_NAME: 30,
 };
 
-const ROUTES = {
+export const ROUTES = {
   HOME: '/',
   ADD: '/add',
   COMPLETE: '/complete',
 } as const;
 
-export { LIMIT_INPUT_LENGTH, ROUTES };
+export const REGEX = {
+  NOT_NUMBER: /\D+/g,
+};

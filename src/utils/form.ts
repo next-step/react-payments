@@ -1,3 +1,4 @@
+import { REGEX } from '@/constants';
 import { CardInformation } from '@/types';
 
 const renderTextDivider = ({
@@ -9,9 +10,7 @@ const renderTextDivider = ({
   latterValue?: string;
   divider?: string;
 }) => {
-  if (formerValue || latterValue) return divider;
-
-  return '';
+  return formerValue || latterValue ? divider : '';
 };
 
 const checkRequiredValues = (data: CardInformation) => {
@@ -36,11 +35,11 @@ const expirationMonthFormatter = (month: string) => {
   if (num1 === '0' && num2 === '0') return num1;
   if (num1 === '1' && parseInt(num2, 10) > 2) return num1;
 
-  return month.replace(/\D+/g, '');
+  return month.replace(REGEX.NOT_NUMBER, '');
 };
 
 const textOnlyFormatter = (str: string) => {
-  return str.replace(/\D+/g, '');
+  return str.replace(REGEX.NOT_NUMBER, '');
 };
 
 export { renderTextDivider, checkRequiredValues, expirationMonthFormatter, textOnlyFormatter };
