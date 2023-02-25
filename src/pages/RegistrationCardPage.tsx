@@ -68,7 +68,7 @@ const RegistrationCardPage = () => {
     setPasswords(copyPassword);
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLDivElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const cardValues = {
       holderName,
@@ -91,7 +91,7 @@ const RegistrationCardPage = () => {
         number={number}
         expiration={expiration}
       />
-      <Form as="form" onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit}>
         <FormFieldControl>
           <FormFieldControl.Label>카드 번호</FormFieldControl.Label>
           <Box
@@ -219,6 +219,6 @@ const RegistrationCardPage = () => {
 
 export default RegistrationCardPage;
 
-const Form = styled(Box)`
+const Form = styled.form`
   margin: 30px;
 `;

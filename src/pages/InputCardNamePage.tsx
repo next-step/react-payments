@@ -21,7 +21,7 @@ const InputCardNamePage = () => {
         number={item?.number}
         expiration={item?.expiration}
       />
-      <Form as="form">
+      <Form>
         <TextField
           placeholder="카드를 저장할 별명을 입력해주세요."
           maxLength={30}
@@ -51,6 +51,6 @@ const H1 = styled.h1`
   text-align: center;
   margin: 30px 0;
 `;
-const Form = styled(Box)`
+const Form = styled.form`
   margin: 30px;
 `;
