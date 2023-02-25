@@ -1,3 +1,5 @@
+import { CARD_COMPANIES } from '@/constants';
+
 export type CardField = {
   cardNumber: string;
   expirationMonth: string;
@@ -5,4 +7,5 @@ export type CardField = {
   ownerName: string;
   cvc: string;
   cardPassword: string;
+  cardCompany: keyof typeof CARD_COMPANIES | null;
 };

@@ -29,9 +29,13 @@ const cardFieldReducer = (state: CardField, action: CardFieldAction) => {
       };
 
     case 'DELETE':
+      const fieldState = state[action.payload.key];
+      if (typeof fieldState !== 'string') {
+        throw new Error('state[action.payload.key] is not a string');
+      }
       return {
         ...state,
-        [action.payload.key]: state[action.payload.key].slice(0, -1),
+        [action.payload.key]: fieldState.slice(0, -1),
       };
   }
 };

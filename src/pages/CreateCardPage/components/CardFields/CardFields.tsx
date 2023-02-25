@@ -5,6 +5,7 @@ import { CardOwnerNameField } from './CardOwnerNameField';
 import { CardCVCNumberField } from './CardCVCNumberField';
 import { CardPasswordField } from './CardPasswordField';
 import { CardExpirationDateField } from './CardExpirationDateField';
+import { CARD_COMPANIES } from '@/constants';
 
 const CardFields = () => {
   const data = useCardFieldContext();
@@ -18,9 +19,11 @@ const CardFields = () => {
     expirationMonth,
     expirationYear,
     ownerName,
+    cardCompany,
   } = data;
 
-  const fontColor = 'primary';
+  const fontColor =
+    cardCompany !== null ? CARD_COMPANIES[cardCompany].color : 'gray1';
   return (
     <form>
       <CardNumberField cardNumber={cardNumber} fontColor={fontColor} />

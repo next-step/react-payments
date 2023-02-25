@@ -1,17 +1,26 @@
 import { Card } from '@/components/Card';
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useCardFieldContext } from '../CardFieldContext';
 import { BottomModal } from '@/components/Modal';
+import CardCompanySelectFormModal from '../CardCompanySelectModal/CardCompanySelectModal';
+import { CARD_COMPANIES } from '@/constants';
 
 const PreviewCard = () => {
   const data = useCardFieldContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
   if (!data) return null;
 
-  const { cardNumber, expirationMonth, expirationYear, ownerName } = data;
-  const cardName = '신한카드';
-  const cardColor = 'primary';
+  const {
+    cardNumber,
+    expirationMonth,
+    expirationYear,
+    ownerName,
+    cardCompany,
+  } = data;
+  const cardName = cardCompany ? CARD_COMPANIES[cardCompany].name : '';
+  const cardColor = cardCompany ? CARD_COMPANIES[cardCompany].color : 'gray1';
   return (
     <PreviewCardContainer
       onClick={() => {
@@ -30,10 +39,14 @@ const PreviewCard = () => {
       <BottomModal
         isOpen={isModalOpen}
         onClose={() => {
+          submitButtonRef.current?.click();
           setIsModalOpen(false);
         }}
       >
-        <div>안녕하세요</div>
+        <CardCompanySelectFormModal
+          ref={submitButtonRef}
+          selectedCardCompany={cardCompany}
+        />
       </BottomModal>
     </PreviewCardContainer>
   );

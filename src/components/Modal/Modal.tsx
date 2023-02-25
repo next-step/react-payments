@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode } from 'react';
 
 type FlexPosition = 'top' | 'bottom' | 'left' | 'right' | 'center';
 interface Type {

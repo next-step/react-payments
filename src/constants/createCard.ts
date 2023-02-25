@@ -15,45 +15,38 @@ export const PLACEHOLDER_TEXT = {
 
 export const CARD_COMPANIES = {
   KAKAO: {
-    name: '카카오뱅크',
-    color: '#FEE500',
-  },
-  NH: {
-    name: '농협',
-    color: '#F80046',
+    name: '카카오뱅크 카드',
+    color: 'yellow',
   },
   SH: {
-    name: '신한',
-    color: '#FF6B6E',
+    name: '신한 카드',
+    color: 'lightPink',
   },
   KB: {
-    name: '국민',
-    color: '#003C71',
+    name: '국민 카드',
+    color: 'red',
   },
   WOORI: {
-    name: '우리',
-    color: '#0289FF',
+    name: '우리 카드',
+    color: 'lightBlue',
   },
-  LOTTE: {
-    name: '롯데',
-    color: '#FB0E16',
-  },
+
   HANA: {
-    name: '하나',
-    color: '#F37021',
+    name: '하나 카드',
+    color: 'orange',
   },
   IBK: {
-    name: '기업',
-    color: '#1C4FA1',
+    name: '기업 카드',
+    color: 'blue',
   },
   SAMSUNG: {
     name: '삼성',
-    color: '#1428A0',
+    color: 'blue',
   },
   CITI: {
-    name: '씨티',
-    color: '#0068B4',
+    name: '씨티 카드',
+    color: 'green',
   },
-};
+} as const;
 
 export const CARD_COMPANIES_ARRAY = typedKeysOf(CARD_COMPANIES);
