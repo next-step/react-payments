@@ -3,7 +3,7 @@ import React from 'react';
 import { Label, TextInput } from '@/components';
 import { ACTION, useCardFieldDispatchContext } from '../../CardFieldContext';
 import { Colors } from '@/styles/colors';
-import { LABEL_TEXT, PLACEHOLDER_TEXT } from '@/constants/createCard';
+import { LABEL_TEXT, PLACEHOLDER_TEXT } from '@/constants';
 
 type CardOwnerNameFieldProps = {
   ownerName: string;

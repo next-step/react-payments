@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import { Label, TextInput } from '@/components';
 import { ACTION, useCardFieldDispatchContext } from '../../CardFieldContext';
-import { LABEL_TEXT } from '@/constants/createCard';
+import { LABEL_TEXT } from '@/constants';
 import { Colors } from '@/styles/colors';
 import { CircleQuestionIcon } from '@/assets';
 import { isNotNumber } from '@/utils/validate';

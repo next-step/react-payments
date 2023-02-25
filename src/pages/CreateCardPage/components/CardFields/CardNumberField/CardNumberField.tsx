@@ -7,7 +7,7 @@ import {
   addCardNumberDashes,
   replaceCardNumberToDot,
 } from '@/utils/formatter';
-import { LABEL_TEXT } from '@/constants/createCard';
+import { LABEL_TEXT } from '@/constants';
 import { Colors } from '@/styles/colors';
 
 type CardNumberFieldProps = {

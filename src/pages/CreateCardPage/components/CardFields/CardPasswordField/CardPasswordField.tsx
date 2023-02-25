@@ -2,7 +2,7 @@ import { Label } from '@/components';
 import React from 'react';
 import { CardPasswordInput } from '../../CardPasswordInput';
 import { ACTION, useCardFieldDispatchContext } from '../../CardFieldContext';
-import { LABEL_TEXT } from '@/constants/createCard';
+import { LABEL_TEXT } from '@/constants';
 import { Colors } from '@/styles/colors';
 
 type CardPasswordFieldProps = {

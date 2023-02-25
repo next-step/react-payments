@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { EmptyCardButton } from '@/components/buttons';
 import { CardListContainer } from './CardList.style';
-import { ROUTE } from '@/constants/route';
+import { ROUTE } from '@/constants';
 
 const CardList = () => {
   const navigate = useNavigate();
