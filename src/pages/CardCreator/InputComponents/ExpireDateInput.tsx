@@ -18,6 +18,7 @@ function ExpireDateInput({
   expireDatesStateBundle,
 }: ExpireDateInputProps) {
   const [expireDates, setExpireDates] = expireDatesStateBundle;
+
   const { createInputBlurHandler, createInputChangeHandler } = useInputEventHandler();
 
   return (

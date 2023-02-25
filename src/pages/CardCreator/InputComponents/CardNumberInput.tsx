@@ -7,6 +7,7 @@ import useExtendedState from '@/hooks/useExtendedState';
 import type { CardNumbersState } from '../types';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
 import { InputDivider } from './InputDivider';
+import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 
 interface CardNumberInputProps {
   // prettier-ignore
@@ -19,6 +20,7 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
   const cardNumberInputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
   const { createInputChangeHandler } = useInputEventHandler();
+  const { toTheNextElement } = useSequentialFocusWithElements(cardNumberInputsRef);
 
   return (
     <div className="input-container">
@@ -29,12 +31,7 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
           const isLast = checkIsArrayLast(cardNumbers, i);
           const isOverFourNumber = checkIsValid(value);
 
-          if (!isLast && isOverFourNumber) {
-            // FIXME: 마지막 카드 번호를 입력했을 때, 그 다음 다른 input으로 가게 하려면 어떻게 해야 할까?
-            if (document.activeElement === cardNumberInputsRef.current[i]) {
-              cardNumberInputsRef.current[i + 1]?.focus();
-            }
-          }
+          toTheNextElement(i, !isLast && isOverFourNumber)
 
           return (
             <>
