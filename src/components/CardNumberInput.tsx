@@ -1,4 +1,5 @@
 import { useEffect, useRef, ChangeEvent } from 'react';
+import { CARD } from '../utils/card_constants';
 
 import '../styles/input.css';
 
@@ -22,19 +23,19 @@ const CardNumberInput = ({ cardNumbers, onChange }: CardNumberProps) => {
   }, []);
 
   useEffect(() => {
-    if (num1.length === 4) {
+    if (num1.length === CARD.NUMBER_LENGTH) {
       num2InputRef.current?.focus();
     }
   }, [num1]);
 
   useEffect(() => {
-    if (num2.length === 4) {
+    if (num2.length === CARD.NUMBER_LENGTH) {
       num3InputRef.current?.focus();
     }
   }, [num2]);
 
   useEffect(() => {
-    if (num3.length === 4) {
+    if (num3.length === CARD.NUMBER_LENGTH) {
       num4InputRef.current?.focus();
     }
   }, [num3]);
@@ -44,7 +45,7 @@ const CardNumberInput = ({ cardNumbers, onChange }: CardNumberProps) => {
       <span className="input-title">카드 번호</span>
       <div className="input-box">
         <input
-          maxLength={4}
+          maxLength={CARD.NUMBER_LENGTH}
           className="input-basic w-25"
           type="text"
           onChange={onChange(0)}
@@ -53,7 +54,7 @@ const CardNumberInput = ({ cardNumbers, onChange }: CardNumberProps) => {
         />
         {num1.length === 4 && <span>-</span>}
         <input
-          maxLength={4}
+          maxLength={CARD.NUMBER_LENGTH}
           className="input-basic w-25"
           type="text"
           onChange={onChange(1)}
@@ -63,7 +64,7 @@ const CardNumberInput = ({ cardNumbers, onChange }: CardNumberProps) => {
         {num2.length === 4 && <span>-</span>}
 
         <input
-          maxLength={4}
+          maxLength={CARD.NUMBER_LENGTH}
           className="input-basic w-25"
           type="password"
           onChange={onChange(2)}
@@ -73,7 +74,7 @@ const CardNumberInput = ({ cardNumbers, onChange }: CardNumberProps) => {
         {num3.length === 4 && <span>-</span>}
 
         <input
-          maxLength={4}
+          maxLength={CARD.NUMBER_LENGTH}
           className="input-basic w-25"
           type="password"
           onChange={onChange(3)}

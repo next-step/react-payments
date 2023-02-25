@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import { CARD } from '../utils/card_constants';
 
 type SecurityCodeProps = {
   security: string;
@@ -8,7 +9,13 @@ const CardSecurityCode = ({ security, onChange }: SecurityCodeProps) => {
   return (
     <div className="input-container">
       <span className="input-title">보안코드(CVC/CVV)</span>
-      <input className="input-basic w-25" type="password" maxLength={3} onChange={onChange} value={security} />
+      <input
+        className="input-basic w-25"
+        type="password"
+        maxLength={CARD.CVC_LENGTH}
+        onChange={onChange}
+        value={security}
+      />
     </div>
   );
 };

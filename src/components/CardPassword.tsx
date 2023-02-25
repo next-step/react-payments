@@ -1,4 +1,5 @@
 import { ChangeEvent, useRef, useEffect } from 'react';
+import { CARD } from '../utils/card_constants';
 
 type PasswordNumber = [string, string];
 
@@ -13,7 +14,7 @@ const CardPassword = ({ cardPassword, onChange }: PasswordNumProps) => {
   const num2InputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (num1.length === 1) {
+    if (num1.length === CARD.PASSWORD_LENGTH) {
       num2InputRef.current?.focus();
     }
   }, [num1]);
@@ -23,17 +24,15 @@ const CardPassword = ({ cardPassword, onChange }: PasswordNumProps) => {
       <input
         className="input-basic w-15 mr-3"
         type="password"
-        maxLength={1}
+        maxLength={CARD.PASSWORD_LENGTH}
         value={num1}
-        name="num1"
         onChange={onChange(0)}
       />
       <input
         className="input-basic w-15 mr-3"
         type="password"
-        maxLength={1}
+        maxLength={CARD.PASSWORD_LENGTH}
         value={num2}
-        name="num2"
         onChange={onChange(1)}
         ref={num2InputRef}
       />

@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import { CARD } from '../utils/card_constants';
 
 type ExpirationNumber = {
   month: string;
@@ -22,7 +23,7 @@ const CardExpiration = ({ expiration, onChange }: ExpirationNumberInputProps) =>
           value={month}
           name="month"
           onChange={onChange}
-          maxLength={2}
+          maxLength={CARD.EXPIRATION_LENGTH}
         />
         {month && <span>/</span>}
         <input
@@ -32,7 +33,7 @@ const CardExpiration = ({ expiration, onChange }: ExpirationNumberInputProps) =>
           placeholder="YY"
           onChange={onChange}
           value={year}
-          maxLength={2}
+          maxLength={CARD.EXPIRATION_LENGTH}
         />
       </div>
     </div>
