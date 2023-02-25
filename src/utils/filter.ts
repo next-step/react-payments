@@ -1,4 +1,4 @@
-export function cardNumber(cardNumber: string): string {
+export function filterCardNumber(cardNumber: string): string {
   const changeValue = cardNumber?.match(/[0-9*]{1,4}/g)?.flatMap((item, index) => {
     if (!item.length) return [];
     if (index > 1) return item.replace(/[0-9]/g, '*');
@@ -8,7 +8,7 @@ export function cardNumber(cardNumber: string): string {
   return changeValue || '';
 }
 
-export function expiredDate(expiredDate: string) {
+export function filterExpiredDate(expiredDate: string) {
   return expiredDate?.match(/[0-9]{1,2}/g)?.join(' / ');
 }
 

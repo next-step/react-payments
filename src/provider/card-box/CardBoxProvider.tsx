@@ -1,6 +1,6 @@
 import { ICardBox } from '../../domain/types';
 import { createContext, ReactNode, useCallback, useMemo, useState } from 'react';
-import { cardNumber as filterCardNumber, expiredDate as filterExpiredDate } from '../../utils/filter';
+import { filterCardNumber, filterExpiredDate } from '../../utils/filter';
 
 export interface ICardBoxContext {
   cardState: ICardBox;
