@@ -1,11 +1,11 @@
 import { Input, InputContainer } from '../../components/form';
 import { onlyString } from '../../utils/filter';
 import { IRegisterCard } from '../../pages/RegisterCard';
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 
 const MAX_LENGTH = 30;
 
-export default function CardHolderContainer({ onChange }: IRegisterCard) {
+function CardHolderContainer({ onChange }: IRegisterCard) {
   const cardHolderRef = useRef<HTMLInputElement>(null);
   const countValue = cardHolderRef.current?.value.length || 0;
 
@@ -27,3 +27,5 @@ export default function CardHolderContainer({ onChange }: IRegisterCard) {
     </InputContainer>
   );
 }
+
+export default memo(CardHolderContainer);

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { Input, InputContainer } from '../../components/form';
 import { IRegisterCard } from '../../pages/RegisterCard';
 import { onlyNumber } from '../../utils/filter';
@@ -8,7 +8,7 @@ const MAX_LENGTH = 4;
 const CARD_LENGTH = 16;
 const VALIDATE_ERROR = '카드 번호를 입력 해 주세요.';
 
-export default function CardNumberContainer({ onChange }: IRegisterCard) {
+function CardNumberContainer({ onChange }: IRegisterCard) {
   const [errorMessage, setErrorMessage] = useState('');
   const [cardNumberRef, getCardRefs] = useRefs<HTMLInputElement>([0, 1, 2, 3]);
 
@@ -58,3 +58,5 @@ export default function CardNumberContainer({ onChange }: IRegisterCard) {
     </InputContainer>
   );
 }
+
+export default memo(CardNumberContainer);
