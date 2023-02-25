@@ -13,10 +13,10 @@ export default {
 const Template: ComponentStory<typeof CardBox> = (args) => <CardBox {...args} />;
 
 const defaultData = {
-  cardCompany: '클린카드',
-  cardNumber: '1234123412341234',
+  brand: '클린카드',
+  cardNumber: '1234-1234-****-****',
   cardHolder: 'TEST',
-  expiredDate: '1223'
+  expiredDate: '12/23'
 };
 
 export const Small = Template.bind({});
