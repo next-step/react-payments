@@ -1,8 +1,10 @@
 import React, { useRef } from 'react';
 
-import type useExtendedState from '../../../hooks/useExtendedState';
-import { PasswordsState } from '../../../types/types';
-import { checkIsArrayLast, filterNumber, updateArray, updateObject } from '../../../utils/utils';
+import type useExtendedState from '@/hooks/useExtendedState';
+import { checkIsArrayLast } from '@/utils';
+
+import { PasswordsState } from '../types';
+import { useInputEventHandler } from './hooks/useInputEventHandler';
 
 interface PasswordInputProps {
   // prettier-ignore
@@ -15,13 +17,16 @@ function PasswordInput({
 }: PasswordInputProps) {
   const [passwords, setPasswords] = passwordsStateBundle;
   const passwordInputsRef = useRef<(HTMLInputElement | null)[]>([]);
+  const { createInputChangeHandler } = useInputEventHandler();
 
   return (
     <div className="input-container">
       <span className="input-title">카드 비밀번호</span>
       <div className="flex">
-        {passwords.map(({ key, value, checkIsAllowInput }, i) => {
+        {passwords.map((password, i) => {
+          const { key, value } = password;
           const isLast = checkIsArrayLast(passwords, i);
+          // 추상화 대상
           if (value && value.length < 2) {
             if (document.activeElement === passwordInputsRef.current[i]) {
               if (isLast) {
@@ -41,21 +46,7 @@ function PasswordInput({
               ref={(ref) => {
                 passwordInputsRef.current[i] = ref;
               }}
-              onChange={(e) => {
-                const numberValue = filterNumber(e.currentTarget.value);
-                if (!checkIsAllowInput(numberValue)) return;
-
-                setPasswords(
-                  (prevPasswords) =>
-                    updateArray(prevPasswords, i, updateObject(prevPasswords[i], 'value', numberValue)),
-                  {
-                    stateRefreshValidator: (prevPasswords) => {
-                      const prevVal = prevPasswords[i].value;
-                      return numberValue !== prevVal;
-                    },
-                  }
-                );
-              }}
+              onChange={createInputChangeHandler({ state: password, i, setState: setPasswords })}
             />
           );
         })}

@@ -6,19 +6,20 @@ import Card from '@/components/Card';
 import useExtendedState from '@/hooks/useExtendedState';
 
 import { CardNumberInput, CardOwnerInput, ExpireDateInput, PasswordInput, SecurityCodeInput } from './InputComponents';
-import { cardNumbersInit, expireDatesInit, passwordsInit } from './CardCreatorInits';
+import { cardNumbersInit, expireDatesInit, passwordsInit, cardOwnersInit, securityCodesInit } from './CardCreatorInits';
 
 function CardCreator() {
+  // FIXME: 전권을 넘겨주는 것 보다는 제한된 권한을 넘겨주는 것이 좋을 것 같다.
   const cardNumbersStateBundle = useExtendedState(cardNumbersInit);
   const [cardNumbers] = cardNumbersStateBundle;
 
   const expireDatesStateBundle = useExtendedState(expireDatesInit);
   const [expireDates] = expireDatesStateBundle;
 
-  const cardOwnerNameStateBundle = useState<string>();
+  const cardOwnerNameStateBundle = useExtendedState(cardOwnersInit);
   const [ownerName] = cardOwnerNameStateBundle;
 
-  const securityCodeStateBundle = useState<string>();
+  const securityCodeStateBundle = useExtendedState(securityCodesInit);
 
   const passwordsStateBundle = useExtendedState(passwordsInit);
 
@@ -44,7 +45,7 @@ function CardCreator() {
                 value,
               }))}
               expireDates={expireDates.map(({ value }) => value)}
-              ownerName={ownerName}
+              ownerName={ownerName[0].value}
             />
           </div>
           <CardNumberInput cardNumbersStateBundle={cardNumbersStateBundle} />

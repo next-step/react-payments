@@ -1,8 +1,10 @@
 import React from 'react';
 
-import useExtendedState from '../../../hooks/useExtendedState';
-import { ExpireDatesState } from '../../../types/types';
-import { checkIsArrayLast, filterNumber, updateArray, updateObject } from '../../../utils/utils';
+import useExtendedState from '@/hooks/useExtendedState';
+import { checkIsArrayLast  } from '@/utils';
+
+import { ExpireDatesState } from '../types';
+import { useInputEventHandler } from './hooks/useInputEventHandler';
 
 interface ExpireDateInputProps {
   // prettier-ignore
@@ -14,11 +16,15 @@ function ExpireDateInput({
   expireDatesStateBundle,
 }: ExpireDateInputProps) {
   const [expireDates, setExpireDates] = expireDatesStateBundle;
+  const { createInputBlurHandler, createInputChangeHandler } = useInputEventHandler();
+
   return (
     <div className="input-container">
       <span className="input-title">만료일</span>
       <div className="input-box w-50">
-        {expireDates.map(({ key, value, placeholder, checkIsValid, checkIsAllowInput }, i) => {
+        {expireDates.map((expireDate, i) => {
+          const { key, value, placeholder, checkIsValid } = expireDate;
+
           const isLast = checkIsArrayLast(expireDates, i);
           const isValueValid = checkIsValid(value);
 
@@ -30,40 +36,20 @@ function ExpireDateInput({
                 type="text"
                 value={value ?? ''}
                 placeholder={placeholder}
-                onChange={(e) => {
-                  const inputVal = filterNumber(e.currentTarget.value);
-                  if (!checkIsAllowInput(inputVal)) return;
-
-                  setExpireDates(
-                    (prevExpireDates) =>
-                      updateArray(prevExpireDates, i, updateObject(prevExpireDates[i], 'value', inputVal || undefined)),
-                    {
-                      stateRefreshValidator: (prevExpireDates) => {
-                        const prevValue = prevExpireDates[i].value;
-                        return prevValue !== inputVal;
-                      },
-                    }
-                  );
-                }}
-                onBlur={(e) => {
-                  const blurValue = e.currentTarget.value;
-                  if (blurValue && blurValue.length === 1) {
-                    const paddedValue = blurValue.padStart(2, '0');
-                    e.currentTarget.value = paddedValue;
-
-                    setExpireDates(
-                      (prevExpireDates) =>
-                        updateArray(prevExpireDates, i, updateObject(prevExpireDates[i], 'value', paddedValue)),
-                    {
-                        stateRefreshValidator: (prevExpireDates) => {
-                          const prevValue = prevExpireDates[i].value;
-                          return prevValue !== paddedValue;
-                        },
-                      }
-                    );
+                onChange={createInputChangeHandler({ state: expireDate, i, setState: setExpireDates })}
+                onBlur={createInputBlurHandler({
+                  props: { state: expireDate, i, setState: setExpireDates },
+                  checkWhetherSetState: (e) => {
+                    const blurValue = e.currentTarget.value;
+                    return !!blurValue && blurValue.length === 1;
+                  },
+                  getNewValue: (e) => {
+                    const blurValue = e.currentTarget.value;
+                    return blurValue.padStart(2, '0');
                   }
-                }}
+                })}
               />
+              {/* TODO: 이것도 하나의 component로 뺄 수 있다. */}
               {!isLast && isValueValid && <div className="text-black">/</div>}
             </>
           );

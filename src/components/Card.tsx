@@ -1,5 +1,6 @@
 import React from 'react';
 
+// 도메인이 되는 타입들
 interface CardProps {
   cardNumbers: {
     isHide: boolean;

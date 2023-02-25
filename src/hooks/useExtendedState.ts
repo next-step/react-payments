@@ -7,9 +7,10 @@ interface ExtendedSetStateOptions<T> {
   stateRefreshValidator?: StateRefreshValidator<T>;
 }
 
+// FIXME: extended라는 용어가 모호하다.
 function useExtendedState<T>(
   initialState: T
-): [T, (newStateCreator: NewStateCreator<T>, { stateRefreshValidator }: ExtendedSetStateOptions<T>) => void] {
+): [T, (newStateCreator: NewStateCreator<T>, options?: ExtendedSetStateOptions<T>) => void] {
   const [state, setState] = useState(initialState);
 
   function extendedSetState(newStateCreator: NewStateCreator<T>, options?: ExtendedSetStateOptions<T>) {
@@ -18,7 +19,7 @@ function useExtendedState<T>(
     }
 
     setState((prev) => {
-      if (!options?.stateRefreshValidator?.(prev)) {
+      if (options && !options.stateRefreshValidator?.(prev)) {
         return prev;
       }
 

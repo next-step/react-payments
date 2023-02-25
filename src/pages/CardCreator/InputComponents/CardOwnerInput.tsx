@@ -1,16 +1,23 @@
 import React from 'react';
-import type { useState } from 'react';
+
+import useExtendedState from '@/hooks/useExtendedState';
+
+import { CardOwnersState } from '../types';
+import { useInputEventHandler } from './hooks/useInputEventHandler';
 
 interface CardOwnerInputProps {
   // prettier-ignore
   // eslint-disable-next-line
-  cardOwnerNameStateBundle: ReturnType<typeof useState<string>>;
+  cardOwnerNameStateBundle: ReturnType<typeof useExtendedState<CardOwnersState>>;
 }
 
 function CardOwnerInput({
   cardOwnerNameStateBundle,
 }: CardOwnerInputProps) {
-  const [ownerName, setOwnerName] = cardOwnerNameStateBundle;
+  const [ownerNames, setOwnersName] = cardOwnerNameStateBundle;
+  const ownerName = ownerNames[0].value;
+
+  const { createInputChangeHandler } = useInputEventHandler();
 
   return (
     <div className="input-container">
@@ -28,10 +35,7 @@ function CardOwnerInput({
         value={ownerName ?? ''}
         maxLength={30}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        onChange={(e) => {
-          const inputName = e.currentTarget.value;
-          setOwnerName(inputName);
-        }}
+        onChange={createInputChangeHandler({ state: ownerNames[0], i: 0, setState: setOwnersName })}
       />
     </div>
   );
