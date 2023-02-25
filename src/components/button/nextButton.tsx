@@ -1,15 +1,16 @@
-import { Link } from "react-router-dom";
+import { useRouter } from "hooks/useRouter";
 
 type NextButtonProps = {
   path: string;
 };
 
 const NextButton = ({ path }: NextButtonProps) => {
+  const { go } = useRouter();
   return (
     <div className="button-box">
-      <Link to={path} className="hide-under-line">
-        <span className="button-text">다음</span>
-      </Link>
+      <span className="button-text" onClick={() => go(path)}>
+        다음
+      </span>
     </div>
   );
 };
