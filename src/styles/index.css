@@ -1,15 +1,6 @@
-@import "./card.css";
-@import "./input.css";
-@import "./button.css";
-@import "./modal.css";
 @import "./utils.css";
 
 body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
   background-color: #e5e5e5;
 }
 
@@ -24,6 +15,15 @@ input {
   height: 700px;
   position: relative;
   border-radius: 15px;
+  overflow-y: scroll;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .app {
