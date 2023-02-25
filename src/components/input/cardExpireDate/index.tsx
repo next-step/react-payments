@@ -1,5 +1,6 @@
-import { ExpirationDate } from "@/store/Provider";
+import { ExpirationDate } from "store/Provider";
 import { ChangeEvent, useEffect, useState } from "react";
+import { useInputFocus, useRefs } from "hooks";
 
 const MAX_DATE_LENGTH = 2;
 const CURRENT_YEAR = Number(new Date().getFullYear().toString().slice(-2));
@@ -11,12 +12,16 @@ type CardExpirationDateInputProps = {
 const CardExpirationDateInput = ({
   handleChangeExpirationDate,
 }: CardExpirationDateInputProps) => {
-  const [expiredDate, setExpiredDate] = useState<ExpirationDate>({
-    month: "",
-    year: "",
+  const [expiredDate, setExpiredDate] = useState<ExpirationDate>({ month: "", year: "" });
+  const dateRefs = useRefs<HTMLInputElement>(MAX_DATE_LENGTH);
+
+  useInputFocus({
+    refs: dateRefs,
+    deps: [expiredDate.month, expiredDate.year],
+    maxLength: MAX_DATE_LENGTH,
   });
 
-  const handleOnExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     if (name === "month" && Number.isNaN(+value)) {
@@ -56,24 +61,26 @@ const CardExpirationDateInput = ({
       <span className="input-title">만료일</span>
       <div className="input-box w-50">
         <input
+          ref={dateRefs[0]}
           className="input-basic"
           type="text"
           placeholder="MM"
           name="month"
           maxLength={MAX_DATE_LENGTH}
           value={expiredDate.month}
-          onChange={handleOnExpirationDate}
+          onChange={handleChange}
           required
         />
         {"/"}
         <input
+          ref={dateRefs[1]}
           className="input-basic"
           type="text"
           placeholder="YY"
           name="year"
           maxLength={MAX_DATE_LENGTH}
           value={expiredDate.year}
-          onChange={handleOnExpirationDate}
+          onChange={handleChange}
           required
         />
       </div>

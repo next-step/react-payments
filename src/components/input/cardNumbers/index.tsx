@@ -1,5 +1,6 @@
-import { CardNumber } from "@/store/Provider";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { useInputFocus, useRefs } from "hooks";
+import { ChangeEvent, useEffect, useState } from "react";
+import { CardNumber } from "store/Provider";
 
 const MAX_CARD_NUMBER_LENGTH = 4;
 
@@ -7,19 +8,20 @@ type CardNumbersInputProps = {
   handleChangeCardNumber: (number: CardNumber) => void;
 };
 
-const CardNumbersInput = ({ handleChangeCardNumber }: CardNumbersInputProps) => {
-  const nextElement = useRef<HTMLInputElement[]>([]);
+const CardNumbersInput = ({
+  handleChangeCardNumber,
+}: CardNumbersInputProps) => {
   const [numbers, setNumbers] = useState<CardNumber>(["", "", "", ""]);
+  const numberRefs = useRefs<HTMLInputElement>(MAX_CARD_NUMBER_LENGTH);
 
-  const autoFocus = (updatedCardNumbers: string[], index: number) => {
-    if (updatedCardNumbers[index].length === 4) {
-      if (nextElement.current[index]) {
-        nextElement.current[index].focus();
-      }
-    }
-  };
+  useInputFocus({
+    refs: numberRefs,
+    deps: numbers,
+    maxLength: MAX_CARD_NUMBER_LENGTH,
+  });
 
-  const handleChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange =
+    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
       const newCardNumber = [...numbers] as CardNumber;
       const { value } = e.target as HTMLInputElement;
 
@@ -29,9 +31,8 @@ const CardNumbersInput = ({ handleChangeCardNumber }: CardNumbersInputProps) => 
       }
 
       newCardNumber[index] = value;
-      autoFocus(newCardNumber, index);
       setNumbers(newCardNumber);
-  };
+    };
 
   useEffect(() => {
     handleChangeCardNumber(numbers);
@@ -43,6 +44,7 @@ const CardNumbersInput = ({ handleChangeCardNumber }: CardNumbersInputProps) => 
       <span className="input-title">카드 번호</span>
       <div className="input-box">
         <input
+          ref={numberRefs[0]}
           className="input-basic"
           type="text"
           maxLength={MAX_CARD_NUMBER_LENGTH}
@@ -50,7 +52,7 @@ const CardNumbersInput = ({ handleChangeCardNumber }: CardNumbersInputProps) => 
           onChange={handleChange(0)}
         />
         <input
-          ref={(el: HTMLInputElement) => (nextElement.current[0] = el)}
+          ref={numberRefs[1]}
           className="input-basic"
           type="text"
           maxLength={MAX_CARD_NUMBER_LENGTH}
@@ -58,7 +60,7 @@ const CardNumbersInput = ({ handleChangeCardNumber }: CardNumbersInputProps) => 
           onChange={handleChange(1)}
         />
         <input
-          ref={(el: HTMLInputElement) => (nextElement.current[1] = el)}
+          ref={numberRefs[2]}
           className="input-basic"
           type="password"
           maxLength={MAX_CARD_NUMBER_LENGTH}
@@ -66,7 +68,7 @@ const CardNumbersInput = ({ handleChangeCardNumber }: CardNumbersInputProps) => 
           onChange={handleChange(2)}
         />
         <input
-          ref={(el: HTMLInputElement) => (nextElement.current[2] = el)}
+          ref={numberRefs[3]}
           className="input-basic"
           type="password"
           maxLength={MAX_CARD_NUMBER_LENGTH}

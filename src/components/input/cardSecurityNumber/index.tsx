@@ -8,7 +8,7 @@ type CardCVCInputProps = {
 
 const CardCVCInput = ({ handleCvc }: CardCVCInputProps) => {
   const [cvc, setCvc] = useState<string>("");
-  const handleCvcInput = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
     if (Number.isNaN(+value)) {
       alert("보안코드는 숫자만 입력해주세요!");
@@ -29,7 +29,7 @@ const CardCVCInput = ({ handleCvc }: CardCVCInputProps) => {
         className="input-basic w-25"
         type="password"
         value={cvc}
-        onChange={handleCvcInput}
+        onChange={handleChange}
         maxLength={MAX_CVC_LENGTH}
         required
       />

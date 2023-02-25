@@ -1,3 +1,4 @@
+import { useInputFocus, useRefs } from "hooks";
 import { ChangeEvent, useEffect, useState } from "react";
 
 const MAX_PASSWORD_LENGTH = 1;
@@ -6,11 +7,17 @@ type CardPasswordInputProps = {
   handlePassword: (input: string[]) => void;
 };
 
-const CardPasswordInput = ({
-  handlePassword,
-}: CardPasswordInputProps) => {
+const CardPasswordInput = ({ handlePassword }: CardPasswordInputProps) => {
   const [passwordNumber, setPasswordNumber] = useState<string[]>(["", ""]);
-  const handlePasswordByInput =
+  const passwordRefs = useRefs<HTMLInputElement>(2);
+
+  useInputFocus({
+    refs: passwordRefs,
+    deps: passwordNumber,
+    maxLength: MAX_PASSWORD_LENGTH,
+  });
+
+  const handleChange =
     (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
       const updatedPassword = [...passwordNumber];
       const { value } = e.target;
@@ -33,17 +40,19 @@ const CardPasswordInput = ({
       <span className="input-title">카드 비밀번호</span>
       <div>
         <input
+          ref={passwordRefs[0]}
           className="input-basic w-15"
           type="password"
           maxLength={MAX_PASSWORD_LENGTH}
-          onChange={handlePasswordByInput(0)}
+          onChange={handleChange(0)}
           value={passwordNumber[0]}
         />
         <input
+          ref={passwordRefs[1]}
           className="input-basic w-15"
           type="password"
           maxLength={MAX_PASSWORD_LENGTH}
-          onChange={handlePasswordByInput(1)}
+          onChange={handleChange(1)}
           value={passwordNumber[1]}
         />
         <input
