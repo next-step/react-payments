@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 
 import { ROUTE_PATH } from "../constants/page";
+import Header from "../components/Header";
 
 // TODO : 컴포넌트로 분리
 export default function CardRegistrationCompletedPage() {
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
-        <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
+        <Header className="page-title mb-10">카드등록이 완료되었습니다.</Header>
       </div>
       <div className="card-box">
         <div className="big-card">

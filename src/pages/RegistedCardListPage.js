@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 
-import {ROUTE_PATH} from "../constants/page"
+import { ROUTE_PATH } from "../constants/page";
+import Header from "../components/Header";
 
 export default function RegistedCardListPage() {
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
-        <h2 className="page-title mb-10">보유 카드</h2>
+        <Header className="page-title mb-10">보유 카드</Header>
       </div>
       <div className="card-box">
         <div className="small-card">
