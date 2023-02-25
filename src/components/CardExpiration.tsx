@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react';
 import { CARD } from '../utils/card_constants';
+import { isShowSlash } from '../utils/isShowSlash';
 
 type ExpirationNumber = {
   month: string;
@@ -25,7 +26,7 @@ const CardExpiration = ({ expiration, onChange }: ExpirationNumberInputProps) =>
           onChange={onChange}
           maxLength={CARD.EXPIRATION_LENGTH}
         />
-        {month && <span>/</span>}
+        {isShowSlash(month, CARD.EXPIRATION_LENGTH) && <span>/</span>}
         <input
           className="input-basic"
           type="text"

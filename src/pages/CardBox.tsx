@@ -1,3 +1,6 @@
+import { isShowSlash } from '../utils/isShowSlash';
+import { CARD } from '../utils/card_constants';
+
 import '../styles/index.css';
 
 type CardNumber = [string, string, string, string];
@@ -18,16 +21,17 @@ const CardBox = ({ cardNumbers, expiration, cardHolderName }: CardBoxProps) => {
   const secretNum4 = num4.replace(/[1-9]/gi, '*');
 
   const { month, year } = expiration;
+
   return (
     <div className="card-box">
       <div className="empty-card">
         <div className="card-top card-num">
           <span className="card-num">{num1}</span>
-          {num1 && <span>-</span>}
+          {isShowSlash(num1, CARD.NUMBER_LENGTH) && <span>-</span>}
           <span className="card-num">{num2}</span>
-          {num2 && <span>-</span>}
+          {isShowSlash(num2, CARD.NUMBER_LENGTH) && <span>-</span>}
           <span className="card-num">{secretNum3}</span>
-          {secretNum3 && <span>-</span>}
+          {isShowSlash(num3, CARD.NUMBER_LENGTH) && <span>-</span>}
           <span className="card-num">{secretNum4}</span>
         </div>
         <div className="card-middle">
@@ -37,7 +41,9 @@ const CardBox = ({ cardNumbers, expiration, cardHolderName }: CardBoxProps) => {
           <div className="card-bottom__info">
             <span className="card-text">{cardHolderName}</span>
             <span className="card-text">
-              {month} {month && <span>/</span>} {year}
+              {month && Number(month) < 10 ? `0${month}` : month}
+              {isShowSlash(month, CARD.EXPIRATION_LENGTH) && <span>/</span>}
+              {year}
             </span>
           </div>
         </div>

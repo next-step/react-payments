@@ -2,6 +2,7 @@ import { useEffect, useRef, ChangeEvent } from 'react';
 import { CARD } from '../utils/card_constants';
 
 import '../styles/input.css';
+import { isShowSlash } from '../utils/isShowSlash';
 
 type CardNumber = [string, string, string, string];
 
@@ -52,7 +53,7 @@ const CardNumberInput = ({ cardNumbers, onChange }: CardNumberProps) => {
           value={num1}
           ref={num1InputRef}
         />
-        {num1.length === 4 && <span>-</span>}
+        {isShowSlash(num1, CARD.NUMBER_LENGTH) && <span>-</span>}
         <input
           maxLength={CARD.NUMBER_LENGTH}
           className="input-basic w-25"
@@ -61,7 +62,7 @@ const CardNumberInput = ({ cardNumbers, onChange }: CardNumberProps) => {
           value={num2}
           ref={num2InputRef}
         />
-        {num2.length === 4 && <span>-</span>}
+        {isShowSlash(num2, CARD.NUMBER_LENGTH) && <span>-</span>}
 
         <input
           maxLength={CARD.NUMBER_LENGTH}
@@ -71,7 +72,7 @@ const CardNumberInput = ({ cardNumbers, onChange }: CardNumberProps) => {
           value={num3}
           ref={num3InputRef}
         />
-        {num3.length === 4 && <span>-</span>}
+        {isShowSlash(num3, CARD.NUMBER_LENGTH) && <span>-</span>}
 
         <input
           maxLength={CARD.NUMBER_LENGTH}
