@@ -59,11 +59,12 @@ const RegistrationCardPage = () => {
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     const regex = /[0-9]/g;
     const target = e.target as HTMLInputElement;
-    const { value, name } = target;
+    const { value } = target;
+    const { id } = target.dataset;
 
-    if (!regex.test(value) || !name) return;
+    if (!regex.test(value) || !id) return;
     let copyPassword = [...passwords];
-    copyPassword[Number(name) - 1] = value;
+    copyPassword[Number(id) - 1] = value;
     setPasswords(copyPassword);
   };
 
@@ -167,7 +168,7 @@ const RegistrationCardPage = () => {
               type="password"
               inputMode="numeric"
               maxLength={1}
-              name="1"
+              data-id="1"
               value={passwords[0] || ''}
               onChange={handlePassword}
               className="w-10 text-center"
@@ -176,7 +177,7 @@ const RegistrationCardPage = () => {
               type="password"
               inputMode="numeric"
               maxLength={1}
-              name="2"
+              data-id="2"
               value={passwords[1] || ''}
               onChange={handlePassword}
               className="w-10 text-center"
@@ -185,7 +186,7 @@ const RegistrationCardPage = () => {
               type="password"
               inputMode="numeric"
               maxLength={1}
-              name="3"
+              data-id="3"
               value={passwords[2] || ''}
               onChange={handlePassword}
               className="w-10 text-center"
@@ -194,7 +195,7 @@ const RegistrationCardPage = () => {
               type="password"
               inputMode="numeric"
               maxLength={1}
-              name="4"
+              data-id="4"
               value={passwords[3] || ''}
               onChange={handlePassword}
               className="w-10 text-center"
