@@ -48,10 +48,7 @@ const AddCard = () => {
   const [cardHolderName, setcCardHolderName] = useState('');
   const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (cardHolderName.length > 30) {
-      return;
-    }
-    setcCardHolderName(value.slice(0, 30));
+    if (cardHolderName.length < 30) setcCardHolderName(value.slice(0, 30));
   };
 
   const [security, setSecurity] = useState('');
