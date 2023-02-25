@@ -37,14 +37,15 @@ export default function RegisterCard() {
 
   const moveCardList = () => navigate('/');
   const saveCardData = () => {
+    const cardIndex = new Date().getTime();
     const cardList = cardRepository.getItem();
     const newCardList = [
       ...cardList,
-      { ...cardState }
+      { ...cardState, index: cardIndex }
     ];
 
     cardRepository.setItem(newCardList);
-    navigate(`/register-complete?card=${cardState.cardNumber}`);
+    navigate(`/register-complete?card=${cardIndex}`);
   };
 
   return (

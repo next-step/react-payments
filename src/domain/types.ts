@@ -1,4 +1,5 @@
 export interface ICardBox {
+  index?: number;
   brand?: string;
   cardNumber?: string;
   cardHolder?: string;

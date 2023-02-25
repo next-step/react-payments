@@ -1,29 +1,36 @@
 import { cardRepository } from '../repositories';
-import { useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { CardBox, PageTitle } from '../components';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button, Input } from '../components/form';
+import { ICardBox } from '../domain/types';
+
+const MAX_LENGTH = 10;
 
 export default function RegisterComplete() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const cardNumber = searchParams.get('card');
-  const cardList = useMemo(() => cardRepository.getItem(), []);
-  const cardData = useMemo(() => cardList.find((item) => item.cardNumber === cardNumber), []);
+  const cardIndex = Number(searchParams.get('card'));
+  const cardList = useMemo<ICardBox[]>(() => cardRepository.getItem(), []);
+  const cardData = useMemo(() => cardList.find((item) => item.index === cardIndex), []);
   const nicknameRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    nicknameRef.current.value = cardData?.nickname;
+    if (!cardData) {
+      navigate('/');
+    }
+  }, []);
 
   const endRegisterCard = () => {
     const { value } = nicknameRef.current;
+    const nickName = value.length ? value : cardData.brand;
+    const updateCardData = cardList.map((item) => ({
+      ...item,
+      nickname: item.index === cardIndex ? nickName : item.nickname
+    }));
 
-    if (value.length) {
-      const updateCardData = cardList.map((item) => ({
-        ...item,
-        nickname: item.cardNumber === cardNumber ? value : item.nickname
-      }));
-
-      cardRepository.setItem(updateCardData);
-    }
-
+    cardRepository.setItem(updateCardData);
     navigate('/');
   };
 
@@ -35,6 +42,7 @@ export default function RegisterComplete() {
         ref={nicknameRef}
         className="input-underline"
         placeholder="카드의 별칭을 입력해주세요."
+        maxLength={MAX_LENGTH}
       />
 
       <Button className="mt-50" onClick={endRegisterCard}>다음</Button>

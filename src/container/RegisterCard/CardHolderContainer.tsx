@@ -1,7 +1,7 @@
 import { Input, InputContainer } from '../../components/form';
 import { onlyString } from '../../utils/filter';
 import { IRegisterCard } from '../../pages/RegisterCard';
-import { memo, useRef } from 'react';
+import { memo, useCallback, useRef } from 'react';
 
 const MAX_LENGTH = 30;
 
@@ -9,12 +9,12 @@ function CardHolderContainer({ onChange }: IRegisterCard) {
   const cardHolderRef = useRef<HTMLInputElement>(null);
   const countValue = cardHolderRef.current?.value.length || 0;
 
-  const handleChange = () => {
+  const handleChange = useCallback(() => {
     const cardHolder = onlyString(cardHolderRef?.current.value);
 
     cardHolderRef.current.value = cardHolder;
     onChange({ cardHolder });
-  };
+  }, []);
 
   return (
     <InputContainer title="카드 소유자 이름(선택)" charLength={`(${countValue}/30)`}>
