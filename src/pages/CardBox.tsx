@@ -7,13 +7,13 @@ type ExpirationNumber = {
 };
 
 type CardBoxProps = {
-  numbers: CardNumber;
+  cardNumbers: CardNumber;
   expiration: ExpirationNumber;
   cardHolderName: string;
 };
 
-const CardBox = ({ numbers, expiration, cardHolderName }: CardBoxProps) => {
-  const [num1, num2, num3, num4] = numbers;
+const CardBox = ({ cardNumbers, expiration, cardHolderName }: CardBoxProps) => {
+  const [num1, num2, num3, num4] = cardNumbers;
   const secretNum3 = num3.replace(/[1-9]/gi, '*');
   const secretNum4 = num4.replace(/[1-9]/gi, '*');
 

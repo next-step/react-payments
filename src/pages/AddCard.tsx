@@ -28,7 +28,7 @@ const AddCard = () => {
     month: '',
     year: '',
   });
-  const getExpirationMonth = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleExpirationMonth = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     const parseValue = parseInt(value, 10);
 
@@ -46,13 +46,13 @@ const AddCard = () => {
   };
 
   const [cardHolderName, setcCardHolderName] = useState('');
-  const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     if (cardHolderName.length < 30) setcCardHolderName(value.slice(0, 30));
   };
 
   const [security, setSecurity] = useState('');
-  const getSecurity = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeSecurity = (e: ChangeEvent<HTMLInputElement>) => {
     setSecurity(e.currentTarget.value.replace(/[^0-9]/g, ''));
   };
 
@@ -60,7 +60,7 @@ const AddCard = () => {
     num1: '',
     num2: '',
   });
-  const getCardPassword = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCardPassword = (e: ChangeEvent<HTMLInputElement>) => {
     setCardPassword({
       ...cardPassword,
       [e.currentTarget.name]: e.currentTarget.value.replace(/[^0-9]/g, ''),
@@ -73,18 +73,17 @@ const AddCard = () => {
       <div className="root">
         <div className="app">
           <h2 className="page-title">
-            {' '}
             <Link to="/" className="link-button mr-20">
               &lt;
-            </Link>{' '}
-            카드 추가{' '}
+            </Link>
+            카드 추가
           </h2>
-          <CardBox numbers={cardNumber} expiration={expiration} cardHolderName={cardHolderName} />
-          <CardNumberInput cardNumber={cardNumber} onChange={handleChangeCardNumber} />
-          <CardExpiration expiration={expiration} onChange={getExpirationMonth} />
-          <CardholderName cardHolderName={cardHolderName} onChange={onChangeName} />
-          <CardSecurityCode security={security} onChange={getSecurity} />
-          <CardPassword cardPassword={cardPassword} onChange={getCardPassword} />
+          <CardBox cardNumbers={cardNumber} expiration={expiration} cardHolderName={cardHolderName} />
+          <CardNumberInput cardNumbers={cardNumber} onChange={handleChangeCardNumber} />
+          <CardExpiration expiration={expiration} onChange={handleExpirationMonth} />
+          <CardholderName cardHolderName={cardHolderName} onChange={handleChangeName} />
+          <CardSecurityCode security={security} onChange={handleChangeSecurity} />
+          <CardPassword cardPassword={cardPassword} onChange={handleChangeCardPassword} />
           <div className="button-box">
             <Link to="/complete-card" className="link-button">
               다음

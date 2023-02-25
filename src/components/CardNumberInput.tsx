@@ -5,12 +5,12 @@ import '../styles/input.css';
 type CardNumber = [string, string, string, string];
 
 type CardNumberProps = {
-  cardNumber: CardNumber;
+  cardNumbers: CardNumber;
   onChange: (index: number) => (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
-const CardNumberInput = ({ cardNumber, onChange }: CardNumberProps) => {
-  const [num1, num2, num3, num4]: CardNumber = cardNumber;
+const CardNumberInput = ({ cardNumbers, onChange }: CardNumberProps) => {
+  const [num1, num2, num3, num4]: CardNumber = cardNumbers;
 
   const num1InputRef = useRef<HTMLInputElement>(null);
   const num2InputRef = useRef<HTMLInputElement>(null);
