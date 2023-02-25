@@ -41,6 +41,11 @@ const Layout = styled.span<LayoutProps>`
           font-size: 20px;
           line-height: 22px;
         `
+      : fontSize === "2x"
+      ? css`
+          font-size: 24px;
+          line-height: 22px;
+        `
       : css`
           //xs일떄
           font-size: 12px;
@@ -90,6 +95,10 @@ const Layout = styled.span<LayoutProps>`
       : fontColor === "purple"
       ? css`
           color: #df59ba;
+        `
+      : fontColor === "primary"
+      ? css`
+          color: rgba(0, 0, 0, 0.5);
         `
       : css`
           color: black;

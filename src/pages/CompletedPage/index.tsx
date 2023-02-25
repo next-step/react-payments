@@ -3,28 +3,35 @@ import Card from "components/Card";
 import Text from "components/Text";
 import Input from "components/Input";
 import Button from "components/Button/index";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { CardContext } from "context/Card";
 import { useNavigate } from "react-router-dom";
 
 //미션2
 const CompletedPage = () => {
-  const ref = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [inputLength, setInputLength] = useState(0);
   const cardCtx = useContext(CardContext);
   const temporaryCard = cardCtx.state.store;
   const navigate = useNavigate();
 
   const submit = () => {
-    const currentInputRef = ref.current;
+    const currentInputRef = inputRef.current;
     if (currentInputRef === null) return;
-    const alias = currentInputRef.value;
+    const refValue = currentInputRef.value;
+    let alias = !refValue.length ? temporaryCard.company : refValue;
     const newCard = {
       ...cardCtx.state.store,
       alias,
     };
     cardCtx.addCard(newCard);
-
     navigate("/");
+  };
+  const handleInput = () => {
+    const currentInputRef = inputRef.current;
+    if (currentInputRef === null) return;
+    const length = currentInputRef.value.length;
+    setInputLength(length);
   };
 
   return (
@@ -45,9 +52,18 @@ const CompletedPage = () => {
         />
       </CardWrapper>
 
-      <InputWrapper>
-        <Input type="text" placeholder="카드의 별칭을 입력해주세요." theme="underline" active={true} ref={ref} />
-      </InputWrapper>
+      <Box>
+        <Input
+          type="text"
+          placeholder="카드의 별칭 (선택) "
+          theme="underline"
+          active={true}
+          ref={inputRef}
+          onChange={handleInput}
+        />
+
+        <Text fontSize="s" weight="normal" label={`${inputLength}/10`} />
+      </Box>
 
       <ButtonWrapper>
         <Button fontSize="lg" label="Next" onClick={submit} />
@@ -73,11 +89,14 @@ const TextWrapper = styled.div`
   color: #383838;
   margin: 40px 0px;
 `;
-const InputWrapper = styled.div`
+const Box = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding: 20px;
+  margin-top: 30px;
   width: 100%;
-  margin: 50px 0px;
 `;
 
 const ButtonWrapper = styled.div`

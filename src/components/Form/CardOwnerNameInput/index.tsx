@@ -12,7 +12,7 @@ type CardOwnerNameInputProps = {
 
 const CardOwnerNameInput = ({ setOwnerName, fontColor }: CardOwnerNameInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [length, setLength] = useState(0);
+  const [inputlength, setInputLength] = useState(0);
 
   const handleInput = () => {
     const ref = inputRef.current;
@@ -20,7 +20,7 @@ const CardOwnerNameInput = ({ setOwnerName, fontColor }: CardOwnerNameInputProps
     const value = ref.value;
     const ownerName = checkOwnerName(value);
     ref.value = ownerName;
-    setLength(ownerName.length);
+    setInputLength(ownerName.length);
     return !ownerName.length
       ? setOwnerName((prev) => ({
           ...prev,

@@ -1,4 +1,4 @@
-export type ColorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange" | "";
+export type ColorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange" | "" | "primary";
 export type CompanyType =
   | "하나카드"
   | "국민카드"
@@ -9,7 +9,7 @@ export type CompanyType =
   | "카카오카드"
   | "오렌지카드"
   | "";
-export type FontSizeType = "xs" | "s" | "m" | "lg";
+export type FontSizeType = "xs" | "s" | "m" | "lg" | "2x";
 export type FontWeightType = "normal" | "bold";
 
 export interface CardType {
@@ -26,4 +26,7 @@ export interface CardType {
   ownerName: string;
   color: ColorType;
   company: CompanyType;
+}
+export interface NewCardType extends CardType {
+  alias: string;
 }

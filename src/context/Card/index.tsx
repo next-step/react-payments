@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { CardType } from "types";
+import { CardType, NewCardType } from "types";
 
 const ACTION_TYPES = {
   add: "ADD",
@@ -53,19 +53,16 @@ const DEFAULT_STATE: DEFAULT_STATE_TYPE = {
 
 export const CardContext = createContext({
   state: DEFAULT_STATE,
-  addCard: function (card: ExtendCardType) {},
+  addCard: function (card: NewCardType) {},
   addCardToStore: function (card: CardType) {},
-  removeCard: function (card: ExtendCardType) {},
+  removeCard: function (card: NewCardType) {},
 });
 
-interface ExtendCardType extends CardType {
-  alias: string;
-}
 export const CardContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, DEFAULT_STATE);
 
   // 카드 리스트에 추가
-  const addCard = (card: ExtendCardType) => {
+  const addCard = (card: NewCardType) => {
     dispatch({ type: ACTION_TYPES.add, payload: card });
   };
 
@@ -75,7 +72,7 @@ export const CardContextProvider = ({ children }) => {
   };
 
   // 카드 삭제
-  const removeCard = (card: ExtendCardType) => {
+  const removeCard = (card: NewCardType) => {
     dispatch({ type: ACTION_TYPES.remove, payload: card });
   };
 
