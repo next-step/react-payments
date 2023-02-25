@@ -12,7 +12,7 @@ import { useHistory } from "react-router-dom";
 import { ModalContext } from "../../components/ModalProvider";
 import { CardContext } from "../../components/CardProvider";
 import Header from "../../components/Header";
-import { Card as CardType } from "../../types/common";
+import { CardType } from "../../types/common";
 
 const INPUT_NAMES = [
   "card-0",
@@ -63,7 +63,9 @@ function Add() {
     2: "",
   });
   const isTyping =
-    !!cardNumber || !!expiredDate.month || !!expiredDate.year || !!userName;
+    Object.values(cardNumber).some((number) => number) ||
+    Object.values(expiredDate).some((date) => date) ||
+    !!userName;
   const history = useHistory();
 
   const modalContext = useContext(ModalContext);
@@ -161,9 +163,5 @@ function Add() {
     </>
   );
 }
-
-type ObjectType = {
-  [key: number | string]: string;
-};
 
 export default Add;

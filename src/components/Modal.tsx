@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { BANKS } from "../constants/bank";
 import { ModalContext } from "./ModalProvider";
 import { CardContext } from "./CardProvider";
-import { Card } from "../types/common";
+import { CardType } from "../types/common";
 
 function Modal() {
   const modalContext = useContext(ModalContext);
@@ -20,7 +20,7 @@ function Modal() {
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget.dataset.id) {
       // setBankId(e.currentTarget.dataset.id);
-      setCard((card: Card) => {
+      setCard((card: CardType) => {
         return {
           ...card,
           bankId: e.currentTarget.dataset.id,

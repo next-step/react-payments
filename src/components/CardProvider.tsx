@@ -1,16 +1,16 @@
 import { createContext, useState } from "react";
-import { Card } from "../types/common";
+import { CardType } from "../types/common";
 
 type ComponentProps = {
   children: JSX.Element | JSX.Element[] | string;
 };
 
 type ContextProps = {
-  card: Card;
+  card: CardType;
   setCard: Function;
 };
 
-const initCard: Card = {
+const initCard: CardType = {
   cardNumber: {
     0: "",
     1: "",
@@ -28,6 +28,7 @@ const initCard: Card = {
     2: "",
   },
   bankId: "",
+  cardAlias: "",
 };
 
 export const CardContext = createContext<ContextProps | null>({
@@ -37,7 +38,6 @@ export const CardContext = createContext<ContextProps | null>({
 
 function CardProvider({ children }: ComponentProps) {
   const [card, setCard] = useState(initCard);
-  // const { toggleModal, isModalOpen, bankId, setBankId } = useModalState();
 
   return (
     <CardContext.Provider value={{ card, setCard }}>

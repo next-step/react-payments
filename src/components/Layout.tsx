@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Header from "./Header";
 import Modal from "./Modal";
 import ModalContainer from "./ModalContainer";
 
