@@ -12,16 +12,16 @@ const CreditCard = ({
 }: CreditCardProps) => {
   return (
     <Styled.Wrapper color={color}>
-      <Styled.Name>{name}</Styled.Name>
-      <Styled.Chip />
-      <Styled.Number>{maskLastEight(number)}</Styled.Number>
+      <Styled.SmallText>{name}</Styled.SmallText>
+      <Styled.CardChip />
+      <Styled.NumberText>{maskLastEight(number)}</Styled.NumberText>
       <Styled.FlexWrapper
         display="flex"
         alignItems="flex-end"
         justifyContent="space-between"
       >
-        <Styled.HolderName>{holderName}</Styled.HolderName>
-        <Styled.Expiration>{expiration}</Styled.Expiration>
+        <Styled.Text>{holderName}</Styled.Text>
+        <Styled.Text>{expiration}</Styled.Text>
       </Styled.FlexWrapper>
     </Styled.Wrapper>
   );

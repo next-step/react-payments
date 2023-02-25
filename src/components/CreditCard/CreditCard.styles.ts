@@ -21,7 +21,7 @@ export const Name = styled.p`
   font-size: 13px;
 `;
 
-export const Chip = styled.div`
+export const CardChip = styled.div`
   margin: 10px 0;
   width: 25%;
   height: 30%;
@@ -29,20 +29,20 @@ export const Chip = styled.div`
   border-radius: 7px;
 `;
 
-export const Number = styled.h3`
-  font-size: 20px;
-  letter-spacing: 3px;
-`;
-
 export const FlexWrapper = styled(Box)`
   height: 25%;
   gap: 3px;
 `;
 
-export const HolderName = styled.p`
+export const SmallText = styled.p`
+  font-size: 13px;
+`;
+
+export const Text = styled.p`
   font-size: 14px;
 `;
 
-export const Expiration = styled.p`
-  font-size: 14px;
+export const NumberText = styled.h3`
+  font-size: 20px;
+  letter-spacing: 3px;
 `;
