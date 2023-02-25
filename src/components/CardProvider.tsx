@@ -11,7 +11,7 @@ type ContextProps = {
 };
 
 const initCard: Card = {
-  cardNumbers: {
+  cardNumber: {
     0: "",
     1: "",
     2: "",

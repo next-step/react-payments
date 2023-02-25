@@ -6,10 +6,7 @@ import ModalContainer from "./ModalContainer";
 function Layout({ children }: ComponentProps) {
   return (
     <Root>
-      <Wrapper>
-        <Header />
-        {children}
-      </Wrapper>
+      <Wrapper>{children}</Wrapper>
       <ModalContainer>
         <Modal></Modal>
       </ModalContainer>

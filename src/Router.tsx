@@ -14,13 +14,19 @@ function Router() {
           </Layout>
         </Route>
         <Route path="/complete">
-          <Complete></Complete>
+          <Layout>
+            <Complete></Complete>
+          </Layout>
         </Route>
         <Route path="/list">
-          <List></List>
+          <Layout>
+            <List></List>
+          </Layout>
         </Route>
         <Route path="/">
-          <List></List>
+          <Layout>
+            <List></List>
+          </Layout>
         </Route>
       </Switch>
     </BrowserRouter>

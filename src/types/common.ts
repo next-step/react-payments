@@ -9,7 +9,7 @@ export enum Size {
 }
 
 export type Card = {
-  cardNumbers: CardNumbers;
+  cardNumber: CardNumbers;
   expiredDate: Date;
   userName: string;
   code: number;

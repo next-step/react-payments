@@ -1,15 +1,18 @@
 import styled from "styled-components";
 import { Size } from "../types/common";
+import { Date } from "./Form/ExpiredDate";
 
 function Card({
   bankName,
   cardNumber,
   userName,
-  expireMonth,
-  expireYear,
+  expiredDate,
   size = Size.Small,
   color,
 }: CardProps) {
+  const expiredMonth = Number(expiredDate.month);
+  const expiredYear = Number(expiredDate.year);
+
   return (
     <CardContainer>
       <CardBox size={size} color={color}>
@@ -28,8 +31,8 @@ function Card({
           <CardBottomInfo>
             <CardText>{userName ?? "NAME"}</CardText>
             <CardText>
-              {expireMonth && expireMonth > 0 ? expireMonth : "MM"} /{" "}
-              {expireYear && expireYear > 0 ? expireYear : "YY"}
+              {expiredMonth && expiredMonth > 0 ? expiredMonth : "MM"} /{" "}
+              {expiredYear && expiredYear > 0 ? expiredYear : "YY"}
             </CardText>
           </CardBottomInfo>
         </CardBottom>
@@ -44,8 +47,7 @@ type CardProps = {
   bankName?: string;
   cardNumber: string;
   userName?: string;
-  expireMonth: number;
-  expireYear: number;
+  expiredDate: Date;
   size?: CardSize;
   color?: string;
 };
