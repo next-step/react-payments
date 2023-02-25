@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Card from "components/Card";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CardNumberInput from "./CardNumberInput";
 import CardSecurityInput from "./CardSecurityInput";
 import CardPasswordInput from "./CardPasswordInput";
@@ -10,13 +10,18 @@ import DotList from "./DotList";
 import Button from "../Button/index";
 import { useNavigate } from "react-router-dom";
 import { useHandleCardText } from "hooks/useHandleCardText";
+import { CardContext } from "context/Card";
 
 export const Form = () => {
   const navigate = useNavigate();
+  const cardCtx = useContext(CardContext);
+
   const { state, setState } = useHandleCardText();
   const [isOpenModal, setIsOpenModal] = useState(true);
 
   const submit = () => {
+    const currentFormCard = state;
+    cardCtx.addCardToStore(currentFormCard);
     navigate("/complete"); // Input validation 추가 필요
   };
 

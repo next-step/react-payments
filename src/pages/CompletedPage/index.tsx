@@ -3,22 +3,54 @@ import Card from "components/Card";
 import Text from "components/Text";
 import Input from "components/Input";
 import Button from "components/Button/index";
+import { useContext, useRef } from "react";
+import { CardContext } from "context/Card";
+import { useNavigate } from "react-router-dom";
 
 //미션2
 const CompletedPage = () => {
+  const ref = useRef<HTMLInputElement>(null);
+  const cardCtx = useContext(CardContext);
+  const temporaryCard = cardCtx.state.store;
+  const navigate = useNavigate();
+
+  const submit = () => {
+    const currentInputRef = ref.current;
+    if (currentInputRef === null) return;
+    const alias = currentInputRef.value;
+    const newCard = {
+      ...cardCtx.state.store,
+      alias,
+    };
+    cardCtx.addCard(newCard);
+
+    navigate("/");
+  };
+
   return (
     <Layout>
       <TextWrapper>
         <Text fontSize="lg" weight="bold" label="카드 등록이 완료되었습니다."></Text>
       </TextWrapper>
-      <CardWrapper>{/* <Card theme="primary" size="big" /> */}</CardWrapper>
+      <CardWrapper>
+        <Card
+          type="primary"
+          size="big"
+          color={temporaryCard.color}
+          company={temporaryCard.company}
+          number={temporaryCard.cardNumbers}
+          expireMonth={temporaryCard.expireDate.month}
+          expireYear={temporaryCard.expireDate.year}
+          ownerName={temporaryCard.ownerName}
+        />
+      </CardWrapper>
 
       <InputWrapper>
-        <Input type="text" placeholder="카드의 별칭을 입력해주세요." theme="underline" active={true} />
+        <Input type="text" placeholder="카드의 별칭을 입력해주세요." theme="underline" active={true} ref={ref} />
       </InputWrapper>
 
       <ButtonWrapper>
-        <Button fontSize="lg" label="Next" />
+        <Button fontSize="lg" label="Next" onClick={submit} />
       </ButtonWrapper>
     </Layout>
   );

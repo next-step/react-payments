@@ -12,7 +12,7 @@ export type CompanyType =
 export type FontSizeType = "xs" | "s" | "m" | "lg";
 export type FontWeightType = "normal" | "bold";
 
-export type CardStateType = {
+export interface CardStateType {
   cardNumbers: string;
   expireDate: {
     month: string;
@@ -26,4 +26,4 @@ export type CardStateType = {
   ownerName: string;
   color: ColorType;
   company: CompanyType;
-};
+}
