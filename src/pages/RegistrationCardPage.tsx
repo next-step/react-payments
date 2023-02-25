@@ -6,7 +6,7 @@ import {
   Box,
   Header,
   TextField,
-  FormControl,
+  FormFieldControl,
   Button,
 } from 'components/@common';
 
@@ -92,8 +92,8 @@ const RegistrationCardPage = () => {
         expiration={expiration}
       />
       <Form as="form" onSubmit={onSubmit}>
-        <FormControl>
-          <FormControl.Label>카드 번호</FormControl.Label>
+        <FormFieldControl>
+          <FormFieldControl.Label>카드 번호</FormFieldControl.Label>
           <Box
             display="flex"
             justifyContent="space-between"
@@ -109,10 +109,10 @@ const RegistrationCardPage = () => {
               className="w-100"
             />
           </Box>
-        </FormControl>
+        </FormFieldControl>
 
-        <FormControl>
-          <FormControl.Label>만료일</FormControl.Label>
+        <FormFieldControl>
+          <FormFieldControl.Label>만료일</FormFieldControl.Label>
           <Box display="flex" alignItems="center">
             <TextField
               placeholder="MM / YY"
@@ -122,12 +122,16 @@ const RegistrationCardPage = () => {
               className="w-30"
             />
           </Box>
-        </FormControl>
+        </FormFieldControl>
 
-        <FormControl>
+        <FormFieldControl>
           <Box display="flex" justifyContent="space-between">
-            <FormControl.Label>카드 소유자 이름 (선택)</FormControl.Label>
-            <FormControl.Label>{holderName.length}/30</FormControl.Label>
+            <FormFieldControl.Label>
+              카드 소유자 이름 (선택)
+            </FormFieldControl.Label>
+            <FormFieldControl.Label>
+              {holderName.length}/30
+            </FormFieldControl.Label>
           </Box>
           <TextField
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
@@ -136,10 +140,10 @@ const RegistrationCardPage = () => {
             onChange={handleName}
             className="w-100"
           />
-        </FormControl>
+        </FormFieldControl>
 
-        <FormControl>
-          <FormControl.Label
+        <FormFieldControl>
+          <FormFieldControl.Label
             help={
               <>
                 <p>카드 뒷면의 서명란 카드번호 중</p>
@@ -149,7 +153,7 @@ const RegistrationCardPage = () => {
             }
           >
             보안 코드 (CVC/CVV)
-          </FormControl.Label>
+          </FormFieldControl.Label>
           <TextField
             type="password"
             inputMode="numeric"
@@ -159,10 +163,10 @@ const RegistrationCardPage = () => {
             onChange={handleCVC}
             className="w-30"
           />
-        </FormControl>
+        </FormFieldControl>
 
-        <FormControl>
-          <FormControl.Label>카드 비밀번호</FormControl.Label>
+        <FormFieldControl>
+          <FormFieldControl.Label>카드 비밀번호</FormFieldControl.Label>
           <Box display="flex" className="gap-x-5" onChange={handlePassword}>
             <TextField
               type="password"
@@ -201,7 +205,7 @@ const RegistrationCardPage = () => {
               className="w-10 text-center"
             />
           </Box>
-        </FormControl>
+        </FormFieldControl>
 
         <Box display="flex" justifyContent="flex-end">
           <Button type="submit" color="brand02" disabled={!isSubmitEnabled}>

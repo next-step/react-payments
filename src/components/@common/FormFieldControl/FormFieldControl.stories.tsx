@@ -1,12 +1,12 @@
 import type { Meta } from '@storybook/react';
 import type { PropsWithChildren } from 'react';
 
-import FormControl from './FormControl';
-import type { LabelProps } from './FormControl.types';
+import FormFieldControl from './FormFieldControl';
+import type { LabelProps } from './FormFieldControl.types';
 
 export default {
-  title: 'Common/FormControl',
-  component: FormControl,
+  title: 'Common/FormFieldControl',
+  component: FormFieldControl,
   argTypes: {
     help: {
       type: 'string',
@@ -14,18 +14,18 @@ export default {
     children: {
       type: 'string',
       table: {
-        category: 'FormControl.Label',
+        category: 'FormFieldControl.Label',
       },
     },
   },
 } as Meta;
 
 export const Primary = ({ help, children }: PropsWithChildren<LabelProps>) => (
-  <FormControl>
-    <FormControl.Label help={help && <p>{help}</p>}>
+  <FormFieldControl>
+    <FormFieldControl.Label help={help && <p>{help}</p>}>
       {children}
-    </FormControl.Label>
-  </FormControl>
+    </FormFieldControl.Label>
+  </FormFieldControl>
 );
 
 Primary.args = {
