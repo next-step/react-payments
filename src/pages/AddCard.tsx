@@ -1,25 +1,27 @@
 import { useState, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
+
 import CardSecurityCode from '../components/CardSecurityCode';
 import CardExpiration from '../components/CardExpiration';
 import CardNumberInput from '../components/CardNumberInput';
 import CardPassword from '../components/CardPassword';
 import CardholderName from '../components/CardholderName';
-import '../styles/index.css';
 import CardBox from './CardBox';
 
+import '../styles/index.css';
+
+type CardNumber = [string, string, string, string];
+
 const AddCard = () => {
-  const [state, setState] = useState({
-    num1: '',
-    num2: '',
-    num3: '',
-    num4: '',
-  });
-  const getCardNumber = (e: ChangeEvent<HTMLInputElement>) => {
-    setState({
-      ...state,
-      [e.currentTarget.name]: e.currentTarget.value.replace(/[^0-9]/g, ''),
-    });
+  const [cardNumber, setCardNumber] = useState<CardNumber>(['', '', '', '']);
+
+  const handleChangeCardNumber = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+    const nextCardNumber: CardNumber = [...cardNumber];
+    const { value } = e.target;
+    nextCardNumber[index] = value;
+    if (Number.isNaN(Number(value))) return;
+    if (nextCardNumber[index].length > 4) return;
+    setCardNumber(nextCardNumber);
   };
 
   const [expiration, setExpiration] = useState({
@@ -27,10 +29,20 @@ const AddCard = () => {
     year: '',
   });
   const getExpirationMonth = (e: ChangeEvent<HTMLInputElement>) => {
-    setExpiration({
-      ...expiration,
-      [e.currentTarget.name]: e.currentTarget.value.replace(/[^0-9]/g, ''),
-    });
+    const { value, name } = e.target;
+    const parseValue = parseInt(value, 10);
+
+    if (Number.isNaN(Number(value)) || (name === 'month' && (parseValue < 1 || parseValue > 12))) return;
+
+    // let formattedValue = value;
+    // if (name === 'month' && value.length === 1) {
+    //   formattedValue = `0${value}`;
+    // }
+
+    setExpiration((prevExpiration) => ({
+      ...prevExpiration,
+      [name]: value,
+    }));
   };
 
   const [name, setName] = useState('');
@@ -70,8 +82,8 @@ const AddCard = () => {
             </Link>{' '}
             카드 추가{' '}
           </h2>
-          <CardBox numbers={state} expiration={expiration} name={name} />
-          <CardNumberInput numbers={state} onChange={getCardNumber} />
+          <CardBox numbers={cardNumber} expiration={expiration} name={name} />
+          <CardNumberInput cardNumber={cardNumber} onChange={handleChangeCardNumber} />
           <CardExpiration expiration={expiration} onChange={getExpirationMonth} />
           <CardholderName name={name} onChange={onChangeName} />
           <CardSecurityCode security={security} onChange={getSecurity} />

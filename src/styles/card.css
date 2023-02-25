@@ -79,6 +79,7 @@
 
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .card-middle {
@@ -142,5 +143,5 @@
 }
 
 .card-num {
-  font-size: 24px;
+  font-size: 20px;
 }

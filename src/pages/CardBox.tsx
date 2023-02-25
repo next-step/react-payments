@@ -1,11 +1,6 @@
 import '../styles/index.css';
 
-type CardNumber = {
-  num1: string;
-  num2: string;
-  num3: string;
-  num4: string;
-};
+type CardNumber = [string, string, string, string];
 type ExpirationNumber = {
   month: string;
   year: string;
@@ -18,7 +13,7 @@ type CardBoxProps = {
 };
 
 const CardBox = ({ numbers, expiration, name }: CardBoxProps) => {
-  const { num1, num2, num3, num4 } = numbers;
+  const [num1, num2, num3, num4] = numbers;
   const secretNum3 = num3.replace(/[1-9]/gi, '*');
   const secretNum4 = num4.replace(/[1-9]/gi, '*');
 
