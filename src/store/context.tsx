@@ -1,19 +1,17 @@
-import { ChangeEvent, createContext, useContext } from "react";
+import { createContext, useContext } from "react";
+import { CardNumber, ExpirationDate } from "./Provider";
 
 type PaymentsContext = {
-  cardNumbers: string[];
-  nextElement: {
-    current: HTMLInputElement[];
-  };
-  expirationDate: string[];
+  cardNumbers: CardNumber;
+  cardExpiration: ExpirationDate;
   cardOwnerName: string;
   cvc: string;
   password: string[];
-  handleCardNumberInput: (index: number) => (e: ChangeEvent<HTMLInputElement>) => void;
-  handleExpirationDateInput: (index: number) => (e: ChangeEvent<HTMLInputElement>) => void;
-  handleCardOwnerInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleCvcInput: (e: ChangeEvent<HTMLInputElement>) => void;
-  handlePasswordByInput: (index: number) => (e: ChangeEvent<HTMLInputElement>) => void;
+  handleChangeCardNumber: (input: CardNumber) => void;
+  handleChangeExpirationDate: (input: ExpirationDate) => void;
+  handleCardOwner: (input: string) => void;
+  handleCvc: (input: string) => void;
+  handlePassword: (input: string[]) => void;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare

@@ -1,16 +1,56 @@
+import { ExpirationDate } from "@/store/Provider";
+import { ChangeEvent, useEffect, useState } from "react";
+
 const MAX_DATE_LENGTH = 2;
+const CURRENT_YEAR = Number(new Date().getFullYear().toString().slice(-2));
 
 type CardExpirationDateInputProps = {
-  expirationDate: string[];
-  onChange: (
-    index: number
-  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChangeExpirationDate: (input: ExpirationDate) => void;
 };
 
 const CardExpirationDateInput = ({
-  expirationDate,
-  onChange,
+  handleChangeExpirationDate,
 }: CardExpirationDateInputProps) => {
+  const [expiredDate, setExpiredDate] = useState<ExpirationDate>({
+    month: "",
+    year: "",
+  });
+
+  const handleOnExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    if (name === "month" && Number.isNaN(+value)) {
+      alert("카드 유효기간은 숫자만 입력해주세요!");
+      return;
+    }
+
+    if (name === "month") {
+      if (+value > 12) {
+        alert("월은 1이상 12이하 숫자여야 합니다.");
+        expiredDate.month = "";
+        return;
+      }
+    }
+
+    if (name === "year") {
+      if (value.length === MAX_DATE_LENGTH && +value < CURRENT_YEAR) {
+        alert("년도는 현재년도보다 적을 수 없습니다.");
+        expiredDate.year = "";
+        return;
+      }
+    }
+
+    setExpiredDate((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    handleChangeExpirationDate(expiredDate);
+    // eslint-disable-next-line
+  }, [expiredDate]);
+
   return (
     <div className="input-container">
       <span className="input-title">만료일</span>
@@ -19,9 +59,10 @@ const CardExpirationDateInput = ({
           className="input-basic"
           type="text"
           placeholder="MM"
+          name="month"
           maxLength={MAX_DATE_LENGTH}
-          value={expirationDate[0]}
-          onChange={onChange(0)}
+          value={expiredDate.month}
+          onChange={handleOnExpirationDate}
           required
         />
         {"/"}
@@ -29,9 +70,10 @@ const CardExpirationDateInput = ({
           className="input-basic"
           type="text"
           placeholder="YY"
+          name="year"
           maxLength={MAX_DATE_LENGTH}
-          value={expirationDate[1]}
-          onChange={onChange(1)}
+          value={expiredDate.year}
+          onChange={handleOnExpirationDate}
           required
         />
       </div>

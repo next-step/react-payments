@@ -8,42 +8,23 @@ import CardCVCInput from "./cardSecurityNumber";
 
 const CardForm = () => {
   const {
-    cardNumbers,
-    nextElement,
-    expirationDate,
-    cardOwnerName,
-    cvc,
-    password,
-    handleCardNumberInput,
-    handleExpirationDateInput,
-    handleCardOwnerInput,
-    handleCvcInput,
-    handlePasswordByInput,
+    handleChangeCardNumber,
+    handleChangeExpirationDate,
+    handleCardOwner,
+    handleCvc,
+    handlePassword,
   } = usePayments();
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log("submit");
-  };
 
   return (
     <div>
-      <form id="card-from" onSubmit={handleSubmit}>
-        <CardNumbersInput
-          cardNumbers={cardNumbers}
-          onChange={handleCardNumberInput}
-          nextElement={nextElement}
-        />
+      <form id="card-from">
+        <CardNumbersInput handleChangeCardNumber={handleChangeCardNumber} />
         <CardExpirationDateInput
-          expirationDate={expirationDate}
-          onChange={handleExpirationDateInput}
+          handleChangeExpirationDate={handleChangeExpirationDate}
         />
-        <CardOwnerInput
-          cardOwnerName={cardOwnerName}
-          onChange={handleCardOwnerInput}
-        />
-        <CardCVCInput cvc={cvc} onChange={handleCvcInput} />
-        <CardPasswordInput password={password} onChange={handlePasswordByInput} />
+        <CardOwnerInput handleCardOwner={handleCardOwner} />
+        <CardCVCInput handleCvc={handleCvc} />
+        <CardPasswordInput handlePassword={handlePassword} />
       </form>
       <NextButton path={"/complete-add-card"} />
     </div>

@@ -12,7 +12,7 @@ function App() {
       <Route path="/" element={<CardListPage />} />
       <Route path="/regist-card" element={<AddCardPage />} />
       <Route path="/card-add" element={<AfterCardPage />} />
-      <Route path="/3" element={<AddCardModal />} />
+      <Route path="/add-card-modal" element={<AddCardModal />} />
       <Route path="/complete-add-card" element={<ComplateCard />} />
     </Routes>
   );

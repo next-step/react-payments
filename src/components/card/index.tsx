@@ -1,18 +1,19 @@
 import { usePayments } from "../../store/context";
 
+const isHypen = (number: string) => {
+  return number.length === 4 ? " - " : "";
+};
+
+const maskingCardNumbers = (number: string) => number.replace(/./g, "*");
+
+const showCardName = (name: string) => (name ? name : "NAME");
+
+const showCardExpiry = (month: string, year: string) => {
+  return month ? `${month} / ${year || "YY"}` : "MM / YY";
+};
+
 const Card = () => {
-  const { cardNumbers, expirationDate, cardOwnerName } = usePayments();
-
-  const isHypen = (number: string) => {
-    return number.length === 4 ? " - " : "";
-  };
-
-  const maskingCardNumbers = (number: string) => number.replace(/./g, "*");
-
-  const showCardName = (name: string) => (name ? name : "NAME");
-
-  const showCardExpiry = (cardExpiry: string[]) =>
-    cardExpiry[0] ? `${cardExpiry[0]} / ${cardExpiry[1] || "YY"}` : "MM / YY";
+  const { cardNumbers, cardExpiration, cardOwnerName } = usePayments();
 
   return (
     <div className="card-box">
@@ -31,8 +32,12 @@ const Card = () => {
             </span>
           </div>
           <div className="card-bottom__info">
-            <span className="card-text text-elipsis">{showCardName(cardOwnerName)}</span>
-            <span className="card-text">{showCardExpiry(expirationDate)}</span>
+            <span className="card-text text-elipsis">
+              {showCardName(cardOwnerName)}
+            </span>
+            <span className="card-text">
+              {showCardExpiry(cardExpiration.month, cardExpiration.year)}
+            </span>
           </div>
         </div>
       </div>

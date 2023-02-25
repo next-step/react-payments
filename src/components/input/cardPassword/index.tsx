@@ -1,16 +1,33 @@
+import { ChangeEvent, useEffect, useState } from "react";
+
 const MAX_PASSWORD_LENGTH = 1;
 
 type CardPasswordInputProps = {
-  password: string[];
-  onChange: (
-    index: number
-  ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePassword: (input: string[]) => void;
 };
 
 const CardPasswordInput = ({
-  password,
-  onChange,
+  handlePassword,
 }: CardPasswordInputProps) => {
+  const [passwordNumber, setPasswordNumber] = useState<string[]>(["", ""]);
+  const handlePasswordByInput =
+    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+      const updatedPassword = [...passwordNumber];
+      const { value } = e.target;
+
+      if (Number.isNaN(+value)) {
+        alert("숫자만 입력해주세요.");
+        return;
+      }
+
+      updatedPassword[index] = value;
+      setPasswordNumber(updatedPassword);
+    };
+
+  useEffect(() => {
+    handlePassword(passwordNumber);
+    // eslint-disable-next-line
+  }, [passwordNumber]);
   return (
     <div className="input-container">
       <span className="input-title">카드 비밀번호</span>
@@ -19,27 +36,27 @@ const CardPasswordInput = ({
           className="input-basic w-15"
           type="password"
           maxLength={MAX_PASSWORD_LENGTH}
-          onChange={onChange(0)}
-          value={password[0]}
+          onChange={handlePasswordByInput(0)}
+          value={passwordNumber[0]}
         />
         <input
           className="input-basic w-15"
           type="password"
           maxLength={MAX_PASSWORD_LENGTH}
-          onChange={onChange(1)}
-          value={password[1]}
+          onChange={handlePasswordByInput(1)}
+          value={passwordNumber[1]}
         />
         <input
           className="input-basic w-15 card-pass-word__disabled"
           type="password"
+          value="x"
           disabled
-          value="*"
         />
         <input
           className="input-basic w-15 card-pass-word__disabled"
           type="password"
+          value="x"
           disabled
-          value="*"
         />
       </div>
     </div>
