@@ -1,10 +1,12 @@
 import React from 'react';
 
+import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
 import useExtendedState from '@/hooks/useExtendedState';
 import { checkIsArrayLast  } from '@/utils';
 
 import { ExpireDatesState } from '../types';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
+import { InputDivider } from './InputDivider';
 
 interface ExpireDateInputProps {
   // prettier-ignore
@@ -49,8 +51,9 @@ function ExpireDateInput({
                   }
                 })}
               />
-              {/* TODO: 이것도 하나의 component로 뺄 수 있다. */}
-              {!isLast && isValueValid && <div className="text-black">/</div>}
+              <ConditionalComponentWrapper isRender={!isLast}>
+                <InputDivider isHide={!isLast && isValueValid}>/</InputDivider>
+              </ConditionalComponentWrapper>
             </>
           );
         })}

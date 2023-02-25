@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
 
+import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
 import { checkIsArrayLast  } from '@/utils';
 import useExtendedState from '@/hooks/useExtendedState';
 
 import type { CardNumbersState } from '../types';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
+import { InputDivider } from './InputDivider';
 
 interface CardNumberInputProps {
   // prettier-ignore
@@ -24,10 +26,8 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
       <div className="input-box">
         {cardNumbers.map((inputState, i) => {
           const { key, type, value, checkIsValid } = inputState;
-          // FIXME: 로직과 UI가 완전히 혼재되어 있다 = 재사용성이 전혀 없다. 분리하는 것이 좋을 것 같다.
           const isLast = checkIsArrayLast(cardNumbers, i);
           const isOverFourNumber = checkIsValid(value);
-          const dashComponentClassName = isOverFourNumber && !isLast ? 'dash' : 'dash hide';
 
           if (!isLast && isOverFourNumber) {
             // FIXME: 마지막 카드 번호를 입력했을 때, 그 다음 다른 input으로 가게 하려면 어떻게 해야 할까?
@@ -48,7 +48,9 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
                 }}
                 onChange={createInputChangeHandler({ state: inputState, i, setState: setCardNumbers})}
               />
-              {!isLast && <div className={`text-black ${dashComponentClassName}`}>-</div>}
+              <ConditionalComponentWrapper isRender={!isLast} >
+                <InputDivider isHide={isOverFourNumber && !isLast} className="dash" >-</InputDivider>
+              </ConditionalComponentWrapper>
             </>
           );
         })}
