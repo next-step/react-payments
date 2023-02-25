@@ -5,25 +5,34 @@ import { CardOwnerNameField } from './CardOwnerNameField';
 import { CardCVCNumberField } from './CardCVCNumberField';
 import { CardPasswordField } from './CardPasswordField';
 import { CardExpirationDateField } from './CardExpirationDateField';
-import { CARD_COMPANIES } from '@/constants';
+import { CARD_COMPANIES, ROUTE } from '@/constants';
+import styled from '@emotion/styled';
+import { TextButton } from '@/components';
+import { CardField } from '@/types';
+import { Route, useNavigate } from 'react-router-dom';
 
 const CardFields = () => {
   const data = useCardFieldContext();
+  const navigate = useNavigate();
 
   if (data === null) return null;
 
   const {
     cardNumber,
-    cardPassword,
+    ownerName,
     cvc,
+    cardPassword,
     expirationMonth,
     expirationYear,
-    ownerName,
     cardCompany,
   } = data;
 
   const fontColor =
     cardCompany !== null ? CARD_COMPANIES[cardCompany].color : 'gray1';
+
+  const handleNextButtonClick = () => {
+    navigate(ROUTE.CARD_CREATE_COMPLETE);
+  };
   return (
     <form>
       <CardNumberField cardNumber={cardNumber} fontColor={fontColor} />
@@ -35,8 +44,38 @@ const CardFields = () => {
       <CardOwnerNameField ownerName={ownerName} fontColor={fontColor} />
       <CardCVCNumberField cvc={cvc} fontColor={fontColor} />
       <CardPasswordField cardPassword={cardPassword} fontColor={fontColor} />
+      <TextButtonContainer>
+        <TextButton
+          text="다음"
+          disabled={isDisabled(data)}
+          onClick={handleNextButtonClick}
+        />
+      </TextButtonContainer>
     </form>
   );
 };
 
 export default CardFields;
+
+const TextButtonContainer = styled.div`
+  width: 100%;
+  text-align: right;
+`;
+
+const isDisabled = (field: CardField) => {
+  const {
+    cardNumber,
+    cardCompany,
+    cvc,
+    cardPassword,
+    expirationMonth,
+    expirationYear,
+  } = field;
+  if (cardNumber.length < 16) return true;
+  if (cvc.length < 3) return true;
+  if (cardPassword.length < 2) return true;
+  if (cardCompany === null) return true;
+  if (expirationMonth.length < 2) return true;
+  if (expirationYear.length < 2) return true;
+  return false;
+};
