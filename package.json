@@ -23,7 +23,8 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "server": "json-server --watch ./src/constants/mock-api.json --port 3004"
+    "server": "json-server --watch ./src/constants/mock-api.json --port 3004",
+    "chromatic": "npx chromatic --project-token=096d3845d1f0"
   },
   "eslintConfig": {
     "extends": [
@@ -86,5 +87,7 @@
     "react-icons": "^4.7.1",
     "webpack": "^5.75.0"
   },
-  "proxy": "http://localhost:3004"
+  "proxy": "http://localhost:3004",
+  "readme": "ERROR: No README data found!",
+  "_id": "test@0.1.0"
 }
