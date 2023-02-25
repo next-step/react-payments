@@ -3,6 +3,7 @@ import { Size } from "../types/common";
 import { Date } from "./Form/ExpiredDate";
 
 function Card({
+  isEmpty = false,
   bankName,
   cardNumber,
   userName,
@@ -10,6 +11,10 @@ function Card({
   size = Size.Small,
   color,
 }: CardProps) {
+  if (isEmpty) {
+    return <div>test</div>;
+  }
+
   const expiredMonth = Number(expiredDate.month);
   const expiredYear = Number(expiredDate.year);
 
@@ -50,6 +55,7 @@ type CardProps = {
   expiredDate: Date;
   size?: CardSize;
   color?: string;
+  isEmpty?: boolean;
 };
 
 type CardBoxProps = {

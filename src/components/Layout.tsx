@@ -27,6 +27,10 @@ const Root = styled.div`
 const Wrapper = styled.div`
   height: 100%;
   padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default Layout;
