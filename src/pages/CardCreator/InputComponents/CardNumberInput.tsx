@@ -23,6 +23,7 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
   const { toTheNextElement } = useSequentialFocusWithElements(cardNumberInputsRef);
 
   return (
+    // TODO: Input들의 Wrapper는 모두 겹치기 때문에, 컴포넌트화 가능.
     <div className="input-container">
       <span className="input-title">카드 번호</span>
       <div className="input-box">

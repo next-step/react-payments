@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
@@ -22,13 +22,6 @@ function CardCreator() {
   const securityCodeStateBundle = useExtendedState(securityCodesInit);
 
   const passwordsStateBundle = useExtendedState(passwordsInit);
-
-  // 클린코드와 추상화를 위한 의견!
-  // TODO: 모든 input을 받아 i번의 다음으로 focus를 넘기는 부분은 공통 hook으로 묶을 수 있겠다.
-  // TODO: useForm처럼 form을 간단하게 만들 수 있는 방법은 없을까? -> [{}] state를 기준으로 input에 여러 event 함수들을 미리 preset하고 input을 전달해주면 좋을듯 하다.
-
-  // TODO: 카드 소유자는 컴포넌트로 빼기
-  // TODO: 카드 소유자 modal은 portal이용해서 관심사 분리
 
   return (
     <>
@@ -54,6 +47,7 @@ function CardCreator() {
           <SecurityCodeInput cardOwnerNameStateBundle={securityCodeStateBundle} />
           <PasswordInput passwordsStateBundle={passwordsStateBundle} />
           <div className="button-box">
+            {/* TODO: 넘어가기 전에 모든 state들의 validation 필요 */}
             <Link to="/add-complete" className="button-text">
               다음
             </Link>
