@@ -1,6 +1,6 @@
 import { ChangeEvent, useRef, useEffect } from 'react';
-import { CARD } from '../utils/card_constants';
-import { isShowSlash } from '../utils/isShowSlash';
+import { CARD } from '../utils/cardConstants';
+import { showSlash } from '../utils/insertWording';
 
 type ExpirationNumber = {
   month: string;
@@ -33,7 +33,7 @@ const CardExpiration = ({ expiration, onChange }: ExpirationNumberInputProps) =>
           onChange={onChange}
           maxLength={CARD.EXPIRATION_LENGTH}
         />
-        {isShowSlash(month, CARD.EXPIRATION_LENGTH) && <span>/</span>}
+        {showSlash(month, CARD.EXPIRATION_LENGTH)}
         <input
           ref={yearInputRef}
           className="input-basic"

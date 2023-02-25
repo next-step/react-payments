@@ -1,5 +1,5 @@
 import { ChangeEvent, useRef, useEffect } from 'react';
-import { CARD } from '../utils/card_constants';
+import { CARD } from '../utils/cardConstants';
 
 type PasswordNumber = [string, string];
 

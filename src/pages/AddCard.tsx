@@ -7,7 +7,7 @@ import CardNumberInput from '../components/CardNumberInput';
 import CardPassword from '../components/CardPassword';
 import CardholderName from '../components/CardholderName';
 import CardBox from './CardBox';
-import { PATH } from '../utils/path_constants';
+import { PATH } from '../utils/pathConstants';
 
 import '../styles/index.css';
 

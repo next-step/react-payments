@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import { CARD } from '../utils/card_constants';
+import { CARD } from '../utils/cardConstants';
 
 type SecurityCodeProps = {
   security: string;

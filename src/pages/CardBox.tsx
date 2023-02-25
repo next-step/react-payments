@@ -1,5 +1,5 @@
-import { isShowSlash } from '../utils/isShowSlash';
-import { CARD } from '../utils/card_constants';
+import { showDash, showSlash } from '../utils/insertWording';
+import { CARD } from '../utils/cardConstants';
 
 import '../styles/index.css';
 
@@ -27,11 +27,11 @@ const CardBox = ({ cardNumbers, expiration, cardHolderName }: CardBoxProps) => {
       <div className="empty-card">
         <div className="card-top card-num">
           <span className="card-num">{num1}</span>
-          {isShowSlash(num1, CARD.NUMBER_LENGTH) && <span>-</span>}
+          {showDash(num1, CARD.NUMBER_LENGTH)}
           <span className="card-num">{num2}</span>
-          {isShowSlash(num2, CARD.NUMBER_LENGTH) && <span>-</span>}
+          {showDash(num2, CARD.NUMBER_LENGTH)}
           <span className="card-num">{secretNum3}</span>
-          {isShowSlash(num3, CARD.NUMBER_LENGTH) && <span>-</span>}
+          {showDash(num3, CARD.NUMBER_LENGTH)}
           <span className="card-num">{secretNum4}</span>
         </div>
         <div className="card-middle">
@@ -42,7 +42,7 @@ const CardBox = ({ cardNumbers, expiration, cardHolderName }: CardBoxProps) => {
             <span className="card-text">{cardHolderName}</span>
             <span className="card-text">
               {month && Number(month) < 10 ? `0${month}` : month}
-              {isShowSlash(month, CARD.EXPIRATION_LENGTH) && <span>/</span>}
+              {showSlash(month, CARD.EXPIRATION_LENGTH)}
               {year}
             </span>
           </div>

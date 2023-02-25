@@ -1,8 +1,8 @@
 import { useEffect, useRef, ChangeEvent } from 'react';
-import { CARD } from '../utils/card_constants';
+import { CARD } from '../utils/cardConstants';
+import { showDash } from '../utils/insertWording';
 
 import '../styles/input.css';
-import { isShowSlash } from '../utils/isShowSlash';
 
 type CardNumber = [string, string, string, string];
 
@@ -53,7 +53,7 @@ const CardNumberInput = ({ cardNumbers, onChange }: CardNumberProps) => {
           value={num1}
           ref={num1InputRef}
         />
-        {isShowSlash(num1, CARD.NUMBER_LENGTH) && <span>-</span>}
+        {showDash(num1, CARD.NUMBER_LENGTH)}
         <input
           maxLength={CARD.NUMBER_LENGTH}
           className="input-basic w-25"
@@ -62,7 +62,7 @@ const CardNumberInput = ({ cardNumbers, onChange }: CardNumberProps) => {
           value={num2}
           ref={num2InputRef}
         />
-        {isShowSlash(num2, CARD.NUMBER_LENGTH) && <span>-</span>}
+        {showDash(num2, CARD.NUMBER_LENGTH)}
 
         <input
           maxLength={CARD.NUMBER_LENGTH}
@@ -72,7 +72,7 @@ const CardNumberInput = ({ cardNumbers, onChange }: CardNumberProps) => {
           value={num3}
           ref={num3InputRef}
         />
-        {isShowSlash(num3, CARD.NUMBER_LENGTH) && <span>-</span>}
+        {showDash(num3, CARD.NUMBER_LENGTH)}
 
         <input
           maxLength={CARD.NUMBER_LENGTH}

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { PATH } from '../utils/path_constants';
+import { PATH } from '../utils/pathConstants';
 
 import '../styles/index.css';
 
