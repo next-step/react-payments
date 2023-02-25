@@ -1,16 +1,10 @@
-import type { HTMLAttributes, ElementType } from 'react';
+import type { HTMLAttributes, ElementType, CSSProperties } from 'react';
 
 export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
   as?: ElementType;
 
-  display?: 'flex' | 'inline-flex' | 'grid';
-  flexDirection?: 'column-reverse' | 'column' | 'row-reverse' | 'row';
-  justifyContent?:
-    | 'center'
-    | 'flex-end'
-    | 'flex-start'
-    | 'space-around'
-    | 'space-between'
-    | 'space-evenly';
-  alignItems?: 'baseline' | 'center' | 'flex-end' | 'flex-start' | 'stretch';
+  display?: CSSProperties['display'];
+  flexDirection?: CSSProperties['flexDirection'];
+  justifyContent?: CSSProperties['justifyContent'];
+  alignItems?: CSSProperties['alignItems'];
 }
