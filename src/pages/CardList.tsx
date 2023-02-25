@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { PATH } from '../utils/path_constants';
+
 import '../styles/index.css';
 
 const CardList = () => {
@@ -39,7 +41,7 @@ const CardList = () => {
           </div>
           <div className="card-box">
             <div className="empty-card">
-              <Link to="/add-card" className="link-button">
+              <Link to={PATH.ADD_CARD} className="link-button">
                 +
               </Link>
             </div>

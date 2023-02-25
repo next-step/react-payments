@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { PATH } from '../utils/path_constants';
+
 import '../styles/index.css';
 
 const CompleteAddCard = () => {
@@ -27,7 +29,7 @@ const CompleteAddCard = () => {
             <input type="text" className="favorite-card" />
           </div>
           <div className="button-box">
-            <Link to="/" className="link-button">
+            <Link to={PATH.DEFAULT_PAGE} className="link-button">
               확인
             </Link>
           </div>

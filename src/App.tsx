@@ -3,15 +3,16 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import AddCard from './pages/AddCard';
 import CardList from './pages/CardList';
 import CompleteAddCard from './pages/CompleteAddCard';
+import { PATH } from './utils/path_constants';
 
 const App = () => {
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={<CardList />} />
-          <Route path="/add-card" element={<AddCard />} />
-          <Route path="/complete-card" element={<CompleteAddCard />} />
+          <Route path={PATH.DEFAULT_PAGE} element={<CardList />} />
+          <Route path={PATH.ADD_CARD} element={<AddCard />} />
+          <Route path={PATH.COMPLETE_CARD} element={<CompleteAddCard />} />
         </Routes>
       </div>
     </BrowserRouter>

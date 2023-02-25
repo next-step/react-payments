@@ -7,6 +7,7 @@ import CardNumberInput from '../components/CardNumberInput';
 import CardPassword from '../components/CardPassword';
 import CardholderName from '../components/CardholderName';
 import CardBox from './CardBox';
+import { PATH } from '../utils/path_constants';
 
 import '../styles/index.css';
 
@@ -79,7 +80,7 @@ const AddCard = () => {
       <div className="root">
         <div className="app">
           <h2 className="page-title">
-            <Link to="/" className="link-button mr-20">
+            <Link to={PATH.DEFAULT_PAGE} className="link-button mr-20">
               &lt;
             </Link>
             카드 추가
@@ -91,7 +92,7 @@ const AddCard = () => {
           <CardSecurityCode security={security} onChange={handleChangeSecurity} />
           <CardPassword cardPassword={cardPassword} onChange={handleChangeCardPassword} />
           <div className="button-box">
-            <Link to="/complete-card" className="link-button">
+            <Link to={PATH.COMPLETE_CARD} className="link-button">
               다음
             </Link>
           </div>
