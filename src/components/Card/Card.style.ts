@@ -73,6 +73,10 @@ export const CardBottomInfo = styled.div`
   justify-content: space-between;
 `;
 
+export const CardName = styled.p`
+  margin: 0 16px;
+  font-size: 10px;
+`;
 export const CardText = styled.div<{
   size: 'small' | 'big';
 }>`

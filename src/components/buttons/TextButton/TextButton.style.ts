@@ -9,4 +9,8 @@ export const StyledTextButton = styled.button`
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
+  &:disabled {
+    color: ${({ theme }) => theme.colors.gray1};
+    cursor: not-allowed;
+  }
 `;

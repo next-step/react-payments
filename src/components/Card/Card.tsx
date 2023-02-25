@@ -13,6 +13,7 @@ import {
   CardText,
   CardBottomNumber,
   CardBottomInfo,
+  CardName,
 } from './Card.style';
 import { CardField } from '@/types';
 import { Colors } from '@/styles/colors';
@@ -43,9 +44,7 @@ const Card = ({
 }: CardProps) => {
   return (
     <CardContainer cardColor={cardColor} size={size}>
-      <CardTop>
-        {cardName && <CardText size={size}>{cardName}</CardText>}
-      </CardTop>
+      <CardTop>{cardName && <CardName>{cardName}</CardName>}</CardTop>
       <CardMiddle>
         <CardChip size={size} />
       </CardMiddle>
