@@ -1,14 +1,16 @@
-import { Link } from "react-router-dom";
+import { useRouter } from "hooks/useRouter";
 
 type Props = {
   title: string;
 };
 
 const Header = ({ title }: Props) => {
+  const { back } = useRouter();
+
   return (
-    <Link to="/" className="hide-under-line">
-      <h2 className="page-title"> &lt; {title} </h2>
-    </Link>
+    <h2 className="page-title" onClick={back}>
+      <span>&lt; {title}</span>
+    </h2>
   );
 };
 

@@ -36,8 +36,7 @@ const CardNumbersInput = ({
 
   useEffect(() => {
     handleChangeCardNumber(numbers);
-    // eslint-disable-next-line
-  }, [numbers]);
+  }, [numbers, handleChangeCardNumber]);
 
   return (
     <div className="input-container">

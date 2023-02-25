@@ -1,39 +1,43 @@
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useCallback, useEffect, useState } from "react";
 import PaymentsContext from "./context";
 
 export type CardNumber = [string, string, string, string];
-export type ExpirationDate = {month: string, year: string};
+export type ExpirationDate = { month: string; year: string };
 
 export const PaymentsProvider = ({ children }: PropsWithChildren) => {
   const [cardNumbers, setCardNumbers] = useState<CardNumber>(["", "", "", ""]);
-  const [cardExpiration, setCardExpiration] = useState<ExpirationDate>({ month: '', year: '' });
+  const [cardExpiration, setCardExpiration] = useState<ExpirationDate>({ month: "", year: "" });
   const [cardOwnerName, setCardOwnerName] = useState<string>("");
   const [password, setPassword] = useState<string[]>(["", ""]);
   const [cvc, setCvc] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const handleChangeCardNumber = (cardNumbers: CardNumber) => {
+  const handleChangeCardNumber = useCallback((cardNumbers: CardNumber) => {
     setCardNumbers(cardNumbers);
-  };
+  }, []);
 
-  const handleChangeExpirationDate = ({ month, year }: ExpirationDate) => {
+  const handleChangeExpirationDate = useCallback(({ month, year }: ExpirationDate) => {
     setCardExpiration({ month, year });
-  };
+  }, [])
 
-  const handleCardOwner = (value: string) => {
+  const handleCardOwner = useCallback((value: string) => {
     setCardOwnerName(value);
-  };
+  }, []);
 
-  const handleCvc = (value: string) => {
-    if (Number.isNaN(+value)) {
-      alert("보안코드는 숫자만 입력해주세요!");
-      return;
-    }
+  const handleCvc = useCallback((value: string) => {
     setCvc(value);
-  };
+  }, []);
 
-  const handlePassword = (values: string[]) => {
-      setPassword(values);
-    };
+  const handlePassword = useCallback((values: string[]) => {
+    setPassword(values);
+  }, []);
+
+  useEffect(() => {
+    const cardComp = cardNumbers.join("").length === 16;
+    if (cardComp) {
+      setIsModalOpen(true);
+    }
+  }, [cardNumbers, cardExpiration])
 
   const value = {
     cardNumbers,
@@ -41,6 +45,7 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     cardOwnerName,
     cvc,
     password,
+    isModalOpen,
     handleChangeCardNumber,
     handleChangeExpirationDate,
     handleCardOwner,

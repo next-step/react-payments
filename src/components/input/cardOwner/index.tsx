@@ -7,16 +7,15 @@ type CardOwnerInputProps = {
 };
 
 const CardOwnerInput = ({ handleCardOwner }: CardOwnerInputProps) => {
-  const [ownerName, setOwnerName] = useState<string>('');
-  
+  const [ownerName, setOwnerName] = useState<string>("");
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setOwnerName(e.target.value);
   };
 
   useEffect(() => {
     handleCardOwner(ownerName);
-    // eslint-disable-next-line
-  }, [ownerName]);
+  }, [ownerName, handleCardOwner]);
 
   return (
     <div className="input-container">

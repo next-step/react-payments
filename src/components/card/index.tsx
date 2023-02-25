@@ -1,5 +1,3 @@
-import { usePayments } from "../../store/context";
-
 const isHypen = (number: string) => {
   return number.length === 4 ? " - " : "";
 };
@@ -12,9 +10,7 @@ const showCardExpiry = (month: string, year: string) => {
   return month ? `${month} / ${year || "YY"}` : "MM / YY";
 };
 
-const Card = () => {
-  const { cardNumbers, cardExpiration, cardOwnerName } = usePayments();
-
+const Card = ({ cardNumbers, cardExpiration, cardOwnerName }: any) => {
   return (
     <div className="card-box">
       <div className="empty-card">

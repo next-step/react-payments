@@ -33,8 +33,7 @@ const CardPasswordInput = ({ handlePassword }: CardPasswordInputProps) => {
 
   useEffect(() => {
     handlePassword(passwordNumber);
-    // eslint-disable-next-line
-  }, [passwordNumber]);
+  }, [passwordNumber, handlePassword]);
   return (
     <div className="input-container">
       <span className="input-title">카드 비밀번호</span>

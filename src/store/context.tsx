@@ -7,6 +7,7 @@ type PaymentsContext = {
   cardOwnerName: string;
   cvc: string;
   password: string[];
+  isModalOpen: boolean;
   handleChangeCardNumber: (input: CardNumber) => void;
   handleChangeExpirationDate: (input: ExpirationDate) => void;
   handleCardOwner: (input: string) => void;

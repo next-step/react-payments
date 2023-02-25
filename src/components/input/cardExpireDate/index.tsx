@@ -53,8 +53,7 @@ const CardExpirationDateInput = ({
 
   useEffect(() => {
     handleChangeExpirationDate(expiredDate);
-    // eslint-disable-next-line
-  }, [expiredDate]);
+  }, [expiredDate, handleChangeExpirationDate]);
 
   return (
     <div className="input-container">

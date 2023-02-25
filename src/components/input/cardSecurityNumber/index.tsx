@@ -19,8 +19,7 @@ const CardCVCInput = ({ handleCvc }: CardCVCInputProps) => {
 
   useEffect(() => {
     handleCvc(cvc);
-    // eslint-disable-next-line
-  }, [cvc]);
+  }, [cvc, handleCvc]);
 
   return (
     <div className="input-container">

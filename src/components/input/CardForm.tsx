@@ -1,4 +1,4 @@
-import { usePayments } from "../../store/context";
+import { usePayments } from "store/context";
 import NextButton from "../button/nextButton";
 import CardExpirationDateInput from "./cardExpireDate";
 import CardNumbersInput from "./cardNumbers";
