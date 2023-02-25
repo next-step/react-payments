@@ -11,6 +11,7 @@ import CardBox from './CardBox';
 import '../styles/index.css';
 
 type CardNumber = [string, string, string, string];
+type CardPassword = [string, string];
 
 const AddCard = () => {
   const [cardNumber, setCardNumber] = useState<CardNumber>(['', '', '', '']);
@@ -59,15 +60,17 @@ const AddCard = () => {
     setSecurity(value);
   };
 
-  const [cardPassword, setCardPassword] = useState({
-    num1: '',
-    num2: '',
-  });
-  const handleChangeCardPassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setCardPassword({
-      ...cardPassword,
-      [e.currentTarget.name]: e.currentTarget.value.replace(/[^0-9]/g, ''),
-    });
+  const [cardPassword, setCardPassword] = useState<CardPassword>(['', '']);
+  const handleChangeCardPassword = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+    const nextCardPassword: CardPassword = [...cardPassword];
+    const { value } = e.target;
+    nextCardPassword[index] = value;
+    if (Number.isNaN(Number(value))) return;
+    setCardPassword(nextCardPassword);
+    // setCardPassword({
+    //   ...cardPassword,
+    //   [e.currentTarget.name]: e.currentTarget.value.replace(/[^0-9]/g, ''),
+    // });
   };
 
   return (
