@@ -1,6 +1,5 @@
 import { CardBox, Modal, PageTitle } from '../components';
 import { useEffect, useState } from 'react';
-import { useCard } from '../hooks';
 import CardSelection from '../components/CardSelection';
 import {
   CardHolderContainer,
@@ -13,6 +12,7 @@ import { Button } from '../components/form';
 import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
 import { ICardBox } from '../domain/types';
+import useCardBoxContext from '../provider/card-box/useCardBox';
 
 export interface IRegisterCard {
   onChange: (data: ICardBox) => void;
@@ -21,7 +21,7 @@ export interface IRegisterCard {
 export default function RegisterCard() {
   const navigate = useNavigate();
   const [openCardPopup, setOpenCardPopup] = useState(false);
-  const { cardState, setCardState } = useCard();
+  const { cardState, setCardState } = useCardBoxContext();
 
   useEffect(() => {
     const { cardNumber, brand } = cardState;
