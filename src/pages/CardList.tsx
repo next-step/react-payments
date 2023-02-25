@@ -2,21 +2,28 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { cardRepository } from '../repositories';
 import { CardBox, PageTitle } from '../components';
 import { ICardBox } from '../domain/types';
-import { useMemo } from 'react';
+import { useCallback, useState } from 'react';
+import { Button } from '../components/form';
 
 export default function CardList() {
   const navigate = useNavigate();
-  const cardList = useMemo<ICardBox[]>(() => (
+  const [cardList, setCardList] = useState<ICardBox[]>(
     cardRepository.getItem().sort((a, b) => b.index - a.index)
-  ), []);
-
-  const goRegisterComplete = (index: number) => {
+  );
+  const goRegisterComplete = useCallback((index: number) => {
     navigate(`/register-complete?card=${index}`);
-  };
+  }, []);
+
+  const removeCard = useCallback((index: number) => {
+    const updateCardList = cardList.filter((item) => item.index !== index);
+    cardRepository.setItem(updateCardList);
+
+    setCardList(updateCardList);
+  }, []);
 
   return (
     <div className="app flex-column-center">
-      <PageTitle title="보유 카드"></PageTitle>
+      <PageTitle title="보유 카드"/>
       <div className="card-box">
         <NavLink to="register">
           <div className="empty-card">+</div>
@@ -24,12 +31,13 @@ export default function CardList() {
       </div>
       {cardList.map((item) => (
         <div
-          className="flex-column-center"
           key={item.cardNumber}
-          onClick={() => goRegisterComplete(item.index)}
         >
-          <CardBox {...item} />
-          {item.nickname && <span className="card-nickname">{item.nickname}</span>}
+          <div className="flex-column-center" onClick={() => goRegisterComplete(item.index)}>
+            <CardBox {...item} />
+            <span>{item.nickname}</span>
+          </div>
+          <Button onClick={() => removeCard(item.index)}>삭제</Button>
         </div>
       ))}
     </div>
