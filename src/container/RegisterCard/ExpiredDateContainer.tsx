@@ -1,4 +1,4 @@
-import { useRefs } from '../../hooks';
+import { useFocusRef, useRefs } from '../../hooks';
 import { Input, InputContainer } from '../../components/form';
 import { useCallback, useState } from 'react';
 import { IRegisterCard } from '../../pages/RegisterCard';
@@ -38,7 +38,7 @@ export default function ExpiredDateContainer({ onChange }: IRegisterCard) {
       <Input
         ref={expiredDateRef.month}
         placeholder="MM"
-        nextFocus={() => expiredDateRef.year.current?.focus()}
+        nextFocus={useFocusRef(expiredDateRef.year)}
         maxLength={MAX_LENGTH}
         onChange={handleChange}
       />

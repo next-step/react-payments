@@ -9,8 +9,8 @@ export default function useCard(initialState: ICardBox = {}) {
     setState((prevState) => {
       let { cardNumber, expiredDate } = newState;
 
-      cardNumber = cardNumber ? filterCardNumber(cardNumber) : prevState.cardNumber;
-      expiredDate = expiredDate ? filterExpiredDate(expiredDate) : prevState.expiredDate;
+      cardNumber = filterCardNumber(cardNumber || prevState.cardNumber);
+      expiredDate = filterExpiredDate(expiredDate || prevState.expiredDate);
 
       return {
         ...prevState,

@@ -1,16 +1,16 @@
 import { MutableRefObject, useCallback, useRef } from 'react';
 
-interface RefObject<T> {
+interface IRefObject<T> {
   [key: string | number]: MutableRefObject<T | null>;
 }
 
-type IUseRefs<T> = [
-  RefObject<T>,
+type TUseRefs<T> = [
+  IRefObject<T>,
   () => T[]
 ];
 
-export default function useRefs<T>(refNames: string[] | number[]): IUseRefs<T> {
-  const refObject = useRef<RefObject<T>>({});
+export default function useRefs<T>(refNames: string[] | number[]): TUseRefs<T> {
+  const refObject = useRef<IRefObject<T>>({});
 
   for (const refName of refNames) {
     refObject.current[refName] = useRef<T | null>(null);

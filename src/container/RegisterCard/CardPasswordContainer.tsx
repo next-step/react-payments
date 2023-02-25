@@ -1,7 +1,7 @@
 import { Input, InputContainer } from '../../components/form';
 import { IRegisterCard } from '../../pages/RegisterCard';
 import { useCallback, useState } from 'react';
-import { useRefs } from '../../hooks';
+import { useFocusRef, useRefs } from '../../hooks';
 import { onlyNumber } from '../../utils/filter';
 
 const MAX_LENGTH = 1;
@@ -33,7 +33,7 @@ export default function CardPasswordContainer({ onChange }: IRegisterCard) {
         maxLength={MAX_LENGTH}
         className="w-15 mr-5"
         ref={passwordRef[0]}
-        nextFocus={() => passwordRef[1].current.focus()}
+        nextFocus={useFocusRef(passwordRef[1])}
         onChange={handleChange}
       />
       <Input
