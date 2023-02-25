@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import React, { ReactNode, useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
 
 type FlexPosition = 'top' | 'bottom' | 'left' | 'right' | 'center';
 interface Type {
@@ -34,31 +33,26 @@ const flexPosition = {
     justify-content: center;
   `,
 };
-const Portal = ({
+// Modal : Portal 로 구현했으나 굳이 portal로 구현할 필요 없다는 생각이 들어서 제거
+const Modal = ({
   children,
   isOpen,
   selector = 'modal',
   position,
   backgroundClick,
 }: Type) => {
-  const [element, setElement] = useState<Element | null>(null);
-  useEffect(() => {
-    setElement(document.getElementById(selector));
-  }, [selector]);
+  if (!isOpen) return null;
 
-  if (!element || !isOpen) return null;
-
-  return ReactDOM.createPortal(
-    <PortalBackground position={position} onClick={backgroundClick}>
+  return (
+    <ModalBackground position={position} onClick={backgroundClick}>
       {children}
-    </PortalBackground>,
-    element
+    </ModalBackground>
   );
 };
 
-export default Portal;
+export default Modal;
 
-const PortalBackground = styled.div<{
+const ModalBackground = styled.div<{
   position: FlexPosition;
 }>`
   position: fixed;

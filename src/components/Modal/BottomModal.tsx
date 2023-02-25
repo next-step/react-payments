@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import React, { PropsWithChildren, useEffect, useState } from 'react';
-import Portal from './Portal';
 import { keyframes } from '@emotion/react';
+import Modal from './Modal';
 
 const BottomModal = ({
   children,
@@ -25,19 +25,21 @@ const BottomModal = ({
   }, [isOpen]);
 
   return (
-    <Portal
+    <Modal
       position="bottom"
       isOpen={isOpen}
       backgroundClick={handelClickBackground}
     >
       <BottomModalContainer
-        onClick={(e) => e.preventDefault()}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
         isOpen={show}
         onAnimationEnd={handleTransitionEnd}
       >
         {children}
       </BottomModalContainer>
-    </Portal>
+    </Modal>
   );
 };
 
@@ -47,7 +49,6 @@ const BottomModalContainer = styled.div<{
   isOpen: boolean;
 }>`
   width: 375px;
-  height: 20%;
   background-color: white;
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
@@ -56,7 +57,7 @@ const BottomModalContainer = styled.div<{
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   animation-name: ${({ isOpen }) => (isOpen ? openAnimation : closeAnimation)};
-  padding: 16px 24px;
+  padding: 34px;
 `;
 
 const openAnimation = keyframes`
