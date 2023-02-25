@@ -15,18 +15,19 @@ export default function CardOwnerInput({
 }: CardOwnerInputProps) {
   const CardOwnerInputLabel = useMemo(
     () => (
-      <S.CardOwnerInputContainer>
+      <S.CardOwnerInputLabelContainer>
         <span>카드 소유자 이름(선택)</span>
         <span>
           {cardOwnerName.length}/{CARD_INPUT_VARIABLES.OWNER_NAME_MAX_LENGTH}
         </span>
-      </S.CardOwnerInputContainer>
+      </S.CardOwnerInputLabelContainer>
     ),
     [cardOwnerName]
   );
 
   return (
     <Input
+      style={{ padding: "0px 10px" }}
       id="ownerName"
       label={CardOwnerInputLabel}
       placeholder="카드에 표시된 이름과 동일하게 입력하세요."
