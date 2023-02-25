@@ -53,7 +53,10 @@ const AddCard = () => {
 
   const [security, setSecurity] = useState('');
   const handleChangeSecurity = (e: ChangeEvent<HTMLInputElement>) => {
-    setSecurity(e.currentTarget.value.replace(/[^0-9]/g, ''));
+    const { value } = e.target;
+    if (Number.isNaN(Number(value))) return;
+    if (value === '0') return;
+    setSecurity(value);
   };
 
   const [cardPassword, setCardPassword] = useState({
