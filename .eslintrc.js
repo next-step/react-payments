@@ -20,7 +20,13 @@ module.exports = {
   ],
   rules: {
     'prettier/prettier': 'error',
-    'import/no-unresolved': 0,
+    'no-use-before-define': [
+      'error',
+      {
+        functions: false,
+      },
+    ],
+
     'react/jsx-filename-extension': [
       1,
       {
@@ -33,10 +39,13 @@ module.exports = {
     'react/function-component-definition': 0,
     'react/no-unescaped-entities': 1,
     'react/no-array-index-key': 1,
+
+    'import/no-unresolved': 0,
     'import/no-extraneous-dependencies': 0,
     'import/extensions': 0,
     'import/export': 0,
     'import/prefer-default-export': 0,
+
     '@typescript-eslint/no-empty-interface': 0,
   },
   settings: {
