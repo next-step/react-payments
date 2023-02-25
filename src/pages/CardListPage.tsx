@@ -1,16 +1,11 @@
 import styled from '@emotion/styled';
 
-import { CreditCard } from 'components';
-import { Box, TextField, Button } from 'components/@common';
-import type { CreditCardProps } from 'components/CreditCard/CreditCard.types';
+import { Box } from 'components/@common';
 import useRouter from 'routes/useRouter';
 import { ReactComponent as PlusIcon } from 'assets/PlusIcon.svg';
 
-import { getLocalStorageItem } from 'utils/localStorage';
-
 const CardListPage = () => {
   const { push } = useRouter();
-  const item = getLocalStorageItem<CreditCardProps>('CardValues');
 
   return (
     <Wrapper display="flex" alignItems="center" justifyContent="center">
