@@ -1,4 +1,5 @@
 import { useEffect, useRef, ChangeEvent } from 'react';
+
 import '../styles/input.css';
 
 type CardNumber = [string, string, string, string];
