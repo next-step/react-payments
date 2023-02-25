@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router": "^6.8.1",
+    "react-router-dom": "^6.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -60,6 +62,8 @@
     "@types/node": "^16.18.12",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.10",
+    "@types/react-router": "^5.1.20",
+    "@types/react-router-dom": "^5.3.3",
     "babel-plugin-named-exports-order": "^0.0.2",
     "chromatic": "^6.17.0",
     "prop-types": "^15.8.1",
