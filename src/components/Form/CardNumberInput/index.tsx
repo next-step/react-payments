@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { checkCardNumber } from "utils";
 import Input from "../../Input";
 import InputContainer from "components/Input/Container";
-import { ColorType, CardStateType } from "types";
+import { ColorType, CardType } from "types";
 type CardNumberInputProps = {
-  setCardNumber: React.Dispatch<React.SetStateAction<CardStateType>>;
+  setCardNumber: React.Dispatch<React.SetStateAction<CardType>>;
   fontColor: ColorType;
 };
 

@@ -4,9 +4,9 @@ import Text from "components/Text";
 import styled from "styled-components";
 import { useRef } from "react";
 import { checkMonth, checkYear } from "../../../utils/index";
-import { CardStateType } from "types";
+import { CardType } from "types";
 export type CardExpirationDateInputProps = {
-  setExprireDate: React.Dispatch<React.SetStateAction<CardStateType>>;
+  setExprireDate: React.Dispatch<React.SetStateAction<CardType>>;
 };
 
 const CardExpirationDateInput = ({ setExprireDate, fontColor }) => {

@@ -5,10 +5,6 @@ import { ReactEventHandler } from "react";
 
 type CardSizeType = "small" | "big";
 type CardType = "primary" | "add";
-type EexpireDateType = {
-  month: string;
-  year: string;
-};
 
 export type CardProps = {
   size: CardSizeType;

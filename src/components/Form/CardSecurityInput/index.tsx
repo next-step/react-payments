@@ -4,11 +4,11 @@ import InputContainer from "../../Input/Container";
 import Input from "../../Input";
 import { useRef } from "react";
 import { checkCardSecurityInput } from "utils";
-import { ColorType, CardStateType } from "types";
+import { ColorType, CardType } from "types";
 
 type CardPasswordInputProps = {
   fontColor: ColorType;
-  setSecurityCode: React.Dispatch<React.SetStateAction<CardStateType>>;
+  setSecurityCode: React.Dispatch<React.SetStateAction<CardType>>;
 };
 
 const CardSecurityInput = ({ fontColor, setSecurityCode }: CardPasswordInputProps) => {

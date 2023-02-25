@@ -4,11 +4,11 @@ import Input from "../../Input";
 import InputContainer from "components/Input/Container";
 import { useRef } from "react";
 import { changePassword } from "utils";
-import { ColorType, CardStateType } from "types";
+import { ColorType, CardType } from "types";
 
 type CardPasswordInputProps = {
   fontColor: ColorType;
-  setPassword: React.Dispatch<React.SetStateAction<CardStateType>>;
+  setPassword: React.Dispatch<React.SetStateAction<CardType>>;
 };
 
 const CardPasswordInput = ({ fontColor, setPassword }: CardPasswordInputProps) => {

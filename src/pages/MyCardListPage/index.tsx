@@ -6,10 +6,12 @@ import Card from "components/Card";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { CardContext } from "context/Card";
+import { CardType } from "types";
 
 const MyCardListPage = () => {
   // context api value에 있는 카드 리스트 값을 가져와서 렌더링한다.
   const cardCtx = useContext(CardContext);
+  const MyCardList = [...cardCtx.state.list].reverse();
 
   const navigate = useNavigate();
   const handleAddCard = () => {
@@ -20,7 +22,7 @@ const MyCardListPage = () => {
   return (
     <Layout>
       <Text fontSize="lg" weight="bold" label="보유카드" />
-      {cardCtx.state.list.map((card) => (
+      {MyCardList.map((card: CardType) => (
         <Card
           type="primary"
           color={card.color}

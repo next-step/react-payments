@@ -12,7 +12,7 @@ export type CompanyType =
 export type FontSizeType = "xs" | "s" | "m" | "lg";
 export type FontWeightType = "normal" | "bold";
 
-export interface CardStateType {
+export interface CardType {
   cardNumbers: string;
   expireDate: {
     month: string;

@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { CardStateType } from "types";
+import { CardType } from "types";
 
 const ACTION_TYPES = {
   add: "ADD",
@@ -9,9 +9,14 @@ const ACTION_TYPES = {
 const reducer = (state, action) => {
   switch (action.type) {
     case ACTION_TYPES.add:
-      state.list.push(action.payload);
-      return state;
-
+      const newCard = {
+        id: Date.now(),
+        ...action.payload,
+      };
+      return {
+        list: [...state.list, newCard],
+        store: "",
+      };
     case ACTION_TYPES.addStore:
       state.store = action.payload;
       return state;
@@ -24,7 +29,7 @@ const reducer = (state, action) => {
 // 카드 목록이 담겨있는 list,
 type DEFAULT_STATE_TYPE = {
   list: [];
-  store: CardStateType;
+  store: CardType;
 };
 
 const DEFAULT_STATE: DEFAULT_STATE_TYPE = {
@@ -48,29 +53,29 @@ const DEFAULT_STATE: DEFAULT_STATE_TYPE = {
 
 export const CardContext = createContext({
   state: DEFAULT_STATE,
-  addCard: function (card: CompletedCardType) {},
-  addCardToStore: function (card: CardStateType) {},
-  removeCard: function (card: CompletedCardType) {},
+  addCard: function (card: ExtendCardType) {},
+  addCardToStore: function (card: CardType) {},
+  removeCard: function (card: ExtendCardType) {},
 });
 
-interface CompletedCardType extends CardStateType {
+interface ExtendCardType extends CardType {
   alias: string;
 }
 export const CardContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, DEFAULT_STATE);
 
   // 카드 리스트에 추가
-  const addCard = (card: CompletedCardType) => {
+  const addCard = (card: ExtendCardType) => {
     dispatch({ type: ACTION_TYPES.add, payload: card });
   };
 
   // store에 카드를 임시저장
-  const addCardToStore = (card: CardStateType) => {
+  const addCardToStore = (card: CardType) => {
     dispatch({ type: ACTION_TYPES.addStore, payload: card });
   };
 
   // 카드 삭제
-  const removeCard = (card: CompletedCardType) => {
+  const removeCard = (card: ExtendCardType) => {
     dispatch({ type: ACTION_TYPES.remove, payload: card });
   };
 
