@@ -6,6 +6,7 @@ import { useContext, useMemo, useState } from "react";
 import { BANKS } from "../../constants/bank";
 import { Size, CardType } from "../../types/common";
 import { useHistory } from "react-router-dom";
+import { CardsContext } from "../../components/CardsProvider";
 
 const formatNumber = (number: string) => {
   return number.replaceAll(/[0-9]/g, "*");
@@ -13,14 +14,16 @@ const formatNumber = (number: string) => {
 
 function CardList() {
   const cardContext = useContext(CardContext);
+  const cardsContext = useContext(CardsContext);
 
-  if (!cardContext) {
+  if (!cardContext || !cardsContext) {
     alert("context 누락");
     throw Error("context 필수값 누락");
   }
 
-  const { card, setCard } = cardContext;
+  const { card } = cardContext;
   const [alias, setAlias] = useState("");
+  const { setCards } = cardsContext;
   const history = useHistory();
 
   const formattedCardNumber = useMemo(() => {
@@ -54,11 +57,12 @@ function CardList() {
     e.preventDefault();
     const finalAlias = alias ?? bankName;
 
-    setCard((card: CardType) => {
-      return {
+    setCards((cards: CardType[]) => {
+      const newCard = {
         ...card,
-        alias: finalAlias,
+        cardAlias: finalAlias,
       };
+      return [...cards, newCard];
     });
     history.push("/list");
   };

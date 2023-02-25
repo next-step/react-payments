@@ -19,7 +19,6 @@ function Modal() {
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget.dataset.id) {
-      // setBankId(e.currentTarget.dataset.id);
       setCard((card: CardType) => {
         return {
           ...card,
