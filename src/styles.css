@@ -1,0 +1,237 @@
+html,
+body,
+main {
+  -webkit-tap-highlight-color: transparent;
+  margin: 0;
+  height: 100vh;
+  font-size: 2.285vh;
+  font-family: 'Pretendard';
+  overflow: hidden;
+}
+input {
+  outline: none;
+}
+
+.content {
+  overflow-y: scroll;
+  height: 100%;
+  padding-top: 3rem;
+}
+
+/* Header */
+header {
+  display: flex;
+  align-items: center;
+  height: 4.5rem;
+}
+
+.header-title {
+  font-size: 1rem;
+  flex-grow: 1;
+  margin-left: 2.25rem;
+}
+
+.has-header-back {
+  margin-left: 1.5rem;
+}
+
+.header-back-button {
+  display: flex;
+  align-items: center;
+  margin-left: 1.5rem;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+
+/* Card */
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  width: 13rem;
+  height: 7.68rem;
+  border-radius: 0.3rem;
+  background-color: #e5e5e5;
+  padding: 0.8rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+}
+
+.new-card {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  color: #575757;
+  font-size: 1.875rem;
+}
+
+.card-title {
+  font-size: 0.625rem;
+  color: #525252;
+  height: 1.125rem;
+}
+
+.card-ic-chip {
+  background-color: #cbba64;
+  width: 2.44rem;
+  height: 1.59rem;
+  border-radius: 0.25rem;
+  margin-top: 1rem;
+}
+
+.card-credit-number {
+  height: 0.625rem;
+  color: #525252;
+  font-size: 0.8rem;
+  display: flex;
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
+  margin-top: 0.5rem;
+  justify-content: flex-start;
+}
+
+.card-credit-number-item {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-bottom {
+  overflow: hidden;
+  color: #525252;
+  margin-top: 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+}
+
+.card-customer-name {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.625rem;
+  padding-bottom: 15rem;
+}
+
+.card-alias {
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.625rem;
+  margin-top: 0.25rem;
+  color: #575757;
+}
+
+/* Input */
+
+.input-form {
+  border: none;
+  background-color: #ecebf1;
+  color: #04c09e;
+  padding: 0.75rem;
+  border-radius: 0.43rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.input-container {
+  margin-top: 1.19rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.75rem;
+  color: #525252;
+  font-weight: 500;
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
+}
+
+.input-container.md {
+  width: 8.5rem;
+}
+
+.input-container.sm {
+  width: 5.25rem;
+}
+
+.input-label {
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  display: flex;
+  justify-content: space-between;
+}
+
+#input-customer-name::placeholder {
+  font-size: 0.9rem;
+}
+
+/* Text Button */
+.text-button {
+  border: none;
+  background-color: transparent;
+  color: #04c09e;
+  font-size: 0.875rem;
+  font-weight: 700;
+  position: absolute;
+  bottom: 1rem;
+  right: 1.57rem;
+  cursor: pointer;
+}
+
+/* Alias */
+
+.alias-page {
+  margin-top: 8.125rem;
+  text-align: center;
+}
+
+.alias-page-title {
+  font-size: 1.5rem;
+  color: #383838;
+  margin-bottom: 4.8rem;
+}
+
+.alias-input {
+  display: flex;
+  border: none;
+  border-bottom: 1.5px solid #737373;
+  text-align: center;
+  font-size: 1.125rem;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+/* Card Password */
+
+.card-password-input-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card-password-input {
+  border: none;
+  background-color: #ecebf1;
+  color: #04c09e;
+  padding: 0.75rem;
+  border-radius: 0.43rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  width: 1rem;
+  text-align: center;
+}
+
+.card-password-input.disabled {
+  background-color: transparent;
+}
