@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useRef, useEffect } from 'react';
 import { CARD } from '../utils/card_constants';
 import { isShowSlash } from '../utils/isShowSlash';
 
@@ -12,6 +12,13 @@ type ExpirationNumberInputProps = {
 };
 const CardExpiration = ({ expiration, onChange }: ExpirationNumberInputProps) => {
   const { month, year } = expiration;
+  const yearInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (month.length === CARD.EXPIRATION_LENGTH) {
+      yearInputRef.current?.focus();
+    }
+  }, [month]);
 
   return (
     <div className="input-container">
@@ -28,6 +35,7 @@ const CardExpiration = ({ expiration, onChange }: ExpirationNumberInputProps) =>
         />
         {isShowSlash(month, CARD.EXPIRATION_LENGTH) && <span>/</span>}
         <input
+          ref={yearInputRef}
           className="input-basic"
           type="text"
           name="year"
