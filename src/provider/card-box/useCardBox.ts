@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { CardBoxContext } from './CardBoxProvider';
+import { CardBoxContext, ICardBoxContext } from './CardBoxProvider';
 
-export default function useCardBoxContext() {
+export default function useCardBoxContext(): ICardBoxContext {
   return useContext(CardBoxContext);
 }
