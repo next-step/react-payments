@@ -1,13 +1,15 @@
 export interface ICardBox {
-  index?: number;
   brand?: string;
   cardNumber?: string;
   cardHolder?: string;
   expiredDate?: string;
   type?: 'small' | 'big';
   color?: string;
-  nickname?: string;
-  cardPassword?: number;
-  cardSecurityCode?: number;
 }
 
+export interface ICardBoxDTO extends ICardBox {
+  index?: number;
+  cardPassword?: number;
+  cardSecurityCode?: number;
+  nickname?: string;
+}

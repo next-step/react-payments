@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { CardBox, PageTitle } from '../components';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button, Input } from '../components/form';
-import { ICardBox } from '../domain/types';
+import { ICardBoxDTO } from '../domain/types';
 
 const MAX_LENGTH = 10;
 
@@ -11,7 +11,7 @@ export default function RegisterComplete() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const cardIndex = Number(searchParams.get('card'));
-  const cardList = useMemo<ICardBox[]>(() => cardRepository.getItem(), []);
+  const cardList = useMemo<ICardBoxDTO[]>(() => cardRepository.getItem(), []);
   const cardData = useMemo(() => cardList.find((item) => item.index === cardIndex), []);
   const nicknameRef = useRef<HTMLInputElement>(null);
 

@@ -1,13 +1,13 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { cardRepository } from '../repositories';
 import { CardBox, PageTitle } from '../components';
-import { ICardBox } from '../domain/types';
+import { ICardBoxDTO } from '../domain/types';
 import { useCallback, useState } from 'react';
 import { Button } from '../components/form';
 
 export default function CardList() {
   const navigate = useNavigate();
-  const [cardList, setCardList] = useState<ICardBox[]>(
+  const [cardList, setCardList] = useState<ICardBoxDTO[]>(
     cardRepository.getItem().sort((a, b) => b.index - a.index)
   );
   const goRegisterComplete = useCallback((index: number) => {

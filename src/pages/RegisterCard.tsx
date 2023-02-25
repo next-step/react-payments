@@ -11,11 +11,11 @@ import {
 import { Button } from '../components/form';
 import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
-import { ICardBox } from '../domain/types';
+import { ICardBoxDTO } from '../domain/types';
 import useCardBoxContext from '../provider/card-box/useCardBox';
 
 export interface IRegisterCard {
-  onChange: (data: ICardBox) => void;
+  onChange: (data: ICardBoxDTO) => void;
 }
 
 export default function RegisterCard() {
