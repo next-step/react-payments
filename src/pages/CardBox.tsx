@@ -9,10 +9,10 @@ type ExpirationNumber = {
 type CardBoxProps = {
   numbers: CardNumber;
   expiration: ExpirationNumber;
-  name: string;
+  cardHolderName: string;
 };
 
-const CardBox = ({ numbers, expiration, name }: CardBoxProps) => {
+const CardBox = ({ numbers, expiration, cardHolderName }: CardBoxProps) => {
   const [num1, num2, num3, num4] = numbers;
   const secretNum3 = num3.replace(/[1-9]/gi, '*');
   const secretNum4 = num4.replace(/[1-9]/gi, '*');
@@ -35,7 +35,7 @@ const CardBox = ({ numbers, expiration, name }: CardBoxProps) => {
         </div>
         <div className="card-bottom">
           <div className="card-bottom__info">
-            <span className="card-text">{name}</span>
+            <span className="card-text">{cardHolderName}</span>
             <span className="card-text">
               {month} {month && <span>/</span>} {year}
             </span>

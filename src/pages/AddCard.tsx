@@ -45,13 +45,13 @@ const AddCard = () => {
     }));
   };
 
-  const [name, setName] = useState('');
+  const [cardHolderName, setcCardHolderName] = useState('');
   const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
-    if (name.length > 30) {
+    if (cardHolderName.length > 30) {
       return;
     }
-    setName(value.slice(0, 30));
+    setcCardHolderName(value.slice(0, 30));
   };
 
   const [security, setSecurity] = useState('');
@@ -82,10 +82,10 @@ const AddCard = () => {
             </Link>{' '}
             카드 추가{' '}
           </h2>
-          <CardBox numbers={cardNumber} expiration={expiration} name={name} />
+          <CardBox numbers={cardNumber} expiration={expiration} cardHolderName={cardHolderName} />
           <CardNumberInput cardNumber={cardNumber} onChange={handleChangeCardNumber} />
           <CardExpiration expiration={expiration} onChange={getExpirationMonth} />
-          <CardholderName name={name} onChange={onChangeName} />
+          <CardholderName cardHolderName={cardHolderName} onChange={onChangeName} />
           <CardSecurityCode security={security} onChange={getSecurity} />
           <CardPassword cardPassword={cardPassword} onChange={getCardPassword} />
           <div className="button-box">
