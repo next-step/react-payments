@@ -12,7 +12,7 @@ import { Button } from '../components/form';
 import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
 import { ICardBoxDTO } from '../domain/types';
-import useCardBoxContext from '../provider/card-box/useCardBoxContext';
+import { useCardBoxContext } from '../provider/card-box';
 import { useModalContext } from '../provider/modal';
 
 export interface IRegisterCard {
