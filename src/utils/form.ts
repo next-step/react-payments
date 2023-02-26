@@ -1,6 +1,6 @@
 const SLASH = '/';
 
-export const handleDigit = (digit: string, targetName: string) => {
+export const validateDigit = (digit: string, targetName: string) => {
   const value = digit.replace(/\D+/g, '');
   const length = value.length;
   const nextId = Number(targetName.split('digit')[1]) + 1;
@@ -8,15 +8,18 @@ export const handleDigit = (digit: string, targetName: string) => {
   return value;
 };
 
-export const handleExpire = (digit: string) => {
+export const validateExpire = (digit: string) => {
   const value = digit.replace(/\D+/g, '');
-  const length = value.length;
 
   if (Number(value.substring(0, 2)) > 12) {
     alert('1이상 12이하의 월을 입력해주세요');
     return '';
   }
 
+  return insertSlash(value, value.length);
+};
+
+const insertSlash = (value: string, length: number) => {
   let result = '';
   if (length < 3) result = value;
   else if (length < 5) {
@@ -32,7 +35,7 @@ export const handleExpire = (digit: string) => {
   return result;
 };
 
-export const handlePassword = (digit: string, targetName: string) => {
+export const validatePassword = (digit: string, targetName: string) => {
   const value = digit.replace(/\D+/g, '');
   const length = value.length;
   const nextId = Number(targetName.split('password')[1]) + 1;

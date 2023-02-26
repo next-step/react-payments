@@ -1,5 +1,5 @@
 import React, { Dispatch, useContext, useReducer } from 'react';
-import { handleDigit, handleExpire, handlePassword } from '../utils/form';
+import { validateDigit, validateExpire, validatePassword } from '../utils/form';
 
 export type CardStateType = {
   digits: { digit1: string; digit2: string; digit3: string; digit4: string };
@@ -55,16 +55,16 @@ const reducer = (state: CardStateType, action: Action): CardStateType => {
       return {
         ...state,
         digits: {
-          digit1: handleDigit(action.digits.digit1, 'digit1'),
-          digit2: handleDigit(action.digits.digit2, 'digit2'),
-          digit3: handleDigit(action.digits.digit3, 'digit3'),
+          digit1: validateDigit(action.digits.digit1, 'digit1'),
+          digit2: validateDigit(action.digits.digit2, 'digit2'),
+          digit3: validateDigit(action.digits.digit3, 'digit3'),
           digit4: action.digits.digit4,
         },
       };
     case 'SET_EXPIRE':
       return {
         ...state,
-        expire: handleExpire(action.expire),
+        expire: validateExpire(action.expire),
       };
     case 'SET_NAME':
       return {
@@ -80,7 +80,7 @@ const reducer = (state: CardStateType, action: Action): CardStateType => {
       return {
         ...state,
         passwords: {
-          password1: handlePassword(action.passwords.password1, 'password1'),
+          password1: validatePassword(action.passwords.password1, 'password1'),
           password2: action.passwords.password2,
         },
       };
