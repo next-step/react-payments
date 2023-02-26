@@ -22,10 +22,7 @@ function Card({ cardNumbers, expireDates, ownerName }: CardProps) {
           {cardNumbers.map(({ isHide, value }, i) => {
             return (
               <span key={`card-number-${i}`} className="card-number-wrapper card-number-spacing">
-                {value &&
-                  String(value)
-                    .split('')
-                    .map((cardNum) => (isHide ? '*' : cardNum))}
+                {value && value.split('').map((cardNum) => (isHide ? '*' : cardNum))}
               </span>
             );
           })}
