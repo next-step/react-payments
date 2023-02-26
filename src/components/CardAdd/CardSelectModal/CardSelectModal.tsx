@@ -1,11 +1,12 @@
-import { MouseEvent, useRef } from 'react';
+import { useRef } from 'react';
 
 import { CARD } from '@/constants/card';
 import useOutsideClick from '@/hooks/common/useOutsideClick';
+
 import CardSelectBox from '../CardSelectBox';
 
 type CardSelectModalProps = {
-  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  onClick: ({ name, color }: { name: string; color: string }) => void;
   onCloseModal: () => void;
 };
 
@@ -18,10 +19,8 @@ export default function CardSelectModal({ onClick, onCloseModal }: CardSelectMod
     <div className="modal-dimmed">
       <div className="modal" ref={modalRef}>
         <div className="grid-center">
-          {CARD.COMPANY.map((company) => {
-            const { name, color } = company;
-
-            return <CardSelectBox key={company.name} name={name} color={color} onClick={onClick} />;
+          {CARD.COMPANY.map(({ name, color }) => {
+            return <CardSelectBox key={name} name={name} color={color} onClick={() => onClick({ name, color })} />;
           })}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from 'react';
+import { useState } from 'react';
 
 export default function useCardSelectModal() {
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -17,9 +17,7 @@ export default function useCardSelectModal() {
     setIsModalOpen(false);
   };
 
-  const handleClickCard = (e: MouseEvent<HTMLButtonElement>) => {
-    const { name, color } = e.currentTarget.dataset;
-
+  const handleClickCard = ({ name, color }: { name: string; color: string }) => {
     if (!name || !color) {
       return;
     }
