@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 
 import { Card, EmptyCard } from "@/components/cards";
 import { Header } from "@/components/common";
-import cards from "@/constants/data/cardMockData.json";
+import { useCardsContext } from "@/contexts";
 
 import { CardWrapper } from "./card.style";
 
 export default function Cards() {
   const navigate = useNavigate();
+
+  const { value: cards } = useCardsContext();
 
   const handleMoveToAddCardPage = () => {
     navigate("/cards/add");
