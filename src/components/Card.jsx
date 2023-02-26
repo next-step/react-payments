@@ -1,10 +1,14 @@
-import Button from "./Common/Button";
-
-const Card = ({ isRegistered, cardInfo, size = "small" }) => (
+import Button from './Common/Button';
+import { PATH } from '../Constant';
+const Card = ({ isRegistered, cardInfo, size = 'small' }) => (
   <>
     <div className="card-box">
       {!isRegistered && (
-        <Button to="/regist" children="+" className="empty-card button-box" />
+        <Button
+          to={PATH.REGIST}
+          children="+"
+          className="empty-card button-box"
+        />
       )}
       {isRegistered && (
         <div

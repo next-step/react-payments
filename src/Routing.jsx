@@ -1,8 +1,9 @@
-import CardList from "./pages/CardList";
-import CardRegist from "./pages/CardRegist";
-import { Routes, Route } from "react-router-dom";
-import usePayment from "./hooks/usePayment";
-import CardSave from "./pages/CardSave";
+import { PATH } from './Constant';
+import CardList from './pages/CardList';
+import CardRegist from './pages/CardRegist';
+import { Routes, Route } from 'react-router-dom';
+import usePayment from './hooks/usePayment';
+import CardSave from './pages/CardSave';
 
 const Routing = () => {
   const {
@@ -20,9 +21,9 @@ const Routing = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<CardList cardList={cardList} />} />
+      <Route path={PATH.HOME} element={<CardList cardList={cardList} />} />
       <Route
-        path="/regist"
+        path={PATH.REGIST}
         element={
           <CardRegist
             cardInfo={cardInfo}
@@ -37,7 +38,7 @@ const Routing = () => {
         }
       />
       <Route
-        path="/save"
+        path={PATH.SAVE}
         element={
           <CardSave
             onSave={onHandleSave}
