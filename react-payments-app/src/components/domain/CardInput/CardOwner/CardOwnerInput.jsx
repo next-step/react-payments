@@ -3,8 +3,11 @@ import { useState, useEffect } from 'react';
 import Input from '../../../common/Input/Input';
 import InputBox from '../../../common/Input/InputBox';
 import { MAX_INPUT_LENGTH } from '../../../../constants/numbers';
+import { useCard } from '../../../../store/CardContext';
+import { CHANGE_CARD } from '../../../../constants/action';
 
-const CardOwnerInput = ({ onChange }) => {
+const CardOwnerInput = () => {
+  const { changeCardInfo } = useCard();
   const [cardOwner, setCardOwner] = useState('');
   const [length, setLength] = useState('');
   const [error, setError] = useState('');
@@ -15,6 +18,7 @@ const CardOwnerInput = ({ onChange }) => {
     updatedCardOwner = e.target.value;
     setCardOwner(updatedCardOwner);
     setLength(updatedCardOwner.length);
+    changeCardInfo(CHANGE_CARD.OWNER, updatedCardOwner);
 
     if (length === MAX_INPUT_LENGTH.CARD_OWNER) {
       setError('이름은 30자까지만 입력할 수 있습니다.');
@@ -22,9 +26,6 @@ const CardOwnerInput = ({ onChange }) => {
     }
     setError(null);
   };
-  useEffect(() => {
-    onChange(cardOwner, error);
-  }, [cardOwner, error]);
 
   return (
     <InputBox name='카드 소유자 이름(선택)'>
