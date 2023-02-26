@@ -1,7 +1,3 @@
-import Payment from "components/Payments";
-
-const Payments = () => {
-  return <Payment />;
-};
-
-export default Payments;
+export { default as CardList } from "./CardList";
+export { default as CardForm } from "./CardForm";
+export { default as Completed } from "./Completed";

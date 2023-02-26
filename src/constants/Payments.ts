@@ -9,9 +9,14 @@ export const CARD_INFO = {
   BACKGROUND_COLOR: "backgroundColor",
 };
 
+export const TYPE = "type";
+export const TYPE_SELECT = "select";
+export const TYPE_COMPLETED = "completed";
+
 export const STEP = {
-  SHOW_CARD_LIST: 1,
-  REGISTER_CARD: 2,
-  SELECT_CARD_COMPANY: 3,
-  ADD_CARD_NICKNAME: 4,
+  SHOW_CARD_LIST: "/",
+  REGISTER_CARD: "/card-form",
+  SELECT_CARD_COMPANY: `/card-form?type=${TYPE_SELECT}`,
+  REGISTER_CARD_COMPLETED: `/card-form?type=${TYPE_COMPLETED}`,
+  ADD_CARD_NICKNAME: "/card-completed",
 };

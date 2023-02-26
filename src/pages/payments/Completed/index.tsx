@@ -1,27 +1,29 @@
-import { Dispatch, SetStateAction } from "react";
 import Button from "components/common/Button";
 import Card from "components/common/Card";
-import { CardInput } from "components/common/Card/card.type";
 import InputContainer from "components/common/Input/InputContainer";
 import Input from "components/common/Input";
 import { STEP } from "constants/Payments";
+import {
+  usePaymentsDispatch,
+  usePaymentsState,
+} from "modules/payments/PaymentsContext";
+import { ADD_CARD_NICKNAME } from "modules/payments/PaymentsActionType";
+import { useNavigate } from "react-router";
 
-interface CompletedProps {
-  newCardInfo: CardInput;
-  setStep: Dispatch<SetStateAction<number>>;
-  handleCardInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleCardNicknameAddClick: ({ nickname }: { nickname?: string }) => void;
-}
+const Completed = () => {
+  const navigate = useNavigate();
 
-const Completed = ({
-  newCardInfo,
-  setStep,
-  handleCardInputChange,
-  handleCardNicknameAddClick,
-}: CompletedProps) => {
+  const { newCardInfo } = usePaymentsState();
+  const dispatch = usePaymentsDispatch();
+
   const handleNextButtonClick = () => {
-    handleCardNicknameAddClick({ nickname: newCardInfo?.nickname });
-    setStep(STEP.SHOW_CARD_LIST);
+    dispatch({ type: ADD_CARD_NICKNAME, nickname: "test" });
+    // handleCardNicknameAddClick({ nickname: newCardInfo?.nickname });
+    navigate(STEP.SHOW_CARD_LIST);
+  };
+
+  const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.currentTarget);
   };
 
   return (

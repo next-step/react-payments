@@ -1,30 +1,26 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React from "react";
 import { characterCount, displayNumber } from "utils";
 import Button from "components/common/Button";
 import Card from "components/common/Card";
-import { CardInput } from "components/common/Card/card.type";
 import InputContainer from "components/common/Input/InputContainer";
 import CompanyModal from "components/common/Modal";
-import { STEP } from "constants/Payments";
+import { STEP, TYPE, TYPE_COMPLETED, TYPE_SELECT } from "constants/Payments";
 import Input from "components/common/Input";
+import {
+  usePaymentsDispatch,
+  usePaymentsState,
+} from "modules/payments/PaymentsContext";
+import { useLocation, useNavigate } from "react-router";
+import { ADD_CARD } from "modules/payments/PaymentsActionType";
 
-interface CardFormProps {
-  newCardInfo: CardInput;
-  step: number;
-  setStep: Dispatch<SetStateAction<number>>;
-  handleCardInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleCardTypeClick: (e: React.MouseEvent<HTMLDivElement>) => void;
-  handleCardAddClick: () => void;
-}
+const CardForm = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const type = params.get(TYPE);
 
-const CardForm = ({
-  newCardInfo,
-  step,
-  setStep,
-  handleCardInputChange,
-  handleCardTypeClick,
-  handleCardAddClick,
-}: CardFormProps) => {
+  const { newCardInfo } = usePaymentsState();
+  const dispatch = usePaymentsDispatch();
   const {
     number = "",
     name = "",
@@ -34,28 +30,29 @@ const CardForm = ({
     password2 = "",
   } = newCardInfo;
 
-  const [showCompanyModal, setShowCompanyModal] = useState<boolean>(false);
-
   const handleNextButtonClick = () => {
-    if (step === STEP.REGISTER_CARD) {
-      setShowCompanyModal((prev: boolean) => !prev);
+    if (type !== TYPE_COMPLETED) {
+      navigate(STEP.SELECT_CARD_COMPANY);
       return;
     }
-    handleCardAddClick();
-    setStep(STEP.ADD_CARD_NICKNAME);
+    // handleCardAddClick();
+    dispatch({ type: ADD_CARD });
+    navigate(STEP.ADD_CARD_NICKNAME);
   };
 
-  const handleGoBackClick = () => setStep(STEP.SHOW_CARD_LIST);
+  const handleGoBackClick = () => navigate(STEP.SHOW_CARD_LIST);
 
   const handleCompanyModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    handleCardTypeClick(e);
-    setShowCompanyModal((prev: boolean) => !prev);
-    setStep(STEP.SELECT_CARD_COMPANY);
+    // handleCardTypeClick(e);
+
+    navigate(STEP.REGISTER_CARD_COMPLETED);
   };
+
+  const handleCardInputChange = () => {};
 
   return (
     <>
-      {step === STEP.REGISTER_CARD ? (
+      {type !== TYPE_COMPLETED ? (
         <h2>1️⃣ 카드 추가</h2>
       ) : (
         <h2>3️⃣ 카드 추가 - 입력 완료</h2>
@@ -149,7 +146,7 @@ const CardForm = ({
 
           <Button label="다음" onClick={handleNextButtonClick} />
         </div>
-        {showCompanyModal && (
+        {type === TYPE_SELECT && (
           <CompanyModal
             onClick={handleCompanyModalClick}
             modalItem={[
