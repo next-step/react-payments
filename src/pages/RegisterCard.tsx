@@ -1,5 +1,5 @@
 import { CardBox, Modal, PageTitle } from '../components';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import CardSelection from '../components/CardSelection';
 import {
   CardHolderContainer,
@@ -12,7 +12,8 @@ import { Button } from '../components/form';
 import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
 import { ICardBoxDTO } from '../domain/types';
-import useCardBoxContext from '../provider/card-box/useCardBox';
+import useCardBoxContext from '../provider/card-box/useCardBoxContext';
+import { useModalContext } from '../provider/modal';
 
 export interface IRegisterCard {
   onChange: (data: ICardBoxDTO) => void;
@@ -20,18 +21,18 @@ export interface IRegisterCard {
 
 export default function RegisterCard() {
   const navigate = useNavigate();
-  const [openCardPopup, setOpenCardPopup] = useState(false);
+  const { showModal } = useModalContext();
   const { cardState, setCardState } = useCardBoxContext();
 
   useEffect(() => {
     const { cardNumber, brand } = cardState;
 
     if (brand) {
-      setOpenCardPopup(false);
+      showModal(false);
       return;
     }
     if (cardNumber?.length) {
-      setOpenCardPopup(true);
+      showModal(true);
     }
   }, [cardState]);
 
@@ -58,7 +59,7 @@ export default function RegisterCard() {
       <SecurityCodeContainer onChange={setCardState}/>
       <CardPasswordContainer onChange={setCardState}/>
       <Button onClick={saveCardData}>다음</Button>
-      <Modal open={openCardPopup}>
+      <Modal>
         <CardSelection onChange={setCardState}/>
       </Modal>
     </div>

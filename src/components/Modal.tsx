@@ -1,12 +1,13 @@
 import { memo, ReactNode } from 'react';
+import { useModalContext } from '../provider/modal';
 
 export interface IModal {
-  open: boolean;
   children: ReactNode;
 }
 
-function Modal({ children, open }: IModal) {
-  if (!open) return null;
+function Modal({ children }: IModal) {
+  const { modalState } = useModalContext();
+  if (!modalState) return;
 
   return (
     <div className="modal-dimmed">
