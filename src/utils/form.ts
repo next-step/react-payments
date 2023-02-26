@@ -2,7 +2,7 @@ import { SLASH } from '../constant';
 
 export const validateDigit = (digit: number | string, targetName: string) => {
   const value = String(digit).replace(/\D+/g, '');
-  nextFocus(Number(value), targetName, 'digit', 4);
+  nextFocus(value, targetName, 4);
   return value;
 };
 
@@ -35,22 +35,15 @@ const insertSlash = (value: string, length: number) => {
 
 export const validatePassword = (digit: string, targetName: string) => {
   const value = digit.replace(/\D+/g, '');
-
-  nextFocus(Number(value), targetName, 'password', 1);
-
+  nextFocus(value, targetName, 1);
   return digit.replace(/\D+/g, '');
 };
 
-const nextFocus = (
-  value: number,
-  targetName: string,
-  targetId: string,
-  maxLength: number
-) => {
-  const length = String(value).length;
-  const nextId = Number(targetName.split(targetId)[1]) + 1;
+const nextFocus = (value: string, targetName: string, nextLength: number) => {
+  const nextId = Number(targetName.slice(-1)) + 1;
+  const targetId = targetName.slice(0, targetName.length - 1);
   const nextRef = document.getElementById(targetId + nextId);
-  if (length === maxLength) {
+  if (value.length === nextLength) {
     if (!nextRef) return;
     nextRef.focus();
   }

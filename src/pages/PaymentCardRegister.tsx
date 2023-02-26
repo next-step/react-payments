@@ -1,8 +1,8 @@
 import React from 'react';
-import PaymentCardRegisterPrev from '../components/CardRegister';
+import CardRegister from '../components/CardRegister';
 
 const PaymentCardRegister = () => {
-  return <PaymentCardRegisterPrev />;
+  return <CardRegister />;
 };
 
 export default PaymentCardRegister;
