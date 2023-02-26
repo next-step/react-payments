@@ -1,6 +1,6 @@
 import type { ChangeEvent, Dispatch, SetStateAction, FocusEvent } from 'react';
 
-import { filterNumber, updateArray, updateObject } from '@/utils';
+import { filterNumber, createUpdatedArray, createUpdatedObject } from '@/utils';
 import type { InputStateType } from '@/types/types';
 import useExtendedState from '@/hooks/useExtendedState';
 
@@ -50,10 +50,10 @@ export { useInputEventHandler };
 
 function setCardInfoState<T = string>(setState: SetInputState<T>, i: number, newValue: T) {
   setState((prev) => {
-    return updateCardInfoState(prev, i, newValue);
+    return createUpdatedCardInfoState(prev, i, newValue);
   });
 }
 
-function updateCardInfoState<T = string>(prevState: InputStateType<T>[], i: number, newValue: T) {
-  return updateArray(prevState, i, updateObject(prevState[i], 'value', newValue));
+function createUpdatedCardInfoState<T = string>(prevState: InputStateType<T>[], i: number, newValue: T) {
+  return createUpdatedArray(prevState, i, createUpdatedObject(prevState[i], 'value', newValue));
 }
