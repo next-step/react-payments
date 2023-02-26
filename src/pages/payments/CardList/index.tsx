@@ -1,18 +1,22 @@
-import { Dispatch, Fragment, SetStateAction } from "react";
+import { Fragment } from "react";
 import { CardListType } from "types/payments";
 import Card from "components/common/Card";
+import {
+  usePaymentsDispatch,
+  usePaymentsState,
+} from "modules/payments/PaymentsContext";
+import { CLEAR_CARD_INFO } from "modules/payments/PaymentsActionType";
+import { useNavigate } from "react-router";
 import { STEP } from "constants/Payments";
 
-interface CardListProps {
-  cardList: CardListType[];
-  clearCardInfo: () => void;
-  setStep: Dispatch<SetStateAction<number>>;
-}
+const CardList = () => {
+  const { cardList } = usePaymentsState();
+  const dispatch = usePaymentsDispatch();
+  const navigation = useNavigate();
 
-const CardList = ({ cardList, clearCardInfo, setStep }: CardListProps) => {
   const handleCardAddClick = () => {
-    clearCardInfo();
-    setStep(STEP.REGISTER_CARD);
+    dispatch({ type: CLEAR_CARD_INFO });
+    navigation(STEP.REGISTER_CARD);
   };
 
   return (

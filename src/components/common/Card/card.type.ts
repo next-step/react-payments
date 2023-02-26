@@ -1,4 +1,5 @@
 export type CardInput = {
+  id?: string;
   title?: string;
   number?: string;
   name?: string;
