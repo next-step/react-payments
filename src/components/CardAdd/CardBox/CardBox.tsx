@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import { CARD } from '@/constants/card';
-import { isShowHyphen, maskingNumber } from '@/domain/card';
+import { isShowHyphen, maskingNumber } from '@/domain/card/card';
 import { CardExpiration, CardNumber, CardOwnerName, SelectedCard } from '@/types/card';
 
 type CardBoxProps = {

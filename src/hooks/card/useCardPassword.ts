@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from 'react';
 
-import { isNumber } from '@/utils';
 import { CARD } from '@/constants/card';
+import { validateCardPassword } from '@/domain/card/validation';
 
 export default function useCardPassword() {
   const [cardPassword, setCardPassword] = useState({
@@ -14,12 +14,7 @@ export default function useCardPassword() {
   const handleChangeCardPassword = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    if (!(name in cardPassword)) {
-      throw new Error(`input element에 지정되지 않은 name이 주입되었습니다. [injected name with '${name}']`);
-    }
-    if (!isNumber(value) && value !== '') {
-      return;
-    }
+    validateCardPassword({ name, value, cardPassword });
 
     setCardPassword((prev) => ({
       ...prev,

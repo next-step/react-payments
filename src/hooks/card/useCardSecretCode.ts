@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from 'react';
 
-import { isNumber } from '@/utils';
 import { CARD } from '@/constants/card';
+import { isNumber } from '@/utils';
 
 export default function useCardSecretCode() {
   const [cardSecretCode, setCardSecretCode] = useState('');
