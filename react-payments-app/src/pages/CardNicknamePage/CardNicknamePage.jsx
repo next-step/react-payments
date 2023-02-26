@@ -1,7 +1,7 @@
-import Header from '../../components/Header/Header';
-import Card from '../../components/Card/Card';
-import CardNickname from '../../components/Input/CardNickname/CardNicknameInput';
-import Button from '../../components/Button/Button';
+import Header from '../../components/common/Header/Header';
+import Card from '../../components/domain/Card/Card';
+import CardNicknameInput from '../../components/domain/CardInput/CardNickname/CardNicknameInput';
+import Button from '../../components/common/Button/Button';
 
 const CardNicknamePage = () => {
   return (
@@ -17,7 +17,7 @@ const CardNicknamePage = () => {
           cardNickname={'생활비카드'}
         />
 
-        <CardNickname />
+        <CardNicknameInput />
 
         <Button title='완료' />
       </div>

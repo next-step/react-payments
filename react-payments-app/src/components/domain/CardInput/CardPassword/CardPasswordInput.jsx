@@ -24,7 +24,7 @@ const CardPasswordInput = ({ onChange }) => {
     updatedPassword[index] = value;
     setPassword(updatedPassword);
 
-    //TODO: 스토리북 액션 테스트 실패
+    // // TODO: 스토리북 액션 테스트 실패
     // if (index === 0) {
     //   nextElement.current.focus();
     // }
@@ -35,7 +35,10 @@ const CardPasswordInput = ({ onChange }) => {
   }, [password, error]);
 
   return (
-    <InputBox name='카드 비밀번호'>
+    <InputBox
+      name='카드 비밀번호'
+      boxClassName='input-box background-transparent'
+    >
       <Input
         className='input-basic w-15 mr-10'
         type='password'

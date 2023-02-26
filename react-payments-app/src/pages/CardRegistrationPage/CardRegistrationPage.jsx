@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useCard } from '../../store/CardContext';
-import { MAX_INPUT_LENGTH } from '../../common/constant';
+import { MAX_INPUT_LENGTH } from '../../constants/numbers';
 
-import Header from '../../components/Header/Header';
-import Card from '../../components/Card/Card';
-import CardForm from '../../components/Input/CardForm';
+import Header from '../../components/common/Header/Header';
+import Card from '../../components/domain/Card/Card';
+import CardForm from '../../components/domain/CardForm/CardForm';
 
 const CardRegistration = () => {
   const navigate = useNavigate();

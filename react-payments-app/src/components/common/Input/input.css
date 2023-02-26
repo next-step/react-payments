@@ -59,3 +59,7 @@
 
   border-bottom: 1px solid #383838;
 }
+
+.background-transparent {
+  background-color: transparent;
+}

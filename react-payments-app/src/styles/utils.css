@@ -14,9 +14,15 @@
 .ml-10 {
   margin-left: 2.5rem;
 }
+
 .mr-10 {
   margin-right: 2.5rem;
 }
+
+.mt-5 {
+  margin-top: 1.75rem;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -43,6 +49,10 @@
 
 .w-100 {
   width: 100%;
+}
+
+.w-90 {
+  width: 90%;
 }
 
 .w-75 {

@@ -2,6 +2,7 @@
 @import '../components/common/Input/input.css';
 @import '../components/common/Button/button.css';
 @import '../components/common/Modal/modal.css';
+@import '../components/common/Header/header.css';
 @import './utils.css';
 @import './wrap.css';
 
@@ -24,7 +25,7 @@ input {
 
 .root {
   background-color: #fff;
-  width: 375px;
+  width: inherit;
   min-width: 375px;
   height: 700px;
   position: relative;
