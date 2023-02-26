@@ -2,7 +2,7 @@ import React, { useRef, memo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
-import { checkIsArrayLast } from '@/utils';
+import { checkIsArrayLast, filterNumber } from '@/utils';
 
 import type { CardStateSetter } from '../utils';
 import type { CardNumbersState } from '../types';
@@ -25,7 +25,7 @@ function CardNumberInput({ cardNumbers, createCardNumberSetter }: CardNumberInpu
     <CardInputWrapperPure header="카드 번호">
       <div className="input-box">
         {cardNumbers.map((inputState, i) => {
-          const { key, type, value, checkIsValid } = inputState;
+          const { key, type, value, checkIsValid, checkIsAllowInput } = inputState;
           const isLast = checkIsArrayLast(cardNumbers, i);
           const isOverFourNumber = checkIsValid(value);
 
@@ -41,7 +41,16 @@ function CardNumberInput({ cardNumbers, createCardNumberSetter }: CardNumberInpu
                 ref={(inputRef) => {
                   cardNumberInputsRef.current[i] = inputRef;
                 }}
-                onChange={createInputChangeHandler({ state: inputState, setState: createCardNumberSetter(i) })}
+                onChange={createInputChangeHandler({
+                  props: { setState: createCardNumberSetter(i) },
+                  checkWhetherSetState: (e) => {
+                    const filteredNumber = filterNumber(e.currentTarget.value);
+                    return checkIsAllowInput(filteredNumber);
+                  },
+                  getNewValue: (e) => {
+                    return filterNumber(e.currentTarget.value);
+                  },
+                })}
               />
               <ConditionalComponentWrapper isRender={!isLast}>
                 <InputDivider isHide={isOverFourNumber && !isLast} className="dash">

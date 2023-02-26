@@ -1,22 +1,28 @@
 import type { ChangeEvent, FocusEvent } from 'react';
 
-import type { InputStateType } from '@/types/types';
-import { filterNumber } from '@/utils';
-
-interface UseInputOnChangeProps<T = string> {
-  state: InputStateType<T>;
+interface UseInputOnChangeProps {
   setState: (newState: any) => void;
 }
 
 function useInputEventHandler() {
   return {
     createInputChangeHandler:
-      ({ state, setState }: UseInputOnChangeProps<string>) =>
+      ({
+        props,
+        checkWhetherSetState,
+        getNewValue,
+      }: {
+        props: UseInputOnChangeProps;
+        checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => boolean;
+        getNewValue: (e: ChangeEvent<HTMLInputElement>) => string;
+      }) =>
       (e: ChangeEvent<HTMLInputElement>) => {
-        const numberString = filterNumber(e.currentTarget.value);
-        if (!state.checkIsAllowInput(numberString)) return;
-
-        setState(numberString);
+        const { setState } = props;
+        if (checkWhetherSetState(e)) {
+          const newValue = getNewValue(e);
+          console.log(newValue);
+          setState(newValue);
+        }
       },
     createInputBlurHandler:
       ({
@@ -24,17 +30,17 @@ function useInputEventHandler() {
         checkWhetherSetState,
         getNewValue,
       }: {
-        props: UseInputOnChangeProps<string>;
+        props: UseInputOnChangeProps;
         checkWhetherSetState: (e: FocusEvent<HTMLInputElement, Element>) => boolean;
         getNewValue: (e: FocusEvent<HTMLInputElement, Element>) => string;
       }) =>
       (e: FocusEvent<HTMLInputElement, Element>) => {
         const { setState } = props;
         if (checkWhetherSetState(e)) {
-          const paddedValue = getNewValue(e);
-          e.currentTarget.value = paddedValue;
+          const newValue = getNewValue(e);
+          e.currentTarget.value = newValue;
 
-          setState(paddedValue);
+          setState(newValue);
         }
       },
   };

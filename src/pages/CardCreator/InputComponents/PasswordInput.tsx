@@ -1,6 +1,7 @@
 import React, { memo, useRef } from 'react';
 
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
+import { filterNumber } from '@/utils';
 
 import type { CardStateSetter } from '../utils';
 import type { PasswordsState } from '../types';
@@ -22,7 +23,7 @@ function PasswordInput({ passwords, createPasswordSetter }: PasswordInputProps) 
     <CardInputWrapperPure header="카드 비밀번호">
       <div className="flex">
         {passwords.map((password, i) => {
-          const { key, value } = password;
+          const { key, value, checkIsAllowInput } = password;
 
           toTheNextElement(i, !!value && value.length < 2);
 
@@ -35,7 +36,16 @@ function PasswordInput({ passwords, createPasswordSetter }: PasswordInputProps) 
               ref={(ref) => {
                 passwordInputsRef.current[i] = ref;
               }}
-              onChange={createInputChangeHandler({ state: password, setState: createPasswordSetter(i) })}
+              onChange={createInputChangeHandler({
+                props: { setState: createPasswordSetter(i) },
+                checkWhetherSetState: (e) => {
+                  const filteredNumber = filterNumber(e.currentTarget.value);
+                  return checkIsAllowInput(filteredNumber);
+                },
+                getNewValue: (e) => {
+                  return filterNumber(e.currentTarget.value);
+                },
+              })}
             />
           );
         })}

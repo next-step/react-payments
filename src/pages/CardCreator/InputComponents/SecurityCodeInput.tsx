@@ -1,5 +1,7 @@
 import React, { memo } from 'react';
 
+import { filterNumber } from '@/utils';
+
 import type { CardStateSetter } from '../utils';
 import type { SecurityCodesState } from '../types';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
@@ -16,14 +18,23 @@ function SecurityCodeInput({ securityCodes, createSecurityCodeSetter }: Security
   return (
     <CardInputWrapperPure header="보안코드(CVC/CVV)">
       {securityCodes.map((securityCode, i) => {
-        const { value } = securityCode;
+        const { value, checkIsAllowInput } = securityCode;
 
         return (
           <input
             className="input-basic w-25"
             type="password"
             value={value ?? ''}
-            onChange={createInputChangeHandler({ state: securityCode, setState: createSecurityCodeSetter(i) })}
+            onChange={createInputChangeHandler({
+              props: { setState: createSecurityCodeSetter(i) },
+              checkWhetherSetState: (e) => {
+                const filteredNumber = filterNumber(e.currentTarget.value);
+                return checkIsAllowInput(filteredNumber);
+              },
+              getNewValue: (e) => {
+                return filterNumber(e.currentTarget.value);
+              },
+            })}
           />
         );
       })}

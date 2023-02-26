@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
-import { checkIsArrayLast } from '@/utils';
+import { checkIsArrayLast, filterNumber } from '@/utils';
 
 import type { CardStateSetter } from '../utils';
 import type { ExpireDatesState } from '../types';
@@ -21,7 +21,7 @@ function ExpireDateInput({ expireDates, createExpireDateSetter }: ExpireDateInpu
     <CardInputWrapperPure header="만료일">
       <div className="input-box w-50">
         {expireDates.map((expireDate, i) => {
-          const { key, value, placeholder, checkIsValid } = expireDate;
+          const { key, value, placeholder, checkIsValid, checkIsAllowInput } = expireDate;
 
           const isLast = checkIsArrayLast(expireDates, i);
           const isValueValid = checkIsValid(value);
@@ -34,9 +34,18 @@ function ExpireDateInput({ expireDates, createExpireDateSetter }: ExpireDateInpu
                 type="text"
                 value={value ?? ''}
                 placeholder={placeholder}
-                onChange={createInputChangeHandler({ state: expireDate, setState: createExpireDateSetter(i) })}
+                onChange={createInputChangeHandler({
+                  props: { setState: createExpireDateSetter(i) },
+                  checkWhetherSetState: (e) => {
+                    const filteredNumber = filterNumber(e.currentTarget.value);
+                    return checkIsAllowInput(filteredNumber);
+                  },
+                  getNewValue: (e) => {
+                    return filterNumber(e.currentTarget.value);
+                  },
+                })}
                 onBlur={createInputBlurHandler({
-                  props: { state: expireDate, setState: createExpireDateSetter(i) },
+                  props: { setState: createExpireDateSetter(i) },
                   checkWhetherSetState: (e) => {
                     const blurValue = e.currentTarget.value;
                     return !!blurValue && blurValue.length === 1;
