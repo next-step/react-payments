@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useId, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { LeftPointArrow } from "@/assets/icons";
@@ -16,6 +16,8 @@ import { useCardNumberInput } from "@/components/cards/CardNumberInput/hook";
 import { useCardOwnerInput } from "@/components/cards/CardOwnerInput/hook";
 import { useCardPasswordInput } from "@/components/cards/CardPasswordInput/hook";
 import { Button } from "@/components/common";
+import { useCardsContext } from "@/contexts";
+import type { CardItem } from "@/contexts/CardsContext";
 import { CardPageLayout } from "@/layouts/cards";
 
 import * as S from "./addCard.style";
@@ -31,7 +33,10 @@ function HeaderLeftPointArrow() {
 }
 
 export default function AddCard() {
+  const uuid = useId();
   const navigate = useNavigate();
+
+  const { dispatch } = useCardsContext();
 
   const { cardNumber, isValidCardNumber, onCardNumberChange } =
     useCardNumberInput({
@@ -57,8 +62,6 @@ export default function AddCard() {
       password1: "",
       password2: "",
     });
-
-  const HeaderStartDecorator = useMemo(() => <HeaderLeftPointArrow />, []);
 
   const cardExpireDateWithSlash = useMemo(
     () =>
@@ -88,17 +91,37 @@ export default function AddCard() {
     [cardNumber, cardExpireDate, cardOwnerName]
   );
 
-  const handleMoveToCompleteAddPage = () => {
-    const isSubmittable = [
+  const checkSubmittable = () => {
+    return [
       isValidCardNumber,
       isValidExpireDate,
       isValidOwnerName,
       isValidCvcNumber,
       isPasswordValid,
     ].every((value) => value);
-
-    if (isSubmittable) navigate("/cards/complete");
   };
+
+  const handleMoveToCompleteAddPage = () => {
+    const isSubmittable = checkSubmittable();
+
+    if (isSubmittable) {
+      const cardItem: CardItem = {
+        id: uuid,
+        ...cardInfo,
+        color: "red",
+      };
+
+      dispatch({ type: "ADD_CARD", payload: cardItem });
+
+      navigate("/cards/complete", {
+        state: {
+          cardInfo: cardItem,
+        },
+      });
+    }
+  };
+
+  const HeaderStartDecorator = useMemo(() => <HeaderLeftPointArrow />, []);
 
   return (
     <CardPageLayout>
