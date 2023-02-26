@@ -5,12 +5,13 @@ const Card = ({
   cardExpirationDate,
   cardNickname,
   cardStatus,
+  onClick,
 }) => {
   // TODO: 카드UI 표시 더 자연스럽게 로직 수정
   const cardNumbersToDisplay = hideLastEightNumbers(cardNumbers);
 
   return (
-    <div id='card'>
+    <div id='card' onClick={onClick}>
       <div className='flex-column-center mb-10'>
         <div className='card-box'>
           <div className={cardStatus}>

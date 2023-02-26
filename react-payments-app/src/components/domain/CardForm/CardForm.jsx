@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 // import Button from '../../common/Button/Button';
 import CardNumbersInput from '../CardInput/CardNumbers/CardNumbersInput';
 import CardExpirationDateInput from '../CardInput/CardExpirationDate/CardExpirationDateInput';
@@ -9,67 +7,37 @@ import CardPasswordInput from '../CardInput/CardPassword/CardPasswordInput';
 import Button from '../../common/Button/Button';
 import { useCard } from '../../../store/CardContext';
 
-const CardForm = ({ onSubmit, onChange }) => {
-  const { cardInfo, changeCardInfo } = useCard();
+const CardForm = () => {
+  const { cardInfo } = useCard();
 
-  const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
-  const [cardExpirationDate, setCardExpirationDate] = useState(['', '']);
-  const [cardOwner, setCardOwner] = useState('');
-  const [cardCVC, setCardCVC] = useState('');
-  const [cardPassword, setCardPassword] = useState(['', '']);
-  const [error, setError] = useState('');
+  // const isAllFilledOut = (cardInfo) => {
+  //   const { cardNumbers, cardExpirationDate, cardPassword, cardCVC } = cardInfo;
 
-  const handleCardNumbersChange = (cardNumbers, error) => {
-    setCardNumbers(cardNumbers);
-    setError(error);
-  };
-
-  const handleCardExpirationDateChange = (cardExpirationDate, error) => {
-    setCardExpirationDate(cardExpirationDate);
-    setError(error);
-  };
-
-  const handleCardOwnerChange = (cardOwner, error) => {
-    setCardOwner(cardOwner);
-    setError(error);
-  };
-
-  const handleCardPasswordChange = (password, error) => {
-    setCardPassword(password);
-    setError(error);
-  };
+  //   return (
+  //     cardCVC.length === MAX_INPUT_LENGTH.CVC &&
+  //     cardNumbers.every(
+  //       (part) => part.length === MAX_INPUT_LENGTH.CARD_NUMBER
+  //     ) &&
+  //     cardExpirationDate.every(
+  //       (part) => part.length === MAX_INPUT_LENGTH.DATE
+  //     ) &&
+  //     cardPassword.every((part) => part.length === MAX_INPUT_LENGTH.PW)
+  //   );
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    onSubmit({
-      cardNumbers,
-      cardExpirationDate,
-      cardOwner,
-      cardCVC,
-      cardPassword,
-    });
+    //TODO: validation
   };
-
-  useEffect(() => {
-    onChange({
-      cardNumbers,
-      cardExpirationDate,
-      cardOwner,
-      cardCVC,
-      cardPassword,
-    });
-  }, [cardNumbers, cardExpirationDate, cardOwner, cardCVC, cardPassword]);
 
   return (
     <div id='card-form' className='w-90'>
       <form>
-        <CardNumbersInput onChange={handleCardNumbersChange} />
-        <CardExpirationDateInput onChange={handleCardExpirationDateChange} />
-        <CardOwnerInput onChange={handleCardOwnerChange} />
+        <CardNumbersInput />
+        <CardExpirationDateInput />
+        <CardOwnerInput />
         <CardCVCInput />
-        <CardPasswordInput onChange={handleCardPasswordChange} />
-
+        <CardPasswordInput />
         <Button title='다음' type='submit' onClick={handleSubmit} />
       </form>
       <div id='card-form-label' style={{ color: 'red' }}>
