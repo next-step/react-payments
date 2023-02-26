@@ -20,9 +20,11 @@ function CardCreator() {
   const cardOwnerNameStateBundle = useExtendedState(cardOwnersInit);
   const [ownerName] = cardOwnerNameStateBundle;
 
-  const securityCodeStateBundle = useExtendedState(securityCodesInit);
+  const securityCodesStateBundle = useExtendedState(securityCodesInit);
+  const [securityCodes] = securityCodesStateBundle;
 
   const passwordsStateBundle = useExtendedState(passwordsInit);
+  const [passwords] = passwordsStateBundle;
 
   return (
     <div className="app">
@@ -42,11 +44,24 @@ function CardCreator() {
       <CardNumberInput cardNumbersStateBundle={cardNumbersStateBundle} />
       <ExpireDateInput expireDatesStateBundle={expireDatesStateBundle} />
       <CardOwnerInput cardOwnerNameStateBundle={cardOwnerNameStateBundle} />
-      <SecurityCodeInput cardOwnerNameStateBundle={securityCodeStateBundle} />
+      <SecurityCodeInput cardOwnerNameStateBundle={securityCodesStateBundle} />
       <PasswordInput passwordsStateBundle={passwordsStateBundle} />
       <div className="button-box">
-        {/* TODO: 넘어가기 전에 모든 state들의 validation 필요 */}
-        <Link to="/add-complete" className="button-text">
+        <Link
+          to="/add-complete"
+          className="button-text"
+          onClick={(e) => {
+            // TODO: 안된 input을 찾아 focus해주는 기능으로 UX 향상 가능. useRef로 담은 element와 연동
+            const isAllValid = [cardNumbers, expireDates, ownerName, securityCodes, passwords].some((states) => {
+              return states.some(({ value, checkIsValid }) => checkIsValid(value));
+            });
+
+            if (!isAllValid) {
+              e.preventDefault();
+              alert('카드 정보들을 모두 올바르게 입력해주세요!');
+            }
+          }}
+        >
           다음
         </Link>
       </div>
