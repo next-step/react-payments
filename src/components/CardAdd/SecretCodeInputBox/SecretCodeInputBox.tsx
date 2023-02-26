@@ -11,7 +11,7 @@ type SecretCodeInputBoxProps = {
 
 export default function SecretCodeInputBox({ cardSecretCode, onChange }: SecretCodeInputBoxProps) {
   return (
-    <Box className="input-container">
+    <Box className="my-4">
       <span className="input-title">보안코드(CVC/CVV)</span>
       <Input
         className="input-basic w-25"

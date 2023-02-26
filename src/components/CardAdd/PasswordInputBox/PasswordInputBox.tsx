@@ -13,7 +13,7 @@ export default function PasswordInputBox({ cardPassword, onChange }: PasswordInp
   const { num1, num2 } = cardPassword;
 
   return (
-    <Box className="input-container">
+    <Box className="my-4">
       <span className="input-title">카드 비밀번호</span>
       <Input
         className="input-basic w-15"

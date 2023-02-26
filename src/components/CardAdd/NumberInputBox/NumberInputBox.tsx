@@ -21,7 +21,7 @@ export default function NumberInputBox({ cardNumber, onChange }: NumberInputProp
   useInputFocus({ cardNumber, num1Ref, num2Ref, num3Ref, num4Ref });
 
   return (
-    <Box className="input-container">
+    <Box className="my-4">
       <span className="input-title">카드 번호</span>
       <Input
         type="number"
