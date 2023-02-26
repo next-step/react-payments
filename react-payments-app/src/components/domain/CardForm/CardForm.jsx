@@ -6,9 +6,11 @@ import CardExpirationDateInput from '../CardInput/CardExpirationDate/CardExpirat
 import CardOwnerInput from '../CardInput/CardOwner/CardOwnerInput';
 import CardCVCInput from '../CardInput/CardCVCInput/CardCVCInput';
 import CardPasswordInput from '../CardInput/CardPassword/CardPasswordInput';
+import Button from '../../common/Button/Button';
+import { useCard } from '../../../store/CardContext';
 
 const CardForm = ({ onSubmit, onChange }) => {
-  //TODO: 로직 구현
+  const { cardInfo, changeCardInfo } = useCard();
 
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [cardExpirationDate, setCardExpirationDate] = useState(['', '']);
@@ -32,54 +34,46 @@ const CardForm = ({ onSubmit, onChange }) => {
     setError(error);
   };
 
-  const handleCardCVCChange = (cardCVC, error) => {
-    setCardCVC(cardCVC);
-    setError(error);
-  };
-
   const handleCardPasswordChange = (password, error) => {
     setCardPassword(password);
     setError(error);
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  //   onSubmit({
-  //     cardNumbers,
-  //     cardExpirationDate,
-  //     cardOwner,
-  //     cardCVC,
-  //     cardPassword,
-  //   });
-  // };
+    onSubmit({
+      cardNumbers,
+      cardExpirationDate,
+      cardOwner,
+      cardCVC,
+      cardPassword,
+    });
+  };
 
-  // useEffect(() => {
-  //   onChange({
-  //     cardNumbers,
-  //     cardExpirationDate,
-  //     cardOwner,
-  //     cardCVC,
-  //     cardPassword,
-  //   });
-  // }, [cardNumbers, cardExpirationDate, cardOwner, cardCVC, cardPassword]);
+  useEffect(() => {
+    onChange({
+      cardNumbers,
+      cardExpirationDate,
+      cardOwner,
+      cardCVC,
+      cardPassword,
+    });
+  }, [cardNumbers, cardExpirationDate, cardOwner, cardCVC, cardPassword]);
 
   return (
-    <div id='card-form' className='w-100'>
+    <div id='card-form' className='w-90'>
       <form>
         <CardNumbersInput onChange={handleCardNumbersChange} />
         <CardExpirationDateInput onChange={handleCardExpirationDateChange} />
         <CardOwnerInput onChange={handleCardOwnerChange} />
-        <CardCVCInput onChange={handleCardCVCChange} />
+        <CardCVCInput />
         <CardPasswordInput onChange={handleCardPasswordChange} />
-        {/* 
-        
-        
-       
-        <Button title='다음' type='submit' onClick={handleSubmit} /> */}
+
+        <Button title='다음' type='submit' onClick={handleSubmit} />
       </form>
       <div id='card-form-label' style={{ color: 'red' }}>
-        {/* {error} */}
+        {cardInfo.error}
       </div>
     </div>
   );
