@@ -1,7 +1,7 @@
 import React, { Dispatch, useContext, useReducer } from 'react';
 import { handleDigit, handleExpire, handlePassword } from '../utils/form';
 
-type State = {
+export type State = {
   digits: { digit1: string; digit2: string; digit3: string; digit4: string };
   expire: string;
   name: string;

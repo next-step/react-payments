@@ -1,20 +1,8 @@
 import React from 'react';
 import { S } from '../styles/card';
+import { State } from '../context/CardContext';
 
-interface ICardProps {
-  digit1: string;
-  digit2: string;
-  digit3: string;
-  digit4: string;
-  name: string;
-  expire: string;
-}
-
-interface IProps {
-  data: ICardProps;
-}
-
-const CardPreview = ({ data }: IProps) => {
+const CardPreview = ({ digits, expire, name }: State) => {
   return (
     <S.CardBox>
       <S.EmptyCard>
@@ -24,16 +12,14 @@ const CardPreview = ({ data }: IProps) => {
         </S.CardMiddle>
         <S.CardBottom>
           <S.CardText>
-            {data.digit1 && data.digit1}
-            {data.digit2 && '-' + data.digit2}
-            {data.digit3 && '-' + '*'.repeat(data.digit3.length)}
-            {data.digit4 && '-' + '*'.repeat(data.digit4.length)}
+            {digits.digit1 && digits.digit1}
+            {digits.digit2 && '-' + digits.digit2}
+            {digits.digit3 && '-' + '*'.repeat(digits.digit3.length)}
+            {digits.digit4 && '-' + '*'.repeat(digits.digit4.length)}
           </S.CardText>
           <S.CardBottomInfo>
-            <S.CardText>{data.name || 'NAME'}</S.CardText>
-            <S.CardText className="card-text">
-              {data.expire || 'MM / YY'}
-            </S.CardText>
+            <S.CardText>{name || 'NAME'}</S.CardText>
+            <S.CardText className="card-text">{expire || 'MM / YY'}</S.CardText>
           </S.CardBottomInfo>
         </S.CardBottom>
       </S.EmptyCard>

@@ -14,12 +14,17 @@ const Template: ComponentStory<typeof CardPreview> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  data: {
+  digits: {
     digit1: '0000',
     digit2: '0000',
     digit3: '0000',
     digit4: '0000',
-    name: 'SEYOUNG',
-    expire: '11/26',
+  },
+  expire: '12/30',
+  name: '양세영',
+  cvc: '12',
+  passwords: {
+    password1: '1',
+    password2: '2',
   },
 };

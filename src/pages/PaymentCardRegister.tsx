@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import PaymentCardRegisterPrev from '../components/CardRegisterPrev';
-const PaymentCardRegister = () => {
-  const [isComplete, setIsComplete] = useState<boolean>(false);
+import React from 'react';
+import PaymentCardRegisterPrev from '../components/CardRegister';
 
-  return <PaymentCardRegisterPrev setIsComplete={setIsComplete} />;
+const PaymentCardRegister = () => {
+  return <PaymentCardRegisterPrev />;
 };
 
 export default PaymentCardRegister;

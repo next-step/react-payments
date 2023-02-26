@@ -1,23 +1,24 @@
-import React, { Dispatch } from 'react';
+import React from 'react';
 import Title from '../components/common/Title';
 import CardRegisterForm from '../components/CardForm';
 import Button from '../components/common/Button';
 import { useNavigate } from 'react-router-dom';
+import { useCardState } from '../context/CardContext';
+import CardPreview from './CardPreview';
 
-interface IProps {
-  setIsComplete: Dispatch<boolean>;
-}
-
-const PaymentCardRegisterPrev = ({ setIsComplete }: IProps) => {
+const PaymentCardRegisterPrev = () => {
   const navigate = useNavigate();
-  // const { state } = useContext(ContextCard);
+  const state = useCardState();
 
   return (
     <div className="app">
       <Title title={'< 카드 추가'} onClick={() => navigate('/')} />
-      {/*<CardPreview data={state} />*/}
+      <CardPreview {...state} />
       <CardRegisterForm />
-      <Button text={'다음'} onClick={() => setIsComplete(true)} />
+      <Button
+        text={'다음'}
+        onClick={() => navigate('/complete', { state: { isComplete: true } })}
+      />
     </div>
   );
 };
