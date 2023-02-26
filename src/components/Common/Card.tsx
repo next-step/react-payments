@@ -7,7 +7,6 @@ type CardProps = {
   cardOwner?: string;
   cardCompany?: string;
   cardNickname?: string;
-  isEmpty?: boolean;
   isBig?: boolean;
 };
 

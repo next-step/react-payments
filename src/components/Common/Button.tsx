@@ -9,10 +9,6 @@ function Button({ children, type = 'button', disabled = false, ...props }: Butto
       type={type}
       disabled={disabled}
       style={{
-        background: 'none',
-        outline: 'none',
-        border: 'none',
-        cursor: 'pointer',
         color: `${disabled ? 'gray' : 'black'}`,
       }}
       {...props}

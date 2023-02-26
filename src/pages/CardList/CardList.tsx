@@ -1,4 +1,4 @@
-import EmptyCard from '@/components/Common/EmptyCard';
+import { Button, Card } from '@/components/Common';
 import { useCardList } from '@/context/CardListContext';
 import { Link } from 'react-router-dom';
 
@@ -12,14 +12,41 @@ function CardList() {
           <div className="flex-center">
             <h2 className="page-title mb-10">보유 카드</h2>
           </div>
-          {cardList.map(card => (
-            <Link key={card.id} to={`/complete/${card.id}`}>
-              Card
-            </Link>
-          ))}
           <Link to="/add">
-            <EmptyCard />
+            <Button>카드추가</Button>
           </Link>
+          {cardList.map(
+            ({
+              id,
+              cardNumber1,
+              cardNumber2,
+              cardNumber3,
+              cardNumber4,
+              month,
+              year,
+              cardCompany,
+              cardOwner,
+              nickname,
+            }) => (
+              <Link key={id} to={`/complete/${id}`}>
+                <Card
+                  cardOwner={cardOwner}
+                  cardCompany={cardCompany}
+                  cardNumber={{
+                    cardNumber1,
+                    cardNumber2,
+                    cardNumber3,
+                    cardNumber4,
+                  }}
+                  expiration={{
+                    month,
+                    year,
+                  }}
+                  cardNickname={nickname}
+                />
+              </Link>
+            ),
+          )}
         </div>
       </div>
     </div>
