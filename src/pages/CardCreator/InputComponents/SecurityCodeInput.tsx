@@ -18,10 +18,11 @@ function SecurityCodeInput({ securityCodes, createSecurityCodeSetter }: Security
   return (
     <CardInputWrapperPure header="보안코드(CVC/CVV)">
       {securityCodes.map((securityCode, i) => {
-        const { value, checkIsAllowInput } = securityCode;
+        const { key, value, checkIsAllowInput } = securityCode;
 
         return (
           <input
+            key={key}
             className="input-basic w-25"
             type="password"
             value={value ?? ''}

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { Fragment, memo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
 import { checkIsArrayLast, filterNumber } from '@/utils';
@@ -27,9 +27,8 @@ function ExpireDateInput({ expireDates, createExpireDateSetter }: ExpireDateInpu
           const isValueValid = checkIsValid(value);
 
           return (
-            <>
+            <Fragment key={key}>
               <input
-                key={key}
                 className="input-basic"
                 type="text"
                 value={value ?? ''}
@@ -59,7 +58,7 @@ function ExpireDateInput({ expireDates, createExpireDateSetter }: ExpireDateInpu
               <ConditionalComponentWrapper isRender={!isLast}>
                 <InputDivider isHide={!isLast && isValueValid}>/</InputDivider>
               </ConditionalComponentWrapper>
-            </>
+            </Fragment>
           );
         })}
       </div>

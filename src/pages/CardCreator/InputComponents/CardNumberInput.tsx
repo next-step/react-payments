@@ -1,4 +1,4 @@
-import React, { useRef, memo } from 'react';
+import React, { useRef, memo, Fragment } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
@@ -32,9 +32,8 @@ function CardNumberInput({ cardNumbers, createCardNumberSetter }: CardNumberInpu
           toTheNextElement(i, !isLast && isOverFourNumber);
 
           return (
-            <>
+            <Fragment key={key}>
               <input
-                key={key}
                 type={type ?? 'text'}
                 value={value ?? ''}
                 className="input-basic text-black"
@@ -57,7 +56,7 @@ function CardNumberInput({ cardNumbers, createCardNumberSetter }: CardNumberInpu
                   -
                 </InputDivider>
               </ConditionalComponentWrapper>
-            </>
+            </Fragment>
           );
         })}
       </div>
