@@ -1,10 +1,22 @@
-import React from "react";
-import { characterCount, displayNumber } from "utils";
+import React, { RefObject, useId, useRef, useState } from "react";
+import {
+  characterCount,
+  formatNumber,
+  validateInput,
+  monthConverter,
+} from "utils";
 import Button from "components/common/Button";
 import Card from "components/common/Card";
 import InputContainer from "components/common/Input/InputContainer";
 import CompanyModal from "components/common/Modal";
-import { STEP, TYPE, TYPE_COMPLETED, TYPE_SELECT } from "constants/Payments";
+import {
+  CARD_INFO,
+  STEP,
+  TYPE,
+  TYPE_COMPLETED,
+  TYPE_SELECT,
+  VALIDATION_LIST,
+} from "constants/Payments";
 import Input from "components/common/Input";
 import {
   usePaymentsDispatch,
@@ -21,14 +33,14 @@ const CardForm = () => {
 
   const { newCardInfo } = usePaymentsState();
   const dispatch = usePaymentsDispatch();
-  const {
-    number = "",
-    name = "",
-    cvc = "",
-    expiry = "",
-    password1 = "",
-    password2 = "",
-  } = newCardInfo;
+
+  const [name, setName] = useState("");
+  const id = useId();
+  const numberInputRef = useRef<HTMLInputElement>(null);
+  const cvcInputRef = useRef<HTMLInputElement>(null);
+  const expiryInputRef = useRef<HTMLInputElement>(null);
+  const password1InputRef = useRef<HTMLInputElement>(null);
+  const password2InputRef = useRef<HTMLInputElement>(null);
 
   const handleNextButtonClick = () => {
     if (type !== TYPE_COMPLETED) {
@@ -48,7 +60,76 @@ const CardForm = () => {
     navigate(STEP.REGISTER_CARD_COMPLETED);
   };
 
-  const handleCardInputChange = () => {};
+  const formatInput = (
+    input: RefObject<HTMLInputElement>,
+    id: typeof CARD_INFO.NUMBER | typeof CARD_INFO.EXPIRY,
+    maxLength: number
+  ): string => {
+    const value = input.current?.value;
+    if (!value) {
+      return "";
+    }
+    if (value.length >= maxLength) {
+      return value;
+    }
+
+    if (id === CARD_INFO.NUMBER) {
+      return formatNumber({ input: value, nth: 5 });
+    }
+
+    if (value.length === 2) {
+      return formatNumber({
+        input: monthConverter(value),
+        nth: 3,
+        formatter: "/",
+      });
+    } else {
+      return value;
+    }
+  };
+
+  const getReference = (id: string) => {
+    switch (id) {
+      case CARD_INFO.NUMBER:
+        return numberInputRef;
+      case CARD_INFO.EXPIRY:
+        return expiryInputRef;
+      case CARD_INFO.CVC:
+        return cvcInputRef;
+      case CARD_INFO.PASSWORD1:
+        return password1InputRef;
+      case CARD_INFO.PASSWORD2:
+        return password2InputRef;
+      default:
+        throw new Error("해당하지 않는 reference 입니다.");
+    }
+  };
+
+  const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, maxLength } = e.target;
+
+    const ref = getReference(id);
+    if (!ref?.current?.value) {
+      return;
+    }
+
+    ref.current.value = validateInput({
+      ref,
+      id,
+      validationList: VALIDATION_LIST,
+    });
+
+    if (CARD_INFO.NUMBER || CARD_INFO.EXPIRY) {
+      ref.current.value = formatInput(ref, id, maxLength);
+    }
+  };
+
+  const handleCardNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setName(e.currentTarget.value);
+
+  const handleInputSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
 
   return (
     <>
@@ -58,7 +139,7 @@ const CardForm = () => {
         <h2>3️⃣ 카드 추가 - 입력 완료</h2>
       )}
       <div className="root">
-        <div className="app">
+        <form className="app" onSubmit={handleInputSubmit}>
           <h2 className="page-title">
             <span className="mr-2 cursor-pointer" onClick={handleGoBackClick}>
               {"<"}
@@ -73,11 +154,12 @@ const CardForm = () => {
 
           <InputContainer hasInputBox title="카드 번호">
             <Input
-              value={displayNumber({ input: number, startPoint: 2 })}
+              ref={numberInputRef}
+              // value={displayNumber({ input: number, startPoint: 2 })}
               type={"text"}
               id={"number"}
-              onChange={handleCardInputChange}
               maxLength={19}
+              onChange={handleCardInputChange}
             />
           </InputContainer>
 
@@ -87,24 +169,24 @@ const CardForm = () => {
             className={{ inputBoxClassName: "w-50" }}
           >
             <Input
-              value={expiry}
+              ref={expiryInputRef}
               type={"text"}
               id={"expiry"}
               placeholder={"MM / YY"}
-              onChange={handleCardInputChange}
               maxLength={5}
+              onChange={handleCardInputChange}
             />
           </InputContainer>
 
           <div className="relative">
             <InputContainer title="카드 소유자 이름(선택)">
               <Input
-                value={name}
                 type={"text"}
                 id={"name"}
+                value={name}
                 placeholder={"카드에 표시된 이름과 동일하게 입력하세요."}
-                onChange={handleCardInputChange}
                 maxLength={30}
+                onChange={handleCardNameChange}
               />
             </InputContainer>
             <span className="absolute t-0 r-0 input-title">
@@ -115,11 +197,11 @@ const CardForm = () => {
           <InputContainer title="보안코드(CVC/CVV)">
             <Input
               className="w-25"
-              value={cvc}
+              ref={cvcInputRef}
               type={"password"}
               id={"cvc"}
-              onChange={handleCardInputChange}
               maxLength={3}
+              onChange={handleCardInputChange}
             />
           </InputContainer>
 
@@ -127,25 +209,29 @@ const CardForm = () => {
             <>
               <Input
                 className="w-15 mr-1"
-                value={password1}
+                ref={password1InputRef}
                 type={"password"}
                 id={"password1"}
-                onChange={handleCardInputChange}
                 maxLength={1}
+                onChange={handleCardInputChange}
               />
               <Input
                 className="w-15 mr-1"
-                value={password2}
+                ref={password2InputRef}
                 type={"password"}
                 id={"password2"}
-                onChange={handleCardInputChange}
                 maxLength={1}
+                onChange={handleCardInputChange}
               />
             </>
           </InputContainer>
 
-          <Button label="다음" onClick={handleNextButtonClick} />
-        </div>
+          <Button
+            type={type === TYPE_COMPLETED ? "button" : "submit"}
+            label="다음"
+            onClick={handleNextButtonClick}
+          />
+        </form>
         {type === TYPE_SELECT && (
           <CompanyModal
             onClick={handleCompanyModalClick}
