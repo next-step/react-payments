@@ -26,6 +26,7 @@ module.exports = {
         functions: false,
       },
     ],
+    'no-shadow': 0,
 
     'react/jsx-filename-extension': [
       1,
