@@ -16,7 +16,8 @@ export default function ExpirationInputBox({ cardExpiration, onChange }: Expirat
     <Box className="my-4">
       <span className="input-title">만료일</span>
       <Input
-        className="input-basic w-25"
+        styleType="basic"
+        className=" w-25"
         name="month"
         value={month}
         onChange={onChange}
@@ -25,7 +26,8 @@ export default function ExpirationInputBox({ cardExpiration, onChange }: Expirat
         placeholder={CARD.EXPIRATION.PLACEHOLDER.MONTH}
       />
       <Input
-        className="input-basic w-25"
+        styleType="basic"
+        className=" w-25"
         name="year"
         value={year}
         onChange={onChange}

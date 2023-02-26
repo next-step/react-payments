@@ -16,7 +16,8 @@ export default function PasswordInputBox({ cardPassword, onChange }: PasswordInp
     <Box className="my-4">
       <span className="input-title">카드 비밀번호</span>
       <Input
-        className="input-basic w-15"
+        styleType="basic"
+        className=" w-15"
         maxLength={CARD.PASSWORD.LENGTH}
         name="num1"
         value={num1}
@@ -24,7 +25,8 @@ export default function PasswordInputBox({ cardPassword, onChange }: PasswordInp
         type="password"
       />
       <Input
-        className="input-basic w-15"
+        styleType="basic"
+        className=" w-15"
         maxLength={CARD.PASSWORD.LENGTH}
         name="num2"
         value={num2}
@@ -32,8 +34,8 @@ export default function PasswordInputBox({ cardPassword, onChange }: PasswordInp
         type="password"
       />
 
-      <Input className="input-fixed w-15" disabled value="•" type="password" />
-      <Input className="input-fixed w-15" disabled value="•" type="password" />
+      <Input styleType="fixed" className=" w-15" disabled value="•" type="password" />
+      <Input styleType="fixed" className="w-15" disabled value="•" type="password" />
     </Box>
   );
 }

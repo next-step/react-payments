@@ -24,40 +24,44 @@ export default function NumberInputBox({ cardNumber, onChange }: NumberInputProp
     <Box className="my-4">
       <span className="input-title">카드 번호</span>
       <Input
+        styleType="basic"
+        className="w-25"
         type="number"
         name="num1"
         ref={num1Ref}
         maxLength={CARD.NUMBER.LENGTH}
         value={num1}
         onChange={onChange}
-        className="input-basic w-25"
       />
       <Input
+        styleType="basic"
+        className="w-25"
         type="number"
         name="num2"
         ref={num2Ref}
         maxLength={CARD.NUMBER.LENGTH}
         value={num2}
         onChange={onChange}
-        className="input-basic w-25"
       />
       <Input
+        styleType="basic"
+        className="w-25"
         type="password"
         name="num3"
         ref={num3Ref}
         maxLength={CARD.NUMBER.LENGTH}
         value={num3}
         onChange={onChange}
-        className="input-basic w-25"
       />
       <Input
+        styleType="basic"
+        className="w-25"
         type="password"
         name="num4"
         ref={num4Ref}
         maxLength={CARD.NUMBER.LENGTH}
         value={num4}
         onChange={onChange}
-        className="input-basic w-25"
       />
     </Box>
   );

@@ -14,7 +14,8 @@ export default function SecretCodeInputBox({ cardSecretCode, onChange }: SecretC
     <Box className="my-4">
       <span className="input-title">보안코드(CVC/CVV)</span>
       <Input
-        className="input-basic w-25"
+        styleType="basic"
+        className=" w-25"
         maxLength={CARD.SECRET_CODE.LENGTH}
         value={cardSecretCode}
         onChange={onChange}

@@ -1,3 +1,5 @@
+import { Input } from '@/components/Common';
+
 export default function CardCompleted() {
   return (
     <div className="root">
@@ -25,7 +27,7 @@ export default function CardCompleted() {
           </div>
         </div>
         <div className="input-container flex-center w-100">
-          <input className="input-underline w-75" type="text" placeholder="카드의 별칭을 입력해주세요." />
+          <Input styleType="underline" className=" w-75" type="text" placeholder="카드의 별칭을 입력해주세요." />
         </div>
         <div className="button-box mt-50">
           <span className="button-text">다음</span>

@@ -14,13 +14,13 @@ export default function OwnerNameInputBox({ cardOwnerName, onChange }: OwnerName
 
   return (
     <Box className="my-4">
-      <Box display="flex" justify="center" align="center" className="flex-between">
+      <Box display="flex" justify="between" align="center" className="flex-between">
         <span className="input-title">카드 소유자 이름(선택)</span>
         <span className="input-title">{subTitle}</span>
       </Box>
       <Input
+        styleType="basic"
         type="text"
-        className="input-basic"
         maxLength={CARD.OWNER_NAME.LENGTH}
         value={cardOwnerName}
         onChange={onChange}
