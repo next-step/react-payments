@@ -8,13 +8,13 @@ import InputPassword from './form/InputPassword';
 
 const CardRegisterForm = () => {
   const dispatch = useCardDispatch();
-  const state = useCardState();
+  const { digits, expire, name, cvc, passwords } = useCardState();
 
   const onChangeDigit = (e: React.ChangeEvent) => {
     dispatch({
       type: 'SET_DIGIT',
       digits: {
-        ...state.digits,
+        ...digits,
         [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement)
           .value,
       },
@@ -45,7 +45,7 @@ const CardRegisterForm = () => {
     dispatch({
       type: 'SET_PASSWORD',
       passwords: {
-        ...state.passwords,
+        ...passwords,
         [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement)
           .value,
       },
@@ -54,11 +54,11 @@ const CardRegisterForm = () => {
 
   return (
     <>
-      <InputDigit onChange={onChangeDigit} value={state.digits} />
-      <InputExpire onChange={onChangeExpire} value={state.expire} />
-      <InputName onChange={onChangeName} value={state.name} />
-      <InputCvc onChange={onChangeCvc} value={state.cvc} />
-      <InputPassword onChange={onChangePassword} value={state.passwords} />
+      <InputDigit onChange={onChangeDigit} value={digits} />
+      <InputExpire onChange={onChangeExpire} value={expire} />
+      <InputName onChange={onChangeName} value={name} />
+      <InputCvc onChange={onChangeCvc} value={cvc} />
+      <InputPassword onChange={onChangePassword} value={passwords} />
     </>
   );
 };
