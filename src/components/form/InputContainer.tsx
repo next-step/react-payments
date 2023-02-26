@@ -1,4 +1,4 @@
-import { memo, ReactNode } from 'react';
+import { memo, PropsWithChildren, ReactNode } from 'react';
 
 interface IInputContainer {
   children: ReactNode;
@@ -9,7 +9,14 @@ interface IInputContainer {
   errorMessage?: string;
 }
 
-function InputContainer({ children, className = '', title, notInputBox, charLength, errorMessage }: IInputContainer) {
+function InputContainer({
+                          children,
+                          className = '',
+                          title,
+                          notInputBox,
+                          charLength,
+                          errorMessage
+                        }: PropsWithChildren<IInputContainer>) {
   return (
     <div className="input-container">
       <div className="flex-between">

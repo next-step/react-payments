@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useCallback, useMemo, useState } from 'react';
+import { createContext, PropsWithChildren, useCallback, useMemo, useState } from 'react';
 
 export interface IModalContext {
   modalState: boolean;
@@ -12,7 +12,7 @@ const initialContext: IModalContext = {
 
 export const ModalContext = createContext(initialContext);
 
-export default function ModalProvider({ children }: { children: ReactNode }) {
+export default function ModalProvider({ children }: PropsWithChildren) {
   const [modalState, setModalState] = useState(false);
 
   const showModal = useCallback((state = true) => {

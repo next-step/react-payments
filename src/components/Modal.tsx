@@ -1,11 +1,7 @@
-import { memo, ReactNode } from 'react';
+import { memo, PropsWithChildren } from 'react';
 import { useModalContext } from '../provider/modal';
 
-export interface IModal {
-  children: ReactNode;
-}
-
-function Modal({ children }: IModal) {
+function Modal({ children }: PropsWithChildren) {
   const { modalState } = useModalContext();
   if (!modalState) return;
 

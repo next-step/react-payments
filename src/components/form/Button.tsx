@@ -1,4 +1,4 @@
-import { memo, ReactNode } from 'react';
+import { memo, PropsWithChildren, ReactNode } from 'react';
 
 export interface IButton {
   children?: ReactNode;
@@ -7,7 +7,7 @@ export interface IButton {
   color?: string;
 }
 
-function Button({ children, onClick, className = '', color }: IButton) {
+function Button({ children, onClick, className = '', color }: PropsWithChildren<IButton>) {
   return (
     <div className={`button-box ${className}`}>
       <button
