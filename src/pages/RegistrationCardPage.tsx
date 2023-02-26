@@ -10,50 +10,46 @@ import {
   Button,
 } from 'components/@common';
 
+import useCardData from 'hooks/useCardData';
 import useRouter from 'routes/useRouter';
+
+import { isObjectComplete } from 'utils/validation';
 import { formatCardNumber, formatMMYY } from 'utils/format';
 import { setLocalStorageItem } from 'utils/localStorage';
 
 import { ReactComponent as CVCIcon } from 'assets/CVCIcon.svg';
+import { CreditCardType } from 'types/CreditCard';
 
 const RegistrationCardPage = () => {
   const { push } = useRouter();
-  const [holderName, setHolderName] = useState('');
-  const [number, setNumber] = useState('');
-  const [expiration, setExpiration] = useState('');
-  const [cvc, setCvc] = useState('');
-  const [passwords, setPasswords] = useState<string[]>([]);
+  const { card, changeCardInfo } = useCardData();
 
   const isSubmitEnabled = useMemo(() => {
-    if (holderName && number && expiration && cvc) {
-      if (passwords[0] && passwords[1] && passwords[2] && passwords[3]) {
-        return true;
-      }
-    }
-    return false;
-  }, [holderName, number, expiration, cvc, passwords]);
+    return isObjectComplete<CreditCardType>(card);
+  }, [{ ...card }]);
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
-    setHolderName(value);
+    changeCardInfo({ holderName: value });
   };
 
   const handleNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
     const formattedValue = formatCardNumber(value);
-    setNumber(formattedValue);
+
+    changeCardInfo({ number: formattedValue });
   };
 
   const handleExpiration = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
     const formattedValue = formatMMYY(value);
-    setExpiration(formattedValue);
+    changeCardInfo({ expiration: formattedValue });
   };
 
   const handleCVC = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
-    const sanitizedValue = value.replace(/[^0-9]/g, '');
-    setCvc(sanitizedValue);
+    const formattedValue = value.replace(/[^0-9]/g, '');
+    changeCardInfo({ cvc: formattedValue });
   };
 
   const handlePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,21 +59,14 @@ const RegistrationCardPage = () => {
     const { id } = target.dataset;
 
     if (!regex.test(value) || !id) return;
-    let copyPassword = [...passwords];
-    copyPassword[Number(id) - 1] = value;
-    setPasswords(copyPassword);
+    const newPassword = [...card.password];
+    newPassword[Number(id) - 1] = value;
+    changeCardInfo({ password: [...newPassword] });
   };
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const cardValues = {
-      holderName,
-      number,
-      expiration,
-      cvc,
-      password: passwords.join(''),
-    };
-    setLocalStorageItem('CardValues', cardValues);
+    setLocalStorageItem('CardValues', card);
     push('/card-name-input');
   };
 
@@ -87,9 +76,9 @@ const RegistrationCardPage = () => {
       <CreditCard
         color="brand02"
         name="파란색 카드"
-        holderName={holderName}
-        number={number}
-        expiration={expiration}
+        holderName={card?.holderName}
+        number={card?.number}
+        expiration={card?.expiration}
       />
       <Form onSubmit={onSubmit}>
         <FormFieldControl>
@@ -104,7 +93,7 @@ const RegistrationCardPage = () => {
               type="text"
               inputMode="numeric"
               maxLength={19}
-              value={number}
+              value={card?.number}
               onChange={handleNumber}
               className="w-100"
             />
@@ -117,7 +106,7 @@ const RegistrationCardPage = () => {
             <TextField
               placeholder="MM / YY"
               maxLength={5}
-              value={expiration}
+              value={card?.expiration}
               onChange={handleExpiration}
               className="w-30"
             />
@@ -130,13 +119,13 @@ const RegistrationCardPage = () => {
               카드 소유자 이름 (선택)
             </FormFieldControl.Label>
             <FormFieldControl.Label>
-              {holderName.length}/30
+              {card?.holderName?.length}/30
             </FormFieldControl.Label>
           </Box>
           <TextField
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
             maxLength={30}
-            value={holderName}
+            value={card?.holderName}
             onChange={handleName}
             className="w-100"
           />
@@ -159,7 +148,7 @@ const RegistrationCardPage = () => {
             inputMode="numeric"
             maxLength={3}
             placeholder="123"
-            value={cvc}
+            value={card?.cvc}
             onChange={handleCVC}
             className="w-30"
           />
@@ -173,7 +162,7 @@ const RegistrationCardPage = () => {
               inputMode="numeric"
               maxLength={1}
               data-id="1"
-              value={passwords[0] || ''}
+              value={card?.password?.[0] || ''}
               onChange={handlePassword}
               className="w-10 text-center"
             />
@@ -182,7 +171,7 @@ const RegistrationCardPage = () => {
               inputMode="numeric"
               maxLength={1}
               data-id="2"
-              value={passwords[1] || ''}
+              value={card?.password?.[1] || ''}
               onChange={handlePassword}
               className="w-10 text-center"
             />
@@ -191,7 +180,7 @@ const RegistrationCardPage = () => {
               inputMode="numeric"
               maxLength={1}
               data-id="3"
-              value={passwords[2] || ''}
+              value={card?.password?.[2] || ''}
               onChange={handlePassword}
               className="w-10 text-center"
             />
@@ -200,7 +189,7 @@ const RegistrationCardPage = () => {
               inputMode="numeric"
               maxLength={1}
               data-id="4"
-              value={passwords[3] || ''}
+              value={card?.password?.[3] || ''}
               onChange={handlePassword}
               className="w-10 text-center"
             />
