@@ -1,8 +1,17 @@
+.card-container {
+  overflow-y: scroll;
+  height: 540px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.card-container::-webkit-scrollbar {
+  display: none;
+}
+
 .card-box {
   display: flex;
   align-items: center;
   justify-content: center;
-
   margin: 10px 0;
 }
 
@@ -11,18 +20,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   width: 208px;
   height: 130px;
-
   font-size: 30px;
   color: #575757;
-
   background: #e5e5e5;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
-
   user-select: none;
+  padding: 8px;
 }
 
 .small-card {
@@ -30,10 +36,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   width: 208px;
   height: 130px;
-
+  padding: 8px;
   background: #94dacd;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -54,10 +59,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   width: 290px;
   height: 180px;
-
   background: #94dacd;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
@@ -144,8 +147,17 @@
   font-weight: 400;
 }
 
-.card-text__ellipsis {
+.card-text__ellipsis__small {
   width: 80px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-text__ellipsis__big {
+  width: 160px;
+  text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

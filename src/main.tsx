@@ -9,7 +9,9 @@ import {
   CardPasswordProvider,
   CardSecretCodeProvider,
   CardSelectModalProvider,
+  CardAliasProvider,
 } from './context';
+import { CardListProvider } from './context/CardList';
 
 import './index.css';
 
@@ -21,7 +23,11 @@ createRoot(document.getElementById('root') as HTMLElement).render(
           <CardOwnerNameProvider>
             <CardSecretCodeProvider>
               <CardPasswordProvider>
-                <App />
+                <CardAliasProvider>
+                  <CardListProvider>
+                    <App />
+                  </CardListProvider>
+                </CardAliasProvider>
               </CardPasswordProvider>
             </CardSecretCodeProvider>
           </CardOwnerNameProvider>

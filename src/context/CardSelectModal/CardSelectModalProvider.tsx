@@ -5,7 +5,9 @@ import { SelectedCard } from '@/types/card';
 type InitValue = {
   isModalOpen: boolean;
   selectedCard: SelectedCard;
+  setSelectedCard: (card: SelectedCard) => void;
   카드사가선택된: boolean;
+  resetSelectedModal: () => void;
   handleClickOpenModal: () => void;
   handleClickCloseModal: () => void;
   handleClickCard: ({ name, color }: { name: string; color: string }) => void;
@@ -14,7 +16,9 @@ type InitValue = {
 const initValue: InitValue = {
   isModalOpen: true,
   selectedCard: { name: '', color: '' },
+  setSelectedCard: () => null,
   카드사가선택된: false,
+  resetSelectedModal: () => null,
   handleClickOpenModal: () => null,
   handleClickCloseModal: () => null,
   handleClickCard: () => null,
@@ -39,6 +43,11 @@ export default function CardSelectModalProvider({ children }: PropsWithChildren)
     setIsModalOpen(false);
   }, []);
 
+  const resetSelectedModal = useCallback(() => {
+    setSelectedCard({ name: '', color: '' });
+    setIsModalOpen(true);
+  }, []);
+
   const handleClickCard = useCallback(({ name, color }: { name: string; color: string }) => {
     if (!name || !color) {
       return;
@@ -49,8 +58,25 @@ export default function CardSelectModalProvider({ children }: PropsWithChildren)
   }, []);
 
   const contextValue = useMemo(
-    () => ({ isModalOpen, selectedCard, 카드사가선택된, handleClickOpenModal, handleClickCloseModal, handleClickCard }),
-    [isModalOpen, selectedCard, 카드사가선택된, handleClickOpenModal, handleClickCloseModal, handleClickCard],
+    () => ({
+      isModalOpen,
+      selectedCard,
+      setSelectedCard,
+      카드사가선택된,
+      resetSelectedModal,
+      handleClickOpenModal,
+      handleClickCloseModal,
+      handleClickCard,
+    }),
+    [
+      isModalOpen,
+      selectedCard,
+      카드사가선택된,
+      resetSelectedModal,
+      handleClickOpenModal,
+      handleClickCloseModal,
+      handleClickCard,
+    ],
   );
 
   return <CardSelectModalContext.Provider value={contextValue}>{children}</CardSelectModalContext.Provider>;

@@ -1,12 +1,11 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-// input-container button-box flex-between page-title
 import { ElementType, PropsWithChildren } from 'react';
 import classnames from 'classnames';
 
 type BoxProps<T extends ElementType> = {
   as?: T;
   type?: 'input-box' | 'button-box';
-  display?: 'block' | 'inline-block' | 'flex';
+  display?: 'block' | 'inline-block' | 'flex' | 'flex-col';
   justify?: 'center' | 'between';
   align?: 'center';
   className?: string;

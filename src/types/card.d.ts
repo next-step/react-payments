@@ -1,3 +1,13 @@
+export type Card = {
+  cardNumber: CardNumber;
+  cardExpiration: CardExpiration;
+  cardOwnerName: CardOwnerName;
+  cardSecretCode: CardSecretCode;
+  cardPassword: CardPassword;
+  selectedCard: SelectedCard;
+  cardAlias: CardAlias;
+};
+
 export type CardNumber = {
   num1: string;
   num2: string;
@@ -23,3 +33,5 @@ export type SelectedCard = {
   name: string;
   color: string;
 };
+
+export type CardAlias = string;

@@ -6,7 +6,9 @@ import { CardNumber } from '@/types/card';
 
 type InitValue = {
   cardNumber: CardNumber;
+  setCardNumber: (cardNumber: CardNumber) => void;
   카드번호가모두입력된: boolean;
+  resetCardNumber: () => void;
   handleChangeCardNumber: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -17,7 +19,9 @@ const initValue: InitValue = {
     num3: '',
     num4: '',
   },
+  setCardNumber: () => null,
   카드번호가모두입력된: false,
+  resetCardNumber: () => null,
   handleChangeCardNumber: () => null,
 };
 
@@ -32,6 +36,15 @@ export default function CardNumberProvider({ children }: PropsWithChildren) {
   });
   const cardNumbersLength = Object.values(cardNumber).map((num) => num.length);
   const 카드번호가모두입력된 = cardNumbersLength.every((length) => length === CARD.NUMBER.LENGTH);
+
+  const resetCardNumber = useCallback(() => {
+    setCardNumber({
+      num1: '',
+      num2: '',
+      num3: '',
+      num4: '',
+    });
+  }, []);
 
   const handleChangeCardNumber = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,8 +61,8 @@ export default function CardNumberProvider({ children }: PropsWithChildren) {
   );
 
   const contextValue = useMemo(
-    () => ({ cardNumber, 카드번호가모두입력된, handleChangeCardNumber }),
-    [cardNumber, 카드번호가모두입력된, handleChangeCardNumber],
+    () => ({ cardNumber, setCardNumber, 카드번호가모두입력된, resetCardNumber, handleChangeCardNumber }),
+    [cardNumber, 카드번호가모두입력된, resetCardNumber, handleChangeCardNumber],
   );
 
   return <CardNumberContext.Provider value={contextValue}>{children}</CardNumberContext.Provider>;

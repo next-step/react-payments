@@ -25,6 +25,11 @@ export const CARD = {
     PLACEHOLDER: 'NAME',
   },
 
+  ALIAS: {
+    LENGTH: 10,
+    PLACEHOLDER: '카드 별칭 (선택)',
+  },
+
   COMPANY: [
     { name: '은규', color: '#FBCD58' },
     { name: '포코', color: '#E24141' },

@@ -2,6 +2,11 @@
   display: flex;
 }
 
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
 .flex-center {
   display: flex;
   justify-content: center;
@@ -48,6 +53,10 @@
 
 .my-4 {
   margin: 16px 0;
+}
+
+.mt-2 {
+  margin-top: 8px;
 }
 
 .mt-10 {

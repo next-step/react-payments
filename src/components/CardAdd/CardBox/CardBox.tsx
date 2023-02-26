@@ -47,7 +47,7 @@ export default function CardBox() {
         </div>
         <div className="card-bottom">
           <div className="card-bottom__info">
-            <span className="card-text card-text__ellipsis">{cardOwnerName || CARD.OWNER_NAME.PLACEHOLDER}</span>
+            <span className="card-text card-text__ellipsis_small">{cardOwnerName || CARD.OWNER_NAME.PLACEHOLDER}</span>
             <span className="card-text">
               {month || CARD.EXPIRATION.PLACEHOLDER.MONTH} / {year || CARD.EXPIRATION.PLACEHOLDER.YEAR}
             </span>
