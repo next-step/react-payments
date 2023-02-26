@@ -1,7 +1,5 @@
 import React, { memo, useMemo } from 'react';
 
-import { filterNumber } from '@/utils';
-
 import type { CardOwnersState } from '../types';
 import type { CardStateSetter } from '../utils';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
