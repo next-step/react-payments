@@ -8,6 +8,7 @@ import useExtendedState from '@/hooks/useExtendedState';
 import { CardNumberInput, CardOwnerInput, ExpireDateInput, PasswordInput, SecurityCodeInput } from './InputComponents';
 import { cardNumbersInit, expireDatesInit, passwordsInit, cardOwnersInit, securityCodesInit } from './CardCreatorInits';
 
+// TODO: rendering 최적화 적용하기.
 function CardCreator() {
   // FIXME: 전권을 넘겨주는 것 보다는 제한된 권한을 넘겨주는 것이 좋을 것 같다.
   const cardNumbersStateBundle = useExtendedState(cardNumbersInit);

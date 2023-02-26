@@ -3,11 +3,12 @@ import React, { useRef } from 'react';
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
 import { checkIsArrayLast  } from '@/utils';
 import useExtendedState from '@/hooks/useExtendedState';
+import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 
 import type { CardNumbersState } from '../types';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
-import { InputDivider } from './InputDivider';
-import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
+import { InputDivider } from './components/InputDivider';
+import { CardInputWrapperPure } from './components/CardInputWrapper';
 
 interface CardNumberInputProps {
   // prettier-ignore
@@ -23,9 +24,7 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
   const { toTheNextElement } = useSequentialFocusWithElements(cardNumberInputsRef);
 
   return (
-    // TODO: Input들의 Wrapper는 모두 겹치기 때문에, 컴포넌트화 가능.
-    <div className="input-container">
-      <span className="input-title">카드 번호</span>
+    <CardInputWrapperPure header="카드 번호">
       <div className="input-box">
         {cardNumbers.map((inputState, i) => {
           const { key, type, value, checkIsValid } = inputState;
@@ -53,7 +52,7 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
           );
         })}
       </div>
-    </div>
+    </CardInputWrapperPure>
   );
 }
 

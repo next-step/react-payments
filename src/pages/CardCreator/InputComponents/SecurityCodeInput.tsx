@@ -4,6 +4,7 @@ import useExtendedState from '@/hooks/useExtendedState';
 
 import { SecurityCodesState } from '../types';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
+import { CardInputWrapperPure } from './components/CardInputWrapper';
 
 interface SecurityCodeInputProps {
   // prettier-ignore
@@ -19,8 +20,7 @@ function SecurityCodeInput({
   const { createInputChangeHandler } = useInputEventHandler();
 
   return (
-    <div className="input-container">
-      <span className="input-title">보안코드(CVC/CVV)</span>
+    <CardInputWrapperPure header="보안코드(CVC/CVV)">
       {
         securityCodes.map((securityCode, i) => {
           const { value } = securityCode;
@@ -35,7 +35,7 @@ function SecurityCodeInput({
           );
         })
       }
-    </div>
+    </CardInputWrapperPure>
   );
 }
 

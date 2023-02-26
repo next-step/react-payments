@@ -1,10 +1,11 @@
 import React, { useRef } from 'react';
 
 import type useExtendedState from '@/hooks/useExtendedState';
+import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 
 import { PasswordsState } from '../types';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
-import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
+import { CardInputWrapperPure } from './components/CardInputWrapper';
 
 interface PasswordInputProps {
   // prettier-ignore
@@ -22,8 +23,7 @@ function PasswordInput({
   const { toTheNextElement } = useSequentialFocusWithElements(passwordInputsRef);
 
   return (
-    <div className="input-container">
-      <span className="input-title">카드 비밀번호</span>
+    <CardInputWrapperPure header="카드 비밀번호">
       <div className="flex">
         {passwords.map((password, i) => {
           const { key, value } = password;
@@ -46,7 +46,7 @@ function PasswordInput({
         <span className="flex-center w-15 mr-10">•</span>
         <span className="flex-center w-15 mr-10">•</span>
       </div>
-    </div>
+    </CardInputWrapperPure>
   );
 }
 

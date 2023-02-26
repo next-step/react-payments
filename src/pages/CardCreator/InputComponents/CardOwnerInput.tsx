@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import useExtendedState from '@/hooks/useExtendedState';
 
 import { CardOwnersState } from '../types';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
+import { CardInputWrapperPure } from './components/CardInputWrapper';
 
 interface CardOwnerInputProps {
   // prettier-ignore
@@ -19,16 +20,10 @@ function CardOwnerInput({
 
   const { createInputChangeHandler } = useInputEventHandler();
 
+  const inputHeader = useMemo(() => ['카드 소유자 이름(선택)', `${ownerName?.length || 0} / 30`], [ownerName]);
+
   return (
-    <div className="input-container">
-      <div className="flex-between">
-        <span className="input-title">카드 소유자 이름(선택)</span>
-        <div className="input-title">
-          <span>{ownerName?.length || 0}</span>
-          <span>/</span>
-          <span>30</span>
-        </div>
-      </div>
+    <CardInputWrapperPure header={inputHeader} >
       <input
         type="text"
         className="input-basic"
@@ -37,7 +32,7 @@ function CardOwnerInput({
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         onChange={createInputChangeHandler({ state: ownerNames[0], i: 0, setState: setOwnersName })}
       />
-    </div>
+    </CardInputWrapperPure>
   );
 }
 

@@ -6,7 +6,8 @@ import { checkIsArrayLast  } from '@/utils';
 
 import { ExpireDatesState } from '../types';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
-import { InputDivider } from './InputDivider';
+import { InputDivider } from './components/InputDivider';
+import { CardInputWrapperPure } from './components/CardInputWrapper';
 
 interface ExpireDateInputProps {
   // prettier-ignore
@@ -22,8 +23,7 @@ function ExpireDateInput({
   const { createInputBlurHandler, createInputChangeHandler } = useInputEventHandler();
 
   return (
-    <div className="input-container">
-      <span className="input-title">만료일</span>
+    <CardInputWrapperPure header="만료일">
       <div className="input-box w-50">
         {expireDates.map((expireDate, i) => {
           const { key, value, placeholder, checkIsValid } = expireDate;
@@ -59,7 +59,7 @@ function ExpireDateInput({
           );
         })}
       </div>
-    </div>
+    </CardInputWrapperPure>
   );
 }
 
