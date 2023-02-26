@@ -18,9 +18,12 @@ export const validateExpire = (digit: string) => {
 };
 
 const insertSlash = (value: string, length: number) => {
+  const DIGIT_BEFORE_SLASH_LENGTH = 3;
+  const DIGIT_AFTER_SLASH_LENGTH = 5;
+
   let result = '';
-  if (length < 3) result = value;
-  else if (length < 5) {
+  if (length < DIGIT_BEFORE_SLASH_LENGTH) result = value;
+  else if (length < DIGIT_AFTER_SLASH_LENGTH) {
     result += value.substring(0, 2);
     result += SLASH;
     result += value.substring(2);
@@ -36,7 +39,7 @@ const insertSlash = (value: string, length: number) => {
 export const validatePassword = (digit: string, targetName: string) => {
   const value = digit.replace(/\D+/g, '');
   nextFocus(value, targetName, 1);
-  return digit.replace(/\D+/g, '');
+  return value;
 };
 
 const nextFocus = (
