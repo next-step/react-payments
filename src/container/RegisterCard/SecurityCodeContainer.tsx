@@ -1,7 +1,7 @@
 import { Input, InputContainer } from '../../components/form';
 import { IRegisterCard } from '../../pages/RegisterCard';
 import { memo, useCallback, useRef, useState } from 'react';
-import { onlyNumber } from '../../utils/filter';
+import { onlyNumber } from '../../utils/keyInterceptor';
 
 const MAX_LENGTH = 3;
 const VALIDATE_ERROR = '보안코드를 올바르게 입력 해 주세요.';
@@ -11,8 +11,7 @@ function SecurityCodeContainer({ onChange }: IRegisterCard) {
   const securityCodeRef = useRef<HTMLInputElement>(null);
 
   const handleChange = useCallback(() => {
-    const cardSecurityCode = onlyNumber(securityCodeRef.current.value);
-    securityCodeRef.current.value = cardSecurityCode;
+    const cardSecurityCode = securityCodeRef.current.value;
 
     onChange({ cardSecurityCode: Number(cardSecurityCode) });
     setErrorMessage(cardSecurityCode.length !== MAX_LENGTH ? VALIDATE_ERROR : '');
@@ -25,6 +24,7 @@ function SecurityCodeContainer({ onChange }: IRegisterCard) {
         maxLength={3}
         ref={securityCodeRef}
         onChange={handleChange}
+        onKeyDown={onlyNumber}
       />
     </InputContainer>
   );

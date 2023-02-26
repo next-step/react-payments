@@ -1,7 +1,7 @@
 import { memo, useCallback, useState } from 'react';
 import { Input, InputContainer } from '../../components/form';
 import { IRegisterCard } from '../../pages/RegisterCard';
-import { onlyNumber } from '../../utils/filter';
+import { onlyNumber } from '../../utils/keyInterceptor';
 import { useFocusRef, useRefs } from '../../hooks';
 
 const MAX_LENGTH = 4;
@@ -13,10 +13,7 @@ function CardNumberContainer({ onChange }: IRegisterCard) {
   const [cardNumberRef, getCardRefs] = useRefs<HTMLInputElement>([0, 1, 2, 3]);
 
   const handleChange = useCallback(() => {
-    const cardNumber = getCardRefs().map((item) => {
-      item.value = onlyNumber(item.value);
-      return item.value;
-    }).join('');
+    const cardNumber = getCardRefs().map((item) => item.value).join('');
 
     onChange({ cardNumber });
     setErrorMessage(cardNumber.length === CARD_LENGTH ? '' : VALIDATE_ERROR);
@@ -32,6 +29,7 @@ function CardNumberContainer({ onChange }: IRegisterCard) {
         onChange={handleChange}
         maxLength={MAX_LENGTH}
         nextFocus={useFocusRef(cardNumberRef[1])}
+        onKeyDown={onlyNumber}
       />
       -
       <Input
@@ -39,6 +37,7 @@ function CardNumberContainer({ onChange }: IRegisterCard) {
         onChange={handleChange}
         maxLength={MAX_LENGTH}
         nextFocus={useFocusRef(cardNumberRef[2])}
+        onKeyDown={onlyNumber}
       />
       -
       <Input
@@ -47,6 +46,7 @@ function CardNumberContainer({ onChange }: IRegisterCard) {
         type="password"
         maxLength={MAX_LENGTH}
         nextFocus={useFocusRef(cardNumberRef[3])}
+        onKeyDown={onlyNumber}
       />
       -
       <Input
@@ -54,6 +54,7 @@ function CardNumberContainer({ onChange }: IRegisterCard) {
         onChange={handleChange}
         type="password"
         maxLength={MAX_LENGTH}
+        onKeyDown={onlyNumber}
       />
     </InputContainer>
   );

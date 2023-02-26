@@ -12,14 +12,6 @@ export function filterExpiredDate(expiredDate: string) {
   return expiredDate?.match(/[0-9]{1,2}/g)?.join(' / ');
 }
 
-export function onlyNumber(text: string) {
-  return text.replace(/[^0-9]/g, '');
-}
-
-export function onlyString(text: string) {
-  return text.replace(/[^a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣\s]/g, '');
-}
-
 export function formToArray(data: object): string[] {
   return Object.values(data).map((item) => item.value);
 }

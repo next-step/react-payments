@@ -1,5 +1,4 @@
 import { Input, InputContainer } from '../../components/form';
-import { onlyString } from '../../utils/filter';
 import { IRegisterCard } from '../../pages/RegisterCard';
 import { memo, useCallback, useRef, useState } from 'react';
 
@@ -10,10 +9,9 @@ function CardHolderContainer({ onChange }: IRegisterCard) {
   const [count, setCount] = useState(0);
 
   const handleChange = useCallback(() => {
-    const cardHolder = onlyString(cardHolderRef?.current.value);
-    setCount(cardHolder.length);
+    const cardHolder = cardHolderRef?.current.value;
 
-    cardHolderRef.current.value = cardHolder;
+    setCount(cardHolder.length);
     onChange({ cardHolder });
   }, []);
 

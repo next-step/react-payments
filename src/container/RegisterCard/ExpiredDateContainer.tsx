@@ -3,7 +3,7 @@ import { Input, InputContainer } from '../../components/form';
 import { memo, useCallback, useState } from 'react';
 import { IRegisterCard } from '../../pages/RegisterCard';
 import { Validator } from '../../domain';
-import { onlyNumber } from '../../utils/filter';
+import { onlyNumber } from '../../utils/keyInterceptor';
 
 const MAX_LENGTH = 2;
 const VALIDATE_ERROR = {
@@ -17,10 +17,7 @@ function ExpiredDateContainer({ onChange }: IRegisterCard) {
   const [expiredDateRef, getExpiredDateRefs] = useRefs<HTMLInputElement>(['month', 'year']);
 
   const handleChange = useCallback(() => {
-    const expiredDate = getExpiredDateRefs().map((item) => {
-      item.value = onlyNumber(item.value);
-      return item.value;
-    });
+    const expiredDate = getExpiredDateRefs().map((item) => item.value);
     const [month, year] = expiredDate;
 
     onChange({ expiredDate: expiredDate.join('') });
@@ -41,6 +38,7 @@ function ExpiredDateContainer({ onChange }: IRegisterCard) {
         nextFocus={useFocusRef(expiredDateRef.year)}
         maxLength={MAX_LENGTH}
         onChange={handleChange}
+        onKeyDown={onlyNumber}
       />
       /
       <Input
@@ -48,6 +46,7 @@ function ExpiredDateContainer({ onChange }: IRegisterCard) {
         placeholder="YY"
         maxLength={MAX_LENGTH}
         onChange={handleChange}
+        onKeyDown={onlyNumber}
       />
     </InputContainer>
   );

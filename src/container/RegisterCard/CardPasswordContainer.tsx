@@ -2,7 +2,7 @@ import { Input, InputContainer } from '../../components/form';
 import { IRegisterCard } from '../../pages/RegisterCard';
 import { memo, useCallback, useState } from 'react';
 import { useFocusRef, useRefs } from '../../hooks';
-import { onlyNumber } from '../../utils/filter';
+import { onlyNumber } from '../../utils/keyInterceptor';
 
 const MAX_LENGTH = 1;
 const VALIDATE_ERROR = '카드 비밀번호 앞 2자리를 입력 해 주세요.';
@@ -12,10 +12,7 @@ function CardPasswordContainer({ onChange }: IRegisterCard) {
   const [passwordRef, getPasswordRef] = useRefs<HTMLInputElement>([0, 1]);
 
   const handleChange = useCallback(() => {
-    const cardPassword = getPasswordRef().map((item) => {
-      item.value = onlyNumber(item.value);
-      return item.value;
-    }).join('');
+    const cardPassword = getPasswordRef().map((item) => item.value).join('');
 
     onChange({ cardPassword: Number(cardPassword) });
     setErrorMessage(cardPassword.length !== MAX_LENGTH * 2 ? VALIDATE_ERROR : '');
@@ -35,6 +32,7 @@ function CardPasswordContainer({ onChange }: IRegisterCard) {
         ref={passwordRef[0]}
         nextFocus={useFocusRef(passwordRef[1])}
         onChange={handleChange}
+        onKeyDown={onlyNumber}
       />
       <Input
         ref={passwordRef[1]}
@@ -42,6 +40,7 @@ function CardPasswordContainer({ onChange }: IRegisterCard) {
         maxLength={MAX_LENGTH}
         className="w-15"
         onChange={handleChange}
+        onKeyDown={onlyNumber}
       />
       <p className="flex-center w-15">•</p>
       <p className="flex-center w-15">•</p>
