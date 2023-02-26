@@ -10,64 +10,55 @@ const CardRegisterForm = () => {
   const dispatch = useCardDispatch();
   const state = useCardState();
 
+  const onChangeDigit = (e: React.ChangeEvent) => {
+    dispatch({
+      type: 'SET_DIGIT',
+      digits: {
+        ...state.digits,
+        [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement)
+          .value,
+      },
+    });
+  };
+
+  const onChangeExpire = (e: React.ChangeEvent) => {
+    dispatch({
+      type: 'SET_EXPIRE',
+      expire: (e.target as HTMLInputElement).value,
+    });
+  };
+
+  const onChangeName = (e: React.ChangeEvent) => {
+    dispatch({
+      type: 'SET_NAME',
+      name: (e.target as HTMLInputElement).value,
+    });
+  };
+
+  const onChangeCvc = (e: React.ChangeEvent) => {
+    dispatch({
+      type: 'SET_CVC',
+      cvc: (e.target as HTMLInputElement).value,
+    });
+  };
+  const onChangePassword = (e: React.ChangeEvent) => {
+    dispatch({
+      type: 'SET_PASSWORD',
+      passwords: {
+        ...state.passwords,
+        [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement)
+          .value,
+      },
+    });
+  };
+
   return (
     <>
-      <InputDigit
-        onChange={(e: React.ChangeEvent) =>
-          dispatch({
-            type: 'SET_DIGIT',
-            digits: {
-              ...state.digits,
-              [(e.target as HTMLInputElement).name]: (
-                e.target as HTMLInputElement
-              ).value,
-            },
-          })
-        }
-        value={state.digits}
-      />
-      <InputExpire
-        onChange={(e: React.ChangeEvent) =>
-          dispatch({
-            type: 'SET_EXPIRE',
-            expire: (e.target as HTMLInputElement).value,
-          })
-        }
-        value={state.expire}
-      />
-      <InputName
-        onChange={(e: React.ChangeEvent) =>
-          dispatch({
-            type: 'SET_NAME',
-            name: (e.target as HTMLInputElement).value,
-          })
-        }
-        value={state.name}
-      />
-      <InputCvc
-        onChange={(e: React.ChangeEvent) =>
-          dispatch({
-            type: 'SET_CVC',
-            cvc: (e.target as HTMLInputElement).value,
-          })
-        }
-        value={state.cvc}
-      />
-
-      <InputPassword
-        onChange={(e: React.ChangeEvent) =>
-          dispatch({
-            type: 'SET_PASSWORD',
-            passwords: {
-              ...state.passwords,
-              [(e.target as HTMLInputElement).name]: (
-                e.target as HTMLInputElement
-              ).value,
-            },
-          })
-        }
-        value={state.passwords}
-      />
+      <InputDigit onChange={onChangeDigit} value={state.digits} />
+      <InputExpire onChange={onChangeExpire} value={state.expire} />
+      <InputName onChange={onChangeName} value={state.name} />
+      <InputCvc onChange={onChangeCvc} value={state.cvc} />
+      <InputPassword onChange={onChangePassword} value={state.passwords} />
     </>
   );
 };

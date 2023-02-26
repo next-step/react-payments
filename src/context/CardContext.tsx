@@ -1,7 +1,7 @@
 import React, { Dispatch, useContext, useReducer } from 'react';
 import { handleDigit, handleExpire, handlePassword } from '../utils/form';
 
-export type State = {
+export type CardStateType = {
   digits: { digit1: string; digit2: string; digit3: string; digit4: string };
   expire: string;
   name: string;
@@ -38,7 +38,7 @@ type Action =
 
 type SampleDispatch = Dispatch<Action>;
 
-const initState: State = {
+const initState: CardStateType = {
   digits: { digit1: '', digit2: '', digit3: '', digit4: '' },
   expire: '',
   name: '',
@@ -46,12 +46,10 @@ const initState: State = {
   passwords: { password1: '', password2: '' },
 };
 
-export const CardStateContext = React.createContext<State | null>(null);
-export const CardDispatchContext = React.createContext<SampleDispatch | null>(
-  null
-);
+const CardStateContext = React.createContext<CardStateType | null>(null);
+const CardDispatchContext = React.createContext<SampleDispatch | null>(null);
 
-const reducer = (state: State, action: Action): State => {
+const reducer = (state: CardStateType, action: Action): CardStateType => {
   switch (action.type) {
     case 'SET_DIGIT':
       return {

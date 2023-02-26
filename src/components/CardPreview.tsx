@@ -1,8 +1,8 @@
 import React from 'react';
 import { S } from '../styles/card';
-import { State } from '../context/CardContext';
+import { CardStateType } from '../context/CardContext';
 
-const CardPreview = ({ digits, expire, name }: State) => {
+const CardPreview = ({ digits, expire, name }: CardStateType) => {
   return (
     <S.CardBox>
       <S.EmptyCard>
