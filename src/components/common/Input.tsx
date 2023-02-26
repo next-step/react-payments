@@ -9,12 +9,12 @@ const S = {
     text-align: center;
     outline: 2px solid transparent;
     outline-offset: 2px;
-    border-color: #9ca3af;
-    border: none;
+    border: none #9ca3af;
     border-radius: 0.25rem;
     &.w-25 {
       width: 25%;
     }
+
     &.w-15 {
       width: 15%;
     }

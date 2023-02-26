@@ -13,8 +13,8 @@ const InputExpire = ({ onChange, value }: IProps) => {
       <S.InputTitle>만료일</S.InputTitle>
       <S.InputBox className={'w-50'}>
         <Input
-          id={'expire'}
-          name={'expire'}
+          id="expire"
+          name="expire"
           onChange={onChange}
           type={'text'}
           placeholder={'MM / YY'}

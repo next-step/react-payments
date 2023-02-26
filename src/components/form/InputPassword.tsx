@@ -15,8 +15,8 @@ const InputPassword = ({ onChange, value }: IProps) => {
     <S.InputContainer>
       <S.InputTitle>카드 비밀번호</S.InputTitle>
       <Input
-        id={'password1'}
-        name={'password1'}
+        id="password1"
+        name="password1"
         onChange={onChange}
         type={'password'}
         className={'w-15'}
@@ -24,8 +24,8 @@ const InputPassword = ({ onChange, value }: IProps) => {
         value={value.password1}
       />
       <Input
-        id={'password2'}
-        name={'password2'}
+        id="password2"
+        name="password2"
         onChange={onChange}
         type={'password'}
         className={'w-15'}
@@ -33,16 +33,16 @@ const InputPassword = ({ onChange, value }: IProps) => {
         value={value.password2}
       />
       <Input
-        id={'password3'}
-        name={'password3'}
+        id="password3"
+        name="password3"
         type={'password'}
         className={'w-15'}
         disabled={true}
         placeholder={'*'}
       />
       <Input
-        id={'password4'}
-        name={'password4'}
+        id="password4"
+        name="password4"
         type={'password'}
         className={'w-15'}
         disabled={true}

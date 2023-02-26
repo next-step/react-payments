@@ -12,8 +12,8 @@ const InputCvc = ({ onChange, value }: IProps) => {
     <S.InputContainer>
       <S.InputTitle>보안코드(CVC/CVV)</S.InputTitle>
       <Input
-        id={'cvc'}
-        name={'cvc'}
+        id="cvc"
+        name="cvc"
         onChange={onChange}
         type={'password'}
         className={'w-25'}

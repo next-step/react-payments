@@ -13,8 +13,8 @@ const InputName = ({ onChange, value }: IProps) => {
       <S.InputTitle>카드 소유자 이름(선택)</S.InputTitle>
       <S.InputTitle>{value?.length + '/30'}</S.InputTitle>
       <Input
-        id={'name'}
-        name={'name'}
+        id="name"
+        name="name"
         onChange={onChange}
         type={'text'}
         placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
