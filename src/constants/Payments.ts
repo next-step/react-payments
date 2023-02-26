@@ -10,7 +10,7 @@ export const CARD_INFO = {
 };
 
 export const STEP = {
-  SHOW_LIST: 1,
+  SHOW_CARD_LIST: 1,
   REGISTER_CARD: 2,
   SELECT_CARD_COMPANY: 3,
   ADD_CARD_NICKNAME: 4,
