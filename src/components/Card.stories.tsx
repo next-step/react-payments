@@ -1,7 +1,7 @@
-import '../styles/button.css';
-import '../styles/card.css';
-import '../styles/index.css';
-import '../styles/input.css';
+import '@/styles/button.css';
+import '@/styles/card.css';
+import '@/styles/index.css';
+import '@/styles/input.css';
 
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
