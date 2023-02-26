@@ -22,7 +22,7 @@ export default function CardNumberFields() {
       <Input
         styleType="basic"
         className="w-25"
-        type="number"
+        type="text"
         name="num1"
         ref={num1Ref}
         maxLength={CARD.NUMBER.LENGTH}
@@ -32,7 +32,7 @@ export default function CardNumberFields() {
       <Input
         styleType="basic"
         className="w-25"
-        type="number"
+        type="text"
         name="num2"
         ref={num2Ref}
         maxLength={CARD.NUMBER.LENGTH}
