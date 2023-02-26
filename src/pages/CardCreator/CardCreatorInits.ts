@@ -36,15 +36,6 @@ export const cardNumbersInit: CardNumbersState = [
   },
 ];
 
-export const cardOwnersInit: CardOwnersState = [
-  {
-    key: 'card-owner-name',
-    value: undefined,
-    checkIsValid: (value) => !!value && value.length <= 30,
-    checkIsAllowInput: (input) => !input || input.length <= 30,
-  },
-];
-
 export const expireDatesInit: ExpireDatesState = [
   {
     key: 'card-expired-month',
@@ -67,6 +58,15 @@ export const expireDatesInit: ExpireDatesState = [
     placeholder: 'YY',
     checkIsValid: (value) => !!value && value.length <= 2,
     checkIsAllowInput: (input) => !input || input.length <= 2,
+  },
+];
+
+export const cardOwnersInit: CardOwnersState = [
+  {
+    key: 'card-owner-name',
+    value: undefined,
+    checkIsValid: (value) => !!value && value.length <= 30,
+    checkIsAllowInput: (input) => !input || input.length <= 30,
   },
 ];
 
