@@ -4,7 +4,7 @@ import type { CardInfo } from "@/components/cards/Card/Card";
 import { CONTEXT_ERROR_MESSAGES } from "@/constants/messages/error";
 import { contextFactory } from "@/helper";
 
-type CardItem = { id: string; color: string } & CardInfo;
+export type CardItem = { id: string; color: string } & CardInfo;
 
 type CardAction =
   | {
