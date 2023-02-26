@@ -1,10 +1,11 @@
 import { S } from '../../styles/Input';
 import Input from '../common/Input';
 import React from 'react';
+import { DigitType } from '../../context/CardContext';
 
 interface IProps {
   onChange: (e: React.ChangeEvent) => void;
-  value: { digit1: string; digit2: string; digit3: string; digit4: string };
+  value: DigitType;
 }
 
 const InputDigit = ({ onChange, value }: IProps) => {
@@ -20,7 +21,7 @@ const InputDigit = ({ onChange, value }: IProps) => {
           value={value.digit1}
           maxLength={4}
         />
-        {value.digit1?.length === 4 && <S.Hyphen>-</S.Hyphen>}
+        {String(value.digit1)?.length === 4 && <S.Hyphen>-</S.Hyphen>}
         <Input
           id={'digit2'}
           name={'digit2'}
@@ -29,7 +30,7 @@ const InputDigit = ({ onChange, value }: IProps) => {
           value={value.digit2}
           maxLength={4}
         />
-        {value.digit2?.length === 4 && <S.Hyphen>-</S.Hyphen>}
+        {String(value.digit2)?.length === 4 && <S.Hyphen>-</S.Hyphen>}
         <Input
           id={'digit3'}
           name={'digit3'}
@@ -38,7 +39,7 @@ const InputDigit = ({ onChange, value }: IProps) => {
           value={value.digit3}
           maxLength={4}
         />
-        {value.digit3?.length === 4 && <S.Hyphen>-</S.Hyphen>}
+        {String(value.digit3)?.length === 4 && <S.Hyphen>-</S.Hyphen>}
         <Input
           id={'digit4'}
           name={'digit4'}

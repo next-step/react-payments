@@ -14,8 +14,8 @@ const CardPreview = ({ digits, expire, name }: CardStateType) => {
           <S.CardText>
             {digits.digit1 && digits.digit1}
             {digits.digit2 && '-' + digits.digit2}
-            {digits.digit3 && '-' + '*'.repeat(digits.digit3.length)}
-            {digits.digit4 && '-' + '*'.repeat(digits.digit4.length)}
+            {digits.digit3 && '-' + '*'.repeat(String(digits.digit3).length)}
+            {digits.digit4 && '-' + '*'.repeat(String(digits.digit4).length)}
           </S.CardText>
           <S.CardBottomInfo>
             <S.CardText>{name || 'NAME'}</S.CardText>

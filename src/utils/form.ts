@@ -1,7 +1,7 @@
 const SLASH = '/';
 
-export const validateDigit = (digit: string, targetName: string) => {
-  const value = digit.replace(/\D+/g, '');
+export const validateDigit = (digit: number | string, targetName: string) => {
+  const value = String(digit).replace(/\D+/g, '');
   const length = value.length;
   const nextId = Number(targetName.split('digit')[1]) + 1;
   if (length === 4) nextFocus('digit' + nextId);

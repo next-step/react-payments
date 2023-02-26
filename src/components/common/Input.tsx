@@ -28,7 +28,7 @@ interface IProps {
   onChange?: (e: React.ChangeEvent) => void;
   type: string;
   className?: string;
-  value?: string;
+  value?: string | number;
   maxLength?: number;
   disabled?: boolean;
 }

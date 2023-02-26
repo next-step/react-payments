@@ -1,8 +1,15 @@
 import React, { Dispatch, useContext, useReducer } from 'react';
 import { validateDigit, validateExpire, validatePassword } from '../utils/form';
 
+export type DigitType = {
+  digit1: number | string;
+  digit2: number | string;
+  digit3: number | string;
+  digit4: number | string;
+};
+
 export type CardStateType = {
-  digits: { digit1: string; digit2: string; digit3: string; digit4: string };
+  digits: DigitType;
   expire: string;
   name: string;
   cvc: string;
@@ -12,12 +19,7 @@ export type CardStateType = {
 type Action =
   | {
       type: 'SET_DIGIT';
-      digits: {
-        digit1: string;
-        digit2: string;
-        digit3: string;
-        digit4: string;
-      };
+      digits: DigitType;
     }
   | {
       type: 'SET_EXPIRE';
