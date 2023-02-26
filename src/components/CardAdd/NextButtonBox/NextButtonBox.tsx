@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Box, Button } from '@/components/Common';
+import { ROUTES } from '@/constants/routes';
 
 type NextButtonBoxProps = {
   isCompleted: boolean;
@@ -19,7 +20,7 @@ export default function NextButtonBox({ isCompleted }: NextButtonBoxProps) {
       return;
     }
 
-    navigate('/card-completed');
+    navigate(ROUTES.CARD.COMPLETED);
   };
 
   const 폼이완성되지않은채로추가하면 = !isCompleted && isButtonClicked;
