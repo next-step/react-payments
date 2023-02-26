@@ -20,25 +20,11 @@ export const CardProvider = ({ children }) => {
     dispatch({ type: actionType, payload: cardInfo });
   };
 
-  const handleInputChange = (e, errorMessage, actionMessage) => {
-    const { value } = e.target;
-
-    if (Number.isNaN(+value)) {
-      changeCardInfo(CHANGE_CARD.ERROR, errorMessage);
-      return;
-    }
-
-    changeCardInfo(CHANGE_CARD.ERROR, null);
-    changeCardInfo(actionMessage, value);
-  };
-
   console.log(cardInfo);
   //TODO: 닉네임 상태관리
 
   return (
-    <CardContext.Provider
-      value={{ cardInfo, changeCardInfo, handleInputChange }}
-    >
+    <CardContext.Provider value={{ cardInfo, changeCardInfo }}>
       {children}
     </CardContext.Provider>
   );

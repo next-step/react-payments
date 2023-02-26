@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import Input from '../../../common/Input/Input';
 import InputBox from '../../../common/Input/InputBox';
@@ -7,10 +7,22 @@ import { MAX_INPUT_LENGTH } from '../../../../constants/numbers';
 import { CHANGE_CARD } from '../../../../constants/action';
 
 const CardCVCInput = () => {
-  const { changeCardInfo, handleInputChange } = useCard();
+  const { changeCardInfo } = useCard();
+  const [cardCVC, setCardCVC] = useState('');
+
+  const isValidCVC = (value) => {
+    if (Number.isNaN(+value)) {
+      changeCardInfo(CHANGE_CARD.ERROR, '숫자만 입력주세요.');
+      setCardCVC('');
+      return;
+    }
+    changeCardInfo(CHANGE_CARD.ERROR, null);
+  };
 
   const handleCVCChange = (e) => {
-    handleInputChange(e, '숫자만 입력주세요.', CHANGE_CARD.CVC);
+    const { value } = e.target;
+    setCardCVC(value);
+    if (isValidCVC(value)) changeCardInfo(CHANGE_CARD.CVC, value);
   };
 
   return (
@@ -23,6 +35,7 @@ const CardCVCInput = () => {
         placeholder='***'
         maxLength={MAX_INPUT_LENGTH.CVC}
         required={true}
+        value={cardCVC}
       />
     </InputBox>
   );
