@@ -1,0 +1,2 @@
+var o=Object.defineProperty;var n=(s,t)=>o(s,"name",{value:t,configurable:!0});import{j as p}from"./jsx-runtime-cd98d61a.js";import{r as a}from"./index-a38f3d31.js";import{c as u}from"./index-ed86a6de.js";function c({styleType:s,className:t,...r},e){const i={basic:"input-basic",underline:"input-underline",fixed:"input-fixed"}[s];return p.jsx("input",{className:u(i,t),ref:e,...r})}n(c,"Input");const l=a.forwardRef(c);export{l as I};
+//# sourceMappingURL=Input-7e4dd3c4.js.map
