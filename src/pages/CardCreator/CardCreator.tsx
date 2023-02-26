@@ -25,37 +25,32 @@ function CardCreator() {
   const passwordsStateBundle = useExtendedState(passwordsInit);
 
   return (
-    <>
-      <h2>1️⃣ 카드 추가</h2>
-      <div className="root">
-        <div className="app">
-          <h2 className="page-title">
-            <Link to={routes.home} className="mr-10">{`<`}</Link> 카드 추가
-          </h2>
-          <div className="card-box">
-            <Card
-              cardNumbers={cardNumbers.map(({ type, value }) => ({
-                isHide: type === 'password',
-                value,
-              }))}
-              expireDates={expireDates.map(({ value }) => value)}
-              ownerName={ownerName[0].value}
-            />
-          </div>
-          <CardNumberInput cardNumbersStateBundle={cardNumbersStateBundle} />
-          <ExpireDateInput expireDatesStateBundle={expireDatesStateBundle} />
-          <CardOwnerInput cardOwnerNameStateBundle={cardOwnerNameStateBundle} />
-          <SecurityCodeInput cardOwnerNameStateBundle={securityCodeStateBundle} />
-          <PasswordInput passwordsStateBundle={passwordsStateBundle} />
-          <div className="button-box">
-            {/* TODO: 넘어가기 전에 모든 state들의 validation 필요 */}
-            <Link to="/add-complete" className="button-text">
-              다음
-            </Link>
-          </div>
-        </div>
+    <div className="app">
+      <h2 className="page-title">
+        <Link to={routes.home} className="mr-10">{`<`}</Link> 카드 추가
+      </h2>
+      <div className="card-box">
+        <Card
+          cardNumbers={cardNumbers.map(({ type, value }) => ({
+            isHide: type === 'password',
+            value,
+          }))}
+          expireDates={expireDates.map(({ value }) => value)}
+          ownerName={ownerName[0].value}
+        />
       </div>
-    </>
+      <CardNumberInput cardNumbersStateBundle={cardNumbersStateBundle} />
+      <ExpireDateInput expireDatesStateBundle={expireDatesStateBundle} />
+      <CardOwnerInput cardOwnerNameStateBundle={cardOwnerNameStateBundle} />
+      <SecurityCodeInput cardOwnerNameStateBundle={securityCodeStateBundle} />
+      <PasswordInput passwordsStateBundle={passwordsStateBundle} />
+      <div className="button-box">
+        {/* TODO: 넘어가기 전에 모든 state들의 validation 필요 */}
+        <Link to="/add-complete" className="button-text">
+          다음
+        </Link>
+      </div>
+    </div>
   );
 }
 
