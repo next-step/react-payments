@@ -5,13 +5,13 @@ export interface ICardSelection {
   onChange: (data: ICardBox) => void;
 }
 
-const CARD_DATA1 = [
+const CARD_DATA1: ICardBox[] = [
   { brand: '클린카드1', color: '#ef5350' },
   { brand: '클린카드2', color: '#ab47bc' },
   { brand: '클린카드3', color: '#5c6bc0' },
   { brand: '클린카드4', color: '#29b6f6' }
 ];
-const CARD_DATA2 = [
+const CARD_DATA2: ICardBox[] = [
   { brand: '클린카드5', color: '#26a69a' },
   { brand: '클린카드6', color: '#9ccc65' },
   { brand: '클린카드7', color: '#ffee58' },

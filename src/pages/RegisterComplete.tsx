@@ -16,7 +16,7 @@ export default function RegisterComplete() {
   const nicknameRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    nicknameRef.current.value = cardData?.nickname;
+    nicknameRef.current.value = cardData?.nickname || '';
     if (!cardData) {
       navigate('/');
     }

@@ -10,6 +10,7 @@ export default function CardList() {
   const [cardList, setCardList] = useState<ICardBoxDTO[]>(
     cardRepository.getItem().sort((a, b) => b.index - a.index)
   );
+
   const goRegisterComplete = useCallback((index: number) => {
     navigate(`/register-complete?card=${index}`);
   }, []);
