@@ -52,7 +52,7 @@ function CardNumberInput({ cardNumbers, createCardNumberSetter }: CardNumberInpu
                 })}
               />
               <ConditionalComponentWrapper isRender={!isLast}>
-                <InputDivider isHide={isOverFourNumber && !isLast} className="dash">
+                <InputDivider isHide={!isOverFourNumber} className="dash">
                   -
                 </InputDivider>
               </ConditionalComponentWrapper>

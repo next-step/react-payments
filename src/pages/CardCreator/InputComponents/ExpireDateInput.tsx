@@ -56,7 +56,7 @@ function ExpireDateInput({ expireDates, createExpireDateSetter }: ExpireDateInpu
                 })}
               />
               <ConditionalComponentWrapper isRender={!isLast}>
-                <InputDivider isHide={!isLast && isValueValid}>/</InputDivider>
+                <InputDivider isHide={!isValueValid}>/</InputDivider>
               </ConditionalComponentWrapper>
             </Fragment>
           );
