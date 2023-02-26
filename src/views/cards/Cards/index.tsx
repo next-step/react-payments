@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, EmptyCard } from "@/components/cards";
 import { Header } from "@/components/common";
 import { useCardsContext } from "@/contexts";
+import { domains } from "@/router";
 
 import { CardWrapper } from "./card.style";
 
@@ -13,7 +14,7 @@ export default function Cards() {
   const { value: cards } = useCardsContext();
 
   const handleMoveToAddCardPage = () => {
-    navigate("/cards/add");
+    navigate(domains.CARD_ADD);
   };
 
   return (

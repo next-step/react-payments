@@ -6,6 +6,7 @@ import { Button, Input } from "@/components/common";
 import { CardItem, useCardsContext } from "@/contexts/CardsContext";
 import useInput from "@/hooks/useInput";
 import { CardPageLayout } from "@/layouts/cards";
+import { domains } from "@/router";
 
 import * as S from "./completeAddCard";
 
@@ -20,7 +21,7 @@ export default function CompleteAddCard() {
   useEffect(() => {
     const { cardInfo } = state;
 
-    if (!cardInfo) navigate("/cards");
+    if (!cardInfo) navigate(domains.CARD_LIST);
   }, []);
 
   const newCardInfo: CardItem = useMemo(
@@ -36,7 +37,7 @@ export default function CompleteAddCard() {
       type: "UPDATE_CARD",
       payload: { id: newCardInfo.id, newInfo: newCardInfo },
     });
-    navigate("/cards");
+    navigate(domains.CARD_LIST);
   };
 
   return (

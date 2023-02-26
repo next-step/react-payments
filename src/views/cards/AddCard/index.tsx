@@ -19,6 +19,7 @@ import { Button } from "@/components/common";
 import { useCardsContext } from "@/contexts";
 import type { CardItem } from "@/contexts/CardsContext";
 import { CardPageLayout } from "@/layouts/cards";
+import { domains } from "@/router";
 
 import * as S from "./addCard.style";
 
@@ -26,7 +27,7 @@ function HeaderLeftPointArrow() {
   const navigate = useNavigate();
 
   const handleMoveToCardsPage = () => {
-    navigate("/cards");
+    navigate(domains.CARD_LIST);
   };
 
   return <LeftPointArrow onClick={handleMoveToCardsPage} />;
@@ -113,7 +114,7 @@ export default function AddCard() {
 
       dispatch({ type: "ADD_CARD", payload: cardItem });
 
-      navigate("/cards/complete", {
+      navigate(domains.CARD_COMPLETE, {
         state: {
           cardInfo: cardItem,
         },
