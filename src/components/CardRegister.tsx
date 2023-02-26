@@ -8,12 +8,18 @@ import CardPreview from './CardPreview';
 
 const PaymentCardRegisterPrev = () => {
   const navigate = useNavigate();
-  const state = useCardState();
+  const { digits, cvc, expire, name, passwords } = useCardState();
 
   return (
     <div className="app">
       <Title title={'< 카드 추가'} onClick={() => navigate('/')} />
-      <CardPreview {...state} />
+      <CardPreview
+        digits={digits}
+        cvc={cvc}
+        expire={expire}
+        name={name}
+        passwords={passwords}
+      />
       <CardRegisterForm />
       <Button
         text={'다음'}
