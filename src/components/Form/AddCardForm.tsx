@@ -2,18 +2,23 @@ import { useNavigate } from 'react-router-dom';
 
 import { CVCField, CardNumberField, ExpirationField, PasswordField, NameField } from '@components/Field';
 import { Button } from '@components/Common';
-import { checkRequiredValues } from '@/utils';
+import { checkRequiredValues, getUniqId } from '@/utils';
 import { LIMIT_INPUT_LENGTH } from '@/constants';
 
 import type { FormEvent } from 'react';
 import { useCardForm, useCardFormHandler } from '@/context/CardFormContext';
+import { useCardListHandler } from '@/context/CardListContext';
 
 function AddCardForm() {
   const navigate = useNavigate();
 
+  const { addCard } = useCardListHandler();
+
+  const cardForm = useCardForm();
   const { onChange } = useCardFormHandler();
+
   const { cardNumber1, cardNumber2, cardNumber3, cardNumber4, year, month, password1, password2, cvc, cardOwner } =
-    useCardForm();
+    cardForm;
 
   const cardNumber = { cardNumber1, cardNumber2, cardNumber3, cardNumber4 };
   const expirationDate = {
@@ -37,7 +42,9 @@ function AddCardForm() {
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate('/complete');
+    const id = getUniqId();
+    addCard({ ...cardForm, id });
+    navigate(`/complete/${id}`);
   };
 
   return (

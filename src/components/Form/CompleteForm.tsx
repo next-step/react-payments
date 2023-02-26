@@ -1,22 +1,28 @@
 import { LIMIT_INPUT_LENGTH } from '@/constants';
 import { Button } from '../Common';
-import { useNavigate } from 'react-router-dom';
-import { FormEvent, useId } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { FormEvent } from 'react';
 import { useCardListHandler } from '@/context/CardListContext';
 import { useCardForm, useCardFormHandler } from '@/context/CardFormContext';
 
 function CompleteForm() {
   const navigate = useNavigate();
-  const id = useId();
+  const { id } = useParams();
 
   const { onChange, onReset } = useCardFormHandler();
-  const { addCard } = useCardListHandler();
-  const cardFormValue = useCardForm();
+  const { updateCard, deleteCard } = useCardListHandler();
+  const { nickname } = useCardForm();
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addCard({ ...cardFormValue, id });
+    updateCard(id as string, { nickname });
     onReset();
+    navigate('/');
+  };
+
+  const onDelete = () => {
+    if (!id) return;
+    deleteCard(id);
     navigate('/');
   };
 
@@ -29,11 +35,12 @@ function CompleteForm() {
           name="nickname"
           placeholder="카드의 별칭을 입력해주세요."
           maxLength={LIMIT_INPUT_LENGTH.NICKNAME}
-          value={cardFormValue.nickname}
+          value={nickname}
           onChange={onChange}
         />
       </div>
       <div className="button-box mt-50">
+        {id ? <Button onClick={onDelete}>삭제</Button> : null}
         <Button type="submit" className="button-text">
           <span className="button-text">다음</span>
         </Button>

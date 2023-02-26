@@ -41,3 +41,5 @@ export const expirationMonthFormatter = (month: string) => {
 export const textOnlyFormatter = (str: string) => {
   return str.replace(REGEX.NOT_NUMBER, '');
 };
+
+export const getUniqId = () => new Date().getTime().toString();

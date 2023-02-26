@@ -1,9 +1,14 @@
 import { Card } from '@/components/Common';
 import CompleteForm from '@/components/Form/CompleteForm';
-import { useCardForm } from '@/context/CardFormContext';
+import { useCardList } from '@/context/CardListContext';
+import { useParams } from 'react-router-dom';
 
 function Complete() {
-  const value = useCardForm();
+  const { id } = useParams();
+
+  const card = useCardList();
+  const targetCard = card.find(card => card.id === id);
+
   return (
     <div>
       <div className="root">
@@ -14,16 +19,16 @@ function Complete() {
           <Card
             isBig
             cardCompany=""
-            cardOwner={value.cardOwner}
+            cardOwner={targetCard?.cardOwner ?? ''}
             cardNumber={{
-              cardNumber1: value.cardNumber1,
-              cardNumber2: value.cardNumber2,
-              cardNumber3: value.cardNumber3,
-              cardNumber4: value.cardNumber4,
+              cardNumber1: targetCard?.cardNumber1 ?? '',
+              cardNumber2: targetCard?.cardNumber2 ?? '',
+              cardNumber3: targetCard?.cardNumber3 ?? '',
+              cardNumber4: targetCard?.cardNumber4 ?? '',
             }}
             expiration={{
-              year: value.year,
-              month: value.month,
+              year: targetCard?.year ?? '',
+              month: targetCard?.month ?? '',
             }}
           />
           <CompleteForm />

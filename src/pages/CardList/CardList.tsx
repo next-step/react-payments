@@ -1,16 +1,9 @@
 import EmptyCard from '@/components/Common/EmptyCard';
-import { useCardFormHandler } from '@/context/CardFormContext';
 import { useCardList } from '@/context/CardListContext';
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function CardList() {
   const cardList = useCardList();
-  const { onReset } = useCardFormHandler();
-
-  useEffect(() => {
-    onReset();
-  }, []);
 
   return (
     <div>

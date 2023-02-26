@@ -8,6 +8,8 @@ const initialCardList: CardList = [];
 
 type CardListHandler = {
   addCard(card: CardInformation): void;
+  deleteCard(id: string): void;
+  updateCard(id: string, form: Partial<CardInformation>): void;
 };
 
 const CardListContext = createContext<CardList | null>(null);
@@ -44,6 +46,19 @@ function CardListProvider({ children }: CardListContextProps) {
     () => ({
       addCard(newCard: CardInformation) {
         setCardList(prev => [...prev, newCard]);
+      },
+      deleteCard(id: string) {
+        setCardList(prev => prev.filter(card => card.id !== id));
+      },
+      updateCard(id: string, form: Partial<CardInformation>) {
+        setCardList(prev => {
+          return [...prev].map(card => {
+            if (card.id === id) {
+              return { ...card, ...form };
+            }
+            return card;
+          });
+        });
       },
     }),
     [],
