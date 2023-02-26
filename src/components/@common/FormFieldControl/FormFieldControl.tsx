@@ -4,7 +4,7 @@ import * as Styled from './FormFieldControl.styled';
 import { Help } from 'components/Help';
 
 const FormFieldControl = ({ children }: PropsWithChildren) => {
-  return <Styled.Wrapper>{children}</Styled.Wrapper>;
+  return <Styled.Fieldset>{children}</Styled.Fieldset>;
 };
 FormFieldControl.Label = ({
   help,

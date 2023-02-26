@@ -1,8 +1,7 @@
 import styled from '@emotion/styled';
 
-export const Wrapper = styled.div`
+export const Fieldset = styled.fieldset`
   margin: 20px 0;
-  width: 100%;
 `;
 
 export const Label = styled.label`

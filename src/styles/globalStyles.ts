@@ -41,4 +41,10 @@ export const globalStyles = css`
   li {
     list-style: none;
   }
+
+  fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+  }
 `;
