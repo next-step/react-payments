@@ -1,16 +1,16 @@
 import { ChangeEvent, useRef } from 'react';
 
 import { Box, Input } from '@/components/Common';
-import { CardNumber } from '@/types/card';
 import { CARD } from '@/constants/card';
 import { useInputFocus } from '@/hooks/card';
+import { CardNumber } from '@/types/card';
 
 type NumberInputProps = {
   cardNumber: CardNumber;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function NumberInputBox({ cardNumber, onChange }: NumberInputProps) {
+export default function CardNumberFields({ cardNumber, onChange }: NumberInputProps) {
   const { num1, num2, num3, num4 } = cardNumber;
 
   const num1Ref = useRef<HTMLInputElement>(null);

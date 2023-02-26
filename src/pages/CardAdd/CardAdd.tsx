@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import {
   CardBox,
-  NumberInputBox,
+  CardNumberFields,
   ExpirationInputBox,
   SecretCodeInputBox,
   PasswordInputBox,
@@ -52,7 +52,7 @@ export default function CardAdd() {
           selectedCard={selectedCard}
         />
         <CardSelectButton onClick={handleClickOpenModal} />
-        <NumberInputBox cardNumber={cardNumber} onChange={handleChangeCardNumber} />
+        <CardNumberFields cardNumber={cardNumber} onChange={handleChangeCardNumber} />
         <ExpirationInputBox cardExpiration={cardExpiration} onChange={handleChangeExpiration} />
         <OwnerNameInputBox cardOwnerName={cardOwnerName} onChange={handleChangeCardOwnerName} />
         <SecretCodeInputBox cardSecretCode={cardSecretCode} onChange={handleChangeCardSecretCode} />

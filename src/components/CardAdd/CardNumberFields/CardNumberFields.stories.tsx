@@ -1,13 +1,13 @@
 import type { ComponentStory, Meta } from '@storybook/react';
 
-import NumberInputBox from './NumberInputBox';
+import CardNumberFields from './CardNumberFields';
 
 export default {
-  title: 'NumberInputBox',
-  component: NumberInputBox,
+  title: 'CardNumberFields',
+  component: CardNumberFields,
 } as Meta;
 
-const Template: ComponentStory<typeof NumberInputBox> = (args) => <NumberInputBox {...args} />;
+const Template: ComponentStory<typeof CardNumberFields> = (args) => <CardNumberFields {...args} />;
 
 const cardNumber = {
   num1: '1234',

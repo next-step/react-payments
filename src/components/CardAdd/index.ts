@@ -1,5 +1,5 @@
 export { default as CardBox } from './CardBox';
-export { default as NumberInputBox } from './NumberInputBox';
+export { default as CardNumberFields } from './CardNumberFields';
 export { default as ExpirationInputBox } from './ExpirationInputBox';
 export { default as SecretCodeInputBox } from './SecretCodeInputBox';
 export { default as PasswordInputBox } from './PasswordInputBox';
