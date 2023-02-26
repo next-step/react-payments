@@ -1,10 +1,9 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
 import Card from '@/components/Card';
 
-import { createCardStateSetter } from './utils';
 import {
   CardNumberInputPure,
   CardOwnerInputPure,
@@ -20,19 +19,19 @@ import type {
   SecurityCodeInputRef,
 } from './InputComponents';
 import { cardNumbersInit, expireDatesInit, passwordsInit, cardOwnersInit, securityCodesInit } from './CardCreatorInits';
+import { useInputComponent } from './hooks/useInputComponent';
 
 function CardCreator() {
-  const [cardNumbers, setCardNumbers] = useState(cardNumbersInit);
-  const [expireDates, setExpireDate] = useState(expireDatesInit);
-  const [ownerNames, setOwnerNames] = useState(cardOwnersInit);
-  const [securityCodes, setSecurityCodes] = useState(securityCodesInit);
-  const [passwords, setPasswords] = useState(passwordsInit);
-
-  const cardNumberInputRef = useRef<CardNumberInputRef>(null);
-  const expireDateInputRef = useRef<ExpireDateInputRef>(null);
-  const cardOwnerInputRef = useRef<CardOwnerInputRef>(null);
-  const securityCodeInputRef = useRef<SecurityCodeInputRef>(null);
-  const passwordInputRef = useRef<PasswordInputRef>(null);
+  const [cardNumbers, createCardNumberSetter, cardNumberInputRef, cardNumberValidator] =
+    useInputComponent<CardNumberInputRef>(cardNumbersInit);
+  const [expireDates, createExpireDateSetter, expireDateInputRef, expireDateValidator] =
+    useInputComponent<ExpireDateInputRef>(expireDatesInit);
+  const [ownerNames, createOwnerNameSetter, cardOwnerInputRef, ownerNameValidator] =
+    useInputComponent<CardOwnerInputRef>(cardOwnersInit);
+  const [securityCodes, createSecurityCodeSetter, securityCodeInputRef, securityCodesValidator] =
+    useInputComponent<SecurityCodeInputRef>(securityCodesInit);
+  const [passwords, createPasswordSetter, passwordInputRef, passwordsValidator] =
+    useInputComponent<PasswordInputRef>(passwordsInit);
 
   return (
     <div className="app">
@@ -52,39 +51,35 @@ function CardCreator() {
       <CardNumberInputPure
         ref={cardNumberInputRef}
         cardNumbers={cardNumbers}
-        createCardNumberSetter={useMemo(() => createCardStateSetter(setCardNumbers), [setCardNumbers])}
+        createCardNumberSetter={createCardNumberSetter}
       />
       <ExpireDateInputPure
         ref={expireDateInputRef}
         expireDates={expireDates}
-        createExpireDateSetter={useMemo(() => createCardStateSetter(setExpireDate), [setExpireDate])}
+        createExpireDateSetter={createExpireDateSetter}
       />
       <CardOwnerInputPure
         ref={cardOwnerInputRef}
         ownerNames={ownerNames}
-        createOwnerNameSetter={useMemo(() => createCardStateSetter(setOwnerNames), [setOwnerNames])}
+        createOwnerNameSetter={createOwnerNameSetter}
       />
       <SecurityCodeInputPure
         ref={securityCodeInputRef}
         securityCodes={securityCodes}
-        createSecurityCodeSetter={useMemo(() => createCardStateSetter(setSecurityCodes), [setSecurityCodes])}
+        createSecurityCodeSetter={createSecurityCodeSetter}
       />
-      <PasswordInputPure
-        ref={passwordInputRef}
-        passwords={passwords}
-        createPasswordSetter={useMemo(() => createCardStateSetter(setPasswords), [setPasswords])}
-      />
+      <PasswordInputPure ref={passwordInputRef} passwords={passwords} createPasswordSetter={createPasswordSetter} />
       <div className="button-box">
         <Link
           to="/add-complete"
           className="button-text"
           onClick={(e) => {
             const inputs = [
-              { state: cardNumbers, ref: cardNumberInputRef },
-              { state: expireDates, ref: expireDateInputRef },
-              { state: ownerNames, ref: cardOwnerInputRef },
-              { state: securityCodes, ref: securityCodeInputRef },
-              { state: passwords, ref: passwordInputRef },
+              cardNumberValidator,
+              expireDateValidator,
+              ownerNameValidator,
+              securityCodesValidator,
+              passwordsValidator,
             ];
             inputs.forEach((states) => states.ref?.current?.setErrorMessage('none'));
 
