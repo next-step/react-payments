@@ -5,7 +5,7 @@ import Card from "components/common/Card";
 import { CardInput } from "components/common/Card/card.type";
 import InputContainer from "components/common/Input/InputContainer";
 import CompanyModal from "components/common/Modal";
-import { STEP } from "../../../constants/Payments";
+import { STEP } from "constants/Payments";
 import Input from "components/common/Input";
 
 interface CardFormProps {
@@ -37,25 +37,25 @@ const CardForm = ({
   const [showCompanyModal, setShowCompanyModal] = useState<boolean>(false);
 
   const handleNextButtonClick = () => {
-    if (step === STEP.SECOND) {
+    if (step === STEP.REGISTER_CARD) {
       setShowCompanyModal((prev: boolean) => !prev);
       return;
     }
     handleCardAddClick();
-    setStep(STEP.FOURTH);
+    setStep(STEP.ADD_CARD_NICKNAME);
   };
 
-  const handleGoBackClick = () => setStep(STEP.FIRST);
+  const handleGoBackClick = () => setStep(STEP.SHOW_CARD_LIST);
 
   const handleCompanyModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
     handleCardTypeClick(e);
     setShowCompanyModal((prev: boolean) => !prev);
-    setStep(STEP.THIRD);
+    setStep(STEP.SELECT_CARD_COMPANY);
   };
 
   return (
     <>
-      {step === STEP.SECOND ? (
+      {step === STEP.REGISTER_CARD ? (
         <h2>1️⃣ 카드 추가</h2>
       ) : (
         <h2>3️⃣ 카드 추가 - 입력 완료</h2>

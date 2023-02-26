@@ -1,7 +1,7 @@
 import { Dispatch, Fragment, SetStateAction } from "react";
 import { CardListType } from "types/payments";
 import Card from "components/common/Card";
-import { STEP } from "../../../constants/Payments";
+import { STEP } from "constants/Payments";
 
 interface CardListProps {
   cardList: CardListType[];
@@ -12,7 +12,7 @@ interface CardListProps {
 const CardList = ({ cardList, clearCardInfo, setStep }: CardListProps) => {
   const handleCardAddClick = () => {
     clearCardInfo();
-    setStep(STEP.SECOND);
+    setStep(STEP.REGISTER_CARD);
   };
 
   return (
