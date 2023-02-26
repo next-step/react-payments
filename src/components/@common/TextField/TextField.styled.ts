@@ -1,6 +1,9 @@
 import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 
-export const TextField = styled.input`
+import type { TextFieldProps } from './TextField.types';
+
+export const TextField = styled.input<TextFieldProps>`
   height: 45px;
   padding: 10px;
   border-radius: 7px;
@@ -9,4 +12,10 @@ export const TextField = styled.input`
   &::placeholder {
     color: ${({ theme }) => theme.color.gray05};
   }
+
+  ${({ validationStatus }) =>
+    validationStatus === 'error' &&
+    css`
+      outline: 1px solid red;
+    `}
 `;

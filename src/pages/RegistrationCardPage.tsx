@@ -18,14 +18,26 @@ import { formatCardNumber, formatMMYY } from 'utils/format';
 import { setLocalStorageItem } from 'utils/localStorage';
 
 import { ReactComponent as CVCIcon } from 'assets/CVCIcon.svg';
-import { CreditCardType } from 'types/CreditCard';
+import type { CreditCardType } from 'types/CreditCard';
+import { ValidationStatus } from 'components/@common/TextField/TextField.types';
+
+const CARD_LENGTH = 19;
 
 const RegistrationCardPage = () => {
   const { push } = useRouter();
   const { card, changeCardInfo } = useCardData();
 
+  const isValidCardLength = () => {
+    return card.number.length === CARD_LENGTH
+      ? ValidationStatus.SUCCESS
+      : ValidationStatus.ERROR;
+  };
+
   const isSubmitEnabled = useMemo(() => {
-    return isObjectComplete<CreditCardType>(card);
+    return (
+      isObjectComplete<CreditCardType>(card) &&
+      isValidCardLength() === 'success'
+    );
   }, [{ ...card }]);
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,6 +105,7 @@ const RegistrationCardPage = () => {
               type="text"
               inputMode="numeric"
               maxLength={19}
+              validationStatus={isValidCardLength()}
               value={card?.number}
               onChange={handleNumber}
               className="w-100"

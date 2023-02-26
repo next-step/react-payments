@@ -17,7 +17,4 @@ FormFieldControl.Label = ({
     </Styled.Label>
   );
 };
-FormFieldControl.Separator = ({ children }: PropsWithChildren) => {
-  return <Styled.Separator>{children}</Styled.Separator>;
-};
 export default FormFieldControl;
