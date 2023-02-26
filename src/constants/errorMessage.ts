@@ -10,4 +10,8 @@ export const ERROR_MESSAGE = {
       INVALID_YEAR: '유효하지 않은 년이 입력되었습니다.',
     },
   },
+
+  PROVIDER: {
+    INVALID_SCOPE: '유효한 Provider 내부에서만 훅을 사용할 수 있습니다.',
+  },
 };

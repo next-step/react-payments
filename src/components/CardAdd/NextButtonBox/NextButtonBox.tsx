@@ -1,14 +1,33 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Box, Button } from '@/components/Common';
 import { ROUTES } from '@/constants/routes';
+import {
+  useCardExpirationContext,
+  useCardNumberContext,
+  useCardPasswordContext,
+  useCardSecretCodeContext,
+  useCardSelectModalContext,
+} from '@/context';
 
-type NextButtonBoxProps = {
-  isCompleted: boolean;
-};
+export default function NextButtonBox() {
+  const { 카드CVC가모두입력된 } = useCardSecretCodeContext();
+  const { 카드비밀번호가모두입력된 } = useCardPasswordContext();
+  const { 카드사가선택된 } = useCardSelectModalContext();
+  const { 카드번호가모두입력된 } = useCardNumberContext();
+  const { 만료일이모두입력된 } = useCardExpirationContext();
 
-export default function NextButtonBox({ isCompleted }: NextButtonBoxProps) {
+  const isCompleted = useMemo(() => {
+    return [
+      카드번호가모두입력된,
+      만료일이모두입력된,
+      카드CVC가모두입력된,
+      카드비밀번호가모두입력된,
+      카드사가선택된,
+    ].every((elem) => elem === true);
+  }, [만료일이모두입력된, 카드CVC가모두입력된, 카드번호가모두입력된, 카드비밀번호가모두입력된, 카드사가선택된]);
+
   const navigate = useNavigate();
 
   const [isButtonClicked, setIsButtonClicked] = useState(false);

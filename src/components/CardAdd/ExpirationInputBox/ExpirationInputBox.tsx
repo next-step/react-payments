@@ -1,15 +1,9 @@
-import { ChangeEvent } from 'react';
-
 import { Box, Input } from '@/components/Common';
-import { CardExpiration } from '@/types/card';
 import { CARD } from '@/constants/card';
+import { useCardExpirationContext } from '@/context';
 
-type ExpirationInputBoxTypes = {
-  cardExpiration: CardExpiration;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-};
-
-export default function ExpirationInputBox({ cardExpiration, onChange }: ExpirationInputBoxTypes) {
+export default function ExpirationInputBox() {
+  const { cardExpiration, handleChangeExpiration } = useCardExpirationContext();
   const { month, year } = cardExpiration;
 
   return (
@@ -20,7 +14,7 @@ export default function ExpirationInputBox({ cardExpiration, onChange }: Expirat
         className=" w-25"
         name="month"
         value={month}
-        onChange={onChange}
+        onChange={handleChangeExpiration}
         type="text"
         maxLength={CARD.EXPIRATION.LENGTH}
         placeholder={CARD.EXPIRATION.PLACEHOLDER.MONTH}
@@ -30,7 +24,7 @@ export default function ExpirationInputBox({ cardExpiration, onChange }: Expirat
         className=" w-25"
         name="year"
         value={year}
-        onChange={onChange}
+        onChange={handleChangeExpiration}
         type="text"
         maxLength={CARD.EXPIRATION.LENGTH}
         placeholder={CARD.EXPIRATION.PLACEHOLDER.YEAR}

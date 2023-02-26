@@ -1,20 +1,26 @@
 import { useMemo } from 'react';
 
 import { CARD } from '@/constants/card';
+import {
+  useCardExpirationContext,
+  useCardNumberContext,
+  useCardOwnerNameContext,
+  useCardSelectModalContext,
+} from '@/context';
+
 import { isShowHyphen, maskingNumber } from '@/domain/card/card';
-import { CardExpiration, CardNumber, CardOwnerName, SelectedCard } from '@/types/card';
 
-type CardBoxProps = {
-  cardNumber: CardNumber;
-  cardExpiration: CardExpiration;
-  cardOwnerName: CardOwnerName;
-  selectedCard: SelectedCard;
-};
-
-export default function CardBox({ cardNumber, cardExpiration, cardOwnerName, selectedCard }: CardBoxProps) {
-  const { num1, num2, num3, num4 } = cardNumber;
-  const { month, year } = cardExpiration;
-  const { name, color } = selectedCard;
+export default function CardBox() {
+  const {
+    cardNumber: { num1, num2, num3, num4 },
+  } = useCardNumberContext();
+  const {
+    cardExpiration: { month, year },
+  } = useCardExpirationContext();
+  const {
+    selectedCard: { name, color },
+  } = useCardSelectModalContext();
+  const { cardOwnerName } = useCardOwnerNameContext();
 
   const cardStyle = useMemo(() => {
     return { backgroundColor: color };

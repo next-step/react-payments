@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 
+import { ROUTES } from '@/constants/routes';
+
 export default function CardList() {
   return (
     <div>
@@ -10,7 +12,7 @@ export default function CardList() {
           </div>
           <div className="card-box">
             <div className="empty-card">
-              <Link className="w-25 text-center" to="/card-add">
+              <Link className="w-25 text-center" to={ROUTES.CARD.ADD}>
                 +
               </Link>
             </div>

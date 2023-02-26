@@ -1,15 +1,9 @@
-import { ChangeEvent } from 'react';
-
 import { Box, Input } from '@/components/Common';
 import { CARD } from '@/constants/card';
-import { CardPassword } from '@/types/card';
+import { useCardPasswordContext } from '@/context';
 
-type PasswordInputBoxProps = {
-  cardPassword: CardPassword;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-};
-
-export default function PasswordInputBox({ cardPassword, onChange }: PasswordInputBoxProps) {
+export default function PasswordInputBox() {
+  const { cardPassword, handleChangeCardPassword } = useCardPasswordContext();
   const { num1, num2 } = cardPassword;
 
   return (
@@ -21,7 +15,7 @@ export default function PasswordInputBox({ cardPassword, onChange }: PasswordInp
         maxLength={CARD.PASSWORD.LENGTH}
         name="num1"
         value={num1}
-        onChange={onChange}
+        onChange={handleChangeCardPassword}
         type="password"
       />
       <Input
@@ -30,7 +24,7 @@ export default function PasswordInputBox({ cardPassword, onChange }: PasswordInp
         maxLength={CARD.PASSWORD.LENGTH}
         name="num2"
         value={num2}
-        onChange={onChange}
+        onChange={handleChangeCardPassword}
         type="password"
       />
 

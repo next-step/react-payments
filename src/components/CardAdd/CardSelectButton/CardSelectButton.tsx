@@ -1,12 +1,10 @@
 import { Button } from '@/components/Common';
+import { useCardSelectModalContext } from '@/context';
 
-type CardSelectButtonProps = {
-  onClick: () => void;
-};
-
-export default function CardSelectButton({ onClick }: CardSelectButtonProps) {
+export default function CardSelectButton() {
+  const { handleClickOpenModal } = useCardSelectModalContext();
   return (
-    <Button type="button" onClick={onClick}>
+    <Button type="button" onClick={handleClickOpenModal}>
       카드 선택
     </Button>
   );

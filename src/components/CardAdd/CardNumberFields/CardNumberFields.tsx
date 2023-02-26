@@ -1,16 +1,12 @@
-import { ChangeEvent, useRef } from 'react';
+import { useRef } from 'react';
 
 import { Box, Input } from '@/components/Common';
 import { CARD } from '@/constants/card';
 import { useInputFocus } from '@/hooks/card';
-import { CardNumber } from '@/types/card';
+import { useCardNumberContext } from '@/context';
 
-type NumberInputProps = {
-  cardNumber: CardNumber;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-};
-
-export default function CardNumberFields({ cardNumber, onChange }: NumberInputProps) {
+export default function CardNumberFields() {
+  const { cardNumber, handleChangeCardNumber } = useCardNumberContext();
   const { num1, num2, num3, num4 } = cardNumber;
 
   const num1Ref = useRef<HTMLInputElement>(null);
@@ -31,7 +27,7 @@ export default function CardNumberFields({ cardNumber, onChange }: NumberInputPr
         ref={num1Ref}
         maxLength={CARD.NUMBER.LENGTH}
         value={num1}
-        onChange={onChange}
+        onChange={handleChangeCardNumber}
       />
       <Input
         styleType="basic"
@@ -41,7 +37,7 @@ export default function CardNumberFields({ cardNumber, onChange }: NumberInputPr
         ref={num2Ref}
         maxLength={CARD.NUMBER.LENGTH}
         value={num2}
-        onChange={onChange}
+        onChange={handleChangeCardNumber}
       />
       <Input
         styleType="basic"
@@ -51,7 +47,7 @@ export default function CardNumberFields({ cardNumber, onChange }: NumberInputPr
         ref={num3Ref}
         maxLength={CARD.NUMBER.LENGTH}
         value={num3}
-        onChange={onChange}
+        onChange={handleChangeCardNumber}
       />
       <Input
         styleType="basic"
@@ -61,7 +57,7 @@ export default function CardNumberFields({ cardNumber, onChange }: NumberInputPr
         ref={num4Ref}
         maxLength={CARD.NUMBER.LENGTH}
         value={num4}
-        onChange={onChange}
+        onChange={handleChangeCardNumber}
       />
     </Box>
   );
