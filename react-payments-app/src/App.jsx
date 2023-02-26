@@ -5,17 +5,15 @@ import CardRegistration from './pages/CardRegistrationPage/CardRegistrationPage'
 
 const App = () => {
   return (
-    <div id='app' className='flex-column-center'>
-      <div className='wrap'>
-        <Routes>
-          <Route path='/' element={<CardListPage />} />
-          <Route path='/registration' element={<CardRegistration />} />
-          <Route
-            path='/registration/setCardNickname'
-            element={<CardNicknamePage />}
-          />
-        </Routes>
-      </div>
+    <div id='app' className='flex-column-center wrap'>
+      <Routes>
+        <Route path='/' element={<CardListPage />} />
+        <Route path='/registration' element={<CardRegistration />} />
+        <Route
+          path='/registration/setCardNickname'
+          element={<CardNicknamePage />}
+        />
+      </Routes>
     </div>
   );
 };
