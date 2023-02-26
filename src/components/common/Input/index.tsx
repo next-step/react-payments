@@ -1,25 +1,26 @@
+import { forwardRef } from "react";
 import "./input.css";
 
-const Input = ({
-  className,
-  type = "text",
-  value,
-  id,
-  placeholder,
-  onChange,
-  maxLength,
-}: React.InputHTMLAttributes<HTMLInputElement>) => {
-  return (
-    <input
-      className={`input-basic ${className}`}
-      type={type}
-      value={value}
-      id={id}
-      placeholder={placeholder}
-      onChange={onChange}
-      maxLength={maxLength}
-    />
-  );
-};
+type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
+
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  (
+    { className, value, type = "text", id, placeholder, onChange, maxLength },
+    ref
+  ) => {
+    return (
+      <input
+        value={value}
+        ref={ref}
+        className={`input-basic ${className}`}
+        type={type}
+        id={id}
+        placeholder={placeholder}
+        onChange={onChange}
+        maxLength={maxLength}
+      />
+    );
+  }
+);
 
 export default Input;

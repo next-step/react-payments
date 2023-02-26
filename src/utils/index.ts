@@ -1,12 +1,26 @@
-export const isNumber = (input: string): boolean => {
-  if (
-    input &&
-    input.length % 5 !== 0 &&
-    !/^[0-9]+$/.test(input[input.length - 1])
-  ) {
-    return false;
+import { RefObject } from "react";
+
+export const getNumberWithoutFormatter = (input: string) => {
+  return input?.replace(/[^0-9|/|-]/g, "");
+};
+
+export const validateInput = ({
+  ref,
+  id,
+  validationList,
+}: {
+  ref: RefObject<HTMLInputElement>;
+  id: string;
+  validationList: string[];
+}) => {
+  if (!ref.current?.value) {
+    return "";
   }
-  return true;
+
+  if (validationList.includes(id)) {
+    return getNumberWithoutFormatter(ref.current.value);
+  }
+  return ref.current.value;
 };
 
 export const formatNumber = ({

@@ -9,6 +9,14 @@ export const CARD_INFO = {
   BACKGROUND_COLOR: "backgroundColor",
 };
 
+export const VALIDATION_LIST = [
+  CARD_INFO.NUMBER,
+  CARD_INFO.EXPIRY,
+  CARD_INFO.CVC,
+  CARD_INFO.PASSWORD1,
+  CARD_INFO.PASSWORD2,
+];
+
 export const TYPE = "type";
 export const TYPE_SELECT = "select";
 export const TYPE_COMPLETED = "completed";

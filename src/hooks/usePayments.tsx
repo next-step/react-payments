@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CardInput } from "components/common/Card/card.type";
 import { CARD_INFO } from "constants/Payments";
 import { CardListType } from "types/payments";
-import { formatNumber, isNumber, monthConverter } from "utils";
+import { formatNumber, monthConverter } from "utils";
 
 const defaultCardInfo = {
   title: "클린카드",
@@ -31,7 +31,7 @@ export const usePayments = () => {
       id === CARD_INFO.PASSWORD1 ||
       id === CARD_INFO.PASSWORD2
     ) {
-      return isNumber(input);
+      return false;
     }
     return true;
   };
