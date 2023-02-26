@@ -4,7 +4,7 @@ import { CHANGE_CARD } from '../constants/action';
 
 const initialState = {
   cardNumbers: ['', '', '', ''],
-  cardExpirationDate: { month: '', year: '' },
+  cardExpirationDate: ['', ''],
   cardOwner: '',
   cardCVC: '',
   cardPassword: '',
