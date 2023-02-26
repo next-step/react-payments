@@ -1,22 +1,18 @@
 import React, { useRef } from 'react';
 
-import type useExtendedState from '@/hooks/useExtendedState';
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 
-import { PasswordsState } from '../types';
+import type { CardStateSetter } from '../utils';
+import type { PasswordsState } from '../types';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
 import { CardInputWrapperPure } from './components/CardInputWrapper';
 
 interface PasswordInputProps {
-  // prettier-ignore
-  // eslint-disable-next-line
-  passwordsStateBundle: ReturnType<typeof useExtendedState<PasswordsState>>;
+  passwords: PasswordsState;
+  createPasswordSetter: CardStateSetter<string>;
 }
 
-function PasswordInput({
-  passwordsStateBundle,
-}: PasswordInputProps) {
-  const [passwords, setPasswords] = passwordsStateBundle;
+function PasswordInput({ passwords, createPasswordSetter }: PasswordInputProps) {
   const passwordInputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
   const { createInputChangeHandler } = useInputEventHandler();
@@ -39,7 +35,7 @@ function PasswordInput({
               ref={(ref) => {
                 passwordInputsRef.current[i] = ref;
               }}
-              onChange={createInputChangeHandler({ state: password, i, setState: setPasswords })}
+              onChange={createInputChangeHandler({ state: password, setState: createPasswordSetter(i) })}
             />
           );
         })}

@@ -1,23 +1,21 @@
 import React, { useRef } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
-import { checkIsArrayLast  } from '@/utils';
-import useExtendedState from '@/hooks/useExtendedState';
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
+import { checkIsArrayLast } from '@/utils';
 
+import type { CardStateSetter } from '../utils';
 import type { CardNumbersState } from '../types';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
 import { InputDivider } from './components/InputDivider';
 import { CardInputWrapperPure } from './components/CardInputWrapper';
 
 interface CardNumberInputProps {
-  // prettier-ignore
-  // eslint-disable-next-line
-  cardNumbersStateBundle: ReturnType<typeof useExtendedState<CardNumbersState>>;
+  cardNumbers: CardNumbersState;
+  createCardNumberSetter: CardStateSetter<string>;
 }
 
-function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
-  const [cardNumbers, setCardNumbers] = cardNumbersStateBundle;
+function CardNumberInput({ cardNumbers, createCardNumberSetter }: CardNumberInputProps) {
   const cardNumberInputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
   const { createInputChangeHandler } = useInputEventHandler();
@@ -31,7 +29,7 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
           const isLast = checkIsArrayLast(cardNumbers, i);
           const isOverFourNumber = checkIsValid(value);
 
-          toTheNextElement(i, !isLast && isOverFourNumber)
+          toTheNextElement(i, !isLast && isOverFourNumber);
 
           return (
             <>
@@ -43,10 +41,12 @@ function CardNumberInput({ cardNumbersStateBundle }: CardNumberInputProps) {
                 ref={(inputRef) => {
                   cardNumberInputsRef.current[i] = inputRef;
                 }}
-                onChange={createInputChangeHandler({ state: inputState, i, setState: setCardNumbers})}
+                onChange={createInputChangeHandler({ state: inputState, setState: createCardNumberSetter(i) })}
               />
-              <ConditionalComponentWrapper isRender={!isLast} >
-                <InputDivider isHide={isOverFourNumber && !isLast} className="dash" >-</InputDivider>
+              <ConditionalComponentWrapper isRender={!isLast}>
+                <InputDivider isHide={isOverFourNumber && !isLast} className="dash">
+                  -
+                </InputDivider>
               </ConditionalComponentWrapper>
             </>
           );

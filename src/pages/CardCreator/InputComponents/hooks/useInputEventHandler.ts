@@ -1,28 +1,22 @@
-import type { ChangeEvent, Dispatch, SetStateAction, FocusEvent } from 'react';
+import type { ChangeEvent, FocusEvent } from 'react';
 
-import { filterNumber, createUpdatedArray, createUpdatedObject } from '@/utils';
 import type { InputStateType } from '@/types/types';
-import useExtendedState from '@/hooks/useExtendedState';
+import { filterNumber } from '@/utils';
 
-// prettier-ignore
-// eslint-disable-next-line
-type SetInputState<T> = Dispatch<SetStateAction<InputStateType<T>[]>> | ReturnType<typeof useExtendedState<InputStateType<T>[]>>[1];
-
-interface UseInputOnChangeProps<T> {
+interface UseInputOnChangeProps<T = string> {
   state: InputStateType<T>;
-  setState: SetInputState<T>;
-  i: number;
+  setState: (newState: any) => void;
 }
 
 function useInputEventHandler() {
   return {
     createInputChangeHandler:
-      ({ state, setState, i }: UseInputOnChangeProps<string>) =>
+      ({ state, setState }: UseInputOnChangeProps<string>) =>
       (e: ChangeEvent<HTMLInputElement>) => {
         const numberString = filterNumber(e.currentTarget.value);
         if (!state.checkIsAllowInput(numberString)) return;
 
-        setCardInfoState(setState, i, numberString);
+        setState(numberString);
       },
     createInputBlurHandler:
       ({
@@ -35,25 +29,15 @@ function useInputEventHandler() {
         getNewValue: (e: FocusEvent<HTMLInputElement, Element>) => string;
       }) =>
       (e: FocusEvent<HTMLInputElement, Element>) => {
-        const { setState, i } = props;
+        const { setState } = props;
         if (checkWhetherSetState(e)) {
           const paddedValue = getNewValue(e);
           e.currentTarget.value = paddedValue;
 
-          setCardInfoState(setState, i, paddedValue);
+          setState(paddedValue);
         }
       },
   };
 }
 
 export { useInputEventHandler };
-
-function setCardInfoState<T = string>(setState: SetInputState<T>, i: number, newValue: T) {
-  setState((prev) => {
-    return createUpdatedCardInfoState(prev, i, newValue);
-  });
-}
-
-function createUpdatedCardInfoState<T = string>(prevState: InputStateType<T>[], i: number, newValue: T) {
-  return createUpdatedArray(prevState, i, createUpdatedObject(prevState[i], 'value', newValue));
-}
