@@ -7,7 +7,7 @@ export default {
   component: PasswordInputBox,
 } as Meta;
 
-const Template: ComponentStory<typeof PasswordInputBox> = (args) => <PasswordInputBox {...args} />;
+const Template: ComponentStory<typeof PasswordInputBox> = () => <PasswordInputBox />;
 
 const cardPassword = {
   num1: '2',

@@ -7,7 +7,7 @@ export default {
   component: CardSelectModal,
 } as Meta;
 
-const Template: ComponentStory<typeof CardSelectModal> = (args) => <CardSelectModal {...args} />;
+const Template: ComponentStory<typeof CardSelectModal> = () => <CardSelectModal />;
 
 export const Default = Template.bind({});
 Default.args = {};

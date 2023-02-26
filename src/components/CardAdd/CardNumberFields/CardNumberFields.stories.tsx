@@ -7,7 +7,7 @@ export default {
   component: CardNumberFields,
 } as Meta;
 
-const Template: ComponentStory<typeof CardNumberFields> = (args) => <CardNumberFields {...args} />;
+const Template: ComponentStory<typeof CardNumberFields> = () => <CardNumberFields />;
 
 const cardNumber = {
   num1: '1234',
