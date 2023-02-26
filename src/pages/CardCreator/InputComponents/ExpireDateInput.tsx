@@ -1,24 +1,37 @@
-import React, { Fragment, memo } from 'react';
+import React, { ForwardedRef, forwardRef, Fragment, memo, useImperativeHandle } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
 import { checkIsArrayLast, filterNumber } from '@/utils';
 
 import type { CardStateSetter } from '../utils';
-import type { ExpireDatesState } from '../types';
+import type { ExpireDatesState, ErrorMessageType } from '../types';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
 import { InputDivider } from './components/InputDivider';
 import { CardInputWrapperPure } from './components/CardInputWrapper';
+import { useErrorMessage } from './hooks/useErrorMessage';
 
 interface ExpireDateInputProps {
   expireDates: ExpireDatesState;
   createExpireDateSetter: CardStateSetter<string>;
 }
 
-function ExpireDateInput({ expireDates, createExpireDateSetter }: ExpireDateInputProps) {
+export interface ExpireDateInputRef {
+  setErrorMessage: (messageType: ErrorMessageType) => void;
+}
+
+function ExpireDateInput(
+  { expireDates, createExpireDateSetter }: ExpireDateInputProps,
+  ref: ForwardedRef<ExpireDateInputRef>
+) {
+  const [errorMessage, setErrorMessage] = useErrorMessage({
+    inValid: 'MM/YY 형태로 만료일을 입력해주세요.',
+  });
   const { createInputBlurHandler, createInputChangeHandler } = useInputEventHandler();
 
+  useImperativeHandle(ref, () => ({ setErrorMessage }));
+
   return (
-    <CardInputWrapperPure header="만료일">
+    <CardInputWrapperPure header="만료일" errorMessage={errorMessage}>
       <div className="input-box w-50">
         {expireDates.map((expireDate, i) => {
           const { key, value, placeholder, checkIsValid, checkIsAllowInput } = expireDate;
@@ -66,4 +79,4 @@ function ExpireDateInput({ expireDates, createExpireDateSetter }: ExpireDateInpu
   );
 }
 
-export const ExpireDateInputPure = memo(ExpireDateInput);
+export const ExpireDateInputPure = memo(forwardRef(ExpireDateInput));

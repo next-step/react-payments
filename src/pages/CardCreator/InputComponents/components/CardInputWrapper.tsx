@@ -2,10 +2,13 @@ import React, { PropsWithChildren } from 'react';
 
 interface CardInputWrapperProps extends PropsWithChildren {
   header: string[] | string;
+  errorMessage?: string;
 }
 
-function CardInputWrapper({ header, children }: CardInputWrapperProps) {
+function CardInputWrapper({ header, errorMessage, children }: CardInputWrapperProps) {
   const headers = typeof header === 'string' ? [header] : header;
+  const isError = !!errorMessage;
+
   return (
     <div className="input-container">
       <div className="flex-between">
@@ -15,7 +18,8 @@ function CardInputWrapper({ header, children }: CardInputWrapperProps) {
           </span>
         ))}
       </div>
-      {children}
+      <div className={`${isError ? 'input-container-error' : ''}`}>{children}</div>
+      {isError && <div className="input-error-message">{errorMessage}</div>}
     </div>
   );
 }

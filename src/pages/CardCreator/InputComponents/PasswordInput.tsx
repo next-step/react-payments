@@ -1,26 +1,36 @@
-import React, { memo, useRef } from 'react';
+import React, { ForwardedRef, forwardRef, memo, useImperativeHandle, useRef } from 'react';
 
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 import { filterNumber } from '@/utils';
 
 import type { CardStateSetter } from '../utils';
-import type { PasswordsState } from '../types';
+import type { PasswordsState, ErrorMessageType } from '../types';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
 import { CardInputWrapperPure } from './components/CardInputWrapper';
+import { useErrorMessage } from './hooks/useErrorMessage';
 
 interface PasswordInputProps {
   passwords: PasswordsState;
   createPasswordSetter: CardStateSetter<string>;
 }
 
-function PasswordInput({ passwords, createPasswordSetter }: PasswordInputProps) {
+export interface PasswordInputRef {
+  setErrorMessage: (messageType: ErrorMessageType) => void;
+}
+
+function PasswordInput({ passwords, createPasswordSetter }: PasswordInputProps, ref: ForwardedRef<PasswordInputRef>) {
   const passwordInputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
+  const [errorMessage, setErrorMessage] = useErrorMessage({
+    inValid: '비밀번호 앞 2자리를 모두 입력해주세요.',
+  });
   const { createInputChangeHandler } = useInputEventHandler();
   const { toTheNextElement } = useSequentialFocusWithElements(passwordInputsRef);
 
+  useImperativeHandle(ref, () => ({ setErrorMessage }));
+
   return (
-    <CardInputWrapperPure header="카드 비밀번호">
+    <CardInputWrapperPure header="카드 비밀번호" errorMessage={errorMessage}>
       <div className="flex">
         {passwords.map((password, i) => {
           const { key, value, checkIsAllowInput } = password;
@@ -56,4 +66,4 @@ function PasswordInput({ passwords, createPasswordSetter }: PasswordInputProps) 
   );
 }
 
-export const PasswordInputPure = memo(PasswordInput);
+export const PasswordInputPure = memo(forwardRef(PasswordInput));

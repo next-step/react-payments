@@ -2,6 +2,18 @@
   margin: 16px 0;
 }
 
+.input-container-error {
+  border-bottom: 1px solid red;
+}
+
+.input-error-message {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: red;
+  font-size: 14px;
+}
+
 .input-box {
   display: flex;
   align-items: center;

@@ -1,22 +1,35 @@
-import React, { memo } from 'react';
+import React, { ForwardedRef, forwardRef, memo, useImperativeHandle } from 'react';
 
 import { filterNumber } from '@/utils';
 
 import type { CardStateSetter } from '../utils';
-import type { SecurityCodesState } from '../types';
+import type { SecurityCodesState, ErrorMessageType } from '../types';
 import { useInputEventHandler } from './hooks/useInputEventHandler';
 import { CardInputWrapperPure } from './components/CardInputWrapper';
+import { useErrorMessage } from './hooks/useErrorMessage';
 
 interface SecurityCodeInputProps {
   securityCodes: SecurityCodesState;
   createSecurityCodeSetter: CardStateSetter<string>;
 }
 
-function SecurityCodeInput({ securityCodes, createSecurityCodeSetter }: SecurityCodeInputProps) {
+export interface SecurityCodeInputRef {
+  setErrorMessage: (messageType: ErrorMessageType) => void;
+}
+
+function SecurityCodeInput(
+  { securityCodes, createSecurityCodeSetter }: SecurityCodeInputProps,
+  ref: ForwardedRef<SecurityCodeInputRef>
+) {
+  const [errorMessage, setErrorMessage] = useErrorMessage({
+    inValid: '보안번호 3자리를 입력해주세요.',
+  });
   const { createInputChangeHandler } = useInputEventHandler();
 
+  useImperativeHandle(ref, () => ({ setErrorMessage }));
+
   return (
-    <CardInputWrapperPure header="보안코드(CVC/CVV)">
+    <CardInputWrapperPure header="보안코드(CVC/CVV)" errorMessage={errorMessage}>
       {securityCodes.map((securityCode, i) => {
         const { key, value, checkIsAllowInput } = securityCode;
 
@@ -43,4 +56,4 @@ function SecurityCodeInput({ securityCodes, createSecurityCodeSetter }: Security
   );
 }
 
-export const SecurityCodeInputPure = memo(SecurityCodeInput);
+export const SecurityCodeInputPure = memo(forwardRef(SecurityCodeInput));
