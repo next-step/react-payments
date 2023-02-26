@@ -10,7 +10,6 @@ interface CardProps {
   expireDates: (string | undefined)[];
 }
 
-// TODO: 보여지는 큰 카드는 스토리북 컴포넌트로 분리 가능.
 function Card({ cardNumbers, expireDates, ownerName }: CardProps) {
   return (
     <div className="empty-card">
