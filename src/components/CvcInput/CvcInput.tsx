@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { onNumericKeyDownOnly } from '../../domain/payments/listeners';
 
 type TCVCInputProps = {
-  onCvcChange?: (cvc: string) => void;
+  onChange?: (cvc: string) => void;
 };
 
-function CvcInput({ onCvcChange }: TCVCInputProps) {
-  const [cvc, setCvc] = useState<string>('');
+function CvcInput({ onChange }: TCVCInputProps) {
+  const [cvc, setCvc] = useState('');
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCvc(event.target.value);
   };
 
   useEffect(() => {
-    if (onCvcChange) onCvcChange(cvc);
+    onChange?.(cvc);
   }, [cvc]);
 
   return (
@@ -23,7 +23,7 @@ function CvcInput({ onCvcChange }: TCVCInputProps) {
         className="input-basic w-25"
         type="password"
         maxLength={3}
-        onChange={onChange}
+        onChange={handleChange}
         onKeyDown={onNumericKeyDownOnly}
       />
     </div>

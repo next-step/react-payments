@@ -8,9 +8,9 @@ function CardList() {
     <Frame title="카드 목록">
       <ul>
         <li>
-          <div className="empty-card">
-            <Link to="/card-add">+</Link>
-          </div>
+          <Link to="/card-add">
+            <div className="empty-card">+</div>
+          </Link>
         </li>
       </ul>
     </Frame>

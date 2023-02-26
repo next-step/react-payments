@@ -15,10 +15,10 @@ function CardNumberInput({ onCardNumberChange }: TCardNumberInputProps) {
   const cardNumberInputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
-    if (onCardNumberChange) onCardNumberChange(cardNumbers);
+    onCardNumberChange?.(cardNumbers);
   }, [cardNumbers]);
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>, currentIndex: number) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>, currentIndex: number) => {
     const changedValue = replaceNumberOnly(event.target.value);
     event.target.value = changedValue;
     const cardNumbers = cardNumberInputRefs.current?.map((input) => input?.value || '');
@@ -38,7 +38,7 @@ function CardNumberInput({ onCardNumberChange }: TCardNumberInputProps) {
             type={type}
             className="input-basic"
             onKeyDown={onNumericKeyDownOnly}
-            onChange={(event) => onChange(event, idx)}
+            onChange={(event) => handleChange(event, idx)}
             ref={(el) => (cardNumberInputRefs.current[idx] = el)}
             maxLength={CARD_NUMBER_MAX_LENGTH}
           />

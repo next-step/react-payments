@@ -8,8 +8,8 @@ type TExpiredInputChange = {
 };
 
 function ExpiredInput({ onExpiredChange }: TExpiredInputChange) {
-  const [expiredMonth, setExpiredMonth] = useState<number>(1);
-  const [expiredYear, setExpiredYear] = useState<number>(0);
+  const [expiredMonth, setExpiredMonth] = useState(1);
+  const [expiredYear, setExpiredYear] = useState(0);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {

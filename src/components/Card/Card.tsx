@@ -4,7 +4,7 @@ import '../../styles/card.css';
 import { generatePad } from '../../util/number';
 import { getShorteningString } from '../../util/string';
 
-const getEncryptedChars = (s = '') => Array.from({ length: s.length }, () => '•').join('');
+const convertToEncryptedChars = (s = '') => '•'.repeat(s.length);
 const getViewCardNumbers = (cardNumbers: string[]) => {
   const result: string[] = [];
   return cardNumbers
@@ -12,7 +12,7 @@ const getViewCardNumbers = (cardNumbers: string[]) => {
       if ([0, 1].includes(idx)) {
         return [...accumulated, current || ''];
       }
-      return [...accumulated, getEncryptedChars(current)];
+      return [...accumulated, convertToEncryptedChars(current)];
     }, result)
     .join('-');
 };

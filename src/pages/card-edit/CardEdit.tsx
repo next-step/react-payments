@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
-import { Card } from '../../components/Card';
-import { CardNumberInput } from '../../components/CardNumberInput';
-import { CvcInput } from '../../components/CvcInput';
-import { ExpiredInput } from '../../components/ExpiredInput';
-import { Frame } from '../../components/Frame';
-import { Link } from '../../components/Link';
-import { OwnerInput } from '../../components/OwnerInput';
-import { PinInput } from '../../components/PinInput';
+import { Card, CardNumberInput, CvcInput, ExpiredInput, Frame, Link, OwnerInput, PinInput } from '../../components';
 
 function CardList() {
   const [cardNumbers, setCardNumbers] = useState<string[]>([]);
-  const [expiredMonth, setExpiredMonth] = useState<number>(0);
-  const [expiredYear, setExpiredYear] = useState<number>(0);
-  const [owner, setOwner] = useState<string>('');
-  const [cvc, setCvc] = useState<string>('');
+  const [expiredMonth, setExpiredMonth] = useState(0);
+  const [expiredYear, setExpiredYear] = useState(0);
+  const [owner, setOwner] = useState('');
+  const [cvc, setCvc] = useState('');
 
   const handleCardNumberChange = (cardNumbers: string[]) => {
     setCardNumbers(cardNumbers);
@@ -39,7 +32,7 @@ function CardList() {
       <CardNumberInput onCardNumberChange={handleCardNumberChange} />
       <ExpiredInput onExpiredChange={handleExpiredChange} />
       <OwnerInput onOwnerChanged={handleOwnerChange} />
-      <CvcInput onCvcChange={handleCvcChange} />
+      <CvcInput onChange={handleCvcChange} />
       <PinInput />
       <div className="button-box">
         <div className="button-text">

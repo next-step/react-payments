@@ -5,7 +5,7 @@ type TOwnerInputProps = {
 };
 
 function OwnerInput({ onOwnerChanged }: TOwnerInputProps) {
-  const [owner, setOwner] = useState<string>('');
+  const [owner, setOwner] = useState('');
 
   useEffect(() => {
     if (onOwnerChanged) onOwnerChanged(owner);
