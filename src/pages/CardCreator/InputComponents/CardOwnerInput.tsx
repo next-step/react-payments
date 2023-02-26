@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 
 import type { CardOwnersState } from '../types';
 import type { CardStateSetter } from '../utils';
@@ -31,4 +31,4 @@ function CardOwnerInput({ ownerNames, createOwnerNameSetter }: CardOwnerInputPro
   );
 }
 
-export { CardOwnerInput };
+export const CardOwnerInputPure = memo(CardOwnerInput);

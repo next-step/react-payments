@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import type { CardStateSetter } from '../utils';
 import type { SecurityCodesState } from '../types';
@@ -31,4 +31,4 @@ function SecurityCodeInput({ securityCodes, createSecurityCodeSetter }: Security
   );
 }
 
-export { SecurityCodeInput };
+export const SecurityCodeInputPure = memo(SecurityCodeInput);

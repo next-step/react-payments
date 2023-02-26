@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
 import { checkIsArrayLast } from '@/utils';
@@ -58,4 +58,4 @@ function ExpireDateInput({ expireDates, createExpireDateSetter }: ExpireDateInpu
   );
 }
 
-export { ExpireDateInput };
+export const ExpireDateInputPure = memo(ExpireDateInput);

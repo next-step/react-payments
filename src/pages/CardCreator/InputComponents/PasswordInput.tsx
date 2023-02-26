@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { memo, useRef } from 'react';
 
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 
@@ -46,4 +46,4 @@ function PasswordInput({ passwords, createPasswordSetter }: PasswordInputProps) 
   );
 }
 
-export { PasswordInput };
+export const PasswordInputPure = memo(PasswordInput);

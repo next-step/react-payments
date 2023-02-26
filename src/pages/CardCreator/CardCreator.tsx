@@ -5,10 +5,15 @@ import { routes } from '@/routes';
 import Card from '@/components/Card';
 
 import { createCardStateSetter } from './utils';
-import { CardNumberInput, CardOwnerInput, ExpireDateInput, PasswordInput, SecurityCodeInput } from './InputComponents';
+import {
+  CardNumberInputPure,
+  CardOwnerInputPure,
+  ExpireDateInputPure,
+  PasswordInputPure,
+  SecurityCodeInputPure,
+} from './InputComponents';
 import { cardNumbersInit, expireDatesInit, passwordsInit, cardOwnersInit, securityCodesInit } from './CardCreatorInits';
 
-// TODO: rendering 최적화 적용하기.
 function CardCreator() {
   const [cardNumbers, setCardNumbers] = useState(cardNumbersInit);
   const [expireDates, setExpireDate] = useState(expireDatesInit);
@@ -31,23 +36,23 @@ function CardCreator() {
           ownerName={ownerNames[0].value}
         />
       </div>
-      <CardNumberInput
+      <CardNumberInputPure
         cardNumbers={cardNumbers}
         createCardNumberSetter={useMemo(() => createCardStateSetter(setCardNumbers), [setCardNumbers])}
       />
-      <ExpireDateInput
+      <ExpireDateInputPure
         expireDates={expireDates}
         createExpireDateSetter={useMemo(() => createCardStateSetter(setExpireDate), [setExpireDate])}
       />
-      <CardOwnerInput
+      <CardOwnerInputPure
         ownerNames={ownerNames}
         createOwnerNameSetter={useMemo(() => createCardStateSetter(setOwnerNames), [setOwnerNames])}
       />
-      <SecurityCodeInput
+      <SecurityCodeInputPure
         securityCodes={securityCodes}
         createSecurityCodeSetter={useMemo(() => createCardStateSetter(setSecurityCodes), [setSecurityCodes])}
       />
-      <PasswordInput
+      <PasswordInputPure
         passwords={passwords}
         createPasswordSetter={useMemo(() => createCardStateSetter(setPasswords), [setPasswords])}
       />
@@ -56,7 +61,6 @@ function CardCreator() {
           to="/add-complete"
           className="button-text"
           onClick={(e) => {
-            // TODO: 안된 input을 찾아 focus해주는 기능으로 UX 향상 가능. useRef로 담은 element와 연동
             const isAllValid = [cardNumbers, expireDates, ownerNames, securityCodes, passwords].some((states) => {
               return states.some(({ value, checkIsValid }) => checkIsValid(value));
             });

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, memo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
@@ -56,4 +56,4 @@ function CardNumberInput({ cardNumbers, createCardNumberSetter }: CardNumberInpu
   );
 }
 
-export { CardNumberInput };
+export const CardNumberInputPure = memo(CardNumberInput);
