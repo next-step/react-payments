@@ -8,3 +8,13 @@ export type InputStateType<T = string> = {
   checkIsValid: (value?: T) => boolean;
   checkIsAllowInput: (input?: T) => boolean;
 };
+
+export type CardNumber = string;
+
+export type CardOwner = string;
+
+export type ExpireDate = string;
+
+export type SecurityCode = string;
+
+export type Password = string;

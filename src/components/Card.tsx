@@ -1,13 +1,14 @@
 import React from 'react';
 
-// 도메인이 되는 타입들
+import type { CardNumber, CardOwner, ExpireDate } from '@/types';
+
 interface CardProps {
   cardNumbers: {
     isHide: boolean;
-    value?: string;
+    value?: CardNumber;
   }[];
-  ownerName?: string;
-  expireDates: (string | undefined)[];
+  ownerName?: CardOwner;
+  expireDates: (ExpireDate | undefined)[];
 }
 
 function Card({ cardNumbers, expireDates, ownerName }: CardProps) {

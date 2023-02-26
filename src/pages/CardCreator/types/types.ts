@@ -1,11 +1,11 @@
-import { InputStateType } from '@/types/types';
+import { InputStateType, CardNumber, CardOwner, ExpireDate, Password, SecurityCode } from '@/types/types';
 
-export type CardNumbersState = Omit<InputStateType<string>, 'placeholder'>[];
+export type CardNumbersState = Omit<InputStateType<CardNumber>, 'placeholder'>[];
 
-export type CardOwnersState = Omit<InputStateType<string>, 'placeholder'>[];
+export type CardOwnersState = Omit<InputStateType<CardOwner>, 'placeholder'>[];
 
-export type ExpireDatesState = Omit<InputStateType<string>, 'type'>[];
+export type ExpireDatesState = Omit<InputStateType<ExpireDate>, 'type'>[];
 
-export type SecurityCodesState = Omit<InputStateType<string>, 'placeholder'>[];
+export type SecurityCodesState = Omit<InputStateType<SecurityCode>, 'placeholder'>[];
 
-export type PasswordsState = Omit<InputStateType<string>, 'type' | 'placeholder'>[];
+export type PasswordsState = Omit<InputStateType<Password>, 'type' | 'placeholder'>[];
