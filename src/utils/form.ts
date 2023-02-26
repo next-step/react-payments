@@ -39,11 +39,15 @@ export const validatePassword = (digit: string, targetName: string) => {
   return digit.replace(/\D+/g, '');
 };
 
-const nextFocus = (value: string, targetName: string, nextLength: number) => {
+const nextFocus = (
+  value: string,
+  targetName: string,
+  nextFocusLength: number
+) => {
   const nextId = Number(targetName.slice(-1)) + 1;
   const targetId = targetName.slice(0, targetName.length - 1);
   const nextRef = document.getElementById(targetId + nextId);
-  if (value.length === nextLength) {
+  if (value.length === nextFocusLength) {
     if (!nextRef) return;
     nextRef.focus();
   }
