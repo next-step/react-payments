@@ -16,6 +16,7 @@ module.exports = {
   },
 
   extends: [
+    'airbnb/hooks',
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'eslint-config-prettier',
