@@ -1,17 +1,13 @@
-import React, { useContext } from 'react';
-import CardPreview from '../components/CardPreview';
+import React from 'react';
 import Button from '../components/common/Button';
-import { CardDispatch } from '../context/cardDispatch';
 
 const PaymentCardRegisterNext = () => {
-  const { state } = useContext(CardDispatch);
-
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
-      <CardPreview data={state} />
+      {/*<CardPreview data={state} />*/}
       <div className="input-container flex-center w-100">
         <input
           className="input-underline w-75"

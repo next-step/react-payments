@@ -4,43 +4,45 @@ import React from 'react';
 
 interface IProps {
   onChange: (e: React.ChangeEvent) => void;
-  value1: string;
-  value2: string;
+  value: {
+    password1: string;
+    password2: string;
+  };
 }
 
-const InputPassword = ({ onChange, value1, value2 }: IProps) => {
+const InputPassword = ({ onChange, value }: IProps) => {
   return (
     <S.InputContainer>
       <S.InputTitle>카드 비밀번호</S.InputTitle>
       <Input
-        id={'ps1'}
-        name={'ps1'}
+        id={'password1'}
+        name={'password1'}
         onChange={onChange}
         type={'password'}
         className={'w-15'}
         maxLength={1}
-        value={value1}
+        value={value.password1}
       />
       <Input
-        id={'ps2'}
-        name={'ps2'}
+        id={'password2'}
+        name={'password2'}
         onChange={onChange}
         type={'password'}
         className={'w-15'}
         maxLength={1}
-        value={value2}
+        value={value.password2}
       />
       <Input
-        id={'ps3'}
-        name={'ps3'}
+        id={'password3'}
+        name={'password3'}
         type={'password'}
         className={'w-15'}
         disabled={true}
         placeholder={'*'}
       />
       <Input
-        id={'ps4'}
-        name={'ps4'}
+        id={'password4'}
+        name={'password4'}
         type={'password'}
         className={'w-15'}
         disabled={true}

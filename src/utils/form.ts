@@ -35,8 +35,8 @@ export const handleExpire = (digit: string) => {
 export const handlePassword = (digit: string, targetName: string) => {
   const value = digit.replace(/\D+/g, '');
   const length = value.length;
-  const nextId = Number(targetName.split('ps')[1]) + 1;
-  if (length === 1) nextFocus('ps' + nextId);
+  const nextId = Number(targetName.split('password')[1]) + 1;
+  if (length === 1) nextFocus('password' + nextId);
   return digit.replace(/\D+/g, '');
 };
 
