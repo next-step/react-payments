@@ -11,7 +11,7 @@ import CardForm from '../../components/domain/CardForm/CardForm';
 
 const CardRegistration = () => {
   const navigate = useNavigate();
-  const { card, setCard } = useCard();
+  const { cardInfo } = useCard();
   const [cardNumbers, setCardNumbers] = useState([]);
   const [cardExpirationDate, setCardExpirationDate] = useState([]);
   const [cardOwner, setCardOwner] = useState([]);
@@ -38,12 +38,12 @@ const CardRegistration = () => {
   };
 
   const handleSubmit = (cardInfo) => {
-    if (!isAllFilledOut(cardInfo)) {
-      alert('빈칸을 모두 채워주세요.');
-      return;
-    }
-    setCard(cardInfo);
-    navigate('/registration/setCardNickname');
+    // if (!isAllFilledOut(cardInfo)) {
+    //   alert('빈칸을 모두 채워주세요.');
+    //   return;
+    // }
+    // setCard(cardInfo);
+    // navigate('/registration/setCardNickname');
   };
 
   const handleChange = (inputInfo) => {
@@ -72,9 +72,9 @@ const CardRegistration = () => {
       />
       <Card
         cardStatus={'empty-card'}
-        cardNumbers={cardNumbers}
-        cardExpirationDate={cardExpirationDate}
-        cardOwner={cardOwner}
+        cardNumbers={cardInfo.cardNumbers}
+        cardExpirationDate={cardInfo.cardExpirationDate}
+        cardOwner={cardInfo.cardOwner}
       />
       <CardForm onSubmit={handleSubmit} onChange={handleChange} />
     </>

@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
+import { CHANGE_CARD } from '../../../../constants/action';
 import { MAX_INPUT_LENGTH } from '../../../../constants/numbers';
+import { useCard } from '../../../../store/CardContext';
 import Input from '../../../common/Input/Input';
 import InputBox from '../../../common/Input/InputBox';
 
-const CardNumbersInput = ({ onChange }) => {
+const CardNumbersInput = () => {
+  const { changeCardInfo } = useCard();
+
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [error, setError] = useState('');
   const nextElement = useRef([]);
@@ -20,7 +24,7 @@ const CardNumbersInput = ({ onChange }) => {
     const { value } = e.target;
 
     if (Number.isNaN(+value)) {
-      setError('카드번호는 숫자만 입력해주세요.');
+      changeCardInfo(CHANGE_CARD.ERROR, '카드번호는 숫자만 입력해주세요.');
       return;
     }
     setError(null);
@@ -28,11 +32,8 @@ const CardNumbersInput = ({ onChange }) => {
     updatedCardNumbers[index] = value;
     autoFocus(updatedCardNumbers, index);
     setCardNumbers(updatedCardNumbers);
+    changeCardInfo(CHANGE_CARD.NUMBERS, updatedCardNumbers);
   };
-
-  useEffect(() => {
-    onChange(cardNumbers, error);
-  }, [cardNumbers, error]);
 
   return (
     <InputBox name='카드 번호' boxClassName='input-box'>
