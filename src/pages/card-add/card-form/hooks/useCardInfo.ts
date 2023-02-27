@@ -83,32 +83,28 @@ const useCardInfo = () => {
 
   const handleSecurityCode = (event: ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(event.target.value)) return
-    if (event.target.value.length > 3) {
-      alert('보안코드는 세자리수 입니다.')
-      return
-    }
-    setCardInfo((prev) => ({ ...prev, securityCode: event.target.value }))
   }
 
   const handlePassword = (event: ChangeEvent<HTMLInputElement>) => {
-    const {
-      dataset: { name },
-      value,
-    } = event.target
-    if (value.length > 1) return
-    switch (name) {
-      case 'first':
-        setCardInfo((prev) => ({
-          ...prev,
-          password: { ...prev.password, first: value },
-        }))
-        break
-      case 'second':
-        setCardInfo((prev) => ({
-          ...prev,
-          password: { ...prev.password, second: value },
-        }))
-    }
+    if (!isNumber(event.target.value)) return
+    // const {
+    //   dataset: { name },
+    //   value,
+    // } = event.target
+    // if (value.length > 1) return
+    // switch (name) {
+    //   case 'first':
+    //     setCardInfo((prev) => ({
+    //       ...prev,
+    //       password: { ...prev.password, first: value },
+    //     }))
+    //     break
+    //   case 'second':
+    //     setCardInfo((prev) => ({
+    //       ...prev,
+    //       password: { ...prev.password, second: value },
+    //     }))
+    // }
   }
   return {
     cardInfo,
