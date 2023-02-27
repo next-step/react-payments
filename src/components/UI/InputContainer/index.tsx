@@ -17,7 +17,7 @@ const InputContainer = (props: StrictPropsWithChildren<Props>) => {
           alignItems: 'center',
         }}
       >
-        <Label>{props.label}</Label>
+        {props.label && <Label>{props.label}</Label>}
         <InputBox>{props.children}</InputBox>
       </div>
       <Line error={props.isError} />
