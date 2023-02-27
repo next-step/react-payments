@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import useRoute from './useRoute';
+import { PATH } from '../Constant';
+import { checkValidInputValue, cleanNaNValue, formatInputValue } from '../utils/inputValue';
 
 const defaultCardInfo = {
   company: '',
@@ -12,10 +14,6 @@ const defaultCardInfo = {
   password2: '',
   backgroundColor: '#e5e5e5'
 };
-
-const digitTypeInput = ['cvc', 'password1', 'password2'];
-
-const formatDigitTypeInput = ['number', 'expiry'];
 
 const cardCompanyList = [
   {
@@ -55,18 +53,18 @@ const cardCompanyList = [
   //   backgroundColor: "burlywood",
   // },
 ];
-
 const usePayment = () => {
   const [cardInfo, setCardInfo] = useState(defaultCardInfo);
   const [cardList, setCardList] = useState([]);
   const [isShowPopup, setIsShowPopup] = useState(true);
-
-  const navigate = useNavigate();
+  const { movePage } = useRoute();
 
   const onHandleCardInfoInput = (evt) => {
     let { value, id } = evt.target;
-    if (!checkValidInputValue(value, id))
-      value = value.subString(0, value.length - 1);
+    if (!checkValidInputValue(value, id)) {
+      alert('숫자만 입력가능합니다.');
+      value = cleanNaNValue(value);
+    }
     setCardInfo({ ...cardInfo, [id]: formatInputValue(value, id) });
   };
 
@@ -76,15 +74,6 @@ const usePayment = () => {
 
   const onHandleSubmit = (evt) => {
     evt.preventDefault();
-    navigate('/save');
-  };
-
-  const checkValidInputValue = (value, id) => {
-    if (digitTypeInput.indexOf(id) !== -1 && value.match(/[^0-9]/)) {
-      alert('숫자만 입력가능합니다.');
-      return false;
-    }
-    return true;
   };
 
   const onHandleCompanyPopupClick = (evt) => {
@@ -103,32 +92,7 @@ const usePayment = () => {
 
   const onHandleSave = () => {
     setCardList([...cardList, cardInfo]);
-    navigate('/');
-  };
-
-  const formatInputValue = (value, id) => {
-    let formattedValue = value;
-
-    if (formatDigitTypeInput.indexOf(id) === -1) return value;
-    if (id === 'number') {
-      const regex = /[^0-9]/g;
-      const cleanInput = value.replace(regex, '');
-      const chunks = cleanInput.match(/.{1,4}/g);
-      if (!chunks) {
-        return cleanInput;
-      }
-      formattedValue = chunks.join('-');
-    }
-    if (id === 'expiry') {
-      const regex = /[^0-9]/g;
-      const cleanInput = value.replace(regex, '');
-      const chunks = cleanInput.match(/.{1,2}/g);
-      if (!chunks) {
-        return cleanInput;
-      }
-      formattedValue = chunks.join('/');
-    }
-    return formattedValue;
+    movePage(PATH.HOME);
   };
 
   return {
