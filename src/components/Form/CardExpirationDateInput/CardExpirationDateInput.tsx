@@ -37,7 +37,7 @@ const CardExpirationDateInput = ({ setExprireDate, fontColor }) => {
   return (
     <Layout>
       <Title fontSize="xs" weight="bold" label="만료일" />
-      <InputContainer width={50}>
+      <Container width={60}>
         <Input
           type="text"
           placeholder="MM"
@@ -56,12 +56,15 @@ const CardExpirationDateInput = ({ setExprireDate, fontColor }) => {
           fontColor={fontColor}
           active={true}
         ></Input>
-      </InputContainer>
+      </Container>
+      <Wrapper>
+        <Text fontSize="xs" weight="bold" label="2자리씩 입력하세요. MM (01~12) / YY (01~99) " fontColor="red" />
+      </Wrapper>
     </Layout>
   );
 };
 const Layout = styled.div`
-  margin: 16px 0;
+  margin-top: 20px;
 `;
 const Title = styled(Text)`
   display: flex;
@@ -69,5 +72,11 @@ const Title = styled(Text)`
   margin-bottom: 4px;
   color: #525252;
 `;
-
+const Wrapper = styled.div`
+  margin-top: 3px;
+  padding-left: 3px;
+`;
+const Container = styled(InputContainer)`
+  gap: 5px;
+`;
 export default CardExpirationDateInput;

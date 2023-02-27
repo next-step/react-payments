@@ -4,11 +4,12 @@ type ContainerProps = {
   children: React.ReactNode;
   width?: number;
   margin?: number;
+  className?: string;
 };
 
-export const Container = ({ children, width, margin }: ContainerProps) => {
+export const Container = ({ className, children, width, margin }: ContainerProps) => {
   return (
-    <Layout width={width} margin={margin}>
+    <Layout className={className} width={width} margin={margin}>
       {children}
     </Layout>
   );

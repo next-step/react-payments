@@ -11,15 +11,13 @@ const FormPage = () => {
   };
 
   return (
-    <>
-      <Layout>
-        <Header>
-          <IconButton onClick={handleBackButton} name="arrowLeft" size="2xl" color="#575757" />
-          <Text fontSize="lg" weight="bold" label="카드추가" />
-        </Header>
-        <Form />
-      </Layout>
-    </>
+    <Layout>
+      <Header>
+        <IconButton onClick={handleBackButton} name="arrowLeft" size="2xl" color="#575757" />
+        <Text fontSize="lg" weight="bold" label="카드추가" />
+      </Header>
+      <Form />
+    </Layout>
   );
 };
 

@@ -51,7 +51,7 @@ const CardOwnerNameInput = ({ setOwnerName, fontColor }: CardOwnerNameInputProps
 };
 
 const Layout = styled.div`
-  margin: 16px 0;
+  margin-top: 20px;
 `;
 const Title = styled(Text)`
   margin-bottom: 4px;

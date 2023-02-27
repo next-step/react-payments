@@ -30,18 +30,25 @@ const CardNumberInput = ({ setCardNumber, fontColor }: CardNumberInputProps) => 
       <InputContainer>
         <Input ref={ref} type="text" theme="primary" onChange={handleInput} fontColor={fontColor} active={true}></Input>
       </InputContainer>
+      <Wrapper>
+        <Text fontSize="xs" weight="bold" label="카드 번호는 12자리여야 합니다." fontColor="red" />
+      </Wrapper>
     </Layout>
   );
 };
 
 const Layout = styled.div`
-  margin: 16px 0;
+  margin-top: 20px;
 `;
 const Title = styled(Text)`
   display: flex;
   align-items: center;
   margin-bottom: 4px;
   color: #525252;
+`;
+const Wrapper = styled.div`
+  margin-top: 3px;
+  padding-left: 3px;
 `;
 
 export default CardNumberInput;

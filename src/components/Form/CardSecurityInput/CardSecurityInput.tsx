@@ -31,17 +31,24 @@ const CardSecurityInput = ({ fontColor, setSecurityCode }: CardPasswordInputProp
       <InputContainer width={25}>
         <Input theme="primary" type="text" ref={inputRef} onChange={handleInput} fontColor={fontColor} active={true} />
       </InputContainer>
+      <Wrapper>
+        <Text fontSize="xs" weight="bold" label="숫자 3자리 입력해주세요" fontColor="red" />
+      </Wrapper>
     </Layout>
   );
 };
 
 export default CardSecurityInput;
 const Layout = styled.div`
-  margin: 16px 0;
+  margin-top: 20px;
 `;
 const Title = styled(Text)`
   display: flex;
   align-items: center;
   margin-bottom: 4px;
   color: #525252;
+`;
+const Wrapper = styled.div`
+  margin-top: 3px;
+  padding-left: 3px;
 `;

@@ -59,12 +59,10 @@ const Layout = styled.input<LayoutProps>`
           height: 45px;
           width: 100%;
           text-align: center;
-          outline: 2px solid transparent;
-          outline-offset: 2px;
-          border-color: #9ca3af;
+          outline: 1px solid transparent;
+          /* outline-color: red; */
           border: none;
           border-radius: 0.25rem;
-          margin-left: 2px;
         `};
   ${({ fontColor }) =>
     fontColor === "red"

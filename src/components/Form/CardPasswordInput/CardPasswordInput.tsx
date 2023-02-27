@@ -34,18 +34,21 @@ const CardPasswordInput = ({ fontColor, setPassword }: CardPasswordInputProps) =
   return (
     <Layout>
       <Title fontSize="xs" weight="bold" label="카드 비밀번호" />
-      <InputContainer width={70}>
+      <Container width={70}>
         <Input theme="primary" type="text" active={true} ref={inputRef} onChange={handleInput} fontColor={fontColor} />
         <Input theme="primary" type="text" active={true} ref={inputRef2} onChange={handleInput} fontColor={fontColor} />
         <Input theme="primary" type="text" active={false} />
         <Input theme="primary" type="text" active={false} />
-      </InputContainer>
+      </Container>
+      <Wrapper>
+        <Text fontSize="xs" weight="bold" label="숫자 1자리씩 입력해주세요" fontColor="red" />
+      </Wrapper>
     </Layout>
   );
 };
 
 const Layout = styled.div`
-  margin: 16px 0;
+  margin-top: 20px;
 `;
 const Title = styled(Text)`
   display: flex;
@@ -53,4 +56,13 @@ const Title = styled(Text)`
   margin-bottom: 4px;
   color: #525252;
 `;
+const Container = styled(InputContainer)`
+  display: flex;
+  gap: 5px;
+`;
+const Wrapper = styled.div`
+  margin-top: 3px;
+  padding-left: 3px;
+`;
+
 export default CardPasswordInput;

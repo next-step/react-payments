@@ -47,7 +47,7 @@ export const Form = () => {
   };
 
   return (
-    <>
+    <div>
       {isOpenModal ? <DotList onSelectedDot={selectedDot} /> : <></>}
       <Card
         type="primary"
@@ -66,9 +66,9 @@ export const Form = () => {
       <CardSecurityInput fontColor={state.color} setSecurityCode={setState} />
       <CardPasswordInput fontColor={state.color} setPassword={setState} />
       <ButtonBox>
-        <Button fontSize="s" onClick={submit} label="Next" />
+        <Button fontSize="m" onClick={submit} label="Next" />
       </ButtonBox>
-    </>
+    </div>
   );
 };
 

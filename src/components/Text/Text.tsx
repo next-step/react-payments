@@ -56,10 +56,10 @@ const Layout = styled.span<LayoutProps>`
   ${({ weight }) =>
     weight === "bold"
       ? css`
-          font-weight: 600;
+          font-weight: 700;
         `
       : css`
-          font-weight: 400;
+          font-weight: 500;
         `}
 
     vertical-align:middle;
