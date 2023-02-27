@@ -33,6 +33,7 @@
   border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;
+  margin-right: 8px;
 }
 
 .input-underline {
@@ -45,4 +46,16 @@
   padding: 4px 0;
 
   border-bottom: 1px solid #383838;
+}
+
+.input-card-name-title-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-elipsis {
+  width: 72px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -134,3 +134,12 @@
   vertical-align: middle;
   font-weight: 400;
 }
+
+.card-pass-word__disabled {
+  background-color: white !important;
+  color: #06C09E;
+}
+
+.hide-under-line {
+  text-decoration: none
+}
