@@ -7,6 +7,7 @@ export const domains = {
   CARD_LIST: "/cards",
   CARD_ADD: "/cards/add",
   CARD_COMPLETE: "/cards/complete",
+  CARD_EDIT: "/cards/edit",
 };
 
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   },
   {
     path: domains.CARD_COMPLETE,
+    element: <CompleteAddCard />,
+  },
+  {
+    path: `${domains.CARD_EDIT}/:id`,
     element: <CompleteAddCard />,
   },
 ]);
