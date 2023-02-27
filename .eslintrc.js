@@ -50,6 +50,9 @@ module.exports = {
 
     '@typescript-eslint/no-empty-interface': 0,
     '@typescript-eslint/ban-ts-comment': 1,
+
+    'jsx-a11y/no-static-element-interactions': 1,
+    'jsx-a11y/click-events-have-key-events': 1,
   },
   settings: {
     'import/parsers': {
