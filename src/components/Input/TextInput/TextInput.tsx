@@ -1,18 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { StyledTextInput } from './TextInput.style';
-import { Colors, colors } from '@/styles/colors';
-
-export type TextInputProps = {
-  label: string;
-  onChange: (value: string) => void;
-  value?: string;
-  placeholder?: string;
-  select?: (value: string) => string;
-  textAlign?: 'left' | 'center' | 'right';
-  width?: string;
-  fontColor: Colors;
-  type?: 'text' | 'password';
-} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>;
+import { TextInputProps } from '../type';
 
 const TextInput = (
   {
@@ -20,8 +8,8 @@ const TextInput = (
     value,
     onChange,
     placeholder,
-    fontColor,
-    select,
+    fontColor = 'gray3',
+    format,
     textAlign = 'left',
     width = '100%',
     type = 'text',
@@ -38,12 +26,12 @@ const TextInput = (
       width={width}
       ref={ref}
       type={type}
-      color={colors[fontColor]}
+      fontColor={fontColor}
       textAlign={textAlign}
       placeholder={placeholder}
       aria-label={label}
       onChange={handleChange}
-      value={value && (select ? select(value) : value)}
+      value={value && (format ? format(value) : value)}
       {...InputProps}
     />
   );

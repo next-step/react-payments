@@ -1,8 +1,9 @@
+import { Colors } from '@/styles/colors';
 import styled from '@emotion/styled';
 
 export const CardPasswordDot = styled.div<{
   size: string;
-  color: string;
+  color: Colors;
 }>`
   width: ${({ size }) => size};
   height: ${({ size }) => size};
@@ -10,7 +11,7 @@ export const CardPasswordDot = styled.div<{
   justify-content: center;
   align-items: center;
   span {
-    color: ${({ color }) => color};
+    color: ${({ theme, color }) => theme.colors[color]};
   }
 `;
 export const CardPasswordInputContainer = styled.div`

@@ -1,4 +1,4 @@
-import { Label, TextInput } from '@/components';
+import { Input, Label } from '@/components';
 import React from 'react';
 import { ACTION, useCardFieldDispatchContext } from '../../CardFieldContext';
 import { SEPARATOR, addSeparator } from '@/utils/formatter';
@@ -42,12 +42,12 @@ const CardExpirationDateField = ({
   // TODO : input 2개로 관리하는 것이 더 좋은가? (month, year)
   return (
     <Label labelText={LABEL_TEXT.EXPIRATION_DATE}>
-      <TextInput
+      <Input.TextInput
         value={expirationMonth + expirationYear}
         fontColor={fontColor}
         label="expirationDate"
         placeholder={PLACEHOLDER_TEXT.EXPIRATION_DATE}
-        select={addSeparator}
+        format={addSeparator}
         maxLength={EXPIRATION_DATE_INPUT_LENGTH}
         width={EXPIRATION_DATE_INPUT_WIDTH}
         onChange={handleChange}

@@ -1,7 +1,8 @@
+import { Colors } from '@/styles/colors';
 import styled from '@emotion/styled';
 import React from 'react';
 type ColorCircleRadioProps = {
-  color: string;
+  color: Colors;
   label: string;
   value: string;
   checked: boolean;
@@ -40,14 +41,21 @@ const StyledLabel = styled.label`
   width: 60px;
   flex-direction: column;
   text-align: center;
+  &:focus-within {
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
-const ColorCircle = styled.input<{ color: string }>`
+const ColorCircle = styled.input<{ color: Colors }>`
   width: 37px;
   height: 37px;
   border-radius: 50%;
-  background-color: ${({ color }) => color};
+  background-color: ${({ color, theme }) => theme.colors[color]};
   margin-bottom: 8px;
+  &:focus-visible {
+    outline-offset: 2px;
+    outline: ${({ theme }) => `2px dotted ${theme.colors.gray2}`};
+  }
   &:checked {
     border: ${({ theme }) => `2px solid ${theme.colors.primary}`};
   }

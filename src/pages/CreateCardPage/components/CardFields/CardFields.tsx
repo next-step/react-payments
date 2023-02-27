@@ -9,7 +9,7 @@ import { CARD_COMPANIES, ROUTE } from '@/constants';
 import styled from '@emotion/styled';
 import { TextButton } from '@/components';
 import { CardField } from '@/types';
-import { Route, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const CardFields = () => {
   const data = useCardFieldContext();
@@ -28,7 +28,7 @@ const CardFields = () => {
   } = data;
 
   const fontColor =
-    cardCompany !== null ? CARD_COMPANIES[cardCompany].color : 'gray1';
+    cardCompany !== null ? CARD_COMPANIES[cardCompany].color : 'gray3';
 
   const handleNextButtonClick = () => {
     navigate(ROUTE.CARD_CREATE_COMPLETE);

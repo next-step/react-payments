@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Label, TextInput } from '@/components';
+import { Label, Input } from '@/components';
 import { ACTION, useCardFieldDispatchContext } from '../../CardFieldContext';
 import { Colors } from '@/styles/colors';
 import { LABEL_TEXT, PLACEHOLDER_TEXT } from '@/constants';
@@ -27,7 +27,7 @@ const CardOwnerNameField = ({
       textLength={ownerName.length}
       textLimit={TEXT_LIMIT}
     >
-      <TextInput
+      <Input.TextInput
         maxLength={30}
         fontColor={fontColor}
         label="ownerName"

@@ -1,17 +1,15 @@
-import { TextInput } from '@/components';
-import { colors } from '@/styles/colors';
 import React, { useMemo } from 'react';
 import {
   CardPasswordDot,
   CardPasswordInputContainer,
 } from './CardPasswordInput.style';
 import { isNotNumber } from '@/utils/validate';
-import { TextInputProps } from '@/components/TextInput/TextInput';
+import { Input, TextInputProps } from '@/components';
 
 const CardPasswordInput = ({
   onChange,
   value,
-  fontColor,
+  fontColor = 'gray3',
 }: Pick<TextInputProps, 'onChange' | 'value' | 'fontColor'>) => {
   const InputRefs = React.useRef<HTMLInputElement[]>([]);
   const cardPasswordWidth = '45px';
@@ -44,7 +42,7 @@ const CardPasswordInput = ({
         switch (item) {
           case 'PASSWORD':
             return (
-              <TextInput
+              <Input.TextInput
                 key={index}
                 ref={(ref) => {
                   if (!ref) return;
@@ -66,7 +64,7 @@ const CardPasswordInput = ({
             return (
               <CardPasswordDot
                 key={index}
-                color={colors[fontColor]}
+                color={fontColor}
                 size={cardPasswordWidth}
               >
                 <span>•</span>

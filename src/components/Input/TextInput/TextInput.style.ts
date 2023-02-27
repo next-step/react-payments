@@ -1,8 +1,9 @@
+import { Colors } from '@/styles/colors';
 import styled from '@emotion/styled';
 
 export const StyledTextInput = styled.input<{
   textAlign: 'left' | 'center' | 'right';
-  color: string;
+  fontColor: Colors;
   width: string;
 }>`
   display: flex;
@@ -13,5 +14,5 @@ export const StyledTextInput = styled.input<{
   width: ${({ width }) => width};
 
   text-align: ${({ textAlign }) => textAlign};
-  color: ${({ color }) => color};
+  color: ${({ fontColor, theme }) => theme.colors[fontColor]};
 `;
