@@ -1,5 +1,5 @@
 import { CARD_NAME_1, CARD_NAME_2, CARD_NAME_GAP } from '../../../constants/Card'
-import Button from '../../Element/Button'
+import { Button } from '../../Element'
 
 const CardDesign = ({ cardDesignNameHandler }: CardDesignProps) => {
   return (
