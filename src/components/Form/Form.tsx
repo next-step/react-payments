@@ -24,7 +24,7 @@ export const Form = () => {
     const newCard = {
       ...currentFormCard,
       alias: "",
-      id: Date.now(),
+      id: Date.now().toString(),
     };
     cardCtx.addCardToStore(newCard);
     navigate("/complete"); // Input validation 추가 필요

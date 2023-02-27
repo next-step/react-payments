@@ -29,5 +29,5 @@ export interface CardFormType {
 }
 export interface NewCardType extends CardFormType {
   alias: string;
-  id: number;
+  id: string;
 }

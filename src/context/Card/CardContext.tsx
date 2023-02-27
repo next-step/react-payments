@@ -17,6 +17,13 @@ const reducer = (state, action) => {
       state.store = action.payload;
       return state;
 
+    case ACTION_TYPES.remove:
+      const newCardList = state.list.filter((card: NewCardType) => card.id !== action.payload.id);
+      return {
+        list: newCardList,
+        store: "",
+      };
+
     default:
       return state;
   }
@@ -45,7 +52,7 @@ const DEFAULT_STATE: DEFAULT_STATE_TYPE = {
     color: "",
     company: "",
     alias: "",
-    id: 0,
+    id: "",
   },
 };
 

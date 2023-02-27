@@ -13,17 +13,17 @@ const MyCardListPage = () => {
   const cardCtx = useContext(CardContext);
   const MyCardList = [...cardCtx.state.list].reverse();
 
-  console.log(MyCardList);
   const handleAddCard = () => {
     navigate("/add");
   };
 
-  // Todo: 카드를 누르면 카드의 별칭을 바꾸는 페이지로 이동한다.
   const handleCard = (e) => {
-    const cardId = e.currentTarget.dataset.id;
-
+    const cardId = e.currentTarget.dataset.id as string;
+    const selectedCard = MyCardList.find((card: NewCardType) => card.id === cardId);
+    if (!selectedCard) return alert("현재 선택한 카드가 리스트에 존재하지 않습니다");
+    cardCtx.removeCard(selectedCard);
+    cardCtx.addCardToStore(selectedCard);
     navigate("/complete");
-    console.log(cardId);
   };
 
   return (

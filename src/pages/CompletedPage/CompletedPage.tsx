@@ -19,9 +19,10 @@ const CompletedPage = () => {
     if (currentInputRef === null) return;
     const refValue = currentInputRef.value;
     let alias = !refValue.length ? temporaryCard.company : refValue;
+    // 스토어에 저장된 아이템을 가져와서 새로운 카드를 만든다.
     const newCard = {
       ...cardCtx.state.store,
-      id: Date.now(),
+      id: Date.now().toString(),
       alias,
     };
     cardCtx.addCard(newCard);
@@ -33,11 +34,14 @@ const CompletedPage = () => {
     const length = currentInputRef.value.length;
     setInputLength(length);
   };
-
   return (
     <Layout>
       <TextWrapper>
-        <Text fontSize="lg" weight="bold" label="카드 등록이 완료되었습니다."></Text>
+        {!temporaryCard.alias.length ? (
+          <Text fontSize="lg" weight="bold" label="카드 등록이 완료되었습니다."></Text>
+        ) : (
+          <Text fontSize="lg" weight="bold" label="카드 별칭 수정"></Text>
+        )}
       </TextWrapper>
       <CardWrapper>
         <Card
