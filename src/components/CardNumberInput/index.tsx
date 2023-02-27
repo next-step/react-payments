@@ -3,10 +3,9 @@ import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
 import { InputContainer } from '@/components/UI';
 import { useBlur } from '@/hooks/useBlur';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
-import { initialCardState } from '@/pages/CardRegisterPage';
-import { CardKey } from '@/types';
+import type { CardNumber, Validation } from '@/types';
 
-const initialState = {
+const initialState: CardNumber = {
   1: '',
   2: '',
   3: '',
@@ -14,9 +13,7 @@ const initialState = {
 } as const;
 
 type Props = {
-  onChangeCardNumbers: <T extends CardKey>(
-    state: typeof initialCardState[T]
-  ) => void;
+  onChangeCardNumbers: (state: Validation<CardNumber>) => void;
 };
 
 const CardNumberInput = (props: Props) => {

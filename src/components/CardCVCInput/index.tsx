@@ -3,11 +3,10 @@ import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
 import { InputContainer } from '@/components/UI';
 import { useBlur } from '@/hooks/useBlur';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
-import { initialCardState } from '@/pages/CardRegisterPage';
-import { CardKey } from '@/types';
+import type { Validation } from '@/types';
 
 type Props = {
-  onChangeCVC: <T extends CardKey>(state: typeof initialCardState[T]) => void;
+  onChangeCVC: (state: Validation<string>) => void;
 };
 
 const CardCVCInput = (props: Props) => {

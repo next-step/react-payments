@@ -5,9 +5,9 @@ import { Button } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
 import { styled } from '@/lib/stitches.config';
 import { getItem, setItem } from '@/storage/storage';
-import { CardKey } from '@/types';
+import { type CardFormType, CardKey } from '@/types';
 
-export const initialCardState = {
+export const initialCardState: CardFormType = {
   [CardKey.CARD_NUMBERS]: {
     val: {
       1: '',
@@ -29,7 +29,12 @@ export const initialCardState = {
     isValid: false,
   },
   [CardKey.PASSWORD]: {
-    val: '',
+    val: {
+      1: '',
+      2: '',
+      3: '',
+      4: '',
+    },
     isValid: false,
   },
   [CardKey.OWNER_NAME]: {

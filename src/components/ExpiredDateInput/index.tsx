@@ -3,18 +3,15 @@ import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
 import { InputContainer } from '@/components/UI';
 import { useBlur } from '@/hooks/useBlur';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
-import { initialCardState } from '@/pages/CardRegisterPage';
-import { CardKey } from '@/types';
+import type { ExpireDate, Validation } from '@/types';
 
-const initialState = {
+const initialState: ExpireDate = {
   month: '',
   year: '',
 };
 
 type Props = {
-  onChangeExpiredDate: <T extends CardKey>(
-    state: typeof initialCardState[T]
-  ) => void;
+  onChangeExpiredDate: (state: Validation<ExpireDate>) => void;
 };
 
 const ExpiredDateInput = (props: Props) => {
@@ -25,7 +22,7 @@ const ExpiredDateInput = (props: Props) => {
   const isExpiredDateValid = Boolean(
     Number(expiredDate.month) <= MAX_MONTH &&
       expiredDate.month &&
-    expiredDate.year
+      expiredDate.year
   );
 
   const errorMessage = useMemo(() => {

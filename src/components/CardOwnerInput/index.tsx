@@ -2,11 +2,10 @@ import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
 import { useBlur } from '@/hooks/useBlur';
-import { initialCardState } from '@/pages/CardRegisterPage';
-import { CardKey } from '@/types';
+import type { Validation } from '@/types';
 
 type Props = {
-  onChangeOwner: <T extends CardKey>(state: typeof initialCardState[T]) => void;
+  onChangeOwner: (state: Validation<string>) => void;
 };
 
 const CardOwnerInput = (props: Props) => {
