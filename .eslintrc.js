@@ -27,6 +27,7 @@ module.exports = {
       },
     ],
     'no-shadow': 0,
+    'no-alert': 0,
 
     'react/jsx-filename-extension': [
       1,
@@ -48,6 +49,7 @@ module.exports = {
     'import/prefer-default-export': 0,
 
     '@typescript-eslint/no-empty-interface': 0,
+    '@typescript-eslint/ban-ts-comment': 1,
   },
   settings: {
     'import/parsers': {
