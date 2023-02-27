@@ -5,9 +5,9 @@ import { filterNumber } from '@/utils';
 
 import type { CardStateSetter } from '../utils';
 import type { PasswordsState, ErrorMessageType } from '../types';
-import { useInputEventHandler } from './hooks/useInputEventHandler';
 import { CardInputWrapperPure } from './components/CardInputWrapper';
 import { useErrorMessage } from './hooks/useErrorMessage';
+import { CardInfoInputElement } from './components/CardInfoInputElement';
 
 interface PasswordInputProps {
   passwords: PasswordsState;
@@ -24,7 +24,6 @@ function PasswordInput({ passwords, createPasswordSetter }: PasswordInputProps, 
   const [errorMessage, setErrorMessage] = useErrorMessage({
     inValid: '비밀번호 앞 2자리를 모두 입력해주세요.',
   });
-  const { createInputChangeHandler } = useInputEventHandler();
   const { toTheNextElement } = useSequentialFocusWithElements(passwordInputsRef);
 
   useImperativeHandle(ref, () => ({ setErrorMessage }));
@@ -38,7 +37,7 @@ function PasswordInput({ passwords, createPasswordSetter }: PasswordInputProps, 
           toTheNextElement(i, !!value && value.length < 2);
 
           return (
-            <input
+            <CardInfoInputElement
               key={key}
               type="password"
               className="input-basic w-15 mr-10"
@@ -46,7 +45,7 @@ function PasswordInput({ passwords, createPasswordSetter }: PasswordInputProps, 
               ref={(ref) => {
                 passwordInputsRef.current[i] = ref;
               }}
-              onChange={createInputChangeHandler({
+              onChangeProps={{
                 props: { setState: createPasswordSetter(i) },
                 checkWhetherSetState: (e) => {
                   const filteredNumber = filterNumber(e.currentTarget.value);
@@ -55,7 +54,7 @@ function PasswordInput({ passwords, createPasswordSetter }: PasswordInputProps, 
                 getNewValue: (e) => {
                   return filterNumber(e.currentTarget.value);
                 },
-              })}
+              }}
             />
           );
         })}

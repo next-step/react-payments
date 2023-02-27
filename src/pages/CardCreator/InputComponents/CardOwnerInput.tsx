@@ -2,9 +2,9 @@ import React, { ForwardedRef, forwardRef, memo, useImperativeHandle, useMemo } f
 
 import type { CardOwnersState, ErrorMessageType } from '../types';
 import type { CardStateSetter } from '../utils';
-import { useInputEventHandler } from './hooks/useInputEventHandler';
 import { CardInputWrapperPure } from './components/CardInputWrapper';
 import { useErrorMessage } from './hooks/useErrorMessage';
+import { CardInfoInputElement } from './components/CardInfoInputElement';
 
 interface CardOwnerInputProps {
   ownerNames: CardOwnersState;
@@ -24,20 +24,18 @@ function CardOwnerInput(
   });
   const { value, checkIsAllowInput, placeholder } = ownerNames[0];
 
-  const { createInputChangeHandler } = useInputEventHandler();
-
   useImperativeHandle(ref, () => ({ setErrorMessage }));
 
   const inputHeader = useMemo(() => ['카드 소유자 이름(선택)', `${value?.length || 0} / 30`], [value]);
 
   return (
     <CardInputWrapperPure header={inputHeader} errorMessage={errorMessage}>
-      <input
+      <CardInfoInputElement
         type="text"
         className="input-basic"
         value={value ?? ''}
         placeholder={placeholder}
-        onChange={createInputChangeHandler({
+        onChangeProps={{
           props: { setState: createOwnerNameSetter(0) },
           checkWhetherSetState: (e) => {
             return checkIsAllowInput(e.currentTarget.value);
@@ -45,7 +43,7 @@ function CardOwnerInput(
           getNewValue: (e) => {
             return e.currentTarget.value;
           },
-        })}
+        }}
       />
     </CardInputWrapperPure>
   );

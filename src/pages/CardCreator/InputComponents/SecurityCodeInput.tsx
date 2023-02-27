@@ -4,9 +4,9 @@ import { filterNumber } from '@/utils';
 
 import type { CardStateSetter } from '../utils';
 import type { SecurityCodesState, ErrorMessageType } from '../types';
-import { useInputEventHandler } from './hooks/useInputEventHandler';
 import { CardInputWrapperPure } from './components/CardInputWrapper';
 import { useErrorMessage } from './hooks/useErrorMessage';
+import { CardInfoInputElement } from './components/CardInfoInputElement';
 
 interface SecurityCodeInputProps {
   securityCodes: SecurityCodesState;
@@ -24,7 +24,6 @@ function SecurityCodeInput(
   const [errorMessage, setErrorMessage] = useErrorMessage({
     inValid: '보안번호 3자리를 입력해주세요.',
   });
-  const { createInputChangeHandler } = useInputEventHandler();
 
   useImperativeHandle(ref, () => ({ setErrorMessage }));
 
@@ -34,12 +33,12 @@ function SecurityCodeInput(
         const { key, value, checkIsAllowInput } = securityCode;
 
         return (
-          <input
+          <CardInfoInputElement
             key={key}
             className="input-basic w-25"
             type="password"
             value={value ?? ''}
-            onChange={createInputChangeHandler({
+            onChangeProps={{
               props: { setState: createSecurityCodeSetter(i) },
               checkWhetherSetState: (e) => {
                 const filteredNumber = filterNumber(e.currentTarget.value);
@@ -48,7 +47,7 @@ function SecurityCodeInput(
               getNewValue: (e) => {
                 return filterNumber(e.currentTarget.value);
               },
-            })}
+            }}
           />
         );
       })}

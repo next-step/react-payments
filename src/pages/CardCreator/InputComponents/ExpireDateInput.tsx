@@ -5,10 +5,10 @@ import { checkIsArrayLast, filterNumber } from '@/utils';
 
 import type { CardStateSetter } from '../utils';
 import type { ExpireDatesState, ErrorMessageType } from '../types';
-import { useInputEventHandler } from './hooks/useInputEventHandler';
 import { InputDivider } from './components/InputDivider';
 import { CardInputWrapperPure } from './components/CardInputWrapper';
 import { useErrorMessage } from './hooks/useErrorMessage';
+import { CardInfoInputElement } from './components/CardInfoInputElement';
 
 interface ExpireDateInputProps {
   expireDates: ExpireDatesState;
@@ -26,8 +26,6 @@ function ExpireDateInput(
   const [errorMessage, setErrorMessage] = useErrorMessage({
     inValid: 'MM/YY 형태로 만료일을 입력해주세요.',
   });
-  const { createInputBlurHandler, createInputChangeHandler } = useInputEventHandler();
-
   useImperativeHandle(ref, () => ({ setErrorMessage }));
 
   return (
@@ -41,12 +39,12 @@ function ExpireDateInput(
 
           return (
             <Fragment key={key}>
-              <input
+              <CardInfoInputElement
                 className="input-basic"
                 type="text"
                 value={value ?? ''}
                 placeholder={placeholder}
-                onChange={createInputChangeHandler({
+                onChangeProps={{
                   props: { setState: createExpireDateSetter(i) },
                   checkWhetherSetState: (e) => {
                     const filteredNumber = filterNumber(e.currentTarget.value);
@@ -55,8 +53,8 @@ function ExpireDateInput(
                   getNewValue: (e) => {
                     return filterNumber(e.currentTarget.value);
                   },
-                })}
-                onBlur={createInputBlurHandler({
+                }}
+                onBlurProps={{
                   props: { setState: createExpireDateSetter(i) },
                   checkWhetherSetState: (e) => {
                     const blurValue = e.currentTarget.value;
@@ -66,7 +64,7 @@ function ExpireDateInput(
                     const blurValue = e.currentTarget.value;
                     return blurValue.padStart(2, '0');
                   },
-                })}
+                }}
               />
               <ConditionalComponentWrapper isRender={!isLast}>
                 <InputDivider isHide={!isValueValid}>/</InputDivider>

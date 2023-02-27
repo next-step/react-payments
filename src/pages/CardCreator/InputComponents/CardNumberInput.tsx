@@ -6,10 +6,10 @@ import { checkIsArrayLast, filterNumber } from '@/utils';
 
 import type { CardStateSetter } from '../utils';
 import type { CardNumbersState, ErrorMessageType } from '../types';
-import { useInputEventHandler } from './hooks/useInputEventHandler';
 import { InputDivider } from './components/InputDivider';
 import { CardInputWrapperPure } from './components/CardInputWrapper';
 import { useErrorMessage } from './hooks/useErrorMessage';
+import { CardInfoInputElement } from './components/CardInfoInputElement';
 
 interface CardNumberInputProps {
   cardNumbers: CardNumbersState;
@@ -29,7 +29,6 @@ function CardNumberInput(
   });
   const cardNumberInputsRef = useRef<(HTMLInputElement | null)[]>([]);
 
-  const { createInputChangeHandler } = useInputEventHandler();
   const { toTheNextElement } = useSequentialFocusWithElements(cardNumberInputsRef);
 
   useImperativeHandle(ref, () => ({ setErrorMessage }));
@@ -46,14 +45,14 @@ function CardNumberInput(
 
           return (
             <Fragment key={key}>
-              <input
+              <CardInfoInputElement
                 type={type ?? 'text'}
                 value={value ?? ''}
                 className="input-basic text-black"
                 ref={(inputRef) => {
                   cardNumberInputsRef.current[i] = inputRef;
                 }}
-                onChange={createInputChangeHandler({
+                onChangeProps={{
                   props: { setState: createCardNumberSetter(i) },
                   checkWhetherSetState: (e) => {
                     const filteredNumber = filterNumber(e.currentTarget.value);
@@ -62,7 +61,7 @@ function CardNumberInput(
                   getNewValue: (e) => {
                     return filterNumber(e.currentTarget.value);
                   },
-                })}
+                }}
               />
               <ConditionalComponentWrapper isRender={!isLast}>
                 <InputDivider isHide={!isOverFourNumber} className="dash">
