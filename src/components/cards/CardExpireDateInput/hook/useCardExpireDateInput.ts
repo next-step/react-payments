@@ -34,7 +34,9 @@ const validateCardExpireDateInput = (
     ) {
       return {
         success: false,
-        error: new ValidationError(CARD_VALIDATION_ERROR_MESSAGES.MONTH_RANGE),
+        error: new ValidationError(
+          CARD_VALIDATION_ERROR_MESSAGES.INVALID_MONTH_RANGE
+        ),
       };
     }
   }
