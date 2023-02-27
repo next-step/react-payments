@@ -1,4 +1,4 @@
-import React, { ForwardedRef, forwardRef, memo, useImperativeHandle, useMemo, useState } from 'react';
+import React, { ForwardedRef, forwardRef, memo, useImperativeHandle, useMemo } from 'react';
 
 import type { CardOwnersState, ErrorMessageType } from '../types';
 import type { CardStateSetter } from '../utils';
@@ -22,7 +22,7 @@ function CardOwnerInput(
   const [errorMessage, setErrorMessage] = useErrorMessage({
     inValid: '소유주 이름을 입력해주세요.',
   });
-  const { value, checkIsAllowInput } = ownerNames[0];
+  const { value, checkIsAllowInput, placeholder } = ownerNames[0];
 
   const { createInputChangeHandler } = useInputEventHandler();
 
@@ -36,8 +36,7 @@ function CardOwnerInput(
         type="text"
         className="input-basic"
         value={value ?? ''}
-        maxLength={30}
-        placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+        placeholder={placeholder}
         onChange={createInputChangeHandler({
           props: { setState: createOwnerNameSetter(0) },
           checkWhetherSetState: (e) => {

@@ -65,6 +65,7 @@ export const cardOwnersInit: CardOwnersState = [
   {
     key: 'card-owner-name',
     value: undefined,
+    placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
     checkIsValid: (value) => !!value && value.length <= 30,
     checkIsAllowInput: (input) => !input || input.length <= 30,
   },

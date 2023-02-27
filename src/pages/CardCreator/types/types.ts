@@ -2,7 +2,7 @@ import { InputStateType, CardNumber, CardOwner, ExpireDate, Password, SecurityCo
 
 export type CardNumbersState = Omit<InputStateType<CardNumber>, 'placeholder'>[];
 
-export type CardOwnersState = Omit<InputStateType<CardOwner>, 'placeholder'>[];
+export type CardOwnersState = Omit<InputStateType<CardOwner>, 'type'>[];
 
 export type ExpireDatesState = Omit<InputStateType<ExpireDate>, 'type'>[];
 
