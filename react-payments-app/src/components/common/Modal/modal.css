@@ -9,6 +9,11 @@
   align-items: center;
   flex-wrap: wrap;
 
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0%);
+
   background: #fff;
   z-index: 10;
 }
@@ -50,4 +55,15 @@
 .modal-item-name {
   font-size: 12px;
   letter-spacing: -0.085rem;
+}
+
+.modal-closed {
+  display: none;
+}
+
+.modal-container {
+  position: absolute;
+
+  width: 100vw;
+  height: 100vh;
 }

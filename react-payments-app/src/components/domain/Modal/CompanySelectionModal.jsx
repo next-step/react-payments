@@ -1,48 +1,22 @@
+import { Modal } from '../../common/Modal/Modal';
+
 const CompanySelectionModal = () => {
   return (
-    <div>
-      <div className='modal-dimmed'>
-        <div className='modal'>
-          <div className='flex-center'>
-            <div className='modal-item-container'>
-              <div className='modal-item-dot'></div>
-              <span className='modal-item-name'>클린 카드</span>
-            </div>
-            <div className='modal-item-container'>
-              <div className='modal-item-dot'></div>
-              <span className='modal-item-name'>클린 카드</span>
-            </div>
-            <div className='modal-item-container'>
-              <div className='modal-item-dot'></div>
-              <span className='modal-item-name'>클린 카드</span>
-            </div>
-            <div className='modal-item-container'>
-              <div className='modal-item-dot'></div>
-              <span className='modal-item-name'>클린 카드</span>
-            </div>
-          </div>
-          <div className='flex-center'>
-            <div className='modal-item-container'>
-              <div className='modal-item-dot'></div>
-              <span className='modal-item-name'>클린 카드</span>
-            </div>
-            <div className='modal-item-container'>
-              <div className='modal-item-dot'></div>
-              <span className='modal-item-name'>클린 카드</span>
-            </div>
-            <div className='modal-item-container'>
-              <div className='modal-item-dot'></div>
-              <span className='modal-item-name'>클린 카드</span>
-            </div>
-            <div className='modal-item-container'>
-              <div className='modal-item-dot'></div>
-              <span className='modal-item-name'>클린 카드</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <>
+      <Modal data={cardCompanies} />
+    </>
   );
 };
 
 export default CompanySelectionModal;
+
+const cardCompanies = [
+  { id: 1, name: 'A카드', color: 'red' },
+  { id: 2, name: 'B카드', color: 'pink' },
+  { id: 3, name: 'C카드', color: 'white' },
+  { id: 4, name: 'D카드', color: 'orange' },
+  { id: 5, name: 'E카드', color: 'mint' },
+  { id: 6, name: 'F카드', color: 'ivory' },
+  { id: 7, name: 'G카드', color: 'skyblue' },
+  { id: 8, name: 'H카드', color: 'navy' },
+];
