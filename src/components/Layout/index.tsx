@@ -5,9 +5,9 @@ export type Props = { headerTitle?: string; goBack?: string };
 
 function Layout({ children, headerTitle, goBack }: PropsWithChildren<Props>) {
   return (
-    <div className="app">
+    <div className="w-full h-full">
       {headerTitle ? <Header headerTitle={headerTitle} goBack={goBack} /> : null}
-      {children}
+      <div className="h-full mt-4 flex flex-col">{children}</div>
     </div>
   );
 }

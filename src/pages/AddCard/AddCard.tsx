@@ -15,27 +15,23 @@ function AddCard() {
   }, []);
 
   return (
-    <div>
-      <div className="root">
-        <Layout headerTitle="카드 추가" goBack="/">
-          <Card
-            cardCompany=""
-            cardOwner={cardOwner}
-            cardNumber={{
-              cardNumber1,
-              cardNumber2,
-              cardNumber3,
-              cardNumber4,
-            }}
-            expiration={{
-              year,
-              month,
-            }}
-          />
-          <AddCardForm />
-        </Layout>
-      </div>
-    </div>
+    <Layout headerTitle="카드 추가" goBack="/">
+      <Card
+        cardCompany=""
+        cardOwner={cardOwner}
+        cardNumber={{
+          cardNumber1,
+          cardNumber2,
+          cardNumber3,
+          cardNumber4,
+        }}
+        expiration={{
+          year,
+          month,
+        }}
+      />
+      <AddCardForm />
+    </Layout>
   );
 }
 

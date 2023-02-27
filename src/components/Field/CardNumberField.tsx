@@ -1,4 +1,4 @@
-import { Input } from '@components/Common';
+import { Input, InputContainer } from '@components/Common';
 import { renderTextDivider } from '@/utils';
 import { CardNumber } from '@/types';
 import FieldContainer from './FieldContainer';
@@ -21,7 +21,7 @@ function CardNumberField({
   const { cardNumber1, cardNumber2, cardNumber3, cardNumber4 } = value;
   return (
     <FieldContainer title={title}>
-      <div className="input-box flex-center">
+      <InputContainer size="full">
         <Input
           type="text"
           minLength={minLength}
@@ -61,7 +61,7 @@ function CardNumberField({
           name="cardNumber4"
           onChange={onChange}
         />
-      </div>
+      </InputContainer>
     </FieldContainer>
   );
 }

@@ -1,6 +1,7 @@
+import { cls } from '@/utils';
 import { ChangeEvent, InputHTMLAttributes } from 'react';
 
-export type Width = 'w-15' | 'w-25' | 'w-50' | 'w-75' | 'w-100';
+export type Width = 'w-15' | 'w-25' | 'w-50' | 'w-75' | 'w-100' | 'w-full';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   kind?: 'basic' | 'underline';
@@ -9,9 +10,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-function Input({ className, kind = 'basic', width = 'w-25', onChange, formatter, ...props }: InputProps) {
-  const inputStyle = kind === 'basic' ? 'input-basic' : 'input-underline';
-
+function Input({ kind = 'basic', width = 'w-full', onChange, formatter, disabled, ...props }: InputProps) {
   const onChangeWithFormatter = (e: ChangeEvent<HTMLInputElement>) => {
     if (formatter) {
       e.target.value = formatter(e.target.value);
@@ -20,7 +19,20 @@ function Input({ className, kind = 'basic', width = 'w-25', onChange, formatter,
     onChange?.(e);
   };
 
-  return <input {...props} onChange={onChangeWithFormatter} className={`${className} ${inputStyle} ${width}`} />;
+  return (
+    <input
+      {...props}
+      onChange={onChangeWithFormatter}
+      disabled={disabled}
+      className={cls(
+        'h-10 outline-none  bg-transparent',
+        'flex items-center justify-center text-center',
+        width,
+        kind === 'underline' ? 'border-b-2 border-gray-200' : '',
+        'placeholder:text-sm',
+      )}
+    />
+  );
 }
 
 export default Input;
