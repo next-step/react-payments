@@ -22,6 +22,7 @@ export default function Card({
   color = "#94dacd",
   cardInfo,
   className,
+  onClick,
 }: CardProps) {
   const { cardName, cardNumber, cardOwnerName, expireDate } = cardInfo;
 
@@ -41,7 +42,12 @@ export default function Card({
   );
 
   return (
-    <S.CardContainer className={className} size={size} color={color}>
+    <S.CardContainer
+      className={className}
+      size={size}
+      color={color}
+      onClick={onClick}
+    >
       <S.CardTopWrapper>
         <S.CardText>{cardName}</S.CardText>
       </S.CardTopWrapper>

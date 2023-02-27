@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { Card } from "@/components/cards";
-import { Button, Input } from "@/components/common";
+import { Card, CardNameInput } from "@/components/cards";
+import { useCardNameInput } from "@/components/cards/CardNameInput/hook";
+import { Button } from "@/components/common";
 import { CardItem, useCardsContext } from "@/contexts/CardsContext";
-import useInput from "@/hooks/useInput";
 import { CardPageLayout } from "@/layouts/cards";
 import { domains } from "@/router";
 
@@ -16,20 +16,20 @@ export default function CompleteAddCard() {
 
   const { dispatch } = useCardsContext();
 
-  const { value, onChange } = useInput({ cardName: "" });
+  const { cardName, onCardNameChange } = useCardNameInput({
+    cardName: state?.cardInfo?.cardName ?? "",
+  });
 
   useEffect(() => {
-    const { cardInfo } = state;
-
-    if (!cardInfo) navigate(domains.CARD_LIST);
+    if (!state?.cardInfo) navigate(domains.CARD_LIST);
   }, []);
 
   const newCardInfo: CardItem = useMemo(
     () => ({
-      ...state.cardInfo,
-      cardName: value.cardName,
+      ...state?.cardInfo,
+      cardName: cardName.cardName,
     }),
-    [value]
+    [cardName.cardName]
   );
 
   const handleMoveToCardsPage = () => {
@@ -42,7 +42,7 @@ export default function CompleteAddCard() {
 
   return (
     <>
-      {state.cardInfo && (
+      {state?.cardInfo && (
         <CardPageLayout>
           <S.CompletedCardWrapper>
             <S.CompleteCardLabel>
@@ -53,12 +53,10 @@ export default function CompleteAddCard() {
               cardInfo={newCardInfo}
               color={state.cardInfo.color}
             />
-            <Input
+            <CardNameInput
               id="cardName"
-              variant="underlined"
-              textAlign="center"
-              value={value.cardName}
-              onChange={onChange}
+              value={cardName.cardName}
+              onChange={onCardNameChange}
             />
           </S.CompletedCardWrapper>
           <S.CompleteCardButtonWrapper>
