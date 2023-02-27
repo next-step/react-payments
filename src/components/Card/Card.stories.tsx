@@ -13,10 +13,13 @@ const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  cardNumber: '1234567890123456',
-  expirationMonth: '12',
-  expirationYear: '23',
-  ownerName: '홍길동',
-  cardName: '신한카드',
+  card: {
+    cardNumber: '1234567890123456',
+    expirationMonth: '12',
+    expirationYear: '23',
+    ownerName: '홍길동',
+    cardName: '신한카드',
+  },
+  size: 'small',
   cardColor: 'primary',
 };
