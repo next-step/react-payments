@@ -1,5 +1,5 @@
 import { PATH } from '../../Constant';
-import { useNavigate, useLocation } from 'react-router-dom';
+import useRoute from '../../hooks/useRoute';
 
 const getPageTitle = (currentPage) => {
   switch (currentPage) {
@@ -13,18 +13,17 @@ const getPageTitle = (currentPage) => {
 };
 
 const Header = () => {
-  const navigate = useNavigate();
-  const currentPage = useLocation().pathname;
+  const { movePrevPage, currentPage } = useRoute();
 
   return (
-    <div className="flex-center">
+    <header className="flex-center">
       {currentPage !== PATH.HOME && (
-        <div className="page-navigator mb-10" onClick={() => navigate(-1)}>
+        <div className="page-navigator mb-10" onClick={movePrevPage}>
           &lt;
         </div>
       )}
       <h2 className="page-title mb-10">{getPageTitle(currentPage)}</h2>
-    </div>
+    </header>
   );
 };
 
