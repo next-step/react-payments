@@ -132,8 +132,6 @@ export default function AddCard() {
         color: selectedCardName?.color,
       };
 
-      console.log(cardItem);
-
       dispatch({ type: "ADD_CARD", payload: cardItem });
 
       navigate(domains.CARD_COMPLETE, {

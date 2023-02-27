@@ -14,6 +14,10 @@ type CardAction =
   | {
       type: "UPDATE_CARD";
       payload: { id: string; newInfo: CardInfo & { color: string } };
+    }
+  | {
+      type: "DELETE_CARD";
+      payload: { id: string };
     };
 
 type CardsDispatch = Dispatch<CardAction>;
@@ -30,7 +34,7 @@ const initialState: CardItem[] = [];
 function cardCrudReducer(prevState: CardItem[], action: CardAction) {
   switch (action.type) {
     case "ADD_CARD": {
-      return [...prevState, action.payload];
+      return [action.payload, ...prevState];
     }
     case "UPDATE_CARD": {
       const id = action.payload.id;
@@ -42,6 +46,11 @@ function cardCrudReducer(prevState: CardItem[], action: CardAction) {
         { id, ...action.payload.newInfo },
         ...prevState.slice(updateCardIndex + 1),
       ];
+    }
+    case "DELETE_CARD": {
+      const id = action.payload.id;
+
+      return prevState.filter((item) => item.id !== id);
     }
     default:
       throw new Error(CONTEXT_ERROR_MESSAGES.UNDEFINED_ACTION);

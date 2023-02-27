@@ -17,6 +17,10 @@ export default function Cards() {
     navigate(domains.CARD_ADD);
   };
 
+  const handleMoveToEditCardPage = () => {
+    navigate(`${domains.CARD_EDIT}/1`);
+  };
+
   return (
     <div>
       <Header>보유카드</Header>
@@ -33,6 +37,7 @@ export default function Cards() {
               }}
               size="small"
               color={color}
+              onClick={handleMoveToEditCardPage}
             />
           )
         )}
