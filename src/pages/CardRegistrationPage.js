@@ -96,11 +96,11 @@ export default function CardRegistrationPage() {
           const { name, value } = e.target;
           if (!isNumber(value))
             return { success: false, errorMessage: MESSAGE.ALERT_NUMBER };
-          if (name == "month") {
+          if (name === "month") {
             if (value > 12) {
               return { success: false, errorMessage: MESSAGE.ALERT_EXP_MONTH };
             }
-          } else if (name == "year") {
+          } else if (name === "year") {
             if (value > 31 || value === 0) {
               return { success: false, errorMessage: MESSAGE.ALERT_EXP_YEAR };
             }
@@ -130,7 +130,7 @@ export default function CardRegistrationPage() {
       <CardSecurityCodeInput
         cardSecurityCode={cardSecurityCode}
         onChange={(e) => {
-          const { name, value } = e.target;
+          const { value } = e.target;
           if (!isNumber(value)) {
             return { success: false, errorMessage: MESSAGE.ALERT_NUMBER };
           }
@@ -140,7 +140,7 @@ export default function CardRegistrationPage() {
       <CardPasswordInput
         cardPassword={cardPassword}
         onChange={(e) => {
-          const { name, value } = e.target;
+          const { value } = e.target;
           if (!isNumber(value)) {
             return { success: false, errorMessage: MESSAGE.ALERT_NUMBER };
           }
