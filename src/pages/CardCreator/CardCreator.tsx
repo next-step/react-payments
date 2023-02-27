@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
 import { Card } from '@/components/Card';
+import { ThemeProvider } from '@/components/ThemeProvider';
 
 import {
   CardNumberInputPure,
@@ -20,7 +21,8 @@ import type {
 } from './InputComponents';
 import { cardNumbersInit, expireDatesInit, passwordsInit, cardOwnersInit, securityCodesInit } from './CardCreatorInits';
 import { useInputComponent } from './hooks/useInputComponent';
-import { ThemeProvider } from '@/components/ThemeProvider';
+import { useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';
+import { CardCompany } from './hooks/useCardCompanySelectModal/CardCompanySelector/cardCompanyList';
 
 function CardCreator() {
   const [cardNumbers, createCardNumberSetter, cardNumberInputRef, cardNumberValidator] =
@@ -34,21 +36,28 @@ function CardCreator() {
   const [passwords, createPasswordSetter, passwordInputRef, passwordsValidator] =
     useInputComponent<PasswordInputRef>(passwordsInit);
 
-  const [theme, setTheme] = useState('');
+  const [cardCompany, setCardCompany] = useState<CardCompany | undefined>();
+
+  const { CardCompanySelectModal, showModal, hideModal } = useCardCompanySelectModal();
 
   return (
-    <ThemeProvider className="app" theme={theme}>
+    <ThemeProvider className="app" theme={cardCompany?.theme}>
       <h2 className="page-title">
         <Link to={routes.home} className="mr-10">{`<`}</Link> 카드 추가
       </h2>
 
       <Card
+        cardCompany={cardCompany}
         cardNumbers={cardNumbers.map(({ type, value }) => ({
           isHide: type === 'password',
           value,
         }))}
         expireDates={expireDates.map(({ value }) => value)}
         ownerName={ownerNames[0].value}
+        onCardClick={(e) => {
+          e.stopPropagation();
+          showModal();
+        }}
       />
 
       <CardNumberInputPure
@@ -100,6 +109,12 @@ function CardCreator() {
           다음
         </Link>
       </div>
+      <CardCompanySelectModal
+        onCardCompanyClick={(cardCompany) => {
+          setCardCompany(cardCompany);
+          hideModal();
+        }}
+      />
     </ThemeProvider>
   );
 }
