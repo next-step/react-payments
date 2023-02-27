@@ -6,12 +6,14 @@ import {
   Card,
   CardCvcInput,
   CardExpireDateInput,
+  CardNameModal,
   CardNumberInput,
   CardOwnerInput,
   CardPasswordInput,
 } from "@/components/cards";
 import { useCardCvcInput } from "@/components/cards/CardCvcInput/hook";
 import { useCardExpireDateInput } from "@/components/cards/CardExpireDateInput/hook";
+import { useCardNameModal } from "@/components/cards/CardNameModal/hook";
 import { useCardNumberInput } from "@/components/cards/CardNumberInput/hook";
 import { useCardOwnerInput } from "@/components/cards/CardOwnerInput/hook";
 import { useCardPasswordInput } from "@/components/cards/CardPasswordInput/hook";
@@ -39,6 +41,7 @@ export default function AddCard() {
 
   const { dispatch } = useCardsContext();
 
+  // 카드번호
   const { cardNumber, isValidCardNumber, onCardNumberChange } =
     useCardNumberInput({
       num1: "",
@@ -46,23 +49,40 @@ export default function AddCard() {
       num3: "",
       num4: "",
     });
+
+  // 카드 만료일
   const { cardExpireDate, isValidExpireDate, onCardExpireDateChange } =
     useCardExpireDateInput({
       month: "",
       year: "",
     });
+
+  // 카드 소유주
   const { cardOwnerName, isValidOwnerName, onCardOwnerNameChange } =
     useCardOwnerInput({
       ownerName: "",
     });
+
+  // 카드 CVC
   const { cvcNumber, isValidCvcNumber, onCvcNumberChange } = useCardCvcInput({
     cvc: "",
   });
+
+  // 카드 비밀번호
   const { cardPassword, isPasswordValid, onCardPasswordChange } =
     useCardPasswordInput({
       password1: "",
       password2: "",
     });
+
+  // 카드 이름
+  const {
+    cardNameList,
+    selectedCardName,
+    isCardNameModalShow,
+    onCardNameSelect,
+    onCardNameModalOpen,
+  } = useCardNameModal(true);
 
   const cardExpireDateWithSlash = useMemo(
     () =>
@@ -84,12 +104,12 @@ export default function AddCard() {
 
   const cardInfo = useMemo(
     () => ({
-      cardName: "",
+      cardName: selectedCardName.name ?? "",
       cardNumber: cardNumberWithDash,
       cardOwnerName: cardOwnerName.ownerName || "NAME",
       expireDate: cardExpireDateWithSlash || "MM/YY",
     }),
-    [cardNumber, cardExpireDate, cardOwnerName]
+    [cardNumber, cardExpireDate, cardOwnerName, selectedCardName]
   );
 
   const checkSubmittable = () => {
@@ -109,8 +129,10 @@ export default function AddCard() {
       const cardItem: CardItem = {
         id: uuid,
         ...cardInfo,
-        color: "red",
+        color: selectedCardName?.color,
       };
+
+      console.log(cardItem);
 
       dispatch({ type: "ADD_CARD", payload: cardItem });
 
@@ -130,7 +152,13 @@ export default function AddCard() {
         카드추가
       </S.AddCardPageHeader>
       <S.AddCardForm>
-        <Card className="add-form-card" size="small" cardInfo={cardInfo} />
+        <Card
+          className="add-form-card"
+          size="small"
+          color={selectedCardName.color}
+          cardInfo={cardInfo}
+          onClick={onCardNameModalOpen}
+        />
         <S.AddCardFormInputWrapper>
           <CardNumberInput
             cardNumber={cardNumber}
@@ -156,6 +184,11 @@ export default function AddCard() {
           다음
         </Button>
       </S.AddCardFormSubmitButtonWrapper>
+      <CardNameModal
+        isShow={isCardNameModalShow}
+        onCardNameSelect={onCardNameSelect}
+        cardNameList={cardNameList}
+      />
     </CardPageLayout>
   );
 }
