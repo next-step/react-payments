@@ -51,9 +51,8 @@ const Layout = styled.div`
   gap: 30px;
 `;
 
-// styled component 상속되게 하는방법 찾아보기
 const Title = styled(Text)`
-  margin: 10px;
+  margin: 20px;
   display: block;
 `;
 const CardLayout = styled.div`

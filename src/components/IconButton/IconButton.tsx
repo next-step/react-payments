@@ -14,9 +14,10 @@ export type IconButtonPropsType = {
   name: FontAweSomeIconType;
   size: FontAwesomeIconProps["size"];
   color: string;
+  className?: string;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
-const IconButton = ({ onClick, name, size, color }: IconButtonPropsType) => {
+const IconButton = ({ onClick, className, name, size, color }: IconButtonPropsType) => {
   return (
     <Button onClick={onClick}>
       <FontAwesomeIcon icon={FontAwesomeIcons[name]} size={size} color={color}></FontAwesomeIcon>

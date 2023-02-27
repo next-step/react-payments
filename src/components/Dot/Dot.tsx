@@ -6,12 +6,13 @@ import { ColorType, CompanyType } from "types";
 export type DotProps = {
   color: ColorType;
   value: CompanyType;
+  className?: string;
   onClick: React.MouseEventHandler<HTMLDivElement>;
 };
 
-const Dot = ({ color, value, onClick }: DotProps) => {
+const Dot = ({ className, color, value, onClick }: DotProps) => {
   return (
-    <Layout onClick={onClick}>
+    <Layout onClick={onClick} className={className}>
       <Circle color={color} />
       <Text fontSize="s" weight="bold" label={value} />
     </Layout>

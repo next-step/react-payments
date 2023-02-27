@@ -8,11 +8,12 @@ export type InputProps = {
   theme: "underline" | "primary";
   fontColor?: ColorType;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
+  className?: string;
   active: boolean;
 };
 
 export const Input = (
-  { type, placeholder, theme, onChange, active, fontColor }: InputProps,
+  { type, placeholder, className, theme, onChange, active, fontColor }: InputProps,
   ref: React.ForwardedRef<HTMLInputElement>
 ) => {
   return (

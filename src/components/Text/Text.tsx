@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-
 import { FontSizeType, FontWeightType, ColorType } from "types";
 
 export type TextProps = {
@@ -7,11 +6,12 @@ export type TextProps = {
   label: string;
   weight?: FontWeightType;
   fontColor?: ColorType;
+  className?: string;
 };
 
-const Text = ({ fontSize, weight, label, fontColor }: TextProps) => {
+const Text = ({ className, fontSize, weight, label, fontColor }: TextProps) => {
   return (
-    <Layout fontSize={fontSize} weight={weight} fontColor={fontColor}>
+    <Layout className={className} fontSize={fontSize} weight={weight} fontColor={fontColor}>
       {label}
     </Layout>
   );
@@ -21,6 +21,7 @@ type LayoutProps = {
   fontSize: FontSizeType;
   weight?: FontWeightType;
   fontColor?: ColorType;
+  className?: string;
 };
 
 // size가 s일떄 특정 css 적용 , l일떄 특정 css 적용하게 구현

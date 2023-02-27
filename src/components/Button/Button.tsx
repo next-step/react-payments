@@ -5,11 +5,12 @@ export type ButtonProps = {
   fontSize: FontSizeType;
   label: string;
   onClick?: ReactEventHandler<HTMLButtonElement>;
+  className?: string;
 };
 
-export const Button = ({ label, fontSize, onClick }: ButtonProps) => {
+export const Button = ({ className, label, fontSize, onClick }: ButtonProps) => {
   return (
-    <StyledButton fontSize={fontSize} onClick={onClick}>
+    <StyledButton className={className} fontSize={fontSize} onClick={onClick}>
       {label}
     </StyledButton>
   );
@@ -18,6 +19,7 @@ export default Button;
 
 type StyledButtonProps = {
   fontSize: FontSizeType;
+  className?: string;
 };
 
 const StyledButton = styled.button<StyledButtonProps>`

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 export type CardProps = {
   size: "small" | "big";
   type: "primary" | "add";
+  className?: string;
   id?: string;
   number?: string;
   expireMonth?: string;
@@ -19,7 +20,19 @@ export type CardProps = {
   onClick?: ReactEventHandler<HTMLDivElement>;
 };
 
-const Card = ({ type, color, company, size, number, expireMonth, expireYear, ownerName, id, onClick }: CardProps) => {
+const Card = ({
+  type,
+  color,
+  company,
+  size,
+  number,
+  expireMonth,
+  expireYear,
+  ownerName,
+  id,
+  className,
+  onClick,
+}: CardProps) => {
   const cardCtx = useContext(CardContext);
   const MyCardList = [...cardCtx.state.list].reverse();
   const selectedCard = MyCardList.find((card: NewCardType) => card.id === id);
@@ -37,7 +50,7 @@ const Card = ({ type, color, company, size, number, expireMonth, expireYear, own
   };
 
   return (
-    <Layout onClick={onClick} id={id}>
+    <Layout onClick={onClick} id={id} className={className}>
       {type === "primary" ? (
         <Container color={color} size={size}>
           <Top>
