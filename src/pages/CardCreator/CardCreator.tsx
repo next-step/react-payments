@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
@@ -20,6 +20,7 @@ import type {
 } from './InputComponents';
 import { cardNumbersInit, expireDatesInit, passwordsInit, cardOwnersInit, securityCodesInit } from './CardCreatorInits';
 import { useInputComponent } from './hooks/useInputComponent';
+import { ThemeProvider } from '@/components/ThemeProvider';
 
 function CardCreator() {
   const [cardNumbers, createCardNumberSetter, cardNumberInputRef, cardNumberValidator] =
@@ -33,21 +34,23 @@ function CardCreator() {
   const [passwords, createPasswordSetter, passwordInputRef, passwordsValidator] =
     useInputComponent<PasswordInputRef>(passwordsInit);
 
+  const [theme, setTheme] = useState('');
+
   return (
-    <div className="app">
+    <ThemeProvider className="app" theme={theme}>
       <h2 className="page-title">
         <Link to={routes.home} className="mr-10">{`<`}</Link> 카드 추가
       </h2>
-      <div className="card-box">
-        <Card
-          cardNumbers={cardNumbers.map(({ type, value }) => ({
-            isHide: type === 'password',
-            value,
-          }))}
-          expireDates={expireDates.map(({ value }) => value)}
-          ownerName={ownerNames[0].value}
-        />
-      </div>
+
+      <Card
+        cardNumbers={cardNumbers.map(({ type, value }) => ({
+          isHide: type === 'password',
+          value,
+        }))}
+        expireDates={expireDates.map(({ value }) => value)}
+        ownerName={ownerNames[0].value}
+      />
+
       <CardNumberInputPure
         ref={cardNumberInputRef}
         cardNumbers={cardNumbers}
@@ -97,7 +100,7 @@ function CardCreator() {
           다음
         </Link>
       </div>
-    </div>
+    </ThemeProvider>
   );
 }
 
