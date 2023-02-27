@@ -13,6 +13,9 @@ import { Button, Header, Label } from 'components/common';
 
 import { useCardNumber, useExpiredDate, useCardOwner, useCompanyPicker } from './hooks';
 
+import { PATHS } from 'constants/router';
+import type { CardBaseProps } from 'types/card';
+
 function AddingCard() {
   const navigate = useNavigate();
   const { cardNumber, handleChangeCardNumber } = useCardNumber();
@@ -23,7 +26,14 @@ function AddingCard() {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    navigate('/confirm');
+    const navigateState: CardBaseProps = {
+      cardNumber,
+      expiredDate,
+      cardOwner,
+      company,
+    };
+
+    navigate(PATHS.CONFIRM, { state: navigateState });
   };
 
   return (
@@ -36,7 +46,7 @@ function AddingCard() {
       <div onClick={openPicker}>
         <Card
           cardNumber={cardNumber}
-          name={cardOwner}
+          cardOwner={cardOwner}
           company={company}
           expiredDate={expiredDate}
         />

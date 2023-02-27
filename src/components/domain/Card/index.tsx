@@ -7,16 +7,9 @@ import { MAX_LENGTH } from 'constants/card';
 import { theme } from 'constants/colors';
 
 import { CardCompany } from 'types/card';
-import type { ExpiredDate, CardNumber } from 'types/card';
+import type { CardBaseProps } from 'types/card';
 
-interface CardProps {
-  company?: CardCompany;
-  name: string;
-  cardNumber: CardNumber;
-  expiredDate: ExpiredDate;
-}
-
-function Card({ company = CardCompany.Hana, name, cardNumber, expiredDate }: CardProps) {
+function Card({ company = CardCompany.Hana, cardOwner, cardNumber, expiredDate }: CardBaseProps) {
   const { num1, num2, num3, num4 } = cardNumber;
   const { year, month } = expiredDate;
 
@@ -58,7 +51,7 @@ function Card({ company = CardCompany.Hana, name, cardNumber, expiredDate }: Car
                 `
               )}
             >
-              {name}
+              {cardOwner}
             </span>
             <span className="card-text">
               {month} / {year}

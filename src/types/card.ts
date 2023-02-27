@@ -25,3 +25,10 @@ export type CardPassword = {
   password1: string;
   password2: string;
 };
+
+export interface CardBaseProps {
+  company?: CardCompany;
+  cardOwner: string;
+  cardNumber: CardNumber;
+  expiredDate: ExpiredDate;
+}
