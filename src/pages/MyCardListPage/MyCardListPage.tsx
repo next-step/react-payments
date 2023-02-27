@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { CardContext } from "context/Card/CardContext";
 import { NewCardType } from "types";
+import ScrollBox from "components/ScrollBox/ScrollBox";
 
 const MyCardListPage = () => {
   const navigate = useNavigate();
@@ -20,37 +21,42 @@ const MyCardListPage = () => {
   return (
     <Layout>
       <Title fontSize="2x" weight="bold" label="보유카드" />
-      {MyCardList.map((card: NewCardType) => (
-        <CardLayout key={card.id}>
-          <Card
-            type="primary"
-            id={card.id}
-            color={card.color}
-            company={card.company}
-            size="small"
-            number={card.cardNumbers}
-            expireMonth={card.expireDate.month}
-            expireYear={card.expireDate.year}
-            ownerName={card.ownerName}
-          />
-          <Text fontSize="m" weight="bold" label={card.alias} key={card.id} />
-        </CardLayout>
-      ))}
-
-      <ADDCard type="add" size="small" onClick={handleAddCard} />
+      <ScrollContainer color="#636266">
+        <StyledAddCard type="add" size="small" onClick={handleAddCard} />
+        {MyCardList.map((card: NewCardType) => (
+          <CardLayout key={card.id}>
+            <Card
+              type="primary"
+              id={card.id}
+              color={card.color}
+              company={card.company}
+              size="small"
+              number={card.cardNumbers}
+              expireMonth={card.expireDate.month}
+              expireYear={card.expireDate.year}
+              ownerName={card.ownerName}
+            />
+            <Text fontSize="m" weight="bold" label={card.alias} key={card.id} />
+          </CardLayout>
+        ))}
+      </ScrollContainer>
     </Layout>
   );
 };
 export default MyCardListPage;
 const Layout = styled.div`
   display: flex;
-  margin: 20px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
 `;
-
+const ScrollContainer = styled(ScrollBox)`
+  padding: 20px;
+  height: 80vh;
+`;
+const StyledAddCard = styled(Card)`
+  margin-bottom: 30px;
+`;
 const Title = styled(Text)`
   margin: 20px;
   display: block;
@@ -60,5 +66,6 @@ const CardLayout = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+  margin-bottom: 20px;
+  gap: 20px;
 `;
