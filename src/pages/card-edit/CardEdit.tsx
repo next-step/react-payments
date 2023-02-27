@@ -3,8 +3,8 @@ import { Card, CardNumberInput, CvcInput, ExpiredInput, Frame, Link, OwnerInput,
 
 function CardList() {
   const [cardNumbers, setCardNumbers] = useState<string[]>([]);
-  const [expiredMonth, setExpiredMonth] = useState(0);
-  const [expiredYear, setExpiredYear] = useState(0);
+  const [expiredMonth, setExpiredMonth] = useState('');
+  const [expiredYear, setExpiredYear] = useState('');
   const [owner, setOwner] = useState('');
   const [cvc, setCvc] = useState('');
 
@@ -13,7 +13,7 @@ function CardList() {
     return;
   };
 
-  const handleExpiredChange = (expiredMonth: number, expiredYear: number) => {
+  const handleExpiredChange = (expiredMonth: string, expiredYear: string) => {
     setExpiredMonth(expiredMonth);
     setExpiredYear(expiredYear);
     return;
@@ -29,9 +29,9 @@ function CardList() {
   return (
     <Frame title="카드 추가" backLink={'/'}>
       <Card owner={owner} expiredMonth={expiredMonth} expiredYear={expiredYear} numbers={cardNumbers} cvc={cvc} />
-      <CardNumberInput onCardNumberChange={handleCardNumberChange} />
-      <ExpiredInput onExpiredChange={handleExpiredChange} />
-      <OwnerInput onOwnerChanged={handleOwnerChange} />
+      <CardNumberInput onChange={handleCardNumberChange} />
+      <ExpiredInput onChange={handleExpiredChange} />
+      <OwnerInput onChange={handleOwnerChange} />
       <CvcInput onChange={handleCvcChange} />
       <PinInput />
       <div className="button-box">

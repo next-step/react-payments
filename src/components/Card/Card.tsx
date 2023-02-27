@@ -36,7 +36,7 @@ function Card({ cardName, owner, expiredMonth, expiredYear, numbers }: ICard) {
           <div className="card-bottom__info">
             <span className="card-text">{owner && getShorteningString(owner, 5)}</span>
             <span className="card-text">
-              {generatePad(expiredMonth, 2)} / {generatePad(expiredYear, 2)}
+              {expiredMonth} / {expiredYear}
             </span>
           </div>
         </div>

@@ -42,8 +42,8 @@ export const 클린카드 = Template.bind({});
   owner: '김배민',
   alias: '배민복카드',
   numbers: ['1111', '2222', '3333', '4444'],
-  expiredMonth: 10,
-  expiredYear: 23,
+  expiredMonth: '10',
+  expiredYear: '23',
   password: '1234',
   cvc: '333',
 };

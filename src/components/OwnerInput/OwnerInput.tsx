@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { TCardComponentProps } from '../../domain/payments/types';
 
-type TOwnerInputProps = {
-  onOwnerChanged?: (owner: string) => void;
-};
-
-function OwnerInput({ onOwnerChanged }: TOwnerInputProps) {
+function OwnerInput({ onChange }: TCardComponentProps<string>) {
   const [owner, setOwner] = useState('');
 
   useEffect(() => {
-    if (onOwnerChanged) onOwnerChanged(owner);
+    if (onChange) onChange(owner);
   }, [owner]);
 
   return (
@@ -20,6 +17,7 @@ function OwnerInput({ onOwnerChanged }: TOwnerInputProps) {
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         maxLength={30}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => setOwner(event.target.value)}
+        value={owner}
       />
     </div>
   );

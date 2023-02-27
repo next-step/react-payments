@@ -10,3 +10,8 @@ export function isAllowedNumberKeys(key: string, containSpecialKeys = true) {
   const allowedKeys = containSpecialKeys ? [...getNumberKeys(), ...getAllowedSpecialKeys()] : getNumberKeys();
   return allowedKeys.includes(key);
 }
+
+export function setFocus(element: HTMLInputElement) {
+  element.focus();
+  element.setSelectionRange(element.value.length, element.value.length);
+}

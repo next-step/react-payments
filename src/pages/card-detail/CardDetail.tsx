@@ -20,8 +20,8 @@ function CardDetail() {
         </div>
         <Card
           owner={'홍길동'}
-          expiredMonth={3}
-          expiredYear={24}
+          expiredMonth={'03'}
+          expiredYear={'24'}
           numbers={['1111', '2222', '3333', '4444']}
           cvc={'000'}
         />

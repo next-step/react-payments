@@ -4,6 +4,10 @@ export type TCardNumbers = TCardNumber[];
 
 export type TCVC = `${TCardSingleNumber}${TCardSingleNumber}${TCardSingleNumber}`;
 
+export type TCardComponentProps<T> = {
+  onChange?: (argument: T) => void;
+};
+
 export interface ICard {
   // 카드 식별을 위한  정보
   cardName?: string;
@@ -11,8 +15,8 @@ export interface ICard {
   alias?: string;
   numbers: TCardNumbers | string[];
   // 카드 유효성 판별을 위한 정보
-  expiredMonth: number;
-  expiredYear: number;
+  expiredMonth: string;
+  expiredYear: string;
   password?: TCardNumber;
   cvc?: TCVC | string;
 }
