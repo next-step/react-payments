@@ -79,12 +79,11 @@ const usePayment = () => {
   const onHandleCompanyPopupClick = (evt) => {
     const clickedElement = evt.target.closest('.modal-item-container');
     if (clickedElement) {
-      const { id } = clickedElement;
-      const [owner, backgroundColor] = id.split('-');
+      const { company, bgcolor } = clickedElement.dataset;
       setCardInfo({
         ...cardInfo,
-        owner,
-        backgroundColor
+        company,
+        backgroundColor: bgcolor
       });
     }
     setIsShowPopup(false);
