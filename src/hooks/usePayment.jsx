@@ -1,39 +1,39 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const defaultCardInfo = {
-  company: "",
-  number: "",
-  owner: "",
-  expiry: "",
-  nickname: "",
-  cvc: "",
-  password1: "",
-  password2: "",
-  backgroundColor: "#e5e5e5",
+  company: '',
+  number: '',
+  owner: '',
+  expiry: '',
+  nickname: '',
+  cvc: '',
+  password1: '',
+  password2: '',
+  backgroundColor: '#e5e5e5'
 };
 
-const digitTypeInput = ["cvc", "password1", "password2"];
+const digitTypeInput = ['cvc', 'password1', 'password2'];
 
-const formatDigitTypeInput = ["number", "expiry"];
+const formatDigitTypeInput = ['number', 'expiry'];
 
 const cardCompanyList = [
   {
-    company: "포코카드",
-    backgroundColor: "red",
+    company: '포코카드',
+    backgroundColor: 'red'
   },
   {
-    company: "준카드",
-    backgroundColor: "palegreen",
+    company: '준카드',
+    backgroundColor: 'palegreen'
   },
   {
-    company: "혜원카드",
-    backgroundColor: "skyblue",
+    company: '혜원카드',
+    backgroundColor: 'skyblue'
   },
   {
-    company: "윤호카드",
-    backgroundColor: "yellow",
-  },
+    company: '윤호카드',
+    backgroundColor: 'yellow'
+  }
   // {
   //   company: "다빈카드",
   //   backgroundColor: "pink",
@@ -63,7 +63,7 @@ const usePayment = () => {
 
   const navigate = useNavigate();
 
-  const onHandleCardInfoInput = evt => {
+  const onHandleCardInfoInput = (evt) => {
     let { value, id } = evt.target;
     if (!checkValidInputValue(value, id))
       value = value.subString(0, value.length - 1);
@@ -74,28 +74,28 @@ const usePayment = () => {
     setCardInfo(defaultCardInfo);
   };
 
-  const onHandleSubmit = evt => {
+  const onHandleSubmit = (evt) => {
     evt.preventDefault();
-    navigate("/save");
+    navigate('/save');
   };
 
   const checkValidInputValue = (value, id) => {
     if (digitTypeInput.indexOf(id) !== -1 && value.match(/[^0-9]/)) {
-      alert("숫자만 입력가능합니다.");
+      alert('숫자만 입력가능합니다.');
       return false;
     }
     return true;
   };
 
-  const onHandleCompanyPopupClick = evt => {
-    const clickedElement = evt.target.closest(".modal-item-container");
+  const onHandleCompanyPopupClick = (evt) => {
+    const clickedElement = evt.target.closest('.modal-item-container');
     if (clickedElement) {
       const { id } = clickedElement;
-      const [owner, backgroundColor] = id.split("-");
+      const [owner, backgroundColor] = id.split('-');
       setCardInfo({
         ...cardInfo,
         owner,
-        backgroundColor,
+        backgroundColor
       });
     }
     setIsShowPopup(false);
@@ -103,30 +103,30 @@ const usePayment = () => {
 
   const onHandleSave = () => {
     setCardList([...cardList, cardInfo]);
-    navigate("/");
+    navigate('/');
   };
 
   const formatInputValue = (value, id) => {
     let formattedValue = value;
 
     if (formatDigitTypeInput.indexOf(id) === -1) return value;
-    if (id === "number") {
+    if (id === 'number') {
       const regex = /[^0-9]/g;
-      const cleanInput = value.replace(regex, "");
+      const cleanInput = value.replace(regex, '');
       const chunks = cleanInput.match(/.{1,4}/g);
       if (!chunks) {
         return cleanInput;
       }
-      formattedValue = chunks.join("-");
+      formattedValue = chunks.join('-');
     }
-    if (id === "expiry") {
+    if (id === 'expiry') {
       const regex = /[^0-9]/g;
-      const cleanInput = value.replace(regex, "");
+      const cleanInput = value.replace(regex, '');
       const chunks = cleanInput.match(/.{1,2}/g);
       if (!chunks) {
         return cleanInput;
       }
-      formattedValue = chunks.join("/");
+      formattedValue = chunks.join('/');
     }
     return formattedValue;
   };
@@ -141,7 +141,7 @@ const usePayment = () => {
     onHandleSubmit,
     isShowPopup,
     onHandleResetCardInfo,
-    setIsShowPopup,
+    setIsShowPopup
   };
 };
 

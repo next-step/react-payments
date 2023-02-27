@@ -6,7 +6,7 @@ const Input = ({
   value,
   id,
   placeholder = '',
-  className = '',
+  className = ''
 }) => {
   return (
     <input

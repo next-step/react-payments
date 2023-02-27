@@ -1,8 +1,8 @@
-import Card from "../components/Card";
-import CardSelectPopup from "../components/CardSelectPopup";
-import Button from "../components/Common/Button";
-import InputContainer from "../components/InputContainer";
-import { useEffect } from "react";
+import Card from '../components/Card';
+import CardSelectPopup from '../components/CardSelectPopup';
+import Button from '../components/Common/Button';
+import InputContainer from '../components/InputContainer';
+import { useEffect } from 'react';
 
 const CardRegist = ({
   cardInfo,
@@ -12,7 +12,7 @@ const CardRegist = ({
   onClickPopup,
   isShowPopup,
   onReset,
-  onShow,
+  onShow
 }) => {
   useEffect(() => {
     onReset();
@@ -20,18 +20,18 @@ const CardRegist = ({
   }, []);
 
   return (
-    <div>
+    <main>
       <Card isRegistered={true} cardInfo={cardInfo} />
       <form onSubmit={onSubmit}>
         <InputContainer
           title="카드번호"
           inputList={[
             {
-              id: "number",
-              type: "text",
+              id: 'number',
+              type: 'text',
               maxLength: 19,
-              required: true,
-            },
+              required: true
+            }
           ]}
           cardInfo={cardInfo}
           onChange={onChange}
@@ -40,12 +40,12 @@ const CardRegist = ({
           title="만료일"
           inputList={[
             {
-              id: "expiry",
-              type: "text",
+              id: 'expiry',
+              type: 'text',
               maxLength: 5,
               required: true,
-              placeholder: "MM/YY",
-            },
+              placeholder: 'MM/YY'
+            }
           ]}
           cardInfo={cardInfo}
           onChange={onChange}
@@ -55,12 +55,12 @@ const CardRegist = ({
           title="카드 소유자 이름(선택)"
           inputList={[
             {
-              id: "owner",
-              type: "text",
+              id: 'owner',
+              type: 'text',
               maxLength: 30,
               required: false,
-              placeholder: "카드에 표시된 이름과 동일하게 입력하세요.",
-            },
+              placeholder: '카드에 표시된 이름과 동일하게 입력하세요.'
+            }
           ]}
           cardInfo={cardInfo}
           onChange={onChange}
@@ -69,11 +69,11 @@ const CardRegist = ({
           title="보안코드(CVC/CVV)"
           inputList={[
             {
-              id: "cvc",
-              type: "password",
+              id: 'cvc',
+              type: 'password',
               maxLength: 3,
-              required: true,
-            },
+              required: true
+            }
           ]}
           cardInfo={cardInfo}
           onChange={onChange}
@@ -83,19 +83,19 @@ const CardRegist = ({
           title="카드 비밀번호"
           inputList={[
             {
-              id: "password1",
-              type: "password",
+              id: 'password1',
+              type: 'password',
               maxLength: 1,
               required: true,
-              className: "w-15",
+              className: 'w-15'
             },
             {
-              id: "password2",
-              type: "password",
+              id: 'password2',
+              type: 'password',
               maxLength: 1,
               required: true,
-              className: "w-15",
-            },
+              className: 'w-15'
+            }
           ]}
           cardInfo={cardInfo}
           onChange={onChange}
@@ -109,7 +109,7 @@ const CardRegist = ({
           onClick={onClickPopup}
         />
       )}
-    </div>
+    </main>
   );
 };
 

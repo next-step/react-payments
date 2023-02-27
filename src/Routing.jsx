@@ -17,7 +17,7 @@ const Routing = () => {
     onHandleCompanyPopupClick,
     isShowPopup,
     onHandleResetCardInfo,
-    setIsShowPopup,
+    setIsShowPopup
   } = usePayment();
 
   const { movePage } = useRoute();
