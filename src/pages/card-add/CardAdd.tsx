@@ -8,23 +8,21 @@ function CardAdd() {
   const { cardInfo, handleNumber, handleExpiredDate, handleOwner, handleSecurityCode, handlePassword } = useCardInfo()
 
   return (
-    <div className="root">
-      <div className="app">
-        <PageTitle title="카드 추가" buttonElement={<BackButton />} />
-        <Card {...cardInfo} />
-        <CardForm>
-          <CardForm.CardNumbers numbers={cardInfo.cardNumbers} handleChange={handleNumber} />
-          <CardForm.CardExpiredDate
-            expiredYear={cardInfo.expiredYear}
-            expiredMonth={cardInfo.expiredMonth}
-            handleChange={handleExpiredDate}
-          />
-          <CardForm.CardOwner owner={cardInfo.owner} handleChange={handleOwner} />
-          <CardForm.CardSecurityCode securityCode={cardInfo.securityCode} handleChange={handleSecurityCode} />
-          <CardForm.CardPassword password={cardInfo.password} handleChange={handlePassword} />
-        </CardForm>
-        <NavigationTextButton to="/card-completed" storage={cardInfo} text="다음" />
-      </div>
+    <div className="app">
+      <PageTitle title="카드 추가" buttonElement={<BackButton />} />
+      <Card {...cardInfo} />
+      <CardForm>
+        <CardForm.CardNumbers numbers={cardInfo.cardNumbers} handleChange={handleNumber} />
+        <CardForm.CardExpiredDate
+          expiredYear={cardInfo.expiredYear}
+          expiredMonth={cardInfo.expiredMonth}
+          handleChange={handleExpiredDate}
+        />
+        <CardForm.CardOwner owner={cardInfo.owner} handleChange={handleOwner} />
+        <CardForm.CardSecurityCode securityCode={cardInfo.securityCode} handleChange={handleSecurityCode} />
+        <CardForm.CardPassword password={cardInfo.password} handleChange={handlePassword} />
+      </CardForm>
+      <NavigationTextButton to="/card-completed" storage={cardInfo} text="다음" />
     </div>
   )
 }

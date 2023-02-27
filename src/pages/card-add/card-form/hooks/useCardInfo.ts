@@ -1,17 +1,11 @@
-import { useState, ChangeEvent } from 'react'
+import { ChangeEvent, useContext } from 'react'
 
+import { CardStateContext, CardDispatchContext } from '@/contexts/card'
 import { isNumber } from '@/utils'
 
 const useCardInfo = () => {
-  const [cardInfo, setCardInfo] = useState({
-    cardNumbers: { first: '', second: '', third: '', fourth: '' },
-    name: '',
-    expiredYear: '',
-    expiredMonth: '',
-    owner: '',
-    securityCode: '',
-    password: { first: '', second: '' },
-  })
+  const cardInfo = useContext(CardStateContext)
+  const cardDispatch = useContext(CardDispatchContext)
 
   const handleNumber = (event: ChangeEvent<HTMLInputElement>) => {
     const {
@@ -22,31 +16,43 @@ const useCardInfo = () => {
     switch (name) {
       case 'first':
         if (value.length > 4) return
-        setCardInfo((prev) => ({
-          ...prev,
-          cardNumbers: { ...prev.cardNumbers, first: value },
-        }))
+        cardDispatch({
+          type: 'SET_CARD_NUMBERS',
+          payload: {
+            ...cardInfo.cardNumbers,
+            first: value,
+          },
+        })
         break
       case 'second':
         if (value.length > 4) return
-        setCardInfo((prev) => ({
-          ...prev,
-          cardNumbers: { ...prev.cardNumbers, second: value },
-        }))
+        cardDispatch({
+          type: 'SET_CARD_NUMBERS',
+          payload: {
+            ...cardInfo.cardNumbers,
+            second: value,
+          },
+        })
         break
       case 'third':
         if (value.length > 4) return
-        setCardInfo((prev) => ({
-          ...prev,
-          cardNumbers: { ...prev.cardNumbers, third: value },
-        }))
+        cardDispatch({
+          type: 'SET_CARD_NUMBERS',
+          payload: {
+            ...cardInfo.cardNumbers,
+            third: value,
+          },
+        })
         break
       case 'fourth':
         if (value.length > 4) return
-        setCardInfo((prev) => ({
-          ...prev,
-          cardNumbers: { ...prev.cardNumbers, fourth: value },
-        }))
+        cardDispatch({
+          type: 'SET_CARD_NUMBERS',
+          payload: {
+            ...cardInfo.cardNumbers,
+            fourth: value,
+          },
+        })
         break
     }
   }
@@ -60,7 +66,10 @@ const useCardInfo = () => {
     switch (name) {
       case 'YY':
         if (value.length > 2) return
-        setCardInfo((prev) => ({ ...prev, expiredYear: value }))
+        cardDispatch({
+          type: 'SET_EXPIRED_YEAR',
+          payload: value,
+        })
         break
       case 'MM':
         if (value.length > 2) return
@@ -68,7 +77,10 @@ const useCardInfo = () => {
           alert('월은 1이상 12이하여야 합니다.')
           return
         }
-        setCardInfo((prev) => ({ ...prev, expiredMonth: value }))
+        cardDispatch({
+          type: 'SET_EXPIRED_MONTH',
+          payload: value,
+        })
         break
     }
   }
@@ -78,7 +90,7 @@ const useCardInfo = () => {
       alert('카드 소유자 이름은 30자리까지 입력할 수 있습니다.')
       return
     }
-    setCardInfo((prev) => ({ ...prev, owner: event.target.value }))
+    cardDispatch({ type: 'SET_OWNER', payload: event.target.value })
   }
 
   const handleSecurityCode = (event: ChangeEvent<HTMLInputElement>) => {
@@ -87,24 +99,6 @@ const useCardInfo = () => {
 
   const handlePassword = (event: ChangeEvent<HTMLInputElement>) => {
     if (!isNumber(event.target.value)) return
-    // const {
-    //   dataset: { name },
-    //   value,
-    // } = event.target
-    // if (value.length > 1) return
-    // switch (name) {
-    //   case 'first':
-    //     setCardInfo((prev) => ({
-    //       ...prev,
-    //       password: { ...prev.password, first: value },
-    //     }))
-    //     break
-    //   case 'second':
-    //     setCardInfo((prev) => ({
-    //       ...prev,
-    //       password: { ...prev.password, second: value },
-    //     }))
-    // }
   }
   return {
     cardInfo,
