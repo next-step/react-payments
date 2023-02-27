@@ -15,16 +15,10 @@ import { MESSAGE } from "../constants/card";
 import { CARD_OWNER_NAME } from "../constants/card";
 
 // TODO : form형태로 변경
-// TODO : error객체나 {success: boolean, errorMessage?: string} 과 같은 결과 객체를 반환
 function reducer(state, action) {
-  console.log(action, state);
   switch (action.type) {
     case "cardNumber": {
       const { name, value } = action.target;
-      if (!isNumber(value)) {
-        alert(MESSAGE.ALERT_NUMBER);
-        return;
-      }
       return {
         ...state,
         [action.type]: { ...state[action.type], [name]: value },
@@ -32,52 +26,21 @@ function reducer(state, action) {
     }
     case "cardExpiration": {
       const { name, value } = action.target;
-      if (!isNumber(value)) {
-        alert(MESSAGE.ALERT_NUMBER);
-        return;
-      }
-      if (name == "month") {
-        if (value > 12) {
-          alert(MESSAGE.ALERT_EXP_MONTH);
-          return;
-        }
-      } else {
-        if (value > 31 || value === 0) {
-          alert(MESSAGE.ALERT_EXP_YEAR);
-          return;
-        }
-      }
       return {
         ...state,
         [action.type]: { ...state[action.type], [name]: value },
       };
     }
     case "cardOwnerName": {
-      function isValidOwnerName(value) {
-        if (value.length <= CARD_OWNER_NAME.MAX_LENGTH) {
-          return true;
-        }
-        return false;
-      }
       const { value } = action.target;
-      if (isValidOwnerName(value)) {
-        return { ...state, [action.type]: value };
-      }
+      return { ...state, [action.type]: value };
     }
     case "cardSecurityCode": {
       const { value } = action.target;
-      if (!isNumber(value)) {
-        alert(MESSAGE.ALERT_NUMBER);
-        return;
-      }
       return { ...state, [action.type]: value };
     }
     case "cardPassword": {
       const { name, value } = action.target;
-      if (!isNumber(value)) {
-        alert(MESSAGE.ALERT_NUMBER);
-        return;
-      }
       return {
         ...state,
         [action.type]: { ...state[action.type], [name]: value },
@@ -121,25 +84,68 @@ export default function CardRegistrationPage() {
       />
       <CardNumberInput
         cardNumber={cardNumber}
-        onChange={(e) => dispatch({ type: "cardNumber", target: e.target })}
+        onChange={(e) => {
+          if (!isNumber(e.target.value))
+            return { success: false, errorMessage: MESSAGE.ALERT_NUMBER };
+          dispatch({ type: "cardNumber", target: e.target });
+        }}
       ></CardNumberInput>
       <CardExpirationInput
         cardExpiration={cardExpiration}
-        onChange={(e) => dispatch({ type: "cardExpiration", target: e.target })}
+        onChange={(e) => {
+          const { name, value } = e.target;
+          if (!isNumber(value))
+            return { success: false, errorMessage: MESSAGE.ALERT_NUMBER };
+          if (name == "month") {
+            if (value > 12) {
+              return { success: false, errorMessage: MESSAGE.ALERT_EXP_MONTH };
+            }
+          } else if (name == "year") {
+            if (value > 31 || value === 0) {
+              return { success: false, errorMessage: MESSAGE.ALERT_EXP_YEAR };
+            }
+          }
+          dispatch({ type: "cardExpiration", target: e.target });
+        }}
       ></CardExpirationInput>
       <CardOwnerNameInput
         cardOwnerName={cardOwnerName}
-        onChange={(e) => dispatch({ type: "cardOwnerName", target: e.target })}
+        onChange={(e) => {
+          const { value } = e.target;
+          function isValidOwnerName(value) {
+            if (value.length <= CARD_OWNER_NAME.MAX_LENGTH) {
+              return true;
+            }
+            return false;
+          }
+          if (!isValidOwnerName(value)) {
+            return {
+              success: false,
+              errorMessage: MESSAGE.ALERT_OWNERNAME_MAXLENGTH,
+            };
+          }
+          dispatch({ type: "cardOwnerName", target: e.target });
+        }}
       ></CardOwnerNameInput>
       <CardSecurityCodeInput
         cardSecurityCode={cardSecurityCode}
-        onChange={(e) =>
-          dispatch({ type: "cardSecurityCode", target: e.target })
-        }
+        onChange={(e) => {
+          const { name, value } = e.target;
+          if (!isNumber(value)) {
+            return { success: false, errorMessage: MESSAGE.ALERT_NUMBER };
+          }
+          dispatch({ type: "cardSecurityCode", target: e.target });
+        }}
       ></CardSecurityCodeInput>
       <CardPasswordInput
         cardPassword={cardPassword}
-        onChange={(e) => dispatch({ type: "cardPassword", target: e.target })}
+        onChange={(e) => {
+          const { name, value } = e.target;
+          if (!isNumber(value)) {
+            return { success: false, errorMessage: MESSAGE.ALERT_NUMBER };
+          }
+          dispatch({ type: "cardPassword", target: e.target });
+        }}
       />
 
       <Link className="button-text" to={ROUTE_PATH.CARD_REGISTRATION_COMPLETED}>
