@@ -1,18 +1,6 @@
-import { useNavigate } from 'react-router-dom';
-
-const Button = ({ children, to, ...props }) => {
-  const navigate = useNavigate();
+const Button = ({ children, onClick, ...props }) => {
   return (
-    <button
-      onClick={(evt) => {
-        if (to) {
-          evt.preventDefault();
-          evt.stopPropagation();
-          navigate(to);
-        }
-      }}
-      {...props}
-    >
+    <button onClick={onClick} {...props}>
       <span>{children}</span>
     </button>
   );
