@@ -17,22 +17,14 @@ const MyCardListPage = () => {
     navigate("/add");
   };
 
-  const handleCard = (e) => {
-    const cardId = e.currentTarget.dataset.id as string;
-    const selectedCard = MyCardList.find((card: NewCardType) => card.id === cardId);
-    if (!selectedCard) return alert("현재 선택한 카드가 리스트에 존재하지 않습니다");
-    cardCtx.removeCard(selectedCard);
-    cardCtx.addCardToStore(selectedCard);
-    navigate("/complete");
-  };
-
   return (
     <Layout>
       <Title fontSize="2x" weight="bold" label="보유카드" />
       {MyCardList.map((card: NewCardType) => (
-        <CardLayout key={card.id} data-id={card.id} onClick={handleCard}>
+        <CardLayout key={card.id}>
           <Card
             type="primary"
+            id={card.id}
             color={card.color}
             company={card.company}
             size="small"

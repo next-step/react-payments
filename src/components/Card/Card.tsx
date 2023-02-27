@@ -1,11 +1,15 @@
 import styled, { css } from "styled-components";
 import Text from "components/Text/Text";
-import { ColorType, CompanyType } from "types";
-import { ReactEventHandler } from "react";
+import { ColorType, CompanyType, NewCardType } from "types";
+import { ReactEventHandler, useContext } from "react";
+import IconButton from "components/IconButton/IconButton";
+import { CardContext } from "context/Card/CardContext";
+import { useNavigate } from "react-router-dom";
 
 export type CardProps = {
   size: "small" | "big";
   type: "primary" | "add";
+  id?: string;
   number?: string;
   expireMonth?: string;
   expireYear?: string;
@@ -15,12 +19,36 @@ export type CardProps = {
   onClick?: ReactEventHandler<HTMLDivElement>;
 };
 
-const Card = ({ type, color, company, size, number, expireMonth, expireYear, ownerName, onClick }: CardProps) => {
+const Card = ({ type, color, company, size, number, expireMonth, expireYear, ownerName, id, onClick }: CardProps) => {
+  const cardCtx = useContext(CardContext);
+  const MyCardList = [...cardCtx.state.list].reverse();
+  const selectedCard = MyCardList.find((card: NewCardType) => card.id === id);
+  const navigate = useNavigate();
+
+  const handleRemove = () => {
+    if (!selectedCard) return alert("현재 선택한 카드가 리스트에 존재하지 않습니다");
+    cardCtx.removeCard(selectedCard);
+  };
+  const handleModify = (e) => {
+    if (!selectedCard) return alert("현재 선택한 카드가 리스트에 존재하지 않습니다");
+    cardCtx.removeCard(selectedCard);
+    cardCtx.addCardToStore(selectedCard);
+    navigate("/complete");
+  };
+
   return (
-    <Layout onClick={onClick}>
+    <Layout onClick={onClick} id={id}>
       {type === "primary" ? (
         <Container color={color} size={size}>
-          <Top>{company && <Text fontSize="s" weight="normal" label={company} />}</Top>
+          <Top>
+            {company && <Text fontSize="s" weight="normal" label={company} />}
+            {id && (
+              <div>
+                <IconButton onClick={handleModify} name="modify" size="1x" color="black" />
+                <IconButton onClick={handleRemove} name="remove" size="1x" color="black" />
+              </div>
+            )}
+          </Top>
           <Middle>
             <Chip />
           </Middle>
@@ -113,6 +141,7 @@ const Container = styled.div<ContainerProps>`
 
 const Top = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 100%;

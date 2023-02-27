@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faM, faRemove } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const FontAwesomeIcons = {
   arrowLeft: faAngleLeft,
+  remove: faRemove,
+  modify: faM,
 };
 
 type FontAweSomeIconType = keyof typeof FontAwesomeIcons;
