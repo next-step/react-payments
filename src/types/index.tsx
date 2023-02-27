@@ -12,7 +12,7 @@ export type CompanyType =
 export type FontSizeType = "xs" | "s" | "m" | "lg" | "2x";
 export type FontWeightType = "normal" | "bold";
 
-export interface CardType {
+export interface CardFormType {
   cardNumbers: string;
   expireDate: {
     month: string;
@@ -27,6 +27,7 @@ export interface CardType {
   color: ColorType;
   company: CompanyType;
 }
-export interface NewCardType extends CardType {
+export interface NewCardType extends CardFormType {
   alias: string;
+  id: number;
 }

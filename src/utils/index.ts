@@ -1,4 +1,4 @@
-import { CompanyType, CardType } from "types";
+import { CompanyType, CardFormType } from "types";
 export const checkCardNumber = (string: string): string => {
   let newString = string.replace(/[^0-9\-\*]/g, ""); //숫자만입력받기
   if (/^(\d{4})(\d)/.test(newString)) {
@@ -57,7 +57,7 @@ export const checkOwnerName = (string: string): string => {
   return string.length > 30 ? string.slice(0, 30) : string;
 };
 
-export const checkCardFormValidation = (form: CardType): boolean => {
+export const checkCardFormValidation = (form: CardFormType): boolean => {
   const { month, year } = form.expireDate;
 
   try {
@@ -87,7 +87,7 @@ const isValidCardNumber = (cardNumber: string) => {
   return cardNumber.length === 19;
 };
 
-export const inistalCardState: CardType = {
+export const initialCardFormState: CardFormType = {
   cardNumbers: "",
   expireDate: {
     month: "MM",

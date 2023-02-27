@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyle from "styles/GlobalStyle";
-import FormPage from "./FormPage";
-import CompletedPage from "./CompletedPage";
-import MyCardListPage from "./MyCardListPage/index";
-import { CardContextProvider } from "context/Card";
+import FormPage from "./FormPage/FormPage";
+import CompletedPage from "./CompletedPage/CompletedPage";
+import MyCardListPage from "./MyCardListPage/MyCardListPage";
+import { CardContextProvider } from "context/Card/CardContext";
 function App() {
   return (
     <Layout>

@@ -1,12 +1,12 @@
-import Text from "components/Text";
+import Text from "components/Text/Text";
 import { useRef } from "react";
 import styled from "styled-components";
 import { checkCardNumber } from "utils";
-import Input from "../../Input";
-import InputContainer from "components/Input/Container";
-import { ColorType, CardType } from "types";
+import Input from "../../Input/Input";
+import InputContainer from "components/Input/Container/Container";
+import { ColorType, CardFormType } from "types";
 type CardNumberInputProps = {
-  setCardNumber: React.Dispatch<React.SetStateAction<CardType>>;
+  setCardNumber: React.Dispatch<React.SetStateAction<CardFormType>>;
   fontColor: ColorType;
 };
 

@@ -1,7 +1,7 @@
-import Form from "components/Form";
-import Text from "components/Text";
+import Form from "components/Form/Form";
+import Text from "components/Text/Text";
 import styled from "styled-components";
-import IconButton from "../../components/IconButton/index";
+import IconButton from "../../components/IconButton/IconButton";
 import { useNavigate } from "react-router-dom";
 
 const FormPage = () => {

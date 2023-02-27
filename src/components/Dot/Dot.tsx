@@ -1,4 +1,4 @@
-import Text from "components/Text";
+import Text from "components/Text/Text";
 import React from "react";
 import styled, { css } from "styled-components";
 import { ColorType, CompanyType } from "types";

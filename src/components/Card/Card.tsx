@@ -1,14 +1,11 @@
 import styled, { css } from "styled-components";
-import Text from "components/Text";
+import Text from "components/Text/Text";
 import { ColorType, CompanyType } from "types";
 import { ReactEventHandler } from "react";
 
-type CardSizeType = "small" | "big";
-type CardType = "primary" | "add";
-
 export type CardProps = {
-  size: CardSizeType;
-  type: CardType;
+  size: "small" | "big";
+  type: "primary" | "add";
   number?: string;
   expireMonth?: string;
   expireYear?: string;
@@ -53,7 +50,7 @@ const Layout = styled.div`
 
 type ContainerProps = {
   color?: ColorType;
-  size: CardSizeType;
+  size: "small" | "big";
 };
 const Container = styled.div<ContainerProps>`
   display: flex;

@@ -1,13 +1,12 @@
 import styled from "styled-components";
-import Card from "components/Card";
-import Text from "components/Text";
-import Input from "components/Input";
-import Button from "components/Button/index";
+import Card from "components/Card/Card";
+import Text from "components/Text/Text";
+import Input from "components/Input/Input";
+import Button from "components/Button/Button";
 import { useContext, useRef, useState } from "react";
-import { CardContext } from "context/Card";
+import { CardContext } from "context/Card/CardContext";
 import { useNavigate } from "react-router-dom";
 
-//미션2
 const CompletedPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputLength, setInputLength] = useState(0);
@@ -22,6 +21,7 @@ const CompletedPage = () => {
     let alias = !refValue.length ? temporaryCard.company : refValue;
     const newCard = {
       ...cardCtx.state.store,
+      id: Date.now(),
       alias,
     };
     cardCtx.addCard(newCard);

@@ -1,5 +1,5 @@
-import Dot from "components/Dot";
-import Modal from "components/Modal";
+import Dot from "components/Dot/Dot";
+import Modal from "components/Modal/Modal";
 import styled from "styled-components";
 import { ReactEventHandler } from "react";
 export type DotListProps = {

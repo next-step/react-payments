@@ -1,12 +1,12 @@
-import InputContainer from "components/Input/Container";
-import Input from "components/Input";
-import Text from "components/Text";
+import InputContainer from "components/Input/Container/Container";
+import Input from "components/Input/Input";
+import Text from "components/Text/Text";
 import styled from "styled-components";
 import { useRef } from "react";
 import { checkMonth, checkYear } from "../../../utils/index";
-import { CardType } from "types";
+import { CardFormType } from "types";
 export type CardExpirationDateInputProps = {
-  setExprireDate: React.Dispatch<React.SetStateAction<CardType>>;
+  setExprireDate: React.Dispatch<React.SetStateAction<CardFormType>>;
 };
 
 const CardExpirationDateInput = ({ setExprireDate, fontColor }) => {

@@ -1,27 +1,32 @@
 import styled from "styled-components";
-import Card from "components/Card";
+import Card from "components/Card/Card";
 import { useContext, useState } from "react";
-import CardNumberInput from "./CardNumberInput";
-import CardSecurityInput from "./CardSecurityInput";
-import CardPasswordInput from "./CardPasswordInput";
-import CardOwnerNameInput from "./CardOwnerNameInput/index";
-import CardExpirationDateInput from "./CardExpirationDateInput/index";
-import DotList from "./DotList";
-import Button from "../Button/index";
+import CardNumberInput from "./CardNumberInput/CardNumberInput";
+import CardSecurityInput from "./CardSecurityInput/CardSecurityInput";
+import CardPasswordInput from "./CardPasswordInput/CardPasswordInput";
+import CardOwnerNameInput from "./CardOwnerNameInput/CardOwnerNameInput";
+import CardExpirationDateInput from "./CardExpirationDateInput/CardExpirationDateInput";
+import DotList from "./DotList/DotList";
+import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
-import { useHandleCardText } from "hooks/useHandleCardText";
-import { CardContext } from "context/Card";
+import { useHandleCardFormText } from "hooks/useHandleCardFormText";
+import { CardContext } from "context/Card/CardContext";
 
 export const Form = () => {
   const navigate = useNavigate();
   const cardCtx = useContext(CardContext);
 
-  const { state, setState } = useHandleCardText();
+  const { state, setState } = useHandleCardFormText();
   const [isOpenModal, setIsOpenModal] = useState(true);
 
   const submit = () => {
     const currentFormCard = state;
-    cardCtx.addCardToStore(currentFormCard);
+    const newCard = {
+      ...currentFormCard,
+      alias: "",
+      id: Date.now(),
+    };
+    cardCtx.addCardToStore(newCard);
     navigate("/complete"); // Input validation 추가 필요
   };
 
