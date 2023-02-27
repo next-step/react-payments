@@ -79,6 +79,7 @@
 
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .card-middle {
@@ -88,6 +89,12 @@
 
   display: flex;
   align-items: center;
+}
+
+.text-align {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-bottom {
@@ -133,4 +140,8 @@
   line-height: 20px;
   vertical-align: middle;
   font-weight: 400;
+}
+
+.card-num {
+  font-size: 20px;
 }

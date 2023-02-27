@@ -1,0 +1,71 @@
+@import './card.css';
+@import './input.css';
+@import './button.css';
+@import './modal.css';
+@import './utils.css';
+
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5e5e5;
+}
+
+input {
+  font-size: 16px;
+}
+
+.root {
+  background-color: #fff;
+  width: 375px;
+  min-width: 375px;
+  height: 700px;
+  position: relative;
+  border-radius: 15px;
+}
+
+.app {
+  height: 100%;
+  padding: 16px 24px;
+}
+
+.page-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+
+  color: #383838;
+}
+
+.mr-3 {
+  margin-right: 3px;
+}
+.mr-20 {
+  margin-right: 20px;
+}
+.link-button {
+  text-decoration: none;
+  color: #525252;
+}
+
+.content-align {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.favorite-card {
+  border: none;
+  border-bottom: 1px solid #383838;
+  text-align: center;
+}
+
+.favorite-card:focus {
+  outline: none;
+  border-bottom: 1px solid #383838;
+}
