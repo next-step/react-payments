@@ -34,7 +34,7 @@ const CardOwnerNameInput = ({ setOwnerName, fontColor }: CardOwnerNameInputProps
   return (
     <Layout>
       <Box>
-        <Title fontSize="xs" weight="normal" label="카드 소유자 이름(선택)" />
+        <Title fontSize="xs" weight="bold" label="카드 소유자 이름(선택)" />
         <Text fontSize="s" weight="normal" label={`${inputlength}/30`} />
       </Box>
       <Input

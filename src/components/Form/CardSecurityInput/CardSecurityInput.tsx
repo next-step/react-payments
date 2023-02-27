@@ -27,7 +27,7 @@ const CardSecurityInput = ({ fontColor, setSecurityCode }: CardPasswordInputProp
 
   return (
     <Layout>
-      <Title fontSize="xs" weight="normal" label="보안코드 (CVC/CVV)" />
+      <Title fontSize="xs" weight="bold" label="보안코드 (CVC/CVV)" />
       <InputContainer width={25}>
         <Input theme="primary" type="text" ref={inputRef} onChange={handleInput} fontColor={fontColor} active={true} />
       </InputContainer>

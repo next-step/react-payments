@@ -33,7 +33,7 @@ const CardPasswordInput = ({ fontColor, setPassword }: CardPasswordInputProps) =
 
   return (
     <Layout>
-      <Title fontSize="xs" weight="normal" label="카드 비밀번호" />
+      <Title fontSize="xs" weight="bold" label="카드 비밀번호" />
       <InputContainer width={70}>
         <Input theme="primary" type="text" active={true} ref={inputRef} onChange={handleInput} fontColor={fontColor} />
         <Input theme="primary" type="text" active={true} ref={inputRef2} onChange={handleInput} fontColor={fontColor} />

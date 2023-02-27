@@ -36,7 +36,7 @@ const CardExpirationDateInput = ({ setExprireDate, fontColor }) => {
   };
   return (
     <Layout>
-      <Title fontSize="xs" weight="normal" label="만료일" />
+      <Title fontSize="xs" weight="bold" label="만료일" />
       <InputContainer width={50}>
         <Input
           type="text"

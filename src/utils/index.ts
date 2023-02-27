@@ -56,6 +56,9 @@ export const changePassword = (string: string): string => {
 export const checkOwnerName = (string: string): string => {
   return string.length > 30 ? string.slice(0, 30) : string;
 };
+export const checkAliasLength = (string: string): string => {
+  return string.length > 10 ? string.slice(0, 10) : string;
+};
 
 export const checkCardFormValidation = (form: CardFormType): boolean => {
   const { month, year } = form.expireDate;

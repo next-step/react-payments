@@ -26,7 +26,7 @@ const CardNumberInput = ({ setCardNumber, fontColor }: CardNumberInputProps) => 
 
   return (
     <Layout>
-      <Title fontSize="xs" weight="normal" label="카드 번호" />
+      <Title fontSize="xs" weight="bold" label="카드 번호" />
       <InputContainer>
         <Input ref={ref} type="text" theme="primary" onChange={handleInput} fontColor={fontColor} active={true}></Input>
       </InputContainer>
