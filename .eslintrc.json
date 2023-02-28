@@ -19,8 +19,9 @@
   "rules": {
     "@typescript-eslint/prefer-interface": "off", // also want to use "type"
     "@typescript-eslint/explicit-function-return-type": "off", // annoying to force return type
-    "no-extra-semi": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
     "@typescript-eslint/no-extra-semi": "error",
+    "no-extra-semi": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }]
   },
