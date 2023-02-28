@@ -7,20 +7,23 @@ type ColorCircleRadioProps = {
   value: string;
   checked: boolean;
   name: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 const ColorCircleRadio = ({
   color,
   label,
   value,
   checked,
+  onChange,
   name,
 }: ColorCircleRadioProps) => {
   return (
-    <StyledLabel>
+    <StyledLabel checked={checked}>
       <ColorCircle
         type="radio"
         color={color}
         value={value}
+        onChange={onChange}
         defaultChecked={checked}
         name={name}
       />
@@ -31,7 +34,9 @@ const ColorCircleRadio = ({
 
 export default React.memo(ColorCircleRadio);
 
-const StyledLabel = styled.label`
+const StyledLabel = styled.label<{
+  checked: boolean;
+}>`
   font-weight: 500;
   font-size: 12px;
   line-height: 14px;
@@ -40,10 +45,9 @@ const StyledLabel = styled.label`
   align-items: center;
   width: 60px;
   flex-direction: column;
+  color: ${({ theme, checked }) =>
+    checked ? theme.colors.primary : theme.colors.gray3};
   text-align: center;
-  &:focus-within {
-    color: ${({ theme }) => theme.colors.primary};
-  }
 `;
 
 const ColorCircle = styled.input<{ color: Colors }>`

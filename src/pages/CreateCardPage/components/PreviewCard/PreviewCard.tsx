@@ -1,6 +1,6 @@
 import { Card } from '@/components/Card';
 import styled from '@emotion/styled';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useCardFieldContext } from '../CardFieldContext';
 import { BottomModal } from '@/components/Modal';
 import CardCompanySelectFormModal from '../CardCompanySelectModal/CardCompanySelectModal';
@@ -9,7 +9,6 @@ import { CARD_COMPANIES } from '@/constants';
 const PreviewCard = () => {
   const data = useCardFieldContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   const {
     cardNumber,
@@ -33,24 +32,19 @@ const PreviewCard = () => {
     [cardNumber, expirationMonth, expirationYear, ownerName, cardName]
   );
 
+  const onClose = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
+  const onOpen = useCallback(() => {
+    setIsModalOpen(true);
+  }, []);
+
   return (
-    <PreviewCardContainer
-      onClick={() => {
-        setIsModalOpen(true);
-      }}
-    >
+    <PreviewCardContainer onClick={onOpen}>
       <Card size="big" card={card} cardColor={cardColor} />
-      <BottomModal
-        isOpen={isModalOpen}
-        onClose={() => {
-          submitButtonRef.current?.click();
-          setIsModalOpen(false);
-        }}
-      >
-        <CardCompanySelectFormModal
-          ref={submitButtonRef}
-          selectedCardCompany={cardCompany}
-        />
+      <BottomModal isOpen={isModalOpen} onClose={onClose}>
+        <CardCompanySelectFormModal selectedCardCompany={cardCompany} />
       </BottomModal>
     </PreviewCardContainer>
   );

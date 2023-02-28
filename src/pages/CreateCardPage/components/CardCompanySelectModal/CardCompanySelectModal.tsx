@@ -1,32 +1,33 @@
-import React, { FormEventHandler } from 'react';
+import React from 'react';
 import styled from '@emotion/styled';
 
 import { CARD_COMPANIES, CARD_COMPANIES_ARRAY } from '@/constants';
 import ColorCircleRadio from './ColorCircleRadio';
 import { ACTION, useCardFieldDispatchContext } from '../CardFieldContext';
+import { ModalChildrenProps } from '@/components/Modal/BottomModal';
 
 type CardCompanySelectModalProps = {
   selectedCardCompany: keyof typeof CARD_COMPANIES | null;
 };
-const CardCompanySelectFormModal = (
-  { selectedCardCompany }: CardCompanySelectModalProps,
-  ref?: React.ForwardedRef<HTMLButtonElement>
-) => {
+const CardCompanySelectFormModal = ({
+  selectedCardCompany,
+  onClose,
+}: ModalChildrenProps & CardCompanySelectModalProps) => {
   const dispatch = useCardFieldDispatchContext();
-  const handleSubmit: FormEventHandler = (e) => {
-    e.preventDefault();
-    const target = e.target as HTMLFormElement & {
-      cardCompany: {
-        value: keyof typeof CARD_COMPANIES;
-      };
-    };
-    dispatch(ACTION.UPDATE_CARD_COMPANY(target.cardCompany.value));
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value as keyof typeof CARD_COMPANIES;
+    if (!isCompanyName(value)) return;
+    dispatch(ACTION.UPDATE_CARD_COMPANY(value));
+    onClose();
   };
+
   return (
-    <CardCompanySelectModalContainer onSubmit={handleSubmit}>
+    <CardCompanySelectModalContainer>
       {CARD_COMPANIES_ARRAY.map((company) => (
         <ColorCircleRadio
           key={company}
+          onChange={handleChange}
           checked={selectedCardCompany === company}
           label={CARD_COMPANIES[company].name}
           value={company}
@@ -34,18 +35,11 @@ const CardCompanySelectFormModal = (
           color={CARD_COMPANIES[company].color}
         />
       ))}
-      <StyledSubmitButton ref={ref} type="submit">
-        카드회사 제출하기
-      </StyledSubmitButton>
     </CardCompanySelectModalContainer>
   );
 };
 
-export default React.forwardRef(CardCompanySelectFormModal);
-
-const StyledSubmitButton = styled.button`
-  display: none;
-`;
+export default CardCompanySelectFormModal as React.FC<CardCompanySelectModalProps>;
 
 const CardCompanySelectModalContainer = styled.form`
   display: grid;
@@ -53,3 +47,7 @@ const CardCompanySelectModalContainer = styled.form`
   place-items: center;
   align-items: flex-start;
 `;
+
+const isCompanyName = (name: string): name is keyof typeof CARD_COMPANIES => {
+  return name in CARD_COMPANIES;
+};

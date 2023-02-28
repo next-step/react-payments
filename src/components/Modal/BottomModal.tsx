@@ -1,7 +1,16 @@
 import styled from '@emotion/styled';
-import React, { PropsWithChildren, useEffect, useState } from 'react';
+import React, {
+  PropsWithChildren,
+  cloneElement,
+  useEffect,
+  useState,
+} from 'react';
 import { keyframes } from '@emotion/react';
 import Modal from './Modal';
+
+export interface ModalChildrenProps {
+  onClose: () => void;
+}
 
 const BottomModal = ({
   children,
@@ -37,7 +46,9 @@ const BottomModal = ({
         isOpen={show}
         onAnimationEnd={handleTransitionEnd}
       >
-        {children}
+        {cloneElement(children as React.ReactElement, {
+          onClose: handelClickBackground,
+        })}
       </BottomModalContainer>
     </Modal>
   );
