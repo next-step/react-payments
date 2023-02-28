@@ -9,3 +9,8 @@ export type CardField = {
   cardPassword: string;
   cardCompany: keyof typeof CARD_COMPANIES | null;
 };
+
+export type CardInfo = {
+  id: number;
+  cardNickName: string;
+} & CardField;

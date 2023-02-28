@@ -10,10 +10,12 @@ import styled from '@emotion/styled';
 import { TextButton } from '@/components';
 import { CardField } from '@/types';
 import { useNavigate } from 'react-router-dom';
+import { CARD_LIST_ACTION, useCardListDispatch } from '@/store';
 
 const CardFields = () => {
   const data = useCardFieldContext();
   const navigate = useNavigate();
+  const dispatch = useCardListDispatch();
 
   if (data === null) return null;
 
@@ -31,7 +33,9 @@ const CardFields = () => {
     cardCompany !== null ? CARD_COMPANIES[cardCompany].color : 'gray3';
 
   const handleNextButtonClick = () => {
-    navigate(ROUTE.CARD_CREATE_COMPLETE);
+    const uniqueId = Date.now();
+    dispatch(CARD_LIST_ACTION.APPEND_NEW_CARD(uniqueId, data));
+    navigate(ROUTE.CARD_CREATE + `/${uniqueId}`);
   };
   return (
     <form>
