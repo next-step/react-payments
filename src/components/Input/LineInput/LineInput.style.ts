@@ -14,7 +14,7 @@ export const StyledLineInput = styled.input<{
   font-weight: 400;
   font-size: 18px;
   line-height: 21px;
-
+  background: transparent;
   border-bottom: 1px solid ${({ lineColor, theme }) => theme.colors[lineColor]};
   text-align: ${({ textAlign }) => textAlign};
   color: ${({ fontColor, theme }) => theme.colors[fontColor]};

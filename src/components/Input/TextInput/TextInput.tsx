@@ -18,7 +18,7 @@ const TextInput = (
   ref?: React.Ref<HTMLInputElement>
 ) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value);
+    onChange?.(event.target.value);
   };
 
   return (

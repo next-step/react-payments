@@ -10,7 +10,9 @@ const CardPasswordInput = ({
   onChange,
   value,
   fontColor = 'gray3',
-}: Pick<TextInputProps, 'onChange' | 'value' | 'fontColor'>) => {
+}: Pick<TextInputProps, 'value' | 'fontColor'> & {
+  onChange: (value: string) => void;
+}) => {
   const InputRefs = React.useRef<HTMLInputElement[]>([]);
   const cardPasswordWidth = '45px';
   const cardPasswordArray = useMemo(
