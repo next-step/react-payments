@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Label } from "@/components/common";
+import { Button, Label } from "@/components/common";
 
 export const CompletedCardWrapper = styled.div`
   height: 100%;
@@ -19,4 +19,8 @@ export const CompleteCardLabel = styled(Label)`
 
 export const CompleteCardButtonWrapper = styled.div`
   text-align: right;
+`;
+
+export const DeleteCardButton = styled(Button)`
+  color: #e24141;
 `;

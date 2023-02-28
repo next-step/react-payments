@@ -28,7 +28,7 @@ const router = createBrowserRouter([
     element: <CompleteAddCard />,
   },
   {
-    path: `${domains.CARD_EDIT}/:id`,
+    path: domains.CARD_EDIT,
     element: <CompleteAddCard />,
   },
 ]);

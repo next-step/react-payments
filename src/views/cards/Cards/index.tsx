@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Card, EmptyCard } from "@/components/cards";
 import { Header } from "@/components/common";
 import { useCardsContext } from "@/contexts";
+import { CardItem } from "@/contexts/CardsContext";
 import { domains } from "@/router";
 
 import { CardWrapper } from "./card.style";
@@ -17,8 +18,12 @@ export default function Cards() {
     navigate(domains.CARD_ADD);
   };
 
-  const handleMoveToEditCardPage = () => {
-    navigate(`${domains.CARD_EDIT}/1`);
+  const handleMoveToEditCardPage = (cardItem: CardItem) => {
+    navigate(`${domains.CARD_EDIT}`, {
+      state: {
+        cardInfo: cardItem,
+      },
+    });
   };
 
   return (
@@ -37,7 +42,16 @@ export default function Cards() {
               }}
               size="small"
               color={color}
-              onClick={handleMoveToEditCardPage}
+              onClick={() =>
+                handleMoveToEditCardPage({
+                  id,
+                  cardName,
+                  cardNumber,
+                  cardOwnerName,
+                  expireDate,
+                  color,
+                })
+              }
             />
           )
         )}

@@ -8,8 +8,6 @@ export function isNumber(variable: string) {
   return variable !== null && !Number.isNaN(Number(variable));
 }
 
-// 만일 UI에 영향을 주어야하는 경우 (팝업창, 상태 변경 등등)는 어떻게?
-// 사이드바 네비게이션에서 데이터
 export function reportError(error: unknown) {
   if (error instanceof ValidationError) {
     alert(error.message);
