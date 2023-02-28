@@ -1,5 +1,5 @@
 import { CardFormType } from "types";
-
+import { reportError, ValidationError } from "utils/error";
 export const isCardFormValidation = (form: CardFormType): boolean => {
   console.log(form);
   const isValid =
@@ -13,9 +13,9 @@ export const isCardFormValidation = (form: CardFormType): boolean => {
     form.password.isValid;
 
   try {
-    if (!isValid) throw new Error("양식에 입력하지 않은 데이터를 확인하세요!");
+    if (!isValid) throw new ValidationError("입력하지 않은 양식을 확인하시오 !");
   } catch (error) {
-    alert(error);
+    reportError(error);
   }
   return isValid;
 };
