@@ -1,11 +1,11 @@
-import { CARD_NAME } from '../../../constants/Card'
+import { CARD_NAME_LIST } from '../../../constants/Card'
 import { expirationDateMark } from '../../../domain/expirationdateMark'
 import { markCardNumber } from '../../../domain/markCardNumber'
 
 const CardShape = ({ cardNumber, cardExpirationDate, cardDesign, ownerName }: CardShapeProps) => {
   return (
     <div className='card-box'>
-      <div className={`empty-card card-color${CARD_NAME.indexOf(cardDesign)}`}>
+      <div className={`empty-card card-color${CARD_NAME_LIST.indexOf(cardDesign)}`}>
         <div className='card-name'>{cardDesign}</div>
         <div className='card-middle'>
           <div className='small-card__chip' />
