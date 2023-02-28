@@ -23,7 +23,7 @@ function CardList() {
     setOwner(owner);
   };
 
-  const handleCvcChange = (cvc: string) => {
+  const handleCvcChange = ([cvc]: string[]) => {
     setCvc(cvc);
   };
   return (

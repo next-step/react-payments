@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import useNumberInput from '../../hooks/useNumberInput';
 import { setFocus } from '../../util/input';
 import { replaceNumberOnly } from '../../util/number';
 
@@ -12,11 +13,7 @@ function ExpiredInput({ onChange }: TExpiredInputChange) {
   const [expiredYear, setExpiredYear] = useState('');
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const [monthRefs, yearRefs] = [inputRefs.current[0], inputRefs.current[1]];
-
-  useEffect(() => {
-    if (onChange) onChange(expiredMonth, expiredYear);
-  }, [expiredMonth, expiredYear]);
+  const [monthRefs, yearRefs] = inputRefs.current;
 
   const expiredInputProperties = [
     {
@@ -39,6 +36,8 @@ function ExpiredInput({ onChange }: TExpiredInputChange) {
         if (value.length === MAX_LENGTH && yearRefs) {
           setFocus(yearRefs);
         }
+
+        onChange?.(value, expiredYear);
       },
       value: expiredMonth,
     },
@@ -52,6 +51,8 @@ function ExpiredInput({ onChange }: TExpiredInputChange) {
         if (value.length === 0 && monthRefs) {
           setFocus(monthRefs);
         }
+
+        onChange?.(expiredMonth, value);
       },
       value: expiredYear,
     },

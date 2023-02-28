@@ -1,7 +1,6 @@
 import React from 'react';
 import { ICard } from '../../domain/payments/types';
 import '../../styles/card.css';
-import { generatePad } from '../../util/number';
 import { getShorteningString } from '../../util/string';
 
 const convertToEncryptedChars = (s = '') => '•'.repeat(s.length);
