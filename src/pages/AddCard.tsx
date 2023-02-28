@@ -130,12 +130,14 @@ const AddCard = () => {
       </div>
       <div className="input-container">
         <span className="input-title">카드 소유자 이름(선택)</span>
-        <span className="input-title">{name.length} / 30</span>
+        <span className="input-title">
+          {name.length} / {NAME_MAX_LENGTH}
+        </span>
         <input
           type="text"
           className="input-basic"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          maxLength={30}
+          maxLength={NAME_MAX_LENGTH}
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -209,3 +211,4 @@ const PrevIcon = () => {
 const JANUARY = '01';
 const DECEMBER = '12';
 const MONTH_VALIDITY_MESSAGE = '유효하지 않아요';
+const NAME_MAX_LENGTH = 30;
