@@ -55,7 +55,7 @@ function CardList() {
 
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const finalAlias = alias ?? bankName;
+    const finalAlias = !!alias.trim() ? alias : bankName;
 
     setCards((cards: CardType[]) => {
       const newCard = {

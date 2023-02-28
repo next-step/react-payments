@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Card from "../../components/Card";
 import { CardsContext } from "../../components/CardsProvider";
@@ -57,7 +57,7 @@ function CardList() {
         <Title>보유 카드</Title>
       </TitleWrapper>
       {cards.map((card, idx) => (
-        <div key={idx}>
+        <React.Fragment key={idx}>
           <Card
             cardNumber={formatCardNumber(card.cardNumber)}
             expiredDate={card.expiredDate}
@@ -66,7 +66,7 @@ function CardList() {
             color={getBankColor(card.bankId)}
           />
           <span>{card.cardAlias}</span>
-        </div>
+        </React.Fragment>
       ))}
       <Card isEmpty />
     </>
