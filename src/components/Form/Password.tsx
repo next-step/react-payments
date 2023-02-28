@@ -38,7 +38,7 @@ function Password({ onPasswordChange }: PasswordProps) {
     if (hasPassword) {
       onPasswordChange(password);
     }
-  }, [password, onPasswordChange]);
+  }, [password]);
 
   return (
     <InputContainer label="카드 비밀번호">

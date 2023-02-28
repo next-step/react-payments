@@ -22,11 +22,11 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
     3: "",
   });
 
-  const itemsRef = useRef<any>([]);
+  const itemsRef = useRef<HTMLInputElement[]>([]);
 
   useEffect(() => {
     onCardNumberChange(cardNumbers);
-  }, [cardNumbers, onCardNumberChange]);
+  }, [cardNumbers]);
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement>,

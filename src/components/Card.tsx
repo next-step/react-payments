@@ -10,17 +10,24 @@ function Card({
   expiredDate,
   size = Size.Small,
   color,
+  onClick,
 }: CardProps) {
   if (isEmpty) {
-    return <div>test</div>;
+    return (
+      <CardContainer>
+        <CardBox>
+          <EmptyCard onClick={onClick}>+</EmptyCard>
+        </CardBox>
+      </CardContainer>
+    );
   }
 
-  const expiredMonth = Number(expiredDate.month);
-  const expiredYear = Number(expiredDate.year);
+  const expiredMonth = Number(expiredDate?.month);
+  const expiredYear = Number(expiredDate?.year);
 
   return (
     <CardContainer>
-      <CardBox size={size} color={color}>
+      <CardBox size={size} color={color} onClick={onClick}>
         <CardTop>
           <CardText>{bankName}</CardText>
         </CardTop>
@@ -50,18 +57,34 @@ type CardSize = Exclude<Size, Size.Medium>;
 
 type CardProps = {
   bankName?: string;
-  cardNumber: string;
+  cardNumber?: string;
   userName?: string;
-  expiredDate: Date;
+  expiredDate?: Date;
   size?: CardSize;
   color?: string;
   isEmpty?: boolean;
+  onClick?: (e: React.MouseEvent) => void;
 };
 
 type CardBoxProps = {
   size?: CardSize;
   color?: string;
 };
+
+const EmptyCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 208px;
+  height: 130px;
+  font-size: 30px;
+  color: #575757;
+  background: #e5e5e5;
+  box-shadow: 3px 3px 5px rgb(0 0 0 / 25%);
+  border-radius: 5px;
+  user-select: none;
+`;
 
 const CardContainer = styled.div`
   display: flex;
