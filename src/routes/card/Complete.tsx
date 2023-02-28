@@ -2,15 +2,11 @@ import styled from "styled-components";
 import Card from "../../components/Card";
 import Button from "../../components/Form/Button";
 import { CardContext } from "../../components/CardProvider";
-import { useContext, useMemo, useState } from "react";
-import { BANKS } from "../../constants/bank";
+import { useContext, useState } from "react";
 import { Size, CardType } from "../../types/common";
 import { useHistory, useParams } from "react-router-dom";
 import { CardsContext } from "../../components/CardsProvider";
-
-const formatNumber = (number: string) => {
-  return number.replaceAll(/[0-9]/g, "*");
-};
+import { initCard } from "../../constants/bank";
 
 type Params = {
   id: string;
@@ -28,41 +24,16 @@ function CardList() {
     throw Error("context 필수값 누락");
   }
 
-  const { card, setCard } = cardContext;
+  const { card, setCard, color, bankName, formattedCardNumber } = cardContext;
   const [alias, setAlias] = useState("");
   const { setCards } = cardsContext;
   const history = useHistory();
-
-  const formattedCardNumber = useMemo(() => {
-    const hasCardNumber = Object.values(card.cardNumber).some(
-      (cardNumber) => cardNumber
-    );
-    return hasCardNumber
-      ? `${card.cardNumber[0]}-${card.cardNumber[1]}-${formatNumber(
-          card.cardNumber[2]
-        )}-${formatNumber(card.cardNumber[3])}`
-      : "";
-  }, [card.cardNumber]);
-  const color = useMemo(() => {
-    if (card.bankId) {
-      const selectedBank = BANKS.find((bank) => bank.ID === card.bankId);
-      return selectedBank ? selectedBank.COLOR : "";
-    }
-  }, [card.bankId]);
-  const bankName = useMemo(() => {
-    if (card.bankId) {
-      const selectedBank = BANKS.find((bank) => bank.ID === card.bankId);
-      return selectedBank ? selectedBank.NAME : "";
-    }
-    return "";
-  }, [card.bankId]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAlias(e.currentTarget.value);
   };
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const updateCard = () => {
     const finalAlias = !!alias.trim() ? alias : bankName;
 
     const newCard = {
@@ -70,19 +41,26 @@ function CardList() {
       cardAlias: finalAlias,
     };
 
-    if (id) {
-      setCards((cards: CardType[]) => {
-        const newCards = [...cards];
-        newCards[id] = newCard;
-        return newCards;
-      });
-    } else {
+    if (!id) {
       setCards((cards: CardType[]) => {
         return [newCard, ...cards];
       });
+
+      return;
     }
 
-    setCard({});
+    setCards((cards: CardType[]) => {
+      const newCards = [...cards];
+      newCards[id] = newCard;
+      return newCards;
+    });
+  };
+
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    updateCard();
+    setCard(initCard);
     history.push("/list");
   };
 

@@ -1,4 +1,3 @@
-import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { Size } from "../types/common";
 import { Date } from "./Form/ExpiredDate";

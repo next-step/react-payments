@@ -4,45 +4,12 @@ import styled from "styled-components";
 import Card from "../../components/Card";
 import { CardContext } from "../../components/CardProvider";
 import { CardsContext } from "../../components/CardsProvider";
-import { CardNumbers } from "../../components/Form/CardNumber";
-import { BANKS } from "../../constants/bank";
 import { CardType } from "../../types/common";
-
-const formatNumber = (number: string) => {
-  return number.replaceAll(/[0-9]/g, "*");
-};
-
-const formatCardNumber = (cardNumber: CardNumbers) => {
-  const hasCardNumber = Object.values(cardNumber).some(
-    (cardNumber) => cardNumber
-  );
-  return hasCardNumber
-    ? `${cardNumber[0]}-${cardNumber[1]}-${formatNumber(
-        cardNumber[2]
-      )}-${formatNumber(cardNumber[3])}`
-    : "";
-};
-
-const getBankName = (bankId: string) => {
-  if (!bankId) {
-    return "";
-  }
-
-  if (bankId) {
-    const selectedBank = BANKS.find((bank) => bank.ID === bankId);
-    return selectedBank ? selectedBank.NAME : "";
-  }
-};
-const getBankColor = (bankId: string) => {
-  if (!bankId) {
-    return "";
-  }
-
-  if (bankId) {
-    const selectedBank = BANKS.find((bank) => bank.ID === bankId);
-    return selectedBank ? selectedBank.COLOR : "";
-  }
-};
+import {
+  formatCardNumber,
+  getBankColor,
+  getBankName,
+} from "../../utils/format";
 
 function CardList() {
   const cardsContext = useContext(CardsContext);

@@ -26,7 +26,7 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
 
   useEffect(() => {
     onCardNumberChange(cardNumbers);
-  }, [cardNumbers, onCardNumberChange]);
+  }, [cardNumbers]);
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement>,
