@@ -1,5 +1,11 @@
 import { ChangeEvent, useState } from 'react'
-import { INIT_NUMBER_VALUE } from '../constants/Card'
+
+const INIT_NUMBER_VALUE = {
+  num1: '',
+  num2: '',
+  num3: '',
+  num4: '',
+}
 
 export const useCardNumberData = (valueLengthMax: number) => {
   const [cardNumberData, setCardNumberData] = useState(INIT_NUMBER_VALUE)

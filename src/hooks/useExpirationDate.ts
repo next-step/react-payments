@@ -1,6 +1,11 @@
 import { ChangeEvent, useState, FocusEvent } from 'react'
-import { EXPIRATION_DATE_LENGTH_MAX, INIT_EXPIRATION_VALUE, MONTH_MAX, SINGLE_DIGIT_MAX } from '../constants/Card'
+import { EXPIRATION_DATE_LENGTH_MAX, MONTH_MAX, SINGLE_DIGIT_MAX } from '../constants/Card'
 import { getThisYear } from '../utils/getThisYear'
+
+const INIT_EXPIRATION_VALUE = {
+  MM: '',
+  YY: '',
+}
 
 export const useExpirationDate = () => {
   const [cardExpirationDate, setCardExpirationDate] = useState(INIT_EXPIRATION_VALUE)
