@@ -11,7 +11,7 @@ import { domains } from "@/router";
 import * as S from "./completeAddCard";
 
 export default function CompleteAddCard() {
-  const { state } = useLocation();
+  const { state, pathname } = useLocation();
   const navigate = useNavigate();
 
   const { dispatch } = useCardsContext();
@@ -23,6 +23,8 @@ export default function CompleteAddCard() {
   useEffect(() => {
     if (!state?.cardInfo) navigate(domains.CARD_LIST);
   }, []);
+
+  const isEdit = useMemo(() => pathname.includes("edit"), [pathname]);
 
   const newCardInfo: CardItem = useMemo(
     () => ({
@@ -36,6 +38,14 @@ export default function CompleteAddCard() {
     dispatch({
       type: "UPDATE_CARD",
       payload: { id: newCardInfo.id, newInfo: newCardInfo },
+    });
+    navigate(domains.CARD_LIST);
+  };
+
+  const handleCardDeleteBtnClick = () => {
+    dispatch({
+      type: "DELETE_CARD",
+      payload: { id: newCardInfo.id },
     });
     navigate(domains.CARD_LIST);
   };
@@ -60,6 +70,11 @@ export default function CompleteAddCard() {
             />
           </S.CompletedCardWrapper>
           <S.CompleteCardButtonWrapper>
+            {isEdit && (
+              <S.DeleteCardButton onClick={handleCardDeleteBtnClick}>
+                삭제
+              </S.DeleteCardButton>
+            )}
             <Button onClick={handleMoveToCardsPage}>확인</Button>
           </S.CompleteCardButtonWrapper>
         </CardPageLayout>
