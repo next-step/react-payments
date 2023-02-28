@@ -1,3 +1,4 @@
+import { useContext, useRef } from 'react';
 import styled from '@emotion/styled';
 
 import { CreditCard } from 'components';
@@ -6,10 +7,20 @@ import type { CreditCardProps } from 'components/CreditCard/CreditCard.types';
 import useRouter from 'routes/useRouter';
 
 import { getLocalStorageItem } from 'utils/localStorage';
+import { CardListContext } from 'contexts/CardListProvider';
 
 const InputCardNamePage = () => {
+  const nameRef = useRef<HTMLInputElement>(null);
   const { push } = useRouter();
+  const { addCardInfo } = useContext(CardListContext);
   const item = getLocalStorageItem<CreditCardProps>('CardValues');
+
+  const onSubmit = () => {
+    if (!nameRef.current) return;
+    const { value } = nameRef.current;
+    addCardInfo({ ...item, nickname: value });
+    push('/card-list');
+  };
 
   return (
     <Wrapper display="flex" flexDirection="column" justifyContent="center">
@@ -23,16 +34,13 @@ const InputCardNamePage = () => {
       />
       <Form>
         <TextField
+          ref={nameRef}
           placeholder="카드를 저장할 별명을 입력해주세요."
           maxLength={30}
           className="w-100"
         />
         <Box display="flex" justifyContent="flex-end" className="mt-20">
-          <Button
-            type="submit"
-            color="brand02"
-            onClick={() => push('/card-list')}
-          >
+          <Button type="submit" color="brand02" onClick={onSubmit}>
             카드 생성 완료하기
           </Button>
         </Box>

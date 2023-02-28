@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { CreditCardType, PartialCreditCardType } from 'types/CreditCard';
 
 const initalData = {
+  nickname: '',
   number: '',
   holderName: '',
   expiration: '',

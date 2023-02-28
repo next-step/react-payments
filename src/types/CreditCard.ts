@@ -1,4 +1,5 @@
 export interface CreditCardType {
+  nickname: string;
   number: string;
   holderName: string;
   expiration: string;
