@@ -1,0 +1,24 @@
+@import "card.css";
+@import "input.css";
+@import "button.css";
+@import "modal.css";
+@import "utils.css";
+@import "reset.css";
+
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5e5e5;
+}
+
+.app{
+  height: 100%;
+  padding: 16px 24px;
+}
+
+input {
+  font-size: 16px;
+}
