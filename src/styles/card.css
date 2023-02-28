@@ -81,6 +81,15 @@
   align-items: center;
 }
 
+.card-name {
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
 .card-middle {
   width: 100%;
   height: 100%;
@@ -115,6 +124,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 5px;
 }
 
 .card-text {
@@ -124,6 +134,13 @@
   line-height: 16px;
   vertical-align: middle;
   font-weight: 400;
+  white-space: nowrap;
+}
+
+.text-hidden {
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .card-text__big {

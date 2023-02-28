@@ -1,16 +1,24 @@
-@import "./card.css";
-@import "./input.css";
-@import "./button.css";
-@import "./modal.css";
-@import "./utils.css";
+@import './card.css';
+@import './input.css';
+@import './button.css';
+@import './modal.css';
+@import './utils.css';
+@import './cardColors.css';
 
 body {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
   align-items: center;
   justify-content: center;
   background-color: #e5e5e5;
+  margin: 0;
+}
+
+a {
+  color: #383838;
+  outline: none;
+  text-decoration: none;
 }
 
 input {
