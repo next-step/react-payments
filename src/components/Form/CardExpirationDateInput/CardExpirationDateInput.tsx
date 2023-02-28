@@ -3,8 +3,9 @@ import Input from "components/Input/Input";
 import Text from "components/Text/Text";
 import styled from "styled-components";
 import { useRef } from "react";
-import { checkMonth, checkYear } from "../../../utils/index";
+import { changeMonth, changeYear } from "../../../utils/InputChange";
 import { CardFormType } from "types";
+import { isValidExpirationMonth, isValidExpirationYear } from "utils/InputValidation";
 export type CardExpirationDateInputProps = {
   setExprireDate: React.Dispatch<React.SetStateAction<CardFormType>>;
 };
@@ -12,13 +13,16 @@ export type CardExpirationDateInputProps = {
 const CardExpirationDateInput = ({ setExprireDate, fontColor }) => {
   const inputMonthRef = useRef<HTMLInputElement>(null);
   const inputYearRef = useRef<HTMLInputElement>(null);
+  const isValidMonth = isValidExpirationMonth(inputMonthRef.current?.value);
+  const isValidYear = isValidExpirationYear(inputYearRef.current?.value);
+  const isValid = isValidMonth && isValidYear;
 
   const handleInput = () => {
     if (inputMonthRef.current === null || inputYearRef.current === null) return;
-    let month = checkMonth(inputMonthRef.current.value);
-    let year = checkYear(inputYearRef.current.value);
-    inputMonthRef.current.value = checkMonth(month);
-    inputYearRef.current.value = checkYear(year);
+    let month = changeMonth(inputMonthRef.current.value);
+    let year = changeYear(inputYearRef.current.value);
+    inputMonthRef.current.value = changeMonth(month);
+    inputYearRef.current.value = changeYear(year);
 
     if (!month.length) {
       month = "MM";
@@ -29,8 +33,14 @@ const CardExpirationDateInput = ({ setExprireDate, fontColor }) => {
     setExprireDate((prev) => ({
       ...prev,
       expireDate: {
-        month: month,
-        year: year,
+        month: {
+          text: month,
+          isValid: isValidExpirationYear(month),
+        },
+        year: {
+          text: year,
+          isValid: isValidExpirationYear(year),
+        },
       },
     }));
   };
@@ -46,6 +56,7 @@ const CardExpirationDateInput = ({ setExprireDate, fontColor }) => {
           ref={inputMonthRef}
           fontColor={fontColor}
           active={true}
+          error={!isValidMonth}
         ></Input>
         <Input
           type="text"
@@ -55,10 +66,13 @@ const CardExpirationDateInput = ({ setExprireDate, fontColor }) => {
           ref={inputYearRef}
           fontColor={fontColor}
           active={true}
+          error={!isValidYear}
         ></Input>
       </Container>
       <Wrapper>
-        <Text fontSize="xs" weight="bold" label="2자리씩 입력하세요. MM (01~12) / YY (01~99) " fontColor="red" />
+        {!isValid && (
+          <Text fontSize="xs" weight="bold" label="2자리씩 입력하세요. MM (01~12) / YY (01~99) " fontColor="red" />
+        )}
       </Wrapper>
     </Layout>
   );

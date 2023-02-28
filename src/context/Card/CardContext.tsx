@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import { NewCardType } from "types";
+import { CardType } from "types";
 
 const ACTION_TYPES = {
   add: "ADD",
@@ -18,7 +18,7 @@ const reducer = (state, action) => {
       return state;
 
     case ACTION_TYPES.remove:
-      const newCardList = state.list.filter((card: NewCardType) => card.id !== action.payload.id);
+      const newCardList = state.list.filter((card: CardType) => card.id !== action.payload.id);
       return {
         list: newCardList,
         store: "",
@@ -32,7 +32,7 @@ const reducer = (state, action) => {
 // 카드 목록이 담겨있는 list,
 type DEFAULT_STATE_TYPE = {
   list: [];
-  store: NewCardType;
+  store: CardType;
 };
 
 const DEFAULT_STATE: DEFAULT_STATE_TYPE = {
@@ -58,26 +58,26 @@ const DEFAULT_STATE: DEFAULT_STATE_TYPE = {
 
 export const CardContext = createContext({
   state: DEFAULT_STATE,
-  addCard: function (card: NewCardType) {},
-  addCardToStore: function (card: NewCardType) {},
-  removeCard: function (card: NewCardType) {},
+  addCard: function (card: CardType) {},
+  addCardToStore: function (card: CardType) {},
+  removeCard: function (card: CardType) {},
 });
 
 export const CardContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, DEFAULT_STATE);
 
   // 카드 리스트에 추가
-  const addCard = (card: NewCardType) => {
+  const addCard = (card: CardType) => {
     dispatch({ type: ACTION_TYPES.add, payload: card });
   };
 
   // store에 카드를 임시저장
-  const addCardToStore = (card: NewCardType) => {
+  const addCardToStore = (card: CardType) => {
     dispatch({ type: ACTION_TYPES.addStore, payload: card });
   };
 
   // 카드 삭제
-  const removeCard = (card: NewCardType) => {
+  const removeCard = (card: CardType) => {
     dispatch({ type: ACTION_TYPES.remove, payload: card });
   };
 

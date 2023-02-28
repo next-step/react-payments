@@ -3,8 +3,9 @@ import styled from "styled-components";
 import InputContainer from "../../Input/Container/Container";
 import Input from "../../Input/Input";
 import { useRef } from "react";
-import { checkCardSecurityInput } from "utils";
+import { changeCardSecurityInput } from "utils/InputChange";
 import { ColorType, CardFormType } from "types";
+import { isValidSecurityCode } from "utils/InputValidation";
 
 type CardPasswordInputProps = {
   fontColor: ColorType;
@@ -13,15 +14,19 @@ type CardPasswordInputProps = {
 
 const CardSecurityInput = ({ fontColor, setSecurityCode }: CardPasswordInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const isValid = isValidSecurityCode(inputRef.current?.value);
 
   const handleInput = () => {
     const ref = inputRef.current;
     if (ref === null) return;
     const securityCode = ref.value;
-    ref.value = checkCardSecurityInput(securityCode);
+    ref.value = changeCardSecurityInput(securityCode);
     setSecurityCode((prev) => ({
       ...prev,
-      cvc: securityCode,
+      cvc: {
+        text: securityCode,
+        isValid: isValidSecurityCode(securityCode),
+      },
     }));
   };
 
@@ -29,10 +34,18 @@ const CardSecurityInput = ({ fontColor, setSecurityCode }: CardPasswordInputProp
     <Layout>
       <Title fontSize="xs" weight="bold" label="보안코드 (CVC/CVV)" />
       <InputContainer width={25}>
-        <Input theme="primary" type="text" ref={inputRef} onChange={handleInput} fontColor={fontColor} active={true} />
+        <Input
+          theme="primary"
+          type="text"
+          ref={inputRef}
+          onChange={handleInput}
+          fontColor={fontColor}
+          active={true}
+          error={!isValid}
+        />
       </InputContainer>
       <Wrapper>
-        <Text fontSize="xs" weight="bold" label="숫자 3자리 입력해주세요" fontColor="red" />
+        {!isValid && <Text fontSize="xs" weight="bold" label="숫자 3자리 입력해주세요" fontColor="red" />}
       </Wrapper>
     </Layout>
   );

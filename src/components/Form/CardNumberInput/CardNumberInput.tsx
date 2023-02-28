@@ -1,10 +1,11 @@
 import Text from "components/Text/Text";
 import { useRef } from "react";
 import styled from "styled-components";
-import { checkCardNumber } from "utils";
+import { changeCardNumber } from "utils/InputChange";
 import Input from "../../Input/Input";
 import InputContainer from "components/Input/Container/Container";
 import { ColorType, CardFormType } from "types";
+import { isValidCardNumber } from "utils/InputValidation";
 type CardNumberInputProps = {
   setCardNumber: React.Dispatch<React.SetStateAction<CardFormType>>;
   fontColor: ColorType;
@@ -12,15 +13,18 @@ type CardNumberInputProps = {
 
 const CardNumberInput = ({ setCardNumber, fontColor }: CardNumberInputProps) => {
   const ref = useRef<HTMLInputElement>(null);
-
+  const isValid = isValidCardNumber(ref.current?.value);
   const handleInput = () => {
     const currentRef = ref.current;
     if (currentRef === null) return;
-    const cardNumbers = checkCardNumber(currentRef.value);
+    const cardNumbers = changeCardNumber(currentRef.value);
     currentRef.value = cardNumbers;
     setCardNumber((prev) => ({
       ...prev,
-      cardNumbers,
+      cardNumbers: {
+        text: cardNumbers,
+        isValid: isValidCardNumber(cardNumbers),
+      },
     }));
   };
 
@@ -28,10 +32,18 @@ const CardNumberInput = ({ setCardNumber, fontColor }: CardNumberInputProps) => 
     <Layout>
       <Title fontSize="xs" weight="bold" label="카드 번호" />
       <InputContainer>
-        <Input ref={ref} type="text" theme="primary" onChange={handleInput} fontColor={fontColor} active={true}></Input>
+        <Input
+          ref={ref}
+          type="text"
+          theme="primary"
+          onChange={handleInput}
+          fontColor={fontColor}
+          active={true}
+          error={!isValid}
+        ></Input>
       </InputContainer>
       <Wrapper>
-        <Text fontSize="xs" weight="bold" label="카드 번호는 12자리여야 합니다." fontColor="red" />
+        {!isValid && <Text fontSize="xs" weight="bold" label="카드 번호는 12자리여야 합니다." fontColor="red" />}
       </Wrapper>
     </Layout>
   );

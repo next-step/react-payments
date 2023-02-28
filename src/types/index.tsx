@@ -13,6 +13,43 @@ export type FontSizeType = "xs" | "s" | "m" | "lg" | "2x";
 export type FontWeightType = "normal" | "bold";
 
 export interface CardFormType {
+  cardNumbers: {
+    text: string;
+    isValid: boolean;
+  };
+  expireDate: {
+    month: {
+      text: string;
+      isValid: boolean;
+    };
+    year: {
+      text: string;
+      isValid: boolean;
+    };
+  };
+  password: {
+    one: string;
+    two: string;
+    isValid: boolean;
+  };
+  cvc: {
+    text: string;
+    isValid: boolean;
+  };
+  ownerName: {
+    text: string;
+    isValid: boolean;
+  };
+  color: {
+    text: ColorType;
+    isValid: boolean;
+  };
+  company: {
+    text: CompanyType;
+    isValid: boolean;
+  };
+}
+export type CardType = {
   cardNumbers: string;
   expireDate: {
     month: string;
@@ -26,8 +63,6 @@ export interface CardFormType {
   ownerName: string;
   color: ColorType;
   company: CompanyType;
-}
-export interface NewCardType extends CardFormType {
   alias: string;
   id: string;
-}
+};

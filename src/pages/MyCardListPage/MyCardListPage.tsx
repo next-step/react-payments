@@ -6,7 +6,7 @@ import Card from "components/Card/Card";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { CardContext } from "context/Card/CardContext";
-import { NewCardType } from "types";
+import { CardType } from "types";
 import ScrollBox from "components/ScrollBox/ScrollBox";
 
 const MyCardListPage = () => {
@@ -23,7 +23,7 @@ const MyCardListPage = () => {
       <Title fontSize="2x" weight="bold" label="보유카드" />
       <ScrollContainer color="#636266">
         <StyledAddCard type="add" size="small" onClick={handleAddCard} />
-        {MyCardList.map((card: NewCardType) => (
+        {MyCardList.map((card: CardType) => (
           <CardLayout key={card.id}>
             <Card
               type="primary"

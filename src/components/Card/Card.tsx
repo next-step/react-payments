@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import Text from "components/Text/Text";
-import { ColorType, CompanyType, NewCardType } from "types";
+import { ColorType, CompanyType, CardType } from "types";
 import { ReactEventHandler, useContext } from "react";
 import IconButton from "components/IconButton/IconButton";
 import { CardContext } from "context/Card/CardContext";
@@ -35,7 +35,7 @@ const Card = ({
 }: CardProps) => {
   const cardCtx = useContext(CardContext);
   const MyCardList = [...cardCtx.state.list].reverse();
-  const selectedCard = MyCardList.find((card: NewCardType) => card.id === id);
+  const selectedCard = MyCardList.find((card: CardType) => card.id === id);
   const navigate = useNavigate();
 
   const handleRemove = () => {

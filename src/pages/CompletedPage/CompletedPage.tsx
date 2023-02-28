@@ -6,7 +6,7 @@ import Button from "components/Button/Button";
 import { useContext, useRef, useState } from "react";
 import { CardContext } from "context/Card/CardContext";
 import { useNavigate } from "react-router-dom";
-import { checkAliasLength } from "../../utils/index";
+import { changeAliasLength } from "../../utils/InputChange";
 
 const CompletedPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -32,7 +32,7 @@ const CompletedPage = () => {
   const handleInput = () => {
     const currentInputRef = inputRef.current;
     if (currentInputRef === null) return;
-    currentInputRef.value = checkAliasLength(currentInputRef.value);
+    currentInputRef.value = changeAliasLength(currentInputRef.value);
     const length = currentInputRef.value.length;
     setInputLength(length);
   };
@@ -108,7 +108,7 @@ const Box = styled.div`
 const ButtonWrapper = styled.div`
   width: 90%;
   text-align: right;
-  margin-top: 30px;
+  margin: 30px;
 `;
 
 export default CompletedPage;

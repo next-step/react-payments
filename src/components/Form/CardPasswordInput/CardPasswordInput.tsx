@@ -3,8 +3,9 @@ import styled from "styled-components";
 import Input from "../../Input/Input";
 import InputContainer from "components/Input/Container/Container";
 import { useRef } from "react";
-import { changePassword } from "utils";
+import { changePassword } from "utils/InputChange";
 import { ColorType, CardFormType } from "types";
+import { isValidPasswordNumber } from "../../../utils/InputValidation";
 
 type CardPasswordInputProps = {
   fontColor: ColorType;
@@ -14,6 +15,9 @@ type CardPasswordInputProps = {
 const CardPasswordInput = ({ fontColor, setPassword }: CardPasswordInputProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const inputRef2 = useRef<HTMLInputElement>(null);
+  const isValidOne = isValidPasswordNumber(inputRef.current?.value);
+  const isValidTwo = isValidPasswordNumber(inputRef2.current?.value);
+  const isValid = isValidOne && isValidTwo;
 
   const handleInput = () => {
     if (inputRef.current === null || inputRef2.current === null) return;
@@ -27,6 +31,7 @@ const CardPasswordInput = ({ fontColor, setPassword }: CardPasswordInputProps) =
       password: {
         one: passwordOne,
         two: passwordTwo,
+        isValid: isValidPasswordNumber(passwordOne) && isValidPasswordNumber(passwordTwo),
       },
     }));
   };
@@ -35,13 +40,29 @@ const CardPasswordInput = ({ fontColor, setPassword }: CardPasswordInputProps) =
     <Layout>
       <Title fontSize="xs" weight="bold" label="카드 비밀번호" />
       <Container width={70}>
-        <Input theme="primary" type="text" active={true} ref={inputRef} onChange={handleInput} fontColor={fontColor} />
-        <Input theme="primary" type="text" active={true} ref={inputRef2} onChange={handleInput} fontColor={fontColor} />
+        <Input
+          theme="primary"
+          type="text"
+          active={true}
+          ref={inputRef}
+          onChange={handleInput}
+          fontColor={fontColor}
+          error={!isValidOne}
+        />
+        <Input
+          theme="primary"
+          type="text"
+          active={true}
+          ref={inputRef2}
+          onChange={handleInput}
+          fontColor={fontColor}
+          error={!isValidTwo}
+        />
         <Input theme="primary" type="text" active={false} />
         <Input theme="primary" type="text" active={false} />
       </Container>
       <Wrapper>
-        <Text fontSize="xs" weight="bold" label="숫자 1자리씩 입력해주세요" fontColor="red" />
+        {!isValid && <Text fontSize="xs" weight="bold" label="숫자 1자리씩 입력해주세요" fontColor="red" />}
       </Wrapper>
     </Layout>
   );

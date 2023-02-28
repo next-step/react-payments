@@ -11,6 +11,8 @@ import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import { useHandleCardFormText } from "hooks/useHandleCardFormText";
 import { CardContext } from "context/Card/CardContext";
+import { ColorType, CompanyType } from "types";
+import { isCardFormValidation } from "utils/InputValidation";
 
 export const Form = () => {
   const navigate = useNavigate();
@@ -21,23 +23,42 @@ export const Form = () => {
 
   const submit = () => {
     const currentFormCard = state;
+    if (!isCardFormValidation(currentFormCard)) return;
     const newCard = {
-      ...currentFormCard,
+      cardNumbers: currentFormCard.cardNumbers.text,
+      expireDate: {
+        month: currentFormCard.expireDate.month.text,
+        year: currentFormCard.expireDate.year.text,
+      },
+      password: {
+        one: currentFormCard.password.one,
+        two: currentFormCard.password.two,
+      },
+      cvc: currentFormCard.cvc.text,
+      ownerName: currentFormCard.ownerName.text,
+      color: currentFormCard.color.text,
+      company: currentFormCard.company.text,
       alias: "",
       id: Date.now().toString(),
     };
     cardCtx.addCardToStore(newCard);
-    navigate("/complete"); // Input validation 추가 필요
+    navigate("/complete");
   };
 
   const selectedDot = (e) => {
-    const color = e.currentTarget.children[0].getAttribute("color");
-    const company = e.currentTarget.children[1].textContent;
+    const color = e.currentTarget.children[0].getAttribute("color") as ColorType;
+    const company = e.currentTarget.children[1].textContent as CompanyType;
 
     setState((prev) => ({
       ...prev,
-      company,
-      color,
+      company: {
+        text: company,
+        isValid: true,
+      },
+      color: {
+        text: color,
+        isValid: true,
+      },
     }));
     setIsOpenModal(false);
   };
@@ -52,19 +73,19 @@ export const Form = () => {
       <Card
         type="primary"
         onClick={openModal}
-        color={state.color}
-        company={state.company}
+        color={state.color.text}
+        company={state.company.text}
         size="small"
-        number={state.cardNumbers}
-        expireMonth={state.expireDate.month}
-        expireYear={state.expireDate.year}
-        ownerName={state.ownerName}
+        number={state.cardNumbers.text}
+        expireMonth={state.expireDate.month.text}
+        expireYear={state.expireDate.year.text}
+        ownerName={state.ownerName.text}
       />
-      <CardNumberInput setCardNumber={setState} fontColor={state.color} />
-      <CardExpirationDateInput setExprireDate={setState} fontColor={state.color} />
-      <CardOwnerNameInput setOwnerName={setState} fontColor={state.color} />
-      <CardSecurityInput fontColor={state.color} setSecurityCode={setState} />
-      <CardPasswordInput fontColor={state.color} setPassword={setState} />
+      <CardNumberInput setCardNumber={setState} fontColor={state.color.text} />
+      <CardExpirationDateInput setExprireDate={setState} fontColor={state.color.text} />
+      <CardOwnerNameInput setOwnerName={setState} fontColor={state.color.text} />
+      <CardSecurityInput fontColor={state.color.text} setSecurityCode={setState} />
+      <CardPasswordInput fontColor={state.color.text} setPassword={setState} />
       <ButtonBox>
         <Button fontSize="m" onClick={submit} label="Next" />
       </ButtonBox>

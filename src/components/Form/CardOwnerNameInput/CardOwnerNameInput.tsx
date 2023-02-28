@@ -2,7 +2,7 @@ import Text from "components/Text/Text";
 import styled from "styled-components";
 import Input from "../../Input/Input";
 import { useRef, useState } from "react";
-import { checkOwnerName } from "utils";
+import { changeOwnerName } from "utils/InputChange";
 import { ColorType, CardFormType } from "types";
 
 type CardOwnerNameInputProps = {
@@ -18,24 +18,30 @@ const CardOwnerNameInput = ({ setOwnerName, fontColor }: CardOwnerNameInputProps
     const ref = inputRef.current;
     if (ref === null) return;
     const value = ref.value;
-    const ownerName = checkOwnerName(value);
+    const ownerName = changeOwnerName(value);
     ref.value = ownerName;
     setInputLength(ownerName.length);
     return !ownerName.length
       ? setOwnerName((prev) => ({
           ...prev,
-          ownerName: "Name",
+          ownerName: {
+            text: "Name",
+            isValid: true,
+          },
         }))
       : setOwnerName((prev) => ({
           ...prev,
-          ownerName,
+          ownerName: {
+            text: ownerName,
+            isValid: true,
+          },
         }));
   };
   return (
     <Layout>
       <Box>
         <Title fontSize="xs" weight="bold" label="카드 소유자 이름(선택)" />
-        <Text fontSize="s" weight="normal" label={`${inputlength}/30`} />
+        <Text fontSize="s" weight="normal" label={`${inputlength}/10`} />
       </Box>
       <Input
         type="text"
