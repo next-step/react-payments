@@ -57,18 +57,18 @@ function CardList() {
         <Title>보유 카드</Title>
       </TitleWrapper>
       {cards.map((card, idx) => (
-        <>
+        <div key={idx}>
           <Card
             cardNumber={formatCardNumber(card.cardNumber)}
             expiredDate={card.expiredDate}
             userName={card.userName}
             bankName={getBankName(card.bankId)}
             color={getBankColor(card.bankId)}
-            key={idx}
           />
           <span>{card.cardAlias}</span>
-        </>
+        </div>
       ))}
+      <Card isEmpty />
     </>
   );
 }
