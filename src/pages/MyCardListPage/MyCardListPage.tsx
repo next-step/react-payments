@@ -51,7 +51,7 @@ const Layout = styled.div`
   align-items: center;
 `;
 const ScrollContainer = styled(ScrollBox)`
-  padding: 20px;
+  padding: 30px;
   height: 80vh;
 `;
 const StyledAddCard = styled(Card)`

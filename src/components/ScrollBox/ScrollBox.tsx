@@ -1,5 +1,5 @@
 import styled from "styled-components";
-interface ScrollBoxProps {
+export interface ScrollBoxProps {
   color?: string;
   radius?: string;
 }

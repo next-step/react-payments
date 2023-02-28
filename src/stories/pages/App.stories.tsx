@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import AddCardForm from "components/Form/Form";
+import Form from "components/Form/Form";
 
 import { withRouter } from "storybook-addon-react-router-v6";
 import { Routes } from "react-router-dom";
@@ -12,9 +12,9 @@ import AddCardPage from "pages/FormPage/FormPage";
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "Page",
-  component: AddCardForm,
+  component: Form,
   decorators: [withRouter],
-} as ComponentMeta<typeof AddCardForm>;
+} as ComponentMeta<typeof Form>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 // const Template: ComponentStory<typeof AddCardForm> = (args) => <AddCardForm />;
@@ -27,4 +27,4 @@ const CompositionTemplate = ({ outlet, ...args }) => (
   </Routes>
 );
 
-export const main = CompositionTemplate.bind({});
+export const App = CompositionTemplate.bind({});

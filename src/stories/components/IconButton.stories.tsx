@@ -19,3 +19,17 @@ LeftButton.args = {
   size: "2x",
   color: "black",
 };
+export const RemoveButton = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+RemoveButton.args = {
+  name: "remove",
+  size: "2x",
+  color: "black",
+};
+export const modifyButton = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+modifyButton.args = {
+  name: "modify",
+  size: "2x",
+  color: "black",
+};
