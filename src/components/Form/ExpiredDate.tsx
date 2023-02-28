@@ -71,7 +71,7 @@ function ExpiredDate({ onExpiredDateChange }: ExpiredDateProps) {
 
   useEffect(() => {
     onExpiredDateChange(expiredDate);
-  }, [expiredDate, onExpiredDateChange]);
+  }, [expiredDate]);
 
   return (
     <InputContainer label="만료일">

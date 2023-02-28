@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import List from "./routes/card/List";
 import Layout from "./components/Layout";
 import Add from "./routes/card/Add";
@@ -8,19 +8,28 @@ function Router() {
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/" exact>
+          <Redirect to="/add" />
+        </Route>
         <Route path="/add">
           <Layout>
             <Add></Add>
           </Layout>
         </Route>
+        <Route path="/complete/:id">
+          <Layout>
+            <Complete></Complete>
+          </Layout>
+        </Route>
         <Route path="/complete">
-          <Complete></Complete>
+          <Layout>
+            <Complete></Complete>
+          </Layout>
         </Route>
         <Route path="/list">
-          <List></List>
-        </Route>
-        <Route path="/">
-          <List></List>
+          <Layout>
+            <List></List>
+          </Layout>
         </Route>
       </Switch>
     </BrowserRouter>

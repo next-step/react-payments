@@ -8,11 +8,12 @@ export enum Size {
   Medium = "medium",
 }
 
-export type Card = {
-  cardNumbers: CardNumbers;
+export type CardType = {
+  cardNumber: CardNumbers;
   expiredDate: Date;
   userName: string;
   code: number;
   password: PasswordType;
   bankId: string;
+  cardAlias: string;
 };
