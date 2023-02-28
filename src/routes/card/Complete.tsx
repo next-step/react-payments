@@ -21,7 +21,7 @@ function CardList() {
     throw Error("context 필수값 누락");
   }
 
-  const { card } = cardContext;
+  const { card, setCard } = cardContext;
   const [alias, setAlias] = useState("");
   const { setCards } = cardsContext;
   const history = useHistory();
@@ -63,6 +63,9 @@ function CardList() {
         cardAlias: finalAlias,
       };
       return [...cards, newCard];
+    });
+    setCard(() => {
+      return {};
     });
     history.push("/list");
   };

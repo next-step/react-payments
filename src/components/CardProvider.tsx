@@ -37,7 +37,7 @@ export const CardContext = createContext<ContextProps | null>({
 });
 
 function CardProvider({ children }: ComponentProps) {
-  const [card, setCard] = useState(initCard);
+  const [card, setCard] = useState<CardType>(initCard);
 
   return (
     <CardContext.Provider value={{ card, setCard }}>
