@@ -11,13 +11,8 @@ function Card({
   expiredDate,
   size = Size.Small,
   color,
+  onClick,
 }: CardProps) {
-  const history = useHistory();
-
-  const onClick = () => {
-    history.push("/add");
-  };
-
   if (isEmpty) {
     return (
       <CardContainer>
@@ -33,7 +28,7 @@ function Card({
 
   return (
     <CardContainer>
-      <CardBox size={size} color={color}>
+      <CardBox size={size} color={color} onClick={onClick}>
         <CardTop>
           <CardText>{bankName}</CardText>
         </CardTop>
@@ -69,6 +64,7 @@ type CardProps = {
   size?: CardSize;
   color?: string;
   isEmpty?: boolean;
+  onClick?: (e: React.MouseEvent) => void;
 };
 
 type CardBoxProps = {

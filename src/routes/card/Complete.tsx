@@ -5,16 +5,23 @@ import { CardContext } from "../../components/CardProvider";
 import { useContext, useMemo, useState } from "react";
 import { BANKS } from "../../constants/bank";
 import { Size, CardType } from "../../types/common";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { CardsContext } from "../../components/CardsProvider";
 
 const formatNumber = (number: string) => {
   return number.replaceAll(/[0-9]/g, "*");
 };
 
+type Params = {
+  id: string;
+};
+
 function CardList() {
   const cardContext = useContext(CardContext);
   const cardsContext = useContext(CardsContext);
+  const params = useParams<Params>();
+
+  const id = Number(params?.id);
 
   if (!cardContext || !cardsContext) {
     alert("context 누락");
@@ -47,6 +54,7 @@ function CardList() {
       const selectedBank = BANKS.find((bank) => bank.ID === card.bankId);
       return selectedBank ? selectedBank.NAME : "";
     }
+    return "";
   }, [card.bankId]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,16 +65,24 @@ function CardList() {
     e.preventDefault();
     const finalAlias = !!alias.trim() ? alias : bankName;
 
-    setCards((cards: CardType[]) => {
-      const newCard = {
-        ...card,
-        cardAlias: finalAlias,
-      };
-      return [...cards, newCard];
-    });
-    setCard(() => {
-      return {};
-    });
+    const newCard = {
+      ...card,
+      cardAlias: finalAlias,
+    };
+
+    if (id) {
+      setCards((cards: CardType[]) => {
+        const newCards = [...cards];
+        newCards[id] = newCard;
+        return newCards;
+      });
+    } else {
+      setCards((cards: CardType[]) => {
+        return [newCard, ...cards];
+      });
+    }
+
+    setCard({});
     history.push("/list");
   };
 

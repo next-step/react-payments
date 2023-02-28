@@ -1,9 +1,12 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../../components/Card";
+import { CardContext } from "../../components/CardProvider";
 import { CardsContext } from "../../components/CardsProvider";
 import { CardNumbers } from "../../components/Form/CardNumber";
 import { BANKS } from "../../constants/bank";
+import { CardType } from "../../types/common";
 
 const formatNumber = (number: string) => {
   return number.replaceAll(/[0-9]/g, "*");
@@ -43,13 +46,24 @@ const getBankColor = (bankId: string) => {
 
 function CardList() {
   const cardsContext = useContext(CardsContext);
+  const cardContext = useContext(CardContext);
 
-  if (!cardsContext) {
+  if (!cardsContext || !cardContext) {
     alert("context 누락");
     throw Error("context 필수값 누락");
   }
 
   const { cards } = cardsContext;
+  const { setCard } = cardContext;
+
+  const history = useHistory();
+  const handleEmptyCardClick = () => {
+    history.push("/add");
+  };
+  const handleCardClick = (card: CardType, idx: number) => {
+    setCard(card);
+    history.push(`/complete/${idx}`);
+  };
 
   return (
     <>
@@ -64,11 +78,12 @@ function CardList() {
             userName={card.userName}
             bankName={getBankName(card.bankId)}
             color={getBankColor(card.bankId)}
+            onClick={() => handleCardClick(card, idx)}
           />
           <span>{card.cardAlias}</span>
         </React.Fragment>
       ))}
-      <Card isEmpty />
+      <Card isEmpty onClick={handleEmptyCardClick} />
     </>
   );
 }
