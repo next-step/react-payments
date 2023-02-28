@@ -1,8 +1,8 @@
 import { ReactNode } from 'react'
 
-import { pageTitles } from '@/contants'
+import { PAGE_TITLES } from '@/contants'
 
-type Title = (typeof pageTitles)[number]
+type Title = (typeof PAGE_TITLES)[number]
 
 interface PageTitleProps {
   title: Title
