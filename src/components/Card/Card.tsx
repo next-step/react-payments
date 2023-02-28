@@ -1,44 +1,20 @@
-import { masking } from '../../utils';
-
-export interface CardProps {
-  bank?: string;
-  num1?: string;
-  num2?: string;
-  num3?: string;
-  num4?: string;
-  expiry?: string;
-  holder: string;
-}
-
-const formatCardNumber = (
-  num1?: string,
-  num2?: string,
-  num3?: string,
-  num4?: string
-) =>
-  [num1, num2, masking(num3), masking(num4)]
-    .filter((num) => num !== undefined && num !== '')
-    .join('-');
-
-const Card = ({ bank, holder, expiry, num1, num2, num3, num4 }: CardProps) => {
+const Card = () => {
   return (
     <div className="card-box">
       <div className="small-card">
         <div className="card-top">
-          <span className="card-text">{bank}</span>
+          <span className="card-text">클린카드</span>
         </div>
         <div className="card-middle">
-          <div className="small-card__chip" />
+          <div className="small-card__chip"></div>
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">
-              {formatCardNumber(num1, num2, num3, num4)}
-            </span>
+            <span className="card-text">1111 - 2222 - oooo - oooo</span>
           </div>
           <div className="card-bottom__info">
-            <span className="card-text">{holder}</span>
-            <span className="card-text">{expiry}</span>
+            <span className="card-text">YUJO</span>
+            <span className="card-text">12 / 23</span>
           </div>
         </div>
       </div>
