@@ -5,7 +5,7 @@ import useCard from '@/store/hooks/useCard';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { CARD_LIST_ACTION, useCardListDispatch } from '@/store';
-import { PLACEHOLDER_TEXT, ROUTE } from '@/constants';
+import { CARD_COMPANIES, PLACEHOLDER_TEXT, ROUTE } from '@/constants';
 
 const CardCreateCompletePage = () => {
   const cardNickNameFormId = 'cardNickNameForm';
@@ -15,7 +15,7 @@ const CardCreateCompletePage = () => {
 
   const maxCardNickNameLength = 10;
   const cardId = Number(location.pathname.split('/')[3]);
-
+  // TODO : useCard 에서 에러가 발생하는 경우에 대한 처리
   const {
     cardNumber,
     expirationMonth,
@@ -27,7 +27,13 @@ const CardCreateCompletePage = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const cardNickName = e.currentTarget.cardNickName.value;
-    dispatch(CARD_LIST_ACTION.UPDATE_CARD_NICKNAME(cardId, cardNickName));
+
+    dispatch(
+      CARD_LIST_ACTION.UPDATE_CARD_NICKNAME(
+        cardId,
+        cardNickName ? cardNickName : CARD_COMPANIES[cardCompany].name
+      )
+    );
     navigate(ROUTE.CARD);
   };
 

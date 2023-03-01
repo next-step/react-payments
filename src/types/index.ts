@@ -1,6 +1,6 @@
 import { CARD_COMPANIES } from '@/constants';
 
-export type CardField = {
+export interface CardField {
   cardNumber: string;
   expirationMonth: string;
   expirationYear: string;
@@ -8,9 +8,10 @@ export type CardField = {
   cvc: string;
   cardPassword: string;
   cardCompany: keyof typeof CARD_COMPANIES | null;
-};
+}
 
-export type CardInfo = {
+export interface CardInfo extends CardField {
   id: number;
   cardNickName: string;
-} & CardField;
+  cardCompany: keyof typeof CARD_COMPANIES;
+}

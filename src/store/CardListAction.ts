@@ -1,4 +1,4 @@
-import { CARD_COMPANIES } from '@/constants';
+import { CARD_COMPANIES, CARD_COMPANIES_ARRAY } from '@/constants';
 import { CardField } from '@/types';
 import {
   AppendNewCardAction,
@@ -6,10 +6,16 @@ import {
   UpdateCardAction,
 } from './CardListReducer';
 
+const isCompanyValid = (
+  cardField: any
+): cardField is CardField & {
+  cardCompany: keyof typeof CARD_COMPANIES;
+} => CARD_COMPANIES_ARRAY.includes(cardField.cardCompany);
+
 export const ACTION = {
   APPEND_NEW_CARD: (id: number, cardField: CardField): AppendNewCardAction => {
-    if (cardField.cardCompany === null) {
-      throw new Error('cardCompany is not found');
+    if (!isCompanyValid(cardField)) {
+      throw new Error('cardCompany is not valid');
     }
     return {
       type: 'APPEND',
@@ -17,7 +23,7 @@ export const ACTION = {
         value: {
           ...cardField,
           id,
-          cardNickName: CARD_COMPANIES[cardField.cardCompany] as any,
+          cardNickName: '',
         },
       },
     };

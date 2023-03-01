@@ -52,7 +52,7 @@ const cardListReducer = (state: CardInfo[], action: CardListAction) => {
 
     case 'DELETE':
       if (!state.find((card) => card.id === action.payload.id))
-        throw new Error('targetCard is not found');
+        throw new Error('DELETE : targetCard is not found');
       return state.filter((card) => card.id !== action.payload.id);
 
     default:
