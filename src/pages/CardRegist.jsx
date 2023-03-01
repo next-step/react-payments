@@ -2,26 +2,30 @@ import Card from '../components/Card';
 import CardSelectPopup from '../components/CardSelectPopup';
 import Button from '../components/Common/Button';
 import InputContainer from '../components/InputContainer';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-const CardRegist = ({
-  cardInfo,
-  onChange,
-  onSubmit,
-  cardCompanyList,
-  onClickPopup,
-  isShowPopup,
-  onReset,
-  onShow
-}) => {
+const CardRegist = ({ cardInfo, onChange, onSubmit, cardCompanyList, setCardInfo, onReset }) => {
+  const [isShowPopup, setIsShowPopup] = useState(true);
+
   useEffect(() => {
     onReset();
-    onShow(true);
   }, []);
 
+  const handlePopupClick = (evt) => {
+    const clickedElement = evt.target.closest('.modal-item-container');
+    if (clickedElement) {
+      const { company, bgcolor } = clickedElement.dataset;
+      setCardInfo({
+        ...cardInfo,
+        company,
+        backgroundColor: bgcolor
+      });
+    }
+    setIsShowPopup(false);
+  };
   return (
     <main>
-      <Card isRegistered={true} cardInfo={cardInfo} />
+      <Card cardInfo={cardInfo} />
       <form onSubmit={onSubmit}>
         <InputContainer
           title="카드번호"
@@ -104,10 +108,7 @@ const CardRegist = ({
         <Button className="button-box registor-button" children="다음"></Button>
       </form>
       {isShowPopup && (
-        <CardSelectPopup
-          cardCompanyList={cardCompanyList}
-          onClick={onClickPopup}
-        />
+        <CardSelectPopup cardCompanyList={cardCompanyList} onClick={handlePopupClick} />
       )}
     </main>
   );

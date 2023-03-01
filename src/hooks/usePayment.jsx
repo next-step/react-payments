@@ -56,10 +56,9 @@ const cardCompanyList = [
 const usePayment = () => {
   const [cardInfo, setCardInfo] = useState(defaultCardInfo);
   const [cardList, setCardList] = useState([]);
-  const [isShowPopup, setIsShowPopup] = useState(true);
   const { movePage } = useRoute();
 
-  const onHandleCardInfoInput = (evt) => {
+  const handleCardInfoInput = (evt) => {
     let { value, id } = evt.target;
     if (!checkValidInputValue(value, id)) {
       alert('숫자만 입력가능합니다.');
@@ -68,43 +67,28 @@ const usePayment = () => {
     setCardInfo({ ...cardInfo, [id]: formatInputValue(value, id) });
   };
 
-  const onHandleResetCardInfo = () => {
+  const handleResetCardInfo = () => {
     setCardInfo(defaultCardInfo);
   };
 
-  const onHandleSubmit = (evt) => {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
   };
 
-  const onHandleCompanyPopupClick = (evt) => {
-    const clickedElement = evt.target.closest('.modal-item-container');
-    if (clickedElement) {
-      const { company, bgcolor } = clickedElement.dataset;
-      setCardInfo({
-        ...cardInfo,
-        company,
-        backgroundColor: bgcolor
-      });
-    }
-    setIsShowPopup(false);
-  };
-
-  const onHandleSave = () => {
+  const handleSave = () => {
     setCardList([...cardList, cardInfo]);
     movePage(PATH.HOME);
   };
 
   return {
     cardInfo,
-    onHandleCardInfoInput,
-    onHandleSave,
+    handleCardInfoInput,
+    handleSave,
     cardList,
     cardCompanyList,
-    onHandleCompanyPopupClick,
-    onHandleSubmit,
-    isShowPopup,
-    onHandleResetCardInfo,
-    setIsShowPopup
+    handleSubmit,
+    setCardInfo,
+    handleResetCardInfo
   };
 };
 
