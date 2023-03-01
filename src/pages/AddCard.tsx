@@ -179,7 +179,9 @@ const AddCard = () => {
         />
       </div>
       <div className="button-box">
-        <Button onClick={() => navigate('/card-added')}>다음</Button>
+        <Button onClick={() => navigate('/card-added', { state: CardData })}>
+          다음
+        </Button>
       </div>
     </section>
   );
