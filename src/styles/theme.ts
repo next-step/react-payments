@@ -22,5 +22,16 @@ export const theme = {
     gray07: '#495057',
     gray08: '#343A40',
     gray09: '#212529',
+
+    red00: '#FFF5F5',
+    red01: '#FFE3E3',
+    red02: '#FFC9C9',
+    red03: '#FFA8A8',
+    red04: '#FF8787',
+    red05: '#FF6B6B',
+    red06: '#FA5252',
+    red07: '#F03E3E',
+    red08: '#E03131',
+    red09: '#C92A2A',
   },
 } as const;
