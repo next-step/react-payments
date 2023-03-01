@@ -29,7 +29,12 @@ export const CardRegisterConfirmPage = () => {
     <CardRegisterConfirmPageLayout>
       <h2>카드 등록이 완료되었습니다.</h2>
       <CreditCard size="small" cardInfo={card} />
-      <Button onClick={() => go('/list')}>카드 목록</Button>
+      <Button
+        css={{ position: 'absolute', bottom: '$5', width: '$11' }}
+        onClick={() => go('/list')}
+      >
+        카드 목록
+      </Button>
     </CardRegisterConfirmPageLayout>
   );
 };
@@ -43,10 +48,4 @@ const CardRegisterConfirmPageLayout = styled('div', {
   alignItems: 'center',
   flexDirection: 'column',
   placeContent: 'end center',
-
-  [`& > button`]: {
-    position: 'absolute',
-    bottom: '1rem',
-    right: '0',
-  },
 });

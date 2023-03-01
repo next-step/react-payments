@@ -72,7 +72,11 @@ export const CardRegister = () => {
     <>
       <CreditCard cardInfo={cardDisplayInfo} />
       <CardForm />
-      <Button disabled={!isAllValid} onClick={handleSubmit}>
+          <Button
+              css={{ position: 'absolute', bottom: '$5', width: '$11' }}
+              disabled={!isAllValid}
+              onClick={handleSubmit}
+          >
         추가하기
       </Button>
     </>
