@@ -1,24 +1,14 @@
 import { useEffect, useState } from 'react';
 
 import { Button, CreditCard } from '@/components/UI';
+import { DefaultCardInfo } from '@/components/UI/CreditCard';
 import { useRouter } from '@/hooks/useRouter';
 import { styled } from '@/lib/stitches.config';
 import { getItem } from '@/storage/storage';
 import { StorageKey } from '@/storage/storageKey';
 
-const initialState = {
-  CARD_NUMBERS: {
-    1: '',
-    2: '',
-    3: '',
-    4: '',
-  },
-  OWNER_NAME: '',
-  EXPIRE_DATE: { month: '', year: '' },
-};
-
 export const CardRegisterConfirmPage = () => {
-  const [card, setCard] = useState(initialState);
+  const [card, setCard] = useState(DefaultCardInfo);
   const { go } = useRouter();
 
   useEffect(() => {
