@@ -1,7 +1,7 @@
-const Button = ({ title, type, onClick }) => {
+const Button = ({ title, type, onClick, form }) => {
   return (
     <div className='button-box mt-10'>
-      <button type={type} onClick={onClick} className='button'>
+      <button form={form} type={type} onClick={onClick} className='button'>
         <span className='button-text'>{title}</span>
       </button>
     </div>

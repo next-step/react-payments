@@ -41,32 +41,25 @@ const CardForm = () => {
 
     //TODO: fix validation error
     // if (isAllFilledOut(cardInfo))
-    navigate('/registration/setCardNickname');
+    navigate('/completed');
     changeCardInfo(CHANGE_CARD.ERROR, '빈칸을 모두 입력해 주세요.');
   };
 
   return (
-    // <Form onSubmit={handleSubmit} formErrorMessage={cardInfo.error}>
-    //   <CardNumbersInput />
-    //   <CardExpirationDateInput />
-    //   <CardOwnerInput />
-    //   <CardCVCInput />
-    //   <CardPasswordInput />
-    //   <Button title='다음' type='submit' />
-    // </Form>
-    <div id='card-form' className='w-90'>
-      <form onSubmit={handleSubmit}>
+    <>
+      <Form
+        id={'card-registration-form'}
+        onSubmit={handleSubmit}
+        error={cardInfo.error}
+      >
         <CardNumbersInput />
         <CardExpirationDateInput />
         <CardOwnerInput />
         <CardCVCInput />
         <CardPasswordInput />
-        <Button title='다음' type='submit' />
-      </form>
-      <div id='card-form-label' style={{ color: 'red' }}>
-        {cardInfo.error}
-      </div>
-    </div>
+      </Form>
+      <Button title='다음' type='submit' form={'card-registration-form'} />
+    </>
   );
 };
 

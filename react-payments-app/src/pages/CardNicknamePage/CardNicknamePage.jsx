@@ -54,10 +54,14 @@ const CardNicknamePage = () => {
         cardExpirationDate={cardExpirationDate}
         cardStatus='big-card'
       />
-      <Form handleSubmit={handleSubmit} formErrorMessage={cardInfo.error}>
+      <Form
+        id={'card-nickname-form'}
+        handleSubmit={handleSubmit}
+        error={cardInfo.error}
+      >
         <CardNicknameInput onChange={handleChange} />
-        <Button title='완료' type='submit' />
       </Form>
+      <Button title='완료' type='submit' form='card-nickname-form' />
     </>
   );
 };
