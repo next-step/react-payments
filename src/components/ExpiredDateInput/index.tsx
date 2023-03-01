@@ -1,9 +1,9 @@
-import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
-import { useBlur } from '@/hooks/useBlur';
+import { useInputChange } from '@/hooks/useInputChange';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
-import type { ExpireDate, Validation } from '@/types';
+import type { ExpireDate } from '@/types';
 
 const initialState: ExpireDate = {
   month: '',
@@ -11,13 +11,14 @@ const initialState: ExpireDate = {
 };
 
 type Props = {
-  onChangeExpiredDate: (state: Validation<ExpireDate>) => void;
+  onChange: <T>(value: T) => void;
+  dirtyState: boolean;
 };
 
-const ExpiredDateInput = (props: Props) => {
+const ExpiredDateInput = ({ onChange, dirtyState }: Props) => {
   const [expiredDate, setExpiredDate] = useState(initialState);
-  const { dirtyState, makeDirty } = useBlur();
   const numberKeyPressInterceptor = useNumberKeyInterceptor();
+  const handleInputChange = useInputChange();
 
   const isExpiredDateValid = Boolean(
     Number(expiredDate.month) <= MAX_MONTH &&
@@ -32,23 +33,9 @@ const ExpiredDateInput = (props: Props) => {
       return ERROR_MESSAGE.EMPTY_INPUT;
   }, [expiredDate]);
 
-  const handleChangeExpiredDate = (e: ChangeEvent<HTMLInputElement>) => {
-    setExpiredDate((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-    props.onChangeExpiredDate({
-      val: expiredDate,
-      isValid: isExpiredDateValid,
-    });
-  };
-
   useEffect(() => {
-    props.onChangeExpiredDate({
-      val: expiredDate,
-      isValid: isExpiredDateValid,
-    });
-  }, [expiredDate]);
+    onChange(expiredDate);
+  }, [expiredDate, onChange]);
 
   return (
     <InputContainer
@@ -63,8 +50,7 @@ const ExpiredDateInput = (props: Props) => {
         min={1}
         maxLength={2}
         onKeyPress={numberKeyPressInterceptor}
-        onChange={handleChangeExpiredDate}
-        onBlur={makeDirty}
+        onChange={handleInputChange(setExpiredDate)}
       />
       /
       <input
@@ -74,8 +60,7 @@ const ExpiredDateInput = (props: Props) => {
         min={1}
         maxLength={2}
         onKeyPress={numberKeyPressInterceptor}
-        onChange={handleChangeExpiredDate}
-        onBlur={makeDirty}
+        onChange={handleInputChange(setExpiredDate)}
       />
     </InputContainer>
   );

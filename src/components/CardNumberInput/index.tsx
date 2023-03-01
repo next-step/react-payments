@@ -1,9 +1,9 @@
-import React, { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
+import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
-import { useBlur } from '@/hooks/useBlur';
+import { useInputChange } from '@/hooks/useInputChange';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
-import type { CardNumber, Validation } from '@/types';
+import type { CardNumber } from '@/types';
 
 const initialState: CardNumber = {
   1: '',
@@ -13,26 +13,14 @@ const initialState: CardNumber = {
 } as const;
 
 type Props = {
-  onChangeCardNumbers?: (state: Validation<CardNumber>) => void;
   onChange: <T>(value: T) => void;
+  dirtyState: boolean;
 };
 
-const handleInputChange = <T extends typeof initialState>(
-  setValue: React.Dispatch<React.SetStateAction<T>>
-) => {
-  return (event: ChangeEvent<HTMLInputElement>) => {
-    event.persist();
-    setValue((prev) => ({
-      ...prev,
-      [event.target.name]: event.target.value,
-    }));
-  };
-};
-
-const CardNumberInput = ({ onChange, ...props }: Props) => {
+const CardNumberInput = ({ onChange, dirtyState }: Props) => {
   const [cardNumbers, setCardNumbers] = useState(initialState);
-  const { dirtyState, makeDirty } = useBlur();
   const keyPressInterceptor = useNumberKeyInterceptor();
+  const handleInputChange = useInputChange();
 
   const isValidCardNumberLength =
     Object.values(cardNumbers).join('').length === 16;
@@ -41,22 +29,9 @@ const CardNumberInput = ({ onChange, ...props }: Props) => {
     if (!isValidCardNumberLength) return ERROR_MESSAGE.FULL_NUMBER;
   }, [cardNumbers]);
 
-  const handleChangeCardNumber = (e: ChangeEvent<HTMLInputElement>) => {
-    setCardNumbers((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
   useEffect(() => {
     onChange(cardNumbers);
   }, [cardNumbers, onChange]);
-
-  useEffect(() => {
-    // props.onChangeCardNumbers({
-    //   val: cardNumbers,
-    //   isValid: isValidCardNumberLength,
-    // });
-  }, [cardNumbers]);
 
   return (
     <InputContainer
@@ -71,8 +46,6 @@ const CardNumberInput = ({ onChange, ...props }: Props) => {
         maxLength={4}
         onKeyPress={keyPressInterceptor}
         onChange={handleInputChange(setCardNumbers)}
-        // onChange={(e) => handleChangeCardNumber(e)}
-        onBlur={makeDirty}
         required
       />
       <input
@@ -81,8 +54,7 @@ const CardNumberInput = ({ onChange, ...props }: Props) => {
         placeholder="1234"
         maxLength={4}
         onKeyPress={keyPressInterceptor}
-        onChange={handleChangeCardNumber}
-        onBlur={makeDirty}
+        onChange={handleInputChange(setCardNumbers)}
       />
       <input
         type="password"
@@ -90,8 +62,7 @@ const CardNumberInput = ({ onChange, ...props }: Props) => {
         placeholder="****"
         maxLength={4}
         onKeyPress={keyPressInterceptor}
-        onChange={handleChangeCardNumber}
-        onBlur={makeDirty}
+        onChange={handleInputChange(setCardNumbers)}
       />
       <input
         type="password"
@@ -99,8 +70,7 @@ const CardNumberInput = ({ onChange, ...props }: Props) => {
         placeholder="****"
         maxLength={4}
         onKeyPress={keyPressInterceptor}
-        onChange={handleChangeCardNumber}
-        onBlur={makeDirty}
+        onChange={handleInputChange(setCardNumbers)}
       />
     </InputContainer>
   );

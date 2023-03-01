@@ -1,16 +1,18 @@
-import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
-import { useBlur } from '@/hooks/useBlur';
-import type { Validation } from '@/types';
+import { useInputChange } from '@/hooks/useInputChange';
+
+const initialState = '';
 
 type Props = {
-  onChangeOwner: (state: Validation<string>) => void;
+  onChange: <T>(value: T) => void;
+  dirtyState: boolean;
 };
 
-const CardOwnerInput = (props: Props) => {
-  const [owner, setOwner] = useState('');
-  const { dirtyState, makeDirty } = useBlur();
+const CardOwnerInput = ({ onChange, dirtyState }: Props) => {
+  const [owner, setOwner] = useState(initialState);
+  const handleInputChange = useInputChange();
 
   const isOwnerValid = useMemo(
     () => Boolean(owner && owner.length < MAX_OWNER_NAME_LENGTH),
@@ -23,13 +25,9 @@ const CardOwnerInput = (props: Props) => {
       return ERROR_MESSAGE.OVER_LIMITED_TEXT;
   }, [owner]);
 
-  const handleChangeOwner = (e: ChangeEvent<HTMLInputElement>) => {
-    setOwner(e.target.value);
-  };
-
   useEffect(() => {
-    props.onChangeOwner({ val: owner, isValid: isOwnerValid });
-  }, [owner]);
+    onChange(owner);
+  }, [owner, onChange]);
 
   return (
     <InputContainer
@@ -40,8 +38,7 @@ const CardOwnerInput = (props: Props) => {
       <input
         type="text"
         placeholder="Dahye"
-        onChange={handleChangeOwner}
-        onBlur={makeDirty}
+        onChange={handleInputChange(setOwner)}
         maxLength={MAX_OWNER_NAME_LENGTH}
       />
       <span>

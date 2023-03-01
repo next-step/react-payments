@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 
 import {
   CardCVCInput,
@@ -8,50 +8,44 @@ import {
   ExpiredDateInput,
 } from '@/components';
 import useFormData from '@/hooks/formHook';
+import { useBlur } from '@/hooks/useBlur';
 import { styled } from '@/lib/stitches.config';
-import { initialCardState } from '@/pages/CardRegisterPage';
 import { CardKey } from '@/types';
 
-export type Props = {
-  onChangeCardForm: <T extends CardKey>(
-    state: typeof initialCardState[T],
-    key: T
-  ) => void;
-};
-const CardForm = (props: Props) => {
+const CardForm = () => {
   const { getFormData, handleInputChange } = useFormData();
   const formData = getFormData();
-  const handleChange = useCallback(
-    <T extends CardKey>(state: typeof initialCardState[T], key: T) => {
-      props.onChangeCardForm(state, key);
-    },
-    []
-  );
+  const { dirtyState, makeDirty } = useBlur();
 
   return (
-    <FormWrapper>
+    <FormWrapper onBlur={makeDirty}>
       <CardNumberInput
+        dirtyState={dirtyState}
         onChange={handleInputChange(formData, CardKey.CARD_NUMBERS as CardKey)}
-      // onChangeCardNumbers={(args) =>
-      //   handleChange(args, CardKey.CARD_NUMBERS as CardKey)
-      // }
       />
       <ExpiredDateInput
-        onChangeExpiredDate={(args) =>
-          handleChange(args, CardKey.EXPIRE_DATE as CardKey)
-        }
+        dirtyState={dirtyState}
+        onChange={handleInputChange(formData, CardKey.EXPIRE_DATE as CardKey)}
       />
       <CardOwnerInput
-        onChangeOwner={(args) =>
-          handleChange(args, CardKey.OWNER_NAME as CardKey)
-        }
+        dirtyState={dirtyState}
+        onChange={handleInputChange(formData, CardKey.OWNER_NAME as CardKey)}
       />
       <CardCVCInput
-        onChangeCVC={(args) => handleChange(args, CardKey.CVC as CardKey)}
+        dirtyState={dirtyState}
+        onChange={handleInputChange(formData, CardKey.CVC as CardKey)}
       />
       <CardPwdInput
-        onChangePwd={(args) => handleChange(args, CardKey.PASSWORD as CardKey)}
+        dirtyState={dirtyState}
+        onChange={handleInputChange(formData, CardKey.PASSWORD as CardKey)}
       />
+      <button
+        onClick={() => {
+          console.log(getFormData());
+        }}
+      >
+        Test getData
+      </button>
     </FormWrapper>
   );
 };

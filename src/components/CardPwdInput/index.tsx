@@ -1,13 +1,9 @@
 import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
-import { useBlur } from '@/hooks/useBlur';
+import { useInputChange } from '@/hooks/useInputChange';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
-import type { Password, Validation } from '@/types';
-
-type Props = {
-  onChangePwd: (state: Validation<Password>) => void;
-};
+import type { Password } from '@/types';
 
 const initialState: Password = {
   1: '',
@@ -16,10 +12,15 @@ const initialState: Password = {
   4: '',
 } as const;
 
-const CardPwdInput = (props: Props) => {
+type Props = {
+  onChange: <T>(value: T) => void;
+  dirtyState: boolean;
+};
+
+const CardPwdInput = ({ onChange, dirtyState }: Props) => {
   const [pwd, setPwd] = useState(initialState);
-  const { dirtyState, makeDirty } = useBlur();
   const keyPressInterceptor = useNumberKeyInterceptor();
+  const handleInputChange = useInputChange();
 
   const isPwdValid = useMemo(
     () => Boolean(Object.values(pwd).join('').length == MIN_PWD_LENGTH),
@@ -30,16 +31,9 @@ const CardPwdInput = (props: Props) => {
     if (!isPwdValid) return ERROR_MESSAGE.NO_EMPTY;
   }, [pwd]);
 
-  const handleChangePwd = (e: ChangeEvent<HTMLInputElement>) => {
-    setPwd((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
   useEffect(() => {
-    props.onChangePwd({ val: pwd, isValid: isPwdValid });
-  }, [pwd]);
+    onChange(pwd);
+  }, [pwd, onChange]);
 
   return (
     <InputContainer
@@ -51,32 +45,28 @@ const CardPwdInput = (props: Props) => {
         type="password"
         name="1"
         onKeyPress={keyPressInterceptor}
-        onChange={handleChangePwd}
-        onBlur={makeDirty}
+        onChange={handleInputChange(setPwd)}
         maxLength={1}
       />
       <input
         type="password"
         name="2"
         onKeyPress={keyPressInterceptor}
-        onChange={handleChangePwd}
-        onBlur={makeDirty}
+        onChange={handleInputChange(setPwd)}
         maxLength={1}
       />
       <input
         type="password"
         name="3"
         onKeyPress={keyPressInterceptor}
-        onChange={handleChangePwd}
-        onBlur={makeDirty}
+        onChange={handleInputChange(setPwd)}
         maxLength={1}
       />
       <input
         type="password"
         name="4"
         onKeyPress={keyPressInterceptor}
-        onChange={handleChangePwd}
-        onBlur={makeDirty}
+        onChange={handleInputChange(setPwd)}
         maxLength={1}
       />
     </InputContainer>
