@@ -1,9 +1,9 @@
 import { useFocusRef, useRefs } from '../../hooks';
 import { Input, InputContainer } from '../../components/form';
 import { memo, useCallback, useState } from 'react';
-import { IRegisterCard } from '../../pages/RegisterCard';
 import { Validator } from '../../domain';
 import { onlyNumber } from '../../utils/keyInterceptor';
+import { useCardBoxContext } from '../../provider/card-box';
 
 const MAX_LENGTH = 2;
 const VALIDATE_ERROR = {
@@ -11,7 +11,8 @@ const VALIDATE_ERROR = {
   PREV_DATE: '현재 날짜보다 이전 날짜는 입력할 수 없습니다.'
 };
 
-function ExpiredDateContainer({ onChange }: IRegisterCard) {
+function ExpiredDateContainer() {
+  const { setCardState } = useCardBoxContext();
   const { isPreviousDate } = Validator();
   const [errorMessage, setErrorMessage] = useState('');
   const [expiredDateRef, getExpiredDateRefs] = useRefs<HTMLInputElement>(['month', 'year']);
@@ -20,7 +21,7 @@ function ExpiredDateContainer({ onChange }: IRegisterCard) {
     const expiredDate = getExpiredDateRefs().map((item) => item.value);
     const [month, year] = expiredDate;
 
-    onChange({ expiredDate: expiredDate.join('') });
+    setCardState({ expiredDate: expiredDate.join('') });
 
     if (Number(month) < 1 || Number(month) > 12) {
       setErrorMessage(VALIDATE_ERROR.MONTH);

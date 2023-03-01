@@ -1,21 +1,22 @@
 import { memo, useCallback, useState } from 'react';
 import { Input, InputContainer } from '../../components/form';
-import { IRegisterCard } from '../../pages/RegisterCard';
 import { onlyNumber } from '../../utils/keyInterceptor';
 import { useFocusRef, useRefs } from '../../hooks';
+import { useCardBoxContext } from '../../provider/card-box';
 
 const MAX_LENGTH = 4;
 const CARD_LENGTH = 16;
 const VALIDATE_ERROR = '카드 번호를 입력 해 주세요.';
 
-function CardNumberContainer({ onChange }: IRegisterCard) {
+function CardNumberContainer() {
+  const { setCardState } = useCardBoxContext();
   const [errorMessage, setErrorMessage] = useState('');
   const [cardNumberRef, getCardRefs] = useRefs<HTMLInputElement>([0, 1, 2, 3]);
 
   const handleChange = useCallback(() => {
     const cardNumber = getCardRefs().map((item) => item.value).join('');
 
-    onChange({ cardNumber });
+    setCardState({ cardNumber });
     setErrorMessage(cardNumber.length === CARD_LENGTH ? '' : VALIDATE_ERROR);
   }, []);
 

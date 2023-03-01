@@ -1,5 +1,5 @@
 import { ICardBoxDTO } from '../../domain/types';
-import { createContext, ReactNode, useCallback, useMemo, useState } from 'react';
+import { createContext, PropsWithChildren, useCallback, useMemo, useState } from 'react';
 import { filterCardNumber, filterExpiredDate } from '../../utils/filter';
 
 export interface ICardBoxContext {
@@ -14,7 +14,7 @@ const initialContext: ICardBoxContext = {
 
 export const CardBoxContext = createContext(initialContext);
 
-export default function CardBoxProvider({ children }: { children: ReactNode }) {
+export default function CardBoxProvider({ children }: PropsWithChildren) {
   const [cardState, setState] = useState<ICardBoxDTO>({});
 
   const setCardState = useCallback((newState: ICardBoxDTO) => {

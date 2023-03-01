@@ -11,13 +11,8 @@ import {
 import { Button } from '../components/form';
 import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
-import { ICardBoxDTO } from '../domain/types';
 import { useCardBoxContext } from '../provider/card-box';
 import { useModalContext } from '../provider/modal';
-
-export interface IRegisterCard {
-  onChange: (data: ICardBoxDTO) => void;
-}
 
 export default function RegisterCard() {
   const navigate = useNavigate();
@@ -53,11 +48,11 @@ export default function RegisterCard() {
     <div className="app">
       <PageTitle title="&lt; 카드 추가" onClick={moveCardList}/>
       <CardBox {...cardState} />
-      <CardNumberContainer onChange={setCardState}/>
-      <ExpiredDateContainer onChange={setCardState}/>
-      <CardHolderContainer onChange={setCardState}/>
-      <SecurityCodeContainer onChange={setCardState}/>
-      <CardPasswordContainer onChange={setCardState}/>
+      <CardNumberContainer/>
+      <ExpiredDateContainer/>
+      <CardHolderContainer/>
+      <SecurityCodeContainer/>
+      <CardPasswordContainer/>
       <Button onClick={saveCardData}>다음</Button>
       <Modal>
         <CardSelection onChange={setCardState}/>

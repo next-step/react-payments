@@ -1,10 +1,11 @@
 import { Input, InputContainer } from '../../components/form';
-import { IRegisterCard } from '../../pages/RegisterCard';
 import { memo, useCallback, useRef, useState } from 'react';
+import { useCardBoxContext } from '../../provider/card-box';
 
 const MAX_LENGTH = 30;
 
-function CardHolderContainer({ onChange }: IRegisterCard) {
+function CardHolderContainer() {
+  const { setCardState } = useCardBoxContext();
   const cardHolderRef = useRef<HTMLInputElement>(null);
   const [count, setCount] = useState(0);
 
@@ -12,7 +13,7 @@ function CardHolderContainer({ onChange }: IRegisterCard) {
     const cardHolder = cardHolderRef?.current.value;
 
     setCount(cardHolder.length);
-    onChange({ cardHolder });
+    setCardState({ cardHolder });
   }, []);
 
   return (
