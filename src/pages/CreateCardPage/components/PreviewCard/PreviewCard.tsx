@@ -1,27 +1,47 @@
 import { Card } from '@/components/Card';
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useCardFieldContext } from '../CardFieldContext';
+import { BottomModal } from '@/components/Modal';
+import CardCompanySelectFormModal from '../CardCompanySelectModal/CardCompanySelectModal';
 
 const PreviewCard = () => {
   const data = useCardFieldContext();
-  if (!data) return null;
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
-  const { cardNumber, expirationMonth, expirationYear, ownerName } = data;
-  const cardName = '신한카드';
-  const cardColor = 'primary';
+  const {
+    cardNumber,
+    expirationMonth,
+    expirationYear,
+    ownerName,
+    cardCompany,
+  } = data || {};
+
+  const card = useMemo(
+    () => ({
+      cardNumber,
+      expirationMonth,
+      expirationYear,
+      ownerName,
+      cardCompany,
+    }),
+    [cardNumber, expirationMonth, expirationYear, ownerName, cardCompany]
+  );
+
+  const onClose = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
+
+  const onOpen = useCallback(() => {
+    setIsModalOpen(true);
+  }, []);
 
   return (
-    <PreviewCardContainer>
-      <Card
-        size="big"
-        cardNumber={cardNumber}
-        expirationMonth={expirationMonth}
-        expirationYear={expirationYear}
-        ownerName={ownerName}
-        cardName={cardName}
-        cardColor={cardColor}
-      />
+    <PreviewCardContainer onClick={onOpen}>
+      <Card size="big" card={card} />
+      <BottomModal isOpen={isModalOpen} onClose={onClose}>
+        <CardCompanySelectFormModal selectedCardCompany={cardCompany} />
+      </BottomModal>
     </PreviewCardContainer>
   );
 };

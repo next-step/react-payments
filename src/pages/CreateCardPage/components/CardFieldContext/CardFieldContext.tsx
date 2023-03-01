@@ -13,6 +13,7 @@ const initialState = {
   ownerName: '',
   cvc: '',
   cardPassword: '',
+  cardCompany: null,
 };
 
 export const CardFieldProvider = ({ children }: CardFieldProviderProps) => {

@@ -3,10 +3,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { EmptyCardButton } from '@/components/buttons';
 import { CardListContainer } from './CardList.style';
-import { ROUTE } from '@/constants/route';
+import { ROUTE } from '@/constants';
+import { useCardList } from '@/store';
+import CardItem from '../CardItem/CardItem';
 
 const CardList = () => {
   const navigate = useNavigate();
+  const cardList = useCardList();
 
   const handleClick = () => {
     navigate(ROUTE.CARD_CREATE);
@@ -14,7 +17,12 @@ const CardList = () => {
 
   return (
     <CardListContainer>
-      <EmptyCardButton onClick={handleClick} />
+      <li>
+        <EmptyCardButton onClick={handleClick} />
+      </li>
+      {cardList.map((card) => (
+        <CardItem key={card.id} {...card} />
+      ))}
     </CardListContainer>
   );
 };

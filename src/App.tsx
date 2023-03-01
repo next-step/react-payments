@@ -4,13 +4,16 @@ import router from '@/router';
 import GlobalStyle from '@/styles/GlobalStyle';
 import { ThemeProvider } from '@emotion/react';
 import { theme } from './styles/colors';
+import { CardListProvider } from './store';
 
 function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <RouterProvider router={router} />
+        <CardListProvider>
+          <RouterProvider router={router} />
+        </CardListProvider>
       </ThemeProvider>
     </>
   );

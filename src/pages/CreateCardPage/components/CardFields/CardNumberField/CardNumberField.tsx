@@ -1,4 +1,4 @@
-import { Label, TextInput } from '@/components';
+import { Label, Input } from '@/components';
 import React, { useCallback } from 'react';
 import { useCardFieldDispatchContext } from '../../CardFieldContext/CardFieldContext';
 import { ACTION } from '../../CardFieldContext/CardFieldAction';
@@ -7,7 +7,7 @@ import {
   addCardNumberDashes,
   replaceCardNumberToDot,
 } from '@/utils/formatter';
-import { LABEL_TEXT } from '@/constants/createCard';
+import { LABEL_TEXT } from '@/constants';
 import { Colors } from '@/styles/colors';
 
 type CardNumberFieldProps = {
@@ -45,9 +45,9 @@ function CardNumberField({ cardNumber, fontColor }: CardNumberFieldProps) {
 
   return (
     <Label labelText={LABEL_TEXT.CARD_NUMBER}>
-      <TextInput
+      <Input.TextInput
         value={cardNumber}
-        select={cardNumberSelector}
+        format={cardNumberSelector}
         fontColor={fontColor}
         label="cardNumber"
         inputMode="numeric"
