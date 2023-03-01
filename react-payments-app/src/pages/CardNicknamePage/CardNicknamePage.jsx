@@ -4,31 +4,61 @@ import CardNicknameInput from '../../components/domain/CardInput/CardNickname/Ca
 import Button from '../../components/common/Button/Button';
 import { useCard } from '../../store/CardContext';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { CHANGE_CARD } from '../../constants/action';
+import { MAX_INPUT_LENGTH } from '../../constants/numbers';
+import Form from '../../components/common/Input/Form';
 
 const CardNicknamePage = () => {
-  const { cardInfo } = useCard();
+  const { cardInfo, changeCardInfo } = useCard();
   const { cardNumbers, cardOwner, cardExpirationDate } = cardInfo;
+
   const navigate = useNavigate();
+
+  const [cardNickname, setCardNickname] = useState('');
+
+  const isValidNickname = (value) => {
+    if (value.length > MAX_INPUT_LENGTH.CARD_NICKNAME) {
+      console.log('test error');
+      changeCardInfo(
+        CHANGE_CARD.ERROR,
+        `최대 ${MAX_INPUT_LENGTH.CARD_NICKNAME}자리까지만 가능합니다.`
+      );
+      return;
+    }
+    changeCardInfo(CHANGE_CARD.ERROR, null);
+    return true;
+  };
+
+  const handleChange = (cardNickname) => {
+    setCardNickname(cardNickname);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isValidNickname(cardNickname)) {
+      changeCardInfo(CHANGE_CARD.NICKNAME, cardNickname);
+      navigate('/');
+    }
+  };
   return (
-    <div>
-      <div className='app flex-column-center'>
-        <Header
-          pageTitle={'카드등록이 완료되었습니다.'}
-          headerIcon={'<'}
-          onClick={() => navigate('/registration')}
-        />
-        <Card
-          cardNumbers={cardNumbers}
-          cardOwner={cardOwner}
-          cardExpirationDate={cardExpirationDate}
-          cardStatus='big-card'
-        />
-
-        <CardNicknameInput />
-
-        <Button title='완료' />
-      </div>
-    </div>
+    <>
+      <Header
+        pageTitle={'카드등록이 완료되었습니다.'}
+        headerIcon={'<'}
+        onClick={() => navigate('/registration')}
+      />
+      <Card
+        cardNumbers={cardNumbers}
+        cardOwner={cardOwner}
+        cardExpirationDate={cardExpirationDate}
+        cardStatus='big-card'
+      />
+      <Form handleSubmit={handleSubmit} formErrorMessage={cardInfo.error}>
+        <CardNicknameInput onChange={handleChange} />
+        <Button title='완료' type='submit' />
+      </Form>
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ export const MAX_INPUT_LENGTH = {
   CARD_OWNER: 30,
   PW: 1,
   CVC: 3,
+  CARD_NICKNAME: 10,
 };
 
 export const VALID_INPUT = {

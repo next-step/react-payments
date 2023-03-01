@@ -8,14 +8,12 @@ import Header from '../../components/common/Header/Header';
 import Card from '../../components/domain/Card/Card';
 import CardForm from '../../components/domain/CardForm/CardForm';
 import CompanySelectionModal from '../../components/domain/Modal/CompanySelectionModal';
-import { useScrollLock } from '../../hooks/useScrollLock';
 
 const CardRegistrationPage = () => {
   const navigate = useNavigate();
   const { cardInfo } = useCard();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { lockScroll, unlockScroll } = useScrollLock();
 
   const goBackToListPage = (e) => {
     navigate('/');
@@ -23,7 +21,6 @@ const CardRegistrationPage = () => {
 
   const handleCardClick = () => {
     setIsModalOpen(!isModalOpen);
-    lockScroll();
   };
 
   return (
@@ -34,7 +31,6 @@ const CardRegistrationPage = () => {
         onClick={goBackToListPage}
       />
       <Card
-        cardStatus={'empty-card'}
         cardNumbers={cardInfo.cardNumbers}
         cardExpirationDate={cardInfo.cardExpirationDate}
         cardOwner={cardInfo.cardOwner}
