@@ -1,87 +1,87 @@
-import { RefObject } from "react";
+import { RefObject } from 'react';
 
 export const getNumberWithoutFormatter = (input: string) => {
-  return input?.replace(/[^0-9|/|-]/g, "");
+	return input?.replace(/[^0-9|/|-]/g, '');
 };
 
 export const validateInput = ({
-  ref,
-  id,
-  validationList,
+	ref,
+	id,
+	validationList,
 }: {
-  ref: RefObject<HTMLInputElement>;
-  id: string;
-  validationList: string[];
+	ref: RefObject<HTMLInputElement>;
+	id: string;
+	validationList: string[];
 }) => {
-  if (!ref.current?.value) {
-    return "";
-  }
+	if (!ref.current?.value) {
+		return '';
+	}
 
-  if (validationList.includes(id)) {
-    return getNumberWithoutFormatter(ref.current.value);
-  }
-  return ref.current.value;
+	if (validationList.includes(id)) {
+		return getNumberWithoutFormatter(ref.current.value);
+	}
+	return ref.current.value;
 };
 
 export const formatNumber = ({
-  input,
-  nth,
-  formatter = "-",
+	input,
+	nth,
+	formatter = '-',
 }: {
-  input: string;
-  nth: number;
-  formatter?: string;
+	input: string;
+	nth: number;
+	formatter?: string;
 }): string => {
-  const length = input?.length;
+	const length = input?.length;
 
-  // 처음 이후로 formatter가 붙을 때
-  if (input.includes(formatter) && (length + 1) % nth === 0) {
-    return input.slice(0, length) + formatter + input.slice(length);
-  }
-  // 처음 formatter가 붙을 때
-  if (!input.includes(formatter) && length % (nth - 1) === 0) {
-    return input + formatter;
-  }
+	// 처음 이후로 formatter가 붙을 때
+	if (input.includes(formatter) && (length + 1) % nth === 0) {
+		return input.slice(0, length) + formatter + input.slice(length);
+	}
+	// 처음 formatter가 붙을 때
+	if (!input.includes(formatter) && length % (nth - 1) === 0) {
+		return input + formatter;
+	}
 
-  return input;
+	return input;
 };
 
 export const monthConverter = (input: string) => {
-  if (parseInt(input) < 1) {
-    return "1";
-  } else if (parseInt(input) > 12) {
-    return "12";
-  }
-  return input;
+	if (parseInt(input) < 1) {
+		return '1';
+	} else if (parseInt(input) > 12) {
+		return '12';
+	}
+	return input;
 };
 
 export const characterCount = (text: string): number => {
-  if (!text) {
-    return 0;
-  }
+	if (!text) {
+		return 0;
+	}
 
-  return text.trim().length;
+	return text.trim().length;
 };
 
 export const displayNumber = ({
-  input,
-  formatter = "-",
-  converter = "*",
-  startPoint,
+	input,
+	formatter = '-',
+	converter = '*',
+	startPoint,
 }: {
-  input: string;
-  formatter?: string;
-  converter?: string;
-  startPoint: number;
+	input: string;
+	formatter?: string;
+	converter?: string;
+	startPoint: number;
 }) => {
-  let numberList = input.split(formatter);
-  if (numberList[startPoint]) {
-    for (let i = startPoint; i < numberList.length; i++) {
-      numberList[i] = converter.repeat(numberList[i].length);
-    }
+	let numberList = input.split(formatter);
+	if (numberList[startPoint]) {
+		for (let i = startPoint; i < numberList.length; i++) {
+			numberList[i] = converter.repeat(numberList[i].length);
+		}
 
-    return numberList.join(formatter);
-  }
+		return numberList.join(formatter);
+	}
 
-  return input;
+	return input;
 };
