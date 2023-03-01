@@ -1,5 +1,11 @@
 import { createContext, useContext } from "react";
-import { CardCompany, CardNumber, Card, ExpirationDate, CardPassword } from "./type";
+import {
+  CardCompany,
+  CardNumber,
+  Card,
+  ExpirationDate,
+  CardPassword,
+} from "./type";
 
 type PaymentsContext = {
   cardNumbers: CardNumber;
@@ -9,14 +15,17 @@ type PaymentsContext = {
   password: CardPassword;
   isModalOpen: boolean;
   cardCompany: CardCompany;
-  cards: Card[],
+  cards: Card[];
+  cardNickName: string;
   handleChangeCardNumber: (payload: CardNumber) => void;
   handleChangeExpirationDate: (name: string, value: string) => void;
   handleCardOwner: (payload: string) => void;
   handleCvc: (payload: string) => void;
   handlePassword: (payload: CardPassword) => void;
   handleCardCompany: (payload: CardCompany) => void;
-  handleCardSubmit: (payload: Card) => void
+  handleCardSubmit: (payload: Card) => void;
+  handleCardNickName: (payload: string) => void;
+  handleNickNameCardMerge: (payload: string) => void;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare

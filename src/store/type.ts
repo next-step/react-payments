@@ -13,4 +13,5 @@ export type Card = {
   cvc: string;
   password: CardPassword;
   cardCompany: CardCompany;
+  cardNickName?: string;
 }

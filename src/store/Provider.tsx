@@ -1,6 +1,12 @@
 import { PropsWithChildren, useCallback, useEffect, useState } from "react";
 import PaymentsContext from "./context";
-import { CardCompany, CardNumber, Card, ExpirationDate, CardPassword } from "./type";
+import {
+  CardCompany,
+  CardNumber,
+  Card,
+  ExpirationDate,
+  CardPassword,
+} from "./type";
 
 export const PaymentsProvider = ({ children }: PropsWithChildren) => {
   const [cardNumbers, setCardNumbers] = useState<CardNumber>(["", "", "", ""]);
@@ -17,6 +23,8 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     color: "",
   });
   const [cards, setCards] = useState<Card[]>([]);
+
+  const [cardNickName, setCardNickName] = useState<string>("");
 
   const handleChangeCardNumber = useCallback((cardNumbers: CardNumber) => {
     setCardNumbers(cardNumbers);
@@ -41,7 +49,6 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   const handlePassword = useCallback((values: CardPassword) => {
-    console.log("values", values)
     setPassword(values);
   }, []);
 
@@ -50,8 +57,18 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   const handleCardSubmit = useCallback((payload: Card) => {
-    console.log("payload", payload)
     setCards((prev) => [...prev, payload]);
+  }, []);
+
+  const handleCardNickName = useCallback((payload: string) => {
+    setCardNickName(payload);
+  }, []);
+
+  const handleNickNameCardMerge = useCallback((payload: string) => {
+    setCards((prev) => [
+      { ...prev[prev.length - 1], cardNickName: payload },
+    ]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -76,13 +93,16 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     isModalOpen,
     cardCompany,
     cards,
+    cardNickName,
     handleChangeCardNumber,
     handleChangeExpirationDate,
     handleCardOwner,
     handleCvc,
     handlePassword,
     handleCardCompany,
-    handleCardSubmit
+    handleCardSubmit,
+    handleCardNickName,
+    handleNickNameCardMerge
   };
 
   return (

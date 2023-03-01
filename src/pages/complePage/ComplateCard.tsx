@@ -1,43 +1,70 @@
+import Card from "components/card";
+
+import { SubWrapper, Wrapper } from "components/common/ui";
+import { useRouter } from "hooks/useRouter";
+import { ChangeEvent } from "react";
+import { usePayments } from "store/context";
+
+const Content = () => {
+  const {
+    cardNumbers,
+    cardCompany,
+    cardExpiration,
+    cardOwnerName,
+    cardNickName,
+    handleCardNickName,
+    handleNickNameCardMerge,
+  } = usePayments();
+
+  const { go } = useRouter();
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target as HTMLInputElement;
+    handleCardNickName(value);
+  };
+
+  const nextPage = () => {
+    handleNickNameCardMerge(cardNickName);
+    go("/");
+  };
+
+  return (
+    <>
+      <div className="flex-center">
+        <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
+      </div>
+      <Card
+        cardNumbers={cardNumbers}
+        cardCompany={cardCompany}
+        cardExpiration={cardExpiration}
+        cardOwnerName={cardOwnerName}
+        size="big"
+      />
+      <div className="input-container flex-center w-100">
+        <input
+          className="input-underline w-75"
+          type="text"
+          placeholder="카드의 별칭을 입력해주세요."
+          onChange={onChange}
+        />
+      </div>
+
+      <div className="button-box mt-50">
+        <span className="button-text" onClick={() => nextPage()}>
+          다음
+        </span>
+      </div>
+    </>
+  );
+};
+
 const ComplateCard = () => {
   return (
-    <div className="root">
-      <div className="app flex-column-center">
-        <div className="flex-center">
-          <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
-        </div>
-        <div className="card-box">
-          <div className="big-card">
-            <div className="card-top">
-              <span className="card-text__big">클린카드</span>
-            </div>
-            <div className="card-middle">
-              <div className="big-card__chip"></div>
-            </div>
-            <div className="card-bottom">
-              <div className="card-bottom__number">
-                <span className="card-text__big">
-                  1111 - 2222 - oooo - oooo
-                </span>
-              </div>
-              <div className="card-bottom__info">
-                <span className="card-text__big">YUJO</span>
-                <span className="card-text__big">12 / 23</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="input-container flex-center w-100">
-          <input
-            className="input-underline w-75"
-            type="text"
-            placeholder="카드의 별칭을 입력해주세요."
-          />
-        </div>
-        <div className="button-box mt-50">
-          <span className="button-text">다음</span>
-        </div>
-      </div>
-    </div>
+    <Wrapper>
+      <SubWrapper flex={"yes"}>
+        <Content />
+      </SubWrapper>
+    </Wrapper>
   );
 };
 
