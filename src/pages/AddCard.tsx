@@ -2,6 +2,7 @@ import { ChangeEvent, RefObject, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Button from '../components/Button';
+import Card from '../components/Card';
 import useRefObjects from '../hooks/useRefObjects';
 import { extractNumbers } from '../utils';
 
@@ -78,6 +79,15 @@ const AddCard = () => {
     );
   };
 
+  const CardData = {
+    num1: cardRefs[0].current?.value,
+    num2: cardRefs[1].current?.value,
+    num3: cardRefs[2].current?.value,
+    num4: cardRefs[3].current?.value,
+    holder: name,
+    expiry: expirationDateRef.current?.value,
+  };
+
   return (
     <section className="app">
       <h2 className="page-title">
@@ -86,20 +96,7 @@ const AddCard = () => {
         </Button>
         카드 추가
       </h2>
-      <div className="card-box">
-        <div className="empty-card">
-          <div className="card-top"></div>
-          <div className="card-middle">
-            <div className="small-card__chip"></div>
-          </div>
-          <div className="card-bottom">
-            <div className="card-bottom__info">
-              <span className="card-text">NAME</span>
-              <span className="card-text">MM / YY</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Card data={CardData} />
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
