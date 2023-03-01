@@ -1,9 +1,11 @@
 import { useRef } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
+import Button from '../components/Button';
 import Card from '../components/Card';
 
 const CardAdded = () => {
+  const navigate = useNavigate();
   const aliasRef = useRef<HTMLInputElement>(null);
   const location = useLocation();
   const { state: CardData } = location;
@@ -23,7 +25,7 @@ const CardAdded = () => {
         />
       </div>
       <div className="button-box mt-50">
-        <span className="button-text">다음</span>
+        <Button onClick={() => navigate('/card-list')}>다음</Button>
       </div>
     </div>
   );
