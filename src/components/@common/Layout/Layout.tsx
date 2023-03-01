@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 const Main = styled.main`
   background-color: ${({ theme }) => theme.color.white};
 
-  max-width: 375px;
+  max-width: var(--mobile-width);
   width: 100%;
   height: 100%;
   margin: 0 auto;

@@ -5,3 +5,4 @@ export { FormFieldControl } from './FormFieldControl';
 export { Button } from './Button';
 export { Tooltip } from './Tooltip';
 export { Chip } from './Chip';
+export { Modal } from './Modal';
