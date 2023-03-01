@@ -23,7 +23,7 @@ export const ACTION = {
         value: {
           ...cardField,
           id,
-          cardNickName: '',
+          cardNickname: '',
         },
       },
     };
@@ -31,13 +31,13 @@ export const ACTION = {
 
   UPDATE_CARD_NICKNAME: (
     id: number,
-    cardNickName: string
+    cardNickname: string
   ): UpdateCardAction => ({
     type: 'UPDATE',
     payload: {
       id,
-      key: 'cardNickName',
-      value: cardNickName,
+      key: 'cardNickname',
+      value: cardNickname,
     },
   }),
 

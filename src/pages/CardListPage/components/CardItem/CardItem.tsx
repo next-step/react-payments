@@ -12,7 +12,7 @@ const CardItem = ({
   expirationYear,
   ownerName,
   cardCompany,
-  cardNickName,
+  cardNickname,
   id,
 }: CardInfo) => {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ const CardItem = ({
         <Card card={cardInfo} size="small" />
       </button>
       <CardItemBottom>
-        <NickName>{cardNickName}</NickName>
+        <Nickname>{cardNickname}</Nickname>
         <DeleteButton onClick={handleDelete}>삭제</DeleteButton>
       </CardItemBottom>
     </StyledCardItem>
@@ -68,7 +68,7 @@ const DeleteButton = styled.button`
   top: 16px;
 `;
 
-const NickName = styled.p`
+const Nickname = styled.p`
   font-weight: 700;
   text-align: center;
   width: 100%;

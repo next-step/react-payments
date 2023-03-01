@@ -12,6 +12,6 @@ export interface CardField {
 
 export interface CardInfo extends CardField {
   id: number;
-  cardNickName: string;
+  cardNickname: string;
   cardCompany: keyof typeof CARD_COMPANIES;
 }
