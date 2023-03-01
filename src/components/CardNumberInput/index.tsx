@@ -1,4 +1,4 @@
-import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
+import React, { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
 import { useBlur } from '@/hooks/useBlur';
@@ -13,10 +13,23 @@ const initialState: CardNumber = {
 } as const;
 
 type Props = {
-  onChangeCardNumbers: (state: Validation<CardNumber>) => void;
+  onChangeCardNumbers?: (state: Validation<CardNumber>) => void;
+  onChange: <T>(value: T) => void;
 };
 
-const CardNumberInput = (props: Props) => {
+const handleInputChange = <T extends typeof initialState>(
+  setValue: React.Dispatch<React.SetStateAction<T>>
+) => {
+  return (event: ChangeEvent<HTMLInputElement>) => {
+    event.persist();
+    setValue((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+  };
+};
+
+const CardNumberInput = ({ onChange, ...props }: Props) => {
   const [cardNumbers, setCardNumbers] = useState(initialState);
   const { dirtyState, makeDirty } = useBlur();
   const keyPressInterceptor = useNumberKeyInterceptor();
@@ -34,12 +47,15 @@ const CardNumberInput = (props: Props) => {
       [e.target.name]: e.target.value,
     }));
   };
+  useEffect(() => {
+    onChange(cardNumbers);
+  }, [cardNumbers, onChange]);
 
   useEffect(() => {
-    props.onChangeCardNumbers({
-      val: cardNumbers,
-      isValid: isValidCardNumberLength,
-    });
+    // props.onChangeCardNumbers({
+    //   val: cardNumbers,
+    //   isValid: isValidCardNumberLength,
+    // });
   }, [cardNumbers]);
 
   return (
@@ -54,7 +70,8 @@ const CardNumberInput = (props: Props) => {
         placeholder="1234"
         maxLength={4}
         onKeyPress={keyPressInterceptor}
-        onChange={(e) => handleChangeCardNumber(e)}
+        onChange={handleInputChange(setCardNumbers)}
+        // onChange={(e) => handleChangeCardNumber(e)}
         onBlur={makeDirty}
         required
       />

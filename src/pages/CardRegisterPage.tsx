@@ -1,12 +1,12 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import { CardForm, CreditCard, TopNavigation } from '@/components';
+import { CardForm, CreditCard } from '@/components';
+import { TopNavigation } from '@/components/common';
 import { Button } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
 import { styled } from '@/lib/stitches.config';
 import { getItem, setItem } from '@/storage/storage';
 import { type CardFormType, CardKey } from '@/types';
-
 export const initialCardState: CardFormType = {
   [CardKey.CARD_NUMBERS]: {
     val: {

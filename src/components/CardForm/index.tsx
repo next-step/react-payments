@@ -7,6 +7,7 @@ import {
   CardPwdInput,
   ExpiredDateInput,
 } from '@/components';
+import useFormData from '@/hooks/formHook';
 import { styled } from '@/lib/stitches.config';
 import { initialCardState } from '@/pages/CardRegisterPage';
 import { CardKey } from '@/types';
@@ -18,6 +19,8 @@ export type Props = {
   ) => void;
 };
 const CardForm = (props: Props) => {
+  const { getFormData, handleInputChange } = useFormData();
+  const formData = getFormData();
   const handleChange = useCallback(
     <T extends CardKey>(state: typeof initialCardState[T], key: T) => {
       props.onChangeCardForm(state, key);
@@ -28,9 +31,10 @@ const CardForm = (props: Props) => {
   return (
     <FormWrapper>
       <CardNumberInput
-        onChangeCardNumbers={(args) =>
-          handleChange(args, CardKey.CARD_NUMBERS as CardKey)
-        }
+        onChange={handleInputChange(formData, CardKey.CARD_NUMBERS as CardKey)}
+      // onChangeCardNumbers={(args) =>
+      //   handleChange(args, CardKey.CARD_NUMBERS as CardKey)
+      // }
       />
       <ExpiredDateInput
         onChangeExpiredDate={(args) =>
