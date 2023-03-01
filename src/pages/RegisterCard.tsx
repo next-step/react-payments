@@ -1,5 +1,5 @@
 import { CardBox, Modal, PageTitle } from '../components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import CardSelection from '../components/CardSelection';
 import {
   CardHolderContainer,
@@ -12,26 +12,28 @@ import { Button } from '../components/form';
 import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
 import { useCardBoxContext } from '../provider/card-box';
-import { useModalContext } from '../provider/modal';
 
 export default function RegisterCard() {
   const navigate = useNavigate();
-  const { showModal } = useModalContext();
+  const [showModal, setShowModal] = useState(false);
   const { cardState, setCardState } = useCardBoxContext();
 
   useEffect(() => {
     const { cardNumber, brand } = cardState;
 
     if (brand) {
-      showModal(false);
+      setShowModal(false);
       return;
     }
     if (cardNumber?.length) {
-      showModal(true);
+      setShowModal(true);
     }
   }, [cardState]);
 
   const moveCardList = () => navigate('/');
+  const handleClickOutside = () => {
+    setShowModal(false);
+  };
   const saveCardData = () => {
     const cardIndex = new Date().getTime();
     const cardList = cardRepository.getItem();
@@ -54,9 +56,11 @@ export default function RegisterCard() {
       <SecurityCodeContainer/>
       <CardPasswordContainer/>
       <Button onClick={saveCardData}>다음</Button>
-      <Modal>
-        <CardSelection onChange={setCardState}/>
-      </Modal>
+      {showModal && (
+        <Modal onClickOutside={handleClickOutside}>
+          <CardSelection onChange={setCardState}/>
+        </Modal>
+      )}
     </div>
   );
 }

@@ -1,13 +1,17 @@
-import { memo, PropsWithChildren } from 'react';
-import { useModalContext } from '../provider/modal';
+import { memo, PropsWithChildren, useCallback } from 'react';
 
-function Modal({ children }: PropsWithChildren) {
-  const { modalState } = useModalContext();
-  if (!modalState) return;
+interface IModal {
+  onClickOutside: () => void;
+}
+
+function Modal({ onClickOutside, children }: PropsWithChildren<IModal>) {
+  const handleClickInside = useCallback((e) => {
+    e.stopPropagation();
+  }, []);
 
   return (
-    <div className="modal-dimmed">
-      <div className="modal">
+    <div className="modal-dimmed" onClick={onClickOutside}>
+      <div className="modal" onClick={handleClickInside}>
         {children}
       </div>
     </div>
