@@ -1,25 +1,25 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Card } from 'components/domain';
 import { Button, Input } from 'components/common';
 
+import { useRouter } from 'hooks';
 import { useCardDispatch } from 'contexts/CardContextProvider/hooks';
 
 import { PATHS } from 'constants/router';
 import { MAX_LENGTH } from 'constants/card';
-import type { CardBaseProps, CardCompany } from 'types/card';
+import type { CardType } from 'types/card';
 
-interface CardProps extends Omit<CardBaseProps, 'company'> {
-  company: CardCompany;
-}
+const TITLE = {
+  ADD: '카드등록이 완료되었습니다.',
+  UPDATE: '카드별칭을 수정해주세요.',
+};
 
 function ConrimCard() {
-  const [alias, setAlias] = useState('');
+  const { navigate, locationState: card } = useRouter<CardType>();
+  const [alias, setAlias] = useState(card.alias ?? '');
   const dispatch = useCardDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const card = location.state as CardProps;
+  const title = card.alias ? TITLE.UPDATE : TITLE.ADD;
 
   const handleChangeAlias: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setAlias(e.target.value);
@@ -34,7 +34,7 @@ function ConrimCard() {
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
-        <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
+        <h2 className="page-title mb-10">{title}</h2>
       </div>
       <Card {...card} />
       <div className="input-container flex-center w-100">
@@ -49,7 +49,7 @@ function ConrimCard() {
       </div>
       <div className="button-box mt-50">
         <Button fontSize={18} onClick={handleClickNextButton}>
-          다음
+          확인
         </Button>
       </div>
     </div>
