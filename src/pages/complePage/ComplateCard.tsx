@@ -3,6 +3,7 @@ import Card from "components/card";
 import { SubWrapper, Wrapper } from "components/common/ui";
 import { useRouter } from "hooks/useRouter";
 import { ChangeEvent } from "react";
+import { ROUTE } from "router";
 import { usePayments } from "store/context";
 
 const Content = () => {
@@ -14,6 +15,7 @@ const Content = () => {
     cardNickName,
     handleCardNickName,
     handleNickNameCardMerge,
+    handleInitialCardState
   } = usePayments();
 
   const { go } = useRouter();
@@ -25,7 +27,8 @@ const Content = () => {
 
   const nextPage = () => {
     handleNickNameCardMerge(cardNickName);
-    go("/");
+    handleInitialCardState();
+    go(ROUTE.CARD_LIST);
   };
 
   return (

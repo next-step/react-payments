@@ -65,11 +65,29 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   const handleNickNameCardMerge = useCallback((payload: string) => {
-    setCards((prev) => [
-      { ...prev[prev.length - 1], cardNickName: payload },
-    ]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    setCards((prev) => {
+      const newCards = [...prev];
+      newCards[newCards.length - 1].cardNickName = payload;
+      return newCards;
+    });
   }, []);
+
+  const handleInitialCardState = useCallback(() => {
+    // 초기화
+    setCardNumbers(["", "", "", ""]);
+    setCardExpiration({
+      month: "",
+      year: "",
+    });
+    setCardOwnerName("");
+    setCvc("");
+    setPassword(["", ""]);
+    setCardCompany({
+      name: "",
+      color: "",
+    });
+  }, []);
+
 
   useEffect(() => {
     const cardComp = cardNumbers.join("").length === 8;
@@ -102,7 +120,8 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     handleCardCompany,
     handleCardSubmit,
     handleCardNickName,
-    handleNickNameCardMerge
+    handleNickNameCardMerge,
+    handleInitialCardState
   };
 
   return (

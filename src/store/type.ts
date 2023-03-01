@@ -7,6 +7,7 @@ export type CardCompany = { name: string; color: string };
 export type CardPassword = string[];
 
 export type Card = {
+  id?: number;
   cardNumbers: CardNumber;
   cardExpiration: ExpirationDate;
   cardOwnerName: string;

@@ -6,6 +6,7 @@ import CardPasswordInput from "./cardPassword";
 import CardCVCInput from "./cardSecurityNumber";
 import SubmitButton from "components/button/submitButton";
 import { useRouter } from "hooks/useRouter";
+import { ROUTE } from "router";
 const CardForm = () => {
   const {
     cardNumbers,
@@ -26,8 +27,10 @@ const CardForm = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    
+
+    const id = Date.now();
     handleCardSubmit({
+      id,
       cardNumbers,
       cardExpiration,
       cardOwnerName,
@@ -35,7 +38,7 @@ const CardForm = () => {
       password,
       cardCompany,
     });
-    go("/complete-add-card")
+    go(ROUTE.REGIST_CARD + `/${id}`);
   };
   return (
     <div>

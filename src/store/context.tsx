@@ -26,6 +26,7 @@ type PaymentsContext = {
   handleCardSubmit: (payload: Card) => void;
   handleCardNickName: (payload: string) => void;
   handleNickNameCardMerge: (payload: string) => void;
+  handleInitialCardState: () => void;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-redeclare
