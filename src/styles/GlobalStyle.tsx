@@ -32,6 +32,10 @@ const globalStyleCss = css`
     height: 100%;
   }
 
+  p {
+    margin: 0;
+  }
+
   input {
     font-size: 16px;
 
