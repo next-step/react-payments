@@ -1,6 +1,6 @@
 import { PropsWithChildren, useCallback, useEffect, useState } from "react";
 import PaymentsContext from "./context";
-import { CardCompany, CardNumber, ExpirationDate } from "./type";
+import { CardCompany, CardNumber, Card, ExpirationDate, CardPassword } from "./type";
 
 export const PaymentsProvider = ({ children }: PropsWithChildren) => {
   const [cardNumbers, setCardNumbers] = useState<CardNumber>(["", "", "", ""]);
@@ -9,13 +9,14 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     year: "",
   });
   const [cardOwnerName, setCardOwnerName] = useState<string>("");
-  const [password, setPassword] = useState<string[]>(["", ""]);
+  const [password, setPassword] = useState<CardPassword>(["", ""]);
   const [cvc, setCvc] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [cardCompany, setCardCompany] = useState<CardCompany>({
     name: "",
     color: "",
   });
+  const [cards, setCards] = useState<Card[]>([]);
 
   const handleChangeCardNumber = useCallback((cardNumbers: CardNumber) => {
     setCardNumbers(cardNumbers);
@@ -39,12 +40,18 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     setCvc(value);
   }, []);
 
-  const handlePassword = useCallback((values: string[]) => {
+  const handlePassword = useCallback((values: CardPassword) => {
+    console.log("values", values)
     setPassword(values);
   }, []);
 
   const handleCardCompany = useCallback((payload: CardCompany) => {
     setCardCompany(payload);
+  }, []);
+
+  const handleCardSubmit = useCallback((payload: Card) => {
+    console.log("payload", payload)
+    setCards((prev) => [...prev, payload]);
   }, []);
 
   useEffect(() => {
@@ -68,12 +75,14 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     password,
     isModalOpen,
     cardCompany,
+    cards,
     handleChangeCardNumber,
     handleChangeExpirationDate,
     handleCardOwner,
     handleCvc,
     handlePassword,
     handleCardCompany,
+    handleCardSubmit
   };
 
   return (

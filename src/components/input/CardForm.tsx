@@ -1,11 +1,11 @@
 import { usePayments } from "store/context";
-import NextButton from "../button/nextButton";
 import CardExpirationDateInput from "./cardExpireDate";
 import CardNumbersInput from "./cardNumbers";
 import CardOwnerInput from "./cardOwner";
 import CardPasswordInput from "./cardPassword";
 import CardCVCInput from "./cardSecurityNumber";
-
+import SubmitButton from "components/button/submitButton";
+import { useRouter } from "hooks/useRouter";
 const CardForm = () => {
   const {
     cardNumbers,
@@ -13,16 +13,33 @@ const CardForm = () => {
     cardOwnerName,
     cvc,
     password,
+    cardCompany,
     handleChangeCardNumber,
     handleChangeExpirationDate,
     handleCardOwner,
     handleCvc,
     handlePassword,
+    handleCardSubmit,
   } = usePayments();
 
+  const { go } = useRouter();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    
+    handleCardSubmit({
+      cardNumbers,
+      cardExpiration,
+      cardOwnerName,
+      cvc,
+      password,
+      cardCompany,
+    });
+    go("/complete-add-card")
+  };
   return (
     <div>
-      <form id="card-from">
+      <form id="card-from" onSubmit={handleSubmit}>
         <CardNumbersInput
           cardNumbers={cardNumbers}
           handleChangeCardNumber={handleChangeCardNumber}
@@ -40,8 +57,8 @@ const CardForm = () => {
           password={password}
           handlePassword={handlePassword}
         />
+        <SubmitButton />
       </form>
-      <NextButton path={"/complete-add-card"} />
     </div>
   );
 };

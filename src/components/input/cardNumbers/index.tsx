@@ -46,6 +46,7 @@ const CardNumbersInput = ({
           maxLength={MAX_CARD_NUMBER_LENGTH}
           value={cardNumbers[0]}
           onChange={handleChange(0)}
+          required
         />
         <input
           ref={numberRefs[1]}
@@ -54,6 +55,7 @@ const CardNumbersInput = ({
           maxLength={MAX_CARD_NUMBER_LENGTH}
           value={cardNumbers[1]}
           onChange={handleChange(1)}
+          required
         />
         <input
           ref={numberRefs[2]}
@@ -62,6 +64,7 @@ const CardNumbersInput = ({
           maxLength={MAX_CARD_NUMBER_LENGTH}
           value={cardNumbers[2]}
           onChange={handleChange(2)}
+          required
         />
         <input
           ref={numberRefs[3]}
@@ -70,6 +73,7 @@ const CardNumbersInput = ({
           maxLength={MAX_CARD_NUMBER_LENGTH}
           value={cardNumbers[3]}
           onChange={handleChange(3)}
+          required
         />
       </div>
     </div>

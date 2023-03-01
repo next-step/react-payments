@@ -28,6 +28,7 @@ const CardOwnerInput = ({
         value={cardOwnerName}
         maxLength={MAX_CARD_OWNER_NAME_LENGTH}
         onChange={handleChange}
+        required
       />
     </div>
   );
