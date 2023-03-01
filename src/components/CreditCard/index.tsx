@@ -3,32 +3,35 @@ import { memo } from 'react';
 import Card from './style';
 
 type Props = {
-  cardInfo: {
-    CARD_NUMBERS: {
-      1: string;
-      2: string;
-      3: string;
-      4: string;
-    };
-    OWNER_NAME: string;
-    EXPIRE_DATE: { month: string; year: string };
-  };
+  cardInfo: typeof DefaultCardInfo;
   size?: 'large' | 'small';
 };
 
-const CreditCard = ({ size = 'large', ...props }: Props) => {
+const DefaultCardInfo = {
+  CARD_NUMBERS: {
+    1: '',
+    2: '',
+    3: '',
+    4: '',
+  },
+  OWNER_NAME: '',
+  EXPIRE_DATE: { month: '', year: '' },
+};
+
+const CreditCard = ({ size = 'large', cardInfo = DefaultCardInfo }: Props) => {
   return (
     <Card size={size}>
       <Card.NumberBox>
-        {Object.values(props.cardInfo.CARD_NUMBERS).map((v, i) => (
-          <Card.Number key={i}>{i < 2 ? v : '****'}</Card.Number>
-        ))}
+        {cardInfo?.CARD_NUMBERS &&
+          Object.values(cardInfo?.CARD_NUMBERS ?? [])?.map((v, i) => (
+            <Card.Number key={i}>{i < 2 ? v : '****'}</Card.Number>
+          ))}
       </Card.NumberBox>
       <Card.BottomBox>
-        <Card.Name>{props.cardInfo.OWNER_NAME}</Card.Name>
+        <Card.Name>{cardInfo.OWNER_NAME}</Card.Name>
         <div>
-          <span>{props.cardInfo.EXPIRE_DATE.month}</span>/
-          <span>{props.cardInfo.EXPIRE_DATE.year}</span>
+          <span>{cardInfo?.EXPIRE_DATE?.month}</span>/
+          <span>{cardInfo?.EXPIRE_DATE?.year}</span>
         </div>
       </Card.BottomBox>
     </Card>
