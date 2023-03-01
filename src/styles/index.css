@@ -24,11 +24,13 @@ input {
   height: 730px;
   position: relative;
   border-radius: 15px;
+  overflow: auto;
 }
 
 .app {
   height: 100%;
   padding: 16px 24px;
+  box-sizing: border-box;
 }
 
 .page-title {
@@ -39,4 +41,9 @@ input {
   align-items: center;
 
   color: #383838;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
 }

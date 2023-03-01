@@ -35,6 +35,7 @@ function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredD
           name={INPUT_NAME.MONTH}
           onChange={handleChangeExpiredDate}
           maxLength={MAX_LENGTH.EXPIRED_DATE}
+          required
         />
         {month.length === MAX_LENGTH.EXPIRED_DATE && (
           <span
@@ -55,6 +56,7 @@ function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredD
           name={INPUT_NAME.YEAR}
           onChange={handleChangeExpiredDate}
           maxLength={MAX_LENGTH.EXPIRED_DATE}
+          required
         />
       </div>
     </div>

@@ -4,6 +4,7 @@ export const MAX_LENGTH = {
   CARD_OWNER: 30,
   SECRET_CODE: 3,
   PASSWORD: 1,
+  ALIAS: 10,
 };
 
 export const INPUT_NAME = {

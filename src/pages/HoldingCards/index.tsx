@@ -1,45 +1,29 @@
-import { css, cx } from '@emotion/css';
 import { Link } from 'react-router-dom';
 
+import { HoldingCard } from 'components/domain';
+
+import { useCardState } from 'contexts/CardContextProvider/hooks';
+
+import { ICard } from 'types/card';
+
 function HoldingCards() {
+  const { cards } = useCardState();
+
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
         <h2 className="page-title mb-10">보유 카드</h2>
       </div>
-      <div className="card-box">
-        <div className="small-card">
-          <div className="card-top">
-            <span className="card-text">클린카드</span>
-          </div>
-          <div className="card-middle">
-            <div className="small-card__chip"></div>
-          </div>
-          <div className="card-bottom">
-            <div className="card-bottom__number">
-              <span className="card-text">1111 - 2222 - oooo - oooo</span>
-            </div>
-            <div className="card-bottom__info">
-              <span className="card-text">YUJO</span>
-              <span className="card-text">12 / 23</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <span className="card-nickname">법인카드</span>
-      <Link
-        to="new"
-        className={cx(
-          css`
-            text-decoration: none;
-          `,
-          'card-box'
-        )}
-      >
+      <Link to="new" className="card-box">
         <div className="empty-card">+</div>
       </Link>
+      {cards.map((card) => (
+        <HoldingCard key={cardNumberToString(card)} card={card} />
+      ))}
     </div>
   );
 }
+
+const cardNumberToString = (card: ICard) => Object.values(card.cardNumber).toString();
 
 export default HoldingCards;

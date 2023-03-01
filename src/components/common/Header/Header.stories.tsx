@@ -5,7 +5,7 @@ import { Header } from 'components/common';
 import { HeaderProps } from 'components/common/Header';
 
 export default {
-  title: 'Header',
+  title: 'Common/Header',
   component: Header,
 };
 

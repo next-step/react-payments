@@ -22,6 +22,7 @@ function SecretCodeContainer() {
           name={INPUT_NAME.SECRET_CODE}
           onChange={handleChangeSecretCode}
           maxLength={MAX_LENGTH.SECRET_CODE}
+          required
           size="medium"
         />
       </div>
