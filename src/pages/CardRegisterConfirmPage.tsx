@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { CreditCard } from '@/components';
-import { Button } from '@/components/UI';
+import { Button, CreditCard } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
 import { styled } from '@/lib/stitches.config';
 import { getItem } from '@/storage/storage';

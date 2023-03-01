@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import InputContainer from '.';
 
 export default {
-  title: 'Components/InputContainer',
+  title: 'Components/UI/InputContainer',
   component: InputContainer,
   argTypes: {
     backgroundColor: { control: 'color' },

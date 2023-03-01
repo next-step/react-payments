@@ -1,13 +1,19 @@
 import { memo } from 'react';
 
+import { CardKey, CardNumber, ExpireDate } from '@/types';
+
 import Card from './style';
 
 type Props = {
-  cardInfo: typeof DefaultCardInfo;
+  cardInfo?: {
+    [CardKey.CARD_NUMBERS]: CardNumber;
+    [CardKey.EXPIRE_DATE]: ExpireDate;
+    [CardKey.OWNER_NAME]: string;
+  };
   size?: 'large' | 'small';
 };
 
-const DefaultCardInfo = {
+export const DefaultCardInfo: Props['cardInfo'] = {
   CARD_NUMBERS: {
     1: '',
     2: '',
