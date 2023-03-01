@@ -9,7 +9,7 @@ import { useCardDispatch } from 'contexts/CardContextProvider/hooks';
 import { PATHS } from 'constants/router';
 import { ICard } from 'types/card';
 
-const PROMPT_MESSAGE = '정말로 등록된 카드를 삭제하시겠습니까?';
+const CONFIRM_MESSAGE = '정말로 등록된 카드를 삭제하시겠습니까?';
 
 interface HodingCardProps {
   card: ICard;
@@ -19,7 +19,7 @@ function HoldingCard({ card }: HodingCardProps) {
   const dispatch = useCardDispatch();
 
   const handleClickDeleteButton = () => {
-    const isCanDeleted = window.confirm(PROMPT_MESSAGE);
+    const isCanDeleted = window.confirm(CONFIRM_MESSAGE);
 
     if (isCanDeleted) {
       dispatch({ type: 'DELETE_CARD', payload: card });

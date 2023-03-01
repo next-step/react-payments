@@ -26,7 +26,9 @@ function ConrimCard() {
   };
 
   const handleClickNextButton = () => {
-    dispatch({ type: 'ADD_OR_UPDATE_CARD', payload: { ...card, alias } });
+    const newAlias = alias === '' ? card.company : alias;
+
+    dispatch({ type: 'ADD_OR_UPDATE_CARD', payload: { ...card, alias: newAlias } });
 
     navigate(PATHS.HOME, { replace: true });
   };
