@@ -1,1 +1,5 @@
-export type RoutePath = '/register' | '/register-confirm' | `/list`;
+export type RoutePath =
+  | '/register'
+  | '/register-confirm'
+  | '/list'
+  | `/detail/${string}`;
