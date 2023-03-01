@@ -1,9 +1,11 @@
-import Router from './routers/router';
+import { RouterProvider } from 'react-router-dom';
+
+import router from './routers/router';
 
 const App = () => {
   return (
     <div id='app' className='flex-column-center wrap'>
-      <Router />
+      <RouterProvider router={router} />
     </div>
   );
 };
