@@ -1,6 +1,6 @@
-import { ExpirationDate } from "store/Provider";
 import { ChangeEvent } from "react";
 import { useInputFocus, useRefs } from "hooks";
+import { ExpirationDate } from "store/type";
 
 const MAX_DATE_LENGTH = 2;
 const CURRENT_YEAR = Number(new Date().getFullYear().toString().slice(-2));

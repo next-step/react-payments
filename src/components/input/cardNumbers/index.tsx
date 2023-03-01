@@ -1,6 +1,6 @@
 import { useInputFocus, useRefs } from "hooks";
 import { ChangeEvent } from "react";
-import { CardNumber } from "store/Provider";
+import { CardNumber } from "store/type";
 
 const MAX_CARD_NUMBER_LENGTH = 4;
 
