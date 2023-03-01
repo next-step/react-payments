@@ -7,7 +7,7 @@ import {
 	EDIT_CARD,
 	SelectedCardInfo,
 	SET_SELECTED_CARD,
-} from 'modules/payments/PaymentsActionType';
+} from 'pages/payments/modules/payments/PaymentsActionType';
 
 export const defaultCardInfo: CardInput = {
 	id: '1',

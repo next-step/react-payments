@@ -1,13 +1,13 @@
-import { characterCount } from 'utils';
+import { characterCount } from 'pages/payments/utils';
 import Button from 'components/common/Button';
 import Card from 'components/common/Card';
 import InputContainer from 'components/common/Input/InputContainer';
 import CompanyModal from 'components/common/Modal';
 import { STEP, TYPE, TYPE_COMPLETED, TYPE_SELECT } from 'constants/Payments';
 import Input from 'components/common/Input';
-import { usePaymentsState } from 'modules/payments/PaymentsContext';
+import { usePaymentsState } from 'pages/payments/modules/payments/PaymentsContext';
 import { useLocation, useNavigate } from 'react-router';
-import { useCardForm } from 'hooks/useCardForm';
+import { useCardForm } from 'pages/payments/hooks/useCardForm';
 
 const CardForm = () => {
 	const navigate = useNavigate();

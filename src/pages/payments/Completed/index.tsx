@@ -6,10 +6,13 @@ import { STEP } from 'constants/Payments';
 import {
 	usePaymentsDispatch,
 	usePaymentsState,
-} from 'modules/payments/PaymentsContext';
-import { ADD_CARD, EDIT_CARD } from 'modules/payments/PaymentsActionType';
+} from 'pages/payments/modules/payments/PaymentsContext';
+import {
+	ADD_CARD,
+	EDIT_CARD,
+} from 'pages/payments/modules/payments/PaymentsActionType';
 import { useNavigate } from 'react-router';
-import { useCardForm } from 'hooks/useCardForm';
+import { useCardForm } from 'pages/payments/hooks/useCardForm';
 
 const Completed = () => {
 	const navigate = useNavigate();

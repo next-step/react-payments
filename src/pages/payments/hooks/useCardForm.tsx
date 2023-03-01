@@ -1,14 +1,18 @@
 import React, { useId, useRef, useState } from 'react';
 import { CARD_INFO, STEP, VALIDATION_LIST } from 'constants/Payments';
-import { formatNumber, monthConverter, validateInput } from 'utils';
+import {
+	formatNumber,
+	monthConverter,
+	validateInput,
+} from 'pages/payments/utils';
 import {
 	usePaymentsDispatch,
 	usePaymentsState,
-} from 'modules/payments/PaymentsContext';
+} from 'pages/payments/modules/payments/PaymentsContext';
 import {
 	ADD_CARD_INFO,
 	NewCardInfo,
-} from 'modules/payments/PaymentsActionType';
+} from 'pages/payments/modules/payments/PaymentsActionType';
 import { useNavigate } from 'react-router';
 
 export const useCardForm = () => {

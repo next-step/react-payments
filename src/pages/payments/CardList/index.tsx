@@ -4,14 +4,14 @@ import Card from 'components/common/Card';
 import {
 	usePaymentsDispatch,
 	usePaymentsState,
-} from 'modules/payments/PaymentsContext';
+} from 'pages/payments/modules/payments/PaymentsContext';
 import { useNavigate } from 'react-router';
 import { STEP } from 'constants/Payments';
 import {
 	DELETE_CARD,
 	SelectedCardInfo,
 	SET_SELECTED_CARD,
-} from 'modules/payments/PaymentsActionType';
+} from 'pages/payments/modules/payments/PaymentsActionType';
 import Button from 'components/common/Button';
 
 const CardList = () => {
