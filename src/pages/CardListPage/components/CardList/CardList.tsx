@@ -5,7 +5,7 @@ import { EmptyCardButton } from '@/components/buttons';
 import { CardListContainer } from './CardList.style';
 import { ROUTE } from '@/constants';
 import { useCardList } from '@/store';
-import { Card } from '@/components';
+import CardItem from '../CardItem/CardItem';
 
 const CardList = () => {
   const navigate = useNavigate();
@@ -17,9 +17,11 @@ const CardList = () => {
 
   return (
     <CardListContainer>
-      <EmptyCardButton onClick={handleClick} />
+      <li>
+        <EmptyCardButton onClick={handleClick} />
+      </li>
       {cardList.map((card) => (
-        <Card key={card.id} card={card} size="small" />
+        <CardItem key={card.id} {...card} />
       ))}
     </CardListContainer>
   );

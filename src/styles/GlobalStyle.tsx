@@ -4,6 +4,13 @@ const globalStyleCss = css`
   * {
     box-sizing: border-box;
   }
+
+  li,
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
   body {
     display: flex;
     flex-direction: column;

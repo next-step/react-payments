@@ -3,10 +3,6 @@ import { CardInfo } from '@/types';
 import styled from '@emotion/styled';
 import React, { useMemo } from 'react';
 
-type CardItemProps = {
-  card: CardInfo;
-};
-
 const CardItem = (card: CardInfo) => {
   const {
     cardNumber,
@@ -29,7 +25,7 @@ const CardItem = (card: CardInfo) => {
 
   return (
     <StyledCardItem>
-      <Card card={cardInfo} size="big" />
+      <Card card={cardInfo} size="small" />
       <NickName>{cardNickName}</NickName>
     </StyledCardItem>
   );
@@ -44,6 +40,5 @@ const StyledCardItem = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px 0;
-  margin-bottom: 40px;
+  flex-direction: column;
 `;

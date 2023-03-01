@@ -3,13 +3,17 @@ import React from 'react';
 import { Card, Input, TextButton } from '@/components';
 import useCard from '@/store/hooks/useCard';
 import styled from '@emotion/styled';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CARD_LIST_ACTION, useCardListDispatch } from '@/store';
+import { PLACEHOLDER_TEXT, ROUTE } from '@/constants';
 
 const CardCreateCompletePage = () => {
   const cardNickNameFormId = 'cardNickNameForm';
   const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useCardListDispatch();
+
+  const maxCardNickNameLength = 10;
   const cardId = Number(location.pathname.split('/')[3]);
 
   const {
@@ -23,8 +27,8 @@ const CardCreateCompletePage = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const cardNickName = e.currentTarget.cardNickName.value;
-    console.log(cardNickName);
     dispatch(CARD_LIST_ACTION.UPDATE_CARD_NICKNAME(cardId, cardNickName));
+    navigate(ROUTE.CARD);
   };
 
   return (
@@ -43,9 +47,10 @@ const CardCreateCompletePage = () => {
         />
         <Input.LineInput
           textAlign="center"
-          placeholder="카드 별칭 (선택)"
+          placeholder={PLACEHOLDER_TEXT.CARD_NICKNAME}
           label="cardNickName"
           name="cardNickName"
+          maxLength={maxCardNickNameLength}
           width="70%"
         />
       </form>

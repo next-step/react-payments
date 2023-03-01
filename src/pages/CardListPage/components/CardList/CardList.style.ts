@@ -7,4 +7,7 @@ export const CardListContainer = styled.ul`
 
   margin: 0;
   padding: 20px 0;
+  li {
+    margin: 10px 0;
+  }
 `;

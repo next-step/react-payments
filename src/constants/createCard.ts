@@ -11,6 +11,7 @@ export const LABEL_TEXT = {
 export const PLACEHOLDER_TEXT = {
   EXPIRATION_DATE: 'MM / YY',
   CARD_OWNER_NAME: '카드에 표시된 이름과 동일하게 입력하세요.',
+  CARD_NICKNAME: '카드 별칭 (선택)',
 };
 
 export const CARD_COMPANIES = {
