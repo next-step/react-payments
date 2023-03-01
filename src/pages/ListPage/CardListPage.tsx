@@ -18,9 +18,8 @@ const CardListPage = () => {
           <h2 className="page-title mb-10">보유 카드</h2>
         </div>
         {cards.map((card, idx) => (
-          <>
+          <React.Fragment key={idx}>
             <Card
-              key={idx}
               cardNumbers={card.cardNumbers}
               cardExpiration={card.cardExpiration}
               cardOwnerName={card.cardOwnerName}
@@ -28,7 +27,7 @@ const CardListPage = () => {
               size={"small"}
             />
             <span>{card.cardNickName}</span>
-          </>
+          </React.Fragment>
         ))}
         <div className="card-box">
           <div className="empty-card" onClick={moveRegistCard}>
