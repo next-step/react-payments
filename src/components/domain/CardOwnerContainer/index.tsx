@@ -20,6 +20,7 @@ function CardOwnerContainer({ cardOwner, handleChangeCardOwner }: CardOwnerConta
         value={cardOwner}
         onChange={handleChangeCardOwner}
         maxLength={MAX_LENGTH.CARD_OWNER}
+        required
       />
     </div>
   );
