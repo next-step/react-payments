@@ -2,7 +2,7 @@ import { masking } from '../../utils';
 
 interface CardProps {
   data: {
-    alias?: string;
+    bank?: string;
     num1?: string;
     num2?: string;
     num3?: string;
@@ -13,7 +13,7 @@ interface CardProps {
 }
 
 const Card = ({ data }: CardProps) => {
-  const { alias, holder, expiry, num1, num2, num3, num4 } = data;
+  const { bank, holder, expiry, num1, num2, num3, num4 } = data;
 
   const formatCardNumber = () =>
     [num1, num2, masking(num3), masking(num4)]
@@ -24,7 +24,7 @@ const Card = ({ data }: CardProps) => {
     <div className="card-box">
       <div className="small-card">
         <div className="card-top">
-          <span className="card-text">{alias}</span>
+          <span className="card-text">{bank}</span>
         </div>
         <div className="card-middle">
           <div className="small-card__chip" />
