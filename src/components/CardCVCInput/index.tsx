@@ -1,8 +1,9 @@
 import { memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
-import { useInputChange } from '@/hooks/useInputChange';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
+
+import { useFormContext } from '../common/Form/FormContext';
 
 const initialState = '';
 
@@ -12,9 +13,9 @@ type Props = {
 };
 
 const CardCVCInput = ({ onChange, dirtyState }: Props) => {
+  const { handleInputChange, dispatch } = useFormContext();
   const [cvc, setCVC] = useState(initialState);
   const keyPressInterceptor = useNumberKeyInterceptor();
-  const handleInputChange = useInputChange();
 
   const isCVCValid = useMemo(
     () => Boolean(cvc.length === CVC_MIN_LENGTH),
@@ -26,8 +27,9 @@ const CardCVCInput = ({ onChange, dirtyState }: Props) => {
   }, [cvc]);
 
   useEffect(() => {
-    onChange(cvc);
-  }, [cvc, onChange]);
+    onChange({ val: cvc, isValid: isCVCValid });
+    dispatch();
+  }, [cvc]);
 
   return (
     <InputContainer

@@ -1,9 +1,10 @@
-import { ChangeEvent, memo, useEffect, useMemo, useState } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
-import { useInputChange } from '@/hooks/useInputChange';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
 import type { CardNumber } from '@/types';
+
+import { useFormContext } from '../common/Form/FormContext';
 
 const initialState: CardNumber = {
   1: '',
@@ -18,9 +19,9 @@ type Props = {
 };
 
 const CardNumberInput = ({ onChange, dirtyState }: Props) => {
+  const { dispatch, handleInputChange } = useFormContext();
   const [cardNumbers, setCardNumbers] = useState(initialState);
   const keyPressInterceptor = useNumberKeyInterceptor();
-  const handleInputChange = useInputChange();
 
   const isValidCardNumberLength =
     Object.values(cardNumbers).join('').length === 16;
@@ -30,8 +31,9 @@ const CardNumberInput = ({ onChange, dirtyState }: Props) => {
   }, [cardNumbers]);
 
   useEffect(() => {
-    onChange(cardNumbers);
-  }, [cardNumbers, onChange]);
+    onChange({ val: cardNumbers, isValid: isValidCardNumberLength });
+    dispatch();
+  }, [cardNumbers]);
 
   return (
     <InputContainer

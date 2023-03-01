@@ -2,7 +2,7 @@ import { ChangeEvent, memo, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
 import { useBlur } from '@/hooks/useBlur';
-import { initialCardState } from '@/pages/CardRegisterPage';
+import { initialCardState } from '@/pages/CardRegister';
 import { CardKey } from '@/types';
 
 type Props = {
@@ -24,10 +24,10 @@ const CardOwnerInput = (props: Props) => {
       return ERROR_MESSAGE.OVER_LIMITED_TEXT;
   }, [owner]);
 
-  const handleChangeOwner = (e: ChangeEvent<HTMLInputElement>) => {
-    setOwner(e.target.value);
-    props.onChangeOwner({ val: owner, isValid: isOwnerValid });
-  };
+  useEffect(() => {
+    onChange({ val: cvc, isValid: isCVCValid });
+    dispatch();
+  }, [cvc]);
 
   return (
     <InputContainer
@@ -38,7 +38,7 @@ const CardOwnerInput = (props: Props) => {
       <input
         type="text"
         placeholder="Dahye"
-        onChange={handleChangeOwner}
+        onChange={handleInputChange(setOwner)}
         onBlur={makeDirty}
         maxLength={MAX_OWNER_NAME_LENGTH}
       />

@@ -1,19 +1,32 @@
-import { createContext, useContext } from 'react';
+import {
+  createContext,
+  PropsWithChildren,
+  useContext,
+  useReducer,
+} from 'react';
 
-interface FormHandler {
-  handleSubmit: (e?: React.FormEvent<HTMLFormElement>) => void;
-  handleReset: (e?: React.SyntheticEvent<any>) => void;
-}
-interface FormSharedConfig<Props> {
-  validateOnChange?: boolean;
-  validateOnBlur?: boolean;
-}
+import useFormData from '@/hooks/formHook';
 
-export type FormProps<Values> = FormSharedConfig<Values> & FormHandler;
-const FormContext = createContext<FormProps<any> | null>(null);
+import type { FormProps } from './type';
 
-export const FormProvider = FormContext.Provider;
-export const FormConsumer = FormContext.Consumer;
+const FormContext = createContext<FormProps | null>(null);
+
+export const FormProvider = ({ children }: PropsWithChildren) => {
+  const { getFormData, handleFormInput, handleInputChange } = useFormData();
+  const [dispatchCount, dispatch] = useReducer((state: number) => {
+    return state + 1;
+  }, 0);
+
+  const value = {
+    getFormData,
+    handleFormInput,
+    handleInputChange,
+    dispatchCount,
+    dispatch,
+  };
+
+  return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
+};
 
 export const useFormContext = () => {
   const context = useContext(FormContext);

@@ -1,7 +1,8 @@
 import { memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
-import { useInputChange } from '@/hooks/useInputChange';
+
+import { useFormContext } from '../common/Form/FormContext';
 
 const initialState = '';
 
@@ -12,7 +13,7 @@ type Props = {
 
 const CardOwnerInput = ({ onChange, dirtyState }: Props) => {
   const [owner, setOwner] = useState(initialState);
-  const handleInputChange = useInputChange();
+  const { handleInputChange, dispatch } = useFormContext();
 
   const isOwnerValid = useMemo(
     () => Boolean(owner && owner.length < MAX_OWNER_NAME_LENGTH),
@@ -26,8 +27,9 @@ const CardOwnerInput = ({ onChange, dirtyState }: Props) => {
   }, [owner]);
 
   useEffect(() => {
-    onChange(owner);
-  }, [owner, onChange]);
+    onChange({ val: owner, isValid: isOwnerValid });
+    dispatch();
+  }, [owner]);
 
   return (
     <InputContainer

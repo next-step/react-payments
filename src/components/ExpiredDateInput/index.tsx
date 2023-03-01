@@ -1,9 +1,10 @@
 import { memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
-import { useInputChange } from '@/hooks/useInputChange';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
 import type { ExpireDate } from '@/types';
+
+import { useFormContext } from '../common/Form/FormContext';
 
 const initialState: ExpireDate = {
   month: '',
@@ -16,9 +17,9 @@ type Props = {
 };
 
 const ExpiredDateInput = ({ onChange, dirtyState }: Props) => {
+  const { dispatch, handleInputChange } = useFormContext();
   const [expiredDate, setExpiredDate] = useState(initialState);
   const numberKeyPressInterceptor = useNumberKeyInterceptor();
-  const handleInputChange = useInputChange();
 
   const isExpiredDateValid = Boolean(
     Number(expiredDate.month) <= MAX_MONTH &&
@@ -34,8 +35,9 @@ const ExpiredDateInput = ({ onChange, dirtyState }: Props) => {
   }, [expiredDate]);
 
   useEffect(() => {
-    onChange(expiredDate);
-  }, [expiredDate, onChange]);
+    onChange({ val: expiredDate, isValid: isExpiredDateValid });
+    dispatch();
+  }, [expiredDate]);
 
   return (
     <InputContainer
