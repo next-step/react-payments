@@ -1,0 +1,50 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs/';
+
+import { theme } from 'styles/theme';
+
+<Meta title="Colors" />
+
+# Colors
+
+<ColorPalette>
+  <ColorItem
+    title="theme.color.black"
+    subtitle="Black"
+    colors={[theme.color.black]}
+  />
+  <ColorItem
+    title="theme.color.white"
+    subtitle="Black"
+    colors={[theme.color.white]}
+  />
+  <ColorItem
+    title="theme.color.brand01~08"
+    subtitle="Brand"
+    colors={[
+      theme.color.brand01,
+      theme.color.brand02,
+      theme.color.brand03,
+      theme.color.brand04,
+      theme.color.brand05,
+      theme.color.brand06,
+      theme.color.brand07,
+      theme.color.brand08,
+    ]}
+  />
+  <ColorItem
+    title="theme.color.gray01~09"
+    subtitle="Gray"
+    colors={[
+      theme.color.gray00,
+      theme.color.gray01,
+      theme.color.gray02,
+      theme.color.gray03,
+      theme.color.gray04,
+      theme.color.gray05,
+      theme.color.gray06,
+      theme.color.gray07,
+      theme.color.gray08,
+      theme.color.gray09,
+    ]}
+  />
+</ColorPalette>
