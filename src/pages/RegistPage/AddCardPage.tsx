@@ -6,8 +6,14 @@ import { PaymentsProvider } from "store/Provider";
 import { usePayments } from "store/context";
 
 const CardPreview = () => {
-  const { cardNumbers, cardExpiration, cardOwnerName, isModalOpen } =
-    usePayments();
+  const {
+    cardNumbers,
+    cardExpiration,
+    cardOwnerName,
+    isModalOpen,
+    cardCompany,
+    handleCardCompany,
+  } = usePayments();
 
   return (
     <>
@@ -15,8 +21,9 @@ const CardPreview = () => {
         cardNumbers={cardNumbers}
         cardExpiration={cardExpiration}
         cardOwnerName={cardOwnerName}
+        cardCompany={cardCompany}
       />
-      {isModalOpen && <AddCardModal />}
+      {isModalOpen && <AddCardModal handleCardCompany={handleCardCompany} />}
     </>
   );
 };

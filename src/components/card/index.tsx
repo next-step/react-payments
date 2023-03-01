@@ -10,11 +10,18 @@ const showCardExpiry = (month: string, year: string) => {
   return month ? `${month} / ${year || "YY"}` : "MM / YY";
 };
 
-const Card = ({ cardNumbers, cardExpiration, cardOwnerName }: any) => {
+const Card = ({
+  cardNumbers,
+  cardExpiration,
+  cardOwnerName,
+  cardCompany,
+}: any) => {
   return (
     <div className="card-box">
-      <div className="empty-card">
-        <div className="card-top"></div>
+      <div className="empty-card" style={{ background: cardCompany.color }}>
+        <div className="card-top">
+          <span className="card-nick-name">{cardCompany.name}</span>
+        </div>
         <div className="card-middle">
           <div className="small-card__chip"></div>
         </div>

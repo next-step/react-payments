@@ -1,9 +1,13 @@
 import { CARD } from "constant";
+import { CardCompany } from "store/type";
 
-const AddCardModal = () => {
+type CardCompanyProps = {
+  handleCardCompany: (payload: CardCompany) => void;
+};
 
-  const handleCardCompany = (color: string) => {
-    console.log(color)
+const AddCardModal = ({ handleCardCompany }: CardCompanyProps) => {
+  const handleClickCardCompany = (name: string, color: string) => {
+    handleCardCompany({ name, color });
   };
 
   return (
@@ -11,8 +15,15 @@ const AddCardModal = () => {
       <div className="modal">
         <div className="grid-template">
           {CARD.COMPANY.map(({ name, color }: any) => (
-            <div className="modal-item-container" onClick={() => handleCardCompany(color)}>
-              <div className="modal-item-dot" style={{backgroundColor:color}}></div>
+            <div
+              className="modal-item-container"
+              key={name}
+              onClick={() => handleClickCardCompany(name, color)}
+            >
+              <div
+                className="modal-item-dot"
+                style={{ backgroundColor: color }}
+              ></div>
               <span className="modal-item-name">{name}</span>
             </div>
           ))}

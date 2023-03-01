@@ -150,3 +150,9 @@
   align-items: center;
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
+
+.card-nick-name {
+  font-size: 14px;
+  width: 60px;
+  text-align: center;
+}
