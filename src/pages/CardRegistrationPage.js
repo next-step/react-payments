@@ -74,8 +74,12 @@ export default function CardRegistrationPage() {
 
   return (
     <>
-      <Header className="page-title" routerPath={ROUTE_PATH.REGISTED_CARD_LIST}>
-        &lt;카드 추가
+      <Header
+        className="page-title"
+        linkToPath={ROUTE_PATH.REGISTED_CARD_LIST}
+        linkText="&lt;"
+      >
+        카드 추가
       </Header>
       <CardBox
         cardNumber={cardNumber}
