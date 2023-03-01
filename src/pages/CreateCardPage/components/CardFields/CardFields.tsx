@@ -38,7 +38,7 @@ const CardFields = () => {
     navigate(ROUTE.CARD_CREATE + `/${uniqueId}`);
   };
   return (
-    <form>
+    <CardFieldForm>
       <CardNumberField cardNumber={cardNumber} fontColor={fontColor} />
       <CardExpirationDateField
         expirationMonth={expirationMonth}
@@ -56,11 +56,19 @@ const CardFields = () => {
           onClick={handleNextButtonClick}
         />
       </TextButtonContainer>
-    </form>
+    </CardFieldForm>
   );
 };
 
 export default CardFields;
+
+const CardFieldForm = styled.form`
+  width: 100%;
+  label {
+    display: block;
+    margin-bottom: 12px;
+  }
+`;
 
 const TextButtonContainer = styled.div`
   width: 100%;

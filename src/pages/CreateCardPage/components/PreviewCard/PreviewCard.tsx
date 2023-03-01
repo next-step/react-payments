@@ -53,5 +53,5 @@ const PreviewCardContainer = styled.section`
   align-items: center;
   justify-content: center;
   margin: 10px 0;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 `;
