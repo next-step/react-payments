@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 import Input from '../../../common/Input/Input';
 import InputBox from '../../../common/Input/InputBox';
@@ -12,7 +12,6 @@ const CardExpirationDateInput = () => {
   const { changeCardInfo } = useCard();
 
   const [expirationDate, setExpirationDate] = useState(['', '']);
-  const nextElement = useRef(null);
 
   const handleCardExpirationDateChange = (index) => (e) => {
     const updatedExpirationDate = [...expirationDate];
@@ -58,7 +57,6 @@ const CardExpirationDateInput = () => {
       />
       /
       <Input
-        ref={nextElement}
         className='input-basic w-25'
         type='text'
         placeholder='YY'

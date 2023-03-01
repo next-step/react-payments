@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 
 import Input from '../../../common/Input/Input';
 import InputBox from '../../../common/Input/InputBox';

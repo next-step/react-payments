@@ -7,7 +7,10 @@ import CardShapedButton from '../../components/domain/Card/CardShapedButton/Card
 import { useCard } from '../../store/CardContext';
 
 const CardListPage = () => {
+  const { cardInfo } = useCard();
+
   const navigate = useNavigate();
+  console.log(cardInfo);
 
   return (
     <div className='app flex-column-center'>

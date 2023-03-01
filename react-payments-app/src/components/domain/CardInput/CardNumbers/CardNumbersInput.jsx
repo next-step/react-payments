@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { CHANGE_CARD } from '../../../../constants/action';
 import { MAX_INPUT_LENGTH } from '../../../../constants/numbers';
 import { useCard } from '../../../../store/CardContext';
@@ -10,15 +10,7 @@ const CardNumbersInput = () => {
 
   const [cardNumbers, setCardNumbers] = useState(['', '', '', '']);
   const [error, setError] = useState('');
-  const nextElement = useRef([]);
 
-  const autoFocus = (updatedCardNumbers, index) => {
-    if (updatedCardNumbers[index].length === 4) {
-      if (nextElement.current[index]) {
-        nextElement.current[index].focus();
-      }
-    }
-  };
   const handleCardNumbersChange = (index) => (e) => {
     const updatedCardNumbers = [...cardNumbers];
     const { value } = e.target;
@@ -30,7 +22,6 @@ const CardNumbersInput = () => {
     setError(null);
 
     updatedCardNumbers[index] = value;
-    autoFocus(updatedCardNumbers, index);
     setCardNumbers(updatedCardNumbers);
     changeCardInfo(CHANGE_CARD.NUMBERS, updatedCardNumbers);
   };
@@ -40,11 +31,6 @@ const CardNumbersInput = () => {
       {cardNumbers.map((_, idx) => (
         <Input
           key={idx}
-          ref={
-            idx === 0
-              ? () => autoFocus()
-              : (el) => (nextElement.current[idx - 1] = el)
-          }
           className='input-basic'
           type='text'
           value={cardNumbers[idx]}

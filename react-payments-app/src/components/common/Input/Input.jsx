@@ -30,11 +30,11 @@ const Input = ({
 export default Input;
 
 Input.propTypes = {
-  className: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  placeholder: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  type: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
   maxLength: PropTypes.number,
   required: PropTypes.bool,
   ref: PropTypes.func || PropTypes.array,

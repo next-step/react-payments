@@ -1,3 +1,4 @@
+import { Children } from 'react';
 import PropTypes from 'prop-types';
 
 const InputBox = ({ name, boxClassName, children }) => {
@@ -12,7 +13,7 @@ const InputBox = ({ name, boxClassName, children }) => {
             <label className='input-title'>{length ? length : 0} / 30</label>
           ) : null}
         </div>
-        <div className={boxClassName}>{children}</div>
+        <div className={boxClassName}>{Children.toArray(children)}</div>
       </div>
     </>
   );
@@ -23,5 +24,5 @@ export default InputBox;
 InputBox.propTypes = {
   name: PropTypes.string.isRequired,
   boxClassName: PropTypes.string,
-  children: PropTypes.element,
+  children: PropTypes.node,
 };
