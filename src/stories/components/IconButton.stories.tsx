@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import IconButton from "components/IconButton";
-import IconButtonPropsType from "components/IconButton";
+import IconButton from "components/IconButton/IconButton";
+import IconButtonPropsType from "components/IconButton/IconButton";
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "IconButton",
@@ -16,6 +16,20 @@ export const LeftButton = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 LeftButton.args = {
   name: "arrowLeft",
+  size: "2x",
+  color: "black",
+};
+export const RemoveButton = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+RemoveButton.args = {
+  name: "remove",
+  size: "2x",
+  color: "black",
+};
+export const modifyButton = Template.bind({});
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+modifyButton.args = {
+  name: "modify",
   size: "2x",
   color: "black",
 };

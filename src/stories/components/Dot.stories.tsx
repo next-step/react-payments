@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Dot from "components/Dot";
-import DotProps from "components/Dot";
+import Dot from "components/Dot/Dot";
+import DotProps from "components/Dot/Dot";
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "Dot",
