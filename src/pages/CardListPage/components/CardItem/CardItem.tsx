@@ -1,9 +1,12 @@
 import { Card } from '@/components';
+import { ROUTE } from '@/constants';
 import { CardInfo } from '@/types';
 import styled from '@emotion/styled';
 import React, { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CardItem = (card: CardInfo) => {
+  const navigate = useNavigate();
   const {
     cardNumber,
     expirationMonth,
@@ -23,8 +26,12 @@ const CardItem = (card: CardInfo) => {
     };
   }, [cardNumber, expirationMonth, expirationYear, ownerName, cardCompany]);
 
+  const handleClick = () => {
+    navigate(ROUTE.CARD_CREATE + `/${card.id}`);
+  };
+
   return (
-    <StyledCardItem>
+    <StyledCardItem onClick={handleClick}>
       <Card card={cardInfo} size="small" />
       <NickName>{cardNickName}</NickName>
     </StyledCardItem>
