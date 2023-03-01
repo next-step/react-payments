@@ -5,7 +5,7 @@ import { Button } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
 import { getItem, setItem } from '@/storage/storage';
 import { StorageKey } from '@/storage/storageKey';
-import { type CardFormType, CardData, CardKey } from '@/types';
+import { type CardFormType, CardKey } from '@/types';
 
 export const initialCardState: CardFormType = {
   [CardKey.CARD_NUMBERS]: {

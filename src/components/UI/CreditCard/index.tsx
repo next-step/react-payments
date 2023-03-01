@@ -9,6 +9,7 @@ type Props = {
     CardKey.CARD_NUMBERS | CardKey.EXPIRE_DATE | CardKey.OWNER_NAME
   >;
   size?: 'large' | 'small';
+  onClick?: () => void;
 };
 
 export const DefaultCardInfo: Props['cardInfo'] = {
