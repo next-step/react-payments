@@ -1,84 +1,98 @@
 .flex-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .flex-column-center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .mt-10 {
-  margin-top: 2.5rem;
+	margin-top: 2.5rem;
 }
 
 .mt-20 {
-  margin-top: 5rem;
+	margin-top: 5rem;
 }
 
 .mt-30 {
-  margin-top: 7.5rem;
+	margin-top: 7.5rem;
 }
 
 .mt-40 {
-  margin-top: 9rem;
+	margin-top: 9rem;
 }
 
 .mt-50 {
-  margin-top: 11.5rem;
+	margin-top: 11.5rem;
 }
 
 .mb-10 {
-  margin-bottom: 2.5rem;
+	margin-bottom: 2.5rem;
 }
 
 .w-100 {
-  width: 100%;
+	width: 100%;
 }
 
 .w-75 {
-  width: 75%;
+	width: 75%;
 }
 
 .w-50 {
-  width: 50%;
+	width: 50%;
 }
 
 .w-25 {
-  width: 25%;
+	width: 25%;
 }
 
 .w-15 {
-  width: 15%;
+	width: 15%;
+}
+
+.w-208 {
+	width: 208px;
+}
+
+.max-w-94 {
+	max-width: 94px;
 }
 
 .mr-1 {
-  margin-right: 0.25rem;
+	margin-right: 0.25rem;
 }
 
 .mr-2 {
-  margin-right: 0.5rem;
+	margin-right: 0.5rem;
 }
 
 .cursor-pointer {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .relative {
-  position: relative;
+	position: relative;
 }
 
 .absolute {
-  position: absolute;
+	position: absolute;
 }
 
 .t-0 {
-  top: 0;
+	top: 0;
 }
 
 .r-0 {
-  right: 0;
+	right: 0;
+}
+
+.ellipsis {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }

@@ -8,9 +8,11 @@ import {
 import { useNavigate } from 'react-router';
 import { STEP } from 'constants/Payments';
 import {
+	DELETE_CARD,
 	SelectedCardInfo,
 	SET_SELECTED_CARD,
 } from 'modules/payments/PaymentsActionType';
+import Button from 'components/common/Button';
 
 const CardList = () => {
 	const { cardList } = usePaymentsState();
@@ -23,6 +25,8 @@ const CardList = () => {
 	};
 
 	const handleCardAddClick = () => navigation(STEP.REGISTER_CARD);
+	const handleCardDeleteClick = (selectedCard: SelectedCardInfo) =>
+		dispatch({ type: DELETE_CARD, id: selectedCard?.id });
 
 	return (
 		<>
@@ -41,7 +45,14 @@ const CardList = () => {
 									backgroundColor={card?.backgroundColor}
 									onClick={() => handleCardClick(card)}
 								/>
-								<span className="card-nickname">{card?.nickname}</span>
+								<div className="flex-center w-208">
+									<span className="card-nickname">{card?.nickname}</span>
+									<Button
+										className="btn-delete"
+										label="카드 삭제"
+										onClick={() => handleCardDeleteClick(card)}
+									/>
+								</div>
 							</Fragment>
 						);
 					})}

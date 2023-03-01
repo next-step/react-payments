@@ -44,7 +44,9 @@ const Card = ({
 								</span>
 							</div>
 							<div className="card-bottom__info">
-								<span className="card-text">{input?.name || 'NAME'}</span>
+								<span className="card-text ellipsis max-w-94">
+									{input?.name || 'NAME'}
+								</span>
 								<span className="card-text">
 									{`${input?.expiry || 'MM / YY'}`}
 								</span>
