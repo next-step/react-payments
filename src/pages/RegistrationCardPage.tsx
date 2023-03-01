@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import styled from '@emotion/styled';
 
 import { CreditCard } from 'components';
@@ -8,6 +8,7 @@ import {
   TextField,
   FormFieldControl,
   Button,
+  Chip,
 } from 'components/@common';
 
 import useCardData from 'hooks/useCardData';
@@ -91,6 +92,10 @@ const RegistrationCardPage = () => {
         number={card?.number}
         expiration={card?.expiration}
       />
+      <ChipWrapper display="flex" justifyContent="center">
+        <Chip>카드사 선택</Chip>
+      </ChipWrapper>
+
       <Form onSubmit={onSubmit}>
         <FormFieldControl>
           <FormFieldControl.Label>카드 번호</FormFieldControl.Label>
@@ -219,4 +224,7 @@ export default RegistrationCardPage;
 
 const Form = styled.form`
   margin: 30px;
+`;
+const ChipWrapper = styled(Box)`
+  margin: 10px 0;
 `;
