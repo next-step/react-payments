@@ -24,6 +24,7 @@ input {
   height: 730px;
   position: relative;
   border-radius: 15px;
+  overflow: auto;
 }
 
 .app {
@@ -39,4 +40,9 @@ input {
   align-items: center;
 
   color: #383838;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
 }
