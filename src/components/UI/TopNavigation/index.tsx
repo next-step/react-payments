@@ -1,15 +1,15 @@
-import { memo } from 'react';
+import { memo, PropsWithChildren } from 'react';
 
 import { Text, TopNavbar } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
 import { styled } from '@/lib/stitches.config';
 
-const TopNavigation = () => {
+const TopNavigation = ({ children }: PropsWithChildren) => {
   const { back } = useRouter();
   return (
-    <TopNavbar>
+    <TopNavbar css={{ display: 'flex', justifyContent: 'center' }}>
       <BackButton onClick={back}>{'<'}</BackButton>
-      <Text>카드 추가하기</Text>
+      <Text>{children}</Text>
     </TopNavbar>
   );
 };
@@ -17,6 +17,8 @@ const TopNavigation = () => {
 export default memo(TopNavigation);
 
 const BackButton = styled('button', {
+  position: 'absolute',
+  left: '0',
   border: 0,
   padding: '0 1rem',
   fontSize: '$4',
