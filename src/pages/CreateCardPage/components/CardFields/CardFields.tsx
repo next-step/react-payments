@@ -52,6 +52,7 @@ const CardFields = () => {
         <TextButton
           text="다음"
           disabled={isDisabled(data)}
+          type="button"
           onClick={handleNextButtonClick}
         />
       </TextButtonContainer>
