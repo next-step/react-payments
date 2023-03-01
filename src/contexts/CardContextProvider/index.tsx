@@ -2,7 +2,7 @@ import { createContext, Dispatch, PropsWithChildren, useReducer } from 'react';
 
 import { addOrUpdateCard, filterCards } from './model';
 
-import type { Card } from 'types/card';
+import type { CardType as Card } from 'types/card';
 
 export interface CardContextBaseState {
   cards: Card[];

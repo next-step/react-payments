@@ -6,10 +6,16 @@ import { Masking } from 'components/domain';
 import { MAX_LENGTH } from 'constants/card';
 import { theme } from 'constants/colors';
 
-import { CardCompany } from 'types/card';
-import type { CardBaseProps } from 'types/card';
+import { CardCompany, CardNumber, ExpiredDate } from 'types/card';
 
-function Card({ company = CardCompany.Hana, cardOwner, cardNumber, expiredDate }: CardBaseProps) {
+export interface CardProps {
+  company?: CardCompany;
+  cardOwner: string;
+  cardNumber: CardNumber;
+  expiredDate: ExpiredDate;
+}
+
+function Card({ company = CardCompany.Hana, cardOwner, cardNumber, expiredDate }: CardProps) {
   const { num1, num2, num3, num4 } = cardNumber;
   const { year, month } = expiredDate;
 

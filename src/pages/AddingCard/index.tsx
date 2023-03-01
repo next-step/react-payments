@@ -14,7 +14,7 @@ import { Button, Header, Label } from 'components/common';
 import { useCardNumber, useExpiredDate, useCardOwner, useCompanyPicker } from './hooks';
 
 import { PATHS } from 'constants/router';
-import type { CardBaseProps } from 'types/card';
+import type { CardType } from 'types/card';
 
 function AddingCard() {
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ function AddingCard() {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    const navigateState: CardBaseProps = {
+    const navigateState: CardType = {
       cardNumber,
       expiredDate,
       cardOwner,

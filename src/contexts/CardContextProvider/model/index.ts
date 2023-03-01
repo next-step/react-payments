@@ -1,4 +1,4 @@
-import type { Card, CardNumber } from 'types/card';
+import type { CardType as Card, CardNumber } from 'types/card';
 
 const concatCardNumber = (cardNumber: CardNumber) => Object.values(cardNumber).join('');
 const isMatchedCard = (cardA: Card, cardB: Card) =>

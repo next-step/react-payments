@@ -26,14 +26,10 @@ export type CardPassword = {
   password2: string;
 };
 
-export interface CardBaseProps {
-  company?: CardCompany;
+export interface CardType {
   cardOwner: string;
   cardNumber: CardNumber;
   expiredDate: ExpiredDate;
-}
-
-export interface Card extends Omit<CardBaseProps, 'company'> {
   company: CardCompany;
-  alias: string;
+  alias?: string;
 }
