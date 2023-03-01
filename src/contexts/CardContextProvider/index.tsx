@@ -9,13 +9,13 @@ export interface CardContextBaseState {
 }
 
 const ACTION_TYPE = {
-  ADD_CARD: 'ADD_CARD',
+  ADD_OR_UPDATE_CARD: 'ADD_OR_UPDATE_CARD',
   DELETE_CARD: 'DELETE_CARD',
 } as const;
 
 type Action =
   | {
-      type: typeof ACTION_TYPE.ADD_CARD;
+      type: typeof ACTION_TYPE.ADD_OR_UPDATE_CARD;
       payload: Card;
     }
   | {
@@ -33,7 +33,7 @@ export const CardDispatchContext = createContext<CardDisptach>(() => null);
 
 function reducer(state: CardContextBaseState, action: Action) {
   switch (action.type) {
-    case ACTION_TYPE.ADD_CARD: {
+    case ACTION_TYPE.ADD_OR_UPDATE_CARD: {
       return {
         cards: addOrUpdateCard(state.cards, action.payload),
       };

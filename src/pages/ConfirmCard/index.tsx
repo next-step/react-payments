@@ -2,23 +2,32 @@ import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Card } from 'components/domain';
-import { Button } from 'components/common';
+import { Button, Input } from 'components/common';
+
+import { useCardDispatch } from 'contexts/CardContextProvider/hooks';
 
 import { PATHS } from 'constants/router';
 import { MAX_LENGTH } from 'constants/card';
-import type { CardBaseProps } from 'types/card';
+import type { CardBaseProps, CardCompany } from 'types/card';
+
+interface CardProps extends Omit<CardBaseProps, 'company'> {
+  company: CardCompany;
+}
 
 function ConrimCard() {
   const [alias, setAlias] = useState('');
+  const dispatch = useCardDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const card = location.state as CardBaseProps;
+  const card = location.state as CardProps;
 
   const handleChangeAlias: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setAlias(e.target.value);
   };
 
   const handleClickNextButton = () => {
+    dispatch({ type: 'ADD_OR_UPDATE_CARD', payload: { ...card, alias } });
+
     navigate(PATHS.HOME, { replace: true });
   };
 
@@ -29,7 +38,7 @@ function ConrimCard() {
       </div>
       <Card {...card} />
       <div className="input-container flex-center w-100">
-        <input
+        <Input
           className="input-underline w-75"
           type="text"
           placeholder="카드 별칭 (선택)"
