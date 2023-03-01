@@ -27,17 +27,12 @@ const RegistrationCardPage = () => {
   const { push } = useRouter();
   const { card, changeCardInfo } = useCardData();
 
-  const isValidCardLength = () => {
-    return card.number.length === CARD_LENGTH
-      ? ValidationStatus.SUCCESS
-      : ValidationStatus.ERROR;
+  const isInvalidCardLength = () => {
+    return card.number != '' && card.number.length < CARD_LENGTH;
   };
 
   const isSubmitEnabled = useMemo(() => {
-    return (
-      isObjectComplete<CreditCardType>(card) &&
-      isValidCardLength() === 'success'
-    );
+    return isObjectComplete<CreditCardType>(card) && !isInvalidCardLength();
   }, [{ ...card }]);
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +71,10 @@ const RegistrationCardPage = () => {
     changeCardInfo({ password: [...newPassword] });
   };
 
+  // const onChange = (e: any) => {
+  //   console.log(e);
+  // };
+
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLocalStorageItem('CardValues', card);
@@ -95,35 +94,32 @@ const RegistrationCardPage = () => {
       <Form onSubmit={onSubmit}>
         <FormFieldControl>
           <FormFieldControl.Label>카드 번호</FormFieldControl.Label>
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <TextField
-              placeholder="0000-0000-0000-0000"
-              type="text"
-              inputMode="numeric"
-              maxLength={19}
-              validationStatus={isValidCardLength()}
-              value={card?.number}
-              onChange={handleNumber}
-              className="w-100"
-            />
-          </Box>
+          <TextField
+            placeholder="0000-0000-0000-0000"
+            type="text"
+            inputMode="numeric"
+            maxLength={19}
+            validationStatus={isInvalidCardLength() ? 'error' : 'success'}
+            value={card?.number}
+            onChange={handleNumber}
+            className="w-100"
+          />
+          {isInvalidCardLength() && (
+            <FormFieldControl.Description isError={isInvalidCardLength()}>
+              카드 번호는 16자 모두 입력되어야 합니다.
+            </FormFieldControl.Description>
+          )}
         </FormFieldControl>
 
         <FormFieldControl>
           <FormFieldControl.Label>만료일</FormFieldControl.Label>
-          <Box display="flex" alignItems="center">
-            <TextField
-              placeholder="MM / YY"
-              maxLength={5}
-              value={card?.expiration}
-              onChange={handleExpiration}
-              className="w-30"
-            />
-          </Box>
+          <TextField
+            placeholder="MM / YY"
+            maxLength={5}
+            value={card?.expiration}
+            onChange={handleExpiration}
+            className="w-30"
+          />
         </FormFieldControl>
 
         <FormFieldControl>
