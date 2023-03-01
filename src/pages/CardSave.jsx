@@ -8,7 +8,7 @@ const CardSave = ({ cardInfo, onSave, onChange }) => {
       <div className="flex-center">
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
-      <Card isRegistered={true} cardInfo={cardInfo} size="big" />
+      <Card cardInfo={cardInfo} size="big" />
       <div className="input-container flex-center w-100">
         <Input
           id="nickname"
@@ -19,11 +19,7 @@ const CardSave = ({ cardInfo, onSave, onChange }) => {
           onChange={onChange}
         />
       </div>
-      <Button
-        className="button-box registor-button"
-        children="다음"
-        onClick={onSave}
-      />
+      <Button className="button-box registor-button" children="다음" onClick={onSave} />
     </main>
   );
 };
