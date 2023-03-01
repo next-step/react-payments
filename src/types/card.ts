@@ -32,3 +32,8 @@ export interface CardBaseProps {
   cardNumber: CardNumber;
   expiredDate: ExpiredDate;
 }
+
+export interface Card extends Omit<CardBaseProps, 'company'> {
+  company: CardCompany;
+  alias: string;
+}
