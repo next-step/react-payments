@@ -6,9 +6,14 @@ const useRouter = <T>() => {
 
   const locationState = location.state as T;
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return {
     navigate,
     locationState,
+    goBack,
   };
 };
 

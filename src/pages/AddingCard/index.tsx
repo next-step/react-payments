@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 import {
   Card,
   CardNumberContainer,
@@ -11,13 +9,14 @@ import {
 } from 'components/domain';
 import { Button, Header, Label } from 'components/common';
 
+import { useRouter } from 'hooks';
 import { useCardNumber, useExpiredDate, useCardOwner, useCompanyPicker } from './hooks';
 
 import { PATHS } from 'constants/router';
 import type { ICard } from 'types/card';
 
 function AddingCard() {
-  const navigate = useNavigate();
+  const { navigate, goBack } = useRouter();
   const { cardNumber, handleChangeCardNumber } = useCardNumber();
   const { expiredDate, handleChangeExpiredDate } = useExpiredDate();
   const { cardOwner, handleChangeCardOwner } = useCardOwner();
@@ -40,7 +39,7 @@ function AddingCard() {
     <div className="app">
       <Header
         title="카드 추가"
-        leftSideComponent={<Button fontSize={24} onClick={() => navigate(-1)}>{`<`}</Button>}
+        leftSideComponent={<Button fontSize={24} onClick={goBack}>{`＜`}</Button>}
       />
       <Label>카드사 선택</Label>
       <div onClick={openPicker}>
