@@ -1,3 +1,18 @@
+import { CardCompany, CardNumber, ExpirationDate } from "store/type";
+import {
+  CardBottomBox,
+  CardBottomBoxInfo,
+  CardChip,
+  CardCompanyText,
+  CardMiddleBox,
+  CardNumberBox,
+  CardText,
+  CardTopBox,
+  CardWrapper,
+  VariableWrapper,
+} from "./style";
+import React from "react";
+
 const isHypen = (number: string) => {
   return number.length === 4 ? " - " : "";
 };
@@ -10,42 +25,52 @@ const showCardExpiry = (month: string, year: string) => {
   return month ? `${month} / ${year || "YY"}` : "MM / YY";
 };
 
+type CardProps = {
+  cardNumbers: CardNumber;
+  cardExpiration: ExpirationDate;
+  cardOwnerName: string;
+  cardCompany: CardCompany;
+  size: "small" | "big";
+};
+
 const Card = ({
   cardNumbers,
   cardExpiration,
   cardOwnerName,
   cardCompany,
-}: any) => {
+  size,
+}: CardProps) => {
+
   return (
-    <div className="card-box">
-      <div className="empty-card" style={{ background: cardCompany.color }}>
-        <div className="card-top">
-          <span className="card-nick-name">{cardCompany.name}</span>
-        </div>
-        <div className="card-middle">
-          <div className="small-card__chip"></div>
-        </div>
-        <div className="card-bottom">
-          <div className="card-bottom__number">
-            <span className="card-text">
+    <CardWrapper>
+      <VariableWrapper size={size} style={{ background: cardCompany.color }}>
+        <CardTopBox>
+          <CardCompanyText size={size}>{cardCompany.name}</CardCompanyText>
+        </CardTopBox>
+        <CardMiddleBox>
+          <CardChip size={size}></CardChip>
+        </CardMiddleBox>
+        <CardBottomBox>
+          <CardNumberBox>
+            <CardText size={size}>
               {cardNumbers[0]} {isHypen(cardNumbers[0])}
               {cardNumbers[1]} {isHypen(cardNumbers[1])}
               {maskingCardNumbers(cardNumbers[2])} {isHypen(cardNumbers[2])}
               {maskingCardNumbers(cardNumbers[3])}
-            </span>
-          </div>
-          <div className="card-bottom__info">
-            <span className="card-text text-elipsis">
+            </CardText>
+          </CardNumberBox>
+          <CardBottomBoxInfo>
+            <CardText size={size} elipsis={"yes"}>
               {showCardName(cardOwnerName)}
-            </span>
-            <span className="card-text">
+            </CardText>
+            <CardText size={size}>
               {showCardExpiry(cardExpiration.month, cardExpiration.year)}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+            </CardText>
+          </CardBottomBoxInfo>
+        </CardBottomBox>
+      </VariableWrapper>
+    </CardWrapper>
   );
 };
 
-export default Card;
+export default React.memo(Card);

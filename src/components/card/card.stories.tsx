@@ -21,11 +21,4 @@ Default.args = {
     year: "23",
   },
   cardOwnerName: '힝구',
-  onClick: action("onClick"),
-  isHypen: () => " - ",
-  maskingCardNumbers: (number: string) => number.replace(/./g, "*"),
-  showCardName: (name: string) => (name ? name : "NAME"),
-  showCardExpiry: (month: string, year: string) => {
-    return month ? `${month} / ${year || "YY"}` : "MM / YY";
-  }
 };

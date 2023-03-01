@@ -1,8 +1,8 @@
 import Card from "components/card";
+import { SubWrapper, Wrapper } from "components/common/ui";
 import Header from "components/header/header";
 import CardForm from "components/input/CardForm";
 import AddCardModal from "components/modal/AddCardModal";
-import { PaymentsProvider } from "store/Provider";
 import { usePayments } from "store/context";
 
 const CardPreview = () => {
@@ -22,6 +22,7 @@ const CardPreview = () => {
         cardExpiration={cardExpiration}
         cardOwnerName={cardOwnerName}
         cardCompany={cardCompany}
+        size={"small"}
       />
       {isModalOpen && <AddCardModal handleCardCompany={handleCardCompany} />}
     </>
@@ -30,21 +31,21 @@ const CardPreview = () => {
 
 const Content = () => {
   return (
-    <PaymentsProvider>
+    <>
       <CardPreview />
       <CardForm />
-    </PaymentsProvider>
+    </>
   );
 };
 
 const AddCardPage = () => {
   return (
-    <div className="root">
-      <div className="app">
+    <Wrapper>
+      <SubWrapper>
         <Header title="카드추가" />
         <Content />
-      </div>
-    </div>
+      </SubWrapper>
+    </Wrapper>
   );
 };
 export default AddCardPage;

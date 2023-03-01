@@ -64,8 +64,10 @@
     "@storybook/preset-create-react-app": "^4.1.2",
     "@storybook/react": "^6.5.16",
     "@storybook/testing-library": "^0.0.13",
+    "@types/styled-components": "^5.1.26",
     "babel-plugin-named-exports-order": "^0.0.2",
     "prop-types": "^15.8.1",
-    "webpack": "^5.75.0"
+    "webpack": "^5.75.0",
+    "@stitches/react": "^1.2.8"
   }
 }
