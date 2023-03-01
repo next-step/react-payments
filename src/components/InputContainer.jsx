@@ -6,7 +6,7 @@ const InputContainer = ({
   cardInfo,
   onChange,
   inputBoxClass = '',
-  hasBoxClass = true,
+  hasBoxClass = true
 }) => {
   return (
     <div className="input-container">

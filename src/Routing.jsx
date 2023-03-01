@@ -1,49 +1,45 @@
-import CardList from "./pages/CardList";
-import CardRegist from "./pages/CardRegist";
-import { Routes, Route } from "react-router-dom";
-import usePayment from "./hooks/usePayment";
-import CardSave from "./pages/CardSave";
+import { PATH } from './Constant';
+import CardList from './pages/CardList';
+import CardRegist from './pages/CardRegist';
+import { Routes, Route } from 'react-router-dom';
+import usePayment from './hooks/usePayment';
+import CardSave from './pages/CardSave';
+import useRoute from './hooks/useRoute';
 
 const Routing = () => {
   const {
     cardInfo,
-    onHandleCardInfoInput,
-    onHandleSave,
-    onHandleSubmit,
+    handleCardInfoInput,
+    handleSave,
+    handleSubmit,
     cardList,
     cardCompanyList,
-    onHandleCompanyPopupClick,
-    isShowPopup,
-    onHandleResetCardInfo,
-    setIsShowPopup,
+    handleResetCardInfo,
+    setCardInfo
   } = usePayment();
+
+  const { movePage } = useRoute();
 
   return (
     <Routes>
-      <Route path="/" element={<CardList cardList={cardList} />} />
+      <Route path={PATH.HOME} element={<CardList cardList={cardList} movePage={movePage} />} />
       <Route
-        path="/regist"
+        path={PATH.REGIST}
         element={
           <CardRegist
             cardInfo={cardInfo}
-            onChange={onHandleCardInfoInput}
-            onSubmit={onHandleSubmit}
+            onChange={handleCardInfoInput}
+            onSubmit={handleSubmit}
             cardCompanyList={cardCompanyList}
-            onClickPopup={onHandleCompanyPopupClick}
-            isShowPopup={isShowPopup}
-            onReset={onHandleResetCardInfo}
-            onShow={setIsShowPopup}
+            setCardInfo={setCardInfo}
+            onReset={handleResetCardInfo}
           />
         }
       />
       <Route
-        path="/save"
+        path={PATH.SAVE}
         element={
-          <CardSave
-            onSave={onHandleSave}
-            cardInfo={cardInfo}
-            onChange={onHandleCardInfoInput}
-          />
+          <CardSave onSave={handleSave} cardInfo={cardInfo} onChange={handleCardInfoInput} />
         }
       />
     </Routes>

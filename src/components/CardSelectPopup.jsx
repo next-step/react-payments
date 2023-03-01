@@ -8,12 +8,10 @@ const CardSelectPopup = ({ cardCompanyList, onClick }) => {
               <div
                 className="modal-item-container"
                 key={company}
-                id={`${company}-${backgroundColor}`}
+                data-company={company}
+                data-bgcolor={backgroundColor}
               >
-                <div
-                  className="modal-item-dot"
-                  style={{ background: backgroundColor }}
-                ></div>
+                <div className="modal-item-dot" style={{ background: backgroundColor }}></div>
                 <span className="modal-item-name">{company}</span>
               </div>
             ))}

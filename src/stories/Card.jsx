@@ -1,7 +1,8 @@
-import Btn from "./Btn";
-import React from "react";
-import PropTypes from "prop-types";
-import "../styles/card.css";
+import Btn from './Btn';
+import React from 'react';
+import PropTypes from 'prop-types';
+import '../styles/card.css';
+
 //👇 컴포넌트의 Docs에서의 설명 부분
 /**
  * Render Card
@@ -10,14 +11,9 @@ import "../styles/card.css";
 const Card = ({ isRegistered, cardInfo, size }) => (
   <>
     <div className="card-box">
-      {!isRegistered && (
-        <Btn to="/regist" children="+" className="empty-card button-box" />
-      )}
+      {!isRegistered && <Btn to="/regist" children="+" className="empty-card button-box" />}
       {isRegistered && (
-        <div
-          className={`${size}-card`}
-          style={{ backgroundColor: cardInfo.backgroundColor }}
-        >
+        <div className={`${size}-card`} style={{ backgroundColor: cardInfo.backgroundColor }}>
           <div className="card-top">
             <span className="card-text">{cardInfo.company}</span>
           </div>
@@ -47,21 +43,21 @@ export default Card;
 Card.propTypes = {
   isRegistered: PropTypes.bool,
   cardInfo: PropTypes,
-  size: PropTypes.oneOf(["small", "big"]),
+  size: PropTypes.oneOf(['small', 'big'])
 };
 
 Card.defaultProps = {
-  isRegistered: true,
+  isRegistered: false,
   cardInfo: {
-    company: "",
-    number: "",
-    owner: "",
-    expiry: "",
-    nickname: "",
-    cvc: "",
-    password1: "",
-    password2: "",
-    backgroundColor: "#e5e5e5",
+    company: '',
+    number: '',
+    owner: '',
+    expiry: '',
+    nickname: '',
+    cvc: '',
+    password1: '',
+    password2: '',
+    backgroundColor: '#e5e5e5'
   },
-  size: "small",
+  size: 'small'
 };
