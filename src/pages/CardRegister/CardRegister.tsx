@@ -4,6 +4,7 @@ import { CreditCard } from '@/components/UI';
 import { Button } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
 import { getItem, setItem } from '@/storage/storage';
+import { StorageKey } from '@/storage/storageKey';
 import { type CardFormType, CardKey } from '@/types';
 
 export const initialCardState: CardFormType = {
@@ -64,7 +65,10 @@ export const CardRegister = () => {
       {}
     );
 
-    setItem('cardList', [...(getItem('cardList') ?? []), newCard]);
+    setItem(StorageKey.CARD_LIST, [
+      ...(getItem(StorageKey.CARD_LIST) ?? []),
+      newCard,
+    ]);
     go('/register-confirm');
   };
 
@@ -72,11 +76,11 @@ export const CardRegister = () => {
     <>
       <CreditCard cardInfo={cardDisplayInfo} />
       <CardForm />
-          <Button
-              css={{ position: 'absolute', bottom: '$5', width: '$11' }}
-              disabled={!isAllValid}
-              onClick={handleSubmit}
-          >
+      <Button
+        css={{ position: 'absolute', bottom: '$5', width: '$11' }}
+        disabled={!isAllValid}
+        onClick={handleSubmit}
+      >
         추가하기
       </Button>
     </>
