@@ -1,6 +1,8 @@
 import Overlay from './Overlay';
 import ModalRow from './ModalRow';
 import { useState } from 'react';
+import { useCard } from '../../../store/CardContext';
+import { CHANGE_CARD } from '../../../constants/action';
 
 export const Modal = ({ data }) => {
   const row1 = data.slice(0, 4);
@@ -9,13 +11,16 @@ export const Modal = ({ data }) => {
   const [isClicked, setIsClicked] = useState(false);
   const className = isClicked ? 'modal-closed' : 'modal-open';
 
+  const { changeCardInfo } = useCard();
+
   const closeModal = (isClicked) => {
     setIsClicked(isClicked);
+    //TODO: [UI] animation 추가
   };
   const handleCompanySelected = (isClicked, selectedId) => {
     closeModal(isClicked);
+    changeCardInfo(CHANGE_CARD.COMPANY, selectedId);
     //TODO: 선택된 id로 카드정보 변경 및 카드 색상 변경 로직 추가
-    //TODO: [UI] 1) modal 위치 중앙으로 옮기기 2) animation 추가
   };
 
   return (

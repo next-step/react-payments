@@ -8,6 +8,8 @@ const initialState = {
   cardOwner: '',
   cardCVC: '',
   cardPassword: '',
+  cardCompanyId: 0,
+  cardNickname: '',
   error: '',
 };
 
@@ -20,7 +22,6 @@ export const CardProvider = ({ children }) => {
     dispatch({ type: actionType, payload: cardInfo });
   };
 
-  console.log(cardInfo);
   //TODO: 닉네임 상태관리
 
   return (

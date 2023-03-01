@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useCard } from '../../../store/CardContext';
-import { cardCompanies } from '../../../store/cardCompanies';
+import { cardCompanies } from '../../../server/cardCompanies';
 
 const Card = ({
   cardName,

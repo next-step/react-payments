@@ -12,6 +12,10 @@ export const cardReducer = (state, action) => {
       return { ...state, cardCVC: action.payload };
     case CHANGE_CARD.PW:
       return { ...state, cardPassword: action.payload };
+    case CHANGE_CARD.COMPANY:
+      return { ...state, cardCompanyId: action.payload };
+    case CHANGE_CARD.NICKNAME:
+      return { ...state, cardNickname: action.payload };
     case CHANGE_CARD.ERROR:
       return { ...state, error: action.payload };
     default:
