@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import useNumberInput from '../../hooks/useNumberInput';
+import React, { useCallback, useRef, useState } from 'react';
 import { setFocus } from '../../util/input';
 import { replaceNumberOnly } from '../../util/number';
 
@@ -19,41 +18,47 @@ function ExpiredInput({ onChange }: TExpiredInputChange) {
     {
       placeholder: 'MM',
       maxLength: MAX_LENGTH,
-      onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value;
-        const parsedValue = parseInt(replaceNumberOnly(value), 10);
-        if (value === '') {
-          setExpiredMonth(value);
-          return;
-        } else if (isNaN(parsedValue)) {
-          return;
-        } else if (parsedValue > 12) {
-          setExpiredMonth('12');
-        } else {
-          setExpiredMonth(value);
-        }
+      onChange: useCallback(
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+          const value = event.target.value;
+          const parsedValue = parseInt(replaceNumberOnly(value), 10);
+          if (value === '') {
+            setExpiredMonth(value);
+            return;
+          } else if (isNaN(parsedValue)) {
+            return;
+          } else if (parsedValue > 12) {
+            setExpiredMonth('12');
+          } else {
+            setExpiredMonth(value);
+          }
 
-        if (value.length === MAX_LENGTH && yearRefs) {
-          setFocus(yearRefs);
-        }
+          if (value.length === MAX_LENGTH && yearRefs) {
+            setFocus(yearRefs);
+          }
 
-        onChange?.(value, expiredYear);
-      },
+          onChange?.(value, expiredYear);
+        },
+        [monthRefs, expiredMonth]
+      ),
       value: expiredMonth,
     },
     {
       placeholder: 'YY',
       maxLength: MAX_LENGTH,
-      onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value;
-        setExpiredYear(value);
+      onChange: useCallback(
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+          const value = event.target.value;
+          setExpiredYear(value);
 
-        if (value.length === 0 && monthRefs) {
-          setFocus(monthRefs);
-        }
+          if (value.length === 0 && monthRefs) {
+            setFocus(monthRefs);
+          }
 
-        onChange?.(expiredMonth, value);
-      },
+          onChange?.(expiredMonth, value);
+        },
+        [yearRefs, expiredYear]
+      ),
       value: expiredYear,
     },
   ];

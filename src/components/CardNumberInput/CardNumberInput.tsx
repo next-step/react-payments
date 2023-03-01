@@ -33,4 +33,4 @@ function CardNumberInput({ onChange }: TCardComponentProps<string[]>) {
   );
 }
 
-export default CardNumberInput;
+export default React.memo(CardNumberInput);

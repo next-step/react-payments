@@ -25,4 +25,4 @@ function Frame({ title, backLink, children }: TFrameProps) {
   );
 }
 
-export default Frame;
+export default React.memo(Frame);

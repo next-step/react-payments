@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { TCardComponentProps } from '../../domain/payments/types';
 
 function OwnerInput({ onChange }: TCardComponentProps<string>) {
   const [owner, setOwner] = useState('');
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const value = event.target.value;
 
-    setOwner(value);
-    onChange?.(value);
-  };
+      setOwner(value);
+      onChange?.(value);
+    },
+    [owner]
+  );
 
   return (
     <div className="input-container">

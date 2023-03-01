@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import routerContext from '../../context/routerContext';
 
 type TLinkProps = {
@@ -9,10 +9,14 @@ type TLinkProps = {
 function Link({ to, children }: TLinkProps) {
   const { changePath } = useContext(routerContext);
 
-  const handleClick = (event: React.MouseEvent) => {
-    event.preventDefault();
-    changePath(to);
-  };
+  const handleClick = useCallback(
+    (event: React.MouseEvent) => {
+      event.preventDefault();
+      changePath(to);
+    },
+    [to]
+  );
+
   return (
     <a href={to} onClick={handleClick}>
       {children}
@@ -20,4 +24,4 @@ function Link({ to, children }: TLinkProps) {
   );
 }
 
-export default Link;
+export default React.memo(Link);

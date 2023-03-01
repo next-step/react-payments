@@ -1,17 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Card } from '../../components/Card';
 import { Frame } from '../../components/Frame';
-import { useNavigate } from '../../components/Router';
 
 function CardDetail() {
-  // useNavigate 확인용 함수
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     navigate('/');
-  //   }, 1000);
-  // }, []);
-
   return (
     <Frame>
       <div className="app flex-column-center">

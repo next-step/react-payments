@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import routerContext from '../../context/routerContext';
 
 type TRouterProps = {
@@ -8,27 +8,33 @@ type TRouterProps = {
 function Router({ children }: TRouterProps) {
   const [path, setPath] = useState(window.location.pathname);
 
-  const changePath = (to: string) => {
-    setPath(to);
-    window.history.pushState({ path }, '', to);
-  };
+  const changePath = useCallback(
+    (to: string) => {
+      setPath(to);
+      window.history.pushState({ path }, '', to);
+    },
+    [path]
+  );
 
-  const contextValue = {
-    path,
-    changePath,
-  };
+  const handleOnPopState = useCallback(
+    (event: PopStateEvent) => {
+      changePath(event.state?.path || '/');
+    },
+    [path]
+  );
 
   useEffect(() => {
-    const handleOnPopState = (event: PopStateEvent) => {
-      changePath(event.state?.path || '/');
-    };
-
     window.addEventListener('popstate', handleOnPopState);
 
     return () => {
       window.removeEventListener('popstate', handleOnPopState);
     };
   }, []);
+
+  const contextValue = {
+    path,
+    changePath,
+  };
 
   return <routerContext.Provider value={contextValue}>{children}</routerContext.Provider>;
 }
