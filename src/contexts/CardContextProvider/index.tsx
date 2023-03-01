@@ -2,10 +2,10 @@ import { createContext, Dispatch, PropsWithChildren, useReducer } from 'react';
 
 import { addOrUpdateCard, filterCards } from './model';
 
-import type { CardType as Card } from 'types/card';
+import type { ICard } from 'types/card';
 
 export interface CardContextBaseState {
-  cards: Card[];
+  cards: ICard[];
 }
 
 const ACTION_TYPE = {
@@ -16,11 +16,11 @@ const ACTION_TYPE = {
 type Action =
   | {
       type: typeof ACTION_TYPE.ADD_OR_UPDATE_CARD;
-      payload: Card;
+      payload: ICard;
     }
   | {
       type: typeof ACTION_TYPE.DELETE_CARD;
-      payload: Card;
+      payload: ICard;
     };
 
 const initalState: CardContextBaseState = {

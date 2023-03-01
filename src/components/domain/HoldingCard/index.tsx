@@ -7,12 +7,12 @@ import { Button } from 'components/common';
 import { useCardDispatch } from 'contexts/CardContextProvider/hooks';
 
 import { PATHS } from 'constants/router';
-import { CardType } from 'types/card';
+import { ICard } from 'types/card';
 
 const PROMPT_MESSAGE = '정말로 등록된 카드를 삭제하시겠습니까?';
 
 interface HodingCardProps {
-  card: CardType;
+  card: ICard;
 }
 
 function HoldingCard({ card }: HodingCardProps) {

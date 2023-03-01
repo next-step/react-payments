@@ -26,7 +26,7 @@ export type CardPassword = {
   password2: string;
 };
 
-export interface CardType {
+export interface ICard {
   cardOwner: string;
   cardNumber: CardNumber;
   expiredDate: ExpiredDate;

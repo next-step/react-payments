@@ -4,7 +4,7 @@ import { HoldingCard } from 'components/domain';
 
 import { useCardState } from 'contexts/CardContextProvider/hooks';
 
-import { CardType } from 'types/card';
+import { ICard } from 'types/card';
 
 function HoldingCards() {
   const { cards } = useCardState();
@@ -24,6 +24,6 @@ function HoldingCards() {
   );
 }
 
-const cardNumberToString = (card: CardType) => Object.values(card.cardNumber).toString();
+const cardNumberToString = (card: ICard) => Object.values(card.cardNumber).toString();
 
 export default HoldingCards;

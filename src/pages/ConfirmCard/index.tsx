@@ -8,7 +8,7 @@ import { useCardDispatch } from 'contexts/CardContextProvider/hooks';
 
 import { PATHS } from 'constants/router';
 import { MAX_LENGTH } from 'constants/card';
-import type { CardType } from 'types/card';
+import type { ICard } from 'types/card';
 
 const TITLE = {
   ADD: '카드등록이 완료되었습니다.',
@@ -16,7 +16,7 @@ const TITLE = {
 };
 
 function ConrimCard() {
-  const { navigate, locationState: card } = useRouter<CardType>();
+  const { navigate, locationState: card } = useRouter<ICard>();
   const [alias, setAlias] = useState(card.alias ?? '');
   const dispatch = useCardDispatch();
   const title = card.alias ? TITLE.UPDATE : TITLE.ADD;

@@ -1,16 +1,16 @@
-import type { CardType as Card, CardNumber } from 'types/card';
+import type { ICard, CardNumber } from 'types/card';
 
 const concatCardNumber = (cardNumber: CardNumber) => Object.values(cardNumber).join('');
-const isMatchedCard = (cardA: Card, cardB: Card) =>
+const isMatchedCard = (cardA: ICard, cardB: ICard) =>
   concatCardNumber(cardA.cardNumber) === concatCardNumber(cardB.cardNumber);
 
-export const filterCards = (cards: Card[], target: Card) => {
+export const filterCards = (cards: ICard[], target: ICard) => {
   const filteredCards = cards.filter((card) => !isMatchedCard(card, target));
 
   return filteredCards;
 };
 
-export const addOrUpdateCard = (cards: Card[], newCard: Card) => {
+export const addOrUpdateCard = (cards: ICard[], newCard: ICard) => {
   const existedCard = cards.find((card) => isMatchedCard(card, newCard));
 
   if (!existedCard) {
