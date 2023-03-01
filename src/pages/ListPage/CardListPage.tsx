@@ -1,10 +1,14 @@
-import { useNavigate } from "react-router-dom";
+import Card from "components/card";
+import { useRouter } from "hooks/useRouter";
+import React from "react";
+import { usePayments } from "store/context";
 
 const CardListPage = () => {
-  const navigate = useNavigate();
-  
+  const { go } = useRouter();
+  const { cards } = usePayments();
+
   const moveRegistCard = () => {
-    navigate('regist-card')
+    go("regist-card");
   };
 
   return (
@@ -13,8 +17,23 @@ const CardListPage = () => {
         <div className="flex-center">
           <h2 className="page-title mb-10">보유 카드</h2>
         </div>
+        {cards.map((card, idx) => (
+          <>
+            <Card
+              key={idx}
+              cardNumbers={card.cardNumbers}
+              cardExpiration={card.cardExpiration}
+              cardOwnerName={card.cardOwnerName}
+              cardCompany={card.cardCompany}
+              size={"small"}
+            />
+            <span>{card.cardNickName}</span>
+          </>
+        ))}
         <div className="card-box">
-          <div className="empty-card" onClick={moveRegistCard}>+</div>
+          <div className="empty-card" onClick={moveRegistCard}>
+            +
+          </div>
         </div>
       </div>
     </div>
