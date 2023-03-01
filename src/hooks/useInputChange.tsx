@@ -1,17 +1,28 @@
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 
-export const useInputChange = () => {
-  const handleInputChange = <T extends object>(
-    setValue: Dispatch<SetStateAction<T>>
-  ) => {
-    return (event: ChangeEvent<HTMLInputElement>) => {
-      event.persist();
-      setValue((prev) => ({
-        ...prev,
-        [event.target.name]: event.target.value,
-      }));
-    };
-  };
+function handleInputChange(
+  input: Dispatch<SetStateAction<object>>
+): (e: ChangeEvent<HTMLInputElement>) => void;
+function handleInputChange(
+  input: Dispatch<SetStateAction<string>>
+): (e: ChangeEvent<HTMLInputElement>) => void;
 
+function handleInputChange(setValue: any) {
+  return (event: ChangeEvent<HTMLInputElement>) => {
+    event.persist();
+    const { value, name } = event.target;
+    setValue((prev: object | string) =>
+      isObjectState(prev)
+        ? {
+            ...prev,
+            [name]: value,
+          }
+        : value
+    );
+  };
+}
+
+export const useInputChange = () => {
   return handleInputChange;
 };
+const isObjectState = (v: any): v is object => typeof v == 'object';
