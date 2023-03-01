@@ -3,6 +3,7 @@ import {
 	ActionType,
 	ADD_CARD,
 	ADD_CARD_INFO,
+	EDIT_CARD,
 	SelectedCardInfo,
 	SET_SELECTED_CARD,
 } from 'modules/payments/PaymentsActionType';
@@ -56,6 +57,25 @@ function PaymentsReducer(
 				...state,
 				cardList: [newCard, ...state.cardList],
 				newCardInfo: {},
+			};
+		}
+		case EDIT_CARD: {
+			const { nickname } = action;
+
+			const cardList = state.cardList.map((card) => {
+				if (card.id === state?.selectedCard?.id) {
+					return {
+						...state.selectedCard,
+						nickname,
+					};
+				}
+				return card;
+			});
+			console.log(cardList);
+			return {
+				...state,
+				cardList,
+				selectedCard: {},
 			};
 		}
 		case SET_SELECTED_CARD: {

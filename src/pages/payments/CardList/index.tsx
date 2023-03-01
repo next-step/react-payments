@@ -19,6 +19,7 @@ const CardList = () => {
 
 	const handleCardClick = (selectedCard: SelectedCardInfo) => {
 		dispatch({ type: SET_SELECTED_CARD, selectedCard });
+		navigation(STEP.ADD_CARD_NICKNAME);
 	};
 
 	const handleCardAddClick = () => navigation(STEP.REGISTER_CARD);

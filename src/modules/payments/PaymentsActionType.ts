@@ -8,6 +8,7 @@ export type NewCardInfo = {
 	password2?: string;
 	title?: string;
 	backgroundColor?: string;
+	nickname?: string;
 };
 export const ADD_CARD_INFO = 'ADD_CARD_INFO';
 type AddCardInfo = {
@@ -21,6 +22,12 @@ type AddCard = {
 	nickname?: string;
 };
 
+export const EDIT_CARD = 'EDIT_CARD';
+type EditCard = {
+	type: typeof EDIT_CARD;
+	nickname?: string;
+};
+
 export type SelectedCardInfo = Exclude<NewCardInfo, null | undefined> | null;
 export const SET_SELECTED_CARD = 'SET_SELECTED_CARD';
 type SetSelectedCard = {
@@ -28,4 +35,4 @@ type SetSelectedCard = {
 	selectedCard: SelectedCardInfo;
 };
 
-export type ActionType = AddCardInfo | AddCard | SetSelectedCard;
+export type ActionType = AddCardInfo | AddCard | EditCard | SetSelectedCard;

@@ -7,22 +7,23 @@ import {
 	usePaymentsDispatch,
 	usePaymentsState,
 } from 'modules/payments/PaymentsContext';
-import { ADD_CARD } from 'modules/payments/PaymentsActionType';
+import { ADD_CARD, EDIT_CARD } from 'modules/payments/PaymentsActionType';
 import { useNavigate } from 'react-router';
 import { useCardForm } from 'hooks/useCardForm';
 
 const Completed = () => {
 	const navigate = useNavigate();
-	const {
-		ref: { nicknameInputRef },
-		handleCardInputChange,
-	} = useCardForm();
+	const { nickname, handleCardNicknameChange } = useCardForm();
 
-	const { newCardInfo } = usePaymentsState();
+	const { newCardInfo, selectedCard } = usePaymentsState();
 	const dispatch = usePaymentsDispatch();
 
 	const handleNextButtonClick = () => {
-		dispatch({ type: ADD_CARD, nickname: nicknameInputRef.current?.value });
+		if (selectedCard) {
+			dispatch({ type: EDIT_CARD, nickname });
+		} else {
+			dispatch({ type: ADD_CARD, nickname });
+		}
 
 		navigate(STEP.SHOW_CARD_LIST);
 	};
@@ -37,7 +38,7 @@ const Completed = () => {
 					</div>
 
 					<Card
-						input={newCardInfo}
+						input={selectedCard || newCardInfo}
 						backgroundColor={newCardInfo?.backgroundColor}
 						isBigCard
 					/>
@@ -48,12 +49,13 @@ const Completed = () => {
 						}}
 					>
 						<Input
+							maxLength={10}
 							className="input-underline"
-							ref={nicknameInputRef}
+							value={nickname}
 							type={'text'}
 							id={'nickname'}
 							placeholder={'카드의 별칭을 입력해주세요.'}
-							onChange={handleCardInputChange}
+							onChange={handleCardNicknameChange}
 						/>
 					</InputContainer>
 
