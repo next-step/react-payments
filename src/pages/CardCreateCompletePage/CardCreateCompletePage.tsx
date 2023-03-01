@@ -1,67 +1,29 @@
 import React from 'react';
 
-import { Card, Input, TextButton } from '@/components';
-import useCard from '@/store/hooks/useCard';
+import { TextButton } from '@/components';
 import styled from '@emotion/styled';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { CARD_LIST_ACTION, useCardListDispatch } from '@/store';
-import { CARD_COMPANIES, PLACEHOLDER_TEXT, ROUTE } from '@/constants';
+import { useLocation } from 'react-router-dom';
+import PreviewCompleteCard from './components/PreviewCompleteCard/PreviewCompleteCard';
+import CardNicknameEdit from './components/CardNicknameEdit/CardNicknameEdit';
 
 const CardCreateCompletePage = () => {
-  const cardNickNameFormId = 'cardNickNameForm';
   const location = useLocation();
-  const navigate = useNavigate();
-  const dispatch = useCardListDispatch();
 
-  const maxCardNickNameLength = 10;
   const cardId = Number(location.pathname.split('/')[3]);
-  // TODO : useCard 에서 에러가 발생하는 경우에 대한 처리
-  const {
-    cardNumber,
-    expirationMonth,
-    expirationYear,
-    ownerName,
-    cardCompany,
-  } = useCard(cardId);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const cardNickName = e.currentTarget.cardNickName.value;
-
-    dispatch(
-      CARD_LIST_ACTION.UPDATE_CARD_NICKNAME(
-        cardId,
-        cardNickName ? cardNickName : CARD_COMPANIES[cardCompany].name
-      )
-    );
-    navigate(ROUTE.CARD);
-  };
+  const cardNicknameFormId = 'cardNicknameForm';
 
   return (
     <CardCreateCompleteContainer>
-      <form id={cardNickNameFormId} onSubmit={handleSubmit}>
-        <h1>카드등록이 완료되었습니다.</h1>
-        <Card
-          card={{
-            cardNumber,
-            expirationMonth,
-            expirationYear,
-            ownerName,
-            cardCompany,
-          }}
-          size="big"
+      <section>
+        <PreviewCompleteCard
+          title="카드등록이 완료되었습니다."
+          cardId={cardId}
         />
-        <Input.LineInput
-          textAlign="center"
-          placeholder={PLACEHOLDER_TEXT.CARD_NICKNAME}
-          label="cardNickName"
-          name="cardNickName"
-          maxLength={maxCardNickNameLength}
-          width="70%"
-        />
-      </form>
+        <CardNicknameEdit formId={cardNicknameFormId} cardId={cardId} />
+      </section>
       <TextButtonContainer>
-        <TextButton form={cardNickNameFormId} type="submit" text="확인" />
+        <TextButton form={cardNicknameFormId} type="submit" text="확인" />
       </TextButtonContainer>
     </CardCreateCompleteContainer>
   );
@@ -79,18 +41,6 @@ const CardCreateCompleteContainer = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  h1 {
-    font-weight: 400;
-    font-size: 24px;
-    line-height: 28px;
-    margin-top: 130px;
-    margin-bottom: 24px;
-  }
 
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
   height: 100%;
 `;

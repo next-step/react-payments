@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyledTextButton } from './TextButton.style';
+import { Colors } from '@/styles/colors';
 
 type TextButtonProps = {
   text: string;
@@ -8,12 +9,14 @@ type TextButtonProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   label?: string;
   form?: string;
+  color?: Colors;
 };
 
 const TextButton = ({
   onClick,
   text,
   disabled,
+  color = 'primary',
   type,
   label,
   form,
@@ -25,6 +28,7 @@ const TextButton = ({
       type={type}
       aria-label={label}
       form={form}
+      fontColor={color}
     >
       {text}
     </StyledTextButton>

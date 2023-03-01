@@ -35,7 +35,7 @@ const CardFields = () => {
   const handleNextButtonClick = () => {
     const uniqueId = Date.now();
     dispatch(CARD_LIST_ACTION.APPEND_NEW_CARD(uniqueId, data));
-    navigate(ROUTE.CARD_CREATE + `/${uniqueId}`);
+    navigate(ROUTE.CARD_CREATE_COMPLETE(uniqueId.toString()));
   };
   return (
     <CardFieldForm>

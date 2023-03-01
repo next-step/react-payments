@@ -1,10 +1,13 @@
+import { Colors } from '@/styles/colors';
 import styled from '@emotion/styled';
 
-export const StyledTextButton = styled.button`
+export const StyledTextButton = styled.button<{
+  fontColor: Colors;
+}>`
   border: none;
   outline: none;
   background: none;
-  color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme, fontColor }) => theme.colors[fontColor]};
   cursor: pointer;
   font-weight: 700;
   font-size: 14px;

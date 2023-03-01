@@ -1,5 +1,10 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import { CreateCardPage, CardListPage, CardCreateCompletePage } from './pages';
+import {
+  CreateCardPage,
+  CardListPage,
+  CardCreateCompletePage,
+  CardNicknameEditPage,
+} from './pages';
 import { ROUTE } from './constants/route';
 
 const router = createBrowserRouter([
@@ -13,8 +18,12 @@ const router = createBrowserRouter([
   },
   { path: ROUTE.CARD_CREATE, element: <CreateCardPage /> },
   {
-    path: ROUTE.CARD_CREATE_COMPLETE,
+    path: ROUTE.CARD_CREATE_COMPLETE(),
     element: <CardCreateCompletePage />,
+  },
+  {
+    path: ROUTE.CARD_NICKNAME_EDIT(),
+    element: <CardNicknameEditPage />,
   },
 ]);
 

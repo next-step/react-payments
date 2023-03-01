@@ -30,7 +30,7 @@ const CardItem = ({
   const dispatch = useCardListDispatch();
 
   const handleClick = () => {
-    navigate(ROUTE.CARD_CREATE + `/${id}`);
+    navigate(ROUTE.CARD_NICKNAME_EDIT(id.toString()));
   };
 
   const handleDelete = () => {

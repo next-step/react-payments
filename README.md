@@ -97,5 +97,5 @@
   - [x] 카드를 삭제할 수 있다.
 
 - [ ] Custom Error 와 Error Boundary 구현
-- [ ] Nickname Edit page 구현
-  - [ ] Nickname Edit page 에서 카드 삭제 가능
+- [x] Nickname Edit page 구현
+  - [x] Nickname Edit page 에서 카드 삭제 가능
