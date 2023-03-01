@@ -8,6 +8,11 @@ import CardCVCInput from "./cardSecurityNumber";
 
 const CardForm = () => {
   const {
+    cardNumbers,
+    cardExpiration,
+    cardOwnerName,
+    cvc,
+    password,
     handleChangeCardNumber,
     handleChangeExpirationDate,
     handleCardOwner,
@@ -18,13 +23,23 @@ const CardForm = () => {
   return (
     <div>
       <form id="card-from">
-        <CardNumbersInput handleChangeCardNumber={handleChangeCardNumber} />
+        <CardNumbersInput
+          cardNumbers={cardNumbers}
+          handleChangeCardNumber={handleChangeCardNumber}
+        />
         <CardExpirationDateInput
+          cardExpiration={cardExpiration}
           handleChangeExpirationDate={handleChangeExpirationDate}
         />
-        <CardOwnerInput handleCardOwner={handleCardOwner} />
-        <CardCVCInput handleCvc={handleCvc} />
-        <CardPasswordInput handlePassword={handlePassword} />
+        <CardOwnerInput
+          cardOwnerName={cardOwnerName}
+          handleCardOwner={handleCardOwner}
+        />
+        <CardCVCInput cvc={cvc} handleCvc={handleCvc} />
+        <CardPasswordInput
+          password={password}
+          handlePassword={handlePassword}
+        />
       </form>
       <NextButton path={"/complete-add-card"} />
     </div>

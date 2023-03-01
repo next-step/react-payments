@@ -6,7 +6,8 @@ import { PaymentsProvider } from "store/Provider";
 import { usePayments } from "store/context";
 
 const CardPreview = () => {
-  const { cardNumbers, cardExpiration, cardOwnerName, isModalOpen } = usePayments();
+  const { cardNumbers, cardExpiration, cardOwnerName, isModalOpen } =
+    usePayments();
 
   return (
     <>
@@ -28,6 +29,7 @@ const Content = () => {
     </PaymentsProvider>
   );
 };
+
 const AddCardPage = () => {
   return (
     <div className="root">

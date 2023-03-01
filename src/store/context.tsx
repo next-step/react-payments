@@ -9,7 +9,7 @@ type PaymentsContext = {
   password: string[];
   isModalOpen: boolean;
   handleChangeCardNumber: (input: CardNumber) => void;
-  handleChangeExpirationDate: (input: ExpirationDate) => void;
+  handleChangeExpirationDate: (name: string, value: string) => void;
   handleCardOwner: (input: string) => void;
   handleCvc: (input: string) => void;
   handlePassword: (input: string[]) => void;

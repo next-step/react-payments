@@ -16,8 +16,12 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     setCardNumbers(cardNumbers);
   }, []);
 
-  const handleChangeExpirationDate = useCallback(({ month, year }: ExpirationDate) => {
-    setCardExpiration({ month, year });
+  const handleChangeExpirationDate = useCallback((name: string, value: string) => {
+    
+    setCardExpiration((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   }, [])
 
   const handleCardOwner = useCallback((value: string) => {

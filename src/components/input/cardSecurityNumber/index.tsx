@@ -1,25 +1,21 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent } from "react";
 
 const MAX_CVC_LENGTH = 3;
 
 type CardCVCInputProps = {
+  cvc: string;
   handleCvc: (input: string) => void;
 };
 
-const CardCVCInput = ({ handleCvc }: CardCVCInputProps) => {
-  const [cvc, setCvc] = useState<string>("");
+const CardCVCInput = ({ cvc, handleCvc }: CardCVCInputProps) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target as HTMLInputElement;
     if (Number.isNaN(+value)) {
       alert("보안코드는 숫자만 입력해주세요!");
       return;
     }
-    setCvc(value);
+    handleCvc(value);
   };
-
-  useEffect(() => {
-    handleCvc(cvc);
-  }, [cvc, handleCvc]);
 
   return (
     <div className="input-container">
