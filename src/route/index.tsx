@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes as ReactRouters } from 'react-router-dom';
 
-import { CardListPage } from '@/pages/CardListPage';
+import { CardListPage } from '@/pages/CardList';
 import { CardRegisterPage } from '@/pages/CardRegister';
 import { CardRegisterConfirmPage } from '@/pages/CardRegisterConfirmPage';
 
