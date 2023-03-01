@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes as ReactRouters } from 'react-router-dom';
 
 import { CardListPage } from '@/pages/CardListPage';
+import { CardRegisterPage } from '@/pages/CardRegister';
 import { CardRegisterConfirmPage } from '@/pages/CardRegisterConfirmPage';
-import { CardRegisterPage } from '@/pages/CardRegisterPage';
 
 const Routes = () => {
   return (
