@@ -1,10 +1,10 @@
-import React from 'react';
-import { css, cx } from '@emotion/css';
 import { Link } from 'react-router-dom';
 
-import { Card } from 'components/domain';
+import { HoldingCard } from 'components/domain';
 
 import { useCardState } from 'contexts/CardContextProvider/hooks';
+
+import { CardType } from 'types/card';
 
 function HoldingCards() {
   const { cards } = useCardState();
@@ -14,30 +14,16 @@ function HoldingCards() {
       <div className="flex-center">
         <h2 className="page-title mb-10">보유 카드</h2>
       </div>
-      <Link
-        to="new"
-        className={cx(
-          css`
-            text-decoration: none;
-          `,
-          'card-box'
-        )}
-      >
+      <Link to="new" className="card-box">
         <div className="empty-card">+</div>
       </Link>
       {cards.map((card) => (
-        <div
-          key={Object.values(card.cardNumber).toString()}
-          className={css`
-            text-align: center;
-          `}
-        >
-          <Card {...card} />
-          <span className="card-nickname">{card.alias}</span>
-        </div>
+        <HoldingCard key={cardNumberToString(card)} card={card} />
       ))}
     </div>
   );
 }
+
+const cardNumberToString = (card: CardType) => Object.values(card.cardNumber).toString();
 
 export default HoldingCards;
