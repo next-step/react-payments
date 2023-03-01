@@ -4,11 +4,10 @@ import React, { useCallback, useMemo, useState } from 'react';
 import { useCardFieldContext } from '../CardFieldContext';
 import { BottomModal } from '@/components/Modal';
 import CardCompanySelectFormModal from '../CardCompanySelectModal/CardCompanySelectModal';
-import { CARD_COMPANIES } from '@/constants';
 
 const PreviewCard = () => {
   const data = useCardFieldContext();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const {
     cardNumber,
@@ -18,18 +17,15 @@ const PreviewCard = () => {
     cardCompany,
   } = data || {};
 
-  const cardName = cardCompany ? CARD_COMPANIES[cardCompany].name : '';
-  const cardColor = cardCompany ? CARD_COMPANIES[cardCompany].color : 'gray1';
-
   const card = useMemo(
     () => ({
       cardNumber,
       expirationMonth,
       expirationYear,
       ownerName,
-      cardName,
+      cardCompany,
     }),
-    [cardNumber, expirationMonth, expirationYear, ownerName, cardName]
+    [cardNumber, expirationMonth, expirationYear, ownerName, cardCompany]
   );
 
   const onClose = useCallback(() => {
@@ -42,7 +38,7 @@ const PreviewCard = () => {
 
   return (
     <PreviewCardContainer onClick={onOpen}>
-      <Card size="big" card={card} cardColor={cardColor} />
+      <Card size="big" card={card} />
       <BottomModal isOpen={isModalOpen} onClose={onClose}>
         <CardCompanySelectFormModal selectedCardCompany={cardCompany} />
       </BottomModal>

@@ -1,21 +1,44 @@
-import { Card, Input, TextButton } from '@/components';
-import styled from '@emotion/styled';
 import React from 'react';
 
+import { Card, Input, TextButton } from '@/components';
+import useCard from '@/store/hooks/useCard';
+import styled from '@emotion/styled';
+import { useLocation } from 'react-router-dom';
+import { CARD_LIST_ACTION, useCardListDispatch } from '@/store';
+
 const CardCreateCompletePage = () => {
-  const cardNickNameFormId = 'cardNickName';
+  const cardNickNameFormId = 'cardNickNameForm';
+  const location = useLocation();
+  const dispatch = useCardListDispatch();
+  const cardId = Number(location.pathname.split('/')[3]);
+
+  const {
+    cardNumber,
+    expirationMonth,
+    expirationYear,
+    ownerName,
+    cardCompany,
+  } = useCard(cardId);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const cardNickName = e.currentTarget.cardNickName.value;
+    console.log(cardNickName);
+    dispatch(CARD_LIST_ACTION.UPDATE_CARD_NICKNAME(cardId, cardNickName));
+  };
+
   return (
     <CardCreateCompleteContainer>
-      <form id={cardNickNameFormId}>
+      <form id={cardNickNameFormId} onSubmit={handleSubmit}>
         <h1>카드등록이 완료되었습니다.</h1>
         <Card
           card={{
-            cardNumber: '1234-5678-9012-3456',
-            expirationMonth: '12',
-            expirationYear: '20',
-            ownerName: '홍길동',
+            cardNumber,
+            expirationMonth,
+            expirationYear,
+            ownerName,
+            cardCompany,
           }}
-          cardColor="blue"
           size="big"
         />
         <Input.LineInput

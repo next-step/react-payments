@@ -40,7 +40,7 @@ export const CARD_COMPANIES = {
     color: 'blue',
   },
   SAMSUNG: {
-    name: '삼성',
+    name: '삼성 카드',
     color: 'blue',
   },
   CITI: {

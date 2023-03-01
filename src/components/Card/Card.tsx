@@ -16,16 +16,11 @@ import {
   CardName,
 } from './Card.style';
 import { CardField } from '@/types';
-import { Colors } from '@/styles/colors';
-
-type CardInfo = Omit<CardField, 'cardPassword' | 'cvc' | 'cardCompany'> & {
-  cardName?: string;
-};
+import { CARD_COMPANIES } from '@/constants';
 
 type CardProps = {
   size: 'small' | 'big';
-  cardColor: Colors;
-  card: CardInfo;
+  card: Omit<CardField, 'cardPassword' | 'cvc'>;
 };
 
 // TODO: 카드 회사에 따라 카드 색상을 다르게 해야함
@@ -36,10 +31,20 @@ type CardProps = {
 // 2는 도메인과 무관한 컴포넌트를 만드는 것 같습니다. 현재 요구사항에서는 카드 컴포넌트가 cardCompany 에 따라서만 그려지기 때문에
 // 2번이 더 좋은 방법이라고 생각합니다. 어떻게 생각하시나요?
 // 그렇지만 이벤트나, 유저의 상태에 따라서 카드의 색을 다르게 보여줘야하는 요구사항이 나올땐 이 컴포넌트를 쓰지못하는 단점이 있습니다.
-// 그 상황을 대비하여 2번 방법을 사용하고, 1번 방법을 사용할 수 있도록 확장성을 고려하여 만들어야할 것 같습니다.
-const Card = ({ size, card, cardColor }: CardProps) => {
-  const { cardName, cardNumber, ownerName, expirationMonth, expirationYear } =
-    card;
+// 고민을 여러번 했으나 현재 요구사항에서는 card 안에서 cardCompany 에 따라서 카드 색을 다르게 보여주는게 맞다고 생각합니다.
+
+const Card = ({ size, card }: CardProps) => {
+  const {
+    cardNumber,
+    ownerName,
+    expirationMonth,
+    expirationYear,
+    cardCompany,
+  } = card;
+
+  const cardName = cardCompany ? CARD_COMPANIES[cardCompany].name : '';
+  const cardColor = cardCompany ? CARD_COMPANIES[cardCompany].color : 'gray1';
+
   return (
     <CardContainer cardColor={cardColor} size={size}>
       <CardTop>{cardName && <CardName>{cardName}</CardName>}</CardTop>
