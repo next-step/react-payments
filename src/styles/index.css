@@ -29,6 +29,7 @@ input {
 .app {
   height: 100%;
   padding: 16px 24px;
+  position: relative;
 }
 
 .page-title {
@@ -39,4 +40,20 @@ input {
   align-items: center;
 
   color: #383838;
+}
+
+.page-navigator {
+  position: absolute;
+  left: 20px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 22px;
+  margin-top: 16.6px;
+  cursor: pointer;
+
+  color: #383838;
+}
+
+form {
+  position: relative;
 }

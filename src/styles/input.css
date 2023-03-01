@@ -34,6 +34,9 @@
   border: none;
   border-radius: 0.25rem;
 }
+.input-basic + .input-basic {
+  margin-left: 10px;
+}
 
 .input-underline {
   text-align: center;
