@@ -17,7 +17,7 @@ const Card = ({ data }: CardProps) => {
 
   const formatCardNumber = () =>
     [num1, num2, masking(num3), masking(num4)]
-      .filter((lang) => lang !== '')
+      .filter((num) => num !== undefined && num !== '')
       .join('-');
 
   return (
