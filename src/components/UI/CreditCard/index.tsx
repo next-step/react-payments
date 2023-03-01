@@ -1,15 +1,13 @@
 import { memo } from 'react';
 
-import { CardKey, CardNumber, ExpireDate } from '@/types';
+import { CardData, CardKey } from '@/types';
 
 import Card from './style';
-
 type Props = {
-  cardInfo?: {
-    [CardKey.CARD_NUMBERS]: CardNumber;
-    [CardKey.EXPIRE_DATE]: ExpireDate;
-    [CardKey.OWNER_NAME]: string;
-  };
+  cardInfo?: Pick<
+    CardData,
+    CardKey.CARD_NUMBERS | CardKey.EXPIRE_DATE | CardKey.OWNER_NAME
+  >;
   size?: 'large' | 'small';
 };
 

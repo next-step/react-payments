@@ -4,6 +4,7 @@ import { Button, CreditCard } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
 import { styled } from '@/lib/stitches.config';
 import { getItem } from '@/storage/storage';
+import { StorageKey } from '@/storage/storageKey';
 
 const initialState = {
   CARD_NUMBERS: {
@@ -21,7 +22,7 @@ export const CardRegisterConfirmPage = () => {
   const { go } = useRouter();
 
   useEffect(() => {
-    const newCard = getItem('cardList').at(-1);
+    const newCard = getItem(StorageKey.CARD_LIST).at(-1);
 
     setCard(newCard);
   }, []);

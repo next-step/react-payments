@@ -31,6 +31,15 @@ export const enum CardKey {
   PASSWORD = 'PASSWORD',
   OWNER_NAME = 'OWNER_NAME',
 }
+export type CardData = {
+  [CardKey.CARD_NUMBERS]: CardNumber;
+  [CardKey.EXPIRE_DATE]: ExpireDate;
+  [CardKey.CVC]: string;
+  [CardKey.PASSWORD]: Password;
+  [CardKey.OWNER_NAME]: string;
+  uid: string;
+  createdDate: string;
+};
 
 export type CardFormType = {
   [CardKey.CARD_NUMBERS]: Validation<CardNumber>;

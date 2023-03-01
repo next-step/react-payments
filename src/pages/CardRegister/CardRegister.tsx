@@ -5,7 +5,7 @@ import { Button } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
 import { getItem, setItem } from '@/storage/storage';
 import { StorageKey } from '@/storage/storageKey';
-import { type CardFormType, CardKey } from '@/types';
+import { type CardFormType, CardData, CardKey } from '@/types';
 
 export const initialCardState: CardFormType = {
   [CardKey.CARD_NUMBERS]: {
@@ -67,7 +67,7 @@ export const CardRegister = () => {
 
     setItem(StorageKey.CARD_LIST, [
       ...(getItem(StorageKey.CARD_LIST) ?? []),
-      newCard,
+      { ...newCard, uid: Date.now(), createdDate: Date.now() },
     ]);
     go('/register-confirm');
   };
