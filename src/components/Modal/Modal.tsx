@@ -5,7 +5,6 @@ import React, { ReactNode } from 'react';
 type FlexPosition = 'top' | 'bottom' | 'left' | 'right' | 'center';
 interface Type {
   children: ReactNode;
-  selector?: string;
   isOpen: boolean;
   position: FlexPosition;
   backgroundClick?: () => void;
@@ -33,14 +32,7 @@ const flexPosition = {
     justify-content: center;
   `,
 };
-// Modal : Portal 로 구현했으나 굳이 portal로 구현할 필요 없다는 생각이 들어서 제거
-const Modal = ({
-  children,
-  isOpen,
-  selector = 'modal',
-  position,
-  backgroundClick,
-}: Type) => {
+const Modal = ({ children, isOpen, position, backgroundClick }: Type) => {
   if (!isOpen) return null;
 
   return (

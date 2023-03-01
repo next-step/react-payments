@@ -39,7 +39,6 @@ const CardExpirationDateField = ({
       dispatch(ACTION.UPDATE_EXPIRATION_YEAR(year));
   };
 
-  // TODO : input 2개로 관리하는 것이 더 좋은가? (month, year)
   return (
     <Label labelText={LABEL_TEXT.EXPIRATION_DATE}>
       <Input.TextInput

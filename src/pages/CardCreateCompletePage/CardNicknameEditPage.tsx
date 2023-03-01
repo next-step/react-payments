@@ -18,7 +18,6 @@ const CardNicknameEditPage = () => {
   const dispatch = useCardListDispatch();
 
   const handleDelete = () => {
-    // navigate 가 먼저 실행되어야 한다. 순서가 보장이 될까? 보장하려면 어떻게 해야할까?
     navigate(ROUTE.CARD);
     dispatch(CARD_LIST_ACTION.DELETE_CARD(cardId));
   };
