@@ -10,21 +10,35 @@ import {
   TopNavigation,
 } from '@/components/UI';
 import { DefaultCardInfo } from '@/components/UI/CreditCard';
+import { useRouter } from '@/hooks/useRouter';
 import { getItem } from '@/storage/storage';
 import { StorageKey } from '@/storage/storageKey';
+import { CardData } from '@/types';
 
 export const CardDetailPage = () => {
   const params = useParams();
   const [card, setCard] = useState(DefaultCardInfo);
   const haveCard = card && Object.values(card).every(Boolean);
+  const { go } = useRouter();
 
   useEffect(() => {
-    const selectedCard = getItem(StorageKey.CARD_LIST).at(params.cardId);
+    const cards = getItem(StorageKey.CARD_LIST) as CardData[];
+    const selectedCard = cards.find((card) => card.uid == params.cardId);
     setCard(selectedCard);
   }, []);
 
   if (!haveCard) {
-    return <Text>카드가 존재하지 않습니다.</Text>;
+    return (
+      <ColumnLayout css={{ height: '100%' }}>
+        <Text>카드가 존재하지 않습니다.</Text>
+        <Button
+          css={{ marginTop: '$3', width: '$10' }}
+          onClick={() => go('/list')}
+        >
+          카드 목록
+        </Button>
+      </ColumnLayout>
+    );
   }
 
   return (

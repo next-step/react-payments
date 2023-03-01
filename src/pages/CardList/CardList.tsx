@@ -47,11 +47,9 @@ const CardList = () => {
           {recentSortedCard.map((card, index) => (
             <CardBox key={index}>
               <RemoveButton onClick={(e) => handleRemoveCard(e, card.uid)} />
-              <CreditCard
-                onClick={() => go(`/detail/${card?.uid}`)}
-                cardInfo={card}
-                size="small"
-              />
+              <div onClick={() => go(`/detail/${card?.uid}`)}>
+                <CreditCard cardInfo={card} size="small" />
+              </div>
             </CardBox>
           ))}
         </ColumnLayout>
