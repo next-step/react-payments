@@ -12,7 +12,7 @@ const COMPANIES = Object.values(CardCompany);
 const handleClickCompanyColor = action('click');
 
 export default {
-  title: 'CompanyColor',
+  title: 'Domain/CompanyColor',
   component: CompanyColor,
 };
 

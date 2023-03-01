@@ -6,7 +6,7 @@ import { Input } from 'components/common';
 import type { InputProps } from 'components/common/Input';
 
 export default {
-  title: 'Input',
+  title: 'Common/Input',
   component: Input,
 };
 

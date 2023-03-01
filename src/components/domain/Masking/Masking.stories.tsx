@@ -4,7 +4,7 @@ import { Masking } from 'components/domain';
 import type { MaskingProps } from 'components/domain/Masking';
 
 export default {
-  title: 'Masking',
+  title: 'Domain/Masking',
   component: Masking,
   argTypes: {
     color: {
