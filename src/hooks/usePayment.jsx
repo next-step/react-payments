@@ -73,6 +73,7 @@ const usePayment = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    movePage(PATH.SAVE);
   };
 
   const handleSave = () => {
