@@ -1,16 +1,16 @@
 import { InputClassName } from "../input.type";
 
 interface InputBoxProps {
-  className?: Omit<InputClassName, "inputContainerClassName">;
-  children?: React.ReactElement;
+	className?: Omit<InputClassName, "inputContainerClassName">;
+	children?: React.ReactElement;
 }
 
 const InputBox = ({ className, children }: InputBoxProps) => {
-  return (
-    <div className={`input-box ${className?.inputBoxClassName}`}>
-      {children}
-    </div>
-  );
+	return (
+		<div className={`input-box ${className?.inputBoxClassName}`}>
+			{children}
+		</div>
+	);
 };
 
 export default InputBox;
