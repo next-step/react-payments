@@ -30,6 +30,9 @@ export const enum CardKey {
   CVC = 'CVC',
   PASSWORD = 'PASSWORD',
   OWNER_NAME = 'OWNER_NAME',
+  UID = 'UID',
+  NICK_NAME = 'NICK_NAME',
+  CREATE_DATE = 'CREATE_DATE',
 }
 export type CardData = {
   [CardKey.CARD_NUMBERS]: CardNumber;
@@ -37,9 +40,9 @@ export type CardData = {
   [CardKey.CVC]: string;
   [CardKey.PASSWORD]: Password;
   [CardKey.OWNER_NAME]: string;
-  uid: string;
-  nickName?: string;
-  createdDate: string;
+  [CardKey.UID]: string;
+  [CardKey.NICK_NAME]: string;
+  [CardKey.CREATE_DATE]: string;
 };
 
 export type CardFormType = {

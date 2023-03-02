@@ -13,7 +13,7 @@ const CardList = () => {
   const [cards, setCards] = useState<CardData[]>([]);
   const haveCards = cards?.length > 0;
   const recentSortedCard = useMemo(
-    () => cards.sort((a, b) => Number(b.createdDate) - Number(a.createdDate)),
+    () => cards.sort((a, b) => Number(b.CREATE_DATE) - Number(a.CREATE_DATE)),
     [cards]
   );
 
@@ -31,7 +31,7 @@ const CardList = () => {
     uid: string
   ) => {
     e.preventDefault();
-    const filteredCards = cards.filter((card) => card.uid != uid);
+    const filteredCards = cards.filter((card) => card.UID != uid);
     setItem(StorageKey.CARD_LIST, filteredCards);
     getStorageCard();
   };
@@ -46,8 +46,8 @@ const CardList = () => {
         <ColumnLayout css={{ gap: '$3' }}>
           {recentSortedCard.map((card, index) => (
             <CardBox key={index}>
-              <RemoveButton onClick={(e) => handleRemoveCard(e, card.uid)} />
-              <div onClick={() => go(`/detail/${card?.uid}`)}>
+              <RemoveButton onClick={(e) => handleRemoveCard(e, card.UID)} />
+              <div onClick={() => go(`/detail/${card?.UID}`)}>
                 <CreditCard cardInfo={card} size="small" />
               </div>
               <Text
@@ -58,7 +58,7 @@ const CardList = () => {
                   fontSize: '$5',
                 }}
               >
-                {card.nickName ?? '이름없음'}
+                {card.NICK_NAME ?? '이름없음'}
               </Text>
             </CardBox>
           ))}

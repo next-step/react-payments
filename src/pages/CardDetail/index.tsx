@@ -28,7 +28,7 @@ export const CardDetailPage = () => {
 
   useEffect(() => {
     const cards = getItem(StorageKey.CARD_LIST) as CardData[];
-    const selectedCard = cards.find((card) => card.uid == params.cardId);
+    const selectedCard = cards.find((card) => card.UID == params.cardId);
     setCard(selectedCard);
   }, []);
 
@@ -54,7 +54,7 @@ export const CardDetailPage = () => {
         <TextInput
           type="text"
           placeholder="카드 별칭을 입력해주세요."
-          value={card.nickName}
+          value={card.NICK_NAME}
           autoFocus
           onChange={handleFormInput(formData, 'nickName')}
         />
@@ -102,7 +102,7 @@ function handleSave(
     const cards = getItem(StorageKey.CARD_LIST) as CardData[];
 
     setItem(StorageKey.CARD_LIST, [
-      ...cards.filter(({ uid }) => uid != card.uid),
+      ...cards.filter(({ UID }) => UID != card.UID),
       { ...card, nickName },
     ]);
 
