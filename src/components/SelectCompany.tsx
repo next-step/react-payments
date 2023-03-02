@@ -27,7 +27,7 @@ const SelectCompany = ({ onClick }: Props) => {
 export default SelectCompany;
 
 const Wrapper = styled(Box)`
-  padding: 25px;
+  padding: 15px 20px;
   height: 200px;
   grid-template-columns: repeat(4, 1fr);
   background-color: ${({ theme }) => theme.color.white};
@@ -35,6 +35,8 @@ const Wrapper = styled(Box)`
 
 const CompanyWrapper = styled.div`
   cursor: pointer;
+  margin: 5px;
+  padding: 10px;
 `;
 
 const ColorCircle = styled.div<{ color: ThemeKeys }>`
