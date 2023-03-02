@@ -3,9 +3,8 @@ import {
   ActionType,
   ADD_CARD,
   ADD_CARD_INFO,
-  ADD_CARD_NICKNAME,
-  ADD_CARD_TYPE,
-  CLEAR_CARD_INFO,
+  SelectedCardInfo,
+  SET_SELECTED_CARD,
 } from "pages/payments/modules/payments/PaymentsActionType";
 
 export const defaultCardInfo: CardInput = {
@@ -22,13 +21,15 @@ export const defaultCardInfo: CardInput = {
 };
 
 export interface DefaultValueState {
-  cardList: CardInput[];
-  newCardInfo: CardInput;
+	cardList: CardInput[];
+ 	newCardInfo: CardInput;
+ 	selectedCard: SelectedCardInfo;
 }
 
 export const defaultValue: DefaultValueState = {
-  cardList: [defaultCardInfo],
-  newCardInfo: {},
+	cardList: [defaultCardInfo],
+ 	newCardInfo: {},
+ 	selectedCard: null,
 };
 
 function PaymentsReducer(
@@ -37,30 +38,35 @@ function PaymentsReducer(
 ): DefaultValueState {
   switch (action.type) {
     case ADD_CARD_INFO: {
+      const { newCardInfo } = action;
+
       return {
         ...state,
-      };
-    }
-    case ADD_CARD_TYPE: {
-      return {
-        ...state,
-      };
-    }
-    case ADD_CARD_NICKNAME: {
-      return {
-        ...state,
+        newCardInfo,
       };
     }
     case ADD_CARD: {
+      const { nickname } = action;
+
+      const newCard = {
+        ...state.newCardInfo,
+        nickname: nickname || state.newCardInfo.title,
+      };
       return {
         ...state,
+        cardList: [newCard, ...state.cardList],
+        newCardInfo: {},
       };
     }
-    case CLEAR_CARD_INFO: {
-      return defaultValue;
+    case SET_SELECTED_CARD: {
+      const { selectedCard } = action;
+      return {
+        ...state,
+        selectedCard,
+      };
     }
     default:
-      throw new Error("처리되지 않은 action 입니다.");
+      throw new Error('처리되지 않은 action 입니다.');
   }
 }
 
