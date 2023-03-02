@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { remainOnlyNumber } from "../../utils/format";
 import Input from "../Input/Input";
 import InputBox from "../Input/InputBox";
@@ -24,10 +24,6 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
 
   const itemsRef = useRef<HTMLInputElement[]>([]);
 
-  useEffect(() => {
-    onCardNumberChange(cardNumbers);
-  }, [cardNumbers]);
-
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement>,
     type: number
@@ -47,6 +43,7 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
     }
 
     setCardNumbers(numbers);
+    onCardNumberChange(numbers);
   };
 
   return (
