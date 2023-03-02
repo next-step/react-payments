@@ -2,16 +2,8 @@ import { memo, useEffect, useMemo, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
-import type { Password } from '@/types';
 
 import { useFormContext } from '../common/Form/FormContext';
-
-const initialState: Password = {
-  1: '',
-  2: '',
-  3: '',
-  4: '',
-} as const;
 
 type Props = {
   onChange: <T>(value: T) => void;
@@ -20,7 +12,7 @@ type Props = {
 
 const CardPwdInput = ({ onChange, dirtyState }: Props) => {
   const { handleInputChange, dispatch } = useFormContext();
-  const [pwd, setPwd] = useState(initialState);
+  const [pwd, setPwd] = useState({});
   const keyPressInterceptor = useNumberKeyInterceptor();
 
   const isPwdValid = useMemo(

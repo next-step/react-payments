@@ -1,10 +1,8 @@
-import { memo, useEffect, useMemo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
 
 import { useFormContext } from '../common/Form/FormContext';
-
-const initialState = '';
 
 type Props = {
   onChange: <T>(value: T) => void;
@@ -12,30 +10,19 @@ type Props = {
 };
 
 const CardOwnerInput = ({ onChange, dirtyState }: Props) => {
-  const [owner, setOwner] = useState(initialState);
+  const [owner, setOwner] = useState('');
   const { handleInputChange, dispatch } = useFormContext();
 
-  const isOwnerValid = useMemo(
-    () => Boolean(owner && owner.length < MAX_OWNER_NAME_LENGTH),
-    [owner]
-  );
-
-  const errorMessage = useMemo(() => {
-    if (!owner) return ERROR_MESSAGE.NO_EMPTY;
-    if (owner.length < MAX_OWNER_NAME_LENGTH)
-      return ERROR_MESSAGE.OVER_LIMITED_TEXT;
-  }, [owner]);
-
   useEffect(() => {
-    onChange({ val: owner, isValid: isOwnerValid });
+    onChange({ val: owner, isValid: !getErrorMessage(owner) });
     dispatch();
   }, [owner]);
 
   return (
     <InputContainer
       label="소유자명"
-      isError={dirtyState && !isOwnerValid}
-      errorMessage={errorMessage}
+      isError={dirtyState && Boolean(getErrorMessage(owner))}
+      errorMessage={getErrorMessage(owner)}
     >
       <input
         type="text"
@@ -57,4 +44,13 @@ const MAX_OWNER_NAME_LENGTH = 30;
 const ERROR_MESSAGE = {
   NO_EMPTY: '소유자명을 입력해주세요',
   OVER_LIMITED_TEXT: `소유자명은 ${MAX_OWNER_NAME_LENGTH}글자까지 입력할 수 있습니다.`,
+};
+
+const getErrorMessage = (owner: string) => {
+  if (!owner) {
+    return ERROR_MESSAGE.NO_EMPTY;
+  }
+  if (owner.length > MAX_OWNER_NAME_LENGTH) {
+    return ERROR_MESSAGE.OVER_LIMITED_TEXT;
+  }
 };
