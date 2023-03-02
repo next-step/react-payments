@@ -9,7 +9,7 @@ export const Wrapper = styled.div<CreditCardProps>`
   box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 8px 0px;
   padding: 15px;
 
-  ${({ theme, color }) => css`
+  ${({ theme, color = 'brand01' }) => css`
     background-color: ${theme.color[color]};
   `}
 

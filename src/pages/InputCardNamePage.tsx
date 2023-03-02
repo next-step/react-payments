@@ -42,7 +42,7 @@ const InputCardNamePage = () => {
       <H1>카드 등록이 완료되었습니다.</H1>
       <CreditCard
         color={item?.color!}
-        name={nickname}
+        nickname={nickname}
         holderName={item?.holderName}
         number={item?.number}
         expiration={item?.expiration}

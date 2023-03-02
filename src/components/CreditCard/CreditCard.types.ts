@@ -1,8 +1,8 @@
 import type { ThemeKeys } from 'styles/theme';
 
 export interface CreditCardProps {
-  color: ThemeKeys;
-  name?: string;
+  color?: ThemeKeys;
+  nickname?: string;
   number?: string;
   holderName?: string;
   expiration?: string;
