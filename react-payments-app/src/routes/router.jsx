@@ -4,10 +4,11 @@ import {
   Routes,
   Route,
   Outlet,
+  Navigate,
 } from 'react-router-dom';
-import CardListPage from './pages/CardListPage/CardListPage';
-import CardNicknamePage from './pages/CardNicknamePage/CardNicknamePage';
-import CardRegistrationPage from './pages/CardRegistrationPage/CardRegistrationPage';
+import CardListPage from '../pages/CardListPage/CardListPage';
+import CardNicknamePage from '../pages/CardNicknamePage/CardNicknamePage';
+import CardRegistrationPage from '../pages/CardRegistrationPage/CardRegistrationPage';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/completed',
         element: <CardNicknamePage />,
+      },
+      {
+        path: '*',
+        element: <Navigate replace to='/' />,
       },
     ],
   },
