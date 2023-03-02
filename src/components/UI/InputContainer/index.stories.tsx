@@ -45,3 +45,18 @@ WithLabelInput.args = {
     </>
   ),
 };
+
+export const WithErrorMessage = Template.bind({});
+WithErrorMessage.args = {
+  label: '카드 번호',
+  isError: true,
+  errorMessage: '카드 번호를 모두 입력해주세요.',
+  children: (
+    <>
+      <input type="tel" name="1" placeholder="1234" maxLength={4} />
+      <input type="tel" name="2" placeholder="1234" />
+      <input type="password" name="3" placeholder="****" maxLength={4} />
+      <input type="password" name="4" placeholder="****" maxLength={4} />
+    </>
+  ),
+};
