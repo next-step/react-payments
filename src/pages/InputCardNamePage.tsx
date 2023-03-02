@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 
 import { CreditCard } from 'components';
@@ -13,8 +13,9 @@ import {
 import { CardListContext } from 'contexts/CardListProvider';
 
 const InputCardNamePage = () => {
+  const [nickname, setNickName] = useState('');
   const nameRef = useRef<HTMLInputElement>(null);
-  const { push } = useRouter();
+  const { replace } = useRouter();
   const { addCardInfo } = useContext(CardListContext);
   const item = getLocalStorageItem<CreditCardProps>('CardValues');
 
@@ -23,21 +24,27 @@ const InputCardNamePage = () => {
     const { value } = nameRef.current;
     addCardInfo({ ...item, nickname: value });
     removeLocalStorageItem('CardValues');
-    push('/card-list');
+    replace('/card-list');
+  };
+
+  const onChange = () => {
+    if (!nameRef.current) return;
+    setNickName(nameRef.current.value);
   };
 
   return (
     <Wrapper display="flex" flexDirection="column" justifyContent="center">
       <H1>카드 등록이 완료되었습니다.</H1>
       <CreditCard
-        color="brand02"
-        name="파란색 카드"
+        color={item?.color!}
+        name={nickname}
         holderName={item?.holderName}
         number={item?.number}
         expiration={item?.expiration}
       />
       <Form>
         <TextField
+          onChange={onChange}
           ref={nameRef}
           placeholder="카드를 저장할 별명을 입력해주세요."
           maxLength={10}
