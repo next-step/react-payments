@@ -27,6 +27,7 @@
     "simple-import-sort/exports": "error",
     "prettier/prettier": "error",
     "react/react-in-jsx-scope": "off",
-    "no-undef": "off"
+    "no-undef": "off",
+    "@typescript-eslint/no-empty-function": "off"
   }
 }
