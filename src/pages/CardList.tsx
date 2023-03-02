@@ -1,9 +1,11 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Card from '../components/Card';
 import { PaymentsContext } from '../context/PaymentsContext';
 
 const CardAdd = () => {
+  const navigate = useNavigate();
   const { cardList } = useContext(PaymentsContext);
 
   return (
@@ -12,7 +14,7 @@ const CardAdd = () => {
         <h2 className="page-title mb-10">보유 카드</h2>
       </div>
       <span className="card-nickname">법인카드</span>
-      <div className="card-box">
+      <div className="card-box" onClick={() => navigate('/')}>
         <div className="empty-card">+</div>
       </div>
       {cardList.map((card) => (
