@@ -1,11 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import {ROUTE_PATH} from "../src/constants/page"
+import { ROUTE_PATH } from "../src/constants/page";
 import CardRegistrationPage from "../src/pages/CardRegistrationPage";
 import RegistedCardListPage from "../src/pages/RegistedCardListPage";
 import CardRegistrationCompletedPage from "../src/pages/CardRegistrationCompletedPage";
-
-import "./styles/index.css";
 
 const router = createBrowserRouter([
   {
