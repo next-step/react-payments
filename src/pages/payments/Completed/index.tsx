@@ -1,18 +1,18 @@
-import Button from 'components/common/Button';
-import Card from 'components/common/Card';
-import InputContainer from 'components/common/Input/InputContainer';
-import Input from 'components/common/Input';
-import { STEP } from 'constants/Payments';
+import Button from "components/common/Button";
+import Card from "components/common/Card";
+import InputContainer from "components/common/Input/InputContainer";
+import Input from "components/common/Input";
+import { STEP } from "constants/Payments";
 import {
 	usePaymentsDispatch,
 	usePaymentsState,
-} from 'pages/payments/modules/payments/PaymentsContext';
+} from "pages/payments/modules/payments/PaymentsContext";
 import {
 	ADD_CARD,
 	EDIT_CARD,
-} from 'pages/payments/modules/payments/PaymentsActionType';
-import { useNavigate } from 'react-router';
-import { useCardForm } from 'pages/payments/hooks/useCardForm';
+} from "pages/payments/modules/payments/PaymentsActionType";
+import { useNavigate } from "react-router";
+import { useCardForm } from "pages/payments/hooks/useCardForm";
 
 const Completed = () => {
 	const navigate = useNavigate();
@@ -48,16 +48,16 @@ const Completed = () => {
 
 					<InputContainer
 						className={{
-							inputContainerClassName: 'flex-center w-100',
+							inputContainerClassName: "flex-center w-100",
 						}}
 					>
 						<Input
 							maxLength={10}
 							className="input-underline"
 							value={nickname}
-							type={'text'}
-							id={'nickname'}
-							placeholder={'카드의 별칭을 입력해주세요.'}
+							type={"text"}
+							id={"nickname"}
+							placeholder={"카드의 별칭을 입력해주세요."}
 							onChange={handleCardNicknameChange}
 						/>
 					</InputContainer>

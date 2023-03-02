@@ -1,19 +1,19 @@
-import React, { useId, useRef, useState } from 'react';
-import { CARD_INFO, STEP, VALIDATION_LIST } from 'constants/Payments';
+import React, { useId, useRef, useState } from "react";
+import { CARD_INFO, STEP, VALIDATION_LIST } from "constants/Payments";
 import {
 	formatNumber,
 	monthConverter,
 	validateInput,
-} from 'pages/payments/utils';
+} from "pages/payments/utils";
 import {
 	usePaymentsDispatch,
 	usePaymentsState,
-} from 'pages/payments/modules/payments/PaymentsContext';
+} from "pages/payments/modules/payments/PaymentsContext";
 import {
 	ADD_CARD_INFO,
 	NewCardInfo,
-} from 'pages/payments/modules/payments/PaymentsActionType';
-import { useNavigate } from 'react-router';
+} from "pages/payments/modules/payments/PaymentsActionType";
+import { useNavigate } from "react-router";
 
 export const useCardForm = () => {
 	const navigate = useNavigate();
@@ -21,8 +21,8 @@ export const useCardForm = () => {
 	const { newCardInfo, selectedCard } = usePaymentsState();
 	const dispatch = usePaymentsDispatch();
 
-	const [name, setName] = useState('');
-	const [nickname, setNickname] = useState(selectedCard?.nickname || '');
+	const [name, setName] = useState("");
+	const [nickname, setNickname] = useState(selectedCard?.nickname || "");
 	const id = useId();
 	const numberInputRef = useRef<HTMLInputElement>(null);
 	const cvcInputRef = useRef<HTMLInputElement>(null);
@@ -43,7 +43,7 @@ export const useCardForm = () => {
 			case CARD_INFO.PASSWORD2:
 				return password2InputRef;
 			default:
-				throw new Error('해당하지 않는 reference 입니다.');
+				throw new Error("해당하지 않는 reference 입니다.");
 		}
 	};
 
@@ -63,7 +63,7 @@ export const useCardForm = () => {
 				return formatNumber({
 					input: monthConverter(input),
 					nth: 3,
-					formatter: '/',
+					formatter: "/",
 				});
 			default:
 				return input;

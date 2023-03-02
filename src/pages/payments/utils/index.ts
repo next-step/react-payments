@@ -1,7 +1,7 @@
-import { RefObject } from 'react';
+import { RefObject } from "react";
 
 export const getNumberWithoutFormatter = (input: string) => {
-	return input?.replace(/[^0-9|/|-]/g, '');
+	return input?.replace(/[^0-9|/|-]/g, "");
 };
 
 export const validateInput = ({
@@ -14,7 +14,7 @@ export const validateInput = ({
 	validationList: string[];
 }) => {
 	if (!ref.current?.value) {
-		return '';
+		return "";
 	}
 
 	if (validationList.includes(id)) {
@@ -26,7 +26,7 @@ export const validateInput = ({
 export const formatNumber = ({
 	input,
 	nth,
-	formatter = '-',
+	formatter = "-",
 }: {
 	input: string;
 	nth: number;
@@ -48,9 +48,9 @@ export const formatNumber = ({
 
 export const monthConverter = (input: string) => {
 	if (parseInt(input) < 1) {
-		return '1';
+		return "1";
 	} else if (parseInt(input) > 12) {
-		return '12';
+		return "12";
 	}
 	return input;
 };
@@ -65,8 +65,8 @@ export const characterCount = (text: string): number => {
 
 export const displayNumber = ({
 	input,
-	formatter = '-',
-	converter = '*',
+	formatter = "-",
+	converter = "*",
 	startPoint,
 }: {
 	input: string;

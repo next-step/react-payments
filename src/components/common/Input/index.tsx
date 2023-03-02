@@ -1,5 +1,5 @@
-import { forwardRef } from 'react';
-import './input.css';
+import { forwardRef } from "react";
+import "./input.css";
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
@@ -8,7 +8,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 		{
 			className,
 			value,
-			type = 'text',
+			type = "text",
 			id,
 			placeholder,
 			onChange,

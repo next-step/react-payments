@@ -1,7 +1,7 @@
-import React from 'react';
-import { displayNumber } from 'pages/payments/utils';
-import './card.css';
-import { CardInput } from './card.type';
+import React from "react";
+import { displayNumber } from "pages/payments/utils";
+import "./card.css";
+import { CardInput } from "./card.type";
 
 interface CardProps {
 	input?: CardInput;
@@ -17,13 +17,13 @@ const Card = ({
 	onClick,
 }: CardProps) => {
 	const mode =
-		input && Object.values(input).length > 0 ? 'small-card' : 'empty-card';
-	const newCard = typeof onClick === 'function' && !input && '+';
+		input && Object.values(input).length > 0 ? "small-card" : "empty-card";
+	const newCard = typeof onClick === "function" && !input && "+";
 
 	return (
 		<div className="card-box">
 			<div
-				className={`${isBigCard ? 'big-card' : mode} cursor-pointer`}
+				className={`${isBigCard ? "big-card" : mode} cursor-pointer`}
 				style={{ backgroundColor }}
 				onClick={onClick}
 			>
@@ -45,10 +45,10 @@ const Card = ({
 							</div>
 							<div className="card-bottom__info">
 								<span className="card-text ellipsis max-w-94">
-									{input?.name || 'NAME'}
+									{input?.name || "NAME"}
 								</span>
 								<span className="card-text">
-									{`${input?.expiry || 'MM / YY'}`}
+									{`${input?.expiry || "MM / YY"}`}
 								</span>
 							</div>
 						</div>

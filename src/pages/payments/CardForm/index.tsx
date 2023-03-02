@@ -1,13 +1,13 @@
-import { characterCount } from 'pages/payments/utils';
-import Button from 'components/common/Button';
-import Card from 'components/common/Card';
-import InputContainer from 'components/common/Input/InputContainer';
-import CompanyModal from 'components/common/Modal';
-import { STEP, TYPE, TYPE_COMPLETED, TYPE_SELECT } from 'constants/Payments';
-import Input from 'components/common/Input';
-import { usePaymentsState } from 'pages/payments/modules/payments/PaymentsContext';
-import { useLocation, useNavigate } from 'react-router';
-import { useCardForm } from 'pages/payments/hooks/useCardForm';
+import { characterCount } from "pages/payments/utils";
+import Button from "components/common/Button";
+import Card from "components/common/Card";
+import InputContainer from "components/common/Input/InputContainer";
+import CompanyModal from "components/common/Modal";
+import { STEP, TYPE, TYPE_COMPLETED, TYPE_SELECT } from "constants/Payments";
+import Input from "components/common/Input";
+import { usePaymentsState } from "pages/payments/modules/payments/PaymentsContext";
+import { useLocation, useNavigate } from "react-router";
+import { useCardForm } from "pages/payments/hooks/useCardForm";
 
 const CardForm = () => {
 	const navigate = useNavigate();
@@ -52,7 +52,7 @@ const CardForm = () => {
 				<form className="app" onSubmit={handleInputSubmit}>
 					<h2 className="page-title">
 						<span className="mr-2 cursor-pointer" onClick={handleGoBackClick}>
-							{'<'}
+							{"<"}
 						</span>
 						카드 추가
 					</h2>
@@ -66,8 +66,8 @@ const CardForm = () => {
 						<Input
 							disabled={type === TYPE_COMPLETED}
 							ref={numberInputRef}
-							type={'text'}
-							id={'number'}
+							type={"text"}
+							id={"number"}
 							maxLength={19}
 							onChange={handleCardInputChange}
 						/>
@@ -76,14 +76,14 @@ const CardForm = () => {
 					<InputContainer
 						hasInputBox
 						title="만료일"
-						className={{ inputBoxClassName: 'w-50' }}
+						className={{ inputBoxClassName: "w-50" }}
 					>
 						<Input
 							disabled={type === TYPE_COMPLETED}
 							ref={expiryInputRef}
-							type={'text'}
-							id={'expiry'}
-							placeholder={'MM / YY'}
+							type={"text"}
+							id={"expiry"}
+							placeholder={"MM / YY"}
 							maxLength={5}
 							onChange={handleCardInputChange}
 						/>
@@ -93,10 +93,10 @@ const CardForm = () => {
 						<InputContainer title="카드 소유자 이름(선택)">
 							<Input
 								disabled={type === TYPE_COMPLETED}
-								type={'text'}
-								id={'name'}
+								type={"text"}
+								id={"name"}
 								value={name}
-								placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
+								placeholder={"카드에 표시된 이름과 동일하게 입력하세요."}
 								maxLength={30}
 								onChange={handleCardNameChange}
 							/>
@@ -111,8 +111,8 @@ const CardForm = () => {
 							disabled={type === TYPE_COMPLETED}
 							className="w-25"
 							ref={cvcInputRef}
-							type={'password'}
-							id={'cvc'}
+							type={"password"}
+							id={"cvc"}
 							maxLength={3}
 							onChange={handleCardInputChange}
 						/>
@@ -124,8 +124,8 @@ const CardForm = () => {
 								disabled={type === TYPE_COMPLETED}
 								className="w-15 mr-1"
 								ref={password1InputRef}
-								type={'password'}
-								id={'password1'}
+								type={"password"}
+								id={"password1"}
 								maxLength={1}
 								onChange={handleCardInputChange}
 							/>
@@ -133,8 +133,8 @@ const CardForm = () => {
 								disabled={type === TYPE_COMPLETED}
 								className="w-15 mr-1"
 								ref={password2InputRef}
-								type={'password'}
-								id={'password2'}
+								type={"password"}
+								id={"password2"}
 								maxLength={1}
 								onChange={handleCardInputChange}
 							/>
@@ -142,7 +142,7 @@ const CardForm = () => {
 					</InputContainer>
 
 					<Button
-						type={type === TYPE_COMPLETED ? 'button' : 'submit'}
+						type={type === TYPE_COMPLETED ? "button" : "submit"}
 						label="다음"
 						onClick={handleNextButtonClick}
 					/>
@@ -151,14 +151,14 @@ const CardForm = () => {
 					<CompanyModal
 						onClick={handleCompanyModalClick}
 						modalItem={[
-							{ item: '레드 카드', backgroundColor: 'red' },
-							{ item: '블루 카드', backgroundColor: 'blue' },
-							{ item: '그린 카드', backgroundColor: 'green' },
-							{ item: '바이 카드', backgroundColor: 'violet' },
-							{ item: '민트 카드', backgroundColor: '#98ff98' },
-							{ item: '핑크 카드', backgroundColor: 'pink' },
-							{ item: '오뤤 카드', backgroundColor: 'orange' },
-							{ item: '옐로 카드', backgroundColor: 'yellow' },
+							{ item: "레드 카드", backgroundColor: "red" },
+							{ item: "블루 카드", backgroundColor: "blue" },
+							{ item: "그린 카드", backgroundColor: "green" },
+							{ item: "바이 카드", backgroundColor: "violet" },
+							{ item: "민트 카드", backgroundColor: "#98ff98" },
+							{ item: "핑크 카드", backgroundColor: "pink" },
+							{ item: "오뤤 카드", backgroundColor: "orange" },
+							{ item: "옐로 카드", backgroundColor: "yellow" },
 						]}
 					/>
 				)}

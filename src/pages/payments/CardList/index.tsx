@@ -1,18 +1,18 @@
-import { Fragment } from 'react';
-import { CardListType } from 'types/payments';
-import Card from 'components/common/Card';
+import { Fragment } from "react";
+import { CardListType } from "types/payments";
+import Card from "components/common/Card";
 import {
 	usePaymentsDispatch,
 	usePaymentsState,
-} from 'pages/payments/modules/payments/PaymentsContext';
-import { useNavigate } from 'react-router';
-import { STEP } from 'constants/Payments';
+} from "pages/payments/modules/payments/PaymentsContext";
+import { useNavigate } from "react-router";
+import { STEP } from "constants/Payments";
 import {
 	DELETE_CARD,
 	SelectedCardInfo,
 	SET_SELECTED_CARD,
-} from 'pages/payments/modules/payments/PaymentsActionType';
-import Button from 'components/common/Button';
+} from "pages/payments/modules/payments/PaymentsActionType";
+import Button from "components/common/Button";
 
 const CardList = () => {
 	const { cardList } = usePaymentsState();
