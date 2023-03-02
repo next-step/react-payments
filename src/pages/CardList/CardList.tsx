@@ -11,15 +11,14 @@ import { CardData } from '@/types';
 const CardList = () => {
   const { go } = useRouter();
   const [cards, setCards] = useState<CardData[]>([]);
-  const haveCards = cards?.length > 0;
-  const recentSortedCard = useMemo(
-    () => cards.sort((a, b) => Number(b.CREATE_DATE) - Number(a.CREATE_DATE)),
-    [cards]
-  );
+
+  const recentSortedCard =
+    cards.sort((a, b) => Number(b.CREATE_DATE) - Number(a.CREATE_DATE)) ?? [];
+  const haveCards = recentSortedCard?.length > 0;
 
   const getStorageCard = useCallback(() => {
     const cardList = getItem(StorageKey.CARD_LIST) as CardData[];
-    setCards(cardList);
+    setCards(cardList ?? []);
   }, []);
 
   useEffect(() => {
