@@ -17,9 +17,11 @@ const CardAdd = () => {
       <div className="card-box" onClick={() => navigate('/')}>
         <div className="empty-card">+</div>
       </div>
-      {cardList.map((card) => (
-        <Card key={card.id.getDate()} data={card} />
-      ))}
+      {cardList
+        .sort((a, b) => b.id.getTime() - a.id.getTime())
+        .map((card) => (
+          <Card key={card.id.getDate()} data={card} />
+        ))}
     </div>
   );
 };
