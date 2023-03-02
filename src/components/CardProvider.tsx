@@ -15,13 +15,7 @@ type ContextProps = {
   color: string;
 };
 
-export const CardContext = createContext<ContextProps | null>({
-  card: initCard,
-  setCard: () => {},
-  formattedCardNumber: "",
-  bankName: "",
-  color: "",
-});
+export const CardContext = createContext<ContextProps | null>(null);
 
 function CardProvider({ children }: ComponentProps) {
   const [card, setCard] = useState<CardType>(initCard);

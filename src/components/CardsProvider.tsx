@@ -10,10 +10,7 @@ type ContextProps = {
   setCards: Function;
 };
 
-export const CardsContext = createContext<ContextProps | null>({
-  cards: [],
-  setCards: () => {},
-});
+export const CardsContext = createContext<ContextProps | null>(null);
 
 function CardsProvider({ children }: ComponentProps) {
   const [cards, setCards] = useState([]);
