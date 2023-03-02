@@ -2,6 +2,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../../components/Card";
+import { ROUTE } from "../../constants/route";
 import useCardContext from "../../hooks/useCardContext";
 import useCardsContext from "../../hooks/useCardsContext";
 import { CardType } from "../../types/common";
@@ -17,11 +18,11 @@ function CardList() {
 
   const history = useHistory();
   const handleEmptyCardClick = () => {
-    history.push("/add");
+    history.push(ROUTE.ADD);
   };
   const handleCardClick = (card: CardType, idx: number) => {
     setCard(card);
-    history.push(`/complete/${idx}`);
+    history.push(`${ROUTE.COMPLETE}/${idx}`);
   };
 
   return (

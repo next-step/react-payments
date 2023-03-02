@@ -11,6 +11,7 @@ import Header from "../../components/Header";
 import useCardChange from "../../hooks/useCardChange";
 import useModalContext from "../../hooks/useModalContext";
 import useCardContext from "../../hooks/useCardContext";
+import { ROUTE } from "../../constants/route";
 
 const INPUT_NAMES = [
   "card-0",
@@ -68,7 +69,7 @@ function Add() {
           bankId: card.bankId,
         };
         setCard(cardData);
-        history.push("/complete");
+        history.push(ROUTE.COMPLETE);
         return;
       }
       setIsOpen(true);

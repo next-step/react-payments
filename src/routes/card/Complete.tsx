@@ -7,6 +7,7 @@ import { initCard } from "../../constants/bank";
 import useCardContext from "../../hooks/useCardContext";
 import useCardsContext from "../../hooks/useCardsContext";
 import { useState } from "react";
+import { ROUTE } from "../../constants/route";
 
 type Params = {
   id: string;
@@ -55,7 +56,7 @@ function CardList() {
 
     updateCard();
     setCard(initCard);
-    history.push("/list");
+    history.push(ROUTE.LIST);
   };
 
   return (
