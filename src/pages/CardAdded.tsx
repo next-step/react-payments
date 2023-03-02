@@ -1,20 +1,29 @@
-import { useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useContext, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Button from '../components/Button';
 import Card from '../components/Card';
+import { PaymentsContext } from '../context/PaymentsContext';
 
 const CardAdded = () => {
   const navigate = useNavigate();
   const aliasRef = useRef<HTMLInputElement>(null);
-  const location = useLocation();
-  const { state: CardData } = location;
+
+  const { cardList, addAlias } = useContext(PaymentsContext);
+
+  const addedAlias = () => {
+    if (aliasRef.current) {
+      addAlias(aliasRef.current.value);
+    }
+    navigate('/card-list');
+  };
+
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
-      <Card data={CardData} />
+      <Card data={cardList[cardList.length - 1]} />
       <div className="input-container flex-center w-100">
         <input
           ref={aliasRef}
@@ -25,7 +34,7 @@ const CardAdded = () => {
         />
       </div>
       <div className="button-box mt-50">
-        <Button onClick={() => navigate('/card-list')}>다음</Button>
+        <Button onClick={addedAlias}>다음</Button>
       </div>
     </div>
   );
