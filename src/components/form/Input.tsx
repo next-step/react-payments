@@ -6,14 +6,9 @@ export interface IInput extends InputHTMLAttributes<HTMLInputElement> {
   nextFocus?: () => void;
 }
 
-const config = {
-  BASIC_TYPE: 'text',
-  BASIC_CLASS: 'input-basic',
-};
-
 const Input = forwardRef<HTMLInputElement, IInput>((
   {
-    type,
+    type = 'text',
     className = '',
     onChange,
     maxLength,
@@ -32,8 +27,8 @@ const Input = forwardRef<HTMLInputElement, IInput>((
   return (
     <input
       ref={inputRef}
-      className={`${config.BASIC_CLASS} ${className}`}
-      type={type || config.BASIC_TYPE}
+      className={`input-basic ${className}`}
+      type={type}
       onChange={handleChange}
       maxLength={maxLength}
       {...props}
