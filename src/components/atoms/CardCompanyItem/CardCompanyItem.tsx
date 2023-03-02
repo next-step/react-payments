@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardCompanyCodeType, CardTypeKeys } from 'models/card.model'
+import { CardCompanyCodeType } from 'models/card.model'
 import { CARD_COMPANYS } from 'constants/card'
 import './CardCompanyItem.css'
 
@@ -17,7 +17,7 @@ const CardCompanyItem: React.FC<CardCompanyItemProps> = ({
       <span
         className='card-company-color'
         style={{ backgroundColor: CARD_COMPANYS[cardCode].color }}
-      ></span>
+      />
       <span className='card-company-name'>{CARD_COMPANYS[cardCode].name}</span>
     </button>
   )

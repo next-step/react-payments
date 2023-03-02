@@ -34,7 +34,7 @@ const CompleteRegisterCard: React.FC<CompleteRegisterCardProps> = ({
           type='text'
           maxLength={10}
           isRequire={true}
-          onChange={(e: ChangeEvent) => onChange(e, 'cardNickname')}
+          onChange={(e) => onChange(e, 'cardNickname')}
           width={'100%'}
           variant='outline'
         />

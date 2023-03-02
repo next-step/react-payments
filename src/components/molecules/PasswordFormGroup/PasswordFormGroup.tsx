@@ -1,7 +1,8 @@
 import { Input } from 'components/atoms/Input'
+import { REGEX } from 'constants/regex'
 import { CardTypeKeys } from 'models/card.model'
 import React, { ChangeEvent, useState } from 'react'
-import { onlyNumberFormat } from 'utils/formats'
+import { getConvertAddStrFormat } from 'utils/formats'
 import { InputBox } from '../InputBox'
 import './PasswordFormGroup.css'
 
@@ -14,7 +15,7 @@ const PasswordFormGroup: React.FC<PasswordFormGroupProps> = ({ onChange }) => {
 
   const onConvertValue = (e: ChangeEvent, idx: number) => {
     const { value } = e.target as HTMLInputElement
-    const currentValue = onlyNumberFormat(value)
+    const currentValue = getConvertAddStrFormat(value, REGEX.NOT_NUMBER)
     const currentPassword = [
       ...password.slice(0, idx),
       currentValue,

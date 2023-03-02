@@ -1,3 +1,4 @@
+import { CARD_INFO } from './../constants/card'
 import { CARD_COMPNAYS_CODE } from 'constants/card'
 
 export type CardCompanyCodeType =
@@ -13,9 +14,9 @@ export interface CardType {
   cardNickname: string
 }
 
-export interface OnChangeEventParams {
-  name: keyof CardType
+export type CardTypeKeys = (typeof CARD_INFO)[keyof typeof CARD_INFO]
+
+export type OnChangeEventParams = {
+  name: CardTypeKeys
   formatter?: (str: string) => string
 }
-
-export type CardTypeKeys = keyof CardType

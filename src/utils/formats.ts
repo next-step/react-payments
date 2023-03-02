@@ -1,30 +1,25 @@
-const cardNumberFormat = (value: string) => {
-  const rawString = value.replace(/\D/g, '')
-  let output = ''
+import { REGEX } from 'constants/regex'
 
-  if (rawString.length > 0) {
-    output += rawString.substring(0, 4)
-  }
+const getConvertAddStrFormat = (
+  value: string,
+  regex: RegExp,
+  options?: { addIndexs: number[]; addstr: string },
+) => {
+  const rawString = value.replace(regex, '')
+  if (!options) return rawString
 
-  if (rawString.length > 4) {
-    output += '-'
-    output += rawString.substring(4, 8)
-  }
+  const { addIndexs, addstr } = options
+  return rawString.split('').reduce((acc, cur, i) => {
+    if (addIndexs.includes(i)) {
+      acc += addstr
+    }
 
-  if (rawString.length > 8) {
-    output += '-'
-    output += rawString.substring(8, 12)
-  }
-
-  if (rawString.length > 12) {
-    output += '-'
-    output += rawString.substring(12, 16)
-  }
-
-  return output
+    acc += rawString[i]
+    return acc
+  }, '')
 }
 
-const expireDateFormat = (value: string) => {
+const getConvertDateFormat = (value: string) => {
   const rawString = value.replace(/\D/g, '')
   let output = ''
   if (rawString.length > 0) {
@@ -50,12 +45,4 @@ const expireDateFormat = (value: string) => {
   return output
 }
 
-const cardOwnerFormat = (value: string) => {
-  return value.replace(/\^[A-Za-z]/g, '')
-}
-
-const onlyNumberFormat = (value: string) => {
-  return value.replace(/\D/g, '')
-}
-
-export { cardNumberFormat, expireDateFormat, cardOwnerFormat, onlyNumberFormat }
+export { getConvertDateFormat, getConvertAddStrFormat }

@@ -1,11 +1,7 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import './MobileTemplate.css'
 
-type MobileTeamplteProps = {
-  children: React.ReactNode
-}
-
-const MobileTemplate: React.FC<MobileTeamplteProps> = ({ children }) => {
+const MobileTemplate: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <div className='mobile-wrap'>
       <div className='mobile-container'>{children}</div>

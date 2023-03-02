@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import './Modal.css'
 
 type LayerProps = {
-  children: React.ReactNode
   isOpen: boolean
 }
 
-const Modal: React.FC<LayerProps> = ({ children, isOpen }) => {
+const Modal: React.FC<PropsWithChildren<LayerProps>> = ({
+  children,
+  isOpen,
+}) => {
   if (!isOpen) return null
   return (
     <div className='modal-wrap'>

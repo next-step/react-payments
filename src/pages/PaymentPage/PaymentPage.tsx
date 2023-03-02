@@ -13,10 +13,6 @@ const PaymentPage = () => {
   const { loading, error, cards, addCard } = useCards()
   const [selectCard, setSelectCard] = useState(INIT_CARD_VALUE)
 
-  const toggleIsAddCard = (isAdd: boolean) => {
-    setIsAddEditCard(isAdd)
-  }
-
   if (loading) {
     return <Loading />
   }
@@ -25,24 +21,24 @@ const PaymentPage = () => {
     return <ErrorIcon message={error.message} />
   }
 
+  const editStart = () => setIsAddEditCard(true)
+  const editEnd = () => setIsAddEditCard(false)
+
   const onAddEditCard = (card?: CardType) => {
     setSelectCard(card ?? INIT_CARD_VALUE)
-    toggleIsAddCard(true)
+    editStart()
   }
 
   return (
     <>
       {isAddEditCard ? (
         <AddEditCraditCard
-          onNavigate={() => toggleIsAddCard(false)}
+          onNavigate={editEnd}
           addCard={addCard}
           initCardValue={selectCard}
         />
       ) : (
-        <PaymentMain
-          onClick={(card?: CardType) => onAddEditCard(card)}
-          cards={cards}
-        />
+        <PaymentMain onClick={onAddEditCard} cards={cards} />
       )}
     </>
   )

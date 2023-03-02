@@ -1,11 +1,8 @@
+import { REGEX } from './../constants/regex'
 import { CardType } from 'models/card.model'
 import { HTMLInputTypeAttribute } from 'react'
-import {
-  cardNumberFormat,
-  cardOwnerFormat,
-  expireDateFormat,
-  onlyNumberFormat,
-} from './formats'
+import { getConvertDateFormat, getConvertAddStrFormat } from './formats'
+import { CARD_INFO } from 'constants/card'
 
 type InputType = {
   key: keyof Omit<CardType, 'id'>
@@ -21,8 +18,12 @@ type InputType = {
 
 const INPUTS: InputType[] = [
   {
-    key: 'cardNumber',
-    formatter: (value: string) => cardNumberFormat(value),
+    key: CARD_INFO.CARD_NUMBER,
+    formatter: (value: string) =>
+      getConvertAddStrFormat(value, REGEX.NOT_NUMBER, {
+        addIndexs: [4, 8, 12],
+        addstr: '-',
+      }),
     label: '카드번호',
     type: 'text',
     maxLength: 19,
@@ -31,8 +32,8 @@ const INPUTS: InputType[] = [
     placeholder: '',
   },
   {
-    key: 'expireDate',
-    formatter: (value: string) => expireDateFormat(value),
+    key: CARD_INFO.EXPIRE_DATE,
+    formatter: (value: string) => getConvertDateFormat(value),
     label: '만료일',
     type: 'text',
     maxLength: 5,
@@ -41,8 +42,8 @@ const INPUTS: InputType[] = [
     placeholder: 'MM/YY',
   },
   {
-    key: 'cardOwner',
-    formatter: (value: string) => cardOwnerFormat(value),
+    key: CARD_INFO.CARD_OWNER,
+    formatter: (value: string) => getConvertAddStrFormat(value, REGEX.NOT_ENG),
     label: '카드소유자 이름(선택)',
     type: 'text',
     maxLength: 30,
@@ -52,8 +53,9 @@ const INPUTS: InputType[] = [
     isMarkValueLength: true,
   },
   {
-    key: 'pinCode',
-    formatter: (value: string) => onlyNumberFormat(value),
+    key: CARD_INFO.PIN_CODE,
+    formatter: (value: string) =>
+      getConvertAddStrFormat(value, REGEX.NOT_NUMBER),
     label: '보안코드(CVC/CVV)',
     type: 'password',
     maxLength: 3,
@@ -61,16 +63,6 @@ const INPUTS: InputType[] = [
     isRequire: true,
     placeholder: '',
   },
-  // {
-  //   key: 'password',
-  //   formatter: (value: string) => onlyNumberFormat(value),
-  //   label: '카드비밀번호',
-  //   type: 'password',
-  //   maxLength: 1,
-  //   width: '15%',
-  //   isRequire: true,
-  //   placeholder: '',
-  // },
 ]
 
 export default INPUTS

@@ -21,7 +21,6 @@ const ModalPortal = ({ children, wrapperId }: ContextPortalProps) => {
       document.getElementById(wrapperId) ||
       (createWrapperAndAppendToBody(wrapperId) as Element)
     setWrapperElement(element)
-    console.log(element)
 
     return () => {
       if (element?.parentNode) {

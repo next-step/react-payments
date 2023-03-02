@@ -25,7 +25,7 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
   const completeCardRegistor = () => {
     addCard(card)
     onNavigate()
-    resetCard(INIT_CARD_VALUE)
+    resetCard()
   }
 
   const changeValue = (value: string, name: CardTypeKeys) => {
@@ -48,29 +48,27 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
     validator.expireDate
 
   return (
-    <>
-      <main id='add-card-container'>
-        {isComplete ? (
-          <CompleteRegisterCard
-            card={card}
-            changeValue={changeValue}
-            submit={completeCardRegistor}
-          />
-        ) : (
-          <RegisterCard
-            card={card}
-            onNavigate={onNavigate}
-            onClickNextBtn={onNavigateNextStep}
-            changeValue={changeValue}
-            isCompleteRegister={isCompleteRegister}
-          />
-        )}
+    <main id='add-card-container'>
+      {isComplete ? (
+        <CompleteRegisterCard
+          card={card}
+          changeValue={changeValue}
+          submit={completeCardRegistor}
+        />
+      ) : (
+        <RegisterCard
+          card={card}
+          onNavigate={onNavigate}
+          onClickNextBtn={onNavigateNextStep}
+          changeValue={changeValue}
+          isCompleteRegister={isCompleteRegister}
+        />
+      )}
 
-        <Modal isOpen={validator.cardNumber && !validator.cardCompanyCode}>
-          <CardCompanyList onClick={changeCardCompanyValue} />
-        </Modal>
-      </main>
-    </>
+      <Modal isOpen={validator.cardNumber && !validator.cardCompanyCode}>
+        <CardCompanyList onClick={changeCardCompanyValue} />
+      </Modal>
+    </main>
   )
 }
 

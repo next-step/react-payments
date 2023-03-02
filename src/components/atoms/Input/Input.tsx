@@ -42,7 +42,7 @@ const Input: React.FC<InputProps> = ({
       type={type}
       value={value}
       placeholder={placeholder}
-      onChange={(e: ChangeEvent) => onChange(e)}
+      onChange={onChange}
       name={name}
       maxLength={maxLength}
       style={{ width, textAlign }}
