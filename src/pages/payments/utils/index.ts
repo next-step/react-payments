@@ -1,7 +1,7 @@
 import { RefObject } from "react";
 
 export const getNumberWithoutFormatter = (input: string) => {
-  return input?.replace(/[^0-9|/|-]/g, "");
+  return input?.replace(/[^0-9|/-]/g, "");
 };
 
 export const validateInput = ({
@@ -32,7 +32,7 @@ export const formatNumber = ({
   nth: number;
   formatter?: string;
 }): string => {
-  const length = input?.length;
+  const length = input.length;
 
   // 처음 이후로 formatter가 붙을 때
   if (input.includes(formatter) && (length + 1) % nth === 0) {
