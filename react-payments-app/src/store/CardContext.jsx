@@ -3,6 +3,7 @@ import { cardReducer } from './cardReducer';
 import { CHANGE_CARD } from '../constants/action';
 
 const initialState = {
+  id: 0,
   cardNumbers: '',
   cardExpirationDate: ['', ''],
   cardOwner: '',
@@ -16,16 +17,21 @@ const initialState = {
 export const CardContext = createContext(null);
 
 export const CardProvider = ({ children }) => {
+  const [cardList, setCardList] = useState([]);
   const [cardInfo, dispatch] = useReducer(cardReducer, initialState);
 
   const changeCardInfo = (actionType, cardInfo) => {
     dispatch({ type: actionType, payload: cardInfo });
   };
 
-  //TODO: 닉네임 상태관리
+  const registerCard = (cardInfo) => {
+    setCardList([...cardList, cardInfo]);
+  };
 
   return (
-    <CardContext.Provider value={{ cardInfo, changeCardInfo }}>
+    <CardContext.Provider
+      value={{ cardInfo, changeCardInfo, registerCard, cardList }}
+    >
       {children}
     </CardContext.Provider>
   );

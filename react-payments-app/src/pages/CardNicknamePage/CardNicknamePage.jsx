@@ -3,14 +3,13 @@ import Card from '../../components/domain/Card/Card';
 import CardNicknameInput from '../../components/domain/CardInput/CardNickname/CardNicknameInput';
 import Button from '../../components/common/Button/Button';
 import { useCard } from '../../store/CardContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Form } from 'react-router-dom';
 import { useState } from 'react';
 import { CHANGE_CARD } from '../../constants/action';
 import { MAX_INPUT_LENGTH } from '../../constants/numbers';
-import Form from '../../components/common/Input/Form';
 
 const CardNicknamePage = () => {
-  const { cardInfo, changeCardInfo } = useCard();
+  const { cardInfo, changeCardInfo, registerCard } = useCard();
   const { cardNumbers, cardOwner, cardExpirationDate } = cardInfo;
 
   const navigate = useNavigate();
@@ -32,15 +31,22 @@ const CardNicknamePage = () => {
 
   const handleChange = (cardNickname) => {
     setCardNickname(cardNickname);
+
+    if (!isValidNickname(cardNickname)) {
+      changeCardInfo(CHANGE_CARD.ERROR, '이름은 10자가 넘을 수 없어요.');
+      return;
+    }
+    changeCardInfo(CHANGE_CARD.ERROR, null);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (isValidNickname(cardNickname)) {
-      changeCardInfo(CHANGE_CARD.NICKNAME, cardNickname);
-      navigate('/');
-    }
+
+    changeCardInfo(CHANGE_CARD.NICKNAME, cardNickname);
+    registerCard(cardInfo);
+    navigate('/');
   };
+
   return (
     <>
       <Header
@@ -56,7 +62,7 @@ const CardNicknamePage = () => {
       />
       <Form
         id={'card-nickname-form'}
-        handleSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         error={cardInfo.error}
       >
         <CardNicknameInput onChange={handleChange} />

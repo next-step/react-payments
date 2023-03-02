@@ -18,6 +18,8 @@ export const cardReducer = (state, action) => {
       return { ...state, cardNickname: action.payload };
     case CHANGE_CARD.ERROR:
       return { ...state, error: action.payload };
+    case CHANGE_CARD.ID:
+      return { ...state, id: new Date() };
     default:
       throw new Error('Invalid action type');
   }

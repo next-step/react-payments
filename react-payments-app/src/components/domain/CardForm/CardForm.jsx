@@ -39,10 +39,14 @@ const CardForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    //TODO: fix validation error
-    // if (isAllFilledOut(cardInfo))
+    // //TODO: fix validation error
+    // if (!isAllFilledOut(cardInfo)) {
+    //   changeCardInfo(CHANGE_CARD.ERROR, '빈칸을 모두 입력해 주세요.');
+    //   return;
+    // }
+
+    changeCardInfo(CHANGE_CARD.ID);
     navigate('/completed');
-    changeCardInfo(CHANGE_CARD.ERROR, '빈칸을 모두 입력해 주세요.');
   };
 
   return (
