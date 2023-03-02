@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import CardNickNameForm from '@/components/common/CardNickNameForm';
+import { CardNickNameForm } from '@/components/common';
 import { Button, ColumnLayout, CreditCard, Text } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
 import { styled } from '@/lib/stitches.config';

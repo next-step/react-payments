@@ -1,4 +1,4 @@
-import TextInput from '@/components/common/Input';
+import { TextInput } from '@/components/common';
 import { Button, InputContainer } from '@/components/UI';
 import useFormData from '@/hooks/formHook';
 import { useRouter } from '@/hooks/useRouter';

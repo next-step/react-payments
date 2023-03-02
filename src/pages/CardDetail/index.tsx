@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import CardNickNameForm from '@/components/common/CardNickNameForm';
+import { CardNickNameForm } from '@/components/common';
 import {
   Button,
   ColumnLayout,
