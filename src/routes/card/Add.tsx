@@ -1,16 +1,17 @@
 import Card from "../../components/Card";
 import CardNumber from "../../components/Form/CardNumber";
-import type { CardNumbers } from "../../components/Form/CardNumber";
 import ExpiredDate from "../../components/Form/ExpiredDate";
 import UserName from "../../components/Form/UserName";
 import Code from "../../components/Form/Code";
 import Password from "../../components/Form/Password";
 import Button from "../../components/Form/Button";
-import React, { useContext, useMemo, useState } from "react";
-import { BANKS, DEFAULT_BANK_COLOR } from "../../constants/bank";
+import React from "react";
 import { useHistory } from "react-router-dom";
-import { ModalContext } from "../../components/ModalProvider";
-import { CardContext } from "../../components/CardProvider";
+import Header from "../../components/Header";
+import useCardChange from "../../hooks/useCardChange";
+import useModalContext from "../../hooks/useModalContext";
+import useCardContext from "../../hooks/useCardContext";
+import { ROUTE } from "../../constants/route";
 
 const INPUT_NAMES = [
   "card-0",
@@ -24,10 +25,6 @@ const INPUT_NAMES = [
   "password1",
   "password2",
 ];
-
-const formatNumber = (number: string) => {
-  return number.replaceAll(/[0-9]/g, "*");
-};
 
 const checkValid = (eventTarget: any) => {
   return INPUT_NAMES.some((inputName) => {
@@ -47,73 +44,32 @@ const checkValid = (eventTarget: any) => {
 };
 
 function Add() {
-  const [cardNumber, setCardNumber] = useState("");
-  const [expireMonth, setExpireMonth] = useState(0);
-  const [expireYear, setExpireYear] = useState(0);
-  const [userName, setUserName] = useState("");
-  const [code, setCode] = useState(0);
-  const [password, setPassword] = useState("");
-  const isTyping = !!cardNumber || !!expireMonth || !!expireYear || !!userName;
+  const { setIsOpen } = useModalContext();
+  const { setCard, card, bankName } = useCardContext();
+  const {
+    onCardNumberChange,
+    onCodeChange,
+    onExpiredDateChange,
+    onUserNameChange,
+    onPasswordChange,
+    cardInfo,
+    cardColor,
+    formattedCardNumber,
+  } = useCardChange();
+
   const history = useHistory();
-
-  const modalContext = useContext(ModalContext);
-  const cardContext = useContext(CardContext);
-
-  if (!modalContext || !cardContext) {
-    alert("context 누락");
-    throw Error("context 필수값 누락");
-  }
-
-  const { setIsOpen } = modalContext;
-  const { card } = cardContext;
-
-  const color = useMemo(() => {
-    if (card.bankId) {
-      const selectedBank = BANKS.find((bank) => bank.ID === card.bankId);
-      return selectedBank ? selectedBank.COLOR : "";
-    } else {
-      return isTyping ? DEFAULT_BANK_COLOR : "";
-    }
-  }, [card.bankId, isTyping]);
-  const bankName = useMemo(() => {
-    if (card.bankId) {
-      const selectedBank = BANKS.find((bank) => bank.ID === card.bankId);
-      return selectedBank ? selectedBank.NAME : "";
-    }
-  }, [card.bankId]);
-
-  const onCardNumberChange = (cardNumbers: CardNumbers) => {
-    const hasCardNumber = Object.values(cardNumbers).some(
-      (cardNumber) => cardNumber
-    );
-    const formattedCardNumber = hasCardNumber
-      ? `${cardNumbers[0]}-${cardNumbers[1]}-${formatNumber(
-          cardNumbers[2]
-        )}-${formatNumber(cardNumbers[3])}`
-      : "";
-    setCardNumber(formattedCardNumber);
-  };
-  const onExpiredDateChange = (expiredDates: number[]) => {
-    setExpireMonth(expiredDates[0]);
-    setExpireYear(expiredDates[1]);
-  };
-  const onUserNameChange = (userName: string) => {
-    setUserName(userName);
-  };
-  const onCodeChange = (code: number) => {
-    setCode(code);
-  };
-  const onPasswordChange = (password: ObjectType): void => {
-    const formattedPassword = Object.values(password).join();
-    setPassword(formattedPassword);
-  };
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const isInvalid = checkValid(e.currentTarget);
 
     if (!isInvalid) {
       if (card.bankId) {
-        history.push("/complete");
+        const cardData = {
+          ...cardInfo,
+          bankId: card.bankId,
+        };
+        setCard(cardData);
+        history.push(ROUTE.COMPLETE);
         return;
       }
       setIsOpen(true);
@@ -122,12 +78,12 @@ function Add() {
 
   return (
     <>
+      <Header />
       <Card
-        cardNumber={cardNumber}
-        expireMonth={expireMonth}
-        expireYear={expireYear}
-        userName={userName}
-        color={color}
+        cardNumber={formattedCardNumber}
+        expiredDate={cardInfo.expiredDate}
+        userName={cardInfo.userName}
+        color={cardColor}
         bankName={bankName}
       ></Card>
       <form onSubmit={submitHandler}>
@@ -141,9 +97,5 @@ function Add() {
     </>
   );
 }
-
-type ObjectType = {
-  [key: number | string]: string;
-};
 
 export default Add;

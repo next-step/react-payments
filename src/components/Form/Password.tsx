@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Size } from "../../types/common";
 import Input from "../Input/Input";
 import InputContainer from "../Input/InputContainer";
@@ -31,14 +31,12 @@ function Password({ onPasswordChange }: PasswordProps) {
       }
     }
     setPassword(newObj);
-  };
 
-  useEffect(() => {
-    const hasPassword = Object.values(password).some((number) => number);
+    const hasPassword = Object.values(newObj).some((number) => number);
     if (hasPassword) {
-      onPasswordChange(password);
+      onPasswordChange(newObj);
     }
-  }, [password, onPasswordChange]);
+  };
 
   return (
     <InputContainer label="카드 비밀번호">

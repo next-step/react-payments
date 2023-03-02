@@ -1,11 +1,12 @@
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { ROUTE } from "../constants/route";
 
 function Header() {
   const history = useHistory();
 
   const onClick = () => {
-    history.push("/list");
+    history.push(ROUTE.LIST);
   };
   return <H2 onClick={onClick}>&lt; 카드 추가</H2>;
 }

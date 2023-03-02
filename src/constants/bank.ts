@@ -1,3 +1,5 @@
+import { CardType } from "../types/common";
+
 export const BANKS = [
   {
     NAME: "강준카드",
@@ -42,3 +44,24 @@ export const BANKS = [
 ];
 
 export const DEFAULT_BANK_COLOR = "#94dacd";
+
+export const initCard: CardType = {
+  cardNumber: {
+    0: "",
+    1: "",
+    2: "",
+    3: "",
+  },
+  expiredDate: {
+    month: "",
+    year: "",
+  },
+  userName: "",
+  code: 0,
+  password: {
+    1: "",
+    2: "",
+  },
+  bankId: "",
+  cardAlias: "",
+};

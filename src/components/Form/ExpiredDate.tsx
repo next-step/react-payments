@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { blockInput, remainOnlyNumber } from "../../utils/format";
 import Input from "../Input/Input";
 import InputBox from "../Input/InputBox";
@@ -67,11 +67,8 @@ function ExpiredDate({ onExpiredDateChange }: ExpiredDateProps) {
     }
 
     setExpiredDate(date);
+    onExpiredDateChange(date);
   };
-
-  useEffect(() => {
-    onExpiredDateChange(expiredDate);
-  }, [expiredDate, onExpiredDateChange]);
 
   return (
     <InputContainer label="만료일">

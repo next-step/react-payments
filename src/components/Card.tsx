@@ -1,18 +1,33 @@
 import styled from "styled-components";
 import { Size } from "../types/common";
+import { Date } from "./Form/ExpiredDate";
 
 function Card({
+  isEmpty = false,
   bankName,
   cardNumber,
   userName,
-  expireMonth,
-  expireYear,
+  expiredDate,
   size = Size.Small,
   color,
+  onClick,
 }: CardProps) {
+  if (isEmpty) {
+    return (
+      <CardContainer>
+        <CardBox>
+          <EmptyCard onClick={onClick}>+</EmptyCard>
+        </CardBox>
+      </CardContainer>
+    );
+  }
+
+  const expiredMonth = Number(expiredDate?.month);
+  const expiredYear = Number(expiredDate?.year);
+
   return (
     <CardContainer>
-      <CardBox size={size} color={color}>
+      <CardBox size={size} color={color} onClick={onClick}>
         <CardTop>
           <CardText>{bankName}</CardText>
         </CardTop>
@@ -28,8 +43,8 @@ function Card({
           <CardBottomInfo>
             <CardText>{userName ?? "NAME"}</CardText>
             <CardText>
-              {expireMonth && expireMonth > 0 ? expireMonth : "MM"} /{" "}
-              {expireYear && expireYear > 0 ? expireYear : "YY"}
+              {expiredMonth && expiredMonth > 0 ? expiredMonth : "MM"} /{" "}
+              {expiredYear && expiredYear > 0 ? expiredYear : "YY"}
             </CardText>
           </CardBottomInfo>
         </CardBottom>
@@ -42,18 +57,34 @@ type CardSize = Exclude<Size, Size.Medium>;
 
 type CardProps = {
   bankName?: string;
-  cardNumber: string;
+  cardNumber?: string;
   userName?: string;
-  expireMonth: number;
-  expireYear: number;
+  expiredDate?: Date;
   size?: CardSize;
   color?: string;
+  isEmpty?: boolean;
+  onClick?: (e: React.MouseEvent) => void;
 };
 
 type CardBoxProps = {
   size?: CardSize;
   color?: string;
 };
+
+const EmptyCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 208px;
+  height: 130px;
+  font-size: 30px;
+  color: #575757;
+  background: #e5e5e5;
+  box-shadow: 3px 3px 5px rgb(0 0 0 / 25%);
+  border-radius: 5px;
+  user-select: none;
+`;
 
 const CardContainer = styled.div`
   display: flex;

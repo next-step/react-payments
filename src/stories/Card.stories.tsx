@@ -10,6 +10,5 @@ const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 
 export const Basic = Template.bind({});
 Basic.args = {
-  expireMonth: 0,
-  expireYear: 0,
+  expiredDate: { month: "", year: "" },
 };

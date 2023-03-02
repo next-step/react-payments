@@ -1,19 +1,11 @@
-import { useContext } from "react";
 import styled from "styled-components";
-import { ModalContext } from "./ModalProvider";
+import useModalContext from "../hooks/useModalContext";
 type ComponentProps = {
   children?: JSX.Element | JSX.Element[] | null;
 };
 
 function ModalContainer({ children }: ComponentProps) {
-  const modalContext = useContext(ModalContext);
-
-  if (!modalContext) {
-    alert("context 누락");
-    throw Error("context 필수값 누락");
-  }
-
-  const { isOpen } = modalContext;
+  const { isOpen } = useModalContext();
 
   return (
     <>

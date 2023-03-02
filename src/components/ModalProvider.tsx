@@ -10,10 +10,7 @@ type ContextProps = {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 };
 
-export const ModalContext = createContext<ContextProps | null>({
-  isOpen: false,
-  setIsOpen: () => {},
-});
+export const ModalContext = createContext<ContextProps | null>(null);
 
 function ModalProvider({ children }: ComponentProps) {
   const [isOpen, setIsOpen] = useState(false);

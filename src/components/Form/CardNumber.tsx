@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { remainOnlyNumber } from "../../utils/format";
 import Input from "../Input/Input";
 import InputBox from "../Input/InputBox";
@@ -22,11 +22,7 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
     3: "",
   });
 
-  const itemsRef = useRef<any>([]);
-
-  useEffect(() => {
-    onCardNumberChange(cardNumbers);
-  }, [cardNumbers, onCardNumberChange]);
+  const itemsRef = useRef<HTMLInputElement[]>([]);
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -40,13 +36,14 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
     };
 
     const isMaxLength = event.currentTarget.value.length === CARD_MAX_LENGTH;
-    const isLastCardNumberIndex = type === 4;
+    const isLastCardNumberIndex = type === 3;
 
     if (isMaxLength && !isLastCardNumberIndex) {
       itemsRef.current[type + 1].focus();
     }
 
     setCardNumbers(numbers);
+    onCardNumberChange(numbers);
   };
 
   return (
