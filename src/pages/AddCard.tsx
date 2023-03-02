@@ -1,14 +1,14 @@
-import { ChangeEvent, RefObject, useRef, useState } from 'react';
+import { ChangeEvent, RefObject, useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Button from '../components/Button';
 import Card from '../components/Card';
+import { PaymentsContext } from '../context/PaymentsContext';
 import useRefObjects from '../hooks/useRefObjects';
 import { extractNumbers } from '../utils';
 
-const cardNumberInputTypes = ['text', 'text', 'password', 'password'];
-
 const AddCard = () => {
+  const { addCard } = useContext(PaymentsContext);
   const navigate = useNavigate();
   const cardRefs = useRefObjects<HTMLInputElement>(4);
   const expirationDateRef = useRef<HTMLInputElement>(null);
@@ -79,13 +79,18 @@ const AddCard = () => {
     );
   };
 
-  const CardData = {
+  const cardData = {
     num1: cardRefs[0].current?.value,
     num2: cardRefs[1].current?.value,
     num3: cardRefs[2].current?.value,
     num4: cardRefs[3].current?.value,
     holder: name,
     expiry: expirationDateRef.current?.value,
+  };
+
+  const cardAdded = () => {
+    addCard({ ...cardData, id: new Date() });
+    navigate('/card-added');
   };
 
   return (
@@ -96,7 +101,7 @@ const AddCard = () => {
         </Button>
         카드 추가
       </h2>
-      <Card data={CardData} />
+      <Card data={cardData} />
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
@@ -179,9 +184,7 @@ const AddCard = () => {
         />
       </div>
       <div className="button-box">
-        <Button onClick={() => navigate('/card-added', { state: CardData })}>
-          다음
-        </Button>
+        <Button onClick={cardAdded}>다음</Button>
       </div>
     </section>
   );
@@ -211,3 +214,5 @@ const JANUARY = '01';
 const DECEMBER = '12';
 const MONTH_VALIDITY_MESSAGE = '유효하지 않아요';
 const NAME_MAX_LENGTH = 30;
+
+const cardNumberInputTypes = ['text', 'text', 'password', 'password'];
