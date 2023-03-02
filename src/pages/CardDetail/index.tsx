@@ -91,7 +91,7 @@ function handleSave(
 ) {
   return () => {
     const data = formData().current;
-    const nickName = data['nickName'];
+    const nickName = data[CardKey.NICK_NAME];
     const errorMessage = getErrorMessage(CardKey.NICK_NAME);
 
     if (errorMessage) {
@@ -103,7 +103,7 @@ function handleSave(
 
     setItem(StorageKey.CARD_LIST, [
       ...cards.filter(({ UID }) => UID != card.UID),
-      { ...card, nickName },
+      { ...card, [CardKey.NICK_NAME]: nickName },
     ]);
 
     callback?.();

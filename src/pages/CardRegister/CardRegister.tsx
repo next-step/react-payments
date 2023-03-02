@@ -62,7 +62,11 @@ export const CardRegister = () => {
 
     setItem(StorageKey.CARD_LIST, [
       ...(getItem(StorageKey.CARD_LIST) ?? []),
-      { ...newCard, uid: Date.now(), createdDate: Date.now() },
+      {
+        ...newCard,
+        [CardKey.UID]: Date.now(),
+        [CardKey.CREATE_DATE]: Date.now(),
+      },
     ]);
     go('/register-confirm');
   };
