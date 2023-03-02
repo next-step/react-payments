@@ -3,7 +3,7 @@ import { cardReducer } from './cardReducer';
 import { CHANGE_CARD } from '../constants/action';
 
 const initialState = {
-  cardNumbers: ['', '', '', ''],
+  cardNumbers: '',
   cardExpirationDate: ['', ''],
   cardOwner: '',
   cardCVC: '',
