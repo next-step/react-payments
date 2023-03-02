@@ -23,23 +23,23 @@ const CardForm = () => {
     <FormWrapper onBlur={makeDirty}>
       <CardNumberInput
         dirtyState={dirtyState}
-        onChange={handleFormInput(formData, CardKey.CARD_NUMBERS as CardKey)}
+        onChange={handleFormInput(formData, CardKey.CARD_NUMBERS)}
       />
       <ExpiredDateInput
         dirtyState={dirtyState}
-        onChange={handleFormInput(formData, CardKey.EXPIRE_DATE as CardKey)}
+        onChange={handleFormInput(formData, CardKey.EXPIRE_DATE)}
       />
       <CardOwnerInput
         dirtyState={dirtyState}
-        onChange={handleFormInput(formData, CardKey.OWNER_NAME as CardKey)}
+        onChange={handleFormInput(formData, CardKey.OWNER_NAME)}
       />
       <CardCVCInput
         dirtyState={dirtyState}
-        onChange={handleFormInput(formData, CardKey.CVC as CardKey)}
+        onChange={handleFormInput(formData, CardKey.CVC)}
       />
       <CardPwdInput
         dirtyState={dirtyState}
-        onChange={handleFormInput(formData, CardKey.PASSWORD as CardKey)}
+        onChange={handleFormInput(formData, CardKey.PASSWORD)}
       />
     </FormWrapper>
   );

@@ -1,4 +1,4 @@
-import { memo, useEffect, useMemo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
@@ -15,23 +15,16 @@ const CardNumberInput = ({ onChange, dirtyState }: Props) => {
   const [cardNumbers, setCardNumbers] = useState({});
   const keyPressInterceptor = useNumberKeyInterceptor();
 
-  const isValidCardNumberLength =
-    Object.values(cardNumbers).join('').length === 16;
-
-  const errorMessage = useMemo(() => {
-    if (!isValidCardNumberLength) return ERROR_MESSAGE.FULL_NUMBER;
-  }, [cardNumbers]);
-
   useEffect(() => {
-    onChange({ val: cardNumbers, isValid: isValidCardNumberLength });
+    onChange({ ...cardNumbers, isValid: !getErrorMessage(cardNumbers) });
     dispatch();
   }, [cardNumbers]);
 
   return (
     <InputContainer
       label="카드번호"
-      isError={dirtyState && !isValidCardNumberLength}
-      errorMessage={errorMessage}
+      isError={dirtyState && !!getErrorMessage(cardNumbers)}
+      errorMessage={getErrorMessage(cardNumbers)}
     >
       <input
         type="tel"
@@ -75,4 +68,11 @@ export default memo(CardNumberInput);
 const ERROR_MESSAGE = {
   ONLY_NUMBER: '카드번호는 숫자만 입력할 수 있습니다.',
   FULL_NUMBER: '카드 번호 16자리를 모두 입력해주세요.',
+};
+
+const getErrorMessage = (val: object) => {
+  const isValidCardNumberLength = Object.values(val).join('').length === 16;
+  if (!isValidCardNumberLength) {
+    return ERROR_MESSAGE.FULL_NUMBER;
+  }
 };

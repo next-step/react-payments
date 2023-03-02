@@ -1,4 +1,4 @@
-import { memo, useEffect, useMemo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
@@ -15,25 +15,16 @@ const CardPwdInput = ({ onChange, dirtyState }: Props) => {
   const [pwd, setPwd] = useState({});
   const keyPressInterceptor = useNumberKeyInterceptor();
 
-  const isPwdValid = useMemo(
-    () => Boolean(Object.values(pwd).join('').length == MIN_PWD_LENGTH),
-    [pwd]
-  );
-
-  const errorMessage = useMemo(() => {
-    if (!isPwdValid) return ERROR_MESSAGE.NO_EMPTY;
-  }, [pwd]);
-
   useEffect(() => {
-    onChange({ val: pwd, isValid: isPwdValid });
+    onChange({ ...pwd, isValid: !getErrorMessage(pwd) });
     dispatch();
   }, [pwd]);
 
   return (
     <InputContainer
       label="카드 비밀번호"
-      isError={dirtyState && !isPwdValid}
-      errorMessage={errorMessage}
+      isError={dirtyState && !!getErrorMessage(pwd)}
+      errorMessage={getErrorMessage(pwd)}
     >
       <input
         type="password"
@@ -73,4 +64,13 @@ const MIN_PWD_LENGTH = 4;
 
 const ERROR_MESSAGE = {
   NO_EMPTY: '비밀번호를 모두 입력해주세요.',
+};
+
+const getErrorMessage = (val: object) => {
+  const isPwdValid = Boolean(
+    Object.values(val).join('').length == MIN_PWD_LENGTH
+  );
+  if (!isPwdValid) {
+    return ERROR_MESSAGE.NO_EMPTY;
+  }
 };

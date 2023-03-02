@@ -9,19 +9,15 @@ import { type CardFormType, CardKey } from '@/types';
 
 export const initialCardState: CardFormType = {
   [CardKey.CARD_NUMBERS]: {
-    val: {
-      1: '',
-      2: '',
-      3: '',
-      4: '',
-    },
+    1: '',
+    2: '',
+    3: '',
+    4: '',
     isValid: false,
   },
   [CardKey.EXPIRE_DATE]: {
-    val: {
-      month: '',
-      year: '',
-    },
+    month: '',
+    year: '',
     isValid: false,
   },
   [CardKey.CVC]: {
@@ -29,12 +25,10 @@ export const initialCardState: CardFormType = {
     isValid: false,
   },
   [CardKey.PASSWORD]: {
-    val: {
-      1: '',
-      2: '',
-      3: '',
-      4: '',
-    },
+    1: '',
+    2: '',
+    3: '',
+    4: '',
     isValid: false,
   },
   [CardKey.OWNER_NAME]: {
@@ -50,17 +44,18 @@ export const CardRegister = () => {
   const { go } = useRouter();
 
   const cardDisplayInfo = {
-    [CardKey.CARD_NUMBERS]: form[CardKey.CARD_NUMBERS]?.val,
-    [CardKey.OWNER_NAME]: form[CardKey.OWNER_NAME]?.val,
-    [CardKey.EXPIRE_DATE]: form[CardKey.EXPIRE_DATE]?.val,
+    [CardKey.CARD_NUMBERS]: form[CardKey.CARD_NUMBERS],
+    [CardKey.OWNER_NAME]: form[CardKey.OWNER_NAME],
+    [CardKey.EXPIRE_DATE]: form[CardKey.EXPIRE_DATE],
   };
 
   const isAllValid = Object.values(form).every((input) => input.isValid);
 
   const handleSubmit = () => {
     const newCard = Object.entries(form).reduce(
-      (cardState, [cardKey, form]) => {
-        return { ...cardState, [cardKey]: form.val };
+      (cardState, [cardKey, cardForm]) => {
+        const { isValid, ...cardData } = { ...cardForm };
+        return { ...cardState, [cardKey]: cardData };
       },
       {}
     );

@@ -10,11 +10,11 @@ type Props = {
 };
 
 const CardOwnerInput = ({ onChange, dirtyState }: Props) => {
-  const [owner, setOwner] = useState('');
+  const [owner, setOwner] = useState<{ val?: string }>({});
   const { handleInputChange, dispatch } = useFormContext();
 
   useEffect(() => {
-    onChange({ val: owner, isValid: !getErrorMessage(owner) });
+    onChange({ ...owner, isValid: !getErrorMessage(owner) });
     dispatch();
   }, [owner]);
 
@@ -26,12 +26,13 @@ const CardOwnerInput = ({ onChange, dirtyState }: Props) => {
     >
       <input
         type="text"
+        name="val"
         placeholder="Dahye"
         onChange={handleInputChange(setOwner)}
         maxLength={MAX_OWNER_NAME_LENGTH}
       />
       <span>
-        ({owner.length}/{MAX_OWNER_NAME_LENGTH})
+        ({owner?.val?.length || 0}/{MAX_OWNER_NAME_LENGTH})
       </span>
     </InputContainer>
   );
@@ -46,11 +47,11 @@ const ERROR_MESSAGE = {
   OVER_LIMITED_TEXT: `소유자명은 ${MAX_OWNER_NAME_LENGTH}글자까지 입력할 수 있습니다.`,
 };
 
-const getErrorMessage = (owner: string) => {
-  if (!owner) {
+const getErrorMessage = ({ val }: any) => {
+  if (!val) {
     return ERROR_MESSAGE.NO_EMPTY;
   }
-  if (owner.length > MAX_OWNER_NAME_LENGTH) {
+  if (val.length > MAX_OWNER_NAME_LENGTH) {
     return ERROR_MESSAGE.OVER_LIMITED_TEXT;
   }
 };

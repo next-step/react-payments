@@ -12,11 +12,11 @@ type Props = {
 
 const CardCVCInput = ({ onChange, dirtyState }: Props) => {
   const { handleInputChange, dispatch } = useFormContext();
-  const [cvc, setCVC] = useState('');
+  const [cvc, setCVC] = useState({});
   const keyPressInterceptor = useNumberKeyInterceptor();
 
   useEffect(() => {
-    onChange({ val: cvc, isValid: !getErrorMessage(cvc) });
+    onChange({ ...cvc, isValid: !getErrorMessage(cvc) });
     dispatch();
   }, [cvc]);
 
@@ -28,6 +28,7 @@ const CardCVCInput = ({ onChange, dirtyState }: Props) => {
     >
       <input
         type="password"
+        name="val"
         onKeyPress={keyPressInterceptor}
         onChange={handleInputChange(setCVC)}
         maxLength={3}
@@ -44,6 +45,6 @@ const ERROR_MESSAGE = {
   UNDER_MIN_LENGTH: 'CVC 세자리를 모두 입력해주세요.',
 };
 
-const getErrorMessage = (cvc: string) => {
-  if (!(cvc.length === CVC_MIN_LENGTH)) return ERROR_MESSAGE.UNDER_MIN_LENGTH;
+const getErrorMessage = ({ val = '' }: { val?: string }) => {
+  if (!(val.length === CVC_MIN_LENGTH)) return ERROR_MESSAGE.UNDER_MIN_LENGTH;
 };

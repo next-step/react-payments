@@ -22,7 +22,16 @@ export type ExpireDate = {
   year: string;
 };
 
-export type Validation<T> = { val: T } & { isValid: boolean };
+export type CVC = {
+  val: string;
+};
+
+export type OwnerName = {
+  val: string;
+};
+
+export type Validation<T> = T & { isValid: boolean };
+export type Maybe<T> = T | object;
 
 export const enum CardKey {
   CARD_NUMBERS = 'CARD_NUMBERS',
@@ -37,9 +46,9 @@ export const enum CardKey {
 export type CardData = {
   [CardKey.CARD_NUMBERS]: CardNumber;
   [CardKey.EXPIRE_DATE]: ExpireDate;
-  [CardKey.CVC]: string;
+  [CardKey.CVC]: CVC;
   [CardKey.PASSWORD]: Password;
-  [CardKey.OWNER_NAME]: string;
+  [CardKey.OWNER_NAME]: OwnerName;
   [CardKey.UID]: string;
   [CardKey.NICK_NAME]: string;
   [CardKey.CREATE_DATE]: string;
@@ -48,7 +57,7 @@ export type CardData = {
 export type CardFormType = {
   [CardKey.CARD_NUMBERS]: Validation<CardNumber>;
   [CardKey.EXPIRE_DATE]: Validation<ExpireDate>;
-  [CardKey.CVC]: Validation<string>;
+  [CardKey.CVC]: Validation<CVC>;
   [CardKey.PASSWORD]: Validation<Password>;
-  [CardKey.OWNER_NAME]: Validation<string>;
+  [CardKey.OWNER_NAME]: Validation<OwnerName>;
 };

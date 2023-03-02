@@ -19,7 +19,9 @@ export const DefaultCardInfo: Props['cardInfo'] = {
     3: '',
     4: '',
   },
-  OWNER_NAME: '',
+  OWNER_NAME: {
+    val: '',
+  },
   EXPIRE_DATE: { month: '', year: '' },
 };
 
@@ -33,7 +35,7 @@ const CreditCard = ({ size = 'large', cardInfo = DefaultCardInfo }: Props) => {
           ))}
       </Card.NumberBox>
       <Card.BottomBox>
-        <Card.Name>{cardInfo.OWNER_NAME}</Card.Name>
+        <Card.Name>{cardInfo.OWNER_NAME?.val}</Card.Name>
         <div>
           <span>{cardInfo?.EXPIRE_DATE?.month}</span>/
           <span>{cardInfo?.EXPIRE_DATE?.year}</span>

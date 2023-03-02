@@ -1,24 +1,21 @@
 import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
 
-function handleInputChange(
-  input: Dispatch<SetStateAction<object>>
-): (e: ChangeEvent<HTMLInputElement>) => void;
-function handleInputChange(
-  input: Dispatch<SetStateAction<string>>
-): (e: ChangeEvent<HTMLInputElement>) => void;
-
-function handleInputChange(setValue: any) {
+function handleInputChange<T>(setValue: Dispatch<SetStateAction<T>>) {
   return (event: ChangeEvent<HTMLInputElement>) => {
     event.persist();
     const { value, name } = event.target;
-    setValue((prev: object | string) =>
-      isObjectState(prev)
-        ? {
-            ...prev,
-            [name]: value,
-          }
-        : value
-    );
+    setValue((prev: T): T => {
+      if (isObjectState(prev)) {
+        return {
+          ...prev,
+          [name]: value,
+        };
+      }
+      if (isStringState(prev)) {
+        return value as unknown as T;
+      }
+      return prev;
+    });
   };
 }
 
@@ -46,4 +43,8 @@ export default function useFormData(initialData = {}) {
   };
 }
 
-const isObjectState = (v: any): v is object => typeof v == 'object';
+function isObjectState<T>(v: T): v is T {
+  return typeof v == 'object';
+}
+// const isObjectState = <T extends object>(v: T): v is T => typeof v == 'object';
+const isStringState = (v: any): v is string => typeof v == 'string';

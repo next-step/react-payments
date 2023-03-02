@@ -14,7 +14,7 @@ import useFormData from '@/hooks/formHook';
 import { useRouter } from '@/hooks/useRouter';
 import { getItem, setItem } from '@/storage/storage';
 import { StorageKey } from '@/storage/storageKey';
-import { CardData } from '@/types';
+import { CardData, CardKey } from '@/types';
 
 export const CardDetailPage = () => {
   const params = useParams();
@@ -56,7 +56,7 @@ export const CardDetailPage = () => {
           placeholder="카드 별칭을 입력해주세요."
           value={card.NICK_NAME}
           autoFocus
-          onChange={handleFormInput(formData, 'nickName')}
+          onChange={handleFormInput(formData, CardKey.NICK_NAME)}
         />
         <Button
           css={{ width: '$10' }}
@@ -92,7 +92,7 @@ function handleSave(
   return () => {
     const data = formData().current;
     const nickName = data['nickName'];
-    const errorMessage = getErrorMessage(data['nickName']);
+    const errorMessage = getErrorMessage(CardKey.NICK_NAME);
 
     if (errorMessage) {
       alert(errorMessage);

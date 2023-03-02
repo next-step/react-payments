@@ -15,7 +15,7 @@ const ExpiredDateInput = ({ onChange, dirtyState }: Props) => {
   const numberKeyPressInterceptor = useNumberKeyInterceptor();
 
   useEffect(() => {
-    onChange({ val: expiredDate, isValid: !getErrorMessage(expiredDate) });
+    onChange({ ...expiredDate, isValid: !getErrorMessage(expiredDate) });
     dispatch();
   }, [expiredDate]);
 
