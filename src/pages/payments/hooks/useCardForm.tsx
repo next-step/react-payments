@@ -18,17 +18,17 @@ import { useNavigate } from "react-router";
 export const useCardForm = () => {
 	const navigate = useNavigate();
 
-	const { newCardInfo } = usePaymentsState();
+	const { newCardInfo, selectedCard } = usePaymentsState();
 	const dispatch = usePaymentsDispatch();
 
 	const [name, setName] = useState("");
+	const [nickname, setNickname] = useState(selectedCard?.nickname || "");
 	const id = useId();
 	const numberInputRef = useRef<HTMLInputElement>(null);
 	const cvcInputRef = useRef<HTMLInputElement>(null);
 	const expiryInputRef = useRef<HTMLInputElement>(null);
 	const password1InputRef = useRef<HTMLInputElement>(null);
 	const password2InputRef = useRef<HTMLInputElement>(null);
-	const nicknameInputRef = useRef<HTMLInputElement>(null);
 
 	const getReference = (id: string) => {
 		switch (id) {
@@ -48,30 +48,24 @@ export const useCardForm = () => {
 	};
 
 	const formatInput = (
-		input: RefObject<HTMLInputElement>,
+		input: string,
 		id: typeof CARD_INFO.NUMBER | typeof CARD_INFO.EXPIRY,
 		maxLength: number,
 	): string => {
-		const value = input.current?.value;
-		if (!value) {
-			return "";
+		if (input.length >= maxLength) {
+			return input;
 		}
-		if (value.length >= maxLength) {
-			return value;
-		}
-
-		if (id === CARD_INFO.NUMBER) {
-			return formatNumber({ input: value, nth: 5 });
-		}
-
-		if (value.length === 2) {
-			return formatNumber({
-				input: monthConverter(value),
-				nth: 3,
-				formatter: "/",
-			});
-		} else {
-			return value;
+		switch (id) {
+			case CARD_INFO.NUMBER:
+				return formatNumber({ input, nth: 5 });
+			case CARD_INFO.NAME && input.length === 2:
+				return formatNumber({
+					input: monthConverter(input),
+					nth: 3,
+					formatter: "/",
+				});
+			default:
+				return input;
 		}
 	};
 
@@ -89,8 +83,11 @@ export const useCardForm = () => {
 			validationList: VALIDATION_LIST,
 		});
 
-		if (CARD_INFO.NUMBER || CARD_INFO.EXPIRY) {
-			ref.current.value = formatInput(ref, id, maxLength);
+		if (
+			ref.current.value &&
+			(id === CARD_INFO.NUMBER || id === CARD_INFO.EXPIRY)
+		) {
+			ref.current.value = formatInput(ref.current.value, id, maxLength);
 		}
 	};
 
@@ -112,6 +109,8 @@ export const useCardForm = () => {
 
 	const handleCardNameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
 		setName(e.currentTarget.value);
+	const handleCardNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+		setNickname(e.currentTarget.value);
 
 	const handleInputSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -130,17 +129,18 @@ export const useCardForm = () => {
 
 	return {
 		name,
+		nickname,
 		ref: {
 			numberInputRef,
 			cvcInputRef,
 			expiryInputRef,
 			password1InputRef,
 			password2InputRef,
-			nicknameInputRef,
 		},
 		handleCardInputChange,
 		handleCompanyModalClick,
 		handleCardNameChange,
+		handleCardNicknameChange,
 		handleInputSubmit,
 	};
 };
