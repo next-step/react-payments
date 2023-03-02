@@ -1,13 +1,14 @@
 import './styles/index.css';
-import { Outlet } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 import { CardBoxProvider } from './provider/card-box';
+import router from './router';
 
 
 function App() {
   return (
     <div className="root">
       <CardBoxProvider>
-        <Outlet/>
+        <RouterProvider router={router}/>
       </CardBoxProvider>
     </div>
   );
