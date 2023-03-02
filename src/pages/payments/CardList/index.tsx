@@ -4,8 +4,8 @@ import Card from "components/common/Card";
 import {
   usePaymentsDispatch,
   usePaymentsState,
-} from "modules/payments/PaymentsContext";
-import { CLEAR_CARD_INFO } from "modules/payments/PaymentsActionType";
+} from "pages/payments/modules/payments/PaymentsContext";
+import { CLEAR_CARD_INFO } from "pages/payments/modules/payments/PaymentsActionType";
 import { useNavigate } from "react-router";
 import { STEP } from "constants/Payments";
 

@@ -1,8 +1,8 @@
-import { ActionType } from "modules/payments/PaymentsActionType";
+import { ActionType } from "pages/payments/modules/payments/PaymentsActionType";
 import PaymentsReducer, {
   defaultValue,
   DefaultValueState,
-} from "modules/payments/PaymentsReducer";
+} from "pages/payments/modules/payments/PaymentsReducer";
 import { createContext, Dispatch, useContext, useReducer } from "react";
 
 export const PaymentsStateContext =

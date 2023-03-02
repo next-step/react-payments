@@ -6,7 +6,7 @@ import {
   ADD_CARD_NICKNAME,
   ADD_CARD_TYPE,
   CLEAR_CARD_INFO,
-} from "modules/payments/PaymentsActionType";
+} from "pages/payments/modules/payments/PaymentsActionType";
 
 export const defaultCardInfo: CardInput = {
   id: "1",

@@ -6,8 +6,8 @@ import { STEP } from "constants/Payments";
 import {
   usePaymentsDispatch,
   usePaymentsState,
-} from "modules/payments/PaymentsContext";
-import { ADD_CARD_NICKNAME } from "modules/payments/PaymentsActionType";
+} from "pages/payments/modules/payments/PaymentsContext";
+import { ADD_CARD_NICKNAME } from "pages/payments/modules/payments/PaymentsActionType";
 import { useNavigate } from "react-router";
 
 const Completed = () => {

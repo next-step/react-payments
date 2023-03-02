@@ -1,4 +1,4 @@
-import { PaymentsProvider } from "modules/payments/PaymentsContext";
+import { PaymentsProvider } from "pages/payments/modules/payments/PaymentsContext";
 import { RouterProvider } from "react-router";
 import router from "routes";
 

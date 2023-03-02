@@ -4,7 +4,7 @@ import {
   formatNumber,
   validateInput,
   monthConverter,
-} from "utils";
+} from "pages/payments/utils";
 import Button from "components/common/Button";
 import Card from "components/common/Card";
 import InputContainer from "components/common/Input/InputContainer";
@@ -21,9 +21,9 @@ import Input from "components/common/Input";
 import {
   usePaymentsDispatch,
   usePaymentsState,
-} from "modules/payments/PaymentsContext";
+} from "pages/payments/modules/payments/PaymentsContext";
 import { useLocation, useNavigate } from "react-router";
-import { ADD_CARD } from "modules/payments/PaymentsActionType";
+import { ADD_CARD } from "pages/payments/modules/payments/PaymentsActionType";
 
 const CardForm = () => {
   const navigate = useNavigate();
