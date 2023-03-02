@@ -50,6 +50,16 @@ const CardList = () => {
               <div onClick={() => go(`/detail/${card?.uid}`)}>
                 <CreditCard cardInfo={card} size="small" />
               </div>
+              <Text
+                css={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  padding: '$3',
+                  fontSize: '$5',
+                }}
+              >
+                {card.nickName ?? '이름없음'}
+              </Text>
             </CardBox>
           ))}
         </ColumnLayout>
@@ -68,12 +78,13 @@ const CardListWrapper = styled('div', {
 const CardBox = styled('div', {
   position: 'relative',
 });
+
 const RemoveButton = styled('span', {
   position: 'absolute',
   zIndex: '10',
   right: 0,
   padding: '3px 10px',
-  fontSize: '$5',
+  fontSize: '$6',
   cursor: 'pointer',
   color: '$grey2',
   '&::before': {

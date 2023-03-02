@@ -38,6 +38,7 @@ export type CardData = {
   [CardKey.PASSWORD]: Password;
   [CardKey.OWNER_NAME]: string;
   uid: string;
+  nickName?: string;
   createdDate: string;
 };
 
