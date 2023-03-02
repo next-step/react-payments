@@ -35,3 +35,6 @@ export const theme = {
     red09: '#C92A2A',
   },
 } as const;
+
+export type ThemeKeys = keyof typeof theme.color;
+export type ThemeHexCodes = (typeof theme.color)[ThemeKeys];
