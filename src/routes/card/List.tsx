@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Card from "../../components/Card";
-import { CardContext } from "../../components/CardProvider";
-import { CardsContext } from "../../components/CardsProvider";
+import useCardContext from "../../hooks/useCardContext";
+import useCardsContext from "../../hooks/useCardsContext";
 import { CardType } from "../../types/common";
 import {
   formatCardNumber,
@@ -12,16 +12,8 @@ import {
 } from "../../utils/format";
 
 function CardList() {
-  const cardsContext = useContext(CardsContext);
-  const cardContext = useContext(CardContext);
-
-  if (!cardsContext || !cardContext) {
-    alert("context 누락");
-    throw Error("context 필수값 누락");
-  }
-
-  const { cards } = cardsContext;
-  const { setCard } = cardContext;
+  const { cards } = useCardsContext();
+  const { setCard } = useCardContext();
 
   const history = useHistory();
   const handleEmptyCardClick = () => {

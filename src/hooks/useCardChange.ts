@@ -1,24 +1,17 @@
-import { CardContext } from "./../components/CardProvider";
 import { formatCardNumber } from "./../utils/format";
 import { DEFAULT_BANK_COLOR } from "./../constants/bank";
 import { PasswordType } from "./../components/Form/Password";
 import { CardNumbers } from "./../components/Form/CardNumber";
-import { useContext, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { initCard } from "../constants/bank";
 import { CardType } from "../types/common";
 import { Date } from "../components/Form/ExpiredDate";
 import { getBankColor } from "../utils/format";
+import useCardContext from "./useCardContext";
 
 function useCardChange() {
   const [cardInfo, setCardInfo] = useState(initCard);
-  const cardContext = useContext(CardContext);
-
-  if (!cardContext) {
-    alert("context 누락");
-    throw Error("context 필수값 누락");
-  }
-
-  const { card } = cardContext;
+  const { card } = useCardContext();
 
   const isTyping =
     Object.values(cardInfo.cardNumber).some((number) => number) ||

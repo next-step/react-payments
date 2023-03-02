@@ -1,21 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { BANKS } from "../constants/bank";
-import { ModalContext } from "./ModalProvider";
-import { CardContext } from "./CardProvider";
 import { CardType } from "../types/common";
+import useModalContext from "../hooks/useModalContext";
+import useCardContext from "../hooks/useCardContext";
 
 function Modal() {
-  const modalContext = useContext(ModalContext);
-  const cardContext = useContext(CardContext);
-
-  if (!modalContext || !cardContext) {
-    alert("context 누락");
-    throw Error("context 필수값 누락");
-  }
-
-  const { setIsOpen } = modalContext;
-  const { setCard } = cardContext;
+  const { setIsOpen } = useModalContext();
+  const { setCard } = useCardContext();
 
   const onClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget.dataset.id) {

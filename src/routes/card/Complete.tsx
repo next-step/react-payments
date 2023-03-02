@@ -1,32 +1,26 @@
 import styled from "styled-components";
 import Card from "../../components/Card";
 import Button from "../../components/Form/Button";
-import { CardContext } from "../../components/CardProvider";
-import { useContext, useState } from "react";
 import { Size, CardType } from "../../types/common";
 import { useHistory, useParams } from "react-router-dom";
-import { CardsContext } from "../../components/CardsProvider";
 import { initCard } from "../../constants/bank";
+import useCardContext from "../../hooks/useCardContext";
+import useCardsContext from "../../hooks/useCardsContext";
+import { useState } from "react";
 
 type Params = {
   id: string;
 };
 
 function CardList() {
-  const cardContext = useContext(CardContext);
-  const cardsContext = useContext(CardsContext);
   const params = useParams<Params>();
 
   const id = Number(params?.id);
 
-  if (!cardContext || !cardsContext) {
-    alert("context 누락");
-    throw Error("context 필수값 누락");
-  }
-
-  const { card, setCard, color, bankName, formattedCardNumber } = cardContext;
+  const { card, setCard, color, bankName, formattedCardNumber } =
+    useCardContext();
   const [alias, setAlias] = useState("");
-  const { setCards } = cardsContext;
+  const { setCards } = useCardsContext();
   const history = useHistory();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {

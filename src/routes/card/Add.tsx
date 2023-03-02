@@ -5,12 +5,12 @@ import UserName from "../../components/Form/UserName";
 import Code from "../../components/Form/Code";
 import Password from "../../components/Form/Password";
 import Button from "../../components/Form/Button";
-import React, { useContext } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
-import { ModalContext } from "../../components/ModalProvider";
-import { CardContext } from "../../components/CardProvider";
 import Header from "../../components/Header";
 import useCardChange from "../../hooks/useCardChange";
+import useModalContext from "../../hooks/useModalContext";
+import useCardContext from "../../hooks/useCardContext";
 
 const INPUT_NAMES = [
   "card-0",
@@ -43,16 +43,8 @@ const checkValid = (eventTarget: any) => {
 };
 
 function Add() {
-  const modalContext = useContext(ModalContext);
-  const cardContext = useContext(CardContext);
-
-  if (!modalContext || !cardContext) {
-    alert("context 누락");
-    throw Error("context 필수값 누락");
-  }
-
-  const { setIsOpen } = modalContext;
-  const { setCard, card, bankName } = cardContext;
+  const { setIsOpen } = useModalContext();
+  const { setCard, card, bankName } = useCardContext();
   const {
     onCardNumberChange,
     onCodeChange,
