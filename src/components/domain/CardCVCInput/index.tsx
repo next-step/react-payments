@@ -3,7 +3,7 @@ import { memo, useEffect, useState } from 'react';
 import { InputContainer } from '@/components/UI';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
 
-import { useFormContext } from '../common/Form/FormContext';
+import { useFormContext } from '@/components/common/Form/FormContext';
 
 type Props = {
   onChange: <T>(value: T) => void;

@@ -1,17 +1,16 @@
 import { memo } from 'react';
 
+import { useFormContext } from '@/components/common/Form/FormContext';
 import {
   CardCVCInput,
   CardNumberInput,
   CardOwnerInput,
   CardPwdInput,
   ExpiredDateInput,
-} from '@/components';
+} from '@/components/domain';
 import { useBlur } from '@/hooks/useBlur';
 import { styled } from '@/lib/stitches.config';
 import { CardKey } from '@/types';
-
-import { useFormContext } from '../common/Form/FormContext';
 
 const CardForm = () => {
   const { getFormData, handleFormInput } = useFormContext();

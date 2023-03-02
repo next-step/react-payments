@@ -1,5 +1,5 @@
-import { CardForm } from '@/components';
 import { useFormContext } from '@/components/common/Form/FormContext';
+import { CardForm } from '@/components/domain';
 import { CreditCard } from '@/components/UI';
 import { Button } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
