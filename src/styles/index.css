@@ -40,3 +40,9 @@ input {
 
   color: #383838;
 }
+
+button {
+  text-decoration: none;
+  border: none;
+  padding: 0;
+}
