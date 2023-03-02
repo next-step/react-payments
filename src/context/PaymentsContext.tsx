@@ -1,52 +1,54 @@
 import { createContext, useState } from 'react';
 
-import { CardProps } from '../components/Card/Card';
-
 interface PaymentsProviderProps {
   children: React.ReactNode;
 }
 
-export interface CreditCard extends CardProps {
-  id: number;
+interface CardData {
+  id: Date;
+  bank?: string;
+  num1?: string;
+  num2?: string;
+  num3?: string;
+  num4?: string;
+  holder: string;
+  expiry?: string;
   alias?: string;
 }
 
-type AddCard = (cardData: CreditCard) => void;
-type RemoveCard = (cardId: number) => void;
-type UpdateAlias = (cardId: number, alias: string) => void;
+type AddCard = (cardData: CardData) => void;
+type RemoveCard = (cardId: Date) => void;
+type AddAlias = (alias: string) => void;
 
 interface PaymentsContextValue {
-  cardList: CreditCard[];
+  cardList: CardData[];
   addCard: AddCard;
   removeCard: RemoveCard;
-  updateAlias: UpdateAlias;
+  addAlias: AddAlias;
 }
 
 export const PaymentsContext = createContext<PaymentsContextValue>({
   cardList: [],
   addCard: () => {},
   removeCard: () => {},
-  updateAlias: () => {},
+  addAlias: () => {},
 });
 
 export const PaymentsProvider = ({ children }: PaymentsProviderProps) => {
-  const [cardList, setCardList] = useState<CreditCard[]>([]);
+  const [cardList, setCardList] = useState<CardData[]>([]);
 
   const addCard: AddCard = (cardData) => {
-    setCardList((prevCardList) => [...prevCardList, cardData]);
+    setCardList([...cardList, cardData]);
   };
 
   const removeCard: RemoveCard = (cardId) => {
-    setCardList((prevCardList) =>
-      prevCardList.filter((card) => card.id !== cardId)
-    );
+    setCardList(cardList.filter((card) => card.id !== cardId));
   };
 
-  const updateAlias: UpdateAlias = (cardId, alias) => {
-    setCardList((prevCardList) =>
-      prevCardList.map((card) => {
-        if (card.id === cardId) {
-          console.log('나는 찾았어');
+  const addAlias: AddAlias = (alias) => {
+    setCardList((prevList) =>
+      prevList.map((card, index) => {
+        if (prevList.length - 1 === index) {
           return {
             ...card,
             alias,
@@ -61,7 +63,7 @@ export const PaymentsProvider = ({ children }: PaymentsProviderProps) => {
     cardList,
     addCard,
     removeCard,
-    updateAlias,
+    addAlias,
   };
 
   return (
