@@ -13,4 +13,8 @@ export const CardCompanies: CardCompany = {
   '보라 카드': 'brand06',
   '주황 카드': 'brand07',
   '노랑 카드': 'brand08',
-};
+} as const;
+
+export type Company = keyof typeof CardCompanies;
+
+export const DEFAULT_CARD_COMPANY: Company = '빨강 카드';

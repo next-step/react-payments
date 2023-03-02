@@ -1,14 +1,16 @@
 import { useState } from 'react';
+
+import { CardCompanies, DEFAULT_CARD_COMPANY } from 'constants/Card';
 import type { CreditCardType, PartialCreditCardType } from 'types/CreditCard';
 
 const initalData: CreditCardType = {
-  color: 'brand01',
-  nickname: '',
   number: '',
   holderName: '',
   expiration: '',
   cvc: '',
   password: ['', '', '', ''],
+  nickname: DEFAULT_CARD_COMPANY,
+  color: CardCompanies[DEFAULT_CARD_COMPANY],
 };
 
 const useCardData = () => {

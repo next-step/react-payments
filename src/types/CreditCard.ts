@@ -1,8 +1,9 @@
-import { ThemeKeys } from 'styles/theme';
+import type { ThemeKeys } from 'styles/theme';
+import type { Company } from 'constants/Card';
 
 export interface CreditCardType {
   color: ThemeKeys;
-  nickname: string;
+  nickname: Company;
   number: string;
   holderName: string;
   expiration: string;
