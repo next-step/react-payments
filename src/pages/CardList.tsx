@@ -6,7 +6,7 @@ import { PaymentsContext } from '../context/PaymentsContext';
 
 const CardAdd = () => {
   const navigate = useNavigate();
-  const { cardList } = useContext(PaymentsContext);
+  const { cardList, removeCard } = useContext(PaymentsContext);
 
   return (
     <div className="app flex-column-center">
@@ -20,7 +20,15 @@ const CardAdd = () => {
       {cardList
         .sort((a, b) => b.id.getTime() - a.id.getTime())
         .map((card) => (
-          <Card key={card.id.getDate()} data={card} />
+          <div key={card.id.getDate()}>
+            <Card data={card} />
+            <div className="holding-card">
+              <span className="card-alias">{card.alias}</span>
+              <span className="card-remove" onClick={() => removeCard(card.id)}>
+                삭제
+              </span>
+            </div>
+          </div>
         ))}
     </div>
   );
