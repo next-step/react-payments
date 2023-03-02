@@ -12,6 +12,8 @@ import {
 } from 'utils/localStorage';
 import { CardListContext } from 'contexts/CardListProvider';
 
+import { findCardDefaultName } from 'utils/findCardDefaultName';
+
 const InputCardNamePage = () => {
   const [nickname, setNickName] = useState('');
   const nameRef = useRef<HTMLInputElement>(null);
@@ -22,7 +24,10 @@ const InputCardNamePage = () => {
   const onSubmit = () => {
     if (!nameRef.current) return;
     const { value } = nameRef.current;
-    addCardInfo({ ...item, nickname: value });
+    addCardInfo({
+      ...item,
+      nickname: value || findCardDefaultName(item?.color!),
+    });
     removeLocalStorageItem('CardValues');
     replace('/card-list');
   };

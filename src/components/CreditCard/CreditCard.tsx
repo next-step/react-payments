@@ -1,16 +1,8 @@
 import * as Styled from './CreditCard.styles';
 import type { CreditCardProps } from './CreditCard.types';
 
-import { CardCompanies } from 'constants/Card';
 import { maskLastEight } from 'utils/format';
-import { ThemeKeys } from 'styles/theme';
-
-const findCardDefaultName = (color: ThemeKeys) => {
-  const result = Object.entries(CardCompanies).find(
-    ([_, value]) => value === color
-  );
-  return result && result[0];
-};
+import { findCardDefaultName } from 'utils/findCardDefaultName';
 
 const CreditCard = ({
   color,
