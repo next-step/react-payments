@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import styled from '@emotion/styled';
 
-import { CreditCard } from 'components';
+import { CreditCard, SelectCompany } from 'components';
 import {
   Box,
   Header,
@@ -9,6 +9,7 @@ import {
   FormFieldControl,
   Button,
   Chip,
+  Modal,
 } from 'components/@common';
 
 import useCardData from 'hooks/useCardData';
@@ -20,7 +21,6 @@ import { setLocalStorageItem } from 'utils/localStorage';
 
 import { ReactComponent as CVCIcon } from 'assets/CVCIcon.svg';
 import type { CreditCardType } from 'types/CreditCard';
-import { ValidationStatus } from 'components/@common/TextField/TextField.types';
 
 const CARD_LENGTH = 19;
 
@@ -72,10 +72,6 @@ const RegistrationCardPage = () => {
     changeCardInfo({ password: [...newPassword] });
   };
 
-  // const onChange = (e: any) => {
-  //   console.log(e);
-  // };
-
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLocalStorageItem('CardValues', card);
@@ -93,7 +89,15 @@ const RegistrationCardPage = () => {
         expiration={card?.expiration}
       />
       <ChipWrapper display="flex" justifyContent="center">
-        <Chip>카드사 선택</Chip>
+        <Modal>
+          <Modal.Trigger>
+            <Chip>카드사 선택</Chip>
+          </Modal.Trigger>
+
+          <Modal.Content>
+            <SelectCompany />
+          </Modal.Content>
+        </Modal>
       </ChipWrapper>
 
       <Form onSubmit={onSubmit}>
