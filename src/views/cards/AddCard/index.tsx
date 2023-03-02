@@ -25,6 +25,29 @@ import { domains } from "@/router";
 
 import * as S from "./addCard.style";
 
+const initialFormValue = {
+  cardNumber: {
+    num1: "",
+    num2: "",
+    num3: "",
+    num4: "",
+  },
+  expireDate: {
+    month: "",
+    year: "",
+  },
+  ownerName: {
+    ownerName: "",
+  },
+  cvcNumber: {
+    cvc: "",
+  },
+  password: {
+    password1: "",
+    password2: "",
+  },
+};
+
 function HeaderLeftPointArrow() {
   const navigate = useNavigate();
 
@@ -43,37 +66,24 @@ export default function AddCard() {
 
   // 카드번호
   const { cardNumber, isValidCardNumber, onCardNumberChange } =
-    useCardNumberInput({
-      num1: "",
-      num2: "",
-      num3: "",
-      num4: "",
-    });
+    useCardNumberInput(initialFormValue.cardNumber);
 
   // 카드 만료일
   const { cardExpireDate, isValidExpireDate, onCardExpireDateChange } =
-    useCardExpireDateInput({
-      month: "",
-      year: "",
-    });
+    useCardExpireDateInput(initialFormValue.expireDate);
 
   // 카드 소유주
   const { cardOwnerName, isValidOwnerName, onCardOwnerNameChange } =
-    useCardOwnerInput({
-      ownerName: "",
-    });
+    useCardOwnerInput(initialFormValue.ownerName);
 
   // 카드 CVC
-  const { cvcNumber, isValidCvcNumber, onCvcNumberChange } = useCardCvcInput({
-    cvc: "",
-  });
+  const { cvcNumber, isValidCvcNumber, onCvcNumberChange } = useCardCvcInput(
+    initialFormValue.cvcNumber
+  );
 
   // 카드 비밀번호
   const { cardPassword, isPasswordValid, onCardPasswordChange } =
-    useCardPasswordInput({
-      password1: "",
-      password2: "",
-    });
+    useCardPasswordInput(initialFormValue.password);
 
   // 카드 이름
   const {
