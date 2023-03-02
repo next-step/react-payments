@@ -58,7 +58,7 @@ export const useCardForm = () => {
 		switch (id) {
 			case CARD_INFO.NUMBER:
 				return formatNumber({ input, nth: 5 });
-			case CARD_INFO.NAME && input.length === 2:
+			case CARD_INFO.EXPIRY:
 				return formatNumber({
 					input: monthConverter(input),
 					nth: 3,

@@ -1,11 +1,17 @@
 .button {
-  border: none;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  padding: 10px 15px;
+	border: none;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	padding: 10px 15px;
 }
 
 .button:hover {
-  cursor: pointer;
+	cursor: pointer;
+}
+
+.btn-delete {
+	border: 1px solid purple;
+	border-radius: 30px;
+	padding: 5px 10px;
 }

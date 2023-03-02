@@ -3,6 +3,7 @@ import {
 	ActionType,
 	ADD_CARD,
 	ADD_CARD_INFO,
+	DELETE_CARD,
 	EDIT_CARD,
 	SelectedCardInfo,
 	SET_SELECTED_CARD,
@@ -76,6 +77,15 @@ function PaymentsReducer(
 				...state,
 				cardList,
 				selectedCard: {},
+			};
+		}
+		case DELETE_CARD: {
+			const { id } = action;
+
+			const cardList = state.cardList.filter((card) => card?.id !== id);
+			return {
+				...state,
+				cardList,
 			};
 		}
 		case SET_SELECTED_CARD: {

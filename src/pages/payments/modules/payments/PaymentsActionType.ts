@@ -26,6 +26,12 @@ type EditCard = {
 	nickname?: string;
 };
 
+export const DELETE_CARD = "DELETE_CARD";
+type DeleteCard = {
+	type: typeof DELETE_CARD;
+	id?: string;
+};
+
 export type SelectedCardInfo = Exclude<NewCardInfo, null | undefined> | null;
 export const SET_SELECTED_CARD = "SET_SELECTED_CARD";
 type SetSelectedCard = {
@@ -33,4 +39,9 @@ type SetSelectedCard = {
 	selectedCard: SelectedCardInfo;
 };
 
-export type ActionType = AddCardInfo | AddCArd | EditCard | SetSelectedCard;
+export type ActionType =
+	| AddCardInfo
+	| AddCArd
+	| EditCard
+	| DeleteCard
+	| SetSelectedCard;

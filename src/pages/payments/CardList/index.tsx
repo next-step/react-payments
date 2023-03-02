@@ -7,10 +7,12 @@ import {
 } from "pages/payments/modules/payments/PaymentsContext";
 import { useNavigate } from "react-router";
 import {
+	DELETE_CARD,
 	SelectedCardInfo,
 	SET_SELECTED_CARD,
 } from "pages/payments/modules/payments/PaymentsActionType";
 import { STEP } from "constants/Payments";
+import Button from "components/common/Button";
 
 const CardList = () => {
 	const { cardList } = usePaymentsState();
@@ -21,6 +23,9 @@ const CardList = () => {
 		dispatch({ type: SET_SELECTED_CARD, selectedCard });
 		navigation(STEP.ADD_CARD_NICKNAME);
 	};
+
+	const handleCardDeleteClick = (selectedCard: SelectedCardInfo) =>
+		dispatch({ type: DELETE_CARD, id: selectedCard?.id });
 
 	const handleCardAddClick = () => navigation(STEP.REGISTER_CARD);
 
@@ -40,7 +45,14 @@ const CardList = () => {
 									backgroundColor={card?.backgroundColor}
 									onClick={() => handleCardClick(card)}
 								/>
-								<span className="card-nickname">{card?.nickname}</span>
+								<div className="flex-center w-208">
+									<span className="card-nickname">{card?.nickname}</span>
+									<Button
+										className="btn-delete"
+										label="카드 삭제"
+										onClick={() => handleCardDeleteClick(card)}
+									/>
+								</div>
 							</Fragment>
 						);
 					})}
