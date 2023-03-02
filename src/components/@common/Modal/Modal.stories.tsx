@@ -21,7 +21,7 @@ export const Primary: ComponentStory<typeof Modal> = () => (
     </Modal.Trigger>
 
     <Modal.Content>
-      <SelectCompany />
+      <SelectCompany onClick={() => {}} />
     </Modal.Content>
   </Modal>
 );

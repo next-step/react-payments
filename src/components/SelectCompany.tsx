@@ -1,16 +1,21 @@
+import { Dispatch, SetStateAction } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
+
 import { CardCompanies } from 'constants/Card';
-import { theme } from 'styles/theme';
+
+import type { ThemeKeys } from 'styles/theme';
 import { Box } from './@common';
 
-type ColorKey = (typeof theme.color)[keyof typeof theme.color];
+interface Props {
+  onClick: Dispatch<SetStateAction<ThemeKeys>>;
+}
 
-const SelectCompany = () => {
+const SelectCompany = ({ onClick }: Props) => {
   return (
     <Wrapper display="grid" alignItems="center">
       {Object.entries(CardCompanies).map(([key, value]) => (
-        <CompanyWrapper key={key}>
+        <CompanyWrapper key={key} onClick={() => onClick(value)}>
           <ColorCircle color={value} />
           <Text>{key}</Text>
         </CompanyWrapper>
@@ -32,14 +37,14 @@ const CompanyWrapper = styled.div`
   cursor: pointer;
 `;
 
-const ColorCircle = styled.div<{ color: ColorKey }>`
+const ColorCircle = styled.div<{ color: ThemeKeys }>`
   height: 38px;
   max-width: 38px;
   border-radius: 50%;
   margin: 0 auto;
 
-  ${({ color }) => css`
-    background-color: ${color};
+  ${({ theme, color }) => css`
+    background-color: ${theme.color[color]};
   `}
 `;
 
