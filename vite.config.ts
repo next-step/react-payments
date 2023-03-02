@@ -11,8 +11,5 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src/'),
     }
   },
-  base: '/react-payments',
-  build: {
-    outDir: './docs'
-  }
+  base: '/react-payments'
 });
