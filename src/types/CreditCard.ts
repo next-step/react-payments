@@ -1,4 +1,7 @@
+import { ThemeKeys } from 'styles/theme';
+
 export interface CreditCardType {
+  color: ThemeKeys;
   nickname: string;
   number: string;
   holderName: string;

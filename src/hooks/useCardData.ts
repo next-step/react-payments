@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import type { CreditCardType, PartialCreditCardType } from 'types/CreditCard';
 
-const initalData = {
+const initalData: CreditCardType = {
+  color: 'brand01',
   nickname: '',
   number: '',
   holderName: '',

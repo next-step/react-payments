@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
-import { css } from '@emotion/react';
+import { css, Theme } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { CardCompanies } from 'constants/Card';
@@ -7,15 +7,17 @@ import { CardCompanies } from 'constants/Card';
 import type { ThemeKeys } from 'styles/theme';
 import { Box } from './@common';
 
+import type { PartialCreditCardType } from 'types/CreditCard';
+
 interface Props {
-  onClick: Dispatch<SetStateAction<ThemeKeys>>;
+  onClick: (data: PartialCreditCardType) => void;
 }
 
 const SelectCompany = ({ onClick }: Props) => {
   return (
     <Wrapper display="grid" alignItems="center">
       {Object.entries(CardCompanies).map(([key, value]) => (
-        <CompanyWrapper key={key} onClick={() => onClick(value)}>
+        <CompanyWrapper key={key} onClick={() => onClick({ color: value })}>
           <ColorCircle color={value} />
           <Text>{key}</Text>
         </CompanyWrapper>

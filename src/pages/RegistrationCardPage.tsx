@@ -20,8 +20,6 @@ import { formatCardNumber, formatMMYY } from 'utils/format';
 import { setLocalStorageItem } from 'utils/localStorage';
 
 import { ReactComponent as CVCIcon } from 'assets/CVCIcon.svg';
-
-import type { ThemeKeys } from 'styles/theme';
 import type { CreditCardType } from 'types/CreditCard';
 
 const CARD_LENGTH = 19;
@@ -29,7 +27,6 @@ const CARD_LENGTH = 19;
 const RegistrationCardPage = () => {
   const { push } = useRouter();
   const { card, changeCardInfo } = useCardData();
-  const [cardColor, setCardColor] = useState<ThemeKeys>('brand01');
 
   const isInvalidCardLength = () => {
     return card.number != '' && card.number.length < CARD_LENGTH;
@@ -85,7 +82,7 @@ const RegistrationCardPage = () => {
     <>
       <Header showBackIcon>카드 추가</Header>
       <CreditCard
-        color={cardColor}
+        color={card.color}
         holderName={card?.holderName}
         number={card?.number}
         expiration={card?.expiration}
@@ -97,7 +94,7 @@ const RegistrationCardPage = () => {
           </Modal.Trigger>
 
           <Modal.Content>
-            <SelectCompany onClick={setCardColor} />
+            <SelectCompany onClick={changeCardInfo} />
           </Modal.Content>
         </Modal>
       </ChipWrapper>

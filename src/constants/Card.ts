@@ -1,4 +1,4 @@
-import type { ThemeKeys } from './../styles/theme';
+import type { ThemeKeys } from 'styles/theme';
 
 interface CardCompany {
   [key: string]: ThemeKeys;
