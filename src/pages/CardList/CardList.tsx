@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { ColumnLayout, CreditCard } from '@/components/UI';
 import { Text } from '@/components/UI';

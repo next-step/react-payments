@@ -1,29 +1,24 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import TextInput from '@/components/common/Input';
+import CardNickNameForm from '@/components/common/CardNickNameForm';
 import {
   Button,
   ColumnLayout,
   CreditCard,
-  InputContainer,
   Text,
   TopNavigation,
 } from '@/components/UI';
-import useFormData from '@/hooks/formHook';
 import { useRouter } from '@/hooks/useRouter';
-import { getItem, setItem } from '@/storage/storage';
+import { getItem } from '@/storage/storage';
 import { StorageKey } from '@/storage/storageKey';
-import { CardData, CardKey } from '@/types';
+import { CardData } from '@/types';
 
 export const CardDetailPage = () => {
   const params = useParams();
   const { go } = useRouter();
 
-  const [card, setCard] = useState<CardData | undefined>(undefined);
-
-  const { getFormData, handleFormInput } = useFormData();
-  const formData = getFormData();
+  const [card, setCard] = useState<CardData>();
   const haveCard = card && Object.values(card).every(Boolean);
 
   useEffect(() => {
@@ -50,62 +45,7 @@ export const CardDetailPage = () => {
     <ColumnLayout css={{ gap: '$3' }}>
       <TopNavigation>카드 별칭 수정하기</TopNavigation>
       <CreditCard size="small" cardInfo={card} />
-      <InputContainer>
-        <TextInput
-          type="text"
-          placeholder="카드 별칭을 입력해주세요."
-          value={card.NICK_NAME}
-          autoFocus
-          onChange={handleFormInput(formData, CardKey.NICK_NAME)}
-        />
-        <Button
-          css={{ width: '$10' }}
-          onClick={handleSave(getFormData, card, () => go('/list'))}
-        >
-          설정
-        </Button>
-      </InputContainer>
+      <CardNickNameForm card={card} />
     </ColumnLayout>
   );
 };
-
-const MAX_NICK_NAME_LENGTH = 10;
-const ERROR_MESSAGE = {
-  EMPTY_INPUT: '별칭을 입력해주세요.',
-  OVER_LIMITED_TEXT: `별칭은 ${MAX_NICK_NAME_LENGTH}글자까지 입력할 수 있습니다.`,
-};
-
-const getErrorMessage = (nickname: string) => {
-  if (nickname.length === 0) {
-    return ERROR_MESSAGE.EMPTY_INPUT;
-  }
-  if (nickname.length > MAX_NICK_NAME_LENGTH) {
-    return ERROR_MESSAGE.OVER_LIMITED_TEXT;
-  }
-};
-
-function handleSave(
-  formData: () => React.MutableRefObject<any>,
-  card: CardData,
-  callback?: () => void
-) {
-  return () => {
-    const data = formData().current;
-    const nickName = data[CardKey.NICK_NAME];
-    const errorMessage = getErrorMessage(CardKey.NICK_NAME);
-
-    if (errorMessage) {
-      alert(errorMessage);
-      return;
-    }
-
-    const cards = getItem(StorageKey.CARD_LIST) as CardData[];
-
-    setItem(StorageKey.CARD_LIST, [
-      ...cards.filter(({ UID }) => UID != card.UID),
-      { ...card, [CardKey.NICK_NAME]: nickName },
-    ]);
-
-    callback?.();
-  };
-}
