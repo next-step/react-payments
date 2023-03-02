@@ -1,39 +1,42 @@
 import styled from '@emotion/styled';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useContext } from 'react';
 
 import ModalPortal from './ModalPortal';
+import ModalProvider, { ModalContext } from './ModalProvider';
 
-const Modal = ({ children }: PropsWithChildren) => {
+import type { ModalProps } from './Modal.types';
+import * as Styled from './Modal.styled';
+
+const Modal = ({ children }: PropsWithChildren<ModalProps>) => {
+  return <ModalProvider>{children}</ModalProvider>;
+};
+
+Modal.Trigger = ({ children }: PropsWithChildren) => {
+  const { open } = useContext(ModalContext);
+
+  return <div onClick={open}>{children}</div>;
+};
+
+Modal.Content = ({ children }: PropsWithChildren) => {
+  const { isOpened, close } = useContext(ModalContext);
+
+  const onCloseWithoutPropagation = (e: React.MouseEvent<HTMLDivElement>) => {
+    close();
+    e.stopPropagation();
+  };
+
   return (
     <ModalPortal>
-      <Dimmer>
-        <Wrapper>
-          <ModalWrapper>{children}</ModalWrapper>
-        </Wrapper>
-      </Dimmer>
+      {isOpened && (
+        <>
+          <Styled.Dimmer onClick={onCloseWithoutPropagation} />
+          <Styled.Wrapper>
+            <Styled.ModalWrapper>{children}</Styled.ModalWrapper>
+          </Styled.Wrapper>
+        </>
+      )}
     </ModalPortal>
   );
 };
 
 export default Modal;
-
-const Dimmer = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-`;
-
-const Wrapper = styled.div`
-  margin: 0 auto;
-`;
-
-const ModalWrapper = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 0%);
-
-  max-width: var(--mobile-width);
-  width: 100%;
-`;
