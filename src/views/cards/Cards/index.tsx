@@ -30,31 +30,23 @@ export default function Cards() {
     <div>
       <Header>보유카드</Header>
       <CardWrapper>
-        {cards.map(
-          ({ id, cardName, cardNumber, cardOwnerName, expireDate, color }) => (
-            <Card
-              key={id}
-              cardInfo={{
-                cardName,
-                cardNumber,
-                cardOwnerName,
-                expireDate,
-              }}
-              size="small"
-              color={color}
-              onClick={() =>
-                handleMoveToEditCardPage({
-                  id,
-                  cardName,
-                  cardNumber,
-                  cardOwnerName,
-                  expireDate,
-                  color,
-                })
-              }
-            />
-          )
-        )}
+        {cards.map(({ id, color, ...cardProps }) => (
+          <Card
+            key={id}
+            cardInfo={{
+              ...cardProps,
+            }}
+            size="small"
+            color={color}
+            onClick={() =>
+              handleMoveToEditCardPage({
+                id,
+                color,
+                ...cardProps,
+              })
+            }
+          />
+        ))}
         <EmptyCard size="small" onClick={handleMoveToAddCardPage} />
       </CardWrapper>
     </div>

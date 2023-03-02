@@ -129,7 +129,7 @@ export default function AddCard() {
       isValidOwnerName,
       isValidCvcNumber,
       isPasswordValid,
-    ].every((value) => value);
+    ].every((isValid) => isValid);
   };
 
   const handleMoveToCompleteAddPage = () => {
