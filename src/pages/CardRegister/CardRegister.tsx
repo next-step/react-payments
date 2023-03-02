@@ -7,36 +7,6 @@ import { getItem, setItem } from '@/storage/storage';
 import { StorageKey } from '@/storage/storageKey';
 import { type CardFormType, CardKey } from '@/types';
 
-export const initialCardState: CardFormType = {
-  [CardKey.CARD_NUMBERS]: {
-    1: '',
-    2: '',
-    3: '',
-    4: '',
-    isValid: false,
-  },
-  [CardKey.EXPIRE_DATE]: {
-    month: '',
-    year: '',
-    isValid: false,
-  },
-  [CardKey.CVC]: {
-    val: '',
-    isValid: false,
-  },
-  [CardKey.PASSWORD]: {
-    1: '',
-    2: '',
-    3: '',
-    4: '',
-    isValid: false,
-  },
-  [CardKey.OWNER_NAME]: {
-    val: '',
-    isValid: false,
-  },
-};
-
 export const CardRegister = () => {
   const { getFormData } = useFormContext();
   const form = getFormData().current as CardFormType;

@@ -2,24 +2,16 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { CardNickNameForm } from '@/components/common';
-import {
-  Button,
-  ColumnLayout,
-  CreditCard,
-  Text,
-  TopNavigation,
-} from '@/components/UI';
-import { useRouter } from '@/hooks/useRouter';
+import { EmptyCard } from '@/components/domain';
+import { ColumnLayout, CreditCard, TopNavigation } from '@/components/UI';
 import { getItem } from '@/storage/storage';
 import { StorageKey } from '@/storage/storageKey';
 import { CardData } from '@/types';
 
 export const CardDetailPage = () => {
   const params = useParams();
-  const { go } = useRouter();
 
   const [card, setCard] = useState<CardData>();
-  const haveCard = card && Object.values(card).every(Boolean);
 
   useEffect(() => {
     const cards = getItem(StorageKey.CARD_LIST) as CardData[];
@@ -27,18 +19,8 @@ export const CardDetailPage = () => {
     setCard(selectedCard);
   }, []);
 
-  if (!haveCard) {
-    return (
-      <ColumnLayout css={{ height: '100%' }}>
-        <Text>카드가 존재하지 않습니다.</Text>
-        <Button
-          css={{ marginTop: '$3', width: '$10' }}
-          onClick={() => go('/list')}
-        >
-          카드 목록
-        </Button>
-      </ColumnLayout>
-    );
+  if (!card) {
+    return <EmptyCard />;
   }
 
   return (

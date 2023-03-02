@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import { CardNickNameForm } from '@/components/common';
-import { Button, ColumnLayout, CreditCard, Text } from '@/components/UI';
+import { EmptyCard } from '@/components/domain';
+import { Button, CreditCard } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
 import { styled } from '@/lib/stitches.config';
 import { getItem } from '@/storage/storage';
@@ -18,17 +19,7 @@ export const CardRegisterConfirmPage = () => {
   }, []);
 
   if (!card) {
-    return (
-      <ColumnLayout css={{ height: '100%' }}>
-        <Text>카드가 존재하지 않습니다.</Text>
-        <Button
-          css={{ marginTop: '$3', width: '$10' }}
-          onClick={() => go('/list')}
-        >
-          카드 목록
-        </Button>
-      </ColumnLayout>
-    );
+    return <EmptyCard />;
   }
 
   return (
