@@ -13,7 +13,6 @@ function AddCardForm() {
   const navigate = useNavigate();
 
   const { addCard } = useCardListHandler();
-
   const cardForm = useCardForm();
   const { onChange } = useCardFormHandler();
 
@@ -61,7 +60,7 @@ function AddCardForm() {
       <ExpirationField
         title="만료일"
         maxLength={LIMIT_INPUT_LENGTH.EXPIRATION}
-        value={{
+        cvc={{
           year,
           month,
         }}

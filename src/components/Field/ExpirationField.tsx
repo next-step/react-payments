@@ -4,23 +4,19 @@ import FieldContainer from './FieldContainer';
 
 import type { ChangeEvent, HTMLInputTypeAttribute } from 'react';
 
-function ExpirationField({
-  title,
-  maxLength,
-  value,
-  type = 'text',
-  onChange,
-}: {
+type ExpirationFieldProps = {
   title: string;
   maxLength?: number;
-  value: {
+  cvc: {
     month: string;
     year: string;
   };
   type?: HTMLInputTypeAttribute;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}) {
-  const { month, year } = value;
+};
+
+function ExpirationField({ title, maxLength, cvc, type = 'text', onChange }: ExpirationFieldProps) {
+  const { month, year } = cvc;
 
   return (
     <FieldContainer title={title}>

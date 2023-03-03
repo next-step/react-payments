@@ -1,21 +1,18 @@
 import type { ReactNode } from 'react';
 
-function FieldContainer({
-  title = '',
-  children,
-  addOn,
-  textLength,
-}: {
+type FieldContainerProps = {
   title?: string;
+  limitText?: string;
   children: ReactNode;
   addOn?: ReactNode;
-  textLength?: string;
-}) {
+};
+
+function FieldContainer({ title = '', children, addOn, limitText = '' }: FieldContainerProps) {
   return (
     <div className="my-2">
       <div className="flex justify-between">
         {title && <span className="text-xs text-gray-400">{title}</span>}
-        {textLength ? <span className="text-xs text-gray-400">{textLength}</span> : null}
+        {limitText ? <span className="text-xs text-gray-400">{limitText}</span> : null}
       </div>
       <div className="flex">
         {children}

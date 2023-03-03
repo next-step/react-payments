@@ -10,7 +10,7 @@ interface NameFieldProps extends InputProps {
 
 function NameField({ title, placeholder, maxLength, value, name, kind, onChange }: NameFieldProps) {
   return (
-    <FieldContainer title={title} textLength={`${value?.length}/${maxLength}`}>
+    <FieldContainer title={title} limitText={`${value?.length}/${maxLength}`}>
       <InputContainer size="full">
         <Input
           name={name}

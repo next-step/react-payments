@@ -7,6 +7,7 @@ type InputContainerProps = {
   size?: Size;
   disabled?: boolean;
 };
+
 function InputContainer({ children, size = 'full', disabled = false }: PropsWithChildren<InputContainerProps>) {
   const getWidth = (size: Size) => {
     switch (size) {

@@ -3,15 +3,7 @@ import { Input, InputContainer } from '../Common';
 
 import type { ChangeEvent, HTMLInputTypeAttribute } from 'react';
 
-function CVCField({
-  title,
-  placeholder,
-  maxLength,
-  value,
-  name,
-  type = 'text',
-  onChange,
-}: {
+type CVCFieldProps = {
   title: string;
   placeholder?: string;
   maxLength?: number;
@@ -19,7 +11,9 @@ function CVCField({
   name: string;
   type?: HTMLInputTypeAttribute;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}) {
+};
+
+function CVCField({ title, placeholder, maxLength, value, name, type = 'text', onChange }: CVCFieldProps) {
   return (
     <FieldContainer title={title}>
       <InputContainer size="quarter">
