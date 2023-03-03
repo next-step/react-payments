@@ -1,5 +1,5 @@
 import { Input, InputContainer } from '@components/Common';
-import { expirationMonthFormatter, textOnlyFormatter } from '@/utils';
+import { expirationMonthFormatter, renderTextDivider, textOnlyFormatter } from '@/utils';
 import FieldContainer from './FieldContainer';
 
 import type { ChangeEvent, HTMLInputTypeAttribute } from 'react';
@@ -34,6 +34,7 @@ function ExpirationField({
           onChange={onChange}
           formatter={expirationMonthFormatter}
         />
+        {renderTextDivider({ formerValue: month, divider: '/' })}
         <Input
           type={type}
           name="year"
