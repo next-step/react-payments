@@ -43,10 +43,6 @@ const CardForm = () => {
     }
     changeCardInfo(CHANGE_CARD.ERROR, null);
 
-    changeCardInfo(CHANGE_CARD.ID);
-    registerCard(cardInfo);
-    changeCardInfo(CHANGE_CARD.INIT_CARD);
-
     navigate('/completed');
   };
 
