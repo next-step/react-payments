@@ -1,14 +1,34 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useReducer } from 'react';
+import { cardReducer } from './cardReducer';
+import { CHANGE_CARD } from '../constants/action';
+
+export const initialState = {
+  id: 0,
+  cardNumbers: '',
+  cardExpirationDate: ['', ''],
+  cardOwner: '',
+  cardCVC: '',
+  cardPassword: '',
+  cardCompanyId: 0,
+  cardNickname: '',
+  error: '',
+};
 
 export const CardContext = createContext(null);
 
 export const CardProvider = ({ children }) => {
-  const [card, setCard] = useState(null);
+  const [cardInfo, dispatch] = useReducer(cardReducer, initialState);
 
-  //TODO: 닉네임 상태관리
+  const changeCardInfo = (actionType, data) => {
+    dispatch({ type: actionType, payload: data });
+  };
+
+  const registerCard = (cardInfo) => {
+    localStorage.setItem(cardInfo.id, JSON.stringify(cardInfo));
+  };
 
   return (
-    <CardContext.Provider value={{ card, setCard }}>
+    <CardContext.Provider value={{ cardInfo, changeCardInfo, registerCard }}>
       {children}
     </CardContext.Provider>
   );

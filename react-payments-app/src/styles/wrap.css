@@ -1,9 +1,3 @@
-@media all {
-  .wrap {
-    height: 100px;
-  }
-}
-
 @media all and (min-width: 1025px) {
   .wrap {
     width: 1200px;
@@ -27,7 +21,7 @@
 /* index */
 @media all {
   .wrap {
-    width: 100%;
+    width: inherit;
     height: 100%;
   }
 }

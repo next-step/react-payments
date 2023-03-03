@@ -1,0 +1,23 @@
+.page-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  width: 100vw;
+  display: flex;
+
+  color: #383838;
+}
+
+.page-title > div {
+  width: 33%;
+  display: flex;
+  justify-content: center;
+}
+
+.page-title :first-child {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: auto;
+}
