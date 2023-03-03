@@ -26,7 +26,12 @@ const CardListPage = () => {
         </CardAddButton>
         <>
           {cardList &&
-            cardList.map((card, index) => <CreditCard key={index} {...card} />)}
+            cardList.map((card, index) => (
+              <>
+                <CreditCard key={index} {...card} />
+                <H3>{card.nickname}</H3>
+              </>
+            ))}
         </>
       </Wrapper>
     </>
@@ -41,7 +46,7 @@ const Wrapper = styled.div`
   overflow-y: scroll;
 
   & > div {
-    margin: 15px auto;
+    margin: 13px auto 7px auto;
   }
 `;
 
@@ -53,4 +58,8 @@ const CardAddButton = styled(Box)`
   cursor: pointer;
 
   background-color: ${({ theme }) => theme.color.gray03};
+`;
+
+const H3 = styled.h3`
+  text-align: center;
 `;
