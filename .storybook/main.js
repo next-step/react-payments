@@ -1,25 +1,33 @@
-const TsconfigPathsPlugin  = require('tsconfig-paths-webpack-plugin')
+const viteTsconfigPaths = require('vite-tsconfig-paths');
+const tsconfigPaths = viteTsconfigPaths.default;
+
+const { mergeConfig } = require('vite');
 
 module.exports = {
-  "stories": [
+  stories: [
     "../src/**/*.stories.mdx",
     "../src/**/*.stories.@(js|jsx|ts|tsx)"
   ],
-  "addons": [
+  addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "@storybook/preset-create-react-app"
   ],
-  "framework": "@storybook/react",
-  "core": {
-    "builder": "@storybook/builder-webpack5"
+  framework: "@storybook/react",
+  core: {
+    "builder": "@storybook/builder-vite"
   },
-  webpackFinal: async config => ({
-    ...config,
-    resolve: {
-      ...config.resolve,
-      ...config.resolve.plugins.push(new TsconfigPathsPlugin({})),
-    },
-  }),
+  async viteFinal(config) {
+    // Merge custom configuration into the default config
+    return mergeConfig(config, {
+      plugins: [tsconfigPaths()],
+      // Use the same "resolve" configuration as your app
+      resolve: (await import('../vite.config.js')).default.resolve,
+      // Add dependencies to pre-optimization
+      optimizeDeps: {
+        include: ['storybook-dark-mode'],
+      },
+    });
+  },
 }
