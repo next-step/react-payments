@@ -41,6 +41,7 @@ const CardListPage = () => {
             cardCVC={cardCVC}
             cardPassword={cardPassword}
             cardNickname={cardNickname}
+            onClick={() => navigate(`/completed/${id}`)}
           />
         );
       })}

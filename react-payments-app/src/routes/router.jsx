@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         element: <CardRegistrationPage />,
       },
       {
-        path: '/completed',
+        path: '/completed/*',
         element: <CardNicknamePage />,
       },
       {
