@@ -5,8 +5,11 @@ import { PageTitle } from '@/components/layouts'
 
 import { useCardInfo } from '../card-add/card-form/hooks'
 
+import useCardList from './hooks/useCardList'
+
 function CardCompleted() {
   const {
+    cardInfo,
     cardInfo: {
       cardNumbers: { first, second, third, fourth },
       owner,
@@ -17,15 +20,15 @@ function CardCompleted() {
     handleNickname,
   } = useCardInfo()
 
+  const { addCard } = useCardList()
+
   const nicknameRef = useRef<HTMLInputElement>(null)
 
   const preNavigation = () => {
-    const nicknameValue = nicknameRef.current?.value
-    if (nicknameValue) {
-      handleNickname(nicknameValue)
-    } else {
-      handleNickname(name)
-    }
+    const nicknameValue = nicknameRef.current?.value || name
+    handleNickname(nicknameValue)
+    // Todo: 업데이트된 닉네임이 반영된 cardInfo를 사용해야함
+    addCard({ ...cardInfo, nickname: nicknameValue })
   }
 
   return (

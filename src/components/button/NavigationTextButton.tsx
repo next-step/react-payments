@@ -9,15 +9,22 @@ interface NavigationTextButtonProps {
   to: Destination
 }
 
-const NavigationTextButton = ({ additionalClassNames = '', text, preNavigation, to }: NavigationTextButtonProps) => {
+const NavigationTextButton = ({
+  additionalClassNames = '',
+  text,
+
+  preNavigation,
+  to,
+}: NavigationTextButtonProps) => {
   const navigate = useNavigate()
 
-  const goToSpecifiedPage = (to: Destination) => {
+  const goToSpecifiedPage = async (to: Destination) => {
     if (preNavigation) {
-      preNavigation()
+      await Promise.resolve(preNavigation())
     }
     navigate(to)
   }
+
   return (
     <div className={`button-box ${additionalClassNames}`}>
       <button onClick={() => goToSpecifiedPage(to)} className="button-text">

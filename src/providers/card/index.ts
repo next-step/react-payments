@@ -1,1 +1,1 @@
-export { default as CardProvider } from './CardProvider'
+export { default } from './CardProvider'

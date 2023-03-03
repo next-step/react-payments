@@ -59,3 +59,7 @@ export interface CardInfomation {
   securityCode: CardSecurityCode
   password: CardPassword
 }
+
+export type CardListAction = {
+  payload: CardInfomation
+}

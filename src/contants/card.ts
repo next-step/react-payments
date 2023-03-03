@@ -1,7 +1,6 @@
 export const INITIAL_CARD_STATE = {
   cardNumbers: { first: '', second: '', third: '', fourth: '' },
-  // Todo: 카드 이름 추가 필요
-  name: '클린카드',
+  name: '',
   nickname: '',
   expiredYear: '',
   expiredMonth: '',
@@ -9,3 +8,5 @@ export const INITIAL_CARD_STATE = {
   securityCode: '',
   password: { first: '', second: '' },
 }
+
+export const INITIAL_CARD_LIST_STATE = []
