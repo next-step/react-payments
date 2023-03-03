@@ -8,7 +8,7 @@ export default {
 
 export const DefaultCard = (
   <Card
-    isBig
+    size="sm"
     cardCompany=""
     cardOwner={''}
     cardNumber={{

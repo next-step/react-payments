@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 type FormHandler = {
   onChange(e: ChangeEvent<HTMLInputElement>): void;
   onReset(): void;
+  updateCardForm(cardForm: CardInformation): void;
 };
 
 const CardFormContext = createContext<CardInformation | null>(null);
@@ -26,7 +27,7 @@ function useCardFormHandler() {
   return value;
 }
 
-const initCardInformation = {
+const initCardInformation: CardInformation = {
   id: '',
   cardNumber1: '',
   cardNumber2: '',
@@ -39,6 +40,7 @@ const initCardInformation = {
   password2: '',
   cardOwner: '',
   nickname: '',
+  cardCompany: '',
 };
 
 interface CardFormProviderProps {
@@ -55,6 +57,9 @@ function CardFormProvider({ children }: CardFormProviderProps) {
         if (!validity.valid) return;
 
         setCardForm(prev => ({ ...prev, [name]: value }));
+      },
+      updateCardForm: (cardForm: CardInformation) => {
+        setCardForm({ ...cardForm });
       },
       onReset() {
         setCardForm(initCardInformation);

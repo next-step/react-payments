@@ -12,7 +12,7 @@ function FieldContainer({
   textLength?: string;
 }) {
   return (
-    <div className="my-5">
+    <div className="my-2">
       <div className="flex justify-between">
         {title && <span className="text-xs text-gray-400">{title}</span>}
         {textLength ? <span className="text-xs text-gray-400">{textLength}</span> : null}
