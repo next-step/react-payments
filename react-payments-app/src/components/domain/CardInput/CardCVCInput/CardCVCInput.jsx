@@ -13,7 +13,6 @@ const CardCVCInput = () => {
   const isValidCVC = (value) => {
     if (Number.isNaN(+value)) {
       changeCardInfo(CHANGE_CARD.ERROR, '숫자만 입력주세요.');
-      alert(cardInfo.error);
       setCardCVC('');
       return;
     }

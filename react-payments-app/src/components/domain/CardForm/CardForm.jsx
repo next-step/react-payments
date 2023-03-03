@@ -11,7 +11,7 @@ import { Form, useNavigate } from 'react-router-dom';
 import { CHANGE_CARD } from '../../../constants/action';
 
 const CardForm = () => {
-  const { cardInfo, changeCardInfo } = useCard();
+  const { cardInfo, changeCardInfo, registerCard } = useCard();
   const navigate = useNavigate();
 
   const isAllFilledOut = (cardInfo) => {
@@ -24,11 +24,9 @@ const CardForm = () => {
     } = cardInfo;
 
     return (
-      cardCompanyId &&
+      // cardCompanyId &&
       cardCVC.length === MAX_INPUT_LENGTH.CVC &&
-      cardNumbers.every(
-        (part) => part.length === MAX_INPUT_LENGTH.CARD_NUMBER
-      ) &&
+      cardNumbers.length === MAX_INPUT_LENGTH.CARD_NUMBERS &&
       cardExpirationDate.every(
         (part) => part.length === MAX_INPUT_LENGTH.DATE
       ) &&
@@ -39,13 +37,16 @@ const CardForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // //TODO: fix validation error
-    // if (!isAllFilledOut(cardInfo)) {
-    //   changeCardInfo(CHANGE_CARD.ERROR, '빈칸을 모두 입력해 주세요.');
-    //   return;
-    // }
+    if (!isAllFilledOut(cardInfo)) {
+      changeCardInfo(CHANGE_CARD.ERROR, '빈칸을 모두 입력해 주세요.');
+      return;
+    }
+    changeCardInfo(CHANGE_CARD.ERROR, null);
 
     changeCardInfo(CHANGE_CARD.ID);
+    registerCard(cardInfo);
+    changeCardInfo(CHANGE_CARD.INIT_CARD);
+
     navigate('/completed');
   };
 

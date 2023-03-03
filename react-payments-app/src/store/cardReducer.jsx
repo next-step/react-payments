@@ -1,4 +1,5 @@
 import { CHANGE_CARD } from '../constants/action';
+import { initialState } from './CardContext';
 
 export const cardReducer = (state, action) => {
   switch (action.type) {
@@ -20,6 +21,8 @@ export const cardReducer = (state, action) => {
       return { ...state, error: action.payload };
     case CHANGE_CARD.ID:
       return { ...state, id: new Date() };
+    case CHANGE_CARD.INIT_CARD:
+      return initialState;
     default:
       throw new Error('Invalid action type');
   }

@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useReducer } from 'react';
 import { cardReducer } from './cardReducer';
 import { CHANGE_CARD } from '../constants/action';
 
-const initialState = {
+export const initialState = {
   id: 0,
   cardNumbers: '',
   cardExpirationDate: ['', ''],
