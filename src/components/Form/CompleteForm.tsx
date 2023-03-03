@@ -11,24 +11,24 @@ function CompleteForm() {
   const { id } = useParams();
 
   const {
-    state: { cardForm },
+    state: { cardForm, isEditMode },
   } = useLocation();
 
   const { onChange, onReset, updateCardForm } = useCardFormHandler();
-  const { updateCard } = useCardListHandler();
+  const { updateCard, deleteCard } = useCardListHandler();
   const { nickname } = useCardForm();
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    updateCard(id as string, { nickname });
+    updateCard(id as string, { nickname: nickname || cardForm.cardCompany });
 
     onReset();
     navigate('/');
   };
 
   useEffect(() => {
-    updateCardForm(cardForm);
+    updateCardForm({ ...cardForm });
   }, [cardForm]);
 
   return (
@@ -38,14 +38,25 @@ function CompleteForm() {
           kind="underline"
           title="카드별칭"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요"
-          maxLength={LIMIT_INPUT_LENGTH.OWNER_NAME}
+          maxLength={LIMIT_INPUT_LENGTH.NICKNAME}
           name="nickname"
           value={nickname || cardForm.cardCompany}
           onChange={onChange}
         />
       </div>
-      <div className="w-20 absolute bottom-2 right-2">
-        <Button type="submit">다음</Button>
+      <div className="absolute bottom-2 right-2 flex gap-2">
+        {isEditMode && (
+          <div className="w-20">
+            <Button type="submit" kind="danger" onClick={() => deleteCard(id as string)}>
+              삭제
+            </Button>
+          </div>
+        )}
+        <div className="w-20 ">
+          <Button type="submit" kind="primary">
+            다음
+          </Button>
+        </div>
       </div>
     </form>
   );

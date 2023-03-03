@@ -79,7 +79,7 @@ function AddCardForm() {
       <PasswordField title="비밀번호" value={password} onChange={onChange} />
       <div className="w-full flex justify-end">
         <div className="w-20 absolute bottom-2 right-2">
-          <Button type="submit" disabled={!isValid}>
+          <Button type="submit" disabled={!isValid} kind="primary">
             다음
           </Button>
         </div>
