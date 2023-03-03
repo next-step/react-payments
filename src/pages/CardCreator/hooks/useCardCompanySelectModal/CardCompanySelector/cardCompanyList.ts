@@ -1,4 +1,4 @@
-import type { Themes } from '@/constants/theme';
+import type { Themes } from '@/theme/theme';
 
 export type CardCompany = {
   name: string;

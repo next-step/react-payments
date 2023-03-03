@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
-import themes, { Themes } from '@/constants/theme';
+import themes, { Themes } from '@/theme/theme';
 
 interface ThemeProviderProps extends PropsWithChildren {
   className?: string;

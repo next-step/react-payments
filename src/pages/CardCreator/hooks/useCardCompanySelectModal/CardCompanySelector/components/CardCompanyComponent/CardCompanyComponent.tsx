@@ -1,5 +1,5 @@
 import React from 'react';
-import themes from '@/constants/theme';
+import themes from '@/theme/theme';
 
 import type { CardCompany } from '../../cardCompanyList';
 import { CardCompanyWrapper, CardCompanyName, CardCompanyColor } from './CardCompanyComponent.styled';
