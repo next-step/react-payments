@@ -3,6 +3,14 @@
   text-align: right;
 }
 
+.delete-box {
+  text-align: left;
+}
+
+.delete-box > button {
+  color: red;
+}
+
 .button {
   margin: 0;
   padding: 0.5rem 1rem;

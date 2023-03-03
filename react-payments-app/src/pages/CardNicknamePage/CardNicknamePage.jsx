@@ -83,6 +83,13 @@ const CardNicknamePage = () => {
     navigate('/');
   };
 
+  const handleDelete = () => {
+    if (confirm('Do you really want to leave?')) {
+      localStorage.removeItem(id);
+      navigate('/');
+    }
+  };
+
   return (
     <>
       <Header
@@ -103,7 +110,12 @@ const CardNicknamePage = () => {
       >
         <CardNicknameInput onChange={handleChange} />
       </Form>
-      <Button title='완료' type='submit' form='card-nickname-form' />
+      <div className='flex-center'>
+        {id && (
+          <Button title='삭제' style='delete-box' onClick={handleDelete} />
+        )}
+        <Button title='완료' type='submit' form='card-nickname-form' />
+      </div>
     </>
   );
 };
