@@ -6,11 +6,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 function Button({ children, type = 'button', disabled = false, ...props }: ButtonProps) {
   return (
     <button
+      className="w-full py-3 px-2 bg-blue-400 text-white font-bold rounded-xl disabled:bg-slate-400"
       type={type}
       disabled={disabled}
-      style={{
-        color: `${disabled ? 'gray' : 'black'}`,
-      }}
       {...props}
     >
       {children}

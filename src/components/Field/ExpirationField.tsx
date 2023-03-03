@@ -1,4 +1,4 @@
-import { Input } from '@components/Common';
+import { Input, InputContainer } from '@components/Common';
 import { expirationMonthFormatter, textOnlyFormatter } from '@/utils';
 import FieldContainer from './FieldContainer';
 
@@ -24,24 +24,26 @@ function ExpirationField({
 
   return (
     <FieldContainer title={title}>
-      <Input
-        type={type}
-        name="month"
-        placeholder="MM"
-        maxLength={maxLength}
-        value={month}
-        onChange={onChange}
-        formatter={expirationMonthFormatter}
-      />
-      <Input
-        type={type}
-        name="year"
-        placeholder="YY"
-        maxLength={maxLength}
-        value={year}
-        onChange={onChange}
-        formatter={textOnlyFormatter}
-      />
+      <InputContainer size="half">
+        <Input
+          type={type}
+          name="month"
+          placeholder="MM"
+          maxLength={maxLength}
+          value={month}
+          onChange={onChange}
+          formatter={expirationMonthFormatter}
+        />
+        <Input
+          type={type}
+          name="year"
+          placeholder="YY"
+          maxLength={maxLength}
+          value={year}
+          onChange={onChange}
+          formatter={textOnlyFormatter}
+        />
+      </InputContainer>
     </FieldContainer>
   );
 }

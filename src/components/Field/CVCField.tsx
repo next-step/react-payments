@@ -1,5 +1,5 @@
 import FieldContainer from './FieldContainer';
-import { Input } from '../Common';
+import { Input, InputContainer } from '../Common';
 
 import type { ChangeEvent, HTMLInputTypeAttribute } from 'react';
 
@@ -22,15 +22,17 @@ function CVCField({
 }) {
   return (
     <FieldContainer title={title}>
-      <Input
-        type={type}
-        name={name}
-        pattern="[0-9]*"
-        value={value}
-        placeholder={placeholder}
-        maxLength={maxLength}
-        onChange={onChange}
-      />
+      <InputContainer size="quarter">
+        <Input
+          type={type}
+          name={name}
+          pattern="[0-9]*"
+          value={value}
+          placeholder={placeholder}
+          maxLength={maxLength}
+          onChange={onChange}
+        />
+      </InputContainer>
     </FieldContainer>
   );
 }

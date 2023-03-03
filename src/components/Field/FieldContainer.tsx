@@ -12,10 +12,10 @@ function FieldContainer({
   textLength?: string;
 }) {
   return (
-    <div className="input-container">
-      <div className="flex-between">
-        {title && <span className="input-title">{title}</span>}
-        {textLength ? <span className="input-title">{textLength}</span> : null}
+    <div className="my-2">
+      <div className="flex justify-between">
+        {title && <span className="text-xs text-gray-400">{title}</span>}
+        {textLength ? <span className="text-xs text-gray-400">{textLength}</span> : null}
       </div>
       <div className="flex">
         {children}
