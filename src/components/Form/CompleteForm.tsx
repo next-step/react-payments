@@ -1,9 +1,10 @@
 import { LIMIT_INPUT_LENGTH } from '@/constants';
-import { Button, Input } from '../Common';
+import { Button } from '../Common';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { FormEvent, useEffect } from 'react';
 import { useCardListHandler } from '@/context/CardListContext';
 import { useCardForm, useCardFormHandler } from '@/context/CardFormContext';
+import { NameField } from '../Field';
 
 function CompleteForm() {
   const navigate = useNavigate();
@@ -33,13 +34,13 @@ function CompleteForm() {
   return (
     <form onSubmit={onSubmit} className="flex flex-col items-center justify-center">
       <div className="h-full flex-1 flex flex-col pt-4">
-        <Input
+        <NameField
           kind="underline"
-          type="text"
+          title="카드별칭"
+          placeholder="카드에 표시된 이름과 동일하게 입력하세요"
+          maxLength={LIMIT_INPUT_LENGTH.OWNER_NAME}
           name="nickname"
-          placeholder="카드의 별칭을 입력해주세요."
-          maxLength={LIMIT_INPUT_LENGTH.NICKNAME}
-          value={nickname}
+          value={nickname || cardForm.cardCompany}
           onChange={onChange}
         />
       </div>

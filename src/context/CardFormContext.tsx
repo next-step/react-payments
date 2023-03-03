@@ -40,7 +40,7 @@ const initCardInformation: CardInformation = {
   password2: '',
   cardOwner: '',
   nickname: '',
-  cardCompany: '',
+  cardCompany: 'UNKNOWN',
 };
 
 interface CardFormProviderProps {

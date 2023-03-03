@@ -5,6 +5,7 @@ import type { InputProps } from '@components/Common/Input';
 
 interface NameFieldProps extends InputProps {
   value?: string;
+  transparent?: boolean;
 }
 
 function NameField({ title, placeholder, maxLength, value, name, kind, onChange }: NameFieldProps) {

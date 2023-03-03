@@ -9,9 +9,6 @@ function CardList() {
   return (
     <Layout headerTitle="보유카드">
       <div className="flex flex-col gap-4 overflow-scroll">
-        <Link to="/add">
-          <EmptyCard />
-        </Link>
         {cardList.map(card => {
           const { id, cardNumber1, cardNumber2, cardNumber3, cardNumber4, month, year, cardCompany, cardOwner } = card;
 
@@ -34,16 +31,9 @@ function CardList() {
             </Link>
           );
         })}
-        <EmptyCard />
-        <EmptyCard />
-        <EmptyCard />
-        <EmptyCard />
-        <EmptyCard />
-        <EmptyCard />
-        <EmptyCard />
-        <EmptyCard />
-        <EmptyCard />
-        <EmptyCard />
+        <Link to="/add">
+          <EmptyCard />
+        </Link>
       </div>
     </Layout>
   );
