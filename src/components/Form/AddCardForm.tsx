@@ -60,7 +60,7 @@ function AddCardForm() {
       <ExpirationField
         title="만료일"
         maxLength={LIMIT_INPUT_LENGTH.EXPIRATION}
-        cvc={{
+        expireDate={{
           year,
           month,
         }}
