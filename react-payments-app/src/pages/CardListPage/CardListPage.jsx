@@ -28,7 +28,6 @@ const CardListPage = () => {
           id,
           cardNumbers,
           cardExpirationDate,
-          cardOwner,
           cardCVC,
           cardPassword,
           cardNickname,
