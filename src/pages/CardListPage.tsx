@@ -1,16 +1,17 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import styled from '@emotion/styled';
 
-import { Box, Header } from 'components/@common';
+import { Box, Header, Modal } from 'components/@common';
 import useRouter from 'routes/useRouter';
 import { ReactComponent as PlusIcon } from 'assets/PlusIcon.svg';
 import { CardListContext } from 'contexts/CardListProvider';
 
-import { CreditCard } from 'components';
+import { CardDetail, CreditCard } from 'components';
 
 const CardListPage = () => {
   const { push } = useRouter();
   const { cardList } = useContext(CardListContext);
+  const [nickname, setNickname] = useState('');
 
   return (
     <>
@@ -24,15 +25,23 @@ const CardListPage = () => {
         >
           <PlusIcon />
         </CardAddButton>
-        <>
-          {cardList &&
-            cardList.map((card, index) => (
-              <div key={index}>
-                <CreditCard {...card} />
-                <Text>{card.nickname}</Text>
-              </div>
-            ))}
-        </>
+        <Modal>
+          <Modal.Trigger>
+            {cardList &&
+              cardList.map((card, index) => (
+                <Container
+                  key={index}
+                  onClick={() => setNickname(card.nickname!)}
+                >
+                  <CreditCard {...card} />
+                  <Text>{card.nickname}</Text>
+                </Container>
+              ))}
+          </Modal.Trigger>
+          <Modal.Content>
+            <CardDetail nickname={nickname} />
+          </Modal.Content>
+        </Modal>
       </Wrapper>
     </>
   );
@@ -46,8 +55,12 @@ const Wrapper = styled.div`
   overflow-y: scroll;
 
   & > div {
-    margin: 15px auto;
+    margin: 0px auto;
   }
+`;
+
+const Container = styled.div`
+  margin: 15px auto;
 `;
 
 const CardAddButton = styled(Box)`

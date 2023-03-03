@@ -1,5 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
-import { css, Theme } from '@emotion/react';
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 import { CardCompanies } from 'constants/Card';

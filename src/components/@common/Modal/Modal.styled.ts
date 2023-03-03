@@ -11,6 +11,10 @@ export const Wrapper = styled.div`
   margin: 0 auto;
 `;
 
+export const TriggerWrapper = styled.div`
+  cursor: pointer;
+`;
+
 export const ModalWrapper = styled.div`
   position: absolute;
   bottom: 0;

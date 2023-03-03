@@ -14,7 +14,9 @@ const Modal = ({ children }: PropsWithChildren<ModalProps>) => {
 Modal.Trigger = ({ children }: PropsWithChildren) => {
   const { open } = useContext(ModalContext);
 
-  return <div onClick={open}>{children}</div>;
+  return (
+    <Styled.TriggerWrapper onClick={open}>{children}</Styled.TriggerWrapper>
+  );
 };
 
 Modal.Content = ({ children }: PropsWithChildren) => {
