@@ -15,7 +15,7 @@ function handleInputChange(setValue: Dispatch<SetStateAction<string>>) {
 }
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  onChange: <T>(value: T) => void;
+  onChange?: <T>(value: T) => void;
   placeholder?: string;
   dirtyState?: boolean;
   value?: string;
@@ -33,7 +33,7 @@ export default function TextInput({
   };
 
   useEffect(() => {
-    onChange(value);
+    onChange?.(value);
   }, [value, onChange]);
 
   return <input {...inputProps} onChange={handleInputChange(setValue)} />;

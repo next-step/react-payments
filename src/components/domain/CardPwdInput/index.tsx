@@ -38,27 +38,15 @@ const CardPwdInput = ({ onChange, dirtyState }: Props) => {
         onChange={handleInputChange(setPwd)}
         maxLength={1}
       />
-      <input
-        type="password"
-        name="3"
-        onKeyPress={keyPressInterceptor}
-        onChange={handleInputChange(setPwd)}
-        maxLength={1}
-      />
-      <input
-        type="password"
-        name="4"
-        onKeyPress={keyPressInterceptor}
-        onChange={handleInputChange(setPwd)}
-        maxLength={1}
-      />
+      <input value="*" readOnly type="password" className="input-box" />
+      <input value="*" readOnly type="password" className="input-box" />
     </InputContainer>
   );
 };
 
 export default memo(CardPwdInput);
 
-const MIN_PWD_LENGTH = 4;
+const MIN_PWD_LENGTH = 2;
 
 const ERROR_MESSAGE = {
   NO_EMPTY: '비밀번호를 모두 입력해주세요.',
