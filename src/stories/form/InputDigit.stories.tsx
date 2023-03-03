@@ -12,3 +12,11 @@ const Template: ComponentStory<typeof InputDigit> = (args) => (
 );
 
 export const Digit = Template.bind({});
+Digit.args = {
+  value: {
+    digit1: '',
+    digit2: '',
+    digit3: '',
+    digit4: '',
+  },
+};

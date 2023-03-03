@@ -12,3 +12,9 @@ const Template: ComponentStory<typeof InputPassword> = (args) => (
 );
 
 export const Password = Template.bind({});
+Password.args = {
+  value: {
+    password1: '',
+    password2: '',
+  },
+};
