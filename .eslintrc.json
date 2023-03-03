@@ -20,7 +20,11 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+<<<<<<< HEAD
     "react/react-in-jsx-scope": "off",
     "react/display-name": "off"
+=======
+    "react/react-in-jsx-scope": "off"
+>>>>>>> upstream/leebonggu
   }
 }
