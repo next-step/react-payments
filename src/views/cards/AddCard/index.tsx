@@ -86,13 +86,8 @@ export default function AddCard() {
     useCardPasswordInput(initialFormValue.password);
 
   // 카드 이름
-  const {
-    cardNameList,
-    selectedCardName,
-    isCardNameModalShow,
-    onCardNameSelect,
-    onCardNameModalOpen,
-  } = useCardNameModal(true);
+  const { cardNameList, selectedCardName, isOpen, onCardNameSelect, open } =
+    useCardNameModal(true);
 
   const cardExpireDateWithSlash = useMemo(
     () =>
@@ -165,7 +160,7 @@ export default function AddCard() {
           size="small"
           color={selectedCardName.color}
           cardInfo={cardInfo}
-          onClick={onCardNameModalOpen}
+          onClick={open}
         />
         <S.AddCardFormInputWrapper>
           <CardNumberInput
@@ -193,7 +188,7 @@ export default function AddCard() {
         </Button>
       </S.AddCardFormSubmitButtonWrapper>
       <CardNameModal
-        isShow={isCardNameModalShow}
+        isShow={isOpen}
         onCardNameSelect={onCardNameSelect}
         cardNameList={cardNameList}
       />

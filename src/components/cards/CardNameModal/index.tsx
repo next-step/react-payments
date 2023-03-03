@@ -1,7 +1,6 @@
 import React from "react";
 
 import type { CardName } from "@/constants/variables";
-import { CARD_NAMES } from "@/constants/variables";
 
 import * as S from "./cardNameModal.style";
 

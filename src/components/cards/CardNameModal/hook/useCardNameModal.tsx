@@ -20,11 +20,11 @@ const useCardNameModal = (initialState = false) => {
     setSelectedCardName(CARD_NAMES[0]);
   }, [cardNameList]);
 
-  const handleCardNameModalClose = () => {
+  const closeModal = () => {
     setShowStatus(false);
   };
 
-  const handleCardNameModalOpen = () => {
+  const openModal = () => {
     setShowStatus(true);
   };
 
@@ -36,9 +36,9 @@ const useCardNameModal = (initialState = false) => {
   return {
     cardNameList,
     selectedCardName,
-    isCardNameModalShow: isShow,
-    onCardNameModalOpen: handleCardNameModalOpen,
-    onCardNameModalClose: handleCardNameModalClose,
+    isOpen: isShow,
+    open: openModal,
+    close: closeModal,
     onCardNameSelect: handleCardNameSelect,
   };
 };
