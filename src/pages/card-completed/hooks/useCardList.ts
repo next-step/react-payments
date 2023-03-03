@@ -8,11 +8,11 @@ const useCardList = () => {
   const cardListDispatch = useContext(CardListDispatchContext)
 
   const addCard = (newCard: CardInfomation) => {
-    cardListDispatch({ payload: newCard })
+    cardListDispatch({ type: 'ADD', payload: newCard })
   }
 
-  const updateCard = () => {
-    console.log('Update Card!')
+  const updateCard = (updatedCard: CardInfomation) => {
+    cardListDispatch({ type: 'UPDATE', payload: updatedCard })
   }
 
   const deleteCard = () => {

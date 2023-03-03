@@ -1,11 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { PageTitle } from '@/components/layouts'
 
+import { useCardInfo } from '../card-add/card-form/hooks'
 import useCardList from '../card-completed/hooks/useCardList'
 
 function CardList() {
+  const navigate = useNavigate()
   const { cardList } = useCardList()
+  const { setAllCardInfo } = useCardInfo()
   return (
     <div className="root">
       <div className="app flex-column-center">
@@ -22,7 +25,13 @@ function CardList() {
             expiredYear,
           } = card
           return (
-            <div key={card.nickname}>
+            <div
+              key={card.nickname}
+              onClick={() => {
+                setAllCardInfo(card)
+                navigate('/card-completed')
+              }}
+            >
               <div className="card-box">
                 <div className="small-card">
                   <div className="card-top">

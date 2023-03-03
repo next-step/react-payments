@@ -1,6 +1,7 @@
 import { ChangeEvent, useContext } from 'react'
 
 import { CardStateContext, CardDispatchContext } from '@/contexts/card'
+import { CardInfomation } from '@/domain'
 import { isNumber } from '@/utils'
 
 const useCardInfo = () => {
@@ -119,6 +120,14 @@ const useCardInfo = () => {
     })
   }
 
+  const setAllCardInfo = (card: CardInfomation) => {
+    cardDispatch({ type: 'SET_ALL', payload: card })
+  }
+
+  const resetCardInfo = () => {
+    cardDispatch({ type: 'RESET_ALL' })
+  }
+
   return {
     cardInfo,
     handleNumber,
@@ -127,6 +136,8 @@ const useCardInfo = () => {
     handleNickname,
     handleSecurityCode,
     handlePassword,
+    setAllCardInfo,
+    resetCardInfo,
   }
 }
 

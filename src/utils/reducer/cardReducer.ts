@@ -1,3 +1,4 @@
+import { INITIAL_CARD_STATE } from '@/contants'
 import { CardInfomation, CardAction } from '@/domain'
 
 const cardReducer = (state: CardInfomation, action: CardAction): CardInfomation => {
@@ -50,6 +51,10 @@ const cardReducer = (state: CardInfomation, action: CardAction): CardInfomation 
           second: action.payload.second,
         },
       }
+    case 'SET_ALL':
+      return action.payload
+    case 'RESET_ALL':
+      return INITIAL_CARD_STATE
     default:
       throw new Error(`Unhandled action type: ${action}`)
   }

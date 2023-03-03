@@ -14,13 +14,15 @@ function CardCompleted() {
       cardNumbers: { first, second, third, fourth },
       owner,
       name,
+      nickname,
       expiredMonth,
       expiredYear,
     },
     handleNickname,
+    resetCardInfo,
   } = useCardInfo()
 
-  const { addCard } = useCardList()
+  const { cardList, addCard, updateCard } = useCardList()
 
   const nicknameRef = useRef<HTMLInputElement>(null)
 
@@ -28,7 +30,13 @@ function CardCompleted() {
     const nicknameValue = nicknameRef.current?.value || name
     handleNickname(nicknameValue)
     // Todo: 업데이트된 닉네임이 반영된 cardInfo를 사용해야함
-    addCard({ ...cardInfo, nickname: nicknameValue })
+    if (cardList.find((card) => card.id === cardInfo.id)) {
+      updateCard({ ...cardInfo, nickname: nicknameValue })
+    } else {
+      addCard({ ...cardInfo, id: cardList.length, nickname: nicknameValue })
+    }
+
+    resetCardInfo()
   }
 
   return (
@@ -58,6 +66,7 @@ function CardCompleted() {
       <div className="input-container flex-center w-100">
         <input
           ref={nicknameRef}
+          defaultValue={nickname}
           className="input-underline w-75"
           type="text"
           placeholder="카드 별칭 (선택)"

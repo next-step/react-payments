@@ -48,8 +48,16 @@ export type CardAction =
       type: 'SET_PASSWORD'
       payload: CardPassword
     }
+  | {
+      type: 'SET_ALL'
+      payload: CardInfomation
+    }
+  | {
+      type: 'RESET_ALL'
+    }
 
 export interface CardInfomation {
+  id?: number
   cardNumbers: CardNumbers
   name: CardName
   nickname: CardNickname
@@ -60,6 +68,12 @@ export interface CardInfomation {
   password: CardPassword
 }
 
-export type CardListAction = {
-  payload: CardInfomation
-}
+export type CardListAction =
+  | {
+      type: 'ADD'
+      payload: CardInfomation
+    }
+  | {
+      type: 'UPDATE'
+      payload: CardInfomation
+    }
