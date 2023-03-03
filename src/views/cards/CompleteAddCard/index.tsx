@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { Card, CardNameInput } from "@/components/cards";
@@ -23,7 +23,7 @@ export default function CompleteAddCard() {
 
   useRedirect("CARD_LIST", !state?.cardInfo);
 
-  const isEdit = useMemo(() => pathname.includes("edit"), [pathname]);
+  const isEdit = pathname.includes("edit");
 
   const newCardInfo: CardItem = useMemo(
     () => ({
