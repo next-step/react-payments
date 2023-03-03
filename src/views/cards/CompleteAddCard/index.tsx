@@ -5,6 +5,7 @@ import { Card, CardNameInput } from "@/components/cards";
 import { useCardNameInput } from "@/components/cards/CardNameInput/hook";
 import { Button } from "@/components/common";
 import { CardItem, useCardsContext } from "@/contexts/CardsContext";
+import { useRedirect } from "@/hooks";
 import { CardPageLayout } from "@/layouts/cards";
 import { domains } from "@/router";
 
@@ -20,9 +21,7 @@ export default function CompleteAddCard() {
     cardName: state?.cardInfo?.cardName ?? "",
   });
 
-  useEffect(() => {
-    if (!state?.cardInfo) navigate(domains.CARD_LIST);
-  }, []);
+  useRedirect("CARD_LIST", !state?.cardInfo);
 
   const isEdit = useMemo(() => pathname.includes("edit"), [pathname]);
 

@@ -3,7 +3,7 @@ import { ChangeEvent, useCallback } from "react";
 import { CARD_VALIDATION_ERROR_MESSAGES } from "@/constants/messages/error";
 import { CARD_INPUT_VARIABLES } from "@/constants/variables";
 import { checkValidator } from "@/helper";
-import useInput from "@/hooks/useInput";
+import { useInput } from "@/hooks";
 import { ValidationError } from "@/services/errors";
 import { ValidationResult } from "@/types";
 

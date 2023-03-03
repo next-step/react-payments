@@ -10,6 +10,8 @@ export const domains = {
   CARD_EDIT: "/cards/edit",
 };
 
+export type Domains = keyof typeof domains;
+
 const router = createBrowserRouter([
   {
     path: "*",
