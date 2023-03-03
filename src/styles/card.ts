@@ -8,57 +8,37 @@ export const S = {
     margin: 10px 0;
   `,
   EmptyCard: styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
     width: 208px;
-    height: 130px;
-
-    font-size: 30px;
+    padding: 10px 14px;
     color: #575757;
-
     background: #e5e5e5;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
-
     user-select: none;
+    box-sizing: border-box;
   `,
   SmallCard: styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
     width: 208px;
     height: 130px;
-
     background: #94dacd;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
   `,
   CardTop: styled.div`
     width: 100%;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
+    font-size: 10px;
+    margin-bottom: 20px;
   `,
   CardMiddle: styled.div`
     width: 100%;
-    height: 100%;
-    margin-left: 30px;
-
-    display: flex;
-    align-items: center;
+    margin-bottom: 13px;
   `,
   CardBottom: styled.div`
     width: 100%;
-    height: 100%;=
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   `,
   SmallCardChip: styled.div`
     width: 40px;
@@ -70,15 +50,30 @@ export const S = {
     border-radius: 4px;
   `,
   CardText: styled.span`
-    margin: 0 16px;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 16px;
     vertical-align: middle;
     font-weight: 400;
   `,
+  CardNumber: styled.span`
+    font-size: 13px;
+    line-height: 16px;
+    vertical-align: middle;
+    font-weight: 400;
+    width: 25%;
+    min-height: 16px;
+  `,
+  CardNumInfo: styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    padding: 0 4px;
+    box-sizing: border-box;
+  `,
   CardBottomInfo: styled.div`
     width: 100%;
-    height: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
