@@ -1,4 +1,4 @@
-import { ChangeEvent, RefObject, useCallback, useContext } from 'react'
+import { ChangeEvent, useContext } from 'react'
 
 import { CardStateContext, CardDispatchContext } from '@/contexts/card'
 import { isNumber } from '@/utils'
@@ -93,38 +93,38 @@ const useCardInfo = () => {
     cardDispatch({ type: 'SET_OWNER', payload: event.target.value })
   }
 
-  const handleSecurityCode = useCallback(
-    (ref: RefObject<HTMLInputElement>) => {
-      cardDispatch({
-        type: 'SET_SECURITY_CODE',
-        payload: ref,
-      })
-    },
-    [cardDispatch],
-  )
-
-  interface HandlePasswordProps {
-    first: RefObject<HTMLInputElement>
-    second: RefObject<HTMLInputElement>
+  const handleSecurityCode = (value: string) => {
+    cardDispatch({
+      type: 'SET_SECURITY_CODE',
+      payload: value,
+    })
   }
 
-  const handlePassword = useCallback(
-    ({ first, second }: HandlePasswordProps) => {
-      cardDispatch({
-        type: 'SET_PASSWORD',
-        payload: {
-          first,
-          second,
-        },
-      })
-    },
-    [cardDispatch],
-  )
+  const handleNickname = (value: string) => {
+    cardDispatch({ type: 'SET_NICKNAME', payload: value })
+  }
+
+  interface HandlePasswordProps {
+    first: string
+    second: string
+  }
+
+  const handlePassword = ({ first, second }: HandlePasswordProps) => {
+    cardDispatch({
+      type: 'SET_PASSWORD',
+      payload: {
+        first,
+        second,
+      },
+    })
+  }
+
   return {
     cardInfo,
     handleNumber,
     handleExpiredDate,
     handleOwner,
+    handleNickname,
     handleSecurityCode,
     handlePassword,
   }

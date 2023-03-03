@@ -1,9 +1,10 @@
 export const INITIAL_CARD_STATE = {
   cardNumbers: { first: '', second: '', third: '', fourth: '' },
   name: '',
+  nickname: '',
   expiredYear: '',
   expiredMonth: '',
   owner: '',
-  securityCode: { current: null },
-  password: { first: { current: null }, second: { current: null } },
+  securityCode: '',
+  password: { first: '', second: '' },
 }

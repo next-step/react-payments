@@ -1,7 +1,30 @@
+import { useRef } from 'react'
+
 import { BackButton, NavigationTextButton } from '@/components/button'
 import { PageTitle } from '@/components/layouts'
 
+import { useCardInfo } from '../card-add/card-form/hooks'
+
 function CardCompleted() {
+  const {
+    cardInfo: {
+      cardNumbers: { first, second, third, fourth },
+      owner,
+      expiredMonth,
+      expiredYear,
+    },
+    handleNickname,
+  } = useCardInfo()
+
+  const nicknameRef = useRef<HTMLInputElement>(null)
+
+  const preNavigation = () => {
+    const nicknameValue = nicknameRef.current?.value
+    if (nicknameValue) {
+      handleNickname(nicknameValue)
+    }
+  }
+
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
@@ -17,19 +40,25 @@ function CardCompleted() {
           </div>
           <div className="card-bottom">
             <div className="card-bottom__number">
-              <span className="card-text__big">1111 - 2222 - oooo - oooo</span>
+              <span className="card-text__big">{`${first} - ${second} - ${third} - ${fourth}`}</span>
             </div>
             <div className="card-bottom__info">
-              <span className="card-text__big">YUJO</span>
-              <span className="card-text__big">12 / 23</span>
+              <span className="card-text__big">{owner}</span>
+              <span className="card-text__big">{`${expiredMonth} / ${expiredYear}`}</span>
             </div>
           </div>
         </div>
       </div>
       <div className="input-container flex-center w-100">
-        <input className="input-underline w-75" type="text" placeholder="카드의 별칭을 입력해주세요." />
+        <input
+          ref={nicknameRef}
+          className="input-underline w-75"
+          type="text"
+          placeholder="카드 별칭 (선택)"
+          maxLength={10}
+        />
       </div>
-      <NavigationTextButton additionalClassNames="mt-50" to="/" text="다음" />
+      <NavigationTextButton additionalClassNames="mt-50" preNavigation={preNavigation} to="/" text="다음" />
     </div>
   )
 }

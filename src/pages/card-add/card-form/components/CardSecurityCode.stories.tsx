@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { useRef } from 'react'
 
 import CardSecurityCode from './CardSecurityCode'
 
@@ -8,10 +9,11 @@ export default {
 } as ComponentMeta<typeof CardSecurityCode>
 
 const Template: ComponentStory<typeof CardSecurityCode> = () => {
+  const securityCodeRef = useRef<HTMLInputElement>(null)
   return (
     <div className="root">
       <div className="app">
-        <CardSecurityCode />
+        <CardSecurityCode securityCodeRef={securityCodeRef} />
       </div>
     </div>
   )

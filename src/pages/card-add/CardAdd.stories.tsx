@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { useRef } from 'react'
 
 import { BackButton, NavigationTextButton } from '@/components/button'
 import { Card } from '@/components/card'
@@ -16,6 +17,12 @@ export default {
 const Template: ComponentStory<typeof CardAdd> = () => {
   const { cardInfo, handleNumber, handleExpiredDate, handleOwner } = useCardInfo()
 
+  const firstPasswordRef = useRef<HTMLInputElement>(null)
+  const secondPasswordRef = useRef<HTMLInputElement>(null)
+  const passwordRef = { first: firstPasswordRef, second: secondPasswordRef }
+
+  const securityCodeRef = useRef<HTMLInputElement>(null)
+
   return (
     <div className="root">
       <div className="app">
@@ -29,10 +36,10 @@ const Template: ComponentStory<typeof CardAdd> = () => {
             handleChange={handleExpiredDate}
           />
           <CardForm.CardOwner owner={cardInfo.owner} handleChange={handleOwner} />
-          <CardForm.CardSecurityCode />
-          <CardForm.CardPassword />
+          <CardForm.CardSecurityCode securityCodeRef={securityCodeRef} />
+          <CardForm.CardPassword passwordRef={passwordRef} />
         </CardForm>
-        <NavigationTextButton to="/card-completed" storage={cardInfo} text="다음" />
+        <NavigationTextButton to="/card-completed" text="다음" />
       </div>
     </div>
   )

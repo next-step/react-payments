@@ -1,3 +1,5 @@
+import { useRef } from 'react'
+
 import { BackButton, NavigationTextButton } from '@/components/button'
 import { Card } from '@/components/card'
 import { PageTitle } from '@/components/layouts'
@@ -5,7 +7,26 @@ import { CardForm } from '@/pages/card-add/card-form'
 import { useCardInfo } from '@/pages/card-add/card-form/hooks'
 
 function CardAdd() {
-  const { cardInfo, handleNumber, handleExpiredDate, handleOwner } = useCardInfo()
+  const { cardInfo, handleNumber, handleExpiredDate, handleOwner, handlePassword, handleSecurityCode } = useCardInfo()
+
+  const firstPasswordRef = useRef<HTMLInputElement>(null)
+  const secondPasswordRef = useRef<HTMLInputElement>(null)
+  const passwordRef = { first: firstPasswordRef, second: secondPasswordRef }
+
+  const securityCodeRef = useRef<HTMLInputElement>(null)
+
+  const preNavigation = () => {
+    const firstPasswordValue = firstPasswordRef.current?.value
+    const secondPasswordValue = secondPasswordRef.current?.value
+    if (firstPasswordValue && secondPasswordValue) {
+      handlePassword({ first: firstPasswordValue, second: secondPasswordValue })
+    }
+
+    const securityCodeValue = securityCodeRef.current?.value
+    if (securityCodeValue) {
+      handleSecurityCode(securityCodeValue)
+    }
+  }
 
   return (
     <div className="app">
@@ -19,10 +40,10 @@ function CardAdd() {
           handleChange={handleExpiredDate}
         />
         <CardForm.CardOwner owner={cardInfo.owner} handleChange={handleOwner} />
-        <CardForm.CardSecurityCode />
-        <CardForm.CardPassword />
+        <CardForm.CardSecurityCode securityCodeRef={securityCodeRef} />
+        <CardForm.CardPassword passwordRef={passwordRef} />
       </CardForm>
-      <NavigationTextButton to="/card-completed" storage={cardInfo} text="다음" />
+      <NavigationTextButton preNavigation={preNavigation} to="/card-completed" text="다음" />
     </div>
   )
 }

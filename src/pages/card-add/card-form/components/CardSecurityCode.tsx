@@ -1,19 +1,10 @@
-import { useEffect, useRef, ChangeEvent } from 'react'
+import { RefObject } from 'react'
 
-import { useCardInfo } from '../hooks'
-
-interface CardSecurityCode {
-  handleChange(event: ChangeEvent<HTMLInputElement>): void
+interface CardSecurityCodeProps {
+  securityCodeRef: RefObject<HTMLInputElement>
 }
 
-const CardSecurityCode = () => {
-  const { handleSecurityCode } = useCardInfo()
-  const securityCodeRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    handleSecurityCode(securityCodeRef)
-  }, [handleSecurityCode, securityCodeRef])
-
+const CardSecurityCode = ({ securityCodeRef }: CardSecurityCodeProps) => {
   return (
     <div className="input-container">
       <span className="input-title">보안코드(CVC/CVV)</span>

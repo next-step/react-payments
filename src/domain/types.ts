@@ -1,5 +1,3 @@
-import { RefObject } from 'react'
-
 export type CardNumbers = {
   first: string
   second: string
@@ -7,13 +5,14 @@ export type CardNumbers = {
   fourth: string
 }
 export type CardName = string
+export type CardNickname = string
 export type CardExpiredYear = string
 export type CardExpiredMonth = string
 export type CardOwner = string
-export type CardSecurityCode = RefObject<HTMLInputElement>
+export type CardSecurityCode = string
 export type CardPassword = {
-  first: RefObject<HTMLInputElement>
-  second: RefObject<HTMLInputElement>
+  first: string
+  second: string
 }
 
 export type CardAction =
@@ -24,6 +23,10 @@ export type CardAction =
   | {
       type: 'SET_NAME'
       payload: CardName
+    }
+  | {
+      type: 'SET_NICKNAME'
+      payload: CardNickname
     }
   | {
       type: 'SET_EXPIRED_YEAR'
@@ -49,19 +52,10 @@ export type CardAction =
 export interface CardInfomation {
   cardNumbers: CardNumbers
   name: CardName
+  nickname: CardNickname
   expiredYear: CardExpiredYear
   expiredMonth: CardExpiredMonth
   owner: CardOwner
   securityCode: CardSecurityCode
   password: CardPassword
-}
-
-export interface ChangeCardInfomation {
-  cardNumbers?: { first: string; second: string; third: string; fourth: string }
-  name?: string
-  expiredYear?: string
-  expiredMonth?: string
-  owner?: string
-  securityCode?: string
-  password?: { first: string; second: string }
 }
