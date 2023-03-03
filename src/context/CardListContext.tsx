@@ -45,7 +45,7 @@ function CardListProvider({ children }: CardListContextProps) {
   const handlers = useMemo(
     () => ({
       addCard(newCard: CardInformation) {
-        setCardList(prev => [...prev, newCard]);
+        setCardList(prev => [newCard, ...prev]);
       },
       deleteCard(id: string) {
         setCardList(prev => prev.filter(card => card.id !== id));
