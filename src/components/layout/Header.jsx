@@ -1,7 +1,9 @@
 import { PATH } from '../../Constant';
 import useRoute from '../../hooks/useRoute';
 
-const getPageTitle = (currentPage) => {
+const getPageTitle = () => {
+  const currentPage = window.location.pathname;
+
   switch (currentPage) {
     case PATH.HOME:
       return '보유카드';
@@ -22,7 +24,7 @@ const Header = () => {
           &lt;
         </div>
       )}
-      <h2 className="page-title mb-10">{getPageTitle(currentPage)}</h2>
+      <h2 className="page-title mb-10">{getPageTitle()}</h2>
     </header>
   );
 };
