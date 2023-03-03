@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 import { useFormContext } from '@/components/common/Form/FormContext';
 import {
   CardCVCInput,
@@ -44,7 +42,7 @@ const CardForm = () => {
   );
 };
 
-export default memo(CardForm);
+export default CardForm;
 
 const FormWrapper = styled('form', {
   paddingTop: '2rem',

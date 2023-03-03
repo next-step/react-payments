@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
 import { useFormContext } from '@/components/common/Form/FormContext';
@@ -37,7 +37,7 @@ const CardOwnerInput = ({ onChange, dirtyState }: Props) => {
   );
 };
 
-export default memo(CardOwnerInput);
+export default CardOwnerInput;
 
 const MAX_OWNER_NAME_LENGTH = 30;
 

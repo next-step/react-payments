@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { InputContainer } from '@/components/UI';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
@@ -37,7 +37,7 @@ const CardCVCInput = ({ onChange, dirtyState }: Props) => {
   );
 };
 
-export default memo(CardCVCInput);
+export default CardCVCInput;
 
 const CVC_MIN_LENGTH = 3;
 

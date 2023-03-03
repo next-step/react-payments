@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
@@ -61,7 +61,7 @@ const CardNumberInput = ({ onChange, dirtyState }: Props) => {
   );
 };
 
-export default memo(CardNumberInput);
+export default CardNumberInput;
 
 const ERROR_MESSAGE = {
   ONLY_NUMBER: '카드번호는 숫자만 입력할 수 있습니다.',

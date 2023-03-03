@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
@@ -44,7 +44,7 @@ const CardPwdInput = ({ onChange, dirtyState }: Props) => {
   );
 };
 
-export default memo(CardPwdInput);
+export default CardPwdInput;
 
 const MIN_PWD_LENGTH = 2;
 

@@ -1,4 +1,4 @@
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
@@ -48,7 +48,7 @@ const ExpiredDateInput = ({ onChange, dirtyState }: Props) => {
   );
 };
 
-export default memo(ExpiredDateInput);
+export default ExpiredDateInput;
 
 const MAX_MONTH = 12;
 
