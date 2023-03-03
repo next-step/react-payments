@@ -7,16 +7,19 @@ import { MAX_INPUT_LENGTH } from '../../../../constants/numbers';
 import { CHANGE_CARD } from '../../../../constants/action';
 
 const CardCVCInput = () => {
-  const { changeCardInfo } = useCard();
+  const { cardInfo, changeCardInfo } = useCard();
   const [cardCVC, setCardCVC] = useState('');
 
   const isValidCVC = (value) => {
     if (Number.isNaN(+value)) {
       changeCardInfo(CHANGE_CARD.ERROR, '숫자만 입력주세요.');
+      alert(cardInfo.error);
       setCardCVC('');
       return;
     }
     changeCardInfo(CHANGE_CARD.ERROR, null);
+
+    return true;
   };
 
   const handleCVCChange = (e) => {
