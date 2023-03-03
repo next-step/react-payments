@@ -23,6 +23,7 @@ const CardNicknameInput = ({ onChange }) => {
   return (
     <div className='input-container flex-center w-100'>
       <Input
+        maxLength={MAX_INPUT_LENGTH.CARD_NICKNAME}
         className='input-underline w-75'
         type='text'
         placeholder='카드의 별칭(선택)'

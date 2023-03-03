@@ -17,7 +17,6 @@ const Card = ({
   const currentLocation = location.pathname.split('/').slice(-1).shift();
 
   // TODO: 카드UI 표시 더 자연스럽게 로직 수정
-  const cardNumbersToDisplay = hideLastEightNumbers(cardNumbers);
 
   //TODO: 회사 선택 유무에 따라 className 변경
   // TODO: 회사에 따라 className 변경
@@ -46,9 +45,7 @@ const Card = ({
             </div>
             <div className='card-bottom'>
               <div className='card-bottom__number'>
-                <span className='card-text'>
-                  {cardNumbersToDisplay[0] && cardNumbersToDisplay.join('-')}
-                </span>
+                <span className='card-text'>{cardNumbers}</span>
               </div>
               <div className='card-bottom__info'>
                 <span className='card-text'>{cardOwner}</span>
