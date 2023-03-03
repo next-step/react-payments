@@ -17,6 +17,11 @@ const cardReducer = (state: CardInfomation, action: CardAction): CardInfomation 
         ...state,
         name: action.payload,
       }
+    case 'SET_NICKNAME':
+      return {
+        ...state,
+        nickname: action.payload,
+      }
     case 'SET_EXPIRED_YEAR':
       return {
         ...state,

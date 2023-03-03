@@ -10,6 +10,7 @@ function CardCompleted() {
     cardInfo: {
       cardNumbers: { first, second, third, fourth },
       owner,
+      name,
       expiredMonth,
       expiredYear,
     },
@@ -22,6 +23,8 @@ function CardCompleted() {
     const nicknameValue = nicknameRef.current?.value
     if (nicknameValue) {
       handleNickname(nicknameValue)
+    } else {
+      handleNickname(name)
     }
   }
 
