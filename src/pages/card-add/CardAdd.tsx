@@ -4,7 +4,7 @@ import { BackButton, NavigationTextButton } from '@/components/button'
 import { Card } from '@/components/card'
 import { PageTitle } from '@/components/layouts'
 import { CardForm } from '@/pages/card-add/card-form'
-import { useCardInfo } from '@/pages/card-add/card-form/hooks'
+import { useCardInfo } from '@/pages/hooks'
 
 function CardAdd() {
   const { cardInfo, handleNumber, handleExpiredDate, handleOwner, handlePassword, handleSecurityCode } = useCardInfo()

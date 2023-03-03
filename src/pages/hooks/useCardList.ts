@@ -15,8 +15,8 @@ const useCardList = () => {
     cardListDispatch({ type: 'UPDATE', payload: updatedCard })
   }
 
-  const deleteCard = () => {
-    console.log('Delete Card!')
+  const deleteCard = (deletedCard: CardInfomation) => {
+    cardListDispatch({ type: 'DELETE', payload: deletedCard })
   }
   return { cardList, addCard, deleteCard, updateCard }
 }

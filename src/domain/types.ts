@@ -77,3 +77,7 @@ export type CardListAction =
       type: 'UPDATE'
       payload: CardInfomation
     }
+  | {
+      type: 'DELETE'
+      payload: CardInfomation
+    }

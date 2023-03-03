@@ -1,9 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 
 import { PageTitle } from '@/components/layouts'
-
-import { useCardInfo } from '../card-add/card-form/hooks'
-import useCardList from '../card-completed/hooks/useCardList'
+import { useCardInfo, useCardList } from '@/pages/hooks'
 
 function CardList() {
   const navigate = useNavigate()
@@ -15,7 +13,7 @@ function CardList() {
         <div className="flex-center">
           <PageTitle addtionalClassName="mb-10" title="보유 카드" />
         </div>
-        {cardList.map((card) => {
+        {cardList?.map((card) => {
           const {
             cardNumbers: { first, second, third, fourth },
             owner,
@@ -27,13 +25,15 @@ function CardList() {
           return (
             <div
               key={card.nickname}
-              onClick={() => {
+              onClick={(event) => {
+                event.stopPropagation()
                 setAllCardInfo(card)
-                navigate('/card-completed')
+                navigate('/card-update')
               }}
             >
               <div className="card-box">
                 <div className="small-card">
+                  <div className="delete-button-box"></div>
                   <div className="card-top">
                     <span className="card-text">{name}</span>
                   </div>

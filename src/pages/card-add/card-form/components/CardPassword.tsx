@@ -1,6 +1,6 @@
 import { RefObject } from 'react'
 
-import { useSequentialInputFocus } from '@/pages/card-add/card-form/hooks'
+import { useSequentialInputFocus } from '@/pages/hooks'
 
 interface CardPasswordProps {
   passwordRef: {

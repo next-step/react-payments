@@ -1,10 +1,12 @@
 import { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { BackButton, NavigationTextButton } from '@/components/button'
 import { PageTitle } from '@/components/layouts'
 import { useCardInfo, useCardList } from '@/pages/hooks'
 
-function CardCompleted() {
+function CardUpdate() {
+  const navigate = useNavigate()
   const {
     cardInfo,
     cardInfo: {
@@ -19,27 +21,36 @@ function CardCompleted() {
     resetCardInfo,
   } = useCardInfo()
 
-  const { cardList, addCard } = useCardList()
+  const { updateCard, deleteCard } = useCardList()
 
   const nicknameRef = useRef<HTMLInputElement>(null)
 
   const preNavigation = () => {
     const nicknameValue = nicknameRef.current?.value || name
     handleNickname(nicknameValue)
-    // Todo: 업데이트된 닉네임이 반영된 cardInfo를 사용해야함
-    addCard({ ...cardInfo, id: cardList.length, nickname: nicknameValue })
+    updateCard({ ...cardInfo, nickname: nicknameValue })
     resetCardInfo()
   }
 
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
-        <PageTitle buttonElement={<BackButton />} addtionalClassName="mb-10" title="카드등록이 완료되었습니다." />
+        <PageTitle buttonElement={<BackButton />} addtionalClassName="mb-10" title="카드 목록으로 돌아가기" />
       </div>
       <div className="card-box">
         <div className="big-card">
           <div className="card-top">
             <span className="card-text__big">클린카드</span>
+            <button
+              type="button"
+              className="card-text"
+              onClick={() => {
+                deleteCard(cardInfo)
+                navigate('/')
+              }}
+            >
+              카드삭제
+            </button>
           </div>
           <div className="card-middle">
             <div className="big-card__chip" />
@@ -70,4 +81,4 @@ function CardCompleted() {
   )
 }
 
-export default CardCompleted
+export default CardUpdate
