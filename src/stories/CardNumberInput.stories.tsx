@@ -1,0 +1,20 @@
+import React from "react";
+import { Story, Meta } from "@storybook/react/types-6-0";
+import CardNumberInput, {
+  CardNumberInputProps,
+} from "../components/CardNumberInput";
+
+export default {
+  title: "Component/CardNumberInput",
+  component: CardNumberInput,
+} as Meta;
+
+const Template: Story<CardNumberInputProps> = (args) => (
+  <CardNumberInput {...args} />
+);
+
+export const Default = Template.bind({});
+Default.args = {
+  cardNumber: "",
+  onChange: () => {},
+};
