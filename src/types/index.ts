@@ -13,8 +13,6 @@ export type CardNumber = {
 export type Password = {
   1: string;
   2: string;
-  3: string;
-  4: string;
 };
 
 export type ExpireDate = {
@@ -31,7 +29,6 @@ export type OwnerName = {
 };
 
 export type Validation<T> = T & { isValid: boolean };
-export type Maybe<T> = T | object;
 
 export const enum CardKey {
   CARD_NUMBERS = 'CARD_NUMBERS',

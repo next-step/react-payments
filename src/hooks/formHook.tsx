@@ -43,8 +43,5 @@ export default function useFormData(initialData = {}) {
   };
 }
 
-function isObjectState<T>(v: T): v is T {
-  return typeof v == 'object';
-}
-// const isObjectState = <T extends object>(v: T): v is T => typeof v == 'object';
+const isObjectState = (v: any): v is object => typeof v == 'object';
 const isStringState = (v: any): v is string => typeof v == 'string';
