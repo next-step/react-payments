@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import styled from '@emotion/styled';
 
-import { Box } from 'components/@common';
+import { Box, Header } from 'components/@common';
 import useRouter from 'routes/useRouter';
 import { ReactComponent as PlusIcon } from 'assets/PlusIcon.svg';
 import { CardListContext } from 'contexts/CardListProvider';
@@ -13,34 +13,35 @@ const CardListPage = () => {
   const { cardList } = useContext(CardListContext);
 
   return (
-    <Wrapper>
-      <CardAddButton
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        onClick={() => push('/card-registration')}
-      >
-        <PlusIcon />
-      </CardAddButton>
-      <>
-        {cardList &&
-          cardList.map((card, index) => <CreditCard key={index} {...card} />)}
-      </>
-    </Wrapper>
+    <>
+      <Header>카드 목록</Header>
+      <Wrapper>
+        <CardAddButton
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          onClick={() => push('/card-registration')}
+        >
+          <PlusIcon />
+        </CardAddButton>
+        <>
+          {cardList &&
+            cardList.map((card, index) => <CreditCard key={index} {...card} />)}
+        </>
+      </Wrapper>
+    </>
   );
 };
 
 export default CardListPage;
 
 const Wrapper = styled.div`
-  height: 100%;
-  padding: 15px 0;
-  row-gap: 30px;
+  height: calc(100% - 59.5px);
   box-sizing: border-box;
   overflow-y: scroll;
 
   & > div {
-    margin: 10px auto;
+    margin: 15px auto;
   }
 `;
 
