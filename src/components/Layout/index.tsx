@@ -7,7 +7,7 @@ function Layout({ children, headerTitle, goBack }: PropsWithChildren<Props>) {
   return (
     <div className="w-full h-full">
       {headerTitle ? <Header headerTitle={headerTitle} goBack={goBack} /> : null}
-      <div className="h-full mt-4 flex flex-col">{children}</div>
+      <div className="h-full mt-4 flex flex-col px-2">{children}</div>
     </div>
   );
 }
