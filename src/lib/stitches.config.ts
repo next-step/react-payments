@@ -3,7 +3,7 @@ import { createStitches } from '@stitches/react';
 
 export type CSS = Stitches.CSS<typeof config>;
 
-export const { styled, css, theme, config } = createStitches({
+export const { styled, css, theme, config, keyframes } = createStitches({
   theme: {
     colors: {
       white: '#FFFFFF',
