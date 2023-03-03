@@ -2,7 +2,7 @@ import { Story } from "@storybook/react";
 import OwnerName, { OwnerNameProps } from "../components/CardOwnerNameInput";
 
 export default {
-  title: "Component/OwnerName",
+  title: "Components/OwnerName",
   component: OwnerName,
 };
 

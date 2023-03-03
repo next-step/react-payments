@@ -5,7 +5,7 @@ import CardNumberInput, {
 } from "../components/CardNumberInput";
 
 export default {
-  title: "Component/CardNumberInput",
+  title: "Components/CardNumberInput",
   component: CardNumberInput,
 } as Meta;
 
