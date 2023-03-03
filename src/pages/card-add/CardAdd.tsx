@@ -5,7 +5,7 @@ import { CardForm } from '@/pages/card-add/card-form'
 import { useCardInfo } from '@/pages/card-add/card-form/hooks'
 
 function CardAdd() {
-  const { cardInfo, handleNumber, handleExpiredDate, handleOwner, handleSecurityCode, handlePassword } = useCardInfo()
+  const { cardInfo, handleNumber, handleExpiredDate, handleOwner } = useCardInfo()
 
   return (
     <div className="app">
@@ -19,8 +19,8 @@ function CardAdd() {
           handleChange={handleExpiredDate}
         />
         <CardForm.CardOwner owner={cardInfo.owner} handleChange={handleOwner} />
-        <CardForm.CardSecurityCode securityCode={cardInfo.securityCode} handleChange={handleSecurityCode} />
-        <CardForm.CardPassword password={cardInfo.password} handleChange={handlePassword} />
+        <CardForm.CardSecurityCode />
+        <CardForm.CardPassword />
       </CardForm>
       <NavigationTextButton to="/card-completed" storage={cardInfo} text="다음" />
     </div>

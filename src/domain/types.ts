@@ -1,3 +1,5 @@
+import { RefObject } from 'react'
+
 export type CardNumbers = {
   first: string
   second: string
@@ -8,10 +10,10 @@ export type CardName = string
 export type CardExpiredYear = string
 export type CardExpiredMonth = string
 export type CardOwner = string
-export type CardSecurityCode = string
+export type CardSecurityCode = RefObject<HTMLInputElement>
 export type CardPassword = {
-  first: string
-  second: string
+  first: RefObject<HTMLInputElement>
+  second: RefObject<HTMLInputElement>
 }
 
 export type CardAction =

@@ -10,7 +10,8 @@ export default {
 } as ComponentMeta<typeof CardForm>
 
 const Template: ComponentStory<typeof CardForm> = () => {
-  const { cardInfo, handleNumber, handleExpiredDate, handleOwner, handleSecurityCode, handlePassword } = useCardInfo()
+  const { cardInfo, handleNumber, handleExpiredDate, handleOwner } = useCardInfo()
+
   return (
     <div className="root">
       <div className="app">
@@ -22,8 +23,8 @@ const Template: ComponentStory<typeof CardForm> = () => {
             handleChange={handleExpiredDate}
           />
           <CardForm.CardOwner owner={cardInfo.owner} handleChange={handleOwner} />
-          <CardForm.CardSecurityCode securityCode={cardInfo.securityCode} handleChange={handleSecurityCode} />
-          <CardForm.CardPassword password={cardInfo.password} handleChange={handlePassword} />
+          <CardForm.CardSecurityCode />
+          <CardForm.CardPassword />
         </CardForm>
       </div>
     </div>

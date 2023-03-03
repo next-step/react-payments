@@ -1,7 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import { useCardInfo } from '@/pages/card-add/card-form/hooks'
-
 import CardSecurityCode from './CardSecurityCode'
 
 export default {
@@ -9,12 +7,11 @@ export default {
   component: CardSecurityCode,
 } as ComponentMeta<typeof CardSecurityCode>
 
-const Template: ComponentStory<typeof CardSecurityCode> = (props) => {
-  const { cardInfo, handleSecurityCode } = useCardInfo()
+const Template: ComponentStory<typeof CardSecurityCode> = () => {
   return (
     <div className="root">
       <div className="app">
-        <CardSecurityCode {...props} securityCode={cardInfo.securityCode} handleChange={handleSecurityCode} />
+        <CardSecurityCode />
       </div>
     </div>
   )
