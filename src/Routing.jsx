@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import usePayment from './hooks/usePayment';
 import CardSave from './pages/CardSave';
 import useRoute from './hooks/useRoute';
+import Error from './pages/Error';
 
 const Routing = () => {
   const {
@@ -42,6 +43,7 @@ const Routing = () => {
           <CardSave onSave={handleSave} cardInfo={cardInfo} onChange={handleCardInfoInput} />
         }
       />
+      <Route path="*" element={<Error />} />
     </Routes>
   );
 };
