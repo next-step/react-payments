@@ -1,11 +1,11 @@
 import type { Themes } from '@/theme/theme';
 
-export type CardCompany = {
+export type CardCompanyModel = {
   name: string;
   theme: Themes;
 };
 
-export const cardCompanyList: { [key: string]: CardCompany } = {
+export const cardCompanyList: { [key: string]: CardCompanyModel } = {
   포코카드: {
     name: '포코카드',
     theme: 'red',

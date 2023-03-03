@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { CardCompanyComponent } from './components/CardCompanyComponent';
-import { cardCompanyList, CardCompany } from './cardCompanyList';
+import { CardCompany } from './components/CardCompany';
+import { cardCompanyList, CardCompanyModel } from './cardCompanyList';
 import { Wrapper, CompaniesWrapper } from './CardCompanySelector.styled';
 
 export interface CardCompanySelectorProps {
-  onCardCompanyClick?: (cardCompany: CardCompany) => void;
+  onCardCompanyClick?: (cardCompany: CardCompanyModel) => void;
 }
 
 function CardCompanySelector({ onCardCompanyClick }: CardCompanySelectorProps) {
@@ -14,7 +14,7 @@ function CardCompanySelector({ onCardCompanyClick }: CardCompanySelectorProps) {
     <Wrapper onClick={(e) => e.stopPropagation()}>
       <CompaniesWrapper>
         {Object.values(cardCompanyList).map((cardCompany) => (
-          <CardCompanyComponent key={cardCompany.name} cardCompany={cardCompany} onClick={onCardCompanyClick} />
+          <CardCompany key={cardCompany.name} cardCompany={cardCompany} onClick={onCardCompanyClick} />
         ))}
       </CompaniesWrapper>
     </Wrapper>
