@@ -7,11 +7,7 @@ import {
   InputTitle,
 } from "./common/Input";
 
-export interface CvcProps {
-  className?: string;
-}
-
-const Cvc: React.FC<CvcProps> = ({ className }) => {
+const Cvc = () => {
   const [cvc, setCvc] = useState<string>("");
   const [showHelp, setShowHelp] = useState<boolean>(false);
 
@@ -21,7 +17,7 @@ const Cvc: React.FC<CvcProps> = ({ className }) => {
   };
 
   return (
-    <InputContainer className={className}>
+    <InputContainer>
       <InputTitle>
         보안코드(CVC/CVV)
         <HelpIcon onClick={() => setShowHelp(!showHelp)}>?</HelpIcon>

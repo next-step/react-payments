@@ -1,5 +1,5 @@
 import { Story } from "@storybook/react";
-import PasswordFirstTwoDigits from "../components/PasswordFirstTwoDigits";
+import PasswordFirstTwoDigits from "../components/CardPasswordFirstTwoDigitsInput";
 
 export default {
   title: "Components/PasswordFirstTwoDigits",

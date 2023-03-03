@@ -1,54 +1,11 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 
-const CardNumberInputContainer = styled.div`
-  margin: 16px 0;
-`;
-
-const CardNumberTitle = styled.span`
-  display: flex;
-  align-items: center;
-  font-size: 12px;
-  line-height: 14px;
-  margin-bottom: 4px;
-  color: #525252;
-`;
-
-const CardNumberInputBasic = styled.input`
-  background-color: #ecebf1;
-  height: 45px;
-  width: 25%;
-  text-align: center;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  border-color: #9ca3af;
-  border: none;
-  border-radius: 0.25rem;
-`;
-
-const CardNumberInputPassword = styled.input`
-  background-color: #ecebf1;
-  height: 45px;
-  width: 25%;
-  text-align: center;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  border-color: #9ca3af;
-  border: none;
-  border-radius: 0.25rem;
-  font-size: 1.5rem;
-  letter-spacing: 4px;
-  font-family: inherit;
-`;
-
-const CardNumberInputBox = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 0.375rem;
-  color: #d3d3d3;
-  border-radius: 0.25rem;
-  background-color: #ecebf1;
-`;
+import {
+  InputBasic,
+  InputBox,
+  InputContainer,
+  InputTitle,
+} from "./common/Input";
 
 export interface CardNumberInputProps {
   cardNumber: string;
@@ -81,20 +38,20 @@ const CardNumberInput: React.FC<CardNumberInputProps> = ({
   };
 
   return (
-    <CardNumberInputContainer>
-      <CardNumberTitle>카드 번호</CardNumberTitle>
-      <CardNumberInputBox>
+    <InputContainer>
+      <InputTitle>카드 번호</InputTitle>
+      <InputBox>
         {inputValues.map((value, index) => (
           <React.Fragment key={index}>
             {index === 2 || index === 3 ? (
-              <CardNumberInputPassword
+              <InputBasic
                 type="password"
                 value={value}
                 maxLength={4}
                 onChange={(e) => handleChange(e, index)}
               />
             ) : (
-              <CardNumberInputBasic
+              <InputBasic
                 type="text"
                 maxLength={4}
                 value={value}
@@ -103,8 +60,8 @@ const CardNumberInput: React.FC<CardNumberInputProps> = ({
             )}
           </React.Fragment>
         ))}
-      </CardNumberInputBox>
-    </CardNumberInputContainer>
+      </InputBox>
+    </InputContainer>
   );
 };
 

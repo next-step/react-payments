@@ -1,6 +1,6 @@
 import React from "react";
 import { Story, Meta } from "@storybook/react";
-import ExpirationDate from "../components/ExpirationDate";
+import ExpirationDate from "../components/CardExpirationDateInput";
 
 export default {
   title: "Components/ExpirationDate",
