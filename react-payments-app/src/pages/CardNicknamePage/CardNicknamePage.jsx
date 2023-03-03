@@ -37,13 +37,17 @@ const CardNicknamePage = () => {
       return;
     }
     changeCardInfo(CHANGE_CARD.ERROR, null);
+
+    changeCardInfo(CHANGE_CARD.NICKNAME, cardNickname);
+    changeCardInfo(CHANGE_CARD.ID);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    changeCardInfo(CHANGE_CARD.NICKNAME, cardNickname);
     registerCard(cardInfo);
+
+    changeCardInfo(CHANGE_CARD.INIT_CARD);
     navigate('/');
   };
 

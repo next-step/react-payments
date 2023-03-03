@@ -8,8 +8,14 @@ import { useCard } from '../../store/CardContext';
 
 const CardListPage = () => {
   const { cardList } = useCard();
-
   const navigate = useNavigate();
+
+  // localStorage 전체 값 불러오기
+  const keys = Object.keys(localStorage);
+  const values = [];
+  for (const key of keys) {
+    values.push(JSON.parse(localStorage.getItem(key)));
+  }
 
   return (
     <div className='app flex-column-center'>
@@ -17,7 +23,7 @@ const CardListPage = () => {
 
       <CardShapedButton onClick={() => navigate('/registration')} />
 
-      {cardList.map((card) => {
+      {values.map((card) => {
         const {
           id,
           cardNumbers,

@@ -17,21 +17,18 @@ export const initialState = {
 export const CardContext = createContext(null);
 
 export const CardProvider = ({ children }) => {
-  const [cardList, setCardList] = useState([]);
   const [cardInfo, dispatch] = useReducer(cardReducer, initialState);
 
-  const changeCardInfo = (actionType, cardInfo) => {
-    dispatch({ type: actionType, payload: cardInfo });
+  const changeCardInfo = (actionType, data) => {
+    dispatch({ type: actionType, payload: data });
   };
 
   const registerCard = (cardInfo) => {
-    setCardList([...cardList, cardInfo]);
+    localStorage.setItem(cardInfo.id, JSON.stringify(cardInfo));
   };
 
   return (
-    <CardContext.Provider
-      value={{ cardInfo, changeCardInfo, registerCard, cardList }}
-    >
+    <CardContext.Provider value={{ cardInfo, changeCardInfo, registerCard }}>
       {children}
     </CardContext.Provider>
   );

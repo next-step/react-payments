@@ -20,7 +20,8 @@ export const cardReducer = (state, action) => {
     case CHANGE_CARD.ERROR:
       return { ...state, error: action.payload };
     case CHANGE_CARD.ID:
-      return { ...state, id: new Date() };
+      return { ...state, id: new Date().getTime() };
+
     case CHANGE_CARD.INIT_CARD:
       return initialState;
     default:
