@@ -52,6 +52,7 @@ export default function CardRegistrationCompletedPage() {
           type="text"
           ref={nickNameRef}
           placeholder="카드의 별칭을 입력해주세요."
+          maxLength="10"
         />
       </div>
       <div className="button-box mt-30">
