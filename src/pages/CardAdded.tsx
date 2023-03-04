@@ -23,7 +23,7 @@ const CardAdded = () => {
       <div className="flex-center">
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
-      <Card data={cardList[cardList.length - 1]} />
+      <Card {...cardList[cardList.length - 1]} />
       <div className="input-container flex-center w-100">
         <input
           ref={aliasRef}

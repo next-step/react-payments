@@ -101,7 +101,7 @@ const AddCard = () => {
         </Button>
         카드 추가
       </h2>
-      <Card data={cardData} />
+      <Card {...cardData} />
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">

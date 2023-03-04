@@ -21,7 +21,7 @@ const CardAdd = () => {
         .sort((a, b) => b.id.getTime() - a.id.getTime())
         .map((card) => (
           <div key={card.id.getDate()}>
-            <Card data={card} />
+            <Card {...card} />
             <div className="holding-card">
               <span className="card-alias">{card.alias}</span>
               <span className="card-remove" onClick={() => removeCard(card.id)}>
