@@ -1,3 +1,6 @@
+// import { useContext } from "react";
+// import { CardContext } from "../context/CardContext";
+
 function maskingCardNumber(cardNumber) {
   const cardNumberArray = Object.values(cardNumber);
   return cardNumberArray
@@ -16,28 +19,21 @@ function maskingCardExpiration(cardExpiration) {
     .join("");
 }
 
-export default function CardBox({
-  cardNumber,
-  cardOwnerName,
-  cardExpiration,
-  cardColor,
-  cardCompanyName,
-  isEmpty,
-  cardSize,
-  onClick,
-}) {
+export default function CardBox({ cardInfo, isEmpty, cardSize, onClick }) {
+  // const { cardInfo } = useContext(CardContext);
+
   return (
     <div className="card-box" onClick={onClick}>
       <div
         className={
           (isEmpty ? "empty" : cardSize) +
           "-card " +
-          (cardColor ? cardColor : "")
+          (cardInfo && cardInfo["cardColor"] ? cardInfo["cardColor"] : "")
         }
       >
         <div className="card-top">
           <span className={cardSize === "big" ? "card-text__big" : "card-text"}>
-            {cardCompanyName}
+            {cardInfo && cardInfo["cardCompanyName"]}
           </span>
         </div>
         <div className="card-middle">
@@ -48,19 +44,19 @@ export default function CardBox({
             <span
               className={cardSize === "big" ? "card-text__big" : "card-text"}
             >
-              {maskingCardNumber(cardNumber)}
+              {cardInfo && maskingCardNumber(cardInfo["cardNumber"])}
             </span>
           </div>
           <div className="card-bottom__info">
             <span
               className={cardSize === "big" ? "card-text__big" : "card-text"}
             >
-              {cardOwnerName}
+              {cardInfo && cardInfo["cardOwnerName"]}
             </span>
             <span
               className={cardSize === "big" ? "card-text__big" : "card-text"}
             >
-              {maskingCardExpiration(cardExpiration)}
+              {cardInfo && maskingCardExpiration(cardInfo["cardExpiration"])}
             </span>
           </div>
         </div>

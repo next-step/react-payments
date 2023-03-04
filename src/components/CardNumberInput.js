@@ -1,7 +1,5 @@
-import { useRef } from "react";
 import { CARD_NUMBER } from "../constants/card";
 
-// TODO : input 노드 통합 & 포맷팅 자동화
 export default function CardNumberInput({
   cardNumber,
   onChange,

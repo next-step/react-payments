@@ -1,6 +1,7 @@
 import { useContext, useReducer, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CardBox from "../components/CardBox";
+import reducer from "../hooks/reducer";
 
 import { CardContext } from "../context/CardContext";
 import { ROUTE_PATH } from "../constants/page";
@@ -21,50 +22,6 @@ import {
   CARD_PASSWORD,
 } from "../constants/card";
 
-// TODO : 검증을 통과하지못하면 검증함수에서 받아온 메시지를 setState를 통해 리렌더링을 트리거
-function reducer(state, action) {
-  switch (action.type) {
-    case "cardNumber": {
-      const { name, value } = action.target;
-      return {
-        ...state,
-        [action.type]: { ...state[action.type], [name]: value },
-      };
-    }
-    case "cardExpiration": {
-      const { name, value } = action.target;
-      return {
-        ...state,
-        [action.type]: { ...state[action.type], [name]: value },
-      };
-    }
-    case "cardOwnerName": {
-      const { value } = action.target;
-      return { ...state, [action.type]: value };
-    }
-    case "cardSecurityCode": {
-      const { value } = action.target;
-      return { ...state, [action.type]: value };
-    }
-    case "cardPassword": {
-      const { name, value } = action.target;
-      return {
-        ...state,
-        [action.type]: { ...state[action.type], [name]: value },
-      };
-    }
-    case "cardCompanyName": {
-      const { value } = action.target;
-      return { ...state, [action.type]: value };
-    }
-    case "cardColor": {
-      const { value } = action.target;
-      return { ...state, [action.type]: value };
-    }
-    default:
-      throw new Error();
-  }
-}
 export default function CardRegistrationPage() {
   const { cardInfo, setCardInfo } = useContext(CardContext);
 
@@ -96,8 +53,6 @@ export default function CardRegistrationPage() {
     cardOwnerName,
     cardSecurityCode,
     cardPassword,
-    cardColor,
-    cardCompanyName,
   } = state;
 
   const [isShowModal, setIsShowModal] = useState(true);
@@ -125,6 +80,7 @@ export default function CardRegistrationPage() {
     setCardInfo({
       ...cardInfo,
       ["cardCompanyName"]: cardCompanyName,
+      ["cardNickName"]: cardCompanyName,
       ["cardColor"]: cardColor,
     });
     setIsShowModal(false);
@@ -139,15 +95,7 @@ export default function CardRegistrationPage() {
         >
           카드 추가
         </Header>
-        <CardBox
-          cardNumber={cardNumber}
-          cardExpiration={cardExpiration}
-          cardOwnerName={cardOwnerName}
-          cardColor={cardInfo["cardColor"]}
-          cardCompanyName={cardInfo["cardCompanyName"]}
-          isEmpty="true"
-          cardSize="small"
-        />
+        <CardBox cardInfo={cardInfo} isEmpty="true" cardSize="small" />
         <CardNumberInput
           cardNumber={cardNumber}
           onChange={(e) => {
