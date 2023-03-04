@@ -1,31 +1,28 @@
 import { useContext, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Button, Card } from '../components';
-import { CreditCard, PaymentsContext } from '../context/PaymentsContext';
+import { PaymentsContext } from '../context/PaymentsContext';
 
 const CardAdded = () => {
   const navigate = useNavigate();
   const aliasRef = useRef<HTMLInputElement>(null);
 
-  const location = useLocation();
-  const newCard: CreditCard = location.state;
-
-  const { updateAlias } = useContext(PaymentsContext);
+  const { cardList, addAlias } = useContext(PaymentsContext);
 
   const addedAlias = () => {
     if (aliasRef.current) {
-      updateAlias(newCard.id, aliasRef.current.value);
+      addAlias(aliasRef.current.value);
     }
     navigate('/card-list');
   };
 
   return (
-    <section className="app flex-column-center">
+    <div className="app flex-column-center">
       <div className="flex-center">
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
-      <Card {...newCard} />
+      <Card {...cardList[cardList.length - 1]} />
       <div className="input-container flex-center w-100">
         <input
           ref={aliasRef}
@@ -38,7 +35,7 @@ const CardAdded = () => {
       <div className="button-box mt-50">
         <Button onClick={addedAlias}>다음</Button>
       </div>
-    </section>
+    </div>
   );
 };
 

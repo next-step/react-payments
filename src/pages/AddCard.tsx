@@ -1,8 +1,7 @@
 import { ChangeEvent, RefObject, useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Button from '../components/Button';
-import Card from '../components/Card';
+import { Button, Card } from '../components';
 import { PaymentsContext } from '../context/PaymentsContext';
 import useRefObjects from '../hooks/useRefObjects';
 import { extractNumbers } from '../utils';
