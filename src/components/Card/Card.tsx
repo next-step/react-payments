@@ -1,6 +1,6 @@
 import { masking } from '../../utils';
 
-interface CardProps {
+export interface CardProps {
   bank?: string;
   num1?: string;
   num2?: string;
