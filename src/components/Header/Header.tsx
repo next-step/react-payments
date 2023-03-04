@@ -1,13 +1,18 @@
+import { useNavigate } from 'react-router-dom';
 import LeftArrow from '../Icon/LeftArrow';
 
 interface HeaderProps {
   title: string;
   hasBackButton?: boolean;
-  onClickBackbutton?: () => void;
 }
 
 const Header = (props: HeaderProps) => {
-  const { title, hasBackButton, onClickBackbutton } = props;
+  const navigate = useNavigate();
+  const { title, hasBackButton } = props;
+
+  const onClickBackButton = () => {
+    navigate(-1);
+  };
 
   return (
     <header>
@@ -15,7 +20,7 @@ const Header = (props: HeaderProps) => {
         <button
           type="button"
           className="header-back-button"
-          onClick={onClickBackbutton}
+          onClick={onClickBackButton}
         >
           <LeftArrow />
         </button>
@@ -29,7 +34,6 @@ const Header = (props: HeaderProps) => {
 
 Header.defaultProps = {
   hasBackButton: false,
-  onClickBackbutton: () => {},
 };
 
 export default Header;
