@@ -39,9 +39,9 @@ function PaymentsReducer(
 
       const cardList = state.cardList.map((card) => {
         if (id === card.id) {
-           card.cardNickName = cardNickName;
+          card.cardNickName = cardNickName ? cardNickName : "별칭";
         }
-        return card
+        return card;
       });
 
       return {

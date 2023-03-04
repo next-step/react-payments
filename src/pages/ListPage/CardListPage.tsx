@@ -10,7 +10,6 @@ const CardListPage = () => {
 
   const cards = [...cardList].reverse();
 
-  console.log("cards", cards)
   const movePage = () => {
     go(ROUTE.REGIST_CARD);
   };
