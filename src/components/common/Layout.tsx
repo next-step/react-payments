@@ -12,10 +12,16 @@ const Layout = () => {
       position: relative;
       border-radius: 15px;
     `,
+    App: styled.div`
+      height: 100%;
+      padding: 16px 24px;
+    `,
   };
   return (
     <S.Root>
-      <Outlet />
+      <S.App>
+        <Outlet />
+      </S.App>
     </S.Root>
   );
 };

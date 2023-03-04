@@ -1,38 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CardPreview from '../components/CardPreview';
+import Title from '../components/common/Title';
+import { useCardListState } from '../context/CardListContext';
 
 const PaymentCardList = () => {
+  const cardList = useCardListState();
+
   return (
-    <div className="app flex-column-center">
-      <div className="flex-center">
-        <h2 className="page-title mb-10">보유 카드</h2>
+    <>
+      <Title text="보유 카드" />
+
+      <div className="flex-column-center">
+        {cardList.map((card, index) => (
+          <React.Fragment key={index}>
+            <CardPreview {...card} />
+            <span className="card-nickname">법인카드</span>
+          </React.Fragment>
+        ))}
+
+        <Link to={'/register'}>
+          <div className="card-box">
+            <div className="empty-card">+</div>
+          </div>
+        </Link>
       </div>
-      <div className="card-box">
-        <div className="small-card">
-          <div className="card-top">
-            <span className="card-text">클린카드</span>
-          </div>
-          <div className="card-middle">
-            <div className="small-card__chip"></div>
-          </div>
-          <div className="card-bottom">
-            <div className="card-bottom__number">
-              <span className="card-text">1111 - 2222 - oooo - oooo</span>
-            </div>
-            <div className="card-bottom__info">
-              <span className="card-text">YUJO</span>
-              <span className="card-text">12 / 23</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <span className="card-nickname">법인카드</span>
-      <Link to={'/register'}>
-        <div className="card-box">
-          <div className="empty-card">+</div>
-        </div>
-      </Link>
-    </div>
+    </>
   );
 };
 

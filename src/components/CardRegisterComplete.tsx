@@ -7,7 +7,7 @@ const CardRegisterComplete = () => {
   const state = useCardState();
 
   return (
-    <div className="app flex-column-center">
+    <>
       <div className="flex-center">
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
@@ -20,7 +20,7 @@ const CardRegisterComplete = () => {
         />
       </div>
       <Button text={'확인'} />
-    </div>
+    </>
   );
 };
 
