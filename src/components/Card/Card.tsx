@@ -1,14 +1,14 @@
 import React, { MouseEvent } from 'react';
 
 import type { CardOwner, ExpireDate } from '@/types';
-import { CardCompany } from '@/pages/CardCreator/hooks/useCardCompanySelectModal/CardCompanySelector/cardCompanyList';
+import { CardCompanyModel } from '@/pages/CardCreator/hooks/useCardCompanySelectModal/CardCompanySelector/cardCompanyList';
 
-import { CardName, CardNumbers } from './CardName';
+import { CardNumbersModel, CardNumbers } from './CardNumbers';
 import { CardWrapper } from './Card.styled';
 
 interface CardProps {
-  cardCompany?: CardCompany;
-  cardNumbers: CardNumbers;
+  cardCompany?: CardCompanyModel;
+  cardNumbers: CardNumbersModel;
   ownerName?: CardOwner;
   expireDates: (ExpireDate | undefined)[];
   onCardClick?: (e: MouseEvent<HTMLDivElement>) => void;
@@ -23,7 +23,7 @@ function Card({ cardCompany, cardNumbers, expireDates, ownerName, onCardClick }:
           <div className="small-card__chip" />
         </div>
         <div className="card-bottom">
-          <CardName cardNumbers={cardNumbers} />
+          <CardNumbers cardNumbers={cardNumbers} />
           <div className="card-bottom__info">
             <span className="card-text card-name-spacing">{ownerName || 'NAME'}</span>
             <span className="card-text">
