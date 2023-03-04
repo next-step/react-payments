@@ -1,6 +1,6 @@
 import { useContext } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CardContext } from "../context/CardContext";
 
 import { ROUTE_PATH } from "../constants/page";
@@ -9,6 +9,7 @@ import CardBox from "../components/CardBox";
 
 export default function RegistedCardListPage() {
   const { cardInfo, setCardInfo } = useContext(CardContext);
+  const navigate = useNavigate();
 
   return (
     <div className="app flex-column-center">
@@ -22,6 +23,9 @@ export default function RegistedCardListPage() {
         cardColor={cardInfo["cardColor"]}
         cardCompanyName={cardInfo["cardCompanyName"]}
         cardSize="small"
+        onClick={() => {
+          navigate(ROUTE_PATH.CARD_REGISTRATION_COMPLETED);
+        }}
       />
       <span className="card-nickname">{cardInfo["cardNickName"]}</span>
       <Link className="button-text" to={ROUTE_PATH.CARD_REGISTRATION}>

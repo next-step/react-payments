@@ -24,9 +24,10 @@ export default function CardBox({
   cardCompanyName,
   isEmpty,
   cardSize,
+  onClick,
 }) {
   return (
-    <div className="card-box">
+    <div className="card-box" onClick={onClick}>
       <div
         className={
           (isEmpty ? "empty" : cardSize) +
