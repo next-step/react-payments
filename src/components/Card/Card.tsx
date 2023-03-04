@@ -1,16 +1,11 @@
+import { ICardInfo } from 'src/utils/types';
 import CardCreditNumber from './CardCreditNumber';
 
-export interface ICardInfo {
-  title: string;
-  bgColor: string;
-  creditNumber: string;
-  customerName: string;
-  expirationDate: string;
-  alias?: string;
+interface CardProps extends ICardInfo {
   onClick?: () => void;
 }
 
-const Card = (props: ICardInfo) => {
+const Card = (props: CardProps) => {
   const {
     title,
     bgColor,
@@ -43,7 +38,6 @@ const Card = (props: ICardInfo) => {
 };
 
 Card.defaultProps = {
-  alias: '',
   onClick: () => {},
 };
 

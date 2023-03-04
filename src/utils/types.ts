@@ -1,3 +1,13 @@
+export interface ICardInfo {
+  id?: string;
+  title: string;
+  bgColor: string;
+  creditNumber: string;
+  customerName: string;
+  expirationDate: string;
+  alias?: string;
+}
+
 export interface INewCard {
   creditNumber: string;
   expirationDate: string;
