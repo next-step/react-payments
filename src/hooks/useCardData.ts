@@ -4,6 +4,7 @@ import { CardCompanies, DEFAULT_CARD_COMPANY } from 'constants/Card';
 import type { CreditCardType, PartialCreditCardType } from 'types/CreditCard';
 
 const initalData: CreditCardType = {
+  id: 1,
   number: '',
   holderName: '',
   expiration: '',
@@ -27,5 +28,3 @@ const useCardData = () => {
 };
 
 export default useCardData;
-
-const test = <T>(data: T) => {};

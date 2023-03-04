@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useState } from 'react';
+import { createContext, PropsWithChildren, useRef, useState } from 'react';
 import type { PartialCreditCardType } from 'types/CreditCard';
 
 export const CardListContext = createContext({
@@ -8,10 +8,13 @@ export const CardListContext = createContext({
 CardListContext.displayName = 'CardListContext';
 
 const CardListProvider = ({ children }: PropsWithChildren) => {
+  const id = useRef(1);
   const [cardList, setCardList] = useState<PartialCreditCardType[]>([]);
 
   const addCardInfo = (data: PartialCreditCardType) => {
+    data['id'] = id.current;
     setCardList((prev) => [...prev, data]);
+    id.current += 1;
   };
 
   return (

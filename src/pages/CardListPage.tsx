@@ -52,7 +52,7 @@ export default CardListPage;
 const Wrapper = styled.div`
   height: calc(100% - 59.5px);
   box-sizing: border-box;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   & > div {
     margin: 0px auto;
