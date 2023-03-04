@@ -1,0 +1,11 @@
+#add-card-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-container {
+  position: fixed;
+  width: 100%;
+  background-color: while;
+}

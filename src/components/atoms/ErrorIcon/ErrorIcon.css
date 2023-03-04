@@ -1,0 +1,17 @@
+.error-container {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 5rem;
+  color: gray;
+  flex-direction: column;
+}
+
+.error-message {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  margin-bottom: 0;
+  color: gray;
+}
