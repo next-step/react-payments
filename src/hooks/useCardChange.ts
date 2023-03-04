@@ -1,8 +1,12 @@
 import { formatCardNumber, getBankId, getBankName } from "./../utils/format";
 import { DEFAULT_BANK_COLOR } from "./../constants/bank";
 import { PasswordType } from "./../components/Form/Password";
-import { CardNumbers } from "./../components/Form/CardNumber";
-import { useEffect, useMemo, useState } from "react";
+import {
+  CardNumbers,
+  CARD_LAST_INDEX,
+  CARD_MAX_LENGTH,
+} from "./../components/Form/CardNumber";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { initCard } from "../constants/bank";
 import { AnyObject, CardType } from "../types/common";
 import { Date } from "../components/Form/ExpiredDate";
@@ -72,6 +76,13 @@ function useCardChange() {
 
     const cardInfo = setBankId(newCardInfo, cardNumbers[0]);
 
+    if (
+      cardNumbers[CARD_LAST_INDEX].length === CARD_MAX_LENGTH &&
+      cardInfo.bankId
+    ) {
+      expiredRef.current?.focus();
+    }
+
     setCardInfo((card: CardType) => {
       return {
         ...card,
@@ -112,6 +123,8 @@ function useCardChange() {
     });
   };
 
+  const expiredRef = useRef<HTMLInputElement>(null);
+
   return {
     onCardNumberChange,
     onCodeChange,
@@ -123,6 +136,7 @@ function useCardChange() {
     formattedCardNumber,
     bankName,
     setCardInfo,
+    expiredRef,
   };
 }
 

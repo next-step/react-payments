@@ -57,6 +57,7 @@ function Add() {
     cardColor,
     formattedCardNumber,
     bankName,
+    expiredRef,
   } = useCardChange();
 
   const history = useHistory();
@@ -89,7 +90,10 @@ function Add() {
       ></Card>
       <form onSubmit={submitHandler}>
         <CardNumber onCardNumberChange={onCardNumberChange}></CardNumber>
-        <ExpiredDate onExpiredDateChange={onExpiredDateChange}></ExpiredDate>
+        <ExpiredDate
+          onExpiredDateChange={onExpiredDateChange}
+          ref={expiredRef}
+        ></ExpiredDate>
         <UserName onUserNameChange={onUserNameChange}></UserName>
         <Code onCodeChange={onCodeChange}></Code>
         <Password onPasswordChange={onPasswordChange}></Password>
