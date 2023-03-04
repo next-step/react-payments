@@ -7,12 +7,13 @@ function CardUpdate() {
     nicknameRef,
     cardNumbers,
     cardOwner,
-    cardExxpiredDate,
+    cardExpiredDate,
     cardNickname,
     onClickDeleteButton,
     handlePreNavigation,
   } = useCardUpdate()
 
+  // Todo: BigCard, Input 컴포넌트 분리 가능함
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
@@ -35,7 +36,7 @@ function CardUpdate() {
             </div>
             <div className="card-bottom__info">
               <span className="card-text__big">{cardOwner}</span>
-              <span className="card-text__big">{cardExxpiredDate}</span>
+              <span className="card-text__big">{cardExpiredDate}</span>
             </div>
           </div>
         </div>

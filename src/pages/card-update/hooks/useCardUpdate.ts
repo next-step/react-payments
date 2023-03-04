@@ -37,14 +37,14 @@ const useCardUpdate = () => {
 
   const cardNumbers = `${first} - ${second} - ${third} - ${fourth}`
   const cardOwner = owner
-  const cardExxpiredDate = `${expiredMonth} / ${expiredYear}`
+  const cardExpiredDate = `${expiredMonth} / ${expiredYear}`
   const cardNickname = nickname
 
   return {
     nicknameRef,
     cardNumbers,
     cardOwner,
-    cardExxpiredDate,
+    cardExpiredDate,
     cardNickname,
     onClickDeleteButton,
     handlePreNavigation,
