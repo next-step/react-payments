@@ -1,10 +1,10 @@
-import { formatCardNumber } from "./../utils/format";
+import { formatCardNumber, getBankId, getBankName } from "./../utils/format";
 import { DEFAULT_BANK_COLOR } from "./../constants/bank";
 import { PasswordType } from "./../components/Form/Password";
 import { CardNumbers } from "./../components/Form/CardNumber";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { initCard } from "../constants/bank";
-import { CardType } from "../types/common";
+import { AnyObject, CardType } from "../types/common";
 import { Date } from "../components/Form/ExpiredDate";
 import { getBankColor } from "../utils/format";
 import useCardContext from "./useCardContext";
@@ -19,8 +19,20 @@ function useCardChange() {
     !!cardInfo.userName;
 
   const color = useMemo(() => {
+    if (cardInfo.bankId) {
+      return getBankColor(cardInfo.bankId);
+    }
+
     return getBankColor(card.bankId);
-  }, [card.bankId]);
+  }, [cardInfo.bankId, card.bankId]);
+
+  const bankName = useMemo(() => {
+    if (cardInfo.bankId) {
+      return getBankName(cardInfo.bankId);
+    }
+
+    return getBankName(card.bankId);
+  }, [cardInfo.bankId, card.bankId]);
 
   const cardColor = useMemo(() => {
     if (color) {
@@ -36,11 +48,27 @@ function useCardChange() {
     return formatCardNumber(cardInfo.cardNumber);
   }, [cardInfo.cardNumber]);
 
+  const setBankId = (newCardInfo: AnyObject, firstCardNumber: string) => {
+    if (!firstCardNumber || firstCardNumber.length < 4) {
+      return newCardInfo;
+    }
+
+    const bankId = getBankId(firstCardNumber);
+    newCardInfo.bankId = bankId;
+    return newCardInfo;
+  };
+
   const onCardNumberChange = (cardNumbers: CardNumbers) => {
+    const newCardInfo: AnyObject = {
+      cardNumber: cardNumbers,
+    };
+
+    const cardInfo = setBankId(newCardInfo, cardNumbers[0]);
+
     setCardInfo((card: CardType) => {
       return {
         ...card,
-        cardNumber: cardNumbers,
+        ...cardInfo,
       };
     });
   };
@@ -86,6 +114,8 @@ function useCardChange() {
     cardInfo,
     cardColor,
     formattedCardNumber,
+    bankName,
+    setCardInfo,
   };
 }
 

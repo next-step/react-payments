@@ -22,6 +22,15 @@ export const getBankColor = (bankId: string) => {
   return selectedBank ? selectedBank.COLOR : "";
 };
 
+export const getBankId = (firstCardNumber: string) => {
+  if (!firstCardNumber) {
+    return "";
+  }
+
+  const selectedBank = BANKS.find((bank) => bank.NUMBER === firstCardNumber);
+  return selectedBank ? selectedBank.ID : "";
+};
+
 export const getBankName = (bankId: string) => {
   if (!bankId) {
     return "";

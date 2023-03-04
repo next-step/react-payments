@@ -17,3 +17,7 @@ export type CardType = {
   bankId: string;
   cardAlias: string;
 };
+
+export type AnyObject = {
+  [key: string]: string | number | {};
+};
