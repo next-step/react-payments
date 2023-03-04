@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { InputContainer } from '@/components/UI';
 import { useFormContext } from '@/components/common/Form/FormContext';
+import { InputContainer } from '@/components/UI';
 
 type Props = {
   onChange: <T>(value: T) => void;

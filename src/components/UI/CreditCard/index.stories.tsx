@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import { CardVariant } from '../Card';
-import CreditCard from '.';
+import CreditCard, { DefaultCardInfo } from '.';
 
 export default {
   title: 'Components/UI/CreditCard',
@@ -23,24 +23,13 @@ const Template: ComponentStory<typeof CreditCard> = (args) => (
 );
 export const Default = Template.bind({});
 
-const MOCK_CARD_INFO = {
-  CARD_NUMBERS: {
-    1: '1111',
-    2: '1111',
-    3: '1111',
-    4: '1111',
-  },
-  OWNER_NAME: { val: 'Dahye' },
-  EXPIRE_DATE: { month: '10', year: '66' },
-};
-
 export const SmallCard = Template.bind({});
 SmallCard.args = {
   size: 'small',
-  cardInfo: MOCK_CARD_INFO,
+  cardInfo: DefaultCardInfo,
 };
 
 export const WithCardInfo = Template.bind({});
 WithCardInfo.args = {
-  cardInfo: MOCK_CARD_INFO,
+  cardInfo: DefaultCardInfo,
 };
