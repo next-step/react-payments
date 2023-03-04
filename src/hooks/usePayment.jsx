@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import useRoute from './useRoute';
 import { PATH } from '../Constant';
-import { checkValidInputValue, cleanNaNValue, formatInputValue } from '../utils/inputValue';
+import {
+  cleanNaNValue,
+  formatInputValue,
+  isDigitInputValue,
+  isInvalidInputValue
+} from '../utils/inputValue';
 
 const defaultCardInfo = {
   company: '',
@@ -60,8 +65,8 @@ const usePayment = () => {
 
   const handleCardInfoInput = (evt) => {
     let { value, id } = evt.target;
-    if (!checkValidInputValue(value, id)) {
-      alert('숫자만 입력가능합니다.');
+    if (!isDigitInputValue(value, id)) {
+      alert('숫자만 입력 가능합니다\n입력값을 확인해주세요!');
       value = cleanNaNValue(value);
     }
     setCardInfo({ ...cardInfo, [id]: formatInputValue(value, id) });
@@ -73,7 +78,9 @@ const usePayment = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    movePage(PATH.SAVE);
+    if (isInvalidInputValue(cardInfo))
+      alert('유효하지 않은 입력값이 있습니다\n입력값을 확인해주세요!');
+    else movePage(PATH.SAVE);
   };
 
   const handleSave = () => {

@@ -1,16 +1,21 @@
 const DIGIT_TYPE_INPUTS = ['cvc', 'password1', 'password2'];
 
-const FORMAT_TYPE_INPUTS = ['number', 'expiry'];
+const FORMATED_DIGIT_TYPE_INPUTS = ['number', 'expiry'];
 
 export const cleanNaNValue = (value) => value.replace(/[^0-9]/g, '');
 
-export const checkValidInputValue = (value, id) => {
+export const isDigitInputValue = (value, id) => {
   if (DIGIT_TYPE_INPUTS.includes(id) && value.match(/[^0-9]/)) return false;
   return true;
 };
 
+export const isInvalidInputValue = ({ expiry }) => {
+  if (expiry.match(/^(0[1-9]|1[012])\/2[4-9]$/)) return false;
+  return true;
+};
+
 export const formatInputValue = (value, id) => {
-  if (!FORMAT_TYPE_INPUTS.includes(id)) return value;
+  if (!FORMATED_DIGIT_TYPE_INPUTS.includes(id)) return value;
   return getFormatedValue(id, value);
 };
 

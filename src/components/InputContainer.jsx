@@ -14,12 +14,13 @@ const InputContainer = ({
       {hasBoxClass && (
         <div className={`input-box ${inputBoxClass}`}>
           {inputList.map(
-            ({ id, type, maxLength, required, placeholder, ...props }, idx) => (
+            ({ id, type, maxLength, minLength, required, placeholder, ...props }, idx) => (
               <Input
                 id={id}
                 key={idx}
                 type={type}
                 maxLength={maxLength}
+                minLength={minLength}
                 required={required}
                 placeholder={placeholder}
                 onChange={onChange}
@@ -32,28 +33,24 @@ const InputContainer = ({
       )}
       {!hasBoxClass && (
         <>
-          {inputList.map(
-            ({ id, type, maxLength, required, placeholder, ...props }) => (
-              <Input
-                id={id}
-                key={id}
-                type={type}
-                maxLength={maxLength}
-                required={required}
-                placeholder={placeholder}
-                onChange={onChange}
-                value={cardInfo[id]}
-                {...props}
-              />
-            )
-          )}
+          {inputList.map(({ id, type, maxLength, minLength, required, placeholder, ...props }) => (
+            <Input
+              id={id}
+              key={id}
+              type={type}
+              maxLength={maxLength}
+              minLength={minLength}
+              required={required}
+              placeholder={placeholder}
+              onChange={onChange}
+              value={cardInfo[id]}
+              {...props}
+            />
+          ))}
         </>
       )}
     </div>
   );
 };
-
-//1. input값 유효성 평가
-//2. input 내역 정리하기..
 
 export default InputContainer;

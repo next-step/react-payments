@@ -15,6 +15,7 @@ const CardSave = ({ cardInfo, onSave, onChange }) => {
           type="text"
           placeholder="카드의 별칭을 입력해주세요."
           className="input-underline w-75"
+          maxLength={10}
           value={cardInfo.nickname}
           onChange={onChange}
         />

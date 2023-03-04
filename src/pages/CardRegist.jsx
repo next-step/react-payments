@@ -34,6 +34,7 @@ const CardRegist = ({ cardInfo, onChange, onSubmit, cardCompanyList, setCardInfo
               id: 'number',
               type: 'text',
               maxLength: 19,
+              minLength: 19,
               required: true
             }
           ]}
@@ -47,6 +48,7 @@ const CardRegist = ({ cardInfo, onChange, onSubmit, cardCompanyList, setCardInfo
               id: 'expiry',
               type: 'text',
               maxLength: 5,
+              minLength: 5,
               required: true,
               placeholder: 'MM/YY'
             }
@@ -76,6 +78,7 @@ const CardRegist = ({ cardInfo, onChange, onSubmit, cardCompanyList, setCardInfo
               id: 'cvc',
               type: 'password',
               maxLength: 3,
+              minLength: 3,
               required: true
             }
           ]}
