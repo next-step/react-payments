@@ -13,7 +13,6 @@ const CardAdd = () => {
   };
 
   const handleEditAlias = (card: CreditCard) => {
-    console.log(card);
     navigate('/card-added', { state: card });
   };
 
