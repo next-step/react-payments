@@ -11,6 +11,7 @@ const initList: CardStateType[] = [
     passwords: { password1: '1', password2: '2' },
     company: '하나카드',
     nickname: '생활비 카드',
+    createdDate: 9999999999999,
   },
 ];
 

@@ -16,6 +16,7 @@ export type CardStateType = {
   passwords: { password1: string; password2: string };
   company: string;
   nickname: string;
+  createdDate: number;
 };
 
 type Action =
@@ -58,6 +59,7 @@ const initState: CardStateType = {
   passwords: { password1: '', password2: '' },
   company: '',
   nickname: '',
+  createdDate: 0,
 };
 
 const CardStateContext = React.createContext<CardStateType | null>(null);

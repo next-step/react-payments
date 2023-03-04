@@ -12,15 +12,32 @@ import {
 
 const PaymentCardRegister = () => {
   const navigate = useNavigate();
-  const { digits, cvc, expire, name, passwords, company, nickname } =
-    useCardState();
+  const {
+    digits,
+    cvc,
+    expire,
+    name,
+    passwords,
+    company,
+    nickname,
+    createdDate,
+  } = useCardState();
   const dispatchCardList = useCardListDispatch();
   const stateCardList = useCardListState();
 
   const onClickRegisterCard = () => {
     dispatchCardList([
       ...stateCardList,
-      { digits, cvc, expire, name, passwords, company, nickname },
+      {
+        digits,
+        cvc,
+        expire,
+        name,
+        passwords,
+        company,
+        nickname,
+        createdDate: Date.now(),
+      },
     ]);
     navigate('/complete', { state: { isComplete: true } });
   };
@@ -36,6 +53,7 @@ const PaymentCardRegister = () => {
         passwords={passwords}
         company={company}
         nickname={nickname}
+        createdDate={createdDate}
       />
       <CardRegisterForm />
       <Button text={'다음'} onClick={onClickRegisterCard} />
