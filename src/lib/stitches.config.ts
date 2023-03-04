@@ -58,5 +58,11 @@ export const { styled, css, theme, config, keyframes } = createStitches({
     mr: (value: Stitches.PropertyValue<'marginRight'>) => ({
       marginRight: value,
     }),
+    bc: (value: Stitches.PropertyValue<'backgroundColor'>) => ({
+      backgroundColor: value,
+    }),
+    br: (value: Stitches.PropertyValue<'borderRadius'>) => ({
+      borderRadius: value,
+    }),
   },
 });

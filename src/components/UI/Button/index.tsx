@@ -1,13 +1,5 @@
 import { styled } from '@/lib/stitches.config';
 
-interface ButtonProps {
-  primary?: boolean;
-  children: React.ReactNode;
-  size?: 'small' | 'medium' | 'large';
-  disabled?: boolean;
-  onClick?: () => void;
-}
-
 const Button = styled('button', {
   border: 0,
   width: '$10',

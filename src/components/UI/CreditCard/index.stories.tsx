@@ -22,9 +22,6 @@ const Template: ComponentStory<typeof CreditCard> = (args) => (
   <CreditCard {...args} />
 );
 export const Default = Template.bind({});
-Default.args = {
-  //   theme: 'black',
-};
 
 const MOCK_CARD_INFO = {
   CARD_NUMBERS: {
