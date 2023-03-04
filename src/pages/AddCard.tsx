@@ -1,13 +1,13 @@
-import { ChangeEvent, RefObject, useRef, useState } from 'react';
+import { ChangeEvent, RefObject, useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Button from '../components/Button';
+import { Button, Card } from '../components';
+import { CreditCard, PaymentsContext } from '../context/PaymentsContext';
 import useRefObjects from '../hooks/useRefObjects';
 import { extractNumbers } from '../utils';
 
-const cardNumberInputTypes = ['text', 'text', 'password', 'password'];
-
 const AddCard = () => {
+  const { addCard } = useContext(PaymentsContext);
   const navigate = useNavigate();
   const cardRefs = useRefObjects<HTMLInputElement>(4);
   const expirationDateRef = useRef<HTMLInputElement>(null);
@@ -78,6 +78,21 @@ const AddCard = () => {
     );
   };
 
+  const card = {
+    num1: cardRefs[0].current?.value,
+    num2: cardRefs[1].current?.value,
+    num3: cardRefs[2].current?.value,
+    num4: cardRefs[3].current?.value,
+    holder: name,
+    expiry: expirationDateRef.current?.value,
+  };
+
+  const addCardToDatabase = () => {
+    const newCard: CreditCard = { ...card, id: new Date().getTime() };
+    addCard(newCard);
+    navigate('/card-added', { state: newCard });
+  };
+
   return (
     <section className="app">
       <h2 className="page-title">
@@ -86,20 +101,7 @@ const AddCard = () => {
         </Button>
         카드 추가
       </h2>
-      <div className="card-box">
-        <div className="empty-card">
-          <div className="card-top"></div>
-          <div className="card-middle">
-            <div className="small-card__chip"></div>
-          </div>
-          <div className="card-bottom">
-            <div className="card-bottom__info">
-              <span className="card-text">NAME</span>
-              <span className="card-text">MM / YY</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Card {...card} />
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
@@ -130,12 +132,14 @@ const AddCard = () => {
       </div>
       <div className="input-container">
         <span className="input-title">카드 소유자 이름(선택)</span>
-        <span className="input-title">{name.length} / 30</span>
+        <span className="input-title">
+          {name.length} / {NAME_MAX_LENGTH}
+        </span>
         <input
           type="text"
           className="input-basic"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-          maxLength={30}
+          maxLength={NAME_MAX_LENGTH}
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
@@ -180,7 +184,7 @@ const AddCard = () => {
         />
       </div>
       <div className="button-box">
-        <Button onClick={() => navigate('/card-added')}>다음</Button>
+        <Button onClick={addCardToDatabase}>다음</Button>
       </div>
     </section>
   );
@@ -209,3 +213,6 @@ const PrevIcon = () => {
 const JANUARY = '01';
 const DECEMBER = '12';
 const MONTH_VALIDITY_MESSAGE = '유효하지 않아요';
+const NAME_MAX_LENGTH = 30;
+
+const cardNumberInputTypes = ['text', 'text', 'password', 'password'];

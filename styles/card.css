@@ -134,3 +134,13 @@
   vertical-align: middle;
   font-weight: 400;
 }
+
+.card-alias {
+  font-weight: bold;
+}
+
+.holding-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}

@@ -1,33 +1,44 @@
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import { Button, Card } from '../components';
+import { CreditCard, PaymentsContext } from '../context/PaymentsContext';
+
 const CardAdd = () => {
+  const navigate = useNavigate();
+  const { cardList, removeCard } = useContext(PaymentsContext);
+
+  const goToCardAddPage = () => {
+    navigate('/');
+  };
+
+  const handleEditAlias = (card: CreditCard) => {
+    navigate('/card-added', { state: card });
+  };
+
   return (
-    <div className="app flex-column-center">
+    <section className="app flex-column-center">
       <div className="flex-center">
         <h2 className="page-title mb-10">보유 카드</h2>
       </div>
-      <div className="card-box">
-        <div className="small-card">
-          <div className="card-top">
-            <span className="card-text">클린카드</span>
-          </div>
-          <div className="card-middle">
-            <div className="small-card__chip"></div>
-          </div>
-          <div className="card-bottom">
-            <div className="card-bottom__number">
-              <span className="card-text">1111 - 2222 - oooo - oooo</span>
-            </div>
-            <div className="card-bottom__info">
-              <span className="card-text">YUJO</span>
-              <span className="card-text">12 / 23</span>
-            </div>
-          </div>
-        </div>
-      </div>
       <span className="card-nickname">법인카드</span>
-      <div className="card-box">
+      <Button onClick={goToCardAddPage}>
         <div className="empty-card">+</div>
-      </div>
-    </div>
+      </Button>
+      {cardList
+        .sort((a, b) => b.id - a.id)
+        .map((card) => (
+          <div key={card.id}>
+            <Button onClick={() => handleEditAlias(card)}>
+              <Card {...card} />
+            </Button>
+            <div className="holding-card">
+              <span className="card-alias">{card.alias}</span>
+              <Button onClick={() => removeCard(card.id)}>삭제</Button>
+            </div>
+          </div>
+        ))}
+    </section>
   );
 };
 

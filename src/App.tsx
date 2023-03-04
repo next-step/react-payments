@@ -1,8 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import AddCard from './pages/AddCard.js';
-import CardAdded from './pages/CardAdded.js';
-import CardList from './pages/CardList.js';
+import { AddCard, CardAdded, CardList } from './pages';
 
 const App = () => {
   return (

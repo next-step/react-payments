@@ -1,40 +1,47 @@
+import { useContext, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { Button, Card } from '../components';
+import { CreditCard, PaymentsContext } from '../context/PaymentsContext';
+
 const CardAdded = () => {
+  const navigate = useNavigate();
+  const aliasRef = useRef<HTMLInputElement>(null);
+
+  const location = useLocation();
+  const newCard: CreditCard = location.state;
+
+  const { updateAlias } = useContext(PaymentsContext);
+
+  const addedAlias = () => {
+    if (aliasRef.current) {
+      updateAlias(newCard.id, aliasRef.current.value);
+    }
+    navigate('/card-list');
+  };
+
   return (
-    <div className="app flex-column-center">
+    <section className="app flex-column-center">
       <div className="flex-center">
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
-      <div className="card-box">
-        <div className="big-card">
-          <div className="card-top">
-            <span className="card-text__big">클린카드</span>
-          </div>
-          <div className="card-middle">
-            <div className="big-card__chip"></div>
-          </div>
-          <div className="card-bottom">
-            <div className="card-bottom__number">
-              <span className="card-text__big">1111 - 2222 - oooo - oooo</span>
-            </div>
-            <div className="card-bottom__info">
-              <span className="card-text__big">YUJO</span>
-              <span className="card-text__big">12 / 23</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Card {...newCard} />
       <div className="input-container flex-center w-100">
         <input
+          ref={aliasRef}
+          maxLength={ALIAS_MAX_LENGTH}
           className="input-underline w-75"
           type="text"
           placeholder="카드의 별칭을 입력해주세요."
         />
       </div>
       <div className="button-box mt-50">
-        <span className="button-text">다음</span>
+        <Button onClick={addedAlias}>다음</Button>
       </div>
-    </div>
+    </section>
   );
 };
 
 export default CardAdded;
+
+const ALIAS_MAX_LENGTH = 10;
