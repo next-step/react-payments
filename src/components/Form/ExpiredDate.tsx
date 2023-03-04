@@ -78,14 +78,14 @@ function ExpiredDate({ onExpiredDateChange }: ExpiredDateProps) {
           maxLength={DATE_MAX_LENGTH}
           onChange={(e) => onChange(e, ExpiredDateType.Month)}
           name={ExpiredDateType.Month}
-          forwardRef={(el: HTMLInputElement) => (itemsRef.current[0] = el)}
+          ref={(el: HTMLInputElement) => (itemsRef.current[0] = el)}
         />
         <Input
           placeholder="YY"
           maxLength={DATE_MAX_LENGTH}
           onChange={(e) => onChange(e, ExpiredDateType.Year)}
           name={ExpiredDateType.Year}
-          forwardRef={(el: HTMLInputElement) => (itemsRef.current[1] = el)}
+          ref={(el: HTMLInputElement) => (itemsRef.current[1] = el)}
         />
       </InputBox>
     </InputContainer>

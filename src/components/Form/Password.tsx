@@ -46,7 +46,7 @@ function Password({ onPasswordChange }: PasswordProps) {
         maxLength={1}
         onChange={(e) => onChange(e, 1)}
         name="password1"
-        forwardRef={(el: HTMLInputElement) => (itemsRef.current[1] = el)}
+        ref={(el: HTMLInputElement) => (itemsRef.current[1] = el)}
       ></Input>
       <Input
         size={Size.Small}
@@ -54,7 +54,7 @@ function Password({ onPasswordChange }: PasswordProps) {
         maxLength={1}
         onChange={(e) => onChange(e, 2)}
         name="password2"
-        forwardRef={(el: HTMLInputElement) => (itemsRef.current[2] = el)}
+        ref={(el: HTMLInputElement) => (itemsRef.current[2] = el)}
       ></Input>
       <Input size={Size.Small} type="password" readonly={true}></Input>
       <Input size={Size.Small} type="password" readonly={true}></Input>

@@ -56,9 +56,7 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
             name={`card-${index}`}
             key={`card-${index}`}
             type={index < PASSWORD_TYPE_START_INDEX ? "text" : "password"}
-            forwardRef={(el: HTMLInputElement) =>
-              (itemsRef.current[index] = el)
-            }
+            ref={(el: HTMLInputElement) => (itemsRef.current[index] = el)}
           ></Input>
         ))}
       </InputBox>
