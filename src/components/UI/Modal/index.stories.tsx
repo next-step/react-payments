@@ -18,37 +18,37 @@ WithCardOption.args = {
       <Flex justify="center">
         <Flex direction="column" justify="center" align="center">
           <Avatar />
-          <Text css={{ fontSize: '$3' }}>클린 카드</Text>
+          <Text size="3">클린 카드</Text>
         </Flex>
         <Flex direction="column" justify="center" align="center">
           <Avatar />
-          <Text css={{ fontSize: '$3' }}>클린 카드</Text>
+          <Text size="3">클린 카드</Text>
         </Flex>
         <Flex direction="column" justify="center" align="center">
           <Avatar />
-          <Text css={{ fontSize: '$3' }}>클린 카드</Text>
+          <Text size="3">클린 카드</Text>
         </Flex>
         <Flex direction="column" justify="center" align="center">
           <Avatar />
-          <Text css={{ fontSize: '$3' }}>클린 카드</Text>
+          <Text size="3">클린 카드</Text>
         </Flex>
       </Flex>
       <Flex justify={'center'}>
         <Flex direction="column" justify="center" align="center">
           <Avatar />
-          <Text css={{ fontSize: '$3' }}>클린 카드</Text>
+          <Text size="3">클린 카드</Text>
         </Flex>
         <Flex direction="column" justify="center" align="center">
           <Avatar />
-          <Text css={{ fontSize: '$3' }}>클린 카드</Text>
+          <Text size="3">클린 카드</Text>
         </Flex>
         <Flex direction="column" justify="center" align="center">
           <Avatar />
-          <Text css={{ fontSize: '$3' }}>클린 카드</Text>
+          <Text size="3">클린 카드</Text>
         </Flex>
         <Flex direction="column" justify="center" align="center">
           <Avatar />
-          <Text css={{ fontSize: '$3' }}>클린 카드</Text>
+          <Text size="3">클린 카드</Text>
         </Flex>
       </Flex>
     </Box>

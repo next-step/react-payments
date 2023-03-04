@@ -1,9 +1,10 @@
+import { Box } from '@/components/UI';
 import Card, { type CardVariants } from '@/components/UI/Card';
 import { styled } from '@/lib/stitches.config';
 export { CardVariants };
 
 export { Card as CardRoot };
-export const NumberBox = styled('div', {
+export const NumberBox = styled(Box, {
   position: 'absolute',
   display: 'flex',
   alignItems: 'center',
@@ -28,7 +29,7 @@ export const Name = styled('h3', {
   color: 'inherit',
 });
 
-export const BottomBox = styled('div', {
+export const BottomBox = styled(Box, {
   position: 'absolute',
   display: 'flex',
   justifyContent: 'space-between',

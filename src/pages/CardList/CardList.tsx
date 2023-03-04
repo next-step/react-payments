@@ -1,8 +1,15 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { ColumnLayout, CreditCard, Text } from '@/components/UI';
+import {
+  Box,
+  ButtonRemove,
+  CreditCard,
+  Flex,
+  Layout,
+  ScrollArea,
+  Text,
+} from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
-import { styled } from '@/lib/stitches.config';
 import { getItem, setItem } from '@/storage/storage';
 import { StorageKey } from '@/storage/storageKey';
 import { CardData } from '@/types';
@@ -39,55 +46,29 @@ const CardList = () => {
   }
 
   return (
-    <>
-      <ScrollArea>
-        <ColumnLayout css={{ gap: '$3' }}>
-          {recentSortedCard.map((card, index) => (
-            <CardBox key={index}>
-              <RemoveButton onClick={(e) => handleRemoveCard(e, card.UID)} />
-              <div onClick={() => go(`/detail/${card?.UID}`)}>
-                <CreditCard cardInfo={card} size="small" />
-              </div>
-              <Text
-                css={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  padding: '$3',
-                  fontSize: '$5',
-                }}
-              >
-                {card.NICK_NAME ?? '이름없음'}
-              </Text>
-            </CardBox>
-          ))}
-        </ColumnLayout>
-      </ScrollArea>
-    </>
+    <ScrollArea>
+      <Layout variant="column" gap="5">
+        {recentSortedCard.map((card, index) => (
+          <Box
+            key={index}
+            css={{
+              position: 'relative',
+            }}
+            onClick={() => go(`/detail/${card?.UID}`)}
+          >
+            <ButtonRemove
+              onRight
+              onClick={(e) => handleRemoveCard(e, card.UID)}
+            />
+            <CreditCard cardInfo={card} size="small" />
+            <Flex justify="center">
+              <Text size="5">{card.NICK_NAME ?? '이름없음'}</Text>
+            </Flex>
+          </Box>
+        ))}
+      </Layout>
+    </ScrollArea>
   );
 };
-
-const ScrollArea = styled('div', {
-  overflow: 'scroll',
-  margin: '0 $12',
-  width: '100%',
-  height: '$12',
-});
-
-const CardBox = styled('div', {
-  position: 'relative',
-});
-
-const RemoveButton = styled('span', {
-  position: 'absolute',
-  zIndex: '10',
-  right: 0,
-  padding: '3px 10px',
-  fontSize: '$6',
-  cursor: 'pointer',
-  color: '$grey2',
-  '&::before': {
-    content: 'ⓧ',
-  },
-});
 
 export default CardList;

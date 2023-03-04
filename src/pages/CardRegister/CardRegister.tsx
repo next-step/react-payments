@@ -58,7 +58,11 @@ export const CardRegister = () => {
 
   return (
     <>
-      <CreditCard cardInfo={cardDisplayInfo} onClick={handleOpen} />
+      <CreditCard
+        size="large"
+        cardInfo={cardDisplayInfo}
+        onClick={handleOpen}
+      />
       <CardForm />
       <Button
         css={{ position: 'absolute', bottom: '$5', width: '$11' }}

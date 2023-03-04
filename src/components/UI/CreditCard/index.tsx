@@ -33,13 +33,9 @@ export const DefaultCardInfo: Props['cardInfo'] = {
   },
 };
 
-const CreditCard = ({
-  size = 'large',
-  cardInfo = DefaultCardInfo,
-  ...props
-}: Props) => {
+const CreditCard = ({ cardInfo = DefaultCardInfo, ...props }: Props) => {
   return (
-    <Card.CardRoot size={size} {...props} variant={cardInfo?.CARD_COMPANY?.val}>
+    <Card.CardRoot variant={cardInfo?.CARD_COMPANY?.val} {...props}>
       <Card.NumberBox>
         {cardInfo?.CARD_NUMBERS &&
           Object.values(cardInfo?.CARD_NUMBERS ?? [])?.map((v, i) => (
