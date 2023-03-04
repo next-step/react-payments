@@ -2,10 +2,8 @@ import { TextInput } from '@/components/common';
 import { Button, InputContainer } from '@/components/UI';
 import useFormData from '@/hooks/formHook';
 import { useRouter } from '@/hooks/useRouter';
-import { getItem, setItem } from '@/storage/storage';
-import { StorageKey } from '@/storage/storageKey';
+import { updateNickNameByCardUID } from '@/storage/service';
 import { CardData, CardKey } from '@/types';
-
 type Props = {
   card: CardData;
 };
@@ -71,13 +69,7 @@ const handleSave = (
       return;
     }
 
-    const cards = getItem(StorageKey.CARD_LIST) as CardData[];
-
-    setItem(StorageKey.CARD_LIST, [
-      ...cards.filter(({ UID }) => UID != card.UID),
-      { ...card, [CardKey.NICK_NAME]: nickName },
-    ]);
-
+    updateNickNameByCardUID(card, nickName);
     callback?.();
   };
 };

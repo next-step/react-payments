@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import {
   Box,
@@ -10,8 +10,7 @@ import {
   Text,
 } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
-import { getItem, setItem } from '@/storage/storage';
-import { StorageKey } from '@/storage/storageKey';
+import { getCards, removeCard } from '@/storage/service';
 import { CardData } from '@/types';
 
 const CardList = () => {
@@ -22,13 +21,9 @@ const CardList = () => {
     cards.sort((a, b) => Number(b.CREATE_DATE) - Number(a.CREATE_DATE)) ?? [];
   const haveCards = recentSortedCard?.length > 0;
 
-  const getStorageCard = useCallback(() => {
-    const cardList = getItem(StorageKey.CARD_LIST) as CardData[];
-    setCards(cardList ?? []);
-  }, []);
-
   useEffect(() => {
-    getStorageCard();
+    const cards = getCards();
+    setCards(cards);
   }, []);
 
   const handleRemoveCard = (
@@ -36,9 +31,8 @@ const CardList = () => {
     uid: string
   ) => {
     e.preventDefault();
-    const filteredCards = cards.filter((card) => card.UID != uid);
-    setItem(StorageKey.CARD_LIST, filteredCards);
-    getStorageCard();
+    const filteredCards = removeCard(uid);
+    setCards(filteredCards);
   };
 
   if (!haveCards) {

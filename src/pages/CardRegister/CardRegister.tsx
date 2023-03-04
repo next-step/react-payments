@@ -5,8 +5,7 @@ import { CardCompanyModal } from '@/components/domain';
 import { CardForm } from '@/components/domain';
 import { Button, CreditCard } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
-import { getItem, setItem } from '@/storage/storage';
-import { StorageKey } from '@/storage/storageKey';
+import { createCard } from '@/storage/service';
 import { type CardFormType, CardKey } from '@/types';
 
 export const CardRegister = () => {
@@ -27,6 +26,7 @@ export const CardRegister = () => {
   const [open, setOpen] = useState(true);
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
+
   const handleSelectCard = (company: string) => {
     handleFormInput(
       getFormData(),
@@ -37,22 +37,8 @@ export const CardRegister = () => {
   };
 
   const handleSubmit = () => {
-    const newCard = Object.entries(form).reduce(
-      (cardState, [cardKey, cardForm]) => {
-        const { isValid, ...cardData } = { ...cardForm };
-        return { ...cardState, [cardKey]: cardData };
-      },
-      {}
-    );
-
-    setItem(StorageKey.CARD_LIST, [
-      ...(getItem(StorageKey.CARD_LIST) ?? []),
-      {
-        ...newCard,
-        [CardKey.UID]: Date.now(),
-        [CardKey.CREATE_DATE]: Date.now(),
-      },
-    ]);
+    const newCard = generateCardObj(form);
+    createCard(newCard);
     go('/register-confirm');
   };
 
@@ -76,4 +62,20 @@ export const CardRegister = () => {
       )}
     </>
   );
+};
+
+const generateCardObj = (form: CardFormType) => {
+  const newCard = Object.entries(form).reduce(
+    (cardState, [cardKey, cardForm]) => {
+      const { isValid, ...cardData } = { ...cardForm };
+      return { ...cardState, [cardKey]: cardData };
+    },
+    {}
+  );
+
+  return {
+    ...newCard,
+    [CardKey.UID]: Date.now(),
+    [CardKey.CREATE_DATE]: Date.now(),
+  };
 };

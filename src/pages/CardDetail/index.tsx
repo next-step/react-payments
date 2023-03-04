@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { CardNickNameForm, EmptyCard } from '@/components/domain';
 import { CreditCard, Layout, TopNavigation } from '@/components/UI';
-import { getItem } from '@/storage/storage';
-import { StorageKey } from '@/storage/storageKey';
+import { getCards } from '@/storage/service';
 import { CardData } from '@/types';
 
 export const CardDetailPage = () => {
@@ -13,7 +12,7 @@ export const CardDetailPage = () => {
   const [card, setCard] = useState<CardData>();
 
   useEffect(() => {
-    const cards = getItem(StorageKey.CARD_LIST) as CardData[];
+    const cards = getCards();
     const selectedCard = cards.find((card) => card.UID == params.cardId);
     setCard(selectedCard);
   }, []);
