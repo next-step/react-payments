@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Card } from '../components';
 import { CreditCard, PaymentsContext } from '../context/PaymentsContext';
 import useRefObjects from '../hooks/useRefObjects';
-import { extractNumbers } from '../utils';
+import { areAllRefsMaxLength, extractNumbers } from '../utils';
 
 const AddCard = () => {
   const { addCard } = useContext(PaymentsContext);
@@ -29,6 +29,8 @@ const AddCard = () => {
     if (value.length === maxLength) {
       if (index < refs.length - 1) {
         refs[index + 1].current?.focus();
+      } else if (areAllRefsMaxLength(cardRefs)) {
+        expirationDateRef.current?.focus();
       }
     }
   };
