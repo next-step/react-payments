@@ -38,17 +38,19 @@ export const PaymentsProvider = ({ children }: PaymentsProviderProps) => {
   const [cardList, setCardList] = useState<CardData[]>([]);
 
   const addCard: AddCard = (cardData) => {
-    setCardList([...cardList, cardData]);
+    setCardList((prevCardList) => [...prevCardList, cardData]);
   };
 
   const removeCard: RemoveCard = (cardId) => {
-    setCardList(cardList.filter((card) => card.id !== cardId));
+    setCardList((prevCardList) =>
+      prevCardList.filter((card) => card.id !== cardId)
+    );
   };
 
   const addAlias: AddAlias = (alias) => {
-    setCardList((prevList) =>
-      prevList.map((card, index) => {
-        if (prevList.length - 1 === index) {
+    setCardList((prevCardList) =>
+      prevCardList.map((card, index) => {
+        if (prevCardList.length - 1 === index) {
           return {
             ...card,
             alias,
