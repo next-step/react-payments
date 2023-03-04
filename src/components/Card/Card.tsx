@@ -7,14 +7,27 @@ export interface ICardInfo {
   customerName: string;
   expirationDate: string;
   alias?: string;
+  onClick?: () => void;
 }
 
 const Card = (props: ICardInfo) => {
-  const { title, bgColor, creditNumber, customerName, expirationDate, alias } =
-    props;
+  const {
+    title,
+    bgColor,
+    creditNumber,
+    customerName,
+    expirationDate,
+    alias,
+    onClick,
+  } = props;
 
+  const onCardClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
   return (
-    <div className="card-container">
+    <div className="card-container" onClick={onCardClick}>
       <div className="card" style={{ backgroundColor: bgColor }}>
         <div className="card-title">{title}</div>
         <div className="card-ic-chip" />
@@ -31,6 +44,7 @@ const Card = (props: ICardInfo) => {
 
 Card.defaultProps = {
   alias: '',
+  onClick: () => {},
 };
 
 export default Card;
