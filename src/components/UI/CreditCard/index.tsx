@@ -39,7 +39,7 @@ const CreditCard = ({
   ...props
 }: Props) => {
   return (
-    <Card.CardRoot size={size} {...props} variant={cardInfo?.CARD_COMPANY}>
+    <Card.CardRoot size={size} {...props} variant={cardInfo?.CARD_COMPANY?.val}>
       <Card.NumberBox>
         {cardInfo?.CARD_NUMBERS &&
           Object.values(cardInfo?.CARD_NUMBERS ?? [])?.map((v, i) => (

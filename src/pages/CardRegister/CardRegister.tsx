@@ -28,7 +28,10 @@ export const CardRegister = () => {
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
   const handleSelectCard = (company: string) => {
-    handleFormInput(getFormData(), CardKey.CARD_COMPANY)(company);
+    handleFormInput(
+      getFormData(),
+      CardKey.CARD_COMPANY
+    )({ val: company, isValid: true });
     handleClose();
     dispatch();
   };
