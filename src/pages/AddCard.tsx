@@ -11,6 +11,7 @@ const AddCard = () => {
   const navigate = useNavigate();
   const cardRefs = useRefObjects<HTMLInputElement>(4);
   const expirationDateRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
   const securityCodeRef = useRef<HTMLInputElement>(null);
   const cardPasswordRefs = useRefObjects<HTMLInputElement>(2);
   const [name, setName] = useState('');
@@ -29,7 +30,7 @@ const AddCard = () => {
     if (value.length === maxLength) {
       if (index < refs.length - 1) {
         refs[index + 1].current?.focus();
-      } else if (areAllRefsMaxLength(cardRefs)) {
+      } else if (areAllRefsMaxLength(cardRefs) && refs === cardRefs) {
         expirationDateRef.current?.focus();
       }
     }
@@ -57,6 +58,10 @@ const AddCard = () => {
     const date =
       month + (currentValue.length > 2 ? '/' + currentValue.slice(2, 4) : '');
     expirationDateRef.current.value = date;
+
+    if (currentValue.length === 4) {
+      nameRef.current?.focus();
+    }
   };
 
   const handleChangeExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
@@ -78,6 +83,10 @@ const AddCard = () => {
     securityCodeRef.current.value = extractNumbers(
       securityCodeRef.current.value
     );
+
+    if (securityCodeRef.current.value.length === 3) {
+      cardPasswordRefs[0].current?.focus();
+    }
   };
 
   const card = {
@@ -143,6 +152,7 @@ const AddCard = () => {
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           maxLength={NAME_MAX_LENGTH}
           value={name}
+          ref={nameRef}
           onChange={(e) => setName(e.target.value)}
         />
       </div>
