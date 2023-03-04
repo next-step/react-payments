@@ -3,6 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { PageTitle } from '@/components/layouts'
 import { useCardInfo, useCardList } from '@/pages/hooks'
 
+/**
+ * Todo: 카드 종류 추가하고 나서 카드 컴포넌트 분리하기
+ */
 function CardList() {
   const navigate = useNavigate()
   const { cardList } = useCardList()
@@ -33,7 +36,6 @@ function CardList() {
             >
               <div className="card-box">
                 <div className="small-card">
-                  <div className="delete-button-box"></div>
                   <div className="card-top">
                     <span className="card-text">{name}</span>
                   </div>

@@ -1,6 +1,4 @@
-import { CardAdd, CardCompleted, CardList } from '@/pages'
-
-import CardUpdate from './pages/card-update/CardUpdate'
+import { CardAdd, CardCompleted, CardList, CardUpdate } from '@/pages'
 
 const routes = [
   { path: '/', element: <CardList /> },

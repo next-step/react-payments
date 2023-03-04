@@ -1,36 +1,17 @@
-import { useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
-
 import { BackButton, NavigationTextButton } from '@/components/button'
 import { PageTitle } from '@/components/layouts'
-import { useCardInfo, useCardList } from '@/pages/hooks'
+import { useCardUpdate } from '@/pages/card-update/hooks'
 
 function CardUpdate() {
-  const navigate = useNavigate()
   const {
-    cardInfo,
-    cardInfo: {
-      cardNumbers: { first, second, third, fourth },
-      owner,
-      name,
-      nickname,
-      expiredMonth,
-      expiredYear,
-    },
-    handleNickname,
-    resetCardInfo,
-  } = useCardInfo()
-
-  const { updateCard, deleteCard } = useCardList()
-
-  const nicknameRef = useRef<HTMLInputElement>(null)
-
-  const preNavigation = () => {
-    const nicknameValue = nicknameRef.current?.value || name
-    handleNickname(nicknameValue)
-    updateCard({ ...cardInfo, nickname: nicknameValue })
-    resetCardInfo()
-  }
+    nicknameRef,
+    cardNumbers,
+    cardOwner,
+    cardExxpiredDate,
+    cardNickname,
+    onClickDeleteButton,
+    handlePreNavigation,
+  } = useCardUpdate()
 
   return (
     <div className="app flex-column-center">
@@ -41,14 +22,7 @@ function CardUpdate() {
         <div className="big-card">
           <div className="card-top">
             <span className="card-text__big">클린카드</span>
-            <button
-              type="button"
-              className="card-text"
-              onClick={() => {
-                deleteCard(cardInfo)
-                navigate('/')
-              }}
-            >
+            <button type="button" className="card-text" onClick={onClickDeleteButton}>
               카드삭제
             </button>
           </div>
@@ -57,11 +31,11 @@ function CardUpdate() {
           </div>
           <div className="card-bottom">
             <div className="card-bottom__number">
-              <span className="card-text__big">{`${first} - ${second} - ${third} - ${fourth}`}</span>
+              <span className="card-text__big">{cardNumbers}</span>
             </div>
             <div className="card-bottom__info">
-              <span className="card-text__big">{owner}</span>
-              <span className="card-text__big">{`${expiredMonth} / ${expiredYear}`}</span>
+              <span className="card-text__big">{cardOwner}</span>
+              <span className="card-text__big">{cardExxpiredDate}</span>
             </div>
           </div>
         </div>
@@ -69,14 +43,14 @@ function CardUpdate() {
       <div className="input-container flex-center w-100">
         <input
           ref={nicknameRef}
-          defaultValue={nickname}
+          defaultValue={cardNickname}
           className="input-underline w-75"
           type="text"
           placeholder="카드 별칭 (선택)"
           maxLength={10}
         />
       </div>
-      <NavigationTextButton additionalClassNames="mt-50" preNavigation={preNavigation} to="/" text="다음" />
+      <NavigationTextButton additionalClassNames="mt-50" preNavigation={handlePreNavigation} to="/" text="다음" />
     </div>
   )
 }
