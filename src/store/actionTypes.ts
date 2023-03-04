@@ -19,7 +19,7 @@ type EditCard = {
 export const DELETE_CARD = "DELETE_CARD";
 type DeleteCard = {
   type: typeof DELETE_CARD;
-  id?: string;
+  id?: number;
 };
 
 export type SelectedCardInfo = Exclude<CardInfo, null | undefined> | null;
