@@ -84,7 +84,8 @@ const usePayment = () => {
   };
 
   const handleSave = () => {
-    setCardList([...cardList, cardInfo]);
+    if (!cardList.includes(cardInfo)) setCardList([cardInfo, ...cardList]);
+    else alert('이전에 등록된 카드입니다.');
     movePage(PATH.HOME);
   };
 
