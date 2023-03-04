@@ -88,7 +88,7 @@ const AddCard = () => {
     expiry: expirationDateRef.current?.value,
   };
 
-  const cardAdded = () => {
+  const addCardToDatabase = () => {
     addCard({ ...card, id: new Date() });
     navigate('/card-added');
   };
@@ -184,7 +184,7 @@ const AddCard = () => {
         />
       </div>
       <div className="button-box">
-        <Button onClick={cardAdded}>다음</Button>
+        <Button onClick={addCardToDatabase}>다음</Button>
       </div>
     </section>
   );
