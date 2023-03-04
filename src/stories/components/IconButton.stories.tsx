@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import IconButton from "components/IconButton/IconButton";
-import IconButtonPropsType from "components/IconButton/IconButton";
+import IconButton from "components/common/IconButton/IconButton";
+import IconButtonPropsType from "components/common/IconButton/IconButton";
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "IconButton",

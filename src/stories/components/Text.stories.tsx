@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Text from "components/Text/Text";
-import TextProps from "components/Text/Text";
+import Text from "components/common/Text/Text";
+import TextProps from "components/common/Text/Text";
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "Text",

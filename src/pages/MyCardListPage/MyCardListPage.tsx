@@ -1,13 +1,11 @@
-import Text from "components/Text/Text";
+import Text from "components/common/Text/Text";
 import styled from "styled-components";
-import ADDCard from "components/Card/Card";
-import Card from "components/Card/Card";
+import Card from "components/common/Card/Card";
 
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { CardContext } from "context/Card/CardContext";
 import { CardType } from "types";
-import ScrollBox from "components/ScrollBox/ScrollBox";
 
 const MyCardListPage = () => {
   const navigate = useNavigate();
@@ -21,7 +19,7 @@ const MyCardListPage = () => {
   return (
     <Layout>
       <Title fontSize="2x" weight="bold" label="보유카드" />
-      <ScrollContainer color="#636266">
+      <ScrollContainer>
         <StyledAddCard type="add" size="small" onClick={handleAddCard} />
         {MyCardList.map((card: CardType) => (
           <CardLayout key={card.id}>
@@ -50,9 +48,22 @@ const Layout = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const ScrollContainer = styled(ScrollBox)`
-  padding: 30px;
+const ScrollContainer = styled.div`
   height: 80vh;
+  padding: 30px;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 10px;
+    opacity: 0;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 5%;
+    background: #636266;
+    border-radius: 7px;
+  }
+  // 파이어폭스
+  scrollbar-width: thin;
+  scrollbar-color: #636266;
 `;
 const StyledAddCard = styled(Card)`
   margin-bottom: 30px;

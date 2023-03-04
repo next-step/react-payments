@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Card from "components/Card/Card";
-import CardProps from "components/Card/Card";
+import Card from "components/common/Card/Card";
+import CardProps from "components/common/Card/Card";
 import { withRouter } from "storybook-addon-react-router-v6";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

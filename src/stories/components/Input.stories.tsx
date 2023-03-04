@@ -1,8 +1,8 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import Input from "components/Input/Input";
-import InputProps from "components/Input/Input";
+import Input from "components/common/Input/Input";
+import InputProps from "components/common/Input/Input";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {

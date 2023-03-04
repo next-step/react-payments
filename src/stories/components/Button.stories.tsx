@@ -1,7 +1,7 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Button from "components/Button/Button";
-import ButtonProps from "components/Button/Button";
+import Button from "components/common/Button/Button";
+import ButtonProps from "components/common/Button/Button";
 import { withRouter } from "storybook-addon-react-router-v6";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export

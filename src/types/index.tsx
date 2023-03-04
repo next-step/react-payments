@@ -1,4 +1,4 @@
-export type ColorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange" | "" | "primary";
+export type ColorType = "red" | "blue" | "green" | "pink" | "purple" | "cyon" | "yellow" | "orange" | "";
 export type CompanyType =
   | "하나카드"
   | "국민카드"

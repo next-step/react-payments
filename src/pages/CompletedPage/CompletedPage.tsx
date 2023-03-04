@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import Card from "components/Card/Card";
-import Text from "components/Text/Text";
-import Input from "components/Input/Input";
-import Button from "components/Button/Button";
+import Card from "components/common/Card/Card";
+import Text from "components/common/Text/Text";
+import Input from "components/common/Input/Input";
+import Button from "components/common/Button/Button";
 import { useContext, useRef, useState } from "react";
 import { CardContext } from "context/Card/CardContext";
 import { useNavigate } from "react-router-dom";
