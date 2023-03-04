@@ -1,8 +1,8 @@
 import Card from "components/card";
 import { SubWrapper, Wrapper } from "components/common/ui";
-import { useForm } from "components/input/hooks/useForm";
+import { useCardForm } from "components/input/hooks/useCardForm";
 import { useRouter } from "hooks/useRouter";
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent } from "react";
 import { useParams } from "react-router-dom";
 import { ROUTE } from "router";
 import { usePaymentsDispatch, usePaymentsState } from "store/context";
@@ -17,7 +17,7 @@ const findItem = (cardList: CardInfo[], id: number) => {
 const Content = () => {
   const dispatch = usePaymentsDispatch();
 
-  const { cardNickName, handleCardNickName } = useForm();
+  const { cardNickName, handleCardNickName } = useCardForm();
   const { cardList } = usePaymentsState();
   const { id } = useParams();
   const card = findItem(cardList, Number(id))[0];
@@ -37,12 +37,6 @@ const Content = () => {
     });
     go(ROUTE.CARD_LIST);
   };
-
-  useEffect(() => {
-    if (!card) {
-      go(ROUTE.CARD_LIST);
-    }
-  }, [card, go]);
 
   return (
     <>
@@ -78,7 +72,7 @@ const Content = () => {
   );
 };
 
-const ComplateCard = () => {
+const CompleteCard = () => {
   return (
     <Wrapper>
       <SubWrapper flex={"yes"}>
@@ -88,4 +82,4 @@ const ComplateCard = () => {
   );
 };
 
-export default ComplateCard;
+export default CompleteCard;

@@ -2,7 +2,7 @@ import Card from "components/card";
 import { SubWrapper, Wrapper } from "components/common/ui";
 import Header from "components/header/header";
 import CardForm from "components/input/CardForm";
-import { useForm } from "components/input/hooks/useForm";
+import { useCardForm } from "components/input/hooks/useCardForm";
 import AddCardModal from "components/modal/AddCardModal";
 
 const Content = () => {
@@ -21,7 +21,7 @@ const Content = () => {
     handlePassword,
     handleCardSubmit,
     handleCardCompany,
-  } = useForm();
+  } = useCardForm();
   return (
     <>
       <Card

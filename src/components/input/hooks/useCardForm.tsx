@@ -1,4 +1,6 @@
+import { useRouter } from "hooks/useRouter";
 import { useCallback, useEffect, useState } from "react";
+import { ROUTE } from "router";
 import { usePaymentsDispatch } from "store/context";
 import {
   CardInfo,
@@ -8,7 +10,7 @@ import {
   ExpirationDate,
 } from "store/type";
 
-export const useForm = () => {
+export const useCardForm = () => {
   const [cardNumbers, setCardNumbers] = useState<CardNumber>(["", "", "", ""]);
   const [cardExpiration, setCardExpiration] = useState<ExpirationDate>({
     month: "",
@@ -26,6 +28,8 @@ export const useForm = () => {
   const [cardNickName, setCardNickName] = useState<string>("");
 
   const dispatch = usePaymentsDispatch();
+
+  const { go } = useRouter();
 
   const handleChangeCardNumber = useCallback((cardNumbers: CardNumber) => {
     setCardNumbers(cardNumbers);
@@ -59,6 +63,8 @@ export const useForm = () => {
 
   const handleCardSubmit = (payload: CardInfo) => {
     dispatch({ type: "ADD_CARD_INFO", newCard: payload });
+    
+    go(ROUTE.REGIST_CARD + `/${payload.id}`);
   };
 
   const handleCardNickName = useCallback((nickName: string) => {

@@ -1,9 +1,4 @@
-import {
-  ADD_CARD_INFO,
-  ActionType,
-  DELETE_CARD,
-  UPSERT_CARD_NICK_NAME,
-} from "./actionTypes";
+import { ActionType } from "./actionTypes";
 import { CardInfo } from "./type";
 
 export interface DefaultValueState {
@@ -21,7 +16,7 @@ function PaymentsReducer(
   action: ActionType
 ): DefaultValueState {
   switch (action.type) {
-    case ADD_CARD_INFO: {
+    case "ADD_CARD_INFO": {
       const { newCard } = action;
 
       return {
@@ -31,7 +26,7 @@ function PaymentsReducer(
       };
     }
 
-    case UPSERT_CARD_NICK_NAME: {
+    case "UPSERT_CARD_NICK_NAME": {
       const { cardNickName, id } = action;
 
       const cardList = state.cardList.map((card) => {
@@ -46,7 +41,7 @@ function PaymentsReducer(
         cardList,
       };
     }
-    case DELETE_CARD: {
+    case "DELETE_CARD": {
       const { id } = action;
 
       const cardList = state.cardList.filter((card) => card?.id !== id);

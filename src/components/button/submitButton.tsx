@@ -1,10 +1,13 @@
-const SubmitButton = () => {
+type ButtonProps = {
+  text: string;
+};
+const SubmitButton = ({ text }: ButtonProps) => {
   return (
     <div className="button-box">
       <input
         style={{ border: "none", background: "none" }}
         type="submit"
-        value={"다음"}
+        value={text}
       ></input>
     </div>
   );

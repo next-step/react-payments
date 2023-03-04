@@ -14,7 +14,7 @@ import {
 import React from "react";
 
 const isHypen = (number: string) => {
-  return number && number.length === 4 ? " - " : "";
+  return number.length === 4 ? " - " : "";
 };
 
 const maskingCardNumbers = (number: string) => number.replace(/./g, "*");

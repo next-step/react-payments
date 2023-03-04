@@ -4,8 +4,6 @@ import CardOwnerInput from "./cardOwner";
 import CardPasswordInput from "./cardPassword";
 import CardCVCInput from "./cardSecurityNumber";
 import SubmitButton from "components/button/submitButton";
-import { useRouter } from "hooks/useRouter";
-import { ROUTE } from "router";
 
 import {
   CardInfo,
@@ -46,8 +44,6 @@ const CardForm = ({
   handlePassword,
   handleCardSubmit,
 }: CardFormProps) => {
-  const { go } = useRouter();
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -61,7 +57,6 @@ const CardForm = ({
       password,
       cardCompany,
     });
-    go(ROUTE.REGIST_CARD + `/${id}`);
   };
   return (
     <div>
@@ -83,7 +78,7 @@ const CardForm = ({
           password={password}
           handlePassword={handlePassword}
         />
-        <SubmitButton />
+        <SubmitButton text={"다음"}/>
       </form>
     </div>
   );

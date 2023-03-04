@@ -1,6 +1,6 @@
 import CardListPage from "pages/ListPage/CardListPage";
 import AddCardPage from "pages/RegistPage/AddCardPage";
-import ComplateCard from "pages/complePage/ComplateCard";
+import CompleteCard from "pages/complePage/CompleteCard";
 import { createBrowserRouter } from "react-router-dom";
 
 export const ROUTE = {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   },
   {
     path: ROUTE.COMPLATE_CARD,
-    element: <ComplateCard />,
+    element: <CompleteCard />,
   },
 ])
 
