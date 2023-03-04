@@ -18,6 +18,17 @@ function useCardChange() {
     Object.values(cardInfo.expiredDate).some((date) => date) ||
     !!cardInfo.userName;
 
+  useEffect(() => {
+    if (card.bankId) {
+      setCardInfo((card: CardType) => {
+        return {
+          ...card,
+          bankId: card.bankId,
+        };
+      });
+    }
+  }, [card.bankId]);
+
   const color = useMemo(() => {
     if (cardInfo.bankId) {
       return getBankColor(cardInfo.bankId);
