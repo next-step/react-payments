@@ -2,19 +2,26 @@ import Card from "components/card";
 import { SubWrapper, Wrapper } from "components/common/ui";
 import Header from "components/header/header";
 import CardForm from "components/input/CardForm";
+import { useForm } from "components/input/hooks/useForm";
 import AddCardModal from "components/modal/AddCardModal";
-import { usePayments } from "store/context";
 
-const CardPreview = () => {
+const Content = () => {
   const {
     cardNumbers,
     cardExpiration,
     cardOwnerName,
-    isModalOpen,
+    cvc,
+    password,
     cardCompany,
+    isModalOpen,
+    handleChangeCardNumber,
+    handleChangeExpirationDate,
+    handleCardOwner,
+    handleCvc,
+    handlePassword,
+    handleCardSubmit,
     handleCardCompany,
-  } = usePayments();
-
+  } = useForm();
   return (
     <>
       <Card
@@ -25,15 +32,22 @@ const CardPreview = () => {
         size={"small"}
       />
       {isModalOpen && <AddCardModal handleCardCompany={handleCardCompany} />}
-    </>
-  );
-};
-
-const Content = () => {
-  return (
-    <>
-      <CardPreview />
-      <CardForm />
+      <CardForm
+        cardNumbers={cardNumbers}
+        cardExpiration={cardExpiration}
+        cardOwnerName={cardOwnerName}
+        cvc={cvc}
+        password={password}
+        cardCompany={cardCompany}
+        isModalOpen={isModalOpen}
+        handleChangeCardNumber={handleChangeCardNumber}
+        handleChangeExpirationDate={handleChangeExpirationDate}
+        handleCardOwner={handleCardOwner}
+        handleCvc={handleCvc}
+        handlePassword={handlePassword}
+        handleCardSubmit={handleCardSubmit}
+        handleCardCompany={handleCardCompany}
+      />
     </>
   );
 };

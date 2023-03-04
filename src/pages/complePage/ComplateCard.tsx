@@ -1,22 +1,26 @@
 import Card from "components/card";
-
 import { SubWrapper, Wrapper } from "components/common/ui";
+import { useForm } from "components/input/hooks/useForm";
 import { useRouter } from "hooks/useRouter";
 import { ChangeEvent } from "react";
+import { useParams } from "react-router-dom";
 import { ROUTE } from "router";
-import { usePayments } from "store/context";
+import { usePaymentsDispatch, usePaymentsState } from "store/context";
+import { CardInfo } from "store/type";
+
+const findItem = (cardList: CardInfo[] ,id: number) => {
+  const get = cardList.filter((v) => v.id === id);
+  return get;
+};
 
 const Content = () => {
-  const {
-    cardNumbers,
-    cardCompany,
-    cardExpiration,
-    cardOwnerName,
-    cardNickName,
-    handleCardNickName,
-    handleNickNameCardMerge,
-    handleInitialCardState
-  } = usePayments();
+  
+  const dispatch = usePaymentsDispatch();
+  
+  const { cardNickName, handleCardNickName } = useForm();
+  const { cardList } = usePaymentsState();
+  const { id } = useParams();
+  const card = findItem(cardList ,Number(id))[0];
 
   const { go } = useRouter();
 
@@ -24,10 +28,9 @@ const Content = () => {
     const { value } = event.target as HTMLInputElement;
     handleCardNickName(value);
   };
-
+  
   const nextPage = () => {
-    handleNickNameCardMerge(cardNickName);
-    handleInitialCardState();
+    dispatch({ type: "UPSERT_CARD_NICK_NAME", cardNickName, id: Number(id) ?? 0 });
     go(ROUTE.CARD_LIST);
   };
 
@@ -37,10 +40,10 @@ const Content = () => {
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
       <Card
-        cardNumbers={cardNumbers}
-        cardCompany={cardCompany}
-        cardExpiration={cardExpiration}
-        cardOwnerName={cardOwnerName}
+        cardNumbers={card.cardNumbers}
+        cardCompany={card.cardCompany}
+        cardExpiration={card.cardExpiration}
+        cardOwnerName={card.cardOwnerName}
         size="big"
       />
       <div className="input-container flex-center w-100">

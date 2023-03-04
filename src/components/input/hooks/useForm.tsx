@@ -1,14 +1,14 @@
-import { PropsWithChildren, useCallback, useEffect, useState } from "react";
-import PaymentsContext from "./context";
+import { useCallback, useEffect, useState } from "react";
+import { usePaymentsDispatch } from "store/context";
 import {
+  CardInfo,
   CardCompany,
   CardNumber,
-  Card,
-  ExpirationDate,
   CardPassword,
-} from "./type";
+  ExpirationDate,
+} from "store/type";
 
-export const PaymentsProvider = ({ children }: PropsWithChildren) => {
+export const useForm = () => {
   const [cardNumbers, setCardNumbers] = useState<CardNumber>(["", "", "", ""]);
   const [cardExpiration, setCardExpiration] = useState<ExpirationDate>({
     month: "",
@@ -22,9 +22,10 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     name: "",
     color: "",
   });
-  const [cards, setCards] = useState<Card[]>([]);
 
   const [cardNickName, setCardNickName] = useState<string>("");
+
+  const dispatch = usePaymentsDispatch();
 
   const handleChangeCardNumber = useCallback((cardNumbers: CardNumber) => {
     setCardNumbers(cardNumbers);
@@ -32,7 +33,7 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
 
   const handleChangeExpirationDate = useCallback(
     (name: string, value: string) => {
-      setCardExpiration((prev) => ({
+      setCardExpiration((prev: any) => ({
         ...prev,
         [name]: value,
       }));
@@ -56,38 +57,13 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     setCardCompany(payload);
   }, []);
 
-  const handleCardSubmit = useCallback((payload: Card) => {
-    setCards((prev) => [...prev, payload]);
-  }, []);
+  const handleCardSubmit = (payload: CardInfo) => {
+    dispatch({ type: "ADD_CARD_INFO", newCard: payload });
+  };
 
-  const handleCardNickName = useCallback((payload: string) => {
-    setCardNickName(payload);
+  const handleCardNickName = useCallback((nickName: string) => {
+    setCardNickName(nickName);
   }, []);
-
-  const handleNickNameCardMerge = useCallback((payload: string) => {
-    setCards((prev) => {
-      const newCards = [...prev];
-      newCards[newCards.length - 1].cardNickName = payload;
-      return newCards;
-    });
-  }, []);
-
-  const handleInitialCardState = useCallback(() => {
-    // 초기화
-    setCardNumbers(["", "", "", ""]);
-    setCardExpiration({
-      month: "",
-      year: "",
-    });
-    setCardOwnerName("");
-    setCvc("");
-    setPassword(["", ""]);
-    setCardCompany({
-      name: "",
-      color: "",
-    });
-  }, []);
-
 
   useEffect(() => {
     const cardComp = cardNumbers.join("").length === 8;
@@ -102,7 +78,7 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     }
   }, [cardCompany]);
 
-  const value = {
+  return {
     cardNumbers,
     cardExpiration,
     cardOwnerName,
@@ -110,7 +86,6 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     password,
     isModalOpen,
     cardCompany,
-    cards,
     cardNickName,
     handleChangeCardNumber,
     handleChangeExpirationDate,
@@ -120,13 +95,5 @@ export const PaymentsProvider = ({ children }: PropsWithChildren) => {
     handleCardCompany,
     handleCardSubmit,
     handleCardNickName,
-    handleNickNameCardMerge,
-    handleInitialCardState
   };
-
-  return (
-    <PaymentsContext.Provider value={value}>
-      {children}
-    </PaymentsContext.Provider>
-  );
 };

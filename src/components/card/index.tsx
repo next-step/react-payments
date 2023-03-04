@@ -14,7 +14,7 @@ import {
 import React from "react";
 
 const isHypen = (number: string) => {
-  return number.length === 4 ? " - " : "";
+  return number && number.length === 4 ? " - " : "";
 };
 
 const maskingCardNumbers = (number: string) => number.replace(/./g, "*");
@@ -40,31 +40,33 @@ const Card = ({
   cardCompany,
   size,
 }: CardProps) => {
-
   return (
     <CardWrapper>
-      <VariableWrapper size={size} style={{ background: cardCompany.color }}>
+      <VariableWrapper size={size} style={{ background: cardCompany?.color }}>
         <CardTopBox>
-          <CardCompanyText size={size}>{cardCompany.name}</CardCompanyText>
+          <CardCompanyText size={size}>{cardCompany?.name}</CardCompanyText>
         </CardTopBox>
         <CardMiddleBox>
           <CardChip size={size}></CardChip>
         </CardMiddleBox>
         <CardBottomBox>
           <CardNumberBox>
-            <CardText size={size}>
-              {cardNumbers[0]} {isHypen(cardNumbers[0])}
-              {cardNumbers[1]} {isHypen(cardNumbers[1])}
-              {maskingCardNumbers(cardNumbers[2])} {isHypen(cardNumbers[2])}
-              {maskingCardNumbers(cardNumbers[3])}
-            </CardText>
+            {cardNumbers && (
+              <CardText size={size}>
+                {cardNumbers[0]} {isHypen(cardNumbers[0])}
+                {cardNumbers[1]} {isHypen(cardNumbers[1])}
+                {maskingCardNumbers(cardNumbers[2])} {isHypen(cardNumbers[2])}
+                {maskingCardNumbers(cardNumbers[3])}
+              </CardText>
+            )}
           </CardNumberBox>
           <CardBottomBoxInfo>
             <CardText size={size} elipsis={"yes"}>
-              {showCardName(cardOwnerName)}
+              {cardOwnerName && showCardName(cardOwnerName)}
             </CardText>
             <CardText size={size}>
-              {showCardExpiry(cardExpiration.month, cardExpiration.year)}
+              {cardExpiration &&
+                showCardExpiry(cardExpiration.month, cardExpiration.year)}
             </CardText>
           </CardBottomBoxInfo>
         </CardBottomBox>

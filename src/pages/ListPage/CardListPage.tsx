@@ -2,14 +2,15 @@ import Card from "components/card";
 import { useRouter } from "hooks/useRouter";
 import React from "react";
 import { ROUTE } from "router";
-import { usePayments } from "store/context";
+import { usePaymentsState } from "store/context";
 
 const CardListPage = () => {
   const { go } = useRouter();
-  const { cards } = usePayments();
+  const { cardList } = usePaymentsState();
 
-  const cardList = [...cards].reverse();
+  const cards = [...cardList].reverse();
 
+  console.log("cards", cards)
   const movePage = () => {
     go(ROUTE.REGIST_CARD);
   };
@@ -25,7 +26,8 @@ const CardListPage = () => {
             +
           </div>
         </div>
-        {cardList.map((card, index) => (
+        {cards.map((card, index) => (
+          card && (
           <React.Fragment key={index}>
             <div onClick={() => go(`${ROUTE.REGIST_CARD}/${card.id}`)}>
               <Card
@@ -38,6 +40,7 @@ const CardListPage = () => {
             </div>
             <span>{card.cardNickName}</span>
           </React.Fragment>
+          )
         ))}
       </div>
     </div>
