@@ -50,11 +50,18 @@ const useCardAlias = () => {
     navigate('/', { replace: true });
   };
 
+  const onClickDeleteBtn = () => {
+    const newCards = cards.filter(card => card.id !== cardInfo.id);
+    localStorage.setItem('cards', JSON.stringify(newCards));
+    navigate('/', { replace: true });
+  };
+
   return {
     aliasInputRef,
     cards,
     cardInfo,
     onClickConfirmBtn,
+    onClickDeleteBtn,
   };
 };
 
