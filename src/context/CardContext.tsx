@@ -38,7 +38,7 @@ type Action =
       passwords: { password1: string; password2: string };
     };
 
-type SampleDispatch = Dispatch<Action>;
+type CardDispatchType = Dispatch<Action>;
 
 const initState: CardStateType = {
   digits: { digit1: '', digit2: '', digit3: '', digit4: '' },
@@ -49,7 +49,7 @@ const initState: CardStateType = {
 };
 
 const CardStateContext = React.createContext<CardStateType | null>(null);
-const CardDispatchContext = React.createContext<SampleDispatch | null>(null);
+const CardDispatchContext = React.createContext<CardDispatchType | null>(null);
 
 const reducer = (state: CardStateType, action: Action): CardStateType => {
   switch (action.type) {
