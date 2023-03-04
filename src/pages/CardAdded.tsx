@@ -33,7 +33,6 @@ const CardAdded = () => {
           className="input-underline w-75"
           type="text"
           placeholder="카드의 별칭을 입력해주세요."
-          value={newCard?.alias}
         />
       </div>
       <div className="button-box mt-50">

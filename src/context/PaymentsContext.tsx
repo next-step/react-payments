@@ -7,13 +7,13 @@ interface PaymentsProviderProps {
 }
 
 export interface CreditCard extends CardProps {
-  id: Date;
+  id: number;
   alias?: string;
 }
 
 type AddCard = (cardData: CreditCard) => void;
-type RemoveCard = (cardId: Date) => void;
-type UpdateAlias = (cardId: Date, alias: string) => void;
+type RemoveCard = (cardId: number) => void;
+type UpdateAlias = (cardId: number, alias: string) => void;
 
 interface PaymentsContextValue {
   cardList: CreditCard[];
@@ -46,6 +46,7 @@ export const PaymentsProvider = ({ children }: PaymentsProviderProps) => {
     setCardList((prevCardList) =>
       prevCardList.map((card) => {
         if (card.id === cardId) {
+          console.log('나는 찾았어');
           return {
             ...card,
             alias,
