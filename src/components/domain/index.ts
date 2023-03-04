@@ -1,3 +1,4 @@
+export { default as CardCompanyModal } from './CardCompanyModal';
 export { default as CardCVCInput } from './CardCVCInput';
 export { default as CardForm } from './CardForm';
 export { default as CardNumberInput } from './CardNumberInput';

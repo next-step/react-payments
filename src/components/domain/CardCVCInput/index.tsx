@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 
+import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
-
-import { useFormContext } from '@/components/common/Form/FormContext';
 
 type Props = {
   onChange: <T>(value: T) => void;

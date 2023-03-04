@@ -1,5 +1,8 @@
+import { useState } from 'react';
+
 import { useFormContext } from '@/components/common/Form/FormContext';
 import {
+  CardCompanyModal,
   CardCVCInput,
   CardNumberInput,
   CardOwnerInput,
@@ -17,28 +20,30 @@ const CardForm = () => {
   const { dirtyState, makeDirty } = useBlur();
 
   return (
-    <FormWrapper onBlur={makeDirty}>
-      <CardNumberInput
-        dirtyState={dirtyState}
-        onChange={handleFormInput(formData, CardKey.CARD_NUMBERS)}
-      />
-      <ExpiredDateInput
-        dirtyState={dirtyState}
-        onChange={handleFormInput(formData, CardKey.EXPIRE_DATE)}
-      />
-      <CardOwnerInput
-        dirtyState={dirtyState}
-        onChange={handleFormInput(formData, CardKey.OWNER_NAME)}
-      />
-      <CardCVCInput
-        dirtyState={dirtyState}
-        onChange={handleFormInput(formData, CardKey.CVC)}
-      />
-      <CardPwdInput
-        dirtyState={dirtyState}
-        onChange={handleFormInput(formData, CardKey.PASSWORD)}
-      />
-    </FormWrapper>
+    <>
+      <FormWrapper onBlur={makeDirty}>
+        <CardNumberInput
+          dirtyState={dirtyState}
+          onChange={handleFormInput(formData, CardKey.CARD_NUMBERS)}
+        />
+        <ExpiredDateInput
+          dirtyState={dirtyState}
+          onChange={handleFormInput(formData, CardKey.EXPIRE_DATE)}
+        />
+        <CardOwnerInput
+          dirtyState={dirtyState}
+          onChange={handleFormInput(formData, CardKey.OWNER_NAME)}
+        />
+        <CardCVCInput
+          dirtyState={dirtyState}
+          onChange={handleFormInput(formData, CardKey.CVC)}
+        />
+        <CardPwdInput
+          dirtyState={dirtyState}
+          onChange={handleFormInput(formData, CardKey.PASSWORD)}
+        />
+      </FormWrapper>
+    </>
   );
 };
 

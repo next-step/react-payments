@@ -8,7 +8,10 @@ import { type CardVariants } from './style';
 type Props = {
   cardInfo?: Pick<
     CardData,
-    CardKey.CARD_NUMBERS | CardKey.EXPIRE_DATE | CardKey.OWNER_NAME
+    | CardKey.CARD_NUMBERS
+    | CardKey.EXPIRE_DATE
+    | CardKey.OWNER_NAME
+    | CardKey.CARD_COMPANY
   >;
   size?: 'large' | 'small';
   onClick?: () => void;
@@ -25,6 +28,9 @@ export const DefaultCardInfo: Props['cardInfo'] = {
     val: '',
   },
   EXPIRE_DATE: { month: '', year: '' },
+  CARD_COMPANY: {
+    val: 'pc',
+  },
 };
 
 const CreditCard = ({
@@ -33,7 +39,7 @@ const CreditCard = ({
   ...props
 }: Props) => {
   return (
-    <Card.CardRoot size={size} {...props}>
+    <Card.CardRoot size={size} {...props} variant={cardInfo?.CARD_COMPANY}>
       <Card.NumberBox>
         {cardInfo?.CARD_NUMBERS &&
           Object.values(cardInfo?.CARD_NUMBERS ?? [])?.map((v, i) => (
@@ -41,7 +47,7 @@ const CreditCard = ({
           ))}
       </Card.NumberBox>
       <Card.BottomBox>
-        <Card.Name>{cardInfo.OWNER_NAME?.val}</Card.Name>
+        <Card.Name>{cardInfo?.OWNER_NAME?.val}</Card.Name>
         <div>
           <span>{cardInfo?.EXPIRE_DATE?.month}</span>/
           <span>{cardInfo?.EXPIRE_DATE?.year}</span>

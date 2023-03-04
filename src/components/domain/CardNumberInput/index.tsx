@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
+
 type Props = {
   onChange: <T>(value: T) => void;
   dirtyState: boolean;
@@ -19,45 +20,47 @@ const CardNumberInput = ({ onChange, dirtyState }: Props) => {
   }, [cardNumbers]);
 
   return (
-    <InputContainer
-      label="카드번호"
-      isError={dirtyState && !!getErrorMessage(cardNumbers)}
-      errorMessage={getErrorMessage(cardNumbers)}
-    >
-      <input
-        type="tel"
-        name="1"
-        placeholder="1234"
-        maxLength={4}
-        onKeyPress={keyPressInterceptor}
-        onChange={handleInputChange(setCardNumbers)}
-        required
-      />
-      <input
-        type="tel"
-        name="2"
-        placeholder="1234"
-        maxLength={4}
-        onKeyPress={keyPressInterceptor}
-        onChange={handleInputChange(setCardNumbers)}
-      />
-      <input
-        type="password"
-        name="3"
-        placeholder="****"
-        maxLength={4}
-        onKeyPress={keyPressInterceptor}
-        onChange={handleInputChange(setCardNumbers)}
-      />
-      <input
-        type="password"
-        name="4"
-        placeholder="****"
-        maxLength={4}
-        onKeyPress={keyPressInterceptor}
-        onChange={handleInputChange(setCardNumbers)}
-      />
-    </InputContainer>
+    <>
+      <InputContainer
+        label="카드번호"
+        isError={dirtyState && !!getErrorMessage(cardNumbers)}
+        errorMessage={getErrorMessage(cardNumbers)}
+      >
+        <input
+          type="tel"
+          name="1"
+          placeholder="1234"
+          maxLength={4}
+          onKeyPress={keyPressInterceptor}
+          onChange={handleInputChange(setCardNumbers)}
+          required
+        />
+        <input
+          type="tel"
+          name="2"
+          placeholder="1234"
+          maxLength={4}
+          onKeyPress={keyPressInterceptor}
+          onChange={handleInputChange(setCardNumbers)}
+        />
+        <input
+          type="password"
+          name="3"
+          placeholder="****"
+          maxLength={4}
+          onKeyPress={keyPressInterceptor}
+          onChange={handleInputChange(setCardNumbers)}
+        />
+        <input
+          type="password"
+          name="4"
+          placeholder="****"
+          maxLength={4}
+          onKeyPress={keyPressInterceptor}
+          onChange={handleInputChange(setCardNumbers)}
+        />
+      </InputContainer>
+    </>
   );
 };
 
