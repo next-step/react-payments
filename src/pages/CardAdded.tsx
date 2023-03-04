@@ -15,7 +15,6 @@ const CardAdded = () => {
 
   const addedAlias = () => {
     if (aliasRef.current) {
-      console.log(aliasRef.current.value);
       updateAlias(newCard.id, aliasRef.current.value);
     }
     navigate('/card-list');
