@@ -6,27 +6,27 @@ interface PaymentsProviderProps {
   children: React.ReactNode;
 }
 
-interface CreditCard extends CardProps {
+export interface CreditCard extends CardProps {
   id: Date;
   alias?: string;
 }
 
 type AddCard = (cardData: CreditCard) => void;
 type RemoveCard = (cardId: Date) => void;
-type AddAlias = (alias: string) => void;
+type UpdateAlias = (cardId: Date, alias: string) => void;
 
 interface PaymentsContextValue {
   cardList: CreditCard[];
   addCard: AddCard;
   removeCard: RemoveCard;
-  addAlias: AddAlias;
+  updateAlias: UpdateAlias;
 }
 
 export const PaymentsContext = createContext<PaymentsContextValue>({
   cardList: [],
   addCard: () => {},
   removeCard: () => {},
-  addAlias: () => {},
+  updateAlias: () => {},
 });
 
 export const PaymentsProvider = ({ children }: PaymentsProviderProps) => {
@@ -42,10 +42,10 @@ export const PaymentsProvider = ({ children }: PaymentsProviderProps) => {
     );
   };
 
-  const addAlias: AddAlias = (alias) => {
+  const updateAlias: UpdateAlias = (cardId, alias) => {
     setCardList((prevCardList) =>
-      prevCardList.map((card, index) => {
-        if (prevCardList.length - 1 === index) {
+      prevCardList.map((card) => {
+        if (card.id === cardId) {
           return {
             ...card,
             alias,
@@ -60,7 +60,7 @@ export const PaymentsProvider = ({ children }: PaymentsProviderProps) => {
     cardList,
     addCard,
     removeCard,
-    addAlias,
+    updateAlias,
   };
 
   return (
