@@ -1,27 +1,22 @@
 import { createContext, useState } from 'react';
 
+import { CardProps } from '../components/Card/Card';
+
 interface PaymentsProviderProps {
   children: React.ReactNode;
 }
 
-interface CardData {
+interface CreditCard extends CardProps {
   id: Date;
-  bank?: string;
-  num1?: string;
-  num2?: string;
-  num3?: string;
-  num4?: string;
-  holder: string;
-  expiry?: string;
   alias?: string;
 }
 
-type AddCard = (cardData: CardData) => void;
+type AddCard = (cardData: CreditCard) => void;
 type RemoveCard = (cardId: Date) => void;
 type AddAlias = (alias: string) => void;
 
 interface PaymentsContextValue {
-  cardList: CardData[];
+  cardList: CreditCard[];
   addCard: AddCard;
   removeCard: RemoveCard;
   addAlias: AddAlias;
@@ -35,7 +30,7 @@ export const PaymentsContext = createContext<PaymentsContextValue>({
 });
 
 export const PaymentsProvider = ({ children }: PaymentsProviderProps) => {
-  const [cardList, setCardList] = useState<CardData[]>([]);
+  const [cardList, setCardList] = useState<CreditCard[]>([]);
 
   const addCard: AddCard = (cardData) => {
     setCardList((prevCardList) => [...prevCardList, cardData]);
