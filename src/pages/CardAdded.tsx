@@ -1,28 +1,32 @@
 import { useContext, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Button, Card } from '../components';
-import { PaymentsContext } from '../context/PaymentsContext';
+import { CreditCard, PaymentsContext } from '../context/PaymentsContext';
 
 const CardAdded = () => {
   const navigate = useNavigate();
   const aliasRef = useRef<HTMLInputElement>(null);
 
-  const { cardList, addAlias } = useContext(PaymentsContext);
+  const location = useLocation();
+  const newCard: CreditCard = location.state;
+
+  const { updateAlias } = useContext(PaymentsContext);
 
   const addedAlias = () => {
     if (aliasRef.current) {
-      addAlias(aliasRef.current.value);
+      console.log(aliasRef.current.value);
+      updateAlias(newCard.id, aliasRef.current.value);
     }
     navigate('/card-list');
   };
 
   return (
-    <div className="app flex-column-center">
+    <section className="app flex-column-center">
       <div className="flex-center">
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
-      <Card {...cardList[cardList.length - 1]} />
+      <Card {...newCard} />
       <div className="input-container flex-center w-100">
         <input
           ref={aliasRef}
@@ -30,12 +34,13 @@ const CardAdded = () => {
           className="input-underline w-75"
           type="text"
           placeholder="카드의 별칭을 입력해주세요."
+          value={newCard?.alias}
         />
       </div>
       <div className="button-box mt-50">
         <Button onClick={addedAlias}>다음</Button>
       </div>
-    </div>
+    </section>
   );
 };
 
