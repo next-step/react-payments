@@ -4,7 +4,8 @@ import Input from "../Input/Input";
 import InputBox from "../Input/InputBox";
 import InputContainer from "../Input/InputContainer";
 
-const CARD_MAX_LENGTH = 4; // 카드에 들어가는 최대 길이
+export const CARD_MAX_LENGTH = 4; // 카드에 들어가는 최대 길이
+export const CARD_LAST_INDEX = 3; // 카드 마지막 인덱스
 const PASSWORD_TYPE_START_INDEX = 2; // 패스워드 타입 시작 인덱스
 
 export type CardNumbers = {
@@ -36,7 +37,7 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
     };
 
     const isMaxLength = event.currentTarget.value.length === CARD_MAX_LENGTH;
-    const isLastCardNumberIndex = type === 3;
+    const isLastCardNumberIndex = type === CARD_LAST_INDEX;
 
     if (isMaxLength && !isLastCardNumberIndex) {
       itemsRef.current[type + 1].focus();
