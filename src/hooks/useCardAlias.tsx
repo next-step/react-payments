@@ -39,8 +39,14 @@ const useCardAlias = () => {
       expirationDate: cardInfo.expirationDate,
       alias: cardAlias,
     };
-
-    localStorage.setItem('cards', JSON.stringify([...cards, cardItem]));
+    const cardIndex = cards.findIndex(card => card.id === cardInfo.id);
+    if (cardIndex >= 0) {
+      const newCards = cards;
+      newCards[cardIndex].alias = cardAlias;
+      localStorage.setItem('cards', JSON.stringify(newCards));
+    } else {
+      localStorage.setItem('cards', JSON.stringify([...cards, cardItem]));
+    }
     navigate('/', { replace: true });
   };
 

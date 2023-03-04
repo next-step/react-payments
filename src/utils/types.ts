@@ -9,6 +9,7 @@ export interface ICardInfo {
 }
 
 export interface INewCard {
+  id?: string;
   creditNumber: string;
   expirationDate: string;
   customerName: string;
