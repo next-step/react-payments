@@ -15,7 +15,7 @@ export default function CardPasswordInput({
           <input
             className={
               "input-basic w-15 card-password" +
-              (index > 1 ? " input-disabled" : null)
+              (index > 1 ? " input-disabled" : "")
             }
             type="password"
             name={name}

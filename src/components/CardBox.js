@@ -32,7 +32,7 @@ export default function CardBox({
         className={
           (isEmpty ? "empty" : cardSize) +
           "-card " +
-          (cardColor ? cardColor : null)
+          (cardColor ? cardColor : "")
         }
       >
         <div className="card-top">

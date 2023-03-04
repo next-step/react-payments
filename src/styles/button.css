@@ -11,3 +11,12 @@
   font-size: 15px;
   letter-spacing: -0.085rem;
 }
+
+.button-delete {
+  color: black;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  letter-spacing: -0.085rem;
+  margin-bottom: 10px;
+}

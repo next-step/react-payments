@@ -28,6 +28,15 @@ export default function RegistedCardListPage() {
         }}
       />
       <span className="card-nickname">{cardInfo["cardNickName"]}</span>
+      <button
+        className="button-delete"
+        type="button"
+        // onClick={(e) =>
+        //   console.log(e.target.parentElement.closest(".card-box"))
+        // }
+      >
+        삭제
+      </button>
       <Link className="button-text" to={ROUTE_PATH.CARD_REGISTRATION}>
         <div className="card-box">
           <div className="empty-card">+</div>
