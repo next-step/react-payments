@@ -6,6 +6,7 @@ import { ROUTE_PATH } from "./constants/page";
 import CardRegistrationPage from "./pages/CardRegistrationPage";
 import RegistedCardListPage from "./pages/RegistedCardListPage";
 import CardRegistrationCompletedPage from "./pages/CardRegistrationCompletedPage";
+import { CardListContext } from "./context/CardListContext";
 
 const router = createBrowserRouter([
   {
@@ -39,12 +40,16 @@ function App() {
     cardColor: "",
   });
 
+  const [cardList, setCardList] = useState([]);
+
   return (
-    <CardContext.Provider value={{ cardInfo, setCardInfo }}>
-      <div className="app">
-        <RouterProvider router={router} />
-      </div>
-    </CardContext.Provider>
+    <CardListContext.Provider value={{ cardList, setCardList }}>
+      <CardContext.Provider value={{ cardInfo, setCardInfo }}>
+        <div className="app">
+          <RouterProvider router={router} />
+        </div>
+      </CardContext.Provider>
+    </CardListContext.Provider>
   );
 }
 

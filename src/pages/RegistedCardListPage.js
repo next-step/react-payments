@@ -18,38 +18,40 @@ export default function RegistedCardListPage() {
       <div className="flex-center">
         <Header className="page-title mb-10">보유 카드</Header>
       </div>
-      {cardList.map((cardInfo, index) => {
-        return (
-          <>
-            <CardBox
-              cardInfo={cardInfo}
-              cardSize="small"
-              key={index}
-              onClick={() => {
-                // TODO : isEdit 구분자 필요한지? 카드가 계속 추가되는 버그
-                navigate(ROUTE_PATH.CARD_REGISTRATION_COMPLETED);
-              }}
-            />
-            <span className="card-nickname">{cardInfo["cardNickName"]}</span>
-            <button
-              className="button-delete"
-              type="button"
-              // onClick={(e) => console.log(e.target.parentElement)}
-              // onClick={setCardList(
-              //   cardList.filter((cardInfo) => cardInfo[index] !== index)
-              // )}
-            >
-              삭제
-            </button>
-          </>
-        );
-      })}
-
       <Link className="button-text" to={ROUTE_PATH.CARD_REGISTRATION}>
         <div className="card-box">
           <div className="empty-card">+</div>
         </div>
       </Link>
+      {cardList
+        .sort((a, b) => a - b)
+        .map((cardInfo, index) => {
+          return (
+            <div className="cardListItem">
+              <CardBox
+                cardInfo={cardInfo}
+                cardSize="small"
+                key={index}
+                onClick={() => {
+                  // TODO : isEdit 구분자 필요한지? 카드가 계속 추가되는 버그
+                  navigate(ROUTE_PATH.CARD_REGISTRATION_COMPLETED);
+                }}
+              />
+              <span className="card-nickname">{cardInfo["cardNickName"]}</span>
+              <button
+                className="button-delete"
+                type="button"
+                onClick={() =>
+                  setCardList(
+                    cardList.filter((cardInfo) => cardInfo[index] == index)
+                  )
+                }
+              >
+                삭제
+              </button>
+            </div>
+          );
+        })}
     </div>
   );
 }
