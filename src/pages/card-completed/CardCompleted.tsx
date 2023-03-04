@@ -1,36 +1,9 @@
-import { useRef } from 'react'
-
 import { BackButton, NavigationTextButton } from '@/components/button'
 import { PageTitle } from '@/components/layouts'
-import { useCardList } from '@/pages/card-list/hooks'
-import { useCardInfo } from '@/pages/hooks'
+import { useCardCompleted } from '@/pages/card-completed/hooks'
 
 function CardCompleted() {
-  const {
-    cardInfo,
-    cardInfo: {
-      cardNumbers: { first, second, third, fourth },
-      owner,
-      name,
-      nickname,
-      expiredMonth,
-      expiredYear,
-    },
-    handleNickname,
-    resetCardInfo,
-  } = useCardInfo()
-
-  const { cardList, addCard } = useCardList()
-
-  const nicknameRef = useRef<HTMLInputElement>(null)
-
-  const preNavigation = () => {
-    const nicknameValue = nicknameRef.current?.value || name
-    handleNickname(nicknameValue)
-    // Todo: 업데이트된 닉네임이 반영된 cardInfo를 사용해야함
-    addCard({ ...cardInfo, id: cardList.length, nickname: nicknameValue })
-    resetCardInfo()
-  }
+  const { nicknameRef, cardNumbers, cardOwner, cardExpiredDate, cardNickname, handlePreNavigation } = useCardCompleted()
 
   return (
     <div className="app flex-column-center">
@@ -47,11 +20,11 @@ function CardCompleted() {
           </div>
           <div className="card-bottom">
             <div className="card-bottom__number">
-              <span className="card-text__big">{`${first} - ${second} - ${third} - ${fourth}`}</span>
+              <span className="card-text__big">{cardNumbers}</span>
             </div>
             <div className="card-bottom__info">
-              <span className="card-text__big">{owner}</span>
-              <span className="card-text__big">{`${expiredMonth} / ${expiredYear}`}</span>
+              <span className="card-text__big">{cardOwner}</span>
+              <span className="card-text__big">{cardExpiredDate}</span>
             </div>
           </div>
         </div>
@@ -59,14 +32,14 @@ function CardCompleted() {
       <div className="input-container flex-center w-100">
         <input
           ref={nicknameRef}
-          defaultValue={nickname}
+          defaultValue={cardNickname}
           className="input-underline w-75"
           type="text"
           placeholder="카드 별칭 (선택)"
           maxLength={10}
         />
       </div>
-      <NavigationTextButton additionalClassNames="mt-50" preNavigation={preNavigation} to="/" text="다음" />
+      <NavigationTextButton additionalClassNames="mt-50" preNavigation={handlePreNavigation} to="/" text="다음" />
     </div>
   )
 }
