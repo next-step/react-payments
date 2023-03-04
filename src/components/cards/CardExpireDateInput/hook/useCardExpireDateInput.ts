@@ -3,7 +3,7 @@ import { ChangeEvent, useCallback, useMemo } from "react";
 import { CARD_VALIDATION_ERROR_MESSAGES } from "@/constants/messages/error";
 import { CARD_INPUT_VARIABLES } from "@/constants/variables";
 import { checkValidator, isNumber } from "@/helper";
-import useInput from "@/hooks/useInput";
+import { useInput } from "@/hooks";
 import { ValidationError } from "@/services/errors";
 import { ValidationResult } from "@/types";
 
@@ -34,7 +34,9 @@ const validateCardExpireDateInput = (
     ) {
       return {
         success: false,
-        error: new ValidationError(CARD_VALIDATION_ERROR_MESSAGES.MONTH_RANGE),
+        error: new ValidationError(
+          CARD_VALIDATION_ERROR_MESSAGES.INVALID_MONTH_RANGE
+        ),
       };
     }
   }
