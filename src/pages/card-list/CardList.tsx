@@ -1,15 +1,14 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { PageTitle } from '@/components/layouts'
-import { useCardInfo, useCardList } from '@/pages/hooks'
+import { useCardList } from '@/pages/hooks'
 
 /**
  * Todo: 카드 종류 추가하고 나서 카드 컴포넌트 분리하기
  */
 function CardList() {
-  const navigate = useNavigate()
-  const { cardList } = useCardList()
-  const { setAllCardInfo } = useCardInfo()
+  const { cardList, onClickCard } = useCardList()
+
   return (
     <div className="root">
       <div className="app flex-column-center">
@@ -26,14 +25,7 @@ function CardList() {
             expiredYear,
           } = card
           return (
-            <div
-              key={card.nickname}
-              onClick={(event) => {
-                event.stopPropagation()
-                setAllCardInfo(card)
-                navigate('/card-update')
-              }}
-            >
+            <div key={card.nickname} onClick={() => onClickCard(card)}>
               <div className="card-box">
                 <div className="small-card">
                   <div className="card-top">
