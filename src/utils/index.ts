@@ -3,7 +3,7 @@ export const extractNumbers = (value: string) => {
 };
 
 export const masking = (value: string | undefined) => {
-  if (value == null) return;
+  if (value === null || value === undefined) return;
 
   const mask = '*';
   const NumberRegex = /[0-9]/g;

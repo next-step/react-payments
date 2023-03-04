@@ -46,7 +46,6 @@ export const PaymentsProvider = ({ children }: PaymentsProviderProps) => {
     setCardList((prevCardList) =>
       prevCardList.map((card) => {
         if (card.id === cardId) {
-          console.log('나는 찾았어');
           return {
             ...card,
             alias,

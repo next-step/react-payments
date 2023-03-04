@@ -28,6 +28,8 @@
     "prettier/prettier": "error",
     "react/react-in-jsx-scope": "off",
     "no-undef": "off",
-    "@typescript-eslint/no-empty-function": "off"
+    "@typescript-eslint/no-empty-function": "off",
+    "eqeqeq": "error",
+    "no-console": "error"
   }
 }
