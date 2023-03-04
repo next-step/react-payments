@@ -1,24 +1,29 @@
+import BottomSheet from 'src/components/BottomSheet';
+import BankBottomSheet from 'src/components/BottomSheet/BankBottomSheet';
 import Card from 'src/components/Card/Card';
 import CardPasswordInput from 'src/components/CardPasswordInput/CardPasswordInput';
 import Header from 'src/components/Header/Header';
 import NewCardInput from 'src/components/NewCardInput/NewCardInput';
 import TextButton from 'src/components/TextButton/TextButton';
 import useNewCardForm from 'src/hooks/useNewCardForm';
+import { bankList } from 'src/utils/constants';
 
 const CUSTOMER_NAME_LIMIT_COUNT = 30;
 
 const CardNew = () => {
-  const { state, handlers, onClickNextPage } = useNewCardForm();
+  const { state, handlers, onClickNextPage, openBottomSheet } =
+    useNewCardForm();
 
   return (
     <>
       <Header title="카드 추가" hasBackButton />
       <Card
-        title=""
-        bgColor=""
+        title={state.bankTitle}
+        bgColor={state.bgColor}
         creditNumber={state.creditNumber}
         customerName={state.customerName}
         expirationDate={state.expirationDate}
+        onClick={openBottomSheet}
       />
       <NewCardInput
         label="카드 번호"
@@ -65,8 +70,14 @@ const CardNew = () => {
           onChange: handlers.handleChangeSecondPassword,
         }}
       />
-      {/* TO DO : Form Validation & Navigate with State */}
       <TextButton onClick={onClickNextPage}>다음</TextButton>
+      <BottomSheet isBackgroundToggle>
+        <BankBottomSheet
+          bankList={bankList}
+          handleBankTitle={handlers.handleBankTitle}
+          handleBgColor={handlers.handleBgColor}
+        />
+      </BottomSheet>
     </>
   );
 };

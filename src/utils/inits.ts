@@ -8,4 +8,6 @@ export const initNewCard: INewCard = {
   cvc: '',
   firstPassword: '',
   secondPassword: '',
+  bankTitle: '',
+  bgColor: '',
 };

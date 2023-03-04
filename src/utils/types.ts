@@ -5,4 +5,12 @@ export interface INewCard {
   cvc: string;
   firstPassword: string;
   secondPassword: string;
+  bankTitle: string;
+  bgColor: string;
+  alias?: string;
+}
+
+export interface INewCardBank {
+  title: string;
+  bgColor: string;
 }
