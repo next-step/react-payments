@@ -26,9 +26,9 @@ const CardAdd = () => {
         <div className="empty-card">+</div>
       </Button>
       {cardList
-        .sort((a, b) => b.id.getTime() - a.id.getTime())
+        .sort((a, b) => b.id - a.id)
         .map((card) => (
-          <div key={card.id.getDate()}>
+          <div key={card.id}>
             <Button onClick={() => handleEditAlias(card)}>
               <Card {...card} />
             </Button>

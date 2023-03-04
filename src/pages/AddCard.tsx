@@ -88,7 +88,7 @@ const AddCard = () => {
   };
 
   const addCardToDatabase = () => {
-    const newCard: CreditCard = { ...card, id: new Date() };
+    const newCard: CreditCard = { ...card, id: new Date().getTime() };
     addCard(newCard);
     navigate('/card-added', { state: newCard });
   };
