@@ -1,17 +1,30 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
+import { CardVariant } from '../Card';
 import CreditCard from '.';
 
 export default {
   title: 'Components/UI/CreditCard',
   component: CreditCard,
+  argTypes: {
+    size: {
+      options: ['small', 'large'],
+      control: { type: 'radio' },
+    },
+    variant: {
+      options: [...Object.keys(CardVariant)],
+      control: { type: 'select' },
+    },
+  },
 } as ComponentMeta<typeof CreditCard>;
 
 const Template: ComponentStory<typeof CreditCard> = (args) => (
   <CreditCard {...args} />
 );
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  //   theme: 'black',
+};
 
 const MOCK_CARD_INFO = {
   CARD_NUMBERS: {

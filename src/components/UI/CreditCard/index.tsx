@@ -2,7 +2,9 @@ import { memo } from 'react';
 
 import { CardData, CardKey } from '@/types';
 
-import Card from './style';
+import * as Card from './style';
+import { type CardVariants } from './style';
+
 type Props = {
   cardInfo?: Pick<
     CardData,
@@ -10,7 +12,7 @@ type Props = {
   >;
   size?: 'large' | 'small';
   onClick?: () => void;
-};
+} & CardVariants;
 
 export const DefaultCardInfo: Props['cardInfo'] = {
   CARD_NUMBERS: {
@@ -25,9 +27,13 @@ export const DefaultCardInfo: Props['cardInfo'] = {
   EXPIRE_DATE: { month: '', year: '' },
 };
 
-const CreditCard = ({ size = 'large', cardInfo = DefaultCardInfo }: Props) => {
+const CreditCard = ({
+  size = 'large',
+  cardInfo = DefaultCardInfo,
+  ...props
+}: Props) => {
   return (
-    <Card size={size}>
+    <Card.CardRoot size={size} {...props}>
       <Card.NumberBox>
         {cardInfo?.CARD_NUMBERS &&
           Object.values(cardInfo?.CARD_NUMBERS ?? [])?.map((v, i) => (
@@ -41,7 +47,7 @@ const CreditCard = ({ size = 'large', cardInfo = DefaultCardInfo }: Props) => {
           <span>{cardInfo?.EXPIRE_DATE?.year}</span>
         </div>
       </Card.BottomBox>
-    </Card>
+    </Card.CardRoot>
   );
 };
 
