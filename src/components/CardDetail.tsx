@@ -1,28 +1,44 @@
-import React from 'react';
+import React, { useContext, useRef } from 'react';
 import styled from '@emotion/styled';
 
 import { Box, Button, FormFieldControl, TextField } from 'components/@common';
-import type { CreditCardType, PartialCreditCardType } from 'types/CreditCard';
+import type { PartialCreditCardType } from 'types/CreditCard';
+import { CardListContext } from 'contexts/CardListProvider';
 
-const CardDetail = ({ nickname }: PartialCreditCardType) => {
+const CardDetail = ({ card }: { card: PartialCreditCardType }) => {
+  const nicknameRef = useRef<HTMLInputElement>(null);
+  const { removeCardInfo, updateCardNickname } = useContext(CardListContext);
+
+  const handleCardNickname = () => {
+    if (!nicknameRef.current) return;
+    const { value } = nicknameRef.current;
+    updateCardNickname(1, value);
+  };
+
   return (
     <Wrapper>
-      <form>
+      <form onSubmit={(e) => e.preventDefault()}>
         <FormFieldControl>
           <FormFieldControl.Label>카드 별칭</FormFieldControl.Label>
           <TextField
             type="text"
+            ref={nicknameRef}
             maxLength={10}
-            defaultValue={nickname}
+            defaultValue={card.nickname}
             className="w-100"
           />
         </FormFieldControl>
 
         <Box display="flex" justifyContent="space-between">
-          <Button type="submit" color="red07" className="w-47">
+          <Button
+            type="submit"
+            color="red07"
+            onClick={() => removeCardInfo(card.id!)}
+            className="w-47"
+          >
             삭제하기
           </Button>
-          <Button type="submit" className="w-47">
+          <Button type="submit" onClick={handleCardNickname} className="w-47">
             수정하기
           </Button>
         </Box>

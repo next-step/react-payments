@@ -7,11 +7,12 @@ import { ReactComponent as PlusIcon } from 'assets/PlusIcon.svg';
 import { CardListContext } from 'contexts/CardListProvider';
 
 import { CardDetail, CreditCard } from 'components';
+import { PartialCreditCardType } from 'types/CreditCard';
 
 const CardListPage = () => {
   const { push } = useRouter();
   const { cardList } = useContext(CardListContext);
-  const [nickname, setNickname] = useState('');
+  const [selectedCard, setSelectedCard] = useState<PartialCreditCardType>();
 
   return (
     <>
@@ -29,17 +30,14 @@ const CardListPage = () => {
           <Modal.Trigger>
             {cardList &&
               cardList.map((card, index) => (
-                <Container
-                  key={index}
-                  onClick={() => setNickname(card.nickname!)}
-                >
+                <Container key={index} onClick={() => setSelectedCard(card)}>
                   <CreditCard {...card} />
                   <Text>{card.nickname}</Text>
                 </Container>
               ))}
           </Modal.Trigger>
           <Modal.Content>
-            <CardDetail nickname={nickname} />
+            <CardDetail card={selectedCard!} />
           </Modal.Content>
         </Modal>
       </Wrapper>
