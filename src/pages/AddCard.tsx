@@ -79,7 +79,7 @@ const AddCard = () => {
     );
   };
 
-  const cardData = {
+  const card = {
     num1: cardRefs[0].current?.value,
     num2: cardRefs[1].current?.value,
     num3: cardRefs[2].current?.value,
@@ -89,7 +89,7 @@ const AddCard = () => {
   };
 
   const cardAdded = () => {
-    addCard({ ...cardData, id: new Date() });
+    addCard({ ...card, id: new Date() });
     navigate('/card-added');
   };
 
@@ -101,7 +101,7 @@ const AddCard = () => {
         </Button>
         카드 추가
       </h2>
-      <Card {...cardData} />
+      <Card {...card} />
       <div className="input-container">
         <span className="input-title">카드 번호</span>
         <div className="input-box">
