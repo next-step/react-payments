@@ -6,7 +6,7 @@ import { CardForm } from '@/components/domain';
 import { Button, CreditCard } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
 import { createCard } from '@/storage/service';
-import { type CardFormType, CardKey } from '@/types';
+import { type CardFormType, CardData, CardKey } from '@/types';
 
 export const CardRegister = () => {
   const { dispatch, getFormData, handleFormInput } = useFormContext();
@@ -37,7 +37,7 @@ export const CardRegister = () => {
   };
 
   const handleSubmit = () => {
-    const newCard = generateCardObj(form);
+    const newCard = generateCardObj(form) as unknown as CardData;
     createCard(newCard);
     go('/register-confirm');
   };
@@ -71,7 +71,7 @@ const generateCardObj = (form: CardFormType) => {
       return { ...cardState, [cardKey]: cardData };
     },
     {}
-  );
+  ) as CardData;
 
   return {
     ...newCard,

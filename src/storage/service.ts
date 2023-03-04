@@ -3,16 +3,20 @@ import { StorageKey } from '@/storage/storageKey';
 import { CardData, CardKey } from '@/types';
 
 export const getCards = () => {
-  return getItem(StorageKey.CARD_LIST) as CardData[];
+  return (getItem(StorageKey.CARD_LIST) as CardData[]) ?? [];
 };
 
 export const getLatestCard = () => {
   return getItem(StorageKey.CARD_LIST).at(-1) as CardData;
 };
-export const createCard = (value: object) => {
+
+export const createCard = (card: CardData) => {
   setItem(StorageKey.CARD_LIST, [
     ...(getItem(StorageKey.CARD_LIST) ?? []),
-    { ...value },
+    {
+      ...card,
+      [CardKey.NICK_NAME]: card.CARD_COMPANY.val,
+    },
   ]);
 };
 
