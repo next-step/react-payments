@@ -42,7 +42,7 @@ export const validatorFn = (
   value: string,
   name: (typeof CARD_INFO)[keyof typeof CARD_INFO],
 ) => {
-  if (!Object.keys(CARD_INFO).includes(name)) {
+  if (!Object.values(CARD_INFO).includes(name)) {
     throw new SyntaxError('invalid key value')
   }
   switch (name) {
