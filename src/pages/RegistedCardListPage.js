@@ -1,9 +1,14 @@
+import { useContext } from "react";
+
 import { Link } from "react-router-dom";
+import { CardContext } from "../context/CardContext";
 
 import { ROUTE_PATH } from "../constants/page";
 import Header from "../components/Header";
 
 export default function RegistedCardListPage() {
+  const { cardInfo, setCardInfo } = useContext(CardContext);
+
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
@@ -19,16 +24,24 @@ export default function RegistedCardListPage() {
           </div>
           <div className="card-bottom">
             <div className="card-bottom__number">
-              <span className="card-text">1111 - 2222 - oooo - oooo</span>
+              <span className="card-text">
+                {cardInfo["cardNumber"]["num0"]} -{" "}
+                {cardInfo["cardNumber"]["num1"]} -{" "}
+                {cardInfo["cardNumber"]["num2"]} -{" "}
+                {cardInfo["cardNumber"]["num3"]}
+              </span>
             </div>
             <div className="card-bottom__info">
-              <span className="card-text">YUJO</span>
-              <span className="card-text">12 / 23</span>
+              <span className="card-text">{cardInfo["cardOwnerName"]}</span>
+              <span className="card-text">
+                {cardInfo["cardExpiration"]["month"]} /{" "}
+                {cardInfo["cardExpiration"]["year"]}
+              </span>
             </div>
           </div>
         </div>
       </div>
-      <span className="card-nickname">법인카드</span>
+      <span className="card-nickname">{cardInfo["cardNickName"]}</span>
       <Link className="button-text" to={ROUTE_PATH.CARD_REGISTRATION}>
         <div className="card-box">
           <div className="empty-card">+</div>

@@ -1,7 +1,8 @@
-import { useState, useReducer, useRef } from "react";
+import { useContext, useReducer, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import CardBox from "../components/CardBox";
 
+import { CardContext } from "../context/CardContext";
 import { ROUTE_PATH } from "../constants/page";
 import Header from "../components/Header";
 import CardNumberInput from "../components/CardNumberInput";
@@ -58,7 +59,7 @@ function reducer(state, action) {
   }
 }
 export default function CardRegistrationPage() {
-  const [isShowModal, setIsShowModal] = useState(false);
+  const { cardInfo, setCardInfo } = useContext(CardContext);
 
   const navigate = useNavigate();
   const cardNumberRefs = useRef(["", "", "", ""]);
@@ -88,6 +89,7 @@ export default function CardRegistrationPage() {
     cardPassword,
   } = state;
 
+  const isShowModal = false;
   const isFormFilled =
     cardNumberRefs.current[0]?.value?.length == CARD_NUMBER.MAX_LENGTH &&
     cardNumberRefs.current[1]?.value?.length == CARD_NUMBER.MAX_LENGTH &&
@@ -102,13 +104,7 @@ export default function CardRegistrationPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
-
     // TODO : 중복 검증
-    // cardInfo 세팅
-    // big card 보여주기
-    // 닉네임 설정
-
-    console.log(e);
   }
 
   return (
@@ -132,7 +128,25 @@ export default function CardRegistrationPage() {
             if (!isNumber(e.target.value))
               return { success: false, errorMessage: MESSAGE.ALERT_NUMBER };
             dispatch({ type: "cardNumber", target: e.target });
-            if (e.target.value.length == 4) e.target.nextSibling?.focus();
+            setCardInfo({
+              ...cardInfo,
+              ["cardNumber"]: {
+                num0: cardNumberRefs.current[0]?.value,
+                num1: cardNumberRefs.current[1]?.value,
+                num2: cardNumberRefs.current[2]?.value,
+                num3: cardNumberRefs.current[3]?.value,
+              },
+            });
+            if (e.target.value.length == 4) {
+              if (
+                cardNumberRefs.current[0]?.value?.length === 4 &&
+                cardNumberRefs.current[1]?.value?.length === 4 &&
+                cardNumberRefs.current[2]?.value?.length === 4 &&
+                cardNumberRefs.current[3]?.value?.length === 4
+              )
+                ExpirationRefs.current[0]?.focus();
+              else e.target.nextSibling?.focus();
+            }
           }}
           cardNumberRefs={cardNumberRefs}
         ></CardNumberInput>
@@ -155,6 +169,21 @@ export default function CardRegistrationPage() {
               }
             }
             dispatch({ type: "cardExpiration", target: e.target });
+            setCardInfo({
+              ...cardInfo,
+              ["cardExpiration"]: {
+                month: ExpirationRefs.current[0]?.value,
+                year: ExpirationRefs.current[1]?.value,
+              },
+            });
+            if (e.target.value.length == 2) {
+              if (
+                ExpirationRefs.current[0]?.value?.length === 2 &&
+                ExpirationRefs.current[1]?.value?.length === 2
+              )
+                OwnerNameRef.current?.focus();
+              else e.target.nextSibling?.focus();
+            }
             if (e.target.value.length == 2) e.target.nextSibling?.focus();
           }}
           ExpirationRefs={ExpirationRefs}
@@ -176,6 +205,11 @@ export default function CardRegistrationPage() {
               };
             }
             dispatch({ type: "cardOwnerName", target: e.target });
+            setCardInfo({
+              ...cardInfo,
+              ["cardOwnerName"]: OwnerNameRef.current?.value,
+            });
+            if (e.target.value.length == 3) SecurityCodeRef.current?.focus();
           }}
           OwnerNameRef={OwnerNameRef}
         ></CardOwnerNameInput>
@@ -187,6 +221,11 @@ export default function CardRegistrationPage() {
               return { success: false, errorMessage: MESSAGE.ALERT_NUMBER };
             }
             dispatch({ type: "cardSecurityCode", target: e.target });
+            setCardInfo({
+              ...cardInfo,
+              ["cardSecurityCode"]: SecurityCodeRef.current?.value,
+            });
+            if (e.target.value.length == 3) PasswordRefs.current[0]?.focus();
           }}
           SecurityCodeRef={SecurityCodeRef}
         ></CardSecurityCodeInput>
@@ -199,14 +238,26 @@ export default function CardRegistrationPage() {
             }
             dispatch({ type: "cardPassword", target: e.target });
             if (e.target.value.length == 1) e.target.nextSibling?.focus();
+            setCardInfo({
+              ...cardInfo,
+              ["cardPassword"]: {
+                num0: PasswordRefs.current[0]?.value,
+                num1: PasswordRefs.current[1]?.value,
+                num2: PasswordRefs.current[2]?.value,
+                num3: PasswordRefs.current[3]?.value,
+              },
+            });
           }}
           PasswordRefs={PasswordRefs}
         />
-        <div
-          className="button-box"
-          onClick={() => navigate(ROUTE_PATH.CARD_REGISTRATION_COMPLETED)}
-        >
-          <button className="button-text" disabled={!isFormFilled}>
+        <div className="button-box">
+          <button
+            className="button-text"
+            disabled={!isFormFilled}
+            onClick={() => {
+              navigate(ROUTE_PATH.CARD_REGISTRATION_COMPLETED);
+            }}
+          >
             다음
           </button>
         </div>

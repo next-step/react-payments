@@ -1,9 +1,11 @@
+import { useState, useContext } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { CardContext } from "./context/CardContext";
 
-import { ROUTE_PATH } from "../src/constants/page";
-import CardRegistrationPage from "../src/pages/CardRegistrationPage";
-import RegistedCardListPage from "../src/pages/RegistedCardListPage";
-import CardRegistrationCompletedPage from "../src/pages/CardRegistrationCompletedPage";
+import { ROUTE_PATH } from "./constants/page";
+import CardRegistrationPage from "./pages/CardRegistrationPage";
+import RegistedCardListPage from "./pages/RegistedCardListPage";
+import CardRegistrationCompletedPage from "./pages/CardRegistrationCompletedPage";
 
 const router = createBrowserRouter([
   {
@@ -21,10 +23,26 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const [cardInfo, setCardInfo] = useState({
+    cardNumber: {
+      num0: "",
+      num1: "",
+      num2: "",
+      num3: "",
+    },
+    cardExpiration: { month: "", year: "" },
+    cardOwnerName: "",
+    cardSecurityCode: "",
+    cardPassword: { num0: "", num1: "", num2: "", num3: "" },
+    cardNickName: "",
+  });
+
   return (
-    <div className="app">
-      <RouterProvider router={router} />
-    </div>
+    <CardContext.Provider value={{ cardInfo, setCardInfo }}>
+      <div className="app">
+        <RouterProvider router={router} />
+      </div>
+    </CardContext.Provider>
   );
 }
 
