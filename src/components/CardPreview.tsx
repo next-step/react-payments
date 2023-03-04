@@ -2,11 +2,11 @@ import React from 'react';
 import { S } from '../styles/card';
 import { CardStateType } from '../context/CardContext';
 
-const CardPreview = ({ digits, expire, name }: CardStateType) => {
+const CardPreview = ({ digits, expire, name, company }: CardStateType) => {
   return (
     <S.CardBox>
       <S.EmptyCard>
-        <S.CardTop>세영카드</S.CardTop>
+        <S.CardTop>{company && company}</S.CardTop>
         <S.CardMiddle>
           <S.SmallCardChip />
         </S.CardMiddle>

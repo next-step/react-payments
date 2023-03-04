@@ -12,12 +12,16 @@ import {
 
 const PaymentCardRegister = () => {
   const navigate = useNavigate();
-  const { digits, cvc, expire, name, passwords } = useCardState();
-  const dispatchCard = useCardListDispatch();
+  const { digits, cvc, expire, name, passwords, company, nickname } =
+    useCardState();
+  const dispatchCardList = useCardListDispatch();
   const stateCardList = useCardListState();
 
   const onClickRegisterCard = () => {
-    dispatchCard([...stateCardList, { digits, cvc, expire, name, passwords }]);
+    dispatchCardList([
+      ...stateCardList,
+      { digits, cvc, expire, name, passwords, company, nickname },
+    ]);
     navigate('/complete', { state: { isComplete: true } });
   };
 
@@ -30,6 +34,8 @@ const PaymentCardRegister = () => {
         expire={expire}
         name={name}
         passwords={passwords}
+        company={company}
+        nickname={nickname}
       />
       <CardRegisterForm />
       <Button text={'다음'} onClick={onClickRegisterCard} />

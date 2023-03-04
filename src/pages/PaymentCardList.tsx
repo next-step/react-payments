@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import CardPreview from '../components/CardPreview';
 import Title from '../components/common/Title';
@@ -15,7 +15,7 @@ const PaymentCardList = () => {
         {cardList.map((card, index) => (
           <React.Fragment key={index}>
             <CardPreview {...card} />
-            <span className="card-nickname">법인카드</span>
+            <span className="card-nickname">{card.nickname}</span>
           </React.Fragment>
         ))}
 

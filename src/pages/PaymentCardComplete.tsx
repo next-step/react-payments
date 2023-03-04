@@ -1,13 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '../components/common/Button';
-import { useCardState } from '../context/CardContext';
-import CardPreview from '../components/CardPreview';
+import {
+  useCardListDispatch,
+  useCardListState,
+} from '../context/CardListContext';
 
 const CardRegisterComplete = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const state = useCardState();
+  const nicknameRef = useRef(null);
+  const dispatchCardList = useCardListDispatch();
+  const stateCardList = useCardListState();
+
+  const registerNickname = () => {
+    if (!nicknameRef.current) return;
+    const nickNameCurrent = nicknameRef.current as HTMLInputElement;
+    const currentCardIndex = stateCardList.length - 1;
+    const updatedCardList = stateCardList.map((card, index) => {
+      if (index === currentCardIndex) {
+        return { ...card, nickname: nickNameCurrent.value ?? card.company };
+      } else {
+        return card;
+      }
+    });
+    dispatchCardList(updatedCardList);
+    navigate('/');
+  };
 
   useEffect(() => {
     if (!location?.state?.isComplete) {
@@ -20,16 +39,17 @@ const CardRegisterComplete = () => {
       <div className="flex-center">
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
-      <CardPreview {...state} />
+      {/* <CardPreview {...state} /> */}
       <div className="input-container flex-center w-100">
         <input
           className="input-underline w-75"
           type="text"
           placeholder="카드 별칭 (선택)"
           maxLength={10}
+          ref={nicknameRef}
         />
       </div>
-      <Button text={'확인'} onClick={() => navigate('/')} />
+      <Button text="확인" onClick={registerNickname} />
     </>
   );
 };

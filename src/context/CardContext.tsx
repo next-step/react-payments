@@ -1,4 +1,4 @@
-import React, { Dispatch, useContext, useReducer } from 'react';
+import React, { Dispatch, useContext, useEffect, useReducer } from 'react';
 import { validateDigit, validateExpire, validatePassword } from '../utils/form';
 
 export type DigitType = {
@@ -14,6 +14,8 @@ export type CardStateType = {
   name: string;
   cvc: string;
   passwords: { password1: string; password2: string };
+  company: string;
+  nickname: string;
 };
 
 type Action =
@@ -36,6 +38,14 @@ type Action =
   | {
       type: 'SET_PASSWORD';
       passwords: { password1: string; password2: string };
+    }
+  | {
+      type: 'SET_COMPANY';
+      company: string;
+    }
+  | {
+      type: 'SET_NICKNAME';
+      nickname: string;
     };
 
 type CardDispatchType = Dispatch<Action>;
@@ -46,6 +56,8 @@ const initState: CardStateType = {
   name: '',
   cvc: '',
   passwords: { password1: '', password2: '' },
+  company: '',
+  nickname: '',
 };
 
 const CardStateContext = React.createContext<CardStateType | null>(null);
@@ -86,6 +98,17 @@ const reducer = (state: CardStateType, action: Action): CardStateType => {
           password2: action.passwords.password2,
         },
       };
+    case 'SET_COMPANY':
+      return {
+        ...state,
+        company: action.company,
+      };
+    case 'SET_NICKNAME':
+      return {
+        ...state,
+        nickname: action.nickname,
+      };
+
     default:
       throw new Error('Unhandled action');
   }
