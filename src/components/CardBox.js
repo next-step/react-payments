@@ -16,23 +16,49 @@ function maskingCardExpiration(cardExpiration) {
     .join("");
 }
 
-export default function CardBox({ cardNumber, cardOwnerName, cardExpiration }) {
+export default function CardBox({
+  cardNumber,
+  cardOwnerName,
+  cardExpiration,
+  cardColor,
+  cardCompanyName,
+  isEmpty,
+  cardSize,
+}) {
   return (
     <div className="card-box">
-      <div className="empty-card">
+      <div
+        className={
+          (isEmpty ? "empty" : cardSize) +
+          "-card " +
+          (cardColor ? cardColor : null)
+        }
+      >
         <div className="card-top">
-          <span className="card-text">클린카드</span>
+          <span className={cardSize === "big" ? "card-text__big" : "card-text"}>
+            {cardCompanyName}
+          </span>
         </div>
         <div className="card-middle">
-          <div className="small-card__chip"></div>
+          <div className={cardSize + "-card__chip"}></div>
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">{maskingCardNumber(cardNumber)}</span>
+            <span
+              className={cardSize === "big" ? "card-text__big" : "card-text"}
+            >
+              {maskingCardNumber(cardNumber)}
+            </span>
           </div>
           <div className="card-bottom__info">
-            <span className="card-text">{cardOwnerName}</span>
-            <span className="card-text">
+            <span
+              className={cardSize === "big" ? "card-text__big" : "card-text"}
+            >
+              {cardOwnerName}
+            </span>
+            <span
+              className={cardSize === "big" ? "card-text__big" : "card-text"}
+            >
               {maskingCardExpiration(cardExpiration)}
             </span>
           </div>

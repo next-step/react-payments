@@ -1,4 +1,4 @@
-import { useContext, useReducer, useRef } from "react";
+import { useContext, useReducer, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CardBox from "../components/CardBox";
 
@@ -21,7 +21,6 @@ import {
   CARD_PASSWORD,
 } from "../constants/card";
 
-// TODO : form형태로 변경
 // TODO : 검증을 통과하지못하면 검증함수에서 받아온 메시지를 setState를 통해 리렌더링을 트리거
 function reducer(state, action) {
   switch (action.type) {
@@ -54,6 +53,14 @@ function reducer(state, action) {
         [action.type]: { ...state[action.type], [name]: value },
       };
     }
+    case "cardCompanyName": {
+      const { value } = action.target;
+      return { ...state, [action.type]: value };
+    }
+    case "cardColor": {
+      const { value } = action.target;
+      return { ...state, [action.type]: value };
+    }
     default:
       throw new Error();
   }
@@ -79,6 +86,8 @@ export default function CardRegistrationPage() {
     cardOwnerName: "",
     cardSecurityCode: "",
     cardPassword: { num0: "", num1: "", num2: "", num3: "" },
+    cardColor: "",
+    cardCompanyName: "",
   });
 
   const {
@@ -87,9 +96,12 @@ export default function CardRegistrationPage() {
     cardOwnerName,
     cardSecurityCode,
     cardPassword,
+    cardColor,
+    cardCompanyName,
   } = state;
 
-  const isShowModal = false;
+  const [isShowModal, setIsShowModal] = useState(true);
+
   const isFormFilled =
     cardNumberRefs.current[0]?.value?.length == CARD_NUMBER.MAX_LENGTH &&
     cardNumberRefs.current[1]?.value?.length == CARD_NUMBER.MAX_LENGTH &&
@@ -107,6 +119,16 @@ export default function CardRegistrationPage() {
     // TODO : 중복 검증
   }
 
+  function handleModalClick({ currentTarget }) {
+    const cardColor = currentTarget.children[0]?.classList[1];
+    const cardCompanyName = currentTarget.children[1]?.innerText;
+    setCardInfo({
+      ...cardInfo,
+      ["cardCompanyName"]: cardCompanyName,
+      ["cardColor"]: cardColor,
+    });
+    setIsShowModal(false);
+  }
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -121,6 +143,10 @@ export default function CardRegistrationPage() {
           cardNumber={cardNumber}
           cardExpiration={cardExpiration}
           cardOwnerName={cardOwnerName}
+          cardColor={cardInfo["cardColor"]}
+          cardCompanyName={cardInfo["cardCompanyName"]}
+          isEmpty="true"
+          cardSize="small"
         />
         <CardNumberInput
           cardNumber={cardNumber}
@@ -149,7 +175,7 @@ export default function CardRegistrationPage() {
             }
           }}
           cardNumberRefs={cardNumberRefs}
-        ></CardNumberInput>
+        />
         <CardExpirationInput
           cardExpiration={cardExpiration}
           onChange={(e) => {
@@ -187,7 +213,7 @@ export default function CardRegistrationPage() {
             if (e.target.value.length == 2) e.target.nextSibling?.focus();
           }}
           ExpirationRefs={ExpirationRefs}
-        ></CardExpirationInput>
+        />
         <CardOwnerNameInput
           cardOwnerName={cardOwnerName}
           onChange={(e) => {
@@ -209,10 +235,10 @@ export default function CardRegistrationPage() {
               ...cardInfo,
               ["cardOwnerName"]: OwnerNameRef.current?.value,
             });
-            if (e.target.value.length == 3) SecurityCodeRef.current?.focus();
+            if (e.target.value.length == 30) SecurityCodeRef.current?.focus();
           }}
           OwnerNameRef={OwnerNameRef}
-        ></CardOwnerNameInput>
+        />
         <CardSecurityCodeInput
           cardSecurityCode={cardSecurityCode}
           onChange={(e) => {
@@ -228,7 +254,7 @@ export default function CardRegistrationPage() {
             if (e.target.value.length == 3) PasswordRefs.current[0]?.focus();
           }}
           SecurityCodeRef={SecurityCodeRef}
-        ></CardSecurityCodeInput>
+        />
         <CardPasswordInput
           cardPassword={cardPassword}
           onChange={(e) => {
@@ -262,7 +288,7 @@ export default function CardRegistrationPage() {
           </button>
         </div>
       </form>
-      {isShowModal && <CardCompanyModal />}
+      {isShowModal && <CardCompanyModal handleModalClick={handleModalClick} />}
     </>
   );
 }

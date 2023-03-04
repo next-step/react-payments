@@ -35,6 +35,8 @@ function App() {
     cardSecurityCode: "",
     cardPassword: { num0: "", num1: "", num2: "", num3: "" },
     cardNickName: "",
+    cardCompanyName: "",
+    cardColor: "",
   });
 
   return (
