@@ -3,8 +3,8 @@ import Text from "components/common/Text/Text";
 import { ColorType, CompanyType, CardType } from "types";
 import { ReactEventHandler, useContext } from "react";
 import IconButton from "components/common/IconButton/IconButton";
-import { CardContext } from "context/Card/CardContext";
 import { useNavigate } from "react-router-dom";
+import { PaymentsContext } from "context/Payments";
 
 export type CardProps = {
   size: "small" | "big";
@@ -33,20 +33,20 @@ const Card = ({
   className,
   onClick,
 }: CardProps) => {
-  const cardCtx = useContext(CardContext);
-  const MyCardList = [...cardCtx.state.list].reverse();
-  const selectedCard = MyCardList.find((card: CardType) => card.id === id);
+  const paymentCtx = useContext(PaymentsContext);
+  const myCardList = paymentCtx.cardList;
+  const currentCard = myCardList.find((card: CardType) => card.id === id);
   const navigate = useNavigate();
 
-  const handleRemove = () => {
-    if (!selectedCard) return alert("현재 선택한 카드가 리스트에 존재하지 않습니다");
-    cardCtx.removeCard(selectedCard);
+  const remove = () => {
+    if (!currentCard) return;
+    paymentCtx.removeCard(currentCard);
   };
-  const handleModify = (e) => {
-    if (!selectedCard) return alert("현재 선택한 카드가 리스트에 존재하지 않습니다");
-    cardCtx.removeCard(selectedCard);
-    cardCtx.addCardToStore(selectedCard);
-    navigate("/complete");
+
+  const modify = () => {
+    if (!currentCard) return;
+    localStorage.setItem("id", currentCard.id);
+    navigate("/alias");
   };
 
   return (
@@ -57,8 +57,8 @@ const Card = ({
             {company && <Text fontSize="s" weight="normal" label={company} />}
             {id && (
               <div>
-                <IconButton onClick={handleModify} name="modify" size="1x" color="black" />
-                <IconButton onClick={handleRemove} name="remove" size="1x" color="black" />
+                <IconButton onClick={modify} name="modify" size="1x" color="black" />
+                <IconButton onClick={remove} name="remove" size="1x" color="black" />
               </div>
             )}
           </Top>

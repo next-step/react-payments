@@ -17,8 +17,7 @@ const CardOwnerNameInput = ({ setOwnerName, fontColor }: CardOwnerNameInputProps
   const handleInput = () => {
     const ref = inputRef.current;
     if (ref === null) return;
-    const value = ref.value;
-    const ownerName = changeOwnerName(value);
+    const ownerName = changeOwnerName(ref.value);
     ref.value = ownerName;
     setInputLength(ownerName.length);
     return !ownerName.length

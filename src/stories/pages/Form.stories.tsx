@@ -5,9 +5,9 @@ import { withRouter } from "storybook-addon-react-router-v6";
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
 import MyCardPage from "pages/MyCardListPage/MyCardListPage";
-import CompletedPage from "pages/CompletedPage/CompletedPage";
+import CompletedPage from "pages/AliasPage/AliasPage";
 import FormPage from "pages/FormPage/FormPage";
-import { CardContextProvider } from "context/Card/CardContext";
+
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "Page",

@@ -2,20 +2,22 @@ import { Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 import GlobalStyle from "styles/GlobalStyle";
 import FormPage from "./FormPage/FormPage";
-import CompletedPage from "./CompletedPage/CompletedPage";
+import AliasPage from "./AliasPage/AliasPage";
 import MyCardListPage from "./MyCardListPage/MyCardListPage";
-import { CardContextProvider } from "context/Card/CardContext";
+
+import { PaymentsContextProvider } from "context/Payments";
+
 function App() {
   return (
     <Layout>
-      <CardContextProvider>
+      <PaymentsContextProvider>
         <GlobalStyle />
         <Routes>
           <Route element={<FormPage />} path="/add"></Route>
           <Route element={<MyCardListPage />} path="/"></Route>
-          <Route element={<CompletedPage />} path="/complete"></Route>
+          <Route element={<AliasPage />} path="/alias"></Route>
         </Routes>
-      </CardContextProvider>
+      </PaymentsContextProvider>
     </Layout>
   );
 }

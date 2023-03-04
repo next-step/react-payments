@@ -13,6 +13,7 @@ type CardNumberInputProps = {
 const CardNumberInput = ({ setCardNumber, fontColor }: CardNumberInputProps) => {
   const ref = useRef<HTMLInputElement>(null);
   const isValid = isValidCardNumber(ref.current?.value);
+
   const handleInput = () => {
     const currentRef = ref.current;
     if (currentRef === null) return;

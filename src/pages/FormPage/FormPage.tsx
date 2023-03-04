@@ -3,7 +3,6 @@ import styled from "styled-components";
 import IconButton from "../../components/common/IconButton/IconButton";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { CardContext } from "context/Card/CardContext";
 import useHandleCardFormText from "hooks/useHandleCardFormText";
 import { useState } from "react";
 import { isCardFormValidation } from "utils/InputValidation";
@@ -14,13 +13,15 @@ import CardExpirationDateInput from "components/Form/CardFormInput/CardExpiratio
 import CardOwnerNameInput from "components/Form/CardFormInput/CardOwnerNameInput/CardOwnerNameInput";
 import CardPasswordInput from "components/Form/CardFormInput/CardPasswordInput/CardPasswordInput";
 import CardSecurityInput from "components/Form/CardFormInput/CardSecurityInput/CardSecurityInput";
+import uuid from "react-uuid";
 import Button from "components/common/Button/Button";
 import { ColorType, CompanyType } from "types";
+import { PaymentsContext } from "context/Payments";
 
 const FormPage = () => {
   const navigate = useNavigate();
-  const cardCtx = useContext(CardContext);
   const { state, setState } = useHandleCardFormText();
+  const paymentsCtx = useContext(PaymentsContext);
   const [isOpenModal, setIsOpenModal] = useState(true);
 
   const handleBackButton = () => {
@@ -45,10 +46,11 @@ const FormPage = () => {
       color: currentFormCard.color.text,
       company: currentFormCard.company.text,
       alias: "",
-      id: Date.now().toString(),
+      id: uuid(),
     };
-    cardCtx.addCardToStore(newCard);
-    navigate("/complete");
+    paymentsCtx.addCard(newCard);
+    localStorage.setItem("id", newCard.id);
+    navigate("/alias");
   };
 
   const selectedDot = (e) => {

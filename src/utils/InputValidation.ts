@@ -1,7 +1,6 @@
 import { CardFormType } from "types";
 import { reportError, ValidationError } from "utils/error";
 export const isCardFormValidation = (form: CardFormType): boolean => {
-  console.log(form);
   const isValid =
     form.cardNumbers.isValid &&
     form.color.isValid &&

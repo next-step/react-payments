@@ -3,32 +3,37 @@ import Card from "components/common/Card/Card";
 import Text from "components/common/Text/Text";
 import Input from "components/common/Input/Input";
 import Button from "components/common/Button/Button";
-import { useContext, useRef, useState } from "react";
-import { CardContext } from "context/Card/CardContext";
+import { useRef, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { changeAliasLength } from "../../utils/InputChange";
+import { PaymentsContext } from "context/Payments";
 
-const CompletedPage = () => {
+const AliasPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [inputLength, setInputLength] = useState(0);
-  const cardCtx = useContext(CardContext);
-  const temporaryCard = cardCtx.state.store;
+  const paymentsCtx = useContext(PaymentsContext);
+  const cardList = paymentsCtx.cardList;
+  const currentCard = cardList.find((card) => card.id === localStorage.getItem("id"));
+
+  if (!currentCard) {
+    return <div>존재하지 않는 카드 입니다. </div>;
+  }
+
   const navigate = useNavigate();
 
   const submit = () => {
     const currentInputRef = inputRef.current;
     if (currentInputRef === null) return;
-    const refValue = currentInputRef.value;
-    let alias = !refValue.length ? temporaryCard.company : refValue;
-    // 스토어에 저장된 아이템을 가져와서 새로운 카드를 만든다.
-    const newCard = {
-      ...cardCtx.state.store,
-      id: Date.now().toString(),
-      alias,
+    const aliasValue = currentInputRef.value;
+    let aliasName = !aliasValue.length ? currentCard.company : aliasValue;
+    const aliasCard = {
+      ...currentCard,
+      alias: aliasName,
     };
-    cardCtx.addCard(newCard);
+    paymentsCtx.updateAlias(aliasCard);
     navigate("/");
   };
+
   const handleInput = () => {
     const currentInputRef = inputRef.current;
     if (currentInputRef === null) return;
@@ -39,7 +44,7 @@ const CompletedPage = () => {
   return (
     <Layout>
       <TextWrapper>
-        {!temporaryCard.alias.length ? (
+        {!currentCard.alias.length ? (
           <Text fontSize="lg" weight="bold" label="카드 등록이 완료되었습니다."></Text>
         ) : (
           <Text fontSize="lg" weight="bold" label="카드 별칭 수정"></Text>
@@ -49,15 +54,14 @@ const CompletedPage = () => {
         <Card
           type="primary"
           size="big"
-          color={temporaryCard.color}
-          company={temporaryCard.company}
-          number={temporaryCard.cardNumbers}
-          expireMonth={temporaryCard.expireDate.month}
-          expireYear={temporaryCard.expireDate.year}
-          ownerName={temporaryCard.ownerName}
+          color={currentCard.color}
+          company={currentCard.company}
+          number={currentCard.cardNumbers}
+          expireMonth={currentCard.expireDate.month}
+          expireYear={currentCard.expireDate.year}
+          ownerName={currentCard.ownerName}
         />
       </CardWrapper>
-
       <Box>
         <Input
           type="text"
@@ -67,7 +71,6 @@ const CompletedPage = () => {
           ref={inputRef}
           onChange={handleInput}
         />
-
         <Text fontSize="s" weight="normal" label={`${inputLength}/10`} />
       </Box>
 
@@ -111,4 +114,4 @@ const ButtonWrapper = styled.div`
   margin: 30px;
 `;
 
-export default CompletedPage;
+export default AliasPage;

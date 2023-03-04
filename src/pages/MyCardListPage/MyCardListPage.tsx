@@ -4,13 +4,14 @@ import Card from "components/common/Card/Card";
 
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import { CardContext } from "context/Card/CardContext";
 import { CardType } from "types";
+import { PaymentsContext } from "context/Payments";
 
 const MyCardListPage = () => {
   const navigate = useNavigate();
-  const cardCtx = useContext(CardContext);
-  const MyCardList = [...cardCtx.state.list].reverse();
+  const payMentsCtx = useContext(PaymentsContext);
+
+  const myCardList = [...payMentsCtx.cardList].reverse();
 
   const handleAddCard = () => {
     navigate("/add");
@@ -21,7 +22,7 @@ const MyCardListPage = () => {
       <Title fontSize="2x" weight="bold" label="보유카드" />
       <ScrollContainer>
         <StyledAddCard type="add" size="small" onClick={handleAddCard} />
-        {MyCardList.map((card: CardType) => (
+        {myCardList.map((card: CardType) => (
           <CardLayout key={card.id}>
             <Card
               type="primary"

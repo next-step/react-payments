@@ -2,7 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import { withRouter } from "storybook-addon-react-router-v6";
-import CompletedPage from "pages/CompletedPage/CompletedPage";
+import CompletedPage from "pages/AliasPage/AliasPage";
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "Page",
