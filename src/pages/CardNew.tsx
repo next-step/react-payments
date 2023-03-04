@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import Card from 'src/components/Card/Card';
 import CardPasswordInput from 'src/components/CardPasswordInput/CardPasswordInput';
 import Header from 'src/components/Header/Header';
@@ -9,18 +8,11 @@ import useNewCardForm from 'src/hooks/useNewCardForm';
 const CUSTOMER_NAME_LIMIT_COUNT = 30;
 
 const CardNew = () => {
-  const navigate = useNavigate();
-  const { state, handlers } = useNewCardForm();
-  const goNextPage = () => {
-    navigate('/card-alias', { replace: true });
-  };
+  const { state, handlers, onClickNextPage } = useNewCardForm();
+
   return (
     <>
-      <Header
-        title="카드 추가"
-        hasBackButton
-        onClickBackbutton={() => navigate(-1)}
-      />
+      <Header title="카드 추가" hasBackButton />
       <Card
         title=""
         bgColor=""
@@ -74,7 +66,7 @@ const CardNew = () => {
         }}
       />
       {/* TO DO : Form Validation & Navigate with State */}
-      <TextButton onClick={goNextPage}>다음</TextButton>
+      <TextButton onClick={onClickNextPage}>다음</TextButton>
     </>
   );
 };

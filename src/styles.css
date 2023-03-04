@@ -75,6 +75,7 @@ header {
   font-size: 0.625rem;
   color: #525252;
   height: 1.125rem;
+  text-align: left;
 }
 
 .card-ic-chip {

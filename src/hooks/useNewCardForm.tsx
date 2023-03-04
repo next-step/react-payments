@@ -1,15 +1,28 @@
-/* eslint-disable no-alert */
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { NewCardContext } from 'src/contexts/NewCardContext';
+import { INewCard } from 'src/utils/types';
 
 type InputType = React.ChangeEvent<HTMLInputElement>;
 
 const useNewCardForm = () => {
+  const navigate = useNavigate();
+  const { handleCardInfo } = useContext(NewCardContext);
   const [creditNumber, setCreditNumber] = useState('');
   const [expirationDate, setExpirationDate] = useState('');
   const [customerName, setCustomerName] = useState('');
   const [cvc, setCvc] = useState('');
   const [firstPassword, setFirstPassword] = useState('');
   const [secondPassword, setSecondPassword] = useState('');
+
+  const state: INewCard = {
+    creditNumber,
+    expirationDate,
+    customerName,
+    cvc,
+    firstPassword,
+    secondPassword,
+  };
 
   const handleChangeCreditNumber = (e: InputType) => {
     let targetValue = e.target.value.trim();
@@ -62,13 +75,9 @@ const useNewCardForm = () => {
     setSecondPassword(e.target.value);
   };
 
-  const state = {
-    creditNumber,
-    expirationDate,
-    customerName,
-    cvc,
-    firstPassword,
-    secondPassword,
+  const onClickNextPage = () => {
+    handleCardInfo(state);
+    navigate('/card-alias', { replace: true });
   };
 
   const handlers = {
@@ -83,6 +92,7 @@ const useNewCardForm = () => {
   return {
     state,
     handlers,
+    onClickNextPage,
   };
 };
 
