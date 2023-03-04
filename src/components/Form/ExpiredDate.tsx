@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { ForwardedRef, useRef, useState } from "react";
 import { blockInput, remainOnlyNumber } from "../../utils/format";
 import Input from "../Input/Input";
 import InputBox from "../Input/InputBox";
@@ -39,7 +39,10 @@ const blockInvalidValue = (inputValue: string, type: string) => {
   return inputValue;
 };
 
-function ExpiredDate({ onExpiredDateChange }: ExpiredDateProps) {
+function ExpiredDate(
+  { onExpiredDateChange }: ExpiredDateProps,
+  ref: ForwardedRef<HTMLInputElement | null>
+) {
   const [expiredDate, setExpiredDate] = useState<Date>({ month: "", year: "" });
 
   const itemsRef = useRef<any>([]);
@@ -78,7 +81,7 @@ function ExpiredDate({ onExpiredDateChange }: ExpiredDateProps) {
           maxLength={DATE_MAX_LENGTH}
           onChange={(e) => onChange(e, ExpiredDateType.Month)}
           name={ExpiredDateType.Month}
-          ref={(el: HTMLInputElement) => (itemsRef.current[0] = el)}
+          ref={ref}
         />
         <Input
           placeholder="YY"
@@ -96,4 +99,5 @@ type ExpiredDateProps = {
   onExpiredDateChange: Function;
 };
 
-export default ExpiredDate;
+const forwardedExpiredDate = React.forwardRef(ExpiredDate);
+export default forwardedExpiredDate;
