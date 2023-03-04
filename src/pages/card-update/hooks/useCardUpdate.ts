@@ -1,7 +1,8 @@
 import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { useCardInfo, useCardList } from '@/pages/hooks'
+import { useCardList } from '@/pages/card-list/hooks'
+import { useCardInfo } from '@/pages/hooks'
 
 const useCardUpdate = () => {
   const navigate = useNavigate()

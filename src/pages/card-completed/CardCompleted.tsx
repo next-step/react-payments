@@ -2,7 +2,8 @@ import { useRef } from 'react'
 
 import { BackButton, NavigationTextButton } from '@/components/button'
 import { PageTitle } from '@/components/layouts'
-import { useCardInfo, useCardList } from '@/pages/hooks'
+import { useCardList } from '@/pages/card-list/hooks'
+import { useCardInfo } from '@/pages/hooks'
 
 function CardCompleted() {
   const {
