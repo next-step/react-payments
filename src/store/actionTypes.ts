@@ -22,16 +22,10 @@ type DeleteCard = {
   id?: number;
 };
 
-export type SelectedCardInfo = Exclude<CardInfo, null | undefined> | null;
-export const SET_SELECTED_CARD = "SET_SELECTED_CARD";
-type SetSelectedCard = {
-  type: typeof SET_SELECTED_CARD;
-  selectedCard: SelectedCardInfo;
-};
+
 
 export type ActionType =
   | AddCardInfo
   | AddNickNameCard
   | EditCard
   | DeleteCard
-  | SetSelectedCard;

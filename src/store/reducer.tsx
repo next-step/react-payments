@@ -3,20 +3,17 @@ import {
   ActionType,
   DELETE_CARD,
   UPSERT_CARD_NICK_NAME,
-  SelectedCardInfo,
 } from "./actionTypes";
 import { CardInfo } from "./type";
 
 export interface DefaultValueState {
   cardList: CardInfo[];
   newCard: CardInfo;
-  selectedCard: SelectedCardInfo;
 }
 
 export const defaultValue: DefaultValueState = {
   cardList: [],
   newCard: {} as CardInfo,
-  selectedCard: null,
 };
 
 function PaymentsReducer(
