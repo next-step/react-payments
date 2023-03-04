@@ -1,28 +1,29 @@
 import { useInputFocus, useRefs } from "hooks";
-import { ChangeEvent, useEffect, useState } from "react";
-import { CardNumber } from "store/Provider";
+import { ChangeEvent } from "react";
+import { CardNumber } from "store/type";
 
 const MAX_CARD_NUMBER_LENGTH = 4;
 
 type CardNumbersInputProps = {
+  cardNumbers: CardNumber;
   handleChangeCardNumber: (number: CardNumber) => void;
 };
 
 const CardNumbersInput = ({
+  cardNumbers,
   handleChangeCardNumber,
 }: CardNumbersInputProps) => {
-  const [numbers, setNumbers] = useState<CardNumber>(["", "", "", ""]);
   const numberRefs = useRefs<HTMLInputElement>(MAX_CARD_NUMBER_LENGTH);
 
   useInputFocus({
     refs: numberRefs,
-    deps: numbers,
+    deps: cardNumbers,
     maxLength: MAX_CARD_NUMBER_LENGTH,
   });
 
   const handleChange =
     (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
-      const newCardNumber = [...numbers] as CardNumber;
+      const newCardNumber = [...cardNumbers] as CardNumber;
       const { value } = e.target as HTMLInputElement;
 
       if (Number.isNaN(+value)) {
@@ -31,12 +32,8 @@ const CardNumbersInput = ({
       }
 
       newCardNumber[index] = value;
-      setNumbers(newCardNumber);
+      handleChangeCardNumber(newCardNumber);
     };
-
-  useEffect(() => {
-    handleChangeCardNumber(numbers);
-  }, [numbers, handleChangeCardNumber]);
 
   return (
     <div className="input-container">
@@ -47,32 +44,36 @@ const CardNumbersInput = ({
           className="input-basic"
           type="text"
           maxLength={MAX_CARD_NUMBER_LENGTH}
-          value={numbers[0]}
+          value={cardNumbers[0]}
           onChange={handleChange(0)}
+          required
         />
         <input
           ref={numberRefs[1]}
           className="input-basic"
           type="text"
           maxLength={MAX_CARD_NUMBER_LENGTH}
-          value={numbers[1]}
+          value={cardNumbers[1]}
           onChange={handleChange(1)}
+          required
         />
         <input
           ref={numberRefs[2]}
           className="input-basic"
           type="password"
           maxLength={MAX_CARD_NUMBER_LENGTH}
-          value={numbers[2]}
+          value={cardNumbers[2]}
           onChange={handleChange(2)}
+          required
         />
         <input
           ref={numberRefs[3]}
           className="input-basic"
           type="password"
           maxLength={MAX_CARD_NUMBER_LENGTH}
-          value={numbers[3]}
+          value={cardNumbers[3]}
           onChange={handleChange(3)}
+          required
         />
       </div>
     </div>

@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const useRouter = () => {
   const navigate = useNavigate();
@@ -10,7 +10,7 @@ export const useRouter = () => {
 
   const go = useCallback(
     (path: string) => {
-      navigate({ pathname: path });
+      navigate(path);
     },
     [navigate]
   );

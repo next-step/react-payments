@@ -137,9 +137,22 @@
 
 .card-pass-word__disabled {
   background-color: white !important;
-  color: #06C09E;
+  color: #06c09e;
 }
 
 .hide-under-line {
-  text-decoration: none
+  text-decoration: none;
+}
+
+.grid-template {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.card-nick-name {
+  font-size: 14px;
+  width: 60px;
+  text-align: center;
 }

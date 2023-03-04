@@ -6,3 +6,9 @@
 .button-text {
   margin-right: 10px;
 }
+
+.delete-button {
+  background: none;
+  border: 1px solid;
+  border-radius: 12px;
+}

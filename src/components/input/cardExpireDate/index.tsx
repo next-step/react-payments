@@ -1,23 +1,24 @@
-import { ExpirationDate } from "store/Provider";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent } from "react";
 import { useInputFocus, useRefs } from "hooks";
+import { ExpirationDate } from "store/type";
 
 const MAX_DATE_LENGTH = 2;
 const CURRENT_YEAR = Number(new Date().getFullYear().toString().slice(-2));
 
 type CardExpirationDateInputProps = {
-  handleChangeExpirationDate: (input: ExpirationDate) => void;
+  cardExpiration: ExpirationDate;
+  handleChangeExpirationDate: (name: string, value: string) => void;
 };
 
 const CardExpirationDateInput = ({
+  cardExpiration,
   handleChangeExpirationDate,
 }: CardExpirationDateInputProps) => {
-  const [expiredDate, setExpiredDate] = useState<ExpirationDate>({ month: "", year: "" });
   const dateRefs = useRefs<HTMLInputElement>(MAX_DATE_LENGTH);
 
   useInputFocus({
     refs: dateRefs,
-    deps: [expiredDate.month, expiredDate.year],
+    deps: [cardExpiration.month, cardExpiration.year],
     maxLength: MAX_DATE_LENGTH,
   });
 
@@ -32,7 +33,7 @@ const CardExpirationDateInput = ({
     if (name === "month") {
       if (+value > 12) {
         alert("월은 1이상 12이하 숫자여야 합니다.");
-        expiredDate.month = "";
+        cardExpiration.month = "";
         return;
       }
     }
@@ -40,20 +41,13 @@ const CardExpirationDateInput = ({
     if (name === "year") {
       if (value.length === MAX_DATE_LENGTH && +value < CURRENT_YEAR) {
         alert("년도는 현재년도보다 적을 수 없습니다.");
-        expiredDate.year = "";
+        cardExpiration.year = "";
         return;
       }
     }
 
-    setExpiredDate((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    handleChangeExpirationDate(name, value);
   };
-
-  useEffect(() => {
-    handleChangeExpirationDate(expiredDate);
-  }, [expiredDate, handleChangeExpirationDate]);
 
   return (
     <div className="input-container">
@@ -66,7 +60,7 @@ const CardExpirationDateInput = ({
           placeholder="MM"
           name="month"
           maxLength={MAX_DATE_LENGTH}
-          value={expiredDate.month}
+          value={cardExpiration.month}
           onChange={handleChange}
           required
         />
@@ -78,7 +72,7 @@ const CardExpirationDateInput = ({
           placeholder="YY"
           name="year"
           maxLength={MAX_DATE_LENGTH}
-          value={expiredDate.year}
+          value={cardExpiration.year}
           onChange={handleChange}
           required
         />
