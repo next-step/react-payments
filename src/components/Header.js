@@ -11,7 +11,7 @@ export default function Header({ className, linkToPath, linkText, children }) {
           {children}
         </>
       ) : (
-        <h2 class="page-title">{children}</h2>
+        <div className="page-title">{children}</div>
       )}
     </h2>
   );
