@@ -20,9 +20,9 @@ function useCardChange() {
 
   useEffect(() => {
     if (card.bankId) {
-      setCardInfo((card: CardType) => {
+      setCardInfo((cardInfo: CardType) => {
         return {
-          ...card,
+          ...cardInfo,
           bankId: card.bankId,
         };
       });
@@ -33,17 +33,13 @@ function useCardChange() {
     if (cardInfo.bankId) {
       return getBankColor(cardInfo.bankId);
     }
-
-    return getBankColor(card.bankId);
-  }, [cardInfo.bankId, card.bankId]);
+  }, [cardInfo.bankId]);
 
   const bankName = useMemo(() => {
     if (cardInfo.bankId) {
       return getBankName(cardInfo.bankId);
     }
-
-    return getBankName(card.bankId);
-  }, [cardInfo.bankId, card.bankId]);
+  }, [cardInfo.bankId]);
 
   const cardColor = useMemo(() => {
     if (color) {

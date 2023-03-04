@@ -12,6 +12,7 @@ import useCardChange from "../../hooks/useCardChange";
 import useModalContext from "../../hooks/useModalContext";
 import useCardContext from "../../hooks/useCardContext";
 import { ROUTE } from "../../constants/route";
+import { initCard } from "../../constants/bank";
 
 const INPUT_NAMES = [
   "card-0",
@@ -45,7 +46,7 @@ const checkValid = (eventTarget: any) => {
 
 function Add() {
   const { setIsOpen } = useModalContext();
-  const { setCard, card, bankName } = useCardContext();
+  const { setCard } = useCardContext();
   const {
     onCardNumberChange,
     onCodeChange,
@@ -55,6 +56,7 @@ function Add() {
     cardInfo,
     cardColor,
     formattedCardNumber,
+    bankName,
   } = useCardChange();
 
   const history = useHistory();
@@ -63,13 +65,12 @@ function Add() {
     const isInvalid = checkValid(e.currentTarget);
 
     if (!isInvalid) {
-      if (card.bankId) {
-        const cardData = {
-          ...cardInfo,
-          bankId: card.bankId,
-        };
-        setCard(cardData);
-        history.push(ROUTE.COMPLETE);
+      if (cardInfo.bankId) {
+        setCard(initCard);
+        history.push({
+          pathname: ROUTE.COMPLETE,
+          state: { card: cardInfo },
+        });
         return;
       }
       setIsOpen(true);

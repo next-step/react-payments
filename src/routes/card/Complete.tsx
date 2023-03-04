@@ -2,15 +2,22 @@ import styled from "styled-components";
 import Card from "../../components/Card";
 import Button from "../../components/Form/Button";
 import { Size, CardType } from "../../types/common";
-import { useHistory, useParams } from "react-router-dom";
-import { initCard } from "../../constants/bank";
-import useCardContext from "../../hooks/useCardContext";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import useCardsContext from "../../hooks/useCardsContext";
 import { useState } from "react";
 import { ROUTE } from "../../constants/route";
+import {
+  formatCardNumber,
+  getBankColor,
+  getBankName,
+} from "../../utils/format";
 
 type Params = {
   id: string;
+};
+
+type CardState = {
+  card: CardType;
 };
 
 function CardList() {
@@ -18,8 +25,17 @@ function CardList() {
 
   const id = Number(params?.id);
 
-  const { card, setCard, color, bankName, formattedCardNumber } =
-    useCardContext();
+  const location = useLocation<CardState>();
+  const cardInfo = location.state.card;
+
+  if (!cardInfo) {
+    window.history.back();
+  }
+
+  const formattedCardNumber = formatCardNumber(cardInfo.cardNumber);
+  const color = getBankColor(cardInfo.bankId);
+  const bankName = getBankName(cardInfo.bankId);
+
   const [alias, setAlias] = useState("");
   const { setCards } = useCardsContext();
   const history = useHistory();
@@ -32,7 +48,7 @@ function CardList() {
     const finalAlias = !!alias.trim() ? alias : bankName;
 
     const newCard = {
-      ...card,
+      ...cardInfo,
       cardAlias: finalAlias,
     };
 
@@ -55,7 +71,6 @@ function CardList() {
     e.preventDefault();
 
     updateCard();
-    setCard(initCard);
     history.push(ROUTE.LIST);
   };
 
@@ -67,8 +82,8 @@ function CardList() {
       <form onSubmit={submitHandler}>
         <Card
           cardNumber={formattedCardNumber}
-          expiredDate={card.expiredDate}
-          userName={card.userName}
+          expiredDate={cardInfo.expiredDate}
+          userName={cardInfo.userName}
           color={color}
           bankName={bankName}
           size={Size.Big}
