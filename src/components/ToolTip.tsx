@@ -1,10 +1,17 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 function ToolTip() {
+  const [isShowTooltip, setIsShowTooltip] = useState(false);
+
+  const onClick = () => {
+    setIsShowTooltip((state) => !state);
+  };
+
   return (
     <>
-      <Img src="img/question.png" alt="" />
-      <Bubble>cvc 3자만 넣어 주세요</Bubble>
+      <Img tabIndex={0} src="img/question.png" alt="" onClick={onClick} />
+      {isShowTooltip && <Bubble>cvc 3자만 넣어 주세요</Bubble>}
     </>
   );
 }
