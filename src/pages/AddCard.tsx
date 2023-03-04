@@ -1,12 +1,11 @@
 import { ChangeEvent, RefObject, useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Button, Card } from '../components';
-import { CreditCard, PaymentsContext } from '../context/PaymentsContext';
+import Button from '../components/Button';
+import Card from '../components/Card';
+import { PaymentsContext } from '../context/PaymentsContext';
 import useRefObjects from '../hooks/useRefObjects';
 import { extractNumbers } from '../utils';
-
-const cardNumberInputTypes = ['text', 'text', 'password', 'password'];
 
 const AddCard = () => {
   const { addCard } = useContext(PaymentsContext);
@@ -89,10 +88,9 @@ const AddCard = () => {
     expiry: expirationDateRef.current?.value,
   };
 
-  const addCardToDatabase = () => {
-    const newCard: CreditCard = { ...card, id: new Date().getTime() };
-    addCard(newCard);
-    navigate('/card-added', { state: newCard });
+  const cardAdded = () => {
+    addCard({ ...card, id: new Date() });
+    navigate('/card-added');
   };
 
   return (
@@ -186,7 +184,7 @@ const AddCard = () => {
         />
       </div>
       <div className="button-box">
-        <Button onClick={addCardToDatabase}>다음</Button>
+        <Button onClick={cardAdded}>다음</Button>
       </div>
     </section>
   );
