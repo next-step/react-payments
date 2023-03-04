@@ -2,7 +2,7 @@ import { ChangeEvent, RefObject, useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Card } from '../components';
-import { PaymentsContext } from '../context/PaymentsContext';
+import { CreditCard, PaymentsContext } from '../context/PaymentsContext';
 import useRefObjects from '../hooks/useRefObjects';
 import { extractNumbers } from '../utils';
 
@@ -88,8 +88,9 @@ const AddCard = () => {
   };
 
   const addCardToDatabase = () => {
-    addCard({ ...card, id: new Date() });
-    navigate('/card-added');
+    const newCard: CreditCard = { ...card, id: new Date() };
+    addCard(newCard);
+    navigate('/card-added', { state: newCard });
   };
 
   return (
