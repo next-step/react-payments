@@ -1,41 +1,41 @@
 export default function CardCompanyModal() {
   return (
-    <div class="modal-dimmed">
-      <div class="modal">
-        <div class="flex-center">
-          <div class="modal-item-container">
-            <div class="modal-item-dot"></div>
-            <span class="modal-item-name">클린 카드</span>
+    <div className="modal-dimmed">
+      <div className="modal">
+        <div className="flex-center">
+          <div className="modal-item-container">
+            <div className="modal-item-dot"></div>
+            <span className="modal-item-name">클린 카드</span>
           </div>
-          <div class="modal-item-container">
-            <div class="modal-item-dot"></div>
-            <span class="modal-item-name">클린 카드</span>
+          <div className="modal-item-container">
+            <div className="modal-item-dot"></div>
+            <span className="modal-item-name">클린 카드</span>
           </div>
-          <div class="modal-item-container">
-            <div class="modal-item-dot"></div>
-            <span class="modal-item-name">클린 카드</span>
+          <div className="modal-item-container">
+            <div className="modal-item-dot"></div>
+            <span className="modal-item-name">클린 카드</span>
           </div>
-          <div class="modal-item-container">
-            <div class="modal-item-dot"></div>
-            <span class="modal-item-name">클린 카드</span>
+          <div className="modal-item-container">
+            <div className="modal-item-dot"></div>
+            <span className="modal-item-name">클린 카드</span>
           </div>
         </div>
-        <div class="flex-center">
-          <div class="modal-item-container">
-            <div class="modal-item-dot"></div>
-            <span class="modal-item-name">클린 카드</span>
+        <div className="flex-center">
+          <div className="modal-item-container">
+            <div className="modal-item-dot"></div>
+            <span className="modal-item-name">클린 카드</span>
           </div>
-          <div class="modal-item-container">
-            <div class="modal-item-dot"></div>
-            <span class="modal-item-name">클린 카드</span>
+          <div className="modal-item-container">
+            <div className="modal-item-dot"></div>
+            <span className="modal-item-name">클린 카드</span>
           </div>
-          <div class="modal-item-container">
-            <div class="modal-item-dot"></div>
-            <span class="modal-item-name">클린 카드</span>
+          <div className="modal-item-container">
+            <div className="modal-item-dot"></div>
+            <span className="modal-item-name">클린 카드</span>
           </div>
-          <div class="modal-item-container">
-            <div class="modal-item-dot"></div>
-            <span class="modal-item-name">클린 카드</span>
+          <div className="modal-item-container">
+            <div className="modal-item-dot"></div>
+            <span className="modal-item-name">클린 카드</span>
           </div>
         </div>
       </div>
