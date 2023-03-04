@@ -13,22 +13,20 @@ const InputContainer = ({
       <span className="input-title">{title}</span>
       {hasBoxClass && (
         <div className={`input-box ${inputBoxClass}`}>
-          {inputList.map(
-            ({ id, type, maxLength, minLength, required, placeholder, ...props }, idx) => (
-              <Input
-                id={id}
-                key={idx}
-                type={type}
-                maxLength={maxLength}
-                minLength={minLength}
-                required={required}
-                placeholder={placeholder}
-                onChange={onChange}
-                value={cardInfo[id]}
-                {...props}
-              />
-            )
-          )}
+          {inputList.map(({ id, type, maxLength, minLength, required, placeholder, ...props }) => (
+            <Input
+              id={id}
+              key={id}
+              type={type}
+              maxLength={maxLength}
+              minLength={minLength}
+              required={required}
+              placeholder={placeholder}
+              onChange={onChange}
+              value={cardInfo[id]}
+              {...props}
+            />
+          ))}
         </div>
       )}
       {!hasBoxClass && (
