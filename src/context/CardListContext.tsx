@@ -39,6 +39,12 @@ export const useCardListState = () => {
   const state = useContext(CardListContext);
 
   if (!state) throw new Error('Cannot find CardListProvider');
+  return state;
+};
+
+export const useCardListDispatch = () => {
+  const state = useContext(CardListDispatchContext);
+  if (!state) throw new Error('Cannot find CardListDispatchContext');
 
   return state;
 };

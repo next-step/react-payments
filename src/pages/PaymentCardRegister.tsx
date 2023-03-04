@@ -5,10 +5,21 @@ import Button from '../components/common/Button';
 import { useNavigate } from 'react-router-dom';
 import { useCardState } from '../context/CardContext';
 import CardPreview from '../components/CardPreview';
+import {
+  useCardListDispatch,
+  useCardListState,
+} from '../context/CardListContext';
 
 const PaymentCardRegister = () => {
   const navigate = useNavigate();
   const { digits, cvc, expire, name, passwords } = useCardState();
+  const dispatchCard = useCardListDispatch();
+  const stateCardList = useCardListState();
+
+  const onClickRegisterCard = () => {
+    dispatchCard([...stateCardList, { digits, cvc, expire, name, passwords }]);
+    navigate('/complete', { state: { isComplete: true } });
+  };
 
   return (
     <>
@@ -21,10 +32,7 @@ const PaymentCardRegister = () => {
         passwords={passwords}
       />
       <CardRegisterForm />
-      <Button
-        text={'다음'}
-        onClick={() => navigate('/complete', { state: { isComplete: true } })}
-      />
+      <Button text={'다음'} onClick={onClickRegisterCard} />
     </>
   );
 };

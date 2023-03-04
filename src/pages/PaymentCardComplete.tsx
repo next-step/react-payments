@@ -7,14 +7,13 @@ import CardPreview from '../components/CardPreview';
 const CardRegisterComplete = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const state = useCardState();
 
   useEffect(() => {
     if (!location?.state?.isComplete) {
       navigate('/');
     }
   }, [location]);
-
-  const state = useCardState();
 
   return (
     <>
@@ -26,10 +25,11 @@ const CardRegisterComplete = () => {
         <input
           className="input-underline w-75"
           type="text"
-          placeholder="카드의 별칭을 입력해주세요."
+          placeholder="카드 별칭 (선택)"
+          maxLength={10}
         />
       </div>
-      <Button text={'확인'} />
+      <Button text={'확인'} onClick={() => navigate('/')} />
     </>
   );
 };

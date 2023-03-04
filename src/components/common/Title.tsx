@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 const S = {
   Title: styled.h2`
-    margin-bottom: 60px;
+    /* margin-bottom: 60px; */
     font-weight: 500;
     font-size: 16px;
     line-height: 22px;
