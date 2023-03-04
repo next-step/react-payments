@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Card from '../components/Card';
+import { Card } from '../components';
 import { PaymentsContext } from '../context/PaymentsContext';
 
 const CardAdd = () => {
