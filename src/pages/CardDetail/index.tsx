@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { CardNickNameForm } from '@/components/common';
-import { EmptyCard } from '@/components/domain';
+import { CardNickNameForm, EmptyCard } from '@/components/domain';
 import { ColumnLayout, CreditCard, TopNavigation } from '@/components/UI';
 import { getItem } from '@/storage/storage';
 import { StorageKey } from '@/storage/storageKey';

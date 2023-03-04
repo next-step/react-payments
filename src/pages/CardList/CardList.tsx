@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { ColumnLayout, CreditCard } from '@/components/UI';
-import { Text } from '@/components/UI';
+import { ColumnLayout, CreditCard, Text } from '@/components/UI';
 import { useRouter } from '@/hooks/useRouter';
 import { styled } from '@/lib/stitches.config';
 import { getItem, setItem } from '@/storage/storage';
@@ -41,7 +40,7 @@ const CardList = () => {
 
   return (
     <>
-      <CardListWrapper>
+      <ScrollArea>
         <ColumnLayout css={{ gap: '$3' }}>
           {recentSortedCard.map((card, index) => (
             <CardBox key={index}>
@@ -62,12 +61,12 @@ const CardList = () => {
             </CardBox>
           ))}
         </ColumnLayout>
-      </CardListWrapper>
+      </ScrollArea>
     </>
   );
 };
 
-const CardListWrapper = styled('div', {
+const ScrollArea = styled('div', {
   overflow: 'scroll',
   margin: '0 $12',
   width: '100%',
