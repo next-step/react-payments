@@ -1,6 +1,8 @@
+import styled from "styled-components";
 import { Size } from "../../types/common";
 import Input from "../Input/Input";
 import InputContainer from "../Input/InputContainer";
+import ToolTip from "../ToolTip";
 
 function Code({ onCodeChange }: CodeProps) {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -11,13 +13,16 @@ function Code({ onCodeChange }: CodeProps) {
 
   return (
     <InputContainer label="보안코드(CVC/CVV)">
-      <Input
-        size={Size.Medium}
-        onChange={onChange}
-        name="code"
-        maxLength={3}
-        type="password"
-      ></Input>
+      <Box>
+        <Input
+          size={Size.Medium}
+          onChange={onChange}
+          name="code"
+          maxLength={3}
+          type="password"
+        ></Input>
+        <ToolTip />
+      </Box>
     </InputContainer>
   );
 }
@@ -25,5 +30,7 @@ function Code({ onCodeChange }: CodeProps) {
 type CodeProps = {
   onCodeChange: Function;
 };
+
+const Box = styled.div``;
 
 export default Code;
