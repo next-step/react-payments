@@ -8,6 +8,7 @@ import CardSecurityCodeInput from "../components/CardSecurityCodeInput";
 import DefaultLayout from "../components/common/DefaultLayout";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import CardSubmitButton from "../components/CardSubmitButton";
 
 const BackButton = styled.button`
   position: absolute;
@@ -49,11 +50,7 @@ const CardAddPage: React.FC<CardAddPageProps> = () => {
         <CardOwnerNameInput value="" />
         <CardSecurityCodeInput />
         <CardPasswordFirstTwoDigitsInput />
-        {/* <ButtonBox>
-          <Button>
-            <ButtonText>다음</ButtonText>
-          </Button>
-        </ButtonBox> */}
+        <CardSubmitButton />
       </>
     </DefaultLayout>
   );
