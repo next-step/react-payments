@@ -20,7 +20,7 @@ const CardSave = ({ cardInfo, onSave, onChange }) => {
           onChange={onChange}
         />
       </div>
-      <Button className="button-box registor-button" children="다음" onClick={onSave} />
+      <Button className="button-box button" children="다음" onClick={onSave} />
     </main>
   );
 };

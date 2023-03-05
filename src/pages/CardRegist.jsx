@@ -108,7 +108,7 @@ const CardRegist = ({ cardInfo, onChange, onSubmit, cardCompanyList, setCardInfo
           onChange={onChange}
           hasBoxClass={false}
         />
-        <Button className="button-box registor-button" children="다음"></Button>
+        <Button className="button-box button" children="다음"></Button>
       </form>
       {isShowPopup && (
         <CardSelectPopup cardCompanyList={cardCompanyList} onClick={handlePopupClick} />
