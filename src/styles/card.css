@@ -142,3 +142,25 @@
   vertical-align: middle;
   font-weight: 400;
 }
+
+.card-text__owner {
+  margin: 0 16px;
+
+  font-size: 14px;
+  line-height: 16px;
+  vertical-align: middle;
+  font-weight: 400;
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-text__date {
+  margin: 0 4px;
+
+  font-size: 14px;
+  line-height: 16px;
+  vertical-align: middle;
+  font-weight: 400;
+}
