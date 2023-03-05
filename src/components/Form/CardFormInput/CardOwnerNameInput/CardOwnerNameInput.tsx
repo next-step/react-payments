@@ -8,18 +8,16 @@ import { ColorType, CardFormType, CardFormInputsType } from "types";
 type CardOwnerNameInputProps = {
   fontColor: ColorType;
   setOwnerNameText: React.Dispatch<React.SetStateAction<CardFormType>>;
-  setOwnerNameInput: (ownerName: string) => void;
   refs: CardFormInputsType;
 };
 
-const CardOwnerNameInput = ({ setOwnerNameText, fontColor, setOwnerNameInput, refs }: CardOwnerNameInputProps) => {
+const CardOwnerNameInput = ({ setOwnerNameText, fontColor, refs }: CardOwnerNameInputProps) => {
   const [inputlength, setInputLength] = useState(0);
 
   const handleInput = () => {
     if (!refs.ownerName.ref) return;
     const ownerName = changeOwnerName(refs.ownerName.ref.value);
-
-    setOwnerNameInput(ownerName);
+    refs.ownerName.ref.value = ownerName;
     setInputLength(ownerName.length);
     return !ownerName.length
       ? setOwnerNameText((prev) => ({

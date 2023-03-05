@@ -9,30 +9,21 @@ import { isValidPasswordNumber } from "utils/InputValidation";
 type CardPasswordInputProps = {
   fontColor: ColorType;
   setPasswordText: React.Dispatch<React.SetStateAction<CardFormType>>;
-  setPassWordFirstInput: (password: string) => void;
-  setPasswordEndInput: (password: string) => void;
   isValidFirst: boolean;
   isValidEnd: boolean;
   refs: CardFormInputsType;
 };
 
-const CardPasswordInput = ({
-  refs,
-  fontColor,
-  setPasswordText,
-  isValidFirst,
-  isValidEnd,
-  setPassWordFirstInput,
-  setPasswordEndInput,
-}: CardPasswordInputProps) => {
+const CardPasswordInput = ({ refs, fontColor, setPasswordText, isValidFirst, isValidEnd }: CardPasswordInputProps) => {
   const isValid = isValidFirst && isValidEnd;
 
   const handleInput = () => {
     if (!refs.password.first.ref || !refs.password.end.ref) return;
     const passWordFirst = changePassword(refs.password.first.ref.value);
     const passWordEnd = changePassword(refs.password.end.ref.value);
-    setPassWordFirstInput(passWordFirst);
-    setPasswordEndInput(passWordEnd);
+    refs.password.first.ref.value = passWordFirst;
+    refs.password.end.ref.value = passWordEnd;
+
     setPasswordText((prev) => ({
       ...prev,
       password: {

@@ -1,11 +1,4 @@
-import Text from "components/common/Text/Text";
 import styled from "styled-components";
-import IconButton from "../../components/common/IconButton/IconButton";
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import useHandleCardFormText from "hooks/useHandleCardFormText";
-import { useState } from "react";
-import { isCardFormValidation } from "utils/InputValidation";
 import CompanyList from "components/Form/CompanyList/CompanyList";
 import Card from "components/common/Card/Card";
 import CardNumberInput from "components/Form/CardFormInput/CardNumberInput/CardNumberInput";
@@ -13,79 +6,22 @@ import CardExpirationDateInput from "components/Form/CardFormInput/CardExpiratio
 import CardOwnerNameInput from "components/Form/CardFormInput/CardOwnerNameInput/CardOwnerNameInput";
 import CardPasswordInput from "components/Form/CardFormInput/CardPasswordInput/CardPasswordInput";
 import CardSecurityInput from "components/Form/CardFormInput/CardSecurityInput/CardSecurityInput";
-import uuid from "react-uuid";
+import IconButton from "../../components/common/IconButton/IconButton";
+import Text from "components/common/Text/Text";
 import Button from "components/common/Button/Button";
-import { ColorType, CompanyType } from "types";
-import { PaymentsContext } from "context/Payments";
-import useHandleCardFormInput from "hooks/useHandleCardFormInput";
+import useCardForm from "hooks/useCardForm";
 
 const FormPage = () => {
-  const navigate = useNavigate();
-  const { state, setState } = useHandleCardFormText();
   const {
+    state,
+    setState,
     cardFormInputs,
-    setCardNumbersInput,
-    setExpireDateMonthInput,
-    setExpireDateYearInput,
-    setOwnerNameInput,
-    setCvcInput,
-    setPassWordFirstInput,
-    setPasswordEndInput,
-  } = useHandleCardFormInput();
-
-  const paymentsCtx = useContext(PaymentsContext);
-  const [isOpenModal, setIsOpenModal] = useState(true);
-
-  const handleBackButton = () => {
-    navigate("/");
-  };
-
-  const submit = () => {
-    const currentFormCard = state;
-    if (!isCardFormValidation(currentFormCard)) return;
-    const newCard = {
-      cardNumbers: currentFormCard.cardNumbers.text,
-      expireDate: {
-        month: currentFormCard.expireDate.month.text,
-        year: currentFormCard.expireDate.year.text,
-      },
-      password: {
-        first: currentFormCard.password.first.text,
-        end: currentFormCard.password.end.text,
-      },
-      cvc: currentFormCard.cvc.text,
-      ownerName: currentFormCard.ownerName.text,
-      color: currentFormCard.color.text,
-      company: currentFormCard.company.text,
-      alias: "",
-      id: uuid(),
-    };
-    paymentsCtx.addCard(newCard);
-    localStorage.setItem("id", newCard.id);
-    navigate("/alias");
-  };
-
-  const selectedDot = (e) => {
-    const color = e.currentTarget.children[0].getAttribute("color") as ColorType;
-    const company = e.currentTarget.children[1].textContent as CompanyType;
-
-    setState((prev) => ({
-      ...prev,
-      company: {
-        text: company,
-        isValid: true,
-      },
-      color: {
-        text: color,
-        isValid: true,
-      },
-    }));
-    setIsOpenModal(false);
-  };
-
-  const openModal = () => {
-    setIsOpenModal(true);
-  };
+    isOpenComanyList,
+    setIsOpenCompanyList,
+    handleCompanyList,
+    handleBackButton,
+    handleSubmit,
+  } = useCardForm();
 
   return (
     <Layout>
@@ -94,10 +30,10 @@ const FormPage = () => {
         <Text fontSize="lg" weight="bold" label="카드추가" />
       </Header>
       <div>
-        {isOpenModal ? <CompanyList onSelectedCompany={selectedDot} /> : <></>}
+        {isOpenComanyList ? <CompanyList onSelectedCompany={handleCompanyList} /> : <></>}
         <Card
           type="primary"
-          onClick={openModal}
+          onClick={() => setIsOpenCompanyList(true)}
           color={state.color.text}
           company={state.company.text}
           size="small"
@@ -111,41 +47,30 @@ const FormPage = () => {
           isValid={state.cardNumbers.isValid}
           fontColor={state.color.text}
           refs={cardFormInputs}
-          setCardNumbersInput={setCardNumbersInput}
         />
         <CardExpirationDateInput
           setExprireDateText={setState}
           fontColor={state.color.text}
           refs={cardFormInputs}
-          setExpireDateMonthInput={setExpireDateMonthInput}
-          setExpireDateYearInput={setExpireDateYearInput}
           isValidMonth={state.expireDate.month.isValid}
           isValidYear={state.expireDate.year.isValid}
         />
-        <CardOwnerNameInput
-          setOwnerNameText={setState}
-          fontColor={state.color.text}
-          refs={cardFormInputs}
-          setOwnerNameInput={setOwnerNameInput}
-        />
+        <CardOwnerNameInput setOwnerNameText={setState} fontColor={state.color.text} refs={cardFormInputs} />
         <CardSecurityInput
           fontColor={state.color.text}
           setSecurityCodeText={setState}
-          setCvcInput={setCvcInput}
           isValid={state.cvc.isValid}
           refs={cardFormInputs}
         />
         <CardPasswordInput
           fontColor={state.color.text}
           setPasswordText={setState}
-          setPassWordFirstInput={setPassWordFirstInput}
-          setPasswordEndInput={setPasswordEndInput}
           isValidFirst={state.password.first.isValid}
           isValidEnd={state.password.end.isValid}
           refs={cardFormInputs}
         />
         <ButtonBox>
-          <Button fontSize="m" onClick={submit} label="Next" />
+          <Button fontSize="m" onClick={handleSubmit} label="Next" />
         </ButtonBox>
       </div>
     </Layout>

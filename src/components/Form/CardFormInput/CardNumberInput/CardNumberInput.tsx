@@ -6,23 +6,16 @@ import { ColorType, CardFormType, CardFormInputsType } from "types";
 import { isValidCardNumber } from "utils/InputValidation";
 type CardNumberInputProps = {
   setCardNumberText: React.Dispatch<React.SetStateAction<CardFormType>>;
-  setCardNumbersInput: (cardNumbers: string) => void;
   isValid: boolean;
   fontColor: ColorType;
   refs: CardFormInputsType;
 };
 
-const CardNumberInput = ({
-  isValid,
-  setCardNumberText,
-  fontColor,
-  refs,
-  setCardNumbersInput,
-}: CardNumberInputProps) => {
+const CardNumberInput = ({ isValid, setCardNumberText, fontColor, refs }: CardNumberInputProps) => {
   const handleInput = () => {
     if (!refs.cardNumbers.ref) return;
     const cardNumbers = changeCardNumber(refs.cardNumbers.ref.value);
-    setCardNumbersInput(cardNumbers);
+    refs.cardNumbers.ref.value = cardNumbers;
     setCardNumberText((prev) => ({
       ...prev,
       cardNumbers: {

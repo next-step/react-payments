@@ -10,15 +10,14 @@ type CardPasswordInputProps = {
   fontColor: ColorType;
   setSecurityCodeText: React.Dispatch<React.SetStateAction<CardFormType>>;
   refs: CardFormInputsType;
-  setCvcInput: (cvc: string) => void;
   isValid: boolean;
 };
 
-const CardSecurityInput = ({ fontColor, setSecurityCodeText, setCvcInput, refs, isValid }: CardPasswordInputProps) => {
+const CardSecurityInput = ({ fontColor, setSecurityCodeText, refs, isValid }: CardPasswordInputProps) => {
   const handleInput = () => {
     if (!refs.cvc.ref) return;
     const securityCode = refs.cvc.ref.value;
-    setCvcInput(changeCardSecurityInput(securityCode));
+    refs.cvc.ref.value = changeCardSecurityInput(securityCode);
     setSecurityCodeText((prev) => ({
       ...prev,
       cvc: {
