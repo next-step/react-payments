@@ -10,6 +10,7 @@ const SingleInput = ({ disabled, ...props }: InputProps) => (
     className={`card-password-input ${disabled ? 'disabled' : ''}`}
     type="password"
     maxLength={1}
+    disabled={disabled}
     {...props}
   />
 );

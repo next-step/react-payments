@@ -20,14 +20,8 @@ const CardPasswordInput = ({
 }: CardPasswordInputProps) => (
   <NewCardInputContainer inputLabel={label}>
     <div className="card-password-input-container">
-      <SingleInput
-        value={firstPasswordProps.value}
-        onChange={firstPasswordProps.onChange}
-      />
-      <SingleInput
-        value={secondPasswordProps.value}
-        onChange={secondPasswordProps.onChange}
-      />
+      <SingleInput {...firstPasswordProps} />
+      <SingleInput {...secondPasswordProps} />
       <SingleInput value="*" disabled />
       <SingleInput value="*" disabled />
     </div>

@@ -48,7 +48,6 @@ const CardNew = () => {
         value={state.customerName}
         onChange={handlers.handleChangeCustomerName}
         inputLimitCount={CUSTOMER_NAME_LIMIT_COUNT}
-        inputCount={state.customerName.length}
         maxLength={CUSTOMER_NAME_LIMIT_COUNT}
       />
       <NewCardInput

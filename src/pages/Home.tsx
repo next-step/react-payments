@@ -11,7 +11,7 @@ const Home = () => {
   const { handleCardInfo } = useContext(NewCardContext);
   const cards = JsonToArr<ICardInfo[]>(localStorage.getItem('cards')) || [];
 
-  const onClickCard = (cardInfo: ICardInfo) => {
+  const goToCardAliasWithInfo = (cardInfo: ICardInfo) => {
     handleCardInfo({
       ...cardInfo,
       bankTitle: cardInfo.title,
@@ -22,7 +22,7 @@ const Home = () => {
     navigate('/card-alias');
   };
 
-  const onClickEmptyCard = () => {
+  const goToCardNew = () => {
     navigate('/card-new');
   };
 
@@ -32,8 +32,8 @@ const Home = () => {
       <div className="content">
         <CardList
           cardInfoList={cards}
-          onClickCard={onClickCard}
-          onClickEmptyCard={onClickEmptyCard}
+          onClickCard={goToCardAliasWithInfo}
+          onClickEmptyCard={goToCardNew}
         />
       </div>
     </>

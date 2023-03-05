@@ -1,22 +1,22 @@
 import { PropsWithChildren } from 'react';
 
 interface NewCardInputContainerProps extends PropsWithChildren {
-  widthSize?: 'lg' | 'md' | 'sm';
+  size?: 'lg' | 'md' | 'sm';
   inputLabel: string;
   inputLimitCount?: number;
   inputCount?: number;
 }
 
 const NewCardInputContainer = ({
-  widthSize,
+  size,
   inputLabel,
   inputLimitCount,
   inputCount,
   children,
 }: NewCardInputContainerProps) => {
-  const hasInputCount = !!(inputLimitCount && inputLimitCount > 0);
+  const hasInputCount = typeof inputLimitCount === 'number';
   return (
-    <div className={`input-container ${widthSize}`}>
+    <div className={`input-container ${size}`}>
       <div className="input-label">
         {inputLabel}
         {hasInputCount && (
@@ -31,8 +31,8 @@ const NewCardInputContainer = ({
 };
 
 NewCardInputContainer.defaultProps = {
-  widthSize: 'lg',
-  inputLimitCount: false,
+  size: 'lg',
+  inputLimitCount: 0,
   inputCount: 0,
 };
 

@@ -1,12 +1,12 @@
 import React, { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import NewCardInputContainer from './NewCardInputContainer';
 
-type ButtonProps = DetailedHTMLProps<
+type HTMLInputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
   HTMLInputElement
 >;
 
-interface InputProps extends ButtonProps {
+interface InputProps extends HTMLInputProps {
   label: string;
   widthSize?: 'lg' | 'md' | 'sm';
   textAlign?: 'center' | 'left';
@@ -20,15 +20,15 @@ const NewCardInput = ({
   textAlign,
   inputLimitCount,
   inputCount,
-  ...rest
+  ...inputProps
 }: InputProps) => (
   <NewCardInputContainer
-    widthSize={widthSize}
+    size={widthSize}
     inputLabel={label}
     inputLimitCount={inputLimitCount}
     inputCount={inputCount}
   >
-    <input className="input-form" {...rest} style={{ textAlign }} />
+    <input className="input-form" {...inputProps} style={{ textAlign }} />
   </NewCardInputContainer>
 );
 

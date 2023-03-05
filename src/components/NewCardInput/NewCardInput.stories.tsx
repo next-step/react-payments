@@ -9,17 +9,15 @@ export default {
 } as ComponentMeta<typeof CardInput>;
 
 const Template: ComponentStory<typeof CardInput> = args => {
-  const [inputCount, setInputCount] = useState(0);
   const [value, setValue] = useState('');
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
-    setInputCount(e.target.value.length);
   };
 
   return (
     <CardInput
       {...args}
-      inputCount={inputCount}
+      inputCount={value.length}
       value={value}
       onChange={onChange}
     />
