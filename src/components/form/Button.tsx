@@ -1,7 +1,6 @@
-import { memo, PropsWithChildren, ReactNode } from 'react';
+import { memo, PropsWithChildren } from 'react';
 
 export interface IButton {
-  children?: ReactNode;
   onClick?: () => void;
   className?: string;
   color?: string;
