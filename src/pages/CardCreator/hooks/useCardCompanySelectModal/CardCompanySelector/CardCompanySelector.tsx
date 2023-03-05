@@ -10,6 +10,7 @@ export interface CardCompanySelectorProps {
 
 function CardCompanySelector({ onCardCompanyClick }: CardCompanySelectorProps) {
   // FIXME: Context Api를 이용해 불필요한 onClick Props Drilling을 없애기
+  // TODO: 세세한 컴포넌트로 나누기
   return (
     <Wrapper onClick={(e) => e.stopPropagation()}>
       <CompaniesWrapper>

@@ -20,7 +20,7 @@ interface CardInfoInputElementProps extends OmittedInputAttributeType {
 }
 
 function CardInfoInputElementComponent(props: CardInfoInputElementProps, ref: ForwardedRef<HTMLInputElement | null>) {
-  const { onChangeProps, onBlurProps, type, value } = props;
+  const { onChangeProps, onBlurProps, type, value, ...rest } = props;
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { createInputChangeHandler, createInputBlurHandler } = useInputEventHandler();
@@ -30,7 +30,7 @@ function CardInfoInputElementComponent(props: CardInfoInputElementProps, ref: Fo
 
   return (
     <Input
-      {...props}
+      {...rest}
       type={type ?? 'text'}
       value={value ?? ''}
       className="input-basic text-black"

@@ -51,8 +51,11 @@ interface CardNumberProps {
 }
 
 // CardNumber 4개중의 하나의 input을 담당한다.
+// TODO: 단수와 복수를 확실하게 알 수 있도록 이름 변경 및 폴더구조 정리.
 function CardNumber({ cardNumber, index, needDividerRender }: CardNumberProps) {
   // 이 컴포넌트만의 state를 가지면, 이곳만 렌더가 갱신된다.
+  // TODO: 최상위의 state가 갱신되지 않음, 따라서 Context Api를 적용하고, 변한 부분만 불변으로 지정해,
+  // 사용하는 곳에서만 새로운 객체가 있다는 것을 알아채고 re-render될 수 있도록 적용하기.
   const [cardNumberState, setCardNumberState] = useState(cardNumber);
   const { key, type, value, checkIsValid, checkIsAllowInput } = cardNumberState;
   const isOverFourNumber = checkIsValid(value);

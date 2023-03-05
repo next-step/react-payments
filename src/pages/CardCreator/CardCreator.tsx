@@ -22,7 +22,7 @@ import type {
 import { cardNumbersInit, expireDatesInit, passwordsInit, cardOwnersInit, securityCodesInit } from './CardCreatorInits';
 import { useInputComponent } from './hooks/useInputComponent';
 import { useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';
-import { CardCompany } from './hooks/useCardCompanySelectModal/CardCompanySelector/cardCompanyList';
+import { CardCompanyModel } from './hooks/useCardCompanySelectModal/CardCompanySelector/cardCompanyList';
 
 function CardCreator() {
   const [cardNumbers, createCardNumberSetter, cardNumberInputRef, cardNumberValidator] =
@@ -36,7 +36,7 @@ function CardCreator() {
   const [passwords, createPasswordSetter, passwordInputRef, passwordsValidator] =
     useInputComponent<PasswordInputRef>(passwordsInit);
 
-  const [cardCompany, setCardCompany] = useState<CardCompany | undefined>();
+  const [cardCompany, setCardCompany] = useState<CardCompanyModel | undefined>();
 
   const { CardCompanySelectModal, showModal, hideModal } = useCardCompanySelectModal();
 

@@ -5,6 +5,9 @@ import type { CardStateSetter } from '../utils';
 import { CardInputWrapperPure } from './components/CardInputWrapper';
 import { useErrorMessage } from './hooks/useErrorMessage';
 import { CardInfoInputElement } from './components/CardInfoInputElement';
+import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
+
+const CARD_OWNER_ELEMENT_SEQUENCE_KEY = 'cardOwner';
 
 interface CardOwnerInputProps {
   ownerNames: CardOwnersState;
@@ -22,7 +25,10 @@ function CardOwnerInput(
   const [errorMessage, setErrorMessage] = useErrorMessage({
     inValid: '소유주 이름을 입력해주세요.',
   });
-  const { value, checkIsAllowInput, placeholder } = ownerNames[0];
+  const { value, checkIsAllowInput, placeholder, checkIsValid } = ownerNames[0];
+
+  const { setElement, toTheNextElement } = useSequentialFocusWithElements();
+  toTheNextElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, checkIsValid(value));
 
   useImperativeHandle(ref, () => ({ setErrorMessage }));
 
@@ -35,6 +41,9 @@ function CardOwnerInput(
         className="input-basic"
         value={value ?? ''}
         placeholder={placeholder}
+        ref={(el) => {
+          setElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, el);
+        }}
         onChangeProps={{
           props: { setState: createOwnerNameSetter(0) },
           checkWhetherSetState: (e) => {
