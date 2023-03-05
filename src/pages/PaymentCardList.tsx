@@ -12,6 +12,18 @@ const S = {
   Button: styled.div`
     font-size: 10px;
     cursor: pointer;
+    text-align: center;
+  `,
+  Nickname: styled.div`
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+  `,
+  TitleWrapper: styled.div`
+    margin-bottom: 65px;
+  `,
+  CardWrapper: styled.div`
+    margin-bottom: 25px;
   `,
 };
 
@@ -35,21 +47,23 @@ const PaymentCardList = () => {
 
   return (
     <>
-      <Title text="보유 카드" />
+      <S.TitleWrapper>
+        <Title text="보유 카드" />
+      </S.TitleWrapper>
 
       <div className="flex-column-center">
         {cardList
           .sort((a, b) => b.createdDate - a.createdDate)
           .map((card, index) => (
-            <React.Fragment key={index}>
+            <S.CardWrapper key={index}>
               <CardPreview
                 {...card}
                 onClick={() => updateNickname(index)}
                 isCursor={true}
               />
-              <span className="card-nickname">{card.nickname}</span>
+              <S.Nickname>{card.nickname}</S.Nickname>
               <S.Button onClick={() => deleteCard(index)}>삭제</S.Button>
-            </React.Fragment>
+            </S.CardWrapper>
           ))}
 
         <Link to={'/register'}>
