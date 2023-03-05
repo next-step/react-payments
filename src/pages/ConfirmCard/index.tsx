@@ -15,7 +15,7 @@ const TITLE = {
   UPDATE: '카드별칭을 수정해주세요.',
 };
 
-function ConrimCard() {
+function ConfirmCard() {
   const { navigate, locationState: card } = useRouter<ICard>();
   const { addOrUpdateCard } = useCardActions();
   const [alias, setAlias] = useState(card.alias ?? '');
@@ -57,4 +57,4 @@ function ConrimCard() {
   );
 }
 
-export default ConrimCard;
+export default ConfirmCard;
