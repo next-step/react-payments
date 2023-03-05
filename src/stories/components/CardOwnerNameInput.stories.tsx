@@ -1,5 +1,5 @@
 import { Story } from "@storybook/react";
-import OwnerName, { OwnerNameProps } from "../components/CardOwnerNameInput";
+import OwnerName, { OwnerNameProps } from "../../components/CardOwnerNameInput";
 
 export default {
   title: "Components/OwnerName",

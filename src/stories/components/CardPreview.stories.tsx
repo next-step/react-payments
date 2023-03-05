@@ -1,5 +1,5 @@
 import { Story } from "@storybook/react";
-import CardPreview, { CardPreviewProps } from "../components/CardPreview";
+import CardPreview, { CardPreviewProps } from "../../components/CardPreview";
 
 export default {
   title: "Components/CardPreview",

@@ -2,7 +2,7 @@ import React from "react";
 import { Story, Meta } from "@storybook/react/types-6-0";
 import CardNumberInput, {
   CardNumberInputProps,
-} from "../components/CardNumberInput";
+} from "../../components/CardNumberInput";
 
 export default {
   title: "Components/CardNumberInput",

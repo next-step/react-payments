@@ -1,5 +1,5 @@
 import { Story } from "@storybook/react";
-import Cvc from "../components/CardSecurityCodeInput";
+import Cvc from "../../components/CardSecurityCodeInput";
 
 export default {
   title: "Components/Cvc",
