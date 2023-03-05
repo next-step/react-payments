@@ -16,11 +16,15 @@ import {
   CardName,
 } from './Card.style';
 import { CardField } from '@/types';
-import { CARD_COMPANIES } from '@/constants';
+import { Colors } from '@/styles/colors';
 
 type CardProps = {
   size: 'small' | 'big';
-  card: Omit<CardField, 'cardPassword' | 'cvc'>;
+
+  card: Omit<CardField, 'cardPassword' | 'cvc' | 'cardCompany'> & {
+    cardName: string;
+    cardColor: Colors;
+  };
 };
 
 const Card = ({ size, card }: CardProps) => {
@@ -29,11 +33,9 @@ const Card = ({ size, card }: CardProps) => {
     ownerName,
     expirationMonth,
     expirationYear,
-    cardCompany,
+    cardColor,
+    cardName,
   } = card;
-
-  const cardName = cardCompany ? CARD_COMPANIES[cardCompany].name : '';
-  const cardColor = cardCompany ? CARD_COMPANIES[cardCompany].color : 'gray1';
 
   return (
     <CardContainer cardColor={cardColor} size={size}>

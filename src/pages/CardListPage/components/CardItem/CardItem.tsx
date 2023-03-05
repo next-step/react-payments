@@ -1,4 +1,4 @@
-import { Card } from '@/components';
+import { CompanyCard } from '@/components';
 import { ROUTE } from '@/constants';
 import { CARD_LIST_ACTION, useCardListDispatch } from '@/store';
 import { CardInfo } from '@/types';
@@ -21,7 +21,7 @@ const CardItem = ({ card }: { card: CardInfo }) => {
   return (
     <StyledCardItem>
       <button onClick={handleClick}>
-        <Card card={card} size="small" />
+        <CompanyCard card={card} size="small" />
       </button>
       <CardItemBottom>
         <Nickname>{card.cardNickname}</Nickname>

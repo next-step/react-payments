@@ -1,4 +1,4 @@
-import { Card } from '@/components/Card';
+import { CompanyCard } from '@/components/Card';
 import styled from '@emotion/styled';
 import React, { useCallback, useMemo, useState } from 'react';
 import { useCardFieldContext } from '../CardFieldContext';
@@ -38,7 +38,7 @@ const PreviewCard = () => {
 
   return (
     <PreviewCardContainer onClick={onOpen}>
-      <Card size="big" card={card} />
+      <CompanyCard size="big" card={card} />
       {isModalOpen && (
         <BottomModal isOpen={isModalOpen} onClose={onClose}>
           <CardCompanySelectFormModal selectedCardCompany={cardCompany} />

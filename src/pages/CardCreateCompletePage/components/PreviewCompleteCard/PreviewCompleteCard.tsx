@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from '@/components';
+import { CompanyCard } from '@/components';
 import useCard from '@/store/hooks/useCard';
 import styled from '@emotion/styled';
 
@@ -13,7 +13,7 @@ const PreviewCompleteCard = ({ title, cardId }: PreviewCompleteCardProps) => {
   return (
     <section>
       <PreviewTitle>{title}</PreviewTitle>
-      <Card card={card} size="big" />
+      <CompanyCard card={card} size="big" />
     </section>
   );
 };
