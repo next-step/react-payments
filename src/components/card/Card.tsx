@@ -1,41 +1,12 @@
-import { getConvertedStringsByStars } from '@/utils'
+import { PropsWithChildren } from 'react'
 
-interface CardProps {
-  cardNumbers: { first: string; second: string; third: string; fourth: string }
-  owner: string
-  expiredYear: string
-  expiredMonth: string
-}
+import { CardBox } from '@/components/card'
 
-function Card({ cardNumbers, owner, expiredYear, expiredMonth }: CardProps) {
-  const { first, second, third, fourth } = cardNumbers
-
+function Card({ children }: PropsWithChildren) {
   return (
-    <div className="card-box">
-      <div className="empty-card">
-        <div className="card-top" />
-        <div className="card-middle">
-          <div className="small-card__chip" />
-          <div className="card-number">
-            <span>
-              {`${first} 
-                ${second} 
-                ${getConvertedStringsByStars(third)} 
-                ${getConvertedStringsByStars(fourth)}`}
-            </span>
-          </div>
-        </div>
-        <div className="card-bottom">
-          <div className="card-bottom__info">
-            <span className="card-text">{owner || 'Name'}</span>
-            <span className="card-text">
-              {`${expiredMonth || 'MM'} 
-              / ${expiredYear || 'YY'}`}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <CardBox>
+      <div className="empty-card">{children}</div>
+    </CardBox>
   )
 }
 

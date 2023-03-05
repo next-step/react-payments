@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom'
 
+import { Card, SmallCard } from '@/components/card'
 import { PageTitle } from '@/components/layouts'
 import { useCardList } from '@/pages/card-list/hooks'
 
-/**
- * Todo: 카드 종류 추가하고 나서 카드 컴포넌트 분리하기
- */
 function CardList() {
   const { cardList, onClickCard } = useCardList()
 
@@ -26,33 +24,23 @@ function CardList() {
           } = card
           return (
             <div key={card.nickname} onClick={() => onClickCard(card)}>
-              <div className="card-box">
-                <div className="small-card">
-                  <div className="card-top">
-                    <span className="card-text">{name}</span>
-                  </div>
-                  <div className="card-middle">
-                    <div className="small-card__chip" />
-                  </div>
-                  <div className="card-bottom">
-                    <div className="card-bottom__number">
-                      <span className="card-text">{`${first} - ${second} - ${third} - ${fourth}`}</span>
-                    </div>
-                    <div className="card-bottom__info">
-                      <span className="card-text">{owner}</span>
-                      <span className="card-text">{`${expiredMonth} / ${expiredYear}`}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <SmallCard
+                cardName={name}
+                cardNumbers={`${first} - ${second} - ${third} - ${fourth}`}
+                cardOwner={owner}
+                cardExpiredDate={`${expiredMonth} / ${expiredYear}`}
+              />
               <span className="card-nickname">{nickname}</span>
             </div>
           )
         })}
         <Link to="/card-add" style={{ textDecoration: 'none' }}>
-          <div className="card-box">
+          <Card>
+            <span>+</span>
+          </Card>
+          {/* <div className="card-box">
             <div className="empty-card">+</div>
-          </div>
+          </div> */}
         </Link>
       </div>
     </div>

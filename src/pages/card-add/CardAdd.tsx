@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 
 import { BackButton, NavigationTextButton } from '@/components/button'
-import { Card } from '@/components/card'
+import { Card, BasicCardPart } from '@/components/card'
 import { PageTitle } from '@/components/layouts'
 import { CardForm } from '@/pages/card-add/card-form'
 import { useCardInfo } from '@/pages/hooks'
@@ -28,10 +28,23 @@ function CardAdd() {
     }
   }
 
+  const {
+    cardNumbers: { first, second, third, fourth },
+    owner,
+    expiredMonth,
+    expiredYear,
+  } = cardInfo
+
   return (
     <div className="app">
       <PageTitle title="카드 추가" buttonElement={<BackButton />} />
-      <Card {...cardInfo} />
+      <Card>
+        <BasicCardPart
+          cardNumbers={`${first} - ${second} - ${third} - ${fourth}`}
+          cardOwner={owner}
+          cardExpiredDate={`${expiredMonth} / ${expiredYear}`}
+        />
+      </Card>
       <CardForm>
         <CardForm.CardNumbers numbers={cardInfo.cardNumbers} handleChange={handleNumber} />
         <CardForm.CardExpiredDate

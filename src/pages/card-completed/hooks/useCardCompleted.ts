@@ -34,6 +34,7 @@ const useCardCompleted = () => {
   const cardNumbers = `${first} - ${second} - ${getConvertedStringsByStars(third)} - ${getConvertedStringsByStars(
     fourth,
   )}`
+  const cardName = name
   const cardOwner = owner
   const cardExpiredDate = `${expiredMonth} / ${expiredYear}`
   const cardNickname = nickname
@@ -44,6 +45,7 @@ const useCardCompleted = () => {
     cardOwner,
     cardExpiredDate,
     cardNickname,
+    cardName,
     handlePreNavigation,
   }
 }
