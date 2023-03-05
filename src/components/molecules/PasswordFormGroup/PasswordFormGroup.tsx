@@ -31,22 +31,16 @@ const PasswordFormGroup: React.FC<PasswordFormGroupProps> = ({ onChange }) => {
         <Input
           key='password0'
           type='password'
-          width='15%'
-          isRequire
           onChange={(e: ChangeEvent) => onConvertValue(e, 0)}
           name='password'
           value={password[0]}
-          maxLength={1}
         />
         <Input
           key='password1'
           type='password'
-          width='15%'
-          isRequire
           onChange={(e: ChangeEvent) => onConvertValue(e, 1)}
           name='password'
           value={password[1]}
-          maxLength={1}
         />
         <span>⦁</span>
         <span>⦁</span>
