@@ -1,7 +1,7 @@
 import {
   Card,
   CardNumberContainer,
-  ExpiredDateContainer,
+  CardExpiredDateContainer,
   CardOwnerContainer,
   CardPasswordContainer,
   CardSecretCodeContainer,
@@ -47,7 +47,7 @@ function AddingCard() {
       </div>
       <form onSubmit={handleSubmit}>
         <CardNumberContainer numbers={numbers} handleChangeNumbers={handleChangeNumbers} />
-        <ExpiredDateContainer
+        <CardExpiredDateContainer
           expiredDate={expiredDate}
           handleChangeExpiredDate={handleChangeExpiredDate}
         />
