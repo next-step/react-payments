@@ -11,6 +11,7 @@ export const isCardFormValidation = (form: CardFormType): boolean => {
     form.ownerName.isValid &&
     form.password.first.isValid &&
     form.password.end.isValid;
+  // Todo: 고차함수적용
 
   try {
     if (!isValid) throw new ValidationError("입력하지 않은 양식을 확인하시오 !");

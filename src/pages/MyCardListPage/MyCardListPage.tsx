@@ -1,11 +1,11 @@
-import Text from "components/common/Text/Text";
-import styled from "styled-components";
-import Card from "components/common/Card/Card";
+import Text from 'components/common/Text/Text';
+import styled from 'styled-components';
+import Card from 'components/common/Card/Card';
 
-import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { CardType } from "types";
-import { PaymentsContext } from "context/Payments";
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { CardType } from 'types';
+import { PaymentsContext } from 'context/Payments';
 
 const MyCardListPage = () => {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const MyCardListPage = () => {
   const myCardList = [...payMentsCtx.cardList].reverse();
 
   const handleAddCard = () => {
-    navigate("/add");
+    navigate('/add');
   };
 
   return (
