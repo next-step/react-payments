@@ -1,8 +1,9 @@
-import { ChangeEvent } from 'react'
-
+type HandleOwnerProps = {
+  value: string
+}
 interface CardOwnerProps {
   owner: string
-  handleChange(event: ChangeEvent<HTMLInputElement>): void
+  handleChange({ value }: HandleOwnerProps): void
 }
 
 const CardOwner = ({ owner, handleChange }: CardOwnerProps) => {
@@ -17,7 +18,7 @@ const CardOwner = ({ owner, handleChange }: CardOwnerProps) => {
         className="input-basic"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         value={owner}
-        onChange={handleChange}
+        onChange={(event) => handleChange({ value: event.target.value })}
       />
     </div>
   )

@@ -1,13 +1,13 @@
 import { RefObject } from 'react'
 interface CardAliasInputProps {
-  ref: RefObject<HTMLInputElement>
+  inputRef: RefObject<HTMLInputElement>
   defaultValue: string
 }
 
-const CardAliasInput = ({ ref, defaultValue }: CardAliasInputProps) => {
+const CardAliasInput = ({ inputRef, defaultValue }: CardAliasInputProps) => {
   return (
     <input
-      ref={ref}
+      ref={inputRef}
       defaultValue={defaultValue}
       className="input-underline w-75"
       type="text"

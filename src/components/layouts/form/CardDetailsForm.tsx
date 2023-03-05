@@ -1,8 +1,11 @@
 import { PropsWithChildren } from 'react'
 
-import { CardAliasInput, BigCard, PageTitle } from '@/components'
 import { NavigationTextButton } from '@/components/button'
+import { BigCard } from '@/components/card'
+import { CardAliasInput } from '@/components/input'
 import { getCardDetailsFormSubElement } from '@/domain'
+
+import { PageTitle } from '../title'
 
 const CardDetailsForm = ({ children }: PropsWithChildren) => {
   const bigCard = getCardDetailsFormSubElement(children, BigCard)

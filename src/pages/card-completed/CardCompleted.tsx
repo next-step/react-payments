@@ -1,4 +1,5 @@
-import { BackButton, CardDetailsForm } from '@/components'
+import { BackButton } from '@/components/button'
+import { CardDetailsForm } from '@/components/layouts'
 import { useCardCompleted } from '@/pages/card-completed/hooks'
 
 function CardCompleted() {
@@ -18,7 +19,7 @@ function CardCompleted() {
         cardOwner={cardOwner}
         cardExpiredDate={cardExpiredDate}
       />
-      <CardDetailsForm.CardAliasInput ref={nicknameRef} defaultValue={cardNickname} />
+      <CardDetailsForm.CardAliasInput inputRef={nicknameRef} defaultValue={cardNickname} />
       <CardDetailsForm.NavigationTextButton
         additionalClassNames="mt-50"
         preNavigation={handlePreNavigation}

@@ -1,7 +1,11 @@
-import { useRef, ChangeEvent } from 'react'
+import { useRef } from 'react'
 
 import { useSequentialInputFocus } from '@/pages/hooks'
 
+interface HandleChangeProps {
+  value: string
+  order: 'first' | 'second' | 'third' | 'fourth'
+}
 interface CardNumbersProps {
   numbers: {
     first: string
@@ -9,7 +13,7 @@ interface CardNumbersProps {
     third: string
     fourth: string
   }
-  handleChange(event: ChangeEvent<HTMLInputElement>): void
+  handleChange({ value, order }: HandleChangeProps): void
 }
 
 // Todo: Props로 State, setState가 결합되는걸 약하게 할 수 없을까?
@@ -35,36 +39,32 @@ const CardNumbers = ({ numbers, handleChange }: CardNumbersProps) => {
           ref={firstRef}
           className="input-basic"
           type="text"
-          data-name="first"
           value={numbers.first}
-          onChange={handleChange}
+          onChange={(event) => handleChange({ value: event.target.value, order: 'first' })}
         />
         {first.length === 4 && <span>-</span>}
         <input
           ref={secondRef}
           className="input-basic"
           type="text"
-          data-name="second"
           value={numbers.second}
-          onChange={handleChange}
+          onChange={(event) => handleChange({ value: event.target.value, order: 'second' })}
         />
         {second.length === 4 && <span>-</span>}
         <input
           ref={thirdRef}
           className="input-basic"
           type="password"
-          data-name="third"
           value={numbers.third}
-          onChange={handleChange}
+          onChange={(event) => handleChange({ value: event.target.value, order: 'third' })}
         />
         {third.length === 4 && <span>-</span>}
         <input
           ref={fourthRef}
           className="input-basic"
           type="password"
-          data-name="fourth"
           value={numbers.fourth}
-          onChange={handleChange}
+          onChange={(event) => handleChange({ value: event.target.value, order: 'fourth' })}
         />
       </div>
     </div>

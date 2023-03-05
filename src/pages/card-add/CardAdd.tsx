@@ -5,6 +5,7 @@ import { Card, BasicCardPart } from '@/components/card'
 import { PageTitle } from '@/components/layouts'
 import { CardForm } from '@/pages/card-add/card-form'
 import { useCardInfo } from '@/pages/hooks'
+import { getConvertedStringsByStars } from '@/utils'
 
 function CardAdd() {
   const { cardInfo, handleNumber, handleExpiredDate, handleOwner, handlePassword, handleSecurityCode } = useCardInfo()
@@ -40,7 +41,9 @@ function CardAdd() {
       <PageTitle title="카드 추가" buttonElement={<BackButton />} />
       <Card>
         <BasicCardPart
-          cardNumbers={`${first} - ${second} - ${third} - ${fourth}`}
+          cardNumbers={`${first} - ${second} - ${getConvertedStringsByStars(third)} - ${getConvertedStringsByStars(
+            fourth,
+          )}`}
           cardOwner={owner}
           cardExpiredDate={`${expiredMonth} / ${expiredYear}`}
         />

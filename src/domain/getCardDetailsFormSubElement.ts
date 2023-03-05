@@ -1,6 +1,9 @@
 import { ReactNode, Children, isValidElement } from 'react'
 
-import { CardAliasInput, NavigationTextButton, BigCard, PageTitle } from '@/components'
+import { NavigationTextButton } from '@/components/button'
+import { BigCard } from '@/components/card'
+import { CardAliasInput } from '@/components/input'
+import { PageTitle } from '@/components/layouts'
 
 type CardSubElementType = typeof PageTitle | typeof BigCard | typeof NavigationTextButton | typeof CardAliasInput
 

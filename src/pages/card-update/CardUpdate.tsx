@@ -1,4 +1,5 @@
-import { CardDetailsForm, BackButton } from '@/components'
+import { BackButton } from '@/components/button'
+import { CardDetailsForm } from '@/components/layouts'
 import { useCardUpdate } from '@/pages/card-update/hooks'
 
 function CardUpdate() {
@@ -27,7 +28,7 @@ function CardUpdate() {
         cardOwner={cardOwner}
         cardExpiredDate={cardExpiredDate}
       />
-      <CardDetailsForm.CardAliasInput ref={nicknameRef} defaultValue={cardNickname} />
+      <CardDetailsForm.CardAliasInput inputRef={nicknameRef} defaultValue={cardNickname} />
       <CardDetailsForm.NavigationTextButton
         additionalClassNames="mt-50"
         preNavigation={handlePreNavigation}

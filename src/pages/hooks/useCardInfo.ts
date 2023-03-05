@@ -1,70 +1,42 @@
-import { ChangeEvent, useContext } from 'react'
+import { useContext } from 'react'
 
 import { CardStateContext, CardDispatchContext } from '@/contexts/card'
 import { CardInfomation } from '@/domain'
 import { isNumber } from '@/utils'
 
+interface HandleNumberProps {
+  value: string
+  order: 'first' | 'second' | 'third' | 'fourth'
+}
+
+interface HandleExpiredDateProps {
+  value: string
+  yymm: 'YY' | 'MM'
+}
+
+interface HandleOwnerProps {
+  value: string
+}
+
 const useCardInfo = () => {
   const cardInfo = useContext(CardStateContext)
   const cardDispatch = useContext(CardDispatchContext)
 
-  const handleNumber = (event: ChangeEvent<HTMLInputElement>) => {
-    const {
-      dataset: { name },
-      value,
-    } = event.target
+  const handleNumber = ({ value, order }: HandleNumberProps) => {
     if (!isNumber(value)) return
-    switch (name) {
-      case 'first':
-        if (value.length > 4) return
-        cardDispatch({
-          type: 'SET_CARD_NUMBERS',
-          payload: {
-            ...cardInfo.cardNumbers,
-            first: value,
-          },
-        })
-        break
-      case 'second':
-        if (value.length > 4) return
-        cardDispatch({
-          type: 'SET_CARD_NUMBERS',
-          payload: {
-            ...cardInfo.cardNumbers,
-            second: value,
-          },
-        })
-        break
-      case 'third':
-        if (value.length > 4) return
-        cardDispatch({
-          type: 'SET_CARD_NUMBERS',
-          payload: {
-            ...cardInfo.cardNumbers,
-            third: value,
-          },
-        })
-        break
-      case 'fourth':
-        if (value.length > 4) return
-        cardDispatch({
-          type: 'SET_CARD_NUMBERS',
-          payload: {
-            ...cardInfo.cardNumbers,
-            fourth: value,
-          },
-        })
-        break
-    }
+    if (value.length > 4) return
+    cardDispatch({
+      type: 'SET_CARD_NUMBERS',
+      payload: {
+        ...cardInfo.cardNumbers,
+        [order]: value,
+      },
+    })
   }
 
-  const handleExpiredDate = (event: ChangeEvent<HTMLInputElement>) => {
-    const {
-      dataset: { name },
-      value,
-    } = event.target
+  const handleExpiredDate = ({ value, yymm }: HandleExpiredDateProps) => {
     if (!isNumber(value)) return
-    switch (name) {
+    switch (yymm) {
       case 'YY':
         if (value.length > 2) return
         cardDispatch({
@@ -86,12 +58,12 @@ const useCardInfo = () => {
     }
   }
 
-  const handleOwner = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value.length > 30) {
+  const handleOwner = ({ value }: HandleOwnerProps) => {
+    if (value.length > 30) {
       alert('카드 소유자 이름은 30자리까지 입력할 수 있습니다.')
       return
     }
-    cardDispatch({ type: 'SET_OWNER', payload: event.target.value })
+    cardDispatch({ type: 'SET_OWNER', payload: value })
   }
 
   const handleSecurityCode = (value: string) => {

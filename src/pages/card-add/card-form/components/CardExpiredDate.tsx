@@ -1,11 +1,15 @@
-import { useRef, ChangeEvent } from 'react'
+import { useRef } from 'react'
 
 import { useSequentialInputFocus } from '@/pages/hooks'
 
+type HandleExpiredDateProps = {
+  value: string
+  yymm: 'YY' | 'MM'
+}
 interface CardExpiredDateProps {
   expiredYear: string
   expiredMonth: string
-  handleChange(event: ChangeEvent<HTMLInputElement>): void
+  handleChange({ value, yymm }: HandleExpiredDateProps): void
 }
 
 const CardExpiredDate = ({ expiredYear, expiredMonth, handleChange }: CardExpiredDateProps) => {
@@ -24,9 +28,8 @@ const CardExpiredDate = ({ expiredYear, expiredMonth, handleChange }: CardExpire
           className="input-basic"
           type="text"
           placeholder="MM"
-          data-name="MM"
           value={expiredMonth}
-          onChange={handleChange}
+          onChange={(event) => handleChange({ value: event.target.value, yymm: 'MM' })}
         />
         {(expiredYear.length === 2 || expiredMonth.length === 2) && <span>/</span>}
         <input
@@ -34,9 +37,8 @@ const CardExpiredDate = ({ expiredYear, expiredMonth, handleChange }: CardExpire
           className="input-basic"
           type="text"
           placeholder="YY"
-          data-name="YY"
           value={expiredYear}
-          onChange={handleChange}
+          onChange={(event) => handleChange({ value: event.target.value, yymm: 'YY' })}
         />
       </div>
     </div>
