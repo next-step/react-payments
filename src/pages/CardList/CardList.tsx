@@ -41,7 +41,7 @@ const CardList = () => {
 
   return (
     <ScrollArea>
-      <Layout variant="column" gap="5">
+      <Flex direction="column" align="center" gap="5">
         {recentSortedCard.map((card, index) => (
           <Box
             key={index}
@@ -60,7 +60,7 @@ const CardList = () => {
             </Flex>
           </Box>
         ))}
-      </Layout>
+      </Flex>
     </ScrollArea>
   );
 };
