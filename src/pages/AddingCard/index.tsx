@@ -16,7 +16,7 @@ import { PATHS } from 'constants/router';
 import type { ICardWithoutId } from 'types/card';
 
 function AddingCard() {
-  const { navigate, goBack } = useRouter();
+  const { go, goBack } = useRouter();
   const { numbers, handleChangeNumbers } = useNumbers();
   const { expiredDate, handleChangeExpiredDate } = useExpiredDate();
   const { owner, handleChangeOwner } = useOwner();
@@ -32,7 +32,7 @@ function AddingCard() {
       company,
     };
 
-    navigate(PATHS.CONFIRM, { state: navigateState });
+    go(PATHS.CONFIRM, { state: navigateState });
   };
 
   return (

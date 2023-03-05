@@ -16,7 +16,7 @@ const TITLE = {
 };
 
 function ConfirmCard() {
-  const { navigate, locationState: card } = useRouter<ICard | ICardWithoutId>();
+  const { replace, locationState: card } = useRouter<ICard | ICardWithoutId>();
   const { addCard, updateCard } = useCardActions();
   const [alias, setAlias] = useState(card.alias ?? '');
   const title = useMemo(() => (card.alias ? TITLE.UPDATE : TITLE.ADD), [card.alias]);
@@ -35,7 +35,7 @@ function ConfirmCard() {
       addCard(newCard);
     }
 
-    navigate(PATHS.HOME, { replace: true });
+    replace(PATHS.HOME);
   };
 
   return (
