@@ -22,7 +22,7 @@ function HoldingCard({ card }: HodingCardProps) {
     const isCanDeleted = window.confirm(CONFIRM_MESSAGE);
 
     if (isCanDeleted) {
-      deleteCard(card);
+      deleteCard(card.id);
     }
   };
 

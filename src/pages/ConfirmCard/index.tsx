@@ -8,7 +8,7 @@ import { useCardActions } from 'contexts/CardContextProvider/hooks';
 
 import { PATHS } from 'constants/router';
 import { MAX_LENGTH } from 'constants/card';
-import type { ICard } from 'types/card';
+import type { ICard, ICardWithoutId } from 'types/card';
 
 const TITLE = {
   ADD: '카드등록이 완료되었습니다.',
@@ -16,8 +16,8 @@ const TITLE = {
 };
 
 function ConfirmCard() {
-  const { navigate, locationState: card } = useRouter<ICard>();
-  const { addOrUpdateCard } = useCardActions();
+  const { navigate, locationState: card } = useRouter<ICard | ICardWithoutId>();
+  const { addCard, updateCard } = useCardActions();
   const [alias, setAlias] = useState(card.alias ?? '');
   const title = useMemo(() => (card.alias ? TITLE.UPDATE : TITLE.ADD), [card.alias]);
   const newAlias = useMemo(() => (alias === '' ? card.company : alias), [alias, card.company]);
@@ -27,7 +27,13 @@ function ConfirmCard() {
   };
 
   const handleClickNextButton = () => {
-    addOrUpdateCard({ ...card, alias: newAlias });
+    const newCard = { ...card, alias: newAlias };
+
+    if ('id' in newCard) {
+      updateCard(newCard);
+    } else {
+      addCard(newCard);
+    }
 
     navigate(PATHS.HOME, { replace: true });
   };
