@@ -1,6 +1,11 @@
 import React, { ChangeEvent } from 'react';
-import { LineInputProps } from '../type';
 import { StyledLineInput } from './LineInput.style';
+import { Colors } from '@/styles/colors';
+import { TextInputProps } from '../type';
+
+interface LineInputProps extends TextInputProps {
+  lineColor?: Colors;
+}
 
 const LineInput = (
   {

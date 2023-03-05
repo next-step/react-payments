@@ -12,7 +12,3 @@ export interface TextInputProps
   fontColor?: Colors;
   type?: 'text' | 'password';
 }
-
-export interface LineInputProps extends TextInputProps {
-  lineColor?: Colors;
-}
