@@ -34,6 +34,11 @@
   border: none;
   border-radius: 0.25rem;
 }
+
+.input-basic:focus {
+  background-color: #fff;
+}
+
 .input-basic + .input-basic {
   margin-left: 10px;
 }
