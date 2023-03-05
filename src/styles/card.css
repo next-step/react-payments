@@ -70,6 +70,7 @@
   width: 290px;
   height: 180px;
 
+  margin: 10px auto;
   background: #94dacd;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;

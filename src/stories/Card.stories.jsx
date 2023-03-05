@@ -11,7 +11,7 @@ const Template = (args) => <Card {...args} />;
 
 export const SmallCard = Template.bind({});
 
-SmallCard.args = { size: 'small' };
+SmallCard.args = { size: 'small', cardInfo: { company: '토스카드' } };
 
 export const BigCard = Template.bind({});
 
