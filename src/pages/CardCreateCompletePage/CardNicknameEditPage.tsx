@@ -2,24 +2,24 @@ import React from 'react';
 
 import { TextButton } from '@/components';
 import styled from '@emotion/styled';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import PreviewCompleteCard from './components/PreviewCompleteCard/PreviewCompleteCard';
 import CardNicknameEdit from './components/CardNicknameEdit/CardNicknameEdit';
 import { CARD_LIST_ACTION, useCardListDispatch } from '@/store';
 import { ROUTE } from '@/constants';
 
 const CardNicknameEditPage = () => {
-  const location = useLocation();
   const navigate = useNavigate();
 
-  const cardId = Number(location.pathname.split('/')[3]);
+  const params = useParams<{ cardId: string }>();
+  const cardId = Number(params.cardId);
 
   const cardNicknameFormId = 'cardNicknameForm';
   const dispatch = useCardListDispatch();
 
   const handleDelete = () => {
-    navigate(ROUTE.CARD);
     dispatch(CARD_LIST_ACTION.DELETE_CARD(cardId));
+    navigate(ROUTE.CARD);
   };
 
   return (

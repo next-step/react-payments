@@ -2,14 +2,13 @@ import React from 'react';
 
 import { TextButton } from '@/components';
 import styled from '@emotion/styled';
-import { useLocation } from 'react-router-dom';
 import PreviewCompleteCard from './components/PreviewCompleteCard/PreviewCompleteCard';
 import CardNicknameEdit from './components/CardNicknameEdit/CardNicknameEdit';
+import { useParams } from 'react-router-dom';
 
 const CardCreateCompletePage = () => {
-  const location = useLocation();
-
-  const cardId = Number(location.pathname.split('/')[3]);
+  const params = useParams<{ cardId: string }>();
+  const cardId = Number(params.cardId);
 
   const cardNicknameFormId = 'cardNicknameForm';
 
