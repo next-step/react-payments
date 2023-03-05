@@ -1,8 +1,10 @@
 import Card from '../components/Card';
 import Button from '../components/Common/Button';
 import Input from '../components/Common/Input';
+import { usePaymentContext } from '../Context';
 
-const CardSave = ({ cardInfo, onSave, onChange }) => {
+const CardSave = ({ onSave, onChange }) => {
+  const { cardInfo } = usePaymentContext();
   return (
     <main className="flex-column-center">
       <Card cardInfo={cardInfo} size="big" />

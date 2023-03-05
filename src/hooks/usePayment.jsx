@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import useRoute from './useRoute';
 import { PATH } from '../Constant';
+import { usePaymentContext, usePaymentAction } from '../Context';
+
 import {
   cleanNaNValue,
   formatInputValue,
@@ -59,7 +61,8 @@ const cardCompanyList = [
   // },
 ];
 const usePayment = () => {
-  const [cardInfo, setCardInfo] = useState(defaultCardInfo); //작성 중인 카드 정보 인스턴스라고 생각하기
+  const { cardInfo } = usePaymentContext();
+  const { setCardInfo } = usePaymentAction();
   const [cardList, setCardList] = useState([]);
   const { movePage } = useRoute();
 
@@ -115,6 +118,7 @@ const usePayment = () => {
   const handleSave = () => {
     // if (!cardInfo['nickname'])
     //   setCardInfo((cardInfo) => ({ ...cardInfo, nickname: cardInfo['company'] }));
+    //TODO: 닉네임 자동저장, 빈 cardInfo save 막기
     const updateCardInfoIdx = cardList.findIndex(
       (existCardInfo) => existCardInfo.number === cardInfo.number
     );
@@ -124,13 +128,11 @@ const usePayment = () => {
   };
 
   return {
-    cardInfo,
     handleInputChange,
     handleSave,
     cardList,
     cardCompanyList,
     handleSubmit,
-    setCardInfo,
     resetCardInfo,
     deleteCardList
   };

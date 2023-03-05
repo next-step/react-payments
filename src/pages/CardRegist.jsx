@@ -3,9 +3,12 @@ import CardSelectPopup from '../components/CardSelectPopup';
 import Button from '../components/Common/Button';
 import InputContainer from '../components/InputContainer';
 import { useEffect, useState } from 'react';
+import { usePaymentContext, usePaymentAction } from '../Context';
 
-const CardRegist = ({ cardInfo, onChange, onSubmit, cardCompanyList, setCardInfo, onReset }) => {
+const CardRegist = ({ onChange, onSubmit, cardCompanyList, onReset }) => {
   const [isShowPopup, setIsShowPopup] = useState(true);
+  const { cardInfo } = usePaymentContext();
+  const { setCardInfo } = usePaymentAction();
 
   useEffect(() => {
     onReset();
