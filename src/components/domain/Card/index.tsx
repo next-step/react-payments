@@ -4,7 +4,7 @@ import { Dash } from 'components/common';
 import { Masking } from 'components/domain';
 
 import { MAX_LENGTH } from 'constants/card';
-import { theme } from 'constants/colors';
+import { THEME } from 'constants/colors';
 
 import { CardCompany, ICardWithoutId } from 'types/card';
 
@@ -22,7 +22,7 @@ function Card({ company = CardCompany.Hana, owner, numbers, expiredDate }: CardP
         className={cx(
           'small-card',
           css`
-            background-color: ${theme[company]};
+            background-color: ${THEME[company]};
           `
         )}
       >

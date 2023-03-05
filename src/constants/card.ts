@@ -5,7 +5,7 @@ export const MAX_LENGTH = {
   SECRET_CODE: 3,
   PASSWORD: 1,
   ALIAS: 10,
-};
+} as const;
 
 export const INPUT_NAME = {
   MONTH: 'month',
@@ -18,4 +18,4 @@ export const INPUT_NAME = {
   PASSWORD1: 'password1',
   PASSWORD2: 'password2',
   SECRET_CODE: 'secretCode',
-};
+} as const;
