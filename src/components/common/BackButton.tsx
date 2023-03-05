@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 const BackButtonIcon = styled.button`
-  position: absolute;
-  top: 24px;
-  left: 24px;
   width: 40px;
   height: 40px;
   border-radius: 50%;

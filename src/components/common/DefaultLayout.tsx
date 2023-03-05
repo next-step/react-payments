@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import BackButton from "./BackButton";
 
 const Root = styled.div`
   background-color: #fff;
@@ -15,6 +16,12 @@ const App = styled.div`
   padding: 16px 24px;
 `;
 
+const Header = styled.header`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+`;
+
 const PageTitle = styled.h2`
   font-weight: 500;
   font-size: 20px;
@@ -27,18 +34,25 @@ const PageTitle = styled.h2`
 interface DefaultLayoutProps {
   pageTitle: string;
   children: React.ReactNode;
+  showBackButton?: boolean;
+  onBackButtonClick?: () => void;
 }
 
 const DefaultLayout: React.FC<DefaultLayoutProps> = ({
   pageTitle,
   children,
+  showBackButton = false,
+  onBackButtonClick,
 }) => {
   return (
     <Root>
       <App>
-        <header>
+        <Header>
+          {showBackButton && onBackButtonClick && (
+            <BackButton handleGoBack={onBackButtonClick} />
+          )}
           <PageTitle>{pageTitle}</PageTitle>
-        </header>
+        </Header>
         {children}
       </App>
     </Root>

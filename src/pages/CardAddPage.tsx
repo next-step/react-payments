@@ -6,53 +6,43 @@ import CardPasswordFirstTwoDigitsInput from "../components/CardPasswordFirstTwoD
 import CardPreview from "../components/CardPreview";
 import CardSecurityCodeInput from "../components/CardSecurityCodeInput";
 import DefaultLayout from "../components/common/DefaultLayout";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import CardSubmitButton from "../components/CardSubmitButton";
-
-const BackButton = styled.button`
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #ffffff;
-  border: none; // 변경된 부분
-  cursor: pointer;
-  font-size: 24px; // 추가된 부분
-`;
 
 export interface CardAddPageProps {
   handleGoBack?: () => void;
 }
 
-const CardAddPage: React.FC<CardAddPageProps> = () => {
+const CardAddPage: React.FC<CardAddPageProps> = ({ handleGoBack }) => {
   const navigate = useNavigate();
 
-  const handleGoBack = () => {
-    navigate(-1);
+  const handleGoBackClick = () => {
+    if (handleGoBack) {
+      handleGoBack();
+    } else {
+      navigate(-1);
+    }
   };
 
   return (
-    <DefaultLayout pageTitle={"카드 추가"}>
-      <>
-        <BackButton onClick={handleGoBack}>{"<"}</BackButton>
-        <CardPreview
-          cardNumber="1234 5678 9012 3456"
-          ownerName="김민수"
-          expirationDate="12/23"
-        />
-        <CardNumberInput value="" onChange={() => {}} />
-        <CardExpirationDateInput />
-        <CardOwnerNameInput value="" />
-        <CardSecurityCodeInput />
-        <CardPasswordFirstTwoDigitsInput />
-        <CardSubmitButton />
-      </>
+    <DefaultLayout
+      pageTitle={"카드 추가"}
+      showBackButton={true}
+      onBackButtonClick={handleGoBackClick}
+    >
+      <CardPreview
+        cardNumber="1234 5678 9012 3456"
+        ownerName="김재원"
+        expirationDate="12/23"
+      />
+      <CardNumberInput value="" onChange={() => {}} />
+      <CardExpirationDateInput />
+      <CardOwnerNameInput value="" />
+      <CardSecurityCodeInput />
+      <CardPasswordFirstTwoDigitsInput />
+      <CardSubmitButton />
     </DefaultLayout>
   );
 };
+
 export default CardAddPage;
