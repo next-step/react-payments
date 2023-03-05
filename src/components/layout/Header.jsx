@@ -9,6 +9,8 @@ const getPageTitle = () => {
       return '보유카드';
     case PATH.REGIST:
       return '카드등록';
+    case PATH.SAVE:
+      return '카드 별칭 등록/수정';
     default:
       return '';
   }
@@ -19,6 +21,7 @@ const Header = () => {
 
   return (
     <header className="flex-center">
+      <h1></h1>
       {currentPage !== PATH.HOME && (
         <div className="page-navigator mb-10" onClick={movePrevPage}>
           &lt;
