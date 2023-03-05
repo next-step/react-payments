@@ -39,9 +39,11 @@ const PreviewCard = () => {
   return (
     <PreviewCardContainer onClick={onOpen}>
       <Card size="big" card={card} />
-      <BottomModal isOpen={isModalOpen} onClose={onClose}>
-        <CardCompanySelectFormModal selectedCardCompany={cardCompany} />
-      </BottomModal>
+      {isModalOpen && (
+        <BottomModal isOpen={isModalOpen} onClose={onClose}>
+          <CardCompanySelectFormModal selectedCardCompany={cardCompany} />
+        </BottomModal>
+      )}
     </PreviewCardContainer>
   );
 };

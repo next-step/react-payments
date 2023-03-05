@@ -1,10 +1,5 @@
 import styled from '@emotion/styled';
-import React, {
-  PropsWithChildren,
-  cloneElement,
-  useEffect,
-  useState,
-} from 'react';
+import React, { PropsWithChildren, cloneElement, useState } from 'react';
 import { keyframes } from '@emotion/react';
 import Modal from './Modal';
 
@@ -25,13 +20,10 @@ const BottomModal = ({
   const handelClickBackground = () => {
     setShow(false);
   };
+  const handleTransitionStart = () => {};
   const handleTransitionEnd = () => {
     if (!show) onClose();
   };
-
-  useEffect(() => {
-    if (isOpen) setShow(true);
-  }, [isOpen]);
 
   return (
     <Modal
@@ -43,7 +35,8 @@ const BottomModal = ({
         onClick={(e) => {
           e.stopPropagation();
         }}
-        isOpen={show}
+        show={show}
+        onAnimationStart={handleTransitionStart}
         onAnimationEnd={handleTransitionEnd}
       >
         {cloneElement(children as React.ReactElement, {
@@ -57,34 +50,41 @@ const BottomModal = ({
 export default BottomModal;
 
 const BottomModalContainer = styled.div<{
-  isOpen: boolean;
+  show: boolean;
 }>`
   width: 375px;
+
   background-color: white;
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
   animation-timing-function: ease-in-out;
-  transform: translate(-50%, -50%);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  animation-name: ${({ isOpen }) => (isOpen ? openAnimation : closeAnimation)};
+  position: absolute;
+
+  animation-name: ${({ show }) => (show ? openAnimation : closeAnimation)};
   padding: 34px;
 `;
 
 const openAnimation = keyframes`
     0% {
         transform: translateY(100%);
+        opacity: 0;
     }
     100% {
         transform: translateY(0);
+        opacity: 1;
     }
     `;
 
 const closeAnimation = keyframes`
-0% {
+  0% {
     transform: translateY(0);
-}
-100% {
+    opacity: 1;
+  }
+
+  100% {
     transform: translateY(100%);
-}
+    opacity: 0;
+  }
 `;
