@@ -8,27 +8,12 @@ type PreviewCompleteCardProps = {
   cardId: number;
 };
 const PreviewCompleteCard = ({ title, cardId }: PreviewCompleteCardProps) => {
-  const {
-    cardNumber,
-    expirationMonth,
-    expirationYear,
-    ownerName,
-    cardCompany,
-  } = useCard(cardId);
+  const card = useCard(cardId);
 
   return (
     <section>
       <PreviewTitle>{title}</PreviewTitle>
-      <Card
-        card={{
-          cardNumber,
-          expirationMonth,
-          expirationYear,
-          ownerName,
-          cardCompany,
-        }}
-        size="big"
-      />
+      <Card card={card} size="big" />
     </section>
   );
 };

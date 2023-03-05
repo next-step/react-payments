@@ -21,7 +21,7 @@ const CardList = () => {
         <EmptyCardButton onClick={handleClick} />
       </li>
       {cardList.map((card) => (
-        <CardItem key={card.id} {...card} />
+        <CardItem key={card.id} card={card} />
       ))}
     </CardListContainer>
   );

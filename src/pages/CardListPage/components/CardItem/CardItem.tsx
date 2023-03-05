@@ -3,54 +3,38 @@ import { ROUTE } from '@/constants';
 import { CARD_LIST_ACTION, useCardListDispatch } from '@/store';
 import { CardInfo } from '@/types';
 import styled from '@emotion/styled';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const CardItem = ({
-  cardNumber,
-  expirationMonth,
-  expirationYear,
-  ownerName,
-  cardCompany,
-  cardNickname,
-  id,
-}: CardInfo) => {
+const CardItem = ({ card }: { card: CardInfo }) => {
   const navigate = useNavigate();
-
-  const cardInfo = useMemo(() => {
-    return {
-      cardNumber,
-      expirationMonth,
-      expirationYear,
-      ownerName,
-      cardCompany,
-    };
-  }, [cardNumber, expirationMonth, expirationYear, ownerName, cardCompany]);
 
   const dispatch = useCardListDispatch();
 
   const handleClick = () => {
-    navigate(ROUTE.CARD_NICKNAME_EDIT(id.toString()));
+    navigate(ROUTE.CARD_NICKNAME_EDIT(card.id.toString()));
   };
 
   const handleDelete = () => {
-    dispatch(CARD_LIST_ACTION.DELETE_CARD(id));
+    dispatch(CARD_LIST_ACTION.DELETE_CARD(card.id));
   };
-
   return (
     <StyledCardItem>
       <button onClick={handleClick}>
-        <Card card={cardInfo} size="small" />
+        <Card card={card} size="small" />
       </button>
       <CardItemBottom>
-        <Nickname>{cardNickname}</Nickname>
+        <Nickname>{card.cardNickname}</Nickname>
         <DeleteButton onClick={handleDelete}>삭제</DeleteButton>
       </CardItemBottom>
     </StyledCardItem>
   );
 };
 
-export default React.memo(CardItem);
+export default React.memo(CardItem, (prevProps, nextProps) => {
+  return prevProps.card.id === nextProps.card.id;
+});
+
 const CardItemBottom = styled.div`
   display: flex;
   align-items: center;
