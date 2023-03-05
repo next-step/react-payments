@@ -1,4 +1,4 @@
-import { memo, PropsWithChildren } from 'react';
+import { memo } from 'react';
 import { ICardBox } from '../domain/types';
 
 const config = {
@@ -8,7 +8,7 @@ const config = {
   }
 };
 
-function CardBox({ cardNumber, cardHolder, expiredDate, type = 'small', color, brand }: PropsWithChildren<ICardBox>) {
+function CardBox({ cardNumber, cardHolder, expiredDate, type = 'small', color, brand }: ICardBox) {
   return (
     <div className="card-box">
       <div className={config.type[type]} style={{ backgroundColor: color }}>
