@@ -20,3 +20,25 @@ export type OnChangeEventParams = {
   name: CardTypeKeys
   formatter?: (str: string) => string
 }
+
+// backend(string) ->
+// front(cardNumber, array) ->
+// backend ->
+
+export type CardExpireDate = {
+  year: string
+  month: string
+}
+export interface PaymentCard {
+  id: string
+  cardNumbers: string[]
+  cardExpireDate: CardExpireDate
+  cardOwner: string
+  cardPinCode: string
+  cardPassword: string
+  cardCompanyCode: CardCompanyCodeType
+  cardNickname: string
+}
+
+export type AddPaymentCard = Omit<PaymentCard, 'id'>
+export type AddPaymentCardKeys = keyof AddPaymentCard

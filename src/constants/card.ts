@@ -82,3 +82,14 @@ export const CARD_INFO = {
   CARD_COMPANY_CODE: 'cardCompanyCode',
   CARD_NICKNAME: 'cardNickname',
 } as const
+
+export const PAYMENT_CARD_INFO = {
+  ID: 'id',
+  CARD_NUMBERS: 'cardNumbers',
+  CARD_EXPIRE_DATE: 'cardExpireDate',
+  CARD_OWNER: 'cardOwner',
+  CARD_PINCODE: 'cardPinCode',
+  CARD_PASSWORD: 'cardPassword',
+  CARD_COMPANY_CODE: 'cardCompanyCode',
+  CARD_NICKNAME: 'cardNickname',
+} as const
