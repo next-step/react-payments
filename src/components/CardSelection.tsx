@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import { ICardBox } from '../domain/types';
 
 export interface ICardSelection {
@@ -19,12 +19,16 @@ const CARD_DATA2: ICardBox[] = [
 ];
 
 function CardSelection({ onChange }: ICardSelection) {
+  const handleChange = useCallback((cardCompany) => {
+    onChange(cardCompany);
+  }, []);
+
   return (
     <>
       {[CARD_DATA1, CARD_DATA2].map((cardData) => (
         <div className="flex-center" key={crypto.randomUUID()}>
           {cardData.map((cardCompany) => (
-            <div className="modal-item-container" key={cardCompany.color} onClick={() => onChange(cardCompany)}>
+            <div className="modal-item-container" key={cardCompany.color} onClick={() => handleChange(cardCompany)}>
               <div className="modal-item-dot" style={{ backgroundColor: cardCompany.color }}></div>
               <span className="modal-item-name">{cardCompany.brand}</span>
             </div>
