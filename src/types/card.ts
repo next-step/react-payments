@@ -27,7 +27,7 @@ export type CardPassword = {
 };
 
 export interface ICard {
-  cardOwner: string;
+  owner: string;
   cardNumber: CardNumber;
   expiredDate: CardExpiredDate;
   company: CardCompany;

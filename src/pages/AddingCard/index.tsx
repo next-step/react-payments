@@ -10,7 +10,7 @@ import {
 import { Button, Header, Label } from 'components/common';
 
 import { useRouter } from 'hooks';
-import { useCardNumber, useExpiredDate, useCardOwner, useCompanyPicker } from './hooks';
+import { useCardNumber, useExpiredDate, useOwner, useCompanyPicker } from './hooks';
 
 import { PATHS } from 'constants/router';
 import type { ICard } from 'types/card';
@@ -19,7 +19,7 @@ function AddingCard() {
   const { navigate, goBack } = useRouter();
   const { cardNumber, handleChangeCardNumber } = useCardNumber();
   const { expiredDate, handleChangeExpiredDate } = useExpiredDate();
-  const { cardOwner, handleChangeCardOwner } = useCardOwner();
+  const { owner, handleChangeOwner } = useOwner();
   const { open, company, updateCompany, openPicker } = useCompanyPicker();
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
@@ -28,7 +28,7 @@ function AddingCard() {
     const navigateState: ICard = {
       cardNumber,
       expiredDate,
-      cardOwner,
+      owner,
       company,
     };
 
@@ -43,12 +43,7 @@ function AddingCard() {
       />
       <Label>카드사 선택</Label>
       <div onClick={openPicker}>
-        <Card
-          cardNumber={cardNumber}
-          cardOwner={cardOwner}
-          company={company}
-          expiredDate={expiredDate}
-        />
+        <Card cardNumber={cardNumber} owner={owner} company={company} expiredDate={expiredDate} />
       </div>
       <form onSubmit={handleSubmit}>
         <CardNumberContainer
@@ -59,7 +54,7 @@ function AddingCard() {
           expiredDate={expiredDate}
           handleChangeExpiredDate={handleChangeExpiredDate}
         />
-        <CardOwnerContainer cardOwner={cardOwner} handleChangeCardOwner={handleChangeCardOwner} />
+        <CardOwnerContainer owner={owner} handleChangeOwner={handleChangeOwner} />
         <SecretCodeContainer />
         <CardPasswordContainer />
         <div className="button-box">

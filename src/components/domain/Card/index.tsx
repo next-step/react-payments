@@ -10,12 +10,12 @@ import { CardCompany, CardNumber, CardExpiredDate } from 'types/card';
 
 export interface CardProps {
   company?: CardCompany;
-  cardOwner: string;
+  owner: string;
   cardNumber: CardNumber;
   expiredDate: CardExpiredDate;
 }
 
-function Card({ company = CardCompany.Hana, cardOwner, cardNumber, expiredDate }: CardProps) {
+function Card({ company = CardCompany.Hana, owner, cardNumber, expiredDate }: CardProps) {
   const { num1, num2, num3, num4 } = cardNumber;
   const { year, month } = expiredDate;
 
@@ -57,7 +57,7 @@ function Card({ company = CardCompany.Hana, cardOwner, cardNumber, expiredDate }
                 `
               )}
             >
-              {cardOwner}
+              {owner}
             </span>
             <span className="card-text">
               {month} / {year}
