@@ -5,10 +5,10 @@ import { Input, Label } from 'components/common';
 import { useInputFocusing, useRefs } from 'hooks';
 
 import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
-import type { ExpiredDate } from 'types/card';
+import type { CardExpiredDate } from 'types/card';
 
 interface ExpiredDateContainerProps {
-  expiredDate: ExpiredDate;
+  expiredDate: CardExpiredDate;
   handleChangeExpiredDate: React.ChangeEventHandler<HTMLInputElement>;
 }
 
