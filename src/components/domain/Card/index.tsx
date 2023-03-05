@@ -6,13 +6,10 @@ import { Masking } from 'components/domain';
 import { MAX_LENGTH } from 'constants/card';
 import { theme } from 'constants/colors';
 
-import { CardCompany, CardNumber, CardExpiredDate } from 'types/card';
+import { CardCompany, ICard } from 'types/card';
 
-export interface CardProps {
+export interface CardProps extends Omit<ICard, 'company'> {
   company?: CardCompany;
-  owner: string;
-  numbers: CardNumber;
-  expiredDate: CardExpiredDate;
 }
 
 function Card({ company = CardCompany.Hana, owner, numbers, expiredDate }: CardProps) {
