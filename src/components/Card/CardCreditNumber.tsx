@@ -1,9 +1,11 @@
+import { maskCreditNumbers } from 'src/utils/functions';
+
 interface CardCreditNumberProps {
   creditNumber: string;
 }
 
 const CardCreditNumber = ({ creditNumber }: CardCreditNumberProps) => {
-  const creditNumberList = creditNumber?.split('-');
+  const creditNumberList = maskCreditNumbers(creditNumber);
 
   return (
     <div className="card-credit-number">
@@ -12,7 +14,7 @@ const CardCreditNumber = ({ creditNumber }: CardCreditNumberProps) => {
           key={creditNum + index.toString()}
           className="card-credit-number-item"
         >
-          {index < 2 ? creditNum : creditNum.replace(/\d/g, '*')}
+          {creditNum}
         </div>
       ))}
     </div>
