@@ -4,7 +4,7 @@ import { Card } from 'components/domain';
 import { Button, Input } from 'components/common';
 
 import { useRouter } from 'hooks';
-import { useCardContext } from 'contexts/CardContextProvider/hooks';
+import { useCardActions } from 'contexts/CardContextProvider/hooks';
 
 import { PATHS } from 'constants/router';
 import { MAX_LENGTH } from 'constants/card';
@@ -17,8 +17,8 @@ const TITLE = {
 
 function ConrimCard() {
   const { navigate, locationState: card } = useRouter<ICard>();
+  const { addOrUpdateCard } = useCardActions();
   const [alias, setAlias] = useState(card.alias ?? '');
-  const { dispatch } = useCardContext();
   const title = card.alias ? TITLE.UPDATE : TITLE.ADD;
 
   const handleChangeAlias: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -28,7 +28,7 @@ function ConrimCard() {
   const handleClickNextButton = () => {
     const newAlias = alias === '' ? card.company : alias;
 
-    dispatch({ type: 'ADD_OR_UPDATE_CARD', payload: { ...card, alias: newAlias } });
+    addOrUpdateCard({ ...card, alias: newAlias });
 
     navigate(PATHS.HOME, { replace: true });
   };
