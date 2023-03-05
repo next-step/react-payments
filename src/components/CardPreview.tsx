@@ -4,6 +4,7 @@ import { CardStateType } from '../context/CardContext';
 
 interface ICardPreview extends CardStateType {
   onClick?: () => void;
+  isCursor?: boolean;
 }
 
 const CardPreview = ({
@@ -12,9 +13,10 @@ const CardPreview = ({
   name,
   company,
   onClick,
+  isCursor,
 }: ICardPreview) => {
   return (
-    <S.CardBox onClick={onClick}>
+    <S.CardBox onClick={onClick} isCursor={isCursor || false}>
       <S.EmptyCard>
         <S.CardTop>{company && company}</S.CardTop>
         <S.CardMiddle>

@@ -1,11 +1,12 @@
 import styled from '@emotion/styled';
 
 export const S = {
-  CardBox: styled.div`
+  CardBox: styled.div<{ isCursor: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 10px 0;
+    cursor: ${(props) => (props.isCursor ? 'pointer' : 'auto')};
   `,
   EmptyCard: styled.div`
     width: 208px;
