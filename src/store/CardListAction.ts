@@ -5,12 +5,7 @@ import {
   DeleteCardAction,
   UpdateCardAction,
 } from './CardListReducer';
-
-const isCompanyValid = (
-  cardField: any
-): cardField is CardField & {
-  cardCompany: keyof typeof CARD_COMPANIES;
-} => CARD_COMPANIES_ARRAY.includes(cardField.cardCompany);
+import { isCompanyValid } from '@/utils/typed';
 
 export const ACTION = {
   APPEND_NEW_CARD: (id: number, cardField: CardField): AppendNewCardAction => {
