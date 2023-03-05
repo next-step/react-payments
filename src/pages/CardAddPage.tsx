@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import CardExpirationDateInput from "../components/CardExpirationDateInput";
 import CardNumberInput from "../components/CardNumberInput";
 import CardOwnerNameInput from "../components/CardOwnerNameInput";
@@ -7,49 +6,39 @@ import CardPasswordFirstTwoDigitsInput from "../components/CardPasswordFirstTwoD
 import CardPreview from "../components/CardPreview";
 import CardSecurityCodeInput from "../components/CardSecurityCodeInput";
 import DefaultLayout from "../components/common/DefaultLayout";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
-const PageTitle = styled.h2`
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 22px;
-  display: flex;
+const BackButton = styled.button`
+  position: absolute;
+  top: 24px;
+  left: 24px;
   align-items: center;
-  color: #383838;
-`;
-
-const ButtonBox = styled.div`
-  display: flex;
   justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-`;
-
-const ButtonText = styled.span`
-  color: #fff;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 22px;
-`;
-
-const Button = styled.button`
-  width: 100%;
-  max-width: 180px;
-  height: 50px;
-  background-color: #a6c8ff;
-  border: none;
-  border-radius: 25px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: none; // 변경된 부분
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-
-  &:hover {
-    background-color: #6d8cff;
-  }
+  font-size: 24px; // 추가된 부분
 `;
 
-const CardAddPage = () => {
+export interface CardAddPageProps {
+  handleGoBack?: () => void;
+}
+
+const CardAddPage: React.FC<CardAddPageProps> = () => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   return (
     <DefaultLayout pageTitle={"카드 추가"}>
       <>
+        <BackButton onClick={handleGoBack}>{"<"}</BackButton>
         <CardPreview
           cardNumber="1234 5678 9012 3456"
           ownerName="김민수"
@@ -66,14 +55,13 @@ const CardAddPage = () => {
         />
         <CardSecurityCodeInput />
         <CardPasswordFirstTwoDigitsInput />
-        <ButtonBox>
+        {/* <ButtonBox>
           <Button>
             <ButtonText>다음</ButtonText>
           </Button>
-        </ButtonBox>
+        </ButtonBox> */}
       </>
     </DefaultLayout>
   );
 };
-
 export default CardAddPage;

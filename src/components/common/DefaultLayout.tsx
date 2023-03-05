@@ -36,7 +36,9 @@ const DefaultLayout: React.FC<DefaultLayoutProps> = ({
   return (
     <Root>
       <App>
-        <PageTitle>{pageTitle}</PageTitle>
+        <header>
+          <PageTitle>{pageTitle}</PageTitle>
+        </header>
         {children}
       </App>
     </Root>
