@@ -3,7 +3,7 @@ import { css } from '@emotion/css';
 import { Input, Label } from 'components/common';
 import { useSecretCode } from 'pages/AddingCard/hooks';
 
-import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
+import { INPUT_NAME, MAX_LENGTH, MIN_LENGTH } from 'constants/card';
 
 function CardSecretCodeContainer() {
   const { secretCode, handleChangeSecretCode } = useSecretCode();
@@ -22,6 +22,7 @@ function CardSecretCodeContainer() {
           name={INPUT_NAME.SECRET_CODE}
           onChange={handleChangeSecretCode}
           maxLength={MAX_LENGTH.SECRET_CODE}
+          minLength={MIN_LENGTH.SECRET_CODE}
           required
           size="medium"
         />

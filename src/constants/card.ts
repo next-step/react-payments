@@ -7,6 +7,12 @@ export const MAX_LENGTH = {
   ALIAS: 10,
 } as const;
 
+export const MIN_LENGTH = {
+  CARD_NUMBER: 4,
+  EXPIRED_DATE: 2,
+  SECRET_CODE: 3,
+};
+
 export const INPUT_NAME = {
   MONTH: 'month',
   YEAR: 'year',

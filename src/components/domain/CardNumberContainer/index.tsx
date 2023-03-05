@@ -2,7 +2,7 @@ import { Input, Dash, Label } from 'components/common';
 
 import { useInputFocusing, useRefs } from 'hooks';
 
-import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
+import { INPUT_NAME, MAX_LENGTH, MIN_LENGTH } from 'constants/card';
 import type { CardNumber } from 'types/card';
 
 interface CardNumberContainerProps {
@@ -33,6 +33,7 @@ function CardNumberContainer({ numbers, handleChangeNumbers }: CardNumberContain
           name={INPUT_NAME.NUM1}
           onChange={handleChangeNumbers}
           maxLength={MAX_LENGTH.CARD_NUMBER}
+          minLength={MIN_LENGTH.CARD_NUMBER}
           required
         />
         {num1.length === MAX_LENGTH.CARD_NUMBER && <Dash />}
@@ -44,6 +45,7 @@ function CardNumberContainer({ numbers, handleChangeNumbers }: CardNumberContain
           name={INPUT_NAME.NUM2}
           onChange={handleChangeNumbers}
           maxLength={MAX_LENGTH.CARD_NUMBER}
+          minLength={MIN_LENGTH.CARD_NUMBER}
           required
         />
         {num2.length === MAX_LENGTH.CARD_NUMBER && <Dash />}
@@ -55,6 +57,7 @@ function CardNumberContainer({ numbers, handleChangeNumbers }: CardNumberContain
           name={INPUT_NAME.NUM3}
           onChange={handleChangeNumbers}
           maxLength={MAX_LENGTH.CARD_NUMBER}
+          minLength={MIN_LENGTH.CARD_NUMBER}
           required
         />
         {num3.length === MAX_LENGTH.CARD_NUMBER && <Dash />}
@@ -66,6 +69,7 @@ function CardNumberContainer({ numbers, handleChangeNumbers }: CardNumberContain
           name={INPUT_NAME.NUM4}
           onChange={handleChangeNumbers}
           maxLength={MAX_LENGTH.CARD_NUMBER}
+          minLength={MIN_LENGTH.CARD_NUMBER}
           required
         />
       </div>
