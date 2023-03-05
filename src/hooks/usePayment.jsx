@@ -1,8 +1,6 @@
-import { useState } from 'react';
 import useRoute from './useRoute';
-import { PATH } from '../Constant';
+import { PATH, DEFAULT_CARD_INFO } from '../Constant';
 import { usePaymentContext, usePaymentAction } from '../Context';
-
 import {
   cleanNaNValue,
   formatInputValue,
@@ -10,60 +8,9 @@ import {
   isInvalidInputValue
 } from '../utils/inputValue';
 
-const defaultCardInfo = {
-  company: '',
-  number: '',
-  owner: '',
-  expiry: '',
-  nickname: '',
-  cvc: '',
-  password1: '',
-  password2: '',
-  backgroundColor: '#e5e5e5'
-};
-
-const cardCompanyList = [
-  {
-    company: '포코카드',
-    backgroundColor: 'red'
-  },
-  {
-    company: '준카드',
-    backgroundColor: 'palegreen'
-  },
-  {
-    company: '혜원카드',
-    backgroundColor: 'skyblue'
-  },
-  {
-    company: '윤호카드',
-    backgroundColor: 'yellow'
-  }
-  // {
-  //   company: "다빈카드",
-  //   backgroundColor: "pink",
-  // },
-  // {
-  //   company: "나나카드",
-  //   backgroundColor: "yellowgreen",
-  // },
-  // {
-  //   company: "치치카드",
-  //   backgroundColor: "plum",
-  // },
-  // {
-  //   company: "사나카드",
-  //   backgroundColor: "lightseagreen",
-  // },
-  // {
-  //   company: "랄랄카드",
-  //   backgroundColor: "burlywood",
-  // },
-];
 const usePayment = () => {
-  const { cardInfo } = usePaymentContext();
-  const { setCardInfo } = usePaymentAction();
-  const [cardList, setCardList] = useState([]);
+  const { cardInfo, cardList } = usePaymentContext();
+  const { setCardInfo, setCardList } = usePaymentAction();
   const { movePage } = useRoute();
 
   const handleInputChange = (evt) => {
@@ -76,7 +23,7 @@ const usePayment = () => {
   };
 
   const resetCardInfo = () => {
-    setCardInfo(defaultCardInfo);
+    setCardInfo(DEFAULT_CARD_INFO);
   };
 
   const handleSubmit = (evt) => {
@@ -130,8 +77,6 @@ const usePayment = () => {
   return {
     handleInputChange,
     handleSave,
-    cardList,
-    cardCompanyList,
     handleSubmit,
     resetCardInfo,
     deleteCardList

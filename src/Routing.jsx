@@ -12,7 +12,6 @@ const Routing = () => {
     handleInputChange,
     handleSave,
     handleSubmit,
-    cardList,
     cardCompanyList,
     resetCardInfo,
     deleteCardList
@@ -24,7 +23,7 @@ const Routing = () => {
     <Routes>
       <Route
         path={PATH.HOME}
-        element={<CardList cardList={cardList} movePage={movePage} onDelete={deleteCardList} />}
+        element={<CardList movePage={movePage} onDelete={deleteCardList} />}
       />
       <Route
         path={PATH.REGIST}

@@ -4,8 +4,9 @@ import Button from '../components/Common/Button';
 import InputContainer from '../components/InputContainer';
 import { useEffect, useState } from 'react';
 import { usePaymentContext, usePaymentAction } from '../Context';
+import { CARD_COMPANY_LIST } from '../Constant';
 
-const CardRegist = ({ onChange, onSubmit, cardCompanyList, onReset }) => {
+const CardRegist = ({ onChange, onSubmit, onReset }) => {
   const [isShowPopup, setIsShowPopup] = useState(true);
   const { cardInfo } = usePaymentContext();
   const { setCardInfo } = usePaymentAction();
@@ -114,7 +115,7 @@ const CardRegist = ({ onChange, onSubmit, cardCompanyList, onReset }) => {
         <Button className="button-box button" children="다음"></Button>
       </form>
       {isShowPopup && (
-        <CardSelectPopup cardCompanyList={cardCompanyList} onClick={handlePopupClick} />
+        <CardSelectPopup cardCompanyList={CARD_COMPANY_LIST} onClick={handlePopupClick} />
       )}
     </main>
   );

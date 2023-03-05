@@ -2,10 +2,11 @@ import CardContainer from '../components/CardContainer';
 import Button from '../components/Common/Button';
 import { PATH } from '../Constant';
 import { useState } from 'react';
-import { usePaymentAction } from '../Context';
+import { usePaymentContext, usePaymentAction } from '../Context';
 
-const CardList = ({ cardList, movePage, onDelete }) => {
+const CardList = ({ movePage, onDelete }) => {
   const [isEditMode, setIsEditMode] = useState(false);
+  const { cardList } = usePaymentContext();
   const { setCardInfo } = usePaymentAction();
 
   const handleEdit = (evt) => {
