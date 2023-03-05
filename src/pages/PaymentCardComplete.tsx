@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '../components/common/Button';
+import { initState, useCardDispatch } from '../context/CardContext';
 import {
   useCardListDispatch,
   useCardListState,
@@ -12,6 +13,7 @@ const CardRegisterComplete = () => {
   const nicknameRef = useRef(null);
   const dispatchCardList = useCardListDispatch();
   const stateCardList = useCardListState();
+  const dispatchCard = useCardDispatch();
 
   const registerNickname = () => {
     if (!nicknameRef.current) return;
@@ -26,6 +28,17 @@ const CardRegisterComplete = () => {
     });
     dispatchCardList(updatedCardList);
     navigate('/');
+    dispatchCard({
+      type: 'SET_INIT',
+      digits: { digit1: '', digit2: '', digit3: '', digit4: '' },
+      expire: '',
+      name: '',
+      cvc: '',
+      passwords: { password1: '', password2: '' },
+      company: '',
+      nickname: '',
+      createdDate: 0,
+    });
   };
 
   useEffect(() => {
