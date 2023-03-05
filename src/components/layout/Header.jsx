@@ -3,7 +3,6 @@ import useRoute from '../../hooks/useRoute';
 
 const getPageTitle = () => {
   const currentPage = window.location.pathname;
-
   switch (currentPage) {
     case PATH.HOME:
       return '보유카드';
