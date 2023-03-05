@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Button from '../components/common/Button';
-import { initState, useCardDispatch } from '../context/CardContext';
+import { useCardDispatch } from '../context/CardContext';
 import {
   useCardListDispatch,
   useCardListState,

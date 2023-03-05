@@ -9,6 +9,13 @@ import {
   useCardListDispatch,
   useCardListState,
 } from '../context/CardListContext';
+import styled from '@emotion/styled';
+
+const S = {
+  ButtonWrapper: styled.div`
+    text-align: right;
+  `,
+};
 
 const PaymentCardRegister = () => {
   const navigate = useNavigate();
@@ -56,7 +63,10 @@ const PaymentCardRegister = () => {
         createdDate={createdDate}
       />
       <CardRegisterForm />
-      <Button text={'다음'} onClick={onClickRegisterCard} />
+
+      <S.ButtonWrapper>
+        <Button text="다음" onClick={onClickRegisterCard} />
+      </S.ButtonWrapper>
     </>
   );
 };
