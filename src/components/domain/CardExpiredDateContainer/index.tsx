@@ -7,12 +7,15 @@ import { useInputFocusing, useRefs } from 'hooks';
 import { INPUT_NAME, MAX_LENGTH, MIN_LENGTH } from 'constants/card';
 import type { CardExpiredDate } from 'types/card';
 
-interface ExpiredDateContainerProps {
+interface CardExpiredDateContainerProps {
   expiredDate: CardExpiredDate;
   handleChangeExpiredDate: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredDateContainerProps) {
+function CardExpiredDateContainer({
+  expiredDate,
+  handleChangeExpiredDate,
+}: CardExpiredDateContainerProps) {
   const { month, year } = expiredDate;
 
   const [monthRef, yearRef] = useRefs<HTMLInputElement>(2);
@@ -65,4 +68,4 @@ function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredD
   );
 }
 
-export default ExpiredDateContainer;
+export default CardExpiredDateContainer;
