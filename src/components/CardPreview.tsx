@@ -2,9 +2,19 @@ import React from 'react';
 import { S } from '../styles/card';
 import { CardStateType } from '../context/CardContext';
 
-const CardPreview = ({ digits, expire, name, company }: CardStateType) => {
+interface ICardPreview extends CardStateType {
+  onClick?: () => void;
+}
+
+const CardPreview = ({
+  digits,
+  expire,
+  name,
+  company,
+  onClick,
+}: ICardPreview) => {
   return (
-    <S.CardBox>
+    <S.CardBox onClick={onClick}>
       <S.EmptyCard>
         <S.CardTop>{company && company}</S.CardTop>
         <S.CardMiddle>

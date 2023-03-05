@@ -1,4 +1,4 @@
-import React, { Dispatch, useContext, useEffect, useState } from 'react';
+import React, { Dispatch, useContext, useState } from 'react';
 import { CardStateType } from './CardContext';
 
 type ListDispatch = Dispatch<CardStateType[]>;

@@ -1,4 +1,4 @@
-import React, { Dispatch, useContext, useEffect, useReducer } from 'react';
+import React, { Dispatch, useContext, useReducer } from 'react';
 import { validateDigit, validateExpire, validatePassword } from '../utils/form';
 
 export type DigitType = {
