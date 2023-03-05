@@ -1,6 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import Header from './components/layout/Header';
 import Routing from './Routing';
+import { PaymentProvider } from './Context';
 import './styles/index.css';
 
 function App() {
@@ -8,7 +9,9 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <Header />
-        <Routing />
+        <PaymentProvider>
+          <Routing />
+        </PaymentProvider>
       </BrowserRouter>
     </div>
   );
