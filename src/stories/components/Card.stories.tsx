@@ -4,18 +4,15 @@ import Card from "components/common/Card/Card";
 import CardProps from "components/common/Card/Card";
 import { withRouter } from "storybook-addon-react-router-v6";
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "Card",
   component: Card,
   decorators: [withRouter],
 } as ComponentMeta<typeof CardProps>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof CardProps> = (args) => <Card {...args} />;
 
 export const SmallPrimary = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 SmallPrimary.args = {
   size: "small",
   type: "primary",

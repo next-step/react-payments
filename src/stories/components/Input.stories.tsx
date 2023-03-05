@@ -4,14 +4,11 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Input from "components/common/Input/Input";
 import InputProps from "components/common/Input/Input";
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: "Input",
   component: Input,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
 } as ComponentMeta<typeof InputProps>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof InputProps> = (args) => <Input {...args} />;
 
 export const primary = Template.bind({});

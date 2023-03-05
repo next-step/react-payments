@@ -1,18 +1,12 @@
-import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-
 import { withRouter } from "storybook-addon-react-router-v6";
-import MyCardPage from "pages/MyCardListPage/MyCardListPage";
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+import MyCardList from "pages/MyCardListPage/MyCardListPage";
 export default {
   title: "Page",
-  component: MyCardPage,
+  component: MyCardList,
   decorators: [withRouter],
-} as ComponentMeta<typeof MyCardPage>;
+} as ComponentMeta<typeof MyCardList>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-// const Template: ComponentStory<typeof AddCardForm> = (args) => <AddCardForm />;
+const Template: ComponentStory<typeof MyCardList> = (args) => <MyCardList />;
 
-const Template: ComponentStory<typeof MyCardPage> = (args) => <MyCardPage />;
-
-export const DefaultMyCardListPage = Template.bind({});
+export const MyCardListPage = Template.bind({});
