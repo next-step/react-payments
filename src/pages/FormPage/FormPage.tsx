@@ -9,7 +9,7 @@ import CardSecurityInput from "components/Form/CardFormInput/CardSecurityInput/C
 import IconButton from "../../components/common/IconButton/IconButton";
 import Text from "components/common/Text/Text";
 import Button from "components/common/Button/Button";
-import useCardForm from "hooks/useCardForm";
+import useFormPage from "hooks/useFormPage";
 
 const FormPage = () => {
   const {
@@ -21,7 +21,7 @@ const FormPage = () => {
     handleCompanyList,
     handleBackButton,
     handleSubmit,
-  } = useCardForm();
+  } = useFormPage();
 
   return (
     <Layout>

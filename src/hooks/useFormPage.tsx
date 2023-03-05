@@ -48,7 +48,7 @@ const initialCardFormState: CardFormType = {
   },
 };
 
-const useCardForm = () => {
+const useFormPage = () => {
   const [state, setState] = useState(initialCardFormState);
   const paymentsCtx = useContext(PaymentsContext);
   const navigate = useNavigate();
@@ -138,4 +138,4 @@ const useCardForm = () => {
   };
 };
 
-export default useCardForm;
+export default useFormPage;

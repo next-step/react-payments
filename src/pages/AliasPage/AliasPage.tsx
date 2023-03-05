@@ -3,44 +3,15 @@ import Card from "components/common/Card/Card";
 import Text from "components/common/Text/Text";
 import Input from "components/common/Input/Input";
 import Button from "components/common/Button/Button";
-import { useRef, useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { changeAliasLength } from "../../utils/InputChange";
-import { PaymentsContext } from "context/Payments";
+import useAliasPage from "hooks/useAliasPage";
 
 const AliasPage = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [inputLength, setInputLength] = useState(0);
-  const paymentsCtx = useContext(PaymentsContext);
-  const cardList = paymentsCtx.cardList;
-  const currentCard = cardList.find((card) => card.id === localStorage.getItem("id"));
+  const { handleSubmit, handleInput, currentCard, inputRef, inputLength } = useAliasPage();
 
   if (!currentCard) {
-    return <div>존재하지 않는 카드 입니다. </div>;
+    return <div>존재하지 않은 카드입니다.</div>;
   }
 
-  const navigate = useNavigate();
-
-  const submit = () => {
-    const currentInputRef = inputRef.current;
-    if (currentInputRef === null) return;
-    const aliasValue = currentInputRef.value;
-    let aliasName = !aliasValue.length ? currentCard.company : aliasValue;
-    const aliasCard = {
-      ...currentCard,
-      alias: aliasName,
-    };
-    paymentsCtx.updateAlias(aliasCard);
-    navigate("/");
-  };
-
-  const handleInput = () => {
-    const currentInputRef = inputRef.current;
-    if (currentInputRef === null) return;
-    currentInputRef.value = changeAliasLength(currentInputRef.value);
-    const length = currentInputRef.value.length;
-    setInputLength(length);
-  };
   return (
     <Layout>
       <TextWrapper>
@@ -73,9 +44,8 @@ const AliasPage = () => {
         />
         <Text fontSize="s" weight="normal" label={`${inputLength}/10`} />
       </Box>
-
       <ButtonWrapper>
-        <Button fontSize="lg" label="Next" onClick={submit} />
+        <Button fontSize="lg" label="Next" onClick={handleSubmit} />
       </ButtonWrapper>
     </Layout>
   );
