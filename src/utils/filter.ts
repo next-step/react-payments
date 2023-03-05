@@ -1,5 +1,7 @@
+import { REGEXP } from '../constants';
+
 export function filterCardNumber(cardNumber: string): string {
-  const changeValue = cardNumber?.match(/[0-9*]{1,4}/g)?.flatMap((item, index) => {
+  const changeValue = cardNumber?.match(REGEXP.CARD_NUMBER)?.flatMap((item, index) => {
     if (!item.length) return [];
     if (index > 1) return item.replace(/[0-9]/g, '*');
 
@@ -9,7 +11,7 @@ export function filterCardNumber(cardNumber: string): string {
 }
 
 export function filterExpiredDate(expiredDate: string) {
-  return expiredDate?.match(/[0-9]{1,2}/g)?.join(' / ');
+  return expiredDate?.match(REGEXP.EXPIRED_DATE)?.join(' / ');
 }
 
 export function formToArray(data: object): string[] {
