@@ -12,7 +12,7 @@ const CardItem = ({ card }: { card: CardInfo }) => {
   const dispatch = useCardListDispatch();
 
   const handleClick = () => {
-    navigate(ROUTE.CARD_NICKNAME_EDIT(card.id.toString()));
+    navigate(ROUTE.CARD_NICKNAME_EDIT(card.id));
   };
 
   const handleDelete = () => {
