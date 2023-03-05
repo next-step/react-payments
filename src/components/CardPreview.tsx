@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   CardBottom,
   CardBottomInfo,
@@ -10,6 +10,7 @@ import {
   SmallCard,
   SmallCardChip,
 } from "./common/Card";
+import { CardContext } from "../contexts/card";
 
 export interface CardPreviewProps {
   cardNumber: string;
@@ -17,16 +18,39 @@ export interface CardPreviewProps {
   expirationDate: string;
 }
 
-const CardPreview: React.FC<CardPreviewProps> = ({
-  cardNumber,
-  ownerName,
-  expirationDate,
-}) => {
-  const formattedCardNumber = cardNumber.replace(/\d{4}(?=.)/g, "$&-");
-  const formattedExpirationDate = expirationDate.replace(
-    /^(\d{2})(\d{2})$/,
-    "$1 / $2"
+const CardPreview: React.FC<CardPreviewProps> = () => {
+  const { cardNumber, ownerName, expirationDate } = useContext(CardContext);
+
+  const [formattedExpirationDate, setFormattedExpirationDate] = useState(
+    expirationDate.replace(/^(\d{2})(\d{2})$/, "$1 / $2") || "MM/YY"
   );
+
+  const [formattedOwnerName, setFormattedOwnerName] = useState(
+    ownerName.length > 10 ? ownerName.slice(0, 10) : ownerName || "YOUR NAME"
+  );
+
+  const [maskedCardNumber, setMaskedCardNumber] = useState(
+    cardNumber.replace(/^(\d{4})(\d{4})(\d{4})(\d{4})$/, "$1-$2-****-****")
+  );
+
+  useEffect(() => {
+    setFormattedExpirationDate(
+      expirationDate.replace(/^(\d{2})(\d{2})$/, "$1 / $2") || "MM/YY"
+    );
+  }, [expirationDate]);
+
+  useEffect(() => {
+    setFormattedOwnerName(
+      ownerName.length > 15 ? ownerName.slice(0, 15) : ownerName || "YOUR NAME"
+    );
+  }, [ownerName]);
+
+  useEffect(() => {
+    setMaskedCardNumber(
+      cardNumber.replace(/^(\d{4})(\d{4})(\d{4})(\d{4})$/, "$1-$2-****-****")
+    );
+  }, [cardNumber]);
+
   return (
     <CardBox>
       <SmallCard>
@@ -38,10 +62,10 @@ const CardPreview: React.FC<CardPreviewProps> = ({
         </CardMiddle>
         <CardBottom>
           <CardBottomNumber>
-            <CardText>{formattedCardNumber}</CardText>
+            <CardText>{maskedCardNumber}</CardText>
           </CardBottomNumber>
           <CardBottomInfo>
-            <CardText>{ownerName}</CardText>
+            <CardText>{formattedOwnerName}</CardText>
             <CardText>{formattedExpirationDate}</CardText>
           </CardBottomInfo>
         </CardBottom>

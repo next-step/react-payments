@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
+import { CardContext } from "../contexts/card";
 import {
   InputBasic,
   InputBox,
@@ -12,14 +13,19 @@ export const Separator = styled.span`
   width: 1.5rem;
   text-align: center;
 `;
+
 interface ExpirationDateProps {
   className?: string;
-  onChange?: (value: string) => void;
 }
 
 const ExpirationDate: React.FC<ExpirationDateProps> = ({ className }) => {
-  const [month, setMonth] = useState("");
-  const [year, setYear] = useState("");
+  const { expirationDate, setExpirationDate } = useContext(CardContext);
+  const [month, setMonth] = useState(expirationDate.slice(0, 2));
+  const [year, setYear] = useState(expirationDate.slice(3));
+
+  useEffect(() => {
+    setExpirationDate(`${month}/${year}`);
+  }, [month, year, setExpirationDate]);
 
   const handleMonthChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;

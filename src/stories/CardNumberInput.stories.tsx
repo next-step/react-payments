@@ -15,6 +15,6 @@ const Template: Story<CardNumberInputProps> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  cardNumber: "",
-  onChange: () => {},
+  value: "",
+  onChange: (value: string) => {},
 };

@@ -1,26 +1,28 @@
-import React, { useState } from "react";
-
+import React, { useState, useContext } from "react";
 import {
   InputBasic,
   InputBox,
   InputContainer,
   InputTitle,
 } from "./common/Input";
+import { CardContext } from "../contexts/card";
 
 export interface CardNumberInputProps {
-  cardNumber: string;
   onChange: (cardNumber: string) => void;
+  value?: string;
 }
 
 const CardNumberInput: React.FC<CardNumberInputProps> = ({
-  cardNumber,
   onChange,
+  value = "",
 }) => {
+  const { setCardNumber } = useContext(CardContext);
+
   const [inputValues, setInputValues] = useState<string[]>([
-    cardNumber.slice(0, 4),
-    cardNumber.slice(4, 8),
-    cardNumber.slice(8, 12),
-    cardNumber.slice(12, 16),
+    value.slice(0, 4),
+    value.slice(4, 8),
+    value.slice(8, 12),
+    value.slice(12, 16),
   ]);
 
   const handleChange = (
@@ -35,6 +37,7 @@ const CardNumberInput: React.FC<CardNumberInputProps> = ({
     setInputValues(newInputValues);
     const newCardNumber = newInputValues.join("");
     onChange(newCardNumber);
+    setCardNumber(newCardNumber);
   };
 
   return (

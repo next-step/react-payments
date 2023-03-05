@@ -10,5 +10,5 @@ const Template: Story<OwnerNameProps> = (args) => <OwnerName {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  onChange: (value: string) => console.log(value),
+  value: "",
 };

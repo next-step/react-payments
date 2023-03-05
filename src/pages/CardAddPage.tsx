@@ -44,15 +44,9 @@ const CardAddPage: React.FC<CardAddPageProps> = () => {
           ownerName="김민수"
           expirationDate="12/23"
         />
-        <CardNumberInput
-          onChange={(value: string) => console.log(value)}
-          cardNumber=""
-        />
+        <CardNumberInput value="" onChange={() => {}} />
         <CardExpirationDateInput />
-        <CardOwnerNameInput
-          onChange={(value: string) => console.log(value)}
-          value=""
-        />
+        <CardOwnerNameInput value="" />
         <CardSecurityCodeInput />
         <CardPasswordFirstTwoDigitsInput />
         {/* <ButtonBox>
