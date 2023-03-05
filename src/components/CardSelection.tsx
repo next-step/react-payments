@@ -21,8 +21,8 @@ const CARD_DATA2: ICardBox[] = [
 function CardSelection({ onChange }: ICardSelection) {
   return (
     <>
-      {[CARD_DATA1, CARD_DATA2].map((cardData, key) => (
-        <div className="flex-center" key={key}>
+      {[CARD_DATA1, CARD_DATA2].map((cardData) => (
+        <div className="flex-center" key={crypto.randomUUID()}>
           {cardData.map((cardCompany) => (
             <div className="modal-item-container" key={cardCompany.color} onClick={() => onChange(cardCompany)}>
               <div className="modal-item-dot" style={{ backgroundColor: cardCompany.color }}></div>
