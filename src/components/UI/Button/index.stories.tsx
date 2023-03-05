@@ -1,4 +1,4 @@
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import Button from '.';
 
@@ -7,6 +7,14 @@ export default {
   component: Button,
 } as ComponentMeta<typeof Button>;
 
-export const Default = () => {
-  return <Button>추가하기</Button>;
+const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
+
+export const Default = Template.bind({});
+Default.args = {
+  children: '추가하기',
+};
+
+export const RemoveButton = Template.bind({});
+RemoveButton.args = {
+  variant: 'removeBtn',
 };

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import {
   Box,
-  ButtonRemove,
+  Button,
   CreditCard,
   Flex,
   Layout,
@@ -50,13 +50,13 @@ const CardList = () => {
             }}
             onClick={() => go(`/detail/${card?.UID}`)}
           >
-            <ButtonRemove
-              onRight
-              onClick={(e) => handleRemoveCard(e, card.UID)}
-            />
             <CreditCard cardInfo={card} size="small" />
-            <Flex justify="center">
+            <Flex justify="between" css={{ paddingTop: '$1' }}>
               <Text size="5">{card.NICK_NAME ?? '이름없음'}</Text>
+              <Button
+                variant="removeBtn"
+                onClick={(e) => handleRemoveCard(e, card.UID)}
+              />
             </Flex>
           </Box>
         ))}
