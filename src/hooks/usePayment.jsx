@@ -84,17 +84,15 @@ const usePayment = () => {
   };
 
   const updateCardList = (updateIdx) => {
-    if (cardList.includes(cardInfo)) {
-      alert('중복된 카드 등록은 허용되지 않습니다.');
-      throw new Error('Duplicated CardInfo');
+    if (!cardList.includes(cardInfo)) {
+      if (updateIdx === null || updateIdx === undefined) throw new Error('Not allowed idx');
+      setCardList(
+        cardList.map((prevCardInfo, idx) => {
+          if (idx === updateIdx) return { ...cardInfo };
+          return prevCardInfo;
+        })
+      );
     }
-    if (updateIdx === null || updateIdx === undefined) throw new Error('Not allowed idx');
-    setCardList(
-      cardList.map((prevCardInfo, idx) => {
-        if (idx === updateIdx) return { ...cardInfo };
-        return prevCardInfo;
-      })
-    );
     resetCardInfo();
   };
 
