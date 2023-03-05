@@ -18,7 +18,7 @@ export const Template: Story<CardProps> = (args) => <Card {...args} />;
 Template.args = {
   company: CardCompany.Hana,
   owner: '홍길동',
-  cardNumber: { num1: '1234', num2: '5678', num3: '1234', num4: '5678' },
+  numbers: { num1: '1234', num2: '5678', num3: '1234', num4: '5678' },
   expiredDate: { month: '07', year: '23' },
 };
 Template.storyName = 'Playground';

@@ -6,12 +6,12 @@ import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
 import type { CardNumber } from 'types/card';
 
 interface CardNumberContainerProps {
-  cardNumber: CardNumber;
-  handleChangeCardNumber: React.ChangeEventHandler<HTMLInputElement>;
+  numbers: CardNumber;
+  handleChangeNumbers: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberContainerProps) {
-  const { num1, num2, num3, num4 } = cardNumber;
+function CardNumberContainer({ numbers, handleChangeNumbers }: CardNumberContainerProps) {
+  const { num1, num2, num3, num4 } = numbers;
 
   const [num1Ref, num2Ref, num3Ref, num4Ref] = useRefs<HTMLInputElement>(4);
 
@@ -31,7 +31,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
           type="text"
           value={num1}
           name={INPUT_NAME.NUM1}
-          onChange={handleChangeCardNumber}
+          onChange={handleChangeNumbers}
           maxLength={MAX_LENGTH.CARD_NUMBER}
           required
         />
@@ -42,7 +42,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
           type="text"
           value={num2}
           name={INPUT_NAME.NUM2}
-          onChange={handleChangeCardNumber}
+          onChange={handleChangeNumbers}
           maxLength={MAX_LENGTH.CARD_NUMBER}
           required
         />
@@ -53,7 +53,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
           type="password"
           value={num3}
           name={INPUT_NAME.NUM3}
-          onChange={handleChangeCardNumber}
+          onChange={handleChangeNumbers}
           maxLength={MAX_LENGTH.CARD_NUMBER}
           required
         />
@@ -64,7 +64,7 @@ function CardNumberContainer({ cardNumber, handleChangeCardNumber }: CardNumberC
           type="password"
           value={num4}
           name={INPUT_NAME.NUM4}
-          onChange={handleChangeCardNumber}
+          onChange={handleChangeNumbers}
           maxLength={MAX_LENGTH.CARD_NUMBER}
           required
         />

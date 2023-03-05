@@ -2,7 +2,7 @@ import type { ICard, CardNumber } from 'types/card';
 
 const concatCardNumber = (cardNumber: CardNumber) => Object.values(cardNumber).join('');
 const isMatchedCard = (cardA: ICard, cardB: ICard) =>
-  concatCardNumber(cardA.cardNumber) === concatCardNumber(cardB.cardNumber);
+  concatCardNumber(cardA.numbers) === concatCardNumber(cardB.numbers);
 
 export const filterCards = (cards: ICard[], target: ICard) => {
   const filteredCards = cards.filter((card) => !isMatchedCard(card, target));

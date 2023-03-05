@@ -28,7 +28,7 @@ export type CardPassword = {
 
 export interface ICard {
   owner: string;
-  cardNumber: CardNumber;
+  numbers: CardNumber;
   expiredDate: CardExpiredDate;
   company: CardCompany;
   alias?: string;

@@ -10,14 +10,14 @@ import {
 import { Button, Header, Label } from 'components/common';
 
 import { useRouter } from 'hooks';
-import { useCardNumber, useExpiredDate, useOwner, useCompanyPicker } from './hooks';
+import { useNumbers, useExpiredDate, useOwner, useCompanyPicker } from './hooks';
 
 import { PATHS } from 'constants/router';
 import type { ICard } from 'types/card';
 
 function AddingCard() {
   const { navigate, goBack } = useRouter();
-  const { cardNumber, handleChangeCardNumber } = useCardNumber();
+  const { numbers, handleChangeNumbers } = useNumbers();
   const { expiredDate, handleChangeExpiredDate } = useExpiredDate();
   const { owner, handleChangeOwner } = useOwner();
   const { open, company, updateCompany, openPicker } = useCompanyPicker();
@@ -26,7 +26,7 @@ function AddingCard() {
     e.preventDefault();
 
     const navigateState: ICard = {
-      cardNumber,
+      numbers,
       expiredDate,
       owner,
       company,
@@ -43,13 +43,10 @@ function AddingCard() {
       />
       <Label>카드사 선택</Label>
       <div onClick={openPicker}>
-        <Card cardNumber={cardNumber} owner={owner} company={company} expiredDate={expiredDate} />
+        <Card numbers={numbers} owner={owner} company={company} expiredDate={expiredDate} />
       </div>
       <form onSubmit={handleSubmit}>
-        <CardNumberContainer
-          cardNumber={cardNumber}
-          handleChangeCardNumber={handleChangeCardNumber}
-        />
+        <CardNumberContainer numbers={numbers} handleChangeNumbers={handleChangeNumbers} />
         <ExpiredDateContainer
           expiredDate={expiredDate}
           handleChangeExpiredDate={handleChangeExpiredDate}

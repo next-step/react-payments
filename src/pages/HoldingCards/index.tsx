@@ -24,6 +24,6 @@ function HoldingCards() {
   );
 }
 
-const cardNumberToString = (card: ICard) => Object.values(card.cardNumber).toString();
+const cardNumberToString = (card: ICard) => Object.values(card.numbers).toString();
 
 export default HoldingCards;

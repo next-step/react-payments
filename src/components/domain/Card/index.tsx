@@ -11,12 +11,12 @@ import { CardCompany, CardNumber, CardExpiredDate } from 'types/card';
 export interface CardProps {
   company?: CardCompany;
   owner: string;
-  cardNumber: CardNumber;
+  numbers: CardNumber;
   expiredDate: CardExpiredDate;
 }
 
-function Card({ company = CardCompany.Hana, owner, cardNumber, expiredDate }: CardProps) {
-  const { num1, num2, num3, num4 } = cardNumber;
+function Card({ company = CardCompany.Hana, owner, numbers, expiredDate }: CardProps) {
+  const { num1, num2, num3, num4 } = numbers;
   const { year, month } = expiredDate;
 
   return (
