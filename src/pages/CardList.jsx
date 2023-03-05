@@ -1,8 +1,10 @@
-import Card from '../components/Card';
+import CardContainer from '../components/CardContainer';
 import Button from '../components/Common/Button';
 import { PATH } from '../Constant';
+import { useState } from 'react';
 
-const CardList = ({ cardList, movePage, setCardInfo }) => {
+const CardList = ({ cardList, movePage, setCardInfo, onDelete }) => {
+  const [isEditMode, setIsEditMode] = useState(false);
   const handleEdit = (evt) => {
     const clickedElement = evt.currentTarget;
     const { number } = clickedElement.dataset;
@@ -21,8 +23,20 @@ const CardList = ({ cardList, movePage, setCardInfo }) => {
         className="empty-card button-box"
       />
       {cardList.map((cardInfo) => (
-        <Card cardInfo={cardInfo} key={cardInfo.number} onClick={handleEdit} />
+        <CardContainer
+          cardInfo={cardInfo}
+          handleCardClick={handleEdit}
+          handleDelBtnClick={onDelete}
+          key={cardInfo.number}
+          isEditMode={isEditMode}
+        />
       ))}
+      {!isEditMode && (
+        <Button children="편집" onClick={() => setIsEditMode(true)} className="button" />
+      )}
+      {isEditMode && (
+        <Button children="닫기" onClick={() => setIsEditMode(false)} className="button" />
+      )}
     </main>
   );
 };

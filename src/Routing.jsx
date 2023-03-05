@@ -16,7 +16,8 @@ const Routing = () => {
     cardList,
     cardCompanyList,
     resetCardInfo,
-    setCardInfo
+    setCardInfo,
+    deleteCardList
   } = usePayment();
 
   const { movePage } = useRoute();
@@ -25,7 +26,14 @@ const Routing = () => {
     <Routes>
       <Route
         path={PATH.HOME}
-        element={<CardList cardList={cardList} movePage={movePage} setCardInfo={setCardInfo} />}
+        element={
+          <CardList
+            cardList={cardList}
+            movePage={movePage}
+            setCardInfo={setCardInfo}
+            onDelete={deleteCardList}
+          />
+        }
       />
       <Route
         path={PATH.REGIST}

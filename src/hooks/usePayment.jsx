@@ -105,6 +105,13 @@ const usePayment = () => {
     resetCardInfo();
   };
 
+  const deleteCardList = (evt) => {
+    const deleteCardElement = evt.target.closest('.card-box');
+    const { number } = deleteCardElement.dataset;
+    if (number === null || number === undefined) throw new Error('Not allowed Delete');
+    setCardList((cardList) => cardList.filter((prevCardInfo) => prevCardInfo.number !== number));
+  };
+
   const handleSave = () => {
     // if (!cardInfo['nickname'])
     //   setCardInfo((cardInfo) => ({ ...cardInfo, nickname: cardInfo['company'] }));
@@ -124,7 +131,8 @@ const usePayment = () => {
     cardCompanyList,
     handleSubmit,
     setCardInfo,
-    resetCardInfo
+    resetCardInfo,
+    deleteCardList
   };
 };
 
