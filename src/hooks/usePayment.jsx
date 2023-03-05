@@ -59,20 +59,20 @@ const cardCompanyList = [
   // },
 ];
 const usePayment = () => {
-  const [cardInfo, setCardInfo] = useState(defaultCardInfo);
+  const [cardInfo, setCardInfo] = useState(defaultCardInfo); //작성 중인 카드 정보 인스턴스라고 생각하기
   const [cardList, setCardList] = useState([]);
   const { movePage } = useRoute();
 
-  const handleCardInfoInput = (evt) => {
+  const handleInputChange = (evt) => {
     let { value, id } = evt.target;
     if (!isDigitInputValue(value, id)) {
       alert('숫자만 입력 가능합니다\n입력값을 확인해주세요!');
       value = cleanNaNValue(value);
     }
-    setCardInfo({ ...cardInfo, [id]: formatInputValue(value, id) });
+    setCardInfo((cardInfo) => ({ ...cardInfo, [id]: formatInputValue(value, id) }));
   };
 
-  const handleResetCardInfo = () => {
+  const resetCardInfo = () => {
     setCardInfo(defaultCardInfo);
   };
 
@@ -83,21 +83,50 @@ const usePayment = () => {
     else movePage(PATH.SAVE);
   };
 
+  const updateCardList = (updateIdx) => {
+    if (cardList.includes(cardInfo)) {
+      alert('중복된 카드 등록은 허용되지 않습니다.');
+      throw new Error('Duplicated CardInfo');
+    }
+    if (updateIdx === null || updateIdx === undefined) throw new Error('Not allowed idx');
+    setCardList(
+      cardList.map((prevCardInfo, idx) => {
+        if (idx === updateIdx) return { ...cardInfo };
+        return prevCardInfo;
+      })
+    );
+    resetCardInfo();
+  };
+
+  const insertCardList = () => {
+    if (cardList.includes(cardInfo)) {
+      alert('중복된 카드 등록은 허용되지 않습니다.');
+      throw new Error('Duplicated CardInfo');
+    }
+    setCardList((cardList) => [cardInfo, ...cardList]);
+    resetCardInfo();
+  };
+
   const handleSave = () => {
-    if (!cardList.includes(cardInfo)) setCardList([cardInfo, ...cardList]);
-    else alert('이전에 등록된 카드입니다.');
+    // if (!cardInfo['nickname'])
+    //   setCardInfo((cardInfo) => ({ ...cardInfo, nickname: cardInfo['company'] }));
+    const updateCardInfoIdx = cardList.findIndex(
+      (existCardInfo) => existCardInfo.number === cardInfo.number
+    );
+    if (updateCardInfoIdx !== -1) updateCardList(updateCardInfoIdx);
+    else insertCardList();
     movePage(PATH.HOME);
   };
 
   return {
     cardInfo,
-    handleCardInfoInput,
+    handleInputChange,
     handleSave,
     cardList,
     cardCompanyList,
     handleSubmit,
     setCardInfo,
-    handleResetCardInfo
+    resetCardInfo
   };
 };
 

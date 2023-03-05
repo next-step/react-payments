@@ -10,12 +10,12 @@ import Error from './pages/Error';
 const Routing = () => {
   const {
     cardInfo,
-    handleCardInfoInput,
+    handleInputChange,
     handleSave,
     handleSubmit,
     cardList,
     cardCompanyList,
-    handleResetCardInfo,
+    resetCardInfo,
     setCardInfo
   } = usePayment();
 
@@ -23,25 +23,26 @@ const Routing = () => {
 
   return (
     <Routes>
-      <Route path={PATH.HOME} element={<CardList cardList={cardList} movePage={movePage} />} />
+      <Route
+        path={PATH.HOME}
+        element={<CardList cardList={cardList} movePage={movePage} setCardInfo={setCardInfo} />}
+      />
       <Route
         path={PATH.REGIST}
         element={
           <CardRegist
             cardInfo={cardInfo}
-            onChange={handleCardInfoInput}
+            onChange={handleInputChange}
             onSubmit={handleSubmit}
             cardCompanyList={cardCompanyList}
             setCardInfo={setCardInfo}
-            onReset={handleResetCardInfo}
+            onReset={resetCardInfo}
           />
         }
       />
       <Route
         path={PATH.SAVE}
-        element={
-          <CardSave onSave={handleSave} cardInfo={cardInfo} onChange={handleCardInfoInput} />
-        }
+        element={<CardSave onSave={handleSave} cardInfo={cardInfo} onChange={handleInputChange} />}
       />
       <Route path="*" element={<Error />} />
     </Routes>

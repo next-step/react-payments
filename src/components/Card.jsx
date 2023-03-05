@@ -1,6 +1,6 @@
-const Card = ({ cardInfo, size = 'small' }) => (
+const Card = ({ cardInfo, size = 'small', onClick }) => (
   <>
-    <div className="card-box">
+    <div className="card-box" onClick={onClick} data-number={cardInfo.number}>
       <div className={`${size}-card`} style={{ backgroundColor: cardInfo.backgroundColor }}>
         <div className="card-top">
           <span className={`card-text__${size}`}>{cardInfo.company}</span>
@@ -19,7 +19,7 @@ const Card = ({ cardInfo, size = 'small' }) => (
         </div>
       </div>
     </div>
-    <span className="card-nickname">{cardInfo.nickname}</span>
+    {cardInfo.nickname && <span className="card-nickname">{cardInfo.nickname}</span>}
   </>
 );
 
