@@ -1,38 +1,64 @@
+import styled from '@emotion/styled';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import CardPreview from '../components/CardPreview';
+import Title from '../components/common/Title';
+import {
+  useCardListDispatch,
+  useCardListState,
+} from '../context/CardListContext';
+
+const S = {
+  Button: styled.div`
+    font-size: 10px;
+    cursor: pointer;
+  `,
+};
 
 const PaymentCardList = () => {
+  const cardList = useCardListState();
+  const stateCardList = useCardListState();
+  const dispatchCardList = useCardListDispatch();
+  const navigate = useNavigate();
+
+  const updateNickname = (index: number) => {
+    // step 3 에서 수정기능 추가할 예정
+    navigate('/complete', { state: { isComplete: true, index: index } });
+  };
+
+  const deleteCard = (index: number) => {
+    const updatedCardList = stateCardList.filter(
+      (_, cardIndex) => index !== cardIndex
+    );
+    dispatchCardList(updatedCardList);
+  };
+
   return (
-    <div className="app flex-column-center">
-      <div className="flex-center">
-        <h2 className="page-title mb-10">보유 카드</h2>
+    <>
+      <Title text="보유 카드" />
+
+      <div className="flex-column-center">
+        {cardList
+          .sort((a, b) => b.createdDate - a.createdDate)
+          .map((card, index) => (
+            <React.Fragment key={index}>
+              <CardPreview
+                {...card}
+                onClick={() => updateNickname(index)}
+                isCursor={true}
+              />
+              <span className="card-nickname">{card.nickname}</span>
+              <S.Button onClick={() => deleteCard(index)}>삭제</S.Button>
+            </React.Fragment>
+          ))}
+
+        <Link to={'/register'}>
+          <div className="card-box">
+            <div className="empty-card">+</div>
+          </div>
+        </Link>
       </div>
-      <div className="card-box">
-        <div className="small-card">
-          <div className="card-top">
-            <span className="card-text">클린카드</span>
-          </div>
-          <div className="card-middle">
-            <div className="small-card__chip"></div>
-          </div>
-          <div className="card-bottom">
-            <div className="card-bottom__number">
-              <span className="card-text">1111 - 2222 - oooo - oooo</span>
-            </div>
-            <div className="card-bottom__info">
-              <span className="card-text">YUJO</span>
-              <span className="card-text">12 / 23</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <span className="card-nickname">법인카드</span>
-      <Link to={'/register'}>
-        <div className="card-box">
-          <div className="empty-card">+</div>
-        </div>
-      </Link>
-    </div>
+    </>
   );
 };
 

@@ -6,18 +6,21 @@ import PaymentCardRegister from './pages/PaymentCardRegister';
 import Layout from './components/common/Layout';
 import { CardProvider } from './context/CardContext';
 import PaymentCardComplete from './pages/PaymentCardComplete';
+import { CardListProvider } from './context/CardListContext';
 
 function App() {
   return (
     <BrowserRouter>
       <CardProvider>
-        <Routes>
-          <Route path={'/'} element={<Layout />}>
-            <Route index element={<PaymentCardList />} />
-            <Route path={'/register'} element={<PaymentCardRegister />} />
-            <Route path={'/complete'} element={<PaymentCardComplete />} />
-          </Route>
-        </Routes>
+        <CardListProvider>
+          <Routes>
+            <Route path={'/'} element={<Layout />}>
+              <Route index element={<PaymentCardList />} />
+              <Route path={'/register'} element={<PaymentCardRegister />} />
+              <Route path={'/complete'} element={<PaymentCardComplete />} />
+            </Route>
+          </Routes>
+        </CardListProvider>
       </CardProvider>
     </BrowserRouter>
   );

@@ -14,6 +14,9 @@ export type CardStateType = {
   name: string;
   cvc: string;
   passwords: { password1: string; password2: string };
+  company: string;
+  nickname: string;
+  createdDate: number;
 };
 
 type Action =
@@ -36,20 +39,42 @@ type Action =
   | {
       type: 'SET_PASSWORD';
       passwords: { password1: string; password2: string };
+    }
+  | {
+      type: 'SET_COMPANY';
+      company: string;
+    }
+  | {
+      type: 'SET_NICKNAME';
+      nickname: string;
+    }
+  | {
+      type: 'SET_INIT';
+      digits: DigitType;
+      expire: string;
+      name: string;
+      cvc: string;
+      passwords: { password1: string; password2: string };
+      company: string;
+      nickname: string;
+      createdDate: number;
     };
 
-type SampleDispatch = Dispatch<Action>;
+type CardDispatchType = Dispatch<Action>;
 
-const initState: CardStateType = {
+export const initState: CardStateType = {
   digits: { digit1: '', digit2: '', digit3: '', digit4: '' },
   expire: '',
   name: '',
   cvc: '',
   passwords: { password1: '', password2: '' },
+  company: '',
+  nickname: '',
+  createdDate: 0,
 };
 
 const CardStateContext = React.createContext<CardStateType | null>(null);
-const CardDispatchContext = React.createContext<SampleDispatch | null>(null);
+const CardDispatchContext = React.createContext<CardDispatchType | null>(null);
 
 const reducer = (state: CardStateType, action: Action): CardStateType => {
   switch (action.type) {
@@ -86,6 +111,28 @@ const reducer = (state: CardStateType, action: Action): CardStateType => {
           password2: action.passwords.password2,
         },
       };
+    case 'SET_COMPANY':
+      return {
+        ...state,
+        company: action.company,
+      };
+    case 'SET_NICKNAME':
+      return {
+        ...state,
+        nickname: action.nickname,
+      };
+    case 'SET_INIT':
+      return {
+        digits: action.digits,
+        expire: action.expire,
+        name: action.name,
+        cvc: action.cvc,
+        passwords: action.passwords,
+        company: action.company,
+        nickname: action.nickname,
+        createdDate: action.createdDate,
+      };
+
     default:
       throw new Error('Unhandled action');
   }
