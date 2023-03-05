@@ -1,15 +1,24 @@
-import { RefObject, useMemo } from 'react';
+import { useMemo } from 'react';
 
-function useSequentialFocusWithElements(elementsRef: RefObject<(HTMLElement | null)[]>) {
+import { createObjectWithArrayProps } from '@/utils/object';
+
+const elementObject = createObjectWithArrayProps<HTMLInputElement | null>();
+
+function useSequentialFocusWithElements() {
   return useMemo(
     () => ({
-      toTheNextElement: (currentElementIndex: number, canProgress: boolean) => {
-        if (document.activeElement === elementsRef.current?.[currentElementIndex] && canProgress) {
-          elementsRef.current[currentElementIndex + 1]?.focus();
+      elementMap: elementObject.object,
+      setElement: elementObject.setProp,
+      toTheNextElement: (key: string, currentElementIndex: number, canProgress: boolean) => {
+        const elementList = elementObject.object?.[key];
+        if (!elementList) return;
+
+        if (document.activeElement === elementList[currentElementIndex] && canProgress) {
+          elementList[currentElementIndex + 1]?.focus();
         }
       },
     }),
-    [elementsRef]
+    []
   );
 }
 
