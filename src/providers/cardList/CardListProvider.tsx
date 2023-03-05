@@ -2,7 +2,7 @@ import { useReducer, PropsWithChildren } from 'react'
 
 import { INITIAL_CARD_LIST_STATE } from '@/contants'
 import { CardListStateContext, CardListDispatchContext } from '@/contexts/cardList/CardListContext'
-import { cardListReducer } from '@/utils'
+import { cardListReducer } from '@/domain'
 
 function CardProvider({ children }: PropsWithChildren) {
   const [state, dispatch] = useReducer(cardListReducer, INITIAL_CARD_LIST_STATE)
