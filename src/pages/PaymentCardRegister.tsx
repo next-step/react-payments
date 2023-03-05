@@ -12,6 +12,9 @@ import {
 import styled from '@emotion/styled';
 
 const S = {
+  TitleWrapper: styled.div`
+    margin-bottom: 50px;
+  `,
   ButtonWrapper: styled.div`
     text-align: right;
   `,
@@ -51,7 +54,14 @@ const PaymentCardRegister = () => {
 
   return (
     <>
-      <Title text={'< 카드 추가'} onClick={() => navigate('/')} />
+      <S.TitleWrapper>
+        <Title
+          text={'카드 추가'}
+          onClick={() => navigate('/')}
+          isArrow={true}
+        />
+      </S.TitleWrapper>
+
       <CardPreview
         digits={digits}
         cvc={cvc}
