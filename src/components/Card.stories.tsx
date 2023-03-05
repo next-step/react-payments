@@ -1,16 +1,16 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { CardBox } from './index';
+import { Card } from './index';
 
 export default {
-  title: 'Payments/CardBox',
-  component: CardBox,
+  title: 'Payments/Card',
+  component: Card,
   parameters: {
     layout: 'centered',
   }
-} as ComponentMeta<typeof CardBox>;
-const Template: ComponentStory<typeof CardBox> = (args) => <CardBox {...args} />;
+} as ComponentMeta<typeof Card>;
+const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 
 const defaultData = {
   brand: '클린카드',

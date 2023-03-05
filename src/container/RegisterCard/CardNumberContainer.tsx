@@ -2,14 +2,14 @@ import { memo, useCallback, useState } from 'react';
 import { Input, InputContainer } from '../../components/form';
 import { onlyNumber } from '../../utils/keyInterceptor';
 import { useFocusRef, useRefs } from '../../hooks';
-import { useCardBoxContext } from '../../provider/card-box';
+import { useCardContext } from '../../provider/card-box';
 
 const MAX_LENGTH = 4;
 const CARD_LENGTH = 16;
 const VALIDATE_ERROR = '카드 번호를 입력 해 주세요.';
 
 function CardNumberContainer() {
-  const { setCardState } = useCardBoxContext();
+  const { setCardState } = useCardContext();
   const [errorMessage, setErrorMessage] = useState('');
   const [cardNumberRef, getCardRefs] = useRefs<HTMLInputElement>([0, 1, 2, 3]);
 

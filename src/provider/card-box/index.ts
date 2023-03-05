@@ -1,2 +1,2 @@
-export { default as CardBoxProvider } from './CardBoxProvider';
-export { default as useCardBoxContext } from './useCardBoxContext';
+export { default as CardProvider } from './CardProvider';
+export { default as useCardContext } from './useCardContext';

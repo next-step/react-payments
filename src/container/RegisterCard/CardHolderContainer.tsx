@@ -1,11 +1,11 @@
 import { Input, InputContainer } from '../../components/form';
 import { memo, useCallback, useRef, useState } from 'react';
-import { useCardBoxContext } from '../../provider/card-box';
+import { useCardContext } from '../../provider/card-box';
 
 const MAX_LENGTH = 30;
 
 function CardHolderContainer() {
-  const { setCardState } = useCardBoxContext();
+  const { setCardState } = useCardContext();
   const cardHolderRef = useRef<HTMLInputElement>(null);
   const [count, setCount] = useState(0);
 

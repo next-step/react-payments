@@ -2,13 +2,13 @@ import { Input, InputContainer } from '../../components/form';
 import { memo, useCallback, useState } from 'react';
 import { useFocusRef, useRefs } from '../../hooks';
 import { onlyNumber } from '../../utils/keyInterceptor';
-import { useCardBoxContext } from '../../provider/card-box';
+import { useCardContext } from '../../provider/card-box';
 
 const MAX_LENGTH = 1;
 const VALIDATE_ERROR = '카드 비밀번호 앞 2자리를 입력 해 주세요.';
 
 function CardPasswordContainer() {
-  const { setCardState } = useCardBoxContext();
+  const { setCardState } = useCardContext();
   const [errorMessage, setErrorMessage] = useState('');
   const [passwordRef, getPasswordRef] = useRefs<HTMLInputElement>([0, 1]);
 

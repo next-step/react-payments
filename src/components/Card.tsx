@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { ICardBox } from '../domain/types';
+import { ICard } from '../domain/types';
 
 const config = {
   type: {
@@ -8,7 +8,7 @@ const config = {
   }
 };
 
-function CardBox({ cardNumber, cardHolder, expiredDate, type = 'small', color, brand }: ICardBox) {
+function Card({ cardNumber, cardHolder, expiredDate, type = 'small', color, brand }: ICard) {
   return (
     <div className="card-box">
       <div className={config.type[type]} style={{ backgroundColor: color }}>
@@ -32,4 +32,4 @@ function CardBox({ cardNumber, cardHolder, expiredDate, type = 'small', color, b
   );
 }
 
-export default memo(CardBox);
+export default memo(Card);

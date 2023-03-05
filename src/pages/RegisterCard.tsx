@@ -1,4 +1,4 @@
-import { CardBox, Modal, PageTitle } from '../components';
+import { Card, Modal, PageTitle } from '../components';
 import { useEffect, useState } from 'react';
 import CardSelection from '../components/CardSelection';
 import {
@@ -11,12 +11,12 @@ import {
 import { Button } from '../components/form';
 import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
-import { useCardBoxContext } from '../provider/card-box';
+import { useCardContext } from '../provider/card-box';
 
 export default function RegisterCard() {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const { cardState, setCardState } = useCardBoxContext();
+  const { cardState, setCardState } = useCardContext();
 
   useEffect(() => {
     const { cardNumber, brand } = cardState;
@@ -49,7 +49,7 @@ export default function RegisterCard() {
   return (
     <div className="app">
       <PageTitle title="&lt; 카드 추가" onClick={moveCardList}/>
-      <CardBox {...cardState} />
+      <Card {...cardState} />
       <CardNumberContainer/>
       <ExpiredDateContainer/>
       <CardHolderContainer/>

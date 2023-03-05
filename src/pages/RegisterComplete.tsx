@@ -1,9 +1,9 @@
 import { cardRepository } from '../repositories';
 import { useEffect, useMemo, useRef } from 'react';
-import { CardBox, PageTitle } from '../components';
+import { Card, PageTitle } from '../components';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button, Input } from '../components/form';
-import { ICardBoxDTO } from '../domain/types';
+import { ICardDTO } from '../domain/types';
 
 const MAX_LENGTH = 10;
 
@@ -11,7 +11,7 @@ export default function RegisterComplete() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const cardIndex = Number(searchParams.get('card'));
-  const cardList = useMemo<ICardBoxDTO[]>(() => cardRepository.getItem(), []);
+  const cardList = useMemo<ICardDTO[]>(() => cardRepository.getItem(), []);
   const cardData = useMemo(() => cardList.find((item) => item.index === cardIndex), []);
   const nicknameRef = useRef<HTMLInputElement>(null);
 
@@ -37,7 +37,7 @@ export default function RegisterComplete() {
   return (
     <div className="app flex-column-center">
       <PageTitle title="카드등록이 완료되었습니다."></PageTitle>
-      <CardBox {...cardData} type="big"/>
+      <Card {...cardData} type="big"/>
       <Input
         ref={nicknameRef}
         className="input-underline"

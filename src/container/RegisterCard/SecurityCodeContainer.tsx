@@ -1,13 +1,13 @@
 import { Input, InputContainer } from '../../components/form';
 import { memo, useCallback, useRef, useState } from 'react';
 import { onlyNumber } from '../../utils/keyInterceptor';
-import { useCardBoxContext } from '../../provider/card-box';
+import { useCardContext } from '../../provider/card-box';
 
 const MAX_LENGTH = 3;
 const VALIDATE_ERROR = '보안코드를 올바르게 입력 해 주세요.';
 
 function SecurityCodeContainer() {
-  const { setCardState } = useCardBoxContext();
+  const { setCardState } = useCardContext();
   const [errorMessage, setErrorMessage] = useState('');
   const securityCodeRef = useRef<HTMLInputElement>(null);
 

@@ -1,4 +1,4 @@
-export interface ICardBox {
+export interface ICard {
   brand?: string;
   cardNumber?: string;
   cardHolder?: string;
@@ -7,7 +7,7 @@ export interface ICardBox {
   color?: string;
 }
 
-export interface ICardBoxDTO extends ICardBox {
+export interface ICardDTO extends ICard {
   index?: number;
   cardPassword?: number;
   cardSecurityCode?: number;

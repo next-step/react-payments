@@ -3,7 +3,7 @@ import { Input, InputContainer } from '../../components/form';
 import { memo, useCallback, useState } from 'react';
 import { Validator } from '../../domain';
 import { onlyNumber } from '../../utils/keyInterceptor';
-import { useCardBoxContext } from '../../provider/card-box';
+import { useCardContext } from '../../provider/card-box';
 
 const MAX_LENGTH = 2;
 const VALIDATE_ERROR = {
@@ -12,7 +12,7 @@ const VALIDATE_ERROR = {
 };
 
 function ExpiredDateContainer() {
-  const { setCardState } = useCardBoxContext();
+  const { setCardState } = useCardContext();
   const { isPreviousDate } = Validator();
   const [errorMessage, setErrorMessage] = useState('');
   const [expiredDateRef, getExpiredDateRefs] = useRefs<HTMLInputElement>(['month', 'year']);

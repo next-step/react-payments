@@ -1,13 +1,13 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { cardRepository } from '../repositories';
-import { CardBox, PageTitle } from '../components';
-import { ICardBoxDTO } from '../domain/types';
+import { Card, PageTitle } from '../components';
+import { ICardDTO } from '../domain/types';
 import { useCallback, useState } from 'react';
 import { Button } from '../components/form';
 
 export default function CardList() {
   const navigate = useNavigate();
-  const [cardList, setCardList] = useState<ICardBoxDTO[]>(
+  const [cardList, setCardList] = useState<ICardDTO[]>(
     cardRepository.getItem().sort((a, b) => b.index - a.index)
   );
 
@@ -35,7 +35,7 @@ export default function CardList() {
           key={item.cardNumber}
         >
           <div className="flex-column-center" onClick={() => goRegisterComplete(item.index)}>
-            <CardBox {...item} />
+            <Card {...item} />
             <span>{item.nickname}</span>
           </div>
           <Button onClick={() => removeCard(item.index)}>삭제</Button>
