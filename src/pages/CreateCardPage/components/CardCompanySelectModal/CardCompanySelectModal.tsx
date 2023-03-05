@@ -5,6 +5,7 @@ import { CARD_COMPANIES, CARD_COMPANIES_ARRAY } from '@/constants';
 import ColorCircleRadio from './ColorCircleRadio';
 import { ACTION, useCardFieldDispatchContext } from '../CardFieldContext';
 import { ModalChildrenProps } from '@/components/Modal/BottomModal';
+import { isCompanyName } from '@/utils/typed';
 
 type CardCompanySelectModalProps = {
   selectedCardCompany: keyof typeof CARD_COMPANIES | null;
@@ -16,7 +17,7 @@ const CardCompanySelectFormModal = ({
   const dispatch = useCardFieldDispatchContext();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value as keyof typeof CARD_COMPANIES;
+    const value = e.target.value;
     if (!isCompanyName(value)) return;
     dispatch(ACTION.UPDATE_CARD_COMPANY(value));
     onClose();
@@ -47,7 +48,3 @@ const CardCompanySelectModalContainer = styled.form`
   place-items: center;
   align-items: flex-start;
 `;
-
-const isCompanyName = (name: string): name is keyof typeof CARD_COMPANIES => {
-  return name in CARD_COMPANIES;
-};
