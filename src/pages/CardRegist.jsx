@@ -25,7 +25,7 @@ const CardRegist = ({ cardInfo, onChange, onSubmit, cardCompanyList, setCardInfo
   };
   return (
     <main>
-      <Card cardInfo={cardInfo} />
+      <Card cardInfo={cardInfo} onClick={() => setIsShowPopup(true)} />
       <form onSubmit={onSubmit}>
         <InputContainer
           title="카드번호"
