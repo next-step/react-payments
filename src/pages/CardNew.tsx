@@ -1,12 +1,10 @@
-import BottomSheet from 'src/components/BottomSheet';
-import BankBottomSheet from 'src/components/BottomSheet/BankBottomSheet';
-import Card from 'src/components/Card/Card';
-import CardPasswordInput from 'src/components/CardPasswordInput/CardPasswordInput';
-import Header from 'src/components/Header/Header';
-import NewCardInput from 'src/components/NewCardInput/NewCardInput';
-import TextButton from 'src/components/TextButton/TextButton';
-import useNewCardForm from 'src/hooks/useNewCardForm';
 import { bankList } from 'src/utils/constants';
+import { TextButton } from 'src/components/Buttons';
+import { Header } from 'src/components/Layouts';
+import { Card } from 'src/components/Cards';
+import { CardPasswordInput, NewCardInput } from 'src/components/Forms';
+import { BankBottomSheet, BottomSheet } from 'src/components/Modals';
+import useNewCardForm from 'src/hooks/useNewCardForm';
 
 const CUSTOMER_NAME_LIMIT_COUNT = 30;
 

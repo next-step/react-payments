@@ -1,5 +1,5 @@
-import Card from 'src/components/Card';
-import TextButton from 'src/components/TextButton/TextButton';
+import { TextButton } from 'src/components/Buttons';
+import { Card } from 'src/components/Cards';
 import useCardAlias from 'src/hooks/useCardAlias';
 
 const CardAlias = () => {

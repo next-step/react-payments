@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CardList from 'src/components/CardList/CardList';
+import { CardList } from 'src/components/Cards';
+import { Header } from 'src/components/Layouts';
 import { NewCardContext } from 'src/contexts/NewCardContext';
 import { JsonToArr } from 'src/utils/functions';
 import { ICardInfo } from 'src/utils/types';
-import Header from '../components/Header/Header';
 
 const Home = () => {
   const navigate = useNavigate();

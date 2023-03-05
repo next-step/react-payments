@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { INewCard } from './types';
 
 export const initNewCard: INewCard = {

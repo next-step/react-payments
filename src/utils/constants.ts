@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { INewCardBank } from './types';
 
 export const bankList: INewCardBank[] = [

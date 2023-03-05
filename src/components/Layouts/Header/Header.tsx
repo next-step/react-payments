@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import LeftArrow from '../Icon/LeftArrow';
+import LeftArrow from '../../Icons/LeftArrow';
 
 interface HeaderProps {
   title: string;
