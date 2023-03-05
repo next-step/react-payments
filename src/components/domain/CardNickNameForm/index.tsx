@@ -1,7 +1,6 @@
 import { TextInput } from '@/components/common';
 import { Button, InputContainer } from '@/components/UI';
 import useFormData from '@/hooks/formHook';
-import { useRouter } from '@/hooks/useRouter';
 import { updateNickNameByCardUID } from '@/storage/service';
 import { CardData, CardKey } from '@/types';
 type Props = {
@@ -9,13 +8,11 @@ type Props = {
 };
 
 const CardNickNameForm = ({ card }: Props) => {
-  const { go } = useRouter();
   const { getFormData, handleFormInput } = useFormData();
   const formData = getFormData();
 
   const onSuccess = () => {
     alert('카드 별칭이 설정되었습니다.');
-    go('/list');
   };
 
   return (
