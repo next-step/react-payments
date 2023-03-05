@@ -4,7 +4,7 @@ import {
   ExpiredDateContainer,
   CardOwnerContainer,
   CardPasswordContainer,
-  SecretCodeContainer,
+  CardSecretCodeContainer,
   CardCompanyPicker,
 } from 'components/domain';
 import { Button, Header, Label } from 'components/common';
@@ -55,7 +55,7 @@ function AddingCard() {
           handleChangeExpiredDate={handleChangeExpiredDate}
         />
         <CardOwnerContainer owner={owner} handleChangeOwner={handleChangeOwner} />
-        <SecretCodeContainer />
+        <CardSecretCodeContainer />
         <CardPasswordContainer />
         <div className="button-box">
           <Button type="submit" fontSize={16}>

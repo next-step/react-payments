@@ -5,7 +5,7 @@ import { useSecretCode } from 'pages/AddingCard/hooks';
 
 import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
 
-function SecretCodeContainer() {
+function CardSecretCodeContainer() {
   const { secretCode, handleChangeSecretCode } = useSecretCode();
 
   return (
@@ -30,4 +30,4 @@ function SecretCodeContainer() {
   );
 }
 
-export default SecretCodeContainer;
+export default CardSecretCodeContainer;
