@@ -25,6 +25,7 @@ export const EmptyCard = styled.div`
   border-radius: 5px;
 
   user-select: none;
+  cursor: pointer;
 `;
 
 export const SmallCard = styled.div`
