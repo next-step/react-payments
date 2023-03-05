@@ -30,7 +30,7 @@ const FormPage = () => {
         <Text fontSize="lg" weight="bold" label="카드추가" />
       </Header>
       <div>
-        {isOpenComanyList ? <CompanyList onSelectedCompany={handleCompanyList} /> : <></>}
+        {isOpenComanyList && <CompanyList onSelectedCompany={handleCompanyList} />}
         <Card
           type="primary"
           onClick={() => setIsOpenCompanyList(true)}

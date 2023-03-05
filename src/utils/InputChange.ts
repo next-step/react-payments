@@ -23,13 +23,13 @@ export const changeCardNumber = (string: string): string => {
   return newString;
 };
 export const changeCardSecurityInput = (string: string) => {
-  let newString = string.replace(/[^0-9\*]/g, ""); //숫자 or *
+  const newString = string.replace(/[^0-9\*]/g, ""); //숫자 or *
   return newString.replaceAll(/[0-9]/g, "*");
 };
 export const changeMonth = (string: string) => {
   if (string.length > 2) return string[0] + string[1];
-  let newString = string.replace(/[^0-9\/]/g, ""); //숫자만 받기
-  let month = parseInt(newString);
+  const newString = string.replace(/[^0-9\/]/g, ""); //숫자만 받기
+  const month = parseInt(newString);
   if ((newString.length === 2 && month > 12) || (newString[1] === "0" && month < 10)) {
     return "";
   }
@@ -37,15 +37,15 @@ export const changeMonth = (string: string) => {
 };
 export const changeYear = (string: string) => {
   if (string.length > 2) return string[0] + string[1];
-  let newString = string.replace(/[^0-9\/]/g, ""); //숫자만 받기
-  let year = parseInt(newString);
+  const newString = string.replace(/[^0-9\/]/g, ""); //숫자만 받기
+  const year = parseInt(newString);
   if (newString.length === 2 && year === 0) {
     return "";
   }
   return newString;
 };
 export const changePassword = (string: string): string => {
-  let newString = string.replaceAll(/[^0-9]/g, ""); //숫자만 받기
+  const newString = string.replaceAll(/[^0-9]/g, ""); //숫자만 받기
   if (newString.length >= 1) {
     return "*";
   }

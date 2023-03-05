@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
-import Text from "components/common/Text/Text";
-import { ColorType, CompanyType, CardType } from "types";
 import { ReactEventHandler, useContext } from "react";
-import IconButton from "components/common/IconButton/IconButton";
 import { useNavigate } from "react-router-dom";
+import Text from "components/common/Text/Text";
+import IconButton from "components/common/IconButton/IconButton";
+import { ColorType, CompanyType, CardType } from "types";
 import { PaymentsContext } from "context/Payments";
 
 export type CardProps = {

@@ -19,7 +19,7 @@ const MyCardListPage = () => {
 
   return (
     <Layout>
-      <Title fontSize="2x" weight="bold" label="보유카드" />
+      <Title fontSize="xl" weight="bold" label="보유카드" />
       <ScrollContainer>
         <StyledAddCard type="add" size="small" onClick={handleAddCard} />
         {myCardList.map((card: CardType) => (

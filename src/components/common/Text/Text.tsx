@@ -42,7 +42,7 @@ const Layout = styled.span<LayoutProps>`
           font-size: 20px;
           line-height: 22px;
         `
-      : fontSize === "2x"
+      : fontSize === "xl"
       ? css`
           font-size: 24px;
           line-height: 22px;

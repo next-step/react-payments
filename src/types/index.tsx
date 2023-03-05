@@ -9,7 +9,7 @@ export type CompanyType =
   | "카카오카드"
   | "오렌지카드"
   | "";
-export type FontSizeType = "xs" | "s" | "m" | "lg" | "2x";
+export type FontSizeType = "xs" | "s" | "m" | "lg" | "xl";
 export type FontWeightType = "normal" | "bold";
 
 export interface CardFormType {

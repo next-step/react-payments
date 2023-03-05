@@ -20,28 +20,22 @@ export const isCardFormValidation = (form: CardFormType): boolean => {
   return isValid;
 };
 
-export const isValidExpirationMonth = (month: string | undefined) => {
-  if (!month) return false;
-  return month.length === 2;
+export const isValidExpirationMonth = (month: string) => {
+  return month?.length === 2;
 };
-export const isValidExpirationYear = (year: string | undefined) => {
-  if (!year) return false;
-  return year.length == 2;
+export const isValidExpirationYear = (year: string) => {
+  return year?.length == 2;
 };
 export const isValidCompany = (company: string) => {
   return company.length;
 };
-export const isValidSecurityCode = (code: string | undefined) => {
-  if (!code) return false;
-  return code.length === 3;
+export const isValidSecurityCode = (code: string) => {
+  return code?.length === 3;
 };
-export const isValidCardNumber = (cardNumber: string | undefined) => {
-  if (!cardNumber) return false;
-
-  return cardNumber.length === 19;
+export const isValidCardNumber = (cardNumber: string) => {
+  return cardNumber?.length === 19;
 };
 
-export const isValidPasswordNumber = (password: string | undefined) => {
-  if (!password) return false;
-  return password.length === 1;
+export const isValidPasswordNumber = (password: string) => {
+  return password?.length === 1;
 };
