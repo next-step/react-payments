@@ -6,9 +6,9 @@ import { Masking } from 'components/domain';
 import { MAX_LENGTH } from 'constants/card';
 import { theme } from 'constants/colors';
 
-import { CardCompany, ICard } from 'types/card';
+import { CardCompany, ICardWithoutId } from 'types/card';
 
-export interface CardProps extends Omit<ICard, 'company'> {
+export interface CardProps extends Omit<ICardWithoutId, 'company'> {
   company?: CardCompany;
 }
 

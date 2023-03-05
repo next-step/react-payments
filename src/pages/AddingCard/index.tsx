@@ -13,7 +13,7 @@ import { useRouter } from 'hooks';
 import { useNumbers, useExpiredDate, useOwner, useCompanyPicker } from './hooks';
 
 import { PATHS } from 'constants/router';
-import type { ICard } from 'types/card';
+import type { ICardWithoutId } from 'types/card';
 
 function AddingCard() {
   const { navigate, goBack } = useRouter();
@@ -25,7 +25,7 @@ function AddingCard() {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    const navigateState: ICard = {
+    const navigateState: ICardWithoutId = {
       numbers,
       expiredDate,
       owner,
