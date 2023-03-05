@@ -38,9 +38,6 @@ function CardList() {
           <Card>
             <span>+</span>
           </Card>
-          {/* <div className="card-box">
-            <div className="empty-card">+</div>
-          </div> */}
         </Link>
       </div>
     </div>
