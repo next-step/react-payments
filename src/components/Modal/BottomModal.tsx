@@ -20,7 +20,6 @@ const BottomModal = ({
   const handelClickBackground = () => {
     setShow(false);
   };
-  const handleTransitionStart = () => {};
   const handleTransitionEnd = () => {
     if (!show) onClose();
   };
@@ -36,7 +35,6 @@ const BottomModal = ({
           e.stopPropagation();
         }}
         show={show}
-        onAnimationStart={handleTransitionStart}
         onAnimationEnd={handleTransitionEnd}
       >
         {cloneElement(children as React.ReactElement, {
