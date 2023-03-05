@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useCardList } from '@/store';
 import { ROUTE } from '@/constants';
 import { EmptyCardButton } from '@/components';
-import CardItem from './components/CardItem/CardItem';
 import styled from '@emotion/styled';
+import { CardItem } from './components';
 
 const CardListPage = () => {
   const navigate = useNavigate();
