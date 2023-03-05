@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Card } from 'components/domain';
 import { Button, Input } from 'components/common';
@@ -19,15 +19,14 @@ function ConrimCard() {
   const { navigate, locationState: card } = useRouter<ICard>();
   const { addOrUpdateCard } = useCardActions();
   const [alias, setAlias] = useState(card.alias ?? '');
-  const title = card.alias ? TITLE.UPDATE : TITLE.ADD;
+  const title = useMemo(() => (card.alias ? TITLE.UPDATE : TITLE.ADD), [card.alias]);
+  const newAlias = useMemo(() => (alias === '' ? card.company : alias), [alias, card.company]);
 
   const handleChangeAlias: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setAlias(e.target.value);
   };
 
   const handleClickNextButton = () => {
-    const newAlias = alias === '' ? card.company : alias;
-
     addOrUpdateCard({ ...card, alias: newAlias });
 
     navigate(PATHS.HOME, { replace: true });
