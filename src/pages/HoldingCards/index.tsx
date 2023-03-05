@@ -4,8 +4,6 @@ import { HoldingCard } from 'components/domain';
 
 import { useCardContext } from 'contexts/CardContextProvider/hooks';
 
-import { ICard } from 'types/card';
-
 function HoldingCards() {
   const {
     state: { cards },
@@ -20,12 +18,10 @@ function HoldingCards() {
         <div className="empty-card">+</div>
       </Link>
       {cards.map((card) => (
-        <HoldingCard key={cardNumberToString(card)} card={card} />
+        <HoldingCard key={card.id} card={card} />
       ))}
     </div>
   );
 }
-
-const cardNumberToString = (card: ICard) => Object.values(card.numbers).toString();
 
 export default HoldingCards;
