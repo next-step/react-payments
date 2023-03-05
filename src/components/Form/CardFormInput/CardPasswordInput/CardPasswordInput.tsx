@@ -3,34 +3,47 @@ import styled from "styled-components";
 import Input from "../../../common/Input/Input";
 import { useRef } from "react";
 import { changePassword } from "utils/InputChange";
-import { ColorType, CardFormType } from "types";
-import { isValidPasswordNumber } from "../../../../utils/InputValidation";
+import { ColorType, CardFormType, CardFormInputsType } from "types";
+import { isValidPasswordNumber } from "utils/InputValidation";
 
 type CardPasswordInputProps = {
   fontColor: ColorType;
-  setPassword: React.Dispatch<React.SetStateAction<CardFormType>>;
+  setPasswordText: React.Dispatch<React.SetStateAction<CardFormType>>;
+  setPassWordFirstInput: (password: string) => void;
+  setPasswordEndInput: (password: string) => void;
+  isValidFirst: boolean;
+  isValidEnd: boolean;
+  refs: CardFormInputsType;
 };
 
-const CardPasswordInput = ({ fontColor, setPassword }: CardPasswordInputProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const inputRef2 = useRef<HTMLInputElement>(null);
-  const isValidOne = isValidPasswordNumber(inputRef.current?.value);
-  const isValidTwo = isValidPasswordNumber(inputRef2.current?.value);
-  const isValid = isValidOne && isValidTwo;
+const CardPasswordInput = ({
+  refs,
+  fontColor,
+  setPasswordText,
+  isValidFirst,
+  isValidEnd,
+  setPassWordFirstInput,
+  setPasswordEndInput,
+}: CardPasswordInputProps) => {
+  const isValid = isValidFirst && isValidEnd;
 
   const handleInput = () => {
-    if (inputRef.current === null || inputRef2.current === null) return;
-    const passwordOne = inputRef.current.value;
-    const passwordTwo = inputRef2.current.value;
-    inputRef.current.value = changePassword(passwordOne);
-    inputRef2.current.value = changePassword(passwordTwo);
-
-    setPassword((prev) => ({
+    if (!refs.password.first.ref || !refs.password.end.ref) return;
+    const passWordFirst = changePassword(refs.password.first.ref.value);
+    const passWordEnd = changePassword(refs.password.end.ref.value);
+    setPassWordFirstInput(passWordFirst);
+    setPasswordEndInput(passWordEnd);
+    setPasswordText((prev) => ({
       ...prev,
       password: {
-        one: passwordOne,
-        two: passwordTwo,
-        isValid: isValidPasswordNumber(passwordOne) && isValidPasswordNumber(passwordTwo),
+        first: {
+          text: passWordFirst,
+          isValid: isValidPasswordNumber(passWordFirst),
+        },
+        end: {
+          text: passWordEnd,
+          isValid: isValidPasswordNumber(passWordEnd),
+        },
       },
     }));
   };
@@ -43,19 +56,19 @@ const CardPasswordInput = ({ fontColor, setPassword }: CardPasswordInputProps) =
           theme="primary"
           type="text"
           active={true}
-          ref={inputRef}
+          ref={(el) => (refs.password.first.ref = el)}
           onChange={handleInput}
           fontColor={fontColor}
-          error={!isValidOne}
+          error={!isValidFirst}
         />
         <Input
           theme="primary"
           type="text"
           active={true}
-          ref={inputRef2}
+          ref={(el) => (refs.password.end.ref = el)}
           onChange={handleInput}
           fontColor={fontColor}
-          error={!isValidTwo}
+          error={!isValidEnd}
         />
         <Input theme="primary" type="text" active={false} />
         <Input theme="primary" type="text" active={false} />

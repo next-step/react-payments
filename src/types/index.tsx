@@ -28,9 +28,14 @@ export interface CardFormType {
     };
   };
   password: {
-    one: string;
-    two: string;
-    isValid: boolean;
+    first: {
+      text: string;
+      isValid: boolean;
+    };
+    end: {
+      text: string;
+      isValid: boolean;
+    };
   };
   cvc: {
     text: string;
@@ -56,8 +61,8 @@ export type CardType = {
     year: string;
   };
   password: {
-    one: string;
-    two: string;
+    first: string;
+    end: string;
   };
   cvc: string;
   ownerName: string;
@@ -65,4 +70,32 @@ export type CardType = {
   company: CompanyType;
   alias: string;
   id: string;
+};
+
+export type CardFormInputsType = {
+  cardNumbers: {
+    ref: HTMLInputElement | null;
+  };
+  expireDate: {
+    month: {
+      ref: HTMLInputElement | null;
+    };
+    year: {
+      ref: HTMLInputElement | null;
+    };
+  };
+  cvc: {
+    ref: HTMLInputElement | null;
+  };
+  ownerName: {
+    ref: HTMLInputElement | null;
+  };
+  password: {
+    first: {
+      ref: HTMLInputElement | null;
+    };
+    end: {
+      ref: HTMLInputElement | null;
+    };
+  };
 };

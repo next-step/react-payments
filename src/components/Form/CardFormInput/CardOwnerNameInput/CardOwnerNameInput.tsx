@@ -3,32 +3,33 @@ import styled from "styled-components";
 import Input from "../../../common/Input/Input";
 import { useRef, useState } from "react";
 import { changeOwnerName } from "utils/InputChange";
-import { ColorType, CardFormType } from "types";
+import { ColorType, CardFormType, CardFormInputsType } from "types";
 
 type CardOwnerNameInputProps = {
   fontColor: ColorType;
-  setOwnerName: React.Dispatch<React.SetStateAction<CardFormType>>;
+  setOwnerNameText: React.Dispatch<React.SetStateAction<CardFormType>>;
+  setOwnerNameInput: (ownerName: string) => void;
+  refs: CardFormInputsType;
 };
 
-const CardOwnerNameInput = ({ setOwnerName, fontColor }: CardOwnerNameInputProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+const CardOwnerNameInput = ({ setOwnerNameText, fontColor, setOwnerNameInput, refs }: CardOwnerNameInputProps) => {
   const [inputlength, setInputLength] = useState(0);
 
   const handleInput = () => {
-    const ref = inputRef.current;
-    if (ref === null) return;
-    const ownerName = changeOwnerName(ref.value);
-    ref.value = ownerName;
+    if (!refs.ownerName.ref) return;
+    const ownerName = changeOwnerName(refs.ownerName.ref.value);
+
+    setOwnerNameInput(ownerName);
     setInputLength(ownerName.length);
     return !ownerName.length
-      ? setOwnerName((prev) => ({
+      ? setOwnerNameText((prev) => ({
           ...prev,
           ownerName: {
             text: "Name",
             isValid: true,
           },
         }))
-      : setOwnerName((prev) => ({
+      : setOwnerNameText((prev) => ({
           ...prev,
           ownerName: {
             text: ownerName,
@@ -46,7 +47,7 @@ const CardOwnerNameInput = ({ setOwnerName, fontColor }: CardOwnerNameInputProps
         type="text"
         theme="primary"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        ref={inputRef}
+        ref={(el) => (refs.ownerName.ref = el)}
         onChange={handleInput}
         fontColor={fontColor}
         active={true}

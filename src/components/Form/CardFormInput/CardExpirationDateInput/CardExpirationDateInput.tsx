@@ -1,35 +1,37 @@
 import Input from "components/common/Input/Input";
 import Text from "components/common/Text/Text";
 import styled from "styled-components";
-import { useRef } from "react";
-import { changeMonth, changeYear } from "../../../../utils/InputChange";
-import { CardFormType } from "types";
+import { changeMonth, changeYear } from "utils/InputChange";
+import { CardFormType, CardFormInputsType, ColorType } from "types";
 import { isValidExpirationMonth, isValidExpirationYear } from "utils/InputValidation";
 export type CardExpirationDateInputProps = {
-  setExprireDate: React.Dispatch<React.SetStateAction<CardFormType>>;
+  setExprireDateText: React.Dispatch<React.SetStateAction<CardFormType>>;
+  setExpireDateMonthInput: (month: string) => void;
+  setExpireDateYearInput: (year: string) => void;
+  fontColor: ColorType;
+  refs: CardFormInputsType;
+  isValidMonth: boolean;
+  isValidYear: boolean;
 };
 
-const CardExpirationDateInput = ({ setExprireDate, fontColor }) => {
-  const inputMonthRef = useRef<HTMLInputElement>(null);
-  const inputYearRef = useRef<HTMLInputElement>(null);
-  const isValidMonth = isValidExpirationMonth(inputMonthRef.current?.value);
-  const isValidYear = isValidExpirationYear(inputYearRef.current?.value);
+const CardExpirationDateInput = ({
+  setExprireDateText,
+  fontColor,
+  refs,
+  isValidMonth,
+  isValidYear,
+  setExpireDateMonthInput,
+  setExpireDateYearInput,
+}: CardExpirationDateInputProps) => {
   const isValid = isValidMonth && isValidYear;
 
-  const handleInput = () => {
-    if (inputMonthRef.current === null || inputYearRef.current === null) return;
-    let month = changeMonth(inputMonthRef.current.value);
-    let year = changeYear(inputYearRef.current.value);
-    inputMonthRef.current.value = changeMonth(month);
-    inputYearRef.current.value = changeYear(year);
+  const handleMonthInput = () => {
+    if (!refs.expireDate.month.ref || !refs.expireDate.year.ref) return;
+    let month = changeMonth(refs.expireDate.month.ref.value);
+    let year = changeYear(refs.expireDate.year.ref.value);
 
-    if (!month.length) {
-      month = "MM";
-    }
-    if (!year.length) {
-      year = "YY";
-    }
-    setExprireDate((prev) => ({
+    setExpireDateMonthInput(month);
+    setExprireDateText((prev) => ({
       ...prev,
       expireDate: {
         month: {
@@ -42,6 +44,30 @@ const CardExpirationDateInput = ({ setExprireDate, fontColor }) => {
         },
       },
     }));
+    return isValidExpirationMonth(month) && refs.expireDate.year.ref.focus();
+  };
+
+  const handleYearInput = () => {
+    if (!refs.expireDate.month.ref || !refs.expireDate.year.ref) return;
+
+    let month = changeMonth(refs.expireDate.month.ref.value);
+    let year = changeYear(refs.expireDate.year.ref.value);
+
+    setExpireDateYearInput(year);
+    setExprireDateText((prev) => ({
+      ...prev,
+      expireDate: {
+        month: {
+          text: month,
+          isValid: isValidExpirationYear(month),
+        },
+        year: {
+          text: year,
+          isValid: isValidExpirationYear(year),
+        },
+      },
+    }));
+    return isValidExpirationYear(year) && refs.ownerName.ref?.focus();
   };
   return (
     <Layout>
@@ -51,8 +77,8 @@ const CardExpirationDateInput = ({ setExprireDate, fontColor }) => {
           type="text"
           placeholder="MM"
           theme="primary"
-          onChange={handleInput}
-          ref={inputMonthRef}
+          onChange={handleMonthInput}
+          ref={(el) => (refs.expireDate.month.ref = el)}
           fontColor={fontColor}
           active={true}
           error={!isValidMonth}
@@ -61,8 +87,8 @@ const CardExpirationDateInput = ({ setExprireDate, fontColor }) => {
           type="text"
           placeholder="YY"
           theme="primary"
-          onChange={handleInput}
-          ref={inputYearRef}
+          onChange={handleYearInput}
+          ref={(el) => (refs.expireDate.year.ref = el)}
           fontColor={fontColor}
           active={true}
           error={!isValidYear}

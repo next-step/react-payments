@@ -1,31 +1,37 @@
 import Text from "components/common/Text/Text";
-import { useRef } from "react";
 import styled from "styled-components";
 import { changeCardNumber } from "utils/InputChange";
 import Input from "../../../common/Input/Input";
-import { ColorType, CardFormType } from "types";
+import { ColorType, CardFormType, CardFormInputsType } from "types";
 import { isValidCardNumber } from "utils/InputValidation";
 type CardNumberInputProps = {
-  setCardNumber: React.Dispatch<React.SetStateAction<CardFormType>>;
+  setCardNumberText: React.Dispatch<React.SetStateAction<CardFormType>>;
+  setCardNumbersInput: (cardNumbers: string) => void;
+  isValid: boolean;
   fontColor: ColorType;
+  refs: CardFormInputsType;
 };
 
-const CardNumberInput = ({ setCardNumber, fontColor }: CardNumberInputProps) => {
-  const ref = useRef<HTMLInputElement>(null);
-  const isValid = isValidCardNumber(ref.current?.value);
-
+const CardNumberInput = ({
+  isValid,
+  setCardNumberText,
+  fontColor,
+  refs,
+  setCardNumbersInput,
+}: CardNumberInputProps) => {
   const handleInput = () => {
-    const currentRef = ref.current;
-    if (currentRef === null) return;
-    const cardNumbers = changeCardNumber(currentRef.value);
-    currentRef.value = cardNumbers;
-    setCardNumber((prev) => ({
+    if (!refs.cardNumbers.ref) return;
+    const cardNumbers = changeCardNumber(refs.cardNumbers.ref.value);
+    setCardNumbersInput(cardNumbers);
+    setCardNumberText((prev) => ({
       ...prev,
       cardNumbers: {
         text: cardNumbers,
         isValid: isValidCardNumber(cardNumbers),
       },
     }));
+
+    return isValidCardNumber(cardNumbers) && refs.expireDate.month.ref?.focus();
   };
 
   return (
@@ -33,7 +39,7 @@ const CardNumberInput = ({ setCardNumber, fontColor }: CardNumberInputProps) => 
       <Title fontSize="xs" weight="bold" label="카드 번호" />
       <Wrapper>
         <Input
-          ref={ref}
+          ref={(el) => (refs.cardNumbers.ref = el)}
           type="text"
           theme="primary"
           onChange={handleInput}

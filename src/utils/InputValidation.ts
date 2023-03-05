@@ -9,7 +9,8 @@ export const isCardFormValidation = (form: CardFormType): boolean => {
     form.expireDate.month.isValid &&
     form.expireDate.year.isValid &&
     form.ownerName.isValid &&
-    form.password.isValid;
+    form.password.first.isValid &&
+    form.password.end.isValid;
 
   try {
     if (!isValid) throw new ValidationError("입력하지 않은 양식을 확인하시오 !");

@@ -16,9 +16,14 @@ const initialCardFormState: CardFormType = {
     },
   },
   password: {
-    one: "",
-    two: "",
-    isValid: false,
+    first: {
+      text: "",
+      isValid: false,
+    },
+    end: {
+      text: "",
+      isValid: false,
+    },
   },
   cvc: {
     text: "",

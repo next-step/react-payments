@@ -3,30 +3,30 @@ import styled from "styled-components";
 import Input from "../../../common/Input/Input";
 import { useRef } from "react";
 import { changeCardSecurityInput } from "utils/InputChange";
-import { ColorType, CardFormType } from "types";
+import { ColorType, CardFormType, CardFormInputsType } from "types";
 import { isValidSecurityCode } from "utils/InputValidation";
 
 type CardPasswordInputProps = {
   fontColor: ColorType;
-  setSecurityCode: React.Dispatch<React.SetStateAction<CardFormType>>;
+  setSecurityCodeText: React.Dispatch<React.SetStateAction<CardFormType>>;
+  refs: CardFormInputsType;
+  setCvcInput: (cvc: string) => void;
+  isValid: boolean;
 };
 
-const CardSecurityInput = ({ fontColor, setSecurityCode }: CardPasswordInputProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const isValid = isValidSecurityCode(inputRef.current?.value);
-
+const CardSecurityInput = ({ fontColor, setSecurityCodeText, setCvcInput, refs, isValid }: CardPasswordInputProps) => {
   const handleInput = () => {
-    const ref = inputRef.current;
-    if (ref === null) return;
-    const securityCode = ref.value;
-    ref.value = changeCardSecurityInput(securityCode);
-    setSecurityCode((prev) => ({
+    if (!refs.cvc.ref) return;
+    const securityCode = refs.cvc.ref.value;
+    setCvcInput(changeCardSecurityInput(securityCode));
+    setSecurityCodeText((prev) => ({
       ...prev,
       cvc: {
         text: securityCode,
         isValid: isValidSecurityCode(securityCode),
       },
     }));
+    return isValidSecurityCode(securityCode) && refs.password.first.ref?.focus();
   };
 
   return (
@@ -36,7 +36,7 @@ const CardSecurityInput = ({ fontColor, setSecurityCode }: CardPasswordInputProp
         <Input
           theme="primary"
           type="text"
-          ref={inputRef}
+          ref={(el) => (refs.cvc.ref = el)}
           onChange={handleInput}
           fontColor={fontColor}
           active={true}

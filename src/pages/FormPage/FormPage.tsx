@@ -17,10 +17,22 @@ import uuid from "react-uuid";
 import Button from "components/common/Button/Button";
 import { ColorType, CompanyType } from "types";
 import { PaymentsContext } from "context/Payments";
+import useHandleCardFormInput from "hooks/useHandleCardFormInput";
 
 const FormPage = () => {
   const navigate = useNavigate();
   const { state, setState } = useHandleCardFormText();
+  const {
+    cardFormInputs,
+    setCardNumbersInput,
+    setExpireDateMonthInput,
+    setExpireDateYearInput,
+    setOwnerNameInput,
+    setCvcInput,
+    setPassWordFirstInput,
+    setPasswordEndInput,
+  } = useHandleCardFormInput();
+
   const paymentsCtx = useContext(PaymentsContext);
   const [isOpenModal, setIsOpenModal] = useState(true);
 
@@ -38,8 +50,8 @@ const FormPage = () => {
         year: currentFormCard.expireDate.year.text,
       },
       password: {
-        one: currentFormCard.password.one,
-        two: currentFormCard.password.two,
+        first: currentFormCard.password.first.text,
+        end: currentFormCard.password.end.text,
       },
       cvc: currentFormCard.cvc.text,
       ownerName: currentFormCard.ownerName.text,
@@ -94,11 +106,44 @@ const FormPage = () => {
           expireYear={state.expireDate.year.text}
           ownerName={state.ownerName.text}
         />
-        <CardNumberInput setCardNumber={setState} fontColor={state.color.text} />
-        <CardExpirationDateInput setExprireDate={setState} fontColor={state.color.text} />
-        <CardOwnerNameInput setOwnerName={setState} fontColor={state.color.text} />
-        <CardSecurityInput fontColor={state.color.text} setSecurityCode={setState} />
-        <CardPasswordInput fontColor={state.color.text} setPassword={setState} />
+        <CardNumberInput
+          setCardNumberText={setState}
+          isValid={state.cardNumbers.isValid}
+          fontColor={state.color.text}
+          refs={cardFormInputs}
+          setCardNumbersInput={setCardNumbersInput}
+        />
+        <CardExpirationDateInput
+          setExprireDateText={setState}
+          fontColor={state.color.text}
+          refs={cardFormInputs}
+          setExpireDateMonthInput={setExpireDateMonthInput}
+          setExpireDateYearInput={setExpireDateYearInput}
+          isValidMonth={state.expireDate.month.isValid}
+          isValidYear={state.expireDate.year.isValid}
+        />
+        <CardOwnerNameInput
+          setOwnerNameText={setState}
+          fontColor={state.color.text}
+          refs={cardFormInputs}
+          setOwnerNameInput={setOwnerNameInput}
+        />
+        <CardSecurityInput
+          fontColor={state.color.text}
+          setSecurityCodeText={setState}
+          setCvcInput={setCvcInput}
+          isValid={state.cvc.isValid}
+          refs={cardFormInputs}
+        />
+        <CardPasswordInput
+          fontColor={state.color.text}
+          setPasswordText={setState}
+          setPassWordFirstInput={setPassWordFirstInput}
+          setPasswordEndInput={setPasswordEndInput}
+          isValidFirst={state.password.first.isValid}
+          isValidEnd={state.password.end.isValid}
+          refs={cardFormInputs}
+        />
         <ButtonBox>
           <Button fontSize="m" onClick={submit} label="Next" />
         </ButtonBox>
@@ -123,4 +168,5 @@ const ButtonBox = styled.div`
   width: 100%;
   text-align: right;
 `;
+
 export default FormPage;
