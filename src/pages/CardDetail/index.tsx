@@ -25,7 +25,7 @@ export const CardDetailPage = () => {
   }, []);
 
   return (
-    <Layout variant="column" justify="center">
+    <Layout variant="column" justify="start">
       {card && (
         <>
           <TopNavigation>카드 별칭 수정하기</TopNavigation>

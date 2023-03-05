@@ -6,7 +6,6 @@ const Layout = styled(Flex, {
     variant: {
       column: {
         flexDirection: 'column',
-        justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
       },

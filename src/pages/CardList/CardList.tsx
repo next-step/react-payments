@@ -5,7 +5,6 @@ import {
   Button,
   CreditCard,
   Flex,
-  Layout,
   ScrollArea,
   Text,
 } from '@/components/UI';
@@ -30,7 +29,7 @@ const CardList = () => {
     e: React.MouseEvent<HTMLSpanElement, MouseEvent>,
     uid: string
   ) => {
-    e.preventDefault();
+    e.stopPropagation();
     const filteredCards = removeCard(uid);
     setCards(filteredCards);
   };
