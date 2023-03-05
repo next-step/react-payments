@@ -1,23 +1,25 @@
-import type { ICard, CardNumber } from 'types/card';
+import type { ICard, ICardWithoutId } from 'types/card';
 
-const concatCardNumber = (cardNumber: CardNumber) => Object.values(cardNumber).join('');
-const isMatchedCard = (cardA: ICard, cardB: ICard) =>
-  concatCardNumber(cardA.numbers) === concatCardNumber(cardB.numbers);
+const createCardId = () => new Date().getTime();
 
-export const filterCards = (cards: ICard[], target: ICard) => {
-  const filteredCards = cards.filter((card) => !isMatchedCard(card, target));
+export const filterCards = (cards: ICard[], id: number) => {
+  const filteredCards = cards.filter((card) => card.id !== id);
 
   return filteredCards;
 };
 
-export const addOrUpdateCard = (cards: ICard[], newCard: ICard) => {
-  const existedCard = cards.find((card) => isMatchedCard(card, newCard));
+export const addCard = (cards: ICard[], card: ICardWithoutId) => {
+  const id = createCardId();
+  const newCard: ICard = {
+    id,
+    ...card,
+  };
 
-  if (!existedCard) {
-    return [newCard, ...cards];
-  }
+  return [newCard, ...cards];
+};
 
-  const updatedCards = cards.map((card) => (isMatchedCard(card, newCard) ? newCard : card));
+export const updateCard = (cards: ICard[], newCard: ICard) => {
+  const updatedCards = cards.map((card) => (card.id === newCard.id ? newCard : card));
 
   return updatedCards;
 };
