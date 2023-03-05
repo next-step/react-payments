@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom';
 
 import { HoldingCard } from 'components/domain';
 
-import { useCardState } from 'contexts/CardContextProvider/hooks';
+import { useCardContext } from 'contexts/CardContextProvider/hooks';
 
 import { ICard } from 'types/card';
 
 function HoldingCards() {
-  const { cards } = useCardState();
+  const {
+    state: { cards },
+  } = useCardContext();
 
   return (
     <div className="app flex-column-center">

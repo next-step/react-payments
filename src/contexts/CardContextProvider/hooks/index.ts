@@ -1,2 +1,1 @@
-export { default as useCardDispatch } from './useCardDispatch';
-export { default as useCardState } from './useCardState';
+export { default as useCardContext } from './useCardContext';

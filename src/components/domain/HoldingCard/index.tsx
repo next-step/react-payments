@@ -4,7 +4,7 @@ import { css } from '@emotion/css';
 import { Card } from 'components/domain';
 import { Button } from 'components/common';
 
-import { useCardDispatch } from 'contexts/CardContextProvider/hooks';
+import { useCardContext } from 'contexts/CardContextProvider/hooks';
 
 import { PATHS } from 'constants/router';
 import { ICard } from 'types/card';
@@ -16,7 +16,7 @@ interface HodingCardProps {
 }
 
 function HoldingCard({ card }: HodingCardProps) {
-  const dispatch = useCardDispatch();
+  const { dispatch } = useCardContext();
 
   const handleClickDeleteButton = () => {
     const isCanDeleted = window.confirm(CONFIRM_MESSAGE);
