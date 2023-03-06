@@ -1,2 +1,0 @@
-var e=Object.defineProperty;var t=(r,o)=>e(r,"name",{value:o,configurable:!0});import{r as n}from"./index-a38f3d31.js";import{E as a}from"./CardSelectModalProvider-85a74e2a.js";import{b as m}from"./CardListProvider-b3c07bc8.js";function x(){const r=n.useContext(m);if(r===void 0)throw new Error(a.PROVIDER.INVALID_SCOPE);return r}t(x,"useCardOwnerNameContext");export{x as u};
-//# sourceMappingURL=useCardOwnerNameContext-a58278b0.js.map
