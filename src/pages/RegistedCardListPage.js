@@ -1,38 +1,57 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
 
-import {ROUTE_PATH} from "../constants/page"
+import { Link, useNavigate } from "react-router-dom";
+import { CardContext } from "../context/CardContext";
+import { CardListContext } from "../context/CardListContext";
+
+import { ROUTE_PATH } from "../constants/page";
+import Header from "../components/Header";
+import CardBox from "../components/CardBox";
 
 export default function RegistedCardListPage() {
+  const { cardInfo, setCardInfo } = useContext(CardContext);
+  const { cardList, setCardList } = useContext(CardListContext);
+  const navigate = useNavigate();
+
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
-        <h2 className="page-title mb-10">보유 카드</h2>
+        <Header className="page-title mb-10">보유 카드</Header>
       </div>
-      <div className="card-box">
-        <div className="small-card">
-          <div className="card-top">
-            <span className="card-text">클린카드</span>
-          </div>
-          <div className="card-middle">
-            <div className="small-card__chip"></div>
-          </div>
-          <div className="card-bottom">
-            <div className="card-bottom__number">
-              <span className="card-text">1111 - 2222 - oooo - oooo</span>
-            </div>
-            <div className="card-bottom__info">
-              <span className="card-text">YUJO</span>
-              <span className="card-text">12 / 23</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <span className="card-nickname">법인카드</span>
       <Link className="button-text" to={ROUTE_PATH.CARD_REGISTRATION}>
         <div className="card-box">
           <div className="empty-card">+</div>
         </div>
       </Link>
+      {cardList
+        .sort((a, b) => a - b)
+        .map((cardInfo, index) => {
+          return (
+            <div className="cardListItem">
+              <CardBox
+                cardInfo={cardInfo}
+                cardSize="small"
+                key={index}
+                onClick={() => {
+                  // TODO : isEdit 구분자 필요한지? 카드가 계속 추가되는 버그
+                  navigate(ROUTE_PATH.CARD_REGISTRATION_COMPLETED);
+                }}
+              />
+              <span className="card-nickname">{cardInfo["cardNickName"]}</span>
+              <button
+                className="button-delete"
+                type="button"
+                onClick={() =>
+                  setCardList(
+                    cardList.filter((cardInfo) => cardInfo[index] == index)
+                  )
+                }
+              >
+                삭제
+              </button>
+            </div>
+          );
+        })}
     </div>
   );
 }

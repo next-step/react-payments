@@ -27,5 +27,6 @@ export const CARD_OWNER_NAME = {
 export const MESSAGE = {
   ALERT_NUMBER: "숫자만 입력 가능합니다",
   ALERT_EXP_MONTH: "만료 월은 1~12 사이 값만 입력 가능합니다.",
-  ALERT_EXP_YEAR: "만료 일은 1~31 사이 값만 입력 가능합니다."
+  ALERT_EXP_YEAR: "만료 일은 1~31 사이 값만 입력 가능합니다.",
+  ALERT_OWNERNAME_MAXLENGTH: "최대 30자 까지 입력 가능합니다.",
 };
