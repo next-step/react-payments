@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
 
-import { Input } from '@/components/input'
+import { Input, InputTitle } from '@/components/input'
 
 type HandleOwnerProps = {
   value: string
@@ -18,10 +18,10 @@ const CardOwner = ({ owner, handleChange }: CardOwnerProps) => {
 
   return (
     <div className="input-container">
-      <div className="input-title">
+      <InputTitle>
         <span>카드 소유자 이름(선택)</span>
         <span>{`${owner.length}`}/30</span>
-      </div>
+      </InputTitle>
       <Input
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         value={owner}
