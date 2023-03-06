@@ -1,9 +1,11 @@
 import React from 'react';
 import './card.css';
 
+import { replaceStringChunkWithToken } from '../../util';
+
 export interface Props {
   company: string;
-  number: string;
+  number: [string, string, string, string];
   owner: string;
   expiration: {
     month: string;
@@ -11,14 +13,7 @@ export interface Props {
   };
 }
 
-function Card(props: Props) {
-  const {
-    company,
-    number,
-    owner,
-    expiration: { month, year },
-  } = props;
-
+function Card({ company, number, owner, expiration: { month, year } }: Props) {
   return (
     <div className="empty-card">
       <div className="card-top">{company}</div>
@@ -27,7 +22,7 @@ function Card(props: Props) {
       </div>
       <div className="card-bottom">
         <div className="card-bottom__number">
-          {replaceDigitsWithDot(splitCardNumber(number), 2).join(' ')}
+          {replaceStringChunkWithToken(number, [2, 3], '*').join(' ')}
         </div>
         <div className="card-bottom__info">
           <span className="card-text">{owner}</span>
@@ -39,32 +34,5 @@ function Card(props: Props) {
     </div>
   );
 }
-
-const splitCardNumber = (number: string): string[] => {
-  let digits = '';
-  const splittedNumberArr: string[] = [];
-  for (let i = 0; i < number.length; i++) {
-    if (i > 0 && i % 4 === 0) {
-      splittedNumberArr.push(digits);
-      digits = '';
-    }
-    digits += number[i];
-  }
-  splittedNumberArr.push(digits);
-  return splittedNumberArr;
-};
-
-const replaceDigitsWithDot = (
-  numberArr: string[],
-  numberOfDigitsChunkToReplace: number
-): string[] => {
-  const replacedNumberArr: string[] = [];
-  for (let i = 0; i < numberArr.length; i++) {
-    if (i < numberArr.length - numberOfDigitsChunkToReplace)
-      replacedNumberArr.push(numberArr[i]);
-    else replacedNumberArr.push('····');
-  }
-  return replacedNumberArr;
-};
 
 export default Card;
