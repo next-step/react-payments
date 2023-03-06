@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { useCard } from '../../store/CardContext';
 
-
 import Header from '../../components/common/Header/Header';
 import Card from '../../components/domain/Card/Card';
 import CardForm from '../../components/domain/CardForm/CardForm';
@@ -16,7 +15,6 @@ const CardRegistrationPage = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   const goBackToListPage = (e) => {
     navigate('/');
   };
@@ -24,7 +22,6 @@ const CardRegistrationPage = () => {
   const handleCardClick = () => {
     setIsModalOpen(!isModalOpen);
   };
-
 
   return (
     <>

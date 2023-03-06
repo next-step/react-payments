@@ -4,14 +4,14 @@ import CardNicknameInput from '../../components/domain/CardInput/CardNickname/Ca
 import Button from '../../components/common/Button/Button';
 import { initialState, useCard } from '../../store/CardContext';
 import { useNavigate, Form, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, setState, useEffect } from 'react';
 import { CHANGE_CARD } from '../../constants/action';
 import { MAX_INPUT_LENGTH } from '../../constants/numbers';
 
 const CardNicknamePage = () => {
   const [id, setId] = useState(0);
   const [data, setData] = useState(initialState);
-  const [cardNickname, setCardNickname] = useState('');
+  const [setCardNickname] = setState('');
 
   const { cardInfo, changeCardInfo, registerCard } = useCard();
   const navigate = useNavigate();
@@ -33,7 +33,6 @@ const CardNicknamePage = () => {
 
   const isValidNickname = (value) => {
     if (value.length > MAX_INPUT_LENGTH.CARD_NICKNAME) {
-      console.log('test error');
       changeCardInfo(
         CHANGE_CARD.ERROR,
         `최대 ${MAX_INPUT_LENGTH.CARD_NICKNAME}자리까지만 가능합니다.`
