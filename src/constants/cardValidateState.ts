@@ -14,7 +14,7 @@ export const INITAL_CARD_STATE = {
       value: '',
       error: null,
     },
-    thirdNumber: {
+    fourthNumber: {
       value: '',
       error: null,
     },
