@@ -2,7 +2,7 @@ const Header = ({ pageTitle, headerIcon, onClick }) => {
   return (
     <div id='header' className='page-title mt-5 mb-10'>
       {headerIcon ? (
-        <div id='icon' className='cursor-pointer' onClick={onClick}>
+        <div className='cursor-pointer' onClick={onClick}>
           {headerIcon}
         </div>
       ) : (
