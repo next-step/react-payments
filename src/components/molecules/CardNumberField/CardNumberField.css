@@ -1,0 +1,10 @@
+.card-number-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-number-container input {
+  width: 40px;
+  text-align: center;
+}
