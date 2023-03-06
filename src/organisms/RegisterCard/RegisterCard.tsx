@@ -12,11 +12,16 @@ import { UI_SIZE, UI_VARIANT } from 'constants/ui.constant'
 import INPUTS from 'utils/inputs'
 import './RegisterCard.css'
 import { FormGroup } from 'components/molecules/FormGroup'
-import { PasswordFormGroup } from 'components/molecules/PasswordFormGroup'
 import { Button } from 'components/atoms/Button'
 import RegisterCardForm from 'organisms/RegisterCardForm/RegisterCardForm'
 import { INIT_CARD_VALUE } from 'constants/card'
 import { useFormContext } from 'context/FormContext'
+import { CardNumberField } from 'components/molecules/CardNumberField'
+import { FlexMainTemplate } from 'templates/FlexMainTemplate'
+import { CardExpireDateField } from 'components/molecules/CardExpireDateField'
+import { CardOwnerField } from 'components/molecules/CardOwnerField'
+import { CVCField } from 'components/molecules/CVCField'
+import { PasswordField } from 'components/molecules/PasswordField'
 
 type RegisterCardProps = {
   // card: PaymentCard
@@ -68,8 +73,16 @@ const RegisterCard: React.FC<RegisterCardProps> = ({
         icon={<AiOutlineLeft />}
         onClickIcon={onNavigate}
       />
-      {/* <Card card={state} size={UI_SIZE.SMALL} isShowNickname={false} /> */}
-      <div className='card-form'></div>
+      <FlexMainTemplate>
+        {/* <Card card={state} size={UI_SIZE.SMALL} isShowNickname={false} /> */}
+        <form className='card-form'>
+          <CardNumberField />
+          <CardExpireDateField />
+          <CardOwnerField />
+          <CVCField />
+          <PasswordField />
+        </form>
+      </FlexMainTemplate>
     </>
   )
 }

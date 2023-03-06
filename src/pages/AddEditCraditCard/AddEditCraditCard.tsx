@@ -33,16 +33,23 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
   const [isComplete, setIsComplete] = useState(false)
   const [state, dispatch] = useReducer(CardFormReducer, INITAL_CARD_STATE)
 
-  const handleChange = (name: AddPaymentCardKeys, newValue: string) => {
-    const error = null
+  const handleChange = (payload: {
+    error: any
+    innerKey: any
+    key: any
+    newValue: any
+  }) => {
     dispatch({
       type: 'updateForm',
-      payload: {
-        newValue,
-        error,
-        key: name,
-      },
+      payload,
     })
+
+    // {
+    //   newValue,
+    //   error,
+    //   key: name,
+    //   innerKey: innerKey ?? '',
+    // }
   }
 
   // const completeCardRegistor = () => {

@@ -112,7 +112,7 @@ const RegisterCardForm: React.FC<RegisterCardFormProps> = ({
         onChangeCardNumbers={onChangeCardNumbers}
       /> */}
 
-      <FormGroup
+      {/* <FormGroup
         label='만료일'
         isInvalid={false}
         input={
@@ -188,7 +188,7 @@ const RegisterCardForm: React.FC<RegisterCardFormProps> = ({
             <span>⦁</span>
           </>
         }
-      ></FormGroup>
+      ></FormGroup> */}
       <button type='submit'>다음</button>
     </form>
   )
