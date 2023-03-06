@@ -1,6 +1,5 @@
-import { createContext, useContext, useState, useReducer } from 'react';
+import { createContext, useContext, useReducer } from 'react';
 import { cardReducer } from './cardReducer';
-import { CHANGE_CARD } from '../constants/action';
 
 export const initialState = {
   id: 0,

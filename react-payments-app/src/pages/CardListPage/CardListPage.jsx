@@ -4,10 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/Header/Header';
 import Card from '../../components/domain/Card/Card';
 import CardShapedButton from '../../components/domain/Card/CardShapedButton/CardShapedButton';
-import { useCard } from '../../store/CardContext';
 
 const CardListPage = () => {
-  const { cardList } = useCard();
   const navigate = useNavigate();
 
   // localStorage 전체 값 불러오기

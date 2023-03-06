@@ -21,7 +21,7 @@
     "max-depth": 2,
     // "max-lines": ["error", 15],
     "no-var": "error",
-    "no-unused-vars": "error",
+    "no-unused-vars": "warn",
     "no-console": "error"
   }
 }

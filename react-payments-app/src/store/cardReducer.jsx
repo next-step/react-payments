@@ -20,9 +20,8 @@ export const cardReducer = (state, action) => {
     case CHANGE_CARD.ERROR:
       return { ...state, error: action.payload };
     case CHANGE_CARD.ID:
-      return { ...state, id: new Date().getTime() };
-
-    case CHANGE_CARD.INIT_CARD:
+      return { ...state, id: action.payload };
+    case CHANGE_CARD.INIT:
       return initialState;
     default:
       throw new Error('Invalid action type');

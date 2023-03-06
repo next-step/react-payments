@@ -1,15 +1,12 @@
-import { useState } from 'react';
 import { CHANGE_CARD } from '../../../../constants/action';
 import { MAX_INPUT_LENGTH } from '../../../../constants/numbers';
 import { useCard } from '../../../../store/CardContext';
-import { formatCardNumbers, maskLastEight } from '../../../../utils/format';
+import { formatCardNumbers } from '../../../../utils/format';
 import Input from '../../../common/Input/Input';
 import InputBox from '../../../common/Input/InputBox';
 
 const CardNumbersInput = () => {
   const { cardInfo, changeCardInfo } = useCard();
-
-  const [cardNumbers, setCardNumbers] = useState('');
 
   const handleCardNumbersChange = (e) => {
     const { value } = e.target;

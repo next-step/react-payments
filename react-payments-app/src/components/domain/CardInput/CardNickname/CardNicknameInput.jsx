@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { MAX_INPUT_LENGTH } from '../../../../constants/numbers';
-import { useCard } from '../../../../store/CardContext';
 import Input from '../../../common/Input/Input';
 
 const CardNicknameInput = ({ onChange }) => {
