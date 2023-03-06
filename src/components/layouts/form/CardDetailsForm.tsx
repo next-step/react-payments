@@ -2,10 +2,9 @@ import { PropsWithChildren } from 'react'
 
 import { NavigationTextButton } from '@/components/button'
 import { BigCard } from '@/components/card'
-import { CardAliasInput } from '@/components/input'
+import { CardAliasInput, InputContainer } from '@/components/input'
+import { PageTitle } from '@/components/layouts'
 import { getCardDetailsFormSubElement } from '@/domain'
-
-import { PageTitle } from '../title'
 
 const CardDetailsForm = ({ children }: PropsWithChildren) => {
   const bigCard = getCardDetailsFormSubElement(children, BigCard)
@@ -16,7 +15,7 @@ const CardDetailsForm = ({ children }: PropsWithChildren) => {
     <div className="app flex-column-center">
       <div className="flex-center">{pageTitle}</div>
       {bigCard}
-      <div className="input-container flex-center w-100">{cardAliasInput}</div>
+      <InputContainer addtionalClassName="flex-center w-100">{cardAliasInput}</InputContainer>
       {navigationTextButton}
     </div>
   )

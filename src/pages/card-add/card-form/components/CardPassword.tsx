@@ -1,4 +1,4 @@
-import { Input, InputTitle } from '@/components/input'
+import { Input, InputTitle, InputContainer } from '@/components/input'
 import { CardPasswordProps } from '@/pages/card-add/card-form/types'
 import { useSequentialInputFocus } from '@/pages/hooks'
 
@@ -9,7 +9,7 @@ const CardPassword = ({ passwordRef }: CardPasswordProps) => {
   ])
 
   return (
-    <div className="input-container">
+    <InputContainer>
       <InputTitle>카드 비밀번호</InputTitle>
       <div className="input-password-container">
         <Input ref={passwordRef.first} addtionalClassName="w-15" type="password" maxLength={1} />
@@ -18,7 +18,7 @@ const CardPassword = ({ passwordRef }: CardPasswordProps) => {
         <Input ref={passwordRef.second} addtionalClassName="w-15 bg-white" type="password" value="x" readOnly />
         <Input ref={passwordRef.second} addtionalClassName="w-15 bg-white" type="password" value="x" readOnly />
       </div>
-    </div>
+    </InputContainer>
   )
 }
 
