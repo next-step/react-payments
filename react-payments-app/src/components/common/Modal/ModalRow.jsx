@@ -17,7 +17,7 @@ const ModalRow = ({ data, onClick }) => {
   return (
     <div className='flex-center'>
       {Array.isArray(data)
-        ? data?.map((company) => (
+        ? data.map((company) => (
             <div
               key={company.id.toString()}
               id={company.id}
