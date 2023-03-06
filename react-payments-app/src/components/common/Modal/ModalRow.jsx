@@ -19,7 +19,7 @@ const ModalRow = ({ data, onClick }) => {
       {Array.isArray(data)
         ? data.map((company) => (
             <div
-              key={company.id.toString()}
+              key={company.id}
               id={company.id}
               className='modal-item-container'
               onClick={handleCompanySelected}
