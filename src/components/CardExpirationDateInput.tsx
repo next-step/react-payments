@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
-import { CardContext } from "../contexts/Card";
+import { CardContext } from "../contexts/PaymentsCardContext";
 import {
   InputBasic,
   InputBox,

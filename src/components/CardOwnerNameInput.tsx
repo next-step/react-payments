@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import styled from "styled-components";
 import { InputContainer, InputTitle, InputBasic } from "./common/Input";
-import { CardContext } from "../contexts/Card";
+import { CardContext } from "../contexts/PaymentsCardContext";
 
 const StyledInputBasic = styled(InputBasic)`
   text-transform: uppercase;

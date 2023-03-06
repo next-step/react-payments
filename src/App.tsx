@@ -2,7 +2,7 @@ import React from "react";
 import CardAddPage from "./pages/CardAddPage";
 import CardListPage from "./pages/CardListPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { CardProvider } from "./contexts/Card";
+import { CardProvider } from "./contexts/PaymentsCardContext";
 
 const App = () => {
   return (

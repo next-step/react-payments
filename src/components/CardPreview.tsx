@@ -7,11 +7,10 @@ import {
   CardMiddle,
   CardText,
   CardTop,
-  EmptyCard,
-  SmallCard,
+  PaymentsCard,
   SmallCardChip,
-} from "./common/Card";
-import { CardContext } from "../contexts/Card";
+} from "./common/PaymentsCard";
+import { CardContext } from "../contexts/PaymentsCardContext";
 
 export interface CardPreviewProps {
   isAllInfoEntered: boolean;
@@ -53,41 +52,45 @@ const CardPreview: React.FC<CardPreviewProps> = ({ isAllInfoEntered }) => {
   return (
     <CardBox>
       {isAllInfoEntered ? (
-        <SmallCard>
-          <CardTop>
-            <CardText>클린카드</CardText>
-          </CardTop>
-          <CardMiddle>
-            <SmallCardChip />
-          </CardMiddle>
-          <CardBottom>
-            <CardBottomNumber>
-              <CardText>{maskedCardNumber}</CardText>
-            </CardBottomNumber>
-            <CardBottomInfo>
-              <CardText>{formattedOwnerName}</CardText>
-              <CardText>{formattedExpirationDate}</CardText>
-            </CardBottomInfo>
-          </CardBottom>
-        </SmallCard>
+        <CardBox>
+          <PaymentsCard type="small">
+            <CardTop>
+              <CardText>클린카드</CardText>
+            </CardTop>
+            <CardMiddle>
+              <SmallCardChip />
+            </CardMiddle>
+            <CardBottom>
+              <CardBottomNumber>
+                <CardText>{maskedCardNumber}</CardText>
+              </CardBottomNumber>
+              <CardBottomInfo>
+                <CardText>{formattedOwnerName}</CardText>
+                <CardText>{formattedExpirationDate}</CardText>
+              </CardBottomInfo>
+            </CardBottom>
+          </PaymentsCard>
+        </CardBox>
       ) : (
-        <EmptyCard>
-          <CardTop>
-            <CardText>클린카드</CardText>
-          </CardTop>
-          <CardMiddle>
-            <SmallCardChip />
-          </CardMiddle>
-          <CardBottom>
-            <CardBottomNumber>
-              <CardText>{maskedCardNumber}</CardText>
-            </CardBottomNumber>
-            <CardBottomInfo>
-              <CardText>{formattedOwnerName}</CardText>
-              <CardText>{formattedExpirationDate}</CardText>
-            </CardBottomInfo>
-          </CardBottom>
-        </EmptyCard>
+        <CardBox>
+          <PaymentsCard type="empty">
+            <CardTop>
+              <CardText>클린카드</CardText>
+            </CardTop>
+            <CardMiddle>
+              <SmallCardChip />
+            </CardMiddle>
+            <CardBottom>
+              <CardBottomNumber>
+                <CardText>{maskedCardNumber}</CardText>
+              </CardBottomNumber>
+              <CardBottomInfo>
+                <CardText>{formattedOwnerName}</CardText>
+                <CardText>{formattedExpirationDate}</CardText>
+              </CardBottomInfo>
+            </CardBottom>
+          </PaymentsCard>
+        </CardBox>
       )}
     </CardBox>
   );

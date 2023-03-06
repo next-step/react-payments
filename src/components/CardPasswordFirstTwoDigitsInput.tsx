@@ -5,7 +5,7 @@ import {
   InputBasic,
   InputBox,
 } from "./common/Input";
-import { CardContext } from "../contexts/Card";
+import { CardContext } from "../contexts/PaymentsCardContext";
 
 const CardPasswordFirstTwoDigitsInput = () => {
   const { passwordFirstTwoDigits, setPasswordFirstTwoDigits } =

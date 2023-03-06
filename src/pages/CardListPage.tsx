@@ -1,7 +1,16 @@
 import React from "react";
-import { CardBox, EmptyCard } from "../components/common/Card";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import DefaultLayout from "../components/common/DefaultLayout";
+import {
+  CardBox,
+  CardTextBig,
+  PaymentsCard,
+} from "../components/common/PaymentsCard";
+
+const AddCardText = styled(CardTextBig)`
+  cursor: pointer;
+`;
 
 const CardListPage = () => {
   const navigate = useNavigate();
@@ -13,7 +22,9 @@ const CardListPage = () => {
   return (
     <DefaultLayout pageTitle={"카드 목록"}>
       <CardBox>
-        <EmptyCard onClick={handleEmptyCardClick}>+</EmptyCard>
+        <PaymentsCard type="empty" onClick={handleEmptyCardClick}>
+          <AddCardText>+</AddCardText>
+        </PaymentsCard>
       </CardBox>
     </DefaultLayout>
   );

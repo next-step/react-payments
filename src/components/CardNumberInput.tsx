@@ -5,7 +5,7 @@ import {
   InputContainer,
   InputTitle,
 } from "./common/Input";
-import { CardContext } from "../contexts/Card";
+import { CardContext } from "../contexts/PaymentsCardContext";
 
 export interface CardNumberInputProps {
   onChange: (cardNumber: string) => void;

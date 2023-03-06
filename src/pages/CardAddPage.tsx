@@ -8,7 +8,7 @@ import CardSecurityCodeInput from "../components/CardSecurityCodeInput";
 import DefaultLayout from "../components/common/DefaultLayout";
 import { useNavigate } from "react-router-dom";
 import CardSubmitButton from "../components/CardSubmitButton";
-import { CardContext } from "../contexts/Card";
+import { CardContext } from "../contexts/PaymentsCardContext";
 
 export interface CardAddPageProps {
   handleGoBack?: () => void;
