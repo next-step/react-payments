@@ -3,7 +3,7 @@ import { Input, InputContainer } from '../../components/form';
 import { memo, useCallback, useState } from 'react';
 import { Validator } from '../../domain';
 import { onlyNumber } from '../../utils/keyInterceptor';
-import { useCardContext } from '../../provider/card-box';
+import useCardDispatch from '../../provider/card-box/hooks/useCardDispatch';
 
 const MAX_LENGTH = 2;
 const VALIDATE_ERROR = {
@@ -12,7 +12,7 @@ const VALIDATE_ERROR = {
 };
 
 function ExpiredDateContainer() {
-  const { setCardState } = useCardContext();
+  const cardDispatch = useCardDispatch();
   const { isPreviousDate } = Validator();
   const [errorMessage, setErrorMessage] = useState('');
   const [expiredDateRef, getExpiredDateRefs] = useRefs<HTMLInputElement>(['month', 'year']);
@@ -21,7 +21,10 @@ function ExpiredDateContainer() {
     const expiredDate = getExpiredDateRefs().map((item) => item.value);
     const [month, year] = expiredDate;
 
-    setCardState({ expiredDate: expiredDate.join('') });
+    cardDispatch({
+      type: 'SET_CARD',
+      payload: { expiredDate: expiredDate.join('') }
+    });
 
     if (Number(month) < 1 || Number(month) > 12) {
       setErrorMessage(VALIDATE_ERROR.MONTH);

@@ -11,12 +11,14 @@ import {
 import { Button } from '../components/form';
 import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
-import { useCardContext } from '../provider/card-box';
+import useCardState from '../provider/card-box/hooks/useCardState';
+import useCardDispatch from '../provider/card-box/hooks/useCardDispatch';
 
 export default function RegisterCard() {
+  const cardState = useCardState();
+  const cardDispatch = useCardDispatch();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const { cardState, setCardState } = useCardContext();
 
   useEffect(() => {
     const { cardNumber, brand } = cardState;
@@ -33,6 +35,9 @@ export default function RegisterCard() {
   const moveCardList = () => navigate('/');
   const handleClickOutside = () => {
     setShowModal(false);
+  };
+  const handleCardCompany = (company) => {
+    cardDispatch({ type: 'SET_CARD', payload: company });
   };
   const saveCardData = () => {
     const cardIndex = new Date().getTime();
@@ -58,7 +63,7 @@ export default function RegisterCard() {
       <Button onClick={saveCardData}>다음</Button>
       {showModal && (
         <Modal onClickOutside={handleClickOutside}>
-          <CardSelection onChange={setCardState}/>
+          <CardSelection onChange={handleCardCompany}/>
         </Modal>
       )}
     </div>

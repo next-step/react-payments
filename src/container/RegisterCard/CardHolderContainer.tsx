@@ -1,11 +1,11 @@
 import { Input, InputContainer } from '../../components/form';
 import { memo, useCallback, useRef, useState } from 'react';
-import { useCardContext } from '../../provider/card-box';
+import useCardDispatch from '../../provider/card-box/hooks/useCardDispatch';
 
 const MAX_LENGTH = 30;
 
 function CardHolderContainer() {
-  const { setCardState } = useCardContext();
+  const cardDispatch = useCardDispatch();
   const cardHolderRef = useRef<HTMLInputElement>(null);
   const [count, setCount] = useState(0);
 
@@ -13,7 +13,10 @@ function CardHolderContainer() {
     const cardHolder = cardHolderRef?.current.value;
 
     setCount(cardHolder.length);
-    setCardState({ cardHolder });
+    cardDispatch({
+      type: 'SET_CARD',
+      payload: { cardHolder }
+    });
   }, []);
 
   return (
