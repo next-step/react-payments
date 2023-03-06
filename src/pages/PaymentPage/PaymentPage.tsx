@@ -1,31 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState, useReducer } from 'react'
 
 import { AddEditCraditCard } from 'pages/AddEditCraditCard'
 import { PaymentMain } from 'pages/PaymentMain'
-import { Loading } from 'components/atoms/Loading'
-import { ErrorIcon } from 'components/atoms/ErrorIcon'
-import useCards from 'hooks/useCards'
-import { CardType } from 'models/card.model'
-import { INIT_CARD_VALUE } from 'constants/card'
+import { AddPaymentCard, PaymentCard } from 'models/card.model'
+import { DUMMY_PAYMENT_CARD, INIT_PAYMENT_CARD_INFO } from 'constants/card'
+import { CardReducer } from 'reducers/CardReducer'
 
 const PaymentPage = () => {
   const [isAddEditCard, setIsAddEditCard] = useState(false)
-  const { loading, error, cards, addCard } = useCards()
-  const [selectCard, setSelectCard] = useState(INIT_CARD_VALUE)
-
-  if (loading) {
-    return <Loading />
-  }
-
-  if (error) {
-    return <ErrorIcon message={error.message} />
-  }
+  const [selectCard, setSelectCard] = useState(INIT_PAYMENT_CARD_INFO)
+  const [cards, dispatch] = useReducer(CardReducer, DUMMY_PAYMENT_CARD)
 
   const editStart = () => setIsAddEditCard(true)
   const editEnd = () => setIsAddEditCard(false)
 
-  const onAddEditCard = (card?: CardType) => {
-    setSelectCard(card ?? INIT_CARD_VALUE)
+  const onAddEditCard = (card?: PaymentCard) => {
+    setSelectCard(card ?? INIT_PAYMENT_CARD_INFO)
     editStart()
   }
 
@@ -33,8 +23,7 @@ const PaymentPage = () => {
     <>
       {isAddEditCard ? (
         <AddEditCraditCard
-          onNavigate={editEnd}
-          addCard={addCard}
+          onNavigateNext={editEnd}
           initCardValue={selectCard}
         />
       ) : (

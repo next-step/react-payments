@@ -1,6 +1,10 @@
 import { UI_VARIANT } from 'constants/ui.constant'
 import { UiVariant } from 'models/ui.model'
-import React, { ChangeEvent, HTMLInputTypeAttribute } from 'react'
+import React, {
+  ChangeEvent,
+  HTMLInputTypeAttribute,
+  InputHTMLAttributes,
+} from 'react'
 import './Input.css'
 
 type InputProps = {
@@ -14,7 +18,7 @@ type InputProps = {
   name: string
   /** Input 종류 */
   variant?: UiVariant
-}
+} & InputHTMLAttributes<HTMLInputElement>
 
 const Input: React.FC<InputProps> = ({
   placeholder = '',
@@ -23,6 +27,7 @@ const Input: React.FC<InputProps> = ({
   value,
   name,
   variant = UI_VARIANT.FILL,
+  ...props
 }) => {
   return (
     <input
@@ -32,6 +37,7 @@ const Input: React.FC<InputProps> = ({
       placeholder={placeholder}
       onChange={onChange}
       name={name}
+      {...props}
     />
   )
 }

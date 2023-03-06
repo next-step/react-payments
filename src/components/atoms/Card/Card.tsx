@@ -1,14 +1,14 @@
 import React from 'react'
-import { CardType, CardTypeKeys } from 'models/card.model'
+import { PaymentCard } from 'models/card.model'
 import { CARD_COMPANYS, EMPTY_CARD_VIEW_ID } from 'constants/card'
 import { UiSize } from 'models/ui.model'
 import './Card.css'
 
 type CardProps = {
-  card: CardType
+  card: PaymentCard
   size: Omit<UiSize, 'medium'>
   isShowNickname?: boolean
-  onClick?: (card?: CardType) => void
+  onClick?: (card?: PaymentCard) => void
 }
 
 const Card: React.FC<CardProps> = ({
@@ -18,9 +18,10 @@ const Card: React.FC<CardProps> = ({
   isShowNickname = false,
 }) => {
   const cardCompnayInfo = CARD_COMPANYS[card.cardCompanyCode]
-  const [first, second, third, fourth] = card.cardNumber.split('-')
+  const { firstNumber, secondNumber, thridNumber, fourthNumber } =
+    card.cardNumbers
 
-  const onUpdateOrAddCard = (card: CardType) => {
+  const onUpdateOrAddCard = (card: PaymentCard) => {
     if (!onClick) return
     if (card.id === EMPTY_CARD_VIEW_ID) {
       onClick()
@@ -47,12 +48,12 @@ const Card: React.FC<CardProps> = ({
           <div className='card-bottom'>
             <div className='card-bottom__number'>
               <span className={`card-text-${size}`}>
-                {card.cardNumber && (
+                {card.cardNumbers && (
                   <>
-                    <span className='card-number'>{first}</span>
-                    <span className='card-number'>{second}</span>
-                    <span className='card-number'>{third}</span>
-                    <span className='card-number'>{fourth}</span>
+                    <span className='card-number'>{firstNumber}</span>
+                    <span className='card-number'>{secondNumber}</span>
+                    <span className='card-number'>{thridNumber}</span>
+                    <span className='card-number'>{fourthNumber}</span>
                   </>
                 )}
               </span>
@@ -62,7 +63,9 @@ const Card: React.FC<CardProps> = ({
                 <span className='card-owner-text'>{card.cardOwner}</span>
               </span>
               <span className={`card-text-${size} card-expire`}>
-                {card.expireDate}
+                <span>
+                  {card.cardExpireDate.month}/{card.cardExpireDate.year}
+                </span>
               </span>
             </div>
           </div>

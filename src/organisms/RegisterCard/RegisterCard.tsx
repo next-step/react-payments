@@ -1,71 +1,66 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, useContext, useState } from 'react'
 import { Header } from 'components/molecules/Header'
 import { AiOutlineLeft } from 'react-icons/ai'
-import { CardType, CardTypeKeys, OnChangeEventParams } from 'models/card.model'
+import {
+  CardType,
+  CardTypeKeys,
+  OnChangeEventParams,
+  PaymentCard,
+} from 'models/card.model'
 import { Card } from 'components/atoms/Card'
 import { UI_SIZE, UI_VARIANT } from 'constants/ui.constant'
 import INPUTS from 'utils/inputs'
 import './RegisterCard.css'
-import { FormGroup } from 'components/molecules/FromGroup'
+import { FormGroup } from 'components/molecules/FormGroup'
 import { PasswordFormGroup } from 'components/molecules/PasswordFormGroup'
 import { Button } from 'components/atoms/Button'
+import RegisterCardForm from 'organisms/RegisterCardForm/RegisterCardForm'
+import { INIT_CARD_VALUE } from 'constants/card'
+import { useFormContext } from 'context/FormContext'
 
 type RegisterCardProps = {
-  card: CardType
+  // card: PaymentCard
   onNavigate: () => void
-  changeValue: (value: string, name: CardTypeKeys) => void
-  isCompleteRegister: boolean
+  // changeValue: (value: string, name: CardTypeKeys) => void
+  // isCompleteRegister: boolean
   onClickNextBtn: () => void
 }
 
 const RegisterCard: React.FC<RegisterCardProps> = ({
-  card,
+  // card,
   onNavigate,
-  changeValue,
-  isCompleteRegister,
+  // changeValue,
+  // isCompleteRegister,
   onClickNextBtn,
 }) => {
-  const onChange = (
-    e: ChangeEvent,
-    { formatter, name }: OnChangeEventParams,
-  ) => {
-    const { value } = e.target as HTMLInputElement
+  // const onChange = (
+  //   e: ChangeEvent,
+  //   { formatter, name }: OnChangeEventParams,
+  // ) => {
+  //   const { value } = e.target as HTMLInputElement
 
-    const currentvalue = formatter ? formatter(value) : value
-    changeValue(currentvalue, name)
-  }
+  //   const currentvalue = formatter ? formatter(value) : value
+  //   changeValue(currentvalue, name)
+  // }
 
-  const onChangePassword = (value: string, name: CardTypeKeys) => {
-    changeValue(value, name)
-  }
+  // const onChangePassword = (value: string, name: CardTypeKeys) => {
+  //   changeValue(value, name)
+  // }
 
-  const inputLayout = INPUTS.map(
-    ({
-      key,
-      label,
-      type,
-      maxLength,
-      isRequire = false,
-      width,
-      placeholder,
-      formatter,
-      isMarkValueLength,
-    }) => (
-      <FormGroup
-        key={key}
-        label={label}
-        name={key}
-        value={card[key]}
-        type={type}
-        maxLength={maxLength}
-        isRequire={isRequire}
-        isMarkValueLength={isMarkValueLength}
-        onChange={(e: ChangeEvent) => onChange(e, { name: key, formatter })}
-        width={width}
-        placeholder={placeholder}
-      />
-    ),
-  )
+  //const [card, setCard] = useState(INIT_CARD_VALUE)
+
+  // const onChangeCardInfo = (name: CardTypeKeys, value: string) => {
+  //   setCard((prevCardInfo) => ({
+  //     ...prevCardInfo,
+  //     [name]: value,
+  //   }))
+
+  //   // name의 isValid가 true면
+  //   // value가 valid면, auto focusing
+  // }
+
+  const { state, handleChange } = useFormContext()
+
   return (
     <>
       <Header
@@ -73,23 +68,8 @@ const RegisterCard: React.FC<RegisterCardProps> = ({
         icon={<AiOutlineLeft />}
         onClickIcon={onNavigate}
       />
-      <Card card={card} size={UI_SIZE.SMALL} isShowNickname={false} />
-      <div className='card-form'>
-        {inputLayout}
-        <PasswordFormGroup onChange={onChangePassword}></PasswordFormGroup>
-      </div>
-      {isCompleteRegister && (
-        <div className='button-box'>
-          <Button
-            size={UI_SIZE.MEDIUM}
-            variant={UI_VARIANT.GHOST}
-            color='green'
-            onClick={onClickNextBtn}
-          >
-            다음
-          </Button>
-        </div>
-      )}
+      {/* <Card card={state} size={UI_SIZE.SMALL} isShowNickname={false} /> */}
+      <div className='card-form'></div>
     </>
   )
 }

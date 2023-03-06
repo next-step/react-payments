@@ -1,0 +1,18 @@
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  display: flex;
+  flex: 1 1 auto;
+  background-color: #ecebf1;
+  border-radius: 0.25rem;
+  align-items: center;
+}

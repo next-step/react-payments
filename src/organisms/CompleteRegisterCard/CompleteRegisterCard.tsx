@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import { FormGroup } from 'components/molecules/FromGroup'
+import { FormGroup } from 'components/molecules/FormGroup'
 import { CardType, CardTypeKeys } from 'models/card.model'
 import { UI_SIZE, UI_VARIANT } from 'constants/ui.constant'
 import { Card } from 'components/atoms/Card'
@@ -25,9 +25,9 @@ const CompleteRegisterCard: React.FC<CompleteRegisterCardProps> = ({
   return (
     <main className='complete-card-container'>
       <h2 className='page-title'>카드등록이 완료되었습니다.</h2>
-      <Card card={card} size={UI_SIZE.LARGE} isShowNickname={false} />
+      {/* <Card card={card} size={UI_SIZE.LARGE} isShowNickname={false} /> */}
       <div className='nickname-form'>
-        <FormGroup
+        {/* <FormGroup
           label=''
           name='cardNickname'
           value={card.cardNickname}
@@ -37,7 +37,7 @@ const CompleteRegisterCard: React.FC<CompleteRegisterCardProps> = ({
           onChange={(e) => onChange(e, 'cardNickname')}
           width={'100%'}
           variant='outline'
-        />
+        /> */}
       </div>
 
       <div className='button-box'>

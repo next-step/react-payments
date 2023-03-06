@@ -1,12 +1,12 @@
 import React from 'react'
-import { CardType } from 'models/card.model'
+import { PaymentCard } from 'models/card.model'
 import { Card } from 'components/atoms/Card'
 import { UI_SIZE } from 'constants/ui.constant'
 import { ADD_CARD_VIEW_VALUE } from 'constants/card'
 
 type CardListProps = {
-  cards: CardType[]
-  onClick: (card?: CardType) => void
+  cards: PaymentCard[]
+  onClick: (card?: PaymentCard) => void
   isIncludeAddCardView?: boolean
 }
 
@@ -15,9 +15,7 @@ const CardList: React.FC<CardListProps> = ({
   onClick,
   isIncludeAddCardView = false,
 }) => {
-  const currentCardList = isIncludeAddCardView
-    ? [...cards, ADD_CARD_VIEW_VALUE]
-    : [...cards]
+  const currentCardList = isIncludeAddCardView ? [...cards] : [...cards]
   return (
     <>
       {currentCardList.map((card) => (

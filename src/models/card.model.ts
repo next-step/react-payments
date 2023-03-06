@@ -21,24 +21,40 @@ export type OnChangeEventParams = {
   formatter?: (str: string) => string
 }
 
-// backend(string) ->
-// front(cardNumber, array) ->
-// backend ->
-
-export type CardExpireDate = {
+export interface CardExpireDateType {
   year: string
   month: string
 }
+
+export interface CardNumbersType {
+  firstNumber: string
+  secondNumber: string
+  thridNumber: string
+  fourthNumber: string
+}
+
+export interface CardPasswordType {
+  firstPssword: string
+  secondPassword: string
+}
 export interface PaymentCard {
   id: string
-  cardNumbers: string[]
-  cardExpireDate: CardExpireDate
+  cardNumbers: CardNumbersType
+  cardExpireDate: CardExpireDateType
   cardOwner: string
   cardPinCode: string
-  cardPassword: string
+  cardPassword: CardPasswordType
   cardCompanyCode: CardCompanyCodeType
   cardNickname: string
 }
 
 export type AddPaymentCard = Omit<PaymentCard, 'id'>
 export type AddPaymentCardKeys = keyof AddPaymentCard
+
+export type ConvertValueToBoolean<T> = {
+  [K in keyof T]: T[K] extends object ? ConvertValueToBoolean<T[K]> : boolean
+}
+
+export type CardNumbersValidate = ConvertValueToBoolean<CardNumbersType>
+
+export type PaymentCardValidate = ConvertValueToBoolean<AddPaymentCard>
