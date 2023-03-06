@@ -1,12 +1,19 @@
 import { Story } from "@storybook/react";
-import Cvc from "../../components/CardSecurityCodeInput";
+import CardSecurityCodeInput, {
+  CardSecurityCodeInputProps,
+} from "../../components/CardSecurityCodeInput";
 
 export default {
-  title: "Components/Cvc",
-  component: Cvc,
+  title: "Components/CardSecurityCodeInput",
+  component: CardSecurityCodeInput,
 };
 
-const Template: Story = (args) => <Cvc {...args} />;
+const Template: Story<CardSecurityCodeInputProps> = (args) => (
+  <CardSecurityCodeInput {...args} />
+);
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  value: "",
+  onChange: () => {},
+};

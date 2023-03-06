@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import styled from "styled-components";
 import { InputContainer, InputTitle, InputBasic } from "./common/Input";
-import { CardContext } from "../contexts/card";
+import { CardContext } from "../contexts/Card";
 
 const StyledInputBasic = styled(InputBasic)`
   text-transform: uppercase;
@@ -9,9 +9,10 @@ const StyledInputBasic = styled(InputBasic)`
 
 export interface OwnerNameProps {
   value?: string;
+  onChange?: (value: string) => void;
 }
 
-const OwnerName = ({ value }: OwnerNameProps) => {
+const OwnerName = ({ value, onChange }: OwnerNameProps) => {
   const { setOwnerName } = useContext(CardContext);
   const [inputValue, setInputValue] = useState(value ?? "");
 
@@ -22,6 +23,7 @@ const OwnerName = ({ value }: OwnerNameProps) => {
       .toUpperCase();
     setInputValue(newValue);
     setOwnerName(newValue);
+    if (onChange) onChange(newValue);
   };
 
   return (

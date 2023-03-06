@@ -5,7 +5,7 @@ import {
   InputContainer,
   InputTitle,
 } from "./common/Input";
-import { CardContext } from "../contexts/card";
+import { CardContext } from "../contexts/Card";
 
 export interface CardNumberInputProps {
   onChange: (cardNumber: string) => void;
@@ -51,14 +51,18 @@ const CardNumberInput: React.FC<CardNumberInputProps> = ({
                 type="password"
                 value={value}
                 maxLength={4}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleChange(e, index)
+                }
               />
             ) : (
               <InputBasic
                 type="text"
                 maxLength={4}
                 value={value}
-                onChange={(e) => handleChange(e, index)}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  handleChange(e, index)
+                }
               />
             )}
           </React.Fragment>

@@ -10,7 +10,7 @@ import {
   SmallCard,
   SmallCardChip,
 } from "./common/Card";
-import { CardContext } from "../contexts/card";
+import { CardContext } from "../contexts/Card";
 
 export interface CardPreviewProps {
   cardNumber: string;

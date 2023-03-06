@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CardExpirationDateInput from "../components/CardExpirationDateInput";
 import CardNumberInput from "../components/CardNumberInput";
 import CardOwnerNameInput from "../components/CardOwnerNameInput";
@@ -8,6 +8,7 @@ import CardSecurityCodeInput from "../components/CardSecurityCodeInput";
 import DefaultLayout from "../components/common/DefaultLayout";
 import { useNavigate } from "react-router-dom";
 import CardSubmitButton from "../components/CardSubmitButton";
+import { CardContext } from "../contexts/Card";
 
 export interface CardAddPageProps {
   handleGoBack?: () => void;
@@ -15,6 +16,28 @@ export interface CardAddPageProps {
 
 const CardAddPage: React.FC<CardAddPageProps> = ({ handleGoBack }) => {
   const navigate = useNavigate();
+  const {
+    cardNumber,
+    setCardNumber,
+    ownerName,
+    setOwnerName,
+    expirationDate,
+    setExpirationDate,
+    securityCode,
+    setSecurityCode,
+    passwordFirstTwoDigits,
+  } = useContext(CardContext);
+
+  const [isAllInfoEntered, setIsAllInfoEntered] = useState(false);
+
+  useEffect(() => {
+    setIsAllInfoEntered(
+      cardNumber.length === 16 &&
+        expirationDate.length === 5 &&
+        securityCode.length === 3 &&
+        passwordFirstTwoDigits.length === 2
+    );
+  }, [cardNumber, expirationDate, securityCode, passwordFirstTwoDigits]);
 
   const handleGoBackClick = () => {
     if (handleGoBack) {
@@ -31,16 +54,16 @@ const CardAddPage: React.FC<CardAddPageProps> = ({ handleGoBack }) => {
       onBackButtonClick={handleGoBackClick}
     >
       <CardPreview
-        cardNumber="1234 5678 9012 3456"
-        ownerName="김재원"
-        expirationDate="12/23"
+        cardNumber={cardNumber}
+        ownerName={ownerName}
+        expirationDate={expirationDate}
       />
-      <CardNumberInput value="" onChange={() => {}} />
-      <CardExpirationDateInput />
-      <CardOwnerNameInput value="" />
-      <CardSecurityCodeInput />
+      <CardNumberInput value={cardNumber} onChange={setCardNumber} />
+      <CardExpirationDateInput onChange={setExpirationDate} />
+      <CardOwnerNameInput value={ownerName} onChange={setOwnerName} />
+      <CardSecurityCodeInput value={securityCode} onChange={setSecurityCode} />
       <CardPasswordFirstTwoDigitsInput />
-      <CardSubmitButton />
+      <CardSubmitButton disabled={!isAllInfoEntered} />
     </DefaultLayout>
   );
 };

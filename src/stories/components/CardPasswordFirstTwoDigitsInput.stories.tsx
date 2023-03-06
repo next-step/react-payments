@@ -1,11 +1,11 @@
 import { Story } from "@storybook/react";
-import PasswordFirstTwoDigits from "../../components/CardPasswordFirstTwoDigitsInput";
+import CardPasswordFirstTwoDigitsInput from "../../components/CardPasswordFirstTwoDigitsInput";
 
 export default {
-  title: "Components/PasswordFirstTwoDigits",
-  component: PasswordFirstTwoDigits,
+  title: "Components/CardPasswordFirstTwoDigitsInput",
+  component: CardPasswordFirstTwoDigitsInput,
 };
 
-const Template: Story = (args) => <PasswordFirstTwoDigits {...args} />;
+const Template: Story = (args) => <CardPasswordFirstTwoDigitsInput />;
 
 export const Default = Template.bind({});

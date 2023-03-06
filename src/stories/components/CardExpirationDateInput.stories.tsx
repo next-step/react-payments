@@ -1,12 +1,12 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react";
-import ExpirationDate from "../../components/CardExpirationDateInput";
+import { Story } from "@storybook/react";
+import CardExpirationDateInput from "../../components/CardExpirationDateInput";
 
 export default {
-  title: "Components/ExpirationDate",
-  component: ExpirationDate,
-} as Meta;
+  title: "Components/CardExpirationDateInput.stories",
+  component: CardExpirationDateInput,
+};
 
-const Template: Story = (args) => <ExpirationDate {...args} />;
+const Template: Story = (args) => <CardExpirationDateInput {...args} />;
 
 export const Default = Template.bind({});

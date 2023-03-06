@@ -7,7 +7,7 @@ import CardNumberInput, {
 export default {
   title: "Components/CardNumberInput",
   component: CardNumberInput,
-} as Meta;
+};
 
 const Template: Story<CardNumberInputProps> = (args) => (
   <CardNumberInput {...args} />

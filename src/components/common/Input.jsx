@@ -16,7 +16,7 @@ export const InputTitle = styled.span`
 export const InputBasic = styled.input`
   background-color: #ecebf1;
   height: 45px;
-  width: 25%;
+  width: 100%;
   text-align: center;
   outline: 2px solid transparent;
   outline-offset: 2px;

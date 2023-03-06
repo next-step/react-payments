@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
-import { CardContext } from "../contexts/card";
+import { CardContext } from "../contexts/Card";
 import {
   InputBasic,
   InputBox,
@@ -14,11 +14,17 @@ export const Separator = styled.span`
   text-align: center;
 `;
 
-interface ExpirationDateProps {
+export interface CardExpirationDateInputProps {
+  value?: string;
+  onChange?: (value: string) => void;
   className?: string;
 }
 
-const ExpirationDate: React.FC<ExpirationDateProps> = ({ className }) => {
+const CardExpirationDateInput: React.FC<CardExpirationDateInputProps> = ({
+  value,
+  onChange,
+  className,
+}) => {
   const { expirationDate, setExpirationDate } = useContext(CardContext);
   const [month, setMonth] = useState(expirationDate.slice(0, 2));
   const [year, setYear] = useState(expirationDate.slice(3));
@@ -39,6 +45,7 @@ const ExpirationDate: React.FC<ExpirationDateProps> = ({ className }) => {
     }
 
     setMonth(value);
+    onChange && onChange(`${value}/${year}`);
   };
 
   const handleYearChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,6 +54,7 @@ const ExpirationDate: React.FC<ExpirationDateProps> = ({ className }) => {
       value = value.slice(0, 2);
     }
     setYear(value);
+    onChange && onChange(`${month}/${value}`);
   };
 
   return (
@@ -58,7 +66,7 @@ const ExpirationDate: React.FC<ExpirationDateProps> = ({ className }) => {
           placeholder="MM"
           maxLength={2}
           pattern="[0-9]*"
-          value={month}
+          value={value || month}
           onChange={handleMonthChange}
         />
         <Separator>/</Separator>
@@ -67,7 +75,7 @@ const ExpirationDate: React.FC<ExpirationDateProps> = ({ className }) => {
           placeholder="YY"
           maxLength={2}
           pattern="[0-9]*"
-          value={year}
+          value={value || year}
           onChange={handleYearChange}
         />
       </InputBox>
@@ -75,4 +83,4 @@ const ExpirationDate: React.FC<ExpirationDateProps> = ({ className }) => {
   );
 };
 
-export default ExpirationDate;
+export default CardExpirationDateInput;
