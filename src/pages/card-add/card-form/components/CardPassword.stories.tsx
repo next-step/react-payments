@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-
-import { useCardInfo } from '@/pages/card-add/card-form/hooks'
+import { useRef } from 'react'
 
 import CardPassword from './CardPassword'
 
@@ -9,12 +8,14 @@ export default {
   component: CardPassword,
 } as ComponentMeta<typeof CardPassword>
 
-const Template: ComponentStory<typeof CardPassword> = (props) => {
-  const { cardInfo, handlePassword } = useCardInfo()
+const Template: ComponentStory<typeof CardPassword> = () => {
+  const firstPasswordRef = useRef<HTMLInputElement>(null)
+  const secondPasswordRef = useRef<HTMLInputElement>(null)
+  const passwordRef = { first: firstPasswordRef, second: secondPasswordRef }
   return (
     <div className="root">
       <div className="app">
-        <CardPassword {...props} password={cardInfo.password} handleChange={handlePassword} />
+        <CardPassword passwordRef={passwordRef} />
       </div>
     </div>
   )

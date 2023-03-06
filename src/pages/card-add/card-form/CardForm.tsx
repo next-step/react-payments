@@ -1,15 +1,10 @@
-import { ReactNode } from 'react'
+import { PropsWithChildren } from 'react'
 
 import { getCardFormSubElement } from '@/domain'
 
 import { CardNumbers, CardExpiredDate, CardOwner, CardSecurityCode, CardPassword } from './components'
 
-interface CardFormProps {
-  //Learning Point: ReactNode와 ReactElement의 차이점
-  children: ReactNode
-}
-
-const CardForm = ({ children }: CardFormProps) => {
+const CardForm = ({ children }: PropsWithChildren) => {
   const cardNumber = getCardFormSubElement(children, CardNumbers)
   const cardExpiredDateType = getCardFormSubElement(children, CardExpiredDate)
   const cardOwnerType = getCardFormSubElement(children, CardOwner)

@@ -1,1 +1,2 @@
-export { pageTitles } from './title'
+export * from './title'
+export * from './card'

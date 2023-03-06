@@ -1,30 +1,65 @@
+import { useRef } from 'react'
+
 import { BackButton, NavigationTextButton } from '@/components/button'
-import { Card } from '@/components/card'
+import { Card, BasicCardPart } from '@/components/card'
 import { PageTitle } from '@/components/layouts'
 import { CardForm } from '@/pages/card-add/card-form'
-import { useCardInfo } from '@/pages/card-add/card-form/hooks'
+import { useCardInfo } from '@/pages/hooks'
+import { getConvertedStringsByStars } from '@/utils'
 
 function CardAdd() {
-  const { cardInfo, handleNumber, handleExpiredDate, handleOwner, handleSecurityCode, handlePassword } = useCardInfo()
+  const { cardInfo, handleNumber, handleExpiredDate, handleOwner, handlePassword, handleSecurityCode } = useCardInfo()
+
+  const firstPasswordRef = useRef<HTMLInputElement>(null)
+  const secondPasswordRef = useRef<HTMLInputElement>(null)
+  const passwordRef = { first: firstPasswordRef, second: secondPasswordRef }
+
+  const securityCodeRef = useRef<HTMLInputElement>(null)
+
+  const preNavigation = () => {
+    const firstPasswordValue = firstPasswordRef.current?.value
+    const secondPasswordValue = secondPasswordRef.current?.value
+    if (firstPasswordValue && secondPasswordValue) {
+      handlePassword({ first: firstPasswordValue, second: secondPasswordValue })
+    }
+
+    const securityCodeValue = securityCodeRef.current?.value
+    if (securityCodeValue) {
+      handleSecurityCode(securityCodeValue)
+    }
+  }
+
+  const {
+    cardNumbers: { first, second, third, fourth },
+    owner,
+    expiredMonth,
+    expiredYear,
+  } = cardInfo
 
   return (
-    <div className="root">
-      <div className="app">
-        <PageTitle title="카드 추가" buttonElement={<BackButton />} />
-        <Card {...cardInfo} />
-        <CardForm>
-          <CardForm.CardNumbers numbers={cardInfo.cardNumbers} handleChange={handleNumber} />
-          <CardForm.CardExpiredDate
-            expiredYear={cardInfo.expiredYear}
-            expiredMonth={cardInfo.expiredMonth}
-            handleChange={handleExpiredDate}
-          />
-          <CardForm.CardOwner owner={cardInfo.owner} handleChange={handleOwner} />
-          <CardForm.CardSecurityCode securityCode={cardInfo.securityCode} handleChange={handleSecurityCode} />
-          <CardForm.CardPassword password={cardInfo.password} handleChange={handlePassword} />
-        </CardForm>
-        <NavigationTextButton to="/card-completed" storage={cardInfo} text="다음" />
-      </div>
+    <div className="app">
+      <PageTitle title="카드 추가" buttonElement={<BackButton />} />
+      <Card>
+        <BasicCardPart
+          cardNumbers={`${first} - ${second} - ${getConvertedStringsByStars(third)} - ${getConvertedStringsByStars(
+            fourth,
+          )}`}
+          cardOwner={owner}
+          cardExpiredDate={`${expiredMonth} / ${expiredYear}`}
+        />
+      </Card>
+      <CardForm>
+        <CardForm.CardNumbers numbers={cardInfo.cardNumbers} handleChange={handleNumber} />
+        <CardForm.CardExpiredDate
+          expiredYear={cardInfo.expiredYear}
+          expiredMonth={cardInfo.expiredMonth}
+          handleChange={handleExpiredDate}
+        />
+        <CardForm.CardOwner owner={cardInfo.owner} handleChange={handleOwner} />
+        <CardForm.CardSecurityCode securityCodeRef={securityCodeRef} />
+        <CardForm.CardPassword passwordRef={passwordRef} />
+      </CardForm>
+      <NavigationTextButton preNavigation={preNavigation} to="/card-completed" text="다음" />
     </div>
   )
 }

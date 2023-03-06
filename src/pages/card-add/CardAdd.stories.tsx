@@ -1,10 +1,11 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { useRef } from 'react'
 
 import { BackButton, NavigationTextButton } from '@/components/button'
-import { Card } from '@/components/card'
+import { Card, BasicCardPart } from '@/components/card'
 import { PageTitle } from '@/components/layouts'
 import { CardForm } from '@/pages/card-add/card-form'
-import { useCardInfo } from '@/pages/card-add/card-form/hooks'
+import { useCardInfo } from '@/pages/hooks'
 
 import CardAdd from './CardAdd'
 
@@ -14,12 +15,32 @@ export default {
 } as ComponentMeta<typeof CardAdd>
 
 const Template: ComponentStory<typeof CardAdd> = () => {
-  const { cardInfo, handleNumber, handleExpiredDate, handleOwner, handleSecurityCode, handlePassword } = useCardInfo()
+  const { cardInfo, handleNumber, handleExpiredDate, handleOwner } = useCardInfo()
+
+  const firstPasswordRef = useRef<HTMLInputElement>(null)
+  const secondPasswordRef = useRef<HTMLInputElement>(null)
+  const passwordRef = { first: firstPasswordRef, second: secondPasswordRef }
+
+  const securityCodeRef = useRef<HTMLInputElement>(null)
+
+  const {
+    cardNumbers: { first, second, third, fourth },
+    owner,
+    expiredMonth,
+    expiredYear,
+  } = cardInfo
+
   return (
     <div className="root">
       <div className="app">
         <PageTitle title="카드 추가" buttonElement={<BackButton />} />
-        <Card {...cardInfo} />
+        <Card>
+          <BasicCardPart
+            cardNumbers={`${first} - ${second} - ${third} - ${fourth}`}
+            cardOwner={owner}
+            cardExpiredDate={`${expiredMonth} / ${expiredYear}`}
+          />
+        </Card>
         <CardForm>
           <CardForm.CardNumbers numbers={cardInfo.cardNumbers} handleChange={handleNumber} />
           <CardForm.CardExpiredDate
@@ -28,10 +49,10 @@ const Template: ComponentStory<typeof CardAdd> = () => {
             handleChange={handleExpiredDate}
           />
           <CardForm.CardOwner owner={cardInfo.owner} handleChange={handleOwner} />
-          <CardForm.CardSecurityCode securityCode={cardInfo.securityCode} handleChange={handleSecurityCode} />
-          <CardForm.CardPassword password={cardInfo.password} handleChange={handlePassword} />
+          <CardForm.CardSecurityCode securityCodeRef={securityCodeRef} />
+          <CardForm.CardPassword passwordRef={passwordRef} />
         </CardForm>
-        <NavigationTextButton to="/card-completed" storage={cardInfo} text="다음" />
+        <NavigationTextButton to="/card-completed" text="다음" />
       </div>
     </div>
   )

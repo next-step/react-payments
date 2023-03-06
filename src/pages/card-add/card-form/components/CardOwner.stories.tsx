@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
-import { useCardInfo } from '@/pages/card-add/card-form/hooks'
+import { useCardInfo } from '@/pages/hooks'
 
 import CardOwner from './CardOwner'
 

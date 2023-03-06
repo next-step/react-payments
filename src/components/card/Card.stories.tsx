@@ -6,10 +6,9 @@ export default {
   title: '페이먼츠 미션/Components/Card/Card',
   component: Card,
   args: {
-    cardNumbers: { first: '1234', second: '5678', third: '9123', fourth: '4567' },
-    name: '김희열',
-    expiredMonth: '02',
-    expiredYear: '20',
+    cardNumbers: '1234 - 1234 - 1234 - 1234',
+    cardOwner: '김희열',
+    cardExpiredDate: '12 / 31',
   },
 } as ComponentMeta<typeof Card>
 

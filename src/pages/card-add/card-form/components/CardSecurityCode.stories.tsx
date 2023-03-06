@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-
-import { useCardInfo } from '@/pages/card-add/card-form/hooks'
+import { useRef } from 'react'
 
 import CardSecurityCode from './CardSecurityCode'
 
@@ -9,12 +8,12 @@ export default {
   component: CardSecurityCode,
 } as ComponentMeta<typeof CardSecurityCode>
 
-const Template: ComponentStory<typeof CardSecurityCode> = (props) => {
-  const { cardInfo, handleSecurityCode } = useCardInfo()
+const Template: ComponentStory<typeof CardSecurityCode> = () => {
+  const securityCodeRef = useRef<HTMLInputElement>(null)
   return (
     <div className="root">
       <div className="app">
-        <CardSecurityCode {...props} securityCode={cardInfo.securityCode} handleChange={handleSecurityCode} />
+        <CardSecurityCode securityCodeRef={securityCodeRef} />
       </div>
     </div>
   )

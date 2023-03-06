@@ -1,39 +1,26 @@
-import { useRef, ChangeEvent } from 'react'
+import { RefObject } from 'react'
 
-import { useSequentialInputFocus } from '@/pages/card-add/card-form/hooks'
+import { useSequentialInputFocus } from '@/pages/hooks'
 
 interface CardPasswordProps {
-  password: { first: string; second: string }
-  handleChange(event: ChangeEvent<HTMLInputElement>): void
+  passwordRef: {
+    first: RefObject<HTMLInputElement>
+    second: RefObject<HTMLInputElement>
+  }
 }
 
-const CardPassword = ({ password, handleChange }: CardPasswordProps) => {
-  const firstRef = useRef<HTMLInputElement>(null)
-  const secondRef = useRef<HTMLInputElement>(null)
+const CardPassword = ({ passwordRef }: CardPasswordProps) => {
   useSequentialInputFocus([
-    { ref: firstRef, isFocus: password.first.length === 1 },
-    { ref: secondRef, isFocus: password.second.length === 1 },
+    { ref: passwordRef.first, maxLength: 1 },
+    { ref: passwordRef.second, maxLength: 1 },
   ])
+
   return (
     <div className="input-container">
       <span className="input-title">카드 비밀번호</span>
       <div className="input-password-container">
-        <input
-          ref={firstRef}
-          className="input-basic w-15"
-          type="password"
-          value={password.first}
-          data-name="first"
-          onChange={handleChange}
-        />
-        <input
-          ref={secondRef}
-          className="input-basic w-15"
-          type="password"
-          value={password.second}
-          data-name="second"
-          onChange={handleChange}
-        />
+        <input ref={passwordRef.first} className="input-basic w-15" data-name="first" type="password" maxLength={1} />
+        <input ref={passwordRef.second} className="input-basic w-15" data-name="second" type="password" maxLength={1} />
         <input className="input-basic w-15 bg-white" type="password" value="x" readOnly />
         <input className="input-basic w-15 bg-white" type="password" value="x" readOnly />
       </div>
