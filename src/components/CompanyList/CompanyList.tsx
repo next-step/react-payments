@@ -1,6 +1,6 @@
-import Dot from "components/Form/CompanyList/Dot/Dot";
-import styled from "styled-components";
-import { ReactEventHandler } from "react";
+import Dot from 'components/common/Dot/Dot';
+import styled from 'styled-components';
+import { ReactEventHandler } from 'react';
 export type CompanyListProps = {
   onSelectedCompany: ReactEventHandler<HTMLDivElement>;
 };

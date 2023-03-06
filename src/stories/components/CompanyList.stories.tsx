@@ -1,10 +1,10 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import CompanyList from "components/Form/CompanyList/CompanyList";
-import CompanyListProps from "components/Form/CompanyList/CompanyList";
+import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import CompanyList from 'components/CompanyList/CompanyList';
+import CompanyListProps from 'components/CompanyList/CompanyList';
 
 export default {
-  title: "CompanyList",
+  title: 'CompanyList',
   component: CompanyList,
 } as ComponentMeta<typeof CompanyListProps>;
 

@@ -1,27 +1,29 @@
-import styled from "styled-components";
-import CompanyList from "components/Form/CompanyList/CompanyList";
-import Card from "components/common/Card/Card";
-import CardNumberInput from "components/Form/CardFormInput/CardNumberInput/CardNumberInput";
-import CardExpirationDateInput from "components/Form/CardFormInput/CardExpirationDateInput/CardExpirationDateInput";
-import CardOwnerNameInput from "components/Form/CardFormInput/CardOwnerNameInput/CardOwnerNameInput";
-import CardPasswordInput from "components/Form/CardFormInput/CardPasswordInput/CardPasswordInput";
-import CardSecurityInput from "components/Form/CardFormInput/CardSecurityInput/CardSecurityInput";
-import IconButton from "../../components/common/IconButton/IconButton";
-import Text from "components/common/Text/Text";
-import Button from "components/common/Button/Button";
-import useFormPage from "hooks/useFormPage";
+import styled from 'styled-components';
+import CompanyList from 'components/CompanyList/CompanyList';
+import Card from 'components/common/Card/Card';
+import CardNumberInput from 'components/CardFormInput/CardNumberInput/CardNumberInput';
+import CardExpirationDateInput from 'components/CardFormInput/CardExpirationDateInput/CardExpirationDateInput';
+import CardOwnerNameInput from 'components/CardFormInput/CardOwnerNameInput/CardOwnerNameInput';
+import CardPasswordInput from 'components/CardFormInput/CardPasswordInput/CardPasswordInput';
+import CardSecurityInput from 'components/CardFormInput/CardSecurityInput/CardSecurityInput';
+import IconButton from '../../components/common/IconButton/IconButton';
+import Text from 'components/common/Text/Text';
+import Button from 'components/common/Button/Button';
+import useFormPage from 'hooks/useFormPage';
+import useModal from '../../hooks/useModal';
+import { useEffect } from 'react';
+import useHandleFormInput from 'hooks/useHandleFormInput';
 
 const FormPage = () => {
-  const {
-    state,
-    setState,
-    cardFormInputs,
-    isOpenComanyList,
-    setIsOpenCompanyList,
-    handleCompanyList,
-    handleBackButton,
-    handleSubmit,
-  } = useFormPage();
+  const { state, setState, handleCompanyList, handleBackButton, handleSubmit } = useFormPage();
+  const { cardFormInputs } = useHandleFormInput();
+  const { isOpenModal, setIsOpenModal } = useModal();
+
+  useEffect(() => {
+    if (state.company.isValid && state.color.isValid) {
+      setIsOpenModal(false);
+    }
+  }, [state.company, state.color]);
 
   return (
     <Layout>
@@ -30,10 +32,10 @@ const FormPage = () => {
         <Text fontSize="lg" weight="bold" label="카드추가" />
       </Header>
       <div>
-        {isOpenComanyList && <CompanyList onSelectedCompany={handleCompanyList} />}
+        {isOpenModal && <CompanyList onSelectedCompany={handleCompanyList} />}
         <Card
           type="primary"
-          onClick={() => setIsOpenCompanyList(true)}
+          onClick={() => setIsOpenModal(true)}
           color={state.color.text}
           company={state.company.text}
           size="small"

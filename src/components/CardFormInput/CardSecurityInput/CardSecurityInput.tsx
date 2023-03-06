@@ -1,10 +1,10 @@
-import Text from "components/common/Text/Text";
-import styled from "styled-components";
-import Input from "../../../common/Input/Input";
-import { useRef } from "react";
-import { changeCardSecurityInput } from "utils/InputChange";
-import { ColorType, CardFormType, CardFormInputsType } from "types";
-import { isValidSecurityCode } from "utils/InputValidation";
+import Text from 'components/common/Text/Text';
+import styled from 'styled-components';
+import Input from '../../common/Input/Input';
+import { useRef } from 'react';
+import { changeCardSecurityInput } from 'utils/InputChange';
+import { ColorType, CardFormType, CardFormInputsType } from 'types';
+import { isValidSecurityCode } from 'utils/InputValidation';
 
 type CardPasswordInputProps = {
   fontColor: ColorType;

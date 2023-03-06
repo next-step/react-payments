@@ -1,49 +1,49 @@
-import { CardFormType, CardFormInputsType, ColorType, CompanyType } from "types";
-import { useState, useRef, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { PaymentsContext } from "context/Payments";
-import { isCardFormValidation } from "utils/InputValidation";
-import uuid from "react-uuid";
+import { CardFormType, CardFormInputsType, ColorType, CompanyType } from 'types';
+import { useState, useRef, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { PaymentsContext } from 'context/Payments';
+import { isCardFormValidation } from 'utils/InputValidation';
+import uuid from 'react-uuid';
 
 const initialCardFormState: CardFormType = {
   cardNumbers: {
-    text: "",
+    text: '',
     isValid: false,
   },
   expireDate: {
     month: {
-      text: "MM",
+      text: 'MM',
       isValid: false,
     },
     year: {
-      text: "YY",
+      text: 'YY',
       isValid: false,
     },
   },
   password: {
     first: {
-      text: "",
+      text: '',
       isValid: false,
     },
     end: {
-      text: "",
+      text: '',
       isValid: false,
     },
   },
   cvc: {
-    text: "",
+    text: '',
     isValid: false,
   },
   ownerName: {
-    text: "empty",
+    text: 'empty',
     isValid: false,
   },
   color: {
-    text: "",
+    text: '',
     isValid: false,
   },
   company: {
-    text: "",
+    text: '',
     isValid: false,
   },
 };
@@ -52,37 +52,9 @@ const useFormPage = () => {
   const [state, setState] = useState(initialCardFormState);
   const paymentsCtx = useContext(PaymentsContext);
   const navigate = useNavigate();
-  const inputRefs = useRef(new Array(10));
-  const [isOpenComanyList, setIsOpenCompanyList] = useState(true);
-  const cardFormInputs: CardFormInputsType = {
-    cardNumbers: {
-      ref: inputRefs.current[0],
-    },
-    expireDate: {
-      month: {
-        ref: inputRefs.current[1],
-      },
-      year: {
-        ref: inputRefs.current[2],
-      },
-    },
-    ownerName: {
-      ref: inputRefs.current[3],
-    },
-    cvc: {
-      ref: inputRefs.current[4],
-    },
-    password: {
-      first: {
-        ref: inputRefs.current[5],
-      },
-      end: {
-        ref: inputRefs.current[6],
-      },
-    },
-  };
+
   const handleCompanyList = (e) => {
-    const color = e.currentTarget.children[0].getAttribute("color") as ColorType;
+    const color = e.currentTarget.children[0].getAttribute('color') as ColorType;
     const company = e.currentTarget.children[1].textContent as CompanyType;
 
     setState((prev) => ({
@@ -96,10 +68,9 @@ const useFormPage = () => {
         isValid: true,
       },
     }));
-    setIsOpenCompanyList(false);
   };
   const handleBackButton = () => {
-    navigate("/");
+    navigate('/');
   };
   const handleSubmit = () => {
     const currentFormCard = state;
@@ -118,21 +89,18 @@ const useFormPage = () => {
       ownerName: currentFormCard.ownerName.text,
       color: currentFormCard.color.text,
       company: currentFormCard.company.text,
-      alias: "",
+      alias: '',
       id: uuid(),
     };
     paymentsCtx.addCard(newCard);
-    localStorage.setItem("id", newCard.id);
-    navigate("/alias");
+    localStorage.setItem('id', newCard.id);
+    navigate('/alias');
   };
 
   return {
     state,
     setState,
-    cardFormInputs,
     handleCompanyList,
-    isOpenComanyList,
-    setIsOpenCompanyList,
     handleBackButton,
     handleSubmit,
   };

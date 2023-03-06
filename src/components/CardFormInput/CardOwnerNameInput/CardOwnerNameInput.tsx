@@ -1,9 +1,9 @@
-import Text from "components/common/Text/Text";
-import styled from "styled-components";
-import Input from "../../../common/Input/Input";
-import { useRef, useState } from "react";
-import { changeOwnerName } from "utils/InputChange";
-import { ColorType, CardFormType, CardFormInputsType } from "types";
+import Text from 'components/common/Text/Text';
+import styled from 'styled-components';
+import Input from '../../common/Input/Input';
+import { useRef, useState } from 'react';
+import { changeOwnerName } from 'utils/InputChange';
+import { ColorType, CardFormType, CardFormInputsType } from 'types';
 
 type CardOwnerNameInputProps = {
   fontColor: ColorType;
@@ -23,7 +23,7 @@ const CardOwnerNameInput = ({ setOwnerNameText, fontColor, refs }: CardOwnerName
       ? setOwnerNameText((prev) => ({
           ...prev,
           ownerName: {
-            text: "Name",
+            text: 'Name',
             isValid: true,
           },
         }))

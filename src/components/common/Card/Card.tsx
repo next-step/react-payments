@@ -1,14 +1,13 @@
-import styled, { css } from "styled-components";
-import { ReactEventHandler, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import Text from "components/common/Text/Text";
-import IconButton from "components/common/IconButton/IconButton";
-import { ColorType, CompanyType, CardType } from "types";
-import { PaymentsContext } from "context/Payments";
+import styled, { css } from 'styled-components';
+import { ReactEventHandler } from 'react';
+import Text from 'components/common/Text/Text';
+import IconButton from 'components/common/IconButton/IconButton';
+import { ColorType, CompanyType } from 'types';
+import useCard from 'hooks/useCard';
 
 export type CardProps = {
-  size: "small" | "big";
-  type: "primary" | "add";
+  size: 'small' | 'big';
+  type: 'primary' | 'add';
   className?: string;
   id?: string;
   number?: string;
@@ -33,25 +32,11 @@ const Card = ({
   className,
   onClick,
 }: CardProps) => {
-  const paymentCtx = useContext(PaymentsContext);
-  const myCardList = paymentCtx.cardList;
-  const currentCard = myCardList.find((card: CardType) => card.id === id);
-  const navigate = useNavigate();
-
-  const remove = () => {
-    if (!currentCard) return;
-    paymentCtx.removeCard(currentCard);
-  };
-
-  const modify = () => {
-    if (!currentCard) return;
-    localStorage.setItem("id", currentCard.id);
-    navigate("/alias");
-  };
+  const { remove, modify } = useCard(id);
 
   return (
     <Layout onClick={onClick} id={id} className={className}>
-      {type === "primary" ? (
+      {type === 'primary' ? (
         <Container color={color} size={size}>
           <Top>
             {company && <Text fontSize="s" weight="normal" label={company} />}
@@ -91,7 +76,7 @@ const Layout = styled.div`
 
 type ContainerProps = {
   color?: ColorType;
-  size: "small" | "big";
+  size: 'small' | 'big';
 };
 const Container = styled.div<ContainerProps>`
   display: flex;
@@ -105,35 +90,35 @@ const Container = styled.div<ContainerProps>`
   cursor: pointer;
 
   ${({ color }) =>
-    color === "red"
+    color === 'red'
       ? css`
           background: #e14141;
         `
-      : color === "cyon"
+      : color === 'cyon'
       ? css`
           background: #92e3d5;
         `
-      : color === "blue"
+      : color === 'blue'
       ? css`
           background: #557ce5;
         `
-      : color === "green"
+      : color === 'green'
       ? css`
           background: #73bc6d;
         `
-      : color === "pink"
+      : color === 'pink'
       ? css`
           background: #e76e9b;
         `
-      : color === "yellow"
+      : color === 'yellow'
       ? css`
           background: #fbcc58;
         `
-      : color === "orange"
+      : color === 'orange'
       ? css`
           background: #f37e3b;
         `
-      : color === "purple"
+      : color === 'purple'
       ? css`
           background: #df59ba;
         `
@@ -141,7 +126,7 @@ const Container = styled.div<ContainerProps>`
           background: #e5e5e5;
         `}
   ${({ size }) =>
-    size === "small"
+    size === 'small'
       ? css`
           width: 208px;
           height: 130px;
@@ -164,7 +149,7 @@ const Middle = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  margin-left: ${(props) => (props.theme !== "add" ? "30px" : "0px")};
+  margin-left: ${(props) => (props.theme !== 'add' ? '30px' : '0px')};
 `;
 const Bottom = styled.div`
   display: flex;

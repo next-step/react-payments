@@ -1,9 +1,9 @@
-import Text from "components/common/Text/Text";
-import styled from "styled-components";
-import { changeCardNumber } from "utils/InputChange";
-import Input from "../../../common/Input/Input";
-import { ColorType, CardFormType, CardFormInputsType } from "types";
-import { isValidCardNumber } from "utils/InputValidation";
+import Text from 'components/common/Text/Text';
+import styled from 'styled-components';
+import { changeCardNumber } from 'utils/InputChange';
+import Input from '../../common/Input/Input';
+import { ColorType, CardFormType, CardFormInputsType } from 'types';
+import { isValidCardNumber } from 'utils/InputValidation';
 type CardNumberInputProps = {
   setCardNumberText: React.Dispatch<React.SetStateAction<CardFormType>>;
   isValid: boolean;
