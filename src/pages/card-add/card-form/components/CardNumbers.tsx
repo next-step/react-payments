@@ -1,5 +1,6 @@
-import { useRef } from 'react'
+import { ChangeEvent, useRef } from 'react'
 
+import { BasicInput } from '@/components/input'
 import { useSequentialInputFocus } from '@/pages/hooks'
 
 interface HandleChangeProps {
@@ -16,7 +17,6 @@ interface CardNumbersProps {
   handleChange({ value, order }: HandleChangeProps): void
 }
 
-// Todo: Props로 State, setState가 결합되는걸 약하게 할 수 없을까?
 const CardNumbers = ({ numbers, handleChange }: CardNumbersProps) => {
   const firstRef = useRef<HTMLInputElement>(null)
   const secondRef = useRef<HTMLInputElement>(null)
@@ -31,40 +31,49 @@ const CardNumbers = ({ numbers, handleChange }: CardNumbersProps) => {
 
   const { first, second, third } = numbers
 
+  const handleCardNumbersInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const {
+      dataset: { name },
+      value,
+    } = event.target
+
+    switch (name) {
+      case 'first':
+        handleChange({ value, order: name })
+        break
+      case 'second':
+        handleChange({ value, order: name })
+        break
+      case 'third':
+        handleChange({ value, order: name })
+        break
+      case 'fourth':
+        handleChange({ value, order: name })
+        break
+      // Default에서 에러 던지기
+    }
+  }
+
   return (
     <div className="input-container">
       <span className="input-title">카드 번호</span>
       <div className="input-box">
-        <input
-          ref={firstRef}
-          className="input-basic"
-          type="text"
-          value={numbers.first}
-          onChange={(event) => handleChange({ value: event.target.value, order: 'first' })}
-        />
+        <BasicInput inputRef={firstRef} value={numbers.first} dataSet="first" onChange={handleCardNumbersInputChange} />
         {first.length === 4 && <span>-</span>}
-        <input
-          ref={secondRef}
-          className="input-basic"
-          type="text"
+        <BasicInput
+          inputRef={secondRef}
           value={numbers.second}
-          onChange={(event) => handleChange({ value: event.target.value, order: 'second' })}
+          dataSet="second"
+          onChange={handleCardNumbersInputChange}
         />
         {second.length === 4 && <span>-</span>}
-        <input
-          ref={thirdRef}
-          className="input-basic"
-          type="password"
-          value={numbers.third}
-          onChange={(event) => handleChange({ value: event.target.value, order: 'third' })}
-        />
+        <BasicInput inputRef={thirdRef} value={numbers.third} dataSet="third" onChange={handleCardNumbersInputChange} />
         {third.length === 4 && <span>-</span>}
-        <input
-          ref={fourthRef}
-          className="input-basic"
-          type="password"
+        <BasicInput
+          inputRef={fourthRef}
           value={numbers.fourth}
-          onChange={(event) => handleChange({ value: event.target.value, order: 'fourth' })}
+          dataSet="fourth"
+          onChange={handleCardNumbersInputChange}
         />
       </div>
     </div>

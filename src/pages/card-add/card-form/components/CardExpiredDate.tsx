@@ -1,5 +1,6 @@
-import { useRef } from 'react'
+import { useRef, ChangeEvent } from 'react'
 
+import { BasicInput } from '@/components/input'
 import { useSequentialInputFocus } from '@/pages/hooks'
 
 type HandleExpiredDateProps = {
@@ -19,26 +20,41 @@ const CardExpiredDate = ({ expiredYear, expiredMonth, handleChange }: CardExpire
     { ref: firstRef, isFocus: expiredMonth.length === 2 },
     { ref: secondRef, isFocus: expiredYear.length === 2 },
   ])
+
+  const handleCardExpiredDateInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const {
+      dataset: { name },
+      value,
+    } = event.target
+
+    switch (name) {
+      case 'YY':
+        handleChange({ value, yymm: name })
+        break
+      case 'MM':
+        handleChange({ value, yymm: name })
+        break
+    }
+  }
+
   return (
     <div className="input-container">
       <span className="input-title">만료일</span>
       <div className="input-box w-50">
-        <input
-          ref={firstRef}
-          className="input-basic"
-          type="text"
-          placeholder="MM"
+        <BasicInput
+          inputRef={firstRef}
+          placeHolder="MM"
+          dataSet="MM"
           value={expiredMonth}
-          onChange={(event) => handleChange({ value: event.target.value, yymm: 'MM' })}
+          onChange={handleCardExpiredDateInputChange}
         />
         {(expiredYear.length === 2 || expiredMonth.length === 2) && <span>/</span>}
-        <input
-          ref={secondRef}
-          className="input-basic"
-          type="text"
-          placeholder="YY"
+        <BasicInput
+          inputRef={secondRef}
+          placeHolder="YY"
+          dataSet="YY"
           value={expiredYear}
-          onChange={(event) => handleChange({ value: event.target.value, yymm: 'YY' })}
+          onChange={handleCardExpiredDateInputChange}
         />
       </div>
     </div>

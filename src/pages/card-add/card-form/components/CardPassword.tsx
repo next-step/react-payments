@@ -1,5 +1,6 @@
 import { RefObject } from 'react'
 
+import { BasicInput } from '@/components/input'
 import { useSequentialInputFocus } from '@/pages/hooks'
 
 interface CardPasswordProps {
@@ -19,10 +20,23 @@ const CardPassword = ({ passwordRef }: CardPasswordProps) => {
     <div className="input-container">
       <span className="input-title">카드 비밀번호</span>
       <div className="input-password-container">
-        <input ref={passwordRef.first} className="input-basic w-15" data-name="first" type="password" maxLength={1} />
-        <input ref={passwordRef.second} className="input-basic w-15" data-name="second" type="password" maxLength={1} />
-        <input className="input-basic w-15 bg-white" type="password" value="x" readOnly />
-        <input className="input-basic w-15 bg-white" type="password" value="x" readOnly />
+        <BasicInput inputRef={passwordRef.first} addtionalClassName="w-15" type="password" maxLength={1} />
+        <BasicInput inputRef={passwordRef.second} addtionalClassName="w-15" type="password" maxLength={1} />
+
+        <BasicInput
+          inputRef={passwordRef.second}
+          addtionalClassName="w-15 bg-white"
+          type="password"
+          value="x"
+          readonly
+        />
+        <BasicInput
+          inputRef={passwordRef.second}
+          addtionalClassName="w-15 bg-white"
+          type="password"
+          value="x"
+          readonly
+        />
       </div>
     </div>
   )
