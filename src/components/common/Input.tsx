@@ -4,6 +4,14 @@ export const InputContainer = styled.div`
   margin: 16px 0;
 `;
 
+const InputStyle = `
+  background-color: #ecebf1;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: #9ca3af;
+  border-radius: 0.25rem;
+`;
+
 export const InputTitle = styled.span`
   display: flex;
   align-items: center;
@@ -14,15 +22,11 @@ export const InputTitle = styled.span`
 `;
 
 export const InputBasic = styled.input`
-  background-color: #ecebf1;
+  ${InputStyle};
   height: 45px;
   width: 100%;
   text-align: center;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-  border-color: #9ca3af;
   border: none;
-  border-radius: 0.25rem;
 `;
 
 export const InputBox = styled.div`
@@ -30,12 +34,19 @@ export const InputBox = styled.div`
   align-items: center;
   margin-top: 0.375rem;
   color: #d3d3d3;
-  border-radius: 0.25rem;
-  background-color: #ecebf1;
+  ${InputStyle};
+`;
+
+const HelpStyle = `
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  line-height: 14px;
+  color: #525252;
 `;
 
 export const HelpIcon = styled.span`
-  display: inline-block;
+  ${HelpStyle};
   margin-left: 4px;
   height: 16px;
   width: 16px;
@@ -46,9 +57,7 @@ export const HelpIcon = styled.span`
 `;
 
 export const HelpDescription = styled.span`
+  ${HelpStyle};
   display: block;
   margin-top: 4px;
-  font-size: 12px;
-  line-height: 14px;
-  color: #525252;
 `;

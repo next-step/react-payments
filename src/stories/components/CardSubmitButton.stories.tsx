@@ -7,6 +7,6 @@ export default {
   component: CardSubmitButton,
 };
 
-const Template: Story = (args) => <CardSubmitButton {...args} />;
+const Template: Story = () => <CardSubmitButton />;
 
 export const Default = Template.bind({});

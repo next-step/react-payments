@@ -7,22 +7,11 @@ import {
   InputContainer,
   InputTitle,
 } from "./common/Input";
+import { useCardSecurityCode } from "../hooks/useCardSecurityCode";
 
-export interface CardSecurityCodeInputProps {
-  value: string;
-  onChange: (value: string) => void;
-}
-
-const CardSecurityCodeInput: React.FC<CardSecurityCodeInputProps> = ({
-  value,
-  onChange,
-}) => {
+const CardSecurityCodeInput: React.FC = () => {
   const [showHelp, setShowHelp] = useState<boolean>(false);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = event.target.value.replace(/[^\d]/g, "").slice(0, 3);
-    onChange(newValue);
-  };
+  const { securityCode, handleChange } = useCardSecurityCode();
 
   return (
     <InputContainer>
@@ -34,7 +23,7 @@ const CardSecurityCodeInput: React.FC<CardSecurityCodeInputProps> = ({
         <InputBasic
           type="password"
           placeholder="CVC"
-          value={value}
+          value={securityCode}
           onChange={handleChange}
           maxLength={3}
           pattern="[0-9]*"

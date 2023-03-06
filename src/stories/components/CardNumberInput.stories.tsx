@@ -1,20 +1,12 @@
 import React from "react";
-import { Story, Meta } from "@storybook/react/types-6-0";
-import CardNumberInput, {
-  CardNumberInputProps,
-} from "../../components/CardNumberInput";
+import { Story } from "@storybook/react/types-6-0";
+import CardNumberInput from "../../components/CardNumberInput";
 
 export default {
   title: "Components/CardNumberInput",
   component: CardNumberInput,
 };
 
-const Template: Story<CardNumberInputProps> = (args) => (
-  <CardNumberInput {...args} />
-);
+const Template: Story = () => <CardNumberInput />;
 
 export const Default = Template.bind({});
-Default.args = {
-  value: "",
-  onChange: (value: string) => {},
-};

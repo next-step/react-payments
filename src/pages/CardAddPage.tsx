@@ -16,17 +16,8 @@ export interface CardAddPageProps {
 
 const CardAddPage: React.FC<CardAddPageProps> = ({ handleGoBack }) => {
   const navigate = useNavigate();
-  const {
-    cardNumber,
-    setCardNumber,
-    ownerName,
-    setOwnerName,
-    expirationDate,
-    setExpirationDate,
-    securityCode,
-    setSecurityCode,
-    passwordFirstTwoDigits,
-  } = useContext(CardContext);
+  const { cardNumber, expirationDate, securityCode, passwordFirstTwoDigits } =
+    useContext(CardContext);
 
   const [isAllInfoEntered, setIsAllInfoEntered] = useState(false);
 
@@ -54,10 +45,10 @@ const CardAddPage: React.FC<CardAddPageProps> = ({ handleGoBack }) => {
       onBackButtonClick={handleGoBackClick}
     >
       <CardPreview isAllInfoEntered={isAllInfoEntered} />
-      <CardNumberInput value={cardNumber} onChange={setCardNumber} />
-      <CardExpirationDateInput onChange={setExpirationDate} />
-      <CardOwnerNameInput value={ownerName} onChange={setOwnerName} />
-      <CardSecurityCodeInput value={securityCode} onChange={setSecurityCode} />
+      <CardNumberInput />
+      <CardExpirationDateInput />
+      <CardOwnerNameInput />
+      <CardSecurityCodeInput />
       <CardPasswordFirstTwoDigitsInput />
       <CardSubmitButton disabled={!isAllInfoEntered} />
     </DefaultLayout>

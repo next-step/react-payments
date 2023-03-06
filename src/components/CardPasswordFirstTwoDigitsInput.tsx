@@ -1,39 +1,19 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import {
   InputContainer,
   InputTitle,
   InputBasic,
   InputBox,
 } from "./common/Input";
-import { CardContext } from "../contexts/PaymentsCardContext";
+import { usePasswordFirstTwoDigits } from "../hooks/usePasswordFirstTwoDigits";
 
 const CardPasswordFirstTwoDigitsInput = () => {
-  const { passwordFirstTwoDigits, setPasswordFirstTwoDigits } =
-    useContext(CardContext);
-  const [firstDigit, setFirstDigit] = useState(
-    passwordFirstTwoDigits ? passwordFirstTwoDigits[0] : ""
-  );
-  const [secondDigit, setSecondDigit] = useState(
-    passwordFirstTwoDigits ? passwordFirstTwoDigits[1] : ""
-  );
-
-  const handleFirstDigitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setFirstDigit(newValue);
-    setPasswordFirstTwoDigits(
-      newValue +
-        (passwordFirstTwoDigits.length > 1 ? passwordFirstTwoDigits[1] : "")
-    );
-  };
-
-  const handleSecondDigitChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setSecondDigit(newValue);
-    setPasswordFirstTwoDigits(
-      (passwordFirstTwoDigits.length > 0 ? passwordFirstTwoDigits[0] : "") +
-        newValue
-    );
-  };
+  const {
+    firstDigit,
+    secondDigit,
+    handleFirstDigitChange,
+    handleSecondDigitChange,
+  } = usePasswordFirstTwoDigits();
 
   return (
     <InputContainer>

@@ -1,14 +1,11 @@
 import { Story } from "@storybook/react";
-import OwnerName, { OwnerNameProps } from "../../components/CardOwnerNameInput";
+import OwnerName from "../../components/CardOwnerNameInput";
 
 export default {
   title: "Components/OwnerName",
   component: OwnerName,
 };
 
-const Template: Story<OwnerNameProps> = (args) => <OwnerName {...args} />;
+const Template: Story = () => <OwnerName />;
 
 export const Default = Template.bind({});
-Default.args = {
-  value: "",
-};

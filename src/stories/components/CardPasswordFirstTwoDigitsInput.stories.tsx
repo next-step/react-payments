@@ -6,6 +6,6 @@ export default {
   component: CardPasswordFirstTwoDigitsInput,
 };
 
-const Template: Story = (args) => <CardPasswordFirstTwoDigitsInput />;
+const Template: Story = () => <CardPasswordFirstTwoDigitsInput />;
 
 export const Default = Template.bind({});

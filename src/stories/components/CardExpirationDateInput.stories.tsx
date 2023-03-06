@@ -7,6 +7,6 @@ export default {
   component: CardExpirationDateInput,
 };
 
-const Template: Story = (args) => <CardExpirationDateInput {...args} />;
+const Template: Story = () => <CardExpirationDateInput />;
 
 export const Default = Template.bind({});
