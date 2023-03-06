@@ -13,6 +13,7 @@ import { ERROR_MESSAGE } from '@/constants/errorMessage';
 import { CARD } from '@/constants/card';
 import { validateCardForm } from '@/domain/card/validation';
 import { Card } from '@/types/card';
+import { assert } from '@/utils/validation';
 
 type InitValue = {
   카드폼이입력된: boolean;
@@ -90,13 +91,12 @@ export default function CardAddFormProvider({ children }: PropsWithChildren) {
         return;
       }
 
-      if (!(type in initValue.cardForm)) {
-        throw new Error(ERROR_MESSAGE.INPUT.COMMON.INVALID_TYPE(type));
-      }
+      assert(type in initValue.cardForm, ERROR_MESSAGE.INPUT.COMMON.INVALID_TYPE(type));
 
       validateCardForm({ type, name, value, cardForm });
 
-      if (type === CARD.OWNER_NAME.TYPE || type === CARD.SECRET_CODE.TYPE || type === CARD.ALIAS.TYPE) {
+      const stringValueTypes = [CARD.OWNER_NAME.TYPE, CARD.SECRET_CODE.TYPE, CARD.ALIAS.TYPE];
+      if (stringValueTypes.some((stringValueType) => stringValueType === type)) {
         setCardForm((cardForm) => ({
           ...cardForm,
           [type]: value,
