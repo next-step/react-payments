@@ -76,7 +76,7 @@ export default function CardAddFormProvider({ children }: PropsWithChildren) {
     카드보안코드가입력된,
     카드비밀번호가입력된,
     카드사가입력된,
-  ].every((isValid) => isValid);
+  ].every((isValid) => isValid === true);
 
   const resetCardForm = () => {
     setCardForm(initValue.cardForm);
