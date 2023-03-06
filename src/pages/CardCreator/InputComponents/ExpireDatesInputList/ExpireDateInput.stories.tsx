@@ -23,7 +23,7 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof ExpireDatesInputListPure> = () => {
   const [expireDates, setExpireDates] = useState(expireDatesInit);
-  return <ExpireDatesInputListPure expireDates={expireDates} />;
+  return <ExpireDatesInputListPure />;
 };
 
 export const Primary = Template.bind({});

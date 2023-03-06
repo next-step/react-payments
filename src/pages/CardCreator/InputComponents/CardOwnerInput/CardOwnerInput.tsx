@@ -1,31 +1,31 @@
-import React, { ForwardedRef, forwardRef, memo, useImperativeHandle, useMemo } from 'react';
+import React, { ForwardedRef, forwardRef, memo, useContext, useImperativeHandle, useMemo } from 'react';
 
-import type { CardOwnersState, ErrorMessageType } from '../../types';
-import type { CardStateSetter } from '../../utils';
+import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
+import { ApiContext, CardOwnersStoreContext } from '@/stores/cardCreator';
+
+import type { ErrorMessageType } from '../../types';
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { useErrorMessage } from '../hooks/useErrorMessage';
 import { CardInfoInputElement } from '../components/CardInfoInputElement';
-import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 
 const CARD_OWNER_ELEMENT_SEQUENCE_KEY = 'cardOwner';
 
-interface CardOwnerInputProps {
-  ownerNames: CardOwnersState;
-  createOwnerNameSetter: CardStateSetter<string>;
-}
+interface CardOwnerInputProps {}
 
 export interface CardOwnerInputRef {
   setErrorMessage: (messageType: ErrorMessageType) => void;
 }
 
-function CardOwnerInput(
-  { ownerNames, createOwnerNameSetter }: CardOwnerInputProps,
-  ref: ForwardedRef<CardOwnerInputRef>
-) {
+function CardOwnerInput(_: CardOwnerInputProps, ref: ForwardedRef<CardOwnerInputRef>) {
   const [errorMessage, setErrorMessage] = useErrorMessage({
     inValid: '소유주 이름을 입력해주세요.',
   });
-  const { value, checkIsAllowInput, placeholder, checkIsValid } = ownerNames[0];
+
+  const apiContext = useContext(ApiContext);
+  // TODO: store 뽑아오기 추상화
+  const cardOwnerContext = useContext(CardOwnersStoreContext);
+  const cardOwner = cardOwnerContext ? cardOwnerContext.store : [];
+  const { value, checkIsAllowInput, placeholder, checkIsValid } = cardOwner[0];
 
   const { setElement, toTheNextElement } = useSequentialFocusWithElements();
   toTheNextElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, checkIsValid(value));
@@ -45,7 +45,9 @@ function CardOwnerInput(
           setElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, el);
         }}
         onChangeProps={{
-          props: { setState: createOwnerNameSetter(0) },
+          props: {
+            setState: (value: string) => apiContext?.dispatch({ type: 'cardOwners', payload: { index: 0, value } }),
+          },
           checkWhetherSetState: (e) => {
             return checkIsAllowInput(e.currentTarget.value);
           },

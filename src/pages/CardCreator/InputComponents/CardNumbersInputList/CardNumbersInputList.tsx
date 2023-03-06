@@ -1,21 +1,23 @@
-import React, { memo, forwardRef, useImperativeHandle, ForwardedRef } from 'react';
+import React, { memo, forwardRef, useImperativeHandle, ForwardedRef, useContext } from 'react';
 
 import { checkIsArrayLast } from '@/utils';
+import { CardNumberStoreContext } from '@/stores/cardCreator';
 
-import type { CardNumbersState, ErrorMessageType } from '../../types';
+import type { ErrorMessageType } from '../../types';
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { useErrorMessage } from '../hooks/useErrorMessage';
 import { CardNumberInput } from './CardNumberInput';
 
-interface CardNumbersInputListProps {
-  cardNumbers: CardNumbersState;
-}
+interface CardNumbersInputListProps {}
 
 export interface CardNumbersInputListRef {
   setErrorMessage: (messageType: ErrorMessageType) => void;
 }
 
-function CardNumbersInputList({ cardNumbers }: CardNumbersInputListProps, ref: ForwardedRef<CardNumbersInputListRef>) {
+function CardNumbersInputList(_: CardNumbersInputListProps, ref: ForwardedRef<CardNumbersInputListRef>) {
+  const cardNumbersStore = useContext(CardNumberStoreContext);
+  const cardNumbers = cardNumbersStore?.store;
+
   const [errorMessage, setErrorMessage] = useErrorMessage({
     inValid: '카드 번호를 각각 4자리씩 입력해주세요.',
   });
@@ -25,7 +27,7 @@ function CardNumbersInputList({ cardNumbers }: CardNumbersInputListProps, ref: F
   return (
     <CardInputWrapperPure header="카드 번호" errorMessage={errorMessage}>
       <div className="input-box">
-        {cardNumbers.map((cardNumber, i) => {
+        {cardNumbers?.map((cardNumber, i) => {
           const isLast = checkIsArrayLast(cardNumbers, i);
           return <CardNumberInput key={cardNumber.key} needDividerRender={!isLast} cardNumber={cardNumber} index={i} />;
         })}

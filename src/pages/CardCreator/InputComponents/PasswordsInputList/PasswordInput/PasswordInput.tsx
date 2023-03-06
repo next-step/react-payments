@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 import type { PasswordsState } from '@/pages/CardCreator/types';
+import { ApiContext } from '@/stores/cardCreator';
 import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components/CardInfoInputElement';
@@ -14,8 +15,9 @@ interface PasswordInputProps {
 }
 
 export function PasswordInput({ password, index }: PasswordInputProps) {
-  const [passwordState, setPasswordState] = useState(password);
-  const { key, value, checkIsAllowInput, checkIsValid } = passwordState;
+  const { key, value, checkIsAllowInput, checkIsValid } = password;
+
+  const apiContext = useContext(ApiContext);
 
   const { setElement, toTheNextElement } = useSequentialFocusWithElements();
   toTheNextElement(PASSWORD_ELEMENT_SEQUENCE_KEY, index, checkIsValid(value));
@@ -30,7 +32,7 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
         setElement(PASSWORD_ELEMENT_SEQUENCE_KEY, index, el);
       }}
       onChangeProps={{
-        props: { setState: (value: string) => setPasswordState((prev) => ({ ...prev, value })) },
+        props: { setState: (value: string) => apiContext?.dispatch({ type: 'passwords', payload: { index, value } }) },
         checkWhetherSetState: (e) => {
           const filteredNumber = filterNumber(e.currentTarget.value);
           return checkIsAllowInput(filteredNumber);

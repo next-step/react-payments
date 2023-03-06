@@ -8,7 +8,6 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { cardOwnersInit } from '../../CardCreatorInits';
 import { CardOwnerInputPure } from './CardOwnerInput';
-import { createCardStateSetter } from '../../utils';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -24,7 +23,7 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof CardOwnerInputPure> = () => {
   const [ownerNames, setOwnerNames] = useState(cardOwnersInit);
-  return <CardOwnerInputPure ownerNames={ownerNames} createOwnerNameSetter={createCardStateSetter(setOwnerNames)} />;
+  return <CardOwnerInputPure />;
 };
 
 export const Primary = Template.bind({});

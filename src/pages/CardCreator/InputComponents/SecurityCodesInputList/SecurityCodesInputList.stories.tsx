@@ -23,7 +23,7 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof SecurityCodesInputListPure> = () => {
   const [securityCodes, setSecurityCodes] = useState(securityCodesInit);
-  return <SecurityCodesInputListPure securityCodes={securityCodes} />;
+  return <SecurityCodesInputListPure />;
 };
 
 export const Primary = Template.bind({});

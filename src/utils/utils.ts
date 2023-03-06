@@ -2,20 +2,10 @@ export function isNil(any: any): any is undefined | null {
   return typeof any === 'undefined' || any === null;
 }
 
-export function padNumber(amountOfNumber: number, number?: number) {
-  if (isNil(number)) return null;
+export function padNumber(amountOfNumber: number, numberInput?: number | string) {
+  if (isNil(numberInput)) return null;
 
-  if (typeof number !== 'number') {
-    throw new Error('only number can use padNumber function');
-  }
-
-  const maxNumber = 10 ** (amountOfNumber - 1);
-  let stringNumber = String(number);
-  if (number < maxNumber) {
-    stringNumber = stringNumber.padStart(amountOfNumber, '0');
-  }
-
-  return stringNumber;
+  return String(numberInput).padStart(amountOfNumber, '0');
 }
 
 export function filterNumber(inputString: string) {

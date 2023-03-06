@@ -23,7 +23,7 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof PasswordsInputListPure> = () => {
   const [passwords, setPasswords] = useState(passwordsInit);
-  return <PasswordsInputListPure passwords={passwords} />;
+  return <PasswordsInputListPure />;
 };
 
 export const Primary = Template.bind({});

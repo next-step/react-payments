@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { memo, useContext, useEffect } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
 import type { ExpireDatesState } from '@/pages/CardCreator/types';
+import { ApiContext } from '@/stores/cardCreator';
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 import { filterNumber } from '@/utils';
 
@@ -16,14 +17,17 @@ interface ExpireDateInputProps {
   needDividerRender: boolean;
 }
 
-export function ExpireDateInput({ expireDate, index, needDividerRender }: ExpireDateInputProps) {
-  const [expireDateState, setExpireDateState] = useState(expireDate);
-  const { value, placeholder, checkIsValid, checkIsAllowInput } = expireDateState;
+export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: ExpireDateInputProps) => {
+  const { value, placeholder, checkIsValid, checkIsAllowInput } = expireDate;
+
+  const apiContext = useContext(ApiContext);
 
   const { setElement, toTheNextElement } = useSequentialFocusWithElements();
 
   const isValueValid = checkIsValid(value);
-  toTheNextElement(EXPIRE_DATE_ELEMENT_SEQUENCE_KEY, index, isValueValid);
+  useEffect(() => {
+    toTheNextElement(EXPIRE_DATE_ELEMENT_SEQUENCE_KEY, index, isValueValid);
+  }, [toTheNextElement, index, isValueValid]);
 
   return (
     <>
@@ -36,7 +40,9 @@ export function ExpireDateInput({ expireDate, index, needDividerRender }: Expire
           setElement(EXPIRE_DATE_ELEMENT_SEQUENCE_KEY, index, el);
         }}
         onChangeProps={{
-          props: { setState: (value: string) => setExpireDateState((prev) => ({ ...prev, value })) },
+          props: {
+            setState: (value: string) => apiContext?.dispatch({ type: 'expireDates', payload: { index, value } }),
+          },
           checkWhetherSetState: (e) => {
             const filteredNumber = filterNumber(e.currentTarget.value);
             return checkIsAllowInput(filteredNumber);
@@ -46,7 +52,9 @@ export function ExpireDateInput({ expireDate, index, needDividerRender }: Expire
           },
         }}
         onBlurProps={{
-          props: { setState: (value: string) => setExpireDateState((prev) => ({ ...prev, value })) },
+          props: {
+            setState: (value: string) => apiContext?.dispatch({ type: 'expireDates', payload: { index, value } }),
+          },
           checkWhetherSetState: (e) => {
             const blurValue = e.currentTarget.value;
             return !!blurValue && blurValue.length === 1;
@@ -62,4 +70,4 @@ export function ExpireDateInput({ expireDate, index, needDividerRender }: Expire
       </ConditionalComponentWrapper>
     </>
   );
-}
+});
