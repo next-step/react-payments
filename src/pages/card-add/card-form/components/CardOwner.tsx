@@ -1,16 +1,20 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, RefObject } from 'react'
 
 import { Input, InputTitle, InputContainer } from '@/components/input'
+import { useCardInfo } from '@/pages/hooks'
 
 type HandleOwnerProps = {
   value: string
 }
 interface CardOwnerProps {
-  owner: string
+  ownerRef: RefObject<HTMLInputElement>
   handleChange({ value }: HandleOwnerProps): void
 }
 
-const CardOwner = ({ owner, handleChange }: CardOwnerProps) => {
+const CardOwner = ({ ownerRef, handleChange }: CardOwnerProps) => {
+  const {
+    cardInfo: { owner },
+  } = useCardInfo()
   const handleCardOwnerInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
     handleChange({ value })
@@ -24,8 +28,8 @@ const CardOwner = ({ owner, handleChange }: CardOwnerProps) => {
       </InputTitle>
       <Input
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        value={owner}
-        onChange={handleCardOwnerInputChange}
+        ref={ownerRef}
+        onInput={handleCardOwnerInputChange}
       />
     </InputContainer>
   )

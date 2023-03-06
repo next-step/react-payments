@@ -5,8 +5,14 @@ export type HandleExpiredDateProps = {
   yymm: 'YY' | 'MM'
 }
 export interface CardExpiredDateProps {
-  expiredYear: string
-  expiredMonth: string
+  expiredDateRef: {
+    first: RefObject<HTMLInputElement>
+    second: RefObject<HTMLInputElement>
+  }
+  handleChange({ value, yymm }: HandleExpiredDateProps): void
+}
+
+export interface UseCardExpiredDateProps {
   handleChange({ value, yymm }: HandleExpiredDateProps): void
 }
 
@@ -15,12 +21,6 @@ export interface HandleChangeProps {
   order: 'first' | 'second' | 'third' | 'fourth'
 }
 export interface CardNumbersProps {
-  numbers: {
-    first: string
-    second: string
-    third: string
-    fourth: string
-  }
   handleChange({ value, order }: HandleChangeProps): void
 }
 

@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
+import { useCardAdd } from '@/pages/card-add/hooks'
 import { useCardInfo } from '@/pages/hooks'
 
 import CardNumbers from './CardNumbers'
@@ -10,11 +11,12 @@ export default {
 } as ComponentMeta<typeof CardNumbers>
 
 const Template: ComponentStory<typeof CardNumbers> = (props) => {
-  const { cardInfo, handleNumber } = useCardInfo()
+  const { handleNumber } = useCardInfo()
+  const { numbersRef } = useCardAdd()
   return (
     <div className="root">
       <div className="app">
-        <CardNumbers {...props} numbers={cardInfo.cardNumbers} handleChange={handleNumber} />
+        <CardNumbers {...props} numbersRef={numbersRef} handleChange={handleNumber} />
       </div>
     </div>
   )

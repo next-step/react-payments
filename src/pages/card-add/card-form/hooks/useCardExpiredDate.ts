@@ -1,16 +1,8 @@
-import { useRef, ChangeEvent } from 'react'
+import { ChangeEvent } from 'react'
 
-import { CardExpiredDateProps } from '@/pages/card-add/card-form/types'
-import { useSequentialInputFocus } from '@/pages/hooks'
+import { UseCardExpiredDateProps } from '@/pages/card-add/card-form/types'
 
-const useCardExpiredDate = ({ expiredYear, expiredMonth, handleChange }: CardExpiredDateProps) => {
-  const firstRef = useRef<HTMLInputElement>(null)
-  const secondRef = useRef<HTMLInputElement>(null)
-  useSequentialInputFocus([
-    { ref: firstRef, isFocus: expiredMonth.length === 2 },
-    { ref: secondRef, isFocus: expiredYear.length === 2 },
-  ])
-
+const useCardExpiredDate = ({ handleChange }: UseCardExpiredDateProps) => {
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const {
       dataset: { name },
@@ -27,7 +19,7 @@ const useCardExpiredDate = ({ expiredYear, expiredMonth, handleChange }: CardExp
     }
   }
 
-  return { firstRef, secondRef, handleInputChange }
+  return { handleInputChange }
 }
 
 export default useCardExpiredDate

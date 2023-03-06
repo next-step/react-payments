@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
+import { useCardAdd } from '@/pages/card-add/hooks'
 import { useCardInfo } from '@/pages/hooks'
 
 import CardExpiredDate from './CardExpiredDate'
@@ -10,16 +11,12 @@ export default {
 } as ComponentMeta<typeof CardExpiredDate>
 
 const Template: ComponentStory<typeof CardExpiredDate> = (props) => {
-  const { cardInfo, handleExpiredDate } = useCardInfo()
+  const { handleExpiredDate } = useCardInfo()
+  const { expiredDateRef } = useCardAdd()
   return (
     <div className="root">
       <div className="app">
-        <CardExpiredDate
-          {...props}
-          expiredMonth={cardInfo.expiredMonth}
-          expiredYear={cardInfo.expiredYear}
-          handleChange={handleExpiredDate}
-        />
+        <CardExpiredDate {...props} expiredDateRef={expiredDateRef} handleChange={handleExpiredDate} />
       </div>
     </div>
   )

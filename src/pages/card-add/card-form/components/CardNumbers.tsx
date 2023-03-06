@@ -1,3 +1,5 @@
+import { RefObject } from 'react'
+
 import { Input, InputTitle, InputBox, InputContainer } from '@/components/input'
 import { useCardNumbers } from '@/pages/card-add/card-form/hooks'
 
@@ -6,39 +8,31 @@ interface HandleChangeProps {
   order: 'first' | 'second' | 'third' | 'fourth'
 }
 interface CardNumbersProps {
-  numbers: {
-    first: string
-    second: string
-    third: string
-    fourth: string
+  numbersRef: {
+    first: RefObject<HTMLInputElement>
+    second: RefObject<HTMLInputElement>
+    third: RefObject<HTMLInputElement>
+    fourth: RefObject<HTMLInputElement>
   }
   handleChange({ value, order }: HandleChangeProps): void
 }
 
-const CardNumbers = ({ numbers, handleChange }: CardNumbersProps) => {
-  const {
-    firstValue,
-    secondValue,
-    thirdValue,
-    fourthValue,
-    firstRef,
-    secondRef,
-    thirdRef,
-    fourthRef,
-    handleInputChange,
-  } = useCardNumbers({ numbers, handleChange })
+const CardNumbers = ({ numbersRef, handleChange }: CardNumbersProps) => {
+  const { handleInputChange } = useCardNumbers({ handleChange })
+
+  console.log('check')
 
   return (
     <InputContainer>
       <InputTitle>카드 번호</InputTitle>
       <InputBox>
-        <Input ref={firstRef} value={firstValue} data-name="first" onChange={handleInputChange} />
-        {firstValue.length === 4 && <span>-</span>}
-        <Input ref={secondRef} value={secondValue} data-name="second" onChange={handleInputChange} />
-        {secondValue.length === 4 && <span>-</span>}
-        <Input ref={thirdRef} value={thirdValue} data-name="third" onChange={handleInputChange} />
-        {thirdValue.length === 4 && <span>-</span>}
-        <Input ref={fourthRef} value={fourthValue} data-name="fourth" onChange={handleInputChange} />
+        <Input ref={numbersRef.first} data-name="first" onInput={handleInputChange} />
+        <span>-</span>
+        <Input ref={numbersRef.second} data-name="second" onInput={handleInputChange} />
+        <span>-</span>
+        <Input ref={numbersRef.third} data-name="third" onInput={handleInputChange} />
+        <span>-</span>
+        <Input ref={numbersRef.fourth} data-name="fourth" onInput={handleInputChange} />
       </InputBox>
     </InputContainer>
   )

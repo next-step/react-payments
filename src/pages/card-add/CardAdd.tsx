@@ -1,61 +1,49 @@
-import { useRef } from 'react'
-
 import { BackButton, NavigationTextButton } from '@/components/button'
 import { Card, BasicCardPart } from '@/components/card'
 import { PageTitle } from '@/components/layouts'
 import { CardForm } from '@/pages/card-add/card-form'
-import { useCardInfo } from '@/pages/hooks'
-import { getConvertedStringsByStars } from '@/utils'
+import { useCardInfo, useSequentialInputFocus } from '@/pages/hooks'
+
+import { useCardAdd } from './hooks'
 
 function CardAdd() {
-  const { cardInfo, handleNumber, handleExpiredDate, handleOwner, handlePassword, handleSecurityCode } = useCardInfo()
-
-  const firstPasswordRef = useRef<HTMLInputElement>(null)
-  const secondPasswordRef = useRef<HTMLInputElement>(null)
-  const passwordRef = { first: firstPasswordRef, second: secondPasswordRef }
-
-  const securityCodeRef = useRef<HTMLInputElement>(null)
-
-  const preNavigation = () => {
-    const firstPasswordValue = firstPasswordRef.current?.value
-    const secondPasswordValue = secondPasswordRef.current?.value
-    if (firstPasswordValue && secondPasswordValue) {
-      handlePassword({ first: firstPasswordValue, second: secondPasswordValue })
-    }
-
-    const securityCodeValue = securityCodeRef.current?.value
-    if (securityCodeValue) {
-      handleSecurityCode(securityCodeValue)
-    }
-  }
-
   const {
-    cardNumbers: { first, second, third, fourth },
-    owner,
-    expiredMonth,
-    expiredYear,
-  } = cardInfo
+    cardInfo: { owner, expiredMonth, expiredYear },
+    handleNumber,
+    handleExpiredDate,
+    handleOwner,
+  } = useCardInfo()
+  const { numbersRef, cardNumbersDisplay, passwordRef, expiredDateRef, ownerRef, securityCodeRef, preNavigation } =
+    useCardAdd()
+
+  // Todo: 유효성 검사 여기서
+  useSequentialInputFocus([
+    { ref: numbersRef.first, maxLength: 4 },
+    { ref: numbersRef.second, maxLength: 4 },
+    { ref: numbersRef.third, maxLength: 4 },
+    { ref: numbersRef.fourth, maxLength: 4 },
+    { ref: expiredDateRef.first, maxLength: 2 },
+    { ref: expiredDateRef.second, maxLength: 2 },
+    { ref: ownerRef, maxLength: 30 },
+    { ref: securityCodeRef, maxLength: 3 },
+    { ref: passwordRef.first, maxLength: 1 },
+    { ref: passwordRef.second, maxLength: 1 },
+  ])
 
   return (
     <div className="app">
       <PageTitle title="카드 추가" buttonElement={<BackButton />} />
       <Card>
         <BasicCardPart
-          cardNumbers={`${first} - ${second} - ${getConvertedStringsByStars(third)} - ${getConvertedStringsByStars(
-            fourth,
-          )}`}
+          cardNumbers={cardNumbersDisplay}
           cardOwner={owner}
           cardExpiredDate={`${expiredMonth} / ${expiredYear}`}
         />
       </Card>
       <CardForm>
-        <CardForm.CardNumbers numbers={cardInfo.cardNumbers} handleChange={handleNumber} />
-        <CardForm.CardExpiredDate
-          expiredYear={cardInfo.expiredYear}
-          expiredMonth={cardInfo.expiredMonth}
-          handleChange={handleExpiredDate}
-        />
-        <CardForm.CardOwner owner={cardInfo.owner} handleChange={handleOwner} />
+        <CardForm.CardNumbers numbersRef={numbersRef} handleChange={handleNumber} />
+        <CardForm.CardExpiredDate expiredDateRef={expiredDateRef} handleChange={handleExpiredDate} />
+        <CardForm.CardOwner ownerRef={ownerRef} handleChange={handleOwner} />
         <CardForm.CardSecurityCode securityCodeRef={securityCodeRef} />
         <CardForm.CardPassword passwordRef={passwordRef} />
       </CardForm>

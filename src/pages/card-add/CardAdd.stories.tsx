@@ -1,10 +1,10 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { useRef } from 'react'
 
 import { BackButton, NavigationTextButton } from '@/components/button'
 import { Card, BasicCardPart } from '@/components/card'
 import { PageTitle } from '@/components/layouts'
 import { CardForm } from '@/pages/card-add/card-form'
+import { useCardAdd } from '@/pages/card-add/hooks'
 import { useCardInfo } from '@/pages/hooks'
 
 import CardAdd from './CardAdd'
@@ -15,20 +15,18 @@ export default {
 } as ComponentMeta<typeof CardAdd>
 
 const Template: ComponentStory<typeof CardAdd> = () => {
-  const { cardInfo, handleNumber, handleExpiredDate, handleOwner } = useCardInfo()
-
-  const firstPasswordRef = useRef<HTMLInputElement>(null)
-  const secondPasswordRef = useRef<HTMLInputElement>(null)
-  const passwordRef = { first: firstPasswordRef, second: secondPasswordRef }
-
-  const securityCodeRef = useRef<HTMLInputElement>(null)
-
   const {
-    cardNumbers: { first, second, third, fourth },
-    owner,
-    expiredMonth,
-    expiredYear,
-  } = cardInfo
+    cardInfo: {
+      cardNumbers: { first, second, third, fourth },
+      owner,
+      expiredMonth,
+      expiredYear,
+    },
+    handleNumber,
+    handleExpiredDate,
+    handleOwner,
+  } = useCardInfo()
+  const { numbersRef, passwordRef, securityCodeRef, expiredDateRef, ownerRef } = useCardAdd()
 
   return (
     <div className="root">
@@ -42,13 +40,9 @@ const Template: ComponentStory<typeof CardAdd> = () => {
           />
         </Card>
         <CardForm>
-          <CardForm.CardNumbers numbers={cardInfo.cardNumbers} handleChange={handleNumber} />
-          <CardForm.CardExpiredDate
-            expiredYear={cardInfo.expiredYear}
-            expiredMonth={cardInfo.expiredMonth}
-            handleChange={handleExpiredDate}
-          />
-          <CardForm.CardOwner owner={cardInfo.owner} handleChange={handleOwner} />
+          <CardForm.CardNumbers numbersRef={numbersRef} handleChange={handleNumber} />
+          <CardForm.CardExpiredDate expiredDateRef={expiredDateRef} handleChange={handleExpiredDate} />
+          <CardForm.CardOwner ownerRef={ownerRef} handleChange={handleOwner} />
           <CardForm.CardSecurityCode securityCodeRef={securityCodeRef} />
           <CardForm.CardPassword passwordRef={passwordRef} />
         </CardForm>
