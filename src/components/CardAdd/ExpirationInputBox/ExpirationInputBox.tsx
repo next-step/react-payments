@@ -1,6 +1,5 @@
 import { Box, Input } from '@/components/Common';
 import { CARD } from '@/constants/card';
-import { useCardExpirationContext } from '@/context';
 import { useCardAddForm } from '@/context/CardAddForm';
 
 export default function ExpirationInputBox() {

@@ -37,7 +37,7 @@ export default function CardList() {
           <Box className="card-container">
             <div className="card-box">
               <div className="empty-card">
-                <Link className="w-25 text-center" to={ROUTES.CARD.ADD}>
+                <Link className="w-100 h-100 flex-center" to={ROUTES.CARD.ADD}>
                   +
                 </Link>
               </div>
