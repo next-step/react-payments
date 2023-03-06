@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import '../../styles.css';
 import { useState } from 'react';
 import CardInput from './NewCardInput';
 

@@ -1,7 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { useContext } from 'react';
 import { ModalContext } from 'src/contexts/ModalContext';
-import '../../styles.css';
 import BottomSheet from './BottomSheet';
 
 export default {
