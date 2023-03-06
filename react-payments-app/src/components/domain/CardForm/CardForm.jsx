@@ -7,21 +7,17 @@ import CardPasswordInput from '../CardInput/CardPassword/CardPasswordInput';
 import Button from '../../common/Button/Button';
 import { useCard } from '../../../store/CardContext';
 import { MAX_INPUT_LENGTH } from '../../../constants/numbers';
-import { Form, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CHANGE_CARD } from '../../../constants/action';
 
+import Form from '../../common/Input/Form';
+
 const CardForm = () => {
-  const { cardInfo, changeCardInfo, registerCard } = useCard();
+  const { cardInfo, changeCardInfo } = useCard();
   const navigate = useNavigate();
 
   const isAllFilledOut = (cardInfo) => {
-    const {
-      cardNumbers,
-      cardExpirationDate,
-      cardPassword,
-      cardCVC,
-      cardCompanyId,
-    } = cardInfo;
+    const { cardNumbers, cardExpirationDate, cardPassword, cardCVC } = cardInfo;
 
     return (
       // cardCompanyId &&

@@ -3,16 +3,16 @@ import Card from '../../components/domain/Card/Card';
 import CardNicknameInput from '../../components/domain/CardInput/CardNickname/CardNicknameInput';
 import Button from '../../components/common/Button/Button';
 import { initialState, useCard } from '../../store/CardContext';
-import { useNavigate, Form, useLocation } from 'react-router-dom';
-import { useState, setState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { CHANGE_CARD } from '../../constants/action';
 import { MAX_INPUT_LENGTH } from '../../constants/numbers';
+import Form from '../../components/common/Input/Form';
 
 const CardNicknamePage = () => {
   const [id, setId] = useState(0);
   const [data, setData] = useState(initialState);
-  const [setCardNickname] = setState('');
-
+  const [cardNickname, setCardNickname] = useState('');
   const { cardInfo, changeCardInfo, registerCard } = useCard();
   const navigate = useNavigate();
   const location = useLocation();
