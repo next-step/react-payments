@@ -1,6 +1,8 @@
 export const ERROR_MESSAGE = {
   INPUT: {
     COMMON: {
+      INVALID_TYPE: (type: string) =>
+        `input element에 지정되지 않은 type이 주입되었습니다. [injected type with '${type}']`,
       INVALID_NAME: (name: string) =>
         `input element에 지정되지 않은 name이 주입되었습니다. [injected name with '${name}']`,
       INVALID_VALUE: '유효하지 않은 값이 입력되었습니다.',

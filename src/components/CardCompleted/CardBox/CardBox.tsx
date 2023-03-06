@@ -1,18 +1,9 @@
 import { Card } from '@/components/Common';
-import {
-  useCardAliasContext,
-  useCardExpirationContext,
-  useCardNumberContext,
-  useCardOwnerNameContext,
-  useCardSelectModalContext,
-} from '@/context';
+import { useCardAddForm } from '@/context/CardAddForm';
 
 export default function CardBox() {
-  const { selectedCard } = useCardSelectModalContext();
-  const { cardOwnerName } = useCardOwnerNameContext();
-  const { cardNumber } = useCardNumberContext();
-  const { cardExpiration } = useCardExpirationContext();
-  const { cardAlias } = useCardAliasContext();
+  const { cardForm } = useCardAddForm();
+  const { cardNumber, cardExpiration, cardOwnerName, cardCompany, cardAlias } = cardForm;
 
   return (
     <Card
@@ -20,7 +11,7 @@ export default function CardBox() {
       cardNumber={cardNumber}
       cardExpiration={cardExpiration}
       cardOwnerName={cardOwnerName}
-      selectedCard={selectedCard}
+      cardCompany={cardCompany}
       cardAlias={cardAlias}
     />
   );

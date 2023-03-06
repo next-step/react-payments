@@ -1,32 +1,13 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Box, Button } from '@/components/Common';
 import { ROUTES } from '@/constants/routes';
-import {
-  useCardExpirationContext,
-  useCardNumberContext,
-  useCardPasswordContext,
-  useCardSecretCodeContext,
-  useCardSelectModalContext,
-} from '@/context';
+
+import { useCardAddForm } from '@/context/CardAddForm';
 
 export default function NextButtonBox() {
-  const { 카드CVC가모두입력된 } = useCardSecretCodeContext();
-  const { 카드비밀번호가모두입력된 } = useCardPasswordContext();
-  const { 카드사가선택된 } = useCardSelectModalContext();
-  const { 카드번호가모두입력된 } = useCardNumberContext();
-  const { 만료일이모두입력된 } = useCardExpirationContext();
-
-  const isCompleted = useMemo(() => {
-    return [
-      카드번호가모두입력된,
-      만료일이모두입력된,
-      카드CVC가모두입력된,
-      카드비밀번호가모두입력된,
-      카드사가선택된,
-    ].every((elem) => elem === true);
-  }, [만료일이모두입력된, 카드CVC가모두입력된, 카드번호가모두입력된, 카드비밀번호가모두입력된, 카드사가선택된]);
+  const { 카드폼이입력된 } = useCardAddForm();
 
   const navigate = useNavigate();
 
@@ -35,14 +16,14 @@ export default function NextButtonBox() {
   const handleClickNext = () => {
     setIsButtonClicked(true);
 
-    if (!isCompleted) {
+    if (!카드폼이입력된) {
       return;
     }
 
     navigate(ROUTES.CARD.COMPLETED);
   };
 
-  const 폼이완성되지않은채로추가하면 = !isCompleted && isButtonClicked;
+  const 폼이완성되지않은채로추가하면 = !카드폼이입력된 && isButtonClicked;
 
   return (
     <Box className="text-right">

@@ -2,14 +2,14 @@ import { useContext } from 'react';
 
 import { ERROR_MESSAGE } from '@/constants/errorMessage';
 
-import { CardAliasContext } from '../CardAliasProvider';
+import { CardAddFormContext } from '../CardAddFormProvider';
 
 export default function useCardAliasProvider() {
-  const cardAliasProvider = useContext(CardAliasContext);
+  const cardAddFormContext = useContext(CardAddFormContext);
 
-  if (cardAliasProvider === undefined) {
+  if (cardAddFormContext === undefined) {
     throw new Error(ERROR_MESSAGE.PROVIDER.INVALID_SCOPE);
   }
 
-  return cardAliasProvider;
+  return cardAddFormContext;
 }

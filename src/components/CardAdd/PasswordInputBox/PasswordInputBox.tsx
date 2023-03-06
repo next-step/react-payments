@@ -1,9 +1,12 @@
 import { Box, Input } from '@/components/Common';
 import { CARD } from '@/constants/card';
-import { useCardPasswordContext } from '@/context';
+import { useCardAddForm } from '@/context/CardAddForm';
 
 export default function PasswordInputBox() {
-  const { cardPassword, handleChangeCardPassword } = useCardPasswordContext();
+  const {
+    cardForm: { cardPassword },
+    handleChangeCardForm,
+  } = useCardAddForm();
   const { num1, num2 } = cardPassword;
 
   return (
@@ -15,8 +18,9 @@ export default function PasswordInputBox() {
         maxLength={CARD.PASSWORD.LENGTH}
         name="num1"
         value={num1}
-        onChange={handleChangeCardPassword}
+        onChange={handleChangeCardForm}
         type="password"
+        data-type={CARD.PASSWORD.TYPE}
       />
       <Input
         styleType="basic"
@@ -24,8 +28,9 @@ export default function PasswordInputBox() {
         maxLength={CARD.PASSWORD.LENGTH}
         name="num2"
         value={num2}
-        onChange={handleChangeCardPassword}
+        onChange={handleChangeCardForm}
         type="password"
+        data-type={CARD.PASSWORD.TYPE}
       />
 
       <Input styleType="fixed" className=" w-15" disabled value="•" type="password" />

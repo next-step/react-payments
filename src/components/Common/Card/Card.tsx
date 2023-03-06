@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { CardAlias, CardExpiration, CardNumber, CardOwnerName, SelectedCard } from '@/types/card';
+import { CardAlias, CardExpiration, CardNumber, CardOwnerName, CardCompany } from '@/types/card';
 import { maskingNumber } from '@/domain/card/card';
 
 import Box from '../Box';
@@ -10,7 +10,7 @@ type CardProps = {
   type: 'big' | 'small';
   isShowAlias?: boolean;
   onClick?: () => void;
-  selectedCard: SelectedCard;
+  cardCompany: CardCompany;
   cardNumber: CardNumber;
   cardOwnerName: CardOwnerName;
   cardExpiration: CardExpiration;
@@ -21,13 +21,13 @@ export default function Card({
   type,
   isShowAlias,
   onClick,
-  selectedCard,
+  cardCompany,
   cardNumber,
   cardOwnerName,
   cardExpiration,
   cardAlias,
 }: CardProps) {
-  const { name, color } = selectedCard;
+  const { name, color } = cardCompany;
   const { num1, num2, num3, num4 } = cardNumber;
   const { month, year } = cardExpiration;
 

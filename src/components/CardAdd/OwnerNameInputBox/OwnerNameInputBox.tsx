@@ -1,9 +1,13 @@
 import { Box, Input } from '@/components/Common';
 import { CARD } from '@/constants/card';
-import { useCardOwnerNameContext } from '@/context';
+import { useCardAddForm } from '@/context/CardAddForm';
 
 export default function OwnerNameInputBox() {
-  const { cardOwnerName, handleChangeCardOwnerName } = useCardOwnerNameContext();
+  const {
+    cardForm: { cardOwnerName },
+    handleChangeCardForm,
+  } = useCardAddForm();
+
   const subTitle = `${cardOwnerName.length}/${CARD.OWNER_NAME.LENGTH}`;
 
   return (
@@ -17,8 +21,9 @@ export default function OwnerNameInputBox() {
         type="text"
         maxLength={CARD.OWNER_NAME.LENGTH}
         value={cardOwnerName}
-        onChange={handleChangeCardOwnerName}
+        onChange={handleChangeCardForm}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+        data-type={CARD.OWNER_NAME.TYPE}
       />
     </Box>
   );

@@ -2,11 +2,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/Common';
 import { ROUTES } from '@/constants/routes';
-import { useCardListContext, useCardNumberContext } from '@/context';
+import { useCardAddForm, useCardListContext } from '@/context';
 
 export default function DeleteButton() {
   const navigate = useNavigate();
-  const { cardNumber } = useCardNumberContext();
+  const {
+    cardForm: { cardNumber },
+  } = useCardAddForm();
   const { handleClickDelete } = useCardListContext();
 
   const handleClick = () => {

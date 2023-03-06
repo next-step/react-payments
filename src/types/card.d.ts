@@ -1,10 +1,12 @@
+// FIXME: type
 export type Card = {
+  [key: string]: any;
   cardNumber: CardNumber;
   cardExpiration: CardExpiration;
   cardOwnerName: CardOwnerName;
   cardSecretCode: CardSecretCode;
   cardPassword: CardPassword;
-  selectedCard: SelectedCard;
+  cardCompany: CardCompany;
   cardAlias: CardAlias;
 };
 
@@ -29,7 +31,7 @@ export type CardPassword = {
   num2: string;
 };
 
-export type SelectedCard = {
+export type CardCompany = {
   name: string;
   color: string;
 };

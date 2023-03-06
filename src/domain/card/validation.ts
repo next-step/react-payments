@@ -1,5 +1,6 @@
+import { CARD } from '@/constants/card';
 import { ERROR_MESSAGE } from '@/constants/errorMessage';
-import { CardExpiration, CardNumber, CardPassword } from '@/types/card';
+import { Card, CardExpiration, CardNumber, CardPassword } from '@/types/card';
 import { getCurrentYear, isNumber } from '@/utils';
 
 type ValidateInput = {
@@ -86,4 +87,24 @@ export function validateCardPassword({ name, value, cardPassword }: { cardPasswo
   if (!isNumber(value) && value !== '') {
     throw new Error(ERROR_MESSAGE.INPUT.COMMON.INVALID_VALUE);
   }
+}
+
+export function validateCardForm({
+  type,
+  name,
+  value,
+  cardForm,
+}: {
+  type: string;
+  cardForm: Card;
+} & ValidateInput) {
+  const { cardNumber, cardExpiration, cardPassword } = cardForm;
+
+  const validate = {
+    [CARD.NUMBER.TYPE]: () => validateCardNumber({ name, value, cardNumber }),
+    [CARD.EXPIRATION.TYPE]: () => validateCardExpiration({ name, value, cardExpiration }),
+    [CARD.PASSWORD.TYPE]: () => validateCardPassword({ name, value, cardPassword }),
+  }[type];
+
+  validate?.();
 }

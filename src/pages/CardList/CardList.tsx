@@ -1,35 +1,27 @@
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Box, Card } from '@/components/Common';
-import { Card as CardType } from '@/types/card';
 import { ROUTES } from '@/constants/routes';
-import {
-  useCardAliasContext,
-  useCardExpirationContext,
-  useCardListContext,
-  useCardNumberContext,
-  useCardOwnerNameContext,
-  useCardSelectModalContext,
-} from '@/context';
+import { useCardAddForm, useCardListContext } from '@/context';
+import { Card as CardType } from '@/types/card';
 
 export default function CardList() {
   const navigate = useNavigate();
-  const { cardList } = useCardListContext();
 
-  const { setSelectedCard } = useCardSelectModalContext();
-  const { setCardOwnerName } = useCardOwnerNameContext();
-  const { setCardNumber } = useCardNumberContext();
-  const { setCardExpiration } = useCardExpirationContext();
-  const { setCardAlias } = useCardAliasContext();
+  const { cardList } = useCardListContext();
+  const { setCardForm } = useCardAddForm();
 
   const handleClickCard = (card: CardType) => () => {
-    const { selectedCard, cardOwnerName, cardNumber, cardExpiration, cardAlias } = card;
+    const { cardCompany, cardOwnerName, cardNumber, cardExpiration, cardAlias } = card;
 
-    setSelectedCard(selectedCard);
-    setCardOwnerName(cardOwnerName);
-    setCardNumber(cardNumber);
-    setCardExpiration(cardExpiration);
-    setCardAlias(cardAlias);
+    setCardForm((cardForm) => ({
+      ...cardForm,
+      cardCompany,
+      cardOwnerName,
+      cardNumber,
+      cardExpiration,
+      cardAlias,
+    }));
 
     navigate(ROUTES.CARD.COMPLETED, { state: { haveDeleteButton: true } });
   };
