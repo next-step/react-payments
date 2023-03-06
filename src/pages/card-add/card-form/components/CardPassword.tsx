@@ -1,14 +1,6 @@
-import { RefObject } from 'react'
-
 import { BasicInput } from '@/components/input'
+import { CardPasswordProps } from '@/pages/card-add/card-form/types'
 import { useSequentialInputFocus } from '@/pages/hooks'
-
-interface CardPasswordProps {
-  passwordRef: {
-    first: RefObject<HTMLInputElement>
-    second: RefObject<HTMLInputElement>
-  }
-}
 
 const CardPassword = ({ passwordRef }: CardPasswordProps) => {
   useSequentialInputFocus([
