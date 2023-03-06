@@ -106,6 +106,10 @@ const useNewCardForm = () => {
     handleOpen(true);
   };
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   const handlers = {
     handleChangeCreditNumber,
     handleChangeCustomerName,
@@ -122,6 +126,7 @@ const useNewCardForm = () => {
     handlers,
     onClickNextPage,
     openBottomSheet,
+    goBack,
   };
 };
 
