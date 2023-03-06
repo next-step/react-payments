@@ -19,6 +19,11 @@ export type CardInformation = Expiration &
 
 export type CardInformationWithoutId = Omit<CardInformation, 'id'>;
 
-export type Destination = '/' | '/add' | '/complete';
+// eslint-disable-next-line @typescript-eslint/ban-types
+type ExctractParams<Path> = Path extends `:${infer Param}` ? Record<Param, string> : {};
+
+export type CompleteDestination = ExctractParams<'/complete/:id'>;
+
+export type Destination = '/' | '/add' | CompleteDestination;
 
 export type CardList = CardInformation[];

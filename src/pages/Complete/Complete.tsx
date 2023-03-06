@@ -1,5 +1,5 @@
 import { Card } from '@/components/Common';
-import CompleteForm from '@/components/Form/CompleteForm';
+import { CompleteForm } from './components';
 import Layout from '@/components/Layout';
 import { useCardForm } from '@/context/CardFormContext';
 

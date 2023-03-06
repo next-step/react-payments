@@ -1,18 +1,17 @@
 import { LIMIT_INPUT_LENGTH } from '@/constants';
-import { Button } from '../Common';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Button } from '@/components/Common';
+import { useNavigate } from 'react-router-dom';
 import { FormEvent, useEffect } from 'react';
 import { useCardListHandler } from '@/context/CardListContext';
 import { useCardForm, useCardFormHandler } from '@/context/CardFormContext';
-import { NameField } from '../Field';
-import { useLocationState } from '@/pages/Complete/hooks';
+import { NameField } from '@/components/Field';
+import { useLocationState } from '../hooks';
 import { CardInformation } from '@/types';
 
 function CompleteForm() {
   const navigate = useNavigate();
-  const { id } = useParams();
 
-  const { cardForm, isEditMode } = useLocationState<{ cardForm: CardInformation; isEditMode: boolean }>();
+  const { id, cardForm, isEditMode } = useLocationState<{ cardForm: CardInformation; isEditMode: boolean }>();
 
   const { onChange, onReset, updateCardForm } = useCardFormHandler();
   const { updateCard, deleteCard } = useCardListHandler();
