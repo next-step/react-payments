@@ -7,9 +7,9 @@ export const useOwnerNameInput = () => {
   const handleOwnerNameChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    const onlyAlphabetsAndSpaces = /[^a-zA-Z\s]/g;
     const newValue = event.target.value
-      .replace(/[^a-zA-Z\s]/g, "")
-      .replace(/[^\w\s]/gi, "")
+      .replace(onlyAlphabetsAndSpaces, "")
       .toUpperCase();
     setOwnerName(newValue);
   };
