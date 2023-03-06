@@ -1,8 +1,9 @@
-import React, { ForwardedRef, useRef, useState } from "react";
+import React, { ForwardedRef, useMemo, useRef, useState } from "react";
 import { blockInput, remainOnlyNumber } from "../../utils/format";
 import Input from "../Input/Input";
 import InputBox from "../Input/InputBox";
 import InputContainer from "../Input/InputContainer";
+import { InvalidText } from "../InvalidText";
 
 export type Date = {
   month: string;
@@ -22,7 +23,7 @@ const blockInvalidValue = (inputValue: string, type: string) => {
   const value = Number(inputValue);
 
   if (type === ExpiredDateType.Month) {
-    const isValidMonth = value !== 0 && value <= MAX_MONTH;
+    const isValidMonth = String(value) !== "00" && value <= MAX_MONTH;
     if (!isValidMonth) {
       return blockInput(String(value));
     }
@@ -46,6 +47,12 @@ function ExpiredDate(
   const [expiredDate, setExpiredDate] = useState<Date>({ month: "", year: "" });
 
   const itemsRef = useRef<any>([]);
+
+  const invalidText = useMemo(() => {
+    if (!expiredDate.month) {
+      return "MM은 필수 입력입니다";
+    }
+  }, [expiredDate]);
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -91,6 +98,9 @@ function ExpiredDate(
           ref={(el: HTMLInputElement) => (itemsRef.current[1] = el)}
         />
       </InputBox>
+      <>
+        <InvalidText>text</InvalidText>
+      </>
     </InputContainer>
   );
 }
