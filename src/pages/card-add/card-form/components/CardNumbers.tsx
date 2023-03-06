@@ -1,4 +1,4 @@
-import { Input, InputTitle } from '@/components/input'
+import { Input, InputTitle, InputBox } from '@/components/input'
 import { useCardNumbers } from '@/pages/card-add/card-form/hooks'
 
 interface HandleChangeProps {
@@ -31,7 +31,7 @@ const CardNumbers = ({ numbers, handleChange }: CardNumbersProps) => {
   return (
     <div className="input-container">
       <InputTitle>카드 번호</InputTitle>
-      <div className="input-box">
+      <InputBox>
         <Input ref={firstRef} value={firstValue} data-name="first" onChange={handleInputChange} />
         {firstValue.length === 4 && <span>-</span>}
         <Input ref={secondRef} value={secondValue} data-name="second" onChange={handleInputChange} />
@@ -39,7 +39,7 @@ const CardNumbers = ({ numbers, handleChange }: CardNumbersProps) => {
         <Input ref={thirdRef} value={thirdValue} data-name="third" onChange={handleInputChange} />
         {thirdValue.length === 4 && <span>-</span>}
         <Input ref={fourthRef} value={fourthValue} data-name="fourth" onChange={handleInputChange} />
-      </div>
+      </InputBox>
     </div>
   )
 }
