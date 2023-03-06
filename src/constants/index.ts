@@ -19,4 +19,5 @@ export const ROUTES = {
 
 export const REGEX = {
   NOT_NUMBER: /\D+/g,
+  PASSWORD: '[0-9]*',
 };

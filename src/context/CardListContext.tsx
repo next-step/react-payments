@@ -1,6 +1,5 @@
 import { CardInformation } from '@/types';
-import { createContext, useContext, useMemo, useState } from 'react';
-import type { ReactNode } from 'react';
+import { PropsWithChildren, createContext, useContext, useMemo, useState } from 'react';
 
 type CardList = CardInformation[];
 
@@ -14,10 +13,6 @@ type CardListHandler = {
 
 const CardListContext = createContext<CardList | null>(null);
 const CardListHandlerContext = createContext<CardListHandler | null>(null);
-
-interface CardListContextProps {
-  children: ReactNode;
-}
 
 function useCardList() {
   const value = useContext(CardListContext);
@@ -39,7 +34,7 @@ function useCardListHandler() {
   return value;
 }
 
-function CardListProvider({ children }: CardListContextProps) {
+function CardListProvider({ children }: PropsWithChildren) {
   const [cardList, setCardList] = useState(initialCardList);
 
   const handlers = useMemo(

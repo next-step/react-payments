@@ -1,9 +1,8 @@
 import { cls } from '@/utils';
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 
 type ButtonKind = 'primary' | 'danger' | 'default';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode | string;
   kind?: ButtonKind;
 }
 
@@ -19,7 +18,13 @@ const getBgColor = (kind: ButtonKind) => {
   }
 };
 
-function Button({ children, type = 'button', disabled = false, kind = 'default', ...props }: ButtonProps) {
+function Button({
+  children,
+  type = 'button',
+  disabled = false,
+  kind = 'default',
+  ...props
+}: PropsWithChildren<ButtonProps>) {
   const bgColor = getBgColor(kind);
   return (
     <button

@@ -1,5 +1,5 @@
 import { REGEX } from '@/constants';
-import { CardInformation } from '@/types';
+import { CardInformationWithoutId } from '@/types';
 
 export const renderTextDivider = ({
   formerValue,
@@ -13,8 +13,8 @@ export const renderTextDivider = ({
   return formerValue || latterValue ? divider : '';
 };
 
-export const checkRequiredValues = (data: Omit<CardInformation, 'id'>) => {
-  const REQUIRED_FORM_KEYS: (keyof Omit<CardInformation, 'id'>)[] = [
+export const checkRequiredValues = (data: CardInformationWithoutId) => {
+  const REQUIRED_FORM_KEYS: (keyof CardInformationWithoutId)[] = [
     'cardNumber1',
     'cardNumber2',
     'cardNumber3',
@@ -41,5 +41,3 @@ export const expirationMonthFormatter = (month: string) => {
 export const textOnlyFormatter = (str: string) => {
   return str.replace(REGEX.NOT_NUMBER, '');
 };
-
-export const getUniqId = () => new Date().getTime().toString();

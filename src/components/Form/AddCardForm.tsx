@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { CVCField, CardNumberField, ExpirationField, PasswordField, NameField } from '@components/Field';
 import { Button } from '@components/Common';
-import { checkRequiredValues, getUniqId } from '@/utils';
+import { checkRequiredValues } from '@/utils';
 import { LIMIT_INPUT_LENGTH } from '@/constants';
 
 import type { FormEvent } from 'react';
@@ -37,7 +37,7 @@ function AddCardForm() {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const id = getUniqId();
+    const id = crypto.randomUUID();
     addCard({ ...cardForm, id });
 
     navigate(`/complete/${id}`, { state: { cardForm } });

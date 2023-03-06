@@ -1,6 +1,5 @@
 import { CardInformation } from '@/types';
-import { ChangeEvent, createContext, useContext, useMemo, useState } from 'react';
-import type { ReactNode } from 'react';
+import { ChangeEvent, PropsWithChildren, createContext, useContext, useMemo, useState } from 'react';
 
 type FormHandler = {
   onChange(e: ChangeEvent<HTMLInputElement>): void;
@@ -16,6 +15,7 @@ function useCardForm() {
   if (!value) {
     throw new Error('useCardForm는 CardFormProvider에서 사용해야합니다.');
   }
+
   return value;
 }
 
@@ -43,11 +43,7 @@ const initCardInformation: CardInformation = {
   cardCompany: 'UNKNOWN',
 };
 
-interface CardFormProviderProps {
-  children: ReactNode;
-}
-
-function CardFormProvider({ children }: CardFormProviderProps) {
+function CardFormProvider({ children }: PropsWithChildren) {
   const [cardForm, setCardForm] = useState<CardInformation>(initCardInformation);
 
   const handlers = useMemo(

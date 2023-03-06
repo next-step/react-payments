@@ -1,13 +1,12 @@
-import type { ReactNode } from 'react';
+import type { PropsWithChildren, ReactNode } from 'react';
 
 type FieldContainerProps = {
   title?: string;
   limitText?: string;
-  children: ReactNode;
   addOn?: ReactNode;
 };
 
-function FieldContainer({ title = '', children, addOn, limitText = '' }: FieldContainerProps) {
+function FieldContainer({ title = '', children, addOn, limitText = '' }: PropsWithChildren<FieldContainerProps>) {
   return (
     <div className="my-2">
       <div className="flex justify-between">

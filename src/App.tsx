@@ -3,9 +3,9 @@ import { CardListProvider } from './context/CardListContext';
 import RootRouter from './RootRouter';
 
 import './index.css';
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 
-function RootContainer({ children }: { children: ReactNode }) {
+function RootContainer({ children }: PropsWithChildren) {
   return <div className="bg-white w-96 min-w-[384px] h-[700px] relative rounded-2xl overflow-hidden">{children}</div>;
 }
 

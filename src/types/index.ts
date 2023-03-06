@@ -3,12 +3,8 @@ export interface Expiration {
   year: string;
 }
 
-export interface CardNumber {
-  cardNumber1: string;
-  cardNumber2: string;
-  cardNumber3: string;
-  cardNumber4: string;
-}
+type CardNumbers = 'cardNumber1' | 'cardNumber2' | 'cardNumber3' | 'cardNumber4';
+export type CardNumber = Record<CardNumbers, string>;
 
 export interface Password {
   password1: string;
@@ -24,6 +20,8 @@ export type CardInformation = Expiration &
     nickname?: string;
     cardCompany?: string;
   };
+
+export type CardInformationWithoutId = Omit<CardInformation, 'id'>;
 
 export type Destination = '/' | '/add' | '/complete';
 
