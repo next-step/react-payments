@@ -18,7 +18,7 @@ const App = styled.div`
 
 const Header = styled.header`
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
 `;
 
