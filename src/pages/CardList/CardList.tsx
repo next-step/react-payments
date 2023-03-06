@@ -8,7 +8,7 @@ import { Card as CardType } from '@/types/card';
 export default function CardList() {
   const navigate = useNavigate();
 
-  const { cardList } = useCardListContext();
+  const { cardList, getUniqueKey } = useCardListContext();
   const { setCardForm } = useCardAddForm();
 
   const handleClickCard = (card: CardType) => () => {
@@ -44,10 +44,7 @@ export default function CardList() {
             </div>
 
             {cardList.map((card) => {
-              const {
-                cardNumber: { num1, num2, num3, num4 },
-              } = card;
-              const key = num1 + num2 + num3 + num4;
+              const key = getUniqueKey(card);
 
               return <Card key={key} type="small" isShowAlias onClick={handleClickCard(card)} {...card} />;
             })}
