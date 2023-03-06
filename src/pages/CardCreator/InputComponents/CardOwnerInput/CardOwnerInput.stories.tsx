@@ -6,27 +6,25 @@ import '@/styles/input.css';
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { expireDatesInit } from '../CardCreatorInits';
-import { ExpireDateInputPure } from './ExpireDateInput';
-import { createCardStateSetter } from '../utils';
+import { cardOwnersInit } from '../../CardCreatorInits';
+import { CardOwnerInputPure } from './CardOwnerInput';
+import { createCardStateSetter } from '../../utils';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'CardCreator/ExpireDateInput',
-  component: ExpireDateInputPure,
+  title: 'CardCreator/CardOwnerInput',
+  component: CardOwnerInputPure,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     cardNumbers: { control: false },
     createCardNumberSetter: { control: false },
   },
-} as ComponentMeta<typeof ExpireDateInputPure>;
+} as ComponentMeta<typeof CardOwnerInputPure>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof ExpireDateInputPure> = () => {
-  const [expireDates, setExpireDates] = useState(expireDatesInit);
-  return (
-    <ExpireDateInputPure expireDates={expireDates} createExpireDateSetter={createCardStateSetter(setExpireDates)} />
-  );
+const Template: ComponentStory<typeof CardOwnerInputPure> = () => {
+  const [ownerNames, setOwnerNames] = useState(cardOwnersInit);
+  return <CardOwnerInputPure ownerNames={ownerNames} createOwnerNameSetter={createCardStateSetter(setOwnerNames)} />;
 };
 
 export const Primary = Template.bind({});

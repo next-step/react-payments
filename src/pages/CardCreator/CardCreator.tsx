@@ -5,20 +5,11 @@ import { routes } from '@/routes';
 import { Card } from '@/components/Card';
 import { ThemeProvider } from '@/components/ThemeProvider';
 
-import {
-  CardNumberInputPure,
-  CardOwnerInputPure,
-  ExpireDateInputPure,
-  PasswordInputPure,
-  SecurityCodeInputPure,
-} from './InputComponents';
-import type {
-  CardNumberInputRef,
-  CardOwnerInputRef,
-  ExpireDateInputRef,
-  PasswordInputRef,
-  SecurityCodeInputRef,
-} from './InputComponents';
+import { CardNumbersInputListRef, CardNumbersInputListPure } from './InputComponents/CardNumbersInputList';
+import { ExpireDatesInputListRef, ExpireDatesInputListPure } from './InputComponents/ExpireDatesInputList';
+import { CardOwnerInputRef, CardOwnerInputPure } from './InputComponents/CardOwnerInput';
+import { SecurityCodesInputListRef, SecurityCodesInputListPure } from './InputComponents/SecurityCodesInputList';
+import { PasswordsInputListRef, PasswordsInputListPure } from './InputComponents/PasswordsInputList';
 import { cardNumbersInit, expireDatesInit, passwordsInit, cardOwnersInit, securityCodesInit } from './CardCreatorInits';
 import { useInputComponent } from './hooks/useInputComponent';
 import { useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';
@@ -26,15 +17,15 @@ import { CardCompanyModel } from './hooks/useCardCompanySelectModal/CardCompanyS
 
 function CardCreator() {
   const [cardNumbers, createCardNumberSetter, cardNumberInputRef, cardNumberValidator] =
-    useInputComponent<CardNumberInputRef>(cardNumbersInit);
+    useInputComponent<CardNumbersInputListRef>(cardNumbersInit);
   const [expireDates, createExpireDateSetter, expireDateInputRef, expireDateValidator] =
-    useInputComponent<ExpireDateInputRef>(expireDatesInit);
+    useInputComponent<ExpireDatesInputListRef>(expireDatesInit);
   const [ownerNames, createOwnerNameSetter, cardOwnerInputRef, ownerNameValidator] =
     useInputComponent<CardOwnerInputRef>(cardOwnersInit);
   const [securityCodes, createSecurityCodeSetter, securityCodeInputRef, securityCodesValidator] =
-    useInputComponent<SecurityCodeInputRef>(securityCodesInit);
+    useInputComponent<SecurityCodesInputListRef>(securityCodesInit);
   const [passwords, createPasswordSetter, passwordInputRef, passwordsValidator] =
-    useInputComponent<PasswordInputRef>(passwordsInit);
+    useInputComponent<PasswordsInputListRef>(passwordsInit);
 
   const [cardCompany, setCardCompany] = useState<CardCompanyModel | undefined>();
 
@@ -60,27 +51,15 @@ function CardCreator() {
         }}
       />
 
-      <CardNumberInputPure
-        ref={cardNumberInputRef}
-        cardNumbers={cardNumbers}
-        createCardNumberSetter={createCardNumberSetter}
-      />
-      <ExpireDateInputPure
-        ref={expireDateInputRef}
-        expireDates={expireDates}
-        createExpireDateSetter={createExpireDateSetter}
-      />
+      <CardNumbersInputListPure ref={cardNumberInputRef} cardNumbers={cardNumbers} />
+      <ExpireDatesInputListPure ref={expireDateInputRef} expireDates={expireDates} />
       <CardOwnerInputPure
         ref={cardOwnerInputRef}
         ownerNames={ownerNames}
         createOwnerNameSetter={createOwnerNameSetter}
       />
-      <SecurityCodeInputPure
-        ref={securityCodeInputRef}
-        securityCodes={securityCodes}
-        createSecurityCodeSetter={createSecurityCodeSetter}
-      />
-      <PasswordInputPure ref={passwordInputRef} passwords={passwords} createPasswordSetter={createPasswordSetter} />
+      <SecurityCodesInputListPure ref={securityCodeInputRef} securityCodes={securityCodes} />
+      <PasswordsInputListPure ref={passwordInputRef} passwords={passwords} />
       <div className="button-box">
         <Link
           to="/add-complete"

@@ -1,10 +1,10 @@
 import React, { ForwardedRef, forwardRef, memo, useImperativeHandle, useMemo } from 'react';
 
-import type { CardOwnersState, ErrorMessageType } from '../types';
-import type { CardStateSetter } from '../utils';
-import { CardInputWrapperPure } from './components/CardInputWrapper';
-import { useErrorMessage } from './hooks/useErrorMessage';
-import { CardInfoInputElement } from './components/CardInfoInputElement';
+import type { CardOwnersState, ErrorMessageType } from '../../types';
+import type { CardStateSetter } from '../../utils';
+import { CardInputWrapperPure } from '../components/CardInputWrapper';
+import { useErrorMessage } from '../hooks/useErrorMessage';
+import { CardInfoInputElement } from '../components/CardInfoInputElement';
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 
 const CARD_OWNER_ELEMENT_SEQUENCE_KEY = 'cardOwner';

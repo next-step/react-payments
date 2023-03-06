@@ -6,30 +6,24 @@ import '@/styles/input.css';
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { securityCodesInit } from '../CardCreatorInits';
-import { SecurityCodeInputPure } from './SecurityCodeInput';
-import { createCardStateSetter } from '../utils';
+import { securityCodesInit } from '../../CardCreatorInits';
+import { SecurityCodesInputListPure } from './SecurityCodesInputList';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'CardCreator/SecurityCodeInput',
-  component: SecurityCodeInputPure,
+  component: SecurityCodesInputListPure,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     cardNumbers: { control: false },
     createCardNumberSetter: { control: false },
   },
-} as ComponentMeta<typeof SecurityCodeInputPure>;
+} as ComponentMeta<typeof SecurityCodesInputListPure>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof SecurityCodeInputPure> = () => {
+const Template: ComponentStory<typeof SecurityCodesInputListPure> = () => {
   const [securityCodes, setSecurityCodes] = useState(securityCodesInit);
-  return (
-    <SecurityCodeInputPure
-      securityCodes={securityCodes}
-      createSecurityCodeSetter={createCardStateSetter(setSecurityCodes)}
-    />
-  );
+  return <SecurityCodesInputListPure securityCodes={securityCodes} />;
 };
 
 export const Primary = Template.bind({});

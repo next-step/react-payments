@@ -1,55 +1,22 @@
-import React, { ForwardedRef, forwardRef, Fragment, memo, useImperativeHandle, useState } from 'react';
+import React, { useState } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
+import type { ExpireDatesState } from '@/pages/CardCreator/types';
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
-import { checkIsArrayLast, filterNumber } from '@/utils';
+import { filterNumber } from '@/utils';
 
-import type { CardStateSetter } from '../utils';
-import type { ExpireDatesState, ErrorMessageType } from '../types';
-import { InputDivider } from './components/InputDivider';
-import { CardInputWrapperPure } from './components/CardInputWrapper';
-import { useErrorMessage } from './hooks/useErrorMessage';
-import { CardInfoInputElement } from './components/CardInfoInputElement';
-
-interface ExpireDateInputProps {
-  expireDates: ExpireDatesState;
-  createExpireDateSetter: CardStateSetter<string>;
-}
-
-export interface ExpireDateInputRef {
-  setErrorMessage: (messageType: ErrorMessageType) => void;
-}
-
-function ExpireDateInput(
-  { expireDates, createExpireDateSetter }: ExpireDateInputProps,
-  ref: ForwardedRef<ExpireDateInputRef>
-) {
-  const [errorMessage, setErrorMessage] = useErrorMessage({
-    inValid: 'MM/YY 형태로 만료일을 입력해주세요.',
-  });
-  useImperativeHandle(ref, () => ({ setErrorMessage }));
-
-  return (
-    <CardInputWrapperPure header="만료일" errorMessage={errorMessage}>
-      <div className="input-box w-50">
-        {expireDates.map((expireDate, i) => {
-          const isLast = checkIsArrayLast(expireDates, i);
-          return <ExpireDate key={expireDate.key} expireDate={expireDate} index={i} needDividerRender={!isLast} />;
-        })}
-      </div>
-    </CardInputWrapperPure>
-  );
-}
+import { InputDivider } from '../../components/InputDivider';
+import { CardInfoInputElement } from '../../components/CardInfoInputElement';
 
 const EXPIRE_DATE_ELEMENT_SEQUENCE_KEY = 'expireDate';
 
-interface ExpireDateProps {
+interface ExpireDateInputProps {
   expireDate: ExpireDatesState[number];
   index: number;
   needDividerRender: boolean;
 }
 
-function ExpireDate({ expireDate, index, needDividerRender }: ExpireDateProps) {
+export function ExpireDateInput({ expireDate, index, needDividerRender }: ExpireDateInputProps) {
   const [expireDateState, setExpireDateState] = useState(expireDate);
   const { value, placeholder, checkIsValid, checkIsAllowInput } = expireDateState;
 
@@ -96,5 +63,3 @@ function ExpireDate({ expireDate, index, needDividerRender }: ExpireDateProps) {
     </>
   );
 }
-
-export const ExpireDateInputPure = memo(forwardRef(ExpireDateInput));
