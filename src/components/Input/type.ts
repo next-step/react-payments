@@ -11,4 +11,6 @@ export interface TextInputProps
   width?: string;
   fontColor?: Colors;
   type?: 'text' | 'password';
+  isError?: boolean;
+  errorMessage?: string;
 }

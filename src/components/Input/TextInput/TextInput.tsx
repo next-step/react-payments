@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { StyledTextInput } from './TextInput.style';
+import { ErrorMessage, StyledTextInput } from './TextInput.style';
 import { TextInputProps } from '../type';
 
 const TextInput = (
@@ -13,6 +13,8 @@ const TextInput = (
     textAlign = 'left',
     width = '100%',
     type = 'text',
+    isError,
+    errorMessage,
     ...InputProps
   }: TextInputProps,
   ref?: React.Ref<HTMLInputElement>
@@ -22,18 +24,22 @@ const TextInput = (
   };
 
   return (
-    <StyledTextInput
-      width={width}
-      ref={ref}
-      type={type}
-      fontColor={fontColor}
-      textAlign={textAlign}
-      placeholder={placeholder}
-      aria-label={label}
-      onChange={handleChange}
-      value={value && (format ? format(value) : value)}
-      {...InputProps}
-    />
+    <>
+      <StyledTextInput
+        width={width}
+        ref={ref}
+        type={type}
+        fontColor={fontColor}
+        textAlign={textAlign}
+        placeholder={placeholder}
+        aria-label={label}
+        isError={isError}
+        onChange={handleChange}
+        value={value && (format ? format(value) : value)}
+        {...InputProps}
+      />
+      {isError && <ErrorMessage>{errorMessage}</ErrorMessage>}
+    </>
   );
 };
 

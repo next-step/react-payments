@@ -11,6 +11,7 @@ import { TextButton } from '@/components';
 import { CardField } from '@/types';
 import { useNavigate } from 'react-router-dom';
 import { CARD_LIST_ACTION, useCardListDispatch } from '@/store';
+import { isMonth } from '@/utils/validate';
 
 const CardFields = () => {
   const data = useCardFieldContext();
@@ -89,6 +90,7 @@ const isDisabled = (field: CardField) => {
   if (cardPassword.length < 2) return true;
   if (cardCompany === null) return true;
   if (expirationMonth.length < 2) return true;
+  if (!isMonth(+expirationMonth)) return true;
   if (expirationYear.length < 2) return true;
   return false;
 };
