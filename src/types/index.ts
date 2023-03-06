@@ -1,15 +1,11 @@
-export interface Expiration {
-  month: string;
-  year: string;
-}
+type ExpirationKey = 'month' | 'year';
+export type Expiration = Record<ExpirationKey, string>;
 
-type CardNumbers = 'cardNumber1' | 'cardNumber2' | 'cardNumber3' | 'cardNumber4';
-export type CardNumber = Record<CardNumbers, string>;
+type CardNumberKey = 'cardNumber1' | 'cardNumber2' | 'cardNumber3' | 'cardNumber4';
+export type CardNumber = Record<CardNumberKey, string>;
 
-export interface Password {
-  password1: string;
-  password2: string;
-}
+type PasswordKey = 'password1' | 'password2';
+export type Password = Record<PasswordKey, string>;
 
 export type CardInformation = Expiration &
   Password &

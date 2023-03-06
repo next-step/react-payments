@@ -46,7 +46,7 @@ const initCardInformation: CardInformation = {
 function CardFormProvider({ children }: PropsWithChildren) {
   const [cardForm, setCardForm] = useState<CardInformation>(initCardInformation);
 
-  const handlers = useMemo(
+  const dispatch = useMemo(
     () => ({
       onChange(e: ChangeEvent<HTMLInputElement>) {
         const { name, value, validity } = e.target;
@@ -64,9 +64,11 @@ function CardFormProvider({ children }: PropsWithChildren) {
     [],
   );
 
+  const memoizedCardForm = useMemo(() => cardForm, [cardForm]);
+
   return (
-    <CardFormHandlerContext.Provider value={handlers}>
-      <CardFormContext.Provider value={cardForm}>{children}</CardFormContext.Provider>
+    <CardFormHandlerContext.Provider value={dispatch}>
+      <CardFormContext.Provider value={memoizedCardForm}>{children}</CardFormContext.Provider>
     </CardFormHandlerContext.Provider>
   );
 }

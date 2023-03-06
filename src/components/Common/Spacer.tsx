@@ -8,23 +8,18 @@ type SpacerProps = {
   custom?: number;
 };
 
-const getSpace = (space: Space) => {
-  switch (space) {
-    case 'sm':
-      return 'p-5';
-    case 'md':
-      return 'p-10';
-    case 'lg':
-      return 'p-20';
-    default:
-      return 'p-10';
-  }
-};
+const DEFAULT_SPACE_SIZE = 'p-10' as const;
+
+const spaceSizeMap = {
+  sm: 'p-5',
+  md: 'p-10',
+  lg: 'p-10',
+} as const;
 
 const getCustom = (custom: number) => `p-[${custom}px]`;
 
 function Spacer({ space = 'md', custom = 0 }: SpacerProps) {
-  const requireSpace = getSpace(space);
+  const requireSpace = spaceSizeMap[space] ?? DEFAULT_SPACE_SIZE;
   const customSpace = getCustom(custom);
 
   return <div className={cls(requireSpace, customSpace)} />;
