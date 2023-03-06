@@ -25,7 +25,6 @@ const router = createBrowserRouter([
       },
       {
         path: '/registration',
-
         element: <CardRegistrationPage />,
       },
       {
