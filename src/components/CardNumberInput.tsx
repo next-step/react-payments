@@ -8,17 +8,17 @@ import {
 import { useCardNumberInput } from "../hooks/useCardNumberInput";
 
 const CardNumberInput: React.FC = () => {
-  const { inputValues, handleChange } = useCardNumberInput("");
+  const { cardNumbers, handleChange } = useCardNumberInput();
 
   return (
     <InputContainer>
       <InputTitle>카드 번호</InputTitle>
       <InputBox>
-        {inputValues.map((value, index) => (
+        {cardNumbers.map((number, index) => (
           <React.Fragment key={index}>
             <InputBasic
               type={index === 2 || index === 3 ? "password" : "text"}
-              value={value}
+              value={number}
               maxLength={4}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 handleChange(e, index)
