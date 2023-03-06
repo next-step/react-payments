@@ -2,7 +2,6 @@ import React from 'react'
 import { PaymentCard } from 'models/card.model'
 import { Card } from 'components/atoms/Card'
 import { UI_SIZE } from 'constants/ui.constant'
-import { ADD_CARD_VIEW_VALUE } from 'constants/card'
 
 type CardListProps = {
   cards: PaymentCard[]

@@ -166,3 +166,8 @@
   cursor: default;
   pointer-events: none;
 }
+
+.security-code {
+  font-size: 10px;
+  letter-spacing: -1px;
+}

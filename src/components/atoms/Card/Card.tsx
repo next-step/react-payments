@@ -52,8 +52,12 @@ const Card: React.FC<CardProps> = ({
                   <>
                     <span className='card-number'>{firstNumber}</span>
                     <span className='card-number'>{secondNumber}</span>
-                    <span className='card-number'>{thridNumber}</span>
-                    <span className='card-number'>{fourthNumber}</span>
+                    <span className='card-number security-code'>
+                      {thridNumber.replace(/./g, '⦁')}
+                    </span>
+                    <span className='card-number security-code'>
+                      {fourthNumber.replace(/./g, '⦁')}
+                    </span>
                   </>
                 )}
               </span>
