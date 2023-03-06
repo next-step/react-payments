@@ -111,9 +111,9 @@ const CardNicknamePage = () => {
         <CardNicknameInput onChange={handleChange} />
       </Form>
       <div className='flex-center'>
-        {id && (
+        {id ? (
           <Button title='삭제' style='delete-box' onClick={handleDelete} />
-        )}
+        ) : null}
         <Button title='완료' type='submit' form='card-nickname-form' />
       </div>
     </>
