@@ -33,7 +33,7 @@ const Card = ({
 
   return (
     <>
-      <div id='card' onClick={onClick}>
+      <button id='card' onClick={onClick}>
         <div className='flex-column-center'>
           <div className='card-box'>
             <div className={cardUI}>
@@ -57,7 +57,7 @@ const Card = ({
             </div>
           </div>
         </div>
-      </div>
+      </button>
       <p>{cardNickname}</p>
     </>
   );

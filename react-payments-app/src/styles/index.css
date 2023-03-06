@@ -23,6 +23,12 @@ input {
   font-size: 16px;
 }
 
+#root {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
 .root {
   background-color: #fff;
   width: inherit;
@@ -45,4 +51,9 @@ input {
   align-items: center;
 
   color: #383838;
+}
+
+button {
+  background: none;
+  border: none;
 }
