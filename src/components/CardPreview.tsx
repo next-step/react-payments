@@ -7,18 +7,17 @@ import {
   CardMiddle,
   CardText,
   CardTop,
+  EmptyCard,
   SmallCard,
   SmallCardChip,
 } from "./common/Card";
 import { CardContext } from "../contexts/Card";
 
 export interface CardPreviewProps {
-  cardNumber: string;
-  ownerName: string;
-  expirationDate: string;
+  isAllInfoEntered: boolean;
 }
 
-const CardPreview: React.FC<CardPreviewProps> = () => {
+const CardPreview: React.FC<CardPreviewProps> = ({ isAllInfoEntered }) => {
   const { cardNumber, ownerName, expirationDate } = useContext(CardContext);
 
   const [formattedExpirationDate, setFormattedExpirationDate] = useState(
@@ -26,7 +25,7 @@ const CardPreview: React.FC<CardPreviewProps> = () => {
   );
 
   const [formattedOwnerName, setFormattedOwnerName] = useState(
-    ownerName.length > 10 ? ownerName.slice(0, 10) : ownerName || "YOUR NAME"
+    ownerName.length > 10 ? ownerName.slice(0, 10) : ownerName || "NAME"
   );
 
   const [maskedCardNumber, setMaskedCardNumber] = useState(
@@ -41,7 +40,7 @@ const CardPreview: React.FC<CardPreviewProps> = () => {
 
   useEffect(() => {
     setFormattedOwnerName(
-      ownerName.length > 15 ? ownerName.slice(0, 15) : ownerName || "YOUR NAME"
+      ownerName.length > 15 ? ownerName.slice(0, 15) : ownerName || "NAME"
     );
   }, [ownerName]);
 
@@ -53,23 +52,43 @@ const CardPreview: React.FC<CardPreviewProps> = () => {
 
   return (
     <CardBox>
-      <SmallCard>
-        <CardTop>
-          <CardText>클린카드</CardText>
-        </CardTop>
-        <CardMiddle>
-          <SmallCardChip />
-        </CardMiddle>
-        <CardBottom>
-          <CardBottomNumber>
-            <CardText>{maskedCardNumber}</CardText>
-          </CardBottomNumber>
-          <CardBottomInfo>
-            <CardText>{formattedOwnerName}</CardText>
-            <CardText>{formattedExpirationDate}</CardText>
-          </CardBottomInfo>
-        </CardBottom>
-      </SmallCard>
+      {isAllInfoEntered ? (
+        <SmallCard>
+          <CardTop>
+            <CardText>클린카드</CardText>
+          </CardTop>
+          <CardMiddle>
+            <SmallCardChip />
+          </CardMiddle>
+          <CardBottom>
+            <CardBottomNumber>
+              <CardText>{maskedCardNumber}</CardText>
+            </CardBottomNumber>
+            <CardBottomInfo>
+              <CardText>{formattedOwnerName}</CardText>
+              <CardText>{formattedExpirationDate}</CardText>
+            </CardBottomInfo>
+          </CardBottom>
+        </SmallCard>
+      ) : (
+        <EmptyCard>
+          <CardTop>
+            <CardText>클린카드</CardText>
+          </CardTop>
+          <CardMiddle>
+            <SmallCardChip />
+          </CardMiddle>
+          <CardBottom>
+            <CardBottomNumber>
+              <CardText>{maskedCardNumber}</CardText>
+            </CardBottomNumber>
+            <CardBottomInfo>
+              <CardText>{formattedOwnerName}</CardText>
+              <CardText>{formattedExpirationDate}</CardText>
+            </CardBottomInfo>
+          </CardBottom>
+        </EmptyCard>
+      )}
     </CardBox>
   );
 };

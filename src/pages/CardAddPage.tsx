@@ -53,11 +53,7 @@ const CardAddPage: React.FC<CardAddPageProps> = ({ handleGoBack }) => {
       showBackButton={true}
       onBackButtonClick={handleGoBackClick}
     >
-      <CardPreview
-        cardNumber={cardNumber}
-        ownerName={ownerName}
-        expirationDate={expirationDate}
-      />
+      <CardPreview isAllInfoEntered={isAllInfoEntered} />
       <CardNumberInput value={cardNumber} onChange={setCardNumber} />
       <CardExpirationDateInput onChange={setExpirationDate} />
       <CardOwnerNameInput value={ownerName} onChange={setOwnerName} />
