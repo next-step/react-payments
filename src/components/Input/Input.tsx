@@ -11,6 +11,8 @@ function Input(
     maxLength,
     name,
     readonly,
+    onBlur,
+    onFocus,
   }: InputProps,
   ref: ForwardedRef<HTMLInputElement>
 ) {
@@ -25,6 +27,8 @@ function Input(
       ref={ref}
       readOnly={readonly}
       value={readonly ? "1" : undefined}
+      onBlur={onBlur}
+      onFocus={onFocus}
     ></StyledInput>
   );
 }
@@ -38,6 +42,8 @@ type InputProps = {
   name?: string;
   forwardRef?: any;
   readonly?: boolean;
+  onBlur?: () => void;
+  onFocus?: () => void;
 };
 
 type StyledInputProps = {

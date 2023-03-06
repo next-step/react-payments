@@ -1,8 +1,9 @@
+import { useRef } from "react";
 import styled from "styled-components";
 import { Size } from "../../types/common";
 import Input from "../Input/Input";
 import InputContainer from "../Input/InputContainer";
-import ToolTip from "../ToolTip";
+import ToolTip, { ToolTipHandle } from "../ToolTip";
 
 function Code({ onCodeChange }: CodeProps) {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -10,6 +11,14 @@ function Code({ onCodeChange }: CodeProps) {
 
     onCodeChange(Number(e.currentTarget.value));
   };
+
+  const onFocus = () => {
+    tooltipRef.current?.toggleToolTip(true);
+  };
+  const onBlur = () => {
+    tooltipRef.current?.toggleToolTip(false);
+  };
+  const tooltipRef = useRef<ToolTipHandle>(null);
 
   return (
     <InputContainer label="보안코드(CVC/CVV)">
@@ -20,8 +29,10 @@ function Code({ onCodeChange }: CodeProps) {
           name="code"
           maxLength={3}
           type="password"
+          onFocus={onFocus}
+          onBlur={onBlur}
         ></Input>
-        <ToolTip />
+        <ToolTip ref={tooltipRef} />
       </Box>
     </InputContainer>
   );

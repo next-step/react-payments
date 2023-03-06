@@ -1,12 +1,22 @@
-import { useState } from "react";
+import React, { ForwardedRef, useImperativeHandle, useState } from "react";
 import styled from "styled-components";
 
-function ToolTip() {
+export type ToolTipHandle = {
+  toggleToolTip: (isShow: boolean) => void;
+};
+
+function ToolTip(props: any, ref: ForwardedRef<ToolTipHandle>) {
   const [isShowTooltip, setIsShowTooltip] = useState(false);
 
   const onClick = () => {
     setIsShowTooltip((state) => !state);
   };
+
+  useImperativeHandle(ref, () => ({
+    toggleToolTip(isShow: boolean) {
+      setIsShowTooltip(isShow);
+    },
+  }));
 
   return (
     <>
@@ -47,4 +57,5 @@ const Bubble = styled.div`
   }
 `;
 
-export default ToolTip;
+const forwardRefToolTip = React.forwardRef(ToolTip);
+export default forwardRefToolTip;
