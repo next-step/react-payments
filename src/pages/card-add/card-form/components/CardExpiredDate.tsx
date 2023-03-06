@@ -1,4 +1,4 @@
-import { BasicInput } from '@/components/input'
+import { Input } from '@/components/input'
 import { useCardExpiredDate } from '@/pages/card-add/card-form/hooks'
 import { CardExpiredDateProps } from '@/pages/card-add/card-form/types'
 
@@ -9,21 +9,9 @@ const CardExpiredDate = ({ expiredYear, expiredMonth, handleChange }: CardExpire
     <div className="input-container">
       <span className="input-title">만료일</span>
       <div className="input-box w-50">
-        <BasicInput
-          inputRef={firstRef}
-          placeHolder="MM"
-          dataSet="MM"
-          value={expiredMonth}
-          onChange={handleInputChange}
-        />
+        <Input ref={firstRef} placeholder="MM" data-name="MM" value={expiredMonth} onChange={handleInputChange} />
         {(expiredYear.length === 2 || expiredMonth.length === 2) && <span>/</span>}
-        <BasicInput
-          inputRef={secondRef}
-          placeHolder="YY"
-          dataSet="YY"
-          value={expiredYear}
-          onChange={handleInputChange}
-        />
+        <Input ref={secondRef} placeholder="YY" data-name="YY" value={expiredYear} onChange={handleInputChange} />
       </div>
     </div>
   )

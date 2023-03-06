@@ -1,4 +1,4 @@
-import { BasicInput } from '@/components/input'
+import { Input } from '@/components/input'
 import { useCardNumbers } from '@/pages/card-add/card-form/hooks'
 
 interface HandleChangeProps {
@@ -32,13 +32,13 @@ const CardNumbers = ({ numbers, handleChange }: CardNumbersProps) => {
     <div className="input-container">
       <span className="input-title">카드 번호</span>
       <div className="input-box">
-        <BasicInput inputRef={firstRef} value={firstValue} dataSet="first" onChange={handleInputChange} />
+        <Input ref={firstRef} value={firstValue} data-name="first" onChange={handleInputChange} />
         {firstValue.length === 4 && <span>-</span>}
-        <BasicInput inputRef={secondRef} value={secondValue} dataSet="second" onChange={handleInputChange} />
+        <Input ref={secondRef} value={secondValue} data-name="second" onChange={handleInputChange} />
         {secondValue.length === 4 && <span>-</span>}
-        <BasicInput inputRef={thirdRef} value={thirdValue} dataSet="third" onChange={handleInputChange} />
+        <Input ref={thirdRef} value={thirdValue} data-name="third" onChange={handleInputChange} />
         {thirdValue.length === 4 && <span>-</span>}
-        <BasicInput inputRef={fourthRef} value={fourthValue} dataSet="fourth" onChange={handleInputChange} />
+        <Input ref={fourthRef} value={fourthValue} data-name="fourth" onChange={handleInputChange} />
       </div>
     </div>
   )

@@ -1,2 +1,2 @@
 export { default as CardAliasInput } from './CardAliasInput'
-export { default as BasicInput } from './BasicInput'
+export { default as Input } from './Input'
