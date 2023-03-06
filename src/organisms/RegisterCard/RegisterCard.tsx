@@ -1,20 +1,9 @@
 import React, { ChangeEvent, useContext, useState } from 'react'
 import { Header } from 'components/molecules/Header'
 import { AiOutlineLeft } from 'react-icons/ai'
-import {
-  CardType,
-  CardTypeKeys,
-  OnChangeEventParams,
-  PaymentCard,
-} from 'models/card.model'
-import { Card } from 'components/atoms/Card'
-import { UI_SIZE, UI_VARIANT } from 'constants/ui.constant'
-import INPUTS from 'utils/inputs'
+
 import './RegisterCard.css'
-import { FormGroup } from 'components/molecules/FormGroup'
-import { Button } from 'components/atoms/Button'
-import RegisterCardForm from 'organisms/RegisterCardForm/RegisterCardForm'
-import { INIT_CARD_VALUE } from 'constants/card'
+
 import { useFormContext } from 'context/FormContext'
 import { CardNumberField } from 'components/molecules/CardNumberField'
 import { FlexMainTemplate } from 'templates/FlexMainTemplate'
