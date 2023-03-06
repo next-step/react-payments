@@ -1,13 +1,13 @@
 import { PropsWithChildren } from 'react';
 
-import { CardAddFormProvider, CardSelectModalProvider, CardListProvider } from '..';
+import { CardAddFormProvider, CardCompanyModalProvider, CardListProvider } from '..';
 
 export default function CardProvider({ children }: PropsWithChildren) {
   return (
     <CardAddFormProvider>
-      <CardSelectModalProvider>
+      <CardCompanyModalProvider>
         <CardListProvider>{children}</CardListProvider>
-      </CardSelectModalProvider>
+      </CardCompanyModalProvider>
     </CardAddFormProvider>
   );
 }

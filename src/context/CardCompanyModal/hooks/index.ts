@@ -1,1 +1,1 @@
-export { default as useCardSelectModalContext } from './useCardCompanyModalContext';
+export { default as useCardCompanyModalContext } from './useCardCompanyModalContext';

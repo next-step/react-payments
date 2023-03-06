@@ -1,2 +1,2 @@
-export { default as CardSelectModalProvider } from './CardCompanyModalProvider';
+export { default as CardCompanyModalProvider } from './CardCompanyModalProvider';
 export * from './hooks';

@@ -5,7 +5,7 @@ import { assert } from '@/utils/validation';
 
 import { CardCompanyModalContext } from '../CardCompanyModalProvider';
 
-export default function useCardSelectModalContext() {
+export default function useCardCompanyModalContext() {
   const cardCompanyModalContext = useContext(CardCompanyModalContext);
 
   assert(cardCompanyModalContext != null, ERROR_MESSAGE.PROVIDER.INVALID_SCOPE);

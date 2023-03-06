@@ -10,10 +10,10 @@ import {
   CardSelectModal,
   CardSelectButton,
 } from '@/components/CardAdd';
-import { useCardSelectModalContext } from '@/context';
+import { useCardCompanyModalContext } from '@/context';
 
 export default function CardAdd() {
-  const { isModalOpen } = useCardSelectModalContext();
+  const { isModalOpen } = useCardCompanyModalContext();
 
   return (
     <div className="root">
