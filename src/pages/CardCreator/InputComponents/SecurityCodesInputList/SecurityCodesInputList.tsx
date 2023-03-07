@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { useSelectSecurityCodes } from '@/stores/cardCreator';
+import { useSelectSecurityCodes } from '@/stores/CardCreatorContext';
 
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { SecurityCodeInput } from './SecutiryCodeInput';

@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { useSelectPasswords } from '@/stores/cardCreator';
+import { useSelectPasswords } from '@/stores/CardCreatorContext';
 
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { PasswordInput } from './PasswordInput';

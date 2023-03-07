@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { routes } from '@/routes';
 import { Card } from '@/components/Card';
 import { ThemeProvider } from '@/components/ThemeProvider';
-import { useCardContextApiSelector, useSelectCardCompany } from '@/stores/cardCreator';
+import { useCardContextApiSelector, useSelectCardCompany } from '@/stores/CardCreatorContext';
 
 import { CardNumbersInputListPure } from './InputComponents/CardNumbersInputList';
 import { ExpireDatesInputListPure } from './InputComponents/ExpireDatesInputList';

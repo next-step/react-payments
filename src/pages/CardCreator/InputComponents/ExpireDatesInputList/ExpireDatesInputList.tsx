@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { useSelectExpireDates } from '@/stores/cardCreator';
+import { useSelectExpireDates } from '@/stores/CardCreatorContext';
 import { checkIsArrayLast } from '@/utils';
 import { useErrorContext } from '../hooks/useErrorContext';
 

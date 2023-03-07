@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
 import { checkIsArrayLast } from '@/utils';
-import { useSelectCardNumbers } from '@/stores/cardCreator';
+import { useSelectCardNumbers } from '@/stores/CardCreatorContext';
 
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { CardNumberInput } from './CardNumberInput';

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import type { CardNumber as CardNumberType } from '@/types';
-import { useSelectCardNumbers } from '@/stores/cardCreator';
+import { useSelectCardNumbers } from '@/stores/CardCreatorContext';
 
 type CardNumberModel = {
   isHide: boolean;

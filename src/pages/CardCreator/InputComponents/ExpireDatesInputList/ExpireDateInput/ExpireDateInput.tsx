@@ -2,7 +2,7 @@ import React, { ChangeEvent, FocusEvent, memo, useContext, useEffect } from 'rea
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
 import type { ExpireDatesState } from '@/pages/CardCreator/types';
-import { ApiContext } from '@/stores/cardCreator';
+import { ApiContext } from '@/stores/CardCreatorContext';
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 import { filterNumber } from '@/utils';
 

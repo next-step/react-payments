@@ -1,7 +1,7 @@
 import React, { ChangeEvent, memo, useContext, useEffect, useMemo } from 'react';
 
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
-import { ApiContext, useSelectCardOwners } from '@/stores/cardCreator';
+import { ApiContext, useSelectCardOwners } from '@/stores/CardCreatorContext';
 
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { CardInfoInputElement } from '../components/CardInfoInputElement';

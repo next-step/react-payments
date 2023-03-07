@@ -4,7 +4,7 @@ import { CardNumbers } from './CardNumbers';
 import { CardOwnerName } from './CardOwnerName';
 import { CardExpireDate } from './CardExpireDate';
 import { CardWrapper } from './Card.styled';
-import { useSelectCardCompany } from '@/stores/cardCreator';
+import { useSelectCardCompany } from '@/stores/CardCreatorContext';
 
 interface CardProps {
   onCardClick?: (e: MouseEvent<HTMLDivElement>) => void;

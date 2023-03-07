@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { padNumber } from '@/utils';
-import { useSelectExpireDates } from '@/stores/cardCreator';
+import { useSelectExpireDates } from '@/stores/CardCreatorContext';
 
 interface CardExpireDateProps {}
 

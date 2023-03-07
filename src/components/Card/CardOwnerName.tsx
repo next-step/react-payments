@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useSelectCardOwners } from '@/stores/cardCreator';
+import { useSelectCardOwners } from '@/stores/CardCreatorContext';
 
 interface CardOwnerNameProps {}
 

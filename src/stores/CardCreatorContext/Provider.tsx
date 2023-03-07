@@ -18,6 +18,7 @@ export function CardInfoProvider({ children }: PropsWithChildren<any>) {
 
   const apis = useMemo(() => ({ dispatch }), [dispatch]);
 
+  // context를 쪼개면 갱신된 context의 consumer의 하부만 re-render된다.
   return (
     <ApiContext.Provider value={apis}>
       <CardCompanyStoreContext.Provider value={store.cardCompany}>
