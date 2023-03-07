@@ -27,8 +27,6 @@ const Card: React.FC<CardProps> = ({
     fourthNumber = '',
   } = card.cardNumbers
 
-  console.log(thridNumber, fourthNumber)
-
   const onUpdateOrAddCard = (card: PaymentCard | AddPaymentCard) => {
     if (!onClick) return
 
