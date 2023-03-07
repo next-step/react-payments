@@ -3,7 +3,7 @@ import './FormGroup.css'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 
 type FormGroupProps = {
-  label: string
+  label?: string
   isInvalid?: boolean
   errorMessage?: string
 }
@@ -16,7 +16,7 @@ const FormGroup: React.FC<PropsWithChildren<FormGroupProps>> = ({
 }) => {
   return (
     <label className='input-container'>
-      <span className='input-title'>{label}</span>
+      {label && <span className='input-title'>{label}</span>}
       <div className='input-box'>
         <span className='input'>{children}</span>
         {errorMessage && isInvalid && (

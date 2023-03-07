@@ -7,17 +7,21 @@ import {
   CardFormReducer,
   CARD_FORM_ACTION_TYPES,
 } from 'reducers/CardFormReducer'
+import { CompleteRegisterCard } from 'organisms/CompleteRegisterCard'
 
 type AddEditCraditCardProps = {
   onNavigateNext: () => void
   selectCard: PaymentCard | AddPaymentCard
+  submitCard: (card: AddPaymentCard, id?: string) => void
 }
 
 const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
   onNavigateNext,
   selectCard,
+  submitCard,
 }) => {
   const [state, dispatch] = useReducer(CardFormReducer, selectCard)
+  const [isCompleteRegister, setIsCompleteRegister] = useState(false)
 
   const handleChange = (payload: FormChangeParams) => {
     dispatch({
@@ -27,24 +31,21 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
   }
 
   const onNavigateNextStep = () => {
+    setIsCompleteRegister(true)
     // dispatch로 state 보내기
     // setIsComplete(true)
   }
 
-  // const isCompleteRegister =
-  //   validator.cardNumber &&
-  //   validator.cardCompanyCode &&
-  //   validator.password &&
-  //   validator.pinCode &&
-  //   validator.expireDate
-
   return (
     <FormProvider value={{ state, handleChange }}>
-      <RegisterCard
-        onNavigate={onNavigateNext}
-        onClickNextBtn={onNavigateNextStep}
-      />
-      {/* <CompleteRegisterCard /> */}
+      {isCompleteRegister ? (
+        <CompleteRegisterCard submit={submitCard} onNavigateNext={onNavigateNext}/>
+      ) : (
+        <RegisterCard
+          onNavigate={onNavigateNext}
+          onClickNextBtn={onNavigateNextStep}
+        />
+      )}
     </FormProvider>
   )
 }

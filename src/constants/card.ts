@@ -17,7 +17,7 @@ export interface CardPasswordType {
   secondPassword: string
 }
 export interface PaymentCard {
-  id?: string
+  id: string
   cardNumbers: CardNumbersType
   cardExpireDate: CardExpireDateType
   cardOwner: string
@@ -42,7 +42,7 @@ export const PAYMENT_CARD_FORM_KEYS = {
   CARD_NICKNAME: 'cardNickname',
 } as const
 
-export const INITAL_CARD_STATE: PaymentCard = {
+export const INITAL_CARD_STATE: AddPaymentCard = {
   [PAYMENT_CARD_FORM_KEYS.CARD_NUMBERS]: {
     firstNumber: '',
     secondNumber: '',

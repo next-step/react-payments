@@ -1,35 +1,35 @@
 import React, { ChangeEvent } from 'react'
-import { FormGroup } from 'components/ui/FormGroup'
 import { UI_SIZE, UI_VARIANT } from 'constants/ui'
 import { Card } from 'components/ui/Card'
 import { Button } from 'components/ui/Button'
 import './CompleteRegisterCard.css'
+import { useFormContext } from 'context/FormContext'
+import { CardNicknameField } from 'components/RegisterCardForm/CardNicknameField'
+import { AddPaymentCard, PaymentCard } from 'constants/card'
 
 type CompleteRegisterCardProps = {
-  //card: CardType
-  //changeValue: (value: string, name: CardTypeKeys) => void
-  submit: () => void
+  submit: (card: AddPaymentCard, id?: string) => void
+  onNavigateNext: () => void
 }
 
 const CompleteRegisterCard: React.FC<CompleteRegisterCardProps> = ({
   submit,
+  onNavigateNext,
 }) => {
+  const { state } = useFormContext()
+
+  const onClickNextBtn = () => {
+    console.log(state)
+    submit(state)
+    onNavigateNext()
+  }
+
   return (
     <main className='complete-card-container'>
       <h2 className='page-title'>카드등록이 완료되었습니다.</h2>
-      {/* <Card card={card} size={UI_SIZE.LARGE} isShowNickname={false} /> */}
+      <Card card={state} size={UI_SIZE.LARGE} isShowNickname={false} />
       <div className='nickname-form'>
-        {/* <FormGroup
-          label=''
-          name='cardNickname'
-          value={card.cardNickname}
-          type='text'
-          maxLength={10}
-          isRequire={true}
-          onChange={(e) => onChange(e, 'cardNickname')}
-          width={'100%'}
-          variant='outline'
-        /> */}
+        <CardNicknameField />
       </div>
 
       <div className='button-box'>
@@ -37,7 +37,7 @@ const CompleteRegisterCard: React.FC<CompleteRegisterCardProps> = ({
           size={UI_SIZE.MEDIUM}
           variant={UI_VARIANT.GHOST}
           color='green'
-          onClick={submit}
+          onClick={onClickNextBtn}
         >
           다음
         </Button>

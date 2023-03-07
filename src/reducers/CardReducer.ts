@@ -1,6 +1,6 @@
 import { AddPaymentCard, PaymentCard } from 'constants/card'
 
-const CARD_REDUCER_ACTION_TYPE = {
+export const CARD_REDUCER_ACTION_TYPE = {
   ADD: 'add',
   DELETE: 'delete',
   UPDATE: 'update',

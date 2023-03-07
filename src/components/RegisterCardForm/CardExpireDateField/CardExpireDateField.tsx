@@ -46,7 +46,6 @@ const CardExpireDateField: React.FC = () => {
   const onChangeExpireDate = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement
     const convertValue = value.replace(REGEX.NOT_NUMBER, '')
-    console.log(value, name, convertValue)
 
     handleChange({
       value:
