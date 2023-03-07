@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import PageTitle from './index';
 
 export default {
-  title: 'Payments/PageTitle',
+  title: 'Atoms/PageTitle',
   component: PageTitle,
   parameters: {
     layout: 'top'

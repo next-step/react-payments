@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import Button from './index';
 
 export default {
-  title: 'Form/Button',
+  title: 'Atoms/Button',
   component: Button,
   parameters: {
     layout: 'centered',

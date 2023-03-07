@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import Modal from './index';
 
 export default {
-  title: 'Payments/Modal',
+  title: 'molecules/Modal',
   component: Modal,
   parameters: {
     layout: 'centered'

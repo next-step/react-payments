@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import Input from './index';
 
 export default {
-  title: 'Form/Input',
+  title: 'Atoms/Input',
   component: Input,
   parameters: {
     layout: 'centered',
