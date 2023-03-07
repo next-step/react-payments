@@ -1,6 +1,6 @@
 import { RefObject } from "react";
 
-export const getNumberWithoutFormatter = (input: string) => {
+export const getOnlyNumInputAndFormatter = (input: string) => {
   return input?.replace(/[^0-9|/-]/g, "");
 };
 
@@ -18,7 +18,7 @@ export const validateInput = ({
   }
 
   if (validationList.includes(id)) {
-    return getNumberWithoutFormatter(ref.current.value);
+    return getOnlyNumInputAndFormatter(ref.current.value);
   }
   return ref.current.value;
 };
