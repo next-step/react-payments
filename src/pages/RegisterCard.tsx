@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { CardHolder, CardNumber, CardPassword, ExpiredDate, SecurityCode } from '../components/organisms/register-card';
 import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
-import { useCardDispatch, useCardState } from '../provider/card-box/hooks';
+import { useCardDispatch, useCardState } from '../provider/card/hooks';
 import { invalidCard } from '../domain/validator';
 import { ICard } from '../domain/types';
 import { VALIDATE_MESSAGE } from '../constants';

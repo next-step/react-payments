@@ -3,7 +3,7 @@ import { InputContainer } from '../../molecules';
 import { memo, useCallback, useState } from 'react';
 import { useFocusRef, useRefs } from '../../../hooks';
 import { onlyNumber } from '../../../utils/keyInterceptor';
-import { useCardDispatch } from '../../../provider/card-box/hooks';
+import { useCardDispatch } from '../../../provider/card/hooks';
 import { isCardPassword } from '../../../domain/validator';
 
 const MAX_LENGTH = 1;

@@ -1,6 +1,6 @@
 import './styles/index.css';
 import { RouterProvider } from 'react-router-dom';
-import { CardProvider } from './provider/card-box';
+import { CardProvider } from './provider/card';
 import router from './router';
 
 

@@ -4,7 +4,7 @@ import { InputContainer } from '../../molecules';
 import { memo, useCallback, useState } from 'react';
 import { isInvalidMonth, isPreviousDate } from '../../../domain/validator';
 import { onlyNumber } from '../../../utils/keyInterceptor';
-import { useCardDispatch } from '../../../provider/card-box/hooks';
+import { useCardDispatch } from '../../../provider/card/hooks';
 
 const MAX_LENGTH = 2;
 const VALIDATE_ERROR = {

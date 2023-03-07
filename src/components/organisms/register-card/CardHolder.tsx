@@ -1,7 +1,7 @@
 import { Input } from '../../atoms';
 import { InputContainer } from '../../molecules';
 import { memo, useCallback, useRef, useState } from 'react';
-import { useCardDispatch } from '../../../provider/card-box/hooks';
+import { useCardDispatch } from '../../../provider/card/hooks';
 
 const MAX_LENGTH = 30;
 
