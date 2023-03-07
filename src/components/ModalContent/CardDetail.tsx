@@ -12,7 +12,7 @@ const CardDetail = ({ card }: { card: PartialCreditCardType }) => {
   const handleCardNickname = () => {
     if (!nicknameRef.current) return;
     const { value } = nicknameRef.current;
-    updateCardNickname(1, value);
+    updateCardNickname(card.id!, value);
   };
 
   return (

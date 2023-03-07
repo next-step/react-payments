@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { CardCompanies } from 'constants/Card';
 
 import type { ThemeKeys } from 'styles/theme';
-import { Box } from './@common';
+import { Box } from '../@common';
 
 import type { PartialCreditCardType } from 'types/CreditCard';
 
