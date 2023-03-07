@@ -6,14 +6,14 @@ import { changeSecretNumber } from '../../domain/changeSecretNumber'
 const CardList = () => {
   const state = useCardListStateContext()
   return (
-    <div>
-      <div className='root'>
-        <div className='app flex-column-center'>
-          <div className='flex-center'>
-            <h2 className='page-title mb-10'>보유 카드</h2>
-          </div>
-          {state.map((item) => (
-            <div key={item.ownerName} className='card-box'>
+    <div className='root'>
+      <div className='app flex-column-center'>
+        <div className='flex-center'>
+          <h2 className='page-title mb-10'>보유 카드</h2>
+        </div>
+        {state.map((item) => (
+          <div key={item.ownerName}>
+            <div className='card-box'>
               <div className={`empty-card card-color${CARD_NAME_LIST.indexOf(item.cardDesign)}`}>
                 <div className='card-name'>{item.cardDesign}</div>
                 <div className='card-middle'>
@@ -27,7 +27,7 @@ const CardList = () => {
                     </span>
                   </div>
                   <div className='card-bottom__info'>
-                    <span className='card-text text-hidden'>{item.nickName}</span>
+                    <span className='card-text text-hidden'>{item.ownerName}</span>
                     <span className='card-text'>
                       {item.cardExpirationDate.MM} / {item.cardExpirationDate.YY}
                     </span>
@@ -35,12 +35,13 @@ const CardList = () => {
                 </div>
               </div>
             </div>
-          ))}
-          <div className='card-box'>
-            <Link className='empty-card' to='/card-add'>
-              +
-            </Link>
+            <div className='flex-center'>{item.nickName}</div>
           </div>
+        ))}
+        <div className='card-box'>
+          <Link className='empty-card' to='/card-add'>
+            +
+          </Link>
         </div>
       </div>
     </div>

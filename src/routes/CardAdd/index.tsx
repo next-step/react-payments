@@ -32,7 +32,7 @@ const CardAdd = () => {
   const cardSecurityCode = useCardNumberData(SECURITY_CODE_LENGTH_MAX)
   const cardPassword = useCardNumberData(PASSWORD_LENGTH_MAX)
 
-  const validationNavigate = () => {
+  const isValidationCardData = () => {
     const design = cardDesign.validation
     const number = !cardNumber.validation.includes(false)
     const expiration = !cardExpirationDate.validation.includes(false)
@@ -40,7 +40,12 @@ const CardAdd = () => {
     const security = cardSecurityCode.validation[0]
     const password = cardPassword.validation[0] && cardPassword.validation[1]
 
-    if (design && number && expiration && owner && security && password) {
+    return design && number && expiration && owner && security && password
+  }
+
+  const onSubmitNavigator = (e: React.MouseEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (isValidationCardData()) {
       setCardItem({
         nickName: '',
         cardDesign: cardDesign.cardDesign,
@@ -62,34 +67,38 @@ const CardAdd = () => {
           <h2 className='page-title'>
             <Link to='/'>&lt;</Link>카드 추가
           </h2>
-          <CardShape
-            cardNumber={cardNumber.cardNumberData}
-            cardExpirationDate={cardExpirationDate.cardExpirationDate}
-            cardDesign={cardDesign.cardDesign}
-            ownerName={ownerName.ownerName}
-          />
-          <Button onClick={cardDesign.toggleModalHandler}>카드선택</Button>
-          <CardNumber
-            cardNumberData={cardNumber.cardNumberData}
-            cardNumberDataHandler={cardNumber.cardNumberDataHandler}
-          />
-          <CardExpirationDate
-            cardExpirationDate={cardExpirationDate.cardExpirationDate}
-            cardExpirationDateHandler={cardExpirationDate.cardExpirationDateHandler}
-            fetchedTwoLettersDataHandler={cardExpirationDate.fetchedTwoLettersDataHandler}
-          />
-          <CardOwnerName ownerName={ownerName.ownerName} ownerNameValueHandler={ownerName.ownerNameValueHandler} />
-          <CardSecurityCode
-            cardSecurityCode={cardSecurityCode.cardNumberData}
-            cardSecurityCodeHandler={cardSecurityCode.cardNumberDataHandler}
-          />
-          <CardPassword
-            cardPassword={cardPassword.cardNumberData}
-            cardPasswordHandler={cardPassword.cardNumberDataHandler}
-          />
-          <div className='button-box'>
-            <Button onClick={validationNavigate}>다음</Button>
-          </div>
+          <form onSubmit={onSubmitNavigator}>
+            <CardShape
+              cardNumber={cardNumber.cardNumberData}
+              cardExpirationDate={cardExpirationDate.cardExpirationDate}
+              cardDesign={cardDesign.cardDesign}
+              ownerName={ownerName.ownerName}
+            />
+            <Button type='button' onClick={cardDesign.toggleModalHandler}>
+              카드선택
+            </Button>
+            <CardNumber
+              cardNumberData={cardNumber.cardNumberData}
+              cardNumberDataHandler={cardNumber.cardNumberDataHandler}
+            />
+            <CardExpirationDate
+              cardExpirationDate={cardExpirationDate.cardExpirationDate}
+              cardExpirationDateHandler={cardExpirationDate.cardExpirationDateHandler}
+              fetchedTwoLettersDataHandler={cardExpirationDate.fetchedTwoLettersDataHandler}
+            />
+            <CardOwnerName ownerName={ownerName.ownerName} ownerNameValueHandler={ownerName.ownerNameValueHandler} />
+            <CardSecurityCode
+              cardSecurityCode={cardSecurityCode.cardNumberData}
+              cardSecurityCodeHandler={cardSecurityCode.cardNumberDataHandler}
+            />
+            <CardPassword
+              cardPassword={cardPassword.cardNumberData}
+              cardPasswordHandler={cardPassword.cardNumberDataHandler}
+            />
+            <div className='button-box'>
+              <Button type='submit'>다음</Button>
+            </div>
+          </form>
         </div>
         {cardDesign.toggleModal && <CardDesign cardDesignNameHandler={cardDesign.cardDesignNameHandler} />}
       </div>
