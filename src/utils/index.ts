@@ -1,15 +1,15 @@
-export const displayNumber = ({
+export const formatNumber = ({
   input,
-  formatter = "-",
+  separator = "-",
   converter = "*",
   startPoint,
 }: {
   input: string;
-  formatter?: string;
+  separator?: string;
   converter?: string;
   startPoint: number;
 }) => {
-  const numberList = input.split(formatter);
+  const numberList = input.split(separator);
 
   if (!numberList[startPoint]) {
     return input;
@@ -19,5 +19,5 @@ export const displayNumber = ({
     numberList[i] = converter.repeat(numberList[i].length);
   }
 
-  return numberList.join(formatter);
+  return numberList.join(separator);
 };

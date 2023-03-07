@@ -1,4 +1,4 @@
-import { displayNumber } from "utils";
+import { formatNumber } from "utils";
 import "./card.css";
 import { CardInput } from "./card.type";
 
@@ -38,7 +38,7 @@ const Card = ({
                 <div className="card-bottom__number">
                   <span className="card-text">
                     {input?.number
-                      ? displayNumber({ input: input.number, startPoint: 2 })
+                      ? formatNumber({ input: input.number, startPoint: 2 })
                       : input?.number}
                   </span>
                 </div>
