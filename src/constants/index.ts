@@ -24,3 +24,10 @@ export const REGEX = {
   },
   NOT_NUMBER: /\D+/g,
 };
+
+export const HEADER_TITLE = {
+  ADD_CARD: '카드 추가',
+  CARD_LIST: '보유카드',
+  COMPLETE: '카드등록이 완료되었습니다.',
+  EDIT_CARD: '카드 별칭을 수정해주세요.',
+};
