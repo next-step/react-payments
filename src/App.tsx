@@ -1,3 +1,4 @@
+import ErrorBoundary from "pages/Error/ErrorBoundary";
 import { PaymentsProvider } from "pages/payments/modules/payments/PaymentsContext";
 import { RouterProvider } from "react-router";
 import router from "routes";
@@ -5,9 +6,11 @@ import router from "routes";
 function App() {
   return (
     <div className="App">
-      <PaymentsProvider>
-        <RouterProvider router={router} />
-      </PaymentsProvider>
+      <ErrorBoundary>
+        <PaymentsProvider>
+          <RouterProvider router={router} />
+        </PaymentsProvider>
+      </ErrorBoundary>
     </div>
   );
 }
