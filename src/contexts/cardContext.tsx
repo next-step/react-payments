@@ -24,8 +24,6 @@ type Action =
       card: State
     }
 
-type cardDispatch = Dispatch<Action>
-
 const INIT_CARD = {
   nickName: '',
   cardDesign: '',
@@ -36,15 +34,10 @@ const INIT_CARD = {
   cardPassword: { password1: '', password2: '' },
 }
 
-const INIT_CARD_LIST = [INIT_CARD]
-
 // eslint-disable-next-line consistent-return
 const cardReducer = (state: State[], action: Action) => {
   switch (action.type) {
     case 'CREATE':
-      if (state.length > 0 && state[0].cardDesign === '') {
-        state.pop()
-      }
       return state.concat(action.card)
     case 'EDIT':
       return state.map((card: State) =>
@@ -56,7 +49,7 @@ const cardReducer = (state: State[], action: Action) => {
 }
 
 const CardListStateContext = createContext<State[]>([])
-const CardDispatchContext = createContext<cardDispatch>(() => null)
+const CardDispatchContext = createContext<Dispatch<Action>>(() => null)
 const CardItemStateContext = createContext<State>(INIT_CARD)
 const CardItemSetContext = createContext<Dispatch<SetStateAction<State>>>(() => null)
 
@@ -81,7 +74,7 @@ export const useCardITemSetContext = () => {
 }
 
 export const CardProvider = ({ children }: { children: ReactNode }) => {
-  const [state, dispatch] = useReducer(cardReducer, INIT_CARD_LIST)
+  const [state, dispatch] = useReducer(cardReducer, [])
   const [cardItem, setCardItem] = useState(INIT_CARD)
   return (
     <CardListStateContext.Provider value={state}>
