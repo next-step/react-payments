@@ -1,7 +1,4 @@
-import '@/styles/button.css';
-import '@/styles/card.css';
 import '@/styles/index.css';
-import '@/styles/input.css';
 
 import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';

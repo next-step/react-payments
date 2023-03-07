@@ -1,9 +1,4 @@
-import './styles/button.css';
-import './styles/card.css';
 import './styles/index.css';
-import './styles/input.css';
-import './styles/modal.css';
-import './styles/utils.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
