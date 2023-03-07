@@ -1,12 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { CARD_NAME_LIST } from '../../constants/Card'
-import { useCardITemSetContext, useCardListStateContext } from '../../contexts/cardContext'
+import { useCardDispatchContext, useCardITemSetContext, useCardListStateContext } from '../../contexts/cardContext'
 import { changeSecretNumber } from '../../domain/changeSecretNumber'
 
 const CardList = () => {
   const state = useCardListStateContext()
   const setState = useCardITemSetContext()
   const navigate = useNavigate()
+  const dispatch = useCardDispatchContext()
 
   const currentCardStateNavigator = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name } = e.currentTarget
@@ -50,6 +51,11 @@ const CardList = () => {
               </div>
             </button>
             <div className='flex-center'>{item.nickName}</div>
+            <div className='flex-center'>
+              <button onClick={() => dispatch({ type: 'REMOVE', card: item })} type='button'>
+                카드 삭제
+              </button>
+            </div>
           </div>
         ))}
         <div className='card-box'>
