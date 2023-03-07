@@ -19,11 +19,35 @@ export type CardInformation = Expiration &
 
 export type CardInformationWithoutId = Omit<CardInformation, 'id'>;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type ExctractParams<Path> = Path extends `:${infer Param}` ? Record<Param, string> : {};
-
-export type CompleteDestination = ExctractParams<'/complete/:id'>;
-
-export type Destination = '/' | '/add' | CompleteDestination;
+export type Destination = '/' | '/add' | '/complete';
 
 export type CardList = CardInformation[];
+
+export type CompanyColorClassName =
+  | 'bg-amber-400'
+  | 'bg-lime-400'
+  | 'bg-green-400'
+  | 'bg-cyan-400'
+  | 'bg-indigo-400'
+  | 'bg-pink-400'
+  | 'bg-rose-400'
+  | 'bg-blue-400'
+  | 'bg-red-400';
+
+export type CompanyColorHexCode =
+  | '#fbbf24'
+  | '#a3e635'
+  | '#4ade80'
+  | '#22d3ee'
+  | '#818cf8'
+  | '#f472b6'
+  | '#fb7185'
+  | '#60a5fa'
+  | '#f87171';
+
+export type CardCompany = {
+  companyName: string;
+  companyColorClassName: CompanyColorClassName;
+  companyColorHexCode: CompanyColorHexCode;
+  companyIdentification: string;
+};

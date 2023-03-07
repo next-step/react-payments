@@ -21,7 +21,7 @@ const useModalContext = () => {
 };
 
 function ModalProvider({ children }: PropsWithChildren) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(!false);
   const [modalType, setModalType] = useState<string | null>(null);
 
   const dispatch = useMemo(
