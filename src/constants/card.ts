@@ -13,11 +13,11 @@ export interface CardNumbersType {
 }
 
 export interface CardPasswordType {
-  firstPssword: string
+  firstPassword: string
   secondPassword: string
 }
 export interface PaymentCard {
-  id: string
+  id?: string
   cardNumbers: CardNumbersType
   cardExpireDate: CardExpireDateType
   cardOwner: string
@@ -29,6 +29,7 @@ export interface PaymentCard {
 
 export type AddPaymentCard = Omit<PaymentCard, 'id'>
 export type AddPaymentCardKeys = keyof AddPaymentCard
+export type PaymentCardKeys = keyof PaymentCard
 
 export const PAYMENT_CARD_FORM_KEYS = {
   ID: 'id',
@@ -41,7 +42,7 @@ export const PAYMENT_CARD_FORM_KEYS = {
   CARD_NICKNAME: 'cardNickname',
 } as const
 
-export const INITAL_CARD_STATE: AddPaymentCard = {
+export const INITAL_CARD_STATE: PaymentCard = {
   [PAYMENT_CARD_FORM_KEYS.CARD_NUMBERS]: {
     firstNumber: '',
     secondNumber: '',
@@ -55,7 +56,7 @@ export const INITAL_CARD_STATE: AddPaymentCard = {
   [PAYMENT_CARD_FORM_KEYS.CARD_OWNER]: '',
   [PAYMENT_CARD_FORM_KEYS.CARD_PINCODE]: '',
   [PAYMENT_CARD_FORM_KEYS.CARD_PASSWORD]: {
-    firstPssword: '',
+    firstPassword: '',
     secondPassword: '',
   },
   [PAYMENT_CARD_FORM_KEYS.CARD_COMPANY_CODE]: CARD_COMPNAYS_CODE.NULL,

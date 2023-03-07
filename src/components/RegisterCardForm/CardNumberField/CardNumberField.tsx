@@ -1,4 +1,5 @@
 import { Input } from 'components/ui/Input'
+import { PAYMENT_CARD_FORM_KEYS } from 'constants/card'
 import { REGEX } from 'constants/regex'
 import { UI_VARIANT } from 'constants/ui'
 import { useFormContext } from 'context/FormContext'
@@ -22,10 +23,9 @@ const CardNumberField: React.FC = () => {
     const convertValue = value.replace(REGEX.NOT_NUMBER, '')
 
     handleChange({
-      newValue: convertValue,
-      key: 'cardNumbers',
-      innerKey: name,
-      error: validateCardNumber(convertValue),
+      key: PAYMENT_CARD_FORM_KEYS.CARD_NUMBERS,
+      name,
+      value: convertValue,
     })
   }
 
@@ -35,34 +35,34 @@ const CardNumberField: React.FC = () => {
         <Input
           type='text'
           name='firstNumber'
-          value={state.cardNumbers.firstNumber.value}
+          value={state.cardNumbers.firstNumber}
           variant={UI_VARIANT.GHOST}
           maxLength={4}
           onChange={onChangeCardNumber}
         />
-        {state.cardNumbers.firstNumber.error === false && <span>-</span>}
+        {state.cardNumbers.firstNumber?.length === 4 && <span>-</span>}
         <Input
           type='text'
           name='secondNumber'
-          value={state.cardNumbers.secondNumber.value}
+          value={state.cardNumbers.secondNumber}
           variant={UI_VARIANT.GHOST}
           maxLength={4}
           onChange={onChangeCardNumber}
         />
-        {state.cardNumbers.secondNumber.error === false && <span>-</span>}
+        {state.cardNumbers.secondNumber?.length === 4 && <span>-</span>}
         <Input
           type='password'
           name='thridNumber'
-          value={state.cardNumbers.thridNumber.value}
+          value={state.cardNumbers.thridNumber}
           variant={UI_VARIANT.GHOST}
           maxLength={4}
           onChange={onChangeCardNumber}
         />
-        {state.cardNumbers.thridNumber.error === false && <span>-</span>}
+        {state.cardNumbers.thridNumber?.length === 4 && <span>-</span>}
         <Input
           type='password'
           name='fourthNumber'
-          value={state.cardNumbers.fourthNumber.value}
+          value={state.cardNumbers.fourthNumber}
           variant={UI_VARIANT.GHOST}
           maxLength={4}
           onChange={onChangeCardNumber}

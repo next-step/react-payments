@@ -48,7 +48,7 @@ export const INITAL_CARD_FORM_STATE: CardFormValidationType = {
     error: false,
   },
   [PAYMENT_CARD_FORM_KEYS.CARD_PASSWORD]: {
-    firstPssword: {
+    firstPassword: {
       value: '',
       error: false,
     },

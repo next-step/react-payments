@@ -17,7 +17,7 @@ export const DUMMY_PAYMENT_CARDS: PaymentCard[] = [
     [PAYMENT_CARD_FORM_KEYS.CARD_OWNER]: 'Soo',
     [PAYMENT_CARD_FORM_KEYS.CARD_PINCODE]: '052',
     [PAYMENT_CARD_FORM_KEYS.CARD_PASSWORD]: {
-      firstPssword: '1',
+      firstPassword: '1',
       secondPassword: '2',
     },
     [PAYMENT_CARD_FORM_KEYS.CARD_COMPANY_CODE]: CARD_COMPNAYS_CODE.HANA,
@@ -38,7 +38,7 @@ export const DUMMY_PAYMENT_CARDS: PaymentCard[] = [
     [PAYMENT_CARD_FORM_KEYS.CARD_OWNER]: 'Soo',
     [PAYMENT_CARD_FORM_KEYS.CARD_PINCODE]: '332',
     [PAYMENT_CARD_FORM_KEYS.CARD_PASSWORD]: {
-      firstPssword: '1',
+      firstPassword: '1',
       secondPassword: '2',
     },
     [PAYMENT_CARD_FORM_KEYS.CARD_COMPANY_CODE]: CARD_COMPNAYS_CODE.HUNDAE,

@@ -1,46 +1,44 @@
-import { INITAL_CARD_STATE } from 'constants/card'
+import {
+  INITAL_CARD_STATE,
+  PaymentCard,
+  PAYMENT_CARD_FORM_KEYS,
+} from 'constants/card'
 import { AddPaymentCard, AddPaymentCardKeys } from 'constants/card'
+import { FormChangeParams } from 'context/FormContext'
 
-type CardFormAction = {
-  type: 'updateForm'
-  payload: {
-    error: null | string
-    newValue: string
-    key: AddPaymentCardKeys
-    innerKey?: any
-  }
+export const CARD_FORM_ACTION_TYPES = {
+  UPDATE: 'update',
+} as const
+
+type Action = {
+  type: typeof CARD_FORM_ACTION_TYPES.UPDATE
+  payload: FormChangeParams
 }
 
 export function CardFormReducer(
-  state: typeof INITAL_CARD_STATE,
-  { type, payload }: CardFormAction,
-): typeof INITAL_CARD_STATE {
-  switch (type) {
-    case 'updateForm': {
-      const { error, newValue, key, innerKey } = payload
-      if (
-        key === 'cardExpireDate' ||
-        key === 'cardNumbers' ||
-        key === 'cardPassword'
-      ) {
+  state: AddPaymentCard,
+  action: Action,
+): AddPaymentCard {
+  switch (action.type) {
+    case CARD_FORM_ACTION_TYPES.UPDATE: {
+      const { value, name, key } = action.payload
+      if (!name) {
         return {
           ...state,
-          [key]: {
-            ...state[key],
-            [innerKey]: {
-              error,
-              value: newValue,
-            },
-          },
+          [key]: value,
         }
       }
       return {
         ...state,
         [key]: {
-          error,
-          value: newValue,
+          ...(state[key] as object),
+          [name]: value,
         },
       }
+    }
+
+    default: {
+      throw Error('')
     }
   }
 }

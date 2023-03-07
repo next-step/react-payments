@@ -1,6 +1,18 @@
-import { createContext, PropsWithChildren, useContext } from 'react'
+import { AddPaymentCard, AddPaymentCardKeys, PaymentCard } from 'constants/card'
+import { createContext, useContext } from 'react'
 
-export const FormContext = createContext<any>(null)
+export type FormChangeParams = {
+  key: AddPaymentCardKeys
+  value: string
+  name?: string
+}
+
+type FormContextType = {
+  state: AddPaymentCard
+  handleChange: (payload: FormChangeParams) => void
+}
+
+export const FormContext = createContext<FormContextType | null>(null)
 
 export const FormProvider = FormContext.Provider
 

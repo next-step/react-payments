@@ -2,34 +2,33 @@ import React, { useState, useReducer } from 'react'
 
 import { AddEditCraditCard } from 'pages/AddEditCraditCard'
 import { PaymentMain } from 'pages/PaymentMain'
-import { PaymentCard, INITAL_CARD_STATE } from 'constants/card'
+import { PaymentCard, AddPaymentCard } from 'constants/card'
 import { DUMMY_PAYMENT_CARDS } from 'constants/staticCardList'
 import { CardReducer } from 'reducers/CardReducer'
 
 const PaymentPage = () => {
-  const [isAddEditCard, setIsAddEditCard] = useState(false)
-  // selected card -> context로 만들기
-  // modal -> context로 만들기
-  const [selectCard, setSelectCard] = useState(INITAL_CARD_STATE)
+  const [selectCard, setSelectCard] = useState<
+    AddPaymentCard | PaymentCard | null
+  >(null)
   const [cards, dispatch] = useReducer(CardReducer, DUMMY_PAYMENT_CARDS)
 
-  const editStart = () => setIsAddEditCard(true)
-  const editEnd = () => setIsAddEditCard(false)
+  const onClickCard = (card: AddPaymentCard | PaymentCard) => {
+    setSelectCard(card)
+  }
 
-  const onAddEditCard = (card?: PaymentCard) => {
-    setSelectCard(card ?? INITAL_CARD_STATE)
-    editStart()
+  const resetSelectCard = () => {
+    setSelectCard(null)
   }
 
   return (
     <>
-      {isAddEditCard ? (
+      {selectCard ? (
         <AddEditCraditCard
-          onNavigateNext={editEnd}
-          initCardValue={selectCard}
+          onNavigateNext={resetSelectCard}
+          selectCard={selectCard}
         />
       ) : (
-        <PaymentMain onClick={onAddEditCard} cards={cards} />
+        <PaymentMain onClick={onClickCard} cards={cards} />
       )}
     </>
   )

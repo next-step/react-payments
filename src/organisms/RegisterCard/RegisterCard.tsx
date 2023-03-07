@@ -13,6 +13,7 @@ import { CVCField } from 'components/RegisterCardForm/CVCField'
 import { PasswordField } from 'components/RegisterCardForm/PasswordField'
 import { Button } from 'components/ui/Button'
 import { UI_SIZE, UI_VARIANT } from 'constants/ui'
+import { Card } from 'components/ui/Card'
 
 type RegisterCardProps = {
   onNavigate: () => void
@@ -23,7 +24,7 @@ const RegisterCard: React.FC<RegisterCardProps> = ({
   onNavigate,
   onClickNextBtn,
 }) => {
-  const { state, handleChange } = useFormContext()
+  const { state } = useFormContext()
 
   return (
     <>
@@ -33,7 +34,7 @@ const RegisterCard: React.FC<RegisterCardProps> = ({
         onClickIcon={onNavigate}
       />
       <FlexMainTemplate>
-        {/* <Card card={state} size={UI_SIZE.SMALL} isShowNickname={false} /> */}
+        <Card card={state} size={UI_SIZE.SMALL} isShowNickname={false} />
         <form className='card-form'>
           <CardNumberField />
           <CardExpireDateField />

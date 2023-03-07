@@ -6,6 +6,7 @@ import { Input } from 'components/ui/Input'
 import { REGEX } from 'constants/regex'
 import './CVCField.css'
 import { AiOutlineQuestionCircle } from 'react-icons/ai'
+import { PAYMENT_CARD_FORM_KEYS } from 'constants/card'
 
 const validateCVC = (cvc: string) => {
   return cvc.length !== 3
@@ -19,9 +20,9 @@ const CVCField = () => {
     const convertValue = value.replace(REGEX.NOT_NUMBER, '')
 
     handleChange({
-      newValue: convertValue,
-      key: name,
-      error: validateCVC(convertValue),
+      value: convertValue,
+      key: PAYMENT_CARD_FORM_KEYS.CARD_PINCODE,
+      // error: validateCVC(convertValue),
     })
   }
 
@@ -31,7 +32,7 @@ const CVCField = () => {
         <Input
           type='password'
           name='cardPinCode'
-          value={cardPinCode.state}
+          value={cardPinCode}
           variant={UI_VARIANT.GHOST}
           onChange={onChangeCVC}
           maxLength={3}

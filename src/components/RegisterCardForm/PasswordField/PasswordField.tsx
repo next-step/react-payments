@@ -5,6 +5,7 @@ import { useFormContext } from 'context/FormContext'
 import { Input } from 'components/ui/Input'
 import { REGEX } from 'constants/regex'
 import './PasswordField.css'
+import { PAYMENT_CARD_FORM_KEYS } from 'constants/card'
 
 const validatePassword = (password: string) => {
   return password.length !== 1
@@ -18,10 +19,10 @@ const PasswordField = () => {
     const convertValue = value.replace(REGEX.NOT_NUMBER, '')
 
     handleChange({
-      newValue: convertValue,
-      key: 'cardPassword',
-      error: validatePassword(convertValue),
-      innerKey: name,
+      value: convertValue,
+      key: PAYMENT_CARD_FORM_KEYS.CARD_PASSWORD,
+      // error: validatePassword(convertValue),
+      name,
     })
   }
 
@@ -31,7 +32,7 @@ const PasswordField = () => {
         <Input
           type='password'
           name='firstPassword'
-          value={cardPassword.firstPassword.value}
+          value={cardPassword.firstPassword}
           variant={UI_VARIANT.GHOST}
           onChange={onChangePassword}
           maxLength={1}
@@ -39,7 +40,7 @@ const PasswordField = () => {
         <Input
           type='password'
           name='secondPassword'
-          value={cardPassword.secondPassword.value}
+          value={cardPassword.secondPassword}
           variant={UI_VARIANT.GHOST}
           onChange={onChangePassword}
           maxLength={1}

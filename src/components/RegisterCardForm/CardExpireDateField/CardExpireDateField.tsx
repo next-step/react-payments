@@ -1,4 +1,5 @@
 import { Input } from 'components/ui/Input'
+import { PAYMENT_CARD_FORM_KEYS } from 'constants/card'
 import { REGEX } from 'constants/regex'
 import { UI_VARIANT } from 'constants/ui'
 import { useFormContext } from 'context/FormContext'
@@ -48,11 +49,10 @@ const CardExpireDateField: React.FC = () => {
     console.log(value, name, convertValue)
 
     handleChange({
-      newValue:
+      value:
         name === 'month' ? getConvertMonthDate(convertValue) : convertValue,
-      key: 'cardExpireDate',
-      innerKey: name,
-      error: validateCardExpireDate(name, convertValue),
+      key: PAYMENT_CARD_FORM_KEYS.CARD_EXPIRE_DATE,
+      name,
     })
   }
 
@@ -62,7 +62,7 @@ const CardExpireDateField: React.FC = () => {
         <Input
           type='text'
           name='month'
-          value={cardExpireDate.month.value}
+          value={cardExpireDate.month}
           variant={UI_VARIANT.GHOST}
           onChange={onChangeExpireDate}
           maxLength={2}
@@ -72,7 +72,7 @@ const CardExpireDateField: React.FC = () => {
         <Input
           type='text'
           name='year'
-          value={cardExpireDate.year.value}
+          value={cardExpireDate.year}
           variant={UI_VARIANT.GHOST}
           onChange={onChangeExpireDate}
           maxLength={2}
