@@ -2,53 +2,48 @@ import React, { useState, useReducer } from 'react'
 
 import { AddEditCraditCard } from 'pages/AddEditCraditCard'
 import { PaymentMain } from 'pages/PaymentMain'
-import {
-  PaymentCard,
-  AddPaymentCard,
-  AddOrUpdateCardType,
-} from 'constants/card'
+import { AddOrUpdateCardType } from 'constants/card'
 import { DUMMY_PAYMENT_CARDS } from 'constants/staticCardList'
 import { CardReducer, CARD_REDUCER_ACTION_TYPE } from 'reducers/CardReducer'
 
 const PaymentPage: React.FC = () => {
-  const [selectCard, setSelectCard] = useState<
-    AddPaymentCard | PaymentCard | null
-  >(null)
-
+  const [selectCard, setSelectCard] = useState<AddOrUpdateCardType | null>(null)
   const [cards, dispatch] = useReducer(CardReducer, DUMMY_PAYMENT_CARDS)
 
-  const onClickCard = (card: AddOrUpdateCardType) => {
+  const onEditStart = (card: AddOrUpdateCardType) => {
     setSelectCard(card)
   }
 
-  const resetSelectCard = () => {
+  const onEditEnd = () => {
     setSelectCard(null)
   }
 
-  const addOrUpdateCraditCard = (card: AddOrUpdateCardType) => {
+  const onUpdateCardList = (card: AddOrUpdateCardType) => {
     if ('id' in card) {
-      return dispatch({
+      dispatch({
         type: CARD_REDUCER_ACTION_TYPE.UPDATE,
         payload: card,
       })
+      return onEditEnd()
     }
 
-    return dispatch({
+    dispatch({
       type: CARD_REDUCER_ACTION_TYPE.ADD,
       payload: card,
     })
+    return onEditEnd()
   }
 
   return (
     <>
       {selectCard ? (
         <AddEditCraditCard
-          onNavigateNext={resetSelectCard}
+          onNavigateGoBack={onEditEnd}
           selectCard={selectCard}
-          submitCard={addOrUpdateCraditCard}
+          submitCard={onUpdateCardList}
         />
       ) : (
-        <PaymentMain onClick={onClickCard} cards={cards} />
+        <PaymentMain onClick={onEditStart} cards={cards} />
       )}
     </>
   )

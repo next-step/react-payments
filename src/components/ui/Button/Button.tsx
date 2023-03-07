@@ -10,7 +10,7 @@ type ButtonProps = {
   /** 버튼 컬러 */
   color: string
   /** 클릭 이벤트 */
-  onClick: () => void
+  onClick?: () => void
   /** 버튼 클릭 이벤트 설정 유무 */
   isDisabled?: boolean
 } & ButtonHTMLAttributes<HTMLButtonElement>

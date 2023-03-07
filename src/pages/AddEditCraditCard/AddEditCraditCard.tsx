@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react'
-import { AddPaymentCard, PaymentCard } from 'constants/card'
+import { AddPaymentCard, AddOrUpdateCardType } from 'constants/card'
 import { RegisterCard } from 'organisms/RegisterCard'
 import './AddEditCraditCard.css'
 import { FormChangeParams, FormProvider } from 'context/FormContext'
@@ -10,13 +10,13 @@ import {
 import { CompleteRegisterCard } from 'organisms/CompleteRegisterCard'
 
 type AddEditCraditCardProps = {
-  onNavigateNext: () => void
-  selectCard: PaymentCard | AddPaymentCard
-  submitCard: (card: AddPaymentCard, id?: string) => void
+  onNavigateGoBack: () => void
+  selectCard: AddOrUpdateCardType
+  submitCard: (card: AddOrUpdateCardType) => void
 }
 
 const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
-  onNavigateNext,
+  onNavigateGoBack,
   selectCard,
   submitCard,
 }) => {
@@ -30,23 +30,18 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
     })
   }
 
-  const onNavigateNextStep = () => {
-    setIsCompleteRegister(true)
-    // dispatch로 state 보내기
-    // setIsComplete(true)
+  const onToggleCompleteCardRegister = () => {
+    setIsCompleteRegister((prev) => !prev)
   }
 
   return (
     <FormProvider value={{ state, handleChange }}>
       {isCompleteRegister ? (
-        <CompleteRegisterCard
-          submit={submitCard}
-          onNavigateNext={onNavigateNext}
-        />
+        <CompleteRegisterCard onSubmit={submitCard} />
       ) : (
         <RegisterCard
-          onNavigate={onNavigateNext}
-          onClickNextBtn={onNavigateNextStep}
+          onNavigate={onNavigateGoBack}
+          onClickNextBtn={onToggleCompleteCardRegister}
         />
       )}
     </FormProvider>

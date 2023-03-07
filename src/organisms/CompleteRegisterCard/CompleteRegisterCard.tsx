@@ -5,27 +5,23 @@ import { Button } from 'components/ui/Button'
 import './CompleteRegisterCard.css'
 import { useFormContext } from 'context/FormContext'
 import { CardNicknameField } from 'components/RegisterCardForm/CardNicknameField'
-import { AddPaymentCard, PaymentCard } from 'constants/card'
+import { AddPaymentCard, AddOrUpdateCardType } from 'constants/card'
 
 type CompleteRegisterCardProps = {
-  submit: (card: AddPaymentCard, id?: string) => void
-  onNavigateNext: () => void
+  onSubmit: (card: AddOrUpdateCardType) => void
 }
 
 const CompleteRegisterCard: React.FC<CompleteRegisterCardProps> = ({
-  submit,
-  onNavigateNext,
+  onSubmit,
 }) => {
   const { state } = useFormContext()
 
-  const onClickNextBtn = () => {
-    console.log(state)
-    submit(state)
-    onNavigateNext()
+  const onSubmitRegisterCard = () => {
+    onSubmit(state)
   }
 
   return (
-    <main className='complete-card-container'>
+    <form className='complete-card-container' onSubmit={onSubmitRegisterCard}>
       <h2 className='page-title'>카드등록이 완료되었습니다.</h2>
       <Card card={state} size={UI_SIZE.LARGE} isShowNickname={false} />
       <div className='nickname-form'>
@@ -37,12 +33,12 @@ const CompleteRegisterCard: React.FC<CompleteRegisterCardProps> = ({
           size={UI_SIZE.MEDIUM}
           variant={UI_VARIANT.GHOST}
           color='green'
-          onClick={onClickNextBtn}
+          type='submit'
         >
           다음
         </Button>
       </div>
-    </main>
+    </form>
   )
 }
 
