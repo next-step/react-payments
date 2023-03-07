@@ -6,3 +6,9 @@
 .button-text {
   margin-right: 10px;
 }
+
+.button-card {
+  background: none;
+  border: none;
+  cursor: pointer;
+}

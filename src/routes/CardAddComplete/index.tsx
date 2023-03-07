@@ -1,13 +1,16 @@
-import { ChangeEvent, useState, MouseEvent } from 'react'
+import { ChangeEvent, useState, MouseEvent, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CARD_NAME_LIST, CARD_NICKNAME_MAX } from '../../constants/Card'
-import { useCardDispatchContext, useCardItemStateContext } from '../../contexts/cardContext'
+import { useCardDispatchContext, useCardItemStateContext, useCardListStateContext } from '../../contexts/cardContext'
 
 const CardAddComplete = () => {
   const navigate = useNavigate()
   const dispatch = useCardDispatchContext()
   const [cardNickName, setCardNickName] = useState('')
   const cardData = useCardItemStateContext()
+  const state = useCardListStateContext()
+
+  const findCardData = state.find((data) => data.ownerName === cardData.ownerName)
 
   const cardNickNameHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget
@@ -18,14 +21,28 @@ const CardAddComplete = () => {
   const cardNickNameAddOnSubmit = (e: MouseEvent<HTMLFormElement>) => {
     e.preventDefault()
     navigate('/')
-    dispatch({
-      type: 'CREATE',
-      card: {
-        ...cardData,
-        nickName: cardNickName === '' ? cardData.cardDesign : cardNickName,
-      },
-    })
+    if (findCardData === undefined)
+      dispatch({
+        type: 'CREATE',
+        card: {
+          ...cardData,
+          nickName: cardNickName === '' ? cardData.cardDesign : cardNickName,
+        },
+      })
+
+    if (findCardData !== undefined)
+      dispatch({
+        type: 'EDIT',
+        card: {
+          ...cardData,
+          nickName: cardNickName === '' ? cardData.cardDesign : cardNickName,
+        },
+      })
   }
+
+  useEffect(() => {
+    if (findCardData !== undefined) setCardNickName(cardData.nickName)
+  }, [])
 
   return (
     <div className='root'>
@@ -68,7 +85,7 @@ const CardAddComplete = () => {
             />
           </div>
           <div className='button-box mt-50'>
-            <button type='submit'>다음</button>
+            <button type='submit'>확인</button>
           </div>
         </form>
       </div>
