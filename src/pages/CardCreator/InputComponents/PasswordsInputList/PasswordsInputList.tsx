@@ -1,27 +1,23 @@
-import React, { ForwardedRef, forwardRef, memo, useContext, useImperativeHandle } from 'react';
+import React, { memo, useContext } from 'react';
 
 import { PasswordsStoreContext } from '@/stores/cardCreator';
 
-import type { ErrorMessageType } from '../../types';
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
-import { useErrorMessage } from '../hooks/useErrorMessage';
 import { PasswordInput } from './PasswordInput';
+import { useErrorContext } from '../hooks/useErrorContext';
 
 interface PasswordsInputListProps {}
 
-export interface PasswordsInputListRef {
-  setErrorMessage: (messageType: ErrorMessageType) => void;
-}
-
-function PasswordsInputList(_: PasswordsInputListProps, ref: ForwardedRef<PasswordsInputListRef>) {
-  const [errorMessage, setErrorMessage] = useErrorMessage({
-    inValid: '비밀번호 앞 2자리를 모두 입력해주세요.',
-  });
-
+function PasswordsInputList(_: PasswordsInputListProps) {
   const passwordStore = useContext(PasswordsStoreContext);
   const passwords = passwordStore?.store;
 
-  useImperativeHandle(ref, () => ({ setErrorMessage }));
+  const errorMessage = useErrorContext(
+    {
+      inValid: '비밀번호 앞 2자리를 모두 입력해주세요.',
+    },
+    [{ errorType: 'passwords', messageType: 'inValid' }]
+  );
 
   return (
     <CardInputWrapperPure header="카드 비밀번호" errorMessage={errorMessage}>
@@ -36,4 +32,4 @@ function PasswordsInputList(_: PasswordsInputListProps, ref: ForwardedRef<Passwo
   );
 }
 
-export const PasswordsInputListPure = memo(forwardRef(PasswordsInputList));
+export const PasswordsInputListPure = memo(PasswordsInputList);

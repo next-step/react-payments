@@ -8,7 +8,7 @@ import {
   passwordsInit,
 } from '@/pages/CardCreator/CardCreatorInits';
 
-import { StoreContext, DispatchContext, ReducerReturnType } from './types';
+import { StoreContext, DispatchContext, ReducerReturnType } from '../types';
 
 export const initialCardStore = {
   cardNumbers: cardNumbersInit,
@@ -21,7 +21,7 @@ export const initialCardStore = {
 type Store = typeof initialCardStore;
 type Actions = keyof typeof initialCardStore;
 
-export function reducer(state: Store, action: { type: Actions; payload: { index: number; value: string } }) {
+export function reducer(store: Store, action: { type: Actions; payload: { index: number; value: string } }) {
   const { type, payload } = action;
 
   switch (type) {
@@ -31,21 +31,21 @@ export function reducer(state: Store, action: { type: Actions; payload: { index:
     case 'passwords':
     case 'securityCodes': {
       const { index, value } = payload;
-      if (state[type][index].value === value) return state;
+      if (store[type][index].value === value) return store;
 
-      state[type][index] = {
-        ...state[type][index],
+      store[type][index] = {
+        ...store[type][index],
         value,
       };
-      state[type] = [...state[type]];
+      store[type] = [...store[type]];
       break;
     }
     default: {
-      return state;
+      return store;
     }
   }
 
-  return { ...state };
+  return { ...store };
 }
 
 type CardReducerType = ReducerReturnType<typeof reducer>;

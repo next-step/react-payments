@@ -1,28 +1,24 @@
-import React, { ForwardedRef, forwardRef, memo, useContext, useImperativeHandle } from 'react';
+import React, { forwardRef, memo, useContext } from 'react';
 
 import { ExpireDatesStoreContext } from '@/stores/cardCreator';
 import { checkIsArrayLast } from '@/utils';
+import { useErrorContext } from '../hooks/useErrorContext';
 
-import type { ErrorMessageType } from '../../types';
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
-import { useErrorMessage } from '../hooks/useErrorMessage';
 import { ExpireDateInput } from './ExpireDateInput';
 
 interface ExpireDatesInputListProps {}
 
-export interface ExpireDatesInputListRef {
-  setErrorMessage: (messageType: ErrorMessageType) => void;
-}
-
-function ExpireDatesInputList(_: ExpireDatesInputListProps, ref: ForwardedRef<ExpireDatesInputListRef>) {
+function ExpireDatesInputList(_: ExpireDatesInputListProps) {
   const expireDatesStore = useContext(ExpireDatesStoreContext);
   const expireDates = expireDatesStore?.store;
 
-  const [errorMessage, setErrorMessage] = useErrorMessage({
-    inValid: 'MM/YY 형태로 만료일을 입력해주세요.',
-  });
-
-  useImperativeHandle(ref, () => ({ setErrorMessage }));
+  const errorMessage = useErrorContext(
+    {
+      inValid: 'MM/YY 형태로 만료일을 입력해주세요.',
+    },
+    [{ errorType: 'expireDates', messageType: 'inValid' }]
+  );
 
   return (
     <CardInputWrapperPure header="만료일" errorMessage={errorMessage}>

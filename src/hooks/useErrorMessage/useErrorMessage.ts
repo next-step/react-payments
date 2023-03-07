@@ -1,6 +1,6 @@
 import { useState, useRef, useMemo } from 'react';
 
-import { ErrorMessages, ErrorMessageType } from '@/pages/CardCreator/types';
+import { ErrorMessages, ErrorMessageType } from './type';
 
 export function useErrorMessage(errorMessageTemplate: ErrorMessages) {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
