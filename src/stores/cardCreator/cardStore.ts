@@ -8,6 +8,8 @@ import {
   passwordsInit,
 } from '@/pages/CardCreator/CardCreatorInits';
 
+import { StoreContext, DispatchContext, ReducerReturnType } from './types';
+
 export const initialCardStore = {
   cardNumbers: cardNumbersInit,
   expireDates: expireDatesInit,
@@ -85,17 +87,16 @@ export function reducer(state: Store, action: { type: Actions; payload: { index:
   return { ...state };
 }
 
-type CardReducerType = Reducer<Parameters<typeof reducer>[0], Parameters<typeof reducer>[1]>;
+type CardReducerType = ReducerReturnType<typeof reducer>;
+type CardStore = CardReducerType[0];
+type Dispatch = CardReducerType[1];
+type CardNumbersStoreContextType = StoreContext<CardStore['cardNumbers']>;
+type ExpireDatesStoreContextType = StoreContext<CardStore['expireDates']>;
+type CardOwnersStoreContextType = StoreContext<CardStore['cardOwners']>;
+type PasswordsStoreContextType = StoreContext<CardStore['passwords']>;
+type SecurityCodesStoreContextType = StoreContext<CardStore['securityCodes']>;
+type ApiContextType = DispatchContext<Dispatch>;
 
-// @ts-ignore
-// eslint-disable-next-line
-type UseReducerReturnType = ReturnType<typeof useReducer<CardReducerType>>;
-export type CardNumbersStoreContextType = { store: UseReducerReturnType[0]['cardNumbers'] } | null;
-export type ExpireDatesStoreContextType = { store: UseReducerReturnType[0]['expireDates'] } | null;
-export type CardOwnersStoreContextType = { store: UseReducerReturnType[0]['cardOwners'] } | null;
-export type PasswordsStoreContextType = { store: UseReducerReturnType[0]['passwords'] } | null;
-export type SecurityCodesStoreContextType = { store: UseReducerReturnType[0]['securityCodes'] } | null;
-export type ApiContextType = { dispatch: UseReducerReturnType[1] } | null;
 export const CardNumberStoreContext = createContext<CardNumbersStoreContextType>(null);
 export const ExpireDatesStoreContext = createContext<ExpireDatesStoreContextType>(null);
 export const CardOwnersStoreContext = createContext<CardOwnersStoreContextType>(null);
