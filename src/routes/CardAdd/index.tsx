@@ -15,6 +15,7 @@ import {
   PASSWORD_LENGTH_MAX,
   SECURITY_CODE_LENGTH_MAX,
 } from '../../constants/Card'
+import { useCardITemSetContext } from '../../contexts/cardContext'
 import { useCardDesign } from '../../hooks/useCardDesign'
 import { useCardNumberData } from '../../hooks/useCardNumber'
 import { useExpirationDate } from '../../hooks/useExpirationDate'
@@ -22,6 +23,7 @@ import { useOwnerName } from '../../hooks/useOwnerName'
 
 const CardAdd = () => {
   const navigate = useNavigate()
+  const setCardItem = useCardITemSetContext()
 
   const cardDesign = useCardDesign()
   const cardNumber = useCardNumberData(CARD_NUMBER_LENGTH_MAX)
@@ -39,12 +41,20 @@ const CardAdd = () => {
     const password = cardPassword.validation[0] && cardPassword.validation[1]
 
     if (design && number && expiration && owner && security && password) {
+      setCardItem({
+        nickName: '',
+        cardDesign: cardDesign.cardDesign,
+        cardNumber: cardNumber.cardNumberData,
+        cardExpirationDate: cardExpirationDate.cardExpirationDate,
+        ownerName: ownerName.ownerName,
+        cardSecurityCode: cardSecurityCode.cardNumberData.num1,
+        cardPassword: { password1: cardPassword.cardNumberData.num1, password2: cardPassword.cardNumberData.num2 },
+      })
       navigate('/card-add-complete')
     } else {
       alert('입력한 값을 확인해주세요.')
     }
   }
-
   return (
     <div>
       <div className='root'>
