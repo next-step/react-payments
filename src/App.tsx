@@ -4,20 +4,25 @@ import RootRouter from './RootRouter';
 
 import './index.css';
 import { PropsWithChildren } from 'react';
+import { ModalProvider } from './context/ModalContext';
+import { ModalContainer } from './components/Modal';
 
 function RootContainer({ children }: PropsWithChildren) {
-  return <div className="bg-white w-96 min-w-[384px] h-[700px] relative rounded-2xl overflow-hidden">{children}</div>;
+  return <div className="bg-white w-96 min-w-[384px] h-[700px] relative overflow-hidden">{children}</div>;
 }
 
 function App() {
   return (
-    <CardListProvider>
-      <CardFormProvider>
-        <RootContainer>
-          <RootRouter />
-        </RootContainer>
-      </CardFormProvider>
-    </CardListProvider>
+    <ModalProvider>
+      <CardListProvider>
+        <CardFormProvider>
+          <RootContainer>
+            <ModalContainer />
+            <RootRouter />
+          </RootContainer>
+        </CardFormProvider>
+      </CardListProvider>
+    </ModalProvider>
   );
 }
 
