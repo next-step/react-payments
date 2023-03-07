@@ -27,16 +27,16 @@ const PaymentPage: React.FC = () => {
 
   const addOrUpdateCraditCard = (card: AddOrUpdateCardType) => {
     if ('id' in card) {
-      dispatch({
+      return dispatch({
         type: CARD_REDUCER_ACTION_TYPE.UPDATE,
         payload: card,
       })
-    } else {
-      dispatch({
-        type: CARD_REDUCER_ACTION_TYPE.ADD,
-        payload: card,
-      })
     }
+
+    return dispatch({
+      type: CARD_REDUCER_ACTION_TYPE.ADD,
+      payload: card,
+    })
   }
 
   return (

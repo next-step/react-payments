@@ -1,10 +1,6 @@
 import React from 'react'
 import { Header } from 'components/ui/Header'
-import {
-  AddOrUpdateCardType,
-  AddPaymentCard,
-  PaymentCard,
-} from 'constants/card'
+import { AddOrUpdateCardType, PaymentCard } from 'constants/card'
 import { CardList } from 'components/CardList'
 import { FlexMainTemplate } from 'templates/FlexMainTemplate'
 

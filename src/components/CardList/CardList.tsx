@@ -3,7 +3,6 @@ import { Card } from 'components/ui/Card'
 import { UI_SIZE } from 'constants/ui'
 import {
   AddOrUpdateCardType,
-  AddPaymentCard,
   INITAL_CARD_STATE,
   PaymentCard,
 } from 'constants/card'
