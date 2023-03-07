@@ -1,4 +1,4 @@
-import { createContext, Reducer, useReducer } from 'react';
+import { createContext } from 'react';
 
 import {
   cardNumbersInit,
@@ -22,61 +22,22 @@ type Store = typeof initialCardStore;
 type Actions = keyof typeof initialCardStore;
 
 export function reducer(state: Store, action: { type: Actions; payload: { index: number; value: string } }) {
-  // FIXME: 반복 코드 없애기.
-  switch (action.type) {
-    case 'cardNumbers': {
-      const { index, value } = action.payload;
-      if (state.cardNumbers[index].value === value) return state;
+  const { type, payload } = action;
 
-      state.cardNumbers[index] = {
-        ...state.cardNumbers[index],
-        value,
-      };
-      state.cardNumbers = [...state.cardNumbers];
-      break;
-    }
-    case 'expireDates': {
-      const { index, value } = action.payload;
-      if (state.expireDates[index].value === value) return state;
-
-      state.expireDates[index] = {
-        ...state.expireDates[index],
-        value,
-      };
-      state.expireDates = [...state.expireDates];
-      break;
-    }
-    case 'cardOwners': {
-      const { index, value } = action.payload;
-      if (state.cardOwners[index].value === value) return state;
-
-      state.cardOwners[index] = {
-        ...state.cardOwners[index],
-        value,
-      };
-      state.cardOwners = [...state.cardOwners];
-      break;
-    }
-    case 'passwords': {
-      const { index, value } = action.payload;
-      if (state.passwords[index].value === value) return state;
-
-      state.passwords[index] = {
-        ...state.passwords[index],
-        value,
-      };
-      state.passwords = [...state.passwords];
-      break;
-    }
+  switch (type) {
+    case 'cardNumbers':
+    case 'expireDates':
+    case 'cardOwners':
+    case 'passwords':
     case 'securityCodes': {
-      const { index, value } = action.payload;
-      if (state.securityCodes[index].value === value) return state;
+      const { index, value } = payload;
+      if (state[type][index].value === value) return state;
 
-      state.securityCodes[index] = {
-        ...state.securityCodes[index],
+      state[type][index] = {
+        ...state[type][index],
         value,
       };
-      state.securityCodes = [...state.securityCodes];
+      state[type] = [...state[type]];
       break;
     }
     default: {
