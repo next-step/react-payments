@@ -1,11 +1,16 @@
-import React, { ReactNode } from "react";
+import React, { HtmlHTMLAttributes, PropsWithChildren } from "react";
 
 import * as S from "./cardPageLayout.style";
 
-interface CardPageLayoutProps {
-  children: ReactNode;
-}
+type CardPageLayoutProps = PropsWithChildren<
+  HtmlHTMLAttributes<HTMLDivElement>
+>;
 
-export default function CardPageLayout({ children }: CardPageLayoutProps) {
-  return <S.CardPageLayoutContainer>{children}</S.CardPageLayoutContainer>;
+export default function CardPageLayout({
+  children,
+  ...props
+}: CardPageLayoutProps) {
+  return (
+    <S.CardPageLayoutContainer {...props}>{children}</S.CardPageLayoutContainer>
+  );
 }
