@@ -11,7 +11,7 @@ const VALIDATE_ERROR = {
   PREV_DATE: '현재 날짜보다 이전 날짜는 입력할 수 없습니다.'
 };
 
-function ExpiredDateContainer() {
+function ExpiredDate() {
   const cardDispatch = useCardDispatch();
   const { isPreviousDate } = Validator();
   const [errorMessage, setErrorMessage] = useState('');
@@ -56,4 +56,4 @@ function ExpiredDateContainer() {
   );
 }
 
-export default memo(ExpiredDateContainer);
+export default memo(ExpiredDate);

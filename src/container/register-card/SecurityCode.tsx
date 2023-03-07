@@ -6,7 +6,7 @@ import useCardDispatch from '../../provider/card-box/hooks/useCardDispatch';
 const MAX_LENGTH = 3;
 const VALIDATE_ERROR = '보안코드를 올바르게 입력 해 주세요.';
 
-function SecurityCodeContainer() {
+function SecurityCode() {
   const cardDispatch = useCardDispatch();
   const [errorMessage, setErrorMessage] = useState('');
   const securityCodeRef = useRef<HTMLInputElement>(null);
@@ -34,4 +34,4 @@ function SecurityCodeContainer() {
   );
 }
 
-export default memo(SecurityCodeContainer);
+export default memo(SecurityCode);

@@ -4,7 +4,7 @@ import useCardDispatch from '../../provider/card-box/hooks/useCardDispatch';
 
 const MAX_LENGTH = 30;
 
-function CardHolderContainer() {
+function CardHolder() {
   const cardDispatch = useCardDispatch();
   const cardHolderRef = useRef<HTMLInputElement>(null);
   const [count, setCount] = useState(0);
@@ -31,4 +31,4 @@ function CardHolderContainer() {
   );
 }
 
-export default memo(CardHolderContainer);
+export default memo(CardHolder);

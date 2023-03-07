@@ -9,7 +9,7 @@ const MAX_LENGTH = 4;
 const CARD_LENGTH = 16;
 const VALIDATE_ERROR = '카드 번호를 입력 해 주세요.';
 
-function CardNumberContainer() {
+function CardNumber() {
   const cardDispatch = useCardDispatch();
   const [errorMessage, setErrorMessage] = useState('');
   const [cardNumberRef, getCardRefs] = useRefs<HTMLInputElement>([0, 1, 2, 3]);
@@ -65,4 +65,4 @@ function CardNumberContainer() {
   );
 }
 
-export default memo(CardNumberContainer);
+export default memo(CardNumber);

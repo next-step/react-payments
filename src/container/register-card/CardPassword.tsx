@@ -7,7 +7,7 @@ import useCardDispatch from '../../provider/card-box/hooks/useCardDispatch';
 const MAX_LENGTH = 1;
 const VALIDATE_ERROR = '카드 비밀번호 앞 2자리를 입력 해 주세요.';
 
-function CardPasswordContainer() {
+function CardPassword() {
   const cardDispatch = useCardDispatch();
   const [errorMessage, setErrorMessage] = useState('');
   const [passwordRef, getPasswordRef] = useRefs<HTMLInputElement>([0, 1]);
@@ -52,4 +52,4 @@ function CardPasswordContainer() {
   );
 }
 
-export default memo(CardPasswordContainer);
+export default memo(CardPassword);

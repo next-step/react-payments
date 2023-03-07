@@ -7,7 +7,7 @@ import {
   CardPasswordContainer,
   ExpiredDateContainer,
   SecurityCodeContainer
-} from '../container/RegisterCard';
+} from '../container/register-card';
 import { Button } from '../components/form';
 import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
