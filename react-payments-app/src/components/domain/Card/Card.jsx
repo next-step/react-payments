@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useCard } from '../../../store/CardContext';
@@ -13,30 +12,29 @@ const Card = ({
   onClick,
 }) => {
   const { cardInfo } = useCard();
-  const [cardUI, setCardUI] = useState('empty-card');
   const location = useLocation();
   const currentLocation = location.pathname.split('/').slice(-1).shift();
+  const id = cardInfo.cardCompanyId;
 
   //TODO: 회사 선택 유무에 따라 className 변경
   // TODO: 회사에 따라 className 변경
 
-  useEffect(() => {
-    const id = cardInfo.cardCompanyId;
-
+  const getCardUI = ({ id, currentLocation }) => {
     if (id) {
-      setCardUI('small-card');
+      return 'small-card';
     }
     if (currentLocation === 'completed') {
-      setCardUI('big-card');
+      return 'big-card';
     }
-  }, []);
+    return 'empty-card';
+  };
 
   return (
     <>
       <button id='card' onClick={onClick}>
         <div className='flex-column-center'>
           <div className='card-box'>
-            <div className={cardUI}>
+            <div className={getCardUI({ id, currentLocation })}>
               <div className='card-top'>
                 <span className='card-text'>{cardName}</span>
               </div>
