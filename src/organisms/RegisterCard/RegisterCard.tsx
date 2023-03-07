@@ -11,6 +11,8 @@ import { CardExpireDateField } from 'components/molecules/CardExpireDateField'
 import { CardOwnerField } from 'components/molecules/CardOwnerField'
 import { CVCField } from 'components/molecules/CVCField'
 import { PasswordField } from 'components/molecules/PasswordField'
+import { Button } from 'components/atoms/Button'
+import { UI_SIZE, UI_VARIANT } from 'constants/ui.constant'
 
 type RegisterCardProps = {
   // card: PaymentCard
@@ -27,32 +29,6 @@ const RegisterCard: React.FC<RegisterCardProps> = ({
   // isCompleteRegister,
   onClickNextBtn,
 }) => {
-  // const onChange = (
-  //   e: ChangeEvent,
-  //   { formatter, name }: OnChangeEventParams,
-  // ) => {
-  //   const { value } = e.target as HTMLInputElement
-
-  //   const currentvalue = formatter ? formatter(value) : value
-  //   changeValue(currentvalue, name)
-  // }
-
-  // const onChangePassword = (value: string, name: CardTypeKeys) => {
-  //   changeValue(value, name)
-  // }
-
-  //const [card, setCard] = useState(INIT_CARD_VALUE)
-
-  // const onChangeCardInfo = (name: CardTypeKeys, value: string) => {
-  //   setCard((prevCardInfo) => ({
-  //     ...prevCardInfo,
-  //     [name]: value,
-  //   }))
-
-  //   // name의 isValid가 true면
-  //   // value가 valid면, auto focusing
-  // }
-
   const { state, handleChange } = useFormContext()
 
   return (
@@ -70,6 +46,15 @@ const RegisterCard: React.FC<RegisterCardProps> = ({
           <CardOwnerField />
           <CVCField />
           <PasswordField />
+          <Button
+            type='submit'
+            size={UI_SIZE.SMALL}
+            variant={UI_VARIANT.GHOST}
+            color='var(--color-primary)'
+            onClick={onClickNextBtn}
+          >
+            다음
+          </Button>
         </form>
       </FlexMainTemplate>
     </>

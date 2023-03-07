@@ -1,5 +1,5 @@
 import { UiSize, UiVariant } from 'models/ui.model'
-import React, { PropsWithChildren } from 'react'
+import React, { ButtonHTMLAttributes, PropsWithChildren } from 'react'
 import './Button.css'
 
 type ButtonProps = {
@@ -13,7 +13,7 @@ type ButtonProps = {
   onClick: () => void
   /** 버튼 클릭 이벤트 설정 유무 */
   isDisabled?: boolean
-}
+} & ButtonHTMLAttributes<HTMLButtonElement>
 
 const Button: React.FC<PropsWithChildren<ButtonProps>> = ({
   size,
