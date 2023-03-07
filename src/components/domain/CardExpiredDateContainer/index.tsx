@@ -4,15 +4,18 @@ import { Input, Label } from 'components/common';
 
 import { useInputFocusing, useRefs } from 'hooks';
 
-import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
-import type { ExpiredDate } from 'types/card';
+import { INPUT_NAME, MAX_LENGTH, MIN_LENGTH } from 'constants/card';
+import type { CardExpiredDate } from 'types/card';
 
-interface ExpiredDateContainerProps {
-  expiredDate: ExpiredDate;
+interface CardExpiredDateContainerProps {
+  expiredDate: CardExpiredDate;
   handleChangeExpiredDate: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredDateContainerProps) {
+function CardExpiredDateContainer({
+  expiredDate,
+  handleChangeExpiredDate,
+}: CardExpiredDateContainerProps) {
   const { month, year } = expiredDate;
 
   const [monthRef, yearRef] = useRefs<HTMLInputElement>(2);
@@ -35,6 +38,8 @@ function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredD
           name={INPUT_NAME.MONTH}
           onChange={handleChangeExpiredDate}
           maxLength={MAX_LENGTH.EXPIRED_DATE}
+          minLength={MIN_LENGTH.EXPIRED_DATE}
+          required
         />
         {month.length === MAX_LENGTH.EXPIRED_DATE && (
           <span
@@ -55,10 +60,12 @@ function ExpiredDateContainer({ expiredDate, handleChangeExpiredDate }: ExpiredD
           name={INPUT_NAME.YEAR}
           onChange={handleChangeExpiredDate}
           maxLength={MAX_LENGTH.EXPIRED_DATE}
+          minLength={MIN_LENGTH.EXPIRED_DATE}
+          required
         />
       </div>
     </div>
   );
 }
 
-export default ExpiredDateContainer;
+export default CardExpiredDateContainer;

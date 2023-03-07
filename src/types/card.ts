@@ -9,7 +9,7 @@ export enum CardCompany {
   Hyundai = '현대',
 }
 
-export type ExpiredDate = {
+export type CardExpiredDate = {
   year: string;
   month: string;
 };
@@ -25,3 +25,14 @@ export type CardPassword = {
   password1: string;
   password2: string;
 };
+
+export interface ICard {
+  id: number;
+  owner: string;
+  numbers: CardNumber;
+  expiredDate: CardExpiredDate;
+  company: CardCompany;
+  alias?: string;
+}
+
+export type ICardWithoutId = Omit<ICard, 'id'>;

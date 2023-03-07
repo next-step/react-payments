@@ -15,3 +15,17 @@ export const isOutOfRangeMonth = (month: string) => {
     return +month <= MIN_MONTH || +month > MAX_MONTH;
   }
 };
+
+export const isOutOfRangeYear = (year: string) => {
+  const currentYear = new Date().getFullYear() % 100;
+
+  if (year.length === 1) {
+    const tensDigitOfCurrentYear = Math.floor(currentYear / 10);
+
+    return +year < tensDigitOfCurrentYear;
+  }
+
+  if (year.length === 2) {
+    return +year < currentYear;
+  }
+};

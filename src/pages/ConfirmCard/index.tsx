@@ -1,40 +1,66 @@
-function ConrimCard() {
+import { useMemo, useState } from 'react';
+
+import { Card } from 'components/domain';
+import { Button, Input } from 'components/common';
+
+import { useRouter } from 'hooks';
+import { useCardActions } from 'contexts/CardContextProvider/hooks';
+
+import { PATHS } from 'constants/router';
+import { MAX_LENGTH } from 'constants/card';
+import type { ICard, ICardWithoutId } from 'types/card';
+
+const TITLE = {
+  ADD: '카드등록이 완료되었습니다.',
+  UPDATE: '카드별칭을 수정해주세요.',
+};
+
+function ConfirmCard() {
+  const { replace, locationState: card } = useRouter<ICard | ICardWithoutId>();
+  const { addCard, updateCard } = useCardActions();
+  const [alias, setAlias] = useState(card.alias ?? '');
+  const title = useMemo(() => (card.alias ? TITLE.UPDATE : TITLE.ADD), [card.alias]);
+  const newAlias = useMemo(() => (alias === '' ? card.company : alias), [alias, card.company]);
+
+  const handleChangeAlias: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setAlias(e.target.value);
+  };
+
+  const handleClickNextButton = () => {
+    const newCard = { ...card, alias: newAlias };
+
+    if ('id' in newCard) {
+      updateCard(newCard);
+    } else {
+      addCard(newCard);
+    }
+
+    replace(PATHS.HOME);
+  };
+
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
-        <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
+        <h2 className="page-title mb-10">{title}</h2>
       </div>
-      <div className="card-box">
-        <div className="big-card">
-          <div className="card-top">
-            <span className="card-text__big">클린카드</span>
-          </div>
-          <div className="card-middle">
-            <div className="big-card__chip"></div>
-          </div>
-          <div className="card-bottom">
-            <div className="card-bottom__number">
-              <span className="card-text__big">1111 - 2222 - oooo - oooo</span>
-            </div>
-            <div className="card-bottom__info">
-              <span className="card-text__big">YUJO</span>
-              <span className="card-text__big">12 / 23</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Card {...card} />
       <div className="input-container flex-center w-100">
-        <input
+        <Input
           className="input-underline w-75"
           type="text"
-          placeholder="카드의 별칭을 입력해주세요."
+          placeholder="카드 별칭 (선택)"
+          value={alias}
+          onChange={handleChangeAlias}
+          maxLength={MAX_LENGTH.ALIAS}
         />
       </div>
       <div className="button-box mt-50">
-        <span className="button-text">다음</span>
+        <Button fontSize={18} onClick={handleClickNextButton}>
+          확인
+        </Button>
       </div>
     </div>
   );
 }
 
-export default ConrimCard;
+export default ConfirmCard;

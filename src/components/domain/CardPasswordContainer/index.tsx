@@ -53,6 +53,7 @@ function CardPasswordContainer() {
           name={INPUT_NAME.PASSWORD1}
           onChange={handleChangePassword}
           maxLength={MAX_LENGTH.PASSWORD}
+          required
           size="small"
         />
         <Input
@@ -62,6 +63,7 @@ function CardPasswordContainer() {
           name={INPUT_NAME.PASSWORD2}
           onChange={handleChangePassword}
           maxLength={MAX_LENGTH.PASSWORD}
+          required
           size="small"
         />
         <Masking count={1} width={6} height={6} />

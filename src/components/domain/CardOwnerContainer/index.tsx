@@ -3,11 +3,11 @@ import { Input } from 'components/common';
 import { INPUT_NAME, MAX_LENGTH } from 'constants/card';
 
 interface CardOwnerContainerProps {
-  cardOwner: string;
-  handleChangeCardOwner: React.ChangeEventHandler<HTMLInputElement>;
+  owner: string;
+  handleChangeOwner: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-function CardOwnerContainer({ cardOwner, handleChangeCardOwner }: CardOwnerContainerProps) {
+function CardOwnerContainer({ owner, handleChangeOwner }: CardOwnerContainerProps) {
   return (
     <div className="input-container">
       <Input
@@ -17,9 +17,10 @@ function CardOwnerContainer({ cardOwner, handleChangeCardOwner }: CardOwnerConta
         label="카드 소유자 이름(선택)"
         hasProgress
         name={INPUT_NAME.OWNER}
-        value={cardOwner}
-        onChange={handleChangeCardOwner}
+        value={owner}
+        onChange={handleChangeOwner}
         maxLength={MAX_LENGTH.CARD_OWNER}
+        required
       />
     </div>
   );

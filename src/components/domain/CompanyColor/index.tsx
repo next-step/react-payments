@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 
-import { theme } from 'constants/colors';
+import { THEME } from 'constants/colors';
 import type { CardCompany } from 'types/card';
 
 export interface CompanyColorProps {
@@ -27,7 +27,7 @@ function CompanyColor({ company, onClick }: CompanyColorProps) {
           border-radius: 50%;
           width: 2.8rem;
           height: 2.8rem;
-          background-color: ${theme[company]};
+          background-color: ${THEME[company]};
         `}
       ></div>
       <p

@@ -4,20 +4,16 @@ import { Dash } from 'components/common';
 import { Masking } from 'components/domain';
 
 import { MAX_LENGTH } from 'constants/card';
-import { theme } from 'constants/colors';
+import { THEME } from 'constants/colors';
 
-import { CardCompany } from 'types/card';
-import type { ExpiredDate, CardNumber } from 'types/card';
+import { CardCompany, ICardWithoutId } from 'types/card';
 
-interface CardProps {
+export interface CardProps extends Omit<ICardWithoutId, 'company'> {
   company?: CardCompany;
-  name: string;
-  cardNumber: CardNumber;
-  expiredDate: ExpiredDate;
 }
 
-function Card({ company = CardCompany.Hana, name, cardNumber, expiredDate }: CardProps) {
-  const { num1, num2, num3, num4 } = cardNumber;
+function Card({ company = CardCompany.Hana, owner, numbers, expiredDate }: CardProps) {
+  const { num1, num2, num3, num4 } = numbers;
   const { year, month } = expiredDate;
 
   return (
@@ -26,7 +22,7 @@ function Card({ company = CardCompany.Hana, name, cardNumber, expiredDate }: Car
         className={cx(
           'small-card',
           css`
-            background-color: ${theme[company]};
+            background-color: ${THEME[company]};
           `
         )}
       >
@@ -47,22 +43,25 @@ function Card({ company = CardCompany.Hana, name, cardNumber, expiredDate }: Car
             <Masking count={num4.length} />
           </div>
           <div className="card-bottom__info">
-            <span
-              className={cx(
-                'card-text',
-                css`
-                  max-width: 100px;
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                `
-              )}
+            <span className={'card-text__owner'}>{owner}</span>
+            <div
+              className={css`
+                margin-right: 12px;
+              `}
             >
-              {name}
-            </span>
-            <span className="card-text">
-              {month} / {year}
-            </span>
+              <span className="card-text__date">{month}</span>
+              {month.length === MAX_LENGTH.EXPIRED_DATE && (
+                <span
+                  className={css`
+                    color: #000;
+                    padding: 4px 0 0;
+                  `}
+                >
+                  /
+                </span>
+              )}
+              <span className="card-text__date">{year}</span>
+            </div>
           </div>
         </div>
       </div>

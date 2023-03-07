@@ -4,7 +4,7 @@ import { InputProgress } from 'components/common';
 import type { InputProgressProps } from 'components/common/Input/InputProgress';
 
 export default {
-  title: 'InputProgress',
+  title: 'Common/InputProgress',
   component: InputProgress,
 };
 

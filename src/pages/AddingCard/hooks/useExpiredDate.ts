@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-import { isNumber, isOutOfRangeMonth } from 'utils';
+import { isNumber, isOutOfRangeMonth, isOutOfRangeYear } from 'utils';
 import { INPUT_NAME } from 'constants/card';
-import type { ExpiredDate } from 'types/card';
+import type { CardExpiredDate } from 'types/card';
 
-const INITIAL_STATE: ExpiredDate = {
+const INITIAL_STATE: CardExpiredDate = {
   month: '',
   year: '',
 };
@@ -20,6 +20,10 @@ const useExpiredDate = () => {
     }
 
     if (name === INPUT_NAME.MONTH && isOutOfRangeMonth(value)) {
+      return;
+    }
+
+    if (name === INPUT_NAME.YEAR && isOutOfRangeYear(value)) {
       return;
     }
 

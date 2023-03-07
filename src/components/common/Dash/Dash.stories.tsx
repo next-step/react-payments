@@ -4,7 +4,7 @@ import { Dash } from 'components/common';
 import { DashProps } from 'components/common/Dash';
 
 export default {
-  title: 'Dash',
+  title: 'Common/Dash',
   component: Dash,
 };
 

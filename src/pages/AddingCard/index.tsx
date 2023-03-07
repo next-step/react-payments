@@ -1,57 +1,58 @@
-import { useNavigate } from 'react-router-dom';
-
 import {
   Card,
   CardNumberContainer,
-  ExpiredDateContainer,
+  CardExpiredDateContainer,
   CardOwnerContainer,
   CardPasswordContainer,
-  SecretCodeContainer,
+  CardSecretCodeContainer,
   CardCompanyPicker,
 } from 'components/domain';
 import { Button, Header, Label } from 'components/common';
 
-import { useCardNumber, useExpiredDate, useCardOwner, useCompanyPicker } from './hooks';
+import { useRouter } from 'hooks';
+import { useNumbers, useExpiredDate, useOwner, useCompanyPicker } from './hooks';
+
+import { PATHS } from 'constants/router';
+import type { ICardWithoutId } from 'types/card';
 
 function AddingCard() {
-  const navigate = useNavigate();
-  const { cardNumber, handleChangeCardNumber } = useCardNumber();
+  const { go, goBack } = useRouter();
+  const { numbers, handleChangeNumbers } = useNumbers();
   const { expiredDate, handleChangeExpiredDate } = useExpiredDate();
-  const { cardOwner, handleChangeCardOwner } = useCardOwner();
+  const { owner, handleChangeOwner } = useOwner();
   const { open, company, updateCompany, openPicker } = useCompanyPicker();
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    navigate('/confirm');
+    const navigateState: ICardWithoutId = {
+      numbers,
+      expiredDate,
+      owner,
+      company,
+    };
+
+    go(PATHS.CONFIRM, { state: navigateState });
   };
 
   return (
     <div className="app">
       <Header
         title="카드 추가"
-        leftSideComponent={<Button fontSize={24} onClick={() => navigate(-1)}>{`<`}</Button>}
+        leftSideComponent={<Button fontSize={24} onClick={goBack}>{`＜`}</Button>}
       />
       <Label>카드사 선택</Label>
       <div onClick={openPicker}>
-        <Card
-          cardNumber={cardNumber}
-          name={cardOwner}
-          company={company}
-          expiredDate={expiredDate}
-        />
+        <Card numbers={numbers} owner={owner} company={company} expiredDate={expiredDate} />
       </div>
       <form onSubmit={handleSubmit}>
-        <CardNumberContainer
-          cardNumber={cardNumber}
-          handleChangeCardNumber={handleChangeCardNumber}
-        />
-        <ExpiredDateContainer
+        <CardNumberContainer numbers={numbers} handleChangeNumbers={handleChangeNumbers} />
+        <CardExpiredDateContainer
           expiredDate={expiredDate}
           handleChangeExpiredDate={handleChangeExpiredDate}
         />
-        <CardOwnerContainer cardOwner={cardOwner} handleChangeCardOwner={handleChangeCardOwner} />
-        <SecretCodeContainer />
+        <CardOwnerContainer owner={owner} handleChangeOwner={handleChangeOwner} />
+        <CardSecretCodeContainer />
         <CardPasswordContainer />
         <div className="button-box">
           <Button type="submit" fontSize={16}>
