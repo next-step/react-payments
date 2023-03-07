@@ -8,6 +8,8 @@ import { CardReducer } from 'reducers/CardReducer'
 
 const PaymentPage = () => {
   const [isAddEditCard, setIsAddEditCard] = useState(false)
+  // selected card -> context로 만들기
+  // modal -> context로 만들기
   const [selectCard, setSelectCard] = useState(INIT_PAYMENT_CARD_INFO)
   const [cards, dispatch] = useReducer(CardReducer, DUMMY_PAYMENT_CARD)
 
