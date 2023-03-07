@@ -1,4 +1,4 @@
-import { RefObject } from 'react'
+import { memo, RefObject } from 'react'
 
 import { Input, InputTitle, InputBox, InputContainer } from '@/components/input'
 import { useCardNumbers } from '@/pages/card-add/card-form/hooks'
@@ -14,13 +14,11 @@ interface CardNumbersProps {
     third: RefObject<HTMLInputElement>
     fourth: RefObject<HTMLInputElement>
   }
-  handleChange({ value, order }: HandleChangeProps): void
+  handleChange: ({ value, order }: HandleChangeProps) => void
 }
 
-const CardNumbers = ({ numbersRef, handleChange }: CardNumbersProps) => {
+const CardNumbers = memo(({ numbersRef, handleChange }: CardNumbersProps) => {
   const { handleInputChange } = useCardNumbers({ handleChange })
-
-  console.log('check')
 
   return (
     <InputContainer>
@@ -36,6 +34,8 @@ const CardNumbers = ({ numbersRef, handleChange }: CardNumbersProps) => {
       </InputBox>
     </InputContainer>
   )
-}
+})
+
+CardNumbers.displayName = 'CardNumbers'
 
 export default CardNumbers

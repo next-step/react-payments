@@ -1,16 +1,9 @@
-import { useRef, useMemo } from 'react'
+import { useRef } from 'react'
 
 import { useCardInfo } from '@/pages/hooks'
-import { getConvertedStringsByStars } from '@/utils'
 
 const useCardAdd = () => {
-  const {
-    cardInfo: {
-      cardNumbers: { first, second, third, fourth },
-    },
-    handlePassword,
-    handleSecurityCode,
-  } = useCardInfo()
+  const { handlePassword, handleSecurityCode } = useCardInfo()
 
   // 카드 번호 Ref
   const firstRef = useRef<HTMLInputElement>(null)
@@ -35,10 +28,10 @@ const useCardAdd = () => {
   // 보안코드 Ref
   const securityCodeRef = useRef<HTMLInputElement>(null)
 
-  const cardNumbersDisplay = useMemo(
-    () => `${first} - ${second} - ${getConvertedStringsByStars(third)} - ${getConvertedStringsByStars(fourth)}`,
-    [first, fourth, second, third],
-  )
+  // const cardNumbersDisplay = useMemo(
+  //   () => `${first} - ${second} - ${getConvertedStringsByStars(third)} - ${getConvertedStringsByStars(fourth)}`,
+  //   [first, fourth, second, third],
+  // )
 
   const preNavigation = () => {
     const firstPasswordValue = firstPasswordRef.current?.value
@@ -52,7 +45,7 @@ const useCardAdd = () => {
       handleSecurityCode(securityCodeValue)
     }
   }
-  return { numbersRef, passwordRef, expiredDateRef, ownerRef, securityCodeRef, cardNumbersDisplay, preNavigation }
+  return { numbersRef, passwordRef, expiredDateRef, ownerRef, securityCodeRef, preNavigation }
 }
 
 export default useCardAdd

@@ -1,7 +1,7 @@
-import { ChangeEvent, RefObject } from 'react'
+import { ChangeEvent, RefObject, useContext } from 'react'
 
 import { Input, InputTitle, InputContainer } from '@/components/input'
-import { useCardInfo } from '@/pages/hooks'
+import { CardStateContext } from '@/contexts/card'
 
 type HandleOwnerProps = {
   value: string
@@ -12,9 +12,8 @@ interface CardOwnerProps {
 }
 
 const CardOwner = ({ ownerRef, handleChange }: CardOwnerProps) => {
-  const {
-    cardInfo: { owner },
-  } = useCardInfo()
+  // Todo: useContext 커스텀 훅으로 숨기기
+  const { owner } = useContext(CardStateContext)
   const handleCardOwnerInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
     handleChange({ value })

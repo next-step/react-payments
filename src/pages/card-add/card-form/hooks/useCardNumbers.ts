@@ -27,14 +27,6 @@ const useCardNumbers = ({ handleChange }: CardNumbersProps) => {
   }
 
   return {
-    // firstValue,
-    // secondValue,
-    // thirdValue,
-    // fourthValue,
-    // firstRef,
-    // secondRef,
-    // thirdRef,
-    // fourthRef,
     handleInputChange,
   }
 }

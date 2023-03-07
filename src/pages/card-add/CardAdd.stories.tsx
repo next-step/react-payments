@@ -15,17 +15,7 @@ export default {
 } as ComponentMeta<typeof CardAdd>
 
 const Template: ComponentStory<typeof CardAdd> = () => {
-  const {
-    cardInfo: {
-      cardNumbers: { first, second, third, fourth },
-      owner,
-      expiredMonth,
-      expiredYear,
-    },
-    handleNumber,
-    handleExpiredDate,
-    handleOwner,
-  } = useCardInfo()
+  const { handleNumber, handleExpiredDate, handleOwner } = useCardInfo()
   const { numbersRef, passwordRef, securityCodeRef, expiredDateRef, ownerRef } = useCardAdd()
 
   return (
@@ -33,11 +23,7 @@ const Template: ComponentStory<typeof CardAdd> = () => {
       <div className="app">
         <PageTitle title="카드 추가" buttonElement={<BackButton />} />
         <Card>
-          <BasicCardPart
-            cardNumbers={`${first} - ${second} - ${third} - ${fourth}`}
-            cardOwner={owner}
-            cardExpiredDate={`${expiredMonth} / ${expiredYear}`}
-          />
+          <BasicCardPart />
         </Card>
         <CardForm>
           <CardForm.CardNumbers numbersRef={numbersRef} handleChange={handleNumber} />

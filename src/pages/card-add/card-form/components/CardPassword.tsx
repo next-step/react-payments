@@ -14,7 +14,6 @@ const CardPassword = ({ passwordRef }: CardPasswordProps) => {
       <div className="input-password-container">
         <Input ref={passwordRef.first} addtionalClassName="w-15" type="password" maxLength={1} />
         <Input ref={passwordRef.second} addtionalClassName="w-15" type="password" maxLength={1} />
-
         <Input addtionalClassName="w-15 bg-white" type="password" value="x" readOnly />
         <Input addtionalClassName="w-15 bg-white" type="password" value="x" readOnly />
       </div>

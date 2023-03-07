@@ -7,14 +7,8 @@ import { useCardInfo, useSequentialInputFocus } from '@/pages/hooks'
 import { useCardAdd } from './hooks'
 
 function CardAdd() {
-  const {
-    cardInfo: { owner, expiredMonth, expiredYear },
-    handleNumber,
-    handleExpiredDate,
-    handleOwner,
-  } = useCardInfo()
-  const { numbersRef, cardNumbersDisplay, passwordRef, expiredDateRef, ownerRef, securityCodeRef, preNavigation } =
-    useCardAdd()
+  const { handleNumber, handleExpiredDate, handleOwner } = useCardInfo()
+  const { numbersRef, passwordRef, expiredDateRef, ownerRef, securityCodeRef, preNavigation } = useCardAdd()
 
   // Todo: 유효성 검사 여기서
   useSequentialInputFocus([
@@ -34,11 +28,7 @@ function CardAdd() {
     <div className="app">
       <PageTitle title="카드 추가" buttonElement={<BackButton />} />
       <Card>
-        <BasicCardPart
-          cardNumbers={cardNumbersDisplay}
-          cardOwner={owner}
-          cardExpiredDate={`${expiredMonth} / ${expiredYear}`}
-        />
+        <BasicCardPart />
       </Card>
       <CardForm>
         <CardForm.CardNumbers numbersRef={numbersRef} handleChange={handleNumber} />

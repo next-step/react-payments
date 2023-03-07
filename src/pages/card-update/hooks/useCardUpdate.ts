@@ -1,24 +1,22 @@
-import { useRef } from 'react'
+import { useRef, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { CardStateContext } from '@/contexts/card'
 import { useCardList } from '@/pages/card-list/hooks'
 import { useCardInfo } from '@/pages/hooks'
 
 const useCardUpdate = () => {
-  const navigate = useNavigate()
+  const cardInfo = useContext(CardStateContext)
   const {
-    cardInfo,
-    cardInfo: {
-      cardNumbers: { first, second, third, fourth },
-      owner,
-      name,
-      nickname,
-      expiredMonth,
-      expiredYear,
-    },
-    handleNickname,
-    resetCardInfo,
-  } = useCardInfo()
+    cardNumbers: { first, second, third, fourth },
+    owner,
+    name,
+    nickname,
+    expiredMonth,
+    expiredYear,
+  } = cardInfo
+  const navigate = useNavigate()
+  const { handleNickname, resetCardInfo } = useCardInfo()
 
   const { updateCard, deleteCard } = useCardList()
 

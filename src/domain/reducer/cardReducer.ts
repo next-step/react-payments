@@ -7,10 +7,8 @@ const cardReducer = (state: CardInfomation, action: CardAction): CardInfomation 
       return {
         ...state,
         cardNumbers: {
-          first: action.payload.first,
-          second: action.payload.second,
-          third: action.payload.third,
-          fourth: action.payload.fourth,
+          ...state.cardNumbers,
+          ...action.payload,
         },
       }
     case 'SET_NAME':

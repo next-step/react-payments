@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { CardStateContext, CardDispatchContext } from '@/contexts/card'
+import { CardDispatchContext } from '@/contexts/card'
 import { CardInfomation } from '@/domain'
 import { isNumber } from '@/utils'
 
@@ -19,7 +19,6 @@ interface HandleOwnerProps {
 }
 
 const useCardInfo = () => {
-  const cardInfo = useContext(CardStateContext)
   const cardDispatch = useContext(CardDispatchContext)
 
   const handleNumber = ({ value, order }: HandleNumberProps) => {
@@ -28,7 +27,6 @@ const useCardInfo = () => {
     cardDispatch({
       type: 'SET_CARD_NUMBERS',
       payload: {
-        ...cardInfo.cardNumbers,
         [order]: value,
       },
     })
@@ -101,7 +99,6 @@ const useCardInfo = () => {
   }
 
   return {
-    cardInfo,
     handleNumber,
     handleExpiredDate,
     handleOwner,

@@ -1,9 +1,20 @@
 export type CardNumbers = {
-  first: string
-  second: string
-  third: string
-  fourth: string
+  [key in 'first' | 'second' | 'third' | 'fourth']: string
 }
+export type CardNumber =
+  | {
+      first: string
+    }
+  | {
+      second: string
+    }
+  | {
+      third: string
+    }
+  | {
+      // Todo : 왜 옵셔널로 해야 되는지 찾아봐야함
+      fourth?: string
+    }
 export type CardName = string
 export type CardNickname = string
 export type CardExpiredYear = string
@@ -18,7 +29,7 @@ export type CardPassword = {
 export type CardAction =
   | {
       type: 'SET_CARD_NUMBERS'
-      payload: CardNumbers
+      payload: CardNumber
     }
   | {
       type: 'SET_NAME'
