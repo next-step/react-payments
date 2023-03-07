@@ -1,26 +1,46 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { UI_VARIANT } from 'constants/ui.constant'
 import { FormGroup } from '../FormGroup'
 import { useFormContext } from 'context/FormContext'
 import { Input } from 'components/atoms/Input'
+import { REGEX } from 'constants/regex'
+
+const validatePassword = (password: string) => {
+  return password.length !== 1
+}
 
 const PasswordField = () => {
   const { state, handleChange } = useFormContext()
+  const { cardPassword } = state
+  const onChangePassword = (e: ChangeEvent) => {
+    const { value, name } = e.target as HTMLInputElement
+    const convertValue = value.replace(REGEX.NOT_NUMBER, '')
+
+    handleChange({
+      newValue: convertValue,
+      key: 'cardPassword',
+      error: validatePassword(convertValue),
+      innerKey: name,
+    })
+  }
+
   return (
     <FormGroup label='카드비밀번호'>
       <Input
-        type='text'
+        type='password'
         name='firstPassword'
-        value={state.cardOwner.state}
+        value={cardPassword.firstPassword.value}
         variant={UI_VARIANT.GHOST}
-        onChange={handleChange}
+        onChange={onChangePassword}
+        maxLength={1}
       />
       <Input
-        type='text'
+        type='password'
         name='secondPassword'
-        value={state.cardOwner.state}
+        value={cardPassword.secondPassword.value}
         variant={UI_VARIANT.GHOST}
-        onChange={handleChange}
+        onChange={onChangePassword}
+        maxLength={1}
       />
       <span>⦁</span>
       <span>⦁</span>

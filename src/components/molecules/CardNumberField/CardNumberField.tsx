@@ -20,9 +20,6 @@ const CardNumberField: React.FC = () => {
   const onChangeCardNumber = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement
     const convertValue = value.replace(REGEX.NOT_NUMBER, '')
-    if (convertValue.length > 4) {
-      return
-    }
 
     handleChange({
       newValue: convertValue,
@@ -40,6 +37,7 @@ const CardNumberField: React.FC = () => {
           name='firstNumber'
           value={state.cardNumbers.firstNumber.value}
           variant={UI_VARIANT.GHOST}
+          maxLength={4}
           onChange={onChangeCardNumber}
         />
         {state.cardNumbers.firstNumber.error === false && <span>-</span>}
@@ -48,6 +46,7 @@ const CardNumberField: React.FC = () => {
           name='secondNumber'
           value={state.cardNumbers.secondNumber.value}
           variant={UI_VARIANT.GHOST}
+          maxLength={4}
           onChange={onChangeCardNumber}
         />
         {state.cardNumbers.secondNumber.error === false && <span>-</span>}
@@ -56,6 +55,7 @@ const CardNumberField: React.FC = () => {
           name='thridNumber'
           value={state.cardNumbers.thridNumber.value}
           variant={UI_VARIANT.GHOST}
+          maxLength={4}
           onChange={onChangeCardNumber}
         />
         {state.cardNumbers.thridNumber.error === false && <span>-</span>}
@@ -64,6 +64,7 @@ const CardNumberField: React.FC = () => {
           name='fourthNumber'
           value={state.cardNumbers.fourthNumber.value}
           variant={UI_VARIANT.GHOST}
+          maxLength={4}
           onChange={onChangeCardNumber}
         />
       </div>

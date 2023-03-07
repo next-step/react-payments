@@ -34,7 +34,7 @@ export const INITAL_CARD_STATE = {
     error: null,
   },
   [PAYMENT_CARD_INFO.CARD_PASSWORD]: {
-    firstPssword: {
+    firstPassword: {
       value: '',
       error: null,
     },
