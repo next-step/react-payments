@@ -2,9 +2,9 @@ import { useFocusRef, useRefs } from '../../../hooks';
 import { Input } from '../../atoms';
 import { InputContainer } from '../../molecules';
 import { memo, useCallback, useState } from 'react';
-import { Validator } from '../../../domain';
+import { isPreviousDate } from '../../../domain/validator';
 import { onlyNumber } from '../../../utils/keyInterceptor';
-import useCardDispatch from '../../../provider/card-box/hooks/useCardDispatch';
+import { useCardDispatch } from '../../../provider/card-box/hooks';
 
 const MAX_LENGTH = 2;
 const VALIDATE_ERROR = {
@@ -14,7 +14,6 @@ const VALIDATE_ERROR = {
 
 function ExpiredDate() {
   const cardDispatch = useCardDispatch();
-  const { isPreviousDate } = Validator();
   const [errorMessage, setErrorMessage] = useState('');
   const [expiredDateRef, getExpiredDateRefs] = useRefs<HTMLInputElement>(['month', 'year']);
 

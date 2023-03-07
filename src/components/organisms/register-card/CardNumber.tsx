@@ -3,7 +3,7 @@ import { Input } from '../../atoms';
 import { InputContainer } from '../../molecules';
 import { onlyNumber } from '../../../utils/keyInterceptor';
 import { useFocusRef, useRefs } from '../../../hooks';
-import useCardDispatch from '../../../provider/card-box/hooks/useCardDispatch';
+import { useCardDispatch } from '../../../provider/card-box/hooks';
 import { filterCardNumber } from '../../../utils/filter';
 
 const MAX_LENGTH = 4;

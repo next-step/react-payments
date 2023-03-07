@@ -1,12 +1,10 @@
 import { Button, Card, PageTitle } from '../components/atoms';
-import { Modal } from '../components/molecules';
+import { CardSelection, Modal } from '../components/molecules';
 import { useEffect, useState } from 'react';
-import CardSelection from '../components/molecules/card-selection';
 import { CardHolder, CardNumber, CardPassword, ExpiredDate, SecurityCode } from '../components/organisms/register-card';
 import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
-import useCardState from '../provider/card-box/hooks/useCardState';
-import useCardDispatch from '../provider/card-box/hooks/useCardDispatch';
+import { useCardDispatch, useCardState } from '../provider/card-box/hooks';
 
 export default function RegisterCard() {
   const cardState = useCardState();
