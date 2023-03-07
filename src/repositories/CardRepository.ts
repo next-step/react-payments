@@ -1,10 +1,10 @@
 import { Repository } from '../core/Repository';
 
 class CardRepository extends Repository {
-  constructor() {
-    super('card-list');
+  constructor(storeKey: string) {
+    super(storeKey);
   }
 }
 
-export default new CardRepository();
+export default new CardRepository('card-list');
 
