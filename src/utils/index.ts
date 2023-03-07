@@ -9,14 +9,15 @@ export const displayNumber = ({
   converter?: string;
   startPoint: number;
 }) => {
-  let numberList = input.split(formatter);
-  if (numberList[startPoint]) {
-    for (let i = startPoint; i < numberList.length; i++) {
-      numberList[i] = converter.repeat(numberList[i].length);
-    }
+  const numberList = input.split(formatter);
 
-    return numberList.join(formatter);
+  if (!numberList[startPoint]) {
+    return input;
   }
 
-  return input;
+  for (let i = startPoint; i < numberList.length; i++) {
+    numberList[i] = converter.repeat(numberList[i].length);
+  }
+
+  return numberList.join(formatter);
 };

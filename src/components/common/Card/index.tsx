@@ -17,7 +17,7 @@ const Card = ({
 }: CardProps) => {
   const mode =
     input && Object.values(input).length > 0 ? "small-card" : "empty-card";
-  const newCard = typeof onClick === "function" && !input && "+";
+  const isNewCard = typeof onClick === "function" && !input && "+";
 
   return (
     <div className="card-box">
@@ -26,7 +26,7 @@ const Card = ({
           className={`${isBigCard ? "big-card" : mode} cursor-pointer`}
           style={{ backgroundColor }}
         >
-          {newCard || (
+          {isNewCard || (
             <>
               <div className="card-top">
                 <span className="card-text">{input?.title}</span>
