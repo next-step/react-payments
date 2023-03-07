@@ -30,7 +30,11 @@ const CardListPage = () => {
           <Modal.Trigger>
             {cardList &&
               cardList.map((card, index) => (
-                <Container key={index} onClick={() => setSelectedCard(card)}>
+                <Container
+                  key={index}
+                  className="w-100"
+                  onClick={() => setSelectedCard(card)}
+                >
                   <CreditCard {...card} />
                   <Text>{card.nickname}</Text>
                 </Container>
@@ -57,8 +61,9 @@ const Wrapper = styled.div`
   }
 `;
 
-const Container = styled.div`
+const Container = styled.button`
   margin: 15px auto;
+  text-align: left;
 `;
 
 const CardAddButton = styled(Box)`
