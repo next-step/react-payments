@@ -1,6 +1,6 @@
 import { Input } from 'components/ui/Input'
 import { REGEX } from 'constants/regex'
-import { UI_VARIANT } from 'constants/ui.constant'
+import { UI_VARIANT } from 'constants/ui'
 import { useFormContext } from 'context/FormContext'
 import React, { ChangeEvent } from 'react'
 import { FormGroup } from '../../ui/FormGroup'

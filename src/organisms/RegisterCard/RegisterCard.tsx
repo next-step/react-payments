@@ -12,7 +12,7 @@ import { CardOwnerField } from 'components/RegisterCardForm/CardOwnerField'
 import { CVCField } from 'components/RegisterCardForm/CVCField'
 import { PasswordField } from 'components/RegisterCardForm/PasswordField'
 import { Button } from 'components/ui/Button'
-import { UI_SIZE, UI_VARIANT } from 'constants/ui.constant'
+import { UI_SIZE, UI_VARIANT } from 'constants/ui'
 
 type RegisterCardProps = {
   onNavigate: () => void

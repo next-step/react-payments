@@ -1,4 +1,4 @@
-import { UI_VARIANT } from 'constants/ui.constant'
+import { UI_VARIANT } from 'constants/ui'
 import React, { ChangeEvent } from 'react'
 import { FormGroup } from 'components/ui/FormGroup'
 import { useFormContext } from 'context/FormContext'

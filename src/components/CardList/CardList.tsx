@@ -1,7 +1,7 @@
 import React from 'react'
-import { PaymentCard } from 'models/card.model'
 import { Card } from 'components/ui/Card'
-import { UI_SIZE } from 'constants/ui.constant'
+import { UI_SIZE } from 'constants/ui'
+import { PaymentCard } from 'constants/card'
 
 type CardListProps = {
   cards: PaymentCard[]

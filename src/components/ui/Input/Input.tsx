@@ -1,5 +1,4 @@
-import { UI_VARIANT } from 'constants/ui.constant'
-import { UiVariant } from 'models/ui.model'
+import { UI_VARIANT, UiVariant } from 'constants/ui'
 import React, {
   ChangeEvent,
   HTMLInputTypeAttribute,

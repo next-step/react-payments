@@ -1,22 +1,15 @@
 import React, { useReducer, useState } from 'react'
-import useCardItem from 'hooks/useCardItem'
-import {
-  AddPaymentCard,
-  AddPaymentCardKeys,
-  CardCompanyCodeType,
-  CardType,
-  CardTypeKeys,
-  PaymentCard,
-} from 'models/card.model'
+import { AddPaymentCard, AddPaymentCardKeys, PaymentCard } from 'constants/card'
+import { CardCompanyCodeType } from 'constants/cardCompanyCode'
 import { RegisterCard } from 'organisms/RegisterCard'
 import { CompleteRegisterCard } from 'organisms/CompleteRegisterCard'
 import { CardCompanyList } from 'components/CardCompanyList'
-import { INIT_CARD_VALUE } from 'constants/card'
+import { INITAL_CARD_STATE } from 'constants/card'
 import { Modal } from 'components/ui/Modal'
 import './AddEditCraditCard.css'
 import { FormProvider } from 'context/FormContext'
 import { CardFormReducer } from 'reducers/CardFormReducer'
-import { INITAL_CARD_STATE } from 'constants/cardValidateState'
+import { INITAL_CARD_FORM_STATE } from 'constants/cardFormState'
 
 type AddEditCraditCardProps = {
   onNavigateNext: () => void
@@ -27,7 +20,7 @@ type AddEditCraditCardProps = {
 const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
   onNavigateNext,
   // addCard,
-  initCardValue = INIT_CARD_VALUE,
+  initCardValue,
 }) => {
   // const { card, resetCard, updateCard, validator } = useCardItem(initCardValue)
   const [isComplete, setIsComplete] = useState(false)

@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import { CardCompanyItem } from 'components/CardCompanyItem'
-import { CARD_COMPNAYS_CODE } from 'constants/card'
+import { CARD_COMPNAYS_CODE } from 'constants/cardCompanyCode'
 import React from 'react'
 
 export default {

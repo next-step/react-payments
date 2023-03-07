@@ -1,6 +1,8 @@
 import React from 'react'
-import { CARD_COMPNAYS_CODE } from 'constants/card'
-import { CardCompanyCodeType } from 'models/card.model'
+import {
+  CARD_COMPNAYS_CODE,
+  CardCompanyCodeType,
+} from 'constants/cardCompanyCode'
 import './CardCompanyList.css'
 import { CardCompanyItem } from 'components/CardCompanyItem'
 

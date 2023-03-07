@@ -1,6 +1,5 @@
-import { PAYMENT_CARD_INFO } from 'constants/card'
-import { INITAL_CARD_STATE } from 'constants/cardValidateState'
-import { AddPaymentCard, AddPaymentCardKeys } from 'models/card.model'
+import { INITAL_CARD_STATE } from 'constants/card'
+import { AddPaymentCard, AddPaymentCardKeys } from 'constants/card'
 
 type CardFormAction = {
   type: 'updateForm'

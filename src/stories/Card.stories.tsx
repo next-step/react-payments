@@ -1,9 +1,9 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Card } from 'components/ui/Card'
-import { UI_SIZE } from 'constants/ui.constant'
+import { UI_SIZE } from 'constants/ui'
 import { action } from '@storybook/addon-actions'
-import { ADD_CARD_VIEW_VALUE, CARD_COMPNAYS_CODE } from 'constants/card'
+import { CARD_COMPNAYS_CODE } from 'constants/cardCompanyCode'
 
 export default {
   title: 'components/Card',

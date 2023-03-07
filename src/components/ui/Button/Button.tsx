@@ -1,4 +1,4 @@
-import { UiSize, UiVariant } from 'models/ui.model'
+import { UiSize, UiVariant } from 'constants/ui'
 import React, { ButtonHTMLAttributes, PropsWithChildren } from 'react'
 import './Button.css'
 

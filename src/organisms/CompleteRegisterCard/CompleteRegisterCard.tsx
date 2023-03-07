@@ -1,27 +1,19 @@
 import React, { ChangeEvent } from 'react'
 import { FormGroup } from 'components/ui/FormGroup'
-import { CardType, CardTypeKeys } from 'models/card.model'
-import { UI_SIZE, UI_VARIANT } from 'constants/ui.constant'
+import { UI_SIZE, UI_VARIANT } from 'constants/ui'
 import { Card } from 'components/ui/Card'
 import { Button } from 'components/ui/Button'
 import './CompleteRegisterCard.css'
 
 type CompleteRegisterCardProps = {
-  card: CardType
-  changeValue: (value: string, name: CardTypeKeys) => void
+  //card: CardType
+  //changeValue: (value: string, name: CardTypeKeys) => void
   submit: () => void
 }
 
 const CompleteRegisterCard: React.FC<CompleteRegisterCardProps> = ({
-  card,
-  changeValue,
   submit,
 }) => {
-  const onChange = (e: ChangeEvent, name: CardTypeKeys) => {
-    const { value } = e.target as HTMLInputElement
-    changeValue(value, name)
-  }
-
   return (
     <main className='complete-card-container'>
       <h2 className='page-title'>카드등록이 완료되었습니다.</h2>

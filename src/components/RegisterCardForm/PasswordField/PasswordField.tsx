@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import { UI_VARIANT } from 'constants/ui.constant'
+import { UI_VARIANT } from 'constants/ui'
 import { FormGroup } from '../../ui/FormGroup'
 import { useFormContext } from 'context/FormContext'
 import { Input } from 'components/ui/Input'

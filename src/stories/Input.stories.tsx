@@ -1,7 +1,7 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { Input } from 'components/ui/Input'
-import { UI_VARIANT } from 'constants/ui.constant'
+import { UI_VARIANT } from 'constants/ui'
 
 export default {
   title: 'components/Input',

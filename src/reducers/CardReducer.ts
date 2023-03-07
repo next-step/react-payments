@@ -1,4 +1,4 @@
-import { AddPaymentCard, PaymentCard } from 'models/card.model'
+import { AddPaymentCard, PaymentCard } from 'constants/card'
 
 const CARD_REDUCER_ACTION_TYPE = {
   ADD: 'add',
