@@ -1,22 +1,20 @@
-import Overlay from './Overlay';
-import ModalRow from './ModalRow';
 import { useState } from 'react';
 import { useCard } from '../../../store/CardContext';
 import { CHANGE_CARD } from '../../../constants/action';
 
-export const Modal = ({ data }) => {
-  const row1 = data.slice(0, 4);
-  const row2 = data.slice(-4);
+const Modal = ({ data }) => {
+  const rows = splitIntoChunk(data, 4);
 
   const [isClicked, setIsClicked] = useState(false);
   const className = isClicked ? 'modal-closed' : 'modal-open';
-
-  const { changeCardInfo } = useCard();
 
   const closeModal = (isClicked) => {
     setIsClicked(isClicked);
     //TODO: [UI] animation 추가
   };
+
+  const { changeCardInfo } = useCard();
+
   const handleCompanySelected = (isClicked, selectedId) => {
     closeModal(isClicked);
     changeCardInfo(CHANGE_CARD.COMPANY, selectedId);
@@ -25,11 +23,42 @@ export const Modal = ({ data }) => {
 
   return (
     <div id='modal-container' className={`modal-container ` + className}>
-      <Overlay onClick={closeModal} />
-      <div className='modal'>
-        <ModalRow data={row1} onClick={handleCompanySelected} />
-        <ModalRow data={row2} onClick={handleCompanySelected} />
+      <div className='modal-dimmed' onClick={closeModal}>
+        <div className='modal flex-center'>
+          {Array.isArray(data)
+            ? rows.map((row) =>
+                row.map((company) => (
+                  <div
+                    key={company.id}
+                    id={company.id}
+                    className='modal-item-container'
+                    onClick={handleCompanySelected}
+                  >
+                    <div className='modal-item-dot'></div>
+                    <span className='modal-item-name'>{company.name}</span>
+                  </div>
+                ))
+              )
+            : null}
+        </div>
       </div>
     </div>
   );
+};
+
+export default Modal;
+
+const splitIntoChunk = (arr, chunk) => {
+  // 빈 배열 생성
+  const result = [];
+
+  for (let index = 0; index < arr.length; index += chunk) {
+    let tempArray;
+    // slice() 메서드를 사용하여 특정 길이만큼 배열을 분리함
+    tempArray = arr.slice(index, index + chunk);
+    // 빈 배열에 특정 길이만큼 분리된 배열을 추가
+    result.push(tempArray);
+  }
+
+  return result;
 };

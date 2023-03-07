@@ -7,7 +7,8 @@ import { useCard } from '../../store/CardContext';
 import Header from '../../components/common/Header/Header';
 import Card from '../../components/domain/Card/Card';
 import CardForm from '../../components/domain/CardForm/CardForm';
-import CompanySelectionModal from '../../components/domain/Modal/CompanySelectionModal';
+import { cardCompanies } from '../../server/cardCompanies';
+import Modal from '../../components/common/Modal/Modal';
 
 const CardRegistrationPage = () => {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ const CardRegistrationPage = () => {
         onClick={handleCardClick}
       />
       <CardForm />
-      {isModalOpen && <CompanySelectionModal />}
+      {isModalOpen && <Modal data={cardCompanies} />}
     </>
   );
 };
