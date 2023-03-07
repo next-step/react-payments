@@ -3,7 +3,13 @@ import Button from "components/common/Button";
 import Card from "components/common/Card";
 import InputContainer from "components/common/Input/InputContainer";
 import CompanyModal from "components/common/Modal";
-import { STEP, TYPE, TYPE_COMPLETED, TYPE_SELECT } from "constants/Payments";
+import {
+  CARD_INFO,
+  STEP,
+  TYPE,
+  TYPE_COMPLETED,
+  TYPE_SELECT,
+} from "constants/Payments";
 import Input from "components/common/Input";
 import { usePaymentsState } from "pages/payments/modules/payments/PaymentsContext";
 import { useLocation, useNavigate } from "react-router";
@@ -22,8 +28,8 @@ const CardForm = () => {
       numberInputRef,
       cvcInputRef,
       expiryInputRef,
-      password1InputRef,
-      password2InputRef,
+      firstPasswordInputRef,
+      secondPasswordInputRef,
     },
     handleCardInputChange,
     handleCompanyModalClick,
@@ -67,7 +73,7 @@ const CardForm = () => {
               disabled={type === TYPE_COMPLETED}
               ref={numberInputRef}
               type={"text"}
-              id={"number"}
+              id={CARD_INFO.NUMBER}
               maxLength={19}
               onChange={handleCardInputChange}
             />
@@ -82,7 +88,7 @@ const CardForm = () => {
               disabled={type === TYPE_COMPLETED}
               ref={expiryInputRef}
               type={"text"}
-              id={"expiry"}
+              id={CARD_INFO.EXPIRY}
               placeholder={"MM / YY"}
               maxLength={5}
               onChange={handleCardInputChange}
@@ -94,7 +100,7 @@ const CardForm = () => {
               <Input
                 disabled={type === TYPE_COMPLETED}
                 type={"text"}
-                id={"name"}
+                id={CARD_INFO.NAME}
                 value={name}
                 placeholder={"카드에 표시된 이름과 동일하게 입력하세요."}
                 maxLength={30}
@@ -112,7 +118,7 @@ const CardForm = () => {
               className="w-25"
               ref={cvcInputRef}
               type={"password"}
-              id={"cvc"}
+              id={CARD_INFO.CVC}
               maxLength={3}
               onChange={handleCardInputChange}
             />
@@ -123,18 +129,18 @@ const CardForm = () => {
               <Input
                 disabled={type === TYPE_COMPLETED}
                 className="w-15 mr-1"
-                ref={password1InputRef}
+                ref={firstPasswordInputRef}
                 type={"password"}
-                id={"password1"}
+                id={CARD_INFO.FIRST_PASSWORD}
                 maxLength={1}
                 onChange={handleCardInputChange}
               />
               <Input
                 disabled={type === TYPE_COMPLETED}
                 className="w-15 mr-1"
-                ref={password2InputRef}
+                ref={secondPasswordInputRef}
                 type={"password"}
-                id={"password2"}
+                id={CARD_INFO.SECOND_PASSWORD}
                 maxLength={1}
                 onChange={handleCardInputChange}
               />

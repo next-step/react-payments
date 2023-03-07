@@ -4,8 +4,8 @@ export const CARD_INFO = {
   EXPIRY: "expiry",
   NICKNAME: "nickname",
   CVC: "cvc",
-  PASSWORD1: "password1",
-  PASSWORD2: "password2",
+  FIRST_PASSWORD: "firstPassword",
+  SECOND_PASSWORD: "secondPassword",
   BACKGROUND_COLOR: "backgroundColor",
 };
 
@@ -13,8 +13,8 @@ export const VALIDATION_LIST = [
   CARD_INFO.NUMBER,
   CARD_INFO.EXPIRY,
   CARD_INFO.CVC,
-  CARD_INFO.PASSWORD1,
-  CARD_INFO.PASSWORD2,
+  CARD_INFO.FIRST_PASSWORD,
+  CARD_INFO.SECOND_PASSWORD,
 ];
 
 export const TYPE = "type";

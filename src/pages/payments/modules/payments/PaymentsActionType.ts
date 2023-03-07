@@ -4,8 +4,8 @@ export type NewCardInfo = {
   number?: string;
   cvc?: string;
   expiry?: string;
-  password1?: string;
-  password2?: string;
+  firstPassword?: string;
+  secondPassword?: string;
   title?: string;
   backgroundColor?: string;
   nickname?: string;

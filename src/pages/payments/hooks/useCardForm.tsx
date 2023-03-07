@@ -27,8 +27,8 @@ export const useCardForm = () => {
   const numberInputRef = useRef<HTMLInputElement>(null);
   const cvcInputRef = useRef<HTMLInputElement>(null);
   const expiryInputRef = useRef<HTMLInputElement>(null);
-  const password1InputRef = useRef<HTMLInputElement>(null);
-  const password2InputRef = useRef<HTMLInputElement>(null);
+  const firstPasswordInputRef = useRef<HTMLInputElement>(null);
+  const secondPasswordInputRef = useRef<HTMLInputElement>(null);
 
   const getReference = (id: string) => {
     switch (id) {
@@ -38,10 +38,10 @@ export const useCardForm = () => {
         return expiryInputRef;
       case CARD_INFO.CVC:
         return cvcInputRef;
-      case CARD_INFO.PASSWORD1:
-        return password1InputRef;
-      case CARD_INFO.PASSWORD2:
-        return password2InputRef;
+      case CARD_INFO.FIRST_PASSWORD:
+        return firstPasswordInputRef;
+      case CARD_INFO.SECOND_PASSWORD:
+        return secondPasswordInputRef;
       default:
         throw new Error("해당하지 않는 reference 입니다.");
     }
@@ -120,8 +120,8 @@ export const useCardForm = () => {
       number: numberInputRef.current?.value,
       cvc: cvcInputRef.current?.value,
       expiry: expiryInputRef.current?.value,
-      password1: password1InputRef.current?.value,
-      password2: password2InputRef.current?.value,
+      firstPassword: firstPasswordInputRef.current?.value,
+      secondPassword: secondPasswordInputRef.current?.value,
     };
 
     dispatch({ type: ADD_CARD_INFO, newCardInfo });
@@ -134,8 +134,8 @@ export const useCardForm = () => {
       numberInputRef,
       cvcInputRef,
       expiryInputRef,
-      password1InputRef,
-      password2InputRef,
+      firstPasswordInputRef,
+      secondPasswordInputRef,
     },
     handleCardInputChange,
     handleCompanyModalClick,

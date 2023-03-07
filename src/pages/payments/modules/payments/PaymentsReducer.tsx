@@ -17,8 +17,8 @@ export const defaultCardInfo: CardInput = {
   expiry: "10/25",
   nickname: "법인카드",
   cvc: "123",
-  password1: "1",
-  password2: "2",
+  firstPassword: "1",
+  secondPassword: "2",
   backgroundColor: "#94dacd",
 };
 
