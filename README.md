@@ -18,7 +18,7 @@
 
 ### 필수 요구사항
 
-- [ ] Storybook 상호 작용 테스트
+- [x] Storybook 상호 작용 테스트
 - [ ] Storybook 스냅샷 테스트
 - [ ] 재사용 가능한 Component 작성
 - [ ] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
