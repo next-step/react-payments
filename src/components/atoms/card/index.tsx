@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { ICard } from '../../../domain/types';
+import useCardFilter from './hooks/useCardFilter';
 
 const config = {
   type: {
@@ -9,6 +10,8 @@ const config = {
 };
 
 function Card({ cardNumber, cardHolder, expiredDate, type = 'small', color, cardCompany }: ICard) {
+  const { previewCardNumber } = useCardFilter({ cardNumber });
+
   return (
     <div className="card-box">
       <div className={config.type[type]} style={{ backgroundColor: color }}>
@@ -20,7 +23,7 @@ function Card({ cardNumber, cardHolder, expiredDate, type = 'small', color, card
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">{cardNumber}</span>
+            <span className="card-text">{previewCardNumber}</span>
           </div>
           <div className="card-bottom__info">
             <span className="card-text">{cardHolder}</span>

@@ -1,6 +1,6 @@
 import { REGEXP } from '../constants';
 
-export function filterCardNumber(cardNumber: string): string {
+export function filterCardBackDigit(cardNumber: string): string {
   const changeValue = cardNumber?.match(REGEXP.CARD_NUMBER)?.flatMap((item, index) => {
     if (!item.length) return [];
     if (index > 1) return item.replace(/[0-9]/g, '*');
@@ -10,7 +10,7 @@ export function filterCardNumber(cardNumber: string): string {
   return changeValue || '';
 }
 
-export function filterExpiredDate(expiredDate: string) {
+export function formatterExpiredDate(expiredDate: string) {
   return expiredDate?.match(REGEXP.EXPIRED_DATE)?.join(' / ');
 }
 

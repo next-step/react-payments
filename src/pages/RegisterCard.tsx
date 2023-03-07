@@ -5,6 +5,9 @@ import { CardHolder, CardNumber, CardPassword, ExpiredDate, SecurityCode } from 
 import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
 import { useCardDispatch, useCardState } from '../provider/card-box/hooks';
+import { invalidCard } from '../domain/validator';
+import { ICard } from '../domain/types';
+import { VALIDATE_MESSAGE } from '../constants';
 
 export default function RegisterCard() {
   const cardState = useCardState();
@@ -32,15 +35,29 @@ export default function RegisterCard() {
     cardDispatch({ type: 'SET_CARD', payload: company });
   };
   const saveCardData = () => {
-    const cardIndex = new Date().getTime();
-    const cardList = cardRepository.getItem();
+    const invalidMessage = invalidCard(cardState);
+
+    if (invalidMessage) {
+      alert(invalidMessage);
+      return;
+    }
+
+    const cardList: ICard[] = cardRepository.getItem();
+    const findDuplicateCard = cardList.find((item) => item.cardNumber === cardState.cardNumber);
+
+    if (findDuplicateCard) {
+      alert(VALIDATE_MESSAGE.DUPLICATE_CARD);
+      return;
+    }
+
     const newCardList = [
       ...cardList,
-      { ...cardState, index: cardIndex }
+      { ...cardState }
     ];
 
     cardRepository.setItem(newCardList);
-    navigate(`/register-complete?card=${cardIndex}`);
+    cardDispatch({ type: 'RESET_CARD', payload: {} });
+    navigate(`/register-complete?card=${cardState.cardNumber}`);
   };
 
   return (

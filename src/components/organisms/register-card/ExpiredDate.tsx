@@ -2,7 +2,7 @@ import { useFocusRef, useRefs } from '../../../hooks';
 import { Input } from '../../atoms';
 import { InputContainer } from '../../molecules';
 import { memo, useCallback, useState } from 'react';
-import { isPreviousDate } from '../../../domain/validator';
+import { isInvalidMonth, isPreviousDate } from '../../../domain/validator';
 import { onlyNumber } from '../../../utils/keyInterceptor';
 import { useCardDispatch } from '../../../provider/card-box/hooks';
 
@@ -26,7 +26,7 @@ function ExpiredDate() {
       payload: { expiredDate: expiredDate.join('') }
     });
 
-    if (Number(month) < 1 || Number(month) > 12) {
+    if (isInvalidMonth(month)) {
       setErrorMessage(VALIDATE_ERROR.MONTH);
       return;
     }

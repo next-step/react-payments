@@ -4,10 +4,9 @@ import { InputContainer } from '../../molecules';
 import { onlyNumber } from '../../../utils/keyInterceptor';
 import { useFocusRef, useRefs } from '../../../hooks';
 import { useCardDispatch } from '../../../provider/card-box/hooks';
-import { filterCardNumber } from '../../../utils/filter';
+import { isCardNumber } from '../../../domain/validator';
 
 const MAX_LENGTH = 4;
-const CARD_LENGTH = 16;
 const VALIDATE_ERROR = '카드 번호를 입력 해 주세요.';
 
 function CardNumber() {
@@ -20,9 +19,9 @@ function CardNumber() {
 
     cardDispatch({
       type: 'SET_CARD',
-      payload: { cardNumber: filterCardNumber(cardNumber) }
+      payload: { cardNumber }
     });
-    setErrorMessage(cardNumber.length === CARD_LENGTH ? '' : VALIDATE_ERROR);
+    setErrorMessage(isCardNumber(cardNumber) ? '' : VALIDATE_ERROR);
   }, []);
 
   return (

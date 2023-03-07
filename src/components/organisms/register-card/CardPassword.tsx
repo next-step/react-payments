@@ -4,6 +4,7 @@ import { memo, useCallback, useState } from 'react';
 import { useFocusRef, useRefs } from '../../../hooks';
 import { onlyNumber } from '../../../utils/keyInterceptor';
 import { useCardDispatch } from '../../../provider/card-box/hooks';
+import { isCardPassword } from '../../../domain/validator';
 
 const MAX_LENGTH = 1;
 const VALIDATE_ERROR = '카드 비밀번호 앞 2자리를 입력 해 주세요.';
@@ -20,7 +21,7 @@ function CardPassword() {
       type: 'SET_CARD',
       payload: { cardPassword: Number(cardPassword) }
     });
-    setErrorMessage(cardPassword.length !== MAX_LENGTH * 2 ? VALIDATE_ERROR : '');
+    setErrorMessage(!isCardPassword(cardPassword) ? VALIDATE_ERROR : '');
   }, []);
 
   return (

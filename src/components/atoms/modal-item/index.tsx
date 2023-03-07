@@ -6,7 +6,7 @@ interface IModalItem {
   title: string;
 }
 
-function ModalItem({ dotColor = '0f0f0f', title, onClick }: IModalItem) {
+function ModalItem({ dotColor = '#bebebe', title, onClick }: IModalItem) {
   return (
     <div className="modal-item-container" onClick={onClick}>
       <div className="modal-item-dot" style={{ backgroundColor: dotColor }}></div>
