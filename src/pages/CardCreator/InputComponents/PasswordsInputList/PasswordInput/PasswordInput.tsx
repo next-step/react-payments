@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext } from 'react';
+import React, { ChangeEvent, useContext, useEffect } from 'react';
 
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 import type { PasswordsState } from '@/pages/CardCreator/types';
@@ -20,7 +20,10 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
   const apiContext = useContext(ApiContext);
 
   const { setElement, toTheNextElement } = useSequentialFocusWithElements();
-  toTheNextElement(PASSWORD_ELEMENT_SEQUENCE_KEY, index, checkIsValid(value));
+
+  useEffect(() => {
+    toTheNextElement(PASSWORD_ELEMENT_SEQUENCE_KEY, index, checkIsValid(value));
+  }, [toTheNextElement, index, checkIsValid, value]);
 
   const inputChangeEventProps = {
     props: { setState: (value: string) => apiContext?.dispatch({ type: 'passwords', payload: { index, value } }) },

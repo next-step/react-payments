@@ -1,4 +1,4 @@
-import React, { ChangeEvent, memo, useContext, useMemo } from 'react';
+import React, { ChangeEvent, memo, useContext, useEffect, useMemo } from 'react';
 
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 import { ApiContext, useSelectCardOwners } from '@/stores/cardCreator';
@@ -18,7 +18,10 @@ function CardOwnerInput(_: CardOwnerInputProps) {
   const apiContext = useContext(ApiContext);
 
   const { setElement, toTheNextElement } = useSequentialFocusWithElements();
-  toTheNextElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, !!checkIsValid?.(value));
+
+  useEffect(() => {
+    toTheNextElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, !!checkIsValid?.(value));
+  }, [toTheNextElement, checkIsValid, value]);
 
   const errorMessage = useErrorContext(
     {

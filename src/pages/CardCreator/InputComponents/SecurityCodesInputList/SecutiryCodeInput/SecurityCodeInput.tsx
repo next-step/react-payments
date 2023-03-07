@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 
 import type { SecurityCodesState } from '@/pages/CardCreator/types';
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
@@ -18,7 +18,10 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
   const { key, value, checkIsAllowInput, checkIsValid } = securityCodeState;
 
   const { setElement, toTheNextElement } = useSequentialFocusWithElements();
-  toTheNextElement(SECURITY_CODE_ELEMENT_SEQUENCE_KEY, index, checkIsValid(value));
+
+  useEffect(() => {
+    toTheNextElement(SECURITY_CODE_ELEMENT_SEQUENCE_KEY, index, checkIsValid(value));
+  }, [toTheNextElement, index, checkIsValid, value]);
 
   const inputChangeEventProps = {
     props: { setState: (value: string) => setSecurityCodeState((prev) => ({ ...prev, value })) },

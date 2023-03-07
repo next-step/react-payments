@@ -1,4 +1,4 @@
-import React, { ChangeEvent, memo, useContext, useMemo } from 'react';
+import React, { ChangeEvent, memo, useContext, useEffect, useMemo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
 import { CardNumbersState } from '@/pages/CardCreator/types';
@@ -26,7 +26,10 @@ export const CardNumberInput = memo(({ cardNumber, index, needDividerRender }: C
   const isOverFourNumber = checkIsValid(value);
 
   const { setElement, toTheNextElement } = useSequentialFocusWithElements();
-  toTheNextElement(CARD_NUMBER_INPUT_REF_KEY, index, isOverFourNumber);
+
+  useEffect(() => {
+    toTheNextElement(CARD_NUMBER_INPUT_REF_KEY, index, isOverFourNumber);
+  }, [toTheNextElement, index, isOverFourNumber]);
 
   // prop 변화에 따라 새롭게 만들어져야하는 객체 = memo를 둠으로서 오히려 메모리와 성능에 손해를 줄 수 있음.
   const changeProps = {
