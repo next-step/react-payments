@@ -1,9 +1,10 @@
 import React, { ChangeEvent } from 'react'
 import { UI_VARIANT } from 'constants/ui.constant'
-import { FormGroup } from '../FormGroup'
+import { FormGroup } from '../../ui/FormGroup'
 import { useFormContext } from 'context/FormContext'
-import { Input } from 'components/atoms/Input'
+import { Input } from 'components/ui/Input'
 import { REGEX } from 'constants/regex'
+import './PasswordField.css'
 
 const validatePassword = (password: string) => {
   return password.length !== 1
@@ -26,24 +27,26 @@ const PasswordField = () => {
 
   return (
     <FormGroup label='카드비밀번호'>
-      <Input
-        type='password'
-        name='firstPassword'
-        value={cardPassword.firstPassword.value}
-        variant={UI_VARIANT.GHOST}
-        onChange={onChangePassword}
-        maxLength={1}
-      />
-      <Input
-        type='password'
-        name='secondPassword'
-        value={cardPassword.secondPassword.value}
-        variant={UI_VARIANT.GHOST}
-        onChange={onChangePassword}
-        maxLength={1}
-      />
-      <span>⦁</span>
-      <span>⦁</span>
+      <div className='password-container'>
+        <Input
+          type='password'
+          name='firstPassword'
+          value={cardPassword.firstPassword.value}
+          variant={UI_VARIANT.GHOST}
+          onChange={onChangePassword}
+          maxLength={1}
+        />
+        <Input
+          type='password'
+          name='secondPassword'
+          value={cardPassword.secondPassword.value}
+          variant={UI_VARIANT.GHOST}
+          onChange={onChangePassword}
+          maxLength={1}
+        />
+        <span>⦁</span>
+        <span>⦁</span>
+      </div>
     </FormGroup>
   )
 }

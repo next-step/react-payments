@@ -1,7 +1,7 @@
 import React from 'react'
-import { Header } from 'components/molecules/Header'
+import { Header } from 'components/ui/Header'
 import { PaymentCard } from 'models/card.model'
-import { CardList } from 'components/molecules/CardList'
+import { CardList } from 'components/CardList'
 import { FlexMainTemplate } from 'templates/FlexMainTemplate'
 
 type PaymentMainProps = {

@@ -1,10 +1,11 @@
 .input-basic {
-  height: 45px;
+  height: 40px;
   width: 100%;
   outline: 2px solid transparent;
   outline-offset: 2px;
   border: none;
   background-color: transparent;
+  font-size: 1rem;
 }
 
 .fill {

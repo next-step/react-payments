@@ -1,9 +1,9 @@
-import { Input } from 'components/atoms/Input'
+import { Input } from 'components/ui/Input'
 import { REGEX } from 'constants/regex'
 import { UI_VARIANT } from 'constants/ui.constant'
 import { useFormContext } from 'context/FormContext'
 import React, { ChangeEvent } from 'react'
-import { FormGroup } from '../FormGroup'
+import { FormGroup } from '../../ui/FormGroup'
 import './CardExpireDateField.css'
 
 const CARD_EXPIRE_DATE_TEXT = {

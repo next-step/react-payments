@@ -1,6 +1,6 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Input } from 'components/atoms/Input'
+import { Input } from 'components/ui/Input'
 import { UI_VARIANT } from 'constants/ui.constant'
 
 export default {

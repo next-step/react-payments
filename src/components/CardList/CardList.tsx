@@ -1,6 +1,6 @@
 import React from 'react'
 import { PaymentCard } from 'models/card.model'
-import { Card } from 'components/atoms/Card'
+import { Card } from 'components/ui/Card'
 import { UI_SIZE } from 'constants/ui.constant'
 
 type CardListProps = {

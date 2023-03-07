@@ -1,6 +1,6 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
-import { Card } from 'components/atoms/Card'
+import { Card } from 'components/ui/Card'
 import { UI_SIZE } from 'constants/ui.constant'
 import { action } from '@storybook/addon-actions'
 import { ADD_CARD_VIEW_VALUE, CARD_COMPNAYS_CODE } from 'constants/card'

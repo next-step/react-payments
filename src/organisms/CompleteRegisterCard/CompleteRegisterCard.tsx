@@ -1,9 +1,9 @@
 import React, { ChangeEvent } from 'react'
-import { FormGroup } from 'components/molecules/FormGroup'
+import { FormGroup } from 'components/ui/FormGroup'
 import { CardType, CardTypeKeys } from 'models/card.model'
 import { UI_SIZE, UI_VARIANT } from 'constants/ui.constant'
-import { Card } from 'components/atoms/Card'
-import { Button } from 'components/atoms/Button'
+import { Card } from 'components/ui/Card'
+import { Button } from 'components/ui/Button'
 import './CompleteRegisterCard.css'
 
 type CompleteRegisterCardProps = {

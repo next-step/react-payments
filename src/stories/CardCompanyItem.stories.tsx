@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { CardCompanyItem } from 'components/atoms/CardCompanyItem'
+import { CardCompanyItem } from 'components/CardCompanyItem'
 import { CARD_COMPNAYS_CODE } from 'constants/card'
 import React from 'react'
 

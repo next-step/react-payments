@@ -2,7 +2,7 @@ import React from 'react'
 import { CARD_COMPNAYS_CODE } from 'constants/card'
 import { CardCompanyCodeType } from 'models/card.model'
 import './CardCompanyList.css'
-import { CardCompanyItem } from 'components/atoms/CardCompanyItem'
+import { CardCompanyItem } from 'components/CardCompanyItem'
 
 type CardCompanyListProps = {
   onClick: (value: CardCompanyCodeType) => void

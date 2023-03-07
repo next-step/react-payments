@@ -1,0 +1,19 @@
+.cvc-container {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-grey-100);
+  border-radius: 0.25rem;
+  position: relative;
+}
+
+.cvc-container input {
+  width: 100px;
+  text-align: center;
+}
+
+.cvc-input-icon {
+  font-size: 20px;
+  position: absolute;
+  right: -30px;
+  color: var(--color-text);
+}

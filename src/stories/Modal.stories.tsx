@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { Modal } from 'components/atoms/Modal'
-import { CardCompanyList } from 'components/molecules/CardCompanyList'
+import { Modal } from 'components/ui/Modal'
+import { CardCompanyList } from 'components/CardCompanyList'
 import React from 'react'
 import { MobileTemplate } from 'templates/MobileTemplate'
 
