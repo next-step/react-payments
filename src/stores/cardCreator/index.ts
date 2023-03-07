@@ -1,4 +1,5 @@
 export * from './Provider';
+export * from './useSelectors';
 export {
   ApiContext,
   CardNumberStoreContext,
@@ -7,4 +8,3 @@ export {
   PasswordsStoreContext,
   SecurityCodesStoreContext,
 } from './cardStore';
-export * from './useCardContextSelector';

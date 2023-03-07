@@ -1,7 +1,7 @@
 import React from 'react';
 import themes from '@/theme/theme';
 
-import type { CardCompanyModel } from '../../cardCompanyList';
+import type { CardCompanyModel } from '../../type';
 import { CardCompanyWrapper, CardCompanyName, CardCompanyColor } from './CardCompany.styled';
 
 interface CardCompanyProps {

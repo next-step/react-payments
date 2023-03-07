@@ -1,18 +1,18 @@
 import React, { MouseEvent } from 'react';
 
-import { CardCompanyModel } from '@/pages/CardCreator/hooks/useCardCompanySelectModal/CardCompanySelector/cardCompanyList';
-
 import { CardNumbers } from './CardNumbers';
 import { CardOwnerName } from './CardOwnerName';
 import { CardExpireDate } from './CardExpireDate';
 import { CardWrapper } from './Card.styled';
+import { useSelectCardCompany } from '@/stores/cardCreator';
 
 interface CardProps {
-  cardCompany?: CardCompanyModel;
   onCardClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
-function Card({ cardCompany, onCardClick }: CardProps) {
+function Card({ onCardClick }: CardProps) {
+  const cardCompany = useSelectCardCompany();
+
   return (
     <div className="card-box" onClick={onCardClick}>
       <CardWrapper>

@@ -1,9 +1,4 @@
-import type { Themes } from '@/theme/theme';
-
-export type CardCompanyModel = {
-  name: string;
-  theme: Themes;
-};
+import { CardCompanyModel } from './type';
 
 export const cardCompanyList: { [key: string]: CardCompanyModel } = {
   포코카드: {

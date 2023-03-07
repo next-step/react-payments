@@ -2,12 +2,17 @@ import { useContext } from 'react';
 
 import {
   ApiContext,
+  CardCompanyStoreContext,
   CardNumberStoreContext,
   CardOwnersStoreContext,
   ExpireDatesStoreContext,
   PasswordsStoreContext,
   SecurityCodesStoreContext,
 } from './cardStore';
+
+export function useSelectCardCompany() {
+  return useContext(CardCompanyStoreContext);
+}
 
 export function useSelectCardNumbers() {
   return useContext(CardNumberStoreContext);

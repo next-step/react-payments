@@ -11,7 +11,7 @@ export function useErrorContext(errorMessageTemplate: ErrorMessages, errorCondit
   const errorConditionTemplatesRef = useRef<ErrorConditionTemplates>(errorConditionTemplates);
 
   const [errorMessage, setErrorMessage] = useErrorMessage(errorMessageTemplate);
-  console.log(errorContext);
+
   useEffect(() => {
     const errorCondition = errorConditionTemplatesRef.current.find(({ errorType }) => errorType === errorContext.type);
     if (!errorCondition) {
