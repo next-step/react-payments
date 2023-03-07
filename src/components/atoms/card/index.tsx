@@ -8,12 +8,12 @@ const config = {
   }
 };
 
-function Card({ cardNumber, cardHolder, expiredDate, type = 'small', color, brand }: ICard) {
+function Card({ cardNumber, cardHolder, expiredDate, type = 'small', color, cardCompany }: ICard) {
   return (
     <div className="card-box">
       <div className={config.type[type]} style={{ backgroundColor: color }}>
         <div className="card-top">
-          <span className="card-text">{brand}</span>
+          <span className="card-text">{cardCompany}</span>
         </div>
         <div className="card-middle">
           <div className="small-card__chip"></div>

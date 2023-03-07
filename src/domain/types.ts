@@ -1,5 +1,5 @@
 export interface ICard {
-  brand?: string;
+  cardCompany?: string;
   cardNumber?: string;
   cardHolder?: string;
   expiredDate?: string;

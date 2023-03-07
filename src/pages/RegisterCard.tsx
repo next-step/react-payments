@@ -15,9 +15,9 @@ export default function RegisterCard() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    const { cardNumber, brand } = cardState;
+    const { cardNumber, cardCompany } = cardState;
 
-    if (brand) {
+    if (cardCompany) {
       setShowModal(false);
       return;
     }
