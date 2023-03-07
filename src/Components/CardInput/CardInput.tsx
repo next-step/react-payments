@@ -17,7 +17,7 @@ interface ContainerProps {
     | ReactElement<CardInputOptions>;
   onChange: (value: string) => void;
   validate: (value: string) => boolean;
-  width?: 15 | 25 | 50 | 60 | 75 | 100;
+  width?: string;
   background?: boolean;
   required?: boolean;
   delimeter?: string;
@@ -33,7 +33,7 @@ function Container({
   required = true,
   countMaxLength = false,
   delimeter = '',
-  width = 100,
+  width = '100%',
   background = true,
 }: ContainerProps) {
   const { getAll } = useComponentContext().components;
@@ -72,7 +72,8 @@ function Container({
         )}
       </div>
       <div
-        className={`input-box ${background ? 'background' : ''} w-${width}`}
+        className={`input-box ${background ? 'background' : ''}`}
+        style={{ width: `${width};` }}
         onChange={handleChange}
       >
         {insertDelimeter(children, delimeter)}

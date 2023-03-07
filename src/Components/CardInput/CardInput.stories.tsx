@@ -47,7 +47,7 @@ export const CardMonthYear = () => (
     }}
     title="만료일"
     delimeter={'/'}
-    width={50}
+    width="50%"
   >
     <CardInfo.Month maxLength={2} placeholder="MM" />
     <CardInfo.Year maxLength={2} placeholder="YY" />
@@ -62,7 +62,7 @@ export const CardSecureCode = () => (
       // console.log(value);
     }}
     title="보안 코드(CVC/CVV)"
-    width={25}
+    width="25%"
   >
     <CardInfo.Number maxLength={3} hideValue={true} />
   </CardInfo>
@@ -76,7 +76,7 @@ export const CardPassword = () => (
       // console.log(value);
     }}
     title="비밀번호"
-    width={60}
+    width="60%"
     background={false}
   >
     <CardInfo.Number maxLength={1} hideValue={true} />
