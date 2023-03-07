@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { ICard } from '../domain/types';
+import { ICard } from '../../../domain/types';
 
 const config = {
   type: {

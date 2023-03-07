@@ -1,9 +1,10 @@
-import { useFocusRef, useRefs } from '../../hooks';
-import { Input, InputContainer } from '../../components/form';
+import { useFocusRef, useRefs } from '../../../hooks';
+import { Input } from '../../atoms';
+import { InputContainer } from '../../molecules';
 import { memo, useCallback, useState } from 'react';
-import { Validator } from '../../domain';
-import { onlyNumber } from '../../utils/keyInterceptor';
-import useCardDispatch from '../../provider/card-box/hooks/useCardDispatch';
+import { Validator } from '../../../domain';
+import { onlyNumber } from '../../../utils/keyInterceptor';
+import useCardDispatch from '../../../provider/card-box/hooks/useCardDispatch';
 
 const MAX_LENGTH = 2;
 const VALIDATE_ERROR = {

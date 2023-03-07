@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { Card } from './index';
+import { Card } from '../../index';
 
 export default {
   title: 'Payments/Card',

@@ -1,6 +1,6 @@
 import { memo, PropsWithChildren, useCallback } from 'react';
 
-interface IModal {
+export interface IModal {
   onClickOutside: () => void;
 }
 

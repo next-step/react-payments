@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { PageTitle } from './index';
+import PageTitle from './index';
 
 export default {
   title: 'Payments/PageTitle',

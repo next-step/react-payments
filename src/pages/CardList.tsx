@@ -1,9 +1,8 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { cardRepository } from '../repositories';
-import { Card, PageTitle } from '../components';
+import { Button, Card, PageTitle } from '../components/atoms';
 import { ICardDTO } from '../domain/types';
 import { useCallback, useState } from 'react';
-import { Button } from '../components/form';
 
 export default function CardList() {
   const navigate = useNavigate();

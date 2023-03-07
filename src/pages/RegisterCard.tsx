@@ -1,14 +1,8 @@
-import { Card, Modal, PageTitle } from '../components';
+import { Button, Card, PageTitle } from '../components/atoms';
+import { Modal } from '../components/molecules';
 import { useEffect, useState } from 'react';
-import CardSelection from '../components/CardSelection';
-import {
-  CardHolderContainer,
-  CardNumberContainer,
-  CardPasswordContainer,
-  ExpiredDateContainer,
-  SecurityCodeContainer
-} from '../container/register-card';
-import { Button } from '../components/form';
+import CardSelection from '../components/molecules/card-selection';
+import { CardHolder, CardNumber, CardPassword, ExpiredDate, SecurityCode } from '../components/organisms/register-card';
 import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
 import useCardState from '../provider/card-box/hooks/useCardState';
@@ -55,11 +49,11 @@ export default function RegisterCard() {
     <div className="app">
       <PageTitle title="&lt; 카드 추가" onClick={moveCardList}/>
       <Card {...cardState} />
-      <CardNumberContainer/>
-      <ExpiredDateContainer/>
-      <CardHolderContainer/>
-      <SecurityCodeContainer/>
-      <CardPasswordContainer/>
+      <CardNumber/>
+      <ExpiredDate/>
+      <CardHolder/>
+      <SecurityCode/>
+      <CardPassword/>
       <Button onClick={saveCardData}>다음</Button>
       {showModal && (
         <Modal onClickOutside={handleClickOutside}>

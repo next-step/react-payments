@@ -1,8 +1,7 @@
 import { cardRepository } from '../repositories';
 import { useEffect, useMemo, useRef } from 'react';
-import { Card, PageTitle } from '../components';
+import { Button, Card, Input, PageTitle } from '../components/atoms';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { Button, Input } from '../components/form';
 import { ICardDTO } from '../domain/types';
 
 const MAX_LENGTH = 10;

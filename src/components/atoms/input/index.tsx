@@ -2,7 +2,6 @@ import { ChangeEvent, forwardRef, InputHTMLAttributes, memo, useCallback } from 
 
 export interface IInput extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
-  filter?: (text: string) => string;
   nextFocus?: () => void;
 }
 
@@ -12,7 +11,6 @@ const Input = forwardRef<HTMLInputElement, IInput>((
     className = '',
     onChange,
     maxLength,
-    filter,
     nextFocus,
     ...props
   }, inputRef) => {

@@ -1,5 +1,5 @@
 import { memo, useCallback } from 'react';
-import { ICard } from '../domain/types';
+import { ICard } from '../../../domain/types';
 
 export interface ICardSelection {
   onChange: (data: ICard) => void;
