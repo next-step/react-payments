@@ -73,7 +73,7 @@ function Container({
       </div>
       <div
         className={`input-box ${background ? 'background' : ''}`}
-        style={{ width: `${width};` }}
+        style={{ width: `${width}` }}
         onChange={handleChange}
       >
         {insertDelimeter(children, delimeter)}
