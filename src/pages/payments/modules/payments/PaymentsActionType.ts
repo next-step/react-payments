@@ -15,7 +15,7 @@ export const ADD_CARD_INFO = "ADD_CARD_INFO";
 type AddCardInfo = { type: typeof ADD_CARD_INFO; newCardInfo: NewCardInfo };
 
 export const ADD_CARD = "ADD_CARD";
-type AddCArd = {
+type AddCard = {
   type: typeof ADD_CARD;
   nickname?: string;
 };
@@ -41,7 +41,7 @@ type SetSelectedCard = {
 
 export type ActionType =
   | AddCardInfo
-  | AddCArd
+  | AddCard
   | EditCard
   | DeleteCard
   | SetSelectedCard;
