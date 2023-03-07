@@ -1,4 +1,5 @@
 import { CardCompanyCodeType, CARD_COMPNAYS_CODE } from './cardCompanyCode'
+import { CARD_REDUCER_ACTION_TYPE } from 'reducers/CardReducer'
 
 export interface CardExpireDateType {
   year: string
@@ -28,8 +29,11 @@ export interface PaymentCard {
 }
 
 export type AddPaymentCard = Omit<PaymentCard, 'id'>
+
 export type AddPaymentCardKeys = keyof AddPaymentCard
 export type PaymentCardKeys = keyof PaymentCard
+
+export type AddOrUpdateCardType = PaymentCard | AddPaymentCard
 
 export const PAYMENT_CARD_FORM_KEYS = {
   ID: 'id',

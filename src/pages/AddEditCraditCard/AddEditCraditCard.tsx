@@ -39,7 +39,10 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
   return (
     <FormProvider value={{ state, handleChange }}>
       {isCompleteRegister ? (
-        <CompleteRegisterCard submit={submitCard} onNavigateNext={onNavigateNext}/>
+        <CompleteRegisterCard
+          submit={submitCard}
+          onNavigateNext={onNavigateNext}
+        />
       ) : (
         <RegisterCard
           onNavigate={onNavigateNext}

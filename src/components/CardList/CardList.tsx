@@ -1,11 +1,16 @@
 import React from 'react'
 import { Card } from 'components/ui/Card'
 import { UI_SIZE } from 'constants/ui'
-import { AddPaymentCard, INITAL_CARD_STATE, PaymentCard } from 'constants/card'
+import {
+  AddOrUpdateCardType,
+  AddPaymentCard,
+  INITAL_CARD_STATE,
+  PaymentCard,
+} from 'constants/card'
 
 type CardListProps = {
   cards: PaymentCard[]
-  onClick: (card: PaymentCard | AddPaymentCard) => void
+  onClick: (card: AddOrUpdateCardType) => void
   isIncludeAddCardView?: boolean
 }
 

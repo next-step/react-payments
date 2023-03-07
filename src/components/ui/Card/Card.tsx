@@ -1,5 +1,5 @@
 import React from 'react'
-import { AddPaymentCard, PaymentCard } from 'constants/card'
+import { AddOrUpdateCardType, AddPaymentCard, PaymentCard } from 'constants/card'
 import { CARD_COMPANYS } from 'constants/cardCompanyCode'
 import { UiSize } from 'constants/ui'
 import './Card.css'
@@ -27,10 +27,10 @@ const Card: React.FC<CardProps> = ({
     fourthNumber = '',
   } = card.cardNumbers
 
-  const onUpdateOrAddCard = (card: PaymentCard | AddPaymentCard) => {
+  const onUpdateOrAddCard = (card: AddOrUpdateCardType) => {
     if (!onClick) return
 
-    onClick(card)
+    onClick({...card, type: isEmptyCardView ? 'add', 'update'})
   }
 
   const cardLayout = isEmptyCardView ? (
