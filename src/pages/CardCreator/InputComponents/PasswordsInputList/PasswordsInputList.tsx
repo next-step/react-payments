@@ -1,6 +1,6 @@
-import React, { memo, useContext } from 'react';
+import React, { memo } from 'react';
 
-import { PasswordsStoreContext } from '@/stores/cardCreator';
+import { useSelectPasswords } from '@/stores/cardCreator';
 
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { PasswordInput } from './PasswordInput';
@@ -9,8 +9,7 @@ import { useErrorContext } from '../hooks/useErrorContext';
 interface PasswordsInputListProps {}
 
 function PasswordsInputList(_: PasswordsInputListProps) {
-  const passwordStore = useContext(PasswordsStoreContext);
-  const passwords = passwordStore?.store;
+  const passwords = useSelectPasswords();
 
   const errorMessage = useErrorContext(
     {

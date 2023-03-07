@@ -19,7 +19,7 @@ export const initialCardStore = {
 };
 
 type Store = typeof initialCardStore;
-type Actions = keyof typeof initialCardStore;
+export type Actions = keyof typeof initialCardStore;
 
 export function reducer(store: Store, action: { type: Actions; payload: { index: number; value: string } }) {
   const { type, payload } = action;
@@ -51,11 +51,11 @@ export function reducer(store: Store, action: { type: Actions; payload: { index:
 type CardReducerType = ReducerReturnType<typeof reducer>;
 type CardStore = CardReducerType[0];
 type Dispatch = CardReducerType[1];
-type CardNumbersStoreContextType = StoreContext<CardStore['cardNumbers']>;
-type ExpireDatesStoreContextType = StoreContext<CardStore['expireDates']>;
-type CardOwnersStoreContextType = StoreContext<CardStore['cardOwners']>;
-type PasswordsStoreContextType = StoreContext<CardStore['passwords']>;
-type SecurityCodesStoreContextType = StoreContext<CardStore['securityCodes']>;
+type CardNumbersStoreContextType = CardStore['cardNumbers'] | null;
+type ExpireDatesStoreContextType = CardStore['expireDates'] | null;
+type CardOwnersStoreContextType = CardStore['cardOwners'] | null;
+type PasswordsStoreContextType = CardStore['passwords'] | null;
+type SecurityCodesStoreContextType = CardStore['securityCodes'] | null;
 type ApiContextType = DispatchContext<Dispatch>;
 
 export const CardNumberStoreContext = createContext<CardNumbersStoreContextType>(null);

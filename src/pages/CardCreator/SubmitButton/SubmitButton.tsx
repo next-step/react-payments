@@ -3,29 +3,29 @@ import { Link } from 'react-router-dom';
 
 import { ErrorApiContext } from '@/stores/ErrorContext';
 import {
-  CardNumberStoreContext,
-  CardOwnersStoreContext,
-  ExpireDatesStoreContext,
-  PasswordsStoreContext,
-  SecurityCodesStoreContext,
+  useSelectCardNumbers,
+  useSelectExpireDates,
+  useSelectCardOwners,
+  useSelectPasswords,
+  useSelectSecurityCodes,
 } from '@/stores/cardCreator';
 
 interface SubmitButtonProps {}
 
 // TODO: key값들 const로 정돈하기
 export function SubmitButton(_: SubmitButtonProps) {
-  const cardNumbersStore = useContext(CardNumberStoreContext);
-  const expireDatesStore = useContext(ExpireDatesStoreContext);
-  const cardOwnersStore = useContext(CardOwnersStoreContext);
-  const passwordsStore = useContext(PasswordsStoreContext);
-  const securityCodesStore = useContext(SecurityCodesStoreContext);
+  const cardNumbersStore = useSelectCardNumbers();
+  const expireDatesStore = useSelectExpireDates();
+  const cardOwnersStore = useSelectCardOwners();
+  const passwordsStore = useSelectPasswords();
+  const securityCodesStore = useSelectSecurityCodes();
 
   const inputs = [
-    createInputObject('cardNumbers', cardNumbersStore?.store),
-    createInputObject('expireDates', expireDatesStore?.store),
-    createInputObject('cardOwners', cardOwnersStore?.store),
-    createInputObject('passwords', passwordsStore?.store),
-    createInputObject('securityCodes', securityCodesStore?.store),
+    createInputObject('cardNumbers', cardNumbersStore),
+    createInputObject('expireDates', expireDatesStore),
+    createInputObject('cardOwners', cardOwnersStore),
+    createInputObject('passwords', passwordsStore),
+    createInputObject('securityCodes', securityCodesStore),
   ];
 
   const errorApis = useContext(ErrorApiContext);

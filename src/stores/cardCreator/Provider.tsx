@@ -15,21 +15,15 @@ import {
 export function ReducerContextProvider({ children }: PropsWithChildren<any>) {
   const [store, dispatch] = useReducer(reducer, initialCardStore);
 
-  const cardNumbersValue = useMemo(() => ({ store: store.cardNumbers }), [store.cardNumbers]);
-  const expireDatesValue = useMemo(() => ({ store: store.expireDates }), [store.expireDates]);
-  const cardOwnersValue = useMemo(() => ({ store: store.cardOwners }), [store.cardOwners]);
-  const passwordsValue = useMemo(() => ({ store: store.passwords }), [store.passwords]);
-  const securityCodesValue = useMemo(() => ({ store: store.securityCodes }), [store.securityCodes]);
-
   const apis = useMemo(() => ({ dispatch }), [dispatch]);
 
   return (
     <ApiContext.Provider value={apis}>
-      <CardNumberStoreContext.Provider value={cardNumbersValue}>
-        <ExpireDatesStoreContext.Provider value={expireDatesValue}>
-          <CardOwnersStoreContext.Provider value={cardOwnersValue}>
-            <PasswordsStoreContext.Provider value={passwordsValue}>
-              <SecurityCodesStoreContext.Provider value={securityCodesValue}>
+      <CardNumberStoreContext.Provider value={store.cardNumbers}>
+        <ExpireDatesStoreContext.Provider value={store.expireDates}>
+          <CardOwnersStoreContext.Provider value={store.cardOwners}>
+            <PasswordsStoreContext.Provider value={store.passwords}>
+              <SecurityCodesStoreContext.Provider value={store.securityCodes}>
                 {children}
               </SecurityCodesStoreContext.Provider>
             </PasswordsStoreContext.Provider>

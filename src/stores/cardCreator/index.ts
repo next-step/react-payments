@@ -7,3 +7,4 @@ export {
   PasswordsStoreContext,
   SecurityCodesStoreContext,
 } from './cardStore';
+export * from './useCardContextSelector';

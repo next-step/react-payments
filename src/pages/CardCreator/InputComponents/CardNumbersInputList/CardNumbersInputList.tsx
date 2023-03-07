@@ -1,7 +1,7 @@
-import React, { memo, useContext } from 'react';
+import React, { memo } from 'react';
 
 import { checkIsArrayLast } from '@/utils';
-import { CardNumberStoreContext } from '@/stores/cardCreator';
+import { useSelectCardNumbers } from '@/stores/cardCreator';
 
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { CardNumberInput } from './CardNumberInput';
@@ -10,8 +10,7 @@ import { useErrorContext } from '../hooks/useErrorContext';
 interface CardNumbersInputListProps {}
 
 function CardNumbersInputList(_: CardNumbersInputListProps) {
-  const cardNumbersStore = useContext(CardNumberStoreContext);
-  const cardNumbers = cardNumbersStore?.store;
+  const cardNumbers = useSelectCardNumbers();
 
   const errorMessage = useErrorContext(
     {

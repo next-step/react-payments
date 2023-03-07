@@ -1,7 +1,7 @@
 import React, { memo, useContext, useMemo } from 'react';
 
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
-import { ApiContext, CardOwnersStoreContext } from '@/stores/cardCreator';
+import { ApiContext, useSelectCardOwners } from '@/stores/cardCreator';
 
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { CardInfoInputElement } from '../components/CardInfoInputElement';
@@ -12,15 +12,13 @@ const CARD_OWNER_ELEMENT_SEQUENCE_KEY = 'cardOwner';
 interface CardOwnerInputProps {}
 
 function CardOwnerInput(_: CardOwnerInputProps) {
-  // TODO: store 뽑아오기 추상화
-  const cardOwnerContext = useContext(CardOwnersStoreContext);
-  const cardOwner = cardOwnerContext ? cardOwnerContext.store : [];
-  const { value, checkIsAllowInput, placeholder, checkIsValid } = cardOwner[0];
+  const cardOwner = useSelectCardOwners();
+  const { value, checkIsAllowInput, placeholder, checkIsValid } = cardOwner?.[0] || {};
 
   const apiContext = useContext(ApiContext);
 
   const { setElement, toTheNextElement } = useSequentialFocusWithElements();
-  toTheNextElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, checkIsValid(value));
+  toTheNextElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, !!checkIsValid?.(value));
 
   const errorMessage = useErrorContext(
     {
@@ -46,7 +44,7 @@ function CardOwnerInput(_: CardOwnerInputProps) {
             setState: (value: string) => apiContext?.dispatch({ type: 'cardOwners', payload: { index: 0, value } }),
           },
           checkWhetherSetState: (e) => {
-            return checkIsAllowInput(e.currentTarget.value);
+            return !!checkIsAllowInput?.(e.currentTarget.value);
           },
           getNewValue: (e) => {
             return e.currentTarget.value;

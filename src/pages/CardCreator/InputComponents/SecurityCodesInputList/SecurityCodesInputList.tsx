@@ -1,6 +1,6 @@
-import React, { memo, useContext } from 'react';
+import React, { memo } from 'react';
 
-import { SecurityCodesStoreContext } from '@/stores/cardCreator';
+import { useSelectSecurityCodes } from '@/stores/cardCreator';
 
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { SecurityCodeInput } from './SecutiryCodeInput';
@@ -9,8 +9,7 @@ import { useErrorContext } from '../hooks/useErrorContext';
 interface SecurityCodesInputListProps {}
 
 function SecurityCodesInputList(_: SecurityCodesInputListProps) {
-  const securityCodeStore = useContext(SecurityCodesStoreContext);
-  const securityCodes = securityCodeStore?.store;
+  const securityCodes = useSelectSecurityCodes();
 
   const errorMessage = useErrorContext(
     {

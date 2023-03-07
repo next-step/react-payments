@@ -1,6 +1,6 @@
-import React, { forwardRef, memo, useContext } from 'react';
+import React, { memo } from 'react';
 
-import { ExpireDatesStoreContext } from '@/stores/cardCreator';
+import { useSelectExpireDates } from '@/stores/cardCreator';
 import { checkIsArrayLast } from '@/utils';
 import { useErrorContext } from '../hooks/useErrorContext';
 
@@ -10,8 +10,7 @@ import { ExpireDateInput } from './ExpireDateInput';
 interface ExpireDatesInputListProps {}
 
 function ExpireDatesInputList(_: ExpireDatesInputListProps) {
-  const expireDatesStore = useContext(ExpireDatesStoreContext);
-  const expireDates = expireDatesStore?.store;
+  const expireDates = useSelectExpireDates();
 
   const errorMessage = useErrorContext(
     {
@@ -32,4 +31,4 @@ function ExpireDatesInputList(_: ExpireDatesInputListProps) {
   );
 }
 
-export const ExpireDatesInputListPure = memo(forwardRef(ExpireDatesInputList));
+export const ExpireDatesInputListPure = memo(ExpireDatesInputList);
