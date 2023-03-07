@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
@@ -11,7 +11,7 @@ import { ExpireDatesInputListPure } from './InputComponents/ExpireDatesInputList
 import { CardOwnerInputPure } from './InputComponents/CardOwnerInput';
 import { SecurityCodesInputListPure } from './InputComponents/SecurityCodesInputList';
 import { PasswordsInputListPure } from './InputComponents/PasswordsInputList';
-import { useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';
+import { CardCompanyModel, useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';
 import { SubmitButton } from './SubmitButton';
 
 function CardCreator() {
@@ -20,18 +20,29 @@ function CardCreator() {
 
   const { CardCompanySelectModal, showModal, hideModal } = useCardCompanySelectModal();
 
+  const handleCardClick = useCallback(
+    (e: MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+      showModal();
+    },
+    [showModal]
+  );
+
+  const handleCardCompanySelectModalClick = useCallback(
+    (cardCompany: CardCompanyModel) => {
+      apis?.dispatch({ type: 'cardCompany', payload: cardCompany });
+      hideModal();
+    },
+    [apis, hideModal]
+  );
+
   return (
     <ThemeProvider className="app" theme={cardCompany?.theme}>
       <h2 className="page-title">
         <Link to={routes.home} className="mr-10">{`<`}</Link> 카드 추가
       </h2>
 
-      <Card
-        onCardClick={(e) => {
-          e.stopPropagation();
-          showModal();
-        }}
-      />
+      <Card onCardClick={handleCardClick} />
 
       <CardNumbersInputListPure />
       <ExpireDatesInputListPure />
@@ -40,12 +51,7 @@ function CardCreator() {
       <PasswordsInputListPure />
       <SubmitButton />
 
-      <CardCompanySelectModal
-        onCardCompanyClick={(cardCompany) => {
-          apis?.dispatch({ type: 'cardCompany', payload: cardCompany });
-          hideModal();
-        }}
-      />
+      <CardCompanySelectModal onCardCompanyClick={handleCardCompanySelectModalClick} />
     </ThemeProvider>
   );
 }

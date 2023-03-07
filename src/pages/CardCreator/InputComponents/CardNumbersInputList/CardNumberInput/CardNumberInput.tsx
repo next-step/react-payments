@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react';
+import React, { ChangeEvent, memo, useContext, useMemo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
 import { CardNumbersState } from '@/pages/CardCreator/types';
@@ -28,6 +28,22 @@ export const CardNumberInput = memo(({ cardNumber, index, needDividerRender }: C
   const { setElement, toTheNextElement } = useSequentialFocusWithElements();
   toTheNextElement(CARD_NUMBER_INPUT_REF_KEY, index, isOverFourNumber);
 
+  // prop 변화에 따라 새롭게 만들어져야하는 객체 = memo를 둠으로서 오히려 메모리와 성능에 손해를 줄 수 있음.
+  const changeProps = {
+    props: {
+      setState: (newVal: string) => {
+        apiContext?.dispatch({ type: 'cardNumbers', payload: { index, value: newVal } });
+      },
+    },
+    checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
+      const filteredNumber = filterNumber(e.currentTarget.value);
+      return checkIsAllowInput(filteredNumber);
+    },
+    getNewValue: (e: ChangeEvent<HTMLInputElement>) => {
+      return filterNumber(e.currentTarget.value);
+    },
+  };
+
   return (
     <>
       <CardInfoInputElement
@@ -37,21 +53,7 @@ export const CardNumberInput = memo(({ cardNumber, index, needDividerRender }: C
         ref={(el) => {
           setElement(CARD_NUMBER_INPUT_REF_KEY, index, el);
         }}
-        // TODO: 프로젝트 전체에서 익명함수와 템플릿 리터럴을 최대한 줄이도록 하기 -> 렌더링때마다 새로운 객체가 생성되기 때문에, 최적화에 어려움이 있음.
-        onChangeProps={{
-          props: {
-            setState: (newVal: string) => {
-              apiContext?.dispatch({ type: 'cardNumbers', payload: { index, value: newVal } });
-            },
-          },
-          checkWhetherSetState: (e) => {
-            const filteredNumber = filterNumber(e.currentTarget.value);
-            return checkIsAllowInput(filteredNumber);
-          },
-          getNewValue: (e) => {
-            return filterNumber(e.currentTarget.value);
-          },
-        }}
+        onChangeProps={changeProps}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
         <InputDivider isHide={!isOverFourNumber} className="dash">

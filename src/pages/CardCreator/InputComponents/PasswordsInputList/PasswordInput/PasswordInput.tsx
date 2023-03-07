@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { ChangeEvent, useContext } from 'react';
 
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 import type { PasswordsState } from '@/pages/CardCreator/types';
@@ -22,6 +22,17 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
   const { setElement, toTheNextElement } = useSequentialFocusWithElements();
   toTheNextElement(PASSWORD_ELEMENT_SEQUENCE_KEY, index, checkIsValid(value));
 
+  const inputChangeEventProps = {
+    props: { setState: (value: string) => apiContext?.dispatch({ type: 'passwords', payload: { index, value } }) },
+    checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
+      const filteredNumber = filterNumber(e.currentTarget.value);
+      return checkIsAllowInput(filteredNumber);
+    },
+    getNewValue: (e: ChangeEvent<HTMLInputElement>) => {
+      return filterNumber(e.currentTarget.value);
+    },
+  };
+
   return (
     <CardInfoInputElement
       key={key}
@@ -31,16 +42,7 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
       ref={(el) => {
         setElement(PASSWORD_ELEMENT_SEQUENCE_KEY, index, el);
       }}
-      onChangeProps={{
-        props: { setState: (value: string) => apiContext?.dispatch({ type: 'passwords', payload: { index, value } }) },
-        checkWhetherSetState: (e) => {
-          const filteredNumber = filterNumber(e.currentTarget.value);
-          return checkIsAllowInput(filteredNumber);
-        },
-        getNewValue: (e) => {
-          return filterNumber(e.currentTarget.value);
-        },
-      }}
+      onChangeProps={inputChangeEventProps}
     />
   );
 }

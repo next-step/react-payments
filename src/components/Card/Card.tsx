@@ -1,4 +1,4 @@
-import React, { MouseEvent } from 'react';
+import React, { memo, MouseEvent } from 'react';
 
 import { CardNumbers } from './CardNumbers';
 import { CardOwnerName } from './CardOwnerName';
@@ -10,7 +10,7 @@ interface CardProps {
   onCardClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
-function Card({ onCardClick }: CardProps) {
+const Card = memo(({ onCardClick }: CardProps) => {
   const cardCompany = useSelectCardCompany();
 
   return (
@@ -30,6 +30,6 @@ function Card({ onCardClick }: CardProps) {
       </CardWrapper>
     </div>
   );
-}
+});
 
 export { Card };

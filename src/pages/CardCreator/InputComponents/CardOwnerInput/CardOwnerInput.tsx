@@ -1,4 +1,4 @@
-import React, { memo, useContext, useMemo } from 'react';
+import React, { ChangeEvent, memo, useContext, useMemo } from 'react';
 
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 import { ApiContext, useSelectCardOwners } from '@/stores/cardCreator';
@@ -27,6 +27,18 @@ function CardOwnerInput(_: CardOwnerInputProps) {
     [{ errorType: 'cardOwners', messageType: 'inValid' }]
   );
 
+  const inputChangeEventProps = {
+    props: {
+      setState: (value: string) => apiContext?.dispatch({ type: 'cardOwners', payload: { index: 0, value } }),
+    },
+    checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
+      return !!checkIsAllowInput?.(e.currentTarget.value);
+    },
+    getNewValue: (e: ChangeEvent<HTMLInputElement>) => {
+      return e.currentTarget.value;
+    },
+  };
+
   const inputHeader = useMemo(() => ['카드 소유자 이름(선택)', `${value?.length || 0} / 30`], [value]);
 
   return (
@@ -39,17 +51,7 @@ function CardOwnerInput(_: CardOwnerInputProps) {
         ref={(el) => {
           setElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, el);
         }}
-        onChangeProps={{
-          props: {
-            setState: (value: string) => apiContext?.dispatch({ type: 'cardOwners', payload: { index: 0, value } }),
-          },
-          checkWhetherSetState: (e) => {
-            return !!checkIsAllowInput?.(e.currentTarget.value);
-          },
-          getNewValue: (e) => {
-            return e.currentTarget.value;
-          },
-        }}
+        onChangeProps={inputChangeEventProps}
       />
     </CardInputWrapperPure>
   );

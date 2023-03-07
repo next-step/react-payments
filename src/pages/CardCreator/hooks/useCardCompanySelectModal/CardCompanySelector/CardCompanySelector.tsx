@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { CardCompany } from './components/CardCompany';
 import { cardCompanyList } from './cardCompanyList';
@@ -9,7 +9,7 @@ export interface CardCompanySelectorProps {
   onCardCompanyClick?: (cardCompany: CardCompanyModel) => void;
 }
 
-function CardCompanySelector({ onCardCompanyClick }: CardCompanySelectorProps) {
+const CardCompanySelector = memo(({ onCardCompanyClick }: CardCompanySelectorProps) => {
   return (
     <Wrapper onClick={(e) => e.stopPropagation()}>
       <CompaniesWrapper>
@@ -19,6 +19,6 @@ function CardCompanySelector({ onCardCompanyClick }: CardCompanySelectorProps) {
       </CompaniesWrapper>
     </Wrapper>
   );
-}
+});
 
 export { CardCompanySelector };

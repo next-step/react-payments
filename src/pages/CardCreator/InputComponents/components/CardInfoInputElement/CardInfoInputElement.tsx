@@ -14,7 +14,7 @@ import { Input } from './CardInfoInputElement.styled';
 type InputAttributeType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 type OmittedInputAttributeType = Omit<InputAttributeType, 'onChange' | 'onBlur' | 'ref'>;
 
-interface CardInfoInputElementProps extends OmittedInputAttributeType {
+export interface CardInfoInputElementProps extends OmittedInputAttributeType {
   onChangeProps: OnChangeHandlerProps;
   onBlurProps?: OnBlurHandlerProps;
 }
