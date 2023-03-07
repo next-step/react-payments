@@ -1,14 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
-import { CardOwnersStoreContext } from '@/stores/cardCreator';
+import { useSelectCardOwners } from '@/stores/cardCreator';
 
 interface CardOwnerNameProps {}
 
 function CardOwnerName(_: CardOwnerNameProps) {
-  const cardOwnerStore = useContext(CardOwnersStoreContext);
-  const ownerName = cardOwnerStore?.store[0].value;
+  const ownerName = useSelectCardOwners();
 
-  return <span className="card-text card-name-spacing">{ownerName || 'NAME'}</span>;
+  return <span className="card-text card-name-spacing">{ownerName?.[0].value || 'NAME'}</span>;
 }
 
 export { CardOwnerName };
