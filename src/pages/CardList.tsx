@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { cardRepository } from '../repositories';
 import { Card, PageTitle } from '../components/atoms';
 import { ICardDTO } from '../domain/types';
@@ -6,14 +6,9 @@ import { useCallback, useState } from 'react';
 import { CardItem } from '../components/molecules';
 
 export default function CardList() {
-  const navigate = useNavigate();
   const [cardList, setCardList] = useState<ICardDTO[]>(
     cardRepository.getItem().sort((a, b) => b.cardNumber - a.cardNumber)
   );
-
-  const moveRegisterComplete = useCallback((cardNumber: string) => {
-    navigate(`/register-complete?card=${cardNumber}`);
-  }, []);
 
   const removeCard = useCallback((cardNumber: string) => {
     setCardList((prevState) => {
@@ -38,10 +33,11 @@ export default function CardList() {
           cardNumber={card.cardNumber}
           nickname={card.nickname}
           buttonText="삭제"
-          onClickChildren={moveRegisterComplete}
           onClickButton={removeCard}
         >
-          <Card {...card} />
+          <NavLink to={`/register-complete?card=${card.cardNumber}`}>
+            <Card {...card} />
+          </NavLink>
         </CardItem>
       ))}
     </div>
