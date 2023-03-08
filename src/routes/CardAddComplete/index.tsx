@@ -1,44 +1,10 @@
-import { ChangeEvent, useState, MouseEvent, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { CARD_NAME_LIST, CARD_NICKNAME_MAX } from '../../constants/Card'
-import { useCardDispatchContext, useCardItemStateContext, useCardListStateContext } from '../../contexts/cardContext'
+import { useEffect } from 'react'
+import { CARD_NAME_LIST } from '../../constants/Card'
+import { useCardNickNameAdd } from '../../hooks/useCardNickNameAdd'
 
 const CardAddComplete = () => {
-  const navigate = useNavigate()
-  const dispatch = useCardDispatchContext()
-  const [cardNickName, setCardNickName] = useState('')
-  const cardData = useCardItemStateContext()
-  const state = useCardListStateContext()
-
-  const findCardData = state.find((data) => data.ownerName === cardData.ownerName)
-
-  const cardNickNameHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget
-    if (value.length > CARD_NICKNAME_MAX) return
-    setCardNickName(value)
-  }
-
-  const cardNickNameAddOnSubmit = (e: MouseEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    navigate('/')
-    if (findCardData === undefined)
-      dispatch({
-        type: 'CREATE',
-        card: {
-          ...cardData,
-          nickName: cardNickName === '' ? cardData.cardDesign : cardNickName,
-        },
-      })
-
-    if (findCardData !== undefined)
-      dispatch({
-        type: 'EDIT',
-        card: {
-          ...cardData,
-          nickName: cardNickName === '' ? cardData.cardDesign : cardNickName,
-        },
-      })
-  }
+  const { cardNickName, setCardNickName, cardNickNameHandler, cardNickNameAddOnSubmit, cardData, findCardData } =
+    useCardNickNameAdd()
 
   useEffect(() => {
     if (findCardData !== undefined) setCardNickName(cardData.nickName)
