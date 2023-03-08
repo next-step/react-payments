@@ -3,7 +3,7 @@ import React, { memo } from 'react';
 import { useSelectSecurityCodes } from '@/stores/CardCreatorContext';
 
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
-import { SecurityCodeInput } from './SecutiryCodeInput';
+import { SecurityCodeInput } from './SecurityCodeInput';
 import { useErrorContext } from '../hooks/useErrorContext';
 
 interface SecurityCodesInputListProps {}
