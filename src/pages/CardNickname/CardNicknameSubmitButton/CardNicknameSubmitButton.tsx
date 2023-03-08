@@ -11,7 +11,6 @@ import {
   useSelectPasswords,
   useSelectSecurityCodes,
 } from '@/stores/CardCreatorContext';
-import { createRandomNumber } from '@/utils';
 
 import { useCardListWithLocalStorage } from '../hooks/useCardListWithLocalStorage';
 
@@ -42,7 +41,7 @@ export function CardNicknameSubmitButton() {
     const newCardNicknameValue = !value ? cardCompany!.value!.name : value;
 
     // TODO: randomId를 달고 localhost에 저장, dynamicRoute가 있는 경우엔 기존것을 그대로 사용
-    setCardInLocalStorage(createRandomNumber(1000000), {
+    setCardInLocalStorage(new Date().getTime(), {
       cardNickname: { ...cardNickname!, value: newCardNicknameValue },
       cardCompany,
       cardNumbers,

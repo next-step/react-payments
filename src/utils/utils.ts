@@ -31,7 +31,3 @@ export function createUpdatedArray<T extends Array<unknown>, K extends keyof T>(
 export function checkIsArrayLast(array: any[], index: number) {
   return index >= array.length - 1;
 }
-
-export function createRandomNumber(maxNumber: number) {
-  return Math.floor(Math.random() * maxNumber);
-}

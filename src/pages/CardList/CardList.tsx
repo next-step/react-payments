@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Card } from '@/components/Card';
@@ -10,12 +10,20 @@ import { useCardListWithLocalStorage } from '../CardNickname/hooks/useCardListWi
 function CardList() {
   const { cardList } = useCardListWithLocalStorage();
 
+  const sortCardListToDescendingOrderOfKey = useMemo(() => {
+    return Object.entries(cardList).sort(([aKey], [bKey]) => {
+      if (aKey > bKey) return -1;
+      if (aKey === bKey) return 0;
+      return 1;
+    });
+  }, [cardList]);
+
   return (
     <div className="app flex-column-center">
       <Link to={routes.cardCreator} className="card-box">
         <div className="empty-card">+</div>
       </Link>
-      {Object.entries(cardList).map(([key, val]) => (
+      {sortCardListToDescendingOrderOfKey.map(([key, val]) => (
         <CardInfoProvider key={key} value={val}>
           <Card cardId={key} />
         </CardInfoProvider>
