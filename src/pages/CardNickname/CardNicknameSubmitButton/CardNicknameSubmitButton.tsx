@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { routes } from '@/routes';
 import {
@@ -15,6 +15,8 @@ import {
 import { useCardListWithLocalStorage } from '../hooks/useCardListWithLocalStorage';
 
 export function CardNicknameSubmitButton() {
+  const { cardId } = useParams();
+
   const cardNickname = useSelectCardNickname();
   const cardCompany = useSelectCardCompany();
   const cardNumbers = useSelectCardNumbers();
@@ -40,8 +42,9 @@ export function CardNicknameSubmitButton() {
 
     const newCardNicknameValue = !value ? cardCompany!.value!.name : value;
 
-    // TODO: randomId를 달고 localhost에 저장, dynamicRoute가 있는 경우엔 기존것을 그대로 사용
-    setCardInLocalStorage(new Date().getTime(), {
+    const saveCardId = cardId || new Date().getTime();
+
+    setCardInLocalStorage(saveCardId, {
       cardNickname: { ...cardNickname!, value: newCardNicknameValue },
       cardCompany,
       cardNumbers,

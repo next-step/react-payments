@@ -1,8 +1,9 @@
 import React, { ChangeEvent, useCallback } from 'react';
 
-import { useCardContextApiSelector } from '@/stores/CardCreatorContext';
+import { useCardContextApiSelector, useSelectCardNickname } from '@/stores/CardCreatorContext';
 
 export function NicknameInput() {
+  const nickname = useSelectCardNickname();
   const apis = useCardContextApiSelector();
 
   const handleCardNicknameChange = useCallback(
@@ -19,6 +20,7 @@ export function NicknameInput() {
         className="input-underline w-75"
         type="text"
         maxLength={10}
+        value={nickname?.value}
         placeholder="카드 별칭 (선택)"
         onChange={handleCardNicknameChange}
       />
