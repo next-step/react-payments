@@ -1,31 +1,37 @@
 import { createContext, useContext } from "react";
 
 import { CONTEXT_ERROR_MESSAGES } from "@/constants/messages/error";
-import { ValidationError } from "@/services/errors";
-import { ValidationResult } from "@/types";
+import { BaseError, ValidationError } from "@/services/errors";
+import { GeneralFunction } from "@/types";
 
 export function isNumber(variable: string) {
   return variable !== null && !Number.isNaN(Number(variable));
 }
 
-export function reportError(error: unknown) {
-  if (error instanceof ValidationError) {
-    alert(error.message);
+export function processError(error: unknown, errorCallback?: GeneralFunction) {
+  if (error instanceof BaseError) {
+    if (error instanceof ValidationError) {
+      errorCallback?.(error);
+      alert(error.message);
+    }
   }
 }
 
-export function checkValidator<T>(
-  value: T,
-  validator: (value: T) => ValidationResult,
-  hook?: (...args: any[]) => any
-) {
-  const result = validator(value);
-
+export function tryCatch(fn: GeneralFunction, errorCallback?: GeneralFunction) {
   try {
-    if (!result.success) throw result.error;
-    hook?.();
+    const result = fn();
+
+    return {
+      result,
+      error: null,
+    };
   } catch (error) {
-    reportError(error);
+    processError(error, errorCallback);
+
+    return {
+      result: null,
+      error,
+    };
   }
 }
 

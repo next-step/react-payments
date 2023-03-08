@@ -2,28 +2,21 @@ import { ChangeEvent, useCallback, useMemo } from "react";
 
 import { CARD_VALIDATION_ERROR_MESSAGES } from "@/constants/messages/error";
 import { CARD_INPUT_VARIABLES } from "@/constants/variables";
-import { checkValidator } from "@/helper";
+import { tryCatch } from "@/helper";
 import { useInput } from "@/hooks";
 import { ValidationError } from "@/services/errors";
-import { ValidationResult } from "@/types";
 
 type CardOwnerInput = {
   ownerName: string;
 };
 
-const validateCardOwnerName = (value: string): ValidationResult => {
+const validateCardOwnerName = (value: string) => {
   if (value.length > CARD_INPUT_VARIABLES.OWNER_NAME_MAX_LENGTH) {
-    return {
-      success: false,
-      error: new ValidationError(
-        CARD_VALIDATION_ERROR_MESSAGES.INVALID_OWNER_NAME_LENGTH
-      ),
-    };
+    throw new ValidationError({
+      name: "INPUT_VALIDATION_ERROR",
+      message: CARD_VALIDATION_ERROR_MESSAGES.INVALID_OWNER_NAME_LENGTH,
+    });
   }
-
-  return {
-    success: true,
-  };
 };
 
 const useCardOwnerInput = (initialValue: CardOwnerInput) => {
@@ -33,11 +26,9 @@ const useCardOwnerInput = (initialValue: CardOwnerInput) => {
     (e: ChangeEvent<HTMLInputElement>) => {
       const { target } = e;
 
-      checkValidator(
-        target.value,
-        validateCardOwnerName,
-        onChange.bind(this, e)
-      );
+      const { error } = tryCatch(() => validateCardOwnerName(target.value));
+
+      if (!error) onChange(e);
     },
     [value]
   );

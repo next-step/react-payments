@@ -2,26 +2,21 @@ import { ChangeEvent, useCallback, useMemo } from "react";
 
 import { CARD_VALIDATION_ERROR_MESSAGES } from "@/constants/messages/error";
 import { CARD_INPUT_VARIABLES } from "@/constants/variables";
-import { checkValidator, isNumber } from "@/helper";
+import { isNumber, tryCatch } from "@/helper";
 import { useInput } from "@/hooks";
 import { ValidationError } from "@/services/errors";
-import { ValidationResult } from "@/types";
 
 export type CardNumber = {
   [K in "num1" | "num2" | "num3" | "num4"]: string;
 };
 
-const validateCardNumberInput = (value: string): ValidationResult => {
+const validateCardNumberInput = (value: string) => {
   if (!isNumber(value)) {
-    return {
-      success: false,
-      error: new ValidationError(CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER),
-    };
+    throw new ValidationError({
+      name: "INPUT_VALIDATION_ERROR",
+      message: CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER,
+    });
   }
-
-  return {
-    success: true,
-  };
 };
 
 const useCardNumberInput = (initialValue: CardNumber) => {
@@ -31,11 +26,9 @@ const useCardNumberInput = (initialValue: CardNumber) => {
     (e: ChangeEvent<HTMLInputElement>) => {
       const { target } = e;
 
-      checkValidator(
-        target.value,
-        validateCardNumberInput,
-        onChange.bind(this, e)
-      );
+      const { error } = tryCatch(() => validateCardNumberInput(target.value));
+
+      if (!error) onChange(e);
     },
     [value]
   );
