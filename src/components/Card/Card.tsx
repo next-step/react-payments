@@ -16,13 +16,12 @@ interface CardProps {
 }
 
 // TODO: 카드컴퍼니 에러가 있을 경우 테두리 깜박이기 및 문구 추가.
-// TODO: onclick이 있으면 click cursor 적용
 const Card = memo(({ cardId, disableNickname, onCardClick }: CardProps) => {
   const cardCompany = useSelectCardCompany();
 
   return (
     <ThemeSetter className="card-box flex-column-center" theme={cardCompany?.value?.theme} onClick={onCardClick}>
-      <CardWrapper>
+      <CardWrapper pointCursor={!!onCardClick}>
         <div className="card-top">{cardCompany?.value?.name}</div>
         <div className="card-middle">
           <div className="small-card__chip" />
