@@ -1,5 +1,5 @@
-import { CardFormType, CardFormInputsType, ColorType, CompanyType } from 'types';
-import { useState, useRef, useContext } from 'react';
+import { CardFormType, ColorType, CompanyType } from 'types';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PaymentsContext } from 'context/Payments';
 import { isCardFormValidation } from 'utils/InputValidation';
@@ -8,31 +8,31 @@ import uuid from 'react-uuid';
 const initialCardFormState: CardFormType = {
   cardNumbers: {
     text: '',
-    isValid: false,
+    isValid: true,
   },
   expireDate: {
     month: {
       text: 'MM',
-      isValid: false,
+      isValid: true,
     },
     year: {
       text: 'YY',
-      isValid: false,
+      isValid: true,
     },
   },
   password: {
     first: {
       text: '',
-      isValid: false,
+      isValid: true,
     },
     end: {
       text: '',
-      isValid: false,
+      isValid: true,
     },
   },
   cvc: {
     text: '',
-    isValid: false,
+    isValid: true,
   },
   ownerName: {
     text: 'empty',

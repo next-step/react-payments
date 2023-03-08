@@ -18,6 +18,10 @@ const CardSecurityInput = ({ fontColor, setSecurityCodeText, refs, isValid }: Ca
     if (!refs.cvc.ref) return;
     const securityCode = refs.cvc.ref.value;
     refs.cvc.ref.value = changeCardSecurityInput(securityCode);
+    const isNext = isValidSecurityCode(securityCode);
+    if (isNext) {
+      refs.password.start.ref?.focus();
+    }
     setSecurityCodeText((prev) => ({
       ...prev,
       cvc: {
@@ -25,7 +29,6 @@ const CardSecurityInput = ({ fontColor, setSecurityCodeText, refs, isValid }: Ca
         isValid: isValidSecurityCode(securityCode),
       },
     }));
-    return isValidSecurityCode(securityCode) && refs.password.first.ref?.focus();
   };
 
   return (
@@ -42,9 +45,7 @@ const CardSecurityInput = ({ fontColor, setSecurityCodeText, refs, isValid }: Ca
           error={!isValid}
         />
       </Container>
-      <Wrapper>
-        {!isValid && <Text fontSize="xs" weight="bold" label="숫자 3자리 입력해주세요" fontColor="red" />}
-      </Wrapper>
+      {!isValid && <Text fontSize="xs" weight="bold" label="숫자 3자리 입력해주세요" fontColor="red" />}
     </Layout>
   );
 };
@@ -59,10 +60,7 @@ const Title = styled(Text)`
   margin-bottom: 4px;
   color: #525252;
 `;
-const Wrapper = styled.div`
-  margin-top: 3px;
-  padding-left: 3px;
-`;
+
 const Container = styled.div`
   width: 25%;
 `;

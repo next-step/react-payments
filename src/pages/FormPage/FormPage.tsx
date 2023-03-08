@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import CompanyList from 'components/CompanyList/CompanyList';
 import Card from 'components/common/Card/Card';
@@ -10,8 +11,6 @@ import IconButton from '../../components/common/IconButton/IconButton';
 import Text from 'components/common/Text/Text';
 import Button from 'components/common/Button/Button';
 import useFormPage from 'hooks/useFormPage';
-
-import { useEffect } from 'react';
 import useHandleFormInput from 'hooks/useHandleFormInput';
 import Modal from 'components/common/Modal/Modal';
 import { useModal } from 'context/Modal';

@@ -46,7 +46,11 @@ const CardExpirationDateInput = ({
     if (!refs.expireDate.month.ref || !refs.expireDate.year.ref) return;
     const month = changeMonth(refs.expireDate.month.ref.value);
     const year = changeYear(refs.expireDate.year.ref.value);
+    const isNext = isValidExpirationYear(year);
     refs.expireDate.year.ref.value = year;
+    if (isNext) {
+      refs.ownerName.ref?.focus();
+    }
     setExprireDateText((prev) => ({
       ...prev,
       expireDate: {
@@ -60,8 +64,8 @@ const CardExpirationDateInput = ({
         },
       },
     }));
-    return isValidExpirationYear(year) && refs.ownerName.ref?.focus();
   };
+
   return (
     <Layout>
       <Title fontSize="xs" weight="bold" label="만료일" />
@@ -75,7 +79,7 @@ const CardExpirationDateInput = ({
           fontColor={fontColor}
           active={true}
           error={!isValidMonth}
-        ></Input>
+        />
         <Input
           type="text"
           placeholder="YY"
@@ -85,13 +89,11 @@ const CardExpirationDateInput = ({
           fontColor={fontColor}
           active={true}
           error={!isValidYear}
-        ></Input>
+        />
       </Container>
-      <Wrapper>
-        {!isValid && (
-          <Text fontSize="xs" weight="bold" label="2자리씩 입력하세요. MM (01~12) / YY (01~99) " fontColor="red" />
-        )}
-      </Wrapper>
+      {!isValid && (
+        <Text fontSize="xs" weight="bold" label="2자리씩 입력하세요. MM (01~12) / YY (01~99) " fontColor="red" />
+      )}
     </Layout>
   );
 };
@@ -104,10 +106,7 @@ const Title = styled(Text)`
   margin-bottom: 4px;
   color: #525252;
 `;
-const Wrapper = styled.div`
-  margin-top: 3px;
-  padding-left: 3px;
-`;
+
 const Container = styled.div`
   display: flex;
   width: 50%;

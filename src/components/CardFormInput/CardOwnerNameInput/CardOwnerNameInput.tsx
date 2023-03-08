@@ -19,21 +19,13 @@ const CardOwnerNameInput = ({ setOwnerNameText, fontColor, refs }: CardOwnerName
     const ownerName = changeOwnerName(refs.ownerName.ref.value);
     refs.ownerName.ref.value = ownerName;
     setInputLength(ownerName.length);
-    return !ownerName.length
-      ? setOwnerNameText((prev) => ({
-          ...prev,
-          ownerName: {
-            text: 'Name',
-            isValid: true,
-          },
-        }))
-      : setOwnerNameText((prev) => ({
-          ...prev,
-          ownerName: {
-            text: ownerName,
-            isValid: true,
-          },
-        }));
+    return setOwnerNameText((prev) => ({
+      ...prev,
+      ownerName: {
+        text: ownerName.length ? ownerName : 'Name',
+        isValid: true,
+      },
+    }));
   };
   return (
     <Layout>

@@ -91,7 +91,7 @@ export type CardFormInputsType = {
     ref: HTMLInputElement | null;
   };
   password: {
-    first: {
+    start: {
       ref: HTMLInputElement | null;
     };
     end: {

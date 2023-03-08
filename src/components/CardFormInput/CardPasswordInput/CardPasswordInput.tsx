@@ -1,7 +1,6 @@
 import Text from 'components/common/Text/Text';
 import styled from 'styled-components';
 import Input from '../../common/Input/Input';
-import { useRef } from 'react';
 import { changePassword } from 'utils/InputChange';
 import { ColorType, CardFormType, CardFormInputsType } from 'types';
 import { isValidPasswordNumber } from 'utils/InputValidation';
@@ -18,18 +17,18 @@ const CardPasswordInput = ({ refs, fontColor, setPasswordText, isValidFirst, isV
   const isValid = isValidFirst && isValidEnd;
 
   const handleInput = () => {
-    if (!refs.password.first.ref || !refs.password.end.ref) return;
-    const passWordFirst = changePassword(refs.password.first.ref.value);
+    if (!refs.password.start.ref || !refs.password.end.ref) return;
+    const passWordStart = changePassword(refs.password.start.ref.value);
     const passWordEnd = changePassword(refs.password.end.ref.value);
-    refs.password.first.ref.value = passWordFirst;
+    refs.password.start.ref.value = passWordStart;
     refs.password.end.ref.value = passWordEnd;
 
     setPasswordText((prev) => ({
       ...prev,
       password: {
         first: {
-          text: passWordFirst,
-          isValid: isValidPasswordNumber(passWordFirst),
+          text: passWordStart,
+          isValid: isValidPasswordNumber(passWordStart),
         },
         end: {
           text: passWordEnd,
@@ -47,7 +46,7 @@ const CardPasswordInput = ({ refs, fontColor, setPasswordText, isValidFirst, isV
           theme="primary"
           type="text"
           active={true}
-          ref={(el) => (refs.password.first.ref = el)}
+          ref={(el) => (refs.password.start.ref = el)}
           onChange={handleInput}
           fontColor={fontColor}
           error={!isValidFirst}
@@ -64,9 +63,7 @@ const CardPasswordInput = ({ refs, fontColor, setPasswordText, isValidFirst, isV
         <Input theme="primary" type="text" active={false} />
         <Input theme="primary" type="text" active={false} />
       </Container>
-      <Wrapper>
-        {!isValid && <Text fontSize="xs" weight="bold" label="숫자 1자리씩 입력해주세요" fontColor="red" />}
-      </Wrapper>
+      {!isValid && <Text fontSize="xs" weight="bold" label="숫자 1자리씩 입력해주세요" fontColor="red" />}
     </Layout>
   );
 };
@@ -84,10 +81,6 @@ const Container = styled.div`
   display: flex;
   width: 70%;
   gap: 5px;
-`;
-const Wrapper = styled.div`
-  margin-top: 3px;
-  padding-left: 3px;
 `;
 
 export default CardPasswordInput;

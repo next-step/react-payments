@@ -16,6 +16,10 @@ const CardNumberInput = ({ isValid, setCardNumberText, fontColor, refs }: CardNu
     if (!refs.cardNumbers.ref) return;
     const cardNumbers = changeCardNumber(refs.cardNumbers.ref.value);
     refs.cardNumbers.ref.value = cardNumbers;
+    const isNext = isValidCardNumber(cardNumbers);
+    if (isNext) {
+      refs.expireDate.month.ref?.focus();
+    }
     setCardNumberText((prev) => ({
       ...prev,
       cardNumbers: {
@@ -23,27 +27,22 @@ const CardNumberInput = ({ isValid, setCardNumberText, fontColor, refs }: CardNu
         isValid: isValidCardNumber(cardNumbers),
       },
     }));
-
-    return isValidCardNumber(cardNumbers) && refs.expireDate.month.ref?.focus();
   };
 
   return (
     <Layout>
       <Title fontSize="xs" weight="bold" label="카드 번호" />
-      <Wrapper>
-        <Input
-          ref={(el) => (refs.cardNumbers.ref = el)}
-          type="text"
-          theme="primary"
-          onChange={handleInput}
-          fontColor={fontColor}
-          active={true}
-          error={!isValid}
-        ></Input>
-      </Wrapper>
-      <Wrapper>
-        {!isValid && <Text fontSize="xs" weight="bold" label="카드 번호는 12자리여야 합니다." fontColor="red" />}
-      </Wrapper>
+      <Input
+        ref={(el) => (refs.cardNumbers.ref = el)}
+        type="text"
+        theme="primary"
+        onChange={handleInput}
+        fontColor={fontColor}
+        active={true}
+        error={!isValid}
+      />
+
+      {!isValid && <Text fontSize="xs" weight="bold" label="카드 번호는 12자리여야 합니다." fontColor="red" />}
     </Layout>
   );
 };
@@ -56,10 +55,6 @@ const Title = styled(Text)`
   align-items: center;
   margin-bottom: 4px;
   color: #525252;
-`;
-const Wrapper = styled.div`
-  margin-top: 3px;
-  padding-left: 3px;
 `;
 
 export default CardNumberInput;

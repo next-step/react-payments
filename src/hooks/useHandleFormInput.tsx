@@ -22,7 +22,7 @@ const useHandleFormInput = () => {
       ref: inputRefs.current[4],
     },
     password: {
-      first: {
+      start: {
         ref: inputRefs.current[5],
       },
       end: {
