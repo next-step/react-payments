@@ -1,4 +1,4 @@
-import { InputStateType, CardNumber, CardOwner, ExpireDate, Password, SecurityCode } from '@/types/types';
+import { InputStateType, CardNumber, CardOwner, ExpireDate, Password, SecurityCode } from '@/types';
 
 export type CardNumbersState = Omit<InputStateType<CardNumber>, 'placeholder'>[];
 
