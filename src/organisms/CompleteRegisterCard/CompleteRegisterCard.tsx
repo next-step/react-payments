@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, FormEventHandler } from 'react'
+import React, { FormEvent } from 'react'
 import { UI_SIZE, UI_VARIANT } from 'constants/ui'
 import { Card } from 'components/ui/Card'
 import { Button } from 'components/ui/Button'

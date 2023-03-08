@@ -1,0 +1,19 @@
+.card-box-wrap {
+  position: relative;
+}
+
+.card-box-wrap:hover .card-delete-btn {
+  visibility: visible;
+}
+
+.card-delete-btn {
+  background-color: transparent;
+  border: 0;
+  color: var(--color-text);
+  font-size: 24px;
+  position: absolute;
+  top: 0;
+  right: 50px;
+  visibility: hidden;
+  cursor: pointer;
+}

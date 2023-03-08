@@ -7,14 +7,24 @@ import { FlexMainTemplate } from 'templates/FlexMainTemplate'
 type PaymentMainProps = {
   onClick: (card: AddOrUpdateCardType) => void
   cards: PaymentCard[]
+  onClickDeleteBtn: (id: string) => void
 }
 
-const PaymentMain: React.FC<PaymentMainProps> = ({ onClick, cards }) => {
+const PaymentMain: React.FC<PaymentMainProps> = ({
+  onClick,
+  cards,
+  onClickDeleteBtn,
+}) => {
   return (
     <>
       <Header title='보유 카드' />
       <FlexMainTemplate>
-        <CardList cards={cards} onClick={onClick} isIncludeAddCardView />
+        <CardList
+          cards={cards}
+          onClick={onClick}
+          isIncludeAddCardView
+          onClickDeleteBtn={onClickDeleteBtn}
+        />
       </FlexMainTemplate>
     </>
   )

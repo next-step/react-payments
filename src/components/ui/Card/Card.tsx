@@ -10,6 +10,7 @@ type CardProps = {
   isShowNickname?: boolean
   onClick?: (card: AddOrUpdateCardType) => void
   isEmptyCardView?: boolean
+  onClickDeleteBtn?: (id: string) => void
 }
 
 const Card: React.FC<CardProps> = ({

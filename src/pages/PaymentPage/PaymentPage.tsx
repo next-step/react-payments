@@ -35,6 +35,13 @@ const PaymentPage: React.FC = () => {
     return onEditEnd()
   }
 
+  const onDeleteCard = (cardId: string) => {
+    dispatch({
+      type: CARD_REDUCER_ACTION_TYPE.DELETE,
+      payload: { id: cardId },
+    })
+  }
+
   return (
     <DialogProvider>
       {selectCard ? (
@@ -44,7 +51,11 @@ const PaymentPage: React.FC = () => {
           submitCard={onUpdateCardList}
         />
       ) : (
-        <PaymentMain onClick={onEditStart} cards={cards} />
+        <PaymentMain
+          onClick={onEditStart}
+          cards={cards}
+          onClickDeleteBtn={onDeleteCard}
+        />
       )}
     </DialogProvider>
   )
