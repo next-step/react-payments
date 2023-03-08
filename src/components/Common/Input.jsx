@@ -1,7 +1,7 @@
 const Input = ({
   type = 'text',
   maxLength,
-  minLength = 0,
+  minLength = undefined,
   required,
   onChange,
   value,
