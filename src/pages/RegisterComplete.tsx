@@ -20,7 +20,7 @@ export default function RegisterComplete() {
   }, []);
 
   const endRegisterCard = () => {
-    const { value } = nicknameRef.current;
+    const value = nicknameRef.current.value.trim();
     const nickName = value.length ? value : cardData.cardCompany;
     const updateCardData = cardList.map((item) => ({
       ...item,
