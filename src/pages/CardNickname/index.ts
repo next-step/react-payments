@@ -1,1 +1,1 @@
-export * from './CardNickname';
+export * from './CardNicknameSetter';
