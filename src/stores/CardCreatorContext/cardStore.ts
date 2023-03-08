@@ -9,10 +9,12 @@ import {
   cardOwnersInit,
   securityCodesInit,
   passwordsInit,
+  cardNicknameInit,
 } from './CardCreatorStates';
 
 type Store = {
   cardCompany: CardCompanyModel | null;
+  cardNickname: typeof cardNicknameInit;
   cardNumbers: typeof cardNumbersInit;
   expireDates: typeof expireDatesInit;
   cardOwners: typeof cardOwnersInit;
@@ -24,6 +26,7 @@ export type Actions = keyof Store;
 
 export const initialCardStore: Store = {
   cardCompany: null,
+  cardNickname: cardNicknameInit,
   cardNumbers: cardNumbersInit,
   expireDates: expireDatesInit,
   cardOwners: cardOwnersInit,
@@ -31,9 +34,13 @@ export const initialCardStore: Store = {
   securityCodes: securityCodesInit,
 };
 
+type CardNickNamePayload = { value: string };
 type CardInputPayload = { index: number; value: string };
 
-export function reducer(store: Store, action: { type: Actions; payload: CardInputPayload | CardCompanyModel }) {
+export function reducer(
+  store: Store,
+  action: { type: Actions; payload: CardInputPayload | CardCompanyModel | CardNickNamePayload }
+) {
   const { type, payload } = action;
 
   switch (type) {
@@ -42,6 +49,16 @@ export function reducer(store: Store, action: { type: Actions; payload: CardInpu
       if (store.cardCompany?.theme === cardCompanyPayload.theme) return store;
 
       store.cardCompany = cardCompanyPayload;
+      break;
+    }
+    case 'cardNickname': {
+      const { value } = payload as CardNickNamePayload;
+      if (store.cardNickname.value === value) return store;
+
+      store.cardNickname = {
+        ...store.cardNickname,
+        value,
+      };
       break;
     }
     case 'cardNumbers':
@@ -71,6 +88,7 @@ type CardReducerType = ReducerReturnType<typeof reducer>;
 type CardStore = CardReducerType[0];
 type Dispatch = CardReducerType[1];
 type CardCompanyStoreContextType = CardStore['cardCompany'] | null;
+type CardNicknameStoreContextType = CardStore['cardNickname'] | null;
 type CardNumbersStoreContextType = CardStore['cardNumbers'] | null;
 type ExpireDatesStoreContextType = CardStore['expireDates'] | null;
 type CardOwnersStoreContextType = CardStore['cardOwners'] | null;
@@ -79,6 +97,7 @@ type SecurityCodesStoreContextType = CardStore['securityCodes'] | null;
 type ApiContextType = DispatchContext<Dispatch>;
 
 export const CardCompanyStoreContext = createContext<CardCompanyStoreContextType>(null);
+export const CardNicknameStoreContext = createContext<CardNicknameStoreContextType>(null);
 export const CardNumberStoreContext = createContext<CardNumbersStoreContextType>(null);
 export const ExpireDatesStoreContext = createContext<ExpireDatesStoreContextType>(null);
 export const CardOwnersStoreContext = createContext<CardOwnersStoreContextType>(null);
