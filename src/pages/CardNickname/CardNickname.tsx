@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Card } from '@/components/Card';
 import { NicknameInput } from './NicknameInput';
+import { CardNicknameSubmitButton } from './CardNicknameSubmitButton';
 
 export function CardNickname() {
   // dynamic route가 있다면 그 id를 가지고 localhost에서 가져온다.
@@ -20,9 +21,7 @@ export function CardNickname() {
 
       <NicknameInput />
 
-      <div className="button-box mt-50">
-        <span className="button-text">다음</span>
-      </div>
+      <CardNicknameSubmitButton />
     </div>
   );
 }
