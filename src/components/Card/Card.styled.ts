@@ -19,3 +19,8 @@ export const CardWrapper = styled('div', {
     },
   },
 });
+
+export const ErrorMessage = styled('span', {
+  color: 'red',
+  fontWeight: 'bold',
+});

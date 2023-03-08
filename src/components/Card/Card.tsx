@@ -2,12 +2,13 @@ import React, { memo, MouseEvent, ReactElement } from 'react';
 
 import { ThemeSetter } from '@/components/ThemeSetter';
 import { useSelectCardCompany } from '@/stores/CardCreatorContext';
+import { useErrorContext } from '@/pages/CardCreator/InputComponents/hooks/useErrorContext';
 
 import { CardNumbers } from './CardNumbers';
 import { CardOwnerName } from './CardOwnerName';
 import { CardExpireDate } from './CardExpireDate';
 import { CardNickname } from './CardNickname';
-import { CardWrapper } from './Card.styled';
+import { CardWrapper, ErrorMessage } from './Card.styled';
 
 interface CardProps {
   disableNickname?: boolean;
@@ -15,9 +16,15 @@ interface CardProps {
   onCardClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
-// TODO: 카드컴퍼니 에러가 있을 경우 테두리 깜박이기 및 문구 추가.
 const Card = memo(({ disableNickname, additionalIcon, onCardClick }: CardProps) => {
   const cardCompany = useSelectCardCompany();
+
+  const errorMessage = useErrorContext(
+    {
+      inValid: '카드 회사를 선택해주세요.',
+    },
+    [{ errorType: 'cardCompany', messageType: 'inValid' }]
+  );
 
   return (
     <ThemeSetter className="card-box flex-column-center" theme={cardCompany?.value?.theme} onClick={onCardClick}>
@@ -36,6 +43,7 @@ const Card = memo(({ disableNickname, additionalIcon, onCardClick }: CardProps) 
         {additionalIcon}
       </CardWrapper>
       {disableNickname || <CardNickname />}
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </ThemeSetter>
   );
 });
