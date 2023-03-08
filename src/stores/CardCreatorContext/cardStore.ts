@@ -35,32 +35,21 @@ export const initialCardStore: CardStore = {
   securityCodes: securityCodesInit,
 };
 
-type CardNickNamePayload = { value: string };
+type CardNickNamePayload = { value: string | CardCompanyModel };
 type CardInputPayload = { index: number; value: string };
 
-export function reducer(
-  store: CardStore,
-  action: { type: Actions; payload: CardInputPayload | CardCompanyModel | CardNickNamePayload }
-) {
+export function reducer(store: CardStore, action: { type: Actions; payload: CardInputPayload | CardNickNamePayload }) {
   const { type, payload } = action;
 
   switch (type) {
-    case 'cardCompany': {
-      const cardCompanyPayload = payload as CardCompanyModel;
-      if (store.cardCompany?.value?.theme === cardCompanyPayload.theme) return store;
-
-      store.cardCompany = {
-        ...store.cardCompany,
-        value: cardCompanyPayload,
-      };
-      break;
-    }
+    case 'cardCompany':
     case 'cardNickname': {
       const { value } = payload as CardNickNamePayload;
-      if (store.cardNickname.value === value) return store;
+      if (store[type].value === value) return store;
 
-      store.cardNickname = {
-        ...store.cardNickname,
+      store[type] = {
+        ...store[type],
+        // @ts-ignore
         value,
       };
       break;

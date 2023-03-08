@@ -25,7 +25,6 @@ export function useCardListWithLocalStorage() {
   const getCardFromStorage = useCallback(
     (cardId: string, fallback?: () => void): void => {
       const card = cardList[cardId] as CardStoreJSON | undefined;
-
       if (!card) {
         fallback && fallback();
         return;
@@ -33,10 +32,6 @@ export function useCardListWithLocalStorage() {
 
       Object.entries(card).forEach(([key, cardInfo]) => {
         const type = key as keyof CardStoreJSON;
-        if (type === 'cardCompany') {
-          // @ts-ignore
-          cardContextApis?.dispatch({ type, payload: cardInfo });
-        }
 
         if (Array.isArray(cardInfo)) {
           const cardInfos = cardInfo;
@@ -46,7 +41,7 @@ export function useCardListWithLocalStorage() {
         }
 
         // @ts-ignore
-        cardContextApis?.dispatch({ type, payload: { index, ...cardInfo } });
+        cardContextApis?.dispatch({ type, payload: { index: 0, ...cardInfo } });
       });
     },
     [cardList, cardContextApis]
