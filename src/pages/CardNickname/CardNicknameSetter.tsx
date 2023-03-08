@@ -3,11 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Card } from '@/components/Card';
 import { useValidateCardInfos } from '@/hooks/useValidateCardInfos';
+import { routes } from '@/routes';
 
 import { NicknameInput } from './NicknameInput';
 import { CardNicknameSubmitButton } from './CardNicknameSubmitButton';
 import { useCardListWithLocalStorage } from './hooks/useCardListWithLocalStorage';
-import { routes } from '@/routes';
 
 export function CardNicknameSetter() {
   const { cardId } = useParams();
@@ -20,7 +20,10 @@ export function CardNicknameSetter() {
   useEffect(
     function checkIfCorrectPageAccess() {
       if (cardId) {
-        getCardFromStorage(cardId);
+        getCardFromStorage(cardId, () => {
+          alert('해당 카드가 존재하지 않습니다.');
+          navigate(routes.home);
+        });
         return;
       }
 
