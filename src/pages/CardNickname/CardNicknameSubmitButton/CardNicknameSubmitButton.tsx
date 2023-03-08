@@ -2,12 +2,30 @@ import React, { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
-import { useCardContextApiSelector, useSelectCardCompany, useSelectCardNickname } from '@/stores/CardCreatorContext';
+import {
+  useCardContextApiSelector,
+  useSelectCardCompany,
+  useSelectCardNickname,
+  useSelectCardNumbers,
+  useSelectCardOwners,
+  useSelectExpireDates,
+  useSelectPasswords,
+  useSelectSecurityCodes,
+} from '@/stores/CardCreatorContext';
+
+import { useCardListWithLocalStorage } from '../hooks/useCardListWithLocalStorage';
 
 export function CardNicknameSubmitButton() {
   const cardNickname = useSelectCardNickname();
   const cardCompany = useSelectCardCompany();
+  const cardNumbers = useSelectCardNumbers();
+  const expireDates = useSelectExpireDates();
+  const cardOwners = useSelectCardOwners();
+  const passwords = useSelectPasswords();
+  const securityCodes = useSelectSecurityCodes();
   const apis = useCardContextApiSelector();
+
+  const { setCardInLocalStorage } = useCardListWithLocalStorage();
 
   const handleSubmitButtonClick = (e: MouseEvent<HTMLAnchorElement>) => {
     const { value, checkIsValid } = cardNickname!;
@@ -17,11 +35,23 @@ export function CardNicknameSubmitButton() {
       return;
     }
 
-    if (!value) {
-      apis?.dispatch({ type: 'cardNickname', payload: { value: cardCompany!.name } });
+    if (!cardNumbers || !expireDates || !cardOwners || !passwords || !securityCodes) {
+      alert('카드 정보를 모두 입력해주세요.');
+      return;
     }
 
+    const newCardNicknameValue = !value ? cardCompany!.name : value;
+
     // TODO: randomId를 달고 localhost에 저장, dynamicRoute가 있는 경우엔 기존것을 그대로 사용
+    setCardInLocalStorage('1', {
+      cardNickname: { ...cardNickname!, value: newCardNicknameValue },
+      cardCompany,
+      cardNumbers,
+      expireDates,
+      cardOwners,
+      passwords,
+      securityCodes,
+    });
   };
 
   return (
