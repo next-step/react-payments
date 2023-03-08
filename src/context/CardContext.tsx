@@ -49,15 +49,7 @@ type Action =
       nickname: string;
     }
   | {
-      type: 'SET_INIT';
-      digits: DigitType;
-      expire: string;
-      name: string;
-      cvc: string;
-      passwords: { password1: string; password2: string };
-      company: string;
-      nickname: string;
-      createdDate: number;
+      type: 'INIT';
     };
 
 type CardDispatchType = Dispatch<Action>;
@@ -121,17 +113,8 @@ const reducer = (state: CardStateType, action: Action): CardStateType => {
         ...state,
         nickname: action.nickname,
       };
-    case 'SET_INIT':
-      return {
-        digits: action.digits,
-        expire: action.expire,
-        name: action.name,
-        cvc: action.cvc,
-        passwords: action.passwords,
-        company: action.company,
-        nickname: action.nickname,
-        createdDate: action.createdDate,
-      };
+    case 'INIT':
+      return { ...initState };
 
     default:
       throw new Error('Unhandled action');

@@ -38,15 +38,7 @@ const CardRegisterComplete = () => {
     dispatchCardList(updatedCardList);
     navigate('/');
     dispatchCard({
-      type: 'SET_INIT',
-      digits: { digit1: '', digit2: '', digit3: '', digit4: '' },
-      expire: '',
-      name: '',
-      cvc: '',
-      passwords: { password1: '', password2: '' },
-      company: '',
-      nickname: '',
-      createdDate: 0,
+      type: 'INIT',
     });
   };
 
