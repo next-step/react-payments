@@ -1,4 +1,4 @@
-import React, { memo, MouseEvent } from 'react';
+import React, { memo, MouseEvent, useEffect } from 'react';
 
 import { ThemeSetter } from '@/components/ThemeSetter';
 import { useSelectCardCompany } from '@/stores/CardCreatorContext';
@@ -10,13 +10,12 @@ import { CardNickname } from './CardNickname';
 import { CardWrapper } from './Card.styled';
 
 interface CardProps {
-  cardId?: string;
   disableNickname?: boolean;
   onCardClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
 // TODO: 카드컴퍼니 에러가 있을 경우 테두리 깜박이기 및 문구 추가.
-const Card = memo(({ cardId, disableNickname, onCardClick }: CardProps) => {
+const Card = memo(({ disableNickname, onCardClick }: CardProps) => {
   const cardCompany = useSelectCardCompany();
 
   return (

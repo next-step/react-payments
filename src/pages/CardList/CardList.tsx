@@ -27,7 +27,6 @@ function CardList() {
       {sortCardListToDescendingOrderOfKey.map(([key, val]) => (
         <CardInfoProvider key={key} value={val}>
           <Card
-            cardId={key}
             onCardClick={() => {
               navigate(routes.createCardNickname(key));
             }}
