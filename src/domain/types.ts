@@ -13,7 +13,6 @@ export interface ICard {
 }
 
 export interface ICardDTO extends ICard {
-  index?: number;
   cardPassword?: number;
   cardSecurityCode?: number;
   nickname?: string;

@@ -6,10 +6,11 @@ import { cardRepository } from '../repositories';
 import { useNavigate } from 'react-router-dom';
 import { useCardDispatch, useCardState } from '../provider/card/hooks';
 import { invalidCard } from '../domain/validator';
-import { ICard } from '../domain/types';
 import { VALIDATE_MESSAGE } from '../constants';
+import { useCardRegister } from './hooks';
 
 export default function RegisterCard() {
+  const { findCard, cardList } = useCardRegister();
   const cardState = useCardState();
   const cardDispatch = useCardDispatch();
   const navigate = useNavigate();
@@ -42,8 +43,7 @@ export default function RegisterCard() {
       return;
     }
 
-    const cardList: ICard[] = cardRepository.getItem();
-    const findDuplicateCard = cardList.find((item) => item.cardNumber === cardState.cardNumber);
+    const findDuplicateCard = findCard(cardState.cardNumber);
 
     if (findDuplicateCard) {
       alert(VALIDATE_MESSAGE.DUPLICATE_CARD);

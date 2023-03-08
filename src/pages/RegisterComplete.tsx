@@ -2,14 +2,14 @@ import { cardRepository } from '../repositories';
 import { useEffect, useRef } from 'react';
 import { Button, Card, Input, PageTitle } from '../components/atoms';
 import { useNavigate } from 'react-router-dom';
-import { useCard } from '../hooks';
+import { useCardRegister } from './hooks';
 
 const MAX_LENGTH = 10;
 
 export default function RegisterComplete() {
   const navigate = useNavigate();
-  const { cardNumber, cardList, getCardInfo } = useCard();
-  const cardData = getCardInfo();
+  const { cardNumber, cardList, findCard } = useCardRegister();
+  const cardData = findCard(cardNumber);
   const nicknameRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function RegisterComplete() {
 
   return (
     <div className="app flex-column-center">
-      <PageTitle title="카드등록이 완료되었습니다."></PageTitle>
+      <PageTitle title="카드등록이 완료되었습니다."/>
       <Card {...cardData} type="big"/>
       <Input
         ref={nicknameRef}
