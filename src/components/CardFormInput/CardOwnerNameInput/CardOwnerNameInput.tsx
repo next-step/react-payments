@@ -1,7 +1,7 @@
 import Text from 'components/common/Text/Text';
 import styled from 'styled-components';
 import Input from '../../common/Input/Input';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { changeOwnerName } from 'utils/InputChange';
 import { ColorType, CardFormType, CardFormInputsType } from 'types';
 

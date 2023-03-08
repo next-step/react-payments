@@ -13,11 +13,12 @@ import useFormPage from 'hooks/useFormPage';
 import useModal from '../../hooks/useModal';
 import { useEffect } from 'react';
 import useHandleFormInput from 'hooks/useHandleFormInput';
+import Modal from 'components/common/Modal/Modal';
 
 const FormPage = () => {
   const { state, setState, handleCompanyList, handleBackButton, handleSubmit } = useFormPage();
   const { cardFormInputs } = useHandleFormInput();
-  const { isOpenModal, setIsOpenModal } = useModal();
+  const { isOpenModal, setIsOpenModal } = useModal(false);
 
   useEffect(() => {
     if (state.company.isValid && state.color.isValid) {
@@ -32,7 +33,11 @@ const FormPage = () => {
         <Text fontSize="lg" weight="bold" label="카드추가" />
       </Header>
       <div>
-        {isOpenModal && <CompanyList onSelectedCompany={handleCompanyList} />}
+        {isOpenModal && (
+          <Modal>
+            <CompanyList onSelectedCompany={handleCompanyList} />
+          </Modal>
+        )}
         <Card
           type="primary"
           onClick={() => setIsOpenModal(true)}
