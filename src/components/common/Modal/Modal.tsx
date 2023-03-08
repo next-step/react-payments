@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useRef } from 'react';
+import { useModal } from 'context/Modal';
 
 interface ModalProps {
   children: ReactElement;
 }
 
 const Modal = ({ children }: ModalProps) => {
-  return <Layout>{children}</Layout>;
+  const modalCtx = useModal();
+  return modalCtx.isOpen ? <Layout>{children}</Layout> : <></>;
 };
 
 export default Modal;

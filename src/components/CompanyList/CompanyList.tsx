@@ -1,13 +1,32 @@
 import Dot from 'components/common/Dot/Dot';
 import styled from 'styled-components';
-import { ReactEventHandler } from 'react';
+import { ReactEventHandler, useRef, useEffect } from 'react';
+import { useModal } from 'context/Modal';
+
 export type CompanyListProps = {
   onSelectedCompany: ReactEventHandler<HTMLDivElement>;
 };
 
 export const CompanyList = ({ onSelectedCompany }: CompanyListProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const modalCtx = useModal();
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutside);
+    };
+  }, []);
+
+  const handleOutside = (event) => {
+    if (!ref.current?.contains(event.target)) {
+      modalCtx.close();
+    }
+  };
+
   return (
-    <Layout>
+    <Layout ref={ref}>
       <Container>
         <Dot color="red" value="하나카드" onClick={onSelectedCompany} />
         <Dot color="pink" value="국민카드" onClick={onSelectedCompany} />

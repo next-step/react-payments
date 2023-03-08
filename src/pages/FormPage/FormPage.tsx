@@ -10,19 +10,20 @@ import IconButton from '../../components/common/IconButton/IconButton';
 import Text from 'components/common/Text/Text';
 import Button from 'components/common/Button/Button';
 import useFormPage from 'hooks/useFormPage';
-import useModal from '../../hooks/useModal';
+
 import { useEffect } from 'react';
 import useHandleFormInput from 'hooks/useHandleFormInput';
 import Modal from 'components/common/Modal/Modal';
+import { useModal } from 'context/Modal';
 
 const FormPage = () => {
   const { state, setState, handleCompanyList, handleBackButton, handleSubmit } = useFormPage();
   const { cardFormInputs } = useHandleFormInput();
-  const { isOpenModal, setIsOpenModal } = useModal(false);
+  const modalCtx = useModal();
 
   useEffect(() => {
     if (state.company.isValid && state.color.isValid) {
-      setIsOpenModal(false);
+      modalCtx.close();
     }
   }, [state.company, state.color]);
 
@@ -33,14 +34,13 @@ const FormPage = () => {
         <Text fontSize="lg" weight="bold" label="카드추가" />
       </Header>
       <div>
-        {isOpenModal && (
-          <Modal>
-            <CompanyList onSelectedCompany={handleCompanyList} />
-          </Modal>
-        )}
+        <Modal>
+          <CompanyList onSelectedCompany={handleCompanyList} />
+        </Modal>
+
         <Card
           type="primary"
-          onClick={() => setIsOpenModal(true)}
+          onClick={modalCtx.show}
           color={state.color.text}
           company={state.company.text}
           size="small"
