@@ -1,48 +1,20 @@
-import React, { MouseEvent, useContext } from 'react';
+import React, { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
-import { ErrorApiContext } from '@/stores/ErrorContext';
-import {
-  useSelectCardNumbers,
-  useSelectExpireDates,
-  useSelectCardOwners,
-  useSelectPasswords,
-  useSelectSecurityCodes,
-  useSelectCardCompany,
-} from '@/stores/CardCreatorContext';
+import { useErrorContextApiSelector } from '@/stores/ErrorContext';
+import { useValidateCardInfos } from '@/hooks/useValidateCardInfos';
 
 interface SubmitButtonProps {}
 
 // TODO: key값들 const로 정돈하기
 export function SubmitButton(_: SubmitButtonProps) {
-  const errorApis = useContext(ErrorApiContext);
+  const errorApis = useErrorContextApiSelector();
 
-  const cardCompany = useSelectCardCompany();
-  const cardNumbersStore = useSelectCardNumbers();
-  const expireDatesStore = useSelectExpireDates();
-  const cardOwnersStore = useSelectCardOwners();
-  const passwordsStore = useSelectPasswords();
-  const securityCodesStore = useSelectSecurityCodes();
-
-  const inputs = [
-    createInputObject('cardCompany', cardCompany),
-    createInputObject('cardNumbers', cardNumbersStore),
-    createInputObject('expireDates', expireDatesStore),
-    createInputObject('cardOwners', cardOwnersStore),
-    createInputObject('passwords', passwordsStore),
-    createInputObject('securityCodes', securityCodesStore),
-  ];
+  const error = useValidateCardInfos();
 
   // select된 inputState가 변하면 아래 함수도 새로 만들어져야 하므로, useCallback은 적용하지 않음.
   const handleSubmitButtonClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    const error = inputs.find(({ store }) => {
-      if (Array.isArray(store)) {
-        return store?.some(({ value, checkIsValid }) => !checkIsValid(value));
-      }
-      return !store?.checkIsValid(store.value);
-    });
-
     if (error) {
       e.preventDefault();
 
@@ -59,8 +31,4 @@ export function SubmitButton(_: SubmitButtonProps) {
       </Link>
     </div>
   );
-}
-
-function createInputObject<T>(type: string, store: T): { type: string; store: T } {
-  return { type, store };
 }
