@@ -7,6 +7,7 @@ import { useCardState } from '../context/CardContext';
 import CardPreview from '../components/CardPreview';
 import { useCardListDispatch } from '../context/CardListContext';
 import styled from '@emotion/styled';
+import { ROUTE } from '../constant/route';
 
 const S = {
   TitleWrapper: styled.div`
@@ -19,27 +20,12 @@ const S = {
 
 const PaymentCardRegister = () => {
   const navigate = useNavigate();
-  const {
-    digits,
-    cvc,
-    expire,
-    name,
-    passwords,
-    company,
-    nickname,
-    createdDate,
-  } = useCardState();
+  const cardState = useCardState();
   const { addCard } = useCardListDispatch();
 
   const onClickAddCard = () => {
     addCard({
-      digits,
-      cvc,
-      expire,
-      name,
-      passwords,
-      company,
-      nickname,
+      ...cardState,
       createdDate: Date.now(),
     });
 
@@ -50,22 +36,13 @@ const PaymentCardRegister = () => {
     <>
       <S.TitleWrapper>
         <Title
-          text={'카드 추가'}
-          onClick={() => navigate('/')}
+          text="카드 추가"
+          onClick={() => navigate(ROUTE.HOME)}
           isArrow={true}
         />
       </S.TitleWrapper>
 
-      <CardPreview
-        digits={digits}
-        cvc={cvc}
-        expire={expire}
-        name={name}
-        passwords={passwords}
-        company={company}
-        nickname={nickname}
-        createdDate={createdDate}
-      />
+      <CardPreview {...cardState} />
       <CardRegisterForm />
 
       <S.ButtonWrapper>
