@@ -1,8 +1,8 @@
 import React from 'react';
 import { S } from '../styles/card';
-import { CardStateType } from '../context/CardContext';
+import { CardInfoType } from '../type/card';
 
-interface ICardPreview extends CardStateType {
+interface ICardPreview extends CardInfoType {
   onClick?: () => void;
   isCursor?: boolean;
 }

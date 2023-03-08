@@ -12,3 +12,14 @@ export const initCardList: CardInfoType[] = [
     createdDate: 9999999999999,
   },
 ];
+
+export const initCardInfo: CardInfoType = {
+  digits: { digit1: '', digit2: '', digit3: '', digit4: '' },
+  expire: '',
+  name: '',
+  cvc: '',
+  passwords: { password1: '', password2: '' },
+  company: '',
+  nickname: '',
+  createdDate: 0,
+};
