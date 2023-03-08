@@ -2,6 +2,12 @@ import React from 'react';
 import styled from '@emotion/styled';
 import { COLOR } from '../../constant/color';
 
+interface ITitle {
+  onClick?: () => void;
+  text: string;
+  isArrow?: boolean;
+}
+
 const S = {
   Title: styled.h2`
     display: flex;
@@ -14,7 +20,7 @@ const S = {
     line-height: 1;
     color: ${COLOR.BLACK};
   `,
-  SvgWrapper: styled.div<{ isArrow: boolean }>`
+  SvgWrapper: styled.div<{ isArrow: ITitle['isArrow'] }>`
     display: ${(props) => (props.isArrow ? 'block' : 'none')};
     width: 9px;
     height: auto;
@@ -25,12 +31,6 @@ const S = {
     }
   `,
 };
-
-interface ITitle {
-  onClick?: () => void;
-  text: string;
-  isArrow?: boolean;
-}
 
 const Title = ({ onClick, text, isArrow }: ITitle) => {
   return (
