@@ -15,7 +15,7 @@ import {
 } from './cardStore';
 
 interface CardInfoProviderProps {
-  value: CardStore;
+  value?: CardStore;
 }
 
 // TODO: key값에 의한 추상화 Provider로 빼기 (like jotai)
