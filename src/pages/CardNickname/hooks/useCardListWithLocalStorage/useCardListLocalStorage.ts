@@ -47,7 +47,7 @@ export function useCardListWithLocalStorage() {
     [cardList, cardContextApis]
   );
 
-  const setCardInLocalStorage = useCallback(
+  const setCardInStorage = useCallback(
     (cardId: string | number, card: CardStore) => {
       cardList[cardId] = card;
       const stringifyAbleObject = formatToStringifyAbleObject(card) as CardStoreJSON;
@@ -59,13 +59,23 @@ export function useCardListWithLocalStorage() {
     [cardList, setValueInLocalStorage]
   );
 
+  const deleteCard = useCallback(
+    (cardId: string | number) => {
+      const copyCardList = { ...cardList };
+      delete copyCardList[cardId];
+      setValueInLocalStorage(LOCAL_STORAGE_CARD_LIST_KEY, JSON.stringify({ ...copyCardList }));
+    },
+    [cardList, setValueInLocalStorage]
+  );
+
   return useMemo(
     () => ({
       cardList,
       getCardFromStorage,
-      setCardInLocalStorage,
+      setCardInStorage,
+      deleteCard,
     }),
-    [cardList, getCardFromStorage, setCardInLocalStorage]
+    [cardList, getCardFromStorage, setCardInStorage, deleteCard]
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { memo, MouseEvent, useEffect } from 'react';
+import React, { memo, MouseEvent, ReactElement } from 'react';
 
 import { ThemeSetter } from '@/components/ThemeSetter';
 import { useSelectCardCompany } from '@/stores/CardCreatorContext';
@@ -11,11 +11,12 @@ import { CardWrapper } from './Card.styled';
 
 interface CardProps {
   disableNickname?: boolean;
+  additionalIcon?: ReactElement;
   onCardClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
 // TODO: 카드컴퍼니 에러가 있을 경우 테두리 깜박이기 및 문구 추가.
-const Card = memo(({ disableNickname, onCardClick }: CardProps) => {
+const Card = memo(({ disableNickname, additionalIcon, onCardClick }: CardProps) => {
   const cardCompany = useSelectCardCompany();
 
   return (
@@ -32,6 +33,7 @@ const Card = memo(({ disableNickname, onCardClick }: CardProps) => {
             <CardExpireDate />
           </div>
         </div>
+        {additionalIcon}
       </CardWrapper>
       {disableNickname || <CardNickname />}
     </ThemeSetter>

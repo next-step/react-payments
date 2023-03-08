@@ -25,7 +25,7 @@ export function CardNicknameSubmitButton() {
   const passwords = useSelectPasswords();
   const securityCodes = useSelectSecurityCodes();
 
-  const { setCardInLocalStorage } = useCardListWithLocalStorage();
+  const { setCardInStorage } = useCardListWithLocalStorage();
 
   const handleSubmitButtonClick = (e: MouseEvent<HTMLAnchorElement>) => {
     const { value, checkIsValid } = cardNickname!;
@@ -44,7 +44,7 @@ export function CardNicknameSubmitButton() {
 
     const saveCardId = cardId || new Date().getTime();
 
-    setCardInLocalStorage(saveCardId, {
+    setCardInStorage(saveCardId, {
       cardNickname: { ...cardNickname!, value: newCardNicknameValue },
       cardCompany,
       cardNumbers,

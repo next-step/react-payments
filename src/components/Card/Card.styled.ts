@@ -1,6 +1,7 @@
 import { styled } from '@/stitches.config';
 
 export const CardWrapper = styled('div', {
+  position: 'relative',
   flexCenter: 'column',
   width: '208px',
   height: '130px',
