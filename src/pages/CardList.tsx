@@ -1,24 +1,27 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { cardRepository } from '../repositories';
-import { Button, Card, PageTitle } from '../components/atoms';
+import { Card, PageTitle } from '../components/atoms';
 import { ICardDTO } from '../domain/types';
 import { useCallback, useState } from 'react';
+import { CardItem } from '../components/molecules';
 
 export default function CardList() {
   const navigate = useNavigate();
   const [cardList, setCardList] = useState<ICardDTO[]>(
-    cardRepository.getItem().sort((a, b) => b.index - a.index)
+    cardRepository.getItem().sort((a, b) => b.cardNumber - a.cardNumber)
   );
 
-  const goRegisterComplete = useCallback((cardNumber: string) => {
+  const moveRegisterComplete = useCallback((cardNumber: string) => {
     navigate(`/register-complete?card=${cardNumber}`);
   }, []);
 
   const removeCard = useCallback((cardNumber: string) => {
-    const updateCardList = cardList.filter((item) => item.cardNumber !== cardNumber);
-    cardRepository.setItem(updateCardList);
+    setCardList((prevState) => {
+      const updateCardList = prevState.filter((item) => item.cardNumber !== cardNumber);
+      cardRepository.setItem(updateCardList);
 
-    setCardList(updateCardList);
+      return updateCardList;
+    });
   }, []);
 
   return (
@@ -29,16 +32,17 @@ export default function CardList() {
           <div className="empty-card">+</div>
         </NavLink>
       </div>
-      {cardList.map((item) => (
-        <div
-          key={item.cardNumber}
+      {cardList.map((card) => (
+        <CardItem
+          key={card.cardNumber}
+          cardNumber={card.cardNumber}
+          nickname={card.nickname}
+          buttonText="삭제"
+          onClickChildren={moveRegisterComplete}
+          onClickButton={removeCard}
         >
-          <div className="flex-column-center" onClick={() => goRegisterComplete(item.cardNumber)}>
-            <Card {...item} />
-            <span>{item.nickname}</span>
-          </div>
-          <Button onClick={() => removeCard(item.cardNumber)}>삭제</Button>
-        </div>
+          <Card {...card} />
+        </CardItem>
       ))}
     </div>
   );
