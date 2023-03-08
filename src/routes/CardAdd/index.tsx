@@ -15,6 +15,7 @@ import {
   PASSWORD_LENGTH_MAX,
   SECURITY_CODE_LENGTH_MAX,
 } from '../../constants/Card'
+
 import { useCardItemSetContext } from '../../contexts/cardContext'
 import { useCardDesign } from '../../hooks/useCardDesign'
 import { useCardNumberData } from '../../hooks/useCardNumber'
@@ -32,6 +33,7 @@ const CardAdd = () => {
   const cardSecurityCode = useCardNumberData(SECURITY_CODE_LENGTH_MAX)
   const cardPassword = useCardNumberData(PASSWORD_LENGTH_MAX)
 
+
   const isValidationCardData = () => {
     const design = cardDesign.validation
     const number = !cardNumber.validation.includes(false)
@@ -39,7 +41,7 @@ const CardAdd = () => {
     const owner = ownerName.validation
     const security = cardSecurityCode.validation[0]
     const password = cardPassword.validation[0] && cardPassword.validation[1]
-
+    
     return design && number && expiration && owner && security && password
   }
 
@@ -60,6 +62,7 @@ const CardAdd = () => {
       alert('입력한 값을 확인해주세요.')
     }
   }
+
   return (
     <div>
       <div className='root'>
