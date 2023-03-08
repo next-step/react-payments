@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
 import { Card } from '@/components/Card';
-import { ThemeProvider } from '@/components/ThemeProvider';
+import { ThemeSetter } from '@/components/ThemeSetter';
 import { useCardContextApiSelector, useSelectCardCompany } from '@/stores/CardCreatorContext';
 
 import { CardNumbersInputListPure } from './InputComponents/CardNumbersInputList';
@@ -37,7 +37,7 @@ function CardCreator() {
   );
 
   return (
-    <ThemeProvider className="app" theme={cardCompany?.theme}>
+    <ThemeSetter className="app" theme={cardCompany?.theme}>
       <h2 className="page-title">
         <Link to={routes.home} className="mr-10">{`<`}</Link> 카드 추가
       </h2>
@@ -53,7 +53,7 @@ function CardCreator() {
       <SubmitButton />
 
       <CardCompanySelectModal onCardCompanyClick={handleCardCompanySelectModalClick} />
-    </ThemeProvider>
+    </ThemeSetter>
   );
 }
 

@@ -4,6 +4,8 @@ import { CardNumbers } from './CardNumbers';
 import { CardOwnerName } from './CardOwnerName';
 import { CardExpireDate } from './CardExpireDate';
 import { CardWrapper } from './Card.styled';
+
+import { ThemeSetter } from '@/components/ThemeSetter';
 import { useSelectCardCompany } from '@/stores/CardCreatorContext';
 
 interface CardProps {
@@ -14,7 +16,7 @@ const Card = memo(({ onCardClick }: CardProps) => {
   const cardCompany = useSelectCardCompany();
 
   return (
-    <div className="card-box" onClick={onCardClick}>
+    <ThemeSetter className="card-box" theme={cardCompany?.theme} onClick={onCardClick}>
       <CardWrapper>
         <div className="card-top">{cardCompany?.name}</div>
         <div className="card-middle">
@@ -28,7 +30,7 @@ const Card = memo(({ onCardClick }: CardProps) => {
           </div>
         </div>
       </CardWrapper>
-    </div>
+    </ThemeSetter>
   );
 });
 
