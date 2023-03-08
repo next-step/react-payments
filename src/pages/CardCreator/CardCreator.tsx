@@ -30,14 +30,14 @@ function CardCreator() {
 
   const handleCardCompanySelectModalClick = useCallback(
     (cardCompany: CardCompanyModel) => {
-      apis?.dispatch({ type: 'cardCompany', payload: cardCompany });
+      apis?.dispatch({ type: 'cardCompany', payload: { value: cardCompany } });
       hideModal();
     },
     [apis, hideModal]
   );
 
   return (
-    <ThemeSetter className="app" theme={cardCompany?.theme}>
+    <ThemeSetter className="app" theme={cardCompany?.value?.theme}>
       <h2 className="page-title">
         <Link to={routes.home} className="mr-10">{`<`}</Link> 카드 추가
       </h2>
