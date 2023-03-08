@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "jest": true
   },
   "extends": [
     "eslint:recommended",
@@ -20,6 +21,7 @@
     "max-depth": 2,
     // "max-lines": ["error", 15],
     "no-var": "error",
-    "no-unused-vars": "off"
+    "no-unused-vars": "warn",
+    "no-console": "error"
   }
 }
