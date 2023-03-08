@@ -3,6 +3,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import CardPreview from '../components/CardPreview';
 import Title from '../components/common/Title';
+import { ROUTE } from '../constant/route';
 import {
   useCardListDispatch,
   useCardListState,
@@ -66,7 +67,7 @@ const PaymentCardList = () => {
             </S.CardWrapper>
           ))}
 
-        <Link to={'/register'}>
+        <Link to={ROUTE.REGISTER}>
           <div className="card-box">
             <div className="empty-card">+</div>
           </div>
