@@ -15,7 +15,7 @@ import {
   PASSWORD_LENGTH_MAX,
   SECURITY_CODE_LENGTH_MAX,
 } from '../../constants/Card'
-import { useCardITemSetContext } from '../../contexts/cardContext'
+import { useCardItemSetContext } from '../../contexts/cardContext'
 import { useCardDesign } from '../../hooks/useCardDesign'
 import { useCardNumberData } from '../../hooks/useCardNumber'
 import { useExpirationDate } from '../../hooks/useExpirationDate'
@@ -23,7 +23,7 @@ import { useOwnerName } from '../../hooks/useOwnerName'
 
 const CardAdd = () => {
   const navigate = useNavigate()
-  const setCardItem = useCardITemSetContext()
+  const setCardItem = useCardItemSetContext()
 
   const cardDesign = useCardDesign()
   const cardNumber = useCardNumberData(CARD_NUMBER_LENGTH_MAX)

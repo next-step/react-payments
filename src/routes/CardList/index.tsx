@@ -1,22 +1,14 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { CARD_NAME_LIST } from '../../constants/Card'
-import { useCardDispatchContext, useCardITemSetContext, useCardListStateContext } from '../../contexts/cardContext'
+import { useCardDispatchContext, useCardListStateContext } from '../../contexts/cardContext'
 import { changeSecretNumber } from '../../domain/changeSecretNumber'
+import { useCardStateCheck } from '../../hooks/useCardStateCheck'
 
 const CardList = () => {
   const state = useCardListStateContext()
-  const setState = useCardITemSetContext()
-  const navigate = useNavigate()
   const dispatch = useCardDispatchContext()
 
-  const currentCardStateNavigator = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const { name } = e.currentTarget
-    const findCardData = state.find((data) => data.ownerName === name)
-    if (findCardData !== undefined) {
-      setState(findCardData)
-      navigate('/card-add-complete')
-    }
-  }
+  const { stateCheckAndNaviator } = useCardStateCheck(state)
 
   return (
     <div className='root'>
@@ -26,7 +18,7 @@ const CardList = () => {
         </div>
         {state.map((item) => (
           <div key={item.ownerName}>
-            <button onClick={currentCardStateNavigator} name={item.ownerName} className='button-card'>
+            <button onClick={stateCheckAndNaviator} name={item.ownerName} className='button-card'>
               <div className='card-box'>
                 <div className={`empty-card card-color${CARD_NAME_LIST.indexOf(item.cardDesign)}`}>
                   <div className='card-name'>{item.cardDesign}</div>

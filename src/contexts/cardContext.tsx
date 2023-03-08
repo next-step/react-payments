@@ -1,6 +1,7 @@
+/* eslint-disable consistent-return */
 import { useReducer, createContext, Dispatch, ReactNode, useContext, useState, SetStateAction } from 'react'
 
-interface State {
+export interface State {
   nickName: string
   cardDesign: string
   cardNumber: { num1: string; num2: string; num3: string; num4: string }
@@ -34,7 +35,6 @@ const INIT_CARD = {
   cardPassword: { password1: '', password2: '' },
 }
 
-// eslint-disable-next-line consistent-return
 const cardReducer = (state: State[], action: Action) => {
   switch (action.type) {
     case 'CREATE':
@@ -68,7 +68,7 @@ export const useCardItemStateContext = () => {
   return itemState
 }
 
-export const useCardITemSetContext = () => {
+export const useCardItemSetContext = () => {
   const setState = useContext(CardItemSetContext)
   return setState
 }
@@ -86,5 +86,3 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
     </CardListStateContext.Provider>
   )
 }
-
-// context 두개로 쪼개서 하나는 객체 관리하고 하나는 배열 관리하도록
