@@ -1,4 +1,4 @@
-import ErrorBoundary from "pages/Error/ErrorBoundary";
+import ErrorBoundary from "pages/error/ErrorBoundary";
 import { PaymentsProvider } from "pages/payments/modules/payments/PaymentsContext";
 import { RouterProvider } from "react-router";
 import router from "routes";
