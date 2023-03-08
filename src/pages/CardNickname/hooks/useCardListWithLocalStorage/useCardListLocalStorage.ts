@@ -23,8 +23,14 @@ export function useCardListWithLocalStorage() {
   }, [storageValue]);
 
   const getCardFromStorage = useCallback(
-    (cardId: string): void => {
-      const card = cardList[cardId] as CardStoreJSON;
+    (cardId: string, fallback?: () => void): void => {
+      const card = cardList[cardId] as CardStoreJSON | undefined;
+
+      if (!card) {
+        fallback && fallback();
+        return;
+      }
+
       Object.entries(card).forEach(([key, cardInfo]) => {
         const type = key as keyof CardStoreJSON;
         if (type === 'cardCompany') {
