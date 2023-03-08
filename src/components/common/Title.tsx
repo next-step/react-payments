@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { COLOR } from '../../constant/color';
+import ArrowIcon from '../icon/ArrowIcon';
 
 interface ITitle {
   onClick?: () => void;
@@ -20,24 +21,20 @@ const S = {
     line-height: 1;
     color: ${COLOR.BLACK};
   `,
-  SvgWrapper: styled.div<{ isArrow: ITitle['isArrow'] }>`
+  ArrowWrapper: styled.div<{ isArrow: ITitle['isArrow'] }>`
     display: ${(props) => (props.isArrow ? 'block' : 'none')};
-    width: 9px;
-    height: auto;
+    width: auto;
+    height: 16px;
     margin-right: 25px;
-    & > img {
-      width: 100%;
-      height: auto;
-    }
   `,
 };
 
 const Title = ({ onClick, text, isArrow }: ITitle) => {
   return (
     <S.Title onClick={onClick}>
-      <S.SvgWrapper isArrow={isArrow ?? false}>
-        <img src="/svg/arrow.svg" />
-      </S.SvgWrapper>
+      <S.ArrowWrapper isArrow={isArrow ?? false}>
+        <ArrowIcon width="100%" height="100%" color={COLOR.BLACK} />
+      </S.ArrowWrapper>
       <S.Text>{text}</S.Text>
     </S.Title>
   );
