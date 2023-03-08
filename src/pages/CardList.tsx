@@ -10,12 +10,12 @@ export default function CardList() {
     cardRepository.getItem().sort((a, b) => b.index - a.index)
   );
 
-  const goRegisterComplete = useCallback((index: number) => {
-    navigate(`/register-complete?card=${index}`);
+  const goRegisterComplete = useCallback((cardNumber: string) => {
+    navigate(`/register-complete?card=${cardNumber}`);
   }, []);
 
-  const removeCard = useCallback((index: number) => {
-    const updateCardList = cardList.filter((item) => item.index !== index);
+  const removeCard = useCallback((cardNumber: string) => {
+    const updateCardList = cardList.filter((item) => item.cardNumber !== cardNumber);
     cardRepository.setItem(updateCardList);
 
     setCardList(updateCardList);
@@ -33,11 +33,11 @@ export default function CardList() {
         <div
           key={item.cardNumber}
         >
-          <div className="flex-column-center" onClick={() => goRegisterComplete(item.index)}>
+          <div className="flex-column-center" onClick={() => goRegisterComplete(item.cardNumber)}>
             <Card {...item} />
             <span>{item.nickname}</span>
           </div>
-          <Button onClick={() => removeCard(item.index)}>삭제</Button>
+          <Button onClick={() => removeCard(item.cardNumber)}>삭제</Button>
         </div>
       ))}
     </div>

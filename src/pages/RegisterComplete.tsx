@@ -1,17 +1,15 @@
 import { cardRepository } from '../repositories';
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Button, Card, Input, PageTitle } from '../components/atoms';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { ICardDTO } from '../domain/types';
+import { useNavigate } from 'react-router-dom';
+import { useCard } from '../hooks';
 
 const MAX_LENGTH = 10;
 
 export default function RegisterComplete() {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-  const cardIndex = Number(searchParams.get('card'));
-  const cardList = useMemo<ICardDTO[]>(() => cardRepository.getItem(), []);
-  const cardData = useMemo(() => cardList.find((item) => item.index === cardIndex), []);
+  const { cardNumber, cardList, getCardInfo } = useCard();
+  const cardData = getCardInfo();
   const nicknameRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -23,10 +21,10 @@ export default function RegisterComplete() {
 
   const endRegisterCard = () => {
     const { value } = nicknameRef.current;
-    const nickName = value.length ? value : cardData.brand;
+    const nickName = value.length ? value : cardData.cardCompany;
     const updateCardData = cardList.map((item) => ({
       ...item,
-      nickname: item.index === cardIndex ? nickName : item.nickname
+      nickname: item.cardNumber === cardNumber ? nickName : item.nickname
     }));
 
     cardRepository.setItem(updateCardData);
