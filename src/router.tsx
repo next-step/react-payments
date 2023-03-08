@@ -14,7 +14,7 @@ function Router() {
       <Route path={routes.home} element={<CardList />} />
       <Route path={routes.cardCreator} element={<CardCreator />} />
       <Route path={routes.createCardNickname()} element={<CardNicknameSetter />} />
-      <Route path={routes.createCardNickname(':/cardId')} element={<CardNicknameSetter />} />
+      <Route path={routes.createCardNickname(':cardId')} element={<CardNicknameSetter />} />
     </Routes>
   );
 }

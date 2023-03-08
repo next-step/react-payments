@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Card } from '@/components/Card';
 import { routes } from '@/routes';
@@ -8,6 +8,7 @@ import { CardInfoProvider } from '@/stores/CardCreatorContext';
 import { useCardListWithLocalStorage } from '../CardNickname/hooks/useCardListWithLocalStorage';
 
 function CardList() {
+  const navigate = useNavigate();
   const { cardList } = useCardListWithLocalStorage();
 
   const sortCardListToDescendingOrderOfKey = useMemo(() => {
@@ -25,7 +26,12 @@ function CardList() {
       </Link>
       {sortCardListToDescendingOrderOfKey.map(([key, val]) => (
         <CardInfoProvider key={key} value={val}>
-          <Card cardId={key} />
+          <Card
+            cardId={key}
+            onCardClick={() => {
+              navigate(routes.createCardNickname(key));
+            }}
+          />
         </CardInfoProvider>
       ))}
     </div>
