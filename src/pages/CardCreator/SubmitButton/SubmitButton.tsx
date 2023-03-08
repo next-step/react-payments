@@ -1,6 +1,7 @@
 import React, { MouseEvent, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
+import { routes } from '@/routes';
 import { ErrorApiContext } from '@/stores/ErrorContext';
 import {
   useSelectCardNumbers,
@@ -9,7 +10,6 @@ import {
   useSelectPasswords,
   useSelectSecurityCodes,
 } from '@/stores/CardCreatorContext';
-import { routes } from '@/routes';
 
 interface SubmitButtonProps {}
 
@@ -48,7 +48,7 @@ export function SubmitButton(_: SubmitButtonProps) {
 
   return (
     <div className="button-box">
-      <Link to={routes.cardNickname} className="button-text" onClick={handleSubmitButtonClick}>
+      <Link to={routes.createCardNickname()} className="button-text" onClick={handleSubmitButtonClick}>
         다음
       </Link>
     </div>

@@ -13,7 +13,8 @@ function Router() {
     <Routes>
       <Route path={routes.home} element={<CardList />} />
       <Route path={routes.cardCreator} element={<CardCreator />} />
-      <Route path={routes.cardNickname} element={<CardNickname />} />
+      <Route path={routes.createCardNickname()} element={<CardNickname />} />
+      <Route path={routes.createCardNickname(':/cardId')} element={<CardNickname />} />
     </Routes>
   );
 }
