@@ -17,7 +17,7 @@ export function CardNickname() {
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
 
-      <Card />
+      <Card disableNickname />
 
       <NicknameInput />
 
