@@ -22,36 +22,32 @@ export function useCardListWithLocalStorage() {
     }
   }, [storageValue]);
 
-  const getCardListFromStorage = useCallback(() => {
-    // 카드 리스트를 통째로 가져온다.
-  }, []);
-
   const getCardFromStorage = useCallback(
     (cardId: string): void => {
       const card = cardList[cardId] as CardStoreJSON;
-      Object.entries(card).forEach(([key, value]) => {
+      Object.entries(card).forEach(([key, cardInfo]) => {
         const type = key as keyof CardStoreJSON;
         if (type === 'cardCompany') {
           // @ts-ignore
-          cardContextApis?.dispatch({ type, payload: value });
-          return;
+          cardContextApis?.dispatch({ type, payload: cardInfo });
         }
 
-        if (Array.isArray(value)) {
+        if (Array.isArray(cardInfo)) {
+          const cardInfos = cardInfo;
           // @ts-ignore
-          value.forEach((val, index) => cardContextApis?.dispatch({ type, payload: { index, ...val } }));
+          cardInfos.forEach((cardInfo, index) => cardContextApis?.dispatch({ type, payload: { index, ...cardInfo } }));
           return;
         }
 
         // @ts-ignore
-        cardContextApis?.dispatch({ type, payload: { index, ...value } });
+        cardContextApis?.dispatch({ type, payload: { index, ...cardInfo } });
       });
     },
     [cardList, cardContextApis]
   );
 
   const setCardInLocalStorage = useCallback(
-    (cardId: string, card: CardStore) => {
+    (cardId: string | number, card: CardStore) => {
       cardList[cardId] = card;
       const stringifyAbleObject = formatToStringifyAbleObject(card) as CardStoreJSON;
       setValueInLocalStorage(
@@ -65,11 +61,10 @@ export function useCardListWithLocalStorage() {
   return useMemo(
     () => ({
       cardList,
-      getCardListFromStorage,
       getCardFromStorage,
       setCardInLocalStorage,
     }),
-    [cardList, getCardListFromStorage, getCardFromStorage, setCardInLocalStorage]
+    [cardList, getCardFromStorage, setCardInLocalStorage]
   );
 }
 
