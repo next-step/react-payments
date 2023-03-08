@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import {
   ApiContext,
   CardCompanyStoreContext,
+  CardNicknameStoreContext,
   CardNumberStoreContext,
   CardOwnersStoreContext,
   ExpireDatesStoreContext,
@@ -12,6 +13,10 @@ import {
 
 export function useSelectCardCompany() {
   return useContext(CardCompanyStoreContext);
+}
+
+export function useSelectCardNickname() {
+  return useContext(CardNicknameStoreContext);
 }
 
 export function useSelectCardNumbers() {
