@@ -1,11 +1,12 @@
-import React, { ChangeEvent } from 'react'
+import React, { ChangeEvent, FormEvent, FormEventHandler } from 'react'
 import { UI_SIZE, UI_VARIANT } from 'constants/ui'
 import { Card } from 'components/ui/Card'
 import { Button } from 'components/ui/Button'
 import './CompleteRegisterCard.css'
 import { useFormContext } from 'context/FormContext'
 import { CardNicknameField } from 'components/RegisterCardForm/CardNicknameField'
-import { AddPaymentCard, AddOrUpdateCardType } from 'constants/card'
+import { AddOrUpdateCardType } from 'constants/card'
+import { CARD_COMPANYS } from 'constants/cardCompanyCode'
 
 type CompleteRegisterCardProps = {
   onSubmit: (card: AddOrUpdateCardType) => void
@@ -16,8 +17,12 @@ const CompleteRegisterCard: React.FC<CompleteRegisterCardProps> = ({
 }) => {
   const { state } = useFormContext()
 
-  const onSubmitRegisterCard = () => {
-    onSubmit(state)
+  const onSubmitRegisterCard = (e: FormEvent) => {
+    e.preventDefault()
+    const result = state.cardNickname
+      ? state
+      : { ...state, cardNickname: CARD_COMPANYS[state.cardCompanyCode].name }
+    onSubmit(result)
   }
 
   return (

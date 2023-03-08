@@ -5,6 +5,7 @@ import { PaymentMain } from 'pages/PaymentMain'
 import { AddOrUpdateCardType } from 'constants/card'
 import { DUMMY_PAYMENT_CARDS } from 'constants/staticCardList'
 import { CardReducer, CARD_REDUCER_ACTION_TYPE } from 'reducers/CardReducer'
+import { DialogProvider } from 'context/DialogContext'
 
 const PaymentPage: React.FC = () => {
   const [selectCard, setSelectCard] = useState<AddOrUpdateCardType | null>(null)
@@ -35,7 +36,7 @@ const PaymentPage: React.FC = () => {
   }
 
   return (
-    <>
+    <DialogProvider>
       {selectCard ? (
         <AddEditCraditCard
           onNavigateGoBack={onEditEnd}
@@ -45,7 +46,7 @@ const PaymentPage: React.FC = () => {
       ) : (
         <PaymentMain onClick={onEditStart} cards={cards} />
       )}
-    </>
+    </DialogProvider>
   )
 }
 

@@ -1,15 +1,9 @@
 import React, { PropsWithChildren } from 'react'
-import './Modal.css'
+import './DialogLayout.css'
 
-type LayerProps = {
-  isOpen: boolean
-}
-
-const Modal: React.FC<PropsWithChildren<LayerProps>> = ({
+const DialogLayout: React.FC<PropsWithChildren<PropsWithChildren>> = ({
   children,
-  isOpen,
 }) => {
-  if (!isOpen) return null
   return (
     <div className='modal-wrap'>
       <div className='modal-content'>{children}</div>
@@ -17,4 +11,4 @@ const Modal: React.FC<PropsWithChildren<LayerProps>> = ({
   )
 }
 
-export default Modal
+export default DialogLayout

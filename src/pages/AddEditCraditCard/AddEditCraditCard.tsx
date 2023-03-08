@@ -1,5 +1,5 @@
 import React, { useReducer, useState } from 'react'
-import { AddPaymentCard, AddOrUpdateCardType } from 'constants/card'
+import { AddOrUpdateCardType } from 'constants/card'
 import { RegisterCard } from 'organisms/RegisterCard'
 import './AddEditCraditCard.css'
 import { FormChangeParams, FormProvider } from 'context/FormContext'
@@ -40,7 +40,7 @@ const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
         <CompleteRegisterCard onSubmit={submitCard} />
       ) : (
         <RegisterCard
-          onNavigate={onNavigateGoBack}
+          onNavigateGoBack={onNavigateGoBack}
           onClickNextBtn={onToggleCompleteCardRegister}
         />
       )}

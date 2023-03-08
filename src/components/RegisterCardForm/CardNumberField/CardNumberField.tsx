@@ -1,7 +1,10 @@
+import { CardCompanyList } from 'components/CardCompanyList'
 import { Input } from 'components/ui/Input'
 import { PAYMENT_CARD_FORM_KEYS } from 'constants/card'
+import { CardCompanyCodeType } from 'constants/cardCompanyCode'
 import { REGEX } from 'constants/regex'
 import { UI_VARIANT } from 'constants/ui'
+import { useDialogContext } from 'context/DialogContext'
 import { useFormContext } from 'context/FormContext'
 import React, { ChangeEvent } from 'react'
 import { FormGroup } from '../../ui/FormGroup'
@@ -17,6 +20,7 @@ const validateCardNumber = (cardNumber: string) => {
 
 const CardNumberField: React.FC = () => {
   const { state, handleChange } = useFormContext()
+  const { openDialog, closeDialog } = useDialogContext()
 
   const onChangeCardNumber = (e: ChangeEvent) => {
     const { value, name } = e.target as HTMLInputElement
@@ -26,6 +30,21 @@ const CardNumberField: React.FC = () => {
       key: PAYMENT_CARD_FORM_KEYS.CARD_NUMBERS,
       name,
       value: convertValue,
+    })
+  }
+
+  // 추후에 위로 뺴기,
+  const onChangeCardCompany = (cardComapnyCode: CardCompanyCodeType) => {
+    handleChange({
+      key: PAYMENT_CARD_FORM_KEYS.CARD_COMPANY_CODE,
+      value: cardComapnyCode,
+    })
+    closeDialog()
+  }
+
+  const onBlurNumberInput = () => {
+    openDialog({
+      component: <CardCompanyList onClick={onChangeCardCompany} />,
     })
   }
 
@@ -66,6 +85,7 @@ const CardNumberField: React.FC = () => {
           variant={UI_VARIANT.GHOST}
           maxLength={4}
           onChange={onChangeCardNumber}
+          onBlur={onBlurNumberInput}
         />
       </div>
     </FormGroup>

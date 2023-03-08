@@ -9,7 +9,7 @@
   margin-top: 0;
   justify-content: center;
   padding: 15px 0;
-  border-radius: 8px;
+  border-radius: 8px 8px 0 0;
 }
 
 .card-company-item {

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useContext, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useContext, useState } from 'react'
 import { Header } from 'components/ui/Header'
 import { AiOutlineLeft } from 'react-icons/ai'
 
@@ -16,40 +16,46 @@ import { UI_SIZE, UI_VARIANT } from 'constants/ui'
 import { Card } from 'components/ui/Card'
 
 type RegisterCardProps = {
-  onNavigate: () => void
+  onNavigateGoBack: () => void
   onClickNextBtn: () => void
 }
 
 const RegisterCard: React.FC<RegisterCardProps> = ({
-  onNavigate,
+  onNavigateGoBack,
   onClickNextBtn,
 }) => {
   const { state } = useFormContext()
+
+  const onSubmitRegisterCard = (e: FormEvent) => {
+    e.preventDefault()
+    onClickNextBtn()
+  }
 
   return (
     <>
       <Header
         title='카드 추가'
         icon={<AiOutlineLeft />}
-        onClickIcon={onNavigate}
+        onClickIcon={onNavigateGoBack}
       />
       <FlexMainTemplate>
         <Card card={state} size={UI_SIZE.SMALL} isShowNickname={false} />
-        <form className='card-form'>
+        <form className='card-form' onSubmit={onSubmitRegisterCard}>
           <CardNumberField />
           <CardExpireDateField />
           <CardOwnerField />
           <CVCField />
           <PasswordField />
-          <Button
-            type='submit'
-            size={UI_SIZE.SMALL}
-            variant={UI_VARIANT.GHOST}
-            color='var(--color-primary)'
-            onClick={onClickNextBtn}
-          >
-            다음
-          </Button>
+          <div className='button-box'>
+            <Button
+              type='submit'
+              size={UI_SIZE.SMALL}
+              variant={UI_VARIANT.GHOST}
+              color='var(--color-primary)'
+            >
+              다음
+            </Button>
+          </div>
         </form>
       </FlexMainTemplate>
     </>
