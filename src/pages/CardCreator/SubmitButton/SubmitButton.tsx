@@ -9,6 +9,7 @@ import {
   useSelectCardOwners,
   useSelectPasswords,
   useSelectSecurityCodes,
+  useSelectCardCompany,
 } from '@/stores/CardCreatorContext';
 
 interface SubmitButtonProps {}
@@ -17,6 +18,7 @@ interface SubmitButtonProps {}
 export function SubmitButton(_: SubmitButtonProps) {
   const errorApis = useContext(ErrorApiContext);
 
+  const cardCompany = useSelectCardCompany();
   const cardNumbersStore = useSelectCardNumbers();
   const expireDatesStore = useSelectExpireDates();
   const cardOwnersStore = useSelectCardOwners();
@@ -24,6 +26,7 @@ export function SubmitButton(_: SubmitButtonProps) {
   const securityCodesStore = useSelectSecurityCodes();
 
   const inputs = [
+    createInputObject('cardCompany', cardCompany),
     createInputObject('cardNumbers', cardNumbersStore),
     createInputObject('expireDates', expireDatesStore),
     createInputObject('cardOwners', cardOwnersStore),
@@ -34,7 +37,10 @@ export function SubmitButton(_: SubmitButtonProps) {
   // select된 inputState가 변하면 아래 함수도 새로 만들어져야 하므로, useCallback은 적용하지 않음.
   const handleSubmitButtonClick = (e: MouseEvent<HTMLAnchorElement>) => {
     const error = inputs.find(({ store }) => {
-      return store?.some(({ value, checkIsValid }) => !checkIsValid(value));
+      if (Array.isArray(store)) {
+        return store?.some(({ value, checkIsValid }) => !checkIsValid(value));
+      }
+      return !store?.checkIsValid(store.value);
     });
 
     if (error) {
