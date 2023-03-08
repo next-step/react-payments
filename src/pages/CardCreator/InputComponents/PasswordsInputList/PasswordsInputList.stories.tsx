@@ -1,9 +1,11 @@
 import '@/styles/index.css';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { passwordsInit } from '../../CardCreatorInits';
+import { CardInfoProvider } from '@/stores/CardCreatorContext';
+import { ErrorContextProvider } from '@/stores/ErrorContext';
+
 import { PasswordsInputListPure } from './PasswordsInputList';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -19,8 +21,13 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof PasswordsInputListPure> = () => {
-  const [passwords, setPasswords] = useState(passwordsInit);
-  return <PasswordsInputListPure />;
+  return (
+    <ErrorContextProvider>
+      <CardInfoProvider>
+        <PasswordsInputListPure />
+      </CardInfoProvider>
+    </ErrorContextProvider>
+  );
 };
 
 export const Primary = Template.bind({});

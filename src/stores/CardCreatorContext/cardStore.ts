@@ -1,16 +1,15 @@
 import { createContext } from 'react';
 
+import { CardCompanyModel } from '@/pages/CardCreator/hooks/useCardCompanySelectModal';
+
+import { DispatchContext, ReducerReturnType } from '../types';
 import {
   cardNumbersInit,
   expireDatesInit,
   cardOwnersInit,
   securityCodesInit,
   passwordsInit,
-} from '@/pages/CardCreator/CardCreatorInits';
-
-import { CardCompanyModel } from '@/pages/CardCreator/hooks/useCardCompanySelectModal';
-
-import { DispatchContext, ReducerReturnType } from '../types';
+} from './CardCreatorInitStates';
 
 type Store = {
   cardCompany: CardCompanyModel | null;
@@ -36,13 +35,12 @@ type CardInputPayload = { index: number; value: string };
 
 export function reducer(store: Store, action: { type: Actions; payload: CardInputPayload | CardCompanyModel }) {
   const { type, payload } = action;
-  console.log(action);
+
   switch (type) {
     case 'cardCompany': {
       const cardCompanyPayload = payload as CardCompanyModel;
-      console.log(cardCompanyPayload);
       if (store.cardCompany?.theme === cardCompanyPayload.theme) return store;
-      console.log(cardCompanyPayload);
+
       store.cardCompany = cardCompanyPayload;
       break;
     }

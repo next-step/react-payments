@@ -1,9 +1,11 @@
 import '@/styles/index.css';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { cardOwnersInit } from '../../CardCreatorInits';
+import { ErrorContextProvider } from '@/stores/ErrorContext';
+import { CardInfoProvider } from '@/stores/CardCreatorContext';
+
 import { CardOwnerInputPure } from './CardOwnerInput';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -19,8 +21,13 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof CardOwnerInputPure> = () => {
-  const [ownerNames, setOwnerNames] = useState(cardOwnersInit);
-  return <CardOwnerInputPure />;
+  return (
+    <ErrorContextProvider>
+      <CardInfoProvider>
+        <CardOwnerInputPure />
+      </CardInfoProvider>
+    </ErrorContextProvider>
+  );
 };
 
 export const Primary = Template.bind({});
