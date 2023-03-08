@@ -8,6 +8,7 @@ import {
   useCardListDispatch,
   useCardListState,
 } from '../context/CardListContext';
+import { ROUTE } from '../constant/route';
 
 const S = {
   ButtonWrapper: styled.div`
@@ -19,24 +20,19 @@ const CardRegisterComplete = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const nicknameRef = useRef(null);
-  const dispatchCardList = useCardListDispatch();
+  const { updateNickname } = useCardListDispatch();
   const stateCardList = useCardListState();
   const dispatchCard = useCardDispatch();
   const state = useCardState();
 
   const registerNickname = () => {
     if (!nicknameRef.current) return;
-    const nickNameCurrent = nicknameRef.current as HTMLInputElement;
-    const currentCardIndex = stateCardList.length - 1;
-    const updatedCardList = stateCardList.map((card, index) => {
-      if (index === currentCardIndex) {
-        return { ...card, nickname: nickNameCurrent.value ?? card.company };
-      } else {
-        return card;
-      }
-    });
-    dispatchCardList(updatedCardList);
-    navigate('/');
+    const nickNameValue = (nicknameRef.current as HTMLInputElement).value;
+    const currentIdx = stateCardList.length - 1;
+    updateNickname(currentIdx, nickNameValue);
+
+    navigate(ROUTE.HOME);
+
     dispatchCard({
       type: 'INIT',
     });

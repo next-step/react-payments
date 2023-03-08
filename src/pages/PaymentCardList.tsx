@@ -30,20 +30,12 @@ const S = {
 
 const PaymentCardList = () => {
   const cardList = useCardListState();
-  const stateCardList = useCardListState();
-  const dispatchCardList = useCardListDispatch();
+  const { deleteCard } = useCardListDispatch();
   const navigate = useNavigate();
 
   const updateNickname = (index: number) => {
     // step 3 에서 수정기능 추가할 예정
     navigate('/complete', { state: { isComplete: true, index: index } });
-  };
-
-  const deleteCard = (index: number) => {
-    const updatedCardList = stateCardList.filter(
-      (_, cardIndex) => index !== cardIndex
-    );
-    dispatchCardList(updatedCardList);
   };
 
   return (

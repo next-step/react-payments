@@ -5,10 +5,7 @@ import Button from '../components/common/Button';
 import { useNavigate } from 'react-router-dom';
 import { useCardState } from '../context/CardContext';
 import CardPreview from '../components/CardPreview';
-import {
-  useCardListDispatch,
-  useCardListState,
-} from '../context/CardListContext';
+import { useCardListDispatch } from '../context/CardListContext';
 import styled from '@emotion/styled';
 
 const S = {
@@ -32,23 +29,20 @@ const PaymentCardRegister = () => {
     nickname,
     createdDate,
   } = useCardState();
-  const dispatchCardList = useCardListDispatch();
-  const stateCardList = useCardListState();
+  const { addCard } = useCardListDispatch();
 
-  const onClickRegisterCard = () => {
-    dispatchCardList([
-      ...stateCardList,
-      {
-        digits,
-        cvc,
-        expire,
-        name,
-        passwords,
-        company,
-        nickname,
-        createdDate: Date.now(),
-      },
-    ]);
+  const onClickAddCard = () => {
+    addCard({
+      digits,
+      cvc,
+      expire,
+      name,
+      passwords,
+      company,
+      nickname,
+      createdDate: Date.now(),
+    });
+
     navigate('/complete', { state: { isComplete: true } });
   };
 
@@ -75,7 +69,7 @@ const PaymentCardRegister = () => {
       <CardRegisterForm />
 
       <S.ButtonWrapper>
-        <Button text="다음" onClick={onClickRegisterCard} />
+        <Button text="다음" onClick={onClickAddCard} />
       </S.ButtonWrapper>
     </>
   );
