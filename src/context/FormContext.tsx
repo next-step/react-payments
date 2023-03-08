@@ -1,4 +1,4 @@
-import { AddPaymentCard, AddPaymentCardKeys, PaymentCard } from 'constants/card'
+import { AddPaymentCard, AddPaymentCardKeys } from 'constants/card'
 import { createContext, useContext } from 'react'
 
 export type FormChangeParams = {

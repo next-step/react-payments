@@ -3,16 +3,14 @@ import React, { ChangeEvent } from 'react'
 import { FormGroup } from 'components/ui/FormGroup'
 import { useFormContext } from 'context/FormContext'
 import { Input } from 'components/ui/Input'
-import { REGEX } from 'constants/regex'
 import './CardNicknameField.css'
 import { PAYMENT_CARD_FORM_KEYS } from 'constants/card'
-import { CARD_COMPANYS } from 'constants/cardCompanyCode'
 
 const CardNicknameField = () => {
   const { state, handleChange } = useFormContext()
 
   const onChangeCardNickname = (e: ChangeEvent) => {
-    const { value, name } = e.target as HTMLInputElement
+    const { value } = e.target as HTMLInputElement
     handleChange({
       value: value,
       key: PAYMENT_CARD_FORM_KEYS.CARD_NICKNAME,

@@ -12,9 +12,9 @@ const CARD_NUMBER_FORM_TEXT = {
   LABEL: '카드 번호',
 }
 
-const validateCardNumber = (cardNumber: string) => {
-  return cardNumber.length !== 4
-}
+// const validateCardNumber = (cardNumber: string) => {
+//   return cardNumber.length !== 4
+// }
 
 const CardNumberField: React.FC = () => {
   const { state, handleChange } = useFormContext()
