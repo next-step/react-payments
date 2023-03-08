@@ -1,6 +1,7 @@
 import { isNil } from '@/utils';
 
 import type {
+  CardCompanyState,
   CardNumbersState,
   CardOwnersState,
   ExpireDatesState,
@@ -8,6 +9,12 @@ import type {
   SecurityCodesState,
   CardNicknameState,
 } from './types';
+
+export const cardCompanyInit: CardCompanyState = {
+  key: 'card-company',
+  value: undefined,
+  checkIsValid: (value) => !!value && !!value.name && !!value.theme,
+};
 
 export const cardNumbersInit: CardNumbersState = [
   {

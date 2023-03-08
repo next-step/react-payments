@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
 import {
-  useCardContextApiSelector,
   useSelectCardCompany,
   useSelectCardNickname,
   useSelectCardNumbers,
@@ -12,6 +11,7 @@ import {
   useSelectPasswords,
   useSelectSecurityCodes,
 } from '@/stores/CardCreatorContext';
+import { createRandomNumber } from '@/utils';
 
 import { useCardListWithLocalStorage } from '../hooks/useCardListWithLocalStorage';
 
@@ -23,7 +23,6 @@ export function CardNicknameSubmitButton() {
   const cardOwners = useSelectCardOwners();
   const passwords = useSelectPasswords();
   const securityCodes = useSelectSecurityCodes();
-  const apis = useCardContextApiSelector();
 
   const { setCardInLocalStorage } = useCardListWithLocalStorage();
 
@@ -35,15 +34,15 @@ export function CardNicknameSubmitButton() {
       return;
     }
 
-    if (!cardNumbers || !expireDates || !cardOwners || !passwords || !securityCodes) {
+    if (!cardCompany || !cardNumbers || !expireDates || !cardOwners || !passwords || !securityCodes) {
       alert('카드 정보를 모두 입력해주세요.');
       return;
     }
 
-    const newCardNicknameValue = !value ? cardCompany!.name : value;
+    const newCardNicknameValue = !value ? cardCompany!.value!.name : value;
 
     // TODO: randomId를 달고 localhost에 저장, dynamicRoute가 있는 경우엔 기존것을 그대로 사용
-    setCardInLocalStorage('1', {
+    setCardInLocalStorage(createRandomNumber(1000000), {
       cardNickname: { ...cardNickname!, value: newCardNicknameValue },
       cardCompany,
       cardNumbers,

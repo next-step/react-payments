@@ -4,6 +4,7 @@ import {
   reducer,
   initialCardStore,
   ApiContext,
+  CardStore,
   CardCompanyStoreContext,
   CardNicknameStoreContext,
   CardNumberStoreContext,
@@ -13,9 +14,13 @@ import {
   SecurityCodesStoreContext,
 } from './cardStore';
 
+interface CardInfoProviderProps {
+  value: CardStore;
+}
+
 // TODO: key값에 의한 추상화 Provider로 빼기 (like jotai)
-export function CardInfoProvider({ children }: PropsWithChildren<any>) {
-  const [store, dispatch] = useReducer(reducer, initialCardStore);
+export function CardInfoProvider({ value, children }: PropsWithChildren<CardInfoProviderProps>) {
+  const [store, dispatch] = useReducer(reducer, value || initialCardStore);
 
   const apis = useMemo(() => ({ dispatch }), [dispatch]);
 

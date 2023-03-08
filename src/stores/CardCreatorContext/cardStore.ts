@@ -4,6 +4,7 @@ import { CardCompanyModel } from '@/pages/CardCreator/hooks/useCardCompanySelect
 
 import { DispatchContext, ReducerReturnType } from '../types';
 import {
+  cardCompanyInit,
   cardNumbersInit,
   expireDatesInit,
   cardOwnersInit,
@@ -13,7 +14,7 @@ import {
 } from './CardCreatorStates';
 
 export type CardStore = {
-  cardCompany: CardCompanyModel | null;
+  cardCompany: typeof cardCompanyInit;
   cardNickname: typeof cardNicknameInit;
   cardNumbers: typeof cardNumbersInit;
   expireDates: typeof expireDatesInit;
@@ -25,7 +26,7 @@ export type CardStore = {
 export type Actions = keyof CardStore;
 
 export const initialCardStore: CardStore = {
-  cardCompany: null,
+  cardCompany: cardCompanyInit,
   cardNickname: cardNicknameInit,
   cardNumbers: cardNumbersInit,
   expireDates: expireDatesInit,
@@ -46,9 +47,12 @@ export function reducer(
   switch (type) {
     case 'cardCompany': {
       const cardCompanyPayload = payload as CardCompanyModel;
-      if (store.cardCompany?.theme === cardCompanyPayload.theme) return store;
+      if (store.cardCompany?.value?.theme === cardCompanyPayload.theme) return store;
 
-      store.cardCompany = cardCompanyPayload;
+      store.cardCompany = {
+        ...store.cardCompany,
+        value: cardCompanyPayload,
+      };
       break;
     }
     case 'cardNickname': {
