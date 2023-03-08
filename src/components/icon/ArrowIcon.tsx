@@ -1,11 +1,4 @@
 import React from 'react';
-import styled from '@emotion/styled';
-
-const S = {
-  Svg: styled.svg`
-    overflow: hidden;
-  `,
-};
 
 interface IArrow {
   width: string;
@@ -15,7 +8,7 @@ interface IArrow {
 
 const ArrowIcon = ({ width, height, color }: IArrow) => {
   return (
-    <S.Svg
+    <svg
       width={width}
       height={height}
       viewBox="0 0 10 17"
@@ -27,7 +20,7 @@ const ArrowIcon = ({ width, height, color }: IArrow) => {
         stroke={color}
         strokeWidth="1.5"
       />
-    </S.Svg>
+    </svg>
   );
 };
 
