@@ -12,7 +12,7 @@ import {
   cardNicknameInit,
 } from './CardCreatorStates';
 
-type Store = {
+export type CardStore = {
   cardCompany: CardCompanyModel | null;
   cardNickname: typeof cardNicknameInit;
   cardNumbers: typeof cardNumbersInit;
@@ -22,9 +22,9 @@ type Store = {
   securityCodes: typeof securityCodesInit;
 };
 
-export type Actions = keyof Store;
+export type Actions = keyof CardStore;
 
-export const initialCardStore: Store = {
+export const initialCardStore: CardStore = {
   cardCompany: null,
   cardNickname: cardNicknameInit,
   cardNumbers: cardNumbersInit,
@@ -38,7 +38,7 @@ type CardNickNamePayload = { value: string };
 type CardInputPayload = { index: number; value: string };
 
 export function reducer(
-  store: Store,
+  store: CardStore,
   action: { type: Actions; payload: CardInputPayload | CardCompanyModel | CardNickNamePayload }
 ) {
   const { type, payload } = action;
@@ -85,7 +85,6 @@ export function reducer(
 }
 
 type CardReducerType = ReducerReturnType<typeof reducer>;
-type CardStore = CardReducerType[0];
 type Dispatch = CardReducerType[1];
 type CardCompanyStoreContextType = CardStore['cardCompany'] | null;
 type CardNicknameStoreContextType = CardStore['cardNickname'] | null;
