@@ -1,9 +1,9 @@
-import React, { ChangeEvent, memo, useContext, useEffect, useMemo } from 'react';
+import React, { ChangeEvent, memo, useContext, useEffect } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
-import { CardNumbersState } from '@/pages/CardCreator/types';
-import { ApiContext } from '@/stores/CardCreatorContext';
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
+import type { CardNumbersState } from '@/stores/CardCreatorContext/CardCreatorStates';
+import { ApiContext } from '@/stores/CardCreatorContext';
 import { filterNumber } from '@/utils';
 
 import { InputDivider } from '../../components/InputDivider';

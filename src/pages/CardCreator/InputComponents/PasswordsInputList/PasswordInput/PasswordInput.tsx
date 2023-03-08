@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useContext, useEffect } from 'react';
 
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
-import type { PasswordsState } from '@/pages/CardCreator/types';
+import type { PasswordsState } from '@/stores/CardCreatorContext/CardCreatorStates';
 import { ApiContext } from '@/stores/CardCreatorContext';
 import { filterNumber } from '@/utils';
 

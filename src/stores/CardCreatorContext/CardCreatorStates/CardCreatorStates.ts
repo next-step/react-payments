@@ -1,11 +1,13 @@
+import { isNil } from '@/utils';
+
 import type {
   CardNumbersState,
   CardOwnersState,
   ExpireDatesState,
   PasswordsState,
   SecurityCodesState,
-} from '@/pages/CardCreator/types';
-import { isNil } from '@/utils';
+  CardNicknameState,
+} from './types';
 
 export const cardNumbersInit: CardNumbersState = [
   {
@@ -94,3 +96,9 @@ export const passwordsInit: PasswordsState = [
     checkIsAllowInput: (input) => !input || input.length < 2,
   },
 ];
+
+export const cardNicknameInit: CardNicknameState = {
+  key: 'card-nickname',
+  value: undefined,
+  checkIsValid: (value) => !value || value.length <= 10,
+};

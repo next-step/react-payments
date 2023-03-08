@@ -9,7 +9,7 @@ import {
   cardOwnersInit,
   securityCodesInit,
   passwordsInit,
-} from './CardCreatorInitStates';
+} from './CardCreatorStates';
 
 type Store = {
   cardCompany: CardCompanyModel | null;

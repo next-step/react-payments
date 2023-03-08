@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 
-import type { SecurityCodesState } from '@/pages/CardCreator/types';
 import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
+import type { SecurityCodesState } from '@/stores/CardCreatorContext/CardCreatorStates';
 import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components/CardInfoInputElement';
