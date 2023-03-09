@@ -1,27 +1,33 @@
-import { Dispatch, SetStateAction } from "react";
 import Button from "components/common/Button";
 import Card from "components/common/Card";
-import { CardInput } from "components/common/Card/card.type";
 import InputContainer from "components/common/Input/InputContainer";
 import Input from "components/common/Input";
-import { STEP } from "../../../constants/Payments";
+import { STEP } from "constants/Payments";
+import { useCardForm } from "pages/payments/hooks/useCardForm";
+import { useNavigate } from "react-router";
+import {
+  usePaymentsDispatch,
+  usePaymentsState,
+} from "pages/payments/modules/payments/PaymentsContext";
+import {
+  ADD_CARD,
+  EDIT_CARD,
+} from "pages/payments/modules/payments/PaymentsActionType";
 
-interface CompletedProps {
-  newCardInfo: CardInput;
-  setStep: Dispatch<SetStateAction<number>>;
-  handleCardInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleCardNicknameAddClick: ({ nickname }: { nickname?: string }) => void;
-}
+const Completed = () => {
+  const navigate = useNavigate();
+  const { nickname, handleCardNicknameChange } = useCardForm();
 
-const Completed = ({
-  newCardInfo,
-  setStep,
-  handleCardInputChange,
-  handleCardNicknameAddClick,
-}: CompletedProps) => {
+  const { newCardInfo, selectedCard } = usePaymentsState();
+  const dispatch = usePaymentsDispatch();
+
   const handleNextButtonClick = () => {
-    handleCardNicknameAddClick({ nickname: newCardInfo?.nickname });
-    setStep(STEP.FIRST);
+    if (selectedCard) {
+      dispatch({ type: EDIT_CARD, nickname });
+    } else {
+      dispatch({ type: ADD_CARD, nickname });
+    }
+    navigate(STEP.SHOW_CARD_LIST);
   };
 
   return (
@@ -32,13 +38,11 @@ const Completed = ({
           <div className="flex-center">
             <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
           </div>
-
           <Card
-            input={newCardInfo}
+            input={selectedCard || newCardInfo}
             backgroundColor={newCardInfo?.backgroundColor}
             isBigCard
           />
-
           <InputContainer
             className={{
               inputContainerClassName: "flex-center w-100",
@@ -46,14 +50,13 @@ const Completed = ({
           >
             <Input
               className="input-underline"
-              value={newCardInfo.nickname || ""}
+              value={nickname}
               type={"text"}
               id={"nickname"}
               placeholder={"카드의 별칭을 입력해주세요."}
-              onChange={handleCardInputChange}
+              onChange={handleCardNicknameChange}
             />
           </InputContainer>
-
           <div className="mt-50">
             <Button label="다음" onClick={handleNextButtonClick} />
           </div>

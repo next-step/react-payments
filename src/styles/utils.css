@@ -55,6 +55,14 @@
   width: 15%;
 }
 
+.w-208 {
+  width: 208px;
+}
+
+.max-w-94 {
+  max-width: 94px;
+}
+
 .mr-1 {
   margin-right: 0.25rem;
 }
@@ -81,4 +89,10 @@
 
 .r-0 {
   right: 0;
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }

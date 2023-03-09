@@ -134,3 +134,8 @@
   vertical-align: middle;
   font-weight: 400;
 }
+
+.card-nickname {
+  flex: 1;
+  text-align: center;
+}

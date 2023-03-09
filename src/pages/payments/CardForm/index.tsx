@@ -1,67 +1,61 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
-import { characterCount, displayNumber } from "utils";
+import { characterCount } from "pages/payments/utils";
 import Button from "components/common/Button";
 import Card from "components/common/Card";
-import { CardInput } from "components/common/Card/card.type";
 import InputContainer from "components/common/Input/InputContainer";
 import CompanyModal from "components/common/Modal";
-import { STEP } from "../../../constants/Payments";
+import {
+  CARD_INFO,
+  STEP,
+  TYPE,
+  TYPE_COMPLETED,
+  TYPE_SELECT,
+} from "constants/Payments";
 import Input from "components/common/Input";
+import { usePaymentsState } from "pages/payments/modules/payments/PaymentsContext";
+import { useLocation, useNavigate } from "react-router";
+import { useCardForm } from "pages/payments/hooks/useCardForm";
 
-interface CardFormProps {
-  newCardInfo: CardInput;
-  step: number;
-  setStep: Dispatch<SetStateAction<number>>;
-  handleCardInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleCardTypeClick: (e: React.MouseEvent<HTMLDivElement>) => void;
-  handleCardAddClick: () => void;
-}
+const CardForm = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const type = params.get(TYPE);
 
-const CardForm = ({
-  newCardInfo,
-  step,
-  setStep,
-  handleCardInputChange,
-  handleCardTypeClick,
-  handleCardAddClick,
-}: CardFormProps) => {
+  const { newCardInfo } = usePaymentsState();
   const {
-    number = "",
-    name = "",
-    cvc = "",
-    expiry = "",
-    password1 = "",
-    password2 = "",
-  } = newCardInfo;
-
-  const [showCompanyModal, setShowCompanyModal] = useState<boolean>(false);
+    name,
+    ref: {
+      numberInputRef,
+      cvcInputRef,
+      expiryInputRef,
+      firstPasswordInputRef,
+      secondPasswordInputRef,
+    },
+    handleCardInputChange,
+    handleCompanyModalClick,
+    handleCardNameChange,
+    handleInputSubmit,
+  } = useCardForm();
 
   const handleNextButtonClick = () => {
-    if (step === STEP.SECOND) {
-      setShowCompanyModal((prev: boolean) => !prev);
+    if (type !== TYPE_COMPLETED) {
+      navigate(STEP.SELECT_CARD_COMPANY);
       return;
     }
-    handleCardAddClick();
-    setStep(STEP.FOURTH);
+    navigate(STEP.ADD_CARD_NICKNAME);
   };
 
-  const handleGoBackClick = () => setStep(STEP.FIRST);
-
-  const handleCompanyModalClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    handleCardTypeClick(e);
-    setShowCompanyModal((prev: boolean) => !prev);
-    setStep(STEP.THIRD);
-  };
+  const handleGoBackClick = () => navigate(STEP.SHOW_CARD_LIST);
 
   return (
     <>
-      {step === STEP.SECOND ? (
+      {type !== TYPE_COMPLETED ? (
         <h2>1️⃣ 카드 추가</h2>
       ) : (
         <h2>3️⃣ 카드 추가 - 입력 완료</h2>
       )}
       <div className="root">
-        <div className="app">
+        <form className="app" onSubmit={handleInputSubmit}>
           <h2 className="page-title">
             <span className="mr-2 cursor-pointer" onClick={handleGoBackClick}>
               {"<"}
@@ -76,11 +70,12 @@ const CardForm = ({
 
           <InputContainer hasInputBox title="카드 번호">
             <Input
-              value={displayNumber({ input: number, startPoint: 2 })}
+              disabled={type === TYPE_COMPLETED}
+              ref={numberInputRef}
               type={"text"}
-              id={"number"}
-              onChange={handleCardInputChange}
+              id={CARD_INFO.NUMBER}
               maxLength={19}
+              onChange={handleCardInputChange}
             />
           </InputContainer>
 
@@ -90,24 +85,26 @@ const CardForm = ({
             className={{ inputBoxClassName: "w-50" }}
           >
             <Input
-              value={expiry}
+              disabled={type === TYPE_COMPLETED}
+              ref={expiryInputRef}
               type={"text"}
-              id={"expiry"}
+              id={CARD_INFO.EXPIRY}
               placeholder={"MM / YY"}
-              onChange={handleCardInputChange}
               maxLength={5}
+              onChange={handleCardInputChange}
             />
           </InputContainer>
 
           <div className="relative">
             <InputContainer title="카드 소유자 이름(선택)">
               <Input
-                value={name}
+                disabled={type === TYPE_COMPLETED}
                 type={"text"}
-                id={"name"}
+                id={CARD_INFO.NAME}
+                value={name}
                 placeholder={"카드에 표시된 이름과 동일하게 입력하세요."}
-                onChange={handleCardInputChange}
                 maxLength={30}
+                onChange={handleCardNameChange}
               />
             </InputContainer>
             <span className="absolute t-0 r-0 input-title">
@@ -117,39 +114,46 @@ const CardForm = ({
 
           <InputContainer title="보안코드(CVC/CVV)">
             <Input
+              disabled={type === TYPE_COMPLETED}
               className="w-25"
-              value={cvc}
+              ref={cvcInputRef}
               type={"password"}
-              id={"cvc"}
-              onChange={handleCardInputChange}
+              id={CARD_INFO.CVC}
               maxLength={3}
+              onChange={handleCardInputChange}
             />
           </InputContainer>
 
           <InputContainer title="카드 비밀번호">
             <>
               <Input
+                disabled={type === TYPE_COMPLETED}
                 className="w-15 mr-1"
-                value={password1}
+                ref={firstPasswordInputRef}
                 type={"password"}
-                id={"password1"}
-                onChange={handleCardInputChange}
+                id={CARD_INFO.FIRST_PASSWORD}
                 maxLength={1}
+                onChange={handleCardInputChange}
               />
               <Input
+                disabled={type === TYPE_COMPLETED}
                 className="w-15 mr-1"
-                value={password2}
+                ref={secondPasswordInputRef}
                 type={"password"}
-                id={"password2"}
-                onChange={handleCardInputChange}
+                id={CARD_INFO.SECOND_PASSWORD}
                 maxLength={1}
+                onChange={handleCardInputChange}
               />
             </>
           </InputContainer>
 
-          <Button label="다음" onClick={handleNextButtonClick} />
-        </div>
-        {showCompanyModal && (
+          <Button
+            type={type === TYPE_COMPLETED ? "button" : "submit"}
+            label="다음"
+            onClick={handleNextButtonClick}
+          />
+        </form>
+        {type === TYPE_SELECT && (
           <CompanyModal
             onClick={handleCompanyModalClick}
             modalItem={[
