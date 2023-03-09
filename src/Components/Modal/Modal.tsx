@@ -24,7 +24,6 @@ function Modal({
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    console.log(modalRef.current);
     (modalRef.current as HTMLDivElement)?.focus();
   });
 

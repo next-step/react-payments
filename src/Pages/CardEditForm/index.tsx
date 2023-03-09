@@ -1,15 +1,16 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import Card from '../../Components/Card/Card';
 import { CardInfo } from '../../Components/CardInput';
+import { type HandleContainer } from '../../Components/CardInput/CardInput';
 import Modal from '../../Components/Modal/Modal';
 import { cardIssuers, type issuers } from '../../constants/CardIssuers';
 
 import '../index.css';
-import './issuer.css';
+import './card-edit-form.css';
 
 function CardEditForm() {
   const appRef = useRef(null);
-  const infoRefs = useRef(Array(5).fill(null));
+  const infoRefs = useRef<HandleContainer[] | null[]>(Array(5).fill(null));
   const [isModalOpen, setModalOpen] = useState(false);
   const [cardIssuer, setCardIssuer] = useState('');
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
@@ -18,10 +19,14 @@ function CardEditForm() {
   const [secureCode, setSecureCode] = useState(['']);
   const [pinNumber, setPinNumber] = useState(['', '']);
 
-  if (!secureCode || !pinNumber) setCardIssuer('');
-
   const handleModalClose = useCallback(() => {
     setModalOpen(false);
+  }, []);
+
+  const handleNextClick = useCallback(() => {
+    for (const ref of infoRefs.current) {
+      if (!ref?.validate()) break;
+    }
   }, []);
 
   useEffect(() => {
@@ -51,8 +56,8 @@ function CardEditForm() {
       />
 
       <CardInfo
-        ref={infoRefs.current[0]}
-        onValidate={(v) => true}
+        ref={(ref) => (infoRefs.current[0] = ref)}
+        onValidate={() => cardNumber.join('').length === 16}
         onChange={setCardNumber}
         title="카드 번호"
         delimeter={'-'}
@@ -64,8 +69,8 @@ function CardEditForm() {
       </CardInfo>
 
       <CardInfo
-        ref={infoRefs.current[1]}
-        onValidate={(v) => true}
+        ref={(ref) => (infoRefs.current[1] = ref)}
+        onValidate={() => cardOwner.join('').length > 0}
         onChange={setCardOwner}
         title="카드 소유자 이름(선택)"
         countMaxLength={true}
@@ -77,8 +82,8 @@ function CardEditForm() {
       </CardInfo>
 
       <CardInfo
-        ref={infoRefs.current[2]}
-        onValidate={(v) => true}
+        ref={(ref) => (infoRefs.current[2] = ref)}
+        onValidate={() => monthYear.join('').length === 4}
         onChange={setMonthYear}
         title="만료일"
         delimeter={'/'}
@@ -89,8 +94,8 @@ function CardEditForm() {
       </CardInfo>
 
       <CardInfo
-        ref={infoRefs.current[3]}
-        onValidate={(v) => true}
+        ref={(ref) => (infoRefs.current[3] = ref)}
+        onValidate={() => secureCode.join('').length === 3}
         onChange={setSecureCode}
         title="보안 코드(CVC/CVV)"
         width="25%"
@@ -99,8 +104,8 @@ function CardEditForm() {
       </CardInfo>
 
       <CardInfo
-        ref={infoRefs.current[4]}
-        onValidate={(v) => true}
+        ref={(ref) => (infoRefs.current[4] = ref)}
+        onValidate={() => pinNumber.join('').length === 2}
         onChange={setPinNumber}
         title="비밀번호"
         width="60%"
@@ -111,6 +116,10 @@ function CardEditForm() {
         <CardInfo.Blocked maxLength={1} />
         <CardInfo.Blocked maxLength={1} />
       </CardInfo>
+
+      <div className="link-container">
+        <button onClick={handleNextClick}>다음</button>
+      </div>
 
       <Modal
         isOpen={isModalOpen}

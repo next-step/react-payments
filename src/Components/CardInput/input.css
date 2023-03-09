@@ -3,6 +3,11 @@
   margin: 25px 0;
 }
 
+.input-container .invalid-text {
+  font-size: 8px;
+  color: red;
+}
+
 .input-box {
   display: flex;
   align-items: center;
@@ -12,6 +17,11 @@
 
 .input-box.background {
   background-color: #ecebf1;
+}
+
+.input-box.invalid {
+  outline: solid 2px red;
+  border-radius: 0.25rem;
 }
 
 .input-top {

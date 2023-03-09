@@ -8,7 +8,7 @@ export const CardNumber = () => {
   const ref = useRef(null);
   return (
     <CardInfo
-      onValidate={(v) => true}
+      onValidate={() => true}
       onChange={(value) => {
         // console.log(value);
       }}
@@ -28,7 +28,7 @@ export const CardText = () => {
   const ref = useRef(null);
   return (
     <CardInfo
-      onValidate={(v) => true}
+      onValidate={() => true}
       onChange={(value) => {
         // console.log(value);
       }}
@@ -48,7 +48,7 @@ export const CardMonthYear = () => {
   const ref = useRef(null);
   return (
     <CardInfo
-      onValidate={(v) => true}
+      onValidate={() => true}
       onChange={(value) => {
         // console.log(value);
       }}
@@ -67,7 +67,7 @@ export const CardSecureCode = () => {
   const ref = useRef(null);
   return (
     <CardInfo
-      onValidate={(v) => true}
+      onValidate={() => true}
       onChange={(value) => {
         // console.log(value);
       }}
@@ -84,7 +84,7 @@ export const CardPassword = () => {
   const ref = useRef(null);
   return (
     <CardInfo
-      onValidate={(v) => true}
+      onValidate={() => true}
       onChange={(value) => {
         // console.log(value);
       }}

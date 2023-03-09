@@ -1,13 +1,13 @@
 import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useImperativeHandle,
+  forwardRef,
   Children,
   type ReactElement,
-  useCallback,
-  useEffect,
-  useRef,
   type ChangeEvent,
-  useState,
-  forwardRef,
-  useImperativeHandle,
   type KeyboardEvent,
 } from 'react';
 import { type CardInputOptions } from '.';
@@ -19,20 +19,16 @@ interface ContainerProps {
     | Array<ReactElement<CardInputOptions>>
     | ReactElement<CardInputOptions>;
   onChange: (value: string[]) => void;
-  onValidate: (value: string) => boolean;
+  onValidate: () => boolean;
   width?: string;
   background?: boolean;
   delimeter?: string;
   countMaxLength?: boolean;
 }
 
-interface ContainerProviderProps extends ContainerProps {
-  ref: React.RefObject<HandleContainer>;
-}
-
 export interface HandleContainer {
   focus: () => void;
-  validate: (s: string) => void;
+  validate: () => boolean;
 }
 
 const [ComponentProvider, useComponentContext] = createComponentContext();
@@ -52,6 +48,7 @@ const Container = forwardRef<HandleContainer, ContainerProps>(
     const { getAll } = useComponentContext().components;
 
     const [inputLength, setInputLength] = useState(0);
+    const [isValid, setIsValid] = useState(true);
 
     const handleChange = useCallback(() => {
       onChange(
@@ -60,6 +57,7 @@ const Container = forwardRef<HandleContainer, ContainerProps>(
         )
       );
       setInputLength(getTotalInputLength());
+      setIsValid(true);
     }, [onChange, getAll]);
 
     const getTotalInputLength = useCallback(() => {
@@ -99,8 +97,10 @@ const Container = forwardRef<HandleContainer, ContainerProps>(
           focus() {
             handleFocus();
           },
-          validate(value: string) {
-            onValidate(value);
+          validate() {
+            const isValid = onValidate();
+            setIsValid(isValid);
+            return isValid;
           },
         };
       },
@@ -118,13 +118,17 @@ const Container = forwardRef<HandleContainer, ContainerProps>(
           )}
         </div>
         <div
-          className={`input-box ${background ? 'background' : ''}`}
+          className={`input-box 
+                      ${background ? 'background' : ''} 
+                      ${!isValid ? 'invalid' : ''}
+                      `}
           style={{ width: `${width}` }}
           onChange={handleChange}
           onFocus={handleFocus}
         >
           {insertDelimeter(children, delimeter)}
         </div>
+        {!isValid && <span className="invalid-text">입력을 완료해주세요</span>}
       </div>
     );
   }
@@ -159,13 +163,16 @@ const insertDelimeter = (
     []
   );
 
-export function CardInputContainerWithProvider(props: ContainerProviderProps) {
+export const CardInputContainerWithProvider = forwardRef<
+  HandleContainer,
+  ContainerProps
+>(function CardInputContainerWithProvider(props, ref) {
   return (
     <ComponentProvider>
-      <Container {...props} />
+      <Container {...props} ref={ref} />
     </ComponentProvider>
   );
-}
+});
 
 export function Input(props: CardInputOptions) {
   const { hideValue, maxLength, placeholder, validate = undefined } = props;
