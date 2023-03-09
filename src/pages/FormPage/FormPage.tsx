@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import CompanyList from 'components/CompanyList/CompanyList';
 import Card from 'components/common/Card/Card';
@@ -12,20 +12,17 @@ import Text from 'components/common/Text/Text';
 import Button from 'components/common/Button/Button';
 import useFormPage from 'hooks/useFormPage';
 import useHandleFormInput from 'hooks/useHandleFormInput';
-import Modal from 'components/common/Modal/Modal';
-import { useModal } from 'context/Modal';
 
 const FormPage = () => {
+  const [activeUI, setActiveUI] = useState(false);
   const { state, setState, handleCompanyList, handleBackButton, handleSubmit } = useFormPage();
   const { cardFormInputs } = useHandleFormInput();
-  const modalCtx = useModal();
 
   useEffect(() => {
     if (state.company.isValid && state.color.isValid) {
-      modalCtx.close();
+      setActiveUI(false);
     }
   }, [state.company, state.color]);
-
   return (
     <Layout>
       <Header>
@@ -33,13 +30,10 @@ const FormPage = () => {
         <Text fontSize="lg" weight="bold" label="카드추가" />
       </Header>
       <div>
-        <Modal>
-          <CompanyList onSelectedCompany={handleCompanyList} />
-        </Modal>
-
+        {activeUI && <CompanyList onSelect={handleCompanyList} onClose={setActiveUI} />}
         <Card
           type="primary"
-          onClick={modalCtx.show}
+          onClick={() => setActiveUI(true)}
           color={state.color.text}
           company={state.company.text}
           size="small"

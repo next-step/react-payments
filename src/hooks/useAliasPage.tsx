@@ -13,7 +13,7 @@ const useAliasPage = () => {
   const handleSubmit = () => {
     if (inputRef.current === null || !currentCard) return;
     const aliasValue = inputRef.current.value;
-    const aliasName = !aliasValue.length ? currentCard.company : aliasValue;
+    const aliasName = aliasValue.length ? aliasValue : currentCard.company;
     const aliasCard = {
       ...currentCard,
       alias: aliasName,

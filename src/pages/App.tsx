@@ -5,20 +5,17 @@ import FormPage from './FormPage/FormPage';
 import AliasPage from './AliasPage/AliasPage';
 import MyCardListPage from './MyCardListPage/MyCardListPage';
 import { PaymentsContextProvider } from 'context/Payments';
-import { ModalContextProvider } from '../context/Modal';
 function App() {
   return (
     <Layout>
-      <ModalContextProvider>
-        <PaymentsContextProvider>
-          <GlobalStyle />
-          <Routes>
-            <Route element={<MyCardListPage />} path="/"></Route>
-            <Route element={<FormPage />} path="/add"></Route>
-            <Route element={<AliasPage />} path="/alias"></Route>
-          </Routes>
-        </PaymentsContextProvider>
-      </ModalContextProvider>
+      <PaymentsContextProvider>
+        <GlobalStyle />
+        <Routes>
+          <Route element={<MyCardListPage />} path="/"></Route>
+          <Route element={<FormPage />} path="/add"></Route>
+          <Route element={<AliasPage />} path="/alias"></Route>
+        </Routes>
+      </PaymentsContextProvider>
     </Layout>
   );
 }

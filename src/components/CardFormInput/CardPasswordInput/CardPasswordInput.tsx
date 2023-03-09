@@ -26,7 +26,6 @@ const CardPasswordInput = ({ refs, fontColor, setPasswordText, isValidFirst, isV
     if (isNext) {
       refs.password.end.ref?.focus();
     }
-
     setPasswordText((prev) => ({
       ...prev,
       password: {
