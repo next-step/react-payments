@@ -12,7 +12,7 @@ const VALIDATE_ERROR = '카드 비밀번호 앞 2자리를 입력 해 주세요.
 function CardPassword() {
   const cardDispatch = useCardDispatch();
   const [errorMessage, setErrorMessage] = useState('');
-  const [passwordRef, getPasswordRef] = useRefs<HTMLInputElement>([0, 1]);
+  const [passwordRef, getPasswordRef] = useRefs<HTMLInputElement>(2);
 
   const handleChange = useCallback(() => {
     const cardPassword = getPasswordRef().map((item) => item.value).join('');

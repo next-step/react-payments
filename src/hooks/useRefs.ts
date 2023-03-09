@@ -1,20 +1,18 @@
-import { MutableRefObject, useCallback, useRef } from 'react';
+import { createRef, MutableRefObject, useCallback, useRef } from 'react';
 
-interface IRefObject<T> {
-  [key: string | number]: MutableRefObject<T | null>;
-}
+type TRefArray<T> = MutableRefObject<T>[];
 
 type TUseRefs<T> = [
-  IRefObject<T>,
+  TRefArray<T>,
   () => T[]
 ];
 
-export default function useRefs<T>(refNames: string[] | number[]): TUseRefs<T> {
-  const refObject = useRef<IRefObject<T>>({});
+export default function useRefs<T>(refLength: number): TUseRefs<T> {
+  const refObject = useRef<TRefArray<T>>([]);
 
-  for (const refName of refNames) {
-    refObject.current[refName] = useRef<T | null>(null);
-  }
+  refObject.current = Array.from({ length: refLength }).map((_, i) => (
+    refObject.current[i] ?? createRef()
+  ));
 
   const getRefs = useCallback(() => {
     return Object.values(refObject.current).map((item) => (

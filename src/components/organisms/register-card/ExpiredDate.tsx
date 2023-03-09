@@ -15,7 +15,7 @@ const VALIDATE_ERROR = {
 function ExpiredDate() {
   const cardDispatch = useCardDispatch();
   const [errorMessage, setErrorMessage] = useState('');
-  const [expiredDateRef, getExpiredDateRefs] = useRefs<HTMLInputElement>(['month', 'year']);
+  const [expiredDateRef, getExpiredDateRefs] = useRefs<HTMLInputElement>(2);
 
   const handleChange = useCallback(() => {
     const expiredDate = getExpiredDateRefs().map((item) => item.value);
@@ -37,16 +37,16 @@ function ExpiredDate() {
   return (
     <InputContainer title="만료일" className="w-50" errorMessage={errorMessage}>
       <Input
-        ref={expiredDateRef.month}
+        ref={expiredDateRef[0]}
         placeholder="MM"
-        nextFocus={useFocusRef(expiredDateRef.year)}
+        nextFocus={useFocusRef(expiredDateRef[1])}
         maxLength={MAX_LENGTH}
         onChange={handleChange}
         onKeyDown={onlyNumber}
       />
       /
       <Input
-        ref={expiredDateRef.year}
+        ref={expiredDateRef[1]}
         placeholder="YY"
         maxLength={MAX_LENGTH}
         onChange={handleChange}

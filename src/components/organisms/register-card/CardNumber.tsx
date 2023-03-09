@@ -12,7 +12,7 @@ const VALIDATE_ERROR = '카드 번호를 입력 해 주세요.';
 function CardNumber() {
   const cardDispatch = useCardDispatch();
   const [errorMessage, setErrorMessage] = useState('');
-  const [cardNumberRef, getCardRefs] = useRefs<HTMLInputElement>([0, 1, 2, 3]);
+  const [cardNumberRef, getCardRefs] = useRefs<HTMLInputElement>(4);
 
   const handleChange = useCallback(() => {
     const cardNumber = getCardRefs().map((item) => item.value).join('');

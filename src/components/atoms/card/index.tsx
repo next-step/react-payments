@@ -10,7 +10,7 @@ const config = {
 };
 
 function Card({ cardNumber, cardHolder, expiredDate, type = 'small', color, cardCompany }: ICard) {
-  const { previewCardNumber } = useCardFilter({ cardNumber });
+  const { previewCardNumber, formatExpiredDate } = useCardFilter({ cardNumber, expiredDate });
 
   return (
     <div className="card-box">
@@ -27,7 +27,7 @@ function Card({ cardNumber, cardHolder, expiredDate, type = 'small', color, card
           </div>
           <div className="card-bottom__info">
             <span className="card-text">{cardHolder}</span>
-            <span className="card-text">{expiredDate}</span>
+            <span className="card-text">{formatExpiredDate}</span>
           </div>
         </div>
       </div>
