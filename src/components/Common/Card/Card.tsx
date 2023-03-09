@@ -1,6 +1,9 @@
 import { cls, renderTextDivider } from '@/utils';
 import Chip from './Chip';
 import { CardNumber, Expiration } from '@/types';
+import { CARD_COMPANY_LIST } from '@/constants';
+
+const DEFAULT_BACKGROUND_COLOR = 'bg-slate-200';
 
 const getCardSize = (size: string) => {
   return size === 'sm' ? 'w-[210px] h-[130px]' : 'w-[290px] h-[180px]';
@@ -26,6 +29,9 @@ function Card({
   onClick,
 }: CardProps) {
   const cardSize = getCardSize(size);
+  const bgColor =
+    CARD_COMPANY_LIST.find(company => company.companyName === cardCompany)?.companyColorClassName ??
+    DEFAULT_BACKGROUND_COLOR;
 
   if (isEmpty) {
     return (
@@ -33,7 +39,8 @@ function Card({
         <div
           className={cls(
             cardSize,
-            'flex flex-col items-center justify-evenly w-[200px] h-[130px] py-2 px-4 bg-slate-200 rounded-lg',
+            DEFAULT_BACKGROUND_COLOR,
+            'flex flex-col items-center justify-evenly w-[200px] h-[130px] py-2 px-4 rounded-lg',
             'relative overflow-hidden',
           )}
         >
@@ -48,7 +55,8 @@ function Card({
       <div
         className={cls(
           cardSize,
-          'flex flex-col items-center justify-evenly w-[200px] h-[130px] py-2 px-4 bg-slate-200 rounded-lg',
+          bgColor,
+          'flex flex-col items-center justify-evenly w-[200px] h-[130px] py-2 px-4  rounded-lg',
           'relative overflow-hidden',
         )}
       >

@@ -13,16 +13,16 @@ function RootContainer({ children }: PropsWithChildren) {
 
 function App() {
   return (
-    <ModalProvider>
-      <CardListProvider>
-        <CardFormProvider>
-          <RootContainer>
+    <CardListProvider>
+      <CardFormProvider>
+        <RootContainer>
+          <ModalProvider>
             <ModalContainer />
             <RootRouter />
-          </RootContainer>
-        </CardFormProvider>
-      </CardListProvider>
-    </ModalProvider>
+          </ModalProvider>
+        </RootContainer>
+      </CardFormProvider>
+    </CardListProvider>
   );
 }
 

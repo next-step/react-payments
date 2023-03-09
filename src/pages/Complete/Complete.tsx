@@ -7,7 +7,7 @@ import { HEADER_TITLE } from '@/constants';
 
 function Complete() {
   const { isEditMode } = useLocationState<{ isEditMode: boolean }>();
-  const { cardNumber1, cardNumber2, cardNumber3, cardNumber4, year, month, cardOwner } = useCardForm();
+  const { cardNumber1, cardNumber2, cardNumber3, cardNumber4, year, month, cardOwner, cardCompany } = useCardForm();
 
   return (
     <Layout>
@@ -18,7 +18,7 @@ function Complete() {
         <div className="flex-[7]">
           <Card
             size="lg"
-            cardCompany=""
+            cardCompany={cardCompany}
             cardOwner={cardOwner}
             cardNumber={{
               cardNumber1,

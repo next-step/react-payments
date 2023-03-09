@@ -4,7 +4,7 @@ import { ChangeEvent, PropsWithChildren, createContext, useContext, useMemo, use
 type FormHandler = {
   onChange(e: ChangeEvent<HTMLInputElement>): void;
   onReset(): void;
-  updateCardForm(cardForm: CardInformation): void;
+  updateCardForm(cardForm: Partial<CardInformation>): void;
 };
 
 const CardFormContext = createContext<CardInformation | null>(null);
@@ -54,8 +54,8 @@ function CardFormProvider({ children }: PropsWithChildren) {
 
         setCardForm(prev => ({ ...prev, [name]: value }));
       },
-      updateCardForm: (cardForm: CardInformation) => {
-        setCardForm({ ...cardForm });
+      updateCardForm: (updatedForm: Partial<CardInformation>) => {
+        setCardForm(prev => ({ ...prev, ...updatedForm }));
       },
       onReset() {
         setCardForm(initCardInformation);
