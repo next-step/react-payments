@@ -14,6 +14,7 @@ export const useCardNickNameAdd = () => {
 
   const cardNickNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget
+
     if (value.length > MAX_CARD_NICKNAME_LENGTH) return
     setCardNickName(value)
   }
@@ -21,6 +22,7 @@ export const useCardNickNameAdd = () => {
   const cardNickNameAddOnSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault()
     navigate('/')
+
     if (findCardItem === undefined)
       dispatch({
         type: 'CREATE',
@@ -39,5 +41,6 @@ export const useCardNickNameAdd = () => {
         },
       })
   }
+
   return { cardNickName, cardItem, setCardNickName, cardNickNameHandler, cardNickNameAddOnSubmit, findCardItem }
 }

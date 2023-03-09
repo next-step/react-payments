@@ -8,10 +8,12 @@ export const useCardStateCheck = (state: State[]) => {
   const stateCheckAndNaviator = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { name } = e.currentTarget
     const findCardData = state.find((data) => data.ownerName === name)
-    if (findCardData !== undefined) {
+
+    if (findCardData) {
       setState(findCardData)
       navigate('/card-add-complete')
     }
   }
+
   return { stateCheckAndNaviator }
 }
