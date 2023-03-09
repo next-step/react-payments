@@ -1,19 +1,18 @@
 import Text from 'components/common/Text/Text';
 import styled from 'styled-components';
 import Input from '../../common/Input/Input';
-import { useRef } from 'react';
 import { changeCardSecurityInput } from 'utils/InputChange';
 import { ColorType, CardFormType, CardFormInputsType } from 'types';
 import { isValidSecurityCode } from 'utils/InputValidation';
 
 type CardPasswordInputProps = {
   fontColor: ColorType;
-  setSecurityCodeText: React.Dispatch<React.SetStateAction<CardFormType>>;
+  setCard: React.Dispatch<React.SetStateAction<CardFormType>>;
   refs: CardFormInputsType;
   isValid: boolean;
 };
 
-const CardSecurityInput = ({ fontColor, setSecurityCodeText, refs, isValid }: CardPasswordInputProps) => {
+const CardSecurityInput = ({ fontColor, setCard, refs, isValid }: CardPasswordInputProps) => {
   const handleInput = () => {
     if (!refs.cvc.ref) return;
     const securityCode = refs.cvc.ref.value;
@@ -22,7 +21,7 @@ const CardSecurityInput = ({ fontColor, setSecurityCodeText, refs, isValid }: Ca
     if (isNext) {
       refs.password.start.ref?.focus();
     }
-    setSecurityCodeText((prev) => ({
+    setCard((prev) => ({
       ...prev,
       cvc: {
         text: securityCode,

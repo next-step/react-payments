@@ -21,7 +21,7 @@ const initialCardFormState: CardFormType = {
     },
   },
   password: {
-    first: {
+    start: {
       text: '',
       isValid: true,
     },
@@ -36,7 +36,6 @@ const initialCardFormState: CardFormType = {
   },
   ownerName: {
     text: 'empty',
-    isValid: false,
   },
   color: {
     text: '',
@@ -82,7 +81,7 @@ const useFormPage = () => {
         year: currentFormCard.expireDate.year.text,
       },
       password: {
-        first: currentFormCard.password.first.text,
+        start: currentFormCard.password.start.text,
         end: currentFormCard.password.end.text,
       },
       cvc: currentFormCard.cvc.text,

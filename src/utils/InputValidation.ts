@@ -1,5 +1,5 @@
-import { CardFormType } from "types";
-import { reportError, ValidationError } from "utils/error";
+import { CardFormType } from 'types';
+import { reportError, ValidationError } from 'utils/error';
 export const isCardFormValidation = (form: CardFormType): boolean => {
   const isValid =
     form.cardNumbers.isValid &&
@@ -8,13 +8,12 @@ export const isCardFormValidation = (form: CardFormType): boolean => {
     form.cvc.isValid &&
     form.expireDate.month.isValid &&
     form.expireDate.year.isValid &&
-    form.ownerName.isValid &&
-    form.password.first.isValid &&
+    form.password.start.isValid &&
     form.password.end.isValid;
   // Todo: 고차함수적용
 
   try {
-    if (!isValid) throw new ValidationError("입력하지 않은 양식을 확인하시오 !");
+    if (!isValid) throw new ValidationError('입력하지 않은 양식을 확인하시오 !');
   } catch (error) {
     reportError(error);
   }

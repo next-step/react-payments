@@ -28,7 +28,7 @@ export interface CardFormType {
     };
   };
   password: {
-    first: {
+    start: {
       text: string;
       isValid: boolean;
     };
@@ -43,7 +43,6 @@ export interface CardFormType {
   };
   ownerName: {
     text: string;
-    isValid: boolean;
   };
   color: {
     text: ColorType;
@@ -61,7 +60,7 @@ export type CardType = {
     year: string;
   };
   password: {
-    first: string;
+    start: string;
     end: string;
   };
   cvc: string;

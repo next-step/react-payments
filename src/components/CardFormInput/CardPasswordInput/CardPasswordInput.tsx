@@ -7,14 +7,14 @@ import { isValidPasswordNumber } from 'utils/InputValidation';
 
 type CardPasswordInputProps = {
   fontColor: ColorType;
-  setPasswordText: React.Dispatch<React.SetStateAction<CardFormType>>;
-  isValidFirst: boolean;
+  setCard: React.Dispatch<React.SetStateAction<CardFormType>>;
+  isValidStart: boolean;
   isValidEnd: boolean;
   refs: CardFormInputsType;
 };
 
-const CardPasswordInput = ({ refs, fontColor, setPasswordText, isValidFirst, isValidEnd }: CardPasswordInputProps) => {
-  const isValid = isValidFirst && isValidEnd;
+const CardPasswordInput = ({ refs, fontColor, setCard, isValidStart, isValidEnd }: CardPasswordInputProps) => {
+  const isValid = isValidStart && isValidEnd;
 
   const handleInput = () => {
     if (!refs.password.start.ref || !refs.password.end.ref) return;
@@ -26,10 +26,10 @@ const CardPasswordInput = ({ refs, fontColor, setPasswordText, isValidFirst, isV
     if (isNext) {
       refs.password.end.ref?.focus();
     }
-    setPasswordText((prev) => ({
+    setCard((prev) => ({
       ...prev,
       password: {
-        first: {
+        start: {
           text: passWordStart,
           isValid: isValidPasswordNumber(passWordStart),
         },
@@ -52,7 +52,7 @@ const CardPasswordInput = ({ refs, fontColor, setPasswordText, isValidFirst, isV
           ref={(el) => (refs.password.start.ref = el)}
           onChange={handleInput}
           fontColor={fontColor}
-          error={!isValidFirst}
+          error={!isValidStart}
         />
         <Input
           theme="primary"

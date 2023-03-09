@@ -5,13 +5,13 @@ import Input from '../../common/Input/Input';
 import { ColorType, CardFormType, CardFormInputsType } from 'types';
 import { isValidCardNumber } from 'utils/InputValidation';
 type CardNumberInputProps = {
-  setCardNumberText: React.Dispatch<React.SetStateAction<CardFormType>>;
+  setCard: React.Dispatch<React.SetStateAction<CardFormType>>;
   isValid: boolean;
   fontColor: ColorType;
   refs: CardFormInputsType;
 };
 
-const CardNumberInput = ({ isValid, setCardNumberText, fontColor, refs }: CardNumberInputProps) => {
+const CardNumberInput = ({ isValid, setCard, fontColor, refs }: CardNumberInputProps) => {
   const handleInput = () => {
     if (!refs.cardNumbers.ref) return;
     const cardNumbers = changeCardNumber(refs.cardNumbers.ref.value);
@@ -20,7 +20,7 @@ const CardNumberInput = ({ isValid, setCardNumberText, fontColor, refs }: CardNu
     if (isNext) {
       refs.expireDate.month.ref?.focus();
     }
-    setCardNumberText((prev) => ({
+    setCard((prev) => ({
       ...prev,
       cardNumbers: {
         text: cardNumbers,

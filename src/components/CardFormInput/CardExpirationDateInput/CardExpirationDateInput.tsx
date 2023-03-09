@@ -5,7 +5,7 @@ import { changeMonth, changeYear } from 'utils/InputChange';
 import { CardFormType, CardFormInputsType, ColorType } from 'types';
 import { isValidExpirationMonth, isValidExpirationYear } from 'utils/InputValidation';
 export type CardExpirationDateInputProps = {
-  setExprireDateText: React.Dispatch<React.SetStateAction<CardFormType>>;
+  setCard: React.Dispatch<React.SetStateAction<CardFormType>>;
   fontColor: ColorType;
   refs: CardFormInputsType;
   isValidMonth: boolean;
@@ -13,7 +13,7 @@ export type CardExpirationDateInputProps = {
 };
 
 const CardExpirationDateInput = ({
-  setExprireDateText,
+  setCard,
   fontColor,
   refs,
   isValidMonth,
@@ -26,11 +26,11 @@ const CardExpirationDateInput = ({
     const month = changeMonth(refs.expireDate.month.ref.value);
     const year = changeYear(refs.expireDate.year.ref.value);
     refs.expireDate.month.ref.value = month;
-    setExprireDateText((prev) => ({
+    setCard((prev) => ({
       ...prev,
       expireDate: {
         month: {
-          text: month,
+          text: !month.length ? 'MM' : month,
           isValid: isValidExpirationYear(month),
         },
         year: {
@@ -51,7 +51,7 @@ const CardExpirationDateInput = ({
     if (isNext) {
       refs.ownerName.ref?.focus();
     }
-    setExprireDateText((prev) => ({
+    setCard((prev) => ({
       ...prev,
       expireDate: {
         month: {

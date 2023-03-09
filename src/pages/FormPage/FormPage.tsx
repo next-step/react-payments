@@ -43,29 +43,29 @@ const FormPage = () => {
           ownerName={state.ownerName.text}
         />
         <CardNumberInput
-          setCardNumberText={setState}
+          setCard={setState}
           isValid={state.cardNumbers.isValid}
           fontColor={state.color.text}
           refs={cardFormInputs}
         />
         <CardExpirationDateInput
-          setExprireDateText={setState}
+          setCard={setState}
           fontColor={state.color.text}
           refs={cardFormInputs}
           isValidMonth={state.expireDate.month.isValid}
           isValidYear={state.expireDate.year.isValid}
         />
-        <CardOwnerNameInput setOwnerNameText={setState} fontColor={state.color.text} refs={cardFormInputs} />
+        <CardOwnerNameInput setCard={setState} fontColor={state.color.text} refs={cardFormInputs} />
         <CardSecurityInput
           fontColor={state.color.text}
-          setSecurityCodeText={setState}
+          setCard={setState}
           isValid={state.cvc.isValid}
           refs={cardFormInputs}
         />
         <CardPasswordInput
           fontColor={state.color.text}
-          setPasswordText={setState}
-          isValidFirst={state.password.first.isValid}
+          setCard={setState}
+          isValidStart={state.password.start.isValid}
           isValidEnd={state.password.end.isValid}
           refs={cardFormInputs}
         />

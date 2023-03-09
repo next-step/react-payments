@@ -7,11 +7,11 @@ import { ColorType, CardFormType, CardFormInputsType } from 'types';
 
 type CardOwnerNameInputProps = {
   fontColor: ColorType;
-  setOwnerNameText: React.Dispatch<React.SetStateAction<CardFormType>>;
+  setCard: React.Dispatch<React.SetStateAction<CardFormType>>;
   refs: CardFormInputsType;
 };
 
-const CardOwnerNameInput = ({ setOwnerNameText, fontColor, refs }: CardOwnerNameInputProps) => {
+const CardOwnerNameInput = ({ setCard, fontColor, refs }: CardOwnerNameInputProps) => {
   const [inputlength, setInputLength] = useState(0);
 
   const handleInput = () => {
@@ -19,11 +19,10 @@ const CardOwnerNameInput = ({ setOwnerNameText, fontColor, refs }: CardOwnerName
     const ownerName = changeOwnerName(refs.ownerName.ref.value);
     refs.ownerName.ref.value = ownerName;
     setInputLength(ownerName.length);
-    return setOwnerNameText((prev) => ({
+    setCard((prev) => ({
       ...prev,
       ownerName: {
         text: ownerName.length ? ownerName : 'Name',
-        isValid: true,
       },
     }));
   };
