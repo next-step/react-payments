@@ -1,13 +1,15 @@
 import { useMemo, useState } from 'react';
 import styled from '@emotion/styled';
 
-import { CreditCard } from 'components';
+import { CreditCard, SelectCompany } from 'components';
 import {
   Box,
   Header,
   TextField,
   FormFieldControl,
   Button,
+  Chip,
+  Modal,
 } from 'components/@common';
 
 import useCardData from 'hooks/useCardData';
@@ -19,7 +21,6 @@ import { setLocalStorageItem } from 'utils/localStorage';
 
 import { ReactComponent as CVCIcon } from 'assets/CVCIcon.svg';
 import type { CreditCardType } from 'types/CreditCard';
-import { ValidationStatus } from 'components/@common/TextField/TextField.types';
 
 const CARD_LENGTH = 19;
 
@@ -27,17 +28,12 @@ const RegistrationCardPage = () => {
   const { push } = useRouter();
   const { card, changeCardInfo } = useCardData();
 
-  const isValidCardLength = () => {
-    return card.number.length === CARD_LENGTH
-      ? ValidationStatus.SUCCESS
-      : ValidationStatus.ERROR;
+  const isInvalidCardLength = () => {
+    return card.number != '' && card.number.length < CARD_LENGTH;
   };
 
   const isSubmitEnabled = useMemo(() => {
-    return (
-      isObjectComplete<CreditCardType>(card) &&
-      isValidCardLength() === 'success'
-    );
+    return isObjectComplete<CreditCardType>(card) && !isInvalidCardLength();
   }, [{ ...card }]);
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,44 +82,52 @@ const RegistrationCardPage = () => {
     <>
       <Header showBackIcon>카드 추가</Header>
       <CreditCard
-        color="brand02"
-        name="파란색 카드"
+        color={card.color}
         holderName={card?.holderName}
         number={card?.number}
         expiration={card?.expiration}
       />
+      <ChipWrapper display="flex" justifyContent="center">
+        <Modal>
+          <Modal.Trigger>
+            <Chip>카드사 선택</Chip>
+          </Modal.Trigger>
+
+          <Modal.Content>
+            <SelectCompany onClick={changeCardInfo} />
+          </Modal.Content>
+        </Modal>
+      </ChipWrapper>
+
       <Form onSubmit={onSubmit}>
         <FormFieldControl>
           <FormFieldControl.Label>카드 번호</FormFieldControl.Label>
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <TextField
-              placeholder="0000-0000-0000-0000"
-              type="text"
-              inputMode="numeric"
-              maxLength={19}
-              validationStatus={isValidCardLength()}
-              value={card?.number}
-              onChange={handleNumber}
-              className="w-100"
-            />
-          </Box>
+          <TextField
+            placeholder="0000-0000-0000-0000"
+            type="text"
+            inputMode="numeric"
+            maxLength={19}
+            validationStatus={isInvalidCardLength() ? 'error' : 'success'}
+            value={card?.number}
+            onChange={handleNumber}
+            className="w-100"
+          />
+          {isInvalidCardLength() && (
+            <FormFieldControl.Description isError={isInvalidCardLength()}>
+              카드 번호는 16자 모두 입력되어야 합니다.
+            </FormFieldControl.Description>
+          )}
         </FormFieldControl>
 
         <FormFieldControl>
           <FormFieldControl.Label>만료일</FormFieldControl.Label>
-          <Box display="flex" alignItems="center">
-            <TextField
-              placeholder="MM / YY"
-              maxLength={5}
-              value={card?.expiration}
-              onChange={handleExpiration}
-              className="w-30"
-            />
-          </Box>
+          <TextField
+            placeholder="MM / YY"
+            maxLength={5}
+            value={card?.expiration}
+            onChange={handleExpiration}
+            className="w-30"
+          />
         </FormFieldControl>
 
         <FormFieldControl>
@@ -223,4 +227,7 @@ export default RegistrationCardPage;
 
 const Form = styled.form`
   margin: 30px;
+`;
+const ChipWrapper = styled(Box)`
+  margin: 10px 0;
 `;

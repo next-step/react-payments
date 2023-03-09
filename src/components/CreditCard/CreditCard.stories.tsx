@@ -21,7 +21,7 @@ const Wrapper = styled.div`
 
 Primary.args = {
   color: 'brand02',
-  name: '아름 카드',
+  nickname: '아름 카드',
   number: '1234-5678-6789-0123',
   holderName: '양아름',
   expiration: '12/24',

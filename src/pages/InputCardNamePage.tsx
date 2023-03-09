@@ -1,3 +1,4 @@
+import { useContext, useRef, useState } from 'react';
 import styled from '@emotion/styled';
 
 import { CreditCard } from 'components';
@@ -5,34 +6,57 @@ import { Box, TextField, Button } from 'components/@common';
 import type { CreditCardProps } from 'components/CreditCard/CreditCard.types';
 import useRouter from 'routes/useRouter';
 
-import { getLocalStorageItem } from 'utils/localStorage';
+import {
+  getLocalStorageItem,
+  removeLocalStorageItem,
+} from 'utils/localStorage';
+import { CardListContext } from 'contexts/CardListProvider';
+
+import { findCardDefaultName } from 'utils/findCardDefaultName';
 
 const InputCardNamePage = () => {
-  const { push } = useRouter();
+  const [nickname, setNickName] = useState('');
+  const nameRef = useRef<HTMLInputElement>(null);
+  const { replace } = useRouter();
+  const { addCardInfo } = useContext(CardListContext);
   const item = getLocalStorageItem<CreditCardProps>('CardValues');
+
+  const onSubmit = () => {
+    if (!nameRef.current) return;
+    const { value } = nameRef.current;
+    addCardInfo({
+      ...item,
+      nickname: value || findCardDefaultName(item?.color!),
+    });
+    removeLocalStorageItem('CardValues');
+    replace('/card-list');
+  };
+
+  const onChange = () => {
+    if (!nameRef.current) return;
+    setNickName(nameRef.current.value);
+  };
 
   return (
     <Wrapper display="flex" flexDirection="column" justifyContent="center">
       <H1>카드 등록이 완료되었습니다.</H1>
       <CreditCard
-        color="brand02"
-        name="파란색 카드"
+        color={item?.color!}
+        nickname={nickname}
         holderName={item?.holderName}
         number={item?.number}
         expiration={item?.expiration}
       />
       <Form>
         <TextField
+          onChange={onChange}
+          ref={nameRef}
           placeholder="카드를 저장할 별명을 입력해주세요."
-          maxLength={30}
+          maxLength={10}
           className="w-100"
         />
         <Box display="flex" justifyContent="flex-end" className="mt-20">
-          <Button
-            type="submit"
-            color="brand02"
-            onClick={() => push('/card-list')}
-          >
+          <Button type="submit" color="brand02" onClick={onSubmit}>
             카드 생성 완료하기
           </Button>
         </Box>

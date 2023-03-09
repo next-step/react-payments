@@ -1,5 +1,5 @@
 import { isValidElement, PropsWithChildren } from 'react';
-import type { LabelProps } from './FormFieldControl.types';
+import type { LabelProps, DescriptionProps } from './FormFieldControl.types';
 import * as Styled from './FormFieldControl.styled';
 import { Help } from 'components/Help';
 
@@ -17,4 +17,11 @@ FormFieldControl.Label = ({
     </Styled.Label>
   );
 };
+FormFieldControl.Description = ({
+  isError,
+  children,
+}: PropsWithChildren<DescriptionProps>) => {
+  return <Styled.Description isError={isError}>{children}</Styled.Description>;
+};
+
 export default FormFieldControl;

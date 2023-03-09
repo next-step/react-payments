@@ -2,17 +2,20 @@ import * as Styled from './CreditCard.styles';
 import type { CreditCardProps } from './CreditCard.types';
 
 import { maskLastEight } from 'utils/format';
+import { findCardDefaultName } from 'utils/findCardDefaultName';
 
 const CreditCard = ({
   color,
-  name,
+  nickname,
   number,
   holderName,
   expiration,
 }: CreditCardProps) => {
   return (
-    <Styled.Wrapper color={color}>
-      <Styled.SmallText>{name}</Styled.SmallText>
+    <Styled.Wrapper color={color!}>
+      <Styled.SmallText>
+        {nickname || findCardDefaultName(color!)}
+      </Styled.SmallText>
       <Styled.CardChip />
       <Styled.NumberText>{maskLastEight(number)}</Styled.NumberText>
       <Styled.FlexWrapper
