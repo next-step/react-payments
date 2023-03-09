@@ -20,4 +20,9 @@ export function maskingCardExpiration(cardExpiration) {
     .join("");
 }
 
-export default { maskingCardNumber, maskingCardExpiration };
+const utils = {
+  isNumber,
+  maskingCardNumber,
+  maskingCardExpiration,
+};
+export default utils;

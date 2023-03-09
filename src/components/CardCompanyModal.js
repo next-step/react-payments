@@ -1,9 +1,4 @@
-import { useContext } from "react";
-import { CardContext } from "../context/CardContext";
-
 export default function CardCompanyModal({ handleModalClick }) {
-  const { cardInfo, setCardInfo } = useContext(CardContext);
-
   return (
     <div className="modal-dimmed">
       <div className="modal">
