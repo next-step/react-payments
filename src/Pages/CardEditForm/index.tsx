@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Card from '../../Components/Card/Card';
 import { CardInfo } from '../../Components/CardInput';
 
 import '../index.css';
 
 function CardEditForm() {
+  const refs = useRef(Array(5).fill(null));
   const [cardIssuer, setCardIssuer] = useState(['']);
   const [cardNumber, setCardNumber] = useState(['', '', '', '']);
   const [monthYear, setMonthYear] = useState(['', '']);
@@ -26,8 +27,8 @@ function CardEditForm() {
       />
 
       <CardInfo
-        required={true}
-        validate={() => true}
+        ref={refs.current[0]}
+        onValidate={(v) => true}
         onChange={setCardNumber}
         title="카드 번호"
         delimeter={'-'}
@@ -39,8 +40,8 @@ function CardEditForm() {
       </CardInfo>
 
       <CardInfo
-        required={true}
-        validate={() => true}
+        ref={refs.current[1]}
+        onValidate={(v) => true}
         onChange={setCardOwner}
         title="카드 소유자 이름(선택)"
         countMaxLength={true}
@@ -52,8 +53,8 @@ function CardEditForm() {
       </CardInfo>
 
       <CardInfo
-        required={true}
-        validate={() => true}
+        ref={refs.current[2]}
+        onValidate={(v) => true}
         onChange={setMonthYear}
         title="만료일"
         delimeter={'/'}
@@ -64,8 +65,8 @@ function CardEditForm() {
       </CardInfo>
 
       <CardInfo
-        required={true}
-        validate={() => true}
+        ref={refs.current[3]}
+        onValidate={(v) => true}
         onChange={setSecureCode}
         title="보안 코드(CVC/CVV)"
         width="25%"
@@ -74,8 +75,8 @@ function CardEditForm() {
       </CardInfo>
 
       <CardInfo
-        required={true}
-        validate={() => true}
+        ref={refs.current[4]}
+        onValidate={(v) => true}
         onChange={setPinNumber}
         title="비밀번호"
         width="60%"

@@ -9,6 +9,7 @@ import {
 interface ComponentRef {
   prevRef: RefObject<HTMLInputElement>;
   ref: RefObject<HTMLInputElement>;
+  props: object;
   nextRef: RefObject<HTMLInputElement>;
 }
 
@@ -19,7 +20,7 @@ class Components {
     this._components = new Map();
   }
 
-  public add = (componentRef: RefObject<HTMLInputElement>) => {
+  public add = (componentRef: RefObject<HTMLInputElement>, props: object) => {
     let lastComponentRef = this._getLastComponent()?.ref;
     if (lastComponentRef) {
       const lastComponent = this._components.get(
@@ -37,6 +38,7 @@ class Components {
     this._components.set(componentRef, {
       prevRef: lastComponentRef,
       ref: componentRef,
+      props,
       nextRef: componentRef,
     });
   };

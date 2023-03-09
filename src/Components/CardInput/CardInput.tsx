@@ -6,6 +6,8 @@ import React, {
   useRef,
   type ChangeEvent,
   useState,
+  forwardRef,
+  useImperativeHandle,
 } from 'react';
 import { type CardInputOptions } from '.';
 import { createComponentContext } from './useComponent';
@@ -16,69 +18,109 @@ interface ContainerProps {
     | Array<ReactElement<CardInputOptions>>
     | ReactElement<CardInputOptions>;
   onChange: (value: string[]) => void;
-  validate: (value: string) => boolean;
+  onValidate: (value: string) => boolean;
   width?: string;
   background?: boolean;
-  required?: boolean;
   delimeter?: string;
   countMaxLength?: boolean;
 }
 
+interface ContainerProviderProps extends ContainerProps {
+  ref: React.RefObject<HandleContainer>;
+}
+
+export interface HandleContainer {
+  focus: () => void;
+  validate: (s: string) => void;
+}
+
 const [ComponentProvider, useComponentContext] = createComponentContext();
 
-function Container({
-  title,
-  children,
-  onChange,
-  required = true,
-  countMaxLength = false,
-  delimeter = '',
-  width = '100%',
-  background = true,
-}: ContainerProps) {
-  const { getAll } = useComponentContext().components;
+const Container = forwardRef<HandleContainer, ContainerProps>(
+  function Container(props, ref) {
+    const {
+      title,
+      children,
+      onChange,
+      onValidate,
+      countMaxLength = false,
+      delimeter = '',
+      width = '100%',
+      background = true,
+    } = props;
+    const { getAll } = useComponentContext().components;
 
-  const [inputLength, setInputLength] = useState(0);
+    const [inputLength, setInputLength] = useState(0);
 
-  const handleChange = useCallback(() => {
-    onChange(
-      getAll().map(
-        (component) => (component.ref.current as HTMLInputElement).value
-      )
+    const handleChange = useCallback(() => {
+      onChange(
+        getAll().map(
+          (component) => (component.ref.current as HTMLInputElement).value
+        )
+      );
+      setInputLength(getTotalInputLength());
+    }, [onChange, getAll]);
+
+    const getTotalInputLength = useCallback(() => {
+      const result = getAll().reduce<number>(
+        (length, component) =>
+          length +
+          ((component.ref.current as HTMLInputElement).value?.length ?? 0),
+        0
+      );
+      return result;
+    }, [getAll]);
+
+    const getFirstIncompleteInput = useCallback(() => {
+      const incompleteInput = getAll().find(
+        (component) =>
+          (component.ref.current as HTMLInputElement).value.length <
+          (component.props as CardInputOptions).maxLength
+      );
+      return incompleteInput;
+    }, [getAll]);
+
+    const handleFocus = () => {
+      (getFirstIncompleteInput()?.ref.current as HTMLInputElement)?.focus();
+    };
+
+    useImperativeHandle(
+      ref,
+      () => {
+        return {
+          focus() {
+            handleFocus();
+          },
+          validate(value: string) {
+            onValidate(value);
+          },
+        };
+      },
+      []
     );
-    setInputLength(getTotalInputLength());
-  }, [onChange]);
 
-  const getTotalInputLength = useCallback(() => {
-    const result = getAll().reduce<number>(
-      (length, component) =>
-        length +
-        ((component.ref.current as HTMLInputElement).value?.length ?? 0),
-      0
+    return (
+      <div className="input-container">
+        <div className="input-top">
+          <span className="input-title">{title}</span>
+          {countMaxLength && (
+            <span className="input-length-count">
+              {inputLength} / {getTotalMaxLength(children)}
+            </span>
+          )}
+        </div>
+        <div
+          className={`input-box ${background ? 'background' : ''}`}
+          style={{ width: `${width}` }}
+          onChange={handleChange}
+          onFocus={handleFocus}
+        >
+          {insertDelimeter(children, delimeter)}
+        </div>
+      </div>
     );
-    return result;
-  }, [getAll]);
-
-  return (
-    <div className="input-container">
-      <div className="input-top">
-        <span className="input-title">{title}</span>
-        {countMaxLength && (
-          <span className="input-length-count">
-            {inputLength} / {getTotalMaxLength(children)}
-          </span>
-        )}
-      </div>
-      <div
-        className={`input-box ${background ? 'background' : ''}`}
-        style={{ width: `${width}` }}
-        onChange={handleChange}
-      >
-        {insertDelimeter(children, delimeter)}
-      </div>
-    </div>
-  );
-}
+  }
+);
 
 const getTotalMaxLength = (components: ReactElement[] | ReactElement) =>
   Children.toArray(components).reduce<number>((totalLength, child) => {
@@ -109,7 +151,7 @@ const insertDelimeter = (
     []
   );
 
-export function CardInputContainerWithProvider(props: ContainerProps) {
+export function CardInputContainerWithProvider(props: ContainerProviderProps) {
   return (
     <ComponentProvider>
       <Container {...props} />
@@ -117,18 +159,15 @@ export function CardInputContainerWithProvider(props: ContainerProps) {
   );
 }
 
-export function Input({
-  hideValue,
-  maxLength,
-  placeholder,
-  validate = undefined,
-}: CardInputOptions) {
+export function Input(props: CardInputOptions) {
+  const { hideValue, maxLength, placeholder, validate = undefined } = props;
+
   const ref = useRef<HTMLInputElement>(null);
 
   const { add, remove, get } = useComponentContext().components;
 
   useEffect(() => {
-    add(ref);
+    add(ref, { ...props });
     return () => {
       remove(ref);
     };
