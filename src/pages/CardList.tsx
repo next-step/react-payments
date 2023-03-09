@@ -5,10 +5,10 @@ import { ICardDTO } from '../domain/types';
 import { useCallback, useState } from 'react';
 import { CardItem } from '../components/molecules';
 
+const initialCardList: ICardDTO[] = cardRepository.getItem().sort((a, b) => b.cardNumber - a.cardNumber);
+
 export default function CardList() {
-  const [cardList, setCardList] = useState<ICardDTO[]>(
-    cardRepository.getItem().sort((a, b) => b.cardNumber - a.cardNumber)
-  );
+  const [cardList, setCardList] = useState(initialCardList);
 
   const removeCard = useCallback((cardNumber: string) => {
     setCardList((prevState) => {

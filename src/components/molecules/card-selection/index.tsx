@@ -35,7 +35,8 @@ function CardSelection({ onChange }: ICardSelection) {
               key={cardItem.cardCompany}
               dotColor={cardItem.color}
               title={cardItem.cardCompany}
-              onClick={() => handleClick(cardItem)}
+              item={cardItem}
+              onClick={handleClick}
             />
           ))}
         </div>
