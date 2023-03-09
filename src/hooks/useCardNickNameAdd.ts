@@ -7,10 +7,10 @@ export const useCardNickNameAdd = () => {
   const navigate = useNavigate()
   const dispatch = useCardDispatchContext()
   const [cardNickName, setCardNickName] = useState('')
-  const cardData = useCardItemStateContext()
-  const state = useCardListStateContext()
+  const cardItem = useCardItemStateContext()
+  const cardList = useCardListStateContext()
 
-  const findCardData = state.find((data) => data.ownerName === cardData.ownerName)
+  const findCardItem = cardList.find((data) => data.ownerName === cardItem.ownerName)
 
   const cardNickNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget
@@ -21,23 +21,23 @@ export const useCardNickNameAdd = () => {
   const cardNickNameAddOnSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault()
     navigate('/')
-    if (findCardData === undefined)
+    if (findCardItem === undefined)
       dispatch({
         type: 'CREATE',
         card: {
-          ...cardData,
-          nickName: cardNickName === '' ? cardData.cardDesign : cardNickName,
+          ...cardItem,
+          nickName: cardNickName === '' ? cardItem.cardDesign : cardNickName,
         },
       })
 
-    if (findCardData !== undefined)
+    if (findCardItem !== undefined)
       dispatch({
         type: 'EDIT',
         card: {
-          ...cardData,
-          nickName: cardNickName === '' ? cardData.cardDesign : cardNickName,
+          ...cardItem,
+          nickName: cardNickName === '' ? cardItem.cardDesign : cardNickName,
         },
       })
   }
-  return { cardNickName, cardData, setCardNickName, cardNickNameHandler, cardNickNameAddOnSubmit, findCardData }
+  return { cardNickName, cardItem, setCardNickName, cardNickNameHandler, cardNickNameAddOnSubmit, findCardItem }
 }

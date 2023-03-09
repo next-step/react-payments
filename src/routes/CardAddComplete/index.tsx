@@ -3,11 +3,11 @@ import { CARD_NAME_LIST } from '../../constants/Card'
 import { useCardNickNameAdd } from '../../hooks/useCardNickNameAdd'
 
 const CardAddComplete = () => {
-  const { cardNickName, setCardNickName, cardNickNameHandler, cardNickNameAddOnSubmit, cardData, findCardData } =
+  const { cardNickName, setCardNickName, cardNickNameHandler, cardNickNameAddOnSubmit, cardItem, findCardItem } =
     useCardNickNameAdd()
 
   useEffect(() => {
-    if (findCardData !== undefined) setCardNickName(cardData.nickName)
+    if (findCardItem !== undefined) setCardNickName(cardItem.nickName)
   }, [])
 
   return (
@@ -17,9 +17,9 @@ const CardAddComplete = () => {
           <h2 className='page-title mb-10'>카드등록이 완료되었습니다.</h2>
         </div>
         <div className='card-box '>
-          <div className={`big-card card-color${CARD_NAME_LIST.indexOf(cardData.cardDesign)}`}>
+          <div className={`big-card card-color${CARD_NAME_LIST.indexOf(cardItem.cardDesign)}`}>
             <div className='card-top'>
-              <span className='card-text__big'>{cardData.cardDesign}</span>
+              <span className='card-text__big'>{cardItem.cardDesign}</span>
             </div>
             <div className='card-middle'>
               <div className='big-card__chip' />
@@ -27,14 +27,14 @@ const CardAddComplete = () => {
             <div className='card-bottom'>
               <div className='card-bottom__number'>
                 <span className='card-text__big'>
-                  {cardData.cardNumber.num1} - {cardData.cardNumber.num2} - {cardData.cardNumber.num3} -{' '}
-                  {cardData.cardNumber.num4}
+                  {cardItem.cardNumber.num1} - {cardItem.cardNumber.num2} - {cardItem.cardNumber.num3} -{' '}
+                  {cardItem.cardNumber.num4}
                 </span>
               </div>
               <div className='card-bottom__info'>
-                <span className='card-text__big text-hidden'>{cardData.ownerName}</span>
+                <span className='card-text__big text-hidden'>{cardItem.ownerName}</span>
                 <span className='card-text__big'>
-                  {cardData.cardExpirationDate.MM} / {cardData.cardExpirationDate.YY}
+                  {cardItem.cardExpirationDate.MM} / {cardItem.cardExpirationDate.YY}
                 </span>
               </div>
             </div>
