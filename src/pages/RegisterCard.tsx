@@ -28,6 +28,10 @@ export default function RegisterCard() {
     }
   }, [cardState]);
 
+  useEffect(() => {
+    cardDispatch({ type: 'RESET_CARD', payload: {} });
+  }, [history]);
+
   const moveCardList = () => navigate('/');
   const handleClickOutside = () => {
     setShowModal(false);
@@ -56,7 +60,6 @@ export default function RegisterCard() {
     ];
 
     cardRepository.setItem(newCardList);
-    cardDispatch({ type: 'RESET_CARD', payload: {} });
     navigate(`/register-complete?card=${cardState.cardNumber}`);
   };
 
