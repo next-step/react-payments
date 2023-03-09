@@ -15,5 +15,5 @@ const Template: ComponentStory<typeof EmptyCardButton> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  onClick: () => console.log('clicked'),
+  onClick: () => alert('버튼 클릭'),
 };

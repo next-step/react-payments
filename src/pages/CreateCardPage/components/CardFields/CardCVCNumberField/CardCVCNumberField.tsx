@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-import { Label, TextInput } from '@/components';
+import { Input, Label } from '@/components';
 import { ACTION, useCardFieldDispatchContext } from '../../CardFieldContext';
-import { LABEL_TEXT } from '@/constants/createCard';
+import { LABEL_TEXT } from '@/constants';
 import { Colors } from '@/styles/colors';
 import { CircleQuestionIcon } from '@/assets';
 import { isNotNumber } from '@/utils/validate';
@@ -29,16 +29,16 @@ const CardCVCNumberField = ({ cvc, fontColor }: CardCVCNumberFieldProps) => {
   return (
     <Label labelText={LABEL_TEXT.CVC}>
       <CardCVCNumberInputContainer>
-        <TextInput
+        <Input.TextInput
           fontColor={fontColor}
-          inputMode="numeric"
           width={CVC_NUMBER_INPUT_WIDTH}
-          type="password"
           maxLength={CVC_NUMBER_LIMIT}
           label="cvc"
           onChange={handleChange}
-          textAlign="center"
           value={cvc}
+          textAlign="center"
+          inputMode="numeric"
+          type="password"
         />
         <CircleQuestionIcon />
       </CardCVCNumberInputContainer>

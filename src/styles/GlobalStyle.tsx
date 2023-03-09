@@ -4,6 +4,23 @@ const globalStyleCss = css`
   * {
     box-sizing: border-box;
   }
+  html {
+    height: 100%;
+  }
+
+  li,
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
   body {
     display: flex;
     flex-direction: column;
@@ -11,6 +28,12 @@ const globalStyleCss = css`
     align-items: center;
     justify-content: center;
     background-color: #e5e5e5;
+    margin: 0;
+    height: 100%;
+  }
+
+  p {
+    margin: 0;
   }
 
   input {
@@ -25,10 +48,15 @@ const globalStyleCss = css`
     background-color: #fff;
     width: 375px;
     min-width: 375px;
-    height: 700px;
+    flex: 1;
     position: relative;
-    border-radius: 15px;
     padding: 16px 24px;
+    overflow-y: scroll;
+    height: 100%;
+    &::-webkit-scrollbar {
+      width: 0px;
+      background-color: transparent;
+    }
   }
 `;
 

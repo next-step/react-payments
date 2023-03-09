@@ -13,32 +13,33 @@ import {
   CardText,
   CardBottomNumber,
   CardBottomInfo,
+  CardName,
 } from './Card.style';
 import { CardField } from '@/types';
-import { Colors, colors } from '@/styles/colors';
+import { Colors } from '@/styles/colors';
 
 type CardProps = {
   size: 'small' | 'big';
-  cardColor: Colors;
-  cardName?: string;
-} & Omit<CardField, 'cardPassword' | 'cvc'>;
 
-const Card = ({
-  size,
-  cardNumber,
-  expirationMonth,
-  expirationYear,
-  cardName,
-  cardColor,
-  ownerName,
-}: CardProps) => {
-  const textClassName = `card-text` + (size === 'big' ? '__big' : '');
+  card: Omit<CardField, 'cardPassword' | 'cvc' | 'cardCompany'> & {
+    cardName: string;
+    cardColor: Colors;
+  };
+};
+
+const Card = ({ size, card }: CardProps) => {
+  const {
+    cardNumber,
+    ownerName,
+    expirationMonth,
+    expirationYear,
+    cardColor,
+    cardName,
+  } = card;
 
   return (
-    <CardContainer cardColor={colors[cardColor]} size={size}>
-      <CardTop>
-        {cardName && <span className={textClassName}>{cardName}</span>}
-      </CardTop>
+    <CardContainer cardColor={cardColor} size={size}>
+      <CardTop>{cardName && <CardName>{cardName}</CardName>}</CardTop>
       <CardMiddle>
         <CardChip size={size} />
       </CardMiddle>

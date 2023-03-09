@@ -15,5 +15,6 @@ const Template: ComponentStory<typeof TextButton> = (args) => (
 export const Default = Template.bind({});
 
 Default.args = {
-  onClick: () => console.log('clicked'),
+  text: '버튼',
+  onClick: () => alert('버튼 클릭'),
 };

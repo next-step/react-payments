@@ -1,3 +1,4 @@
+import { CARD_COMPANIES } from '@/constants';
 import { CardFieldAction } from './CardFieldReducer';
 
 type ActionTypes =
@@ -7,7 +8,8 @@ type ActionTypes =
   | 'UPDATE_CARD_CVC'
   | 'UPDATE_CARD_PASSWORD'
   | 'UPDATE_EXPIRATION_MONTH'
-  | 'UPDATE_EXPIRATION_YEAR';
+  | 'UPDATE_EXPIRATION_YEAR'
+  |'UPDATE_CARD_COMPANY';
 
 export const ACTION = {
   APPEND_CARD_NUM: (value: string) => ({
@@ -65,4 +67,11 @@ export const ACTION = {
       value : value || '',
     },
   }),
+  UPDATE_CARD_COMPANY : (value: keyof typeof CARD_COMPANIES) => ({
+    type: 'UPDATE',
+    payload: {
+      key: 'cardCompany',
+      value,
+    },
+}),
 } satisfies Record<ActionTypes, (value: any) => CardFieldAction>;
