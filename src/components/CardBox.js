@@ -1,23 +1,6 @@
 // import { useContext } from "react";
 // import { CardContext } from "../context/CardContext";
-
-function maskingCardNumber(cardNumber) {
-  const cardNumberArray = Object.values(cardNumber);
-  return cardNumberArray
-    .map((value, index) => {
-      return index < 3 && value.length === 4 ? value + "-" : value;
-    })
-    .join("");
-}
-
-function maskingCardExpiration(cardExpiration) {
-  const cardExpirationArray = Object.values(cardExpiration);
-  return cardExpirationArray
-    .map((value, index) => {
-      return index == 0 && value < 13 && value > 0 ? value + " / " : value;
-    })
-    .join("");
-}
+import utils from "../utils/card";
 
 export default function CardBox({ cardInfo, isEmpty, cardSize, onClick }) {
   // const { cardInfo } = useContext(CardContext);
@@ -44,7 +27,7 @@ export default function CardBox({ cardInfo, isEmpty, cardSize, onClick }) {
             <span
               className={cardSize === "big" ? "card-text__big" : "card-text"}
             >
-              {cardInfo && maskingCardNumber(cardInfo["cardNumber"])}
+              {cardInfo && utils.maskingCardNumber(cardInfo["cardNumber"])}
             </span>
           </div>
           <div className="card-bottom__info">
@@ -56,7 +39,8 @@ export default function CardBox({ cardInfo, isEmpty, cardSize, onClick }) {
             <span
               className={cardSize === "big" ? "card-text__big" : "card-text"}
             >
-              {cardInfo && maskingCardExpiration(cardInfo["cardExpiration"])}
+              {cardInfo &&
+                utils.maskingCardExpiration(cardInfo["cardExpiration"])}
             </span>
           </div>
         </div>

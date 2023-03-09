@@ -58,10 +58,10 @@ export default function CardRegistrationPage() {
   const [isShowModal, setIsShowModal] = useState(true);
 
   const isFormFilled =
-    cardNumberRefs.current[0]?.value?.length == CARD_NUMBER.MAX_LENGTH &&
-    cardNumberRefs.current[1]?.value?.length == CARD_NUMBER.MAX_LENGTH &&
-    cardNumberRefs.current[2]?.value?.length == CARD_NUMBER.MAX_LENGTH &&
-    cardNumberRefs.current[3]?.value?.length == CARD_NUMBER.MAX_LENGTH &&
+    cardNumberRefs.current[0]?.value?.length === CARD_NUMBER.MAX_LENGTH &&
+    cardNumberRefs.current[1]?.value?.length === CARD_NUMBER.MAX_LENGTH &&
+    cardNumberRefs.current[2]?.value?.length === CARD_NUMBER.MAX_LENGTH &&
+    cardNumberRefs.current[3]?.value?.length === CARD_NUMBER.MAX_LENGTH &&
     ExpirationRefs.current[0]?.value > 0 &&
     ExpirationRefs.current[1]?.value > 0 &&
     OwnerNameRef.current?.value?.length > 0 &&
@@ -111,7 +111,7 @@ export default function CardRegistrationPage() {
                 num3: cardNumberRefs.current[3]?.value,
               },
             });
-            if (e.target.value.length == 4) {
+            if (e.target.value.length === 4) {
               if (
                 cardNumberRefs.current[0]?.value?.length === 4 &&
                 cardNumberRefs.current[1]?.value?.length === 4 &&
@@ -150,7 +150,7 @@ export default function CardRegistrationPage() {
                 year: ExpirationRefs.current[1]?.value,
               },
             });
-            if (e.target.value.length == 2) {
+            if (e.target.value.length === 2) {
               if (
                 ExpirationRefs.current[0]?.value?.length === 2 &&
                 ExpirationRefs.current[1]?.value?.length === 2
@@ -158,7 +158,7 @@ export default function CardRegistrationPage() {
                 OwnerNameRef.current?.focus();
               else e.target.nextSibling?.focus();
             }
-            if (e.target.value.length == 2) e.target.nextSibling?.focus();
+            if (e.target.value.length === 2) e.target.nextSibling?.focus();
           }}
           ExpirationRefs={ExpirationRefs}
         />
@@ -183,7 +183,7 @@ export default function CardRegistrationPage() {
               ...cardInfo,
               ["cardOwnerName"]: OwnerNameRef.current?.value,
             });
-            if (e.target.value.length == 30) SecurityCodeRef.current?.focus();
+            if (e.target.value.length === 30) SecurityCodeRef.current?.focus();
           }}
           OwnerNameRef={OwnerNameRef}
         />
@@ -199,7 +199,7 @@ export default function CardRegistrationPage() {
               ...cardInfo,
               ["cardSecurityCode"]: SecurityCodeRef.current?.value,
             });
-            if (e.target.value.length == 3) PasswordRefs.current[0]?.focus();
+            if (e.target.value.length === 3) PasswordRefs.current[0]?.focus();
           }}
           SecurityCodeRef={SecurityCodeRef}
         />
@@ -211,7 +211,7 @@ export default function CardRegistrationPage() {
               return { success: false, errorMessage: MESSAGE.ALERT_NUMBER };
             }
             dispatch({ type: "cardPassword", target: e.target });
-            if (e.target.value.length == 1) e.target.nextSibling?.focus();
+            if (e.target.value.length === 1) e.target.nextSibling?.focus();
             setCardInfo({
               ...cardInfo,
               ["cardPassword"]: {

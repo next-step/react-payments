@@ -1,7 +1,6 @@
 import { useContext } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
-import { CardContext } from "../context/CardContext";
 import { CardListContext } from "../context/CardListContext";
 
 import { ROUTE_PATH } from "../constants/page";
@@ -9,7 +8,6 @@ import Header from "../components/Header";
 import CardBox from "../components/CardBox";
 
 export default function RegistedCardListPage() {
-  const { cardInfo, setCardInfo } = useContext(CardContext);
   const { cardList, setCardList } = useContext(CardListContext);
   const navigate = useNavigate();
 
@@ -43,7 +41,7 @@ export default function RegistedCardListPage() {
                 type="button"
                 onClick={() =>
                   setCardList(
-                    cardList.filter((cardInfo) => cardInfo[index] == index)
+                    cardList.filter((cardInfo) => cardInfo[index] === index)
                   )
                 }
               >
