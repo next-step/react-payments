@@ -45,9 +45,16 @@ const CARD_COMPANY_LIST_SET: [string, string, CompanyColorHexCode, string][] = [
   ['Number8', 'red', '#f87171', '888888888'],
 ];
 
+enum Index {
+  companyName,
+  classNameColor,
+  hexColor,
+  companyIdentificationNumber,
+}
+
 export const CARD_COMPANY_LIST: CardCompany[] = CARD_COMPANY_LIST_SET.map(cardCompany => ({
-  companyName: cardCompany[0],
-  companyColorClassName: `bg-${cardCompany[1]}-400` as CompanyColorClassName,
-  companyColorHexCode: cardCompany[2],
-  companyIdentification: cardCompany[3],
+  companyName: cardCompany[Index.companyName],
+  companyColorClassName: `bg-${cardCompany[Index.classNameColor]}-400` as CompanyColorClassName,
+  companyColorHexCode: cardCompany[Index.hexColor],
+  companyIdentification: cardCompany[Index.companyIdentificationNumber],
 }));

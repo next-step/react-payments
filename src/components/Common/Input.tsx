@@ -15,6 +15,7 @@ export type Width = keyof typeof widthToClassNameMap;
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   kind?: 'basic' | 'underline';
   width?: Width;
+  border?: boolean;
   formatter?: (str: string) => string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
