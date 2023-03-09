@@ -1,4 +1,4 @@
-import { OWNER_NAME_LENGTH_MAX } from '../../../constants/Card'
+import { MAX_OWNER_NAME_LENGTH } from '../../../constants/Card'
 import { Input } from '../../Element'
 
 const CardOwnerName = ({ ownerName, ownerNameValueHandler }: CardOwnerNameProps) => {
@@ -6,7 +6,7 @@ const CardOwnerName = ({ ownerName, ownerNameValueHandler }: CardOwnerNameProps)
     <div className='input-container'>
       <div className='input-title-box'>
         <span className='input-title'>카드 소유자 이름(선택)</span>
-        <span className='input-title'>{`${ownerName.length}/${OWNER_NAME_LENGTH_MAX}`}</span>
+        <span className='input-title'>{`${ownerName.length}/${MAX_OWNER_NAME_LENGTH}`}</span>
       </div>
       <Input
         className='input-basic'

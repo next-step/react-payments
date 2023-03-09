@@ -10,10 +10,10 @@ import {
 } from '../../components/Card'
 import Button from '../../components/Element/Button'
 import {
-  CARD_NUMBER_LENGTH_MAX,
-  OWNER_NAME_LENGTH_MAX,
-  PASSWORD_LENGTH_MAX,
-  SECURITY_CODE_LENGTH_MAX,
+  MAX_CARD_NUMBER_LENGTH,
+  MAX_OWNER_NAME_LENGTH,
+  MAX_PASSWORD_LENGTH,
+  MAX_SECURITY_CODE_LENGTH,
 } from '../../constants/Card'
 import { useCardItemSetContext } from '../../contexts/cardContext'
 import { useCardDesign } from '../../hooks/useCardDesign'
@@ -26,11 +26,11 @@ const CardAdd = () => {
   const setCardItem = useCardItemSetContext()
 
   const cardDesign = useCardDesign()
-  const cardNumber = useCardNumberData(CARD_NUMBER_LENGTH_MAX)
+  const cardNumber = useCardNumberData(MAX_CARD_NUMBER_LENGTH)
   const cardExpirationDate = useExpirationDate()
-  const ownerName = useOwnerName(OWNER_NAME_LENGTH_MAX)
-  const cardSecurityCode = useCardNumberData(SECURITY_CODE_LENGTH_MAX)
-  const cardPassword = useCardNumberData(PASSWORD_LENGTH_MAX)
+  const ownerName = useOwnerName(MAX_OWNER_NAME_LENGTH)
+  const cardSecurityCode = useCardNumberData(MAX_PASSWORD_LENGTH)
+  const cardPassword = useCardNumberData(MAX_SECURITY_CODE_LENGTH)
 
   const isValidationCardData = () => {
     const design = cardDesign.validation
@@ -60,6 +60,7 @@ const CardAdd = () => {
       alert('입력한 값을 확인해주세요.')
     }
   }
+
   return (
     <div>
       <div className='root'>

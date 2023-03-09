@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CARD_NICKNAME_MAX } from '../constants/Card'
+import { MAX_CARD_NICKNAME_LENGTH } from '../constants/Card'
 import { useCardDispatchContext, useCardItemStateContext, useCardListStateContext } from '../contexts/cardContext'
 
 export const useCardNickNameAdd = () => {
@@ -14,7 +14,7 @@ export const useCardNickNameAdd = () => {
 
   const cardNickNameHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget
-    if (value.length > CARD_NICKNAME_MAX) return
+    if (value.length > MAX_CARD_NICKNAME_LENGTH) return
     setCardNickName(value)
   }
 
