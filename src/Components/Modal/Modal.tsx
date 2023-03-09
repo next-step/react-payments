@@ -3,6 +3,7 @@ import React, {
   useCallback,
   type MouseEvent,
   type PropsWithChildren,
+  useEffect,
 } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -20,7 +21,12 @@ function Modal({
   isOpen,
   onClose,
 }: PropsWithChildren<Props>) {
-  if (!containerRef.current) return null;
+  const modalRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    console.log(modalRef.current);
+    (modalRef.current as HTMLDivElement)?.focus();
+  });
 
   const handleClick = useCallback((e: MouseEvent<HTMLDivElement>) => {
     if (e.currentTarget === e.target) {
@@ -31,9 +37,11 @@ function Modal({
   return isOpen
     ? createPortal(
         <div className="modal-dimmed" onClick={handleClick}>
-          <div className="modal">{children}</div>
+          <div className="modal" ref={modalRef} tabIndex={0}>
+            {children}
+          </div>
         </div>,
-        containerRef.current
+        containerRef.current as HTMLElement
       )
     : null;
 }

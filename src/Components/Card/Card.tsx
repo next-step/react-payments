@@ -2,9 +2,10 @@ import React from 'react';
 import './card.css';
 
 import { replaceStringChunkWithToken } from '../../util';
+import { cardIssuers, type issuers } from '../../constants/CardIssuers';
 
 export interface Props {
-  issuer: string;
+  issuer: issuers;
   number: [string, string, string, string];
   owner: string;
   expiration: {
@@ -14,9 +15,12 @@ export interface Props {
 }
 
 function Card({ issuer, number, owner, expiration: { month, year } }: Props) {
+  const { name, color } = issuer
+    ? cardIssuers[issuer]
+    : { name: '', color: '#e5e5e5' };
   return (
-    <div className="empty-card">
-      <div className="card-top">{issuer}</div>
+    <div className="empty-card" style={{ backgroundColor: color }}>
+      <div className="card-top">{name}</div>
       <div className="card-middle">
         <div className="small-card__chip"></div>
       </div>

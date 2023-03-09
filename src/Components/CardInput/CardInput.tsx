@@ -8,6 +8,7 @@ import React, {
   useState,
   forwardRef,
   useImperativeHandle,
+  type KeyboardEvent,
 } from 'react';
 import { type CardInputOptions } from '.';
 import { createComponentContext } from './useComponent';
@@ -80,9 +81,16 @@ const Container = forwardRef<HandleContainer, ContainerProps>(
       return incompleteInput;
     }, [getAll]);
 
-    const handleFocus = () => {
-      (getFirstIncompleteInput()?.ref.current as HTMLInputElement)?.focus();
-    };
+    const handleFocus = useCallback(() => {
+      if (
+        getAll().every(
+          (component) =>
+            (component.ref.current as HTMLInputElement).value.length === 0
+        )
+      ) {
+        (getFirstIncompleteInput()?.ref.current as HTMLInputElement)?.focus();
+      }
+    }, [getAll]);
 
     useImperativeHandle(
       ref,
@@ -171,14 +179,23 @@ export function Input(props: CardInputOptions) {
     return () => {
       remove(ref);
     };
-  }, []);
+  }, [add, remove]);
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    if (validate) {
-      e.target.value = e.target.value.match(validate)?.[0] ?? '';
-    }
-    if (e.target.value.length >= maxLength) {
-      get(ref)?.nextRef.current?.focus();
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      if (validate) {
+        e.target.value = e.target.value.match(validate)?.[0] ?? '';
+      }
+      if (e.target.value.length >= maxLength) {
+        get(ref)?.nextRef.current?.focus();
+      }
+    },
+    [get]
+  );
+
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Backspace' && !(e.target as HTMLInputElement).value) {
+      get(ref)?.prevRef.current?.focus();
     }
   }, []);
 
@@ -188,6 +205,7 @@ export function Input(props: CardInputOptions) {
       className="input-basic"
       type={hideValue ? 'password' : 'text'}
       onChange={handleChange}
+      onKeyDown={handleKeyDown}
       placeholder={placeholder ?? ''}
       maxLength={maxLength}
     />

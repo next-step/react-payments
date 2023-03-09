@@ -10,7 +10,7 @@ const Template: Story<Props> = (args) => <Card {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  issuer: '포코카드',
+  issuer: 'poco',
   number: ['1111', '2222', '3333', '4444'],
   owner: '김동호',
   expiration: {

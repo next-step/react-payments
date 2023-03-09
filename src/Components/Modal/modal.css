@@ -37,6 +37,10 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .modal-item-dot {
