@@ -51,3 +51,5 @@ export type CardCompany = {
   companyColorHexCode: CompanyColorHexCode;
   companyIdentification: string;
 };
+
+export type ModalType = 'cardCompanySelectModal';

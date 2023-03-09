@@ -13,6 +13,7 @@ interface CardProps {
   cardCompany?: string;
   size?: 'sm' | 'lg';
   isEmpty?: boolean;
+  onClick?: () => void;
 }
 
 function Card({
@@ -22,6 +23,7 @@ function Card({
   expiration: { month, year },
   size = 'sm',
   isEmpty = false,
+  onClick,
 }: CardProps) {
   const cardSize = getCardSize(size);
 
@@ -42,7 +44,7 @@ function Card({
   }
 
   return (
-    <div className={cls('flex items-center justify-center text-xs')}>
+    <div onClick={onClick} className={cls('flex items-center justify-center text-xs')}>
       <div
         className={cls(
           cardSize,

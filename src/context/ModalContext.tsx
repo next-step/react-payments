@@ -1,3 +1,4 @@
+import { ModalType } from '@/types';
 import { createContext, useContext, useState, useMemo } from 'react';
 import type { PropsWithChildren } from 'react';
 
@@ -5,8 +6,8 @@ import type { PropsWithChildren } from 'react';
 
 const ModalContext = createContext<{
   open: boolean;
-  modalType: string | null;
-  openModal: () => void;
+  modalType: ModalType | null;
+  openModal: (modalType: ModalType) => void;
   closeModal: () => void;
 } | null>(null);
 
@@ -21,12 +22,12 @@ const useModalContext = () => {
 };
 
 function ModalProvider({ children }: PropsWithChildren) {
-  const [open, setOpen] = useState(!false);
-  const [modalType, setModalType] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
+  const [modalType, setModalType] = useState<ModalType | null>(null);
 
   const dispatch = useMemo(
     () => ({
-      openModal: (modalType = '') => {
+      openModal: (modalType: ModalType) => {
         setOpen(true);
         setModalType(modalType);
       },

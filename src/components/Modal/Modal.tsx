@@ -1,13 +1,14 @@
-import type { PropsWithChildren } from 'react';
+import type { PropsWithChildren, ReactNode } from 'react';
 import CardCompanySelectModal from './CardCompanySelectModal';
 
+export type ModalType = 'cardCompanySelectModal';
 interface ModalProps {
   onClose(): void;
-  modalType: string | null;
+  modalType: ModalType | null;
 }
 
-const modalMap: Record<string, () => JSX.Element> = {
-  cardCompanySelectModal: CardCompanySelectModal,
+const modalMap: Record<string, ReactNode> = {
+  cardCompanySelectModal: <CardCompanySelectModal />,
 };
 
 function ModalBody({ children }: PropsWithChildren) {
@@ -15,16 +16,14 @@ function ModalBody({ children }: PropsWithChildren) {
 }
 
 function Modal({ onClose, modalType }: PropsWithChildren<ModalProps>) {
-  const ModalContent = modalMap['cardCompanySelectModal'] ?? null;
+  const ModalContent = modalMap[modalType ?? ''] ?? null;
 
   return (
     <div
       onClick={onClose}
       className="fixed w-screen h-screen top-0 left-0 right-0 flex flex-col justify-center items-center"
     >
-      <ModalBody>
-        <ModalContent />
-      </ModalBody>
+      <ModalBody>{ModalContent}</ModalBody>
     </div>
   );
 }
