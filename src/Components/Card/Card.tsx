@@ -4,7 +4,7 @@ import './card.css';
 import { replaceStringChunkWithToken } from '../../util';
 
 export interface Props {
-  company: string;
+  issuer: string;
   number: [string, string, string, string];
   owner: string;
   expiration: {
@@ -13,22 +13,28 @@ export interface Props {
   };
 }
 
-function Card({ company, number, owner, expiration: { month, year } }: Props) {
+function Card({ issuer, number, owner, expiration: { month, year } }: Props) {
   return (
     <div className="empty-card">
-      <div className="card-top">{company}</div>
+      <div className="card-top">{issuer}</div>
       <div className="card-middle">
         <div className="small-card__chip"></div>
       </div>
       <div className="card-bottom">
         <div className="card-bottom__number">
-          {replaceStringChunkWithToken(number, [2, 3], '*').join(' ')}
+          {replaceStringChunkWithToken(number, [2, 3], '*').map((number, i) => (
+            <input key={`number:${i}`} readOnly value={number} />
+          ))}
         </div>
         <div className="card-bottom__info">
-          <span className="card-text">{owner}</span>
-          <span className="card-text">
-            {month} / {year}
-          </span>
+          <div className="card-info owner">
+            <input readOnly value={owner} />
+          </div>
+          <div className="card-info expiration">
+            <input readOnly value={month} />
+            /
+            <input readOnly value={year} />
+          </div>
         </div>
       </div>
     </div>

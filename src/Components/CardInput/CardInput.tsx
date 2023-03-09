@@ -15,7 +15,7 @@ interface ContainerProps {
   children:
     | Array<ReactElement<CardInputOptions>>
     | ReactElement<CardInputOptions>;
-  onChange: (value: string) => void;
+  onChange: (value: string[]) => void;
   validate: (value: string) => boolean;
   width?: string;
   background?: boolean;
@@ -42,10 +42,8 @@ function Container({
 
   const handleChange = useCallback(() => {
     onChange(
-      getAll().reduce<string>(
-        (acc, component) =>
-          acc + (component.ref.current as HTMLInputElement).value,
-        ''
+      getAll().map(
+        (component) => (component.ref.current as HTMLInputElement).value
       )
     );
     setInputLength(getTotalInputLength());
@@ -100,9 +98,9 @@ const insertDelimeter = (
       if (i < array.length - 1) {
         elements.push(
           delimeter ? (
-            <span key={i}>{delimeter}</span>
+            <span key={`${delimeter}:${i}`}>{delimeter}</span>
           ) : (
-            <span style={{ padding: '0 5px' }}></span>
+            <span key={`child:${i}`} style={{ padding: '0 5px' }}></span>
           )
         );
       }
@@ -138,7 +136,6 @@ export function Input({
 
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     if (validate) {
-      // console.log(e.target.value.match(validate)?.[0] ?? '');
       e.target.value = e.target.value.match(validate)?.[0] ?? '';
     }
     if (e.target.value.length >= maxLength) {
