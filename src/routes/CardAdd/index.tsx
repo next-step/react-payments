@@ -15,6 +15,7 @@ import {
   MAX_PASSWORD_LENGTH,
   MAX_SECURITY_CODE_LENGTH,
 } from '../../constants/Card'
+
 import { useCardItemSetContext } from '../../contexts/cardContext'
 import { useCardDesign } from '../../hooks/useCardDesign'
 import { useCardNumberData } from '../../hooks/useCardNumber'
@@ -32,6 +33,7 @@ const CardAdd = () => {
   const cardSecurityCode = useCardNumberData(MAX_PASSWORD_LENGTH)
   const cardPassword = useCardNumberData(MAX_SECURITY_CODE_LENGTH)
 
+
   const isValidationCardData = () => {
     const design = cardDesign.validation
     const number = !cardNumber.validation.includes(false)
@@ -39,7 +41,7 @@ const CardAdd = () => {
     const owner = ownerName.validation
     const security = cardSecurityCode.validation[0]
     const password = cardPassword.validation[0] && cardPassword.validation[1]
-
+    
     return design && number && expiration && owner && security && password
   }
 
