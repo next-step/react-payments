@@ -1,19 +1,19 @@
 import { cls } from '@/utils';
 import type { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 
-type ButtonKind = 'primary' | 'danger' | 'default';
+const buttonBackgroundColorMap = {
+  primary: 'bg-blue-400',
+  danger: 'bg-red-400',
+  default: 'bg-zinc-400',
+};
+
+type ButtonKind = keyof typeof buttonBackgroundColorMap;
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   kind?: ButtonKind;
 }
 
-const DEFAULT_BUTTON_BACKGROUND_COLOR = 'bg-zinc-400' as const;
-
-const buttonBackgroundColorMap = {
-  primary: 'bg-blue-400',
-  danger: 'bg-red-400',
-  default: 'bg-zinc-400',
-} as const;
+const DEFAULT_BUTTON_BACKGROUND_COLOR = 'bg-zinc-400';
 
 function Button({
   children,

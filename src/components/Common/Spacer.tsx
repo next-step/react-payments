@@ -1,20 +1,20 @@
 import { cls } from '@/utils';
 import React from 'react';
 
-type Space = 'sm' | 'md' | 'lg';
+const spaceSizeMap = {
+  sm: 'p-5',
+  md: 'p-10',
+  lg: 'p-10',
+};
+
+type Space = keyof typeof spaceSizeMap;
 
 type SpacerProps = {
   space?: Space;
   custom?: number;
 };
 
-const DEFAULT_SPACE_SIZE = 'p-10' as const;
-
-const spaceSizeMap = {
-  sm: 'p-5',
-  md: 'p-10',
-  lg: 'p-10',
-} as const;
+const DEFAULT_SPACE_SIZE = 'p-10';
 
 const getCustom = (custom: number) => `p-[${custom}px]`;
 

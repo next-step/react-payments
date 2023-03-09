@@ -1,7 +1,16 @@
 import { cls } from '@/utils';
 import { ChangeEvent, InputHTMLAttributes, forwardRef } from 'react';
 
-export type Width = 'w-15' | 'w-25' | 'w-50' | 'w-75' | 'w-100' | 'w-full';
+const widthToClassNameMap = {
+  xs: 'w-15',
+  sm: 'w-25',
+  md: 'w-50',
+  lg: 'w-75',
+  xl: 'w-100',
+  full: 'w-full',
+};
+
+export type Width = keyof typeof widthToClassNameMap;
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   kind?: 'basic' | 'underline';
@@ -11,7 +20,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ kind = 'basic', width = 'w-full', onChange, formatter, disabled, ...props }, ref) => {
+  ({ kind = 'basic', width = 'full', onChange, formatter, disabled, ...props }, ref) => {
     const onChangeWithFormatter = (e: ChangeEvent<HTMLInputElement>) => {
       if (formatter) {
         e.target.value = formatter(e.target.value);
@@ -19,6 +28,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
       onChange?.(e);
     };
+
+    const widthSize = widthToClassNameMap[width];
+
     return (
       <input
         ref={ref}
@@ -28,7 +40,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         className={cls(
           'h-10 outline-none  bg-transparent',
           'flex items-center justify-center text-center',
-          width,
+          widthSize,
           kind === 'underline' ? 'border-b-2 border-gray-200' : '',
           'placeholder:text-sm',
         )}

@@ -17,7 +17,7 @@ export const ROUTES = {
   ADD: '/add',
   COMPLETE: '/complete/:id',
   NOT_FOUND: '*',
-} as const;
+};
 
 export const REGEX = {
   // 임시적 분류 -> HTML PATTERN에는 문자열만 허용
