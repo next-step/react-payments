@@ -3,7 +3,7 @@ import { REGEXP } from '../constants';
 export function filterCardBackDigit(cardNumber: string): string {
   const changeValue = cardNumber?.match(REGEXP.CARD_NUMBER)?.flatMap((item, index) => {
     if (!item.length) return [];
-    if (index > 1) return item.replace(/[0-9]/g, '*');
+    if (index > 1) return item.replace(REGEXP.NUMBER, '*');
 
     return item;
   }).join('-');
