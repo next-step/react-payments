@@ -45,7 +45,7 @@ const CardList = () => {
             </button>
             <div className='flex-center'>{item.nickName}</div>
             <div className='flex-center'>
-              <button onClick={() => dispatch({ type: 'REMOVE', card: item })} type='button'>
+              <button onClick={() => dispatch({ type: 'REMOVE', ownerName: item.ownerName })} type='button'>
                 카드 삭제
               </button>
             </div>

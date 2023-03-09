@@ -30,8 +30,8 @@ const CardAdd = () => {
   const cardNumber = useCardNumberData(MAX_CARD_NUMBER_LENGTH)
   const cardExpirationDate = useExpirationDate()
   const ownerName = useOwnerName(MAX_OWNER_NAME_LENGTH)
-  const cardSecurityCode = useCardNumberData(MAX_PASSWORD_LENGTH)
-  const cardPassword = useCardNumberData(MAX_SECURITY_CODE_LENGTH)
+  const cardSecurityCode = useCardNumberData(MAX_SECURITY_CODE_LENGTH)
+  const cardPassword = useCardNumberData(MAX_PASSWORD_LENGTH)
 
   const isValidationCardData = () => {
     const design = cardDesign.validation

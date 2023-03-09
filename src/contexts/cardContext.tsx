@@ -22,7 +22,7 @@ type Action =
     }
   | {
       type: 'REMOVE'
-      card: State
+      ownerName: string
     }
 
 const INIT_CARD = {
@@ -44,7 +44,7 @@ const cardReducer = (state: State[], action: Action) => {
         card.ownerName === action.card.ownerName ? { ...card, nickName: action.card.nickName } : card
       )
     case 'REMOVE':
-      return state.filter((card: State) => card.ownerName !== action.card.ownerName)
+      return state.filter((card: State) => card.ownerName !== action.ownerName)
   }
 }
 
