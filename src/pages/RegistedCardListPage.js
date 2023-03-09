@@ -43,7 +43,7 @@ export default function RegistedCardListPage() {
                 type="button"
                 onClick={() =>
                   setCardList(
-                    cardList.filter((cardInfo) => cardInfo[index] == index)
+                    cardList.filter((cardInfo) => cardInfo[index] === index)
                   )
                 }
               >
