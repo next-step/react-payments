@@ -1,0 +1,19 @@
+.card-owner-field-container {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-grey-100);
+  border-radius: 0.25rem;
+  width: 100%;
+  position: relative;
+}
+
+.card-owner-field-container input {
+  width: 100%;
+  text-align: center;
+}
+
+.display-limit-length {
+  position: absolute;
+  right: 0;
+  top: -30px;
+}

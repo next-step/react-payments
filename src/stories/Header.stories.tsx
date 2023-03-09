@@ -2,7 +2,7 @@ import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { AiOutlineLeft } from 'react-icons/ai'
 
-import { Header } from '../components/molecules/Header'
+import { Header } from '../components/ui/Header'
 import { MobileTemplate } from 'templates/MobileTemplate'
 import { action } from '@storybook/addon-actions'
 

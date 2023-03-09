@@ -1,46 +1,63 @@
-import React, { useState } from 'react'
+import React, { useState, useReducer } from 'react'
 
 import { AddEditCraditCard } from 'pages/AddEditCraditCard'
 import { PaymentMain } from 'pages/PaymentMain'
-import { Loading } from 'components/atoms/Loading'
-import { ErrorIcon } from 'components/atoms/ErrorIcon'
-import useCards from 'hooks/useCards'
-import { CardType } from 'models/card.model'
-import { INIT_CARD_VALUE } from 'constants/card'
+import { AddOrUpdateCardType } from 'constants/card'
+import { DUMMY_PAYMENT_CARDS } from 'constants/staticCardList'
+import { CardReducer, CARD_REDUCER_ACTION_TYPE } from 'reducers/CardReducer'
+import { DialogProvider } from 'context/DialogContext'
 
-const PaymentPage = () => {
-  const [isAddEditCard, setIsAddEditCard] = useState(false)
-  const { loading, error, cards, addCard } = useCards()
-  const [selectCard, setSelectCard] = useState(INIT_CARD_VALUE)
+const PaymentPage: React.FC = () => {
+  const [selectCard, setSelectCard] = useState<AddOrUpdateCardType | null>(null)
+  const [cards, dispatch] = useReducer(CardReducer, DUMMY_PAYMENT_CARDS)
 
-  if (loading) {
-    return <Loading />
+  const onEditStart = (card: AddOrUpdateCardType) => {
+    setSelectCard(card)
   }
 
-  if (error) {
-    return <ErrorIcon message={error.message} />
+  const onEditEnd = () => {
+    setSelectCard(null)
   }
 
-  const editStart = () => setIsAddEditCard(true)
-  const editEnd = () => setIsAddEditCard(false)
+  const onUpdateCardList = (card: AddOrUpdateCardType) => {
+    if ('id' in card) {
+      dispatch({
+        type: CARD_REDUCER_ACTION_TYPE.UPDATE,
+        payload: card,
+      })
+      return onEditEnd()
+    }
 
-  const onAddEditCard = (card?: CardType) => {
-    setSelectCard(card ?? INIT_CARD_VALUE)
-    editStart()
+    dispatch({
+      type: CARD_REDUCER_ACTION_TYPE.ADD,
+      payload: card,
+    })
+    return onEditEnd()
+  }
+
+  const onDeleteCard = (cardId: string) => {
+    dispatch({
+      type: CARD_REDUCER_ACTION_TYPE.DELETE,
+      payload: { id: cardId },
+    })
   }
 
   return (
-    <>
-      {isAddEditCard ? (
+    <DialogProvider>
+      {selectCard ? (
         <AddEditCraditCard
-          onNavigate={editEnd}
-          addCard={addCard}
-          initCardValue={selectCard}
+          onNavigateGoBack={onEditEnd}
+          selectCard={selectCard}
+          submitCard={onUpdateCardList}
         />
       ) : (
-        <PaymentMain onClick={onAddEditCard} cards={cards} />
+        <PaymentMain
+          onClick={onEditStart}
+          cards={cards}
+          onClickDeleteBtn={onDeleteCard}
+        />
       )}
-    </>
+    </DialogProvider>
   )
 }
 

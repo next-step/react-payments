@@ -1,84 +1,68 @@
-import { CardType } from 'models/card.model'
+import { CardCompanyCodeType, CARD_COMPNAYS_CODE } from './cardCompanyCode'
+import { CARD_REDUCER_ACTION_TYPE } from 'reducers/CardReducer'
 
-export const CARD_COMPNAYS_CODE = {
-  NULL: 'C000',
-  LOTTE: 'C001',
-  BC: 'C002',
-  SAMSUNG: 'C003',
-  SINHAN: 'C004',
-  HANA: 'C005',
-  HUNDAE: 'C006',
-  KB: 'C007',
-  NH: 'C008',
-} as const
-
-export const CARD_COMPANYS = {
-  C000: {
-    name: '',
-    color: '#e5e5e5',
-  },
-  C001: {
-    name: '롯데카드',
-    color: '#F8D800',
-  },
-  C002: {
-    name: '비씨카드',
-    color: '#0396FF',
-  },
-  C003: {
-    name: '삼성카드',
-    color: '#EA5455',
-  },
-  C004: {
-    name: '신한카드',
-    color: '#7367F0',
-  },
-  C005: {
-    name: '하나카드',
-    color: '#32CCBC',
-  },
-  C006: {
-    name: '현대카드',
-    color: '#F6416C',
-  },
-  C007: {
-    name: 'KB국민카드',
-    color: '#28C76F',
-  },
-  C008: {
-    name: 'NH농협카드',
-    color: '#F55555',
-  },
-} as const
-
-export const EMPTY_CARD_VIEW_ID = 'EmptyCardView' as const
-export const INIT_CARD_VALUE: CardType = {
-  cardNumber: '',
-  expireDate: '',
-  cardOwner: '',
-  pinCode: '',
-  password: '',
-  cardNickname: '',
-  cardCompanyCode: CARD_COMPNAYS_CODE.NULL,
+export interface CardExpireDateType {
+  year: string
+  month: string
 }
 
-export const ADD_CARD_VIEW_VALUE: CardType = {
-  id: EMPTY_CARD_VIEW_ID,
-  cardNumber: '',
-  expireDate: '',
-  cardOwner: '',
-  pinCode: '',
-  password: '',
-  cardNickname: '',
-  cardCompanyCode: CARD_COMPNAYS_CODE.NULL,
+export interface CardNumbersType {
+  firstNumber: string
+  secondNumber: string
+  thridNumber: string
+  fourthNumber: string
 }
 
-export const CARD_INFO = {
-  CARD_NUMBER: 'cardNumber',
-  EXPIRE_DATE: 'expireDate',
+export interface CardPasswordType {
+  firstPassword: string
+  secondPassword: string
+}
+export interface PaymentCard {
+  id: string
+  cardNumbers: CardNumbersType
+  cardExpireDate: CardExpireDateType
+  cardOwner: string
+  cardPinCode: string
+  cardPassword: CardPasswordType
+  cardCompanyCode: CardCompanyCodeType
+  cardNickname: string
+}
+
+export type AddPaymentCard = Omit<PaymentCard, 'id'>
+
+export type AddPaymentCardKeys = keyof AddPaymentCard
+export type PaymentCardKeys = keyof PaymentCard
+
+export type AddOrUpdateCardType = PaymentCard | AddPaymentCard
+
+export const PAYMENT_CARD_FORM_KEYS = {
+  ID: 'id',
+  CARD_NUMBERS: 'cardNumbers',
+  CARD_EXPIRE_DATE: 'cardExpireDate',
   CARD_OWNER: 'cardOwner',
-  PIN_CODE: 'pinCode',
-  PASSWORD: 'password',
+  CARD_PINCODE: 'cardPinCode',
+  CARD_PASSWORD: 'cardPassword',
   CARD_COMPANY_CODE: 'cardCompanyCode',
   CARD_NICKNAME: 'cardNickname',
 } as const
+
+export const INITAL_CARD_STATE: AddPaymentCard = {
+  [PAYMENT_CARD_FORM_KEYS.CARD_NUMBERS]: {
+    firstNumber: '',
+    secondNumber: '',
+    thridNumber: '',
+    fourthNumber: '',
+  },
+  [PAYMENT_CARD_FORM_KEYS.CARD_EXPIRE_DATE]: {
+    month: '',
+    year: '',
+  },
+  [PAYMENT_CARD_FORM_KEYS.CARD_OWNER]: '',
+  [PAYMENT_CARD_FORM_KEYS.CARD_PINCODE]: '',
+  [PAYMENT_CARD_FORM_KEYS.CARD_PASSWORD]: {
+    firstPassword: '',
+    secondPassword: '',
+  },
+  [PAYMENT_CARD_FORM_KEYS.CARD_COMPANY_CODE]: CARD_COMPNAYS_CODE.NULL,
+  [PAYMENT_CARD_FORM_KEYS.CARD_NICKNAME]: '',
+}

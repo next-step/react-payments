@@ -2,8 +2,8 @@ import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
 
-import { Button } from '../components/atoms/Button'
-import { UI_SIZE, UI_VARIANT } from 'constants/ui.constant'
+import { Button } from '../components/ui/Button'
+import { UI_SIZE, UI_VARIANT } from 'constants/ui'
 
 export default {
   title: 'components/Button',

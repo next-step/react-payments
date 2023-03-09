@@ -1,74 +1,81 @@
-import React, { useState } from 'react'
-import useCardItem from 'hooks/useCardItem'
-import { CardCompanyCodeType, CardType, CardTypeKeys } from 'models/card.model'
+import React, { useCallback, useEffect, useReducer, useState } from 'react'
+import { AddOrUpdateCardType, PAYMENT_CARD_FORM_KEYS } from 'constants/card'
 import { RegisterCard } from 'organisms/RegisterCard'
-import { CompleteRegisterCard } from 'organisms/CompleteRegisterCard'
-import { CardCompanyList } from 'components/molecules/CardCompanyList'
-import { INIT_CARD_VALUE } from 'constants/card'
-import { Modal } from 'components/atoms/Modal'
 import './AddEditCraditCard.css'
+import { FormChangeParams, FormProvider } from 'context/FormContext'
+import {
+  CardFormReducer,
+  CARD_FORM_ACTION_TYPES,
+} from 'reducers/CardFormReducer'
+import { useDialogContext } from 'context/DialogContext'
+import { CompleteRegisterCard } from 'organisms/CompleteRegisterCard'
+import { CardCompanyList } from 'components/CardCompanyList'
+import {
+  CardCompanyCodeType,
+  CARD_COMPNAYS_CODE,
+} from 'constants/cardCompanyCode'
 
 type AddEditCraditCardProps = {
-  onNavigate: () => void
-  addCard: (card: CardType) => void
-  initCardValue?: CardType
+  onNavigateGoBack: () => void
+  selectCard: AddOrUpdateCardType
+  submitCard: (card: AddOrUpdateCardType) => void
 }
 
 const AddEditCraditCard: React.FC<AddEditCraditCardProps> = ({
-  onNavigate,
-  addCard,
-  initCardValue = INIT_CARD_VALUE,
+  onNavigateGoBack,
+  selectCard,
+  submitCard,
 }) => {
-  const { card, resetCard, updateCard, validator } = useCardItem(initCardValue)
-  const [isComplete, setIsComplete] = useState(false)
+  const [state, dispatch] = useReducer(CardFormReducer, selectCard)
+  const [isCompleteRegister, setIsCompleteRegister] = useState(false)
+  const { openDialog, closeDialog } = useDialogContext()
 
-  const completeCardRegistor = () => {
-    addCard(card)
-    onNavigate()
-    resetCard()
+  const handleChange = (payload: FormChangeParams) => {
+    dispatch({
+      type: CARD_FORM_ACTION_TYPES.UPDATE,
+      payload,
+    })
   }
 
-  const changeValue = (value: string, name: CardTypeKeys) => {
-    updateCard(value, name)
+  const onToggleCompleteCardRegister = () => {
+    setIsCompleteRegister((prev) => !prev)
   }
 
-  const changeCardCompanyValue = (value: CardCompanyCodeType) => {
-    updateCard(value, 'cardCompanyCode')
-  }
+  const onChangeCardCompany = useCallback(
+    (cardComapnyCode: CardCompanyCodeType) => {
+      handleChange({
+        key: PAYMENT_CARD_FORM_KEYS.CARD_COMPANY_CODE,
+        value: cardComapnyCode,
+      })
+      closeDialog()
+    },
+    [closeDialog],
+  )
 
-  const onNavigateNextStep = () => {
-    setIsComplete(true)
-  }
+  useEffect(() => {
+    const { cardNumbers, cardCompanyCode } = state
+    const isValidateCardNumbers = Object.values(cardNumbers).every(
+      (val) => val.length === 4,
+    )
 
-  const isCompleteRegister =
-    validator.cardNumber &&
-    validator.cardCompanyCode &&
-    validator.password &&
-    validator.pinCode &&
-    validator.expireDate
+    if (isValidateCardNumbers && cardCompanyCode === CARD_COMPNAYS_CODE.NULL) {
+      openDialog({
+        component: <CardCompanyList onClick={onChangeCardCompany} />,
+      })
+    }
+  }, [state.cardNumbers])
 
   return (
-    <main id='add-card-container'>
-      {isComplete ? (
-        <CompleteRegisterCard
-          card={card}
-          changeValue={changeValue}
-          submit={completeCardRegistor}
-        />
+    <FormProvider value={{ state, handleChange }}>
+      {isCompleteRegister ? (
+        <CompleteRegisterCard onSubmit={submitCard} />
       ) : (
         <RegisterCard
-          card={card}
-          onNavigate={onNavigate}
-          onClickNextBtn={onNavigateNextStep}
-          changeValue={changeValue}
-          isCompleteRegister={isCompleteRegister}
+          onNavigateGoBack={onNavigateGoBack}
+          onClickNextBtn={onToggleCompleteCardRegister}
         />
       )}
-
-      <Modal isOpen={validator.cardNumber && !validator.cardCompanyCode}>
-        <CardCompanyList onClick={changeCardCompanyValue} />
-      </Modal>
-    </main>
+    </FormProvider>
   )
 }
 

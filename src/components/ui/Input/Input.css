@@ -1,0 +1,23 @@
+.input-basic {
+  height: 40px;
+  width: 100%;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border: none;
+  background-color: transparent;
+  font-size: 1rem;
+}
+
+.fill {
+  border-radius: 0.25rem;
+  background-color: #ecebf1;
+}
+
+.outline {
+  border-bottom: 2px solid #9ca3af;
+  border-radius: 0;
+}
+
+.ghost {
+  border-radius: 0;
+}

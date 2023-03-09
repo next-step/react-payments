@@ -1,0 +1,11 @@
+.card-expire-date-container {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-grey-100);
+  border-radius: 0.25rem;
+}
+
+.card-expire-date-container input {
+  width: 40px;
+  text-align: center;
+}
