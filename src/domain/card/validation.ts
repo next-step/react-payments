@@ -1,6 +1,6 @@
 import { CARD } from '@/constants/card';
 import { ERROR_MESSAGE } from '@/constants/errorMessage';
-import { Card, CardExpiration, CardNumber, CardPassword } from '@/types/card';
+import { Card, CardExpiration, CardNumber, CardPassword, CardSecretCode } from '@/types/card';
 import { getCurrentYear, isNumber } from '@/utils';
 import { assert } from '@/utils/validation';
 
@@ -76,6 +76,10 @@ export function validateCardPassword({ name, value, cardPassword }: { cardPasswo
   assert(isNumber(value) || value === '', ERROR_MESSAGE.INPUT.COMMON.INVALID_VALUE);
 }
 
+export function validateCardSecretCode(value: ValidateInput['value']) {
+  assert(isNumber(value) || value === '', ERROR_MESSAGE.INPUT.COMMON.INVALID_VALUE);
+}
+
 export function validateCardForm({
   type,
   name,
@@ -91,6 +95,7 @@ export function validateCardForm({
     [CARD.NUMBER.TYPE]: () => validateCardNumber({ name, value, cardNumber }),
     [CARD.EXPIRATION.TYPE]: () => validateCardExpiration({ name, value, cardExpiration }),
     [CARD.PASSWORD.TYPE]: () => validateCardPassword({ name, value, cardPassword }),
+    [CARD.SECRET_CODE.TYPE]: () => validateCardSecretCode(value),
   }[type];
 
   validate?.();
