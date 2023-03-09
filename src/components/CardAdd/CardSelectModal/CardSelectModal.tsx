@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 
 import { CARD } from '@/constants/card';
-import { useCardSelectModalContext } from '@/context/CardCompanyModal';
+import { useCardCompanyModalContext } from '@/context/CardCompanyModal';
 import useOutsideClick from '@/hooks/common/useOutsideClick';
 
 import CardSelectBox from '../CardSelectBox';
 
 export default function CardSelectModal() {
-  const { handleClickCard, handleClickCloseModal } = useCardSelectModalContext();
+  const { handleClickCard, handleClickCloseModal } = useCardCompanyModalContext();
   const modalRef = useRef<HTMLDivElement>(null);
 
   useOutsideClick(modalRef, handleClickCloseModal);
