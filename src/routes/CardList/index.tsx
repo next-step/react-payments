@@ -9,7 +9,7 @@ const CardList = () => {
   const state = useCardListStateContext()
   const dispatch = useCardDispatchContext()
 
-  const { stateCheckAndNaviator } = useCardStateCheck(state)
+  const { isValidOwnerName } = useCardStateCheck(state)
 
   return (
     <div className='root'>
@@ -19,7 +19,7 @@ const CardList = () => {
         </div>
         {state.map((item) => (
           <div key={item.ownerName}>
-            <button onClick={stateCheckAndNaviator} name={item.ownerName} className='button-card'>
+            <button onClick={isValidOwnerName} name={item.ownerName} className='button-card'>
               <div className='card-box'>
                 <div className={`empty-card card-color${CARD_NAME_LIST.indexOf(item.cardDesign)}`}>
                   <div className='card-name'>{item.cardDesign}</div>

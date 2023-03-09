@@ -33,7 +33,7 @@ const CardAdd = () => {
   const cardSecurityCode = useCardNumberData(MAX_SECURITY_CODE_LENGTH)
   const cardPassword = useCardNumberData(MAX_PASSWORD_LENGTH)
 
-  const isValidationCardData = () => {
+  const isValidCardData = () => {
     const design = cardDesign.validation
     const number = !cardNumber.validation.includes(false)
     const expiration = !cardExpirationDate.validation.includes(false)
@@ -44,9 +44,9 @@ const CardAdd = () => {
     return design && number && expiration && owner && security && password
   }
 
-  const onSubmitNavigator = (e: React.MouseEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.MouseEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (isValidationCardData()) {
+    if (isValidCardData()) {
       setCardItem({
         nickName: '',
         cardDesign: cardDesign.cardDesign,
@@ -69,7 +69,7 @@ const CardAdd = () => {
           <h2 className='page-title'>
             <Link to='/'>&lt;</Link>카드 추가
           </h2>
-          <form onSubmit={onSubmitNavigator}>
+          <form onSubmit={onSubmit}>
             <CardShape
               cardNumber={cardNumber.cardNumberData}
               cardExpirationDate={cardExpirationDate.cardExpirationDate}
