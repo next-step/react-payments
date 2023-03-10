@@ -1,0 +1,33 @@
+.item-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.item-dot {
+  margin: 0.5rem 1rem;
+  border-radius: 50%;
+  width: 2.8rem;
+  height: 2.8rem;
+}
+
+.item-name {
+  font-size: 12px;
+  letter-spacing: -0.085rem;
+}
+
+.link-container {
+  display: flex;
+  justify-content: end;
+}
+
+.link-container button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  color: #04c09e;
+  cursor: pointer;
+}
