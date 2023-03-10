@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { COLOR } from '../../constant/color';
 
 const S = {
   Input: styled.input`
-    background-color: #ecebf1;
+    background-color: ${COLOR.GREY};
     height: 45px;
     width: 100%;
     text-align: center;
