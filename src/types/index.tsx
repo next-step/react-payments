@@ -44,10 +44,6 @@ export interface CardFormType {
   ownerName: {
     text: string;
   };
-  color: {
-    text: ColorType;
-    isValid: boolean;
-  };
   company: {
     text: CompanyType;
     isValid: boolean;
@@ -65,7 +61,6 @@ export type CardType = {
   };
   cvc: string;
   ownerName: string;
-  color: ColorType;
   company: CompanyType;
   alias: string;
   id: string;

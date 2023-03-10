@@ -32,10 +32,6 @@ const initialCardFormState: CardFormType = {
   ownerName: {
     text: '',
   },
-  color: {
-    text: '',
-    isValid: false,
-  },
   company: {
     text: '',
     isValid: false,

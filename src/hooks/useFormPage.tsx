@@ -1,4 +1,4 @@
-import { CardFormType, ColorType, CompanyType } from 'types';
+import { CardFormType, CompanyType } from 'types';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PaymentsContext } from 'context/Payments';
@@ -15,16 +15,11 @@ const useFormPage = ({ state, setState }: useFormPageProps) => {
   const navigate = useNavigate();
 
   const handleCompanyList = (e) => {
-    const color = e.currentTarget.children[0].getAttribute('color') as ColorType;
     const company = e.currentTarget.children[1].textContent as CompanyType;
     setState((prev) => ({
       ...prev,
       company: {
         text: company,
-        isValid: true,
-      },
-      color: {
-        text: color,
         isValid: true,
       },
     }));
@@ -48,7 +43,6 @@ const useFormPage = ({ state, setState }: useFormPageProps) => {
       },
       cvc: currentFormCard.cvc.text,
       ownerName: currentFormCard.ownerName.text,
-      color: currentFormCard.color.text,
       company: currentFormCard.company.text,
       alias: '',
       id: uuid(),

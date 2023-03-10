@@ -4,6 +4,7 @@ import Text from 'components/common/Text/Text';
 import Input from 'components/common/Input/Input';
 import Button from 'components/common/Button/Button';
 import useAliasPage from 'hooks/useAliasPage';
+import { getCardColor } from 'utils/Card';
 
 const AliasPage = () => {
   const { handleSubmit, handleInput, currentCard, inputRef, inputLength } = useAliasPage();
@@ -25,7 +26,7 @@ const AliasPage = () => {
         <Card
           type="primary"
           size="big"
-          color={currentCard.color}
+          color={getCardColor(currentCard.company)}
           company={currentCard.company}
           number={currentCard.cardNumbers}
           expireMonth={currentCard.expireDate.month}

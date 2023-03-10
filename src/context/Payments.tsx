@@ -34,11 +34,12 @@ export const PaymentsContextProvider = ({ children }: PaymentsProviderProps) => 
     const newCardList = cardList.map((card) => {
       if (currentCard.id === card.id) {
         return {
-          ...card,
+          ...currentCard,
         };
       }
       return card;
     });
+    console.log(currentCard, newCardList);
     setCardList(newCardList);
   };
 

@@ -13,6 +13,7 @@ import Button from 'components/common/Button/Button';
 import useFormPage from 'hooks/useFormPage';
 import useHandleFormInput from 'hooks/useHandleFormInput';
 import useHandleFormState from 'hooks/useHandleFormState';
+import { getCardColor } from 'utils/Card';
 
 const FormPage = () => {
   const [activeUI, setActiveUI] = useState(false);
@@ -33,10 +34,12 @@ const FormPage = () => {
   } = useHandleFormInput(formStateObject);
 
   useEffect(() => {
-    if (formState.company.isValid && formState.color.isValid) {
+    if (formState.company.isValid) {
       setActiveUI(false);
     }
-  }, [formState.company, formState.color]);
+  }, [formState.company]);
+
+  const cardColor = getCardColor(formState.company.text);
   return (
     <Layout>
       <Header>
@@ -48,7 +51,7 @@ const FormPage = () => {
         <Card
           type="primary"
           onClick={() => setActiveUI(true)}
-          color={formState.color.text}
+          color={getCardColor(formState.company.text)}
           company={formState.company.text}
           size="small"
           number={formState.cardNumbers.text}
@@ -59,30 +62,30 @@ const FormPage = () => {
         <CardNumberInput
           onChange={handleCardNumberInput}
           isValid={formState.cardNumbers.isValid}
-          fontColor={formState.color.text}
+          fontColor={cardColor}
           refs={cardFormInputs}
         />
         <CardExpirationDateInput
           onChange={handleExpireInput}
-          fontColor={formState.color.text}
+          fontColor={cardColor}
           refs={cardFormInputs}
           isValidMonth={formState.expireDate.month.isValid}
           isValidYear={formState.expireDate.year.isValid}
         />
         <CardOwnerNameInput
           onChange={handleOwnerNameInput}
-          fontColor={formState.color.text}
+          fontColor={cardColor}
           refs={cardFormInputs}
           length={formState.ownerName.text.length}
         />
         <CardSecurityInput
-          fontColor={formState.color.text}
+          fontColor={cardColor}
           onChange={handleSecurityInput}
           isValid={formState.cvc.isValid}
           refs={cardFormInputs}
         />
         <CardPasswordInput
-          fontColor={formState.color.text}
+          fontColor={cardColor}
           onChange={handlePasswordInput}
           isValidStart={formState.password.start.isValid}
           isValidEnd={formState.password.end.isValid}

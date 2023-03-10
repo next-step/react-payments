@@ -3,7 +3,6 @@ import { reportError, ValidationError } from 'utils/error';
 export const isCardFormValidation = (form: CardFormType): boolean => {
   const isValid =
     form.cardNumbers.isValid &&
-    form.color.isValid &&
     form.company.isValid &&
     form.cvc.isValid &&
     form.expireDate.month.isValid &&
@@ -20,12 +19,10 @@ export const isCardFormValidation = (form: CardFormType): boolean => {
   return isValid;
 };
 
-export const isValidExpirationMonth = (month: string) => {
-  return month?.length === 2;
+export const isValidExpirationDate = (date: string) => {
+  return date?.length === 2;
 };
-export const isValidExpirationYear = (year: string) => {
-  return year?.length == 2;
-};
+
 export const isValidCompany = (company: string) => {
   return company.length;
 };

@@ -10,8 +10,7 @@ import {
 } from 'utils/InputChange';
 import {
   isValidCardNumber,
-  isValidExpirationMonth,
-  isValidExpirationYear,
+  isValidExpirationDate,
   isValidPasswordNumber,
   isValidSecurityCode,
 } from 'utils/InputValidation';
@@ -76,10 +75,10 @@ const useHandleFormInput = ({ state, setState }: useHandleFormInputProps) => {
     monthRef.value = month;
     yearRef.value = year;
 
-    if (isValidExpirationMonth(month)) {
+    if (isValidExpirationDate(month)) {
       yearRef.focus();
     }
-    if (isValidExpirationYear(year)) {
+    if (isValidExpirationDate(month) && isValidExpirationDate(year)) {
       ownerNameRef?.focus();
     }
 
@@ -88,11 +87,11 @@ const useHandleFormInput = ({ state, setState }: useHandleFormInputProps) => {
       expireDate: {
         month: {
           text: !month.length ? 'MM' : month,
-          isValid: isValidExpirationYear(month),
+          isValid: isValidExpirationDate(month),
         },
         year: {
           text: year,
-          isValid: isValidExpirationYear(year),
+          isValid: isValidExpirationDate(year),
         },
       },
     }));
