@@ -1,8 +1,12 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode } from 'react';
 import styled from '@emotion/styled';
 import { COLOR } from '../../constant/color';
+import { ModalType, useModalState } from '../../context/ModalContext';
+import ModalSelectCompany from './ModalSelectCompany';
+import ModalManageCard from './ModalManageCard';
 const S = {
-  Modal: styled.div`
+  ModalDimmed: styled.div<{ isShow: IModal['isShow'] }>`
+    display: ${(props) => (props.isShow ? 'block' : 'none')};
     position: absolute;
     width: 100%;
     height: 100%;
@@ -10,41 +14,57 @@ const S = {
     left: 0;
     right: 0;
     bottom: 0;
-  `,
-  Dimmed: styled.div<{ isShow: IModal['isShow'] }>`
-    display: ${(props) => (props.isShow ? 'block' : 'none')};
-    width: 100%;
-    height: 100%;
     background-color: ${COLOR.BLACK};
     opacity: 0.5;
   `,
-  Content: styled.div<{ isShow: IModal['isShow'] }>`
-    position: absolute;
+  Modal: styled.div<{ isShow: IModal['isShow'] }>`
+    position: fixed;
     bottom: 0;
-    left: 0;
+    left: 50%;
     right: 0;
     width: 100%;
+    max-width: 500px;
     height: 227px;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
     background-color: ${COLOR.WHITE};
-    transition: transform 0.5s ease;
+    transition: transform 0.3s ease-in-out;
     transform: ${(props) =>
-      props.isShow ? 'translate3d(0, 0, 0)' : 'translate3d(0, 100%, 0)'};
+      props.isShow ? 'translate3d(-50%, 0, 0)' : 'translate3d(-50%, 100%, 0)'};
+  `,
+
+  Content: styled.div`
+    padding: 34px 53px;
   `,
 };
 interface IModal {
   isShow: boolean;
   children: ReactNode;
 }
+
 const Modal = () => {
-  const [isShow, setIsShow] = useState(false);
+  const {
+    modalState: { isShow, type },
+  } = useModalState();
+
+  const getModalContent = (type: ModalType | null) => {
+    switch (type) {
+      case 'SELECT_COMPANY':
+        return <ModalSelectCompany />;
+      case 'MANAGE_CARD':
+        return <ModalManageCard />;
+      default:
+        return null;
+    }
+  };
 
   return (
-    <S.Modal>
-      <S.Dimmed isShow={isShow} />
-      <S.Content isShow={isShow}></S.Content>
-    </S.Modal>
+    <>
+      <S.ModalDimmed isShow={isShow} />
+      <S.Modal isShow={isShow}>
+        <S.Content>{getModalContent(type)}</S.Content>
+      </S.Modal>
+    </>
   );
 };
 

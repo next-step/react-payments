@@ -8,18 +8,21 @@ import { CardProvider } from './context/CardContext';
 import PaymentCardComplete from './pages/PaymentCardComplete';
 import { CardListProvider } from './context/CardListContext';
 import { ROUTE } from './constant/route';
+import { ModalProvider } from './context/ModalContext';
 
 function App() {
   return (
     <CardProvider>
       <CardListProvider>
-        <Routes>
-          <Route path={ROUTE.HOME} element={<Layout />}>
-            <Route index element={<PaymentCardList />} />
-            <Route path={ROUTE.REGISTER} element={<PaymentCardRegister />} />
-            <Route path={ROUTE.COMPLETE} element={<PaymentCardComplete />} />
-          </Route>
-        </Routes>
+        <ModalProvider>
+          <Routes>
+            <Route path={ROUTE.HOME} element={<Layout />}>
+              <Route index element={<PaymentCardList />} />
+              <Route path={ROUTE.REGISTER} element={<PaymentCardRegister />} />
+              <Route path={ROUTE.COMPLETE} element={<PaymentCardComplete />} />
+            </Route>
+          </Routes>
+        </ModalProvider>
       </CardListProvider>
     </CardProvider>
   );

@@ -41,6 +41,7 @@ export const reducer = (state: CardInfoType, action: Action): CardInfoType => {
       return {
         ...state,
         company: action.company,
+        color: action.color,
       };
     case 'SET_NICKNAME':
       return {

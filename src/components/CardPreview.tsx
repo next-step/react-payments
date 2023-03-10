@@ -12,12 +12,13 @@ const CardPreview = ({
   expire,
   name,
   company,
+  color,
   onClick,
   isCursor,
 }: ICardPreview) => {
   return (
     <S.CardBox onClick={onClick} isCursor={isCursor || false}>
-      <S.EmptyCard>
+      <S.EmptyCard backgroundColor={color}>
         <S.CardTop>{company && company}</S.CardTop>
         <S.CardMiddle>
           <S.SmallCardChip />

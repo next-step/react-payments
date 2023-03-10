@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { COLOR } from '../constant/color';
 
 export const S = {
   CardBox: styled.div<{ isCursor: boolean }>`
@@ -8,11 +9,11 @@ export const S = {
     margin: 10px 0;
     cursor: ${(props) => (props.isCursor ? 'pointer' : 'auto')};
   `,
-  EmptyCard: styled.div`
+  EmptyCard: styled.div<{ backgroundColor: string }>`
     width: 208px;
     padding: 10px 14px;
     color: #575757;
-    background: #e5e5e5;
+    background-color: ${(props) => props.backgroundColor || COLOR.GREY_1};
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     border-radius: 5px;
     user-select: none;

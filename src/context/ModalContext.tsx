@@ -1,50 +1,39 @@
-import React, { createContext, ReactNode, useContext, useState } from 'react';
-import { initCardList } from '../data/init';
-import { CardInfoType, CardListDispatchType } from '../type/card';
+import React, {
+  createContext,
+  Dispatch,
+  ReactNode,
+  useContext,
+  useState,
+} from 'react';
 
-export const CardListContext = createContext<CardInfoType[] | null>(null);
-export const CardListDispatchContext =
-  createContext<CardListDispatchType | null>(null);
+export type ModalType = 'SELECT_COMPANY' | 'MANAGE_CARD';
 
-export const CardListProvider = ({ children }: { children: ReactNode }) => {
-  const [cardList, setCardList] = useState(initCardList);
-  const addCard = (cardInfo: CardInfoType) => {
-    setCardList([...cardList, { ...cardInfo }]);
-  };
-  const updateNickname = (selectIdx: number, value: string) => {
-    const updatedCardList = cardList.map((card, index) => {
-      if (index === selectIdx) {
-        return { ...card, nickname: value };
-      } else {
-        return card;
-      }
-    });
-    setCardList(updatedCardList);
-  };
-  const deleteCard = (selectIdx: number) => {
-    const updatedCardList = cardList.filter((_, index) => selectIdx !== index);
-    setCardList(updatedCardList);
-  };
+interface ModalStateType {
+  type: ModalType | null;
+  isShow: boolean;
+}
+
+interface ModalContextType {
+  modalState: ModalStateType;
+  setModalState: Dispatch<ModalStateType>;
+}
+export const ModalStateContext = createContext<ModalContextType | null>(null);
+
+export const ModalProvider = ({ children }: { children: ReactNode }) => {
+  const [modalState, setModalState] = useState<ModalStateType>({
+    type: null,
+    isShow: false,
+  });
 
   return (
-    <CardListContext.Provider value={cardList}>
-      <CardListDispatchContext.Provider
-        value={{ addCard, updateNickname, deleteCard }}
-      >
-        {children}
-      </CardListDispatchContext.Provider>
-    </CardListContext.Provider>
+    <ModalStateContext.Provider value={{ modalState, setModalState }}>
+      {children}
+    </ModalStateContext.Provider>
   );
 };
 
-export const useCardListState = () => {
-  const state = useContext(CardListContext);
-  if (!state) throw new Error('Cannot find CardListProvider');
+export const useModalState = (): ModalContextType => {
+  const state = useContext(ModalStateContext);
+  if (!state) throw new Error('Cannot find ModalProvider');
   return state;
-};
-
-export const useCardListDispatch = () => {
-  const dispatch = useContext(CardListDispatchContext);
-  if (!dispatch) throw new Error('Cannot find CardListDispatchContext');
-  return dispatch;
 };

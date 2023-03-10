@@ -14,6 +14,7 @@ export interface CardInfoType {
   cvc: string;
   passwords: { password1: string; password2: string };
   company: string;
+  color: string;
   nickname: string;
   createdDate: number;
 }
@@ -48,6 +49,7 @@ export type Action =
   | {
       type: 'SET_COMPANY';
       company: string;
+      color: string;
     }
   | {
       type: 'SET_NICKNAME';

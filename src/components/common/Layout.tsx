@@ -12,6 +12,7 @@ const Layout = () => {
       min-height: 100vh;
       margin: 0 auto;
       background-color: ${COLOR.WHITE};
+      overflow: hidden;
     `,
     App: styled.div`
       height: 100%;
@@ -23,7 +24,7 @@ const Layout = () => {
       <S.App>
         <Outlet />
       </S.App>
-      {/*<Modal />*/}
+      <Modal />
     </S.Root>
   );
 };
