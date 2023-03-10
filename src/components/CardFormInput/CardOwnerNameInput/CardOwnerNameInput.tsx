@@ -1,43 +1,29 @@
 import Text from 'components/common/Text/Text';
 import styled from 'styled-components';
 import Input from '../../common/Input/Input';
-import { useState } from 'react';
-import { changeOwnerName } from 'utils/InputChange';
-import { ColorType, CardFormType, CardFormInputsType } from 'types';
+
+import { ColorType, CardFormInputsType } from 'types';
 
 type CardOwnerNameInputProps = {
   fontColor: ColorType;
-  setCard: React.Dispatch<React.SetStateAction<CardFormType>>;
+  onChange?: () => void;
   refs: CardFormInputsType;
+  length: number;
 };
 
-const CardOwnerNameInput = ({ setCard, fontColor, refs }: CardOwnerNameInputProps) => {
-  const [inputlength, setInputLength] = useState(0);
-
-  const handleInput = () => {
-    if (!refs.ownerName.ref) return;
-    const ownerName = changeOwnerName(refs.ownerName.ref.value);
-    refs.ownerName.ref.value = ownerName;
-    setInputLength(ownerName.length);
-    setCard((prev) => ({
-      ...prev,
-      ownerName: {
-        text: ownerName.length ? ownerName : 'Name',
-      },
-    }));
-  };
+const CardOwnerNameInput = ({ onChange, fontColor, refs, length }: CardOwnerNameInputProps) => {
   return (
     <Layout>
       <Container>
         <Title fontSize="xs" weight="bold" label="카드 소유자 이름(선택)" />
-        <Text fontSize="s" weight="normal" label={`${inputlength}/10`} />
+        <Text fontSize="s" weight="normal" label={`${length}/10`} />
       </Container>
       <Input
         type="text"
         theme="primary"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         ref={(el) => (refs.ownerName.ref = el)}
-        onChange={handleInput}
+        onChange={onChange}
         fontColor={fontColor}
         active={true}
       />

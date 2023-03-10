@@ -1,61 +1,22 @@
 import { CardFormType, ColorType, CompanyType } from 'types';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PaymentsContext } from 'context/Payments';
 import { isCardFormValidation } from 'utils/InputValidation';
 import uuid from 'react-uuid';
 
-const initialCardFormState: CardFormType = {
-  cardNumbers: {
-    text: '',
-    isValid: true,
-  },
-  expireDate: {
-    month: {
-      text: 'MM',
-      isValid: true,
-    },
-    year: {
-      text: 'YY',
-      isValid: true,
-    },
-  },
-  password: {
-    start: {
-      text: '',
-      isValid: true,
-    },
-    end: {
-      text: '',
-      isValid: true,
-    },
-  },
-  cvc: {
-    text: '',
-    isValid: true,
-  },
-  ownerName: {
-    text: 'empty',
-  },
-  color: {
-    text: '',
-    isValid: false,
-  },
-  company: {
-    text: '',
-    isValid: false,
-  },
-};
+interface useFormPageProps {
+  state: CardFormType;
+  setState: React.Dispatch<React.SetStateAction<CardFormType>>;
+}
 
-const useFormPage = () => {
-  const [state, setState] = useState(initialCardFormState);
+const useFormPage = ({ state, setState }: useFormPageProps) => {
   const paymentsCtx = useContext(PaymentsContext);
   const navigate = useNavigate();
 
   const handleCompanyList = (e) => {
     const color = e.currentTarget.children[0].getAttribute('color') as ColorType;
     const company = e.currentTarget.children[1].textContent as CompanyType;
-
     setState((prev) => ({
       ...prev,
       company: {
@@ -68,6 +29,7 @@ const useFormPage = () => {
       },
     }));
   };
+
   const handleBackButton = () => {
     navigate('/');
   };
@@ -97,8 +59,6 @@ const useFormPage = () => {
   };
 
   return {
-    state,
-    setState,
     handleCompanyList,
     handleBackButton,
     handleSubmit,

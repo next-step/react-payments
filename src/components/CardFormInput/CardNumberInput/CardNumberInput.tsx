@@ -1,34 +1,15 @@
 import Text from 'components/common/Text/Text';
 import styled from 'styled-components';
-import { changeCardNumber } from 'utils/InputChange';
 import Input from '../../common/Input/Input';
-import { ColorType, CardFormType, CardFormInputsType } from 'types';
-import { isValidCardNumber } from 'utils/InputValidation';
+import { ColorType, CardFormInputsType } from 'types';
 type CardNumberInputProps = {
-  setCard: React.Dispatch<React.SetStateAction<CardFormType>>;
+  onChange?: () => void;
   isValid: boolean;
   fontColor: ColorType;
   refs: CardFormInputsType;
 };
 
-const CardNumberInput = ({ isValid, setCard, fontColor, refs }: CardNumberInputProps) => {
-  const handleInput = () => {
-    if (!refs.cardNumbers.ref) return;
-    const cardNumbers = changeCardNumber(refs.cardNumbers.ref.value);
-    refs.cardNumbers.ref.value = cardNumbers;
-    const isNext = isValidCardNumber(cardNumbers);
-    if (isNext) {
-      refs.expireDate.month.ref?.focus();
-    }
-    setCard((prev) => ({
-      ...prev,
-      cardNumbers: {
-        text: cardNumbers,
-        isValid: isValidCardNumber(cardNumbers),
-      },
-    }));
-  };
-
+const CardNumberInput = ({ onChange, isValid, fontColor, refs }: CardNumberInputProps) => {
   return (
     <Layout>
       <Title fontSize="xs" weight="bold" label="카드 번호" />
@@ -36,12 +17,11 @@ const CardNumberInput = ({ isValid, setCard, fontColor, refs }: CardNumberInputP
         ref={(el) => (refs.cardNumbers.ref = el)}
         type="text"
         theme="primary"
-        onChange={handleInput}
+        onChange={onChange}
         fontColor={fontColor}
         active={true}
         error={!isValid}
       />
-
       {!isValid && <Text fontSize="xs" weight="bold" label="카드 번호는 12자리여야 합니다." fontColor="red" />}
     </Layout>
   );

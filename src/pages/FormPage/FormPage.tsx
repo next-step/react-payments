@@ -12,17 +12,31 @@ import Text from 'components/common/Text/Text';
 import Button from 'components/common/Button/Button';
 import useFormPage from 'hooks/useFormPage';
 import useHandleFormInput from 'hooks/useHandleFormInput';
+import useHandleFormState from 'hooks/useHandleFormState';
 
 const FormPage = () => {
   const [activeUI, setActiveUI] = useState(false);
-  const { state, setState, handleCompanyList, handleBackButton, handleSubmit } = useFormPage();
-  const { cardFormInputs } = useHandleFormInput();
+
+  const { formState, setFormState } = useHandleFormState();
+  const formStateObject = {
+    state: formState,
+    setState: setFormState,
+  };
+  const { handleCompanyList, handleBackButton, handleSubmit } = useFormPage(formStateObject);
+  const {
+    cardFormInputs,
+    handleCardNumberInput,
+    handleExpireInput,
+    handleOwnerNameInput,
+    handlePasswordInput,
+    handleSecurityInput,
+  } = useHandleFormInput(formStateObject);
 
   useEffect(() => {
-    if (state.company.isValid && state.color.isValid) {
+    if (formState.company.isValid && formState.color.isValid) {
       setActiveUI(false);
     }
-  }, [state.company, state.color]);
+  }, [formState.company, formState.color]);
   return (
     <Layout>
       <Header>
@@ -34,39 +48,44 @@ const FormPage = () => {
         <Card
           type="primary"
           onClick={() => setActiveUI(true)}
-          color={state.color.text}
-          company={state.company.text}
+          color={formState.color.text}
+          company={formState.company.text}
           size="small"
-          number={state.cardNumbers.text}
-          expireMonth={state.expireDate.month.text}
-          expireYear={state.expireDate.year.text}
-          ownerName={state.ownerName.text}
+          number={formState.cardNumbers.text}
+          expireMonth={formState.expireDate.month.text}
+          expireYear={formState.expireDate.year.text}
+          ownerName={formState.ownerName.text}
         />
         <CardNumberInput
-          setCard={setState}
-          isValid={state.cardNumbers.isValid}
-          fontColor={state.color.text}
+          onChange={handleCardNumberInput}
+          isValid={formState.cardNumbers.isValid}
+          fontColor={formState.color.text}
           refs={cardFormInputs}
         />
         <CardExpirationDateInput
-          setCard={setState}
-          fontColor={state.color.text}
+          onChange={handleExpireInput}
+          fontColor={formState.color.text}
           refs={cardFormInputs}
-          isValidMonth={state.expireDate.month.isValid}
-          isValidYear={state.expireDate.year.isValid}
+          isValidMonth={formState.expireDate.month.isValid}
+          isValidYear={formState.expireDate.year.isValid}
         />
-        <CardOwnerNameInput setCard={setState} fontColor={state.color.text} refs={cardFormInputs} />
+        <CardOwnerNameInput
+          onChange={handleOwnerNameInput}
+          fontColor={formState.color.text}
+          refs={cardFormInputs}
+          length={formState.ownerName.text.length}
+        />
         <CardSecurityInput
-          fontColor={state.color.text}
-          setCard={setState}
-          isValid={state.cvc.isValid}
+          fontColor={formState.color.text}
+          onChange={handleSecurityInput}
+          isValid={formState.cvc.isValid}
           refs={cardFormInputs}
         />
         <CardPasswordInput
-          fontColor={state.color.text}
-          setCard={setState}
-          isValidStart={state.password.start.isValid}
-          isValidEnd={state.password.end.isValid}
+          fontColor={formState.color.text}
+          onChange={handlePasswordInput}
+          isValidStart={formState.password.start.isValid}
+          isValidEnd={formState.password.end.isValid}
           refs={cardFormInputs}
         />
         <ButtonBox>
@@ -89,6 +108,7 @@ const Header = styled.div`
   margin-bottom: 20px;
   gap: 20px;
 `;
+
 const ButtonBox = styled.div`
   width: 100%;
   text-align: right;

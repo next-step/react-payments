@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import Card from "components/common/Card/Card";
-import Text from "components/common/Text/Text";
-import Input from "components/common/Input/Input";
-import Button from "components/common/Button/Button";
-import useAliasPage from "hooks/useAliasPage";
+import styled from 'styled-components';
+import Card from 'components/common/Card/Card';
+import Text from 'components/common/Text/Text';
+import Input from 'components/common/Input/Input';
+import Button from 'components/common/Button/Button';
+import useAliasPage from 'hooks/useAliasPage';
 
 const AliasPage = () => {
   const { handleSubmit, handleInput, currentCard, inputRef, inputLength } = useAliasPage();

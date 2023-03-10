@@ -1,45 +1,18 @@
 import Text from 'components/common/Text/Text';
 import styled from 'styled-components';
 import Input from '../../common/Input/Input';
-import { changePassword } from 'utils/InputChange';
-import { ColorType, CardFormType, CardFormInputsType } from 'types';
-import { isValidPasswordNumber } from 'utils/InputValidation';
+import { ColorType, CardFormInputsType } from 'types';
 
 type CardPasswordInputProps = {
   fontColor: ColorType;
-  setCard: React.Dispatch<React.SetStateAction<CardFormType>>;
+  onChange?: () => void;
   isValidStart: boolean;
   isValidEnd: boolean;
   refs: CardFormInputsType;
 };
 
-const CardPasswordInput = ({ refs, fontColor, setCard, isValidStart, isValidEnd }: CardPasswordInputProps) => {
+const CardPasswordInput = ({ refs, fontColor, onChange, isValidStart, isValidEnd }: CardPasswordInputProps) => {
   const isValid = isValidStart && isValidEnd;
-
-  const handleInput = () => {
-    if (!refs.password.start.ref || !refs.password.end.ref) return;
-    const passWordStart = changePassword(refs.password.start.ref.value);
-    const passWordEnd = changePassword(refs.password.end.ref.value);
-    refs.password.start.ref.value = passWordStart;
-    refs.password.end.ref.value = passWordEnd;
-    const isNext = isValidPasswordNumber(passWordStart);
-    if (isNext) {
-      refs.password.end.ref?.focus();
-    }
-    setCard((prev) => ({
-      ...prev,
-      password: {
-        start: {
-          text: passWordStart,
-          isValid: isValidPasswordNumber(passWordStart),
-        },
-        end: {
-          text: passWordEnd,
-          isValid: isValidPasswordNumber(passWordEnd),
-        },
-      },
-    }));
-  };
 
   return (
     <Layout>
@@ -50,7 +23,7 @@ const CardPasswordInput = ({ refs, fontColor, setCard, isValidStart, isValidEnd 
           type="text"
           active={true}
           ref={(el) => (refs.password.start.ref = el)}
-          onChange={handleInput}
+          onChange={onChange}
           fontColor={fontColor}
           error={!isValidStart}
         />
@@ -59,7 +32,7 @@ const CardPasswordInput = ({ refs, fontColor, setCard, isValidStart, isValidEnd 
           type="text"
           active={true}
           ref={(el) => (refs.password.end.ref = el)}
-          onChange={handleInput}
+          onChange={onChange}
           fontColor={fontColor}
           error={!isValidEnd}
         />

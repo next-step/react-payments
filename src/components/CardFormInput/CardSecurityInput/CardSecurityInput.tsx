@@ -1,35 +1,16 @@
 import Text from 'components/common/Text/Text';
 import styled from 'styled-components';
 import Input from '../../common/Input/Input';
-import { changeCardSecurityInput } from 'utils/InputChange';
-import { ColorType, CardFormType, CardFormInputsType } from 'types';
-import { isValidSecurityCode } from 'utils/InputValidation';
+import { ColorType, CardFormInputsType } from 'types';
 
 type CardPasswordInputProps = {
   fontColor: ColorType;
-  setCard: React.Dispatch<React.SetStateAction<CardFormType>>;
+  onChange?: () => void;
   refs: CardFormInputsType;
   isValid: boolean;
 };
 
-const CardSecurityInput = ({ fontColor, setCard, refs, isValid }: CardPasswordInputProps) => {
-  const handleInput = () => {
-    if (!refs.cvc.ref) return;
-    const securityCode = refs.cvc.ref.value;
-    refs.cvc.ref.value = changeCardSecurityInput(securityCode);
-    const isNext = isValidSecurityCode(securityCode);
-    if (isNext) {
-      refs.password.start.ref?.focus();
-    }
-    setCard((prev) => ({
-      ...prev,
-      cvc: {
-        text: securityCode,
-        isValid: isValidSecurityCode(securityCode),
-      },
-    }));
-  };
-
+const CardSecurityInput = ({ fontColor, onChange, refs, isValid }: CardPasswordInputProps) => {
   return (
     <Layout>
       <Title fontSize="xs" weight="bold" label="보안코드 (CVC/CVV)" />
@@ -38,7 +19,7 @@ const CardSecurityInput = ({ fontColor, setCard, refs, isValid }: CardPasswordIn
           theme="primary"
           type="text"
           ref={(el) => (refs.cvc.ref = el)}
-          onChange={handleInput}
+          onChange={onChange}
           fontColor={fontColor}
           active={true}
           error={!isValid}
