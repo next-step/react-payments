@@ -11,8 +11,7 @@ export function isNumber(variable: string) {
 export function processError(error: unknown, errorCallback?: GeneralFunction) {
   if (error instanceof BaseError) {
     if (error instanceof ValidationError) {
-      errorCallback?.(error);
-      alert(error.message);
+      errorCallback?.(error.message);
     }
   }
 }

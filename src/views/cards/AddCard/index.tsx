@@ -65,8 +65,13 @@ export default function AddCard() {
   const { dispatch } = useCardsContext();
 
   // 카드번호
-  const { cardNumber, isValidCardNumber, onCardNumberChange } =
-    useCardNumberInput(initialFormValue.cardNumber);
+  const {
+    cardNumber,
+    cardNumberError,
+    isValidCardNumber,
+    onCardNumberChange,
+    onCardNumberInputBlur,
+  } = useCardNumberInput(initialFormValue.cardNumber);
 
   // 카드 만료일
   const { cardExpireDate, isValidExpireDate, onCardExpireDateChange } =
@@ -168,7 +173,9 @@ export default function AddCard() {
           <S.AddCardFormInputWrapper>
             <CardNumberInput
               cardNumber={cardNumber}
+              error={cardNumberError}
               onChange={onCardNumberChange}
+              onBlur={onCardNumberInputBlur}
             />
             <CardExpireDateInput
               cardExpireDate={cardExpireDate}

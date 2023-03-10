@@ -1,1 +1,1 @@
-export type GeneralFunction = (...args: unknown[]) => unknown;
+export type GeneralFunction = (...args: any[]) => any;
