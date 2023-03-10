@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { CardType } from 'types';
 import { PaymentsContext } from 'context/Payments';
-import { getCardColor } from 'utils/Card';
+import { getCardCompnayColor } from 'utils/Card';
 
 const MyCardListPage = () => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const MyCardListPage = () => {
             <Card
               type="primary"
               id={card.id}
-              color={getCardColor(card.company)}
+              color={getCardCompnayColor(card.company)}
               company={card.company}
               size="small"
               number={card.cardNumbers}

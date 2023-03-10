@@ -13,7 +13,7 @@ import Button from 'components/common/Button/Button';
 import useFormPage from 'hooks/useFormPage';
 import useHandleFormInput from 'hooks/useHandleFormInput';
 import useHandleFormState from 'hooks/useHandleFormState';
-import { getCardColor } from 'utils/Card';
+import { getCardCompnayColor } from 'utils/Card';
 
 const FormPage = () => {
   const [activeUI, setActiveUI] = useState(false);
@@ -39,7 +39,7 @@ const FormPage = () => {
     }
   }, [formState.company]);
 
-  const cardColor = getCardColor(formState.company.text);
+  const cardColor = getCardCompnayColor(formState.company.text);
   return (
     <Layout>
       <Header>
@@ -51,7 +51,7 @@ const FormPage = () => {
         <Card
           type="primary"
           onClick={() => setActiveUI(true)}
-          color={getCardColor(formState.company.text)}
+          color={cardColor}
           company={formState.company.text}
           size="small"
           number={formState.cardNumbers.text}

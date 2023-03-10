@@ -14,6 +14,7 @@ import {
   isValidPasswordNumber,
   isValidSecurityCode,
 } from 'utils/InputValidation';
+import { getCardNumberCompnay } from 'utils/Card';
 interface useHandleFormInputProps {
   state: CardFormType;
   setState: React.Dispatch<React.SetStateAction<CardFormType>>;
@@ -51,6 +52,7 @@ const useHandleFormInput = ({ state, setState }: useHandleFormInputProps) => {
     const ref = cardFormInputs.cardNumbers.ref;
     if (!ref) return;
     const cardNumbers = changeCardNumber(ref.value);
+    const cardCompany = getCardNumberCompnay(cardNumbers[0]);
     ref.value = cardNumbers;
     const isNext = isValidCardNumber(cardNumbers);
     if (isNext) {
@@ -62,17 +64,23 @@ const useHandleFormInput = ({ state, setState }: useHandleFormInputProps) => {
         text: cardNumbers,
         isValid: isValidCardNumber(cardNumbers),
       },
+      company: {
+        text: cardCompany,
+        isValid: true,
+      },
     }));
   };
   const handleExpireInput = () => {
     const monthRef = cardFormInputs.expireDate.month.ref;
     const yearRef = cardFormInputs.expireDate.year.ref;
+
     const ownerNameRef = cardFormInputs.ownerName.ref;
 
-    if (!monthRef || !yearRef) return;
+    if (!monthRef) return;
     const month = changeMonth(monthRef.value);
-    const year = changeYear(yearRef.value);
     monthRef.value = month;
+    if (!yearRef) return;
+    const year = changeYear(yearRef.value);
     yearRef.value = year;
 
     if (isValidExpirationDate(month)) {

@@ -18,7 +18,7 @@ const Color: ColorTable = {
 };
 const Company_Color: CompanyTable = {
   토스카드: Color.Blue,
-  네이버: Color.Green,
+  네이버카드: Color.Green,
   하나카드: Color.Red,
   국민카드: Color.Pink,
   신한카드: Color.Cyon,
@@ -26,8 +26,36 @@ const Company_Color: CompanyTable = {
   카카오카드: Color.Yellow,
   오렌지카드: Color.Orange,
 };
-const Companys = ['토스카드', '네이버', '하나카드', '국민카드', '신한카드', '클린카드', '카카오카드', '오렌지카드'];
-// 카드에 맞는 컬러 추출
-export const getCardColor = (name: CompanyType): ColorType => {
+
+const Companys: CompanyType[] = [
+  '토스카드',
+  '네이버카드',
+  '하나카드',
+  '국민카드',
+  '신한카드',
+  '클린카드',
+  '카카오카드',
+  '오렌지카드',
+];
+// 회사 이름명에 맞는 색깔 얻기
+export const getCardCompnayColor = (name: CompanyType): ColorType => {
   return Companys.includes(name) ? Company_Color[name] : '';
+};
+type CardNumberTable = {
+  [key: string]: CompanyType;
+};
+const CARD_NUMBER: CardNumberTable = {
+  '1': Companys[0],
+  '2': Companys[1],
+  '3': Companys[2],
+  '4': Companys[3],
+  '5': Companys[4],
+  '6': Companys[5],
+  '7': Companys[6],
+  '8': Companys[7],
+};
+const CardNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+// 카드 Number의 첫번째수에 맞는 회사 얻기
+export const getCardNumberCompnay = (number: string): CompanyType => {
+  return CardNumbers.includes(number) ? CARD_NUMBER[number] : '';
 };

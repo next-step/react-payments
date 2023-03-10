@@ -59,7 +59,7 @@ const Card = ({
                 <Text fontSize="s" weight="bold" label={ownerName} />
               )}
 
-              {expireMonth && expireYear && <Text fontSize="s" weight="bold" label={`${expireMonth}/${expireYear}`} />}
+              <Text fontSize="s" weight="bold" label={`${expireMonth}/${expireYear}`} />
             </InfoContainer>
           </Bottom>
         </Container>
