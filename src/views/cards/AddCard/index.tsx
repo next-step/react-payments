@@ -74,8 +74,13 @@ export default function AddCard() {
   } = useCardNumberInput(initialFormValue.cardNumber);
 
   // 카드 만료일
-  const { cardExpireDate, isValidExpireDate, onCardExpireDateChange } =
-    useCardExpireDateInput(initialFormValue.expireDate);
+  const {
+    cardExpireDate,
+    cardExpireDateError,
+    isValidExpireDate,
+    onCardExpireDateChange,
+    onCardExpireDateInputBlur,
+  } = useCardExpireDateInput(initialFormValue.expireDate);
 
   // 카드 소유주
   const { cardOwnerName, isValidOwnerName, onCardOwnerNameChange } =
@@ -179,7 +184,9 @@ export default function AddCard() {
             />
             <CardExpireDateInput
               cardExpireDate={cardExpireDate}
+              error={cardExpireDateError}
               onChange={onCardExpireDateChange}
+              onBlur={onCardExpireDateInputBlur}
             />
             <CardOwnerInput
               cardOwnerName={cardOwnerName.ownerName}
