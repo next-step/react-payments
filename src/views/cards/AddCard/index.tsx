@@ -83,8 +83,13 @@ export default function AddCard() {
   } = useCardExpireDateInput(initialFormValue.expireDate);
 
   // 카드 소유주
-  const { cardOwnerName, isValidOwnerName, onCardOwnerNameChange } =
-    useCardOwnerInput(initialFormValue.ownerName);
+  const {
+    cardOwnerName,
+    cardOwnerError,
+    isValidOwnerName,
+    onCardOwnerNameChange,
+    onCardOwnerInputBlur,
+  } = useCardOwnerInput(initialFormValue.ownerName);
 
   // 카드 CVC
   const { cvcNumber, isValidCvcNumber, onCvcNumberChange } = useCardCvcInput(
@@ -190,7 +195,9 @@ export default function AddCard() {
             />
             <CardOwnerInput
               cardOwnerName={cardOwnerName.ownerName}
+              error={cardOwnerError}
               onChange={onCardOwnerNameChange}
+              onBlur={onCardOwnerInputBlur}
             />
             <CardCvcInput
               cardCvc={cvcNumber.cvc}

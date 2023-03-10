@@ -19,19 +19,33 @@ const validateCardOwnerName = (value: string) => {
   }
 };
 
+const isAllCardOwnerFieldFilled = (cardOwner: CardOwnerInput) =>
+  cardOwner.ownerName.length;
+
 const useCardOwnerInput = (initialValue: CardOwnerInput) => {
-  const { value, onChange } = useInput(initialValue);
+  const { value, error, onChange, setError } = useInput(initialValue);
 
   const handleCardOwnerNameChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const { target } = e;
 
-      const { error } = tryCatch(() => validateCardOwnerName(target.value));
+      tryCatch(() => validateCardOwnerName(target.value), setError);
 
-      if (!error) onChange(e);
+      onChange(e);
     },
     [value]
   );
+
+  const handleCardOwnerInputBlur = useCallback(() => {
+    if (!isAllCardOwnerFieldFilled(value)) {
+      tryCatch(() => {
+        throw new ValidationError({
+          name: "INPUT_VALIDATION_ERROR",
+          message: CARD_VALIDATION_ERROR_MESSAGES.REQUIRED,
+        });
+      }, setError);
+    }
+  }, [value]);
 
   const isValidOwnerName = useMemo(
     () =>
@@ -42,8 +56,10 @@ const useCardOwnerInput = (initialValue: CardOwnerInput) => {
 
   return {
     cardOwnerName: value,
+    cardOwnerError: error,
     isValidOwnerName,
     onCardOwnerNameChange: handleCardOwnerNameChange,
+    onCardOwnerInputBlur: handleCardOwnerInputBlur,
   };
 };
 
