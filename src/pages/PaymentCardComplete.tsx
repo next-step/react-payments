@@ -40,7 +40,7 @@ const CardRegisterComplete = () => {
 
   useEffect(() => {
     if (!location?.state?.isComplete) {
-      navigate('/');
+      navigate(ROUTE.HOME);
     }
   }, [location]);
 

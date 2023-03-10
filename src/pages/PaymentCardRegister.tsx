@@ -29,7 +29,7 @@ const PaymentCardRegister = () => {
       createdDate: Date.now(),
     });
 
-    navigate('/complete', { state: { isComplete: true } });
+    navigate(ROUTE.COMPLETE, { state: { isComplete: true } });
   };
 
   return (
