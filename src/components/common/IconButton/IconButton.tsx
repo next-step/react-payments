@@ -1,21 +1,22 @@
-import styled from "styled-components";
-import { FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faM, faRemove } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styled from 'styled-components';
+import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
+import { faAngleLeft, faM, faRemove, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const FontAwesomeIcons = {
   arrowLeft: faAngleLeft,
   remove: faRemove,
   modify: faM,
+  help: faCircleQuestion,
 };
 
 type FontAweSomeIconType = keyof typeof FontAwesomeIcons;
 export type IconButtonPropsType = {
   name: FontAweSomeIconType;
-  size: FontAwesomeIconProps["size"];
+  size: FontAwesomeIconProps['size'];
   color: string;
   className?: string;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 const IconButton = ({ onClick, className, name, size, color }: IconButtonPropsType) => {
   return (

@@ -39,7 +39,6 @@ export const PaymentsContextProvider = ({ children }: PaymentsProviderProps) => 
       }
       return card;
     });
-    console.log(currentCard, newCardList);
     setCardList(newCardList);
   };
 

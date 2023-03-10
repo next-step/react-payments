@@ -2,6 +2,7 @@ import Text from 'components/common/Text/Text';
 import styled from 'styled-components';
 import Input from '../../common/Input/Input';
 import { ColorType, CardFormInputsType } from 'types';
+import Help from 'components/common/Help/Help';
 
 type CardPasswordInputProps = {
   fontColor: ColorType;
@@ -24,6 +25,7 @@ const CardSecurityInput = ({ fontColor, onChange, refs, isValid }: CardPasswordI
           active={true}
           error={!isValid}
         />
+        <Help />
       </Container>
       {!isValid && <Text fontSize="xs" weight="bold" label="숫자 3자리 입력해주세요" fontColor="red" />}
     </Layout>
@@ -42,5 +44,8 @@ const Title = styled(Text)`
 `;
 
 const Container = styled.div`
-  width: 25%;
+  display: flex;
+  width: 35%;
+  gap: 10px;
+  align-items: center;
 `;
