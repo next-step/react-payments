@@ -12,5 +12,6 @@ const Template: ComponentStory<typeof Title> = (args) => <Title {...args} />;
 export const Default = Template.bind({});
 
 Default.args = {
-  title: '< 카드 추가',
+  text: '카드 추가',
+  isArrow: true,
 };

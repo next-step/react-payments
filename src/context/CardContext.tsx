@@ -1,98 +1,13 @@
-import React, { Dispatch, useContext, useReducer } from 'react';
-import { validateDigit, validateExpire, validatePassword } from '../utils/form';
+import React, { createContext, ReactNode, useContext, useReducer } from 'react';
+import { CardDispatchType, CardInfoType } from '../type/card';
+import { reducer } from '../hook/cardReducer';
+import { initCardInfo } from '../data/init';
 
-export type DigitType = {
-  digit1: number | string;
-  digit2: number | string;
-  digit3: number | string;
-  digit4: number | string;
-};
+const CardStateContext = createContext<CardInfoType | null>(null);
+const CardDispatchContext = createContext<CardDispatchType | null>(null);
 
-export type CardStateType = {
-  digits: DigitType;
-  expire: string;
-  name: string;
-  cvc: string;
-  passwords: { password1: string; password2: string };
-};
-
-type Action =
-  | {
-      type: 'SET_DIGIT';
-      digits: DigitType;
-    }
-  | {
-      type: 'SET_EXPIRE';
-      expire: string;
-    }
-  | {
-      type: 'SET_NAME';
-      name: string;
-    }
-  | {
-      type: 'SET_CVC';
-      cvc: string;
-    }
-  | {
-      type: 'SET_PASSWORD';
-      passwords: { password1: string; password2: string };
-    };
-
-type SampleDispatch = Dispatch<Action>;
-
-const initState: CardStateType = {
-  digits: { digit1: '', digit2: '', digit3: '', digit4: '' },
-  expire: '',
-  name: '',
-  cvc: '',
-  passwords: { password1: '', password2: '' },
-};
-
-const CardStateContext = React.createContext<CardStateType | null>(null);
-const CardDispatchContext = React.createContext<SampleDispatch | null>(null);
-
-const reducer = (state: CardStateType, action: Action): CardStateType => {
-  switch (action.type) {
-    case 'SET_DIGIT':
-      return {
-        ...state,
-        digits: {
-          digit1: validateDigit(action.digits.digit1, 'digit1'),
-          digit2: validateDigit(action.digits.digit2, 'digit2'),
-          digit3: validateDigit(action.digits.digit3, 'digit3'),
-          digit4: action.digits.digit4,
-        },
-      };
-    case 'SET_EXPIRE':
-      return {
-        ...state,
-        expire: validateExpire(action.expire),
-      };
-    case 'SET_NAME':
-      return {
-        ...state,
-        name: action.name,
-      };
-    case 'SET_CVC':
-      return {
-        ...state,
-        cvc: action.cvc,
-      };
-    case 'SET_PASSWORD':
-      return {
-        ...state,
-        passwords: {
-          password1: validatePassword(action.passwords.password1, 'password1'),
-          password2: action.passwords.password2,
-        },
-      };
-    default:
-      throw new Error('Unhandled action');
-  }
-};
-
-export const CardProvider = ({ children }: { children: React.ReactNode }) => {
-  const [state, dispatch] = useReducer(reducer, initState);
+export const CardProvider = ({ children }: { children: ReactNode }) => {
+  const [state, dispatch] = useReducer(reducer, initCardInfo);
 
   return (
     <CardStateContext.Provider value={state}>

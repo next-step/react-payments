@@ -1,26 +1,27 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { COLOR } from '../../constant/color';
 
 const S = {
-  Button: styled.div`
-    width: 100%;
-    text-align: right;
+  Button: styled.button`
     cursor: pointer;
-  `,
-  Span: styled.span`
-    margin-right: 10px;
+    border: none;
+    background: none;
+    font-size: 14px;
+    font-weight: bold;
   `,
 };
 
 interface IButton {
   onClick?: () => void;
   text: string;
+  color?: string;
 }
 
-const Button = ({ onClick, text }: IButton) => {
+const Button = ({ onClick, text, color }: IButton) => {
   return (
-    <S.Button onClick={onClick}>
-      <S.Span>{text}</S.Span>
+    <S.Button onClick={onClick} color={color ?? COLOR.BLACK}>
+      {text}
     </S.Button>
   );
 };

@@ -1,7 +1,7 @@
 import { S } from '../../styles/Input';
 import Input from '../common/Input';
 import React from 'react';
-import { DigitType } from '../../context/CardContext';
+import { DigitType } from '../../type/card';
 
 interface IProps {
   onChange: (e: React.ChangeEvent) => void;
