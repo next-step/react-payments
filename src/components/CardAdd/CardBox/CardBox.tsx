@@ -1,20 +1,16 @@
 import { useMemo } from 'react';
 
 import { CARD } from '@/constants/card';
-import { isShowHyphen, maskingNumber } from '@/domain/card';
-import { CardExpiration, CardNumber, CardOwnerName, SelectedCard } from '@/types/card';
+import { useCardAddForm } from '@/context/CardAddForm';
+import { isShowHyphen, maskingNumber } from '@/domain/card/card';
 
-type CardBoxProps = {
-  cardNumber: CardNumber;
-  cardExpiration: CardExpiration;
-  cardOwnerName: CardOwnerName;
-  selectedCard: SelectedCard;
-};
-
-export default function CardBox({ cardNumber, cardExpiration, cardOwnerName, selectedCard }: CardBoxProps) {
+export default function CardBox() {
+  const {
+    cardForm: { cardNumber, cardExpiration, cardCompany, cardOwnerName },
+  } = useCardAddForm();
   const { num1, num2, num3, num4 } = cardNumber;
   const { month, year } = cardExpiration;
-  const { name, color } = selectedCard;
+  const { name, color } = cardCompany;
 
   const cardStyle = useMemo(() => {
     return { backgroundColor: color };
@@ -41,7 +37,7 @@ export default function CardBox({ cardNumber, cardExpiration, cardOwnerName, sel
         </div>
         <div className="card-bottom">
           <div className="card-bottom__info">
-            <span className="card-text card-text__ellipsis">{cardOwnerName || CARD.OWNER_NAME.PLACEHOLDER}</span>
+            <span className="card-text card-text__ellipsis__small">{cardOwnerName || CARD.OWNER_NAME.PLACEHOLDER}</span>
             <span className="card-text">
               {month || CARD.EXPIRATION.PLACEHOLDER.MONTH} / {year || CARD.EXPIRATION.PLACEHOLDER.YEAR}
             </span>

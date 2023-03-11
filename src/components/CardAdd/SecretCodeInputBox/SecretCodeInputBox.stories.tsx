@@ -7,7 +7,7 @@ export default {
   component: SecretCodeInputBox,
 } as Meta;
 
-const Template: ComponentStory<typeof SecretCodeInputBox> = (args) => <SecretCodeInputBox {...args} />;
+const Template: ComponentStory<typeof SecretCodeInputBox> = () => <SecretCodeInputBox />;
 
 export const Default = Template.bind({});
 Default.args = {};

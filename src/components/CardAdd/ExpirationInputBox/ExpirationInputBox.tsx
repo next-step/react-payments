@@ -1,37 +1,38 @@
-import { ChangeEvent } from 'react';
-
 import { Box, Input } from '@/components/Common';
-import { CardExpiration } from '@/types/card';
 import { CARD } from '@/constants/card';
+import { useCardAddForm } from '@/context/CardAddForm';
 
-type ExpirationInputBoxTypes = {
-  cardExpiration: CardExpiration;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-};
-
-export default function ExpirationInputBox({ cardExpiration, onChange }: ExpirationInputBoxTypes) {
+export default function ExpirationInputBox() {
+  const {
+    cardForm: { cardExpiration },
+    handleChangeCardForm,
+  } = useCardAddForm();
   const { month, year } = cardExpiration;
 
   return (
-    <Box className="input-container">
+    <Box className="my-4">
       <span className="input-title">만료일</span>
       <Input
-        className="input-basic w-25"
+        styleType="basic"
+        className=" w-25"
         name="month"
         value={month}
-        onChange={onChange}
+        onChange={handleChangeCardForm}
         type="text"
         maxLength={CARD.EXPIRATION.LENGTH}
         placeholder={CARD.EXPIRATION.PLACEHOLDER.MONTH}
+        data-type={CARD.EXPIRATION.TYPE}
       />
       <Input
-        className="input-basic w-25"
+        styleType="basic"
+        className=" w-25"
         name="year"
         value={year}
-        onChange={onChange}
+        onChange={handleChangeCardForm}
         type="text"
         maxLength={CARD.EXPIRATION.LENGTH}
         placeholder={CARD.EXPIRATION.PLACEHOLDER.YEAR}
+        data-type={CARD.EXPIRATION.TYPE}
       />
     </Box>
   );

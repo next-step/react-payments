@@ -7,7 +7,7 @@ export default {
   component: OwnerNameInputBox,
 } as Meta;
 
-const Template: ComponentStory<typeof OwnerNameInputBox> = (args) => <OwnerNameInputBox {...args} />;
+const Template: ComponentStory<typeof OwnerNameInputBox> = () => <OwnerNameInputBox />;
 
 const cardOwnerName = '승완';
 
