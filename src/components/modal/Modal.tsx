@@ -45,6 +45,7 @@ interface IModal {
 const Modal = () => {
   const {
     modalState: { isShow, type },
+    setModalState,
   } = useModalState();
 
   const getModalContent = (type: ModalType | null) => {
@@ -60,7 +61,10 @@ const Modal = () => {
 
   return (
     <>
-      <S.ModalDimmed isShow={isShow} />
+      <S.ModalDimmed
+        isShow={isShow}
+        onClick={() => setModalState({ type: null, isShow: false })}
+      />
       <S.Modal isShow={isShow}>
         <S.Content>{getModalContent(type)}</S.Content>
       </S.Modal>

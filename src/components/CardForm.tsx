@@ -1,69 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCardDispatch, useCardState } from '../context/CardContext';
 import InputCvc from './form/InputCvc';
 import InputDigit from './form/InputDigit';
 import InputExpire from './form/InputExpire';
 import InputName from './form/InputName';
 import InputPassword from './form/InputPassword';
-import { COMPANY } from '../constant/company';
+import { useModalState } from '../context/ModalContext';
+import { computeCompany } from '../utils/form';
 
 const CardRegisterForm = () => {
   const dispatch = useCardDispatch();
   const { digits, expire, name, cvc, passwords } = useCardState();
+  const { setModalState } = useModalState();
+  const [isFocusCompany, setIsFocusCompany] = useState(false);
 
   const onChangeDigit = (e: React.ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
     dispatch({
       type: 'SET_CARD_DIGIT',
       digits: {
         ...digits,
-        [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement)
-          .value,
+        [target.name]: target.value,
       },
     });
-    // console.log(digits);
 
-    // const isComputeStart =
-    //   String(digits.digit1).length + String(digits.digit2).length === 8;
-    // console.log(isComputeStart);
-
-    // compute 함수가 작동되어야하는 조건
-    // isComputeStart
-    // 1. digit 1 + digit 2 의 length 가 8일 떄
-
-    // if((e.target as HTMLInputElement))
-    // console.log((e.target as HTMLInputElement).value);
-  };
-
-  const computeCardCompany = (digit1: string) => {
-    // 카드숫자 첫번째 자리로 회사별 카드 추정
-    const firstNum = digit1[0];
-    switch (firstNum) {
-      case '1':
-        return COMPANY.RED_CARD;
-      case '2':
-        return COMPANY.BLUE_CARD;
-      case '3':
-        return COMPANY.GREEN_CARD;
-      case '4':
-        return COMPANY.PINK_CARD;
-      case '5':
-        return COMPANY.ORANGE_CARD;
-      case '6':
-        return COMPANY.GREY_CARD;
-      case '7':
-        return COMPANY.YELLOW_CARD;
-      case '8':
-        return COMPANY.AQUA_CARD;
-      default:
-        return null;
+    if (target.name === 'digit1' || target.name === 'digit2') {
+      setIsFocusCompany(true);
+    } else {
+      setIsFocusCompany(false);
+      setModalState({ type: null, isShow: false });
     }
   };
+
   const onChangeValue = (e: React.ChangeEvent) => {
     dispatch({
       type: 'SET_CARD_VALUE',
       target: e.target as HTMLInputElement,
     });
   };
+
   const onChangePassword = (e: React.ChangeEvent) => {
     dispatch({
       type: 'SET_PASSWORD',
@@ -74,6 +49,23 @@ const CardRegisterForm = () => {
       },
     });
   };
+
+  const showCompanyModal = () => {
+    const companyDigitLength =
+      String(digits.digit1).length + String(digits.digit2).length;
+    if (companyDigitLength === 8 && isFocusCompany) {
+      dispatch({
+        type: 'SET_COMPANY',
+        company: computeCompany(String(digits.digit1)).company,
+        color: computeCompany(String(digits.digit1)).color,
+      });
+      setModalState({ type: 'SELECT_COMPANY', isShow: true });
+    }
+  };
+
+  useEffect(() => {
+    showCompanyModal();
+  }, [digits, isFocusCompany]);
 
   return (
     <>

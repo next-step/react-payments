@@ -1,5 +1,4 @@
 import React from 'react';
-// import { S } from '../styles/card';
 import { CardInfoType } from '../type/card';
 import styled from '@emotion/styled';
 import { COLOR } from '../constant/color';
@@ -81,13 +80,12 @@ const CardPreview = ({
       backgroundColor={color}
       isSizeBig={isSizeBig ?? false}
     >
-      <S.CardCompany>{company || '하나카드'}</S.CardCompany>
+      <S.CardCompany>{company || ''}</S.CardCompany>
       <S.CardBottom>
         <S.CardChip isSizeBig={isSizeBig ?? false} />
         <S.CardInfoWrap>
           <S.CardNumWrap isSizeBig={isSizeBig ?? false}>
             <S.CardNum>{digits.digit1}</S.CardNum>
-
             <S.CardNum>{digits.digit2}</S.CardNum>
             <S.CardNum>{'*'.repeat(String(digits.digit3).length)}</S.CardNum>
             <S.CardNum>{'*'.repeat(String(digits.digit4).length)}</S.CardNum>

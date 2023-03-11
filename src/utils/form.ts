@@ -1,4 +1,7 @@
 import { SLASH } from '../constant';
+import { CardCompanyType } from '../components/modal/ModalSelectCompany';
+import { COMPANY_DATA } from '../constant/company';
+import { COLOR } from '../constant/color';
 
 export const validateDigit = (digit: number | string, targetName: string) => {
   const value = String(digit).replace(/\D+/g, '');
@@ -53,5 +56,33 @@ const nextFocus = (
   if (value.length === nextFocusLength) {
     if (!nextRef) return;
     nextRef.focus();
+  }
+};
+
+export const computeCompany = (digit: string): CardCompanyType => {
+  // 카드숫자 첫번째 자리로 회사별 카드 추정
+  const firstNum = digit[0];
+  switch (firstNum) {
+    case '1':
+      return { ...COMPANY_DATA.RED_CARD };
+    case '2':
+      return { ...COMPANY_DATA.BLUE_CARD };
+    case '3':
+      return { ...COMPANY_DATA.GREEN_CARD };
+    case '4':
+      return { ...COMPANY_DATA.PINK_CARD };
+    case '5':
+      return { ...COMPANY_DATA.ORANGE_CARD };
+    case '6':
+      return { ...COMPANY_DATA.GREY_CARD };
+    case '7':
+      return { ...COMPANY_DATA.YELLOW_CARD };
+    case '8':
+      return { ...COMPANY_DATA.AQUA_CARD };
+    default:
+      return {
+        company: '',
+        color: COLOR.GREY,
+      };
   }
 };
