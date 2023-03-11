@@ -1,6 +1,7 @@
 import { CardInfoType } from '../type/card';
 import { COLOR } from '../constant/color';
 import { CardCompanyType } from '../components/modal/ModalSelectCompany';
+import { COMPANY } from '../constant/company';
 
 export const initCardList: CardInfoType[] = [
   {
@@ -28,37 +29,39 @@ export const initCardInfo: CardInfoType = {
   createdDate: 0,
 };
 
+// company에 관한 상수값이 있으면 관리가 쉬울 것 같다.
+
 export const cardCompanyList: CardCompanyType[] = [
   {
     color: COLOR.RED,
-    company: '레드카드',
+    company: COMPANY.RED_CARD,
   },
   {
     color: COLOR.BLUE,
-    company: '블루카드',
+    company: COMPANY.BLUE_CARD,
   },
   {
     color: COLOR.GREEN,
-    company: '그린카드',
+    company: COMPANY.GREEN_CARD,
   },
   {
     color: COLOR.PINK,
-    company: '핑크카드',
+    company: COMPANY.PINK_CARD,
   },
   {
     color: COLOR.ORANGE,
-    company: '오렌지카드',
+    company: COMPANY.ORANGE_CARD,
   },
   {
     color: COLOR.GREY,
-    company: '그레이카드',
+    company: COMPANY.GREY_CARD,
   },
   {
     color: COLOR.YELLOW,
-    company: '옐로우카드',
+    company: COMPANY.YELLOW_CARD,
   },
   {
-    color: COLOR.GREEN_1,
-    company: '형광카드',
+    color: COLOR.AQUA,
+    company: COMPANY.AQUA_CARD,
   },
 ];

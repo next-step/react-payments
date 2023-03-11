@@ -28,20 +28,12 @@ export type CardListDispatchType = {
 
 export type Action =
   | {
-      type: 'SET_DIGIT';
+      type: 'SET_CARD_VALUE';
+      target: HTMLInputElement;
+    }
+  | {
+      type: 'SET_CARD_DIGIT';
       digits: DigitType;
-    }
-  | {
-      type: 'SET_EXPIRE';
-      expire: string;
-    }
-  | {
-      type: 'SET_NAME';
-      name: string;
-    }
-  | {
-      type: 'SET_CVC';
-      cvc: string;
     }
   | {
       type: 'SET_PASSWORD';
@@ -51,10 +43,6 @@ export type Action =
       type: 'SET_COMPANY';
       company: string;
       color: string;
-    }
-  | {
-      type: 'SET_NICKNAME';
-      nickname: string;
     }
   | {
       type: 'INIT';

@@ -8,7 +8,6 @@ import CardPreview from '../components/CardPreview';
 import { useCardListDispatch } from '../context/CardListContext';
 import styled from '@emotion/styled';
 import { ROUTE } from '../constant/route';
-import { useModalState } from '../context/ModalContext';
 
 const S = {
   TitleWrapper: styled.div`
@@ -23,7 +22,6 @@ const PaymentCardRegister = () => {
   const navigate = useNavigate();
   const cardState = useCardState();
   const { addCard } = useCardListDispatch();
-  const { setModalState } = useModalState();
 
   const onClickAddCard = () => {
     addCard({
