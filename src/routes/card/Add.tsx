@@ -58,6 +58,7 @@ function Add() {
     formattedCardNumber,
     bankName,
     expiredRef,
+    userNameRef,
   } = useCardChange();
 
   const history = useHistory();
@@ -94,7 +95,10 @@ function Add() {
           onExpiredDateChange={onExpiredDateChange}
           ref={expiredRef}
         ></ExpiredDate>
-        <UserName onUserNameChange={onUserNameChange}></UserName>
+        <UserName
+          onUserNameChange={onUserNameChange}
+          ref={userNameRef}
+        ></UserName>
         <Code onCodeChange={onCodeChange}></Code>
         <Password onPasswordChange={onPasswordChange}></Password>
         <Button />

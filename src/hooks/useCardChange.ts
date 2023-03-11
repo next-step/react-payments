@@ -91,6 +91,10 @@ function useCardChange() {
     });
   };
   const onExpiredDateChange = (expiredDate: Date) => {
+    if (expiredDate.month && expiredDate.year.length === 2) {
+      userNameRef.current?.focus();
+    }
+
     setCardInfo((card: CardType) => {
       return {
         ...card,
@@ -124,6 +128,7 @@ function useCardChange() {
   };
 
   const expiredRef = useRef<HTMLInputElement>(null);
+  const userNameRef = useRef<HTMLInputElement>(null);
 
   return {
     onCardNumberChange,
@@ -137,6 +142,7 @@ function useCardChange() {
     bankName,
     setCardInfo,
     expiredRef,
+    userNameRef,
   };
 }
 
