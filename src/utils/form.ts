@@ -86,7 +86,3 @@ export const computeCompany = (digit: string): CardCompanyType => {
       };
   }
 };
-
-// nextFocus
-// length
-// 다음 ID값
