@@ -12,6 +12,7 @@ export default function CardNumberInput({
         <input
           className="input-basic card-number"
           type="text"
+          inputMode="numeric"
           name="num0"
           ref={(el) => (cardNumberRefs.current[0] = el)}
           onChange={onChange}
@@ -22,6 +23,7 @@ export default function CardNumberInput({
         <input
           className="input-basic card-number"
           type="text"
+          inputMode="numeric"
           name="num1"
           ref={(el) => (cardNumberRefs.current[1] = el)}
           onChange={onChange}
@@ -32,6 +34,7 @@ export default function CardNumberInput({
         <input
           className="input-basic card-number"
           type="password"
+          inputMode="numeric"
           name="num2"
           ref={(el) => (cardNumberRefs.current[2] = el)}
           onChange={onChange}
@@ -42,6 +45,7 @@ export default function CardNumberInput({
         <input
           className="input-basic card-number"
           type="password"
+          inputMode="numeric"
           name="num3"
           ref={(el) => (cardNumberRefs.current[3] = el)}
           onChange={onChange}
