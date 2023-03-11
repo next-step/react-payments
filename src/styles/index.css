@@ -4,6 +4,7 @@
 @import "modal.css";
 @import "utils.css";
 @import "reset.css";
+@import "font/font.css";
 
 body {
   background-color: #e5e5e5;
