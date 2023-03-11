@@ -19,9 +19,6 @@ const validateCardOwnerName = (value: string) => {
   }
 };
 
-const isAllCardOwnerFieldFilled = (cardOwner: CardOwnerInput) =>
-  cardOwner.ownerName.length;
-
 const useCardOwnerInput = (initialValue: CardOwnerInput) => {
   const { value, error, onChange, setError } = useInput(initialValue);
 
@@ -37,7 +34,7 @@ const useCardOwnerInput = (initialValue: CardOwnerInput) => {
   );
 
   const handleCardOwnerInputBlur = useCallback(() => {
-    if (!isAllCardOwnerFieldFilled(value)) {
+    if (!value.ownerName) {
       tryCatch(() => {
         throw new ValidationError({
           name: "INPUT_VALIDATION_ERROR",

@@ -92,9 +92,13 @@ export default function AddCard() {
   } = useCardOwnerInput(initialFormValue.ownerName);
 
   // 카드 CVC
-  const { cvcNumber, isValidCvcNumber, onCvcNumberChange } = useCardCvcInput(
-    initialFormValue.cvcNumber
-  );
+  const {
+    cvcNumber,
+    cvcError,
+    isValidCvcNumber,
+    onCvcNumberChange,
+    onCvcNumberInputBlur,
+  } = useCardCvcInput(initialFormValue.cvcNumber);
 
   // 카드 비밀번호
   const { cardPassword, isPasswordValid, onCardPasswordChange } =
@@ -201,7 +205,9 @@ export default function AddCard() {
             />
             <CardCvcInput
               cardCvc={cvcNumber.cvc}
+              error={cvcError}
               onChange={onCvcNumberChange}
+              onBlur={onCvcNumberInputBlur}
             />
             <CardPasswordInput
               cardPassword={cardPassword}

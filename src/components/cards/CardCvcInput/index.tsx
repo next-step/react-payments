@@ -6,9 +6,14 @@ import * as S from "./cardCvcInput";
 
 interface CardCvcInputProps extends InputHTMLAttributes<HTMLInputElement> {
   cardCvc: string;
+  error?: string;
 }
 
-export default function CardCvcInput({ cardCvc, ...props }: CardCvcInputProps) {
+export default function CardCvcInput({
+  cardCvc,
+  error,
+  ...props
+}: CardCvcInputProps) {
   return (
     <S.CardCvcInput
       id="cvc"
@@ -17,6 +22,7 @@ export default function CardCvcInput({ cardCvc, ...props }: CardCvcInputProps) {
       type="password"
       maxLength={CARD_INPUT_VARIABLES.CVC_NUMBER_MAX_LENGTH}
       value={cardCvc}
+      error={error}
       {...props}
     />
   );

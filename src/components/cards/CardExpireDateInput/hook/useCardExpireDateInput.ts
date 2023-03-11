@@ -37,7 +37,7 @@ const validateCardExpireDateInput = (element: HTMLInputElement) => {
   }
 };
 
-const isAllCardExpireDateFieldFilled = (cardExpireDate: CardExpireDate) => {
+const isCardExpireDateFieldFilled = (cardExpireDate: CardExpireDate) => {
   return !Object.entries(cardExpireDate).some(
     ([_, number]) => number.length < CARD_INPUT_VARIABLES.DATE_MAX_LENGTH
   );
@@ -68,7 +68,7 @@ const useCardExpireDateInput = (initialValue: CardExpireDate) => {
   );
 
   const handleCardExpireInputBlur = useCallback(() => {
-    if (!isAllCardExpireDateFieldFilled(value)) {
+    if (!isCardExpireDateFieldFilled(value)) {
       tryCatch(() => {
         throw new ValidationError({
           name: "INPUT_VALIDATION_ERROR",
