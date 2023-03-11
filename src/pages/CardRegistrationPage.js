@@ -85,6 +85,14 @@ export default function CardRegistrationPage() {
     });
     setIsShowModal(false);
   }
+
+  function isValidOwnerName(value) {
+    if (value.length <= CARD_OWNER_NAME.MAX_LENGTH) {
+      return true;
+    }
+    return false;
+  }
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -130,6 +138,9 @@ export default function CardRegistrationPage() {
             const { name, value } = e.target;
             if (!isNumber(value))
               return { success: false, errorMessage: MESSAGE.ALERT_NUMBER };
+            if (name !== "month" && name !== "year") {
+              return { success: false, errorMessage: "잘못된 입력 시도입니다" };
+            }
             if (name === "month") {
               if (value > 12) {
                 return {
@@ -137,7 +148,7 @@ export default function CardRegistrationPage() {
                   errorMessage: MESSAGE.ALERT_EXP_MONTH,
                 };
               }
-            } else if (name === "year") {
+            } else {
               if (value > 31 || value === 0) {
                 return { success: false, errorMessage: MESSAGE.ALERT_EXP_YEAR };
               }
@@ -166,12 +177,6 @@ export default function CardRegistrationPage() {
           cardOwnerName={cardOwnerName}
           onChange={(e) => {
             const { value } = e.target;
-            function isValidOwnerName(value) {
-              if (value.length <= CARD_OWNER_NAME.MAX_LENGTH) {
-                return true;
-              }
-              return false;
-            }
             if (!isValidOwnerName(value)) {
               return {
                 success: false,
