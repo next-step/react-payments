@@ -52,6 +52,11 @@ function ExpiredDate(
     if (!expiredDate.month) {
       return "MM은 필수 입력입니다";
     }
+    if (!expiredDate.year) {
+      return "YY는 필수 입력입니다";
+    }
+
+    return null;
   }, [expiredDate]);
 
   const onChange = (
@@ -98,9 +103,7 @@ function ExpiredDate(
           ref={(el: HTMLInputElement) => (itemsRef.current[1] = el)}
         />
       </InputBox>
-      <>
-        <InvalidText>text</InvalidText>
-      </>
+      <>{invalidText && <InvalidText>{invalidText}</InvalidText>}</>
     </InputContainer>
   );
 }
