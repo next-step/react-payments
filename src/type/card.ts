@@ -17,6 +17,7 @@ export interface CardInfoType {
   color: string;
   nickname: string;
   createdDate: number;
+  isSizeBig?: boolean;
 }
 
 export type CardListDispatchType = {

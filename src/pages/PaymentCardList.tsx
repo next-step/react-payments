@@ -8,6 +8,7 @@ import {
   useCardListDispatch,
   useCardListState,
 } from '../context/CardListContext';
+import { useModalState } from '../context/ModalContext';
 
 const S = {
   Button: styled.div`
@@ -32,10 +33,11 @@ const PaymentCardList = () => {
   const cardList = useCardListState();
   const { deleteCard } = useCardListDispatch();
   const navigate = useNavigate();
+  const { setModalState } = useModalState();
 
-  const updateNickname = (index: number) => {
-    // step 3 에서 수정기능 추가할 예정
-    navigate('/complete', { state: { isComplete: true, index: index } });
+  const showManageCardModal = (index: number) => {
+    setModalState({ isShow: true, type: 'MANAGE_CARD' });
+    // navigate('/complete', { state: { isComplete: true, index: index } });
   };
 
   return (
@@ -51,7 +53,7 @@ const PaymentCardList = () => {
             <S.CardWrapper key={index}>
               <CardPreview
                 {...card}
-                onClick={() => updateNickname(index)}
+                onClick={() => showManageCardModal(index)}
                 isCursor={true}
               />
               <S.Nickname>{card.nickname}</S.Nickname>
