@@ -10,8 +10,8 @@ const getCardSize = (size: string) => {
 };
 
 interface CardProps {
-  cardNumber: CardNumber;
-  expiration: Expiration;
+  cardNumber?: CardNumber;
+  expiration?: Expiration;
   cardOwner?: string;
   cardCompany?: string;
   size?: 'sm' | 'lg';
@@ -19,15 +19,7 @@ interface CardProps {
   onClick?: () => void;
 }
 
-function Card({
-  cardOwner,
-  cardCompany,
-  cardNumber: { cardNumber1, cardNumber2, cardNumber3, cardNumber4 },
-  expiration: { month, year },
-  size = 'sm',
-  isEmpty = false,
-  onClick,
-}: CardProps) {
+function Card({ cardOwner, cardCompany, cardNumber, expiration, size = 'sm', isEmpty = false, onClick }: CardProps) {
   const cardSize = getCardSize(size);
   const bgColor =
     CARD_COMPANY_LIST.find(company => company.companyName === cardCompany)?.companyColorClassName ??
@@ -66,17 +58,21 @@ function Card({
         <Chip size={size} />
         <div className="w-full flex-1 my-2 flex flex-col justify-between">
           <div className="flex-1 w-full flex items-center py-2 justify-evenly">
-            <span>{cardNumber1}</span>
-            <span>{cardNumber2}</span>
-            <span>{cardNumber3}</span>
-            <span>{cardNumber4}</span>
+            <span>{cardNumber?.cardNumber1}</span>
+            <span>{cardNumber?.cardNumber2}</span>
+            <span>{cardNumber?.cardNumber3}</span>
+            <span>{cardNumber?.cardNumber4}</span>
           </div>
           <div className=" flex-1 flex items-end justify-between">
             <div className="flex-1 overflow-hidden text-ellipsis" title={cardOwner}>
               {cardOwner || 'Name'}
             </div>
             <div>
-              {!month && !year ? 'MM/YY' : `${month}${renderTextDivider({ formerValue: month, divider: '/' })}${year}`}
+              {!expiration?.month && !expiration?.year
+                ? 'MM/YY'
+                : `${expiration?.month}${renderTextDivider({ formerValue: expiration?.month, divider: '/' })}${
+                    expiration?.year
+                  }`}
             </div>
           </div>
         </div>

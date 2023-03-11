@@ -1,4 +1,4 @@
-import { EmptyCard, Spacer } from '@/components/Common';
+import { Card, Spacer } from '@/components/Common';
 import Layout from '@/components/Layout';
 import { Link } from 'react-router-dom';
 import { Cards } from './components';
@@ -10,7 +10,7 @@ function CardList() {
       <div className="flex flex-col gap-4 overflow-scroll">
         <Cards />
         <Link to="/add">
-          <EmptyCard />
+          <Card isEmpty />
         </Link>
         <Spacer space="lg" />
       </div>

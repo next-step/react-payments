@@ -13,7 +13,7 @@ function FieldContainer({ title = '', children, addOn, limitText = '' }: PropsWi
         {title && <span className="text-xs text-gray-400">{title}</span>}
         {limitText ? <span className="text-xs text-gray-400">{limitText}</span> : null}
       </div>
-      <div className="flex">
+      <div className="flex flex-col">
         {children}
         {addOn ? <div className="flex-center">{addOn}</div> : null}
       </div>
