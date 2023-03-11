@@ -15,6 +15,6 @@ export default function useInput<T>(initialState: T): ReturnObject<T> {
 
   return {
     value: state,
-    onChange,
+    onChange
   };
 }

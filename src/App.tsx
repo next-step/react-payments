@@ -1,17 +1,15 @@
 import './styles/index.css';
-import { Route, Routes } from 'react-router-dom';
-import { CardList, RegisterCard, RegisterComplete } from './pages';
+import { RouterProvider } from 'react-router-dom';
+import { CardProvider } from './provider/card';
+import router from './router';
+
 
 function App() {
   return (
     <div className="root">
-      <Routes>
-        <Route path="/">
-          <Route index element={<CardList/>}></Route>
-          <Route path="register" element={<RegisterCard/>}></Route>
-          <Route path="register-complete" element={<RegisterComplete/>}></Route>
-        </Route>
-      </Routes>
+      <CardProvider>
+        <RouterProvider router={router}/>
+      </CardProvider>
     </div>
   );
 }

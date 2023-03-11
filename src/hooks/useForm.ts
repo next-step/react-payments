@@ -21,10 +21,12 @@ export default function useForm<T>(initialState: FormState<T>): [StateType<T>, F
 
   const handleChange: FormChangeHandler = useCallback((e) => {
     const { name, value } = e.target;
-    const newFormState = Object.freeze(formState);
 
-    newFormState[name].value = value as T;
-    setState({ ...newFormState });
+    setState((prevState) => {
+      prevState[name].value = value as T;
+
+      return { ...prevState };
+    });
   }, []);
 
   return [formState, handleChange];

@@ -16,11 +16,14 @@ export class Repository {
   }
 
   public getItem() {
+    return JSON.parse(this.storage.getItem(this.key)) || [];
   }
 
   public setItem(item: object) {
+    this.storage.setItem(this.key, JSON.stringify(item));
   }
 
   public removeItem() {
+    this.storage.removeItem(this.key);
   }
 }

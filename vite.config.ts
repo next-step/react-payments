@@ -10,9 +10,5 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src/'),
     }
-  },
-  base: 'react-payments',
-  build: {
-    outDir: './docs'
   }
 });
