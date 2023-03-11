@@ -4,13 +4,16 @@ import App from './routes'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter } from 'react-router-dom'
 import './styles/index.css'
+import { CardProvider } from './contexts/cardContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <CardProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </CardProvider>
   </React.StrictMode>
 )
 
