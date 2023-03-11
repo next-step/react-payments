@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import CardPreview from '../components/CardPreview';
 import Title from '../components/common/Title';
 import { ROUTE } from '../constant/route';
@@ -17,6 +17,7 @@ const S = {
     text-align: center;
   `,
   Nickname: styled.div`
+    margin-top: 7px;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
@@ -31,13 +32,12 @@ const S = {
 
 const PaymentCardList = () => {
   const cardList = useCardListState();
-  const { deleteCard } = useCardListDispatch();
-  const navigate = useNavigate();
+  const { updateSelectedCard } = useCardListDispatch();
   const { setModalState } = useModalState();
 
   const showManageCardModal = (index: number) => {
     setModalState({ isShow: true, type: 'MANAGE_CARD' });
-    // navigate('/complete', { state: { isComplete: true, index: index } });
+    updateSelectedCard(index);
   };
 
   return (
@@ -57,7 +57,7 @@ const PaymentCardList = () => {
                 isCursor={true}
               />
               <S.Nickname>{card.nickname}</S.Nickname>
-              <S.Button onClick={() => deleteCard(index)}>삭제</S.Button>
+              {/*<S.Button onClick={() => deleteCard(index)}>삭제</S.Button>*/}
             </S.CardWrapper>
           ))}
 

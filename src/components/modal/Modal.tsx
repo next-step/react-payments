@@ -34,7 +34,8 @@ const S = {
   `,
 
   Content: styled.div`
-    padding: 34px 53px;
+    height: 100%;
+    padding: 20px 53px;
   `,
 };
 interface IModal {

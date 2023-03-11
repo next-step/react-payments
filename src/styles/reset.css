@@ -43,6 +43,9 @@ table {
 }
 button {background:none;border:0;cursor:pointer;}
 a {text-decoration:none}
+input{
+	border: none;
+}
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;

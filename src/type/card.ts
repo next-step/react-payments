@@ -18,12 +18,14 @@ export interface CardInfoType {
   nickname: string;
   createdDate: number;
   isSizeBig?: boolean;
+  isSelect?: boolean;
 }
 
 export type CardListDispatchType = {
   addCard: (data: CardInfoType) => void;
   updateNickname: (selectIdx: number, value: string) => void;
   deleteCard: (selectIdx: number) => void;
+  updateSelectedCard: (selectIdx: number) => void;
 };
 
 export type Action =
