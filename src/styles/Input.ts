@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 
 export const S = {
   InputContainer: styled.div`
-    margin: 16px 0;
+    margin: 20px 0;
   `,
   InputTitle: styled.span`
     display: flex;

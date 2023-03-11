@@ -8,7 +8,7 @@ export type DigitType = {
 };
 
 export interface CardInfoType {
-  digits: DigitType;
+  digits: DigitType | { [x: string]: string };
   expire: string;
   name: string;
   cvc: string;
@@ -32,14 +32,6 @@ export type Action =
   | {
       type: 'SET_CARD_VALUE';
       target: HTMLInputElement;
-    }
-  | {
-      type: 'SET_CARD_DIGIT';
-      digits: DigitType;
-    }
-  | {
-      type: 'SET_PASSWORD';
-      passwords: { password1: string; password2: string };
     }
   | {
       type: 'SET_COMPANY';

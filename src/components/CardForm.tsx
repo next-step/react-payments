@@ -8,6 +8,7 @@ import InputPassword from './form/InputPassword';
 import { useModalState } from '../context/ModalContext';
 import { computeCompany } from '../utils/form';
 import styled from '@emotion/styled';
+import { DigitType } from '../type/card';
 
 const S = {
   Form: styled.form`
@@ -23,25 +24,6 @@ const CardRegisterForm = () => {
   const { setModalState } = useModalState();
   const [isFocusCompany, setIsFocusCompany] = useState(false);
 
-  const onChangeDigit = (e: React.ChangeEvent) => {
-    const target = e.target as HTMLInputElement;
-    dispatch({
-      type: 'SET_CARD_DIGIT',
-      digits: {
-        ...digits,
-        [target.name]: target.value,
-      },
-    });
-
-    const companyDigit = target.name === 'digit1' || target.name === 'digit2';
-    if (companyDigit) {
-      setIsFocusCompany(true);
-    } else {
-      setIsFocusCompany(false);
-      setModalState({ type: null, isShow: false });
-    }
-  };
-
   const onChangeValue = (e: React.ChangeEvent) => {
     dispatch({
       type: 'SET_CARD_VALUE',
@@ -49,15 +31,21 @@ const CardRegisterForm = () => {
     });
   };
 
-  const onChangePassword = (e: React.ChangeEvent) => {
+  const onChangeDigit = (e: React.ChangeEvent) => {
+    const eventTarget = e.target as HTMLInputElement;
     dispatch({
-      type: 'SET_PASSWORD',
-      passwords: {
-        ...passwords,
-        [(e.target as HTMLInputElement).name]: (e.target as HTMLInputElement)
-          .value,
-      },
+      type: 'SET_CARD_VALUE',
+      target: eventTarget,
     });
+
+    const companyDigit =
+      eventTarget.name === 'digit1' || eventTarget.name === 'digit2';
+    if (companyDigit) {
+      setIsFocusCompany(true);
+    } else {
+      setIsFocusCompany(false);
+      setModalState({ type: null, isShow: false });
+    }
   };
 
   const showCompanyModal = () => {
@@ -79,11 +67,11 @@ const CardRegisterForm = () => {
 
   return (
     <S.Form>
-      <InputDigit onChange={onChangeDigit} value={digits} />
+      <InputDigit onChange={onChangeDigit} value={digits as DigitType} />
       <InputExpire onChange={onChangeValue} value={expire} />
       <InputName onChange={onChangeValue} value={name} />
       <InputCvc onChange={onChangeValue} value={cvc} />
-      <InputPassword onChange={onChangePassword} value={passwords} />
+      <InputPassword onChange={onChangeValue} value={passwords} />
     </S.Form>
   );
 };

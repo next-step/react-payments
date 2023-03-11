@@ -19,7 +19,7 @@ const InputPassword = ({ onChange, value }: IProps) => {
         name="password1"
         onChange={onChange}
         type={'password'}
-        className={'w-15'}
+        className={'w-10 m-r-5'}
         maxLength={1}
         value={value.password1}
       />
@@ -28,7 +28,7 @@ const InputPassword = ({ onChange, value }: IProps) => {
         name="password2"
         onChange={onChange}
         type={'password'}
-        className={'w-15'}
+        className={'w-10 m-r-5'}
         maxLength={1}
         value={value.password2}
       />
@@ -36,17 +36,17 @@ const InputPassword = ({ onChange, value }: IProps) => {
         id="password3"
         name="password3"
         type={'password'}
-        className={'w-15'}
+        className={'w-10 m-r-5'}
         disabled={true}
-        placeholder={'*'}
+        value={'●'}
       />
       <Input
         id="password4"
         name="password4"
         type={'password'}
-        className={'w-15'}
+        className={'w-10'}
         disabled={true}
-        placeholder={'*'}
+        value={'●'}
       />
     </S.InputContainer>
   );
