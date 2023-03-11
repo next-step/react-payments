@@ -8,10 +8,12 @@ import type { CardPassword } from "./hook/useCardPasswordInput";
 
 interface CardPasswordProps extends InputHTMLAttributes<HTMLInputElement> {
   cardPassword: CardPassword;
+  error?: string;
 }
 
 export default function CardPasswordInput({
   cardPassword,
+  error,
   ...props
 }: CardPasswordProps) {
   return (
@@ -49,6 +51,7 @@ export default function CardPasswordInput({
           {...props}
         />
       </S.CardPasswordInputWrapper>
+      {error && <Label isError>{error}</Label>}
     </S.CardPasswordInputContainer>
   );
 }

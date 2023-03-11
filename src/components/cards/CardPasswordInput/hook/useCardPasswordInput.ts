@@ -15,24 +15,49 @@ const validateCardPassword = (value: string) => {
   if (!isNumber(value)) {
     throw new ValidationError({
       name: "INPUT_VALIDATION_ERROR",
-      message: CARD_VALIDATION_ERROR_MESSAGES.INVALID_OWNER_NAME_LENGTH,
+      message: CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER,
     });
   }
 };
 
+const isAllCardPasswordFieldFilles = (cardPassword: CardPassword) => {
+  return !Object.entries(cardPassword).some(([_, value]) => value.length === 0);
+};
+
 const useCardPasswordInput = (initialValue: CardPassword) => {
-  const { value, onChange } = useInput(initialValue);
+  const { value, error, onChange, setError } = useInput(initialValue);
 
   const handleCardPasswordChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const { target } = e;
 
-      const { error } = tryCatch(() => validateCardPassword(target.value));
+      const { error } = tryCatch(() => {
+        setError("");
+        validateCardPassword(target.value);
+      }, setError);
 
-      if (!error) onChange(e);
+      if (
+        error instanceof ValidationError &&
+        error.message === CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER
+      ) {
+        return;
+      }
+
+      onChange(e);
     },
     [value]
   );
+
+  const handleCardPasswordInputBlur = useCallback(() => {
+    if (!isAllCardPasswordFieldFilles(value)) {
+      tryCatch(() => {
+        throw new ValidationError({
+          name: "INPUT_VALIDATION_ERROR",
+          message: CARD_VALIDATION_ERROR_MESSAGES.REQUIRED,
+        });
+      }, setError);
+    }
+  }, [value]);
 
   const isPasswordValid = useMemo(
     () =>
@@ -45,8 +70,10 @@ const useCardPasswordInput = (initialValue: CardPassword) => {
 
   return {
     cardPassword: value,
+    cardPasswordError: error,
     isPasswordValid,
     onCardPasswordChange: handleCardPasswordChange,
+    onCardPasswordInputBlur: handleCardPasswordInputBlur,
   };
 };
 

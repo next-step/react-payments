@@ -26,7 +26,10 @@ const useCardOwnerInput = (initialValue: CardOwnerInput) => {
     (e: ChangeEvent<HTMLInputElement>) => {
       const { target } = e;
 
-      tryCatch(() => validateCardOwnerName(target.value), setError);
+      tryCatch(() => {
+        setError("");
+        validateCardOwnerName(target.value);
+      }, setError);
 
       onChange(e);
     },

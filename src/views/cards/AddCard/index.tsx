@@ -101,8 +101,13 @@ export default function AddCard() {
   } = useCardCvcInput(initialFormValue.cvcNumber);
 
   // 카드 비밀번호
-  const { cardPassword, isPasswordValid, onCardPasswordChange } =
-    useCardPasswordInput(initialFormValue.password);
+  const {
+    cardPassword,
+    cardPasswordError,
+    isPasswordValid,
+    onCardPasswordChange,
+    onCardPasswordInputBlur,
+  } = useCardPasswordInput(initialFormValue.password);
 
   // 카드 이름
   const { cardNameList, selectedCardName, isOpen, onCardNameSelect, open } =
@@ -211,7 +216,9 @@ export default function AddCard() {
             />
             <CardPasswordInput
               cardPassword={cardPassword}
+              error={cardPasswordError}
               onChange={onCardPasswordChange}
+              onBlur={onCardPasswordInputBlur}
             />
           </S.AddCardFormInputWrapper>
           <S.AddCardFormSubmitButtonWrapper>
