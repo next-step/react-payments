@@ -143,12 +143,12 @@ export default function AddCard() {
 
   const checkSubmittable = () => {
     return [
-      isValidCardNumber,
-      isValidExpireDate,
-      isValidOwnerName,
-      isValidCvcNumber,
-      isPasswordValid,
-    ].every((isValid) => isValid);
+      cardNumberError,
+      cardExpireDateError,
+      cardOwnerError,
+      cvcError,
+      cardPasswordError,
+    ].every((isValid) => !isValid);
   };
 
   const handleMoveToCompleteAddPage = (e: MouseEvent<HTMLButtonElement>) => {
