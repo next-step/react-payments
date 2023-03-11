@@ -1,60 +1,41 @@
-import CardCompanyModalItem from "./CardCompanyModalItem";
+const CompanyNames = [
+  [
+    { index: "0", name: "사성" },
+    { index: "1", name: "형대" },
+    { index: "2", name: "룻데" },
+    { index: "3", name: "버씨" },
+  ],
+  [
+    { index: "4", name: "궁민" },
+    { index: "5", name: "심한" },
+    { index: "6", name: "누리" },
+    { index: "7", name: "하니" },
+  ],
+];
 
 export default function CardCompanyModal({ handleModalClick }) {
   return (
     <div className="modal-dimmed">
       <div className="modal">
         <div className="flex-center">
-          <CardCompanyModalItem
-            handleModalClick={handleModalClick}
-            dotColor="dot1"
-          >
-            사성 카드
-          </CardCompanyModalItem>
-          <CardCompanyModalItem
-            handleModalClick={handleModalClick}
-            dotColor="dot2"
-          >
-            형대 카드
-          </CardCompanyModalItem>
-          <CardCompanyModalItem
-            handleModalClick={handleModalClick}
-            dotColor="dot3"
-          >
-            룻데 카드
-          </CardCompanyModalItem>
-          <CardCompanyModalItem
-            handleModalClick={handleModalClick}
-            dotColor="dot4"
-          >
-            버씨 카드
-          </CardCompanyModalItem>
+          {CompanyNames[0].map((value) => {
+            return (
+              <div className="modal-item-container" onClick={handleModalClick}>
+                <div className={"modal-item-dot dot" + value["index"]}></div>
+                <span className="modal-item-name">{value["name"]} 카드</span>
+              </div>
+            );
+          })}
         </div>
         <div className="flex-center">
-          <CardCompanyModalItem
-            handleModalClick={handleModalClick}
-            dotColor="dot5"
-          >
-            궁민 카드
-          </CardCompanyModalItem>
-          <CardCompanyModalItem
-            handleModalClick={handleModalClick}
-            dotColor="dot6"
-          >
-            심한 카드
-          </CardCompanyModalItem>
-          <CardCompanyModalItem
-            handleModalClick={handleModalClick}
-            dotColor="dot7"
-          >
-            누리 카드
-          </CardCompanyModalItem>
-          <CardCompanyModalItem
-            handleModalClick={handleModalClick}
-            dotColor="dot8"
-          >
-            하니 카드
-          </CardCompanyModalItem>
+          {CompanyNames[1].map((value) => {
+            return (
+              <div className="modal-item-container" onClick={handleModalClick}>
+                <div className={"modal-item-dot dot" + value["index"]}></div>
+                <span className="modal-item-name">{value["name"]} 카드</span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
