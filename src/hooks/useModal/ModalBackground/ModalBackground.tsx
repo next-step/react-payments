@@ -18,9 +18,7 @@ export function ModalBackground({
     (e: React.MouseEvent) => {
       e.stopPropagation();
 
-      if (onBackgroundClick) {
-        onBackgroundClick(e);
-      }
+      onBackgroundClick?.(e);
     },
     [onBackgroundClick]
   );

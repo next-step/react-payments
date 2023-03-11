@@ -1,41 +1,51 @@
-import React, { MouseEvent } from 'react';
+import React, { memo, MouseEvent, ReactElement } from 'react';
 
-import type { CardOwner, ExpireDate } from '@/types';
-import { CardCompany } from '@/pages/CardCreator/hooks/useCardCompanySelectModal/CardCompanySelector/cardCompanyList';
+import { ThemeSetter } from '@/components/ThemeSetter';
+import { useSelectCardCompany } from '@/stores/CardCreatorContext';
+import { useErrorContext } from '@/pages/CardCreator/InputComponents/hooks/useErrorContext';
 
-import { CardName, CardNumbers } from './CardName';
-import { CardWrapper } from './Card.styled';
+import { CardNumbers } from './CardNumbers';
+import { CardOwnerName } from './CardOwnerName';
+import { CardExpireDate } from './CardExpireDate';
+import { CardNickname } from './CardNickname';
+import { CardWrapper, ErrorMessage } from './Card.styled';
 
 interface CardProps {
-  cardCompany?: CardCompany;
-  cardNumbers: CardNumbers;
-  ownerName?: CardOwner;
-  expireDates: (ExpireDate | undefined)[];
+  disableNickname?: boolean;
+  additionalIcon?: ReactElement;
   onCardClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
-function Card({ cardCompany, cardNumbers, expireDates, ownerName, onCardClick }: CardProps) {
+const Card = memo(({ disableNickname, additionalIcon, onCardClick }: CardProps) => {
+  const cardCompany = useSelectCardCompany();
+
+  const errorMessage = useErrorContext(
+    {
+      inValid: '카드 회사를 선택해주세요.',
+    },
+    [{ errorType: 'cardCompany', messageType: 'inValid' }]
+  );
+
   return (
-    <div className="card-box" onClick={onCardClick}>
-      <CardWrapper>
-        <div className="card-top">{cardCompany?.name}</div>
+    <ThemeSetter className="card-box flex-column-center" theme={cardCompany?.value?.theme} onClick={onCardClick}>
+      <CardWrapper pointCursor={!!onCardClick}>
+        <div className="card-top">{cardCompany?.value?.name}</div>
         <div className="card-middle">
           <div className="small-card__chip" />
         </div>
         <div className="card-bottom">
-          <CardName cardNumbers={cardNumbers} />
+          <CardNumbers />
           <div className="card-bottom__info">
-            <span className="card-text card-name-spacing">{ownerName || 'NAME'}</span>
-            <span className="card-text">
-              <span className="card-text card-expire-date">{expireDates[0]?.padStart(2, '0')}</span>
-              <span className="card-text mx-5">/</span>
-              <span className="card-text card-expire-date">{expireDates[1]?.padStart(2, '0')}</span>
-            </span>
+            <CardOwnerName />
+            <CardExpireDate />
           </div>
         </div>
+        {additionalIcon}
       </CardWrapper>
-    </div>
+      {disableNickname || <CardNickname />}
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+    </ThemeSetter>
   );
-}
+});
 
 export { Card };

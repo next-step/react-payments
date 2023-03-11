@@ -1,121 +1,59 @@
-import React, { useState } from 'react';
+import React, { MouseEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
 import { Card } from '@/components/Card';
-import { ThemeProvider } from '@/components/ThemeProvider';
+import { ThemeSetter } from '@/components/ThemeSetter';
+import { useCardContextApiSelector, useSelectCardCompany } from '@/stores/CardCreatorContext';
 
-import {
-  CardNumberInputPure,
-  CardOwnerInputPure,
-  ExpireDateInputPure,
-  PasswordInputPure,
-  SecurityCodeInputPure,
-} from './InputComponents';
-import type {
-  CardNumberInputRef,
-  CardOwnerInputRef,
-  ExpireDateInputRef,
-  PasswordInputRef,
-  SecurityCodeInputRef,
-} from './InputComponents';
-import { cardNumbersInit, expireDatesInit, passwordsInit, cardOwnersInit, securityCodesInit } from './CardCreatorInits';
-import { useInputComponent } from './hooks/useInputComponent';
-import { useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';
-import { CardCompany } from './hooks/useCardCompanySelectModal/CardCompanySelector/cardCompanyList';
+import { CardNumbersInputListPure } from './InputComponents/CardNumbersInputList';
+import { ExpireDatesInputListPure } from './InputComponents/ExpireDatesInputList';
+import { CardOwnerInputPure } from './InputComponents/CardOwnerInput';
+import { SecurityCodesInputListPure } from './InputComponents/SecurityCodesInputList';
+import { PasswordsInputListPure } from './InputComponents/PasswordsInputList';
+import { CardCompanyModel, useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';
+import { SubmitButton } from './SubmitButton';
 
 function CardCreator() {
-  const [cardNumbers, createCardNumberSetter, cardNumberInputRef, cardNumberValidator] =
-    useInputComponent<CardNumberInputRef>(cardNumbersInit);
-  const [expireDates, createExpireDateSetter, expireDateInputRef, expireDateValidator] =
-    useInputComponent<ExpireDateInputRef>(expireDatesInit);
-  const [ownerNames, createOwnerNameSetter, cardOwnerInputRef, ownerNameValidator] =
-    useInputComponent<CardOwnerInputRef>(cardOwnersInit);
-  const [securityCodes, createSecurityCodeSetter, securityCodeInputRef, securityCodesValidator] =
-    useInputComponent<SecurityCodeInputRef>(securityCodesInit);
-  const [passwords, createPasswordSetter, passwordInputRef, passwordsValidator] =
-    useInputComponent<PasswordInputRef>(passwordsInit);
-
-  const [cardCompany, setCardCompany] = useState<CardCompany | undefined>();
+  const cardCompany = useSelectCardCompany();
+  const apis = useCardContextApiSelector();
 
   const { CardCompanySelectModal, showModal, hideModal } = useCardCompanySelectModal();
 
+  const handleCardClick = useCallback(
+    (e: MouseEvent<HTMLDivElement>) => {
+      e.stopPropagation();
+      showModal();
+    },
+    [showModal]
+  );
+
+  const handleCardCompanySelectModalClick = useCallback(
+    (cardCompany: CardCompanyModel) => {
+      apis?.dispatch({ type: 'cardCompany', payload: { value: cardCompany } });
+      hideModal();
+    },
+    [apis, hideModal]
+  );
+
   return (
-    <ThemeProvider className="app" theme={cardCompany?.theme}>
+    <ThemeSetter className="app" theme={cardCompany?.value?.theme}>
       <h2 className="page-title">
         <Link to={routes.home} className="mr-10">{`<`}</Link> 카드 추가
       </h2>
 
-      <Card
-        cardCompany={cardCompany}
-        cardNumbers={cardNumbers.map(({ type, value }) => ({
-          isHide: type === 'password',
-          value,
-        }))}
-        expireDates={expireDates.map(({ value }) => value)}
-        ownerName={ownerNames[0].value}
-        onCardClick={(e) => {
-          e.stopPropagation();
-          showModal();
-        }}
-      />
+      <Card onCardClick={handleCardClick} />
 
-      <CardNumberInputPure
-        ref={cardNumberInputRef}
-        cardNumbers={cardNumbers}
-        createCardNumberSetter={createCardNumberSetter}
-      />
-      <ExpireDateInputPure
-        ref={expireDateInputRef}
-        expireDates={expireDates}
-        createExpireDateSetter={createExpireDateSetter}
-      />
-      <CardOwnerInputPure
-        ref={cardOwnerInputRef}
-        ownerNames={ownerNames}
-        createOwnerNameSetter={createOwnerNameSetter}
-      />
-      <SecurityCodeInputPure
-        ref={securityCodeInputRef}
-        securityCodes={securityCodes}
-        createSecurityCodeSetter={createSecurityCodeSetter}
-      />
-      <PasswordInputPure ref={passwordInputRef} passwords={passwords} createPasswordSetter={createPasswordSetter} />
-      <div className="button-box">
-        <Link
-          to="/add-complete"
-          className="button-text"
-          onClick={(e) => {
-            const inputs = [
-              cardNumberValidator,
-              expireDateValidator,
-              ownerNameValidator,
-              securityCodesValidator,
-              passwordsValidator,
-            ];
-            inputs.forEach((states) => states.ref?.current?.setErrorMessage('none'));
+      <CardNumbersInputListPure />
+      <ExpireDatesInputListPure />
+      <CardOwnerInputPure />
+      <SecurityCodesInputListPure />
+      <PasswordsInputListPure />
 
-            const errorIndex = inputs.findIndex((states) => {
-              return !states.state.every(({ value, checkIsValid }) => checkIsValid(value));
-            });
+      <SubmitButton />
 
-            if (errorIndex >= 0) {
-              inputs[errorIndex].ref?.current?.setErrorMessage('inValid');
-              e.preventDefault();
-              alert('카드 정보들을 모두 올바르게 입력해주세요!');
-            }
-          }}
-        >
-          다음
-        </Link>
-      </div>
-      <CardCompanySelectModal
-        onCardCompanyClick={(cardCompany) => {
-          setCardCompany(cardCompany);
-          hideModal();
-        }}
-      />
-    </ThemeProvider>
+      <CardCompanySelectModal onCardCompanyClick={handleCardCompanySelectModalClick} />
+    </ThemeSetter>
   );
 }
 

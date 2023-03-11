@@ -1,15 +1,25 @@
-import { RefObject, useMemo } from 'react';
+import { useMemo } from 'react';
 
-function useSequentialFocusWithElements(elementsRef: RefObject<(HTMLElement | null)[]>) {
+import { createObjectWithArrayProps } from '@/utils/object';
+
+const elementObject = createObjectWithArrayProps<HTMLInputElement | null>();
+
+function useSequentialFocusWithElements() {
   return useMemo(
     () => ({
-      toTheNextElement: (currentElementIndex: number, canProgress: boolean) => {
-        if (document.activeElement === elementsRef.current?.[currentElementIndex] && canProgress) {
-          elementsRef.current[currentElementIndex + 1]?.focus();
+      elementMap: elementObject.object,
+      setElement: elementObject.setProp,
+      // TODO: 다음 key 설정하기 + key들의 순서를 다루는 객체 설정하기
+      toTheNextElement: (key: string, currentElementIndex: number, canProgress: boolean) => {
+        const elementList = elementObject.object?.[key];
+        if (!elementList) return;
+
+        if (document.activeElement === elementList[currentElementIndex] && canProgress) {
+          elementList[currentElementIndex + 1]?.focus();
         }
       },
     }),
-    [elementsRef]
+    []
   );
 }
 
