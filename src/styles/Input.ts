@@ -7,7 +7,7 @@ export const S = {
   InputTitle: styled.span`
     display: flex;
     align-items: center;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 14px;
     margin-bottom: 4px;
     color: #525252;
@@ -25,5 +25,9 @@ export const S = {
   `,
   Hyphen: styled.span`
     color: #000;
+  `,
+  TitleWrap: styled.div`
+    display: flex;
+    justify-content: space-between;
   `,
 };

@@ -11,7 +11,7 @@ import { ROUTE } from '../constant/route';
 
 const S = {
   TitleWrapper: styled.div`
-    margin-bottom: 25px;
+    margin-bottom: 30px;
   `,
   ButtonWrapper: styled.div`
     text-align: right;

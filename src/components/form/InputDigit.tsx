@@ -15,7 +15,7 @@ export const S = {
   InputTitle: styled.span`
     display: flex;
     align-items: center;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 14px;
     margin-bottom: 4px;
     color: #525252;

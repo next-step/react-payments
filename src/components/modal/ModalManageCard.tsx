@@ -20,7 +20,6 @@ const S = {
   Row: styled.div`
     margin-bottom: 40px;
   `,
-
   Company: styled.p`
     margin-bottom: 10px;
     font-size: 22px;
@@ -99,7 +98,7 @@ const ModalManageCard = () => {
           <S.Input
             type="text"
             placeholder={selectCardInfo?.nickname}
-            maxLength={10}
+            maxLength={30}
             ref={nicknameRef}
           />
         )}
