@@ -53,7 +53,7 @@ const usePayment = () => {
   };
 
   const deleteCardList = (evt) => {
-    const deleteCardElement = evt.target.closest('.card-box');
+    const deleteCardElement = evt.target.closest('div');
     const { number } = deleteCardElement.dataset;
     assert(() => number === null || number === undefined, 'Not allowed Delete');
     setCardList((cardList) => cardList.filter((prevCardInfo) => prevCardInfo.number !== number));
