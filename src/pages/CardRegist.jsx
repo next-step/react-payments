@@ -54,12 +54,12 @@ const CardRegist = ({ onChange, onSubmit, onReset }) => {
               maxLength: 5,
               minLength: 5,
               required: true,
-              placeholder: 'MM/YY'
+              placeholder: 'MM/YY',
+              className: 'w-50'
             }
           ]}
           cardInfo={cardInfo}
           onChange={onChange}
-          inputBoxClass="w-50"
         />
         <InputContainer
           title="카드 소유자 이름(선택)"
@@ -83,12 +83,12 @@ const CardRegist = ({ onChange, onSubmit, onReset }) => {
               type: 'password',
               maxLength: 3,
               minLength: 3,
-              required: true
+              required: true,
+              className: 'w-25'
             }
           ]}
           cardInfo={cardInfo}
           onChange={onChange}
-          inputBoxClass="w-25"
         />
         <InputContainer
           title="카드 비밀번호"
@@ -110,7 +110,6 @@ const CardRegist = ({ onChange, onSubmit, onReset }) => {
           ]}
           cardInfo={cardInfo}
           onChange={onChange}
-          hasBoxClass={false}
         />
         <Button className="button-box button" children="다음"></Button>
       </form>

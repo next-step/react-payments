@@ -1,18 +1,28 @@
 import Input from './Common/Input';
+import styled from 'styled-components';
 
-const InputContainer = ({
-  title,
-  inputList,
-  cardInfo,
-  onChange,
-  inputBoxClass = '',
-  hasBoxClass = true
-}) => {
+const Container = styled.div`
+  margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  .input-title {
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 4px;
+    color: #525252;
+  }
+`;
+const Box = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const InputContainer = ({ title, inputList, cardInfo, onChange }) => {
   return (
-    <div className="input-container">
-      <span className="input-title">{title}</span>
-      {hasBoxClass && (
-        <div className={`input-box ${inputBoxClass}`}>
+    <Container>
+      <label className="input-title">{title}</label>
+      {inputList.length > 1 ? (
+        <Box>
           {inputList.map(({ id, type, maxLength, minLength, required, placeholder, ...props }) => (
             <Input
               id={id}
@@ -27,9 +37,8 @@ const InputContainer = ({
               {...props}
             />
           ))}
-        </div>
-      )}
-      {!hasBoxClass && (
+        </Box>
+      ) : (
         <>
           {inputList.map(({ id, type, maxLength, minLength, required, placeholder, ...props }) => (
             <Input
@@ -47,7 +56,7 @@ const InputContainer = ({
           ))}
         </>
       )}
-    </div>
+    </Container>
   );
 };
 

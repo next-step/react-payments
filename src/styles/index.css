@@ -1,8 +1,6 @@
-@import "./card.css";
-@import "./input.css";
-@import "./button.css";
-@import "./modal.css";
-@import "./utils.css";
+@import './card.css';
+@import './modal.css';
+@import './utils.css';
 
 body {
   display: flex;
@@ -13,11 +11,7 @@ body {
   background-color: #e5e5e5;
 }
 
-input {
-  font-size: 16px;
-}
-
-.root {
+#root {
   background-color: #fff;
   width: 375px;
   min-width: 375px;
@@ -32,26 +26,9 @@ input {
   position: relative;
 }
 
-.page-title {
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 22px;
-  display: flex;
-  align-items: center;
-
-  color: #383838;
-}
-
-.page-navigator {
-  position: absolute;
-  left: 20px;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 22px;
-  margin-top: 16.6px;
-  cursor: pointer;
-
-  color: #383838;
+main {
+  max-height: 600px;
+  min-height: 500px;
 }
 
 form {
