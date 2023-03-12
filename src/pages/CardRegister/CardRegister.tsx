@@ -23,14 +23,6 @@ export const CardRegister = () => {
 
   const isAllValid = Object.values(form).every((input) => input.isValid);
 
-  const handleSelectCard = (company: string) => {
-    handleFormInput(
-      getFormData(),
-      CardKey.CARD_COMPANY
-    )({ val: company, isValid: true });
-    handleClose();
-  };
-
   const handleSubmit = () => {
     const newCard = generateCardObj(form) as unknown as CardData;
     createCard(newCard);
@@ -53,7 +45,10 @@ export const CardRegister = () => {
         추가하기
       </Button>
       {open && (
-        <CardCompanyModal onClose={handleClose} onConfirm={handleSelectCard} />
+        <CardCompanyModal
+          onClose={handleClose}
+          onChange={handleFormInput(getFormData(), CardKey.CARD_COMPANY)}
+        />
       )}
     </>
   );

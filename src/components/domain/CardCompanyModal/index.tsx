@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 
 import { Avatar, Box, Flex, Modal, Text } from '@/components/UI';
 import { CardCompanyValues } from '@/types';
@@ -6,10 +6,19 @@ import { text } from '@/utils';
 
 type Props = {
   onClose: () => void;
-  onConfirm: (company: string) => void;
+  onChange: <T>(value: T) => void;
 };
 
-const CardCompanyModal = ({ onClose, onConfirm }: Props) => {
+const CardCompanyModal = ({ onClose, onChange }: Props) => {
+  const handleSelect = (company: string) => {
+    onChange({ val: company, isValid: true });
+    onClose();
+  };
+
+  useEffect(() => {
+    onChange({ isValid: false });
+  }, []);
+
   return (
     <Modal onClose={onClose}>
       <Box>
@@ -17,7 +26,7 @@ const CardCompanyModal = ({ onClose, onConfirm }: Props) => {
           {cardFirstRow.map((company) => (
             <Flex
               key={company}
-              onClick={() => onConfirm(company)}
+              onClick={() => handleSelect(company)}
               direction="column"
               justify="center"
               align="center"
@@ -31,7 +40,7 @@ const CardCompanyModal = ({ onClose, onConfirm }: Props) => {
           {cardSecondRow.map((company) => (
             <Flex
               key={company}
-              onClick={() => onConfirm(company)}
+              onClick={() => handleSelect(company)}
               direction="column"
               justify="center"
               align="center"
