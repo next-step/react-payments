@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
+import { useBlur } from '@/hooks/useBlur';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
 type Props = {
   onChange: <T>(value: T) => void;
-  dirtyState: boolean;
 };
 
-const CardPwdInput = ({ onChange, dirtyState }: Props) => {
+const CardPwdInput = ({ onChange }: Props) => {
+  const { dirtyState, makeDirty } = useBlur();
   const { handleInputChange, dispatch } = useFormContext();
   const [pwd, setPwd] = useState({});
   const keyPressInterceptor = useNumberKeyInterceptor();
@@ -23,6 +24,7 @@ const CardPwdInput = ({ onChange, dirtyState }: Props) => {
       label="카드 비밀번호"
       isError={dirtyState && !!getErrorMessage(pwd)}
       errorMessage={getErrorMessage(pwd)}
+      onBlur={makeDirty}
     >
       <input
         type="password"

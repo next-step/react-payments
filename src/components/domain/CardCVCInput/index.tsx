@@ -2,20 +2,21 @@ import { useEffect, useState } from 'react';
 
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
+import { useBlur } from '@/hooks/useBlur';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
 
 type Props = {
   onChange: <T>(value: T) => void;
-  dirtyState: boolean;
 };
 
-const CardCVCInput = ({ onChange, dirtyState }: Props) => {
+const CardCVCInput = ({ onChange }: Props) => {
+  const { dirtyState, makeDirty } = useBlur();
   const { handleInputChange, dispatch } = useFormContext();
   const [cvc, setCVC] = useState({});
   const keyPressInterceptor = useNumberKeyInterceptor();
 
   useEffect(() => {
-    onChange({ ...cvc, isValid: !getErrorMessage(cvc) });
+    onChange({ ...cvc, isValid: !getErrorMessage(cvc), isDirty: true });
     dispatch();
   }, [cvc]);
 
@@ -24,6 +25,7 @@ const CardCVCInput = ({ onChange, dirtyState }: Props) => {
       label="보안코드(CVC/CVV)"
       isError={dirtyState && Boolean(getErrorMessage(cvc))}
       errorMessage={getErrorMessage(cvc)}
+      onBlur={makeDirty}
     >
       <input
         type="password"

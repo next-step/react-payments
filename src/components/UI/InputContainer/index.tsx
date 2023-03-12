@@ -5,11 +5,15 @@ export type Props = {
   label?: string;
   isError?: boolean;
   errorMessage?: string;
+  onBlur?: () => void;
 };
 
-const InputContainer = (props: StrictPropsWithChildren<Props>) => {
+const InputContainer = ({
+  onBlur,
+  ...props
+}: StrictPropsWithChildren<Props>) => {
   return (
-    <Container>
+    <Container onBlur={onBlur}>
       <div
         style={{
           display: 'flex',

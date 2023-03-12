@@ -7,37 +7,25 @@ import {
   ExpiredDateInput,
 } from '@/components/domain';
 import { Box } from '@/components/UI';
-import { useBlur } from '@/hooks/useBlur';
 import { CardKey } from '@/types';
 
 const CardForm = () => {
   const { getFormData, handleFormInput } = useFormContext();
   const formData = getFormData();
 
-  const { dirtyState, makeDirty } = useBlur();
-
   return (
-    <Box css={{ paddingTop: '2rem' }} onBlur={makeDirty}>
+    <Box css={{ paddingTop: '2rem' }}>
       <CardNumberInput
-        dirtyState={dirtyState}
         onChange={handleFormInput(formData, CardKey.CARD_NUMBERS)}
       />
       <ExpiredDateInput
-        dirtyState={dirtyState}
         onChange={handleFormInput(formData, CardKey.EXPIRE_DATE)}
       />
       <CardOwnerInput
-        dirtyState={dirtyState}
         onChange={handleFormInput(formData, CardKey.OWNER_NAME)}
       />
-      <CardCVCInput
-        dirtyState={dirtyState}
-        onChange={handleFormInput(formData, CardKey.CVC)}
-      />
-      <CardPwdInput
-        dirtyState={dirtyState}
-        onChange={handleFormInput(formData, CardKey.PASSWORD)}
-      />
+      <CardCVCInput onChange={handleFormInput(formData, CardKey.CVC)} />
+      <CardPwdInput onChange={handleFormInput(formData, CardKey.PASSWORD)} />
     </Box>
   );
 };

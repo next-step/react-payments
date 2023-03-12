@@ -2,18 +2,19 @@ import { useEffect, useState } from 'react';
 
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
+import { useBlur } from '@/hooks/useBlur';
 
 type Props = {
   onChange: <T>(value: T) => void;
-  dirtyState: boolean;
 };
 
-const CardOwnerInput = ({ onChange, dirtyState }: Props) => {
+const CardOwnerInput = ({ onChange }: Props) => {
+  const { dirtyState, makeDirty } = useBlur();
   const [owner, setOwner] = useState<{ val?: string }>({});
   const { handleInputChange, dispatch } = useFormContext();
 
   useEffect(() => {
-    onChange({ ...owner, isValid: !getErrorMessage(owner) });
+    onChange({ ...owner, isValid: !getErrorMessage(owner), isDirty: true });
     dispatch();
   }, [owner]);
 
@@ -22,6 +23,7 @@ const CardOwnerInput = ({ onChange, dirtyState }: Props) => {
       label="소유자명"
       isError={dirtyState && Boolean(getErrorMessage(owner))}
       errorMessage={getErrorMessage(owner)}
+      onBlur={makeDirty}
     >
       <input
         type="text"

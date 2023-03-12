@@ -2,20 +2,24 @@ import { useEffect, useState } from 'react';
 
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
+import { useBlur } from '@/hooks/useBlur';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
 
 type Props = {
   onChange: <T>(value: T) => void;
-  dirtyState: boolean;
 };
 
-const CardNumberInput = ({ onChange, dirtyState }: Props) => {
+const CardNumberInput = ({ onChange }: Props) => {
+  const { dirtyState, makeDirty } = useBlur();
   const { dispatch, handleInputChange } = useFormContext();
   const [cardNumbers, setCardNumbers] = useState({});
   const keyPressInterceptor = useNumberKeyInterceptor();
 
   useEffect(() => {
-    onChange({ ...cardNumbers, isValid: !getErrorMessage(cardNumbers) });
+    onChange({
+      ...cardNumbers,
+      isValid: !getErrorMessage(cardNumbers),
+    });
     dispatch();
   }, [cardNumbers]);
 
@@ -25,6 +29,7 @@ const CardNumberInput = ({ onChange, dirtyState }: Props) => {
         label="카드번호"
         isError={dirtyState && !!getErrorMessage(cardNumbers)}
         errorMessage={getErrorMessage(cardNumbers)}
+        onBlur={makeDirty}
       >
         <input
           type="tel"

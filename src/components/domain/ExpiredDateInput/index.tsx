@@ -2,20 +2,24 @@ import { useEffect, useState } from 'react';
 
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
+import { useBlur } from '@/hooks/useBlur';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
 import { type ExpireDate } from '@/types';
 type Props = {
   onChange: <T>(value: T) => void;
-  dirtyState: boolean;
 };
 
-const ExpiredDateInput = ({ onChange, dirtyState }: Props) => {
+const ExpiredDateInput = ({ onChange }: Props) => {
+  const { dirtyState, makeDirty } = useBlur();
   const { dispatch, handleInputChange } = useFormContext();
   const [expiredDate, setExpiredDate] = useState({});
   const numberKeyPressInterceptor = useNumberKeyInterceptor();
 
   useEffect(() => {
-    onChange({ ...expiredDate, isValid: !getErrorMessage(expiredDate) });
+    onChange({
+      ...expiredDate,
+      isValid: !getErrorMessage(expiredDate),
+    });
     dispatch();
   }, [expiredDate]);
 
@@ -24,6 +28,7 @@ const ExpiredDateInput = ({ onChange, dirtyState }: Props) => {
       label="만료일"
       isError={dirtyState && Boolean(getErrorMessage(expiredDate))}
       errorMessage={getErrorMessage(expiredDate)}
+      onBlur={makeDirty}
     >
       <input
         type="tel"
