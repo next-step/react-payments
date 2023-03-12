@@ -28,11 +28,8 @@ const CardList = ({ movePage, onDelete }) => {
   const handleEdit = (evt) => {
     const clickedElement = evt.currentTarget;
     const { number } = clickedElement.dataset;
-    cardList.forEach((cardInfo) => {
-      if (cardInfo.number === number) {
-        setCardInfo(cardInfo);
-      }
-    });
+    const editCardInfo = cardList.find((cardInfo) => cardInfo.number === number);
+    if (editCardInfo) setCardInfo(editCardInfo);
     movePage(PATH.SAVE);
   };
   return (
@@ -42,8 +39,8 @@ const CardList = ({ movePage, onDelete }) => {
         {cardList.map((cardInfo) => (
           <CardContainer
             cardInfo={cardInfo}
-            handleCardClick={handleEdit}
-            handleDelBtnClick={onDelete}
+            onClick={handleEdit}
+            onDelete={onDelete}
             key={cardInfo.number}
             isEditMode={isEditMode}
           />

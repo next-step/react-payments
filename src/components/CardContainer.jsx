@@ -15,11 +15,11 @@ const DeleteButton = styled(Button)`
   z-index: 10;
 `;
 
-const CardContainer = ({ cardInfo, handleCardClick, isEditMode, handleDelBtnClick }) => {
+const CardContainer = ({ cardInfo, onClick, isEditMode, onDelete }) => {
   return (
     <div className="card-box" data-number={cardInfo.number}>
-      {isEditMode && <DeleteButton children="-" onClick={handleDelBtnClick} />}
-      <Card cardInfo={cardInfo} onClick={handleCardClick} />
+      {isEditMode && <DeleteButton children="-" onClick={onDelete} />}
+      <Card cardInfo={cardInfo} onClick={onClick} />
       <span className="card-nickname">{cardInfo.nickname}</span>
     </div>
   );

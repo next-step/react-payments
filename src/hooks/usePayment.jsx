@@ -5,7 +5,7 @@ import {
   cleanNaNValue,
   formatInputValue,
   isDigitInputValue,
-  isInvalidInputValue
+  isInvalidExpiry
 } from '../utils/inputValue';
 import { assert } from '../utils/validation';
 
@@ -29,8 +29,7 @@ const usePayment = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (isInvalidInputValue(cardInfo))
-      alert('유효하지 않은 입력값이 있습니다\n입력값을 확인해주세요!');
+    if (isInvalidExpiry(cardInfo)) alert('유효하지 않은 입력값이 있습니다\n입력값을 확인해주세요!');
     else movePage(PATH.SAVE);
   };
 

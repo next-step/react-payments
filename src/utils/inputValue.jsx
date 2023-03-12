@@ -9,7 +9,7 @@ export const isDigitInputValue = (value, id) => {
   return true;
 };
 
-export const isInvalidInputValue = ({ expiry }) => {
+export const isInvalidExpiry = ({ expiry }) => {
   if (expiry.match(/^(0[1-9]|1[012])\/2[4-9]$/)) return false;
   return true;
 };
