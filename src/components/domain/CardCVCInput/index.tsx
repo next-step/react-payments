@@ -16,7 +16,7 @@ const CardCVCInput = ({ onChange }: Props) => {
   const keyPressInterceptor = useNumberKeyInterceptor();
 
   useEffect(() => {
-    onChange({ ...cvc, isValid: !getErrorMessage(cvc), isDirty: true });
+    onChange({ ...cvc, isValid: !getErrorMessage(cvc) });
     dispatch();
   }, [cvc]);
 

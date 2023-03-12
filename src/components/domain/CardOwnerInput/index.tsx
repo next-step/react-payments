@@ -14,7 +14,7 @@ const CardOwnerInput = ({ onChange }: Props) => {
   const { handleInputChange, dispatch } = useFormContext();
 
   useEffect(() => {
-    onChange({ ...owner, isValid: !getErrorMessage(owner), isDirty: true });
+    onChange({ ...owner, isValid: !getErrorMessage(owner) });
     dispatch();
   }, [owner]);
 
