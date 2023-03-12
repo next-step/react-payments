@@ -7,6 +7,7 @@ import {
   isDigitInputValue,
   isInvalidInputValue
 } from '../utils/inputValue';
+import { assert } from '../utils/validation';
 
 const usePayment = () => {
   const { cardInfo, cardList } = usePaymentContext();
@@ -35,7 +36,7 @@ const usePayment = () => {
 
   const updateCardList = (updateIdx) => {
     if (!cardList.includes(cardInfo)) {
-      if (updateIdx === null || updateIdx === undefined) throw new Error('Not allowed idx');
+      assert(() => updateIdx === null || updateIdx === undefined, 'Not allowed idx');
       setCardList(
         cardList.map((prevCardInfo, idx) => {
           if (idx === updateIdx) return { ...cardInfo };
@@ -47,10 +48,7 @@ const usePayment = () => {
   };
 
   const insertCardList = () => {
-    if (cardList.includes(cardInfo)) {
-      alert('중복된 카드 등록은 허용되지 않습니다.');
-      throw new Error('Duplicated CardInfo');
-    }
+    if (cardList.includes(cardInfo)) alert('중복된 카드 등록은 허용되지 않습니다.');
     setCardList((cardList) => [cardInfo, ...cardList]);
     resetCardInfo();
   };
@@ -58,7 +56,7 @@ const usePayment = () => {
   const deleteCardList = (evt) => {
     const deleteCardElement = evt.target.closest('.card-box');
     const { number } = deleteCardElement.dataset;
-    if (number === null || number === undefined) throw new Error('Not allowed Delete');
+    assert(() => number === null || number === undefined, 'Not allowed Delete');
     setCardList((cardList) => cardList.filter((prevCardInfo) => prevCardInfo.number !== number));
   };
 
