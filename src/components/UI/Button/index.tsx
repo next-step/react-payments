@@ -1,37 +1,36 @@
 import { styled } from '@/lib/stitches.config';
 
-interface ButtonProps {
-  primary?: boolean;
-  children: React.ReactNode;
-  size?: 'small' | 'medium' | 'large';
-  disabled?: boolean;
-  onClick?: () => void;
-}
-
-const Button = ({
-  primary = false,
-  size = 'medium',
-  children,
-  ...props
-}: ButtonProps) => {
-  return (
-    <StyledButton type="button" {...props}>
-      {children}
-    </StyledButton>
-  );
-};
-
-export const StyledButton = styled('button', {
+const Button = styled('button', {
   border: 0,
-  width: '130px',
-  height: '48px',
-  background: '$white',
-  boxShadow: '1px 4px 6px rgba(0, 0, 0, 0.2)',
-  borderRadius: '8px',
-  '&:disabled': {
-    background: '#F4F4F4',
-    borderColor: '#DEDEDE',
-    color: '#BBBBBB',
+  variants: {
+    variant: {
+      default: {
+        width: '$10',
+        height: '$7',
+        background: '$white',
+        boxShadow: '1px 4px 6px rgba(0, 0, 0, 0.2)',
+        borderRadius: '8px',
+        '&:disabled': {
+          background: '#F4F4F4',
+          borderColor: '#DEDEDE',
+          color: '#BBBBBB',
+        },
+      },
+      removeBtn: {
+        boxShadow: 'none',
+        zIndex: '10',
+        backgroundColor: 'inherit',
+        fontSize: '$6',
+        cursor: 'pointer',
+        color: '$grey2',
+        '&::before': {
+          content: 'ⓧ',
+        },
+      },
+    },
+  },
+  defaultVariants: {
+    variant: 'default',
   },
 });
 

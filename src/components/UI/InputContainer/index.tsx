@@ -5,11 +5,15 @@ export type Props = {
   label?: string;
   isError?: boolean;
   errorMessage?: string;
+  onBlur?: () => void;
 };
 
-const InputContainer = (props: StrictPropsWithChildren<Props>) => {
+const InputContainer = ({
+  onBlur,
+  ...props
+}: StrictPropsWithChildren<Props>) => {
   return (
-    <Container>
+    <Container onBlur={onBlur}>
       <div
         style={{
           display: 'flex',
@@ -17,7 +21,7 @@ const InputContainer = (props: StrictPropsWithChildren<Props>) => {
           alignItems: 'center',
         }}
       >
-        <Label>{props.label}</Label>
+        {props.label && <Label>{props.label}</Label>}
         <InputBox>{props.children}</InputBox>
       </div>
       <Line error={props.isError} />

@@ -1,8 +1,9 @@
 import { Navigate, Route, Routes as ReactRouters } from 'react-router-dom';
 
-import { CardListPage } from '@/pages/CardListPage';
+import { CardDetailPage } from '@/pages/CardDetail';
+import { CardListPage } from '@/pages/CardList';
+import { CardRegisterPage } from '@/pages/CardRegister';
 import { CardRegisterConfirmPage } from '@/pages/CardRegisterConfirmPage';
-import { CardRegisterPage } from '@/pages/CardRegisterPage';
 
 const Routes = () => {
   return (
@@ -10,6 +11,7 @@ const Routes = () => {
       <Route path="/register" element={<CardRegisterPage />} />
       <Route path="/register-confirm" element={<CardRegisterConfirmPage />} />
       <Route path="/list" element={<CardListPage />} />
+      <Route path="/detail/:cardId" element={<CardDetailPage />} />
       <Route path="*" element={<Navigate replace to="/list" />} />
     </ReactRouters>
   );

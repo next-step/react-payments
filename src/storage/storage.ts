@@ -1,4 +1,5 @@
-export const setItem = (key: string, value: unknown) => {
+import { StorageKey } from './storageKey';
+export const setItem = (key: StorageKey, value: unknown) => {
   try {
     localStorage.setItem(key, JSON.stringify(value));
   } catch (err) {
@@ -6,7 +7,7 @@ export const setItem = (key: string, value: unknown) => {
   }
 };
 
-export const getItem = (key: string) => {
+export const getItem = (key: StorageKey) => {
   const json = localStorage.getItem(key);
   if (!json) return null;
   return JSON.parse(json);
