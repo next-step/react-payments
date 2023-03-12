@@ -1,16 +1,16 @@
-import { useState } from 'react';
-
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { CardCompanyModal } from '@/components/domain';
 import { CardForm } from '@/components/domain';
 import { Button, CreditCard } from '@/components/UI';
+import { useModal } from '@/components/UI/Modal';
 import { useRouter } from '@/hooks/useRouter';
 import { createCard } from '@/storage/service';
 import { type CardFormType, CardData, CardKey } from '@/types';
 
 export const CardRegister = () => {
-  const { dispatch, getFormData, handleFormInput } = useFormContext();
+  const { getFormData, handleFormInput } = useFormContext();
   const form = getFormData().current as CardFormType;
+  const { isOpen: open, open: handleOpen, close: handleClose } = useModal();
 
   const { go } = useRouter();
 
@@ -23,17 +23,12 @@ export const CardRegister = () => {
 
   const isAllValid = Object.values(form).every((input) => input.isValid);
 
-  const [open, setOpen] = useState(true);
-  const handleClose = () => setOpen(false);
-  const handleOpen = () => setOpen(true);
-
   const handleSelectCard = (company: string) => {
     handleFormInput(
       getFormData(),
       CardKey.CARD_COMPANY
     )({ val: company, isValid: true });
     handleClose();
-    dispatch();
   };
 
   const handleSubmit = () => {
