@@ -18,7 +18,6 @@ function ModalProvider({ children }: ComponentProps) {
   return (
     <ModalContext.Provider value={{ isOpen, setIsOpen }}>
       {children}
-      {isOpen ?? <Modal />}
     </ModalContext.Provider>
   );
 }
