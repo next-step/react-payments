@@ -5,7 +5,8 @@ type ComponentProps = {
 };
 
 function Keyboard({ children }: ComponentProps) {
-  const { isOpen } = useKeyboardContext();
+  // const { isOpen } = useKeyboardContext();
+  const isOpen = true;
 
   return (
     <>

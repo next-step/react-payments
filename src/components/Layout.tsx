@@ -19,7 +19,7 @@ type ComponentProps = {
 
 const Root = styled.div`
   background-color: #fff;
-  height: 700px;
+  height: 100%;
   position: relative;
   border-radius: 15px;
 `;

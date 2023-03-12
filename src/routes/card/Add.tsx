@@ -13,6 +13,8 @@ import useModalContext from "../../hooks/useModalContext";
 import useCardContext from "../../hooks/useCardContext";
 import { ROUTE } from "../../constants/route";
 import { initCard } from "../../constants/bank";
+import Keyboard from "../../components/Keyboard";
+import KeyboardProvider from "../../components/KeyboardProvider";
 
 const INPUT_NAMES = [
   "card-0",
@@ -81,28 +83,31 @@ function Add() {
 
   return (
     <>
-      <Header />
-      <Card
-        cardNumber={formattedCardNumber}
-        expiredDate={cardInfo.expiredDate}
-        userName={cardInfo.userName}
-        color={cardColor}
-        bankName={bankName}
-      ></Card>
-      <form onSubmit={submitHandler}>
-        <CardNumber onCardNumberChange={onCardNumberChange}></CardNumber>
-        <ExpiredDate
-          onExpiredDateChange={onExpiredDateChange}
-          ref={expiredRef}
-        ></ExpiredDate>
-        <UserName
-          onUserNameChange={onUserNameChange}
-          ref={userNameRef}
-        ></UserName>
-        <Code onCodeChange={onCodeChange}></Code>
-        <Password onPasswordChange={onPasswordChange}></Password>
-        <Button />
-      </form>
+      <KeyboardProvider>
+        <Header />
+        <Card
+          cardNumber={formattedCardNumber}
+          expiredDate={cardInfo.expiredDate}
+          userName={cardInfo.userName}
+          color={cardColor}
+          bankName={bankName}
+        ></Card>
+        <form onSubmit={submitHandler}>
+          <CardNumber onCardNumberChange={onCardNumberChange}></CardNumber>
+          <ExpiredDate
+            onExpiredDateChange={onExpiredDateChange}
+            ref={expiredRef}
+          ></ExpiredDate>
+          <UserName
+            onUserNameChange={onUserNameChange}
+            ref={userNameRef}
+          ></UserName>
+          <Code onCodeChange={onCodeChange}></Code>
+          <Password onPasswordChange={onPasswordChange}></Password>
+          <Button />
+        </form>
+        <Keyboard />
+      </KeyboardProvider>
     </>
   );
 }
