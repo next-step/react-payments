@@ -42,7 +42,10 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
       className="input-basic w-25"
       type="password"
       value={value ?? ''}
-      ref={(el) => setElement(SECURITY_CODE_ELEMENT_SEQUENCE_KEY, index, el)}
+      ref={(el) => {
+        if (securityCode) securityCode.ref = el;
+        setElement(SECURITY_CODE_ELEMENT_SEQUENCE_KEY, index, el);
+      }}
       onChangeProps={inputChangeEventProps}
     />
   );

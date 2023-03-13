@@ -54,6 +54,7 @@ export const CardNumberInput = memo(({ cardNumber, index, needDividerRender }: C
         value={value ?? ''}
         className="input-basic text-black"
         ref={(el) => {
+          if (cardNumber) cardNumber.ref = el;
           setElement(CARD_NUMBER_INPUT_REF_KEY, index, el);
         }}
         onChangeProps={changeProps}

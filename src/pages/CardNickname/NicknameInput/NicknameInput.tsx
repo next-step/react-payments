@@ -21,6 +21,9 @@ export function NicknameInput() {
         type="text"
         maxLength={10}
         value={nickname?.value}
+        ref={(ref) => {
+          if (nickname) nickname.ref = ref;
+        }}
         placeholder="카드 별칭 (선택)"
         onChange={handleCardNicknameChange}
       />

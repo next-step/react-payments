@@ -5,7 +5,7 @@ export type InputStateType<T = string> = {
   key: string;
   value?: T;
   placeholder?: string;
-  ref?: HTMLInputElement;
+  ref?: HTMLInputElement | null;
   checkIsValid: (this: InputStateType<T>) => boolean;
   checkIsAllowInput: (input?: T) => boolean;
 };

@@ -65,6 +65,7 @@ export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: E
         value={value ?? ''}
         placeholder={placeholder}
         ref={(el) => {
+          if (expireDate) expireDate.ref = el;
           setElement(EXPIRE_DATE_ELEMENT_SEQUENCE_KEY, index, el);
         }}
         onChangeProps={inputChangeEventProps}
