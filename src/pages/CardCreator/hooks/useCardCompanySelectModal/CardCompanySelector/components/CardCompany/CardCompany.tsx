@@ -9,7 +9,7 @@ interface CardCompanyProps {
   onClick?: (cardCompany: CardCompanyModel) => void;
 }
 
-function CardCompany({ cardCompany, onClick }: CardCompanyProps) {
+export function CardCompany({ cardCompany, onClick }: CardCompanyProps) {
   return (
     <CardCompanyWrapper
       onClick={() => {
@@ -21,5 +21,3 @@ function CardCompany({ cardCompany, onClick }: CardCompanyProps) {
     </CardCompanyWrapper>
   );
 }
-
-export { CardCompany };

@@ -9,7 +9,7 @@ export interface CardCompanySelectorProps {
   onCardCompanyClick?: (cardCompany: CardCompanyModel) => void;
 }
 
-const CardCompanySelector = memo(({ onCardCompanyClick }: CardCompanySelectorProps) => {
+export const CardCompanySelector = memo(function CardCompanySelector({ onCardCompanyClick }: CardCompanySelectorProps) {
   return (
     <Wrapper onClick={(e) => e.stopPropagation()}>
       <CompaniesWrapper>
@@ -20,5 +20,3 @@ const CardCompanySelector = memo(({ onCardCompanyClick }: CardCompanySelectorPro
     </Wrapper>
   );
 });
-
-export { CardCompanySelector };

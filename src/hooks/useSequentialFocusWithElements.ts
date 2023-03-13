@@ -4,7 +4,7 @@ import { createObjectWithArrayProps } from '@/utils/object';
 
 const elementObject = createObjectWithArrayProps<HTMLInputElement | null>();
 
-function useSequentialFocusWithElements() {
+export function useSequentialFocusWithElements() {
   return useMemo(
     () => ({
       elementMap: elementObject.object,
@@ -22,5 +22,3 @@ function useSequentialFocusWithElements() {
     []
   );
 }
-
-export { useSequentialFocusWithElements };

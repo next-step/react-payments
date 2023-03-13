@@ -14,7 +14,7 @@ const ModalWithPortal = memo((props: React.PropsWithChildren<ModalBackgroundProp
   );
 });
 
-function useModal(initialState = false) {
+export function useModal(initialState = false) {
   const [isShow, setIsShow] = useState(false);
 
   useEffect(() => {
@@ -56,5 +56,3 @@ function useModal(initialState = false) {
     showModal,
   };
 }
-
-export { useModal };

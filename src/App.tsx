@@ -4,7 +4,7 @@ import Router from './router';
 import { CardInfoProvider } from './stores/CardCreatorContext';
 import { ErrorContextProvider } from './stores/ErrorContext';
 
-function App() {
+export function App() {
   return (
     <ErrorContextProvider>
       <CardInfoProvider>
@@ -13,5 +13,3 @@ function App() {
     </ErrorContextProvider>
   );
 }
-
-export { App };

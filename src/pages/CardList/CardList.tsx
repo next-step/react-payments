@@ -9,7 +9,7 @@ import { CloseIcon } from '@/components/CloseIcon';
 import { useCardListWithLocalStorage } from '../CardNickname/hooks/useCardListWithLocalStorage';
 import { DeleteButtonWrapper } from './CardList.styled';
 
-function CardList() {
+export function CardList() {
   const navigate = useNavigate();
   const { cardList, deleteCard } = useCardListWithLocalStorage();
 
@@ -56,5 +56,3 @@ function CardList() {
     </div>
   );
 }
-
-export { CardList };

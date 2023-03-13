@@ -12,7 +12,7 @@ function getContainer(container: PortalProps['container']) {
   return typeof container === 'function' ? container() : container;
 }
 
-function Portal({ disablePortal = false, container, children }: PortalProps) {
+export function Portal({ disablePortal = false, container, children }: PortalProps) {
   const [mountNode, setMountNode] = useState<ReturnType<typeof getContainer>>(null);
 
   useEffect(() => {
@@ -23,5 +23,3 @@ function Portal({ disablePortal = false, container, children }: PortalProps) {
 
   return mountNode ? createPortal(children, mountNode) : null;
 }
-
-export { Portal };

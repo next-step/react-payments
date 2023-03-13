@@ -14,7 +14,7 @@ import { PasswordsInputListPure } from './InputComponents/PasswordsInputList';
 import { CardCompanyModel, useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';
 import { SubmitButton } from './SubmitButton';
 
-function CardCreator() {
+export function CardCreator() {
   const cardCompany = useSelectCardCompany();
   const apis = useCardContextApiSelector();
 
@@ -56,5 +56,3 @@ function CardCreator() {
     </ThemeSetter>
   );
 }
-
-export { CardCreator };

@@ -16,7 +16,7 @@ export interface OnBlurHandlerProps {
   getNewValue: (e: FocusEvent<HTMLInputElement, Element>) => string;
 }
 
-function useInputEventHandler() {
+export function useInputEventHandler() {
   return {
     createInputChangeHandler:
       ({ props, checkWhetherSetState, getNewValue }: OnChangeHandlerProps) =>
@@ -40,5 +40,3 @@ function useInputEventHandler() {
       },
   };
 }
-
-export { useInputEventHandler };

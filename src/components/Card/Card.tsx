@@ -16,7 +16,7 @@ interface CardProps {
   onCardClick?: (e: MouseEvent<HTMLDivElement>) => void;
 }
 
-const Card = memo(({ disableNickname, additionalIcon, onCardClick }: CardProps) => {
+export const Card = memo(function Card({ disableNickname, additionalIcon, onCardClick }: CardProps) {
   const cardCompany = useSelectCardCompany();
 
   const errorMessage = useErrorContext(
@@ -47,5 +47,3 @@ const Card = memo(({ disableNickname, additionalIcon, onCardClick }: CardProps) 
     </ThemeSetter>
   );
 });
-
-export { Card };

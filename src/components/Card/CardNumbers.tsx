@@ -12,7 +12,7 @@ export type CardNumbersModel = CardNumberModel[];
 
 interface CardNumbersProps {}
 
-function CardNumbers(_: CardNumbersProps) {
+export function CardNumbers(_: CardNumbersProps) {
   const cardNumbers = useSelectCardNumbers();
 
   return (
@@ -35,5 +35,3 @@ function CardNumber({ isHide, value }: CardNumberModel) {
 function makeCardNumber(value: string, isHide: boolean) {
   return value.split('').map((cardNum) => (isHide ? '*' : cardNum));
 }
-
-export { CardNumbers };
