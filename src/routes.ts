@@ -1,5 +1,6 @@
 export const routes = {
   home: '/',
   cardCreator: '/add',
-  createCardNickname: (cardId?: number | string) => (cardId ? `/nickname/${cardId}` : '/nickname'),
+  nickname: '/nickname',
+  createCardNickname: (cardId?: number | string) => (cardId ? `${routes.nickname}/${cardId}` : routes.nickname),
 };
