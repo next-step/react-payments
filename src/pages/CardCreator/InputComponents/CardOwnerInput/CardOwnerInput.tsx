@@ -13,15 +13,15 @@ interface CardOwnerInputProps {}
 
 function CardOwnerInput(_: CardOwnerInputProps) {
   const cardOwner = useSelectCardOwners();
-  const { value, checkIsAllowInput, placeholder, checkIsValid } = cardOwner?.[0] || {};
+  const { value, checkIsAllowInput, placeholder } = cardOwner?.[0] || {};
 
   const apiContext = useContext(ApiContext);
 
   const { setElement, toTheNextElement } = useSequentialFocusWithElements();
 
   useEffect(() => {
-    toTheNextElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, !!checkIsValid?.(value));
-  }, [toTheNextElement, checkIsValid, value]);
+    toTheNextElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, !!cardOwner?.[0].checkIsValid?.());
+  }, [toTheNextElement, cardOwner]);
 
   const errorMessage = useErrorContext(
     {

@@ -15,15 +15,15 @@ interface PasswordInputProps {
 }
 
 export function PasswordInput({ password, index }: PasswordInputProps) {
-  const { key, value, checkIsAllowInput, checkIsValid } = password;
+  const { key, value, checkIsAllowInput } = password;
 
   const apiContext = useContext(ApiContext);
 
   const { setElement, toTheNextElement } = useSequentialFocusWithElements();
 
   useEffect(() => {
-    toTheNextElement(PASSWORD_ELEMENT_SEQUENCE_KEY, index, checkIsValid(value));
-  }, [toTheNextElement, index, checkIsValid, value]);
+    toTheNextElement(PASSWORD_ELEMENT_SEQUENCE_KEY, index, password.checkIsValid());
+  }, [toTheNextElement, index, password]);
 
   const inputChangeEventProps = {
     props: { setState: (value: string) => apiContext?.dispatch({ type: 'passwords', payload: { index, value } }) },

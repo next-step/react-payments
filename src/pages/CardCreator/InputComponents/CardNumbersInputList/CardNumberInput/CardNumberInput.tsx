@@ -19,11 +19,11 @@ interface CardNumberProps {
 
 // CardNumber 4개중의 하나의 input을 담당한다.
 export const CardNumberInput = memo(({ cardNumber, index, needDividerRender }: CardNumberProps) => {
-  const { type, value, checkIsValid, checkIsAllowInput } = cardNumber;
+  const { type, value, checkIsAllowInput } = cardNumber;
 
   const apiContext = useContext(ApiContext);
 
-  const isOverFourNumber = checkIsValid(value);
+  const isOverFourNumber = cardNumber.checkIsValid();
 
   const { setElement, toTheNextElement } = useSequentialFocusWithElements();
 

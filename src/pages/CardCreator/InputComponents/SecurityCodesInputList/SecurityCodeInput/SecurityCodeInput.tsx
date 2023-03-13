@@ -15,15 +15,15 @@ interface SecurityCodeInputProps {
 }
 
 export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProps) {
-  const { key, value, checkIsAllowInput, checkIsValid } = securityCode;
+  const { key, value, checkIsAllowInput } = securityCode;
 
   const { setElement, toTheNextElement } = useSequentialFocusWithElements();
 
   const apis = useCardContextApiSelector();
 
   useEffect(() => {
-    toTheNextElement(SECURITY_CODE_ELEMENT_SEQUENCE_KEY, index, checkIsValid(value));
-  }, [toTheNextElement, index, checkIsValid, value]);
+    toTheNextElement(SECURITY_CODE_ELEMENT_SEQUENCE_KEY, index, securityCode.checkIsValid());
+  }, [toTheNextElement, index, securityCode]);
 
   const inputChangeEventProps = {
     props: { setState: (value: string) => apis?.dispatch({ type: 'securityCodes', payload: { index, value } }) },

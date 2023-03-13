@@ -5,7 +5,8 @@ export type InputStateType<T = string> = {
   key: string;
   value?: T;
   placeholder?: string;
-  checkIsValid: (value?: T) => boolean;
+  ref?: HTMLInputElement;
+  checkIsValid: (this: InputStateType<T>) => boolean;
   checkIsAllowInput: (input?: T) => boolean;
 };
 
@@ -18,3 +19,5 @@ export type ExpireDate = string;
 export type SecurityCode = string;
 
 export type Password = string;
+
+export type CardNickname = string;

@@ -33,9 +33,10 @@ export function useValidateCardInfos() {
     () =>
       inputs.find(({ store }) => {
         if (Array.isArray(store)) {
-          return store?.some(({ value, checkIsValid }) => !checkIsValid(value));
+          return store.some((inputInstance) => !inputInstance.checkIsValid());
         }
-        return !store?.checkIsValid(store.value);
+        // @ts-ignore
+        return !store?.checkIsValid();
       }),
     [inputs]
   );
