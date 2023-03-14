@@ -3,14 +3,28 @@ import type { CardCompanyModel } from '@/pages/CardCreator/hooks/useCardCompanyS
 
 export type CardCompanyState = Omit<InputStateType<CardCompanyModel>, 'placeholder' | 'type' | 'checkIsAllowInput'>;
 
-export type CardNumbersState = Omit<InputStateType<CardNumber>, 'placeholder'>[];
+export type CardNumberState = Omit<InputStateType<CardNumber>, 'placeholder'>;
+export type CardNumbersState = CardNumberState[];
 
-export type CardOwnersState = Omit<InputStateType<CardOwner>, 'type'>[];
+export type CardOwnerState = Omit<InputStateType<CardOwner>, 'type'>;
+export type CardOwnersState = CardOwnerState[];
 
-export type ExpireDatesState = Omit<InputStateType<ExpireDate>, 'type'>[];
+export type ExpireDateState = Omit<InputStateType<ExpireDate>, 'type'>;
+export type ExpireDatesState = ExpireDateState[];
 
-export type SecurityCodesState = Omit<InputStateType<SecurityCode>, 'placeholder'>[];
+export type SecurityCodeState = Omit<InputStateType<SecurityCode>, 'placeholder'>;
+export type SecurityCodesState = SecurityCodeState[];
 
-export type PasswordsState = Omit<InputStateType<Password>, 'type' | 'placeholder'>[];
+export type PasswordState = Omit<InputStateType<Password>, 'type' | 'placeholder'>;
+export type PasswordsState = PasswordState[];
 
 export type CardNicknameState = Omit<InputStateType<CardNickname>, 'type' | 'placeholder' | 'checkIsAllowInput'>;
+
+export type UnionInputState =
+  | CardCompanyState
+  | CardNumberState
+  | CardOwnerState
+  | ExpireDateState
+  | SecurityCodeState
+  | PasswordState
+  | CardNicknameState;

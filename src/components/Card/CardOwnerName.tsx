@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { useSelectCardOwners } from '@/stores/CardCreatorContext';
+import { CardOwnersState } from '@/stores/CardCreatorContext/CardCreatorStates';
 
-interface CardOwnerNameProps {}
+interface CardOwnerNameProps {
+  ownerName?: CardOwnersState;
+}
 
-export function CardOwnerName(_: CardOwnerNameProps) {
-  const ownerName = useSelectCardOwners();
-
+export function CardOwnerName({ ownerName }: CardOwnerNameProps) {
   return <span className="card-text card-name-spacing">{ownerName?.[0].value || 'NAME'}</span>;
 }

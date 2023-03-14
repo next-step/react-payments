@@ -1,17 +1,17 @@
 import React, { memo } from 'react';
 
-import { useSelectExpireDates } from '@/stores/CardCreatorContext';
 import { checkIsArrayLast } from '@/utils';
-import { useErrorContext } from '../hooks/useErrorContext';
+import { ExpireDatesState } from '@/stores/CardCreatorContext/CardCreatorStates';
 
+import { useErrorContext } from '../hooks/useErrorContext';
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { ExpireDateInput } from './ExpireDateInput';
 
-interface ExpireDatesInputListProps {}
+interface ExpireDatesInputListProps {
+  expireDates?: ExpireDatesState;
+}
 
-function ExpireDatesInputList(_: ExpireDatesInputListProps) {
-  const expireDates = useSelectExpireDates();
-
+function ExpireDatesInputList({ expireDates }: ExpireDatesInputListProps) {
   const errorMessage = useErrorContext(
     {
       inValid: 'MM/YY 형태로 만료일을 입력해주세요.',

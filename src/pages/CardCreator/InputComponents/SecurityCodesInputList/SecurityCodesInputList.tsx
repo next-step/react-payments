@@ -1,16 +1,16 @@
 import React, { memo } from 'react';
 
-import { useSelectSecurityCodes } from '@/stores/CardCreatorContext';
+import { SecurityCodesState } from '@/stores/CardCreatorContext/CardCreatorStates';
 
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { SecurityCodeInput } from './SecurityCodeInput';
 import { useErrorContext } from '../hooks/useErrorContext';
 
-interface SecurityCodesInputListProps {}
+interface SecurityCodesInputListProps {
+  securityCodes?: SecurityCodesState;
+}
 
-function SecurityCodesInputList(_: SecurityCodesInputListProps) {
-  const securityCodes = useSelectSecurityCodes();
-
+function SecurityCodesInputList({ securityCodes }: SecurityCodesInputListProps) {
   const errorMessage = useErrorContext(
     {
       inValid: '보안번호 3자리를 입력해주세요.',

@@ -1,13 +1,10 @@
-import React, { ChangeEvent, useContext, useEffect } from 'react';
+import React, { ChangeEvent, useContext } from 'react';
 
-import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 import type { PasswordsState } from '@/stores/CardCreatorContext/CardCreatorStates';
 import { ApiContext } from '@/stores/CardCreatorContext';
 import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components/CardInfoInputElement';
-
-const PASSWORD_ELEMENT_SEQUENCE_KEY = 'password';
 
 interface PasswordInputProps {
   password: PasswordsState[number];
@@ -15,15 +12,9 @@ interface PasswordInputProps {
 }
 
 export function PasswordInput({ password, index }: PasswordInputProps) {
-  const { key, value, checkIsAllowInput } = password;
+  const { key, value, checkIsAllowInput, setRef } = password;
 
   const apiContext = useContext(ApiContext);
-
-  const { setElement, toTheNextElement } = useSequentialFocusWithElements();
-
-  useEffect(() => {
-    toTheNextElement(PASSWORD_ELEMENT_SEQUENCE_KEY, index, password.checkIsValid());
-  }, [toTheNextElement, index, password]);
 
   const inputChangeEventProps = {
     props: { setState: (value: string) => apiContext?.dispatch({ type: 'passwords', payload: { index, value } }) },
@@ -42,10 +33,7 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
       type="password"
       className="input-basic w-15 mr-10"
       value={value ?? ''}
-      ref={(el) => {
-        if (password) password.ref = el;
-        setElement(PASSWORD_ELEMENT_SEQUENCE_KEY, index, el);
-      }}
+      ref={setRef?.bind(password)}
       onChangeProps={inputChangeEventProps}
     />
   );

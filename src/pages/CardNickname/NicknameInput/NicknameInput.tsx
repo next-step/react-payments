@@ -1,9 +1,11 @@
 import React, { ChangeEvent, useCallback } from 'react';
 
-import { useCardContextApiSelector, useSelectCardNickname } from '@/stores/CardCreatorContext';
+import { useCardContextApiSelector, useCardInfoSelector } from '@/stores/CardCreatorContext';
 
 export function NicknameInput() {
-  const nickname = useSelectCardNickname();
+  const cardInfo = useCardInfoSelector();
+  const nickname = cardInfo?.cardNickname;
+
   const apis = useCardContextApiSelector();
 
   const handleCardNicknameChange = useCallback(

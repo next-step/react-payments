@@ -1,15 +1,12 @@
-import React, { ChangeEvent, FocusEvent, memo, useContext, useEffect } from 'react';
+import React, { ChangeEvent, FocusEvent, memo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
 import type { ExpireDatesState } from '@/stores/CardCreatorContext/CardCreatorStates';
-import { ApiContext } from '@/stores/CardCreatorContext';
-import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
+import { useCardContextApiSelector } from '@/stores/CardCreatorContext';
 import { filterNumber } from '@/utils';
 
 import { InputDivider } from '../../components/InputDivider';
 import { CardInfoInputElement } from '../../components/CardInfoInputElement';
-
-const EXPIRE_DATE_ELEMENT_SEQUENCE_KEY = 'expireDate';
 
 interface ExpireDateInputProps {
   expireDate: ExpireDatesState[number];
@@ -18,17 +15,11 @@ interface ExpireDateInputProps {
 }
 
 export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: ExpireDateInputProps) => {
-  const { value, placeholder, checkIsAllowInput } = expireDate;
+  const { value, placeholder, checkIsAllowInput, setRef } = expireDate;
 
-  const apiContext = useContext(ApiContext);
-
-  const { setElement, toTheNextElement } = useSequentialFocusWithElements();
+  const apiContext = useCardContextApiSelector();
 
   const isValueValid = expireDate.checkIsValid();
-
-  useEffect(() => {
-    toTheNextElement(EXPIRE_DATE_ELEMENT_SEQUENCE_KEY, index, isValueValid);
-  }, [toTheNextElement, index, isValueValid]);
 
   const inputChangeEventProps = {
     props: {
@@ -64,10 +55,7 @@ export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: E
         type="text"
         value={value ?? ''}
         placeholder={placeholder}
-        ref={(el) => {
-          if (expireDate) expireDate.ref = el;
-          setElement(EXPIRE_DATE_ELEMENT_SEQUENCE_KEY, index, el);
-        }}
+        ref={setRef?.bind(expireDate)}
         onChangeProps={inputChangeEventProps}
         onBlurProps={inputBlurEventProps}
       />

@@ -1,13 +1,13 @@
 import React from 'react';
 
+import type { ExpireDatesState } from '@/stores/CardCreatorContext/CardCreatorStates';
 import { padNumber } from '@/utils';
-import { useSelectExpireDates } from '@/stores/CardCreatorContext';
 
-interface CardExpireDateProps {}
+interface CardExpireDateProps {
+  expireDates?: ExpireDatesState;
+}
 
-export function CardExpireDate(_: CardExpireDateProps) {
-  const expireDates = useSelectExpireDates();
-
+export function CardExpireDate({ expireDates }: CardExpireDateProps) {
   return (
     <span className="card-text">
       <span className="card-text card-expire-date">{padNumber(2, expireDates?.[0].value)}</span>

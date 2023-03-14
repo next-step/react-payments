@@ -1,7 +1,7 @@
 import React from 'react';
 
+import type { CardNumbersState } from '@/stores/CardCreatorContext/CardCreatorStates';
 import type { CardNumber as CardNumberType } from '@/types';
-import { useSelectCardNumbers } from '@/stores/CardCreatorContext';
 
 type CardNumberModel = {
   isHide: boolean;
@@ -10,11 +10,11 @@ type CardNumberModel = {
 
 export type CardNumbersModel = CardNumberModel[];
 
-interface CardNumbersProps {}
+interface CardNumbersProps {
+  cardNumbers?: CardNumbersState;
+}
 
-export function CardNumbers(_: CardNumbersProps) {
-  const cardNumbers = useSelectCardNumbers();
-
+export function CardNumbers({ cardNumbers }: CardNumbersProps) {
   return (
     <div className="card-bottom__number">
       {cardNumbers?.map((cardNumber, i) => (

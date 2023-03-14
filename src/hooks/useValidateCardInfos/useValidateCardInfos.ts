@@ -1,32 +1,22 @@
 import { useMemo } from 'react';
 
-import {
-  useSelectCardCompany,
-  useSelectCardNumbers,
-  useSelectExpireDates,
-  useSelectCardOwners,
-  useSelectPasswords,
-  useSelectSecurityCodes,
-} from '@/stores/CardCreatorContext';
+import { useCardInfoSelector } from '@/stores/CardCreatorContext';
 
 export function useValidateCardInfos() {
-  const cardCompany = useSelectCardCompany();
-  const cardNumbersStore = useSelectCardNumbers();
-  const expireDatesStore = useSelectExpireDates();
-  const cardOwnersStore = useSelectCardOwners();
-  const passwordsStore = useSelectPasswords();
-  const securityCodesStore = useSelectSecurityCodes();
+  const cardInfo = useCardInfoSelector();
+
+  const { cardCompany, cardNumbers, expireDates, cardOwners, passwords, securityCodes } = cardInfo || {};
 
   const inputs = useMemo(
     () => [
       createInputObject('cardCompany', cardCompany),
-      createInputObject('cardNumbers', cardNumbersStore),
-      createInputObject('expireDates', expireDatesStore),
-      createInputObject('cardOwners', cardOwnersStore),
-      createInputObject('passwords', passwordsStore),
-      createInputObject('securityCodes', securityCodesStore),
+      createInputObject('cardNumbers', cardNumbers),
+      createInputObject('expireDates', expireDates),
+      createInputObject('cardOwners', cardOwners),
+      createInputObject('passwords', passwords),
+      createInputObject('securityCodes', securityCodes),
     ],
-    [cardCompany, cardNumbersStore, expireDatesStore, cardOwnersStore, passwordsStore, securityCodesStore]
+    [cardCompany, cardNumbers, expireDates, cardOwners, passwords, securityCodes]
   );
 
   return useMemo(

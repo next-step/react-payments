@@ -1,23 +1,43 @@
-import React, { memo } from 'react';
+import React, { memo, forwardRef, useImperativeHandle, ForwardedRef } from 'react';
 
 import { checkIsArrayLast } from '@/utils';
-import { useSelectCardNumbers } from '@/stores/CardCreatorContext';
+import { CardNumbersState } from '@/stores/CardCreatorContext/CardCreatorStates';
 
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { CardNumberInput } from './CardNumberInput';
 import { useErrorContext } from '../hooks/useErrorContext';
 
-interface CardNumbersInputListProps {}
+export interface CardNumbersInputListRefs {
+  checkIsEveryInputValid: () => boolean;
+}
 
-function CardNumbersInputList(_: CardNumbersInputListProps) {
-  const cardNumbers = useSelectCardNumbers();
+interface CardNumbersInputListProps {
+  cardNumbers?: CardNumbersState;
+}
 
+function CardNumbersInputList({ cardNumbers }: CardNumbersInputListProps, ref: ForwardedRef<CardNumbersInputListRefs>) {
   const errorMessage = useErrorContext(
     {
       inValid: '카드 번호를 각각 4자리씩 입력해주세요.',
     },
     [{ errorType: 'cardNumbers', messageType: 'inValid' }]
   );
+
+  useImperativeHandle(ref, () => ({
+    checkIsEveryInputValid: () => {
+      return !!cardNumbers?.every((cardNumber, i) => {
+        const isValid = cardNumber.checkIsValid();
+
+        if (!isValid) return isValid;
+
+        if (!checkIsArrayLast(cardNumbers, i)) {
+          cardNumbers?.[i + 1].ref?.focus();
+        }
+
+        return isValid;
+      });
+    },
+  }));
 
   return (
     <CardInputWrapperPure header="카드 번호" errorMessage={errorMessage}>
@@ -31,4 +51,4 @@ function CardNumbersInputList(_: CardNumbersInputListProps) {
   );
 }
 
-export const CardNumbersInputListPure = memo(CardNumbersInputList);
+export const CardNumbersInputListPure = memo(forwardRef(CardNumbersInputList));

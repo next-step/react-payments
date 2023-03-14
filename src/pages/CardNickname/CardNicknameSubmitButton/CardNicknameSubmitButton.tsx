@@ -2,34 +2,21 @@ import React, { MouseEvent } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import { routes } from '@/routes';
-import {
-  useSelectCardCompany,
-  useSelectCardNickname,
-  useSelectCardNumbers,
-  useSelectCardOwners,
-  useSelectExpireDates,
-  useSelectPasswords,
-  useSelectSecurityCodes,
-} from '@/stores/CardCreatorContext';
+import { useCardInfoSelector } from '@/stores/CardCreatorContext';
 
 import { useCardListWithLocalStorage } from '../hooks/useCardListWithLocalStorage';
 
 export function CardNicknameSubmitButton() {
   const { cardId } = useParams();
 
-  const cardNickname = useSelectCardNickname();
-  const cardCompany = useSelectCardCompany();
-  const cardNumbers = useSelectCardNumbers();
-  const expireDates = useSelectExpireDates();
-  const cardOwners = useSelectCardOwners();
-  const passwords = useSelectPasswords();
-  const securityCodes = useSelectSecurityCodes();
+  const cardInfo = useCardInfoSelector();
+
+  const { cardNickname, cardCompany, cardNumbers, expireDates, cardOwners, passwords, securityCodes } = cardInfo || {};
 
   const { setCardInStorage } = useCardListWithLocalStorage();
 
   const handleSubmitButtonClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    const { value, checkIsValid } = cardNickname!;
-    if (!checkIsValid(value)) {
+    if (!cardNickname?.checkIsValid()) {
       e.preventDefault();
       alert('카드 별명은 10자리를 넘을 수 없습니다.');
       return;
@@ -40,12 +27,12 @@ export function CardNicknameSubmitButton() {
       return;
     }
 
-    const newCardNicknameValue = !value ? cardCompany!.value!.name : value;
+    const newCardNicknameValue = !cardNickname?.value ? cardCompany?.value?.name : cardNickname.value;
 
     const saveCardId = cardId || new Date().getTime();
 
     setCardInStorage(saveCardId, {
-      cardNickname: { ...cardNickname!, value: newCardNicknameValue },
+      cardNickname: { ...cardNickname, value: newCardNicknameValue },
       cardCompany,
       cardNumbers,
       expireDates,

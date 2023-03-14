@@ -1,16 +1,16 @@
 import React, { memo } from 'react';
 
-import { useSelectPasswords } from '@/stores/CardCreatorContext';
+import { PasswordsState } from '@/stores/CardCreatorContext/CardCreatorStates';
 
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { PasswordInput } from './PasswordInput';
 import { useErrorContext } from '../hooks/useErrorContext';
 
-interface PasswordsInputListProps {}
+interface PasswordsInputListProps {
+  passwords?: PasswordsState;
+}
 
-function PasswordsInputList(_: PasswordsInputListProps) {
-  const passwords = useSelectPasswords();
-
+function PasswordsInputList({ passwords }: PasswordsInputListProps) {
   const errorMessage = useErrorContext(
     {
       inValid: '비밀번호 앞 2자리를 모두 입력해주세요.',

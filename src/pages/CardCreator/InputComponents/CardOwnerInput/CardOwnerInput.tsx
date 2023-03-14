@@ -1,27 +1,20 @@
-import React, { ChangeEvent, memo, useContext, useEffect, useMemo } from 'react';
+import React, { ChangeEvent, memo, useMemo } from 'react';
 
-import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
-import { ApiContext, useSelectCardOwners } from '@/stores/CardCreatorContext';
+import { useCardContextApiSelector } from '@/stores/CardCreatorContext';
+import { CardOwnersState } from '@/stores/CardCreatorContext/CardCreatorStates';
 
 import { CardInputWrapperPure } from '../components/CardInputWrapper';
 import { CardInfoInputElement } from '../components/CardInfoInputElement';
 import { useErrorContext } from '../hooks/useErrorContext';
 
-const CARD_OWNER_ELEMENT_SEQUENCE_KEY = 'cardOwner';
+interface CardOwnerInputProps {
+  cardOwners?: CardOwnersState;
+}
 
-interface CardOwnerInputProps {}
-
-function CardOwnerInput(_: CardOwnerInputProps) {
-  const cardOwners = useSelectCardOwners();
+function CardOwnerInput({ cardOwners }: CardOwnerInputProps) {
   const cardOwner = useMemo(() => cardOwners?.[0], [cardOwners]);
 
-  const apiContext = useContext(ApiContext);
-
-  const { setElement, toTheNextElement } = useSequentialFocusWithElements();
-
-  useEffect(() => {
-    toTheNextElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, !!cardOwner?.checkIsValid());
-  }, [toTheNextElement, cardOwner]);
+  const apiContext = useCardContextApiSelector();
 
   const errorMessage = useErrorContext(
     {
@@ -54,10 +47,7 @@ function CardOwnerInput(_: CardOwnerInputProps) {
         className="input-basic"
         value={cardOwner?.value ?? ''}
         placeholder={cardOwner?.placeholder}
-        ref={(el) => {
-          if (cardOwner) cardOwner.ref = el;
-          setElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, el);
-        }}
+        ref={cardOwner?.setRef?.bind(cardOwner)}
         onChangeProps={inputChangeEventProps}
       />
     </CardInputWrapperPure>

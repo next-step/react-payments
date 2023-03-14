@@ -1,10 +1,11 @@
 import React from 'react';
-import { useSelectCardNickname } from '@/stores/CardCreatorContext';
 
-interface CardNicknameProps {}
+import type { CardNicknameState } from '@/stores/CardCreatorContext/CardCreatorStates';
 
-export function CardNickname(_: CardNicknameProps) {
-  const nickname = useSelectCardNickname();
+interface CardNicknameProps {
+  nickname?: CardNicknameState;
+}
 
+export function CardNickname({ nickname }: CardNicknameProps) {
   return <span className="card-nickname">{nickname?.value}</span>;
 }

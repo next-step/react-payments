@@ -1,15 +1,12 @@
-import React, { ChangeEvent, memo, useContext, useEffect } from 'react';
+import React, { ChangeEvent, memo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
-import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
 import type { CardNumbersState } from '@/stores/CardCreatorContext/CardCreatorStates';
-import { ApiContext } from '@/stores/CardCreatorContext';
+import { useCardContextApiSelector } from '@/stores/CardCreatorContext';
 import { filterNumber } from '@/utils';
 
 import { InputDivider } from '../../components/InputDivider';
 import { CardInfoInputElement } from '../../components/CardInfoInputElement';
-
-const CARD_NUMBER_INPUT_REF_KEY = 'cardNumber';
 
 interface CardNumberProps {
   cardNumber: CardNumbersState[number];
@@ -17,25 +14,18 @@ interface CardNumberProps {
   needDividerRender: boolean;
 }
 
-// CardNumber 4개중의 하나의 input을 담당한다.
 export const CardNumberInput = memo(({ cardNumber, index, needDividerRender }: CardNumberProps) => {
-  const { type, value, checkIsAllowInput } = cardNumber;
+  const { type, value, checkIsAllowInput, setRef } = cardNumber;
 
-  const apiContext = useContext(ApiContext);
+  const cardStoreApiContext = useCardContextApiSelector();
 
   const isOverFourNumber = cardNumber.checkIsValid();
-
-  const { setElement, toTheNextElement } = useSequentialFocusWithElements();
-
-  useEffect(() => {
-    toTheNextElement(CARD_NUMBER_INPUT_REF_KEY, index, isOverFourNumber);
-  }, [toTheNextElement, index, isOverFourNumber]);
 
   // prop 변화에 따라 새롭게 만들어져야하는 객체 = memo를 둠으로서 오히려 메모리와 성능에 손해를 줄 수 있음.
   const changeProps = {
     props: {
       setState: (newVal: string) => {
-        apiContext?.dispatch({ type: 'cardNumbers', payload: { index, value: newVal } });
+        cardStoreApiContext?.dispatch({ type: 'cardNumbers', payload: { index, value: newVal } });
       },
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,10 +43,7 @@ export const CardNumberInput = memo(({ cardNumber, index, needDividerRender }: C
         type={type ?? 'text'}
         value={value ?? ''}
         className="input-basic text-black"
-        ref={(el) => {
-          if (cardNumber) cardNumber.ref = el;
-          setElement(CARD_NUMBER_INPUT_REF_KEY, index, el);
-        }}
+        ref={setRef?.bind(cardNumber)}
         onChangeProps={changeProps}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
