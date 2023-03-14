@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
 import { useCardInfoSelector } from '@/stores/CardCreatorContext';
+import type { InputStateType } from '@/types';
 
 export function useValidateCardInfos() {
   const cardInfo = useCardInfoSelector();
@@ -9,27 +10,29 @@ export function useValidateCardInfos() {
 
   const inputs = useMemo(
     () => [
-      createInputObject('cardCompany', cardCompany),
+      createInputObject('cardCompany', [cardCompany]),
       createInputObject('cardNumbers', cardNumbers),
       createInputObject('expireDates', expireDates),
       createInputObject('cardOwners', cardOwners),
-      createInputObject('passwords', passwords),
       createInputObject('securityCodes', securityCodes),
+      createInputObject('passwords', passwords),
     ],
     [cardCompany, cardNumbers, expireDates, cardOwners, passwords, securityCodes]
   );
 
-  return useMemo(
-    () =>
-      inputs.find(({ store }) => {
-        if (Array.isArray(store)) {
-          return store.some((inputInstance) => !inputInstance.checkIsValid());
-        }
-        // @ts-ignore
-        return !store?.checkIsValid();
-      }),
-    [inputs]
-  );
+  return useMemo(() => {
+    const targetStore = inputs.find(({ store }) => {
+      // @ts-ignore
+      return store?.some((inputInstance) => !inputInstance?.checkIsValid());
+    });
+
+    if (!targetStore) return null;
+
+    // @ts-ignore
+    const invalidElement = targetStore.store?.find((store) => !store.checkIsValid()) as Pick<InputStateType, 'ref'>;
+
+    return createInputObject(targetStore?.type, invalidElement);
+  }, [inputs]);
 }
 
 function createInputObject<T>(type: string, store: T): { type: string; store: T } {

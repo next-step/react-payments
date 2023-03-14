@@ -7,7 +7,6 @@ import { useValidateCardInfos } from '@/hooks/useValidateCardInfos';
 
 interface SubmitButtonProps {}
 
-// TODO: key값들 const로 정돈하기
 export function SubmitButton(_: SubmitButtonProps) {
   const errorApis = useErrorContextApiSelector();
 
@@ -20,7 +19,7 @@ export function SubmitButton(_: SubmitButtonProps) {
 
       const errorType = error.type;
       errorApis?.dispatch({ type: errorType, message: null });
-      alert('카드 정보들을 모두 올바르게 입력해주세요!');
+      error.store.ref?.focus();
     }
   };
 
