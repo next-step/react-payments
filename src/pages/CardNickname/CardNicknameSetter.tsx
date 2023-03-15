@@ -1,43 +1,18 @@
-import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React from 'react';
 
 import { Card } from '@/components/Card';
-import { useValidateCardInfos } from '@/hooks/useValidateCardInfos';
-import { routes } from '@/routes';
 import { useCardInfoSelector } from '@/stores/CardCreatorContext';
 
+import { useValidateCreatePage } from './hooks/useValidateCreatePage';
+import { useValidateUpdatePage } from './hooks/useValidateUpdatePage';
 import { NicknameInput } from './NicknameInput';
 import { CardNicknameSubmitButton } from './CardNicknameSubmitButton';
-import { useCardListWithLocalStorage } from './hooks/useCardListWithLocalStorage';
 
 export function CardNicknameSetter() {
-  const { cardId } = useParams();
-  const navigate = useNavigate();
-
   const cardInfo = useCardInfoSelector();
 
-  const { getCardFromStorage } = useCardListWithLocalStorage();
-
-  // TODO: validate 하는 부분 hook으로 빼서 가독성 올려주기
-  const invalidInfo = useValidateCardInfos();
-
-  useEffect(
-    function checkIfCorrectPageAccess() {
-      if (cardId) {
-        getCardFromStorage(cardId, () => {
-          alert('해당 카드가 존재하지 않습니다.');
-          navigate(routes.home);
-        });
-        return;
-      }
-
-      if (invalidInfo) {
-        alert('카드 정보를 모두 등록해주세요.');
-        navigate(routes.cardCreator);
-      }
-    },
-    [cardId, getCardFromStorage, invalidInfo, navigate]
-  );
+  useValidateCreatePage();
+  useValidateUpdatePage();
 
   return (
     <div className="app flex-column-center">
