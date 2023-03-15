@@ -39,6 +39,7 @@ export function CardList() {
       </Link>
       {sortCardListToDescendingOrderOfKey.map(([key, val]) => (
         <Card
+          key={key}
           cardCompany={val?.cardCompany?.value}
           cardExpireDate={val?.expireDates?.map((ss: { value: string }) => ss.value)}
           cardNumbers={val?.cardNumbers}
