@@ -12,14 +12,10 @@ export function CardList() {
   const navigate = useNavigate();
   const { cardList, deleteCard } = useCardListWithLocalStorage();
 
-  const sortCardListToDescendingOrderOfKey = useMemo(() => {
-    // TODO: sorting 로직 이름 부여해서 빼주기
-    return Object.entries(cardList).sort(([aKey], [bKey]) => {
-      if (aKey > bKey) return -1;
-      if (aKey === bKey) return 0;
-      return 1;
-    });
-  }, [cardList]);
+  const sortCardListToDescendingOrderOfKey = useMemo(
+    () => Object.entries(cardList).sort(sortDescendingOrderByKeys),
+    [cardList]
+  );
 
   const createCardClickHandler = useCallback(
     (key: string) => () => {
@@ -58,4 +54,10 @@ export function CardList() {
       ))}
     </div>
   );
+}
+
+function sortDescendingOrderByKeys([aKey]: [string, any], [bKey]: [string, any]) {
+  if (aKey > bKey) return -1;
+  if (aKey === bKey) return 0;
+  return 1;
 }
