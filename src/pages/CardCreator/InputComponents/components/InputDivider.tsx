@@ -1,12 +1,12 @@
 import React, { PropsWithChildren } from 'react';
 
 interface InputDividerProps extends PropsWithChildren {
-  isHide: boolean;
+  hiding: boolean;
   className?: string;
 }
 
-export function InputDivider({ isHide, children, className = '' }: InputDividerProps) {
-  const dashComponentHideClassName = isHide ? 'hide' : '';
+export function InputDivider({ hiding, children, className = '' }: InputDividerProps) {
+  const dashComponentHideClassName = hiding ? 'hide' : '';
 
   return <div className={`text-black ${className} ${dashComponentHideClassName}`}>{children}</div>;
 }

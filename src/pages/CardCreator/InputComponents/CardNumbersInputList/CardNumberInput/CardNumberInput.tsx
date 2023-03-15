@@ -47,7 +47,7 @@ export const CardNumberInput = memo(({ cardNumber, index, needDividerRender }: C
         onChangeProps={changeProps}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
-        <InputDivider isHide={!isOverFourNumber} className="dash">
+        <InputDivider hiding={!isOverFourNumber} className="dash">
           -
         </InputDivider>
       </ConditionalComponentWrapper>

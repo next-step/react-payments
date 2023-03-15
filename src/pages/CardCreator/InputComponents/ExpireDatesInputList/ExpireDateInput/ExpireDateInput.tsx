@@ -60,7 +60,7 @@ export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: E
         onBlurProps={inputBlurEventProps}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
-        <InputDivider isHide={!isValueValid}>/</InputDivider>
+        <InputDivider hiding={!isValueValid}>/</InputDivider>
       </ConditionalComponentWrapper>
     </>
   );

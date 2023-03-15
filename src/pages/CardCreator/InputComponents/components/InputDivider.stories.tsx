@@ -23,13 +23,13 @@ const Template: ComponentStory<typeof InputDivider> = (args) => {
 export const NumberInputDivider = Template.bind({});
 
 NumberInputDivider.args = {
-  isHide: false,
+  hiding: false,
   children: '-',
 };
 
 export const ExpireDateDivider = Template.bind({});
 
 ExpireDateDivider.args = {
-  isHide: false,
+  hiding: false,
   children: '/',
 };
