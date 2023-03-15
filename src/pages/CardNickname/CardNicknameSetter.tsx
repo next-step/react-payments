@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { Card } from '@/components/Card';
 import { useCardInfoSelector } from '@/stores/CardCreatorContext';
@@ -14,6 +14,8 @@ export function CardNicknameSetter() {
   useValidateCreatePage();
   useValidateUpdatePage();
 
+  const cardExpireDate = useMemo(() => cardInfo?.expireDates?.map((expireDate) => expireDate.value), [cardInfo]);
+
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
@@ -23,13 +25,12 @@ export function CardNicknameSetter() {
       <Card
         disableNickname
         cardCompany={cardInfo?.cardCompany?.value}
-        cardExpireDate={cardInfo?.expireDates?.map((ss) => ss.value)}
+        cardExpireDate={cardExpireDate}
         cardNumbers={cardInfo?.cardNumbers}
         cardOwnerName={cardInfo?.cardOwners?.[0]?.value}
-        cardNickname={cardInfo?.cardNickname?.value}
       />
 
-      <NicknameInput />
+      <NicknameInput cardNickname={cardInfo?.cardNickname?.value} />
 
       <CardNicknameSubmitButton />
     </div>

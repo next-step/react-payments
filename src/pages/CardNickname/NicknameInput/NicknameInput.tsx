@@ -1,11 +1,12 @@
 import React, { ChangeEvent, useCallback } from 'react';
 
-import { useCardContextApiSelector, useCardInfoSelector } from '@/stores/CardCreatorContext';
+import { useCardContextApiSelector } from '@/stores/CardCreatorContext';
 
-export function NicknameInput() {
-  const cardInfo = useCardInfoSelector();
-  const nickname = cardInfo?.cardNickname;
+interface NicknameInputProps {
+  cardNickname?: string;
+}
 
+export function NicknameInput({ cardNickname = '' }: NicknameInputProps) {
   const apis = useCardContextApiSelector();
 
   const handleCardNicknameChange = useCallback(
@@ -15,17 +16,13 @@ export function NicknameInput() {
     [apis]
   );
 
-  // remain uncontrolled
   return (
     <div className="input-container flex-center w-100">
       <input
         className="input-underline w-75"
         type="text"
         maxLength={10}
-        value={nickname?.value}
-        ref={(ref) => {
-          if (nickname) nickname.ref = ref;
-        }}
+        value={cardNickname}
         placeholder="카드 별칭 (선택)"
         onChange={handleCardNicknameChange}
       />

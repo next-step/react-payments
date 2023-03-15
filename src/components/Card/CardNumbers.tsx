@@ -20,7 +20,7 @@ export function CardNumbers({ cardNumbers }: CardNumbersProps) {
         <CardNumber
           key={`card-number-${i}-${cardNumber.value}`}
           isHide={cardNumber.type === 'password'}
-          value={cardNumber.value}
+          value={cardNumber.value || ''}
         />
       ))}
     </div>
