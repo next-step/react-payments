@@ -1,11 +1,11 @@
 import React from 'react';
 
-import type { CardNicknameState } from '@/stores/CardCreatorContext/CardCreatorStates';
+import { TCardNicknameProp } from './types';
 
 interface CardNicknameProps {
-  nickname?: CardNicknameState;
+  nickname?: TCardNicknameProp;
 }
 
 export function CardNickname({ nickname }: CardNicknameProps) {
-  return <span className="card-nickname">{nickname?.value}</span>;
+  return <span className="card-nickname">{nickname}</span>;
 }

@@ -1,17 +1,16 @@
 import React from 'react';
 
-import type { CardNumbersState } from '@/stores/CardCreatorContext/CardCreatorStates';
-import type { CardNumber as CardNumberType } from '@/types';
+import { TCardNumberProp } from './types';
 
 type CardNumberModel = {
   isHide: boolean;
-  value?: CardNumberType;
+  value?: string;
 };
 
 export type CardNumbersModel = CardNumberModel[];
 
 interface CardNumbersProps {
-  cardNumbers?: CardNumbersState;
+  cardNumbers?: TCardNumberProp[];
 }
 
 export function CardNumbers({ cardNumbers }: CardNumbersProps) {

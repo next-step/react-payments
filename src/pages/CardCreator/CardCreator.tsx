@@ -6,14 +6,14 @@ import { Card } from '@/components/Card';
 import { ThemeSetter } from '@/components/ThemeSetter';
 import { useCardContextApiSelector, useCardInfoSelector } from '@/stores/CardCreatorContext';
 
+import { CardCompanyModel, useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';
+import { useSequentialAutoFocus } from './hooks/useSequentialAutoFocus';
 import { CardNumbersInputListPure } from './InputComponents/CardNumbersInputList';
 import { ExpireDatesInputListPure } from './InputComponents/ExpireDatesInputList';
 import { CardOwnerInputPure } from './InputComponents/CardOwnerInput';
 import { SecurityCodesInputListPure } from './InputComponents/SecurityCodesInputList';
 import { PasswordsInputListPure } from './InputComponents/PasswordsInputList';
-import { CardCompanyModel, useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';
 import { SubmitButton } from './SubmitButton';
-import { useSequentialAutoFocus } from './hooks/useSequentialAutoFocus';
 
 export function CardCreator() {
   const cardInfo = useCardInfoSelector();
@@ -45,7 +45,13 @@ export function CardCreator() {
         <Link to={routes.home} className="mr-10">{`<`}</Link> 카드 추가
       </h2>
 
-      <Card onCardClick={handleCardClick} />
+      <Card
+        cardCompany={cardInfo?.cardCompany?.value}
+        cardExpireDate={cardInfo?.expireDates?.map((ss) => ss.value)}
+        cardNumbers={cardInfo?.cardNumbers}
+        cardOwnerName={cardInfo?.cardOwners?.[0]?.value}
+        onCardClick={handleCardClick}
+      />
 
       <CardNumbersInputListPure cardNumbers={cardInfo?.cardNumbers} />
       <ExpireDatesInputListPure expireDates={cardInfo?.expireDates} />

@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { Card } from '@/components/Card';
 import { routes } from '@/routes';
-import { CardInfoProvider } from '@/stores/CardCreatorContext';
 import { CloseIcon } from '@/components/CloseIcon';
 
 import { useCardListWithLocalStorage } from '../CardNickname/hooks/useCardListWithLocalStorage';
@@ -14,6 +13,7 @@ export function CardList() {
   const { cardList, deleteCard } = useCardListWithLocalStorage();
 
   const sortCardListToDescendingOrderOfKey = useMemo(() => {
+    // TODO: sorting 로직 이름 부여해서 빼주기
     return Object.entries(cardList).sort(([aKey], [bKey]) => {
       if (aKey > bKey) return -1;
       if (aKey === bKey) return 0;
@@ -42,16 +42,19 @@ export function CardList() {
         <div className="empty-card">+</div>
       </Link>
       {sortCardListToDescendingOrderOfKey.map(([key, val]) => (
-        <CardInfoProvider key={key} value={val}>
-          <Card
-            onCardClick={createCardClickHandler(key)}
-            additionalIcon={
-              <DeleteButtonWrapper onClick={createCardDeleteButtonClickHandler(key)}>
-                <CloseIcon />
-              </DeleteButtonWrapper>
-            }
-          />
-        </CardInfoProvider>
+        <Card
+          cardCompany={val?.cardCompany?.value}
+          cardExpireDate={val?.expireDates?.map((ss: { value: string }) => ss.value)}
+          cardNumbers={val?.cardNumbers}
+          cardOwnerName={val?.cardOwners?.[0]?.value}
+          cardNickname={val?.cardNickname?.value}
+          onCardClick={createCardClickHandler(key)}
+          additionalIcon={
+            <DeleteButtonWrapper onClick={createCardDeleteButtonClickHandler(key)}>
+              <CloseIcon />
+            </DeleteButtonWrapper>
+          }
+        />
       ))}
     </div>
   );
