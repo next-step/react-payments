@@ -47,7 +47,7 @@ export function CardCreator() {
 
       <Card
         cardCompany={cardInfo?.cardCompany?.value}
-        cardExpireDate={cardInfo?.expireDates?.map((ss) => ss.value)}
+        cardExpireDate={cardInfo?.expireDates?.map((expireDate) => expireDate.value)}
         cardNumbers={cardInfo?.cardNumbers}
         cardOwnerName={cardInfo?.cardOwners?.[0]?.value}
         onCardClick={handleCardClick}

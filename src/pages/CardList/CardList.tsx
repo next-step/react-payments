@@ -41,7 +41,7 @@ export function CardList() {
         <Card
           key={key}
           cardCompany={val?.cardCompany?.value}
-          cardExpireDate={val?.expireDates?.map((ss: { value: string }) => ss.value)}
+          cardExpireDate={val?.expireDates?.map((expireDate: { value: string }) => expireDate.value)}
           cardNumbers={val?.cardNumbers}
           cardOwnerName={val?.cardOwners?.[0]?.value}
           cardNickname={val?.cardNickname?.value}
