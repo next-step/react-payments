@@ -7,13 +7,13 @@ interface NicknameInputProps {
 }
 
 export function NicknameInput({ cardNickname = '' }: NicknameInputProps) {
-  const apis = useCardContextApiSelector();
+  const cardContextApis = useCardContextApiSelector();
 
   const handleCardNicknameChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      apis?.dispatch({ type: 'cardNickname', payload: { value: e.currentTarget.value } });
+      cardContextApis?.dispatch({ type: 'cardNickname', payload: { value: e.currentTarget.value } });
     },
-    [apis]
+    [cardContextApis]
   );
 
   return (

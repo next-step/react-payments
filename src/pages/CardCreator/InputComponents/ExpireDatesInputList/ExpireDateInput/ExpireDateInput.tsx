@@ -15,13 +15,13 @@ interface ExpireDateInputProps {
 export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: ExpireDateInputProps) => {
   const { value, placeholder, checkIsAllowInput, setRef } = expireDate;
 
-  const apiContext = useCardContextApiSelector();
+  const cardContextApis = useCardContextApiSelector();
 
   const isValueValid = expireDate.checkIsValid();
 
   const changeEventProps = {
     props: {
-      setState: (value: string) => apiContext?.dispatch({ type: 'expireDates', payload: { index, value } }),
+      setState: (value: string) => cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value } }),
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
       const filteredNumber = filterNumber(e.currentTarget.value);
@@ -34,7 +34,7 @@ export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: E
 
   const blurEventProps = {
     props: {
-      setState: (value: string) => apiContext?.dispatch({ type: 'expireDates', payload: { index, value } }),
+      setState: (value: string) => cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value } }),
     },
     checkWhetherSetState: (e: FocusEvent<HTMLInputElement>) => {
       const blurValue = e.currentTarget.value;

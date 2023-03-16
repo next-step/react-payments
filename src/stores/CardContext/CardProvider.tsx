@@ -9,12 +9,12 @@ interface CardProviderProps {
 export function CardProvider({ value, children }: PropsWithChildren<CardProviderProps>) {
   const [store, dispatch] = useReducer(reducer, value || initialCardStore);
 
-  const apis = useMemo(() => ({ dispatch }), [dispatch]);
+  const cardContextApis = useMemo(() => ({ dispatch }), [dispatch]);
 
   return (
     // eslint-disable-next-line
     <CardContext.Provider value={{ ...store }}>
-      <ApiContext.Provider value={apis}>{children}</ApiContext.Provider>
+      <ApiContext.Provider value={cardContextApis}>{children}</ApiContext.Provider>
     </CardContext.Provider>
   );
 }

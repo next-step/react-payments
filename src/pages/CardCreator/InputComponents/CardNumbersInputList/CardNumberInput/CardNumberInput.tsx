@@ -15,7 +15,7 @@ interface CardNumberProps {
 export const CardNumberInput = memo(({ cardNumber, index, needDividerRender }: CardNumberProps) => {
   const { type, value, checkIsAllowInput, setRef } = cardNumber;
 
-  const cardStoreApiContext = useCardContextApiSelector();
+  const cardContextApis = useCardContextApiSelector();
 
   const isOverFourNumber = cardNumber.checkIsValid();
 
@@ -23,7 +23,7 @@ export const CardNumberInput = memo(({ cardNumber, index, needDividerRender }: C
   const changeEventProps = {
     props: {
       setState: (newVal: string) => {
-        cardStoreApiContext?.dispatch({ type: 'cardNumbers', payload: { index, value: newVal } });
+        cardContextApis?.dispatch({ type: 'cardNumbers', payload: { index, value: newVal } });
       },
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {

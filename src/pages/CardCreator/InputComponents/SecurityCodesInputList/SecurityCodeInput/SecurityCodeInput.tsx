@@ -13,10 +13,12 @@ interface SecurityCodeInputProps {
 export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProps) {
   const { key, value, checkIsAllowInput, setRef } = securityCode;
 
-  const apis = useCardContextApiSelector();
+  const cardContextApis = useCardContextApiSelector();
 
   const changeEventProps = {
-    props: { setState: (value: string) => apis?.dispatch({ type: 'securityCodes', payload: { index, value } }) },
+    props: {
+      setState: (value: string) => cardContextApis?.dispatch({ type: 'securityCodes', payload: { index, value } }),
+    },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
       const filteredNumber = filterNumber(e.currentTarget.value);
       return checkIsAllowInput(filteredNumber);

@@ -12,7 +12,7 @@ interface CardOwnerInputProps {
 function CardOwnerInput({ cardOwners }: CardOwnerInputProps) {
   const cardOwner = useMemo(() => cardOwners?.[0], [cardOwners]);
 
-  const apiContext = useCardContextApiSelector();
+  const cardContextApis = useCardContextApiSelector();
 
   const errorMessage = useErrorContext(
     {
@@ -23,7 +23,7 @@ function CardOwnerInput({ cardOwners }: CardOwnerInputProps) {
 
   const changeEventProps = {
     props: {
-      setState: (value: string) => apiContext?.dispatch({ type: 'cardOwners', payload: { index: 0, value } }),
+      setState: (value: string) => cardContextApis?.dispatch({ type: 'cardOwners', payload: { index: 0, value } }),
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
       return !!cardOwner?.checkIsAllowInput?.(e.currentTarget.value);

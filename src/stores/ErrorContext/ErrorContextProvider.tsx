@@ -5,10 +5,10 @@ import { initialErrorStore, reducer, ErrorApiContext, ErrorStoreContext } from '
 export function ErrorContextProvider({ children }: PropsWithChildren<any>) {
   const [errorStore, dispatch] = useReducer(reducer, initialErrorStore);
 
-  const apis = useMemo(() => ({ dispatch }), [dispatch]);
+  const errorContextApis = useMemo(() => ({ dispatch }), [dispatch]);
 
   return (
-    <ErrorApiContext.Provider value={apis}>
+    <ErrorApiContext.Provider value={errorContextApis}>
       <ErrorStoreContext.Provider value={errorStore}>{children}</ErrorStoreContext.Provider>
     </ErrorApiContext.Provider>
   );
