@@ -22,7 +22,7 @@ export const CardNumberInput = memo(({ cardNumber, index, needDividerRender }: C
   const isOverFourNumber = cardNumber.checkIsValid();
 
   // prop 변화에 따라 새롭게 만들어져야하는 객체 = memo를 둠으로서 오히려 메모리와 성능에 손해를 줄 수 있음.
-  const changeProps = {
+  const changeEventProps = {
     props: {
       setState: (newVal: string) => {
         cardStoreApiContext?.dispatch({ type: 'cardNumbers', payload: { index, value: newVal } });
@@ -44,7 +44,7 @@ export const CardNumberInput = memo(({ cardNumber, index, needDividerRender }: C
         value={value ?? ''}
         className="input-basic text-black"
         ref={setRef?.bind(cardNumber)}
-        onChangeProps={changeProps}
+        changeEventProps={changeEventProps}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
         <InputDivider hiding={!isOverFourNumber} className="dash">

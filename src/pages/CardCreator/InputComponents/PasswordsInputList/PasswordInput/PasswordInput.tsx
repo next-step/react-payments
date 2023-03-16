@@ -16,7 +16,7 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
 
   const apiContext = useContext(ApiContext);
 
-  const inputChangeEventProps = {
+  const changeEventProps = {
     props: { setState: (value: string) => apiContext?.dispatch({ type: 'passwords', payload: { index, value } }) },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
       const filteredNumber = filterNumber(e.currentTarget.value);
@@ -34,7 +34,7 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
       className="input-basic w-15 mr-10"
       value={value ?? ''}
       ref={setRef?.bind(password)}
-      onChangeProps={inputChangeEventProps}
+      changeEventProps={changeEventProps}
     />
   );
 }

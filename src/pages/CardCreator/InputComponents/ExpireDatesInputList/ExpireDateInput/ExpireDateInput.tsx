@@ -21,7 +21,7 @@ export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: E
 
   const isValueValid = expireDate.checkIsValid();
 
-  const inputChangeEventProps = {
+  const changeEventProps = {
     props: {
       setState: (value: string) => apiContext?.dispatch({ type: 'expireDates', payload: { index, value } }),
     },
@@ -34,7 +34,7 @@ export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: E
     },
   };
 
-  const inputBlurEventProps = {
+  const blurEventProps = {
     props: {
       setState: (value: string) => apiContext?.dispatch({ type: 'expireDates', payload: { index, value } }),
     },
@@ -56,8 +56,8 @@ export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: E
         value={value ?? ''}
         placeholder={placeholder}
         ref={setRef?.bind(expireDate)}
-        onChangeProps={inputChangeEventProps}
-        onBlurProps={inputBlurEventProps}
+        changeEventProps={changeEventProps}
+        blurEventProps={blurEventProps}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
         <InputDivider hiding={!isValueValid}>/</InputDivider>

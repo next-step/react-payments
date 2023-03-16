@@ -4,13 +4,13 @@ interface UseInputOnChangeProps {
   setState: (newState: any) => void;
 }
 
-export interface OnChangeHandlerProps {
+export interface ChangeEventHandlerProps {
   props: UseInputOnChangeProps;
   checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => boolean;
   getNewValue: (e: ChangeEvent<HTMLInputElement>) => string;
 }
 
-export interface OnBlurHandlerProps {
+export interface BlurEventHandlerProps {
   props: UseInputOnChangeProps;
   checkWhetherSetState: (e: FocusEvent<HTMLInputElement, Element>) => boolean;
   getNewValue: (e: FocusEvent<HTMLInputElement, Element>) => string;
@@ -19,7 +19,7 @@ export interface OnBlurHandlerProps {
 export function useInputEventHandler() {
   return {
     createInputChangeHandler:
-      ({ props, checkWhetherSetState, getNewValue }: OnChangeHandlerProps) =>
+      ({ props, checkWhetherSetState, getNewValue }: ChangeEventHandlerProps) =>
       (e: ChangeEvent<HTMLInputElement>) => {
         const { setState } = props;
         if (checkWhetherSetState(e)) {
@@ -28,7 +28,7 @@ export function useInputEventHandler() {
         }
       },
     createInputBlurHandler:
-      ({ props, checkWhetherSetState, getNewValue }: OnBlurHandlerProps) =>
+      ({ props, checkWhetherSetState, getNewValue }: BlurEventHandlerProps) =>
       (e: FocusEvent<HTMLInputElement, Element>) => {
         const { setState } = props;
         if (checkWhetherSetState(e)) {

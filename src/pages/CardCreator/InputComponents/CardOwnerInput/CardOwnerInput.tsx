@@ -23,7 +23,7 @@ function CardOwnerInput({ cardOwners }: CardOwnerInputProps) {
     [{ errorType: 'cardOwners', messageType: 'inValid' }]
   );
 
-  const inputChangeEventProps = {
+  const changeEventProps = {
     props: {
       setState: (value: string) => apiContext?.dispatch({ type: 'cardOwners', payload: { index: 0, value } }),
     },
@@ -48,7 +48,7 @@ function CardOwnerInput({ cardOwners }: CardOwnerInputProps) {
         value={cardOwner?.value ?? ''}
         placeholder={cardOwner?.placeholder}
         ref={cardOwner?.setRef?.bind(cardOwner)}
-        onChangeProps={inputChangeEventProps}
+        changeEventProps={changeEventProps}
       />
     </CardInputWrapperPure>
   );

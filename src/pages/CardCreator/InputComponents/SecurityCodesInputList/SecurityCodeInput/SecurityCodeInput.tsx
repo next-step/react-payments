@@ -16,7 +16,7 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
 
   const apis = useCardContextApiSelector();
 
-  const inputChangeEventProps = {
+  const changeEventProps = {
     props: { setState: (value: string) => apis?.dispatch({ type: 'securityCodes', payload: { index, value } }) },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
       const filteredNumber = filterNumber(e.currentTarget.value);
@@ -34,7 +34,7 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
       type="password"
       value={value ?? ''}
       ref={setRef?.bind(securityCode)}
-      onChangeProps={inputChangeEventProps}
+      changeEventProps={changeEventProps}
     />
   );
 }
