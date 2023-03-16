@@ -1,6 +1,6 @@
 import { styled } from '@/stitches.config';
 
-export const CardWrapper = styled('div', {
+export const StyledCard = styled('div', {
   position: 'relative',
   flexCenter: 'column',
   width: '208px',
@@ -20,7 +20,7 @@ export const CardWrapper = styled('div', {
   },
 });
 
-export const ErrorMessage = styled('span', {
+export const StyledErrorMessage = styled('span', {
   color: 'red',
   fontWeight: 'bold',
 });

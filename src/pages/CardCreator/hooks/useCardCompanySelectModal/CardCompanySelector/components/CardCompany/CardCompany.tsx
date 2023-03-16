@@ -2,7 +2,7 @@ import React from 'react';
 import themes from '@/theme/theme';
 
 import type { TCardCompany } from '../../type';
-import { CardCompanyWrapper, CardCompanyName, CardCompanyColor } from './CardCompany.styled';
+import { StyledCardCompany, StyledCardCompanyColor, StyledCardCompanyName } from './CardCompany.styled';
 
 interface CardCompanyProps {
   cardCompany: TCardCompany;
@@ -11,13 +11,13 @@ interface CardCompanyProps {
 
 export function CardCompany({ cardCompany, onClick }: CardCompanyProps) {
   return (
-    <CardCompanyWrapper
+    <StyledCardCompany
       onClick={() => {
         if (onClick) onClick(cardCompany);
       }}
     >
-      <CardCompanyColor className={themes[cardCompany.theme]} />
-      <CardCompanyName>{cardCompany.name}</CardCompanyName>
-    </CardCompanyWrapper>
+      <StyledCardCompanyColor className={themes[cardCompany.theme]} />
+      <StyledCardCompanyName>{cardCompany.name}</StyledCardCompanyName>
+    </StyledCardCompany>
   );
 }

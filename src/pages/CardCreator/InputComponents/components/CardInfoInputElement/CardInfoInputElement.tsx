@@ -9,7 +9,7 @@ import React, {
 
 import { useInputEventHandler } from './useInputEventHandler';
 import type { OnBlurHandlerProps, OnChangeHandlerProps } from './useInputEventHandler';
-import { Input } from './CardInfoInputElement.styled';
+import { StyledInput } from './CardInfoInputElement.styled';
 
 type InputAttributeType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 type OmittedInputAttributeType = Omit<InputAttributeType, 'onChange' | 'onBlur' | 'ref'>;
@@ -29,7 +29,7 @@ function CardInfoInputElementComponent(props: CardInfoInputElementProps, ref: Fo
   useImperativeHandle(ref, () => inputRef.current);
 
   return (
-    <Input
+    <StyledInput
       {...rest}
       type={type ?? 'text'}
       value={value ?? ''}

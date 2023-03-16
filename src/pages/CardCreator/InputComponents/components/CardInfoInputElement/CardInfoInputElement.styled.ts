@@ -1,5 +1,5 @@
 import { styled } from '@/stitches.config';
 
-export const Input = styled('input', {
+export const StyledInput = styled('input', {
   color: '$inputColor',
 });

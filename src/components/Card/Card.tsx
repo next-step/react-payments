@@ -14,7 +14,7 @@ import { CardNumbers } from './CardNumbers';
 import { CardOwnerName } from './CardOwnerName';
 import { CardExpireDate } from './CardExpireDate';
 import { CardNickname } from './CardNickname';
-import { CardWrapper, ErrorMessage } from './Card.styled';
+import { StyledCard, StyledErrorMessage } from './Card.styled';
 
 interface CardProps {
   disableNickname?: boolean;
@@ -46,7 +46,7 @@ export const Card = memo(function Card({
 
   return (
     <ThemeSetter className="card-box flex-column-center" theme={cardCompany?.theme} onClick={onCardClick}>
-      <CardWrapper pointCursor={!!onCardClick}>
+      <StyledCard pointCursor={!!onCardClick}>
         <div className="card-top">{cardCompany?.name}</div>
         <div className="card-middle">
           <div className="small-card__chip" />
@@ -59,9 +59,9 @@ export const Card = memo(function Card({
           </div>
         </div>
         {additionalIcon}
-      </CardWrapper>
+      </StyledCard>
       {disableNickname || <CardNickname nickname={cardNickname} />}
-      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {errorMessage && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}
     </ThemeSetter>
   );
 });

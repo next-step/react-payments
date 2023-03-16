@@ -7,7 +7,7 @@ import { CloseIcon } from '@/components/CloseIcon';
 
 import { useCardListWithLocalStorage } from '../CardNickname/hooks/useCardListWithLocalStorage';
 import { useFlushCardContextStore } from './hooks/useFlushCardContext';
-import { DeleteButtonWrapper } from './CardList.styled';
+import { StyledDeleteButton } from './CardList.styled';
 
 export function CardList() {
   const navigate = useNavigate();
@@ -51,9 +51,9 @@ export function CardList() {
           cardNickname={val?.cardNickname?.value}
           onCardClick={createCardClickHandler(key)}
           additionalIcon={
-            <DeleteButtonWrapper onClick={createCardDeleteButtonClickHandler(key)}>
+            <StyledDeleteButton onClick={createCardDeleteButtonClickHandler(key)}>
               <CloseIcon />
-            </DeleteButtonWrapper>
+            </StyledDeleteButton>
           }
         />
       ))}
