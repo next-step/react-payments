@@ -1,7 +1,6 @@
-import Input from 'components/common/Input/Input';
-import Text from 'components/common/Text/Text';
-import styled from 'styled-components';
 import { CardExpirationDateInputProps } from './CardExpirationDateInput.types';
+import * as Styled from './CardExpirationDateInput.styles';
+
 const CardExpirationDateInput = ({
   onChange,
   fontColor,
@@ -12,10 +11,10 @@ const CardExpirationDateInput = ({
   const isValid = isValidMonth && isValidYear;
 
   return (
-    <Layout>
-      <Title fontSize="xs" weight="bold" label="만료일" />
-      <Container>
-        <Input
+    <Styled.Layout>
+      <Styled.Title fontSize="xs" weight="bold" label="만료일" />
+      <Styled.Container>
+        <Styled.CardExiprationDateInput
           type="text"
           placeholder="MM"
           theme="primary"
@@ -25,7 +24,7 @@ const CardExpirationDateInput = ({
           active={true}
           error={!isValidMonth}
         />
-        <Input
+        <Styled.CardExiprationDateInput
           type="text"
           placeholder="YY"
           theme="primary"
@@ -35,26 +34,17 @@ const CardExpirationDateInput = ({
           active={true}
           error={!isValidYear}
         />
-      </Container>
+      </Styled.Container>
       {!isValid && (
-        <Text fontSize="xs" weight="bold" label="2자리씩 입력하세요. MM (01~12) / YY (01~99) " fontColor="red" />
+        <Styled.CardExiprationDateText
+          fontSize="xs"
+          weight="bold"
+          label="2자리씩 입력하세요. MM (01~12) / YY (01~99) "
+          fontColor="red"
+        />
       )}
-    </Layout>
+    </Styled.Layout>
   );
 };
-const Layout = styled.div`
-  margin-top: 20px;
-`;
-const Title = styled(Text)`
-  display: flex;
-  align-items: center;
-  margin-bottom: 4px;
-  color: #525252;
-`;
 
-const Container = styled.div`
-  display: flex;
-  width: 50%;
-  gap: 5px;
-`;
 export default CardExpirationDateInput;

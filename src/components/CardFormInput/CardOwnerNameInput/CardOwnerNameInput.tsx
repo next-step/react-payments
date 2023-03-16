@@ -1,24 +1,14 @@
-import Text from 'components/common/Text/Text';
-import styled from 'styled-components';
-import Input from '../../common/Input/Input';
-
-import { ColorType, CardFormInputsType } from 'types';
-
-type CardOwnerNameInputProps = {
-  fontColor: ColorType;
-  onChange?: () => void;
-  refs: CardFormInputsType;
-  length: number;
-};
+import type { CardOwnerNameInputProps } from './CardOwnerNameInput.types';
+import * as Styled from './CardOwnerNameInput.styles';
 
 const CardOwnerNameInput = ({ onChange, fontColor, refs, length }: CardOwnerNameInputProps) => {
   return (
-    <Layout>
-      <Container>
-        <Title fontSize="xs" weight="bold" label="카드 소유자 이름(선택)" />
-        <Text fontSize="s" weight="normal" label={`${length}/10`} />
-      </Container>
-      <Input
+    <Styled.Layout>
+      <Styled.Container>
+        <Styled.OwnerName fontSize="xs" weight="bold" label="카드 소유자 이름(선택)" />
+        <Styled.OwnerNameLength fontSize="s" weight="normal" label={`${length}/10`} />
+      </Styled.Container>
+      <Styled.CardOwnerNameInput
         type="text"
         theme="primary"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
@@ -27,20 +17,8 @@ const CardOwnerNameInput = ({ onChange, fontColor, refs, length }: CardOwnerName
         fontColor={fontColor}
         active={true}
       />
-    </Layout>
+    </Styled.Layout>
   );
 };
-
-const Layout = styled.div`
-  margin-top: 20px;
-`;
-const Title = styled(Text)`
-  margin-bottom: 4px;
-  color: #525252;
-`;
-const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
 
 export default CardOwnerNameInput;

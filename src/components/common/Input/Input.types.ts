@@ -10,9 +10,4 @@ export type InputProps = {
   active: boolean;
   error?: boolean;
 };
-export type RootProps = {
-  theme: 'underline' | 'primary';
-  active?: boolean;
-  error?: boolean;
-  fontColor?: ColorType;
-};
+export type RootProps = Partial<InputProps>;
