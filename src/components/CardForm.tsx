@@ -38,9 +38,9 @@ const CardRegisterForm = () => {
       target: eventTarget,
     });
 
-    const companyDigit =
+    const isFocusCompanyDigit =
       eventTarget.name === 'digit1' || eventTarget.name === 'digit2';
-    if (companyDigit) {
+    if (isFocusCompanyDigit) {
       setIsFocusCompany(true);
     } else {
       setIsFocusCompany(false);
@@ -48,7 +48,7 @@ const CardRegisterForm = () => {
     }
   };
 
-  const showCompanyModal = () => {
+  const showCompanySelectModal = () => {
     const digitLength =
       String(digits.digit1).length + String(digits.digit2).length;
     if (digitLength === DIGIT_COMPANY_LENGTH && isFocusCompany) {
@@ -62,7 +62,7 @@ const CardRegisterForm = () => {
   };
 
   useEffect(() => {
-    showCompanyModal();
+    showCompanySelectModal();
   }, [digits, isFocusCompany]);
 
   return (
