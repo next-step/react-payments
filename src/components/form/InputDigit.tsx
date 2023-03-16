@@ -56,20 +56,18 @@ const InputDigit = ({ onChange, value }: IProps) => {
           id="digit1"
           name="digit1"
           onChange={onChange}
-          type={'text'}
+          type="number"
           value={value.digit1}
           placeholder={'1234'}
-          maxLength={4}
         />
         <Hyphen />
         <Input
           id="digit2"
           name="digit2"
           onChange={onChange}
-          type={'text'}
+          type="number"
           value={value.digit2}
           placeholder={'5678'}
-          maxLength={4}
         />
         <Hyphen />
         <Input

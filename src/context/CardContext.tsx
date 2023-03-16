@@ -1,7 +1,11 @@
 import React, { createContext, ReactNode, useContext, useReducer } from 'react';
 import { Action, CardDispatchType, CardInfoType } from '../type/card';
 import { initCardInfo } from '../data/init';
-import { validateDigit, validateExpire, validatePassword } from '../utils/form';
+import {
+  maxLengthCheck,
+  validateExpire,
+  validatePassword,
+} from '../utils/form';
 
 const CardStateContext = createContext<CardInfoType | null>(null);
 const CardDispatchContext = createContext<CardDispatchType | null>(null);
@@ -14,7 +18,7 @@ const cardReducer = (state: CardInfoType, action: Action): CardInfoType => {
           ...state,
           digits: {
             ...state.digits,
-            [action.target.name]: action.target.value,
+            [action.target.name]: maxLengthCheck(action.target.value, 4),
           },
         };
       }
@@ -38,6 +42,7 @@ const cardReducer = (state: CardInfoType, action: Action): CardInfoType => {
         };
       }
 
+      /** DEFAULT */
       return {
         ...state,
         [action.target.name]: action.target.value,

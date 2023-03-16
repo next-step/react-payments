@@ -3,10 +3,8 @@ import { CardCompanyType } from '../components/modal/ModalSelectCompany';
 import { COMPANY_DATA } from '../constant/company';
 import { COLOR } from '../constant/color';
 
-export const validateDigit = (digit: number | string, targetName: string) => {
-  const value = String(digit).replace(/\D+/g, '');
-  nextFocus(value, targetName, 4);
-  return value;
+export const maxLengthCheck = (value: string, max: number) => {
+  return value.slice(0, max);
 };
 
 export const validateExpire = (digit: string) => {
