@@ -33,8 +33,11 @@ const PaymentCardRegister = () => {
     navigate(ROUTE.COMPLETE, { state: { isComplete: true } });
   };
   const navigateHome = () => {
-    navigate(ROUTE.HOME);
-    dispatch({ type: 'INIT' });
+    const confirmRes = confirm('카드 등록을 취소하시겠습니까?');
+    if (confirmRes) {
+      navigate(ROUTE.HOME);
+      dispatch({ type: 'INIT' });
+    }
   };
 
   return (
@@ -44,6 +47,7 @@ const PaymentCardRegister = () => {
       </S.TitleWrapper>
 
       <CardPreview {...cardState} />
+
       <CardRegisterForm />
 
       <S.ButtonWrapper>
