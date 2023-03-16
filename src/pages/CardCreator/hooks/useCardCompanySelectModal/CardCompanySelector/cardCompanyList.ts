@@ -1,6 +1,6 @@
-import { CardCompanyModel } from './type';
+import { TCardCompany } from './type';
 
-export const cardCompanyList: { [key: string]: CardCompanyModel } = {
+export const cardCompanyList: { [key: string]: TCardCompany } = {
   포코카드: {
     name: '포코카드',
     theme: 'red',

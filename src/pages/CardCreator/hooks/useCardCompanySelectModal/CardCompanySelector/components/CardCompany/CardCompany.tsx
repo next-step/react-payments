@@ -1,12 +1,12 @@
 import React from 'react';
 import themes from '@/theme/theme';
 
-import type { CardCompanyModel } from '../../type';
+import type { TCardCompany } from '../../type';
 import { CardCompanyWrapper, CardCompanyName, CardCompanyColor } from './CardCompany.styled';
 
 interface CardCompanyProps {
-  cardCompany: CardCompanyModel;
-  onClick?: (cardCompany: CardCompanyModel) => void;
+  cardCompany: TCardCompany;
+  onClick?: (cardCompany: TCardCompany) => void;
 }
 
 export function CardCompany({ cardCompany, onClick }: CardCompanyProps) {

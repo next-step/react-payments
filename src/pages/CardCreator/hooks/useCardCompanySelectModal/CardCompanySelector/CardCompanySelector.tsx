@@ -2,11 +2,11 @@ import React, { memo } from 'react';
 
 import { CardCompany } from './components/CardCompany';
 import { cardCompanyList } from './cardCompanyList';
-import type { CardCompanyModel } from './type';
+import type { TCardCompany } from './type';
 import { Wrapper, CompaniesWrapper } from './CardCompanySelector.styled';
 
 export interface CardCompanySelectorProps {
-  onCardCompanyClick?: (cardCompany: CardCompanyModel) => void;
+  onCardCompanyClick?: (cardCompany: TCardCompany) => void;
 }
 
 export const CardCompanySelector = memo(function CardCompanySelector({ onCardCompanyClick }: CardCompanySelectorProps) {

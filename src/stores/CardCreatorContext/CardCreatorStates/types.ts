@@ -1,7 +1,7 @@
 import { InputStateType, CardNumber, CardOwner, ExpireDate, Password, SecurityCode, CardNickname } from '@/types';
-import type { CardCompanyModel } from '@/pages/CardCreator/hooks/useCardCompanySelectModal';
+import type { TCardCompany } from '@/pages/CardCreator/hooks/useCardCompanySelectModal';
 
-export type CardCompanyState = Omit<InputStateType<CardCompanyModel>, 'placeholder' | 'type' | 'checkIsAllowInput'>;
+export type CardCompanyState = Omit<InputStateType<TCardCompany>, 'placeholder' | 'type' | 'checkIsAllowInput'>;
 
 export type CardNumberState = Omit<InputStateType<CardNumber>, 'placeholder'>;
 export type CardNumbersState = CardNumberState[];

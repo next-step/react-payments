@@ -6,7 +6,7 @@ import { Card } from '@/components/Card';
 import { ThemeSetter } from '@/components/ThemeSetter';
 import { useCardContextApiSelector, useCardInfoSelector } from '@/stores/CardCreatorContext';
 
-import { CardCompanyModel, useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';
+import { TCardCompany, useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';
 import { useSequentialAutoFocus } from './hooks/useSequentialAutoFocus';
 import { CardNumbersInputListPure } from './InputComponents/CardNumbersInputList';
 import { ExpireDatesInputListPure } from './InputComponents/ExpireDatesInputList';
@@ -30,7 +30,7 @@ export function CardCreator() {
   );
 
   const handleCardCompanySelectModalClick = useCallback(
-    (cardCompany: CardCompanyModel) => {
+    (cardCompany: TCardCompany) => {
       apis?.dispatch({ type: 'cardCompany', payload: { value: cardCompany } });
       hideModal();
     },

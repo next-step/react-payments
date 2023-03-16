@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { CardCompanyModel } from '@/pages/CardCreator/hooks/useCardCompanySelectModal';
+import { TCardCompany } from '@/pages/CardCreator/hooks/useCardCompanySelectModal';
 
 import { DispatchContext, ReducerReturnType } from '../types';
 import {
@@ -35,7 +35,7 @@ export const initialCardStore: CardStore = {
   securityCodes: securityCodesInit,
 };
 
-type CardNickNamePayload = { value: string | CardCompanyModel };
+type CardNickNamePayload = { value: string | TCardCompany };
 type CardInputPayload = { index: number; value: string };
 
 export function reducer(store: CardStore, action: { type: Actions; payload: CardInputPayload | CardNickNamePayload }) {

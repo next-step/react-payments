@@ -1,6 +1,6 @@
 import type { Themes } from '@/theme/theme';
 
-export type CardCompanyModel = {
+export type TCardCompany = {
   name: string;
   theme: Themes;
 };
