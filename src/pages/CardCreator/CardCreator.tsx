@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
 import { Card, ThemeSetter } from '@/components';
-import { useCardContextApiSelector, useCardInfoSelector } from '@/stores/CardContext';
+import { useCardContextApiSelector, useCardSelector } from '@/stores/CardContext';
 import type { TCardCompany } from '@/types';
 
 import { useCardCompanySelectModal, useSequentialAutoFocus } from './hooks';
@@ -17,8 +17,8 @@ import {
 } from './InputComponents';
 
 export function CardCreator() {
-  const cardInfo = useCardInfoSelector();
-  const apis = useCardContextApiSelector();
+  const cardInfo = useCardSelector();
+  const cardContextApis = useCardContextApiSelector();
 
   const { CardCompanySelectModal, showModal, hideModal } = useCardCompanySelectModal();
 
@@ -32,10 +32,10 @@ export function CardCreator() {
 
   const handleCardCompanySelectModalClick = useCallback(
     (cardCompany: TCardCompany) => {
-      apis?.dispatch({ type: 'cardCompany', payload: { value: cardCompany } });
+      cardContextApis?.dispatch({ type: 'cardCompany', payload: { value: cardCompany } });
       hideModal();
     },
-    [apis, hideModal]
+    [cardContextApis, hideModal]
   );
 
   useSequentialAutoFocus(cardInfo);

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import { ApiContext, CardContext } from './cardStore';
 
-export function useCardInfoSelector() {
+export function useCardSelector() {
   return useContext(CardContext);
 }
 

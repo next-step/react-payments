@@ -3,12 +3,12 @@ import { Link, useParams } from 'react-router-dom';
 
 import { useCardListWithLocalStorage } from '@/hooks/useCardListWithLocalStorage';
 import { routes } from '@/routes';
-import { useCardInfoSelector } from '@/stores/CardContext';
+import { useCardSelector } from '@/stores/CardContext';
 
 export function CardNicknameSubmitButton() {
   const { cardId } = useParams();
 
-  const cardInfo = useCardInfoSelector();
+  const cardInfo = useCardSelector();
 
   const { cardNickname, cardCompany, cardNumbers, expireDates, cardOwners, passwords, securityCodes } = cardInfo || {};
 

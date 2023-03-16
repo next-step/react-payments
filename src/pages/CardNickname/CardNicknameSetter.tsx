@@ -1,14 +1,14 @@
 import React, { useMemo } from 'react';
 
 import { Card } from '@/components';
-import { useCardInfoSelector } from '@/stores/CardContext';
+import { useCardSelector } from '@/stores/CardContext';
 
 import { useValidateCreatePage, useValidateUpdatePage } from './hooks';
 import { NicknameInput } from './NicknameInput';
 import { CardNicknameSubmitButton } from './CardNicknameSubmitButton';
 
 export function CardNicknameSetter() {
-  const cardInfo = useCardInfoSelector();
+  const cardInfo = useCardSelector();
 
   useValidateCreatePage();
   useValidateUpdatePage();

@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 
-import { useCardInfoSelector } from '@/stores/CardContext';
+import { useCardSelector } from '@/stores/CardContext';
 import type { InputStateType } from '@/types';
 
 export function useValidateCardInfos() {
-  const cardInfo = useCardInfoSelector();
+  const cardInfo = useCardSelector();
 
   const { cardCompany, cardNumbers, expireDates, cardOwners, passwords, securityCodes } = cardInfo || {};
 

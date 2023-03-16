@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
 import { checkIsArrayLast } from '@/utils';
-import type { useCardInfoSelector } from '@/stores/CardContext';
+import type { useCardSelector } from '@/stores/CardContext';
 
 // FIXME: 클린코드
-export function useSequentialAutoFocus(cardInfo: ReturnType<typeof useCardInfoSelector>) {
+export function useSequentialAutoFocus(cardInfo: ReturnType<typeof useCardSelector>) {
   useEffect(() => {
     if (!cardInfo) return;
 
