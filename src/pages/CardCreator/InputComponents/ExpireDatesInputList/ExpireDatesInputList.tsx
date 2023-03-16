@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 
 import { checkIsArrayLast } from '@/utils';
-import { ExpireDatesState } from '@/stores/CardCreatorContext/CardCreatorStates';
+import type { ExpireDatesState } from '@/stores/CardContext';
 
-import { useErrorContext } from '../hooks/useErrorContext';
-import { CardInputWrapperPure } from '../components/CardInputWrapper';
+import { CardInputWrapperPure } from '../components';
+import { useErrorContext } from '../hooks';
 import { ExpireDateInput } from './ExpireDateInput';
 
 interface ExpireDatesInputListProps {

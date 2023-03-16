@@ -3,16 +3,18 @@ import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
 import { Card, ThemeSetter } from '@/components';
-import { useCardContextApiSelector, useCardInfoSelector } from '@/stores/CardCreatorContext';
+import { useCardContextApiSelector, useCardInfoSelector } from '@/stores/CardContext';
+import type { TCardCompany } from '@/types';
 
-import { TCardCompany, useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';
-import { useSequentialAutoFocus } from './hooks/useSequentialAutoFocus';
-import { CardNumbersInputListPure } from './InputComponents/CardNumbersInputList';
-import { ExpireDatesInputListPure } from './InputComponents/ExpireDatesInputList';
-import { CardOwnerInputPure } from './InputComponents/CardOwnerInput';
-import { SecurityCodesInputListPure } from './InputComponents/SecurityCodesInputList';
-import { PasswordsInputListPure } from './InputComponents/PasswordsInputList';
+import { useCardCompanySelectModal, useSequentialAutoFocus } from './hooks';
 import { SubmitButton } from './SubmitButton';
+import {
+  CardNumbersInputListPure,
+  ExpireDatesInputListPure,
+  CardOwnerInputPure,
+  SecurityCodesInputListPure,
+  PasswordsInputListPure,
+} from './InputComponents';
 
 export function CardCreator() {
   const cardInfo = useCardInfoSelector();

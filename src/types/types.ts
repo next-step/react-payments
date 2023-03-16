@@ -1,5 +1,7 @@
 import type { InputHTMLAttributes } from 'react';
 
+import type { Themes } from '@/theme/theme';
+
 export interface CommonInputStateType {
   ref?: HTMLInputElement | null;
   setRef?: (this: CommonInputStateType, ref?: HTMLInputElement | null) => void;
@@ -28,3 +30,8 @@ export type SecurityCode = string;
 export type Password = string;
 
 export type CardNickname = string;
+
+export type TCardCompany = {
+  name: string;
+  theme: Themes;
+};

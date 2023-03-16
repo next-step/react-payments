@@ -4,7 +4,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { ErrorContextProvider } from '@/stores/ErrorContext';
-import { CardInfoProvider } from '@/stores/CardCreatorContext';
+import { CardProvider } from '@/stores/CardContext';
 
 import { SecurityCodesInputListPure } from './SecurityCodesInputList';
 
@@ -23,9 +23,9 @@ export default {
 const Template: ComponentStory<typeof SecurityCodesInputListPure> = () => {
   return (
     <ErrorContextProvider>
-      <CardInfoProvider>
+      <CardProvider>
         <SecurityCodesInputListPure />
-      </CardInfoProvider>
+      </CardProvider>
     </ErrorContextProvider>
   );
 };

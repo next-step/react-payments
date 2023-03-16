@@ -3,7 +3,7 @@ import '@/styles/index.css';
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { CardInfoProvider } from '@/stores/CardCreatorContext';
+import { CardProvider } from '@/stores/CardContext';
 import { ErrorContextProvider } from '@/stores/ErrorContext';
 
 import { CardNumbersInputListPure } from './CardNumbersInputList';
@@ -23,9 +23,9 @@ export default {
 const Template: ComponentStory<typeof CardNumbersInputListPure> = () => {
   return (
     <ErrorContextProvider>
-      <CardInfoProvider>
+      <CardProvider>
         <CardNumbersInputListPure />
-      </CardInfoProvider>
+      </CardProvider>
     </ErrorContextProvider>
   );
 };

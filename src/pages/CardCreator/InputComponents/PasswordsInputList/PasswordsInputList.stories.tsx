@@ -3,7 +3,7 @@ import '@/styles/index.css';
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { CardInfoProvider } from '@/stores/CardCreatorContext';
+import { CardProvider } from '@/stores/CardContext';
 import { ErrorContextProvider } from '@/stores/ErrorContext';
 
 import { PasswordsInputListPure } from './PasswordsInputList';
@@ -23,9 +23,9 @@ export default {
 const Template: ComponentStory<typeof PasswordsInputListPure> = () => {
   return (
     <ErrorContextProvider>
-      <CardInfoProvider>
+      <CardProvider>
         <PasswordsInputListPure />
-      </CardInfoProvider>
+      </CardProvider>
     </ErrorContextProvider>
   );
 };

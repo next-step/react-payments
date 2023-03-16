@@ -2,10 +2,10 @@ import React, { MouseEvent, useCallback, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Card, CloseIcon } from '@/components';
+import { useCardListWithLocalStorage } from '@/hooks';
 import { routes } from '@/routes';
 
-import { useCardListWithLocalStorage } from '../CardNickname/hooks/useCardListWithLocalStorage';
-import { useFlushCardContextStore } from './hooks/useFlushCardContext';
+import { useFlushCardContextStore } from './hooks';
 import { StyledDeleteButton } from './CardList.styled';
 
 export function CardList() {

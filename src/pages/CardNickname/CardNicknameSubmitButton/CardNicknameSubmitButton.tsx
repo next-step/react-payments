@@ -1,10 +1,9 @@
 import React, { MouseEvent } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
+import { useCardListWithLocalStorage } from '@/hooks/useCardListWithLocalStorage';
 import { routes } from '@/routes';
-import { useCardInfoSelector } from '@/stores/CardCreatorContext';
-
-import { useCardListWithLocalStorage } from '../hooks/useCardListWithLocalStorage';
+import { useCardInfoSelector } from '@/stores/CardContext';
 
 export function CardNicknameSubmitButton() {
   const { cardId } = useParams();

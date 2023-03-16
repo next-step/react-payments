@@ -1,5 +1,13 @@
-import { InputStateType, CardNumber, CardOwner, ExpireDate, Password, SecurityCode, CardNickname } from '@/types';
-import type { TCardCompany } from '@/pages/CardCreator/hooks/useCardCompanySelectModal';
+import {
+  InputStateType,
+  CardNumber,
+  CardOwner,
+  ExpireDate,
+  Password,
+  SecurityCode,
+  CardNickname,
+  TCardCompany,
+} from '@/types';
 
 export type CardCompanyState = Omit<InputStateType<TCardCompany>, 'placeholder' | 'type' | 'checkIsAllowInput'>;
 

@@ -1,10 +1,9 @@
 import React, { ChangeEvent } from 'react';
 
-import type { SecurityCodesState } from '@/stores/CardCreatorContext/CardCreatorStates';
-import { useCardContextApiSelector } from '@/stores/CardCreatorContext';
+import { useCardContextApiSelector, SecurityCodesState } from '@/stores/CardContext';
 import { filterNumber } from '@/utils';
 
-import { CardInfoInputElement } from '../../components/CardInfoInputElement';
+import { CardInfoInputElement } from '../../components';
 
 interface SecurityCodeInputProps {
   securityCode: SecurityCodesState[number];

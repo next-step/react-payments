@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react';
 
 import { Card } from '@/components';
-import { useCardInfoSelector } from '@/stores/CardCreatorContext';
+import { useCardInfoSelector } from '@/stores/CardContext';
 
-import { useValidateCreatePage } from './hooks/useValidateCreatePage';
-import { useValidateUpdatePage } from './hooks/useValidateUpdatePage';
+import { useValidateCreatePage, useValidateUpdatePage } from './hooks';
 import { NicknameInput } from './NicknameInput';
 import { CardNicknameSubmitButton } from './CardNicknameSubmitButton';
 

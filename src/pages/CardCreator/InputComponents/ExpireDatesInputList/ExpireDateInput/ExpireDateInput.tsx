@@ -1,12 +1,10 @@
 import React, { ChangeEvent, FocusEvent, memo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components';
-import type { ExpireDatesState } from '@/stores/CardCreatorContext/CardCreatorStates';
-import { useCardContextApiSelector } from '@/stores/CardCreatorContext';
+import { ExpireDatesState, useCardContextApiSelector } from '@/stores/CardContext';
 import { filterNumber } from '@/utils';
 
-import { InputDivider } from '../../components/InputDivider';
-import { CardInfoInputElement } from '../../components/CardInfoInputElement';
+import { InputDivider, CardInfoInputElement } from '../../components';
 
 interface ExpireDateInputProps {
   expireDate: ExpireDatesState[number];

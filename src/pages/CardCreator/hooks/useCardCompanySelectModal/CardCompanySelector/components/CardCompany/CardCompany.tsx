@@ -1,7 +1,8 @@
 import React from 'react';
-import themes from '@/theme/theme';
 
-import type { TCardCompany } from '../../type';
+import themes from '@/theme/theme';
+import type { TCardCompany } from '@/types';
+
 import { StyledCardCompany, StyledCardCompanyColor, StyledCardCompanyName } from './CardCompany.styled';
 
 interface CardCompanyProps {

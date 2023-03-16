@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 
 import { checkIsArrayLast } from '@/utils';
-import type { useCardInfoSelector } from '@/stores/CardCreatorContext';
+import type { useCardInfoSelector } from '@/stores/CardContext';
 
+// FIXME: 클린코드
 export function useSequentialAutoFocus(cardInfo: ReturnType<typeof useCardInfoSelector>) {
   useEffect(() => {
     if (!cardInfo) return;

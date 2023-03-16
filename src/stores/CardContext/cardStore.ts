@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { TCardCompany } from '@/pages/CardCreator/hooks/useCardCompanySelectModal';
+import type { TCardCompany } from '@/types';
 
 import { DispatchContext, ReducerReturnType } from '../types';
 import {
@@ -11,7 +11,7 @@ import {
   securityCodesInit,
   passwordsInit,
   cardNicknameInit,
-} from './CardCreatorStates';
+} from './CardStates';
 
 export type CardStore = {
   cardCompany: typeof cardCompanyInit;
@@ -85,5 +85,5 @@ type Dispatch = CardReducerType[1];
 type CardCompanyStoreContextType = CardStore | null;
 type ApiContextType = DispatchContext<Dispatch>;
 
-export const CardInfoContext = createContext<CardCompanyStoreContextType>(null);
+export const CardContext = createContext<CardCompanyStoreContextType>(null);
 export const ApiContext = createContext<ApiContextType>(null);

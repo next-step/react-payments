@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useCardContextApiSelector } from '@/stores/CardCreatorContext';
+import { useCardContextApiSelector } from '@/stores/CardContext';
 
 export function useFlushCardContextStore() {
   const cardContextApi = useCardContextApiSelector();

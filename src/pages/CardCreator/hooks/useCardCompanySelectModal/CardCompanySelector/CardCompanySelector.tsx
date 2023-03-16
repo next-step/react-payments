@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
 
+import type { TCardCompany } from '@/types';
+
 import { CardCompany } from './components/CardCompany';
 import { cardCompanyList } from './cardCompanyList';
-import type { TCardCompany } from './type';
 import { StyledCardCompanySelector, StyledCompaniesFlexBox } from './CardCompanySelector.styled';
 
 export interface CardCompanySelectorProps {

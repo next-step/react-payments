@@ -1,10 +1,9 @@
 import React, { ChangeEvent, useContext } from 'react';
 
-import type { PasswordsState } from '@/stores/CardCreatorContext/CardCreatorStates';
-import { ApiContext } from '@/stores/CardCreatorContext';
+import { ApiContext, PasswordsState } from '@/stores/CardContext';
 import { filterNumber } from '@/utils';
 
-import { CardInfoInputElement } from '../../components/CardInfoInputElement';
+import { CardInfoInputElement } from '../../components';
 
 interface PasswordInputProps {
   password: PasswordsState[number];

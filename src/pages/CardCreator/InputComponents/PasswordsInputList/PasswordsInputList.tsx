@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 
-import { PasswordsState } from '@/stores/CardCreatorContext/CardCreatorStates';
+import type { PasswordsState } from '@/stores/CardContext';
 
-import { CardInputWrapperPure } from '../components/CardInputWrapper';
+import { CardInputWrapperPure } from '../components';
+import { useErrorContext } from '../hooks';
 import { PasswordInput } from './PasswordInput';
-import { useErrorContext } from '../hooks/useErrorContext';
 
 interface PasswordsInputListProps {
   passwords?: PasswordsState;

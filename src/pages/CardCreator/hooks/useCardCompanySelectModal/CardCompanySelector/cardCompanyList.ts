@@ -1,4 +1,4 @@
-import { TCardCompany } from './type';
+import type { TCardCompany } from '@/types';
 
 export const cardCompanyList: { [key: string]: TCardCompany } = {
   포코카드: {

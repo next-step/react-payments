@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useCardInfoSelector } from '@/stores/CardCreatorContext';
+import { useCardInfoSelector } from '@/stores/CardContext';
 import type { InputStateType } from '@/types';
 
 export function useValidateCardInfos() {

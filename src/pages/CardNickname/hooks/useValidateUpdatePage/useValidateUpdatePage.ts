@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import { useCardListWithLocalStorage } from '@/hooks/useCardListWithLocalStorage';
 import { routes } from '@/routes';
-
-import { useCardListWithLocalStorage } from '../useCardListWithLocalStorage';
 
 export function useValidateUpdatePage() {
   const { cardId } = useParams();

@@ -3,3 +3,4 @@ export * from './useExternalStore';
 export * from './useLocalStorage';
 export * from './useModal';
 export * from './useValidateCardInfos';
+export * from './useCardListWithLocalStorage';

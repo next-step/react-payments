@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 
 import { useLocalStorage } from '@/hooks';
-import type { CardStore } from '@/stores/CardCreatorContext/cardStore';
-import { useCardContextApiSelector } from '@/stores/CardCreatorContext';
-import { mapObjectValues } from '@/utils/object';
+import type { CardStore } from '@/stores/CardContext/cardStore';
+import { useCardContextApiSelector } from '@/stores/CardContext';
+import { mapObjectValues } from '@/utils';
 
 const LOCAL_STORAGE_CARD_LIST_KEY = 'cardList';
 

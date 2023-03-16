@@ -1,11 +1,11 @@
 import React, { memo, forwardRef, useImperativeHandle, ForwardedRef } from 'react';
 
 import { checkIsArrayLast } from '@/utils';
-import { CardNumbersState } from '@/stores/CardCreatorContext/CardCreatorStates';
+import type { CardNumbersState } from '@/stores/CardContext';
 
-import { CardInputWrapperPure } from '../components/CardInputWrapper';
+import { CardInputWrapperPure } from '../components';
+import { useErrorContext } from '../hooks';
 import { CardNumberInput } from './CardNumberInput';
-import { useErrorContext } from '../hooks/useErrorContext';
 
 export interface CardNumbersInputListRefs {
   checkIsEveryInputValid: () => boolean;

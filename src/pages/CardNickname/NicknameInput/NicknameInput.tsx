@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useCallback } from 'react';
 
-import { useCardContextApiSelector } from '@/stores/CardCreatorContext';
+import { useCardContextApiSelector } from '@/stores/CardContext';
 
 interface NicknameInputProps {
   cardNickname?: string;

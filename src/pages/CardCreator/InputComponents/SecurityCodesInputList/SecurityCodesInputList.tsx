@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 
-import { SecurityCodesState } from '@/stores/CardCreatorContext/CardCreatorStates';
+import { SecurityCodesState } from '@/stores/CardContext';
 
-import { CardInputWrapperPure } from '../components/CardInputWrapper';
+import { CardInputWrapperPure } from '../components';
+import { useErrorContext } from '../hooks';
 import { SecurityCodeInput } from './SecurityCodeInput';
-import { useErrorContext } from '../hooks/useErrorContext';
 
 interface SecurityCodesInputListProps {
   securityCodes?: SecurityCodesState;

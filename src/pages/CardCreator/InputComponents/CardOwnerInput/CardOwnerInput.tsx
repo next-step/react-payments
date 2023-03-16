@@ -1,11 +1,9 @@
 import React, { ChangeEvent, memo, useMemo } from 'react';
 
-import { useCardContextApiSelector } from '@/stores/CardCreatorContext';
-import { CardOwnersState } from '@/stores/CardCreatorContext/CardCreatorStates';
+import { useCardContextApiSelector, CardOwnersState } from '@/stores/CardContext';
 
-import { CardInputWrapperPure } from '../components/CardInputWrapper';
-import { CardInfoInputElement } from '../components/CardInfoInputElement';
-import { useErrorContext } from '../hooks/useErrorContext';
+import { CardInputWrapperPure, CardInfoInputElement } from '../components';
+import { useErrorContext } from '../hooks';
 
 interface CardOwnerInputProps {
   cardOwners?: CardOwnersState;
