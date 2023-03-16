@@ -7,10 +7,9 @@ interface ThemeSetterProps extends HTMLAttributes<HTMLDivElement> {
   theme?: Themes;
 }
 
-export function ThemeSetter(props: PropsWithChildren<ThemeSetterProps>) {
-  const { className, theme, children, ...rest } = props;
+export function ThemeSetter({ className, theme, children, ...props }: PropsWithChildren<ThemeSetterProps>) {
   return (
-    <div {...rest} className={`${className} ${theme ? themes[theme] : ''}`}>
+    <div {...props} className={`${className} ${theme ? themes[theme] : ''}`}>
       {children}
     </div>
   );
