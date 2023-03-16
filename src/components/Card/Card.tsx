@@ -1,6 +1,6 @@
 import React, { memo, MouseEvent, ReactElement } from 'react';
 
-import { ThemeSetter } from '@/components/ThemeSetter';
+import { ThemeSetter } from '@/components';
 import { useErrorContext } from '@/pages/CardCreator/InputComponents/hooks/useErrorContext';
 
 import type {

@@ -1,6 +1,6 @@
 import React, { memo, MouseEvent, MouseEventHandler, useCallback, useEffect, useState } from 'react';
 
-import { Portal } from '@/components/Portal';
+import { Portal } from '@/components';
 
 import { ModalBackground, ModalBackgroundProps } from './ModalBackground';
 

@@ -2,8 +2,7 @@ import React, { MouseEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
-import { Card } from '@/components/Card';
-import { ThemeSetter } from '@/components/ThemeSetter';
+import { Card, ThemeSetter } from '@/components';
 import { useCardContextApiSelector, useCardInfoSelector } from '@/stores/CardCreatorContext';
 
 import { TCardCompany, useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';

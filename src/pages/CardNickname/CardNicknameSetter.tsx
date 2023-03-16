@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { Card } from '@/components/Card';
+import { Card } from '@/components';
 import { useCardInfoSelector } from '@/stores/CardCreatorContext';
 
 import { useValidateCreatePage } from './hooks/useValidateCreatePage';

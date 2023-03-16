@@ -1,9 +1,8 @@
 import React, { MouseEvent, useCallback, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Card } from '@/components/Card';
+import { Card, CloseIcon } from '@/components';
 import { routes } from '@/routes';
-import { CloseIcon } from '@/components/CloseIcon';
 
 import { useCardListWithLocalStorage } from '../CardNickname/hooks/useCardListWithLocalStorage';
 import { useFlushCardContextStore } from './hooks/useFlushCardContext';
