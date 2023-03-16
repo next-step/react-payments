@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
 import { useErrorContextApiSelector } from '@/stores/ErrorContext';
-import { useValidateCardInfos } from '@/hooks/useValidateCardInfos';
+import { useValidateCardInfos } from '@/hooks';
 
 interface SubmitButtonProps {}
 

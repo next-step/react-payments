@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useLocalStorage } from '@/hooks';
 import type { CardStore } from '@/stores/CardCreatorContext/cardStore';
 import { useCardContextApiSelector } from '@/stores/CardCreatorContext';
 import { mapObjectValues } from '@/utils/object';

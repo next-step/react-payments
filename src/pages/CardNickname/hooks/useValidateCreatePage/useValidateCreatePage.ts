@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { routes } from '@/routes';
-import { useValidateCardInfos } from '@/hooks/useValidateCardInfos';
+import { useValidateCardInfos } from '@/hooks';
 
 export function useValidateCreatePage() {
   const { cardId } = useParams();

@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef } from 'react';
 
 import { ErrorStoreContext } from '@/stores/ErrorContext';
 
-import { useErrorMessage, ErrorMessages, ErrorMessageType } from '@/hooks/useErrorMessage';
+import { useErrorMessage, ErrorMessages, ErrorMessageType } from '@/hooks';
 
 type ErrorConditionTemplates = { errorType: string; messageType: ErrorMessageType }[];
 
