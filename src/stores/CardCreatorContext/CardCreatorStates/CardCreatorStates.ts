@@ -19,6 +19,9 @@ export const cardCompanyInit: CardCompanyState = attachCommonInputObjectProperty
     const { value } = this;
     return !!value && !!value.name && !!value.theme;
   },
+  getPOJO() {
+    return { value: this.value };
+  },
 });
 
 export const cardNumbersInit: CardNumbersState = [
@@ -30,6 +33,9 @@ export const cardNumbersInit: CardNumbersState = [
       return !!value && value.length === 4;
     },
     checkIsAllowInput: (input) => !input || input.length <= 4,
+    getPOJO() {
+      return { value: this.value, type: this.type };
+    },
   }),
   attachCommonInputObjectProperty({
     key: 'card-second-num',
@@ -39,6 +45,9 @@ export const cardNumbersInit: CardNumbersState = [
       return !!value && value.length === 4;
     },
     checkIsAllowInput: (input) => !input || input.length <= 4,
+    getPOJO() {
+      return { value: this.value, type: this.type };
+    },
   }),
   attachCommonInputObjectProperty({
     type: 'password',
@@ -49,6 +58,9 @@ export const cardNumbersInit: CardNumbersState = [
       return !!value && value.length === 4;
     },
     checkIsAllowInput: (input) => !input || input.length <= 4,
+    getPOJO() {
+      return { value: this.value, type: this.type };
+    },
   }),
   attachCommonInputObjectProperty({
     type: 'password',
@@ -59,6 +71,9 @@ export const cardNumbersInit: CardNumbersState = [
       return !!value && value.length === 4;
     },
     checkIsAllowInput: (input) => !input || input.length <= 4,
+    getPOJO() {
+      return { value: this.value, type: this.type };
+    },
   }),
 ];
 
@@ -83,6 +98,9 @@ export const expireDatesInit: ExpireDatesState = [
     checkIsInputFinished() {
       return this.value?.length === 2;
     },
+    getPOJO() {
+      return { value: this.value };
+    },
   }),
   attachCommonInputObjectProperty({
     key: 'card-expired-year',
@@ -95,6 +113,9 @@ export const expireDatesInit: ExpireDatesState = [
     checkIsAllowInput: (input) => !input || input.length <= 2,
     checkIsInputFinished() {
       return this.value?.length === 2;
+    },
+    getPOJO() {
+      return { value: this.value };
     },
   }),
 ];
@@ -112,6 +133,9 @@ export const cardOwnersInit: CardOwnersState = [
     checkIsInputFinished() {
       return this.value?.length === 30;
     },
+    getPOJO() {
+      return { value: this.value };
+    },
   }),
 ];
 
@@ -124,6 +148,9 @@ export const securityCodesInit: SecurityCodesState = [
       return !!value && value.length === 3;
     },
     checkIsAllowInput: (input) => !input || input.length <= 3,
+    getPOJO() {
+      return { value: this.value };
+    },
   }),
 ];
 
@@ -136,6 +163,9 @@ export const passwordsInit: PasswordsState = [
       return !!value && value.length < 2;
     },
     checkIsAllowInput: (input) => !input || input.length < 2,
+    getPOJO() {
+      return { value: this.value };
+    },
   }),
   attachCommonInputObjectProperty({
     key: 'card-password-second',
@@ -145,6 +175,9 @@ export const passwordsInit: PasswordsState = [
       return !!value && value.length < 2;
     },
     checkIsAllowInput: (input) => !input || input.length < 2,
+    getPOJO() {
+      return { value: this.value };
+    },
   }),
 ];
 
@@ -154,6 +187,9 @@ export const cardNicknameInit: CardNicknameState = attachCommonInputObjectProper
   checkIsValid() {
     const { value } = this;
     return !value || value.length <= 10;
+  },
+  getPOJO() {
+    return { value: this.value };
   },
 });
 

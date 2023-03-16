@@ -38,7 +38,10 @@ export const initialCardStore: CardStore = {
 type CardNickNamePayload = { value: string | TCardCompany };
 type CardInputPayload = { index: number; value: string };
 
-export function reducer(store: CardStore, action: { type: Actions; payload: CardInputPayload | CardNickNamePayload }) {
+export function reducer(
+  store: CardStore,
+  action: { type?: Actions; payload?: CardInputPayload | CardNickNamePayload }
+) {
   const { type, payload } = action;
 
   switch (type) {
@@ -70,7 +73,7 @@ export function reducer(store: CardStore, action: { type: Actions; payload: Card
       break;
     }
     default: {
-      return store;
+      return initialCardStore;
     }
   }
 

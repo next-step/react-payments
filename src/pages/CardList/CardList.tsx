@@ -10,10 +10,11 @@ import { DeleteButtonWrapper } from './CardList.styled';
 
 export function CardList() {
   const navigate = useNavigate();
+
   const { cardList, deleteCard } = useCardListWithLocalStorage();
 
   const sortCardListToDescendingOrderOfKey = useMemo(
-    () => Object.entries(cardList).sort(sortDescendingOrderByKeys),
+    () => cardList && Object.entries(cardList).sort(sortDescendingOrderByKeys),
     [cardList]
   );
 
@@ -37,7 +38,7 @@ export function CardList() {
       <Link to={routes.cardCreator} className="card-box">
         <div className="empty-card">+</div>
       </Link>
-      {sortCardListToDescendingOrderOfKey.map(([key, val]) => (
+      {sortCardListToDescendingOrderOfKey?.map(([key, val]) => (
         <Card
           key={key}
           cardCompany={val?.cardCompany?.value}

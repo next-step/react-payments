@@ -14,6 +14,7 @@ export interface InputStateType<T = string> extends CommonInputStateType {
   checkIsValid: (this: Partial<InputStateType<T>>) => boolean;
   checkIsAllowInput: (input?: T) => boolean;
   checkIsInputFinished?: (this: Partial<InputStateType<T>>) => boolean;
+  getPOJO: (this: Partial<InputStateType<T>>) => { value?: T; type?: InputHTMLAttributes<HTMLInputElement>['type'] };
 }
 
 export type CardNumber = string;

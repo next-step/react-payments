@@ -1,4 +1,7 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo } from 'react';
+
+import { useExternalStore } from '../useExternalStore';
+import { LocalStorage } from './LocalStorage';
 
 function throwErrorIfNotBrowser() {
   if (!window) {
@@ -6,26 +9,18 @@ function throwErrorIfNotBrowser() {
   }
 }
 
-export function useLocalStorage(initialKey: string) {
-  const [key, setKey] = useState(initialKey);
-  const [storageValue, setStorageValue] = useState<string | undefined | null>();
+export function useLocalStorage<T extends { [key: string]: any }>(key: string) {
+  const localStorage = useMemo(() => new LocalStorage<T>(key), [key]);
+  const { localStore, setStore: setExternalStore } = useExternalStore<T>(localStorage);
 
-  useEffect(() => {
-    setStorageValue(window?.localStorage.getItem(key));
-  }, [key]);
+  const setStore = useCallback(
+    (newStore: T | null) => {
+      throwErrorIfNotBrowser();
 
-  const setLocalStorageKey = useCallback((key: string) => setKey(key), [setKey]);
-
-  const setValueInLocalStorage = useCallback((key: string, value: string) => {
-    throwErrorIfNotBrowser();
-
-    window.localStorage.setItem(key, value);
-    setKey(key);
-    setStorageValue(value);
-  }, []);
-
-  return useMemo(
-    () => ({ storageValue, setLocalStorageKey, setValueInLocalStorage }),
-    [storageValue, setLocalStorageKey, setValueInLocalStorage]
+      setExternalStore(newStore);
+    },
+    [setExternalStore]
   );
+
+  return { localStore, setStore };
 }
