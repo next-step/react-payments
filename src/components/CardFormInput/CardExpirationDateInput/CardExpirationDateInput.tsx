@@ -1,15 +1,7 @@
 import Input from 'components/common/Input/Input';
 import Text from 'components/common/Text/Text';
 import styled from 'styled-components';
-import { CardFormInputsType, ColorType } from 'types';
-export type CardExpirationDateInputProps = {
-  onChange?: () => void;
-  fontColor: ColorType;
-  refs: CardFormInputsType;
-  isValidMonth: boolean;
-  isValidYear: boolean;
-};
-
+import { CardExpirationDateInputProps } from './CardExpirationDateInput.types';
 const CardExpirationDateInput = ({
   onChange,
   fontColor,
