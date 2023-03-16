@@ -6,10 +6,13 @@ import { routes } from '@/routes';
 import { CloseIcon } from '@/components/CloseIcon';
 
 import { useCardListWithLocalStorage } from '../CardNickname/hooks/useCardListWithLocalStorage';
+import { useFlushCardContextStore } from './hooks/useFlushCardContext';
 import { DeleteButtonWrapper } from './CardList.styled';
 
 export function CardList() {
   const navigate = useNavigate();
+
+  useFlushCardContextStore();
 
   const { cardList, deleteCard } = useCardListWithLocalStorage();
 
