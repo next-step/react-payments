@@ -11,16 +11,16 @@ function throwErrorIfNotBrowser() {
 
 export function useLocalStorage<T extends { [key: string]: any }>(key: string) {
   const localStorage = useMemo(() => new LocalStorage<T>(key), [key]);
-  const { localStore, setStore: setExternalStore } = useExternalStore<T>(localStorage);
+  const { localStore, setStore } = useExternalStore<T>(localStorage);
 
-  const setStore = useCallback(
+  const setLocalStorageValue = useCallback(
     (newStore: T | null) => {
       throwErrorIfNotBrowser();
 
-      setExternalStore(newStore);
+      setStore(newStore);
     },
-    [setExternalStore]
+    [setStore]
   );
 
-  return { localStore, setStore };
+  return { value: localStore, setLocalStorageValue };
 }

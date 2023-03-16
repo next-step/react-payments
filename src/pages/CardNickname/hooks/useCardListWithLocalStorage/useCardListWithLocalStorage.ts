@@ -20,15 +20,16 @@ interface CardStorePOJO extends Record<keyof CardStore, CardStorePOJOValue> {
 }
 
 export function useCardListWithLocalStorage() {
-  const { localStore, setStore } = useLocalStorage<{ [createdAt: string]: CardStorePOJO }>(LOCAL_STORAGE_CARD_LIST_KEY);
+  const { value, setLocalStorageValue } =
+    useLocalStorage<{ [createdAt: string]: CardStorePOJO }>(LOCAL_STORAGE_CARD_LIST_KEY);
 
   const cardContextApis = useCardContextApiSelector();
 
   const getCardFromStorage = useCallback(
     (cardId: string, fallback?: () => void): void => {
-      if (typeof localStore === 'undefined') return;
+      if (typeof value === 'undefined') return;
 
-      const card = localStore?.[cardId];
+      const card = value?.[cardId];
       if (!card) {
         fallback && fallback();
         return;
@@ -36,7 +37,7 @@ export function useCardListWithLocalStorage() {
 
       dispatchCardStoreJSONInContext(card, cardContextApis);
     },
-    [localStore, cardContextApis]
+    [value, cardContextApis]
   );
 
   const setCardInStorage = useCallback(
@@ -47,21 +48,21 @@ export function useCardListWithLocalStorage() {
         return value.getPOJO();
       }) as unknown as CardStorePOJO;
 
-      setStore({ ...localStore, [cardId]: cardPOJO });
+      setLocalStorageValue({ ...value, [cardId]: cardPOJO });
     },
-    [setStore, localStore]
+    [setLocalStorageValue, value]
   );
 
   const deleteCard = useCallback(
     (cardId: string | number) => {
-      delete localStore?.[cardId];
-      setStore(localStore ?? null);
+      delete value?.[cardId];
+      setLocalStorageValue(value ?? null);
     },
-    [localStore, setStore]
+    [value, setLocalStorageValue]
   );
 
   return {
-    cardList: localStore,
+    cardList: value,
     getCardFromStorage,
     setCardInStorage,
     deleteCard,
