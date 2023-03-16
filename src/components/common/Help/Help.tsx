@@ -1,12 +1,13 @@
-import styled from 'styled-components';
-import IconButton from '../IconButton/IconButton';
+import * as Styled from './Help.styles';
+
+// import type { HelpProps } from './Help.types';
 
 const Help = () => {
   return (
-    <Layout>
-      <IconButton name="help" size="2x" color="black" />
-    </Layout>
+    <Styled.Layout>
+      <Styled.ToolTip>CVC 번호 3자리</Styled.ToolTip>
+      <Styled.HelpButton name="help" size="2x" color="black" />
+    </Styled.Layout>
   );
 };
 export default Help;
-const Layout = styled.div``;
