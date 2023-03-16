@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faM, faRemove, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import type { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
+import { faAngleLeft, faM, faRemove, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 
 export const FontAwesomeIcons = {
   arrowLeft: faAngleLeft,

@@ -15,11 +15,11 @@ import {
   isValidSecurityCode,
 } from 'utils/InputValidation';
 import { getCardNumberCompnay } from 'utils/Card';
-interface useHandleFormInputProps {
+interface PropsType {
   state: CardFormType;
   setState: React.Dispatch<React.SetStateAction<CardFormType>>;
 }
-const useHandleFormInput = ({ state, setState }: useHandleFormInputProps) => {
+const useHandleFormInput = ({ state, setState }: PropsType) => {
   const inputRefs = useRef(new Array(10));
   const cardFormInputs: CardFormInputsType = {
     cardNumbers: {

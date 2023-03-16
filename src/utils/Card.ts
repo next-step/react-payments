@@ -16,7 +16,7 @@ const Color: ColorTable = {
   Yellow: 'yellow',
   Orange: 'orange',
 };
-const Company_Color: CompanyTable = {
+const CompanyColors: CompanyTable = {
   토스카드: Color.Blue,
   네이버카드: Color.Green,
   하나카드: Color.Red,
@@ -39,7 +39,7 @@ const Companys: CompanyType[] = [
 ];
 // 회사 이름명에 맞는 색깔 얻기
 export const getCardCompnayColor = (name: CompanyType): ColorType => {
-  return Companys.includes(name) ? Company_Color[name] : '';
+  return Companys.includes(name) ? CompanyColors[name] : '';
 };
 type CardNumberTable = {
   [key: string]: CompanyType;

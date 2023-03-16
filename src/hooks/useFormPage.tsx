@@ -5,12 +5,12 @@ import { PaymentsContext } from 'context/Payments';
 import { isCardFormValidation } from 'utils/InputValidation';
 import uuid from 'react-uuid';
 
-interface useFormPageProps {
+interface PropsType {
   state: CardFormType;
   setState: React.Dispatch<React.SetStateAction<CardFormType>>;
 }
 
-const useFormPage = ({ state, setState }: useFormPageProps) => {
+const useFormPage = ({ state, setState }: PropsType) => {
   const paymentsCtx = useContext(PaymentsContext);
   const navigate = useNavigate();
 
