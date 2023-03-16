@@ -1,6 +1,7 @@
+type ObjectType<T> = { [key: string]: Array<T> };
+
 export function createObjectWithArrayProps<T>() {
-  type ObjectType = { [key: string]: Array<T> };
-  const object: ObjectType = {};
+  const object: ObjectType<T> = {};
 
   return {
     object,
