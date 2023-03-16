@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import type { CardStore } from '@/stores/CardCreatorContext/cardStore';
 import { useCardContextApiSelector } from '@/stores/CardCreatorContext';
-import { mapObjectValue } from '@/utils/object';
+import { mapObjectValues } from '@/utils/object';
 
 const LOCAL_STORAGE_CARD_LIST_KEY = 'cardList';
 
@@ -41,7 +41,7 @@ export function useCardListWithLocalStorage() {
 
   const setCardInStorage = useCallback(
     (cardId: string | number, card: CardStore) => {
-      const cardPOJO = mapObjectValue(card, (value) => {
+      const cardPOJO = mapObjectValues(card, (value) => {
         if (Array.isArray(value)) return value.map((stateObject) => stateObject.getPOJO());
         // @ts-ignore
         return value.getPOJO();

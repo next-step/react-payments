@@ -14,7 +14,7 @@ export function createObjectWithArrayProps<T>() {
   };
 }
 
-export function mapObjectValue<T, K extends { [key: string | symbol]: unknown }>(
+export function mapObjectValues<T, K extends { [key: string | symbol]: unknown }>(
   object: K,
   mapCallback: (value: K[keyof K]) => T
 ): Record<keyof K, T> {
@@ -23,4 +23,14 @@ export function mapObjectValue<T, K extends { [key: string | symbol]: unknown }>
     prev[k] = mapCallback(val as K[keyof K]);
     return prev;
   }, {} as Record<keyof K, T>);
+}
+
+export function createUpdatedObject<T extends { [key: string]: any }, K extends keyof T>(
+  object: T,
+  key: K,
+  newValue: T[K]
+) {
+  const newObject = { ...object };
+  newObject[key] = newValue;
+  return newObject;
 }
