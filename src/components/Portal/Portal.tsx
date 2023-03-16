@@ -3,9 +3,11 @@ import { createPortal } from 'react-dom';
 
 const MODAL_ROOT = 'modal-root';
 
+type ElementOrNull = Element | null;
+
 interface PortalProps extends PropsWithChildren {
   disablePortal?: boolean;
-  container?: Element | (() => Element | null) | null;
+  container?: ElementOrNull | (() => ElementOrNull);
 }
 
 function getContainer(container: PortalProps['container']) {
@@ -13,7 +15,7 @@ function getContainer(container: PortalProps['container']) {
 }
 
 export function Portal({ disablePortal = false, container, children }: PortalProps) {
-  const [mountNode, setMountNode] = useState<ReturnType<typeof getContainer>>(null);
+  const [mountNode, setMountNode] = useState<ElementOrNull>();
 
   useEffect(() => {
     if (!disablePortal) {
