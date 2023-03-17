@@ -10,8 +10,10 @@ interface IProps {
 const InputName = ({ onChange, value }: IProps) => {
   return (
     <S.InputContainer>
-      <S.InputTitle>카드 소유자 이름(선택)</S.InputTitle>
-      <S.InputTitle>{value?.length + '/30'}</S.InputTitle>
+      <S.TitleWrap>
+        <S.InputTitle>카드 소유자 이름(선택)</S.InputTitle>
+        <S.InputTitle>{value?.length + '/30'}</S.InputTitle>
+      </S.TitleWrap>
       <Input
         id="name"
         name="name"

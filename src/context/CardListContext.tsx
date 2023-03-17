@@ -7,10 +7,22 @@ export const CardListDispatchContext =
   createContext<CardListDispatchType | null>(null);
 
 export const CardListProvider = ({ children }: { children: ReactNode }) => {
-  const [cardList, setCardList] = useState(initCardList);
+  const [cardList, setCardList] = useState<CardInfoType[]>(initCardList);
   const addCard = (cardInfo: CardInfoType) => {
     setCardList([...cardList, { ...cardInfo }]);
   };
+
+  const updateSelectedCard = (selectIdx: number) => {
+    const updatedCardList = cardList.map((card, index) => {
+      if (index === selectIdx) {
+        return { ...card, isSelect: true };
+      } else {
+        return { ...card, isSelect: false };
+      }
+    });
+    setCardList(updatedCardList);
+  };
+
   const updateNickname = (selectIdx: number, value: string) => {
     const updatedCardList = cardList.map((card, index) => {
       if (index === selectIdx) {
@@ -29,7 +41,7 @@ export const CardListProvider = ({ children }: { children: ReactNode }) => {
   return (
     <CardListContext.Provider value={cardList}>
       <CardListDispatchContext.Provider
-        value={{ addCard, updateNickname, deleteCard }}
+        value={{ addCard, updateNickname, deleteCard, updateSelectedCard }}
       >
         {children}
       </CardListDispatchContext.Provider>

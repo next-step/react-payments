@@ -4,13 +4,9 @@
 @import "modal.css";
 @import "utils.css";
 @import "reset.css";
+@import "font/font.css";
 
 body {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
   background-color: #e5e5e5;
 }
 
