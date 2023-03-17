@@ -21,15 +21,13 @@ const S = {
   `,
 };
 
-const DIGIT_COMPANY_LENGTH = 8;
-
 const CardRegisterForm = () => {
   const dispatch = useCardDispatch();
   const { digits, expire, name, cvc, passwords } = useCardState();
-  const { setModalState } = useModalState();
-  const [isFocusCompany, setIsFocusCompany] = useState(false);
-  const { inputRefs, nextFocus } = useNextFocus();
   const validation = useCardValidation();
+  const [isSelectCompany, setSelectCompany] = useState(false);
+  const { setModalState } = useModalState();
+  const { inputRefs, nextFocus } = useNextFocus();
 
   const onChangeValue = (e: React.ChangeEvent) => {
     dispatch({
@@ -44,67 +42,75 @@ const CardRegisterForm = () => {
       type: 'SET_CARD_VALUE',
       target: eventTarget,
     });
-
-    const isFocusCompanyDigit =
-      eventTarget.name === 'digit1' || eventTarget.name === 'digit2';
-    if (isFocusCompanyDigit) {
-      setIsFocusCompany(true);
-    } else {
-      setIsFocusCompany(false);
-      setModalState({ type: null, isShow: false });
-    }
   };
 
+  // digit 개수가 8개가 되었을 때 카드사 추정 모달 오픈
+  const DIGIT_COMPANY_LENGTH = 8;
   const showCompanySelectModal = () => {
     const digitLength =
       String(digits.digit1).length + String(digits.digit2).length;
-    if (digitLength === DIGIT_COMPANY_LENGTH && isFocusCompany) {
+
+    if (digits.digit3 || digits.digit4) {
+      setModalState({ type: 'SELECT_COMPANY', isShow: false });
+    }
+
+    if (digitLength !== DIGIT_COMPANY_LENGTH) {
+      setSelectCompany(false);
+      return;
+    }
+    // prettier-ignore
+    if ((digitLength === DIGIT_COMPANY_LENGTH) && !isSelectCompany) {
       dispatch({
         type: 'SET_COMPANY',
         company: computeCompany(String(digits.digit1)).company,
         color: computeCompany(String(digits.digit1)).color,
       });
+
       setModalState({ type: 'SELECT_COMPANY', isShow: true });
+      setSelectCompany(true)
     }
   };
 
   useEffect(() => {
     showCompanySelectModal();
-  }, [digits, isFocusCompany]);
+  }, [digits]);
 
   useEffect(() => {
     inputRefs[0].current?.focus();
   }, []);
 
   useEffect(() => {
-    if (
+    const isValidDigit =
       validation.validDigit &&
       !validation.validExpire &&
       !validation.validCvc &&
-      !validation.validPassword
-    ) {
-      nextFocus(0);
-    }
+      !validation.validPassword;
 
-    if (
+    const isValidExpire =
       validation.validDigit &&
       validation.validExpire &&
       !validation.validCvc &&
-      !validation.validPassword
-    ) {
-      nextFocus(1);
-    }
+      !validation.validPassword;
 
-    if (
+    const isValidCvc =
       validation.validDigit &&
       validation.validExpire &&
       validation.validCvc &&
       !validation.validPassword &&
-      !passwords.password1
-    ) {
+      !passwords.password1;
+
+    if (isValidDigit) {
+      nextFocus(0);
+    }
+
+    if (isValidExpire) {
+      nextFocus(1);
+    }
+
+    if (isValidCvc) {
       nextFocus(2);
     }
-  }, [inputRefs, validation]);
+  }, [validation]);
 
   return (
     <S.Form>
