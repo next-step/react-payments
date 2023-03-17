@@ -1,5 +1,6 @@
 import { REGEX } from '@/constants';
 import { CardInformationWithoutId } from '@/types';
+import { MutableRefObject } from 'react';
 
 export const renderTextDivider = ({
   formerValue,
@@ -40,4 +41,8 @@ export const expirationMonthFormatter = (month: string) => {
 
 export const textOnlyFormatter = (str: string) => {
   return str.replace(REGEX.NOT_NUMBER, '');
+};
+
+export const nextSiblingInputFocus = (ref: MutableRefObject<HTMLDivElement | null>, index = 0) => {
+  return ref.current?.nextElementSibling?.querySelectorAll('input')[index]?.focus();
 };

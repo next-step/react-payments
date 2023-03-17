@@ -26,7 +26,7 @@ function InputContainer({ children, size = 'full', disabled = false }: PropsWith
   const bgStyle = disabled ? 'bg-white' : 'bg-gray-100';
 
   return (
-    <div className={cls(width, 'px-4 flex  justify-center items-center gap-2  rounded-lg my-2', bgStyle)}>
+    <div className={cls(width, 'px-2 py-1 flex  justify-center items-center gap-2  rounded-lg my-2', bgStyle)}>
       {children}
     </div>
   );

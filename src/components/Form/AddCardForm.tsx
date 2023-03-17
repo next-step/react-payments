@@ -16,23 +16,7 @@ function AddCardForm() {
   const cardForm = useCardForm();
   const { onChange } = useCardFormHandler();
 
-  const { cardNumber1, cardNumber2, cardNumber3, cardNumber4, year, month, password1, password2, cvc, cardOwner } =
-    cardForm;
-
-  const password = { password1, password2 };
-
-  const isValid = checkRequiredValues({
-    cardNumber1,
-    cardNumber2,
-    cardNumber3,
-    cardNumber4,
-    year,
-    month,
-    password1,
-    password2,
-    cvc,
-    cardOwner,
-  });
+  const isValid = checkRequiredValues(cardForm);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,35 +31,21 @@ function AddCardForm() {
     <form onSubmit={onSubmit} className="flex flex-col nowrap">
       <CardNumberField
         title="카드 번호"
-        value={{
-          cardNumber1,
-          cardNumber2,
-          cardNumber3,
-          cardNumber4,
-        }}
         onChange={onChange}
         minLength={LIMIT_INPUT_LENGTH.CARD_NUMBER.MIN}
         maxLength={LIMIT_INPUT_LENGTH.CARD_NUMBER.MAX}
       />
-      <ExpirationField
-        title="만료일"
-        maxLength={LIMIT_INPUT_LENGTH.EXPIRATION}
-        expireDate={{
-          year,
-          month,
-        }}
-        onChange={onChange}
-      />
+      <ExpirationField title="만료일" maxLength={LIMIT_INPUT_LENGTH.EXPIRATION} onChange={onChange} />
       <NameField
         title="카드 소유자 이름(선택)"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요"
         maxLength={LIMIT_INPUT_LENGTH.OWNER_NAME}
         name="cardOwner"
-        value={cardOwner}
+        value={cardForm.cardOwner}
         onChange={onChange}
       />
-      <CVCField title="보안코드(CVC/CCV)" maxLength={3} name="cvc" type="password" value={cvc} onChange={onChange} />
-      <PasswordField title="비밀번호" value={password} onChange={onChange} />
+      <CVCField title="보안코드(CVC/CCV)" maxLength={3} name="cvc" type="password" onChange={onChange} />
+      <PasswordField title="비밀번호" onChange={onChange} />
       <div className="w-full flex justify-end">
         <div className="w-20 absolute bottom-2 right-2">
           <Button type="submit" disabled={!isValid} kind="primary">
