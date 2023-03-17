@@ -19,3 +19,13 @@ export const StyledCard = styled('div', {
     },
   },
 });
+
+export const StyledEmptyCardInfo = styled('span', {
+  position: 'absolute',
+  right: '10px',
+  fontSize: '15px',
+  fontWeight: 'bold',
+  textAlign: 'center',
+  marginLeft: '20px',
+  whiteSpace: 'pre-wrap',
+});
