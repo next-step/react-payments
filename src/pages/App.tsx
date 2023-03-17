@@ -5,11 +5,13 @@ import FormPage from './FormPage/FormPage';
 import AliasPage from './AliasPage/AliasPage';
 import MyCardListPage from './MyCardListPage/MyCardListPage';
 import { PaymentsContextProvider } from 'context/Payments';
+import { VirtualKeyBoard } from 'components/common/VirtualKeyBoard';
 function App() {
   return (
     <Layout>
       <PaymentsContextProvider>
         <GlobalStyle />
+        {/* <VirtualKeyBoard /> */}
         <Routes>
           <Route element={<MyCardListPage />} path="/"></Route>
           <Route element={<FormPage />} path="/add"></Route>

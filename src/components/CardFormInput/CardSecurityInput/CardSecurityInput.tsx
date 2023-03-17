@@ -1,4 +1,4 @@
-import Help from 'components/common/Help/Help';
+import { Help } from 'components/common/Help';
 import type { CardPasswordInputProps } from './CardSecurityInput.types';
 import * as Styled from './CardSecurityInput.styles';
 

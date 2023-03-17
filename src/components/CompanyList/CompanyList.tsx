@@ -1,5 +1,5 @@
-import Dot from 'components/common/Dot/Dot';
 import styled from 'styled-components';
+import { Dot } from 'components/common/Dot';
 import { ReactEventHandler, useRef, useEffect } from 'react';
 
 export type CompanyListProps = {

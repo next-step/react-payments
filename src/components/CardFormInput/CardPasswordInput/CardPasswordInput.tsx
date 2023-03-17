@@ -26,8 +26,8 @@ const CardPasswordInput = ({ refs, fontColor, onChange, isValidStart, isValidEnd
           fontColor={fontColor}
           error={!isValidEnd}
         />
-        <Styled.CardPasswordInput theme="primary" type="text" active={false} />
-        <Styled.CardPasswordInput theme="primary" type="text" active={false} />
+        <Styled.CardPasswordInput theme="primary" type="text" active={true} />
+        <Styled.CardPasswordInput theme="primary" type="text" active={true} />
       </Styled.Container>
       {!isValid && <Styled.ErrorText fontSize="xs" weight="bold" label="숫자 1자리씩 입력해주세요" fontColor="red" />}
     </Styled.Layout>

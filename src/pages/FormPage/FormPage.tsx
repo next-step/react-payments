@@ -14,6 +14,7 @@ import useFormPage from 'hooks/useFormPage';
 import useHandleFormInput from 'hooks/useHandleFormInput';
 import useHandleFormState from 'hooks/useHandleFormState';
 import { getCardCompnayColor } from 'utils/Card';
+import { VirtualKeyBoard } from 'components/common/VirtualKeyBoard';
 
 const FormPage = () => {
   const [activeUI, setActiveUI] = useState(false);
@@ -47,6 +48,7 @@ const FormPage = () => {
         <Text fontSize="lg" weight="bold" label="카드추가" />
       </Header>
       <div>
+        <VirtualKeyBoard />
         {activeUI && <CompanyList onSelect={handleCompanyList} onClose={setActiveUI} />}
         <Card
           type="primary"
