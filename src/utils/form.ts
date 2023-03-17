@@ -31,26 +31,6 @@ const insertSlash = (value: string, length: number) => {
   return result;
 };
 
-export const validatePassword = (digit: string, targetName: string) => {
-  const value = digit.replace(/\D+/g, '');
-  nextFocus(value, targetName, 1);
-  return value;
-};
-
-const nextFocus = (
-  value: string,
-  targetName: string,
-  nextFocusLength: number
-) => {
-  const nextId = Number(targetName.slice(-1)) + 1;
-  const targetId = targetName.slice(0, targetName.length - 1);
-  const nextRef = document.getElementById(targetId + nextId);
-  if (value.length === nextFocusLength) {
-    if (!nextRef) return;
-    nextRef.focus();
-  }
-};
-
 export const computeCompany = (digit: string): CardCompanyType => {
   // 카드숫자 첫번째 자리로 회사별 카드 추정
   const firstNum = digit[0];
