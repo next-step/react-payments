@@ -17,7 +17,7 @@ interface CardNumbersInputListProps {
 
 function CardNumbersInputList({ cardNumbers }: CardNumbersInputListProps, ref: ForwardedRef<CardNumbersInputListRefs>) {
   const errorMessage = useGetErrorMessage(cardNumbers);
-  console.log(errorMessage);
+
   useImperativeHandle(ref, () => ({
     checkIsEveryInputValid: () => {
       return !!cardNumbers?.every((cardNumber, i) => {
