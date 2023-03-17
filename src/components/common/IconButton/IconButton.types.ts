@@ -1,12 +1,12 @@
+import type { ButtonHTMLAttributes } from 'react';
 import type { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faM, faRemove, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 
-export type IconButtonPropsType = {
+export interface IconButtonPropsType extends ButtonHTMLAttributes<HTMLButtonElement> {
   name: FontAweSomeIconType;
   size: FontAwesomeIconProps['size'];
   color: string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-};
+}
 
 type FontAweSomeIconType = keyof typeof FontAwesomeIcons;
 export const FontAwesomeIcons = {

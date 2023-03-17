@@ -3,11 +3,11 @@ import type { IconButtonPropsType } from './IconButton.types';
 import { FontAwesomeIcons } from './IconButton.types';
 import * as Styled from './IconButton.styles';
 
-const IconButton = ({ onClick, name, size, color }: IconButtonPropsType) => {
+const IconButton = ({ name, size, color, ...attributes }: IconButtonPropsType) => {
   return (
-    <Styled.Button onClick={onClick}>
+    <Styled.IconButton {...attributes}>
       <FontAwesomeIcon icon={FontAwesomeIcons[name]} size={size} color={color}></FontAwesomeIcon>
-    </Styled.Button>
+    </Styled.IconButton>
   );
 };
 

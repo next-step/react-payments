@@ -4,7 +4,7 @@ export const HelpButton = styled(IconButton)``;
 export const ToolTip = styled.span`
   display: block;
   position: absolute;
-  width: 130px;
+  width: 112px;
   height: 40px;
   background: #484848;
   color: white;

@@ -1,12 +1,19 @@
+import useHelpIcon from 'hooks/useHelpIcon';
 import * as Styled from './Help.styles';
 
-// import type { HelpProps } from './Help.types';
-
 const Help = () => {
+  const { isOpen, setIsOpen } = useHelpIcon();
+
   return (
     <Styled.Layout>
-      <Styled.ToolTip>CVC 번호 3자리</Styled.ToolTip>
-      <Styled.HelpButton name="help" size="2x" color="black" />
+      {isOpen && <Styled.ToolTip>카드 뒤 3자리</Styled.ToolTip>}
+      <Styled.HelpButton
+        name="help"
+        size="2x"
+        color="black"
+        onMouseOver={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+      />
     </Styled.Layout>
   );
 };

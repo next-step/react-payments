@@ -1,8 +1,6 @@
 import { FontSizeType } from 'types';
-import { ReactEventHandler } from 'react';
-export type ButtonProps = {
-  fontSize: FontSizeType;
-  label: string;
-  onClick?: ReactEventHandler<HTMLButtonElement>;
-  className?: string;
-};
+import { ButtonHTMLAttributes } from 'react';
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  fontSize?: FontSizeType;
+  label?: string;
+}
