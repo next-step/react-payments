@@ -1,6 +1,6 @@
 import { S } from '../../styles/Input';
 import Input from '../common/Input';
-import React from 'react';
+import React, { RefObject } from 'react';
 import { useCardValidation } from '../../context/CardContext';
 
 interface IProps {
@@ -9,9 +9,10 @@ interface IProps {
     password1: string;
     password2: string;
   };
+  refs: RefObject<HTMLInputElement>;
 }
 
-const InputPassword = ({ onChange, value }: IProps) => {
+const InputPassword = ({ onChange, value, refs }: IProps) => {
   const { validPassword } = useCardValidation();
   return (
     <S.InputContainer>
@@ -24,6 +25,7 @@ const InputPassword = ({ onChange, value }: IProps) => {
         className={'w-10 m-r-5'}
         maxLength={1}
         value={value.password1}
+        ref={refs}
       />
       <Input
         id="password2"

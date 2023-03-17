@@ -1,5 +1,5 @@
 import Input from '../common/Input';
-import React from 'react';
+import React, { RefObject } from 'react';
 import { DigitType } from '../../type/card';
 import styled from '@emotion/styled';
 import { COLOR } from '../../constant/color';
@@ -8,6 +8,7 @@ import { useCardValidation } from '../../context/CardContext';
 interface IProps {
   onChange: (e: React.ChangeEvent) => void;
   value: DigitType;
+  refs: RefObject<HTMLInputElement>;
 }
 export const S = {
   InputContainer: styled.div`
@@ -52,7 +53,7 @@ const Hyphen = () => {
   return <S.Hyphen>-</S.Hyphen>;
 };
 
-const InputDigit = ({ onChange, value }: IProps) => {
+const InputDigit = ({ onChange, value, refs }: IProps) => {
   const { validDigit } = useCardValidation();
   return (
     <S.InputContainer>
@@ -65,6 +66,7 @@ const InputDigit = ({ onChange, value }: IProps) => {
           type="number"
           value={value.digit1}
           placeholder={'1234'}
+          ref={refs}
         />
         <Hyphen />
         <Input

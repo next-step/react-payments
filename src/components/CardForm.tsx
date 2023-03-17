@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useCardDispatch, useCardState } from '../context/CardContext';
+import {
+  useCardDispatch,
+  useCardState,
+  useCardValidation,
+} from '../context/CardContext';
 import InputCvc from './form/InputCvc';
 import InputDigit from './form/InputDigit';
 import InputExpire from './form/InputExpire';
@@ -9,6 +13,7 @@ import { useModalState } from '../context/ModalContext';
 import { computeCompany } from '../utils/form';
 import styled from '@emotion/styled';
 import { DigitType } from '../type/card';
+import useNextFocus from '../hook/useNextFocus';
 
 const S = {
   Form: styled.form`
@@ -23,6 +28,8 @@ const CardRegisterForm = () => {
   const { digits, expire, name, cvc, passwords } = useCardState();
   const { setModalState } = useModalState();
   const [isFocusCompany, setIsFocusCompany] = useState(false);
+  const { inputRefs, nextFocus } = useNextFocus();
+  const validation = useCardValidation();
 
   const onChangeValue = (e: React.ChangeEvent) => {
     dispatch({
@@ -65,13 +72,59 @@ const CardRegisterForm = () => {
     showCompanySelectModal();
   }, [digits, isFocusCompany]);
 
+  useEffect(() => {
+    inputRefs[0].current?.focus();
+  }, []);
+
+  useEffect(() => {
+    if (
+      validation.validDigit &&
+      !validation.validExpire &&
+      !validation.validCvc &&
+      !validation.validPassword
+    ) {
+      nextFocus(0);
+    }
+
+    if (
+      validation.validDigit &&
+      validation.validExpire &&
+      !validation.validCvc &&
+      !validation.validPassword
+    ) {
+      nextFocus(1);
+    }
+
+    if (
+      validation.validDigit &&
+      validation.validExpire &&
+      validation.validCvc &&
+      !validation.validPassword &&
+      !passwords.password1
+    ) {
+      nextFocus(2);
+    }
+  }, [inputRefs, validation]);
+
   return (
     <S.Form>
-      <InputDigit onChange={onChangeDigit} value={digits as DigitType} />
-      <InputExpire onChange={onChangeValue} value={expire} />
+      <InputDigit
+        onChange={onChangeDigit}
+        value={digits as DigitType}
+        refs={inputRefs[0]}
+      />
+      <InputExpire
+        onChange={onChangeValue}
+        value={expire}
+        refs={inputRefs[1]}
+      />
       <InputName onChange={onChangeValue} value={name} />
-      <InputCvc onChange={onChangeValue} value={cvc} />
-      <InputPassword onChange={onChangeValue} value={passwords} />
+      <InputCvc onChange={onChangeValue} value={cvc} refs={inputRefs[2]} />
+      <InputPassword
+        onChange={onChangeValue}
+        value={passwords}
+        refs={inputRefs[3]}
+      />
     </S.Form>
   );
 };

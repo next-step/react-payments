@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ForwardedRef, forwardRef } from 'react';
 import styled from '@emotion/styled';
 import { COLOR } from '../../constant/color';
 
@@ -40,8 +40,9 @@ interface IProps {
   disabled?: boolean;
 }
 
-const Input = (props: IProps) => {
-  return <S.Input {...props} />;
-};
+const Input = forwardRef((props: IProps, ref) => {
+  return <S.Input {...props} ref={ref as ForwardedRef<HTMLInputElement>} />;
+});
 
+Input.displayName = 'Input';
 export default Input;
