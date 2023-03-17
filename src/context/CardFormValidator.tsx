@@ -1,6 +1,6 @@
 import { PropsWithChildren, createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { useCardForm } from './CardFormContext';
-import { LIMIT_INPUT_LENGTH } from '@/constants';
+import { LIMIT_INPUT_LENGTH, VALIDATOR_MESSAGE } from '@/constants';
 
 type Validator = {
   isValid: boolean;
@@ -58,7 +58,7 @@ function CardFormValidatorProvider({ children }: PropsWithChildren) {
     if (allCardNumber.length < 16) {
       setIsValidCardForm({
         isValid: false,
-        msg: '카드숫자는 16자리가 되어야 합니다.',
+        msg: VALIDATOR_MESSAGE.CARD_NUMBER,
       });
       return;
     }
@@ -72,7 +72,7 @@ function CardFormValidatorProvider({ children }: PropsWithChildren) {
     if (month.length < LIMIT_INPUT_LENGTH.EXPIRATION || year.length < LIMIT_INPUT_LENGTH.EXPIRATION) {
       setIsValidExpirationForm({
         isValid: false,
-        msg: 'Month, Year는 2자리를 입력해 주세요',
+        msg: VALIDATOR_MESSAGE.EXPIRATION.LENGTH,
       });
       return;
     }
@@ -80,7 +80,7 @@ function CardFormValidatorProvider({ children }: PropsWithChildren) {
     if (Number(month) < 0 || Number(month) > 12) {
       setIsValidExpirationForm({
         isValid: false,
-        msg: 'Month는 0보다 크고, 13보다 작아야 합니다.',
+        msg: VALIDATOR_MESSAGE.EXPIRATION.MONTH_RANGE,
       });
       return;
     }
@@ -95,7 +95,7 @@ function CardFormValidatorProvider({ children }: PropsWithChildren) {
     if (cvc.length < 3) {
       setIsValidCVCForm({
         isValid: false,
-        msg: 'CVC는 3자리를 입력해 주세요',
+        msg: VALIDATOR_MESSAGE.CVC,
       });
       return;
     }
@@ -109,7 +109,7 @@ function CardFormValidatorProvider({ children }: PropsWithChildren) {
     if (password1.length < 1 || password2.length < 1) {
       setIsValidPasswordForm({
         isValid: false,
-        msg: 'password를 입력해주세요.',
+        msg: VALIDATOR_MESSAGE.PASSWORD,
       });
       return;
     }
@@ -124,7 +124,7 @@ function CardFormValidatorProvider({ children }: PropsWithChildren) {
     if (!cardCompany) {
       setIsValidCardCompanyForm({
         isValid: false,
-        msg: '카드를 클릭해 카드회사를 선택해주세요',
+        msg: VALIDATOR_MESSAGE.CARD_COMPANY,
       });
       return;
     }

@@ -58,3 +58,14 @@ export const CARD_COMPANY_LIST: CardCompany[] = CARD_COMPANY_LIST_SET.map(cardCo
   companyColorHexCode: cardCompany[Index.hexColor],
   companyIdentification: cardCompany[Index.companyIdentificationNumber],
 }));
+
+export const VALIDATOR_MESSAGE = {
+  CARD_NUMBER: '카드숫자는 16자리가 되어야 합니다.',
+  PASSWORD: '비밀번호를 입력해주세요.',
+  CVC: 'CVC는 3자리를 입력해 주세요',
+  EXPIRATION: {
+    LENGTH: 'Month, Year는 2자리를 입력해 주세요.',
+    MONTH_RANGE: 'Month는 0보다 크고, 13보다 작아야 합니다.',
+  },
+  CARD_COMPANY: '카드를 클릭해 카드회사를 선택해주세요.',
+};
