@@ -1,12 +1,7 @@
 import React from 'react';
+import { SvgType } from '../../type/svg';
 
-interface IArrow {
-  width: string;
-  height: string;
-  color: string;
-}
-
-const ArrowIcon = ({ width, height, color }: IArrow) => {
+const ArrowIcon = ({ width, height, color }: SvgType) => {
   return (
     <svg
       width={width}
