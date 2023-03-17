@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 
-import { checkIsArrayLast } from '@/utils';
+import { useGetErrorMessage } from '@/hooks';
 import type { ExpireDatesState } from '@/stores/CardContext';
+import { checkIsArrayLast } from '@/utils';
 
 import { CardInputWrapperPure } from '../components';
-import { useErrorContext } from '../hooks';
 import { ExpireDateInput } from './ExpireDateInput';
 
 interface ExpireDatesInputListProps {
@@ -12,12 +12,7 @@ interface ExpireDatesInputListProps {
 }
 
 function ExpireDatesInputList({ expireDates }: ExpireDatesInputListProps) {
-  const errorMessage = useErrorContext(
-    {
-      inValid: 'MM/YY 형태로 만료일을 입력해주세요.',
-    },
-    [{ errorType: 'expireDates', messageType: 'inValid' }]
-  );
+  const errorMessage = useGetErrorMessage(expireDates);
 
   return (
     <CardInputWrapperPure header="만료일" errorMessage={errorMessage}>

@@ -6,6 +6,7 @@ import { routes } from '@/routes';
 import { useCardSelector } from '@/stores/CardContext';
 
 export function CardNicknameSubmitButton() {
+  // TODO: 아래 submit 로직을 분리하기 -> 어떤 곳에서도 재활용 될 수 있도록 분리하기.
   const { cardId } = useParams();
 
   const cardInfo = useCardSelector();

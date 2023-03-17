@@ -19,6 +19,10 @@ export const cardCompanyInit: CardCompanyState = attachCommonInputObjectProperty
     const { value } = this;
     return !!value && !!value.name && !!value.theme;
   },
+  getInvalidMessage() {
+    if (this.checkIsValid()) return null;
+    return '카드사를 입력해주세요.';
+  },
   getPOJO() {
     return { value: this.value };
   },
@@ -33,6 +37,10 @@ export const cardNumbersInit: CardNumbersState = [
       return !!value && value.length === 4;
     },
     checkIsAllowInput: (input) => !input || input.length <= 4,
+    getInvalidMessage() {
+      if (this.checkIsValid()) return null;
+      return '카드 번호 4자리를 입력해주세요.';
+    },
     getPOJO() {
       return { value: this.value, type: this.type };
     },
@@ -45,6 +53,10 @@ export const cardNumbersInit: CardNumbersState = [
       return !!value && value.length === 4;
     },
     checkIsAllowInput: (input) => !input || input.length <= 4,
+    getInvalidMessage() {
+      if (!this.checkIsValid?.()) return null;
+      return '카드 번호 4자리를 입력해주세요.';
+    },
     getPOJO() {
       return { value: this.value, type: this.type };
     },
@@ -58,6 +70,10 @@ export const cardNumbersInit: CardNumbersState = [
       return !!value && value.length === 4;
     },
     checkIsAllowInput: (input) => !input || input.length <= 4,
+    getInvalidMessage() {
+      if (this.checkIsValid()) return null;
+      return '카드 번호 4자리를 입력해주세요.';
+    },
     getPOJO() {
       return { value: this.value, type: this.type };
     },
@@ -71,6 +87,10 @@ export const cardNumbersInit: CardNumbersState = [
       return !!value && value.length === 4;
     },
     checkIsAllowInput: (input) => !input || input.length <= 4,
+    getInvalidMessage() {
+      if (this.checkIsValid()) return null;
+      return '카드 번호 4자리를 입력해주세요.';
+    },
     getPOJO() {
       return { value: this.value, type: this.type };
     },
@@ -98,6 +118,10 @@ export const expireDatesInit: ExpireDatesState = [
     checkIsInputFinished() {
       return this.value?.length === 2;
     },
+    getInvalidMessage() {
+      if (this.checkIsValid()) return null;
+      return '만료월을 입력해주세요.';
+    },
     getPOJO() {
       return { value: this.value };
     },
@@ -113,6 +137,10 @@ export const expireDatesInit: ExpireDatesState = [
     checkIsAllowInput: (input) => !input || input.length <= 2,
     checkIsInputFinished() {
       return this.value?.length === 2;
+    },
+    getInvalidMessage() {
+      if (this.checkIsValid()) return null;
+      return '만료년을 입력해주세요.';
     },
     getPOJO() {
       return { value: this.value };
@@ -133,6 +161,10 @@ export const cardOwnersInit: CardOwnersState = [
     checkIsInputFinished() {
       return this.value?.length === 30;
     },
+    getInvalidMessage() {
+      if (this.checkIsValid()) return null;
+      return '카드 소유주 이름을 입력해주세요.';
+    },
     getPOJO() {
       return { value: this.value };
     },
@@ -148,6 +180,10 @@ export const securityCodesInit: SecurityCodesState = [
       return !!value && value.length === 3;
     },
     checkIsAllowInput: (input) => !input || input.length <= 3,
+    getInvalidMessage() {
+      if (this.checkIsValid()) return null;
+      return '보안코드 3자리를 입력해주세요.';
+    },
     getPOJO() {
       return { value: this.value };
     },
@@ -163,6 +199,10 @@ export const passwordsInit: PasswordsState = [
       return !!value && value.length < 2;
     },
     checkIsAllowInput: (input) => !input || input.length < 2,
+    getInvalidMessage() {
+      if (this.checkIsValid()) return null;
+      return '비밀번호 앞자리 2자리를 입력해주세요.';
+    },
     getPOJO() {
       return { value: this.value };
     },
@@ -175,6 +215,10 @@ export const passwordsInit: PasswordsState = [
       return !!value && value.length < 2;
     },
     checkIsAllowInput: (input) => !input || input.length < 2,
+    getInvalidMessage() {
+      if (this.checkIsValid()) return null;
+      return '비밀번호 앞자리 2자리를 입력해주세요.';
+    },
     getPOJO() {
       return { value: this.value };
     },
@@ -187,6 +231,10 @@ export const cardNicknameInit: CardNicknameState = attachCommonInputObjectProper
   checkIsValid() {
     const { value } = this;
     return !value || value.length <= 10;
+  },
+  getInvalidMessage() {
+    if (this.checkIsValid()) return null;
+    return '카드 별명을 입력해주세요.';
   },
   getPOJO() {
     return { value: this.value };

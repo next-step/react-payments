@@ -1,7 +1,6 @@
 import React, { memo, MouseEvent, ReactElement } from 'react';
 
 import { ThemeSetter } from '@/components';
-import { useErrorContext } from '@/pages/CardCreator/InputComponents/hooks/useErrorContext';
 
 import type {
   TCardCompanyProp,
@@ -14,11 +13,12 @@ import { CardNumbers } from './CardNumbers';
 import { CardOwnerName } from './CardOwnerName';
 import { CardExpireDate } from './CardExpireDate';
 import { CardNickname } from './CardNickname';
-import { StyledCard, StyledErrorMessage } from './Card.styled';
+import { StyledCard } from './Card.styled';
 
 interface CardProps {
   disableNickname?: boolean;
   additionalIcon?: ReactElement;
+  additionalBottomElement?: ReactElement;
   cardCompany?: TCardCompanyProp;
   cardNumbers?: TCardNumberProp[];
   cardOwnerName?: TCardOwnerNameProp;
@@ -30,6 +30,7 @@ interface CardProps {
 export const Card = memo(function Card({
   disableNickname,
   additionalIcon,
+  additionalBottomElement,
   cardCompany,
   cardNumbers,
   cardOwnerName,
@@ -37,13 +38,6 @@ export const Card = memo(function Card({
   cardNickname,
   onCardClick,
 }: CardProps) {
-  const errorMessage = useErrorContext(
-    {
-      inValid: '카드 회사를 선택해주세요.',
-    },
-    [{ errorType: 'cardCompany', messageType: 'inValid' }]
-  );
-
   return (
     <ThemeSetter className="card-box flex-column-center" theme={cardCompany?.theme} onClick={onCardClick}>
       <StyledCard pointCursor={!!onCardClick}>
@@ -61,7 +55,7 @@ export const Card = memo(function Card({
         {additionalIcon}
       </StyledCard>
       {disableNickname || <CardNickname nickname={cardNickname} />}
-      {errorMessage && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}
+      {additionalBottomElement}
     </ThemeSetter>
   );
 });

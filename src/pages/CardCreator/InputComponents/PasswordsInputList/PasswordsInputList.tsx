@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 
+import { useGetErrorMessage } from '@/hooks';
 import type { PasswordsState } from '@/stores/CardContext';
 
 import { CardInputWrapperPure } from '../components';
-import { useErrorContext } from '../hooks';
 import { PasswordInput } from './PasswordInput';
 
 interface PasswordsInputListProps {
@@ -11,12 +11,7 @@ interface PasswordsInputListProps {
 }
 
 function PasswordsInputList({ passwords }: PasswordsInputListProps) {
-  const errorMessage = useErrorContext(
-    {
-      inValid: '비밀번호 앞 2자리를 모두 입력해주세요.',
-    },
-    [{ errorType: 'passwords', messageType: 'inValid' }]
-  );
+  const errorMessage = useGetErrorMessage(passwords);
 
   return (
     <CardInputWrapperPure header="카드 비밀번호" errorMessage={errorMessage}>

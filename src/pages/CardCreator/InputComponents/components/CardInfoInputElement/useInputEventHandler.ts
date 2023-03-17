@@ -1,42 +1,62 @@
 import type { ChangeEvent, FocusEvent } from 'react';
 
-interface UseInputOnChangeProps {
-  setState: (newState: any) => void;
+interface InputEventProps {
+  setState?: (newValue: string) => void;
+  eventCallback?: (e: unknown) => void;
 }
 
 export interface ChangeEventHandlerProps {
-  props: UseInputOnChangeProps;
-  checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => boolean;
-  getNewValue: (e: ChangeEvent<HTMLInputElement>) => string;
+  props: InputEventProps;
+  checkWhetherSetState?: (e: ChangeEvent<HTMLInputElement>) => boolean;
+  getNewValue?: (e: ChangeEvent<HTMLInputElement>) => string;
 }
 
 export interface BlurEventHandlerProps {
-  props: UseInputOnChangeProps;
-  checkWhetherSetState: (e: FocusEvent<HTMLInputElement, Element>) => boolean;
-  getNewValue: (e: FocusEvent<HTMLInputElement, Element>) => string;
+  props: InputEventProps;
+  checkWhetherSetState?: (e: FocusEvent<HTMLInputElement, Element>) => boolean;
+  getNewValue?: (e: FocusEvent<HTMLInputElement, Element>) => string;
 }
 
 export function useInputEventHandler() {
   return {
     createInputChangeHandler:
-      ({ props, checkWhetherSetState, getNewValue }: ChangeEventHandlerProps) =>
+      ({
+        props,
+        checkWhetherSetState = checkWhetherSetStateDefault,
+        getNewValue = getNewValueDefault,
+      }: ChangeEventHandlerProps) =>
       (e: ChangeEvent<HTMLInputElement>) => {
-        const { setState } = props;
+        const { setState, eventCallback } = props;
         if (checkWhetherSetState(e)) {
           const newValue = getNewValue(e);
-          setState(newValue);
+          setState?.(newValue);
         }
+
+        eventCallback?.(e);
       },
     createInputBlurHandler:
-      ({ props, checkWhetherSetState, getNewValue }: BlurEventHandlerProps) =>
+      ({
+        props,
+        checkWhetherSetState = checkWhetherSetStateDefault,
+        getNewValue = getNewValueDefault,
+      }: BlurEventHandlerProps) =>
       (e: FocusEvent<HTMLInputElement, Element>) => {
-        const { setState } = props;
+        const { setState, eventCallback } = props;
         if (checkWhetherSetState(e)) {
           const newValue = getNewValue(e);
           e.currentTarget.value = newValue;
-
-          setState(newValue);
+          setState?.(newValue);
         }
+
+        eventCallback?.(e);
       },
   };
+}
+
+function checkWhetherSetStateDefault() {
+  return true;
+}
+
+function getNewValueDefault(e: { currentTarget: { value: string } }) {
+  return e.currentTarget.value;
 }

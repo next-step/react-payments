@@ -15,6 +15,7 @@ body {
 
 input {
   font-size: 16px;
+  padding: 0;
 }
 
 .root {
@@ -108,4 +109,8 @@ input[type=number] {
 #modal-root:empty {
   width: 0px;
   height: 0px;
+}
+
+.error {
+  border: 2px solid red;
 }

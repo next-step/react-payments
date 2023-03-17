@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
 
 import { useCardContextApiSelector, SecurityCodesState } from '@/stores/CardContext';
+import { useErrorContextApiSelector, useErrorSelector } from '@/stores/ErrorContext';
 import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';
@@ -14,6 +15,7 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
   const { key, value, checkIsAllowInput, setRef } = securityCode;
 
   const cardContextApis = useCardContextApiSelector();
+  const errorContextApis = useErrorContextApiSelector();
 
   const changeEventProps = {
     props: {
@@ -28,6 +30,19 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
     },
   };
 
+  const blurEventProps = {
+    props: {
+      eventCallback: () => {
+        if (!securityCode.checkIsValid())
+          errorContextApis?.dispatch({ type: securityCode.key, message: securityCode.getInvalidMessage() });
+        else errorContextApis?.dispatch({});
+      },
+    },
+  };
+
+  const errorStore = useErrorSelector();
+  const error = { isError: errorStore.type === key };
+
   return (
     <CardInfoInputElement
       key={key}
@@ -36,6 +51,8 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
       value={value ?? ''}
       ref={setRef?.bind(securityCode)}
       changeEventProps={changeEventProps}
+      blurEventProps={blurEventProps}
+      error={error}
     />
   );
 }

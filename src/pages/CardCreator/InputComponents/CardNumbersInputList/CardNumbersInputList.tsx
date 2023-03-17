@@ -1,10 +1,10 @@
 import React, { memo, forwardRef, useImperativeHandle, ForwardedRef } from 'react';
 
+import { useGetErrorMessage } from '@/hooks';
 import { checkIsArrayLast } from '@/utils';
 import type { CardNumbersState } from '@/stores/CardContext';
 
 import { CardInputWrapperPure } from '../components';
-import { useErrorContext } from '../hooks';
 import { CardNumberInput } from './CardNumberInput';
 
 export interface CardNumbersInputListRefs {
@@ -16,13 +16,8 @@ interface CardNumbersInputListProps {
 }
 
 function CardNumbersInputList({ cardNumbers }: CardNumbersInputListProps, ref: ForwardedRef<CardNumbersInputListRefs>) {
-  const errorMessage = useErrorContext(
-    {
-      inValid: '카드 번호를 각각 4자리씩 입력해주세요.',
-    },
-    [{ errorType: 'cardNumbers', messageType: 'inValid' }]
-  );
-
+  const errorMessage = useGetErrorMessage(cardNumbers);
+  console.log(errorMessage);
   useImperativeHandle(ref, () => ({
     checkIsEveryInputValid: () => {
       return !!cardNumbers?.every((cardNumber, i) => {

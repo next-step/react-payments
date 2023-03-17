@@ -1,8 +1,9 @@
 import React, { MouseEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
-import { routes } from '@/routes';
 import { Card, ThemeSetter } from '@/components';
+import { useGetErrorMessage } from '@/hooks';
+import { routes } from '@/routes';
 import { useCardContextApiSelector, useCardSelector } from '@/stores/CardContext';
 import type { TCardCompany } from '@/types';
 
@@ -15,12 +16,15 @@ import {
   SecurityCodesInputListPure,
   PasswordsInputListPure,
 } from './InputComponents';
+import { StyledErrorMessage } from './CardCreator.styled';
 
 export function CardCreator() {
   const cardInfo = useCardSelector();
   const cardContextApis = useCardContextApiSelector();
 
   const { CardCompanySelectModal, showModal, hideModal } = useCardCompanySelectModal();
+
+  const errorMessage = useGetErrorMessage(cardInfo?.cardCompany);
 
   const handleCardClick = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
@@ -51,6 +55,11 @@ export function CardCreator() {
         cardExpireDate={cardInfo?.expireDates?.map((expireDate) => expireDate.value)}
         cardNumbers={cardInfo?.cardNumbers}
         cardOwnerName={cardInfo?.cardOwners?.[0]?.value}
+        additionalBottomElement={
+          !cardInfo?.cardCompany.checkIsValid() && errorMessage ? (
+            <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
+          ) : undefined
+        }
         onCardClick={handleCardClick}
       />
 

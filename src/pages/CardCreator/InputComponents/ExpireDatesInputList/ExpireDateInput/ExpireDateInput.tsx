@@ -2,6 +2,7 @@ import React, { ChangeEvent, FocusEvent, memo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components';
 import { ExpireDatesState, useCardContextApiSelector } from '@/stores/CardContext';
+import { useErrorContextApiSelector, useErrorSelector } from '@/stores/ErrorContext';
 import { filterNumber } from '@/utils';
 
 import { InputDivider, CardInfoInputElement } from '../../components';
@@ -13,11 +14,10 @@ interface ExpireDateInputProps {
 }
 
 export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: ExpireDateInputProps) => {
-  const { value, placeholder, checkIsAllowInput, setRef } = expireDate;
+  const { key, value, placeholder, checkIsAllowInput, setRef } = expireDate;
 
   const cardContextApis = useCardContextApiSelector();
-
-  const isValueValid = expireDate.checkIsValid();
+  const errorContextApis = useErrorContextApiSelector();
 
   const changeEventProps = {
     props: {
@@ -35,6 +35,11 @@ export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: E
   const blurEventProps = {
     props: {
       setState: (value: string) => cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value } }),
+      eventCallback: () => {
+        if (!expireDate.checkIsValid())
+          errorContextApis?.dispatch({ type: expireDate.key, message: expireDate.getInvalidMessage() });
+        else errorContextApis?.dispatch({});
+      },
     },
     checkWhetherSetState: (e: FocusEvent<HTMLInputElement>) => {
       const blurValue = e.currentTarget.value;
@@ -46,6 +51,14 @@ export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: E
     },
   };
 
+  const errorStore = useErrorSelector();
+  const error = {
+    isError: errorStore.type === key,
+    message: errorStore.message,
+  };
+
+  const isValueValid = expireDate.checkIsValid();
+
   return (
     <>
       <CardInfoInputElement
@@ -56,6 +69,7 @@ export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: E
         ref={setRef?.bind(expireDate)}
         changeEventProps={changeEventProps}
         blurEventProps={blurEventProps}
+        error={error}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
         <InputDivider hiding={!isValueValid}>/</InputDivider>

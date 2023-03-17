@@ -1,6 +1,7 @@
-import React, { ChangeEvent, useContext } from 'react';
+import React, { ChangeEvent } from 'react';
 
-import { ApiContext, PasswordsState } from '@/stores/CardContext';
+import { PasswordsState, useCardContextApiSelector } from '@/stores/CardContext';
+import { useErrorContextApiSelector, useErrorSelector } from '@/stores/ErrorContext';
 import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';
@@ -13,10 +14,11 @@ interface PasswordInputProps {
 export function PasswordInput({ password, index }: PasswordInputProps) {
   const { key, value, checkIsAllowInput, setRef } = password;
 
-  const apiContext = useContext(ApiContext);
+  const cardContextApis = useCardContextApiSelector();
+  const errorContextApis = useErrorContextApiSelector();
 
   const changeEventProps = {
-    props: { setState: (value: string) => apiContext?.dispatch({ type: 'passwords', payload: { index, value } }) },
+    props: { setState: (value: string) => cardContextApis?.dispatch({ type: 'passwords', payload: { index, value } }) },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
       const filteredNumber = filterNumber(e.currentTarget.value);
       return checkIsAllowInput(filteredNumber);
@@ -26,6 +28,19 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
     },
   };
 
+  const blurEventProps = {
+    props: {
+      eventCallback: () => {
+        if (!password.checkIsValid())
+          errorContextApis?.dispatch({ type: password.key, message: password.getInvalidMessage() });
+        else errorContextApis?.dispatch({ type: null, message: null });
+      },
+    },
+  };
+
+  const errorStore = useErrorSelector();
+  const error = { isError: errorStore.type === key };
+
   return (
     <CardInfoInputElement
       key={key}
@@ -34,6 +49,8 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
       value={value ?? ''}
       ref={setRef?.bind(password)}
       changeEventProps={changeEventProps}
+      blurEventProps={blurEventProps}
+      error={error}
     />
   );
 }

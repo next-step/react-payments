@@ -19,8 +19,3 @@ export const StyledCard = styled('div', {
     },
   },
 });
-
-export const StyledErrorMessage = styled('span', {
-  color: 'red',
-  fontWeight: 'bold',
-});

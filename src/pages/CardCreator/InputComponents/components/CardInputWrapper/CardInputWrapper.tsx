@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 
 interface CardInputWrapperProps extends PropsWithChildren {
   header: string[] | string;
-  errorMessage?: string;
+  errorMessage?: string | null;
 }
 
 function CardInputWrapper({ header, errorMessage, children }: CardInputWrapperProps) {

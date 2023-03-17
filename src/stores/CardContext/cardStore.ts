@@ -2,7 +2,7 @@ import { createContext } from 'react';
 
 import type { TCardCompany } from '@/types';
 
-import { DispatchContext, ReducerReturnType } from '../types';
+import { DispatchContext, ReducerReturnType, CardStoreActions, CardStore } from '../types';
 import {
   cardCompanyInit,
   cardNumbersInit,
@@ -12,18 +12,6 @@ import {
   passwordsInit,
   cardNicknameInit,
 } from './CardStates';
-
-export type CardStore = {
-  cardCompany: typeof cardCompanyInit;
-  cardNickname: typeof cardNicknameInit;
-  cardNumbers: typeof cardNumbersInit;
-  expireDates: typeof expireDatesInit;
-  cardOwners: typeof cardOwnersInit;
-  passwords: typeof passwordsInit;
-  securityCodes: typeof securityCodesInit;
-};
-
-export type Actions = keyof CardStore;
 
 export const initialCardStore: CardStore = {
   cardCompany: cardCompanyInit,
@@ -40,7 +28,7 @@ type CardInputPayload = { index: number; value: string };
 
 export function reducer(
   store: CardStore,
-  action: { type?: Actions; payload?: CardInputPayload | CardNickNamePayload }
+  action: { type?: CardStoreActions; payload?: CardInputPayload | CardNickNamePayload }
 ) {
   const { type, payload } = action;
 

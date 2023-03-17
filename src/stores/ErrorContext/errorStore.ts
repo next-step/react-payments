@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import type { DispatchContext, ReducerReturnType } from '../types';
 
-type ErrorStore = { type: string | null; message: string | null };
+type ErrorStore = { type?: string | null; message?: string | null };
 
 export const initialErrorStore: ErrorStore = {
   type: null,
