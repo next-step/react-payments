@@ -86,6 +86,8 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
     validPassword: false,
     validAllSuccess: false,
   });
+  const { validDigit, validExpire, validCvc, validPassword, validAllSuccess } =
+    validation;
 
   useEffect(() => {
     setValidation({
@@ -97,19 +99,15 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
       validExpire: EXPIRE_REG.test(state.expire),
       validCvc: CVC_REG.test(state.cvc),
       validPassword: !!state.passwords.password1 && !!state.passwords.password2,
-      validAllSuccess:
-        validation.validDigit &&
-        validation.validExpire &&
-        validation.validCvc &&
-        validation.validPassword,
+      validAllSuccess: validDigit && validExpire && validCvc && validPassword,
     });
   }, [
     state,
-    validation.validPassword,
-    validation.validExpire,
-    validation.validCvc,
-    validation.validAllSuccess,
-    validation.validDigit,
+    validPassword,
+    validExpire,
+    validCvc,
+    validAllSuccess,
+    validDigit,
   ]);
 
   return (
