@@ -1,5 +1,5 @@
 export interface SvgType {
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
   color: string;
 }

@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 
-export type ModalType = 'SELECT_COMPANY' | 'MANAGE_CARD';
+export type ModalType = 'SELECT_COMPANY' | 'MANAGE_CARD' | 'MESSAGE_TOOLTIP';
 
 interface ModalStateType {
   type: ModalType | null;

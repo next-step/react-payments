@@ -4,6 +4,7 @@ import { COLOR } from '../../constant/color';
 import { ModalType, useModalState } from '../../context/ModalContext';
 import ModalSelectCompany from './ModalSelectCompany';
 import ModalManageCard from './ModalManageCard';
+import ModalMessageTip from './ModalMessageTip';
 const S = {
   ModalDimmed: styled.div<{ isShow: IModal['isShow'] }>`
     display: ${(props) => (props.isShow ? 'block' : 'none')};
@@ -31,6 +32,7 @@ const S = {
     transition: transform 0.3s ease-in-out;
     transform: ${(props) =>
       props.isShow ? 'translate3d(-50%, 0, 0)' : 'translate3d(-50%, 100%, 0)'};
+    opacity: ${(props) => (props.isShow ? '1' : '0')};
   `,
 
   Content: styled.div`
@@ -49,15 +51,10 @@ const Modal = () => {
     setModalState,
   } = useModalState();
 
-  const getModalContent = (type: ModalType | null) => {
-    switch (type) {
-      case 'SELECT_COMPANY':
-        return <ModalSelectCompany />;
-      case 'MANAGE_CARD':
-        return <ModalManageCard />;
-      default:
-        return null;
-    }
+  const content = {
+    SELECT_COMPANY: <ModalSelectCompany />,
+    MANAGE_CARD: <ModalManageCard />,
+    MESSAGE_TOOLTIP: <ModalMessageTip />,
   };
 
   return (
@@ -67,7 +64,7 @@ const Modal = () => {
         onClick={() => setModalState({ type: null, isShow: false })}
       />
       <S.Modal isShow={isShow}>
-        <S.Content>{getModalContent(type)}</S.Content>
+        <S.Content>{content[type as ModalType]}</S.Content>
       </S.Modal>
     </>
   );

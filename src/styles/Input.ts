@@ -3,6 +3,7 @@ import { COLOR } from '../constant/color';
 
 export const S = {
   InputContainer: styled.div`
+    position: relative;
     margin: 20px 0;
   `,
   InputTitle: styled.label`
@@ -35,5 +36,14 @@ export const S = {
     margin-top: 5px;
     font-size: 10px;
     color: ${COLOR.RED};
+  `,
+  SvgWrap: styled.span`
+    display: inline-block;
+    margin-left: 10px;
+    cursor: pointer;
+  `,
+  Row: styled.div`
+    display: flex;
+    align-items: center;
   `,
 };
