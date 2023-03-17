@@ -20,6 +20,7 @@ const InputCvc = ({ onChange, value }: IProps) => {
         maxLength={3}
         value={value}
       />
+      <S.Error>보안코드를 입력해 주세요.</S.Error>
     </S.InputContainer>
   );
 };

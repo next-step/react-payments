@@ -21,6 +21,7 @@ const InputExpire = ({ onChange, value }: IProps) => {
           value={value}
         />
       </S.InputBox>
+      <S.Error>유효한 날짜를 입력해 주세요.</S.Error>
     </S.InputContainer>
   );
 };

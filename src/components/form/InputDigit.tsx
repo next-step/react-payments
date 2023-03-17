@@ -41,6 +41,10 @@ export const S = {
     color: ${COLOR.BLACK};
     opacity: 0.3;
   `,
+  Error: styled.span`
+    font-size: 10px;
+    color: ${COLOR.RED};
+  `,
 };
 
 const Hyphen = () => {
@@ -90,6 +94,7 @@ const InputDigit = ({ onChange, value }: IProps) => {
           maxLength={4}
         />
       </S.InputBox>
+      <S.Error>유효한 카드 번호를 입력해 주세요.</S.Error>
     </S.InputContainer>
   );
 };

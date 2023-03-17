@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { COLOR } from '../constant/color';
 
 export const S = {
   InputContainer: styled.div`
@@ -29,5 +30,10 @@ export const S = {
   TitleWrap: styled.div`
     display: flex;
     justify-content: space-between;
+  `,
+  Error: styled.p`
+    margin-top: 5px;
+    font-size: 10px;
+    color: ${COLOR.RED};
   `,
 };

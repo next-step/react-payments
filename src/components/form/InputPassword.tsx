@@ -48,6 +48,7 @@ const InputPassword = ({ onChange, value }: IProps) => {
         disabled={true}
         value={'●'}
       />
+      <S.Error>비밀번호를 입력해 주세요.</S.Error>
     </S.InputContainer>
   );
 };
