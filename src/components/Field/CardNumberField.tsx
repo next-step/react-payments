@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useRef } from 'react';
 import { Input, InputContainer } from '@components/Common';
 import { nextSiblingInputFocus, renderTextDivider } from '@/utils';
 import FieldContainer from './FieldContainer';
-import { LIMIT_INPUT_LENGTH } from '@/constants';
+import { LIMIT_INPUT_LENGTH, REGEX } from '@/constants';
 import { useCardForm } from '@/context/CardFormContext';
 
 type CardNumberFieldProps = {
@@ -47,7 +47,7 @@ function CardNumberField({ title, onChange, minLength = 0, maxLength = 4 }: Card
           type="text"
           minLength={minLength}
           maxLength={maxLength}
-          pattern="[0-9]*"
+          pattern={REGEX.HTML_PATTERN.ONLY_NUMBER}
           value={cardNumber1}
           name="cardNumber1"
           onChange={onChange}
@@ -59,7 +59,7 @@ function CardNumberField({ title, onChange, minLength = 0, maxLength = 4 }: Card
           type="text"
           minLength={0}
           maxLength={4}
-          pattern="[0-9]*"
+          pattern={REGEX.HTML_PATTERN.ONLY_NUMBER}
           value={cardNumber2}
           name="cardNumber2"
           onChange={onChange}
@@ -71,7 +71,7 @@ function CardNumberField({ title, onChange, minLength = 0, maxLength = 4 }: Card
           type="password"
           minLength={0}
           maxLength={4}
-          pattern="[0-9]*"
+          pattern={REGEX.HTML_PATTERN.ONLY_NUMBER}
           value={cardNumber3}
           name="cardNumber3"
           onChange={onChange}
@@ -83,7 +83,7 @@ function CardNumberField({ title, onChange, minLength = 0, maxLength = 4 }: Card
           type="password"
           minLength={0}
           maxLength={4}
-          pattern="[0-9]*"
+          pattern={REGEX.HTML_PATTERN.ONLY_NUMBER}
           value={cardNumber4}
           name="cardNumber4"
           onChange={onChange}

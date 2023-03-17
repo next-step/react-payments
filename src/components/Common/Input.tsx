@@ -16,17 +16,12 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   kind?: 'basic' | 'underline';
   width?: Width;
   border?: boolean;
-  formatter?: (str: string) => string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ kind = 'basic', width = 'full', onChange, formatter, disabled, autoComplete, ...props }, ref) => {
+  ({ kind = 'basic', width = 'full', onChange, disabled, autoComplete, ...props }, ref) => {
     const onChangeWithFormatter = (e: ChangeEvent<HTMLInputElement>) => {
-      if (formatter) {
-        e.target.value = formatter(e.target.value);
-      }
-
       onChange?.(e);
     };
 

@@ -22,7 +22,7 @@ export const ROUTES = {
 export const REGEX = {
   // 임시적 분류 -> HTML PATTERN에는 문자열만 허용
   HTML_PATTERN: {
-    PASSWORD: '[0-9]*',
+    ONLY_NUMBER: '[0-9]*',
   },
   NOT_NUMBER: /\D+/g,
 };

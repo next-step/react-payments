@@ -3,7 +3,7 @@ import { Input, InputContainer } from '../Common';
 
 import { ChangeEvent, HTMLInputTypeAttribute, useEffect, useRef } from 'react';
 import { useCardForm } from '@/context/CardFormContext';
-import { LIMIT_INPUT_LENGTH } from '@/constants';
+import { LIMIT_INPUT_LENGTH, REGEX } from '@/constants';
 import { nextSiblingInputFocus } from '@/utils';
 
 type CVCFieldProps = {
@@ -34,7 +34,7 @@ function CVCField({ title, placeholder, maxLength, name, type = 'text', onChange
           type={type}
           ref={cvcRef}
           name={name}
-          pattern="[0-9]*"
+          pattern={REGEX.HTML_PATTERN.ONLY_NUMBER}
           value={cvc}
           placeholder={placeholder}
           maxLength={maxLength}

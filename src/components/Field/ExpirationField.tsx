@@ -1,10 +1,10 @@
 import { Input, InputContainer } from '@components/Common';
-import { expirationMonthFormatter, nextSiblingInputFocus, renderTextDivider, textOnlyFormatter } from '@/utils';
+import { nextSiblingInputFocus, renderTextDivider } from '@/utils';
 import FieldContainer from './FieldContainer';
 
 import { ChangeEvent, HTMLInputTypeAttribute, useEffect, useRef } from 'react';
 import { useCardForm } from '@/context/CardFormContext';
-import { LIMIT_INPUT_LENGTH } from '@/constants';
+import { LIMIT_INPUT_LENGTH, REGEX } from '@/constants';
 
 type ExpirationFieldProps = {
   title: string;
@@ -41,10 +41,10 @@ function ExpirationField({ title, maxLength, type = 'text', onChange }: Expirati
           ref={monthRef}
           name="month"
           placeholder="MM"
+          pattern={REGEX.HTML_PATTERN.ONLY_NUMBER}
           maxLength={maxLength}
           value={month}
           onChange={onChange}
-          formatter={expirationMonthFormatter}
         />
         {renderTextDivider({ formerValue: month, divider: '/' })}
         <Input
@@ -52,10 +52,10 @@ function ExpirationField({ title, maxLength, type = 'text', onChange }: Expirati
           ref={yearRef}
           name="year"
           placeholder="YY"
+          pattern={REGEX.HTML_PATTERN.ONLY_NUMBER}
           maxLength={maxLength}
           value={year}
           onChange={onChange}
-          formatter={textOnlyFormatter}
         />
       </InputContainer>
     </FieldContainer>

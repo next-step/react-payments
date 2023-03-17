@@ -29,7 +29,7 @@ function PasswordField({ title, onChange }: PasswordFieldProps) {
             type="password"
             ref={password1Ref}
             name="password1"
-            pattern={REGEX.HTML_PATTERN.PASSWORD}
+            pattern={REGEX.HTML_PATTERN.ONLY_NUMBER}
             maxLength={LIMIT_INPUT_LENGTH.PASSWORD}
             value={password1}
             onChange={onChange}
@@ -40,17 +40,17 @@ function PasswordField({ title, onChange }: PasswordFieldProps) {
             type="password"
             ref={password2Ref}
             name="password2"
-            pattern={REGEX.HTML_PATTERN.PASSWORD}
+            pattern={REGEX.HTML_PATTERN.ONLY_NUMBER}
             maxLength={LIMIT_INPUT_LENGTH.PASSWORD}
             value={password2}
             onChange={onChange}
           />
         </InputContainer>
         <InputContainer size="quarter" disabled>
-          <Input type="password" pattern={REGEX.HTML_PATTERN.PASSWORD} value="*" disabled />
+          <Input type="password" pattern={REGEX.HTML_PATTERN.ONLY_NUMBER} value="*" disabled />
         </InputContainer>
         <InputContainer size="quarter" disabled>
-          <Input type="password" pattern={REGEX.HTML_PATTERN.PASSWORD} value="*" disabled />
+          <Input type="password" pattern={REGEX.HTML_PATTERN.ONLY_NUMBER} value="*" disabled />
         </InputContainer>
       </div>
     </FieldContainer>
