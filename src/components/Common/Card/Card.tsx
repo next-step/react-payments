@@ -17,6 +17,7 @@ interface CardProps {
   size?: 'sm' | 'lg';
   isEmpty?: boolean;
   onClick?: () => void;
+  cursor?: boolean;
 }
 
 function Card({ cardOwner, cardCompany, cardNumber, expiration, size = 'sm', isEmpty = false, onClick }: CardProps) {
@@ -27,7 +28,7 @@ function Card({ cardOwner, cardCompany, cardNumber, expiration, size = 'sm', isE
 
   if (isEmpty) {
     return (
-      <div className={cls('flex items-center justify-center text-xs')}>
+      <div className={cls('flex items-center justify-center text-xs cursor-pointer')}>
         <div
           className={cls(
             cardSize,
@@ -43,7 +44,7 @@ function Card({ cardOwner, cardCompany, cardNumber, expiration, size = 'sm', isE
   }
 
   return (
-    <div onClick={onClick} className={cls('flex items-center justify-center text-xs')}>
+    <div onClick={onClick} className={cls('flex items-center justify-center text-xs cursor-pointer')}>
       <div
         className={cls(
           cardSize,
