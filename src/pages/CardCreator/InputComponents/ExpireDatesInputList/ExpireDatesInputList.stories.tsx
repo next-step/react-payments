@@ -1,22 +1,17 @@
-import '@/styles/index.css';
-
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { ErrorContextProvider } from '@/stores/ErrorContext';
-import { CardProvider } from '@/stores/CardContext';
+import { CardProvider, expireDatesInit } from '@/stores/CardContext';
 
 import { ExpireDatesInputListPure } from './ExpireDatesInputList';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'CardCreator/ExpireDateInput',
+  title: 'CardCreator/ExpireDatesInputList',
   component: ExpireDatesInputListPure,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    cardNumbers: { control: false },
-    createCardNumberSetter: { control: false },
-  },
+  argTypes: {},
 } as ComponentMeta<typeof ExpireDatesInputListPure>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
@@ -31,3 +26,7 @@ const Template: ComponentStory<typeof ExpireDatesInputListPure> = () => {
 };
 
 export const Primary = Template.bind({});
+
+Primary.args = {
+  expireDates: expireDatesInit,
+};

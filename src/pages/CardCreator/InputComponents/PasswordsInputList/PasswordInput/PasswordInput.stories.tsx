@@ -1,40 +1,32 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { cardNumbersInit, CardProvider } from '@/stores/CardContext';
 import { ErrorContextProvider } from '@/stores/ErrorContext';
+import { CardProvider, passwordsInit } from '@/stores/CardContext';
 
-import { CardNumbersInputListPure } from './CardNumbersInputList';
+import { PasswordInput } from './PasswordInput';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'CardCreator/CardNumbersInputList',
-  component: CardNumbersInputListPure,
+  title: 'CardCreator/PasswordsInputList/PasswordInput',
+  component: PasswordInput,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
-} as ComponentMeta<typeof CardNumbersInputListPure>;
+} as ComponentMeta<typeof PasswordInput>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof CardNumbersInputListPure> = (props) => {
+const Template: ComponentStory<typeof PasswordInput> = (props) => {
   return (
     <ErrorContextProvider>
       <CardProvider>
-        <CardNumbersInputListPure {...props} />
+        <PasswordInput {...props} />
       </CardProvider>
     </ErrorContextProvider>
   );
 };
 
 export const Primary = Template.bind({});
-export const ValueSet = Template.bind({});
 
 Primary.args = {
-  cardNumbers: cardNumbersInit,
-};
-
-ValueSet.args = {
-  cardNumbers: cardNumbersInit.map((cardNumber) => {
-    cardNumber.value = '1234';
-    return cardNumber;
-  }),
+  password: passwordsInit[0],
 };

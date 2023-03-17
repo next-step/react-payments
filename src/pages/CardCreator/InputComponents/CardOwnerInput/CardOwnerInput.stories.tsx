@@ -1,10 +1,8 @@
-import '@/styles/index.css';
-
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
+import { cardOwnersInit, CardProvider } from '@/stores/CardContext';
 import { ErrorContextProvider } from '@/stores/ErrorContext';
-import { CardProvider } from '@/stores/CardContext';
 
 import { CardOwnerInputPure } from './CardOwnerInput';
 
@@ -13,21 +11,22 @@ export default {
   title: 'CardCreator/CardOwnerInput',
   component: CardOwnerInputPure,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    cardNumbers: { control: false },
-    createCardNumberSetter: { control: false },
-  },
+  argTypes: {},
 } as ComponentMeta<typeof CardOwnerInputPure>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof CardOwnerInputPure> = () => {
+const Template: ComponentStory<typeof CardOwnerInputPure> = (props) => {
   return (
     <ErrorContextProvider>
       <CardProvider>
-        <CardOwnerInputPure />
+        <CardOwnerInputPure {...props} />
       </CardProvider>
     </ErrorContextProvider>
   );
 };
 
 export const Primary = Template.bind({});
+
+Primary.args = {
+  cardOwners: cardOwnersInit,
+};
