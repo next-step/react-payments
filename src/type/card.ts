@@ -49,5 +49,5 @@ export interface CardValidationType {
   validExpire: boolean;
   validCvc: boolean;
   validPassword: boolean;
-  validSuccess: boolean; // 모든 input 통과 여부
+  validAllSuccess: boolean; // 모든 input 통과 여부
 }

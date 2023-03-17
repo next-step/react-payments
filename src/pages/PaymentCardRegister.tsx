@@ -27,7 +27,7 @@ const PaymentCardRegister = () => {
   const cardState = useCardState();
   const dispatch = useCardDispatch();
   const { addCard } = useCardListDispatch();
-  const { validSuccess } = useCardValidation();
+  const { validAllSuccess } = useCardValidation();
 
   const registerCard = () => {
     addCard({
@@ -56,7 +56,11 @@ const PaymentCardRegister = () => {
       <CardRegisterForm />
 
       <S.ButtonWrapper>
-        <Button text="다음" onClick={registerCard} disabled={!validSuccess} />
+        <Button
+          text="다음"
+          onClick={registerCard}
+          disabled={!validAllSuccess}
+        />
       </S.ButtonWrapper>
     </>
   );

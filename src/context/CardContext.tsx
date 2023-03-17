@@ -18,6 +18,7 @@ import { maxLengthCheck, validateExpire } from '../utils/form';
 const CardStateContext = createContext<CardInfoType | null>(null);
 const CardDispatchContext = createContext<CardDispatchType | null>(null);
 const CardValidationContext = createContext<CardValidationType | null>(null);
+
 const cardReducer = (state: CardInfoType, action: Action): CardInfoType => {
   switch (action.type) {
     case 'SET_CARD_VALUE':
@@ -75,6 +76,7 @@ const cardReducer = (state: CardInfoType, action: Action): CardInfoType => {
 const DIGIT_REG = /^\d{4}$/;
 const EXPIRE_REG = /(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])/;
 const CVC_REG = /^\d{3}$/;
+
 export const CardProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(cardReducer, initCardInfo);
   const [validation, setValidation] = useState<CardValidationType>({
@@ -82,7 +84,7 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
     validExpire: false,
     validCvc: false,
     validPassword: false,
-    validSuccess: false,
+    validAllSuccess: false,
   });
 
   useEffect(() => {
@@ -95,7 +97,7 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
       validExpire: EXPIRE_REG.test(state.expire),
       validCvc: CVC_REG.test(state.cvc),
       validPassword: !!state.passwords.password1 && !!state.passwords.password2,
-      validSuccess:
+      validAllSuccess:
         validation.validDigit &&
         validation.validExpire &&
         validation.validCvc &&
@@ -106,10 +108,10 @@ export const CardProvider = ({ children }: { children: ReactNode }) => {
     validation.validPassword,
     validation.validExpire,
     validation.validCvc,
-    validation.validSuccess,
+    validation.validAllSuccess,
     validation.validDigit,
   ]);
-  // validation을 통째로 넣으면 무한렌더링 걸리는 이유는..?
+
   return (
     <CardStateContext.Provider value={state}>
       <CardDispatchContext.Provider value={dispatch}>
