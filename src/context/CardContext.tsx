@@ -1,14 +1,23 @@
-import React, { createContext, ReactNode, useContext, useReducer } from 'react';
-import { Action, CardDispatchType, CardInfoType } from '../type/card';
-import { initCardInfo } from '../data/init';
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react';
 import {
-  maxLengthCheck,
-  validateExpire,
-  validatePassword,
-} from '../utils/form';
+  Action,
+  CardDispatchType,
+  CardInfoType,
+  CardValidationType,
+} from '../type/card';
+import { initCardInfo } from '../data/init';
+import { maxLengthCheck, validateExpire } from '../utils/form';
 
 const CardStateContext = createContext<CardInfoType | null>(null);
 const CardDispatchContext = createContext<CardDispatchType | null>(null);
+const CardValidationContext = createContext<CardValidationType | null>(null);
 const cardReducer = (state: CardInfoType, action: Action): CardInfoType => {
   switch (action.type) {
     case 'SET_CARD_VALUE':
@@ -63,13 +72,50 @@ const cardReducer = (state: CardInfoType, action: Action): CardInfoType => {
   }
 };
 
+const DIGIT_REG = /^\d{4}$/;
+const EXPIRE_REG = /(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])/;
+const CVC_REG = /^\d{3}$/;
 export const CardProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(cardReducer, initCardInfo);
+  const [validation, setValidation] = useState<CardValidationType>({
+    validDigit: false,
+    validExpire: false,
+    validCvc: false,
+    validPassword: false,
+    validSuccess: false,
+  });
 
+  useEffect(() => {
+    setValidation({
+      validDigit:
+        DIGIT_REG.test(state.digits.digit1 as string) &&
+        DIGIT_REG.test(state.digits.digit2 as string) &&
+        DIGIT_REG.test(state.digits.digit3 as string) &&
+        DIGIT_REG.test(state.digits.digit4 as string),
+      validExpire: EXPIRE_REG.test(state.expire),
+      validCvc: CVC_REG.test(state.cvc),
+      validPassword: !!state.passwords.password1 && !!state.passwords.password2,
+      validSuccess:
+        validation.validDigit &&
+        validation.validExpire &&
+        validation.validCvc &&
+        validation.validPassword,
+    });
+  }, [
+    state,
+    validation.validPassword,
+    validation.validExpire,
+    validation.validCvc,
+    validation.validSuccess,
+    validation.validDigit,
+  ]);
+  // validation을 통째로 넣으면 무한렌더링 걸리는 이유는..?
   return (
     <CardStateContext.Provider value={state}>
       <CardDispatchContext.Provider value={dispatch}>
-        {children}
+        <CardValidationContext.Provider value={validation}>
+          {children}
+        </CardValidationContext.Provider>
       </CardDispatchContext.Provider>
     </CardStateContext.Provider>
   );
@@ -85,4 +131,10 @@ export const useCardDispatch = () => {
   const dispatch = useContext(CardDispatchContext);
   if (!dispatch) throw new Error('Cannot find CardDispatchProvider');
   return dispatch;
+};
+
+export const useCardValidation = () => {
+  const state = useContext(CardValidationContext);
+  if (!state) throw new Error('Cannot find CardValidationContext');
+  return state;
 };

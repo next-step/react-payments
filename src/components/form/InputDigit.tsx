@@ -3,6 +3,7 @@ import React from 'react';
 import { DigitType } from '../../type/card';
 import styled from '@emotion/styled';
 import { COLOR } from '../../constant/color';
+import { useCardValidation } from '../../context/CardContext';
 
 interface IProps {
   onChange: (e: React.ChangeEvent) => void;
@@ -52,6 +53,7 @@ const Hyphen = () => {
 };
 
 const InputDigit = ({ onChange, value }: IProps) => {
+  const { validDigit } = useCardValidation();
   return (
     <S.InputContainer>
       <S.InputTitle>카드 번호</S.InputTitle>
@@ -94,7 +96,9 @@ const InputDigit = ({ onChange, value }: IProps) => {
           maxLength={4}
         />
       </S.InputBox>
-      <S.Error>유효한 카드 번호를 입력해 주세요.</S.Error>
+      {!validDigit && value.digit1 && (
+        <S.Error>유효한 카드 번호를 입력해 주세요.</S.Error>
+      )}
     </S.InputContainer>
   );
 };

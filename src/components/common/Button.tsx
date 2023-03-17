@@ -9,6 +9,9 @@ const S = {
     background: none;
     font-size: 14px;
     font-weight: bold;
+    &:disabled {
+      cursor: default;
+    }
   `,
 };
 
@@ -16,11 +19,16 @@ interface IButton {
   onClick?: () => void;
   text: string;
   color?: string;
+  disabled?: boolean;
 }
 
-const Button = ({ onClick, text, color }: IButton) => {
+const Button = ({ onClick, text, color, disabled }: IButton) => {
   return (
-    <S.Button onClick={onClick} color={color ?? COLOR.BLACK}>
+    <S.Button
+      onClick={onClick}
+      color={color ?? COLOR.BLACK}
+      disabled={disabled ?? false}
+    >
       {text}
     </S.Button>
   );

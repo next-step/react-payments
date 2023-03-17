@@ -9,12 +9,6 @@ export const maxLengthCheck = (value: string, max: number) => {
 
 export const validateExpire = (digit: string) => {
   const value = digit.replace(/\D+/g, '');
-
-  if (Number(value.substring(0, 2)) > 12) {
-    alert('1이상 12이하의 월을 입력해주세요');
-    return '';
-  }
-
   return insertSlash(value, value.length);
 };
 

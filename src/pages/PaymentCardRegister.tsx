@@ -3,7 +3,11 @@ import Title from '../components/common/Title';
 import CardRegisterForm from '../components/CardForm';
 import Button from '../components/common/Button';
 import { useNavigate } from 'react-router-dom';
-import { useCardDispatch, useCardState } from '../context/CardContext';
+import {
+  useCardDispatch,
+  useCardState,
+  useCardValidation,
+} from '../context/CardContext';
 import CardPreview from '../components/CardPreview';
 import { useCardListDispatch } from '../context/CardListContext';
 import styled from '@emotion/styled';
@@ -23,6 +27,7 @@ const PaymentCardRegister = () => {
   const cardState = useCardState();
   const dispatch = useCardDispatch();
   const { addCard } = useCardListDispatch();
+  const { validSuccess } = useCardValidation();
 
   const registerCard = () => {
     addCard({
@@ -51,7 +56,7 @@ const PaymentCardRegister = () => {
       <CardRegisterForm />
 
       <S.ButtonWrapper>
-        <Button text="다음" onClick={registerCard} />
+        <Button text="다음" onClick={registerCard} disabled={!validSuccess} />
       </S.ButtonWrapper>
     </>
   );

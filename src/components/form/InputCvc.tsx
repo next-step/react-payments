@@ -1,6 +1,7 @@
 import { S } from '../../styles/Input';
 import Input from '../common/Input';
 import React from 'react';
+import { useCardValidation } from '../../context/CardContext';
 
 interface IProps {
   onChange: (e: React.ChangeEvent) => void;
@@ -8,6 +9,7 @@ interface IProps {
 }
 
 const InputCvc = ({ onChange, value }: IProps) => {
+  const { validCvc } = useCardValidation();
   return (
     <S.InputContainer>
       <S.InputTitle>보안코드(CVC/CVV)</S.InputTitle>
@@ -20,7 +22,7 @@ const InputCvc = ({ onChange, value }: IProps) => {
         maxLength={3}
         value={value}
       />
-      <S.Error>보안코드를 입력해 주세요.</S.Error>
+      {!validCvc && value && <S.Error>보안코드를 입력해 주세요.</S.Error>}
     </S.InputContainer>
   );
 };

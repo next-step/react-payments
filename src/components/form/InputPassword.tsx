@@ -1,6 +1,7 @@
 import { S } from '../../styles/Input';
 import Input from '../common/Input';
 import React from 'react';
+import { useCardValidation } from '../../context/CardContext';
 
 interface IProps {
   onChange: (e: React.ChangeEvent) => void;
@@ -11,6 +12,7 @@ interface IProps {
 }
 
 const InputPassword = ({ onChange, value }: IProps) => {
+  const { validPassword } = useCardValidation();
   return (
     <S.InputContainer>
       <S.InputTitle>카드 비밀번호</S.InputTitle>
@@ -48,7 +50,9 @@ const InputPassword = ({ onChange, value }: IProps) => {
         disabled={true}
         value={'●'}
       />
-      <S.Error>비밀번호를 입력해 주세요.</S.Error>
+      {!validPassword && value.password1 && (
+        <S.Error>비밀번호를 입력해 주세요.</S.Error>
+      )}
     </S.InputContainer>
   );
 };
