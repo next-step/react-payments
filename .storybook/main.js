@@ -20,14 +20,33 @@ module.exports = {
   },
   async viteFinal(config) {
     // Merge custom configuration into the default config
-    return mergeConfig(config, {
-      plugins: [tsconfigPaths()],
-      // Use the same "resolve" configuration as your app
-      resolve: (await import('../vite.config.js')).default.resolve,
-      // Add dependencies to pre-optimization
-      optimizeDeps: {
-        include: ['storybook-dark-mode'],
+    return {
+      ...config,
+      ...mergeConfig(config, {
+        plugins: [tsconfigPaths()],
+        // Use the same "resolve" configuration as your app
+        resolve: (await import('../vite.config.js')).default.resolve,
+        // Add dependencies to pre-optimization
+        optimizeDeps: {
+          include: ['storybook-dark-mode'],
+        },
+      }),
+      esbuild: {
+        ...config.esbuild,
+        jsxInject: `import React from 'react'`,
       },
-    });
+      rollupOptions: {
+        ...config.rollupOptions,
+        // Externalize deps that shouldn't be bundled
+        external: ["react", "react-dom"],
+        output: {
+          // Global vars to use in UMD build for externalized deps
+          globals: {
+            react: "React",
+            "react-dom": "ReactDOM",
+          },
+        },
+      },
+    };
   },
 }
