@@ -3,6 +3,7 @@ import { Input, InputContainer } from '../Common';
 import { ChangeEvent, useEffect, useRef } from 'react';
 import { LIMIT_INPUT_LENGTH, REGEX } from '@/constants';
 import { useCardForm } from '@/context/CardFormContext';
+import { useCardFormValidator } from '@/context/CardFormValidator';
 
 type PasswordFieldProps = {
   title: string;
@@ -11,6 +12,9 @@ type PasswordFieldProps = {
 
 function PasswordField({ title, onChange }: PasswordFieldProps) {
   const { password1, password2 } = useCardForm();
+  const {
+    isValidPasswordForm: { isValid, msg },
+  } = useCardFormValidator();
 
   const password1Ref = useRef<HTMLInputElement | null>(null);
   const password2Ref = useRef<HTMLInputElement | null>(null);
@@ -22,9 +26,9 @@ function PasswordField({ title, onChange }: PasswordFieldProps) {
   }, [password1]);
 
   return (
-    <FieldContainer title={title}>
+    <FieldContainer title={title} msg={msg}>
       <div className="flex w-1/2 gap-2">
-        <InputContainer size="quarter">
+        <InputContainer size="quarter" error={!password1 && !isValid}>
           <Input
             type="password"
             ref={password1Ref}
@@ -33,9 +37,10 @@ function PasswordField({ title, onChange }: PasswordFieldProps) {
             maxLength={LIMIT_INPUT_LENGTH.PASSWORD}
             value={password1}
             onChange={onChange}
+            error={!isValid}
           />
         </InputContainer>
-        <InputContainer size="quarter">
+        <InputContainer size="quarter" error={!password2 && !isValid}>
           <Input
             type="password"
             ref={password2Ref}
@@ -44,6 +49,7 @@ function PasswordField({ title, onChange }: PasswordFieldProps) {
             maxLength={LIMIT_INPUT_LENGTH.PASSWORD}
             value={password2}
             onChange={onChange}
+            error={!isValid}
           />
         </InputContainer>
         <InputContainer size="quarter" disabled>

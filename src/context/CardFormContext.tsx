@@ -40,7 +40,7 @@ const initCardInformation: CardInformation = {
   password2: '',
   cardOwner: '',
   nickname: '',
-  cardCompany: 'UNKNOWN',
+  cardCompany: '',
 };
 
 function CardFormProvider({ children }: PropsWithChildren) {

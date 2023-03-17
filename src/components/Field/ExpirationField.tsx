@@ -5,6 +5,7 @@ import FieldContainer from './FieldContainer';
 import { ChangeEvent, HTMLInputTypeAttribute, useEffect, useRef } from 'react';
 import { useCardForm } from '@/context/CardFormContext';
 import { LIMIT_INPUT_LENGTH, REGEX } from '@/constants';
+import { useCardFormValidator } from '@/context/CardFormValidator';
 
 type ExpirationFieldProps = {
   title: string;
@@ -16,6 +17,9 @@ type ExpirationFieldProps = {
 
 function ExpirationField({ title, maxLength, type = 'text', onChange }: ExpirationFieldProps) {
   const { month, year } = useCardForm();
+  const {
+    isValidExpirationForm: { isValid, msg },
+  } = useCardFormValidator();
 
   const fieldRef = useRef<HTMLDivElement | null>(null);
   const monthRef = useRef<HTMLInputElement | null>(null);
@@ -34,8 +38,8 @@ function ExpirationField({ title, maxLength, type = 'text', onChange }: Expirati
   }, [year]);
 
   return (
-    <FieldContainer title={title} ref={fieldRef}>
-      <InputContainer size="half">
+    <FieldContainer title={title} ref={fieldRef} msg={msg}>
+      <InputContainer size="half" error={!isValid}>
         <Input
           type={type}
           ref={monthRef}
@@ -45,6 +49,7 @@ function ExpirationField({ title, maxLength, type = 'text', onChange }: Expirati
           maxLength={maxLength}
           value={month}
           onChange={onChange}
+          error={!isValid}
         />
         {renderTextDivider({ formerValue: month, divider: '/' })}
         <Input
@@ -56,6 +61,7 @@ function ExpirationField({ title, maxLength, type = 'text', onChange }: Expirati
           maxLength={maxLength}
           value={year}
           onChange={onChange}
+          error={!isValid}
         />
       </InputContainer>
     </FieldContainer>

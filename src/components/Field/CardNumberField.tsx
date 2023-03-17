@@ -4,6 +4,7 @@ import { nextSiblingInputFocus, renderTextDivider } from '@/utils';
 import FieldContainer from './FieldContainer';
 import { LIMIT_INPUT_LENGTH, REGEX } from '@/constants';
 import { useCardForm } from '@/context/CardFormContext';
+import { useCardFormValidator } from '@/context/CardFormValidator';
 
 type CardNumberFieldProps = {
   title: string;
@@ -14,6 +15,9 @@ type CardNumberFieldProps = {
 
 function CardNumberField({ title, onChange, minLength = 0, maxLength = 4 }: CardNumberFieldProps) {
   const { cardNumber1, cardNumber2, cardNumber3, cardNumber4 } = useCardForm();
+  const {
+    isValidCardForm: { isValid, msg },
+  } = useCardFormValidator();
 
   const fieldRef = useRef<HTMLDivElement | null>(null);
   const cardNumber1Ref = useRef<HTMLInputElement | null>(null);
@@ -40,8 +44,8 @@ function CardNumberField({ title, onChange, minLength = 0, maxLength = 4 }: Card
   }, [cardNumber4]);
 
   return (
-    <FieldContainer title={title} ref={fieldRef}>
-      <InputContainer size="full">
+    <FieldContainer title={title} ref={fieldRef} msg={msg}>
+      <InputContainer size="full" error={!isValid}>
         <Input
           ref={cardNumber1Ref}
           type="text"
@@ -52,6 +56,7 @@ function CardNumberField({ title, onChange, minLength = 0, maxLength = 4 }: Card
           name="cardNumber1"
           onChange={onChange}
           autoComplete="off"
+          error={!isValid}
         />
         {renderTextDivider({ formerValue: cardNumber1, latterValue: cardNumber2, divider: '-' })}
         <Input
@@ -64,6 +69,7 @@ function CardNumberField({ title, onChange, minLength = 0, maxLength = 4 }: Card
           name="cardNumber2"
           onChange={onChange}
           autoComplete="off"
+          error={!isValid}
         />
         {renderTextDivider({ formerValue: cardNumber2, latterValue: cardNumber3, divider: '-' })}
         <Input
@@ -76,6 +82,7 @@ function CardNumberField({ title, onChange, minLength = 0, maxLength = 4 }: Card
           name="cardNumber3"
           onChange={onChange}
           autoComplete="off"
+          error={!isValid}
         />
         {renderTextDivider({ formerValue: cardNumber3, latterValue: cardNumber4, divider: '-' })}
         <Input
@@ -88,6 +95,7 @@ function CardNumberField({ title, onChange, minLength = 0, maxLength = 4 }: Card
           name="cardNumber4"
           onChange={onChange}
           autoComplete="off"
+          error={!isValid}
         />
       </InputContainer>
     </FieldContainer>

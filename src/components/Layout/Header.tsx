@@ -4,7 +4,7 @@ import { BackArrow } from '../Common/Icon';
 
 function Header({ headerTitle, goBack }: Props) {
   return (
-    <h2 className="p-6 flex items-center">
+    <h2 className="px-6 py-4 flex items-center">
       {goBack ? (
         <Link to={goBack ?? ''}>
           <BackArrow />

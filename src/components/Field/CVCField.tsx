@@ -5,6 +5,7 @@ import { ChangeEvent, HTMLInputTypeAttribute, useEffect, useRef } from 'react';
 import { useCardForm } from '@/context/CardFormContext';
 import { LIMIT_INPUT_LENGTH, REGEX } from '@/constants';
 import { nextSiblingInputFocus } from '@/utils';
+import { useCardFormValidator } from '@/context/CardFormValidator';
 
 type CVCFieldProps = {
   title: string;
@@ -17,6 +18,9 @@ type CVCFieldProps = {
 
 function CVCField({ title, placeholder, maxLength, name, type = 'text', onChange }: CVCFieldProps) {
   const { cvc } = useCardForm();
+  const {
+    isValidCVCdForm: { isValid, msg },
+  } = useCardFormValidator();
 
   const fieldRef = useRef<HTMLDivElement | null>(null);
   const cvcRef = useRef<HTMLInputElement | null>(null);
@@ -28,8 +32,8 @@ function CVCField({ title, placeholder, maxLength, name, type = 'text', onChange
   }, [cvc]);
 
   return (
-    <FieldContainer ref={fieldRef} title={title}>
-      <InputContainer size="quarter">
+    <FieldContainer title={title} ref={fieldRef} msg={msg}>
+      <InputContainer size="quarter" error={!isValid}>
         <Input
           type={type}
           ref={cvcRef}
@@ -39,6 +43,7 @@ function CVCField({ title, placeholder, maxLength, name, type = 'text', onChange
           placeholder={placeholder}
           maxLength={maxLength}
           onChange={onChange}
+          error={!isValid}
         />
       </InputContainer>
     </FieldContainer>
