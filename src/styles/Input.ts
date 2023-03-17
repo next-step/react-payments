@@ -4,7 +4,7 @@ export const S = {
   InputContainer: styled.div`
     margin: 20px 0;
   `,
-  InputTitle: styled.span`
+  InputTitle: styled.label`
     display: flex;
     align-items: center;
     font-size: 13px;
