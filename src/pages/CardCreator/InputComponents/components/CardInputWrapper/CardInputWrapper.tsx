@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren, memo } from 'react';
 
 interface CardInputWrapperProps extends PropsWithChildren {
   header: string[] | string;
@@ -24,4 +24,4 @@ function CardInputWrapper({ header, errorMessage, children }: CardInputWrapperPr
   );
 }
 
-export const CardInputWrapperPure = React.memo(CardInputWrapper);
+export const CardInputWrapperPure = memo(CardInputWrapper);
