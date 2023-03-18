@@ -234,7 +234,10 @@ export const cardNicknameInit: CardNicknameState = attachCommonInputObjectProper
   },
   getInvalidMessage() {
     if (this.checkIsValid()) return null;
-    return '카드 별명을 입력해주세요.';
+    if (!this.value) {
+      return '카드 별명을 입력해주세요.';
+    }
+    return '카드 별명은 10자리를 넘을 수 없습니다.';
   },
   getPOJO() {
     return { value: this.value };
