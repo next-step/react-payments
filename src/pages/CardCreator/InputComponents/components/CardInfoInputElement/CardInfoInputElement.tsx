@@ -15,7 +15,7 @@ type InputAttributeType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement
 type OmittedInputAttributeType = Omit<InputAttributeType, 'onChange' | 'onBlur' | 'ref'>;
 
 export interface CardInfoInputElementProps extends OmittedInputAttributeType {
-  changeEventProps: ChangeEventHandlerProps;
+  changeEventProps?: ChangeEventHandlerProps;
   blurEventProps?: BlurEventHandlerProps;
   error?: {
     isError?: boolean;
@@ -44,7 +44,7 @@ function CardInfoInputElementComponent(
         value={value ?? ''}
         className={`input-basic text-black ${errorClassName}`}
         ref={inputRef}
-        onChange={createInputChangeHandler(changeEventProps)}
+        onChange={changeEventProps && createInputChangeHandler(changeEventProps)}
         onBlur={blurEventProps && createInputBlurHandler(blurEventProps)}
       />
       {error?.isError && error?.message && <StyledErrorMessage>{error.message}</StyledErrorMessage>}

@@ -8,7 +8,10 @@ export default {
   title: 'CardCreator/components/CardInfoInputElement',
   component: CardInfoInputElement,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {},
+  argTypes: {
+    changeEventProps: { control: 'false' },
+    blurEventProps: { control: 'false' },
+  },
 } as ComponentMeta<typeof CardInfoInputElement>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
