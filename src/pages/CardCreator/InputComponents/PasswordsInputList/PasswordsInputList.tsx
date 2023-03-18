@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 
-import { useGetErrorMessage } from '@/hooks';
 import type { PasswordsState } from '@/stores/CardContext';
 
 import { CardInputWrapperPure } from '../components';
@@ -11,10 +10,8 @@ interface PasswordsInputListProps {
 }
 
 function PasswordsInputList({ passwords }: PasswordsInputListProps) {
-  const errorMessage = useGetErrorMessage(passwords);
-
   return (
-    <CardInputWrapperPure header="카드 비밀번호" errorMessage={errorMessage}>
+    <CardInputWrapperPure header="카드 비밀번호">
       <div className="flex">
         {passwords?.map((password, i) => {
           return <PasswordInput key={password.key} password={password} index={i} />;

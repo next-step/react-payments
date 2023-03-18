@@ -1,7 +1,8 @@
 import React, { ChangeEvent } from 'react';
 
+import { useGetErrorMessage } from '@/hooks';
 import { useCardContextApiSelector, SecurityCodesState } from '@/stores/CardContext';
-import { useErrorContextApiSelector, useErrorSelector } from '@/stores/ErrorContext';
+import { useErrorContextApiSelector } from '@/stores/ErrorContext';
 import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';
@@ -40,8 +41,8 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
     },
   };
 
-  const errorStore = useErrorSelector();
-  const error = { isError: errorStore.type === key };
+  const errorMessage = useGetErrorMessage(securityCode);
+  const error = { isError: !!errorMessage, message: errorMessage };
 
   return (
     <CardInfoInputElement

@@ -1,7 +1,8 @@
 import React, { ChangeEvent } from 'react';
 
+import { useGetErrorMessage } from '@/hooks';
 import { PasswordsState, useCardContextApiSelector } from '@/stores/CardContext';
-import { useErrorContextApiSelector, useErrorSelector } from '@/stores/ErrorContext';
+import { useErrorContextApiSelector } from '@/stores/ErrorContext';
 import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';
@@ -38,8 +39,8 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
     },
   };
 
-  const errorStore = useErrorSelector();
-  const error = { isError: errorStore.type === key };
+  const errorMessage = useGetErrorMessage(password);
+  const error = { isError: !!errorMessage, message: errorMessage };
 
   return (
     <CardInfoInputElement

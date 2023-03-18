@@ -1,8 +1,9 @@
 import React, { ChangeEvent, FocusEvent, memo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components';
+import { useGetErrorMessage } from '@/hooks';
 import { ExpireDatesState, useCardContextApiSelector } from '@/stores/CardContext';
-import { useErrorContextApiSelector, useErrorSelector } from '@/stores/ErrorContext';
+import { useErrorContextApiSelector } from '@/stores/ErrorContext';
 import { filterNumber } from '@/utils';
 
 import { InputDivider, CardInfoInputElement } from '../../components';
@@ -51,10 +52,10 @@ export const ExpireDateInput = memo(({ expireDate, index, needDividerRender }: E
     },
   };
 
-  const errorStore = useErrorSelector();
+  const errorMessage = useGetErrorMessage(expireDate);
   const error = {
-    isError: errorStore.type === key,
-    message: errorStore.message,
+    isError: !!errorMessage,
+    message: errorMessage,
   };
 
   const isValueValid = expireDate.checkIsValid();
