@@ -33,16 +33,10 @@ export const Key = styled.button`
   }
 `;
 
-export const InputContainer = styled.div`
-  display: flex;
-  width: 100%;
-  gap: 20px;
-  padding: 55px;
-`;
-
 export const PasswordInput = styled(Input)`
-  font-size: 50px;
+  font-size: 40px;
   border-bottom: 1px solid green;
+  margin: 30px 10px;
 `;
 export const Title = styled.h1`
   padding: 10px;

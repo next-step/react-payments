@@ -48,7 +48,7 @@ const FormPage = () => {
         <Text fontSize="lg" weight="bold" label="카드추가" />
       </Header>
       <div>
-        <VirtualKeyBoard />
+        <VirtualKeyBoard mode="password" />
         {activeUI && <CompanyList onSelect={handleCompanyList} onClose={setActiveUI} />}
         <Card
           type="primary"
