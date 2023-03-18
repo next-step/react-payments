@@ -15,3 +15,9 @@ export function filterNumber(inputString: string) {
 export function checkIsArrayLast(array: any[], index: number) {
   return index >= array.length - 1;
 }
+
+export function changeStringNumberToNumber(string: string) {
+  const number = Number(string);
+  if (Number.isNaN(number)) return null;
+  return number;
+}

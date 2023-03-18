@@ -7,7 +7,7 @@ import { routes } from '@/routes';
 import { useCardContextApiSelector, useCardSelector } from '@/stores/CardContext';
 import type { TCardCompany } from '@/types';
 
-import { useCardCompanySelectModal, useSequentialAutoFocus } from './hooks';
+import { useCardCompanySelectModal, useSequentialAutoFocus, useAutoCompanyChecker } from './hooks';
 import { SubmitButton } from './SubmitButton';
 import {
   CardNumbersInputListPure,
@@ -26,6 +26,9 @@ export function CardCreator() {
 
   const errorMessage = useGetErrorMessage(cardInfo?.cardCompany);
 
+  useAutoCompanyChecker(cardInfo?.cardNumbers[0].value, cardInfo?.cardNumbers[1].value);
+  useSequentialAutoFocus(cardInfo);
+
   const handleCardClick = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
@@ -41,8 +44,6 @@ export function CardCreator() {
     },
     [cardContextApis, hideModal]
   );
-
-  useSequentialAutoFocus(cardInfo);
 
   return (
     <ThemeSetter className="app" theme={cardInfo?.cardCompany.value?.theme}>

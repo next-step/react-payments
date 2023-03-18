@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 
 import type { TCardCompany } from '@/types';
+import { cardCompanyList } from '@/pages/CardCreator/constants';
 
 import { CardCompany } from './components/CardCompany';
-import { cardCompanyList } from './cardCompanyList';
 import { StyledCardCompanySelector, StyledCompaniesFlexBox } from './CardCompanySelector.styled';
 
 export interface CardCompanySelectorProps {
@@ -14,7 +14,7 @@ export const CardCompanySelector = memo(function CardCompanySelector({ onCardCom
   return (
     <StyledCardCompanySelector onClick={(e) => e.stopPropagation()}>
       <StyledCompaniesFlexBox>
-        {Object.values(cardCompanyList).map((cardCompany) => (
+        {cardCompanyList.map((cardCompany) => (
           <CardCompany key={cardCompany.name} cardCompany={cardCompany} onClick={onCardCompanyClick} />
         ))}
       </StyledCompaniesFlexBox>
