@@ -56,7 +56,7 @@ export function useCardListWithLocalStorage() {
   const deleteCard = useCallback(
     (cardId: string | number) => {
       delete value?.[cardId];
-      setLocalStorageValue(value ?? null);
+      setLocalStorageValue(value ? { ...value } : null);
     },
     [value, setLocalStorageValue]
   );
