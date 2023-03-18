@@ -54,7 +54,7 @@ export const cardNumbersInit: CardNumbersState = [
     },
     checkIsAllowInput: (input) => !input || input.length <= 4,
     getInvalidMessage() {
-      if (!this.checkIsValid?.()) return null;
+      if (this.checkIsValid?.()) return null;
       return '카드 번호 4자리를 입력해주세요.';
     },
     getPOJO() {
@@ -104,14 +104,15 @@ export const expireDatesInit: ExpireDatesState = [
     placeholder: 'MM',
     checkIsValid() {
       const { value } = this;
-      return !!value && value.length <= 2 && Number(value) <= 12;
+      const numberedValue = Number(value);
+      return !!value && value.length <= 2 && numberedValue >= 1 && numberedValue <= 12;
     },
     checkIsAllowInput: (input) => {
       if (isNil(input) || input.length === 0) return true;
 
       const isInputLengthValid = input.length <= 2;
       const numberedInput = Number(input);
-      const isMinNumberValid = numberedInput >= 1;
+      const isMinNumberValid = numberedInput >= 0;
       const isMaxNumberValid = numberedInput <= 12;
       return isInputLengthValid && isMinNumberValid && isMaxNumberValid;
     },
@@ -120,7 +121,10 @@ export const expireDatesInit: ExpireDatesState = [
     },
     getInvalidMessage() {
       if (this.checkIsValid()) return null;
-      return '만료월을 입력해주세요.';
+      if (!this.value) {
+        return '만료월을 입력해주세요.';
+      }
+      return '1 ~ 12월을 입력해주세요.';
     },
     getPOJO() {
       return { value: this.value };
