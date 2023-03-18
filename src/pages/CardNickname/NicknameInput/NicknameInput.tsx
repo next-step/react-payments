@@ -1,12 +1,16 @@
-import React, { ChangeEvent, useCallback } from 'react';
+import React, { ChangeEvent, useCallback, useEffect } from 'react';
 
-import { useCardContextApiSelector } from '@/stores/CardContext';
+import { useGetErrorMessage } from '@/hooks';
+import { CardNicknameState, useCardContextApiSelector } from '@/stores/CardContext';
+
+import { StyledNicknameInput, StyledNicknameInputErrorMessage } from './NicknameInput.styled';
 
 interface NicknameInputProps {
-  cardNickname?: string;
+  cardNickname?: CardNicknameState;
 }
 
-export function NicknameInput({ cardNickname = '' }: NicknameInputProps) {
+export function NicknameInput({ cardNickname }: NicknameInputProps) {
+  const errorMessage = useGetErrorMessage(cardNickname);
   const cardContextApis = useCardContextApiSelector();
 
   const handleCardNicknameChange = useCallback(
@@ -16,16 +20,23 @@ export function NicknameInput({ cardNickname = '' }: NicknameInputProps) {
     [cardContextApis]
   );
 
+  useEffect(() => {
+    cardNickname?.ref?.focus();
+  }, [cardNickname?.ref]);
+
   return (
     <div className="input-container flex-center w-100">
-      <input
+      <StyledNicknameInput
         className="input-underline w-75"
         type="text"
         maxLength={10}
-        value={cardNickname}
+        error={!!errorMessage}
+        ref={cardNickname?.setRef?.bind(cardNickname)}
+        value={cardNickname?.value || ''}
         placeholder="카드 별칭 (선택)"
         onChange={handleCardNicknameChange}
       />
+      {errorMessage && <StyledNicknameInputErrorMessage>{errorMessage}</StyledNicknameInputErrorMessage>}
     </div>
   );
 }
