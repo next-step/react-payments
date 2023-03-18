@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { CardContext, cardNumbersInit, CardProvider } from '@/stores/CardContext';
+import { initialCardStore } from '@/stores/CardContext/cardStore';
 import { ErrorContextProvider } from '@/stores/ErrorContext';
 
 import { CardNumberInput } from './CardNumberInput';
@@ -12,16 +13,39 @@ export default {
   component: CardNumberInput,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
+    index: { control: 'false' },
     needDividerRender: { type: 'boolean' },
   },
 } as ComponentMeta<typeof CardNumberInput>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof CardNumberInput> = (props) => {
+const Template: ComponentStory<typeof CardNumberInput> = ({ cardNumber, index, needDividerRender }) => {
   return (
     <ErrorContextProvider>
-      <CardProvider>
-        <CardNumberInput {...props} />
+      <CardProvider value={{ ...initialCardStore, cardNumbers: [{ ...cardNumbersInit[0], ...cardNumber }] }}>
+        <CardContext.Consumer>
+          {(store) =>
+            store && (
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '10px',
+                    width: '100px',
+                  }}
+                >
+                  <CardNumberInput
+                    cardNumber={store.cardNumbers[0]}
+                    index={index}
+                    needDividerRender={needDividerRender}
+                  />
+                </div>
+              </div>
+            )
+          }
+        </CardContext.Consumer>
       </CardProvider>
     </ErrorContextProvider>
   );
@@ -32,14 +56,15 @@ export const WithDivider = Template.bind({});
 export const SecreteValue = Template.bind({});
 
 Primary.args = {
+  index: 0,
   cardNumber: cardNumbersInit[0],
 };
 
 WithDivider.args = {
   cardNumber: {
     ...cardNumbersInit[0],
-    value: '1234',
   },
+  index: 0,
   needDividerRender: true,
 };
 
@@ -47,7 +72,6 @@ SecreteValue.args = {
   cardNumber: {
     type: 'password',
     key: 'card-first-num',
-    value: '1234',
     checkIsValid() {
       const { value } = this;
       return !!value && value.length === 4;
@@ -61,4 +85,5 @@ SecreteValue.args = {
       return { value: this.value, type: this.type };
     },
   },
+  index: 0,
 };

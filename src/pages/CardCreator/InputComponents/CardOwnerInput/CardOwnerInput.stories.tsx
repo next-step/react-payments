@@ -1,7 +1,8 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { cardOwnersInit, CardProvider } from '@/stores/CardContext';
+import { CardContext, cardOwnersInit, CardProvider } from '@/stores/CardContext';
+import { initialCardStore } from '@/stores/CardContext/cardStore';
 import { ErrorContextProvider } from '@/stores/ErrorContext';
 
 import { CardOwnerInputPure } from './CardOwnerInput';
@@ -18,8 +19,10 @@ export default {
 const Template: ComponentStory<typeof CardOwnerInputPure> = (props) => {
   return (
     <ErrorContextProvider>
-      <CardProvider>
-        <CardOwnerInputPure {...props} />
+      <CardProvider value={{ ...initialCardStore, cardOwners: props.cardOwners! }}>
+        <CardContext.Consumer>
+          {(store) => store && <CardOwnerInputPure cardOwners={store.cardOwners} />}
+        </CardContext.Consumer>
       </CardProvider>
     </ErrorContextProvider>
   );

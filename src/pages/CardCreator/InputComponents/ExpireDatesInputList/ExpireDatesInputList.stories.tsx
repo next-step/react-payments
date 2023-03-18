@@ -2,9 +2,10 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { ErrorContextProvider } from '@/stores/ErrorContext';
-import { CardProvider, expireDatesInit } from '@/stores/CardContext';
+import { CardContext, CardProvider, expireDatesInit } from '@/stores/CardContext';
 
 import { ExpireDatesInputListPure } from './ExpireDatesInputList';
+import { initialCardStore } from '@/stores/CardContext/cardStore';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -15,11 +16,13 @@ export default {
 } as ComponentMeta<typeof ExpireDatesInputListPure>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof ExpireDatesInputListPure> = () => {
+const Template: ComponentStory<typeof ExpireDatesInputListPure> = (props) => {
   return (
     <ErrorContextProvider>
-      <CardProvider>
-        <ExpireDatesInputListPure />
+      <CardProvider value={{ ...initialCardStore, expireDates: props.expireDates! }}>
+        <CardContext.Consumer>
+          {(store) => <ExpireDatesInputListPure expireDates={store?.expireDates} />}
+        </CardContext.Consumer>
       </CardProvider>
     </ErrorContextProvider>
   );

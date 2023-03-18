@@ -2,9 +2,10 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { ErrorContextProvider } from '@/stores/ErrorContext';
-import { CardProvider, passwordsInit } from '@/stores/CardContext';
+import { CardContext, CardProvider, passwordsInit } from '@/stores/CardContext';
 
 import { PasswordsInputListPure } from './PasswordsInputList';
+import { initialCardStore } from '@/stores/CardContext/cardStore';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -15,11 +16,13 @@ export default {
 } as ComponentMeta<typeof PasswordsInputListPure>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof PasswordsInputListPure> = () => {
+const Template: ComponentStory<typeof PasswordsInputListPure> = ({ passwords }) => {
   return (
     <ErrorContextProvider>
-      <CardProvider>
-        <PasswordsInputListPure />
+      <CardProvider value={{ ...initialCardStore, passwords: passwords! }}>
+        <CardContext.Consumer>
+          {(store) => <PasswordsInputListPure passwords={store?.passwords} />}
+        </CardContext.Consumer>
       </CardProvider>
     </ErrorContextProvider>
   );

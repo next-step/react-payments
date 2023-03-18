@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { cardNumbersInit, CardProvider } from '@/stores/CardContext';
+import { CardContext, initialCardStore } from '@/stores/CardContext/cardStore';
 import { ErrorContextProvider } from '@/stores/ErrorContext';
 
 import { CardNumbersInputListPure } from './CardNumbersInputList';
@@ -18,8 +19,10 @@ export default {
 const Template: ComponentStory<typeof CardNumbersInputListPure> = (props) => {
   return (
     <ErrorContextProvider>
-      <CardProvider>
-        <CardNumbersInputListPure {...props} />
+      <CardProvider value={{ ...initialCardStore, cardNumbers: props.cardNumbers! }}>
+        <CardContext.Consumer>
+          {(store) => store && <CardNumbersInputListPure cardNumbers={store.cardNumbers} />}
+        </CardContext.Consumer>
       </CardProvider>
     </ErrorContextProvider>
   );
