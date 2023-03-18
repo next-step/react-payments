@@ -1,8 +1,8 @@
-import useHelpIcon from 'hooks/useHelpIcon';
+import useToolTip from 'hooks/useTooltip';
 import * as Styled from './Help.styles';
 
 const Help = () => {
-  const { isOpen, setIsOpen } = useHelpIcon();
+  const { isOpen, setIsOpen } = useToolTip();
 
   return (
     <Styled.Layout>
