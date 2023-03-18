@@ -15,4 +15,5 @@ export const StyledErrorMessage = styled('span', {
   left: '0',
   color: 'red',
   fontSize: '10px',
+  width: 'max-content',
 });
