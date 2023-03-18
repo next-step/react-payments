@@ -1,13 +1,11 @@
 import { ColorType } from 'types';
+import type { InputHTMLAttributes } from 'react';
 
-export type InputProps = {
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   type: string;
-  placeholder?: string;
   theme: 'underline' | 'primary';
   fontColor?: ColorType;
-  onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  className?: string;
-  active: boolean;
+  active?: boolean;
   error?: boolean;
-};
+}
 export type RootProps = Partial<InputProps>;
