@@ -1,46 +1,12 @@
-import React, { MouseEvent } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { useCardListWithLocalStorage } from '@/hooks/useCardListWithLocalStorage';
 import { routes } from '@/routes';
-import { useCardSelector } from '@/stores/CardContext';
+
+import { useNicknameSubmitEvent } from '../hooks';
 
 export function CardNicknameSubmitButton() {
-  // TODO: 아래 submit 로직을 분리하기 -> 어떤 곳에서도 재활용 될 수 있도록 분리하기.
-  const { cardId } = useParams();
-
-  const cardInfo = useCardSelector();
-
-  const { cardNickname, cardCompany, cardNumbers, expireDates, cardOwners, passwords, securityCodes } = cardInfo || {};
-
-  const { setCardInStorage } = useCardListWithLocalStorage();
-
-  const handleSubmitButtonClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    if (!cardNickname?.checkIsValid()) {
-      e.preventDefault();
-      alert('카드 별명은 10자리를 넘을 수 없습니다.');
-      return;
-    }
-
-    if (!cardCompany || !cardNumbers || !expireDates || !cardOwners || !passwords || !securityCodes) {
-      alert('카드 정보를 모두 입력해주세요.');
-      return;
-    }
-
-    const newCardNicknameValue = !cardNickname?.value ? cardCompany?.value?.name : cardNickname.value;
-
-    const saveCardId = cardId || new Date().getTime();
-
-    setCardInStorage(saveCardId, {
-      cardNickname: { ...cardNickname, value: newCardNicknameValue },
-      cardCompany,
-      cardNumbers,
-      expireDates,
-      cardOwners,
-      passwords,
-      securityCodes,
-    });
-  };
+  const handleSubmitButtonClick = useNicknameSubmitEvent();
 
   return (
     <div className="button-box mt-50">

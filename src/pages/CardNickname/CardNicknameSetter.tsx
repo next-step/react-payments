@@ -29,7 +29,7 @@ export function CardNicknameSetter() {
         cardOwnerName={cardInfo?.cardOwners?.[0]?.value}
       />
 
-      <NicknameInput cardNickname={cardInfo?.cardNickname?.value} />
+      <NicknameInput cardNickname={cardInfo?.cardNickname} />
 
       <CardNicknameSubmitButton />
     </div>
