@@ -18,7 +18,7 @@
 
 <a href='https://react-payments-gilt.vercel.app' target="__blank">리액트 페이먼츠</a>
 <br/>
-<a href='https://63f3ad2683ec21dc9f02d0de-tdzxdujtao.chromatic.com' target="__blank">리액트 페이먼츠 스토리북</a>
+<a href='https://63f3ad2683ec21dc9f02d0de-zpcsxrmyny.chromatic.com' target="__blank">리액트 페이먼츠 스토리북</a>
 
 ## 📝 Requirements
 
@@ -26,7 +26,7 @@
 
 ## 필수 요구사항
 
-- [ ] Storybook 상호 작용 테스트
+- [x] Storybook 상호 작용 테스트
 - [x] 재사용 가능한 Component 작성
 
 
@@ -60,8 +60,8 @@
 
 ## 필수 요구사항
 
-- [ ]  Storybook 상호 작용 테스트
-- [ ] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
+- [x]  Storybook 상호 작용 테스트
+- [x] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
 - [x] Context API를 활용해 전역 상태 관리 및 계층 재구성
 ### 카드 추가 확인
 - [x] 이전 폼에서 입력된 카드를 보여준다.
@@ -83,20 +83,20 @@
 
 ## 필수 요구사항
 
-- [ ]  Storybook 상호 작용 테스트
+- [x]  Storybook 상호 작용 테스트
 - [ ]  Storybook 스냅샷 테스트
-- [ ] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
-- [ ] Context API를 활용해 전역 상태 관리 및 계층 재구성
+- [x] Controlled & Uncontrolled Components에 입각하여 Form 핸들링
+- [x] Context API를 활용해 전역 상태 관리 및 계층 재구성
 
 ### 유효성 검증
-- [ ] 유효성 검증 실패에 대한 UI/UX 추가
-- [ ] 유효한 값 입력시 다음 필드로 Input Focusing
+- [x] 유효성 검증 실패에 대한 UI/UX 추가
+- [x] 유효한 값 입력시 다음 필드로 Input Focusing
 ###  카드 
 
-- [ ] 카드 번호 앞 8자리로 카드사를 추정하여 그 테마를 카드 UI에 반영한다.
-- [ ] 카드사를 선택하지 않아도 모달을 닫을 수 있다.
-- [ ] 카드사가 선택되고 유효한 카드 번호 16자리를 모두 입력하면, 자동으로 만료일로 focus된다.
-- [ ] 별칭 수정 가능
+- [x] 카드 번호 앞 8자리로 카드사를 추정하여 그 테마를 카드 UI에 반영한다.
+- [x] 카드사를 선택하지 않아도 모달을 닫을 수 있다.
+- [x] 카드사가 선택되고 유효한 카드 번호 16자리를 모두 입력하면, 자동으로 만료일로 focus된다.
+- [x] 별칭 수정 가능
 
 ###  보안코드툴팁
 
