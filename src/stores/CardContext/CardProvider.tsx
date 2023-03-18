@@ -1,6 +1,7 @@
 import React, { PropsWithChildren, useMemo, useReducer } from 'react';
 
-import { reducer, initialCardStore, ApiContext, CardStore, CardContext } from './cardStore';
+import type { CardStore } from '../types';
+import { reducer, initialCardStore, ApiContext, CardContext } from './cardStore';
 
 interface CardProviderProps {
   value?: CardStore;
