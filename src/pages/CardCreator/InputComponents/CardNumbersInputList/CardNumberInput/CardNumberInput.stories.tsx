@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { CardContext, cardNumbersInit, CardProvider } from '@/stores/CardContext';
-import { initialCardStore } from '@/stores/CardContext/cardStore';
+import { getInitialCardStore } from '@/stores/CardContext/cardStore';
 import { ErrorContextProvider } from '@/stores/ErrorContext';
 
 import { CardNumberInput } from './CardNumberInput';
@@ -22,7 +22,7 @@ export default {
 const Template: ComponentStory<typeof CardNumberInput> = ({ cardNumber, index, needDividerRender }) => {
   return (
     <ErrorContextProvider>
-      <CardProvider value={{ ...initialCardStore, cardNumbers: [{ ...cardNumbersInit[0], ...cardNumber }] }}>
+      <CardProvider value={{ ...getInitialCardStore(), cardNumbers: [{ ...cardNumbersInit[0], ...cardNumber }] }}>
         <CardContext.Consumer>
           {(store) =>
             store && (

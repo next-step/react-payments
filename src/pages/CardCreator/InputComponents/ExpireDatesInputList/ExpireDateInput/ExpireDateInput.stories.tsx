@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { CardContext, CardProvider, expireDatesInit } from '@/stores/CardContext';
-import { initialCardStore } from '@/stores/CardContext/cardStore';
+import { getInitialCardStore } from '@/stores/CardContext/cardStore';
 import { ErrorContextProvider } from '@/stores/ErrorContext';
 
 import { ExpireDateInput } from './ExpireDateInput';
@@ -22,7 +22,7 @@ export default {
 const Template: ComponentStory<typeof ExpireDateInput> = ({ expireDate, ...props }) => {
   return (
     <ErrorContextProvider>
-      <CardProvider value={{ ...initialCardStore, expireDates: [expireDate!, expireDate!] }}>
+      <CardProvider value={{ ...getInitialCardStore(), expireDates: [expireDate!, expireDate!] }}>
         <CardContext.Consumer>
           {(store) => store && <ExpireDateInput expireDate={store.expireDates[props.index]} {...props} />}
         </CardContext.Consumer>

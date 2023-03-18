@@ -1,14 +1,14 @@
 import React, { PropsWithChildren, useMemo, useReducer } from 'react';
 
 import type { CardStore } from '../types';
-import { reducer, initialCardStore, ApiContext, CardContext } from './cardStore';
+import { reducer, getInitialCardStore, ApiContext, CardContext } from './cardStore';
 
 interface CardProviderProps {
   value?: CardStore;
 }
 
 export function CardProvider({ value, children }: PropsWithChildren<CardProviderProps>) {
-  const [store, dispatch] = useReducer(reducer, value || initialCardStore);
+  const [store, dispatch] = useReducer(reducer, value || getInitialCardStore());
 
   const cardContextApis = useMemo(() => ({ dispatch }), [dispatch]);
 

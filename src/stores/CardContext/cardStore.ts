@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import { cloneDeep } from 'lodash-es';
 
 import type { TCardCompany } from '@/types';
 
@@ -13,7 +14,7 @@ import {
   cardNicknameInit,
 } from './CardStates';
 
-export const initialCardStore: CardStore = {
+const initialCardStore: CardStore = {
   cardCompany: cardCompanyInit,
   cardNickname: cardNicknameInit,
   cardNumbers: cardNumbersInit,
@@ -22,6 +23,10 @@ export const initialCardStore: CardStore = {
   passwords: passwordsInit,
   securityCodes: securityCodesInit,
 };
+
+export function getInitialCardStore() {
+  return cloneDeep(initialCardStore);
+}
 
 type CardNickNamePayload = { value: string | TCardCompany };
 type CardInputPayload = { index: number; value: string };
@@ -61,7 +66,7 @@ export function reducer(
       break;
     }
     default: {
-      return initialCardStore;
+      return getInitialCardStore();
     }
   }
 

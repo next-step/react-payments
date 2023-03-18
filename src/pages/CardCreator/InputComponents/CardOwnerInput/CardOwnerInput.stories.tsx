@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { CardContext, cardOwnersInit, CardProvider } from '@/stores/CardContext';
-import { initialCardStore } from '@/stores/CardContext/cardStore';
+import { getInitialCardStore } from '@/stores/CardContext/cardStore';
 import { ErrorContextProvider } from '@/stores/ErrorContext';
 
 import { CardOwnerInputPure } from './CardOwnerInput';
@@ -19,7 +19,7 @@ export default {
 const Template: ComponentStory<typeof CardOwnerInputPure> = (props) => {
   return (
     <ErrorContextProvider>
-      <CardProvider value={{ ...initialCardStore, cardOwners: props.cardOwners! }}>
+      <CardProvider value={{ ...getInitialCardStore(), cardOwners: props.cardOwners! }}>
         <CardContext.Consumer>
           {(store) => store && <CardOwnerInputPure cardOwners={store.cardOwners} />}
         </CardContext.Consumer>

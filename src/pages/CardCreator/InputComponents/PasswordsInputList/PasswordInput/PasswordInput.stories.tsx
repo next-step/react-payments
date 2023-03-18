@@ -5,7 +5,7 @@ import { ErrorContextProvider } from '@/stores/ErrorContext';
 import { CardContext, CardProvider, passwordsInit } from '@/stores/CardContext';
 
 import { PasswordInput } from './PasswordInput';
-import { initialCardStore } from '@/stores/CardContext/cardStore';
+import { getInitialCardStore } from '@/stores/CardContext/cardStore';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -19,7 +19,7 @@ export default {
 const Template: ComponentStory<typeof PasswordInput> = ({ password, ...props }) => {
   return (
     <ErrorContextProvider>
-      <CardProvider value={{ ...initialCardStore, passwords: [password!] }}>
+      <CardProvider value={{ ...getInitialCardStore(), passwords: [password!] }}>
         <CardContext.Consumer>
           {(store) => store && <PasswordInput password={store.passwords[0]} {...props} />}
         </CardContext.Consumer>
