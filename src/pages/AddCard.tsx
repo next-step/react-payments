@@ -28,7 +28,7 @@ const AddCard = () => {
     password: '',
   });
 
-  const isValidCardFields = () => {
+  const validateCard = () => {
     const errors = {
       cardNumber: '',
       CVC: '',
@@ -39,58 +39,26 @@ const AddCard = () => {
     const isCardNumberValid = areAllRefsMaxLength(cardRefs);
     const isPasswordValid = areAllRefsMaxLength(cardPasswordRefs);
     const isCvcValid = securityCodeRef.current?.value.length === 3;
+    const isExpiryValid = isValidExpiryDate(
+      expirationDateRef.current?.value || ''
+    );
 
     if (!isCardNumberValid) {
       errors.cardNumber = '카드 번호는 모두 4자리여야 합니다.';
     }
-
     if (!isPasswordValid) {
       errors.password = '카드 비밀번호는 모두 1자리여야 합니다.';
     }
-
     if (!isCvcValid) {
       errors.CVC = 'CVC는 3자리여야 합니다.';
     }
-
-    setErrorMessages(errors);
-    return {
-      isCardNumberValid,
-      isPasswordValid,
-      isCvcValid,
-      errors,
-    };
-  };
-
-  const isValidExpiry = () => {
-    const expiryValue = expirationDateRef.current?.value;
-    const isExpiryValid = isValidExpiryDate(expiryValue || '');
-
     if (!isExpiryValid) {
-      setErrorMessages((prevState) => ({
-        ...prevState,
-        expiry: '유효한 만료일을 입력해주세요. (MM/YY)',
-      }));
-      return false;
+      errors.expiry = '유효한 만료일을 입력해주세요. (MM/YY)';
     }
 
-    setErrorMessages((prevState) => ({
-      ...prevState,
-      expiry: '',
-    }));
-
-    return true;
-  };
-
-  const validateCard = () => {
-    const { isCardNumberValid, isPasswordValid, isCvcValid, errors } =
-      isValidCardFields();
-    const isExpiryValid = isValidExpiry();
-
     setErrorMessages(errors);
-
     return isCardNumberValid && isPasswordValid && isCvcValid && isExpiryValid;
   };
-
   const handleCardNumber = (index: number) =>
     handleRefInputMaxLength(
       index,
@@ -119,7 +87,7 @@ const AddCard = () => {
       month + (currentValue.length > 2 ? '/' + currentValue.slice(2, 4) : '');
     expirationDateRef.current.value = date;
 
-    if (currentValue.length === 4 && isValidExpiry()) {
+    if (currentValue.length === 4) {
       nameRef.current?.focus();
     }
   };
@@ -196,7 +164,7 @@ const AddCard = () => {
             />
           ))}
         </div>
-        <p className="error-message">{errorMessages.cardNumber || ''}</p>
+        <p className="error-message">{errorMessages.cardNumber}</p>
       </div>
       <div className="input-container">
         <span className="input-title">만료일</span>
@@ -210,7 +178,7 @@ const AddCard = () => {
             onChange={handleChangeExpirationDate}
           />
         </div>
-        <p className="error-message">{errorMessages.expiry || ''}</p>
+        <p className="error-message">{errorMessages.expiry}</p>
       </div>
       <div className="input-container">
         <span className="input-title">카드 소유자 이름(선택)</span>
@@ -237,7 +205,7 @@ const AddCard = () => {
           onChange={handleSecurityCode}
         />
       </div>
-      <p className="error-message">{errorMessages.CVC || ''}</p>
+      <p className="error-message">{errorMessages.CVC}</p>
       <div className="input-container">
         <span className="input-title">카드 비밀번호</span>
         <input
@@ -267,7 +235,7 @@ const AddCard = () => {
           disabled
         />
       </div>
-      <p className="error-message">{errorMessages.password || ''}</p>
+      <p className="error-message">{errorMessages.password}</p>
       <div className="button-box">
         <Button onClick={handleSubmitCard}>다음</Button>
       </div>
