@@ -6,7 +6,7 @@ const CardNumberInput = ({ onChange, isValid, fontColor, refs }: CardNumberInput
     <Styled.Layout>
       <Styled.Title fontSize="xs" weight="bold" label="카드 번호" />
       <Styled.CardNumberInput
-        ref={(el) => (refs.cardNumbers.ref = el)}
+        ref={(ref) => (refs.cardNumbers = ref)}
         type="text"
         theme="primary"
         onChange={onChange}

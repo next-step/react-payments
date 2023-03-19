@@ -1,7 +1,9 @@
 import { ColorType, CardFormInputsType } from 'types';
 
 export type CardExpirationDateInputProps = {
-  onChange?: () => void;
+  onChangeMonth?: () => void;
+  onChangeYear?: () => void;
+
   fontColor: ColorType;
   refs: CardFormInputsType;
   isValidMonth: boolean;

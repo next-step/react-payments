@@ -34,8 +34,8 @@ const useFormPage = ({ state, setState }: PropsType) => {
     const newCard = {
       cardNumbers: currentFormCard.cardNumbers.text,
       expireDate: {
-        month: currentFormCard.expireDate.month.text,
-        year: currentFormCard.expireDate.year.text,
+        month: currentFormCard.expireDateMonth.text,
+        year: currentFormCard.expireDateYear.text,
       },
       password: {
         start: currentFormCard.password.start.text,

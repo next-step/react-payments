@@ -17,15 +17,13 @@ export interface CardFormType {
     text: string;
     isValid: boolean;
   };
-  expireDate: {
-    month: {
-      text: string;
-      isValid: boolean;
-    };
-    year: {
-      text: string;
-      isValid: boolean;
-    };
+  expireDateMonth: {
+    text: string;
+    isValid: boolean;
+  };
+  expireDateYear: {
+    text: string;
+    isValid: boolean;
   };
   password: {
     start: {
@@ -67,29 +65,13 @@ export type CardType = {
 };
 
 export type CardFormInputsType = {
-  cardNumbers: {
-    ref: HTMLInputElement | null;
-  };
-  expireDate: {
-    month: {
-      ref: HTMLInputElement | null;
-    };
-    year: {
-      ref: HTMLInputElement | null;
-    };
-  };
-  cvc: {
-    ref: HTMLInputElement | null;
-  };
-  ownerName: {
-    ref: HTMLInputElement | null;
-  };
+  cardNumbers: HTMLInputElement | null;
+  expireDateMonth: HTMLInputElement | null;
+  expireDateYear: HTMLInputElement | null;
+  cvc: HTMLInputElement | null;
+  ownerName: HTMLInputElement | null;
   password: {
-    start: {
-      ref: HTMLInputElement | null;
-    };
-    end: {
-      ref: HTMLInputElement | null;
-    };
+    start: HTMLInputElement | null;
+    end: HTMLInputElement | null;
   };
 };

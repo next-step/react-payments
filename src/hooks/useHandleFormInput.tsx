@@ -22,41 +22,25 @@ interface PropsType {
 const useHandleFormInput = ({ state, setState }: PropsType) => {
   const inputRefs = useRef(new Array(10));
   const cardFormInputs: CardFormInputsType = {
-    cardNumbers: {
-      ref: inputRefs.current[0],
-    },
-    expireDate: {
-      month: {
-        ref: inputRefs.current[1],
-      },
-      year: {
-        ref: inputRefs.current[2],
-      },
-    },
-    ownerName: {
-      ref: inputRefs.current[3],
-    },
-    cvc: {
-      ref: inputRefs.current[4],
-    },
+    cardNumbers: inputRefs.current[0],
+    expireDateMonth: inputRefs.current[1],
+    expireDateYear: inputRefs.current[2],
+    ownerName: inputRefs.current[3],
+    cvc: inputRefs.current[4],
     password: {
-      start: {
-        ref: inputRefs.current[5],
-      },
-      end: {
-        ref: inputRefs.current[6],
-      },
+      start: inputRefs.current[5],
+      end: inputRefs.current[6],
     },
   };
   const handleCardNumberInput = () => {
-    const ref = cardFormInputs.cardNumbers.ref;
+    const ref = cardFormInputs.cardNumbers;
     if (!ref) return;
     const cardNumbers = changeCardNumber(ref.value);
     const cardCompany = getCardNumberCompnay(cardNumbers[0]);
     ref.value = cardNumbers;
     const isNext = isValidCardNumber(cardNumbers);
     if (isNext) {
-      cardFormInputs.expireDate.month.ref?.focus();
+      cardFormInputs.expireDateMonth?.focus();
     }
     setState((prev) => ({
       ...prev,
@@ -70,20 +54,35 @@ const useHandleFormInput = ({ state, setState }: PropsType) => {
       },
     }));
   };
-  const handleExpireInput = () => {
-    const monthRef = cardFormInputs.expireDate.month.ref;
-    const yearRef = cardFormInputs.expireDate.year.ref;
-
-    const ownerNameRef = cardFormInputs.ownerName.ref;
-
+  const handleExpireMonthInput = () => {
+    const monthRef = cardFormInputs.expireDateMonth;
+    const yearRef = cardFormInputs.expireDateYear;
     if (!monthRef) return;
     const month = changeMonth(monthRef.value);
     monthRef.value = month;
     if (!yearRef) return;
+    if (isValidExpirationDate(month)) {
+      yearRef.focus();
+    }
+
+    setState((prev) => ({
+      ...prev,
+      expireDateMonth: {
+        text: !month.length ? 'MM' : month,
+        isValid: isValidExpirationDate(month),
+      },
+    }));
+  };
+  const handleExpireYearInput = () => {
+    const monthRef = cardFormInputs.expireDateMonth;
+    const yearRef = cardFormInputs.expireDateYear;
+    const ownerNameRef = cardFormInputs.ownerName;
+    if (!yearRef) return;
     const year = changeYear(yearRef.value);
     yearRef.value = year;
-
-    if (isValidExpirationDate(month)) {
+    if (!monthRef) return;
+    const month = changeMonth(monthRef.value);
+    if (isValidExpirationDate(year)) {
       yearRef.focus();
     }
     if (isValidExpirationDate(month) && isValidExpirationDate(year)) {
@@ -92,20 +91,15 @@ const useHandleFormInput = ({ state, setState }: PropsType) => {
 
     setState((prev) => ({
       ...prev,
-      expireDate: {
-        month: {
-          text: !month.length ? 'MM' : month,
-          isValid: isValidExpirationDate(month),
-        },
-        year: {
-          text: year,
-          isValid: isValidExpirationDate(year),
-        },
+      expireDateYear: {
+        text: year,
+        isValid: isValidExpirationDate(year),
       },
     }));
   };
+
   const handleOwnerNameInput = () => {
-    const ownerNameRef = cardFormInputs.ownerName.ref;
+    const ownerNameRef = cardFormInputs.ownerName;
     if (!ownerNameRef) return;
     const ownerName = changeOwnerName(ownerNameRef.value);
     ownerNameRef.value = ownerName;
@@ -117,8 +111,8 @@ const useHandleFormInput = ({ state, setState }: PropsType) => {
     }));
   };
   const handleSecurityInput = () => {
-    const cvcRef = cardFormInputs.cvc.ref;
-    const passwordStartRef = cardFormInputs.password.start.ref;
+    const cvcRef = cardFormInputs.cvc;
+    const passwordStartRef = cardFormInputs.password.start;
 
     if (!cvcRef) return;
     const securityCode = cvcRef.value;
@@ -136,8 +130,8 @@ const useHandleFormInput = ({ state, setState }: PropsType) => {
     }));
   };
   const handlePasswordInput = () => {
-    const passwordStartRef = cardFormInputs.password.start.ref;
-    const passwordEndRef = cardFormInputs.password.end.ref;
+    const passwordStartRef = cardFormInputs.password.start;
+    const passwordEndRef = cardFormInputs.password.end;
     if (!passwordStartRef || !passwordEndRef) return;
     const passWordStart = changePassword(passwordStartRef.value);
     const passWordEnd = changePassword(passwordEndRef.value);
@@ -165,7 +159,8 @@ const useHandleFormInput = ({ state, setState }: PropsType) => {
   return {
     cardFormInputs,
     handleCardNumberInput,
-    handleExpireInput,
+    handleExpireMonthInput,
+    handleExpireYearInput,
     handleOwnerNameInput,
     handleSecurityInput,
     handlePasswordInput,

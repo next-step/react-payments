@@ -12,7 +12,7 @@ const CardOwnerNameInput = ({ onChange, fontColor, refs, length }: CardOwnerName
         type="text"
         theme="primary"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        ref={(el) => (refs.ownerName.ref = el)}
+        ref={(ref) => (refs.ownerName = ref)}
         onChange={onChange}
         fontColor={fontColor}
         active={true}

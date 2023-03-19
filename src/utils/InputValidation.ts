@@ -5,8 +5,8 @@ export const isCardFormValidation = (form: CardFormType): boolean => {
     form.cardNumbers.isValid &&
     form.company.isValid &&
     form.cvc.isValid &&
-    form.expireDate.month.isValid &&
-    form.expireDate.year.isValid &&
+    form.expireDateMonth.isValid &&
+    form.expireDateYear.isValid &&
     form.password.start.isValid &&
     form.password.end.isValid;
   // Todo: 고차함수적용

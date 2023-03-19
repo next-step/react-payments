@@ -10,7 +10,7 @@ const CardSecurityInput = ({ fontColor, onChange, refs, isValid }: CardPasswordI
         <Styled.CardSecurityInput
           theme="primary"
           type="text"
-          ref={(el) => (refs.cvc.ref = el)}
+          ref={(ref) => (refs.cvc = ref)}
           onChange={onChange}
           fontColor={fontColor}
           active={true}

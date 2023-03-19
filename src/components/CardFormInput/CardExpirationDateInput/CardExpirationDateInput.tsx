@@ -2,7 +2,8 @@ import { CardExpirationDateInputProps } from './CardExpirationDateInput.types';
 import * as Styled from './CardExpirationDateInput.styles';
 
 const CardExpirationDateInput = ({
-  onChange,
+  onChangeMonth,
+  onChangeYear,
   fontColor,
   refs,
   isValidMonth,
@@ -18,8 +19,8 @@ const CardExpirationDateInput = ({
           type="text"
           placeholder="MM"
           theme="primary"
-          onChange={onChange}
-          ref={(el) => (refs.expireDate.month.ref = el)}
+          onChange={onChangeMonth}
+          ref={(ref) => (refs.expireDateMonth = ref)}
           fontColor={fontColor}
           active={true}
           error={!isValidMonth}
@@ -28,8 +29,8 @@ const CardExpirationDateInput = ({
           type="text"
           placeholder="YY"
           theme="primary"
-          onChange={onChange}
-          ref={(el) => (refs.expireDate.year.ref = el)}
+          onChange={onChangeYear}
+          ref={(ref) => (refs.expireDateYear = ref)}
           fontColor={fontColor}
           active={true}
           error={!isValidYear}

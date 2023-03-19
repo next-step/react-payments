@@ -5,15 +5,13 @@ const initialCardFormState: CardFormType = {
     text: '',
     isValid: true,
   },
-  expireDate: {
-    month: {
-      text: 'MM',
-      isValid: true,
-    },
-    year: {
-      text: 'YY',
-      isValid: true,
-    },
+  expireDateMonth: {
+    text: 'MM',
+    isValid: true,
+  },
+  expireDateYear: {
+    text: 'YY',
+    isValid: true,
   },
   password: {
     start: {

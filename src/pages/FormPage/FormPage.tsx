@@ -28,7 +28,8 @@ const FormPage = () => {
   const {
     cardFormInputs,
     handleCardNumberInput,
-    handleExpireInput,
+    handleExpireMonthInput,
+    handleExpireYearInput,
     handleOwnerNameInput,
     handlePasswordInput,
     handleSecurityInput,
@@ -57,8 +58,8 @@ const FormPage = () => {
           company={formState.company.text}
           size="small"
           number={formState.cardNumbers.text}
-          expireMonth={formState.expireDate.month.text}
-          expireYear={formState.expireDate.year.text}
+          expireMonth={formState.expireDateMonth.text}
+          expireYear={formState.expireDateYear.text}
           ownerName={formState.ownerName.text}
         />
         <CardNumberInput
@@ -68,11 +69,12 @@ const FormPage = () => {
           refs={cardFormInputs}
         />
         <CardExpirationDateInput
-          onChange={handleExpireInput}
+          onChangeMonth={handleExpireMonthInput}
+          onChangeYear={handleExpireYearInput}
           fontColor={cardColor}
           refs={cardFormInputs}
-          isValidMonth={formState.expireDate.month.isValid}
-          isValidYear={formState.expireDate.year.isValid}
+          isValidMonth={formState.expireDateMonth.isValid}
+          isValidYear={formState.expireDateYear.isValid}
         />
         <CardOwnerNameInput
           onChange={handleOwnerNameInput}

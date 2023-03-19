@@ -12,7 +12,7 @@ const CardPasswordInput = ({ refs, fontColor, onChange, isValidStart, isValidEnd
           theme="primary"
           type="text"
           active={true}
-          ref={(el) => (refs.password.start.ref = el)}
+          ref={(ref) => (refs.password.start = ref)}
           onChange={onChange}
           fontColor={fontColor}
           error={!isValidStart}
@@ -21,13 +21,13 @@ const CardPasswordInput = ({ refs, fontColor, onChange, isValidStart, isValidEnd
           theme="primary"
           type="text"
           active={true}
-          ref={(el) => (refs.password.end.ref = el)}
+          ref={(ref) => (refs.password.end = ref)}
           onChange={onChange}
           fontColor={fontColor}
           error={!isValidEnd}
         />
-        <Styled.CardPasswordInput theme="primary" type="text" active={true} />
-        <Styled.CardPasswordInput theme="primary" type="text" active={true} />
+        <Styled.CardPasswordInput theme="primary" type="text" active={false} disabled={true} />
+        <Styled.CardPasswordInput theme="primary" type="text" active={false} disabled={true} />
       </Styled.Container>
       {!isValid && <Styled.ErrorText fontSize="xs" weight="bold" label="숫자 1자리씩 입력해주세요" fontColor="red" />}
     </Styled.Layout>
