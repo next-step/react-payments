@@ -1,8 +1,7 @@
-import { Help } from 'components/common/Help';
-import type { CardPasswordInputProps } from './CardSecurityInput.types';
-import * as Styled from './CardSecurityInput.styles';
+import type { CardPasswordInputProps } from './CardSecurity.types';
+import * as Styled from './CardSecurity.styles';
 
-const CardSecurityInput = ({ fontColor, onChange, refs, isValid }: CardPasswordInputProps) => {
+const CardSecurity = ({ fontColor, onChange, refs, isValid }: CardPasswordInputProps) => {
   return (
     <Styled.Layout>
       <Styled.Title fontSize="xs" weight="bold" label="보안코드 (CVC/CVV)" />
@@ -16,11 +15,13 @@ const CardSecurityInput = ({ fontColor, onChange, refs, isValid }: CardPasswordI
           active={true}
           error={!isValid}
         />
-        <Help />
+        <div>
+          <Styled.HelpButton />
+        </div>
       </Styled.Container>
       {!isValid && <Styled.ErrorText fontSize="xs" weight="bold" label="숫자 3자리 입력해주세요" fontColor="red" />}
     </Styled.Layout>
   );
 };
 
-export default CardSecurityInput;
+export default CardSecurity;

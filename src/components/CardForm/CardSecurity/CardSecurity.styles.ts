@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Text } from 'components/common/Text';
 import { Input } from 'components/common/Input';
+import { HelpIcon } from 'components/common/HelpIcon';
 export const Layout = styled.div`
   margin-top: 20px;
 `;
@@ -18,3 +19,4 @@ export const Container = styled.div`
   align-items: center;
 `;
 export const CardSecurityInput = styled(Input)``;
+export const HelpButton = styled(HelpIcon)``;
