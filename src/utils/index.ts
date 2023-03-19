@@ -59,3 +59,8 @@ export const handleRefInputMaxLength = (
     nextRef.current?.focus();
   }
 };
+
+export const shuffle = (arr: number[]) => {
+  const shuffled = arr.map((value) => ({ value, sort: Math.random() }));
+  return shuffled.sort((a, b) => a.sort - b.sort).map(({ value }) => value);
+};
