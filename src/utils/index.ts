@@ -43,3 +43,19 @@ export const isValidExpiryDate = (expiry: string) => {
 
   return true;
 };
+
+export const handleRefInputMaxLength = (
+  index: number,
+  refs: RefObject<HTMLInputElement>[],
+  nextRef?: RefObject<HTMLInputElement>
+) => {
+  const currentInput = refs[index].current;
+  if (!currentInput) return;
+
+  const value = extractNumbers(currentInput.value);
+  currentInput.value = value;
+
+  if (value.length === refs[0].current?.maxLength && nextRef) {
+    nextRef.current?.focus();
+  }
+};

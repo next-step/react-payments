@@ -1,4 +1,4 @@
-import { ChangeEvent, RefObject, useContext, useRef, useState } from 'react';
+import { ChangeEvent, useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Card } from '../components';
@@ -8,6 +8,7 @@ import useRefObjects from '../hooks/useRefObjects';
 import {
   areAllRefsMaxLength,
   extractNumbers,
+  handleRefInputMaxLength,
   isValidExpiryDate,
 } from '../utils';
 
@@ -90,31 +91,21 @@ const AddCard = () => {
     return isCardNumberValid && isPasswordValid && isCvcValid && isExpiryValid;
   };
 
-  const handleInputChange = (
-    index: number,
-    refs: RefObject<HTMLInputElement>[],
-    maxLength: number
-  ) => {
-    const currentInput = refs[index].current;
-    if (!currentInput) return;
-
-    const value = extractNumbers(currentInput.value);
-    currentInput.value = value;
-
-    if (value.length === maxLength) {
-      if (index < refs.length - 1) {
-        refs[index + 1].current?.focus();
-      } else if (areAllRefsMaxLength(cardRefs) && refs === cardRefs) {
-        expirationDateRef.current?.focus();
-      }
-    }
-  };
-
   const handleCardNumber = (index: number) =>
-    handleInputChange(index, cardRefs, 4);
+    handleRefInputMaxLength(
+      index,
+      cardRefs,
+      index < cardRefs.length - 1 ? cardRefs[index + 1] : expirationDateRef
+    );
 
   const handleCardPassword = (index: number) =>
-    handleInputChange(index, cardPasswordRefs, 1);
+    handleRefInputMaxLength(
+      index,
+      cardPasswordRefs,
+      index < cardPasswordRefs.length - 1
+        ? cardPasswordRefs[index + 1]
+        : undefined
+    );
 
   const checkExpiration = () => {
     if (!expirationDateRef.current) return;
