@@ -27,7 +27,7 @@ const AddCard = () => {
     password: '',
   });
 
-  const validateCard = () => {
+  const isValidCardFields = () => {
     const errors = {
       cardNumber: '',
       CVC: '',
@@ -38,9 +38,6 @@ const AddCard = () => {
     const isCardNumberValid = areAllRefsMaxLength(cardRefs);
     const isPasswordValid = areAllRefsMaxLength(cardPasswordRefs);
     const isCvcValid = securityCodeRef.current?.value.length === 3;
-    const isExpiryValid = isValidExpiryDate(
-      expirationDateRef.current?.value || ''
-    );
 
     if (!isCardNumberValid) {
       errors.cardNumber = '카드 번호는 모두 4자리여야 합니다.';
@@ -54,11 +51,42 @@ const AddCard = () => {
       errors.CVC = 'CVC는 3자리여야 합니다.';
     }
 
+    setErrorMessages(errors);
+    return {
+      isCardNumberValid,
+      isPasswordValid,
+      isCvcValid,
+      errors,
+    };
+  };
+
+  const isValidExpiry = () => {
+    const expiryValue = expirationDateRef.current?.value;
+    const isExpiryValid = isValidExpiryDate(expiryValue || '');
+
     if (!isExpiryValid) {
-      errors.expiry = '유효한 만료일을 입력해주세요. (MM/YY)';
+      setErrorMessages((prevState) => ({
+        ...prevState,
+        expiry: '유효한 만료일을 입력해주세요. (MM/YY)',
+      }));
+      return false;
     }
 
+    setErrorMessages((prevState) => ({
+      ...prevState,
+      expiry: '',
+    }));
+
+    return true;
+  };
+
+  const validateCard = () => {
+    const { isCardNumberValid, isPasswordValid, isCvcValid, errors } =
+      isValidCardFields();
+    const isExpiryValid = isValidExpiry();
+
     setErrorMessages(errors);
+
     return isCardNumberValid && isPasswordValid && isCvcValid && isExpiryValid;
   };
 
@@ -100,7 +128,7 @@ const AddCard = () => {
       month + (currentValue.length > 2 ? '/' + currentValue.slice(2, 4) : '');
     expirationDateRef.current.value = date;
 
-    if (currentValue.length === 4) {
+    if (currentValue.length === 4 && isValidExpiry()) {
       nameRef.current?.focus();
     }
   };
