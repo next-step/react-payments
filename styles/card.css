@@ -150,3 +150,27 @@
   font-size: 0.8rem;
   height: 1rem;
 }
+
+.cvc {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.cvc-info {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.cvc-tooltip {
+  position: absolute;
+  top: 70%;
+  left: 42%;
+  width: 200px;
+  background-color: #f1f1f1;
+  color: #777;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 5px;
+  z-index: 10;
+}
