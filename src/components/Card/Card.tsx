@@ -1,26 +1,26 @@
 import { masking } from '../../utils';
 
+type CardNumber = [string, string, string, string];
+
 export interface CardProps {
   bank?: string;
-  num1?: string;
-  num2?: string;
-  num3?: string;
-  num4?: string;
+  numbers?: CardNumber;
   expiry?: string;
   holder: string;
 }
 
-const formatCardNumber = (
-  num1?: string,
-  num2?: string,
-  num3?: string,
-  num4?: string
-) =>
-  [num1, num2, masking(num3), masking(num4)]
-    .filter((num) => num !== undefined && num !== '')
+const formatCardNumber = (numbers?: CardNumber) =>
+  numbers
+    ?.map((num, index) => {
+      if (index === 2 || index === 3) {
+        return masking(num);
+      }
+      return num;
+    })
+    .filter(Boolean)
     .join('-');
 
-const Card = ({ bank, holder, expiry, num1, num2, num3, num4 }: CardProps) => {
+const Card = ({ bank, holder, expiry, numbers }: CardProps) => {
   return (
     <div className="card-box">
       <div className="small-card">
@@ -32,9 +32,7 @@ const Card = ({ bank, holder, expiry, num1, num2, num3, num4 }: CardProps) => {
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text">
-              {formatCardNumber(num1, num2, num3, num4)}
-            </span>
+            <span className="card-text">{formatCardNumber(numbers)}</span>
           </div>
           <div className="card-bottom__info">
             <span className="card-text">{holder}</span>
