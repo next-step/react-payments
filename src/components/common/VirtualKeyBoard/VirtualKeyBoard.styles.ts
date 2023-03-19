@@ -15,10 +15,12 @@ export const Layout = styled.div`
   flex-wrap: wrap;
   z-index: 9999;
 `;
+
 export const KeyContainer = styled.div`
+  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(3, 125px);
-  grid-template-rows: repeat(3, 125px);
+  grid-template-rows: repeat(4, 125px);
 `;
 export const Key = styled.button`
   background-color: green;
@@ -34,9 +36,10 @@ export const Key = styled.button`
 `;
 
 export const PasswordInput = styled(Input)`
-  font-size: 40px;
+  font-size: 50px;
   border-bottom: 1px solid green;
-  margin: 30px 10px;
+  margin-bottom: 20px;
+  width: 75%;
 `;
 export const Title = styled.h1`
   padding: 10px;
