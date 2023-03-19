@@ -2,9 +2,14 @@ import { ChangeEvent, RefObject, useContext, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Button, Card } from '../components';
+import { CardNumber } from '../components/Card/Card';
 import { CreditCard, PaymentsContext } from '../context/PaymentsContext';
 import useRefObjects from '../hooks/useRefObjects';
-import { areAllRefsMaxLength, extractNumbers } from '../utils';
+import {
+  areAllRefsMaxLength,
+  extractNumbers,
+  isValidExpiryDate,
+} from '../utils';
 
 const AddCard = () => {
   const { addCard } = useContext(PaymentsContext);
@@ -14,7 +19,48 @@ const AddCard = () => {
   const nameRef = useRef<HTMLInputElement>(null);
   const securityCodeRef = useRef<HTMLInputElement>(null);
   const cardPasswordRefs = useRefObjects<HTMLInputElement>(2);
-  const [name, setName] = useState('');
+  const [holder, setHolder] = useState('');
+  const [errorMessages, setErrorMessages] = useState({
+    cardNumber: '',
+    CVC: '',
+    expiry: '',
+    password: '',
+  });
+
+  const validateCard = () => {
+    const errors = {
+      cardNumber: '',
+      CVC: '',
+      password: '',
+      expiry: '',
+    };
+
+    const isCardNumberValid = areAllRefsMaxLength(cardRefs);
+    const isPasswordValid = areAllRefsMaxLength(cardPasswordRefs);
+    const isCvcValid = securityCodeRef.current?.value.length === 3;
+    const isExpiryValid = isValidExpiryDate(
+      expirationDateRef.current?.value || ''
+    );
+
+    if (!isCardNumberValid) {
+      errors.cardNumber = '카드 번호는 모두 4자리여야 합니다.';
+    }
+
+    if (!isPasswordValid) {
+      errors.password = '카드 비밀번호는 모두 1자리여야 합니다.';
+    }
+
+    if (!isCvcValid) {
+      errors.CVC = 'CVC는 3자리여야 합니다.';
+    }
+
+    if (!isExpiryValid) {
+      errors.expiry = '유효한 만료일을 입력해주세요. (MM/YY)';
+    }
+
+    setErrorMessages(errors);
+    return isCardNumberValid && isPasswordValid && isCvcValid && isExpiryValid;
+  };
 
   const handleInputChange = (
     index: number,
@@ -49,11 +95,6 @@ const AddCard = () => {
     if (currentValue === '') return;
 
     const month = currentValue.slice(0, 2);
-    if (month < JANUARY || month > DECEMBER) {
-      alert(MONTH_VALIDITY_MESSAGE);
-      expirationDateRef.current.value = '';
-      return;
-    }
 
     const date =
       month + (currentValue.length > 2 ? '/' + currentValue.slice(2, 4) : '');
@@ -89,16 +130,25 @@ const AddCard = () => {
     }
   };
 
+  const cardNumber: CardNumber = [
+    cardRefs[0].current?.value,
+    cardRefs[1].current?.value,
+    cardRefs[2].current?.value,
+    cardRefs[3].current?.value,
+  ];
+
   const card = {
-    num1: cardRefs[0].current?.value,
-    num2: cardRefs[1].current?.value,
-    num3: cardRefs[2].current?.value,
-    num4: cardRefs[3].current?.value,
-    holder: name,
+    cardNumber,
+    CVC: securityCodeRef.current?.value,
+    holder,
+    password1: cardPasswordRefs[0].current?.value,
+    password2: cardPasswordRefs[1].current?.value,
     expiry: expirationDateRef.current?.value,
   };
 
-  const addCardToDatabase = () => {
+  const handleSubmitCard = () => {
+    if (!validateCard()) return;
+
     const newCard: CreditCard = { ...card, id: new Date().getTime() };
     addCard(newCard);
     navigate('/card-added', { state: newCard });
@@ -127,6 +177,7 @@ const AddCard = () => {
             />
           ))}
         </div>
+        <p className="error-message">{errorMessages.cardNumber || ''}</p>
       </div>
       <div className="input-container">
         <span className="input-title">만료일</span>
@@ -140,20 +191,21 @@ const AddCard = () => {
             onChange={handleChangeExpirationDate}
           />
         </div>
+        <p className="error-message">{errorMessages.expiry || ''}</p>
       </div>
       <div className="input-container">
         <span className="input-title">카드 소유자 이름(선택)</span>
         <span className="input-title">
-          {name.length} / {NAME_MAX_LENGTH}
+          {holder.length} / {NAME_MAX_LENGTH}
         </span>
         <input
           type="text"
           className="input-basic"
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           maxLength={NAME_MAX_LENGTH}
-          value={name}
+          value={holder}
           ref={nameRef}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setHolder(e.target.value)}
         />
       </div>
       <div className="input-container">
@@ -166,6 +218,7 @@ const AddCard = () => {
           onChange={handleSecurityCode}
         />
       </div>
+      <p className="error-message">{errorMessages.CVC || ''}</p>
       <div className="input-container">
         <span className="input-title">카드 비밀번호</span>
         <input
@@ -195,8 +248,9 @@ const AddCard = () => {
           disabled
         />
       </div>
+      <p className="error-message">{errorMessages.password || ''}</p>
       <div className="button-box">
-        <Button onClick={addCardToDatabase}>다음</Button>
+        <Button onClick={handleSubmitCard}>다음</Button>
       </div>
     </section>
   );
@@ -222,9 +276,6 @@ const PrevIcon = () => {
   );
 };
 
-const JANUARY = '01';
-const DECEMBER = '12';
-const MONTH_VALIDITY_MESSAGE = '유효하지 않아요';
 const NAME_MAX_LENGTH = 30;
 
 const cardNumberInputTypes = ['text', 'text', 'password', 'password'];
