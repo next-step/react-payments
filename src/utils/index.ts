@@ -18,3 +18,28 @@ export const areAllRefsMaxLength = (refs: RefObject<HTMLInputElement>[]) => {
     (ref) => ref.current?.value.length === ref.current?.maxLength
   );
 };
+
+const JANUARY = 1;
+const DECEMBER = 12;
+export const isValidExpiryDate = (expiry: string) => {
+  if (expiry.length !== 5) return false;
+
+  const [month, year] = expiry.split('/');
+
+  const inputYear = parseInt(`20${year}`, 10);
+  const inputMonth = parseInt(month, 10);
+
+  if (inputMonth < JANUARY || inputMonth > DECEMBER) {
+    return false;
+  }
+
+  const now = new Date();
+  if (
+    inputYear < now.getFullYear() ||
+    (inputYear === now.getFullYear() && inputMonth < now.getMonth() + 1)
+  ) {
+    return false;
+  }
+
+  return true;
+};
