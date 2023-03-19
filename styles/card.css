@@ -144,3 +144,9 @@
   justify-content: space-between;
   align-items: baseline;
 }
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+  height: 1rem;
+}
