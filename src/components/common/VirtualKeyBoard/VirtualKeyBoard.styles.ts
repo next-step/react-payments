@@ -5,7 +5,7 @@ export const Layout = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 5px 5px 15px 15px;
-  display: none;
+  display: flex;
   background: #fff;
   justify-content: center;
   align-items: center;

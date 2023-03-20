@@ -1,8 +1,8 @@
-import { ColorType, CardFormInputsType } from 'types';
+import { ColorType, CardFormInputRefsType } from 'types';
 
 export type CardOwnerNameInputProps = {
   fontColor: ColorType;
   onChange?: () => void;
-  refs: CardFormInputsType;
+  refs: CardFormInputRefsType;
   length: number;
 };

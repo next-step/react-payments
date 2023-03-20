@@ -22,10 +22,7 @@ export const changeCardNumber = (string: string): string => {
   }
   return newString;
 };
-export const changeCardSecurityInput = (string: string) => {
-  const newString = string.replace(/[^0-9\*]/g, ''); //숫자 or *
-  return newString.replaceAll(/[0-9]/g, '*');
-};
+
 export const changeMonth = (string: string) => {
   if (string.length > 2) return string[0] + string[1];
   const newString = string.replace(/[^0-9\/]/g, ''); //숫자만 받기
@@ -43,13 +40,6 @@ export const changeYear = (string: string) => {
     return '';
   }
   return newString;
-};
-export const changePassword = (string: string): string => {
-  const newString = string.replaceAll(/[^0-9]/g, ''); //숫자만 받기
-  if (newString.length >= 1) {
-    return '*';
-  }
-  return string.includes('*') ? '*' : '';
 };
 
 export const changeOwnerName = (string: string): string => {

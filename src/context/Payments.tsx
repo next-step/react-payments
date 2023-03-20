@@ -17,11 +17,11 @@ export const PaymentsContext = createContext<PaymentsContextType>({
   removeCard: function (card: CardType) {},
 });
 
-interface PaymentsProviderProps {
+interface ProviderProps {
   children: React.ReactNode;
 }
 
-export const PaymentsContextProvider = ({ children }: PaymentsProviderProps) => {
+export const PaymentsContextProvider = ({ children }: ProviderProps) => {
   const [cardList, setCardList] = useState<CardType[]>([]);
 
   // 카드 리스트에 추가

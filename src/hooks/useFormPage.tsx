@@ -1,4 +1,4 @@
-import { CardFormType, CompanyType } from 'types';
+import { CardUIType, CompanyType, CardFormInputRefsType } from 'types';
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PaymentsContext } from 'context/Payments';
@@ -6,11 +6,12 @@ import { isCardFormValidation } from 'utils/InputValidation';
 import uuid from 'react-uuid';
 
 interface PropsType {
-  state: CardFormType;
-  setState: React.Dispatch<React.SetStateAction<CardFormType>>;
+  state: CardUIType;
+  setState: React.Dispatch<React.SetStateAction<CardUIType>>;
+  formRefs: CardFormInputRefsType;
 }
 
-const useFormPage = ({ state, setState }: PropsType) => {
+const useFormPage = ({ state, setState, formRefs }: PropsType) => {
   const paymentsCtx = useContext(PaymentsContext);
   const navigate = useNavigate();
 
@@ -18,32 +19,26 @@ const useFormPage = ({ state, setState }: PropsType) => {
     const company = e.currentTarget.children[1].textContent as CompanyType;
     setState((prev) => ({
       ...prev,
-      company: {
-        text: company,
-        isValid: true,
-      },
+      company,
     }));
   };
 
   const handleBackButton = () => {
     navigate('/');
   };
+
   const handleSubmit = () => {
     const currentFormCard = state;
-    if (!isCardFormValidation(currentFormCard)) return;
+    const newCardValidation = { ...state, password: formRefs.password?.value, cvc: formRefs.cvc?.value };
+    if (!isCardFormValidation(newCardValidation)) return;
     const newCard = {
-      cardNumbers: currentFormCard.cardNumbers.text,
+      cardNumbers: currentFormCard.cardNumbers,
       expireDate: {
-        month: currentFormCard.expireDateMonth.text,
-        year: currentFormCard.expireDateYear.text,
+        month: currentFormCard.expireDateMonth,
+        year: currentFormCard.expireDateYear,
       },
-      password: {
-        start: currentFormCard.password.start.text,
-        end: currentFormCard.password.end.text,
-      },
-      cvc: currentFormCard.cvc.text,
-      ownerName: currentFormCard.ownerName.text,
-      company: currentFormCard.company.text,
+      ownerName: currentFormCard.ownerName,
+      company: currentFormCard.company,
       alias: '',
       id: uuid(),
     };

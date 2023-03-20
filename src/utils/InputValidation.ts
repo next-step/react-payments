@@ -1,15 +1,15 @@
-import { CardFormType } from 'types';
+import type { CardValidationType } from 'types';
 import { reportError, ValidationError } from 'utils/error';
-export const isCardFormValidation = (form: CardFormType): boolean => {
+export const isCardFormValidation = (form: CardValidationType): boolean | number => {
   const isValid =
-    form.cardNumbers.isValid &&
-    form.company.isValid &&
-    form.cvc.isValid &&
-    form.expireDateMonth.isValid &&
-    form.expireDateYear.isValid &&
-    form.password.start.isValid &&
-    form.password.end.isValid;
-  // Todo: 고차함수적용
+    isValidCardNumber(form.cardNumbers) &&
+    isValidCompany(form.company) &&
+    isValidExpirationDate(form.expireDateMonth) &&
+    isValidExpirationDate(form.expireDateYear) &&
+    isValidPasswordNumber(form.password) &&
+    isValidSecurityCode(form.cvc);
+
+  // Todo: 고차함수적용 ?
 
   try {
     if (!isValid) throw new ValidationError('입력하지 않은 양식을 확인하시오 !');
@@ -26,13 +26,13 @@ export const isValidExpirationDate = (date: string) => {
 export const isValidCompany = (company: string) => {
   return company.length;
 };
-export const isValidSecurityCode = (code: string) => {
+export const isValidSecurityCode = (code: string | undefined) => {
   return code?.length === 3;
 };
 export const isValidCardNumber = (cardNumber: string) => {
   return cardNumber?.length === 19;
 };
 
-export const isValidPasswordNumber = (password: string) => {
-  return password?.length === 1;
+export const isValidPasswordNumber = (password: string | undefined) => {
+  return password?.length === 4;
 };

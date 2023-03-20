@@ -1,16 +1,32 @@
-// 버튼을 누르면 input에 값이 찍히게
 import { initialVirtualKeyBoard } from 'components/common/VirtualKeyBoard/utils';
 import { Key } from 'components/common/VirtualKeyBoard/VirtualKeyBoard.styles';
-import { useRef } from 'react';
+import { VirtualKeyBoardContext } from 'context/VirtualKeyBoard';
+import { useContext, useRef } from 'react';
+import { isValidPasswordNumber, isValidSecurityCode } from 'utils/InputValidation';
+import type { CardFormInputRefsType } from 'types';
+type ModeType = 'cvc' | 'password';
 
-// clear는 input값 다지움 , x는 한글자씩만지움
-const useVirtualKeyBoard = () => {
+const useVirtualKeyBoard = (formInputRef: CardFormInputRefsType) => {
   const passwordRef = useRef<HTMLInputElement>(null);
+  const ctx = useContext(VirtualKeyBoardContext);
+  const isOpen = ctx.isOpen;
+  const mode = ctx.mode;
 
   const handleKeyBoard = (e) => {
     if (!passwordRef.current) return;
-    const prevValue = passwordRef.current.value;
-    passwordRef.current.value = prevValue + e.target.value;
+    const currentValue = passwordRef.current.value;
+    const nextValue = currentValue + e.target.value;
+    passwordRef.current.value = nextValue;
+
+    if (mode === 'cvc' && isValidSecurityCode(nextValue)) {
+      if (!formInputRef.cvc) return;
+      formInputRef.cvc.value = nextValue;
+      ctx.hide();
+    } else if (mode === 'password' && isValidPasswordNumber(nextValue)) {
+      if (!formInputRef.password) return;
+      formInputRef.password.value = nextValue;
+      ctx.hide();
+    }
   };
   const deleteInput = () => {
     if (!passwordRef.current) return;
@@ -23,13 +39,18 @@ const useVirtualKeyBoard = () => {
     passwordRef.current.value = '';
   };
 
+  const showUI = (type: ModeType) => {
+    ctx.setUI(type);
+    ctx.show();
+  };
+
   const keyBoardNumbers = initialVirtualKeyBoard().map((number) => (
     <Key key={number} value={number} onClick={handleKeyBoard}>
       {number}
     </Key>
   ));
 
-  return { passwordRef, keyBoardNumbers, clearInput, deleteInput };
+  return { passwordRef, keyBoardNumbers, clearInput, deleteInput, showUI, isOpen, mode };
 };
 
 export default useVirtualKeyBoard;

@@ -1,3 +1,5 @@
-export interface VirtualKeyBoardProp {
-  mode: 'cvc' | 'password';
-}
+import { CardFormInputRefsType } from 'types';
+
+export type VirtualKeyBoardProps = {
+  refs: CardFormInputRefsType;
+};

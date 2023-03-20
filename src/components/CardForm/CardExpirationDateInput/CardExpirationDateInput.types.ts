@@ -1,11 +1,11 @@
-import { ColorType, CardFormInputsType } from 'types';
+import { ColorType, CardFormInputRefsType } from 'types';
 
 export type CardExpirationDateInputProps = {
   onChangeMonth?: () => void;
   onChangeYear?: () => void;
 
   fontColor: ColorType;
-  refs: CardFormInputsType;
+  refs: CardFormInputRefsType;
   isValidMonth: boolean;
   isValidYear: boolean;
 };

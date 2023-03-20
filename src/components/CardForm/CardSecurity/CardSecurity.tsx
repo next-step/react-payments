@@ -1,7 +1,9 @@
-import type { CardPasswordInputProps } from './CardSecurity.types';
+import type { CardSecurityProps } from './CardSecurity.types';
 import * as Styled from './CardSecurity.styles';
+import useVirtualKeyBoard from 'hooks/useVirtualKeyBoard';
 
-const CardSecurity = ({ fontColor, onChange, refs, isValid }: CardPasswordInputProps) => {
+const CardSecurity = ({ fontColor, refs }: CardSecurityProps) => {
+  const { showUI } = useVirtualKeyBoard(refs);
   return (
     <Styled.Layout>
       <Styled.Title fontSize="xs" weight="bold" label="보안코드 (CVC/CVV)" />
@@ -9,20 +11,16 @@ const CardSecurity = ({ fontColor, onChange, refs, isValid }: CardPasswordInputP
         <Styled.Box>
           <Styled.CardSecurityInput
             theme="primary"
-            type="text"
+            type="password"
             ref={(ref) => (refs.cvc = ref)}
-            onChange={onChange}
             fontColor={fontColor}
             active={true}
-            error={!isValid}
+            disabled={true}
           />
           <Styled.HelpButton />
-        </Styled.Box>
-        <Styled.Box>
-          <Styled.KeyBoardButton />
+          <Styled.KeyBoardButton onClick={() => showUI('cvc')} />
         </Styled.Box>
       </Styled.Container>
-      {!isValid && <Styled.ErrorText fontSize="xs" weight="bold" label="숫자 3자리 입력해주세요" fontColor="red" />}
     </Styled.Layout>
   );
 };

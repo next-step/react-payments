@@ -1,8 +1,8 @@
-import useToolTip from 'hooks/useTooltip';
+import useToggle from 'hooks/useToggle';
 import * as Styled from './KeyBoardIcon.styles';
-
-const KeyBoardIcon = () => {
-  const { isOpen, setIsOpen } = useToolTip();
+import type { KeyBoardIconProps } from './KeyBoardIcon.types';
+const KeyBoardIcon = ({ onClick }: KeyBoardIconProps) => {
+  const { isOpen, setIsOpen } = useToggle();
 
   return (
     <Styled.Layout>
@@ -11,6 +11,7 @@ const KeyBoardIcon = () => {
         name="keyboard"
         size="2x"
         color="black"
+        onClick={onClick}
         onMouseOver={() => setIsOpen(true)}
         onMouseLeave={() => setIsOpen(false)}
       />

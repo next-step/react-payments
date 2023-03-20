@@ -1,9 +1,6 @@
-import { ColorType, CardFormInputsType } from 'types';
+import { ColorType, CardFormInputRefsType } from 'types';
 
 export type CardPasswordInputProps = {
   fontColor: ColorType;
-  onChange?: () => void;
-  isValidStart: boolean;
-  isValidEnd: boolean;
-  refs: CardFormInputsType;
+  refs: CardFormInputRefsType;
 };

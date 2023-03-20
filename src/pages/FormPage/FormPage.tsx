@@ -1,47 +1,48 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import CompanyList from 'components/CompanyList/CompanyList';
+import { CompanyList } from 'components/CompanyList/CompanyList';
 import Card from 'components/common/Card/Card';
 import CardNumberInput from 'components/CardForm/CardNumberInput/CardNumberInput';
 import CardExpirationDateInput from 'components/CardForm/CardExpirationDateInput/CardExpirationDateInput';
 import CardOwnerNameInput from 'components/CardForm/CardOwnerNameInput/CardOwnerNameInput';
 import CardPasswordInput from 'components/CardForm/CardPasswordInput/CardPasswordInput';
 import CardSecurityInput from 'components/CardForm/CardSecurity/CardSecurity';
-import IconButton from '../../components/common/IconButton/IconButton';
+import IconButton from 'components/common/IconButton/IconButton';
 import Text from 'components/common/Text/Text';
-import Button from 'components/common/Button/Button';
-import useFormPage from 'hooks/useFormPage';
-import useHandleFormInput from 'hooks/useHandleFormInput';
-import useHandleFormState from 'hooks/useHandleFormState';
-import { getCardCompnayColor } from 'utils/Card';
+import { Button } from 'components/common/Button/Button';
 import { VirtualKeyBoard } from 'components/common/VirtualKeyBoard';
 
-const FormPage = () => {
-  const [activeUI, setActiveUI] = useState(false);
+import useFormPage from 'hooks/useFormPage';
+import useFormInput from 'hooks/useFormInput';
+import useHandleCardUI from 'hooks/useHandleCardUI';
+import useToggle from 'hooks/useToggle';
+import { getCardCompnayColor } from 'utils/Card';
+import { isValidCardNumber, isValidExpirationDate, isValidCompany } from 'utils/InputValidation';
 
-  const { formState, setFormState } = useHandleFormState();
-  const formStateObject = {
-    state: formState,
-    setState: setFormState,
+const FormPage = () => {
+  const { isOpen, setIsOpen } = useToggle();
+  const { cardUI, setCardUI } = useHandleCardUI();
+  const cardUIState = {
+    state: cardUI,
+    setState: setCardUI,
   };
-  const { handleCompanyList, handleBackButton, handleSubmit } = useFormPage(formStateObject);
-  const {
-    cardFormInputs,
-    handleCardNumberInput,
-    handleExpireMonthInput,
-    handleExpireYearInput,
-    handleOwnerNameInput,
-    handlePasswordInput,
-    handleSecurityInput,
-  } = useHandleFormInput(formStateObject);
+
+  const { cardFormInputs, handleCardNumberInput, handleExpireMonthInput, handleExpireYearInput, handleOwnerNameInput } =
+    useFormInput(cardUIState);
+
+  const { handleCompanyList, handleBackButton, handleSubmit } = useFormPage({
+    ...cardUIState,
+    formRefs: cardFormInputs,
+  });
 
   useEffect(() => {
-    if (formState.company.isValid) {
-      setActiveUI(false);
+    if (isValidCompany(cardUI.company)) {
+      setIsOpen(false);
     }
-  }, [formState.company]);
+  }, [cardUI.company]);
 
-  const cardColor = getCardCompnayColor(formState.company.text);
+  const cardColor = getCardCompnayColor(cardUI.company);
+
   return (
     <Layout>
       <Header>
@@ -49,22 +50,21 @@ const FormPage = () => {
         <Text fontSize="lg" weight="bold" label="카드추가" />
       </Header>
       <div>
-        <VirtualKeyBoard mode="password" />
-        {activeUI && <CompanyList onSelect={handleCompanyList} onClose={setActiveUI} />}
+        {isOpen && <CompanyList onSelect={handleCompanyList} onClose={setIsOpen} />}
         <Card
           type="primary"
-          onClick={() => setActiveUI(true)}
+          onClick={() => setIsOpen(true)}
           color={cardColor}
-          company={formState.company.text}
+          company={cardUI.company}
           size="small"
-          number={formState.cardNumbers.text}
-          expireMonth={formState.expireDateMonth.text}
-          expireYear={formState.expireDateYear.text}
-          ownerName={formState.ownerName.text}
+          number={cardUI.cardNumbers}
+          expireMonth={cardUI.expireDateMonth}
+          expireYear={cardUI.expireDateYear}
+          ownerName={cardUI.ownerName}
         />
         <CardNumberInput
           onChange={handleCardNumberInput}
-          isValid={formState.cardNumbers.isValid}
+          isValid={cardUI.cardNumbers.length === 0 ? true : isValidCardNumber(cardUI.cardNumbers)}
           fontColor={cardColor}
           refs={cardFormInputs}
         />
@@ -73,28 +73,18 @@ const FormPage = () => {
           onChangeYear={handleExpireYearInput}
           fontColor={cardColor}
           refs={cardFormInputs}
-          isValidMonth={formState.expireDateMonth.isValid}
-          isValidYear={formState.expireDateYear.isValid}
+          isValidMonth={cardUI.expireDateMonth.length === 0 ? true : isValidExpirationDate(cardUI.expireDateMonth)}
+          isValidYear={cardUI.expireDateYear.length === 0 ? true : isValidExpirationDate(cardUI.expireDateYear)}
         />
         <CardOwnerNameInput
           onChange={handleOwnerNameInput}
           fontColor={cardColor}
           refs={cardFormInputs}
-          length={formState.ownerName.text.length}
+          length={cardUI.ownerName.length}
         />
-        <CardSecurityInput
-          fontColor={cardColor}
-          onChange={handleSecurityInput}
-          isValid={formState.cvc.isValid}
-          refs={cardFormInputs}
-        />
-        <CardPasswordInput
-          fontColor={cardColor}
-          onChange={handlePasswordInput}
-          isValidStart={formState.password.start.isValid}
-          isValidEnd={formState.password.end.isValid}
-          refs={cardFormInputs}
-        />
+        <VirtualKeyBoard refs={cardFormInputs} />
+        <CardSecurityInput fontColor={cardColor} refs={cardFormInputs} />
+        <CardPasswordInput fontColor={cardColor} refs={cardFormInputs} />
         <ButtonBox>
           <Button fontSize="m" onClick={handleSubmit} label="Next" />
         </ButtonBox>

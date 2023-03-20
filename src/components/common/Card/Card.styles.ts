@@ -106,5 +106,5 @@ export const Chip = styled.div`
   background-color: #cbba64;
   border-radius: 4px;
 `;
-export const CartText = styled(Text)``;
-export const CartButton = styled(IconButton)``;
+export const CardText = styled(Text)``;
+export const CardButton = styled(IconButton)``;

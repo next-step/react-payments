@@ -20,7 +20,8 @@ export const Container = styled.div`
   align-items: center;
 `;
 export const CardSecurityInput = styled(Input)`
-  width: 35%;
+  width: 20%;
+  font-size: 30px;
   margin-right: 10px;
 `;
 export const Box = styled.div`

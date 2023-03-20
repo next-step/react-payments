@@ -1,35 +1,25 @@
 import type { CardPasswordInputProps } from './CardPasswordInput.types';
 import * as Styled from './CardPasswordInput.styles';
+import useVirtualKeyBoard from 'hooks/useVirtualKeyBoard';
 
-const CardPasswordInput = ({ refs, fontColor, onChange, isValidStart, isValidEnd }: CardPasswordInputProps) => {
-  const isValid = isValidStart && isValidEnd;
+const CardPasswordInput = ({ refs, fontColor }: CardPasswordInputProps) => {
+  const { showUI } = useVirtualKeyBoard(refs);
 
   return (
     <Styled.Layout>
       <Styled.Title fontSize="xs" weight="bold" label="카드 비밀번호" />
-      <Styled.Container>
+      <Styled.Box>
         <Styled.CardPasswordInput
+          ref={(ref) => (refs.password = ref)}
+          type="password"
           theme="primary"
-          type="text"
-          active={true}
-          ref={(ref) => (refs.password.start = ref)}
-          onChange={onChange}
           fontColor={fontColor}
-          error={!isValidStart}
-        />
-        <Styled.CardPasswordInput
-          theme="primary"
-          type="text"
           active={true}
-          ref={(ref) => (refs.password.end = ref)}
-          onChange={onChange}
-          fontColor={fontColor}
-          error={!isValidEnd}
+          disabled={true}
+          maxLength={4}
         />
-        <Styled.CardPasswordInput theme="primary" type="text" active={false} disabled={true} />
-        <Styled.CardPasswordInput theme="primary" type="text" active={false} disabled={true} />
-      </Styled.Container>
-      {!isValid && <Styled.ErrorText fontSize="xs" weight="bold" label="숫자 1자리씩 입력해주세요" fontColor="red" />}
+        <Styled.KeyBoardIconButton onClick={() => showUI('password')} />
+      </Styled.Box>
     </Styled.Layout>
   );
 };

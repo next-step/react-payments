@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const useToolTip = () => {
+const useToggle = () => {
   const [isOpen, setIsOpen] = useState(false);
   return { isOpen, setIsOpen };
 };
-export default useToolTip;
+export default useToggle;

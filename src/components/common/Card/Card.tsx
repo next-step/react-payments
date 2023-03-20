@@ -22,11 +22,11 @@ const Card = ({
       {type === 'primary' ? (
         <Styled.Container color={color} size={size}>
           <Styled.Top>
-            {company && <Styled.CartText fontSize="s" weight="normal" label={company} />}
+            {company && <Styled.CardText fontSize="s" weight="normal" label={company} />}
             {id && (
               <div>
-                <Styled.CartButton onClick={modify} name="modify" size="1x" color="black" />
-                <Styled.CartButton onClick={remove} name="remove" size="1x" color="black" />
+                <Styled.CardButton onClick={modify} name="modify" size="1x" color="black" />
+                <Styled.CardButton onClick={remove} name="remove" size="1x" color="black" />
               </div>
             )}
           </Styled.Top>
@@ -34,15 +34,15 @@ const Card = ({
             <Styled.Chip />
           </Styled.Middle>
           <Styled.Bottom>
-            {number && <Styled.CartText fontSize="m" weight="normal" label={number} />}
+            {number && <Styled.CardText fontSize="m" weight="normal" label={number} />}
             <Styled.InfoContainer>
               {!ownerName ? (
-                <Styled.CartText fontSize="s" weight="bold" label={'Empty'} />
+                <Styled.CardText fontSize="s" weight="bold" label={'Empty'} />
               ) : (
-                <Styled.CartText fontSize="s" weight="bold" label={ownerName} />
+                <Styled.CardText fontSize="s" weight="bold" label={ownerName} />
               )}
 
-              <Styled.CartText fontSize="s" weight="bold" label={`${expireMonth}/${expireYear}`} />
+              <Styled.CardText fontSize="s" weight="bold" label={`${expireMonth}/${expireYear}`} />
             </Styled.InfoContainer>
           </Styled.Bottom>
         </Styled.Container>
