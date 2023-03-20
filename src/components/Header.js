@@ -1,16 +1,17 @@
 import { Link } from "react-router-dom";
 
-export default function Header({ className, routerPath, children }) {
+export default function Header({ className, linkToPath, linkText, children }) {
   return (
     <h2 className={className}>
-      {routerPath ? (
-        <Link className="button-text" to={routerPath}>
-          <div className="button-box">
-            <span className="button-text">{children}</span>
-          </div>
-        </Link>
+      {linkToPath ? (
+        <>
+          <Link className="button-text" to={linkToPath}>
+            {linkText}
+          </Link>
+          {children}
+        </>
       ) : (
-        <span>{children}</span>
+        <div className="page-title">{children}</div>
       )}
     </h2>
   );

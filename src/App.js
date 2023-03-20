@@ -1,11 +1,12 @@
+import { useState } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { CardContext } from "./context/CardContext";
 
-import {ROUTE_PATH} from "../src/constants/page"
-import CardRegistrationPage from "../src/pages/CardRegistrationPage";
-import RegistedCardListPage from "../src/pages/RegistedCardListPage";
-import CardRegistrationCompletedPage from "../src/pages/CardRegistrationCompletedPage";
-
-import "./styles/index.css";
+import { ROUTE_PATH } from "./constants/page";
+import CardRegistrationPage from "./pages/CardRegistrationPage";
+import RegistedCardListPage from "./pages/RegistedCardListPage";
+import CardRegistrationCompletedPage from "./pages/CardRegistrationCompletedPage";
+import { CardListContext } from "./context/CardListContext";
 
 const router = createBrowserRouter([
   {
@@ -23,10 +24,32 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const [cardInfo, setCardInfo] = useState({
+    cardNumber: {
+      num0: "",
+      num1: "",
+      num2: "",
+      num3: "",
+    },
+    cardExpiration: { month: "", year: "" },
+    cardOwnerName: "",
+    cardSecurityCode: "",
+    cardPassword: { num0: "", num1: "", num2: "", num3: "" },
+    cardNickName: "",
+    cardCompanyName: "",
+    cardColor: "",
+  });
+
+  const [cardList, setCardList] = useState([]);
+
   return (
-    <div className="app">
-      <RouterProvider router={router} />
-    </div>
+    <CardListContext.Provider value={{ cardList, setCardList }}>
+      <CardContext.Provider value={{ cardInfo, setCardInfo }}>
+        <div className="app">
+          <RouterProvider router={router} />
+        </div>
+      </CardContext.Provider>
+    </CardListContext.Provider>
   );
 }
 
