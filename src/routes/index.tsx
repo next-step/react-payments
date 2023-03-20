@@ -1,6 +1,6 @@
-import AliasPage from 'pages/AliasPage/AliasPage';
-import FormPage from 'pages/FormPage/FormPage';
-import MyCardListPage from 'pages/MyCardListPage/MyCardListPage';
+import { AliasPage } from 'pages/Alias';
+import { FormPage } from 'pages/Form';
+import { MyCardListPage } from 'pages/MyCardList';
 import { Route, Routes as ReactRouterRoutes } from 'react-router-dom';
 
 const ROUTE_PATH = {

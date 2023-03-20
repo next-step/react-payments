@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import { Text } from 'components/common/Text';
-import { Input } from 'components/common/Input';
-import { KeyBoardIcon } from 'components/common/KeyBoardIcon';
+import { Text, Input, KeyBoardIcon } from 'components/common';
+
 export const Layout = styled.div`
   margin-top: 20px;
 `;

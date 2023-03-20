@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-import { Input } from 'components/common/Input';
-import { Text } from 'components/common/Text';
+import { Text, Input } from 'components/common';
 
 export const Layout = styled.div`
   margin-top: 20px;
