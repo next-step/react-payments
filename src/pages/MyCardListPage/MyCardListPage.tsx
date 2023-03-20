@@ -2,26 +2,22 @@ import Text from 'components/common/Text/Text';
 import styled from 'styled-components';
 import Card from 'components/common/Card/Card';
 
-import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { CardType } from 'types';
 import { PaymentsContext } from 'context/Payments';
 import { getCardCompnayColor } from 'utils/Card';
+import useRouter from 'routes/useRouter';
 
 const MyCardListPage = () => {
-  const navigate = useNavigate();
+  const { push } = useRouter();
   const payMentsCtx = useContext(PaymentsContext);
-
   const myCardList = [...payMentsCtx.cardList].reverse();
 
-  const handleAddCard = () => {
-    navigate('/add');
-  };
   return (
     <Layout>
       <Title fontSize="xl" weight="bold" label="보유카드" />
       <ScrollContainer>
-        <StyledAddCard type="add" size="small" onClick={handleAddCard} />
+        <StyledAddCard type="add" size="small" onClick={() => push('/form')} />
         {myCardList.map((card: CardType) => (
           <CardLayout key={card.id}>
             <Card

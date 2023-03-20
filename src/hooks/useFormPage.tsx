@@ -1,9 +1,9 @@
 import { CardUIType, CompanyType, CardFormInputRefsType } from 'types';
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { PaymentsContext } from 'context/Payments';
 import { isCardFormValidation } from 'utils/InputValidation';
 import uuid from 'react-uuid';
+import useRouter from 'routes/useRouter';
 
 interface PropsType {
   state: CardUIType;
@@ -13,7 +13,7 @@ interface PropsType {
 
 const useFormPage = ({ state, setState, formRefs }: PropsType) => {
   const paymentsCtx = useContext(PaymentsContext);
-  const navigate = useNavigate();
+  const { push } = useRouter();
 
   const handleCompanyList = (e) => {
     const company = e.currentTarget.children[1].textContent as CompanyType;
@@ -24,7 +24,7 @@ const useFormPage = ({ state, setState, formRefs }: PropsType) => {
   };
 
   const handleBackButton = () => {
-    navigate('/');
+    push('/');
   };
 
   const handleSubmit = () => {
@@ -44,7 +44,7 @@ const useFormPage = ({ state, setState, formRefs }: PropsType) => {
     };
     paymentsCtx.addCard(newCard);
     localStorage.setItem('id', newCard.id);
-    navigate('/alias');
+    push('/alias');
   };
 
   return {
