@@ -1,4 +1,16 @@
 export const COLOR = {
   BLACK: '#383838',
+  BLACK_1: '#525252',
   WHITE: '#ffffff',
+  GREY: '#ecebf1',
+  GREY_1: '#D2D2D2',
+  GREY_2: '#969696',
+  RED: '#E24141',
+  BLUE: '#547CE4',
+  GREEN: '#73BC6D',
+  AQUA: '#00ffff',
+  PINK: '#DE59B9',
+  PINK_1: '#E76E9A',
+  ORANGE: '#F37D3B',
+  YELLOW: '#FBCD58',
 };

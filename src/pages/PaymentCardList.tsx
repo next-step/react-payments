@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import CardPreview from '../components/CardPreview';
 import Title from '../components/common/Title';
 import { ROUTE } from '../constant/route';
@@ -8,6 +8,7 @@ import {
   useCardListDispatch,
   useCardListState,
 } from '../context/CardListContext';
+import { useModalState } from '../context/ModalContext';
 
 const S = {
   Button: styled.div`
@@ -16,6 +17,7 @@ const S = {
     text-align: center;
   `,
   Nickname: styled.div`
+    margin-top: 7px;
     font-size: 14px;
     font-weight: bold;
     text-align: center;
@@ -30,12 +32,12 @@ const S = {
 
 const PaymentCardList = () => {
   const cardList = useCardListState();
-  const { deleteCard } = useCardListDispatch();
-  const navigate = useNavigate();
+  const { updateSelectedCard } = useCardListDispatch();
+  const { setModalState } = useModalState();
 
-  const updateNickname = (index: number) => {
-    // step 3 에서 수정기능 추가할 예정
-    navigate('/complete', { state: { isComplete: true, index: index } });
+  const showManageCardModal = (index: number) => {
+    setModalState({ isShow: true, type: 'MANAGE_CARD' });
+    updateSelectedCard(index);
   };
 
   return (
@@ -51,11 +53,11 @@ const PaymentCardList = () => {
             <S.CardWrapper key={index}>
               <CardPreview
                 {...card}
-                onClick={() => updateNickname(index)}
+                onClick={() => showManageCardModal(index)}
                 isCursor={true}
               />
               <S.Nickname>{card.nickname}</S.Nickname>
-              <S.Button onClick={() => deleteCard(index)}>삭제</S.Button>
+              {/*<S.Button onClick={() => deleteCard(index)}>삭제</S.Button>*/}
             </S.CardWrapper>
           ))}
 

@@ -1,13 +1,15 @@
 import styled from '@emotion/styled';
+import { COLOR } from '../constant/color';
 
 export const S = {
   InputContainer: styled.div`
-    margin: 16px 0;
+    position: relative;
+    margin: 20px 0;
   `,
-  InputTitle: styled.span`
+  InputTitle: styled.label`
     display: flex;
     align-items: center;
-    font-size: 12px;
+    font-size: 13px;
     line-height: 14px;
     margin-bottom: 4px;
     color: #525252;
@@ -25,5 +27,23 @@ export const S = {
   `,
   Hyphen: styled.span`
     color: #000;
+  `,
+  TitleWrap: styled.div`
+    display: flex;
+    justify-content: space-between;
+  `,
+  Error: styled.p`
+    margin-top: 5px;
+    font-size: 10px;
+    color: ${COLOR.RED};
+  `,
+  SvgWrap: styled.span`
+    display: inline-block;
+    margin-left: 10px;
+    cursor: pointer;
+  `,
+  Row: styled.div`
+    display: flex;
+    align-items: center;
   `,
 };

@@ -8,53 +8,46 @@ export type DigitType = {
 };
 
 export interface CardInfoType {
-  digits: DigitType;
+  digits: DigitType | { [x: string]: string };
   expire: string;
   name: string;
   cvc: string;
   passwords: { password1: string; password2: string };
   company: string;
+  color: string;
   nickname: string;
   createdDate: number;
+  isSizeBig?: boolean;
+  isSelect?: boolean;
 }
 
 export type CardListDispatchType = {
   addCard: (data: CardInfoType) => void;
   updateNickname: (selectIdx: number, value: string) => void;
   deleteCard: (selectIdx: number) => void;
+  updateSelectedCard: (selectIdx: number) => void;
 };
 
 export type Action =
   | {
-      type: 'SET_DIGIT';
-      digits: DigitType;
-    }
-  | {
-      type: 'SET_EXPIRE';
-      expire: string;
-    }
-  | {
-      type: 'SET_NAME';
-      name: string;
-    }
-  | {
-      type: 'SET_CVC';
-      cvc: string;
-    }
-  | {
-      type: 'SET_PASSWORD';
-      passwords: { password1: string; password2: string };
+      type: 'SET_CARD_VALUE';
+      target: HTMLInputElement;
     }
   | {
       type: 'SET_COMPANY';
       company: string;
-    }
-  | {
-      type: 'SET_NICKNAME';
-      nickname: string;
+      color: string;
     }
   | {
       type: 'INIT';
     };
 
 export type CardDispatchType = Dispatch<Action>;
+
+export interface CardValidationType {
+  validDigit: boolean;
+  validExpire: boolean;
+  validCvc: boolean;
+  validPassword: boolean;
+  validAllSuccess: boolean; // 모든 input 통과 여부
+}
