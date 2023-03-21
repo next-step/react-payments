@@ -9,12 +9,12 @@ import useNewCardForm from 'src/hooks/useNewCardForm';
 const CUSTOMER_NAME_LIMIT_COUNT = 30;
 
 const CardNew = () => {
-  const { state, handlers, onClickNextPage, openBottomSheet } =
+  const { state, handlers, onClickNextPage, openBottomSheet, goBack } =
     useNewCardForm();
 
   return (
     <>
-      <Header title="카드 추가" hasBackButton />
+      <Header title="카드 추가" hasBackButton onClickBackButton={goBack} />
       <Card
         title={state.bankTitle}
         bgColor={state.bgColor}

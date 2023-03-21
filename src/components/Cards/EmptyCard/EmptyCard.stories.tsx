@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import '../../styles.css';
 import EmptyCard from '.';
 
 export default {
