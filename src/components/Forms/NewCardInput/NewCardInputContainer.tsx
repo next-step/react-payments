@@ -14,7 +14,8 @@ const NewCardInputContainer = ({
   inputCount,
   children,
 }: NewCardInputContainerProps) => {
-  const hasInputCount = typeof inputLimitCount === 'number';
+  const hasInputCount =
+    typeof inputLimitCount === 'number' && inputLimitCount > 0;
   return (
     <div className={`input-container ${size}`}>
       <div className="input-label">
