@@ -1,25 +1,52 @@
-import { ChangeEvent, InputHTMLAttributes } from 'react';
+import { cls } from '@/utils';
+import { ChangeEvent, InputHTMLAttributes, forwardRef } from 'react';
 
-export type Width = 'w-15' | 'w-25' | 'w-50' | 'w-75' | 'w-100';
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+const widthToClassNameMap = {
+  xs: 'w-15',
+  sm: 'w-25',
+  md: 'w-50',
+  lg: 'w-75',
+  xl: 'w-100',
+  full: 'w-full',
+};
+
+export type Width = keyof typeof widthToClassNameMap;
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   kind?: 'basic' | 'underline';
   width?: Width;
-  formatter?: (str: string) => string;
+  border?: boolean;
+  error?: boolean;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-function Input({ className, kind = 'basic', width = 'w-25', onChange, formatter, ...props }: InputProps) {
-  const inputStyle = kind === 'basic' ? 'input-basic' : 'input-underline';
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ kind = 'basic', width = 'full', onChange, disabled, error, ...props }, ref) => {
+    const onChangeWithFormatter = (e: ChangeEvent<HTMLInputElement>) => {
+      onChange?.(e);
+    };
 
-  const onChangeWithFormatter = (e: ChangeEvent<HTMLInputElement>) => {
-    if (formatter) {
-      e.target.value = formatter(e.target.value);
-    }
+    const widthSize = widthToClassNameMap[width];
 
-    onChange && onChange(e);
-  };
-
-  return <input {...props} onChange={onChangeWithFormatter} className={`${className} ${inputStyle} ${width}`} />;
-}
+    return (
+      <input
+        {...props}
+        ref={ref}
+        onChange={onChangeWithFormatter}
+        disabled={disabled}
+        className={cls(
+          'h-10 outline-none  bg-transparent',
+          'flex items-center justify-center text-center',
+          widthSize,
+          kind === 'underline' ? 'border-b-2 border-gray-200' : '',
+          'placeholder:text-sm',
+          error
+            ? 'focus:border-red-300 focus:bg-red-200 focus:border-2 focus:border-solid focus:rounded'
+            : 'focus:border-blue-300 focus:bg-blue-100 focus:border-2 focus:border-solid focus:rounded',
+        )}
+      />
+    );
+  },
+);
 
 export default Input;

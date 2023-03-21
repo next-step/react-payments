@@ -1,35 +1,64 @@
 import FieldContainer from './FieldContainer';
-import { Input } from '../Common';
-import { ChangeEvent } from 'react';
+import { Input, InputContainer } from '../Common';
+import { ChangeEvent, useEffect, useRef } from 'react';
+import { LIMIT_INPUT_LENGTH, REGEX } from '@/constants';
+import { useCardForm } from '@/context/CardFormContext';
+import { useCardFormValidator } from '@/context/CardFormValidator';
 
-type Props = {
+type PasswordFieldProps = {
   title: string;
-  value: { password1: string; password2: string };
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 };
-function PasswordField({ title, value, onChange }: Props) {
+
+function PasswordField({ title, onChange }: PasswordFieldProps) {
+  const { password1, password2 } = useCardForm();
+  const {
+    isValidPasswordForm: { isValid, msg },
+  } = useCardFormValidator();
+
+  const password1Ref = useRef<HTMLInputElement | null>(null);
+  const password2Ref = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (password1.length === LIMIT_INPUT_LENGTH.PASSWORD) {
+      password2Ref.current?.focus();
+    }
+  }, [password1]);
+
   return (
-    <FieldContainer title={title}>
-      <Input
-        className="w-15"
-        type="password"
-        name="password1"
-        pattern="[0-9]*"
-        maxLength={1}
-        value={value.password1}
-        onChange={onChange}
-      />
-      <Input
-        className="w-15"
-        type="password"
-        name="password2"
-        pattern="[0-9]*"
-        maxLength={1}
-        value={value.password2}
-        onChange={onChange}
-      />
-      <Input className="w-15" type="password" maxLength={1} value="*" disabled />
-      <Input className="w-15" type="password" maxLength={1} value="*" disabled />
+    <FieldContainer title={title} msg={msg}>
+      <div className="flex w-1/2 gap-2">
+        <InputContainer size="quarter" error={!password1 && !isValid}>
+          <Input
+            type="password"
+            ref={password1Ref}
+            name="password1"
+            pattern={REGEX.HTML_PATTERN.ONLY_NUMBER}
+            maxLength={LIMIT_INPUT_LENGTH.PASSWORD}
+            value={password1}
+            onChange={onChange}
+            error={!isValid}
+          />
+        </InputContainer>
+        <InputContainer size="quarter" error={!password2 && !isValid}>
+          <Input
+            type="password"
+            ref={password2Ref}
+            name="password2"
+            pattern={REGEX.HTML_PATTERN.ONLY_NUMBER}
+            maxLength={LIMIT_INPUT_LENGTH.PASSWORD}
+            value={password2}
+            onChange={onChange}
+            error={!isValid}
+          />
+        </InputContainer>
+        <InputContainer size="quarter" disabled>
+          <Input type="password" pattern={REGEX.HTML_PATTERN.ONLY_NUMBER} value="*" disabled />
+        </InputContainer>
+        <InputContainer size="quarter" disabled>
+          <Input type="password" pattern={REGEX.HTML_PATTERN.ONLY_NUMBER} value="*" disabled />
+        </InputContainer>
+      </div>
     </FieldContainer>
   );
 }

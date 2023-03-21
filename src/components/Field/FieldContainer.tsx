@@ -1,28 +1,31 @@
-import type { ReactNode } from 'react';
+import { PropsWithChildren, ReactNode, forwardRef } from 'react';
+import { ErrorMessage } from '../Common';
 
-function FieldContainer({
-  title,
-  children,
-  addOn,
-  textLength,
-}: {
-  title: string;
-  children: ReactNode;
+type FieldContainerProps = {
+  title?: string;
+  limitText?: string;
+  msg?: string;
   addOn?: ReactNode;
-  textLength?: string;
-}) {
-  return (
-    <div className="input-container">
-      <div className="flex-between">
-        <span className="input-title">{title}</span>
-        {textLength ? <span className="input-title">{textLength}</span> : null}
+};
+
+const FieldContainer = forwardRef<HTMLDivElement, PropsWithChildren<FieldContainerProps>>(
+  ({ title = '', children, addOn, limitText = '', msg }, ref) => {
+    return (
+      <div className="my-1" ref={ref}>
+        <div className="flex justify-between">
+          {title && <span className="text-xs text-gray-400">{title}</span>}
+          {limitText ? <span className="text-xs text-gray-400">{limitText}</span> : null}
+        </div>
+        <div className="flex">
+          <div className="flex-1 flex flex-col">
+            {children}
+            {msg ? <ErrorMessage msg={msg} /> : null}
+          </div>
+          {addOn ? <div className="flex-center">{addOn}</div> : null}
+        </div>
       </div>
-      <div className="flex">
-        {children}
-        {addOn ? <div className="flex-center">{addOn}</div> : null}
-      </div>
-    </div>
-  );
-}
+    );
+  },
+);
 
 export default FieldContainer;

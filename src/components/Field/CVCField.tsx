@@ -1,36 +1,51 @@
 import FieldContainer from './FieldContainer';
-import { Input } from '../Common';
+import { Input, InputContainer } from '../Common';
 
-import type { ChangeEvent, HTMLInputTypeAttribute } from 'react';
+import { ChangeEvent, HTMLInputTypeAttribute, useEffect, useRef } from 'react';
+import { useCardForm } from '@/context/CardFormContext';
+import { LIMIT_INPUT_LENGTH, REGEX } from '@/constants';
+import { nextSiblingInputFocus } from '@/utils';
+import { useCardFormValidator } from '@/context/CardFormValidator';
 
-function CVCField({
-  title,
-  placeholder,
-  maxLength,
-  value,
-  name,
-  type = 'text',
-  onChange,
-}: {
+type CVCFieldProps = {
   title: string;
   placeholder?: string;
   maxLength?: number;
-  value: string;
   name: string;
   type?: HTMLInputTypeAttribute;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-}) {
+};
+
+function CVCField({ title, placeholder, maxLength, name, type = 'text', onChange }: CVCFieldProps) {
+  const { cvc } = useCardForm();
+  const {
+    isValidCVCdForm: { isValid, msg },
+  } = useCardFormValidator();
+
+  const fieldRef = useRef<HTMLDivElement | null>(null);
+  const cvcRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (cvc.length === LIMIT_INPUT_LENGTH.CVC) {
+      nextSiblingInputFocus(fieldRef, 0);
+    }
+  }, [cvc]);
+
   return (
-    <FieldContainer title={title}>
-      <Input
-        type={type}
-        name={name}
-        pattern="[0-9]*"
-        value={value}
-        placeholder={placeholder}
-        maxLength={maxLength}
-        onChange={onChange}
-      />
+    <FieldContainer title={title} ref={fieldRef} msg={msg}>
+      <InputContainer size="quarter" error={!isValid}>
+        <Input
+          type={type}
+          ref={cvcRef}
+          name={name}
+          pattern={REGEX.HTML_PATTERN.ONLY_NUMBER}
+          value={cvc}
+          placeholder={placeholder}
+          maxLength={maxLength}
+          onChange={onChange}
+          error={!isValid}
+        />
+      </InputContainer>
     </FieldContainer>
   );
 }

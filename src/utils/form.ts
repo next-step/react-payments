@@ -1,6 +1,8 @@
-import { CardInformation } from '@/types';
+import { REGEX } from '@/constants';
+import { CardInformationWithoutId } from '@/types';
+import { MutableRefObject } from 'react';
 
-const renderTextDivider = ({
+export const renderTextDivider = ({
   formerValue,
   latterValue = '',
   divider = '-',
@@ -9,13 +11,11 @@ const renderTextDivider = ({
   latterValue?: string;
   divider?: string;
 }) => {
-  if (formerValue || latterValue) return divider;
-
-  return '';
+  return formerValue || latterValue ? divider : '';
 };
 
-const checkRequiredValues = (data: CardInformation) => {
-  const REQUIRED_FORM_KEYS: (keyof CardInformation)[] = [
+export const checkRequiredValues = (data: CardInformationWithoutId) => {
+  const REQUIRED_FORM_KEYS: (keyof CardInformationWithoutId)[] = [
     'cardNumber1',
     'cardNumber2',
     'cardNumber3',
@@ -30,17 +30,19 @@ const checkRequiredValues = (data: CardInformation) => {
   return REQUIRED_FORM_KEYS.every(key => Boolean(data[key]));
 };
 
-const expirationMonthFormatter = (month: string) => {
+export const expirationMonthFormatter = (month: string) => {
   const [num1, num2] = month.split('');
   if (num1 === undefined && parseInt(num1, 10) > 1) return '';
   if (num1 === '0' && num2 === '0') return num1;
   if (num1 === '1' && parseInt(num2, 10) > 2) return num1;
 
-  return month.replace(/\D+/g, '');
+  return month.replace(REGEX.NOT_NUMBER, '');
 };
 
-const textOnlyFormatter = (str: string) => {
-  return str.replace(/\D+/g, '');
+export const textOnlyFormatter = (str: string) => {
+  return str.replace(REGEX.NOT_NUMBER, '');
 };
 
-export { renderTextDivider, checkRequiredValues, expirationMonthFormatter, textOnlyFormatter };
+export const nextSiblingInputFocus = (ref: MutableRefObject<HTMLDivElement | null>, index = 0) => {
+  return ref.current?.nextElementSibling?.querySelectorAll('input')[index]?.focus();
+};

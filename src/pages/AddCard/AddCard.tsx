@@ -1,44 +1,44 @@
-import { Card } from '@/components/Common';
+import { Card, ErrorMessage } from '@/components/Common';
 import AddCardForm from '@/components/Form/AddCardForm';
 import Layout from '@/components/Layout';
+import { HEADER_TITLE } from '@/constants';
+import { useCardForm } from '@/context/CardFormContext';
+import { useCardFormValidator } from '@/context/CardFormValidator';
+import { useModalContext } from '@/context/ModalContext';
 
-import type { CardInformation } from '@/types';
-import type { ChangeEvent, FormEvent } from 'react';
+function AddCard() {
+  const { cardNumber1, cardNumber2, cardNumber3, cardNumber4, year, month, cardOwner, cardCompany } = useCardForm();
+  const { isValidCardCompanyForm } = useCardFormValidator();
+  const { openModal } = useModalContext();
 
-type Props = {
-  cardInformation: CardInformation;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-};
+  const handleCompanyName = () => {
+    openModal('cardCompanySelectModal');
+  };
 
-function AddCard({ cardInformation, onChange, onSubmit }: Props) {
-  const { cardNumber1, cardNumber2, cardNumber3, cardNumber4, year, month, cardOwner } = cardInformation;
+  console.log(cardNumber1, cardNumber2, cardNumber3, cardNumber4, year, month, cardOwner, cardCompany);
+
   return (
-    <div>
-      <div className="root">
-        <Layout headerTitle="카드 추가" goBack="/">
-          {
-            <>
-              <Card
-                cardCompany=""
-                cardOwner={cardOwner}
-                cardNumber={{
-                  cardNumber1,
-                  cardNumber2,
-                  cardNumber3,
-                  cardNumber4,
-                }}
-                expiration={{
-                  year,
-                  month,
-                }}
-              />
-              <AddCardForm cardInformation={cardInformation} onChange={onChange} onSubmit={onSubmit} />
-            </>
-          }
-        </Layout>
+    <Layout headerTitle={HEADER_TITLE.ADD_CARD} goBack="/">
+      <Card
+        onClick={handleCompanyName}
+        cardCompany={cardCompany}
+        cardOwner={cardOwner}
+        cardNumber={{
+          cardNumber1,
+          cardNumber2,
+          cardNumber3,
+          cardNumber4,
+        }}
+        expiration={{
+          year,
+          month,
+        }}
+      />
+      <div className="flex items-center justify-center">
+        {!isValidCardCompanyForm.isValid ? <ErrorMessage msg={isValidCardCompanyForm.msg} /> : null}
       </div>
-    </div>
+      <AddCardForm />
+    </Layout>
   );
 }
 

@@ -1,63 +1,32 @@
-import { useState } from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { AddCard, CardList, Complete } from '@pages';
+import { CardFormProvider } from './context/CardFormContext';
+import { CardListProvider } from './context/CardListContext';
+import RootRouter from './RootRouter';
 
-import './styles/index.css';
+import './index.css';
+import { PropsWithChildren } from 'react';
+import { ModalProvider } from './context/ModalContext';
+import { ModalContainer } from './components/Modal';
+import { CardFormValidatorProvider } from './context/CardFormValidator';
 
-import type { ChangeEvent, FormEvent } from 'react';
-import type { CardInformation } from './types';
-
-const initCardInformation = {
-  cardNumber1: '',
-  cardNumber2: '',
-  cardNumber3: '',
-  cardNumber4: '',
-  year: '',
-  month: '',
-  cvc: '',
-  password1: '',
-  password2: '',
-  cardOwner: '',
-  nickname: '',
-};
+function RootContainer({ children }: PropsWithChildren) {
+  return <div className="bg-white w-96 min-w-[384px] h-[700px] relative overflow-hidden">{children}</div>;
+}
 
 function App() {
-  const [cardInformation, setCardInformation] = useState<CardInformation>(initCardInformation);
-
-  const handleCardInformation = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value, validity } = e.target;
-    if (!validity.valid) return;
-
-    setCardInformation(prev => ({ ...prev, [name]: value }));
-  };
-
-  const initializedState = () => {
-    setCardInformation(initCardInformation);
-  };
-
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    initializedState();
-  };
-
-  const routes = [
-    {
-      path: '/',
-      element: <CardList />,
-    },
-    {
-      path: '/add',
-      element: <AddCard cardInformation={cardInformation} onChange={handleCardInformation} onSubmit={onSubmit} />,
-    },
-    {
-      path: '/complete',
-      element: <Complete />,
-    },
-  ];
-
-  const router = createBrowserRouter(routes);
-
-  return <RouterProvider router={router} />;
+  return (
+    <CardListProvider>
+      <CardFormProvider>
+        <CardFormValidatorProvider>
+          <RootContainer>
+            <ModalProvider>
+              <ModalContainer />
+              <RootRouter />
+            </ModalProvider>
+          </RootContainer>
+        </CardFormValidatorProvider>
+      </CardFormProvider>
+    </CardListProvider>
+  );
 }
 
 export default App;
