@@ -1,37 +1,14 @@
-import styled from "styled-components";
-import { FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
-import { faAngleLeft, faM, faRemove } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import type { IconButtonPropsType } from './IconButton.types';
+import { FontAwesomeIcons } from './IconButton.types';
+import * as Styled from './IconButton.styles';
 
-export const FontAwesomeIcons = {
-  arrowLeft: faAngleLeft,
-  remove: faRemove,
-  modify: faM,
-};
-
-type FontAweSomeIconType = keyof typeof FontAwesomeIcons;
-export type IconButtonPropsType = {
-  name: FontAweSomeIconType;
-  size: FontAwesomeIconProps["size"];
-  color: string;
-  className?: string;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-};
-const IconButton = ({ onClick, className, name, size, color }: IconButtonPropsType) => {
+const IconButton = ({ name, size, color, ...attributes }: IconButtonPropsType) => {
   return (
-    <Button onClick={onClick}>
+    <Styled.IconButton {...attributes}>
       <FontAwesomeIcon icon={FontAwesomeIcons[name]} size={size} color={color}></FontAwesomeIcon>
-    </Button>
+    </Styled.IconButton>
   );
 };
-
-const Button = styled.button`
-  background: none;
-  border: 0;
-  cursor: pointer;
-  &:hover {
-    transform: scale(1.16);
-  }
-`;
 
 export default IconButton;

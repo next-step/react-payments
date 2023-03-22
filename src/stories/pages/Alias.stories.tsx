@@ -1,9 +1,9 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { withRouter } from "storybook-addon-react-router-v6";
-import Alias from "pages/AliasPage/AliasPage";
+import { withRouter } from 'storybook-addon-react-router-v6';
+import Alias from 'pages/Alias/AliasPage';
 export default {
-  title: "Page",
+  title: 'Page',
   component: Alias,
   decorators: [withRouter],
 } as ComponentMeta<typeof Alias>;

@@ -1,30 +1,48 @@
-import Dot from 'components/common/Dot/Dot';
 import styled from 'styled-components';
-import { ReactEventHandler } from 'react';
+import { Dot } from 'components/common/Dot';
+import { ReactEventHandler, useRef, useEffect } from 'react';
+
 export type CompanyListProps = {
-  onSelectedCompany: ReactEventHandler<HTMLDivElement>;
+  onSelect: ReactEventHandler<HTMLDivElement>;
+  onClose: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const CompanyList = ({ onSelectedCompany }: CompanyListProps) => {
+export const CompanyList = ({ onSelect, onClose }: CompanyListProps) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutside);
+    };
+  }, []);
+
+  const handleOutside = (event) => {
+    if (ref.current?.contains(event.target)) return;
+    onClose(false);
+  };
+
   return (
     <Overlay>
-      <Layout>
+      <Layout ref={ref}>
         <Container>
-          <Dot color="red" value="하나카드" onClick={onSelectedCompany} />
-          <Dot color="pink" value="국민카드" onClick={onSelectedCompany} />
-          <Dot color="cyon" value="신한카드" onClick={onSelectedCompany} />
-          <Dot color="purple" value="클린카드" onClick={onSelectedCompany} />
+          <Dot color="red" value="하나카드" onClick={onSelect} />
+          <Dot color="pink" value="국민카드" onClick={onSelect} />
+          <Dot color="cyon" value="신한카드" onClick={onSelect} />
+          <Dot color="purple" value="클린카드" onClick={onSelect} />
         </Container>
         <Container>
-          <Dot color="blue" value="토스카드" onClick={onSelectedCompany} />
-          <Dot color="green" value="네이버카드" onClick={onSelectedCompany} />
-          <Dot color="yellow" value="카카오카드" onClick={onSelectedCompany} />
-          <Dot color="orange" value="오렌지카드" onClick={onSelectedCompany} />
+          <Dot color="blue" value="토스카드" onClick={onSelect} />
+          <Dot color="green" value="네이버카드" onClick={onSelect} />
+          <Dot color="yellow" value="카카오카드" onClick={onSelect} />
+          <Dot color="orange" value="오렌지카드" onClick={onSelect} />
         </Container>
       </Layout>
     </Overlay>
   );
 };
+
 const Overlay = styled.div`
   width: 100%;
   height: 100%;
@@ -36,7 +54,7 @@ const Overlay = styled.div`
   left: 0;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 15px;
-  z-index: 5;
+  z-index: 9999;
 `;
 
 const Layout = styled.div`

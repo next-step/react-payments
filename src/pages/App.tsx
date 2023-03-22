@@ -1,22 +1,18 @@
-import { Route, Routes } from "react-router-dom";
-import styled from "styled-components";
-import GlobalStyle from "styles/GlobalStyle";
-import FormPage from "./FormPage/FormPage";
-import AliasPage from "./AliasPage/AliasPage";
-import MyCardListPage from "./MyCardListPage/MyCardListPage";
-import { PaymentsContextProvider } from "context/Payments";
+import styled from 'styled-components';
+import GlobalStyle from 'styles/GlobalStyle';
+import { PaymentsContextProvider } from 'context/Payments';
+import { VirtualKeyBoardContextProvider } from 'context/VirtualKeyBoard';
+import Routes from 'routes';
 
 function App() {
   return (
     <Layout>
-      <PaymentsContextProvider>
-        <GlobalStyle />
-        <Routes>
-          <Route element={<MyCardListPage />} path="/"></Route>
-          <Route element={<FormPage />} path="/add"></Route>
-          <Route element={<AliasPage />} path="/alias"></Route>
-        </Routes>
-      </PaymentsContextProvider>
+      <VirtualKeyBoardContextProvider>
+        <PaymentsContextProvider>
+          <GlobalStyle />
+          <Routes />
+        </PaymentsContextProvider>
+      </VirtualKeyBoardContextProvider>
     </Layout>
   );
 }

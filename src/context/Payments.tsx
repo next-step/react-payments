@@ -17,31 +17,34 @@ export const PaymentsContext = createContext<PaymentsContextType>({
   removeCard: function (card: CardType) {},
 });
 
-export const PaymentsContextProvider = ({ children }) => {
+interface ProviderProps {
+  children: React.ReactNode;
+}
+
+export const PaymentsContextProvider = ({ children }: ProviderProps) => {
   const [cardList, setCardList] = useState<CardType[]>([]);
 
   // 카드 리스트에 추가
-  const addCard = (card: CardType) => {
-    const newCardList = [...cardList, card];
-    setCardList(newCardList);
+  const addCard = (currentCard) => {
+    setCardList((prevCardList) => [...prevCardList, currentCard]);
   };
 
   // 카드 별칭 업데이트
-  const updateAlias = (card: CardType) => {
-    const newCardList = cardList.map((el) => {
-      if (el.id === card.id) {
+  const updateAlias = (currentCard) => {
+    const newCardList = cardList.map((card) => {
+      if (currentCard.id === card.id) {
         return {
-          ...card,
+          ...currentCard,
         };
       }
-      return el;
+      return card;
     });
     setCardList(newCardList);
   };
 
   // 카드 삭제
-  const removeCard = (card: CardType) => {
-    const newCardList = cardList.filter((el: CardType) => el.id !== card.id);
+  const removeCard = (currentCard) => {
+    const newCardList = cardList.filter((card) => card.id !== currentCard.id);
     setCardList(newCardList);
   };
 

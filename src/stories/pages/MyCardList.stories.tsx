@@ -1,8 +1,8 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { withRouter } from "storybook-addon-react-router-v6";
-import MyCardList from "pages/MyCardListPage/MyCardListPage";
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { withRouter } from 'storybook-addon-react-router-v6';
+import MyCardList from 'pages/MyCardList/MyCardListPage';
 export default {
-  title: "Page",
+  title: 'Page',
   component: MyCardList,
   decorators: [withRouter],
 } as ComponentMeta<typeof MyCardList>;
