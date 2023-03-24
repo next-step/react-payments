@@ -13,8 +13,8 @@ import useModalContext from "../../hooks/useModalContext";
 import useCardContext from "../../hooks/useCardContext";
 import { ROUTE } from "../../constants/route";
 import { initCard } from "../../constants/bank";
-import Keyboard from "../../components/Keyboard";
 import KeyboardProvider from "../../components/KeyboardProvider";
+import Keyboard from "../../components/Keyboard";
 
 const INPUT_NAMES = [
   "card-0",
@@ -106,8 +106,8 @@ function Add() {
           <Password onPasswordChange={onPasswordChange}></Password>
           <Button />
         </form>
-        <Keyboard />
       </KeyboardProvider>
+      <Keyboard></Keyboard>
     </>
   );
 }

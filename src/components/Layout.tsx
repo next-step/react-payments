@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Keyboard from "./Keyboard";
 import Modal from "./Modal";
 import ModalContainer from "./ModalContainer";
 
@@ -9,6 +10,7 @@ function Layout({ children }: ComponentProps) {
       <ModalContainer>
         <Modal></Modal>
       </ModalContainer>
+      {/* <Keyboard></Keyboard> */}
     </Root>
   );
 }
@@ -27,7 +29,7 @@ const Root = styled.div`
 const Wrapper = styled.div`
   height: 100%;
   padding: 16px 24px;
-  display: flex;
+  text-align: center;
   flex-direction: column;
   justify-content: center;
 `;

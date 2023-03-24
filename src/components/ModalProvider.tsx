@@ -1,5 +1,4 @@
 import { createContext, Dispatch, SetStateAction, useState } from "react";
-import Modal from "./Modal";
 
 type ComponentProps = {
   children: JSX.Element | JSX.Element[] | string;

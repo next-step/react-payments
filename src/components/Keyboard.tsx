@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import useKeyboardContext from "../hooks/useKeyboardContext";
+
 type ComponentProps = {
   children?: JSX.Element | JSX.Element[] | null;
 };
@@ -32,7 +33,6 @@ const Dimmed = styled.div`
   border-radius: 15px;
   z-index: 5;
 `;
-
 const Box = styled.div`
   width: 375px;
   height: 220px;
