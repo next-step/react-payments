@@ -1,4 +1,5 @@
 import { createContext, Dispatch, SetStateAction, useState } from "react";
+import styled from "styled-components";
 
 type ComponentProps = {
   children: JSX.Element | JSX.Element[] | string;
@@ -15,10 +16,16 @@ function KeyboardProvider({ children }: ComponentProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <KeyboardContext.Provider value={{ isOpen, setIsOpen }}>
-      {children}
-    </KeyboardContext.Provider>
+    <Wrapper>
+      <KeyboardContext.Provider value={{ isOpen, setIsOpen }}>
+        {children}
+      </KeyboardContext.Provider>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  text-align: justify;
+`;
 
 export default KeyboardProvider;

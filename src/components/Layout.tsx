@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Keyboard from "./Keyboard";
 import Modal from "./Modal";
 import ModalContainer from "./ModalContainer";
 
@@ -10,7 +9,6 @@ function Layout({ children }: ComponentProps) {
       <ModalContainer>
         <Modal></Modal>
       </ModalContainer>
-      {/* <Keyboard></Keyboard> */}
     </Root>
   );
 }

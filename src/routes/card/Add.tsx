@@ -82,33 +82,31 @@ function Add() {
   };
 
   return (
-    <>
-      <KeyboardProvider>
-        <Header />
-        <Card
-          cardNumber={formattedCardNumber}
-          expiredDate={cardInfo.expiredDate}
-          userName={cardInfo.userName}
-          color={cardColor}
-          bankName={bankName}
-        ></Card>
-        <form onSubmit={submitHandler}>
-          <CardNumber onCardNumberChange={onCardNumberChange}></CardNumber>
-          <ExpiredDate
-            onExpiredDateChange={onExpiredDateChange}
-            ref={expiredRef}
-          ></ExpiredDate>
-          <UserName
-            onUserNameChange={onUserNameChange}
-            ref={userNameRef}
-          ></UserName>
-          <Code onCodeChange={onCodeChange}></Code>
-          <Password onPasswordChange={onPasswordChange}></Password>
-          <Button />
-        </form>
-      </KeyboardProvider>
+    <KeyboardProvider>
+      <Header />
+      <Card
+        cardNumber={formattedCardNumber}
+        expiredDate={cardInfo.expiredDate}
+        userName={cardInfo.userName}
+        color={cardColor}
+        bankName={bankName}
+      ></Card>
+      <form onSubmit={submitHandler}>
+        <CardNumber onCardNumberChange={onCardNumberChange}></CardNumber>
+        <ExpiredDate
+          onExpiredDateChange={onExpiredDateChange}
+          ref={expiredRef}
+        ></ExpiredDate>
+        <UserName
+          onUserNameChange={onUserNameChange}
+          ref={userNameRef}
+        ></UserName>
+        <Code onCodeChange={onCodeChange}></Code>
+        <Password onPasswordChange={onPasswordChange}></Password>
+        <Button />
+      </form>
       <Keyboard></Keyboard>
-    </>
+    </KeyboardProvider>
   );
 }
 

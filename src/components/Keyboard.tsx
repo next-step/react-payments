@@ -4,16 +4,26 @@ import useKeyboardContext from "../hooks/useKeyboardContext";
 type ComponentProps = {
   children?: JSX.Element | JSX.Element[] | null;
 };
+const DIGIT_LIST = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function Keyboard({ children }: ComponentProps) {
-  // const { isOpen } = useKeyboardContext();
-  const isOpen = true;
+  const { isOpen } = useKeyboardContext();
 
   return (
     <>
       {isOpen && (
         <Dimmed>
-          <Box>{children}</Box>
+          <Box>
+            <DigitWrapper>
+              {DIGIT_LIST.map((digit: number) => (
+                <DigitButton>{digit}</DigitButton>
+              ))}
+            </DigitWrapper>
+            <BottomWrapper>
+              <DigitButton>0</DigitButton>
+              <OkayButton>확인</OkayButton>
+            </BottomWrapper>
+          </Box>
         </Dimmed>
       )}
     </>
@@ -34,8 +44,8 @@ const Dimmed = styled.div`
   z-index: 5;
 `;
 const Box = styled.div`
-  width: 375px;
-  height: 220px;
+  width: 100%;
+  height: 400px;
   border-radius: 5px 5px 15px 15px;
   display: flex;
   justify-content: center;
@@ -43,6 +53,39 @@ const Box = styled.div`
   flex-wrap: wrap;
   background: #fff;
   z-index: 10;
+`;
+
+const DigitWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
+  height: 80%;
+`;
+
+const BottomWrapper = styled.div`
+  height: 20%;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 1fr;
+`;
+
+const DigitButton = styled.button`
+  border-color: #ecebf1;
+  border: 1px solid;
+  outline: none;
+  background-color: #e5e5e5;
+  color: #686868;
+  font-weight: bold;
+  font-size: 2rem;
+`;
+
+const OkayButton = styled.button`
+  border: 1px solid;
+  outline: none;
+  background-color: rgb(251, 197, 49);
+  color: rgb(53, 59, 72);
+  font-weight: bold;
+  font-size: 2rem;
 `;
 
 export default Keyboard;
