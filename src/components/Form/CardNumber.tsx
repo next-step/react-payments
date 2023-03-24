@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import useKeyboardContext from "../../hooks/useKeyboardContext";
 import { remainOnlyNumber } from "../../utils/format";
 import Input from "../Input/Input";
 import InputBox from "../Input/InputBox";
@@ -24,6 +25,7 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
     3: "",
   });
   const [invalid, setInvalid] = useState(true);
+  const { setIsOpen } = useKeyboardContext();
 
   const itemsRef = useRef<HTMLInputElement[]>([]);
 
@@ -55,6 +57,12 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
     checkCardNumberInvalid(numbers);
   };
 
+  const onFocus = (index: number) => {
+    if (index > 1) {
+      setIsOpen(true);
+    }
+  };
+
   return (
     <>
       <InputContainer label="카드 번호">
@@ -62,6 +70,7 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
           {Object.keys(cardNumbers).map((cardNumber, index) => (
             <Input
               onChange={(event) => onChange(event, index)}
+              onFocus={() => onFocus(index)}
               maxLength={CARD_MAX_LENGTH}
               name={`card-${index}`}
               key={`card-${index}`}

@@ -8,6 +8,7 @@ const DIGIT_LIST = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function Keyboard({ children }: ComponentProps) {
   const { isOpen } = useKeyboardContext();
+  const onClick = (digit: number) => {};
 
   return (
     <>
@@ -16,11 +17,13 @@ function Keyboard({ children }: ComponentProps) {
           <Box>
             <DigitWrapper>
               {DIGIT_LIST.map((digit: number, idx) => (
-                <DigitButton key={idx}>{digit}</DigitButton>
+                <DigitButton key={idx} onClick={() => onClick(digit)}>
+                  {digit}
+                </DigitButton>
               ))}
             </DigitWrapper>
             <BottomWrapper>
-              <DigitButton>0</DigitButton>
+              <DigitButton onClick={() => onClick(0)}>0</DigitButton>
             </BottomWrapper>
           </Box>
         </Dimmed>

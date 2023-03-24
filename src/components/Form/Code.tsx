@@ -1,11 +1,13 @@
 import { useRef } from "react";
 import styled from "styled-components";
+import useKeyboardContext from "../../hooks/useKeyboardContext";
 import { Size } from "../../types/common";
 import Input from "../Input/Input";
 import InputContainer from "../Input/InputContainer";
 import ToolTip, { ToolTipHandle } from "../ToolTip";
 
 function Code({ onCodeChange }: CodeProps) {
+  const { setIsOpen } = useKeyboardContext();
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.currentTarget.value = e.currentTarget.value.replace(/[^0-9]/g, "");
 
@@ -13,6 +15,7 @@ function Code({ onCodeChange }: CodeProps) {
   };
 
   const onFocus = () => {
+    setIsOpen(true);
     tooltipRef.current?.toggleToolTip(true);
   };
   const onBlur = () => {
