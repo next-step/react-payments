@@ -15,13 +15,12 @@ function Keyboard({ children }: ComponentProps) {
         <Dimmed>
           <Box>
             <DigitWrapper>
-              {DIGIT_LIST.map((digit: number) => (
-                <DigitButton>{digit}</DigitButton>
+              {DIGIT_LIST.map((digit: number, idx) => (
+                <DigitButton key={idx}>{digit}</DigitButton>
               ))}
             </DigitWrapper>
             <BottomWrapper>
               <DigitButton>0</DigitButton>
-              <OkayButton>확인</OkayButton>
             </BottomWrapper>
           </Box>
         </Dimmed>
@@ -66,7 +65,6 @@ const BottomWrapper = styled.div`
   height: 20%;
   display: grid;
   width: 100%;
-  grid-template-columns: 1fr 1fr;
 `;
 
 const DigitButton = styled.button`
@@ -75,15 +73,6 @@ const DigitButton = styled.button`
   outline: none;
   background-color: #e5e5e5;
   color: #686868;
-  font-weight: bold;
-  font-size: 2rem;
-`;
-
-const OkayButton = styled.button`
-  border: 1px solid;
-  outline: none;
-  background-color: rgb(251, 197, 49);
-  color: rgb(53, 59, 72);
   font-weight: bold;
   font-size: 2rem;
 `;
