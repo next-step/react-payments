@@ -2,9 +2,8 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { routes } from '@/routes';
+import { CardList, CardCreator } from '@/pages';
 
-import { CardList } from '@/pages/CardList';
-import { CardCreator } from '@/pages/CardCreator';
 import { CardNicknameSetter } from './pages/CardNickname';
 
 function Router() {
