@@ -5,6 +5,6 @@ export function generatePad(num: number, size: number) {
   return Array.from({ length }, () => '0').join('') + num;
 }
 
-export function replaceNumberOnly(str: string) {
+export function leaveOnlyNumbers(str: string) {
   return str.replace(NUMBER_REGULAR_EXPRESSION, '');
 }

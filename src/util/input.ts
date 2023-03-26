@@ -12,6 +12,6 @@ export function isAllowedNumberKeys(key: string, containSpecialKeys = true) {
 }
 
 export function setFocus(element: HTMLInputElement) {
-  element.focus();
-  element.setSelectionRange(element.value.length, element.value.length);
+  element?.focus();
+  element?.setSelectionRange(element.value.length, element.value.length);
 }

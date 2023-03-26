@@ -1,5 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Card, CardNumberInput, CvcInput, ExpiredInput, Frame, Link, OwnerInput, PinInput } from '../../components';
+
+const handleOnFulfill = (data: unknown) => console.log(data);
 
 function CardEdit() {
   const [cardNumbers, setCardNumbers] = useState<string[]>([]);
@@ -8,8 +10,16 @@ function CardEdit() {
   const [owner, setOwner] = useState('');
   const [cvc, setCvc] = useState('');
 
+  const refs = {
+    cardNumber: useRef<HTMLInputElement>(null),
+    expired: useRef<HTMLInputElement>(null),
+    owner: useRef<HTMLInputElement>(null),
+    cvc: useRef<HTMLInputElement>(null),
+    pin: useRef<HTMLInputElement>(null),
+  };
+
   const handleExpiredChange = useCallback(
-    (expiredMonth: string, expiredYear: string) => {
+    ([expiredMonth, expiredYear]: string[]) => {
       setExpiredMonth(expiredMonth);
       setExpiredYear(expiredYear);
       return;
@@ -26,12 +36,32 @@ function CardEdit() {
 
   return (
     <Frame title="카드 추가" backLink={'/'}>
-      <Card owner={owner} expiredMonth={expiredMonth} expiredYear={expiredYear} numbers={cardNumbers} cvc={cvc[0]} />
-      <CardNumberInput onChange={setCardNumbers} />
-      <ExpiredInput onChange={handleExpiredChange} />
-      <OwnerInput onChange={setOwner} />
-      <CvcInput onChange={handleCvcChange} />
-      <PinInput />
+      <Card owner={owner} expiredMonth={expiredMonth} expiredYear={expiredYear} numbers={cardNumbers} cvc={cvc} />
+
+      <CardNumberInput ref={refs.cardNumber} nextRef={refs.expired} onChange={setCardNumbers} />
+      <ExpiredInput
+        ref={refs.expired}
+        prevRef={refs.cardNumber}
+        nextRef={refs.owner}
+        onChange={handleExpiredChange}
+        onFulfill={handleOnFulfill}
+      />
+      <OwnerInput
+        ref={refs.owner}
+        prevRef={refs.expired}
+        nextRef={refs.cvc}
+        onChange={setOwner}
+        onFulfill={handleOnFulfill}
+      />
+      <CvcInput
+        ref={refs.cvc}
+        prevRef={refs.owner}
+        nextRef={refs.pin}
+        onChange={handleCvcChange}
+        onFulfill={handleOnFulfill}
+      />
+      <PinInput ref={refs.pin} prevRef={refs.cvc} onFulfill={handleOnFulfill} />
+
       <div className="button-box">
         <div className="button-text">
           <Link to="/card-detail">다음</Link>
