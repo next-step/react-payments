@@ -12,10 +12,6 @@ export function filterNumber(inputString: string) {
   return inputString.replace(/\D/g, '');
 }
 
-export function checkIsArrayLast(array: any[], index: number) {
-  return index >= array.length - 1;
-}
-
 export function changeStringNumberToNumber(string: string) {
   const number = Number(string);
   if (Number.isNaN(number)) return null;
