@@ -1,5 +1,5 @@
-import type { IInputState, IInputElement } from '@/types';
-import type { Themes } from '@/theme/theme';
+import type { Themes } from '@/theme';
+import type { IInputState, IInputElement } from '@/stores/types';
 
 type TCardCompany = {
   name: string;

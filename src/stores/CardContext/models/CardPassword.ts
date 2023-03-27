@@ -1,4 +1,4 @@
-import type { IInputState, IInputElement } from '@/types';
+import type { IInputState, IInputElement } from '@/stores/types';
 
 export type TCardPasswordState = IInputState;
 
