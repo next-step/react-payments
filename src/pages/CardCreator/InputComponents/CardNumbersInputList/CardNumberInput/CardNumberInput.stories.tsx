@@ -1,8 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { CardContext, cardNumbersInit, CardProvider } from '@/stores/CardContext';
-import { getInitialCardStore } from '@/stores/CardContext/cardStore';
+import { CardContext, CardProvider, getInitialCardStore } from '@/stores/CardContext';
 import { ErrorContextProvider } from '@/stores/ErrorContext';
 
 import { CardNumberInput } from './CardNumberInput';
@@ -22,7 +21,9 @@ export default {
 const Template: ComponentStory<typeof CardNumberInput> = ({ cardNumber, index, needDividerRender }) => {
   return (
     <ErrorContextProvider>
-      <CardProvider value={{ ...getInitialCardStore(), cardNumbers: [{ ...cardNumbersInit[0], ...cardNumber }] }}>
+      <CardProvider
+        value={{ ...getInitialCardStore(), cardNumbers: [{ ...getInitialCardStore().cardNumbers[0], ...cardNumber }] }}
+      >
         <CardContext.Consumer>
           {(store) =>
             store && (
@@ -57,33 +58,22 @@ export const SecreteValue = Template.bind({});
 
 Primary.args = {
   index: 0,
-  cardNumber: cardNumbersInit[0],
+  cardNumber: getInitialCardStore().cardNumbers[0],
 };
 
 WithDivider.args = {
   cardNumber: {
-    ...cardNumbersInit[0],
+    ...getInitialCardStore().cardNumbers[0],
   },
   index: 0,
   needDividerRender: true,
 };
 
 SecreteValue.args = {
+  type: 'password',
   cardNumber: {
-    type: 'password',
-    key: 'card-first-num',
-    checkIsValid() {
-      const { value } = this;
-      return !!value && value.length === 4;
-    },
-    checkIsAllowInput: (input) => !input || input.length <= 4,
-    getInvalidMessage() {
-      if (this.checkIsValid()) return null;
-      return '카드 번호 4자리를 입력해주세요.';
-    },
-    getPOJO() {
-      return { value: this.value, type: this.type };
-    },
+    ...getInitialCardStore().cardNumbers[0],
   },
   index: 0,
+  needDividerRender: true,
 };

@@ -1,27 +1,26 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { cardNumbersInit, CardProvider } from '@/stores/CardContext';
-import { CardContext, getInitialCardStore } from '@/stores/CardContext/cardStore';
+import { CardContext, CardProvider, getInitialCardStore } from '@/stores/CardContext';
 import { ErrorContextProvider } from '@/stores/ErrorContext';
 
-import { CardNumbersInputListPure } from './CardNumbersInputList';
+import { CardNumbersInputList } from './CardNumbersInputList';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'CardCreator/CardNumbersInputList',
-  component: CardNumbersInputListPure,
+  component: CardNumbersInputList,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
-} as ComponentMeta<typeof CardNumbersInputListPure>;
+} as ComponentMeta<typeof CardNumbersInputList>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof CardNumbersInputListPure> = (props) => {
+const Template: ComponentStory<typeof CardNumbersInputList> = (props) => {
   return (
     <ErrorContextProvider>
       <CardProvider value={{ ...getInitialCardStore(), cardNumbers: props.cardNumbers! }}>
         <CardContext.Consumer>
-          {(store) => store && <CardNumbersInputListPure cardNumbers={store.cardNumbers} />}
+          {(store) => store && <CardNumbersInputList cardNumbers={store.cardNumbers} />}
         </CardContext.Consumer>
       </CardProvider>
     </ErrorContextProvider>
@@ -32,11 +31,11 @@ export const Primary = Template.bind({});
 export const ValueSet = Template.bind({});
 
 Primary.args = {
-  cardNumbers: cardNumbersInit,
+  cardNumbers: getInitialCardStore().cardNumbers,
 };
 
 ValueSet.args = {
-  cardNumbers: cardNumbersInit.map((cardNumber) => {
+  cardNumbers: getInitialCardStore().cardNumbers.map((cardNumber) => {
     cardNumber.value = '1234';
     return cardNumber;
   }),

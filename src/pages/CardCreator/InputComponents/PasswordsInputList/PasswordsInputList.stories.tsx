@@ -2,26 +2,25 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { ErrorContextProvider } from '@/stores/ErrorContext';
-import { CardContext, CardProvider, passwordsInit } from '@/stores/CardContext';
+import { CardContext, CardProvider, getInitialCardStore } from '@/stores/CardContext';
 
-import { PasswordsInputListPure } from './PasswordsInputList';
-import { getInitialCardStore } from '@/stores/CardContext/cardStore';
+import { PasswordsInputList } from './PasswordsInputList';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'CardCreator/PasswordsInputList',
-  component: PasswordsInputListPure,
+  component: PasswordsInputList,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
-} as ComponentMeta<typeof PasswordsInputListPure>;
+} as ComponentMeta<typeof PasswordsInputList>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof PasswordsInputListPure> = ({ passwords }) => {
+const Template: ComponentStory<typeof PasswordsInputList> = ({ passwords }) => {
   return (
     <ErrorContextProvider>
       <CardProvider value={{ ...getInitialCardStore(), passwords: passwords! }}>
         <CardContext.Consumer>
-          {(store) => <PasswordsInputListPure passwords={store?.passwords} />}
+          {(store) => store && <PasswordsInputList passwords={store.passwords} />}
         </CardContext.Consumer>
       </CardProvider>
     </ErrorContextProvider>
@@ -31,5 +30,5 @@ const Template: ComponentStory<typeof PasswordsInputListPure> = ({ passwords }) 
 export const Primary = Template.bind({});
 
 Primary.args = {
-  passwords: passwordsInit,
+  passwords: getInitialCardStore().passwords,
 };

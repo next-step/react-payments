@@ -2,10 +2,9 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { ErrorContextProvider } from '@/stores/ErrorContext';
-import { CardContext, CardProvider, securityCodesInit } from '@/stores/CardContext';
+import { CardContext, CardProvider, getInitialCardStore } from '@/stores/CardContext';
 
 import { SecurityCodeInput } from './SecurityCodeInput';
-import { getInitialCardStore } from '@/stores/CardContext/cardStore';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -31,6 +30,6 @@ const Template: ComponentStory<typeof SecurityCodeInput> = ({ securityCode, ...p
 export const Primary = Template.bind({});
 
 Primary.args = {
-  securityCode: securityCodesInit[0],
+  securityCode: getInitialCardStore().securityCodes[0],
   index: 0,
 };

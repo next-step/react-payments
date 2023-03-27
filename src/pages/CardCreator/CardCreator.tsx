@@ -4,30 +4,31 @@ import { Link } from 'react-router-dom';
 import { Card, ThemeSetter } from '@/components';
 import { useGetErrorMessage } from '@/hooks';
 import { routes } from '@/routes';
-import { useCardContextApiSelector, useCardSelector } from '@/stores/CardContext';
+import { useCardApiContext, useCardContext } from '@/stores/CardContext';
 import type { TCardCompany } from '@/types';
 
 import { useCardCompanySelectModal, useSequentialAutoFocus, useAutoCompanyChecker } from './hooks';
 import { SubmitButton } from './SubmitButton';
 import {
-  CardNumbersInputListPure,
-  ExpireDatesInputListPure,
-  CardOwnerInputPure,
-  SecurityCodesInputListPure,
-  PasswordsInputListPure,
+  CardNumbersInputList,
+  ExpireDatesInputList,
+  CardOwnerInput,
+  SecurityCodesInputList,
+  PasswordsInputList,
 } from './InputComponents';
 import { StyledErrorMessage } from './CardCreator.styled';
 
 export function CardCreator() {
-  const cardInfo = useCardSelector();
-  const cardContextApis = useCardContextApiSelector();
+  const cardInfo = useCardContext();
+  const cardContextApis = useCardApiContext();
 
   const { CardCompanySelectModal, showModal, hideModal } = useCardCompanySelectModal();
 
-  const errorMessage = useGetErrorMessage(cardInfo?.cardCompany);
+  // @ts-ignore
+  const errorMessage = useGetErrorMessage(cardInfo?.cardCompanies[0].value);
 
   useAutoCompanyChecker(cardInfo?.cardNumbers[0].value, cardInfo?.cardNumbers[1].value);
-  useSequentialAutoFocus(cardInfo);
+  // useSequentialAutoFocus(cardInfo);
 
   const handleCardClick = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
@@ -39,36 +40,38 @@ export function CardCreator() {
 
   const handleCardCompanySelectModalClick = useCallback(
     (cardCompany: TCardCompany) => {
-      cardContextApis?.dispatch({ type: 'cardCompany', payload: { value: cardCompany } });
+      cardContextApis?.dispatch({ type: 'cardCompanies', payload: { index: 0, value: cardCompany } });
       hideModal();
     },
-    [cardContextApis, hideModal]
+    [hideModal, cardContextApis]
   );
 
+  if (!cardInfo) return null;
+
   return (
-    <ThemeSetter className="app" theme={cardInfo?.cardCompany.value?.theme}>
+    <ThemeSetter className="app" theme={cardInfo?.cardCompanies[0].value?.theme}>
       <h2 className="page-title">
         <Link to={routes.home} className="mr-10">{`<`}</Link> 카드 추가
       </h2>
 
       <Card
-        cardCompany={cardInfo?.cardCompany?.value}
+        cardCompany={cardInfo?.cardCompanies[0].value}
         cardExpireDate={cardInfo?.expireDates?.map((expireDate) => expireDate.value)}
         cardNumbers={cardInfo?.cardNumbers}
         cardOwnerName={cardInfo?.cardOwners?.[0]?.value}
         additionalBottomElement={
-          !cardInfo?.cardCompany.checkIsValid() && errorMessage ? (
+          !cardInfo?.cardCompanies[0].isValidate && errorMessage ? (
             <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
           ) : undefined
         }
         onCardClick={handleCardClick}
       />
 
-      <CardNumbersInputListPure cardNumbers={cardInfo?.cardNumbers} />
-      <ExpireDatesInputListPure expireDates={cardInfo?.expireDates} />
-      <CardOwnerInputPure cardOwners={cardInfo?.cardOwners} />
-      <SecurityCodesInputListPure securityCodes={cardInfo?.securityCodes} />
-      <PasswordsInputListPure passwords={cardInfo?.passwords} />
+      <CardNumbersInputList cardNumbers={cardInfo?.cardNumbers} />
+      <ExpireDatesInputList expireDates={cardInfo?.expireDates} />
+      <CardOwnerInput cardOwners={cardInfo?.cardOwners} />
+      <SecurityCodesInputList securityCodes={cardInfo?.securityCodes} />
+      <PasswordsInputList passwords={cardInfo?.passwords} />
 
       <SubmitButton />
 

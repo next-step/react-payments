@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useCallback, useEffect } from 'react';
 
 import { useGetErrorMessage } from '@/hooks';
-import { CardNicknameState, useCardContextApiSelector } from '@/stores/CardContext';
+import { CardNicknameState, useCardApiContext } from '@/stores/CardContext';
 
 import { StyledNicknameInput, StyledNicknameInputErrorMessage } from './NicknameInput.styled';
 
@@ -11,7 +11,7 @@ interface NicknameInputProps {
 
 export function NicknameInput({ cardNickname }: NicknameInputProps) {
   const errorMessage = useGetErrorMessage(cardNickname);
-  const cardContextApis = useCardContextApiSelector();
+  const cardContextApis = useCardApiContext();
 
   const handleCardNicknameChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {

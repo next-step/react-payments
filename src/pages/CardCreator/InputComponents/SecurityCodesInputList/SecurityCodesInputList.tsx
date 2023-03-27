@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { SecurityCodesState } from '@/stores/CardContext';
+import { TCardStore } from '@/stores/CardContext/initialCardStore';
 
 import { CardInputWrapperPure } from '../components';
 import { SecurityCodeInput } from './SecurityCodeInput';
@@ -8,20 +8,18 @@ import { SecurityCodeTooltip } from './SecurityCodeTooltip';
 import { StyledSecurityCodesInputList } from './SecurityCodesInputList.styled';
 
 interface SecurityCodesInputListProps {
-  securityCodes?: SecurityCodesState;
+  securityCodes: TCardStore['securityCodes'];
 }
 
-function SecurityCodesInputList({ securityCodes }: SecurityCodesInputListProps) {
+export const SecurityCodesInputList = memo(function SecurityCodesInputList({
+  securityCodes,
+}: SecurityCodesInputListProps) {
   return (
     <CardInputWrapperPure header="보안코드(CVC/CVV)">
       <StyledSecurityCodesInputList>
-        {securityCodes?.map((securityCode, i) => {
-          return <SecurityCodeInput key={securityCode.key} securityCode={securityCode} index={i} />;
-        })}
+        <SecurityCodeInput securityCode={securityCodes[0]} index={0} />
         <SecurityCodeTooltip />
       </StyledSecurityCodesInputList>
     </CardInputWrapperPure>
   );
-}
-
-export const SecurityCodesInputListPure = memo(SecurityCodesInputList);
+});

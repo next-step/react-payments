@@ -1,22 +1,19 @@
 import React, { ChangeEvent } from 'react';
 
-import { useGetErrorMessage } from '@/hooks';
-import { useCardContextApiSelector, SecurityCodesState } from '@/stores/CardContext';
-import { useErrorContextApiSelector } from '@/stores/ErrorContext';
+import { useCardApiContext, SecurityCodeInputElement } from '@/stores/CardContext';
 import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';
 
 interface SecurityCodeInputProps {
-  securityCode: SecurityCodesState[number];
+  securityCode: SecurityCodeInputElement;
   index: number;
 }
 
 export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProps) {
-  const { key, value, checkIsAllowInput, setRef } = securityCode;
+  const { value, setRef } = securityCode;
 
-  const cardContextApis = useCardContextApiSelector();
-  const errorContextApis = useErrorContextApiSelector();
+  const cardContextApis = useCardApiContext();
 
   const changeEventProps = {
     props: {
@@ -24,36 +21,20 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
       const filteredNumber = filterNumber(e.currentTarget.value);
-      return checkIsAllowInput(filteredNumber);
+      return !filteredNumber || filteredNumber.length <= 3;
     },
     getNewValue: (e: ChangeEvent<HTMLInputElement>) => {
       return filterNumber(e.currentTarget.value);
     },
   };
 
-  const blurEventProps = {
-    props: {
-      eventCallback: () => {
-        if (!securityCode.checkIsValid())
-          errorContextApis?.dispatch({ type: securityCode.key, message: securityCode.getInvalidMessage() });
-        else errorContextApis?.dispatch({});
-      },
-    },
-  };
-
-  const errorMessage = useGetErrorMessage(securityCode);
-  const error = { isError: !!errorMessage, message: errorMessage };
-
   return (
     <CardInfoInputElement
-      key={key}
       className="input-basic w-25"
       type="password"
       value={value ?? ''}
       ref={setRef?.bind(securityCode)}
       changeEventProps={changeEventProps}
-      blurEventProps={blurEventProps}
-      error={error}
     />
   );
 }

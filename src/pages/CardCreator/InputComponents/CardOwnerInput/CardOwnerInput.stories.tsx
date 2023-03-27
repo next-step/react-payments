@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { CardContext, cardOwnersInit, CardProvider } from '@/stores/CardContext';
-import { getInitialCardStore } from '@/stores/CardContext/cardStore';
+import { getInitialCardStore } from '@/stores/CardContext/cardContext';
 import { ErrorContextProvider } from '@/stores/ErrorContext';
 
 import { CardOwnerInputPure } from './CardOwnerInput';

@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import { useLocalStorage } from '@/hooks';
 import type { CardStore } from '@/stores';
-import { useCardContextApiSelector } from '@/stores/CardContext';
+import { useCardApiContext } from '@/stores/CardContext';
 import { mapObjectValues } from '@/utils';
 
 const LOCAL_STORAGE_CARD_LIST_KEY = 'cardList';
@@ -23,7 +23,7 @@ export function useCardListWithLocalStorage() {
   const { value, setLocalStorageValue } =
     useLocalStorage<{ [createdAt: string]: CardStorePOJO }>(LOCAL_STORAGE_CARD_LIST_KEY);
 
-  const cardContextApis = useCardContextApiSelector();
+  const cardContextApis = useCardApiContext();
 
   const getCardFromStorage = useCallback(
     (cardId: string, fallback?: () => void): void => {
@@ -69,10 +69,7 @@ export function useCardListWithLocalStorage() {
   };
 }
 
-function dispatchCardStoreJSONInContext(
-  card: CardStorePOJO,
-  cardContextApis: ReturnType<typeof useCardContextApiSelector>
-) {
+function dispatchCardStoreJSONInContext(card: CardStorePOJO, cardContextApis: ReturnType<typeof useCardApiContext>) {
   Object.entries(card).forEach(([key, val]) => {
     if (!val) return;
 

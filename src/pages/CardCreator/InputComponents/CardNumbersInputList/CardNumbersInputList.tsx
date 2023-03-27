@@ -1,8 +1,7 @@
-import React, { memo, forwardRef, useImperativeHandle, ForwardedRef } from 'react';
+import React, { memo } from 'react';
 
-import { useGetErrorMessage } from '@/hooks';
+import type { TCardStore } from '@/stores/CardContext/initialCardStore';
 import { checkIsArrayLast } from '@/utils';
-import type { CardNumbersState } from '@/stores/CardContext';
 
 import { CardInputWrapperPure } from '../components';
 import { CardNumberInput } from './CardNumberInput';
@@ -12,38 +11,27 @@ export interface CardNumbersInputListRefs {
 }
 
 interface CardNumbersInputListProps {
-  cardNumbers?: CardNumbersState;
+  cardNumbers?: TCardStore['cardNumbers'];
 }
 
-function CardNumbersInputList({ cardNumbers }: CardNumbersInputListProps, ref: ForwardedRef<CardNumbersInputListRefs>) {
-  const errorMessage = useGetErrorMessage(cardNumbers);
-
-  useImperativeHandle(ref, () => ({
-    checkIsEveryInputValid: () => {
-      return !!cardNumbers?.every((cardNumber, i) => {
-        const isValid = cardNumber.checkIsValid();
-
-        if (!isValid) return isValid;
-
-        if (!checkIsArrayLast(cardNumbers, i)) {
-          cardNumbers?.[i + 1].ref?.focus();
-        }
-
-        return isValid;
-      });
-    },
-  }));
-
+export const CardNumbersInputList = memo(function CardNumbersInputList({ cardNumbers }: CardNumbersInputListProps) {
   return (
-    <CardInputWrapperPure header="카드 번호" errorMessage={errorMessage}>
+    <CardInputWrapperPure header="카드 번호" errorMessage="">
       <div className="input-box">
         {cardNumbers?.map((cardNumber, i) => {
           const isLast = checkIsArrayLast(cardNumbers, i);
-          return <CardNumberInput key={cardNumber.key} needDividerRender={!isLast} cardNumber={cardNumber} index={i} />;
+          const isPasswordType = i >= cardNumbers.length - 2;
+          return (
+            <CardNumberInput
+              key={`cardNumber-input-${i}`}
+              type={isPasswordType ? 'password' : 'text'}
+              needDividerRender={!isLast}
+              cardNumber={cardNumber}
+              index={i}
+            />
+          );
         })}
       </div>
     </CardInputWrapperPure>
   );
-}
-
-export const CardNumbersInputListPure = memo(forwardRef(CardNumbersInputList));
+});

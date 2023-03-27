@@ -1,57 +1,38 @@
 import React, { ChangeEvent } from 'react';
 
-import { useGetErrorMessage } from '@/hooks';
-import { PasswordsState, useCardContextApiSelector } from '@/stores/CardContext';
-import { useErrorContextApiSelector } from '@/stores/ErrorContext';
+import { CardPasswordInputElement, useCardApiContext } from '@/stores/CardContext';
 import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';
 
 interface PasswordInputProps {
-  password: PasswordsState[number];
+  password: CardPasswordInputElement;
   index: number;
 }
 
 export function PasswordInput({ password, index }: PasswordInputProps) {
-  const { key, value, checkIsAllowInput, setRef } = password;
+  const { value, setRef } = password;
 
-  const cardContextApis = useCardContextApiSelector();
-  const errorContextApis = useErrorContextApiSelector();
+  const cardContextApis = useCardApiContext();
 
   const changeEventProps = {
     props: { setState: (value: string) => cardContextApis?.dispatch({ type: 'passwords', payload: { index, value } }) },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
       const filteredNumber = filterNumber(e.currentTarget.value);
-      return checkIsAllowInput(filteredNumber);
+      return !filteredNumber || filteredNumber.length < 2;
     },
     getNewValue: (e: ChangeEvent<HTMLInputElement>) => {
       return filterNumber(e.currentTarget.value);
     },
   };
 
-  const blurEventProps = {
-    props: {
-      eventCallback: () => {
-        if (!password.checkIsValid())
-          errorContextApis?.dispatch({ type: password.key, message: password.getInvalidMessage() });
-        else errorContextApis?.dispatch({ type: null, message: null });
-      },
-    },
-  };
-
-  const errorMessage = useGetErrorMessage(password);
-  const error = { isError: !!errorMessage, message: errorMessage };
-
   return (
     <CardInfoInputElement
-      key={key}
       type="password"
       className="input-basic w-15 mr-10"
       value={value ?? ''}
       ref={setRef?.bind(password)}
       changeEventProps={changeEventProps}
-      blurEventProps={blurEventProps}
-      error={error}
     />
   );
 }

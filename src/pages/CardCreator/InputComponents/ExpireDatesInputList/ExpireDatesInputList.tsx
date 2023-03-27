@@ -1,26 +1,23 @@
 import React, { memo } from 'react';
 
-import type { ExpireDatesState } from '@/stores/CardContext';
-import { checkIsArrayLast } from '@/utils';
+import type { TCardStore } from '@/stores/CardContext/initialCardStore';
 
 import { CardInputWrapperPure } from '../components';
-import { ExpireDateInput } from './ExpireDateInput';
+import { ExpireMonthInput } from './ExpireMonthInput';
+import { ExpireYearInput } from './ExpireYearInput';
 
 interface ExpireDatesInputListProps {
-  expireDates?: ExpireDatesState;
+  expireDates: TCardStore['expireDates'];
 }
 
-function ExpireDatesInputList({ expireDates }: ExpireDatesInputListProps) {
+export const ExpireDatesInputList = memo(function ExpireDatesInputList({ expireDates }: ExpireDatesInputListProps) {
   return (
     <CardInputWrapperPure header="만료일">
       <div className="input-box w-50">
-        {expireDates?.map((expireDate, i) => {
-          const isLast = checkIsArrayLast(expireDates, i);
-          return <ExpireDateInput key={expireDate.key} expireDate={expireDate} index={i} needDividerRender={!isLast} />;
-        })}
+        <ExpireMonthInput needDividerRender expireDate={expireDates[0]} index={0} />
+
+        <ExpireYearInput expireDate={expireDates[1]} index={1} />
       </div>
     </CardInputWrapperPure>
   );
-}
-
-export const ExpireDatesInputListPure = memo(ExpireDatesInputList);
+});

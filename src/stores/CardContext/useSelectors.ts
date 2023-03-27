@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 
-import { ApiContext, CardContext } from './cardStore';
+import { ApiContext, CardContext } from './cardContext';
 
-export function useCardSelector() {
+export function useCardContext() {
   return useContext(CardContext);
 }
 
-export function useCardContextApiSelector() {
+export function useCardApiContext() {
   return useContext(ApiContext);
 }
