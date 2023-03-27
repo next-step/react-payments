@@ -25,10 +25,11 @@ export class CardCompanyInputElement implements IInputElement<TCardCompany> {
 
   index: number;
 
-  constructor({ isValidate = false, value }: TCardCompanyState, index = 0) {
+  constructor({ isValidate = false, value, index = 0, ref }: Partial<CardCompanyInputElement>) {
     this.value = value;
     this.isValidate = isValidate;
     this.index = index;
+    this.ref = ref;
   }
 }
 

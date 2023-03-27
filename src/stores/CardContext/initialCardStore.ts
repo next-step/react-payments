@@ -13,13 +13,13 @@ import {
 } from './models';
 
 const initialCardStore = {
-  cardCompanies: createArray(1, (_: any, i: number) => new CardCompanyInputElement({}, i)),
-  cardNicknames: createArray(1, (_: any, i: number) => new CardNicknameInputElement({}, i)),
-  cardNumbers: createArray(4, (_: any, i: number) => new CardNumberInputElement({}, i)),
-  expireDates: createArray(2, (_: any, i: number) => new ExpireDateInputElement({}, i)),
-  cardOwners: createArray(1, (_: any, i: number) => new CardOwnerInputElement({}, i)),
-  securityCodes: createArray(1, (_: any, i: number) => new SecurityCodeInputElement({}, i)),
-  passwords: createArray(2, (_: any, i: number) => new CardPasswordInputElement({}, i)),
+  cardCompanies: createArray(1, (_: any, index: number) => new CardCompanyInputElement({ index })),
+  cardNicknames: createArray(1, (_: any, index: number) => new CardNicknameInputElement({ index })),
+  cardNumbers: createArray(4, (_: any, index: number) => new CardNumberInputElement({ index })),
+  expireDates: createArray(2, (_: any, index: number) => new ExpireDateInputElement({ index })),
+  cardOwners: createArray(1, (_: any, index: number) => new CardOwnerInputElement({ index })),
+  securityCodes: createArray(1, (_: any, index: number) => new SecurityCodeInputElement({ index })),
+  passwords: createArray(2, (_: any, index: number) => new CardPasswordInputElement({ index })),
 };
 
 export type TCardStore = typeof initialCardStore;

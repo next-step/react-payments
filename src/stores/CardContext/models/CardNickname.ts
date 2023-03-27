@@ -5,7 +5,7 @@ export type TCardNicknameState = IInputState;
 export class CardNicknameInputElement implements IInputElement {
   value?: string | undefined;
 
-  isValidate = false;
+  isValidate: boolean;
 
   ref?: HTMLInputElement | null;
 
@@ -15,10 +15,11 @@ export class CardNicknameInputElement implements IInputElement {
 
   index: number;
 
-  constructor({ isValidate = false, value }: TCardNicknameState, index = 0) {
+  constructor({ isValidate = false, value, index = 0, ref }: Partial<CardNicknameInputElement>) {
     this.value = value;
     this.isValidate = isValidate;
     this.index = index;
+    this.ref = ref;
   }
 }
 

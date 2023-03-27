@@ -3,9 +3,9 @@ import type { IInputState, IInputElement } from '@/stores/types';
 export type TCardNumberState = IInputState;
 
 export class CardNumberInputElement implements IInputElement {
-  value?: string | undefined;
+  value?: string;
 
-  isValidate = false;
+  isValidate: boolean;
 
   ref?: HTMLInputElement | null;
 
@@ -15,10 +15,11 @@ export class CardNumberInputElement implements IInputElement {
 
   index: number;
 
-  constructor({ isValidate = false, value }: TCardNumberState, index = 0) {
+  constructor({ isValidate = false, value, index = 0, ref }: Partial<CardNumberInputElement>) {
     this.value = value;
     this.isValidate = isValidate;
     this.index = index;
+    this.ref = ref;
   }
 }
 

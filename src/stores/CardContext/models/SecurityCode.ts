@@ -15,10 +15,11 @@ export class SecurityCodeInputElement implements IInputElement {
 
   index: number;
 
-  constructor({ isValidate = false, value }: TSecurityCodeState, index: number) {
+  constructor({ isValidate = false, value, ref, index = 0 }: Partial<SecurityCodeInputElement>) {
     this.value = value;
     this.isValidate = isValidate;
     this.index = index;
+    this.ref = ref;
   }
 }
 

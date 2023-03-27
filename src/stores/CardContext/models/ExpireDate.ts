@@ -15,10 +15,11 @@ export class ExpireDateInputElement implements IInputElement {
 
   index: number;
 
-  constructor({ isValidate = false, value }: TExpireDateState, index = 0) {
+  constructor({ isValidate = false, value, ref, index = 0 }: Partial<ExpireDateInputElement>) {
     this.value = value;
     this.isValidate = isValidate;
     this.index = index;
+    this.ref = ref;
   }
 }
 
