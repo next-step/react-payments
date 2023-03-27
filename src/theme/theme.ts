@@ -56,7 +56,7 @@ const yellow = createTheme({
   },
 });
 
-const themes = {
+export const themes = {
   red,
   blue,
   green,
@@ -68,5 +68,3 @@ const themes = {
 } as const;
 
 export type Themes = keyof typeof themes;
-
-export default themes;
