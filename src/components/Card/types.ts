@@ -1,6 +1,6 @@
 import type { InputHTMLAttributes } from 'react';
 
-import type { Themes } from '@/theme/theme';
+import type { Themes } from '@/theme';
 
 export interface TCardCompanyProp {
   theme: Themes;

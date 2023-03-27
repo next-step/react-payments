@@ -1,6 +1,6 @@
 import React from 'react';
 
-import themes from '@/theme/theme';
+import themes from '@/theme';
 import type { TCardCompany } from '@/types';
 
 import { StyledCardCompany, StyledCardCompanyColor, StyledCardCompanyName } from './CardCompany.styled';

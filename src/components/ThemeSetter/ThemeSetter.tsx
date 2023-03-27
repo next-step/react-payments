@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, HTMLAttributes } from 'react';
 
-import themes, { Themes } from '@/theme/theme';
+import themes, { Themes } from '@/theme';
 
 interface ThemeSetterProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
