@@ -13,13 +13,13 @@ import {
 } from './models';
 
 const initialCardStore = {
-  cardCompanies: createArray(1, () => new CardCompanyInputElement({})),
-  cardNicknames: createArray(1, () => new CardNicknameInputElement({})),
-  cardNumbers: createArray(4, () => new CardNumberInputElement({})),
-  expireDates: createArray(2, () => new ExpireDateInputElement({})),
-  cardOwners: createArray(1, () => new CardOwnerInputElement({})),
-  securityCodes: createArray(1, () => new SecurityCodeInputElement({})),
-  passwords: createArray(2, () => new CardPasswordInputElement({})),
+  cardCompanies: createArray(1, (_: any, i: number) => new CardCompanyInputElement({}, i)),
+  cardNicknames: createArray(1, (_: any, i: number) => new CardNicknameInputElement({}, i)),
+  cardNumbers: createArray(4, (_: any, i: number) => new CardNumberInputElement({}, i)),
+  expireDates: createArray(2, (_: any, i: number) => new ExpireDateInputElement({}, i)),
+  cardOwners: createArray(1, (_: any, i: number) => new CardOwnerInputElement({}, i)),
+  securityCodes: createArray(1, (_: any, i: number) => new SecurityCodeInputElement({}, i)),
+  passwords: createArray(2, (_: any, i: number) => new CardPasswordInputElement({}, i)),
 };
 
 export type TCardStore = typeof initialCardStore;
