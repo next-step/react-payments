@@ -42,7 +42,7 @@ export const CardOwnerInput = memo(function CardOwnerInput({ cardOwners }: CardO
         className="input-basic"
         value={cardOwner?.value ?? ''}
         placeholder="소유주 이름"
-        ref={cardOwner?.setRef?.bind(cardOwner)}
+        ref={cardOwner?.setRef}
         changeEventProps={changeEventProps}
       />
     </CardInputWrapperPure>

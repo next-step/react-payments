@@ -31,7 +31,7 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
       type="password"
       className="input-basic w-15 mr-10"
       value={value ?? ''}
-      ref={setRef?.bind(password)}
+      ref={setRef}
       changeEventProps={changeEventProps}
     />
   );

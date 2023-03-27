@@ -63,7 +63,7 @@ export const ExpireMonthInput = memo(function ExpireMonthInput({
         type="text"
         value={value ?? ''}
         placeholder="월"
-        ref={setRef?.bind(expireDate)}
+        ref={setRef}
         changeEventProps={changeEventProps}
         blurEventProps={blurEventProps}
       />

@@ -15,15 +15,20 @@ export type TCardCompanyState = IInputState<TCardCompany>;
 export class CardCompanyInputElement implements IInputElement<TCardCompany> {
   value?: TCardCompany;
 
-  isValidate = false;
+  isValidate: boolean;
 
   ref?: HTMLInputElement | null;
 
-  setRef?: (this: IInputElement, ref?: HTMLInputElement | null) => void;
+  setRef = (ref?: HTMLInputElement | null) => {
+    this.ref = ref;
+  };
 
-  constructor({ isValidate, value }: TCardCompanyState) {
+  index: number;
+
+  constructor({ isValidate = false, value }: TCardCompanyState, index = 0) {
     this.value = value;
-    if (isValidate) this.isValidate = isValidate;
+    this.isValidate = isValidate;
+    this.index = index;
   }
 }
 

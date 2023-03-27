@@ -9,11 +9,16 @@ export class CardOwnerInputElement implements IInputElement {
 
   ref?: HTMLInputElement | null;
 
-  setRef?: (this: IInputElement, ref?: HTMLInputElement | null) => void;
+  setRef = (ref?: HTMLInputElement | null) => {
+    this.ref = ref;
+  };
 
-  constructor({ isValidate, value }: TCardOwnerState) {
+  index: number;
+
+  constructor({ isValidate = false, value }: TCardOwnerState, index = 0) {
     this.value = value;
-    if (isValidate) this.isValidate = isValidate;
+    this.isValidate = isValidate;
+    this.index = index;
   }
 }
 

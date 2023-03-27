@@ -33,7 +33,7 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
       className="input-basic w-25"
       type="password"
       value={value ?? ''}
-      ref={setRef?.bind(securityCode)}
+      ref={setRef}
       changeEventProps={changeEventProps}
     />
   );
