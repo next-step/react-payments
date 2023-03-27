@@ -42,7 +42,7 @@ export const CardNumberInput = memo(({ type = 'text', cardNumber, index, needDiv
         type={type}
         value={value ?? ''}
         className="input-basic text-black"
-        ref={setRef}
+        ref={setRef.bind(cardNumber)}
         changeEventProps={changeEventProps}
         error={{ isError: cardNumber.isValidate }}
       />

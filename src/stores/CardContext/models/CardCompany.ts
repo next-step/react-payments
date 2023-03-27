@@ -19,9 +19,9 @@ export class CardCompanyInputElement implements IInputElement<TCardCompany> {
 
   ref?: HTMLInputElement | null;
 
-  setRef = (ref?: HTMLInputElement | null) => {
+  setRef(ref?: HTMLInputElement | null) {
     this.ref = ref;
-  };
+  }
 
   index: number;
 

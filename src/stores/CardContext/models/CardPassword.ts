@@ -7,11 +7,11 @@ export class CardPasswordInputElement implements IInputElement {
 
   isValidate = false;
 
-  ref?: HTMLInputElement | null;
+  ref?: HTMLInputElement | null = null;
 
-  setRef = (ref?: HTMLInputElement | null) => {
+  setRef(ref?: HTMLInputElement | null) {
     this.ref = ref;
-  };
+  }
 
   index: number;
 
