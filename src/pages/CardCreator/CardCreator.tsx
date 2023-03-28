@@ -26,6 +26,7 @@ export function CardCreator() {
   // @ts-ignore
   const errorMessage = useGetErrorMessage(cardInfo?.cardCompanies[0].value);
 
+  // TODO: mount시에 한번 돌아주는 hook넣어주기
   useAutoCompanyChecker(cardInfo?.cardNumbers[0].value, cardInfo?.cardNumbers[1].value);
   useSequentialAutoFocus(
     cardInfo && [

@@ -4,45 +4,52 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useCardListWithLocalStorage } from '@/hooks';
 import { routes } from '@/routes';
 import { useCardContext } from '@/stores/CardContext';
-import { useErrorContextApiSelector } from '@/stores/ErrorContext';
+import { findInvalidStoreAndFocus } from '@/utils/card';
 
 export function useNicknameSubmitEvent() {
   const { cardId } = useParams();
   const navigate = useNavigate();
 
-  const errorContextApis = useErrorContextApiSelector();
   const cardInfo = useCardContext();
-  const { cardNickname, cardCompany, cardNumbers, expireDates, cardOwners, passwords, securityCodes } = cardInfo || {};
 
   const { setCardInStorage } = useCardListWithLocalStorage();
 
   return (e: MouseEvent<HTMLElement>) => {
-    if (!cardNickname?.checkIsValid()) {
+    if (!cardInfo) return;
+
+    const { cardNicknames, cardCompanies, cardNumbers, expireDates, cardOwners, passwords, securityCodes } = cardInfo;
+    const cardNickname = cardNicknames[0];
+    if (cardNickname.errorMessage) {
       e.preventDefault();
-      errorContextApis?.dispatch({ type: cardNickname?.key, message: cardNickname?.getInvalidMessage() });
       return;
     }
 
-    if (!cardCompany || !cardNumbers || !expireDates || !cardOwners || !passwords || !securityCodes) return;
-
-    if (invalidElement) {
-      e.preventDefault();
-      errorContextApis?.dispatch({ type: invalidElement.key, message: invalidElement.getInvalidMessage() });
-      navigate(routes.cardCreator);
-      return;
-    }
-
-    const newCardNicknameValue = !cardNickname.value ? cardCompany?.value?.name : cardNickname.value;
-    const saveCardId = cardId || new Date().getTime();
-
-    setCardInStorage(saveCardId, {
-      cardNickname: { ...cardNickname, value: newCardNicknameValue },
-      cardCompany,
+    const invalidElement = findInvalidStoreAndFocus([
+      cardCompanies,
       cardNumbers,
       expireDates,
       cardOwners,
       passwords,
       securityCodes,
-    });
+    ]);
+
+    if (invalidElement) {
+      e.preventDefault();
+      navigate(routes.cardCreator);
+      return;
+    }
+
+    const newCardNicknameValue = !cardNickname.value ? cardCompanies[0]?.value?.name : cardNickname.value;
+    const saveCardId = cardId || new Date().getTime();
+
+    // setCardInStorage(saveCardId, {
+    //   cardNickname: { ...cardNickname, value: newCardNicknameValue },
+    //   cardCompany,
+    //   cardNumbers,
+    //   expireDates,
+    //   cardOwners,
+    //   passwords,
+    //   securityCodes,
+    // });
   };
 }
