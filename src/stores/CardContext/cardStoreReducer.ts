@@ -14,7 +14,6 @@ type TCardStoreActions = TCardStoreKeys;
 
 type TCardInputPayload = { index?: number; value: any; errorMessage?: string };
 
-// TODO: reducer지우고 state로 교체하기
 export function cardStoreReducer(store: TCardStore, action: { type: TCardStoreActions; payload?: TCardInputPayload }) {
   const { type, payload } = action;
   const { index = 0, value, errorMessage } = payload as TCardInputPayload;
