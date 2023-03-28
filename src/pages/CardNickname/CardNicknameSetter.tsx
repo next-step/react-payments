@@ -23,13 +23,13 @@ export function CardNicknameSetter() {
 
       <Card
         disableNickname
-        cardCompany={cardInfo?.cardCompany?.value}
+        cardCompany={cardInfo?.cardCompanies[0]?.value}
         cardExpireDate={cardExpireDate}
         cardNumbers={cardInfo?.cardNumbers}
         cardOwnerName={cardInfo?.cardOwners?.[0]?.value}
       />
 
-      <NicknameInput cardNickname={cardInfo?.cardNickname} />
+      <NicknameInput cardNickname={cardInfo?.cardNicknames[0]} />
 
       <CardNicknameSubmitButton />
     </div>

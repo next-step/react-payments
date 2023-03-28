@@ -15,7 +15,6 @@ export class CardNicknameInputElement implements IInputElement {
   }
 
   validateValue(value?: string) {
-    if (isNil(value)) return;
     if (!value) {
       return '닉네임을 입력해주세요.';
     }

@@ -1,6 +1,7 @@
 import { styled } from '@/stitches.config';
 
 export const StyledNicknameInput = styled('input', {
+  marginBottom: '10px',
   variants: {
     error: {
       true: {
@@ -12,5 +13,4 @@ export const StyledNicknameInput = styled('input', {
 
 export const StyledNicknameInputErrorMessage = styled('div', {
   color: 'red',
-  marginTop: '10px',
 });

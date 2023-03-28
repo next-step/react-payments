@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { routes } from '@/routes';
 
-import { useCardSubmitEvent } from '../hooks';
+import { useCardSubmitEvent } from './hooks';
 
 interface SubmitButtonProps {}
 

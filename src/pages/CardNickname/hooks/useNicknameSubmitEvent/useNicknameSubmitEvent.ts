@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useCardListWithLocalStorage, useGetInvalidCardInputState } from '@/hooks';
+import { useCardListWithLocalStorage } from '@/hooks';
 import { routes } from '@/routes';
 import { useCardContext } from '@/stores/CardContext';
 import { useErrorContextApiSelector } from '@/stores/ErrorContext';
@@ -13,8 +13,6 @@ export function useNicknameSubmitEvent() {
   const errorContextApis = useErrorContextApiSelector();
   const cardInfo = useCardContext();
   const { cardNickname, cardCompany, cardNumbers, expireDates, cardOwners, passwords, securityCodes } = cardInfo || {};
-
-  const invalidElement = useGetInvalidCardInputState();
 
   const { setCardInStorage } = useCardListWithLocalStorage();
 

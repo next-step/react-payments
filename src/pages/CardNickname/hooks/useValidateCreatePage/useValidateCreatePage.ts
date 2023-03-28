@@ -2,20 +2,28 @@ import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { routes } from '@/routes';
-import { useGetInvalidCardInputState } from '@/hooks';
-import { useErrorContextApiSelector } from '@/stores/ErrorContext';
+import { findInvalidStoreAndFocus } from '@/utils/card';
+import { useCardContext } from '@/stores/CardContext';
 
 export function useValidateCreatePage() {
   const { cardId } = useParams();
   const navigate = useNavigate();
-  const errorContextApis = useErrorContextApiSelector();
-
-  const invalidElement = useGetInvalidCardInputState();
+  const cardStore = useCardContext();
 
   useEffect(() => {
-    if (!cardId && invalidElement) {
-      errorContextApis?.dispatch({ type: invalidElement.key, message: invalidElement.getInvalidMessage() });
+    if (cardId || !cardStore || !navigate) return;
+
+    const { cardCompanies, cardNumbers, expireDates, cardOwners, passwords, securityCodes } = cardStore;
+    const invalidState = findInvalidStoreAndFocus([
+      cardNumbers,
+      expireDates,
+      cardOwners,
+      passwords,
+      securityCodes,
+      cardCompanies,
+    ]);
+    if (invalidState) {
       navigate(routes.cardCreator);
     }
-  }, [cardId, navigate, invalidElement, errorContextApis]);
+  }, [cardId, navigate, cardStore]);
 }
