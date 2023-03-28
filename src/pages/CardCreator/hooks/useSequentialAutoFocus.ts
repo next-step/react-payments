@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { checkIsArrayLast } from '@/utils';
 
-type TCardState = { ref?: HTMLElement | null; isValidate: boolean };
+type TCardState = { ref?: HTMLElement | null; errorMessage?: string; isAllowToFocusNext: () => boolean };
 
 // FIXME: 너무 길다... 해체가 필요하다. 따라서 아래와 같이 simple하게 간다.
 // 현재 active인 ref의 state가 isValid인 것을 확인하고 처음부터 끝까지 valid를 확인하고 처음 invalid한 곳을 바라보게한다.
@@ -14,7 +14,7 @@ export function useSequentialAutoFocus(cardStore?: TCardState[][] | null) {
     // active한 element를 찾은 다음
     const activeState = findActiveState(cardStore);
     console.log('active : ', activeState);
-    if (activeState?.isValidate) {
+    if (activeState && !activeState.errorMessage && activeState.isAllowToFocusNext()) {
       // isValidate면,
       // 처음부터 끝까지 다시 탐색.
       // 다시 탐색과정에서 처음 걸리는 element에 focus를 준다.

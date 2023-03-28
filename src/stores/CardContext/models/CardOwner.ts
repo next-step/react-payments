@@ -1,23 +1,35 @@
 import type { IInputState, IInputElement } from '@/stores/types';
+import { isNil } from '@/utils';
 
 export type TCardOwnerState = IInputState;
 
 export class CardOwnerInputElement implements IInputElement {
   value?: string | undefined;
 
-  isValidate: boolean;
+  errorMessage?: string;
 
   ref?: HTMLInputElement | null;
+
+  index: number;
 
   setRef(ref?: HTMLInputElement | null) {
     this.ref = ref;
   }
 
-  index: number;
+  validateValue(value?: string) {
+    if (isNil(value)) return;
+    if (!value) {
+      return '카드 소유주 이름을 입력해주세요.';
+    }
+  }
 
-  constructor({ isValidate = false, value, ref, index = 0 }: Partial<CardOwnerInputElement>) {
+  isAllowToFocusNext() {
+    return this.value?.length === 30;
+  }
+
+  constructor({ value, ref, index = 0 }: Partial<CardOwnerInputElement>) {
     this.value = value;
-    this.isValidate = isValidate;
+    this.errorMessage = this.validateValue(value);
     this.index = index;
     this.ref = ref;
   }

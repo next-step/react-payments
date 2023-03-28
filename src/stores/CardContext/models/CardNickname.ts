@@ -1,23 +1,35 @@
 import type { IInputState, IInputElement } from '@/stores/types';
+import { isNil } from '@/utils';
 
 export type TCardNicknameState = IInputState;
 
 export class CardNicknameInputElement implements IInputElement {
   value?: string | undefined;
 
-  isValidate: boolean;
+  errorMessage?: string;
 
   ref?: HTMLInputElement | null;
+
+  index: number;
 
   setRef(ref?: HTMLInputElement | null) {
     this.ref = ref;
   }
 
-  index: number;
+  validateValue(value?: string) {
+    if (isNil(value)) return;
+    if (!value) {
+      return '닉네임을 입력해주세요.';
+    }
+  }
 
-  constructor({ isValidate = false, value, index = 0, ref }: Partial<CardNicknameInputElement>) {
+  isAllowToFocusNext() {
+    return this.value?.length === 10;
+  }
+
+  constructor({ value, ref, index = 0 }: Partial<CardNicknameInputElement>) {
     this.value = value;
-    this.isValidate = isValidate;
+    this.errorMessage = this.validateValue(value);
     this.index = index;
     this.ref = ref;
   }

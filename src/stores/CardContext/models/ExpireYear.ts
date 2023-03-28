@@ -1,23 +1,35 @@
 import type { IInputState, IInputElement } from '@/stores/types';
+import { isNil } from '@/utils';
 
-export type TExpireDateState = IInputState;
+export type TExpireYearState = IInputState;
 
-export class ExpireDateInputElement implements IInputElement {
+export class ExpireYearInputElement implements IInputElement {
   value?: string | undefined;
 
-  isValidate = false;
+  errorMessage?: string;
 
   ref?: HTMLInputElement | null;
+
+  index: number;
 
   setRef(ref?: HTMLInputElement | null) {
     this.ref = ref;
   }
 
-  index: number;
+  validateValue(value?: string) {
+    if (isNil(value)) return;
+    if (!value) {
+      return '만료 연도를 입력해주세요.';
+    }
+  }
 
-  constructor({ isValidate = false, value, ref, index = 0 }: Partial<ExpireDateInputElement>) {
+  isAllowToFocusNext() {
+    return this.value?.length === 2;
+  }
+
+  constructor({ value, errorMessage, ref, index = 0 }: Partial<ExpireYearInputElement>) {
     this.value = value;
-    this.isValidate = isValidate;
+    this.errorMessage = errorMessage;
     this.index = index;
     this.ref = ref;
   }

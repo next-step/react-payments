@@ -1,23 +1,35 @@
 import type { IInputState, IInputElement } from '@/stores/types';
+import { isNil } from '@/utils';
 
 export type TCardPasswordState = IInputState;
 
 export class CardPasswordInputElement implements IInputElement {
   value?: string | undefined;
 
-  isValidate: boolean;
+  errorMessage?: string;
 
   ref?: HTMLInputElement | null = null;
+
+  index: number;
 
   setRef(ref?: HTMLInputElement | null) {
     this.ref = ref;
   }
 
-  index: number;
+  validateValue(value?: string) {
+    if (isNil(value)) return;
+    if (!value) {
+      return '비밀번호를 입력해주세요.';
+    }
+  }
 
-  constructor({ isValidate = false, value, ref, index = 0 }: Partial<CardPasswordInputElement>) {
+  isAllowToFocusNext() {
+    return this.value?.length === 1;
+  }
+
+  constructor({ value, ref, index = 0 }: Partial<CardPasswordInputElement>) {
     this.value = value;
-    this.isValidate = isValidate;
+    this.errorMessage = this.validateValue(value);
     this.index = index;
     this.ref = ref;
   }

@@ -3,7 +3,6 @@ import React, { ChangeEvent, memo, useMemo } from 'react';
 import { useGetErrorMessage } from '@/hooks';
 import { useCardApiContext } from '@/stores/CardContext';
 import { TCardStore } from '@/stores/CardContext/initialCardStore';
-import { isNil } from '@/utils';
 
 import { CardInputWrapperPure, CardInfoInputElement } from '../components';
 
@@ -13,7 +12,7 @@ interface CardOwnerInputProps {
 
 export const CardOwnerInput = memo(function CardOwnerInput({ cardOwners }: CardOwnerInputProps) {
   const cardOwner = useMemo(() => cardOwners[0], [cardOwners]);
-  const isError = !isNil(cardOwner.value) && !cardOwner.isValidate;
+  const isError = !!cardOwner.errorMessage;
 
   const cardContextApis = useCardApiContext();
   const errorMessage = useGetErrorMessage();
@@ -21,8 +20,7 @@ export const CardOwnerInput = memo(function CardOwnerInput({ cardOwners }: CardO
   const changeEventProps = {
     props: {
       setState: (value: string) => {
-        const isValidate = checkIsValidate(value);
-        cardContextApis?.dispatch({ type: 'cardOwners', payload: { index: 0, value, isValidate } });
+        cardContextApis?.dispatch({ type: 'cardOwners', payload: { index: 0, value } });
       },
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +51,3 @@ export const CardOwnerInput = memo(function CardOwnerInput({ cardOwners }: CardO
     </CardInputWrapperPure>
   );
 });
-
-function checkIsValidate(value: string) {
-  return !!value && value.length <= 30;
-}

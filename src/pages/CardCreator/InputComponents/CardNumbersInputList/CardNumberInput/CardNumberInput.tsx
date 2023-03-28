@@ -2,7 +2,7 @@ import React, { ChangeEvent, HTMLInputTypeAttribute, memo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components';
 import { CardNumberInputElement, useCardApiContext } from '@/stores/CardContext';
-import { filterNumber, isNil } from '@/utils';
+import { filterNumber } from '@/utils';
 
 import { InputDivider, CardInfoInputElement } from '../../components';
 
@@ -14,8 +14,9 @@ interface CardNumberProps {
 }
 
 export const CardNumberInput = memo(({ type = 'text', cardNumber, index, needDividerRender }: CardNumberProps) => {
-  const { value, setRef, isValidate } = cardNumber;
-  const isError = !isNil(value) && !isValidate;
+  const { value, setRef, errorMessage } = cardNumber;
+  const isError = !!errorMessage;
+
   const cardContextApis = useCardApiContext();
 
   // prop 변화에 따라 새롭게 만들어져야하는 객체 = memo를 둠으로서 오히려 메모리와 성능에 손해를 줄 수 있음.
@@ -23,8 +24,7 @@ export const CardNumberInput = memo(({ type = 'text', cardNumber, index, needDiv
     props: {
       setState: (value: string) => {
         // setState하기 전에 value를 스스로 판단해 isValidate의 값을 수정한다.
-        const isValidate = checkIsValidate(value);
-        cardContextApis?.dispatch({ type: 'cardNumbers', payload: { index, value, isValidate } });
+        cardContextApis?.dispatch({ type: 'cardNumbers', payload: { index, value } });
       },
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,14 +47,10 @@ export const CardNumberInput = memo(({ type = 'text', cardNumber, index, needDiv
         error={{ isError }}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
-        <InputDivider hiding={!isValidate} className="dash">
+        <InputDivider hiding={!isError} className="dash">
           -
         </InputDivider>
       </ConditionalComponentWrapper>
     </>
   );
 });
-
-function checkIsValidate(value: string) {
-  return !!value && value.length >= 4;
-}

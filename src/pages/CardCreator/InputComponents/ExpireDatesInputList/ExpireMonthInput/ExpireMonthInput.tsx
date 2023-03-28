@@ -1,13 +1,13 @@
 import React, { ChangeEvent, FocusEvent, memo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components';
-import { useCardApiContext, ExpireDateInputElement } from '@/stores/CardContext';
+import { useCardApiContext, ExpireMonthInputElement } from '@/stores/CardContext';
 import { filterNumber, isNil } from '@/utils';
 
 import { InputDivider, CardInfoInputElement } from '../../components';
 
 interface ExpireMonthInputProps {
-  expireDate: ExpireDateInputElement;
+  expireDate: ExpireMonthInputElement;
   index: number;
   needDividerRender: boolean;
 }
@@ -17,16 +17,15 @@ export const ExpireMonthInput = memo(function ExpireMonthInput({
   index,
   needDividerRender,
 }: ExpireMonthInputProps) {
-  const { value, setRef, isValidate } = expireDate;
-  const isError = !isNil(value) && !isValidate;
+  const { value, setRef, errorMessage } = expireDate;
+  const isError = !!errorMessage;
 
   const cardContextApis = useCardApiContext();
 
   const changeEventProps = {
     props: {
       setState: (value: string) => {
-        const isValidate = checkMonthIsValidate(value);
-        cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value, isValidate } });
+        cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value } });
       },
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,8 +46,7 @@ export const ExpireMonthInput = memo(function ExpireMonthInput({
   const blurEventProps = {
     props: {
       setState: (value: string) => {
-        const isValidate = checkMonthIsValidate(value);
-        cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value, isValidate } });
+        cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value } });
       },
     },
     checkWhetherSetState: (e: FocusEvent<HTMLInputElement>) => {
@@ -60,8 +58,6 @@ export const ExpireMonthInput = memo(function ExpireMonthInput({
       return blurValue.padStart(2, '0');
     },
   };
-
-  const isValueValid = expireDate.isValidate;
 
   return (
     <>
@@ -76,13 +72,8 @@ export const ExpireMonthInput = memo(function ExpireMonthInput({
         error={{ isError }}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
-        <InputDivider hiding={!isValueValid}>/</InputDivider>
+        <InputDivider hiding={!isError}>/</InputDivider>
       </ConditionalComponentWrapper>
     </>
   );
 });
-
-function checkMonthIsValidate(value: string) {
-  const numberedValue = Number(value);
-  return !!value && value.length <= 2 && numberedValue >= 1 && numberedValue <= 12;
-}

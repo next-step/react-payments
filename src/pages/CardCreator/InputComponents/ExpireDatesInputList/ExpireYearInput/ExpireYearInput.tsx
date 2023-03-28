@@ -1,26 +1,25 @@
 import React, { ChangeEvent, FocusEvent, memo } from 'react';
 
-import { useCardApiContext, ExpireDateInputElement } from '@/stores/CardContext';
-import { filterNumber, isNil } from '@/utils';
+import { useCardApiContext, ExpireYearInputElement } from '@/stores/CardContext';
+import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';
 
 interface ExpireYearInputProps {
-  expireDate: ExpireDateInputElement;
+  expireDate: ExpireYearInputElement;
   index: number;
 }
 
 export const ExpireYearInput = memo(function ExpireYearInput({ expireDate, index }: ExpireYearInputProps) {
-  const { value, setRef, isValidate } = expireDate;
-  const isError = !isNil(value) && !isValidate;
+  const { value, setRef, errorMessage } = expireDate;
+  const isError = !!errorMessage;
 
   const cardContextApis = useCardApiContext();
 
   const changeEventProps = {
     props: {
       setState: (value: string) => {
-        const isValidate = checkYearIsValidate(value);
-        cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value, isValidate } });
+        cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value } });
       },
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,8 +34,7 @@ export const ExpireYearInput = memo(function ExpireYearInput({ expireDate, index
   const blurEventProps = {
     props: {
       setState: (value: string) => {
-        const isValidate = checkYearIsValidate(value);
-        cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value, isValidate } });
+        cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value } });
       },
     },
     checkWhetherSetState: (e: FocusEvent<HTMLInputElement>) => {
@@ -62,7 +60,3 @@ export const ExpireYearInput = memo(function ExpireYearInput({ expireDate, index
     />
   );
 });
-
-function checkYearIsValidate(value: string) {
-  return !!value && value.length <= 2;
-}

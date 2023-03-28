@@ -1,5 +1,6 @@
 import type { Themes } from '@/theme';
 import type { IInputState, IInputElement } from '@/stores/types';
+import { isNil } from '@/utils';
 
 type TCardCompany = {
   name: string;
@@ -7,7 +8,6 @@ type TCardCompany = {
 };
 
 // DX개선, 새로운 state가 생겨도 간단하게 할 수 있도록
-
 export type TCardCompanyState = IInputState<TCardCompany>;
 
 // class로 객체를 만들경우 객체 name이 생겨서 instanceof로 구별하기 쉬워짐.
@@ -15,23 +15,36 @@ export type TCardCompanyState = IInputState<TCardCompany>;
 export class CardCompanyInputElement implements IInputElement<TCardCompany> {
   value?: TCardCompany;
 
-  isValidate: boolean;
+  errorMessage?: string;
 
   ref?: HTMLInputElement | null;
+
+  index: number;
 
   setRef(ref?: HTMLInputElement | null) {
     this.ref = ref;
   }
 
-  index: number;
+  validateValue(value?: TCardCompany) {
+    if (isNil(value)) return;
+    if (!value) {
+      return '카드사를 선택해주세요.';
+    }
+  }
 
-  constructor({ isValidate = false, value, index = 0, ref }: Partial<CardCompanyInputElement>) {
+  isAllowToFocusNext() {
+    return !!this.value;
+  }
+
+  constructor({ value, ref, index = 0 }: Partial<CardCompanyInputElement>) {
     this.value = value;
-    this.isValidate = isValidate;
+    this.errorMessage = this.validateValue(value);
     this.index = index;
     this.ref = ref;
   }
 }
+
+// !! 기존 코드의 문제점은 component의 작동방식의 책임까지 객체에 있었다는 것이다.
 
 /*
   import type { CardCompanyState } from './types';

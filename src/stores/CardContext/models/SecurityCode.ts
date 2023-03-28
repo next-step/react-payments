@@ -1,23 +1,35 @@
 import type { IInputState, IInputElement } from '@/stores/types';
+import { isNil } from '@/utils';
 
 export type TSecurityCodeState = IInputState;
 
 export class SecurityCodeInputElement implements IInputElement {
   value?: string | undefined;
 
-  isValidate = false;
+  errorMessage?: string;
 
   ref?: HTMLInputElement | null;
+
+  index: number;
 
   setRef(ref?: HTMLInputElement | null) {
     this.ref = ref;
   }
 
-  index: number;
+  validateValue(value?: string) {
+    if (isNil(value)) return;
+    if (!value || value.length !== 3) {
+      return '보안번호 3자리를 입력해주세요.';
+    }
+  }
 
-  constructor({ isValidate = false, value, ref, index = 0 }: Partial<SecurityCodeInputElement>) {
+  isAllowToFocusNext() {
+    return this.value?.length === 3;
+  }
+
+  constructor({ value, ref, index = 0 }: Partial<SecurityCodeInputElement>) {
     this.value = value;
-    this.isValidate = isValidate;
+    this.errorMessage = this.validateValue(value);
     this.index = index;
     this.ref = ref;
   }

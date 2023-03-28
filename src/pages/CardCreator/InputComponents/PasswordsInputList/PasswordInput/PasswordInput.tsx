@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 
 import { CardPasswordInputElement, useCardApiContext } from '@/stores/CardContext';
-import { filterNumber, isNil } from '@/utils';
+import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';
 
@@ -11,16 +11,15 @@ interface PasswordInputProps {
 }
 
 export function PasswordInput({ password, index }: PasswordInputProps) {
-  const { value, setRef, isValidate } = password;
-  const isError = !isNil(value) && !isValidate;
+  const { value, setRef, errorMessage } = password;
+  const isError = !!errorMessage;
 
   const cardContextApis = useCardApiContext();
 
   const changeEventProps = {
     props: {
       setState: (value: string) => {
-        const isValidate = checkIsValidate(value);
-        cardContextApis?.dispatch({ type: 'passwords', payload: { index, value, isValidate } });
+        cardContextApis?.dispatch({ type: 'passwords', payload: { index, value } });
       },
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,8 +41,4 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
       error={{ isError }}
     />
   );
-}
-
-function checkIsValidate(value: string) {
-  return !!value && value.length < 2;
 }
