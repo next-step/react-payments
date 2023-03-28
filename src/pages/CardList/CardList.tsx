@@ -13,34 +13,34 @@ export function CardList() {
 
   useFlushCardContextStore();
 
-  const { cardList, deleteCard } = useCardListWithLocalStorage();
+  // const { cardList, deleteCard } = useCardListWithLocalStorage();
 
-  const sortCardListToDescendingOrderOfKey = useMemo(
-    () => cardList && Object.entries(cardList).sort(sortDescendingOrderByKeys),
-    [cardList]
-  );
+  // const sortCardListToDescendingOrderOfKey = useMemo(
+  //   () => cardList && Object.entries(cardList).sort(sortDescendingOrderByKeys),
+  //   [cardList]
+  // );
 
-  const createCardClickHandler = useCallback(
-    (key: string) => () => {
-      navigate(routes.createCardNickname(key));
-    },
-    [navigate]
-  );
+  // const createCardClickHandler = useCallback(
+  //   (key: string) => () => {
+  //     navigate(routes.createCardNickname(key));
+  //   },
+  //   [navigate]
+  // );
 
-  const createCardDeleteButtonClickHandler = useCallback(
-    (key: string) => (e: MouseEvent<HTMLDivElement>) => {
-      e.stopPropagation();
-      deleteCard(key);
-    },
-    [deleteCard]
-  );
+  // const createCardDeleteButtonClickHandler = useCallback(
+  //   (key: string) => (e: MouseEvent<HTMLDivElement>) => {
+  //     e.stopPropagation();
+  //     deleteCard(key);
+  //   },
+  //   [deleteCard]
+  // );
 
   return (
     <div className="app flex-column-center">
       <Link to={routes.cardCreator} className="card-box">
         <div className="empty-card">+</div>
       </Link>
-      {sortCardListToDescendingOrderOfKey?.map(([key, val]) => (
+      {/* {sortCardListToDescendingOrderOfKey?.map(([key, val]) => (
         <Card
           key={key}
           cardCompany={val?.cardCompany?.value}
@@ -55,7 +55,7 @@ export function CardList() {
             </StyledDeleteButton>
           }
         />
-      ))}
+      ))} */}
     </div>
   );
 }

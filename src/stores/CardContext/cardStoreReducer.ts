@@ -12,11 +12,14 @@ import {
 
 type TCardStoreActions = TCardStoreKeys;
 
-type TCardInputPayload = { index?: number; value: any; errorMessage?: string };
+type TCardInputPayload = { index?: number; value?: any; errorMessage?: string };
 
-export function cardStoreReducer(store: TCardStore, action: { type: TCardStoreActions; payload?: TCardInputPayload }) {
-  const { type, payload } = action;
+export function cardStoreReducer(store: TCardStore, action: { type?: TCardStoreActions; payload?: TCardInputPayload }) {
+  const { type, payload = {} } = action;
   const { index = 0, value, errorMessage } = payload as TCardInputPayload;
+
+  if (!type) return getInitialCardStore();
+
   if (store[type][index].value === value) return store;
 
   switch (type) {
