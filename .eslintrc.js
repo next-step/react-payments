@@ -31,6 +31,7 @@ module.exports = {
     'no-param-reassign': 0,
     'no-unused-expressions': 0,
     'class-methods-use-this': 0,
+    'consistent-return': 0,
 
     'react/destructuring-assignment': 0,
     'react/jsx-filename-extension': [
