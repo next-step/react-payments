@@ -17,7 +17,7 @@ export const SecurityCodesInputList = memo(function SecurityCodesInputList({
   return (
     <CardInputWrapperPure header="보안코드(CVC/CVV)">
       <StyledSecurityCodesInputList>
-        <SecurityCodeInput securityCode={securityCodes[0]} index={0} />
+        <SecurityCodeInput securityCode={securityCodes[0]} />
         <SecurityCodeTooltip />
       </StyledSecurityCodesInputList>
     </CardInputWrapperPure>

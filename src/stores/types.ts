@@ -13,7 +13,6 @@ export interface IInputState<T = string> {
 // 하나의 InputElement에 해당하는 타입
 export interface IInputElement<T = string> extends IInputState<T> {
   errorMessage?: string;
-  index: number;
   ref?: HTMLInputElement | null;
   setRef: (ref?: HTMLInputElement | null) => void;
   validateValue: (value?: T) => string | void;

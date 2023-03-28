@@ -18,8 +18,6 @@ export class CardCompanyInputElement implements IInputElement<TCardCompany> {
 
   ref?: HTMLInputElement | null;
 
-  index: number;
-
   setRef(ref?: HTMLInputElement | null) {
     this.ref = ref;
   }
@@ -34,10 +32,9 @@ export class CardCompanyInputElement implements IInputElement<TCardCompany> {
     return !!this.value;
   }
 
-  constructor({ value, ref, index = 0 }: Partial<CardCompanyInputElement>) {
+  constructor({ value, ref }: Partial<CardCompanyInputElement>) {
     this.value = value;
     this.errorMessage = this.validateValue(value);
-    this.index = index;
     this.ref = ref;
   }
 }

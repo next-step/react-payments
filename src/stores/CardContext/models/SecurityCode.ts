@@ -10,8 +10,6 @@ export class SecurityCodeInputElement implements IInputElement {
 
   ref?: HTMLInputElement | null;
 
-  index: number;
-
   setRef(ref?: HTMLInputElement | null) {
     this.ref = ref;
   }
@@ -27,10 +25,9 @@ export class SecurityCodeInputElement implements IInputElement {
     return this.value?.length === 3;
   }
 
-  constructor({ value, ref, index = 0 }: Partial<SecurityCodeInputElement>) {
+  constructor({ value, ref }: Partial<SecurityCodeInputElement>) {
     this.value = value;
     this.errorMessage = this.validateValue(value);
-    this.index = index;
     this.ref = ref;
   }
 }

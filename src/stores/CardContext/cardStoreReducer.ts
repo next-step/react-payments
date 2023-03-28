@@ -12,7 +12,7 @@ import {
 
 type TCardStoreActions = TCardStoreKeys;
 
-type TCardInputPayload = { index: number; value: any; errorMessage?: string };
+type TCardInputPayload = { index?: number; value: any; errorMessage?: string };
 
 // TODO: reducer지우고 state로 교체하기
 export function cardStoreReducer(store: TCardStore, action: { type: TCardStoreActions; payload?: TCardInputPayload }) {

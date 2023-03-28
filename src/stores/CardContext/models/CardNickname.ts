@@ -10,8 +10,6 @@ export class CardNicknameInputElement implements IInputElement {
 
   ref?: HTMLInputElement | null;
 
-  index: number;
-
   setRef(ref?: HTMLInputElement | null) {
     this.ref = ref;
   }
@@ -27,10 +25,9 @@ export class CardNicknameInputElement implements IInputElement {
     return this.value?.length === 10;
   }
 
-  constructor({ value, ref, index = 0 }: Partial<CardNicknameInputElement>) {
+  constructor({ value, ref }: Partial<CardNicknameInputElement>) {
     this.value = value;
     this.errorMessage = this.validateValue(value);
-    this.index = index;
     this.ref = ref;
   }
 }

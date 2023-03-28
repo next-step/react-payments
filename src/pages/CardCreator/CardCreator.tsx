@@ -48,7 +48,7 @@ export function CardCreator() {
 
   const handleCardCompanySelectModalClick = useCallback(
     (cardCompany: TCardCompanyState) => {
-      cardContextApis?.dispatch({ type: 'cardCompanies', payload: { index: 0, value: cardCompany } });
+      cardContextApis?.dispatch({ type: 'cardCompanies', payload: { value: cardCompany } });
       hideModal();
     },
     [hideModal, cardContextApis]

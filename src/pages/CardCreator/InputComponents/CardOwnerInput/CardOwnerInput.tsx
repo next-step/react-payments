@@ -20,7 +20,7 @@ export const CardOwnerInput = memo(function CardOwnerInput({ cardOwners }: CardO
   const changeEventProps = {
     props: {
       setState: (value: string) => {
-        cardContextApis?.dispatch({ type: 'cardOwners', payload: { index: 0, value } });
+        cardContextApis?.dispatch({ type: 'cardOwners', payload: { value } });
       },
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +33,7 @@ export const CardOwnerInput = memo(function CardOwnerInput({ cardOwners }: CardO
   };
 
   const handleCardOwnerInputFocus = () => {
-    cardContextApis?.dispatch({ type: 'cardOwners', payload: { index: 0, value: cardOwner.value || '' } });
+    cardContextApis?.dispatch({ type: 'cardOwners', payload: { value: cardOwner.value || '' } });
   };
 
   const inputHeader = useMemo(

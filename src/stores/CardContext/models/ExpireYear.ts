@@ -10,8 +10,6 @@ export class ExpireYearInputElement implements IInputElement {
 
   ref?: HTMLInputElement | null;
 
-  index: number;
-
   setRef(ref?: HTMLInputElement | null) {
     this.ref = ref;
   }
@@ -27,10 +25,9 @@ export class ExpireYearInputElement implements IInputElement {
     return this.value?.length === 2;
   }
 
-  constructor({ value, errorMessage, ref, index = 0 }: Partial<ExpireYearInputElement>) {
+  constructor({ value, errorMessage, ref }: Partial<ExpireYearInputElement>) {
     this.value = value;
     this.errorMessage = errorMessage;
-    this.index = index;
     this.ref = ref;
   }
 }

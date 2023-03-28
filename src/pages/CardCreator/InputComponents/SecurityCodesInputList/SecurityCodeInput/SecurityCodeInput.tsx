@@ -7,10 +7,9 @@ import { CardInfoInputElement } from '../../components';
 
 interface SecurityCodeInputProps {
   securityCode: SecurityCodeInputElement;
-  index: number;
 }
 
-export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProps) {
+export function SecurityCodeInput({ securityCode }: SecurityCodeInputProps) {
   const { value, setRef, errorMessage } = securityCode;
   const isError = !!errorMessage;
 
@@ -19,7 +18,7 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
   const changeEventProps = {
     props: {
       setState: (value: string) => {
-        cardContextApis?.dispatch({ type: 'securityCodes', payload: { index, value } });
+        cardContextApis?.dispatch({ type: 'securityCodes', payload: { value } });
       },
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +31,7 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
   };
 
   const handleSecurityCodeInputFocus = () => {
-    cardContextApis?.dispatch({ type: 'securityCodes', payload: { index, value: value || '' } });
+    cardContextApis?.dispatch({ type: 'securityCodes', payload: { value: value || '' } });
   };
 
   return (
