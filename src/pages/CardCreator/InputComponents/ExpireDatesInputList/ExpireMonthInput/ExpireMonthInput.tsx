@@ -59,6 +59,10 @@ export const ExpireMonthInput = memo(function ExpireMonthInput({
     },
   };
 
+  const handleExpireMonthInputFocus = () => {
+    cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value: value || '' } });
+  };
+
   return (
     <>
       <CardInfoInputElement
@@ -70,6 +74,7 @@ export const ExpireMonthInput = memo(function ExpireMonthInput({
         changeEventProps={changeEventProps}
         blurEventProps={blurEventProps}
         error={{ isError }}
+        onFocus={handleExpireMonthInputFocus}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
         <InputDivider hiding={!isError}>/</InputDivider>

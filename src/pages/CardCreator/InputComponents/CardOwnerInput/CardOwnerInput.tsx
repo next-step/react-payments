@@ -32,6 +32,10 @@ export const CardOwnerInput = memo(function CardOwnerInput({ cardOwners }: CardO
     },
   };
 
+  const handleCardOwnerInputFocus = () => {
+    cardContextApis?.dispatch({ type: 'cardOwners', payload: { index: 0, value: cardOwner.value || '' } });
+  };
+
   const inputHeader = useMemo(
     () => ['카드 소유자 이름(선택)', `${cardOwner?.value?.length || 0} / 30`],
     [cardOwner?.value]
@@ -47,6 +51,7 @@ export const CardOwnerInput = memo(function CardOwnerInput({ cardOwners }: CardO
         ref={cardOwner?.setRef.bind(cardOwner)}
         changeEventProps={changeEventProps}
         error={{ isError }}
+        onFocus={handleCardOwnerInputFocus}
       />
     </CardInputWrapperPure>
   );

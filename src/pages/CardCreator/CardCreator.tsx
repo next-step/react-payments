@@ -27,7 +27,16 @@ export function CardCreator() {
   const errorMessage = useGetErrorMessage(cardInfo?.cardCompanies[0].value);
 
   useAutoCompanyChecker(cardInfo?.cardNumbers[0].value, cardInfo?.cardNumbers[1].value);
-  useSequentialAutoFocus(cardInfo && Object.values(cardInfo));
+  useSequentialAutoFocus(
+    cardInfo && [
+      cardInfo.cardNumbers,
+      cardInfo.expireDates,
+      cardInfo.cardOwners,
+      cardInfo.securityCodes,
+      cardInfo.passwords,
+      cardInfo.cardCompanies,
+    ]
+  );
 
   const handleCardClick = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
@@ -39,8 +48,7 @@ export function CardCreator() {
 
   const handleCardCompanySelectModalClick = useCallback(
     (cardCompany: TCardCompanyState) => {
-      const isValidate = !!cardCompany;
-      cardContextApis?.dispatch({ type: 'cardCompanies', payload: { index: 0, value: cardCompany, isValidate } });
+      cardContextApis?.dispatch({ type: 'cardCompanies', payload: { index: 0, value: cardCompany } });
       hideModal();
     },
     [hideModal, cardContextApis]
@@ -60,8 +68,8 @@ export function CardCreator() {
         cardNumbers={cardInfo?.cardNumbers}
         cardOwnerName={cardInfo?.cardOwners?.[0]?.value}
         additionalBottomElement={
-          !cardInfo?.cardCompanies[0].isValidate && errorMessage ? (
-            <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
+          !cardInfo?.cardCompanies[0].errorMessage ? (
+            <StyledErrorMessage>{cardInfo?.cardCompanies[0].errorMessage}</StyledErrorMessage>
           ) : undefined
         }
         onCardClick={handleCardClick}

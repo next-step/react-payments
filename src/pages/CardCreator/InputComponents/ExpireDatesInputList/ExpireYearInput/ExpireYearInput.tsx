@@ -47,6 +47,10 @@ export const ExpireYearInput = memo(function ExpireYearInput({ expireDate, index
     },
   };
 
+  const handleExpireYearInputFocus = () => {
+    cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value: value || '' } });
+  };
+
   return (
     <CardInfoInputElement
       className="input-basic"
@@ -57,6 +61,7 @@ export const ExpireYearInput = memo(function ExpireYearInput({ expireDate, index
       changeEventProps={changeEventProps}
       blurEventProps={blurEventProps}
       error={{ isError }}
+      onFocus={handleExpireYearInputFocus}
     />
   );
 });

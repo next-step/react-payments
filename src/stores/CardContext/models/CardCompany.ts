@@ -1,6 +1,5 @@
 import type { Themes } from '@/theme';
 import type { IInputState, IInputElement } from '@/stores/types';
-import { isNil } from '@/utils';
 
 type TCardCompany = {
   name: string;
@@ -26,7 +25,6 @@ export class CardCompanyInputElement implements IInputElement<TCardCompany> {
   }
 
   validateValue(value?: TCardCompany) {
-    if (isNil(value)) return;
     if (!value) {
       return '카드사를 선택해주세요.';
     }

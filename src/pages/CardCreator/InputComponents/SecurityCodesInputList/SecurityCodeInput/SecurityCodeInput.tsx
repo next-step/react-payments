@@ -31,6 +31,10 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
     },
   };
 
+  const handleSecurityCodeInputFocus = () => {
+    cardContextApis?.dispatch({ type: 'securityCodes', payload: { index, value: value || '' } });
+  };
+
   return (
     <CardInfoInputElement
       className="input-basic w-25"
@@ -39,6 +43,7 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
       ref={setRef.bind(securityCode)}
       changeEventProps={changeEventProps}
       error={{ isError }}
+      onFocus={handleSecurityCodeInputFocus}
     />
   );
 }

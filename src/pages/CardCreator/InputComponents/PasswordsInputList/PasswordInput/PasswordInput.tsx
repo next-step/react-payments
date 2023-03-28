@@ -31,6 +31,10 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
     },
   };
 
+  const handlePasswordInputFocus = () => {
+    cardContextApis?.dispatch({ type: 'passwords', payload: { index, value: value || '' } });
+  };
+
   return (
     <CardInfoInputElement
       type="password"
@@ -39,6 +43,7 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
       ref={setRef.bind(password)}
       changeEventProps={changeEventProps}
       error={{ isError }}
+      onFocus={handlePasswordInputFocus}
     />
   );
 }

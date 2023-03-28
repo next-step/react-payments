@@ -36,6 +36,10 @@ export const CardNumberInput = memo(({ type = 'text', cardNumber, index, needDiv
     },
   };
 
+  const handleCardNumberInputFocus = () => {
+    cardContextApis?.dispatch({ type: 'cardNumbers', payload: { index, value: value || '' } });
+  };
+
   return (
     <>
       <CardInfoInputElement
@@ -45,6 +49,7 @@ export const CardNumberInput = memo(({ type = 'text', cardNumber, index, needDiv
         ref={setRef.bind(cardNumber)}
         changeEventProps={changeEventProps}
         error={{ isError }}
+        onFocus={handleCardNumberInputFocus}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
         <InputDivider hiding={!isError} className="dash">
