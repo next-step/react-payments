@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card, ThemeSetter } from '@/components';
 import { useGetErrorMessage } from '@/hooks';
 import { routes } from '@/routes';
-import { useCardApiContext, useCardContext, TCardCompanyState } from '@/stores/CardContext';
+import { useCardApiContext, useCardContext, TCardCompany } from '@/stores/CardContext';
 
 import { useCardCompanySelectModal, useSequentialAutoFocus, useAutoCompanyChecker } from './hooks';
 import { SubmitButton } from './SubmitButton';
@@ -47,7 +47,7 @@ export function CardCreator() {
   );
 
   const handleCardCompanySelectModalClick = useCallback(
-    (cardCompany: TCardCompanyState) => {
+    (cardCompany: TCardCompany) => {
       cardContextApis?.dispatch({ type: 'cardCompanies', payload: { value: cardCompany } });
       hideModal();
     },
