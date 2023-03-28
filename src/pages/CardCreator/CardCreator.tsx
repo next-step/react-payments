@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import { Card, ThemeSetter } from '@/components';
 import { useGetErrorMessage } from '@/hooks';
 import { routes } from '@/routes';
-import { useCardApiContext, useCardContext } from '@/stores/CardContext';
-import type { TCardCompany } from '@/types';
+import { useCardApiContext, useCardContext, TCardCompanyState } from '@/stores/CardContext';
 
 import { useCardCompanySelectModal, useSequentialAutoFocus, useAutoCompanyChecker } from './hooks';
 import { SubmitButton } from './SubmitButton';
@@ -28,7 +27,7 @@ export function CardCreator() {
   const errorMessage = useGetErrorMessage(cardInfo?.cardCompanies[0].value);
 
   useAutoCompanyChecker(cardInfo?.cardNumbers[0].value, cardInfo?.cardNumbers[1].value);
-  // useSequentialAutoFocus(cardInfo);
+  useSequentialAutoFocus(cardInfo && Object.values(cardInfo));
 
   const handleCardClick = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
@@ -39,8 +38,9 @@ export function CardCreator() {
   );
 
   const handleCardCompanySelectModalClick = useCallback(
-    (cardCompany: TCardCompany) => {
-      cardContextApis?.dispatch({ type: 'cardCompanies', payload: { index: 0, value: cardCompany } });
+    (cardCompany: TCardCompanyState) => {
+      const isValidate = !!cardCompany;
+      cardContextApis?.dispatch({ type: 'cardCompanies', payload: { index: 0, value: cardCompany, isValidate } });
       hideModal();
     },
     [hideModal, cardContextApis]

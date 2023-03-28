@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react';
 
 import { useCardApiContext, SecurityCodeInputElement } from '@/stores/CardContext';
-import { filterNumber } from '@/utils';
+import { filterNumber, isNil } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';
 
@@ -11,13 +11,17 @@ interface SecurityCodeInputProps {
 }
 
 export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProps) {
-  const { value, setRef } = securityCode;
+  const { value, setRef, isValidate } = securityCode;
+  const isError = !isNil(value) && !isValidate;
 
   const cardContextApis = useCardApiContext();
 
   const changeEventProps = {
     props: {
-      setState: (value: string) => cardContextApis?.dispatch({ type: 'securityCodes', payload: { index, value } }),
+      setState: (value: string) => {
+        const isValidate = checkIsValidate(value);
+        cardContextApis?.dispatch({ type: 'securityCodes', payload: { index, value, isValidate } });
+      },
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
       const filteredNumber = filterNumber(e.currentTarget.value);
@@ -35,6 +39,11 @@ export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProp
       value={value ?? ''}
       ref={setRef.bind(securityCode)}
       changeEventProps={changeEventProps}
+      error={{ isError }}
     />
   );
+}
+
+function checkIsValidate(value: string) {
+  return !!value && value.length === 3;
 }

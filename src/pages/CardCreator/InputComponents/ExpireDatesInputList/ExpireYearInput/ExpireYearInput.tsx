@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FocusEvent, memo } from 'react';
 
 import { useCardApiContext, ExpireDateInputElement } from '@/stores/CardContext';
-import { filterNumber } from '@/utils';
+import { filterNumber, isNil } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';
 
@@ -11,13 +11,17 @@ interface ExpireYearInputProps {
 }
 
 export const ExpireYearInput = memo(function ExpireYearInput({ expireDate, index }: ExpireYearInputProps) {
-  const { value, setRef } = expireDate;
+  const { value, setRef, isValidate } = expireDate;
+  const isError = !isNil(value) && !isValidate;
 
   const cardContextApis = useCardApiContext();
 
   const changeEventProps = {
     props: {
-      setState: (value: string) => cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value } }),
+      setState: (value: string) => {
+        const isValidate = checkYearIsValidate(value);
+        cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value, isValidate } });
+      },
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
       const filteredNumber = filterNumber(e.currentTarget.value);
@@ -30,7 +34,10 @@ export const ExpireYearInput = memo(function ExpireYearInput({ expireDate, index
 
   const blurEventProps = {
     props: {
-      setState: (value: string) => cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value } }),
+      setState: (value: string) => {
+        const isValidate = checkYearIsValidate(value);
+        cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value, isValidate } });
+      },
     },
     checkWhetherSetState: (e: FocusEvent<HTMLInputElement>) => {
       const blurValue = e.currentTarget.value;
@@ -51,6 +58,11 @@ export const ExpireYearInput = memo(function ExpireYearInput({ expireDate, index
       ref={setRef.bind(expireDate)}
       changeEventProps={changeEventProps}
       blurEventProps={blurEventProps}
+      error={{ isError }}
     />
   );
 });
+
+function checkYearIsValidate(value: string) {
+  return !!value && value.length <= 2;
+}

@@ -17,13 +17,17 @@ export const ExpireMonthInput = memo(function ExpireMonthInput({
   index,
   needDividerRender,
 }: ExpireMonthInputProps) {
-  const { value, setRef } = expireDate;
+  const { value, setRef, isValidate } = expireDate;
+  const isError = !isNil(value) && !isValidate;
 
   const cardContextApis = useCardApiContext();
 
   const changeEventProps = {
     props: {
-      setState: (value: string) => cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value } }),
+      setState: (value: string) => {
+        const isValidate = checkMonthIsValidate(value);
+        cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value, isValidate } });
+      },
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
       const filteredNumber = filterNumber(e.currentTarget.value);
@@ -42,7 +46,10 @@ export const ExpireMonthInput = memo(function ExpireMonthInput({
 
   const blurEventProps = {
     props: {
-      setState: (value: string) => cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value } }),
+      setState: (value: string) => {
+        const isValidate = checkMonthIsValidate(value);
+        cardContextApis?.dispatch({ type: 'expireDates', payload: { index, value, isValidate } });
+      },
     },
     checkWhetherSetState: (e: FocusEvent<HTMLInputElement>) => {
       const blurValue = e.currentTarget.value;
@@ -66,6 +73,7 @@ export const ExpireMonthInput = memo(function ExpireMonthInput({
         ref={setRef.bind(expireDate)}
         changeEventProps={changeEventProps}
         blurEventProps={blurEventProps}
+        error={{ isError }}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
         <InputDivider hiding={!isValueValid}>/</InputDivider>
@@ -73,3 +81,8 @@ export const ExpireMonthInput = memo(function ExpireMonthInput({
     </>
   );
 });
+
+function checkMonthIsValidate(value: string) {
+  const numberedValue = Number(value);
+  return !!value && value.length <= 2 && numberedValue >= 1 && numberedValue <= 12;
+}
