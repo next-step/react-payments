@@ -1,9 +1,9 @@
 import { MouseEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useCardListWithLocalStorage } from '@/hooks';
+import { useFetchCardList } from '@/hooks';
 import { routes } from '@/routes';
-import { useCardContext } from '@/stores/CardContext';
+import { CardNicknameInputElement, useCardContext } from '@/stores/CardContext';
 import { findInvalidStoreAndFocus } from '@/utils/card';
 
 export function useNicknameSubmitEvent() {
@@ -12,7 +12,7 @@ export function useNicknameSubmitEvent() {
 
   const cardInfo = useCardContext();
 
-  const { setCardInStorage } = useCardListWithLocalStorage();
+  const { postCard } = useFetchCardList();
 
   return (e: MouseEvent<HTMLElement>) => {
     if (!cardInfo) return;
@@ -40,16 +40,8 @@ export function useNicknameSubmitEvent() {
     }
 
     const newCardNicknameValue = !cardNickname.value ? cardCompanies[0]?.value?.name : cardNickname.value;
-    const saveCardId = cardId || new Date().getTime();
 
-    // setCardInStorage(saveCardId, {
-    //   cardNickname: { ...cardNickname, value: newCardNicknameValue },
-    //   cardCompany,
-    //   cardNumbers,
-    //   expireDates,
-    //   cardOwners,
-    //   passwords,
-    //   securityCodes,
-    // });
+    // @ts-ignore
+    postCard({ ...cardInfo, cardNicknames: [new CardNicknameInputElement({ value: newCardNicknameValue })] }, cardId);
   };
 }
