@@ -40,7 +40,7 @@ export const CardOwnerInput = memo(function CardOwnerInput({ cardOwners }: CardO
   );
 
   return (
-    <CardInputWrapperPure header={inputHeader}>
+    <CardInputWrapperPure header={inputHeader} errorMessage={cardOwner.errorMessage}>
       <CardInfoInputElement
         type="text"
         className="input-basic"

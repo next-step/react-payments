@@ -15,8 +15,10 @@ interface CardNumbersInputListProps {
 }
 
 export const CardNumbersInputList = memo(function CardNumbersInputList({ cardNumbers }: CardNumbersInputListProps) {
+  const errorMessage = cardNumbers?.find((cardNumber) => !!cardNumber.errorMessage)?.errorMessage;
+
   return (
-    <CardInputWrapperPure header="카드 번호" errorMessage="">
+    <CardInputWrapperPure header="카드 번호" errorMessage={errorMessage}>
       <div className="input-box">
         {cardNumbers?.map((cardNumber, i) => {
           const isLast = checkIsArrayLast(cardNumbers, i);

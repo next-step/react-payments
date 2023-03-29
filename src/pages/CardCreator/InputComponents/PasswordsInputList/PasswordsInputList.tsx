@@ -10,8 +10,10 @@ interface PasswordsInputListProps {
 }
 
 export const PasswordsInputList = memo(function PasswordsInputList({ passwords }: PasswordsInputListProps) {
+  const errorMessage = passwords?.find((password) => !!password.errorMessage)?.errorMessage;
+
   return (
-    <CardInputWrapperPure header="카드 비밀번호">
+    <CardInputWrapperPure header="카드 비밀번호" errorMessage={errorMessage}>
       <div className="flex">
         {passwords.map((password, i) => {
           return <PasswordInput key={`password-input-${i}`} password={password} index={i} />;

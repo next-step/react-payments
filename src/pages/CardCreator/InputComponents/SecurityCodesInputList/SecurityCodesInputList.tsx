@@ -14,8 +14,10 @@ interface SecurityCodesInputListProps {
 export const SecurityCodesInputList = memo(function SecurityCodesInputList({
   securityCodes,
 }: SecurityCodesInputListProps) {
+  const errorMessage = securityCodes?.find((securityCode) => !!securityCode.errorMessage)?.errorMessage;
+
   return (
-    <CardInputWrapperPure header="보안코드(CVC/CVV)">
+    <CardInputWrapperPure header="보안코드(CVC/CVV)" errorMessage={errorMessage}>
       <StyledSecurityCodesInputList>
         <SecurityCodeInput securityCode={securityCodes[0]} />
         <SecurityCodeTooltip />
