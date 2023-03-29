@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 
-import type { TCardStore } from '@/stores/CardContext';
+import type { TCardStoreKeys } from '@/stores/CardContext';
 import { useFetch } from '../useFetch';
 
 const LOCAL_STORAGE_CARD_LIST_KEY = 'cardList';
 
 type TCardStateListJSON = { value: any }[];
-type TCardStoreJSON = Record<keyof TCardStore, TCardStateListJSON>;
+type TCardStoreJSON = Record<TCardStoreKeys, TCardStateListJSON>;
 type TCardList = { [createdAt: string]: TCardStoreJSON };
 
 const get = async () => {
