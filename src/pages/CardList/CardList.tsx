@@ -1,18 +1,17 @@
-import React, { MouseEvent, useCallback, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { MouseEvent, useCallback, useMemo, useState } from 'react';
 
 import { Card, CloseIcon } from '@/components';
 import { useFetchCardList } from '@/hooks';
-import { routes } from '@/router';
 
 import { useFlushCardContextStore } from './hooks';
 import { EmptyCard } from './EmptyCard';
+import { CardModal, TCardModalDTO } from './CardModal';
 import { StyledDeleteButton, StyledCardListContainer } from './CardList.styled';
 
 export function CardList() {
-  const navigate = useNavigate();
-
   useFlushCardContextStore();
+
+  const [selectedCard, setSelectedCard] = useState<TCardModalDTO | null>();
 
   const { cardList, deleteCard } = useFetchCardList();
 
@@ -23,9 +22,10 @@ export function CardList() {
 
   const createCardClickHandler = useCallback(
     (key: string) => () => {
-      navigate(routes.createCardNickname(key));
+      if (!cardList) return;
+      setSelectedCard({ id: key, card: cardList[key] });
     },
-    [navigate]
+    [cardList]
   );
 
   const createCardDeleteButtonClickHandler = useCallback(
@@ -55,6 +55,7 @@ export function CardList() {
           }
         />
       ))}
+      <CardModal cardInfo={selectedCard} onModalHide={() => setSelectedCard(null)} />
     </StyledCardListContainer>
   );
 }
