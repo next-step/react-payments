@@ -31,8 +31,17 @@ export class ExpireYearInputElement implements InputElement {
   }
 
   constructor({ value, ref }: Partial<ExpireYearInputElement>) {
+    this.#exceptionChecker(value);
     this.value = value;
     this.errorMessage = this.validateValue(value);
     this.ref = ref;
+  }
+
+  #exceptionChecker(value?: TExpireYear) {
+    if (isNil(value)) return;
+    if (typeof value !== 'string') {
+      console.error('받은 value : ', value);
+      throw new Error('ExpireYear의 value가 string 형태가 아닙니다.');
+    }
   }
 }

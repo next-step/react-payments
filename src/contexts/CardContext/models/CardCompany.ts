@@ -1,5 +1,6 @@
 import type { InputElement } from '@/contexts/types';
 import { TCardCompany } from '@/types';
+import { isNil } from '@/utils';
 
 // DX개선, 새로운 state가 생겨도 간단하게 할 수 있도록
 
@@ -27,9 +28,22 @@ export class CardCompanyInputElement implements InputElement<TCardCompany> {
   }
 
   constructor({ value, ref }: Partial<CardCompanyInputElement>) {
+    this.#exceptionChecker(value);
     this.value = value;
     this.errorMessage = this.validateValue(value);
     this.ref = ref;
+  }
+
+  #exceptionChecker(value?: TCardCompany) {
+    if (typeof value !== 'object') {
+      console.error('받은 value : ', value);
+      throw new Error('CardCompany에서 받은 value가 Object 형태가 아닙니다.');
+    }
+
+    if (isNil(value.name) || isNil(value.theme)) {
+      console.error('받은 value : ', value);
+      throw new Error('CardCompany value에는 name과 theme 프로퍼티가 필요합니다.');
+    }
   }
 }
 

@@ -25,8 +25,17 @@ export class SecurityCodeInputElement implements InputElement {
   }
 
   constructor({ value, ref }: Partial<SecurityCodeInputElement>) {
+    this.#exceptionChecker(value);
     this.value = value;
     this.errorMessage = this.validateValue(value);
     this.ref = ref;
+  }
+
+  #exceptionChecker(value?: TSecurityCode) {
+    if (isNil(value)) return;
+    if (typeof value !== 'string') {
+      console.error('받은 value : ', value);
+      throw new Error('Security의 value가 string 형태가 아닙니다.');
+    }
   }
 }

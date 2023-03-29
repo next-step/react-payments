@@ -26,8 +26,17 @@ export class ExpireMonthInputElement implements InputElement {
   }
 
   constructor({ value, ref }: Partial<ExpireMonthInputElement>) {
+    this.#exceptionChecker(value);
     this.value = value;
     this.errorMessage = this.validateValue(value);
     this.ref = ref;
+  }
+
+  #exceptionChecker(value?: TExpireMonth) {
+    if (isNil(value)) return;
+    if (typeof value !== 'string') {
+      console.error('받은 value : ', value);
+      throw new Error('ExpireMonth의 value가 string 형태가 아닙니다.');
+    }
   }
 }

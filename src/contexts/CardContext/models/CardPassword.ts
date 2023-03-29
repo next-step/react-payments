@@ -25,8 +25,17 @@ export class CardPasswordInputElement implements InputElement {
   }
 
   constructor({ value, ref }: Partial<CardPasswordInputElement>) {
+    this.#exceptionChecker(value);
     this.value = value;
     this.errorMessage = this.validateValue(value);
     this.ref = ref;
+  }
+
+  #exceptionChecker(value?: TCardPassword) {
+    if (isNil(value)) return;
+    if (typeof value !== 'string') {
+      console.error('받은 value : ', value);
+      throw new Error('CardPassword의 value가 string 형태가 아닙니다.');
+    }
   }
 }

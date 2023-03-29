@@ -25,8 +25,17 @@ export class CardOwnerInputElement implements InputElement {
   }
 
   constructor({ value, ref }: Partial<CardOwnerInputElement>) {
+    this.#exceptionChecker(value);
     this.value = value;
     this.errorMessage = this.validateValue(value);
     this.ref = ref;
+  }
+
+  #exceptionChecker(value?: TCardOwner) {
+    if (isNil(value)) return;
+    if (typeof value !== 'string') {
+      console.error('받은 value : ', value);
+      throw new Error('CardOwner의 이름이 string 형태가 아닙니다.');
+    }
   }
 }

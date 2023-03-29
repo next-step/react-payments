@@ -25,8 +25,16 @@ export class CardNumberInputElement implements InputElement {
   }
 
   constructor({ value, ref }: Partial<CardNumberInputElement>) {
+    this.#exceptionChecker(value);
     this.value = value;
     this.errorMessage = this.validateValue(value);
     this.ref = ref;
+  }
+
+  #exceptionChecker(value?: TCardNumber) {
+    if (typeof value !== 'string') {
+      console.error('받은 value : ', value);
+      throw new Error('CardNumber의 value가 string 형태가 아닙니다.');
+    }
   }
 }
