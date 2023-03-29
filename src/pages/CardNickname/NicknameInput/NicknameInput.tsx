@@ -2,7 +2,7 @@ import React, { ChangeEvent, useCallback, useEffect } from 'react';
 
 import { CardNicknameInputElement, useCardContextApi } from '@/stores/CardContext';
 
-import { StyledNicknameInput, StyledNicknameInputErrorMessage } from './NicknameInput.styled';
+import { StyledNicknameInput } from './NicknameInput.styled';
 
 interface NicknameInputProps {
   cardNickname?: CardNicknameInputElement;
@@ -28,15 +28,11 @@ export function NicknameInput({ cardNickname }: NicknameInputProps) {
         className="input-underline w-75"
         type="text"
         maxLength={10}
-        error={!!cardNickname?.errorMessage}
         ref={cardNickname?.setRef?.bind(cardNickname)}
         value={cardNickname?.value || ''}
         placeholder="카드 별칭 (선택)"
         onChange={handleCardNicknameChange}
       />
-      {cardNickname?.errorMessage && (
-        <StyledNicknameInputErrorMessage>{cardNickname.errorMessage}</StyledNicknameInputErrorMessage>
-      )}
     </div>
   );
 }

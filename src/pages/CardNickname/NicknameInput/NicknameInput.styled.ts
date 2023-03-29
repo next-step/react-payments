@@ -10,7 +10,3 @@ export const StyledNicknameInput = styled('input', {
     },
   },
 });
-
-export const StyledNicknameInputErrorMessage = styled('div', {
-  color: 'red',
-});
