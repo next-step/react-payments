@@ -1,5 +1,5 @@
 import type { InputElement } from '@/stores/types';
-import { isNil } from '@/utils';
+import { changeStringNumberToNumber, isNil, getYearFormatYY } from '@/utils';
 
 export class ExpireYearInputElement implements InputElement {
   value?: string | undefined;
@@ -17,15 +17,21 @@ export class ExpireYearInputElement implements InputElement {
     if (!value) {
       return '만료 연도를 입력해주세요.';
     }
+
+    const numberedYear = changeStringNumberToNumber(value) as number;
+    const currentYearYY = getYearFormatYY();
+    if (numberedYear <= currentYearYY) {
+      return `${currentYearYY}년 이후 연도를 입력해주세요.`;
+    }
   }
 
   isAllowToFocusNext() {
     return this.value?.length === 2;
   }
 
-  constructor({ value, errorMessage, ref }: Partial<ExpireYearInputElement>) {
+  constructor({ value, ref }: Partial<ExpireYearInputElement>) {
     this.value = value;
-    this.errorMessage = errorMessage;
+    this.errorMessage = this.validateValue(value);
     this.ref = ref;
   }
 }
