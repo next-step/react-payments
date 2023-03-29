@@ -1,5 +1,4 @@
 import type { IInputState, IInputElement } from '@/stores/types';
-import { isNil } from '@/utils';
 
 export type TCardNicknameState = IInputState;
 

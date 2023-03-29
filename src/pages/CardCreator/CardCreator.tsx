@@ -22,23 +22,23 @@ import { SubmitButton } from './SubmitButton';
 import { StyledErrorMessage } from './CardCreator.styled';
 
 export function CardCreator() {
-  const cardInfo = useCardContext();
+  const cardContext = useCardContext();
   const cardContextApis = useCardContextApi();
 
   const { CardCompanySelectModal, showModal, hideModal } = useCardCompanySelectModal();
 
-  const cardStateList = cardInfo && [
-    cardInfo.cardNumbers,
-    cardInfo.expireDates,
-    cardInfo.cardOwners,
-    cardInfo.securityCodes,
-    cardInfo.passwords,
-    cardInfo.cardCompanies,
+  const cardStateList = cardContext && [
+    cardContext.cardNumbers,
+    cardContext.expireDates,
+    cardContext.cardOwners,
+    cardContext.securityCodes,
+    cardContext.passwords,
+    cardContext.cardCompanies,
   ];
   useInvalidFinderOnMount(cardStateList);
   useSequentialAutoFocus(cardStateList);
 
-  useAutoCompanyChecker(cardInfo?.cardNumbers[0].value, cardInfo?.cardNumbers[1].value);
+  useAutoCompanyChecker(cardContext?.cardNumbers[0].value, cardContext?.cardNumbers[1].value);
 
   const handleCardClick = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
@@ -56,32 +56,33 @@ export function CardCreator() {
     [hideModal, cardContextApis]
   );
 
-  if (!cardInfo) return null;
+  if (!cardContext) return null;
+  const { cardCompanies, cardNumbers, cardOwners, expireDates, passwords, securityCodes } = cardContext;
 
   return (
-    <ThemeSetter className="app" theme={cardInfo?.cardCompanies[0].value?.theme}>
+    <ThemeSetter className="app" theme={cardCompanies[0].value?.theme}>
       <h2 className="page-title">
         <Link to={routes.home} className="mr-10">{`<`}</Link> 카드 추가
       </h2>
 
       <Card
-        cardCompany={cardInfo?.cardCompanies[0].value}
-        cardExpireDate={cardInfo?.expireDates?.map((expireDate) => expireDate.value)}
-        cardNumbers={cardInfo?.cardNumbers}
-        cardOwnerName={cardInfo?.cardOwners?.[0]?.value}
+        cardCompany={cardCompanies[0].value}
+        cardExpireDate={expireDates?.map((expireDate) => expireDate.value)}
+        cardNumbers={cardNumbers}
+        cardOwnerName={cardOwners?.[0]?.value}
         additionalBottomElement={
-          !cardInfo?.cardCompanies[0].errorMessage ? (
-            <StyledErrorMessage>{cardInfo?.cardCompanies[0].errorMessage}</StyledErrorMessage>
+          !cardCompanies[0].errorMessage ? (
+            <StyledErrorMessage>{cardCompanies[0].errorMessage}</StyledErrorMessage>
           ) : undefined
         }
         onCardClick={handleCardClick}
       />
 
-      <CardNumbersInputList cardNumbers={cardInfo?.cardNumbers} />
-      <ExpireDatesInputList expireDates={cardInfo?.expireDates} />
-      <CardOwnerInput cardOwners={cardInfo?.cardOwners} />
-      <SecurityCodesInputList securityCodes={cardInfo?.securityCodes} />
-      <PasswordsInputList passwords={cardInfo?.passwords} />
+      <CardNumbersInputList cardNumbers={cardNumbers} />
+      <ExpireDatesInputList expireDates={expireDates} />
+      <CardOwnerInput cardOwners={cardOwners} />
+      <SecurityCodesInputList securityCodes={securityCodes} />
+      <PasswordsInputList passwords={passwords} />
 
       <SubmitButton />
 

@@ -20,6 +20,7 @@ export default {
 const Template: ComponentStory<typeof CardNumberInput> = ({ cardNumber, index, needDividerRender }) => {
   return (
     <CardProvider
+      // @ts-ignore
       value={{ ...getInitialCardStore(), cardNumbers: [{ ...getInitialCardStore().cardNumbers[0], ...cardNumber }] }}
     >
       <CardContext.Consumer>
@@ -59,18 +60,14 @@ Primary.args = {
 };
 
 WithDivider.args = {
-  cardNumber: {
-    ...getInitialCardStore().cardNumbers[0],
-  },
+  cardNumber: getInitialCardStore().cardNumbers[0],
   index: 0,
   needDividerRender: true,
 };
 
 SecreteValue.args = {
   type: 'password',
-  cardNumber: {
-    ...getInitialCardStore().cardNumbers[0],
-  },
+  cardNumber: getInitialCardStore().cardNumbers[0],
   index: 0,
   needDividerRender: true,
 };

@@ -8,12 +8,12 @@ import { NicknameInput } from './NicknameInput';
 import { CardNicknameSubmitButton } from './CardNicknameSubmitButton';
 
 export function CardNicknameSetter() {
-  const cardInfo = useCardContext();
+  const cardContext = useCardContext();
 
   useValidateCreatePage();
   useValidateUpdatePage();
 
-  const cardExpireDate = useMemo(() => cardInfo?.expireDates?.map((expireDate) => expireDate.value), [cardInfo]);
+  const cardExpireDate = useMemo(() => cardContext?.expireDates?.map((expireDate) => expireDate.value), [cardContext]);
 
   return (
     <div className="app flex-column-center">
@@ -23,13 +23,13 @@ export function CardNicknameSetter() {
 
       <Card
         disableNickname
-        cardCompany={cardInfo?.cardCompanies[0]?.value}
+        cardCompany={cardContext?.cardCompanies[0]?.value}
         cardExpireDate={cardExpireDate}
-        cardNumbers={cardInfo?.cardNumbers}
-        cardOwnerName={cardInfo?.cardOwners?.[0]?.value}
+        cardNumbers={cardContext?.cardNumbers}
+        cardOwnerName={cardContext?.cardOwners?.[0]?.value}
       />
 
-      <NicknameInput cardNickname={cardInfo?.cardNicknames[0]} />
+      <NicknameInput cardNickname={cardContext?.cardNicknames[0]} />
 
       <CardNicknameSubmitButton />
     </div>

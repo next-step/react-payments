@@ -10,14 +10,15 @@ export function useNicknameSubmitEvent() {
   const { cardId } = useParams();
   const navigate = useNavigate();
 
-  const cardInfo = useCardContext();
+  const cardContext = useCardContext();
 
   const { postCard } = useFetchCardList();
 
   return (e: MouseEvent<HTMLElement>) => {
-    if (!cardInfo) return;
+    if (!cardContext) return;
 
-    const { cardNicknames, cardCompanies, cardNumbers, expireDates, cardOwners, passwords, securityCodes } = cardInfo;
+    const { cardNicknames, cardCompanies, cardNumbers, expireDates, cardOwners, passwords, securityCodes } =
+      cardContext;
     const cardNickname = cardNicknames[0];
     if (cardNickname.errorMessage) {
       e.preventDefault();
@@ -41,7 +42,10 @@ export function useNicknameSubmitEvent() {
 
     const newCardNicknameValue = !cardNickname.value ? cardCompanies[0]?.value?.name : cardNickname.value;
 
-    // @ts-ignore
-    postCard({ ...cardInfo, cardNicknames: [new CardNicknameInputElement({ value: newCardNicknameValue })] }, cardId);
+    postCard(
+      // @ts-ignore
+      { ...cardContext, cardNicknames: [new CardNicknameInputElement({ value: newCardNicknameValue })] },
+      cardId
+    );
   };
 }
