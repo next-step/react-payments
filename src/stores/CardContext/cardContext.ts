@@ -5,10 +5,10 @@ import type { TCardStore } from './initialCardStore';
 import { cardStoreReducer } from './cardStoreReducer';
 import { DispatchContext, ReducerReturnType } from '../types';
 
-type CardReducerType = ReducerReturnType<typeof cardStoreReducer>;
-type Dispatch = CardReducerType[1];
-type CardCompanyStoreContextType = TCardStore | null;
-type ApiContextType = DispatchContext<Dispatch>;
+type TCardReducer = ReducerReturnType<typeof cardStoreReducer>;
+type TDispatch = TCardReducer[1];
+type TCardCompanyStoreContext = TCardStore | null;
+type TApiContext = DispatchContext<TDispatch>;
 
-export const CardContext = createContext<CardCompanyStoreContextType>(null);
-export const CardApiContext = createContext<ApiContextType>(null);
+export const CardContext = createContext<TCardCompanyStoreContext>(null);
+export const CardApiContext = createContext<TApiContext>(null);

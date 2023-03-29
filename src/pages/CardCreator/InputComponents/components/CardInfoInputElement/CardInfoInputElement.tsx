@@ -11,10 +11,10 @@ import { useInputEventHandler } from './useInputEventHandler';
 import type { BlurEventHandlerProps, ChangeEventHandlerProps } from './useInputEventHandler';
 import { StyledCardInfoInputElement, StyledInput, StyledErrorMessage } from './CardInfoInputElement.styled';
 
-type InputAttributeType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-type OmittedInputAttributeType = Omit<InputAttributeType, 'onChange' | 'onBlur' | 'ref'>;
+type TInputAttribute = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+type TOmittedInputAttribute = Omit<TInputAttribute, 'onChange' | 'onBlur' | 'ref'>;
 
-export interface CardInfoInputElementProps extends OmittedInputAttributeType {
+export interface CardInfoInputElementProps extends TOmittedInputAttribute {
   changeEventProps?: ChangeEventHandlerProps;
   blurEventProps?: BlurEventHandlerProps;
   error?: {
