@@ -8,5 +8,5 @@ interface InputDividerProps extends PropsWithChildren {
 export function InputDivider({ hiding, children, className = '' }: InputDividerProps) {
   const dashComponentHideClassName = hiding ? 'hide' : '';
 
-  return <div className={`text-black ${className} ${dashComponentHideClassName}`}>{children}</div>;
+  return <div className={`${className} ${dashComponentHideClassName}`}>{children}</div>;
 }

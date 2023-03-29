@@ -7,7 +7,7 @@ import { routes } from '@/router';
 
 import { useFlushCardContextStore } from './hooks';
 import { EmptyCard } from './EmptyCard';
-import { StyledDeleteButton } from './CardList.styled';
+import { StyledDeleteButton, StyledCardListContainer } from './CardList.styled';
 
 export function CardList() {
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ export function CardList() {
   );
 
   return (
-    <div className="app flex-column-center">
+    <StyledCardListContainer>
       <EmptyCard />
       {sortCardListToDescendingOrderOfKey?.map(([key, val]) => (
         <Card
@@ -55,7 +55,7 @@ export function CardList() {
           }
         />
       ))}
-    </div>
+    </StyledCardListContainer>
   );
 }
 

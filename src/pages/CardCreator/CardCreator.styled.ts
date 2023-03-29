@@ -1,4 +1,8 @@
-import { styled } from '@/stitches.config';
+import { styled, css } from '@/stitches.config';
+
+export const cardCreatorContainerStyle = css({
+  app: '',
+});
 
 export const StyledErrorMessage = styled('span', {
   color: 'red',

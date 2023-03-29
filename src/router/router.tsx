@@ -1,10 +1,9 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { routes } from '@/router';
-import { CardList, CardCreator } from '@/pages';
+import { CardList, CardCreator, CardNicknameSetter } from '@/pages';
 
-import { CardNicknameSetter } from '../pages/CardNickname';
+import { routes } from './routes';
 
 function Router() {
   return (
@@ -17,4 +16,4 @@ function Router() {
   );
 }
 
-export default Router;
+export { Router };

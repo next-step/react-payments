@@ -49,7 +49,7 @@ export const CardNumberInput = memo(function CardNumberInput({
       <CardInfoInputElement
         type={type}
         value={value ?? ''}
-        className="input-basic text-black"
+        className="input-basic"
         ref={setRef.bind(cardNumber)}
         changeEventProps={changeEventProps}
         error={{ isError }}

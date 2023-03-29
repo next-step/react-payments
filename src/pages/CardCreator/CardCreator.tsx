@@ -20,7 +20,7 @@ import {
   PasswordsInputList,
 } from './InputComponents';
 import { SubmitButton } from './SubmitButton';
-import { StyledErrorMessage } from './CardCreator.styled';
+import { StyledErrorMessage, cardCreatorContainerStyle } from './CardCreator.styled';
 
 export function CardCreator() {
   const cardContext = useCardContext();
@@ -61,7 +61,7 @@ export function CardCreator() {
   const { cardCompanies, cardNumbers, cardOwners, expireDates, passwords, securityCodes } = cardContext;
 
   return (
-    <ThemeSetter className="app" theme={cardCompanies[0].value?.theme}>
+    <ThemeSetter className={cardCreatorContainerStyle()} theme={cardCompanies[0].value?.theme}>
       <h2 className="page-title">
         <Link to={routes.home} className="mr-10">{`<`}</Link> 카드 추가
       </h2>
