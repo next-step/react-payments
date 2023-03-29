@@ -1,8 +1,9 @@
 import type { InputElement } from '@/contexts/types';
+import { TExpireYear } from '@/types';
 import { convertStringToNumber, isNil, getYearFormatYY } from '@/utils';
 
 export class ExpireYearInputElement implements InputElement {
-  value?: string | undefined;
+  value?: TExpireYear;
 
   errorMessage?: string;
 

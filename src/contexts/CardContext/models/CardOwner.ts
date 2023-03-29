@@ -1,8 +1,9 @@
 import type { InputElement } from '@/contexts/types';
+import { TCardOwner } from '@/types';
 import { isNil } from '@/utils';
 
 export class CardOwnerInputElement implements InputElement {
-  value?: string | undefined;
+  value?: TCardOwner;
 
   errorMessage?: string;
 

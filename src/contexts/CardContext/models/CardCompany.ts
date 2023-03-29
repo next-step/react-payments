@@ -1,10 +1,5 @@
-import type { Themes } from '@/theme';
 import type { InputElement } from '@/contexts/types';
-
-export type TCardCompany = {
-  name: string;
-  theme: Themes;
-};
+import { TCardCompany } from '@/types';
 
 // DX개선, 새로운 state가 생겨도 간단하게 할 수 있도록
 

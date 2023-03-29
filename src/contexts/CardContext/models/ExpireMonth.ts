@@ -1,8 +1,9 @@
 import type { InputElement } from '@/contexts/types';
+import { TExpireMonth } from '@/types';
 import { isNil } from '@/utils';
 
 export class ExpireMonthInputElement implements InputElement {
-  value?: string | undefined;
+  value?: TExpireMonth;
 
   errorMessage?: string;
 

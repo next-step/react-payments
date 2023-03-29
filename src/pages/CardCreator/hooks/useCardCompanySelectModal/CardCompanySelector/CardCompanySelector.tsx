@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
-import { TCardCompany } from '@/contexts/CardContext';
 import { cardCompanyList } from '@/pages/CardCreator/constants';
+import type { TCardCompany } from '@/types';
 
 import { CardCompany } from './components/CardCompany';
 import { StyledCardCompanySelector, StyledCompaniesFlexBox } from './CardCompanySelector.styled';

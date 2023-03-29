@@ -1,8 +1,9 @@
 import type { InputElement } from '@/contexts/types';
+import { TSecurityCode } from '@/types';
 import { isNil } from '@/utils';
 
 export class SecurityCodeInputElement implements InputElement {
-  value?: string | undefined;
+  value?: TSecurityCode;
 
   errorMessage?: string;
 

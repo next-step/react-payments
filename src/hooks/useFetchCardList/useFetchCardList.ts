@@ -1,32 +1,15 @@
 import { useCallback } from 'react';
 
-import type { TCardStoreKeys } from '@/contexts/CardContext';
+import { useApplicationContext, ICard, TCardList } from '@/contexts/ApplicationContext';
+
 import { useFetch } from '../useFetch';
 
-const LOCAL_STORAGE_CARD_LIST_KEY = 'cardList';
-
-type TCardStateListJSON = { value: any }[];
-type TCardStoreJSON = Record<TCardStoreKeys, TCardStateListJSON>;
-type TCardList = { [createdAt: string]: TCardStoreJSON };
-
-const get = async () => {
-  const item = window.localStorage.getItem(LOCAL_STORAGE_CARD_LIST_KEY);
-  return item ? (JSON.parse(item) as TCardList) : null;
-};
-
-const localStorageService = {
-  get,
-  post: async (cardList: TCardList) => {
-    window.localStorage.setItem(LOCAL_STORAGE_CARD_LIST_KEY, JSON.stringify(cardList));
-    return get();
-  },
-};
-
 export function useFetchCardList() {
-  const { fetch, fetchedData } = useFetch<TCardList | null>(localStorageService);
+  const appContext = useApplicationContext();
+  const { fetch, fetchedData } = useFetch<TCardList | null>(appContext?.service);
 
   const postCard = useCallback(
-    (card: TCardStoreJSON, givenCardId?: string) => {
+    (card: ICard, givenCardId?: string) => {
       const cardId = givenCardId || new Date().getTime();
 
       if (!fetchedData) {

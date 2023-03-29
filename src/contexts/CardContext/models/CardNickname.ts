@@ -1,7 +1,8 @@
 import type { InputElement } from '@/contexts/types';
+import { TCardNickname } from '@/types';
 
 export class CardNicknameInputElement implements InputElement {
-  value?: string | undefined;
+  value?: TCardNickname;
 
   errorMessage?: string;
 

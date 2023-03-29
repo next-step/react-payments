@@ -1,12 +1,17 @@
 import React from 'react';
 
-import Router from './router';
-import { CardProvider } from './contexts/CardContext';
+import { CardProvider } from '@/contexts/CardContext';
+import { ApplicationProvider, ApplicationProviderProps } from '@/contexts/ApplicationContext';
+import Router from '@/router';
 
-export function App() {
+interface AppProps extends ApplicationProviderProps {}
+
+export function App(props: AppProps) {
   return (
-    <CardProvider>
-      <Router />
-    </CardProvider>
+    <ApplicationProvider {...props}>
+      <CardProvider>
+        <Router />
+      </CardProvider>
+    </ApplicationProvider>
   );
 }
