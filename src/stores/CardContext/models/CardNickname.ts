@@ -12,9 +12,7 @@ export class CardNicknameInputElement implements InputElement {
   }
 
   validateValue(value?: string) {
-    if (!value) {
-      return '닉네임을 입력해주세요.';
-    }
+    return undefined;
   }
 
   isAllowToFocusNext() {
