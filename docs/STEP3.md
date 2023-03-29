@@ -43,3 +43,9 @@ hook -> service -> store의 형식으로 두고 service를 갈아끼운다.
 service는 localStore, sessionStore, REST api 어떤 것이든 될 수 있다.
 
 MSW를 쓰다가 Backend Server의 Api로 갈아끼울 때를 생각해, 최소한의 수정으로 side-effect없이 구성한다.
+
+## Type과 interface 네이밍 규칙
+
+Type은 고정 Type으로 항상 T를 붙여 확실하게 Type이라는 것을 명시.
+
+하지만, interface의 경우엔 "타입 확장 혹은 보강"의 여지가 있기 때문에 이름을 반드시 구분해야되는 경우가 아니라면 I를 붙이지 않는다.
