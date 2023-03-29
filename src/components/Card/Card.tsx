@@ -13,7 +13,7 @@ import { CardNumbers } from './CardNumbers';
 import { CardOwnerName } from './CardOwnerName';
 import { CardExpireDate } from './CardExpireDate';
 import { CardNickname } from './CardNickname';
-import { StyledCard, StyledEmptyCardCompany } from './Card.styled';
+import { StyledCard, StyledEmptyCardCompany, cardThemeWrapperStyle } from './Card.styled';
 
 interface CardProps {
   disableNickname?: boolean;
@@ -39,7 +39,7 @@ export const Card = memo(function Card({
   onCardClick,
 }: CardProps) {
   return (
-    <ThemeSetter className="card-box flex-column-center" theme={cardCompany?.theme} onClick={onCardClick}>
+    <ThemeSetter className={cardThemeWrapperStyle()} theme={cardCompany?.theme} onClick={onCardClick}>
       <StyledCard pointCursor={!!onCardClick}>
         <div className="card-top">{cardCompany?.name}</div>
         <div className="card-middle">

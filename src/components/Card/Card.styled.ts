@@ -1,4 +1,9 @@
-import { styled } from '@/stitches.config';
+import { styled, css } from '@/stitches.config';
+
+export const cardThemeWrapperStyle = css({
+  flexCenter: 'column',
+  margin: '10px 0',
+});
 
 export const StyledCard = styled('div', {
   position: 'relative',
