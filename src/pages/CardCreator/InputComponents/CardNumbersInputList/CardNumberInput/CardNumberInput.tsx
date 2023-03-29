@@ -1,7 +1,7 @@
 import React, { ChangeEvent, HTMLInputTypeAttribute, memo } from 'react';
 
 import { ConditionalComponentWrapper } from '@/components';
-import { CardNumberInputElement, useCardApiContext } from '@/stores/CardContext';
+import { CardNumberInputElement, useCardContextApi } from '@/stores/CardContext';
 import { filterNumber } from '@/utils';
 
 import { InputDivider, CardInfoInputElement } from '../../components';
@@ -17,7 +17,7 @@ export const CardNumberInput = memo(({ type = 'text', cardNumber, index, needDiv
   const { value, setRef, errorMessage } = cardNumber;
   const isError = !!errorMessage;
 
-  const cardContextApis = useCardApiContext();
+  const cardContextApis = useCardContextApi();
 
   // prop 변화에 따라 새롭게 만들어져야하는 객체 = memo를 둠으로서 오히려 메모리와 성능에 손해를 줄 수 있음.
   const changeEventProps = {

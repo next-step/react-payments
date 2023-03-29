@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
-import { useCardApiContext, SecurityCodeInputElement } from '@/stores/CardContext';
+import { useCardContextApi, SecurityCodeInputElement } from '@/stores/CardContext';
 import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';
@@ -13,7 +13,7 @@ export function SecurityCodeInput({ securityCode }: SecurityCodeInputProps) {
   const { value, setRef, errorMessage } = securityCode;
   const isError = !!errorMessage;
 
-  const cardContextApis = useCardApiContext();
+  const cardContextApis = useCardContextApi();
 
   const changeEventProps = {
     props: {

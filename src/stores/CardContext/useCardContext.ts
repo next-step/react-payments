@@ -6,6 +6,6 @@ export function useCardContext() {
   return useContext(CardContext);
 }
 
-export function useCardApiContext() {
+export function useCardContextApi() {
   return useContext(CardApiContext);
 }

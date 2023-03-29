@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Card, ThemeSetter } from '@/components';
 import { routes } from '@/routes';
-import { useCardApiContext, useCardContext, TCardCompany } from '@/stores/CardContext';
+import { useCardContextApi, useCardContext, TCardCompany } from '@/stores/CardContext';
 
 import {
   useCardCompanySelectModal,
@@ -23,7 +23,7 @@ import { StyledErrorMessage } from './CardCreator.styled';
 
 export function CardCreator() {
   const cardInfo = useCardContext();
-  const cardContextApis = useCardApiContext();
+  const cardContextApis = useCardContextApi();
 
   const { CardCompanySelectModal, showModal, hideModal } = useCardCompanySelectModal();
 

@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
-import { useCardApiContext } from '@/stores/CardContext';
+import { useCardContextApi } from '@/stores/CardContext';
 
 import { autoCompanyChecker } from './autoCompanyChecker';
 
 // 앞자리 두개를 받아 확인
 export function useAutoCompanyChecker(cardNumber1?: string, cardNumber2?: string) {
-  const cardContextApis = useCardApiContext();
+  const cardContextApis = useCardContextApi();
 
   useEffect(() => {
     if (!cardNumber1 || !cardNumber2) return;

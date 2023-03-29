@@ -3,13 +3,13 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import { useFetchCardList } from '@/hooks/useFetchCardList';
 import { routes } from '@/routes';
-import { useCardApiContext } from '@/stores/CardContext';
+import { useCardContextApi } from '@/stores/CardContext';
 import { entryObject } from '@/utils';
 
 export function useValidateUpdatePage() {
   const { cardId } = useParams();
   const navigate = useNavigate();
-  const cardContextApi = useCardApiContext();
+  const cardContextApi = useCardContextApi();
 
   const { cardList } = useFetchCardList();
 
