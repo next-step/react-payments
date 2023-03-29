@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import { styled } from '@/stitches.config';
 
 export const StyledEmptyCardWrapper = styled(Link, {
+  // @ts-ignore
   flexCenter: '',
   margin: '10px 0',
 });
 
 export const StyledEmptyCard = styled('div', {
+  // @ts-ignore
   flexCenter: 'column',
   width: '208px',
   height: '130px',
