@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Router from './router';
-import { CardProvider } from './stores/CardContext';
+import { CardProvider } from './contexts/CardContext';
 
 export function App() {
   return (

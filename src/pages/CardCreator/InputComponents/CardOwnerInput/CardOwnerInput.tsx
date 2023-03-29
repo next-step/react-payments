@@ -1,7 +1,7 @@
 import React, { ChangeEvent, memo, useMemo } from 'react';
 
-import { useCardContextApis } from '@/stores/CardContext';
-import { TCardStore } from '@/stores/CardContext/initialCardStore';
+import { useCardContextApis } from '@/contexts/CardContext';
+import { TCardStore } from '@/contexts/CardContext/initialCardStore';
 
 import { CardInputWrapperPure, CardInfoInputElement } from '../components';
 

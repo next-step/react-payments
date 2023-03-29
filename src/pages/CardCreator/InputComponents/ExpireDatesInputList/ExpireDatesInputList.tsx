@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 
-import type { TCardStore } from '@/stores/CardContext/initialCardStore';
-import type { ExpireMonthInputElement, ExpireYearInputElement } from '@/stores/CardContext';
+import type { TCardStore } from '@/contexts/CardContext/initialCardStore';
+import type { ExpireMonthInputElement, ExpireYearInputElement } from '@/contexts/CardContext';
 
 import { CardInputWrapperPure } from '../components';
 import { ExpireMonthInput } from './ExpireMonthInput';

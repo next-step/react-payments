@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import type { TCardStore } from '@/stores/CardContext/initialCardStore';
+import type { TCardStore } from '@/contexts/CardContext/initialCardStore';
 import { checkIsArrayLast } from '@/utils';
 
 import { CardInputWrapperPure } from '../components';

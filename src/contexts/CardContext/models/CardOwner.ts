@@ -1,12 +1,12 @@
-import type { InputElement } from '@/stores/types';
+import type { InputElement } from '@/contexts/types';
 import { isNil } from '@/utils';
 
-export class CardPasswordInputElement implements InputElement {
+export class CardOwnerInputElement implements InputElement {
   value?: string | undefined;
 
   errorMessage?: string;
 
-  ref?: HTMLInputElement | null = null;
+  ref?: HTMLInputElement | null;
 
   setRef(ref?: HTMLInputElement | null) {
     this.ref = ref;
@@ -15,15 +15,15 @@ export class CardPasswordInputElement implements InputElement {
   validateValue(value?: string) {
     if (isNil(value)) return;
     if (!value) {
-      return '비밀번호를 입력해주세요.';
+      return '카드 소유주 이름을 입력해주세요.';
     }
   }
 
   isAllowToFocusNext() {
-    return this.value?.length === 1;
+    return this.value?.length === 30;
   }
 
-  constructor({ value, ref }: Partial<CardPasswordInputElement>) {
+  constructor({ value, ref }: Partial<CardOwnerInputElement>) {
     this.value = value;
     this.errorMessage = this.validateValue(value);
     this.ref = ref;

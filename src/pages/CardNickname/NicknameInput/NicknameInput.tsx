@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useCallback, useEffect } from 'react';
 
-import { CardNicknameInputElement, useCardContextApis } from '@/stores/CardContext';
+import { CardNicknameInputElement, useCardContextApis } from '@/contexts/CardContext';
 
 import { StyledNicknameInput } from './NicknameInput.styled';
 

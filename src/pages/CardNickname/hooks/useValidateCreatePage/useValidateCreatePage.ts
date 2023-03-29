@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import { routes } from '@/routes';
 import { findInvalidStoreAndFocus } from '@/utils/card';
-import { useCardContext } from '@/stores/CardContext';
+import { useCardContext } from '@/contexts/CardContext';
 
 export function useValidateCreatePage() {
   const { cardId } = useParams();

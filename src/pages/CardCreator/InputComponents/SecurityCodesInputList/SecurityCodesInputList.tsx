@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { TCardStore } from '@/stores/CardContext/initialCardStore';
+import { TCardStore } from '@/contexts/CardContext/initialCardStore';
 
 import { CardInputWrapperPure } from '../components';
 import { SecurityCodeInput } from './SecurityCodeInput';

@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
-import { useCardContextApis, SecurityCodeInputElement } from '@/stores/CardContext';
+import { useCardContextApis, SecurityCodeInputElement } from '@/contexts/CardContext';
 import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';

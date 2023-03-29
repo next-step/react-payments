@@ -1,6 +1,6 @@
 import type { MouseEvent } from 'react';
 
-import { useCardContext } from '@/stores/CardContext';
+import { useCardContext } from '@/contexts/CardContext';
 import { findInvalidStoreAndFocus } from '@/utils/card';
 
 export function useCardSubmitEvent() {

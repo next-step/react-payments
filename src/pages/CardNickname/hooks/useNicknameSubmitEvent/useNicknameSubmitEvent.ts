@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { useFetchCardList } from '@/hooks';
 import { routes } from '@/routes';
-import { CardNicknameInputElement, useCardContext } from '@/stores/CardContext';
+import { CardNicknameInputElement, useCardContext } from '@/contexts/CardContext';
 import { findInvalidStoreAndFocus } from '@/utils/card';
 
 export function useNicknameSubmitEvent() {

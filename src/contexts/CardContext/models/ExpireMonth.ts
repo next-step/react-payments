@@ -1,7 +1,7 @@
-import type { InputElement } from '@/stores/types';
+import type { InputElement } from '@/contexts/types';
 import { isNil } from '@/utils';
 
-export class CardOwnerInputElement implements InputElement {
+export class ExpireMonthInputElement implements InputElement {
   value?: string | undefined;
 
   errorMessage?: string;
@@ -14,16 +14,17 @@ export class CardOwnerInputElement implements InputElement {
 
   validateValue(value?: string) {
     if (isNil(value)) return;
-    if (!value) {
-      return '카드 소유주 이름을 입력해주세요.';
+    const numberedValue = Number(value);
+    if (!(numberedValue >= 1 && numberedValue <= 12)) {
+      return '1월 ~ 12월중에 입력해주세요.';
     }
   }
 
   isAllowToFocusNext() {
-    return this.value?.length === 30;
+    return this.value?.length === 2;
   }
 
-  constructor({ value, ref }: Partial<CardOwnerInputElement>) {
+  constructor({ value, ref }: Partial<ExpireMonthInputElement>) {
     this.value = value;
     this.errorMessage = this.validateValue(value);
     this.ref = ref;

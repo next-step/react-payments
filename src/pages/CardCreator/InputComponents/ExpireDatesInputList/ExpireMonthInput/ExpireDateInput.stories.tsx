@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { CardContext, CardProvider, getInitialCardStore } from '@/stores/CardContext';
+import { CardContext, CardProvider, getInitialCardStore } from '@/contexts/CardContext';
 
 import { ExpireMonthInput } from './ExpireMonthInput';
 

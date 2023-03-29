@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Card, ThemeSetter } from '@/components';
 import { routes } from '@/routes';
-import { useCardContextApis, useCardContext, TCardCompany } from '@/stores/CardContext';
+import { useCardContextApis, useCardContext, TCardCompany } from '@/contexts/CardContext';
 
 import {
   useCardCompanySelectModal,

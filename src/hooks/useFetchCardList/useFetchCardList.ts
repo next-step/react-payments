@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import type { TCardStoreKeys } from '@/stores/CardContext';
+import type { TCardStoreKeys } from '@/contexts/CardContext';
 import { useFetch } from '../useFetch';
 
 const LOCAL_STORAGE_CARD_LIST_KEY = 'cardList';

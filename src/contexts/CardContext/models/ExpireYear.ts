@@ -1,4 +1,4 @@
-import type { InputElement } from '@/stores/types';
+import type { InputElement } from '@/contexts/types';
 import { changeStringNumberToNumber, isNil, getYearFormatYY } from '@/utils';
 
 export class ExpireYearInputElement implements InputElement {

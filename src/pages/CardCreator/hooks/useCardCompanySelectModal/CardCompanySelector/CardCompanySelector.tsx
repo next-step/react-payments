@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { TCardCompany } from '@/stores/CardContext';
+import { TCardCompany } from '@/contexts/CardContext';
 import { cardCompanyList } from '@/pages/CardCreator/constants';
 
 import { CardCompany } from './components/CardCompany';

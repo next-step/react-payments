@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FocusEvent, memo } from 'react';
 
-import { useCardContextApis, ExpireYearInputElement } from '@/stores/CardContext';
+import { useCardContextApis, ExpireYearInputElement } from '@/contexts/CardContext';
 import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';

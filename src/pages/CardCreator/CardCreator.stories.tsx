@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { CardProvider } from '@/stores/CardContext';
+import { CardProvider } from '@/contexts/CardContext';
 
 import { CardCreator } from './CardCreator';
 

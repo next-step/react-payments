@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useCardContextApis } from '@/stores/CardContext';
+import { useCardContextApis } from '@/contexts/CardContext';
 
 export function useFlushCardContextStore() {
   const cardContextApis = useCardContextApis();

@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 
 import { useFetchCardList } from '@/hooks/useFetchCardList';
 import { routes } from '@/routes';
-import { useCardContextApis } from '@/stores/CardContext';
+import { useCardContextApis } from '@/contexts/CardContext';
 import { entryObject } from '@/utils';
 
 export function useValidateUpdatePage() {

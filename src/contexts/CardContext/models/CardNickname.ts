@@ -1,4 +1,4 @@
-import type { InputElement } from '@/stores/types';
+import type { InputElement } from '@/contexts/types';
 
 export class CardNicknameInputElement implements InputElement {
   value?: string | undefined;

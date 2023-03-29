@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { Card } from '@/components';
-import { useCardContext } from '@/stores/CardContext';
+import { useCardContext } from '@/contexts/CardContext';
 
 import { useValidateCreatePage, useValidateUpdatePage } from './hooks';
 import { NicknameInput } from './NicknameInput';

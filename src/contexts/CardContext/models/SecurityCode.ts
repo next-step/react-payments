@@ -1,7 +1,7 @@
-import type { InputElement } from '@/stores/types';
+import type { InputElement } from '@/contexts/types';
 import { isNil } from '@/utils';
 
-export class ExpireMonthInputElement implements InputElement {
+export class SecurityCodeInputElement implements InputElement {
   value?: string | undefined;
 
   errorMessage?: string;
@@ -14,17 +14,16 @@ export class ExpireMonthInputElement implements InputElement {
 
   validateValue(value?: string) {
     if (isNil(value)) return;
-    const numberedValue = Number(value);
-    if (!(numberedValue >= 1 && numberedValue <= 12)) {
-      return '1월 ~ 12월중에 입력해주세요.';
+    if (!value || value.length !== 3) {
+      return '보안번호 3자리를 입력해주세요.';
     }
   }
 
   isAllowToFocusNext() {
-    return this.value?.length === 2;
+    return this.value?.length === 3;
   }
 
-  constructor({ value, ref }: Partial<ExpireMonthInputElement>) {
+  constructor({ value, ref }: Partial<SecurityCodeInputElement>) {
     this.value = value;
     this.errorMessage = this.validateValue(value);
     this.ref = ref;

@@ -1,4 +1,4 @@
-import type { InputElement } from '@/stores/types';
+import type { InputElement } from '@/contexts/types';
 import { isNil } from '@/utils';
 
 export class CardNumberInputElement implements InputElement {

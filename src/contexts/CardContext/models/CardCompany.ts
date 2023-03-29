@@ -1,5 +1,5 @@
 import type { Themes } from '@/theme';
-import type { InputElement } from '@/stores/types';
+import type { InputElement } from '@/contexts/types';
 
 export type TCardCompany = {
   name: string;
