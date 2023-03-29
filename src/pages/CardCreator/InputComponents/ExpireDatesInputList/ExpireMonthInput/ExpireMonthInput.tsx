@@ -77,7 +77,7 @@ export const ExpireMonthInput = memo(function ExpireMonthInput({
         onFocus={handleExpireMonthInputFocus}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
-        <InputDivider hiding={!isError}>/</InputDivider>
+        <InputDivider hiding={isError}>/</InputDivider>
       </ConditionalComponentWrapper>
     </>
   );

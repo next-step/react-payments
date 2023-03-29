@@ -56,7 +56,7 @@ export const CardNumberInput = memo(function CardNumberInput({
         onFocus={handleCardNumberInputFocus}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
-        <InputDivider hiding={!isError} className="dash">
+        <InputDivider hiding={isError} className="dash">
           -
         </InputDivider>
       </ConditionalComponentWrapper>
