@@ -1,5 +1,5 @@
 import type { Themes } from '@/theme';
-import type { IInputElement } from '@/stores/types';
+import type { InputElement } from '@/stores/types';
 
 export type TCardCompany = {
   name: string;
@@ -10,7 +10,7 @@ export type TCardCompany = {
 
 // class로 객체를 만들경우 객체 name이 생겨서 instanceof로 구별하기 쉬워짐.
 // 대신 class로 만드는 경우, 새로운 class로 만드는 것에 굉장한 불편함이 있다. -> 내 설계를 읽고 따라해야함.
-export class CardCompanyInputElement implements IInputElement<TCardCompany> {
+export class CardCompanyInputElement implements InputElement<TCardCompany> {
   value?: TCardCompany;
 
   errorMessage?: string;

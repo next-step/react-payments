@@ -1,8 +1,6 @@
-import type { IInputState, IInputElement } from '@/stores/types';
+import type { InputElement } from '@/stores/types';
 
-export type TCardNicknameState = IInputState;
-
-export class CardNicknameInputElement implements IInputElement {
+export class CardNicknameInputElement implements InputElement {
   value?: string | undefined;
 
   errorMessage?: string;

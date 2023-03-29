@@ -1,9 +1,7 @@
-import type { IInputState, IInputElement } from '@/stores/types';
+import type { InputElement } from '@/stores/types';
 import { isNil } from '@/utils';
 
-export type TSecurityCodeState = IInputState;
-
-export class SecurityCodeInputElement implements IInputElement {
+export class SecurityCodeInputElement implements InputElement {
   value?: string | undefined;
 
   errorMessage?: string;

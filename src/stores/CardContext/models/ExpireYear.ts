@@ -1,9 +1,7 @@
-import type { IInputState, IInputElement } from '@/stores/types';
+import type { InputElement } from '@/stores/types';
 import { isNil } from '@/utils';
 
-export type TExpireYearState = IInputState;
-
-export class ExpireYearInputElement implements IInputElement {
+export class ExpireYearInputElement implements InputElement {
   value?: string | undefined;
 
   errorMessage?: string;
