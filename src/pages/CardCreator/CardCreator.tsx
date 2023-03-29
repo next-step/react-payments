@@ -2,12 +2,15 @@ import React, { MouseEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Card, ThemeSetter } from '@/components';
-import { useGetErrorMessage } from '@/hooks';
 import { routes } from '@/routes';
 import { useCardApiContext, useCardContext, TCardCompany } from '@/stores/CardContext';
 
-import { useCardCompanySelectModal, useSequentialAutoFocus, useAutoCompanyChecker } from './hooks';
-import { SubmitButton } from './SubmitButton';
+import {
+  useCardCompanySelectModal,
+  useSequentialAutoFocus,
+  useAutoCompanyChecker,
+  useInvalidFinderOnMount,
+} from './hooks';
 import {
   CardNumbersInputList,
   ExpireDatesInputList,
@@ -15,6 +18,7 @@ import {
   SecurityCodesInputList,
   PasswordsInputList,
 } from './InputComponents';
+import { SubmitButton } from './SubmitButton';
 import { StyledErrorMessage } from './CardCreator.styled';
 
 export function CardCreator() {
@@ -23,21 +27,18 @@ export function CardCreator() {
 
   const { CardCompanySelectModal, showModal, hideModal } = useCardCompanySelectModal();
 
-  // @ts-ignore
-  const errorMessage = useGetErrorMessage(cardInfo?.cardCompanies[0].value);
+  const cardStateList = cardInfo && [
+    cardInfo.cardNumbers,
+    cardInfo.expireDates,
+    cardInfo.cardOwners,
+    cardInfo.securityCodes,
+    cardInfo.passwords,
+    cardInfo.cardCompanies,
+  ];
+  useInvalidFinderOnMount(cardStateList);
+  useSequentialAutoFocus(cardStateList);
 
-  // TODO: mount시에 한번 돌아주는 hook넣어주기
   useAutoCompanyChecker(cardInfo?.cardNumbers[0].value, cardInfo?.cardNumbers[1].value);
-  useSequentialAutoFocus(
-    cardInfo && [
-      cardInfo.cardNumbers,
-      cardInfo.expireDates,
-      cardInfo.cardOwners,
-      cardInfo.securityCodes,
-      cardInfo.passwords,
-      cardInfo.cardCompanies,
-    ]
-  );
 
   const handleCardClick = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
