@@ -14,7 +14,7 @@ const get = async () => {
   return item ? (JSON.parse(item) as TCardList) : null;
 };
 
-const fetchLocalStorageMethods = {
+const localStorageService = {
   get,
   post: async (cardList: TCardList) => {
     window.localStorage.setItem(LOCAL_STORAGE_CARD_LIST_KEY, JSON.stringify(cardList));
@@ -23,7 +23,7 @@ const fetchLocalStorageMethods = {
 };
 
 export function useFetchCardList() {
-  const { fetch, fetchedData } = useFetch<TCardList | null>(fetchLocalStorageMethods);
+  const { fetch, fetchedData } = useFetch<TCardList | null>(localStorageService);
 
   const postCard = useCallback(
     (card: TCardStoreJSON, givenCardId?: string) => {
