@@ -1,5 +1,7 @@
 import { PropsWithChildren, memo } from 'react';
 
+import { StyledErrorMessage } from './CardInputWrapper.styled';
+
 interface CardInputWrapperProps extends PropsWithChildren {
   header: string[] | string;
   errorMessage?: string | null;
@@ -18,8 +20,8 @@ function CardInputWrapper({ header, errorMessage, children }: CardInputWrapperPr
           </span>
         ))}
       </div>
-      <div className={`${isError ? 'input-container-error' : ''}`}>{children}</div>
-      {isError && <div className="input-error-message">{errorMessage}</div>}
+      <div>{children}</div>
+      {isError && <StyledErrorMessage>{errorMessage}</StyledErrorMessage>}
     </div>
   );
 }
