@@ -1,5 +1,5 @@
 import { cardCompanyList } from '@/pages/CardCreator/constants';
-import { changeStringNumberToNumber, isNil } from '@/utils';
+import { convertStringToNumber, isNil } from '@/utils';
 
 const CARD_NUMBER_LENGTH = 8;
 const MAX_NUMBER = 10 ** CARD_NUMBER_LENGTH - 1;
@@ -11,7 +11,7 @@ export function autoCompanyChecker(cardNumber?: string | null) {
   if (isNil(cardNumber)) return null;
   if (cardNumber.length !== CARD_NUMBER_LENGTH) return null;
 
-  const numberedCardNumber = changeStringNumberToNumber(cardNumber);
+  const numberedCardNumber = convertStringToNumber(cardNumber);
   if (isNil(numberedCardNumber)) return null;
 
   const index = Math.round(numberedCardNumber / DIVIDE_FACTOR);

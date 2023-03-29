@@ -12,7 +12,7 @@ export function filterNumber(inputString: string) {
   return inputString.replace(/\D/g, '');
 }
 
-export function changeStringNumberToNumber(string: string) {
+export function convertStringToNumber(string: string) {
   const number = Number(string);
   if (Number.isNaN(number)) return null;
   return number;
