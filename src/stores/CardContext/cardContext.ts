@@ -11,4 +11,4 @@ type CardCompanyStoreContextType = TCardStore | null;
 type ApiContextType = DispatchContext<Dispatch>;
 
 export const CardContext = createContext<CardCompanyStoreContextType>(null);
-export const ApiContext = createContext<ApiContextType>(null);
+export const CardApiContext = createContext<ApiContextType>(null);

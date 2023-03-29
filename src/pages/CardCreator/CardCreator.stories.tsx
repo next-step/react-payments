@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { ErrorContextProvider } from '@/stores/ErrorContext';
 import { CardProvider } from '@/stores/CardContext';
 
 import { CardCreator } from './CardCreator';
@@ -19,15 +18,13 @@ export default {
 const Template: ComponentStory<typeof CardCreator> = () => {
   return (
     <BrowserRouter>
-      <ErrorContextProvider>
-        <CardProvider>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div className="root">
-              <CardCreator />
-            </div>
+      <CardProvider>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div className="root">
+            <CardCreator />
           </div>
-        </CardProvider>
-      </ErrorContextProvider>
+        </div>
+      </CardProvider>
     </BrowserRouter>
   );
 };

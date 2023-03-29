@@ -1,6 +1,5 @@
 import React, { ChangeEvent, memo, useMemo } from 'react';
 
-import { useGetErrorMessage } from '@/hooks';
 import { useCardApiContext } from '@/stores/CardContext';
 import { TCardStore } from '@/stores/CardContext/initialCardStore';
 
@@ -15,7 +14,6 @@ export const CardOwnerInput = memo(function CardOwnerInput({ cardOwners }: CardO
   const isError = !!cardOwner.errorMessage;
 
   const cardContextApis = useCardApiContext();
-  const errorMessage = useGetErrorMessage();
 
   const changeEventProps = {
     props: {
@@ -42,7 +40,7 @@ export const CardOwnerInput = memo(function CardOwnerInput({ cardOwners }: CardO
   );
 
   return (
-    <CardInputWrapperPure header={inputHeader} errorMessage={errorMessage}>
+    <CardInputWrapperPure header={inputHeader}>
       <CardInfoInputElement
         type="text"
         className="input-basic"

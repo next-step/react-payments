@@ -1,7 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { ErrorContextProvider } from '@/stores/ErrorContext';
 import { CardContext, CardProvider, getInitialCardStore } from '@/stores/CardContext';
 
 import { ExpireDatesInputList } from './ExpireDatesInputList';
@@ -17,13 +16,11 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof ExpireDatesInputList> = (props) => {
   return (
-    <ErrorContextProvider>
-      <CardProvider value={{ ...getInitialCardStore(), expireDates: props.expireDates! }}>
-        <CardContext.Consumer>
-          {(store) => store && <ExpireDatesInputList expireDates={store?.expireDates} />}
-        </CardContext.Consumer>
-      </CardProvider>
-    </ErrorContextProvider>
+    <CardProvider value={{ ...getInitialCardStore(), expireDates: props.expireDates! }}>
+      <CardContext.Consumer>
+        {(store) => store && <ExpireDatesInputList expireDates={store?.expireDates} />}
+      </CardContext.Consumer>
+    </CardProvider>
   );
 };
 

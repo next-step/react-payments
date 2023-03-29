@@ -2,7 +2,6 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { CardContext, CardProvider, getInitialCardStore } from '@/stores/CardContext';
-import { ErrorContextProvider } from '@/stores/ErrorContext';
 
 import { CardNumbersInputList } from './CardNumbersInputList';
 
@@ -17,13 +16,11 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof CardNumbersInputList> = (props) => {
   return (
-    <ErrorContextProvider>
-      <CardProvider value={{ ...getInitialCardStore(), cardNumbers: props.cardNumbers! }}>
-        <CardContext.Consumer>
-          {(store) => store && <CardNumbersInputList cardNumbers={store.cardNumbers} />}
-        </CardContext.Consumer>
-      </CardProvider>
-    </ErrorContextProvider>
+    <CardProvider value={{ ...getInitialCardStore(), cardNumbers: props.cardNumbers! }}>
+      <CardContext.Consumer>
+        {(store) => store && <CardNumbersInputList cardNumbers={store.cardNumbers} />}
+      </CardContext.Consumer>
+    </CardProvider>
   );
 };
 

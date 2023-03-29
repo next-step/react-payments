@@ -1,7 +1,6 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { ErrorContextProvider } from '@/stores/ErrorContext';
 import { CardContext, CardProvider, getInitialCardStore } from '@/stores/CardContext';
 
 import { PasswordInput } from './PasswordInput';
@@ -17,13 +16,11 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof PasswordInput> = ({ password, ...props }) => {
   return (
-    <ErrorContextProvider>
-      <CardProvider value={{ ...getInitialCardStore(), passwords: [password!] }}>
-        <CardContext.Consumer>
-          {(store) => store && <PasswordInput password={store.passwords[0]} {...props} />}
-        </CardContext.Consumer>
-      </CardProvider>
-    </ErrorContextProvider>
+    <CardProvider value={{ ...getInitialCardStore(), passwords: [password!] }}>
+      <CardContext.Consumer>
+        {(store) => store && <PasswordInput password={store.passwords[0]} {...props} />}
+      </CardContext.Consumer>
+    </CardProvider>
   );
 };
 

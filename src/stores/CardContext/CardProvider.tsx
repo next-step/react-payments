@@ -2,7 +2,7 @@ import React, { PropsWithChildren, useMemo, useReducer } from 'react';
 
 import { cardStoreReducer } from './cardStoreReducer';
 import { TCardStore, getInitialCardStore } from './initialCardStore';
-import { ApiContext, CardContext } from './cardContext';
+import { CardApiContext, CardContext } from './cardContext';
 
 interface CardProviderProps {
   value?: TCardStore;
@@ -16,7 +16,7 @@ export function CardProvider({ value, children }: PropsWithChildren<CardProvider
   return (
     // eslint-disable-next-line
     <CardContext.Provider value={{ ...store }}>
-      <ApiContext.Provider value={cardContextApis}>{children}</ApiContext.Provider>
+      <CardApiContext.Provider value={cardContextApis}>{children}</CardApiContext.Provider>
     </CardContext.Provider>
   );
 }
