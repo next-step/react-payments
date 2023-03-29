@@ -2,7 +2,7 @@ import { MouseEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { useFetchCardList } from '@/hooks';
-import { routes } from '@/routes';
+import { routes } from '@/router';
 import { CardNicknameInputElement, useCardContext } from '@/contexts/CardContext';
 import { convertCardStoreToCard, findInvalidStoreAndFocus } from '@/utils/card';
 

@@ -1,11 +1,12 @@
 import React, { MouseEvent, useCallback, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { Card, CloseIcon } from '@/components';
 import { useFetchCardList } from '@/hooks';
-import { routes } from '@/routes';
+import { routes } from '@/router';
 
 import { useFlushCardContextStore } from './hooks';
+import { EmptyCard } from './EmptyCard';
 import { StyledDeleteButton } from './CardList.styled';
 
 export function CardList() {
@@ -37,9 +38,7 @@ export function CardList() {
 
   return (
     <div className="app flex-column-center">
-      <Link to={routes.cardCreator} className="card-box">
-        <div className="empty-card">+</div>
-      </Link>
+      <EmptyCard />
       {sortCardListToDescendingOrderOfKey?.map(([key, val]) => (
         <Card
           key={key}

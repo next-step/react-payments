@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
 import { useFetchCardList } from '@/hooks/useFetchCardList';
-import { routes } from '@/routes';
+import { routes } from '@/router';
 import { useCardContextApis } from '@/contexts/CardContext';
 import { entryObject } from '@/utils';
 

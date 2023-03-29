@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { routes } from '@/routes';
+import { routes } from '@/router';
 import { findInvalidStoreAndFocus } from '@/utils/card';
 import { useCardContext } from '@/contexts/CardContext';
 
