@@ -22,5 +22,8 @@ function CardNumber({ type, value }: TCardNumberProp) {
 }
 
 function makeCardNumber(value: string, isHide: boolean) {
-  return value.split('').map((cardNum) => (isHide ? '*' : cardNum));
+  if (isHide) {
+    return '*'.repeat(value.length);
+  }
+  return value;
 }
