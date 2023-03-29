@@ -20,7 +20,7 @@ export const StyledCard = styled('div', {
   },
 });
 
-export const StyledEmptyCardInfo = styled('span', {
+export const StyledEmptyCardCompany = styled('span', {
   position: 'absolute',
   right: '10px',
   fontSize: '15px',

@@ -13,7 +13,7 @@ import { CardNumbers } from './CardNumbers';
 import { CardOwnerName } from './CardOwnerName';
 import { CardExpireDate } from './CardExpireDate';
 import { CardNickname } from './CardNickname';
-import { StyledCard, StyledEmptyCardInfo } from './Card.styled';
+import { StyledCard, StyledEmptyCardCompany } from './Card.styled';
 
 interface CardProps {
   disableNickname?: boolean;
@@ -44,7 +44,7 @@ export const Card = memo(function Card({
         <div className="card-top">{cardCompany?.name}</div>
         <div className="card-middle">
           <div className="small-card__chip" />
-          {!cardCompany && <StyledEmptyCardInfo>{`이곳을 눌러 \n카드사를 선택해주세요`}</StyledEmptyCardInfo>}
+          {!cardCompany && <StyledEmptyCardCompany>{`이곳을 눌러 \n카드사를 선택해주세요`}</StyledEmptyCardCompany>}
         </div>
         <div className="card-bottom">
           <CardNumbers cardNumbers={cardNumbers} />
