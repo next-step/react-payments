@@ -23,7 +23,6 @@ export const CardNumberInput = memo(({ type = 'text', cardNumber, index, needDiv
   const changeEventProps = {
     props: {
       setState: (value: string) => {
-        // setState하기 전에 value를 스스로 판단해 isValidate의 값을 수정한다.
         cardContextApis?.dispatch({ type: 'cardNumbers', payload: { index, value } });
       },
     },
