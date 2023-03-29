@@ -1,3 +1,7 @@
+import type { ICard } from '@/contexts/ApplicationContext';
+import type { TCardStore } from '@/contexts/CardContext';
+import { entryObject } from '@/utils/object';
+
 export type TCardState = {
   value?: any;
   ref?: HTMLElement | null;
@@ -36,4 +40,15 @@ export function findInvalidStoreAndFocus(cardStore: TCardState[][]): TCardState 
   );
 
   return invalidState;
+}
+
+// Input 객체에서 value만 추출한다.
+export function convertCardStoreToCard(cardStore: TCardStore) {
+  const card = {};
+  entryObject(cardStore).forEach(([key, cardStateList]) => {
+    // @ts-ignore
+    card[key] = cardStateList.map(({ value }) => ({ value }));
+  });
+
+  return card as ICard;
 }

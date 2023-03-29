@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useFetchCardList } from '@/hooks';
 import { routes } from '@/routes';
 import { CardNicknameInputElement, useCardContext } from '@/contexts/CardContext';
-import { findInvalidStoreAndFocus } from '@/utils/card';
+import { convertCardStoreToCard, findInvalidStoreAndFocus } from '@/utils/card';
 
 export function useNicknameSubmitEvent() {
   const { cardId } = useParams();
@@ -43,8 +43,10 @@ export function useNicknameSubmitEvent() {
     const newCardNicknameValue = !cardNickname.value ? cardCompanies[0]?.value?.name : cardNickname.value;
 
     postCard(
-      // @ts-ignore
-      { ...cardContext, cardNicknames: [new CardNicknameInputElement({ value: newCardNicknameValue })] },
+      convertCardStoreToCard({
+        ...cardContext,
+        cardNicknames: [new CardNicknameInputElement({ value: newCardNicknameValue })],
+      }),
       cardId
     );
   };
