@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useCallback, useEffect } from 'react';
 
-import { CardNicknameInputElement, useCardContextApi } from '@/stores/CardContext';
+import { CardNicknameInputElement, useCardContextApis } from '@/stores/CardContext';
 
 import { StyledNicknameInput } from './NicknameInput.styled';
 
@@ -9,7 +9,7 @@ interface NicknameInputProps {
 }
 
 export function NicknameInput({ cardNickname }: NicknameInputProps) {
-  const cardContextApis = useCardContextApi();
+  const cardContextApis = useCardContextApis();
 
   const handleCardNicknameChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {

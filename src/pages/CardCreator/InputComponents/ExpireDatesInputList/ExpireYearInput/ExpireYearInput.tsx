@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FocusEvent, memo } from 'react';
 
-import { useCardContextApi, ExpireYearInputElement } from '@/stores/CardContext';
+import { useCardContextApis, ExpireYearInputElement } from '@/stores/CardContext';
 import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';
@@ -14,7 +14,7 @@ export const ExpireYearInput = memo(function ExpireYearInput({ expireDate, index
   const { value, setRef, errorMessage } = expireDate;
   const isError = !!errorMessage;
 
-  const cardContextApis = useCardContextApi();
+  const cardContextApis = useCardContextApis();
 
   const changeEventProps = {
     props: {

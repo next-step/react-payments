@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 
-import { CardPasswordInputElement, useCardContextApi } from '@/stores/CardContext';
+import { CardPasswordInputElement, useCardContextApis } from '@/stores/CardContext';
 import { filterNumber } from '@/utils';
 
 import { CardInfoInputElement } from '../../components';
@@ -14,7 +14,7 @@ export function PasswordInput({ password, index }: PasswordInputProps) {
   const { value, setRef, errorMessage } = password;
   const isError = !!errorMessage;
 
-  const cardContextApis = useCardContextApi();
+  const cardContextApis = useCardContextApis();
 
   const changeEventProps = {
     props: {

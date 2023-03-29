@@ -22,6 +22,7 @@ export function useValidateCreatePage() {
       securityCodes,
       cardCompanies,
     ]);
+
     if (invalidState) {
       navigate(routes.cardCreator);
     }

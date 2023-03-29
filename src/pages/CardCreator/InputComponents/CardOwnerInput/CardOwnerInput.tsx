@@ -1,6 +1,6 @@
 import React, { ChangeEvent, memo, useMemo } from 'react';
 
-import { useCardContextApi } from '@/stores/CardContext';
+import { useCardContextApis } from '@/stores/CardContext';
 import { TCardStore } from '@/stores/CardContext/initialCardStore';
 
 import { CardInputWrapperPure, CardInfoInputElement } from '../components';
@@ -13,7 +13,7 @@ export const CardOwnerInput = memo(function CardOwnerInput({ cardOwners }: CardO
   const cardOwner = useMemo(() => cardOwners[0], [cardOwners]);
   const isError = !!cardOwner.errorMessage;
 
-  const cardContextApis = useCardContextApi();
+  const cardContextApis = useCardContextApis();
 
   const changeEventProps = {
     props: {
