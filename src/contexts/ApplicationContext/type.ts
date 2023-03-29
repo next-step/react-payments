@@ -1,5 +1,4 @@
 import { Service } from '@/hooks';
-import type { TCardStoreKeys } from '@/contexts/CardContext';
 import type {
   TCardCompany,
   TCardNickname,
@@ -12,7 +11,7 @@ import type {
 } from '@/types';
 
 type TCardState<T> = { value: T };
-export interface ICard extends Record<TCardStoreKeys, TCardState<unknown>[]> {
+export type TCard = {
   cardCompanies: [TCardState<TCardCompany>];
   cardNicknames: [TCardState<TCardNickname>];
   cardNumbers: [TCardState<TCardNumber>, TCardState<TCardNumber>, TCardState<TCardNumber>, TCardState<TCardNumber>];
@@ -20,12 +19,12 @@ export interface ICard extends Record<TCardStoreKeys, TCardState<unknown>[]> {
   cardOwners: [TCardState<TCardOwner>];
   securityCodes: [TCardState<TSecurityCode>];
   passwords: [TCardState<TCardPassword>, TCardState<TCardPassword>];
-}
-export type TCardList = { [cardId: string]: ICard };
+};
+export type TCardList = { [cardId: string]: TCard };
 
 export type TCardListService = Service<TCardList | null>;
 
 export type TApplicationContextValue = {
-  onCardConfirmClick: (card: ICard) => any;
+  onCardConfirmClick: (card: TCard) => any;
   service: TCardListService;
 };

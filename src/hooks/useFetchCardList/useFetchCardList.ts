@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { useApplicationContext, ICard, TCardList } from '@/contexts/ApplicationContext';
+import { useApplicationContext, TCard, TCardList } from '@/contexts/ApplicationContext';
 
 import { useFetch } from '../useFetch';
 
@@ -9,7 +9,7 @@ export function useFetchCardList() {
   const { fetch, fetchedData } = useFetch<TCardList | null>(appContext?.service);
 
   const postCard = useCallback(
-    (card: ICard, givenCardId?: string) => {
+    (card: TCard, givenCardId?: string) => {
       const cardId = givenCardId || new Date().getTime();
 
       if (!fetchedData) {

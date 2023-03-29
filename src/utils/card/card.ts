@@ -1,4 +1,4 @@
-import type { ICard } from '@/contexts/ApplicationContext';
+import type { TCard } from '@/contexts/ApplicationContext';
 import type { TCardStore } from '@/contexts/CardContext';
 import { entryObject } from '@/utils/object';
 
@@ -50,5 +50,5 @@ export function convertCardStoreToCard(cardStore: TCardStore) {
     card[key] = cardStateList.map(({ value }) => ({ value }));
   });
 
-  return card as ICard;
+  return card as TCard;
 }
