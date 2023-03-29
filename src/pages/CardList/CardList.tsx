@@ -34,7 +34,7 @@ export function CardList() {
     },
     [deleteCard]
   );
-
+  console.log(sortCardListToDescendingOrderOfKey);
   return (
     <div className="app flex-column-center">
       <Link to={routes.cardCreator} className="card-box">

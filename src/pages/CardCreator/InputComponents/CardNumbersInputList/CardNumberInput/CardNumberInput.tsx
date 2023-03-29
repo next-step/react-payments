@@ -13,7 +13,12 @@ interface CardNumberProps {
   needDividerRender: boolean;
 }
 
-export const CardNumberInput = memo(({ type = 'text', cardNumber, index, needDividerRender }: CardNumberProps) => {
+export const CardNumberInput = memo(function CardNumberInput({
+  type = 'text',
+  cardNumber,
+  index,
+  needDividerRender,
+}: CardNumberProps) {
   const { value, setRef, errorMessage } = cardNumber;
   const isError = !!errorMessage;
 
