@@ -1,8 +1,10 @@
 import React, { PropsWithChildren, useMemo } from 'react';
 
-import { localStorageService } from './localStorageService';
+import { isNil } from '@/utils';
+
+import { localStorageService, checkCardListServiceObject } from './service';
 import { TApplicationContextValue } from './type';
-import { ApplicationContext } from './serviceContext';
+import { ApplicationContext } from './applicationContext';
 
 export interface ApplicationProviderProps extends Partial<TApplicationContextValue> {}
 
@@ -12,6 +14,10 @@ export function ApplicationProvider({
   children,
 }: PropsWithChildren<ApplicationProviderProps>) {
   const AppContextValue = useMemo(() => {
+    if (!isNil(service)) {
+      checkCardListServiceObject(service);
+    }
+
     return { onCardConfirmClick, service };
   }, [onCardConfirmClick, service]);
 

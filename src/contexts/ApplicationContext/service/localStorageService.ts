@@ -1,6 +1,4 @@
-import type { Service } from '@/hooks';
-
-import type { TCardList } from './type';
+import type { TCardList, TCardListService } from '../type';
 
 const LOCAL_STORAGE_CARD_LIST_KEY = 'cardList';
 
@@ -9,7 +7,7 @@ const get = async () => {
   return item ? (JSON.parse(item) as TCardList) : null;
 };
 
-export const localStorageService: Service<TCardList> = {
+export const localStorageService: TCardListService = {
   get,
   post: async (cardList: TCardList) => {
     window.localStorage.setItem(LOCAL_STORAGE_CARD_LIST_KEY, JSON.stringify(cardList));
