@@ -8,5 +8,6 @@ export { default as Layout } from './Layout';
 export { default as Modal } from './Modal';
 export { default as ScrollArea } from './ScrollArea';
 export { default as Text } from './Text';
+export { default as ToolTip } from './TooTip';
 export { default as TopNavbar } from './TopNavbar';
 export { default as TopNavigation } from './TopNavigation';
