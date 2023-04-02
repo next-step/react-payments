@@ -1,51 +1,38 @@
-import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useMemo } from 'react';
 
-import { Card } from '@/components/Card';
-import { useValidateCardInfos } from '@/hooks/useValidateCardInfos';
-import { routes } from '@/routes';
+import { Card } from '@/components';
+import { useCardContext } from '@/contexts/CardContext';
 
+import { useValidateCreatePage, useValidateUpdatePage } from './hooks';
 import { NicknameInput } from './NicknameInput';
 import { CardNicknameSubmitButton } from './CardNicknameSubmitButton';
-import { useCardListWithLocalStorage } from './hooks/useCardListWithLocalStorage';
+import { StyledCarNicknameSetterWrapper } from './CardNicknameSetter.styled';
 
 export function CardNicknameSetter() {
-  const { cardId } = useParams();
-  const navigate = useNavigate();
+  const cardContext = useCardContext();
 
-  const { getCardFromStorage } = useCardListWithLocalStorage();
+  useValidateCreatePage();
+  useValidateUpdatePage();
 
-  const invalidInfo = useValidateCardInfos();
-
-  useEffect(
-    function checkIfCorrectPageAccess() {
-      if (cardId) {
-        getCardFromStorage(cardId, () => {
-          alert('해당 카드가 존재하지 않습니다.');
-          navigate(routes.home);
-        });
-        return;
-      }
-
-      if (invalidInfo) {
-        alert('카드 정보를 모두 등록해주세요.');
-        navigate(routes.cardCreator);
-      }
-    },
-    [cardId, getCardFromStorage, invalidInfo, navigate]
-  );
+  const cardExpireDate = useMemo(() => cardContext?.expireDates?.map((expireDate) => expireDate.value), [cardContext]);
 
   return (
-    <div className="app flex-column-center">
+    <StyledCarNicknameSetterWrapper>
       <div className="flex-center">
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
 
-      <Card disableNickname />
+      <Card
+        disableNickname
+        cardCompany={cardContext?.cardCompanies[0]?.value}
+        cardExpireDate={cardExpireDate}
+        cardNumbers={cardContext?.cardNumbers}
+        cardOwnerName={cardContext?.cardOwners?.[0]?.value}
+      />
 
-      <NicknameInput />
+      <NicknameInput cardNickname={cardContext?.cardNicknames[0]} />
 
       <CardNicknameSubmitButton />
-    </div>
+    </StyledCarNicknameSetterWrapper>
   );
 }

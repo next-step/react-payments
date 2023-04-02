@@ -8,19 +8,25 @@ import React, {
 } from 'react';
 
 import { useInputEventHandler } from './useInputEventHandler';
-import type { OnBlurHandlerProps, OnChangeHandlerProps } from './useInputEventHandler';
-import { Input } from './CardInfoInputElement.styled';
+import type { BlurEventHandlerProps, ChangeEventHandlerProps } from './useInputEventHandler';
+import { StyledCardInfoInputElement, StyledInput, StyledErrorMessage } from './CardInfoInputElement.styled';
 
-type InputAttributeType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-type OmittedInputAttributeType = Omit<InputAttributeType, 'onChange' | 'onBlur' | 'ref'>;
+type TInputAttribute = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+type TOmittedInputAttribute = Omit<TInputAttribute, 'onChange' | 'onBlur' | 'ref'>;
 
-export interface CardInfoInputElementProps extends OmittedInputAttributeType {
-  onChangeProps: OnChangeHandlerProps;
-  onBlurProps?: OnBlurHandlerProps;
+export interface CardInfoInputElementProps extends TOmittedInputAttribute {
+  changeEventProps?: ChangeEventHandlerProps;
+  blurEventProps?: BlurEventHandlerProps;
+  error?: {
+    isError?: boolean;
+    message?: string | null;
+  };
 }
 
-function CardInfoInputElementComponent(props: CardInfoInputElementProps, ref: ForwardedRef<HTMLInputElement | null>) {
-  const { onChangeProps, onBlurProps, type, value, ...rest } = props;
+function CardInfoInputElementComponent(
+  { changeEventProps, blurEventProps, type, value, className, error, ...props }: CardInfoInputElementProps,
+  ref: ForwardedRef<HTMLInputElement | null>
+) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const { createInputChangeHandler, createInputBlurHandler } = useInputEventHandler();
@@ -28,16 +34,21 @@ function CardInfoInputElementComponent(props: CardInfoInputElementProps, ref: Fo
   // @ts-ignore
   useImperativeHandle(ref, () => inputRef.current);
 
+  const errorClassName = error?.isError ? 'error' : '';
+
   return (
-    <Input
-      {...rest}
-      type={type ?? 'text'}
-      value={value ?? ''}
-      className="input-basic text-black"
-      ref={inputRef}
-      onChange={createInputChangeHandler(onChangeProps)}
-      onBlur={onBlurProps && createInputBlurHandler(onBlurProps)}
-    />
+    <StyledCardInfoInputElement className={className}>
+      <StyledInput
+        {...props}
+        type={type ?? 'text'}
+        value={value ?? ''}
+        className={`input-basic ${errorClassName}`}
+        ref={inputRef}
+        onChange={changeEventProps && createInputChangeHandler(changeEventProps)}
+        onBlur={blurEventProps && createInputBlurHandler(blurEventProps)}
+      />
+      {error?.isError && error?.message && <StyledErrorMessage>{error.message}</StyledErrorMessage>}
+    </StyledCardInfoInputElement>
   );
 }
 

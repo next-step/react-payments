@@ -1,6 +1,11 @@
-import { styled } from '@/stitches.config';
+import { styled, css } from '@/stitches.config';
 
-export const CardWrapper = styled('div', {
+export const cardThemeWrapperStyle = css({
+  flexCenter: 'column',
+  margin: '10px 0',
+});
+
+export const StyledCard = styled('div', {
   position: 'relative',
   flexCenter: 'column',
   width: '208px',
@@ -20,7 +25,12 @@ export const CardWrapper = styled('div', {
   },
 });
 
-export const ErrorMessage = styled('span', {
-  color: 'red',
+export const StyledEmptyCardCompany = styled('span', {
+  position: 'absolute',
+  right: '10px',
+  fontSize: '15px',
   fontWeight: 'bold',
+  textAlign: 'center',
+  marginLeft: '20px',
+  whiteSpace: 'pre-wrap',
 });

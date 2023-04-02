@@ -1,44 +1,62 @@
 import type { ChangeEvent, FocusEvent } from 'react';
 
-interface UseInputOnChangeProps {
-  setState: (newState: any) => void;
+interface InputEventProps {
+  setState?: (newValue: string) => void;
+  eventCallback?: (e: unknown) => void;
 }
 
-export interface OnChangeHandlerProps {
-  props: UseInputOnChangeProps;
-  checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => boolean;
-  getNewValue: (e: ChangeEvent<HTMLInputElement>) => string;
+export interface ChangeEventHandlerProps {
+  props: InputEventProps;
+  checkWhetherSetState?: (e: ChangeEvent<HTMLInputElement>) => boolean;
+  getNewValue?: (e: ChangeEvent<HTMLInputElement>) => string;
 }
 
-export interface OnBlurHandlerProps {
-  props: UseInputOnChangeProps;
-  checkWhetherSetState: (e: FocusEvent<HTMLInputElement, Element>) => boolean;
-  getNewValue: (e: FocusEvent<HTMLInputElement, Element>) => string;
+export interface BlurEventHandlerProps {
+  props: InputEventProps;
+  checkWhetherSetState?: (e: FocusEvent<HTMLInputElement, Element>) => boolean;
+  getNewValue?: (e: FocusEvent<HTMLInputElement, Element>) => string;
 }
 
-function useInputEventHandler() {
+export function useInputEventHandler() {
   return {
     createInputChangeHandler:
-      ({ props, checkWhetherSetState, getNewValue }: OnChangeHandlerProps) =>
+      ({
+        props,
+        checkWhetherSetState = checkWhetherSetStateDefault,
+        getNewValue = getNewValueDefault,
+      }: ChangeEventHandlerProps) =>
       (e: ChangeEvent<HTMLInputElement>) => {
-        const { setState } = props;
+        const { setState, eventCallback } = props;
         if (checkWhetherSetState(e)) {
           const newValue = getNewValue(e);
-          setState(newValue);
+          setState?.(newValue);
         }
+
+        eventCallback?.(e);
       },
     createInputBlurHandler:
-      ({ props, checkWhetherSetState, getNewValue }: OnBlurHandlerProps) =>
+      ({
+        props,
+        checkWhetherSetState = checkWhetherSetStateDefault,
+        getNewValue = getNewValueDefault,
+      }: BlurEventHandlerProps) =>
       (e: FocusEvent<HTMLInputElement, Element>) => {
-        const { setState } = props;
+        const { setState, eventCallback } = props;
         if (checkWhetherSetState(e)) {
           const newValue = getNewValue(e);
           e.currentTarget.value = newValue;
-
-          setState(newValue);
+          setState?.(newValue);
         }
+
+        eventCallback?.(e);
       },
   };
 }
 
-export { useInputEventHandler };
+function checkWhetherSetStateDefault() {
+  return true;
+}
+
+function getNewValueDefault(e: { currentTarget: { value: string } }) {
+  return e.currentTarget.value;
+}

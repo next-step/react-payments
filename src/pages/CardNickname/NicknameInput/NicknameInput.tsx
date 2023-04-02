@@ -1,26 +1,35 @@
-import React, { ChangeEvent, useCallback } from 'react';
+import React, { ChangeEvent, useCallback, useEffect } from 'react';
 
-import { useCardContextApiSelector, useSelectCardNickname } from '@/stores/CardCreatorContext';
+import { CardNicknameInputElement, useCardContextApis } from '@/contexts/CardContext';
 
-export function NicknameInput() {
-  const nickname = useSelectCardNickname();
-  const apis = useCardContextApiSelector();
+import { StyledNicknameInput } from './NicknameInput.styled';
+
+interface NicknameInputProps {
+  cardNickname?: CardNicknameInputElement;
+}
+
+export function NicknameInput({ cardNickname }: NicknameInputProps) {
+  const cardContextApis = useCardContextApis();
 
   const handleCardNicknameChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      apis?.dispatch({ type: 'cardNickname', payload: { value: e.currentTarget.value } });
+      cardContextApis?.dispatch({ type: 'cardNicknames', payload: { value: e.currentTarget.value } });
     },
-    [apis]
+    [cardContextApis]
   );
 
-  // remain uncontrolled
+  useEffect(() => {
+    cardNickname?.ref?.focus();
+  }, [cardNickname?.ref]);
+
   return (
-    <div className="input-container flex-center w-100">
-      <input
+    <div className="input-container flex-column-center w-100">
+      <StyledNicknameInput
         className="input-underline w-75"
         type="text"
         maxLength={10}
-        value={nickname?.value}
+        ref={cardNickname?.setRef?.bind(cardNickname)}
+        value={cardNickname?.value || ''}
         placeholder="카드 별칭 (선택)"
         onChange={handleCardNicknameChange}
       />

@@ -6,7 +6,7 @@ interface CloseIconProps {
   onClick?: MouseEventHandler<SVGSVGElement>;
 }
 
-function CloseIcon({ width = '30', height = '30', onClick }: CloseIconProps) {
+export function CloseIcon({ width = '30', height = '30', onClick }: CloseIconProps) {
   return (
     <svg
       width={width}
@@ -23,5 +23,3 @@ function CloseIcon({ width = '30', height = '30', onClick }: CloseIconProps) {
     </svg>
   );
 }
-
-export { CloseIcon };

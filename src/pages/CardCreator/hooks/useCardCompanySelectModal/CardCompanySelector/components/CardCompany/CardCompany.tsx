@@ -1,25 +1,26 @@
 import React from 'react';
-import themes from '@/theme/theme';
 
-import type { CardCompanyModel } from '../../type';
-import { CardCompanyWrapper, CardCompanyName, CardCompanyColor } from './CardCompany.styled';
+import { themes } from '@/theme';
+import type { TCardCompany } from '@/types';
+
+import { StyledCardCompany, StyledCardCompanyColor, StyledCardCompanyName } from './CardCompany.styled';
 
 interface CardCompanyProps {
-  cardCompany: CardCompanyModel;
-  onClick?: (cardCompany: CardCompanyModel) => void;
+  cardCompany: TCardCompany;
+  onClick?: (cardCompany: TCardCompany) => void;
 }
 
-function CardCompany({ cardCompany, onClick }: CardCompanyProps) {
+export function CardCompany({ cardCompany, onClick }: CardCompanyProps) {
+  if (!cardCompany) return null;
+
   return (
-    <CardCompanyWrapper
+    <StyledCardCompany
       onClick={() => {
         if (onClick) onClick(cardCompany);
       }}
     >
-      <CardCompanyColor className={themes[cardCompany.theme]} />
-      <CardCompanyName>{cardCompany.name}</CardCompanyName>
-    </CardCompanyWrapper>
+      <StyledCardCompanyColor className={themes[cardCompany.theme]} />
+      <StyledCardCompanyName>{cardCompany?.name}</StyledCardCompanyName>
+    </StyledCardCompany>
   );
 }
-
-export { CardCompany };

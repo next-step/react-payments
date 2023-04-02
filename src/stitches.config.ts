@@ -9,11 +9,16 @@ export const { styled, css, globalCss, keyframes, getCssText, theme, createTheme
     },
   },
   utils: {
+    // @ts-ignore
     flexCenter: (value = 'row') => ({
       display: 'flex',
       flexDirection: value,
       alignItems: 'center',
       justifyContent: 'center',
+    }),
+    app: () => ({
+      height: '100%',
+      padding: '16px 24px',
     }),
   },
 });

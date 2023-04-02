@@ -1,30 +1,27 @@
 import React, { memo } from 'react';
 
-import { useSelectSecurityCodes } from '@/stores/CardCreatorContext';
+import { TCardStore } from '@/contexts/CardContext/initialCardStore';
 
-import { CardInputWrapperPure } from '../components/CardInputWrapper';
+import { CardInputWrapperPure } from '../components';
 import { SecurityCodeInput } from './SecurityCodeInput';
-import { useErrorContext } from '../hooks/useErrorContext';
+import { SecurityCodeTooltip } from './SecurityCodeTooltip';
+import { StyledSecurityCodesInputList } from './SecurityCodesInputList.styled';
 
-interface SecurityCodesInputListProps {}
+interface SecurityCodesInputListProps {
+  securityCodes: TCardStore['securityCodes'];
+}
 
-function SecurityCodesInputList(_: SecurityCodesInputListProps) {
-  const securityCodes = useSelectSecurityCodes();
-
-  const errorMessage = useErrorContext(
-    {
-      inValid: '보안번호 3자리를 입력해주세요.',
-    },
-    [{ errorType: 'securityCodes', messageType: 'inValid' }]
-  );
+export const SecurityCodesInputList = memo(function SecurityCodesInputList({
+  securityCodes,
+}: SecurityCodesInputListProps) {
+  const errorMessage = securityCodes?.find((securityCode) => !!securityCode.errorMessage)?.errorMessage;
 
   return (
     <CardInputWrapperPure header="보안코드(CVC/CVV)" errorMessage={errorMessage}>
-      {securityCodes?.map((securityCode, i) => {
-        return <SecurityCodeInput key={securityCode.key} securityCode={securityCode} index={i} />;
-      })}
+      <StyledSecurityCodesInputList>
+        <SecurityCodeInput securityCode={securityCodes[0]} />
+        <SecurityCodeTooltip />
+      </StyledSecurityCodesInputList>
     </CardInputWrapperPure>
   );
-}
-
-export const SecurityCodesInputListPure = memo(SecurityCodesInputList);
+});

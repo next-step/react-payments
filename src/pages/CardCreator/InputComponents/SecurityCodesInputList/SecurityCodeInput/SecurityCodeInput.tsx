@@ -1,49 +1,48 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { ChangeEvent } from 'react';
 
-import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
-import type { SecurityCodesState } from '@/stores/CardCreatorContext/CardCreatorStates';
+import { useCardContextApis, SecurityCodeInputElement } from '@/contexts/CardContext';
 import { filterNumber } from '@/utils';
 
-import { CardInfoInputElement } from '../../components/CardInfoInputElement';
-import { useCardContextApiSelector } from '@/stores/CardCreatorContext';
-
-const SECURITY_CODE_ELEMENT_SEQUENCE_KEY = 'securityCode';
+import { CardInfoInputElement } from '../../components';
 
 interface SecurityCodeInputProps {
-  securityCode: SecurityCodesState[number];
-  index: number;
+  securityCode: SecurityCodeInputElement;
 }
 
-export function SecurityCodeInput({ securityCode, index }: SecurityCodeInputProps) {
-  const { key, value, checkIsAllowInput, checkIsValid } = securityCode;
+export function SecurityCodeInput({ securityCode }: SecurityCodeInputProps) {
+  const { value, setRef, errorMessage } = securityCode;
+  const isError = !!errorMessage;
 
-  const { setElement, toTheNextElement } = useSequentialFocusWithElements();
+  const cardContextApis = useCardContextApis();
 
-  const apis = useCardContextApiSelector();
-
-  useEffect(() => {
-    toTheNextElement(SECURITY_CODE_ELEMENT_SEQUENCE_KEY, index, checkIsValid(value));
-  }, [toTheNextElement, index, checkIsValid, value]);
-
-  const inputChangeEventProps = {
-    props: { setState: (value: string) => apis?.dispatch({ type: 'securityCodes', payload: { index, value } }) },
+  const changeEventProps = {
+    props: {
+      setState: (value: string) => {
+        cardContextApis?.dispatch({ type: 'securityCodes', payload: { value } });
+      },
+    },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
       const filteredNumber = filterNumber(e.currentTarget.value);
-      return checkIsAllowInput(filteredNumber);
+      return !filteredNumber || filteredNumber.length <= 3;
     },
     getNewValue: (e: ChangeEvent<HTMLInputElement>) => {
       return filterNumber(e.currentTarget.value);
     },
   };
 
+  const handleSecurityCodeInputFocus = () => {
+    cardContextApis?.dispatch({ type: 'securityCodes', payload: { value: value || '' } });
+  };
+
   return (
     <CardInfoInputElement
-      key={key}
       className="input-basic w-25"
       type="password"
       value={value ?? ''}
-      ref={(el) => setElement(SECURITY_CODE_ELEMENT_SEQUENCE_KEY, index, el)}
-      onChangeProps={inputChangeEventProps}
+      ref={setRef.bind(securityCode)}
+      changeEventProps={changeEventProps}
+      error={{ isError }}
+      onFocus={handleSecurityCodeInputFocus}
     />
   );
 }

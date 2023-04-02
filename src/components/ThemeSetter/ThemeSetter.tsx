@@ -1,19 +1,16 @@
 import React, { PropsWithChildren, HTMLAttributes } from 'react';
 
-import themes, { Themes } from '@/theme/theme';
+import { themes, Themes } from '@/theme';
 
 interface ThemeSetterProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   theme?: Themes;
 }
 
-function ThemeSetter(props: PropsWithChildren<ThemeSetterProps>) {
-  const { className, theme, children, ...rest } = props;
+export function ThemeSetter({ className, theme, children, ...props }: PropsWithChildren<ThemeSetterProps>) {
   return (
-    <div {...rest} className={`${className} ${theme ? themes[theme] : ''}`}>
+    <div {...props} className={`${className} ${theme ? themes[theme] : ''}`}>
       {children}
     </div>
   );
 }
-
-export { ThemeSetter };

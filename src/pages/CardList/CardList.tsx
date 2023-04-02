@@ -1,31 +1,31 @@
-import React, { MouseEvent, useCallback, useMemo } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { MouseEvent, useCallback, useMemo, useState } from 'react';
 
-import { Card } from '@/components/Card';
-import { routes } from '@/routes';
-import { CardInfoProvider } from '@/stores/CardCreatorContext';
-import { CloseIcon } from '@/components/CloseIcon';
+import { Card, CloseIcon } from '@/components';
+import { useFetchCardList } from '@/hooks';
 
-import { useCardListWithLocalStorage } from '../CardNickname/hooks/useCardListWithLocalStorage';
-import { DeleteButtonWrapper } from './CardList.styled';
+import { useFlushCardContextStore } from './hooks';
+import { EmptyCard } from './EmptyCard';
+import { CardModal, TCardModalDTO } from './CardModal';
+import { StyledDeleteButton, StyledCardListContainer } from './CardList.styled';
 
-function CardList() {
-  const navigate = useNavigate();
-  const { cardList, deleteCard } = useCardListWithLocalStorage();
+export function CardList() {
+  useFlushCardContextStore();
 
-  const sortCardListToDescendingOrderOfKey = useMemo(() => {
-    return Object.entries(cardList).sort(([aKey], [bKey]) => {
-      if (aKey > bKey) return -1;
-      if (aKey === bKey) return 0;
-      return 1;
-    });
-  }, [cardList]);
+  const [selectedCard, setSelectedCard] = useState<TCardModalDTO | null>();
+
+  const { cardList, deleteCard } = useFetchCardList();
+
+  const sortCardListToDescendingOrderOfKey = useMemo(
+    () => cardList && Object.entries(cardList).sort(sortDescendingOrderByKeys),
+    [cardList]
+  );
 
   const createCardClickHandler = useCallback(
     (key: string) => () => {
-      navigate(routes.createCardNickname(key));
+      if (!cardList) return;
+      setSelectedCard({ id: key, card: cardList[key] });
     },
-    [navigate]
+    [cardList]
   );
 
   const createCardDeleteButtonClickHandler = useCallback(
@@ -37,24 +37,31 @@ function CardList() {
   );
 
   return (
-    <div className="app flex-column-center">
-      <Link to={routes.cardCreator} className="card-box">
-        <div className="empty-card">+</div>
-      </Link>
-      {sortCardListToDescendingOrderOfKey.map(([key, val]) => (
-        <CardInfoProvider key={key} value={val}>
-          <Card
-            onCardClick={createCardClickHandler(key)}
-            additionalIcon={
-              <DeleteButtonWrapper onClick={createCardDeleteButtonClickHandler(key)}>
-                <CloseIcon />
-              </DeleteButtonWrapper>
-            }
-          />
-        </CardInfoProvider>
+    <StyledCardListContainer>
+      <EmptyCard />
+      {sortCardListToDescendingOrderOfKey?.map(([key, val]) => (
+        <Card
+          key={key}
+          cardCompany={val?.cardCompanies[0]?.value}
+          cardExpireDate={val?.expireDates?.map((expireDate: { value: string }) => expireDate.value)}
+          cardNumbers={val?.cardNumbers}
+          cardOwnerName={val?.cardOwners?.[0]?.value}
+          cardNickname={val?.cardNicknames[0]?.value}
+          onCardClick={createCardClickHandler(key)}
+          additionalIcon={
+            <StyledDeleteButton onClick={createCardDeleteButtonClickHandler(key)}>
+              <CloseIcon />
+            </StyledDeleteButton>
+          }
+        />
       ))}
-    </div>
+      <CardModal cardInfo={selectedCard} onModalHide={() => setSelectedCard(null)} />
+    </StyledCardListContainer>
   );
 }
 
-export { CardList };
+function sortDescendingOrderByKeys([aKey]: [string, any], [bKey]: [string, any]) {
+  if (aKey > bKey) return -1;
+  if (aKey === bKey) return 0;
+  return 1;
+}

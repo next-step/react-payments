@@ -1,33 +1,39 @@
-import '@/styles/index.css';
-
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { CardInfoProvider } from '@/stores/CardCreatorContext';
-import { ErrorContextProvider } from '@/stores/ErrorContext';
+import { CardContext, CardProvider, getInitialCardStore } from '@/contexts/CardContext';
 
-import { CardNumbersInputListPure } from './CardNumbersInputList';
+import { CardNumbersInputList } from './CardNumbersInputList';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'CardCreator/CardNumberInput',
-  component: CardNumbersInputListPure,
+  title: 'CardCreator/CardNumbersInputList',
+  component: CardNumbersInputList,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  argTypes: {
-    cardNumbers: { control: false },
-    createCardNumberSetter: { control: false },
-  },
-} as ComponentMeta<typeof CardNumbersInputListPure>;
+  argTypes: {},
+} as ComponentMeta<typeof CardNumbersInputList>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof CardNumbersInputListPure> = () => {
+const Template: ComponentStory<typeof CardNumbersInputList> = (props) => {
   return (
-    <ErrorContextProvider>
-      <CardInfoProvider>
-        <CardNumbersInputListPure />
-      </CardInfoProvider>
-    </ErrorContextProvider>
+    <CardProvider value={{ ...getInitialCardStore(), cardNumbers: props.cardNumbers! }}>
+      <CardContext.Consumer>
+        {(store) => store && <CardNumbersInputList cardNumbers={store.cardNumbers} />}
+      </CardContext.Consumer>
+    </CardProvider>
   );
 };
 
 export const Primary = Template.bind({});
+export const ValueSet = Template.bind({});
+
+Primary.args = {
+  cardNumbers: getInitialCardStore().cardNumbers,
+};
+
+ValueSet.args = {
+  cardNumbers: getInitialCardStore().cardNumbers.map((cardNumber) => {
+    cardNumber.value = '1234';
+    return cardNumber;
+  }),
+};

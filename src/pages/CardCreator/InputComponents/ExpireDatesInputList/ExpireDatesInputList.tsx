@@ -1,34 +1,26 @@
 import React, { memo } from 'react';
 
-import { useSelectExpireDates } from '@/stores/CardCreatorContext';
-import { checkIsArrayLast } from '@/utils';
-import { useErrorContext } from '../hooks/useErrorContext';
+import type { TCardStore } from '@/contexts/CardContext/initialCardStore';
+import type { ExpireMonthInputElement, ExpireYearInputElement } from '@/contexts/CardContext';
 
-import { CardInputWrapperPure } from '../components/CardInputWrapper';
-import { ExpireDateInput } from './ExpireDateInput';
+import { CardInputWrapperPure } from '../components';
+import { ExpireMonthInput } from './ExpireMonthInput';
+import { ExpireYearInput } from './ExpireYearInput';
 
-interface ExpireDatesInputListProps {}
+interface ExpireDatesInputListProps {
+  expireDates: TCardStore['expireDates'];
+}
 
-function ExpireDatesInputList(_: ExpireDatesInputListProps) {
-  const expireDates = useSelectExpireDates();
-
-  const errorMessage = useErrorContext(
-    {
-      inValid: 'MM/YY 형태로 만료일을 입력해주세요.',
-    },
-    [{ errorType: 'expireDates', messageType: 'inValid' }]
-  );
+export const ExpireDatesInputList = memo(function ExpireDatesInputList({ expireDates }: ExpireDatesInputListProps) {
+  const errorMessage = expireDates?.find((expireDate) => !!expireDate.errorMessage)?.errorMessage;
 
   return (
     <CardInputWrapperPure header="만료일" errorMessage={errorMessage}>
       <div className="input-box w-50">
-        {expireDates?.map((expireDate, i) => {
-          const isLast = checkIsArrayLast(expireDates, i);
-          return <ExpireDateInput key={expireDate.key} expireDate={expireDate} index={i} needDividerRender={!isLast} />;
-        })}
+        <ExpireMonthInput needDividerRender expireDate={expireDates[0] as ExpireMonthInputElement} index={0} />
+
+        <ExpireYearInput expireDate={expireDates[1] as ExpireYearInputElement} index={1} />
       </div>
     </CardInputWrapperPure>
   );
-}
-
-export const ExpireDatesInputListPure = memo(ExpireDatesInputList);
+});

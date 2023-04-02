@@ -1,24 +1,23 @@
 import React, { memo } from 'react';
 
+import { cardCompanyList } from '@/pages/CardCreator/constants';
+import type { TCardCompany } from '@/types';
+
 import { CardCompany } from './components/CardCompany';
-import { cardCompanyList } from './cardCompanyList';
-import type { CardCompanyModel } from './type';
-import { Wrapper, CompaniesWrapper } from './CardCompanySelector.styled';
+import { StyledCardCompanySelector, StyledCompaniesFlexBox } from './CardCompanySelector.styled';
 
 export interface CardCompanySelectorProps {
-  onCardCompanyClick?: (cardCompany: CardCompanyModel) => void;
+  onCardCompanyClick?: (cardCompany: TCardCompany) => void;
 }
 
-const CardCompanySelector = memo(({ onCardCompanyClick }: CardCompanySelectorProps) => {
+export const CardCompanySelector = memo(function CardCompanySelector({ onCardCompanyClick }: CardCompanySelectorProps) {
   return (
-    <Wrapper onClick={(e) => e.stopPropagation()}>
-      <CompaniesWrapper>
-        {Object.values(cardCompanyList).map((cardCompany) => (
+    <StyledCardCompanySelector onClick={(e) => e.stopPropagation()}>
+      <StyledCompaniesFlexBox>
+        {cardCompanyList.map((cardCompany) => (
           <CardCompany key={cardCompany.name} cardCompany={cardCompany} onClick={onCardCompanyClick} />
         ))}
-      </CompaniesWrapper>
-    </Wrapper>
+      </StyledCompaniesFlexBox>
+    </StyledCardCompanySelector>
   );
 });
-
-export { CardCompanySelector };

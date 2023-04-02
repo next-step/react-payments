@@ -1,15 +1,3 @@
-export function createObjectWithArrayProps<T>() {
-  type ObjectType = { [key: string]: Array<T> };
-  const object: ObjectType = {};
-
-  return {
-    object,
-    setProp: (key: string, index: number, value: T) => {
-      if (!object[key]) {
-        object[key] = [];
-      }
-
-      object[key][index] = value;
-    },
-  };
+export function entryObject<T extends { [key: string | number | symbol]: unknown }>(obj: T): [keyof T, T[keyof T]][] {
+  return Object.entries(obj) as [keyof T, T[keyof T]][];
 }

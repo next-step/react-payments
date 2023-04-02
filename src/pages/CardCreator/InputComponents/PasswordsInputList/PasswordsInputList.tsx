@@ -1,34 +1,26 @@
 import React, { memo } from 'react';
 
-import { useSelectPasswords } from '@/stores/CardCreatorContext';
+import type { TCardStore } from '@/contexts/CardContext/initialCardStore';
 
-import { CardInputWrapperPure } from '../components/CardInputWrapper';
+import { CardInputWrapperPure } from '../components';
 import { PasswordInput } from './PasswordInput';
-import { useErrorContext } from '../hooks/useErrorContext';
 
-interface PasswordsInputListProps {}
+interface PasswordsInputListProps {
+  passwords: TCardStore['passwords'];
+}
 
-function PasswordsInputList(_: PasswordsInputListProps) {
-  const passwords = useSelectPasswords();
-
-  const errorMessage = useErrorContext(
-    {
-      inValid: '비밀번호 앞 2자리를 모두 입력해주세요.',
-    },
-    [{ errorType: 'passwords', messageType: 'inValid' }]
-  );
+export const PasswordsInputList = memo(function PasswordsInputList({ passwords }: PasswordsInputListProps) {
+  const errorMessage = passwords?.find((password) => !!password.errorMessage)?.errorMessage;
 
   return (
     <CardInputWrapperPure header="카드 비밀번호" errorMessage={errorMessage}>
       <div className="flex">
-        {passwords?.map((password, i) => {
-          return <PasswordInput key={password.key} password={password} index={i} />;
+        {passwords.map((password, i) => {
+          return <PasswordInput key={`password-input-${i}`} password={password} index={i} />;
         })}
         <span className="flex-center w-15 mr-10">•</span>
         <span className="flex-center w-15 mr-10">•</span>
       </div>
     </CardInputWrapperPure>
   );
-}
-
-export const PasswordsInputListPure = memo(PasswordsInputList);
+});

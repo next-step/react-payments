@@ -1,51 +1,49 @@
-import React, { ChangeEvent, useContext, useEffect } from 'react';
+import React, { ChangeEvent } from 'react';
 
-import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
-import type { PasswordsState } from '@/stores/CardCreatorContext/CardCreatorStates';
-import { ApiContext } from '@/stores/CardCreatorContext';
+import { CardPasswordInputElement, useCardContextApis } from '@/contexts/CardContext';
 import { filterNumber } from '@/utils';
 
-import { CardInfoInputElement } from '../../components/CardInfoInputElement';
-
-const PASSWORD_ELEMENT_SEQUENCE_KEY = 'password';
+import { CardInfoInputElement } from '../../components';
 
 interface PasswordInputProps {
-  password: PasswordsState[number];
+  password: CardPasswordInputElement;
   index: number;
 }
 
 export function PasswordInput({ password, index }: PasswordInputProps) {
-  const { key, value, checkIsAllowInput, checkIsValid } = password;
+  const { value, setRef, errorMessage } = password;
+  const isError = !!errorMessage;
 
-  const apiContext = useContext(ApiContext);
+  const cardContextApis = useCardContextApis();
 
-  const { setElement, toTheNextElement } = useSequentialFocusWithElements();
-
-  useEffect(() => {
-    toTheNextElement(PASSWORD_ELEMENT_SEQUENCE_KEY, index, checkIsValid(value));
-  }, [toTheNextElement, index, checkIsValid, value]);
-
-  const inputChangeEventProps = {
-    props: { setState: (value: string) => apiContext?.dispatch({ type: 'passwords', payload: { index, value } }) },
+  const changeEventProps = {
+    props: {
+      setState: (value: string) => {
+        cardContextApis?.dispatch({ type: 'passwords', payload: { index, value } });
+      },
+    },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
       const filteredNumber = filterNumber(e.currentTarget.value);
-      return checkIsAllowInput(filteredNumber);
+      return !filteredNumber || filteredNumber.length < 2;
     },
     getNewValue: (e: ChangeEvent<HTMLInputElement>) => {
       return filterNumber(e.currentTarget.value);
     },
   };
 
+  const handlePasswordInputFocus = () => {
+    cardContextApis?.dispatch({ type: 'passwords', payload: { index, value: value || '' } });
+  };
+
   return (
     <CardInfoInputElement
-      key={key}
       type="password"
       className="input-basic w-15 mr-10"
       value={value ?? ''}
-      ref={(el) => {
-        setElement(PASSWORD_ELEMENT_SEQUENCE_KEY, index, el);
-      }}
-      onChangeProps={inputChangeEventProps}
+      ref={setRef.bind(password)}
+      changeEventProps={changeEventProps}
+      error={{ isError }}
+      onFocus={handlePasswordInputFocus}
     />
   );
 }

@@ -1,65 +1,62 @@
-import React, { ChangeEvent, memo, useContext, useEffect } from 'react';
+import React, { ChangeEvent, HTMLInputTypeAttribute, memo } from 'react';
 
-import { ConditionalComponentWrapper } from '@/components/ConditionalComponentWrapper';
-import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
-import type { CardNumbersState } from '@/stores/CardCreatorContext/CardCreatorStates';
-import { ApiContext } from '@/stores/CardCreatorContext';
+import { ConditionalComponentWrapper } from '@/components';
+import { CardNumberInputElement, useCardContextApis } from '@/contexts/CardContext';
 import { filterNumber } from '@/utils';
 
-import { InputDivider } from '../../components/InputDivider';
-import { CardInfoInputElement } from '../../components/CardInfoInputElement';
-
-const CARD_NUMBER_INPUT_REF_KEY = 'cardNumber';
+import { InputDivider, CardInfoInputElement } from '../../components';
 
 interface CardNumberProps {
-  cardNumber: CardNumbersState[number];
+  type?: HTMLInputTypeAttribute;
+  cardNumber: CardNumberInputElement;
   index: number;
   needDividerRender: boolean;
 }
 
-// CardNumber 4개중의 하나의 input을 담당한다.
-export const CardNumberInput = memo(({ cardNumber, index, needDividerRender }: CardNumberProps) => {
-  const { type, value, checkIsValid, checkIsAllowInput } = cardNumber;
+export const CardNumberInput = memo(function CardNumberInput({
+  type = 'text',
+  cardNumber,
+  index,
+  needDividerRender,
+}: CardNumberProps) {
+  const { value, setRef, errorMessage } = cardNumber;
+  const isError = !!errorMessage;
 
-  const apiContext = useContext(ApiContext);
-
-  const isOverFourNumber = checkIsValid(value);
-
-  const { setElement, toTheNextElement } = useSequentialFocusWithElements();
-
-  useEffect(() => {
-    toTheNextElement(CARD_NUMBER_INPUT_REF_KEY, index, isOverFourNumber);
-  }, [toTheNextElement, index, isOverFourNumber]);
+  const cardContextApis = useCardContextApis();
 
   // prop 변화에 따라 새롭게 만들어져야하는 객체 = memo를 둠으로서 오히려 메모리와 성능에 손해를 줄 수 있음.
-  const changeProps = {
+  const changeEventProps = {
     props: {
-      setState: (newVal: string) => {
-        apiContext?.dispatch({ type: 'cardNumbers', payload: { index, value: newVal } });
+      setState: (value: string) => {
+        cardContextApis?.dispatch({ type: 'cardNumbers', payload: { index, value } });
       },
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
       const filteredNumber = filterNumber(e.currentTarget.value);
-      return checkIsAllowInput(filteredNumber);
+      return !filteredNumber || filteredNumber.length <= 4;
     },
     getNewValue: (e: ChangeEvent<HTMLInputElement>) => {
       return filterNumber(e.currentTarget.value);
     },
   };
 
+  const handleCardNumberInputFocus = () => {
+    cardContextApis?.dispatch({ type: 'cardNumbers', payload: { index, value: value || '' } });
+  };
+
   return (
     <>
       <CardInfoInputElement
-        type={type ?? 'text'}
+        type={type}
         value={value ?? ''}
-        className="input-basic text-black"
-        ref={(el) => {
-          setElement(CARD_NUMBER_INPUT_REF_KEY, index, el);
-        }}
-        onChangeProps={changeProps}
+        className="input-basic"
+        ref={setRef.bind(cardNumber)}
+        changeEventProps={changeEventProps}
+        error={{ isError }}
+        onFocus={handleCardNumberInputFocus}
       />
       <ConditionalComponentWrapper isRender={needDividerRender}>
-        <InputDivider isHide={!isOverFourNumber} className="dash">
+        <InputDivider hiding={isError} className="dash">
           -
         </InputDivider>
       </ConditionalComponentWrapper>

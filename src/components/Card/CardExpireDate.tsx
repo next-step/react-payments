@@ -1,18 +1,19 @@
 import React from 'react';
 
 import { padNumber } from '@/utils';
-import { useSelectExpireDates } from '@/stores/CardCreatorContext';
 
-interface CardExpireDateProps {}
+import { TCardExpireDateProp } from './types';
 
-export function CardExpireDate(_: CardExpireDateProps) {
-  const expireDates = useSelectExpireDates();
+interface CardExpireDateProps {
+  expireDates?: TCardExpireDateProp[];
+}
 
+export function CardExpireDate({ expireDates }: CardExpireDateProps) {
   return (
     <span className="card-text">
-      <span className="card-text card-expire-date">{padNumber(2, expireDates?.[0].value)}</span>
+      <span className="card-text card-expire-date">{padNumber(2, expireDates?.[0])}</span>
       <span className="card-text mx-5">/</span>
-      <span className="card-text card-expire-date">{padNumber(2, expireDates?.[1].value)}</span>
+      <span className="card-text card-expire-date">{padNumber(2, expireDates?.[1])}</span>
     </span>
   );
 }

@@ -1,6 +1,6 @@
 import { styled } from '@/stitches.config';
 
-export const CardCompanyWrapper = styled('div', {
+export const StyledCardCompany = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -11,7 +11,7 @@ export const CardCompanyWrapper = styled('div', {
   cursor: 'pointer',
 });
 
-export const CardCompanyColor = styled('div', {
+export const StyledCardCompanyColor = styled('div', {
   width: '40px',
   height: '40px',
   borderRadius: '100%',
@@ -19,4 +19,4 @@ export const CardCompanyColor = styled('div', {
   backgroundColor: '$cardBackground',
 });
 
-export const CardCompanyName = styled('div', {});
+export const StyledCardCompanyName = styled('div', {});

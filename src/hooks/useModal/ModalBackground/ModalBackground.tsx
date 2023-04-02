@@ -1,6 +1,6 @@
 import React, { MouseEventHandler, PropsWithChildren, useCallback } from 'react';
 
-import { Background } from './ModalBackground.styled';
+import { StyledBackground } from './ModalBackground.styled';
 
 export interface ModalBackgroundProps extends PropsWithChildren {
   className?: string;
@@ -24,8 +24,8 @@ export function ModalBackground({
   );
 
   return (
-    <Background className={className} verticalAlign={verticalAlign} onClick={handleBackgroundClick}>
+    <StyledBackground className={className} verticalAlign={verticalAlign} onClick={handleBackgroundClick}>
       {children}
-    </Background>
+    </StyledBackground>
   );
 }

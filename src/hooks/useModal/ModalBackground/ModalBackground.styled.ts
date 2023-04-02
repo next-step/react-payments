@@ -1,6 +1,6 @@
 import { styled } from '@/stitches.config';
 
-export const Background = styled('div', {
+export const StyledBackground = styled('div', {
   flexCenter: 'column',
   width: '100%',
   height: '100%',

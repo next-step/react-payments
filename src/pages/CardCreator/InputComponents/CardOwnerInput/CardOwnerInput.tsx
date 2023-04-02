@@ -1,63 +1,56 @@
-import React, { ChangeEvent, memo, useContext, useEffect, useMemo } from 'react';
+import React, { ChangeEvent, memo, useMemo } from 'react';
 
-import { useSequentialFocusWithElements } from '@/hooks/useSequentialFocusWithElements';
-import { ApiContext, useSelectCardOwners } from '@/stores/CardCreatorContext';
+import { useCardContextApis } from '@/contexts/CardContext';
+import { TCardStore } from '@/contexts/CardContext/initialCardStore';
 
-import { CardInputWrapperPure } from '../components/CardInputWrapper';
-import { CardInfoInputElement } from '../components/CardInfoInputElement';
-import { useErrorContext } from '../hooks/useErrorContext';
+import { CardInputWrapperPure, CardInfoInputElement } from '../components';
 
-const CARD_OWNER_ELEMENT_SEQUENCE_KEY = 'cardOwner';
+interface CardOwnerInputProps {
+  cardOwners: TCardStore['cardOwners'];
+}
 
-interface CardOwnerInputProps {}
+export const CardOwnerInput = memo(function CardOwnerInput({ cardOwners }: CardOwnerInputProps) {
+  const cardOwner = useMemo(() => cardOwners[0], [cardOwners]);
+  const isError = !!cardOwner.errorMessage;
 
-function CardOwnerInput(_: CardOwnerInputProps) {
-  const cardOwner = useSelectCardOwners();
-  const { value, checkIsAllowInput, placeholder, checkIsValid } = cardOwner?.[0] || {};
+  const cardContextApis = useCardContextApis();
 
-  const apiContext = useContext(ApiContext);
-
-  const { setElement, toTheNextElement } = useSequentialFocusWithElements();
-
-  useEffect(() => {
-    toTheNextElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, !!checkIsValid?.(value));
-  }, [toTheNextElement, checkIsValid, value]);
-
-  const errorMessage = useErrorContext(
-    {
-      inValid: '소유주 이름을 입력해주세요.',
-    },
-    [{ errorType: 'cardOwners', messageType: 'inValid' }]
-  );
-
-  const inputChangeEventProps = {
+  const changeEventProps = {
     props: {
-      setState: (value: string) => apiContext?.dispatch({ type: 'cardOwners', payload: { index: 0, value } }),
+      setState: (value: string) => {
+        cardContextApis?.dispatch({ type: 'cardOwners', payload: { value } });
+      },
     },
     checkWhetherSetState: (e: ChangeEvent<HTMLInputElement>) => {
-      return !!checkIsAllowInput?.(e.currentTarget.value);
+      const { value } = e.currentTarget;
+      return !value || value.length <= 30;
     },
     getNewValue: (e: ChangeEvent<HTMLInputElement>) => {
       return e.currentTarget.value;
     },
   };
 
-  const inputHeader = useMemo(() => ['카드 소유자 이름(선택)', `${value?.length || 0} / 30`], [value]);
+  const handleCardOwnerInputFocus = () => {
+    cardContextApis?.dispatch({ type: 'cardOwners', payload: { value: cardOwner.value || '' } });
+  };
+
+  const inputHeader = useMemo(
+    () => ['카드 소유자 이름(선택)', `${cardOwner?.value?.length || 0} / 30`],
+    [cardOwner?.value]
+  );
 
   return (
-    <CardInputWrapperPure header={inputHeader} errorMessage={errorMessage}>
+    <CardInputWrapperPure header={inputHeader} errorMessage={cardOwner.errorMessage}>
       <CardInfoInputElement
         type="text"
         className="input-basic"
-        value={value ?? ''}
-        placeholder={placeholder}
-        ref={(el) => {
-          setElement(CARD_OWNER_ELEMENT_SEQUENCE_KEY, 0, el);
-        }}
-        onChangeProps={inputChangeEventProps}
+        value={cardOwner?.value ?? ''}
+        placeholder="소유주 이름"
+        ref={cardOwner?.setRef.bind(cardOwner)}
+        changeEventProps={changeEventProps}
+        error={{ isError }}
+        onFocus={handleCardOwnerInputFocus}
       />
     </CardInputWrapperPure>
   );
-}
-
-export const CardOwnerInputPure = memo(CardOwnerInput);
+});

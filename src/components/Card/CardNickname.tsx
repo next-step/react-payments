@@ -1,10 +1,17 @@
 import React from 'react';
-import { useSelectCardNickname } from '@/stores/CardCreatorContext';
+import { styled } from '@/stitches.config';
 
-interface CardNicknameProps {}
+import { TCardNicknameProp } from './types';
 
-export function CardNickname(_: CardNicknameProps) {
-  const nickname = useSelectCardNickname();
+const StyledCardNickname = styled('span', {
+  fontWeight: 'bold',
+  marginTop: '5px',
+});
 
-  return <span className="card-nickname">{nickname?.value}</span>;
+interface CardNicknameProps {
+  nickname?: TCardNicknameProp;
+}
+
+export function CardNickname({ nickname }: CardNicknameProps) {
+  return <StyledCardNickname className="card-nickname">{nickname}</StyledCardNickname>;
 }

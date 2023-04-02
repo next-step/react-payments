@@ -1,9 +1,10 @@
 import React, { useCallback } from 'react';
 
-import { useModal } from '@/hooks/useModal';
+import { useModal } from '@/hooks';
+
 import { CardCompanySelector, CardCompanySelectorProps } from './CardCompanySelector';
 
-function useCardCompanySelectModal() {
+export function useCardCompanySelectModal() {
   const { Modal, showModal, hideModal } = useModal();
 
   const CardCompanySelectModal = useCallback(
@@ -21,5 +22,3 @@ function useCardCompanySelectModal() {
     hideModal,
   };
 }
-
-export { useCardCompanySelectModal };

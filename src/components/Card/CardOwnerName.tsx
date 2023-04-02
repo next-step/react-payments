@@ -1,13 +1,18 @@
 import React from 'react';
+import { styled } from '@/stitches.config';
 
-import { useSelectCardOwners } from '@/stores/CardCreatorContext';
+import { TCardOwnerNameProp } from './types';
 
-interface CardOwnerNameProps {}
+const StyledCardOwnerName = styled('span', {
+  maxWidth: '75%',
+  overflowX: 'hidden',
+  textOverflow: 'ellipsis',
+});
 
-function CardOwnerName(_: CardOwnerNameProps) {
-  const ownerName = useSelectCardOwners();
-
-  return <span className="card-text card-name-spacing">{ownerName?.[0].value || 'NAME'}</span>;
+interface CardOwnerNameProps {
+  ownerName?: TCardOwnerNameProp;
 }
 
-export { CardOwnerName };
+export function CardOwnerName({ ownerName }: CardOwnerNameProps) {
+  return <StyledCardOwnerName className="card-text card-name-spacing">{ownerName || 'NAME'}</StyledCardOwnerName>;
+}

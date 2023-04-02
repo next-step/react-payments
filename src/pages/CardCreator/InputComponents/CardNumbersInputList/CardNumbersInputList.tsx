@@ -1,34 +1,39 @@
 import React, { memo } from 'react';
 
+import type { TCardStore } from '@/contexts/CardContext/initialCardStore';
 import { checkIsArrayLast } from '@/utils';
-import { useSelectCardNumbers } from '@/stores/CardCreatorContext';
 
-import { CardInputWrapperPure } from '../components/CardInputWrapper';
+import { CardInputWrapperPure } from '../components';
 import { CardNumberInput } from './CardNumberInput';
-import { useErrorContext } from '../hooks/useErrorContext';
 
-interface CardNumbersInputListProps {}
+export interface CardNumbersInputListRefs {
+  checkIsEveryInputValid: () => boolean;
+}
 
-function CardNumbersInputList(_: CardNumbersInputListProps) {
-  const cardNumbers = useSelectCardNumbers();
+interface CardNumbersInputListProps {
+  cardNumbers?: TCardStore['cardNumbers'];
+}
 
-  const errorMessage = useErrorContext(
-    {
-      inValid: '카드 번호를 각각 4자리씩 입력해주세요.',
-    },
-    [{ errorType: 'cardNumbers', messageType: 'inValid' }]
-  );
+export const CardNumbersInputList = memo(function CardNumbersInputList({ cardNumbers }: CardNumbersInputListProps) {
+  const errorMessage = cardNumbers?.find((cardNumber) => !!cardNumber.errorMessage)?.errorMessage;
 
   return (
     <CardInputWrapperPure header="카드 번호" errorMessage={errorMessage}>
       <div className="input-box">
         {cardNumbers?.map((cardNumber, i) => {
           const isLast = checkIsArrayLast(cardNumbers, i);
-          return <CardNumberInput key={cardNumber.key} needDividerRender={!isLast} cardNumber={cardNumber} index={i} />;
+          const isPasswordType = i >= cardNumbers.length - 2;
+          return (
+            <CardNumberInput
+              key={`cardNumber-input-${i}`}
+              type={isPasswordType ? 'password' : 'text'}
+              needDividerRender={!isLast}
+              cardNumber={cardNumber}
+              index={i}
+            />
+          );
         })}
       </div>
     </CardInputWrapperPure>
   );
-}
-
-export const CardNumbersInputListPure = memo(CardNumbersInputList);
+});

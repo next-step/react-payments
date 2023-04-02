@@ -1,24 +1,45 @@
 import React, { MouseEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
-import { routes } from '@/routes';
-import { Card } from '@/components/Card';
-import { ThemeSetter } from '@/components/ThemeSetter';
-import { useCardContextApiSelector, useSelectCardCompany } from '@/stores/CardCreatorContext';
+import { Card, ThemeSetter } from '@/components';
+import { useCardContextApis, useCardContext } from '@/contexts/CardContext';
+import { routes } from '@/router';
+import { TCardCompany } from '@/types';
 
-import { CardNumbersInputListPure } from './InputComponents/CardNumbersInputList';
-import { ExpireDatesInputListPure } from './InputComponents/ExpireDatesInputList';
-import { CardOwnerInputPure } from './InputComponents/CardOwnerInput';
-import { SecurityCodesInputListPure } from './InputComponents/SecurityCodesInputList';
-import { PasswordsInputListPure } from './InputComponents/PasswordsInputList';
-import { CardCompanyModel, useCardCompanySelectModal } from './hooks/useCardCompanySelectModal';
+import {
+  useCardCompanySelectModal,
+  useSequentialAutoFocus,
+  useAutoCompanyChecker,
+  useInvalidFinderOnMount,
+} from './hooks';
+import {
+  CardNumbersInputList,
+  ExpireDatesInputList,
+  CardOwnerInput,
+  SecurityCodesInputList,
+  PasswordsInputList,
+} from './InputComponents';
 import { SubmitButton } from './SubmitButton';
+import { StyledErrorMessage, cardCreatorContainerStyle } from './CardCreator.styled';
 
-function CardCreator() {
-  const cardCompany = useSelectCardCompany();
-  const apis = useCardContextApiSelector();
+export function CardCreator() {
+  const cardContext = useCardContext();
+  const cardContextApis = useCardContextApis();
 
   const { CardCompanySelectModal, showModal, hideModal } = useCardCompanySelectModal();
+
+  const cardStateList = cardContext && [
+    cardContext.cardNumbers,
+    cardContext.expireDates,
+    cardContext.cardOwners,
+    cardContext.securityCodes,
+    cardContext.passwords,
+    cardContext.cardCompanies,
+  ];
+  useInvalidFinderOnMount(cardStateList);
+  useSequentialAutoFocus(cardStateList);
+
+  useAutoCompanyChecker(cardContext?.cardNumbers[0].value, cardContext?.cardNumbers[1].value);
 
   const handleCardClick = useCallback(
     (e: MouseEvent<HTMLDivElement>) => {
@@ -29,26 +50,40 @@ function CardCreator() {
   );
 
   const handleCardCompanySelectModalClick = useCallback(
-    (cardCompany: CardCompanyModel) => {
-      apis?.dispatch({ type: 'cardCompany', payload: { value: cardCompany } });
+    (cardCompany: TCardCompany) => {
+      cardContextApis?.dispatch({ type: 'cardCompanies', payload: { value: cardCompany } });
       hideModal();
     },
-    [apis, hideModal]
+    [hideModal, cardContextApis]
   );
 
+  if (!cardContext) return null;
+  const { cardCompanies, cardNumbers, cardOwners, expireDates, passwords, securityCodes } = cardContext;
+
   return (
-    <ThemeSetter className="app" theme={cardCompany?.value?.theme}>
+    <ThemeSetter className={cardCreatorContainerStyle()} theme={cardCompanies[0].value?.theme}>
       <h2 className="page-title">
         <Link to={routes.home} className="mr-10">{`<`}</Link> 카드 추가
       </h2>
 
-      <Card onCardClick={handleCardClick} />
+      <Card
+        cardCompany={cardCompanies[0].value}
+        cardExpireDate={expireDates?.map((expireDate) => expireDate.value)}
+        cardNumbers={cardNumbers}
+        cardOwnerName={cardOwners?.[0]?.value}
+        additionalBottomElement={
+          !cardCompanies[0].errorMessage ? (
+            <StyledErrorMessage>{cardCompanies[0].errorMessage}</StyledErrorMessage>
+          ) : undefined
+        }
+        onCardClick={handleCardClick}
+      />
 
-      <CardNumbersInputListPure />
-      <ExpireDatesInputListPure />
-      <CardOwnerInputPure />
-      <SecurityCodesInputListPure />
-      <PasswordsInputListPure />
+      <CardNumbersInputList cardNumbers={cardNumbers} />
+      <ExpireDatesInputList expireDates={expireDates} />
+      <CardOwnerInput cardOwners={cardOwners} />
+      <SecurityCodesInputList securityCodes={securityCodes} />
+      <PasswordsInputList passwords={passwords} />
 
       <SubmitButton />
 
@@ -56,5 +91,3 @@ function CardCreator() {
     </ThemeSetter>
   );
 }
-
-export { CardCreator };

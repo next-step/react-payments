@@ -1,6 +1,4 @@
-import '@/styles/index.css';
-
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Card } from './Card';
@@ -19,26 +17,61 @@ export default {
 const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 
 export const Primary = Template.bind({});
+export const Secondary = Template.bind({});
+export const Empty = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
+  cardCompany: {
+    theme: 'blue',
+    name: 'companyName',
+  },
   cardNumbers: [
     {
-      isHide: false,
       value: '1234',
     },
     {
-      isHide: false,
       value: '1234',
     },
     {
-      isHide: true,
+      type: 'password',
       value: '1234',
     },
     {
-      isHide: true,
+      type: 'password',
       value: '1234',
     },
   ],
-  ownerName: 'test',
-  expireDates: ['12', '32'],
+  cardOwnerName: '',
+  cardExpireDate: ['12', '32'],
+  cardNickname: 'nickname',
 };
+
+Secondary.args = {
+  cardCompany: {
+    theme: 'green',
+    name: 'companyName',
+  },
+  cardNumbers: [
+    {
+      value: '1234',
+    },
+    {
+      value: '1234',
+    },
+    {
+      type: 'password',
+      value: '1234',
+    },
+    {
+      type: 'password',
+      value: '1234',
+    },
+  ],
+  cardOwnerName: '',
+  cardExpireDate: ['12', '32'],
+  cardNickname: 'nickname',
+  additionalBottomElement: 'bottomElement' as unknown as ReactElement<string>,
+  additionalIcon: 'icon' as unknown as ReactElement<string>,
+};
+
+Empty.args = {};
