@@ -4,7 +4,8 @@ import { StyledToolTip, StyledToolTopWrapper } from './style';
 
 type Props = {
   message: string;
-  onOpen: () => void;
+  onOpen?: () => void;
+  onClose?: () => void;
   open: boolean;
 };
 
@@ -25,11 +26,17 @@ export const ToolTip = ({
   children,
   open,
   onOpen,
+  onClose,
 }: PropsWithChildren<Props>) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const toolTipRef = useRef<HTMLDivElement>(null);
 
   const handleClickToolTip = ({ clientX }: MouseEvent<HTMLDivElement>) => {
+    if (open) {
+      onClose?.();
+      return;
+    }
+
     if (!toolTipRef.current || !containerRef.current) return;
     const { right } = containerRef.current.getBoundingClientRect();
     toolTipRef.current.style.right = clientX - right + 'px';

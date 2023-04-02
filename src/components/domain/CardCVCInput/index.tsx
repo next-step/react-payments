@@ -46,6 +46,7 @@ const CardCVCInput = ({ onChange }: Props) => {
       <ToolTip
         open={openToolTip}
         onOpen={onOpenToolTip}
+        onClose={onCloseToolTip}
         message={CVC_INFO_MESSAGE}
       >
         <InfoIcon width="20px" height="20px" />
