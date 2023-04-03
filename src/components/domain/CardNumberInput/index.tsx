@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
 import { useBlur } from '@/hooks/useBlur';
+import useFocus from '@/hooks/useFocus';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
+import type { CardData } from '@/types';
 
 type Props = {
   onChange: <T>(value: T) => void;
@@ -11,9 +13,41 @@ type Props = {
 
 const CardNumberInput = ({ onChange }: Props) => {
   const { dirtyState, makeDirty } = useBlur();
-  const { dispatch, handleInputChange } = useFormContext();
+  const { dispatch, handleInputChange, getFormData } = useFormContext();
   const [cardNumbers, setCardNumbers] = useState({});
   const keyPressInterceptor = useNumberKeyInterceptor();
+
+  const cardNumberRef = {
+    1: useRef<HTMLInputElement>(null),
+    2: useRef<HTMLInputElement>(null),
+    3: useRef<HTMLInputElement>(null),
+    4: useRef<HTMLInputElement>(null),
+  };
+
+  const FormData = getFormData().current as CardData;
+  const { focusOnTarget, target } = useFocus({
+    values: [
+      {
+        value: FormData?.CARD_NUMBERS?.[1],
+        ref: cardNumberRef[1],
+      },
+      {
+        value: FormData?.CARD_NUMBERS?.[2],
+        ref: cardNumberRef[2],
+      },
+      {
+        value: FormData?.CARD_NUMBERS?.[3],
+        ref: cardNumberRef[3],
+      },
+      {
+        value: FormData?.CARD_NUMBERS?.[4],
+        ref: cardNumberRef[4],
+      },
+    ],
+    maxLength: 4,
+  });
+
+  focusOnTarget(target);
 
   useEffect(() => {
     onChange({
@@ -32,6 +66,7 @@ const CardNumberInput = ({ onChange }: Props) => {
         onBlur={makeDirty}
       >
         <input
+          ref={cardNumberRef[1]}
           type="tel"
           name="1"
           placeholder="1234"
@@ -39,8 +74,10 @@ const CardNumberInput = ({ onChange }: Props) => {
           onKeyPress={keyPressInterceptor}
           onChange={handleInputChange(setCardNumbers)}
           required
+          autoFocus
         />
         <input
+          ref={cardNumberRef[2]}
           type="tel"
           name="2"
           placeholder="1234"
@@ -49,6 +86,7 @@ const CardNumberInput = ({ onChange }: Props) => {
           onChange={handleInputChange(setCardNumbers)}
         />
         <input
+          ref={cardNumberRef[3]}
           type="password"
           name="3"
           placeholder="****"
@@ -57,6 +95,7 @@ const CardNumberInput = ({ onChange }: Props) => {
           onChange={handleInputChange(setCardNumbers)}
         />
         <input
+          ref={cardNumberRef[4]}
           type="password"
           name="4"
           placeholder="****"
