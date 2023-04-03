@@ -3,18 +3,18 @@ import ReactDOM from 'react-dom';
 
 import { StyledBackDrop, StyledModal } from './style';
 
-type Props = {
-  onClose: () => void;
-};
-
-export const useModal = () => {
-  const [isOpen, setIsOpen] = useState(true);
+export const useModal = (initialState = false) => {
+  const [isOpen, setIsOpen] = useState(initialState);
 
   return {
     isOpen,
     open: () => setIsOpen(true),
     close: () => setIsOpen(false),
   };
+};
+
+type Props = {
+  onClose: () => void;
 };
 
 const Backdrop = ({ onClose }: Props) => {
