@@ -1,5 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { Card, CardNumberInput, CvcInput, ExpiredInput, Frame, Link, OwnerInput, PinInput } from '../../components';
+import '../../styles/input.css';
+import '../../styles/utils.css';
 
 const handleOnFulfill = (data: unknown) => console.log(data);
 

@@ -1,13 +1,15 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { OwnerInput } from '../components/OwnerInput';
+import CardEdit from './CardEdit';
 
 export default {
-  title: 'Example/OwnerInput',
-  component: OwnerInput,
+  title: 'Payments/Pages/CardEdit',
+  component: CardEdit,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-} as ComponentMeta<typeof OwnerInput>;
+} as ComponentMeta<typeof CardEdit>;
 
-const Template: ComponentStory<typeof OwnerInput> = () => <OwnerInput />;
+const Template: ComponentStory<typeof CardEdit> = () => {
+  return <CardEdit />;
+};
 
 export const Default = Template.bind({});

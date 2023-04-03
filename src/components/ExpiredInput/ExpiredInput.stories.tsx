@@ -1,13 +1,13 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { PinInput } from '../components/PinInput';
+import { ExpiredInput } from '.';
 
 export default {
-  title: 'Example/PinInput',
-  component: PinInput,
+  title: 'Payments/Input/ExpiredInput',
+  component: ExpiredInput,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-} as ComponentMeta<typeof PinInput>;
+} as ComponentMeta<typeof ExpiredInput>;
 
-const Template: ComponentStory<typeof PinInput> = () => <PinInput />;
+const Template: ComponentStory<typeof ExpiredInput> = () => <ExpiredInput />;
 
 export const Default = Template.bind({});

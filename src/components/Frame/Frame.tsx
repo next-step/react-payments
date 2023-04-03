@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from '../Link';
+import '../../styles/index.css';
 
 type TFrameProps = {
   title?: string;

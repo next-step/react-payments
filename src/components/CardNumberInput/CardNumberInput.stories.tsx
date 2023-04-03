@@ -1,9 +1,9 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { CardNumberInput } from '../components/CardNumberInput';
+import { CardNumberInput } from '.';
 
 export default {
-  title: 'Example/CardNumberInput',
+  title: 'Payments/Input/CardNumberInput',
   component: CardNumberInput,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
 } as ComponentMeta<typeof CardNumberInput>;
