@@ -73,7 +73,8 @@ const CardNumberInput = ({ onChange }: Props) => {
     }));
 
     const isFullPrivateCardNumber =
-      cardNumbers[3].length && cardNumbers[4].length === 4;
+      cardNumbers[3].length === SINGLE_CARD_NUMBER_LENGTH &&
+      cardNumbers[4].length === SINGLE_CARD_NUMBER_LENGTH;
     isFullPrivateCardNumber && closeVirtualKeyboard();
   };
 
