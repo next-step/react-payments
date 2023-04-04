@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 
 import { InfoIcon } from '@/assets';
 import { useFormContext } from '@/components/common/Form/FormContext';
-import { InputContainer, VirtualKeyboard } from '@/components/UI';
+import { InputContainer } from '@/components/UI';
 import { useModal } from '@/components/UI/Modal';
 import { ToolTip, useToolTip } from '@/components/UI/TooTip';
+import VirtualKeyboard from '@/components/UI/VirtualKeyboard';
 import { useBlur } from '@/hooks/useBlur';
 
 type Props = {
@@ -31,14 +32,14 @@ const CardCVCInput = ({ onChange }: Props) => {
   const { handleInputChange, dispatch } = useFormContext();
   const [cvc, setCVC] = useState(initialCVC);
 
+  const handleChange = (n: number) => {
+    setCVC((prev) => ({ val: prev.val ? prev.val + String(n) : String(n) }));
+    cvc.val.length === 3 && closeVirtualKeyboard();
+  };
+
   const handleOpen = () => {
     setCVC(initialCVC);
     openVirtualKeyboard();
-  };
-
-  const handleChange = (n: number) => {
-    setCVC((prev) => ({ val: prev.val ? prev.val + String(n) : String(n) }));
-    cvc.val.length === CVC_MIN_LENGTH && closeVirtualKeyboard();
   };
 
   useEffect(() => {
@@ -62,7 +63,7 @@ const CardCVCInput = ({ onChange }: Props) => {
           onFocus={onOpenToolTip}
           onBlur={onCloseToolTip}
           onChange={handleInputChange(setCVC)}
-          maxLength={CVC_MIN_LENGTH}
+          maxLength={3}
           readOnly
         />
         <ToolTip

@@ -61,16 +61,9 @@ const CardNumberInput = ({ onChange }: Props) => {
     close: closeVirtualKeyboard,
   } = useModal(false);
 
-  const isFullPrivateCardNumber =
-    cardNumberRef[3].current?.value?.length === 4 &&
-    cardNumberRef[4].current?.value?.length === 4;
-
   const handleChange = (n: number) => {
     const focusedElementName = focus.ref.current
       .name as keyof typeof initialCardNumbers;
-
-    const isFullPrivateCardNumber =
-      cardNumbers[3].length && cardNumbers[4].length === 4;
 
     setCardNumbers((prev) => ({
       ...prev,
@@ -79,12 +72,10 @@ const CardNumberInput = ({ onChange }: Props) => {
         : String(n),
     }));
 
+    const isFullPrivateCardNumber =
+      cardNumbers[3].length && cardNumbers[4].length === 4;
     isFullPrivateCardNumber && closeVirtualKeyboard();
   };
-
-  useEffect(() => {
-    closeVirtualKeyboard();
-  }, [isFullPrivateCardNumber]);
 
   useEffect(() => {
     onChange({
@@ -133,7 +124,6 @@ const CardNumberInput = ({ onChange }: Props) => {
           onFocus={handleOpen}
           maxLength={4}
           onChange={handleInputChange(setCardNumbers)}
-          readOnly
         />
         <input
           type="password"
@@ -144,7 +134,6 @@ const CardNumberInput = ({ onChange }: Props) => {
           maxLength={4}
           onFocus={handleOpen}
           onChange={handleInputChange(setCardNumbers)}
-          readOnly
         />
       </InputContainer>
       {open && (
