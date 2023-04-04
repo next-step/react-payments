@@ -1,14 +1,16 @@
-import { RefObject } from 'react';
+import { RefObject, useRef } from 'react';
 
 type Value = {
-  values: { value: any; ref: RefObject<HTMLInputElement> }[];
+  values: { value: any; ref: RefObject<HTMLInputElement>; isFocus?: boolean }[];
   maxLength: number;
 };
 
 const useFocus = ({ values, maxLength }: Value) => {
+  const focus = useRef<any>(null);
   const focusOnTarget = (i = 0) => {
     if (values.length === i) return;
     values[i]?.ref?.current?.focus();
+    focus.current = values[i];
   };
 
   const targetIndex =
@@ -17,6 +19,7 @@ const useFocus = ({ values, maxLength }: Value) => {
   return {
     focusOnTarget,
     target: targetIndex,
+    focus: focus.current,
   };
 };
 
