@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
+import { useModal } from '@/components/UI/Modal';
+import VirtualKeyboard from '@/components/UI/VirtualKeyboard';
 import { useBlur } from '@/hooks/useBlur';
 import useFocus from '@/hooks/useFocus';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
@@ -10,11 +12,17 @@ import type { CardData } from '@/types';
 type Props = {
   onChange: <T>(value: T) => void;
 };
+const initialCardNumbers = {
+  1: '',
+  2: '',
+  3: '',
+  4: '',
+};
 
 const CardNumberInput = ({ onChange }: Props) => {
   const { dirtyState, makeDirty } = useBlur();
   const { dispatch, handleInputChange, getFormData } = useFormContext();
-  const [cardNumbers, setCardNumbers] = useState({});
+  const [cardNumbers, setCardNumbers] = useState(initialCardNumbers);
   const keyPressInterceptor = useNumberKeyInterceptor();
 
   const cardNumberRef = {
@@ -25,7 +33,7 @@ const CardNumberInput = ({ onChange }: Props) => {
   };
 
   const FormData = getFormData().current as CardData;
-  const { focusOnTarget, target } = useFocus({
+  const { focusOnTarget, target, focus } = useFocus({
     values: [
       {
         value: FormData?.CARD_NUMBERS?.[1],
@@ -47,7 +55,36 @@ const CardNumberInput = ({ onChange }: Props) => {
     maxLength: 4,
   });
 
-  focusOnTarget(target);
+  const {
+    isOpen: open,
+    open: handleOpen,
+    close: closeVirtualKeyboard,
+  } = useModal(false);
+
+  const isFullPrivateCardNumber =
+    cardNumberRef[3].current?.value?.length === 4 &&
+    cardNumberRef[4].current?.value?.length === 4;
+
+  const handleChange = (n: number) => {
+    const focusedElementName = focus.ref.current
+      .name as keyof typeof initialCardNumbers;
+
+    const isFullPrivateCardNumber =
+      cardNumbers[3].length && cardNumbers[4].length === 4;
+
+    setCardNumbers((prev) => ({
+      ...prev,
+      [focusedElementName]: cardNumbers[focusedElementName]
+        ? cardNumbers[focusedElementName].concat(String(n))
+        : String(n),
+    }));
+
+    isFullPrivateCardNumber && closeVirtualKeyboard();
+  };
+
+  useEffect(() => {
+    closeVirtualKeyboard();
+  }, [isFullPrivateCardNumber]);
 
   useEffect(() => {
     onChange({
@@ -56,6 +93,8 @@ const CardNumberInput = ({ onChange }: Props) => {
     });
     dispatch();
   }, [cardNumbers]);
+
+  focusOnTarget(target);
 
   return (
     <>
@@ -86,24 +125,34 @@ const CardNumberInput = ({ onChange }: Props) => {
           onChange={handleInputChange(setCardNumbers)}
         />
         <input
-          ref={cardNumberRef[3]}
           type="password"
           name="3"
           placeholder="****"
+          ref={cardNumberRef[3]}
+          value={cardNumbers[3]}
+          onFocus={handleOpen}
           maxLength={4}
-          onKeyPress={keyPressInterceptor}
           onChange={handleInputChange(setCardNumbers)}
+          readOnly
         />
         <input
-          ref={cardNumberRef[4]}
           type="password"
           name="4"
           placeholder="****"
+          ref={cardNumberRef[4]}
+          value={cardNumbers[4]}
           maxLength={4}
-          onKeyPress={keyPressInterceptor}
+          onFocus={handleOpen}
           onChange={handleInputChange(setCardNumbers)}
+          readOnly
         />
       </InputContainer>
+      {open && (
+        <VirtualKeyboard
+          onClose={closeVirtualKeyboard}
+          onChange={handleChange}
+        />
+      )}
     </>
   );
 };
