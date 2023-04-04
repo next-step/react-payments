@@ -8,7 +8,7 @@ export interface FormHandler {
 }
 export interface InputHandler {
   handleInputChange: (
-    input: React.Dispatch<React.SetStateAction<object>>
+    input: React.Dispatch<React.SetStateAction<any>>
   ) => (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 export interface FormSharedConfig {
