@@ -1,6 +1,7 @@
 import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
 import { TCardComponentProps } from '../../domain/payments/types';
 import { leaveOnlyNumbers } from '../../util/number';
+import { InputContainer } from '../InputContainer';
 
 const MAX_LENGTH = 2;
 const MONTH_CHARACTERS = {
@@ -102,26 +103,23 @@ function ExpiredInput(
   ];
 
   return (
-    <div className="input-container">
-      <span className="input-title">만료일</span>
-      <div className="input-box w-50">
-        {expiredInputProperties.map((expiredInput) => (
-          <input
-            required
-            key={expiredInput.placeholder}
-            className="input-basic"
-            type="text"
-            ref={expiredInput.ref}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              event.target.value = leaveOnlyNumbers(event.target.value);
-              expiredInput.onChange(event);
-            }}
-            maxLength={expiredInput.maxLength}
-            value={expiredInput.value}
-          />
-        ))}
-      </div>
-    </div>
+    <InputContainer caption="만료 월/연도" width={50}>
+      {expiredInputProperties.map((expiredInput) => (
+        <input
+          required
+          key={expiredInput.placeholder}
+          className="input-basic"
+          type="text"
+          ref={expiredInput.ref}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            event.target.value = leaveOnlyNumbers(event.target.value);
+            expiredInput.onChange(event);
+          }}
+          maxLength={expiredInput.maxLength}
+          value={expiredInput.value}
+        />
+      ))}
+    </InputContainer>
   );
 }
 

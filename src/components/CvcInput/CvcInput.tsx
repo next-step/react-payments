@@ -1,6 +1,7 @@
 import React, { ForwardedRef, forwardRef } from 'react';
 import useNumberInput from '../../hooks/useNumberInput';
 import { TCardComponentProps } from '../../domain/payments/types';
+import { InputContainer } from '../InputContainer';
 
 const CVC_MAX_LENGTH = 3;
 
@@ -23,8 +24,7 @@ function CvcInput(
   });
 
   return (
-    <div className="input-container">
-      <span className="input-title">보안코드(CVC/CVV)</span>
+    <InputContainer caption="보안코드(CVC/CVV)">
       <input
         required
         ref={(el: HTMLInputElement) => (refs.current[0] = el)}
@@ -34,7 +34,7 @@ function CvcInput(
         onChange={(event) => handleChange(event, 0)}
         value={cvc}
       />
-    </div>
+    </InputContainer>
   );
 }
 

@@ -2,6 +2,7 @@ import React, { ForwardedRef, forwardRef } from 'react';
 import '../../styles/input.css';
 import useNumberInput from '../../hooks/useNumberInput';
 import { TCardComponentProps } from '../../domain/payments/types';
+import { InputContainer } from '../InputContainer';
 
 const EACH_PASSWORD_LENGTH = 1;
 const PASSWORD_LENGTH = 4;
@@ -17,8 +18,7 @@ function PinInput({ onChange, onFulfill }: TCardComponentProps, ref: ForwardedRe
   } = useNumberInput({ initValues: ['', ''], maxLength: EACH_PASSWORD_LENGTH, onChange, onFulfill, forwardedRef: ref });
 
   return (
-    <div className="input-container">
-      <span className="input-title">카드 비밀번호</span>
+    <InputContainer caption="카드 비밀번호" width={15}>
       {Array.from({ length: PASSWORD_LENGTH }, (_, idx) => (
         <input
           required
@@ -32,7 +32,7 @@ function PinInput({ onChange, onFulfill }: TCardComponentProps, ref: ForwardedRe
           disabled={!isEditable(idx)}
         />
       ))}
-    </div>
+    </InputContainer>
   );
 }
 

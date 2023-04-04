@@ -1,5 +1,6 @@
 import React, { ForwardedRef, forwardRef, useCallback, useState } from 'react';
 import { TCardComponentProps } from '../../domain/payments/types';
+import { InputContainer } from '../InputContainer';
 
 const MAX_LENGTH = 30;
 function OwnerInput(
@@ -35,8 +36,7 @@ function OwnerInput(
   );
 
   return (
-    <div className="input-container">
-      <span className="input-title">카드 소유자 이름(선택)</span>
+    <InputContainer caption="카드 소유자 이름(선택)">
       <input
         ref={ref}
         type="text"
@@ -47,7 +47,7 @@ function OwnerInput(
         onKeyDown={handleEnter}
         value={owner}
       />
-    </div>
+    </InputContainer>
   );
 }
 
