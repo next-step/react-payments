@@ -26,6 +26,7 @@ function CvcInput(
     <div className="input-container">
       <span className="input-title">보안코드(CVC/CVV)</span>
       <input
+        required
         ref={(el: HTMLInputElement) => (refs.current[0] = el)}
         className="input-basic w-25"
         type="password"

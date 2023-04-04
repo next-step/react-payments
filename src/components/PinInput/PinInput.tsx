@@ -9,18 +9,19 @@ const EDITABLE_PASSWORD_LENGTH = 2;
 
 const isEditable = (idx: number) => idx < EDITABLE_PASSWORD_LENGTH;
 
-function PinInput({ onFulfill }: TCardComponentProps, ref: ForwardedRef<HTMLInputElement>) {
+function PinInput({ onChange, onFulfill }: TCardComponentProps, ref: ForwardedRef<HTMLInputElement>) {
   const {
     numbers: pins,
     refs,
     handleChange,
-  } = useNumberInput({ initValues: ['', ''], maxLength: EACH_PASSWORD_LENGTH, onFulfill, forwardedRef: ref });
+  } = useNumberInput({ initValues: ['', ''], maxLength: EACH_PASSWORD_LENGTH, onChange, onFulfill, forwardedRef: ref });
 
   return (
     <div className="input-container">
       <span className="input-title">카드 비밀번호</span>
       {Array.from({ length: PASSWORD_LENGTH }, (_, idx) => (
         <input
+          required
           ref={(el) => (refs.current[idx] = el as HTMLInputElement)}
           key={idx}
           className="input-basic w-15"

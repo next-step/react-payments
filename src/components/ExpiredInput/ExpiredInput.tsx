@@ -107,6 +107,7 @@ function ExpiredInput(
       <div className="input-box w-50">
         {expiredInputProperties.map((expiredInput) => (
           <input
+            required
             key={expiredInput.placeholder}
             className="input-basic"
             type="text"

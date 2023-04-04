@@ -1,28 +1,26 @@
 import React, { useCallback } from 'react';
-import { useStepContext } from '../../context/StepContext';
 import '../../styles/index.css';
 
 type TFrameProps = {
   title?: string;
-  backTo?: number;
   children: React.ReactNode;
+  onBackClick?: () => void;
 };
 
-function Frame({ title, backTo, children }: TFrameProps) {
-  const { setStep } = useStepContext();
+function Frame({ title, children, onBackClick }: TFrameProps) {
+  const handleBack = useCallback(() => {
+    onBackClick && onBackClick();
+  }, [onBackClick]);
 
   const LeftBack = useCallback(() => {
-    return (
-      (backTo && setStep && (
-        <>
-          <span onClick={() => setStep(backTo)} style={{ marginRight: '0.5rem' }}>
-            &lt;
-          </span>
-        </>
-      )) ||
-      null
-    );
-  }, [backTo, setStep]);
+    return onBackClick ? (
+      <>
+        <span onClick={handleBack} style={{ marginRight: '0.5rem' }}>
+          &lt;
+        </span>
+      </>
+    ) : null;
+  }, [onBackClick]);
 
   return (
     <div className="root">

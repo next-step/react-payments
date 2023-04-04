@@ -29,6 +29,7 @@ function CardNumberInput(
       <div className="input-box">
         {CARD_NUMBER_INPUT_TYPES.map((type, idx) => (
           <input
+            required
             ref={(el: HTMLInputElement) => (refs.current[idx] = el)}
             key={idx}
             className="input-basic"
