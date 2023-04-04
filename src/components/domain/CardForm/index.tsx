@@ -9,7 +9,7 @@ import {
   ExpiredDateInput,
 } from '@/components/domain';
 import { Box } from '@/components/UI';
-import { type CardFormType, CardCompanyValues, CardKey } from '@/types';
+import { type CardFormType, CardKey } from '@/types';
 
 import { type ExpireDateHandle } from '../ExpiredDateInput';
 
@@ -47,27 +47,3 @@ const CardForm = () => {
 };
 
 export default CardForm;
-
-export const guessCardCompanyByCardNumber = (cardNumber: string) => {
-  const firstNumber = cardNumber[0];
-  switch (firstNumber) {
-    case '1':
-      return CardCompanyValues.PC;
-    case '2':
-      return CardCompanyValues.JUN;
-    case '3':
-      return CardCompanyValues.HS;
-    case '4':
-      return CardCompanyValues.YH;
-    case '5':
-      return CardCompanyValues.HO;
-    case '6':
-      return CardCompanyValues.TE;
-    case '7':
-      return CardCompanyValues.JI;
-    case '8':
-      return CardCompanyValues.EK;
-    default:
-      return '';
-  }
-};

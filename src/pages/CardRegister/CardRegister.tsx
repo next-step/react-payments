@@ -9,9 +9,9 @@ import { useRouter } from '@/hooks/useRouter';
 import { createCard } from '@/storage/service';
 import {
   type CardFormType,
+  CardCompanyValues,
   CardData,
   CardKey,
-  guessCardCompanyByCardNumber,
 } from '@/types';
 
 export const CardRegister = () => {
@@ -54,8 +54,6 @@ export const CardRegister = () => {
         getFormData(),
         CardKey.CARD_COMPANY
       )({ val: guessedCardCompany, isValid: true });
-
-      handleOpen();
     }
   }, [isFullPublicCardNumber]);
 
@@ -98,4 +96,28 @@ const generateCardObj = (form: CardFormType) => {
     [CardKey.UID]: Date.now(),
     [CardKey.CREATE_DATE]: Date.now(),
   };
+};
+
+export const guessCardCompanyByCardNumber = (cardNumber: string) => {
+  const firstNumber = cardNumber[0];
+  switch (firstNumber) {
+    case '1':
+      return CardCompanyValues.PC;
+    case '2':
+      return CardCompanyValues.JUN;
+    case '3':
+      return CardCompanyValues.HS;
+    case '4':
+      return CardCompanyValues.YH;
+    case '5':
+      return CardCompanyValues.HO;
+    case '6':
+      return CardCompanyValues.TE;
+    case '7':
+      return CardCompanyValues.JI;
+    case '8':
+      return CardCompanyValues.EK;
+    default:
+      return '';
+  }
 };
