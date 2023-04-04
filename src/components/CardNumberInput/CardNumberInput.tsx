@@ -14,7 +14,14 @@ function CardNumberInput(
     numbers: cardNumbers,
     refs,
     handleChange,
-  } = useNumberInput({ initValues: ['', '', '', ''], maxLength: 4, onChange, onFulfill, nextRef, forwardedRef });
+  } = useNumberInput({
+    initValues: ['', '', '', ''],
+    maxLength: CARD_NUMBER_MAX_LENGTH,
+    onChange,
+    onFulfill,
+    nextRef,
+    forwardedRef,
+  });
 
   return (
     <div className="input-container">

@@ -3,6 +3,12 @@ import { TCardComponentProps } from '../../domain/payments/types';
 import { leaveOnlyNumbers } from '../../util/number';
 
 const MAX_LENGTH = 2;
+const MONTH_CHARACTERS = {
+  INVALID_MONTH: '00',
+  MIN_MONTH: '01',
+  MAX_MONTH: '12',
+};
+
 const isFulfilled = (month: string, year: string) => {
   return [month, year].every((s) => s?.length === MAX_LENGTH);
 };
@@ -42,10 +48,10 @@ function ExpiredInput(
             return;
           } else if (isNaN(parsedValue)) {
             return;
-          } else if (value === '00') {
-            setExpiredMonth('01');
-          } else if (parsedValue > 12) {
-            setExpiredMonth('12');
+          } else if (value === MONTH_CHARACTERS.INVALID_MONTH) {
+            setExpiredMonth(MONTH_CHARACTERS.MIN_MONTH);
+          } else if (parsedValue > parseInt(MONTH_CHARACTERS.MAX_MONTH, 10)) {
+            setExpiredMonth(MONTH_CHARACTERS.MAX_MONTH);
           } else {
             setExpiredMonth(value);
           }

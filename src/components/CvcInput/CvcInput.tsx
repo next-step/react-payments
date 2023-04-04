@@ -3,6 +3,7 @@ import useNumberInput from '../../hooks/useNumberInput';
 import { TCardComponentProps } from '../../domain/payments/types';
 
 const CVC_MAX_LENGTH = 3;
+
 function CvcInput(
   { onChange, onFulfill, prevRef, nextRef }: TCardComponentProps<string[]>,
   forwardedRef: ForwardedRef<HTMLInputElement>

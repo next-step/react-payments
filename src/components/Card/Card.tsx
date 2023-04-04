@@ -1,14 +1,17 @@
 import React from 'react';
 import { ICard } from '../../domain/payments/types';
-import '../../styles/card.css';
 import { getShorteningString } from '../../util/string';
+import '../../styles/card.css';
+
+const CARD_VISIBLE_MAX_LENGTH_NAME = 5;
+const CARD_VISIBLE_NUMBER_INDEX = [0, 1];
 
 const convertToEncryptedChars = (s = '') => '•'.repeat(s.length);
 const getViewCardNumbers = (cardNumbers: string[]) => {
   const result: string[] = [];
   return cardNumbers
     .reduce((accumulated, current, idx) => {
-      if ([0, 1].includes(idx)) {
+      if (CARD_VISIBLE_NUMBER_INDEX.includes(idx)) {
         return [...accumulated, current || ''];
       }
       return [...accumulated, convertToEncryptedChars(current)];
@@ -33,7 +36,7 @@ function Card({ cardName, owner, expiredMonth, expiredYear, numbers }: ICard) {
         </div>
         <div className="card-bottom">
           <div className="card-bottom__info">
-            <span className="card-text">{owner && getShorteningString(owner, 5)}</span>
+            <span className="card-text">{owner && getShorteningString(owner, CARD_VISIBLE_MAX_LENGTH_NAME)}</span>
             <span className="card-text">
               {expiredMonth} / {expiredYear}
             </span>
