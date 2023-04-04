@@ -18,15 +18,15 @@ const CardForm = () => {
   const formData = getFormData();
   const currentFormData = formData.current as CardFormType;
   const expireDateInputRef = useRef<ExpireDateHandle>(null);
+  const isCardNumberAndCompanyValid =
+    currentFormData.CARD_NUMBERS?.isValid &&
+    currentFormData.CARD_COMPANY?.isValid;
 
   useEffect(() => {
-    if (
-      currentFormData.CARD_NUMBERS?.isValid &&
-      currentFormData.CARD_COMPANY.isValid
-    ) {
+    if (isCardNumberAndCompanyValid) {
       expireDateInputRef.current?.focusOnExpiredDate();
     }
-  }, [currentFormData]);
+  }, [isCardNumberAndCompanyValid]);
 
   return (
     <Box css={{ paddingTop: '2rem' }}>
