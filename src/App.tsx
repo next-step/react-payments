@@ -1,18 +1,20 @@
 import React from 'react';
-import { Route, Router, Routes } from './components';
+import { PAYMENTS_STEP, useStepContext } from './context/StepContext';
 import { CardDetail, CardEdit, CardList } from './pages';
 
 function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/card-detail" element={<CardDetail />} />
-        <Route path="/card-edit" element={<CardEdit />} />
-        <Route path="/card-add" element={<CardEdit />} />
-        <Route path="/" element={<CardList />} />
-      </Routes>
-    </Router>
-  );
+  const { step } = useStepContext();
+
+  switch (step) {
+    case PAYMENTS_STEP.ADD:
+    case PAYMENTS_STEP.EDIT:
+      return <CardEdit />;
+    case PAYMENTS_STEP.DONE:
+      return <CardDetail />;
+    case PAYMENTS_STEP.LIST:
+    default:
+      return <CardList />;
+  }
 }
 
 export default App;

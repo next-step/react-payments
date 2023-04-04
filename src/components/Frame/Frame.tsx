@@ -1,23 +1,34 @@
-import React from 'react';
-import { Link } from '../Link';
+import React, { useCallback } from 'react';
+import { useStepContext } from '../../context/StepContext';
 import '../../styles/index.css';
 
 type TFrameProps = {
   title?: string;
-  backLink?: string;
+  backTo?: number;
   children: React.ReactNode;
 };
 
-function Frame({ title, backLink, children }: TFrameProps) {
+function Frame({ title, backTo, children }: TFrameProps) {
+  const { setStep } = useStepContext();
+
+  const LeftBack = useCallback(() => {
+    return (
+      (backTo && setStep && (
+        <>
+          <span onClick={() => setStep(backTo)} style={{ marginRight: '0.5rem' }}>
+            &lt;
+          </span>
+        </>
+      )) ||
+      null
+    );
+  }, [backTo, setStep]);
+
   return (
     <div className="root">
       <div className="app">
         <h2 className="page-title">
-          {backLink && (
-            <Link to={backLink}>
-              <span>&lt;</span>
-            </Link>
-          )}
+          <LeftBack />
           {title}
         </h2>
         {children}

@@ -8,11 +8,14 @@ import './styles/button.css';
 import './styles/index.css';
 import './styles/modal.css';
 import './styles/utils.css';
+import { StepContextProvider } from './context/StepContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <App />
+    <StepContextProvider>
+      <App />
+    </StepContextProvider>
   </React.StrictMode>
 );
 

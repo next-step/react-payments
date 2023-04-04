@@ -1,5 +1,6 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { Card, CardNumberInput, CvcInput, ExpiredInput, Frame, Link, OwnerInput, PinInput } from '../../components';
+import { Card, CardNumberInput, CvcInput, ExpiredInput, Frame, OwnerInput, PinInput } from '../../components';
+import { PAYMENTS_STEP, useStepContext } from '../../context/StepContext';
 import '../../styles/input.css';
 import '../../styles/utils.css';
 
@@ -11,6 +12,8 @@ function CardEdit() {
   const [expiredYear, setExpiredYear] = useState('');
   const [owner, setOwner] = useState('');
   const [cvc, setCvc] = useState('');
+
+  const { setStep } = useStepContext();
 
   const refs = {
     cardNumber: useRef<HTMLInputElement>(null),
@@ -36,8 +39,15 @@ function CardEdit() {
     [cvc]
   );
 
+  const handleNextStep = useCallback(() => {
+    // TODO: 유효성 검사
+
+    // nextStep
+    setStep && setStep(PAYMENTS_STEP.DONE);
+  }, [setStep]);
+
   return (
-    <Frame title="카드 추가" backLink={'/'}>
+    <Frame title="카드 추가" backTo={PAYMENTS_STEP.LIST}>
       <Card owner={owner} expiredMonth={expiredMonth} expiredYear={expiredYear} numbers={cardNumbers} cvc={cvc} />
 
       <CardNumberInput ref={refs.cardNumber} nextRef={refs.expired} onChange={setCardNumbers} />
@@ -65,8 +75,8 @@ function CardEdit() {
       <PinInput ref={refs.pin} prevRef={refs.cvc} onFulfill={handleOnFulfill} />
 
       <div className="button-box">
-        <div className="button-text">
-          <Link to="/card-detail">다음</Link>
+        <div className="button-text" onClick={handleNextStep}>
+          다음
         </div>
       </div>
     </Frame>
