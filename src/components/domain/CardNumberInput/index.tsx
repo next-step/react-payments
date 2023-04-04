@@ -52,7 +52,7 @@ const CardNumberInput = ({ onChange }: Props) => {
         ref: cardNumberRef[4],
       },
     ],
-    maxLength: 4,
+    maxLength: SINGLE_CARD_NUMBER_LENGTH,
   });
 
   const {
@@ -100,7 +100,7 @@ const CardNumberInput = ({ onChange }: Props) => {
           type="tel"
           name="1"
           placeholder="1234"
-          maxLength={4}
+          maxLength={SINGLE_CARD_NUMBER_LENGTH}
           onKeyPress={keyPressInterceptor}
           onChange={handleInputChange(setCardNumbers)}
           required
@@ -111,7 +111,7 @@ const CardNumberInput = ({ onChange }: Props) => {
           type="tel"
           name="2"
           placeholder="1234"
-          maxLength={4}
+          maxLength={SINGLE_CARD_NUMBER_LENGTH}
           onKeyPress={keyPressInterceptor}
           onChange={handleInputChange(setCardNumbers)}
         />
@@ -119,19 +119,19 @@ const CardNumberInput = ({ onChange }: Props) => {
           type="password"
           name="3"
           placeholder="****"
+          maxLength={SINGLE_CARD_NUMBER_LENGTH}
           ref={cardNumberRef[3]}
           value={cardNumbers[3]}
           onFocus={handleOpen}
-          maxLength={4}
           onChange={handleInputChange(setCardNumbers)}
         />
         <input
           type="password"
           name="4"
           placeholder="****"
+          maxLength={SINGLE_CARD_NUMBER_LENGTH}
           ref={cardNumberRef[4]}
           value={cardNumbers[4]}
-          maxLength={4}
           onFocus={handleOpen}
           onChange={handleInputChange(setCardNumbers)}
         />
@@ -147,6 +147,8 @@ const CardNumberInput = ({ onChange }: Props) => {
 };
 
 export default CardNumberInput;
+
+const SINGLE_CARD_NUMBER_LENGTH = 4;
 
 const ERROR_MESSAGE = {
   ONLY_NUMBER: '카드번호는 숫자만 입력할 수 있습니다.',
