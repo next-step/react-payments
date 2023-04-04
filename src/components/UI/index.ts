@@ -12,3 +12,4 @@ export { default as Text } from './Text';
 export { default as ToolTip } from './TooTip';
 export { default as TopNavbar } from './TopNavbar';
 export { default as TopNavigation } from './TopNavigation';
+export { default as VirtualKeyboard } from './VirtualKeyboard';
