@@ -2,12 +2,17 @@ import { useEffect, useState } from 'react';
 
 import { InfoIcon } from '@/assets';
 import { useFormContext } from '@/components/common/Form/FormContext';
-import { InputContainer } from '@/components/UI';
+import { InputContainer, VirtualKeyboard } from '@/components/UI';
+import { useModal } from '@/components/UI/Modal';
 import { ToolTip, useToolTip } from '@/components/UI/TooTip';
 import { useBlur } from '@/hooks/useBlur';
-import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
+
 type Props = {
   onChange: <T>(value: T) => void;
+};
+
+const initialCVC = {
+  val: '',
 };
 
 const CardCVCInput = ({ onChange }: Props) => {
@@ -17,10 +22,24 @@ const CardCVCInput = ({ onChange }: Props) => {
     onOpen: onOpenToolTip,
     onClose: onCloseToolTip,
   } = useToolTip();
+  const {
+    isOpen: open,
+    open: openVirtualKeyboard,
+    close: closeVirtualKeyboard,
+  } = useModal(false);
 
   const { handleInputChange, dispatch } = useFormContext();
-  const [cvc, setCVC] = useState({});
-  const keyPressInterceptor = useNumberKeyInterceptor();
+  const [cvc, setCVC] = useState(initialCVC);
+
+  const handleOpen = () => {
+    setCVC(initialCVC);
+    openVirtualKeyboard();
+  };
+
+  const handleChange = (n: number) => {
+    setCVC((prev) => ({ val: prev.val ? prev.val + String(n) : String(n) }));
+    cvc.val.length === CVC_MIN_LENGTH && closeVirtualKeyboard();
+  };
 
   useEffect(() => {
     onChange({ ...cvc, isValid: !getErrorMessage(cvc) });
@@ -28,30 +47,40 @@ const CardCVCInput = ({ onChange }: Props) => {
   }, [cvc]);
 
   return (
-    <InputContainer
-      label="보안코드(CVC/CVV)"
-      isError={dirtyState && Boolean(getErrorMessage(cvc))}
-      errorMessage={getErrorMessage(cvc)}
-      onBlur={makeDirty}
-    >
-      <input
-        type="password"
-        name="val"
-        onFocus={onOpenToolTip}
-        onBlur={onCloseToolTip}
-        onKeyPress={keyPressInterceptor}
-        onChange={handleInputChange(setCVC)}
-        maxLength={3}
-      />
-      <ToolTip
-        open={openToolTip}
-        onOpen={onOpenToolTip}
-        onClose={onCloseToolTip}
-        message={CVC_INFO_MESSAGE}
+    <>
+      <InputContainer
+        label="보안코드(CVC/CVV)"
+        isError={dirtyState && Boolean(getErrorMessage(cvc))}
+        errorMessage={getErrorMessage(cvc)}
+        onBlur={makeDirty}
       >
-        <InfoIcon width="20px" height="20px" />
-      </ToolTip>
-    </InputContainer>
+        <input
+          type="password"
+          name="val"
+          value={cvc.val}
+          onClick={handleOpen}
+          onFocus={onOpenToolTip}
+          onBlur={onCloseToolTip}
+          onChange={handleInputChange(setCVC)}
+          maxLength={CVC_MIN_LENGTH}
+          readOnly
+        />
+        <ToolTip
+          open={openToolTip}
+          onOpen={onOpenToolTip}
+          onClose={onCloseToolTip}
+          message={CVC_INFO_MESSAGE}
+        >
+          <InfoIcon width="20px" height="20px" />
+        </ToolTip>
+      </InputContainer>
+      {open && (
+        <VirtualKeyboard
+          onClose={closeVirtualKeyboard}
+          onChange={handleChange}
+        />
+      )}
+    </>
   );
 };
 
