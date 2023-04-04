@@ -22,7 +22,7 @@ export type ExpireDateHandle = {
 };
 
 const ExpiredDateInput = forwardRef<ExpireDateHandle, Props>(
-  ({ onChange }, ref) => {
+  ({ onChange }, _ref) => {
     const { dirtyState, makeDirty } = useBlur();
     const { dispatch, handleInputChange, getFormData } = useFormContext();
     const FormData = getFormData().current as CardData;
@@ -49,7 +49,7 @@ const ExpiredDateInput = forwardRef<ExpireDateHandle, Props>(
     });
 
     useImperativeHandle(
-      ref,
+      _ref,
       () => {
         return {
           focusOnExpiredDate: () => {
@@ -76,7 +76,6 @@ const ExpiredDateInput = forwardRef<ExpireDateHandle, Props>(
         onBlur={makeDirty}
       >
         <input
-          // ref={ref}
           ref={expiredDateRef.month}
           type="tel"
           placeholder="MM"
