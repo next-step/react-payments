@@ -100,7 +100,7 @@ function CardEdit() {
 
   return (
     <Frame title="카드 추가" onBackClick={handleBackStep}>
-      <Card owner={owner} expiredMonth={expiredMonth} expiredYear={expiredYear} numbers={cardNumbers} cvc={cvc} />
+      <Card card={{ owner, expiredMonth, expiredYear, numbers: cardNumbers, cvc }} />
 
       <form onSubmit={handleEnrollStep}>
         <CardNumberInput ref={refs.cardNumber} nextRef={refs.expired} onChange={setCardNumbers} />

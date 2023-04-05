@@ -19,31 +19,52 @@ const getViewCardNumbers = (cardNumbers: string[]) => {
     .join('-');
 };
 
-function Card({ cardName, owner, expiredMonth, expiredYear, numbers }: ICard) {
+type TCardProps = {
+  card: ICard;
+  deletable?: boolean;
+  onDeleteClick?: (card: ICard) => void;
+};
+
+function Card({ card, deletable = false, onDeleteClick }: TCardProps) {
+  const { cardName, owner, expiredMonth, expiredYear, numbers, alias } = card;
   const cardNumber = getViewCardNumbers(numbers);
+  const displayCardName = alias && alias.length ? alias : cardName;
+
+  const handleDelete = () => {
+    onDeleteClick && onDeleteClick(card);
+  };
 
   return (
-    <div className="card-box">
-      <div className="small-card">
-        <div className="card-top">{cardName && <span className="card-text">{cardName}</span>}</div>
-        <div className="card-middle">
-          <div className="small-card__chip"></div>
-        </div>
-        <div className="card-bottom">
-          <div className="card-bottom__number">
-            <span className="card-text">{cardNumber}</span>
+    <>
+      <div className="card-box">
+        <div className="small-card">
+          <div className="card-top">{displayCardName && <span className="card-text">{displayCardName}</span>}</div>
+          <div className="card-middle">
+            <div className="small-card__chip"></div>
           </div>
-        </div>
-        <div className="card-bottom">
-          <div className="card-bottom__info">
-            <span className="card-text">{owner && getShorteningString(owner, CARD_VISIBLE_MAX_LENGTH_NAME)}</span>
-            <span className="card-text">
-              {expiredMonth} / {expiredYear}
-            </span>
+          <div className="card-bottom">
+            <div className="card-bottom__number">
+              <span className="card-text">{cardNumber}</span>
+            </div>
+          </div>
+          <div className="card-bottom">
+            <div className="card-bottom__info">
+              <span className="card-text">{owner && getShorteningString(owner, CARD_VISIBLE_MAX_LENGTH_NAME)}</span>
+              <span className="card-text">
+                {expiredMonth} / {expiredYear}
+              </span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      {deletable && (
+        <div>
+          <button type="button" onClick={handleDelete}>
+            삭제
+          </button>
+        </div>
+      )}
+    </>
   );
 }
 

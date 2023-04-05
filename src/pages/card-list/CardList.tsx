@@ -1,38 +1,41 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { Card } from '../../components';
 import { Frame } from '../../components/Frame';
 import { PAYMENTS_STEP, useStepContext } from '../../context/StepContext';
-import { getEnrolledCards } from '../../domain/payments/cardStorage';
+import { getSavedCards, removeCard } from '../../domain/payments/cardStorage';
 import { ICard } from '../../domain/payments/types';
 import './CardList.css';
 
 function CardList() {
+  const [cards, setCards] = useState(getSavedCards());
   const { setStep } = useStepContext();
 
-  const enrolledCards: ICard[] = getEnrolledCards();
-
-  const handleClick = () => {
+  const handleAddCard = useCallback(() => {
     setStep && setStep(PAYMENTS_STEP.ADD);
-  };
+  }, [setStep]);
+
+  const handleDeleteCard = useCallback(
+    (card: ICard) => {
+      removeCard(card);
+      setCards(getSavedCards());
+    },
+    [setCards]
+  );
 
   return (
     <Frame title="카드 목록">
-      <ul>
+      <ul className="card-list">
         <li>
-          <div className="empty-card" onClick={handleClick}>
+          <div className="empty-card" onClick={handleAddCard}>
             +
           </div>
         </li>
-        {enrolledCards.map(({ cardName, owner, numbers, expiredMonth, expiredYear, alias, cvc }) => (
+        {cards.map(({ cardName, owner, numbers, expiredMonth, expiredYear, alias, cvc }) => (
           <li key={numbers.join('')}>
             <Card
-              cardName={cardName}
-              owner={owner}
-              numbers={numbers}
-              expiredMonth={expiredMonth}
-              expiredYear={expiredYear}
-              alias={alias}
-              cvc={cvc}
+              card={{ cardName, owner, numbers, expiredMonth, expiredYear, alias, cvc }}
+              deletable
+              onDeleteClick={handleDeleteCard}
             />
           </li>
         ))}

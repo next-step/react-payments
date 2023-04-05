@@ -2,7 +2,10 @@ import { ICard } from './types';
 
 const CARD_STORAGE_KEY = 'enrolled-card-list';
 
-export const getEnrolledCards = () => {
+const compareCards = (card1: ICard, card2: ICard) => card1.numbers.join('') === card2.numbers.join('');
+const getCard = (card: ICard, cards: ICard[]) => cards.find((c) => compareCards(c, card));
+
+export const getSavedCards = () => {
   try {
     const saved = localStorage.getItem(CARD_STORAGE_KEY) || '';
     const enrolled = JSON.parse(saved);
@@ -19,19 +22,45 @@ export const getEnrolledCards = () => {
   }
 };
 
+//TODO: saveCard, removeCard 리팱퉈륑
+
 export const saveCard = (card: ICard) => {
   try {
     const createdAt = { createdAt: new Date().getTime() };
+    const updatedAt = { updatedAt: new Date().getTime() };
 
-    const cards = getEnrolledCards();
-    const compareCards = (card1: ICard, card2: ICard) => card1.numbers.join('') === card2.numbers.join('');
-    const savedCard = cards.find((savedCard) => compareCards(savedCard, card));
+    const cards = getSavedCards();
+    const others = cards.filter((c) => !compareCards(c, card)); //
+    others.sort(({ createdAt: a }, { createdAt: b }) => b - a);
+    const savedCard = getCard(card, cards);
 
     const newCardsList = [
-      ...cards.filter((savedCard) => !compareCards(savedCard, card)),
-      { ...(savedCard || card), ...createdAt },
+      {
+        ...savedCard,
+        ...card,
+        ...(savedCard ? updatedAt : createdAt),
+      },
+      ...others,
     ];
-    localStorage.setItem(CARD_STORAGE_KEY, JSON.stringify(newCardsList));
+
+    localStorage.setItem(CARD_STORAGE_KEY, JSON.stringify(newCardsList)); //
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+export const removeCard = (card: ICard) => {
+  try {
+    const cards = getSavedCards();
+    const savedCard = getCard(card, cards);
+    if (!savedCard) {
+      throw new Error('해당 카드가 저장되어 있지 않습니다');
+    }
+
+    const others = cards.filter((c) => !compareCards(c, card)); //
+    localStorage.setItem(CARD_STORAGE_KEY, JSON.stringify(others)); //
 
     return true;
   } catch (error) {

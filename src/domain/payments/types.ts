@@ -25,4 +25,5 @@ export interface ICard {
   cvc?: TCVC | string;
 
   createdAt?: number;
+  updatedAt?: number;
 }

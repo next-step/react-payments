@@ -58,10 +58,12 @@ const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />;
 export const 클린카드 = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 클린카드.args = {
-  cardName: '하나카드',
-  owner: '홍길동',
-  alias: '나의 하나카드',
-  numbers: ['1234', '4567', '7890', '0123'],
-  expiredMonth: '10',
-  expiredYear: '23',
+  card: {
+    cardName: '하나카드',
+    owner: '홍길동',
+    alias: '나의 하나카드',
+    numbers: ['1234', '4567', '7890', '0123'],
+    expiredMonth: '10',
+    expiredYear: '23',
+  },
 };
