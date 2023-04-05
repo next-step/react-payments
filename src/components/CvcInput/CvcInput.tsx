@@ -24,11 +24,11 @@ function CvcInput(
   });
 
   return (
-    <InputContainer caption="보안코드(CVC/CVV)">
+    <InputContainer caption="보안코드(CVC/CVV)" width={25}>
       <input
         required
         ref={(el: HTMLInputElement) => (refs.current[0] = el)}
-        className="input-basic w-25"
+        className="input-basic"
         type="password"
         maxLength={CVC_MAX_LENGTH}
         onChange={(event) => handleChange(event, 0)}

@@ -4,15 +4,16 @@ type TInputContainerProps = {
   caption: string;
   children: ReactNode;
   width?: number;
+  isTied?: boolean;
 };
 
-function InputContainer({ caption, children, width }: TInputContainerProps) {
+function InputContainer({ caption, children, width, isTied = true }: TInputContainerProps) {
   const inputBoxSizeClass = width ? `w-${width}` : '';
 
   return (
     <div className="input-container">
       <span className="input-title">{caption}</span>
-      <div className={['input-box', inputBoxSizeClass].join(' ').trim()}>{children}</div>
+      {isTied ? <div className={['input-box', inputBoxSizeClass].join(' ').trim()}>{children}</div> : <>{children}</>}
     </div>
   );
 }
