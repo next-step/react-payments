@@ -74,9 +74,13 @@ const CardNumberInput = ({ onChange }: Props) => {
 
     setCardNumbers(nextCardNumbers);
 
-    const isValidPrivateCardNumber = Object.entries(nextCardNumbers).filter(
-      ([index, item]) => (index === '3' || index === '4') && item.length === 4
-    );
+    const isValidPrivateCardNumber =
+      Object.entries(nextCardNumbers).filter(
+        ([index, item]) =>
+          (index === '3' || index === '4') &&
+          item.length === SINGLE_CARD_NUMBER_LENGTH
+      ).length === 2;
+
     isValidPrivateCardNumber && closeVirtualKeyboard();
   };
 
