@@ -65,18 +65,24 @@ const CardNumberInput = ({ onChange }: Props) => {
     const focusedElementName = focus.ref.current
       .name as keyof typeof initialCardNumbers;
 
-    setCardNumbers((prev) => ({
-      ...prev,
+    const nextCardNumbers = {
+      ...cardNumbers,
       [focusedElementName]: cardNumbers[focusedElementName]
         ? cardNumbers[focusedElementName].concat(String(n))
         : String(n),
-    }));
+    };
 
-    const isFullPrivateCardNumber =
-      cardNumbers[3].length === SINGLE_CARD_NUMBER_LENGTH &&
-      cardNumbers[4].length === SINGLE_CARD_NUMBER_LENGTH;
-    isFullPrivateCardNumber && closeVirtualKeyboard();
+    setCardNumbers(nextCardNumbers);
+
+    const isValidPrivateCardNumber = Object.entries(nextCardNumbers).filter(
+      ([index, item]) => (index === '3' || index === '4') && item.length === 4
+    );
+    isValidPrivateCardNumber && closeVirtualKeyboard();
   };
+
+  useEffect(() => {
+    closeVirtualKeyboard();
+  }, []);
 
   useEffect(() => {
     onChange({

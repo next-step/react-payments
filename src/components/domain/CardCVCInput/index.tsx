@@ -32,14 +32,15 @@ const CardCVCInput = ({ onChange }: Props) => {
   const { handleInputChange, dispatch } = useFormContext();
   const [cvc, setCVC] = useState(initialCVC);
 
-  const handleChange = (n: number) => {
-    setCVC((prev) => ({ val: prev.val ? prev.val + String(n) : String(n) }));
-    cvc.val.length === 3 && closeVirtualKeyboard();
-  };
-
   const handleOpen = () => {
     setCVC(initialCVC);
     openVirtualKeyboard();
+  };
+
+  const handleChange = (n: number) => {
+    const nextCVC = cvc.val ? cvc.val + String(n) : String(n);
+    setCVC({ val: nextCVC });
+    nextCVC.length === CVC_MIN_LENGTH && closeVirtualKeyboard();
   };
 
   useEffect(() => {
