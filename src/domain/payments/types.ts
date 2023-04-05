@@ -23,4 +23,6 @@ export interface ICard {
   expiredYear: string;
   password?: string;
   cvc?: TCVC | string;
+
+  createdAt?: number;
 }
