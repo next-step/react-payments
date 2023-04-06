@@ -8,8 +8,12 @@ import { CARD_INPUT } from '../../constants';
 const CARD_NUMBER_EACH_LENGTH = CARD_INPUT.CARD_NUMBER.EACH_LENGTH;
 const CARD_NUMBER_INPUT_TYPES = ['text', 'text', 'password', 'password'];
 
+type TCardNumberInputProps = TCardComponentProps & {
+  values?: string[];
+};
+
 function CardNumberInput(
-  { onChange, onFulfill, nextRef }: TCardComponentProps,
+  { onChange, onFulfill, nextRef, values }: TCardNumberInputProps,
   forwardedRef: ForwardedRef<HTMLInputElement>
 ) {
   const {
@@ -24,6 +28,7 @@ function CardNumberInput(
     onFulfill,
     nextRef,
     forwardedRef,
+    values,
   });
 
   return (
@@ -33,12 +38,12 @@ function CardNumberInput(
           required
           ref={(el: HTMLInputElement) => (refs.current[idx] = el)}
           key={idx}
-          className="input-basic"
+          className="input-basic input-dash"
           type={type}
           maxLength={CARD_NUMBER_EACH_LENGTH}
           onChange={(event) => handleChange(event, idx)}
           onKeyDown={(event) => handleKeyDown(event, idx)}
-          value={cardNumbers[idx]}
+          value={cardNumbers[idx] || ''}
         />
       ))}
     </InputContainer>

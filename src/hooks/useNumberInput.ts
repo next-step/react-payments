@@ -6,6 +6,7 @@ import { leaveOnlyNumbers } from '../util/number';
 type THookNumerInputProps = {
   initValues: string[];
   minLength?: number;
+  values?: string[];
   maxLength: number;
 } & TCardComponentProps;
 
@@ -17,16 +18,29 @@ type THookNumberInputs = {
   handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>, currentIndex: number) => void;
 };
 
+const getFilledInputs = (inputs: string[] = [], maxLength: number) =>
+  inputs.filter((s) => s !== '' && s.length === maxLength);
+const isFulfilled = (inputs: string[], maxLength: number) => {
+  const filledInputs = getFilledInputs(inputs, maxLength);
+
+  return (
+    inputs.length > 0 &&
+    inputs.length === filledInputs.length &&
+    filledInputs.length === maxLength &&
+    filledInputs.every((input) => input.length === maxLength)
+  );
+};
+
 export default ({
   initValues,
-  minLength = 0,
   maxLength,
   onChange,
   onFulfill,
   prevRef,
   nextRef,
   forwardedRef,
-}: THookNumerInputProps): THookNumberInputs => {
+  values,
+}: THookNumerInputProps): /** returns -> */ THookNumberInputs => {
   const [numbers, setNumbers] = useState(initValues);
   const refs = useRef<HTMLInputElement[]>(Array.from({ length: initValues.length }));
 
@@ -39,6 +53,22 @@ export default ({
     }
   }, []);
 
+  useEffect(() => {
+    if (!values) {
+      return;
+    }
+
+    setNumbers(values);
+
+    const nextIndex = Math.floor((values?.join('') || '').length / maxLength);
+    setFocus(refs.current[isFinite(nextIndex) ? nextIndex : 0]);
+
+    if (isFulfilled(values, maxLength)) {
+      onFulfill?.(values);
+      nextRef?.current?.focus();
+    }
+  }, [values]);
+
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>, currentIndex: number) => {
       const value = leaveOnlyNumbers(event.target.value);
@@ -46,8 +76,8 @@ export default ({
       setNumbers(newNumbers);
 
       if (value.length === maxLength) {
-        const nextFocusedRef = refs.current[currentIndex + 1];
-        nextFocusedRef && setFocus(nextFocusedRef);
+        const nextSiblingRef = refs.current[currentIndex + 1];
+        nextSiblingRef && setFocus(nextSiblingRef);
       }
       onChange?.(newNumbers);
     },
@@ -56,7 +86,6 @@ export default ({
 
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>, currentIndex: number) => {
-      //
       const [target, key] = [event.target as HTMLInputElement, event.key];
       const [length, position] = [target.value.length, target.selectionStart];
 
@@ -65,33 +94,16 @@ export default ({
         next: ['ArrowDown', 'ArrowRight', 'Enter'],
       };
 
-      const [prevFocusedRef, nextFocusedRef] = [refs.current[currentIndex - 1], refs.current[currentIndex + 1]];
+      const [prevSiblingRef, nextSiblingRef] = [refs.current[currentIndex - 1], refs.current[currentIndex + 1]];
 
       if (triggerKeys.previous.includes(key) && position === 0) {
-        setFocus(prevFocusedRef || prevRef);
+        setFocus(prevSiblingRef || prevRef);
       } else if (triggerKeys.next.includes(key) && position === length) {
-        setFocus(nextFocusedRef || nextRef);
+        setFocus(nextSiblingRef || nextRef);
       }
     },
     [refs, prevRef, nextRef, setFocus]
   );
 
-  const filledInputs = numbers.filter((s) => s !== '' && s.length === maxLength);
-  const isFulfilled =
-    numbers.length === filledInputs.length &&
-    filledInputs.every((input) => input.length >= minLength && input.length <= maxLength);
-  if (isFulfilled) {
-    setTimeout(() => onFulfill?.(numbers));
-    nextRef?.current?.focus();
-  }
-
   return { numbers, setNumbers, refs, handleChange, handleKeyDown };
 };
-
-/*
-setTimeout...
-  react_devtools_backend.js:2655 Warning:
-  Cannot update a component (`CardEdit`) while rendering a different component (`CardNumberInput`).
-  To locate the bad setState() call inside `CardNumberInput`,
-    follow the stack trace as described in https://reactjs.org/link/setstate-in-render
-*/

@@ -9,7 +9,7 @@ type TFrameProps = {
 
 function Frame({ title, children, onBackClick }: TFrameProps) {
   const handleBack = useCallback(() => {
-    onBackClick && onBackClick();
+    onBackClick?.();
   }, [onBackClick]);
 
   const LeftBack = useCallback(() => {

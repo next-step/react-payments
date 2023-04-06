@@ -1,16 +1,6 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 import { ICard } from '../domain/payments/types';
-
-export const CARD_DEFAULT_VALUE: ICard = {
-  numbers: '1234-1234-1234-1234'.split('-'),
-  cardName: '삼성카드 taptap',
-  expiredMonth: '12',
-  expiredYear: '40',
-  alias: '삼성카드 taptap',
-  cvc: '098',
-  owner: '홍길동',
-  password: '7890',
-};
+import { CARD_DEFAULT_VALUE } from '../constants';
 
 const CardValueContext = createContext<ICard | null>(null);
 const CardValueUpdatingContext = createContext<((card: ICard) => void) | null>(null);

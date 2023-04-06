@@ -11,7 +11,7 @@ function CardList() {
   const { setStep } = useStepContext();
 
   const handleAddCard = useCallback(() => {
-    setStep && setStep(PAYMENTS_STEP.ADD);
+    setStep?.(PAYMENTS_STEP.ADD);
   }, [setStep]);
 
   const handleDeleteCard = useCallback(
@@ -30,10 +30,10 @@ function CardList() {
             +
           </div>
         </li>
-        {cards.map(({ cardName, owner, numbers, expiredMonth, expiredYear, alias, cvc }) => (
+        {cards.map(({ name, owner, numbers, expiredMonth, expiredYear, alias, cvc }) => (
           <li key={numbers.join('')}>
             <Card
-              card={{ cardName, owner, numbers, expiredMonth, expiredYear, alias, cvc }}
+              card={{ name, owner, numbers, expiredMonth, expiredYear, alias, cvc }}
               deletable
               onDeleteClick={handleDeleteCard}
             />

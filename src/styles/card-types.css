@@ -1,0 +1,27 @@
+.palette {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: #fff;
+  z-index: 100;
+}
+
+.palette li {
+  margin-bottom: 16px;
+}
+
+.palette-color {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: blue;
+  margin: 0;
+  padding: 0;
+}
+
+.palette-label {
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 0;
+  padding: 8px 0 0;
+}

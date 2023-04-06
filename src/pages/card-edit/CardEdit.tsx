@@ -12,6 +12,8 @@ import {
 } from '../../domain/payments/validator';
 import '../../styles/input.css';
 import '../../styles/utils.css';
+import { CardTypeModal } from '../../components/CardTypeModal';
+import { ICardType } from '../../domain/payments/types';
 
 function CardEdit() {
   const [cardNumbers, setCardNumbers] = useState<string[]>([]);
@@ -20,11 +22,12 @@ function CardEdit() {
   const [owner, setOwner] = useState('');
   const [cvc, setCvc] = useState('');
   const [pin, setPin] = useState('');
+  const [cardTypeSelected, setCardTypeSelected] = useState(false);
 
   const inputs = [cardNumbers, expiredMonth, expiredYear, owner, cvc, pin];
 
   const { setStep } = useStepContext();
-  const { setCard } = useCardContext();
+  const { card, setCard } = useCardContext();
 
   const refs = {
     cardNumber: useRef<HTMLInputElement>(null),
@@ -34,32 +37,46 @@ function CardEdit() {
     pin: useRef<HTMLInputElement>(null),
   };
 
-  const handleExpired = useCallback(
-    ([expiredMonth, expiredYear]: string[]) => {
-      setExpiredMonth(expiredMonth);
-      setExpiredYear(expiredYear);
-      return;
-    },
-    [expiredMonth, expiredYear]
-  );
+  const handleExpired = useCallback(([expiredMonth, expiredYear]: string[]) => {
+    setExpiredMonth(expiredMonth);
+    setExpiredYear(expiredYear);
+    return;
+  }, []);
 
-  const handleCvc = useCallback(
-    ([newCvc]: string[]) => {
-      setCvc(newCvc);
-    },
-    [cvc]
-  );
+  const handleCvc = useCallback(([newCvc]: string[]) => {
+    setCvc(newCvc);
+  }, []);
 
-  const handlePin = useCallback(
-    (strings: string[]) => {
-      setPin(strings.join(''));
-    },
-    [pin]
-  );
+  const handlePin = useCallback((strings: string[]) => {
+    setPin(strings.join(''));
+  }, []);
 
   const handleBackStep = useCallback(() => {
-    setStep && setStep(PAYMENTS_STEP.LIST);
+    setStep?.(PAYMENTS_STEP.LIST);
   }, [setStep]);
+
+  const handleSelectedCardType = useCallback(
+    (cardType?: ICardType) => {
+      setCardTypeSelected(true);
+      if (!cardType) {
+        return;
+      }
+
+      const { cardName, cardNumberPrefix } = cardType;
+      setCard?.({
+        name: cardName,
+        owner,
+        numbers: cardNumbers,
+        expiredMonth,
+        expiredYear,
+        pin,
+        cvc,
+      });
+
+      setCardNumbers((cardNumbers) => [...cardNumberPrefix, ...cardNumbers.slice(2)]);
+    },
+    [...inputs]
+  );
 
   const handleEnrollStep = useCallback(
     (event: FormEvent) => {
@@ -79,21 +96,20 @@ function CardEdit() {
           ref?.current?.focus();
           event.preventDefault();
           alert(message);
-          return false;
+          return;
         }
       }
 
-      setCard &&
-        setCard({
-          cardName: 'default카드',
-          owner,
-          numbers: cardNumbers,
-          expiredMonth,
-          expiredYear,
-          password: pin,
-          cvc,
-        });
-      setStep && setStep(PAYMENTS_STEP.DONE);
+      setCard?.({
+        name: card?.name,
+        owner,
+        numbers: cardNumbers,
+        expiredMonth,
+        expiredYear,
+        pin,
+        cvc,
+      });
+      setStep?.(PAYMENTS_STEP.DONE);
     },
     [setStep, ...inputs, refs]
   );
@@ -103,7 +119,7 @@ function CardEdit() {
       <Card card={{ owner, expiredMonth, expiredYear, numbers: cardNumbers, cvc }} />
 
       <form onSubmit={handleEnrollStep}>
-        <CardNumberInput ref={refs.cardNumber} nextRef={refs.expired} onChange={setCardNumbers} />
+        <CardNumberInput ref={refs.cardNumber} nextRef={refs.expired} onChange={setCardNumbers} values={cardNumbers} />
         <ExpiredInput ref={refs.expired} nextRef={refs.owner} onChange={handleExpired} />
         <OwnerInput ref={refs.owner} nextRef={refs.cvc} onChange={setOwner} />
         <CvcInput ref={refs.cvc} nextRef={refs.pin} onChange={handleCvc} />
@@ -115,6 +131,7 @@ function CardEdit() {
           </div>
         </div>
       </form>
+      {!cardTypeSelected && <CardTypeModal onClick={handleSelectedCardType} />}
     </Frame>
   );
 }

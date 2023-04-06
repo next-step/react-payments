@@ -9,11 +9,14 @@ const {
 } = CARD_INPUT;
 
 export const isValidCardNumber = (cardNumbers: string[]) => {
-  return cardNumbers.every(
-    //prettier-ignore
-    (input) =>
+  return (
+    cardNumbers.length === CARD_NUMBER.LENGTH &&
+    cardNumbers.every(
+      //prettier-ignore
+      (input) =>
       !isNaN(parseInt(input, 10)) &&
       input.length === CARD_NUMBER.EACH_LENGTH
+    )
   );
 };
 

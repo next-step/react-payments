@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Card } from '../../components/Card';
 import { Frame } from '../../components/Frame';
 import { useCardContext } from '../../context/CardContext';
@@ -19,10 +19,10 @@ function CardDetail() {
 
   const handleConfirm = useCallback(() => {
     try {
-      const savingAlias = alias.length ? alias : card.cardName;
+      const savingAlias = alias.length ? alias : card.name;
       saveCard({ ...card, alias: savingAlias });
 
-      setStep && setStep(PAYMENTS_STEP.LIST);
+      setStep?.(PAYMENTS_STEP.LIST);
     } catch (error) {
       console.error(error);
       alert('알 수 없는 오류가 발생하여 별명을 지정할 수 없었습니다. 다시 시도해 주세요.');

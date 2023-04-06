@@ -9,7 +9,7 @@ export default {
   component: Card,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
-    cardName: {
+    name: {
       name: '카드 이름',
       type: { name: 'string', required: true },
       description: '카드 이름',
@@ -59,7 +59,7 @@ export const 클린카드 = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 클린카드.args = {
   card: {
-    cardName: '하나카드',
+    name: '하나카드',
     owner: '홍길동',
     alias: '나의 하나카드',
     numbers: ['1234', '4567', '7890', '0123'],
