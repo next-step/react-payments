@@ -14,28 +14,16 @@ export const blockInput = (value: string): string => {
 };
 
 export const getBankColor = (bankId: string) => {
-  if (!bankId) {
-    return "";
-  }
-
   const selectedBank = BANKS.find((bank) => bank.ID === bankId);
   return selectedBank ? selectedBank.COLOR : "";
 };
 
 export const getBankId = (firstCardNumber: string) => {
-  if (!firstCardNumber) {
-    return "";
-  }
-
   const selectedBank = BANKS.find((bank) => bank.NUMBER === firstCardNumber);
   return selectedBank ? selectedBank.ID : "";
 };
 
 export const getBankName = (bankId: string) => {
-  if (!bankId) {
-    return "";
-  }
-
   const selectedBank = BANKS.find((bank) => bank.ID === bankId);
   return selectedBank ? selectedBank.NAME : "";
 };
