@@ -1,5 +1,6 @@
 import React, { FormEvent, useCallback, useRef, useState } from 'react';
 import { Card, CardNumberInput, CvcInput, ExpiredInput, Frame, OwnerInput, PinInput } from '../../components';
+import { useCardContext } from '../../context/CardContext';
 import { PAYMENTS_STEP, useStepContext } from '../../context/StepContext';
 import {
   isValidCardNumber,
@@ -23,6 +24,7 @@ function CardEdit() {
   const inputs = [cardNumbers, expiredMonth, expiredYear, owner, cvc, pin];
 
   const { setStep } = useStepContext();
+  const { setCard } = useCardContext();
 
   const refs = {
     cardNumber: useRef<HTMLInputElement>(null),
@@ -81,6 +83,16 @@ function CardEdit() {
         }
       }
 
+      setCard &&
+        setCard({
+          cardName: 'default카드',
+          owner,
+          numbers: cardNumbers,
+          expiredMonth,
+          expiredYear,
+          password: pin,
+          cvc,
+        });
       setStep && setStep(PAYMENTS_STEP.DONE);
     },
     [setStep, ...inputs, refs]

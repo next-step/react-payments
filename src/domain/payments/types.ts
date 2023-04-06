@@ -21,6 +21,6 @@ export interface ICard {
   // 카드 유효성 판별을 위한 정보
   expiredMonth: string;
   expiredYear: string;
-  password?: TCardNumber;
+  password?: string;
   cvc?: TCVC | string;
 }

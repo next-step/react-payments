@@ -6,7 +6,7 @@ import '../../styles/card.css';
 const CARD_VISIBLE_MAX_LENGTH_NAME = 5;
 const CARD_VISIBLE_NUMBER_INDEX = [0, 1];
 
-const convertToEncryptedChars = (s = '') => '•'.repeat(s.length);
+const convertToEncryptedChars = (s = '') => '∙'.repeat(s.length);
 const getViewCardNumbers = (cardNumbers: string[]) => {
   const result: string[] = [];
   return cardNumbers
