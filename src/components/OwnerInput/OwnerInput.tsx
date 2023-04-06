@@ -1,8 +1,10 @@
 import React, { ForwardedRef, forwardRef, useCallback, useState } from 'react';
 import { TCardComponentProps } from '../../domain/payments/types';
 import { InputContainer } from '../InputContainer';
+import { CARD_INPUT } from '../../constants';
 
-const MAX_LENGTH = 30;
+const MAX_LENGTH = CARD_INPUT.OWNER.MAX_LENGTH;
+
 function OwnerInput(
   { onChange, onFulfill, prevRef, nextRef }: TCardComponentProps<string>,
   ref: ForwardedRef<HTMLInputElement>

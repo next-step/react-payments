@@ -2,8 +2,9 @@ import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'rea
 import { TCardComponentProps } from '../../domain/payments/types';
 import { leaveOnlyNumbers } from '../../util/number';
 import { InputContainer } from '../InputContainer';
+import { CARD_INPUT } from '../../constants';
 
-const MAX_LENGTH = 2;
+const { MONTH, YEAR } = CARD_INPUT.EXPIRED;
 const MONTH_CHARACTERS = {
   INVALID_MONTH: '00',
   MIN_MONTH: '01',
@@ -11,7 +12,7 @@ const MONTH_CHARACTERS = {
 };
 
 const isFulfilled = (month: string, year: string) => {
-  return [month, year].every((s) => s?.length === MAX_LENGTH);
+  return month.length === MONTH.LENGTH && year.length === YEAR.LENGTH;
 };
 
 function ExpiredInput(
@@ -33,12 +34,11 @@ function ExpiredInput(
     }
   }, []);
 
-  // TODO: This is the love code... I will trim it later.
   const expiredInputProperties = [
     {
       ref: monthRef,
       placeholder: 'MM',
-      maxLength: MAX_LENGTH,
+      maxLength: MONTH.LENGTH,
       onChange: useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
           const value = event.target.value;
@@ -57,7 +57,7 @@ function ExpiredInput(
             setExpiredMonth(value);
           }
 
-          if (value.length === MAX_LENGTH && yearRef) {
+          if (value.length === MONTH.LENGTH && yearRef) {
             yearRef?.current?.focus();
           }
 
@@ -75,7 +75,7 @@ function ExpiredInput(
     {
       ref: yearRef,
       placeholder: 'YY',
-      maxLength: MAX_LENGTH,
+      maxLength: YEAR.LENGTH,
       onChange: useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
           const value = event.target.value;
@@ -92,7 +92,7 @@ function ExpiredInput(
             return;
           }
 
-          if (value.length === MAX_LENGTH) {
+          if (value.length === YEAR.LENGTH) {
             (event.target.previousSibling as HTMLInputElement)?.focus();
           }
         },

@@ -1,6 +1,14 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { FormEvent, useCallback, useRef, useState } from 'react';
 import { Card, CardNumberInput, CvcInput, ExpiredInput, Frame, OwnerInput, PinInput } from '../../components';
 import { PAYMENTS_STEP, useStepContext } from '../../context/StepContext';
+import {
+  isValidCardNumber,
+  isValidExpiredMonth,
+  isValidExpiredYear,
+  isValidOwner,
+  isValidCvc,
+  isValidPin,
+} from '../../domain/payments/validator';
 import '../../styles/input.css';
 import '../../styles/utils.css';
 
@@ -12,17 +20,9 @@ function CardEdit() {
   const [cvc, setCvc] = useState('');
   const [pin, setPin] = useState('');
 
-  const [passed, setPassed] = useState(false);
   const inputs = [cardNumbers, expiredMonth, expiredYear, owner, cvc, pin];
 
   const { setStep } = useStepContext();
-
-  useEffect(() => {
-    const others = inputs.slice(1);
-    if (cardNumbers.every((s) => s.length) && others.every((input) => input.length)) {
-      setPassed(true);
-    }
-  }, inputs);
 
   const refs = {
     cardNumber: useRef<HTMLInputElement>(null),
@@ -59,20 +59,38 @@ function CardEdit() {
     setStep && setStep(PAYMENTS_STEP.LIST);
   }, [setStep]);
 
-  const handleNextStep = useCallback(() => {
-    if (!passed) {
-      return;
-    }
+  const handleEnrollStep = useCallback(
+    (event: FormEvent) => {
+      //유효성 검사 구간
+      const validations: [boolean, React.RefObject<HTMLInputElement>, string][] = [
+        [isValidCardNumber(cardNumbers), refs.cardNumber, '카드번호가 올바르게 입력되었는지 확인해 주세요'],
+        [isValidExpiredMonth(expiredMonth), refs.expired, '만료 월이 올바르게 입력되었는지 확인해 주세요'],
+        [isValidExpiredYear(expiredYear), refs.expired, '만료 연도가 올바르게 입력되었는지 확인해 주세요'],
+        [isValidOwner(owner), refs.owner, '소유자 이름이 올바르게 입력되었는지 확인해 주세요'],
+        [isValidCvc(cvc), refs.cvc, 'CVC가 올바르게 입력되었는지 확인해 주세요'],
+        [isValidPin(pin), refs.pin, '비밀번호 앞 2자리가 올바르게 입력되었는지 확인해 주세요'],
+      ];
 
-    // nextStep
-    setStep && setStep(PAYMENTS_STEP.DONE);
-  }, [setStep, ...inputs]);
+      // TODO: step2에서 입력 유효성 체크 메시지 출력할 때는 코드가 바뀔 예정이에요 (e.g. Array.prototype.forEach)
+      for (const [isValid, ref, message] of validations) {
+        if (!isValid) {
+          ref?.current?.focus();
+          event.preventDefault();
+          alert(message);
+          return false;
+        }
+      }
+
+      setStep && setStep(PAYMENTS_STEP.DONE);
+    },
+    [setStep, ...inputs, refs]
+  );
 
   return (
     <Frame title="카드 추가" onBackClick={handleBackStep}>
       <Card owner={owner} expiredMonth={expiredMonth} expiredYear={expiredYear} numbers={cardNumbers} cvc={cvc} />
 
-      <form>
+      <form onSubmit={handleEnrollStep}>
         <CardNumberInput ref={refs.cardNumber} nextRef={refs.expired} onChange={setCardNumbers} />
         <ExpiredInput ref={refs.expired} nextRef={refs.owner} onChange={handleExpired} />
         <OwnerInput ref={refs.owner} nextRef={refs.cvc} onChange={setOwner} />
@@ -81,7 +99,7 @@ function CardEdit() {
 
         <div className="button-box">
           <div className="button-text">
-            <button onClick={handleNextStep}>다음</button>
+            <button>다음</button>
           </div>
         </div>
       </form>

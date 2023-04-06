@@ -2,8 +2,9 @@ import React, { ForwardedRef, forwardRef } from 'react';
 import useNumberInput from '../../hooks/useNumberInput';
 import { TCardComponentProps } from '../../domain/payments/types';
 import { InputContainer } from '../InputContainer';
+import { CARD_INPUT } from '../../constants';
 
-const CVC_MAX_LENGTH = 3;
+const CVC_MAX_LENGTH = CARD_INPUT.CVC.LENGTH;
 
 function CvcInput(
   { onChange, onFulfill, prevRef, nextRef }: TCardComponentProps<string[]>,

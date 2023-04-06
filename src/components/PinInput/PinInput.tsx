@@ -3,12 +3,12 @@ import '../../styles/input.css';
 import useNumberInput from '../../hooks/useNumberInput';
 import { TCardComponentProps } from '../../domain/payments/types';
 import { InputContainer } from '../InputContainer';
+import { CARD_INPUT } from '../../constants';
 
+const { LENGTH, EDITABLE_LENGTH } = CARD_INPUT.PIN;
 const EACH_PASSWORD_LENGTH = 1;
-const PASSWORD_LENGTH = 4;
-const EDITABLE_PASSWORD_LENGTH = 2;
 
-const isEditable = (idx: number) => idx < EDITABLE_PASSWORD_LENGTH;
+const isEditable = (idx: number) => idx < EDITABLE_LENGTH;
 
 function PinInput({ onChange, onFulfill }: TCardComponentProps, ref: ForwardedRef<HTMLInputElement>) {
   const {
@@ -19,7 +19,7 @@ function PinInput({ onChange, onFulfill }: TCardComponentProps, ref: ForwardedRe
 
   return (
     <InputContainer caption="카드 비밀번호" isTied={false}>
-      {Array.from({ length: PASSWORD_LENGTH }, (_, idx) => (
+      {Array.from({ length: LENGTH }, (_, idx) => (
         <input
           required
           ref={(el) => (refs.current[idx] = el as HTMLInputElement)}
