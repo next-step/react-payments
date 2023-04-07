@@ -6,7 +6,7 @@ export const INITIAL_CARD_STATE = {
   expiredMonth: '',
   owner: '',
   securityCode: '',
-  password: { first: '', second: '' },
+  passwords: { first: '', second: '' },
 }
 
 export const INITIAL_CARD_LIST_STATE = []

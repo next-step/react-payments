@@ -4,11 +4,48 @@
   align-items: center;
 }
 
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .flex-column-center {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.gap-1 {
+  gap: 0.25rem;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.gap-10 {
+  gap: 2.5rem;
+}
+
+.position-top {
+  position: absolute;
+  top: 25px;
+  left: 20px;
+  right: 20px;
+}
+
+.font-xs {
+  font-size: 0.5rem;
+}
+
+.text-error {
+  color: red;
+}
+
+.mt-1 {
+  margin-top: 0.25rem;
 }
 
 .mt-10 {

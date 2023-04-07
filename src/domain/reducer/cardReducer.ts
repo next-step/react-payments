@@ -44,9 +44,9 @@ const cardReducer = (state: CardInfomation, action: CardAction): CardInfomation 
     case 'SET_PASSWORD':
       return {
         ...state,
-        password: {
-          first: action.payload.first,
-          second: action.payload.second,
+        passwords: {
+          ...state.passwords,
+          ...action.payload,
         },
       }
     case 'SET_ALL':

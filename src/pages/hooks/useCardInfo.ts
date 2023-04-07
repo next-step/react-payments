@@ -23,7 +23,6 @@ const useCardInfo = () => {
 
   const handleNumber = ({ value, order }: HandleNumberProps) => {
     if (!isNumber(value)) return
-    if (value.length > 4) return
     cardDispatch({
       type: 'SET_CARD_NUMBERS',
       payload: {
@@ -64,7 +63,7 @@ const useCardInfo = () => {
     cardDispatch({ type: 'SET_OWNER', payload: value })
   }
 
-  const handleSecurityCode = (value: string) => {
+  const handleSecurityCode = ({ value }: { value: string }) => {
     cardDispatch({
       type: 'SET_SECURITY_CODE',
       payload: value,
@@ -76,16 +75,16 @@ const useCardInfo = () => {
   }
 
   interface HandlePasswordProps {
-    first: string
-    second: string
+    value: string
+    order: 'first' | 'second'
   }
 
-  const handlePassword = ({ first, second }: HandlePasswordProps) => {
+  const handlePassword = ({ value, order }: HandlePasswordProps) => {
+    if (!isNumber(value)) return
     cardDispatch({
       type: 'SET_PASSWORD',
       payload: {
-        first,
-        second,
+        [order]: value,
       },
     })
   }

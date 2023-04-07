@@ -7,8 +7,11 @@ interface CardExpiredDateProps {
   expiredYear: string
 }
 
-export const getCardNumbersDisplay = ({ first, second, third, fourth }: CardNumbers): string =>
-  `${first} - ${second} - ${getConvertedStringsByStars(third)} - ${getConvertedStringsByStars(fourth)}`
+export const getCardNumbersDisplay = ({ first, second, third, fourth }: CardNumbers): string => {
+  return `${first} ${second && '-'} ${second} ${third && '-'} ${getConvertedStringsByStars(third)} ${
+    fourth && '-'
+  } ${getConvertedStringsByStars(fourth)}`
+}
 
 export const getCardExpiredDateDisplay = ({ expiredMonth, expiredYear }: CardExpiredDateProps) =>
-  `${expiredMonth} / ${expiredYear}`
+  `${expiredMonth} ${expiredYear && '/'} ${expiredYear}`

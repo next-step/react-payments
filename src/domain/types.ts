@@ -21,10 +21,11 @@ export type CardExpiredYear = string
 export type CardExpiredMonth = string
 export type CardOwner = string
 export type CardSecurityCode = string
-export type CardPassword = {
-  first: string
-  second: string
+
+export type CardPasswords = {
+  [key in 'first' | 'second']: string
 }
+export type CardPassword = { first: string } | { second?: string }
 
 export type CardAction =
   | {
@@ -76,7 +77,7 @@ export interface CardInfomation {
   expiredMonth: CardExpiredMonth
   owner: CardOwner
   securityCode: CardSecurityCode
-  password: CardPassword
+  passwords: CardPasswords
 }
 
 export type CardListAction =

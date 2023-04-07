@@ -6,7 +6,7 @@ import {
   CardOwner,
   CardSecurityCode,
   CardPassword,
-} from '@/pages/card-add/card-form/components'
+} from '@/pages/CardAdd/components/CardForm/components'
 
 type CardSubElementType =
   | typeof CardNumbers

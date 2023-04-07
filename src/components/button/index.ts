@@ -1,2 +1,2 @@
 export { default as BackButton } from './BackButton'
-export { default as NavigationTextButton } from './NavigationTextButton'
+export { default as NavigationButton } from './NavigationButton'
