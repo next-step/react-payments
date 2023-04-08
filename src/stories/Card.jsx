@@ -1,53 +1,132 @@
-import Btn from './Btn';
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../styles/card.css';
-
+import styled from 'styled-components';
 //👇 컴포넌트의 Docs에서의 설명 부분
 /**
  * Render Card
  */
+const DefaultCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-const Card = ({ isRegistered, cardInfo, size }) => (
-  <>
-    <div className="card-box">
-      {!isRegistered && <Btn to="/regist" children="+" className="empty-card button-box" />}
-      {isRegistered && (
-        <div className={`${size}-card`} style={{ backgroundColor: cardInfo.backgroundColor }}>
-          <div className="card-top">
-            <span className="card-text">{cardInfo.company}</span>
-          </div>
-          <div className="card-middle">
-            <div className="small-card__chip"></div>
-          </div>
-          <div className="card-bottom">
-            <div className="card-bottom__number">
-              <span className="card-text">{cardInfo.number}</span>
-            </div>
-            <div className="card-bottom__info">
-              <span className="card-text">{cardInfo.owner}</span>
-              <span className="card-text">{cardInfo.expiry}</span>
-            </div>
-          </div>
-        </div>
-      )}
+  width: 208px;
+  height: 130px;
+  margin: 10px auto;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.5s;
+  }
+  .card-top {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .card-middle {
+    width: 100%;
+    height: 100%;
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+  }
+
+  .card-bottom {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .card-bottom__number {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-bottom__info {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  &.small-card {
+    .card-text__small {
+      margin: 0 16px;
+      font-size: 14px;
+      line-height: 16px;
+      vertical-align: middle;
+      font-weight: 400;
+    }
+    .small-card__chip {
+      width: 40px;
+      height: 26px;
+      left: 95px;
+      top: 122px;
+      background: #cbba64;
+      border-radius: 4px;
+    }
+  }
+  &.big-card {
+    width: 290px;
+    height: 180px;
+    .card-text__big {
+      margin: 0 16px;
+      font-size: 18px;
+      line-height: 20px;
+    }
+    .big-card__chip {
+      width: 55.04px;
+      height: 35.77px;
+      background: #cbba64;
+      border-radius: 4px;
+      font-size: 24px;
+    }
+  }
+`;
+
+export const Card = ({ cardInfo, size, onClick }) => (
+  <DefaultCard
+    className={`${size}-card`}
+    style={{ backgroundColor: cardInfo.backgroundColor }}
+    onClick={onClick}
+    data-number={cardInfo.number}
+  >
+    <div className="card-top">
+      <span className={`card-text__${size}`}>{cardInfo.company}</span>
     </div>
-    {isRegistered && <span className="card-nickname">{cardInfo.nickname}</span>}
-  </>
+    <div className="card-middle">
+      <div className={`${size}-card__chip`}></div>
+    </div>
+    <div className="card-bottom">
+      <div className="card-bottom__number">
+        <span className={`card-text__${size}`}>{cardInfo.number}</span>
+      </div>
+      <div className="card-bottom__info">
+        <span className={`card-text__${size}`}>{cardInfo.owner}</span>
+        <span className={`card-text__${size}`}>{cardInfo.expiry}</span>
+      </div>
+    </div>
+  </DefaultCard>
 );
-
-export default Card;
 
 // 👇 컴포넌트의 Docs에서의 프로퍼티 설명 부분
 
 Card.propTypes = {
-  isRegistered: PropTypes.bool,
-  cardInfo: PropTypes,
-  size: PropTypes.oneOf(['small', 'big'])
+  cardInfo: PropTypes.object,
+  size: PropTypes.oneOf(['small', 'big']),
+  onClick: PropTypes.func
 };
 
 Card.defaultProps = {
-  isRegistered: false,
   cardInfo: {
     company: '',
     number: '',
@@ -59,5 +138,6 @@ Card.defaultProps = {
     password2: '',
     backgroundColor: '#e5e5e5'
   },
-  size: 'small'
+  size: 'small',
+  onClick: () => alert('clicked!')
 };

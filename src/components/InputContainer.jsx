@@ -1,59 +1,63 @@
 import Input from './Common/Input';
+import styled from 'styled-components';
 
-const InputContainer = ({
-  title,
-  inputList,
-  cardInfo,
-  onChange,
-  inputBoxClass = '',
-  hasBoxClass = true
-}) => {
+const Container = styled.div`
+  margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  .input-title {
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 4px;
+    color: #525252;
+  }
+`;
+const Box = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const InputContainer = ({ title, inputList, cardInfo, onChange }) => {
   return (
-    <div className="input-container">
-      <span className="input-title">{title}</span>
-      {hasBoxClass && (
-        <div className={`input-box ${inputBoxClass}`}>
-          {inputList.map(
-            ({ id, type, maxLength, required, placeholder, ...props }, idx) => (
-              <Input
-                id={id}
-                key={idx}
-                type={type}
-                maxLength={maxLength}
-                required={required}
-                placeholder={placeholder}
-                onChange={onChange}
-                value={cardInfo[id]}
-                {...props}
-              />
-            )
-          )}
-        </div>
-      )}
-      {!hasBoxClass && (
+    <Container>
+      <label className="input-title">{title}</label>
+      {inputList.length > 1 ? (
+        <Box>
+          {inputList.map(({ id, type, maxLength, minLength, required, placeholder, ...props }) => (
+            <Input
+              id={id}
+              key={id}
+              type={type}
+              maxLength={maxLength}
+              minLength={minLength}
+              required={required}
+              placeholder={placeholder}
+              onChange={onChange}
+              value={cardInfo[id]}
+              {...props}
+            />
+          ))}
+        </Box>
+      ) : (
         <>
-          {inputList.map(
-            ({ id, type, maxLength, required, placeholder, ...props }) => (
-              <Input
-                id={id}
-                key={id}
-                type={type}
-                maxLength={maxLength}
-                required={required}
-                placeholder={placeholder}
-                onChange={onChange}
-                value={cardInfo[id]}
-                {...props}
-              />
-            )
-          )}
+          {inputList.map(({ id, type, maxLength, minLength, required, placeholder, ...props }) => (
+            <Input
+              id={id}
+              key={id}
+              type={type}
+              maxLength={maxLength}
+              minLength={minLength}
+              required={required}
+              placeholder={placeholder}
+              onChange={onChange}
+              value={cardInfo[id]}
+              {...props}
+            />
+          ))}
         </>
       )}
-    </div>
+    </Container>
   );
 };
-
-//1. input값 유효성 평가
-//2. input 내역 정리하기..
 
 export default InputContainer;

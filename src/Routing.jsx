@@ -5,43 +5,42 @@ import { Routes, Route } from 'react-router-dom';
 import usePayment from './hooks/usePayment';
 import CardSave from './pages/CardSave';
 import useRoute from './hooks/useRoute';
+import Error from './pages/Error';
 
 const Routing = () => {
   const {
-    cardInfo,
-    handleCardInfoInput,
+    handleInputChange,
     handleSave,
     handleSubmit,
-    cardList,
     cardCompanyList,
-    handleResetCardInfo,
-    setCardInfo
+    resetCardInfo,
+    deleteCardList
   } = usePayment();
 
   const { movePage } = useRoute();
 
   return (
     <Routes>
-      <Route path={PATH.HOME} element={<CardList cardList={cardList} movePage={movePage} />} />
+      <Route
+        path={PATH.HOME}
+        element={<CardList movePage={movePage} onDelete={deleteCardList} />}
+      />
       <Route
         path={PATH.REGIST}
         element={
           <CardRegist
-            cardInfo={cardInfo}
-            onChange={handleCardInfoInput}
+            onChange={handleInputChange}
             onSubmit={handleSubmit}
             cardCompanyList={cardCompanyList}
-            setCardInfo={setCardInfo}
-            onReset={handleResetCardInfo}
+            onReset={resetCardInfo}
           />
         }
       />
       <Route
         path={PATH.SAVE}
-        element={
-          <CardSave onSave={handleSave} cardInfo={cardInfo} onChange={handleCardInfoInput} />
-        }
+        element={<CardSave onSave={handleSave} onChange={handleInputChange} />}
       />
+      <Route path="*" element={<Error />} />
     </Routes>
   );
 };

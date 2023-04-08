@@ -7,13 +7,12 @@ const useRoute = () => {
 
   const movePage = (path) => {
     if (!path || !Object.values(PATH).includes(path)) {
-      console.log('Invalid path');
-      return false;
+      throw new Error('Invalid path');
     }
     navigate(path);
   };
-
-  const movePrevPage = (evt) => {
+  const movePrevPage = () => {
+    // TODO: 엣지 케이스 처리
     if (currentPage !== PATH.HOME) navigate(-1);
   };
 

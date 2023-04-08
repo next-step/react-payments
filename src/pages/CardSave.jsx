@@ -1,25 +1,35 @@
 import Card from '../components/Card';
 import Button from '../components/Common/Button';
 import Input from '../components/Common/Input';
+import { usePaymentContext } from '../Context';
+import styled from 'styled-components';
 
-const CardSave = ({ cardInfo, onSave, onChange }) => {
+const UnderLineInput = styled(Input)`
+  background: none;
+  outline: none;
+  margin: 16px 0;
+  padding: 4px 0;
+  border: none !important;
+  border-bottom: 1px solid #383838 !important;
+`;
+
+const CardSave = ({ onSave, onChange }) => {
+  const { cardInfo } = usePaymentContext();
   return (
     <main className="flex-column-center">
-      <div className="flex-center">
-        <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
-      </div>
       <Card cardInfo={cardInfo} size="big" />
       <div className="input-container flex-center w-100">
-        <Input
+        <UnderLineInput
           id="nickname"
           type="text"
-          placeholder="카드의 별칭을 입력해주세요."
-          className="input-underline w-75"
+          placeholder="카드의 별칭을 입력해주세요.(선택)"
+          className="w-75"
+          maxLength={10}
           value={cardInfo.nickname}
           onChange={onChange}
         />
       </div>
-      <Button className="button-box registor-button" children="다음" onClick={onSave} />
+      <Button children="다음" onClick={onSave} />
     </main>
   );
 };

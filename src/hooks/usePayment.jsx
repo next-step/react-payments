@@ -1,95 +1,82 @@
-import { useState } from 'react';
 import useRoute from './useRoute';
-import { PATH } from '../Constant';
-import { checkValidInputValue, cleanNaNValue, formatInputValue } from '../utils/inputValue';
+import { PATH, DEFAULT_CARD_INFO } from '../Constant';
+import { usePaymentContext, usePaymentAction } from '../Context';
+import {
+  cleanNaNValue,
+  formatInputValue,
+  isDigitInputValue,
+  isInvalidExpiry
+} from '../utils/inputValue';
+import { assert } from '../utils/validation';
 
-const defaultCardInfo = {
-  company: '',
-  number: '',
-  owner: '',
-  expiry: '',
-  nickname: '',
-  cvc: '',
-  password1: '',
-  password2: '',
-  backgroundColor: '#e5e5e5'
-};
-
-const cardCompanyList = [
-  {
-    company: '포코카드',
-    backgroundColor: 'red'
-  },
-  {
-    company: '준카드',
-    backgroundColor: 'palegreen'
-  },
-  {
-    company: '혜원카드',
-    backgroundColor: 'skyblue'
-  },
-  {
-    company: '윤호카드',
-    backgroundColor: 'yellow'
-  }
-  // {
-  //   company: "다빈카드",
-  //   backgroundColor: "pink",
-  // },
-  // {
-  //   company: "나나카드",
-  //   backgroundColor: "yellowgreen",
-  // },
-  // {
-  //   company: "치치카드",
-  //   backgroundColor: "plum",
-  // },
-  // {
-  //   company: "사나카드",
-  //   backgroundColor: "lightseagreen",
-  // },
-  // {
-  //   company: "랄랄카드",
-  //   backgroundColor: "burlywood",
-  // },
-];
 const usePayment = () => {
-  const [cardInfo, setCardInfo] = useState(defaultCardInfo);
-  const [cardList, setCardList] = useState([]);
+  const { cardInfo, cardList } = usePaymentContext();
+  const { setCardInfo, setCardList } = usePaymentAction();
   const { movePage } = useRoute();
 
-  const handleCardInfoInput = (evt) => {
+  const handleInputChange = (evt) => {
     let { value, id } = evt.target;
-    if (!checkValidInputValue(value, id)) {
-      alert('숫자만 입력가능합니다.');
+    if (!isDigitInputValue(value, id)) {
+      alert('숫자만 입력 가능합니다\n입력값을 확인해주세요!');
       value = cleanNaNValue(value);
     }
-    setCardInfo({ ...cardInfo, [id]: formatInputValue(value, id) });
+    setCardInfo((cardInfo) => ({ ...cardInfo, [id]: formatInputValue(value, id) }));
   };
 
-  const handleResetCardInfo = () => {
-    setCardInfo(defaultCardInfo);
+  const resetCardInfo = () => {
+    setCardInfo(DEFAULT_CARD_INFO);
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    movePage(PATH.SAVE);
+    if (isInvalidExpiry(cardInfo)) alert('유효하지 않은 입력값이 있습니다\n입력값을 확인해주세요!');
+    else movePage(PATH.SAVE);
+  };
+
+  const updateCardList = (updateIdx) => {
+    if (!cardList.includes(cardInfo)) {
+      assert(() => updateIdx === null || updateIdx === undefined, 'Not allowed idx');
+      setCardList(
+        cardList.map((prevCardInfo, idx) => {
+          if (idx === updateIdx) return { ...cardInfo };
+          return prevCardInfo;
+        })
+      );
+    }
+    resetCardInfo();
+  };
+
+  const insertCardList = () => {
+    if (cardList.includes(cardInfo)) alert('중복된 카드 등록은 허용되지 않습니다.');
+    setCardList((cardList) => [cardInfo, ...cardList]);
+    resetCardInfo();
+  };
+
+  const deleteCardList = (evt) => {
+    const deleteCardElement = evt.target.closest('div');
+    const { number } = deleteCardElement.dataset;
+    assert(() => number === null || number === undefined, 'Not allowed Delete');
+    setCardList((cardList) => cardList.filter((prevCardInfo) => prevCardInfo.number !== number));
   };
 
   const handleSave = () => {
-    setCardList([...cardList, cardInfo]);
+    // if (!cardInfo['nickname'])
+    //   setCardInfo((cardInfo) => ({ ...cardInfo, nickname: cardInfo['company'] }));
+    //TODO: 닉네임 자동저장, 빈 cardInfo save 막기
+    const updateCardInfoIdx = cardList.findIndex(
+      (existCardInfo) => existCardInfo.number === cardInfo.number
+    );
+    if (updateCardInfoIdx !== -1) updateCardList(updateCardInfoIdx);
+    else insertCardList();
     movePage(PATH.HOME);
   };
 
   return {
-    cardInfo,
-    handleCardInfoInput,
+    handleInputChange,
     handleSave,
-    cardList,
-    cardCompanyList,
     handleSubmit,
-    setCardInfo,
-    handleResetCardInfo
+    resetCardInfo,
+    deleteCardList
   };
 };
 

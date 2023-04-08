@@ -3,9 +3,13 @@ import CardSelectPopup from '../components/CardSelectPopup';
 import Button from '../components/Common/Button';
 import InputContainer from '../components/InputContainer';
 import { useEffect, useState } from 'react';
+import { usePaymentContext, usePaymentAction } from '../Context';
+import { CARD_COMPANY_LIST } from '../Constant';
 
-const CardRegist = ({ cardInfo, onChange, onSubmit, cardCompanyList, setCardInfo, onReset }) => {
+const CardRegist = ({ onChange, onSubmit, onReset }) => {
   const [isShowPopup, setIsShowPopup] = useState(true);
+  const { cardInfo } = usePaymentContext();
+  const { setCardInfo } = usePaymentAction();
 
   useEffect(() => {
     onReset();
@@ -25,7 +29,7 @@ const CardRegist = ({ cardInfo, onChange, onSubmit, cardCompanyList, setCardInfo
   };
   return (
     <main>
-      <Card cardInfo={cardInfo} />
+      <Card cardInfo={cardInfo} onClick={() => setIsShowPopup(true)} />
       <form onSubmit={onSubmit}>
         <InputContainer
           title="카드번호"
@@ -34,6 +38,7 @@ const CardRegist = ({ cardInfo, onChange, onSubmit, cardCompanyList, setCardInfo
               id: 'number',
               type: 'text',
               maxLength: 19,
+              minLength: 19,
               required: true
             }
           ]}
@@ -47,13 +52,14 @@ const CardRegist = ({ cardInfo, onChange, onSubmit, cardCompanyList, setCardInfo
               id: 'expiry',
               type: 'text',
               maxLength: 5,
+              minLength: 5,
               required: true,
-              placeholder: 'MM/YY'
+              placeholder: 'MM/YY',
+              className: 'w-50'
             }
           ]}
           cardInfo={cardInfo}
           onChange={onChange}
-          inputBoxClass="w-50"
         />
         <InputContainer
           title="카드 소유자 이름(선택)"
@@ -76,12 +82,13 @@ const CardRegist = ({ cardInfo, onChange, onSubmit, cardCompanyList, setCardInfo
               id: 'cvc',
               type: 'password',
               maxLength: 3,
-              required: true
+              minLength: 3,
+              required: true,
+              className: 'w-25'
             }
           ]}
           cardInfo={cardInfo}
           onChange={onChange}
-          inputBoxClass="w-25"
         />
         <InputContainer
           title="카드 비밀번호"
@@ -103,12 +110,11 @@ const CardRegist = ({ cardInfo, onChange, onSubmit, cardCompanyList, setCardInfo
           ]}
           cardInfo={cardInfo}
           onChange={onChange}
-          hasBoxClass={false}
         />
-        <Button className="button-box registor-button" children="다음"></Button>
+        <Button className="button-box button" children="다음"></Button>
       </form>
       {isShowPopup && (
-        <CardSelectPopup cardCompanyList={cardCompanyList} onClick={handlePopupClick} />
+        <CardSelectPopup cardCompanyList={CARD_COMPANY_LIST} onClick={handlePopupClick} />
       )}
     </main>
   );
