@@ -3,15 +3,15 @@ export type WithChild = {
 };
 export type StrictPropsWithChildren<P = unknown> = P & WithChild;
 export type CardNumber = {
+  0: string;
   1: string;
   2: string;
   3: string;
-  4: string;
 };
 
 export type Password = {
+  0: string;
   1: string;
-  2: string;
 };
 
 export type ExpireDate = {

@@ -18,8 +18,8 @@ export const CardRegister = () => {
   const { getFormData, handleFormInput } = useFormContext();
   const form = getFormData().current as CardFormType;
   const isFullPublicCardNumber =
-    form?.CARD_NUMBERS?.[1]?.length === 4 &&
-    form?.CARD_NUMBERS?.[2]?.length === 4;
+    form?.CARD_NUMBERS?.[0]?.length === 4 &&
+    form?.CARD_NUMBERS?.[1]?.length === 4;
 
   const {
     isOpen: open,
@@ -47,7 +47,7 @@ export const CardRegister = () => {
   useEffect(() => {
     if (isFullPublicCardNumber) {
       const guessedCardCompany = guessCardCompanyByCardNumber(
-        form.CARD_NUMBERS[1]
+        form.CARD_NUMBERS[0]
       );
 
       handleFormInput(

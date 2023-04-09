@@ -13,10 +13,10 @@ type Props = {
   onChange: <T>(value: T) => void;
 };
 const initialCardNumbers = {
+  0: '',
   1: '',
   2: '',
   3: '',
-  4: '',
 };
 
 const CardNumberInput = ({ onChange }: Props) => {
@@ -25,16 +25,20 @@ const CardNumberInput = ({ onChange }: Props) => {
   const [cardNumbers, setCardNumbers] = useState(initialCardNumbers);
   const keyPressInterceptor = useNumberKeyInterceptor();
 
-  const cardNumberRef = {
-    1: useRef<HTMLInputElement>(null),
-    2: useRef<HTMLInputElement>(null),
-    3: useRef<HTMLInputElement>(null),
-    4: useRef<HTMLInputElement>(null),
-  };
+  const cardNumberRef = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
 
   const FormData = getFormData().current as CardData;
   const { focusOnTarget, target, focus } = useFocus({
     values: [
+      {
+        value: FormData?.CARD_NUMBERS?.[0],
+        ref: cardNumberRef[0],
+      },
       {
         value: FormData?.CARD_NUMBERS?.[1],
         ref: cardNumberRef[1],
@@ -46,10 +50,6 @@ const CardNumberInput = ({ onChange }: Props) => {
       {
         value: FormData?.CARD_NUMBERS?.[3],
         ref: cardNumberRef[3],
-      },
-      {
-        value: FormData?.CARD_NUMBERS?.[4],
-        ref: cardNumberRef[4],
       },
     ],
     maxLength: SINGLE_CARD_NUMBER_LENGTH,
@@ -77,7 +77,7 @@ const CardNumberInput = ({ onChange }: Props) => {
     const isValidPrivateCardNumber =
       Object.entries(nextCardNumbers).filter(
         ([index, item]) =>
-          (index === '3' || index === '4') &&
+          (index === '2' || index === '3') &&
           item.length === SINGLE_CARD_NUMBER_LENGTH
       ).length === 2;
 
@@ -107,9 +107,9 @@ const CardNumberInput = ({ onChange }: Props) => {
         onBlur={makeDirty}
       >
         <input
-          ref={cardNumberRef[1]}
+          ref={cardNumberRef[0]}
           type="tel"
-          name="1"
+          name="0"
           placeholder="1234"
           maxLength={SINGLE_CARD_NUMBER_LENGTH}
           onKeyPress={keyPressInterceptor}
@@ -118,12 +118,22 @@ const CardNumberInput = ({ onChange }: Props) => {
           autoFocus
         />
         <input
-          ref={cardNumberRef[2]}
+          ref={cardNumberRef[1]}
           type="tel"
-          name="2"
+          name="1"
           placeholder="1234"
           maxLength={SINGLE_CARD_NUMBER_LENGTH}
           onKeyPress={keyPressInterceptor}
+          onChange={handleInputChange(setCardNumbers)}
+        />
+        <input
+          type="password"
+          name="2"
+          placeholder="****"
+          maxLength={SINGLE_CARD_NUMBER_LENGTH}
+          ref={cardNumberRef[2]}
+          value={cardNumbers[2]}
+          onFocus={handleOpen}
           onChange={handleInputChange(setCardNumbers)}
         />
         <input
@@ -133,16 +143,6 @@ const CardNumberInput = ({ onChange }: Props) => {
           maxLength={SINGLE_CARD_NUMBER_LENGTH}
           ref={cardNumberRef[3]}
           value={cardNumbers[3]}
-          onFocus={handleOpen}
-          onChange={handleInputChange(setCardNumbers)}
-        />
-        <input
-          type="password"
-          name="4"
-          placeholder="****"
-          maxLength={SINGLE_CARD_NUMBER_LENGTH}
-          ref={cardNumberRef[4]}
-          value={cardNumbers[4]}
           onFocus={handleOpen}
           onChange={handleInputChange(setCardNumbers)}
         />

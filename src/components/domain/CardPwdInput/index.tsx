@@ -28,14 +28,14 @@ const CardPwdInput = ({ onChange }: Props) => {
     >
       <input
         type="password"
-        name="1"
+        name="0"
         onKeyPress={keyPressInterceptor}
         onChange={handleInputChange(setPwd)}
         maxLength={1}
       />
       <input
         type="password"
-        name="2"
+        name="1"
         onKeyPress={keyPressInterceptor}
         onChange={handleInputChange(setPwd)}
         maxLength={1}
