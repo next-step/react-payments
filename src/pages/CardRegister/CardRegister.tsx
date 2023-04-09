@@ -1,16 +1,26 @@
+import { useEffect } from 'react';
+
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { CardCompanyModal } from '@/components/domain';
 import { CardForm } from '@/components/domain';
 import { Button, CreditCard } from '@/components/UI';
-import { useModal } from '@/components/UI/Modal';
+import { useBooleanState } from '@/hooks/useBooleanState';
 import { useRouter } from '@/hooks/useRouter';
 import { createCard } from '@/storage/service';
-import { type CardFormType, CardData, CardKey } from '@/types';
+import {
+  type CardFormType,
+  CardCompanyValues,
+  CardData,
+  CardKey,
+} from '@/types';
 
 export const CardRegister = () => {
   const { getFormData, handleFormInput } = useFormContext();
+  const [isOpenModal, openModal, closeModal] = useBooleanState();
   const form = getFormData().current as CardFormType;
-  const { isOpen: open, open: handleOpen, close: handleClose } = useModal();
+  const isFullPublicCardNumber =
+    form?.CARD_NUMBERS?.[0]?.length === 4 &&
+    form?.CARD_NUMBERS?.[1]?.length === 4;
 
   const { go } = useRouter();
 
@@ -29,13 +39,22 @@ export const CardRegister = () => {
     go('/register-confirm');
   };
 
+  useEffect(() => {
+    if (isFullPublicCardNumber) {
+      const guessedCardCompany = guessCardCompanyByCardNumber(
+        form.CARD_NUMBERS[0]
+      );
+
+      handleFormInput(
+        getFormData(),
+        CardKey.CARD_COMPANY
+      )({ val: guessedCardCompany, isValid: true });
+    }
+  }, [isFullPublicCardNumber]);
+
   return (
     <>
-      <CreditCard
-        size="large"
-        cardInfo={cardDisplayInfo}
-        onClick={handleOpen}
-      />
+      <CreditCard size="large" cardInfo={cardDisplayInfo} onClick={openModal} />
       <CardForm />
       <Button
         css={{ position: 'absolute', bottom: '$5', width: '$11' }}
@@ -44,9 +63,9 @@ export const CardRegister = () => {
       >
         추가하기
       </Button>
-      {open && (
+      {isOpenModal && (
         <CardCompanyModal
-          onClose={handleClose}
+          onClose={closeModal}
           onChange={handleFormInput(getFormData(), CardKey.CARD_COMPANY)}
         />
       )}
@@ -68,4 +87,18 @@ const generateCardObj = (form: CardFormType) => {
     [CardKey.UID]: Date.now(),
     [CardKey.CREATE_DATE]: Date.now(),
   };
+};
+
+export const guessCardCompanyByCardNumber = (cardNumber: string) => {
+  const firstNumber = cardNumber[0];
+  return {
+    1: CardCompanyValues.PC,
+    2: CardCompanyValues.JUN,
+    3: CardCompanyValues.HS,
+    4: CardCompanyValues.YH,
+    5: CardCompanyValues.HO,
+    6: CardCompanyValues.TE,
+    7: CardCompanyValues.JI,
+    8: CardCompanyValues.EK,
+  }[firstNumber];
 };

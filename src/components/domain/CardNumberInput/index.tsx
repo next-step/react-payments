@@ -1,19 +1,88 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
+import VirtualKeyboard from '@/components/UI/VirtualKeyboard';
 import { useBlur } from '@/hooks/useBlur';
+import { useBooleanState } from '@/hooks/useBooleanState';
+import useFocus from '@/hooks/useFocus';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
+import type { CardData } from '@/types';
 
 type Props = {
   onChange: <T>(value: T) => void;
 };
+const initialCardNumbers = {
+  0: '',
+  1: '',
+  2: '',
+  3: '',
+};
 
 const CardNumberInput = ({ onChange }: Props) => {
   const { dirtyState, makeDirty } = useBlur();
-  const { dispatch, handleInputChange } = useFormContext();
-  const [cardNumbers, setCardNumbers] = useState({});
+  const { dispatch, handleInputChange, getFormData } = useFormContext();
+  const [cardNumbers, setCardNumbers] = useState(initialCardNumbers);
+  const [isOpenVirtualKeyboard, openVirtualKeyboard, closeVirtualKeyboard] =
+    useBooleanState();
   const keyPressInterceptor = useNumberKeyInterceptor();
+
+  const cardNumberRef = [
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+    useRef<HTMLInputElement>(null),
+  ];
+
+  const FormData = getFormData().current as CardData;
+  const { focusOnTarget, target, focus } = useFocus({
+    values: [
+      {
+        value: FormData?.CARD_NUMBERS?.[0],
+        ref: cardNumberRef[0],
+      },
+      {
+        value: FormData?.CARD_NUMBERS?.[1],
+        ref: cardNumberRef[1],
+      },
+      {
+        value: FormData?.CARD_NUMBERS?.[2],
+        ref: cardNumberRef[2],
+      },
+      {
+        value: FormData?.CARD_NUMBERS?.[3],
+        ref: cardNumberRef[3],
+      },
+    ],
+    maxLength: SINGLE_CARD_NUMBER_LENGTH,
+  });
+
+  const handleChange = (n: number) => {
+    const focusedElementName = focus.ref.current
+      .name as keyof typeof initialCardNumbers;
+
+    const nextCardNumbers = {
+      ...cardNumbers,
+      [focusedElementName]: cardNumbers[focusedElementName]
+        ? cardNumbers[focusedElementName].concat(String(n))
+        : String(n),
+    };
+
+    setCardNumbers(nextCardNumbers);
+
+    const isValidPrivateCardNumber =
+      Object.entries(nextCardNumbers).filter(
+        ([index, item]) =>
+          (index === '2' || index === '3') &&
+          item.length === SINGLE_CARD_NUMBER_LENGTH
+      ).length === 2;
+
+    isValidPrivateCardNumber && closeVirtualKeyboard();
+  };
+
+  useEffect(() => {
+    closeVirtualKeyboard();
+  }, []);
 
   useEffect(() => {
     onChange({
@@ -22,6 +91,8 @@ const CardNumberInput = ({ onChange }: Props) => {
     });
     dispatch();
   }, [cardNumbers]);
+
+  focusOnTarget(target);
 
   return (
     <>
@@ -32,44 +103,59 @@ const CardNumberInput = ({ onChange }: Props) => {
         onBlur={makeDirty}
       >
         <input
+          ref={cardNumberRef[0]}
           type="tel"
-          name="1"
+          name="0"
           placeholder="1234"
-          maxLength={4}
+          maxLength={SINGLE_CARD_NUMBER_LENGTH}
           onKeyPress={keyPressInterceptor}
           onChange={handleInputChange(setCardNumbers)}
           required
+          autoFocus
         />
         <input
+          ref={cardNumberRef[1]}
           type="tel"
-          name="2"
+          name="1"
           placeholder="1234"
-          maxLength={4}
+          maxLength={SINGLE_CARD_NUMBER_LENGTH}
           onKeyPress={keyPressInterceptor}
+          onChange={handleInputChange(setCardNumbers)}
+        />
+        <input
+          type="password"
+          name="2"
+          placeholder="****"
+          maxLength={SINGLE_CARD_NUMBER_LENGTH}
+          ref={cardNumberRef[2]}
+          value={cardNumbers[2]}
+          onFocus={openVirtualKeyboard}
           onChange={handleInputChange(setCardNumbers)}
         />
         <input
           type="password"
           name="3"
           placeholder="****"
-          maxLength={4}
-          onKeyPress={keyPressInterceptor}
-          onChange={handleInputChange(setCardNumbers)}
-        />
-        <input
-          type="password"
-          name="4"
-          placeholder="****"
-          maxLength={4}
-          onKeyPress={keyPressInterceptor}
+          maxLength={SINGLE_CARD_NUMBER_LENGTH}
+          ref={cardNumberRef[3]}
+          value={cardNumbers[3]}
+          onFocus={openVirtualKeyboard}
           onChange={handleInputChange(setCardNumbers)}
         />
       </InputContainer>
+      {isOpenVirtualKeyboard && (
+        <VirtualKeyboard
+          onClose={closeVirtualKeyboard}
+          onChange={handleChange}
+        />
+      )}
     </>
   );
 };
 
 export default CardNumberInput;
+
+const SINGLE_CARD_NUMBER_LENGTH = 4;
 
 const ERROR_MESSAGE = {
   ONLY_NUMBER: '카드번호는 숫자만 입력할 수 있습니다.',

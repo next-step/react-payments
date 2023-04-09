@@ -1,57 +1,105 @@
-import { useEffect, useState } from 'react';
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
 import { useBlur } from '@/hooks/useBlur';
+import useFocus from '@/hooks/useFocus';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
-import { type ExpireDate } from '@/types';
+import type { CardData, ExpireDate } from '@/types';
+
 type Props = {
   onChange: <T>(value: T) => void;
 };
 
-const ExpiredDateInput = ({ onChange }: Props) => {
-  const { dirtyState, makeDirty } = useBlur();
-  const { dispatch, handleInputChange } = useFormContext();
-  const [expiredDate, setExpiredDate] = useState({});
-  const numberKeyPressInterceptor = useNumberKeyInterceptor();
-
-  useEffect(() => {
-    onChange({
-      ...expiredDate,
-      isValid: !getErrorMessage(expiredDate),
-    });
-    dispatch();
-  }, [expiredDate]);
-
-  return (
-    <InputContainer
-      label="만료일"
-      isError={dirtyState && Boolean(getErrorMessage(expiredDate))}
-      errorMessage={getErrorMessage(expiredDate)}
-      onBlur={makeDirty}
-    >
-      <input
-        type="tel"
-        placeholder="MM"
-        name="month"
-        min={1}
-        maxLength={2}
-        onKeyPress={numberKeyPressInterceptor}
-        onChange={handleInputChange(setExpiredDate)}
-      />
-      /
-      <input
-        type="tel"
-        placeholder="YY"
-        name="year"
-        min={1}
-        maxLength={2}
-        onKeyPress={numberKeyPressInterceptor}
-        onChange={handleInputChange(setExpiredDate)}
-      />
-    </InputContainer>
-  );
+export type ExpireDateHandle = {
+  focusOnExpiredDate: () => void;
 };
+
+const ExpiredDateInput = forwardRef<ExpireDateHandle, Props>(
+  ({ onChange }, _ref) => {
+    const { dirtyState, makeDirty } = useBlur();
+    const { dispatch, handleInputChange, getFormData } = useFormContext();
+    const FormData = getFormData().current as CardData;
+
+    const expiredDateRef = {
+      month: useRef<HTMLInputElement>(null),
+      year: useRef<HTMLInputElement>(null),
+    };
+
+    const [expiredDate, setExpiredDate] = useState({});
+    const numberKeyPressInterceptor = useNumberKeyInterceptor();
+    const { focusOnTarget, target } = useFocus({
+      values: [
+        {
+          value: FormData?.EXPIRE_DATE?.month,
+          ref: expiredDateRef.month,
+        },
+        {
+          value: FormData?.EXPIRE_DATE?.year,
+          ref: expiredDateRef.year,
+        },
+      ],
+      maxLength: 2,
+    });
+
+    useImperativeHandle(
+      _ref,
+      () => {
+        return {
+          focusOnExpiredDate: () => {
+            focusOnTarget(target);
+          },
+        };
+      },
+      []
+    );
+
+    useEffect(() => {
+      onChange({
+        ...expiredDate,
+        isValid: !getErrorMessage(expiredDate),
+      });
+      dispatch();
+    }, [expiredDate]);
+
+    return (
+      <InputContainer
+        label="만료일"
+        isError={dirtyState && Boolean(getErrorMessage(expiredDate))}
+        errorMessage={getErrorMessage(expiredDate)}
+        onBlur={makeDirty}
+      >
+        <input
+          ref={expiredDateRef.month}
+          type="tel"
+          placeholder="MM"
+          name="month"
+          min={1}
+          maxLength={2}
+          onKeyPress={numberKeyPressInterceptor}
+          onChange={handleInputChange(setExpiredDate)}
+        />
+        /
+        <input
+          ref={expiredDateRef.year}
+          type="tel"
+          placeholder="YY"
+          name="year"
+          min={1}
+          maxLength={2}
+          onKeyPress={numberKeyPressInterceptor}
+          onChange={handleInputChange(setExpiredDate)}
+        />
+      </InputContainer>
+    );
+  }
+);
 
 export default ExpiredDateInput;
 

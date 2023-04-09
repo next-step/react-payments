@@ -19,10 +19,10 @@ type Props = {
 
 export const DefaultCardInfo: Props['cardInfo'] = {
   CARD_NUMBERS: {
+    0: '',
     1: '',
     2: '',
     3: '',
-    4: '',
   },
   OWNER_NAME: {
     val: '',

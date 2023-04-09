@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 import { useFormContext } from '@/components/common/Form/FormContext';
 import {
   CardCVCInput,
@@ -7,11 +9,24 @@ import {
   ExpiredDateInput,
 } from '@/components/domain';
 import { Box } from '@/components/UI';
-import { CardKey } from '@/types';
+import { type CardFormType, CardKey } from '@/types';
+
+import { type ExpireDateHandle } from '../ExpiredDateInput';
 
 const CardForm = () => {
   const { getFormData, handleFormInput } = useFormContext();
   const formData = getFormData();
+  const currentFormData = formData.current as CardFormType;
+  const expireDateInputRef = useRef<ExpireDateHandle>(null);
+  const isCardNumberAndCompanyValid =
+    currentFormData.CARD_NUMBERS?.isValid &&
+    currentFormData.CARD_COMPANY?.isValid;
+
+  useEffect(() => {
+    if (isCardNumberAndCompanyValid) {
+      expireDateInputRef.current?.focusOnExpiredDate();
+    }
+  }, [isCardNumberAndCompanyValid]);
 
   return (
     <Box css={{ paddingTop: '2rem' }}>
@@ -19,6 +34,7 @@ const CardForm = () => {
         onChange={handleFormInput(formData, CardKey.CARD_NUMBERS)}
       />
       <ExpiredDateInput
+        ref={expireDateInputRef}
         onChange={handleFormInput(formData, CardKey.EXPIRE_DATE)}
       />
       <CardOwnerInput

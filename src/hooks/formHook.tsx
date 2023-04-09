@@ -4,22 +4,16 @@ function handleInputChange<T>(setValue: Dispatch<SetStateAction<T>>) {
   return (event: ChangeEvent<HTMLInputElement>) => {
     event.persist();
     const { value, name } = event.target;
-    setValue((prev: T): T => {
-      if (isObjectState(prev)) {
-        return {
-          ...prev,
-          [name]: value,
-        };
-      }
-      if (isStringState(prev)) {
-        return value as unknown as T;
-      }
-      return prev;
+    setValue((prev: T) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
     });
   };
 }
 
-export const handleFormInput = <T extends object>(
+export const handleFormInput = <T,>(
   formData: React.MutableRefObject<T>,
   key: string
 ) => {

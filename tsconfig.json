@@ -15,7 +15,10 @@
     "isolatedModules": false,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node"],
+    "types": [
+      "node",
+      "vite-plugin-svgr/client"
+    ],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
