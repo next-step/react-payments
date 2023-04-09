@@ -2,12 +2,12 @@ import { Box, Button, Flex, Grid, Modal } from '@/components/UI';
 
 type Props = {
   onClose: () => void;
-  onChange?: (value: number) => void;
+  onChange: (value: number) => void;
 };
 
 const VirtualKeyboard = ({ onClose, onChange }: Props) => {
   const handleClickNumber = (n: number) => {
-    onChange?.(n);
+    onChange(n);
   };
 
   return (
