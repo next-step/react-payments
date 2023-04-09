@@ -1,17 +1,7 @@
-import { PropsWithChildren, useState } from 'react';
+import { PropsWithChildren } from 'react';
 import ReactDOM from 'react-dom';
 
 import { StyledBackDrop, StyledModal } from './style';
-
-export const useModal = (initialState = false) => {
-  const [isOpen, setIsOpen] = useState(initialState);
-
-  return {
-    isOpen,
-    open: () => setIsOpen(true),
-    close: () => setIsOpen(false),
-  };
-};
 
 type Props = {
   onClose: () => void;

@@ -1,4 +1,4 @@
-import { MouseEvent, PropsWithChildren, useRef, useState } from 'react';
+import { MouseEvent, PropsWithChildren, useRef } from 'react';
 
 import { StyledToolTip, StyledToolTopWrapper } from './style';
 
@@ -7,18 +7,6 @@ type Props = {
   onOpen?: () => void;
   onClose?: () => void;
   open: boolean;
-};
-
-export const useToolTip = () => {
-  const [open, setOpen] = useState(false);
-  const onClose = () => setOpen(false);
-  const onOpen = () => setOpen(true);
-
-  return {
-    open,
-    onClose,
-    onOpen,
-  };
 };
 
 export const ToolTip = ({
