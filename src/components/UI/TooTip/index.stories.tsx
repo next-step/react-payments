@@ -1,6 +1,8 @@
 import { ComponentMeta } from '@storybook/react';
 
-import ToolTip, { useToolTip } from '.';
+import { useBooleanState } from '@/hooks/useBooleanState';
+
+import ToolTip from '.';
 
 export default {
   title: 'Components/UI/ToolTip',
@@ -15,18 +17,14 @@ export default {
 } as ComponentMeta<typeof ToolTip>;
 
 export const Default = () => {
-  const {
-    open: openToolTip,
-    onOpen: onOpenToolTip,
-    onClose: onCloseToolTip,
-  } = useToolTip();
+  const [isOpenToolTip, openToolTip, closeToolTip] = useBooleanState();
 
   return (
     <>
-      <input onFocus={onOpenToolTip} onBlur={onCloseToolTip} />
+      <input onFocus={openToolTip} onBlur={closeToolTip} />
       <ToolTip
-        open={openToolTip}
-        onOpen={onOpenToolTip}
+        open={isOpenToolTip}
+        onOpen={openToolTip}
         message="tooltip message"
       >
         Click here

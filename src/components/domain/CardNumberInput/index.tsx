@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
-import { useModal } from '@/components/UI/Modal';
 import VirtualKeyboard from '@/components/UI/VirtualKeyboard';
 import { useBlur } from '@/hooks/useBlur';
+import { useBooleanState } from '@/hooks/useBooleanState';
 import useFocus from '@/hooks/useFocus';
 import { useNumberKeyInterceptor } from '@/hooks/useNumberKeyInterceptor';
 import type { CardData } from '@/types';
@@ -23,6 +23,8 @@ const CardNumberInput = ({ onChange }: Props) => {
   const { dirtyState, makeDirty } = useBlur();
   const { dispatch, handleInputChange, getFormData } = useFormContext();
   const [cardNumbers, setCardNumbers] = useState(initialCardNumbers);
+  const [isOpenVirtualKeyboard, openVirtualKeyboard, closeVirtualKeyboard] =
+    useBooleanState();
   const keyPressInterceptor = useNumberKeyInterceptor();
 
   const cardNumberRef = [
@@ -54,12 +56,6 @@ const CardNumberInput = ({ onChange }: Props) => {
     ],
     maxLength: SINGLE_CARD_NUMBER_LENGTH,
   });
-
-  const {
-    isOpen: open,
-    open: handleOpen,
-    close: closeVirtualKeyboard,
-  } = useModal(false);
 
   const handleChange = (n: number) => {
     const focusedElementName = focus.ref.current
@@ -133,7 +129,7 @@ const CardNumberInput = ({ onChange }: Props) => {
           maxLength={SINGLE_CARD_NUMBER_LENGTH}
           ref={cardNumberRef[2]}
           value={cardNumbers[2]}
-          onFocus={handleOpen}
+          onFocus={openVirtualKeyboard}
           onChange={handleInputChange(setCardNumbers)}
         />
         <input
@@ -143,11 +139,11 @@ const CardNumberInput = ({ onChange }: Props) => {
           maxLength={SINGLE_CARD_NUMBER_LENGTH}
           ref={cardNumberRef[3]}
           value={cardNumbers[3]}
-          onFocus={handleOpen}
+          onFocus={openVirtualKeyboard}
           onChange={handleInputChange(setCardNumbers)}
         />
       </InputContainer>
-      {open && (
+      {isOpenVirtualKeyboard && (
         <VirtualKeyboard
           onClose={closeVirtualKeyboard}
           onChange={handleChange}

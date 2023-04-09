@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import { InfoIcon } from '@/assets';
 import { useFormContext } from '@/components/common/Form/FormContext';
 import { InputContainer } from '@/components/UI';
-import { useModal } from '@/components/UI/Modal';
-import { ToolTip, useToolTip } from '@/components/UI/TooTip';
+import { ToolTip } from '@/components/UI/TooTip';
 import VirtualKeyboard from '@/components/UI/VirtualKeyboard';
 import { useBlur } from '@/hooks/useBlur';
+import { useBooleanState } from '@/hooks/useBooleanState';
 
 type Props = {
   onChange: <T>(value: T) => void;
@@ -18,16 +18,9 @@ const initialCVC = {
 
 const CardCVCInput = ({ onChange }: Props) => {
   const { dirtyState, makeDirty } = useBlur();
-  const {
-    open: openToolTip,
-    onOpen: onOpenToolTip,
-    onClose: onCloseToolTip,
-  } = useToolTip();
-  const {
-    isOpen: open,
-    open: openVirtualKeyboard,
-    close: closeVirtualKeyboard,
-  } = useModal(false);
+  const [isOpenToolTip, openToolTip, closeToolTip] = useBooleanState();
+  const [isOpenVirtualKeyboard, openVirtualKeyboard, closeVirtualKeyboard] =
+    useBooleanState();
 
   const { handleInputChange, dispatch } = useFormContext();
   const [cvc, setCVC] = useState(initialCVC);
@@ -61,22 +54,22 @@ const CardCVCInput = ({ onChange }: Props) => {
           name="val"
           value={cvc.val}
           onClick={handleOpen}
-          onFocus={onOpenToolTip}
-          onBlur={onCloseToolTip}
+          onFocus={openToolTip}
+          onBlur={closeToolTip}
           onChange={handleInputChange(setCVC)}
           maxLength={3}
           readOnly
         />
         <ToolTip
-          open={openToolTip}
-          onOpen={onOpenToolTip}
-          onClose={onCloseToolTip}
+          open={isOpenToolTip}
+          onOpen={openToolTip}
+          onClose={closeToolTip}
           message={CVC_INFO_MESSAGE}
         >
           <InfoIcon width="20px" height="20px" />
         </ToolTip>
       </InputContainer>
-      {open && (
+      {isOpenVirtualKeyboard && (
         <VirtualKeyboard
           onClose={closeVirtualKeyboard}
           onChange={handleChange}
