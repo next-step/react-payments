@@ -100,24 +100,14 @@ const generateCardObj = (form: CardFormType) => {
 
 export const guessCardCompanyByCardNumber = (cardNumber: string) => {
   const firstNumber = cardNumber[0];
-  switch (firstNumber) {
-    case '1':
-      return CardCompanyValues.PC;
-    case '2':
-      return CardCompanyValues.JUN;
-    case '3':
-      return CardCompanyValues.HS;
-    case '4':
-      return CardCompanyValues.YH;
-    case '5':
-      return CardCompanyValues.HO;
-    case '6':
-      return CardCompanyValues.TE;
-    case '7':
-      return CardCompanyValues.JI;
-    case '8':
-      return CardCompanyValues.EK;
-    default:
-      return '';
-  }
+  return {
+    1: CardCompanyValues.PC,
+    2: CardCompanyValues.JUN,
+    3: CardCompanyValues.HS,
+    4: CardCompanyValues.YH,
+    5: CardCompanyValues.HO,
+    6: CardCompanyValues.TE,
+    7: CardCompanyValues.JI,
+    8: CardCompanyValues.EK,
+  }[firstNumber];
 };
