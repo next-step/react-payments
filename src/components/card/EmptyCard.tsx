@@ -2,10 +2,17 @@ import { PropsWithChildren } from 'react'
 
 import { CardBox } from '@/components/card'
 
-function EmptyCard({ children }: PropsWithChildren) {
+interface EmptyCardProps {
+  backgroundColor?: string
+  color?: string
+}
+
+function EmptyCard({ children, backgroundColor, color }: PropsWithChildren<EmptyCardProps>) {
   return (
     <CardBox>
-      <div className="empty-card">{children}</div>
+      <div className="empty-card" style={{ backgroundColor, color }}>
+        {children}
+      </div>
     </CardBox>
   )
 }

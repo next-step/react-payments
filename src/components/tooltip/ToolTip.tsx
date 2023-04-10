@@ -9,9 +9,9 @@ const ToolTip = ({ content }: ToolTipProps) => {
     <Tooltip.Provider delayDuration={100}>
       <Tooltip.Root>
         <Tooltip.Trigger>
-          <button className="icon-button">
+          <span className="icon-button">
             <i className="tooltip-icon">&#9432;</i>
-          </button>
+          </span>
         </Tooltip.Trigger>
         <Tooltip.Portal>
           <Tooltip.Content className="tooltip-content">

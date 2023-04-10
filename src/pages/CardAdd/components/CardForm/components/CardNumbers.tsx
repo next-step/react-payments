@@ -18,7 +18,7 @@ interface CardNumbersProps {
 }
 
 const CardNumbers = memo(({ numbersRef, handleChange }: CardNumbersProps) => {
-  const { handleInputChange } = useCardNumbers({ handleChange })
+  const { handleInputChange } = useCardNumbers({ numbersRef, handleChange })
 
   return (
     <InputContainer>

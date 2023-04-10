@@ -26,6 +26,14 @@ export type CardPasswords = {
   [key in 'first' | 'second']: string
 }
 export type CardPassword = { first: string } | { second?: string }
+export type CardType = {
+  name: string
+  color: string
+  bg: string
+}
+export type CardTypes = {
+  [key in 'name' | 'color' | 'bg']: string
+}
 
 export type CardAction =
   | {
@@ -61,6 +69,10 @@ export type CardAction =
       payload: CardPassword
     }
   | {
+      type: 'SET_CARD_TYPE'
+      payload: CardTypes
+    }
+  | {
       type: 'SET_ALL'
       payload: CardInfomation
     }
@@ -78,6 +90,7 @@ export interface CardInfomation {
   owner: CardOwner
   securityCode: CardSecurityCode
   passwords: CardPasswords
+  cardType: CardType
 }
 
 export type CardListAction =

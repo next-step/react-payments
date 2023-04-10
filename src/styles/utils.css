@@ -29,6 +29,13 @@
   gap: 2.5rem;
 }
 
+.grid-repeat-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0.5rem;
+  grid-row-gap: 1.5rem;
+}
+
 .position-top {
   position: absolute;
   top: 25px;
@@ -38,6 +45,10 @@
 
 .font-xs {
   font-size: 0.5rem;
+}
+
+.font-sm {
+  font-size: 0.75rem;
 }
 
 .text-error {

@@ -49,6 +49,14 @@ const cardReducer = (state: CardInfomation, action: CardAction): CardInfomation 
           ...action.payload,
         },
       }
+    case 'SET_CARD_TYPE':
+      return {
+        ...state,
+        cardType: {
+          ...state.cardType,
+          ...action.payload,
+        },
+      }
     case 'SET_ALL':
       return action.payload
     case 'RESET_ALL':

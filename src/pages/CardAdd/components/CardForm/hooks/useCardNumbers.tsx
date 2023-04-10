@@ -1,8 +1,12 @@
 import { ChangeEvent } from 'react'
 
+import { CardTypeSelectionModal } from '@/components/modal'
+import { useModal } from '@/hooks'
 import { CardNumbersProps } from '@/pages/CardAdd/components/CardForm/types'
 
 const useCardNumbers = ({ handleChange }: CardNumbersProps) => {
+  const { openModal } = useModal()
+
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const {
       dataset: { name },
@@ -15,6 +19,9 @@ const useCardNumbers = ({ handleChange }: CardNumbersProps) => {
         break
       case 'second':
         handleChange({ value, order: name })
+        if (value.length === 4) {
+          openModal({ element: <CardTypeSelectionModal /> })
+        }
         break
       case 'third':
         handleChange({ value, order: name })

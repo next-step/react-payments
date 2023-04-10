@@ -1,6 +1,8 @@
 import { BackButton } from '@/components/button'
 import { PreviewCard } from '@/components/card'
 import { PageTitle } from '@/components/layouts'
+// import { CardTypeSelectionModal } from '@/components/modal'
+// import { useModal } from '@/hooks'
 import { CardForm } from '@/pages/CardAdd/components/CardForm'
 import { useCardInfo } from '@/pages/hooks'
 
@@ -10,6 +12,11 @@ import { useCardAdd } from './hooks'
 function CardAdd() {
   const { handleNumber, handleExpiredDate, handleOwner, handlePassword, handleSecurityCode } = useCardInfo()
   const { numbersRef, passwordRef, expiredDateRef, ownerRef, securityCodeRef } = useCardAdd()
+  // const { openModal } = useModal()
+
+  // const openCardTypeSelectionModal = () => {
+  //   openModal({ element: <CardTypeSelectionModal text="하이" onConfirmButtonClick={() => console.log('check')} /> })
+  // }
 
   return (
     <div className="app">

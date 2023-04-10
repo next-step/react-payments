@@ -24,7 +24,7 @@
 
   -webkit-user-select: none;
 
-          user-select: none;
+  user-select: none;
 }
 
 .small-card {
@@ -628,6 +628,5 @@ section .tip-wrapper svg {
 section .tip-wrapper svg path {
   fill: #1ea7fd;
 }
-
 
 /*# sourceMappingURL=main.031f012e.css.map*/
