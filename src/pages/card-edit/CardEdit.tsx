@@ -1,7 +1,7 @@
 import React, { FormEvent, useCallback, useRef, useState } from 'react';
 import { Card, CardNumberInput, CvcInput, ExpiredInput, Frame, OwnerInput, PinInput } from '../../components';
 import { useCardContext } from '../../context/CardContext';
-import { PAYMENTS_STEP, useStepContext } from '../../context/StepContext';
+import { useStepContext } from '../../context/StepContext';
 import {
   isValidCardNumber,
   isValidExpiredMonth,
@@ -14,6 +14,7 @@ import '../../styles/input.css';
 import '../../styles/utils.css';
 import { CardTypeModal } from '../../components/CardTypeModal';
 import { ICardType } from '../../domain/payments/types';
+import { PAYMENTS_STEP } from '../../constants';
 
 function CardEdit() {
   const [cardNumbers, setCardNumbers] = useState<string[]>([]);

@@ -1,11 +1,5 @@
 import React, { createContext, Dispatch, SetStateAction, useContext, useMemo, useState } from 'react';
-
-export const PAYMENTS_STEP = {
-  LIST: 1,
-  ADD: 2,
-  EDIT: 3,
-  DONE: 4,
-} as const;
+import { PAYMENTS_STEP } from '../constants';
 
 type TStep = {
   step?: number;

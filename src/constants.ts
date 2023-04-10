@@ -1,4 +1,4 @@
-import { ICard, ICardType } from './domain/payments/types';
+import { ICard, ICardDetailMessage, ICardType } from './domain/payments/types';
 
 export const CARD_INPUT = {
   CARD_NAME: {
@@ -57,4 +57,23 @@ export const CARD_TYPES: ICardType[] = [
   { id: 6, cardName: '태은', color: '#e76e9a', cardNumberPrefix: ['6666', '6666'] },
   { id: 7, cardName: '준일', color: '#f37d3b', cardNumberPrefix: ['7777', '7777'] },
   { id: 8, cardName: '은규', color: '#fbcd58', cardNumberPrefix: ['8888', '8888'] },
+];
+
+export const PAYMENTS_STEP = {
+  LIST: 1,
+  ADD: 2,
+  EDIT: 3,
+  DONE: 4,
+  UPDATING_CARD_ALIAS: 5,
+} as const;
+
+export const CARD_DETAIL_MESSAGE: ICardDetailMessage[] = [
+  {
+    step: PAYMENTS_STEP.DONE,
+    message: '카드 등록이 완료되었습니다',
+  },
+  {
+    step: PAYMENTS_STEP.UPDATING_CARD_ALIAS,
+    message: '카드 별칭을 수정할 수 있습니다',
+  },
 ];

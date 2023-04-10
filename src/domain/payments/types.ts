@@ -36,3 +36,8 @@ export interface ICardType {
   color: TColorCode;
   cardNumberPrefix: TCardNumbers;
 }
+
+export interface ICardDetailMessage {
+  step: number;
+  message: string;
+}

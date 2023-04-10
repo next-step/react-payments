@@ -23,10 +23,11 @@ const getViewCardNumbers = (cardNumbers: string[]) => {
 type TCardProps = {
   card: ICard;
   deletable?: boolean;
+  onClick?: (card: ICard) => void;
   onDeleteClick?: (card: ICard) => void;
 };
 
-function Card({ card, deletable = false, onDeleteClick }: TCardProps) {
+function Card({ card, deletable = false, onClick, onDeleteClick }: TCardProps) {
   const { name, owner, expiredMonth, expiredYear, numbers } = card;
   const cardNumber = useMemo(() => getViewCardNumbers(numbers), [numbers]);
   const cardType = useMemo(() => {
@@ -38,13 +39,17 @@ function Card({ card, deletable = false, onDeleteClick }: TCardProps) {
   }, [numbers]);
   const displayCardName = name || cardType.cardName;
 
+  const handleCardClick = useCallback(() => {
+    onClick?.(card);
+  }, []);
+
   const handleDelete = useCallback(() => {
     onDeleteClick?.(card);
   }, [card]);
 
   return (
     <>
-      <div className="card-box">
+      <div className="card-box" onClick={handleCardClick}>
         <div className="small-card" style={{ backgroundColor: cardType.color }}>
           <div className="card-top">{displayCardName && <span className="card-text">{displayCardName}</span>}</div>
           <div className="card-middle">
@@ -65,13 +70,18 @@ function Card({ card, deletable = false, onDeleteClick }: TCardProps) {
           </div>
         </div>
       </div>
-      {deletable && (
-        <div>
-          <button type="button" onClick={handleDelete}>
-            삭제
-          </button>
-        </div>
-      )}
+      <div className="card-label-wrap">
+        <a href="#">
+          <strong>{card.alias || card.name}</strong>
+        </a>
+        {deletable && (
+          <div className="delete-wrap">
+            <button type="button" onClick={handleDelete}>
+              삭제
+            </button>
+          </div>
+        )}
+      </div>
     </>
   );
 }

@@ -31,7 +31,6 @@ export const saveCard = (card: ICard) => {
 
     const cards = getSavedCards();
     const others = cards.filter((c) => !compareCards(c, card)); //
-    others.sort(({ createdAt: a }, { createdAt: b }) => b - a);
     const savedCard = getCard(card, cards);
 
     const newCardsList = [
@@ -42,6 +41,7 @@ export const saveCard = (card: ICard) => {
       },
       ...others,
     ];
+    newCardsList.sort(({ createdAt: a }, { createdAt: b }) => b - a);
 
     localStorage.setItem(CARD_STORAGE_KEY, JSON.stringify(newCardsList)); //
     return true;
