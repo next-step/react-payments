@@ -4,7 +4,7 @@ import { CardTypeSelectionModal } from '@/components/modal'
 import { useModal } from '@/hooks'
 import { CardNumbersProps } from '@/pages/CardAdd/components/CardForm/types'
 
-const useCardNumbers = ({ handleChange }: CardNumbersProps) => {
+const useCardNumbers = ({ onFocusChange, handleChange }: CardNumbersProps) => {
   const { openModal } = useModal()
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +20,7 @@ const useCardNumbers = ({ handleChange }: CardNumbersProps) => {
       case 'second':
         handleChange({ value, order: name })
         if (value.length === 4) {
-          openModal({ element: <CardTypeSelectionModal /> })
+          openModal({ element: <CardTypeSelectionModal onAfterModalClose={onFocusChange} /> })
         }
         break
       case 'third':

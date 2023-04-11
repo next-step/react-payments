@@ -21,12 +21,7 @@ export interface HandleNumbersChangeProps {
   order: 'first' | 'second' | 'third' | 'fourth'
 }
 export interface CardNumbersProps {
-  numbersRef: {
-    first: RefObject<HTMLInputElement>
-    second: RefObject<HTMLInputElement>
-    third: RefObject<HTMLInputElement>
-    fourth: RefObject<HTMLInputElement>
-  }
+  onFocusChange?: () => void
   handleChange({ value, order }: HandleNumbersChangeProps): void
 }
 

@@ -18,7 +18,11 @@ interface CardNumbersProps {
 }
 
 const CardNumbers = memo(({ numbersRef, handleChange }: CardNumbersProps) => {
-  const { handleInputChange } = useCardNumbers({ numbersRef, handleChange })
+  const onFocusThirdInput = () => {
+    numbersRef.third.current?.focus()
+  }
+
+  const { handleInputChange } = useCardNumbers({ onFocusChange: onFocusThirdInput, handleChange })
 
   return (
     <InputContainer>

@@ -20,9 +20,9 @@ const CardTypeSelectionModal = ({ onAfterModalClose }: CheckModalProps) => {
   })
 
   const selectCardType = (name: string, bg: string, color: string) => {
-    // Todo: onAfterModalClose에서 focus 다시 가져오도록
-    // onAfterModalClose()
-    // 전역 카드 상태에 카드사와 카드색상을 저장
+    if (onAfterModalClose) {
+      onAfterModalClose()
+    }
     cardDispatch({ type: 'SET_CARD_TYPE', payload: { name, bg, color } })
     closeModal({ element: CardTypeSelectionModal })
   }
@@ -32,7 +32,7 @@ const CardTypeSelectionModal = ({ onAfterModalClose }: CheckModalProps) => {
       <BottomSheetContainer>
         <div className="grid-repeat-4">
           {CARD_TYPES.map(({ name, bg, color }) => (
-            <CardTypeButton key={name} name={name} bg={bg} color={color} selectCardType={selectCardType} />
+            <CardTypeButton key={name} name={name} backgroundColor={bg} color={color} selectCardType={selectCardType} />
           ))}
         </div>
       </BottomSheetContainer>
