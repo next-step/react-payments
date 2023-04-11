@@ -15,6 +15,7 @@ import '../../styles/utils.css';
 import { CardTypeModal } from '../../components/CardTypeModal';
 import { ICardType } from '../../domain/payments/types';
 import { PAYMENTS_STEP } from '../../constants';
+import { ToolTip } from '../../components/ToolTip';
 
 function CardEdit() {
   const [cardNumbers, setCardNumbers] = useState<string[]>([]);

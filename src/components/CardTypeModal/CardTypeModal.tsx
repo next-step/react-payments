@@ -4,6 +4,7 @@ import { CARD_TYPES } from '../../constants';
 import { ICardType } from '../../domain/payments/types';
 
 import '../../styles/card-types.css';
+import { Modal } from '../Modal';
 
 type TCardTypeModalProps = {
   onClick?: (cardType?: ICardType) => void;
@@ -18,21 +19,18 @@ function CardTypeModal({ onClick }: TCardTypeModalProps) {
   };
 
   return (
-    <>
-      <div className="modal-dimmed" onClick={handleNonSelected}></div>
-      <div className="modal">
-        <ul className="palette">
-          {CARD_TYPES.map((cardType) => {
-            const { id, color, cardName } = cardType;
-            return (
-              <li key={id} onClick={() => handleSelectedPalette(cardType)}>
-                <Palette color={color} label={cardName} />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-    </>
+    <Modal onDimmedClick={handleNonSelected}>
+      <ul className="palette">
+        {CARD_TYPES.map((cardType) => {
+          const { id, color, cardName } = cardType;
+          return (
+            <li key={id} onClick={() => handleSelectedPalette(cardType)}>
+              <Palette color={color} label={cardName} />
+            </li>
+          );
+        })}
+      </ul>
+    </Modal>
   );
 }
 
