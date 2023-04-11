@@ -35,18 +35,12 @@ const useCardInfo = () => {
     if (!isNumber(value)) return
     switch (yymm) {
       case 'YY':
-        if (value.length > 2) return
         cardDispatch({
           type: 'SET_EXPIRED_YEAR',
           payload: value,
         })
         break
       case 'MM':
-        if (value.length > 2) return
-        if (Number(value) > 12 || Number(value) < 0) {
-          alert('월은 1이상 12이하여야 합니다.')
-          return
-        }
         cardDispatch({
           type: 'SET_EXPIRED_MONTH',
           payload: value,
