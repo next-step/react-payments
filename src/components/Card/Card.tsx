@@ -22,12 +22,11 @@ const getViewCardNumbers = (cardNumbers: string[]) => {
 
 type TCardProps = {
   card: ICard;
-  deletable?: boolean;
   onClick?: (card: ICard) => void;
-  onDeleteClick?: (card: ICard) => void;
+  children?: React.ReactNode;
 };
 
-function Card({ card, deletable = false, onClick, onDeleteClick }: TCardProps) {
+function Card({ card, onClick, children }: TCardProps) {
   const { name, owner, expiredMonth, expiredYear, numbers } = card;
   const cardNumber = useMemo(() => getViewCardNumbers(numbers), [numbers]);
   const cardType = useMemo(() => {
@@ -43,12 +42,8 @@ function Card({ card, deletable = false, onClick, onDeleteClick }: TCardProps) {
     onClick?.(card);
   }, []);
 
-  const handleDelete = useCallback(() => {
-    onDeleteClick?.(card);
-  }, [card]);
-
   return (
-    <>
+    <div className="card-wrap">
       <div className="card-box" onClick={handleCardClick}>
         <div className="small-card" style={{ backgroundColor: cardType.color }}>
           <div className="card-top">{displayCardName && <span className="card-text">{displayCardName}</span>}</div>
@@ -70,19 +65,8 @@ function Card({ card, deletable = false, onClick, onDeleteClick }: TCardProps) {
           </div>
         </div>
       </div>
-      <div className="card-label-wrap">
-        <a href="#">
-          <strong>{card.alias || card.name}</strong>
-        </a>
-        {deletable && (
-          <div className="delete-wrap">
-            <button type="button" onClick={handleDelete}>
-              삭제
-            </button>
-          </div>
-        )}
-      </div>
-    </>
+      {children && <div className="card-portal">{children}</div>}
+    </div>
   );
 }
 

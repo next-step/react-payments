@@ -117,7 +117,11 @@ function CardEdit() {
 
   return (
     <Frame title="카드 추가" onBackClick={handleBackStep}>
-      <Card card={{ owner, expiredMonth, expiredYear, numbers: cardNumbers, cvc }} />
+      <Card card={{ owner, expiredMonth, expiredYear, numbers: cardNumbers, cvc }}>
+        <div className="card-controller">
+          <button onClick={() => setCardTypeSelected(false)}>카드사 선택</button>
+        </div>
+      </Card>
 
       <form onSubmit={handleEnrollStep}>
         <CardNumberInput ref={refs.cardNumber} nextRef={refs.expired} onChange={setCardNumbers} values={cardNumbers} />

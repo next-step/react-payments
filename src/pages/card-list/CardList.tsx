@@ -39,16 +39,25 @@ function CardList() {
             +
           </div>
         </li>
-        {cards.map(({ name, owner, numbers, expiredMonth, expiredYear, alias, cvc }) => (
-          <li key={numbers.join('')}>
-            <Card
-              card={{ name, owner, numbers, expiredMonth, expiredYear, alias, cvc }}
-              deletable
-              onClick={handleUpdatingCard}
-              onDeleteClick={handleDeletingCard}
-            />
-          </li>
-        ))}
+        {cards.map((card) => {
+          const { name, owner, numbers, expiredMonth, expiredYear, alias, cvc } = card;
+          return (
+            <li key={numbers.join('')}>
+              <Card card={{ name, owner, numbers, expiredMonth, expiredYear, alias, cvc }} onClick={handleUpdatingCard}>
+                <div className="card-controller">
+                  <a href="#">
+                    <strong>{alias || name}</strong>
+                  </a>
+                  <div className="delete-wrap">
+                    <button type="button" onClick={() => handleDeletingCard(card)}>
+                      삭제
+                    </button>
+                  </div>
+                </div>
+              </Card>
+            </li>
+          );
+        })}
       </ul>
     </Frame>
   );
