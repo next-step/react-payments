@@ -16,3 +16,12 @@ li {
   justify-content: center;
   list-style-type: none;
 }
+
+.card-controller {
+  display: flex;
+  justify-content: center;
+}
+
+.card-controller *:not(:first-child) {
+  margin-left: 1rem;
+}
