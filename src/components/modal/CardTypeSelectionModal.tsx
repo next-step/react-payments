@@ -1,5 +1,6 @@
 import { useRef, useContext } from 'react'
 
+import { CardTypeButton } from '@/components/button'
 import { BottomSheetContainer } from '@/components/modal'
 import { CardDispatchContext } from '@/contexts/card'
 import { useModal, useOutsideClick } from '@/hooks'
@@ -19,6 +20,7 @@ const CardTypeSelectionModal = ({ onAfterModalClose }: CheckModalProps) => {
   })
 
   const selectCardType = (name: string, bg: string, color: string) => {
+    // Todo: onAfterModalClose에서 focus 다시 가져오도록
     // onAfterModalClose()
     // 전역 카드 상태에 카드사와 카드색상을 저장
     cardDispatch({ type: 'SET_CARD_TYPE', payload: { name, bg, color } })
@@ -30,15 +32,7 @@ const CardTypeSelectionModal = ({ onAfterModalClose }: CheckModalProps) => {
       <BottomSheetContainer>
         <div className="grid-repeat-4">
           {CARD_TYPES.map(({ name, bg, color }) => (
-            // Todo: 컴포넌트로 변경
-            <button
-              key={name}
-              className="flex-column-center gap-2 font-sm"
-              onClick={() => selectCardType(name, bg, color)}
-            >
-              <div style={{ backgroundColor: bg }} className="card-color" />
-              <p>{name}</p>
-            </button>
+            <CardTypeButton key={name} name={name} bg={bg} color={color} selectCardType={selectCardType} />
           ))}
         </div>
       </BottomSheetContainer>
