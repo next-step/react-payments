@@ -12,6 +12,7 @@ export type TCardComponentProps<T = string[]> = {
   prevRef?: React.RefObject<HTMLInputElement>;
   nextRef?: React.RefObject<HTMLInputElement>;
   forwardedRef?: React.ForwardedRef<HTMLInputElement>;
+  children?: React.ReactNode;
 };
 
 export interface ICard {
