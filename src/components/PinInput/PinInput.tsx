@@ -1,6 +1,6 @@
 import React, { ForwardedRef, forwardRef } from 'react';
 import '../../styles/input.css';
-import useNumberInput from '../../hooks/useNumberInput';
+import useNumberInput from '../../hooks/useNumbersInput';
 import { TCardComponentProps } from '../../domain/payments/types';
 import { InputContainer } from '../InputContainer';
 import { CARD_INPUT } from '../../constants';

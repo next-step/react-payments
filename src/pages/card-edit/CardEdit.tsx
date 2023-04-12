@@ -1,5 +1,5 @@
 import React, { FormEvent, useCallback, useRef, useState } from 'react';
-import { Card, CardNumberInput, CvcInput, ExpiredInput, Frame, OwnerInput, PinInput } from '../../components';
+import { Card, CardNumbersInput, CvcInput, ExpiredInput, Frame, OwnerInput, PinInput } from '../../components';
 import { useCardContext } from '../../context/CardContext';
 import { useStepContext } from '../../context/StepContext';
 import {
@@ -18,7 +18,7 @@ import { PAYMENTS_STEP } from '../../constants';
 import { ToolTip } from '../../components/ToolTip';
 
 function CardEdit() {
-  const [cardNumbers, setCardNumbers] = useState<string[]>([]);
+  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
   const [expiredMonth, setExpiredMonth] = useState('');
   const [expiredYear, setExpiredYear] = useState('');
   const [owner, setOwner] = useState('');
@@ -116,6 +116,10 @@ function CardEdit() {
     [setStep, ...inputs, refs]
   );
 
+  const handleCardNumbers = (numbers: string[]) => {
+    setCardNumbers(numbers);
+  };
+
   return (
     <Frame title="카드 추가" onBackClick={handleBackStep}>
       <Card card={{ owner, expiredMonth, expiredYear, numbers: cardNumbers, cvc }}>
@@ -125,7 +129,8 @@ function CardEdit() {
       </Card>
 
       <form onSubmit={handleEnrollStep}>
-        <CardNumberInput ref={refs.cardNumber} nextRef={refs.expired} onChange={setCardNumbers} values={cardNumbers} />
+        {/* <CardNumberInput ref={refs.cardNumber} nextRef={refs.expired} onChange={setCardNumbers} values={cardNumbers} /> */}
+        <CardNumbersInput values={cardNumbers} onChange={handleCardNumbers} />
         <ExpiredInput ref={refs.expired} nextRef={refs.owner} onChange={handleExpired} />
         <OwnerInput ref={refs.owner} nextRef={refs.cvc} onChange={setOwner} />
         <CvcInput ref={refs.cvc} nextRef={refs.pin} onChange={handleCvc} />

@@ -57,3 +57,21 @@
   font-size: 12px;
   letter-spacing: -0.085rem;
 }
+
+.modal-number-pad {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.modal-button {
+  border: none;
+  font-size: 1.2rem;
+  transition: background-color cubic-bezier(0.165, 0.84, 0.44, 1) 0.2s;
+}
+
+.modal-button.active {
+  transition: background-color linear 0s;
+  background-color: #94dacd;
+}

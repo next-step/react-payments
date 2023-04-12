@@ -5,6 +5,7 @@ export const CARD_INPUT = {
     MAX_LENGTH: 5,
   },
   CARD_NUMBER: {
+    TYPES: ['text', 'text', 'password', 'password'],
     LENGTH: 4,
     EACH_LENGTH: 4,
   },
