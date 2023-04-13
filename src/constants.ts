@@ -27,12 +27,16 @@ export const CARD_INPUT = {
     LENGTH: 3,
   },
   PIN: {
+    EACH_LENGTH: 1,
     LENGTH: 4,
     EDITABLE_LENGTH: 2,
   },
 } as const;
 
 export const CARD_VIRTUAL_KEYBOARD = {
+  NUMBER_KEYS: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => String(n)),
+  FUNCTION_KEY_DELETE: '지움',
+  FUNCTION_KEY_RESET: '초기화',
   CLICK_TRACING_DELAY: 200,
   ACTIVE_BUTTON_CLASSNAME: 'active',
 } as const;

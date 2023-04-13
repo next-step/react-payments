@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Modal } from '../Modal';
 import useVirtualNumPad from './useVirtualNumPad';
 import { TVirtualNumPad } from './types';
-import { getRandomNumberPad } from './VirtualNumberPad';
+import { getRandomNumberPad } from './VirtualNumPadGenerator';
 
 function VirtualNumPad({ onClick, onDimmedClick }: TVirtualNumPad) {
   const keys = useMemo(() => getRandomNumberPad(), []);

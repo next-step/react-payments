@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { TVirtualNumPad } from './types';
 import { CARD_VIRTUAL_KEYBOARD } from '../../constants';
-import { TVirtualNumberPad } from './VirtualNumberPad';
+import { TVirtualNumberPad, processPressKey } from './VirtualNumPadGenerator';
 
 const { CLICK_TRACING_DELAY, ACTIVE_BUTTON_CLASSNAME } = CARD_VIRTUAL_KEYBOARD;
 
@@ -18,7 +18,7 @@ export default ({ onClick, keys }: THookVirtualNumPad) => {
       const childNodes = Array.from(parent?.childNodes || []);
 
       const index = childNodes.indexOf(target as ChildNode);
-      const newValue = buffer + keys[index];
+      const newValue = processPressKey(buffer, keys[index]);
       setBuffer(() => newValue);
       onClick?.(newValue);
 

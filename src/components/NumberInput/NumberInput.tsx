@@ -1,48 +1,34 @@
-import React, { ForwardedRef, forwardRef, useMemo, useState } from 'react';
+import React, { ForwardedRef, forwardRef } from 'react';
 import { VirtualNumPad } from '../VirtualNumPad';
+import useNumberInput from './useNumberInput';
 
-type TNumberInput = {
+export type TNumberInputProps = {
   type: string;
   ref: React.RefObject<HTMLInputElement>;
   value: string;
   onChange: (newValue: string) => void;
-  onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   required?: boolean;
   maxLength?: number;
   minLength?: number;
+  classNames?: string[];
+  disabled?: boolean;
 };
 
-function NumberInput(
-  { required = false, type, value, onChange, onKeyDown, maxLength, minLength }: TNumberInput,
-  forwardedRef: ForwardedRef<HTMLInputElement>
-) {
-  const [virtualKeyboardVisible, setVirtualKeyboardVisible] = useState(false);
-  const isSafety = useMemo(() => type === 'password', [type]);
+function NumberInput(props: TNumberInputProps, forwardedRef: ForwardedRef<HTMLInputElement>) {
+  const { required = false, type, value, onKeyDown, maxLength, minLength, classNames, disabled = false } = props;
+  const { virtualKeyboardVisible, setVirtualKeyboardVisible, isSafety, handleChange, handleVirtualKeyDown } =
+    useNumberInput(props);
 
-  const handleChange = (event: React.ChangeEvent) => {
-    const newValue = (event.target as HTMLInputElement).value;
-
-    handleFulfilled(newValue);
-    onChange(newValue);
-  };
-
-  const handleFulfilled = (value: string) => {
-    if (value.length === maxLength) {
-      setVirtualKeyboardVisible(false);
-    }
-  };
-
-  const handleVirtualKeyDown = (newValue: string) => {
-    handleFulfilled(newValue);
-    onChange(newValue);
-  };
+  const className = ['input-basic', ...(classNames || [])].join(' ');
 
   return (
     <>
       <input
-        className="input-basic"
+        className={className}
         required={required}
         readOnly={isSafety}
+        disabled={disabled}
         type={type}
         ref={forwardedRef}
         value={value}

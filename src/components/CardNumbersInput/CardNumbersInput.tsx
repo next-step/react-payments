@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useRef } from 'react';
 import { InputContainer } from '../InputContainer';
-import NumberInput from './NumberInput';
+import { NumberInput } from '../NumberInput';
 import { CARD_INPUT } from '../../constants';
 
 export type TInputEventHandler = {

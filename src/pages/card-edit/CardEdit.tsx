@@ -36,20 +36,13 @@ function CardEdit() {
     owner: useRef<HTMLInputElement>(null),
     cvc: useRef<HTMLInputElement>(null),
     pin: useRef<HTMLInputElement>(null),
+    nextButton: useRef<HTMLButtonElement>(null),
   };
 
   const handleExpired = useCallback(([expiredMonth, expiredYear]: string[]) => {
     setExpiredMonth(expiredMonth);
     setExpiredYear(expiredYear);
     return;
-  }, []);
-
-  const handleCvc = useCallback(([newCvc]: string[]) => {
-    setCvc(newCvc);
-  }, []);
-
-  const handlePin = useCallback((strings: string[]) => {
-    setPin(strings.join(''));
   }, []);
 
   const handleBackStep = useCallback(() => {
@@ -128,16 +121,15 @@ function CardEdit() {
       </Card>
 
       <form onSubmit={handleEnrollStep}>
-        {/* <CardNumberInput ref={refs.cardNumber} nextRef={refs.expired} onChange={setCardNumbers} values={cardNumbers} /> */}
         <CardNumbersInput values={cardNumbers} nextRef={refs.expired} onChange={handleCardNumbers} />
         <ExpiredInput ref={refs.expired} nextRef={refs.owner} onChange={handleExpired} />
         <OwnerInput ref={refs.owner} nextRef={refs.cvc} onChange={setOwner} />
-        <CvcInput ref={refs.cvc} nextRef={refs.pin} onChange={handleCvc} />
-        <PinInput ref={refs.pin} onChange={handlePin} />
+        <CvcInput value={cvc} ref={refs.cvc} nextRef={refs.pin} onChange={setCvc} />
+        <PinInput value={pin} ref={refs.pin} nextRef={refs.nextButton} onChange={setPin} />
 
         <div className="button-box">
           <div className="button-text">
-            <button>다음</button>
+            <button ref={refs.nextButton}>다음</button>
           </div>
         </div>
       </form>

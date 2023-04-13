@@ -4,39 +4,39 @@ import { TCardComponentProps } from '../../domain/payments/types';
 import { InputContainer } from '../InputContainer';
 import { CARD_INPUT } from '../../constants';
 import { ToolTip } from '../ToolTip';
+import { NumberInput } from '../NumberInput';
 
 const CVC_MAX_LENGTH = CARD_INPUT.CVC.LENGTH;
 
 function CvcInput(
-  { onChange, onFulfill, prevRef, nextRef }: TCardComponentProps<string[]>,
+  { value, onChange, onFulfill, nextRef }: TCardComponentProps<string>,
   forwardedRef: ForwardedRef<HTMLInputElement>
 ) {
-  const {
-    numbers: cvc,
-    handleChange,
-    refs,
-  } = useNumberInput({
-    initValues: [''],
-    maxLength: CVC_MAX_LENGTH,
-    onChange,
-    onFulfill,
-    prevRef,
-    nextRef,
-    forwardedRef,
-  });
+  const handleChange = (value: string) => {
+    onChange?.(value);
+    handleFullfilled(value);
+  };
+
+  const handleFullfilled = (value: string) => {
+    if (value.length == CARD_INPUT.CVC.LENGTH) {
+      nextRef?.current?.focus();
+    }
+  };
 
   return (
     <InputContainer title="보안코드(CVC/CVV)" width={25} tied={false}>
       <div className="flex">
         <div className="input-box w-25">
-          <input
+          <NumberInput
             required
-            ref={(el: HTMLInputElement) => (refs.current[0] = el)}
-            className="input-basic"
             type="password"
+            minLength={CVC_MAX_LENGTH}
             maxLength={CVC_MAX_LENGTH}
-            onChange={(event) => handleChange(event, 0)}
-            value={cvc}
+            onChange={handleChange}
+            onKeyDown={() => {
+              /** */
+            }}
+            value={value || ''}
           />
         </div>
         <ToolTip>카드 뒷면에서 찾을 수 있으며 보통 3-4글자로 되어 있습니다.</ToolTip>

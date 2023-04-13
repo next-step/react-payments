@@ -7,10 +7,11 @@ export type TCardNumbers = TCardNumber[];
 export type TCVC = `${TDigit}${TDigit}${TDigit}`;
 
 export type TCardComponentProps<T = string[]> = {
+  value?: T;
   onChange?: (argument: T) => void;
   onFulfill?: (argument: T) => void;
-  prevRef?: React.RefObject<HTMLInputElement>;
-  nextRef?: React.RefObject<HTMLInputElement>;
+  prevRef?: React.RefObject<HTMLInputElement | HTMLButtonElement>;
+  nextRef?: React.RefObject<HTMLInputElement | HTMLButtonElement>;
   forwardedRef?: React.ForwardedRef<HTMLInputElement>;
   children?: React.ReactNode;
 };
