@@ -134,9 +134,3 @@
   vertical-align: middle;
   font-weight: 400;
 }
-
-/* TODO:  나중에 뺄 수 있으면 별도의 파일로 빼기 */
-
-.card-list {
-  visibility: visible; /*경고방지용 dummy*/
-}

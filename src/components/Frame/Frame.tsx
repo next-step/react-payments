@@ -29,7 +29,7 @@ function Frame({ title, children, onBackClick }: TFrameProps) {
           <LeftBack />
           {title}
         </h2>
-        {children}
+        <div className="page-content">{children}</div>
       </div>
     </div>
   );
