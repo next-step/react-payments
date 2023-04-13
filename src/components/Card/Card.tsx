@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { ICard } from '../../domain/payments/types';
 import '../../styles/card.css';
 import CardNumber from './CardNumber';

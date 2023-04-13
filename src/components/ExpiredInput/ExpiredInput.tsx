@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useEffect, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useState } from 'react';
 import { TCardComponentProps } from '../../domain/payments/types';
 import { leaveOnlyNumbers } from '../../util/number';
 import { InputContainer } from '../InputContainer';

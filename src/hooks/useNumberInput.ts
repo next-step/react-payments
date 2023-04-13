@@ -87,11 +87,3 @@ export default ({
 
   return { numbers, setNumbers, refs, handleChange, handleKeyDown };
 };
-
-/*
-setTimeout...
-  react_devtools_backend.js:2655 Warning:
-  Cannot update a component (`CardEdit`) while rendering a different component (`CardNumberInput`).
-  To locate the bad setState() call inside `CardNumberInput`,
-    follow the stack trace as described in https://reactjs.org/link/setstate-in-render
-*/

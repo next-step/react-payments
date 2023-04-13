@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { getDisplayCardNumbers } from '../../../util/card';
 import { CARD_TYPES, DEFAULT_CARD_TYPE } from '../../../constants';
 
