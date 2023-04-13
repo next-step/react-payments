@@ -1,44 +1,43 @@
-import React, { forwardRef, useEffect, useRef } from 'react';
+import React, { forwardRef, useCallback, useEffect, useRef } from 'react';
 import '../../styles/input.css';
 import { TCardComponentProps } from '../../domain/payments/types';
 import { InputContainer } from '../InputContainer';
 import { CARD_INPUT } from '../../constants';
 import { NumberInput } from '../NumberInput';
+import useForwardedRef from '../../hooks/useForwardedRef';
 
 const { EDITABLE_LENGTH, EACH_LENGTH } = CARD_INPUT.PIN;
 
 function PinInput(
-  { value = '', onChange, nextRef, caption }: TCardComponentProps<string>,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>
+  props: TCardComponentProps<string>,
+  forwardedRef: React.ForwardedRef<HTMLInputElement | HTMLButtonElement>
 ) {
-  const refs = Array.from({ length: EDITABLE_LENGTH }, () => useRef() as React.RefObject<HTMLInputElement>);
+  const { value = '', onChange, nextRef, caption } = props;
+  const { refs } = useForwardedRef({ forwardedRef, length: EDITABLE_LENGTH });
 
-  useEffect(() => {
-    if (!forwardedRef) return;
-    if (typeof forwardedRef === 'function') {
-      forwardedRef(refs[0].current);
-    } else {
-      forwardedRef.current = refs[0].current;
-    }
-  }, []);
+  const handleChange = useCallback(
+    (newValue: string, index: number) => {
+      const values = value.split('');
+      const newValues = [...values.slice(0, index), newValue, ...values.slice(index + 1)];
 
-  const handleChange = (newValue: string, index: number) => {
-    const values = value.split('');
-    const newValues = [...values.slice(0, index), newValue, ...values.slice(index + 1)];
+      onChange?.(newValues.join(''));
+      if (newValue.length === EACH_LENGTH) {
+        refs[index + 1]?.current?.focus();
+      }
 
-    onChange?.(newValues.join(''));
-    if (newValue.length === EACH_LENGTH) {
-      refs[index + 1]?.current?.focus();
-    }
+      handleFulfilled(newValue, index);
+    },
+    [props]
+  );
 
-    handleFulfilled(newValue, index);
-  };
-
-  const handleFulfilled = (value: string, index: number) => {
-    if (index === 1 && value.length === EDITABLE_LENGTH) {
-      nextRef?.current?.focus();
-    }
-  };
+  const handleFulfilled = useCallback(
+    (value: string, index: number) => {
+      if (index === 1 && value.length === EDITABLE_LENGTH) {
+        nextRef?.current?.focus();
+      }
+    },
+    [props]
+  );
 
   return (
     <InputContainer title="카드 비밀번호" tied={false} caption={caption}>

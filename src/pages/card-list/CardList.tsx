@@ -10,8 +10,8 @@ import { PAYMENTS_STEP } from '../../constants';
 
 function CardList() {
   const [cards, setCards] = useState(getSavedCards());
-  const { setStep } = useStepContext();
 
+  const { setStep } = useStepContext();
   const { setCard } = useCardContext();
 
   const handleAddingCard = useCallback(() => {

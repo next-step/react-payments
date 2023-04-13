@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import '../../styles/card-types.css';
 import Palette from './Palette';
 import { CARD_TYPES } from '../../constants';
 import { ICardType } from '../../domain/payments/types';
 
-import '../../styles/card-types.css';
 import { Modal } from '../Modal';
 
 type TCardTypeModalProps = {
@@ -11,12 +11,13 @@ type TCardTypeModalProps = {
 };
 
 function CardTypeModal({ onClick }: TCardTypeModalProps) {
-  const handleSelectedPalette = (cardType: ICardType) => {
+  const handleSelectedPalette = useCallback((cardType: ICardType) => {
     onClick?.(cardType);
-  };
-  const handleNonSelected = () => {
+  }, []);
+
+  const handleNonSelected = useCallback(() => {
     onClick?.();
-  };
+  }, []);
 
   return (
     <Modal onDimmedClick={handleNonSelected}>

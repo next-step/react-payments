@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 
 type TInputContainerProps = {
   title: string;
@@ -9,7 +9,7 @@ type TInputContainerProps = {
 };
 
 function InputContainer({ title, children, width, tied = true, caption }: TInputContainerProps) {
-  const inputBoxSizeClass = width ? `w-${width}` : '';
+  const inputBoxSizeClass = useMemo(() => (width ? `w-${width}` : ''), [width]);
 
   return (
     <div className="input-container">

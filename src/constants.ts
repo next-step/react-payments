@@ -22,6 +22,7 @@ export const CARD_INPUT = {
   OWNER: {
     MIN_LENGTH: 1,
     MAX_LENGTH: 30,
+    VISIBLE_LENGTH: 5,
   },
   CVC: {
     LENGTH: 3,

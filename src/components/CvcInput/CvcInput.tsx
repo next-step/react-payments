@@ -4,34 +4,17 @@ import { InputContainer } from '../InputContainer';
 import { CARD_INPUT } from '../../constants';
 import { ToolTip } from '../ToolTip';
 import { NumberInput } from '../NumberInput';
+import useForwardedRef from '../../hooks/useForwardedRef';
+import useBaseInputHandler from '../../hooks/useBaseInputHandler';
 
 const CVC_MAX_LENGTH = CARD_INPUT.CVC.LENGTH;
 
 function CvcInput(
   { value, onChange, nextRef, caption }: TCardComponentProps<string>,
-  forwardedRef: ForwardedRef<HTMLInputElement>
+  forwardedRef: ForwardedRef<HTMLInputElement | HTMLButtonElement>
 ) {
-  const ref = useRef<HTMLInputElement>() as React.RefObject<HTMLInputElement>;
-
-  useEffect(() => {
-    if (!forwardedRef) return;
-    if (typeof forwardedRef === 'function') {
-      forwardedRef(ref.current);
-    } else {
-      forwardedRef.current = ref.current;
-    }
-  }, []);
-
-  const handleChange = (value: string) => {
-    onChange?.(value);
-    handleFullfilled(value);
-  };
-
-  const handleFullfilled = (value: string) => {
-    if (value.length == CARD_INPUT.CVC.LENGTH) {
-      nextRef?.current?.focus();
-    }
-  };
+  const { ref } = useForwardedRef({ forwardedRef });
+  const { handleChange } = useBaseInputHandler({ onChange, nextRef, maxLength: CVC_MAX_LENGTH });
 
   return (
     <InputContainer title="보안코드(CVC/CVV)" width={25} tied={false} caption={caption}>
@@ -55,5 +38,4 @@ function CvcInput(
 
 const ForwardedCvcRef = forwardRef(CvcInput);
 ForwardedCvcRef.displayName = 'CvcInput';
-
 export default React.memo(ForwardedCvcRef);

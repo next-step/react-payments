@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Modal } from '../Modal';
 
 type TToolTipProps = {
@@ -8,9 +8,9 @@ type TToolTipProps = {
 function ToolTip({ children }: TToolTipProps) {
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleVisibility = () => {
+  const handleVisibility = useCallback(() => {
     setIsVisible(!isVisible);
-  };
+  }, [isVisible]);
 
   return (
     <>

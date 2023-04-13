@@ -3,6 +3,7 @@ import { TCardComponentProps } from '../../domain/payments/types';
 import { leaveOnlyNumbers } from '../../util/number';
 import { InputContainer } from '../InputContainer';
 import { CARD_INPUT } from '../../constants';
+import useForwardedRef from '../../hooks/useForwardedRef';
 
 const { MONTH, YEAR } = CARD_INPUT.EXPIRED;
 const MONTH_CHARACTERS = {
@@ -17,23 +18,16 @@ const isFulfilled = (month: string, year: string) => {
 
 function ExpiredInput(
   { onChange, onFulfill, prevRef, nextRef, caption }: TCardComponentProps,
-  forwardedRef: React.ForwardedRef<HTMLInputElement>
+  forwardedRef: React.ForwardedRef<HTMLInputElement | HTMLButtonElement>
 ) {
   const [expiredMonth, setExpiredMonth] = useState('');
   const [expiredYear, setExpiredYear] = useState('');
 
-  const monthRef = useRef<HTMLInputElement>(null);
-  const yearRef = useRef<HTMLInputElement>(null);
+  const {
+    refs: [monthRef, yearRef],
+  } = useForwardedRef({ forwardedRef, length: [MONTH, YEAR].length });
 
-  useEffect(() => {
-    if (!forwardedRef) return;
-    if (typeof forwardedRef === 'function') {
-      forwardedRef(monthRef.current);
-    } else {
-      forwardedRef.current = monthRef.current;
-    }
-  }, []);
-
+  // TODO: 큰 거 나중에...😫
   const expiredInputProperties = [
     {
       ref: monthRef,
@@ -41,8 +35,9 @@ function ExpiredInput(
       maxLength: MONTH.LENGTH,
       onChange: useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
-          const value = event.target.value;
-          const parsedValue = parseInt(leaveOnlyNumbers(value), 10);
+          const value = leaveOnlyNumbers(event.target.value);
+          event.target.value = value;
+          const parsedValue = parseInt(value, 10);
           if (value === '') {
             setExpiredMonth(value);
             prevRef?.current?.focus();
@@ -78,7 +73,8 @@ function ExpiredInput(
       maxLength: YEAR.LENGTH,
       onChange: useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
-          const value = event.target.value;
+          const value = leaveOnlyNumbers(event.target.value);
+          event.target.value = value;
           setExpiredYear(value);
           onChange?.([expiredMonth, value]);
 
@@ -112,7 +108,6 @@ function ExpiredInput(
           type="text"
           ref={expiredInput.ref}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            event.target.value = leaveOnlyNumbers(event.target.value);
             expiredInput.onChange(event);
           }}
           maxLength={expiredInput.maxLength}

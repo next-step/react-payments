@@ -1,11 +1,11 @@
-import React, { FormEvent, useCallback, useEffect, useMemo } from 'react';
+import React, { FormEvent, useCallback, useMemo } from 'react';
 import { Card } from '../../components/Card';
 import { Frame } from '../../components/Frame';
-import { useCardContext } from '../../context/CardContext';
 import { useStepContext } from '../../context/StepContext';
-import { saveCard } from '../../domain/payments/cardStorage';
 import useBasicInput from '../../hooks/useBasicInput';
 import { CARD_DETAIL_MESSAGE, PAYMENTS_STEP } from '../../constants';
+import useCard from './hooks/useCard';
+import { saveCard } from '../../domain/payments/cardStorage';
 
 const CARD_ALIAS_MAX_LENGTH = 10;
 
@@ -15,12 +15,14 @@ type TCardDetailProps = {
 
 function CardDetail({ step }: TCardDetailProps) {
   const { setStep } = useStepContext();
-  const { card } = useCardContext();
+  const message = useMemo(() => CARD_DETAIL_MESSAGE.find((detail) => detail.step === step)?.message || '', [step]);
+
+  const { text: alias, setText: setAlias, textRef: aliasRef, handleChange: handleAliasChange } = useBasicInput();
+  const { card } = useCard({ alias, setAlias, aliasRef, handleAliasChange });
 
   if (!card) return null;
   const { owner, expiredMonth, expiredYear, numbers, cvc } = card;
 
-  const { text: alias, setText: setAlias, textRef: aliasRef, handleChange: handleAliasChange } = useBasicInput();
   const handleConfirm = useCallback(
     (event: FormEvent) => {
       try {
@@ -38,24 +40,6 @@ function CardDetail({ step }: TCardDetailProps) {
       }
     },
     [alias, card, setStep]
-  );
-
-  useEffect(() => {
-    saveCard(card);
-
-    if (card?.alias) {
-      setAlias(card.alias);
-      setTimeout(() => {
-        aliasRef?.current?.focus();
-        aliasRef?.current?.setSelectionRange?.(0, card?.alias?.length || 0);
-      });
-    }
-  }, []);
-
-  const message = useMemo(
-    //
-    () => CARD_DETAIL_MESSAGE.find((detail) => detail.step === step)?.message || '',
-    [step]
   );
 
   return (
