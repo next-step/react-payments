@@ -92,7 +92,7 @@ function CardNumbersInput(
 
   return (
     <div>
-      <InputContainer caption="카드 번호">
+      <InputContainer title="카드 번호">
         {values.map((value, idx) => (
           <NumberInput
             key={idx}

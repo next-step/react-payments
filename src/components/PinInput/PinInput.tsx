@@ -18,7 +18,7 @@ function PinInput({ onChange, onFulfill }: TCardComponentProps, ref: ForwardedRe
   } = useNumberInput({ initValues: ['', ''], maxLength: EACH_PASSWORD_LENGTH, onChange, onFulfill, forwardedRef: ref });
 
   return (
-    <InputContainer caption="카드 비밀번호" tied={false}>
+    <InputContainer title="카드 비밀번호" tied={false}>
       {Array.from({ length: LENGTH }, (_, idx) => (
         <input
           required

@@ -103,7 +103,7 @@ function ExpiredInput(
   ];
 
   return (
-    <InputContainer caption="만료 월/연도" width={50}>
+    <InputContainer title="만료 월/연도" width={50}>
       {expiredInputProperties.map((expiredInput) => (
         <input
           required

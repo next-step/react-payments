@@ -26,24 +26,22 @@ function CvcInput(
   });
 
   return (
-    <div style={{ display: 'flex' }}>
-      <InputContainer caption="보안코드(CVC/CVV)" width={25} tied={false}>
-        <div className="flex">
-          <div className="input-box w-50">
-            <input
-              required
-              ref={(el: HTMLInputElement) => (refs.current[0] = el)}
-              className="input-basic"
-              type="password"
-              maxLength={CVC_MAX_LENGTH}
-              onChange={(event) => handleChange(event, 0)}
-              value={cvc}
-            />
-          </div>
-          <ToolTip>카드 뒷면에서 찾을 수 있으며 보통 3-4글자로 되어 있습니다.</ToolTip>
+    <InputContainer title="보안코드(CVC/CVV)" width={25} tied={false}>
+      <div className="flex">
+        <div className="input-box w-25">
+          <input
+            required
+            ref={(el: HTMLInputElement) => (refs.current[0] = el)}
+            className="input-basic"
+            type="password"
+            maxLength={CVC_MAX_LENGTH}
+            onChange={(event) => handleChange(event, 0)}
+            value={cvc}
+          />
         </div>
-      </InputContainer>
-    </div>
+        <ToolTip>카드 뒷면에서 찾을 수 있으며 보통 3-4글자로 되어 있습니다.</ToolTip>
+      </div>
+    </InputContainer>
   );
 }
 

@@ -38,7 +38,7 @@ function OwnerInput(
   );
 
   return (
-    <InputContainer caption="카드 소유자 이름(선택)">
+    <InputContainer title="카드 소유자 이름(선택)">
       <input
         ref={ref}
         type="text"
