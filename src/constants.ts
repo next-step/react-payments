@@ -30,7 +30,14 @@ export const CARD_INPUT = {
     LENGTH: 4,
     EDITABLE_LENGTH: 2,
   },
-};
+} as const;
+
+export const CARD_VIRTUAL_KEYBOARD = {
+  CLICK_TRACING_DELAY: 200,
+  ACTIVE_BUTTON_CLASSNAME: 'active',
+} as const;
+
+/////////////
 
 export const CARD_DEFAULT_VALUE: ICard = {
   numbers: '1111-1111-1234-1234'.split('-'),
@@ -40,7 +47,7 @@ export const CARD_DEFAULT_VALUE: ICard = {
   cvc: '000',
   owner: '홍길동',
   pin: '0000',
-};
+} as const;
 
 export const DEFAULT_CARD_TYPE: ICardType = {
   id: 0,
@@ -48,7 +55,7 @@ export const DEFAULT_CARD_TYPE: ICardType = {
   color: '#94dacd',
   cardNumberPrefix: [],
 };
-// 포코, 준, 현석, 윤호, 환오, 태은, 준일, 은규
+
 export const CARD_TYPES: ICardType[] = [
   { id: 1, cardName: '포코', color: '#e24141', cardNumberPrefix: ['1111', '1111'] },
   { id: 2, cardName: '준', color: '#547ce4', cardNumberPrefix: ['2222', '2222'] },

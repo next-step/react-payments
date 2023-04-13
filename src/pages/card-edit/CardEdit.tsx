@@ -130,7 +130,7 @@ function CardEdit() {
 
       <form onSubmit={handleEnrollStep}>
         {/* <CardNumberInput ref={refs.cardNumber} nextRef={refs.expired} onChange={setCardNumbers} values={cardNumbers} /> */}
-        <CardNumbersInput values={cardNumbers} onChange={handleCardNumbers} />
+        <CardNumbersInput values={cardNumbers} nextRef={refs.expired} onChange={handleCardNumbers} />
         <ExpiredInput ref={refs.expired} nextRef={refs.owner} onChange={handleExpired} />
         <OwnerInput ref={refs.owner} nextRef={refs.cvc} onChange={setOwner} />
         <CvcInput ref={refs.cvc} nextRef={refs.pin} onChange={handleCvc} />

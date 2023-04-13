@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { forwardRef, useEffect, useRef } from 'react';
 import { InputContainer } from '../InputContainer';
 import NumberInput from './NumberInput';
 import { CARD_INPUT } from '../../constants';
@@ -10,12 +10,25 @@ export type TInputEventHandler = {
 
 type TCardNumbersInput = {
   values: string[];
+  nextRef?: React.RefObject<HTMLInputElement>;
 } & TInputEventHandler;
 
 const { CARD_NUMBER } = CARD_INPUT;
 
-function CardNumbersInput({ values, onChange }: TCardNumbersInput) {
+function CardNumbersInput(
+  { values, onChange, nextRef }: TCardNumbersInput,
+  forwardedRef: React.ForwardedRef<HTMLInputElement>
+) {
   const refs = Array.from({ length: values.length }, () => useRef() as React.RefObject<HTMLInputElement>);
+
+  useEffect(() => {
+    if (!forwardedRef) return;
+    if (typeof forwardedRef === 'function') {
+      forwardedRef(refs[0].current);
+    } else {
+      forwardedRef.current = refs[0].current;
+    }
+  }, []);
 
   useEffect(() => {
     const lengths = values.map((value) => value.length);
@@ -30,13 +43,26 @@ function CardNumbersInput({ values, onChange }: TCardNumbersInput) {
   }, [values]);
 
   const handleChange = (value: string, index: number) => {
-    // const value = event.target.value;
-    const newCardNumbers = [...values];
-    newCardNumbers[index] = value;
+    const newCardNumbers = [...values.slice(0, index), value, ...values.slice(index + 1)];
 
     onChange?.(newCardNumbers);
     if (value.length === CARD_NUMBER.EACH_LENGTH) {
       focusNext(index);
+    }
+
+    handleFulfilled(value, index);
+  };
+
+  const handleFulfilled = (value: string, index: number) => {
+    const newCardNumbers = [...values.slice(0, index), value, ...values.slice(index + 1)];
+
+    if (
+      // prettier-ignore
+      newCardNumbers.filter(
+        (s) => s.length === CARD_NUMBER.EACH_LENGTH
+      ).length === CARD_NUMBER.LENGTH
+    ) {
+      nextRef?.current?.focus();
     }
   };
 
@@ -85,4 +111,6 @@ function CardNumbersInput({ values, onChange }: TCardNumbersInput) {
   );
 }
 
-export default CardNumbersInput;
+const ForwardedCardNumbersInput = forwardRef(CardNumbersInput);
+ForwardedCardNumbersInput.displayName = 'CardNumbersInput';
+export default React.memo(ForwardedCardNumbersInput);
