@@ -29,6 +29,12 @@
   gap: 2.5rem;
 }
 
+.grid-repeat-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 0.5rem;
+}
+
 .grid-repeat-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -53,6 +59,16 @@
 
 .text-error {
   color: red;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
 
 .mt-1 {

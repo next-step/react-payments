@@ -1,7 +1,7 @@
 import { useRef, useContext } from 'react'
 
 import { CardTypeButton } from '@/components/button'
-import { BottomSheetContainer } from '@/components/modal'
+import { BottomSheetContainer, DarkOverlay } from '@/components/modal'
 import { CardDispatchContext } from '@/contexts/card'
 import { useModal, useOutsideClick } from '@/hooks'
 
@@ -28,15 +28,23 @@ const CardTypeSelectionModal = ({ onAfterModalClose }: CheckModalProps) => {
   }
 
   return (
-    <div ref={modalRef}>
-      <BottomSheetContainer>
-        <div className="grid-repeat-4">
-          {CARD_TYPES.map(({ name, bg, color }) => (
-            <CardTypeButton key={name} name={name} backgroundColor={bg} color={color} selectCardType={selectCardType} />
-          ))}
-        </div>
-      </BottomSheetContainer>
-    </div>
+    <DarkOverlay>
+      <div ref={modalRef}>
+        <BottomSheetContainer>
+          <div className="grid-repeat-4">
+            {CARD_TYPES.map(({ name, bg, color }) => (
+              <CardTypeButton
+                key={name}
+                name={name}
+                backgroundColor={bg}
+                color={color}
+                selectCardType={selectCardType}
+              />
+            ))}
+          </div>
+        </BottomSheetContainer>
+      </div>
+    </DarkOverlay>
   )
 }
 

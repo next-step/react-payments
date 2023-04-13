@@ -1,6 +1,7 @@
 import { memo, RefObject } from 'react'
 
 import { Input, InputTitle, InputBox, InputContainer } from '@/components/input'
+import { VirtualKeyboard } from '@/components/modal'
 import { useCardNumbers } from '@/pages/CardAdd/components/CardForm/hooks'
 
 interface HandleChangeProps {
@@ -36,6 +37,7 @@ const CardNumbers = memo(({ numbersRef, handleChange }: CardNumbersProps) => {
         <span>-</span>
         <Input ref={numbersRef.fourth} data-name="fourth" onInput={handleInputChange} maxLength={4} />
       </InputBox>
+      <VirtualKeyboard />
     </InputContainer>
   )
 })
