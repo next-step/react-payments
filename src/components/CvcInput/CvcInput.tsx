@@ -1,5 +1,4 @@
-import React, { ForwardedRef, forwardRef } from 'react';
-import useNumberInput from '../../hooks/useNumbersInput';
+import React, { ForwardedRef, forwardRef, useEffect, useRef } from 'react';
 import { TCardComponentProps } from '../../domain/payments/types';
 import { InputContainer } from '../InputContainer';
 import { CARD_INPUT } from '../../constants';
@@ -9,9 +8,20 @@ import { NumberInput } from '../NumberInput';
 const CVC_MAX_LENGTH = CARD_INPUT.CVC.LENGTH;
 
 function CvcInput(
-  { value, onChange, onFulfill, nextRef }: TCardComponentProps<string>,
+  { value, onChange, nextRef, caption }: TCardComponentProps<string>,
   forwardedRef: ForwardedRef<HTMLInputElement>
 ) {
+  const ref = useRef<HTMLInputElement>() as React.RefObject<HTMLInputElement>;
+
+  useEffect(() => {
+    if (!forwardedRef) return;
+    if (typeof forwardedRef === 'function') {
+      forwardedRef(ref.current);
+    } else {
+      forwardedRef.current = ref.current;
+    }
+  }, []);
+
   const handleChange = (value: string) => {
     onChange?.(value);
     handleFullfilled(value);
@@ -24,18 +34,16 @@ function CvcInput(
   };
 
   return (
-    <InputContainer title="보안코드(CVC/CVV)" width={25} tied={false}>
+    <InputContainer title="보안코드(CVC/CVV)" width={25} tied={false} caption={caption}>
       <div className="flex">
         <div className="input-box w-25">
           <NumberInput
+            ref={ref}
             required
             type="password"
             minLength={CVC_MAX_LENGTH}
             maxLength={CVC_MAX_LENGTH}
             onChange={handleChange}
-            onKeyDown={() => {
-              /** */
-            }}
             value={value || ''}
           />
         </div>

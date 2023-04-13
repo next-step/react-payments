@@ -6,7 +6,7 @@ import { CARD_INPUT } from '../../constants';
 const MAX_LENGTH = CARD_INPUT.OWNER.MAX_LENGTH;
 
 function OwnerInput(
-  { onChange, onFulfill, prevRef, nextRef }: TCardComponentProps<string>,
+  { onChange, onFulfill, prevRef, nextRef, caption }: TCardComponentProps<string>,
   ref: ForwardedRef<HTMLInputElement>
 ) {
   const [owner, setOwner] = useState('');
@@ -38,7 +38,7 @@ function OwnerInput(
   );
 
   return (
-    <InputContainer title="카드 소유자 이름(선택)">
+    <InputContainer title="카드 소유자 이름(선택)" caption={caption}>
       <input
         ref={ref}
         type="text"

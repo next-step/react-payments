@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useRef, useState } from 'react';
+import React, { FormEvent, useCallback, useMemo, useRef, useState } from 'react';
 import { Card, CardNumbersInput, CvcInput, ExpiredInput, Frame, OwnerInput, PinInput } from '../../components';
 import { useCardContext } from '../../context/CardContext';
 import { useStepContext } from '../../context/StepContext';
@@ -39,6 +39,34 @@ function CardEdit() {
     nextButton: useRef<HTMLButtonElement>(null),
   };
 
+  const validations: { [key: string]: [boolean, React.RefObject<HTMLInputElement>, string] } = useMemo(
+    () => ({
+      cardNumbers: [isValidCardNumber(cardNumbers), refs.cardNumber, '카드번호가 올바르게 입력되었는지 확인해 주세요'],
+      expired: [
+        isValidExpiredMonth(expiredMonth) && isValidExpiredYear(expiredYear),
+        refs.expired,
+        '만료 연/월이 올바르게 입력되었는지 확인해 주세요',
+      ],
+      owner: [isValidOwner(owner), refs.owner, '소유자 이름이 올바르게 입력되었는지 확인해 주세요'],
+      cvc: [isValidCvc(cvc), refs.cvc, 'CVC가 올바르게 입력되었는지 확인해 주세요'],
+      pin: [isValidPin(pin), refs.pin, '비밀번호 앞 2자리가 올바르게 입력되었는지 확인해 주세요'],
+    }),
+    [...inputs, refs]
+  );
+  const isValid = useMemo(() => Object.values(validations).every(([isValid]) => isValid), [...inputs]);
+
+  const getValidationCaption = useCallback(
+    (key: string) => {
+      const validation = validations[key];
+      if (!validation) throw new Error('올바르지 않은 속성 값을 입력하셨습니다');
+
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const [isValid, _, message] = validation;
+      return isValid ? '' : message;
+    },
+    [...inputs, refs]
+  );
+
   const handleExpired = useCallback(([expiredMonth, expiredYear]: string[]) => {
     setExpiredMonth(expiredMonth);
     setExpiredYear(expiredYear);
@@ -74,24 +102,9 @@ function CardEdit() {
 
   const handleEnrollStep = useCallback(
     (event: FormEvent) => {
-      //유효성 검사 구간
-      const validations: [boolean, React.RefObject<HTMLInputElement>, string][] = [
-        [isValidCardNumber(cardNumbers), refs.cardNumber, '카드번호가 올바르게 입력되었는지 확인해 주세요'],
-        [isValidExpiredMonth(expiredMonth), refs.expired, '만료 월이 올바르게 입력되었는지 확인해 주세요'],
-        [isValidExpiredYear(expiredYear), refs.expired, '만료 연도가 올바르게 입력되었는지 확인해 주세요'],
-        [isValidOwner(owner), refs.owner, '소유자 이름이 올바르게 입력되었는지 확인해 주세요'],
-        [isValidCvc(cvc), refs.cvc, 'CVC가 올바르게 입력되었는지 확인해 주세요'],
-        [isValidPin(pin), refs.pin, '비밀번호 앞 2자리가 올바르게 입력되었는지 확인해 주세요'],
-      ];
-
-      // TODO: step2에서 입력 유효성 체크 메시지 출력할 때는 코드가 바뀔 예정이에요 (e.g. Array.prototype.forEach)
-      for (const [isValid, ref, message] of validations) {
-        if (!isValid) {
-          ref?.current?.focus();
-          event.preventDefault();
-          alert(message);
-          return;
-        }
+      if (!isValid) {
+        event.preventDefault();
+        return;
       }
 
       setCard?.({
@@ -121,15 +134,39 @@ function CardEdit() {
       </Card>
 
       <form onSubmit={handleEnrollStep}>
-        <CardNumbersInput values={cardNumbers} nextRef={refs.expired} onChange={handleCardNumbers} />
-        <ExpiredInput ref={refs.expired} nextRef={refs.owner} onChange={handleExpired} />
-        <OwnerInput ref={refs.owner} nextRef={refs.cvc} onChange={setOwner} />
-        <CvcInput value={cvc} ref={refs.cvc} nextRef={refs.pin} onChange={setCvc} />
-        <PinInput value={pin} ref={refs.pin} nextRef={refs.nextButton} onChange={setPin} />
+        <CardNumbersInput
+          values={cardNumbers}
+          nextRef={refs.expired}
+          onChange={handleCardNumbers}
+          caption={getValidationCaption('cardNumbers')}
+        />
+        <ExpiredInput
+          ref={refs.expired}
+          nextRef={refs.owner}
+          onChange={handleExpired}
+          caption={getValidationCaption('expired')}
+        />
+        <OwnerInput ref={refs.owner} nextRef={refs.cvc} onChange={setOwner} caption={getValidationCaption('owner')} />
+        <CvcInput
+          value={cvc}
+          ref={refs.cvc}
+          nextRef={refs.pin}
+          onChange={setCvc}
+          caption={getValidationCaption('cvc')}
+        />
+        <PinInput
+          value={pin}
+          ref={refs.pin}
+          nextRef={refs.nextButton}
+          onChange={setPin}
+          caption={getValidationCaption('pin')}
+        />
 
         <div className="button-box">
           <div className="button-text">
-            <button ref={refs.nextButton}>다음</button>
+            <button ref={refs.nextButton} disabled={!isValid}>
+              다음
+            </button>
           </div>
         </div>
       </form>

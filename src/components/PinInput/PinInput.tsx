@@ -8,7 +8,7 @@ import { NumberInput } from '../NumberInput';
 const { EDITABLE_LENGTH, EACH_LENGTH } = CARD_INPUT.PIN;
 
 function PinInput(
-  { value = '', onChange, nextRef }: TCardComponentProps<string>,
+  { value = '', onChange, nextRef, caption }: TCardComponentProps<string>,
   forwardedRef: React.ForwardedRef<HTMLInputElement>
 ) {
   const refs = Array.from({ length: EDITABLE_LENGTH }, () => useRef() as React.RefObject<HTMLInputElement>);
@@ -41,7 +41,7 @@ function PinInput(
   };
 
   return (
-    <InputContainer title="카드 비밀번호" tied={false}>
+    <InputContainer title="카드 비밀번호" tied={false} caption={caption}>
       {Array.from({ length: EDITABLE_LENGTH }, (_, idx) => (
         <NumberInput
           //

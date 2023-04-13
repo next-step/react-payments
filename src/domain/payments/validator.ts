@@ -1,4 +1,5 @@
 import { CARD_INPUT } from '../../constants';
+import { leaveOnlyNumbers } from '../../util/number';
 
 const {
   CARD_NUMBER,
@@ -43,9 +44,11 @@ export const isValidOwner = (owner: string) => {
 };
 
 export const isValidCvc = (cvc: string) => {
-  return !isNaN(parseInt(cvc, 10)) && cvc.length === CVC.LENGTH;
+  const parsed = leaveOnlyNumbers(cvc);
+  return parsed?.length === CVC.LENGTH;
 };
 
 export const isValidPin = (pin: string) => {
-  return !isNaN(parseInt(pin, 10)) && pin.length === PIN.EDITABLE_LENGTH;
+  const parsed = leaveOnlyNumbers(pin);
+  return parsed?.length === PIN.EDITABLE_LENGTH;
 };

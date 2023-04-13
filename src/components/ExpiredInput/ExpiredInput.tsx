@@ -16,7 +16,7 @@ const isFulfilled = (month: string, year: string) => {
 };
 
 function ExpiredInput(
-  { onChange, onFulfill, prevRef, nextRef }: TCardComponentProps,
+  { onChange, onFulfill, prevRef, nextRef, caption }: TCardComponentProps,
   forwardedRef: React.ForwardedRef<HTMLInputElement>
 ) {
   const [expiredMonth, setExpiredMonth] = useState('');
@@ -103,7 +103,7 @@ function ExpiredInput(
   ];
 
   return (
-    <InputContainer title="만료 월/연도" width={50}>
+    <InputContainer title="만료 월/연도" width={50} caption={caption}>
       {expiredInputProperties.map((expiredInput) => (
         <input
           required

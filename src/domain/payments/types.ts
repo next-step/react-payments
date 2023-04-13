@@ -14,6 +14,7 @@ export type TCardComponentProps<T = string[]> = {
   nextRef?: React.RefObject<HTMLInputElement | HTMLButtonElement>;
   forwardedRef?: React.ForwardedRef<HTMLInputElement>;
   children?: React.ReactNode;
+  caption?: string;
 };
 
 export interface ICard {

@@ -11,12 +11,13 @@ export type TInputEventHandler = {
 type TCardNumbersInput = {
   values: string[];
   nextRef?: React.RefObject<HTMLInputElement>;
+  caption?: string;
 } & TInputEventHandler;
 
 const { CARD_NUMBER } = CARD_INPUT;
 
 function CardNumbersInput(
-  { values, onChange, nextRef }: TCardNumbersInput,
+  { values, onChange, nextRef, caption }: TCardNumbersInput,
   forwardedRef: React.ForwardedRef<HTMLInputElement>
 ) {
   const refs = Array.from({ length: values.length }, () => useRef() as React.RefObject<HTMLInputElement>);
@@ -92,7 +93,7 @@ function CardNumbersInput(
 
   return (
     <div>
-      <InputContainer title="카드 번호">
+      <InputContainer title="카드 번호" caption={caption}>
         {values.map((value, idx) => (
           <NumberInput
             key={idx}
