@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import { withReactContext } from 'storybook-react-context';
 import CardEdit from './CardEdit';
+import { CardContextProvider } from '../../context/CardContext';
 
 export default {
   title: 'Payments/Pages/CardEdit',
@@ -9,7 +9,11 @@ export default {
 } as ComponentMeta<typeof CardEdit>;
 
 const Template: ComponentStory<typeof CardEdit> = () => {
-  return <CardEdit />;
+  return (
+    <CardContextProvider>
+      <CardEdit />
+    </CardContextProvider>
+  );
 };
 
 export const Default = Template.bind({});

@@ -22,7 +22,7 @@ export function useCardContext() {
   const setCard = useContext(CardValueUpdatingContext);
 
   if ([card, setCard].some((o) => o === null)) {
-    throw new Error('CardValueContext 초기화 작업이 진행되지 않았습니다.');
+    throw new Error('CardValueContext 초기화 작업이 진행되지 않았습니다.' + card + setCard);
   }
   return {
     card,
