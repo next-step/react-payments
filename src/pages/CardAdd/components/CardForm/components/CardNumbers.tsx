@@ -1,29 +1,18 @@
-import { memo, RefObject } from 'react'
-
 import { Input, InputTitle, InputBox, InputContainer } from '@/components/input'
-import { VirtualKeyboard } from '@/components/modal'
 import { useCardNumbers } from '@/pages/CardAdd/components/CardForm/hooks'
+import { CardNumbersOrder, CardNumbersProps } from '@/pages/CardAdd/components/CardForm/types'
 
-interface HandleChangeProps {
-  value: string
-  order: 'first' | 'second' | 'third' | 'fourth'
-}
-interface CardNumbersProps {
-  numbersRef: {
-    first: RefObject<HTMLInputElement>
-    second: RefObject<HTMLInputElement>
-    third: RefObject<HTMLInputElement>
-    fourth: RefObject<HTMLInputElement>
-  }
-  handleChange: ({ value, order }: HandleChangeProps) => void
-}
-
-const CardNumbers = memo(({ numbersRef, handleChange }: CardNumbersProps) => {
-  const onFocusThirdInput = () => {
-    numbersRef.third.current?.focus()
+const CardNumbers = ({ numbersRef, nextRef, handleChange }: CardNumbersProps) => {
+  const onFocusChange = (order: CardNumbersOrder) => {
+    numbersRef[order].current?.focus()
   }
 
-  const { handleInputChange } = useCardNumbers({ onFocusChange: onFocusThirdInput, handleChange })
+  const { handleInputChange, openVirtualKeyboard } = useCardNumbers({
+    numbersRef,
+    nextRef,
+    onFocusChange,
+    handleChange,
+  })
 
   return (
     <InputContainer>
@@ -33,14 +22,25 @@ const CardNumbers = memo(({ numbersRef, handleChange }: CardNumbersProps) => {
         <span>-</span>
         <Input ref={numbersRef.second} data-name="second" onInput={handleInputChange} maxLength={4} />
         <span>-</span>
-        <Input ref={numbersRef.third} data-name="third" onInput={handleInputChange} maxLength={4} />
+        <Input
+          ref={numbersRef.third}
+          data-name="third"
+          onInput={handleInputChange}
+          maxLength={4}
+          onFocus={() => openVirtualKeyboard('third')}
+        />
         <span>-</span>
-        <Input ref={numbersRef.fourth} data-name="fourth" onInput={handleInputChange} maxLength={4} />
+        <Input
+          ref={numbersRef.fourth}
+          data-name="fourth"
+          onInput={handleInputChange}
+          maxLength={4}
+          onFocus={() => openVirtualKeyboard('fourth')}
+        />
       </InputBox>
-      <VirtualKeyboard />
     </InputContainer>
   )
-})
+}
 
 CardNumbers.displayName = 'CardNumbers'
 

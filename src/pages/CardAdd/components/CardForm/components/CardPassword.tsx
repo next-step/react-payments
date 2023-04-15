@@ -1,9 +1,13 @@
 import { Input, InputTitle, InputContainer } from '@/components/input'
 import { useCardPassword } from '@/pages/CardAdd/components/CardForm/hooks'
-import { CardPasswordProps } from '@/pages/CardAdd/components/CardForm/types'
+import { CardPasswordProps, CardPasswordOrder } from '@/pages/CardAdd/components/CardForm/types'
 
 const CardPassword = ({ passwordRef, handleChange }: CardPasswordProps) => {
-  const { handleInputChange } = useCardPassword({ passwordRef, handleChange })
+  const onFocusChange = (order: CardPasswordOrder) => {
+    passwordRef[order].current?.focus()
+  }
+
+  const { handleInputChange, openVirtualKeyboard } = useCardPassword({ passwordRef, handleChange, onFocusChange })
 
   return (
     <InputContainer>
@@ -16,6 +20,7 @@ const CardPassword = ({ passwordRef, handleChange }: CardPasswordProps) => {
           type="password"
           maxLength={1}
           onInput={handleInputChange}
+          onFocus={() => openVirtualKeyboard('first')}
         />
         <Input
           ref={passwordRef.second}
@@ -24,6 +29,7 @@ const CardPassword = ({ passwordRef, handleChange }: CardPasswordProps) => {
           type="password"
           maxLength={1}
           onInput={handleInputChange}
+          onFocus={() => openVirtualKeyboard('second')}
         />
         <Input addtionalClassName="w-15 bg-white" type="password" value="x" readOnly />
         <Input addtionalClassName="w-15 bg-white" type="password" value="x" readOnly />

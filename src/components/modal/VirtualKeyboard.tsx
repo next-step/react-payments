@@ -1,32 +1,34 @@
-import { BottomSheetContainer } from '@/components/modal'
+import { useRef } from 'react'
 
-const VirtualKeyboard = () => {
+import { BottomSheetContainer } from '@/components/modal'
+import { getRandomVirtualDigits } from '@/domain'
+import { useModal, useOutsideClick } from '@/hooks'
+
+interface VirtualKeyboardProps {
+  onKeyPress: (value: string) => void
+}
+
+const VirtualKeyboard = ({ onKeyPress }: VirtualKeyboardProps) => {
+  const modalRef = useRef<HTMLDivElement>(null)
+  const { closeModal } = useModal()
+
+  useOutsideClick(modalRef, () => {
+    closeModal({ element: VirtualKeyboard })
+  })
+
   return (
-    <BottomSheetContainer>
-      <div className="grid-repeat-3 w-100 px-5">
-        {KEYBOARD.map(({ digit }) => (
-          <button key={digit} type="button" className="digit-button">
-            {digit}
-          </button>
-        ))}
-      </div>
-    </BottomSheetContainer>
+    <div ref={modalRef}>
+      <BottomSheetContainer>
+        <div className="grid-repeat-3 w-100 px-5">
+          {getRandomVirtualDigits().map((digit) => (
+            <button key={digit} type="button" className="digit-button" onClick={() => onKeyPress(String(digit))}>
+              {digit}
+            </button>
+          ))}
+        </div>
+      </BottomSheetContainer>
+    </div>
   )
 }
 
 export default VirtualKeyboard
-
-const KEYBOARD = [
-  { digit: 0 },
-  { digit: 1 },
-  { digit: 2 },
-  { digit: 3 },
-  { digit: 4 },
-  { digit: 5 },
-  { digit: 6 },
-  { digit: 7 },
-  { digit: 8 },
-  { digit: 9 },
-  { digit: null },
-  { digit: 'Delete' },
-]

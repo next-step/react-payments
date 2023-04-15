@@ -23,6 +23,7 @@ const useCardInfo = () => {
 
   const handleNumber = ({ value, order }: HandleNumberProps) => {
     if (!isNumber(value)) return
+
     cardDispatch({
       type: 'SET_CARD_NUMBERS',
       payload: {

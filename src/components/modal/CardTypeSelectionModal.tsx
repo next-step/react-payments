@@ -17,14 +17,18 @@ const CardTypeSelectionModal = ({ onAfterModalClose }: CheckModalProps) => {
 
   useOutsideClick(modalRef, () => {
     closeModal({ element: CardTypeSelectionModal })
-  })
-
-  const selectCardType = (name: string, bg: string, color: string) => {
     if (onAfterModalClose) {
       onAfterModalClose()
     }
+  })
+
+  const selectCardType = (name: string, bg: string, color: string) => {
     cardDispatch({ type: 'SET_CARD_TYPE', payload: { name, bg, color } })
     closeModal({ element: CardTypeSelectionModal })
+
+    if (onAfterModalClose) {
+      onAfterModalClose()
+    }
   }
 
   return (

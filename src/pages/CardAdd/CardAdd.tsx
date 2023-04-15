@@ -17,10 +17,14 @@ function CardAdd() {
       <PageTitle title="카드 추가" buttonElement={<BackButton />} />
       <PreviewCard />
       <CardForm>
-        <CardForm.CardNumbers numbersRef={numbersRef} handleChange={handleNumber} />
+        <CardForm.CardNumbers numbersRef={numbersRef} nextRef={expiredDateRef.first} handleChange={handleNumber} />
         <CardForm.CardExpiredDate expiredDateRef={expiredDateRef} handleChange={handleExpiredDate} />
         <CardForm.CardOwner ownerRef={ownerRef} handleChange={handleOwner} />
-        <CardForm.CardSecurityCode securityCodeRef={securityCodeRef} handleChange={handleSecurityCode} />
+        <CardForm.CardSecurityCode
+          securityCodeRef={securityCodeRef}
+          nextRef={passwordRef.first}
+          handleChange={handleSecurityCode}
+        />
         <CardForm.CardPassword passwordRef={passwordRef} handleChange={handlePassword} />
       </CardForm>
       <NavigationButtonWithValidation to="/card-completed" text="다음" />
