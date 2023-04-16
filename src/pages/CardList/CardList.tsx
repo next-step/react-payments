@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 
 import { EmptyCard, SmallCard } from '@/components/card'
 import { PageTitle } from '@/components/layouts'
+import { getCardNumbersDisplay, getCardExpiredDateDisplay } from '@/domain'
 import { useCardList } from '@/pages/CardList/hooks'
 
 function CardList() {
@@ -9,26 +10,18 @@ function CardList() {
 
   return (
     <div className="root">
-      <div className="app flex-column-center">
-        <div className="flex-center">
-          <PageTitle addtionalClassName="mb-10" title="보유 카드" />
-        </div>
+      <div className="app text-center">
+        <PageTitle addtionalClassName="mb-10" title="보유 카드" />
         {cardList?.map((card) => {
-          const {
-            cardNumbers: { first, second, third, fourth },
-            owner,
-            name,
-            nickname,
-            expiredMonth,
-            expiredYear,
-          } = card
+          const { cardNumbers, owner, name, nickname, expiredMonth, expiredYear, cardType } = card
           return (
             <div key={card.nickname} onClick={() => onClickCard(card)}>
               <SmallCard
                 cardName={name}
-                cardNumbers={`${first} - ${second} - ${third} - ${fourth}`}
+                cardNumbers={getCardNumbersDisplay(cardNumbers)}
                 cardOwner={owner}
-                cardExpiredDate={`${expiredMonth} / ${expiredYear}`}
+                cardExpiredDate={getCardExpiredDateDisplay({ expiredMonth, expiredYear })}
+                cardType={cardType}
               />
               <span className="card-nickname">{nickname}</span>
             </div>

@@ -3,8 +3,16 @@ import { CardDetailsForm } from '@/components/layouts'
 import { useCardCompleted } from '@/pages/CardCompleted/hooks'
 
 function CardCompleted() {
-  const { nicknameRef, cardNumbers, cardOwner, cardExpiredDate, cardNickname, cardName, handlePreNavigation } =
-    useCardCompleted()
+  const {
+    nicknameRef,
+    cardNumbers,
+    cardOwner,
+    cardExpiredDate,
+    cardNickname,
+    cardName,
+    cardType,
+    handlePreNavigation,
+  } = useCardCompleted()
 
   return (
     <CardDetailsForm>
@@ -18,6 +26,7 @@ function CardCompleted() {
         cardName={cardName}
         cardOwner={cardOwner}
         cardExpiredDate={cardExpiredDate}
+        cardType={cardType}
       />
       <CardDetailsForm.CardAliasInput inputRef={nicknameRef} defaultValue={cardNickname} />
       <CardDetailsForm.NavigationButton

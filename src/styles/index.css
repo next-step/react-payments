@@ -25,11 +25,12 @@ input {
   height: 700px;
   position: relative;
   border-radius: 15px;
+  overflow-y: scroll;
 }
 
 .app {
   height: 100%;
-  padding: 16px 24px;
+  padding: 24px;
 }
 
 .page-title {

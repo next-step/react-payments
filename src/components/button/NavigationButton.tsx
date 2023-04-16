@@ -7,7 +7,7 @@ interface NavigationButtonProps {
   text: string
   onBeforeNavigate?: () => void
   to: Destination
-  isNavigationEnabled?: boolean
+  isNavigationEnabled?: () => boolean
 }
 
 const NavigationButton = ({
@@ -15,7 +15,7 @@ const NavigationButton = ({
   text,
   onBeforeNavigate,
   to,
-  isNavigationEnabled = true,
+  isNavigationEnabled = () => true,
 }: NavigationButtonProps) => {
   const navigate = useNavigate()
 
@@ -23,7 +23,7 @@ const NavigationButton = ({
     if (onBeforeNavigate) {
       await Promise.resolve(onBeforeNavigate())
     }
-    if (isNavigationEnabled) {
+    if (isNavigationEnabled()) {
       navigate(to)
     }
   }

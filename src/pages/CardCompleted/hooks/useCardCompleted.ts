@@ -34,6 +34,7 @@ const useCardCompleted = () => {
     expiredYear: cardInfo.expiredMonth,
   })
   const cardNickname = cardInfo.nickname
+  const { cardType } = cardInfo
 
   return {
     nicknameRef,
@@ -42,6 +43,7 @@ const useCardCompleted = () => {
     cardExpiredDate,
     cardNickname,
     cardName,
+    cardType,
     handlePreNavigation,
   }
 }

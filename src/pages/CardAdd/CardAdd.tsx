@@ -10,7 +10,17 @@ import { useCardAdd } from './hooks'
 function CardAdd() {
   // Todo: 핸들러 각 컴포넌트에서 불러오고 Props에서 지워주기
   const { handleNumber, handleExpiredDate, handleOwner, handlePassword, handleSecurityCode } = useCardInfo()
-  const { numbersRef, passwordRef, expiredDateRef, ownerRef, securityCodeRef } = useCardAdd()
+  const {
+    numbersRef,
+    passwordRef,
+    expiredDateRef,
+    ownerRef,
+    securityCodeRef,
+    openValidToast,
+    setOpenValidToast,
+    onBeforeNavigate,
+    isValidCardInfo,
+  } = useCardAdd()
 
   return (
     <div className="app">
@@ -27,7 +37,14 @@ function CardAdd() {
         />
         <CardForm.CardPassword passwordRef={passwordRef} handleChange={handlePassword} />
       </CardForm>
-      <NavigationButtonWithValidation to="/card-completed" text="다음" />
+      <NavigationButtonWithValidation
+        to="/card-completed"
+        text="다음"
+        openValidToast={openValidToast}
+        setOpenValidToast={setOpenValidToast}
+        onBeforeNavigate={onBeforeNavigate}
+        isNavigationEnabled={isValidCardInfo}
+      />
     </div>
   )
 }
