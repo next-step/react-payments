@@ -1,25 +1,20 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Story, Meta } from '@storybook/react'
 
+import CardDecorator from '@/decorator/CardDecorator'
+import { CardExpiredDateProps } from '@/pages/CardAdd/components/CardForm/types'
 import { useCardAdd } from '@/pages/CardAdd/hooks'
-import { useCardInfo } from '@/pages/hooks'
 
 import CardExpiredDate from './CardExpiredDate'
 
 export default {
-  title: '페이먼츠 미션/Pages/CardAdd/CardForm/CardExpiredDate',
+  title: 'CardAdd/CardExpiredDate',
   component: CardExpiredDate,
-} as ComponentMeta<typeof CardExpiredDate>
+  decorators: [CardDecorator],
+} as Meta
 
-const Template: ComponentStory<typeof CardExpiredDate> = (props) => {
-  const { handleExpiredDate } = useCardInfo()
+const Template: Story<CardExpiredDateProps> = () => {
   const { expiredDateRef } = useCardAdd()
-  return (
-    <div className="root">
-      <div className="app">
-        <CardExpiredDate {...props} expiredDateRef={expiredDateRef} handleChange={handleExpiredDate} />
-      </div>
-    </div>
-  )
+  return <CardExpiredDate expiredDateRef={expiredDateRef} />
 }
 
-export const basic = Template.bind({})
+export const Default = Template.bind({})

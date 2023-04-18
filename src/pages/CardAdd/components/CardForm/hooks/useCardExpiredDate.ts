@@ -1,9 +1,10 @@
 import { ChangeEvent } from 'react'
 
 import { isYearValid } from '@/domain'
-import { UseCardExpiredDateProps } from '@/pages/CardAdd/components/CardForm/types'
+import { useCardInfo } from '@/pages/hooks'
 
-const useCardExpiredDate = ({ handleChange }: UseCardExpiredDateProps) => {
+const useCardExpiredDate = () => {
+  const { handleExpiredDate } = useCardInfo()
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const {
       dataset: { name },
@@ -17,7 +18,7 @@ const useCardExpiredDate = ({ handleChange }: UseCardExpiredDateProps) => {
           event.target.value = ''
           return
         }
-        handleChange({ value, yymm: name })
+        handleExpiredDate({ value, yymm: name })
         break
       case 'MM':
         if (Number(value) > 12 || Number(value) < 0) {
@@ -25,7 +26,7 @@ const useCardExpiredDate = ({ handleChange }: UseCardExpiredDateProps) => {
           event.target.value = ''
           return
         }
-        handleChange({ value, yymm: name })
+        handleExpiredDate({ value, yymm: name })
         break
     }
   }

@@ -2,8 +2,8 @@ import { Input, InputTitle, InputBox, InputContainer } from '@/components/input'
 import { useCardExpiredDate } from '@/pages/CardAdd/components/CardForm/hooks'
 import { CardExpiredDateProps } from '@/pages/CardAdd/components/CardForm/types'
 
-const CardExpiredDate = ({ expiredDateRef, handleChange }: CardExpiredDateProps) => {
-  const { handleInputChange } = useCardExpiredDate({ handleChange })
+const CardExpiredDate = ({ expiredDateRef }: CardExpiredDateProps) => {
+  const { handleInputChange } = useCardExpiredDate()
 
   return (
     <InputContainer>

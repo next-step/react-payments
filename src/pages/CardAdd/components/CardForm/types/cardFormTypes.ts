@@ -9,7 +9,6 @@ export interface CardExpiredDateProps {
     first: RefObject<HTMLInputElement>
     second: RefObject<HTMLInputElement>
   }
-  handleChange({ value, yymm }: HandleExpiredDateProps): void
 }
 
 export interface UseCardExpiredDateProps {

@@ -9,7 +9,7 @@ import { useCardAdd } from './hooks'
 
 function CardAdd() {
   // Todo: 핸들러 각 컴포넌트에서 불러오고 Props에서 지워주기
-  const { handleNumber, handleExpiredDate, handleOwner, handlePassword, handleSecurityCode } = useCardInfo()
+  const { handleNumber, handleOwner, handlePassword, handleSecurityCode } = useCardInfo()
   const {
     numbersRef,
     passwordRef,
@@ -28,7 +28,7 @@ function CardAdd() {
       <PreviewCard />
       <CardForm>
         <CardForm.CardNumbers numbersRef={numbersRef} nextRef={expiredDateRef.first} handleChange={handleNumber} />
-        <CardForm.CardExpiredDate expiredDateRef={expiredDateRef} handleChange={handleExpiredDate} />
+        <CardForm.CardExpiredDate expiredDateRef={expiredDateRef} />
         <CardForm.CardOwner ownerRef={ownerRef} handleChange={handleOwner} />
         <CardForm.CardSecurityCode
           securityCodeRef={securityCodeRef}
