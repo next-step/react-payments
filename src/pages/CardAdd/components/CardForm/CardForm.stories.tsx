@@ -11,18 +11,22 @@ export default {
 } as ComponentMeta<typeof CardForm>
 
 const Template: ComponentStory<typeof CardForm> = () => {
-  const { handleExpiredDate, handleOwner, handlePassword, handleSecurityCode } = useCardInfo()
+  const { handleNumber, handleExpiredDate, handleOwner, handlePassword, handleSecurityCode } = useCardInfo()
 
-  const { passwordRef, securityCodeRef, expiredDateRef, ownerRef } = useCardAdd()
+  const { numbersRef, passwordRef, expiredDateRef, ownerRef, securityCodeRef } = useCardAdd()
 
   return (
     <div className="root">
       <div className="app">
         <CardForm>
-          {/* <CardForm.CardNumbers numbersRef={numbersRef} handleChange={handleNumber} /> */}
+          <CardForm.CardNumbers numbersRef={numbersRef} nextRef={expiredDateRef.first} handleChange={handleNumber} />
           <CardForm.CardExpiredDate expiredDateRef={expiredDateRef} handleChange={handleExpiredDate} />
           <CardForm.CardOwner ownerRef={ownerRef} handleChange={handleOwner} />
-          <CardForm.CardSecurityCode securityCodeRef={securityCodeRef} handleChange={handleSecurityCode} />
+          <CardForm.CardSecurityCode
+            securityCodeRef={securityCodeRef}
+            nextRef={passwordRef.first}
+            handleChange={handleSecurityCode}
+          />
           <CardForm.CardPassword passwordRef={passwordRef} handleChange={handlePassword} />
         </CardForm>
       </div>

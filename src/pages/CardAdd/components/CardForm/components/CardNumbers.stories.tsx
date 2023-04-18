@@ -10,12 +10,14 @@ export default {
   component: CardNumbers,
 } as ComponentMeta<typeof CardNumbers>
 
-const Template: ComponentStory<typeof CardNumbers> = (props) => {
+const Template: ComponentStory<typeof CardNumbers> = () => {
   const { handleNumber } = useCardInfo()
-  const { numbersRef } = useCardAdd()
+  const { numbersRef, expiredDateRef } = useCardAdd()
   return (
     <div className="root">
-      <div className="app">{/* <CardNumbers {...props} numbersRef={numbersRef} handleChange={handleNumber} /> */}</div>
+      <div className="app">
+        <CardNumbers numbersRef={numbersRef} nextRef={expiredDateRef.first} handleChange={handleNumber} />
+      </div>
     </div>
   )
 }

@@ -10,6 +10,7 @@ function CardUpdate() {
     cardExpiredDate,
     cardName,
     cardNickname,
+    cardType,
     onClickDeleteButton,
     handlePreNavigation,
   } = useCardUpdate()
@@ -27,6 +28,7 @@ function CardUpdate() {
         cardName={cardName}
         cardOwner={cardOwner}
         cardExpiredDate={cardExpiredDate}
+        cardType={cardType}
       />
       <CardDetailsForm.CardAliasInput inputRef={nicknameRef} defaultValue={cardNickname} />
       <CardDetailsForm.NavigationButton

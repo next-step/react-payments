@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
-import { useRef } from 'react'
 
+import { useCardAdd } from '@/pages/CardAdd/hooks'
 import { useCardInfo } from '@/pages/hooks'
 
 import CardSecurityCode from './CardSecurityCode'
@@ -12,11 +12,15 @@ export default {
 
 const Template: ComponentStory<typeof CardSecurityCode> = () => {
   const { handleSecurityCode } = useCardInfo()
-  const securityCodeRef = useRef<HTMLInputElement>(null)
+  const { passwordRef, securityCodeRef } = useCardAdd()
   return (
     <div className="root">
       <div className="app">
-        <CardSecurityCode securityCodeRef={securityCodeRef} handleChange={handleSecurityCode} />
+        <CardSecurityCode
+          securityCodeRef={securityCodeRef}
+          nextRef={passwordRef.first}
+          handleChange={handleSecurityCode}
+        />
       </div>
     </div>
   )
