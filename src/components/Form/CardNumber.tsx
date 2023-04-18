@@ -30,7 +30,7 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
   const itemsRef = useRef<HTMLInputElement[]>([]);
 
   const checkCardNumberInvalid = (cardNumbers: CardNumbers) => {
-    const valid = Object.values(cardNumbers).every((cardNumber) => cardNumber);
+    const valid = Object.values(cardNumbers).some((cardNumber) => !cardNumber);
     setInvalid(!valid);
   };
 
