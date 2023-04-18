@@ -8,7 +8,7 @@ import {
 } from "./../components/Form/CardNumber";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { initCard } from "../constants/bank";
-import { AnyObject, CardType } from "../types/common";
+import { CardType } from "../types/common";
 import { Date } from "../components/Form/ExpiredDate";
 import { getBankColor } from "../utils/format";
 import useCardContext from "./useCardContext";
@@ -59,8 +59,13 @@ function useCardChange() {
     return formatCardNumber(cardInfo.cardNumber);
   }, [cardInfo.cardNumber]);
 
+  type CardInfo = {
+    cardNumber?: CardNumbers;
+    bankId?: string;
+  };
+
   const updateCardInfoWithBankId = (
-    newCardInfo: AnyObject,
+    newCardInfo: CardInfo,
     firstCardNumber: string
   ) => {
     if (!firstCardNumber || firstCardNumber.length < 4) {
@@ -73,7 +78,7 @@ function useCardChange() {
   };
 
   const onCardNumberChange = (cardNumbers: CardNumbers) => {
-    const newCardInfo: AnyObject = {
+    const newCardInfo: CardInfo = {
       cardNumber: cardNumbers,
     };
 
