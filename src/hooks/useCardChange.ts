@@ -59,7 +59,10 @@ function useCardChange() {
     return formatCardNumber(cardInfo.cardNumber);
   }, [cardInfo.cardNumber]);
 
-  const setBankId = (newCardInfo: AnyObject, firstCardNumber: string) => {
+  const updateCardInfoWithBankId = (
+    newCardInfo: AnyObject,
+    firstCardNumber: string
+  ) => {
     if (!firstCardNumber || firstCardNumber.length < 4) {
       return newCardInfo;
     }
@@ -74,7 +77,7 @@ function useCardChange() {
       cardNumber: cardNumbers,
     };
 
-    const cardInfo = setBankId(newCardInfo, cardNumbers[0]);
+    const cardInfo = updateCardInfoWithBankId(newCardInfo, cardNumbers[0]);
 
     if (
       cardNumbers[CARD_LAST_INDEX].length === CARD_MAX_LENGTH &&
