@@ -68,17 +68,19 @@ function Add() {
     e.preventDefault();
     const isInvalid = checkValid(e.currentTarget);
 
-    if (!isInvalid) {
-      if (cardInfo.bankId) {
-        setCard(initCard);
-        history.push({
-          pathname: ROUTE.COMPLETE,
-          state: { card: cardInfo },
-        });
-        return;
-      }
-      setIsOpen(true);
+    if (isInvalid) {
+      return;
     }
+
+    if (cardInfo.bankId) {
+      setCard(initCard);
+      history.push({
+        pathname: ROUTE.COMPLETE,
+        state: { card: cardInfo },
+      });
+      return;
+    }
+    setIsOpen(true);
   };
 
   return (
