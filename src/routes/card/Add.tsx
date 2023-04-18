@@ -83,6 +83,15 @@ function Add() {
     setIsOpen(true);
   };
 
+  const onClickKeyboard = (digitInfo: { digit: number; component: string }) => {
+    console.log(
+      "%c 🤩🤩🤩 영우의 로그 digit: ",
+      "font-size: x-large; color: #bada55;",
+      "",
+      digitInfo
+    );
+  };
+
   return (
     <KeyboardProvider>
       <Header />
@@ -107,7 +116,7 @@ function Add() {
         <Password onPasswordChange={onPasswordChange}></Password>
         <Button />
       </form>
-      <Keyboard></Keyboard>
+      <Keyboard onClickKeyboard={onClickKeyboard}></Keyboard>
     </KeyboardProvider>
   );
 }

@@ -1,14 +1,16 @@
 import styled from "styled-components";
 import useKeyboardContext from "../hooks/useKeyboardContext";
 
-type ComponentProps = {
-  children?: JSX.Element | JSX.Element[] | null;
-};
-const DIGIT_LIST = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const DIGIT_LIST = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+DIGIT_LIST.sort(() => Math.random() - 0.5);
 
-function Keyboard({ children }: ComponentProps) {
+function Keyboard({ onClickKeyboard }: KeyboardProps) {
   const { isOpen } = useKeyboardContext();
-  const onClick = (digit: number) => {};
+  const onClick = (digit: number) => {
+    if (onClickKeyboard) {
+      onClickKeyboard(digit);
+    }
+  };
 
   return (
     <>
@@ -23,7 +25,7 @@ function Keyboard({ children }: ComponentProps) {
               ))}
             </DigitWrapper>
             <BottomWrapper>
-              <DigitButton onClick={() => onClick(0)}>0</DigitButton>
+              <DigitButton onClick={() => {}}>지우기</DigitButton>
             </BottomWrapper>
           </Box>
         </Dimmed>
@@ -31,6 +33,10 @@ function Keyboard({ children }: ComponentProps) {
     </>
   );
 }
+
+type KeyboardProps = {
+  onClickKeyboard?: Function;
+};
 
 const Dimmed = styled.div`
   width: 100%;
@@ -62,6 +68,10 @@ const DigitWrapper = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   width: 100%;
   height: 80%;
+
+  & > :nth-child(10) {
+    grid-column: 1 / 4;
+  }
 `;
 
 const BottomWrapper = styled.div`
