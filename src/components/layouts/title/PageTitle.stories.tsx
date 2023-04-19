@@ -5,7 +5,7 @@ import { BackButton } from '@/components/button'
 import PageTitle from './PageTitle'
 
 export default {
-  title: '페이먼츠 미션/Components/Layout/Title',
+  title: 'Components/Layout/Title',
   component: PageTitle,
   args: {
     title: '카드 추가',
@@ -15,15 +15,13 @@ export default {
 
 const Template: ComponentStory<typeof PageTitle> = (props) => (
   <div className="root">
-    <div className="app flex-column-center">
-      <div className="flex-center">
-        <PageTitle {...props} />
-      </div>
+    <div className="app">
+      <PageTitle {...props} />
     </div>
   </div>
 )
 
-export const basic = Template.bind({})
+export const Default = Template.bind({})
 
 export const type1 = Template.bind({})
 type1.args = {
@@ -55,12 +53,5 @@ export const type5 = Template.bind({})
 type5.args = {
   title: '카드등록이 완료되었습니다.',
   buttonElement: <BackButton />,
-  addtionalClassName: 'mb-10',
-}
-
-export const type6 = Template.bind({})
-type6.args = {
-  title: '카드 추가',
-  buttonElement: <button>Back</button>,
   addtionalClassName: 'mb-10',
 }

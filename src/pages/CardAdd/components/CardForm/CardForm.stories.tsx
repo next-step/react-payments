@@ -1,37 +1,28 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
+import { CardDecorator } from '@/decorator'
 import { useCardAdd } from '@/pages/CardAdd/hooks'
-import { useCardInfo } from '@/pages/hooks'
 
 import CardForm from './CardForm'
 
 export default {
-  title: '페이먼츠 미션/Pages/CardAdd/CardForm',
+  title: 'Components/CardForm',
   component: CardForm,
+  decorators: [CardDecorator],
 } as ComponentMeta<typeof CardForm>
 
 const Template: ComponentStory<typeof CardForm> = () => {
-  const { handleNumber, handleExpiredDate, handleOwner, handlePassword, handleSecurityCode } = useCardInfo()
-
   const { numbersRef, passwordRef, expiredDateRef, ownerRef, securityCodeRef } = useCardAdd()
 
   return (
-    <div className="root">
-      <div className="app">
-        <CardForm>
-          <CardForm.CardNumbers numbersRef={numbersRef} nextRef={expiredDateRef.first} handleChange={handleNumber} />
-          <CardForm.CardExpiredDate expiredDateRef={expiredDateRef} handleChange={handleExpiredDate} />
-          <CardForm.CardOwner ownerRef={ownerRef} handleChange={handleOwner} />
-          <CardForm.CardSecurityCode
-            securityCodeRef={securityCodeRef}
-            nextRef={passwordRef.first}
-            handleChange={handleSecurityCode}
-          />
-          <CardForm.CardPassword passwordRef={passwordRef} handleChange={handlePassword} />
-        </CardForm>
-      </div>
-    </div>
+    <CardForm>
+      <CardForm.CardNumbers numbersRef={numbersRef} nextRef={expiredDateRef.first} />
+      <CardForm.CardExpiredDate expiredDateRef={expiredDateRef} />
+      <CardForm.CardOwner ownerRef={ownerRef} />
+      <CardForm.CardSecurityCode securityCodeRef={securityCodeRef} nextRef={passwordRef.first} />
+      <CardForm.CardPassword passwordRef={passwordRef} />
+    </CardForm>
   )
 }
 
-export const basic = Template.bind({})
+export const Default = Template.bind({})

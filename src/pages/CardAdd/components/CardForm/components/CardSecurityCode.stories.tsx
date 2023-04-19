@@ -1,29 +1,20 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 
+import { CardDecorator } from '@/decorator'
 import { useCardAdd } from '@/pages/CardAdd/hooks'
-import { useCardInfo } from '@/pages/hooks'
 
 import CardSecurityCode from './CardSecurityCode'
 
 export default {
-  title: '페이먼츠 미션/Pages/CardAdd/CardForm/CardSecurityCode',
+  title: 'Components/CardForm/CardSecurityCode',
   component: CardSecurityCode,
+  decorators: [CardDecorator],
+  // 궁금한 점 : ComponentMeta vs Meta 차이점
 } as ComponentMeta<typeof CardSecurityCode>
 
 const Template: ComponentStory<typeof CardSecurityCode> = () => {
-  const { handleSecurityCode } = useCardInfo()
   const { passwordRef, securityCodeRef } = useCardAdd()
-  return (
-    <div className="root">
-      <div className="app">
-        <CardSecurityCode
-          securityCodeRef={securityCodeRef}
-          nextRef={passwordRef.first}
-          handleChange={handleSecurityCode}
-        />
-      </div>
-    </div>
-  )
+  return <CardSecurityCode securityCodeRef={securityCodeRef} nextRef={passwordRef.first} />
 }
 
-export const basic = Template.bind({})
+export const Default = Template.bind({})

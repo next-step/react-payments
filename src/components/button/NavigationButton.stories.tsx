@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 import NavigationButton from './NavigationButton'
 
 export default {
-  title: '페이먼츠 미션/Components/Button/NavigationButton',
+  title: 'Components/Button/NavigationButton',
   component: NavigationButton,
   // Todo: 다음 버튼을 눌렀을 때도 상호작용 테스트를 할 수 있는건가?
   args: {
@@ -21,4 +21,4 @@ const Template: ComponentStory<typeof NavigationButton> = (props) => (
   </div>
 )
 
-export const basic = Template.bind({})
+export const Default = Template.bind({})

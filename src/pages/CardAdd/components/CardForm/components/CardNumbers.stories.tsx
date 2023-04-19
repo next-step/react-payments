@@ -1,25 +1,24 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Meta, ComponentStory } from '@storybook/react'
 
+import { CardDecorator } from '@/decorator'
+import { CardNumbersOrder } from '@/pages/CardAdd/components/CardForm/types'
 import { useCardAdd } from '@/pages/CardAdd/hooks'
-import { useCardInfo } from '@/pages/hooks'
 
 import CardNumbers from './CardNumbers'
 
 export default {
-  title: '페이먼츠 미션/Pages/CardAdd/CardForm/CardNumbers',
+  title: 'Components/CardForm/CardNumbers',
   component: CardNumbers,
-} as ComponentMeta<typeof CardNumbers>
+  decorators: [CardDecorator],
+} as Meta
 
 const Template: ComponentStory<typeof CardNumbers> = () => {
-  const { handleNumber } = useCardInfo()
   const { numbersRef, expiredDateRef } = useCardAdd()
-  return (
-    <div className="root">
-      <div className="app">
-        <CardNumbers numbersRef={numbersRef} nextRef={expiredDateRef.first} handleChange={handleNumber} />
-      </div>
-    </div>
-  )
+  const onFocusChange = (order: CardNumbersOrder) => {
+    numbersRef[order].current?.focus()
+  }
+
+  return <CardNumbers numbersRef={numbersRef} nextRef={expiredDateRef.first} onFocusChange={onFocusChange} />
 }
 
-export const basic = Template.bind({})
+export const Default = Template.bind({})

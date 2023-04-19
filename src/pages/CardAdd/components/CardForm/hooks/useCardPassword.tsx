@@ -3,8 +3,10 @@ import { ChangeEvent } from 'react'
 import { VirtualKeyboard } from '@/components/modal'
 import { useModal } from '@/hooks'
 import { CardPasswordProps, CardPasswordOrder } from '@/pages/CardAdd/components/CardForm/types'
+import { useCardInfo } from '@/pages/hooks'
 
-const useCardPassword = ({ passwordRef, handleChange, onFocusChange }: CardPasswordProps) => {
+const useCardPassword = ({ passwordRef, onFocusChange }: CardPasswordProps) => {
+  const { handlePassword: handleChange } = useCardInfo()
   const { openModal, closeModal } = useModal()
 
   const handleSecurityCode = (order: CardPasswordOrder, value: string) => {

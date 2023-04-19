@@ -4,8 +4,10 @@ import { VirtualKeyboard } from '@/components/modal'
 import { ModalStateContext } from '@/contexts/modal'
 import { useModal } from '@/hooks'
 import { CardSecurityCodeProps } from '@/pages/CardAdd/components/CardForm/types'
+import { useCardInfo } from '@/pages/hooks'
 
-const useCardSecurityCode = ({ handleChange, securityCodeRef, nextRef }: CardSecurityCodeProps) => {
+const useCardSecurityCode = ({ securityCodeRef, nextRef }: CardSecurityCodeProps) => {
+  const { handleSecurityCode: handleChange } = useCardInfo()
   const { openModal, closeModal } = useModal()
   const openedModal = useContext(ModalStateContext)
 

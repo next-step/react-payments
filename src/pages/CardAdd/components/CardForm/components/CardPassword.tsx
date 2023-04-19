@@ -2,12 +2,12 @@ import { Input, InputTitle, InputContainer } from '@/components/input'
 import { useCardPassword } from '@/pages/CardAdd/components/CardForm/hooks'
 import { CardPasswordProps, CardPasswordOrder } from '@/pages/CardAdd/components/CardForm/types'
 
-const CardPassword = ({ passwordRef, handleChange }: CardPasswordProps) => {
+const CardPassword = ({ passwordRef }: CardPasswordProps) => {
   const onFocusChange = (order: CardPasswordOrder) => {
     passwordRef[order].current?.focus()
   }
 
-  const { handleInputChange, openVirtualKeyboard } = useCardPassword({ passwordRef, handleChange, onFocusChange })
+  const { handleInputChange, openVirtualKeyboard } = useCardPassword({ passwordRef, onFocusChange })
 
   return (
     <InputContainer>

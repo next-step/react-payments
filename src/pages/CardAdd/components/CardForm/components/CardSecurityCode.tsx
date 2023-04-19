@@ -3,8 +3,8 @@ import { ToolTip } from '@/components/tooltip'
 import { useCardSecurityCode } from '@/pages/CardAdd/components/CardForm/hooks'
 import { CardSecurityCodeProps } from '@/pages/CardAdd/components/CardForm/types'
 
-const CardSecurityCode = ({ securityCodeRef, nextRef, handleChange }: CardSecurityCodeProps) => {
-  const { handleInputChange, openVirtualKeyboard } = useCardSecurityCode({ handleChange, securityCodeRef, nextRef })
+const CardSecurityCode = ({ securityCodeRef, nextRef }: CardSecurityCodeProps) => {
+  const { handleInputChange, openVirtualKeyboard } = useCardSecurityCode({ securityCodeRef, nextRef })
   return (
     <InputContainer>
       <InputTitle>보안코드(CVC/CVV)</InputTitle>

@@ -2,7 +2,7 @@ import { Input, InputTitle, InputBox, InputContainer } from '@/components/input'
 import { useCardNumbers } from '@/pages/CardAdd/components/CardForm/hooks'
 import { CardNumbersOrder, CardNumbersProps } from '@/pages/CardAdd/components/CardForm/types'
 
-const CardNumbers = ({ numbersRef, nextRef, handleChange }: CardNumbersProps) => {
+const CardNumbers = ({ numbersRef, nextRef }: CardNumbersProps) => {
   const onFocusChange = (order: CardNumbersOrder) => {
     numbersRef[order].current?.focus()
   }
@@ -11,7 +11,6 @@ const CardNumbers = ({ numbersRef, nextRef, handleChange }: CardNumbersProps) =>
     numbersRef,
     nextRef,
     onFocusChange,
-    handleChange,
   })
 
   return (
@@ -28,6 +27,7 @@ const CardNumbers = ({ numbersRef, nextRef, handleChange }: CardNumbersProps) =>
           onInput={handleInputChange}
           maxLength={4}
           onFocus={() => openVirtualKeyboard('third')}
+          type="password"
         />
         <span>-</span>
         <Input
@@ -36,6 +36,7 @@ const CardNumbers = ({ numbersRef, nextRef, handleChange }: CardNumbersProps) =>
           onInput={handleInputChange}
           maxLength={4}
           onFocus={() => openVirtualKeyboard('fourth')}
+          type="password"
         />
       </InputBox>
     </InputContainer>

@@ -1,14 +1,18 @@
 import { ComponentType } from 'react'
 
-import { CardProvider } from '@/providers'
+import { Modal } from '@/components/modal'
+import { CardProvider, ModalProvider } from '@/providers'
 
 export default function CardDecorator(Story: ComponentType) {
   return (
     <div className="root">
       <div className="app">
-        <CardProvider>
-          <Story />
-        </CardProvider>
+        <ModalProvider>
+          <CardProvider>
+            <Story />
+            <Modal />
+          </CardProvider>
+        </ModalProvider>
       </div>
     </div>
   )

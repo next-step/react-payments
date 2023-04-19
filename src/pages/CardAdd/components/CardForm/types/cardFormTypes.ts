@@ -31,7 +31,6 @@ export interface CardNumbersProps {
   }
   nextRef?: RefObject<HTMLInputElement>
   onFocusChange?: (order: CardNumbersOrder) => void
-  handleChange({ value, order }: HandleNumbersChangeProps): void
 }
 
 export type CardPasswordOrder = 'first' | 'second'
@@ -46,7 +45,6 @@ export interface CardPasswordProps {
     second: RefObject<HTMLInputElement>
   }
   onFocusChange?: (order: CardPasswordOrder) => void
-  handleChange({ value, order }: HandlePasswordChangeProps): void
 }
 
 export interface UseCardPasswordProps {
@@ -60,5 +58,4 @@ export interface HandleSecurityCodeChangeProps {
 export interface CardSecurityCodeProps {
   securityCodeRef: RefObject<HTMLInputElement>
   nextRef?: RefObject<HTMLInputElement>
-  handleChange: ({ value }: HandleSecurityCodeChangeProps) => void
 }

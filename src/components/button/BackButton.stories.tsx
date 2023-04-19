@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 import BackButton from './BackButton'
 
 export default {
-  title: '페이먼츠 미션/Components/Button/BackButton',
+  title: 'Components/Button/BackButton',
   component: BackButton,
   args: {},
 } as ComponentMeta<typeof BackButton>
@@ -18,4 +18,4 @@ const Template: ComponentStory<typeof BackButton> = () => (
   </div>
 )
 
-export const basic = Template.bind({})
+export const Default = Template.bind({})

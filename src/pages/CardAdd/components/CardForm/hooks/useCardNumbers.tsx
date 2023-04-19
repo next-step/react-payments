@@ -4,8 +4,10 @@ import { CardTypeSelectionModal, VirtualKeyboard } from '@/components/modal'
 import { ModalStateContext } from '@/contexts/modal'
 import { useModal } from '@/hooks'
 import { CardNumbersProps, CardNumbersOrder } from '@/pages/CardAdd/components/CardForm/types'
+import { useCardInfo } from '@/pages/hooks'
 
-const useCardNumbers = ({ numbersRef, nextRef, onFocusChange, handleChange }: CardNumbersProps) => {
+const useCardNumbers = ({ numbersRef, nextRef, onFocusChange }: CardNumbersProps) => {
+  const { handleNumber: handleChange } = useCardInfo()
   const { openModal, closeModal } = useModal()
   const openedModal = useContext(ModalStateContext)
 
