@@ -10,11 +10,11 @@ const PreviewCard = () => {
     owner,
     expiredYear,
     expiredMonth,
-    cardType: { name },
+    cardType: { name, bg, color },
   } = useContext(CardStateContext)
 
   return (
-    <EmptyCard>
+    <EmptyCard backgroundColor={bg} color={color}>
       <div className="card-top">
         <p className="font-sm">{name}</p>
       </div>

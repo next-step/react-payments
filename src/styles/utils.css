@@ -75,6 +75,16 @@
   padding-right: 1.25rem;
 }
 
+.px-15px {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.px-30 {
+  padding-left: 30px;
+  padding-right: 7.5rem;
+}
+
 .mt-1 {
   margin-top: 0.25rem;
 }

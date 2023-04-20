@@ -24,7 +24,7 @@
 
   -webkit-user-select: none;
 
-          user-select: none;
+  user-select: none;
 }
 
 .small-card {
@@ -280,7 +280,7 @@
   right: 0;
   height: 100%;
   -webkit-animation: toggle 1s;
-          animation: toggle 1s;
+  animation: toggle 1s;
   background-color: rgba(0, 0, 0, 0.75);
 }
 
@@ -330,7 +330,7 @@
   margin: auto;
   display: flex;
   -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
   justify-content: center;
   align-items: flex-end;
   border-top-left-radius: 12px;
@@ -490,11 +490,11 @@ button {
   background-color: white;
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
   -webkit-user-select: none;
-          user-select: none;
+  user-select: none;
   -webkit-animation-duration: 400ms;
-          animation-duration: 400ms;
+  animation-duration: 400ms;
   -webkit-animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-          animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
 }
 
@@ -522,12 +522,12 @@ button {
   from {
     opacity: 0;
     -webkit-transform: translateY(2px);
-            transform: translateY(2px);
+    transform: translateY(2px);
   }
   to {
     opacity: 1;
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
 }
 
@@ -535,12 +535,12 @@ button {
   from {
     opacity: 0;
     -webkit-transform: translateY(2px);
-            transform: translateY(2px);
+    transform: translateY(2px);
   }
   to {
     opacity: 1;
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
 }
 
@@ -548,12 +548,12 @@ button {
   from {
     opacity: 0;
     -webkit-transform: translateX(-2px);
-            transform: translateX(-2px);
+    transform: translateX(-2px);
   }
   to {
     opacity: 1;
     -webkit-transform: translateX(0);
-            transform: translateX(0);
+    transform: translateX(0);
   }
 }
 
@@ -561,12 +561,12 @@ button {
   from {
     opacity: 0;
     -webkit-transform: translateX(-2px);
-            transform: translateX(-2px);
+    transform: translateX(-2px);
   }
   to {
     opacity: 1;
     -webkit-transform: translateX(0);
-            transform: translateX(0);
+    transform: translateX(0);
   }
 }
 
@@ -574,12 +574,12 @@ button {
   from {
     opacity: 0;
     -webkit-transform: translateY(-2px);
-            transform: translateY(-2px);
+    transform: translateY(-2px);
   }
   to {
     opacity: 1;
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
 }
 
@@ -587,12 +587,12 @@ button {
   from {
     opacity: 0;
     -webkit-transform: translateY(-2px);
-            transform: translateY(-2px);
+    transform: translateY(-2px);
   }
   to {
     opacity: 1;
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
   }
 }
 
@@ -600,12 +600,12 @@ button {
   from {
     opacity: 0;
     -webkit-transform: translateX(2px);
-            transform: translateX(2px);
+    transform: translateX(2px);
   }
   to {
     opacity: 1;
     -webkit-transform: translateX(0);
-            transform: translateX(0);
+    transform: translateX(0);
   }
 }
 
@@ -613,12 +613,12 @@ button {
   from {
     opacity: 0;
     -webkit-transform: translateX(2px);
-            transform: translateX(2px);
+    transform: translateX(2px);
   }
   to {
     opacity: 1;
     -webkit-transform: translateX(0);
-            transform: translateX(0);
+    transform: translateX(0);
   }
 }
 
@@ -788,6 +788,5 @@ button {
   border: none;
   cursor: pointer;
 }
-
 
 /*# sourceMappingURL=main.83437ae6.css.map*/
