@@ -40,13 +40,13 @@
      4. Toast
      5. Tooltip
   2. 유저와의 상호작용을 통해 UI가 달라지는 컴포넌트
-     1. Input
-     2. CardForm
-        - CardNumbers
-        - CardExpiredDate
-        - CardOwner
-        - CardPassword
-        - CardSecurityCode
+     1. Input ✅
+     2. CardForm ✅
+        - CardNumbers ✅
+        - CardExpiredDate ✅
+        - CardOwner ✅
+        - CardPassword ✅
+        - CardSecurityCode ✅
   3. 컴포넌트의 조합으로 생성된 페이지
      1. /cart-add
      2. /card-completed
