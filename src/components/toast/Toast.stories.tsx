@@ -28,7 +28,9 @@ const Template: Story<ToastProps> = (args) => {
 
   return (
     <>
-      <button onClick={handleClick}>Toggle Toast</button>
+      <button className="toast-button" onClick={handleClick}>
+        Toast 열기
+      </button>
       <Toast {...args} open={open} onOpenChange={setOpen} />
     </>
   )

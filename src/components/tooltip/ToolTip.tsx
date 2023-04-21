@@ -1,6 +1,6 @@
 import * as Tooltip from '@radix-ui/react-tooltip'
 
-interface ToolTipProps {
+export interface ToolTipProps {
   content: string
 }
 
