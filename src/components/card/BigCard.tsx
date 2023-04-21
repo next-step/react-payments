@@ -34,11 +34,11 @@ const BigCard = ({
         </div>
         <div className="card-middle">
           <div className="big-card__chip" />
-        </div>
-        <div className="card-bottom">
-          <div className="card-bottom__number">
+          <div className="card-number">
             <span className="card-text__big">{cardNumbers}</span>
           </div>
+        </div>
+        <div className="card-bottom">
           <div className="card-bottom__info">
             <span className="card-text__big">{cardOwner}</span>
             <span className="card-text__big">{cardExpiredDate}</span>

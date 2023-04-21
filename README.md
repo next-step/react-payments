@@ -28,8 +28,8 @@
   1. Props에 따라서 UI가 달라지는 컴포넌트
      1. Card
         - PreviewCard ✅
-        - BigCard
-        - SmallCard
+        - BigCard ✅
+        - SmallCard ✅
      2. Button
         - CardTypeButton
         - NavigationButton
@@ -48,7 +48,7 @@
         - CardPassword ✅
         - CardSecurityCode ✅
   3. 컴포넌트의 조합으로 생성된 페이지
-     1. /cart-add
+     1. /cart-add ✅
      2. /card-completed
      3. /card-list
      4. /card-update

@@ -30,11 +30,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 0 15px;
 
   width: 208px;
   height: 130px;
 
-  /* background: #94dacd; */
+  font-size: 30px;
+  color: #575757;
+
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
@@ -70,7 +73,6 @@
   width: 290px;
   height: 180px;
 
-  background: #94dacd;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
@@ -99,7 +101,7 @@
   height: 100%;
 
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-direction: column;
   align-items: start;
 }

@@ -27,11 +27,11 @@ const SmallCard = ({
         </div>
         <div className="card-middle">
           <div className="small-card__chip" />
-        </div>
-        <div className="card-bottom">
-          <div className="card-bottom__number">
+          <div className="card-number">
             <span className="card-text">{cardNumbers}</span>
           </div>
+        </div>
+        <div className="card-bottom">
           <div className="card-bottom__info">
             <span className="card-text">{cardOwner}</span>
             <span className="card-text">{cardExpiredDate}</span>

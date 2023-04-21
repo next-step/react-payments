@@ -3,10 +3,9 @@ import { Story, Meta } from '@storybook/react'
 import { CardBox } from '@/components/card'
 import { CardDecorator } from '@/decorator'
 
-import BigCard from './BigCard'
+import SmallCard from './SmallCard'
 
-interface BigCardProps {
-  onClickDeleteButton?: () => void
+interface SmallCardProps {
   cardName: string
   cardNumbers: string
   cardOwner: string
@@ -19,41 +18,34 @@ interface BigCardProps {
 }
 
 export default {
-  title: 'Components/Card/BigCard',
-  component: BigCard,
+  title: 'Components/Card/SmallCard',
+  component: SmallCard,
   decorators: [CardDecorator],
 } as Meta
 
-// Todo: onClickDeleteButton에 대한 테스트를 할 수 있나?
-const Template: Story<BigCardProps> = ({
-  onClickDeleteButton,
+const Template: Story<SmallCardProps> = ({
   cardName,
   cardNumbers,
   cardOwner,
   cardExpiredDate,
   cardType: { name, color, bg },
-}: BigCardProps) => {
+}: SmallCardProps) => {
   return (
     <CardBox>
-      <div className="big-card" style={{ backgroundColor: bg, color }}>
+      <div className="small-card" style={{ backgroundColor: bg, color }}>
         <div className="card-top">
-          <span className="card-text__big">{cardName || name}</span>
-          {onClickDeleteButton && (
-            <button type="button" className="card-text" onClick={onClickDeleteButton}>
-              카드삭제
-            </button>
-          )}
+          <span className="card-text">{cardName || name}</span>
         </div>
         <div className="card-middle">
-          <div className="big-card__chip" />
+          <div className="small-card__chip" />
           <div className="card-number">
-            <span className="card-text__big">{cardNumbers}</span>
+            <span className="card-text">{cardNumbers}</span>
           </div>
         </div>
         <div className="card-bottom">
           <div className="card-bottom__info">
-            <span className="card-text__big">{cardOwner}</span>
-            <span className="card-text__big">{cardExpiredDate}</span>
+            <span className="card-text">{cardOwner}</span>
+            <span className="card-text">{cardExpiredDate}</span>
           </div>
         </div>
       </div>
