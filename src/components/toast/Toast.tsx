@@ -1,7 +1,7 @@
 import * as RadixToast from '@radix-ui/react-toast'
 import { Dispatch, SetStateAction } from 'react'
 
-interface ToastProps {
+export interface ToastProps {
   open: boolean
   onOpenChange: Dispatch<SetStateAction<boolean>>
   title: string
