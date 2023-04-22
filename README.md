@@ -48,11 +48,15 @@
         - CardSecurityCode ✅
   3. 컴포넌트의 조합으로 생성된 페이지
      1. /cart-add ✅
-     2. /card-completed
-     3. /card-list
-     4. /card-update
+     2. /card-completed ✅
+     3. /card-list ✅
+     4. /card-update ✅
 - Context API를 테스트 하려면?
 - Router를 테스트 하려면?
+- 인터렉션을 테스트 하려면?
+- 스토리북 내에서 Jest, Cypress 등을 테스트 하려면?
+- 참고
+  - https://ui.toast.com/posts/ko_20220111
 
 ### 4. 재사용 가능한 컴포넌트
 
