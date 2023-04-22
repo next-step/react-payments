@@ -107,11 +107,6 @@
 }
 
 .card-number {
-  width: 100%;
-
-  display: flex;
-  justify-content: center;
-  margin-left: -15px;
   font-size: 16px;
 }
 
@@ -151,8 +146,6 @@
 
 .card-text__big {
   font-size: 18px;
-  line-height: 20px;
-  vertical-align: middle;
   font-weight: 400;
 }
 

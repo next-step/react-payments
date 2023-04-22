@@ -35,7 +35,7 @@
         - NavigationButton ✅
      3. Modal
         - CardTypeSelectionModal ✅
-        - VitualKeyboard
+        - VitualKeyboard ✅
      4. Toast ✅
      5. Tooltip ✅
   2. 유저와의 상호작용을 통해 UI가 달라지는 컴포넌트

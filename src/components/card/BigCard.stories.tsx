@@ -61,7 +61,7 @@ const Template: Story<BigCardProps> = ({
   )
 }
 
-const mockData = {
+const MOCK_DATA = {
   하얀카드: {
     cardNumbers: '4321 - 8765 - **** - ****',
     cardOwner: '김하얀',
@@ -145,25 +145,25 @@ const mockData = {
 }
 
 export const 하얀카드 = Template.bind({})
-하얀카드.args = mockData['하얀카드']
+하얀카드.args = MOCK_DATA['하얀카드']
 
 export const 파란카드 = Template.bind({})
-파란카드.args = mockData['파란카드']
+파란카드.args = MOCK_DATA['파란카드']
 
 export const 빨간카드 = Template.bind({})
-빨간카드.args = mockData['빨간카드']
+빨간카드.args = MOCK_DATA['빨간카드']
 
 export const 초록카드 = Template.bind({})
-초록카드.args = mockData['초록카드']
+초록카드.args = MOCK_DATA['초록카드']
 
 export const 에메랄드카드 = Template.bind({})
-에메랄드카드.args = mockData['에메랄드카드']
+에메랄드카드.args = MOCK_DATA['에메랄드카드']
 
 export const 분홍카드 = Template.bind({})
-분홍카드.args = mockData['분홍카드']
+분홍카드.args = MOCK_DATA['분홍카드']
 
 export const 보라카드 = Template.bind({})
-보라카드.args = mockData['보라카드']
+보라카드.args = MOCK_DATA['보라카드']
 
 export const 주황카드 = Template.bind({})
-주황카드.args = mockData['주황카드']
+주황카드.args = MOCK_DATA['주황카드']
