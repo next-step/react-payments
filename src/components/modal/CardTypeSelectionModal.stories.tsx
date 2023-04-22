@@ -13,7 +13,11 @@ export default {
 
 const Template: ComponentStory<typeof CardTypeSelectionModal> = () => {
   const { openModal } = useModal()
-  return <button onClick={() => openModal({ element: <CardTypeSelectionModal /> })}>Modal Open</button>
+  return (
+    <button className="digit-button px-5" onClick={() => openModal({ element: <CardTypeSelectionModal /> })}>
+      Click Here
+    </button>
+  )
 }
 
 export const Default = Template.bind({})
