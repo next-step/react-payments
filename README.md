@@ -31,11 +31,10 @@
         - BigCard ✅
         - SmallCard ✅
      2. Button
-        - CardTypeButton
-        - NavigationButton
-        - NavigationButtonWithValidationProps
+        - CardTypeButton ✅
+        - NavigationButton ✅
      3. Modal
-        - CardTypeSelectionModal
+        - CardTypeSelectionModal ✅
         - VitualKeyboard
      4. Toast ✅
      5. Tooltip ✅

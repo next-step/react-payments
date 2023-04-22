@@ -15,7 +15,7 @@ export default {
 
 const Template: ComponentStory<typeof NavigationButton> = (props) => (
   <div className="root">
-    <div className="app flex-column-center">
+    <div className="app">
       <NavigationButton {...props} />
     </div>
   </div>
