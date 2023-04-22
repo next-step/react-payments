@@ -2,7 +2,9 @@ import { useRef, useContext } from 'react'
 
 import { CardTypeButton } from '@/components/button'
 import { BottomSheetContainer, DarkOverlay } from '@/components/modal'
+import { CARD_TYPES } from '@/contants'
 import { CardDispatchContext } from '@/contexts/card'
+import { CardBackgoundColor, CardColor } from '@/domain'
 import { useModal, useOutsideClick } from '@/hooks'
 
 interface CheckModalProps {
@@ -22,7 +24,7 @@ const CardTypeSelectionModal = ({ onAfterModalClose }: CheckModalProps) => {
     }
   })
 
-  const selectCardType = (name: string, bg: string, color: string) => {
+  const selectCardType = (name: string, bg: CardBackgoundColor, color: CardColor) => {
     cardDispatch({ type: 'SET_CARD_TYPE', payload: { name, bg, color } })
     closeModal({ element: CardTypeSelectionModal })
 
@@ -53,46 +55,3 @@ const CardTypeSelectionModal = ({ onAfterModalClose }: CheckModalProps) => {
 }
 
 export default CardTypeSelectionModal
-
-const CARD_TYPES = [
-  {
-    name: '하얀카드',
-    color: '#000000',
-    bg: '#F5F5F5',
-  },
-  {
-    name: '파란카드',
-    color: '#ffffff',
-    bg: '#162bb1',
-  },
-  {
-    name: '빨간카드',
-    color: '#ffffff',
-    bg: '#932929',
-  },
-  {
-    name: '초록카드',
-    color: '#000000',
-    bg: '#54cb25',
-  },
-  {
-    name: '에메랄드카드',
-    color: '#ffffff',
-    bg: '#20d0ad',
-  },
-  {
-    name: '분홍카드',
-    color: '#ffffff',
-    bg: '#d320c7',
-  },
-  {
-    name: '보라카드',
-    color: '#ffffff',
-    bg: '#7c1ddb',
-  },
-  {
-    name: '주황카드',
-    color: '#ffffff',
-    bg: '#e1860f',
-  },
-]

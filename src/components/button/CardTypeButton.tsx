@@ -1,8 +1,9 @@
-interface CardTypeButtonProps {
+import { CardBackgoundColor, CardColor } from '@/domain'
+
+export interface CardTypeButtonProps {
   name: string
-  // Todo: Color 타입 유니언 타입으로 지정해줘야 함 or 다른 방법
-  backgroundColor: string
-  color: string
+  backgroundColor: CardBackgoundColor
+  color: CardColor
   selectCardType: (name: string, bg: string, color: string) => void
 }
 
