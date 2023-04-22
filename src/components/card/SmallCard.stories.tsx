@@ -38,9 +38,9 @@ const Template: Story<SmallCardProps> = ({
         </div>
         <div className="card-middle">
           <div className="small-card__chip" />
-          <div className="card-number">
-            <span className="card-text">{cardNumbers}</span>
-          </div>
+        </div>
+        <div className="card-number">
+          <span className="card-text">{cardNumbers}</span>
         </div>
         <div className="card-bottom">
           <div className="card-bottom__info">
