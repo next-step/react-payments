@@ -155,3 +155,8 @@
 
   border-radius: 50%;
 }
+
+.card-nickname {
+  display: flex;
+  justify-content: center;
+}
