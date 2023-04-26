@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, SetStateAction, useContext, useMemo, useState } from 'react';
-import { PAYMENTS_STEP } from '../constants';
+import { PAYMENTS_STEP } from '../domain/payments/constants';
 
 type TStep = {
   step?: number;

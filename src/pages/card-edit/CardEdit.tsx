@@ -1,53 +1,26 @@
-import React, { useRef, useState } from 'react';
+import React, { RefObject } from 'react';
 import { Card, CardNumbersInput, CvcInput, ExpiredInput, Frame, OwnerInput, PinInput } from '../../components';
 import '../../styles/input.css';
 import '../../styles/utils.css';
 import { CardTypeModal } from '../../components/CardTypeModal';
-import useValidators from './hooks/useValidators';
-import useHandlers from './hooks/useHandlers';
-import { TCardEditProperties, TCardEditRefs, TCardEditSetters } from './types';
+import useCardEdit from './hooks';
 
 function CardEdit() {
-  const [cardNumbers, setCardNumbers] = useState<string[]>(['', '', '', '']);
-  const [expiredMonth, setExpiredMonth] = useState('');
-  const [expiredYear, setExpiredYear] = useState('');
-  const [owner, setOwner] = useState('');
-  const [cvc, setCvc] = useState('');
-  const [pin, setPin] = useState('');
-  const [cardTypeSelected, setCardTypeSelected] = useState(false);
+  const { cardEditStates, handlers, validators } = useCardEdit();
 
-  const refs = {
-    cardNumber: useRef<HTMLInputElement>(null),
-    expired: useRef<HTMLInputElement>(null),
-    owner: useRef<HTMLInputElement>(null),
-    cvc: useRef<HTMLInputElement>(null),
-    pin: useRef<HTMLInputElement>(null),
-    nextButton: useRef<HTMLButtonElement>(null),
-  };
-
-  const CardEditStates = {
-    cardNumbers,
-    setCardNumbers,
-    expiredMonth,
-    setExpiredMonth,
-    expiredYear,
-    setExpiredYear,
-    owner,
-    setOwner,
-    cvc,
-    setCvc,
-    pin,
-    setPin,
+  const {
+    cardNumbers: { value: cardNumbers },
+    expiredMonth: { value: expiredMonth },
+    expiredYear: { value: expiredYear },
+    owner: { value: owner, set: setOwner },
+    cvc: { value: cvc, set: setCvc },
+    pin: { value: pin, set: setPin },
+    cardTypeSelected: { value: cardTypeSelected, set: setCardTypeSelected },
     refs,
-  } as TCardEditProperties & TCardEditSetters & TCardEditRefs; // 명시
+  } = cardEditStates;
 
-  // hooks
-  const { isValid, getValidationCaption } = useValidators(CardEditStates);
-  const { handleExpired, handleBackStep, handleSelectedCardType, handleEnrollStep, handleCardNumbers } = useHandlers({
-    ...CardEditStates,
-    isValid,
-    setCardTypeSelected,
-  });
+  const { handleBackStep, handleEnrollStep, handleCardNumbers, handleExpired, handleSelectedCardType } = handlers;
+  const { isValid, getValidationCaption } = validators;
 
   return (
     <Frame title="카드 추가" onBackClick={handleBackStep}>
@@ -88,7 +61,7 @@ function CardEdit() {
 
         <div className="button-box">
           <div className="button-text">
-            <button ref={refs.nextButton} disabled={!isValid}>
+            <button ref={refs.nextButton as RefObject<HTMLButtonElement>} disabled={!isValid}>
               다음
             </button>
           </div>

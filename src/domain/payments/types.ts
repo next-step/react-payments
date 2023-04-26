@@ -6,18 +6,8 @@ export type TCardNumbers = TCardNumber[];
 
 export type TCVC = `${TDigit}${TDigit}${TDigit}`;
 
-export type TCardComponentProps<T = string[]> = {
-  value?: T;
-  onChange?: (argument: T) => void;
-  onFulfill?: (argument: T) => void;
-  prevRef?: React.RefObject<HTMLInputElement | HTMLButtonElement>;
-  nextRef?: React.RefObject<HTMLInputElement | HTMLButtonElement>;
-  forwardedRef?: React.ForwardedRef<HTMLInputElement>;
-  children?: React.ReactNode;
-  caption?: string;
-};
-
 export interface ICard {
+  id?: string;
   // 카드 식별을 위한  정보
   name?: string;
   owner?: string;
@@ -35,9 +25,9 @@ export interface ICard {
 
 export interface ICardType {
   id: number;
-  cardName: string;
+  name: string;
   color: TColorCode;
-  cardNumberPrefix: TCardNumbers;
+  numberPrefix: TCardNumbers;
 }
 
 export interface ICardDetailMessage {

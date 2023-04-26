@@ -2,7 +2,7 @@ import React from 'react';
 import { ICard } from '../../domain/payments/types';
 import useCard from './hooks/useCard';
 import { ellipsis } from '../../util/string';
-import { CARD_INPUT } from '../../constants';
+import { CARD_INPUT } from '../../domain/payments/constants';
 
 type TCardNumberProps = {
   card: ICard;

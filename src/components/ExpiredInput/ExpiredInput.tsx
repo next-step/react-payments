@@ -1,9 +1,9 @@
 import React, { forwardRef, useCallback, useState } from 'react';
-import { TCardComponentProps } from '../../domain/payments/types';
 import { leaveOnlyNumbers } from '../../util/number';
 import { InputContainer } from '../InputContainer';
-import { CARD_INPUT } from '../../constants';
+import { CARD_INPUT } from '../../domain/payments/constants';
 import useForwardedRef from '../../hooks/useForwardedRef';
+import { TCardComponentProps } from '../../pages/card-edit/types';
 
 const { MONTH, YEAR } = CARD_INPUT.EXPIRED;
 const MONTH_CHARACTERS = {

@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { TVirtualNumPad } from './types';
-import { CARD_VIRTUAL_KEYBOARD } from '../../constants';
+import { CARD_VIRTUAL_KEYBOARD } from '../../domain/payments/constants';
 import { TVirtualNumberPad, processPressKey } from './VirtualNumPadGenerator';
 
 const { CLICK_TRACING_DELAY, ACTIVE_BUTTON_CLASSNAME } = CARD_VIRTUAL_KEYBOARD;
@@ -9,7 +9,7 @@ type THookVirtualNumPad = {
   keys: TVirtualNumberPad;
 } & TVirtualNumPad;
 
-export default ({ onClick, keys }: THookVirtualNumPad) => {
+const useVirtualNumPad = ({ onClick, keys }: THookVirtualNumPad) => {
   const [buffer, setBuffer] = useState('');
 
   const handleClick = useCallback(
@@ -29,7 +29,7 @@ export default ({ onClick, keys }: THookVirtualNumPad) => {
 
       [index, randomIndexes[0]].forEach((idx) => {
         const node = parent?.childNodes[idx] as HTMLElement;
-        node.classList.add(ACTIVE_BUTTON_CLASSNAME);
+        node?.classList?.add(ACTIVE_BUTTON_CLASSNAME);
 
         setTimeout(() => {
           node.classList.remove(ACTIVE_BUTTON_CLASSNAME);
@@ -41,3 +41,5 @@ export default ({ onClick, keys }: THookVirtualNumPad) => {
 
   return { handleClick };
 };
+
+export default useVirtualNumPad;

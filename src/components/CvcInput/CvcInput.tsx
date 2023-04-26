@@ -1,11 +1,10 @@
 import React, { ForwardedRef, forwardRef } from 'react';
-import { TCardComponentProps } from '../../domain/payments/types';
 import { InputContainer } from '../InputContainer';
-import { CARD_INPUT } from '../../constants';
+import { CARD_INPUT } from '../../domain/payments/constants';
 import { ToolTip } from '../ToolTip';
 import { NumberInput } from '../NumberInput';
-import useForwardedRef from '../../hooks/useForwardedRef';
-import useBaseInputHandler from '../../hooks/useBaseInputHandler';
+import { useForwardedRef, useBaseInputHandler } from '../../hooks';
+import { TCardComponentProps } from '../../pages/card-edit/types';
 
 const CVC_MAX_LENGTH = CARD_INPUT.CVC.LENGTH;
 

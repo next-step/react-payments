@@ -1,33 +1,17 @@
 import React, { useCallback, useState } from 'react';
 import { Card } from '../../components';
 import { Frame } from '../../components/Frame';
-import { useStepContext } from '../../context/StepContext';
-import { getSavedCards, removeCard } from '../../domain/payments/cardStorage';
+import { getSavedCards, deleteCard } from '../../services/cardStorage';
 import { ICard } from '../../domain/payments/types';
 import './CardList.css';
-import { useCardContext } from '../../context/CardContext';
-import { PAYMENTS_STEP } from '../../constants';
+import useCardList from './hooks/useCardList';
 
 function CardList() {
   const [cards, setCards] = useState(getSavedCards());
-
-  const { setStep } = useStepContext();
-  const { setCard } = useCardContext();
-
-  const handleAddingCard = useCallback(() => {
-    setStep?.(PAYMENTS_STEP.ADD);
-  }, [setStep]);
-
-  const handleUpdatingCard = useCallback(
-    (card: ICard) => {
-      setCard?.(card);
-      setStep?.(PAYMENTS_STEP.UPDATING_CARD_ALIAS);
-    },
-    [setStep]
-  );
+  const { addCard, updateCard } = useCardList();
 
   const handleDeletingCard = useCallback((card: ICard) => {
-    removeCard(card);
+    deleteCard(card);
     setCards(getSavedCards());
   }, []);
 
@@ -35,15 +19,15 @@ function CardList() {
     <Frame title="카드 목록">
       <ul className="card-list">
         <li>
-          <div className="empty-card" onClick={handleAddingCard}>
+          <div className="empty-card" onClick={addCard}>
             +
           </div>
         </li>
         {cards.map((card) => {
-          const { name, owner, numbers, expiredMonth, expiredYear, alias, cvc } = card;
+          const { id, name, owner, numbers, expiredMonth, expiredYear, alias, cvc } = card;
           return (
-            <li key={numbers.join('')}>
-              <Card card={{ name, owner, numbers, expiredMonth, expiredYear, alias, cvc }} onClick={handleUpdatingCard}>
+            <li key={id}>
+              <Card card={{ name, owner, numbers, expiredMonth, expiredYear, alias, cvc }} onClick={updateCard}>
                 <div className="card-controller">
                   <a href="#">
                     <strong>{alias || name}</strong>

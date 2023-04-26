@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { CARD_INPUT } from '../../../constants';
+import { CARD_INPUT } from '../../../domain/payments/constants';
 
 type THookHandler = {
   cardNumbers: string[];
@@ -10,7 +10,7 @@ type THookHandler = {
 
 const { CARD_NUMBER } = CARD_INPUT;
 
-export default ({ cardNumbers, onChange, nextRef, refs }: THookHandler) => {
+const useCardNumbersHandler = ({ cardNumbers, onChange, nextRef, refs }: THookHandler) => {
   useEffect(() => {
     const lengths = cardNumbers.map((value) => value.length);
     const targetIndex = lengths.findIndex((length) => length !== CARD_NUMBER.EACH_LENGTH);
@@ -73,3 +73,5 @@ export default ({ cardNumbers, onChange, nextRef, refs }: THookHandler) => {
 
   return { handleChange, handleFulfilled, handleKeyDown, focusPrev, focusNext };
 };
+
+export default useCardNumbersHandler;

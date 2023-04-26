@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 import { InputContainer } from '../InputContainer';
 import { NumberInput } from '../NumberInput';
-import { CARD_INPUT } from '../../constants';
+import { CARD_INPUT } from '../../domain/payments/constants';
 import useForwardedRef from '../../hooks/useForwardedRef';
-import useHandler from './hooks/useHandler';
+import useCardNumbersHandler from './hooks/useCardNumbersHandler';
 
 export type TInputEventHandler = {
   onChange?: (values: string[]) => void;
@@ -12,7 +12,7 @@ export type TInputEventHandler = {
 
 type TCardNumbersInput = {
   values: string[];
-  nextRef?: React.RefObject<HTMLInputElement>;
+  nextRef?: React.RefObject<HTMLInputElement | HTMLButtonElement>;
   caption?: string;
 } & TInputEventHandler;
 
@@ -25,7 +25,7 @@ function CardNumbersInput(
   const { values, onChange, nextRef, caption } = props;
   const { refs } = useForwardedRef({ forwardedRef, length: values.length });
 
-  const { handleChange, handleKeyDown } = useHandler({
+  const { handleChange, handleKeyDown } = useCardNumbersHandler({
     cardNumbers: values,
     onChange,
     nextRef,

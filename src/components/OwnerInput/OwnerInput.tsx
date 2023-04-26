@@ -1,13 +1,13 @@
-import React, { ForwardedRef, forwardRef, useCallback, useState } from 'react';
-import { TCardComponentProps } from '../../domain/payments/types';
+import React, { ForwardedRef, RefObject, forwardRef, useCallback, useState } from 'react';
 import { InputContainer } from '../InputContainer';
-import { CARD_INPUT } from '../../constants';
+import { CARD_INPUT } from '../../domain/payments/constants';
+import { TCardComponentProps } from '../../pages/card-edit/types';
 
 const MAX_LENGTH = CARD_INPUT.OWNER.MAX_LENGTH;
 
 function OwnerInput(
   { onChange, onFulfill, prevRef, nextRef, caption }: TCardComponentProps<string>,
-  ref: ForwardedRef<HTMLInputElement>
+  ref: ForwardedRef<HTMLInputElement | HTMLButtonElement>
 ) {
   const [owner, setOwner] = useState('');
 
@@ -40,7 +40,7 @@ function OwnerInput(
   return (
     <InputContainer title="카드 소유자 이름(선택)" caption={caption}>
       <input
-        ref={ref}
+        ref={ref as RefObject<HTMLInputElement>}
         type="text"
         className="input-basic"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."

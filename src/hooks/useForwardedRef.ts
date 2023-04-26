@@ -5,7 +5,7 @@ type THookForwardedRef = {
   length?: number; //ref 개수
 };
 
-export default ({ forwardedRef, length = 1 }: THookForwardedRef) => {
+const useForwardedRef = ({ forwardedRef, length = 1 }: THookForwardedRef) => {
   const refs = Array.from({ length }, () => useRef<HTMLInputElement>() as React.RefObject<HTMLInputElement>);
   const ref = refs[0];
 
@@ -20,3 +20,5 @@ export default ({ forwardedRef, length = 1 }: THookForwardedRef) => {
 
   return { ref, refs };
 };
+
+export default useForwardedRef;

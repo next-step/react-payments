@@ -1,4 +1,4 @@
-import { CARD_INPUT } from '../../constants';
+import { CARD_INPUT } from './constants';
 import { leaveOnlyNumbers } from '../../util/number';
 
 const {

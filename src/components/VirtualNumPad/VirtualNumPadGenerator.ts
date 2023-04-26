@@ -1,4 +1,4 @@
-import { CARD_VIRTUAL_KEYBOARD } from '../../constants';
+import { CARD_VIRTUAL_KEYBOARD } from '../../domain/payments/constants';
 
 const { NUMBER_KEYS, FUNCTION_KEY_DELETE, FUNCTION_KEY_RESET } = CARD_VIRTUAL_KEYBOARD;
 const FUNCTION_KEYS: string[] = [FUNCTION_KEY_DELETE, FUNCTION_KEY_RESET];

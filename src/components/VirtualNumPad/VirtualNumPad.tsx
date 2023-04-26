@@ -9,7 +9,7 @@ function VirtualNumPad({ onClick, onDimmedClick }: TVirtualNumPad) {
   const { handleClick } = useVirtualNumPad({ keys, onClick });
 
   return (
-    <Modal onDimmedClick={onDimmedClick}>
+    <Modal onClick={onDimmedClick}>
       <div className="modal-number-pad" onClick={handleClick}>
         {keys.map((key) => (
           <button className="modal-button" type="button" key={key}>

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { TNumberInputProps } from './NumberInput';
 
-export default ({ type, onChange, maxLength }: TNumberInputProps) => {
+const useNumberInput = ({ type, onChange, maxLength }: TNumberInputProps) => {
   const [virtualKeyboardVisible, setVirtualKeyboardVisible] = useState(false);
   const isSafety = useMemo(() => type === 'password', [type]);
 
@@ -32,3 +32,5 @@ export default ({ type, onChange, maxLength }: TNumberInputProps) => {
     handleVirtualKeyDown,
   };
 };
+
+export default useNumberInput;

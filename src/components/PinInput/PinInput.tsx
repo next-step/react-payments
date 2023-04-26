@@ -1,10 +1,10 @@
 import React, { forwardRef, useCallback } from 'react';
 import '../../styles/input.css';
-import { TCardComponentProps } from '../../domain/payments/types';
 import { InputContainer } from '../InputContainer';
-import { CARD_INPUT } from '../../constants';
+import { CARD_INPUT } from '../../domain/payments/constants';
 import { NumberInput } from '../NumberInput';
 import useForwardedRef from '../../hooks/useForwardedRef';
+import { TCardComponentProps } from '../../pages/card-edit/types';
 
 const { EDITABLE_LENGTH, EACH_LENGTH } = CARD_INPUT.PIN;
 

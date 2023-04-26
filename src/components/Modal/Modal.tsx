@@ -2,14 +2,14 @@ import React from 'react';
 
 export type TModalProps = {
   children?: React.ReactNode;
-  onDimmedClick?: () => void;
+  onClick?: () => void;
   onBlur?: (event: React.FocusEvent) => void;
 };
 
-function Modal({ children, onDimmedClick, onBlur }: TModalProps) {
+function Modal({ children, onClick, onBlur }: TModalProps) {
   return (
     <>
-      <div className="modal-dimmed" onClick={() => onDimmedClick?.()} onBlur={onBlur}></div>
+      <div className="modal-dimmed" onClick={() => onClick?.()} onBlur={onBlur}></div>
       <div className="modal">{children}</div>
     </>
   );

@@ -18,7 +18,7 @@ function ToolTip({ children }: TToolTipProps) {
         ?
       </button>
       {isVisible && (
-        <Modal onDimmedClick={handleVisibility}>
+        <Modal onClick={handleVisibility}>
           <p style={{ padding: '24px' }}>{children}</p>
           <button type="button" onClick={handleVisibility}>
             확인

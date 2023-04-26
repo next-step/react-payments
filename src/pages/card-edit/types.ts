@@ -1,19 +1,25 @@
-export type TCardEditProperties = {
-  cardNumbers: string[];
-  expiredMonth: string;
-  expiredYear: string;
-  owner: string;
-  cvc: string;
-  pin: string;
+type TReactSetter<T> = React.Dispatch<React.SetStateAction<T>>;
+type TEditProperty<T> = { value: T; set: TReactSetter<T> };
+
+export type TCardComponentProps<T = string[]> = {
+  value?: T;
+  onChange?: (argument: T) => void;
+  onFulfill?: (argument: T) => void;
+  prevRef?: React.RefObject<HTMLInputElement | HTMLButtonElement>;
+  nextRef?: React.RefObject<HTMLInputElement | HTMLButtonElement>;
+  forwardedRef?: React.ForwardedRef<HTMLInputElement>;
+  children?: React.ReactNode;
+  caption?: string;
 };
 
-export type TCardEditSetters = {
-  setCardNumbers: React.Dispatch<React.SetStateAction<string[]>>;
-  setExpiredYear: React.Dispatch<React.SetStateAction<string>>;
-  setExpiredMonth: React.Dispatch<React.SetStateAction<string>>;
-  setOwner: React.Dispatch<React.SetStateAction<string>>;
-  setCvc: React.Dispatch<React.SetStateAction<string>>;
-  setPin: React.Dispatch<React.SetStateAction<string>>;
+export type TCardEditProperties = {
+  cardNumbers: TEditProperty<string[]>;
+  expiredMonth: TEditProperty<string>;
+  expiredYear: TEditProperty<string>;
+  owner: TEditProperty<string>;
+  cvc: TEditProperty<string>;
+  pin: TEditProperty<string>;
+  cardTypeSelected: TEditProperty<boolean>;
 };
 
 export type TCardEditRefs = {
