@@ -1,42 +1,66 @@
-import React, { ForwardedRef, forwardRef } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 import '../../styles/input.css';
-import useNumberInput from '../../hooks/useNumberInput';
-import { TCardComponentProps } from '../../domain/payments/types';
 import { InputContainer } from '../InputContainer';
-import { CARD_INPUT } from '../../constants';
+import { CARD_INPUT } from '../../domain/payments/constants';
+import { NumberInput } from '../NumberInput';
+import useForwardedRef from '../../hooks/useForwardedRef';
+import { TCardComponentProps } from '../../pages/card-edit/types';
 
-const { LENGTH, EDITABLE_LENGTH } = CARD_INPUT.PIN;
-const EACH_PASSWORD_LENGTH = 1;
+const { EDITABLE_LENGTH, EACH_LENGTH } = CARD_INPUT.PIN;
 
-const isEditable = (idx: number) => idx < EDITABLE_LENGTH;
+function PinInput(
+  props: TCardComponentProps<string>,
+  forwardedRef: React.ForwardedRef<HTMLInputElement | HTMLButtonElement>
+) {
+  const { value = '', onChange, nextRef, caption } = props;
+  const { refs } = useForwardedRef({ forwardedRef, length: EDITABLE_LENGTH });
 
-function PinInput({ onChange, onFulfill }: TCardComponentProps, ref: ForwardedRef<HTMLInputElement>) {
-  const {
-    numbers: pins,
-    refs,
-    handleChange,
-  } = useNumberInput({ initValues: ['', ''], maxLength: EACH_PASSWORD_LENGTH, onChange, onFulfill, forwardedRef: ref });
+  const handleChange = useCallback(
+    (newValue: string, index: number) => {
+      const values = value.split('');
+      const newValues = [...values.slice(0, index), newValue, ...values.slice(index + 1)];
+
+      onChange?.(newValues.join(''));
+      if (newValue.length === EACH_LENGTH) {
+        refs[index + 1]?.current?.focus();
+      }
+
+      handleFulfilled(newValue, index);
+    },
+    [props]
+  );
+
+  const handleFulfilled = useCallback(
+    (value: string, index: number) => {
+      if (index === 1 && value.length === EDITABLE_LENGTH) {
+        nextRef?.current?.focus();
+      }
+    },
+    [props]
+  );
 
   return (
-    <InputContainer caption="카드 비밀번호" isTied={false}>
-      {Array.from({ length: LENGTH }, (_, idx) => (
-        <input
-          required
-          ref={(el) => (refs.current[idx] = el as HTMLInputElement)}
+    <InputContainer title="카드 비밀번호" tied={false} caption={caption}>
+      {Array.from({ length: EDITABLE_LENGTH }, (_, idx) => (
+        <NumberInput
+          //
           key={idx}
-          className="input-basic w-15"
+          required
           type="password"
-          maxLength={1}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleChange(event, idx)}
-          value={isEditable(idx) ? pins[idx] : '*'}
-          disabled={!isEditable(idx)}
+          ref={refs[idx]}
+          onChange={(event) => handleChange(event, idx)}
+          value={value[idx] ? value[idx] : ''}
+          classNames={['input-basic', 'w-15']}
+          minLength={EACH_LENGTH}
+          maxLength={EACH_LENGTH}
         />
       ))}
+      <input disabled className="input-basic w-15" type="password" maxLength={1} value={'*'} />
+      <input disabled className="input-basic w-15" type="password" maxLength={1} value={'*'} />
     </InputContainer>
   );
 }
 
 const ForwardedPinInput = forwardRef(PinInput);
 ForwardedPinInput.displayName = 'PinInput';
-
 export default ForwardedPinInput;

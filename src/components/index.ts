@@ -1,5 +1,5 @@
 export { Card } from './Card';
-export { CardNumberInput } from './CardNumberInput';
+export { CardNumbersInput } from './CardNumbersInput';
 export { CvcInput } from './CvcInput';
 export { ExpiredInput } from './ExpiredInput';
 export { Frame } from './Frame';

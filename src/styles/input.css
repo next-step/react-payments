@@ -1,5 +1,5 @@
 .input-container {
-  margin: 16px 0;
+  margin: 4px 0;
 }
 
 .input-box {
@@ -25,7 +25,7 @@
 
 .input-basic {
   background-color: #ecebf1;
-  height: 45px;
+  height: 40px;
   width: 100%;
   text-align: center;
   outline: 2px solid transparent;
@@ -45,4 +45,11 @@
   padding: 4px 0;
 
   border-bottom: 1px solid #383838;
+}
+
+.input-message {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: red;
+  user-select: none;
 }

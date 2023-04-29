@@ -1,19 +1,21 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 
 type TInputContainerProps = {
-  caption: string;
+  title: string;
   children: ReactNode;
   width?: number;
-  isTied?: boolean;
+  tied?: boolean;
+  caption?: string;
 };
 
-function InputContainer({ caption, children, width, isTied = true }: TInputContainerProps) {
-  const inputBoxSizeClass = width ? `w-${width}` : '';
+function InputContainer({ title, children, width, tied = true, caption }: TInputContainerProps) {
+  const inputBoxSizeClass = useMemo(() => (width ? `w-${width}` : ''), [width]);
 
   return (
     <div className="input-container">
-      <span className="input-title">{caption}</span>
-      {isTied ? <div className={['input-box', inputBoxSizeClass].join(' ').trim()}>{children}</div> : <>{children}</>}
+      <span className="input-title">{title}</span>
+      {tied ? <div className={['input-box', inputBoxSizeClass].join(' ').trim()}>{children}</div> : <>{children}</>}
+      <div className="input-message">{caption}</div>
     </div>
   );
 }
