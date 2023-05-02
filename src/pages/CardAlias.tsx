@@ -1,20 +1,47 @@
-import { useNavigate } from 'react-router-dom';
-import EmptyCard from 'src/components/EmptyCard/EmptyCard';
-import TextButton from 'src/components/TextButton/TextButton';
+import { TextButton } from 'src/components/Buttons';
+import { Card } from 'src/components/Cards';
+import useCardAlias from 'src/hooks/useCardAlias';
 
 const CardAlias = () => {
-  const navigate = useNavigate();
-
-  const onClickConfirmBtn = () => {
-    navigate('/', { replace: true });
-  };
-
+  const { cardInfo, aliasInputRef, onClickConfirmBtn, onClickDeleteBtn } =
+    useCardAlias();
+  const {
+    creditNumber,
+    customerName,
+    expirationDate,
+    bankTitle,
+    bgColor,
+    alias,
+  } = cardInfo;
   return (
     <div className="alias-page">
-      <div className="alias-page-title">카드 등록이 완료되었습니다.</div>
-      {/* TO DO : Change Card Component with Card Info Data */}
-      <EmptyCard onClick={() => {}} />
-      <input className="alias-input" />
+      <div className="alias-page-title">
+        {cardInfo.id
+          ? '카드 별칭을 수정합니다.'
+          : '카드 등록이 완료되었습니다.'}
+      </div>
+      <Card
+        title={bankTitle}
+        bgColor={bgColor}
+        creditNumber={creditNumber}
+        customerName={customerName}
+        expirationDate={expirationDate}
+      />
+      <input
+        defaultValue={alias}
+        className="alias-input"
+        placeholder="카드 별칭 (선택)"
+        maxLength={10}
+        ref={aliasInputRef}
+      />
+      {cardInfo.id && (
+        <TextButton
+          style={{ marginRight: '3rem', color: '#E24141' }}
+          onClick={onClickDeleteBtn}
+        >
+          삭제
+        </TextButton>
+      )}
       <TextButton onClick={onClickConfirmBtn}>확인</TextButton>
     </div>
   );

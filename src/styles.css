@@ -75,6 +75,7 @@ header {
   font-size: 0.625rem;
   color: #525252;
   height: 1.125rem;
+  text-align: left;
 }
 
 .card-ic-chip {
@@ -206,11 +207,21 @@ header {
 .alias-input {
   display: flex;
   border: none;
-  border-bottom: 1.5px solid #737373;
+  border-bottom: 1.5px solid #e5e5e5;
   text-align: center;
   font-size: 1.125rem;
   margin: 0 auto;
   margin-top: 2rem;
+}
+
+.alias-input::placeholder {
+  color: #e5e5e5;
+}
+
+.alias-input:focus {
+  border-color: #737373;
+  color: #383838;
+  transition: 0.2s;
 }
 
 /* Card Password */
@@ -234,4 +245,73 @@ header {
 
 .card-password-input.disabled {
   background-color: transparent;
+}
+
+/* Bottom Sheet */
+
+.bottom-sheet-container {
+  width: 100%;
+  height: 14rem;
+  background-color: #fdfdfd;
+  border-radius: 0.3125rem 0.3125rem 0 0;
+  z-index: 100;
+  position: fixed;
+  bottom: -14rem;
+  transition: all 0.4s cubic-bezier(0.5, 0, 0.5, 1) 0.1s;
+}
+
+.bottom-sheet-container.open {
+  bottom: 0;
+  transform: translate(100, 100%);
+}
+
+.bottom-sheet-background {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.bottom-sheet-background.open {
+  display: block;
+}
+
+/* Bottom Sheet Bank */
+
+.bottom-sheet-new-card-container {
+  margin: 2rem 3.3rem;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.bottom-sheet-new-card-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-right: 0.6rem;
+  padding-left: 0.6rem;
+  padding-bottom: 0.8rem;
+}
+.bottom-sheet-new-card-item:hover {
+  opacity: 0.8;
+}
+
+.bottom-sheet-new-card-item-bgcolor {
+  background-color: #737373;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 1.2rem;
+}
+
+.bottom-sheet-new-card-item-title {
+  color: #525252;
+  font-size: 0.75rem;
+  margin-top: 0.6rem;
+  white-space: nowrap;
 }

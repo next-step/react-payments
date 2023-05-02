@@ -1,32 +1,27 @@
-import { useNavigate } from 'react-router-dom';
-import Card from 'src/components/Card/Card';
-import CardPasswordInput from 'src/components/CardPasswordInput/CardPasswordInput';
-import Header from 'src/components/Header/Header';
-import NewCardInput from 'src/components/NewCardInput/NewCardInput';
-import TextButton from 'src/components/TextButton/TextButton';
+import { bankList } from 'src/utils/constants';
+import { TextButton } from 'src/components/Buttons';
+import { Header } from 'src/components/Layouts';
+import { Card } from 'src/components/Cards';
+import { CardPasswordInput, NewCardInput } from 'src/components/Forms';
+import { BankBottomSheet, BottomSheet } from 'src/components/Modals';
 import useNewCardForm from 'src/hooks/useNewCardForm';
 
 const CUSTOMER_NAME_LIMIT_COUNT = 30;
 
 const CardNew = () => {
-  const navigate = useNavigate();
-  const { state, handlers } = useNewCardForm();
-  const goNextPage = () => {
-    navigate('/card-alias', { replace: true });
-  };
+  const { state, handlers, onClickNextPage, openBottomSheet, goBack } =
+    useNewCardForm();
+
   return (
     <>
-      <Header
-        title="카드 추가"
-        hasBackButton
-        onClickBackbutton={() => navigate(-1)}
-      />
+      <Header title="카드 추가" hasBackButton onClickBackButton={goBack} />
       <Card
-        title=""
-        bgColor=""
+        title={state.bankTitle}
+        bgColor={state.bgColor}
         creditNumber={state.creditNumber}
         customerName={state.customerName}
         expirationDate={state.expirationDate}
+        onClick={openBottomSheet}
       />
       <NewCardInput
         label="카드 번호"
@@ -51,7 +46,6 @@ const CardNew = () => {
         value={state.customerName}
         onChange={handlers.handleChangeCustomerName}
         inputLimitCount={CUSTOMER_NAME_LIMIT_COUNT}
-        inputCount={state.customerName.length}
         maxLength={CUSTOMER_NAME_LIMIT_COUNT}
       />
       <NewCardInput
@@ -73,8 +67,14 @@ const CardNew = () => {
           onChange: handlers.handleChangeSecondPassword,
         }}
       />
-      {/* TO DO : Form Validation & Navigate with State */}
-      <TextButton onClick={goNextPage}>다음</TextButton>
+      <TextButton onClick={onClickNextPage}>다음</TextButton>
+      <BottomSheet isBackgroundToggle>
+        <BankBottomSheet
+          bankList={bankList}
+          handleBankTitle={handlers.handleBankTitle}
+          handleBgColor={handlers.handleBgColor}
+        />
+      </BottomSheet>
     </>
   );
 };

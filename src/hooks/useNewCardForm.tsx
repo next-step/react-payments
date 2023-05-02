@@ -1,15 +1,42 @@
 /* eslint-disable no-alert */
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ModalContext } from 'src/contexts/ModalContext';
+import { NewCardContext } from 'src/contexts/NewCardContext';
+import { INewCard } from 'src/utils/types';
 
 type InputType = React.ChangeEvent<HTMLInputElement>;
 
 const useNewCardForm = () => {
+  const navigate = useNavigate();
+  const { handleCardInfo } = useContext(NewCardContext);
+  const { isOpen, handleOpen } = useContext(ModalContext);
   const [creditNumber, setCreditNumber] = useState('');
   const [expirationDate, setExpirationDate] = useState('');
   const [customerName, setCustomerName] = useState('');
   const [cvc, setCvc] = useState('');
   const [firstPassword, setFirstPassword] = useState('');
   const [secondPassword, setSecondPassword] = useState('');
+  const [bankTitle, setBankTitle] = useState('');
+  const [bgColor, setBgColor] = useState('');
+
+  useEffect(() => {
+    if (!isOpen) {
+      handleOpen(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const state: INewCard = {
+    creditNumber,
+    expirationDate,
+    customerName,
+    cvc,
+    firstPassword,
+    secondPassword,
+    bankTitle,
+    bgColor,
+  };
 
   const handleChangeCreditNumber = (e: InputType) => {
     let targetValue = e.target.value.trim();
@@ -62,13 +89,25 @@ const useNewCardForm = () => {
     setSecondPassword(e.target.value);
   };
 
-  const state = {
-    creditNumber,
-    expirationDate,
-    customerName,
-    cvc,
-    firstPassword,
-    secondPassword,
+  const handleBankTitle = (title: string) => {
+    setBankTitle(title);
+  };
+
+  const handleBgColor = (color: string) => {
+    setBgColor(color);
+  };
+
+  const onClickNextPage = () => {
+    handleCardInfo(state);
+    navigate('/card-alias', { replace: true });
+  };
+
+  const openBottomSheet = () => {
+    handleOpen(true);
+  };
+
+  const goBack = () => {
+    navigate(-1);
   };
 
   const handlers = {
@@ -78,11 +117,16 @@ const useNewCardForm = () => {
     handleChangeExpirationDate,
     handleChangeFirstPassword,
     handleChangeSecondPassword,
+    handleBankTitle,
+    handleBgColor,
   };
 
   return {
     state,
     handlers,
+    onClickNextPage,
+    openBottomSheet,
+    goBack,
   };
 };
 
