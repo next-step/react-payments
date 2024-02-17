@@ -9,3 +9,10 @@
   cursor: pointer;
   font-weight: bold;
 }
+
+.button-prev {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+}
