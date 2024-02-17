@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import useKeyboardContext from "../../hooks/useKeyboardContext";
 import { Size } from "../../types/common";
 import Input from "../Input/Input";
 import InputContainer from "../Input/InputContainer";
@@ -8,6 +9,7 @@ function Password({ onPasswordChange }: PasswordProps) {
     1: "",
     2: "",
   });
+  const { setIsOpen } = useKeyboardContext();
 
   const itemsRef = useRef<any>([]);
 
@@ -38,6 +40,10 @@ function Password({ onPasswordChange }: PasswordProps) {
     }
   };
 
+  const onFocus = () => {
+    setIsOpen(true);
+  };
+
   return (
     <InputContainer label="카드 비밀번호">
       <Input
@@ -45,16 +51,18 @@ function Password({ onPasswordChange }: PasswordProps) {
         type="password"
         maxLength={1}
         onChange={(e) => onChange(e, 1)}
+        onFocus={onFocus}
         name="password1"
-        forwardRef={(el: HTMLInputElement) => (itemsRef.current[1] = el)}
+        ref={(el: HTMLInputElement) => (itemsRef.current[1] = el)}
       ></Input>
       <Input
         size={Size.Small}
         type="password"
         maxLength={1}
         onChange={(e) => onChange(e, 2)}
+        onFocus={onFocus}
         name="password2"
-        forwardRef={(el: HTMLInputElement) => (itemsRef.current[2] = el)}
+        ref={(el: HTMLInputElement) => (itemsRef.current[2] = el)}
       ></Input>
       <Input size={Size.Small} type="password" readonly={true}></Input>
       <Input size={Size.Small} type="password" readonly={true}></Input>

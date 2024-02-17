@@ -1,10 +1,13 @@
 import { useState, useRef } from "react";
+import useKeyboardContext from "../../hooks/useKeyboardContext";
 import { remainOnlyNumber } from "../../utils/format";
 import Input from "../Input/Input";
 import InputBox from "../Input/InputBox";
 import InputContainer from "../Input/InputContainer";
+import { InvalidText } from "../InvalidText";
 
-const CARD_MAX_LENGTH = 4; // 카드에 들어가는 최대 길이
+export const CARD_MAX_LENGTH = 4; // 카드에 들어가는 최대 길이
+export const CARD_LAST_INDEX = 3; // 카드 마지막 인덱스
 const PASSWORD_TYPE_START_INDEX = 2; // 패스워드 타입 시작 인덱스
 
 export type CardNumbers = {
@@ -21,8 +24,15 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
     2: "",
     3: "",
   });
+  const [invalid, setInvalid] = useState(true);
+  const { setIsOpen } = useKeyboardContext();
 
   const itemsRef = useRef<HTMLInputElement[]>([]);
+
+  const checkCardNumberInvalid = (cardNumbers: CardNumbers) => {
+    const valid = Object.values(cardNumbers).some((cardNumber) => !cardNumber);
+    setInvalid(!valid);
+  };
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -36,7 +46,7 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
     };
 
     const isMaxLength = event.currentTarget.value.length === CARD_MAX_LENGTH;
-    const isLastCardNumberIndex = type === 3;
+    const isLastCardNumberIndex = type === CARD_LAST_INDEX;
 
     if (isMaxLength && !isLastCardNumberIndex) {
       itemsRef.current[type + 1].focus();
@@ -44,25 +54,34 @@ function CardNumber({ onCardNumberChange }: CardNumberProps) {
 
     setCardNumbers(numbers);
     onCardNumberChange(numbers);
+    checkCardNumberInvalid(numbers);
+  };
+
+  const onFocus = (index: number) => {
+    if (index > 1) {
+      setIsOpen(true);
+    }
   };
 
   return (
-    <InputContainer label="카드 번호">
-      <InputBox>
-        {Object.keys(cardNumbers).map((cardNumber, index) => (
-          <Input
-            onChange={(event) => onChange(event, index)}
-            maxLength={CARD_MAX_LENGTH}
-            name={`card-${index}`}
-            key={`card-${index}`}
-            type={index < PASSWORD_TYPE_START_INDEX ? "text" : "password"}
-            forwardRef={(el: HTMLInputElement) =>
-              (itemsRef.current[index] = el)
-            }
-          ></Input>
-        ))}
-      </InputBox>
-    </InputContainer>
+    <>
+      <InputContainer label="카드 번호">
+        <InputBox>
+          {Object.keys(cardNumbers).map((cardNumber, index) => (
+            <Input
+              onChange={(event) => onChange(event, index)}
+              onFocus={() => onFocus(index)}
+              maxLength={CARD_MAX_LENGTH}
+              name={`card-${index}`}
+              key={`card-${index}`}
+              type={index < PASSWORD_TYPE_START_INDEX ? "text" : "password"}
+              ref={(el: HTMLInputElement) => (itemsRef.current[index] = el)}
+            ></Input>
+          ))}
+        </InputBox>
+        <>{invalid && <InvalidText>4자리를 모두 채워야 합니다</InvalidText>}</>
+      </InputContainer>
+    </>
   );
 }
 

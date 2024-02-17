@@ -12,6 +12,9 @@ import useCardChange from "../../hooks/useCardChange";
 import useModalContext from "../../hooks/useModalContext";
 import useCardContext from "../../hooks/useCardContext";
 import { ROUTE } from "../../constants/route";
+import { initCard } from "../../constants/bank";
+import KeyboardProvider from "../../components/KeyboardProvider";
+import Keyboard from "../../components/Keyboard";
 
 const INPUT_NAMES = [
   "card-0",
@@ -45,7 +48,7 @@ const checkValid = (eventTarget: any) => {
 
 function Add() {
   const { setIsOpen } = useModalContext();
-  const { setCard, card, bankName } = useCardContext();
+  const { setCard } = useCardContext();
   const {
     onCardNumberChange,
     onCodeChange,
@@ -55,6 +58,9 @@ function Add() {
     cardInfo,
     cardColor,
     formattedCardNumber,
+    bankName,
+    expiredRef,
+    userNameRef,
   } = useCardChange();
 
   const history = useHistory();
@@ -62,22 +68,32 @@ function Add() {
     e.preventDefault();
     const isInvalid = checkValid(e.currentTarget);
 
-    if (!isInvalid) {
-      if (card.bankId) {
-        const cardData = {
-          ...cardInfo,
-          bankId: card.bankId,
-        };
-        setCard(cardData);
-        history.push(ROUTE.COMPLETE);
-        return;
-      }
-      setIsOpen(true);
+    if (isInvalid) {
+      return;
     }
+
+    if (cardInfo.bankId) {
+      setCard(initCard);
+      history.push({
+        pathname: ROUTE.COMPLETE,
+        state: { card: cardInfo },
+      });
+      return;
+    }
+    setIsOpen(true);
+  };
+
+  const onClickKeyboard = (digitInfo: { digit: number; component: string }) => {
+    console.log(
+      "%c 🤩🤩🤩 영우의 로그 digit: ",
+      "font-size: x-large; color: #bada55;",
+      "",
+      digitInfo
+    );
   };
 
   return (
-    <>
+    <KeyboardProvider>
       <Header />
       <Card
         cardNumber={formattedCardNumber}
@@ -88,13 +104,20 @@ function Add() {
       ></Card>
       <form onSubmit={submitHandler}>
         <CardNumber onCardNumberChange={onCardNumberChange}></CardNumber>
-        <ExpiredDate onExpiredDateChange={onExpiredDateChange}></ExpiredDate>
-        <UserName onUserNameChange={onUserNameChange}></UserName>
+        <ExpiredDate
+          onExpiredDateChange={onExpiredDateChange}
+          ref={expiredRef}
+        ></ExpiredDate>
+        <UserName
+          onUserNameChange={onUserNameChange}
+          ref={userNameRef}
+        ></UserName>
         <Code onCodeChange={onCodeChange}></Code>
         <Password onPasswordChange={onPasswordChange}></Password>
         <Button />
       </form>
-    </>
+      <Keyboard onClickKeyboard={onClickKeyboard}></Keyboard>
+    </KeyboardProvider>
   );
 }
 

@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
+import React, { ForwardedRef, useMemo, useRef, useState } from "react";
 import { blockInput, remainOnlyNumber } from "../../utils/format";
 import Input from "../Input/Input";
 import InputBox from "../Input/InputBox";
 import InputContainer from "../Input/InputContainer";
+import { InvalidText } from "../InvalidText";
 
 export type Date = {
   month: string;
@@ -22,7 +23,7 @@ const blockInvalidValue = (inputValue: string, type: string) => {
   const value = Number(inputValue);
 
   if (type === ExpiredDateType.Month) {
-    const isValidMonth = value !== 0 && value <= MAX_MONTH;
+    const isValidMonth = String(value) !== "00" && value <= MAX_MONTH;
     if (!isValidMonth) {
       return blockInput(String(value));
     }
@@ -39,10 +40,24 @@ const blockInvalidValue = (inputValue: string, type: string) => {
   return inputValue;
 };
 
-function ExpiredDate({ onExpiredDateChange }: ExpiredDateProps) {
+function ExpiredDate(
+  { onExpiredDateChange }: ExpiredDateProps,
+  ref: ForwardedRef<HTMLInputElement | null>
+) {
   const [expiredDate, setExpiredDate] = useState<Date>({ month: "", year: "" });
 
   const itemsRef = useRef<any>([]);
+
+  const invalidText = useMemo(() => {
+    if (!expiredDate.month) {
+      return "MM은 필수 입력입니다";
+    }
+    if (!expiredDate.year) {
+      return "YY는 필수 입력입니다";
+    }
+
+    return null;
+  }, [expiredDate]);
 
   const onChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -78,16 +93,17 @@ function ExpiredDate({ onExpiredDateChange }: ExpiredDateProps) {
           maxLength={DATE_MAX_LENGTH}
           onChange={(e) => onChange(e, ExpiredDateType.Month)}
           name={ExpiredDateType.Month}
-          forwardRef={(el: HTMLInputElement) => (itemsRef.current[0] = el)}
+          ref={ref}
         />
         <Input
           placeholder="YY"
           maxLength={DATE_MAX_LENGTH}
           onChange={(e) => onChange(e, ExpiredDateType.Year)}
           name={ExpiredDateType.Year}
-          forwardRef={(el: HTMLInputElement) => (itemsRef.current[1] = el)}
+          ref={(el: HTMLInputElement) => (itemsRef.current[1] = el)}
         />
       </InputBox>
+      <>{invalidText && <InvalidText>{invalidText}</InvalidText>}</>
     </InputContainer>
   );
 }
@@ -96,4 +112,5 @@ type ExpiredDateProps = {
   onExpiredDateChange: Function;
 };
 
-export default ExpiredDate;
+const forwardedExpiredDate = React.forwardRef(ExpiredDate);
+export default forwardedExpiredDate;

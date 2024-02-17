@@ -51,33 +51,19 @@
 - [x] 카드를 클릭하면, 카드 별칭 수정(카드 추가 완료 페이지)로 이동한다.
 - [ ] 카드를 삭제할 수 있다.
 
----
+## UX/UI 요구사항
 
-## 과제를 하면서 생긴 질문
-
-1. 지난 계산기 미션에서 styled component 를 컴포넌트의 아래로 내리는 편이 나을 것 같다고 말씀 주셨는데 (물론 취향차이라고 하심!!)  
-    그렇다면 type 도 아래로 내리는 편이 나을까?  
-    예시)
-
-   ```tsx
-   // 첫번째 구현 방법
-   function Input({ type = "text" }: InputProps) {
-     return <StyledInput type={type}></StyledInput>;
-   }
-
-   type InputProps = {
-     type: string;
-   };
-
-   // 두번째 구현 방법
-   type InputProps = {
-     type: string;
-   };
-
-   function Input({ type = "text" }: InputProps) {
-     return <StyledInput type={type}></StyledInput>;
-   }
-   ```
-
-2. 자동으로 4자리마다 - 를 추가하는 것과, / 를 추가하는 것은 input 을 중간 중간에 넣어야 하는 건지? 감을 못 잡겠다 ㅠㅠ
-3. onChange 로 너저분한 코드들이 너무 많은데, 이것을 use 커스텀 훅을 써서 뭉칠 방법이 있을까?
+- [x] 유효성 검증
+  - [x] 유효성 검증 실패에 대한 UI/UX 추가
+  - [x] 유효한 값 입력시 다음 필드로 Input Focusing
+- [ ] 카드
+  - [x] 카드 번호 앞 8자리로 카드사를 추정하여 그 테마를 카드 UI에 반영한다.
+  - [ ] 카드사를 선택하지 않아도 모달을 닫을 수 있다.
+  - [x] 카드사가 선택되고 유효한 카드 번호 16자리를 모두 입력하면, 자동으로 만료일로 focus된다.
+  - [x] 별칭 수정 가능
+- [x] 보안코드 툴팁
+  - [x] 클릭 시, 보안코드 관련 안내 메시지를 보여준다.
+  - [x] focus out 시, 툴팁이 닫힌다.
+- [ ] 가상 키보드
+  - [ ] 마스킹 처리된 값 입력시 사용
+  - [x] 숫자를 랜덤으로 배열

@@ -1,5 +1,4 @@
 import { createContext, Dispatch, SetStateAction, useState } from "react";
-import Modal from "./Modal";
 
 type ComponentProps = {
   children: JSX.Element | JSX.Element[] | string;
@@ -18,7 +17,6 @@ function ModalProvider({ children }: ComponentProps) {
   return (
     <ModalContext.Provider value={{ isOpen, setIsOpen }}>
       {children}
-      {isOpen ?? <Modal />}
     </ModalContext.Provider>
   );
 }

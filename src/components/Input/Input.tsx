@@ -1,16 +1,21 @@
+import React, { ForwardedRef } from "react";
 import styled from "styled-components";
 import { Size } from "../../types/common";
 
-function Input({
-  type = "text",
-  placeholder,
-  size = Size.Big,
-  onChange,
-  maxLength,
-  name,
-  forwardRef,
-  readonly,
-}: InputProps) {
+function Input(
+  {
+    type = "text",
+    placeholder,
+    size = Size.Big,
+    onChange,
+    maxLength,
+    name,
+    readonly,
+    onBlur,
+    onFocus,
+  }: InputProps,
+  ref: ForwardedRef<HTMLInputElement>
+) {
   return (
     <StyledInput
       type={type}
@@ -19,9 +24,11 @@ function Input({
       onChange={onChange}
       maxLength={maxLength}
       name={name}
-      ref={forwardRef}
+      ref={ref}
       readOnly={readonly}
       value={readonly ? "1" : undefined}
+      onBlur={onBlur}
+      onFocus={onFocus}
     ></StyledInput>
   );
 }
@@ -35,6 +42,8 @@ type InputProps = {
   name?: string;
   forwardRef?: any;
   readonly?: boolean;
+  onBlur?: () => void;
+  onFocus?: () => void;
 };
 
 type StyledInputProps = {
@@ -63,4 +72,5 @@ const StyledInput = styled.input<StyledInputProps>`
   margin-right: ${(props) => (props.widthSize === "small" ? "4px" : "")};
 `;
 
-export default Input;
+const forwardedRefInput = React.forwardRef(Input);
+export default forwardedRefInput;

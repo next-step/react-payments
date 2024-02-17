@@ -1,8 +1,12 @@
-import { formatCardNumber } from "./../utils/format";
+import { formatCardNumber, getBankId, getBankName } from "./../utils/format";
 import { DEFAULT_BANK_COLOR } from "./../constants/bank";
 import { PasswordType } from "./../components/Form/Password";
-import { CardNumbers } from "./../components/Form/CardNumber";
-import { useMemo, useState } from "react";
+import {
+  CardNumbers,
+  CARD_LAST_INDEX,
+  CARD_MAX_LENGTH,
+} from "./../components/Form/CardNumber";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { initCard } from "../constants/bank";
 import { CardType } from "../types/common";
 import { Date } from "../components/Form/ExpiredDate";
@@ -18,9 +22,28 @@ function useCardChange() {
     Object.values(cardInfo.expiredDate).some((date) => date) ||
     !!cardInfo.userName;
 
-  const color = useMemo(() => {
-    return getBankColor(card.bankId);
+  useEffect(() => {
+    if (card.bankId) {
+      setCardInfo((cardInfo: CardType) => {
+        return {
+          ...cardInfo,
+          bankId: card.bankId,
+        };
+      });
+    }
   }, [card.bankId]);
+
+  const color = useMemo(() => {
+    if (cardInfo.bankId) {
+      return getBankColor(cardInfo.bankId);
+    }
+  }, [cardInfo.bankId]);
+
+  const bankName = useMemo(() => {
+    if (cardInfo.bankId) {
+      return getBankName(cardInfo.bankId);
+    }
+  }, [cardInfo.bankId]);
 
   const cardColor = useMemo(() => {
     if (color) {
@@ -36,15 +59,50 @@ function useCardChange() {
     return formatCardNumber(cardInfo.cardNumber);
   }, [cardInfo.cardNumber]);
 
+  type CardInfo = {
+    cardNumber?: CardNumbers;
+    bankId?: string;
+  };
+
+  const updateCardInfoWithBankId = (
+    newCardInfo: CardInfo,
+    firstCardNumber: string
+  ) => {
+    if (!firstCardNumber || firstCardNumber.length < 4) {
+      return newCardInfo;
+    }
+
+    const bankId = getBankId(firstCardNumber);
+    newCardInfo.bankId = bankId;
+    return newCardInfo;
+  };
+
   const onCardNumberChange = (cardNumbers: CardNumbers) => {
+    const newCardInfo: CardInfo = {
+      cardNumber: cardNumbers,
+    };
+
+    const cardInfo = updateCardInfoWithBankId(newCardInfo, cardNumbers[0]);
+
+    if (
+      cardNumbers[CARD_LAST_INDEX].length === CARD_MAX_LENGTH &&
+      cardInfo.bankId
+    ) {
+      expiredRef.current?.focus();
+    }
+
     setCardInfo((card: CardType) => {
       return {
         ...card,
-        cardNumber: cardNumbers,
+        ...cardInfo,
       };
     });
   };
   const onExpiredDateChange = (expiredDate: Date) => {
+    if (expiredDate.month && expiredDate.year.length === 2) {
+      userNameRef.current?.focus();
+    }
+
     setCardInfo((card: CardType) => {
       return {
         ...card,
@@ -77,6 +135,9 @@ function useCardChange() {
     });
   };
 
+  const expiredRef = useRef<HTMLInputElement>(null);
+  const userNameRef = useRef<HTMLInputElement>(null);
+
   return {
     onCardNumberChange,
     onCodeChange,
@@ -86,6 +147,10 @@ function useCardChange() {
     cardInfo,
     cardColor,
     formattedCardNumber,
+    bankName,
+    setCardInfo,
+    expiredRef,
+    userNameRef,
   };
 }
 

@@ -19,7 +19,7 @@ type ComponentProps = {
 
 const Root = styled.div`
   background-color: #fff;
-  height: 700px;
+  height: 100%;
   position: relative;
   border-radius: 15px;
 `;
@@ -27,10 +27,9 @@ const Root = styled.div`
 const Wrapper = styled.div`
   height: 100%;
   padding: 16px 24px;
-  display: flex;
+  text-align: center;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 `;
 
 export default Layout;

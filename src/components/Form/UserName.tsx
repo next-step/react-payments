@@ -1,11 +1,14 @@
-import { useState } from "react";
+import React, { ForwardedRef, useState } from "react";
 import Input from "../Input/Input";
 import InputBox from "../Input/InputBox";
 import InputContainer from "../Input/InputContainer";
 
 const MAX_LENGTH = 30;
 
-function UserName({ onUserNameChange }: CardNumberProps) {
+function UserName(
+  { onUserNameChange }: CardNumberProps,
+  ref: ForwardedRef<HTMLInputElement | null>
+) {
   const [username, setUsername] = useState("");
 
   const rightLabel = `${username.length} / ${MAX_LENGTH}`;
@@ -23,6 +26,7 @@ function UserName({ onUserNameChange }: CardNumberProps) {
           onChange={onChange}
           name="username"
           maxLength={MAX_LENGTH}
+          ref={ref}
         ></Input>
       </InputBox>
     </InputContainer>
@@ -33,4 +37,5 @@ type CardNumberProps = {
   onUserNameChange: Function;
 };
 
-export default UserName;
+const forwardedUserName = React.forwardRef(UserName);
+export default forwardedUserName;
