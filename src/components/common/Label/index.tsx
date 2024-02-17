@@ -1,21 +1,30 @@
-import React, { LabelHTMLAttributes, memo, ReactNode } from "react";
+import React, {
+  LabelHTMLAttributes,
+  memo,
+  PropsWithChildren,
+  useMemo,
+} from "react";
 
-export interface InputLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
+export interface InputLabelProps
+  extends PropsWithChildren<LabelHTMLAttributes<HTMLLabelElement>> {
   color?: string;
-  children: ReactNode;
+  isError?: boolean;
 }
 
-import { LabelEl } from "./label.style";
+import * as S from "./label.style";
 
 export default memo(function InputLabel({
   color = "#525252",
+  isError = false,
   className,
   children,
   ...props
 }: InputLabelProps) {
+  const labelColor = useMemo(() => (isError ? "#e81e1e" : color), []);
+
   return (
-    <LabelEl className={className} color={color} {...props}>
+    <S.Label className={className} color={labelColor} {...props}>
       {children}
-    </LabelEl>
+    </S.Label>
   );
 });

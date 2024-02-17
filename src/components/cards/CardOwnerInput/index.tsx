@@ -7,10 +7,12 @@ import * as S from "./cardOwnerInput.style";
 
 interface CardOwnerInputProps extends InputHTMLAttributes<HTMLInputElement> {
   cardOwnerName: string;
+  error?: string;
 }
 
 export default function CardOwnerInput({
   cardOwnerName,
+  error,
   ...props
 }: CardOwnerInputProps) {
   const CardOwnerInputLabel = useMemo(
@@ -31,6 +33,7 @@ export default function CardOwnerInput({
       id="ownerName"
       label={CardOwnerInputLabel}
       placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+      error={error}
       value={cardOwnerName}
       {...props}
     />

@@ -9,10 +9,12 @@ import type { CardNumber } from "./hook/useCardNumberInput";
 
 interface CardNumberInputProps extends InputHTMLAttributes<HTMLInputElement> {
   cardNumber: CardNumber;
+  error?: string;
 }
 
 export default function CardNumberInput({
   cardNumber,
+  error,
   ...props
 }: CardNumberInputProps) {
   const { num1, num2, num3, num4 } = cardNumber;
@@ -59,6 +61,7 @@ export default function CardNumberInput({
           {...props}
         />
       </S.CardNumberInputWrapper>
+      {error && <Label isError>{error}</Label>}
     </S.CardNumberInputContainer>
   );
 }

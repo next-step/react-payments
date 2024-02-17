@@ -7,7 +7,6 @@ export const CardNumberInputContainer = styled.div``;
 export const CardNumberInputWrapper = styled.div`
   display: flex;
   align-items: center;
-  height: 100%;
 
   ${resetInputBorderRadius}
 `;

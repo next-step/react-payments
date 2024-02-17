@@ -1,4 +1,4 @@
-import React, { useId, useMemo } from "react";
+import React, { MouseEvent, useId, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { LeftPointArrow } from "@/assets/icons";
@@ -65,25 +65,49 @@ export default function AddCard() {
   const { dispatch } = useCardsContext();
 
   // 카드번호
-  const { cardNumber, isValidCardNumber, onCardNumberChange } =
-    useCardNumberInput(initialFormValue.cardNumber);
+  const {
+    cardNumber,
+    cardNumberError,
+    isValidCardNumber,
+    onCardNumberChange,
+    onCardNumberInputBlur,
+  } = useCardNumberInput(initialFormValue.cardNumber);
 
   // 카드 만료일
-  const { cardExpireDate, isValidExpireDate, onCardExpireDateChange } =
-    useCardExpireDateInput(initialFormValue.expireDate);
+  const {
+    cardExpireDate,
+    cardExpireDateError,
+    isValidExpireDate,
+    onCardExpireDateChange,
+    onCardExpireDateInputBlur,
+  } = useCardExpireDateInput(initialFormValue.expireDate);
 
   // 카드 소유주
-  const { cardOwnerName, isValidOwnerName, onCardOwnerNameChange } =
-    useCardOwnerInput(initialFormValue.ownerName);
+  const {
+    cardOwnerName,
+    cardOwnerError,
+    isValidOwnerName,
+    onCardOwnerNameChange,
+    onCardOwnerInputBlur,
+  } = useCardOwnerInput(initialFormValue.ownerName);
 
   // 카드 CVC
-  const { cvcNumber, isValidCvcNumber, onCvcNumberChange } = useCardCvcInput(
-    initialFormValue.cvcNumber
-  );
+  const {
+    cvcNumber,
+    cvcError,
+    isValidCvcNumber,
+    onCvcNumberChange,
+    onCvcNumberInputBlur,
+  } = useCardCvcInput(initialFormValue.cvcNumber);
 
   // 카드 비밀번호
-  const { cardPassword, isPasswordValid, onCardPasswordChange } =
-    useCardPasswordInput(initialFormValue.password);
+  const {
+    cardPassword,
+    cardPasswordError,
+    isPasswordValid,
+    onCardPasswordChange,
+    onCardPasswordInputBlur,
+  } = useCardPasswordInput(initialFormValue.password);
 
   // 카드 이름
   const { cardNameList, selectedCardName, isOpen, onCardNameSelect, open } =
@@ -119,15 +143,17 @@ export default function AddCard() {
 
   const checkSubmittable = () => {
     return [
-      isValidCardNumber,
-      isValidExpireDate,
-      isValidOwnerName,
-      isValidCvcNumber,
-      isPasswordValid,
-    ].every((isValid) => isValid);
+      cardNumberError,
+      cardExpireDateError,
+      cardOwnerError,
+      cvcError,
+      cardPasswordError,
+    ].every((isValid) => !isValid);
   };
 
-  const handleMoveToCompleteAddPage = () => {
+  const handleMoveToCompleteAddPage = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
     const isSubmittable = checkSubmittable();
 
     if (isSubmittable) {
@@ -150,48 +176,63 @@ export default function AddCard() {
   const HeaderStartDecorator = useMemo(() => <HeaderLeftPointArrow />, []);
 
   return (
-    <CardPageLayout>
+    <CardPageLayout style={{ height: "100%" }}>
       <S.AddCardPageHeader startDecorator={HeaderStartDecorator}>
         카드추가
       </S.AddCardPageHeader>
-      <S.AddCardForm>
-        <Card
+      <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+        <S.CustomizedCard
           className="add-form-card"
           size="small"
           color={selectedCardName.color}
           cardInfo={cardInfo}
           onClick={open}
         />
-        <S.AddCardFormInputWrapper>
-          <CardNumberInput
-            cardNumber={cardNumber}
-            onChange={onCardNumberChange}
-          />
-          <CardExpireDateInput
-            cardExpireDate={cardExpireDate}
-            onChange={onCardExpireDateChange}
-          />
-          <CardOwnerInput
-            cardOwnerName={cardOwnerName.ownerName}
-            onChange={onCardOwnerNameChange}
-          />
-          <CardCvcInput cardCvc={cvcNumber.cvc} onChange={onCvcNumberChange} />
-          <CardPasswordInput
-            cardPassword={cardPassword}
-            onChange={onCardPasswordChange}
-          />
-        </S.AddCardFormInputWrapper>
-      </S.AddCardForm>
-      <S.AddCardFormSubmitButtonWrapper>
-        <Button variant="text" onClick={handleMoveToCompleteAddPage}>
-          다음
-        </Button>
-      </S.AddCardFormSubmitButtonWrapper>
-      <CardNameModal
-        isShow={isOpen}
-        onCardNameSelect={onCardNameSelect}
-        cardNameList={cardNameList}
-      />
+        <S.AddCardForm>
+          <S.AddCardFormInputWrapper>
+            <CardNumberInput
+              cardNumber={cardNumber}
+              error={cardNumberError}
+              onChange={onCardNumberChange}
+              onBlur={onCardNumberInputBlur}
+            />
+            <CardExpireDateInput
+              cardExpireDate={cardExpireDate}
+              error={cardExpireDateError}
+              onChange={onCardExpireDateChange}
+              onBlur={onCardExpireDateInputBlur}
+            />
+            <CardOwnerInput
+              cardOwnerName={cardOwnerName.ownerName}
+              error={cardOwnerError}
+              onChange={onCardOwnerNameChange}
+              onBlur={onCardOwnerInputBlur}
+            />
+            <CardCvcInput
+              cardCvc={cvcNumber.cvc}
+              error={cvcError}
+              onChange={onCvcNumberChange}
+              onBlur={onCvcNumberInputBlur}
+            />
+            <CardPasswordInput
+              cardPassword={cardPassword}
+              error={cardPasswordError}
+              onChange={onCardPasswordChange}
+              onBlur={onCardPasswordInputBlur}
+            />
+          </S.AddCardFormInputWrapper>
+          <S.AddCardFormSubmitButtonWrapper>
+            <Button variant="text" onClick={handleMoveToCompleteAddPage}>
+              다음
+            </Button>
+          </S.AddCardFormSubmitButtonWrapper>
+        </S.AddCardForm>
+        <CardNameModal
+          isShow={isOpen}
+          onCardNameSelect={onCardNameSelect}
+          cardNameList={cardNameList}
+        />
+      </div>
     </CardPageLayout>
   );
 }

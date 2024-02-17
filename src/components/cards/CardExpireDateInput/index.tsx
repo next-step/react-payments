@@ -10,10 +10,12 @@ import type { CardExpireDate } from "./hook/useCardExpireDateInput";
 interface CardExpireDateInputProps
   extends InputHTMLAttributes<HTMLInputElement> {
   cardExpireDate: CardExpireDate;
+  error?: string;
 }
 
 export default function CardExpireDateInput({
   cardExpireDate,
+  error,
   ...props
 }: CardExpireDateInputProps) {
   const { month, year } = cardExpireDate;
@@ -41,6 +43,7 @@ export default function CardExpireDateInput({
           {...props}
         />
       </S.CardExpireDateInputWrapper>
+      {error && <Label isError>{error}</Label>}
     </S.CardExpireDateInputContainer>
   );
 }

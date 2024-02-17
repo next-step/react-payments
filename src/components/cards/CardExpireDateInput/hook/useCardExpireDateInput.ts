@@ -2,26 +2,23 @@ import { ChangeEvent, useCallback, useMemo } from "react";
 
 import { CARD_VALIDATION_ERROR_MESSAGES } from "@/constants/messages/error";
 import { CARD_INPUT_VARIABLES } from "@/constants/variables";
-import { checkValidator, isNumber } from "@/helper";
+import { isNumber, tryCatch } from "@/helper";
 import { useInput } from "@/hooks";
 import { ValidationError } from "@/services/errors";
-import { ValidationResult } from "@/types";
 
 export type CardExpireDate = {
   month: string;
   year: string;
 };
 
-const validateCardExpireDateInput = (
-  element: HTMLInputElement
-): ValidationResult => {
+const validateCardExpireDateInput = (element: HTMLInputElement) => {
   const { value, id } = element;
 
   if (!isNumber(value)) {
-    return {
-      success: false,
-      error: new ValidationError(CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER),
-    };
+    throw new ValidationError({
+      name: "INPUT_VALIDATION_ERROR",
+      message: CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER,
+    });
   }
 
   if (id === "month") {
@@ -32,35 +29,54 @@ const validateCardExpireDateInput = (
       (expireMonth < CARD_INPUT_VARIABLES.MIN_MONTH ||
         expireMonth > CARD_INPUT_VARIABLES.MAX_MONTH)
     ) {
-      return {
-        success: false,
-        error: new ValidationError(
-          CARD_VALIDATION_ERROR_MESSAGES.INVALID_MONTH_RANGE
-        ),
-      };
+      throw new ValidationError({
+        name: "INPUT_VALIDATION_ERROR",
+        message: CARD_VALIDATION_ERROR_MESSAGES.INVALID_MONTH_RANGE,
+      });
     }
   }
+};
 
-  return {
-    success: true,
-  };
+const isCardExpireDateFieldFilled = (cardExpireDate: CardExpireDate) => {
+  return !Object.entries(cardExpireDate).some(
+    ([_, number]) => number.length < CARD_INPUT_VARIABLES.DATE_MAX_LENGTH
+  );
 };
 
 const useCardExpireDateInput = (initialValue: CardExpireDate) => {
-  const { value, onChange } = useInput(initialValue);
+  const { value, error, onChange, setError } = useInput(initialValue);
 
   const handleCardExpireDateChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const { target } = e;
 
-      checkValidator(
-        target,
-        validateCardExpireDateInput,
-        onChange.bind(this, e)
-      );
+      const { error } = tryCatch(() => {
+        setError("");
+        validateCardExpireDateInput(target);
+      }, setError);
+
+      if (
+        error instanceof ValidationError &&
+        error.message === CARD_VALIDATION_ERROR_MESSAGES.ONLY_NUMBER
+      ) {
+        return;
+      }
+
+      onChange(e);
     },
     [value]
   );
+
+  const handleCardExpireInputBlur = useCallback(() => {
+    if (!isCardExpireDateFieldFilled(value)) {
+      tryCatch(() => {
+        throw new ValidationError({
+          name: "INPUT_VALIDATION_ERROR",
+          message: CARD_VALIDATION_ERROR_MESSAGES.REQUIRED,
+        });
+      }, setError);
+    }
+  }, [value]);
 
   const isValidExpireDate = useMemo(
     () =>
@@ -71,8 +87,10 @@ const useCardExpireDateInput = (initialValue: CardExpireDate) => {
 
   return {
     cardExpireDate: value,
+    cardExpireDateError: error,
     isValidExpireDate,
     onCardExpireDateChange: handleCardExpireDateChange,
+    onCardExpireDateInputBlur: handleCardExpireInputBlur,
   };
 };
 

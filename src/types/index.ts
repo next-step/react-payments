@@ -1,5 +1,1 @@
-export type ValidationResult =
-  | {
-      success: true;
-    }
-  | { success: false; error: Error };
+export type GeneralFunction = (...args: any[]) => any;

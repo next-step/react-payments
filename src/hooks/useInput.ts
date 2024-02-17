@@ -3,6 +3,7 @@ import { ChangeEvent, useCallback, useState } from "react";
 //임시
 const useInput = <T extends { [k: string]: string }>(initialValue: T) => {
   const [value, setValue] = useState(initialValue);
+  const [error, setError] = useState("");
 
   const handleInputChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +19,9 @@ const useInput = <T extends { [k: string]: string }>(initialValue: T) => {
 
   return {
     value,
+    error,
     onChange: handleInputChange,
+    setError,
   };
 };
 
