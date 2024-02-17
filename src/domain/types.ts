@@ -1,24 +1,44 @@
 export type CardNumbers = {
-  first: string
-  second: string
-  third: string
-  fourth: string
+  [key in 'first' | 'second' | 'third' | 'fourth']: string
 }
+export type CardNumber =
+  | {
+      first: string
+    }
+  | {
+      second: string
+    }
+  | {
+      third: string
+    }
+  | {
+      // Todo : 왜 옵셔널로 해야 되는지 찾아봐야함
+      fourth?: string
+    }
 export type CardName = string
 export type CardNickname = string
 export type CardExpiredYear = string
 export type CardExpiredMonth = string
 export type CardOwner = string
 export type CardSecurityCode = string
-export type CardPassword = {
-  first: string
-  second: string
+
+export type CardPasswords = {
+  [key in 'first' | 'second']: string
+}
+export type CardPassword = { first: string } | { second?: string }
+export type CardType = {
+  name: string
+  color: string
+  bg: string
+}
+export type CardTypes = {
+  [key in 'name' | 'color' | 'bg']: string
 }
 
 export type CardAction =
   | {
       type: 'SET_CARD_NUMBERS'
-      payload: CardNumbers
+      payload: CardNumber
     }
   | {
       type: 'SET_NAME'
@@ -49,6 +69,10 @@ export type CardAction =
       payload: CardPassword
     }
   | {
+      type: 'SET_CARD_TYPE'
+      payload: CardTypes
+    }
+  | {
       type: 'SET_ALL'
       payload: CardInfomation
     }
@@ -65,7 +89,8 @@ export interface CardInfomation {
   expiredMonth: CardExpiredMonth
   owner: CardOwner
   securityCode: CardSecurityCode
-  password: CardPassword
+  passwords: CardPasswords
+  cardType: CardType
 }
 
 export type CardListAction =
@@ -81,3 +106,15 @@ export type CardListAction =
       type: 'DELETE'
       payload: CardInfomation
     }
+
+export type CardColor = '#ffffff' | '#000000'
+
+export type CardBackgoundColor =
+  | '#F5F5F5'
+  | '#162bb1'
+  | '#932929'
+  | '#54cb25'
+  | '#20d0ad'
+  | '#d320c7'
+  | '#7c1ddb'
+  | '#e1860f'

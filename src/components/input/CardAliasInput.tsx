@@ -1,10 +1,10 @@
 import { RefObject } from 'react'
 interface CardAliasInputProps {
   inputRef: RefObject<HTMLInputElement>
-  defaultValue: string
+  defaultValue?: string
 }
 
-const CardAliasInput = ({ inputRef, defaultValue }: CardAliasInputProps) => {
+const CardAliasInput = ({ inputRef, defaultValue = '' }: CardAliasInputProps) => {
   return (
     <input
       ref={inputRef}

@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { CardStateContext, CardDispatchContext } from '@/contexts/card'
+import { CardDispatchContext } from '@/contexts/card'
 import { CardInfomation } from '@/domain'
 import { isNumber } from '@/utils'
 
@@ -19,16 +19,14 @@ interface HandleOwnerProps {
 }
 
 const useCardInfo = () => {
-  const cardInfo = useContext(CardStateContext)
   const cardDispatch = useContext(CardDispatchContext)
 
   const handleNumber = ({ value, order }: HandleNumberProps) => {
     if (!isNumber(value)) return
-    if (value.length > 4) return
+
     cardDispatch({
       type: 'SET_CARD_NUMBERS',
       payload: {
-        ...cardInfo.cardNumbers,
         [order]: value,
       },
     })
@@ -38,18 +36,12 @@ const useCardInfo = () => {
     if (!isNumber(value)) return
     switch (yymm) {
       case 'YY':
-        if (value.length > 2) return
         cardDispatch({
           type: 'SET_EXPIRED_YEAR',
           payload: value,
         })
         break
       case 'MM':
-        if (value.length > 2) return
-        if (Number(value) > 12 || Number(value) < 0) {
-          alert('월은 1이상 12이하여야 합니다.')
-          return
-        }
         cardDispatch({
           type: 'SET_EXPIRED_MONTH',
           payload: value,
@@ -66,7 +58,7 @@ const useCardInfo = () => {
     cardDispatch({ type: 'SET_OWNER', payload: value })
   }
 
-  const handleSecurityCode = (value: string) => {
+  const handleSecurityCode = ({ value }: { value: string }) => {
     cardDispatch({
       type: 'SET_SECURITY_CODE',
       payload: value,
@@ -78,16 +70,16 @@ const useCardInfo = () => {
   }
 
   interface HandlePasswordProps {
-    first: string
-    second: string
+    value: string
+    order: 'first' | 'second'
   }
 
-  const handlePassword = ({ first, second }: HandlePasswordProps) => {
+  const handlePassword = ({ value, order }: HandlePasswordProps) => {
+    if (!isNumber(value)) return
     cardDispatch({
       type: 'SET_PASSWORD',
       payload: {
-        first,
-        second,
+        [order]: value,
       },
     })
   }
@@ -101,7 +93,6 @@ const useCardInfo = () => {
   }
 
   return {
-    cardInfo,
     handleNumber,
     handleExpiredDate,
     handleOwner,

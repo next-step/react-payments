@@ -3,6 +3,7 @@
 @import './button.css';
 @import './modal.css';
 @import './utils.css';
+@import './tooltip.css';
 
 body {
   display: flex;
@@ -24,11 +25,12 @@ input {
   height: 700px;
   position: relative;
   border-radius: 15px;
+  overflow-y: scroll;
 }
 
 .app {
   height: 100%;
-  padding: 16px 24px;
+  padding: 24px;
 }
 
 .page-title {
@@ -144,9 +146,7 @@ nav,
 section {
   display: block;
 }
-body {
-  line-height: 1;
-}
+
 ol,
 ul {
   list-style: none;

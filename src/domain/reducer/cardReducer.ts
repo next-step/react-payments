@@ -7,10 +7,8 @@ const cardReducer = (state: CardInfomation, action: CardAction): CardInfomation 
       return {
         ...state,
         cardNumbers: {
-          first: action.payload.first,
-          second: action.payload.second,
-          third: action.payload.third,
-          fourth: action.payload.fourth,
+          ...state.cardNumbers,
+          ...action.payload,
         },
       }
     case 'SET_NAME':
@@ -46,9 +44,17 @@ const cardReducer = (state: CardInfomation, action: CardAction): CardInfomation 
     case 'SET_PASSWORD':
       return {
         ...state,
-        password: {
-          first: action.payload.first,
-          second: action.payload.second,
+        passwords: {
+          ...state.passwords,
+          ...action.payload,
+        },
+      }
+    case 'SET_CARD_TYPE':
+      return {
+        ...state,
+        cardType: {
+          ...state.cardType,
+          ...action.payload,
         },
       }
     case 'SET_ALL':

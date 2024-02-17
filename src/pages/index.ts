@@ -1,4 +1,4 @@
-export { default as CardAdd } from './card-add'
-export { default as CardCompleted } from './card-completed'
-export { default as CardList } from './card-list'
-export { default as CardUpdate } from './card-update'
+export { default as CardAdd } from './CardAdd'
+export { default as CardCompleted } from './CardCompleted'
+export { default as CardList } from './CardList'
+export { default as CardUpdate } from './CardUpdate'

@@ -6,14 +6,26 @@ interface BigCardProps {
   cardNumbers: string
   cardOwner: string
   cardExpiredDate: string
+  cardType?: {
+    name: string
+    color: string
+    bg: string
+  }
 }
 
-const BigCard = ({ onClickDeleteButton, cardName, cardNumbers, cardOwner, cardExpiredDate }: BigCardProps) => {
+const BigCard = ({
+  onClickDeleteButton,
+  cardName,
+  cardNumbers,
+  cardOwner,
+  cardExpiredDate,
+  cardType: { name, color, bg },
+}: BigCardProps) => {
   return (
     <CardBox>
-      <div className="big-card">
+      <div className="big-card" style={{ backgroundColor: bg, color }}>
         <div className="card-top">
-          <span className="card-text__big">{cardName}</span>
+          <span className="card-text__big">{cardName || name}</span>
           {onClickDeleteButton && (
             <button type="button" className="card-text" onClick={onClickDeleteButton}>
               카드삭제
@@ -22,11 +34,11 @@ const BigCard = ({ onClickDeleteButton, cardName, cardNumbers, cardOwner, cardEx
         </div>
         <div className="card-middle">
           <div className="big-card__chip" />
-        </div>
-        <div className="card-bottom">
-          <div className="card-bottom__number">
+          <div className="card-number">
             <span className="card-text__big">{cardNumbers}</span>
           </div>
+        </div>
+        <div className="card-bottom">
           <div className="card-bottom__info">
             <span className="card-text__big">{cardOwner}</span>
             <span className="card-text__big">{cardExpiredDate}</span>

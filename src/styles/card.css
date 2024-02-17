@@ -11,6 +11,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 0 15px;
 
   width: 208px;
   height: 130px;
@@ -18,7 +19,6 @@
   font-size: 30px;
   color: #575757;
 
-  background: #e5e5e5;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
@@ -30,11 +30,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 0 15px;
 
   width: 208px;
   height: 130px;
 
-  background: #94dacd;
+  font-size: 30px;
+  color: #575757;
+
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
@@ -65,11 +68,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 0 15px;
 
   width: 290px;
   height: 180px;
 
-  background: #94dacd;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
@@ -96,20 +99,17 @@
 .card-middle {
   width: 100%;
   height: 100%;
-  padding-left: 30px;
 
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-direction: column;
   align-items: start;
 }
 
 .card-number {
   width: 100%;
-
   display: flex;
   justify-content: center;
-  margin-left: -15px;
   font-size: 16px;
 }
 
@@ -141,19 +141,25 @@
 }
 
 .card-text {
-  margin: 0 16px;
-
   font-size: 14px;
-  line-height: 16px;
+
   vertical-align: middle;
   font-weight: 400;
 }
 
 .card-text__big {
-  margin: 0 16px;
-
   font-size: 18px;
-  line-height: 20px;
-  vertical-align: middle;
   font-weight: 400;
+}
+
+.card-color {
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50%;
+}
+
+.card-nickname {
+  display: flex;
+  justify-content: center;
 }
