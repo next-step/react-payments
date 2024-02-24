@@ -99,14 +99,14 @@ export default function App() {
 							/>
 							<Input
 								className='input-basic'
-								type='text'
+								type='password'
 								value={cardNumber.thirdNumber}
 								name='thirdNumber'
 								onChange={handleChangeCardNumber}
 							/>
 							<Input
 								className='input-basic'
-								type='text'
+								type='password'
 								value={cardNumber.fourthNumber}
 								name='fourthNumber'
 								onChange={handleChangeCardNumber}
