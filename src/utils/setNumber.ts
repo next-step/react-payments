@@ -9,7 +9,7 @@ export default function setNumber(
 
 	let isValid = true;
 
-	if (!validation.isValidNubmer(value)) {
+	if (!validation.isValidNubmer(limit, value)) {
 		isValid = false;
 	}
 

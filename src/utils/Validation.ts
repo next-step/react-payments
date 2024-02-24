@@ -1,6 +1,6 @@
 export class Validation {
-	isValidNubmer(value: string) {
-		const numberRegex = /^(?:[0-9]{1,4})$/;
+	isValidNubmer(limit: number, value: string) {
+		const numberRegex = new RegExp(`^(?:[0-9]{1,${limit}})$`);
 
 		return numberRegex.test(value);
 	}
