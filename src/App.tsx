@@ -17,6 +17,11 @@ export default function App() {
 		[FOURTH_NUMBER]: '',
 	});
 
+	const [expirationDate, setExpirationDate] = useState({
+		month: '',
+		day: '',
+	});
+
 	const handleChangeCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value, name} = event.target;
 
@@ -24,6 +29,21 @@ export default function App() {
 			CARD_LIMIT,
 			value => {
 				setCardNumber(prev => ({
+					...prev,
+					[name]: value,
+				}));
+			},
+			value,
+		);
+	};
+
+	const handleChangeExpirationDate = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const {value, name} = event.target;
+
+		setNumber(
+			2,
+			value => {
+				setExpirationDate(prev => ({
 					...prev,
 					[name]: value,
 				}));
@@ -52,7 +72,7 @@ export default function App() {
 								</div>
 								<div className='card-bottom__info'>
 									<span className='card-text'>YUJO</span>
-									<span className='card-text'>12 / 23</span>
+									<span className='card-text'>{expirationDate.month} / {expirationDate.day}</span>
 								</div>
 							</div>
 						</div>
@@ -93,18 +113,22 @@ export default function App() {
 					<div className='input-container'>
 						<span className='input-title'>만료일</span>
 						<div className='input-box w-50'>
-							{/* <input
+							<Input
 								className='input-basic'
 								type='text'
 								placeholder='MM'
-								value='12'
+								value={expirationDate.month}
+								name='month'
+								onChange={handleChangeExpirationDate}
 							/>
-							<input
+							<Input
 								className='input-basic'
 								type='text'
 								placeholder='YY'
-								value='23'
-							/> */}
+								value={expirationDate.day}
+								name='day'
+								onChange={handleChangeExpirationDate}
+							/>
 						</div>
 					</div>
 					<div className='input-container'>

@@ -12,9 +12,9 @@ export default function Input({className, type, value, name, placeholder, onChan
 		<input
 			className={className}
 			type={type}
+			placeholder={placeholder}
 			value={value}
 			name={name}
-			placeholder={placeholder}
 			onChange={onChange}
 		/>
 	);
