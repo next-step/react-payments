@@ -8,6 +8,7 @@ import {CARD_LIMIT, EXPIRATIONDATE_LIMIT} from './fixtures/limit';
 import {
 	FIRST_NUMBER, SECOND_NUMBER, THIRD_NUMBER, FOURTH_NUMBER,
 } from './fixtures/cardNumber';
+import {MONTH, DAY} from './fixtures/expirationDate';
 
 export default function App() {
 	const [cardNumber, setCardNumber] = useState({
@@ -18,8 +19,8 @@ export default function App() {
 	});
 
 	const [expirationDate, setExpirationDate] = useState({
-		month: '',
-		day: '',
+		[MONTH]: '',
+		[DAY]: '',
 	});
 
 	const handleChangeCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -119,16 +120,16 @@ export default function App() {
 								className='input-basic'
 								type='text'
 								placeholder='MM'
-								value={expirationDate.month}
-								name='month'
+								value={expirationDate[MONTH]}
+								name={MONTH}
 								onChange={handleChangeExpirationDate}
 							/>
 							<Input
 								className='input-basic'
 								type='text'
 								placeholder='YY'
-								value={expirationDate.day}
-								name='day'
+								value={expirationDate[DAY]}
+								name={DAY}
 								onChange={handleChangeExpirationDate}
 							/>
 						</div>
