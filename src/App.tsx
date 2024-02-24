@@ -90,7 +90,7 @@ export default function App() {
 										{cardNumber[FIRST_NUMBER]} - {cardNumber[SECOND_NUMBER]} - {cardNumber[THIRD_NUMBER]} - {cardNumber[FOURTH_NUMBER]}</span>
 								</div>
 								<div className='card-bottom__info'>
-									<span className='card-text'>YUJO</span>
+									<span className='card-text'>{ownerName}</span>
 									<span className='card-text'>{expirationDate[MONTH]} / {expirationDate[DAY]}</span>
 								</div>
 							</div>
@@ -151,7 +151,10 @@ export default function App() {
 						</div>
 					</div>
 					<div className='input-container'>
-						<span className='input-title'>카드 소유자 이름(선택)</span>
+						<div className='input-group'>
+							<span className='input-title'>카드 소유자 이름(선택)</span>
+							<span className='input-title'>12 / 23</span>
+						</div>
 						<Input
 							type='text'
 							className='input-basic'
