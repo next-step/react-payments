@@ -8,6 +8,7 @@ import {
 	CARD_LIMIT,
 	EXPIRATIONDATE_LIMIT,
 	OWNERNAME_LIMIT,
+	SECURITYCODE_LMIT,
 } from './fixtures/limit';
 import {
 	FIRST_NUMBER, SECOND_NUMBER, THIRD_NUMBER, FOURTH_NUMBER,
@@ -28,6 +29,8 @@ export default function App() {
 	});
 
 	const [ownerName, setOwnerName] = useState('');
+
+	const [securityCode, setSecurityCode] = useState('');
 
 	const handleChangeCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value, name} = event.target;
@@ -72,6 +75,18 @@ export default function App() {
 			value,
 			false,
 			false,
+		);
+	};
+
+	const handleChangeSecurityCode = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const {value} = event.target;
+
+		setNumber(
+			SECURITYCODE_LMIT,
+			setSecurityCode,
+			value,
+			false,
+			true,
 		);
 	};
 
@@ -160,15 +175,20 @@ export default function App() {
 							<span className='input-title'>{ownerName.length} / {OWNERNAME_LIMIT}</span>
 						</div>
 						<Input
-							type='text'
 							className='input-basic'
+							type='text'
 							value={ownerName}
 							onChange={handleChangeOwnerName}
 						/>
 					</div>
 					<div className='input-container'>
 						<span className='input-title'>보안코드(CVC/CVV)</span>
-						{/* <input className='input-basic w-25' type='password' value='111' /> */}
+						<Input
+							className='input-basic w-25'
+							type='password'
+							value={securityCode}
+							onChange={handleChangeSecurityCode}
+						/>
 					</div>
 					<div className='input-container'>
 						<span className='input-title'>카드 비밀번호</span>
