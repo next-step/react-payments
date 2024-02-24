@@ -11,12 +11,17 @@ export default function App() {
 	});
 
 	const setNumber = (limit: number, setter: (value: string) => void, value: string) => {
+		let isValid = true;
 		// 자리 유효성 검사
 
 		// 숫자 유효성 검사
+		if (limit < value.length) {
+			isValid = false;
+		}
 
-		// 값 변경
-		setter(value);
+		if (isValid) {
+			setter(value);
+		}
 	};
 
 	const handleChangeCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
