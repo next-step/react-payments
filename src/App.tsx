@@ -5,8 +5,8 @@ import {Validation} from './utils/Validation';
 
 export default function App() {
 	const [cardNumber, setCardNumber] = useState({
-		firstdNubmer: '',
-		seconddNubmer: '',
+		firstNubmer: '',
+		secondNubmer: '',
 		thirdNumber: '',
 		fourthNumber: '',
 	});
@@ -60,7 +60,7 @@ export default function App() {
 							<div className='card-bottom'>
 								<div className='card-bottom__number'>
 									<span className='card-text'>
-										{cardNumber.firstdNubmer} - {cardNumber.seconddNubmer} - {cardNumber.thirdNumber} - {cardNumber.fourthNumber}</span>
+										{cardNumber.firstNubmer} - {cardNumber.secondNubmer} - {cardNumber.thirdNumber} - {cardNumber.fourthNumber}</span>
 								</div>
 								<div className='card-bottom__info'>
 									<span className='card-text'>YUJO</span>
@@ -75,15 +75,15 @@ export default function App() {
 							<Input
 								className='input-basic'
 								type='text'
-								value={cardNumber.firstdNubmer}
-								name='firstdNubmer'
+								value={cardNumber.firstNubmer}
+								name='firstNubmer'
 								onChange={handleChangeCardNumber}
 							/>
 							<Input
 								className='input-basic'
 								type='text'
-								value={cardNumber.seconddNubmer}
-								name='seconddNubmer'
+								value={cardNumber.secondNubmer}
+								name='secondNubmer'
 								onChange={handleChangeCardNumber}
 							/>
 							<Input
