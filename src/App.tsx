@@ -4,16 +4,19 @@ type InputProps = {
 	className: string;
 	type: string;
 	value: string;
+	name: string;
 	placeholder?: string;
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-function Input({className, type, value, placeholder, onChange}: InputProps) {
+function Input({className, type, value, name, placeholder, onChange}: InputProps) {
+	console.log(className, type, value, name, placeholder);
 	return (
 		<input
 			className={className}
 			type={type}
 			value={value}
+			name={name}
 			placeholder={placeholder}
 			onChange={onChange}
 		/>
@@ -21,7 +24,12 @@ function Input({className, type, value, placeholder, onChange}: InputProps) {
 }
 
 export default function App() {
-	const [cardNumber, setCardNumber] = useState('');
+	const [cardNumber, setCardNumber] = useState({
+		firstdNubmer: '',
+		seconddNubmer: '',
+		thirdNumber: '',
+		fourthNumber: '',
+	});
 
 	const setNumber = (limit: number, setter: (value: string) => void, value: string) => {
 		// 자리 유효성 검사
@@ -29,16 +37,20 @@ export default function App() {
 		// 숫자 유효성 검사
 
 		// 값 변경
-		console.log(value);
 		setter(value);
 	};
 
 	const handleChangeCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const {value} = event.target;
+		const {value, name} = event.target;
 
 		setNumber(
 			4,
-			setCardNumber,
+			value => {
+				setCardNumber(prev => ({
+					...prev,
+					[name]: value,
+				}));
+			},
 			value,
 		);
 	};
@@ -58,7 +70,8 @@ export default function App() {
 							</div>
 							<div className='card-bottom'>
 								<div className='card-bottom__number'>
-									<span className='card-text'>{cardNumber} - 2222 - oooo - oooo</span>
+									<span className='card-text'>
+										{cardNumber.firstdNubmer} - {cardNumber.seconddNubmer} - {cardNumber.thirdNumber} - {cardNumber.fourthNumber}</span>
 								</div>
 								<div className='card-bottom__info'>
 									<span className='card-text'>YUJO</span>
@@ -73,7 +86,29 @@ export default function App() {
 							<Input
 								className='input-basic'
 								type='text'
-								value={cardNumber}
+								value={cardNumber.firstdNubmer}
+								name='firstdNubmer'
+								onChange={handleChangeCardNumber}
+							/>
+							<Input
+								className='input-basic'
+								type='text'
+								value={cardNumber.seconddNubmer}
+								name='seconddNubmer'
+								onChange={handleChangeCardNumber}
+							/>
+							<Input
+								className='input-basic'
+								type='text'
+								value={cardNumber.thirdNumber}
+								name='thirdNumber'
+								onChange={handleChangeCardNumber}
+							/>
+							<Input
+								className='input-basic'
+								type='text'
+								value={cardNumber.fourthNumber}
+								name='fourthNumber'
 								onChange={handleChangeCardNumber}
 							/>
 						</div>
