@@ -58,7 +58,7 @@ export default function App() {
 							</div>
 							<div className='card-bottom'>
 								<div className='card-bottom__number'>
-									<span className='card-text'>1111 - 2222 - oooo - oooo</span>
+									<span className='card-text'>{cardNumber} - 2222 - oooo - oooo</span>
 								</div>
 								<div className='card-bottom__info'>
 									<span className='card-text'>YUJO</span>
