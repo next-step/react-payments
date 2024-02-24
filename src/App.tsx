@@ -1,27 +1,6 @@
 import {useState} from 'react';
 
-type InputProps = {
-	className: string;
-	type: string;
-	value: string;
-	name: string;
-	placeholder?: string;
-	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
-
-function Input({className, type, value, name, placeholder, onChange}: InputProps) {
-	console.log(className, type, value, name, placeholder);
-	return (
-		<input
-			className={className}
-			type={type}
-			value={value}
-			name={name}
-			placeholder={placeholder}
-			onChange={onChange}
-		/>
-	);
-}
+import Input from './components/Input';
 
 export default function App() {
 	const [cardNumber, setCardNumber] = useState({
