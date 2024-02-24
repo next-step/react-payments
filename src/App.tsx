@@ -15,10 +15,10 @@ export default function App() {
 
 	const setNumber = (limit: number, setter: (value: string) => void, value: string) => {
 		let isValid = true;
+
 		// 숫자 유효성 검사
 
-		// 자리 유효성 검사
-		if (validation.isValidLength(limit, value)) {
+		if (!validation.isValidLength(limit, value)) {
 			isValid = false;
 		}
 

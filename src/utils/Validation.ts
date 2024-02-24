@@ -1,5 +1,5 @@
 export class Validation {
 	isValidLength(limit: number, value: string) {
-		return limit < value.length;
+		return value.length <= limit;
 	}
 }
