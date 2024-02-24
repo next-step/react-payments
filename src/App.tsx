@@ -4,6 +4,8 @@ import Input from './components/Input';
 
 import setNumber from './utils/setNumber';
 
+import {CARD_LIMIT} from './fixtures/limit';
+
 export default function App() {
 	const [cardNumber, setCardNumber] = useState({
 		firstNubmer: '',
@@ -16,7 +18,7 @@ export default function App() {
 		const {value, name} = event.target;
 
 		setNumber(
-			4,
+			CARD_LIMIT,
 			value => {
 				setCardNumber(prev => ({
 					...prev,
