@@ -51,7 +51,7 @@ export default function App() {
 				}));
 			},
 			value,
-			true,
+			name === MONTH,
 		);
 	};
 
