@@ -8,7 +8,8 @@ import {
 	CARD_LIMIT,
 	EXPIRATIONDATE_LIMIT,
 	OWNERNAME_LIMIT,
-	SECURITYCODE_LMIT,
+	SECURITYCODE_LIMIT,
+	CARDPASSWORD_LIMIT,
 } from './fixtures/limit';
 import {
 	FIRST_NUMBER, SECOND_NUMBER, THIRD_NUMBER, FOURTH_NUMBER,
@@ -33,8 +34,8 @@ export default function App() {
 	const [securityCode, setSecurityCode] = useState('');
 
 	const [cardPassword, setCardPassword] = useState({
-		first_number: '',
-		second_number: '',
+		[FIRST_NUMBER]: '',
+		[SECOND_NUMBER]: '',
 	});
 
 	const handleChangeCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,7 +88,7 @@ export default function App() {
 		const {value} = event.target;
 
 		setNumber(
-			SECURITYCODE_LMIT,
+			SECURITYCODE_LIMIT,
 			setSecurityCode,
 			value,
 			false,
@@ -99,7 +100,7 @@ export default function App() {
 		const {value, name} = event.target;
 
 		setNumber(
-			1,
+			CARDPASSWORD_LIMIT,
 			value => {
 				setCardPassword(prev => ({
 					...prev,
@@ -217,11 +218,17 @@ export default function App() {
 						<Input
 							className='input-basic w-15'
 							type='password'
-							value={cardPassword.first_number}
-							name='first_number'
+							value={cardPassword[FIRST_NUMBER]}
+							name={FIRST_NUMBER}
 							onChange={handleChangeCardPassword}
 						/>
-						<input className='input-basic w-15' type='password' value='1' />
+						<Input
+							className='input-basic w-15'
+							type='password'
+							value={cardPassword[SECOND_NUMBER]}
+							name={SECOND_NUMBER}
+							onChange={handleChangeCardPassword}
+						/>
 						<input className='input-basic input-disabled w-15' type='password' value='*' disabled />
 						<input className='input-basic input-disabled w-15' type='password' value='*' disabled />
 					</div>
