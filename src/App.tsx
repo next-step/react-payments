@@ -32,6 +32,11 @@ export default function App() {
 
 	const [securityCode, setSecurityCode] = useState('');
 
+	const [cardPassword, setCardPassword] = useState({
+		first_number: '',
+		second_number: '',
+	});
+
 	const handleChangeCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value, name} = event.target;
 
@@ -84,6 +89,23 @@ export default function App() {
 		setNumber(
 			SECURITYCODE_LMIT,
 			setSecurityCode,
+			value,
+			false,
+			true,
+		);
+	};
+
+	const handleChangeCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const {value, name} = event.target;
+
+		setNumber(
+			1,
+			value => {
+				setCardPassword(prev => ({
+					...prev,
+					[name]: value,
+				}));
+			},
 			value,
 			false,
 			true,
@@ -192,7 +214,13 @@ export default function App() {
 					</div>
 					<div className='input-container'>
 						<span className='input-title'>카드 비밀번호</span>
-						<input className='input-basic w-15' type='password' value='1' />
+						<Input
+							className='input-basic w-15'
+							type='password'
+							value={cardPassword.first_number}
+							name='first_number'
+							onChange={handleChangeCardPassword}
+						/>
 						<input className='input-basic w-15' type='password' value='1' />
 						<input className='input-basic input-disabled w-15' type='password' value='*' disabled />
 						<input className='input-basic input-disabled w-15' type='password' value='*' disabled />
