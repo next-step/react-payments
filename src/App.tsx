@@ -4,7 +4,7 @@ import Input from './components/Input';
 
 import setNumber from './utils/setNumber';
 
-import {CARD_LIMIT} from './fixtures/limit';
+import {CARD_LIMIT, EXPIRATIONDATE_LIMIT} from './fixtures/limit';
 import {
 	FIRST_NUMBER, SECOND_NUMBER, THIRD_NUMBER, FOURTH_NUMBER,
 } from './fixtures/cardNumber';
@@ -42,7 +42,7 @@ export default function App() {
 		const {value, name} = event.target;
 
 		setNumber(
-			2,
+			EXPIRATIONDATE_LIMIT,
 			value => {
 				setExpirationDate(prev => ({
 					...prev,
