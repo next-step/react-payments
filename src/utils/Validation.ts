@@ -8,4 +8,8 @@ export class Validation {
 	isValidLength(limit: number, value: string) {
 		return value.length <= limit;
 	}
+
+	isValidMonth(value: string) {
+		return Number(value) >= 1 && Number(value) <= 12;
+	}
 }

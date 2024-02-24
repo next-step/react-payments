@@ -4,6 +4,7 @@ export default function setNumber(
 	limit: number,
 	setter: (value: string) => void,
 	value: string,
+	isMonth: boolean,
 ) {
 	const validation = new Validation();
 
@@ -14,6 +15,10 @@ export default function setNumber(
 	}
 
 	if (!validation.isValidLength(limit, value)) {
+		isValid = false;
+	}
+
+	if (isMonth && !validation.isValidMonth(value)) {
 		isValid = false;
 	}
 

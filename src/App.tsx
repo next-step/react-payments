@@ -34,6 +34,7 @@ export default function App() {
 				}));
 			},
 			value,
+			false,
 		);
 	};
 
@@ -49,6 +50,7 @@ export default function App() {
 				}));
 			},
 			value,
+			true,
 		);
 	};
 
