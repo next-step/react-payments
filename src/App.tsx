@@ -1,6 +1,7 @@
 import {useState} from 'react';
 
 import Input from './components/Input';
+import {Validation} from './utils/Validation';
 
 export default function App() {
 	const [cardNumber, setCardNumber] = useState({
@@ -10,12 +11,14 @@ export default function App() {
 		fourthNumber: '',
 	});
 
+	const validation = new Validation();
+
 	const setNumber = (limit: number, setter: (value: string) => void, value: string) => {
 		let isValid = true;
-		// 자리 유효성 검사
-
 		// 숫자 유효성 검사
-		if (limit < value.length) {
+
+		// 자리 유효성 검사
+		if (validation.isValidLength(limit, value)) {
 			isValid = false;
 		}
 
