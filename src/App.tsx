@@ -4,7 +4,11 @@ import Input from './components/Input';
 
 import setNumber from './utils/setNumber';
 
-import {CARD_LIMIT, EXPIRATIONDATE_LIMIT} from './fixtures/limit';
+import {
+	CARD_LIMIT,
+	EXPIRATIONDATE_LIMIT,
+	OWNERNAME_LIMIT,
+} from './fixtures/limit';
 import {
 	FIRST_NUMBER, SECOND_NUMBER, THIRD_NUMBER, FOURTH_NUMBER,
 } from './fixtures/cardNumber';
@@ -63,7 +67,7 @@ export default function App() {
 		const {value} = event.target;
 
 		setNumber(
-			30,
+			OWNERNAME_LIMIT,
 			setOwnerName,
 			value,
 			false,
@@ -153,7 +157,7 @@ export default function App() {
 					<div className='input-container'>
 						<div className='input-group'>
 							<span className='input-title'>카드 소유자 이름(선택)</span>
-							<span className='input-title'>12 / 23</span>
+							<span className='input-title'>{ownerName.length} / {OWNERNAME_LIMIT}</span>
 						</div>
 						<Input
 							type='text'
