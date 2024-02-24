@@ -75,7 +75,7 @@ export default function App() {
 								</div>
 								<div className='card-bottom__info'>
 									<span className='card-text'>YUJO</span>
-									<span className='card-text'>{expirationDate.month} / {expirationDate.day}</span>
+									<span className='card-text'>{expirationDate[MONTH]} / {expirationDate[DAY]}</span>
 								</div>
 							</div>
 						</div>
