@@ -5,13 +5,16 @@ import Input from './components/Input';
 import setNumber from './utils/setNumber';
 
 import {CARD_LIMIT} from './fixtures/limit';
+import {
+	FIRST_NUMBER, SECOND_NUMBER, THIRD_NUMBER, FOURTH_NUMBER,
+} from './fixtures/cardNumber';
 
 export default function App() {
 	const [cardNumber, setCardNumber] = useState({
-		firstNubmer: '',
-		secondNubmer: '',
-		thirdNumber: '',
-		fourthNumber: '',
+		[FIRST_NUMBER]: '',
+		[SECOND_NUMBER]: '',
+		[THIRD_NUMBER]: '',
+		[FOURTH_NUMBER]: '',
 	});
 
 	const handleChangeCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +48,7 @@ export default function App() {
 							<div className='card-bottom'>
 								<div className='card-bottom__number'>
 									<span className='card-text'>
-										{cardNumber.firstNubmer} - {cardNumber.secondNubmer} - {cardNumber.thirdNumber} - {cardNumber.fourthNumber}</span>
+										{cardNumber[FIRST_NUMBER]} - {cardNumber[SECOND_NUMBER]} - {cardNumber[THIRD_NUMBER]} - {cardNumber[FOURTH_NUMBER]}</span>
 								</div>
 								<div className='card-bottom__info'>
 									<span className='card-text'>YUJO</span>
@@ -60,29 +63,29 @@ export default function App() {
 							<Input
 								className='input-basic'
 								type='text'
-								value={cardNumber.firstNubmer}
-								name='firstNubmer'
+								value={cardNumber[FIRST_NUMBER]}
+								name={FIRST_NUMBER}
 								onChange={handleChangeCardNumber}
 							/>
 							<Input
 								className='input-basic'
 								type='text'
-								value={cardNumber.secondNubmer}
-								name='secondNubmer'
+								value={cardNumber[SECOND_NUMBER]}
+								name={SECOND_NUMBER}
 								onChange={handleChangeCardNumber}
 							/>
 							<Input
 								className='input-basic'
 								type='password'
-								value={cardNumber.thirdNumber}
-								name='thirdNumber'
+								value={cardNumber[THIRD_NUMBER]}
+								name={THIRD_NUMBER}
 								onChange={handleChangeCardNumber}
 							/>
 							<Input
 								className='input-basic'
 								type='password'
-								value={cardNumber.fourthNumber}
-								name='fourthNumber'
+								value={cardNumber[FOURTH_NUMBER]}
+								name={FOURTH_NUMBER}
 								onChange={handleChangeCardNumber}
 							/>
 						</div>
