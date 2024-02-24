@@ -51,3 +51,7 @@
   display: flex;
   justify-content: space-between;
 }
+
+.input-disabled {
+  background-color: transparent;
+}

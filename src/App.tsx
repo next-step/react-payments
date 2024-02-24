@@ -192,10 +192,10 @@ export default function App() {
 					</div>
 					<div className='input-container'>
 						<span className='input-title'>카드 비밀번호</span>
-						{/* <input className='input-basic w-15' type='password' value='1' /> */}
-						{/* <input className='input-basic w-15' type='password' value='1' /> */}
-						{/* <input className='input-basic w-15' type='password' value='1' /> */}
-						{/* <input className='input-basic w-15' type='password' value='1' /> */}
+						<input className='input-basic w-15' type='password' value='1' />
+						<input className='input-basic w-15' type='password' value='1' />
+						<input className='input-basic input-disabled w-15' type='password' value='*' disabled />
+						<input className='input-basic input-disabled w-15' type='password' value='*' disabled />
 					</div>
 					<div className='button-box'>
 						<span className='button-text'>다음</span>
