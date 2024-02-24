@@ -5,12 +5,13 @@ export default function setNumber(
 	setter: (value: string) => void,
 	value: string,
 	isMonth: boolean,
+	isNumber: boolean,
 ) {
 	const validation = new Validation();
 
 	let isValid = true;
 
-	if (!validation.isValidNubmer(limit, value)) {
+	if (isNumber && !validation.isValidNubmer(limit, value)) {
 		isValid = false;
 	}
 

@@ -2,7 +2,7 @@ type InputProps = {
 	className: string;
 	type: string;
 	value: string;
-	name: string;
+	name?: string;
 	placeholder?: string;
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };

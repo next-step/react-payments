@@ -23,6 +23,8 @@ export default function App() {
 		[DAY]: '',
 	});
 
+	const [ownerName, setOwnerName] = useState('');
+
 	const handleChangeCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value, name} = event.target;
 
@@ -36,6 +38,7 @@ export default function App() {
 			},
 			value,
 			false,
+			true,
 		);
 	};
 
@@ -52,6 +55,19 @@ export default function App() {
 			},
 			value,
 			name === MONTH,
+			true,
+		);
+	};
+
+	const handleChangeOwnerName = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const {value} = event.target;
+
+		setNumber(
+			30,
+			setOwnerName,
+			value,
+			false,
+			false,
 		);
 	};
 
@@ -136,7 +152,12 @@ export default function App() {
 					</div>
 					<div className='input-container'>
 						<span className='input-title'>카드 소유자 이름(선택)</span>
-						{/* <input type='text' className='input-basic' value='YUJO' /> */}
+						<Input
+							type='text'
+							className='input-basic'
+							value={ownerName}
+							onChange={handleChangeOwnerName}
+						/>
 					</div>
 					<div className='input-container'>
 						<span className='input-title'>보안코드(CVC/CVV)</span>
