@@ -20,6 +20,8 @@ import {
 	EXPIRATIONDATE_YEAR_PLACEHOLDER,
 	OWNERNAME_PLACEHOLDER,
 } from './fixtures/placeHolder';
+import {OWNERNAME_DEFAULT} from './fixtures/default';
+import {HYPHEN, SLASH} from './fixtures/specialCharacter';
 
 export default function App() {
 	const [cardNumber, setCardNumber] = useState({
@@ -141,24 +143,24 @@ export default function App() {
 								<div className='card-bottom__number'>
 									<span className='card-text'>
 										{cardNumber[FIRST_NUMBER]
-										+ specialCharacter(cardNumber[FIRST_NUMBER], CARDNUMBER_LIMIT, '-')}
+										+ specialCharacter(cardNumber[FIRST_NUMBER], CARDNUMBER_LIMIT, HYPHEN)}
 										{cardNumber[SECOND_NUMBER]
-										+ specialCharacter(cardNumber[SECOND_NUMBER], CARDNUMBER_LIMIT, '-')}
+										+ specialCharacter(cardNumber[SECOND_NUMBER], CARDNUMBER_LIMIT, HYPHEN)}
 										{cardNumber[THIRD_NUMBER]
-										+ specialCharacter(cardNumber[THIRD_NUMBER], CARDNUMBER_LIMIT, '-')}
+										+ specialCharacter(cardNumber[THIRD_NUMBER], CARDNUMBER_LIMIT, HYPHEN)}
 										{cardNumber[FOURTH_NUMBER]}
 									</span>
 
 								</div>
 								<div className='card-bottom__info'>
-									<span className='card-text'>{ownerName || 'NAME'}</span>
+									<span className='card-text'>{ownerName || OWNERNAME_DEFAULT}</span>
 									<span className='card-text'>
 										{
 											expirationDate[MONTH] || expirationDate[YEAR]
 												? `${expirationDate[MONTH]} 
-												   ${specialCharacter(expirationDate[MONTH], EXPIRATIONDATE_LIMIT, '/')}
+												   ${specialCharacter(expirationDate[MONTH], EXPIRATIONDATE_LIMIT, SLASH)}
 												   ${expirationDate[YEAR]}`
-												: `${EXPIRATIONDATE_MONTH_PLACEHOLDER} / ${EXPIRATIONDATE_YEAR_PLACEHOLDER}`
+												: `${EXPIRATIONDATE_MONTH_PLACEHOLDER} ${SLASH} ${EXPIRATIONDATE_YEAR_PLACEHOLDER}`
 										}
 									</span>
 								</div>
