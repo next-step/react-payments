@@ -1,0 +1,13 @@
+.root {
+  background-color: #fff;
+  width: 375px;
+  min-width: 375px;
+  height: 700px;
+  position: relative;
+  border-radius: 15px;
+}
+
+.app {
+  height: 100%;
+  padding: 16px 24px;
+}

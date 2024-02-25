@@ -1,0 +1,18 @@
+@import './card.module.css';
+@import './input.module.css';
+@import './button.module.css';
+@import './modal.module.css';
+@import './utils.module.css';
+
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #e5e5e5;
+}
+
+input {
+  font-size: 16px;
+}
