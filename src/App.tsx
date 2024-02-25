@@ -14,10 +14,10 @@ import {
 import {
 	FIRST_NUMBER, SECOND_NUMBER, THIRD_NUMBER, FOURTH_NUMBER,
 } from './fixtures/cardNumber';
-import {MONTH, DAY} from './fixtures/expirationDate';
+import {MONTH, YEAR} from './fixtures/expirationDate';
 import {
 	EXPIRATIONDATE_MONTH_PLACEHOLDER,
-	EXPIRATIONDATE_DAY_PLACEHOLDER,
+	EXPIRATIONDATE_YEAR_PLACEHOLDER,
 	OWNERNAME_PLACEHOLDER,
 } from './fixtures/placeHolder';
 
@@ -31,7 +31,7 @@ export default function App() {
 
 	const [expirationDate, setExpirationDate] = useState({
 		[MONTH]: '',
-		[DAY]: '',
+		[YEAR]: '',
 	});
 
 	const [ownerName, setOwnerName] = useState('');
@@ -138,7 +138,7 @@ export default function App() {
 								</div>
 								<div className='card-bottom__info'>
 									<span className='card-text'>{ownerName || 'NAME'}</span>
-									<span className='card-text'>{expirationDate[MONTH] || 'MM'}  / {expirationDate[DAY] || 'YY'}</span>
+									<span className='card-text'>{expirationDate[MONTH] || 'MM'}  / {expirationDate[YEAR] || 'YY'}</span>
 								</div>
 							</div>
 						</div>
@@ -190,9 +190,9 @@ export default function App() {
 							<Input
 								className='input-basic'
 								type='text'
-								placeholder={EXPIRATIONDATE_DAY_PLACEHOLDER}
-								value={expirationDate[DAY]}
-								name={DAY}
+								placeholder={EXPIRATIONDATE_YEAR_PLACEHOLDER}
+								value={expirationDate[YEAR]}
+								name={YEAR}
 								onChange={handleChangeExpirationDate}
 							/>
 						</div>
