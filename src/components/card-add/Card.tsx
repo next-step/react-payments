@@ -269,7 +269,7 @@ export default function Card() {
 					</div>
 					<div className='button-box'>
 						<span className='button-text'>
-							<Link to='' className='button-basic'>다음</Link>
+							<Link to='/add/complete' className='button-basic'>다음</Link>
 						</span>
 					</div>
 				</div>
