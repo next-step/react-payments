@@ -23,7 +23,7 @@ export default function setNumber(
 		isValid = false;
 	}
 
-	if (isValid) {
+	if (isValid || value === '') {
 		setter(value);
 	}
 }
