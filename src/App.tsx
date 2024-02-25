@@ -15,6 +15,11 @@ import {
 	FIRST_NUMBER, SECOND_NUMBER, THIRD_NUMBER, FOURTH_NUMBER,
 } from './fixtures/cardNumber';
 import {MONTH, DAY} from './fixtures/expirationDate';
+import {
+	EXPIRATIONDATE_MONTH_PLACEHOLDER,
+	EXPIRATIONDATE_DAY_PLACEHOLDER,
+	OWNERNAME_PLACEHOLDER,
+} from './fixtures/placeHolder';
 
 export default function App() {
 	const [cardNumber, setCardNumber] = useState({
@@ -177,7 +182,7 @@ export default function App() {
 							<Input
 								className='input-basic'
 								type='text'
-								placeholder='MM'
+								placeholder={EXPIRATIONDATE_MONTH_PLACEHOLDER}
 								value={expirationDate[MONTH]}
 								name={MONTH}
 								onChange={handleChangeExpirationDate}
@@ -185,7 +190,7 @@ export default function App() {
 							<Input
 								className='input-basic'
 								type='text'
-								placeholder='YY'
+								placeholder={EXPIRATIONDATE_DAY_PLACEHOLDER}
 								value={expirationDate[DAY]}
 								name={DAY}
 								onChange={handleChangeExpirationDate}
@@ -200,6 +205,7 @@ export default function App() {
 						<Input
 							className='input-basic'
 							type='text'
+							placeholder={OWNERNAME_PLACEHOLDER}
 							value={ownerName}
 							onChange={handleChangeOwnerName}
 						/>
