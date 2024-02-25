@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 export default function Card() {
 	return (
 		<div className='root'>
@@ -32,7 +34,7 @@ export default function Card() {
 					/>
 				</div>
 				<div className='button-box mt-50'>
-					<span className='button-text'>다음</span>
+					<Link to='/' className='button-basic'>다음</Link>
 				</div>
 			</div>
 		</div>
