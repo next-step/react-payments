@@ -124,7 +124,7 @@ export default function App() {
 				<div className='app'>
 					<h2 className='page-title'>카드 추가</h2>
 					<div className='card-box'>
-						<div className='small-card'>
+						<div className='empty-card'>
 							<div className='card-top'>
 								<span className='card-text'>클린카드</span>
 							</div>
@@ -137,8 +137,8 @@ export default function App() {
 										{cardNumber[FIRST_NUMBER]} - {cardNumber[SECOND_NUMBER]} - {cardNumber[THIRD_NUMBER]} - {cardNumber[FOURTH_NUMBER]}</span>
 								</div>
 								<div className='card-bottom__info'>
-									<span className='card-text'>{ownerName}</span>
-									<span className='card-text'>{expirationDate[MONTH]} / {expirationDate[DAY]}</span>
+									<span className='card-text'>{ownerName || 'NAME'}</span>
+									<span className='card-text'>{expirationDate[MONTH] || 'MM'}  / {expirationDate[DAY] || 'YY'}</span>
 								</div>
 							</div>
 						</div>
