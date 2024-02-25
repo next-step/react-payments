@@ -5,7 +5,7 @@ import Input from './components/Input';
 import setNumber from './utils/setNumber';
 
 import {
-	CARD_LIMIT,
+	CARDNUMBER_LIMIT,
 	EXPIRATIONDATE_LIMIT,
 	OWNERNAME_LIMIT,
 	SECURITYCODE_LIMIT,
@@ -47,7 +47,7 @@ export default function App() {
 		const {value, name} = event.target;
 
 		setNumber(
-			CARD_LIMIT,
+			CARDNUMBER_LIMIT,
 			value => {
 				setCardNumber(prev => ({
 					...prev,
@@ -118,6 +118,12 @@ export default function App() {
 		);
 	};
 
+	const specialCharacter = (
+		value: string,
+		limit: number,
+		specialCharacter: string,
+	) => value.length === limit ? specialCharacter : '';
+
 	return (
 		<div>
 			<div className='root'>
@@ -134,11 +140,16 @@ export default function App() {
 							<div className='card-bottom'>
 								<div className='card-bottom__number'>
 									<span className='card-text'>
-										{cardNumber[FIRST_NUMBER]} - {cardNumber[SECOND_NUMBER]} - {cardNumber[THIRD_NUMBER]} - {cardNumber[FOURTH_NUMBER]}</span>
+										{cardNumber[FIRST_NUMBER] + specialCharacter(cardNumber[FIRST_NUMBER], CARDNUMBER_LIMIT, '-')}
+										{cardNumber[SECOND_NUMBER] + specialCharacter(cardNumber[SECOND_NUMBER], CARDNUMBER_LIMIT, '-')}
+										{cardNumber[THIRD_NUMBER] + specialCharacter(cardNumber[THIRD_NUMBER], CARDNUMBER_LIMIT, '-')}
+										{cardNumber[FOURTH_NUMBER]}
+									</span>
+
 								</div>
 								<div className='card-bottom__info'>
 									<span className='card-text'>{ownerName || 'NAME'}</span>
-									<span className='card-text'>{expirationDate[MONTH] || 'MM'}  / {expirationDate[YEAR] || 'YY'}</span>
+									<span className='card-text'>{expirationDate[MONTH] || 'MM'} / {expirationDate[YEAR] || 'YY'}</span>
 								</div>
 							</div>
 						</div>
