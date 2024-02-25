@@ -1,5 +1,7 @@
 import {useState} from 'react';
 
+import {Link} from 'react-router-dom';
+
 import Input from '../Input';
 
 import setNumber from '../../utils/setNumber';
@@ -263,7 +265,9 @@ export default function Card() {
 						<input className='input-basic input-disabled w-15' type='password' value='*' disabled />
 					</div>
 					<div className='button-box'>
-						<span className='button-text'>다음</span>
+						<span className='button-text'>
+							<Link to='' className='button-basic'>다음</Link>
+						</span>
 					</div>
 				</div>
 			</div>
