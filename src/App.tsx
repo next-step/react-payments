@@ -128,7 +128,7 @@ export default function App() {
 		<div>
 			<div className='root'>
 				<div className='app'>
-					<h2 className='page-title'>카드 추가</h2>
+					<h2 className='page-title'>{'<'} 카드 추가</h2>
 					<div className='card-box'>
 						<div className='empty-card'>
 							<div className='card-top'>
