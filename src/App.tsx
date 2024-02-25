@@ -140,16 +140,27 @@ export default function App() {
 							<div className='card-bottom'>
 								<div className='card-bottom__number'>
 									<span className='card-text'>
-										{cardNumber[FIRST_NUMBER] + specialCharacter(cardNumber[FIRST_NUMBER], CARDNUMBER_LIMIT, '-')}
-										{cardNumber[SECOND_NUMBER] + specialCharacter(cardNumber[SECOND_NUMBER], CARDNUMBER_LIMIT, '-')}
-										{cardNumber[THIRD_NUMBER] + specialCharacter(cardNumber[THIRD_NUMBER], CARDNUMBER_LIMIT, '-')}
+										{cardNumber[FIRST_NUMBER]
+										+ specialCharacter(cardNumber[FIRST_NUMBER], CARDNUMBER_LIMIT, '-')}
+										{cardNumber[SECOND_NUMBER]
+										+ specialCharacter(cardNumber[SECOND_NUMBER], CARDNUMBER_LIMIT, '-')}
+										{cardNumber[THIRD_NUMBER]
+										+ specialCharacter(cardNumber[THIRD_NUMBER], CARDNUMBER_LIMIT, '-')}
 										{cardNumber[FOURTH_NUMBER]}
 									</span>
 
 								</div>
 								<div className='card-bottom__info'>
 									<span className='card-text'>{ownerName || 'NAME'}</span>
-									<span className='card-text'>{expirationDate[MONTH] || 'MM'} / {expirationDate[YEAR] || 'YY'}</span>
+									<span className='card-text'>
+										{
+											expirationDate[MONTH] || expirationDate[YEAR]
+												? `${expirationDate[MONTH]} 
+												   ${specialCharacter(expirationDate[MONTH], EXPIRATIONDATE_LIMIT, '/')}
+												   ${expirationDate[YEAR]}`
+												: `${EXPIRATIONDATE_MONTH_PLACEHOLDER} / ${EXPIRATIONDATE_YEAR_PLACEHOLDER}`
+										}
+									</span>
 								</div>
 							</div>
 						</div>
