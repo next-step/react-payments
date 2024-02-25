@@ -1,18 +1,8 @@
 import {RouterProvider, createBrowserRouter} from 'react-router-dom';
 
-import CardListPage from './pages/CardListPage';
-import CardAddPage from './pages/CardAddPage';
+import routes from './routes';
 
 export default function App() {
-	const routes = [
-		{
-			children: [
-				{path: '/', element: <CardListPage />},
-				{path: '/add', element: <CardAddPage />},
-			],
-		},
-	];
-
 	const router = createBrowserRouter(routes);
 
 	return (
