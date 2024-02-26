@@ -19,28 +19,28 @@ export default function CardNumber({cardNumber, handleChangeCardNumber}: CardNum
 				<Input
 					variant='basic'
 					type='text'
-					value={cardNumber.first_number}
+					value={cardNumber.firstNumber}
 					name={FIRST_NUMBER}
 					onChange={handleChangeCardNumber}
 				/>
 				<Input
 					variant='basic'
 					type='text'
-					value={cardNumber.second_number}
+					value={cardNumber.secondNumber}
 					name={SECOND_NUMBER}
 					onChange={handleChangeCardNumber}
 				/>
 				<Input
 					variant='basic'
 					type='password'
-					value={cardNumber.third_number}
+					value={cardNumber.thirdNumber}
 					name={THIRD_NUMBER}
 					onChange={handleChangeCardNumber}
 				/>
 				<Input
 					variant='basic'
 					type='password'
-					value={cardNumber.fourth_number}
+					value={cardNumber.fourthNumber}
 					name={FOURTH_NUMBER}
 					onChange={handleChangeCardNumber}
 				/>

@@ -1,8 +1,8 @@
 type CardNumberType = {
-	first_number: string;
-	second_number: string;
-	third_number: string;
-	fourth_number: string;
+	firstNumber: string;
+	secondNumber: string;
+	thirdNumber: string;
+	fourthNumber: string;
 };
 
 export default CardNumberType;

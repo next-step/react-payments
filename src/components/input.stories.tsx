@@ -1,7 +1,7 @@
 import CardNumber from './card-add/CardNumber';
 
 export default {
-	title: 'CardNumber',
+	title: 'CARD-ADD/CardNumber',
 	component: CardNumber,
 	argTypes: {
 		className: {control: 'text'},
