@@ -1,21 +1,19 @@
-type InputProps = {
-	className: string;
-	type: string;
-	value: string;
-	name?: string;
-	placeholder?: string;
-	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-};
+import {type InputHTMLAttributes, type DetailedHTMLProps} from 'react';
 
-export default function Input({className, type, value, name, placeholder, onChange}: InputProps) {
+import classnames from 'classnames';
+
+type BaseInputProps = DetailedHTMLProps< InputHTMLAttributes<HTMLInputElement>, HTMLInputElement >;
+type InputProps = {
+	variant: 'basic' | 'secondary';
+	className?: string;
+
+} & BaseInputProps ;
+
+export default function Input({variant, className, ...props}: InputProps) {
 	return (
 		<input
-			className={className}
-			type={type}
-			placeholder={placeholder}
-			value={value}
-			name={name}
-			onChange={onChange}
+			className={classnames(`input-${variant}`, className)}
+			{...props}
 		/>
 	);
 }

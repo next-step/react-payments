@@ -3,11 +3,7 @@ module.exports = {
 		browser: true,
 		es2021: true,
 	},
-	extends: [
-		'plugin:react/recommended',
-		'plugin:react/jsx-runtime',
-		'xo',
-	],
+	extends: ['plugin:react/recommended', 'plugin:react/jsx-runtime', 'xo', 'plugin:storybook/recommended'],
 	overrides: [
 		{
 			extends: [

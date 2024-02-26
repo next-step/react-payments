@@ -12,18 +12,20 @@ import {
 	OWNERNAME_LIMIT,
 	SECURITYCODE_LIMIT,
 	CARDPASSWORD_LIMIT,
-} from '../../fixtures/limit';
+} from '../../constants/limit';
 import {
 	FIRST_NUMBER, SECOND_NUMBER, THIRD_NUMBER, FOURTH_NUMBER,
-} from '../../fixtures/cardNumber';
-import {MONTH, YEAR} from '../../fixtures/expirationDate';
+} from '../../constants/cardNumber';
+import {MONTH, YEAR} from '../../constants/expirationDate';
 import {
 	EXPIRATIONDATE_MONTH_PLACEHOLDER,
 	EXPIRATIONDATE_YEAR_PLACEHOLDER,
 	OWNERNAME_PLACEHOLDER,
-} from '../../fixtures/placeHolder';
-import {OWNERNAME_DEFAULT} from '../../fixtures/default';
-import {HYPHEN, SLASH} from '../../fixtures/specialCharacter';
+} from '../../constants/placeHolder';
+import {OWNERNAME_DEFAULT} from '../../constants/default';
+import {HYPHEN, SLASH} from '../../constants/specialCharacter';
+
+import CardNumber from './CardNumber';
 
 export default function Card() {
 	const [cardNumber, setCardNumber] = useState({
@@ -172,44 +174,15 @@ export default function Card() {
 							</div>
 						</div>
 					</div>
-					<div className='input-container'>
-						<span className='input-title'>카드 번호</span>
-						<div className='input-box'>
-							<Input
-								className='input-basic'
-								type='text'
-								value={cardNumber[FIRST_NUMBER]}
-								name={FIRST_NUMBER}
-								onChange={handleChangeCardNumber}
-							/>
-							<Input
-								className='input-basic'
-								type='text'
-								value={cardNumber[SECOND_NUMBER]}
-								name={SECOND_NUMBER}
-								onChange={handleChangeCardNumber}
-							/>
-							<Input
-								className='input-basic'
-								type='password'
-								value={cardNumber[THIRD_NUMBER]}
-								name={THIRD_NUMBER}
-								onChange={handleChangeCardNumber}
-							/>
-							<Input
-								className='input-basic'
-								type='password'
-								value={cardNumber[FOURTH_NUMBER]}
-								name={FOURTH_NUMBER}
-								onChange={handleChangeCardNumber}
-							/>
-						</div>
-					</div>
+					<CardNumber
+						cardNumber={cardNumber}
+						handleChangeCardNumber={handleChangeCardNumber}
+					/>
 					<div className='input-container'>
 						<span className='input-title'>만료일</span>
 						<div className='input-box w-50'>
 							<Input
-								className='input-basic'
+								variant='basic'
 								type='text'
 								placeholder={EXPIRATIONDATE_MONTH_PLACEHOLDER}
 								value={expirationDate[MONTH]}
@@ -217,7 +190,7 @@ export default function Card() {
 								onChange={handleChangeExpirationDate}
 							/>
 							<Input
-								className='input-basic'
+								variant='basic'
 								type='text'
 								placeholder={EXPIRATIONDATE_YEAR_PLACEHOLDER}
 								value={expirationDate[YEAR]}
@@ -232,7 +205,7 @@ export default function Card() {
 							<span className='input-title'>{ownerName.length} / {OWNERNAME_LIMIT}</span>
 						</div>
 						<Input
-							className='input-basic'
+							variant='basic'
 							type='text'
 							placeholder={OWNERNAME_PLACEHOLDER}
 							value={ownerName}
@@ -242,7 +215,8 @@ export default function Card() {
 					<div className='input-container'>
 						<span className='input-title'>보안코드(CVC/CVV)</span>
 						<Input
-							className='input-basic w-25'
+							variant='basic'
+							className='w-25'
 							type='password'
 							value={securityCode}
 							onChange={handleChangeSecurityCode}
@@ -251,14 +225,16 @@ export default function Card() {
 					<div className='input-container'>
 						<span className='input-title'>카드 비밀번호</span>
 						<Input
-							className='input-basic w-15'
+							variant='basic'
+							className='w-15'
 							type='password'
 							value={cardPassword[FIRST_NUMBER]}
 							name={FIRST_NUMBER}
 							onChange={handleChangeCardPassword}
 						/>
 						<Input
-							className='input-basic w-15'
+							variant='basic'
+							className='w-15'
 							type='password'
 							value={cardPassword[SECOND_NUMBER]}
 							name={SECOND_NUMBER}
