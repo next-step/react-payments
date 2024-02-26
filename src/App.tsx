@@ -1,11 +1,10 @@
-import { Funnel } from './componenets/funnel/Funnel';
-import { useFunnel } from './componenets/funnel/context';
-import { STEP } from './componenets/funnel/funnel.constant';
+import { Funnel } from './components/funnel/Funnel';
+import { useFunnel } from './components/funnel/context';
+import { STEP } from './components/funnel/funnel.constant';
 
 function App() {
   return (
     <Funnel initialStep={STEP.INITIAL_STEP}>
-      qwe
       <Funnel.Step name={STEP.ADD_CARD}>
         <Step1 />
       </Funnel.Step>
