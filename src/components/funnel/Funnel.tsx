@@ -1,29 +1,42 @@
-import { useState } from 'react';
-import { FunnelContext, useFunnel } from './context';
-import { FunnelContainerProps, StepProps, StepType } from './funnel.type';
+import { createContext, useContext, useState } from 'react';
+import {
+  FunnelContainerProps,
+  FunnelContextProps,
+  FunnelStepProps,
+} from '@/components/funnel/funnel.type';
+import { FUNNEL } from './funnel.constant';
 
-const Step = <T,>({ name, children }: StepProps<T>) => {
-  const { step } = useFunnel();
+export const getFunnel = <T,>({ initialState }: { initialState: T }) => {
+  const FunnelContext = createContext<FunnelContextProps<T>>({
+    step: null,
+    setStep: () => {
+      throw new Error(FUNNEL.MESSAGE.ERROR.NOT_INITIALIZED);
+    },
+  });
 
-  if (name === step) return <>{children}</>;
+  const Step = ({ name, children }: FunnelStepProps<T>) => {
+    const { step } = useContext(FunnelContext);
 
-  return null;
+    if (name === step) return <>{children}</>;
+
+    return null;
+  };
+
+  const FunnelContainer = ({ children }: FunnelContainerProps<T>) => {
+    const [step, setStep] = useState<T>(initialState);
+
+    return (
+      <FunnelContext.Provider value={{ step, setStep }}>
+        {children}
+      </FunnelContext.Provider>
+    );
+  };
+
+  return {
+    Funnel: Object.assign(FunnelContainer, {
+      Step,
+    }),
+
+    useFunnel: () => useContext(FunnelContext),
+  };
 };
-
-const FunnelContainer = ({
-  initialStep,
-  children,
-}: FunnelContainerProps<StepType>) => {
-  const [step, setStep] = useState<StepType>(initialStep);
-
-  return (
-    <FunnelContext.Provider value={{ step, setStep }}>
-      {children}
-    </FunnelContext.Provider>
-  );
-};
-
-// 흠.. 여기서 추상화하는게 최선인가. 도메인별로 추상화하고 여기서 타입 주입하는 쪽으로 일단 진행.
-export const Funnel = Object.assign(FunnelContainer, {
-  Step: Step as (props: StepProps<StepType>) => JSX.Element,
-});

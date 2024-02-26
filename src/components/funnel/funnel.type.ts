@@ -1,18 +1,23 @@
-import { STEP } from './funnel.constant';
+import { ContainerProps } from '@/types';
 
-export type StepType = (typeof STEP)[keyof typeof STEP];
+type DefaultStep = null;
+type DefaultSetState = () => never;
 
-export interface FunnelContextProps {
-  step: StepType;
-  setStep: (step: StepType) => void;
+/**
+ * 주입받는 제네릭 타입은 Step의 name들의 유니온 타입입니다.
+ * @template T
+ * @property {T} step - 현재 Step
+ * @property {(step: T) => void} setStep - Step 변경 함수
+ */
+export interface FunnelContextProps<T> {
+  step: T | DefaultStep;
+  setStep: ((step: T) => void) | DefaultSetState;
 }
 
-export interface StepProps<T> {
+export interface FunnelStepProps<T> extends ContainerProps {
   name: T;
-  children: React.ReactNode;
 }
 
-export interface FunnelContainerProps<T> {
+export interface FunnelContainerProps<T> extends ContainerProps {
   initialStep: T;
-  children: React.ReactNode;
 }
