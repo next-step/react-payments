@@ -4,6 +4,6 @@ import { STEP } from './payments.constant';
 
 export const { Funnel, useFunnel: usePaymentsFunnel } = getFunnel<PaymentsStep>(
   {
-    initialState: STEP.INITIAL_STEP,
+    initialStep: STEP.INITIAL_STEP,
   }
 );

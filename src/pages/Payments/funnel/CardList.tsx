@@ -1,4 +1,4 @@
-import { usePaymentsFunnel } from '../paments.context';
+import { usePaymentsFunnel } from '../payments.context';
 import { STEP } from '../payments.constant';
 import { PaymentsStepKey } from '../payments.type';
 

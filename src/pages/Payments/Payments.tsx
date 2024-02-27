@@ -1,5 +1,5 @@
 import { AddCard, CardList, AddCardComplete, CardPayment } from './funnel';
-import { Funnel } from './paments.context';
+import { Funnel } from './payments.context';
 import { STEP } from './payments.constant';
 
 export const Payments = () => {

@@ -19,5 +19,5 @@ export interface FunnelStepProps<T> extends ContainerProps {
 }
 
 export interface GetFunnelProps<T> {
-  initialState: T;
+  initialStep: T;
 }
