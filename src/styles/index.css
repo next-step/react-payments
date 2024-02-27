@@ -17,6 +17,13 @@ input {
 	font-size: 16px;
 }
 
+button {
+	border: none;
+	background-color: inherit;
+	cursor: pointer;
+	outline: none;
+}
+
 .root {
 	background-color: #fff;
 	width: 375px;
