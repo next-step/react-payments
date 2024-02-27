@@ -9,4 +9,5 @@ export default {
 		'^src/(.*)$': ['<rootDir>/src/$1'],
 	},
 	setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+	modulePathIgnorePatterns: ['node_modules', 'jest-test-results.json'],
 };
