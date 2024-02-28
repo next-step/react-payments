@@ -1,8 +1,11 @@
+import chevronLeft from '@assets/icon/chevron_left_24.svg';
+
 function App() {
   return (
     <div className="root">
       <div className="app">
-        <div>
+        <div className="flex">
+          <img src={chevronLeft} alt="뒤로 가기 버튼" />
           <h2 className="page-title">카드 추가</h2>
         </div>
         <div className="card-box">
