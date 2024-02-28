@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import TextInputComponent from 'src/components/TextInput.tsx';
 
 const meta: Meta<typeof TextInputComponent> = {
-	title: 'atoms/TextInput',
+	title: 'primitive/TextInput',
 	component: TextInputComponent,
 };
 

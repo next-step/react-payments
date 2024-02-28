@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import HeadingComponent from 'src/components/Heading.tsx';
 
 const meta: Meta<typeof HeadingComponent.H1> = {
-	title: 'atoms/Heading',
+	title: 'primitive/Heading',
 	component: HeadingComponent.H1,
 };
 
