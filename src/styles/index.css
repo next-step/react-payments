@@ -24,6 +24,10 @@ button {
 	outline: none;
 }
 
+.sb-show-main.sb-main-padded {
+	display: flex;
+}
+
 .root {
 	background-color: #fff;
 	width: 375px;

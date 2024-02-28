@@ -12,6 +12,15 @@ const preview: Preview = {
 			},
 		},
 	},
+	decorators: [
+		Story => (
+			<div className="root">
+				<div className="app">
+					<Story />
+				</div>
+			</div>
+		),
+	],
 };
 
 export default preview;
