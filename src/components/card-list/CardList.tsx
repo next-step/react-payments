@@ -1,5 +1,7 @@
 import {Link} from 'react-router-dom';
 
+import CardBox from '../CardBox';
+
 export default function CardList() {
 	return (
 		<div className='root'>
@@ -8,9 +10,9 @@ export default function CardList() {
 					<h2 className='page-title mb-10'>보유 카드</h2>
 				</div>
 				<Link to='/add' className='button-basic'>
-					<div className='card-box'>
-						<div className='empty-card'>+</div>
-					</div>
+					<CardBox>
+						+
+					</CardBox>
 				</Link>
 			</div>
 		</div>

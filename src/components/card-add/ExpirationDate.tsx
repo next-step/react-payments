@@ -2,14 +2,11 @@ import Input from '../Input';
 
 import setNumber from '../../utils/setNumber';
 
+import type ExpirationDateType from '../../types/ExpirationDateType';
+
 import {MONTH, YEAR} from '../../constants/expirationDate';
 import {EXPIRATION_DATE_LIMIT} from '../../constants/limit';
 import {EXPIRATION_DATE_MONTH_PLACEHOLDER, EXPIRATION_DATE_YEAR_PLACEHOLDER} from '../../constants/placeHolder';
-
-type ExpirationDateType = {
-	[MONTH]: string;
-	[YEAR]: string;
-};
 
 type ExpirationDateProps = {
 	expirationDate: ExpirationDateType;
