@@ -1,4 +1,4 @@
-import Button from '../card-add/NextButton';
+import Button from '../card-add/Button';
 
 export default function Card() {
 	return (

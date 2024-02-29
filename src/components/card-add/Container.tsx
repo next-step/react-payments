@@ -1,13 +1,12 @@
 import {useState} from 'react';
 
-import {Link} from 'react-router-dom';
-
+import Header from './Header';
 import CardNumber from './CardNumber';
 import ExpirationDate from './ExpirationDate';
 import OwnerName from './OwnerName';
 import SecurityCode from './SecurityCode';
 import CardPassword from './CardPassword';
-import Button from './NextButton';
+import Button from './Button';
 
 import {
 	CARD_NUMBER_LIMIT,
@@ -18,13 +17,13 @@ import {
 } from '../../constants/cardNumber';
 import {MONTH, YEAR} from '../../constants/expirationDate';
 import {
-	EXPIRATIONDATE_MONTH_PLACEHOLDER,
-	EXPIRATIONDATE_YEAR_PLACEHOLDER,
+	EXPIRATION_DATE_MONTH_PLACEHOLDER,
+	EXPIRATION_DATE_YEAR_PLACEHOLDER,
 } from '../../constants/placeHolder';
-import {OWNERNAME_DEFAULT} from '../../constants/default';
+import {OWNER_NAME_DEFAULT} from '../../constants/default';
 import {HYPHEN, SLASH} from '../../constants/specialCharacter';
 
-export default function Card() {
+export default function Container() {
 	const [cardNumber, setCardNumber] = useState({
 		[FIRST_NUMBER]: '',
 		[SECOND_NUMBER]: '',
@@ -56,10 +55,7 @@ export default function Card() {
 		<div>
 			<div className='root'>
 				<div className='app'>
-					<h2 className='page-title'>
-						<Link to='/' className='button-basic'>{'<'}</Link>
-						<span className='ml-10'>카드 추가</span>
-					</h2>
+					<Header />
 					<div className='card-box'>
 						<div className='empty-card'>
 							<div className='card-top'>
@@ -82,14 +78,14 @@ export default function Card() {
 
 								</div>
 								<div className='card-bottom__info'>
-									<span className='card-text'>{ownerName || OWNERNAME_DEFAULT}</span>
+									<span className='card-text'>{ownerName || OWNER_NAME_DEFAULT}</span>
 									<span className='card-text'>
 										{
 											expirationDate[MONTH] || expirationDate[YEAR]
 												? `${expirationDate[MONTH]} 
 												   ${specialCharacter(expirationDate[MONTH], EXPIRATION_DATE_LIMIT, SLASH)}
 												   ${expirationDate[YEAR]}`
-												: `${EXPIRATIONDATE_MONTH_PLACEHOLDER} ${SLASH} ${EXPIRATIONDATE_YEAR_PLACEHOLDER}`
+												: `${EXPIRATION_DATE_MONTH_PLACEHOLDER} ${SLASH} ${EXPIRATION_DATE_YEAR_PLACEHOLDER}`
 										}
 									</span>
 								</div>

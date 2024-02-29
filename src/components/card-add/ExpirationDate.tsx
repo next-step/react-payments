@@ -4,7 +4,7 @@ import setNumber from '../../utils/setNumber';
 
 import {MONTH, YEAR} from '../../constants/expirationDate';
 import {EXPIRATION_DATE_LIMIT} from '../../constants/limit';
-import {EXPIRATIONDATE_MONTH_PLACEHOLDER, EXPIRATIONDATE_YEAR_PLACEHOLDER} from '../../constants/placeHolder';
+import {EXPIRATION_DATE_MONTH_PLACEHOLDER, EXPIRATION_DATE_YEAR_PLACEHOLDER} from '../../constants/placeHolder';
 
 type ExpirationDateType = {
 	[MONTH]: string;
@@ -41,7 +41,7 @@ export default function ExpirationDate({expirationDate, setExpirationDate}: Expi
 				<Input
 					variant='basic'
 					type='text'
-					placeholder={EXPIRATIONDATE_MONTH_PLACEHOLDER}
+					placeholder={EXPIRATION_DATE_MONTH_PLACEHOLDER}
 					value={expirationDate[MONTH]}
 					name={MONTH}
 					onChange={handleChangeExpirationDate}
@@ -49,7 +49,7 @@ export default function ExpirationDate({expirationDate, setExpirationDate}: Expi
 				<Input
 					variant='basic'
 					type='text'
-					placeholder={EXPIRATIONDATE_YEAR_PLACEHOLDER}
+					placeholder={EXPIRATION_DATE_YEAR_PLACEHOLDER}
 					value={expirationDate[YEAR]}
 					name={YEAR}
 					onChange={handleChangeExpirationDate}

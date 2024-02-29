@@ -1,2 +1,2 @@
 // eslint-disable-next-line @typescript-eslint/naming-convention
-export const OWNERNAME_DEFAULT = 'NAME';
+export const OWNER_NAME_DEFAULT = 'NAME';

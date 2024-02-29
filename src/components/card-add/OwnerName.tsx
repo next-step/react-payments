@@ -3,7 +3,7 @@ import Input from '../Input';
 import setNumber from '../../utils/setNumber';
 
 import {OWNER_NAME_LIMIT} from '../../constants/limit';
-import {OWNERNAME_PLACEHOLDER} from '../../constants/placeHolder';
+import {OWNER_NAME_PLACEHOLDER} from '../../constants/placeHolder';
 
 type OwnerNameProps = {
 	ownerName: string;
@@ -32,7 +32,7 @@ export default function OwnerName({ownerName, setOwnerName}: OwnerNameProps) {
 			<Input
 				variant='basic'
 				type='text'
-				placeholder={OWNERNAME_PLACEHOLDER}
+				placeholder={OWNER_NAME_PLACEHOLDER}
 				value={ownerName}
 				onChange={handleChangeOwnerName}
 			/>
