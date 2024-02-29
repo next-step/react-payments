@@ -42,11 +42,15 @@ export default function Card({
 					<span className={`card-text${variant === 'big' ? '__big' : ''}`}>
 						{cardNumber[FIRST_NUMBER]
 						+ specialCharacter(cardNumber[FIRST_NUMBER], CARD_NUMBER_LIMIT, HYPHEN)}
+
 						{cardNumber[SECOND_NUMBER]
 						+ specialCharacter(cardNumber[SECOND_NUMBER], CARD_NUMBER_LIMIT, HYPHEN)}
-						{cardNumber[THIRD_NUMBER]
+
+						{'*'.repeat(cardNumber[THIRD_NUMBER].length)
 						+ specialCharacter(cardNumber[THIRD_NUMBER], CARD_NUMBER_LIMIT, HYPHEN)}
-						{cardNumber[FOURTH_NUMBER]}
+
+						{'*'.repeat(cardNumber[FOURTH_NUMBER].length)}
+
 					</span>
 
 				</div>
