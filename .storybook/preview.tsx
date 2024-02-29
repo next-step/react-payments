@@ -1,4 +1,5 @@
-import type { Preview } from '@storybook/react';
+import type { Preview, StoryFn } from '@storybook/react';
+import { GlobalStyles } from '../src/shared/styles';
 
 const preview: Preview = {
   parameters: {
@@ -11,5 +12,14 @@ const preview: Preview = {
     },
   },
 };
+
+export const decorators = [
+  (Story: StoryFn) => (
+    <>
+      <GlobalStyles />
+      <Story />
+    </>
+  ),
+];
 
 export default preview;
