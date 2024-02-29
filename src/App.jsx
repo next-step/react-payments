@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-const Home = () => <h2>Home</h2>;
+import CardAdd from "./pages/CardAdd.jsx";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />}></Route>
+      <Route path="/" element={<CardAdd />}></Route>
     </Routes>
   );
 }
