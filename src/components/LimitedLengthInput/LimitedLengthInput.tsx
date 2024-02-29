@@ -34,6 +34,7 @@ interface LimitedLengthInputProps {
   textAlign?: "left" | "center" | "right";
 
   colorTheme: "primary" | "normal";
+  placeholder?: string;
   value: string;
 }
 
@@ -44,6 +45,7 @@ function LimitedLengthInput({
   value,
   colorTheme = "normal",
   textAlign = "left",
+  placeholder,
 }: Readonly<LimitedLengthInputProps>) {
   const [inputValue, setInputValue] = useState<string>("");
   const isMaxLength = inputValue.length === maxLength;
@@ -56,15 +58,14 @@ function LimitedLengthInput({
     className: styleClasses,
     type,
     maxLength,
+    placeholder,
     title: "limited length input",
   };
 
   function changeValue(event: ChangeEvent<HTMLInputElement>) {
-    const isPreviousMaxLength = isOverLengthToLimitation(
-      event.target.value,
-      maxLength
-    );
-    !value && !isPreviousMaxLength && setInputValue(event.target.value);
+    !value &&
+      !isOverLengthToLimitation(event.target.value, maxLength) &&
+      setInputValue(event.target.value);
   }
 
   useEffect(() => {
