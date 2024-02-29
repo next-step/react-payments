@@ -7,11 +7,11 @@ import Input from '../Input';
 import setNumber from '../../utils/setNumber';
 
 import {
-	CARDNUMBER_LIMIT,
-	EXPIRATIONDATE_LIMIT,
-	OWNERNAME_LIMIT,
-	SECURITYCODE_LIMIT,
-	CARDPASSWORD_LIMIT,
+	CARD_NUMBER_LIMIT,
+	EXPIRATION_DATE_LIMIT,
+	OWNER_NAME_LIMIT,
+	SECURITY_CODE_LIMIT,
+	CARD_PASSWORD_LIMIT,
 } from '../../constants/limit';
 import {
 	FIRST_NUMBER, SECOND_NUMBER, THIRD_NUMBER, FOURTH_NUMBER,
@@ -49,28 +49,11 @@ export default function Card() {
 		[SECOND_NUMBER]: '',
 	});
 
-	const handleChangeCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const {value, name} = event.target;
-
-		setNumber(
-			CARDNUMBER_LIMIT,
-			value => {
-				setCardNumber(prev => ({
-					...prev,
-					[name]: value,
-				}));
-			},
-			value,
-			false,
-			true,
-		);
-	};
-
 	const handleChangeExpirationDate = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value, name} = event.target;
 
 		setNumber(
-			EXPIRATIONDATE_LIMIT,
+			EXPIRATION_DATE_LIMIT,
 			value => {
 				setExpirationDate(prev => ({
 					...prev,
@@ -87,7 +70,7 @@ export default function Card() {
 		const {value} = event.target;
 
 		setNumber(
-			OWNERNAME_LIMIT,
+			OWNER_NAME_LIMIT,
 			setOwnerName,
 			value,
 			false,
@@ -99,7 +82,7 @@ export default function Card() {
 		const {value} = event.target;
 
 		setNumber(
-			SECURITYCODE_LIMIT,
+			SECURITY_CODE_LIMIT,
 			setSecurityCode,
 			value,
 			false,
@@ -111,7 +94,7 @@ export default function Card() {
 		const {value, name} = event.target;
 
 		setNumber(
-			CARDPASSWORD_LIMIT,
+			CARD_PASSWORD_LIMIT,
 			value => {
 				setCardPassword(prev => ({
 					...prev,
@@ -150,11 +133,11 @@ export default function Card() {
 								<div className='card-bottom__number'>
 									<span className='card-text'>
 										{cardNumber[FIRST_NUMBER]
-										+ specialCharacter(cardNumber[FIRST_NUMBER], CARDNUMBER_LIMIT, HYPHEN)}
+										+ specialCharacter(cardNumber[FIRST_NUMBER], CARD_NUMBER_LIMIT, HYPHEN)}
 										{cardNumber[SECOND_NUMBER]
-										+ specialCharacter(cardNumber[SECOND_NUMBER], CARDNUMBER_LIMIT, HYPHEN)}
+										+ specialCharacter(cardNumber[SECOND_NUMBER], CARD_NUMBER_LIMIT, HYPHEN)}
 										{cardNumber[THIRD_NUMBER]
-										+ specialCharacter(cardNumber[THIRD_NUMBER], CARDNUMBER_LIMIT, HYPHEN)}
+										+ specialCharacter(cardNumber[THIRD_NUMBER], CARD_NUMBER_LIMIT, HYPHEN)}
 										{cardNumber[FOURTH_NUMBER]}
 									</span>
 
@@ -165,7 +148,7 @@ export default function Card() {
 										{
 											expirationDate[MONTH] || expirationDate[YEAR]
 												? `${expirationDate[MONTH]} 
-												   ${specialCharacter(expirationDate[MONTH], EXPIRATIONDATE_LIMIT, SLASH)}
+												   ${specialCharacter(expirationDate[MONTH], EXPIRATION_DATE_LIMIT, SLASH)}
 												   ${expirationDate[YEAR]}`
 												: `${EXPIRATIONDATE_MONTH_PLACEHOLDER} ${SLASH} ${EXPIRATIONDATE_YEAR_PLACEHOLDER}`
 										}
@@ -176,7 +159,7 @@ export default function Card() {
 					</div>
 					<CardNumber
 						cardNumber={cardNumber}
-						handleChangeCardNumber={handleChangeCardNumber}
+						setCardNumber={setCardNumber}
 					/>
 					<div className='input-container'>
 						<span className='input-title'>만료일</span>
@@ -202,7 +185,7 @@ export default function Card() {
 					<div className='input-container'>
 						<div className='input-group'>
 							<span className='input-title'>카드 소유자 이름(선택)</span>
-							<span className='input-title'>{ownerName.length} / {OWNERNAME_LIMIT}</span>
+							<span className='input-title'>{ownerName.length} / {OWNER_NAME_LIMIT}</span>
 						</div>
 						<Input
 							variant='basic'
