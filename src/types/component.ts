@@ -3,3 +3,7 @@ export interface ContainerProps {
 }
 
 export type ClassNames = string[] | readonly string[];
+
+export interface RestProps {
+  [key: string]: any;
+}

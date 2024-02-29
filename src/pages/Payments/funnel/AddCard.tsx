@@ -1,6 +1,7 @@
 import { usePaymentsFunnel } from '../payments.context';
 import { STEP } from '../payments.constant';
 import { PaymentsStepKey } from '../payments.type';
+import { Input } from '@/components/input/Input';
 
 // FIXME: className에 하드코딩 된 값들은 전부 공통 컴포넌트로 분리해야 함.
 export const AddCard = () => {
@@ -25,6 +26,16 @@ export const AddCard = () => {
         </div>
       </div>
 
+      <Input.Container>
+        <Input.Title>카드 번호1</Input.Title>
+        <Input.Box separator='-'>
+          <Input type='text' />
+          <Input type='text' />
+          <Input type='password' />
+          <Input type='password' />
+        </Input.Box>
+      </Input.Container>
+
       <div className='input-container'>
         <span className='input-title'>카드 번호</span>
         <div className='input-box'>
@@ -35,11 +46,18 @@ export const AddCard = () => {
         </div>
       </div>
 
+      <Input.Container>
+        <Input.Title>만료일1</Input.Title>
+        <Input.Box separator='/'>
+          <Input type='text' placeholder='MM' />
+          <Input type='text' placeholder='YY' />
+        </Input.Box>
+      </Input.Container>
+
       <div className='input-container'>
         <span className='input-title'>만료일</span>
         <div className='input-box w-50'>
           <input className='input-basic' type='text' placeholder='MM' />
-          /
           <input className='input-basic' type='text' placeholder='YY' />
         </div>
       </div>
