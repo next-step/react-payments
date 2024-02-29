@@ -2,6 +2,13 @@ import {useState} from 'react';
 
 import {Link} from 'react-router-dom';
 
+import CardNumber from './CardNumber';
+import ExpirationDate from './ExpirationDate';
+import OwnerName from './OwnerName';
+import SecurityCode from './SecurityCode';
+import CardPassword from './CardPassword';
+import Button from './NextButton';
+
 import {
 	CARD_NUMBER_LIMIT,
 	EXPIRATION_DATE_LIMIT,
@@ -16,12 +23,6 @@ import {
 } from '../../constants/placeHolder';
 import {OWNERNAME_DEFAULT} from '../../constants/default';
 import {HYPHEN, SLASH} from '../../constants/specialCharacter';
-
-import CardNumber from './CardNumber';
-import ExpirationDate from './ExpirationDate';
-import OwnerName from './OwnerName';
-import SecurityCode from './SecurityCode';
-import CardPassword from './CardPassword';
 
 export default function Card() {
 	const [cardNumber, setCardNumber] = useState({
@@ -115,11 +116,10 @@ export default function Card() {
 						cardPassword={cardPassword}
 						setCardPassword={setCardPassword}
 					/>
-					<div className='button-box'>
-						<span className='button-text'>
-							<Link to='/add/complete' className='button-basic'>다음</Link>
-						</span>
-					</div>
+					<Button
+						location='/add/complete'
+						text='다음'
+					/>
 				</div>
 			</div>
 		</div>

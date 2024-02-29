@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import Button from '../card-add/NextButton';
 
 export default function Card() {
 	return (
@@ -33,9 +33,11 @@ export default function Card() {
 						placeholder='카드의 별칭을 입력해주세요.'
 					/>
 				</div>
-				<div className='button-box mt-50'>
-					<Link to='/' className='button-basic'>다음</Link>
-				</div>
+				<Button
+					className='mt-45'
+					location='/'
+					text='다음'
+				/>
 			</div>
 		</div>
 	);
