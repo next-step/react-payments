@@ -15,7 +15,7 @@ import {
 } from '../../constants/cardNumber';
 import {MONTH, YEAR} from '../../constants/expirationDate';
 
-export default function Container() {
+export default function AddCardForm() {
 	const [cardNumber, setCardNumber] = useState({
 		[FIRST_NUMBER]: '',
 		[SECOND_NUMBER]: '',
