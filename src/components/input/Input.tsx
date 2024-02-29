@@ -1,3 +1,5 @@
+import React from 'react';
+
 // Utils
 type valueOf<T> = T[keyof T];
 
@@ -14,7 +16,7 @@ const Parser = {
 };
 
 // Constants
-const INPUT = {
+export const INPUT = {
   TEXT: {
     TYPE: 'text',
   },
@@ -23,6 +25,12 @@ const INPUT = {
   },
 } as const;
 
+const SEPARATOR = {
+  HYPHEN: '-',
+  SLASH: '/',
+} as const;
+
+type Separator = valueOf<typeof SEPARATOR>;
 // Types
 type InputType = valueOf<typeof INPUT>['TYPE'];
 
@@ -38,6 +46,10 @@ interface InputProps extends DefaultInputProps {
   type: InputType;
 }
 
+interface InputBoxProps extends ContainerProps {
+  separator?: Separator;
+}
+
 // Components
 const DefaultInput = ({ classNames, ...rest }: DefaultInputProps) => {
   const concatedClassNames = ['input-basic', ...(classNames ?? [])];
@@ -48,12 +60,13 @@ const DefaultInput = ({ classNames, ...rest }: DefaultInputProps) => {
 const InputFactory = ({ type, ...rest }: InputProps) => {
   const getInput = (inputType: InputType) => {
     switch (inputType) {
-      case INPUT.TEXT.TYPE || INPUT.PASSWORD.TYPE: {
+      case INPUT.TEXT.TYPE:
+      case INPUT.PASSWORD.TYPE: {
         return <DefaultInput type={inputType} {...rest} />;
       }
 
       default: {
-        throw new Error('존재하지 않는 inputType입니다.');
+        throw new Error(`${inputType} 존재하지 않는 inputType입니다.`);
       }
     }
   };
@@ -61,8 +74,30 @@ const InputFactory = ({ type, ...rest }: InputProps) => {
   return getInput(type);
 };
 
-const InputBox = ({ children }: ContainerProps) => {
-  return <div className='input-box'>{children}</div>;
+const InputBox = ({ children, separator }: InputBoxProps) => {
+  if (separator === undefined) {
+    return <div className='input-box'>{children}</div>;
+  }
+
+  const childrenArray = React.Children.toArray(children);
+  const lastChildIndex = childrenArray.length - 1;
+
+  return (
+    <div className='input-box'>
+      {childrenArray.map((child, index) => {
+        if (index === lastChildIndex) {
+          return child;
+        }
+
+        return (
+          <>
+            {child}
+            <span>{separator}</span>
+          </>
+        );
+      })}
+    </div>
+  );
 };
 
 const InputContainer = ({ children }: ContainerProps) => {
