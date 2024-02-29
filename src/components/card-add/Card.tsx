@@ -2,15 +2,9 @@ import {useState} from 'react';
 
 import {Link} from 'react-router-dom';
 
-import Input from '../Input';
-
-import setNumber from '../../utils/setNumber';
-
 import {
 	CARD_NUMBER_LIMIT,
 	EXPIRATION_DATE_LIMIT,
-	SECURITY_CODE_LIMIT,
-	CARD_PASSWORD_LIMIT,
 } from '../../constants/limit';
 import {
 	FIRST_NUMBER, SECOND_NUMBER, THIRD_NUMBER, FOURTH_NUMBER,
@@ -27,6 +21,7 @@ import CardNumber from './CardNumber';
 import ExpirationDate from './ExpirationDate';
 import OwnerName from './OwnerName';
 import SecurityCode from './SecurityCode';
+import CardPassword from './CardPassword';
 
 export default function Card() {
 	const [cardNumber, setCardNumber] = useState({
@@ -49,23 +44,6 @@ export default function Card() {
 		[FIRST_NUMBER]: '',
 		[SECOND_NUMBER]: '',
 	});
-
-	const handleChangeCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const {value, name} = event.target;
-
-		setNumber(
-			CARD_PASSWORD_LIMIT,
-			value => {
-				setCardPassword(prev => ({
-					...prev,
-					[name]: value,
-				}));
-			},
-			value,
-			false,
-			true,
-		);
-	};
 
 	const specialCharacter = (
 		value: string,
@@ -133,27 +111,10 @@ export default function Card() {
 						securityCode={securityCode}
 						setSecurityCode={setSecurityCode}
 					/>
-					<div className='input-container'>
-						<span className='input-title'>카드 비밀번호</span>
-						<Input
-							variant='basic'
-							className='w-15'
-							type='password'
-							value={cardPassword[FIRST_NUMBER]}
-							name={FIRST_NUMBER}
-							onChange={handleChangeCardPassword}
-						/>
-						<Input
-							variant='basic'
-							className='w-15'
-							type='password'
-							value={cardPassword[SECOND_NUMBER]}
-							name={SECOND_NUMBER}
-							onChange={handleChangeCardPassword}
-						/>
-						<input className='input-basic input-disabled w-15' type='password' value='*' disabled />
-						<input className='input-basic input-disabled w-15' type='password' value='*' disabled />
-					</div>
+					<CardPassword
+						cardPassword={cardPassword}
+						setCardPassword={setCardPassword}
+					/>
 					<div className='button-box'>
 						<span className='button-text'>
 							<Link to='/add/complete' className='button-basic'>다음</Link>
