@@ -1,0 +1,19 @@
+@import "./card.css";
+@import "./input.css";
+@import "./button.css";
+@import "./modal.css";
+@import "./utils.css";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+#root {
+  height: 100vh;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
