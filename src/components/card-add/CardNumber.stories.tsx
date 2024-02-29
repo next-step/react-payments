@@ -4,8 +4,6 @@ import type {Meta, StoryObj} from '@storybook/react';
 
 import CardNumber from './CardNumber';
 
-import type CardNumberType from '../../types/CardNumberType';
-
 const meta = {
 	title: 'CARD-ADD/CardNumber',
 	component: CardNumber,
@@ -16,7 +14,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = args => {
-	const [cardNumber, setCardNumber] = useState<CardNumberType>({
+	const [cardNumber, setCardNumber] = useState({
 		firstNumber: '1234',
 		secondNumber: '5678',
 		thirdNumber: '1357',

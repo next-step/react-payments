@@ -2,12 +2,17 @@ import Input from '../Input';
 
 import setNumber from '../../utils/setNumber';
 
-import type CardNumberType from '../../types/CardNumberType';
-
 import {
 	FIRST_NUMBER, FOURTH_NUMBER, SECOND_NUMBER, THIRD_NUMBER,
 } from '../../constants/cardNumber';
 import {CARD_NUMBER_LIMIT} from '../../constants/limit';
+
+type CardNumberType = {
+	[FIRST_NUMBER]: string;
+	[SECOND_NUMBER]: string;
+	[THIRD_NUMBER]: string;
+	[FOURTH_NUMBER]: string;
+};
 
 type CardNumberProps = {
 	cardNumber: CardNumberType;
@@ -39,28 +44,28 @@ export default function CardNumber({cardNumber, setCardNumber}: CardNumberProps)
 				<Input
 					variant='basic'
 					type='text'
-					value={cardNumber.firstNumber}
+					value={cardNumber[FIRST_NUMBER]}
 					name={FIRST_NUMBER}
 					onChange={handleChangeCardNumber}
 				/>
 				<Input
 					variant='basic'
 					type='text'
-					value={cardNumber.secondNumber}
+					value={cardNumber[SECOND_NUMBER]}
 					name={SECOND_NUMBER}
 					onChange={handleChangeCardNumber}
 				/>
 				<Input
 					variant='basic'
 					type='password'
-					value={cardNumber.thirdNumber}
+					value={cardNumber[THIRD_NUMBER]}
 					name={THIRD_NUMBER}
 					onChange={handleChangeCardNumber}
 				/>
 				<Input
 					variant='basic'
 					type='password'
-					value={cardNumber.fourthNumber}
+					value={cardNumber[FOURTH_NUMBER]}
 					name={FOURTH_NUMBER}
 					onChange={handleChangeCardNumber}
 				/>

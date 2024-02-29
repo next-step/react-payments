@@ -26,6 +26,7 @@ import {OWNERNAME_DEFAULT} from '../../constants/default';
 import {HYPHEN, SLASH} from '../../constants/specialCharacter';
 
 import CardNumber from './CardNumber';
+import ExpirationDate from './ExpirationDate';
 
 export default function Card() {
 	const [cardNumber, setCardNumber] = useState({
@@ -48,23 +49,6 @@ export default function Card() {
 		[FIRST_NUMBER]: '',
 		[SECOND_NUMBER]: '',
 	});
-
-	const handleChangeExpirationDate = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const {value, name} = event.target;
-
-		setNumber(
-			EXPIRATION_DATE_LIMIT,
-			value => {
-				setExpirationDate(prev => ({
-					...prev,
-					[name]: value,
-				}));
-			},
-			value,
-			name === MONTH,
-			true,
-		);
-	};
 
 	const handleChangeOwnerName = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value} = event.target;
@@ -161,27 +145,10 @@ export default function Card() {
 						cardNumber={cardNumber}
 						setCardNumber={setCardNumber}
 					/>
-					<div className='input-container'>
-						<span className='input-title'>만료일</span>
-						<div className='input-box w-50'>
-							<Input
-								variant='basic'
-								type='text'
-								placeholder={EXPIRATIONDATE_MONTH_PLACEHOLDER}
-								value={expirationDate[MONTH]}
-								name={MONTH}
-								onChange={handleChangeExpirationDate}
-							/>
-							<Input
-								variant='basic'
-								type='text'
-								placeholder={EXPIRATIONDATE_YEAR_PLACEHOLDER}
-								value={expirationDate[YEAR]}
-								name={YEAR}
-								onChange={handleChangeExpirationDate}
-							/>
-						</div>
-					</div>
+					<ExpirationDate
+						expirationDate={expirationDate}
+						setExpirationDate={setExpirationDate}
+					/>
 					<div className='input-container'>
 						<div className='input-group'>
 							<span className='input-title'>카드 소유자 이름(선택)</span>
