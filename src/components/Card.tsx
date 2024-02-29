@@ -58,7 +58,7 @@ export default function Card({
 					<span className={`card-text${variant === 'big' ? '__big' : ''}`}>{ownerName || OWNER_NAME_DEFAULT}</span>
 					<span className={`card-text${variant === 'big' ? '__big' : ''}`}>
 						{
-							expirationDate[MONTH] || expirationDate[YEAR]
+							(expirationDate[MONTH] || expirationDate[YEAR])
 								? `${expirationDate[MONTH]} 
 								   ${specialCharacter(expirationDate[MONTH], EXPIRATION_DATE_LIMIT, SLASH)}
 								   ${expirationDate[YEAR]}`

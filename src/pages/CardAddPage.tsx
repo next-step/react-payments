@@ -1,7 +1,7 @@
-import Container from '../components/card-add/AddCard';
+import AddCardForm from '../components/card-add/AddCardForm';
 
 export default function CardAddPage() {
 	return (
-		<Container />
+		<AddCardForm />
 	);
 }
