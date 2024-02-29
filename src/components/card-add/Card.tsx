@@ -26,6 +26,7 @@ import {HYPHEN, SLASH} from '../../constants/specialCharacter';
 import CardNumber from './CardNumber';
 import ExpirationDate from './ExpirationDate';
 import OwnerName from './OwnerName';
+import SecurityCode from './SecurityCode';
 
 export default function Card() {
 	const [cardNumber, setCardNumber] = useState({
@@ -48,18 +49,6 @@ export default function Card() {
 		[FIRST_NUMBER]: '',
 		[SECOND_NUMBER]: '',
 	});
-
-	const handleChangeSecurityCode = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const {value} = event.target;
-
-		setNumber(
-			SECURITY_CODE_LIMIT,
-			setSecurityCode,
-			value,
-			false,
-			true,
-		);
-	};
 
 	const handleChangeCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value, name} = event.target;
@@ -140,16 +129,10 @@ export default function Card() {
 						ownerName={ownerName}
 						setOwnerName={setOwnerName}
 					/>
-					<div className='input-container'>
-						<span className='input-title'>보안코드(CVC/CVV)</span>
-						<Input
-							variant='basic'
-							className='w-25'
-							type='password'
-							value={securityCode}
-							onChange={handleChangeSecurityCode}
-						/>
-					</div>
+					<SecurityCode
+						securityCode={securityCode}
+						setSecurityCode={setSecurityCode}
+					/>
 					<div className='input-container'>
 						<span className='input-title'>카드 비밀번호</span>
 						<Input
