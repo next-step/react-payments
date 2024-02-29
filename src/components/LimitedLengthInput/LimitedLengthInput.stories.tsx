@@ -58,7 +58,7 @@ PasswordInput.play = async ({ canvasElement, step }) => {
   const canvas = within(canvasElement);
   const input = canvas.getByTitle<HTMLInputElement>("limited length input");
 
-  await step("타이핑 후 비밀번호로 표시되는지 확인", async () => {
+  await step("password 설정 확인", async () => {
     expect(input.type).toBe("password");
   });
 

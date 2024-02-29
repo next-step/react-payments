@@ -1,5 +1,6 @@
 import { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
 import stylesModule from "./LimitedLengthInput.module.css";
+import { isOverLengthToLimitation } from "../../utils";
 
 const styles = {
   color: {
@@ -59,7 +60,10 @@ function LimitedLengthInput({
   };
 
   function changeValue(event: ChangeEvent<HTMLInputElement>) {
-    const isPreviousMaxLength = event.target.value.length > maxLength;
+    const isPreviousMaxLength = isOverLengthToLimitation(
+      event.target.value,
+      maxLength
+    );
     !value && !isPreviousMaxLength && setInputValue(event.target.value);
   }
 
