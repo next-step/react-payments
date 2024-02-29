@@ -12,12 +12,24 @@ jobs:
     runs-on: ubuntu-latest
     # Job steps
     steps:
-      - uses: actions/checkout@v1
-      - run: yarn
+      - name: Checkout code
+        #👇 Checks out the repository code
+        uses: actions/checkout@v1
+      - name: Install dependencies
+        run: yarn
         #👇 Adds Chromatic as a step in the workflow
-      - uses: chromaui/action@v1
+      - name: Chromatic
+        id: chromatic
+        uses: chromaui/action@v1
         # Options required for Chromatic's GitHub Action
         with:
           #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/ko/deploy/ to obtain it
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit Comment
+        uses: peter-evans/commit-comment@v3.0.0
+        with:
+          body: |
+            # 🚀 StoryBook Deployment Successful
+
+            - ${{ steps.chromatic.outputs.storybookUrl }}
