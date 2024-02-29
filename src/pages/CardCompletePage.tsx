@@ -1,7 +1,7 @@
-import Card from '../components/card-complete/Card';
+import CompletedCard from '../components/card-complete/CompletedCard';
 
 export default function CardCompletePage() {
 	return (
-		<Card />
+		<CompletedCard />
 	);
 }

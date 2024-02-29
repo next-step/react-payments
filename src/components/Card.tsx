@@ -11,12 +11,18 @@ import {HYPHEN, SLASH} from '../constants/specialCharacter';
 import {EXPIRATION_DATE_MONTH_PLACEHOLDER, EXPIRATION_DATE_YEAR_PLACEHOLDER} from '../constants/placeHolder';
 
 type CardProps = {
+	variant: 'big' | 'small';
 	cardNumber: CardNumberType;
 	ownerName: string;
 	expirationDate: ExpirationDateType;
 };
 
-export default function Card({cardNumber, ownerName, expirationDate}: CardProps) {
+export default function Card({
+	variant,
+	cardNumber,
+	ownerName,
+	expirationDate,
+}: CardProps) {
 	const specialCharacter = (
 		value: string,
 		limit: number,
@@ -26,14 +32,14 @@ export default function Card({cardNumber, ownerName, expirationDate}: CardProps)
 	return (
 		<>
 			<div className='card-top'>
-				<span className='card-text'>클린카드</span>
+				<span className={`card-text${variant === 'big' ? '__big' : ''}`}>클린카드</span>
 			</div>
 			<div className='card-middle'>
-				<div className='small-card__chip'></div>
+				<div className={`${variant}-card__chip`}></div>
 			</div>
 			<div className='card-bottom'>
 				<div className='card-bottom__number'>
-					<span className='card-text'>
+					<span className={`card-text${variant === 'big' ? '__big' : ''}`}>
 						{cardNumber[FIRST_NUMBER]
 						+ specialCharacter(cardNumber[FIRST_NUMBER], CARD_NUMBER_LIMIT, HYPHEN)}
 						{cardNumber[SECOND_NUMBER]
@@ -45,8 +51,8 @@ export default function Card({cardNumber, ownerName, expirationDate}: CardProps)
 
 				</div>
 				<div className='card-bottom__info'>
-					<span className='card-text'>{ownerName || OWNER_NAME_DEFAULT}</span>
-					<span className='card-text'>
+					<span className={`card-text${variant === 'big' ? '__big' : ''}`}>{ownerName || OWNER_NAME_DEFAULT}</span>
+					<span className={`card-text${variant === 'big' ? '__big' : ''}`}>
 						{
 							expirationDate[MONTH] || expirationDate[YEAR]
 								? `${expirationDate[MONTH]} 

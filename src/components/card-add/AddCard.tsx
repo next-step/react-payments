@@ -44,6 +44,7 @@ export default function Container() {
 					<Header />
 					<CardBox>
 						<Card
+							variant='small'
 							cardNumber={cardNumber}
 							ownerName={ownerName}
 							expirationDate={expirationDate}
