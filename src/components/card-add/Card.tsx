@@ -9,7 +9,6 @@ import setNumber from '../../utils/setNumber';
 import {
 	CARD_NUMBER_LIMIT,
 	EXPIRATION_DATE_LIMIT,
-	OWNER_NAME_LIMIT,
 	SECURITY_CODE_LIMIT,
 	CARD_PASSWORD_LIMIT,
 } from '../../constants/limit';
@@ -20,13 +19,13 @@ import {MONTH, YEAR} from '../../constants/expirationDate';
 import {
 	EXPIRATIONDATE_MONTH_PLACEHOLDER,
 	EXPIRATIONDATE_YEAR_PLACEHOLDER,
-	OWNERNAME_PLACEHOLDER,
 } from '../../constants/placeHolder';
 import {OWNERNAME_DEFAULT} from '../../constants/default';
 import {HYPHEN, SLASH} from '../../constants/specialCharacter';
 
 import CardNumber from './CardNumber';
 import ExpirationDate from './ExpirationDate';
+import OwnerName from './OwnerName';
 
 export default function Card() {
 	const [cardNumber, setCardNumber] = useState({
@@ -49,18 +48,6 @@ export default function Card() {
 		[FIRST_NUMBER]: '',
 		[SECOND_NUMBER]: '',
 	});
-
-	const handleChangeOwnerName = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const {value} = event.target;
-
-		setNumber(
-			OWNER_NAME_LIMIT,
-			setOwnerName,
-			value,
-			false,
-			false,
-		);
-	};
 
 	const handleChangeSecurityCode = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value} = event.target;
@@ -149,19 +136,10 @@ export default function Card() {
 						expirationDate={expirationDate}
 						setExpirationDate={setExpirationDate}
 					/>
-					<div className='input-container'>
-						<div className='input-group'>
-							<span className='input-title'>카드 소유자 이름(선택)</span>
-							<span className='input-title'>{ownerName.length} / {OWNER_NAME_LIMIT}</span>
-						</div>
-						<Input
-							variant='basic'
-							type='text'
-							placeholder={OWNERNAME_PLACEHOLDER}
-							value={ownerName}
-							onChange={handleChangeOwnerName}
-						/>
-					</div>
+					<OwnerName
+						ownerName={ownerName}
+						setOwnerName={setOwnerName}
+					/>
 					<div className='input-container'>
 						<span className='input-title'>보안코드(CVC/CVV)</span>
 						<Input
