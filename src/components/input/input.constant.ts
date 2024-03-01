@@ -1,10 +1,6 @@
-const FACTORY = {
-  TEXT: {
-    TYPE: 'text',
-  },
-  PASSWORD: {
-    TYPE: 'password',
-  },
+const TYPE = {
+  TEXT: 'text',
+  PASSWORD: 'password',
 } as const;
 
 const BOX = {
@@ -14,7 +10,15 @@ const BOX = {
   },
 } as const;
 
+const CLASSNAME = {
+  CONTAINER: 'input-container',
+  TITLE: 'input-title',
+  BOX: 'input-box',
+  BASIC: 'input-basic',
+} as const;
+
 export const INPUT = {
-  FACTORY,
+  TYPE,
   BOX,
+  CLASSNAME,
 } as const;
