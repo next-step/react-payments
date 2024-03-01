@@ -17,6 +17,9 @@ export default function CardAdd() {
   const expirationYYRef = useRef(null);
   const [expirationYY, setExpirationYY] = useState("");
 
+  // 카드 소유자 이름(선택)
+  const cardOwnerNameRef = useRef(null);
+
   // 카드 번호
   const handleCardNumberInput = (event) => {
     const onlyNumberCardValue = getNumberString(event.target.value);
@@ -30,25 +33,29 @@ export default function CardAdd() {
     }
   };
 
-  // 만료일
+  // 만료일(MM)
   const handleExpirationMMInput = (event) => {
     const nowExpirationMM = event.target.value;
 
+    // 빈 문자열
     if (nowExpirationMM === "") {
       setExpirationMM("");
       return;
     }
 
+    // 숫자외 다른 입력
     if (!isNumericString(nowExpirationMM)) {
       alert("숫자만 입력해주세요!");
       return;
     }
 
+    // 유효하지 않은 월
     if (nowExpirationMM.length >= 2 && !isValidateMonth(nowExpirationMM)) {
       alert("유효한 월을 입력해주세요!");
       return;
     }
 
+    // 모두 입력 시, 만료일(YY)
     if (nowExpirationMM.length === 2) {
       expirationYYRef.current.focus();
     }
@@ -56,11 +63,27 @@ export default function CardAdd() {
     setExpirationMM(nowExpirationMM);
   };
 
+  // 만료일(YY)
   const handleExpirationYYInput = (event) => {
     const nowExpirationYY = event.target.value;
-    if (nowExpirationYY.length === 2) {
-      console.log("YY 길이 2개");
+
+    // 빈 문자열
+    if (nowExpirationYY === "") {
+      setExpirationYY("");
+      return;
     }
+
+    // 숫자외 다른 입력
+    if (!isNumericString(nowExpirationYY)) {
+      alert("숫자만 입력해주세요!");
+      return;
+    }
+
+    // 모두 입력 시, 카드 소유자 이름
+    if (nowExpirationYY.length === 2) {
+      cardOwnerNameRef.current.focus();
+    }
+
     setExpirationYY(nowExpirationYY);
   };
 
@@ -121,6 +144,8 @@ export default function CardAdd() {
         <div className="input-container">
           <span className="input-title">카드 소유자 이름(선택)</span>
           <input
+            defaultValue=""
+            ref={cardOwnerNameRef}
             type="text"
             className="input-basic"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
