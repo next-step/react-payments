@@ -1,9 +1,14 @@
 import '../styles/index.css';
+import AddCard from './components/templates/AddCard';
+import CardList from './components/templates/CardList';
+import SaveCard from './components/templates/SaveCard';
 
 function App() {
   return (
     <div className="root">
-      <div className="app">App</div>
+      <CardList />
+      <AddCard />
+      <SaveCard />
     </div>
   );
 }
