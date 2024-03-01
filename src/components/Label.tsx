@@ -1,8 +1,7 @@
 interface LabelProps {
-  className: string;
   label: string;
 }
 
-export default function Label({ className, label }: LabelProps) {
-  return <label className={className}>{label}</label>;
+export default function Label({ label }: LabelProps) {
+  return <label className="input-title">{label}</label>;
 }

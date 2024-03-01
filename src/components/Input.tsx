@@ -1,13 +1,17 @@
-interface InputProps extends React.HTMLProps<HTMLInputElement> {
-  onChange: () => void;
+type InputType = "basic" | "underline";
+
+interface InputProps {
+  style: InputType;
+  value: string | number;
+  onChange: (value: string | number) => void;
 }
 
-export default function Input({ className, onChange, ...rest }: InputProps) {
+export default function Input({ style, value, onChange }: InputProps) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.value);
+  };
+
   return (
-    <div className="input-container">
-      <div className="input-box">
-        <input className={className} onChange={() => onChange()} {...rest} />
-      </div>
-    </div>
+    <input className={`input-${style}`} onChange={handleChange} value={value} />
   );
 }
