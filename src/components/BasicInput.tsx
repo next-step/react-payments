@@ -5,7 +5,7 @@ interface BasicInputProps {
   label: string;
   value: string;
   onChange?: (value: string) => void;
-  onKeydown?: () => void;
+  onKeydown?: (value: string) => void;
 }
 
 export default function BasicInput({
