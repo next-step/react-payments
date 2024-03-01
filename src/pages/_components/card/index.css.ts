@@ -12,6 +12,7 @@ const base = style({
 });
 
 const cardBoxBase = style({
+  margin: 'auto',
   marginBottom: '48px',
 });
 

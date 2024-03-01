@@ -3,6 +3,7 @@ import { style, styleVariants } from '@vanilla-extract/css';
 const base = style({
   display: 'flex',
   marginBottom: '28px',
+  width: '100%',
 });
 
 export const formItem = styleVariants({

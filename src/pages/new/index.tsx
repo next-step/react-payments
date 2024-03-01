@@ -1,7 +1,9 @@
 import { useEffect, useState, useRef, Fragment } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Header, Form, Input } from '@/components';
+import { Header, Form, Input, Button } from '@/components';
 import { Card } from '@/pages/_components';
+import Arrow from '@/assets/arrow.svg?react';
+import * as styles from './index.css';
 import type { CardBrand } from '@/types/card';
 
 const New = () => {
@@ -16,7 +18,7 @@ const New = () => {
     if (!formRef.current) return;
     const formItems = formRef.current.elements;
     setFormItems(formItems);
-  }, [formRef.current]);
+  }, []);
 
   useEffect(() => {
     if (!firstCardNumber) return;
@@ -31,8 +33,18 @@ const New = () => {
 
   return (
     <>
-      <Header left={<button onClick={() => navigate('/')}>뒤로가기</button>}>
-        <h1>카드 추가</h1>
+      <Header
+        left={
+          <Button
+            onClick={() => navigate('/')}
+            aria-label='뒤로가기'
+            type='text'
+          >
+            <Arrow />
+          </Button>
+        }
+      >
+        <h1 className={styles.header}>카드 추가</h1>
       </Header>
       <Card
         brand={cardBrand}
@@ -48,7 +60,11 @@ const New = () => {
         }}
         owner={formData.get('cardOwner')}
       />
-      <main>
+      <main
+        style={{
+          width: '100%',
+        }}
+      >
         <Form
           ref={formRef}
           onChange={(e) => {
@@ -93,45 +109,87 @@ const New = () => {
           }}
         >
           <Form.Item vertical label={'카드번호'}>
-            <div style={{ display: 'flex' }}>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr 1fr 1fr',
+                alignItems: 'center',
+                backgroundColor: '#ecebf1',
+                borderRadius: '8px',
+              }}
+            >
               {[1, 2, 3, 4].map((i) => (
                 <Fragment key={i}>
-                  <Input
-                    required
-                    name={`cardNumber${i}`}
-                    type='text'
-                    inputMode='numeric'
-                    minLength={4}
-                    maxLength={4}
-                  />
-                  {i !== 4 && formData.get(`cardNumber${i}`)?.length === 4 && (
-                    <span>-</span>
-                  )}
+                  <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <Input
+                      required
+                      name={`cardNumber${i}`}
+                      type={i > 2 ? 'password' : 'text'}
+                      inputMode='numeric'
+                      minLength={4}
+                      maxLength={4}
+                      style={{ textAlign: 'center' }}
+                    />
+                    {i !== 4 && (
+                      <span
+                        style={{
+                          opacity:
+                            formData.get(`cardNumber${i}`)?.length === 4
+                              ? 1
+                              : 0,
+                          color: '#04C09E',
+                        }}
+                      >
+                        -
+                      </span>
+                    )}
+                  </div>
                 </Fragment>
               ))}
             </div>
           </Form.Item>
           <Form.Item vertical label={'만료일'}>
-            <Input
-              required
-              type='number'
-              inputMode='numeric'
-              placeholder='MM'
-              name='expireDateMonth'
-              maxLength={2}
-              data-rule={'^(0[1-9]|1[0-2])$'}
-              data-message={'01~12월 사이의 숫자만 입력해주세요'}
-            />
-            {formData.get('expireDateMonth')?.length === 2 && <span>/</span>}
-            <Input
-              required
-              type='number'
-              inputMode='numeric'
-              placeholder='YY'
-              name='expireDateYear'
-              minLength={2}
-              maxLength={2}
-            />
+            <div
+              style={{
+                display: 'grid',
+                width: '50%',
+                gridTemplateColumns: '1fr auto 1fr',
+                alignItems: 'center',
+                backgroundColor: '#ecebf1',
+                borderRadius: '8px',
+              }}
+            >
+              <Input
+                required
+                type='number'
+                inputMode='numeric'
+                placeholder='MM'
+                name='expireDateMonth'
+                maxLength={2}
+                data-rule={'^(0[1-9]|1[0-2])$'}
+                data-message={'01~12월 사이의 숫자만 입력해주세요'}
+                style={{ textAlign: 'right' }}
+              />
+              <span
+                style={{
+                  opacity:
+                    formData.get('expireDateMonth')?.length === 2 ? 1 : 0,
+                  transform: 'translateX(-6px)',
+                  color: '#04C09E',
+                }}
+              >
+                /
+              </span>
+              <Input
+                required
+                type='number'
+                inputMode='numeric'
+                placeholder='YY'
+                name='expireDateYear'
+                minLength={2}
+                maxLength={2}
+              />
+            </div>
           </Form.Item>
           <Form.Item
             vertical
@@ -150,35 +208,95 @@ const New = () => {
             />
           </Form.Item>
           <Form.Item vertical label={'보안코드(CVC/CVV)'}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <Input name='cvc' type='text' inputMode='numeric' maxLength={3} />
-              <div>툴팁</div>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+              }}
+            >
+              <Input
+                name='cvc'
+                type='password'
+                inputMode='numeric'
+                maxLength={3}
+                style={{
+                  // width: '60px',
+                  width: '60px',
+                  textAlign: 'center',
+                  letterSpacing: '8px',
+                }}
+              />
+              <div style={{ flexGrow: 1 }}>툴팁</div>
             </div>
           </Form.Item>
           <Form.Item vertical label={'카드 비밀번호'}>
             <div
               style={{
                 display: 'grid',
+                width: 'fit-content',
+                gap: '8px',
                 gridTemplateColumns: '1fr 1fr 1fr 1fr',
               }}
             >
-              <Input
-                name='password1'
-                type='password'
-                inputMode='numeric'
-                maxLength={1}
-              />
-              <Input
-                name='password2'
-                type='password'
-                inputMode='numeric'
-                maxLength={1}
-              />
-              <div>•</div>
-              <div>•</div>
+              <div
+                style={{
+                  width: '42.5px',
+                }}
+              >
+                <Input
+                  name='password1'
+                  type='password'
+                  inputMode='numeric'
+                  maxLength={1}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  width: '42.5px',
+                  textAlign: 'center',
+                }}
+              >
+                <Input
+                  name='password2'
+                  type='password'
+                  inputMode='numeric'
+                  maxLength={1}
+                  style={{
+                    textAlign: 'center',
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  width: '42.5px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                •
+              </div>
+              <div
+                style={{
+                  width: '42.5px',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                •
+              </div>
             </div>
           </Form.Item>
-          <button type='submit'>다음</button>
+          <div style={{ textAlign: 'end' }}>
+            <Button htmlType='submit' type='text' style={{ color: '#04C09E' }}>
+              다음
+            </Button>
+          </div>
         </Form>
       </main>
     </>
