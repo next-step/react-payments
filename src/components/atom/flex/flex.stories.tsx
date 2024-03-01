@@ -4,7 +4,7 @@ import { Flex } from './flex'
 import { layoutArgTypes } from '@/stories/arg-types.ts'
 
 const meta: Meta<typeof Flex> = {
-  title: 'atom/Flex',
+  title: 'atoms/Flex',
   component: Flex,
   tags: ['autodocs'],
   argTypes: { ...layoutArgTypes },
