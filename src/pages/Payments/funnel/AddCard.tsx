@@ -29,22 +29,17 @@ export const AddCard = () => {
       <Card.Number />
       <Card.ExpireDate />
       <Card.OwnerName />
+      <Card.SecurityCode />
 
       {/*
-
-
-      <Input.Container>
-        <Input.Title>보안코드(CVC/CVV)</Input.Title>
-        <Input type={INPUT.TYPE.PASSWORD} className='w-25' />
-      </Input.Container>
-
       <Input.Container>
         <Input.Title>카드 비밀번호</Input.Title>
         <Input type={INPUT.TYPE.PASSWORD} className='w-15' />
         <Input type={INPUT.TYPE.PASSWORD} className='w-15' />
         <Input type={INPUT.TYPE.PASSWORD} className='w-15' />
         <Input type={INPUT.TYPE.PASSWORD} className='w-15' />
-      </Input.Container> */}
+      </Input.Container>
+      */}
 
       <div className='button-box'>
         <span className='button-text'>다음</span>

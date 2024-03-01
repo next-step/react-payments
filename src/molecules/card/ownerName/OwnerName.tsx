@@ -3,9 +3,12 @@ import { useInputFields } from '@/hooks/useInputFields';
 import { OWNER_NAME } from './ownerName.constant';
 
 export const OwnerName = () => {
-  const { fields, autoFocusRefs, onFieldChange } = useInputFields(
-    Object.values(OWNER_NAME.FIELDS)
-  );
+  const { fields, autoFocusRefs, onFieldChange, fieldsFulfilled } =
+    useInputFields(Object.values(OWNER_NAME.FIELDS));
+
+  const optionalClassName = fieldsFulfilled.every((field) => field)
+    ? 'text-fulfilled'
+    : '';
 
   return (
     <Input.Container>
@@ -21,6 +24,7 @@ export const OwnerName = () => {
               onFieldChange(event, fieldIndex)
             }
             placeholder={field.PLACEHOLDER}
+            className={optionalClassName}
           />
         ))}
       </Input.Box>
