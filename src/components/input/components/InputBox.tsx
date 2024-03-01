@@ -1,7 +1,7 @@
 import { Children, Fragment } from 'react';
 import { InputBoxProps } from '../input.type';
 
-export const InputBox = ({ children, separator, className }: InputBoxProps) => {
+export const InputBox = ({ separator, className, children }: InputBoxProps) => {
   if (separator === undefined) {
     return <div className={`input-box ${className}`}>{children}</div>;
   }
