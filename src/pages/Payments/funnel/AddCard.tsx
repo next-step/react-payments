@@ -3,7 +3,7 @@ import { STEP } from '../payments.constant';
 import { PaymentsStepKey } from '../payments.type';
 // import { Input } from '@/components/input/Input';
 // import { INPUT } from '@/components/input/input.constant';
-import { CardNumber } from '@/molecules/cardNumbers/CardNumber';
+import { Card } from '@/molecules/card/Card';
 
 export const AddCard = () => {
   const { setStep } = usePaymentsFunnel();
@@ -26,7 +26,8 @@ export const AddCard = () => {
         </div>
       </div>
 
-      <CardNumber />
+      <Card.Number />
+      <Card.ExpireDate />
 
       {/* <Input.Container>
         <Input.Title>만료일</Input.Title>

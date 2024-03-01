@@ -5,36 +5,32 @@ export const INPUT_FIELDS = {
     TYPE: 'number',
     REGEX: /\D/g,
   },
-  TEXT: {
-    TYPE: 'text',
+  STRING: {
+    TYPE: 'string',
     REGEX: /[^a-zA-Z]/g,
   },
 } as const;
 
 type InputFieldType = (typeof INPUT_FIELDS)[keyof typeof INPUT_FIELDS]['TYPE'];
 
-interface UseInputFieldProps {
-  fieldAmount: number;
-  type: InputFieldType;
+interface FieldConfig {
+  fieldType: InputFieldType;
   maxLength?: number;
+  validation?: (fields: string) => boolean;
   onFieldChangeCallback?: (fields: string[]) => void;
 }
 
-export const useInputFields = ({
-  fieldAmount,
-  type,
-  maxLength,
-  onFieldChangeCallback,
-}: UseInputFieldProps) => {
-  const [fields, setValue] = useState<string[]>(
+export const useInputFields = (fieldConfigs: FieldConfig[]) => {
+  const fieldAmount = fieldConfigs.length;
+  const [fields, setFields] = useState<string[]>(
     Array.from({ length: fieldAmount }, () => '')
   );
-  const [autoFocusRef, setAutoFocusRef] = useState<
+  const [autoFocusRefs, setAutoFocusRefs] = useState<
     React.RefObject<HTMLInputElement>[]
   >([]);
 
   useEffect(() => {
-    setAutoFocusRef(
+    setAutoFocusRefs(
       Array.from({ length: fieldAmount }, () => createRef<HTMLInputElement>())
     );
   }, [fieldAmount]);
@@ -42,35 +38,41 @@ export const useInputFields = ({
   const getRegex = (inputType: InputFieldType) => {
     return inputType === INPUT_FIELDS.NUMBER.TYPE
       ? INPUT_FIELDS.NUMBER.REGEX
-      : INPUT_FIELDS.TEXT.REGEX;
+      : INPUT_FIELDS.STRING.REGEX;
   };
 
   const onFieldChange = (
     { target }: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-    const fieldsValue = [...fields];
-    const changedField = target.value.replace(getRegex(type), '');
+    const newFields = [...fields];
+    const { maxLength, fieldType, onFieldChangeCallback, validation } =
+      fieldConfigs[index];
+    const changedValue = target.value.replace(getRegex(fieldType), '');
 
-    if (maxLength && changedField.length > maxLength) return;
-
-    fieldsValue[index] = changedField;
-
-    if (fieldsValue[index].length === maxLength && index < fieldAmount - 1) {
-      autoFocusRef[index + 1].current?.focus();
+    if (!maxLength || (maxLength && changedValue.length <= maxLength)) {
+      newFields[index] = changedValue;
+      setFields(newFields);
+      onFieldChangeCallback?.(newFields);
     }
 
-    setValue(fieldsValue);
-    onFieldChangeCallback?.(fieldsValue);
+    if (validation && validation(changedValue) && index < fieldAmount - 1) {
+      autoFocusRefs[index + 1].current?.focus();
+    }
   };
 
-  // FIXME: 조건이 가변적이니 상위에서 주입하도록 변경
-  const fulfilled = fields.every((field) => field.length === maxLength);
+  const fieldsFulfilled = fields.map((field, index) => {
+    const { validation } = fieldConfigs[index];
+
+    if (validation) {
+      return validation(field);
+    }
+  });
 
   return {
     fields,
-    autoFocusRef,
+    autoFocusRefs,
     onFieldChange,
-    fulfilled,
+    fieldsFulfilled,
   };
 };

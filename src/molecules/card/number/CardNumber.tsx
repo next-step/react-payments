@@ -6,20 +6,21 @@ import { INPUT } from '@/components/input/input.constant';
 export const CardNumber = () => {
   const {
     fields: numberFields,
-    autoFocusRef,
+    autoFocusRefs,
     onFieldChange,
-    fulfilled,
-  } = useInputFields({
-    fieldAmount: Object.values(CARD_NUMBER.FIELDS).length,
-    type: CARD_NUMBER.TYPE,
-    maxLength: CARD_NUMBER.MAX_LENGTH,
-  });
+    fieldsFulfilled,
+  } = useInputFields([
+    CARD_NUMBER.FIELDS.FIRST,
+    CARD_NUMBER.FIELDS.SECOND,
+    CARD_NUMBER.FIELDS.THIRD,
+    CARD_NUMBER.FIELDS.FOURTH,
+  ]);
 
-  const optionalClassName = fulfilled ? 'text-fulfilled' : '';
+  const optionalClassName = fieldsFulfilled.every((field) => field)
+    ? 'text-fulfilled'
+    : '';
 
-  const eachFieldFulfilled = numberFields.map(
-    (field) => field.length === CARD_NUMBER.MAX_LENGTH
-  );
+  const eachFieldFulfilled = numberFields.map((field) => field.length === 4);
 
   return (
     <Input.Container>
@@ -34,7 +35,7 @@ export const CardNumber = () => {
           <Input
             key={field.ID}
             type={field.TYPE}
-            ref={autoFocusRef[fieldIndex]}
+            ref={autoFocusRefs[fieldIndex]}
             value={numberFields[fieldIndex]}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
               onFieldChange(event, fieldIndex)
