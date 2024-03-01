@@ -1,4 +1,4 @@
-import { ContainerProps, RestProps } from '@/types';
+import { RestProps } from '@/types';
 import { INPUT } from './input.constant';
 
 export type InputType = (typeof INPUT.TYPE)[keyof typeof INPUT.TYPE];
@@ -17,7 +17,11 @@ export interface DefaultInputProps {
   type: InputType;
 }
 
-export interface InputBoxProps extends ContainerProps {
-  separator?: Separator;
+export interface InputBoxProps extends RestProps {
+  children: React.ReactNode;
   className?: string;
+  separator?: {
+    eachFieldFulfilled: boolean[];
+    symbol: Separator;
+  };
 }

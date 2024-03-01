@@ -14,30 +14,30 @@ export const INPUT_FIELDS = {
 type InputFieldType = (typeof INPUT_FIELDS)[keyof typeof INPUT_FIELDS]['TYPE'];
 
 interface UseInputFieldProps {
-  amount: number;
+  fieldAmount: number;
   type: InputFieldType;
   maxLength?: number;
   onFieldChangeCallback?: (fields: string[]) => void;
 }
 
 export const useInputFields = ({
-  amount,
+  fieldAmount,
   type,
   maxLength,
   onFieldChangeCallback,
 }: UseInputFieldProps) => {
-  const [value, setValue] = useState<string[]>(
-    Array.from({ length: amount }, () => '')
+  const [fields, setValue] = useState<string[]>(
+    Array.from({ length: fieldAmount }, () => '')
   );
-  const [inputRefs, setInputRefs] = useState<
+  const [autoFocusRef, setAutoFocusRef] = useState<
     React.RefObject<HTMLInputElement>[]
   >([]);
 
   useEffect(() => {
-    setInputRefs(
-      Array.from({ length: amount }, () => createRef<HTMLInputElement>())
+    setAutoFocusRef(
+      Array.from({ length: fieldAmount }, () => createRef<HTMLInputElement>())
     );
-  }, [amount]);
+  }, [fieldAmount]);
 
   const getRegex = (inputType: InputFieldType) => {
     return inputType === INPUT_FIELDS.NUMBER.TYPE
@@ -49,20 +49,28 @@ export const useInputFields = ({
     { target }: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
-    const fields = [...value];
+    const fieldsValue = [...fields];
     const changedField = target.value.replace(getRegex(type), '');
 
     if (maxLength && changedField.length > maxLength) return;
 
-    fields[index] = changedField;
+    fieldsValue[index] = changedField;
 
-    if (fields[index].length === maxLength && index < amount - 1) {
-      inputRefs[index + 1].current?.focus();
+    if (fieldsValue[index].length === maxLength && index < fieldAmount - 1) {
+      autoFocusRef[index + 1].current?.focus();
     }
 
-    setValue(fields);
-    onFieldChangeCallback?.(fields);
+    setValue(fieldsValue);
+    onFieldChangeCallback?.(fieldsValue);
   };
 
-  return { value, inputRefs, onFieldChange };
+  // FIXME: 조건이 가변적이니 상위에서 주입하도록 변경
+  const fulfilled = fields.every((field) => field.length === maxLength);
+
+  return {
+    fields,
+    autoFocusRef,
+    onFieldChange,
+    fulfilled,
+  };
 };
