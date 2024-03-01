@@ -44,6 +44,19 @@ describe("Input 입력 테스트", () => {
     expect(input).toBeTruthy();
   });
 
+  // 비슷한 유형의 테스트를 다른 곳에서 작성했는데 또 할 필요가 있을까?
+  it("태그 변경 적용", () => {
+    render(
+      <Form>
+        <Input as="textarea" type={"number"} name={"number"} />
+      </Form>
+    );
+
+    const input = document.querySelector("textarea");
+
+    expect(input).toBeTruthy();
+  });
+
   it("스타일 클래스 적용", () => {
     render(
       <Form>
