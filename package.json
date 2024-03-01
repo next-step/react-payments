@@ -12,6 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@vanilla-extract/css": "^1.14.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.1"
@@ -30,6 +31,7 @@
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
+    "@vanilla-extract/vite-plugin": "^4.0.4",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "chromatic": "^11.0.0",
     "eslint": "^8.56.0",
