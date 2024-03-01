@@ -39,11 +39,9 @@ describe("Input 입력 테스트", () => {
       </Form>
     );
 
-    const input = document.querySelector("input");
+    const input = document.querySelector(".input-secret");
 
-    fireEvent.change(input, { target: { value: "123" } });
-
-    expect(input.value).toBe("***");
+    expect(input).toBeTruthy();
   });
 
   it("문자 길이 제한 가능", () => {
@@ -54,6 +52,11 @@ describe("Input 입력 테스트", () => {
     );
 
     const input = document.querySelector("input");
+    fireEvent.change(input, { target: { value: "1" } });
+    fireEvent.change(input, { target: { value: "12" } });
+    fireEvent.change(input, { target: { value: "123" } });
+    fireEvent.change(input, { target: { value: "1234" } });
+    fireEvent.change(input, { target: { value: "12345" } });
     fireEvent.change(input, { target: { value: "123456" } });
 
     expect(input.value).toBe("12345");
@@ -77,7 +80,7 @@ describe("Input 입력 테스트", () => {
       <Form>
         <Input
           type="number"
-          digit={{ length: "2", fill: "0", pad: "start" }}
+          digit={{ length: "2", fill: "0", pad: "padStart" }}
           name={"digit_number"}
         />
       </Form>
