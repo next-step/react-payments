@@ -1,7 +1,12 @@
-import Header from './components/common'
+import Payments from '.'
+import CardInfoProvider from './context/paymentContext'
 
 function App() {
-  return <Header />
+  return (
+    <CardInfoProvider>
+      <Payments />
+    </CardInfoProvider>
+  )
 }
 
 export default App
