@@ -1,25 +1,21 @@
-<!DOCTYPE html>
-<html lang="ko">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="./styles/index.css" />
-		<title>React Clean Code Payments</title>
-	</head>
-	<body>
+import logo from './logo.svg';
+import './App.css';
+
+function App() {
+  return (
+    <div className="App">
 		<h1>React Clean Code Payments CSS example</h1>
 
-		<!-- 
+		{/* <!-- 
 
     PAGE 01
 
-     -->
+     --> */}
 
 		<h2>1️⃣ 카드 추가</h2>
 		<div class="root">
 			<div class="app">
-				<h2 class="page-title">< 카드 추가</h2>
+				<h2 class="page-title">카드 추가</h2>
 				<div class="card-box">
 					<div class="empty-card">
 						<div class="card-top"></div>
@@ -75,16 +71,16 @@
 			</div>
 		</div>
 
-		<!-- 
+		{/* <!-- 
 
     PAGE 02
 
-     -->
+     --> */}
 
 		<h2>2️⃣ 카드 추가 - 카드사 선택</h2>
 		<div class="root">
 			<div class="app">
-				<h2 class="page-title">< 카드 추가</h2>
+				<h2 class="page-title"> 카드 추가</h2>
 				<div class="card-box">
 					<div class="small-card">
 						<div class="card-top">
@@ -185,16 +181,16 @@
       </div>
 		</div>
 
-		<!-- 
+		{/* <!-- 
 
     PAGE 03
 
-     -->
+     --> */}
 
 		<h2>3️⃣ 카드 추가 - 입력 완료</h2>
 		<div class="root">
 			<div class="app">
-				<h2 class="page-title">< 카드 추가</h2>
+				<h2 class="page-title"> 카드 추가</h2>
 				<div class="card-box">
 					<div class="small-card">
 						<div class="card-top">
@@ -260,12 +256,12 @@
 				</div>
 			</div>
 		</div>
-
+{/* 
 		<!-- 
 
     PAGE 04
 
-     -->
+     --> */}
 
 		<h2>4️⃣ 카드 추가 완료</h2>
 		<div class="root">
@@ -305,11 +301,11 @@
 			</div>
 		</div>
 
-		<!-- 
+		{/* <!-- 
 
     PAGE 05
 
-     -->
+     --> */}
 
 		<h2>5️⃣ 카드 목록</h2>
 		<div class="root">
@@ -342,5 +338,8 @@
 				</div>
 			</div>
 		</div>
-	</body>
-</html>
+    </div>
+  );
+}
+
+export default App;
