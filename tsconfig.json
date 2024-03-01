@@ -24,7 +24,12 @@
     "paths": {
       "@/*": ["*"],
       "@components/*": ["components/*"],
-      "@assets/*": ["assets/*"]
+      "@components/atoms/*": ["components/atoms/*"],
+      "@components/molecules/*": ["components/molecules/*"],
+      "@components/organisms/*": ["components/organisms/*"],
+      "@assets/*": ["assets/*"],
+      "@styles/*": ["styles/*"],
+      "@entities/*": ["entities/*"]
     }
   },
   "include": ["src"],
