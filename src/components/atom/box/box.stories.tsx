@@ -3,7 +3,7 @@ import { Box } from './box'
 import { layoutArgTypes } from '@/stories/arg-types.ts'
 
 const meta: Meta<typeof Box> = {
-  title: 'atom/Box',
+  title: 'atoms/Box',
   component: Box,
   tags: ['autodocs'],
   argTypes: { ...layoutArgTypes },
@@ -14,6 +14,7 @@ export default meta
 type Story = StoryObj<typeof Box>
 
 export const Default: Story = {
+  render: args => <Box {...args} />,
   args: {
     children: 'Box - Create Whatever you need',
     as: 'button',
