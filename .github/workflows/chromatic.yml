@@ -16,7 +16,7 @@ jobs:
         #👇 Checks out the repository code
         uses: actions/checkout@v1
       - name: Install dependencies
-        run: yarn
+        run: npm install
         #👇 Adds Chromatic as a step in the workflow
       - name: Chromatic
         id: chromatic
