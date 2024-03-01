@@ -30,7 +30,7 @@ StepChild.propTypes = {
   children: PropTypes.node,
 };
 
-describe("useFunnel 상태 변경 테스트", () => {
+describe("Funnel 상태 변경 테스트", () => {
   afterEach(cleanup);
 
   it("현재 패널 반환", () => {
