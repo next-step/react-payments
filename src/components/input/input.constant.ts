@@ -7,12 +7,14 @@ const FACTORY = {
   },
 } as const;
 
-const SEPARATOR = {
-  HYPHEN: '-',
-  SLASH: '/',
+const BOX = {
+  SEPARATOR: {
+    HYPHEN: '-',
+    SLASH: '/',
+  },
 } as const;
 
 export const INPUT = {
   FACTORY,
-  SEPARATOR,
+  BOX,
 } as const;

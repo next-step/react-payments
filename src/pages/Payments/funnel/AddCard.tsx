@@ -27,7 +27,7 @@ export const AddCard = () => {
 
       <Input.Container>
         <Input.Title>카드 번호</Input.Title>
-        <Input.Box separator={INPUT.SEPARATOR.SLASH}>
+        <Input.Box separator={INPUT.BOX.SEPARATOR.SLASH}>
           <Input type={INPUT.FACTORY.TEXT.TYPE} />
           <Input type={INPUT.FACTORY.TEXT.TYPE} />
           <Input type={INPUT.FACTORY.PASSWORD.TYPE} />
@@ -37,7 +37,7 @@ export const AddCard = () => {
 
       <Input.Container>
         <Input.Title>만료일</Input.Title>
-        <Input.Box separator={INPUT.SEPARATOR.SLASH} className='w-50'>
+        <Input.Box separator={INPUT.BOX.SEPARATOR.SLASH} className='w-50'>
           <Input type={INPUT.FACTORY.TEXT.TYPE} placeholder='MM' />
           <Input type={INPUT.FACTORY.TEXT.TYPE} placeholder='YY' />
         </Input.Box>
