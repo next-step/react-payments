@@ -1,23 +1,20 @@
 import { Meta, StoryObj } from "@storybook/react";
-import BasicInput from "./BasicInput";
-
-import "../styles/input.css";
+import CardNumberInput from "./CardNumberInput";
 
 const meta = {
-  title: "BasicInput",
-  component: BasicInput,
+  title: "AddCard/CardNumberInput",
+  component: CardNumberInput,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof BasicInput>;
+} satisfies Meta<typeof CardNumberInput>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   args: {
-    label: "This is label",
-    value: "123",
+    cardNumber: "1234567812345678",
   },
 };

@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from "@storybook/react";
 import UnderlineInput from "./UnderlineInput";
 
-import "../styles/input.css";
+import "../../styles/input.css";
 
 const meta = {
-  title: "UnderlineInput",
+  title: "Common/UnderlineInput",
   component: UnderlineInput,
   parameters: {
     layout: "centered",

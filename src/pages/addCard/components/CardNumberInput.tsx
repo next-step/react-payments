@@ -1,6 +1,6 @@
 import { SetStateAction, useCallback, useState } from "react";
-import BasicInput from "../../components/BasicInput";
-import { toMaskedCardNumber } from "../../utils/stringUtils";
+import BasicInput from "../../../components/input/BasicInput";
+import { toMaskedCardNumber } from "../../../utils/stringUtils";
 
 const CARN_NUMBER_LENGTH = 16;
 
