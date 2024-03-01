@@ -11,9 +11,16 @@ describe("Box 테스트", () => {
   });
 
   it("스타일 클래스 적용", () => {
-    render(<Box className="empty-card"></Box>);
+    render(<Box as="div" className="empty-card"></Box>);
 
     const box = document.querySelector(".empty-card");
+    expect(box).toBeTruthy();
+  });
+
+  it("여러 스타일 클래스 적용", () => {
+    render(<Box as="div" className={["empty-card", "card"]}></Box>);
+
+    const box = document.querySelector(".empty-card.card");
     expect(box).toBeTruthy();
   });
 });
