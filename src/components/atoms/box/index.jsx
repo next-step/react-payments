@@ -2,7 +2,7 @@ import { createElement } from "react";
 import PropTypes from "prop-types";
 
 const Box = (props) => {
-  const { className, as, children } = props;
+  const { className, as = "div", children } = props;
 
   const classes = Array.isArray(className) ? className.join(" ") : className;
 
