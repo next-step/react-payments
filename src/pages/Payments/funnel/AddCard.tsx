@@ -28,24 +28,10 @@ export const AddCard = () => {
 
       <Card.Number />
       <Card.ExpireDate />
+      <Card.OwnerName />
 
-      {/* <Input.Container>
-        <Input.Title>만료일</Input.Title>
-        <Input.Box separator={INPUT.BOX.SEPARATOR.SLASH} className='w-50'>
-          <Input type={INPUT.TYPE.TEXT} placeholder='MM' />
-          <Input type={INPUT.TYPE.TEXT} placeholder='YY' />
-        </Input.Box>
-      </Input.Container>
+      {/*
 
-      <Input.Container>
-        <Input.Title>카드 소유자 이름(선택)</Input.Title>
-        <Input.Box>
-          <Input
-            type={INPUT.TYPE.TEXT}
-            placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
-          />
-        </Input.Box>
-      </Input.Container>
 
       <Input.Container>
         <Input.Title>보안코드(CVC/CVV)</Input.Title>
