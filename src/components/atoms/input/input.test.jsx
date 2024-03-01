@@ -43,4 +43,32 @@ describe("Input 입력 테스트", () => {
 
     expect(input).toBeTruthy();
   });
+
+  it("스타일 클래스 적용", () => {
+    render(
+      <Form>
+        <Input type={"number"} name={"number"} className="input" />
+      </Form>
+    );
+
+    const input = document.querySelector(".input");
+
+    expect(input).toBeTruthy();
+  });
+
+  it("여러 스타일 클래스 적용", () => {
+    render(
+      <Form>
+        <Input
+          type={"number"}
+          name={"number"}
+          className={["input", "number"]}
+        />
+      </Form>
+    );
+
+    const input = document.querySelector(".input.number");
+
+    expect(input).toBeTruthy();
+  });
 });
