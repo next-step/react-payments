@@ -39,7 +39,7 @@ export const WithPadding: Story = {
 
 export const WithBorder: Story = {
   args: {
-    border: `2px solid ${styleToken.color.gray500}`,
+    border: `2px solid ${styleToken.color.gray600}`,
   },
 };
 
@@ -65,7 +65,7 @@ export const WithChildren: Story = {
           display="flex"
           alignItems="center"
           justifyContent="center"
-          backgroundColor={styleToken.color.teal}
+          backgroundColor={styleToken.color.teal100}
           width="100px"
           height="100px"
         >

@@ -52,6 +52,7 @@ export type TypographyProps = {
   fontWeight?: CSSProperties['fontWeight'];
   lineHeight?: CSSProperties['lineHeight'];
   textAlign?: CSSProperties['textAlign'];
+  letterSpacing?: CSSProperties['letterSpacing'];
 };
 
 export type BackgroundProps = {
@@ -85,4 +86,5 @@ export type OtherProps = {
   opacity?: CSSProperties['opacity'];
   overflow?: CSSProperties['overflow'];
   transition?: CSSProperties['transition'];
+  outline?: CSSProperties['outline'];
 };
