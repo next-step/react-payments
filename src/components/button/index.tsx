@@ -1,48 +1,27 @@
-import React from 'react';
-import './button.css';
+import { cn } from '@/utils';
+import * as styles from './index.css';
 
-interface ButtonProps {
-  /**
-   * Is this the principal call to action on the page?
-   */
+import type { HTMLProps, ReactNode } from 'react';
+
+interface ButtonProps extends HTMLProps<HTMLButtonElement> {
+  children: ReactNode | string;
+  type?: 'primary' | 'secondary' | 'text';
+  htmlType?: 'button' | 'submit' | 'reset';
   primary?: boolean;
-  /**
-   * What background color to use
-   */
-  backgroundColor?: string;
-  /**
-   * How large should the button be?
-   */
-  size?: 'small' | 'medium' | 'large';
-  /**
-   * Button contents
-   */
-  label: string;
-  /**
-   * Optional click handler
-   */
-  onClick?: () => void;
 }
 
-/**
- * Primary UI component for user interaction
- */
-export const Button = ({
-  primary = false,
-  size = 'medium',
-  backgroundColor,
-  label,
-  ...props
+const Button = ({
+  children,
+  className,
+  type = 'primary',
+  htmlType,
+  ...restProps
 }: ButtonProps) => {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+  const classNames = cn([styles.buttonType[type], className ?? '']);
   return (
-    <button
-      type="button"
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={{ backgroundColor }}
-      {...props}
-    >
-      {label}
+    <button {...restProps} type={htmlType} className={classNames}>
+      <>{children}</>
     </button>
   );
 };
+export default Button;
