@@ -21,7 +21,7 @@ describe("Input 입력 테스트", () => {
   it("숫자만 입력 가능", () => {
     render(
       <Form>
-        <Input type={"number"} />
+        <Input type={"number"} name={"number"} />
       </Form>
     );
 
@@ -35,7 +35,7 @@ describe("Input 입력 테스트", () => {
   it("* 처리 숫자만 입력 가능", () => {
     render(
       <Form>
-        <Input type={"number"} secret={true} />
+        <Input type={"number"} secret={true} name={"secret_number"} />
       </Form>
     );
 
@@ -49,7 +49,7 @@ describe("Input 입력 테스트", () => {
   it("문자 길이 제한 가능", () => {
     render(
       <Form>
-        <Input type={"text"} maxLength={5} />
+        <Input type={"text"} maxLength={5} name={"length_string"} />
       </Form>
     );
 
@@ -62,7 +62,7 @@ describe("Input 입력 테스트", () => {
   it("숫자 범위 제한 가능", () => {
     render(
       <Form>
-        <Input type={"number"} min={1} max={12} />
+        <Input type={"number"} min={1} max={12} name={"period_number"} />
       </Form>
     );
 
@@ -75,7 +75,11 @@ describe("Input 입력 테스트", () => {
   it("숫자 자릿수 설정 가능", () => {
     render(
       <Form>
-        <Input type="number" digit={{ length: "2", fill: "0", pad: "start" }} />
+        <Input
+          type="number"
+          digit={{ length: "2", fill: "0", pad: "start" }}
+          name={"digit_number"}
+        />
       </Form>
     );
 
