@@ -23,8 +23,6 @@ export interface InlineStyleProps {
   maxWidth?: string
   /** inline css max-height property */
   maxHeight?: string
-  /** inline css aspectRatio property */
-  aspectRatio?: string
 }
 
 export const inlineStylePropsSet = new Set([
@@ -34,7 +32,6 @@ export const inlineStylePropsSet = new Set([
   'minHeight',
   'maxWidth',
   'maxHeight',
-  'aspectRatio',
 ] as const)
 
 export interface SpaceProps extends ShorthandsProps {
@@ -57,55 +54,3 @@ export interface SpaceProps extends ShorthandsProps {
 }
 
 export type LayoutProps = SpaceProps & InlineStyleProps
-
-export const getLayoutProps = <T extends LayoutProps>(props: T) => {
-  const {
-    margin,
-    marginX,
-    marginY,
-    marginTop,
-    marginBottom,
-    marginLeft,
-    marginRight,
-    padding,
-    paddingX,
-    paddingY,
-    paddingTop,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-    width,
-    minWidth,
-    maxWidth,
-    height,
-    minHeight,
-    maxHeight,
-    ...rest
-  } = props
-
-  return {
-    layoutProps: {
-      margin,
-      marginX,
-      marginY,
-      marginTop,
-      marginBottom,
-      marginLeft,
-      marginRight,
-      padding,
-      paddingX,
-      paddingY,
-      paddingTop,
-      paddingBottom,
-      paddingLeft,
-      paddingRight,
-      width,
-      minWidth,
-      maxWidth,
-      height,
-      minHeight,
-      maxHeight,
-    },
-    ...rest,
-  }
-}

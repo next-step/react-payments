@@ -13,7 +13,6 @@ export const fontSize = {
   '14px': '0.875rem',
   '13px': '0.8125rem',
   '12px': '0.75rem',
-  '10px': '0.625rem',
 }
 
 export const fontWeight = {

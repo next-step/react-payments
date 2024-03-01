@@ -25,7 +25,6 @@ const block = style({
 })
 
 const button = style({
-  cursor: 'pointer',
   background: 'none',
 })
 
@@ -56,6 +55,9 @@ const field = style([
   appearance,
   style({
     outline: 'none',
+    '::placeholder': {
+      opacity: '0.1',
+    },
   }),
 ])
 
