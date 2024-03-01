@@ -1,8 +1,7 @@
 import { useContext, useState } from 'react'
 import { CardInfoContext } from './context/paymentContext'
 import { Button } from './stories/Button'
-import { CardBox, CardCvc, CardName, CardNumber, CardPassword, CardType } from './components'
-import ValidityInput from './components/common/ValidityDateInput'
+import { CardBox, CardCvc, CardName, CardNumber, CardPassword, CardType, CardDate } from './components'
 import ui from './styles/index.module.css'
 
 type StepProps = {
@@ -22,14 +21,7 @@ const AddCard = ({ onBack, onNext }: StepProps) => {
           <h2 className={ui['page-title']}>카드 추가</h2>
           <CardBox />
           <CardNumber />
-          <div className={ui['input-container']}>
-            <span className={ui['input-title']}>만료일</span>
-            <div className={`${ui['input-box']} ${ui['w-50']}`}>
-              <ValidityInput />
-              {/* <input className={ui['input-basic']} type={ui['text" placeholder=MM />
-              <input className={ui['input-basic']} type={ui['text" placeholder=YY /> */}
-            </div>
-          </div>
+          <CardDate />
           <CardName />
           <CardCvc />
           <CardPassword />
