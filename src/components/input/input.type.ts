@@ -21,7 +21,7 @@ export interface InputBoxProps extends RestProps {
   children: React.ReactNode;
   className?: string;
   separator?: {
-    eachFieldFulfilled: boolean[];
+    fieldsFulfilled: boolean[];
     symbol: Separator;
   };
 }

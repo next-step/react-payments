@@ -19,12 +19,12 @@ export const InputBox = ({ separator, className, children }: InputBoxProps) => {
           return child;
         }
 
-        const { eachFieldFulfilled, symbol } = separator;
+        const { fieldsFulfilled, symbol } = separator;
 
         return (
           <Fragment key={index}>
             {child}
-            {eachFieldFulfilled[index] && <span>{symbol}</span>}
+            {fieldsFulfilled[index] && <span>{symbol}</span>}
           </Fragment>
         );
       })}

@@ -9,18 +9,11 @@ export const CardNumber = () => {
     autoFocusRefs,
     onFieldChange,
     fieldsFulfilled,
-  } = useInputFields([
-    CARD_NUMBER.FIELDS.FIRST,
-    CARD_NUMBER.FIELDS.SECOND,
-    CARD_NUMBER.FIELDS.THIRD,
-    CARD_NUMBER.FIELDS.FOURTH,
-  ]);
+  } = useInputFields(Object.values(CARD_NUMBER.FIELDS));
 
   const optionalClassName = fieldsFulfilled.every((field) => field)
     ? 'text-fulfilled'
     : '';
-
-  const eachFieldFulfilled = numberFields.map((field) => field.length === 4);
 
   return (
     <Input.Container>
@@ -28,7 +21,7 @@ export const CardNumber = () => {
       <Input.Box
         separator={{
           symbol: INPUT.BOX.SEPARATOR.HYPHEN,
-          eachFieldFulfilled,
+          fieldsFulfilled,
         }}
       >
         {Object.values(CARD_NUMBER.FIELDS).map((field, fieldIndex) => (

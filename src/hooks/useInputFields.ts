@@ -67,6 +67,8 @@ export const useInputFields = (fieldConfigs: FieldConfig[]) => {
     if (validation) {
       return validation(field);
     }
+
+    return field.length > 0;
   });
 
   return {
