@@ -6,10 +6,15 @@ import {
   formattedCardNumber,
 } from "common/utils/inputFormat";
 
-import { CardInfo } from "pages/AddCard";
+import { CardInfo } from "common/types/card.type";
 
-interface InputCardFormProps extends CardInfo {
+interface InputCardFormProps {
   onCardInfoChange: (key: keyof CardInfo, value: string) => void;
+  cardNumber: string;
+  cardOwner: string;
+  expireDate: string;
+  cvc: string;
+  password: string;
 }
 
 export default function InputCardForm({

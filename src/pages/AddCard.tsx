@@ -1,40 +1,24 @@
-import { useState } from "react";
-
-import Card from "common/components/card/Card";
-import BasicLayout from "common/layout/BasicLayout";
+import { CardInfo } from "common/types/card.type";
 import { CurrentPage } from "common/types/page.type";
-
-import InputCardForm from "features/card/components/InputCardForm";
+import Layout from "common/layout";
 import Button from "common/components/button/Button";
 import Title from "common/components/title/Title";
 
-export interface CardInfo {
-  cardNumber: string;
-  expireDate: string;
-  cardOwner: string;
-  cvc: string;
-  password: string;
-}
+import InputCardForm from "features/card/components/InputCardForm";
+import Card from "common/components/card";
 
-interface AddCardProps {
+interface AddCardProps extends CardInfo {
   onChangePage: (page: CurrentPage) => void;
+  onChangeCardInfo: (key: keyof CardInfo, value: string) => void;
 }
 
-export default function AddCard({ onChangePage }: AddCardProps) {
-  const [cardInfo, setCardInfo] = useState<CardInfo>({
-    cardNumber: "",
-    expireDate: "",
-    cardOwner: "",
-    cvc: "",
-    password: "",
-  });
-
-  const handleCardInfoChange = (key: keyof CardInfo, value: string) => {
-    setCardInfo((prev) => ({ ...prev, [key]: value }));
-  };
-
+export default function AddCard({
+  onChangePage,
+  onChangeCardInfo,
+  ...cardInfo
+}: AddCardProps) {
   return (
-    <BasicLayout>
+    <Layout.Basic>
       <Title
         button={
           <span
@@ -47,9 +31,9 @@ export default function AddCard({ onChangePage }: AddCardProps) {
       >
         카드 추가
       </Title>
-      <Card {...cardInfo} />
-      <InputCardForm onCardInfoChange={handleCardInfoChange} {...cardInfo} />
+      <Card.Small {...cardInfo} />
+      <InputCardForm onCardInfoChange={onChangeCardInfo} {...cardInfo} />
       <Button onClick={() => onChangePage("addCardSuccess")}>다음</Button>
-    </BasicLayout>
+    </Layout.Basic>
   );
 }

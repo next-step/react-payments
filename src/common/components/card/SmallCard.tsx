@@ -1,6 +1,10 @@
-import { CardInfo } from "pages/AddCard";
+import { CardInfo } from "common/types/card.type";
 
-export default function Card({ cardNumber, expireDate, cardOwner }: CardInfo) {
+export default function SmallCard({
+  cardNumber,
+  expireDate,
+  cardOwner,
+}: CardInfo) {
   return (
     <div className="card-box">
       <div className="empty-card">
