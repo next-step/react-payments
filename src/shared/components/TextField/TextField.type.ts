@@ -10,4 +10,5 @@ export type FocusProps = {
   outline?: StyleProps['outline'];
 };
 
-export type TextFieldVariant = 'outline' | 'filled' | 'flushed' | 'unstyled';
+export const TEXT_FIELD_VARIANTS = ['outline', 'filled', 'flushed', 'unstyled'] as const;
+export type TextFieldVariant = (typeof TEXT_FIELD_VARIANTS)[number];

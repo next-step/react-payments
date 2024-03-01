@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { TEXT_FIELD_VARIANTS } from './TextField.type';
 import { AppLayout } from '@/components';
 import { TextField } from '@/shared/components';
 import { letterSpacingValue, storybookControls, styleToken } from '@/shared/styles';
@@ -17,6 +18,9 @@ const meta: Meta = {
     ...storybookControls.argTypes,
     type: {
       options: ['text', 'password', 'email', 'number', 'tel', 'url'],
+    },
+    variant: {
+      options: TEXT_FIELD_VARIANTS,
     },
   },
   args: {
