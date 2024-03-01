@@ -6,7 +6,7 @@ export type Separator = (typeof INPUT.SEPARATOR)[keyof typeof INPUT.SEPARATOR];
 export type InputType =
   (typeof INPUT.FACTORY)[keyof typeof INPUT.FACTORY]['TYPE'];
 
-export interface InputProps extends RestProps {
+export interface InputFactoryProps extends RestProps {
   type: InputType;
 }
 
@@ -16,5 +16,6 @@ export interface DefaultInputProps {
 }
 
 export interface InputBoxProps extends ContainerProps {
+  classNames?: ClassNames;
   separator?: Separator;
 }

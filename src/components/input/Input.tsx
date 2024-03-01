@@ -1,5 +1,5 @@
 import { INPUT } from './input.constant';
-import { InputProps, InputType } from './input.type';
+import { InputFactoryProps, InputType } from './input.type';
 import {
   DefaultInput,
   InputBox,
@@ -7,7 +7,7 @@ import {
   InputTitle,
 } from './components';
 
-const InputFactory = ({ type, ...rest }: InputProps) => {
+const InputFactory = ({ type, ...rest }: InputFactoryProps) => {
   const getInput = (inputType: InputType) => {
     switch (inputType) {
       case INPUT.FACTORY.TEXT.TYPE:

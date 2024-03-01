@@ -2,6 +2,7 @@ import { usePaymentsFunnel } from '../payments.context';
 import { STEP } from '../payments.constant';
 import { PaymentsStepKey } from '../payments.type';
 import { Input } from '@/components/input/Input';
+import { INPUT } from '@/components/input/input.constant';
 
 // FIXME: className에 하드코딩 된 값들은 전부 공통 컴포넌트로 분리해야 함.
 export const AddCard = () => {
@@ -27,62 +28,45 @@ export const AddCard = () => {
       </div>
 
       <Input.Container>
-        <Input.Title>카드 번호1</Input.Title>
-        <Input.Box separator='-'>
-          <Input type='text' />
-          <Input type='text' />
-          <Input type='password' />
-          <Input type='password' />
+        <Input.Title>카드 번호</Input.Title>
+        <Input.Box separator={INPUT.SEPARATOR.SLASH}>
+          <Input type={INPUT.FACTORY.TEXT.TYPE} />
+          <Input type={INPUT.FACTORY.TEXT.TYPE} />
+          <Input type={INPUT.FACTORY.PASSWORD.TYPE} />
+          <Input type={INPUT.FACTORY.PASSWORD.TYPE} />
         </Input.Box>
       </Input.Container>
-
-      <div className='input-container'>
-        <span className='input-title'>카드 번호</span>
-        <div className='input-box'>
-          <input className='input-basic' type='text' />
-          <input className='input-basic' type='text' />
-          <input className='input-basic' type='password' />
-          <input className='input-basic' type='password' />
-        </div>
-      </div>
 
       <Input.Container>
-        <Input.Title>만료일1</Input.Title>
-        <Input.Box separator='/'>
-          <Input type='text' placeholder='MM' />
-          <Input type='text' placeholder='YY' />
+        <Input.Title>만료일</Input.Title>
+        <Input.Box separator={INPUT.SEPARATOR.SLASH} classNames={['w-50']}>
+          <Input type={INPUT.FACTORY.TEXT.TYPE} placeholder='MM' />
+          <Input type={INPUT.FACTORY.TEXT.TYPE} placeholder='YY' />
         </Input.Box>
       </Input.Container>
 
-      <div className='input-container'>
-        <span className='input-title'>만료일</span>
-        <div className='input-box w-50'>
-          <input className='input-basic' type='text' placeholder='MM' />
-          <input className='input-basic' type='text' placeholder='YY' />
-        </div>
-      </div>
+      <Input.Container>
+        <Input.Title>카드 소유자 이름(선택)</Input.Title>
+        <Input.Box>
+          <Input
+            type={INPUT.FACTORY.TEXT.TYPE}
+            placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
+          />
+        </Input.Box>
+      </Input.Container>
 
-      <div className='input-container'>
-        <span className='input-title'>카드 소유자 이름(선택)</span>
-        <input
-          type='text'
-          className='input-basic'
-          placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
-        />
-      </div>
+      <Input.Container>
+        <Input.Title>보안코드(CVC/CVV)</Input.Title>
+        <Input type={INPUT.FACTORY.PASSWORD.TYPE} classNames={['w-25']} />
+      </Input.Container>
 
-      <div className='input-container'>
-        <span className='input-title'>보안코드(CVC/CVV)</span>
-        <input className='input-basic w-25' type='password' />
-      </div>
-
-      <div className='input-container'>
-        <span className='input-title'>카드 비밀번호</span>
-        <input className='input-basic w-15' type='password' />
-        <input className='input-basic w-15' type='password' />
-        <input className='input-basic w-15' type='password' />
-        <input className='input-basic w-15' type='password' />
-      </div>
+      <Input.Container>
+        <Input.Title>카드 비밀번호</Input.Title>
+        <Input type={INPUT.FACTORY.PASSWORD.TYPE} classNames={['w-15']} />
+        <Input type={INPUT.FACTORY.PASSWORD.TYPE} classNames={['w-15']} />
+        <Input type={INPUT.FACTORY.PASSWORD.TYPE} classNames={['w-15']} />
+        <Input type={INPUT.FACTORY.PASSWORD.TYPE} classNames={['w-15']} />
+      </Input.Container>
 
       <div className='button-box'>
         <span className='button-text'>다음</span>

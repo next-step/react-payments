@@ -53,6 +53,6 @@
 
 .w-15 {
   width: 15%;
-  /* margin-right는 util의 성격과 맞지 않지만, 사용처가 비밀번호 뿐이라 figma와 UI동기화를 위해 추가 */
+  /* FIXME: 추후 margin right 속성을 컴포넌트에 이식 */
   margin-right: 4px;
 }
