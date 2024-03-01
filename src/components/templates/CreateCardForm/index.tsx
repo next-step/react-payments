@@ -3,10 +3,8 @@ import { Box, Button, Container, HFlex, Text } from '@components/atoms';
 import { Header, IconButton } from '@components/molecules';
 import { CreditCardInputs } from '@components/organisms';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export default function CreateCard() {
-  const navigate = useNavigate();
   const [cardInputValue, setCardInputValue] = useState({
     cardNumber: '',
     expirationMonth: '',
@@ -24,7 +22,7 @@ export default function CreateCard() {
   };
 
   const navigateToCardList = () => {
-    navigate('/card');
+    alert('//TODO: 카드 목록 페이지로 이동되었습니다.');
   };
 
   return (
