@@ -1,18 +1,20 @@
-import { SetStateAction, useCallback, useState } from "react";
+import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import BasicInput from "../../../components/input/BasicInput";
-import { toMaskedCardNumber } from "../../../utils/stringUtils";
+import useCardNumberInput from "../hooks/useCardNumberInput";
 
 const CARN_NUMBER_LENGTH = 16;
 
 interface CardNumberProps {
   cardNumber: string;
-  setCardNumber: React.Dispatch<SetStateAction<string>>;
+  setCardNumber: Dispatch<SetStateAction<string>>;
 }
 
 export default function CardNumberInput({
   cardNumber,
   setCardNumber,
 }: CardNumberProps) {
+  const { toMaskedCardNumber } = useCardNumberInput();
+
   const [displayedCardNumber, setDisplayedCardNumber] = useState<string>(
     toMaskedCardNumber(cardNumber)
   );
@@ -20,7 +22,7 @@ export default function CardNumberInput({
   const handleChange = useCallback(() => {
     const maskedCardNumber = toMaskedCardNumber(cardNumber);
     setDisplayedCardNumber(maskedCardNumber);
-  }, [cardNumber]);
+  }, [cardNumber, toMaskedCardNumber]);
 
   const handleKeydown = useCallback(
     (value: string) => {
