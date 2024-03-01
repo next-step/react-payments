@@ -1,5 +1,5 @@
 export const Validation = {
-  cardNumberLength(field: string) {
+  cardNumber(field: string) {
     return Validation.checkLength(field, 4);
   },
 
@@ -21,6 +21,10 @@ export const Validation = {
 
   securityCode(field: string) {
     return Validation.checkLength(field, 3);
+  },
+
+  password(field: string) {
+    return Validation.checkLength(field, 1);
   },
 
   checkLength(field: string, length: number) {

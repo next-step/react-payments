@@ -11,6 +11,10 @@ const InputFactory = forwardRef<HTMLInputElement, InputFactoryProps>(
         return <DefaultInput ref={ref} type={type} {...rest} />;
       }
 
+      case INPUT.TYPE.READONLY_PASSWORD: {
+        return <DefaultInput ref={ref} type='password' readOnly {...rest} />;
+      }
+
       default: {
         throw new Error(`${type} 존재하지 않는 inputType입니다.`);
       }

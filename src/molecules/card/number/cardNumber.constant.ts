@@ -18,7 +18,7 @@ export const CARD_NUMBER = {
       ID: 'first',
       TYPE: INPUT.TYPE.TEXT,
       fieldType: INPUT_FIELDS.NUMBER.TYPE,
-      validation: Validation.cardNumberLength,
+      validation: Validation.cardNumber,
       maxLength: 4,
     },
 
@@ -26,7 +26,7 @@ export const CARD_NUMBER = {
       ID: 'second',
       TYPE: INPUT.TYPE.TEXT,
       fieldType: INPUT_FIELDS.NUMBER.TYPE,
-      validation: Validation.cardNumberLength,
+      validation: Validation.cardNumber,
       maxLength: 4,
     },
 
@@ -34,7 +34,7 @@ export const CARD_NUMBER = {
       ID: 'third',
       TYPE: INPUT.TYPE.PASSWORD,
       fieldType: INPUT_FIELDS.NUMBER.TYPE,
-      validation: Validation.cardNumberLength,
+      validation: Validation.cardNumber,
       maxLength: 4,
     },
 
@@ -42,7 +42,7 @@ export const CARD_NUMBER = {
       ID: 'fourth',
       TYPE: INPUT.TYPE.PASSWORD,
       fieldType: INPUT_FIELDS.NUMBER.TYPE,
-      validation: Validation.cardNumberLength,
+      validation: Validation.cardNumber,
       maxLength: 4,
     },
   },

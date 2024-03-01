@@ -2,8 +2,9 @@ import { ExpireDate } from './expireDate/ExpireDate';
 import { CardNumber } from './number/CardNumber';
 import { OwnerName } from './ownerName/OwnerName';
 import { SecurityCode } from './securityCode/SecurityCode';
+import { Password } from './password/Password';
 
 export const Card = Object.assign(
   {},
-  { Number: CardNumber, ExpireDate, OwnerName, SecurityCode }
+  { Number: CardNumber, ExpireDate, OwnerName, SecurityCode, Password }
 );

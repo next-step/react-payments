@@ -1,6 +1,7 @@
 const TYPE = {
   TEXT: 'text',
   PASSWORD: 'password',
+  READONLY_PASSWORD: 'password',
 } as const;
 
 const BOX = {

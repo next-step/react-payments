@@ -1,16 +1,23 @@
 import { usePaymentsFunnel } from '../payments.context';
 import { STEP } from '../payments.constant';
 import { PaymentsStepKey } from '../payments.type';
-// import { Input } from '@/components/input/Input';
-// import { INPUT } from '@/components/input/input.constant';
 import { Card } from '@/molecules/card/Card';
 
 export const AddCard = () => {
   const { setStep } = usePaymentsFunnel();
 
+  const handleNext = () => {
+    // TODO: inputFields validation
+    setStep(STEP.ADD_CARD_COMPLETE);
+  };
+
+  const handlePrev = () => {
+    setStep(STEP.CARD_LIST);
+  };
+
   return (
     <div>
-      <h2 className='page-title'>{`< 카드 추가`}</h2>
+      <h2 className='page-title' onClick={handlePrev}>{`< 카드 추가`}</h2>
       <div className='card-box'>
         <div className='empty-card'>
           <div className='card-top'></div>
@@ -30,18 +37,9 @@ export const AddCard = () => {
       <Card.ExpireDate />
       <Card.OwnerName />
       <Card.SecurityCode />
+      <Card.Password />
 
-      {/*
-      <Input.Container>
-        <Input.Title>카드 비밀번호</Input.Title>
-        <Input type={INPUT.TYPE.PASSWORD} className='w-15' />
-        <Input type={INPUT.TYPE.PASSWORD} className='w-15' />
-        <Input type={INPUT.TYPE.PASSWORD} className='w-15' />
-        <Input type={INPUT.TYPE.PASSWORD} className='w-15' />
-      </Input.Container>
-      */}
-
-      <div className='button-box'>
+      <div className='button-box' onClick={handleNext}>
         <span className='button-text'>다음</span>
       </div>
 

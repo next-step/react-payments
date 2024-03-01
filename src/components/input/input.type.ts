@@ -12,7 +12,7 @@ export interface InputFactoryProps extends RestProps {
   ref?: React.Ref<HTMLInputElement>;
 }
 
-export interface DefaultInputProps {
+export interface DefaultInputProps extends RestProps {
   className?: string;
   type: InputType;
 }

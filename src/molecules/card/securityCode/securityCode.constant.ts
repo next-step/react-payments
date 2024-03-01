@@ -7,7 +7,7 @@ export const SECURITY_CODE = {
     SECURITY_CODE: {
       ID: 'card-security-code',
       PLACEHOLDER: 'CVC',
-      TYPE: INPUT.TYPE.TEXT,
+      TYPE: INPUT.TYPE.PASSWORD,
       fieldType: INPUT_FIELDS.NUMBER.TYPE,
       validation: Validation.securityCode,
       maxLength: 3,
