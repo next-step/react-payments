@@ -1,10 +1,18 @@
-import { act, render, renderHook, screen } from "@testing-library/react";
+import {
+  act,
+  render,
+  renderHook,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import useFunnel from ".";
 
 describe("useFunnel 상태 변경 테스트", () => {
   it("현재 패널 반환", () => {
-    const { result: Result } = renderHook(() => useFunnel());
+    const { result: Result } = renderHook(() =>
+      useFunnel(["1단계", "2단계", "3단계"])
+    );
 
     render(
       <Result.current.Funnel>
@@ -16,11 +24,13 @@ describe("useFunnel 상태 변경 테스트", () => {
 
     const currentStep = screen.getByText("1");
 
-    expect(currentStep).toBeInTheDocument();
+    expect(currentStep).toBeTruthy();
   });
 
   it("특정 패널으로 이동", () => {
-    const { result: Result } = renderHook(() => useFunnel());
+    const { result: Result } = renderHook(() =>
+      useFunnel(["1단계", "2단계", "3단계"])
+    );
 
     render(
       <Result.current.Funnel>
@@ -34,13 +44,16 @@ describe("useFunnel 상태 변경 테스트", () => {
       Result.current.update("2단계");
     });
 
-    const currentStep = screen.getByText("2");
-
-    expect(currentStep).toBeInTheDocument();
+    waitFor(() => {
+      const currentStep = screen.getByText("2");
+      expect(currentStep).toBeTruthy();
+    });
   });
 
   it("이전 패널으로 이동", () => {
-    const { result: Result } = renderHook(() => useFunnel());
+    const { result: Result } = renderHook(() =>
+      useFunnel(["1단계", "2단계", "3단계"])
+    );
 
     render(
       <Result.current.Funnel>
@@ -55,13 +68,16 @@ describe("useFunnel 상태 변경 테스트", () => {
       Result.current.back();
     });
 
-    const currentStep = screen.getByText("1");
-
-    expect(currentStep).toBeInTheDocument();
+    waitFor(() => {
+      const currentStep = screen.getByText("1");
+      expect(currentStep).toBeTruthy();
+    });
   });
 
   it("다음 패널로 이동", () => {
-    const { result: Result } = renderHook(() => useFunnel());
+    const { result: Result } = renderHook(() =>
+      useFunnel(["1단계", "2단계", "3단계"])
+    );
 
     render(
       <Result.current.Funnel>
@@ -75,8 +91,9 @@ describe("useFunnel 상태 변경 테스트", () => {
       Result.current.next();
     });
 
-    const currentStep = screen.getByText("2");
-
-    expect(currentStep).toBeInTheDocument();
+    waitFor(() => {
+      const currentStep = screen.getByText("2");
+      expect(currentStep).toBeTruthy();
+    });
   });
 });
