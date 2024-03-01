@@ -25,6 +25,7 @@ export default function CardNumberInput({
   const handleKeydown = useCallback(
     (value: string) => {
       if (cardNumber.length === CARN_NUMBER_LENGTH) return;
+      if (isNaN(Number(value))) return;
       if (value === "Backspace") {
         setCardNumber((prev) => prev.slice(0, cardNumber.length - 1));
         return;
