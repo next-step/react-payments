@@ -19,7 +19,6 @@ export const layoutArgTypes = [
   'maxWidth',
   'minHeight',
   'maxHeight',
-  'aspectRatio',
 ].reduce((acc, prop) => {
   return {
     ...acc,
