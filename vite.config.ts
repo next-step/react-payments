@@ -6,6 +6,9 @@ export default defineConfig({
   resolve: {
     alias: {
       styles: "/src/styles",
+      common: "/src/common",
+      pages: "/src/pages",
+      features: "/src/features",
     },
   },
 });
