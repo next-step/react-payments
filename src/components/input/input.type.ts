@@ -1,4 +1,4 @@
-import { ClassNames, ContainerProps, RestProps } from '@/types';
+import { ContainerProps, RestProps } from '@/types';
 import { INPUT } from './input.constant';
 
 export type Separator = (typeof INPUT.SEPARATOR)[keyof typeof INPUT.SEPARATOR];
@@ -11,11 +11,11 @@ export interface InputFactoryProps extends RestProps {
 }
 
 export interface DefaultInputProps {
-  classNames?: ClassNames;
+  className?: string;
   type: InputType;
 }
 
 export interface InputBoxProps extends ContainerProps {
-  classNames?: ClassNames;
   separator?: Separator;
+  className?: string;
 }

@@ -4,13 +4,11 @@ import { PaymentsStepKey } from '../payments.type';
 import { Input } from '@/components/input/Input';
 import { INPUT } from '@/components/input/input.constant';
 
-// FIXME: className에 하드코딩 된 값들은 전부 공통 컴포넌트로 분리해야 함.
 export const AddCard = () => {
   const { setStep } = usePaymentsFunnel();
 
   return (
     <div>
-      {/* 추후에 Header Layout 컴포넌트로 분리 */}
       <h2 className='page-title'>{`< 카드 추가`}</h2>
       <div className='card-box'>
         <div className='empty-card'>
@@ -39,7 +37,7 @@ export const AddCard = () => {
 
       <Input.Container>
         <Input.Title>만료일</Input.Title>
-        <Input.Box separator={INPUT.SEPARATOR.SLASH} classNames={['w-50']}>
+        <Input.Box separator={INPUT.SEPARATOR.SLASH} className='w-50'>
           <Input type={INPUT.FACTORY.TEXT.TYPE} placeholder='MM' />
           <Input type={INPUT.FACTORY.TEXT.TYPE} placeholder='YY' />
         </Input.Box>
@@ -57,15 +55,15 @@ export const AddCard = () => {
 
       <Input.Container>
         <Input.Title>보안코드(CVC/CVV)</Input.Title>
-        <Input type={INPUT.FACTORY.PASSWORD.TYPE} classNames={['w-25']} />
+        <Input type={INPUT.FACTORY.PASSWORD.TYPE} className='w-25' />
       </Input.Container>
 
       <Input.Container>
         <Input.Title>카드 비밀번호</Input.Title>
-        <Input type={INPUT.FACTORY.PASSWORD.TYPE} classNames={['w-15']} />
-        <Input type={INPUT.FACTORY.PASSWORD.TYPE} classNames={['w-15']} />
-        <Input type={INPUT.FACTORY.PASSWORD.TYPE} classNames={['w-15']} />
-        <Input type={INPUT.FACTORY.PASSWORD.TYPE} classNames={['w-15']} />
+        <Input type={INPUT.FACTORY.PASSWORD.TYPE} className='w-15' />
+        <Input type={INPUT.FACTORY.PASSWORD.TYPE} className='w-15' />
+        <Input type={INPUT.FACTORY.PASSWORD.TYPE} className='w-15' />
+        <Input type={INPUT.FACTORY.PASSWORD.TYPE} className='w-15' />
       </Input.Container>
 
       <div className='button-box'>
