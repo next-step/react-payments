@@ -1,10 +1,13 @@
 type InputType = "basic" | "underline";
 
-interface InputProps {
-  style: InputType;
+export interface BaseInputProps {
   value: string;
   onChange?: (value: string) => void;
   onKeydown?: (value: string) => void;
+  placeHolder?: string;
+}
+interface InputProps extends BaseInputProps {
+  style: InputType;
 }
 
 export default function Input({
@@ -12,6 +15,7 @@ export default function Input({
   value,
   onChange,
   onKeydown,
+  placeHolder,
 }: InputProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
@@ -26,6 +30,7 @@ export default function Input({
       value={value}
       onChange={handleChange}
       onKeyDown={handleKeyDown}
+      placeholder={placeHolder}
     />
   );
 }

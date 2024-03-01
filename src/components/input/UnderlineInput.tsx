@@ -1,10 +1,6 @@
-import Input from "./Input";
+import Input, { BaseInputProps } from "./Input";
 
-interface UnderlineInput {
-  value: string;
-  onChange: (value: string) => void;
-}
-export default function UnderlineInput({ value, onChange }: UnderlineInput) {
+export default function UnderlineInput({ value, onChange }: BaseInputProps) {
   return (
     <div className="input-container">
       <Input style="underline" value={value} onChange={onChange} />

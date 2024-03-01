@@ -1,11 +1,8 @@
-import Input from "./Input";
+import Input, { BaseInputProps } from "./Input";
 import Label from "./Label";
 
-interface BasicInputProps {
+interface BasicInputProps extends BaseInputProps {
   label: string;
-  value: string;
-  onChange?: (value: string) => void;
-  onKeydown?: (value: string) => void;
 }
 
 export default function BasicInput({
@@ -13,6 +10,7 @@ export default function BasicInput({
   value,
   onChange,
   onKeydown,
+  placeHolder,
 }: BasicInputProps) {
   return (
     <div className="input-container">
@@ -23,6 +21,7 @@ export default function BasicInput({
           value={value}
           onChange={onChange}
           onKeydown={onKeydown}
+          placeHolder={placeHolder}
         />
       </div>
     </div>
