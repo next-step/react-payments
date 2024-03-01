@@ -1,8 +1,8 @@
 import Input from "./Input";
 
 interface UnderlineInput {
-  value: string | number;
-  onChange: (value: string | number) => void;
+  value: string;
+  onChange: (value: string) => void;
 }
 export default function UnderlineInput({ value, onChange }: UnderlineInput) {
   return (

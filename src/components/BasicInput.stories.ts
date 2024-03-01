@@ -18,7 +18,6 @@ type Story = StoryObj<typeof meta>;
 export const Basic: Story = {
   args: {
     label: "This is label",
-    value: 123,
-    onChange: (value: number | string) => console.log(value),
+    value: "123",
   },
 };
