@@ -6,7 +6,7 @@ import Text from "../../atoms/text";
 // 이 부분을 커스텀 훅으로 빼면 좋을지?
 const changeCardProps = (props, form) => {
   if (props.empty) {
-    return { empty: true };
+    return { empty: true, type: props.type };
   } else {
     const nameValue = props.name || form.watch("name") || "NAME";
     const yearValue = props.year || form.watch("year") || "YY";
@@ -25,6 +25,7 @@ const changeCardProps = (props, form) => {
     ];
 
     return {
+      type: props.type,
       name: nameValue,
       year: yearValue,
       month: monthValue,
@@ -37,12 +38,12 @@ const changeCardProps = (props, form) => {
 const Card = (props) => {
   const form = useFormContext();
 
-  const { empty, name, year, month, cardNumberSplit, cardCompany } =
+  const { empty, type, name, year, month, cardNumberSplit, cardCompany } =
     changeCardProps(props, form);
 
   return (
     <Box className={"card-box"}>
-      <Box className="empty-card">
+      <Box className={[type === "big" ? "big-card" : "empty-card"]}>
         {empty ? (
           "+"
         ) : (

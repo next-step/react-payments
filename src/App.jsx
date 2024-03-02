@@ -1,5 +1,6 @@
 import { FormProvider, useForm } from "react-hook-form";
 import CardForm from "./components/templates/cardForm";
+import SubmitCard from "./components/templates/submitCard";
 
 function App() {
   const form = useForm({
@@ -19,7 +20,7 @@ function App() {
   return (
     <div className="app">
       <FormProvider {...form}>
-        <CardForm />
+        <SubmitCard />
       </FormProvider>
     </div>
   );
