@@ -54,3 +54,55 @@ export interface SpaceProps extends ShorthandsProps {
 }
 
 export type LayoutProps = SpaceProps & InlineStyleProps
+
+export const getLayoutProps = <T extends LayoutProps>(props: T) => {
+  const {
+    margin,
+    marginX,
+    marginY,
+    marginTop,
+    marginBottom,
+    marginLeft,
+    marginRight,
+    padding,
+    paddingX,
+    paddingY,
+    paddingTop,
+    paddingBottom,
+    paddingLeft,
+    paddingRight,
+    width,
+    minWidth,
+    maxWidth,
+    height,
+    minHeight,
+    maxHeight,
+    ...rest
+  } = props
+
+  return {
+    layoutProps: {
+      margin,
+      marginX,
+      marginY,
+      marginTop,
+      marginBottom,
+      marginLeft,
+      marginRight,
+      padding,
+      paddingX,
+      paddingY,
+      paddingTop,
+      paddingBottom,
+      paddingLeft,
+      paddingRight,
+      width,
+      minWidth,
+      maxWidth,
+      height,
+      minHeight,
+      maxHeight,
+    },
+    ...rest,
+  }
+}
