@@ -7,7 +7,7 @@ const InputForm = (props) => {
   const { label, option, children } = props;
 
   return (
-    <Box className={"input-container"}>
+    <Box as="label" className={"input-container"}>
       <Text className={"input-title"}>
         {label}
         {option}
