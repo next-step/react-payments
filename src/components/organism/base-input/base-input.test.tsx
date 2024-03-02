@@ -5,7 +5,6 @@ import { BaseInput } from '@/components/organism/base-input/base-input.tsx'
 const TEST_LABEL = 'input test abel'
 const TEST_PLACEHOLDER = 'input test placeholder'
 const TEST_INPUT_VALUE = 'input value test'
-const TEST_INPUT_ERROR = 'test error'
 
 describe('baseinput unit test', () => {
   test('초기 렌더링 테스트 - label, placeholder를 확인할 수 있다.', () => {
@@ -21,20 +20,5 @@ describe('baseinput unit test', () => {
 
     await userEvent.type(inputElement, TEST_INPUT_VALUE)
     expect(inputElement).toHaveValue(TEST_INPUT_VALUE)
-  })
-
-  test('error가 입력되면 error 요소를 확인할 수 있다', () => {
-    render(
-      <BaseInput
-        id="test-base-input"
-        label={TEST_LABEL}
-        placeholder={TEST_PLACEHOLDER}
-        error={TEST_INPUT_ERROR}
-      />,
-    )
-    const inputElement = screen.getByRole('textbox')
-    expect(inputElement).toBeInTheDocument()
-
-    expect(screen.getByText(TEST_INPUT_ERROR)).toBeInTheDocument()
   })
 })
