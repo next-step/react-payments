@@ -1,6 +1,7 @@
 import { CSSProperties } from 'react';
 
 export type StyleProps = FlexboxProps &
+  GridProps &
   SpacingProps &
   SizeProps &
   TypographyProps &
@@ -22,6 +23,16 @@ export type FlexboxProps = {
   order?: CSSProperties['order'];
   alignSelf?: CSSProperties['alignSelf'];
   gap?: CSSProperties['gap'];
+};
+
+export type GridProps = {
+  gridGap?: CSSProperties['gridGap'];
+  gridRowGap?: CSSProperties['gridRowGap'];
+  gridColumnGap?: CSSProperties['gridColumnGap'];
+  gridTemplateRows?: CSSProperties['gridTemplateRows'];
+  gridTemplateColumns?: CSSProperties['gridTemplateColumns'];
+  gridTemplateAreas?: CSSProperties['gridTemplateAreas'];
+  gridArea?: CSSProperties['gridArea'];
 };
 
 export type SpacingProps = {

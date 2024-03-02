@@ -5,9 +5,9 @@ import { AsProps, StyleProps } from '@/shared/types';
 
 export enum TypographyVariants {
   caption = 'caption',
-  title = 'title',
   body = 'body',
   subtitle = 'subtitle',
+  title = 'title',
   headline = 'headline',
   display = 'display',
 }
@@ -27,7 +27,7 @@ export const Typography = ({ as, variant, children, ...restProps }: TypographyPr
 );
 
 const Root = styled(DefaultStyled)<TypographyProps>`
-  white-space: pre-wrap;
+  ${({ whiteSpace }) => whiteSpace && `white-space: ${whiteSpace || 'pre-wrap'};`};
   ${({ variant }) => typographyVariantStyle[variant || 'body']};
 `;
 

@@ -4,7 +4,7 @@ import type { FocusProps, PlaceholderProps, TextFieldVariant } from './TextField
 import { DefaultStyled, styleToken } from '@/shared/styles';
 import { AsProps, StyleProps } from '@/shared/types';
 
-type TextFieldProps = StyleProps &
+export type TextFieldProps = StyleProps &
   AsProps &
   HTMLProps<HTMLInputElement> & {
     variant?: TextFieldVariant;
@@ -13,16 +13,25 @@ type TextFieldProps = StyleProps &
   };
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
-  const { type, variant, ...restProps } = props;
-  return <Root as="input" type={type || 'text'} variant={variant || 'outline'} ref={ref} {...restProps} />;
+  const { type, variant, width, height, padding, borderRadius, fontSize, ...restProps } = props;
+  const buttonProps = {
+    type: type || 'text',
+    variant: variant || 'outline',
+    width: width || styleToken.width.w100,
+    height: height || '45px',
+    padding: padding || '13px 12px 13px 11px',
+    borderRadius: borderRadius || '6px',
+    fontSize: fontSize || '18px',
+  };
+  return <Root as="input" ref={ref} {...buttonProps} {...restProps} />;
 });
 
 const Root = styled(DefaultStyled)<TextFieldProps>`
-  width: ${styleToken.width.w100};
-  height: 45px;
-  padding: 13px 12px 13px 11px;
-  border-radius: 6px;
-  font-size: 18px;
+  ${({ width }) => width || styleToken.width.w100};
+  ${({ height }) => height || '45px'};
+  ${({ padding }) => padding || '13px 12px 13px 11px'};
+  ${({ borderRadius }) => borderRadius || '6px'};
+  ${({ fontSize }) => fontSize || '18px'};
   ${({ variant }) => variantStyles[variant || 'outline']};
 
   &::placeholder {
@@ -53,6 +62,7 @@ const variantStyles = {
     borderRadius: '0',
   },
   unstyled: {
+    backgroundColor: 'transparent',
     border: 'none',
     borderRadius: '0',
     padding: '0',
