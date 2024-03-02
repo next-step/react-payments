@@ -74,6 +74,7 @@ const CardForm = (props) => {
             type="number"
             length={2}
             max={"12"}
+            placeholder={"MM"}
           />
           <Input
             required
@@ -81,6 +82,7 @@ const CardForm = (props) => {
             className={"input-basic"}
             type="number"
             length={2}
+            placeholder={"YY"}
           />
         </Box>
       </InputForm>
@@ -89,7 +91,13 @@ const CardForm = (props) => {
         label="카드 소유자 이름"
         option={<InputLength name={"name"} maxLength={"30"} />}
       >
-        <Input required name="name" className={"input-basic"} maxLength={30} />
+        <Input
+          required
+          name="name"
+          className={"input-basic"}
+          maxLength={30}
+          placeholder={"카드에 표시된 이름과 동일하게 입력하세요."}
+        />
       </InputForm>
 
       <InputForm label="보안코드(CVC/CVV)">

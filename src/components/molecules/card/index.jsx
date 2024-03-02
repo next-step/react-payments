@@ -22,7 +22,7 @@ const changeCardProps = (props, form) => {
       cardNumber2Value,
       cardNumber3Value.replace(/\d/g, "*"),
       cardNumber4Value.replace(/\d/g, "*"),
-    ];
+    ].filter((v) => v);
 
     return {
       type: props.type,
@@ -58,7 +58,9 @@ const Card = (props) => {
             </Box>
             <Box className={"card-bottom"}>
               <Box className={"card-bottom__number"}>
-                <Text className={"card-text"}>{cardNumberSplit.join(" ")}</Text>
+                <Text className={"card-text"}>
+                  {cardNumberSplit.join(" - ")}
+                </Text>
               </Box>
               <Box className={"card-bottom__info"}>
                 <Text className={"card-text"}>{name}</Text>

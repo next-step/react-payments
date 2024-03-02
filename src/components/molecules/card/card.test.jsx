@@ -42,7 +42,7 @@ describe("Card Form 테스트", () => {
       </Form>
     );
 
-    const text = screen.getByText("1234 1234 **** ****");
+    const text = screen.getByText("1234 - 1234 - **** - ****");
 
     expect(text).toBeTruthy();
   });
@@ -99,7 +99,7 @@ describe("Card props 테스트", () => {
       </Form>
     );
 
-    const text = screen.getByText("4321 4321 **** ****");
+    const text = screen.getByText("4321 - 4321 - **** - ****");
 
     expect(text).toBeTruthy();
   });
