@@ -16,6 +16,12 @@ const CardForm = (props) => {
   } = useFormContext();
   const { Modal, toggleModal } = useModal();
 
+  const handleNextStep = () => {
+    if (isValid) {
+      toggleModal();
+    }
+  };
+
   return (
     <>
       <button className="page-title" onClick={back}>
@@ -130,7 +136,7 @@ const CardForm = (props) => {
         </Box>
 
         <Box className={"button-box"}>
-          <button className={"button-text"} onClick={isValid && toggleModal}>
+          <button className={"button-text"} onClick={handleNextStep}>
             다음
           </button>
         </Box>

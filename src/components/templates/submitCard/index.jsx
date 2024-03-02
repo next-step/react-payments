@@ -28,7 +28,11 @@ const SubmitCard = (props) => {
       </Box>
 
       <Box className={["input-container", "flex-center", "w-100"]}>
-        <Input name="nickname" className={["input-underline", "w-75"]} />
+        <Input
+          name="nickname"
+          className={["input-underline", "w-75"]}
+          required
+        />
       </Box>
 
       <Box className={["button-box", "mt-50"]}>
