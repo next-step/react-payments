@@ -5,7 +5,7 @@ import {
   RefObject,
 } from "react";
 
-type InputType = "basic" | "underline";
+type InputType = "basic" | "underline" | "empty";
 
 export interface BaseInputProps {
   value?: string;
@@ -17,7 +17,7 @@ export interface BaseInputProps {
   maxLength?: number;
 }
 interface InputProps extends BaseInputProps {
-  style: InputType;
+  style?: InputType;
 }
 
 export default function Input({
