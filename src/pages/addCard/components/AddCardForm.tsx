@@ -2,10 +2,12 @@ import { useRef, useState } from "react";
 import CardNumberInput from "./CardNumberInput";
 import CardExpiredDateInput from "./CardExpiredDateInput";
 import CardSecurityCodeInput from "./CardSecurityCodeInput";
+import CardHolderNameInput from "./CardHolderNameInput";
 
 export default function AddCardForm() {
   const [cardNumber, setCardNumber] = useState<string>("");
   const [cardExpiredDate, setCardExpiredDate] = useState<string>("");
+  const [cardHolderName, setCardHolderName] = useState<string>("");
   const cardSecurityCodeRef = useRef<HTMLInputElement>(null);
 
   return (
@@ -14,6 +16,10 @@ export default function AddCardForm() {
       <CardExpiredDateInput
         cardExpiredDate={cardExpiredDate}
         setCardExpiredDate={setCardExpiredDate}
+      />
+      <CardHolderNameInput
+        cardHolderName={cardHolderName}
+        setCardHolderName={setCardHolderName}
       />
       <CardSecurityCodeInput cardSecurityCodeRef={cardSecurityCodeRef} />
       <button
