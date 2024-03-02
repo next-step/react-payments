@@ -2,6 +2,11 @@
   margin: 16px 0;
 }
 
+.input-gap {
+  display: flex;
+  gap: 10px;
+}
+
 .input-box {
   display: flex;
   align-items: center;
@@ -50,4 +55,16 @@
   padding: 4px 0;
 
   border-bottom: 1px solid #383838;
+}
+
+.input-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+}
+
+.input-password {
+  background: none;
 }

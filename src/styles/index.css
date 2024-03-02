@@ -17,7 +17,7 @@ input {
   font-size: 16px;
 }
 
-.root {
+#root {
   background-color: #fff;
   width: 375px;
   min-width: 375px;
@@ -32,6 +32,11 @@ input {
 }
 
 .page-title {
+  background: none;
+  border: none;
+
+  cursor: pointer;
+
   font-weight: 500;
   font-size: 20px;
   line-height: 22px;
@@ -39,4 +44,10 @@ input {
   align-items: center;
 
   color: #383838;
+}
+
+input::-webkit-inner-spin-button {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }

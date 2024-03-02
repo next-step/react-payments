@@ -12,7 +12,7 @@ const InputForm = (props) => {
         {label}
         {option}
       </Text>
-      <Box className={"input-box"}>{children}</Box>
+      {children}
     </Box>
   );
 };

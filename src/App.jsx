@@ -1,24 +1,27 @@
 import { FormProvider, useForm } from "react-hook-form";
-import Input from "./components/atoms/input";
-
-const Form = (props) => {
-  const { children } = props;
-  const form = useForm({});
-
-  return <FormProvider {...form}>{children}</FormProvider>;
-};
+import CardForm from "./components/templates/cardForm";
 
 function App() {
+  const form = useForm({
+    mode: "onChange",
+    defaultValues: {
+      name: "",
+      year: "",
+      month: "",
+      cardNumber1: "",
+      cardNumber2: "",
+      cardNumber3: "",
+      cardNumber4: "",
+      cardCompany: "",
+    },
+  });
+
   return (
-    <Form>
-      <Input
-        type={"number"}
-        secret={true}
-        name={"secret_number"}
-        maxLength={4}
-        max={12}
-      />
-    </Form>
+    <div className="app">
+      <FormProvider {...form}>
+        <CardForm />
+      </FormProvider>
+    </div>
   );
 }
 

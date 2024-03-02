@@ -5,12 +5,16 @@ import { useFormContext } from "react-hook-form";
 // checkValue를 useCallback을 써서 처리를 하는게 좋을지?
 // => 복잡한 작업이 아니라서 useCallback을 사용할 정도는 아닌거 같음
 const useInput = (props) => {
-  const { name, maxLength, max, min, digit } = props;
+  const { name, required, length, maxLength, max, min, digit } = props;
   const { register, getValues, setValue } = useFormContext();
 
   const checkValue = (e) => {
     let { value } = e.target;
     const currentValue = getValues(name);
+
+    if (value.length > length) {
+      value = currentValue;
+    }
 
     if (value.length > maxLength) {
       value = currentValue;
@@ -37,7 +41,11 @@ const useInput = (props) => {
   };
 
   return {
-    ...register(name),
+    ...register(name, {
+      required,
+      maxLength,
+      minLength: length,
+    }),
     onChange: handleChange,
   };
 };

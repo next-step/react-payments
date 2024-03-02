@@ -10,7 +10,7 @@ const InputLength = (props) => {
   const length = value.length;
 
   return (
-    <Text>
+    <Text className={"input-text"}>
       {length} / {maxLength}
     </Text>
   );

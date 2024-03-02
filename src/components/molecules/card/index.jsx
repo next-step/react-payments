@@ -8,9 +8,9 @@ const changeCardProps = (props, form) => {
   if (props.empty) {
     return { empty: true };
   } else {
-    const nameValue = props.name || form.watch("name");
-    const yearValue = props.year || form.watch("year");
-    const monthValue = props.month || form.watch("month");
+    const nameValue = props.name || form.watch("name") || "NAME";
+    const yearValue = props.year || form.watch("year") || "YY";
+    const monthValue = props.month || form.watch("month") || "MM";
     const cardNumber1Value = props.cardNumber1 || form.watch("cardNumber1");
     const cardNumber2Value = props.cardNumber2 || form.watch("cardNumber2");
     const cardNumber3Value = props.cardNumber3 || form.watch("cardNumber3");
@@ -47,17 +47,22 @@ const Card = (props) => {
           "+"
         ) : (
           <>
-            <Box class="card-top">
+            <Box className="card-top">
               <Text className={"card-text"}>{cardCompany}</Text>
             </Box>
-            <Box class="card-middle">
-              <Text className={"card-text"}>{cardNumberSplit.join(" ")}</Text>
+            <Box className="card-middle">
+              <Box className="small-card__chip" />
             </Box>
-            <Box class={["card-bottom", "card-bottom__info"]}>
-              <Text className={"card-text"}>{name}</Text>
-              <Text className={"card-text"}>
-                {month}/{year}
-              </Text>
+            <Box className={"card-bottom"}>
+              <Box className={"card-bottom__number"}>
+                <Text className={"card-text"}>{cardNumberSplit.join(" ")}</Text>
+              </Box>
+              <Box className={"card-bottom__info"}>
+                <Text className={"card-text"}>{name}</Text>
+                <Text className={"card-text"}>
+                  {month}/{year}
+                </Text>
+              </Box>
             </Box>
           </>
         )}
