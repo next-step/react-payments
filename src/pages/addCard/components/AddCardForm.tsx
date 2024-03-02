@@ -1,25 +1,25 @@
 import { useRef, useState } from "react";
 import CardNumberInput from "./CardNumberInput";
-import ExpiredDateInput from "./ExpiredDateInput";
-import SecurityCodeInput from "./SecurityCodeInput";
+import CardExpiredDateInput from "./CardExpiredDateInput";
+import CardSecurityCodeInput from "./CardSecurityCodeInput";
 
 export default function AddCardForm() {
   const [cardNumber, setCardNumber] = useState<string>("");
-  const [expiredDate, setExpiredDate] = useState<string>("");
-  const securityCodeRef = useRef<HTMLInputElement>(null);
+  const [cardExpiredDate, setCardExpiredDate] = useState<string>("");
+  const cardSecurityCodeRef = useRef<HTMLInputElement>(null);
 
   return (
     <form>
       <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
-      <ExpiredDateInput
-        expiredDate={expiredDate}
-        setExpiredDate={setExpiredDate}
+      <CardExpiredDateInput
+        cardExpiredDate={cardExpiredDate}
+        setCardExpiredDate={setCardExpiredDate}
       />
-      <SecurityCodeInput securityCodeRef={securityCodeRef} />
+      <CardSecurityCodeInput cardSecurityCodeRef={cardSecurityCodeRef} />
       <button
         type="button"
         onClick={() => {
-          console.log("securityCodeRef", securityCodeRef.current?.value);
+          console.log("securityCodeRef", cardSecurityCodeRef.current?.value);
         }}
       >
         버튼

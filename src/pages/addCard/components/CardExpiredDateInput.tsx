@@ -3,41 +3,41 @@ import BasicInput from "../../../components/input/BasicInput";
 
 const EXPIRED_DATE_LENGTH = 6;
 
-interface ExpiredDateInputProps {
-  expiredDate: string;
-  setExpiredDate: Dispatch<SetStateAction<string>>;
+interface CardExpiredDateInputProps {
+  cardExpiredDate: string;
+  setCardExpiredDate: Dispatch<SetStateAction<string>>;
 }
 
-export default function ExpiredDateInput({
-  expiredDate,
-  setExpiredDate,
-}: ExpiredDateInputProps) {
+export default function CardExpiredDateInput({
+  cardExpiredDate,
+  setCardExpiredDate,
+}: CardExpiredDateInputProps) {
   const toDisplayedExpiredDate = (value: string) =>
     value.length > 2 ? `${value.slice(0, 2)}/${value.slice(2)}` : value;
 
   const [displayedExpiredDate, setDisplayedExpiredDate] = useState<string>(
-    toDisplayedExpiredDate(expiredDate)
+    toDisplayedExpiredDate(cardExpiredDate)
   );
 
   const handleChange = useCallback(() => {
-    const displayed = toDisplayedExpiredDate(expiredDate);
+    const displayed = toDisplayedExpiredDate(cardExpiredDate);
     setDisplayedExpiredDate(displayed);
-  }, [expiredDate]);
+  }, [cardExpiredDate]);
 
   const handleKeydown = useCallback(
     (value: string) => {
-      if (expiredDate.length === EXPIRED_DATE_LENGTH) return;
+      if (cardExpiredDate.length === EXPIRED_DATE_LENGTH) return;
       const numValue = Number(value);
       if (isNaN(numValue)) return;
-      if (expiredDate.length === 0 && numValue > 2) return;
-      if (expiredDate.length === 1 && numValue > 3) return;
+      if (cardExpiredDate.length === 0 && numValue > 2) return;
+      if (cardExpiredDate.length === 1 && numValue > 3) return;
       if (value === "Backspace") {
-        setExpiredDate((prev) => prev.slice(0, expiredDate.length - 1));
+        setCardExpiredDate((prev) => prev.slice(0, cardExpiredDate.length - 1));
         return;
       }
-      setExpiredDate((prev) => prev + value);
+      setCardExpiredDate((prev) => prev + value);
     },
-    [expiredDate.length, setExpiredDate]
+    [cardExpiredDate.length, setCardExpiredDate]
   );
 
   return (
