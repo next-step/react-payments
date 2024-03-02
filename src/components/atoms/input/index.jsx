@@ -24,7 +24,7 @@ const Input = (props) => {
   return createElement(
     as,
     {
-      className: classes + secret ? " input-secret" : "",
+      className: classes + (secret ? " input-secret" : ""),
       type,
       placeholder,
       ...input,
