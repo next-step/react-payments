@@ -16,7 +16,7 @@ interface BoxProps {
    */
   backgroundColor?: string;
   children: ReactNode;
-  contentPosition: "center" | "middle" | "centerMiddle";
+  contentPosition?: "center" | "middle" | "centerMiddle" | "none";
 }
 
 const position = {
@@ -33,18 +33,19 @@ const position = {
     justifyContent: "center",
     alignItems: "center",
   },
+  none: {},
 };
 
 export default function Box({
   width,
   height,
-  contentPosition = "centerMiddle",
+  contentPosition = "none",
   backgroundColor,
   children,
 }: Readonly<BoxProps>) {
   const style = {
-    width,
-    height,
+    ...{ width },
+    ...{ height },
     backgroundColor,
     borderRadius: "7px",
     ...position[contentPosition],
