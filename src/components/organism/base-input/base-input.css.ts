@@ -10,7 +10,6 @@ export const inputContent = style({
   color: vars.color.aqua,
   selectors: {
     ['&::placeholder']: {
-      ...textVariants.title2,
       color: vars.color.gray300,
     },
   },

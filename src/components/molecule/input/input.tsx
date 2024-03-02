@@ -1,9 +1,8 @@
-import { forwardRef, ReactElement } from 'react'
+import { forwardRef } from 'react'
 import { Flex, FlexElements, FlexProps } from '@/components/atom/flex'
 import { Box, BoxProps } from '@/components/atom/box'
 import { Text, TextProps } from '@/components/atom/text'
-import { LayoutProps, PolymorphicRef } from '@/types'
-import { isNil } from '@/utils'
+import { PolymorphicRef } from '@/types'
 
 /* -------------------------------------------------------------------------------------------------
  * InputLabel
@@ -13,29 +12,6 @@ export type InputLabelProps = Omit<TextProps<'label'>, 'ref'>
 export const InputLabel = forwardRef((props: InputLabelProps, ref: PolymorphicRef<'label'>) => {
   return <Text as="label" ref={ref} {...props} />
 })
-
-/* -------------------------------------------------------------------------------------------------
- * InputError
- * -----------------------------------------------------------------------------------------------*/
-
-export interface InputErrorProps extends LayoutProps {
-  /** 표시하고자 하는 에러 메시지  */
-  error?: string
-  /** 에러 요소 커스텀 렌더 함수 */
-  errorRender?: (error: string) => ReactElement
-}
-
-export const InputError = ({ error, errorRender, ...layoutProps }: InputErrorProps) => {
-  const isCustomError = !isNil(error) && !isNil(errorRender)
-
-  return isCustomError ? (
-    errorRender?.(error as string)
-  ) : (
-    <Text variant="caption1" color="red" {...layoutProps}>
-      {error}
-    </Text>
-  )
-}
 
 /* -------------------------------------------------------------------------------------------------
  * InputWrapper
@@ -73,5 +49,4 @@ export const Input = {
   Label: InputLabel,
   Wrapper: InputWrapper,
   Content: InputContent,
-  Error: InputError,
 }
