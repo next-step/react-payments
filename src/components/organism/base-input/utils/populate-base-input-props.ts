@@ -9,8 +9,9 @@ export const populateBaseInputProps = (props: BaseInputProps) => {
     label,
     topOffset = '4px',
     bottomOffset = '4px',
-    error,
     id,
+    error,
+    errorRender,
     ...otherInputContentProps
   } = otherBaseInputProps
 
@@ -25,12 +26,15 @@ export const populateBaseInputProps = (props: BaseInputProps) => {
   return {
     wrapperProps: { ...layoutProps, className },
     baseInputTopSectionProps: {
-      isTopSectionEnabled,
       isLabelEnabled,
       label,
       isHelperTextEnabled,
       helperText,
       htmlFor: id,
+    },
+    baseInputBottomSectionProps: {
+      error,
+      errorRender,
     },
     contentProps: {
       ...otherInputContentProps,
@@ -38,6 +42,5 @@ export const populateBaseInputProps = (props: BaseInputProps) => {
       marginTop: inputContentTopMargin,
       marginBottom: inputContentBottomMargin,
     },
-    error,
   }
 }
