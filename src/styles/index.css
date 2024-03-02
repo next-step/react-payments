@@ -17,7 +17,7 @@ input {
   font-size: 16px;
 }
 
-.root {
+#root {
   background-color: #fff;
   width: 375px;
   min-width: 375px;
@@ -40,3 +40,4 @@ input {
 
   color: #383838;
 }
+
