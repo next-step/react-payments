@@ -11,7 +11,10 @@ const Form = (props) => {
       name: "test",
       year: "21",
       month: "12",
-      cardNumber: "1234123412341234",
+      cardNumber1: "1234",
+      cardNumber2: "1234",
+      cardNumber3: "1234",
+      cardNumber4: "1234",
       cardCompany: "visa",
     },
   });
@@ -105,7 +108,12 @@ describe("Card props 테스트", () => {
   it("카드 번호 표시", () => {
     render(
       <Form>
-        <Card cardNumber="4321432143214321" />
+        <Card
+          cardNumber1="4321"
+          cardNumber2="4321"
+          cardNumber3="4321"
+          cardNumber4="4321"
+        />
       </Form>
     );
 
@@ -124,5 +132,11 @@ describe("Card props 테스트", () => {
     const text = screen.getByText("master");
 
     expect(text).toBeTruthy();
+  });
+});
+
+describe("빈 Card 테스트", () => {
+  it("빈 카드 표시", () => {
+    render(<Card empty />);
   });
 });
