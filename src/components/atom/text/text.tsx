@@ -28,7 +28,7 @@ interface TextStyleProps {
   underline?: styles.Underline
 }
 
-export type TextElement =
+type TextElement =
   | 'h1'
   | 'h2'
   | 'h3'
@@ -41,7 +41,6 @@ export type TextElement =
   | 'p'
   | 'label'
   | 'a'
-  | 'button'
 
 export type TextProps<C extends TextElement = 'div'> = PolymorphicComponentPropWithRef<
   C,

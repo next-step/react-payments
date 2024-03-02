@@ -1,11 +1,11 @@
 import { Text, type TextProps } from '@/components/atom/text'
 import type { StoryObj, Meta } from '@storybook/react'
-import { textVariants } from '@/styles/variants.css'
-import { layoutArgTypes } from '@/stories/arg-types'
+import { textVariants } from '@/components/atom/text/text.css'
+import { layoutArgTypes } from '@/stories/arg-types.ts'
 import { Box } from '@/components'
 
 const meta: Meta<typeof Text> = {
-  title: 'atom/Text',
+  title: 'atoms/Text',
   component: Text,
   argTypes: { ...layoutArgTypes },
   tags: ['autodocs'],
