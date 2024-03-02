@@ -1,4 +1,4 @@
-import { FormProvider, useForm } from "react-hook-form";
+import Form from "../../../utils/test/form";
 import Input from ".";
 
 export default {
@@ -7,13 +7,6 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
-};
-
-const Form = (props) => {
-  const { children } = props;
-  const form = useForm();
-
-  return <FormProvider {...form}>{children}</FormProvider>;
 };
 
 const Template = (args) => (

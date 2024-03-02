@@ -1,4 +1,4 @@
-import { FormProvider, useForm } from "react-hook-form";
+import Form from "../../../utils/test/form";
 import Card from ".";
 
 export default {
@@ -7,24 +7,6 @@ export default {
   parameters: {
     layout: "fullscreen",
   },
-};
-
-const Form = (props) => {
-  const { children } = props;
-  const form = useForm({
-    defaultValues: {
-      name: "서재완",
-      year: "23",
-      month: "03",
-      cardNumber1: "1234",
-      cardNumber2: "1234",
-      cardNumber3: "1234",
-      cardNumber4: "1234",
-      cardCompany: "kb",
-    },
-  });
-
-  return <FormProvider {...form}>{children}</FormProvider>;
 };
 
 const FormTemplate = (args) => (

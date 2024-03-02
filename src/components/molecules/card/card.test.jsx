@@ -1,26 +1,8 @@
-import { FormProvider, useForm } from "react-hook-form";
 import { afterEach, describe, expect, it } from "vitest";
 import PropTypes from "prop-types";
 import { cleanup, render, screen } from "@testing-library/react";
 import Card from ".";
-
-const Form = (props) => {
-  const { children } = props;
-  const form = useForm({
-    defaultValues: {
-      name: "test",
-      year: "21",
-      month: "12",
-      cardNumber1: "1234",
-      cardNumber2: "1234",
-      cardNumber3: "1234",
-      cardNumber4: "1234",
-      cardCompany: "visa",
-    },
-  });
-
-  return <FormProvider {...form}>{children}</FormProvider>;
-};
+import Form from "../../../utils/test/form";
 
 Form.propTypes = {
   children: PropTypes.node,
@@ -72,7 +54,7 @@ describe("Card Form 테스트", () => {
       </Form>
     );
 
-    const text = screen.getByText("visa");
+    const text = screen.getByText("kb");
 
     expect(text).toBeTruthy();
   });
