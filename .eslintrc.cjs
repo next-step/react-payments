@@ -1,11 +1,8 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires,no-undef
 const { resolve } = require('node:path')
 
-// eslint-disable-next-line no-undef
 const project = resolve(process.cwd(), 'tsconfig.json')
 
 /** @type { import("eslint").Linter.BaseConfig } */
-// eslint-disable-next-line no-undef
 module.exports = {
   parserOptions: {
     ecmaVersion: 'es6',

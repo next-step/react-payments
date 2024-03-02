@@ -2,43 +2,35 @@ import { BaseInputProps } from '@/components/organism/base-input/base-input.tsx'
 import { getLayoutProps } from '@/types'
 import { isNil } from '@/utils'
 
-export const populateBaseInputProps = (props: BaseInputProps) => {
-  const { layoutProps, className, ...otherBaseInputProps } = getLayoutProps(props)
-  const {
-    helperText,
-    label,
-    topOffset = '4px',
-    bottomOffset = '4px',
-    id,
-    error,
-    errorRender,
-    htmlFor,
-    ...otherInputContentProps
-  } = otherBaseInputProps
+export const getBaseInputProps = (props: BaseInputProps) => {
+  const { layoutProps, ...otherBaseInputProps } = getLayoutProps(props)
+  const { helperText, label, topOffset, bottomOffset, error, id, ...otherProps } =
+    otherBaseInputProps
 
   const isHelperTextEnabled = !isNil(helperText)
   const isLabelEnabled = !isNil(label)
   const isTopSectionEnabled = isLabelEnabled || isHelperTextEnabled
   const isBottomSectionEnabled = !isNil(error)
 
-  const inputContentTopMargin = isTopSectionEnabled ? topOffset : 'none'
-  const inputContentBottomMargin = isBottomSectionEnabled ? bottomOffset : 'none'
+  const inputContentTopMargin: BaseInputProps['topOffset'] = isTopSectionEnabled
+    ? topOffset
+    : 'none'
+  const inputContentBottomMargin: BaseInputProps['bottomOffset'] = isBottomSectionEnabled
+    ? bottomOffset
+    : 'none'
 
   return {
-    wrapperProps: { ...layoutProps, className },
+    wrapperProps: layoutProps,
     baseInputTopSectionProps: {
+      isTopSectionEnabled,
       isLabelEnabled,
       label,
       isHelperTextEnabled,
       helperText,
-      htmlFor: htmlFor ?? id,
+      htmlFor: id,
     },
-    baseInputBottomSectionProps: {
-      error,
-      errorRender,
-    },
-    contentProps: {
-      ...otherInputContentProps,
+    inputContentProps: {
+      ...otherProps,
       id,
       marginTop: inputContentTopMargin,
       marginBottom: inputContentBottomMargin,
