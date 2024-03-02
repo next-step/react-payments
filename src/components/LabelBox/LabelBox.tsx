@@ -14,11 +14,7 @@ export default function LabelBox({
   return (
     <div>
       <div className={styles.description}>{description}</div>
-      <div className={styles.labelBox}>
-        <Box height="45px" backgroundColor="#ECEBF1">
-          {children}
-        </Box>
-      </div>
+      <div className={styles.labelBox}>{children}</div>
     </div>
   );
 }
