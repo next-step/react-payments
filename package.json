@@ -15,6 +15,7 @@
     "test:watch": "vitest --watch"
   },
   "dependencies": {
+    "@tabler/icons-react": "^2.47.0",
     "@vanilla-extract/css": "^1.14.1",
     "@vanilla-extract/recipes": "^0.5.1",
     "@vanilla-extract/sprinkles": "^1.6.1",
