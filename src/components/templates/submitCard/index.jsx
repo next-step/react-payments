@@ -3,9 +3,17 @@ import Box from "../../atoms/box";
 import Input from "../../atoms/input";
 import Text from "../../atoms/text";
 import Card from "../../molecules/card";
+import { useFormContext } from "react-hook-form";
 
 const SubmitCard = (props) => {
   const { setCardList, update } = props;
+  const { handleSubmit, reset } = useFormContext();
+
+  const handleAddCard = (data) => {
+    update("list");
+    setCardList((prev) => [...prev, data]);
+    reset();
+  };
 
   return (
     <Box className={"app flex-column-center"}>
@@ -24,7 +32,7 @@ const SubmitCard = (props) => {
       </Box>
 
       <Box className={["button-box", "mt-50"]}>
-        <button className={"button-text"} onClick={() => update("list")}>
+        <button className={"button-text"} onClick={handleSubmit(handleAddCard)}>
           다음
         </button>
       </Box>

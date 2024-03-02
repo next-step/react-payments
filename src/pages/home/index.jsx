@@ -21,6 +21,8 @@ const Home = () => {
     },
   });
 
+  console.log(cardList);
+
   return (
     <FormProvider {...form}>
       <Funnel steps={["list", "form", "success"]}>

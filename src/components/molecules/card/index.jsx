@@ -43,7 +43,9 @@ const Card = (props) => {
 
   return (
     <Box className={"card-box"}>
-      <Box className={[type === "big" ? "big-card" : "empty-card"]}>
+      <Box
+        className={[type === "big" ? "big-card" : "empty-card", cardCompany]}
+      >
         {empty ? (
           "+"
         ) : (
@@ -52,7 +54,7 @@ const Card = (props) => {
               <Text className={"card-text"}>{cardCompany}</Text>
             </Box>
             <Box className="card-middle">
-              <Box className="small-card__chip" />
+              <Box className={"small-card__chip"} />
             </Box>
             <Box className={"card-bottom"}>
               <Box className={"card-bottom__number"}>
