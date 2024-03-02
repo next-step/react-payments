@@ -37,6 +37,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  border: none;
+  background-color: #fff;
+
+  cursor: pointer;
 }
 
 .modal-item-dot {
@@ -44,7 +49,6 @@
   border-radius: 50%;
   width: 2.8rem;
   height: 2.8rem;
-  background-color: #94dacd;
 }
 
 .modal-item-name {

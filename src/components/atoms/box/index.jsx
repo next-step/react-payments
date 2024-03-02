@@ -10,7 +10,7 @@ const Box = (props) => {
 };
 
 Box.propTypes = {
-  as: PropTypes.oneOf(["div", "label"]),
+  as: PropTypes.oneOf(["div", "label", "span"]),
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
