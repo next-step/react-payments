@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import AddCardInfo from './AddCard';
-import ChooseCard from './ChooseCard';
-import FinishAddingCard from './FinishAddingCard';
+import AddCardInfo from './AddCard.tsx';
+import ChooseCard from './ChooseCard.tsx';
+import FinishAddingCard from './FinishAddingCard.tsx';
 
 const AddCard = () => {
   const [data,setData]=useState()
