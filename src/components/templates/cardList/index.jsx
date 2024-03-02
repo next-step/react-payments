@@ -4,7 +4,7 @@ import Text from "../../atoms/text";
 import Card from "../../molecules/card";
 
 const CardList = (props) => {
-  const { cardList } = props;
+  const { cardList, next } = props;
 
   return (
     <Box className={["app", "flex-column-center"]}>
@@ -22,13 +22,16 @@ const CardList = (props) => {
         />;
       })}
 
-      <Card empty />
+      <button onClick={next}>
+        <Card empty />
+      </button>
     </Box>
   );
 };
 
 CardList.propTypes = {
   cardList: PropTypes.array,
+  next: PropTypes.func,
 };
 
 export default CardList;

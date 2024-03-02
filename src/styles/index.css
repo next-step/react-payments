@@ -51,3 +51,10 @@ input::-webkit-inner-spin-button {
   -moz-appearance: none;
   -webkit-appearance: none;
 }
+
+button {
+  background: none;
+  border: none;
+
+  cursor: pointer;
+}

@@ -1,9 +1,12 @@
+import PropTypes from "prop-types";
 import Box from "../../atoms/box";
 import Input from "../../atoms/input";
 import Text from "../../atoms/text";
 import Card from "../../molecules/card";
 
-const SubmitCard = () => {
+const SubmitCard = (props) => {
+  const { setCardList, update } = props;
+
   return (
     <Box className={"app flex-column-center"}>
       <Box>
@@ -21,10 +24,17 @@ const SubmitCard = () => {
       </Box>
 
       <Box className={["button-box", "mt-50"]}>
-        <button className={"button-text"}>다음</button>
+        <button className={"button-text"} onClick={() => update("list")}>
+          다음
+        </button>
       </Box>
     </Box>
   );
+};
+
+SubmitCard.propTypes = {
+  setCardList: PropTypes.func,
+  update: PropTypes.func,
 };
 
 export default SubmitCard;

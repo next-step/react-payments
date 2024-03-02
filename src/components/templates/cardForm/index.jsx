@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import PropTypes from "prop-types";
 import Box from "../../atoms/box";
 import Input from "../../atoms/input";
 import Text from "../../atoms/text";
@@ -6,14 +7,17 @@ import Card from "../../molecules/card";
 import InputForm from "../../molecules/inputForm";
 import InputLength from "../../molecules/inputLength";
 
-const CardForm = () => {
+const CardForm = (props) => {
+  const { next, back } = props;
   const {
     formState: { isValid },
   } = useFormContext();
 
   return (
     <>
-      <button className="page-title">&lt; 카드 추가</button>
+      <button className="page-title" onClick={back}>
+        &lt; 카드 추가
+      </button>
 
       <Card />
 
@@ -123,11 +127,18 @@ const CardForm = () => {
         </Box>
 
         <Box className={"button-box"}>
-          <button className={"button-text"}>다음</button>
+          <button className={"button-text"} onClick={isValid && next}>
+            다음
+          </button>
         </Box>
       </InputForm>
     </>
   );
+};
+
+CardForm.propTypes = {
+  next: PropTypes.func,
+  back: PropTypes.func,
 };
 
 export default CardForm;
