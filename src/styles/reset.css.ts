@@ -55,9 +55,6 @@ const field = style([
   appearance,
   style({
     outline: 'none',
-    '::placeholder': {
-      opacity: '0.1',
-    },
   }),
 ])
 

@@ -56,9 +56,4 @@ export const textVariants = {
     fontWeight: vars.fontWeight.medium,
     lineHeight: vars.lineHeight['1.3'],
   },
-  inherit: {
-    fontSize: 'inherit',
-    fontWeight: 'inherit',
-    lineHeight: 'inherit',
-  },
 }
