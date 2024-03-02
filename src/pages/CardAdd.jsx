@@ -4,14 +4,11 @@ import NumberInput from "../components/NumberInput";
 
 export default function CardAdd() {
   const [cardNumberValue1, setCardNumberValue1] = useState("");
-  const cardNumberRef1 = useRef(null);
+  const cardNumberRef = useRef([]);
   const [cardNumberValue2, setCardNumberValue2] = useState("");
-  const cardNumberRef2 = useRef(null);
 
   const [cardNumberValue3, setCardNumberValue3] = useState("");
-  const cardNumberRef3 = useRef(null);
   const [cardNumberValue4, setCardNumberValue4] = useState("");
-  const cardNumberRef4 = useRef(null);
 
   // 만료일(MM)
   const expirationMMRef = useRef(null);
@@ -101,8 +98,8 @@ export default function CardAdd() {
           <span className="input-title">카드 번호</span>
           <div className="input-box">
             <NumberInput
-              myref={cardNumberRef1}
-              nextRef={cardNumberRef2}
+              myref={(el) => (cardNumberRef.current[0] = el)}
+              nextRef={cardNumberRef.current[1]}
               value={cardNumberValue1}
               setValue={setCardNumberValue1}
               type="text"
@@ -118,8 +115,8 @@ export default function CardAdd() {
               disabled
             />
             <NumberInput
-              myref={cardNumberRef2}
-              nextRef={cardNumberRef3}
+              myref={(el) => (cardNumberRef.current[1] = el)}
+              nextRef={cardNumberRef.current[2]}
               value={cardNumberValue2}
               setValue={setCardNumberValue2}
               type="text"
@@ -135,8 +132,8 @@ export default function CardAdd() {
               disabled
             />
             <NumberInput
-              myref={cardNumberRef3}
-              nextRef={cardNumberRef4}
+              myref={(el) => (cardNumberRef.current[2] = el)}
+              nextRef={cardNumberRef.current[3]}
               value={cardNumberValue3}
               setValue={setCardNumberValue3}
               type="password"
@@ -151,8 +148,7 @@ export default function CardAdd() {
               disabled
             />
             <NumberInput
-              myref={cardNumberRef4}
-              nextRef={expirationMMRef}
+              myref={(el) => (cardNumberRef.current[3] = el)}
               value={cardNumberValue4}
               setValue={setCardNumberValue4}
               type="password"

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { getNumberString } from "../util/regExp";
 
 export default function NumberInput({
@@ -11,9 +12,8 @@ export default function NumberInput({
   const onChangeInputFn = (event) => {
     const onlyNumberValue = getNumberString(event.target.value);
 
-    console.log(myref, nextRef);
     if (nextRef !== undefined && onlyNumberValue.length === maxLength) {
-      nextRef.current.focus();
+      nextRef.focus();
     }
 
     setValue(onlyNumberValue);
