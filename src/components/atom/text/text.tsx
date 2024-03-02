@@ -28,7 +28,7 @@ interface TextStyleProps {
   underline?: styles.Underline
 }
 
-type TextElement =
+export type TextElement =
   | 'h1'
   | 'h2'
   | 'h3'
