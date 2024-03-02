@@ -1,6 +1,7 @@
 import { style, styleVariants } from '@vanilla-extract/css';
 import { CARD_BRANDS } from '@/constants/card';
-import type { BrandName } from '.';
+import type { CardBrand } from '@/types/card';
+
 const base = style({
   padding: '16px',
   borderRadius: '4px',
@@ -43,9 +44,9 @@ const cardColors = CARD_BRANDS.reduce((acc, brand) => {
       },
     ],
   };
-}, {}) as Record<BrandName, { backgroundColor: string }>;
+}, {}) as Record<CardBrand, { backgroundColor: string }>;
 
-export const cardColor: Record<'UNKNOWN' | BrandName, string> = styleVariants({
+export const cardColor: Record<'UNKNOWN' | CardBrand, string> = styleVariants({
   ...cardColors,
   UNKNOWN: [
     base,

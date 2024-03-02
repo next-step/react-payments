@@ -1,11 +1,10 @@
-import { CARD_BRANDS } from '@/constants/card';
+import { useEffect, useState } from 'react';
 import * as styles from './index.css';
 
-export type BrandName = (typeof CARD_BRANDS)[number]['name'];
+import type { CardBrand } from '@/types/card';
 
 interface CardProps {
   size?: 'small' | 'large';
-  brand: BrandName | 'UNKNOWN';
   cardNumber: [string, string, string, string];
   owner: string;
   expirationDate: {
@@ -19,11 +18,13 @@ const Chip = ({ size }: Required<Pick<CardProps, 'size'>>) => (
 
 const Card = ({
   size = 'small',
-  brand,
   cardNumber,
   owner,
   expirationDate,
 }: CardProps) => {
+  const firstCardNumber = cardNumber[0];
+  const [cardBrand, setCardBrand] = useState<CardBrand | 'UNKNOWN'>('UNKNOWN');
+
   const fullCardNumber = cardNumber
     // .filter(Boolean)
     .map((part, index) => {
@@ -37,10 +38,20 @@ const Card = ({
     expirationDate.month && expirationDate.year
       ? `${expirationDate.month}/${expirationDate.year}`
       : '';
+  useEffect(() => {
+    if (!firstCardNumber) return;
+    const firstNum = firstCardNumber[0];
+    if (firstNum === '9') {
+      setCardBrand('UNKNOWN');
+      return;
+    }
+    const brand = `BRAND${firstNum}` as CardBrand;
+    setCardBrand(brand);
+  }, [firstCardNumber]);
   return (
     <div className={styles.cardBox[size]}>
-      <div className={styles.cardColor[brand]}>
-        <div className={styles.brand}>{brand || ' '}</div>
+      <div className={styles.cardColor[cardBrand]}>
+        <div className={styles.brand}>{cardBrand || ' '}</div>
         <Chip size={size} />
         <div style={{ textAlign: 'center' }}>{fullCardNumber}</div>
         <div

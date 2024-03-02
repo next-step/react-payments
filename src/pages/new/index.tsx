@@ -1,305 +1,38 @@
-import { useEffect, useState, useRef, Fragment } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Header, Form, Input, Button } from '@/components';
-import { Card } from '@/pages/_components';
-import Arrow from '@/assets/arrow.svg?react';
-import * as styles from './index.css';
-import type { CardBrand } from '@/types/card';
+import { useFunnel } from '@/hooks';
+import FormContext from './context';
+import { Step1, Step2 } from './steps';
 
 const New = () => {
   const navigate = useNavigate();
-  const formRef = useRef<HTMLFormElement | null>(null);
-  const [formItems, setFormItems] = useState<HTMLFormControlsCollection>();
-  const [formData, setFormData] = useState(new Map());
-  const [cardBrand, setCardBrand] = useState<CardBrand | 'UNKNOWN'>('UNKNOWN');
-  const firstCardNumber = formData.get('cardNumber1');
-
-  useEffect(() => {
-    if (!formRef.current) return;
-    const formItems = formRef.current.elements;
-    setFormItems(formItems);
-  }, []);
-
-  useEffect(() => {
-    if (!firstCardNumber) return;
-    const firstNum = firstCardNumber[0];
-    if (firstNum === '9') {
-      setCardBrand('UNKNOWN');
-      return;
-    }
-    const brand = `BRAND${firstNum}` as CardBrand;
-    setCardBrand(brand);
-  }, [firstCardNumber]);
+  const [totalFormData, setTotalFormData] = useState(new Map());
+  const [Funnel, setStep] = useFunnel('1');
 
   return (
-    <>
-      <Header
-        left={
-          <Button
-            onClick={() => navigate('/')}
-            aria-label='뒤로가기'
-            type='text'
-          >
-            <Arrow />
-          </Button>
-        }
-      >
-        <h1 className={styles.header}>카드 추가</h1>
-      </Header>
-      <Card
-        brand={cardBrand}
-        cardNumber={[
-          formData.get('cardNumber1') || '',
-          formData.get('cardNumber2') || '',
-          formData.get('cardNumber3') || '',
-          formData.get('cardNumber4') || '',
-        ]}
-        expirationDate={{
-          month: formData.get('expireDateMonth'),
-          year: formData.get('expireDateYear'),
-        }}
-        owner={formData.get('cardOwner')}
-      />
-      <main
-        style={{
-          width: '100%',
-        }}
-      >
-        <Form
-          ref={formRef}
-          onChange={(e) => {
-            const target = e.target as HTMLInputElement;
-            const currentIndex = Array.from(formItems!).findIndex(
-              (item) => item === target
-            );
-
-            // setCustomeValidity
-            if (target.dataset.rule) {
-              const rule = new RegExp(target.dataset.rule);
-              if (!rule.test(target.value)) {
-                target.setCustomValidity(
-                  target.dataset.message || '올바른 형식이 아닙니다.'
-                );
-              } else {
-                target.setCustomValidity('');
-              }
+    <FormContext.Provider
+      value={{
+        totalFormData,
+        setTotalFormData,
+      }}
+    >
+      <Funnel>
+        <Funnel.Step name='1'>
+          <Step1 next={() => setStep('2')} />
+        </Funnel.Step>
+        <Funnel.Step name='2'>
+          <Step2
+            next={() =>
+              navigate('/', {
+                state: {
+                  data: totalFormData,
+                },
+              })
             }
-
-            // 지울 때 이전 input으로 focus
-            if (target.value === '') {
-              const PrevFormItem = formItems?.item(currentIndex - 1);
-              if (PrevFormItem instanceof HTMLInputElement) {
-                PrevFormItem.focus();
-              }
-            }
-
-            // maxLength 다 됐으면 다음 input으로 focus
-            if (target.maxLength === target.value.length) {
-              const NextFormItem = formItems?.item(currentIndex + 1);
-              if (NextFormItem instanceof HTMLInputElement) {
-                NextFormItem.focus();
-              }
-            }
-
-            setFormData((prev) => {
-              const next = new Map(prev);
-              next.set(target.name, target.value);
-              return next;
-            });
-          }}
-        >
-          <Form.Item vertical label={'카드번호'}>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr 1fr 1fr',
-                alignItems: 'center',
-                backgroundColor: '#ecebf1',
-                borderRadius: '8px',
-              }}
-            >
-              {[1, 2, 3, 4].map((i) => (
-                <Fragment key={i}>
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <Input
-                      required
-                      name={`cardNumber${i}`}
-                      type={i > 2 ? 'password' : 'text'}
-                      inputMode='numeric'
-                      minLength={4}
-                      maxLength={4}
-                      style={{ textAlign: 'center' }}
-                    />
-                    {i !== 4 && (
-                      <span
-                        style={{
-                          opacity:
-                            formData.get(`cardNumber${i}`)?.length === 4
-                              ? 1
-                              : 0,
-                          color: '#04C09E',
-                        }}
-                      >
-                        -
-                      </span>
-                    )}
-                  </div>
-                </Fragment>
-              ))}
-            </div>
-          </Form.Item>
-          <Form.Item vertical label={'만료일'}>
-            <div
-              style={{
-                display: 'grid',
-                width: '50%',
-                gridTemplateColumns: '1fr auto 1fr',
-                alignItems: 'center',
-                backgroundColor: '#ecebf1',
-                borderRadius: '8px',
-              }}
-            >
-              <Input
-                required
-                type='number'
-                inputMode='numeric'
-                placeholder='MM'
-                name='expireDateMonth'
-                maxLength={2}
-                data-rule={'^(0[1-9]|1[0-2])$'}
-                data-message={'01~12월 사이의 숫자만 입력해주세요'}
-                style={{ textAlign: 'right' }}
-              />
-              <span
-                style={{
-                  opacity:
-                    formData.get('expireDateMonth')?.length === 2 ? 1 : 0,
-                  transform: 'translateX(-6px)',
-                  color: '#04C09E',
-                }}
-              >
-                /
-              </span>
-              <Input
-                required
-                type='number'
-                inputMode='numeric'
-                placeholder='YY'
-                name='expireDateYear'
-                minLength={2}
-                maxLength={2}
-              />
-            </div>
-          </Form.Item>
-          <Form.Item
-            vertical
-            label={
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <span>카드 소유자 이름(선택)</span>
-                <span>{formData.get('cardOwner')?.length || 0}/30</span>
-              </div>
-            }
-          >
-            <Input
-              name='cardOwner'
-              type='text'
-              placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
-              maxLength={30}
-            />
-          </Form.Item>
-          <Form.Item vertical label={'보안코드(CVC/CVV)'}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-              }}
-            >
-              <Input
-                name='cvc'
-                type='password'
-                inputMode='numeric'
-                maxLength={3}
-                style={{
-                  // width: '60px',
-                  width: '60px',
-                  textAlign: 'center',
-                  letterSpacing: '8px',
-                }}
-              />
-              <div style={{ flexGrow: 1 }}>툴팁</div>
-            </div>
-          </Form.Item>
-          <Form.Item vertical label={'카드 비밀번호'}>
-            <div
-              style={{
-                display: 'grid',
-                width: 'fit-content',
-                gap: '8px',
-                gridTemplateColumns: '1fr 1fr 1fr 1fr',
-              }}
-            >
-              <div
-                style={{
-                  width: '42.5px',
-                }}
-              >
-                <Input
-                  name='password1'
-                  type='password'
-                  inputMode='numeric'
-                  maxLength={1}
-                  style={{
-                    textAlign: 'center',
-                  }}
-                />
-              </div>
-              <div
-                style={{
-                  width: '42.5px',
-                  textAlign: 'center',
-                }}
-              >
-                <Input
-                  name='password2'
-                  type='password'
-                  inputMode='numeric'
-                  maxLength={1}
-                  style={{
-                    textAlign: 'center',
-                  }}
-                />
-              </div>
-              <div
-                style={{
-                  width: '42.5px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                •
-              </div>
-              <div
-                style={{
-                  width: '42.5px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-              >
-                •
-              </div>
-            </div>
-          </Form.Item>
-          <div style={{ textAlign: 'end' }}>
-            <Button htmlType='submit' type='text' style={{ color: '#04C09E' }}>
-              다음
-            </Button>
-          </div>
-        </Form>
-      </main>
-    </>
+          />
+        </Funnel.Step>
+      </Funnel>
+    </FormContext.Provider>
   );
 };
 
