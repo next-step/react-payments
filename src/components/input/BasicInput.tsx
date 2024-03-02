@@ -1,8 +1,10 @@
+import { ReactNode } from "react";
 import Input, { BaseInputProps } from "./Input";
 import Label from "./Label";
 
 interface BasicInputProps extends BaseInputProps {
   label: string;
+  children?: ReactNode;
 }
 
 export default function BasicInput({
@@ -14,10 +16,11 @@ export default function BasicInput({
   inputRef,
   type,
   maxLength,
+  children,
 }: BasicInputProps) {
   return (
     <div className="input-container">
-      <Label label={label} />
+      <Label label={label}>{children}</Label>
       <div className="input-box">
         <Input
           style="basic"
