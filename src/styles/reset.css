@@ -1,0 +1,21 @@
+button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+input,
+textarea {
+  border: none;
+  appearance: none;
+  border-radius: 0;
+  outline: none;
+  padding: 0;
+  background-color: transparent;
+  --webkit-border-radius: 0;
+  --moz-border-radius: 0;
+}
