@@ -8,7 +8,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import CardList from './pages/CardList.tsx';
-import AddCard from './pages/AddCard/AddCard.tsx';
+import AddCard from './pages/AddCard/index.tsx';
 
 
 const router = createBrowserRouter([
