@@ -36,7 +36,10 @@ export const InputWrapper = forwardRef(
  * InputContent
  * -----------------------------------------------------------------------------------------------*/
 
-export type InputContentProps = Omit<BoxProps<'input'>, 'ref'>
+export type InputContentProps = Omit<BoxProps<'input'>, 'ref' | 'id'> & {
+  /** html input id attribute */
+  id: BoxProps<'input'>['id']
+}
 
 export const InputContent = forwardRef((props: InputContentProps, ref: PolymorphicRef<'input'>) => {
   return <Box as="input" ref={ref} {...props} />
