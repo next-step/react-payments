@@ -6,12 +6,15 @@ import Text from "../../atoms/text";
 import Card from "../../molecules/card";
 import InputForm from "../../molecules/inputForm";
 import InputLength from "../../molecules/inputLength";
+import useModal from "../../../hooks/useModal";
+import CardModal from "../../molecules/cardModal";
 
 const CardForm = (props) => {
   const { next, back } = props;
   const {
     formState: { isValid },
   } = useFormContext();
+  const { Modal, toggleModal } = useModal();
 
   return (
     <>
@@ -127,11 +130,14 @@ const CardForm = (props) => {
         </Box>
 
         <Box className={"button-box"}>
-          <button className={"button-text"} onClick={isValid && next}>
+          <button className={"button-text"} onClick={isValid && toggleModal}>
             다음
           </button>
         </Box>
       </InputForm>
+      <Modal>
+        <CardModal toggleModal={toggleModal} submit={next} />
+      </Modal>
     </>
   );
 };

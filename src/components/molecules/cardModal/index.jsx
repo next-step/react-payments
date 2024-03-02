@@ -1,4 +1,5 @@
 import { Controller, useFormContext } from "react-hook-form";
+import PropTypes from "prop-types";
 import Box from "../../atoms/box";
 import Text from "../../atoms/text";
 
@@ -45,8 +46,9 @@ const CARD_CATEGORY = [
   },
 ];
 
-const CardModal = () => {
+const CardModal = (props) => {
   const { control } = useFormContext();
+  const { toggleModal, submit } = props;
 
   return (
     <Box className="modal-dimmed">
@@ -60,7 +62,12 @@ const CardModal = () => {
               render={({ field: { onChange } }) => (
                 <button
                   className="modal-item-container"
-                  onClick={() => onChange(value)}
+                  // 방식을 onChange 때문에 밖으로 뻇는데 이런 방식이 괜찮을까??
+                  onClick={() => {
+                    onChange(value);
+                    toggleModal();
+                    submit();
+                  }}
                 >
                   <Box as="span" className={["modal-item-dot", className]} />
                   <Text as="span" className={"modal-item-name"}>
@@ -74,6 +81,11 @@ const CardModal = () => {
       </Box>
     </Box>
   );
+};
+
+CardModal.propTypes = {
+  toggleModal: PropTypes.func,
+  submit: PropTypes.func,
 };
 
 export default CardModal;
