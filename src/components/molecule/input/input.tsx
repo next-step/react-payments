@@ -38,7 +38,7 @@ export const InputWrapper = forwardRef(
 
 export type InputContentProps = Omit<BoxProps<'input'>, 'ref' | 'id'> & {
   /** html input id attribute */
-  id: BoxProps<'input'>['id']
+  id?: BoxProps<'input'>['id']
 }
 
 export const InputContent = forwardRef((props: InputContentProps, ref: PolymorphicRef<'input'>) => {

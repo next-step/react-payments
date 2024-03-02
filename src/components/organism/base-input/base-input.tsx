@@ -1,7 +1,7 @@
 import { forwardRef, ReactElement } from 'react'
 import { Flex } from '@/components/atom/flex'
 import { Text } from '@/components/atom/text'
-import { Input, InputContentProps } from '@/components/molecules/input'
+import { Input, InputContentProps } from '@/components/molecule/input'
 import { populateBaseInputProps } from '@/components/organism/base-input/utils/populate-base-input-props.ts'
 import { AtomicProps, PolymorphicRef } from '@/types'
 import * as styles from './base-input.css.ts'
