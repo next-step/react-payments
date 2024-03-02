@@ -15,6 +15,7 @@ export interface BaseInputProps {
   inputRef?: RefObject<HTMLInputElement>;
   type?: HTMLInputTypeAttribute;
   maxLength?: number;
+  readOnly?: boolean;
 }
 interface InputProps extends BaseInputProps {
   style?: InputType;
@@ -29,6 +30,7 @@ export default function Input({
   inputRef,
   type,
   maxLength,
+  readOnly,
 }: InputProps) {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
@@ -47,6 +49,7 @@ export default function Input({
       ref={inputRef}
       type={type}
       maxLength={maxLength}
+      readOnly={readOnly}
     />
   );
 }
