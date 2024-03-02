@@ -1,7 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { AppLayout } from '@/components';
-import { TextField, TypographyVariants, VStack } from '@/shared/components';
-import { Label } from '@/shared/components/Label/Label.tsx';
+import { TextField, TypographyVariants, VStack, Label } from '@/shared/components';
 import { storybookControls } from '@/shared/styles';
 
 const meta: Meta<typeof Label> = {
