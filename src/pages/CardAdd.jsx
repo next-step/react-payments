@@ -1,14 +1,17 @@
 import { useState, useRef } from "react";
-import {
-  getHpyenAddedNumberSting,
-  getNumberString,
-  isNumericString,
-  isValidateMonth,
-} from "../util/regExp";
+import { isNumericString, isValidateMonth } from "../util/regExp";
+import NumberInput from "../components/NumberInput";
 
 export default function CardAdd() {
-  // 카드 번호
-  const [cardNumber, setCardNumber] = useState("");
+  const [cardNumberValue1, setCardNumberValue1] = useState("");
+  const cardNumberRef1 = useRef(null);
+  const [cardNumberValue2, setCardNumberValue2] = useState("");
+  const cardNumberRef2 = useRef(null);
+
+  const [cardNumberValue3, setCardNumberValue3] = useState("");
+  const cardNumberRef3 = useRef(null);
+  const [cardNumberValue4, setCardNumberValue4] = useState("");
+  const cardNumberRef4 = useRef(null);
 
   // 만료일(MM)
   const expirationMMRef = useRef(null);
@@ -19,19 +22,6 @@ export default function CardAdd() {
 
   // 카드 소유자 이름(선택)
   const cardOwnerNameRef = useRef(null);
-
-  // 카드 번호
-  const handleCardNumberInput = (event) => {
-    const onlyNumberCardValue = getNumberString(event.target.value);
-    const cardNumber16Digits = onlyNumberCardValue.slice(0, 16);
-    const hypenAddedCardNumber16Digits =
-      getHpyenAddedNumberSting(cardNumber16Digits);
-    setCardNumber(hypenAddedCardNumber16Digits);
-
-    if (cardNumber16Digits.length === 16) {
-      expirationMMRef.current.focus();
-    }
-  };
 
   // 만료일(MM)
   const handleExpirationMMInput = (event) => {
@@ -56,7 +46,7 @@ export default function CardAdd() {
     }
 
     // 모두 입력 시, 만료일(YY)
-    if (nowExpirationMM.length === 2) {
+    if (nowExpirationMM.length >= 2) {
       expirationYYRef.current.focus();
     }
 
@@ -110,11 +100,63 @@ export default function CardAdd() {
         <div className="input-container">
           <span className="input-title">카드 번호</span>
           <div className="input-box">
-            <input
-              value={cardNumber}
-              onChange={handleCardNumberInput}
-              className="input-basic"
+            <NumberInput
+              myref={cardNumberRef1}
+              nextRef={cardNumberRef2}
+              value={cardNumberValue1}
+              setValue={setCardNumberValue1}
               type="text"
+              maxLength={4}
+            />
+
+            <input
+              defaultValue="-"
+              className="input-basic"
+              style={{
+                display: cardNumberValue1.length === 4 ? "block" : "none",
+              }}
+              disabled
+            />
+            <NumberInput
+              myref={cardNumberRef2}
+              nextRef={cardNumberRef3}
+              value={cardNumberValue2}
+              setValue={setCardNumberValue2}
+              type="text"
+              maxLength={4}
+            />
+
+            <input
+              defaultValue="-"
+              className="input-basic"
+              style={{
+                display: cardNumberValue2.length === 4 ? "block" : "none",
+              }}
+              disabled
+            />
+            <NumberInput
+              myref={cardNumberRef3}
+              nextRef={cardNumberRef4}
+              value={cardNumberValue3}
+              setValue={setCardNumberValue3}
+              type="password"
+              maxLength={4}
+            />
+            <input
+              defaultValue="-"
+              className="input-basic"
+              style={{
+                display: cardNumberValue3.length === 4 ? "block" : "none",
+              }}
+              disabled
+            />
+            <NumberInput
+              myref={cardNumberRef4}
+              nextRef={expirationMMRef}
+              value={cardNumberValue4}
+              setValue={setCardNumberValue4}
+              type="password"
+              maxLength={4}
             />
           </div>
         </div>
@@ -159,6 +201,7 @@ export default function CardAdd() {
         {/* 카드 비밀번호 */}
         <div className="input-container">
           <span className="input-title">카드 비밀번호</span>
+
           <input className="input-basic w-15" type="password" />
           <input className="input-basic w-15" type="password" />
           <input className="input-basic w-15" type="password" />
