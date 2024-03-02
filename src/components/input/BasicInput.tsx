@@ -11,6 +11,9 @@ export default function BasicInput({
   onChange,
   onKeydown,
   placeHolder,
+  inputRef,
+  type,
+  maxLength,
 }: BasicInputProps) {
   return (
     <div className="input-container">
@@ -22,6 +25,9 @@ export default function BasicInput({
           onChange={onChange}
           onKeydown={onKeydown}
           placeHolder={placeHolder}
+          inputRef={inputRef}
+          type={type}
+          maxLength={maxLength}
         />
       </div>
     </div>

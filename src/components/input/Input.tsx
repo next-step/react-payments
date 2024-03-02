@@ -1,10 +1,15 @@
+import { HTMLInputTypeAttribute, RefObject } from "react";
+
 type InputType = "basic" | "underline";
 
 export interface BaseInputProps {
-  value: string;
+  value?: string;
   onChange?: (value: string) => void;
   onKeydown?: (value: string) => void;
   placeHolder?: string;
+  inputRef?: RefObject<HTMLInputElement>;
+  type?: HTMLInputTypeAttribute;
+  maxLength?: number;
 }
 interface InputProps extends BaseInputProps {
   style: InputType;
@@ -16,6 +21,9 @@ export default function Input({
   onChange,
   onKeydown,
   placeHolder,
+  inputRef,
+  type,
+  maxLength,
 }: InputProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
@@ -31,6 +39,9 @@ export default function Input({
       onChange={handleChange}
       onKeyDown={handleKeyDown}
       placeholder={placeHolder}
+      ref={inputRef}
+      type={type}
+      maxLength={maxLength}
     />
   );
 }
