@@ -16,7 +16,9 @@ export interface BaseInputProps extends InputContentProps {
   label?: string
   /** input의 우측 상단에 표시되는 text */
   helperText?: string
+  /** 표시하고자 하는 에러 메시지  */
   error?: BaseInputBottomSectionProps['error']
+  /** 에러 요소 커스텀 렌더 함수 */
   errorRender?: BaseInputBottomSectionProps['errorRender']
   /** Input.Content와 상단 사이의 간격 */
   topOffset?: AtomicProps['marginBottom']
@@ -86,14 +88,5 @@ export interface BaseInputBottomSectionProps {
 const BaseInputBottomSection = ({ error, errorRender }: BaseInputBottomSectionProps) => {
   const isBottomSectionEnabled = !isNil(error)
 
-  const ErrorComponent =
-    error && errorRender ? (
-      errorRender(error)
-    ) : (
-      <Text variant="caption1" color="red">
-        {error}
-      </Text>
-    )
-
-  return isBottomSectionEnabled ? ErrorComponent : null
+  return isBottomSectionEnabled ? <Input.Error error={error} errorRender={errorRender} /> : null
 }
