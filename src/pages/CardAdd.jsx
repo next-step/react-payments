@@ -1,14 +1,39 @@
 import { useState, useRef } from "react";
 import { isNumericString, isValidateMonth } from "../util/regExp";
-import NumberInput from "../components/NumberInput";
+import InputGroup from "../components/InputGroup";
 
 export default function CardAdd() {
   const [cardNumberValue1, setCardNumberValue1] = useState("");
-  const cardNumberRef = useRef([]);
   const [cardNumberValue2, setCardNumberValue2] = useState("");
 
   const [cardNumberValue3, setCardNumberValue3] = useState("");
   const [cardNumberValue4, setCardNumberValue4] = useState("");
+  const cardNumberInfoList = [
+    {
+      value: cardNumberValue1,
+      setValue: setCardNumberValue1,
+      type: "text",
+      maxLength: 4,
+    },
+    {
+      value: cardNumberValue2,
+      setValue: setCardNumberValue2,
+      type: "text",
+      maxLength: 4,
+    },
+    {
+      value: cardNumberValue3,
+      setValue: setCardNumberValue3,
+      type: "password",
+      maxLength: 4,
+    },
+    {
+      value: cardNumberValue4,
+      setValue: setCardNumberValue4,
+      type: "password",
+      maxLength: 4,
+    },
+  ];
 
   // 만료일(MM)
   const expirationMMRef = useRef(null);
@@ -96,65 +121,10 @@ export default function CardAdd() {
         {/* 카드 번호 */}
         <div className="input-container">
           <span className="input-title">카드 번호</span>
-          <div className="input-box">
-            <NumberInput
-              myref={(el) => (cardNumberRef.current[0] = el)}
-              nextRef={cardNumberRef.current[1]}
-              value={cardNumberValue1}
-              setValue={setCardNumberValue1}
-              type="text"
-              maxLength={4}
-            />
-
-            <input
-              defaultValue="-"
-              className="input-basic"
-              style={{
-                display: cardNumberValue1.length === 4 ? "block" : "none",
-              }}
-              disabled
-            />
-            <NumberInput
-              myref={(el) => (cardNumberRef.current[1] = el)}
-              nextRef={cardNumberRef.current[2]}
-              value={cardNumberValue2}
-              setValue={setCardNumberValue2}
-              type="text"
-              maxLength={4}
-            />
-
-            <input
-              defaultValue="-"
-              className="input-basic"
-              style={{
-                display: cardNumberValue2.length === 4 ? "block" : "none",
-              }}
-              disabled
-            />
-            <NumberInput
-              myref={(el) => (cardNumberRef.current[2] = el)}
-              nextRef={cardNumberRef.current[3]}
-              value={cardNumberValue3}
-              setValue={setCardNumberValue3}
-              type="password"
-              maxLength={4}
-            />
-            <input
-              defaultValue="-"
-              className="input-basic"
-              style={{
-                display: cardNumberValue3.length === 4 ? "block" : "none",
-              }}
-              disabled
-            />
-            <NumberInput
-              myref={(el) => (cardNumberRef.current[3] = el)}
-              value={cardNumberValue4}
-              setValue={setCardNumberValue4}
-              type="password"
-              maxLength={4}
-            />
-          </div>
+          <InputGroup
+            inputGroupInfoList={cardNumberInfoList}
+            dividerText={"-"}
+          />
         </div>
         {/* 만료일 */}
         <div className="input-container">
