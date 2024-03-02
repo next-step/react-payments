@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import CardNumberInput from "./CardNumberInput";
 import CardExpiredDateInput from "./CardExpiredDateInput";
 import CardSecurityCodeInput from "./CardSecurityCodeInput";
@@ -13,8 +13,23 @@ export default function AddCardForm() {
   const firstLetterOfPasswordRef = useRef<HTMLInputElement>(null);
   const secondLetterOfPasswordRef = useRef<HTMLInputElement>(null);
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("cardNumber", cardNumber);
+    console.log("cardExpiredDate", cardExpiredDate);
+    console.log("cardHolderName", cardHolderName);
+    console.log("securityCodeRef", cardSecurityCodeRef.current?.value);
+    console.log(
+      "firstLetterOfPasswordRef",
+      firstLetterOfPasswordRef.current?.value
+    );
+    console.log(
+      "secondLetterOfPasswordRef",
+      secondLetterOfPasswordRef.current?.value
+    );
+  };
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
       <CardExpiredDateInput
         cardExpiredDate={cardExpiredDate}
@@ -29,22 +44,7 @@ export default function AddCardForm() {
         firstLetterRef={firstLetterOfPasswordRef}
         secondLetterRef={secondLetterOfPasswordRef}
       />
-      <button
-        type="button"
-        onClick={() => {
-          console.log("securityCodeRef", cardSecurityCodeRef.current?.value);
-          console.log(
-            "firstLetterOfPasswordRef",
-            firstLetterOfPasswordRef.current?.value
-          );
-          console.log(
-            "secondLetterOfPasswordRef",
-            secondLetterOfPasswordRef.current?.value
-          );
-        }}
-      >
-        버튼
-      </button>
+      <button type="submit">다음</button>
     </form>
   );
 }
