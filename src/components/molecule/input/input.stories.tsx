@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react'
-import { Input, InputContentProps } from '@/components/molecules/input/input.tsx'
+import { Input, InputContentProps } from '@/components/molecule/input/input.tsx'
 import { layoutArgTypes } from '@/stories/arg-types.ts'
 
 const meta: Meta<typeof Input.Content> = {
-  title: 'molecules/Input',
+  title: 'molecule/Input',
   component: Input.Content,
   argTypes: {
     ...layoutArgTypes,

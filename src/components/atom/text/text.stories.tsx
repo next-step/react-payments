@@ -5,7 +5,7 @@ import { layoutArgTypes } from '@/stories/arg-types'
 import { Box } from '@/components'
 
 const meta: Meta<typeof Text> = {
-  title: 'atoms/Text',
+  title: 'atom/Text',
   component: Text,
   argTypes: { ...layoutArgTypes },
   tags: ['autodocs'],

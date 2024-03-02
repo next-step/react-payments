@@ -3,7 +3,7 @@ import { Box } from './box'
 import { layoutArgTypes } from '@/stories/arg-types.ts'
 
 const meta: Meta<typeof Box> = {
-  title: 'atoms/Box',
+  title: 'atom/Box',
   component: Box,
   tags: ['autodocs'],
   argTypes: { ...layoutArgTypes },
