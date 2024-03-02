@@ -11,7 +11,7 @@ export enum TypographyVariants {
   headline = 'headline',
   display = 'display',
 }
-type TypographyVariant = keyof typeof TypographyVariants;
+export type TypographyVariant = keyof typeof TypographyVariants;
 
 type TypographyProps = PropsWithChildren<
   StyleProps &
@@ -69,3 +69,5 @@ export const typographyVariantStyle = {
     letterSpacing: '0.1rem',
   },
 } as const;
+
+Typography.displayName = 'Typography';

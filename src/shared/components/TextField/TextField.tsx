@@ -61,3 +61,5 @@ const variantStyles = {
 
 const isValidVariantNoneOutline = (variant: TextFieldVariant): variant is 'filled' | 'flushed' | 'unstyled' =>
   ['filled', 'flushed', 'unstyled'].includes(variant);
+
+TextField.displayName = 'TextField';

@@ -53,6 +53,7 @@ export type TypographyProps = {
   lineHeight?: CSSProperties['lineHeight'];
   textAlign?: CSSProperties['textAlign'];
   letterSpacing?: CSSProperties['letterSpacing'];
+  whiteSpace?: CSSProperties['whiteSpace'];
 };
 
 export type BackgroundProps = {
