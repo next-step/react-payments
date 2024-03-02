@@ -1,4 +1,9 @@
-import { HTMLInputTypeAttribute, RefObject } from "react";
+import {
+  ChangeEvent,
+  HTMLInputTypeAttribute,
+  KeyboardEvent,
+  RefObject,
+} from "react";
 
 type InputType = "basic" | "underline";
 
@@ -25,10 +30,10 @@ export default function Input({
   type,
   maxLength,
 }: InputProps) {
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
   };
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     onKeydown?.(e.key);
   };
 
