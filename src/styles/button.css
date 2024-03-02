@@ -5,4 +5,22 @@
 
 .button-text {
   margin-right: 10px;
+  color:#2bc1bc;
+}
+
+.button-contained {
+  background-color: #2bc1bc;
+  color: white;
+  margin: 10px;
+  padding: 10px 24px;
+  cursor: pointer;
+}
+
+.button-outlined {
+  background-color: #DDDDDD;
+  color: white;
+  margin: 10px;
+  padding: 10px 24px;
+  cursor: pointer;
+  border: 1px solid #DDDDDD;
 }
