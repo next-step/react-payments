@@ -11,6 +11,8 @@ import CardPreview from '../molecules/CardPreview';
 
 const INITIAL_STATE = {
   cardNumber: ['', '', '', ''],
+  mm: '',
+  yy: '',
 };
 
 function AddCard() {
@@ -18,6 +20,10 @@ function AddCard() {
   const isInitialState = JSON.stringify(card) === JSON.stringify(INITIAL_STATE);
 
   const handleCardNumber = (key, value) => {
+    setCard({ ...card, [key]: value });
+  };
+
+  const handleCardExpiration = (key, value) => {
     setCard({ ...card, [key]: value });
   };
 
@@ -35,7 +41,11 @@ function AddCard() {
         <CardNumber cardNumber={card.cardNumber} onData={handleCardNumber} />
       </div>
       <div className="input-container">
-        <CardExpiration />
+        <CardExpiration
+          mm={card.mm}
+          yy={card.yy}
+          onData={handleCardExpiration}
+        />
       </div>
       <div className="input-container">
         <CardHolder />

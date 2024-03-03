@@ -2,12 +2,7 @@ import Chip from '../atoms/Chip';
 import Text from '../atoms/Text';
 
 function CardPreview(props) {
-  const {
-    card,
-    size,
-    name,
-    expiration,
-  } = props;
+  const { card, size, name } = props;
 
   return (
     <div className={`${size}-card`}>
@@ -34,7 +29,7 @@ function CardPreview(props) {
           />
           <Text
             className={`card-text${size === 'big' ? '__big' : ''}`}
-            text={expiration || 'MM / YY'}
+            text={`${card?.mm || 'MM'} / ${card?.yy || 'YY'}`}
           />
         </div>
       </div>
