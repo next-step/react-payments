@@ -1,7 +1,7 @@
 import { CardAddDisplay } from './CardAddDisplay';
 import { Button, Grid, HStack, Typography, VStack } from '@/shared/components';
 import { styleToken } from '@/shared/styles';
-import { removeAllSpaces, replaceMaskText } from '@/shared/utils';
+import { replaceMaskText } from '@/shared/utils';
 import { CardState } from '@/type';
 
 type CardSize = 'big' | 'small';
@@ -21,9 +21,7 @@ export const CardDisplay = ({
   onClick,
 }: CardDisplayProps) => {
   const { cardDisplayProps, cardChipProps, typographyVariant, maskFontSize } = getCardStyles(size);
-  const cardDateString = removeAllSpaces(expirationDate);
-  const expirationMonth = cardDateString.slice(0, 2) || 'MM';
-  const expirationYear = cardDateString.slice(2, 4) || 'YY';
+  const [expirationMonth = 'MM', expirationYear = 'YY'] = expirationDate.split(' ');
   return (
     <Button onClick={onClick} padding="0">
       <VStack
