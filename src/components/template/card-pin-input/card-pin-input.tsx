@@ -49,8 +49,8 @@ export const CardPinInput = ({
 
   return (
     <>
-      <BaseInput htmlFor={`${id}-${pinValue.length}`} {...props}>
-        <Flex alignItems="center" gap="6px" marginTop="4px">
+      <BaseInput {...props}>
+        <Flex alignItems="center" gap="6px">
           {Array.from({ length: inputDigit }).map((_, index) => (
             <BaseInputContent
               id={`${id}-${index}`}

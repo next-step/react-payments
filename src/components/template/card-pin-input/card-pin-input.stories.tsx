@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 import { CardPinInput } from '@/components/template/card-pin-input'
 import { layoutArgTypes } from '@/stories/arg-types.ts'
-import { userEvent } from '@storybook/testing-library'
+import { within, userEvent } from '@storybook/testing-library'
 
 const meta: Meta<typeof CardPinInput> = {
   title: 'template/CardPinInput',
@@ -22,8 +22,9 @@ export const Default: Story = {
     id: 'card-pin',
     label: '비밀번호',
   },
-  play: async ({ step }) => {
-    const cardPinInput = document.getElementById('card-pin-0')!
+  play: async ({ step, canvasElement }) => {
+    const canvas = within(canvasElement)
+    const cardPinInput = document.getElementById('card-pin-0')
 
     await step('Enter non number string', async () => {
       await userEvent.type(cardPinInput, 'a')
