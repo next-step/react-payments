@@ -6,8 +6,8 @@ const Card = ({
   brand,
   numbers,
   owner = 'NAME',
-  expirationMonth = 'MM',
-  expirationYear = 'YY',
+  expirationMonth,
+  expirationYear,
 }: Props) => {
   const isEmpty =
     !brand || !numbers || !owner || !expirationMonth || !expirationYear;
@@ -35,7 +35,7 @@ const Card = ({
           <div className='card-bottom__info'>
             <span className='card-text'>{owner}</span>
             <span className='card-text'>
-              {expirationMonth} / {expirationYear}
+              {expirationMonth || 'MM'} / {expirationYear || 'YY'}
             </span>
           </div>
         </div>

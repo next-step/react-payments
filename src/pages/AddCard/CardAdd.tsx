@@ -8,11 +8,13 @@ import InputContainer from '../../components/InputContainer/InputContainer';
 import useCardNumber from './hooks/useCardNumber';
 import useExpiration from './hooks/useExpiration';
 import useSecurityCode from './hooks/useSecurityCode';
+import usePassword from './hooks/usePassword';
 
 const AddCard = () => {
   const { cardNumber, handleNumbers } = useCardNumber();
   const { expirationDate, handleExpirationDate } = useExpiration();
   const { securityCode, handleSecurityCode } = useSecurityCode();
+  const { password, handlePassword } = usePassword();
 
   const card: CardType = {
     numbers: Object.values(cardNumber),
@@ -78,8 +80,22 @@ const AddCard = () => {
 
       <InputContainer label='카드 비밀번호'>
         <div style={{ display: 'flex', gap: 6 }}>
-          <Input className='w-15' type='password' />
-          <Input className='w-15' type='password' />
+          <Input
+            className='w-15'
+            type='password'
+            name='first'
+            value={password.first}
+            onChange={handlePassword}
+          />
+          <Input
+            className='w-15'
+            type='password'
+            name='second'
+            value={password.second}
+            onChange={handlePassword}
+          />
+          <div className='flex-center w-15'>•</div>
+          <div className='flex-center w-15'>•</div>
         </div>
       </InputContainer>
 
