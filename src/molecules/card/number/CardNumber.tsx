@@ -1,60 +1,44 @@
 import { Input } from '@/components/input/Input';
-import { useInputFields } from '@/hooks/useInputFields';
 import { CARD_NUMBER } from './cardNumber.constant';
 import { INPUT } from '@/components/input/input.constant';
-import { useEffect } from 'react';
-import {
-  CardFulfilledAction,
-  CardFulfilledForm,
-} from '@/pages/Payments/funnel';
+import { formMethodsProps } from '@/hooks/useForm';
 
-export const CardNumber = ({
-  onFulfilled,
-}: {
-  onFulfilled: CardFulfilledAction;
-}) => {
-  const {
-    fields: numberFields,
-    autoFocusRefs,
-    onFieldChange,
-    fieldsFulfilled,
-  } = useInputFields(Object.values(CARD_NUMBER.FIELDS));
+export const CardNumber = ({ formMethods }: formMethodsProps) => {
+  const { register, errors, values, handleSubmit } = formMethods;
 
-  const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
-
-  useEffect(() => {
-    onFulfilled((fields: CardFulfilledForm) => {
-      return {
-        ...fields,
-        number: allFieldsFulfilled,
-      };
-    });
-  }, [allFieldsFulfilled]);
+  console.log('CardNumber', values, errors);
+  const allFieldsFulfilled = Object.values(errors).every((error) => !error);
 
   const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
 
+  const onSubmit = () => console.log('onSubmitCallback!');
+
   return (
-    <Input.Container>
-      <Input.Title>{CARD_NUMBER.TITLE}</Input.Title>
-      <Input.Box
-        separator={{
-          symbol: INPUT.BOX.SEPARATOR.HYPHEN,
-          fieldsFulfilled,
-        }}
-      >
-        {Object.values(CARD_NUMBER.FIELDS).map((field, fieldIndex) => (
-          <Input
-            key={field.ID}
-            type={field.TYPE}
-            ref={autoFocusRefs[fieldIndex]}
-            value={numberFields[fieldIndex]}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              onFieldChange(event, fieldIndex)
-            }
-            className={`w-25 ${optionalClassName}`}
-          />
-        ))}
-      </Input.Box>
-    </Input.Container>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <button type='submit'>submit</button>
+      <Input.Container>
+        <Input.Title>{CARD_NUMBER.TITLE}</Input.Title>
+        <Input.Box
+          separator={{
+            symbol: INPUT.BOX.SEPARATOR.HYPHEN,
+            fieldsFulfilled: Array.from(
+              { length: 4 },
+              () => allFieldsFulfilled
+            ),
+          }}
+        >
+          {Object.values(CARD_NUMBER.FIELDS).map((field, fieldIndex) => (
+            <Input
+              key={`${field.ID}_${fieldIndex}`}
+              type={field.TYPE}
+              className={`w-25 ${optionalClassName}`}
+              {...register(field.ID, {
+                validate: field.validation,
+              })}
+            />
+          ))}
+        </Input.Box>
+      </Input.Container>
+    </form>
   );
 };

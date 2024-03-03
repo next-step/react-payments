@@ -2,6 +2,7 @@ import { usePaymentsFunnel } from '../payments.context';
 import { STEP } from '../payments.constant';
 import { Card } from '@/molecules/card/Card';
 import { useState } from 'react';
+import { useForm } from '@/hooks/useForm';
 
 // FIXME: 리팩터링 전, 코드 동작을 위한 임시 타입이기에 분리하지 않았습니다.
 export interface CardFulfilledForm {
@@ -26,6 +27,8 @@ export const AddCard = () => {
     securityCode: false,
     password: false,
   });
+
+  const formMethods = useForm();
 
   const isAllFieldsFulfilled = Object.values(fieldsFulfilled).every(
     (field) => field
@@ -62,7 +65,7 @@ export const AddCard = () => {
       </div>
 
       {/* FIXME: 각 컴포넌트에서 관리하는 것이 아니라 formLayer에서 해시맵으로 관리 */}
-      <Card.Number onFulfilled={setFieldsFulfilled} />
+      <Card.Number formMethods={formMethods} />
       <Card.ExpireDate onFulfilled={setFieldsFulfilled} />
       <Card.OwnerName onFulfilled={setFieldsFulfilled} />
       <Card.SecurityCode onFulfilled={setFieldsFulfilled} />
