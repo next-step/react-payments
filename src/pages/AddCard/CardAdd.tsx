@@ -7,10 +7,12 @@ import Input from '../../components/Input/Input';
 import InputContainer from '../../components/InputContainer/InputContainer';
 import useCardNumber from './hooks/useCardNumber';
 import useExpiration from './hooks/useExpiration';
+import useSecurityCode from './hooks/useSecurityCode';
 
 const AddCard = () => {
   const { cardNumber, handleNumbers } = useCardNumber();
-  const { expirationDate, handleExpiration } = useExpiration();
+  const { expirationDate, handleExpirationDate } = useExpiration();
+  const { securityCode, handleSecurityCode } = useSecurityCode();
 
   const card: CardType = {
     numbers: Object.values(cardNumber),
@@ -24,7 +26,9 @@ const AddCard = () => {
         <a>{'<'}&nbsp;</a>
         <span>카드추가</span>
       </Header>
+
       <Card {...card} />
+
       <InputContainer label='카드 번호'>
         <div className='input-box'>
           {Object.entries(cardNumber).map(([key, value], index) => (
@@ -40,28 +44,36 @@ const AddCard = () => {
           ))}
         </div>
       </InputContainer>
+
       <InputContainer label='만료일' className='w-50'>
         <div className='input-box'>
           <Input
             name='month'
             placeholder='MM'
             value={expirationDate.month}
-            onChange={handleExpiration}
+            onChange={handleExpirationDate}
           />
           <span>/</span>
           <Input
             name='year'
             placeholder='YY'
             value={expirationDate.year}
-            onChange={handleExpiration}
+            onChange={handleExpirationDate}
           />
         </div>
       </InputContainer>
+
       <InputContainer label='카드 소유자 이름(선택)'>
         <Input placeholder='카드에 표시된 이름과 동일하게 입력하세요.' />
       </InputContainer>
+
       <InputContainer label='보안코드'>
-        <Input className='w-25' type='password' />
+        <Input
+          className='w-25'
+          type='password'
+          value={securityCode}
+          onChange={handleSecurityCode}
+        />
       </InputContainer>
 
       <InputContainer label='카드 비밀번호'>

@@ -6,7 +6,7 @@ const useExpiration = () => {
     year: '',
   });
 
-  const handleExpiration = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleExpirationDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
 
     const isNumber = !Number.isNaN(Number(value));
@@ -21,7 +21,7 @@ const useExpiration = () => {
 
   return {
     expirationDate,
-    handleExpiration,
+    handleExpirationDate,
   };
 };
 
