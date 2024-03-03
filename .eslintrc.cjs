@@ -59,7 +59,8 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": "warn",
     "no-unused-vars": "off",
     "n/no-missing-import" : "off",
-    "sort-imports": "off"
+    "sort-imports": "off",
+    "no-shadow": "off"
   },
   root: true,
 }
