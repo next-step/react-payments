@@ -11,6 +11,12 @@
   align-items: center;
 }
 
+.flex-row-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }

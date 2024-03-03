@@ -28,9 +28,15 @@ export const OwnerName = ({
 
   const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
 
+  const ownerNameLength = fields[0].length;
   return (
     <Input.Container>
-      <Input.Title>{OWNER_NAME.TITLE}</Input.Title>
+      <div className='flex-row-between'>
+        <Input.Title>{OWNER_NAME.TITLE}</Input.Title>
+        {ownerNameLength > 0 && (
+          <Input.Title>{`${ownerNameLength}/${OWNER_NAME.FIELDS.OWNER_NAME.maxLength}`}</Input.Title>
+        )}
+      </div>
       <Input.Box>
         {Object.values(OWNER_NAME.FIELDS).map((field, fieldIndex) => (
           <Input
