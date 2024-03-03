@@ -12,8 +12,8 @@ const Page2 = () => {
         <H2Text className="page-title">2️⃣ 카드 추가</H2Text>
         <SmallCreditcard />
         <RegisterForm />
+        <Modal />
       </Layout>
-      <Modal />
     </>
   );
 };
