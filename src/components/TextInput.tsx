@@ -5,7 +5,7 @@ export interface TextInputProps extends Omit<ComponentPropsWithoutRef<'input'>, 
 }
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({ className, ...props }, ref) => {
-	return <input ref={ref} className={className ?? 'input-basic'} {...props} />;
+	return <input ref={ref} className={`input-basic ${className || ''}`} {...props} />;
 });
 
 export default TextInput;
