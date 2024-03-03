@@ -47,7 +47,7 @@ export const useForm = () => {
         fieldsRef.current[name] = {
           value: defaultValue || '',
           // FIXME: validate 함수가 반환하는 값이 true면 유효한 값임. 헷갈리니 message로 변경
-          error: validate ? !validate(defaultValue || '') : true,
+          error: validate ? !validate(defaultValue || '') : true, // customErroor {@link https://developer.mozilla.org/en-US/docs/Web/API/ValidityState#customerror}
           readonly: readonly ? 'readonly' : '',
           required: required || false,
         };

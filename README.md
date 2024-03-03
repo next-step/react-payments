@@ -83,3 +83,34 @@
 - [ ] useForm을 이용하여 Input에 주입할 로직을 관리한다.
 - [ ] form 내부의 input값들은 하나의 해시맵에서 관리한다. useInput 단위로 추상화한다면 최상단 Layer(form)에서 각 input들의 값을 다시 동기화해야하기 때문이다.
 - [ ] ref는 register에서 포함하지 않는다. autoFocus를 사용하기 위해 forwardRef를 래핑해야하는데, 모든 컴포넌트에서 autoFocus를 사용하는 것은 아니기 때문이다.
+
+---
+
+## +a
+
+### 1. inputAPI를 사용한다면? (추후에 코드로 구현해보기)
+
+- constraint validation check validity override
+- setCustomValidity
+- https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation#complex_constraints_using_the_constraint_validation_api
+- https://developer.mozilla.org/en-US/docs/Web/API/ValidityState
+- customError {@link https://developer.mozilla.org/en-US/docs/Web/API/ValidityState#customerror}
+
+### 2. TSDoc 좋으니 잘 쓰기
+
+```ts
+/**
+ * {@link HTMLElement}
+ * {@link useManager}
+ * @template T 어쩌고 저쩌고 타입을 위한 제네릭 {@link useManager}
+ * @exampl
+ * ExtractSelectors<typeof {}>
+ */
+```
+
+### 3. 재남님 스터디 기회되면 참여하기
+
+### 4. 오픈소스 참여하기
+
+- zod
+- https://blueskyproject.io/bluesky/contributing.html
