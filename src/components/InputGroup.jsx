@@ -29,10 +29,10 @@ export default function InputGroup({ inputGroupInfoList, dividerText }) {
                 defaultValue={dividerText}
                 className="input-basic"
                 style={{
-                  display:
+                  visibility:
                     inputGroupInfo.value.length === inputGroupInfo.maxLength
-                      ? "block"
-                      : "none",
+                      ? "visible"
+                      : "hidden",
                 }}
                 disabled
               />
