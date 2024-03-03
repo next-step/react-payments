@@ -9,7 +9,6 @@ import AddCard from "pages/AddCard";
 
 function PaymentCard() {
   const [currentPage, setCurrentPage] = useState<CurrentPage>("addCard");
-
   const [cardInfo, setCardInfo] = useState<CardInfo>({
     cardNumber: "",
     expireDate: "",

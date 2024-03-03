@@ -3,9 +3,9 @@ import { CurrentPage } from "common/types/page.type";
 import Layout from "common/layout";
 import Button from "common/components/button/Button";
 import Title from "common/components/title/Title";
+import Card from "common/components/card";
 
 import InputCardForm from "features/card/components/InputCardForm";
-import Card from "common/components/card";
 
 interface AddCardProps extends CardInfo {
   onChangePage: (page: CurrentPage) => void;
