@@ -1,16 +1,21 @@
 import { Fragment } from 'react/jsx-runtime';
+import type { Card as CardType } from '../../types';
 import Button from '../../components/Button/Button';
 import Card from '../../components/Card/Card';
 import Header from '../../components/Header/Header';
 import Input from '../../components/Input/Input';
 import InputContainer from '../../components/InputContainer/InputContainer';
 import useCardNumber from './hooks/useCardNumber';
+import useExpiration from './hooks/useExpiration';
 
 const AddCard = () => {
   const { cardNumber, handleNumbers } = useCardNumber();
+  const { expirationDate, handleExpiration } = useExpiration();
 
-  const card = {
+  const card: CardType = {
     numbers: Object.values(cardNumber),
+    expirationMonth: expirationDate.month,
+    expirationYear: expirationDate.year,
   };
 
   return (
@@ -22,26 +27,34 @@ const AddCard = () => {
       <Card {...card} />
       <InputContainer label='카드 번호'>
         <div className='input-box'>
-          {Object.entries(cardNumber).map(([key, value], index) => {
-            return (
-              <Fragment key={key}>
-                <Input
-                  type={index > 1 ? 'password' : 'text'}
-                  name={key}
-                  onChange={handleNumbers}
-                  value={cardNumber[key]}
-                />
-                {value.length === 4 && index < 3 && <span>-</span>}
-              </Fragment>
-            );
-          })}
+          {Object.entries(cardNumber).map(([key, value], index) => (
+            <Fragment key={key}>
+              <Input
+                type={index > 1 ? 'password' : 'text'}
+                name={key}
+                onChange={handleNumbers}
+                value={cardNumber[key]}
+              />
+              {value.length === 4 && index < 3 && <span>-</span>}
+            </Fragment>
+          ))}
         </div>
       </InputContainer>
       <InputContainer label='만료일' className='w-50'>
         <div className='input-box'>
-          <Input placeholder='MM' />
+          <Input
+            name='month'
+            placeholder='MM'
+            value={expirationDate.month}
+            onChange={handleExpiration}
+          />
           <span>/</span>
-          <Input placeholder='YY' />
+          <Input
+            name='year'
+            placeholder='YY'
+            value={expirationDate.year}
+            onChange={handleExpiration}
+          />
         </div>
       </InputContainer>
       <InputContainer label='카드 소유자 이름(선택)'>
