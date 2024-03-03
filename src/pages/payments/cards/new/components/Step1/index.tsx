@@ -7,11 +7,7 @@ import { ExpirationDate } from './Components/ExpirationDate'
 import { Next } from './Components/Next'
 import { SecurityCode } from './Components/SecurityCode'
 
-interface Step1Props {
-  onNext: () => void
-}
-
-export const Step1 = (props: Step1Props) => {
+export const Step1 = () => {
   return (
     <PaymentsLayout title="카드 추가">
       <Card />
@@ -26,7 +22,7 @@ export const Step1 = (props: Step1Props) => {
 
       <CardPassword />
 
-      <Next onNext={props.onNext} />
+      <Next />
     </PaymentsLayout>
   )
 }

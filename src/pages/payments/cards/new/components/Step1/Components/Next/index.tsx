@@ -1,10 +1,7 @@
-interface NextProps {
-  onNext: () => void
-}
-export const Next = (props: NextProps) => {
+export const Next = () => {
   return (
     <div className="button-box">
-      <button className="button-text" onClick={() => props.onNext()}>
+      <button className="button-text" type="submit">
         다음
       </button>
     </div>

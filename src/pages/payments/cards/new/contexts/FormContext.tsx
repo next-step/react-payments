@@ -13,7 +13,11 @@ interface FormProps<T extends FormValues> extends UseFormProps<T> {
 export const Form = <T extends FormValues>({ children, ...props }: FormProps<T>) => {
   const formValue = useForm(props)
 
-  return <FormContext.Provider value={formValue}>{children}</FormContext.Provider>
+  return (
+    <FormContext.Provider value={formValue}>
+      <form onSubmit={formValue.handleSubmit}>{children}</form>
+    </FormContext.Provider>
+  )
 }
 
 export const useFormContext = <T extends FormValues>() => {
