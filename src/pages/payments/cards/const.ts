@@ -6,5 +6,6 @@ export const formInitialValues = {
   expirationDate: '',
   cardholderName: '',
   securityCode: '',
-  cardPassword: '',
+  cardPassword1: '',
+  cardPassword2: '',
 }

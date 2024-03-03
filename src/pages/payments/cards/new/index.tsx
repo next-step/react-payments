@@ -1,11 +1,13 @@
 import { useFunnel } from '@/hooks/useFunnel'
 
 import { formInitialValues } from '../const'
+import { FormType } from '../type'
 import { Step1 } from './components/Step1'
 import { Form } from './contexts/FormContext'
 import {
   checkCardholderName,
   checkCardNumber,
+  checkCardPassword,
   checkExpirationDate,
   checkSecurityCode,
 } from './service/validations'
@@ -18,13 +20,14 @@ export const AddingCard = () => {
       initialValues={formInitialValues}
       onSubmit={(values) => null}
       validate={(values) => {
-        const errors = {
+        const errors: Record<keyof FormType, string> = {
           cardholderName: '',
           cardNumber1: '',
           cardNumber2: '',
           cardNumber3: '',
           cardNumber4: '',
-          cardPassword: '',
+          cardPassword1: '',
+          cardPassword2: '',
           expirationDate: '',
           securityCode: '',
         }
@@ -57,6 +60,14 @@ export const AddingCard = () => {
 
         if (!checkSecurityCode(values.securityCode)) {
           errors.securityCode = '보안코드은 3개의 숫자를 입력해 주세요.'
+        }
+
+        if (!checkCardPassword(values.cardPassword1)) {
+          errors.cardPassword1 = '카드 비밀번호의 앞 2자리를 입력해 주세요.'
+        }
+
+        if (!checkCardPassword(values.cardPassword2)) {
+          errors.cardPassword2 = '카드 비밀번호의 앞 2자리를 입력해 주세요.'
         }
 
         return errors

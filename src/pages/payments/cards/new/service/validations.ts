@@ -35,3 +35,11 @@ export const checkSecurityCode = (code: string) => {
 
   return false
 }
+
+export const checkCardPassword = (password: string) => {
+  const CARD_PASSWORD_REG = /^\d$/
+
+  if (CARD_PASSWORD_REG.test(password)) {
+    return true
+  }
+}
