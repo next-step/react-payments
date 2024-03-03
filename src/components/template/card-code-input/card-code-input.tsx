@@ -2,7 +2,7 @@ import { BaseInput, BaseInputProps } from '@/components/organism/base-input'
 import { useUncontrolledInputState } from '@/hooks/use-uncontrolled-input-state'
 import { ChangeEvent, forwardRef } from 'react'
 import { PolymorphicRef } from '@/types'
-import { createDisplayCardCode } from '@/utils/create-display-card-code'
+import { createDisplayCardCode } from '@/components/template/card-code-input/utils/create-display-card-code'
 
 export interface CardCodeInputProps
   extends Omit<BaseInputProps, 'value' | 'onChange' | 'defaultValue'> {
