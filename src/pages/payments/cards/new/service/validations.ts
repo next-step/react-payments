@@ -3,6 +3,10 @@ import { CARD_HOLDER_NAME_MAX_LENGTH } from './const'
 export const checkExpirationDate = (month: string, year: string) => {
   const parsedMonth = parseInt(month)
 
+  if (!parsedMonth || !year) {
+    return false
+  }
+
   if (parsedMonth < 1 || parsedMonth > 12) {
     return false
   }
