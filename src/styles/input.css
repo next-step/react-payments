@@ -23,6 +23,12 @@
 	color: #525252;
 }
 
+.input-label-box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
 .input-basic {
 	background-color: #ecebf1;
 	height: 45px;

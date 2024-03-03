@@ -12,8 +12,8 @@ export function TestContainer() {
 			value={cardOwnerName}
 			onChange={handleCardOwnerNameChange}
 			maxLength={maxLength}
-			id="card-owener-name"
-			aria-label="card-owener--name"
+			id="card-owner-name"
+			aria-label="card-owner-name"
 		/>
 	);
 }
@@ -21,7 +21,7 @@ export function TestContainer() {
 const setup = () => {
 	const utils = render(<TestContainer />);
 
-	const cardOwnerNameInput = screen.getByLabelText<HTMLInputElement>('card-name', { selector: 'input' });
+	const cardOwnerNameInput = screen.getByLabelText<HTMLInputElement>('card-owner-name', { selector: 'input' });
 
 	return {
 		cardOwnerNameInput,
@@ -49,7 +49,7 @@ describe('카드 소유자 입력', () => {
 
 		await userEvent.type(cardOwnerNameInput, '1234');
 
-		const label = await screen.findByText(`${cardOwnerNameInput.value.length}/${cardOwnerNameInput.maxLength}`);
+		const label = screen.queryByText(`${cardOwnerNameInput.value.length} / ${cardOwnerNameInput.maxLength}`);
 
 		expect(label).not.toBeNull();
 	});
