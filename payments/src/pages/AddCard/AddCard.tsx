@@ -5,7 +5,7 @@ import Input from '../../components/Input.tsx'
 import CardSecret from '../../components/CardSecret.tsx'
 import Button from '../../components/Button.tsx'
 
-const AddCardInfo = () => {
+const AddCardInfo = ({onNext}) => {
 
   return (
     <>
@@ -47,7 +47,7 @@ const AddCardInfo = () => {
             <span className="input-title">카드 비밀번호</span>
             <CardSecret />
           </div>
-          <Button />
+          <Button onClick={onNext}/>
         </div>
       </div>
     </>
