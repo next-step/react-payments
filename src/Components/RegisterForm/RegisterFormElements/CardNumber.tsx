@@ -13,3 +13,8 @@ const CardNumber = () => {
 };
 
 export default CardNumber;
+/*
+커스텀 훅으로 짤것
+
+
+*/
