@@ -24,6 +24,14 @@ export interface BaseInputProps extends InputContentProps {
   topOffset?: AtomicProps['marginBottom']
   /** Input.Content와 하단 사이의 간격 */
   bottomOffset?: AtomicProps['marginTop']
+  /** content border-bottom-left */
+  contentBorderBottomLeftRadius?: AtomicProps['borderBottomLeftRadius']
+  /** content border-bottom-right */
+  contentBorderBottomRightRadius?: AtomicProps['borderBottomRightRadius']
+  /** content border-top-left */
+  contentBorderTopLeftRadius?: AtomicProps['borderTopLeftRadius']
+  /** content border-top-right */
+  contentBorderTopRightRadius?: AtomicProps['borderBottomRightRadius']
 }
 
 export const BaseInput = forwardRef((props: BaseInputProps, ref: PolymorphicRef<'input'>) => {
