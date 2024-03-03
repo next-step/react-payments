@@ -6,6 +6,7 @@ import { populateBaseInputProps } from '@/components/organism/base-input/utils/p
 import { AtomicProps, PolymorphicRef } from '@/types'
 import * as styles from './base-input.css.ts'
 import { isNil } from '@/utils'
+import { clsx } from 'clsx'
 
 /* -------------------------------------------------------------------------------------------------
  * BaseInput
@@ -53,19 +54,20 @@ export const BaseInputContent = forwardRef(
       borderTopLeftRadius = '8px',
       borderBottomLeftRadius = '8px',
       borderBottomRightRadius = '8px',
+      className,
       ...props
     }: BaseInputContentProps,
     ref: PolymorphicRef<'input'>,
   ) => {
     return (
       <Input.Content
+        {...props}
         ref={ref}
         borderTopRightRadius={borderTopRightRadius}
         borderTopLeftRadius={borderTopLeftRadius}
         borderBottomRightRadius={borderBottomRightRadius}
         borderBottomLeftRadius={borderBottomLeftRadius}
-        className={styles.inputContent}
-        {...props}
+        className={clsx(styles.inputContent, className)}
       />
     )
   },
