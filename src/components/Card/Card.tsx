@@ -12,6 +12,13 @@ const Card = ({
   const isEmpty =
     !brand || !numbers || !owner || !expirationMonth || !expirationYear;
 
+  const cardNumbers = numbers
+    ?.map((number, index) => {
+      if (index > 1) return number.replace(/\d/g, '*');
+      return number;
+    })
+    .join(' ');
+
   return (
     <div className='card-box mb-10'>
       <div className={isEmpty ? 'empty-card' : 'small-card'}>
@@ -23,7 +30,7 @@ const Card = ({
         </div>
         <div className='card-bottom'>
           <div className='card-bottom__number'>
-            <span className='card-text'>{numbers?.join(' - ')}</span>
+            <span className='card-text'>{cardNumbers}</span>
           </div>
           <div className='card-bottom__info'>
             <span className='card-text'>{owner}</span>
