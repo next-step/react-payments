@@ -1,5 +1,6 @@
-import { AddCard } from "@/pages/AddCard";
 import { CardList } from "@/pages/CardList";
+import { CompleteRegister } from "@/pages/CompleteRegister";
+import { RegisterCard } from "@/pages/RegisterCard";
 import { createBrowserRouter } from "react-router-dom";
 export const router = createBrowserRouter([
   {
@@ -7,7 +8,11 @@ export const router = createBrowserRouter([
     element: <CardList />,
   },
   {
-    path: "/add/card",
-    element: <AddCard />,
+    path: "/register/card",
+    element: <RegisterCard />,
+  },
+  {
+    path: "/complete/register",
+    element: <CompleteRegister />,
   },
 ]);

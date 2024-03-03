@@ -9,8 +9,13 @@ export const CardList = () => {
         <div className="flex-center">
           <h2 className="page-title mb-10">보유 카드</h2>
         </div>
-        <Card />
-        <Link to={"/add/card"}>
+        <Card
+          cardCorporation="XX카드"
+          cardNumber="1234-1234-1234-1234"
+          expireDay="03/25"
+          name="김철수"
+        />
+        <Link to={"/register/card"}>
           <EmptyCard className="card-box">
             <div className="empty-card">+</div>
           </EmptyCard>

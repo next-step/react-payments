@@ -34,9 +34,11 @@ export const Input = ({
     if (customType) {
       e.target.value = convertValueByCustomType(value);
     }
-    const returnedValue = value.length === 0 ? "" : onChange?.(e);
+    onChange?.(e);
+    // const returnedValue = value.length === 0 ? "" : onChange?.(e);
 
-    setValue(onChange ? returnedValue ?? "" : value);
+    // setValue(onChange ? returnedValue ?? "" : value);
+    setValue(onChange?.(e) ?? value);
   };
 
   return (
