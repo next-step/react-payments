@@ -2,14 +2,32 @@ import { Input } from '@/components/input/Input';
 import { INPUT } from '@/components/input/input.constant';
 import { useInputFields } from '@/hooks/useInputFields';
 import { EXPIRE_DATE } from './expireDate.constant';
+import {
+  CardFulfilledAction,
+  CardFulfilledForm,
+} from '@/pages/Payments/funnel';
+import { useEffect } from 'react';
 
-export const ExpireDate = () => {
+export const ExpireDate = ({
+  onFulfilled,
+}: {
+  onFulfilled: CardFulfilledAction;
+}) => {
   const { fields, autoFocusRefs, onFieldChange, fieldsFulfilled } =
     useInputFields(Object.values(EXPIRE_DATE.FIELDS));
 
-  const optionalClassName = fieldsFulfilled.every((field) => field)
-    ? 'text-fulfilled'
-    : '';
+  const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
+
+  useEffect(() => {
+    onFulfilled((fields: CardFulfilledForm) => {
+      return {
+        ...fields,
+        expireDate: allFieldsFulfilled,
+      };
+    });
+  }, [allFieldsFulfilled]);
+
+  const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
 
   return (
     <Input.Container>

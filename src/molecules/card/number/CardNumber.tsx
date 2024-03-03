@@ -2,8 +2,17 @@ import { Input } from '@/components/input/Input';
 import { useInputFields } from '@/hooks/useInputFields';
 import { CARD_NUMBER } from './cardNumber.constant';
 import { INPUT } from '@/components/input/input.constant';
+import { useEffect } from 'react';
+import {
+  CardFulfilledAction,
+  CardFulfilledForm,
+} from '@/pages/Payments/funnel';
 
-export const CardNumber = () => {
+export const CardNumber = ({
+  onFulfilled,
+}: {
+  onFulfilled: CardFulfilledAction;
+}) => {
   const {
     fields: numberFields,
     autoFocusRefs,
@@ -11,9 +20,18 @@ export const CardNumber = () => {
     fieldsFulfilled,
   } = useInputFields(Object.values(CARD_NUMBER.FIELDS));
 
-  const optionalClassName = fieldsFulfilled.every((field) => field)
-    ? 'text-fulfilled'
-    : '';
+  const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
+
+  useEffect(() => {
+    onFulfilled((fields: CardFulfilledForm) => {
+      return {
+        ...fields,
+        number: allFieldsFulfilled,
+      };
+    });
+  }, [allFieldsFulfilled]);
+
+  const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
 
   return (
     <Input.Container>

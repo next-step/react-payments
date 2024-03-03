@@ -1,8 +1,17 @@
 import { useInputFields } from '@/hooks/useInputFields';
 import { PASSWORD } from './password.constant';
 import { Input } from '@/components/input/Input';
+import { useEffect } from 'react';
+import {
+  CardFulfilledAction,
+  CardFulfilledForm,
+} from '@/pages/Payments/funnel';
 
-export const Password = () => {
+export const Password = ({
+  onFulfilled,
+}: {
+  onFulfilled: CardFulfilledAction;
+}) => {
   const {
     fields: passwordFields,
     autoFocusRefs,
@@ -10,9 +19,18 @@ export const Password = () => {
     fieldsFulfilled,
   } = useInputFields(Object.values(PASSWORD.FIELDS));
 
-  const optionalClassName = fieldsFulfilled.every((field) => field)
-    ? 'text-fulfilled'
-    : '';
+  const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
+
+  useEffect(() => {
+    onFulfilled((fields: CardFulfilledForm) => {
+      return {
+        ...fields,
+        password: allFieldsFulfilled,
+      };
+    });
+  }, [allFieldsFulfilled]);
+
+  const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
 
   return (
     <Input.Container>

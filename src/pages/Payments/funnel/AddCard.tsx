@@ -1,13 +1,41 @@
 import { usePaymentsFunnel } from '../payments.context';
 import { STEP } from '../payments.constant';
-import { PaymentsStepKey } from '../payments.type';
 import { Card } from '@/molecules/card/Card';
+import { useState } from 'react';
+
+// FIXME: 리팩터링 전, 코드 동작을 위한 임시 타입이기에 분리하지 않았습니다.
+export interface CardFulfilledForm {
+  number: boolean;
+  expireDate: boolean;
+  ownerName: boolean;
+  securityCode: boolean;
+  password: boolean;
+}
+
+export type CardFulfilledAction = React.Dispatch<
+  React.SetStateAction<CardFulfilledForm>
+>;
 
 export const AddCard = () => {
   const { setStep } = usePaymentsFunnel();
+  // FIXME: 각 컴포넌트에서 관리하는 것이 아니라 formLayer에서 해시맵으로 관리 불필요한 동기화 발생
+  const [fieldsFulfilled, setFieldsFulfilled] = useState<CardFulfilledForm>({
+    number: false,
+    expireDate: false,
+    ownerName: false,
+    securityCode: false,
+    password: false,
+  });
+
+  const isAllFieldsFulfilled = Object.values(fieldsFulfilled).every(
+    (field) => field
+  );
+
+  const optaionalClassName = isAllFieldsFulfilled ? 'text-fulfilled' : '';
 
   const handleNext = () => {
-    // TODO: inputFields validation
+    if (!isAllFieldsFulfilled) return;
+
     setStep(STEP.ADD_CARD_COMPLETE);
   };
 
@@ -33,27 +61,18 @@ export const AddCard = () => {
         </div>
       </div>
 
-      <Card.Number />
-      <Card.ExpireDate />
-      <Card.OwnerName />
-      <Card.SecurityCode />
-      <Card.Password />
+      {/* FIXME: 각 컴포넌트에서 관리하는 것이 아니라 formLayer에서 해시맵으로 관리 */}
+      <Card.Number onFulfilled={setFieldsFulfilled} />
+      <Card.ExpireDate onFulfilled={setFieldsFulfilled} />
+      <Card.OwnerName onFulfilled={setFieldsFulfilled} />
+      <Card.SecurityCode onFulfilled={setFieldsFulfilled} />
+      <Card.Password onFulfilled={setFieldsFulfilled} />
 
-      <div className='button-box' onClick={handleNext}>
-        <span className='button-text'>다음</span>
-      </div>
-
-      {/* Buttons */}
-      {Object.keys(STEP).map((key) => {
-        return (
-          <button
-            key={key}
-            onClick={() => setStep(STEP[key as PaymentsStepKey])}
-          >
-            {key}
-          </button>
-        );
-      })}
+      {isAllFieldsFulfilled && (
+        <div className='button-box' onClick={handleNext}>
+          <span className={`button-text ${optaionalClassName}`}>다음</span>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,14 +1,32 @@
 import { useInputFields } from '@/hooks/useInputFields';
 import { SECURITY_CODE } from './securityCode.constant';
 import { Input } from '@/components/input/Input';
+import { useEffect } from 'react';
+import {
+  CardFulfilledAction,
+  CardFulfilledForm,
+} from '@/pages/Payments/funnel';
 
-export const SecurityCode = () => {
+export const SecurityCode = ({
+  onFulfilled,
+}: {
+  onFulfilled: CardFulfilledAction;
+}) => {
   const { fields, autoFocusRefs, onFieldChange, fieldsFulfilled } =
     useInputFields(Object.values(SECURITY_CODE.FIELDS));
 
-  const optionalClassName = fieldsFulfilled.every((field) => field)
-    ? 'text-fulfilled'
-    : '';
+  const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
+
+  useEffect(() => {
+    onFulfilled((fields: CardFulfilledForm) => {
+      return {
+        ...fields,
+        securityCode: allFieldsFulfilled,
+      };
+    });
+  }, [allFieldsFulfilled]);
+
+  const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
 
   return (
     <Input.Container>
