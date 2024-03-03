@@ -21,9 +21,10 @@ interface AddCardFormProps {
 		securityCode: string,
 		password: string,
 	) => void;
+	onClickBack?: () => void;
 }
 
-export default function AddCardForm({ onSubmit }: AddCardFormProps) {
+export default function AddCardForm({ onSubmit, onClickBack }: AddCardFormProps) {
 	const cardNumberInput = useCardNumberInput();
 	const cardOwnerNameInput = useCardOwnerNameInput();
 	const cardExpirationDateInput = useCardExpirationDateInput();
@@ -45,35 +46,43 @@ export default function AddCardForm({ onSubmit }: AddCardFormProps) {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<CardImage
-				firstSegment={cardNumberInput.firstSegment}
-				secondSegment={cardNumberInput.secondSegment}
-				thirdSegment={cardNumberInput.thirdSegment}
-				fourthSegment={cardNumberInput.fourthSegment}
-				expirationDate={cardExpirationDateInput.expirationDate}
-				cardOwnerName={cardOwnerNameInput.cardOwnerName}
-			/>
-			<CardNumberInput {...cardNumberInput} />
-			<CardOwnerNameInput
-				value={cardOwnerNameInput.cardOwnerName}
-				onChange={cardOwnerNameInput.handleCardOwnerNameChange}
-				maxLength={cardOwnerNameInput.maxLength}
-			/>
-			<CardExpirationDateInput
-				value={cardExpirationDateInput.expirationDate}
-				onChange={cardExpirationDateInput.handleExpirationDateChange}
-			/>
-			<CardSecurityCodeInput
-				value={cardSecurityCodeInput.cardSecurityCode}
-				onChange={cardSecurityCodeInput.handleCardSecurityCodeChange}
-			/>
-			<CardPasswordInput {...cardPasswordInput} />
-			<div className="button-box">
-				<button type="submit" className="button-text">
-					다음
+		<div>
+			<div className="header-box">
+				<button type="button" onClick={onClickBack}>
+					<img src="/back.png" alt="뒤로가기" />
 				</button>
+				<h2 className="page-title">카드 추가</h2>
 			</div>
-		</form>
+			<form onSubmit={handleSubmit}>
+				<CardImage
+					firstSegment={cardNumberInput.firstSegment}
+					secondSegment={cardNumberInput.secondSegment}
+					thirdSegment={cardNumberInput.thirdSegment}
+					fourthSegment={cardNumberInput.fourthSegment}
+					expirationDate={cardExpirationDateInput.expirationDate}
+					cardOwnerName={cardOwnerNameInput.cardOwnerName}
+				/>
+				<CardNumberInput {...cardNumberInput} />
+				<CardOwnerNameInput
+					value={cardOwnerNameInput.cardOwnerName}
+					onChange={cardOwnerNameInput.handleCardOwnerNameChange}
+					maxLength={cardOwnerNameInput.maxLength}
+				/>
+				<CardExpirationDateInput
+					value={cardExpirationDateInput.expirationDate}
+					onChange={cardExpirationDateInput.handleExpirationDateChange}
+				/>
+				<CardSecurityCodeInput
+					value={cardSecurityCodeInput.cardSecurityCode}
+					onChange={cardSecurityCodeInput.handleCardSecurityCodeChange}
+				/>
+				<CardPasswordInput {...cardPasswordInput} />
+				<div className="button-box">
+					<button type="submit" className="button-text">
+						다음
+					</button>
+				</div>
+			</form>
+		</div>
 	);
 }

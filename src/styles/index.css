@@ -4,6 +4,7 @@
 @import 'modal.css';
 @import 'utils.css';
 @import 'password.css';
+@import 'form.css';
 
 body {
 	display: flex;
