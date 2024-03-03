@@ -13,6 +13,7 @@ const INITIAL_STATE = {
   cardNumber: ['', '', '', ''],
   mm: '',
   yy: '',
+  user: '',
 };
 
 function AddCard() {
@@ -24,6 +25,10 @@ function AddCard() {
   };
 
   const handleCardExpiration = (key, value) => {
+    setCard({ ...card, [key]: value });
+  };
+
+  const handleCardHolder = (key, value) => {
     setCard({ ...card, [key]: value });
   };
 
@@ -48,7 +53,7 @@ function AddCard() {
         />
       </div>
       <div className="input-container">
-        <CardHolder />
+        <CardHolder onData={handleCardHolder} />
       </div>
       <div className="input-container">
         <CardSecurityCode />
