@@ -26,6 +26,7 @@ export type FlexElements =
   | 'tr'
   | 'td'
   | 'th'
+  | 'button'
 
 interface FlexStyleProps {
   /** css gap property */
