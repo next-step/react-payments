@@ -1,7 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom'
 
 import { Home } from './pages/home/Home'
-import { AddingCard } from './pages/payments/cards'
+import { CardsPage } from './pages/payments/cards'
+import { AddingCard } from './pages/payments/cards/new'
 
 export const router = createBrowserRouter([
   {
@@ -9,7 +10,11 @@ export const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: '/payments/cards',
+    path: '/payments/cards/new',
     element: <AddingCard />,
+  },
+  {
+    path: '/payments/cards',
+    element: <CardsPage />,
   },
 ])
