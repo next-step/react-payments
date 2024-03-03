@@ -1,3 +1,5 @@
+import { CARD_HOLDER_NAME_MAX_LENGTH } from './const'
+
 export const checkExpirationDate = (month: string, year: string) => {
   const parsedMonth = parseInt(month)
 
@@ -9,9 +11,7 @@ export const checkExpirationDate = (month: string, year: string) => {
 }
 
 export const checkCardholderName = (name: string) => {
-  const MAX_LENGTH = 30
-
-  if (name.length > MAX_LENGTH) return false
+  if (name.length > CARD_HOLDER_NAME_MAX_LENGTH) return false
 
   return true
 }

@@ -1,0 +1,1 @@
+export const CARD_HOLDER_NAME_MAX_LENGTH = 30
