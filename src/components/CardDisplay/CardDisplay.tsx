@@ -21,7 +21,7 @@ export const CardDisplay = ({
   onClick,
 }: CardDisplayProps) => {
   const { cardDisplayProps, cardChipProps, typographyVariant, maskFontSize } = getCardStyles(size);
-  const [expirationMonth = 'MM', expirationYear = 'YY'] = expirationDate.split(' ');
+  const [expirationMonth, expirationYear] = expirationDate.split(' ');
   return (
     <Button onClick={onClick} padding="0">
       <VStack
@@ -47,8 +47,8 @@ export const CardDisplay = ({
           <CardOwnerDisplay
             ownerName={ownerName}
             variant={typographyVariant}
-            expirationMonth={expirationMonth}
-            expirationYear={expirationYear}
+            expirationMonth={expirationMonth || 'MM'}
+            expirationYear={expirationYear || 'YY'}
           />
         </VStack>
       </VStack>
