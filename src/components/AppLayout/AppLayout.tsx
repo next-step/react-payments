@@ -1,4 +1,7 @@
 import { PropsWithChildren } from 'react';
+import { AppLayoutBody } from './AppLayoutBody';
+import { AppLayoutFooter } from './AppLayoutFooter';
+import { AppLayoutHeader } from './AppLayoutHeader';
 import { Box, VStack } from '@/shared/components';
 import { styleToken } from '@/shared/styles';
 
@@ -22,5 +25,10 @@ const AppLayoutDisplay = ({ children }: PropsWithChildren) => (
     {children}
   </VStack>
 );
+
+AppLayout.Root = AppLayout;
+AppLayout.Header = AppLayoutHeader;
+AppLayout.Body = AppLayoutBody;
+AppLayout.Footer = AppLayoutFooter;
 
 AppLayout.displayName = 'AppLayout';
