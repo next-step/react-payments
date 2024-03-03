@@ -6,7 +6,7 @@ interface UseExpirationDateInputOptions {
 	separator: string;
 }
 
-export default function useExpirationDateInput(options: UseExpirationDateInputOptions = { separator: '/' }) {
+export default function useCardExpirationDateInput(options: UseExpirationDateInputOptions = { separator: '/' }) {
 	const { separator } = options;
 
 	const [expirationDate, setExpirationDate] = useState('');

@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import useExpirationDateInput from 'src/hooks/useExpirationDateInput.ts';
-import ExpirationDateInput from 'src/components/ExpirationDateInput.tsx';
+import useCardExpirationDateInput from 'src/hooks/useCardExpirationDateInput.ts';
+import CardExpirationDateInput from 'src/components/CardExpirationDateInput.tsx';
 
 export function TestContainer() {
-	const { handleExpirationDateChange, expirationDate } = useExpirationDateInput();
+	const { handleExpirationDateChange, expirationDate } = useCardExpirationDateInput();
 
 	return (
-		<ExpirationDateInput
+		<CardExpirationDateInput
 			value={expirationDate}
 			onChange={handleExpirationDateChange}
 			id="expiration-date"

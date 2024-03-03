@@ -1,9 +1,9 @@
 import useCardNumberInput from 'src/hooks/useCardNumberInput.ts';
 import useCardOwnerNameInput from 'src/hooks/useCardOwnerNameInput.ts';
-import useExpirationDateInput from 'src/hooks/useExpirationDateInput.ts';
+import useCardExpirationDateInput from 'src/hooks/useCardExpirationDateInput.ts';
 
 interface CardImageProps
-	extends Pick<ReturnType<typeof useExpirationDateInput>, 'expirationDate'>,
+	extends Pick<ReturnType<typeof useCardExpirationDateInput>, 'expirationDate'>,
 		Pick<ReturnType<typeof useCardNumberInput>, 'firstSegment' | 'secondSegment' | 'thirdSegment' | 'fourthSegment'>,
 		Pick<ReturnType<typeof useCardOwnerNameInput>, 'cardOwnerName'> {}
 
