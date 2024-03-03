@@ -1,7 +1,7 @@
 const TYPE = {
   TEXT: 'text',
   PASSWORD: 'password',
-  READONLY_PASSWORD: 'password',
+  READONLY_PASSWORD: 'readonly-password',
 } as const;
 
 const BOX = {
@@ -16,6 +16,7 @@ const CLASSNAME = {
   TITLE: 'input-title',
   BOX: 'input-box',
   BASIC: 'input-basic',
+  READONLY: 'input-readonly',
 } as const;
 
 export const INPUT = {

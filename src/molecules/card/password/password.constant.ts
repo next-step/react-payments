@@ -24,16 +24,16 @@ export const PASSWORD = {
       ID: 'third',
       TYPE: INPUT.TYPE.READONLY_PASSWORD,
       fieldType: INPUT_FIELDS.NUMBER.TYPE,
-      validation: Validation.password,
-      maxLength: 1,
+      validation: undefined,
+      maxLength: 0,
     },
 
     FOURTH: {
       ID: 'fourth',
       TYPE: INPUT.TYPE.READONLY_PASSWORD,
       fieldType: INPUT_FIELDS.NUMBER.TYPE,
-      validation: Validation.password,
-      maxLength: 1,
+      validation: undefined,
+      maxLength: 0,
     },
   },
 

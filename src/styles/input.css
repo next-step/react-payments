@@ -35,6 +35,16 @@
   border-radius: 0.25rem;
 }
 
+.input-readonly {
+  height: 45px;
+  width: 100%;
+  text-align: center;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border: none;
+  border-radius: 0.25rem;
+}
+
 .input-underline {
   text-align: center;
   border: none;
