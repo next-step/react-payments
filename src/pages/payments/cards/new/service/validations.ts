@@ -15,3 +15,13 @@ export const checkCardholderName = (name: string) => {
 
   return true
 }
+
+export const checkCardNumber = (cardNumber: string) => {
+  const FOUR_NUMBER_REG = /^\d{4}$/
+
+  if (FOUR_NUMBER_REG.test(cardNumber)) {
+    return true
+  }
+
+  return false
+}

@@ -1,5 +1,8 @@
 export const formInitialValues = {
-  cardNumber: '',
+  cardNumber1: '',
+  cardNumber2: '',
+  cardNumber3: '',
+  cardNumber4: '',
   expirationDate: '',
   cardholderName: '',
   securityCode: '',
