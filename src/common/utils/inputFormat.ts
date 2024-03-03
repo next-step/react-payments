@@ -1,6 +1,5 @@
 export const formattedCardNumber = (value: string) => {
-  const cardNumber = value.replace(/\D/g, "");
-  return cardNumber.replace(/(?<=^(.{4})+)(?=.+)/g, "-");
+  return value.replace(/\D/g, "").replace(/(?<=^(.{4})+)(?=.+)/g, "-");
 };
 
 export const formattedCardExpireDate = (value: string) => {

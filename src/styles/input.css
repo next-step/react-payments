@@ -36,6 +36,10 @@
   color: #04c09e;
 }
 
+.input-basic:read-only {
+  background-color: transparent;
+}
+
 .input-underline {
   text-align: center;
   border: none;

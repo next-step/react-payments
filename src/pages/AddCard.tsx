@@ -25,7 +25,7 @@ export default function AddCard({
             className="button-text"
             onClick={() => onChangePage("cardList")}
           >
-            {"<"}
+            &lt;
           </span>
         }
       >

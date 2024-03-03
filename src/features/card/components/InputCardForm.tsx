@@ -5,7 +5,6 @@ import {
   formattedCardExpireDate,
   formattedCardNumber,
 } from "common/utils/inputFormat";
-
 import { CardInfo } from "common/types/card.type";
 
 interface InputCardFormProps {
@@ -47,37 +46,69 @@ export default function InputCardForm({
 
   return (
     <>
-      <Input.Text
-        label="카드 번호"
-        value={cardNumber}
-        maxLength={19}
-        onChange={handleCardNumberChange}
-      />
-      <Input.Text
-        label="만료일"
-        value={expireDate}
-        placeholder="MM/YY"
-        maxLength={5}
-        onChange={handleCardExpireDateChange}
-      />
-      <Input.Text
-        label="카드 소유자 이름(선택)"
-        value={cardOwner}
-        placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        maxLength={30}
-        onChange={handleCardOwnerChange}
-      />
-      <Input.Password
-        label="보안코드 (CVC/CVV)"
-        value={cvc}
-        maxLength={3}
-        onChange={handleCardSecurityCodeChange}
-      />
-      <Input.Password
-        label="카드 비밀번호"
-        value={password}
-        onChange={handleCardPasswordChange}
-      />
+      <Input.Container>
+        <Input.Label>카드 번호</Input.Label>
+        <Input.Box>
+          <Input.Text
+            value={cardNumber}
+            maxLength={19}
+            onChange={handleCardNumberChange}
+          />
+        </Input.Box>
+      </Input.Container>
+      <Input.Container>
+        <Input.Label>만료일</Input.Label>
+        <Input.Box className="input-box w-50">
+          <Input.Text
+            value={expireDate}
+            maxLength={2}
+            onChange={handleCardExpireDateChange}
+          />
+          <span>/</span>
+          <Input.Text
+            value={expireDate}
+            maxLength={2}
+            onChange={handleCardExpireDateChange}
+          />
+        </Input.Box>
+      </Input.Container>
+      <Input.Container>
+        <Input.Label>카드 소유자 이름(선택)</Input.Label>
+        <Input.Text
+          value={cardOwner}
+          placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          maxLength={30}
+          onChange={handleCardOwnerChange}
+        />
+      </Input.Container>
+      <Input.Container>
+        <Input.Label>보안코드 (CVC/CVV)</Input.Label>
+        <Input.Password
+          value={cvc}
+          className="input-basic w-25"
+          maxLength={3}
+          onChange={handleCardSecurityCodeChange}
+        />
+      </Input.Container>
+      <Input.Container>
+        <Input.Label>카드 비밀번호</Input.Label>
+        <Input.Box className="gap8">
+          <Input.Password
+            value={password}
+            maxLength={1}
+            className="input-basic w-15"
+            onChange={handleCardPasswordChange}
+          />
+          <Input.Password
+            value={password}
+            maxLength={1}
+            className="input-basic w-15"
+            onChange={handleCardPasswordChange}
+          />
+          <Input.Password value="*" className="input-basic w-15" readOnly />
+          <Input.Password value="*" className="input-basic w-15" readOnly />
+        </Input.Box>
+      </Input.Container>
     </>
   );
 }

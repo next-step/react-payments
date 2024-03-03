@@ -46,3 +46,8 @@ button {
   border: none;
   background: transparent;
 }
+
+.gap8 {
+  display: flex;
+  gap: 8px;
+}
