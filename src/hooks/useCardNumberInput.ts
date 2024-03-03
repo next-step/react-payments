@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, useCallback } from 'react';
+import { useState, ChangeEvent } from 'react';
 
 interface UseCardNumberInputOptions {
 	segmentLength: number;
@@ -17,25 +17,19 @@ export default function useCardNumberInput(
 
 	const [cardNumber, setCardNumber] = useState('');
 
-	const formatCardNumber = useCallback(
-		(value: string) => {
-			const numericValue = value.replace(/\D/g, '');
+	const formatCardNumber = (value: string) => {
+		const numericValue = value.replace(/\D/g, '');
 
-			const segments = Array.from({ length: Math.ceil(numericValue.length / segmentLength) }, (_, index) =>
-				numericValue.slice(index * segmentLength, (index + 1) * segmentLength),
-			);
+		const segments = Array.from({ length: Math.ceil(numericValue.length / segmentLength) }, (_, index) =>
+			numericValue.slice(index * segmentLength, (index + 1) * segmentLength),
+		);
 
-			return segments.join(separator);
-		},
-		[separator, segmentLength],
-	);
+		return segments.join(separator);
+	};
 
-	const handleCardNumberChange = useCallback(
-		(event: ChangeEvent<HTMLInputElement>) => {
-			setCardNumber(formatCardNumber(event.target.value));
-		},
-		[formatCardNumber],
-	);
+	const handleCardNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setCardNumber(formatCardNumber(event.target.value));
+	};
 
 	return { cardNumber, handleCardNumberChange, maxLength: segmentLength * segmentNumber + segmentNumber - 1 };
 }
