@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-import { CurrentPage } from "common/types/page.type";
-import { CardInfo } from "common/types/card.type";
-
 import SuccessAddCard from "pages/SuccessAddCard";
 import CardList from "pages/CardList";
 import AddCard from "pages/AddCard";
 
+import { CardInfo } from "common/types/card.type";
+
+import useFunnel from "features/card/hooks/useFunnel";
+
 function PaymentCard() {
-  const [currentPage, setCurrentPage] = useState<CurrentPage>("addCard");
   const [cardInfo, setCardInfo] = useState<CardInfo>({
     cardNumber: "",
     expireDate: "",
@@ -18,28 +18,28 @@ function PaymentCard() {
     secondPassword: "",
   });
 
-  const handleChangeCurrentPage = (page: CurrentPage) => {
-    setCurrentPage(page);
-  };
+  const { Funnel, Step, handleChangeCurrentStep } = useFunnel();
 
   const handleCardInfoChange = (key: keyof CardInfo, value: string) => {
     setCardInfo((prev) => ({ ...prev, [key]: value }));
   };
 
   return (
-    <>
-      {currentPage === "addCard" && (
+    <Funnel>
+      <Step name="addCard">
         <AddCard
-          onChangePage={handleChangeCurrentPage}
+          onChangePage={handleChangeCurrentStep}
           onChangeCardInfo={handleCardInfoChange}
           {...cardInfo}
         />
-      )}
-      {currentPage === "addCardSuccess" && (
-        <SuccessAddCard {...cardInfo} onChangePage={handleChangeCurrentPage} />
-      )}
-      {currentPage === "cardList" && <CardList />}
-    </>
+      </Step>
+      <Step name="addCardSuccess">
+        <SuccessAddCard {...cardInfo} onChangePage={handleChangeCurrentStep} />
+      </Step>
+      <Step name="cardList">
+        <CardList />
+      </Step>
+    </Funnel>
   );
 }
 
