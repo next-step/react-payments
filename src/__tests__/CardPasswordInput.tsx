@@ -5,15 +5,21 @@ import CardPasswordInput from 'src/components/CardPasswordInput.tsx';
 import useCardPasswordInput from 'src/hooks/useCardPasswordInput.ts';
 
 export function TestContainer() {
-	const { first, handleFirstChange, second, handleSecondChange, secondRef } = useCardPasswordInput();
+	const {
+		firstPassword,
+		handleFirstPasswordChange,
+		secondPassword,
+		handleSecondPasswordChange,
+		secondPasswordInputRef,
+	} = useCardPasswordInput();
 
 	return (
 		<CardPasswordInput
-			first={first}
-			onFirstChange={handleFirstChange}
-			second={second}
-			onSecondChange={handleSecondChange}
-			secondRef={secondRef}
+			firstPassword={firstPassword}
+			handleFirstPasswordChange={handleFirstPasswordChange}
+			secondPassword={secondPassword}
+			handleSecondPasswordChange={handleSecondPasswordChange}
+			secondPasswordInputRef={secondPasswordInputRef}
 		/>
 	);
 }
@@ -21,8 +27,8 @@ export function TestContainer() {
 const setup = () => {
 	const utils = render(<TestContainer />);
 
-	const firstInput = screen.getByLabelText<HTMLInputElement>('first-password', { selector: 'input' });
-	const secondInput = screen.getByLabelText<HTMLInputElement>('second-password', { selector: 'input' });
+	const firstInput = screen.getByTestId<HTMLInputElement>('first-password');
+	const secondInput = screen.getByTestId<HTMLInputElement>('second-password');
 
 	return {
 		firstInput,

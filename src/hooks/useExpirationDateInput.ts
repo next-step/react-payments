@@ -1,5 +1,7 @@
 import { useState, ChangeEvent } from 'react';
 
+import REGEX from 'src/constants/regex.ts';
+
 interface UseExpirationDateInputOptions {
 	separator: string;
 }
@@ -10,7 +12,7 @@ export default function useExpirationDateInput(options: UseExpirationDateInputOp
 	const [expirationDate, setExpirationDate] = useState('');
 
 	const formatExpirationDate = (value: string) => {
-		const numericValue = value.replace(/\D/g, '');
+		const numericValue = value.replace(REGEX.EXCLUDE_NUMBER, '');
 
 		const month = numericValue.slice(0, 2);
 		const year = numericValue.slice(2);

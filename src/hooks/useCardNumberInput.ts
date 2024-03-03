@@ -1,5 +1,7 @@
 import { useState, ChangeEvent } from 'react';
 
+import REGEX from 'src/constants/regex.ts';
+
 interface UseCardNumberInputOptions {
 	segmentLength: number;
 	segmentNumber: number;
@@ -18,7 +20,7 @@ export default function useCardNumberInput(
 	const [cardNumber, setCardNumber] = useState('');
 
 	const formatCardNumber = (value: string) => {
-		const numericValue = value.replace(/\D/g, '');
+		const numericValue = value.replace(REGEX.EXCLUDE_NUMBER, '');
 
 		const segments = Array.from({ length: Math.ceil(numericValue.length / segmentLength) }, (_, index) =>
 			numericValue.slice(index * segmentLength, (index + 1) * segmentLength),
