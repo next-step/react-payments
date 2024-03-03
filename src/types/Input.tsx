@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import { CSSProperties, InputHTMLAttributes } from "react";
 
 export type TInputProps = Omit<
   React.DetailedHTMLProps<
@@ -7,7 +7,8 @@ export type TInputProps = Omit<
   >,
   "onChange"
 > & {
-  inputRuleFn?: (value: string) => string;
-  customType?: "textOnly";
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => string | void;
+  customType?: "textOnly" | "numberOnly";
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => string | void;
+  textAlign?: CSSProperties["textAlign"];
+  inputStyle?: CSSProperties;
 };

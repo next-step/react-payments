@@ -1,53 +1,44 @@
 import { Input } from "@/components/primitive/Input";
 import { TInputProps } from "@/types/Input";
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
 import styled from "styled-components";
 
 type TProps = {
   lengthCheck?: boolean;
-  maxLengthCheck?: number;
   label?: string;
-  onChange: (value: string) => string | void;
+  onChange?: (value: string) => string | void;
+  inputStyle?: CSSProperties;
 };
 
 export const FormInput = ({
   maxLength,
-  //   inputRuleFn,
   onChange,
   label,
   lengthCheck,
-  maxLengthCheck,
   ...props
 }: Omit<TInputProps, "onChange"> & TProps) => {
   const [value, setValue] = useState<string>();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setValue(value);
-    return onChange(value);
-    // inputRuleFn?.(e.target.value);
+    return onChange?.(value);
   };
   return (
-    <>
+    <FormInputContainer>
       <Header>
-        <span className="input-title">{label}</span>
+        {label && <span className="input-title">{label}</span>}
         {lengthCheck && (
           <span className="input-title">{`${
             value ? value.length : 0
-          }/${maxLengthCheck}`}</span>
+          }/${maxLength}`}</span>
         )}
       </Header>
-      <Input
-        maxLength={maxLength}
-        // inputRuleFn={inputRuleFn}
-        {...props}
-        // {...(lengthCheck && {
-        //   onChange,
-        // })}
-        onChange={handleChange}
-      />
-    </>
+      <Input maxLength={maxLength} {...props} onChange={handleChange} />
+    </FormInputContainer>
   );
 };
+
+const FormInputContainer = styled.div``;
 
 const Header = styled.div`
   display: flex;

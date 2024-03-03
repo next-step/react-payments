@@ -31,6 +31,10 @@ export const formatCardExpireDay = (value: string) => {
   return returnValue;
 };
 
+export const convertToAsterisks = (value: string) => {
+  return "*".repeat(value.length);
+};
+
 export const ruleFn = (rule: keyof typeof RULE, value: string) => {
   switch (rule) {
     case "ONLY_HYPHEN_AND_NUMBER":

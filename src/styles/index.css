@@ -5,6 +5,10 @@
 @import "./utils.css";
 @import "./reset.css";
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   margin: 0;
