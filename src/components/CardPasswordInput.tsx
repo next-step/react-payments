@@ -20,7 +20,7 @@ export default function CardPasswordInput({
 	return (
 		<div className="input-container">
 			<span className="input-title">카드 비밀번호</span>
-			<div className="password-input-box">
+			<div className="input-box">
 				<TextInput
 					testId="first-password"
 					type="password"

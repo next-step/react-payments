@@ -1,37 +1,60 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, useRef, ChangeEvent } from 'react';
 
 import REGEX from 'src/constants/regex.ts';
 
-interface UseCardNumberInputOptions {
-	segmentLength: number;
-	segmentNumber: number;
-	separator: string;
-}
+export default function useCardNumberInput() {
+	const [firstSegment, setFirstSegment] = useState('');
+	const [secondSegment, setSecondSegment] = useState('');
+	const [thirdSegment, setThirdSegment] = useState('');
+	const [fourthSegment, setFourthSegment] = useState('');
 
-export default function useCardNumberInput(
-	options: UseCardNumberInputOptions = {
-		segmentLength: 4,
-		segmentNumber: 4,
-		separator: '-',
-	},
-) {
-	const { separator, segmentLength, segmentNumber } = options;
+	const secondSegmentInputRef = useRef<HTMLInputElement>(null);
+	const thirdSegmentInputRef = useRef<HTMLInputElement>(null);
+	const fourthSegmentInputRef = useRef<HTMLInputElement>(null);
 
-	const [cardNumber, setCardNumber] = useState('');
+	const handleFirstSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const value = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '').slice(0, 4);
+		setFirstSegment(value);
 
-	const formatCardNumber = (value: string) => {
-		const numericValue = value.replace(REGEX.EXCLUDE_NUMBER, '');
-
-		const segments = Array.from({ length: Math.ceil(numericValue.length / segmentLength) }, (_, index) =>
-			numericValue.slice(index * segmentLength, (index + 1) * segmentLength),
-		);
-
-		return segments.join(separator);
+		if (value.length === 4) {
+			secondSegmentInputRef.current?.focus();
+		}
 	};
 
-	const handleCardNumberChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setCardNumber(formatCardNumber(event.target.value));
+	const handleSecondSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const value = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '').slice(0, 4);
+		setSecondSegment(value);
+
+		if (value.length === 4) {
+			thirdSegmentInputRef.current?.focus();
+		}
 	};
 
-	return { cardNumber, handleCardNumberChange, maxLength: segmentLength * segmentNumber + segmentNumber - 1 };
+	const handleThirdSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const value = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '').slice(0, 4);
+		setThirdSegment(value);
+
+		if (value.length === 4) {
+			fourthSegmentInputRef.current?.focus();
+		}
+	};
+
+	const handleFourthSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const value = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '').slice(0, 4);
+		setFourthSegment(value);
+	};
+
+	return {
+		firstSegment,
+		secondSegment,
+		thirdSegment,
+		fourthSegment,
+		handleFirstSegmentChange,
+		handleSecondSegmentChange,
+		handleThirdSegmentChange,
+		handleFourthSegmentChange,
+		secondSegmentInputRef,
+		thirdSegmentInputRef,
+		fourthSegmentInputRef,
+	};
 }

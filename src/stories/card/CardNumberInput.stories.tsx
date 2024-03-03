@@ -14,16 +14,11 @@ type Story = StoryObj<typeof CardNumberInputComponent>;
 
 export const CardNumberInput: Story = {
 	render: () => {
-		const { handleCardNumberChange, cardNumber, maxLength } = useCardNumberInput();
+		const cardNumberInput = useCardNumberInput();
 
 		return (
 			<div>
-				<CardNumberInputComponent
-					value={cardNumber}
-					onChange={handleCardNumberChange}
-					maxLength={maxLength}
-					id="card-number"
-				/>
+				<CardNumberInputComponent {...cardNumberInput} />
 			</div>
 		);
 	},
