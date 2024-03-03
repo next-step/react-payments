@@ -14,6 +14,13 @@ const colors = {
   mustard: '#cbba64',
   shadow: 'rgba(0, 0, 0, 0.25)',
   body: '#e5e5e5',
+  crimson: '#E24141',
+  azure: '#547CE4',
+  mint: '#73BC6D',
+  fuchsia: '#DE59B9',
+  rose: '#E76E9A',
+  amber: '#F37D3B',
+  gold: '#FBCD58',
 } as const;
 
 const fontSize = {

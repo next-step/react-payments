@@ -7,3 +7,10 @@ export type ButtonOptionalProps = {
   variant?: ButtonVariant;
   colorScheme?: ButtonColorScheme;
 };
+export type ButtonHoverProps = {
+  _hover?: {
+    backgroundColor?: string;
+    color?: string;
+    border?: string;
+  };
+};

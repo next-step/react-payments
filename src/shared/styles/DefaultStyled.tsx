@@ -4,6 +4,7 @@ import type { AsProps, StyleProps } from '@/shared/types';
 
 export const DefaultStyled = styled.div<DefaultStyledProps>`
   ${({ display }) => display && `display: ${display};`};
+  ${({ flex }) => flex && `flex: ${flex};`};
   ${({ flexDirection }) => flexDirection && `flex-direction: ${flexDirection};`};
   ${({ justifyContent }) => justifyContent && `justify-content: ${justifyContent};`};
   ${({ alignItems }) => alignItems && `align-items: ${alignItems};`};

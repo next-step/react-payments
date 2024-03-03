@@ -12,6 +12,7 @@ export type StyleProps = FlexboxProps &
 
 export type FlexboxProps = {
   display?: CSSProperties['display'];
+  flex?: CSSProperties['flex'];
   flexDirection?: CSSProperties['flexDirection'];
   justifyContent?: CSSProperties['justifyContent'];
   alignItems?: CSSProperties['alignItems'];

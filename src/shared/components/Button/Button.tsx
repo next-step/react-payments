@@ -1,11 +1,13 @@
 import { HTMLProps, PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
-import type { ButtonOptionalProps } from './Button.type';
+import { ButtonHoverProps, ButtonOptionalProps } from './Button.type';
 import { getButtonColor } from './Button.util';
 import { styleToken } from '@/shared/styles';
 import type { AsProps, StyleProps } from '@/shared/types';
 
-type ButtonProps = PropsWithChildren<StyleProps & AsProps & HTMLProps<HTMLButtonElement> & ButtonOptionalProps>;
+type ButtonProps = PropsWithChildren<
+  StyleProps & AsProps & HTMLProps<HTMLButtonElement> & ButtonOptionalProps & ButtonHoverProps
+>;
 
 export const Button = ({ children, type, variant, colorScheme, ...rest }: ButtonProps) => {
   const buttonType = type || 'button';
@@ -18,7 +20,7 @@ export const Button = ({ children, type, variant, colorScheme, ...rest }: Button
   );
 };
 
-const Root = styled.button<ButtonProps & Required<ButtonOptionalProps>>`
+const Root = styled.button<ButtonProps & Required<ButtonOptionalProps> & ButtonHoverProps>`
   width: ${({ width }) => width || 'auto'};
   height: ${({ height }) => height || 'auto'};
   text-align: ${({ textAlign }) => textAlign || 'center'};
@@ -48,12 +50,23 @@ const Root = styled.button<ButtonProps & Required<ButtonOptionalProps>>`
         border: ${border};
       `;
     }}
+    ${({ _hover }) =>
+      _hover &&
+      `
+      background-color: ${_hover.backgroundColor};
+      color: ${_hover.color};
+      border: ${_hover.border};
+    `};
   }
 
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
   }
+
+  ${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor}`};
+  ${({ fontSize }) => fontSize && `background-color: ${fontSize};`};
+  ${({ padding }) => padding && `padding: ${padding};`};
 `;
 
 Button.displayName = 'Button';
