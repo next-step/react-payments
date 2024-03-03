@@ -16,7 +16,7 @@ const AddCard = () => {
   const { expirationDate, handleExpirationDate } = useExpiration();
   const { securityCode, handleSecurityCode } = useSecurityCode();
   const { password, handlePassword } = usePassword();
-  const { owner, handleOnwer } = useOwner();
+  const { owner, handleOwner } = useOwner();
 
   const card: CardType = {
     numbers: Object.values(cardNumber),
@@ -77,7 +77,7 @@ const AddCard = () => {
             placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
             maxLength={30}
             value={owner}
-            onChange={handleOnwer}
+            onChange={handleOwner}
           />
         </div>
       </InputContainer>
