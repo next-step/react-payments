@@ -5,6 +5,8 @@ function Input(props) {
     type,
     value,
     placeholder,
+    onChange,
+    maxLength,
   } = props;
 
   return (
@@ -13,6 +15,8 @@ function Input(props) {
       type={type}
       value={value}
       placeholder={placeholder}
+      onChange={onChange}
+      maxLength={maxLength}
     />
   );
 }
