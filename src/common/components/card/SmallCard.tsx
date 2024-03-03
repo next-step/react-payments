@@ -1,4 +1,4 @@
-import { CardInfo } from "common/types/card.type";
+import { CardInfo } from "features/card/types/card.type";
 
 export default function SmallCard({
   cardNumber,

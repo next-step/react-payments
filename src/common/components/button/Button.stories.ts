@@ -9,7 +9,7 @@ const meta = {
     layout: "centered",
   },
   args: {
-    label: "Button",
+    children: "Button",
   },
 } satisfies Meta<typeof Button>;
 
@@ -19,6 +19,6 @@ type Story = StoryObj<typeof meta>;
 
 export const BasicButton: Story = {
   args: {
-    label: "Button",
+    children: "Button",
   },
 };

@@ -1,4 +1,4 @@
-import { CardInfo } from "common/types/card.type";
+import { CardInfo } from "features/card/types/card.type";
 import { CurrentPage } from "common/types/page.type";
 import Layout from "common/components/layout";
 import Button from "common/components/button/Button";

@@ -4,7 +4,7 @@ import SuccessAddCard from "pages/SuccessAddCard";
 import CardList from "pages/CardList";
 import AddCard from "pages/AddCard";
 
-import { CardInfo } from "common/types/card.type";
+import { CardInfo } from "features/card/types/card.type";
 
 import useFunnel from "features/card/hooks/useFunnel";
 

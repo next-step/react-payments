@@ -4,8 +4,8 @@ import Input from "common/components/input";
 import {
   formattedCardExpireDate,
   formattedCardNumber,
-} from "common/utils/inputFormat";
-import { CardInfo } from "common/types/card.type";
+} from "features/card/utils/inputFormat";
+import { CardInfo } from "features/card/types/card.type";
 
 interface InputCardFormProps extends CardInfo {
   onCardInfoChange: (key: keyof CardInfo, value: string) => void;
