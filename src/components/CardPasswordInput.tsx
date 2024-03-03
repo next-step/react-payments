@@ -24,20 +24,20 @@ export default function CardPasswordInput({
 				<TextInput
 					testId="first-password"
 					type="password"
-					className="w-15"
+					className="input-basic w-15"
 					value={firstPassword}
 					onChange={handleFirstPasswordChange}
 				/>
 				<TextInput
 					testId="second-password"
 					type="password"
-					className="w-15"
+					className="input-basic w-15"
 					value={secondPassword}
 					onChange={handleSecondPasswordChange}
 					ref={secondPasswordInputRef}
 				/>
-				<TextInput readOnly value=" " type="password" className="w-15 password-readonly" />
-				<TextInput readOnly value=" " type="password" className="w-15 password-readonly" />
+				<TextInput readOnly value=" " type="password" className="input-basic w-15 password-readonly" />
+				<TextInput readOnly value=" " type="password" className="input-basic w-15 password-readonly" />
 			</div>
 		</div>
 	);

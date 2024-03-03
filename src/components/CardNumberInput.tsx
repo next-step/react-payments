@@ -33,11 +33,16 @@ export default function CardNumberInput({
 		<div className="input-container">
 			<span className="input-title">카드 번호</span>
 			<div className="input-box">
-				<TextInput testId="first-segment" className="w-15" value={firstSegment} onChange={handleFirstSegmentChange} />
+				<TextInput
+					testId="first-segment"
+					className="input-basic w-15"
+					value={firstSegment}
+					onChange={handleFirstSegmentChange}
+				/>
 				<div>-</div>
 				<TextInput
 					testId="second-segment"
-					className="w-15"
+					className="input-basic w-15"
 					value={secondSegment}
 					onChange={handleSecondSegmentChange}
 					ref={secondSegmentInputRef}
@@ -46,7 +51,7 @@ export default function CardNumberInput({
 				<TextInput
 					testId="third-segment"
 					type="password"
-					className="w-15"
+					className="input-basic w-15"
 					value={thirdSegment}
 					onChange={handleThirdSegmentChange}
 					ref={thirdSegmentInputRef}
@@ -55,7 +60,7 @@ export default function CardNumberInput({
 				<TextInput
 					testId="fourth-segment"
 					type="password"
-					className="w-15"
+					className="input-basic w-15"
 					value={fourthSegment}
 					onChange={handleFourthSegmentChange}
 					ref={fourthSegmentInputRef}

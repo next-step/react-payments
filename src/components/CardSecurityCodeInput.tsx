@@ -6,7 +6,7 @@ export default function CardSecurityCodeInput(props: Omit<TextInputProps, 'type'
 			<label className="input-title" htmlFor={props.id}>
 				보안코드(CVC/CVV)
 			</label>
-			<TextInput type="password" className="w-50" {...props} />
+			<TextInput type="password" className="input-basic w-50" {...props} />
 		</div>
 	);
 }

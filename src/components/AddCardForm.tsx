@@ -6,6 +6,8 @@ import CardOwnerNameInput from 'src/components/CardOwnerNameInput.tsx';
 import CardExpirationDateInput from 'src/components/CardExpirationDateInput.tsx';
 import CardSecurityCodeInput from 'src/components/CardSecurityCodeInput.tsx';
 import CardPasswordInput from 'src/components/CardPasswordInput.tsx';
+import Heading from 'src/components/Heading.tsx';
+import Button from 'src/components/Button.tsx';
 
 import useCardNumberInput from 'src/hooks/useCardNumberInput.ts';
 import useCardOwnerNameInput from 'src/hooks/useCardOwnerNameInput.ts';
@@ -48,10 +50,10 @@ export default function AddCardForm({ onSubmit, onClickBack }: AddCardFormProps)
 	return (
 		<div>
 			<div className="header-box">
-				<button type="button" onClick={onClickBack}>
+				<Button type="button" onClick={onClickBack}>
 					<img src="/back.png" alt="뒤로가기" />
-				</button>
-				<h2 className="page-title">카드 추가</h2>
+				</Button>
+				<Heading.H2 className="page-title">카드 추가</Heading.H2>
 			</div>
 			<form onSubmit={handleSubmit}>
 				<CardImage
@@ -78,9 +80,7 @@ export default function AddCardForm({ onSubmit, onClickBack }: AddCardFormProps)
 				/>
 				<CardPasswordInput {...cardPasswordInput} />
 				<div className="button-box">
-					<button type="submit" className="button-text">
-						다음
-					</button>
+					<Button type="submit">다음</Button>
 				</div>
 			</form>
 		</div>
