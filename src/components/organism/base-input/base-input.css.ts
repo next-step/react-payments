@@ -7,6 +7,7 @@ export const inputContent = style({
   padding: vars.space['12px'],
   backgroundColor: vars.color.gray100,
   color: vars.color.aqua,
+  width: '100%',
   selectors: {
     ['&::placeholder']: {
       color: vars.color.gray300,
