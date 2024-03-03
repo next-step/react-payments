@@ -23,6 +23,8 @@ export interface InlineStyleProps {
   maxWidth?: string
   /** inline css max-height property */
   maxHeight?: string
+  /** inline css aspectRatio property */
+  aspectRatio?: string
 }
 
 export const inlineStylePropsSet = new Set([
@@ -32,6 +34,7 @@ export const inlineStylePropsSet = new Set([
   'minHeight',
   'maxWidth',
   'maxHeight',
+  'aspectRatio',
 ] as const)
 
 export interface SpaceProps extends ShorthandsProps {
