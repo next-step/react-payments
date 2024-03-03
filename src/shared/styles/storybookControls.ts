@@ -1,4 +1,4 @@
-import { styleToken } from '@/shared/styles/styleToken.ts';
+import { styleToken } from '@/shared/styles';
 
 const colorValues = Object.values(styleToken.color);
 const fontSizeValues = Object.values(styleToken.fontSize);

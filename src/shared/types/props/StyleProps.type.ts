@@ -65,6 +65,7 @@ export type TypographyProps = {
   textAlign?: CSSProperties['textAlign'];
   letterSpacing?: CSSProperties['letterSpacing'];
   whiteSpace?: CSSProperties['whiteSpace'];
+  textOverflow?: CSSProperties['textOverflow'];
 };
 
 export type BackgroundProps = {

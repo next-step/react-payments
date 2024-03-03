@@ -20,16 +20,24 @@ type TypographyProps = PropsWithChildren<
     }
 >;
 
-export const Typography = ({ as, variant, children, ...restProps }: TypographyProps) => (
-  <Root as="span" variant={variant || 'body'} {...restProps}>
-    {children}
-  </Root>
-);
+export const Typography = ({ children, ...props }: TypographyProps) => {
+  const { as, variant = 'body', whiteSpace, fontSize, fontWeight, ...restProps } = props;
 
-const Root = styled(DefaultStyled)<TypographyProps>`
-  ${({ whiteSpace }) => whiteSpace && `white-space: ${whiteSpace || 'pre-wrap'};`};
-  ${({ variant }) => typographyVariantStyle[variant || 'body']};
-`;
+  const typographyProps = {
+    fontSize: fontSize || typographyVariantStyle[variant].fontSize,
+    fontWeight: fontWeight || typographyVariantStyle[variant].fontWeight,
+    lineHeight: typographyVariantStyle[variant].lineHeight,
+    letterSpacing: typographyVariantStyle[variant].letterSpacing,
+    whiteSpace: whiteSpace || 'pre-wrap',
+  };
+  return (
+    <Root as="span" variant={variant} {...typographyProps} {...restProps}>
+      {children}
+    </Root>
+  );
+};
+
+const Root = styled(DefaultStyled)<TypographyProps>``;
 
 export const typographyVariantStyle = {
   title: {

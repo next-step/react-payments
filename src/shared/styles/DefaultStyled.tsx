@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
-import type { AsProps, StyleProps } from '@/shared/types';
 
-type DefaultStyledProps = StyleProps & AsProps;
+import type { AsProps, StyleProps } from '@/shared/types';
 
 export const DefaultStyled = styled.div<DefaultStyledProps>`
   ${({ display }) => display && `display: ${display};`};
@@ -44,6 +43,9 @@ export const DefaultStyled = styled.div<DefaultStyledProps>`
   ${({ fontWeight }) => fontWeight && `font-weight: ${fontWeight};`};
   ${({ lineHeight }) => lineHeight && `line-height: ${lineHeight};`};
   ${({ textAlign }) => textAlign && `text-align: ${textAlign};`};
+  ${({ letterSpacing }) => letterSpacing && `letter-spacing: ${letterSpacing};`};
+  ${({ whiteSpace }) => whiteSpace && `white-space: ${whiteSpace};`};
+  ${({ textOverflow }) => textOverflow && `text-overflow: ${textOverflow};`};
   ${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor};`};
   ${({ backgroundImage }) => backgroundImage && `background-image: url(${backgroundImage});`};
   ${({ backgroundSize }) => backgroundSize && `background-size: ${backgroundSize};`};
@@ -66,3 +68,5 @@ export const DefaultStyled = styled.div<DefaultStyledProps>`
   ${({ overflow }) => overflow && `overflow: ${overflow};`};
   ${({ transition }) => transition && `transition: ${transition};`};
 `;
+
+type DefaultStyledProps = StyleProps & AsProps;

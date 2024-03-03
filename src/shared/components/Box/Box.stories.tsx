@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Box } from './Box';
-import { styleToken } from '@/shared/styles';
-import { storybookControls } from '@/shared/styles/storybookControls.ts';
+import { storybookControls, styleToken } from '@/shared/styles';
 
 const meta = {
   title: 'Primitive/Box',
