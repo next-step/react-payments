@@ -1,7 +1,7 @@
 import * as S from './Input.style.ts';
 import { InputHTMLAttributes } from 'react';
 import { InputVariantType } from './Input.type.ts';
-import { INPUT_VARIANT } from './Input.variant.ts';
+import { INPUT_VARIANT } from './Input.constant.ts';
 
 interface Props {
   variant?: InputVariantType;

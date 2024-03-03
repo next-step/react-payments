@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import Card from './Card.tsx';
 import * as S from './CardList.style.ts';
-import { CARD_SIZE } from './Card.variant.ts';
+import { CARD_SIZE } from './Card.constant.ts';
 import PlusIcon from '../../assets/plus_icon.svg?react';
+import { PAGES } from '../../routes/route.constant.ts';
 
 const CardList = () => {
   const navigation = useNavigate();
@@ -17,7 +18,7 @@ const CardList = () => {
         month={4}
         number={'1111-2222-****-****'}
       />
-      <S.CreateCardButton onClick={() => navigation('/regis')}>
+      <S.CreateCardButton onClick={() => navigation(PAGES.REGIS)}>
         <PlusIcon />
       </S.CreateCardButton>
     </S.Container>

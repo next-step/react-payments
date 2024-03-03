@@ -1,8 +1,9 @@
 import { RouteObject } from 'react-router-dom';
 import ListPage from '../pages/list/ListPage.tsx';
+import { PAGES } from './route.constant.ts';
 
 const ListRoute: RouteObject = {
-  path: '/list',
+  path: PAGES.HOME,
   element: <ListPage />,
 };
 

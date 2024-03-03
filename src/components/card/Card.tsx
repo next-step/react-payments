@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import * as S from './Card.style.ts';
-import ICard from '../../interface/ICard.ts';
-import { CardSizeType } from './Card.type.ts';
+import { CardSizeType, ICard } from './Card.type.ts';
 
 interface Props {
   onClick?: () => void;
