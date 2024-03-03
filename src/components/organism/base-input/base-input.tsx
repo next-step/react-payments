@@ -24,28 +24,56 @@ export interface BaseInputProps extends InputContentProps {
   topOffset?: AtomicProps['marginBottom']
   /** Input.Content와 하단 사이의 간격 */
   bottomOffset?: AtomicProps['marginTop']
-  /** content border-bottom-left */
-  contentBorderBottomLeftRadius?: AtomicProps['borderBottomLeftRadius']
-  /** content border-bottom-right */
-  contentBorderBottomRightRadius?: AtomicProps['borderBottomRightRadius']
-  /** content border-top-left */
-  contentBorderTopLeftRadius?: AtomicProps['borderTopLeftRadius']
-  /** content border-top-right */
-  contentBorderTopRightRadius?: AtomicProps['borderBottomRightRadius']
 }
 
-export const BaseInput = forwardRef((props: BaseInputProps, ref: PolymorphicRef<'input'>) => {
-  const { wrapperProps, baseInputTopSectionProps, contentProps, baseInputBottomSectionProps } =
-    populateBaseInputProps(props)
+export const BaseInput = forwardRef(
+  ({ children, ...props }: BaseInputProps, ref: PolymorphicRef<'input'>) => {
+    const { wrapperProps, baseInputTopSectionProps, contentProps, baseInputBottomSectionProps } =
+      populateBaseInputProps(props)
+    return (
+      <Input.Wrapper {...wrapperProps}>
+        <BaseInputTopSection {...baseInputTopSectionProps} />
+        {children ?? <BaseInputContent ref={ref} {...contentProps} />}
+        <BaseInputBottomSection {...baseInputBottomSectionProps} />
+      </Input.Wrapper>
+    )
+  },
+)
 
-  return (
-    <Input.Wrapper {...wrapperProps}>
-      <BaseInputTopSection {...baseInputTopSectionProps} />
-      <Input.Content ref={ref} className={styles.inputContent} {...contentProps} />
-      <BaseInputBottomSection {...baseInputBottomSectionProps} />
-    </Input.Wrapper>
-  )
-})
+/* -------------------------------------------------------------------------------------------------
+ * BaseInputContent
+ * -----------------------------------------------------------------------------------------------*/
+
+export interface BaseInputContentProps extends InputContentProps {}
+
+export const BaseInputContent = forwardRef(
+  (
+    {
+      borderTopRightRadius = '8px',
+      borderTopLeftRadius = '8px',
+      borderBottomLeftRadius = '8px',
+      borderBottomRightRadius = '8px',
+      ...props
+    }: BaseInputContentProps,
+    ref: PolymorphicRef<'input'>,
+  ) => {
+    return (
+      <Input.Content
+        ref={ref}
+        borderTopRightRadius={borderTopRightRadius}
+        borderTopLeftRadius={borderTopLeftRadius}
+        borderBottomRightRadius={borderBottomRightRadius}
+        borderBottomLeftRadius={borderBottomLeftRadius}
+        className={styles.inputContent}
+        {...props}
+      />
+    )
+  },
+)
+
+/* -------------------------------------------------------------------------------------------------
+ * BaseInputTopSection
+ * -----------------------------------------------------------------------------------------------*/
 
 export interface BaseInputTopSectionProps {
   isLabelEnabled: boolean
@@ -55,9 +83,6 @@ export interface BaseInputTopSectionProps {
   htmlFor?: BaseInputProps['id']
 }
 
-/* -------------------------------------------------------------------------------------------------
- * BaseInputTopSection
- * -----------------------------------------------------------------------------------------------*/
 const BaseInputTopSection = ({
   isLabelEnabled,
   label,

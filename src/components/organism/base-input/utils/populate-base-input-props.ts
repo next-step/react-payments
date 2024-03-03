@@ -12,10 +12,6 @@ export const populateBaseInputProps = (props: BaseInputProps) => {
     id,
     error,
     errorRender,
-    contentBorderTopLeftRadius = '8px',
-    contentBorderTopRightRadius = '8px',
-    contentBorderBottomLeftRadius = '8px',
-    contentBorderBottomRightRadius = '8px',
     ...otherInputContentProps
   } = otherBaseInputProps
 
@@ -45,10 +41,6 @@ export const populateBaseInputProps = (props: BaseInputProps) => {
       id,
       marginTop: inputContentTopMargin,
       marginBottom: inputContentBottomMargin,
-      borderTopLeftRadius: contentBorderTopLeftRadius,
-      borderTopRightRadius: contentBorderTopRightRadius,
-      borderBottomLeftRadius: contentBorderBottomLeftRadius,
-      borderBottomRightRadius: contentBorderBottomRightRadius,
     },
   }
 }
