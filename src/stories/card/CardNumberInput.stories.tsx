@@ -22,7 +22,6 @@ export const CardNumberInput: Story = {
 					value={cardNumber}
 					onChange={handleCardNumberChange}
 					maxLength={maxLength}
-					type="text"
 					id="card-number"
 				/>
 			</div>

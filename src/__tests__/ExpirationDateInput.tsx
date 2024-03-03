@@ -1,6 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import useExpirationDateInput from 'src/hooks/useExpirationDateInput.ts';
+import ExpirationDateInput from 'src/components/ExpirationDateInput.tsx';
+
 export function TestContainer() {
 	const { handleExpirationDateChange, expirationDate } = useExpirationDateInput();
 
