@@ -5,7 +5,6 @@ import InputGroup from "../components/InputGroup";
 export default function CardAdd() {
   const [cardNumberValue1, setCardNumberValue1] = useState("");
   const [cardNumberValue2, setCardNumberValue2] = useState("");
-
   const [cardNumberValue3, setCardNumberValue3] = useState("");
   const [cardNumberValue4, setCardNumberValue4] = useState("");
   const cardNumberInfoList = [
@@ -109,6 +108,7 @@ export default function CardAdd() {
             <div className="card-top"></div>
             <div className="card-middle">
               <div className="small-card__chip"></div>
+              <span className="card-text">NAME</span>
             </div>
             <div className="card-bottom">
               <div className="card-bottom_info">
@@ -162,7 +162,7 @@ export default function CardAdd() {
         {/* 보안 코드 */}
         <div className="input-container">
           <span className="input-title">보안코드(CVC/CVV)</span>
-          <input className="input-basic w-25" type="password" />
+          <input className="input-basic w-25" type="text" />
         </div>
         {/* 카드 비밀번호 */}
         <div className="input-container">
