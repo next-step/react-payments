@@ -86,6 +86,11 @@ export const AddingCard = () => {
           <Step1 />
         </Form>
       </Funnel.Step>
+
+      <Funnel.Step name="b">
+        <button onClick={() => changeStep('a')}> 이전</button>
+        <div>등록 완료 페이지 입니다.</div>
+      </Funnel.Step>
     </Funnel>
   )
 }
