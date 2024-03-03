@@ -1,8 +1,17 @@
 import Input from '../atoms/Input';
 import Text from '../atoms/Text';
 
+const numberRegExp = /[^\d]/g;
+
 function CardSecurityCode(props) {
-  const { securityCode } = props;
+  const { onData } = props;
+
+  const handleChange = (event) => {
+    const { value } = event.target;
+    const newSecurityCode = value.replace(numberRegExp, '');
+    event.target.value = newSecurityCode;
+    onData('securityCode', newSecurityCode);
+  };
 
   return (
     <>
@@ -11,7 +20,8 @@ function CardSecurityCode(props) {
         className="input-basic"
         extraClassName="w-25"
         type="password"
-        value={securityCode}
+        onChange={handleChange}
+        maxLength={3}
       />
     </>
   );

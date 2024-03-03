@@ -14,6 +14,7 @@ const INITIAL_STATE = {
   mm: '',
   yy: '',
   user: '',
+  securityCode: '',
 };
 
 function AddCard() {
@@ -29,6 +30,10 @@ function AddCard() {
   };
 
   const handleCardHolder = (key, value) => {
+    setCard({ ...card, [key]: value });
+  };
+
+  const handleCardSecurityCode = (key, value) => {
     setCard({ ...card, [key]: value });
   };
 
@@ -56,7 +61,7 @@ function AddCard() {
         <CardHolder onData={handleCardHolder} />
       </div>
       <div className="input-container">
-        <CardSecurityCode />
+        <CardSecurityCode onData={handleCardSecurityCode} />
       </div>
       <div className="input-container">
         <CardPassword />
