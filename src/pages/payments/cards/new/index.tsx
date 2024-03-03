@@ -3,7 +3,12 @@ import { useFunnel } from '@/hooks/useFunnel'
 import { formInitialValues } from '../const'
 import { Step1 } from './components/Step1'
 import { Form } from './contexts/FormContext'
-import { checkCardholderName, checkCardNumber, checkExpirationDate } from './service/validations'
+import {
+  checkCardholderName,
+  checkCardNumber,
+  checkExpirationDate,
+  checkSecurityCode,
+} from './service/validations'
 
 export const AddingCard = () => {
   const { Funnel, changeStep } = useFunnel<'a' | 'b'>('a')
@@ -48,6 +53,10 @@ export const AddingCard = () => {
 
         if (!checkCardNumber(values.cardNumber4)) {
           errors.cardNumber4 = '카드번호은 4개의 숫자를 입력해 주세요.'
+        }
+
+        if (!checkSecurityCode(values.securityCode)) {
+          errors.securityCode = '보안코드은 3개의 숫자를 입력해 주세요.'
         }
 
         return errors

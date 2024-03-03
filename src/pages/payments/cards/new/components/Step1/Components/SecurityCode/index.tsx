@@ -1,8 +1,23 @@
+import { FormType } from '@/pages/payments/cards/type'
+
+import { useFormContext } from '../../../../contexts/FormContext'
+
 export const SecurityCode = () => {
+  const { getFieldProps, errors, touched } = useFormContext<FormType>()
+
   return (
-    <div className="input-container">
-      <span className="input-title">보안코드(CVC/CVV)</span>
-      <input className="input-basic w-25" type="password" />
-    </div>
+    <>
+      <div className="input-container" style={{ width: '84px' }}>
+        <span className="input-title">보안코드(CVC/CVV)</span>
+        <input
+          className="input-basic w-25"
+          type="password"
+          maxLength={3}
+          {...getFieldProps('securityCode')}
+        />
+      </div>
+
+      <div>{errors.securityCode && touched.securityCode && <span>{errors.securityCode}</span>}</div>
+    </>
   )
 }

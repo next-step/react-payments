@@ -25,3 +25,13 @@ export const checkCardNumber = (cardNumber: string) => {
 
   return false
 }
+
+export const checkSecurityCode = (code: string) => {
+  const SECURITY_CODE_REG = /^\d{3}$/
+
+  if (SECURITY_CODE_REG.test(code)) {
+    return true
+  }
+
+  return false
+}
