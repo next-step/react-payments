@@ -6,3 +6,4 @@ export * from './TextField';
 export * from './Typography';
 export * from './Label';
 export * from './Button';
+export * from './Circle';

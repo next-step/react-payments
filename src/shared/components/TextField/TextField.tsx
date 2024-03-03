@@ -35,6 +35,7 @@ const Root = styled(DefaultStyled)<TextFieldProps>`
   ${({ variant }) => variantStyles[variant || 'outline']};
 
   &::placeholder {
+    font-size: ${({ _placeholder }) => _placeholder?.fontSize};
     letter-spacing: ${({ _placeholder }) => _placeholder?.letterSpacing};
     color: ${({ _placeholder }) => _placeholder?.color};
     text-align: ${({ _placeholder }) => _placeholder?.textAlign};

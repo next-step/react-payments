@@ -4,9 +4,11 @@
   - [x] HStack
   - [x] VStack
   - [x] Grid
+  - [x] Circle
+  - [x] Button
   - [x] TextField
   - [x] Typography
-  - [x] Button
+
 - [ ] Funnel 기반의 애플리케이션 설계
 - [x] Storybook 상호 작용 테스트
 - [ ] Controlled & Uncontrolled Components를 명확하게 구분하거나 선택하여 구현

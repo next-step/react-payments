@@ -1,6 +1,7 @@
 import { StyleProps } from '@/shared/types';
 
 export type PlaceholderProps = {
+  fontSize?: StyleProps['fontSize'];
   color?: StyleProps['color'];
   letterSpacing?: StyleProps['letterSpacing'];
   textAlign?: StyleProps['textAlign'];
