@@ -41,6 +41,7 @@ export type TextElement =
   | 'p'
   | 'label'
   | 'a'
+  | 'button'
 
 export type TextProps<C extends TextElement = 'div'> = PolymorphicComponentPropWithRef<
   C,
