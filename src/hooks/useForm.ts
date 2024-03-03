@@ -1,23 +1,27 @@
 import { ChangeEvent, FocusEvent, FormEvent, useCallback, useEffect, useState } from 'react'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-type FormValues = Record<string, any>
+export type FormValues = Record<string, any>
 
 type FormErrors<T extends FormValues> = {
   [P in keyof T]: string
 }
 
-type FormTouched<T extends FormValues> = {
+export type FormTouched<T extends FormValues> = {
   [P in keyof T]: boolean
 }
 
-export interface FormProps<T extends FormValues> {
+export interface UseFormProps<T extends FormValues> {
   initialValues: T
   validate: (values: T) => FormErrors<T>
   onSubmit: (values: T) => void
 }
 
-export function useForm<T extends FormValues>({ initialValues, validate, onSubmit }: FormProps<T>) {
+export function useForm<T extends FormValues>({
+  initialValues,
+  validate,
+  onSubmit,
+}: UseFormProps<T>) {
   const [values, setValues] = useState<T>(initialValues)
   const [errors, setErrors] = useState<FormErrors<T>>({} as FormErrors<T>)
   const [touched, setTouched] = useState<FormTouched<T>>({} as FormTouched<T>)
