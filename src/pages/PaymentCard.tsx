@@ -14,7 +14,8 @@ function PaymentCard() {
     expireDate: "",
     cardOwner: "",
     cvc: "",
-    password: "",
+    firstPassword: "",
+    secondPassword: "",
   });
 
   const handleChangeCurrentPage = (page: CurrentPage) => {

@@ -19,7 +19,9 @@ export default function SmallCard({
             <span className="card-text">{cardNumber}</span>
           </div>
           <div className="card-bottom__info">
-            <span className="card-text">{cardOwner ? cardOwner : "NAME"}</span>
+            <span className="card-text text-overflow">
+              {cardOwner ? cardOwner : "NAME"}
+            </span>
             <span className="card-text">
               {expireDate ? expireDate : "MM / YY"}
             </span>

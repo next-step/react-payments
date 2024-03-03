@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, useRef } from "react";
 
 import Input from "common/components/input";
 import {
@@ -7,13 +7,8 @@ import {
 } from "common/utils/inputFormat";
 import { CardInfo } from "common/types/card.type";
 
-interface InputCardFormProps {
+interface InputCardFormProps extends CardInfo {
   onCardInfoChange: (key: keyof CardInfo, value: string) => void;
-  cardNumber: string;
-  cardOwner: string;
-  expireDate: string;
-  cvc: string;
-  password: string;
 }
 
 export default function InputCardForm({
@@ -21,9 +16,13 @@ export default function InputCardForm({
   cardOwner,
   expireDate,
   cvc,
-  password,
+  firstPassword,
+  secondPassword,
   onCardInfoChange,
 }: InputCardFormProps) {
+  const firstPasswordRef = useRef<HTMLInputElement>(null);
+  const secondPasswordRef = useRef<HTMLInputElement>(null);
+
   const handleCardNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     onCardInfoChange("cardNumber", formattedCardNumber(e.target.value));
   };
@@ -37,11 +36,19 @@ export default function InputCardForm({
   };
 
   const handleCardSecurityCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onCardInfoChange("cvc", e.target.value);
+    onCardInfoChange("cvc", formattedCardNumber(e.target.value));
   };
 
-  const handleCardPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onCardInfoChange("password", e.target.value);
+  const handleFirstPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onCardInfoChange("firstPassword", e.target.value);
+
+    if (e.target.value) {
+      secondPasswordRef.current?.focus();
+    }
+  };
+
+  const handleSecondPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onCardInfoChange("secondPassword", e.target.value);
   };
 
   return (
@@ -61,13 +68,8 @@ export default function InputCardForm({
         <Input.Box className="input-box w-50">
           <Input.Text
             value={expireDate}
-            maxLength={2}
-            onChange={handleCardExpireDateChange}
-          />
-          <span>/</span>
-          <Input.Text
-            value={expireDate}
-            maxLength={2}
+            maxLength={5}
+            placeholder="MM / YY"
             onChange={handleCardExpireDateChange}
           />
         </Input.Box>
@@ -94,16 +96,18 @@ export default function InputCardForm({
         <Input.Label>카드 비밀번호</Input.Label>
         <Input.Box className="gap8">
           <Input.Password
-            value={password}
+            ref={firstPasswordRef}
+            value={firstPassword}
             maxLength={1}
             className="input-basic w-15"
-            onChange={handleCardPasswordChange}
+            onChange={handleFirstPasswordChange}
           />
           <Input.Password
-            value={password}
+            ref={secondPasswordRef}
+            value={secondPassword}
             maxLength={1}
             className="input-basic w-15"
-            onChange={handleCardPasswordChange}
+            onChange={handleSecondPasswordChange}
           />
           <Input.Password value="*" className="input-basic w-15" readOnly />
           <Input.Password value="*" className="input-basic w-15" readOnly />

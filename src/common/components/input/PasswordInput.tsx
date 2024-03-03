@@ -1,7 +1,12 @@
-import { InputHTMLAttributes } from "react";
+import { forwardRef, InputHTMLAttributes } from "react";
 
-interface PasswordInputProps extends InputHTMLAttributes<HTMLInputElement> {}
+const PasswordInput = forwardRef<
+  HTMLInputElement,
+  InputHTMLAttributes<HTMLInputElement>
+>((props, ref) => {
+  return <input type="password" className="input-basic" ref={ref} {...props} />;
+});
 
-export default function PasswordInput({ ...props }: PasswordInputProps) {
-  return <input type="password" className="input-basic" {...props} />;
-}
+PasswordInput.displayName = "PasswordInput";
+
+export default PasswordInput;

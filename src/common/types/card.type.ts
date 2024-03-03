@@ -3,5 +3,6 @@ export interface CardInfo {
   expireDate: string;
   cardOwner: string;
   cvc: string;
-  password: string;
+  firstPassword: string;
+  secondPassword: string;
 }

@@ -1,7 +1,12 @@
-import { InputHTMLAttributes } from "react";
+import { forwardRef, InputHTMLAttributes } from "react";
 
-interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {}
+const TextInput = forwardRef<
+  HTMLInputElement,
+  InputHTMLAttributes<HTMLInputElement>
+>((props, ref) => {
+  return <input type="text" className="input-basic" ref={ref} {...props} />;
+});
 
-export default function TextInput({ ...props }: TextInputProps) {
-  return <input type="text" className="input-basic" {...props} />;
-}
+TextInput.displayName = "TextInput";
+
+export default TextInput;

@@ -18,7 +18,7 @@ function BigCard({ cardNumber, cardOwner, expireDate }: BigCardProps) {
             <span className="card-text__big">{cardNumber}</span>
           </div>
           <div className="card-bottom__info">
-            <span className="card-text__big">{cardOwner}</span>
+            <span className="card-text__big text-overflow">{cardOwner}</span>
             <span className="card-text__big">{expireDate}</span>
           </div>
         </div>
