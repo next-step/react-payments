@@ -3,6 +3,7 @@ import { CARD_INPUT_COLOR, CARD_INPUT_TEXT_FONT_SIZE, CARD_INPUT_TEXT_FONT_WEIGH
 import { useInputs } from '@/hook';
 import { HStack, Label, TextField, Typography, VStack } from '@/shared/components';
 import { styleToken } from '@/shared/styles';
+import { validateMonthString } from '@/shared/utils';
 
 const INITIAL_CARD_EXPIRATIONS_DATES = ['', ''];
 const CARD_EXPIRATIONS_DATE_LENGTH = INITIAL_CARD_EXPIRATIONS_DATES.length;
@@ -23,11 +24,17 @@ export const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputPro
     pattern: /^[0-9]*$/,
   });
 
-  const onCardNumberPartChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
-    const newCardNumberParts = [...cardExpirationDateParts];
-    newCardNumberParts[index] = e.target.value;
-    handleChange(index)(e);
+  const handleCardNumberPartChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
+    const monthString = e.target.value;
+    if (index === 0 && monthString.length === 2 && !validateMonthString(monthString)) {
+      console.warn('월 형식이 올바르지 않습니다. (01 ~ 12)');
+      return;
+    }
 
+    const newCardNumberParts = [...cardExpirationDateParts];
+    newCardNumberParts[index] = monthString;
+
+    handleChange(index)(e);
     onChange?.(newCardNumberParts.join(' '));
   };
 
@@ -49,7 +56,7 @@ export const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputPro
           ref={inputRefs[0]}
           variant="unstyled"
           value={cardExpirationDateParts[0]}
-          onChange={onCardNumberPartChange(0)}
+          onChange={handleCardNumberPartChange(0)}
           onKeyDown={handleKeyDown(0)}
           maxLength={2}
           width="30px"
@@ -78,7 +85,7 @@ export const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputPro
           ref={inputRefs[1]}
           variant="unstyled"
           value={cardExpirationDateParts[1]}
-          onChange={onCardNumberPartChange(1)}
+          onChange={handleCardNumberPartChange(1)}
           onKeyDown={handleKeyDown(1)}
           maxLength={2}
           width="24px"
