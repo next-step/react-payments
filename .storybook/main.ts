@@ -16,5 +16,16 @@ const config: StorybookConfig = {
 	docs: {
 		autodocs: 'tag',
 	},
+	viteFinal: config => {
+		config.resolve = {
+			...config.resolve,
+			alias: {
+				...config.resolve?.alias,
+				path: require.resolve('path-browserify'),
+			},
+		};
+
+		return config;
+	},
 };
 export default config;

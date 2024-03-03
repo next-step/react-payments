@@ -1,6 +1,8 @@
 import type { Preview } from '@storybook/react';
+import { withTests } from '@storybook/addon-jest';
 
 import '../src/styles/index.css';
+import results from '../.jest-test-results.json';
 
 const preview: Preview = {
 	parameters: {
@@ -13,6 +15,9 @@ const preview: Preview = {
 		},
 	},
 	decorators: [
+		withTests({
+			results,
+		}),
 		Story => (
 			<div className="root">
 				<div className="app">
