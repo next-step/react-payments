@@ -11,7 +11,7 @@ export const createDisplayCardCode = ({
   value,
   maskedLastDigit,
   separator = ' - ',
-  maskChar = '*',
+  maskChar = '•',
   separateDigit = 4,
   maxDigit = 16,
 }: CreateCardNumberParams) => {
