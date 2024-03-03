@@ -1,48 +1,24 @@
+import NextButton from "../Components/Button/NextButton";
+import H2Text from "../Components/Text/H2Text";
+import CardNickname from "../Components/Cards/CardElements/CardNickName";
+import BigCreditCard from "../Components/Cards/Card/BigCreditCard";
+import Layout45 from "../Components/Layout/Layout45";
+import Flex from "../Components/Layout/Flex";
+
 const Page4 = () => {
   return (
     <>
-      <h2>4️⃣ 카드 추가 완료</h2>
-      <div className="root">
-        <div className="app flex-column-center">
-          <div className="flex-center">
-            <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
-          </div>
-
-          <div className="card-box">
-            <div className="big-card">
-              <div className="card-top">
-                <span className="card-text__big">클린카드</span>
-              </div>
-              <div className="card-middle">
-                <div className="big-card__chip"></div>
-              </div>
-              <div className="card-bottom">
-                <div className="card-bottom__number">
-                  <span className="card-text__big">
-                    1111 - 2222 - oooo - oooo
-                  </span>
-                </div>
-                <div className="card-bottom__info">
-                  <span className="card-text__big">YUJO</span>
-                  <span className="card-text__big">12 / 23</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="input-container flex-center w-100">
-            <input
-              className="input-underline w-75"
-              type="text"
-              placeholder="카드의 별칭을 입력해주세요."
-            />
-          </div>
-
-          <div className="button-box mt-50">
-            <span className="button-text">다음</span>
-          </div>
-        </div>
-      </div>
+      <H2Text>4️⃣ 카드 추가 완료</H2Text>
+      <Layout45>
+        <Flex>
+          <H2Text className="page-title mb-10">
+            카드등록이 완료되었습니다.
+          </H2Text>
+        </Flex>
+        <BigCreditCard />
+        <CardNickname />
+        <NextButton className="mt-50" />
+      </Layout45>
     </>
   );
 };

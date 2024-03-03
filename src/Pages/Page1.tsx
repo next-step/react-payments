@@ -1,4 +1,4 @@
-import EmptyCreditcard from "../Components/Cards/EmptyCreditcard";
+import EmptyCreditcard from "../Components/Cards/Card/EmptyCreditcard";
 import Layout from "../Components/Layout/Layout";
 import RegisterForm from "../Components/RegisterForm/RegisterForm";
 import H2Text from "../Components/Text/H2Text";

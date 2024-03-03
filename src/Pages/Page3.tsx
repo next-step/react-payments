@@ -1,4 +1,4 @@
-import Creditcard from "../Components/Cards/Creditcard";
+import Creditcard from "../Components/Cards/Card/SmallCreditCard";
 import Layout from "../Components/Layout/Layout";
 import RegisterForm from "../Components/RegisterForm/RegisterForm";
 const Page3 = () => {

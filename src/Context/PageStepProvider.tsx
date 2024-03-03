@@ -12,8 +12,8 @@ export const PageStepContext = createContext({
 
 const PageStepProvider = ({ children }: { children: ReactElement | null }) => {
   const [currentStep, setCurrentStep] = useState({
-    currentPage: TotalPage[0],
-    idx: 0,
+    currentPage: TotalPage[2],
+    idx: 2,
   });
 
   const handleCurrentStep = () => {
