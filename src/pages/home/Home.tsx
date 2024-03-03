@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export const Home = () => {
-  return <h1>home page</h1>
+  return <Link to={'/payments/cards'}>카드 추가</Link>
 }
