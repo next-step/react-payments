@@ -8,3 +8,6 @@ export * from '@/components/organism/base-input'
 export * from '@/components/organism/underline-input'
 
 export * from '@/components/template/card-code-input'
+export * from '@/components/template/card-exp-date-input'
+export * from '@/components/template/card-pin-input'
+export * from '@/components/template/header/header'
