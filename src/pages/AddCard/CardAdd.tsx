@@ -9,17 +9,20 @@ import useCardNumber from './hooks/useCardNumber';
 import useExpiration from './hooks/useExpiration';
 import useSecurityCode from './hooks/useSecurityCode';
 import usePassword from './hooks/usePassword';
+import useOwner from './hooks/useOwner';
 
 const AddCard = () => {
   const { cardNumber, handleNumbers } = useCardNumber();
   const { expirationDate, handleExpirationDate } = useExpiration();
   const { securityCode, handleSecurityCode } = useSecurityCode();
   const { password, handlePassword } = usePassword();
+  const { owner, handleOnwer } = useOwner();
 
   const card: CardType = {
     numbers: Object.values(cardNumber),
     expirationMonth: expirationDate.month,
     expirationYear: expirationDate.year,
+    owner,
   };
 
   return (
@@ -66,7 +69,17 @@ const AddCard = () => {
       </InputContainer>
 
       <InputContainer label='카드 소유자 이름(선택)'>
-        <Input placeholder='카드에 표시된 이름과 동일하게 입력하세요.' />
+        <div className='input-relative'>
+          <span className='owner-length'>
+            {owner.length} / {30}
+          </span>
+          <Input
+            placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
+            maxLength={30}
+            value={owner}
+            onChange={handleOnwer}
+          />
+        </div>
       </InputContainer>
 
       <InputContainer label='보안코드'>

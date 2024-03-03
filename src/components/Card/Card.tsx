@@ -5,7 +5,7 @@ interface Props extends CardProps {}
 const Card = ({
   brand,
   numbers,
-  owner = 'NAME',
+  owner,
   expirationMonth,
   expirationYear,
 }: Props) => {
@@ -33,7 +33,7 @@ const Card = ({
             <span className='card-text'>{cardNumbers}</span>
           </div>
           <div className='card-bottom__info'>
-            <span className='card-text'>{owner}</span>
+            <span className='card-text'>{owner || 'NAME'}</span>
             <span className='card-text'>
               {expirationMonth || 'MM'} / {expirationYear || 'YY'}
             </span>
