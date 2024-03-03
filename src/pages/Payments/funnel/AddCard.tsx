@@ -70,7 +70,9 @@ export const AddCard = () => {
 
       {isAllFieldsFulfilled && (
         <div className='button-box' onClick={handleNext}>
-          <span className={`button-text ${optaionalClassName}`}>다음</span>
+          <span className={`button-text button-activate ${optaionalClassName}`}>
+            다음
+          </span>
         </div>
       )}
     </div>

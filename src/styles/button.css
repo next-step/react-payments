@@ -6,3 +6,7 @@
 .button-text {
   margin-right: 10px;
 }
+
+.button-activate:hover {
+  cursor: pointer;
+}
