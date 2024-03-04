@@ -1,10 +1,18 @@
 import { createContext, useState, type PropsWithChildren } from 'react';
 
 export type KeyIndex = {
-  [key in string]: string;
+  [key: string]: string;
 };
+
+export type CardNumbersType = {
+  first?: string;
+  second?: string;
+  third?: string;
+  fourth?: string;
+} & KeyIndex;
+
 export type CardStateType = {
-  cardNumbers?: string[];
+  cardNumbers?: CardNumbersType;
   securityCode?: string;
   firstCardPassword?: string;
   secondCardPassword?: string;
@@ -27,6 +35,7 @@ export const CardInfoContext = createContext(initialState);
 
 const CardInfoProvider = ({ children }: PropsWithChildren) => {
   const [cardState, setCardState] = useState<CardStateType>({});
+  console.log({ cardState });
 
   const handleCardState = (data: CardStateType) => {
     setCardState((prev) => ({ ...prev, ...data }));

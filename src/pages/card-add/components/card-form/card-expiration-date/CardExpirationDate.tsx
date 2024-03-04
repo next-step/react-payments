@@ -8,9 +8,8 @@ const CardExpirationDate = () => {
   const { handleChange, refs } = useCardExpirationDate();
 
   return (
-    <InputBox className="input-box w-50">
+    <InputBox className="w-50">
       <Input
-        className="input-basic"
         type="text"
         name="month"
         onChange={(e) => handleChange(e, 0)}
@@ -21,7 +20,6 @@ const CardExpirationDate = () => {
         }}
       />
       <Input
-        className="input-basic"
         type="text"
         name="year"
         onChange={(e) => handleChange(e, 1)}

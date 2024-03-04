@@ -9,7 +9,7 @@ const CardPassword = () => {
   return (
     <div style={{ display: 'flex', gap: '5px' }}>
       <Input
-        className="input-basic w-15"
+        className="w-15"
         type="password"
         name="firstCardPassword"
         onChange={(e) => handleChange(e, 0)}
@@ -19,7 +19,7 @@ const CardPassword = () => {
         }}
       />
       <Input
-        className="input-basic w-15"
+        className="w-15"
         type="password"
         name="secondCardPassword"
         onChange={(e) => handleChange(e, 1)}

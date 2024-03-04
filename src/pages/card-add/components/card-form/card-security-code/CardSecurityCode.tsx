@@ -7,7 +7,7 @@ const CardSecurityCode = () => {
   const { handleScurityCode, inputRef } = useSecurityCode();
   return (
     <Input
-      className="input-basic w-25"
+      className="w-25"
       type="password"
       maxLength={MAX_LENGTH}
       name="securityCode"

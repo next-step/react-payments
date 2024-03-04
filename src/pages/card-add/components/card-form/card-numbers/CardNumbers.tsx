@@ -1,68 +1,53 @@
 import InputBox from '@/components/common/input-box/InputBox';
 import Input from '@/components/common/input/Input';
-import { CardInfoContext } from '@/provider/CardInfoProvider';
-import { ChangeEvent, useContext, useRef } from 'react';
+import useNumbers from './hook/useCardNumbers';
 
 const MAX_LENGTH = 4;
-const REGEX = /[^0-9]/;
+export const createHyphen = (value: string) => value && value.length === MAX_LENGTH && '-';
 const CardNumbers = () => {
-  const { handleCardState } = useContext(CardInfoContext);
-
-  const inputRefs = useRef<Array<HTMLInputElement>>([]);
-
-  const handleCardNumbers = (e: ChangeEvent<HTMLInputElement>, idx: number) => {
-    const { name, value } = e.target;
-    if (REGEX.test(value)) {
-      if (inputRefs.current[idx]) {
-        const inputValue = inputRefs.current[idx].value;
-        inputRefs.current[idx].value = inputValue.replace(/\D/g, '');
-      }
-    }
-    if (!REGEX.test(value)) {
-      handleCardState({ [name]: value });
-    }
-  };
+  const { state, handleChange, refs } = useNumbers();
 
   return (
-    <InputBox className="input-box">
+    <InputBox>
       <Input
         type="text"
-        name="cardNumber"
-        onChange={(e) => handleCardNumbers(e, 0)}
-        className="input-basic"
+        name="first"
+        onChange={(e) => handleChange(e, 0)}
         maxLength={MAX_LENGTH}
         ref={(el) => {
-          if (el) inputRefs.current[0] = el;
+          if (el) refs.current[0] = el;
         }}
       />
+      {state && createHyphen(Object.values(state)[0])}
       <Input
         type="text"
-        name="cardNumber"
-        onChange={(e) => handleCardNumbers(e, 1)}
+        name="second"
+        onChange={(e) => handleChange(e, 1)}
         className="input-basic"
         maxLength={MAX_LENGTH}
         ref={(el) => {
-          if (el) inputRefs.current[1] = el;
+          if (el) refs.current[1] = el;
         }}
       />
+      {state && createHyphen(Object.values(state)[1])}
       <Input
         type="password"
-        name="cardNumber"
-        onChange={(e) => handleCardNumbers(e, 2)}
+        name="third"
+        onChange={(e) => handleChange(e, 2)}
         className="input-basic"
         maxLength={MAX_LENGTH}
         ref={(el) => {
-          if (el) inputRefs.current[2] = el;
+          if (el) refs.current[2] = el;
         }}
       />
+      {state && createHyphen(Object.values(state)[2])}
       <Input
         type="password"
-        name="cardNumber"
-        onChange={(e) => handleCardNumbers(e, 3)}
-        className="input-basic"
+        name="fourth"
+        onChange={(e) => handleChange(e, 3)}
         maxLength={MAX_LENGTH}
         ref={(el) => {
-          if (el) inputRefs.current[3] = el;
+          if (el) refs.current[3] = el;
         }}
       />
     </InputBox>
