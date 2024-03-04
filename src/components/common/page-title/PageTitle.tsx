@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-ß;
+
 interface PageTitle {
   title: string;
 }
