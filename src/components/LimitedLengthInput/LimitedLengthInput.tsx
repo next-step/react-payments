@@ -1,4 +1,12 @@
-import { ChangeEvent, InputHTMLAttributes, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  HTMLAttributes,
+  InputHTMLAttributes,
+  forwardRef,
+  useEffect,
+  useRef,
+} from "react";
+import { mergeRefs } from "react-merge-refs";
 import stylesModule from "./LimitedLengthInput.module.css";
 import { isOverLengthToLimitation } from "../../utils";
 
@@ -14,7 +22,10 @@ const styles = {
   },
 };
 
-interface LimitedLengthInputProps {
+type LimitedLengthInputProps = Omit<
+  HTMLAttributes<HTMLInputElement>,
+  "onChange" | "value"
+> & {
   /**
    * @description 인풋 입력 최대 길이를 조정합니다.
    */
@@ -31,48 +42,62 @@ interface LimitedLengthInputProps {
    * @description 화면에 표시되는 텍스트의 결과를 그대로 표시할 것인지에 대한 조정값입니다.
    */
   type?: "text" | "password";
+
+  isAbledFocusOnMount?: boolean;
   textAlign?: "left" | "center" | "right";
 
-  colorTheme: "primary" | "normal";
+  colorTheme?: "primary" | "normal";
   placeholder?: string;
-  value: string;
-}
+  value?: string;
+};
 
-function LimitedLengthInput({
-  maxLength,
-  onChange,
-  type = "text",
-  value,
-  colorTheme = "normal",
-  textAlign = "left",
-  placeholder,
-}: Readonly<LimitedLengthInputProps>) {
-  const [inputValue, setInputValue] = useState<string>("");
-  const isMaxLength = inputValue.length === maxLength;
-
+const LimitedLengthInput = forwardRef<
+  HTMLInputElement,
+  Readonly<LimitedLengthInputProps>
+>(function LimitedLengthInput(
+  {
+    maxLength,
+    onChange,
+    type = "text",
+    value,
+    colorTheme = "normal",
+    textAlign = "left",
+    placeholder,
+    isAbledFocusOnMount = false,
+    ...props
+  },
+  ref
+) {
+  const inputRef = useRef<HTMLInputElement>(null);
   const styleClasses = `${stylesModule.input} ${styles.color[colorTheme]} ${styles.textAlign[textAlign]}`;
 
   const inputProps: InputHTMLAttributes<HTMLInputElement> = {
     onChange: changeValue,
-    value: value || inputValue,
+    value,
     className: styleClasses,
     type,
     maxLength,
     placeholder,
     title: "limited length input",
+    onInput: (event) => {
+      event.currentTarget.style.width =
+        (event.currentTarget.value.length + 1) * 8 + "px";
+    },
+    ...props,
   };
 
   function changeValue(event: ChangeEvent<HTMLInputElement>) {
-    !value &&
-      !isOverLengthToLimitation(event.target.value, maxLength) &&
-      setInputValue(event.target.value);
+    const isMaxLength = event.target.value.length === maxLength;
+    !isOverLengthToLimitation(event.target.value, maxLength) &&
+      onChange &&
+      onChange(event.target.value, isMaxLength);
   }
 
   useEffect(() => {
-    onChange && onChange(inputValue, isMaxLength);
-  }, [inputValue, isMaxLength]);
+    if (inputRef.current && isAbledFocusOnMount) inputRef.current.focus();
+  }, []);
 
-  return <input {...inputProps} />;
-}
+  return <input ref={mergeRefs([ref, inputRef])} {...inputProps} />;
+});
 
 export default LimitedLengthInput;
