@@ -25,6 +25,7 @@ const block = style({
 })
 
 const button = style({
+  cursor: 'pointer',
   background: 'none',
 })
 

@@ -50,7 +50,7 @@ export const CardPinInput = ({
   return (
     <>
       <BaseInput {...props}>
-        <Flex alignItems="center" gap="6px">
+        <Flex alignItems="center" gap="6px" marginTop="4px">
           {Array.from({ length: inputDigit }).map((_, index) => (
             <BaseInputContent
               id={`${id}-${index}`}

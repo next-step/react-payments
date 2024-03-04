@@ -1,18 +1,19 @@
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { CardListPage } from '@/pages/card-list-page'
+import { CardRegisterPage } from '@/pages/card-register-page'
 
 const router = createBrowserRouter([
   {
     index: true,
-    element: <Navigate to="/cards" />,
+    element: <Navigate to="/card-list" />,
   },
   {
-    path: '/cards',
+    path: '/card-list',
     element: <CardListPage />,
   },
   {
     path: '/card-register',
-    element: <>add-cards</>,
+    element: <CardRegisterPage />,
   },
 ])
 
