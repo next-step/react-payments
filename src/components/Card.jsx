@@ -1,6 +1,7 @@
 import { getSplitString4 } from "../util/regExp";
 
-export default function Card({ alias = "", cardNumber }) {
+export default function Card({ alias = "", cardNumber, expirationDate }) {
+  // 카드 번호
   const displayCardNumber = getSplitString4(Object.values(cardNumber).join(""))
     .map((value, i) => {
       if (i >= 2) {
@@ -10,6 +11,7 @@ export default function Card({ alias = "", cardNumber }) {
     })
     .join("-");
 
+  const displayExpirationDate = Object.values(expirationDate).join(" / ");
   return (
     <>
       <div className="card-top">
@@ -22,7 +24,7 @@ export default function Card({ alias = "", cardNumber }) {
       <div className="card-bottom">
         <div className="card-bottom_info">
           <span className="card-text">NAME</span>
-          <span className="card-text">MM / YY</span>
+          <span className="card-text">{displayExpirationDate}</span>
         </div>
       </div>
     </>

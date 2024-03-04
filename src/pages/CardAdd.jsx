@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { isNumericString, isValidateMonth } from "../util/regExp";
 import { Link } from "react-router-dom";
 import CardBox from "../components/CardBox";
 import Card from "../components/Card";
@@ -10,64 +9,23 @@ import {
   THIRD_NUMBER,
 } from "../constants/cardNumber";
 import CardNumberInput from "../components/card-add/CardNumberInput";
+import { MONTH, YEAR } from "../constants/expirationDate";
+import ExpirationDateInput from "../components/card-add/ExpirationDateInput";
 
 export default function CardAdd() {
   // 카드번호
-  const [cardNumberValue, setCardNumberValue] = useState({
+  const [cardNumber, setCardNumber] = useState({
     [FIRST_NUMBER]: "",
     [SECOND_NUMBER]: "",
     [THIRD_NUMBER]: "",
     [FOURTH_NUMBER]: "",
   });
 
-  // 만료일(MM)
-  const [expirationMM, setExpirationMM] = useState("");
-  // 만료일(YY)
-  const [expirationYY, setExpirationYY] = useState("");
-
-  // 만료일(MM)
-  const handleExpirationMMInput = (event) => {
-    const nowExpirationMM = event.target.value;
-
-    // 빈 문자열
-    if (nowExpirationMM === "") {
-      setExpirationMM("");
-      return;
-    }
-
-    // 숫자외 다른 입력
-    if (!isNumericString(nowExpirationMM)) {
-      alert("숫자만 입력해주세요!");
-      return;
-    }
-
-    // 유효하지 않은 월
-    if (nowExpirationMM.length >= 2 && !isValidateMonth(nowExpirationMM)) {
-      alert("유효한 월을 입력해주세요!");
-      return;
-    }
-
-    setExpirationMM(nowExpirationMM);
-  };
-
-  // 만료일(YY)
-  const handleExpirationYYInput = (event) => {
-    const nowExpirationYY = event.target.value;
-
-    // 빈 문자열
-    if (nowExpirationYY === "") {
-      setExpirationYY("");
-      return;
-    }
-
-    // 숫자외 다른 입력
-    if (!isNumericString(nowExpirationYY)) {
-      alert("숫자만 입력해주세요!");
-      return;
-    }
-
-    setExpirationYY(nowExpirationYY);
-  };
+  // 만료일
+  const [expirationDate, setExpirationDate] = useState({
+    [MONTH]: "",
+    [YEAR]: "",
+  });
 
   return (
     <div className="root">
@@ -78,38 +36,31 @@ export default function CardAdd() {
           </Link>
           <span className="ml-10">카드 추가</span>
         </h2>
+
         {/* 카드 */}
         <CardBox>
-          <Card alias={"카드 별칭"} cardNumber={cardNumberValue} />
+          <Card
+            alias={"카드 별칭"}
+            cardNumber={cardNumber}
+            expirationDate={expirationDate}
+          />
         </CardBox>
 
         {/* 카드 번호 */}
         <div className="input-container">
           <span className="input-title">카드 번호</span>
           <CardNumberInput
-            cardNumberValue={cardNumberValue}
-            setCardNumberValue={setCardNumberValue}
+            cardNumber={cardNumber}
+            setCardNumber={setCardNumber}
           />
         </div>
         {/* 만료일 */}
         <div className="input-container">
           <span className="input-title">만료일</span>
-          <div className="input-box w-50">
-            <input
-              value={expirationMM}
-              onChange={handleExpirationMMInput}
-              className="input-basic"
-              type="text"
-              placeholder="MM"
-            />
-            <input
-              value={expirationYY}
-              onChange={handleExpirationYYInput}
-              className="input-basic"
-              type="text"
-              placeholder="YY"
-            />
-          </div>
+          <ExpirationDateInput
+            expirationDate={expirationDate}
+            setExpirationDate={setExpirationDate}
+          />
         </div>
         {/* 카드 소유자 이름 */}
         <div className="input-container">
