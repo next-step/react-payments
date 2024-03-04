@@ -11,6 +11,16 @@
   align-items: center;
 }
 
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-justify-spaceBetween {
+  display: flex;
+  justify-content: space-between;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -35,6 +45,10 @@
   margin-bottom: 2.5rem;
 }
 
+.pl-16 {
+  padding-left: 16px;
+}
+
 .w-100 {
   width: 100%;
 }
@@ -53,4 +67,20 @@
 
 .w-15 {
   width: 15%;
+}
+
+.g-16 {
+  gap: 16px;
+}
+
+.g-8 {
+  gap: 8px;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.word-break-all {
+  word-break: break-all;
 }
