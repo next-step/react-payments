@@ -1,15 +1,16 @@
-import { ReactNode } from "react";
+import { CSSProperties, ReactNode } from "react";
 
-interface BoxProps {
+interface BoxProps extends CSSProperties {
+  /**
+   * @description 숫자가 아닌 원하는 단위의 사이즈를 입력 가능합니다.
+   * @default 'fit-content'
+   */
+  width?: string;
+
   /**
    * @description 숫자가 아닌 원하는 단위의 사이즈를 입력 가능합니다.
    */
-  width: string;
-
-  /**
-   * @description 숫자가 아닌 원하는 단위의 사이즈를 입력 가능합니다.
-   */
-  height: string;
+  height?: string;
 
   /**
    * @description 박스의 컬러를 지정할 수 있습니다.
@@ -37,7 +38,7 @@ const position = {
 };
 
 export default function Box({
-  width,
+  width = "fit-content",
   height,
   contentPosition = "none",
   backgroundColor,
