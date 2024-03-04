@@ -1,9 +1,10 @@
 import Title from '../atoms/Title';
+import { LABEL_ADD_CARD } from '../../constants/labels';
 
 function Header(props) {
   const { onClick } = props;
 
-  return <Title title="< 카드 추가" onClick={onClick} />;
+  return <Title title={`< ${LABEL_ADD_CARD}`} onClick={onClick} />;
 }
 
 export default Header;

@@ -2,6 +2,10 @@ import Input from '../atoms/Input';
 import Title from '../atoms/Title';
 import CardPreview from '../molecules/CardPreview';
 import Footer from '../organisms/Footer';
+import {
+  MSG_COMPLETE_CARD_REGISTRATION,
+  MSG_INPUT_CARD_NICKNAME,
+} from '../../constants/messages';
 
 function SaveCard(props) {
   const { data: card } = props;
@@ -9,7 +13,7 @@ function SaveCard(props) {
   return (
     <div className="app flex-column-center">
       <div className="flex-center">
-        <Title extraClassName="mb-10" title="카드등록이 완료되었습니다." />
+        <Title extraClassName="mb-10" title={MSG_COMPLETE_CARD_REGISTRATION} />
       </div>
       <div className="card-box">
         <CardPreview card={card} size="big" />
@@ -19,7 +23,7 @@ function SaveCard(props) {
           className="input-underline"
           extraClassName="w-75"
           type="text"
-          placeholder="카드의 별칭을 입력해주세요."
+          placeholder={MSG_INPUT_CARD_NICKNAME}
         />
       </div>
       <Footer extraClassName="mt-50" />

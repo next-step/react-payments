@@ -3,22 +3,20 @@ import '../styles/index.css';
 import AddCard from './components/templates/AddCard';
 import CardList from './components/templates/CardList';
 import SaveCard from './components/templates/SaveCard';
-
-const firstStep = 0;
-const lastStep = 2;
+import { FIRST_STEP, LAST_STEP } from './constants/constraints';
 
 function App() {
   const [step, setStep] = useState(1);
   const [data, setData] = useState();
   const goToPreviousStep = () => {
-    if (step - 1 < firstStep) {
+    if (step - 1 < FIRST_STEP) {
       return;
     }
     setStep(step - 1);
   };
 
   const goToNextStep = (stepData) => {
-    if (step + 1 > lastStep) {
+    if (step + 1 > LAST_STEP) {
       return;
     }
     setData(stepData);

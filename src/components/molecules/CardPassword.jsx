@@ -1,5 +1,6 @@
 import Input from '../atoms/Input';
 import Text from '../atoms/Text';
+import { LABEL_CARD_PASSWORD } from '../../constants/labels';
 
 const numberRegExp = /[^\d]/g;
 
@@ -17,35 +18,27 @@ function CardPassword(props) {
 
   return (
     <>
-      <Text className="input-title" text="카드 비밀번호" />
-      <Input
-        className="input-basic"
-        extraClassName="w-15"
-        type="password"
-        onChange={(e) => handleChange(e, 0)}
-        maxLength={1}
-      />
-      <Input
-        className="input-basic"
-        extraClassName="w-15"
-        type="password"
-        onChange={(e) => handleChange(e, 1)}
-        maxLength={1}
-      />
-      <Input
-        className="input-basic"
-        extraClassName="w-15"
-        type="password"
-        value="*"
-        readOnly
-      />
-      <Input
-        className="input-basic"
-        extraClassName="w-15"
-        type="password"
-        value="*"
-        readOnly
-      />
+      <Text className="input-title" text={LABEL_CARD_PASSWORD} />
+      {Array.from({ length: 2 }, (_, index) => (
+        <Input
+          key={index}
+          className="input-basic"
+          extraClassName="w-15"
+          type="password"
+          onChange={(e) => handleChange(e, 0)}
+          maxLength={1}
+        />
+      ))}
+      {Array.from({ length: 2 }, (_, index) => (
+        <Input
+          key={index}
+          className="input-basic"
+          extraClassName="w-15"
+          type="password"
+          value="*"
+          readOnly
+        />
+      ))}
     </>
   );
 }

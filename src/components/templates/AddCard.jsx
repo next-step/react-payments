@@ -8,6 +8,19 @@ import CardPassword from '../molecules/CardPassword';
 import Footer from '../organisms/Footer';
 import EmptyCard from '../molecules/EmptyCard';
 import CardPreview from '../molecules/CardPreview';
+import {
+  CARD_EXPIRATION_MM_DIGIT,
+  CARD_EXPIRATION_YY_DIGIT,
+  CARD_NUMBER_TOTAL_DIGIT,
+  CARD_PASSWORD_INPUT_DIGIT,
+  CARD_SECURITY_CODE_DIGIT,
+} from '../../constants/constraints';
+import {
+  MSG_CHECK_CARD_EXPIRATION,
+  MSG_CHECK_CARD_NUMBER,
+  MSG_CHECK_CARD_PASSWORD,
+  MSG_CHECK_CARD_SECURITY_CODE,
+} from '../../constants/messages';
 
 const INITIAL_STATE = {
   cardNumber: ['', '', '', ''],
@@ -29,23 +42,26 @@ function AddCard(props) {
   };
 
   const validateCard = () => {
-    if (card.cardNumber.join('').length !== 16) {
-      alert('카드 번호를 확인해주세요.');
+    if (card.cardNumber.join('').length !== CARD_NUMBER_TOTAL_DIGIT) {
+      alert(MSG_CHECK_CARD_NUMBER);
       return false;
     }
 
-    if (card.mm.length !== 2 || card.yy.length !== 2) {
-      alert('카드 만료일을 확인해주세요.');
+    if (
+      card.mm.length !== CARD_EXPIRATION_MM_DIGIT ||
+      card.yy.length !== CARD_EXPIRATION_YY_DIGIT
+    ) {
+      alert(MSG_CHECK_CARD_EXPIRATION);
       return false;
     }
 
-    if (card.securityCode.length !== 3) {
-      alert('카드 보안코드를 확인해주세요.');
+    if (card.securityCode.length !== CARD_SECURITY_CODE_DIGIT) {
+      alert(MSG_CHECK_CARD_SECURITY_CODE);
       return false;
     }
 
-    if (card.password.join('').length !== 2) {
-      alert('카드 비밀번호를 확인해주세요.');
+    if (card.password.join('').length !== CARD_PASSWORD_INPUT_DIGIT) {
+      alert(MSG_CHECK_CARD_PASSWORD);
       return false;
     }
 
@@ -58,23 +74,7 @@ function AddCard(props) {
     }
   };
 
-  const handleCardNumber = (key, value) => {
-    setCard({ ...card, [key]: value });
-  };
-
-  const handleCardExpiration = (key, value) => {
-    setCard({ ...card, [key]: value });
-  };
-
-  const handleCardHolder = (key, value) => {
-    setCard({ ...card, [key]: value });
-  };
-
-  const handleCardSecurityCode = (key, value) => {
-    setCard({ ...card, [key]: value });
-  };
-
-  const handleCardPassword = (key, value) => {
+  const handleCard = (key, value) => {
     setCard({ ...card, [key]: value });
   };
 
@@ -89,23 +89,19 @@ function AddCard(props) {
         )}
       </div>
       <div className="input-container">
-        <CardNumber cardNumber={card.cardNumber} onData={handleCardNumber} />
+        <CardNumber cardNumber={card.cardNumber} onData={handleCard} />
       </div>
       <div className="input-container">
-        <CardExpiration
-          mm={card.mm}
-          yy={card.yy}
-          onData={handleCardExpiration}
-        />
+        <CardExpiration mm={card.mm} yy={card.yy} onData={handleCard} />
       </div>
       <div className="input-container">
-        <CardHolder onData={handleCardHolder} />
+        <CardHolder onData={handleCard} />
       </div>
       <div className="input-container">
-        <CardSecurityCode onData={handleCardSecurityCode} />
+        <CardSecurityCode onData={handleCard} />
       </div>
       <div className="input-container">
-        <CardPassword password={card.password} onData={handleCardPassword} />
+        <CardPassword password={card.password} onData={handleCard} />
       </div>
       <Footer onClick={handleFooterClick} />
     </div>

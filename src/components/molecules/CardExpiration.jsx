@@ -1,21 +1,27 @@
 import Input from '../atoms/Input';
 import Text from '../atoms/Text';
-
-const mmRegExp = /^(0[1-9]|1[0-2])$/;
-const yyRegExp = /^\d{2}$/;
-const numberRegExp = /[^\d]/g;
+import {
+  CARD_EXPIRATION_MM_DIGIT,
+  CARD_EXPIRATION_YY_DIGIT,
+} from '../../constants/constraints';
+import {
+  CARD_EXPIRATION_MM_REG_EXP,
+  CARD_EXPIRATION_YY_REG_EXP,
+  NUMBER_REG_EXP,
+} from '../../constants/regularExpressions';
+import { LABEL_EXPIRATION } from '../../constants/labels';
 
 function CardExpiration(props) {
   const { onData } = props;
 
   const handleChange = (event, type) => {
     const { value } = event.target;
-    const newValue = value.replace(numberRegExp, '');
+    const newValue = value.replace(NUMBER_REG_EXP, '');
     event.target.value = newValue;
     if (
-      newValue === ''
-      || (type === 'mm' && mmRegExp.test(newValue))
-      || (type === 'yy' && yyRegExp.test(newValue))
+      newValue === '' ||
+      (type === 'mm' && CARD_EXPIRATION_MM_REG_EXP.test(newValue)) ||
+      (type === 'yy' && CARD_EXPIRATION_YY_REG_EXP.test(newValue))
     ) {
       onData(type, newValue);
     }
@@ -23,21 +29,21 @@ function CardExpiration(props) {
 
   return (
     <>
-      <Text className="input-title" text="만료일" />
+      <Text className="input-title" text={LABEL_EXPIRATION} />
       <div className="input-box w-50">
         <Input
           className="input-basic"
           type="text"
           placeholder="MM"
           onChange={(e) => handleChange(e, 'mm')}
-          maxLength={2}
+          maxLength={CARD_EXPIRATION_MM_DIGIT}
         />
         <Input
           className="input-basic"
           type="text"
           placeholder="YY"
           onChange={(e) => handleChange(e, 'yy')}
-          maxLength={2}
+          maxLength={CARD_EXPIRATION_YY_DIGIT}
         />
       </div>
     </>
