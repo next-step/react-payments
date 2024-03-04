@@ -1,6 +1,6 @@
 export interface CreateCardNumberParams {
   value: string
-  maskedLastDigit?: number
+  maskedLastDigit: number
   maskChar?: string
   separator?: string
   separateDigit?: number
@@ -9,7 +9,7 @@ export interface CreateCardNumberParams {
 
 export const createDisplayCardCode = ({
   value,
-  maskedLastDigit = 8,
+  maskedLastDigit,
   separator = ' - ',
   maskChar = '•',
   separateDigit = 4,
