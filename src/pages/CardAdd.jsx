@@ -13,6 +13,8 @@ import { MONTH, YEAR } from "../constants/expirationDate";
 import ExpirationDateInput from "../components/card-add/ExpirationDateInput";
 import CardOwnerNameInput from "../components/card-add/CardOwnerInput";
 import { CARD_OWNER_NAME_MAX_LENGTH } from "../constants/cardOwnerName";
+import SecurityCodeInput from "../components/card-add/SecurityCodeInput";
+import PasswordInput from "../components/card-add/PasswordInput";
 
 export default function CardAdd() {
   // 카드번호
@@ -31,6 +33,15 @@ export default function CardAdd() {
 
   // 카드 소유자 이름(선택)
   const [cardOwnerName, setCardOwnerName] = useState("");
+
+  // 보안코드
+  const [securityCode, setSecurityCode] = useState("");
+
+  // 카드 비밀번호
+  const [password, setPassword] = useState({
+    [FIRST_NUMBER]: "",
+    [SECOND_NUMBER]: "",
+  });
 
   return (
     <div className="root">
@@ -85,16 +96,15 @@ export default function CardAdd() {
         {/* 보안 코드 */}
         <div className="input-container">
           <span className="input-title">보안코드(CVC/CVV)</span>
-          <input className="input-basic w-25" type="text" />
+          <SecurityCodeInput
+            securityCode={securityCode}
+            setSecurityCode={setSecurityCode}
+          />
         </div>
         {/* 카드 비밀번호 */}
         <div className="input-container">
           <span className="input-title">카드 비밀번호</span>
-
-          <input className="input-basic w-15" type="password" />
-          <input className="input-basic w-15" type="password" />
-          <input className="input-basic w-15" type="password" />
-          <input className="input-basic w-15" type="password" />
+          <PasswordInput password={password} setPassword={setPassword} />
         </div>
         <div className="button-box">
           <span className="button-text">다음</span>
