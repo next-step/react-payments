@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import styles from "./CardNumberInput.module.css";
 import { CardNumber } from "../../types";
-import { isNumberFromString } from "../../../../utils";
+import { compareShallowValues, isNumberFromString } from "../../../../utils";
 import LabelBox from "../../../../components/LabelBox/LabelBox";
 import Box from "../../../../components/Box/Box";
 import LimitedLengthInput from "../../../../components/LimitedLengthInput/LimitedLengthInput";
@@ -43,10 +43,16 @@ export default function CardNumberInput({
       value: string,
       isAttachLimitation?: boolean
     ) {
-      if (value === "")
-        return setCardNumber((prev) => ({ ...prev, [key]: "" }));
-      if (isNumberFromString(value))
-        return setCardNumber((prev) => ({ ...prev, [key]: value }));
+      if (value === "") {
+        onChange && onChange({ ...cardNumber, [key]: "" });
+        setCardNumber((prev) => ({ ...prev, [key]: "" }));
+        return;
+      }
+      if (isNumberFromString(value)) {
+        onChange && onChange({ ...cardNumber, [key]: value });
+        setCardNumber((prev) => ({ ...prev, [key]: value }));
+        return;
+      }
     };
   }
 
