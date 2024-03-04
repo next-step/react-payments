@@ -1,4 +1,4 @@
-import InputContainer from '../../../components/InputContainer';
+import { InputContainer } from '../../../components';
 import { CardAction } from '../reducer';
 
 interface SecurityCode {

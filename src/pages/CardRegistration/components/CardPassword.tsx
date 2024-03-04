@@ -1,4 +1,4 @@
-import InputContainer from '../../../components/InputContainer';
+import { InputContainer } from '../../../components';
 import { CardAction } from '../reducer';
 
 interface CardPassword {
@@ -27,9 +27,13 @@ export default function CardPassword({ cardPassword, cardPasswordDispatch }: Car
           value={cardPassword.second}
           onChange={(e) => cardPasswordDispatch({ type: 'cardPasswordSecond', param: e.target.value })}
         />
-        <input className="input-basic w-15" type="password" maxLength={1} value={0} />
-        <input className="input-basic w-15" type="password" maxLength={1} value={0} />
+        <input disabled className="input-basic w-15" type="password" maxLength={1} value={COSNT._value} />
+        <input disabled className="input-basic w-15" type="password" maxLength={1} value={COSNT._value} />
       </>
     </InputContainer>
   );
 }
+
+const COSNT = {
+  _value: 0,
+};

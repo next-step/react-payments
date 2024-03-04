@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import Card from '../../components/Card';
+import { Card } from '../../components';
 import { CardExpiration, CardNumber, CardPassword, OwnerName, SecurityCode } from './components';
 import { cardReducer, initialCard } from './reducer';
 

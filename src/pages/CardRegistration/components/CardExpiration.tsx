@@ -1,5 +1,4 @@
-import InputContainer from '../../../components/InputContainer';
-import Mark from '../../../components/Mark';
+import { InputContainer, Mark } from '../../../components';
 import { MARK } from '../../../constant';
 import { CardAction } from '../reducer';
 
