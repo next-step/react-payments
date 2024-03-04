@@ -49,7 +49,15 @@
   margin-bottom: 2.5rem;
 }
 
-.pl-16 {
+.ml-8px {
+  margin-left: 8px;
+}
+
+.mr-8px {
+  margin-right: 8px;
+}
+
+.pl-16px {
   padding-left: 16px;
 }
 
@@ -73,6 +81,14 @@
   width: 15%;
 }
 
+.w-14 {
+  width: 3.5rem;
+}
+
+.h-14 {
+  height: 3.5rem;
+}
+
 .g-16 {
   gap: 16px;
 }
@@ -83,6 +99,10 @@
 
 .text-left {
   text-align: left;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .word-break-all {

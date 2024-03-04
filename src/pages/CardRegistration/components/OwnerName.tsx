@@ -19,7 +19,7 @@ export default function OwnerName({ ownerName, ownerNameDispatch }: OwnerName) {
     >
       <input
         type="text"
-        className="input-basic text-left pl-16"
+        className="input-basic text-left pl-16px"
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
         maxLength={CONST.ownerNameMaxLength}
         value={ownerName}
