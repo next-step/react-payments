@@ -29,6 +29,7 @@
       "@components/organisms/*": ["components/organisms/*"],
       "@assets/*": ["assets/*"],
       "@styles/*": ["styles/*"],
+      "@utils/*": ["utils/*"],
       "@entities/*": ["entities/*"]
     }
   },
