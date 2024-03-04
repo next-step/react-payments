@@ -1,11 +1,25 @@
+import { useRef } from "react";
 import { FIRST_NUMBER, SECOND_NUMBER } from "../../constants/cardNumber";
 import { getNumberString } from "../../util/regExp";
 
+const nextRefMap = {
+  [FIRST_NUMBER]: SECOND_NUMBER,
+  [SECOND_NUMBER]: null,
+};
+
 export default function PasswordInput({ password, setPassword }) {
+  const passwordRef = useRef({});
   const onChangePassword = (event) => {
-    const { value, name } = event.target;
+    const { value, name, maxLength } = event.target;
 
     const onlyNumberValue = getNumberString(value);
+
+    if (onlyNumberValue.length === maxLength) {
+      const nextRef = nextRefMap[name];
+      if (nextRef !== null) {
+        passwordRef.current[nextRef].focus();
+      }
+    }
 
     setPassword((prev) => {
       return { ...prev, [name]: onlyNumberValue };
@@ -17,6 +31,7 @@ export default function PasswordInput({ password, setPassword }) {
       <input
         value={password[FIRST_NUMBER]}
         name={FIRST_NUMBER}
+        ref={(el) => (passwordRef.current[FIRST_NUMBER] = el)}
         onChange={onChangePassword}
         className="input-basic w-15"
         type="password"
@@ -26,6 +41,7 @@ export default function PasswordInput({ password, setPassword }) {
       <input
         value={password[SECOND_NUMBER]}
         name={SECOND_NUMBER}
+        ref={(el) => (passwordRef.current[SECOND_NUMBER] = el)}
         onChange={onChangePassword}
         className="input-basic w-15"
         type="password"
