@@ -7,6 +7,7 @@ function Input(props) {
     placeholder,
     onChange,
     maxLength,
+    readOnly,
   } = props;
 
   return (
@@ -17,6 +18,7 @@ function Input(props) {
       placeholder={placeholder}
       onChange={onChange}
       maxLength={maxLength}
+      readOnly={readOnly}
     />
   );
 }
