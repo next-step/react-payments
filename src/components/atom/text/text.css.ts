@@ -19,7 +19,7 @@ export const textStyle = recipe({
     },
   },
   defaultVariants: {
-    variant: 'body1',
+    variant: 'inherit',
     underline: false,
     ellipsis: false,
   },
