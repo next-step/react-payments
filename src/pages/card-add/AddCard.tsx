@@ -3,12 +3,23 @@ import PageTitle from '@/components/common/page-title/PageTitle';
 import { CardInfoContext } from '@/provider/CardInfoProvider';
 import CardForm from './components/card-form/CardForm';
 import { useContext } from 'react';
+import { StepContext } from '@/provider/step-provider/StepProvider';
 
 const AddCard = () => {
   const { cardState } = useContext(CardInfoContext);
+  const { navigate } = useContext(StepContext);
+
   return (
     <>
-      <PageTitle>{'< 카드 추가'}</PageTitle>
+      <PageTitle>
+        <div
+          onClick={() => {
+            navigate('LIST');
+          }}
+        >
+          {'< 카드 추가'}
+        </div>
+      </PageTitle>
       <Card {...cardState} />
       <CardForm />
       <div className="button-box">

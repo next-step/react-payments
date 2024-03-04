@@ -35,7 +35,6 @@ export const CardInfoContext = createContext(initialState);
 
 const CardInfoProvider = ({ children }: PropsWithChildren) => {
   const [cardState, setCardState] = useState<CardStateType>({});
-  console.log({ cardState });
 
   const handleCardState = (data: CardStateType) => {
     setCardState((prev) => ({ ...prev, ...data }));
