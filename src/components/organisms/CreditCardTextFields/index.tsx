@@ -1,10 +1,10 @@
-import { Input } from '@/components/molecules';
-import { InputProps } from '@/components/molecules/Input';
+import { TextField } from '@/components/molecules';
+import { TextFieldProps } from '@/components/molecules/TextField';
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
 
-interface CreditCardInputProps {
-  value: InputProps['value'];
-  onChange: InputProps['onChange'];
+interface CreditCardTextFieldProps {
+  value: TextFieldProps['value'];
+  onChange: TextFieldProps['onChange'];
 }
 
 const keepOnlyNumeric = (text: string) => {
@@ -17,11 +17,11 @@ const keepOnlyAlphabetHangulAndSpace = (text: string) => {
   return text.replace(pattern, '');
 };
 
-function CardNumber({ value, onChange }: CreditCardInputProps) {
+function CardNumber({ value, onChange }: CreditCardTextFieldProps) {
   const MAX_LENGTH_FOR_FORMATTED_CODE = 19;
 
   return (
-    <Input
+    <TextField
       name="cardNumber"
       type="text"
       value={value}
@@ -42,9 +42,9 @@ function CardNumber({ value, onChange }: CreditCardInputProps) {
   );
 }
 
-function VerificationCode({ value, onChange }: CreditCardInputProps) {
+function VerificationCode({ value, onChange }: CreditCardTextFieldProps) {
   return (
-    <Input
+    <TextField
       name="verificationCode"
       className="w-28"
       type="text"
@@ -58,9 +58,9 @@ function VerificationCode({ value, onChange }: CreditCardInputProps) {
   );
 }
 
-function CardPassword({ value, onChange }: CreditCardInputProps) {
+function CardPassword({ value, onChange }: CreditCardTextFieldProps) {
   return (
-    <Input
+    <TextField
       name="cardPassword"
       className="w-28"
       type="text"
@@ -74,7 +74,7 @@ function CardPassword({ value, onChange }: CreditCardInputProps) {
   );
 }
 
-interface ExpiractionDateProps extends CreditCardInputProps {
+interface ExpiractionDateProps extends CreditCardTextFieldProps {
   dateType: 'month' | 'year';
 }
 
@@ -82,7 +82,7 @@ function ExpirationDate({ value, onChange, dateType }: ExpiractionDateProps) {
   const isMonth = dateType === 'month';
 
   return (
-    <Input
+    <TextField
       name={'expiration' + capitalizeFirstLetter(dateType)}
       type="text"
       value={value}
@@ -97,9 +97,9 @@ function ExpirationDate({ value, onChange, dateType }: ExpiractionDateProps) {
   );
 }
 
-function OwnerName({ value, onChange }: CreditCardInputProps) {
+function OwnerName({ value, onChange }: CreditCardTextFieldProps) {
   return (
-    <Input
+    <TextField
       name="ownerName"
       type="text"
       value={value}

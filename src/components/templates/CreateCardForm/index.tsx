@@ -1,7 +1,7 @@
 import chevronLeft from '@assets/icon/chevron_left_24.svg';
 import { Box, Button, Container, HFlex, Text } from '@components/atoms';
 import { Header, IconButton } from '@components/molecules';
-import { CreditCardInputs } from '@components/organisms';
+import { CreditCardTextFields } from '@components/organisms';
 import { useState } from 'react';
 
 export default function CreateCard() {
@@ -33,22 +33,25 @@ export default function CreateCard() {
       </Header>
 
       <Box className="my-4 space-y-6">
-        <CreditCardInputs.CardNumber value={cardInputValue.cardNumber} onChange={handleCardInputChange} />
+        <CreditCardTextFields.CardNumber value={cardInputValue.cardNumber} onChange={handleCardInputChange} />
         <HFlex className="gap-4">
-          <CreditCardInputs.ExpirationDate
+          <CreditCardTextFields.ExpirationDate
             dateType="month"
             value={cardInputValue.expirationMonth}
             onChange={handleCardInputChange}
           />
-          <CreditCardInputs.ExpirationDate
+          <CreditCardTextFields.ExpirationDate
             dateType="year"
             value={cardInputValue.expirationYear}
             onChange={handleCardInputChange}
           />
         </HFlex>
-        <CreditCardInputs.OwnerName value={cardInputValue.ownerName} onChange={handleCardInputChange} />
-        <CreditCardInputs.VerificationCode value={cardInputValue.verificationCode} onChange={handleCardInputChange} />
-        <CreditCardInputs.CardPassword value={cardInputValue.cardPassword} onChange={handleCardInputChange} />
+        <CreditCardTextFields.OwnerName value={cardInputValue.ownerName} onChange={handleCardInputChange} />
+        <CreditCardTextFields.VerificationCode
+          value={cardInputValue.verificationCode}
+          onChange={handleCardInputChange}
+        />
+        <CreditCardTextFields.CardPassword value={cardInputValue.cardPassword} onChange={handleCardInputChange} />
       </Box>
 
       <Box className="w-full">

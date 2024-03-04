@@ -3,7 +3,7 @@ import { TYPOGRAPHY_SIZE_MAP } from '@/styles/guide';
 import { ComponentProps, useId } from 'react';
 import { twMerge } from 'tailwind-merge';
 
-export interface InputProps extends ComponentProps<'div'> {
+export interface TextFieldProps extends ComponentProps<'div'> {
   value: string;
   name: string;
   onChange: NonNullable<ComponentProps<'input'>['onChange']>;
@@ -19,7 +19,7 @@ export interface InputProps extends ComponentProps<'div'> {
   inputProps?: ComponentProps<'input'>;
 }
 
-export default function Input({
+export default function TextField({
   value,
   name,
   onChange,
@@ -29,7 +29,7 @@ export default function Input({
   lengthLimit,
   replacer,
   ...restProps
-}: InputProps) {
+}: TextFieldProps) {
   const id = useId();
 
   return (
