@@ -18,9 +18,45 @@ const INITIAL_STATE = {
   password: ['', ''],
 };
 
-function AddCard() {
+function AddCard(props) {
+  const { goToPreviousStep, goToNextStep } = props;
+
   const [card, setCard] = useState(INITIAL_STATE);
   const isInitialState = JSON.stringify(card) === JSON.stringify(INITIAL_STATE);
+
+  const handleHeaderClick = () => {
+    goToPreviousStep();
+  };
+
+  const validateCard = () => {
+    if (card.cardNumber.join('').length !== 16) {
+      alert('카드 번호를 확인해주세요.');
+      return false;
+    }
+
+    if (card.mm.length !== 2 || card.yy.length !== 2) {
+      alert('카드 만료일을 확인해주세요.');
+      return false;
+    }
+
+    if (card.securityCode.length !== 3) {
+      alert('카드 보안코드를 확인해주세요.');
+      return false;
+    }
+
+    if (card.password.join('').length !== 2) {
+      alert('카드 비밀번호를 확인해주세요.');
+      return false;
+    }
+
+    return true;
+  };
+
+  const handleFooterClick = () => {
+    if (validateCard()) {
+      goToNextStep(card);
+    }
+  };
 
   const handleCardNumber = (key, value) => {
     setCard({ ...card, [key]: value });
@@ -44,7 +80,7 @@ function AddCard() {
 
   return (
     <div className="app">
-      <Header />
+      <Header onClick={handleHeaderClick} />
       <div className="card-box">
         {isInitialState ? (
           <EmptyCard mode="add" />
@@ -69,9 +105,9 @@ function AddCard() {
         <CardSecurityCode onData={handleCardSecurityCode} />
       </div>
       <div className="input-container">
-        <CardPassword onData={handleCardPassword} />
+        <CardPassword password={card.password} onData={handleCardPassword} />
       </div>
-      <Footer />
+      <Footer onClick={handleFooterClick} />
     </div>
   );
 }

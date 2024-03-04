@@ -1,7 +1,11 @@
 function Title(props) {
-  const { extraClassName, title } = props;
+  const { extraClassName, title, onClick } = props;
 
-  return <h2 className={`page-title ${extraClassName || ''}`}>{title}</h2>;
+  return (
+    <h2 className={`page-title ${extraClassName || ''}`} onClick={onClick}>
+      {title}
+    </h2>
+  );
 }
 
 export default Title;
