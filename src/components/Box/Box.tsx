@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties, ReactNode, forwardRef } from "react";
 
 interface BoxProps extends CSSProperties {
   /**
@@ -37,13 +37,16 @@ const position = {
   none: {},
 };
 
-export default function Box({
-  width = "fit-content",
-  height,
-  contentPosition = "none",
-  backgroundColor,
-  children,
-}: Readonly<BoxProps>) {
+const Box = forwardRef<HTMLDivElement, Readonly<BoxProps>>(function Box(
+  {
+    width = "fit-content",
+    height,
+    contentPosition = "none",
+    backgroundColor,
+    children,
+  },
+  ref
+) {
   const style = {
     ...{ width },
     ...{ height },
@@ -52,5 +55,11 @@ export default function Box({
     ...position[contentPosition],
   };
 
-  return <div style={style}>{children}</div>;
-}
+  return (
+    <div ref={ref} style={style}>
+      {children}
+    </div>
+  );
+});
+
+export default Box;
