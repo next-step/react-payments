@@ -12,7 +12,7 @@ interface CardPassword {
 export default function CardPassword({ cardPassword, cardPasswordDispatch }: CardPassword) {
   return (
     <InputContainer inputTitle={'카드 비밀번호'}>
-      <>
+      <div className="flex g-8">
         <input
           className="input-basic w-15"
           type="password"
@@ -29,7 +29,7 @@ export default function CardPassword({ cardPassword, cardPasswordDispatch }: Car
         />
         <input disabled className="input-basic w-15" type="password" maxLength={1} value={COSNT._value} />
         <input disabled className="input-basic w-15" type="password" maxLength={1} value={COSNT._value} />
-      </>
+      </div>
     </InputContainer>
   );
 }

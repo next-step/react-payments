@@ -21,6 +21,10 @@
   justify-content: space-between;
 }
 
+.flex {
+  display: flex;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
