@@ -26,15 +26,15 @@ export default function CardExpiredDateInput({
 
   const handleKeydown = useCallback(
     (value: string) => {
-      if (cardExpiredDate.length === EXPIRED_DATE_LENGTH) return;
-      const numValue = Number(value);
-      if (isNaN(numValue)) return;
-      if (cardExpiredDate.length === 0 && numValue > 2) return;
-      if (cardExpiredDate.length === 1 && numValue > 3) return;
       if (value === "Backspace") {
         setCardExpiredDate((prev) => prev.slice(0, cardExpiredDate.length - 1));
         return;
       }
+      if (cardExpiredDate.length === EXPIRED_DATE_LENGTH) return;
+      const numValue = Number(value);
+      if (cardExpiredDate.length === 0 && numValue > 2) return;
+      if (cardExpiredDate.length === 1 && numValue > 3) return;
+      if (isNaN(numValue)) return;
       setCardExpiredDate((prev) => prev + value);
     },
     [cardExpiredDate.length, setCardExpiredDate]
