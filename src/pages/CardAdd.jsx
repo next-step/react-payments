@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import { isNumericString, isValidateMonth } from "../util/regExp";
 import InputGroup from "../components/InputGroup";
 import { Link } from "react-router-dom";
+import CardBox from "../components/CardBox";
+import Card from "../components/Card";
 
 export default function CardAdd() {
   const [cardNumberValue1, setCardNumberValue1] = useState("");
@@ -109,21 +111,18 @@ export default function CardAdd() {
           <span className="ml-10">카드 추가</span>
         </h2>
         {/* 카드 */}
-        <div className="card-box">
-          <div className="empty-card">
-            <div className="card-top"></div>
-            <div className="card-middle">
-              <div className="small-card__chip"></div>
-              <span className="card-text">NAME</span>
-            </div>
-            <div className="card-bottom">
-              <div className="card-bottom_info">
-                <span className="card-text">NAME</span>
-                <span className="card-text">MM / YY</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <CardBox>
+          <Card
+            alias={"카드 별칭"}
+            cardNumber={
+              cardNumberValue1 +
+              cardNumberValue2 +
+              cardNumberValue3 +
+              cardNumberValue4
+            }
+          />
+        </CardBox>
+
         {/* 카드 번호 */}
         <div className="input-container">
           <span className="input-title">카드 번호</span>

@@ -3,7 +3,7 @@ export function getNumberString(string) {
   return numberArray.join("");
 }
 
-export function getHpyenAddedNumberSting(string) {
+export function getHypedAddedNumberSting(string) {
   const splited4Array = string.match(/.{1,4}/g) || [];
   return splited4Array.join("-");
 }
