@@ -15225,6 +15225,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-merge-refs@npm:^2.1.1":
+  version: 2.1.1
+  resolution: "react-merge-refs@npm:2.1.1"
+  checksum: 40564bc4c16520ef830d4fe7a2bd298c23a42d644a8fcb2353cdc6cf16aa82eac681c554df4c849397b25af9dbe728086566e1a01f65f95d2301dc8fc8f6809f
+  languageName: node
+  linkType: hard
+
 "react-payments@workspace:.":
   version: 0.0.0-use.local
   resolution: "react-payments@workspace:."
@@ -15254,6 +15261,7 @@ __metadata:
     jsdom: ^24.0.0
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-merge-refs: ^2.1.1
     react-scripts: ^5.0.1
     storybook: ^7.6.17
     typescript: ^5.2.2
