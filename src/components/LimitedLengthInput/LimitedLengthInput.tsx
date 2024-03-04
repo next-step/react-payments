@@ -81,7 +81,7 @@ const LimitedLengthInput = forwardRef<
     title: "limited length input",
     onInput: (event) => {
       event.currentTarget.style.width =
-        (event.currentTarget.value.length + 1) * 8 + "px";
+        (event.currentTarget.value.length + 1) * 10 + "px";
     },
     ...props,
   };
@@ -98,9 +98,12 @@ const LimitedLengthInput = forwardRef<
   }, []);
 
   useEffect(() => {
-    if (inputRef.current)
+    if (inputRef.current) {
       inputRef.current.style.minWidth =
         (inputRef.current.placeholder.length + 1) * 14 + "px";
+      inputRef.current.style.width =
+        (inputRef.current.value.length + 1) * 10 + "px";
+    }
   }, [placeholder]);
 
   return <input ref={mergeRefs([ref, inputRef])} {...inputProps} />;
