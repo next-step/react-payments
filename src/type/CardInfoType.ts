@@ -17,4 +17,6 @@ export type CardInfoType = {
     section3: number | null;
     section4: number | null;
   };
+  cardName: string | null;
+  cardNickName: string | null;
 };

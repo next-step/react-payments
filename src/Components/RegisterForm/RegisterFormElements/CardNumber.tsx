@@ -1,37 +1,10 @@
-import UseInput from "../../../Hooks/UseInput";
-import { useCardInfo } from "../../../Context/CardProvider";
+import { useCardSectionInput } from "../../../Hooks/useCardSectionInput";
 
 const CardNumber = () => {
-  const { state, dispatch } = useCardInfo();
-
-  const section1 = UseInput(state.cardNumber.section1, (event) => {
-    dispatch({
-      type: "SET_CARD_INFO",
-      payload: { key: "cardNumber1", value: event.target.value },
-    });
-  });
-
-  const section2 = UseInput(state.cardNumber.section2, (event) => {
-    dispatch({
-      type: "SET_CARD_INFO",
-      payload: { key: "cardNumber2", value: event.target.value },
-    });
-  });
-
-  const section3 = UseInput(state.cardNumber.section3, (event) => {
-    dispatch({
-      type: "SET_CARD_INFO",
-      payload: { key: "cardNumber3", value: event.target.value },
-    });
-  });
-
-  const section4 = UseInput(state.cardNumber.section4, (event) => {
-    dispatch({
-      type: "SET_CARD_INFO",
-      payload: { key: "cardNumber4", value: event.target.value },
-    });
-  });
-
+  const section1 = useCardSectionInput("section1");
+  const section2 = useCardSectionInput("section2");
+  const section3 = useCardSectionInput("section3");
+  const section4 = useCardSectionInput("section4");
   return (
     <div className="input-container">
       <span className="input-title">카드 번호</span>

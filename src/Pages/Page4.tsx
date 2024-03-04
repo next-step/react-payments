@@ -1,6 +1,6 @@
 import NextButton from "../Components/Button/NextButton";
 import H2Text from "../Components/Text/H2Text";
-import CardNickname from "../Components/Cards/CardElements/CardNickName";
+import CardNickNameInput from "../Components/Cards/CardElements/CardNickNameInput";
 import BigCreditCard from "../Components/Cards/Card/BigCreditCard";
 import Layout45 from "../Components/Layout/Layout45";
 import Flex from "../Components/Layout/Flex";
@@ -16,7 +16,7 @@ const Page4 = () => {
           </H2Text>
         </Flex>
         <BigCreditCard />
-        <CardNickname />
+        <CardNickNameInput />
         <NextButton className="mt-50" />
       </Layout45>
     </>

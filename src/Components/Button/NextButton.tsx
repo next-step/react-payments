@@ -1,11 +1,7 @@
 import { PageStepContext } from "../../Context/PageStepProvider";
 import { useContext } from "react";
 
-interface NextButtonProps {
-  className?: string;
-}
-
-const NextButton: React.FC<NextButtonProps> = ({ className }) => {
+const NextButton = ({ className }: { className?: string }) => {
   const { handleCurrentStep } = useContext(PageStepContext);
   return (
     <div className={`button-box ${className}`} onClick={handleCurrentStep}>

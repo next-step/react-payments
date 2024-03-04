@@ -17,6 +17,13 @@ const PageStepProvider = ({ children }: { children: ReactElement | null }) => {
   });
 
   const handleCurrentStep = () => {
+    if (currentStep.idx + 1 === TotalPage.length) {
+      setCurrentStep({
+        currentPage: TotalPage[0],
+        idx: 0,
+      });
+      return;
+    }
     setCurrentStep({
       currentPage: TotalPage[currentStep.idx + 1],
       idx: currentStep.idx + 1,
