@@ -1,6 +1,14 @@
-import { getHypedAddedNumberSting as getHypedAddedNumberSting } from "../util/regExp";
+import { getSplitString4 } from "../util/regExp";
+
 export default function Card({ alias = "", cardNumber }) {
-  const displayCardNumber = getHypedAddedNumberSting(cardNumber);
+  const displayCardNumber = getSplitString4(cardNumber)
+    .map((value, i) => {
+      if (i >= 2) {
+        return "*".repeat(value.length);
+      }
+      return value;
+    })
+    .join("-");
 
   return (
     <>

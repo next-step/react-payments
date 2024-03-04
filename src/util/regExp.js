@@ -3,9 +3,8 @@ export function getNumberString(string) {
   return numberArray.join("");
 }
 
-export function getHypedAddedNumberSting(string) {
-  const splited4Array = string.match(/.{1,4}/g) || [];
-  return splited4Array.join("-");
+export function getSplitString4(string) {
+  return string.match(/.{1,4}/g) || [];
 }
 
 export function isNumericString(string) {

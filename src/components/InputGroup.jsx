@@ -4,7 +4,6 @@ import NumberInput from "./NumberInput";
 
 export default function InputGroup({ inputGroupInfoList, dividerText }) {
   const inputGroupRef = useRef([]);
-  console.log(inputGroupInfoList);
 
   return (
     <div className="input-box">
