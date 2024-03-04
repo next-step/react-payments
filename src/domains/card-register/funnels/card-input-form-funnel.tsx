@@ -11,13 +11,19 @@ import {
 import { FormEventHandler } from 'react'
 
 // TODO
-// [ ] 상태 연결
+// [ ] 상태 연결, 다음 활성화 로직 구성 (다음 퍼널에서도 사용되어야 하므로 context로 폼 입력 상태를 정의해야 할듯)
 // [ ] 상단에 카드 컴포넌트 표시, 상태랑 연결
+// [ ] Funnel 연결 + 카드 등록 완료로 이동
 
-export const CardRegisterPage = () => {
+export interface CardInputFormFunnelProps {
+  onSubmit: () => void
+}
+
+export const CardInputFormFunnel = ({ onSubmit }: CardInputFormFunnelProps) => {
   const handleSubmit: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault()
     alert('제출!')
+    onSubmit()
   }
 
   return (
