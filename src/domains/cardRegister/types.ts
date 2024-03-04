@@ -9,3 +9,8 @@ export type ExpirationDate = {
   month: string;
   year: string;
 };
+
+export type TwoPasswordDigits = {
+  first: string;
+  second: string;
+};
