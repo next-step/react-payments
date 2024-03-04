@@ -11,6 +11,20 @@
   align-items: center;
 }
 
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-justify-spaceBetween {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex {
+  display: flex;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -35,6 +49,18 @@
   margin-bottom: 2.5rem;
 }
 
+.ml-8px {
+  margin-left: 8px;
+}
+
+.mr-8px {
+  margin-right: 8px;
+}
+
+.pl-16px {
+  padding-left: 16px;
+}
+
 .w-100 {
   width: 100%;
 }
@@ -53,4 +79,32 @@
 
 .w-15 {
   width: 15%;
+}
+
+.w-14 {
+  width: 3.5rem;
+}
+
+.h-14 {
+  height: 3.5rem;
+}
+
+.g-16 {
+  gap: 16px;
+}
+
+.g-8 {
+  gap: 8px;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.word-break-all {
+  word-break: break-all;
 }
