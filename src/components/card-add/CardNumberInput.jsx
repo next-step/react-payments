@@ -5,8 +5,12 @@ import {
   THIRD_NUMBER,
 } from "../../constants/cardNumber";
 import { getNumberString } from "../../util/regExp";
+import InputBox from "../InputBox";
 
-export default function CardNumber({ cardNumberValue, setCardNumberValue }) {
+export default function CardNumberInput({
+  cardNumberValue,
+  setCardNumberValue,
+}) {
   const onChangeCardNumber = (event) => {
     const { value, name } = event.target;
 
@@ -18,7 +22,7 @@ export default function CardNumber({ cardNumberValue, setCardNumberValue }) {
   };
 
   return (
-    <div className="input-box">
+    <InputBox>
       <input
         className="input-basic"
         value={cardNumberValue[FIRST_NUMBER]}
@@ -80,6 +84,6 @@ export default function CardNumber({ cardNumberValue, setCardNumberValue }) {
         maxLength="4"
         onChange={onChangeCardNumber}
       />
-    </div>
+    </InputBox>
   );
 }

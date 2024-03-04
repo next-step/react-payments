@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { isNumericString, isValidateMonth } from "../util/regExp";
 import { Link } from "react-router-dom";
 import CardBox from "../components/CardBox";
@@ -9,7 +9,7 @@ import {
   SECOND_NUMBER,
   THIRD_NUMBER,
 } from "../constants/cardNumber";
-import CardNumber from "../components/card-add/CardNumber";
+import CardNumberInput from "../components/card-add/CardNumberInput";
 
 export default function CardAdd() {
   // 카드번호
@@ -21,14 +21,9 @@ export default function CardAdd() {
   });
 
   // 만료일(MM)
-  const expirationMMRef = useRef(null);
   const [expirationMM, setExpirationMM] = useState("");
   // 만료일(YY)
-  const expirationYYRef = useRef(null);
   const [expirationYY, setExpirationYY] = useState("");
-
-  // 카드 소유자 이름(선택)
-  const cardOwnerNameRef = useRef(null);
 
   // 만료일(MM)
   const handleExpirationMMInput = (event) => {
@@ -52,11 +47,6 @@ export default function CardAdd() {
       return;
     }
 
-    // 모두 입력 시, 만료일(YY)
-    if (nowExpirationMM.length >= 2) {
-      expirationYYRef.current.focus();
-    }
-
     setExpirationMM(nowExpirationMM);
   };
 
@@ -74,11 +64,6 @@ export default function CardAdd() {
     if (!isNumericString(nowExpirationYY)) {
       alert("숫자만 입력해주세요!");
       return;
-    }
-
-    // 모두 입력 시, 카드 소유자 이름
-    if (nowExpirationYY.length === 2) {
-      cardOwnerNameRef.current.focus();
     }
 
     setExpirationYY(nowExpirationYY);
@@ -101,7 +86,7 @@ export default function CardAdd() {
         {/* 카드 번호 */}
         <div className="input-container">
           <span className="input-title">카드 번호</span>
-          <CardNumber
+          <CardNumberInput
             cardNumberValue={cardNumberValue}
             setCardNumberValue={setCardNumberValue}
           />
@@ -113,7 +98,6 @@ export default function CardAdd() {
             <input
               value={expirationMM}
               onChange={handleExpirationMMInput}
-              ref={expirationMMRef}
               className="input-basic"
               type="text"
               placeholder="MM"
@@ -121,7 +105,6 @@ export default function CardAdd() {
             <input
               value={expirationYY}
               onChange={handleExpirationYYInput}
-              ref={expirationYYRef}
               className="input-basic"
               type="text"
               placeholder="YY"
@@ -133,7 +116,6 @@ export default function CardAdd() {
           <span className="input-title">카드 소유자 이름(선택)</span>
           <input
             defaultValue=""
-            ref={cardOwnerNameRef}
             type="text"
             className="input-basic"
             placeholder="카드에 표시된 이름과 동일하게 입력하세요."
