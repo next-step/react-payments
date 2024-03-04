@@ -1,5 +1,6 @@
 import { Input } from '@/components/molecules';
 import { InputProps } from '@/components/molecules/Input';
+import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
 import { ComponentProps } from 'react';
 
 interface CreditCardInputProps {
@@ -78,10 +79,6 @@ interface ExpiractionDateProps extends CreditCardInputProps {
 
 function ExpirationDate({ value, onChange, dateType }: ExpiractionDateProps) {
   const isMonth = dateType === 'month';
-
-  const capitalizeFirstLetter = (string: string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
 
   return (
     <Input
