@@ -1,12 +1,12 @@
 import 'src/styles/index.css';
 
-import AddCardStepper from 'src/components/AddCardStepper.tsx';
+import AddCard from 'src/page/AddCard.tsx';
 
 function App() {
 	return (
 		<div className="root">
 			<div className="app">
-				<AddCardStepper />
+				<AddCard />
 			</div>
 		</div>
 	);
