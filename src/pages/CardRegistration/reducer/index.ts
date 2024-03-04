@@ -19,7 +19,7 @@ interface CardState {
   };
 }
 
-interface CardAction {
+export interface CardAction {
   type:
     | 'ownerName'
     | 'expirationMonth'

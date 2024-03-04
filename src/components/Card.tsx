@@ -1,4 +1,4 @@
-import { MARK } from '../../../constant';
+import { MARK } from '../constant';
 
 interface Card {
   ownerName: string;
