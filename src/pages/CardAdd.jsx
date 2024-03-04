@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { isNumericString, isValidateMonth } from "../util/regExp";
 import InputGroup from "../components/InputGroup";
+import { Link } from "react-router-dom";
 
 export default function CardAdd() {
   const [cardNumberValue1, setCardNumberValue1] = useState("");
@@ -101,7 +102,12 @@ export default function CardAdd() {
   return (
     <div className="root">
       <div className="app">
-        <h2 className="page-title">{"<"} 카드 추가</h2>
+        <h2 className="page-title">
+          <Link to="/" className="button-basic">
+            {"<"}
+          </Link>
+          <span className="ml-10">카드 추가</span>
+        </h2>
         {/* 카드 */}
         <div className="card-box">
           <div className="empty-card">
