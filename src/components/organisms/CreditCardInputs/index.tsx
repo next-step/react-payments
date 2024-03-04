@@ -19,6 +19,8 @@ const keepOnlyAlphabetHangulAndSpace = (text: string) => {
 };
 
 function CardNumber({ value, onChange }: CreditCardInputProps) {
+  const MAX_LENGTH_FOR_FORMATTED_CODE = 19;
+
   return (
     <Input
       name="cardNumber"
@@ -26,7 +28,7 @@ function CardNumber({ value, onChange }: CreditCardInputProps) {
       value={value}
       onChange={onChange}
       label="카드 번호"
-      lengthLimit={{ show: false, maxLength: 19 }} // 4자리마다의 '-'를 포함한 최대 길이는 19
+      lengthLimit={{ show: false, maxLength: MAX_LENGTH_FOR_FORMATTED_CODE }}
       inputProps={{ inputMode: 'numeric' }}
       replacer={(text) => {
         let replacedText = keepOnlyNumeric(text);
