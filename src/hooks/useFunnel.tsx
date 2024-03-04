@@ -16,16 +16,12 @@ const useFunnel = (initialStep: string) => {
     children: Array<ReactElement<StepProps>>;
   }) => {
     // name === currentStep 인것 만 렌더링
-    return (
-      <>
-        {Children.map(children, (child) => {
-          if (isValidElement(child) && child.props.name === currentStep) {
-            return child;
-          }
-          return null;
-        })}
-      </>
-    );
+    return Children.map(children, (child) => {
+      if (isValidElement(child) && child.props.name === currentStep) {
+        return child;
+      }
+      return null;
+    });
   };
   const Funnel = Object.assign(FunnelElement, {
     Step,

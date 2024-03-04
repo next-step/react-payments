@@ -4,7 +4,7 @@ import * as styles from './index.css';
 import type { HTMLProps, ReactNode } from 'react';
 
 interface ButtonProps extends HTMLProps<HTMLButtonElement> {
-  children: ReactNode | string;
+  children: ReactNode;
   type?: 'primary' | 'secondary' | 'text';
   htmlType?: 'button' | 'submit' | 'reset';
   primary?: boolean;
@@ -12,15 +12,15 @@ interface ButtonProps extends HTMLProps<HTMLButtonElement> {
 
 const Button = ({
   children,
-  className,
+  className = '',
   type = 'primary',
   htmlType,
   ...restProps
 }: ButtonProps) => {
-  const classNames = cn([styles.buttonType[type], className ?? '']);
+  const classNames = cn([styles.buttonType[type], className]);
   return (
     <button {...restProps} type={htmlType} className={classNames}>
-      <>{children}</>
+      {children}
     </button>
   );
 };

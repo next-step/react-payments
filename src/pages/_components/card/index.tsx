@@ -24,7 +24,6 @@ const Card = ({
 }: CardProps) => {
   const firstCardNumber = cardNumber[0];
   const [cardBrand, setCardBrand] = useState<CardBrand | 'UNKNOWN'>('UNKNOWN');
-
   const fullCardNumber = cardNumber
     // .filter(Boolean)
     .map((part, index) => {
@@ -38,8 +37,11 @@ const Card = ({
     expirationDate.month && expirationDate.year
       ? `${expirationDate.month}/${expirationDate.year}`
       : '';
+
   useEffect(() => {
-    if (!firstCardNumber) return;
+    if (!firstCardNumber) {
+      return;
+    }
     const firstNum = firstCardNumber[0];
     if (firstNum === '9') {
       setCardBrand('UNKNOWN');
@@ -48,6 +50,7 @@ const Card = ({
     const brand = `BRAND${firstNum}` as CardBrand;
     setCardBrand(brand);
   }, [firstCardNumber]);
+
   return (
     <div className={styles.cardBox[size]}>
       <div className={styles.cardColor[cardBrand]}>

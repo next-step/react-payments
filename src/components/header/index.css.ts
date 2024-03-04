@@ -9,8 +9,6 @@ export const headerStyle = style({
   backgroundColor: 'white',
 });
 
-export const leftElement = style({});
-
 export const rightElement = style({
   position: 'absolute',
   right: '1rem',

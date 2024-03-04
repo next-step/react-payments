@@ -1,16 +1,16 @@
-import { useEffect, useState, useRef, Fragment, useContext } from 'react';
+import { useEffect, useState, useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Header } from '@/components';
 import { Card } from '@/pages/_components';
 import FormContext from '@/pages/new/context';
-import * as styles from './step1.css';
+import * as styles from './cardInfo.css';
 import Arrow from '@/assets/arrow.svg?react';
 import type { FormEvent } from 'react';
 
-interface Step1Props {
+interface CardInfoProps {
   next: () => void;
 }
-const Step1 = ({ next }: Step1Props) => {
+const CardInfo = ({ next }: CardInfoProps) => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement | null>(null);
   const [formItems, setFormItems] = useState<HTMLFormControlsCollection>();
@@ -23,6 +23,49 @@ const Step1 = ({ next }: Step1Props) => {
     setFormItems(formItems);
   }, []);
 
+  const handleCustomValidity = (target: HTMLInputElement) => {
+    if (!target.dataset.rule) {
+      return;
+    }
+    const rule = new RegExp(target.dataset.rule);
+    if (!rule.test(target.value)) {
+      target.setCustomValidity(
+        target.dataset.message || '올바른 형식이 아닙니다.'
+      );
+    } else {
+      target.setCustomValidity('');
+    }
+  };
+
+  const handleChangeForm = (e: FormEvent<HTMLFormElement>) => {
+    const target = e.target as HTMLInputElement;
+    const currentIndex = Array.from(formItems!).findIndex(
+      (item) => item === target
+    );
+    const isInputEnd = target.maxLength === target.value.length;
+
+    handleCustomValidity(target);
+
+    if (isInputEnd) {
+      const NextFormItem = formItems?.item(currentIndex + 1);
+      if (NextFormItem instanceof HTMLInputElement) {
+        NextFormItem.focus();
+      }
+    }
+
+    setFormData((prev) => {
+      const next = new Map(prev);
+      next.set(target.name, target.value);
+      return next;
+    });
+  };
+
+  const handleSubmitForm = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const totalNewData = new Map([...totalFormData, ...formData]);
+    setTotalFormData(totalNewData);
+    next();
+  };
   return (
     <>
       <Header
@@ -38,11 +81,7 @@ const Step1 = ({ next }: Step1Props) => {
       >
         <h1 className={styles.header}>카드 추가</h1>
       </Header>
-      <main
-        style={{
-          width: '100%',
-        }}
-      >
+      <main className={styles.wFull}>
         <Card
           cardNumber={[
             formData.get('cardNumber1') || '',
@@ -58,106 +97,57 @@ const Step1 = ({ next }: Step1Props) => {
         />
         <Form
           ref={formRef}
-          onChange={(e) => {
-            const target = e.target as HTMLInputElement;
-            const currentIndex = Array.from(formItems!).findIndex(
-              (item) => item === target
-            );
-
-            // setCustomeValidity
-            if (target.dataset.rule) {
-              const rule = new RegExp(target.dataset.rule);
-              if (!rule.test(target.value)) {
-                target.setCustomValidity(
-                  target.dataset.message || '올바른 형식이 아닙니다.'
-                );
-              } else {
-                target.setCustomValidity('');
-              }
-            }
-
-            // 지울 때 이전 input으로 focus
-            // if (target.value === '') {
-            //   const PrevFormItem = formItems?.item(currentIndex - 1);
-            //   if (PrevFormItem instanceof HTMLInputElement) {
-            //     PrevFormItem.focus();
-            //   }
-            // }
-
-            // maxLength 다 됐으면 다음 input으로 focus
-            if (target.maxLength === target.value.length) {
-              const NextFormItem = formItems?.item(currentIndex + 1);
-              if (NextFormItem instanceof HTMLInputElement) {
-                NextFormItem.focus();
-              }
-            }
-
-            setFormData((prev) => {
-              const next = new Map(prev);
-              next.set(target.name, target.value);
-              return next;
-            });
-          }}
-          onSubmit={(event: FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            const totalNewData = new Map([...totalFormData, ...formData]);
-            setTotalFormData(totalNewData);
-            next();
-          }}
+          onChange={handleChangeForm}
+          onSubmit={handleSubmitForm}
         >
           <Form.Item vertical label={'카드번호'}>
-            <div className={styles.cardNumberInputBox}>
-              {[1, 2, 3, 4].map((i) => (
-                <Fragment key={i}>
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className={styles.cardNumberInputContainer}>
+              {[1, 2, 3, 4].map((i) => {
+                const showDelimiter = `${formData.get(
+                  `cardNumber${i}`?.length === 4
+                )}` as 'true' | 'false';
+                return (
+                  <div key={i} className={styles.cardNumberInputBox}>
                     <Input
                       required
                       name={`cardNumber${i}`}
+                      className={styles.textCenter}
                       type={i > 2 ? 'password' : 'text'}
                       inputMode='numeric'
                       minLength={4}
                       maxLength={4}
-                      style={{ textAlign: 'center' }}
                       data-rule={'^[0-9]{4}$'}
                       data-message={'숫자 4자리를 입력해주세요'}
                     />
                     {i !== 4 && (
-                      <span
-                        style={{
-                          opacity:
-                            formData.get(`cardNumber${i}`)?.length === 4
-                              ? 1
-                              : 0,
-                          color: '#04C09E',
-                        }}
-                      >
-                        -
-                      </span>
+                      <span className={styles.delimiter[showDelimiter]}>-</span>
                     )}
                   </div>
-                </Fragment>
-              ))}
+                );
+              })}
             </div>
           </Form.Item>
           <Form.Item vertical label={'만료일'}>
-            <div className={styles.expireDateInputBox}>
+            <div className={styles.expireDateInputContainer}>
               <Input
                 required
+                name='expireDateMonth'
+                className={styles.textCenter}
                 type='number'
                 inputMode='numeric'
                 placeholder='MM'
-                name='expireDateMonth'
                 maxLength={2}
                 data-rule={'^(0[1-9]|1[0-2])$'}
                 data-message={'01~12월 사이의 숫자만 입력해주세요'}
-                style={{ textAlign: 'right' }}
               />
               <span
+                className={
+                  styles.delimiter[
+                    `${formData.get('expireDateMonth')?.length === 2}`
+                  ]
+                }
                 style={{
-                  opacity:
-                    formData.get('expireDateMonth')?.length === 2 ? 1 : 0,
                   transform: 'translateX(-6px)',
-                  color: '#04C09E',
                 }}
               >
                 /
@@ -190,43 +180,31 @@ const Step1 = ({ next }: Step1Props) => {
             />
           </Form.Item>
           <Form.Item vertical label={'보안코드(CVC/CVV)'}>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-              }}
-            >
+            <div className={styles.cvcInputBox}>
               <Input
                 required
                 name='cvc'
+                className={styles.cvcInputElem}
                 type='password'
                 inputMode='numeric'
                 maxLength={3}
-                style={{
-                  width: '60px',
-                  textAlign: 'center',
-                  letterSpacing: '8px',
-                }}
                 data-rule={'^[0-9]{3}$'}
                 data-message={'숫자 3자리를 입력해주세요'}
               />
-              <div style={{ flexGrow: 1 }}>툴팁</div>
+              <div className={styles.toolTipBox}>툴팁</div>
             </div>
           </Form.Item>
           <Form.Item vertical label={'카드 비밀번호'}>
-            <div className={styles.passwordInputBox}>
+            <div className={styles.passwordInputContainer}>
               {[1, 2].map((i) => (
                 <div key={i} className={styles.passwordPinBox}>
                   <Input
                     required
                     name={`password${i}`}
+                    className={styles.textCenter}
                     type='password'
                     inputMode='numeric'
                     maxLength={1}
-                    style={{
-                      textAlign: 'center',
-                    }}
                     data-rule={'^[0-9]$'}
                     data-message={'숫자만 입력해주세요'}
                   />
@@ -236,8 +214,12 @@ const Step1 = ({ next }: Step1Props) => {
               <div className={styles.passwordPinBox}>•</div>
             </div>
           </Form.Item>
-          <div style={{ textAlign: 'end' }}>
-            <Button htmlType='submit' type='text' style={{ color: '#04C09E' }}>
+          <div className={styles.textEnd}>
+            <Button
+              htmlType='submit'
+              type='text'
+              className={styles.textPrimary}
+            >
               다음
             </Button>
           </div>
@@ -247,4 +229,4 @@ const Step1 = ({ next }: Step1Props) => {
   );
 };
 
-export default Step1;
+export default CardInfo;

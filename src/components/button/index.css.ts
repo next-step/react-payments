@@ -1,6 +1,6 @@
 import { style, styleVariants } from '@vanilla-extract/css';
 
-export const buttonBase = style({
+const buttonBase = style({
   border: 'none',
   cursor: 'pointer',
   padding: '8px 16px',

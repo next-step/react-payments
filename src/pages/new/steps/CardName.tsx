@@ -3,10 +3,10 @@ import FormContext from '@/pages/new/context';
 import { Button, Form } from '@/components';
 import { Card } from '@/pages/_components';
 
-interface Step2Props {
+interface CardNameProps {
   next: () => void;
 }
-const Step2 = ({ next }: Step2Props) => {
+const CardName = ({ next }: CardNameProps) => {
   const { totalFormData, setTotalFormData } = useContext(FormContext);
   const [cardName, setCardName] = useState('');
   return (
@@ -49,4 +49,4 @@ const Step2 = ({ next }: Step2Props) => {
   );
 };
 
-export default Step2;
+export default CardName;

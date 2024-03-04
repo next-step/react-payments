@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFunnel } from '@/hooks';
 import FormContext from './context';
-import { Step1, Step2 } from './steps';
+import { CardInfo, CardName } from './steps';
 
 const New = () => {
   const navigate = useNavigate();
   const [totalFormData, setTotalFormData] = useState(new Map());
-  const [Funnel, setStep] = useFunnel('1');
+  const [Funnel, setStep] = useFunnel('cardInfo');
 
   return (
     <FormContext.Provider
@@ -17,11 +17,11 @@ const New = () => {
       }}
     >
       <Funnel>
-        <Funnel.Step name='1'>
-          <Step1 next={() => setStep('2')} />
+        <Funnel.Step name='cardInfo'>
+          <CardInfo next={() => setStep('cardName')} />
         </Funnel.Step>
-        <Funnel.Step name='2'>
-          <Step2
+        <Funnel.Step name='cardName'>
+          <CardName
             next={() =>
               navigate('/', {
                 state: {

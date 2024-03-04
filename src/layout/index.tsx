@@ -1,8 +1,12 @@
-import { container } from './index.css';
+import * as styles from './index.css';
 import type { ReactNode } from 'react';
 
-const Layout = ({ children }: { children: ReactNode }) => {
-  return <div className={container}>{children}</div>;
+interface LayoutProps {
+  children: ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
+  return <div className={styles.container}>{children}</div>;
 };
 
 export default Layout;

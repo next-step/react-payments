@@ -46,7 +46,7 @@ const cardColors = CARD_BRANDS.reduce((acc, brand) => {
   };
 }, {}) as Record<CardBrand, { backgroundColor: string }>;
 
-export const cardColor: Record<'UNKNOWN' | CardBrand, string> = styleVariants({
+export const cardColor = styleVariants({
   ...cardColors,
   UNKNOWN: [
     base,

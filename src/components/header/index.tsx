@@ -9,7 +9,7 @@ interface HeaderProps {
 
 const Header = ({ left, right, children }: HeaderProps) => (
   <header className={styles.headerStyle}>
-    {left && <div className={styles.leftElement}>{left}</div>}
+    {left && <div>{left}</div>}
     {children}
     {right && <div className={styles.rightElement}>{right}</div>}
   </header>
