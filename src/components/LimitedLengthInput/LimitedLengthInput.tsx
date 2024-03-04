@@ -100,7 +100,7 @@ const LimitedLengthInput = forwardRef<
   useEffect(() => {
     if (inputRef.current)
       inputRef.current.style.minWidth =
-        (inputRef.current.placeholder.length + 1) * 12 + "px";
+        (inputRef.current.placeholder.length + 1) * 14 + "px";
   }, [placeholder]);
 
   return <input ref={mergeRefs([ref, inputRef])} {...inputProps} />;
