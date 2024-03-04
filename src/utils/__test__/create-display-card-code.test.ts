@@ -1,4 +1,4 @@
-import { createDisplayCardCode } from './create-display-card-code'
+import { createDisplayCardCode } from '../create-display-card-code'
 
 describe('createCardNumber test', () => {
   test('4자리 이하로 주어지면 문자열 그대로를 반환한다', () => {
@@ -25,6 +25,7 @@ describe('createCardNumber test', () => {
         value: '1234567899999999',
         maskedLastDigit: 8,
         maxDigit: 16,
+        maskChar: '*',
       }),
     ).toBe('1234 - 5678 - **** - ****')
 
@@ -33,6 +34,7 @@ describe('createCardNumber test', () => {
         value: '1234567899999999',
         maskedLastDigit: 4,
         maxDigit: 16,
+        maskChar: '*',
       }),
     ).toBe('1234 - 5678 - 9999 - ****')
   })
