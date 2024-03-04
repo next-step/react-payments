@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React, { useState } from 'react';
 
 import { HFlex } from '@/components/atoms';
 import CreditCardTextFields from './index';
+import useCreditCardTextFields from './useCreditCardTextFields';
 
 const meta = {
   title: 'molecules/CreditCardInputs',
@@ -17,13 +17,25 @@ export default meta;
 type Story = StoryObj<typeof CreditCardTextFields.ExpirationDate>;
 
 const TextFieldWithHooks = ({ dateType }: { dateType: 'month' | 'year' }) => {
-  const [value, setValue] = useState('');
+  const { cardInputValue, handleExpirationMonthInputChange, handleExpirationYearInputChange } =
+    useCreditCardTextFields();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
-
-  return <CreditCardTextFields.ExpirationDate dateType={dateType} value={value} onChange={handleInputChange} />;
+  if (dateType === 'month') {
+    return (
+      <CreditCardTextFields.ExpirationDate
+        dateType={dateType}
+        value={cardInputValue.expirationMonth}
+        onChange={handleExpirationMonthInputChange}
+      />
+    );
+  }
+  return (
+    <CreditCardTextFields.ExpirationDate
+      dateType={dateType}
+      value={cardInputValue.expirationYear}
+      onChange={handleExpirationYearInputChange}
+    />
+  );
 };
 
 export const ExpirationDate: Story = {

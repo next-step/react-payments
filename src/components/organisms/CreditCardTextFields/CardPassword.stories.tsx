@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import React, { useState } from 'react';
 
 import CreditCardTextFields from './index';
+import useCreditCardTextFields from './useCreditCardTextFields';
 
 const meta = {
   title: 'molecules/CreditCardInputs',
@@ -16,13 +16,11 @@ export default meta;
 type Story = StoryObj<typeof CreditCardTextFields.CardPassword>;
 
 const TextFieldWithHooks = () => {
-  const [value, setValue] = useState('');
+  const { cardInputValue, handleCardPasswordInputChange } = useCreditCardTextFields();
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
-  };
-
-  return <CreditCardTextFields.CardPassword value={value} onChange={handleInputChange} />;
+  return (
+    <CreditCardTextFields.CardPassword value={cardInputValue.cardPassword} onChange={handleCardPasswordInputChange} />
+  );
 };
 
 export const CardPassword: Story = {

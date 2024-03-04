@@ -1,25 +1,22 @@
+import useCreditCardTextFields from '@/components/organisms/CreditCardTextFields/useCreditCardTextFields';
 import chevronLeft from '@assets/icon/chevron_left_24.svg';
 import { Box, Button, Container, HFlex, Text } from '@components/atoms';
 import { Header, IconButton } from '@components/molecules';
 import { CreditCardTextFields } from '@components/organisms';
-import { useState } from 'react';
 
 export default function CreateCard() {
-  const [cardInputValue, setCardInputValue] = useState({
-    cardNumber: '',
-    expirationMonth: '',
-    expirationYear: '',
-    ownerName: '',
-    verificationCode: '',
-    cardPassword: '',
-  });
+  const {
+    cardInputValue,
+    handleCardNumberInputChange,
+    handleVerificationCodeInputChange,
+    handleCardPasswordInputChange,
+    handleExpirationMonthInputChange,
+    handleExpirationYearInputChange,
+    handleOwnerNameInputChange,
+  } = useCreditCardTextFields();
 
   const areAllInputsFilled = Object.values(cardInputValue).some((value) => value === '');
   const disableNextButton = areAllInputsFilled;
-
-  const handleCardInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setCardInputValue({ ...cardInputValue, [e.target.name]: e.target.value });
-  };
 
   const navigateToCardList = () => {
     alert('//TODO: 카드 목록 페이지로 이동되었습니다.');
@@ -33,25 +30,28 @@ export default function CreateCard() {
       </Header>
 
       <Box className="my-4 space-y-6">
-        <CreditCardTextFields.CardNumber value={cardInputValue.cardNumber} onChange={handleCardInputChange} />
+        <CreditCardTextFields.CardNumber value={cardInputValue.cardNumber} onChange={handleCardNumberInputChange} />
         <HFlex className="gap-4">
           <CreditCardTextFields.ExpirationDate
             dateType="month"
             value={cardInputValue.expirationMonth}
-            onChange={handleCardInputChange}
+            onChange={handleExpirationMonthInputChange}
           />
           <CreditCardTextFields.ExpirationDate
             dateType="year"
             value={cardInputValue.expirationYear}
-            onChange={handleCardInputChange}
+            onChange={handleExpirationYearInputChange}
           />
         </HFlex>
-        <CreditCardTextFields.OwnerName value={cardInputValue.ownerName} onChange={handleCardInputChange} />
+        <CreditCardTextFields.OwnerName value={cardInputValue.ownerName} onChange={handleOwnerNameInputChange} />
         <CreditCardTextFields.VerificationCode
           value={cardInputValue.verificationCode}
-          onChange={handleCardInputChange}
+          onChange={handleVerificationCodeInputChange}
         />
-        <CreditCardTextFields.CardPassword value={cardInputValue.cardPassword} onChange={handleCardInputChange} />
+        <CreditCardTextFields.CardPassword
+          value={cardInputValue.cardPassword}
+          onChange={handleCardPasswordInputChange}
+        />
       </Box>
 
       <Box className="w-full">

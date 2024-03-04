@@ -15,7 +15,6 @@ export interface TextFieldProps extends ComponentProps<'div'> {
   };
 
   label?: string;
-  replacer?: (value: string) => string;
   inputProps?: ComponentProps<'input'>;
 }
 
@@ -27,7 +26,6 @@ export default function TextField({
   placeholder,
   inputProps,
   lengthLimit,
-  replacer,
   ...restProps
 }: TextFieldProps) {
   const id = useId();
@@ -47,7 +45,7 @@ export default function TextField({
         </HFlex>
       )}
       <input
-        value={replacer ? replacer(value) : value}
+        value={value}
         onChange={onChange}
         name={name}
         id={label + id}
