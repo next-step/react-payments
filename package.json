@@ -11,11 +11,10 @@
 		"prettier": "prettier . --write --config .prettierrc",
 		"test": "jest",
 		"test:watch": "jest --watch",
-		"storybook": "storybook dev -p 6006",
+		"storybook": "yarn test:generate-output && storybook dev -p 6006",
 		"build-storybook": "storybook build",
 		"test:generate-output": "jest --json --outputFile=.jest-test-results.json || true",
-		"test:generate-output-watch": "jest --watch --json --outputFile=.jest-test-results.json || true",
-		"test-storybook": "test-storybook"
+		"test:generate-output-watch": "jest --watch --json --outputFile=.jest-test-results.json || true"
 	},
 	"dependencies": {
 		"react": "^18.2.0",
