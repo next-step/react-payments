@@ -32,7 +32,7 @@ export default function CreateCard() {
         <Text size="xl">카드 추가</Text>
       </Header>
 
-      <CreditCardInputs.Root className="my-4 space-y-6">
+      <Box className="my-4 space-y-6">
         <CreditCardInputs.CardNumber value={cardInputValue.cardNumber} onChange={handleCardInputChange} />
         <HFlex className="gap-4">
           <CreditCardInputs.ExpirationDate
@@ -49,7 +49,7 @@ export default function CreateCard() {
         <CreditCardInputs.OwnerName value={cardInputValue.ownerName} onChange={handleCardInputChange} />
         <CreditCardInputs.VerificationCode value={cardInputValue.verificationCode} onChange={handleCardInputChange} />
         <CreditCardInputs.CardPassword value={cardInputValue.cardPassword} onChange={handleCardInputChange} />
-      </CreditCardInputs.Root>
+      </Box>
 
       <Box className="w-full">
         <Button

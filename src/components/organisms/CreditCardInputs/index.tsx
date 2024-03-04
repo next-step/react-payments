@@ -1,7 +1,6 @@
 import { Input } from '@/components/molecules';
 import { InputProps } from '@/components/molecules/Input';
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
-import { ComponentProps } from 'react';
 
 interface CreditCardInputProps {
   value: InputProps['value'];
@@ -113,18 +112,9 @@ function OwnerName({ value, onChange }: CreditCardInputProps) {
   );
 }
 
-function Root({ children, className, ...rest }: ComponentProps<'div'>) {
-  return (
-    <div className={className} {...rest}>
-      {children}
-    </div>
-  );
-}
-
 export default Object.assign(
   {},
   {
-    Root,
     CardNumber,
     ExpirationDate,
     OwnerName,
