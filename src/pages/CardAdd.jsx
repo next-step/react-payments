@@ -1,41 +1,24 @@
 import { useState, useRef } from "react";
 import { isNumericString, isValidateMonth } from "../util/regExp";
-import InputGroup from "../components/InputGroup";
 import { Link } from "react-router-dom";
 import CardBox from "../components/CardBox";
 import Card from "../components/Card";
+import {
+  FIRST_NUMBER,
+  FOURTH_NUMBER,
+  SECOND_NUMBER,
+  THIRD_NUMBER,
+} from "../constants/cardNumber";
+import CardNumber from "../components/card-add/CardNumber";
 
 export default function CardAdd() {
-  const [cardNumberValue1, setCardNumberValue1] = useState("");
-  const [cardNumberValue2, setCardNumberValue2] = useState("");
-  const [cardNumberValue3, setCardNumberValue3] = useState("");
-  const [cardNumberValue4, setCardNumberValue4] = useState("");
-  const cardNumberInfoList = [
-    {
-      value: cardNumberValue1,
-      setValue: setCardNumberValue1,
-      type: "text",
-      maxLength: 4,
-    },
-    {
-      value: cardNumberValue2,
-      setValue: setCardNumberValue2,
-      type: "text",
-      maxLength: 4,
-    },
-    {
-      value: cardNumberValue3,
-      setValue: setCardNumberValue3,
-      type: "password",
-      maxLength: 4,
-    },
-    {
-      value: cardNumberValue4,
-      setValue: setCardNumberValue4,
-      type: "password",
-      maxLength: 4,
-    },
-  ];
+  // 카드번호
+  const [cardNumberValue, setCardNumberValue] = useState({
+    [FIRST_NUMBER]: "",
+    [SECOND_NUMBER]: "",
+    [THIRD_NUMBER]: "",
+    [FOURTH_NUMBER]: "",
+  });
 
   // 만료일(MM)
   const expirationMMRef = useRef(null);
@@ -112,23 +95,15 @@ export default function CardAdd() {
         </h2>
         {/* 카드 */}
         <CardBox>
-          <Card
-            alias={"카드 별칭"}
-            cardNumber={
-              cardNumberValue1 +
-              cardNumberValue2 +
-              cardNumberValue3 +
-              cardNumberValue4
-            }
-          />
+          <Card alias={"카드 별칭"} cardNumber={cardNumberValue} />
         </CardBox>
 
         {/* 카드 번호 */}
         <div className="input-container">
           <span className="input-title">카드 번호</span>
-          <InputGroup
-            inputGroupInfoList={cardNumberInfoList}
-            dividerText={"-"}
+          <CardNumber
+            cardNumberValue={cardNumberValue}
+            setCardNumberValue={setCardNumberValue}
           />
         </div>
         {/* 만료일 */}

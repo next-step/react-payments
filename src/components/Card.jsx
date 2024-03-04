@@ -1,7 +1,7 @@
 import { getSplitString4 } from "../util/regExp";
 
 export default function Card({ alias = "", cardNumber }) {
-  const displayCardNumber = getSplitString4(cardNumber)
+  const displayCardNumber = getSplitString4(Object.values(cardNumber).join(""))
     .map((value, i) => {
       if (i >= 2) {
         return "*".repeat(value.length);
