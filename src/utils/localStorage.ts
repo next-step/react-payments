@@ -1,3 +1,5 @@
+export const CARD_KEY = 'cards';
+
 export const getLocalStorageItem = ({ key }: { key: string }) => {
   const storedData = localStorage.getItem(key);
   if (!storedData) return [];

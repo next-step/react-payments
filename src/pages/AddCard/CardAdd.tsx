@@ -10,8 +10,17 @@ import useExpiration from './hooks/useExpiration';
 import useSecurityCode from './hooks/useSecurityCode';
 import usePassword from './hooks/usePassword';
 import useOwner from './hooks/useOwner';
+import {
+  CARD_KEY,
+  getLocalStorageItem,
+  setLocalStorageItem,
+} from '../../utils/localStorage';
 
-const AddCard = () => {
+interface Props {
+  onNext: () => void;
+}
+
+const AddCard = ({ onNext }: Props) => {
   const { cardNumber, handleNumbers } = useCardNumber();
   const { expirationDate, handleExpirationDate } = useExpiration();
   const { securityCode, handleSecurityCode } = useSecurityCode();
@@ -25,10 +34,16 @@ const AddCard = () => {
     owner,
   };
 
+  const handleAddCard = () => {
+    const storedData = getLocalStorageItem({ key: CARD_KEY });
+    setLocalStorageItem({ key: CARD_KEY, item: [...storedData, card] });
+    onNext();
+  };
+
   return (
     <>
       <Header className='mb-10'>
-        <a>{'<'}&nbsp;</a>
+        <div onClick={onNext}>{'<'}&nbsp;</div>
         <span>카드추가</span>
       </Header>
 
@@ -113,7 +128,7 @@ const AddCard = () => {
       </InputContainer>
 
       <div className='button-box'>
-        <Button>다음</Button>
+        <Button onClick={handleAddCard}>다음</Button>
       </div>
     </>
   );
