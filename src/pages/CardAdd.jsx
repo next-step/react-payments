@@ -54,14 +54,13 @@ export default function CardAdd() {
         </h2>
 
         {/* 카드 */}
-        <CardBox>
-          <Card
-            alias={"카드 별칭"}
-            cardNumber={cardNumber}
-            expirationDate={expirationDate}
-            cardOwnerName={cardOwnerName}
-          />
-        </CardBox>
+        <Card
+          alias={"카드 별칭"}
+          cardNumber={cardNumber}
+          expirationDateMM={expirationDate[MONTH]}
+          expirationDateYY={expirationDate[YEAR]}
+          cardOwnerName={cardOwnerName}
+        />
 
         {/* 카드 번호 */}
         <div className="input-container">

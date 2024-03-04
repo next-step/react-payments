@@ -1,10 +1,12 @@
 import { MONTH, YEAR } from "../constants/expirationDate";
 import { getSplitString4 } from "../util/regExp";
+import CardBox from "./CardBox";
 
 export default function Card({
   alias = "",
   cardNumber = "",
-  expirationDate = "",
+  expirationDateMM = "",
+  expirationDateYY = "",
   cardOwnerName = "",
 }) {
   // 카드 번호
@@ -18,14 +20,14 @@ export default function Card({
     .join("-");
 
   // 만료일
-  const displayExpirationDateMM = expirationDate[MONTH] || "MM";
-  const displayExpirationDateYY = expirationDate[YEAR] || "YY";
+  const displayExpirationDateMM = expirationDateMM || "MM";
+  const displayExpirationDateYY = expirationDateYY || "YY";
 
   // 카드 소유자 이름(선택)
   const displayCardOwnerName = cardOwnerName;
 
   return (
-    <>
+    <CardBox>
       <div className="card-top">
         <span className="card-text">{alias}</span>
       </div>
@@ -41,6 +43,6 @@ export default function Card({
           </span>
         </div>
       </div>
-    </>
+    </CardBox>
   );
 }
