@@ -3,9 +3,9 @@ import { getSplitString4 } from "../util/regExp";
 
 export default function Card({
   alias = "",
-  cardNumber,
-  expirationDate,
-  cardOwnerName,
+  cardNumber = "",
+  expirationDate = "",
+  cardOwnerName = "",
 }) {
   // 카드 번호
   const displayCardNumber = getSplitString4(Object.values(cardNumber).join(""))

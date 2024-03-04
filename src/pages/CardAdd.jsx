@@ -107,7 +107,9 @@ export default function CardAdd() {
           <PasswordInput password={password} setPassword={setPassword} />
         </div>
         <div className="button-box">
-          <span className="button-text">다음</span>
+          <Link to="/complete" className="button-basic">
+            다음
+          </Link>
         </div>
       </div>
     </div>
