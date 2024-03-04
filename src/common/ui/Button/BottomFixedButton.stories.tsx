@@ -12,7 +12,7 @@ export default meta;
 
 type Story = StoryObj<ButtonProps>;
 
-export const HeaderStory: Story = {
+export const BottomFixedButtonStory: Story = {
 	args: {
 		buttonColor: "cyan"
 	},
