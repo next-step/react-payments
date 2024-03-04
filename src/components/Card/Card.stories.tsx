@@ -12,7 +12,7 @@ type Story = StoryObj<typeof Card>;
 export const Default: Story = {
   args: {
     brand: '클린카드',
-    numbers: [1234, 5678, 1234, 5678],
+    numbers: ['1234', '5678', '1234', '5678'],
     owner: 'NAME',
     expirationMonth: 'MM',
     expirationYear: 'YY',

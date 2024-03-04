@@ -1,6 +1,8 @@
 import type { Card as CardProps } from '../../types';
 
-interface Props extends CardProps {}
+interface Props extends CardProps {
+  size?: 'small' | 'big';
+}
 
 const Card = ({
   brand,
@@ -8,9 +10,9 @@ const Card = ({
   owner,
   expirationMonth,
   expirationYear,
+  size = 'small',
 }: Props) => {
-  const isEmpty =
-    !brand || !numbers || !owner || !expirationMonth || !expirationYear;
+  const isEmpty = !numbers || !owner || !expirationMonth || !expirationYear;
 
   const cardNumbers = numbers
     ?.map((number, index) => {
@@ -20,13 +22,13 @@ const Card = ({
     .join(' ');
 
   return (
-    <div className='card-box mb-10'>
-      <div className={isEmpty ? 'empty-card' : 'small-card'}>
+    <div className='card-box'>
+      <div className={isEmpty ? 'empty-card' : `${size}-card`}>
         <div className='card-top'>
           <span className='card-text'>{brand}</span>
         </div>
         <div className='card-middle'>
-          <div className='small-card__chip'></div>
+          <div className={`${size}-card__chip`}></div>
         </div>
         <div className='card-bottom'>
           <div className='card-bottom__number'>

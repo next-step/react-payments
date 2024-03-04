@@ -1,4 +1,5 @@
 export const PAGES = {
   CARD_LIST: 'card-list',
-  CARD_ADD: 'card-add',
+  ADD_CARD: 'add-card',
+  ADD_CARD_SUCCESS: 'add-card-success',
 } as const;

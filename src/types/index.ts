@@ -6,4 +6,5 @@ export interface Card {
   expirationYear?: string;
   password?: number;
   securityCode?: number;
+  nickname?: string;
 }
