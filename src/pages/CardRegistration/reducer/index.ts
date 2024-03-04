@@ -55,7 +55,7 @@ export const initialCard = {
 
 export function cardReducer(state: CardState, action: CardAction) {
   const { type, param } = action;
-  console.log(type, param);
+
   switch (type) {
     case 'ownerName':
       return {
