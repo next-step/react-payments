@@ -6,7 +6,7 @@ import { expect } from "@storybook/jest";
 
 const meta: Meta<typeof CardNumberInput> = {
   component: CardNumberInput,
-  title: "CardNumberInput",
+  title: "CardRegister/Component/CardNumberInput",
 };
 
 export default meta;
