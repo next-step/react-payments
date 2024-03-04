@@ -20,5 +20,3 @@ export default function Portal({ dropShadow = true, children }: PortalProps) {
     element
   );
 }
-
-// Fnull
