@@ -11,6 +11,8 @@ import {
 import CardNumberInput from "../components/card-add/CardNumberInput";
 import { MONTH, YEAR } from "../constants/expirationDate";
 import ExpirationDateInput from "../components/card-add/ExpirationDateInput";
+import CardOwnerNameInput from "../components/card-add/CardOwnerInput";
+import { CARD_OWNER_NAME_MAX_LENGTH } from "../constants/cardOwnerName";
 
 export default function CardAdd() {
   // 카드번호
@@ -26,6 +28,9 @@ export default function CardAdd() {
     [MONTH]: "",
     [YEAR]: "",
   });
+
+  // 카드 소유자 이름(선택)
+  const [cardOwnerName, setCardOwnerName] = useState("");
 
   return (
     <div className="root">
@@ -43,6 +48,7 @@ export default function CardAdd() {
             alias={"카드 별칭"}
             cardNumber={cardNumber}
             expirationDate={expirationDate}
+            cardOwnerName={cardOwnerName}
           />
         </CardBox>
 
@@ -64,12 +70,16 @@ export default function CardAdd() {
         </div>
         {/* 카드 소유자 이름 */}
         <div className="input-container">
-          <span className="input-title">카드 소유자 이름(선택)</span>
-          <input
-            defaultValue=""
-            type="text"
-            className="input-basic"
-            placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+          <div className="input-group">
+            <span className="input-title">카드 소유자 이름(선택)</span>
+            <span className="input-title">
+              {cardOwnerName.length} / {CARD_OWNER_NAME_MAX_LENGTH}
+            </span>
+          </div>
+
+          <CardOwnerNameInput
+            cardOwnerName={cardOwnerName}
+            setCardOwnerName={setCardOwnerName}
           />
         </div>
         {/* 보안 코드 */}

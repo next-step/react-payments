@@ -1,6 +1,12 @@
+import { MONTH, YEAR } from "../constants/expirationDate";
 import { getSplitString4 } from "../util/regExp";
 
-export default function Card({ alias = "", cardNumber, expirationDate }) {
+export default function Card({
+  alias = "",
+  cardNumber,
+  expirationDate,
+  cardOwnerName,
+}) {
   // 카드 번호
   const displayCardNumber = getSplitString4(Object.values(cardNumber).join(""))
     .map((value, i) => {
@@ -11,7 +17,13 @@ export default function Card({ alias = "", cardNumber, expirationDate }) {
     })
     .join("-");
 
-  const displayExpirationDate = Object.values(expirationDate).join(" / ");
+  // 만료일
+  const displayExpirationDateMM = expirationDate[MONTH] || "MM";
+  const displayExpirationDateYY = expirationDate[YEAR] || "YY";
+
+  // 카드 소유자 이름(선택)
+  const displayCardOwnerName = cardOwnerName;
+
   return (
     <>
       <div className="card-top">
@@ -23,8 +35,10 @@ export default function Card({ alias = "", cardNumber, expirationDate }) {
       </div>
       <div className="card-bottom">
         <div className="card-bottom_info">
-          <span className="card-text">NAME</span>
-          <span className="card-text">{displayExpirationDate}</span>
+          <span className="card-text">{displayCardOwnerName}</span>
+          <span className="card-text">
+            {displayExpirationDateMM} / {displayExpirationDateYY}
+          </span>
         </div>
       </div>
     </>
