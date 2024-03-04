@@ -9,6 +9,7 @@ import {
   BaseInput,
 } from '@/components'
 import { FormEventHandler } from 'react'
+import { useCardInputContext } from '@/domains/card-register/contexts/card-input-context'
 
 // TODO
 // [ ] 상태 연결, 다음 활성화 로직 구성 (다음 퍼널에서도 사용되어야 하므로 context로 폼 입력 상태를 정의해야 할듯)
@@ -20,9 +21,10 @@ export interface CardInputFormFunnelProps {
 }
 
 export const CardInputFormFunnel = ({ onSubmit }: CardInputFormFunnelProps) => {
+  const { cardInput, setCardInput } = useCardInputContext()
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault()
-    alert('제출!')
     onSubmit()
   }
 
@@ -39,9 +41,26 @@ export const CardInputFormFunnel = ({ onSubmit }: CardInputFormFunnelProps) => {
         onSubmit={handleSubmit}
       >
         <Flex id="card-register-form" as="form" direction="column" width="100%" gap="36px">
-          <CardCodeInput id="card-code" label="카드 번호" width="100%" textAlign="center" />
-          <CardExpDateInput id="card-exp-date" label="만료일" />
-          <CardNameInput id="card-name" label="카드 소유자 이름(선택)" />
+          <CardCodeInput
+            id="card-code"
+            label="카드 번호"
+            width="100%"
+            textAlign="center"
+            value={cardInput.cardCode}
+            onChange={setCardInput('cardCode')}
+          />
+          <CardExpDateInput
+            id="card-exp-date"
+            label="만료일"
+            value={cardInput.cardExpDate}
+            onChange={setCardInput('cardExpDate')}
+          />
+          <CardNameInput
+            id="card-name"
+            label="카드 소유자 이름(선택)"
+            value={cardInput.cardName}
+            onChange={setCardInput('cardName')}
+          />
           <BaseInput
             id="card-cvc"
             label="보안 코드(CVC/CVV)"
@@ -49,8 +68,15 @@ export const CardInputFormFunnel = ({ onSubmit }: CardInputFormFunnelProps) => {
             maxLength={3}
             width="100px"
             textAlign="center"
+            value={cardInput.cardCVC}
+            onChange={e => setCardInput('cardCVC')(e.target.value)}
           />
-          <CardPinInput id="card-pin" label="카드 비밀번호" />
+          <CardPinInput
+            id="card-pin"
+            label="카드 비밀번호"
+            value={cardInput.cardPin}
+            onChange={setCardInput('cardPin')}
+          />
         </Flex>
         <Flex justifyContent="flex-end" paddingX="24px" paddingY="32px" marginTop="auto">
           <Text as="button" type="submit" variant="body1" color="aqua" form="card-register-form">
