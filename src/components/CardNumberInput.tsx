@@ -17,6 +17,7 @@ export default function CardNumberInput({
 	thirdSegment,
 	fourthSegment,
 	id,
+	segmentLength,
 }: CardNumberInputProps) {
 	return (
 		<div className="input-container">
@@ -30,6 +31,7 @@ export default function CardNumberInput({
 					value={firstSegment}
 					onChange={handleFirstSegmentChange}
 					id={id}
+					maxLength={segmentLength}
 				/>
 				<div>-</div>
 				<input
@@ -38,6 +40,7 @@ export default function CardNumberInput({
 					value={secondSegment}
 					onChange={handleSecondSegmentChange}
 					ref={secondSegmentInputRef}
+					maxLength={segmentLength}
 				/>
 				<div>-</div>
 				<input
@@ -47,6 +50,7 @@ export default function CardNumberInput({
 					value={thirdSegment}
 					onChange={handleThirdSegmentChange}
 					ref={thirdSegmentInputRef}
+					maxLength={segmentLength}
 				/>
 				<div>-</div>
 				<input
@@ -56,6 +60,7 @@ export default function CardNumberInput({
 					value={fourthSegment}
 					onChange={handleFourthSegmentChange}
 					ref={fourthSegmentInputRef}
+					maxLength={segmentLength}
 				/>
 			</div>
 		</div>

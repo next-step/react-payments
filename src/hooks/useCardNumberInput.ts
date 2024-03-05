@@ -2,7 +2,13 @@ import { useState, useRef, ChangeEvent } from 'react';
 
 import REGEX from 'src/constants/regex.ts';
 
-export default function useCardNumberInput() {
+interface UseCardNumberInputOptions {
+	segmentLength: number;
+}
+
+export default function useCardNumberInput(options: UseCardNumberInputOptions = { segmentLength: 4 }) {
+	const { segmentLength } = options;
+
 	const [firstSegment, setFirstSegment] = useState('');
 	const [secondSegment, setSecondSegment] = useState('');
 	const [thirdSegment, setThirdSegment] = useState('');
@@ -13,34 +19,34 @@ export default function useCardNumberInput() {
 	const fourthSegmentInputRef = useRef<HTMLInputElement>(null);
 
 	const handleFirstSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
-		const value = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '').slice(0, 4);
+		const value = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
 		setFirstSegment(value);
 
-		if (value.length === 4) {
+		if (value.length === segmentLength) {
 			secondSegmentInputRef.current?.focus();
 		}
 	};
 
 	const handleSecondSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
-		const value = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '').slice(0, 4);
+		const value = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
 		setSecondSegment(value);
 
-		if (value.length === 4) {
+		if (value.length === segmentLength) {
 			thirdSegmentInputRef.current?.focus();
 		}
 	};
 
 	const handleThirdSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
-		const value = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '').slice(0, 4);
+		const value = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
 		setThirdSegment(value);
 
-		if (value.length === 4) {
+		if (value.length === segmentLength) {
 			fourthSegmentInputRef.current?.focus();
 		}
 	};
 
 	const handleFourthSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
-		const value = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '').slice(0, 4);
+		const value = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
 		setFourthSegment(value);
 	};
 
@@ -56,5 +62,6 @@ export default function useCardNumberInput() {
 		secondSegmentInputRef,
 		thirdSegmentInputRef,
 		fourthSegmentInputRef,
+		segmentLength,
 	};
 }
