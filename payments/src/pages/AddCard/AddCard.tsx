@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useState,useEffect } from 'react'
 import CardNumberInput from '../../components/CardNumberInput.tsx'
 import DateInput from '../../components/DateInput.tsx'
 import Input from '../../components/Input.tsx'
@@ -9,8 +9,47 @@ import IconButton from '../../components/IconButton.tsx'
 import { useNavigate } from 'react-router-dom'
 
 const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
+  // const cardNumRef = useRef(null)
+  // const expiredDateRef = useRef(null)
+  // const ownerNameRef = useRef(null)
+  // const CVCRef = useRef(null)
+  // const cardPasswordRef = useRef<HTMLInputElement | null>(null)
 
-    const navigate = useNavigate()
+
+
+  const [inputs, setInputs] = useState({
+    cardNum: '',
+    expiredDate: '',
+    ownerName: '',
+    CVC:'',
+    cardPasswordOne:'',
+    cardPasswordTwo:''
+  })
+  
+  useEffect(() => {
+    
+    if (!/^[0-9]*$/.test(inputs.CVC)) {
+      console.error('CVC 형식이 틀렸습니다.')
+
+      setInputs({
+        ...inputs,
+        CVC: '',
+      })
+
+      return
+    }
+    
+
+  }, [inputs.CVC])
+
+
+  
+  const handleSubmit = () => {
+    // 모든 Input 정보가 올바를 때
+    console.log(inputs)
+    onNext()
+  }
+  const navigate = useNavigate()
     const handleOnClick = () => {
       navigate('/list')
     }
@@ -20,8 +59,10 @@ const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
       <div className="root">
         <div className="app">
           <Title>
-            <IconButton onClick={handleOnClick} file={'/icons/back.svg'}>
-            </IconButton>
+            <IconButton
+              onClick={handleOnClick}
+              file={'/icons/back.svg'}
+            ></IconButton>
             카드 추가
           </Title>
           <div className="card-box">
@@ -46,19 +87,52 @@ const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
             <span className="input-title">만료일</span>
             <DateInput />
           </div>
-          <div className="input-container">
-            <span className="input-title">카드 소유자 이름(선택)</span>
-            <Input />
-          </div>
-          <div className="input-container">
-            <span className="input-title">보안코드(CVC/CVV)</span>
-            <Input />
-          </div>
+          <Input
+            label="카드 소유자 이름(선택)"
+            placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+            maxLength={30}
+            value={inputs.ownerName}
+            onChange={(e) => {
+              setInputs({ ...inputs, ownerName: e.target.value })
+            }}
+            isShowLength
+          ></Input>
+          <Input
+            label="보안코드(CVC/CVV)"
+            type="password"
+            maxLength={3}
+            size="md"
+            value={inputs.CVC}
+            onChange={(e) => {
+              setInputs({ ...inputs, CVC: e.target.value })
+            }}
+          />
           <div className="input-container">
             <span className="input-title">카드 비밀번호</span>
-            <CardSecret />
+            <div className="flex-center gap-4">
+              <Input
+                type="password"
+                maxLength={1}
+                size="sm"
+                value={inputs.cardPasswordOne}
+                onChange={(e) => {
+                  setInputs({ ...inputs, cardPasswordOne: e.target.value })
+                }}
+              />
+              <Input
+                type="password"
+                maxLength={1}
+                size="sm"
+                value={inputs.cardPasswordTwo}
+                onChange={(e) => {
+                  setInputs({ ...inputs, cardPasswordTwo: e.target.value })
+                }}
+              />
+              <span>*</span>
+              <span>*</span>
           </div>
-          <Button onClick={onNext}>다음</Button>
+          <Button onClick={handleSubmit}>다음</Button>
+          </div>
         </div>
       </div>
     </>
