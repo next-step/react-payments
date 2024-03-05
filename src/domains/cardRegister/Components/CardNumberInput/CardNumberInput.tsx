@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 import styles from "./CardNumberInput.module.css";
 import { CardNumber } from "../../types";
-import { compareShallowValues, isNumberFromString } from "../../../../utils";
+import { isNumberFromString } from "../../../../utils";
 import LabelBox from "../../../../components/LabelBox/LabelBox";
 import Box from "../../../../components/Box/Box";
 import LimitedLengthInput from "../../../../components/LimitedLengthInput/LimitedLengthInput";
@@ -39,10 +39,7 @@ export default function CardNumberInput({
   };
 
   function fillCardNumber(key: keyof CardNumber) {
-    return function changeInputValue(
-      value: string,
-      isAttachLimitation?: boolean
-    ) {
+    return function changeInputValue(value: string) {
       if (value === "") {
         onChange && onChange({ ...cardNumber, [key]: "" });
         setCardNumber((prev) => ({ ...prev, [key]: "" }));

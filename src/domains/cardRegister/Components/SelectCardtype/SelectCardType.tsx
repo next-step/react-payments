@@ -13,7 +13,7 @@ export default function SelectCardType({
   value,
   onChange,
 }: SelectCardTypeProps) {
-  const [selected, setSelected] = useState(value || "none");
+  const [_, setSelected] = useState(value || "none");
 
   function selectCardType(value: CardType) {
     return function selectCardType() {

@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import styles from "./LabelBox.module.css";
-import Box from "../Box/Box";
 
 interface LabelBox {
   description: string;
