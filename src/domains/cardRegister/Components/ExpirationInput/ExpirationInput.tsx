@@ -66,7 +66,6 @@ export default function ExpirationInput({ value, onChange }: ExpirationInput) {
     <LabelBox description="만료일">
       <Box
         height="45px"
-        width="100%"
         backgroundColor="#ECEBF1"
         contentPosition="centerMiddle"
       >
