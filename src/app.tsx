@@ -15,9 +15,7 @@ const router = createBrowserRouter([
     path: '/card-register',
     element: <CardRegisterPage />,
   },
-], {
-  basename: 'https://sxungchxn.github.io/react-payments/'
-})
+])
 
 function App() {
   return (
