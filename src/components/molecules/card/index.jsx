@@ -1,7 +1,7 @@
-import { useFormContext } from "react-hook-form";
 import PropTypes from "prop-types";
 import Box from "../../atoms/box";
 import Text from "../../atoms/text";
+import { useFormContext } from "../../../hooks/useFormProvider";
 
 // 이 부분을 커스텀 훅으로 빼면 좋을지?
 const changeCardProps = (props, form) => {

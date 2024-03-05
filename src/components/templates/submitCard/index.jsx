@@ -3,11 +3,11 @@ import Box from "../../atoms/box";
 import Input from "../../atoms/input";
 import Text from "../../atoms/text";
 import Card from "../../molecules/card";
-import { useFormContext } from "react-hook-form";
+import { useFormContext } from "../../../hooks/useFormProvider";
 
 const SubmitCard = (props) => {
   const { setCardList, update } = props;
-  const { handleSubmit, reset } = useFormContext();
+  const { handleSubmit, reset, watch } = useFormContext();
 
   const handleAddCard = (data) => {
     update("list");

@@ -1,14 +1,14 @@
-import { FormProvider, useForm } from "react-hook-form";
 import SubmitCard from "../../components/templates/submitCard";
 import Funnel from "../../components/atoms/funnel";
 import CardForm from "../../components/templates/cardForm";
 import CardList from "../../components/templates/cardList";
 import { useState } from "react";
+import useCustomForm from "../../hooks/useForm";
+import FormProvider from "../../hooks/useFormProvider";
 
 const Home = () => {
   const [cardList, setCardList] = useState([]);
-  const form = useForm({
-    mode: "onChange",
+  const form = useCustomForm({
     defaultValues: {
       name: "",
       year: "",
@@ -21,7 +21,7 @@ const Home = () => {
     },
   });
 
-  console.log(cardList);
+  console.log(form.watch());
 
   return (
     <FormProvider {...form}>

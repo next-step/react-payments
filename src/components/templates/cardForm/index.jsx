@@ -1,4 +1,3 @@
-import { useFormContext } from "react-hook-form";
 import PropTypes from "prop-types";
 import Box from "../../atoms/box";
 import Input from "../../atoms/input";
@@ -11,9 +10,10 @@ import CardModal from "../../molecules/cardModal";
 
 const CardForm = (props) => {
   const { next, back } = props;
-  const {
-    formState: { isValid },
-  } = useFormContext();
+  // const {
+  //   formState: { isValid },
+  // } = useFormContext();
+  const isValid = true;
   const { Modal, toggleModal } = useModal();
 
   const handleNextStep = () => {
