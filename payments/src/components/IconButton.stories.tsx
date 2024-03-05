@@ -11,6 +11,6 @@ type Story = StoryObj<typeof IconButtonComponent>
 
 export const IconButton: Story = {
   args: {
-    name: 'back',
+    file: '/icons/back.svg',
   },
 }

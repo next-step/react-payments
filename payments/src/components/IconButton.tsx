@@ -8,24 +8,27 @@ const StyledIconButtonWrapper = styled.button`
   cursor: pointer;
 `
 
-const StyledIconButton = styled.span<{ $name: string; $color?: string }>`
-  background-repeat: no-repeat;
-  background-position: center left;
-  background-size: contain;
+const StyledIconButton = styled.span<{ $file: string; $color?: string }>`
+  display: block; 
   background-color: ${(props) => (props.$color ? props.$color : 'black')};
-  background-image: ${(props) => props.$name};
+  mask-image: ${(props) => `url(${props.$file})`};
+  mask-repeat: no-repeat;
+  mask-position: center left;
+  mask-size: contain;
+  width: 12px;
+  height: 12px;
 `
 
 const IconButton = ({
   onClick,
-  name
+  file
 }: {
   onClick: () => void
-  name:string
+  file:string
 }) => {
   return (
     <StyledIconButtonWrapper type="button" onClick={onClick}>
-      <StyledIconButton $name={`/icons/${name}.svg`}/>
+      <StyledIconButton $file={file}/>
     </StyledIconButtonWrapper>
   )
 }

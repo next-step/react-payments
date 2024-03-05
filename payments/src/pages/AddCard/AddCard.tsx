@@ -20,7 +20,7 @@ const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
       <div className="root">
         <div className="app">
           <Title>
-            <IconButton onClick={handleOnClick} name="back">
+            <IconButton onClick={handleOnClick} file={'/icons/back.svg'}>
             </IconButton>
             카드 추가
           </Title>
