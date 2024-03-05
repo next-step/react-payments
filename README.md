@@ -1,30 +1,33 @@
-# React + TypeScript + Vite
+### 필수 요구사항
+- [x] 원시적인 형태의 Primitive UI 형태의 컴포넌트 작성
+- [x] Funnel 기반의 애플리케이션 설계
+- [x] Storybook 상호 작용 테스트
+- [x] Controlled & Uncontrolled Components를 명확하게 구분하거나 선택하여 구현
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### 카드 추가
+- [x] <(뒤로가기) 버튼 클릭 시, 카드 목록 페이지로 이동한다.
 
-Currently, two official plugins are available:
+- [x] 카드 번호를 입력 받을 수 있다.
+  - [x]카드 번호는 숫자만 입력가능하다.
+  - [x]카드 번호 4자리마다 -가 삽입된다.
+  - [x] 카드 번호는 실시간으로 카드 UI에 반영된다.
+  - [x] 카드 번호는 앞 8자리만 숫자로 보여지고, 나머지 숫자는 *로 보여진다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [x] 만료일을 입력 받을 수 있다.
+  - [x] MM / YY 로 placeholder를 적용한다.
+  - [x] 월, 년 사이에 자동으로 /가 삽입된다.
+  - [x] 만료일은 실시간으로 카드 UI에 반영된다.
+  - [x] 월은 1이상 12이하 숫자여야 한다.
 
-## Expanding the ESLint configuration
+- [x] 보안코드를 입력 받을 수 있다.
+  - [x] 보안코드는 *으로 보여진다.
+  - [x] 보안코드는 숫자만 입력가능하다.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [x]카드 비밀번호의 앞 2자리를 입력 받을 수 있다.
+  - [x] 카드 비밀번호는 각 폼마다 한자리 숫자만 입력가능하다.
+  - [x] 카드 번호 입력 시, *으로 보여진다.
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- [x] 카드 소유자 이름을 입력 받을 수 있다.
+  - [x] 이름은 30자리까지 입력할 수 있다.
+  - [x] 이름 입력 폼 위에, 현재 입력 자릿수와 최대 입력 자릿수를 실시간으로 보여준다.
+  - [x] 카드 추가 완료시 카드 등록 완료 페이지로 이동한다.
