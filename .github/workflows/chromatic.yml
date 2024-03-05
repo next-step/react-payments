@@ -3,8 +3,9 @@ name: 'Chromatic Deployment'
 
 # Event for the workflow
 on:
-  push:
-    branches: ['main']
+  pull_request:
+    types:
+      - opened
 # List of jobs
 jobs:
   deploy:
@@ -26,10 +27,9 @@ jobs:
           #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/ko/deploy/ to obtain it
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Commit Comment
-        uses: peter-evans/commit-comment@v3.0.0
+      - name: comment PR
+        uses: thollander/actions-comment-pull-request@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          body: |
-            # 🚀 StoryBook Deployment Successful
-
-            - ${{ steps.chromatic.outputs.storybookUrl }}
+          message: "🚀 Storybook Deploy Url: ${{ steps.chromatic.outputs.storybookUrl }}"
