@@ -12,8 +12,8 @@ export const addDash = (value: string, length: number) => {
   return returnValue;
 };
 
-export const isInRange1To12 = (value: string) => {
-  const isInRange = /^(1[0-2]|[1-9])$/.test(value);
+export const isInRange1To12 = (value: number) => {
+  const isInRange = value >= 1 && value <= 12;
   return isInRange;
 };
 
@@ -25,7 +25,7 @@ export const formatCardExpireDay = (value: string) => {
   });
 
   if (returnValue.includes("/")) {
-    if (!isInRange1To12(returnValue.split("/")[0])) {
+    if (!isInRange1To12(+returnValue.split("/")[0])) {
       returnValue = "";
     }
   }
@@ -36,7 +36,6 @@ export const formatCardExpireDay = (value: string) => {
 export const convertToAsterisks = (value: string) => {
   return "*".repeat(value.length);
 };
-
 export const ruleFn = (rule: keyof typeof RULE, value: string) => {
   switch (rule) {
     case "ONLY_HYPHEN_AND_NUMBER":
@@ -47,7 +46,8 @@ export const ruleFn = (rule: keyof typeof RULE, value: string) => {
 export const addDashAndMask = (value: string, convertingIndex?: number) => {
   if (!value || value.length === 0) return;
   // 카드 번호의 각 자리를 배열로 변환합니다.
-  const splitNumbers = value.split("");
+  const removedDashValue = value.replaceAll("-", "");
+  const splitNumbers = removedDashValue.split("");
 
   // 첫 8자리는 숫자를 그대로 두고, 나머지 8자리는 '*'로 대체합니다.
   const maskedNumbers = splitNumbers.map((num, index) =>

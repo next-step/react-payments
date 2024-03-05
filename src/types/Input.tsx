@@ -9,6 +9,5 @@ export type TInputProps = Omit<
 > & {
   customType?: "textOnly" | "numberOnly";
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => string | void;
-  textAlign?: CSSProperties["textAlign"];
   inputStyle?: CSSProperties;
 };

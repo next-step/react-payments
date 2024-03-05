@@ -31,11 +31,8 @@ export const RegisterCard = () => {
     switch (type) {
       case "cardNumber": {
         formValue.current = { ...formValue.current, cardNumber: value };
-        // const cardNumberWithDash = addDash(
-        //   ruleFn("ONLY_HYPHEN_AND_NUMBER", value),
-        //   4
-        // );
-        const cardNumberWithDash = addDashAndMask(value.replaceAll("-", ""));
+        const _value = value.replace(REGEX.ONLY_ASTERISKS_AND_NUMBER, "");
+        const cardNumberWithDash = addDashAndMask(_value);
         setCardInfo((prev) => {
           return { ...prev, cardNumber: cardNumberWithDash };
         });
@@ -97,6 +94,7 @@ export const RegisterCard = () => {
             <FormInput
               label="만료일"
               maxLength={5}
+              customType="numberOnly"
               inputStyle={{ color: "#0f9c82" }}
               onChange={(value: string) =>
                 handleChange("expireDay", formatCardExpireDay(value))

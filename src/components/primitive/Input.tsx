@@ -7,7 +7,6 @@ export const Input = ({
   type = "text",
   onChange,
   customType,
-  textAlign,
   style,
   inputStyle,
   ...props
@@ -34,15 +33,15 @@ export const Input = ({
     if (customType) {
       e.target.value = convertValueByCustomType(value);
     }
-    onChange?.(e);
-    // const returnedValue = value.length === 0 ? "" : onChange?.(e);
-
-    // setValue(onChange ? returnedValue ?? "" : value);
-    setValue(onChange?.(e) ?? value);
+    if (onChange) {
+      setValue(onChange?.(e) ?? "");
+    } else {
+      setValue(value);
+    }
   };
 
   return (
-    <InputBox textAlign={textAlign} style={style}>
+    <InputBox style={style}>
       <input
         type={type}
         {...props}
@@ -54,9 +53,7 @@ export const Input = ({
   );
 };
 
-const InputBox = styled.div<{
-  textAlign?: TInputProps["textAlign"];
-}>`
+const InputBox = styled.div`
   display: flex;
   align-items: center;
   color: #d3d3d3;
