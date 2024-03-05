@@ -6,7 +6,7 @@ import "./main.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/react-payments">
       <App />
     </BrowserRouter>
   </React.StrictMode>
