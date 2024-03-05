@@ -1,19 +1,17 @@
-import React from 'react';
-
-import TextInput from 'src/components/TextInput.tsx';
+import { RefObject, ChangeEvent } from 'react';
 
 interface CardNumberInputProps {
 	firstSegment: string;
-	handleFirstSegmentChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	handleFirstSegmentChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	secondSegment: string;
-	handleSecondSegmentChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	handleSecondSegmentChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	thirdSegment: string;
-	handleThirdSegmentChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	handleThirdSegmentChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	fourthSegment: string;
-	handleFourthSegmentChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	secondSegmentInputRef: React.RefObject<HTMLInputElement>;
-	thirdSegmentInputRef: React.RefObject<HTMLInputElement>;
-	fourthSegmentInputRef: React.RefObject<HTMLInputElement>;
+	handleFourthSegmentChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	secondSegmentInputRef: RefObject<HTMLInputElement>;
+	thirdSegmentInputRef: RefObject<HTMLInputElement>;
+	fourthSegmentInputRef: RefObject<HTMLInputElement>;
 }
 
 export default function CardNumberInput({
@@ -33,23 +31,23 @@ export default function CardNumberInput({
 		<div className="input-container">
 			<span className="input-title">카드 번호</span>
 			<div className="input-box">
-				<TextInput
-					testId="first-segment"
+				<input
+					data-testid="first-segment"
 					className="input-basic w-15"
 					value={firstSegment}
 					onChange={handleFirstSegmentChange}
 				/>
 				<div>-</div>
-				<TextInput
-					testId="second-segment"
+				<input
+					data-testid="second-segment"
 					className="input-basic w-15"
 					value={secondSegment}
 					onChange={handleSecondSegmentChange}
 					ref={secondSegmentInputRef}
 				/>
 				<div>-</div>
-				<TextInput
-					testId="third-segment"
+				<input
+					data-testid="third-segment"
 					type="password"
 					className="input-basic w-15"
 					value={thirdSegment}
@@ -57,8 +55,8 @@ export default function CardNumberInput({
 					ref={thirdSegmentInputRef}
 				/>
 				<div>-</div>
-				<TextInput
-					testId="fourth-segment"
+				<input
+					data-testid="fourth-segment"
 					type="password"
 					className="input-basic w-15"
 					value={fourthSegment}

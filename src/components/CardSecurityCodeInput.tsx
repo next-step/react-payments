@@ -1,12 +1,18 @@
-import TextInput, { TextInputProps } from 'src/components/TextInput.tsx';
+import { ChangeEvent } from 'react';
 
-export default function CardSecurityCodeInput(props: Omit<TextInputProps, 'type'>) {
+interface CardSecurityCodeInputProps {
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	id?: string;
+	value: string;
+}
+
+export default function CardSecurityCodeInput(props: CardSecurityCodeInputProps) {
 	return (
 		<div className="input-container">
 			<label className="input-title" htmlFor={props.id}>
 				보안코드(CVC/CVV)
 			</label>
-			<TextInput type="password" className="input-basic w-50" {...props} />
+			<input type="password" className="input-basic w-50" {...props} />
 		</div>
 	);
 }

@@ -1,12 +1,18 @@
-import TextInput, { TextInputProps } from 'src/components/TextInput.tsx';
+import { ChangeEvent } from 'react';
 
-export default function CardExpirationDateInput(props: Omit<TextInputProps, 'placeholder' | 'type'>) {
+interface CardExpirationDateInputProps {
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	value: string;
+	id?: string;
+}
+
+export default function CardExpirationDateInput(props: CardExpirationDateInputProps) {
 	return (
 		<div className="input-container">
 			<label className="input-title" htmlFor={props.id}>
 				만료일
 			</label>
-			<TextInput placeholder="MM / YY" {...props} />
+			<input placeholder="MM / YY" className="input-basic" {...props} />
 		</div>
 	);
 }
