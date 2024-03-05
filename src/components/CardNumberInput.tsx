@@ -1,17 +1,6 @@
-import { RefObject, ChangeEvent } from 'react';
+import useCardNumberInput from 'src/hooks/useCardNumberInput.ts';
 
-interface CardNumberInputProps {
-	firstSegment: string;
-	handleFirstSegmentChange: (e: ChangeEvent<HTMLInputElement>) => void;
-	secondSegment: string;
-	handleSecondSegmentChange: (e: ChangeEvent<HTMLInputElement>) => void;
-	thirdSegment: string;
-	handleThirdSegmentChange: (e: ChangeEvent<HTMLInputElement>) => void;
-	fourthSegment: string;
-	handleFourthSegmentChange: (e: ChangeEvent<HTMLInputElement>) => void;
-	secondSegmentInputRef: RefObject<HTMLInputElement>;
-	thirdSegmentInputRef: RefObject<HTMLInputElement>;
-	fourthSegmentInputRef: RefObject<HTMLInputElement>;
+interface CardNumberInputProps extends ReturnType<typeof useCardNumberInput> {
 	id?: string;
 }
 

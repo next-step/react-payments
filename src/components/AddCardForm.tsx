@@ -70,19 +70,19 @@ export default function AddCardForm({ onSubmit, onClickBack }: AddCardFormProps)
 				/>
 				<CardNumberInput {...cardNumberInput} id={cardNumberInputId} />
 				<CardOwnerNameInput
-					value={cardOwnerNameInput.cardOwnerName}
-					onChange={cardOwnerNameInput.handleCardOwnerNameChange}
+					cardOwnerName={cardOwnerNameInput.cardOwnerName}
+					handleCardOwnerNameChange={cardOwnerNameInput.handleCardOwnerNameChange}
 					maxLength={cardOwnerNameInput.maxLength}
 					id={cardOwnerNameInputId}
 				/>
 				<CardExpirationDateInput
-					value={cardExpirationDateInput.expirationDate}
-					onChange={cardExpirationDateInput.handleExpirationDateChange}
+					expirationDate={cardExpirationDateInput.expirationDate}
+					handleExpirationDateChange={cardExpirationDateInput.handleExpirationDateChange}
 					id={cardExpirationDateInputId}
 				/>
 				<CardSecurityCodeInput
-					value={cardSecurityCodeInput.cardSecurityCode}
-					onChange={cardSecurityCodeInput.handleCardSecurityCodeChange}
+					cardSecurityCode={cardSecurityCodeInput.cardSecurityCode}
+					handleCardSecurityCodeChange={cardSecurityCodeInput.handleCardSecurityCodeChange}
 					id={cardSecurityCodeInputId}
 				/>
 				<CardPasswordInput {...cardPasswordInput} id={cardPasswordInputId} />

@@ -8,19 +8,14 @@ export function TestContainer() {
 	const { handleExpirationDateChange, expirationDate } = useCardExpirationDateInput();
 
 	return (
-		<CardExpirationDateInput
-			value={expirationDate}
-			onChange={handleExpirationDateChange}
-			id="expiration-date"
-			aria-label="expiration-date"
-		/>
+		<CardExpirationDateInput expirationDate={expirationDate} handleExpirationDateChange={handleExpirationDateChange} />
 	);
 }
 
 const setup = () => {
 	const utils = render(<TestContainer />);
 
-	const expirationDateInput = screen.getByLabelText<HTMLInputElement>('expiration-date', { selector: 'input' });
+	const expirationDateInput = screen.getByTestId<HTMLInputElement>('card-expiration-date');
 
 	return {
 		expirationDateInput,

@@ -9,11 +9,9 @@ export function TestContainer() {
 
 	return (
 		<CardOwnerNameInput
-			value={cardOwnerName}
-			onChange={handleCardOwnerNameChange}
+			cardOwnerName={cardOwnerName}
+			handleCardOwnerNameChange={handleCardOwnerNameChange}
 			maxLength={maxLength}
-			id="card-owner-name"
-			aria-label="card-owner-name"
 		/>
 	);
 }
@@ -21,7 +19,7 @@ export function TestContainer() {
 const setup = () => {
 	const utils = render(<TestContainer />);
 
-	const cardOwnerNameInput = screen.getByLabelText<HTMLInputElement>('card-owner-name', { selector: 'input' });
+	const cardOwnerNameInput = screen.getByTestId<HTMLInputElement>('card-owner-name');
 
 	return {
 		cardOwnerNameInput,

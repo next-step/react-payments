@@ -19,10 +19,9 @@ export const CardOwnerNameInput: Story = {
 		return (
 			<div>
 				<CardOwnerNameInputComponent
-					value={cardOwnerName}
-					onChange={handleCardOwnerNameChange}
+					cardOwnerName={cardOwnerName}
+					handleCardOwnerNameChange={handleCardOwnerNameChange}
 					maxLength={maxLength}
-					id="card-owner-name"
 				/>
 			</div>
 		);

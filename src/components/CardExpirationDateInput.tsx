@@ -1,18 +1,27 @@
-import { ChangeEvent } from 'react';
+import useCardExpirationDateInput from 'src/hooks/useCardExpirationDateInput';
 
-interface CardExpirationDateInputProps {
-	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-	value: string;
+interface CardExpirationDateInputProps extends ReturnType<typeof useCardExpirationDateInput> {
 	id?: string;
 }
 
-export default function CardExpirationDateInput(props: CardExpirationDateInputProps) {
+export default function CardExpirationDateInput({
+	id,
+	expirationDate,
+	handleExpirationDateChange,
+}: CardExpirationDateInputProps) {
 	return (
 		<div className="input-container">
-			<label className="input-title" htmlFor={props.id}>
+			<label className="input-title" htmlFor={id}>
 				만료일
 			</label>
-			<input placeholder="MM / YY" className="input-basic" {...props} />
+			<input
+				placeholder="MM / YY"
+				className="input-basic"
+				id={id}
+				value={expirationDate}
+				onChange={handleExpirationDateChange}
+				data-testid="card-expiration-date"
+			/>
 		</div>
 	);
 }

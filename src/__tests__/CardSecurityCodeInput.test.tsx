@@ -9,10 +9,8 @@ export function TestContainer() {
 
 	return (
 		<CardSecurityCodeInput
-			value={cardSecurityCode}
-			onChange={handleCardSecurityCodeChange}
-			id="card-security-code"
-			aria-label="card-security-code"
+			cardSecurityCode={cardSecurityCode}
+			handleCardSecurityCodeChange={handleCardSecurityCodeChange}
 		/>
 	);
 }
@@ -20,7 +18,7 @@ export function TestContainer() {
 const setup = () => {
 	const utils = render(<TestContainer />);
 
-	const cardSecurityCodeInput = screen.getByLabelText<HTMLInputElement>('card-security-code', { selector: 'input' });
+	const cardSecurityCodeInput = screen.getByTestId<HTMLInputElement>('card-security-code');
 
 	return {
 		cardSecurityCodeInput,

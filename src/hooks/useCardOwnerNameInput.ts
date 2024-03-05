@@ -10,7 +10,7 @@ export default function useCardOwnerNameInput(options: UseCardOwnerNameInputOpti
 	const [cardOwnerName, setCardOwnerName] = useState('');
 
 	const handleCardOwnerNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setCardOwnerName(event.target.value.slice(0, maxLength));
+		setCardOwnerName(event.target.value);
 	};
 
 	return { cardOwnerName, handleCardOwnerNameChange, maxLength };

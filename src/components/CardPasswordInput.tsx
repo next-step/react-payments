@@ -1,11 +1,6 @@
-import React from 'react';
+import useCardPasswordInput from 'src/hooks/useCardPasswordInput.ts';
 
-interface CardPasswordInputProps {
-	firstPassword: string;
-	handleFirstPasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	secondPassword: string;
-	handleSecondPasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	secondPasswordInputRef: React.RefObject<HTMLInputElement>;
+interface CardPasswordInputProps extends ReturnType<typeof useCardPasswordInput> {
 	id?: string;
 }
 
@@ -16,6 +11,7 @@ export default function CardPasswordInput({
 	handleSecondPasswordChange,
 	secondPasswordInputRef,
 	id,
+	segmentMaxLength,
 }: CardPasswordInputProps) {
 	return (
 		<div className="input-container">
@@ -30,6 +26,7 @@ export default function CardPasswordInput({
 					value={firstPassword}
 					onChange={handleFirstPasswordChange}
 					id={id}
+					maxLength={segmentMaxLength}
 				/>
 				<input
 					data-testid="second-password"
@@ -38,6 +35,7 @@ export default function CardPasswordInput({
 					value={secondPassword}
 					onChange={handleSecondPasswordChange}
 					ref={secondPasswordInputRef}
+					maxLength={segmentMaxLength}
 				/>
 				<input readOnly value=" " type="password" className="input-basic w-15 password-readonly" />
 				<input readOnly value=" " type="password" className="input-basic w-15 password-readonly" />

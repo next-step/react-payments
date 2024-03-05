@@ -1,18 +1,27 @@
-import { ChangeEvent } from 'react';
+import useCardSecurityCodeInput from 'src/hooks/useCardSecurityCodeInput.ts';
 
-interface CardSecurityCodeInputProps {
-	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+interface CardSecurityCodeInputProps extends ReturnType<typeof useCardSecurityCodeInput> {
 	id?: string;
-	value: string;
 }
 
-export default function CardSecurityCodeInput(props: CardSecurityCodeInputProps) {
+export default function CardSecurityCodeInput({
+	id,
+	cardSecurityCode,
+	handleCardSecurityCodeChange,
+}: CardSecurityCodeInputProps) {
 	return (
 		<div className="input-container">
-			<label className="input-title" htmlFor={props.id}>
+			<label className="input-title" htmlFor={id}>
 				보안코드(CVC/CVV)
 			</label>
-			<input type="password" className="input-basic w-50" {...props} />
+			<input
+				type="password"
+				className="input-basic w-50"
+				value={cardSecurityCode}
+				onChange={handleCardSecurityCodeChange}
+				id={id}
+				data-testid="card-security-code"
+			/>
 		</div>
 	);
 }

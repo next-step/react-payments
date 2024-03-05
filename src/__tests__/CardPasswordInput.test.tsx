@@ -11,6 +11,7 @@ export function TestContainer() {
 		secondPassword,
 		handleSecondPasswordChange,
 		secondPasswordInputRef,
+		segmentMaxLength,
 	} = useCardPasswordInput();
 
 	return (
@@ -20,6 +21,7 @@ export function TestContainer() {
 			secondPassword={secondPassword}
 			handleSecondPasswordChange={handleSecondPasswordChange}
 			secondPasswordInputRef={secondPasswordInputRef}
+			segmentMaxLength={segmentMaxLength}
 		/>
 	);
 }
