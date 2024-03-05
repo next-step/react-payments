@@ -1,11 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-
+import React from 'react'
+import styled from 'styled-components'
 
 const StyledInputLabel = styled.label`
   display: flex;
   align-items: center;
-	justify-content: space-between;
+  justify-content: space-between;
   font-size: 12px;
   font-weight: 500;
   line-height: 14px;
@@ -14,24 +13,24 @@ const StyledInputLabel = styled.label`
 `
 
 const StyledInput = styled.input<{ $size?: 'block' | 'sm' | 'md' }>`
-	color:#94dacd;	
-	font-weight:700;
-	background-color: #ecebf1;
-	height: 45px;
-	width: ${(props) =>
+  color: #94dacd;
+  font-weight: 700;
+  background-color: #ecebf1;
+  height: 45px;
+  width: ${(props) =>
     props.$size === 'block' ? '100%' : props.$size === 'sm' ? '24px' : '84px'};
-	text-align: ${(props) => (props.$size === 'block' ? 'left' : 'center')};
-	outline: 2px solid transparent;
-	outline-offset: 2px;
-	border-color: #9ca3af;
-	border: none;
-	border-radius: 0.25rem;
-	padding-left:12px;
+  text-align: ${(props) => (props.$size === 'block' ? 'left' : 'center')};
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border-color: #9ca3af;
+  border: none;
+  border-radius: 0.25rem;
+  padding-left: 12px;
 `
 
-const StyledLength=styled.span`
-		font-size: 12px;
-		font-weight: 500;
+const StyledLength = styled.span`
+  font-size: 12px;
+  font-weight: 500;
 `
 const Input = ({
   type,
@@ -50,7 +49,7 @@ const Input = ({
   maxLength?: number
   value?: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  isShowLength?:boolean
+  isShowLength?: boolean
 }) => {
   return (
     <div className="input-container">
@@ -64,7 +63,7 @@ const Input = ({
           )}
         </StyledInputLabel>
       )}
-      {!label&&isShowLength && (
+      {!label && isShowLength && (
         <StyledLength>
           {value?.length}/{maxLength}
         </StyledLength>
@@ -83,5 +82,4 @@ const Input = ({
   )
 }
 
-
-export default Input;
+export default Input

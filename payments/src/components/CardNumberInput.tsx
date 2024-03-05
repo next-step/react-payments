@@ -1,6 +1,6 @@
-import React from 'react';
-import { StyledInput } from './DateInput.tsx';
-import styled from 'styled-components';
+import React from 'react'
+import { StyledInput } from './DateInput.tsx'
+import styled from 'styled-components'
 
 const Slash = styled.span`
   color: #94dacd;
@@ -57,4 +57,4 @@ const CardNumberInput = ({
     </div>
   )
 }
-export default CardNumberInput;
+export default CardNumberInput

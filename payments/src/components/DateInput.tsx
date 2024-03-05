@@ -1,6 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
-
+import React from 'react'
+import styled from 'styled-components'
 
 export const StyledInput = styled.input`
   color: #94dacd;
@@ -46,4 +45,4 @@ const DateInput = ({
     </div>
   )
 }
-export default DateInput;
+export default DateInput

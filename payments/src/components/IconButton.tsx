@@ -9,7 +9,7 @@ const StyledIconButtonWrapper = styled.button`
 `
 
 const StyledIconButton = styled.span<{ $file: string; $color?: string }>`
-  display: block; 
+  display: block;
   background-color: ${(props) => (props.$color ? props.$color : 'black')};
   mask-image: ${(props) => `url(${props.$file})`};
   mask-repeat: no-repeat;
@@ -21,14 +21,14 @@ const StyledIconButton = styled.span<{ $file: string; $color?: string }>`
 
 const IconButton = ({
   onClick,
-  file
+  file,
 }: {
   onClick: () => void
-  file:string
+  file: string
 }) => {
   return (
     <StyledIconButtonWrapper type="button" onClick={onClick}>
-      <StyledIconButton $file={file}/>
+      <StyledIconButton $file={file} />
     </StyledIconButtonWrapper>
   )
 }

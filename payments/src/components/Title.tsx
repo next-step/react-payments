@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import styled from 'styled-components';
+import React, { ReactNode } from 'react'
+import styled from 'styled-components'
 
 const StyledTitle = styled.h2`
   font-weight: 500;
@@ -9,11 +9,19 @@ const StyledTitle = styled.h2`
   align-items: center;
   color: #383838;
   margin-bottom: 10px;
-`;
+`
 
-const Title = ({ children, className }: { children: ReactNode; className?: string }) => {
+const Title = ({
+  children,
+  className,
+}: {
+  children: ReactNode
+  className?: string
+}) => {
   return (
-    <StyledTitle className={className?`${className}`:''}>{children}</StyledTitle>
+    <StyledTitle className={className ? `${className}` : ''}>
+      {children}
+    </StyledTitle>
   )
-};
-export default Title;
+}
+export default Title
