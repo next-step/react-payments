@@ -5,10 +5,14 @@ import useCardExpirationDateInput from 'src/hooks/useCardExpirationDateInput.ts'
 import CardExpirationDateInput from 'src/components/CardExpirationDateInput.tsx';
 
 export function TestContainer() {
-	const { handleExpirationDateChange, expirationDate } = useCardExpirationDateInput();
+	const { handleExpirationDateChange, expirationDate, id } = useCardExpirationDateInput();
 
 	return (
-		<CardExpirationDateInput expirationDate={expirationDate} handleExpirationDateChange={handleExpirationDateChange} />
+		<CardExpirationDateInput
+			expirationDate={expirationDate}
+			handleExpirationDateChange={handleExpirationDateChange}
+			id={id}
+		/>
 	);
 }
 

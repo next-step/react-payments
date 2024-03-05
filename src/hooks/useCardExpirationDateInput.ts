@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useId } from 'react';
 
 import REGEX from 'src/constants/regex.ts';
 
@@ -10,6 +10,8 @@ export default function useCardExpirationDateInput(options: UseExpirationDateInp
 	const { separator } = options;
 
 	const [expirationDate, setExpirationDate] = useState('');
+
+	const cardExpirationDateInputId = useId();
 
 	const formatExpirationDate = (value: string) => {
 		const numericValue = value.replace(REGEX.EXCLUDE_NUMBER, '');
@@ -27,5 +29,5 @@ export default function useCardExpirationDateInput(options: UseExpirationDateInp
 		setExpirationDate(formatExpirationDate(event.target.value));
 	};
 
-	return { expirationDate, handleExpirationDateChange };
+	return { expirationDate, handleExpirationDateChange, id: cardExpirationDateInputId };
 }

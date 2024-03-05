@@ -5,13 +5,14 @@ import CardOwnerNameInput from 'src/components/CardOwnerNameInput.tsx';
 import useCardOwnerNameInput from 'src/hooks/useCardOwnerNameInput.ts';
 
 export function TestContainer() {
-	const { handleCardOwnerNameChange, cardOwnerName, maxLength } = useCardOwnerNameInput();
+	const { handleCardOwnerNameChange, cardOwnerName, maxLength, id } = useCardOwnerNameInput();
 
 	return (
 		<CardOwnerNameInput
 			cardOwnerName={cardOwnerName}
 			handleCardOwnerNameChange={handleCardOwnerNameChange}
 			maxLength={maxLength}
+			id={id}
 		/>
 	);
 }

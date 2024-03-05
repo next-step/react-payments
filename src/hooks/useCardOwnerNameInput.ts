@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, useId } from 'react';
 
 interface UseCardOwnerNameInputOptions {
 	maxLength: number;
@@ -9,9 +9,11 @@ export default function useCardOwnerNameInput(options: UseCardOwnerNameInputOpti
 
 	const [cardOwnerName, setCardOwnerName] = useState('');
 
+	const cardOwnerNameInputId = useId();
+
 	const handleCardOwnerNameChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setCardOwnerName(event.target.value);
 	};
 
-	return { cardOwnerName, handleCardOwnerNameChange, maxLength };
+	return { cardOwnerName, handleCardOwnerNameChange, maxLength, id: cardOwnerNameInputId };
 }

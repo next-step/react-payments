@@ -1,4 +1,4 @@
-import { useState, useRef, ChangeEvent } from 'react';
+import { useState, useRef, ChangeEvent, useId } from 'react';
 
 import REGEX from 'src/constants/regex.ts';
 
@@ -17,6 +17,8 @@ export default function useCardNumberInput(options: UseCardNumberInputOptions = 
 	const secondSegmentInputRef = useRef<HTMLInputElement>(null);
 	const thirdSegmentInputRef = useRef<HTMLInputElement>(null);
 	const fourthSegmentInputRef = useRef<HTMLInputElement>(null);
+
+	const cardNumberInputId = useId();
 
 	const handleFirstSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const value = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
@@ -63,5 +65,6 @@ export default function useCardNumberInput(options: UseCardNumberInputOptions = 
 		thirdSegmentInputRef,
 		fourthSegmentInputRef,
 		segmentLength,
+		id: cardNumberInputId,
 	};
 }

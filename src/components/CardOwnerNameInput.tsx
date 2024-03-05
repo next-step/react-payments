@@ -1,8 +1,6 @@
 import useCardOwnerNameInput from 'src/hooks/useCardOwnerNameInput.ts';
 
-interface CardSecurityCodeInputProps extends ReturnType<typeof useCardOwnerNameInput> {
-	id?: string;
-}
+interface CardSecurityCodeInputProps extends ReturnType<typeof useCardOwnerNameInput> {}
 
 export default function CardOwnerNameInput({
 	cardOwnerName,

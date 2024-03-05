@@ -1,8 +1,6 @@
 import useCardSecurityCodeInput from 'src/hooks/useCardSecurityCodeInput.ts';
 
-interface CardSecurityCodeInputProps extends ReturnType<typeof useCardSecurityCodeInput> {
-	id?: string;
-}
+interface CardSecurityCodeInputProps extends ReturnType<typeof useCardSecurityCodeInput> {}
 
 export default function CardSecurityCodeInput({
 	id,

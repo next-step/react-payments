@@ -1,8 +1,6 @@
 import useCardPasswordInput from 'src/hooks/useCardPasswordInput.ts';
 
-interface CardPasswordInputProps extends ReturnType<typeof useCardPasswordInput> {
-	id?: string;
-}
+interface CardPasswordInputProps extends ReturnType<typeof useCardPasswordInput> {}
 
 export default function CardPasswordInput({
 	firstPassword,

@@ -1,11 +1,9 @@
 import useCardExpirationDateInput from 'src/hooks/useCardExpirationDateInput';
 
-interface CardExpirationDateInputProps extends ReturnType<typeof useCardExpirationDateInput> {
-	id?: string;
-}
+interface CardExpirationDateInputProps extends ReturnType<typeof useCardExpirationDateInput> {}
 
 export default function CardExpirationDateInput({
-	id,
+	id = 'card-expiration-date',
 	expirationDate,
 	handleExpirationDateChange,
 }: CardExpirationDateInputProps) {

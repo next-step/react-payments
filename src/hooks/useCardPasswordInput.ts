@@ -1,4 +1,4 @@
-import { useState, useRef, ChangeEvent } from 'react';
+import { useState, useRef, ChangeEvent, useId } from 'react';
 
 import REGEX from 'src/constants/regex.ts';
 
@@ -13,6 +13,8 @@ export default function useCardPasswordInput(options: UseCardPasswordInputOption
 	const [secondPassword, setSecondPassword] = useState('');
 
 	const secondPasswordInputRef = useRef<HTMLInputElement>(null);
+
+	const cardPasswordInputId = useId();
 
 	const handleFirstPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
@@ -35,5 +37,6 @@ export default function useCardPasswordInput(options: UseCardPasswordInputOption
 		handleSecondPasswordChange,
 		secondPasswordInputRef,
 		segmentMaxLength,
+		id: cardPasswordInputId,
 	};
 }

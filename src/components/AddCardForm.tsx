@@ -1,4 +1,4 @@
-import { FormEvent, useId } from 'react';
+import { FormEvent } from 'react';
 
 import CardImage from 'src/components/CardImage.tsx';
 import CardNumberInput from 'src/components/CardNumberInput.tsx';
@@ -14,41 +14,59 @@ import useCardSecurityCodeInput from 'src/hooks/useCardSecurityCodeInput.ts';
 import useCardPasswordInput from 'src/hooks/useCardPasswordInput.ts';
 
 interface AddCardFormProps {
-	onSubmit?: (
-		cardNumber: string,
-		cardOwnerName: string,
-		expirationDate: string,
-		securityCode: string,
-		password: string,
-	) => void;
-	onClickBack?: () => void;
+	onSubmit: (payload: {
+		cardNumber: string;
+		cardOwnerName: string;
+		expirationDate: string;
+		cardSecurityCode: string;
+		password: string;
+	}) => void;
+	onClickBack: () => void;
 }
 
 export default function AddCardForm({ onSubmit, onClickBack }: AddCardFormProps) {
-	const cardNumberInput = useCardNumberInput();
-	const cardOwnerNameInput = useCardOwnerNameInput();
-	const cardExpirationDateInput = useCardExpirationDateInput();
-	const cardSecurityCodeInput = useCardSecurityCodeInput();
-	const cardPasswordInput = useCardPasswordInput();
+	const {
+		firstSegment,
+		handleFirstSegmentChange,
+		handleFourthSegmentChange,
+		handleSecondSegmentChange,
+		handleThirdSegmentChange,
+		fourthSegmentInputRef,
+		secondSegmentInputRef,
+		secondSegment,
+		thirdSegmentInputRef,
+		thirdSegment,
+		fourthSegment,
+		segmentLength,
+		id: cardNumberInputId,
+	} = useCardNumberInput();
 
-	const cardNumberInputId = useId();
-	const cardOwnerNameInputId = useId();
-	const cardExpirationDateInputId = useId();
-	const cardSecurityCodeInputId = useId();
-	const cardPasswordInputId = useId();
+	const { cardOwnerName, handleCardOwnerNameChange, maxLength, id: cardOwnerNameInputId } = useCardOwnerNameInput();
+
+	const { handleExpirationDateChange, expirationDate, id: cardExpirationDateInputId } = useCardExpirationDateInput();
+
+	const { cardSecurityCode, handleCardSecurityCodeChange, id: cardSecurityCodeInputId } = useCardSecurityCodeInput();
+
+	const {
+		firstPassword,
+		handleFirstPasswordChange,
+		secondPassword,
+		handleSecondPasswordChange,
+		secondPasswordInputRef,
+		segmentMaxLength,
+		id: cardPasswordInputId,
+	} = useCardPasswordInput();
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		if (onSubmit) {
-			onSubmit(
-				`${cardNumberInput.firstSegment}-${cardNumberInput.secondSegment}-${cardNumberInput.thirdSegment}-${cardNumberInput.fourthSegment}`,
-				cardOwnerNameInput.cardOwnerName,
-				cardExpirationDateInput.expirationDate,
-				cardSecurityCodeInput.cardSecurityCode,
-				`${cardPasswordInput.firstPassword}${cardPasswordInput.secondPassword}`,
-			);
-		}
+		onSubmit({
+			cardNumber: `${firstSegment}-${secondSegment}-${thirdSegment}-${fourthSegment}`,
+			cardOwnerName,
+			expirationDate,
+			cardSecurityCode,
+			password: `${firstPassword}${secondPassword}`,
+		});
 	};
 
 	return (
@@ -61,31 +79,53 @@ export default function AddCardForm({ onSubmit, onClickBack }: AddCardFormProps)
 			</div>
 			<form onSubmit={handleSubmit}>
 				<CardImage
-					firstSegment={cardNumberInput.firstSegment}
-					secondSegment={cardNumberInput.secondSegment}
-					thirdSegment={cardNumberInput.thirdSegment}
-					fourthSegment={cardNumberInput.fourthSegment}
-					expirationDate={cardExpirationDateInput.expirationDate}
-					cardOwnerName={cardOwnerNameInput.cardOwnerName}
+					firstSegment={firstSegment}
+					secondSegment={secondSegment}
+					thirdSegment={thirdSegment}
+					fourthSegment={fourthSegment}
+					expirationDate={expirationDate}
+					cardOwnerName={cardOwnerName}
 				/>
-				<CardNumberInput {...cardNumberInput} id={cardNumberInputId} />
+				<CardNumberInput
+					id={cardNumberInputId}
+					firstSegment={firstSegment}
+					handleFirstSegmentChange={handleFirstSegmentChange}
+					handleFourthSegmentChange={handleFourthSegmentChange}
+					handleSecondSegmentChange={handleSecondSegmentChange}
+					handleThirdSegmentChange={handleThirdSegmentChange}
+					fourthSegmentInputRef={fourthSegmentInputRef}
+					secondSegmentInputRef={secondSegmentInputRef}
+					secondSegment={secondSegment}
+					thirdSegmentInputRef={thirdSegmentInputRef}
+					thirdSegment={thirdSegment}
+					fourthSegment={fourthSegment}
+					segmentLength={segmentLength}
+				/>
 				<CardOwnerNameInput
-					cardOwnerName={cardOwnerNameInput.cardOwnerName}
-					handleCardOwnerNameChange={cardOwnerNameInput.handleCardOwnerNameChange}
-					maxLength={cardOwnerNameInput.maxLength}
+					cardOwnerName={cardOwnerName}
+					handleCardOwnerNameChange={handleCardOwnerNameChange}
+					maxLength={maxLength}
 					id={cardOwnerNameInputId}
 				/>
 				<CardExpirationDateInput
-					expirationDate={cardExpirationDateInput.expirationDate}
-					handleExpirationDateChange={cardExpirationDateInput.handleExpirationDateChange}
+					expirationDate={expirationDate}
+					handleExpirationDateChange={handleExpirationDateChange}
 					id={cardExpirationDateInputId}
 				/>
 				<CardSecurityCodeInput
-					cardSecurityCode={cardSecurityCodeInput.cardSecurityCode}
-					handleCardSecurityCodeChange={cardSecurityCodeInput.handleCardSecurityCodeChange}
+					cardSecurityCode={cardSecurityCode}
+					handleCardSecurityCodeChange={handleCardSecurityCodeChange}
 					id={cardSecurityCodeInputId}
 				/>
-				<CardPasswordInput {...cardPasswordInput} id={cardPasswordInputId} />
+				<CardPasswordInput
+					id={cardPasswordInputId}
+					firstPassword={firstPassword}
+					handleFirstPasswordChange={handleFirstPasswordChange}
+					secondPassword={secondPassword}
+					handleSecondPasswordChange={handleSecondPasswordChange}
+					secondPasswordInputRef={secondPasswordInputRef}
+					segmentMaxLength={segmentMaxLength}
+				/>
 				<div className="button-box">
 					<button type="submit" className="button-text">
 						다음

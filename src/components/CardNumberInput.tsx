@@ -1,8 +1,6 @@
 import useCardNumberInput from 'src/hooks/useCardNumberInput.ts';
 
-interface CardNumberInputProps extends ReturnType<typeof useCardNumberInput> {
-	id?: string;
-}
+interface CardNumberInputProps extends ReturnType<typeof useCardNumberInput> {}
 
 export default function CardNumberInput({
 	firstSegment,
