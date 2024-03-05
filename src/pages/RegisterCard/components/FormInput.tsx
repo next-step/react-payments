@@ -25,7 +25,7 @@ export const FormInput = React.memo(
       return onChange?.(value);
     };
     return (
-      <FormInputContainer>
+      <>
         <Header>
           {label && <span className="input-title">{label}</span>}
           {lengthCheck && (
@@ -35,12 +35,10 @@ export const FormInput = React.memo(
           )}
         </Header>
         <Input maxLength={maxLength} {...props} onChange={handleChange} />
-      </FormInputContainer>
+      </>
     );
   }
 );
-
-const FormInputContainer = styled.div``;
 
 const Header = styled.div`
   display: flex;
