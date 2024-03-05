@@ -1,0 +1,27 @@
+.selectbox {
+  position: absolute;
+  bottom: 0;
+  width: calc(100% - 114px);
+  padding: 34px 57px;
+  background-color: white;
+  border-radius: 5px 5px 0 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  padding-top: 10px;
+}
+
+.selectbox__item {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.selectbox__item_title {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 500;
+}

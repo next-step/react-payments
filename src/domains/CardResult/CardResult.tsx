@@ -4,6 +4,7 @@ import PlasticCard from "../component/PlaticCard/PlaticCard";
 import styles from "./CardResult.module.css";
 import {
   CardNumber,
+  CardType,
   ExpirationDate,
   TwoPasswordDigits,
 } from "../cardRegister/types";
@@ -14,6 +15,7 @@ type CardQuery = {
   holder: string;
   cvc: string;
   password: TwoPasswordDigits;
+  cardType: CardType;
 };
 
 export default function CardResult() {
@@ -41,7 +43,7 @@ export default function CardResult() {
         <div className={styles.result__card}>
           <PlasticCard
             cardNumber={params.cardNumber}
-            cardType="윤호"
+            cardType={params.cardType}
             holderName={params.holder}
             expiration={params.expiration}
           />

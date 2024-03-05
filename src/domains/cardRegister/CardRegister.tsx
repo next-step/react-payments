@@ -7,7 +7,14 @@ import ExpirationInput from "./Components/ExpirationInput/ExpirationInput";
 import PasswordInput from "./Components/PasswordInput/PasswordInput";
 import styles from "./CardRegister.module.css";
 import PlasticCard from "../component/PlaticCard/PlaticCard";
-import { CardNumber, ExpirationDate, TwoPasswordDigits } from "./types";
+import {
+  CardNumber,
+  CardType,
+  ExpirationDate,
+  TwoPasswordDigits,
+} from "./types";
+import SelectCardType from "./Components/SelectCardtype/SelectCardType";
+import useBoolean from "../../hooks/useBoolean";
 
 export default function CardRegister() {
   const [cardNumber, setCardNumber] = useState<CardNumber>();
@@ -15,6 +22,9 @@ export default function CardRegister() {
   const [cardHolder, setCardHolder] = useState<string>("");
   const [cvc, setCvc] = useState<string>("");
   const [password, setPassword] = useState<TwoPasswordDigits>();
+  const [cardType, setCardType] = useState<CardType>("none");
+  const navigate = useNavigate();
+  const [isShownCardTypeSelection, turnOn, turnOff] = useBoolean(false);
 
   const isAbledSubmit =
     cardNumber &&
@@ -24,7 +34,10 @@ export default function CardRegister() {
     password?.first &&
     password.second;
 
-  const navigate = useNavigate();
+  function changeCardType(value: CardType) {
+    setCardType(value);
+    turnOff();
+  }
 
   function moveBack() {
     window.history.back();
@@ -35,6 +48,7 @@ export default function CardRegister() {
     const expirationDateUri = encodeURIComponent(
       JSON.stringify(expirationDate)
     );
+    const cardTypeUri = encodeURIComponent(JSON.stringify(cardType));
     const cardHolderUri = encodeURIComponent(JSON.stringify(cardHolder));
     const cvcUri = encodeURIComponent(JSON.stringify(cvc));
     const passwordUri = encodeURIComponent(JSON.stringify(password));
@@ -45,6 +59,7 @@ export default function CardRegister() {
       holder: cardHolderUri,
       cvc: cvcUri,
       password: passwordUri,
+      cardType: cardTypeUri,
     });
 
     return queryParams;
@@ -68,12 +83,12 @@ export default function CardRegister() {
         </a>
         <div>카드추가</div>
       </div>
-      <div className={styles.card__dummy}>
+      <div className={styles.card__dummy} onClick={turnOn}>
         <PlasticCard
           cardNumber={cardNumber}
           expiration={expirationDate}
           holderName={cardHolder}
-          cardType="윤호"
+          cardType={cardType}
         />
       </div>
       <form className={styles.form}>
@@ -93,6 +108,7 @@ export default function CardRegister() {
           )}
         </div>
       </form>
+      {isShownCardTypeSelection && <SelectCardType onChange={changeCardType} />}
     </div>
   );
 }
