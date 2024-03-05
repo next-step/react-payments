@@ -1,12 +1,12 @@
 import React from 'react'
+import Title from '../../components/Title'
 
 const ChooseCard = () => {
   return (
     <>
-      <h2>2️⃣ 카드 추가 - 카드사 선택</h2>
       <div className="root">
         <div className="app">
-          <h2 className="page-title"> 카드 추가</h2>
+					<Title>카드 추가</Title>
           <div className="card-box">
             <div className="small-card">
               <div className="card-top">
@@ -120,7 +120,7 @@ export default ChooseCard
 // <h2>3️⃣ 카드 추가 - 입력 완료</h2>
 // <div class="root">
 // 	<div class="app">
-// 		<h2 class="page-title"> 카드 추가</h2>
+// 		<Title>카드 추가</Title>
 // 		<div class="card-box">
 // 			<div class="small-card">
 // 				<div class="card-top">

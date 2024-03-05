@@ -4,14 +4,14 @@ import DateInput from '../../components/DateInput.tsx'
 import Input from '../../components/Input.tsx'
 import CardSecret from '../../components/CardSecret.tsx'
 import Button from '../../components/Button.tsx'
+import Title from '../../components/Title.tsx'
 
 const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
   return (
     <>
-      <h2>1️⃣ 카드 추가</h2>
       <div className="root">
         <div className="app">
-          <h2 className="page-title">카드 추가</h2>
+          <Title>카드 추가</Title>
           <div className="card-box">
             <div className="empty-card">
               <div className="card-top"></div>
