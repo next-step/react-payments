@@ -1,0 +1,75 @@
+.card__container {
+  width: 185px;
+  height: 115px;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 9px 14px;
+}
+
+.card__name {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 11px;
+}
+
+.card__chip {
+  margin-top: 20px;
+  width: 40px;
+  height: 26px;
+  background-color: #cbba64;
+  border-radius: 4px;
+}
+
+.card__number {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 15px;
+  font-size: 12px;
+  letter-spacing: 4px;
+}
+
+.card__info {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card__holder {
+  font-size: 10px;
+}
+
+.card__expiration {
+  font-size: 10px;
+}
+
+.포코 {
+  background-color: rgb(226, 65, 65);
+}
+
+.준 {
+  background-color: rgb(84, 124, 228);
+}
+.현석 {
+  background-color: rgb(114, 188, 108);
+}
+
+.윤호 {
+  background-color: rgb(222, 85, 185);
+}
+
+.환오 {
+  background-color: rgb(166, 231, 219);
+}
+
+.태은 {
+  background-color: rgb(230, 111, 154);
+}
+
+.준일 {
+  background-color: rgb(243, 125, 59);
+}
+
+.은규 {
+  background-color: rgb(251, 205, 88);
+}

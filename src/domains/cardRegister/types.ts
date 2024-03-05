@@ -14,3 +14,13 @@ export type TwoPasswordDigits = {
   first: string;
   second: string;
 };
+
+export type CardType =
+  | "포코"
+  | "준"
+  | "현석"
+  | "윤호"
+  | "환오"
+  | "태은"
+  | "준일"
+  | "은규";
