@@ -1,4 +1,4 @@
-import React from 'react';
+import { FormEvent, useId } from 'react';
 
 import CardImage from 'src/components/CardImage.tsx';
 import CardNumberInput from 'src/components/CardNumberInput.tsx';
@@ -31,7 +31,13 @@ export default function AddCardForm({ onSubmit, onClickBack }: AddCardFormProps)
 	const cardSecurityCodeInput = useCardSecurityCodeInput();
 	const cardPasswordInput = useCardPasswordInput();
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const cardNumberInputId = useId();
+	const cardOwnerNameInputId = useId();
+	const cardExpirationDateInputId = useId();
+	const cardSecurityCodeInputId = useId();
+	const cardPasswordInputId = useId();
+
+	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		if (onSubmit) {
@@ -62,21 +68,24 @@ export default function AddCardForm({ onSubmit, onClickBack }: AddCardFormProps)
 					expirationDate={cardExpirationDateInput.expirationDate}
 					cardOwnerName={cardOwnerNameInput.cardOwnerName}
 				/>
-				<CardNumberInput {...cardNumberInput} />
+				<CardNumberInput {...cardNumberInput} id={cardNumberInputId} />
 				<CardOwnerNameInput
 					value={cardOwnerNameInput.cardOwnerName}
 					onChange={cardOwnerNameInput.handleCardOwnerNameChange}
 					maxLength={cardOwnerNameInput.maxLength}
+					id={cardOwnerNameInputId}
 				/>
 				<CardExpirationDateInput
 					value={cardExpirationDateInput.expirationDate}
 					onChange={cardExpirationDateInput.handleExpirationDateChange}
+					id={cardExpirationDateInputId}
 				/>
 				<CardSecurityCodeInput
 					value={cardSecurityCodeInput.cardSecurityCode}
 					onChange={cardSecurityCodeInput.handleCardSecurityCodeChange}
+					id={cardSecurityCodeInputId}
 				/>
-				<CardPasswordInput {...cardPasswordInput} />
+				<CardPasswordInput {...cardPasswordInput} id={cardPasswordInputId} />
 				<div className="button-box">
 					<button type="submit" className="button-text">
 						다음

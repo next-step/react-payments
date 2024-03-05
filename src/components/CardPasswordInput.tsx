@@ -6,6 +6,7 @@ interface CardPasswordInputProps {
 	secondPassword: string;
 	handleSecondPasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	secondPasswordInputRef: React.RefObject<HTMLInputElement>;
+	id?: string;
 }
 
 export default function CardPasswordInput({
@@ -14,10 +15,13 @@ export default function CardPasswordInput({
 	secondPassword,
 	handleSecondPasswordChange,
 	secondPasswordInputRef,
+	id,
 }: CardPasswordInputProps) {
 	return (
 		<div className="input-container">
-			<span className="input-title">카드 비밀번호</span>
+			<label className="input-title" htmlFor={id}>
+				카드 비밀번호
+			</label>
 			<div className="input-box">
 				<input
 					data-testid="first-password"
@@ -25,6 +29,7 @@ export default function CardPasswordInput({
 					className="input-basic w-15"
 					value={firstPassword}
 					onChange={handleFirstPasswordChange}
+					id={id}
 				/>
 				<input
 					data-testid="second-password"

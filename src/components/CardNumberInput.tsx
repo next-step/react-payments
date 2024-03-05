@@ -12,6 +12,7 @@ interface CardNumberInputProps {
 	secondSegmentInputRef: RefObject<HTMLInputElement>;
 	thirdSegmentInputRef: RefObject<HTMLInputElement>;
 	fourthSegmentInputRef: RefObject<HTMLInputElement>;
+	id?: string;
 }
 
 export default function CardNumberInput({
@@ -26,16 +27,20 @@ export default function CardNumberInput({
 	thirdSegmentInputRef,
 	thirdSegment,
 	fourthSegment,
+	id,
 }: CardNumberInputProps) {
 	return (
 		<div className="input-container">
-			<span className="input-title">카드 번호</span>
+			<label className="input-title" htmlFor={id}>
+				카드 번호
+			</label>
 			<div className="input-box">
 				<input
 					data-testid="first-segment"
 					className="input-basic w-15"
 					value={firstSegment}
 					onChange={handleFirstSegmentChange}
+					id={id}
 				/>
 				<div>-</div>
 				<input
