@@ -1,4 +1,4 @@
-const cn = (classNames: string[]) => {
+const cn = (classNames: unknown[]) => {
   return classNames.filter(Boolean).join(' ');
 };
 

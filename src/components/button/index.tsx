@@ -12,7 +12,7 @@ interface ButtonProps extends HTMLProps<HTMLButtonElement> {
 
 const Button = ({
   children,
-  className = '',
+  className,
   type = 'primary',
   htmlType,
   ...restProps
