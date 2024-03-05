@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
-const Button = ({ onClick }: { onClick: () => void }) => {
+const Button = ({
+  onClick,
+  children,
+}: {
+  onClick: () => void
+  children: ReactNode
+}) => {
   return (
     <div className="button-box">
       <button type="button" className="button-text" onClick={onClick}>
-        다음
+        {children}
       </button>
     </div>
   )

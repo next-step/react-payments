@@ -4,5 +4,11 @@
 }
 
 .button-text {
+  cursor: pointer;
   margin-right: 10px;
+  font-size:14px;
+  color: #04C09E;
+  font-weight: 700;
+  border: 0;
+  background-color: transparent;
 }

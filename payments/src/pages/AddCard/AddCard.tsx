@@ -1,12 +1,11 @@
-import React from 'react';
+import React from 'react'
 import CardNumberInput from '../../components/CardNumberInput.tsx'
 import DateInput from '../../components/DateInput.tsx'
 import Input from '../../components/Input.tsx'
 import CardSecret from '../../components/CardSecret.tsx'
 import Button from '../../components/Button.tsx'
 
-const AddCardInfo = ({onNext}) => {
-
+const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
   return (
     <>
       <h2>1️⃣ 카드 추가</h2>
@@ -47,10 +46,10 @@ const AddCardInfo = ({onNext}) => {
             <span className="input-title">카드 비밀번호</span>
             <CardSecret />
           </div>
-          <Button onClick={onNext}/>
+          <Button onClick={onNext}>다음</Button>
         </div>
       </div>
     </>
   )
 }
-export default AddCardInfo;
+export default AddCardInfo
