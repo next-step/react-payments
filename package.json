@@ -14,7 +14,9 @@
     "check-types": "tsc --noEmit",
     "test": "vitest --run",
     "test:watch": "vitest --watch",
-    "chromatic": "npx chromatic --project-token=chpt_496b68d5c043834"
+    "chromatic": "npx chromatic --project-token=chpt_496b68d5c043834",
+    "predeploy": "pnpm build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@tabler/icons-react": "^2.47.0",
@@ -56,6 +58,7 @@
     "eslint-plugin-storybook": "^0.6.15",
     "eslint-plugin-testing-library": "^6.2.0",
     "eslint-plugin-unused-imports": "^3.0.0",
+    "gh-pages": "^6.1.1",
     "jsdom": "^24.0.0",
     "storybook": "^7.6.17",
     "typescript": "^5.2.2",
