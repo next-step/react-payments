@@ -100,7 +100,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
           onChange={handleChangeForm}
           onSubmit={handleSubmitForm}
         >
-          <Form.Item vertical label={'카드번호'}>
+          <Form.Item vertical label={'카드번호'} inputId={'cardNumber1'}>
             <div className={styles.cardNumberInputContainer}>
               {[1, 2, 3, 4].map((i) => {
                 const showDelimiter = `${formData.get(
@@ -110,6 +110,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
                   <div key={i} className={styles.cardNumberInputBox}>
                     <Input
                       required
+                      id={`cardNumber${i}`}
                       name={`cardNumber${i}`}
                       className={styles.textCenter}
                       type={i > 2 ? 'password' : 'text'}
@@ -127,10 +128,11 @@ const CardInfo = ({ next }: CardInfoProps) => {
               })}
             </div>
           </Form.Item>
-          <Form.Item vertical label={'만료일'}>
+          <Form.Item vertical label={'만료일'} inputId={'expireDateMonth'}>
             <div className={styles.expireDateInputContainer}>
               <Input
                 required
+                id='expireDateMonth'
                 name='expireDateMonth'
                 className={styles.textCenter}
                 type='number'
@@ -171,18 +173,21 @@ const CardInfo = ({ next }: CardInfoProps) => {
                 <span>{formData.get('cardOwner')?.length || 0}/30</span>
               </div>
             }
+            inputId='cardOwner'
           >
             <Input
+              id='cardOwner'
               name='cardOwner'
               type='text'
               placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
               maxLength={30}
             />
           </Form.Item>
-          <Form.Item vertical label={'보안코드(CVC/CVV)'}>
+          <Form.Item vertical label={'보안코드(CVC/CVV)'} inputId={'cvc'}>
             <div className={styles.cvcInputBox}>
               <Input
                 required
+                id='cvc'
                 name='cvc'
                 className={styles.cvcInputElem}
                 type='password'
@@ -194,12 +199,13 @@ const CardInfo = ({ next }: CardInfoProps) => {
               <div className={styles.toolTipBox}>툴팁</div>
             </div>
           </Form.Item>
-          <Form.Item vertical label={'카드 비밀번호'}>
+          <Form.Item vertical label={'카드 비밀번호'} inputId={'password1'}>
             <div className={styles.passwordInputContainer}>
               {[1, 2].map((i) => (
                 <div key={i} className={styles.passwordPinBox}>
                   <Input
                     required
+                    id={`password${i}`}
                     name={`password${i}`}
                     className={styles.textCenter}
                     type='password'
