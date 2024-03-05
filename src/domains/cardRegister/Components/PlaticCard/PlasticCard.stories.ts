@@ -23,3 +23,7 @@ export const Primary: Story = {
     cardType: "준",
   },
 };
+
+export const EmptyProperties: Story = {
+  args: {},
+};

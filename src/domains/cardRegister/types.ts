@@ -16,6 +16,7 @@ export type TwoPasswordDigits = {
 };
 
 export type CardType =
+  | "none"
   | "포코"
   | "준"
   | "현석"

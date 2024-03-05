@@ -9,4 +9,5 @@ export const cardColor: Record<CardType, { color: string }> = {
   태은: { color: "rgb(230, 111, 154)" },
   준일: { color: "rgb(243, 125, 59)" },
   은규: { color: "rgb(251, 205, 88)" },
+  none: { color: "#D2D2D2" },
 };
