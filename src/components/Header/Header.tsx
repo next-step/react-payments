@@ -1,16 +1,11 @@
-import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren } from 'react';
+import { ComponentPropsWithoutRef } from 'react';
 import classNames from 'classnames';
-
-type BaseProps = DetailedHTMLProps<
-  HTMLAttributes<HTMLHeadingElement>,
-  HTMLHeadingElement
->;
 
 const Header = ({
   children,
   className,
   ...props
-}: PropsWithChildren<BaseProps>) => {
+}: ComponentPropsWithoutRef<'h1'>) => {
   return (
     <h1 className={classNames('page-title', className)} {...props}>
       {children}

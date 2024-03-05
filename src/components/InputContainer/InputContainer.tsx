@@ -1,12 +1,7 @@
-import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren } from 'react';
+import { ComponentPropsWithoutRef, PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
-type BaseInputProps = DetailedHTMLProps<
-  HTMLAttributes<HTMLDivElement>,
-  HTMLDivElement
->;
-
-interface Props extends BaseInputProps {
+interface Props extends ComponentPropsWithoutRef<'div'> {
   label?: string;
 }
 

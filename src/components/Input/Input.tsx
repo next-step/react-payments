@@ -1,13 +1,8 @@
-import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import { ComponentPropsWithoutRef } from 'react';
 import classNames from 'classnames';
 
-type BaseInputProps = DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->;
-
-interface Props extends BaseInputProps {
-  type?: BaseInputProps['type'];
+interface Props extends ComponentPropsWithoutRef<'input'> {
+  type?: ComponentPropsWithoutRef<'input'>['type'];
   variant?: 'basic' | 'underline';
 }
 

@@ -1,25 +1,28 @@
 import { useCallback } from 'react';
 import { useCardState } from '../../../hooks/useCardState';
 
-const useCardNickname = () => {
+const useCardSecurityCode = () => {
   const { cardState, setCardState } = useCardState();
 
-  const handleNickname = useCallback(
+  const handleSecurityCode = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
 
+      const isNumber = !Number.isNaN(Number(value));
+      if (!isNumber || value.length > 3) return;
+
       setCardState((prev) => ({
         ...prev,
-        nickname: value,
+        securityCode: value,
       }));
     },
     [setCardState]
   );
 
   return {
-    nickname: cardState.nickname,
-    handleNickname,
+    securityCode: cardState.securityCode,
+    handleSecurityCode,
   };
 };
 
-export default useCardNickname;
+export default useCardSecurityCode;

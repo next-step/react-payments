@@ -1,42 +1,21 @@
-import { Fragment } from 'react/jsx-runtime';
-import type { Card as CardType } from '../../types';
 import Button from '../../components/Button/Button';
 import Card from '../../components/Card/Card';
 import Header from '../../components/Header/Header';
-import Input from '../../components/Input/Input';
-import InputContainer from '../../components/InputContainer/InputContainer';
-import useCardNumber from './hooks/useCardNumber';
-import useExpiration from './hooks/useExpiration';
-import useSecurityCode from './hooks/useSecurityCode';
-import usePassword from './hooks/usePassword';
-import useOwner from './hooks/useOwner';
-import {
-  CARD_KEY,
-  getLocalStorageItem,
-  setLocalStorageItem,
-} from '../../utils/localStorage';
+import CardNumbers from './components/CardNumbers';
+import CardExpiration from './components/CardExpiration';
+import CardOwner from './components/CardOwner';
+import CardSecurityCode from './components/CardSecurityCode';
+import CardPassword from './components/CardPassword';
+import { useCardState } from '../../hooks/useCardState';
 
 interface Props {
   onNext: () => void;
 }
 
 const AddCard = ({ onNext }: Props) => {
-  const { cardNumber, handleNumbers } = useCardNumber();
-  const { expirationDate, handleExpirationDate } = useExpiration();
-  const { securityCode, handleSecurityCode } = useSecurityCode();
-  const { password, handlePassword } = usePassword();
-  const { owner, handleOwner } = useOwner();
-
-  const card: CardType = {
-    numbers: Object.values(cardNumber),
-    expirationMonth: expirationDate.month,
-    expirationYear: expirationDate.year,
-    owner,
-  };
+  const { cardState } = useCardState();
 
   const handleAddCard = () => {
-    const storedData = getLocalStorageItem({ key: CARD_KEY });
-    setLocalStorageItem({ key: CARD_KEY, item: [...storedData, card] });
     onNext();
   };
 
@@ -47,85 +26,12 @@ const AddCard = ({ onNext }: Props) => {
         <span>카드추가</span>
       </Header>
 
-      <Card {...card} />
-
-      <InputContainer label='카드 번호'>
-        <div className='input-box'>
-          {Object.entries(cardNumber).map(([key, value], index) => (
-            <Fragment key={key}>
-              <Input
-                type={index > 1 ? 'password' : 'text'}
-                name={key}
-                onChange={handleNumbers}
-                value={cardNumber[key]}
-              />
-              {value.length === 4 && index < 3 && <span>-</span>}
-            </Fragment>
-          ))}
-        </div>
-      </InputContainer>
-
-      <InputContainer label='만료일' className='w-50'>
-        <div className='input-box'>
-          <Input
-            name='month'
-            placeholder='MM'
-            value={expirationDate.month}
-            onChange={handleExpirationDate}
-          />
-          <span>/</span>
-          <Input
-            name='year'
-            placeholder='YY'
-            value={expirationDate.year}
-            onChange={handleExpirationDate}
-          />
-        </div>
-      </InputContainer>
-
-      <InputContainer label='카드 소유자 이름(선택)'>
-        <div className='input-relative'>
-          <span className='owner-length'>
-            {owner.length} / {30}
-          </span>
-          <Input
-            placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
-            maxLength={30}
-            value={owner}
-            onChange={handleOwner}
-          />
-        </div>
-      </InputContainer>
-
-      <InputContainer label='보안코드'>
-        <Input
-          className='w-25'
-          type='password'
-          value={securityCode}
-          onChange={handleSecurityCode}
-        />
-      </InputContainer>
-
-      <InputContainer label='카드 비밀번호'>
-        <div style={{ display: 'flex', gap: 6 }}>
-          <Input
-            className='w-15'
-            type='password'
-            name='first'
-            value={password.first}
-            onChange={handlePassword}
-          />
-          <Input
-            className='w-15'
-            type='password'
-            name='second'
-            value={password.second}
-            onChange={handlePassword}
-          />
-          <div className='flex-center w-15'>•</div>
-          <div className='flex-center w-15'>•</div>
-        </div>
-      </InputContainer>
+      <Card {...cardState} />
+      <CardNumbers />
+      <CardExpiration />
+      <CardOwner />
+      <CardSecurityCode />
+      <CardPassword />
 
       <div className='button-box'>
         <Button onClick={handleAddCard}>다음</Button>

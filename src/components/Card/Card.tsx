@@ -1,21 +1,12 @@
-import type { Card as CardProps } from '../../types';
+import type { CardInfo } from '../../types';
 
-interface Props extends CardProps {
+interface Props extends CardInfo {
   size?: 'small' | 'big';
 }
 
-const Card = ({
-  brand,
-  numbers,
-  owner,
-  expirationMonth,
-  expirationYear,
-  size = 'small',
-}: Props) => {
-  const isEmpty = !numbers || !owner || !expirationMonth || !expirationYear;
-
-  const cardNumbers = numbers
-    ?.map((number, index) => {
+const Card = ({ brand, numbers, owner, expiration, size = 'small' }: Props) => {
+  const cardNumbers = Object.values(numbers)
+    .map((number, index) => {
       if (index > 1) return number.replace(/\d/g, '*');
       return number;
     })
@@ -23,7 +14,7 @@ const Card = ({
 
   return (
     <div className='card-box'>
-      <div className={isEmpty ? 'empty-card' : `${size}-card`}>
+      <div className={`${size}-card`}>
         <div className='card-top'>
           <span className='card-text'>{brand}</span>
         </div>
@@ -37,7 +28,7 @@ const Card = ({
           <div className='card-bottom__info'>
             <span className='card-text'>{owner || 'NAME'}</span>
             <span className='card-text'>
-              {expirationMonth || 'MM'} / {expirationYear || 'YY'}
+              {expiration.month || 'MM'} / {expiration.year || 'YY'}
             </span>
           </div>
         </div>

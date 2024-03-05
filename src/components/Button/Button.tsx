@@ -1,12 +1,7 @@
-import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren } from 'react';
+import { PropsWithChildren, ComponentPropsWithoutRef } from 'react';
 import classNames from 'classnames';
 
-type BaseInputProps = DetailedHTMLProps<
-  HTMLAttributes<HTMLSpanElement>,
-  HTMLSpanElement
->;
-
-interface Props extends BaseInputProps {
+interface Props extends ComponentPropsWithoutRef<'span'> {
   variant?: 'text' | 'contained' | 'outlined';
 }
 

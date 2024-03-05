@@ -1,25 +1,23 @@
 import { useCallback } from 'react';
 import { useCardState } from '../../../hooks/useCardState';
 
-const useCardNickname = () => {
+const useCardOwner = () => {
   const { cardState, setCardState } = useCardState();
 
-  const handleNickname = useCallback(
+  const handleOwner = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const { value } = e.target;
-
       setCardState((prev) => ({
         ...prev,
-        nickname: value,
+        owner: e.target.value,
       }));
     },
     [setCardState]
   );
 
   return {
-    nickname: cardState.nickname,
-    handleNickname,
+    owner: cardState.owner,
+    handleOwner,
   };
 };
 
-export default useCardNickname;
+export default useCardOwner;

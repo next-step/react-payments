@@ -1,10 +1,9 @@
-export interface Card {
-  brand?: string;
-  numbers?: string[];
-  owner?: string;
-  expirationMonth?: string;
-  expirationYear?: string;
-  password?: number;
-  securityCode?: number;
-  nickname?: string;
+export interface CardInfo {
+  brand: string;
+  numbers: { first: string; second: string; third: string; fourth: string };
+  owner: string;
+  expiration: { month: string; year: string };
+  password: { first: string; second: string };
+  securityCode: string;
+  nickname: string;
 }

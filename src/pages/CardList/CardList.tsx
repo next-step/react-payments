@@ -1,14 +1,18 @@
+import { Fragment } from 'react/jsx-runtime';
 import Card from '../../components/Card/Card';
 import Header from '../../components/Header/Header';
-import type { Card as CardType } from '../../types';
-import { CARD_KEY, getLocalStorageItem } from '../../utils/localStorage';
+import type { CardInfo } from '../../types';
+import {
+  CARD_STORAGE_KEY,
+  getLocalStorageItem,
+} from '../../utils/localStorage';
 
 interface Props {
   onNext: () => void;
 }
 
 const CardList = ({ onNext }: Props) => {
-  const cards: CardType[] = getLocalStorageItem({ key: CARD_KEY });
+  const cards: CardInfo[] = getLocalStorageItem({ key: CARD_STORAGE_KEY });
 
   return (
     <>
@@ -16,14 +20,20 @@ const CardList = ({ onNext }: Props) => {
         <span>보유카드</span>
       </Header>
 
-      {cards?.map((card, index) => (
-        <div className='card-box' key={index}>
-          <Card {...card} />
-        </div>
-      ))}
-      <div className='card-box'>
-        <div className='empty-card' onClick={onNext}>
-          +
+      <div className='flex-column-center'>
+        {cards?.map((card) => (
+          <Fragment key={card.nickname}>
+            <div className='card-box'>
+              <Card {...card} />
+            </div>
+            <span className='card-nickname'>{card.nickname}</span>
+          </Fragment>
+        ))}
+
+        <div className='card-box'>
+          <div className='empty-card' onClick={onNext}>
+            +
+          </div>
         </div>
       </div>
     </>

@@ -1,28 +1,29 @@
 import { useCallback } from 'react';
 import { useCardState } from '../../../hooks/useCardState';
 
-const useCardNumber = () => {
+const useCardExpiration = () => {
   const { cardState, setCardState } = useCardState();
 
-  const handleNumbers = useCallback(
+  const handleExpirationDate = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value, name } = e.target;
 
       const isNumber = !Number.isNaN(Number(value));
-      if (!isNumber || value.length > 4) return;
+      if (!isNumber || value.length > 2) return;
+      if (name === 'month' && Number(value) > 12) return;
 
       setCardState((prev) => ({
         ...prev,
-        numbers: { ...prev.numbers, [name]: value },
+        expiration: { ...prev.expiration, [name]: value },
       }));
     },
     [setCardState]
   );
 
   return {
-    cardNumber: cardState.numbers,
-    handleNumbers,
+    expiration: cardState.expiration,
+    handleExpirationDate,
   };
 };
 
-export default useCardNumber;
+export default useCardExpiration;
