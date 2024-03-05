@@ -7,7 +7,6 @@ import { Fragment } from "react";
 const CardList = (props) => {
   const { cardList, next } = props;
 
-  console.log(cardList);
   return (
     <Box className={["app", "flex-column-center"]}>
       <Box className={"flex-center"}>

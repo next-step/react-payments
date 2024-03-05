@@ -14,10 +14,26 @@ FormProvider.propTypes = {
 };
 
 export const useFormContext = () => {
-  const { register, getValues, setValue, watch, reset, handleSubmit } =
-    useContext(FormContext);
+  const {
+    formState,
+    register,
+    getValues,
+    setValue,
+    watch,
+    reset,
+    handleSubmit,
+  } = useContext(FormContext);
 
-  return { register, getValues, setValue, watch, reset, handleSubmit };
+  return {
+    formState,
+    //
+    register,
+    getValues,
+    setValue,
+    watch,
+    reset,
+    handleSubmit,
+  };
 };
 
 export default FormProvider;

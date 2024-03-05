@@ -7,13 +7,14 @@ import InputForm from "../../molecules/inputForm";
 import InputLength from "../../molecules/inputLength";
 import useModal from "../../../hooks/useModal";
 import CardModal from "../../molecules/cardModal";
+import { useFormContext } from "../../../hooks/useFormProvider";
 
 const CardForm = (props) => {
   const { next, back } = props;
-  // const {
-  //   formState: { isValid },
-  // } = useFormContext();
-  const isValid = true;
+  const {
+    formState: { isValid },
+  } = useFormContext();
+
   const { Modal, toggleModal } = useModal();
 
   const handleNextStep = () => {

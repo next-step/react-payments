@@ -1,25 +1,49 @@
 import { useRef, useState } from "react";
 
 const useCustomForm = (props) => {
-  const { defaultValues } = props;
+  const { defaultValues, mode } = props;
 
   const checkWatch = new Set();
   const [watchValue, setWatchValue] = useState(defaultValues || {});
   const refs = useRef(defaultValues || {});
+  const formOption = useRef({});
+  const [formState, setFormState] = useState({});
 
-  const register = (name) => {
+  const updateFormState = () => {
+    if (mode === "onChange") {
+      let isValid = true;
+      Object.entries(formOption.current).forEach(([key, value]) => {
+        if (value.required && !refs.current[key]) {
+          isValid = false;
+        }
+      });
+      console.log(isValid);
+
+      setFormState({
+        isValid,
+      });
+    }
+  };
+
+  const updateWatch = (name, value) => {
+    if (!checkWatch.has(name)) return;
+    setWatchValue((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
+    });
+  };
+
+  const register = (name, option) => {
+    formOption.current[name] = option;
+
     return {
       onChange: (e) => {
         const { value } = e.target;
         refs.current[name] = value;
-
-        if (!checkWatch.has(name)) return;
-        setWatchValue((prev) => {
-          return {
-            ...prev,
-            [name]: value,
-          };
-        });
+        updateFormState();
+        updateWatch(name, value);
       },
     };
   };
@@ -33,14 +57,8 @@ const useCustomForm = (props) => {
 
   const setValue = (name, value) => {
     refs.current[name] = value;
-
-    if (!checkWatch.has(name)) return;
-    setWatchValue((prev) => {
-      return {
-        ...prev,
-        [name]: value,
-      };
-    });
+    updateFormState();
+    updateWatch(name, value);
   };
 
   const watch = (name) => {
@@ -66,6 +84,7 @@ const useCustomForm = (props) => {
   };
 
   return {
+    formState,
     register,
     getValues,
     setValue,

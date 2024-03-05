@@ -9,6 +9,7 @@ import FormProvider from "../../hooks/useFormProvider";
 const Home = () => {
   const [cardList, setCardList] = useState([]);
   const form = useCustomForm({
+    mode: "onChange",
     defaultValues: {
       name: "",
       year: "",
@@ -21,7 +22,7 @@ const Home = () => {
     },
   });
 
-  console.log(form.watch());
+  // console.log(form.watch());
 
   return (
     <FormProvider {...form}>
