@@ -1,10 +1,11 @@
 import { ReactElement } from 'react';
 
 import AddCardForm from 'src/components/AddCardForm.tsx';
+import { AddCardStep } from 'src/page/AddCard.tsx';
 
 interface AddCardStepperProps {
-	activeStep: 'list' | 'form' | 'finish';
-	changeActiveStep: (step: 'list' | 'form' | 'finish') => void;
+	activeStep: AddCardStep;
+	changeActiveStep: (step: AddCardStep) => void;
 }
 
 export default function AddCardStepper({ activeStep, changeActiveStep }: AddCardStepperProps) {
