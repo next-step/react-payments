@@ -7,12 +7,13 @@ import {
   Text,
   Header,
   BaseInput,
+  Card,
 } from '@/components'
 import { FormEventHandler } from 'react'
 import { useCardInputContext } from '@/domains/card-register/contexts/card-input-context'
 
 // TODO
-// [ ] 상태 연결, 다음 활성화 로직 구성 (다음 퍼널에서도 사용되어야 하므로 context로 폼 입력 상태를 정의해야 할듯)
+// [x] 상태 연결, 다음 활성화 로직 구성 (다음 퍼널에서도 사용되어야 하므로 context로 폼 입력 상태를 정의해야 할듯)
 // [ ] 상단에 카드 컴포넌트 표시, 상태랑 연결
 // [ ] Funnel 연결 + 카드 등록 완료로 이동
 
@@ -21,7 +22,10 @@ export interface CardInputFormFunnelProps {
 }
 
 export const CardInputFormFunnel = ({ onSubmit }: CardInputFormFunnelProps) => {
-  const { cardInput, setCardInput } = useCardInputContext()
+  const {
+    cardInput: { cardCode, cardExpDate, cardName, cardCVC, cardPin },
+    setCardInput,
+  } = useCardInputContext()
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault()
@@ -40,25 +44,28 @@ export const CardInputFormFunnel = ({ onSubmit }: CardInputFormFunnelProps) => {
         width="100%"
         onSubmit={handleSubmit}
       >
+        <Flex justifyContent="center" marginBottom="32px">
+          <Card cardCode={cardCode} cardName={cardName} cardExpDate={cardExpDate} />
+        </Flex>
         <Flex id="card-register-form" as="form" direction="column" width="100%" gap="36px">
           <CardCodeInput
             id="card-code"
             label="카드 번호"
             width="100%"
             textAlign="center"
-            value={cardInput.cardCode}
+            value={cardCode}
             onChange={setCardInput('cardCode')}
           />
           <CardExpDateInput
             id="card-exp-date"
             label="만료일"
-            value={cardInput.cardExpDate}
+            value={cardExpDate}
             onChange={setCardInput('cardExpDate')}
           />
           <CardNameInput
             id="card-name"
             label="카드 소유자 이름(선택)"
-            value={cardInput.cardName}
+            value={cardName}
             onChange={setCardInput('cardName')}
           />
           <BaseInput
@@ -68,13 +75,13 @@ export const CardInputFormFunnel = ({ onSubmit }: CardInputFormFunnelProps) => {
             maxLength={3}
             width="100px"
             textAlign="center"
-            value={cardInput.cardCVC}
+            value={cardCVC}
             onChange={e => setCardInput('cardCVC')(e.target.value)}
           />
           <CardPinInput
             id="card-pin"
             label="카드 비밀번호"
-            value={cardInput.cardPin}
+            value={cardPin}
             onChange={setCardInput('cardPin')}
           />
         </Flex>
