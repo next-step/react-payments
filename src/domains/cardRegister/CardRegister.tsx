@@ -35,8 +35,8 @@ export default function CardRegister() {
     const expirationDateUri = encodeURIComponent(
       JSON.stringify(expirationDate)
     );
-    const cardHolderUri = encodeURIComponent(cardHolder);
-    const cvcUri = encodeURIComponent(cvc);
+    const cardHolderUri = encodeURIComponent(JSON.stringify(cardHolder));
+    const cvcUri = encodeURIComponent(JSON.stringify(cvc));
     const passwordUri = encodeURIComponent(JSON.stringify(password));
 
     const queryParams = new URLSearchParams({
@@ -54,7 +54,11 @@ export default function CardRegister() {
     event.preventDefault();
     if (!isAbledSubmit) return;
     const queryParams = makeParams();
-    navigate(`/mycards/register/completed?${queryParams.toString()}`);
+    // navigate(`/mycards/register/result?${queryParams.toString()}`);
+    navigate({
+      pathname: "/mycards/register/result",
+      search: queryParams.toString(),
+    });
   }
   return (
     <div className={styles.container}>
