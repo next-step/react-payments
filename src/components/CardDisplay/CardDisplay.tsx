@@ -1,6 +1,7 @@
 import { CardAddDisplay } from './CardAddDisplay';
 import { Button, Grid, HStack, Typography, VStack } from '@/shared/components';
 import { styleToken } from '@/shared/styles';
+import { StyleProps } from '@/shared/types';
 import { replaceMaskText } from '@/shared/utils';
 import { CardState } from '@/type';
 
@@ -61,18 +62,19 @@ const CardNumberDisplay = ({
   variant,
   maskFontSize,
 }: {
-  cardNumber: string;
+  cardNumber: CardDisplayProps['cardNumber'];
   variant: CardTypographyVariant;
-  maskFontSize: string;
+  maskFontSize: StyleProps['fontSize'];
 }) => (
   <Grid gridTemplateColumns="repeat(4, 1fr)" width="100%" paddingLeft="20px">
-    {cardNumber.split(' ').map((number, index) => {
+    {cardNumber.map((number, index) => {
       const isTextMaskIndex = index > 1;
       const text = isTextMaskIndex ? replaceMaskText(number) : number;
       return (
         <Typography
           key={`card-number-${index}`}
           variant={variant}
+          textAlign="left"
           whiteSpace="nowrap"
           overflow="hidden"
           textOverflow="ellipsis"

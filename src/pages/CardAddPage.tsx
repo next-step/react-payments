@@ -1,10 +1,14 @@
 import ArrowLeft from '@/assets/arrow-left.svg';
 import { AppLayout, CardDisplay, useCard, useFunnel, CardSelectBottomSheet, CardInput } from '@/components';
-import { useModal, useStringInput, useSelectCardBrand } from '@/hook';
+import { ONLY_NUMBERS_REGEX } from '@/constant';
+import { useModal, useStringInput, useSelectCardBrand, useInputs, createUseInputConfig } from '@/hook';
 import { Button, HStack, Typography, VStack } from '@/shared/components';
 import { styleToken } from '@/shared/styles';
 import { removeAllSpaces } from '@/shared/utils';
 import { CardBrand } from '@/type';
+
+const CARD_NUMBER_ID = 'card-number';
+const CARD_NUMBER_INPUT_CONFIG = createUseInputConfig(4, ONLY_NUMBERS_REGEX);
 
 export const CardAddPage = () => {
   const { goToPrev, goToNext } = useFunnel();
@@ -17,14 +21,25 @@ export const CardAddPage = () => {
     handleClose: handleCardSelectClose,
   } = useModal(true);
 
-  const { value: cardNumber, handleChange: handleCardNumberChange } = useStringInput('');
+  const {
+    values: cardNumber,
+    refs: cardNumberInputRefs,
+    handleChange: handleCardNumberChange,
+    handleKeyDown: handleCardNumberKeyDown,
+  } = useInputs([
+    CARD_NUMBER_INPUT_CONFIG,
+    CARD_NUMBER_INPUT_CONFIG,
+    CARD_NUMBER_INPUT_CONFIG,
+    CARD_NUMBER_INPUT_CONFIG,
+  ]);
+
   const { value: expirationDate, handleChange: handleExpirationDateChange } = useStringInput('');
   const { value: ownerName, handleChange: handleOwnerNameChange } = useStringInput('');
   const { value: securityCode, handleChange: handleSecurityCodeChange } = useStringInput('');
   const { value: password, handleChange: handlePasswordChange } = useStringInput('');
 
   const isValidateCardBrand = Boolean(selectedCardBrand.label);
-  const isValidateCardNumber = removeAllSpaces(cardNumber).length === 16;
+  const isValidateCardNumber = removeAllSpaces(cardNumber.join('')).length === 16;
   const isValidateExpirationDate = removeAllSpaces(expirationDate).length === 4;
   const isValidateSecurityCode = securityCode.length === 3;
   const isValidatePassword = removeAllSpaces(password).length === 2;
@@ -93,7 +108,19 @@ export const CardAddPage = () => {
               onClick={handleCardSelectOpen}
             />
           </VStack>
-          <CardInput.Number onChange={handleCardNumberChange} />
+          <CardInput.Number
+            id={CARD_NUMBER_ID}
+            values={cardNumber}
+            label="카드 번호"
+            refs={cardNumberInputRefs}
+            onChange={handleCardNumberChange}
+            onKeyDown={handleCardNumberKeyDown}
+            _inputRoot={{
+              backgroundColor: `${styleToken.color.gray200}`,
+              borderRadius: '7px',
+              padding: '0 45px',
+            }}
+          />
           <CardInput.ExpirationDate onChange={handleExpirationDateChange} />
           <CardInput.OwnerName onChange={handleOwnerNameChange} />
           <CardInput.SecurityCode onChange={handleSecurityCodeChange} />

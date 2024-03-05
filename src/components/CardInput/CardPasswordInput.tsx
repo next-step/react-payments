@@ -4,12 +4,11 @@ import {
   CARD_INPUT_PASSWORD_FONT_SIZE,
   CARD_INPUT_PASSWORD_FONT_WEIGHT,
 } from './constants/cardInputStyles';
-import { useInputs } from '@/hook';
+import { ONLY_NUMBERS_REGEX } from '@/constant';
+import { createUseInputConfig, useInputs } from '@/hook';
 import { HStack, Label, TextField, VStack } from '@/shared/components';
 import { styleToken } from '@/shared/styles';
 
-const INITIAL_PIN_INPUTS = ['', ''];
-const PIN_INPUT_COUNT = INITIAL_PIN_INPUTS.length;
 const PIN_INPUT_MAX_VALUE_LENGTH = 1;
 const PIN_INPUT_ID = 'pin-input';
 
@@ -23,11 +22,10 @@ export const CardPasswordInput = ({ onChange }: PinInputProps) => {
     refs: pinInputRefs,
     handleChange,
     handleKeyDown,
-  } = useInputs({
-    inputCount: PIN_INPUT_COUNT,
-    maxLength: PIN_INPUT_MAX_VALUE_LENGTH,
-    pattern: /^[0-9]*$/,
-  });
+  } = useInputs([
+    createUseInputConfig(PIN_INPUT_MAX_VALUE_LENGTH, ONLY_NUMBERS_REGEX),
+    createUseInputConfig(PIN_INPUT_MAX_VALUE_LENGTH, ONLY_NUMBERS_REGEX),
+  ]);
 
   const onPinInputChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
     const newPinInputs = [...pinInputValues];

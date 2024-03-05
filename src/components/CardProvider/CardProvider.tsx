@@ -1,7 +1,7 @@
 import { createContext, useState, useContext, PropsWithChildren, useMemo } from 'react';
 
 type CardState = {
-  cardNumber: string;
+  cardNumber: string[];
   expirationDate: string;
   ownerName: string;
   securityCode: string;
@@ -22,7 +22,7 @@ const CardContext = createContext<CardContextType | null>(null);
 
 export const CardProvider = ({ children }: PropsWithChildren) => {
   const [card, setCard] = useState<CardState>({
-    cardNumber: '',
+    cardNumber: [],
     expirationDate: '',
     ownerName: '',
     securityCode: '',
@@ -35,7 +35,7 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
 
   const resetCurrentCard = () => {
     setCard({
-      cardNumber: '',
+      cardNumber: [],
       expirationDate: '',
       ownerName: '',
       securityCode: '',

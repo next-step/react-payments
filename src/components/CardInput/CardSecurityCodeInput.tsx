@@ -4,12 +4,12 @@ import {
   CARD_INPUT_PASSWORD_FONT_SIZE,
   CARD_INPUT_PASSWORD_FONT_WEIGHT,
 } from './constants/cardInputStyles';
-import { useInputs } from '@/hook';
+import { ONLY_NUMBERS_REGEX } from '@/constant';
+import { createUseInputConfig, useInputs } from '@/hook';
 import { Circle, HStack, Label, TextField, Typography, VStack } from '@/shared/components';
 
 import { styleToken } from '@/shared/styles';
 
-const SECURITY_CODE_INPUT_COUNT = 1;
 const SECURITY_CODE_INPUT_MAX_VALUE_LENGTH = 3;
 const SECURITY_CODE_INPUT_ID = 'security-code-input';
 
@@ -22,11 +22,7 @@ export const CardSecurityCodeInput = ({ onChange }: SecurityCodeInputProps) => {
     values: securityCodeInputValue,
     refs: securityCdoeInputRefs,
     handleChange,
-  } = useInputs({
-    inputCount: SECURITY_CODE_INPUT_COUNT,
-    maxLength: SECURITY_CODE_INPUT_MAX_VALUE_LENGTH,
-    pattern: /^[0-9]*$/,
-  });
+  } = useInputs([createUseInputConfig(SECURITY_CODE_INPUT_MAX_VALUE_LENGTH, ONLY_NUMBERS_REGEX)]);
 
   const onSecurityCodeInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;

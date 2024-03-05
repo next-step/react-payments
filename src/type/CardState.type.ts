@@ -1,5 +1,5 @@
 export type CardState = {
-  cardNumber: string;
+  cardNumber: string[];
   expirationDate: string;
   ownerName: string;
   securityCode: string;

@@ -1,10 +1,9 @@
 import { ChangeEvent } from 'react';
 import { CARD_INPUT_COLOR, CARD_INPUT_TEXT_FONT_SIZE, CARD_INPUT_TEXT_FONT_WEIGHT } from './constants/cardInputStyles';
-import { useInputs } from '@/hook';
+import { createUseInputConfig, useInputs } from '@/hook';
 import { HStack, Label, TextField, Typography, VStack } from '@/shared/components';
 import { styleToken } from '@/shared/styles';
 
-const OWNER_NAME_INPUT_COUNT = 1;
 const OWNER_NAME_INPUT_MAX_VALUE_LENGTH = 30;
 const OWNER_NAME_INPUT_ID = 'owner-name-input';
 const OWNER_NAME_INPUT_PLACEHOLDER = '카드에 표시된 이름과 동일하게 입력하세요.';
@@ -18,10 +17,7 @@ export const CardOwnerNameInput = ({ onChange }: OwnerNameInputProps) => {
     values: ownerNameInputValue,
     refs: ownerNameInputRefs,
     handleChange,
-  } = useInputs({
-    inputCount: OWNER_NAME_INPUT_COUNT,
-    maxLength: OWNER_NAME_INPUT_MAX_VALUE_LENGTH,
-  });
+  } = useInputs([createUseInputConfig(OWNER_NAME_INPUT_MAX_VALUE_LENGTH)]);
 
   const onOwnerNameInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;

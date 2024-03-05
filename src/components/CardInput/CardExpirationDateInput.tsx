@@ -1,12 +1,11 @@
 import { ChangeEvent } from 'react';
 import { CARD_INPUT_COLOR, CARD_INPUT_TEXT_FONT_SIZE, CARD_INPUT_TEXT_FONT_WEIGHT } from './constants/cardInputStyles';
-import { useInputs } from '@/hook';
+import { ONLY_NUMBERS_REGEX } from '@/constant';
+import { createUseInputConfig, useInputs } from '@/hook';
 import { HStack, Label, TextField, Typography, VStack } from '@/shared/components';
 import { styleToken } from '@/shared/styles';
 import { validateMonthString } from '@/shared/utils';
 
-const INITIAL_CARD_EXPIRATIONS_DATES = ['', ''];
-const CARD_EXPIRATIONS_DATE_LENGTH = INITIAL_CARD_EXPIRATIONS_DATES.length;
 const CARD_EXPIRATIONS_DATE_ID = 'card-expiration-date';
 
 type CardExpirationDateInputProps = {
@@ -18,11 +17,7 @@ export const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputPro
     refs: inputRefs,
     handleChange,
     handleKeyDown,
-  } = useInputs({
-    inputCount: CARD_EXPIRATIONS_DATE_LENGTH,
-    maxLength: 2,
-    pattern: /^[0-9]*$/,
-  });
+  } = useInputs([createUseInputConfig(2, ONLY_NUMBERS_REGEX), createUseInputConfig(2, ONLY_NUMBERS_REGEX)]);
 
   const handleCardNumberPartChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
     const monthString = e.target.value;
