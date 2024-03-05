@@ -30,8 +30,8 @@ export default function PlasticCard({
       <div className={styles.card__name}>{cardType && `${cardType}카드`}</div>
       <div className={styles.card__chip}></div>
       <div className={styles.card__number}>{`${firstNumber} ${secondNumber} ${
-        thirdNumber ?? "****"
-      } ${fourthNumber ?? "****"}`}</div>
+        thirdNumber && "****"
+      } ${fourthNumber && "****"}`}</div>
       <div className={styles.card__info}>
         <div className={styles.card__holder}>{holderName}</div>
         <div className={styles.card__expiration}>{`${month} / ${year}`}</div>

@@ -1,0 +1,52 @@
+.container {
+  padding: 38px 24px;
+  width: calc(100vw - 48px);
+  height: calc(100vh - 76px);
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+}
+
+.card__dummy {
+  margin: 6px 0 6px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+}
+
+.nav__item {
+  vertical-align: middle;
+}
+
+a {
+  text-decoration: none;
+}
+
+.submit__container {
+  width: 100%;
+  text-align: end;
+}
+
+.submit__btn {
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  color: #04c09e;
+}
+
+.cvc__container {
+  width: 120px;
+}
