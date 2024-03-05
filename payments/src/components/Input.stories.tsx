@@ -10,13 +10,17 @@ export default meta
 type Story = StoryObj<typeof InputComponent>
 
 export const Primary: Story = {
-  args: {
-
-  },
+  args: {},
 }
 
 export const Password: Story = {
-  args:{
-    type: 'password'
-  }
+  args: {
+    type: 'password',
+  },
+}
+
+export const SizeMd: Story = {
+  args: {
+    size: 'md',
+  },
 }

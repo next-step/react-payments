@@ -18,18 +18,22 @@ const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
 
 
   const [inputs, setInputs] = useState({
-    cardNum: '',
-    expiredDate: '',
+    cardNumberOne: '',
+    cardNumberTwo: '',
+    cardNumberThree: '',
+    cardNumberFour: '',
+    expiredMonth: '',
+    expiredYear: '',
     ownerName: '',
     CVC:'',
     cardPasswordOne:'',
-    cardPasswordTwo:''
+    cardPasswordTwo:'',
   })
   
   useEffect(() => {
     
     if (!/^[0-9]*$/.test(inputs.CVC)) {
-      console.error('CVC 형식이 틀렸습니다.')
+      alert('CVC 형식이 틀렸습니다.')
 
       setInputs({
         ...inputs,
@@ -41,9 +45,63 @@ const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
     
 
   }, [inputs.CVC])
+  
+  useEffect(() => {
+    if (!/^[0-9]*$/.test(inputs.expiredMonth) || inputs.expiredMonth > 12) {
+      alert('카드 만료 날짜 - 월을 확인해주세요.')
 
+      setInputs({
+        ...inputs,
+        expiredMonth: '',
+      })
+
+      return
+    }
+  }, [inputs.expiredMonth])
 
   
+  useEffect(() => {
+    if (!/^[0-9]*$/.test(inputs.cardNumberOne)) {
+      alert('카드 번호는 숫자만 입력 가능합니다.')
+
+      setInputs({
+        ...inputs,
+        cardNumberOne: '',
+      })
+      return
+    }
+    if (!/^[0-9]*$/.test(inputs.cardNumberTwo)) {
+      alert('카드 번호는 숫자만 입력 가능합니다.')
+
+      setInputs({
+        ...inputs,
+        cardNumberTwo: '',
+      })
+      return
+    }
+    if (!/^[0-9]*$/.test(inputs.cardNumberThree)) {
+      alert('카드 번호는 숫자만 입력 가능합니다.')
+
+      setInputs({
+        ...inputs,
+        cardNumberThree: '',
+      })
+      return
+    }
+    if (!/^[0-9]*$/.test(inputs.ardNumberFour)) {
+      alert('카드 번호는 숫자만 입력 가능합니다.')
+
+      setInputs({
+        ...inputs,
+        ardNumberFour: '',
+      })
+      return
+    }
+
+  }, [inputs.cardNumberOne, inputs.cardNumberTwo, inputs.cardNumberThree, inputs.ardNumberFour])
+
+
+
   const handleSubmit = () => {
     // 모든 Input 정보가 올바를 때
     console.log(inputs)
@@ -72,20 +130,57 @@ const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
                 <div className="small-card__chip"></div>
               </div>
               <div className="card-bottom">
+                <span className="card-text">
+                  {inputs.cardNumberOne}
+                  {inputs.cardNumberOne && '-'}
+                  {inputs.cardNumberTwo}
+                  {inputs.cardNumberTwo && '-'}
+                  {inputs.cardNumberThree.split('').map(() => '*')}
+                  {inputs.cardNumberThree && '-'}
+                  {inputs.cardNumberFour.split('').map(() => '*')}
+                </span>
                 <div className="card-bottom__info">
-                  <span className="card-text">NAME</span>
-                  <span className="card-text">MM / YY</span>
+                  <span className="card-text">{inputs.ownerName}</span>
+                  <span className="card-text">
+                    {inputs.expiredMonth}/ {inputs.expiredYear}
+                  </span>
                 </div>
               </div>
             </div>
           </div>
           <div className="input-container">
             <span className="input-title">카드 번호</span>
-            <CardNumberInput />
+            <CardNumberInput
+              one={inputs.cardNumberOne}
+              two={inputs.cardNumberTwo}
+              three={inputs.cardNumberThree}
+              four={inputs.cardNumberFour}
+              onChangeOne={(e) => {
+                setInputs({ ...inputs, cardNumberOne: e.target.value })
+              }}
+              onChangeTwo={(e) => {
+                setInputs({ ...inputs, cardNumberTwo: e.target.value })
+              }}
+              onChangeThree={(e) => {
+                setInputs({ ...inputs, cardNumberThree: e.target.value })
+              }}
+              onChangeFour={(e) => {
+                setInputs({ ...inputs, cardNumberFour: e.target.value })
+              }}
+            />
           </div>
           <div className="input-container">
             <span className="input-title">만료일</span>
-            <DateInput />
+            <DateInput
+              expiredMonth={inputs.expiredMonth}
+              expiredYear={inputs.expiredYear}
+              onChangeMonth={(e) => {
+                setInputs({ ...inputs, expiredMonth: e.target.value })
+              }}
+              onChangeYear={(e) => {
+                setInputs({ ...inputs, expiredYear: e.target.value })
+              }}
+            />
           </div>
           <Input
             label="카드 소유자 이름(선택)"
@@ -130,8 +225,8 @@ const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
               />
               <span>*</span>
               <span>*</span>
-          </div>
-          <Button onClick={handleSubmit}>다음</Button>
+            </div>
+            <Button onClick={handleSubmit}>다음</Button>
           </div>
         </div>
       </div>

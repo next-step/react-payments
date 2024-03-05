@@ -14,10 +14,12 @@ const StyledInputLabel = styled.label`
 `
 
 const StyledInput = styled.input<{ $size?: 'block' | 'sm' | 'md' }>`
+	color:#94dacd;	
+	font-weight:700;
 	background-color: #ecebf1;
 	height: 45px;
 	width: ${(props) =>
-		props.$size === 'block' ? '100%' : props.$size === 'sm' ? '24px' : '84px'};
+    props.$size === 'block' ? '100%' : props.$size === 'sm' ? '24px' : '84px'};
 	text-align: ${(props) => (props.$size === 'block' ? 'left' : 'center')};
 	outline: 2px solid transparent;
 	outline-offset: 2px;
@@ -53,7 +55,7 @@ const Input = ({
   return (
     <div className="input-container">
       {label && (
-        <StyledInputLabel for={label}>
+        <StyledInputLabel htmlFor={label}>
           {label}
           {isShowLength && (
             <StyledLength>
