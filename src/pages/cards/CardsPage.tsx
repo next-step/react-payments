@@ -1,3 +1,9 @@
+import AddCardButton from "./components/AddCardButton";
+
 export default function CardsPage() {
-  return <div>CardsPage</div>;
+  return (
+    <div>
+      <AddCardButton />
+    </div>
+  );
 }
