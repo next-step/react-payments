@@ -8,10 +8,10 @@ export const CardRegisterCompleteFunnel = () => {
   return (
     <Flex width="100%" height="100vh" direction="column">
       <Flex direction="column" justifyContent="center" alignItems="center" marginTop="48px">
-        <Text as="h1" variant="title1" marginBottom="48px">
+        <Text as="h1" variant="heading1" marginBottom="48px">
           카드등록이 완료되었습니다.
         </Text>
-        <Card cardSize="lg" {...cardInput} marginBottom="16px" />
+        <Card cardSize="lg" {...cardInput} marginBottom="24px" />
         <UnderlineInput width="240px" placeholder="카드 별명" contentAlign="center" />
       </Flex>
 
