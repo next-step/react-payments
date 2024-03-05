@@ -1,9 +1,9 @@
-import AddCardPage from "./pages/addCard/AddCardPage";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <main className="app">
-      <AddCardPage />
+      <Outlet />
     </main>
   );
 }
