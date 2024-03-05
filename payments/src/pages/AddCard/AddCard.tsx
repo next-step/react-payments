@@ -5,13 +5,25 @@ import Input from '../../components/Input.tsx'
 import CardSecret from '../../components/CardSecret.tsx'
 import Button from '../../components/Button.tsx'
 import Title from '../../components/Title.tsx'
+import IconButton from '../../components/IconButton.tsx'
+import { useNavigate } from 'react-router-dom'
 
 const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
+
+    const navigate = useNavigate()
+    const handleOnClick = () => {
+      navigate('/list')
+    }
+
   return (
     <>
       <div className="root">
         <div className="app">
-          <Title>카드 추가</Title>
+          <Title>
+            <IconButton onClick={handleOnClick} name="back">
+            </IconButton>
+            카드 추가
+          </Title>
           <div className="card-box">
             <div className="empty-card">
               <div className="card-top"></div>
