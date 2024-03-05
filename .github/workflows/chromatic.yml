@@ -3,8 +3,9 @@ name: 'Chromatic Deployment'
 
 # Event for the workflow
 on:
-  push:
-    branches: ['main']
+  pull_request:
+    types:
+      - opened
 # List of jobs
 jobs:
   deploy:
