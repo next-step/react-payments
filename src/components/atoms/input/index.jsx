@@ -5,17 +5,18 @@ import { createElement } from "react";
 const Input = (props) => {
   const {
     as = "input",
-    className,
-    type,
-    required,
     name,
-    secret,
     length,
+    required,
     maxLength,
     min,
     max,
     digit,
-    placeholder,
+    //
+    secret,
+    className,
+    //
+    ...rest
   } = props;
   const input = useInput({
     name,
@@ -27,16 +28,13 @@ const Input = (props) => {
     digit,
   });
 
-  const classes = Array.isArray(className)
-    ? props.className.join(" ")
-    : props.className;
+  const classes = Array.isArray(className) ? className.join(" ") : className;
 
   return createElement(
     as,
     {
       className: classes + (secret ? " input-secret" : ""),
-      type,
-      placeholder,
+      ...rest,
       ...input,
     },
     null
