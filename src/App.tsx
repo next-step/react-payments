@@ -7,7 +7,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/mycards">
+        <Route path="mycards">
           <Route index element={<MyCards />} />
           <Route path="register">
             <Route index element={<CardRegister />} />
