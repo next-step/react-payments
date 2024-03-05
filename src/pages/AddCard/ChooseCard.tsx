@@ -6,7 +6,7 @@ const ChooseCard = () => {
     <>
       <div className="root">
         <div className="app">
-					<Title>카드 추가</Title>
+          <Title>카드 추가</Title>
           <div className="card-box">
             <div className="small-card">
               <div className="card-top">

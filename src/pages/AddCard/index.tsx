@@ -1,18 +1,43 @@
 import React, { useState } from 'react'
 import AddCardInfo from './AddCard.tsx'
-import ChooseCard from './ChooseCard.tsx'
 import FinishAddingCard from './FinishAddingCard.tsx'
 
+export interface CardData {
+  cardNumberOne: string
+  cardNumberTwo: string
+  cardNumberThree: string
+  cardNumberFour: string
+  expiredMonth: string
+  expiredYear: string
+  ownerName: string
+  CVC: string
+  cardPasswordOne: string
+  cardPasswordTwo: string
+}
 const AddCard = () => {
-  const [data, setData] = useState()
   const [step, setStep] = useState<'카드정보' | '카드선택' | '생성완료'>(
-    '카드정보',
+    '카드정보'
   )
+
+  const [inputs, setInputs] = useState<CardData>({
+    cardNumberOne: '',
+    cardNumberTwo: '',
+    cardNumberThree: '',
+    cardNumberFour: '',
+    expiredMonth: '',
+    expiredYear: '',
+    ownerName: '',
+    CVC: '',
+    cardPasswordOne: '',
+    cardPasswordTwo: '',
+  })
 
   return (
     <div>
       {step === '카드정보' && (
         <AddCardInfo
+          inputs={inputs}
+          setInputs={setInputs}
           onNext={() => {
             setStep('생성완료')
           }}

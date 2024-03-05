@@ -1,37 +1,29 @@
-import React, { useRef, useState,useEffect } from 'react'
+import React, { useEffect } from 'react'
 import CardNumberInput from '../../components/CardNumberInput.tsx'
 import DateInput from '../../components/DateInput.tsx'
 import Input from '../../components/Input.tsx'
-import CardSecret from '../../components/CardSecret.tsx'
 import Button from '../../components/Button.tsx'
 import Title from '../../components/Title.tsx'
 import IconButton from '../../components/IconButton.tsx'
 import { useNavigate } from 'react-router-dom'
+import { CardData } from './index.tsx'
 
-const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
+const AddCardInfo = ({
+  onNext,
+  inputs,
+  setInputs,
+}: {
+  onNext: () => void
+  inputs: CardData
+  setInputs: React.Dispatch<React.SetStateAction<CardData>>
+}) => {
   // const cardNumRef = useRef(null)
   // const expiredDateRef = useRef(null)
   // const ownerNameRef = useRef(null)
   // const CVCRef = useRef(null)
   // const cardPasswordRef = useRef<HTMLInputElement | null>(null)
 
-
-
-  const [inputs, setInputs] = useState({
-    cardNumberOne: '',
-    cardNumberTwo: '',
-    cardNumberThree: '',
-    cardNumberFour: '',
-    expiredMonth: '',
-    expiredYear: '',
-    ownerName: '',
-    CVC:'',
-    cardPasswordOne:'',
-    cardPasswordTwo:'',
-  })
-  
   useEffect(() => {
-    
     if (!/^[0-9]*$/.test(inputs.CVC)) {
       alert('CVC 형식이 틀렸습니다.')
 
@@ -42,12 +34,13 @@ const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
 
       return
     }
-    
-
   }, [inputs.CVC])
-  
+
   useEffect(() => {
-    if (!/^[0-9]*$/.test(inputs.expiredMonth) || inputs.expiredMonth > 12) {
+    if (
+      !/^[0-9]*$/.test(String(inputs.expiredMonth)) ||
+      parseInt(inputs.expiredMonth) > 12
+    ) {
       alert('카드 만료 날짜 - 월을 확인해주세요.')
 
       setInputs({
@@ -59,7 +52,6 @@ const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
     }
   }, [inputs.expiredMonth])
 
-  
   useEffect(() => {
     if (!/^[0-9]*$/.test(inputs.cardNumberOne)) {
       alert('카드 번호는 숫자만 입력 가능합니다.')
@@ -88,19 +80,21 @@ const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
       })
       return
     }
-    if (!/^[0-9]*$/.test(inputs.ardNumberFour)) {
+    if (!/^[0-9]*$/.test(inputs.cardNumberFour)) {
       alert('카드 번호는 숫자만 입력 가능합니다.')
 
       setInputs({
         ...inputs,
-        ardNumberFour: '',
+        cardNumberFour: '',
       })
       return
     }
-
-  }, [inputs.cardNumberOne, inputs.cardNumberTwo, inputs.cardNumberThree, inputs.ardNumberFour])
-
-
+  }, [
+    inputs.cardNumberOne,
+    inputs.cardNumberTwo,
+    inputs.cardNumberThree,
+    inputs.cardNumberFour,
+  ])
 
   const handleSubmit = () => {
     // 모든 Input 정보가 올바를 때
@@ -108,9 +102,9 @@ const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
     onNext()
   }
   const navigate = useNavigate()
-    const handleOnClick = () => {
-      navigate('/list')
-    }
+  const handleOnClick = () => {
+    navigate('/list')
+  }
 
   return (
     <>
@@ -142,7 +136,7 @@ const AddCardInfo = ({ onNext }: { onNext: () => void }) => {
                 <div className="card-bottom__info">
                   <span className="card-text">{inputs.ownerName}</span>
                   <span className="card-text">
-                    {inputs.expiredMonth}/ {inputs.expiredYear}
+                    {inputs.expiredMonth} / {inputs.expiredYear}
                   </span>
                 </div>
               </div>

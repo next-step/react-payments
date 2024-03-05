@@ -14,7 +14,7 @@ const FinishAddingCard = () => {
       <div className="root">
         <div className="app flex-column-center">
           <div className="flex-center">
-          <Title className="mb-10">카드등록이 완료되었습니다.</Title>
+            <Title className="mb-10">카드등록이 완료되었습니다.</Title>
           </div>
           <Card />
           <div className="input-container flex-center w-100">
