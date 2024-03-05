@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import FormContext from '@/pages/new/context';
-import { Button, Form } from '@/components';
-import { Card } from '@/pages/_components';
+import { Button, Form, Card } from '@/components';
 
 interface CardNameProps {
   next: () => void;

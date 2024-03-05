@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Input, Button, Header } from '@/components';
-import { Card } from '@/pages/_components';
+import { Form, Input, Button, Header, Card } from '@/components';
 import FormContext from '@/pages/new/context';
 import * as styles from './cardInfo.css';
 import Arrow from '@/assets/arrow.svg?react';
