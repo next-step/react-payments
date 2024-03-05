@@ -1,6 +1,7 @@
 import React from 'react'
+import { CardData } from '../pages/AddCard'
 
-const Card = () => {
+const Card = ({ inputs }: { inputs: CardData }) => {
   return (
     <div className="card-box">
       <div className="big-card">
@@ -12,11 +13,15 @@ const Card = () => {
         </div>
         <div className="card-bottom">
           <div className="card-bottom__number">
-            <span className="card-text__big">1111 - 2222 - oooo - oooo</span>
+            <span className="card-text__big">
+              {inputs.cardNumberOne} - {inputs.cardNumberTwo} - oooo - oooo
+            </span>
           </div>
           <div className="card-bottom__info">
-            <span className="card-text__big">YUJO</span>
-            <span className="card-text__big">12 / 23</span>
+            <span className="card-text__big">{inputs.ownerName}</span>
+            <span className="card-text__big">
+              {inputs.expiredMonth}/ {inputs.expiredYear}
+            </span>
           </div>
         </div>
       </div>

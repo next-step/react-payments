@@ -44,7 +44,7 @@ const AddCard = () => {
         />
       )}
       {/* {step==='카드선택'&& <ChooseCard />} */}
-      {step === '생성완료' && <FinishAddingCard />}
+      {step === '생성완료' && <FinishAddingCard inputs={inputs} />}
     </div>
   )
 }

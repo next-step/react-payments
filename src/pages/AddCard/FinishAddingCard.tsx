@@ -3,7 +3,8 @@ import Card from '../../components/Card.tsx'
 import Button from '../../components/Button.tsx'
 import { useNavigate } from 'react-router-dom'
 import Title from '../../components/Title.tsx'
-const FinishAddingCard = () => {
+import { CardData } from './index.tsx'
+const FinishAddingCard = ({ inputs }: { inputs: CardData }) => {
   const navigate = useNavigate()
   const handleOnClick = () => {
     navigate('/list')
@@ -16,7 +17,7 @@ const FinishAddingCard = () => {
           <div className="flex-center">
             <Title className="mb-10">카드등록이 완료되었습니다.</Title>
           </div>
-          <Card />
+          <Card inputs={inputs}/>
           <div className="input-container flex-center w-100">
             <input
               className="input-underline w-75"
