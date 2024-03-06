@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext } from 'react'
 
-import { FormValues, useForm, UseFormProps } from '@/hooks/useForm'
+import { FormValues, useForm, UseFormProps } from '@/hooks/form/useForm'
 
 const FormContext = createContext({})
 

@@ -1,8 +1,7 @@
 import { InputWithMask } from '@/components/InputWithMask'
 import { Label } from '@/components/Label'
+import { useFormContext } from '@/hooks/form/formContext'
 import { FormType } from '@/pages/payments/cards/type'
-
-import { useFormContext } from '../../../../contexts/FormContext'
 
 export const ExpirationDate = () => {
   const { getFieldProps, errors, touched } = useFormContext<FormType>()

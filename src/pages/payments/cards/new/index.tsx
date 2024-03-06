@@ -1,11 +1,11 @@
 import { useRef } from 'react'
 
+import { Form } from '@/hooks/form/formContext'
 import { useFunnel } from '@/hooks/useFunnel'
 
 import { formInitialValues } from '../const'
 import { FormType } from '../type'
 import { Step1 } from './components/Step1'
-import { Form } from './contexts/FormContext'
 import { Step1Validate } from './service/validations'
 
 export const AddingCard = () => {

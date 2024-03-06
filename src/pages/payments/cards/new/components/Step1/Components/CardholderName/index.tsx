@@ -1,7 +1,7 @@
 import { TextCounter } from '@/components/TextCounter'
+import { useFormContext } from '@/hooks/form/formContext'
 import { FormType } from '@/pages/payments/cards/type'
 
-import { useFormContext } from '../../../../contexts/FormContext'
 import { CARD_HOLDER_NAME_MAX_LENGTH } from '../../../../service/const'
 
 export const CardholderName = () => {
