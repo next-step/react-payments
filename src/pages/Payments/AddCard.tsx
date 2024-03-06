@@ -11,7 +11,7 @@ import CardHolderName from '@components/CardForm/molecules/CardHolderName';
 import CardNumber from '@components/CardForm/molecules/CardNumber';
 import ExpirationDate from '@components/CardForm/molecules/ExpirationDate';
 import PinNumber from '@components/CardForm/molecules/PinNumber';
-import VerificationNumber from '@components/CardForm/molecules/VerificationNumber';
+import VerificationCode from '@components/CardForm/molecules/VerificationCode';
 
 type AddCardProps = {
   onNext: () => void;
@@ -46,7 +46,7 @@ export default function AddCard({ onNext, onPrevious }: AddCardProps) {
         <CardNumber />
         <ExpirationDate />
         <CardHolderName />
-        <VerificationNumber />
+        <VerificationCode />
         <PinNumber />
 
         <Button onButtonClick={onNext}>다음</Button>
