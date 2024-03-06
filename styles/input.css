@@ -55,3 +55,7 @@
 .input-disabled {
   background-color: transparent;
 }
+
+.input-hidden {
+  visibility: hidden;
+}
