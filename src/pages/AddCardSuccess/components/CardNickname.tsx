@@ -3,15 +3,16 @@ import InputContainer from '../../../components/InputContainer/InputContainer';
 import useCardNickname from '../hooks/useNickname';
 
 const CardNickname = () => {
-  const { nickname, handleNickname } = useCardNickname();
+  const { brand, nickname, handleNickname } = useCardNickname();
 
   return (
     <InputContainer className='input-container flex-center w-100'>
       <Input
         className='input-underline w-75'
         type='text'
-        placeholder='카드의 별칭을 입력해주세요.'
-        value={nickname || ''}
+        placeholder='카드 별칭 (선택)'
+        maxLength={10}
+        value={nickname || brand}
         onChange={handleNickname}
       />
     </InputContainer>

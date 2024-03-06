@@ -17,6 +17,7 @@ const useCardNickname = () => {
   );
 
   return {
+    brand: cardState.brand,
     nickname: cardState.nickname,
     handleNickname,
   };
