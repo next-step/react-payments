@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import type CardNumberType from '../types/CardNumberType';
 import type ExpirationDateType from '../types/ExpirationDateType';
 
 import {OWNER_NAME_DEFAULT} from '../constants/default';
 import {CARD_NUMBER_LIMIT, EXPIRATION_DATE_LIMIT} from '../constants/limit';
-import {HYPHEN, SLASH} from '../constants/specialCharacter';
 import {EXPIRATION_DATE_MONTH_PLACEHOLDER, EXPIRATION_DATE_YEAR_PLACEHOLDER} from '../constants/placeHolder';
 
 type CardProps = {
@@ -19,6 +19,9 @@ export default function Card({
 	ownerName,
 	expirationDate,
 }: CardProps) {
+	const SLASH = '/';
+	const HYPHEN = '-';
+
 	const specialCharacter = (
 		value: string,
 		limit: number,
