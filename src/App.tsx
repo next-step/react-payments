@@ -1,11 +1,7 @@
 import { Payments } from '@/pages/Payments/Payments';
 
 function App() {
-  return (
-    <>
-      <Payments />
-    </>
-  );
+  return <Payments />;
 }
 
 export default App;
