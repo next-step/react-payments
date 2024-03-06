@@ -1,16 +1,16 @@
-@import "./card.css";
-@import "./input.css";
-@import "./button.css";
-@import "./modal.css";
-@import "./utils.css";
+@import './styles/card.css';
+@import './styles/input.css';
+@import './styles/button.css';
+@import './styles/modal.css';
+@import './styles/utils.css';
 
 body {
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   align-items: center;
   justify-content: center;
-  background-color: #e5e5e5;
 }
 
 input {
