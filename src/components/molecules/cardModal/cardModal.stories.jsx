@@ -6,13 +6,20 @@ export default {
   component: CardModal,
   parameters: {
     layout: "fullscreen",
+    viewport: {
+      defaultViewport: "iphone14promax",
+    },
   },
 };
 
 const FormTemplate = (args) => (
-  <Form>
-    <CardModal toggleModal={() => {}} submit={() => {}} />
-  </Form>
+  <div id="root">
+    <div className="app">
+      <Form>
+        <CardModal toggleModal={() => {}} submit={() => {}} />
+      </Form>
+    </div>
+  </div>
 );
 export const Default = FormTemplate.bind({});
 Default.args = {};
