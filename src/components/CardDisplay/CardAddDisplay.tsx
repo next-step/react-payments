@@ -4,15 +4,15 @@ import { styleToken } from '@/shared/styles';
 type CardAddDisplayProps = {
   onClick?: () => void;
 };
-export const CardAddDisplay = (props: CardAddDisplayProps) => (
+export const CardAddDisplay = ({ onClick }: CardAddDisplayProps) => (
   <Button
     alignItems="center"
     justifyContent="center"
     width="208px"
     height="130px"
     backgroundColor={styleToken.color.gray300}
+    onClick={onClick}
     _hover={{ backgroundColor: styleToken.color.gray300 }}
-    {...props}
   >
     <Typography variant="headline" fontSize="36px" color={styleToken.color.gray600}>
       +

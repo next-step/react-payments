@@ -19,14 +19,7 @@ export const CardListPage = () => {
         <VStack gap="20px" padding="20px 0">
           {ownerCards.map((ownerCard, index) => (
             <VStack key={`card-list-${index}`} gap="10px" alignItems="center" justifyContent="center">
-              <CardDisplay
-                size="small"
-                label={ownerCard.label}
-                color={ownerCard.color}
-                cardNumber={ownerCard.cardNumber}
-                expirationDate={ownerCard.expirationDate}
-                ownerName={ownerCard.ownerName}
-              />
+              <CardDisplay size="small" {...ownerCard} />
               <Typography variant="body" textAlign="center">
                 {ownerCard.description}
               </Typography>

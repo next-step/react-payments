@@ -1,7 +1,6 @@
-import type { ButtonVariant, ButtonVariantState, ButtonColorScheme } from './Button.type';
 import { styleToken } from '@/shared/styles';
 
-export const buttonColorMap = {
+export const buttonColorToken = {
   teal: {
     solid: {
       default: {
@@ -79,8 +78,3 @@ export const buttonColorMap = {
     },
   },
 } as const;
-
-export const getButtonColor = (colorScheme: ButtonColorScheme, variant: ButtonVariant, state: ButtonVariantState) => {
-  const colorInfo = buttonColorMap[colorScheme][variant];
-  return colorInfo[state];
-};

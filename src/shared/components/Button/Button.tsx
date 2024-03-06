@@ -1,7 +1,7 @@
 import { HTMLProps, PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
 import { ButtonHoverProps, ButtonOptionalProps } from './Button.type';
-import { getButtonColor } from './Button.util';
+import { getButtonColor } from './Button.utils.ts';
 import { styleToken } from '@/shared/styles';
 import type { AsProps, StyleProps } from '@/shared/types';
 
@@ -9,16 +9,17 @@ type ButtonProps = PropsWithChildren<
   StyleProps & AsProps & HTMLProps<HTMLButtonElement> & ButtonOptionalProps & ButtonHoverProps
 >;
 
-export const Button = ({ children, type, variant, colorScheme, ...rest }: ButtonProps) => {
-  const buttonType = type || 'button';
-  const buttonVariant = variant || 'solid';
-  const buttonColorScheme = colorScheme || 'teal';
-  return (
-    <Root type={buttonType} variant={buttonVariant} colorScheme={buttonColorScheme} {...rest}>
-      {children}
-    </Root>
-  );
-};
+export const Button = ({
+  children,
+  type = 'button',
+  variant = 'solid',
+  colorScheme = 'teal',
+  ...rest
+}: ButtonProps) => (
+  <Root type={type} variant={variant} colorScheme={colorScheme} {...rest}>
+    {children}
+  </Root>
+);
 
 const Root = styled.button<ButtonProps & Required<ButtonOptionalProps> & ButtonHoverProps>`
   width: ${({ width }) => width || 'auto'};

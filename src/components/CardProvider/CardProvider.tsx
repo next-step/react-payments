@@ -1,14 +1,5 @@
 import { createContext, useState, useContext, PropsWithChildren, useMemo } from 'react';
-
-type CardState = {
-  cardNumber: string[];
-  expirationDate: string;
-  ownerName: string;
-  securityCode: string;
-  label: string;
-  color: string;
-  description: string;
-};
+import { CardState } from '@/type';
 
 type CardContextType = {
   card: CardState;
