@@ -2,8 +2,8 @@ import Input from '../Input';
 
 import updateValidValue from '../../utils/updateValidValue';
 
-import {OWNER_NAME_LIMIT} from '../../constants/limit';
-import {OWNER_NAME_PLACEHOLDER} from '../../constants/placeHolder';
+import {OWNER_NAME_LIMIT} from '../../constants/cardLimit';
+import {OWNER_NAME_PLACEHOLDER} from '../../constants/cardPlaceHolder';
 
 type OwnerNameProps = {
 	ownerName: string;

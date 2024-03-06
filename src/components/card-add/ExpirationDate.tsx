@@ -3,10 +3,10 @@ import Input from '../Input';
 
 import updateValidValue from '../../utils/updateValidValue';
 
-import type ExpirationDateType from '../../types/ExpirationDateType';
+import type {ExpirationDateType} from '../../types/CardFormType';
 
-import {EXPIRATION_DATE_LIMIT} from '../../constants/limit';
-import {EXPIRATION_DATE_MONTH_PLACEHOLDER, EXPIRATION_DATE_YEAR_PLACEHOLDER} from '../../constants/placeHolder';
+import {EXPIRATION_DATE_LIMIT} from '../../constants/cardLimit';
+import {EXPIRATION_DATE_MONTH_PLACEHOLDER, EXPIRATION_DATE_YEAR_PLACEHOLDER} from '../../constants/cardPlaceHolder';
 
 type ExpirationDateProps = {
 	expirationDate: ExpirationDateType;

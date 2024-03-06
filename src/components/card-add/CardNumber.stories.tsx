@@ -4,7 +4,7 @@ import type {Meta} from '@storybook/react';
 
 import CardNumber from './CardNumber';
 
-import type CardNumberType from '../../types/CardNumberType';
+import type {CardNumberType} from '../../types/CardFormType';
 
 type CardNumberProps = {
 	cardNumber: CardNumberType;

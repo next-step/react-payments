@@ -9,9 +9,8 @@ import OwnerName from './OwnerName';
 import SecurityCode from './SecurityCode';
 import CardPassword from './CardPassword';
 import ClickableLink from './ClickableLink';
-import type CardNumberType from '../../types/CardNumberType';
-import type ExpirationDateType from '../../types/ExpirationDateType';
-import type CardPasswordNumberType from '../../types/CardPasswordNumberType';
+
+import type {CardNumberType, ExpirationDateType, CardPasswordNumberType} from '../../types/CardFormType';
 
 export default function AddCardForm() {
 	const [cardNumber, setCardNumber] = useState<CardNumberType>({

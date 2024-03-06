@@ -2,14 +2,14 @@ import Input from '../Input';
 
 import updateValidValue from '../../utils/updateValidValue';
 
-import {SECURITY_CODE_LIMIT} from '../../constants/limit';
+import {SECURITY_CODE_LIMIT} from '../../constants/cardLimit';
 
-type SecurityCoderops = {
+type SecurityCodeProps = {
 	securityCode: string;
 	setSecurityCode: (value: string) => void;
 };
 
-export default function SecurityCode({securityCode, setSecurityCode}: SecurityCoderops) {
+export default function SecurityCode({securityCode, setSecurityCode}: SecurityCodeProps) {
 	const handleChangeSecurityCode = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value} = event.target;
 

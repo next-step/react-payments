@@ -2,9 +2,9 @@ import Input from '../Input';
 
 import updateValidValue from '../../utils/updateValidValue';
 
-import {CARD_PASSWORD_LIMIT} from '../../constants/limit';
+import {CARD_PASSWORD_LIMIT} from '../../constants/cardLimit';
 
-import type CardPasswordNumberType from '../../types/CardPasswordNumberType';
+import {type CardPasswordNumberType} from '../../types/CardFormType';
 
 type CardPasswordProps = {
 	cardPassword: CardPasswordNumberType;

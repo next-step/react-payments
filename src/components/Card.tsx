@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/naming-convention */
-import type CardNumberType from '../types/CardNumberType';
-import type ExpirationDateType from '../types/ExpirationDateType';
+import type {CardNumberType} from '../types/CardFormType';
+import type {ExpirationDateType} from '../types/CardFormType';
 
-import {OWNER_NAME_DEFAULT} from '../constants/default';
-import {CARD_NUMBER_LIMIT, EXPIRATION_DATE_LIMIT} from '../constants/limit';
-import {EXPIRATION_DATE_MONTH_PLACEHOLDER, EXPIRATION_DATE_YEAR_PLACEHOLDER} from '../constants/placeHolder';
+import {OWNER_NAME_DEFAULT} from '../constants/cardDefaultValue';
+import {CARD_NUMBER_LIMIT, EXPIRATION_DATE_LIMIT} from '../constants/cardLimit';
+import {EXPIRATION_DATE_MONTH_PLACEHOLDER, EXPIRATION_DATE_YEAR_PLACEHOLDER} from '../constants/cardPlaceHolder';
 
 type CardProps = {
 	variant: 'big' | 'small';
@@ -22,6 +22,8 @@ export default function Card({
 	const SLASH = '/';
 	const HYPHEN = '-';
 
+	const cardClassName = `card-text${variant === 'big' ? '__big' : ''}`;
+
 	const specialCharacter = (
 		value: string,
 		limit: number,
@@ -31,14 +33,14 @@ export default function Card({
 	return (
 		<>
 			<div className='card-top'>
-				<span className={`card-text${variant === 'big' ? '__big' : ''}`}>클린카드</span>
+				<span className={cardClassName}>클린카드</span>
 			</div>
 			<div className='card-middle'>
 				<div className={`${variant}-card__chip`}></div>
 			</div>
 			<div className='card-bottom'>
 				<div className='card-bottom__number'>
-					<span className={`card-text${variant === 'big' ? '__big' : ''}`}>
+					<span className={cardClassName}>
 						{cardNumber.firstNumber
 						+ specialCharacter(cardNumber.firstNumber, CARD_NUMBER_LIMIT, HYPHEN)}
 
@@ -53,8 +55,8 @@ export default function Card({
 
 				</div>
 				<div className='card-bottom__info'>
-					<span className={`card-text${variant === 'big' ? '__big' : ''}`}>{ownerName || OWNER_NAME_DEFAULT}</span>
-					<span className={`card-text${variant === 'big' ? '__big' : ''}`}>
+					<span className={cardClassName}>{ownerName || OWNER_NAME_DEFAULT}</span>
+					<span className={cardClassName}>
 						{
 							(expirationDate.month || expirationDate.year)
 								? `${expirationDate.month} 

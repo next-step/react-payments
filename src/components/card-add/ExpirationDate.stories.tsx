@@ -4,7 +4,7 @@ import type {Meta} from '@storybook/react';
 
 import ExpirationDate from './ExpirationDate';
 
-import type ExpirationDateType from '../../types/ExpirationDateType';
+import {type ExpirationDateType} from '../../types/CardFormType';
 
 type ExpirationDateProps = {
 	expirationDate: ExpirationDateType;

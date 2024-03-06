@@ -4,7 +4,7 @@ import type {Meta} from '@storybook/react';
 
 import CardPassword from './CardPassword';
 
-import type CardPasswordNumberType from '../../types/CardPasswordNumberType';
+import {type CardPasswordNumberType} from '../../types/CardFormType';
 
 const meta = {
 	title: 'CARD-ADD/CardPassword',
