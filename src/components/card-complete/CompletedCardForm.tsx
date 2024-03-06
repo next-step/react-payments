@@ -1,6 +1,6 @@
 import CardBox from '../CardBox';
 import Card from '../Card';
-import Button from '../card-add/Button';
+import Button from '../card-add/ClickableLink';
 import {
 	FIRST_NUMBER, FOURTH_NUMBER, SECOND_NUMBER, THIRD_NUMBER,
 } from '../../constants/cardNumber';

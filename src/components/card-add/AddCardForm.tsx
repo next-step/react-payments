@@ -8,7 +8,7 @@ import ExpirationDate from './ExpirationDate';
 import OwnerName from './OwnerName';
 import SecurityCode from './SecurityCode';
 import CardPassword from './CardPassword';
-import Button from './Button';
+import ClickableLink from './ClickableLink';
 
 import {
 	FIRST_NUMBER, SECOND_NUMBER, THIRD_NUMBER, FOURTH_NUMBER,
@@ -69,7 +69,7 @@ export default function AddCardForm() {
 					cardPassword={cardPassword}
 					setCardPassword={setCardPassword}
 				/>
-				<Button
+				<ClickableLink
 					location='/add/complete'
 					text='다음'
 				/>
