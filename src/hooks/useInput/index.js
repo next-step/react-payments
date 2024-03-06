@@ -2,7 +2,7 @@ import { useFormContext } from "../useFormProvider";
 
 const useInput = (props) => {
   const { name, required, length, maxLength, max, min, digit } = props;
-  const { register, getValues, setValue } = useFormContext();
+  const { register, getValues } = useFormContext();
 
   const checkValue = (value) => {
     const currentValue = getValues(name);

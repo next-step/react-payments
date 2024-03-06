@@ -33,7 +33,7 @@ StepChild.propTypes = {
 describe("Funnel 상태 변경 테스트", () => {
   afterEach(cleanup);
 
-  it("현재 패널 반환", () => {
+  it("1단계 패널이 렌더링 된다.", () => {
     render(
       <Funnel steps={["1단계", "2단계", "3단계"]}>
         <Funnel.Step name="1단계">
@@ -53,7 +53,7 @@ describe("Funnel 상태 변경 테스트", () => {
     expect(currentStep).toBeTruthy();
   });
 
-  it("특정 패널으로 이동", async () => {
+  it("update 함수를 통해서 2단계 패널로 이동이 가능하다.", async () => {
     render(
       <Funnel steps={["1단계", "2단계", "3단계"]}>
         <Funnel.Step name="1단계">
@@ -76,7 +76,7 @@ describe("Funnel 상태 변경 테스트", () => {
     });
   });
 
-  it("이전 패널으로 이동", () => {
+  it("back 함수로 이전 패널으로 이동 가능하다.", () => {
     render(
       <Funnel steps={["1단계", "2단계", "3단계"]}>
         <Funnel.Step name="1단계">
@@ -106,7 +106,7 @@ describe("Funnel 상태 변경 테스트", () => {
     });
   });
 
-  it("다음 패널로 이동", () => {
+  it("next 함수로 다음 패널로 이동 가능하다", () => {
     render(
       <Funnel steps={["1단계", "2단계", "3단계"]}>
         <Funnel.Step name="1단계">

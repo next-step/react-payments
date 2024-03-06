@@ -1,12 +1,13 @@
 import { cleanup, fireEvent, render } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
-import { FormProvider, useForm } from "react-hook-form";
+import FormProvider from "../useFormProvider";
+import useCustomForm from "../useForm";
 import PropTypes from "prop-types";
 import useInput from ".";
 
 const Form = (props) => {
   const { children } = props;
-  const form = useForm();
+  const form = useCustomForm();
 
   return <FormProvider {...form}>{children}</FormProvider>;
 };

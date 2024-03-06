@@ -14,7 +14,7 @@ describe("InputLength 테스트", () => {
   it("Undefined 테스트", () => {
     render(
       <Form>
-        <InputLength name={"undefined"} maxLength={10} />
+        <InputLength name={"undefined"} maxLength={"10"} />
       </Form>
     );
 
@@ -23,10 +23,10 @@ describe("InputLength 테스트", () => {
     expect(text).toBeTruthy();
   });
 
-  it("텍스트 테스트", () => {
+  it("텍스트 렌더링 테스트", () => {
     render(
       <Form>
-        <InputLength name={"name"} maxLength={10} />
+        <InputLength name={"name"} maxLength={"10"} />
       </Form>
     );
 

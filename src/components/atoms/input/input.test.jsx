@@ -11,7 +11,7 @@ Form.propTypes = {
 describe("Input 입력 테스트", () => {
   afterEach(cleanup);
 
-  it("숫자만 입력 가능", () => {
+  it("숫자만 입력 가능 가능하다", () => {
     render(
       <Form>
         <Input type={"number"} name={"number"} />
@@ -38,7 +38,7 @@ describe("Input 입력 테스트", () => {
   });
 
   // 비슷한 유형의 테스트를 다른 곳에서 작성했는데 또 할 필요가 있을까?
-  it("태그 변경 적용", () => {
+  it("특정 태그를 넣었을 때 해당 태그로 렌더링된다.", () => {
     render(
       <Form>
         <Input as="textarea" type={"number"} name={"number"} />
@@ -50,7 +50,7 @@ describe("Input 입력 테스트", () => {
     expect(input).toBeTruthy();
   });
 
-  it("스타일 클래스 적용", () => {
+  it("클래스를 넣었을 때 컴포넌트에 반영이 된다.", () => {
     render(
       <Form>
         <Input type={"number"} name={"number"} className="input" />
@@ -62,7 +62,7 @@ describe("Input 입력 테스트", () => {
     expect(input).toBeTruthy();
   });
 
-  it("여러 스타일 클래스 적용", () => {
+  it("여러 스타일 클래스를 적용할 수 있다.", () => {
     render(
       <Form>
         <Input

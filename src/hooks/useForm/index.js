@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 
-const useCustomForm = (props) => {
-  const { defaultValues, mode } = props;
+const useCustomForm = (props = {}) => {
+  const { defaultValues = {}, mode } = props;
 
   const elementRefs = useRef({});
   const valueRefs = useRef(defaultValues || {});
