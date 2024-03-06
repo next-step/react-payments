@@ -1,16 +1,29 @@
-import useCardOwnerNameInput from 'src/hooks/useCardOwnerNameInput.ts';
+import { useId, ChangeEvent } from 'react';
 
-interface CardSecurityCodeInputProps extends ReturnType<typeof useCardOwnerNameInput> {}
+import { useAddCardMachineActor } from 'src/state/addCardMachine.ts';
 
-export default function CardOwnerNameInput({
-	cardOwnerName,
-	handleCardOwnerNameChange,
-	id,
-	maxLength,
-}: CardSecurityCodeInputProps) {
+interface CardSecurityCodeInputProps {
+	maxLength?: number;
+}
+
+export default function CardOwnerNameInput({ maxLength = 30 }: CardSecurityCodeInputProps) {
+	const cardOwnerNameInputId = useId();
+
+	const [state, send] = useAddCardMachineActor();
+
+	const handleCardOwnerNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+		send({
+			type: 'CHANGE_FIELD',
+			value: event.target.value,
+			field: 'cardOwnerName',
+		});
+	};
+
+	const cardOwnerName = state.context.cardInfo.cardOwnerName;
+
 	return (
 		<div className="input-container">
-			<label className="input-label-box" htmlFor={id}>
+			<label className="input-label-box" htmlFor={cardOwnerNameInputId}>
 				<div className="input-title">카드 소유자 이름(선택)</div>
 				<div className="input-title">{`${cardOwnerName.length} / ${maxLength}`}</div>
 			</label>
@@ -19,7 +32,7 @@ export default function CardOwnerNameInput({
 				className="input-basic"
 				value={cardOwnerName}
 				onChange={handleCardOwnerNameChange}
-				id={id}
+				id={cardOwnerNameInputId}
 				data-testid="card-owner-name"
 				maxLength={maxLength}
 			/>

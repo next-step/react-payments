@@ -2,17 +2,16 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import CardSecurityCodeInput from 'src/components/CardSecurityCodeInput.tsx';
-import useCardSecurityCodeInput from 'src/hooks/useCardSecurityCodeInput.ts';
+import { AddCardMachineProvider } from 'src/state/addCardMachine.ts';
+import { SelectToFormLayer } from 'src/components/SelectToFormLayer.tsx';
 
 export function TestContainer() {
-	const { handleCardSecurityCodeChange, cardSecurityCode, id } = useCardSecurityCodeInput();
-
 	return (
-		<CardSecurityCodeInput
-			cardSecurityCode={cardSecurityCode}
-			handleCardSecurityCodeChange={handleCardSecurityCodeChange}
-			id={id}
-		/>
+		<AddCardMachineProvider>
+			<SelectToFormLayer>
+				<CardSecurityCodeInput />
+			</SelectToFormLayer>
+		</AddCardMachineProvider>
 	);
 }
 

@@ -1,7 +1,7 @@
 import { createMachine, assign } from 'xstate';
-import { nanoid } from 'nanoid';
+import { createActorContext } from '@xstate/react';
 
-interface CardInfo {
+export interface CardInfo {
 	cardNumberFirstSegment: string;
 	cardNumberSecondSegment: string;
 	cardNumberThirdSegment: string;
@@ -29,6 +29,7 @@ type CardMachineEvent =
 	| { type: 'TOGGLE' };
 export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent>(
 	{
+		predictableActionArguments: true,
 		id: 'addCard',
 		initial: 'select',
 		context: {
@@ -49,7 +50,6 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 		},
 		states: {
 			select: {
-				type: 'final',
 				on: {
 					ADD_CARD: {
 						target: 'form',
@@ -79,7 +79,7 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 						target: 'nickname',
 					},
 					CHANGE_FIELD: {
-						actions: ['changField'],
+						actions: ['changeField'],
 					},
 					BACK: {
 						target: 'select',
@@ -94,7 +94,7 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 						actions: ['addCard'],
 					},
 					CHANGE_FIELD: {
-						actions: ['changField'],
+						actions: ['changeField'],
 					},
 				},
 			},
@@ -117,7 +117,7 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 			}),
 			addCard: assign({
 				cardList: context => {
-					return [...context.cardList, { ...context.cardInfo, id: nanoid() }];
+					return [...context.cardList, { ...context.cardInfo, id: Date.now().toString() }];
 				},
 				cardInfo: {
 					cardNumberFirstSegment: '',
@@ -153,3 +153,10 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 );
 
 export type CardMachineType = typeof addCardMachine;
+
+export const {
+	Provider: AddCardMachineProvider,
+	useSelector: useAddCardMachineSelector,
+	useActor: useAddCardMachineActor,
+	useActorRef: useAddCardMachineActorRef,
+} = createActorContext(addCardMachine);

@@ -2,15 +2,16 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import CardNumberInput from 'src/components/CardNumberInput.tsx';
-import useCardNumberInput from 'src/hooks/useCardNumberInput.ts';
+import { AddCardMachineProvider } from 'src/state/addCardMachine.ts';
+import { SelectToFormLayer } from 'src/components/SelectToFormLayer.tsx';
 
 export function TestContainer() {
-	const cardNumberInput = useCardNumberInput();
-
 	return (
-		<div>
-			<CardNumberInput {...cardNumberInput} />
-		</div>
+		<AddCardMachineProvider>
+			<SelectToFormLayer>
+				<CardNumberInput />
+			</SelectToFormLayer>
+		</AddCardMachineProvider>
 	);
 }
 

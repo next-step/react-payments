@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import CardPasswordInputComponent from 'src/components/CardPasswordInput.tsx';
-import useCardPasswordInput from 'src/hooks/useCardPasswordInput.ts';
+import { SelectToFormLayer } from 'src/components/SelectToFormLayer.tsx';
+import { AddCardMachineDecorator } from 'src/stories/Decorators.tsx';
 
 const meta: Meta<typeof CardPasswordInputComponent> = {
 	title: 'card/CardPasswordInput',
 	component: CardPasswordInputComponent,
+	decorators: [AddCardMachineDecorator],
 };
 
 export default meta;
@@ -14,24 +16,10 @@ type Story = StoryObj<typeof CardPasswordInputComponent>;
 
 export const CardPasswordInput: Story = {
 	render: () => {
-		const {
-			firstPassword,
-			handleFirstPasswordChange,
-			secondPassword,
-			handleSecondPasswordChange,
-			secondPasswordInputRef,
-		} = useCardPasswordInput();
-
 		return (
-			<div>
-				<CardPasswordInputComponent
-					firstPassword={firstPassword}
-					handleFirstPasswordChange={handleFirstPasswordChange}
-					secondPassword={secondPassword}
-					handleSecondPasswordChange={handleSecondPasswordChange}
-					secondPasswordInputRef={secondPasswordInputRef}
-				/>
-			</div>
+			<SelectToFormLayer>
+				<CardPasswordInputComponent />
+			</SelectToFormLayer>
 		);
 	},
 };

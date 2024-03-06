@@ -2,29 +2,16 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import CardPasswordInput from 'src/components/CardPasswordInput.tsx';
-import useCardPasswordInput from 'src/hooks/useCardPasswordInput.ts';
+import { AddCardMachineProvider } from 'src/state/addCardMachine.ts';
+import { SelectToFormLayer } from 'src/components/SelectToFormLayer.tsx';
 
 export function TestContainer() {
-	const {
-		firstPassword,
-		handleFirstPasswordChange,
-		secondPassword,
-		handleSecondPasswordChange,
-		secondPasswordInputRef,
-		segmentMaxLength,
-		id,
-	} = useCardPasswordInput();
-
 	return (
-		<CardPasswordInput
-			firstPassword={firstPassword}
-			handleFirstPasswordChange={handleFirstPasswordChange}
-			secondPassword={secondPassword}
-			handleSecondPasswordChange={handleSecondPasswordChange}
-			secondPasswordInputRef={secondPasswordInputRef}
-			segmentMaxLength={segmentMaxLength}
-			id={id}
-		/>
+		<AddCardMachineProvider>
+			<SelectToFormLayer>
+				<CardPasswordInput />
+			</SelectToFormLayer>
+		</AddCardMachineProvider>
 	);
 }
 

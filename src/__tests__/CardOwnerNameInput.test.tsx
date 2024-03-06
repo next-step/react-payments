@@ -2,18 +2,16 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import CardOwnerNameInput from 'src/components/CardOwnerNameInput.tsx';
-import useCardOwnerNameInput from 'src/hooks/useCardOwnerNameInput.ts';
+import { AddCardMachineProvider } from 'src/state/addCardMachine.ts';
+import { SelectToFormLayer } from 'src/components/SelectToFormLayer.tsx';
 
 export function TestContainer() {
-	const { handleCardOwnerNameChange, cardOwnerName, maxLength, id } = useCardOwnerNameInput();
-
 	return (
-		<CardOwnerNameInput
-			cardOwnerName={cardOwnerName}
-			handleCardOwnerNameChange={handleCardOwnerNameChange}
-			maxLength={maxLength}
-			id={id}
-		/>
+		<AddCardMachineProvider>
+			<SelectToFormLayer>
+				<CardOwnerNameInput />
+			</SelectToFormLayer>
+		</AddCardMachineProvider>
 	);
 }
 

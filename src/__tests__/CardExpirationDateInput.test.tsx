@@ -1,18 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import useCardExpirationDateInput from 'src/hooks/useCardExpirationDateInput.ts';
 import CardExpirationDateInput from 'src/components/CardExpirationDateInput.tsx';
+import { AddCardMachineProvider } from 'src/state/addCardMachine.ts';
+import { SelectToFormLayer } from 'src/components/SelectToFormLayer.tsx';
 
 export function TestContainer() {
-	const { handleExpirationDateChange, expirationDate, id } = useCardExpirationDateInput();
-
 	return (
-		<CardExpirationDateInput
-			expirationDate={expirationDate}
-			handleExpirationDateChange={handleExpirationDateChange}
-			id={id}
-		/>
+		<AddCardMachineProvider>
+			<SelectToFormLayer>
+				<CardExpirationDateInput />
+			</SelectToFormLayer>
+		</AddCardMachineProvider>
 	);
 }
 

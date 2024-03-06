@@ -1,41 +1,81 @@
-import useCardNumberInput from 'src/hooks/useCardNumberInput.ts';
+import { useId, useRef, ChangeEvent } from 'react';
 
-interface CardNumberInputProps extends ReturnType<typeof useCardNumberInput> {}
+import { useAddCardMachineActor } from 'src/state/addCardMachine.ts';
+import REGEX from 'src/constants/regex.ts';
 
-export default function CardNumberInput({
-	firstSegment,
-	handleFirstSegmentChange,
-	handleFourthSegmentChange,
-	handleSecondSegmentChange,
-	handleThirdSegmentChange,
-	fourthSegmentInputRef,
-	secondSegmentInputRef,
-	secondSegment,
-	thirdSegmentInputRef,
-	thirdSegment,
-	fourthSegment,
-	id,
-	segmentLength,
-}: CardNumberInputProps) {
+interface CardNumberInputProps {
+	segmentLength?: number;
+}
+
+export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputProps) {
+	const [state, send] = useAddCardMachineActor();
+
+	const { cardNumberFirstSegment, cardNumberSecondSegment, cardNumberThirdSegment, cardNumberFourthSegment } =
+		state.context.cardInfo;
+
+	const secondSegmentInputRef = useRef<HTMLInputElement>(null);
+	const thirdSegmentInputRef = useRef<HTMLInputElement>(null);
+	const fourthSegmentInputRef = useRef<HTMLInputElement>(null);
+
+	const cardNumberInputId = useId();
+
+	const handleFirstSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
+
+		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberFirstSegment' });
+
+		if (formattedValue.length === segmentLength) {
+			secondSegmentInputRef.current?.focus();
+		}
+	};
+
+	const handleSecondSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
+
+		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberSecondSegment' });
+
+		if (formattedValue.length === segmentLength) {
+			thirdSegmentInputRef.current?.focus();
+		}
+	};
+
+	const handleThirdSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
+
+		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberThirdSegment' });
+
+		if (formattedValue.length === segmentLength) {
+			fourthSegmentInputRef.current?.focus();
+		}
+	};
+
+	const handleFourthSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
+		send({
+			type: 'CHANGE_FIELD',
+			value: event.target.value.replace(REGEX.EXCLUDE_NUMBER, ''),
+			field: 'cardNumberFourthSegment',
+		});
+	};
+
 	return (
 		<div className="input-container">
-			<label className="input-title" htmlFor={id}>
+			<label className="input-title" htmlFor={cardNumberInputId}>
 				카드 번호
 			</label>
 			<div className="input-box">
 				<input
 					data-testid="first-segment"
 					className="input-basic w-15"
-					value={firstSegment}
+					value={cardNumberFirstSegment}
 					onChange={handleFirstSegmentChange}
-					id={id}
+					id={cardNumberInputId}
 					maxLength={segmentLength}
 				/>
 				<div>-</div>
 				<input
 					data-testid="second-segment"
 					className="input-basic w-15"
-					value={secondSegment}
+					value={cardNumberSecondSegment}
 					onChange={handleSecondSegmentChange}
 					ref={secondSegmentInputRef}
 					maxLength={segmentLength}
@@ -45,7 +85,7 @@ export default function CardNumberInput({
 					data-testid="third-segment"
 					type="password"
 					className="input-basic w-15"
-					value={thirdSegment}
+					value={cardNumberThirdSegment}
 					onChange={handleThirdSegmentChange}
 					ref={thirdSegmentInputRef}
 					maxLength={segmentLength}
@@ -55,7 +95,7 @@ export default function CardNumberInput({
 					data-testid="fourth-segment"
 					type="password"
 					className="input-basic w-15"
-					value={fourthSegment}
+					value={cardNumberFourthSegment}
 					onChange={handleFourthSegmentChange}
 					ref={fourthSegmentInputRef}
 					maxLength={segmentLength}

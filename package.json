@@ -17,8 +17,7 @@
 		"test:generate-output-watch": "jest --watch --json --outputFile=.jest-test-results.json || true"
 	},
 	"dependencies": {
-		"@xstate/react": "^4.1.0",
-		"nanoid": "^5.0.6",
+		"@xstate/react": "3.2.2",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"xstate": "4.38.3"

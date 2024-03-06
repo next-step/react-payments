@@ -1,20 +1,15 @@
-import useCardNumberInput from 'src/hooks/useCardNumberInput.ts';
-import useCardOwnerNameInput from 'src/hooks/useCardOwnerNameInput.ts';
-import useCardExpirationDateInput from 'src/hooks/useCardExpirationDateInput.ts';
+import { useAddCardMachineSelector } from 'src/state/addCardMachine.ts';
 
-interface CardImageProps
-	extends Pick<ReturnType<typeof useCardExpirationDateInput>, 'expirationDate'>,
-		Pick<ReturnType<typeof useCardNumberInput>, 'firstSegment' | 'secondSegment' | 'thirdSegment' | 'fourthSegment'>,
-		Pick<ReturnType<typeof useCardOwnerNameInput>, 'cardOwnerName'> {}
+export default function CardImage() {
+	const {
+		cardExpirationDate,
+		cardNumberFirstSegment,
+		cardNumberSecondSegment,
+		cardNumberThirdSegment,
+		cardNumberFourthSegment,
+		cardOwnerName,
+	} = useAddCardMachineSelector(state => state.context.cardInfo);
 
-export default function CardImage({
-	expirationDate,
-	firstSegment,
-	secondSegment,
-	thirdSegment,
-	fourthSegment,
-	cardOwnerName,
-}: CardImageProps) {
 	return (
 		<div className="card-box">
 			<div className="empty-card">
@@ -25,12 +20,13 @@ export default function CardImage({
 				<div className="card-bottom">
 					<div className="card-bottom__number">
 						<span className="card-text">
-							{firstSegment} {secondSegment} {'o'.repeat(thirdSegment.length)} {'o'.repeat(fourthSegment.length)}
+							{cardNumberFirstSegment} {cardNumberSecondSegment} {'o'.repeat(cardNumberThirdSegment.length)}{' '}
+							{'o'.repeat(cardNumberFourthSegment.length)}
 						</span>
 					</div>
 					<div className="card-bottom__info">
 						<span className="card-text">{cardOwnerName || 'NAME'}</span>
-						<span className="card-text">{expirationDate || 'MM / YY'}</span>
+						<span className="card-text">{cardExpirationDate || 'MM / YY'}</span>
 					</div>
 				</div>
 			</div>
