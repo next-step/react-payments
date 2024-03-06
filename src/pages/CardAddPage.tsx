@@ -1,7 +1,7 @@
 import ArrowLeft from '@/assets/arrow-left.svg';
 import { AppLayout, CardDisplay, useCard, useFunnel, CardSelectBottomSheet, CardInput } from '@/components';
 import { ONLY_NUMBERS_REGEX } from '@/constant';
-import { useModal, useStringInput, useSelectCardBrand, useInputs, createUseInputConfig } from '@/hook';
+import { useModal, useSelectCardBrand, useInputs, createUseInputConfig } from '@/hook';
 import { Button, HStack, Typography, VStack } from '@/shared/components';
 import { styleToken } from '@/shared/styles';
 import { removeAllSpaces } from '@/shared/utils';
@@ -9,6 +9,9 @@ import { CardBrand } from '@/type';
 
 const CARD_NUMBER_ID = 'card-number';
 const CARD_NUMBER_INPUT_CONFIG = createUseInputConfig(4, ONLY_NUMBERS_REGEX);
+const CARD_EXPIRATION_DATE = createUseInputConfig(2, ONLY_NUMBERS_REGEX);
+const CARD_SECURITY_CODE = createUseInputConfig(3, ONLY_NUMBERS_REGEX);
+const CARD_PASSWORD = createUseInputConfig(1, ONLY_NUMBERS_REGEX);
 
 export const CardAddPage = () => {
   const { goToPrev, goToNext } = useFunnel();
@@ -33,16 +36,39 @@ export const CardAddPage = () => {
     CARD_NUMBER_INPUT_CONFIG,
   ]);
 
-  const { value: expirationDate, handleChange: handleExpirationDateChange } = useStringInput('');
-  const { value: ownerName, handleChange: handleOwnerNameChange } = useStringInput('');
-  const { value: securityCode, handleChange: handleSecurityCodeChange } = useStringInput('');
-  const { value: password, handleChange: handlePasswordChange } = useStringInput('');
+  const {
+    values: expirationDate,
+    refs: expirationDateRefs,
+    handleChange: handleExpirationDateChange,
+    handleKeyUp: handleExpirationDateKeyUp,
+  } = useInputs([CARD_EXPIRATION_DATE, CARD_EXPIRATION_DATE]);
+
+  const {
+    values: ownerName,
+    refs: ownerNameRefs,
+    handleChange: handleOwnerNameChange,
+    handleKeyUp: handleOwnerNameKeyUp,
+  } = useInputs();
+
+  const {
+    values: securityCode,
+    refs: securityCodeRefs,
+    handleChange: handleSecurityCodeChange,
+    handleKeyUp: handleSecurityCodeKeyUp,
+  } = useInputs([CARD_SECURITY_CODE]);
+
+  const {
+    values: password,
+    refs: passwordRefs,
+    handleChange: handlePasswordChange,
+    handleKeyUp: handlePasswordKeyUp,
+  } = useInputs([CARD_PASSWORD, CARD_PASSWORD]);
 
   const isValidateCardBrand = Boolean(selectedCardBrand.label);
   const isValidateCardNumber = removeAllSpaces(cardNumber.join('')).length === 16;
-  const isValidateExpirationDate = removeAllSpaces(expirationDate).length === 4;
+  const isValidateExpirationDate = removeAllSpaces(expirationDate.join('')).length === 4;
   const isValidateSecurityCode = securityCode.length === 3;
-  const isValidatePassword = removeAllSpaces(password).length === 2;
+  const isValidatePassword = removeAllSpaces(password.join('')).length === 2;
   const isValidateCardState =
     isValidateCardBrand &&
     isValidateCardNumber &&
@@ -60,8 +86,8 @@ export const CardAddPage = () => {
       ...card,
       cardNumber,
       expirationDate,
-      ownerName,
-      securityCode,
+      ownerName: ownerName[0],
+      securityCode: securityCode[0],
       label: selectedCardBrand.label,
       color: selectedCardBrand.color,
     });
@@ -104,7 +130,7 @@ export const CardAddPage = () => {
               color={selectedCardBrand.color}
               cardNumber={cardNumber}
               expirationDate={expirationDate}
-              ownerName={ownerName}
+              ownerName={ownerName[0]}
               onClick={handleCardSelectOpen}
             />
           </VStack>
@@ -121,10 +147,30 @@ export const CardAddPage = () => {
               padding: '0 45px',
             }}
           />
-          <CardInput.ExpirationDate onChange={handleExpirationDateChange} />
-          <CardInput.OwnerName onChange={handleOwnerNameChange} />
-          <CardInput.SecurityCode onChange={handleSecurityCodeChange} />
-          <CardInput.Password onChange={handlePasswordChange} />
+          <CardInput.ExpirationDate
+            values={expirationDate}
+            onChange={handleExpirationDateChange}
+            onKeyUp={handleExpirationDateKeyUp}
+            refs={expirationDateRefs}
+          />
+          <CardInput.OwnerName
+            value={ownerName[0]}
+            onChange={handleOwnerNameChange(0)}
+            onKeyUp={handleOwnerNameKeyUp(0)}
+            ref={ownerNameRefs[0]}
+          />
+          <CardInput.SecurityCode
+            value={securityCode[0]}
+            onChange={handleSecurityCodeChange(0)}
+            onKeyUp={handleSecurityCodeKeyUp(0)}
+            ref={securityCodeRefs[0]}
+          />
+          <CardInput.Password
+            values={password}
+            onChange={handlePasswordChange}
+            onKeyUp={handlePasswordKeyUp}
+            refs={passwordRefs}
+          />
         </VStack>
       </AppLayout.Body>
       <AppLayout.Footer>

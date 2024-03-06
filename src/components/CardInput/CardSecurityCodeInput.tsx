@@ -1,11 +1,9 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, forwardRef, KeyboardEvent, RefObject } from 'react';
 import {
   CARD_INPUT_COLOR,
   CARD_INPUT_PASSWORD_FONT_SIZE,
   CARD_INPUT_PASSWORD_FONT_WEIGHT,
 } from './constants/cardInputStyles';
-import { ONLY_NUMBERS_REGEX } from '@/constant';
-import { createUseInputConfig, useInputs } from '@/hook';
 import { Circle, HStack, Label, TextField, Typography, VStack } from '@/shared/components';
 
 import { styleToken } from '@/shared/styles';
@@ -13,25 +11,15 @@ import { styleToken } from '@/shared/styles';
 const SECURITY_CODE_INPUT_MAX_VALUE_LENGTH = 3;
 const SECURITY_CODE_INPUT_ID = 'security-code-input';
 
-type SecurityCodeInputProps = {
-  onChange?: (value: string) => void;
-};
+type SecurityCodeInputProps = Partial<{
+  refs: RefObject<HTMLInputElement>;
+  value: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  onKeyUp: (event: KeyboardEvent<HTMLInputElement>) => void;
+}>;
 
-export const CardSecurityCodeInput = ({ onChange }: SecurityCodeInputProps) => {
-  const {
-    values: securityCodeInputValue,
-    refs: securityCdoeInputRefs,
-    handleChange,
-  } = useInputs([createUseInputConfig(SECURITY_CODE_INPUT_MAX_VALUE_LENGTH, ONLY_NUMBERS_REGEX)]);
-
-  const onSecurityCodeInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    handleChange(0)(e);
-
-    onChange?.(value);
-  };
-
-  return (
+export const CardSecurityCodeInput = forwardRef<HTMLInputElement, SecurityCodeInputProps>(
+  ({ value, onChange, onKeyUp }, ref) => (
     <VStack>
       <Label htmlFor={SECURITY_CODE_INPUT_ID} variant="caption" color={styleToken.color.gray700}>
         보안 코드(CVC/CVV)
@@ -39,11 +27,12 @@ export const CardSecurityCodeInput = ({ onChange }: SecurityCodeInputProps) => {
       <HStack alignItems="center" gap="10px">
         <TextField
           id={SECURITY_CODE_INPUT_ID}
-          ref={securityCdoeInputRefs[0]}
+          ref={ref}
           type="password"
           variant="filled"
-          value={securityCodeInputValue}
-          onChange={onSecurityCodeInputChange}
+          value={value}
+          onChange={onChange}
+          onKeyUp={onKeyUp}
           maxLength={SECURITY_CODE_INPUT_MAX_VALUE_LENGTH}
           width="84px"
           paddingLeft="19px"
@@ -56,8 +45,8 @@ export const CardSecurityCodeInput = ({ onChange }: SecurityCodeInputProps) => {
         <Tooltip />
       </HStack>
     </VStack>
-  );
-};
+  ),
+);
 
 const Tooltip = () => (
   <Circle

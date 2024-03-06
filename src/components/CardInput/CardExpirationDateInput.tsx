@@ -1,36 +1,27 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, KeyboardEvent, RefObject } from 'react';
 import { CARD_INPUT_COLOR, CARD_INPUT_TEXT_FONT_SIZE, CARD_INPUT_TEXT_FONT_WEIGHT } from './constants/cardInputStyles';
-import { ONLY_NUMBERS_REGEX } from '@/constant';
-import { createUseInputConfig, useInputs } from '@/hook';
 import { HStack, Label, TextField, Typography, VStack } from '@/shared/components';
 import { styleToken } from '@/shared/styles';
 import { validateMonthString } from '@/shared/utils';
 
 const CARD_EXPIRATIONS_DATE_ID = 'card-expiration-date';
 
-type CardExpirationDateInputProps = {
-  onChange?: (value: string) => void;
-};
-export const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputProps) => {
-  const {
-    values: cardExpirationDateParts,
-    refs: inputRefs,
-    handleChange,
-    handleKeyUp,
-  } = useInputs([createUseInputConfig(2, ONLY_NUMBERS_REGEX), createUseInputConfig(2, ONLY_NUMBERS_REGEX)]);
+type CardExpirationDateInputProps = Partial<{
+  refs: RefObject<HTMLInputElement>[];
+  values: string[];
+  onChange: (index: number) => (event: ChangeEvent<HTMLInputElement>) => void;
+  onKeyUp: (index: number) => (event: KeyboardEvent<HTMLInputElement>) => void;
+}>;
 
+export const CardExpirationDateInput = ({ refs, values, onChange, onKeyUp }: CardExpirationDateInputProps) => {
   const handleCardNumberPartChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
-    const monthString = e.target.value;
-    if (index === 0 && monthString.length === 2 && !validateMonthString(monthString)) {
+    const datesString = e.target.value;
+    if (index === 0 && datesString.length === 2 && !validateMonthString(datesString)) {
       console.warn('월 형식이 올바르지 않습니다. (01 ~ 12)');
       return;
     }
 
-    const newCardNumberParts = [...cardExpirationDateParts];
-    newCardNumberParts[index] = monthString;
-
-    handleChange(index)(e);
-    onChange?.(newCardNumberParts.join(' '));
+    onChange?.(index)(e);
   };
 
   return (
@@ -48,11 +39,11 @@ export const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputPro
       >
         <TextField
           id={`${CARD_EXPIRATIONS_DATE_ID}-0`}
-          ref={inputRefs[0]}
+          ref={refs?.[0]}
           variant="unstyled"
-          value={cardExpirationDateParts[0]}
+          value={values?.[0]}
           onChange={handleCardNumberPartChange(0)}
-          onKeyUp={handleKeyUp(0)}
+          onKeyUp={onKeyUp?.(0)}
           maxLength={2}
           width="30px"
           color={CARD_INPUT_COLOR}
@@ -77,11 +68,11 @@ export const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputPro
         </Typography>
         <TextField
           id={`${CARD_EXPIRATIONS_DATE_ID}-1`}
-          ref={inputRefs[1]}
+          ref={refs?.[1]}
           variant="unstyled"
-          value={cardExpirationDateParts[1]}
+          value={values?.[1]}
           onChange={handleCardNumberPartChange(1)}
-          onKeyUp={handleKeyUp(1)}
+          onKeyUp={onKeyUp?.(1)}
           maxLength={2}
           width="24px"
           color={CARD_INPUT_COLOR}

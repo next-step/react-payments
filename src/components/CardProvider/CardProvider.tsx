@@ -1,6 +1,16 @@
 import { createContext, useState, useContext, PropsWithChildren, useMemo } from 'react';
 import { CardState } from '@/type';
 
+const INITIAL_CARD_STATE: CardState = {
+  cardNumber: ['', '', '', ''],
+  expirationDate: ['', ''],
+  ownerName: '',
+  securityCode: '',
+  label: '',
+  color: '',
+  description: '',
+};
+
 type CardContextType = {
   card: CardState;
   ownerCards: CardState[];
@@ -12,28 +22,12 @@ type CardContextType = {
 const CardContext = createContext<CardContextType | null>(null);
 
 export const CardProvider = ({ children }: PropsWithChildren) => {
-  const [card, setCard] = useState<CardState>({
-    cardNumber: [],
-    expirationDate: '',
-    ownerName: '',
-    securityCode: '',
-    label: '',
-    color: '',
-    description: '',
-  });
+  const [card, setCard] = useState<CardState>(INITIAL_CARD_STATE);
 
   const [ownerCards, setOwnerCards] = useState<CardState[]>([]);
 
   const resetCurrentCard = () => {
-    setCard({
-      cardNumber: [],
-      expirationDate: '',
-      ownerName: '',
-      securityCode: '',
-      description: '',
-      label: '',
-      color: '',
-    });
+    setCard(INITIAL_CARD_STATE);
   };
 
   const addCardToOwner = (card: CardState) => {

@@ -22,7 +22,7 @@ export const CardDisplay = ({
   onClick,
 }: CardDisplayProps) => {
   const { cardDisplayProps, cardChipProps, typographyVariant, maskFontSize } = getCardStyles(size);
-  const [expirationMonth, expirationYear] = expirationDate.split(' ');
+  const [expirationMonth, expirationYear] = expirationDate;
   return (
     <Button onClick={onClick} padding="0">
       <VStack

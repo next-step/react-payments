@@ -34,7 +34,7 @@ export const Primary: Story = {
       label="Near 카드"
       color={styleToken.color.teal200}
       cardNumber={['1234', '1234', '1234', '1234']}
-      expirationDate="12 12"
+      expirationDate={['12', '12']}
       ownerName="Near"
     />
   ),
@@ -47,7 +47,7 @@ export const WithBackgroundColor: Story = {
       label="Near 카드"
       color={styleToken.color.gray200}
       cardNumber={['1234', '1234', '1234', '1234']}
-      expirationDate="12 12"
+      expirationDate={['12', '12']}
       ownerName="Near"
     />
   ),
@@ -60,7 +60,7 @@ export const WithSizeBig: Story = {
       label="Near 카드"
       color={styleToken.color.teal200}
       cardNumber={['1234', '1234', '1234', '1234']}
-      expirationDate="12 12"
+      expirationDate={['12', '12']}
       ownerName="Near"
     />
   ),
@@ -73,7 +73,7 @@ export const WithNoLabel: Story = {
       label=""
       color={styleToken.color.teal200}
       cardNumber={['1234', '1234', '1234', '1234']}
-      expirationDate="12 12"
+      expirationDate={['12', '12']}
       ownerName="Near"
     />
   ),
