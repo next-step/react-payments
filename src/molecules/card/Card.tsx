@@ -4,7 +4,10 @@ import { OwnerName } from './ownerName/OwnerName';
 import { SecurityCode } from './securityCode/SecurityCode';
 import { Password } from './password/Password';
 
-export const Card = Object.assign(
-  {},
-  { Number: CardNumber, ExpireDate, OwnerName, SecurityCode, Password }
-);
+export const Card = {
+  Number: CardNumber,
+  ExpireDate,
+  OwnerName,
+  SecurityCode,
+  Password,
+};
