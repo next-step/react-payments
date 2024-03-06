@@ -1,4 +1,4 @@
-import {Validation} from './Validation';
+import {isValidNumber, isValidLength, isValidMonth} from './Validation';
 
 type UpdateValidValueProps = {
 	limit: number;
@@ -15,19 +15,17 @@ export default function updateValidValue({
 	isMonth,
 	isNumber,
 }: UpdateValidValueProps) {
-	const validation = new Validation();
-
 	let isValid = true;
 
-	if (isNumber && !validation.isValidNumber(limit, value)) {
+	if (isNumber && !isValidNumber(limit, value)) {
 		isValid = false;
 	}
 
-	if (!validation.isValidLength(limit, value)) {
+	if (!isValidLength(limit, value)) {
 		isValid = false;
 	}
 
-	if (isMonth && !validation.isValidMonth(value)) {
+	if (isMonth && !isValidMonth(value)) {
 		isValid = false;
 	}
 
