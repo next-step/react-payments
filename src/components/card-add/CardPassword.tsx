@@ -19,18 +19,18 @@ export default function CardPassword({cardPassword, setCardPassword}: CardPasswo
 	const handleChangeCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value, name} = event.target;
 
-		updateValidValue(
-			CARD_PASSWORD_LIMIT,
-			value => {
+		updateValidValue({
+			limit: CARD_PASSWORD_LIMIT,
+			setter(value) {
 				setCardPassword(prev => ({
 					...prev,
 					[name]: value,
 				}));
 			},
 			value,
-			false,
-			true,
-		);
+			isMonth: false,
+			isNumber: true,
+		});
 	};
 
 	return (

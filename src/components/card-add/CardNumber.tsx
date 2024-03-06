@@ -23,18 +23,18 @@ export default function CardNumber({cardNumber, setCardNumber}: CardNumberProps)
 	const handleChangeCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value, name} = event.target;
 
-		updateValidValue(
-			CARD_NUMBER_LIMIT,
-			value => {
+		updateValidValue({
+			limit: CARD_NUMBER_LIMIT,
+			setter(value) {
 				setCardNumber(prev => ({
 					...prev,
 					[name]: value,
 				}));
 			},
 			value,
-			false,
-			true,
-		);
+			isMonth: false,
+			isNumber: true,
+		});
 	};
 
 	return (

@@ -14,13 +14,13 @@ export default function OwnerName({ownerName, setOwnerName}: OwnerNameProps) {
 	const handleChangeOwnerName = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value} = event.target;
 
-		updateValidValue(
-			OWNER_NAME_LIMIT,
-			setOwnerName,
+		updateValidValue({
+			limit: OWNER_NAME_LIMIT,
+			setter: setOwnerName,
 			value,
-			false,
-			false,
-		);
+			isMonth: false,
+			isNumber: false,
+		});
 	};
 
 	return (

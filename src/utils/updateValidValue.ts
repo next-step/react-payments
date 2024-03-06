@@ -1,12 +1,20 @@
 import {Validation} from './Validation';
 
-export default function updateNumberIfValid(
-	limit: number,
-	setter: (value: string) => void,
-	value: string,
-	isMonth: boolean,
-	isNumber: boolean,
-) {
+type UpdateValidValueProps = {
+	limit: number;
+	setter: (value: string) => void;
+	value: string;
+	isMonth: boolean;
+	isNumber: boolean;
+};
+
+export default function updateValidValue({
+	limit,
+	setter,
+	value,
+	isMonth,
+	isNumber,
+}: UpdateValidValueProps) {
 	const validation = new Validation();
 
 	let isValid = true;
