@@ -16,9 +16,7 @@ const checkExpirationDate = (month: string, year: string) => {
 }
 
 const checkCardholderName = (name: string) => {
-  if (name.length > CARD_HOLDER_NAME_MAX_LENGTH) return false
-
-  return true
+  return name.length <= CARD_HOLDER_NAME_MAX_LENGTH
 }
 
 const checkCardNumber = (cardNumber: string) => {
