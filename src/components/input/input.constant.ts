@@ -19,8 +19,14 @@ const CLASSNAME = {
   READONLY: 'input-readonly',
 } as const;
 
+const REGEX = {
+  DIGIT: /\D/g,
+  ALPHABET: /[^a-zA-Z]/g,
+};
+
 export const INPUT = {
   TYPE,
+  REGEX,
   BOX,
   CLASSNAME,
 } as const;
