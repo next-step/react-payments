@@ -1,7 +1,26 @@
 import { Input } from '@/components/input/Input';
 import { CARD_NUMBER } from './cardNumber.constant';
 import { INPUT } from '@/components/input/input.constant';
-import { formMethodsProps } from '@/hooks/useForm';
+import { formMethodsProps } from '@/hooks/useForm/useForm';
+
+export const INPUT_FIELDS = {
+  NUMBER: {
+    TYPE: 'number',
+    REGEX: /\D/g,
+  },
+  STRING: {
+    TYPE: 'string',
+    REGEX: /[^a-zA-Z]/g,
+  },
+} as const;
+
+type InputFieldType = (typeof INPUT_FIELDS)[keyof typeof INPUT_FIELDS]['TYPE'];
+
+const getRegex = (inputType: InputFieldType) => {
+  return inputType === INPUT_FIELDS.NUMBER.TYPE
+    ? INPUT_FIELDS.NUMBER.REGEX
+    : INPUT_FIELDS.STRING.REGEX;
+};
 
 export const CardNumber = ({ formMethods }: formMethodsProps) => {
   const { register, errors, values, handleSubmit } = formMethods;
@@ -27,16 +46,22 @@ export const CardNumber = ({ formMethods }: formMethodsProps) => {
             ),
           }}
         >
-          {Object.values(CARD_NUMBER.FIELDS).map((field, fieldIndex) => (
-            <Input
-              key={`${field.ID}_${fieldIndex}`}
-              type={field.TYPE}
-              className={`w-25 ${optionalClassName}`}
-              {...register(field.ID, {
-                validate: field.validation,
-              })}
-            />
-          ))}
+          {Object.values(CARD_NUMBER.FIELDS).map(
+            ({ ID, TYPE, fieldType, validate, maxLength }, fieldIndex) => (
+              <Input
+                key={`${ID}_${fieldIndex}`}
+                type={TYPE}
+                className={`w-25 ${optionalClassName}`}
+                {...register(ID, {
+                  maxLength,
+                  validate,
+                  onChange: (value: string) => {
+                    return value.replace(getRegex(fieldType), '');
+                  },
+                })}
+              />
+            )
+          )}
         </Input.Box>
       </Input.Container>
     </form>

@@ -2,7 +2,7 @@ import { usePaymentsFunnel } from '../payments.context';
 import { STEP } from '../payments.constant';
 import { Card } from '@/molecules/card/Card';
 import { useState } from 'react';
-import { useForm } from '@/hooks/useForm';
+import { useForm } from '@/hooks/useForm/useForm';
 
 // FIXME: 리팩터링 전, 코드 동작을 위한 임시 타입이기에 분리하지 않았습니다.
 export interface CardFulfilledForm {
