@@ -6,18 +6,19 @@ export const getOnlyNumbers = (value: string) => {
 
 export const applyMask = (mask: string, inputValue: string) => {
   let maskedValue = ''
-  let i = 0
-  let j = 0
 
-  while (i < mask.length && j < inputValue.length) {
-    if (mask[i] === '0') {
-      maskedValue += inputValue[j]
-      j++
+  let maskIndex = 0
+  let InputIndex = 0
+
+  while (maskIndex < mask.length && InputIndex < inputValue.length) {
+    if (mask[maskIndex] === '0') {
+      maskedValue += inputValue[InputIndex]
+      InputIndex++
     } else {
-      maskedValue += mask[i]
+      maskedValue += mask[maskIndex]
     }
 
-    i++
+    maskIndex++
   }
 
   return maskedValue
