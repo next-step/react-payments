@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-export const useStringInput = (initialStringValue: string = '') => {
+export const useStringInput = (initialStringValue = '') => {
   const [stringValue, setStringValue] = useState(initialStringValue);
 
   const handleChange = (value: string) => {
     setStringValue(value);
   };
 
-  return { value: stringValue, setValue: setStringValue, handleChange };
+  return { value: stringValue, handleChange };
 };
