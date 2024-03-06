@@ -1,6 +1,6 @@
 import Input from '../Input';
 
-import setNumber from '../../utils/setNumber';
+import updateValidValue from '../../utils/updateValidValue';
 
 import {OWNER_NAME_LIMIT} from '../../constants/limit';
 import {OWNER_NAME_PLACEHOLDER} from '../../constants/placeHolder';
@@ -14,7 +14,7 @@ export default function OwnerName({ownerName, setOwnerName}: OwnerNameProps) {
 	const handleChangeOwnerName = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value} = event.target;
 
-		setNumber(
+		updateValidValue(
 			OWNER_NAME_LIMIT,
 			setOwnerName,
 			value,

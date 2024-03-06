@@ -1,6 +1,6 @@
 import Input from '../Input';
 
-import setNumber from '../../utils/setNumber';
+import updateValidValue from '../../utils/updateValidValue';
 
 import type ExpirationDateType from '../../types/ExpirationDateType';
 
@@ -17,7 +17,7 @@ export default function ExpirationDate({expirationDate, setExpirationDate}: Expi
 	const handleChangeExpirationDate = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value, name} = event.target;
 
-		setNumber(
+		updateValidValue(
 			EXPIRATION_DATE_LIMIT,
 			value => {
 				setExpirationDate(prev => ({

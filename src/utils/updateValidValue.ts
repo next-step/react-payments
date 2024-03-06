@@ -1,6 +1,6 @@
 import {Validation} from './Validation';
 
-export default function setNumber(
+export default function updateNumberIfValid(
 	limit: number,
 	setter: (value: string) => void,
 	value: string,
@@ -11,7 +11,7 @@ export default function setNumber(
 
 	let isValid = true;
 
-	if (isNumber && !validation.isValidNubmer(limit, value)) {
+	if (isNumber && !validation.isValidNumber(limit, value)) {
 		isValid = false;
 	}
 

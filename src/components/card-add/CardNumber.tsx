@@ -1,6 +1,6 @@
 import Input from '../Input';
 
-import setNumber from '../../utils/setNumber';
+import updateValidValue from '../../utils/updateValidValue';
 
 import {
 	FIRST_NUMBER, FOURTH_NUMBER, SECOND_NUMBER, THIRD_NUMBER,
@@ -23,7 +23,7 @@ export default function CardNumber({cardNumber, setCardNumber}: CardNumberProps)
 	const handleChangeCardNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value, name} = event.target;
 
-		setNumber(
+		updateValidValue(
 			CARD_NUMBER_LIMIT,
 			value => {
 				setCardNumber(prev => ({

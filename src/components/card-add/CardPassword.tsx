@@ -1,6 +1,6 @@
 import Input from '../Input';
 
-import setNumber from '../../utils/setNumber';
+import updateValidValue from '../../utils/updateValidValue';
 
 import {FIRST_NUMBER, SECOND_NUMBER} from '../../constants/cardNumber';
 import {CARD_PASSWORD_LIMIT} from '../../constants/limit';
@@ -19,7 +19,7 @@ export default function CardPassword({cardPassword, setCardPassword}: CardPasswo
 	const handleChangeCardPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value, name} = event.target;
 
-		setNumber(
+		updateValidValue(
 			CARD_PASSWORD_LIMIT,
 			value => {
 				setCardPassword(prev => ({

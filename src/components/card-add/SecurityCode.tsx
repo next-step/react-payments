@@ -1,6 +1,6 @@
 import Input from '../Input';
 
-import setNumber from '../../utils/setNumber';
+import updateValidValue from '../../utils/updateValidValue';
 
 import {SECURITY_CODE_LIMIT} from '../../constants/limit';
 
@@ -13,7 +13,7 @@ export default function SecurityCode({securityCode, setSecurityCode}: SecurityCo
 	const handleChangeSecurityCode = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value} = event.target;
 
-		setNumber(
+		updateValidValue(
 			SECURITY_CODE_LIMIT,
 			setSecurityCode,
 			value,
