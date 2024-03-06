@@ -1,3 +1,4 @@
+import { FocusEvent } from 'react';
 import ArrowLeft from '@/assets/arrow-left.svg';
 import { AppLayout, CardDisplay, useCard, useFunnel, CardSelectBottomSheet, CardInput } from '@/components';
 import { ONLY_NUMBERS_REGEX } from '@/constant';
@@ -42,6 +43,16 @@ export const CardAddPage = () => {
     handleChange: handleExpirationDateChange,
     handleKeyUp: handleExpirationDateKeyUp,
   } = useInputs([CARD_EXPIRATION_DATE, CARD_EXPIRATION_DATE]);
+  const handleExpirationDateBlur = (index: number) => (e: FocusEvent<HTMLInputElement>) => {
+    if (e.target.value.length === 1) {
+      if (e.target.value === '0') {
+        e.target.value = '';
+        return;
+      }
+      e.target.value = `0${e.target.value}`;
+    }
+    handleExpirationDateChange(index)(e);
+  };
 
   const {
     values: ownerName,
@@ -151,6 +162,7 @@ export const CardAddPage = () => {
             values={expirationDate}
             onChange={handleExpirationDateChange}
             onKeyUp={handleExpirationDateKeyUp}
+            onBlur={handleExpirationDateBlur}
             refs={expirationDateRefs}
           />
           <CardInput.OwnerName
