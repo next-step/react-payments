@@ -11,9 +11,6 @@ export interface formMethodsProps {
   formMethods: ReturnType<typeof useForm>;
 }
 
-// Auto Focus 핸들링 => useAutoFocus 커스텀 훅으로 분리
-// type에 맞지 않는 값이 들어오면 입력 제한 => 내부에 추상화하면 너무 복잡도가 올라감 => 사용처에서 추상화!(callback으로 처리)
-
 export const useForm = () => {
   const fieldsRef = useRef<FieldRef>({});
   const [, forceUpdate] = useState({});
@@ -26,7 +23,7 @@ export const useForm = () => {
         validate,
         minLength,
         maxLength,
-        readonly,
+        readOnly,
         required,
         onChange,
       }: Partial<RegisterConfig> = {}
@@ -37,8 +34,6 @@ export const useForm = () => {
         fieldsRef.current[name] = {
           value: defaultValue || '',
           error: validate ? !validate(defaultValue || '') : true,
-          readonly: readonly ? 'readonly' : '',
-          required: required || false,
         };
       }
 
@@ -46,8 +41,8 @@ export const useForm = () => {
         name,
         minLength,
         maxLength,
-        readonly: readonly || false,
-        required: required || false,
+        readOnly,
+        required,
         value: fieldsRef.current[name].value,
         onChange: ({ target }: React.ChangeEvent<HTMLInputElement>) => {
           const onChangeValue = onChange && onChange(target.value);

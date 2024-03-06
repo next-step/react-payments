@@ -3,7 +3,7 @@ export type OnSubmitCallback = (values: Values) => void;
 export interface Field {
   value: string;
   error: boolean;
-  readonly?: string;
+  readonly?: boolean;
   required?: boolean;
 }
 
@@ -14,7 +14,7 @@ export interface RegisterConfig {
   defaultValue: string;
   minLength: number;
   maxLength: number;
-  readonly: boolean;
+  readOnly: boolean;
   required: boolean;
   validate: (value: string) => boolean;
   onChange: (value: string) => string | void;
