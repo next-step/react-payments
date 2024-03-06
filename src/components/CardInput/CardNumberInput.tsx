@@ -20,6 +20,7 @@ type CardNumberInputProps = Partial<{
   refs: RefObject<HTMLInputElement>[];
   onChange: (index: number) => (event: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown: (index: number) => (event: KeyboardEvent<HTMLInputElement>) => void;
+  onKeyUp: (index: number) => (event: KeyboardEvent<HTMLInputElement>) => void;
   _label: StyleProps;
   _inputRoot: StyleProps;
   _input: StyleProps;
@@ -32,6 +33,7 @@ export const CardNumberInput = ({
   refs,
   onChange,
   onKeyDown,
+  onKeyUp,
   _label,
   _inputRoot,
   _input,
@@ -58,6 +60,7 @@ export const CardNumberInput = ({
               value={value}
               onChange={onChange?.(index)}
               onKeyDown={onKeyDown?.(index)}
+              onKeyUp={onKeyUp?.(index)}
               maxLength={4}
               color={CARD_INPUT_COLOR}
               textAlign="left"

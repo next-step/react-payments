@@ -16,7 +16,7 @@ export const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputPro
     values: cardExpirationDateParts,
     refs: inputRefs,
     handleChange,
-    handleKeyDown,
+    handleKeyUp,
   } = useInputs([createUseInputConfig(2, ONLY_NUMBERS_REGEX), createUseInputConfig(2, ONLY_NUMBERS_REGEX)]);
 
   const handleCardNumberPartChange = (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +52,7 @@ export const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputPro
           variant="unstyled"
           value={cardExpirationDateParts[0]}
           onChange={handleCardNumberPartChange(0)}
-          onKeyDown={handleKeyDown(0)}
+          onKeyUp={handleKeyUp(0)}
           maxLength={2}
           width="30px"
           color={CARD_INPUT_COLOR}
@@ -81,7 +81,7 @@ export const CardExpirationDateInput = ({ onChange }: CardExpirationDateInputPro
           variant="unstyled"
           value={cardExpirationDateParts[1]}
           onChange={handleCardNumberPartChange(1)}
-          onKeyDown={handleKeyDown(1)}
+          onKeyUp={handleKeyUp(1)}
           maxLength={2}
           width="24px"
           color={CARD_INPUT_COLOR}

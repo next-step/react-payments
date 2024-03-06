@@ -3,6 +3,8 @@ import { ChangeEvent, useRef, useState, KeyboardEvent } from 'react';
 export const createUseInputConfig = (maxLength?: number, pattern?: RegExp) => ({ maxLength, pattern });
 const INPUT_CONFIG_DEFAULTS = [createUseInputConfig()];
 
+type CursorPosition = 'start' | 'end';
+
 type InputConfig = {
   maxLength?: number;
   pattern?: RegExp;
@@ -23,14 +25,10 @@ export const useInputs = (inputConfigs: UseInputsProps = INPUT_CONFIG_DEFAULTS) 
       const inputValues = [...values];
       inputValues[index] = inputValue;
       setValues(inputValues);
-
-      if (inputValue.length === config.maxLength && index < inputConfigs.length - 1) {
-        nextFocus(index);
-      }
     }
   };
 
-  const setFocus = (index: number, cursorPosition: 'start' | 'end') => {
+  const setFocus = (index: number, cursorPosition: CursorPosition) => {
     const inputElement = refs[index].current;
     if (inputElement) {
       inputElement.focus();
@@ -39,28 +37,32 @@ export const useInputs = (inputConfigs: UseInputsProps = INPUT_CONFIG_DEFAULTS) 
     }
   };
 
-  const prevFocus = (index: number) => {
+  const prevFocus = (index: number, cursorPosition?: CursorPosition) => {
     if (values[index - 1] === undefined) {
       return;
     }
-    setFocus(index - 1, 'end');
+    setFocus(index - 1, cursorPosition || 'end');
   };
 
-  const nextFocus = (index: number) => {
+  const nextFocus = (index: number, position?: CursorPosition) => {
     if (values[index + 1] === undefined) {
       return;
     }
     const nextInputValueLength = values[index + 1]?.length || 0;
-    const nextFocusPosition = nextInputValueLength === 0 ? 'start' : 'end';
+    const nextFocusPosition = position || (nextInputValueLength === 0 ? 'start' : 'end');
     setFocus(index + 1, nextFocusPosition);
   };
 
-  const handleKeyDown = (index: number) => (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyUp = (index: number) => (e: KeyboardEvent<HTMLInputElement>) => {
     const { pattern, maxLength } = inputConfigs[index];
-    const { key, shiftKey } = e;
+    const {
+      key,
+      shiftKey,
+      currentTarget: { value, selectionStart },
+    } = e;
 
     const isValidInputPattern = pattern ? pattern.test(key) : true;
-    const isUnderMaxLength = maxLength ? values[index].length < maxLength : true;
+    const isUnderMaxLength = maxLength ? value.length < maxLength : true;
     const isControlKey = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Delete'].includes(key);
     const isShiftTabKey = shiftKey && key === 'Tab';
 
@@ -68,7 +70,17 @@ export const useInputs = (inputConfigs: UseInputsProps = INPUT_CONFIG_DEFAULTS) 
       return;
     }
 
-    if (isShiftTabKey && index > 0) {
+    if (key === 'ArrowLeft') {
+      if (selectionStart === 0 && key === 'ArrowLeft') {
+        prevFocus(index);
+      }
+      return;
+    }
+
+    if (key === 'ArrowRight') {
+      if (selectionStart === value.length && value.length === inputConfigs[index].maxLength) {
+        nextFocus(index, 'start');
+      }
       return;
     }
 
@@ -76,8 +88,10 @@ export const useInputs = (inputConfigs: UseInputsProps = INPUT_CONFIG_DEFAULTS) 
       return;
     }
 
-    if (key === 'Backspace' && values[index].length === 0 && index > 0) {
-      prevFocus(index);
+    if (key === 'Backspace') {
+      if (selectionStart === 0 && index > 0) {
+        prevFocus(index);
+      }
       return;
     }
 
@@ -85,11 +99,11 @@ export const useInputs = (inputConfigs: UseInputsProps = INPUT_CONFIG_DEFAULTS) 
       return;
     }
 
-    const shouldFocusNext = maxLength && values[index].length === maxLength && index < inputConfigs.length - 1;
-    if (shouldFocusNext && key !== 'ArrowLeft' && key !== 'Backspace') {
+    const shouldFocusNext = maxLength && value.length === maxLength && index < inputConfigs.length - 1;
+    if (shouldFocusNext) {
       nextFocus(index);
     }
   };
 
-  return { values, refs, handleChange, handleKeyDown, prevFocus, nextFocus };
+  return { values, refs, handleChange, handleKeyUp, prevFocus, nextFocus };
 };

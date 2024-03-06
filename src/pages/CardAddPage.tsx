@@ -25,7 +25,7 @@ export const CardAddPage = () => {
     values: cardNumber,
     refs: cardNumberInputRefs,
     handleChange: handleCardNumberChange,
-    handleKeyDown: handleCardNumberKeyDown,
+    handleKeyUp: handleCardNumberKeyDown,
   } = useInputs([
     CARD_NUMBER_INPUT_CONFIG,
     CARD_NUMBER_INPUT_CONFIG,
@@ -114,7 +114,7 @@ export const CardAddPage = () => {
             label="카드 번호"
             refs={cardNumberInputRefs}
             onChange={handleCardNumberChange}
-            onKeyDown={handleCardNumberKeyDown}
+            onKeyUp={handleCardNumberKeyDown}
             _inputRoot={{
               backgroundColor: `${styleToken.color.gray200}`,
               borderRadius: '7px',

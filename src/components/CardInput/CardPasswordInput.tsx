@@ -21,7 +21,7 @@ export const CardPasswordInput = ({ onChange }: PinInputProps) => {
     values: pinInputValues,
     refs: pinInputRefs,
     handleChange,
-    handleKeyDown,
+    handleKeyUp,
   } = useInputs([
     createUseInputConfig(PIN_INPUT_MAX_VALUE_LENGTH, ONLY_NUMBERS_REGEX),
     createUseInputConfig(PIN_INPUT_MAX_VALUE_LENGTH, ONLY_NUMBERS_REGEX),
@@ -50,7 +50,7 @@ export const CardPasswordInput = ({ onChange }: PinInputProps) => {
             variant="filled"
             value={pinInputValue}
             onChange={onPinInputChange(index)}
-            onKeyDown={handleKeyDown(index)}
+            onKeyUp={handleKeyUp(index)}
             maxLength={PIN_INPUT_MAX_VALUE_LENGTH}
             width="43px"
             color={CARD_INPUT_COLOR}
