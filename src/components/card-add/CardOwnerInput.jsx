@@ -7,10 +7,6 @@ export default function CardOwnerNameInput({
   const onChangeCardOwnerName = (event) => {
     const { value } = event.target;
 
-    if (value.length > CARD_OWNER_NAME_MAX_LENGTH) {
-      return;
-    }
-
     setCardOwnerName(value);
   };
 
@@ -21,6 +17,7 @@ export default function CardOwnerNameInput({
       type="text"
       className="input-basic"
       placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+      maxLength={CARD_OWNER_NAME_MAX_LENGTH}
     />
   );
 }
