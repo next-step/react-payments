@@ -38,43 +38,41 @@ export default function AddCardForm() {
 	});
 
 	return (
-		<div>
-			<div className='root'>
-				<div className='app'>
-					<Header />
-					<CardBox>
-						<Card
-							variant='small'
-							cardNumber={cardNumber}
-							ownerName={ownerName}
-							expirationDate={expirationDate}
-						/>
-					</CardBox>
-					<CardNumber
+		<div className='root'>
+			<div className='app'>
+				<Header />
+				<CardBox>
+					<Card
+						variant='small'
 						cardNumber={cardNumber}
-						setCardNumber={setCardNumber}
-					/>
-					<ExpirationDate
-						expirationDate={expirationDate}
-						setExpirationDate={setExpirationDate}
-					/>
-					<OwnerName
 						ownerName={ownerName}
-						setOwnerName={setOwnerName}
+						expirationDate={expirationDate}
 					/>
-					<SecurityCode
-						securityCode={securityCode}
-						setSecurityCode={setSecurityCode}
-					/>
-					<CardPassword
-						cardPassword={cardPassword}
-						setCardPassword={setCardPassword}
-					/>
-					<Button
-						location='/add/complete'
-						text='다음'
-					/>
-				</div>
+				</CardBox>
+				<CardNumber
+					cardNumber={cardNumber}
+					setCardNumber={setCardNumber}
+				/>
+				<ExpirationDate
+					expirationDate={expirationDate}
+					setExpirationDate={setExpirationDate}
+				/>
+				<OwnerName
+					ownerName={ownerName}
+					setOwnerName={setOwnerName}
+				/>
+				<SecurityCode
+					securityCode={securityCode}
+					setSecurityCode={setSecurityCode}
+				/>
+				<CardPassword
+					cardPassword={cardPassword}
+					setCardPassword={setCardPassword}
+				/>
+				<Button
+					location='/add/complete'
+					text='다음'
+				/>
 			</div>
 		</div>
 	);
