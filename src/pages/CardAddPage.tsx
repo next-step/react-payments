@@ -47,9 +47,9 @@ export const CardAddPage = () => {
     if (e.target.value.length === 1) {
       if (e.target.value === '0') {
         e.target.value = '';
-        return;
+      } else {
+        e.target.value = `0${e.target.value}`;
       }
-      e.target.value = `0${e.target.value}`;
     }
     handleExpirationDateChange(index)(e);
   };
