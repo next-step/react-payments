@@ -21,7 +21,7 @@ Text.propTypes = {
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
   ]),
-  children: PropTypes.node,
+  children: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
 };
 
 export default Text;

@@ -15,11 +15,11 @@ const CardForm = (props) => {
     formState: { isValid },
   } = useFormContext();
 
-  const { Modal, toggleModal } = useModal();
+  const { Modal, modal } = useModal();
 
   const handleNextStep = () => {
     if (isValid) {
-      toggleModal();
+      modal.open();
     }
   };
 
@@ -74,7 +74,7 @@ const CardForm = (props) => {
             className={["input-basic"]}
             type="number"
             length={2}
-            max={"12"}
+            max={12}
             placeholder={"MM"}
           />
           <Input
@@ -151,7 +151,7 @@ const CardForm = (props) => {
         </Box>
       </InputForm>
       <Modal>
-        <CardModal toggleModal={toggleModal} submit={next} />
+        <CardModal submit={next} />
       </Modal>
     </>
   );

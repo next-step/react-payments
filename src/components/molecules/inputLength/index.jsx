@@ -10,7 +10,7 @@ const InputLength = (props) => {
   const length = value.length;
 
   return (
-    <Text className={"input-text"}>
+    <Text className={"input-text"} as="span">
       {length} / {maxLength}
     </Text>
   );
@@ -18,7 +18,7 @@ const InputLength = (props) => {
 
 InputLength.propTypes = {
   name: PropTypes.string,
-  maxLength: PropTypes.number,
+  maxLength: PropTypes.string,
 };
 
 export default InputLength;

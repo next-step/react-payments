@@ -47,12 +47,12 @@ const CARD_CATEGORY = [
 ];
 
 const CardModal = (props) => {
-  const { toggleModal, submit } = props;
+  const { close, submit } = props;
   const { setValue } = useFormContext();
 
   const handleButtonClick = (value) => {
     setValue("cardCompany", value);
-    toggleModal();
+    close();
     submit();
   };
 
