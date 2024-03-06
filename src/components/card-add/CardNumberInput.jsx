@@ -1,10 +1,10 @@
-import { useRef } from "react";
 import {
   FIRST_NUMBER,
   FOURTH_NUMBER,
   SECOND_NUMBER,
   THIRD_NUMBER,
 } from "../../constants/cardNumber";
+import { useAutoFocus } from "../../hook/useAutoFocus";
 import { getNumberString } from "../../util/regExp";
 
 const nextRefMap = {
@@ -15,20 +15,14 @@ const nextRefMap = {
 };
 
 export default function CardNumberInput({ cardNumber, setCardNumber }) {
-  const cardNumberRef = useRef({});
+  const [cardNumberRef, changeFocus] = useAutoFocus(nextRefMap);
 
   const onChangeCardNumber = (event) => {
     const { value, name, maxLength } = event.target;
 
     const onlyNumberValue = getNumberString(value);
 
-    if (onlyNumberValue.length === maxLength) {
-      const nextRef = nextRefMap[name];
-
-      if (nextRef !== null) {
-        cardNumberRef.current[nextRefMap[name]].focus();
-      }
-    }
+    changeFocus(name, onlyNumberValue, maxLength);
 
     setCardNumber((prev) => {
       return { ...prev, [name]: onlyNumberValue };
