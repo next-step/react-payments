@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { expect, userEvent, within } from '@storybook/test'
 
 import { InputWithMask } from '.'
 
@@ -24,3 +25,21 @@ export const ExpirationDate: Story = {
 }
 
 export default meta
+
+export const MaskingTest: Story = {
+  args: {
+    role: 'text',
+    mask: '00 00 00',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+
+    const maskInput = canvas.getByRole('text')
+
+    await userEvent.type(canvas.getByRole('text'), '11')
+    await expect(maskInput).toHaveValue('11')
+
+    await userEvent.type(maskInput, '1')
+    await expect(maskInput).toHaveValue('11 1') // error
+  },
+}
