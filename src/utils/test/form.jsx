@@ -1,8 +1,9 @@
-import { useForm, FormProvider } from "react-hook-form";
+import useCustomForm from "../../hooks/useForm";
+import FormProvider from "../../hooks/useFormProvider";
 
 const Form = (props) => {
   const { children } = props;
-  const form = useForm({
+  const form = useCustomForm({
     defaultValues: {
       name: "test",
       year: "21",

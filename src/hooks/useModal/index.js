@@ -7,11 +7,19 @@ const useModal = () => {
     setIsModalOpen((prev) => !prev);
   };
 
-  const Modal = ({ children }) => {
-    return isModalOpen && cloneElement(children, { toggleModal });
+  const open = () => {
+    setIsModalOpen(true);
   };
 
-  return { Modal, toggleModal };
+  const close = () => {
+    setIsModalOpen(false);
+  };
+
+  const Modal = ({ children }) => {
+    return isModalOpen && cloneElement(children, { close });
+  };
+
+  return { Modal, modal: { open, close } };
 };
 
 export default useModal;

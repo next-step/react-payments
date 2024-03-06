@@ -50,6 +50,12 @@ const CardModal = (props) => {
   const { toggleModal, submit } = props;
   const { setValue } = useFormContext();
 
+  const handleButtonClick = (value) => {
+    setValue("cardCompany", value);
+    toggleModal();
+    submit();
+  };
+
   return (
     <Box className="modal-dimmed">
       <Box className="modal">
@@ -59,11 +65,7 @@ const CardModal = (props) => {
               key={value}
               className="modal-item-container"
               // 방식을 onChange 때문에 밖으로 뻇는데 이런 방식이 괜찮을까??
-              onClick={() => {
-                setValue("cardCompany", value);
-                toggleModal();
-                submit();
-              }}
+              onClick={() => handleButtonClick(value)}
             >
               <Box as="span" className={["modal-item-dot", className]} />
               <Text as="span" className={"modal-item-name"}>

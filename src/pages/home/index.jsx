@@ -22,8 +22,6 @@ const Home = () => {
     },
   });
 
-  // console.log(form.watch());
-
   return (
     <FormProvider {...form}>
       <Funnel steps={["list", "form", "success"]}>

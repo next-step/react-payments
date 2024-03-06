@@ -4,8 +4,7 @@ const useInput = (props) => {
   const { name, required, length, maxLength, max, min, digit } = props;
   const { register, getValues, setValue } = useFormContext();
 
-  const checkValue = (e) => {
-    let { value } = e.target;
+  const checkValue = (value) => {
     const currentValue = getValues(name);
 
     if (value.length > length) {
@@ -32,17 +31,21 @@ const useInput = (props) => {
   };
 
   const handleChange = (e) => {
-    const value = (e.target.value = checkValue(e));
-    setValue(name, value);
+    const value = checkValue(e.target.value);
+
+    return { target: { value } };
   };
 
   return {
-    ...register(name, {
-      required,
-      maxLength,
-      minLength: length,
-    }),
-    onChange: handleChange,
+    ...register(
+      name,
+      {
+        required,
+        maxLength,
+        minLength: length,
+      },
+      handleChange
+    ),
   };
 };
 

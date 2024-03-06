@@ -3,21 +3,22 @@ import { useRef, useState } from "react";
 const useCustomForm = (props) => {
   const { defaultValues, mode } = props;
 
+  const elementRefs = useRef({});
+  const valueRefs = useRef(defaultValues || {});
+  const formOption = useRef({});
+
   const checkWatch = new Set();
   const [watchValue, setWatchValue] = useState(defaultValues || {});
-  const refs = useRef(defaultValues || {});
-  const formOption = useRef({});
   const [formState, setFormState] = useState({});
 
   const updateFormState = () => {
     if (mode === "onChange") {
       let isValid = true;
       Object.entries(formOption.current).forEach(([key, value]) => {
-        if (value.required && !refs.current[key]) {
+        if (value.required && !valueRefs.current[key]) {
           isValid = false;
         }
       });
-      console.log(isValid);
 
       setFormState({
         isValid,
@@ -35,13 +36,18 @@ const useCustomForm = (props) => {
     });
   };
 
-  const register = (name, option) => {
+  const register = (name, option, onChange = (e) => e) => {
     formOption.current[name] = option;
 
     return {
+      ref: (el) => {
+        elementRefs.current[name] = el;
+      },
       onChange: (e) => {
-        const { value } = e.target;
-        refs.current[name] = value;
+        const { value } = onChange(e).target;
+        valueRefs.current[name] = value;
+        elementRefs.current[name].value = value;
+
         updateFormState();
         updateWatch(name, value);
       },
@@ -50,13 +56,13 @@ const useCustomForm = (props) => {
 
   const getValues = (name) => {
     if (!name) {
-      return refs.current;
+      return valueRefs.current;
     }
-    return refs.current[name];
+    return valueRefs.current[name];
   };
 
   const setValue = (name, value) => {
-    refs.current[name] = value;
+    valueRefs.current[name] = value;
     updateFormState();
     updateWatch(name, value);
   };
@@ -66,7 +72,7 @@ const useCustomForm = (props) => {
       checkWatch.add(name);
       return watchValue[name];
     } else {
-      Object.keys(refs.current).forEach((key) => {
+      Object.keys(valueRefs.current).forEach((key) => {
         checkWatch.add(key);
       });
 
@@ -75,12 +81,12 @@ const useCustomForm = (props) => {
   };
 
   const reset = () => {
-    refs.current = defaultValues;
+    valueRefs.current = defaultValues;
     setWatchValue(defaultValues);
   };
 
   const handleSubmit = (callback) => () => {
-    return callback(refs.current);
+    return callback(valueRefs.current);
   };
 
   return {

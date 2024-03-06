@@ -11,11 +11,11 @@ import PropTypes from "prop-types";
 import useModal from ".";
 
 const ChildModal = (props) => {
-  const { toggleModal } = props;
+  const { close } = props;
 
   return (
     <div>
-      <button onClick={toggleModal}>닫기</button>
+      <button onClick={close}>닫기</button>
     </div>
   );
 };
@@ -38,7 +38,7 @@ describe("useModal 테스트", () => {
     expect(textBeforeToggle).toBeNull();
 
     act(() => {
-      Result.current.toggleModal();
+      Result.current.modal.open();
     });
 
     waitFor(() => {
@@ -57,7 +57,7 @@ describe("useModal 테스트", () => {
     );
 
     act(() => {
-      Result.current.toggleModal();
+      Result.current.modal.open();
     });
 
     waitFor(() => {

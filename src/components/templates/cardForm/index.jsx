@@ -90,7 +90,7 @@ const CardForm = (props) => {
 
       <InputForm
         label="카드 소유자 이름"
-        option={<InputLength name={"name"} maxLength={"30"} />}
+        side={<InputLength name={"name"} maxLength={"30"} />}
       >
         <Input
           required
