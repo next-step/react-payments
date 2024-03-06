@@ -58,6 +58,9 @@ devDependencies:
   '@vitejs/plugin-react':
     specifier: ^4.2.1
     version: 4.2.1(vite@5.1.4)
+  chromatic:
+    specifier: ^11.0.3
+    version: 11.0.3
   eslint:
     specifier: ^8.56.0
     version: 8.57.0
@@ -4603,6 +4606,19 @@ packages:
   /chownr@2.0.0:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
+    dev: true
+
+  /chromatic@11.0.3:
+    resolution: {integrity: sha512-zdOFWPoNAgzlfMlhCExcpsW/lMkwWccF2m9W3V7pddTWQMStXzs6FMjAxj+C3J+NBeBlcCyr9Jm6i/P3DMjZ7A==}
+    hasBin: true
+    peerDependencies:
+      '@chromatic-com/cypress': ^0.5.2 || ^1.0.0
+      '@chromatic-com/playwright': ^0.5.2 || ^1.0.0
+    peerDependenciesMeta:
+      '@chromatic-com/cypress':
+        optional: true
+      '@chromatic-com/playwright':
+        optional: true
     dev: true
 
   /ci-info@3.9.0:
