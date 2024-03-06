@@ -22,7 +22,7 @@ export default function CardNumberInput({ cardNumber, setCardNumber }) {
 
     const onlyNumberValue = getNumberString(value);
 
-    changeFocus(name, onlyNumberValue, maxLength);
+    changeFocus(onlyNumberValue.length === maxLength, name);
 
     setCardNumber((prev) => {
       return { ...prev, [name]: onlyNumberValue };

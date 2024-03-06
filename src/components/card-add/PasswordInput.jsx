@@ -1,6 +1,6 @@
-import { useRef } from "react";
 import { FIRST_NUMBER, SECOND_NUMBER } from "../../constants/cardNumber";
 import { getNumberString } from "../../util/regExp";
+import { useAutoFocus } from "../../hook/useAutoFocus";
 
 const nextRefMap = {
   [FIRST_NUMBER]: SECOND_NUMBER,
@@ -8,18 +8,13 @@ const nextRefMap = {
 };
 
 export default function PasswordInput({ password, setPassword }) {
-  const passwordRef = useRef({});
+  const [passwordRef, changeFocus] = useAutoFocus(nextRefMap);
   const onChangePassword = (event) => {
     const { value, name, maxLength } = event.target;
 
     const onlyNumberValue = getNumberString(value);
 
-    if (onlyNumberValue.length === maxLength) {
-      const nextRef = nextRefMap[name];
-      if (nextRef !== null) {
-        passwordRef.current[nextRef].focus();
-      }
-    }
+    changeFocus(onlyNumberValue.length === maxLength, name);
 
     setPassword((prev) => {
       return { ...prev, [name]: onlyNumberValue };
