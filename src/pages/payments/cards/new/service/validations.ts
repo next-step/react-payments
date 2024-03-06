@@ -1,5 +1,10 @@
 import { FormType } from '../../type'
-import { CARD_HOLDER_NAME_MAX_LENGTH } from './const'
+import {
+  CARD_HOLDER_NAME_MAX_LENGTH,
+  CARD_NUMBER_INPUT_REGEX,
+  CARD_PASSWORD_REGEX,
+  SECURITY_CODE_REG,
+} from './const'
 
 const checkExpirationDate = (month: string, year: string) => {
   const parsedMonth = parseInt(month)
@@ -20,31 +25,15 @@ const checkCardholderName = (name: string) => {
 }
 
 const checkCardNumber = (cardNumber: string) => {
-  const FOUR_NUMBER_REG = /^\d{4}$/
-
-  if (FOUR_NUMBER_REG.test(cardNumber)) {
-    return true
-  }
-
-  return false
+  return CARD_NUMBER_INPUT_REGEX.test(cardNumber)
 }
 
 const checkSecurityCode = (code: string) => {
-  const SECURITY_CODE_REG = /^\d{3}$/
-
-  if (SECURITY_CODE_REG.test(code)) {
-    return true
-  }
-
-  return false
+  return SECURITY_CODE_REG.test(code)
 }
 
 const checkCardPassword = (password: string) => {
-  const CARD_PASSWORD_REG = /^\d$/
-
-  if (CARD_PASSWORD_REG.test(password)) {
-    return true
-  }
+  return CARD_PASSWORD_REGEX.test(password)
 }
 
 export const Step1Validate = (values: FormType) => {
