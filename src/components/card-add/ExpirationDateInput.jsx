@@ -1,4 +1,9 @@
-import { MONTH, YEAR } from "../../constants/expirationDate";
+import {
+  MONTH,
+  MONTH_MAX_LENGTH,
+  YEAR,
+  YEAR_MAX_LENGTH,
+} from "../../constants/expirationDate";
 import { getNumberString } from "../../util/regExp";
 
 export default function ExpirationDateInput({
@@ -8,11 +13,6 @@ export default function ExpirationDateInput({
   const onChangeExpirationDate = (event) => {
     const { name, value } = event.target;
     const onlyNumberValue = getNumberString(value);
-
-    // 두 자리수 초과
-    if (onlyNumberValue.length > 2) {
-      return;
-    }
 
     // 유효하지 않은 월
     if (name === MONTH && +onlyNumberValue > 12) {
@@ -33,6 +33,7 @@ export default function ExpirationDateInput({
         className="input-basic"
         type="text"
         placeholder="MM"
+        maxLength={MONTH_MAX_LENGTH}
       />
       <input
         value={expirationDate[YEAR]}
@@ -41,6 +42,7 @@ export default function ExpirationDateInput({
         className="input-basic"
         type="text"
         placeholder="YY"
+        maxLength={YEAR_MAX_LENGTH}
       />
     </div>
   );
