@@ -2,21 +2,16 @@ import type {Meta, StoryObj} from '@storybook/react';
 
 import Card from './Card';
 
-import {
-	FIRST_NUMBER, FOURTH_NUMBER, SECOND_NUMBER, THIRD_NUMBER,
-} from '../constants/cardNumber';
-import {MONTH, YEAR} from '../constants/expirationDate';
-
 const cardNumber = {
-	[FIRST_NUMBER]: '1111',
-	[SECOND_NUMBER]: '1111',
-	[THIRD_NUMBER]: '1111',
-	[FOURTH_NUMBER]: '1111',
+	firstNumber: '1111',
+	secondNumber: '1111',
+	thirdNumber: '1111',
+	fourthNumber: '1111',
 };
 
 const expirationDate = {
-	[MONTH]: '12',
-	[YEAR]: '23',
+	month: '12',
+	year: '23',
 };
 
 const meta = {

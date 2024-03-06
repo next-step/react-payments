@@ -13,13 +13,13 @@ export default function SecurityCode({securityCode, setSecurityCode}: SecurityCo
 	const handleChangeSecurityCode = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const {value} = event.target;
 
-		updateValidValue(
-			SECURITY_CODE_LIMIT,
-			setSecurityCode,
+		updateValidValue({
+			limit: SECURITY_CODE_LIMIT,
+			setter: setSecurityCode,
 			value,
-			false,
-			true,
-		);
+			isMonth: false,
+			isNumber: true,
+		});
 	};
 
 	return (

@@ -6,8 +6,6 @@ import ExpirationDate from './ExpirationDate';
 
 import type ExpirationDateType from '../../types/ExpirationDateType';
 
-import {MONTH, YEAR} from '../../constants/expirationDate';
-
 type ExpirationDateProps = {
 	expirationDate: ExpirationDateType;
 	setExpirationDate: (prevState: ExpirationDateType | ((prevState: ExpirationDateType) => ExpirationDateType)) => void;
@@ -22,8 +20,8 @@ export default meta;
 
 export function Basic(args: ExpirationDateProps) {
 	const [expirationDate, setExpirationDate] = useState({
-		[MONTH]: '12',
-		[YEAR]: '23',
+		month: '12',
+		year: '23',
 	});
 
 	return <ExpirationDate {...args} expirationDate={expirationDate} setExpirationDate={setExpirationDate} />;

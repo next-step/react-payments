@@ -9,32 +9,30 @@ import OwnerName from './OwnerName';
 import SecurityCode from './SecurityCode';
 import CardPassword from './CardPassword';
 import ClickableLink from './ClickableLink';
-
-import {
-	FIRST_NUMBER, SECOND_NUMBER, THIRD_NUMBER, FOURTH_NUMBER,
-} from '../../constants/cardNumber';
-import {MONTH, YEAR} from '../../constants/expirationDate';
+import type CardNumberType from '../../types/CardNumberType';
+import type ExpirationDateType from '../../types/ExpirationDateType';
+import type CardPasswordNumberType from '../../types/CardPasswordNumberType';
 
 export default function AddCardForm() {
-	const [cardNumber, setCardNumber] = useState({
-		[FIRST_NUMBER]: '',
-		[SECOND_NUMBER]: '',
-		[THIRD_NUMBER]: '',
-		[FOURTH_NUMBER]: '',
+	const [cardNumber, setCardNumber] = useState<CardNumberType>({
+		firstNumber: '',
+		secondNumber: '',
+		thirdNumber: '',
+		fourthNumber: '',
 	});
 
-	const [expirationDate, setExpirationDate] = useState({
-		[MONTH]: '',
-		[YEAR]: '',
+	const [expirationDate, setExpirationDate] = useState<ExpirationDateType>({
+		month: '',
+		year: '',
 	});
 
 	const [ownerName, setOwnerName] = useState('');
 
 	const [securityCode, setSecurityCode] = useState('');
 
-	const [cardPassword, setCardPassword] = useState({
-		[FIRST_NUMBER]: '',
-		[SECOND_NUMBER]: '',
+	const [cardPassword, setCardPassword] = useState<CardPasswordNumberType>({
+		firstNumber: '',
+		secondNumber: '',
 	});
 
 	return (

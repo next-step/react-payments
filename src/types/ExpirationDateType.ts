@@ -1,8 +1,7 @@
-import {type MONTH, type YEAR} from '../constants/expirationDate';
 
 type ExpirationDateType = {
-	[MONTH]: string;
-	[YEAR]: string;
+	month: string;
+	year: string;
 };
 
 export default ExpirationDateType;

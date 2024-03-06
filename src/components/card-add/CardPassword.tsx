@@ -2,17 +2,13 @@ import Input from '../Input';
 
 import updateValidValue from '../../utils/updateValidValue';
 
-import {FIRST_NUMBER, SECOND_NUMBER} from '../../constants/cardNumber';
 import {CARD_PASSWORD_LIMIT} from '../../constants/limit';
 
-type CardPasswordType = {
-	[FIRST_NUMBER]: string;
-	[SECOND_NUMBER]: string;
-};
+import type CardPasswordNumberType from '../../types/CardPasswordNumberType';
 
 type CardPasswordProps = {
-	cardPassword: CardPasswordType;
-	setCardPassword: (prevState: CardPasswordType | ((prevState: CardPasswordType) => CardPasswordType)) => void;
+	cardPassword: CardPasswordNumberType;
+	setCardPassword: (prevState: CardPasswordNumberType | ((prevState: CardPasswordNumberType) => CardPasswordNumberType)) => void;
 };
 
 export default function CardPassword({cardPassword, setCardPassword}: CardPasswordProps) {
@@ -40,16 +36,16 @@ export default function CardPassword({cardPassword, setCardPassword}: CardPasswo
 				variant='basic'
 				className='w-15'
 				type='password'
-				value={cardPassword[FIRST_NUMBER]}
-				name={FIRST_NUMBER}
+				value={cardPassword.firstNumber}
+				name={'firstNumber'}
 				onChange={handleChangeCardPassword}
 			/>
 			<Input
 				variant='basic'
 				className='w-15'
 				type='password'
-				value={cardPassword[SECOND_NUMBER]}
-				name={SECOND_NUMBER}
+				value={cardPassword.secondNumber}
+				name={'secondNumber'}
 				onChange={handleChangeCardPassword}
 			/>
 			<input className='input-basic input-disabled w-15' type='password' value='*' disabled />

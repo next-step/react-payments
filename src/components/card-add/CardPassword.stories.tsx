@@ -4,12 +4,7 @@ import type {Meta} from '@storybook/react';
 
 import CardPassword from './CardPassword';
 
-import {type FIRST_NUMBER, type SECOND_NUMBER} from '../../constants/cardNumber';
-
-type CardPasswordType = {
-	[FIRST_NUMBER]: string;
-	[SECOND_NUMBER]: string;
-};
+import type CardPasswordNumberType from '../../types/CardPasswordNumberType';
 
 const meta = {
 	title: 'CARD-ADD/CardPassword',
@@ -18,7 +13,7 @@ const meta = {
 
 export default meta;
 
-export function Basic(args: CardPasswordType) {
+export function Basic(args: CardPasswordNumberType) {
 	const [cardPassword, setCardPassword] = useState({
 		firstNumber: '1',
 		secondNumber: '5',

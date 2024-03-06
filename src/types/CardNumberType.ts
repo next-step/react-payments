@@ -1,8 +1,8 @@
+import type CardPasswordNumberType from './CardPasswordNumberType';
+
 type CardNumberType = {
-	firstNumber: string;
-	secondNumber: string;
 	thirdNumber: string;
 	fourthNumber: string;
-};
+} & CardPasswordNumberType ;
 
 export default CardNumberType;
