@@ -22,7 +22,7 @@ export default function CompletedCard() {
 		<div className='root'>
 			<div className='app flex-column-center'>
 				<div className='flex-center'>
-					<h2 className='page-title mb-10'>카드등록이 완료되었습니다.</h2>
+					<h1 className='page-title mb-10'>카드등록이 완료되었습니다.</h1>
 				</div>
 				<CardBox>
 					<Card
@@ -40,7 +40,7 @@ export default function CompletedCard() {
 					/>
 				</div>
 				<Button
-					className='mt-45'
+					className='mt-55'
 					location='/'
 					text='다음'
 				/>
