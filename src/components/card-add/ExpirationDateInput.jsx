@@ -6,6 +6,8 @@ import {
 } from "../../constants/expirationDate";
 import { useAutoFocus } from "../../hook/useAutoFocus";
 import { getNumberString } from "../../util/regExp";
+import Input from "../atomic-design-pattern/atom/Input";
+import InputBox from "../atomic-design-pattern/molecule/InputBox";
 
 const expirationDateRefMap = {
   [MONTH]: YEAR,
@@ -34,27 +36,25 @@ export default function ExpirationDateInput({
   };
 
   return (
-    <div className="input-box w-50">
-      <input
+    <InputBox className="w-50">
+      <Input
         value={expirationDate[MONTH]}
         onChange={onChangeExpirationDate}
         name={MONTH}
         ref={(el) => (expirationDateRef.current[MONTH] = el)}
-        className="input-basic"
         type="text"
         placeholder="MM"
         maxLength={MONTH_MAX_LENGTH}
       />
-      <input
+      <Input
         value={expirationDate[YEAR]}
         name={YEAR}
         ref={(el) => (expirationDateRef.current[YEAR] = el)}
         onChange={onChangeExpirationDate}
-        className="input-basic"
         type="text"
         placeholder="YY"
         maxLength={YEAR_MAX_LENGTH}
       />
-    </div>
+    </InputBox>
   );
 }

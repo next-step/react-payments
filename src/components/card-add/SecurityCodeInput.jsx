@@ -1,4 +1,5 @@
 import { getNumberString } from "../../util/regExp";
+import Input from "../atomic-design-pattern/atom/Input";
 
 export default function SecurityCodeInput({ securityCode, setSecurityCode }) {
   const onChangeSecurityCode = (event) => {
@@ -10,10 +11,10 @@ export default function SecurityCodeInput({ securityCode, setSecurityCode }) {
   };
 
   return (
-    <input
+    <Input
       value={securityCode}
       onChange={onChangeSecurityCode}
-      className="input-basic w-25"
+      className="w-25"
       type="password"
       maxLength="3"
     />

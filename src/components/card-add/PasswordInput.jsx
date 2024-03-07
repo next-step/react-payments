@@ -1,6 +1,7 @@
 import { FIRST_NUMBER, SECOND_NUMBER } from "../../constants/cardNumber";
 import { getNumberString } from "../../util/regExp";
 import { useAutoFocus } from "../../hook/useAutoFocus";
+import Input from "../atomic-design-pattern/atom/Input";
 
 const nextRefMap = {
   [FIRST_NUMBER]: SECOND_NUMBER,
@@ -23,35 +24,35 @@ export default function PasswordInput({ password, setPassword }) {
 
   return (
     <>
-      <input
+      <Input
         value={password[FIRST_NUMBER]}
         name={FIRST_NUMBER}
         ref={(el) => (passwordRef.current[FIRST_NUMBER] = el)}
         onChange={onChangePassword}
-        className="input-basic w-15"
+        className="w-15"
         type="password"
         maxLength="1"
       />
 
-      <input
+      <Input
         value={password[SECOND_NUMBER]}
         name={SECOND_NUMBER}
         ref={(el) => (passwordRef.current[SECOND_NUMBER] = el)}
         onChange={onChangePassword}
-        className="input-basic w-15"
+        className="w-15"
         type="password"
         maxLength="1"
       />
-      <input
+      <Input
         value="*"
-        className="input-basic input-disabled w-15"
+        className="input-disabled w-15"
         type="password"
         disabled
         maxLength="1"
       />
-      <input
+      <Input
         value="*"
-        className="input-basic input-disabled w-15"
+        className="input-disabled w-15"
         type="password"
         disabled
         maxLength="1"
