@@ -6,9 +6,6 @@ export default {
   component: CardModal,
   parameters: {
     layout: "fullscreen",
-    viewport: {
-      defaultViewport: "iphone14promax",
-    },
   },
 };
 

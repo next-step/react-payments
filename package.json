@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "gh-pages -d dist",
+    "predeploy": "vite build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest",
@@ -37,10 +39,12 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "eslint-plugin-storybook": "0.8.0",
+    "gh-pages": "^6.1.1",
     "jsdom": "24.0.0",
     "prop-types": "15.8.1",
     "storybook": "7.6.17",
     "vite": "^5.1.4",
     "vitest": "1.3.1"
-  }
+  },
+  "homepage": "https://seojaewan.github.io/react-payments"
 }
