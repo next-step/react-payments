@@ -2,9 +2,13 @@ import { Input } from '@/components/input/Input';
 import { CARD_NUMBER } from './cardNumber.constant';
 import { INPUT } from '@/components/input/input.constant';
 import { formMethodsProps } from '@/hooks/useForm/useForm';
+import { useAutoFocus } from '@/hooks/useAutoFocus/useAutoFocus';
 
 export const CardNumber = ({ formMethods }: formMethodsProps) => {
   const { register, errors } = formMethods;
+  const { autoFocusRefs, handleAutoFocus } = useAutoFocus({
+    amount: Object.values(CARD_NUMBER.FIELDS).length,
+  });
 
   const allFieldsFulfilled = Object.values(errors).every((error) => !error);
 
@@ -25,11 +29,19 @@ export const CardNumber = ({ formMethods }: formMethodsProps) => {
               key={`${ID}_${fieldIndex}`}
               type={TYPE}
               className={`w-25 ${optionalClassName}`}
+              ref={autoFocusRefs[fieldIndex]}
               {...register(ID, {
                 maxLength,
                 validate,
                 onChange: (value: string) => {
-                  return value.replace(INPUT.REGEX.DIGIT, '');
+                  const parsedValue = value.replace(INPUT.REGEX.DIGIT, '');
+
+                  handleAutoFocus({
+                    value: parsedValue,
+                    index: fieldIndex,
+                    maxLength: maxLength,
+                  });
+                  return parsedValue;
                 },
               })}
             />

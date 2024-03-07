@@ -1,11 +1,31 @@
-import { useEffect, useRef } from 'react';
+import { createRef, useState } from 'react';
 
-export const useAutoFocus = () => {
-  const autoFocusRef = useRef<HTMLInputElement>(null);
+interface UseAutoFocusProps {
+  amount: number;
+}
 
-  useEffect(() => {
-    autoFocusRef.current?.focus();
-  }, []);
+interface HandleAutoFocusProps {
+  value: string;
+  maxLength: number;
+  index: number;
+}
 
-  return autoFocusRef;
+export const useAutoFocus = ({ amount }: UseAutoFocusProps) => {
+  const [autoFocusRefs] = useState<React.RefObject<HTMLInputElement>[]>(
+    Array.from({ length: amount }, () => createRef<HTMLInputElement>())
+  );
+
+  const handleAutoFocus = ({
+    value,
+    maxLength,
+    index,
+  }: HandleAutoFocusProps) => {
+    const nextFieldIndex = index + 1;
+
+    if (value.length === maxLength && nextFieldIndex < autoFocusRefs.length) {
+      autoFocusRefs[nextFieldIndex].current?.focus();
+    }
+  };
+
+  return { autoFocusRefs, handleAutoFocus };
 };
