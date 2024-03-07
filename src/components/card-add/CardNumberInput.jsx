@@ -7,6 +7,7 @@ import {
 import { useAutoFocus } from "../../hook/useAutoFocus";
 import { getNumberString } from "../../util/regExp";
 import Input from "../atomic-design-pattern/atom/Input";
+import InputBox from "../atomic-design-pattern/molecule/InputBox";
 
 const nextRefMap = {
   [FIRST_NUMBER]: [SECOND_NUMBER],
@@ -31,7 +32,7 @@ export default function CardNumberInput({ cardNumber, setCardNumber }) {
   };
 
   return (
-    <div className="input-box">
+    <InputBox>
       <Input
         value={cardNumber[FIRST_NUMBER]}
         name={FIRST_NUMBER}
@@ -80,6 +81,6 @@ export default function CardNumberInput({ cardNumber, setCardNumber }) {
         maxLength="4"
         onChange={onChangeCardNumber}
       />
-    </div>
+    </InputBox>
   );
 }
