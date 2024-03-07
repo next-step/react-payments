@@ -37,8 +37,12 @@ export const CardExpDateInput = forwardRef(
         onChange,
       })
 
+    const monthId = `${id}-month`
+    const yearId = `${id}-year`
+    const labelHtmlFor = monthInputValue.length >= dateInputDigit ? yearId : monthId
+
     return (
-      <BaseInput id={id} label={label} {...otherInputProps} width="180px">
+      <BaseInput htmlFor={labelHtmlFor} label={label} {...otherInputProps} width="180px">
         <div className={styles.wrapper}>
           <BaseInputContent
             id={`${id}-month`}
