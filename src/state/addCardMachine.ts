@@ -12,8 +12,22 @@ export interface CardInfo {
 	cardPasswordSecondDigit: string;
 	cardSecurityCode: string;
 	cardNickname: string;
-	cardCompany: string;
+	cardCompanyCode: string;
 }
+
+const initialCardInfo: CardInfo = {
+	cardNumberFirstSegment: '',
+	cardNumberSecondSegment: '',
+	cardNumberThirdSegment: '',
+	cardNumberFourthSegment: '',
+	cardOwnerName: '',
+	cardExpirationDate: '',
+	cardPasswordFirstDigit: '',
+	cardPasswordSecondDigit: '',
+	cardSecurityCode: '',
+	cardNickname: '',
+	cardCompanyCode: '',
+};
 
 interface CardMachineContext {
 	cardInfo: CardInfo;
@@ -27,6 +41,7 @@ type CardMachineEvent =
 	| { type: 'SUBMIT_CARD' }
 	| { type: 'BACK' }
 	| { type: 'TOGGLE' };
+
 export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent>(
 	{
 		predictableActionArguments: true,
@@ -44,7 +59,7 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 				cardPasswordSecondDigit: '',
 				cardSecurityCode: '',
 				cardNickname: '',
-				cardCompany: '',
+				cardCompanyCode: '',
 			},
 			cardList: [],
 		},
@@ -79,6 +94,7 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 						target: 'nickname',
 					},
 					CHANGE_FIELD: {
+						target: 'form.enterCardInfo',
 						actions: ['changeField'],
 					},
 					BACK: {
@@ -119,34 +135,10 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 				cardList: context => {
 					return [...context.cardList, { ...context.cardInfo, id: Date.now().toString() }];
 				},
-				cardInfo: {
-					cardNumberFirstSegment: '',
-					cardNumberSecondSegment: '',
-					cardNumberThirdSegment: '',
-					cardNumberFourthSegment: '',
-					cardOwnerName: '',
-					cardExpirationDate: '',
-					cardPasswordFirstDigit: '',
-					cardPasswordSecondDigit: '',
-					cardSecurityCode: '',
-					cardNickname: '',
-					cardCompany: '',
-				},
+				cardInfo: { ...initialCardInfo },
 			}),
 			resetCardInfo: assign({
-				cardInfo: {
-					cardNumberFirstSegment: '',
-					cardNumberSecondSegment: '',
-					cardNumberThirdSegment: '',
-					cardNumberFourthSegment: '',
-					cardOwnerName: '',
-					cardExpirationDate: '',
-					cardPasswordFirstDigit: '',
-					cardPasswordSecondDigit: '',
-					cardSecurityCode: '',
-					cardNickname: '',
-					cardCompany: '',
-				},
+				cardInfo: { ...initialCardInfo },
 			}),
 		},
 	},

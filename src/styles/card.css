@@ -134,3 +134,45 @@
 	vertical-align: middle;
 	font-weight: 400;
 }
+
+.card-poco {
+	background-color: #e24141;
+}
+
+.card-jun {
+	background-color: #547ce4;
+}
+
+.card-seok {
+	background-color: #73bc6d;
+}
+
+.card-yoon {
+	background-color: #de59b9;
+}
+
+.card-hwan {
+	background: radial-gradient(
+		50% 50% at 50% 50%,
+		rgba(4, 192, 158, 0.31) 0%,
+		rgba(4, 192, 158, 0.457344) 65.1%,
+		#04c09e 100%
+	);
+}
+
+.card-taen {
+	background: #e76e9a;
+}
+
+.card-joonil {
+	background: #f37d3b;
+}
+
+.card-eunkyu {
+	background: #fbcd58;
+}
+
+.card-item-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+}

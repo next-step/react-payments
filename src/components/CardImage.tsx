@@ -1,4 +1,5 @@
 import { useAddCardMachineSelector } from 'src/state/addCardMachine.ts';
+import { getCardCompanyClassNameByCode } from 'src/constants/card.ts';
 
 export default function CardImage() {
 	const {
@@ -8,11 +9,12 @@ export default function CardImage() {
 		cardNumberThirdSegment,
 		cardNumberFourthSegment,
 		cardOwnerName,
+		cardCompanyCode,
 	} = useAddCardMachineSelector(state => state.context.cardInfo);
 
 	return (
 		<div className="card-box">
-			<div className="empty-card">
+			<div className={cardCompanyCode ? `small-card ${getCardCompanyClassNameByCode(cardCompanyCode)}` : 'empty-card'}>
 				<div className="card-top"></div>
 				<div className="card-middle">
 					<div className="small-card__chip"></div>
@@ -20,8 +22,8 @@ export default function CardImage() {
 				<div className="card-bottom">
 					<div className="card-bottom__number">
 						<span className="card-text">
-							{cardNumberFirstSegment} {cardNumberSecondSegment} {'o'.repeat(cardNumberThirdSegment.length)}{' '}
-							{'o'.repeat(cardNumberFourthSegment.length)}
+							{cardNumberFirstSegment} {cardNumberSecondSegment} {'∙'.repeat(cardNumberThirdSegment.length)}{' '}
+							{'∙'.repeat(cardNumberFourthSegment.length)}
 						</span>
 					</div>
 					<div className="card-bottom__info">
