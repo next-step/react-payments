@@ -1,5 +1,6 @@
 import { getSplitString4 } from "../util/regExp";
 import CardBox from "./CardBox";
+import Text from "./atomic-design-pattern/atom/Text";
 
 export default function Card({
   alias = "",
@@ -28,18 +29,18 @@ export default function Card({
   return (
     <CardBox>
       <div className="card-top">
-        <span className="card-text">{alias}</span>
+        <Text>{alias}</Text>
       </div>
       <div className="card-middle">
         <div className="small-card__chip"></div>
-        <span className="card-text">{displayCardNumber}</span>
+        <Text>{displayCardNumber}</Text>
       </div>
       <div className="card-bottom">
         <div className="card-bottom_info">
-          <span className="card-text">{displayCardOwnerName}</span>
-          <span className="card-text">
+          <Text>{displayCardOwnerName}</Text>
+          <Text>
             {displayExpirationDateMM} / {displayExpirationDateYY}
-          </span>
+          </Text>
         </div>
       </div>
     </CardBox>
