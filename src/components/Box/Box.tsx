@@ -1,21 +1,8 @@
-import { CSSProperties, ReactNode, forwardRef } from "react";
+import { CSSProperties, HTMLAttributes, ReactNode, forwardRef } from "react";
 
-interface BoxProps extends CSSProperties {
-  /**
-   * @description 숫자가 아닌 원하는 단위의 사이즈를 입력 가능합니다.
-   * @default 'fit-content'
-   */
-  width?: string;
-
-  /**
-   * @description 숫자가 아닌 원하는 단위의 사이즈를 입력 가능합니다.
-   */
-  height?: string;
-
-  /**
-   * @description 박스의 컬러를 지정할 수 있습니다.
-   */
-  backgroundColor?: string;
+interface BoxProps
+  extends Pick<CSSProperties, "width" | "height" | "backgroundColor">,
+    HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   contentPosition?: "center" | "middle" | "centerMiddle" | "none";
 }
@@ -44,19 +31,20 @@ const Box = forwardRef<HTMLDivElement, Readonly<BoxProps>>(function Box(
     contentPosition = "none",
     backgroundColor,
     children,
+    ...props
   },
   ref
 ) {
   const style = {
-    ...{ width },
-    ...{ height },
+    width,
+    height,
     backgroundColor,
     borderRadius: "7px",
     ...position[contentPosition],
   };
 
   return (
-    <div ref={ref} style={style}>
+    <div {...props} ref={ref} style={style}>
       {children}
     </div>
   );
