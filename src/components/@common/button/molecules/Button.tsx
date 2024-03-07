@@ -3,18 +3,14 @@ import ButtonText from '../atoms/ButtonText';
 
 type ButtonProps = {
   className?: string;
-  onButtonClick: () => void;
-  children: React.ReactNode;
+  onClick?: () => void;
+  children?: React.ReactNode;
 };
 
-export default function Button({
-  className,
-  onButtonClick,
-  children,
-}: ButtonProps) {
+export default function Button({ className, children, ...rest }: ButtonProps) {
   return (
-    <ButtonBox className={className} onClick={onButtonClick}>
-      <ButtonText>{children}</ButtonText>
+    <ButtonBox className={className}>
+      <ButtonText {...rest}>{children}</ButtonText>
     </ButtonBox>
   );
 }

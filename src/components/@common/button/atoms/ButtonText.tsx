@@ -2,6 +2,10 @@ type ButtonTextProps = {
   children: React.ReactNode;
 };
 
-export default function ButtonText({ children }: ButtonTextProps) {
-  return <span className='button-text'>{children}</span>;
+export default function ButtonText({ children, ...rest }: ButtonTextProps) {
+  return (
+    <button className='button-text' {...rest}>
+      {children}
+    </button>
+  );
 }

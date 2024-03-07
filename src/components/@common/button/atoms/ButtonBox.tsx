@@ -1,6 +1,6 @@
 type ButtonBoxProps = {
   className?: string;
-  onClick: () => void;
+  onClick?: () => void;
   children: React.ReactNode;
 };
 
