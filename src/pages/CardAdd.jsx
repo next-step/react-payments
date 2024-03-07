@@ -14,6 +14,7 @@ import CardOwnerNameInput from "../components/card-add/CardOwnerInput";
 import { CARD_OWNER_NAME_MAX_LENGTH } from "../constants/cardOwnerName";
 import SecurityCodeInput from "../components/card-add/SecurityCodeInput";
 import PasswordInput from "../components/card-add/PasswordInput";
+import Button from "../components/atomic-design-pattern/atom/Button";
 
 export default function CardAdd() {
   // 카드번호
@@ -105,9 +106,7 @@ export default function CardAdd() {
           <PasswordInput password={password} setPassword={setPassword} />
         </div>
         <div className="button-box">
-          <Link to="/complete" className="button-basic">
-            다음
-          </Link>
+          <Button>다음</Button>
         </div>
       </div>
     </div>
