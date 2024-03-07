@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import CardBox from "../components/CardBox";
 import Card from "../components/Card";
 import {
   FIRST_NUMBER,

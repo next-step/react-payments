@@ -1,4 +1,3 @@
-import { MONTH, YEAR } from "../constants/expirationDate";
 import { getSplitString4 } from "../util/regExp";
 import CardBox from "./CardBox";
 
