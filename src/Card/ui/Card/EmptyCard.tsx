@@ -10,10 +10,10 @@ import {
 	CardTop
 } from "../styles/Card";
 import CardCompany from "./core/CardCompany";
+import CardNumber from "./core/CardNumber";
 import Chip from "./core/Chip";
 import ExpirationDate from "./core/ExpirationDate";
 import Name from "./core/Name";
-import Number from "./core/Number";
 import { CardProvider } from "./provider/CardProvider";
 
 export interface EmptyCardProps {
@@ -31,7 +31,7 @@ const EmptyCard = ({
 }: EmptyCardProps) => {
 	const cardNameComponent = findComponentFromChildren(children, CardCompany);
 	const chipComponent = findComponentFromChildren(children, Chip);
-	const cardNumberComponent = findComponentFromChildren(children, Number);
+	const cardNumberComponent = findComponentFromChildren(children, CardNumber);
 	const nameComponent = findComponentFromChildren(children, Name);
 	const expirationDateComponent = findComponentFromChildren(
 		children,
@@ -67,7 +67,7 @@ EmptyCard.CardCompany = CardCompany;
 EmptyCard.Chip = Chip;
 EmptyCard.Name = Name;
 EmptyCard.ExpirationDate = ExpirationDate;
-EmptyCard.Number = Number;
+EmptyCard.CardNumber = CardNumber;
 
 const EmptyCardWrapper = styled.div`
 	display: flex;

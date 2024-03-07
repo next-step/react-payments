@@ -6,7 +6,7 @@ export interface NumberProps {
 	text: string;
 }
 
-const Number = ({ text }: NumberProps) => {
+const CardNumber = ({ text }: NumberProps) => {
 	const { size } = useCardContext();
 	return (
 		<CardBottomNumber>
@@ -15,7 +15,7 @@ const Number = ({ text }: NumberProps) => {
 	);
 };
 
-export default Number;
+export default CardNumber;
 
 const CardBottomNumber = styled.div`
 	width: 100%;

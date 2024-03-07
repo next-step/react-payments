@@ -26,7 +26,7 @@ const SuccessAddCard = ({ card, onNext, onChange }: SuccessAddCardProps) => {
 				<Card size={"big"}>
 					<Card.CardCompany text={card.bankName} />
 					<Card.Chip />
-					<Card.Number
+					<Card.CardNumber
 						text={maskStringAfterIndex(
 							convertObjectValuesToString(card.cardNumber),
 							2

@@ -1,12 +1,12 @@
 import Header from "@/common/ui/Header/Header";
 import Text from "@/common/ui/Text/Text";
+import { maskStringAfterIndex } from "@/common/utils";
 import { convertObjectValuesToString } from "@/common/utils/object";
 import { CardFunnelProps } from "@/pages/CardFunnel";
 import styled from "@emotion/styled";
 import { CardInfo } from "../types/card";
 import Card from "../ui/Card/Card";
 import EmptyCard from "../ui/Card/EmptyCard";
-import { maskStringAfterIndex } from "@/common/utils";
 
 interface CardListProps extends CardFunnelProps {
 	cardList: CardInfo[];
@@ -23,7 +23,7 @@ const CardList = ({ cardList, onNext }: CardListProps) => {
 							<Card size={"small"}>
 								<Card.CardCompany text={card.bankName} />
 								<Card.Chip />
-								<Card.Number
+								<Card.CardNumber
 									text={maskStringAfterIndex(
 										convertObjectValuesToString(card.cardNumber),
 										2

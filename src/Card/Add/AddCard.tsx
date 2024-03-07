@@ -65,7 +65,7 @@ const AddCard = ({ card, onChange, onNext, setCard }: AddCardProps) => {
 			<EmptyCard mode='add'>
 				<EmptyCard.CardCompany text={""} />
 				<EmptyCard.Chip />
-				<EmptyCard.Number
+				<EmptyCard.CardNumber
 					text={maskStringAfterIndex(
 						convertObjectValuesToString(card.cardNumber),
 						2
