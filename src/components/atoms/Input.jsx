@@ -1,7 +1,7 @@
 function Input(props) {
   const {
     className,
-    extraClassName,
+    extraClassName = '',
     type,
     value,
     placeholder,
@@ -12,7 +12,7 @@ function Input(props) {
 
   return (
     <input
-      className={`${className} ${extraClassName || ''}`}
+      className={`${className} ${extraClassName}`}
       type={type}
       value={value}
       placeholder={placeholder}
