@@ -3,7 +3,7 @@ import { Flex } from '@/components/atom/flex'
 import { Text } from '@/components/atom/text'
 import { Input, InputContentProps } from '@/components/molecule/input'
 import { populateBaseInputProps } from '@/components/organism/base-input/utils/populate-base-input-props.ts'
-import { AtomicProps, PolymorphicRef } from '@/types'
+import { AtomicProps, PolymorphicComponentProp, PolymorphicRef } from '@/types'
 import * as styles from './base-input.css.ts'
 import { isNil } from '@/utils'
 import { clsx } from 'clsx'
@@ -25,6 +25,8 @@ export interface BaseInputProps extends InputContentProps {
   topOffset?: AtomicProps['marginBottom']
   /** Input.Content와 하단 사이의 간격 */
   bottomOffset?: AtomicProps['marginTop']
+  /** label이 포커스 맞춰야 할 input id */
+  htmlFor?: PolymorphicComponentProp<'label'>['htmlFor']
 }
 
 export const BaseInput = forwardRef(
@@ -82,7 +84,7 @@ export interface BaseInputTopSectionProps {
   isHelperTextEnabled: boolean
   helperText?: BaseInputProps['helperText']
   label?: BaseInputProps['label']
-  htmlFor?: BaseInputProps['id']
+  htmlFor?: BaseInputProps['htmlFor']
 }
 
 const BaseInputTopSection = ({
