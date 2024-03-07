@@ -2,23 +2,25 @@ import SuccessAddCard from "pages/SuccessAddCard";
 import CardList from "pages/CardList";
 import AddCard from "pages/AddCard";
 
+import Funnel from "common/components/layout/funnel";
+
 import useFunnel from "features/card/hooks/useFunnel";
 
 function PaymentCard() {
-  const { Funnel, Step, handleChangeCurrentStep } = useFunnel();
+  const { currentStep, handleChangeCurrentStep } = useFunnel();
 
   return (
-    <Funnel>
-      <Step name="addCard">
+    <Funnel.Container currentStep={currentStep}>
+      <Funnel.Step name="addCard">
         <AddCard onChangePage={handleChangeCurrentStep} />
-      </Step>
-      <Step name="addCardSuccess">
+      </Funnel.Step>
+      <Funnel.Step name="addCardSuccess">
         <SuccessAddCard onChangePage={handleChangeCurrentStep} />
-      </Step>
-      <Step name="cardList">
+      </Funnel.Step>
+      <Funnel.Step name="cardList">
         <CardList />
-      </Step>
-    </Funnel>
+      </Funnel.Step>
+    </Funnel.Container>
   );
 }
 
