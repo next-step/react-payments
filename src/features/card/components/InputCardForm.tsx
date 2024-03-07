@@ -1,10 +1,7 @@
 import { ChangeEvent, useRef } from "react";
 
 import Input from "common/components/input";
-import {
-  formattedCardExpireDate,
-  formattedCardNumber,
-} from "features/card/utils/inputFormat";
+import { formattedCardExpireDate, formattedCardNumber } from "features/card/utils/inputFormat";
 import { CardInfo } from "features/card/types/card.type";
 
 interface InputCardFormProps extends CardInfo {
@@ -56,17 +53,17 @@ export default function InputCardForm({
       <Input.Container>
         <Input.Label>카드 번호</Input.Label>
         <Input.Box>
-          <Input.Text
-            value={cardNumber}
-            maxLength={19}
-            onChange={handleCardNumberChange}
-          />
+          <Input.Basic type="text" value={cardNumber} maxLength={4} onChange={handleCardNumberChange} />
+          <Input.Basic type="text" value={cardNumber} maxLength={4} />
+          <Input.Basic type="password" value={cardNumber} maxLength={4} />
+          <Input.Basic type="password" value={cardNumber} maxLength={4} />
         </Input.Box>
       </Input.Container>
       <Input.Container>
         <Input.Label>만료일</Input.Label>
         <Input.Box className="input-box w-50">
-          <Input.Text
+          <Input.Basic
+            type="text"
             value={expireDate}
             maxLength={5}
             placeholder="MM / YY"
@@ -76,7 +73,8 @@ export default function InputCardForm({
       </Input.Container>
       <Input.Container>
         <Input.Label>카드 소유자 이름(선택)</Input.Label>
-        <Input.Text
+        <Input.Basic
+          type="text"
           value={cardOwner}
           placeholder="카드에 표시된 이름과 동일하게 입력하세요."
           maxLength={30}
@@ -85,7 +83,8 @@ export default function InputCardForm({
       </Input.Container>
       <Input.Container>
         <Input.Label>보안코드 (CVC/CVV)</Input.Label>
-        <Input.Password
+        <Input.Basic
+          type="password"
           value={cvc}
           className="input-basic w-25"
           maxLength={3}
@@ -95,22 +94,24 @@ export default function InputCardForm({
       <Input.Container>
         <Input.Label>카드 비밀번호</Input.Label>
         <Input.Box className="gap8">
-          <Input.Password
+          <Input.Basic
+            type="password"
             ref={firstPasswordRef}
             value={firstPassword}
             maxLength={1}
             className="input-basic w-15"
             onChange={handleFirstPasswordChange}
           />
-          <Input.Password
+          <Input.Basic
+            type="password"
             ref={secondPasswordRef}
             value={secondPassword}
             maxLength={1}
             className="input-basic w-15"
             onChange={handleSecondPasswordChange}
           />
-          <Input.Password value="*" className="input-basic w-15" readOnly />
-          <Input.Password value="*" className="input-basic w-15" readOnly />
+          <Input.Basic type="password" value="*" className="input-basic w-15" readOnly />
+          <Input.Basic type="password" value="*" className="input-basic w-15" readOnly />
         </Input.Box>
       </Input.Container>
     </>

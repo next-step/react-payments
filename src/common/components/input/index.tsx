@@ -1,15 +1,13 @@
 import InputContainer from "./InputContainer";
 import InputBox from "./InputBox";
 import InputLabel from "./InputLabel";
-import TextInput from "./TextInput";
-import PasswordInput from "./PasswordInput";
+import BasicInput from "./BasicInput";
 
 const Input = {
   Container: InputContainer,
   Box: InputBox,
   Label: InputLabel,
-  Text: TextInput,
-  Password: PasswordInput,
+  Basic: BasicInput,
 };
 
 export default Input;

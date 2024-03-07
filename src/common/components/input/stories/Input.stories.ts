@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import TextInput from "../TextInput";
+import BasicInput from "common/components/input/BasicInput";
 
 const meta = {
-  title: "Input/TextInput",
-  component: TextInput,
+  title: "Input/BasicInput",
+  component: BasicInput,
   parameters: {
     layout: "centered",
   },
@@ -13,7 +13,13 @@ const meta = {
     maxLength: 10,
     type: "text",
   },
-} satisfies Meta<typeof TextInput>;
+  argTypes: {
+    type: {
+      options: ["text", "password"],
+      control: { type: "radio" },
+    },
+  },
+} satisfies Meta<typeof BasicInput>;
 
 export default meta;
 
