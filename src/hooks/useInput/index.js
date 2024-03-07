@@ -5,11 +5,14 @@ const useInput = (props) => {
   const { register, getValues } = useFormContext();
 
   const checkValue = (value) => {
+    console.log(value);
     const currentValue = getValues(name);
 
     if (value.length > length) {
       value = currentValue;
     }
+
+    console.log(value, value.length);
 
     if (value.length > maxLength) {
       value = currentValue;

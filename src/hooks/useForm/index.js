@@ -82,6 +82,7 @@ const useCustomForm = (props = {}) => {
 
   const reset = () => {
     valueRefs.current = defaultValues;
+    formOption.current = {};
     setWatchValue(defaultValues);
   };
 

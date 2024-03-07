@@ -16,6 +16,7 @@ const Input = (props) => {
     secret,
     className,
     //
+    type,
     ...rest
   } = props;
   const input = useInput({
@@ -30,10 +31,20 @@ const Input = (props) => {
 
   const classes = Array.isArray(className) ? className.join(" ") : className;
 
+  const handleKeyPress = (e) => {
+    if (type === "number") {
+      if ((e.which !== 8 && e.which !== 0 && e.which < 48) || e.which > 57) {
+        e.preventDefault();
+      }
+    }
+  };
+
   return createElement(
     as,
     {
       className: classes + (secret ? " input-secret" : ""),
+      type,
+      onKeyPress: handleKeyPress,
       ...rest,
       ...input,
     },
