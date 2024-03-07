@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import '../styles/index.css';
-import AddCard from './components/templates/AddCard';
-import CardList from './components/templates/CardList';
-import SaveCard from './components/templates/SaveCard';
 import { FIRST_STEP, LAST_STEP } from './constants/constraints';
+import { Router } from './route/Router';
 
 function App() {
   const [step, setStep] = useState(1);
@@ -25,14 +23,12 @@ function App() {
 
   return (
     <div className="root">
-      {step === 0 ? <CardList goToNextStep={goToNextStep} /> : null}
-      {step === 1 ? (
-        <AddCard
-          goToPreviousStep={goToPreviousStep}
-          goToNextStep={goToNextStep}
-        />
-      ) : null}
-      {step === 2 ? <SaveCard data={data} /> : null}
+      <Router
+        step={step}
+        goToNextStep={goToNextStep}
+        goToPreviousStep={goToPreviousStep}
+        data={data}
+      />
     </div>
   );
 }
