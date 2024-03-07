@@ -1,6 +1,6 @@
 import type { Preview, Story } from "@storybook/react";
 import GlobalStyle from "../src/common/ui/GlobalStyle";
-import IconLoader from "../src/common/ui/assets/IconLoader";
+import IconSprites from "../src/common/ui/assets/IconSprites";
 
 const preview: Preview = {
 	parameters: {
@@ -21,7 +21,7 @@ export const decorators = [
 		<div id='root'>
 			<div id='app'>
 				<GlobalStyle />
-				<IconLoader />
+				<IconSprites />
 				<Story />
 			</div>
 		</div>

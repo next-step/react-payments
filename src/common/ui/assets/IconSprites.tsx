@@ -1,4 +1,4 @@
-const IconLoader = () => (
+const IconSprites = () => (
 	<svg
 		id='sprite-svgs'
 		version='1.1'
@@ -18,4 +18,4 @@ const IconLoader = () => (
 	</svg>
 );
 
-export default IconLoader;
+export default IconSprites;
