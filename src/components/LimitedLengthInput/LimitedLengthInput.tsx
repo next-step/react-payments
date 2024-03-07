@@ -1,6 +1,5 @@
 import {
   ChangeEvent,
-  HTMLAttributes,
   InputHTMLAttributes,
   forwardRef,
   useEffect,
@@ -23,14 +22,13 @@ const styles = {
 };
 
 type LimitedLengthInputProps = Omit<
-  HTMLAttributes<HTMLInputElement>,
-  "onChange" | "value"
+  InputHTMLAttributes<HTMLInputElement>,
+  "onChange" | "maxLength"
 > & {
   /**
    * @description 인풋 입력 최대 길이를 조정합니다.
    */
   maxLength: number;
-
   /**
    * @description 인풋의 변화를 얻을 수 있는 콜백 함수 입니다.
    * @param value 현재 인풋에 입력중인 텍스트를 얻을 수 있습니다.
@@ -47,8 +45,6 @@ type LimitedLengthInputProps = Omit<
   textAlign?: "left" | "center" | "right";
 
   colorTheme?: "primary" | "normal";
-  placeholder?: string;
-  value?: string;
 };
 
 const LimitedLengthInput = forwardRef<
@@ -88,6 +84,10 @@ const LimitedLengthInput = forwardRef<
 
   function changeValue(event: ChangeEvent<HTMLInputElement>) {
     const isMaxLength = event.target.value.length === maxLength;
+    maxLength === undefined &&
+      onChange &&
+      onChange(event.target.value, isMaxLength);
+
     !isOverLengthToLimitation(event.target.value, maxLength) &&
       onChange &&
       onChange(event.target.value, isMaxLength);
