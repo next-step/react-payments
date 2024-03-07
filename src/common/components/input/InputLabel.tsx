@@ -1,6 +1,6 @@
-import { HTMLAttributes } from "react";
+import { LabelHTMLAttributes } from "react";
 
-interface InputLabelProps extends HTMLAttributes<HTMLSpanElement> {
+interface InputLabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
   children: React.ReactNode;
 }
 
