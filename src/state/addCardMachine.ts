@@ -48,7 +48,8 @@ type CardMachineEvent =
 	| { type: 'EDIT_CARD' }
 	| { type: 'BACK' }
 	| { type: 'TOGGLE' }
-	| { type: 'SELECT_CARD'; value: CardInfoWithId };
+	| { type: 'SELECT_CARD'; value: CardInfoWithId }
+	| { type: 'DELETE_CARD'; value: string };
 
 export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent>(
 	{
@@ -69,6 +70,9 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 					SELECT_CARD: {
 						target: 'nickname',
 						actions: ['selectCard'],
+					},
+					DELETE_CARD: {
+						actions: ['deleteCard'],
 					},
 				},
 			},
@@ -154,7 +158,7 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 
 				return {
 					...context,
-					cardList: [...context.cardList, newCardInfo],
+					cardList: [newCardInfo, ...context.cardList],
 					selectedCard: newCardInfo,
 					cardInfo: { ...initialCardInfo },
 				};
@@ -181,6 +185,15 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 					}
 
 					return { ...context.selectedCard };
+				},
+			}),
+			deleteCard: assign({
+				cardList: (context, event) => {
+					if (event.type === 'DELETE_CARD') {
+						return context.cardList.filter(card => card.id !== event.value);
+					}
+
+					return context.cardList;
 				},
 			}),
 		},

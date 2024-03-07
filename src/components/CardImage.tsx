@@ -1,3 +1,5 @@
+import { MouseEvent } from 'react';
+
 import { CardInfo } from 'src/state/addCardMachine.ts';
 import { getCardCompanyClassNameByCode, getCardCompanyNameByCode } from 'src/constants/card.ts';
 
@@ -13,6 +15,7 @@ interface CardImageProps
 		| 'cardCompanyCode'
 	> {
 	size?: 'small' | 'big';
+	onClick?: (event: MouseEvent<HTMLDivElement>) => void;
 }
 
 export default function CardImage({
@@ -24,6 +27,7 @@ export default function CardImage({
 	cardOwnerName,
 	cardCompanyCode,
 	size = 'small',
+	onClick,
 }: CardImageProps) {
 	const classNameBySize = {
 		small: { card: 'small-card', chip: 'small-card__chip', text: 'card-text' },
@@ -31,7 +35,7 @@ export default function CardImage({
 	};
 
 	return (
-		<div className="card-box">
+		<div className="card-box" onClick={onClick}>
 			<div
 				className={
 					cardCompanyCode
