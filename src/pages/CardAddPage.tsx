@@ -78,7 +78,7 @@ export const CardAddPage = () => {
   const isValidateCardBrand = Boolean(selectedCardBrand.label);
   const isValidateCardNumber = removeAllSpaces(cardNumber.join('')).length === 16;
   const isValidateExpirationDate = removeAllSpaces(expirationDate.join('')).length === 4;
-  const isValidateSecurityCode = securityCode.length === 3;
+  const isValidateSecurityCode = securityCode[0].length === 3;
   const isValidatePassword = removeAllSpaces(password.join('')).length === 2;
   const isValidateCardState =
     isValidateCardBrand &&
@@ -106,7 +106,7 @@ export const CardAddPage = () => {
   };
 
   return (
-    <AppLayout>
+    <>
       {isCardSelectOpen && (
         <CardSelectBottomSheet onSubmit={handleCardSelectSubmit} onOverlayClick={handleCardSelectClose} />
       )}
@@ -194,6 +194,6 @@ export const CardAddPage = () => {
           )}
         </HStack>
       </AppLayout.Footer>
-    </AppLayout>
+    </>
   );
 };
