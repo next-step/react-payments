@@ -26,9 +26,10 @@ export default function PlasticCard({
 }: PlasticCardProps) {
   const { firstNumber, secondNumber, thirdNumber, fourthNumber } = cardNumber;
   const { month, year } = expiration;
+
   return (
     <div
-      style={{ backgroundColor: `${cardColor[cardType]}` }}
+      style={{ backgroundColor: `${cardColor[cardType].color}` }}
       className={`${styles.card__container}`}
     >
       <div className={styles.card__name}>
