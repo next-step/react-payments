@@ -16,7 +16,7 @@ export const useInputs = (inputConfigs: UseInputsProps = INPUT_CONFIG_DEFAULTS) 
   const [values, setValues] = useState(INITIAL_VALUES);
   const refs = inputConfigs.map(() => useRef<HTMLInputElement>(null));
 
-  const handleChange = (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
+  const createChangeHandlerByIndex = (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
     const { value: inputValue } = event.target;
     const config = inputConfigs[index];
     const isValid = !config.pattern || config.pattern.test(inputValue);
@@ -53,7 +53,7 @@ export const useInputs = (inputConfigs: UseInputsProps = INPUT_CONFIG_DEFAULTS) 
     setFocus(index + 1, nextFocusPosition);
   };
 
-  const handleKeyUp = (index: number) => (e: KeyboardEvent<HTMLInputElement>) => {
+  const createKeyUpHandlerByIndex = (index: number) => (e: KeyboardEvent<HTMLInputElement>) => {
     const { pattern, maxLength } = inputConfigs[index];
     const {
       key,
@@ -105,5 +105,5 @@ export const useInputs = (inputConfigs: UseInputsProps = INPUT_CONFIG_DEFAULTS) 
     }
   };
 
-  return { values, refs, handleChange, handleKeyUp, prevFocus, nextFocus };
+  return { values, refs, createChangeHandlerByIndex, createKeyUpHandlerByIndex, prevFocus, nextFocus };
 };

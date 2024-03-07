@@ -18,18 +18,14 @@ export const CardAddPage = () => {
   const { goToPrev, goToNext } = useFunnel();
   const { card, setCard } = useCard();
 
-  const { selected: selectedCardBrand, handleSelect: handleCardBrandSelect } = useSelectCardBrand();
-  const {
-    isOpen: isCardSelectOpen,
-    handleOpen: handleCardSelectOpen,
-    handleClose: handleCardSelectClose,
-  } = useModal(true);
+  const { cardBrand: selectedCardBrand, selectCardBrand: handleCardBrandSelect } = useSelectCardBrand();
+  const { isOpen: isCardSelectOpen, open: cardSelectOpen, close: cardSelectClose } = useModal(true);
 
   const {
     values: cardNumber,
     refs: cardNumberInputRefs,
-    handleChange: handleCardNumberChange,
-    handleKeyUp: handleCardNumberKeyDown,
+    createChangeHandlerByIndex: createChangeCardNumberCHandlerByIndex,
+    createKeyUpHandlerByIndex: createKeyUpCardNumberCHandlerByIndex,
   } = useInputs([
     CARD_NUMBER_INPUT_CONFIG,
     CARD_NUMBER_INPUT_CONFIG,
@@ -40,8 +36,8 @@ export const CardAddPage = () => {
   const {
     values: expirationDate,
     refs: expirationDateRefs,
-    handleChange: handleExpirationDateChange,
-    handleKeyUp: handleExpirationDateKeyUp,
+    createChangeHandlerByIndex: createChangeExpirationDateCHandlerByIndex,
+    createKeyUpHandlerByIndex: createKeyUpExpirationDateCHandlerByIndex,
   } = useInputs([CARD_EXPIRATION_DATE, CARD_EXPIRATION_DATE]);
   const handleExpirationDateBlur = (index: number) => (e: FocusEvent<HTMLInputElement>) => {
     if (e.target.value.length === 1) {
@@ -51,28 +47,28 @@ export const CardAddPage = () => {
         e.target.value = `0${e.target.value}`;
       }
     }
-    handleExpirationDateChange(index)(e);
+    createChangeExpirationDateCHandlerByIndex(index)(e);
   };
 
   const {
     values: ownerName,
     refs: ownerNameRefs,
-    handleChange: handleOwnerNameChange,
-    handleKeyUp: handleOwnerNameKeyUp,
+    createChangeHandlerByIndex: createChangeOwnerNameCHandlerByIndex,
+    createKeyUpHandlerByIndex: handleOwnerNameKeyUp,
   } = useInputs();
 
   const {
     values: securityCode,
     refs: securityCodeRefs,
-    handleChange: handleSecurityCodeChange,
-    handleKeyUp: handleSecurityCodeKeyUp,
+    createChangeHandlerByIndex: createChangeSecurityCodeHandlerByIndex,
+    createKeyUpHandlerByIndex: createdKeyUpSecurityCodeHandlerByIndex,
   } = useInputs([CARD_SECURITY_CODE]);
 
   const {
     values: password,
     refs: passwordRefs,
-    handleChange: handlePasswordChange,
-    handleKeyUp: handlePasswordKeyUp,
+    createChangeHandlerByIndex: createChangePasswordCHandlerByIndex,
+    createKeyUpHandlerByIndex: createdKeyUpPasswordByIndex,
   } = useInputs([CARD_PASSWORD, CARD_PASSWORD]);
 
   const isValidateCardBrand = Boolean(selectedCardBrand.label);
@@ -87,12 +83,12 @@ export const CardAddPage = () => {
     isValidateSecurityCode &&
     isValidatePassword;
 
-  const handleCardSelectSubmit = (cardBrand: CardBrand) => {
+  const cardSelectSubmit = (cardBrand: CardBrand) => {
     handleCardBrandSelect(cardBrand);
-    handleCardSelectClose();
+    cardSelectClose();
   };
 
-  const handleCardStateAdd = () => {
+  const setCardWithGoToNextPage = () => {
     setCard({
       ...card,
       cardNumber,
@@ -107,9 +103,7 @@ export const CardAddPage = () => {
 
   return (
     <>
-      {isCardSelectOpen && (
-        <CardSelectBottomSheet onSubmit={handleCardSelectSubmit} onOverlayClick={handleCardSelectClose} />
-      )}
+      {isCardSelectOpen && <CardSelectBottomSheet onSubmit={cardSelectSubmit} onOverlayClick={cardSelectClose} />}
       <AppLayout.Header>
         <Button
           variant="ghost"
@@ -142,7 +136,7 @@ export const CardAddPage = () => {
               cardNumber={cardNumber}
               expirationDate={expirationDate}
               ownerName={ownerName[0]}
-              onClick={handleCardSelectOpen}
+              onClick={cardSelectOpen}
             />
           </Box>
           <CardInput.Number
@@ -150,8 +144,8 @@ export const CardAddPage = () => {
             values={cardNumber}
             label="카드 번호"
             refs={cardNumberInputRefs}
-            onChange={handleCardNumberChange}
-            onKeyUp={handleCardNumberKeyDown}
+            onChange={createChangeCardNumberCHandlerByIndex}
+            onKeyUp={createKeyUpCardNumberCHandlerByIndex}
             _inputRoot={{
               backgroundColor: `${styleToken.color.gray200}`,
               borderRadius: '7px',
@@ -160,27 +154,27 @@ export const CardAddPage = () => {
           />
           <CardInput.ExpirationDate
             values={expirationDate}
-            onChange={handleExpirationDateChange}
-            onKeyUp={handleExpirationDateKeyUp}
+            onChange={createChangeExpirationDateCHandlerByIndex}
+            onKeyUp={createKeyUpExpirationDateCHandlerByIndex}
             onBlur={handleExpirationDateBlur}
             refs={expirationDateRefs}
           />
           <CardInput.OwnerName
             value={ownerName[0]}
-            onChange={handleOwnerNameChange(0)}
+            onChange={createChangeOwnerNameCHandlerByIndex(0)}
             onKeyUp={handleOwnerNameKeyUp(0)}
             ref={ownerNameRefs[0]}
           />
           <CardInput.SecurityCode
             value={securityCode[0]}
-            onChange={handleSecurityCodeChange(0)}
-            onKeyUp={handleSecurityCodeKeyUp(0)}
+            onChange={createChangeSecurityCodeHandlerByIndex(0)}
+            onKeyUp={createdKeyUpSecurityCodeHandlerByIndex(0)}
             ref={securityCodeRefs[0]}
           />
           <CardInput.Password
             values={password}
-            onChange={handlePasswordChange}
-            onKeyUp={handlePasswordKeyUp}
+            onChange={createChangePasswordCHandlerByIndex}
+            onKeyUp={createdKeyUpPasswordByIndex}
             refs={passwordRefs}
           />
         </VStack>
@@ -188,7 +182,7 @@ export const CardAddPage = () => {
       <AppLayout.Footer>
         <HStack justifyContent="flex-end">
           {isValidateCardState && (
-            <Button variant="ghost" color="teal" fontSize="100px" onClick={handleCardStateAdd}>
+            <Button variant="ghost" color="teal" fontSize="100px" onClick={setCardWithGoToNextPage}>
               다음
             </Button>
           )}
