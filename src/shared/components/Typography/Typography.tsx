@@ -11,6 +11,7 @@ export enum TypographyVariants {
   headline = 'headline',
   display = 'display',
 }
+
 export type TypographyVariant = keyof typeof TypographyVariants;
 
 type TypographyProps = PropsWithChildren<
@@ -20,18 +21,23 @@ type TypographyProps = PropsWithChildren<
     }
 >;
 
-export const Typography = ({ children, ...props }: TypographyProps) => {
-  const { as, variant = 'body', whiteSpace, fontSize, fontWeight, ...restProps } = props;
-
+export const Typography = ({
+  children,
+  as = 'span',
+  variant = 'body',
+  whiteSpace = 'pre-wrap',
+  fontSize,
+  fontWeight,
+  ...props
+}: TypographyProps) => {
   const typographyProps = {
     fontSize: fontSize || typographyVariantStyle[variant].fontSize,
     fontWeight: fontWeight || typographyVariantStyle[variant].fontWeight,
     lineHeight: typographyVariantStyle[variant].lineHeight,
     letterSpacing: typographyVariantStyle[variant].letterSpacing,
-    whiteSpace: whiteSpace || 'pre-wrap',
   };
   return (
-    <Root as="span" variant={variant} {...typographyProps} {...restProps}>
+    <Root as={as} variant={variant} whiteSpace={whiteSpace} {...typographyProps} {...props}>
       {children}
     </Root>
   );

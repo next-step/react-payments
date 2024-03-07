@@ -13,7 +13,9 @@ export const CardListPage = () => {
   return (
     <>
       <AppLayout.Header>
-        <Typography variant="headline">보유 카드</Typography>
+        <Typography as="h1" variant="headline" padding="10px 0" margin="0">
+          보유 카드
+        </Typography>
       </AppLayout.Header>
       <AppLayout.Body>
         <VStack spacing="20px" padding="20px 0">
