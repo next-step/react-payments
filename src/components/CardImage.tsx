@@ -14,7 +14,10 @@ export default function CardImage() {
 
 	return (
 		<div className="card-box">
-			<div className={cardCompanyCode ? `small-card ${getCardCompanyClassNameByCode(cardCompanyCode)}` : 'empty-card'}>
+			<div
+				className={cardCompanyCode ? `small-card ${getCardCompanyClassNameByCode(cardCompanyCode)}` : 'empty-card'}
+				data-testid="card-image"
+			>
 				<div className="card-top"></div>
 				<div className="card-middle">
 					<div className="small-card__chip"></div>

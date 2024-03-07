@@ -10,7 +10,12 @@ export default function SelectCardCompanyItem({ code, name, className }: CardCom
 	};
 
 	return (
-		<button className="modal-item-container" type="button" onClick={handleSelectCardCompany}>
+		<button
+			className="modal-item-container"
+			type="button"
+			onClick={handleSelectCardCompany}
+			data-testid={`card-company-button-${code}`}
+		>
 			<div className={`modal-item-dot ${className}`}></div>
 			<span className="modal-item-name">{name}</span>
 		</button>
