@@ -3,7 +3,8 @@ import BottomFixedButton from "@/common/ui/Button/BottomFixedButton";
 import FlexibleInput from "@/common/ui/FlexibleInput/FlexibleInput";
 import Header from "@/common/ui/Header/Header";
 import Text from "@/common/ui/Text/Text";
-import { maskObjectValuesAfterIndex } from "@/common/utils/object";
+import { maskStringAfterIndex } from "@/common/utils";
+import { convertObjectValuesToString } from "@/common/utils/object";
 import styled from "@emotion/styled";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import {
@@ -65,7 +66,10 @@ const AddCard = ({ card, onChange, onNext, setCard }: AddCardProps) => {
 				<EmptyCard.CardCompany text={""} />
 				<EmptyCard.Chip />
 				<EmptyCard.Number
-					text={maskObjectValuesAfterIndex(card.cardNumber, 2)}
+					text={maskStringAfterIndex(
+						convertObjectValuesToString(card.cardNumber),
+						2
+					)}
 				/>
 				<EmptyCard.Name text={card.ownerName || "NAME"} />
 				<EmptyCard.ExpirationDate month={month || "MM"} year={year || "YY"} />

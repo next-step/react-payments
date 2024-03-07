@@ -1,7 +1,8 @@
 import BottomFixedButton from "@/common/ui/Button/BottomFixedButton";
 import Input from "@/common/ui/Input/Input";
 import Text from "@/common/ui/Text/Text";
-import { maskObjectValuesAfterIndex } from "@/common/utils/object";
+import { maskStringAfterIndex } from "@/common/utils";
+import { convertObjectValuesToString } from "@/common/utils/object";
 import { CardFunnelProps } from "@/pages/CardFunnel";
 import styled from "@emotion/styled";
 import { ChangeEvent } from "react";
@@ -25,7 +26,12 @@ const SuccessAddCard = ({ card, onNext, onChange }: SuccessAddCardProps) => {
 				<Card size={"big"}>
 					<Card.CardCompany text={card.bankName} />
 					<Card.Chip />
-					<Card.Number text={maskObjectValuesAfterIndex(card.cardNumber, 2)} />
+					<Card.Number
+						text={maskStringAfterIndex(
+							convertObjectValuesToString(card.cardNumber),
+							2
+						)}
+					/>
 					<Card.Name text={card.ownerName} />
 					<Card.ExpirationDate
 						month={card.expirationDate.month}
