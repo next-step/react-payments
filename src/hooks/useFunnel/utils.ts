@@ -4,5 +4,5 @@ export const updateQueryParams = (key: string, value: string) => {
 
   const newUrl = `${window.location.pathname}?${queryParams.toString()}`;
 
-  window.history.pushState({}, "", newUrl);
+  window.history.replaceState({}, "", newUrl);
 };

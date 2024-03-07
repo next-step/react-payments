@@ -15,6 +15,7 @@ import CvcInput from "./Components/CvcInput/CvcInput";
 import PasswordInput from "./Components/PasswordInput/PasswordInput";
 import SelectCardType from "./Components/SelectCardtype/SelectCardType";
 import Button from "../../../components/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 type CardRegistration = {
   cardNumber: CardNumber;
@@ -39,6 +40,7 @@ export default function CardRegister({
   const [password, setPassword] = useState<TwoPasswordDigits>();
   const [cardType, setCardType] = useState<CardType>("none");
   const [isShownCardTypeSelection, turnOn, turnOff] = useBoolean(false);
+  const navigate = useNavigate();
 
   const isAbledSubmit =
     cardNumber &&
@@ -54,7 +56,7 @@ export default function CardRegister({
   }
 
   function moveBack() {
-    window.history.back();
+    navigate(-1);
   }
 
   function submit(event: MouseEvent<HTMLButtonElement>) {
