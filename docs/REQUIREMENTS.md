@@ -1,11 +1,13 @@
 ### 필수 요구사항
 - [x] 원시적인 형태의 Primitive UI 형태의 컴포넌트 작성
   - [x] Box
+  - [x] Flex
+  - [x] Grid
+  - [x] Stack
+  - [x] VStack
+  - [x] HStack
   - [x] Button
   - [x] Circle
-  - [x] HStack
-  - [x] VStack
-  - [x] Grid
   - [x] TextField
   - [x] Typography
   - [x] Label

@@ -1,15 +1,17 @@
 import { PropsWithChildren } from 'react';
-import styled from '@emotion/styled';
-import { DefaultStyled } from '@/shared/styles';
+import { Stack } from '@/shared/components';
 import type { AsProps, StyleProps } from '@/shared/types';
 
-type HStackProps = PropsWithChildren<StyleProps & AsProps>;
-
-export const HStack = ({ children, ...props }: HStackProps) => <Root {...props}>{children}</Root>;
-
-const Root = styled(DefaultStyled)<HStackProps>`
-  display: flex;
-  flex-direction: ${({ flexDirection }) => flexDirection || 'row'};
-`;
+type HStackProps = PropsWithChildren<
+  StyleProps &
+    AsProps & {
+      spacing?: string;
+    }
+>;
+export const HStack = ({ children, spacing, ...props }: HStackProps) => (
+  <Stack flexDirection="row" spacing={spacing} {...props}>
+    {children}
+  </Stack>
+);
 
 HStack.displayName = 'HStack';

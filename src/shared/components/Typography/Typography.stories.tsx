@@ -39,7 +39,7 @@ export const Primary: Story = {
 
 export const WithVariants: Story = {
   render: () => (
-    <VStack gap="24px">
+    <VStack spacing="24px">
       {Object.entries(TypographyVariants).map(([key, value]) => {
         const { fontSize, fontWeight, lineHeight, letterSpacing } = typographyVariantStyle[value];
         return (

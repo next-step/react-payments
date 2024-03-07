@@ -45,7 +45,7 @@ export const Primary: Story = {
 
 export const WithTypographyVariants: Story = {
   render: (args) => (
-    <VStack gap="24px">
+    <VStack spacing="24px">
       {Object.values(TypographyVariants).map((variant) => (
         <Label key={variant} htmlFor={`input-${variant}`} {...args} variant={variant}>
           {`Label - ${variant}`}
