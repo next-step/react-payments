@@ -1,5 +1,10 @@
+import CardInfoProvider from "features/card/context/CardInputContext";
 import PaymentCard from "pages/PaymentCard";
 
 export default function App() {
-  return <PaymentCard />;
+  return (
+    <CardInfoProvider>
+      <PaymentCard />
+    </CardInfoProvider>
+  );
 }

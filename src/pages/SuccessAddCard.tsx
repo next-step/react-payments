@@ -4,19 +4,19 @@ import Layout from "common/components/layout";
 import { CurrentPage } from "common/types/page.type";
 import Card from "common/components/card/Card";
 
-import { CardInfo } from "features/card/types/card.type";
+import useCardInput from "features/card/hooks/useCardInput";
 
-interface SuccessAddCardProps extends CardInfo {
+interface SuccessAddCardProps {
   onChangePage: (page: CurrentPage) => void;
 }
 
-export default function SuccessAddCard({ onChangePage, ...cardInfo }: SuccessAddCardProps) {
-  const { cardNumber, cardOwner, expireDate, cardName } = cardInfo;
+export default function SuccessAddCard({ onChangePage }: SuccessAddCardProps) {
+  const { cardInfo } = useCardInput();
 
   return (
     <Layout.Success>
       <Title className="page-title mb-10">카드등록이 완료되었습니다.</Title>
-      <Card mode="complete" cardName={cardName} cardNumber={cardNumber} cardOwner={cardOwner} expireDate={expireDate} />
+      <Card mode="complete" {...cardInfo} />
       <Button onClick={() => onChangePage("cardList")}>확인</Button>
     </Layout.Success>
   );
