@@ -1,10 +1,13 @@
 import { Card, Flex, Text, UnderlineInput } from '@/components'
-import { useCardInputContext } from '@/domains/card-register/contexts/card-input-context'
-import { useNavigate } from 'react-router-dom'
+import { useCardInputContext } from '@/steps/card-register/contexts/card-input-context'
 
-export const CardRegisterCompleteFunnel = () => {
+export interface CardRegisterCompleteStepProps {
+  onClickConfirm: () => void
+}
+
+export const CardRegisterCompleteStep = ({ onClickConfirm }: CardRegisterCompleteStepProps) => {
   const { cardInput } = useCardInputContext()
-  const navigate = useNavigate()
+
   return (
     <Flex width="100%" height="100vh" direction="column">
       <Flex direction="column" justifyContent="center" alignItems="center" marginTop="48px">
@@ -16,7 +19,7 @@ export const CardRegisterCompleteFunnel = () => {
       </Flex>
 
       <Flex justifyContent="flex-end" paddingX="24px" paddingY="32px" marginTop="auto">
-        <Text as="button" variant="body1" color="aqua" onClick={() => navigate('/card-list')}>
+        <Text as="button" variant="body1" color="aqua" onClick={onClickConfirm}>
           확인
         </Text>
       </Flex>

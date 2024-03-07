@@ -10,7 +10,7 @@ import {
   Card,
 } from '@/components'
 import { FormEventHandler } from 'react'
-import { useCardInputContext } from '@/domains/card-register/contexts/card-input-context'
+import { useCardInputContext } from '@/steps/card-register/contexts/card-input-context'
 
 export interface CardInputFormFunnelProps {
   onSubmit: () => void
@@ -29,7 +29,7 @@ export const CardInputFormFunnel = ({ onSubmit }: CardInputFormFunnelProps) => {
 
   return (
     <Flex direction="column" width="100%" height="100vh">
-      <Header title="카드 추가" prevNavPath="/card-list" />
+      <Header title="카드 추가" />
       <Flex
         as="main"
         direction="column"
