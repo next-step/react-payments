@@ -1,13 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { ReactNode } from 'react';
 
-import { AddCardMachineProvider } from 'src/state/addCardMachine.ts';
 import AddCardStepper from 'src/components/AddCardStepper.tsx';
-
-export function TestWrapper({ children }: { children?: ReactNode }) {
-	return <AddCardMachineProvider>{children}</AddCardMachineProvider>;
-}
 
 const setup = () => {
 	const formNextButton = screen.getByTestId('form-next');
