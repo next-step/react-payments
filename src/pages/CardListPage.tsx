@@ -16,9 +16,9 @@ export const CardListPage = () => {
         <Typography variant="headline">보유 카드</Typography>
       </AppLayout.Header>
       <AppLayout.Body>
-        <VStack gap="20px" padding="20px 0">
+        <VStack spacing="20px" padding="20px 0">
           {ownerCards.map((ownerCard, index) => (
-            <VStack key={`card-list-${index}`} gap="10px" alignItems="center" justifyContent="center">
+            <VStack key={`card-list-${index}`} spacing="10px" alignItems="center" justifyContent="center">
               <CardDisplay size="small" {...ownerCard} />
               <Typography variant="body" textAlign="center">
                 {ownerCard.description}

@@ -34,7 +34,7 @@ export const CardCompletePage = () => {
     <>
       <AppLayout.Header />
       <AppLayout.Body>
-        <VStack gap="20px" marginTop="20px">
+        <VStack spacing="20px" marginTop="20px">
           <Typography variant="headline" textAlign="center" margin="40px 0">
             카드 등록이 완료되었습니다.
           </Typography>

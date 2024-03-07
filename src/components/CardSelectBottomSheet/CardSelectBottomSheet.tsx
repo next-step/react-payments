@@ -48,7 +48,7 @@ type CardSelectButtonProps = {
 
 const CardSelectButton = ({ color, label, ...props }: CardSelectButtonProps) => (
   <Button variant="ghost" backgroundColor={styleToken.color.white} width="100%" padding="0" {...props}>
-    <VStack width="100%" justifyContent="center" alignItems="center" gap="10px">
+    <VStack width="100%" justifyContent="center" alignItems="center" spacing="10px">
       <Circle backgroundColor={color} width="36px" height="36px" />
       <Typography variant="caption" color={styleToken.color.black}>
         {label}

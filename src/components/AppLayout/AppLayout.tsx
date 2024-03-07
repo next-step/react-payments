@@ -24,9 +24,9 @@ const AppLayoutDisplay = ({ children }: PropsWithChildren) => (
 );
 
 const AppLayoutHeader = ({ children }: PropsWithChildren) => (
-  <VStack as="header" width={styleToken.width.w100} minHeight="30px">
+  <Box as="header" width={styleToken.width.w100} minHeight="30px">
     {children}
-  </VStack>
+  </Box>
 );
 
 const AppLayoutBody = ({ children }: PropsWithChildren) => (
@@ -36,9 +36,9 @@ const AppLayoutBody = ({ children }: PropsWithChildren) => (
 );
 
 const AppLayoutFooter = ({ children, ...props }: PropsWithChildren<{ height?: string }>) => (
-  <VStack as="footer" width={styleToken.width.w100} minHeight="30px" {...props}>
+  <Box as="footer" width={styleToken.width.w100} minHeight="30px" {...props}>
     {children}
-  </VStack>
+  </Box>
 );
 
 AppLayout.Root = AppLayout;

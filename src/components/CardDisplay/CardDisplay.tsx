@@ -1,5 +1,5 @@
 import { CardAddDisplay } from './CardAddDisplay';
-import { Button, Grid, HStack, Typography, VStack } from '@/shared/components';
+import { Box, Button, Grid, HStack, Typography, VStack } from '@/shared/components';
 import { styleToken } from '@/shared/styles';
 import { StyleProps } from '@/shared/types';
 import { replaceMaskText } from '@/shared/utils';
@@ -15,7 +15,7 @@ type CardDisplayProps = {
 export const CardDisplay = ({
   size,
   label,
-  color,
+  color = styleToken.color.body,
   cardNumber,
   expirationDate,
   ownerName,
@@ -26,24 +26,20 @@ export const CardDisplay = ({
   return (
     <Button onClick={onClick} padding="0">
       <VStack
-        alignItems="center"
-        justifyContent="center"
         color={styleToken.color.gray600}
-        backgroundColor={color || styleToken.color.body}
+        backgroundColor={color}
         boxShadow={`3px 3px 5px ${styleToken.color.shadow}`}
         borderRadius="5px"
         padding="10px 14px"
-        gap="0"
+        spacing="0"
         {...cardDisplayProps}
       >
-        <VStack width="100%">
-          <VStack height="24px" alignItems="flex-start">
-            {label && <Typography variant="body">{label}</Typography>}
-          </VStack>
-          <VStack backgroundColor={styleToken.color.mustard} borderRadius="4px" {...cardChipProps} />
-        </VStack>
+        <Box width="100%" textAlign="left">
+          <Box height="24px">{label && <Typography variant="body">{label}</Typography>}</Box>
+          <Box backgroundColor={styleToken.color.mustard} borderRadius="4px" {...cardChipProps} />
+        </Box>
         <VStack alignItems="center" justifyContent="space-between" width="100%" flexGrow={1}>
-          <VStack width="100%" />
+          <Box width="100%" />
           <CardNumberDisplay cardNumber={cardNumber} variant={typographyVariant} maskFontSize={maskFontSize} />
           <CardOwnerDisplay
             ownerName={ownerName}
@@ -98,7 +94,7 @@ const CardOwnerDisplay = ({
   expirationMonth: string;
   expirationYear: string;
 }) => (
-  <HStack width="100%" justifyContent="space-between" gap="10px">
+  <HStack width="100%" justifyContent="space-between" spacing="10px">
     <Typography variant={variant} whiteSpace="nowrap" overflow="hidden" textOverflow="ellipsis" lineHeight={1}>
       {ownerName}
     </Typography>

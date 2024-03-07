@@ -3,7 +3,7 @@ import ArrowLeft from '@/assets/arrow-left.svg';
 import { AppLayout, CardDisplay, useCard, useFunnel, CardSelectBottomSheet, CardInput } from '@/components';
 import { ONLY_NUMBERS_REGEX } from '@/constant';
 import { useModal, useSelectCardBrand, useInputs, createUseInputConfig } from '@/hook';
-import { Button, HStack, Typography, VStack } from '@/shared/components';
+import { Box, Button, HStack, Typography, VStack } from '@/shared/components';
 import { styleToken } from '@/shared/styles';
 import { removeAllSpaces } from '@/shared/utils';
 import { CardBrand } from '@/type';
@@ -133,8 +133,8 @@ export const CardAddPage = () => {
         </Button>
       </AppLayout.Header>
       <AppLayout.Body>
-        <VStack gap="18px" marginTop="20px">
-          <VStack justifyContent="center" alignItems="center">
+        <VStack spacing="18px" marginTop="20px">
+          <Box margin="0 auto">
             <CardDisplay
               size="small"
               label={selectedCardBrand.label}
@@ -144,7 +144,7 @@ export const CardAddPage = () => {
               ownerName={ownerName[0]}
               onClick={handleCardSelectOpen}
             />
-          </VStack>
+          </Box>
           <CardInput.Number
             id={CARD_NUMBER_ID}
             values={cardNumber}

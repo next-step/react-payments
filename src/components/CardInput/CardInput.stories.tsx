@@ -26,7 +26,7 @@ type Story = StoryObj<typeof CardInput>;
 
 export const Primary: Story = {
   render: () => (
-    <VStack gap="24px">
+    <VStack spacing="24px">
       <CardInput.Number />
       <CardInput.ExpirationDate />
       <CardInput.OwnerName />

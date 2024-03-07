@@ -24,7 +24,7 @@ export const CardSecurityCodeInput = forwardRef<HTMLInputElement, SecurityCodeIn
       <Label htmlFor={SECURITY_CODE_INPUT_ID} variant="caption" color={styleToken.color.gray700}>
         보안 코드(CVC/CVV)
       </Label>
-      <HStack alignItems="center" gap="10px">
+      <HStack alignItems="center" spacing="10px">
         <TextField
           id={SECURITY_CODE_INPUT_ID}
           ref={ref}

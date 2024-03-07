@@ -25,7 +25,7 @@ export const CardOwnerNameInput = forwardRef<HTMLInputElement, OwnerNameInputPro
           {value?.length} / {OWNER_NAME_INPUT_MAX_VALUE_LENGTH}
         </Typography>
       </HStack>
-      <HStack alignItems="center" gap="10px">
+      <HStack alignItems="center" spacing="10px">
         <TextField
           id={OWNER_NAME_INPUT_ID}
           ref={ref}

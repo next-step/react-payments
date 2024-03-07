@@ -22,7 +22,7 @@ export const CardPasswordInput = ({ refs, values, onChange, onKeyUp }: CardPassw
     <Label htmlFor={`${PIN_INPUT_ID}-0`} variant="caption" color={styleToken.color.gray700}>
       카드 비밀번호
     </Label>
-    <HStack justifyContent="flex-start" gap="7px" marginTop="2px">
+    <HStack spacing="10px" justifyContent="flex-start" marginTop="2px">
       {values?.map((pinInputValue, index) => (
         <TextField
           key={index}
