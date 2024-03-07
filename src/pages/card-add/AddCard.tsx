@@ -9,16 +9,14 @@ const AddCard = () => {
   const { cardState } = useContext(CardInfoContext);
   const { navigate } = useContext(StepContext);
 
+  const goToPage = () => {
+    navigate('LIST');
+  };
+
   return (
     <>
       <PageTitle>
-        <div
-          onClick={() => {
-            navigate('LIST');
-          }}
-        >
-          {'< 카드 추가'}
-        </div>
+        <div onClick={goToPage}>{'< 카드 추가'}</div>
       </PageTitle>
       <Card {...cardState} />
       <CardForm />

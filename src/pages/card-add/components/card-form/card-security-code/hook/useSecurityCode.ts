@@ -1,6 +1,6 @@
-import { validSecurityCode } from '@/domain/validate';
+import { validNumber } from '@/domain/validate';
 import { CardInfoContext } from '@/provider/CardInfoProvider';
-import { ChangeEvent, useContext, useRef } from 'react';
+import { ChangeEvent, useContext } from 'react';
 
 const useSecurityCode = () => {
   const {
@@ -8,18 +8,15 @@ const useSecurityCode = () => {
     handleCardState,
   } = useContext(CardInfoContext);
 
-  const inputRef = useRef<HTMLInputElement>(null);
   const handleScurityCode = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    const result = validSecurityCode(value.replace(/\D/g, ''));
-    const displayValue = result ? value : securityCode;
-    if (inputRef.current) {
-      inputRef.current.value = displayValue || '';
+
+    if (validNumber(value)) {
+      handleCardState({ [name]: value });
     }
-    handleCardState({ [name]: displayValue || '' });
   };
 
-  return { handleScurityCode, inputRef };
+  return { securityCode, handleScurityCode };
 };
 
 export default useSecurityCode;

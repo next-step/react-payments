@@ -1,26 +1,28 @@
+import { REGEX } from '@/domain/constant';
 import { validExpirationDate } from '@/domain/validate';
 import { CardInfoContext } from '@/provider/CardInfoProvider';
-import { ChangeEvent, useContext, useRef } from 'react';
+import { ChangeEvent, useContext } from 'react';
 
 const useCardExpirationDate = () => {
-  const { cardState, handleCardState } = useContext(CardInfoContext);
-  const inputRefs = useRef<Array<HTMLInputElement>>([]);
+  const {
+    cardState: { month, year },
+    handleCardState,
+  } = useContext(CardInfoContext);
 
-  const handleExpirationDate = (e: ChangeEvent<HTMLInputElement>, idx: number) => {
+  const handleExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
-
     if (!value) {
       handleCardState({ [name]: value });
-      inputRefs.current[idx].value = '';
-      return;
+    }
+    if (name === 'month' && validExpirationDate(value)) {
+      handleCardState({ [name]: value });
     }
 
-    const result = validExpirationDate(value);
-    const displayValue = result ? value : cardState[name];
-    handleCardState({ [name]: displayValue });
-    inputRefs.current[idx].value = displayValue;
+    if (name === 'year') {
+      if (!REGEX.test(value)) handleCardState({ [name]: value });
+    }
   };
-  return { handleChange: handleExpirationDate, refs: inputRefs };
+  return { month, year, handleChange: handleExpirationDate };
 };
 
 export default useCardExpirationDate;

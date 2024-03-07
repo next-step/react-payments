@@ -1,8 +1,12 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { StepContext } from './StepProvider';
 
 const useStepContext = () => {
-  return useContext(StepContext);
+  const stepContext = useContext(StepContext);
+  if (!stepContext) {
+    return null;
+  }
+  return stepContext;
 };
 
 export default useStepContext;

@@ -10,13 +10,13 @@ const App = () => (
       <StepProvider>
         {(route) => (
           <>
-            {['LIST'].includes(route) && <CardList />}
-            {['CARD'].includes(route) && (
+            {'LIST' === route && <CardList />}
+            {'CARD' === route && (
               <CardInfoProvider>
                 <AddCard />
               </CardInfoProvider>
             )}
-            {['COMPLETE'].includes(route) && <CardRegisterComplete />}
+            {'COMPLETE' === route && <CardRegisterComplete />}
           </>
         )}
       </StepProvider>

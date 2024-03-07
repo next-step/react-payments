@@ -1,7 +1,7 @@
 import classNames from 'classnames';
-import { DetailedHTMLProps, ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
+import { ForwardedRef, InputHTMLAttributes, forwardRef } from 'react';
 
-type BaseInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+type BaseInputProps = InputHTMLAttributes<HTMLInputElement>;
 
 interface InputProps extends BaseInputProps {
   type: 'text' | 'password';

@@ -9,3 +9,5 @@ export const MAX_MONTH = 12;
 
 export const MIN_CARD_NUMBER = 0;
 export const MAX_CARD_NUMBER = 9999;
+
+export const REGEX = /\D/g;

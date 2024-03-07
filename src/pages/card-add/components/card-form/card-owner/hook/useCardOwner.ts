@@ -6,12 +6,13 @@ const useCardOwner = () => {
     cardState: { ownerName },
     handleCardState,
   } = useContext(CardInfoContext);
+
   const handleOwnerName = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     handleCardState({ [name]: value });
   };
 
-  return { state: ownerName, handleChange: handleOwnerName };
+  return { ownerName, handleChange: handleOwnerName };
 };
 
 export default useCardOwner;

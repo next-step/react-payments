@@ -5,9 +5,9 @@ import CardForm from './CardForm';
 
 type CardProps = CardStateType;
 
-const Card = ({ ownerName, month, year, cardNumbers }: CardProps) => {
+const Card = ({ ownerName = 'NAME', month, year = '', cardNumbers }: CardProps) => {
   const displayMonth = month ? `${month} / ` : '';
-  const expirationDate = `${displayMonth}${year || ''}`;
+  const expirationDate = `${displayMonth}${year}`;
 
   return (
     <CardBox>
@@ -22,7 +22,7 @@ const Card = ({ ownerName, month, year, cardNumbers }: CardProps) => {
             <CardNumbers {...cardNumbers} />
           </span>
           <div className="card-bottom__info">
-            <span className="card-text">{ownerName || 'NAME'}</span>
+            <span className="card-text">{ownerName}</span>
             <span className="card-text">{expirationDate || 'MM/YY'}</span>
           </div>
         </div>

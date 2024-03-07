@@ -1,19 +1,23 @@
-import Form from '@/components/common/form/Form';
 import Container from '@/components/common/input-container/Container';
 import CardExpirationDate from './card-expiration-date/CardExpirationDate';
 import CardNumbers from './card-numbers/CardNumbers';
 import CardOwner from './card-owner/CardOwner';
 import CardPassword from './card-password/CardPassword';
 import CardSecurityCode from './card-security-code/CardSecurityCode';
+import InputBox from '@/components/common/input-box/InputBox';
 
 const CardForm = () => {
   return (
-    <Form>
+    <>
       <Container title="카드 번호">
-        <CardNumbers />
+        <InputBox>
+          <CardNumbers />
+        </InputBox>
       </Container>
       <Container title="만료일">
-        <CardExpirationDate />
+        <InputBox className="w-50">
+          <CardExpirationDate />
+        </InputBox>
       </Container>
       <Container>
         <CardOwner />
@@ -24,7 +28,7 @@ const CardForm = () => {
       <Container title="카드 비밀번호">
         <CardPassword />
       </Container>
-    </Form>
+    </>
   );
 };
 

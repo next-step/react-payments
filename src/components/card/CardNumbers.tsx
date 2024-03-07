@@ -1,12 +1,8 @@
-import React from 'react';
+import { CardNumbersType } from '@/provider/CardInfoProvider';
 
-interface CardNumbers {
-  first: string;
-  second: string;
-  third: string;
-  fourth: string;
-}
-const CardNumbers = ({ first, second, third, fourth }: CardNumbers) => {
+const REGEX = /[1-9]/gi;
+
+const CardNumbers = ({ first = '', second = '', third = '', fourth = '' }: CardNumbersType) => {
   return (
     <div style={{ display: 'flex', gap: '5px' }}>
       <div>
@@ -16,10 +12,10 @@ const CardNumbers = ({ first, second, third, fourth }: CardNumbers) => {
         <span>{second}</span>
       </div>
       <div>
-        <span>{third?.replace(/[1-9]/gi, '*')}</span>
+        <span>{third.replace(REGEX, '*')}</span>
       </div>
       <div>
-        <span>{fourth?.replace(/[1-9]/gi, '*')}</span>
+        <span>{fourth.replace(REGEX, '*')}</span>
       </div>
     </div>
   );
