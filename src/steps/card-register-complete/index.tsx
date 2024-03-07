@@ -6,7 +6,9 @@ export interface CardRegisterCompleteStepProps {
 }
 
 export const CardRegisterCompleteStep = ({ onClickConfirm }: CardRegisterCompleteStepProps) => {
-  const { cardInput } = useCardInputContext()
+  const {
+    cardInput: { cardName, cardExpDate, cardCode },
+  } = useCardInputContext()
 
   return (
     <Flex width="100%" height="100vh" direction="column">
@@ -14,7 +16,13 @@ export const CardRegisterCompleteStep = ({ onClickConfirm }: CardRegisterComplet
         <Text as="h1" variant="heading1" marginBottom="48px">
           카드등록이 완료되었습니다.
         </Text>
-        <Card cardSize="lg" {...cardInput} marginBottom="24px" />
+        <Card
+          cardSize="lg"
+          cardCode={cardCode}
+          cardExpDate={cardExpDate}
+          cardName={cardName}
+          marginBottom="24px"
+        />
         <UnderlineInput width="240px" placeholder="카드 별명" contentAlign="center" />
       </Flex>
 
