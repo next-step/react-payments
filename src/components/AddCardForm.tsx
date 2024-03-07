@@ -15,7 +15,7 @@ export default function AddCardForm() {
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		send({ type: 'NEXT' });
+		send({ type: 'ADD_CARD' });
 	};
 
 	const handleClickBack = () => {

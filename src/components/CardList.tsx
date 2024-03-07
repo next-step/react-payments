@@ -4,7 +4,7 @@ export default function CardList() {
 	const [state, send] = useAddCardMachineActor();
 
 	const handleClickAddCard = () => {
-		send({ type: 'ADD_CARD' });
+		send({ type: 'GO_TO_FORM' });
 	};
 
 	if (state.matches('select')) {

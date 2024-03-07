@@ -9,7 +9,7 @@ export function SelectToFormLayer({ children }: MockAddCardFormProviderProps) {
 	const actorRef = useAddCardMachineActorRef();
 
 	useEffect(() => {
-		actorRef.send({ type: 'ADD_CARD' });
+		actorRef.send({ type: 'GO_TO_FORM' });
 	}, [actorRef]);
 
 	return <>{children}</>;
