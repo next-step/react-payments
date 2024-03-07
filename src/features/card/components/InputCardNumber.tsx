@@ -1,12 +1,14 @@
-import { ChangeEvent, useRef } from "react";
+import React, { ChangeEvent, useRef } from "react";
 
 import Input from "common/components/input";
 
-import { CardInfo, CardInputContextType } from "features/card/types/card.type";
+import { CardInfo } from "features/card/types/card.type";
 import { MAX_CARD_NUMBER_FIELD_LENGTH } from "features/card/data/constants";
 
-interface InputCardNumberProps
-  extends Pick<CardInputContextType, "cardInfo" | "handleCardInfoChange"> {}
+interface InputCardNumberProps {
+  cardInfo: CardInfo;
+  onChangeCardInfo: (field: keyof CardInfo, value: string) => void;
+}
 
 const CARD_NUMBER_FIELD: (keyof CardInfo)[] = [
   "cardNumber1",
@@ -17,7 +19,7 @@ const CARD_NUMBER_FIELD: (keyof CardInfo)[] = [
 
 export default function InputCardNumber({
   cardInfo,
-  handleCardInfoChange,
+  onChangeCardInfo,
 }: InputCardNumberProps) {
   const inputRefs = useRef<(HTMLElement | null)[]>([]);
 
@@ -25,7 +27,7 @@ export default function InputCardNumber({
     (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
       const currentField = CARD_NUMBER_FIELD[index];
 
-      handleCardInfoChange(currentField, e.target.value);
+      onChangeCardInfo(currentField, e.target.value);
 
       if (
         e.target.value.length === MAX_CARD_NUMBER_FIELD_LENGTH &&
@@ -40,9 +42,8 @@ export default function InputCardNumber({
       <Input.Label>카드 번호</Input.Label>
       <Input.Box>
         {CARD_NUMBER_FIELD.map((field, index) => (
-          <>
+          <React.Fragment key={field}>
             <Input.Basic
-              key={field}
               ref={(el) => (inputRefs.current[index] = el)}
               type={index < 2 ? "text" : "password"}
               value={cardInfo[field]}
@@ -50,7 +51,7 @@ export default function InputCardNumber({
               onChange={handleCardNumberChange(index)}
             />
             {index < CARD_NUMBER_FIELD.length - 1 ? <div>-</div> : null}
-          </>
+          </React.Fragment>
         ))}
       </Input.Box>
     </Input.Container>

@@ -2,20 +2,22 @@ import { ChangeEvent } from "react";
 
 import Input from "common/components/input";
 
-import { CardInputContextType } from "features/card/types/card.type";
+import { CardInfo } from "features/card/types/card.type";
 import { MAX_CARD_CVC_LENGTH } from "features/card/data/constants";
 
-interface InputCardCVCProps
-  extends Pick<CardInputContextType, "cardInfo" | "handleCardInfoChange"> {}
+interface InputCardCVCProps {
+  cardInfo: CardInfo;
+  onChangeCardInfo: (field: keyof CardInfo, value: string) => void;
+}
 
 export default function InputCardCVC({
   cardInfo,
-  handleCardInfoChange,
+  onChangeCardInfo,
 }: InputCardCVCProps) {
   const { cvc } = cardInfo;
 
   const handleCardSecurityCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleCardInfoChange("cvc", e.target.value);
+    onChangeCardInfo("cvc", e.target.value);
   };
 
   return (

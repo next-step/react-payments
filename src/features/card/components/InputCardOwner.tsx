@@ -2,20 +2,22 @@ import { ChangeEvent } from "react";
 
 import Input from "common/components/input";
 
-import { CardInputContextType } from "features/card/types/card.type";
+import { CardInfo } from "features/card/types/card.type";
 import { MAX_CARD_OWNER_LENGTH } from "features/card/data/constants";
 
-interface InputCardOwnerProps
-  extends Pick<CardInputContextType, "cardInfo" | "handleCardInfoChange"> {}
+interface InputCardOwnerProps {
+  cardInfo: CardInfo;
+  onChangeCardInfo: (field: keyof CardInfo, value: string) => void;
+}
 
 export default function InputCardOwner({
   cardInfo,
-  handleCardInfoChange,
+  onChangeCardInfo,
 }: InputCardOwnerProps) {
   const { cardOwner } = cardInfo;
 
   const handleCardOwnerChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleCardInfoChange("cardOwner", e.target.value);
+    onChangeCardInfo("cardOwner", e.target.value);
   };
 
   return (

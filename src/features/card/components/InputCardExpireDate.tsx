@@ -3,20 +3,22 @@ import { ChangeEvent } from "react";
 import Input from "common/components/input";
 
 import { formattedCardExpireDate } from "features/card/utils/inputFormat";
-import { CardInputContextType } from "features/card/types/card.type";
+import { CardInfo } from "features/card/types/card.type";
 import { MAX_CARD_EXPIRED_DATE_LENGTH } from "features/card/data/constants";
 
-interface InputCardExpiredDateProps
-  extends Pick<CardInputContextType, "cardInfo" | "handleCardInfoChange"> {}
+interface InputCardExpiredDateProps {
+  cardInfo: CardInfo;
+  onChangeCardInfo: (field: keyof CardInfo, value: string) => void;
+}
 
 export default function InputCardExpiredDate({
   cardInfo,
-  handleCardInfoChange,
+  onChangeCardInfo,
 }: InputCardExpiredDateProps) {
   const { expireDate } = cardInfo;
 
   const handleCardExpireDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    handleCardInfoChange("expireDate", formattedCardExpireDate(e.target.value));
+    onChangeCardInfo("expireDate", formattedCardExpireDate(e.target.value));
   };
 
   return (

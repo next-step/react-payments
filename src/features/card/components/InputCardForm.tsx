@@ -12,23 +12,23 @@ export default function InputCardForm() {
     <>
       <InputCardNumber
         cardInfo={cardInfo}
-        handleCardInfoChange={handleCardInfoChange}
+        onChangeCardInfo={handleCardInfoChange}
       />
       <InputCardExpiredDate
         cardInfo={cardInfo}
-        handleCardInfoChange={handleCardInfoChange}
+        onChangeCardInfo={handleCardInfoChange}
       />
       <InputCardOwner
         cardInfo={cardInfo}
-        handleCardInfoChange={handleCardInfoChange}
+        onChangeCardInfo={handleCardInfoChange}
       />
       <InputCardCVC
         cardInfo={cardInfo}
-        handleCardInfoChange={handleCardInfoChange}
+        onChangeCardInfo={handleCardInfoChange}
       />
       <InputCardPassword
         cardInfo={cardInfo}
-        handleCardInfoChange={handleCardInfoChange}
+        onChangeCardInfo={handleCardInfoChange}
       />
     </>
   );
