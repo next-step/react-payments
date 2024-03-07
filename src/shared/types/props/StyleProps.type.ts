@@ -10,95 +10,61 @@ export type StyleProps = FlexboxProps &
   PositionProps &
   OtherProps;
 
-export type FlexboxProps = {
-  display?: CSSProperties['display'];
-  flex?: CSSProperties['flex'];
-  flexDirection?: CSSProperties['flexDirection'];
-  justifyContent?: CSSProperties['justifyContent'];
-  alignItems?: CSSProperties['alignItems'];
-  alignContent?: CSSProperties['alignContent'];
-  flexWrap?: CSSProperties['flexWrap'];
-  flexBasis?: CSSProperties['flexBasis'];
-  flexGrow?: CSSProperties['flexGrow'];
-  flexShrink?: CSSProperties['flexShrink'];
-  order?: CSSProperties['order'];
-  alignSelf?: CSSProperties['alignSelf'];
-  gap?: CSSProperties['gap'];
-};
+type PickCSSProperties<Properties extends keyof CSSProperties> = Partial<Pick<CSSProperties, Properties>>;
 
-export type GridProps = {
-  gridGap?: CSSProperties['gridGap'];
-  gridRowGap?: CSSProperties['gridRowGap'];
-  gridColumnGap?: CSSProperties['gridColumnGap'];
-  gridTemplateRows?: CSSProperties['gridTemplateRows'];
-  gridTemplateColumns?: CSSProperties['gridTemplateColumns'];
-  gridTemplateAreas?: CSSProperties['gridTemplateAreas'];
-  gridArea?: CSSProperties['gridArea'];
-};
+export type FlexboxProps = PickCSSProperties<
+  | 'display'
+  | 'flex'
+  | 'flexDirection'
+  | 'justifyContent'
+  | 'alignItems'
+  | 'alignContent'
+  | 'flexWrap'
+  | 'flexBasis'
+  | 'flexGrow'
+  | 'flexShrink'
+  | 'order'
+  | 'alignSelf'
+  | 'gap'
+>;
 
-export type SpacingProps = {
-  margin?: CSSProperties['margin'];
-  marginTop?: CSSProperties['marginTop'];
-  marginRight?: CSSProperties['marginRight'];
-  marginBottom?: CSSProperties['marginBottom'];
-  marginLeft?: CSSProperties['marginLeft'];
-  padding?: CSSProperties['padding'];
-  paddingTop?: CSSProperties['paddingTop'];
-  paddingRight?: CSSProperties['paddingRight'];
-  paddingBottom?: CSSProperties['paddingBottom'];
-  paddingLeft?: CSSProperties['paddingLeft'];
-};
+export type GridProps = PickCSSProperties<
+  | 'gridGap'
+  | 'gridRowGap'
+  | 'gridColumnGap'
+  | 'gridTemplateRows'
+  | 'gridTemplateColumns'
+  | 'gridTemplateAreas'
+  | 'gridArea'
+>;
 
-export type SizeProps = {
-  width?: CSSProperties['width'];
-  height?: CSSProperties['height'];
-  minWidth?: CSSProperties['minWidth'];
-  maxWidth?: CSSProperties['maxWidth'];
-  minHeight?: CSSProperties['minHeight'];
-  maxHeight?: CSSProperties['maxHeight'];
-};
+export type SpacingProps = PickCSSProperties<
+  | 'margin'
+  | 'marginTop'
+  | 'marginRight'
+  | 'marginBottom'
+  | 'marginLeft'
+  | 'padding'
+  | 'paddingTop'
+  | 'paddingRight'
+  | 'paddingBottom'
+  | 'paddingLeft'
+>;
 
-export type TypographyProps = {
-  color?: CSSProperties['color'];
-  fontSize?: CSSProperties['fontSize'];
-  fontWeight?: CSSProperties['fontWeight'];
-  lineHeight?: CSSProperties['lineHeight'];
-  textAlign?: CSSProperties['textAlign'];
-  letterSpacing?: CSSProperties['letterSpacing'];
-  whiteSpace?: CSSProperties['whiteSpace'];
-  textOverflow?: CSSProperties['textOverflow'];
-};
+export type SizeProps = PickCSSProperties<'width' | 'height' | 'minWidth' | 'maxWidth' | 'minHeight' | 'maxHeight'>;
 
-export type BackgroundProps = {
-  backgroundColor?: CSSProperties['backgroundColor'];
-  backgroundImage?: CSSProperties['backgroundImage'];
-  backgroundSize?: CSSProperties['backgroundSize'];
-  backgroundPosition?: CSSProperties['backgroundPosition'];
-  backgroundRepeat?: CSSProperties['backgroundRepeat'];
-};
+export type TypographyProps = PickCSSProperties<
+  'color' | 'fontSize' | 'fontWeight' | 'lineHeight' | 'textAlign' | 'letterSpacing' | 'whiteSpace' | 'textOverflow'
+>;
 
-export type BoxModelProps = {
-  boxShadow?: CSSProperties['boxShadow'];
-  borderRadius?: CSSProperties['borderRadius'];
-  border?: CSSProperties['border'];
-  borderWidth?: CSSProperties['borderWidth'];
-  borderColor?: CSSProperties['borderColor'];
-  borderStyle?: CSSProperties['borderStyle'];
-};
+export type BackgroundProps = PickCSSProperties<
+  'backgroundColor' | 'backgroundImage' | 'backgroundSize' | 'backgroundPosition' | 'backgroundRepeat'
+>;
 
-export type PositionProps = {
-  position?: CSSProperties['position'];
-  top?: CSSProperties['top'];
-  right?: CSSProperties['right'];
-  bottom?: CSSProperties['bottom'];
-  left?: CSSProperties['left'];
-};
+export type BoxModelProps = PickCSSProperties<
+  'boxShadow' | 'borderRadius' | 'border' | 'borderWidth' | 'borderColor' | 'borderStyle'
+>;
 
-export type OtherProps = {
-  cursor?: CSSProperties['cursor'];
-  zIndex?: CSSProperties['zIndex'];
-  opacity?: CSSProperties['opacity'];
-  overflow?: CSSProperties['overflow'];
-  transition?: CSSProperties['transition'];
-  outline?: CSSProperties['outline'];
-};
+export type PositionProps = PickCSSProperties<'position' | 'top' | 'right' | 'bottom' | 'left'>;
+
+export type OtherProps = PickCSSProperties<'cursor' | 'zIndex' | 'opacity' | 'overflow' | 'transition' | 'outline'>;
