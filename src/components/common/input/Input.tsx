@@ -5,13 +5,15 @@ type BaseInputProps = InputHTMLAttributes<HTMLInputElement>;
 
 interface InputProps extends BaseInputProps {
   type: 'text' | 'password';
+  boxType?: 'input-basic' | 'input-underline';
 }
 
 const Input = forwardRef(
-  ({ type = 'text', className, ...props }: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
-    return (
-      <input type={type} className={classNames('input-basic', className)} {...props} ref={ref} />
-    );
+  (
+    { type = 'text', boxType = 'input-basic', className, ...props }: InputProps,
+    ref: ForwardedRef<HTMLInputElement>,
+  ) => {
+    return <input type={type} className={classNames(boxType, className)} {...props} ref={ref} />;
   },
 );
 

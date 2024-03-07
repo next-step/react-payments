@@ -3,15 +3,21 @@ import CardNumbers from './CardNumbers';
 import CardBox from './CardBox';
 import CardForm from './CardForm';
 
-type CardProps = CardStateType;
+type CardProps = { status?: string } & CardStateType;
 
-const Card = ({ ownerName = 'NAME', month, year = '', cardNumbers }: CardProps) => {
+const Card = ({
+  ownerName = 'NAME',
+  month,
+  year = '',
+  cardNumbers,
+  status = 'small',
+}: CardProps) => {
   const displayMonth = month ? `${month} / ` : '';
   const expirationDate = `${displayMonth}${year}`;
 
   return (
     <CardBox>
-      <CardForm status="small">
+      <CardForm status={status}>
         <div className="card-top"></div>
         <div className="card-middle">
           <div className="small-card__chip"></div>

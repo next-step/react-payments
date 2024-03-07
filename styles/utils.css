@@ -55,9 +55,15 @@
   width: 15%;
 }
 
-/* .d-flex {
+.d-flex {
   display: flex;
 }
-.gap-5 {
+.direction-column {
+  flex-direction: column;
+}
+.align-items {
+  align-items: center;
+}
+/*.gap-5 {
   gap: 5px;
 } */

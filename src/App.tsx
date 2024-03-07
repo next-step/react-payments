@@ -11,12 +11,10 @@ const App = () => (
         {(route) => (
           <>
             {'LIST' === route && <CardList />}
-            {'CARD' === route && (
-              <CardInfoProvider>
-                <AddCard />
-              </CardInfoProvider>
-            )}
-            {'COMPLETE' === route && <CardRegisterComplete />}
+            <CardInfoProvider>
+              {'CARD' === route && <AddCard />}
+              {'COMPLETE' === route && <CardRegisterComplete />}
+            </CardInfoProvider>
           </>
         )}
       </StepProvider>
