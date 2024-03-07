@@ -15,6 +15,9 @@ import { CARD_OWNER_NAME_MAX_LENGTH } from "../constants/cardOwnerName";
 import SecurityCodeInput from "../components/card-add/SecurityCodeInput";
 import PasswordInput from "../components/card-add/PasswordInput";
 import Button from "../components/atomic-design-pattern/atom/Button";
+import InputContainer from "../components/atomic-design-pattern/organism/InputContainer";
+import InputTitle from "../components/atomic-design-pattern/atom/InputTitle";
+import InputGroup from "../components/atomic-design-pattern/molecule/InputGroup";
 
 export default function CardAdd() {
   // 카드번호
@@ -63,48 +66,48 @@ export default function CardAdd() {
         />
 
         {/* 카드 번호 */}
-        <div className="input-container">
-          <span className="input-title">카드 번호</span>
+        <InputContainer>
+          <InputTitle>카드 번호</InputTitle>
           <CardNumberInput
             cardNumber={cardNumber}
             setCardNumber={setCardNumber}
           />
-        </div>
+        </InputContainer>
         {/* 만료일 */}
-        <div className="input-container">
-          <span className="input-title">만료일</span>
+        <InputContainer>
+          <InputTitle>만료일</InputTitle>
           <ExpirationDateInput
             expirationDate={expirationDate}
             setExpirationDate={setExpirationDate}
           />
-        </div>
+        </InputContainer>
         {/* 카드 소유자 이름 */}
-        <div className="input-container">
-          <div className="input-group">
-            <span className="input-title">카드 소유자 이름(선택)</span>
-            <span className="input-title">
+        <InputContainer>
+          <InputGroup>
+            <InputTitle>카드 소유자 이름(선택)</InputTitle>
+            <InputTitle>
               {cardOwnerName.length} / {CARD_OWNER_NAME_MAX_LENGTH}
-            </span>
-          </div>
+            </InputTitle>
+          </InputGroup>
 
           <CardOwnerNameInput
             cardOwnerName={cardOwnerName}
             setCardOwnerName={setCardOwnerName}
           />
-        </div>
+        </InputContainer>
         {/* 보안 코드 */}
-        <div className="input-container">
-          <span className="input-title">보안코드(CVC/CVV)</span>
+        <InputContainer>
+          <InputTitle>보안코드(CVC/CVV)</InputTitle>
           <SecurityCodeInput
             securityCode={securityCode}
             setSecurityCode={setSecurityCode}
           />
-        </div>
+        </InputContainer>
         {/* 카드 비밀번호 */}
-        <div className="input-container">
-          <span className="input-title">카드 비밀번호</span>
+        <InputContainer>
+          <InputTitle>카드 비밀번호</InputTitle>
           <PasswordInput password={password} setPassword={setPassword} />
-        </div>
+        </InputContainer>
         <div className="button-box">
           <Button>다음</Button>
         </div>
