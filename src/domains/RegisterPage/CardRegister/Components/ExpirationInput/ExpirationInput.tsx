@@ -4,6 +4,8 @@ import LabelBox from "../../../../../components/LabelBox/LabelBox";
 import LimitedLengthInput from "../../../../../components/LimitedLengthInput/LimitedLengthInput";
 import { ExpirationDate } from "../../types";
 import { regex } from "../../../../../utils";
+import useChainFocusInput from "../../../../../hooks/useChainFocus";
+import { mergeRefs } from "react-merge-refs";
 
 interface ExpirationInput {
   onChange?: (value: ExpirationDate) => void;
@@ -18,6 +20,7 @@ export default function ExpirationInput({ value, onChange }: ExpirationInput) {
   );
   const monthInputRef = useRef<HTMLInputElement>(null);
   const yearInputRef = useRef<HTMLInputElement>(null);
+  const { targetRef, focusRef } = useChainFocusInput<HTMLDivElement>();
 
   function modifyExpiration(period: ExpirationPeriod, value: string) {
     setExpiration((prev) => ({ ...prev, [period]: value }));
@@ -65,12 +68,13 @@ export default function ExpirationInput({ value, onChange }: ExpirationInput) {
   return (
     <LabelBox description="만료일">
       <Box
+        ref={targetRef}
         height="45px"
         backgroundColor="#ECEBF1"
         contentPosition="centerMiddle"
       >
         <LimitedLengthInput
-          ref={monthInputRef}
+          ref={mergeRefs([focusRef, monthInputRef])}
           title="Expiration Month"
           type="text"
           colorTheme="primary"

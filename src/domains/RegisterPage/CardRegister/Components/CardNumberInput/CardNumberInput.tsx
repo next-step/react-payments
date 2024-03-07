@@ -6,6 +6,8 @@ import { isNumberFromString } from "../../../../../utils";
 import LabelBox from "../../../../../components/LabelBox/LabelBox";
 import Box from "../../../../../components/Box/Box";
 import LimitedLengthInput from "../../../../../components/LimitedLengthInput/LimitedLengthInput";
+import useChainFocusInput from "../../../../../hooks/useChainFocus";
+import { mergeRefs } from "react-merge-refs";
 
 interface CardNumberInputProps {
   onChange?: (value: CardNumber) => void;
@@ -25,6 +27,7 @@ export default function CardNumberInput({
     fourthNumber: "",
   },
 }: CardNumberInputProps) {
+  const { targetRef, focusRef } = useChainFocusInput<HTMLDivElement>();
   const firstNumberInputRef = useRef<HTMLInputElement>(null);
   const secondNumberInputRef = useRef<HTMLInputElement>(null);
   const thirdNumberInputRef = useRef<HTMLInputElement>(null);
@@ -93,6 +96,7 @@ export default function CardNumberInput({
   return (
     <LabelBox description="카드 번호">
       <Box
+        ref={targetRef}
         height="45px"
         width="100%"
         backgroundColor="#ECEBF1"
@@ -100,7 +104,7 @@ export default function CardNumberInput({
       >
         <Box contentPosition="centerMiddle">
           <LimitedLengthInput
-            ref={firstNumberInputRef}
+            ref={mergeRefs([firstNumberInputRef, focusRef])}
             title="first number of card"
             onChange={fillCardNumber("firstNumber")}
             value={cardNumber.firstNumber}

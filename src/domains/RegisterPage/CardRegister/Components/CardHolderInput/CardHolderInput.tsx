@@ -3,6 +3,7 @@ import Box from "../../../../../components/Box/Box";
 import LabelBox from "../../../../../components/LabelBox/LabelBox";
 import LimitedLengthInput from "../../../../../components/LimitedLengthInput/LimitedLengthInput";
 import styles from "./CardHolderInput.module.css";
+import useChainFocusInput from "../../../../../hooks/useChainFocus";
 
 interface CardHolderInputProps {
   value?: string;
@@ -14,6 +15,8 @@ export default function CardHolderInput({
   onChange,
 }: CardHolderInputProps) {
   const [word, setWord] = useState(value || "");
+
+  const { targetRef, focusRef } = useChainFocusInput<HTMLDivElement>();
   const limitationWordsLength = 30;
   const currentWordLength = word.length;
 
@@ -31,12 +34,14 @@ export default function CardHolderInput({
   return (
     <LabelBox description="카드 소유자 이름(선택)">
       <Box
+        ref={targetRef}
         height="45px"
         width="100%"
         backgroundColor="#ECEBF1"
         contentPosition="middle"
       >
         <LimitedLengthInput
+          ref={focusRef}
           title="CardHolder"
           type="text"
           colorTheme="primary"
