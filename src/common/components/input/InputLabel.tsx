@@ -6,8 +6,8 @@ interface InputLabelProps extends HTMLAttributes<HTMLSpanElement> {
 
 export default function InputLabel({ children, ...props }: InputLabelProps) {
   return (
-    <span className="input-title" {...props}>
+    <label className="input-label" {...props}>
       {children}
-    </span>
+    </label>
   );
 }

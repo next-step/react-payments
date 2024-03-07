@@ -72,7 +72,10 @@ export default function InputCardForm({
         </Input.Box>
       </Input.Container>
       <Input.Container>
-        <Input.Label>카드 소유자 이름(선택)</Input.Label>
+        <div className="input-labe-limit-tracker-container">
+          <Input.Label>카드 소유자 이름(선택)</Input.Label>
+          <Input.LimitTracker current={cardOwner.length} limit={30} />
+        </div>
         <Input.Basic
           type="text"
           value={cardOwner}
