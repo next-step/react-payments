@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { KeyboardEvent, useRef, useState } from "react";
 
 import styles from "./CardNumberInput.module.css";
 import { CardNumber } from "../../types";
@@ -43,55 +43,26 @@ export default function CardNumberInput({
 
   function fillCardNumber(key: keyof CardNumber) {
     return function changeInputValue(value: string) {
-      if (value === "") {
-        onChange && onChange({ ...cardNumber, [key]: "" });
-        setCardNumber((prev) => ({ ...prev, [key]: "" }));
-        return;
-      }
-      if (isNumberFromString(value)) {
-        onChange && onChange({ ...cardNumber, [key]: value });
-        setCardNumber((prev) => ({ ...prev, [key]: value }));
-        return;
-      }
+      const checkedValue = isNumberFromString(value) ? value : "";
+      onChange &&
+        onChange({
+          ...cardNumber,
+          [key]: checkedValue,
+        });
+      setCardNumber((prev) => ({ ...prev, [key]: checkedValue }));
     };
   }
 
-  useEffect(() => {
-    const secondInput = secondNumberInputRef.current;
-    const thirdInput = thirdNumberInputRef.current;
-    const fourthInput = fourthNumberInputRef.current;
-
-    function backSpaceEventHandler(key: keyof CardNumber) {
-      return function moveToPreviousInput(event: KeyboardEvent) {
-        const input = (event.currentTarget as HTMLInputElement).value as string;
-        if (event.key === "Backspace" && input.length === 0) {
-          focus[key]();
-        }
-      };
-    }
-
-    function addBackSpaceEvent() {
-      const moveToFirstInput = backSpaceEventHandler("firstNumber");
-      const moveToSecondInput = backSpaceEventHandler("secondNumber");
-      const moveToThirdInput = backSpaceEventHandler("thirdNumber");
-
-      secondInput?.addEventListener("keydown", moveToFirstInput);
-      thirdInput?.addEventListener("keydown", moveToSecondInput);
-      fourthInput?.addEventListener("keydown", moveToThirdInput);
-
-      return function removeBackSpaceEvent() {
-        secondInput?.removeEventListener("keydown", moveToFirstInput);
-        thirdInput?.removeEventListener("keydown", moveToSecondInput);
-        fourthInput?.removeEventListener("keydown", moveToThirdInput);
-      };
-    }
-
-    const removeBackSpaceEvent = addBackSpaceEvent();
-
-    return () => {
-      removeBackSpaceEvent();
+  function backSpaceEventHandler(key: keyof CardNumber) {
+    return function moveToPreviousInput(
+      event: KeyboardEvent<HTMLInputElement>
+    ) {
+      const input = (event.currentTarget as HTMLInputElement).value as string;
+      if (event.key === "Backspace" && input.length === 0) {
+        focus[key]();
+      }
     };
-  }, [cardNumber]);
+  }
 
   return (
     <LabelBox description="카드 번호">
@@ -122,6 +93,7 @@ export default function CardNumberInput({
                   title="second number of card"
                   isAbledFocusOnMount
                   onChange={fillCardNumber("secondNumber")}
+                  onKeyDown={backSpaceEventHandler("firstNumber")}
                   value={cardNumber.secondNumber}
                   type="text"
                   colorTheme="primary"
@@ -139,6 +111,7 @@ export default function CardNumberInput({
                   title="third number of card"
                   isAbledFocusOnMount
                   onChange={fillCardNumber("thirdNumber")}
+                  onKeyDown={backSpaceEventHandler("secondNumber")}
                   value={cardNumber.thirdNumber}
                   type="password"
                   colorTheme="primary"
@@ -156,6 +129,7 @@ export default function CardNumberInput({
                   title="fourth number of card"
                   isAbledFocusOnMount
                   onChange={fillCardNumber("fourthNumber")}
+                  onKeyDown={backSpaceEventHandler("thirdNumber")}
                   value={cardNumber.fourthNumber}
                   type="password"
                   colorTheme="primary"
