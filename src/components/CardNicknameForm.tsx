@@ -26,14 +26,15 @@ export default function CardNicknameForm({ maxLength = 10 }: CardNicknameFormPro
 				<input
 					className="input-underline w-75"
 					type="text"
-					placeholder="카드의 별칭을 입력해주세요."
+					placeholder="카드 별칭 (선택)"
 					onChange={handleNicknameChange}
 					value={cardNickname}
 					maxLength={maxLength}
+					data-testid="nickname-input"
 				/>
 			</div>
 			<div className="button-box mt-50">
-				<button className="button-text" type="submit">
+				<button className="button-text" type="submit" data-testid="confirm">
 					확인
 				</button>
 			</div>

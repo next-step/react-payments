@@ -1,3 +1,5 @@
+import { CardInfoWithId } from 'src/state/addCardMachine.ts';
+
 export interface CardCompanyData {
 	name: string;
 	code: string;
@@ -21,3 +23,76 @@ export const getCardCompanyClassNameByCode = (code: string) => {
 export const getCardCompanyNameByCode = (code: string) => {
 	return CARD_COMPANY_LIST.find(card => card.code === code)?.name ?? '';
 };
+
+export const MOCK_CARD_INFO_LIST: CardInfoWithId[] = [
+	{
+		id: '1',
+		cardNumberFirstSegment: '1234',
+		cardNumberSecondSegment: '5678',
+		cardNumberThirdSegment: '1234',
+		cardNumberFourthSegment: '5678',
+		cardOwnerName: '김포코',
+		cardExpirationDate: '12/24',
+		cardPasswordFirstDigit: '1',
+		cardPasswordSecondDigit: '2',
+		cardSecurityCode: '123',
+		cardNickname: '포코카드',
+		cardCompanyCode: 'poco',
+	},
+	{
+		id: '2',
+		cardNumberFirstSegment: '1234',
+		cardNumberSecondSegment: '5678',
+		cardNumberThirdSegment: '1234',
+		cardNumberFourthSegment: '5678',
+		cardOwnerName: '김준',
+		cardExpirationDate: '12/24',
+		cardPasswordFirstDigit: '1',
+		cardPasswordSecondDigit: '2',
+		cardSecurityCode: '123',
+		cardNickname: '준 카드',
+		cardCompanyCode: 'jun',
+	},
+	{
+		id: '3',
+		cardNumberFirstSegment: '1234',
+		cardNumberSecondSegment: '5678',
+		cardNumberThirdSegment: '1234',
+		cardNumberFourthSegment: '5678',
+		cardOwnerName: '김현석',
+		cardExpirationDate: '12/24',
+		cardPasswordFirstDigit: '1',
+		cardPasswordSecondDigit: '2',
+		cardSecurityCode: '123',
+		cardNickname: '현석카드',
+		cardCompanyCode: 'seok',
+	},
+	{
+		id: '4',
+		cardNumberFirstSegment: '1234',
+		cardNumberSecondSegment: '5678',
+		cardNumberThirdSegment: '1234',
+		cardNumberFourthSegment: '5678',
+		cardOwnerName: '김윤호',
+		cardExpirationDate: '12/24',
+		cardPasswordFirstDigit: '1',
+		cardPasswordSecondDigit: '2',
+		cardSecurityCode: '123',
+		cardNickname: '윤호카드',
+		cardCompanyCode: 'yoon',
+	},
+	{
+		id: '5',
+		cardNumberFirstSegment: '1234',
+		cardNumberSecondSegment: '5678',
+		cardNumberThirdSegment: '1234',
+		cardNumberFourthSegment: '5678',
+		cardOwnerName: '김환오',
+		cardExpirationDate: '12/24',
+		cardPasswordFirstDigit: '1',
+		cardPasswordSecondDigit: '2',
+		cardSecurityCode: '123',
+		cardNickname: '환오카드',
+		cardCompanyCode: 'hwan',
+	},
+];

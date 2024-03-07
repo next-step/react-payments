@@ -21,7 +21,7 @@ export interface CardInfoWithId extends CardInfo {
 	id: string;
 }
 
-const initialCardInfo: CardInfo = {
+export const initialCardInfo: CardInfo = {
 	cardNumberFirstSegment: '',
 	cardNumberSecondSegment: '',
 	cardNumberThirdSegment: '',
