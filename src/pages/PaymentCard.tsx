@@ -10,6 +10,7 @@ import useFunnel from "features/card/hooks/useFunnel";
 
 function PaymentCard() {
   const [cardInfo, setCardInfo] = useState<CardInfo>({
+    cardName: "",
     cardNumber: "",
     expireDate: "",
     cardOwner: "",
@@ -27,11 +28,7 @@ function PaymentCard() {
   return (
     <Funnel>
       <Step name="addCard">
-        <AddCard
-          onChangePage={handleChangeCurrentStep}
-          onChangeCardInfo={handleCardInfoChange}
-          {...cardInfo}
-        />
+        <AddCard onChangePage={handleChangeCurrentStep} onChangeCardInfo={handleCardInfoChange} {...cardInfo} />
       </Step>
       <Step name="addCardSuccess">
         <SuccessAddCard {...cardInfo} onChangePage={handleChangeCurrentStep} />
