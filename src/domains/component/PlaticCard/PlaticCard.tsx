@@ -1,3 +1,4 @@
+import { cardColor } from "../../RegisterPage/CardRegister/constants";
 import {
   CardNumber,
   CardType,
@@ -21,17 +22,18 @@ export default function PlasticCard({
   },
   expiration = { year: "YY", month: "MM" },
   holderName = "NAME",
-  cardType,
+  cardType = "none",
 }: PlasticCardProps) {
   const { firstNumber, secondNumber, thirdNumber, fourthNumber } = cardNumber;
   const { month, year } = expiration;
   return (
     <div
-      className={`${styles.card__container} ${
-        styles[cardType ? cardType : "none"]
-      }`}
+      style={{ backgroundColor: `${cardColor[cardType]}` }}
+      className={`${styles.card__container}`}
     >
-      <div className={styles.card__name}>{cardType && `${cardType}카드`}</div>
+      <div className={styles.card__name}>
+        {cardType && `${cardType === "none" ? "" : cardType}카드`}
+      </div>
       <div className={styles.card__chip}></div>
       <div className={styles.card__number}>{`${firstNumber} ${secondNumber} ${
         thirdNumber && "****"
