@@ -10,8 +10,12 @@ export default function CardList() {
 	if (state.matches('select')) {
 		return (
 			<div>
-				<h2 className="page-title mb-10">보유 카드</h2>
-				<button onClick={handleClickAddCard}>카드 추가하기</button>
+				<h2 className="page-title mb-10" data-testid="card-select">
+					보유 카드
+				</h2>
+				<button onClick={handleClickAddCard} data-testid="add-card-button">
+					카드 추가하기
+				</button>
 			</div>
 		);
 	}

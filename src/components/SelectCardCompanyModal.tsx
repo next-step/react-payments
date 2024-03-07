@@ -11,8 +11,8 @@ export default function SelectCardCompanyModal() {
 
 	if (state.matches('form.selectCardCompany')) {
 		return (
-			<div className="modal-dimmed" onClick={handleDimmedClick}>
-				<div className="modal">
+			<div className="modal-dimmed" onClick={handleDimmedClick} data-testid="modal-dimmed">
+				<div className="modal" data-testid="company-modal">
 					<div className="card-item-grid">
 						{CARD_COMPANY_LIST.map(card => (
 							<SelectCardCompanyItem key={card.code} {...card} />

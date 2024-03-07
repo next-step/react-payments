@@ -27,12 +27,12 @@ export default function AddCardForm() {
 			<>
 				<div>
 					<div className="header-box">
-						<button type="button" onClick={handleClickBack}>
+						<button type="button" onClick={handleClickBack} data-testid="back-to-select">
 							<img src="/back.png" alt="뒤로가기" />
 						</button>
 						<h2 className="page-title">카드 추가</h2>
 					</div>
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handleSubmit} data-testid="card-form">
 						<CardImage />
 						<CardNumberInput />
 						<CardOwnerNameInput />
@@ -40,7 +40,7 @@ export default function AddCardForm() {
 						<CardSecurityCodeInput />
 						<CardPasswordInput />
 						<div className="button-box">
-							<button type="submit" className="button-text">
+							<button type="submit" className="button-text" data-testid="form-next">
 								다음
 							</button>
 						</div>

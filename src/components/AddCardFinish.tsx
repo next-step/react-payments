@@ -4,7 +4,7 @@ export default function AddCardFinish() {
 	const [state] = useAddCardMachineActor();
 
 	if (state.matches('nickname')) {
-		return <div>finish</div>;
+		return <div data-testid="nickname">finish</div>;
 	}
 
 	return null;
