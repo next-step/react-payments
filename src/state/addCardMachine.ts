@@ -17,6 +17,10 @@ export interface CardInfo {
 	cardCompanyCode: string;
 }
 
+export interface CardInfoWithId extends CardInfo {
+	id: string;
+}
+
 const initialCardInfo: CardInfo = {
 	cardNumberFirstSegment: '',
 	cardNumberSecondSegment: '',
@@ -33,8 +37,8 @@ const initialCardInfo: CardInfo = {
 
 interface CardMachineContext {
 	cardInfo: CardInfo;
-	cardList: (CardInfo & { id: string })[];
-	selectedCard: CardInfo & { id: string };
+	cardList: CardInfoWithId[];
+	selectedCard: CardInfoWithId;
 }
 
 type CardMachineEvent =
@@ -43,7 +47,8 @@ type CardMachineEvent =
 	| { type: 'ADD_CARD' }
 	| { type: 'EDIT_CARD' }
 	| { type: 'BACK' }
-	| { type: 'TOGGLE' };
+	| { type: 'TOGGLE' }
+	| { type: 'SELECT_CARD'; value: CardInfoWithId };
 
 export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent>(
 	{
@@ -60,6 +65,10 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 				on: {
 					GO_TO_FORM: {
 						target: 'form',
+					},
+					SELECT_CARD: {
+						target: 'nickname',
+						actions: ['selectCard'],
 					},
 				},
 			},
@@ -164,6 +173,15 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 							: card,
 					),
 				};
+			}),
+			selectCard: assign({
+				selectedCard: (context, event) => {
+					if (event.type === 'SELECT_CARD') {
+						return event.value;
+					}
+
+					return { ...context.selectedCard };
+				},
 			}),
 		},
 	},
