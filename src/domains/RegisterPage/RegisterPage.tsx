@@ -1,13 +1,14 @@
-import { useNavigate } from "react-router-dom";
 import useFunnel from "../../hooks/useFunnel/useFunnel";
 import CardRegister from "./CardRegister/CardRegister";
+import CardNaming from "./CardNaming/CardNaming";
 import CardResult from "./CardResult/CardResult";
 
 export default function RegisterPage() {
-  const navigate = useNavigate();
-  const [Funnel, setStep, stepStore] = useFunnel(["register", "naming"]);
-
-  console.log("stepStore", stepStore);
+  const [Funnel, setStep, stepStore] = useFunnel([
+    "register",
+    "naming",
+    "result",
+  ]);
 
   return (
     <Funnel>
@@ -19,12 +20,14 @@ export default function RegisterPage() {
         />
       </Funnel.Page>
       <Funnel.Page step="naming">
-        <CardResult
+        <CardNaming
           onSubmit={(value) => {
-            setStep("naming", value);
-            navigate("/mycards");
+            setStep("result", value);
           }}
         />
+      </Funnel.Page>
+      <Funnel.Page step="result">
+        <CardResult store={stepStore} />
       </Funnel.Page>
     </Funnel>
   );
