@@ -12,6 +12,7 @@ export const populateBaseInputProps = (props: BaseInputProps) => {
     id,
     error,
     errorRender,
+    htmlFor,
     ...otherInputContentProps
   } = otherBaseInputProps
 
@@ -30,7 +31,7 @@ export const populateBaseInputProps = (props: BaseInputProps) => {
       label,
       isHelperTextEnabled,
       helperText,
-      htmlFor: id,
+      htmlFor: htmlFor ?? id,
     },
     baseInputBottomSectionProps: {
       error,
