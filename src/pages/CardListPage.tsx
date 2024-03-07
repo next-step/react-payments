@@ -5,7 +5,7 @@ export const CardListPage = () => {
   const { ownerCards, resetCurrentCard } = useCard();
   const { goToNext } = useFunnel();
 
-  const handleCardAddPageMove = () => {
+  const moveCardAddPage = () => {
     resetCurrentCard();
     goToNext();
   };
@@ -31,7 +31,7 @@ export const CardListPage = () => {
       </AppLayout.Body>
       <AppLayout.Footer height="300px">
         <VStack paddingTop="20px" alignItems="center">
-          <CardDisplay.Add onClick={handleCardAddPageMove} />
+          <CardDisplay.Add onClick={moveCardAddPage} />
         </VStack>
       </AppLayout.Footer>
     </>
