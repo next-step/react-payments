@@ -31,7 +31,7 @@ export const CardCompletePage = () => {
   };
 
   return (
-    <AppLayout>
+    <>
       <AppLayout.Header />
       <AppLayout.Body>
         <VStack gap="20px" marginTop="20px">
@@ -68,6 +68,6 @@ export const CardCompletePage = () => {
           )}
         </HStack>
       </AppLayout.Footer>
-    </AppLayout>
+    </>
   );
 };

@@ -11,7 +11,7 @@ export const CardListPage = () => {
   };
 
   return (
-    <AppLayout>
+    <>
       <AppLayout.Header>
         <Typography variant="headline">보유 카드</Typography>
       </AppLayout.Header>
@@ -32,6 +32,6 @@ export const CardListPage = () => {
           <CardDisplay.Add onClick={handleCardAddPageMove} />
         </VStack>
       </AppLayout.Footer>
-    </AppLayout>
+    </>
   );
 };
