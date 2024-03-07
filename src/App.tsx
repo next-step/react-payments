@@ -8,11 +8,7 @@ function App() {
       <Routes>
         <Route
           index={true}
-          element={
-            <Link to="/mycards">
-              <button>my cards</button>
-            </Link>
-          }
+          element={<Link to="/mycards">my cards</Link>}
         ></Route>
         <Route path="mycards">
           <Route index element={<MyCards />} />
