@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import Box from "../../../../components/Box/Box";
-import LabelBox from "../../../../components/LabelBox/LabelBox";
-import LimitedLengthInput from "../../../../components/LimitedLengthInput/LimitedLengthInput";
+import Box from "../../../../../components/Box/Box";
+import LabelBox from "../../../../../components/LabelBox/LabelBox";
+import LimitedLengthInput from "../../../../../components/LimitedLengthInput/LimitedLengthInput";
 import { TwoPasswordDigits } from "../../types";
 import styles from "./PasswordInput.module.css";
 

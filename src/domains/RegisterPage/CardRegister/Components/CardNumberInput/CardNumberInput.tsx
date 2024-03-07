@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 
 import styles from "./CardNumberInput.module.css";
 import { CardNumber } from "../../types";
-import { isNumberFromString } from "../../../../utils";
-import LabelBox from "../../../../components/LabelBox/LabelBox";
-import Box from "../../../../components/Box/Box";
-import LimitedLengthInput from "../../../../components/LimitedLengthInput/LimitedLengthInput";
+import { isNumberFromString } from "../../../../../utils";
+import LabelBox from "../../../../../components/LabelBox/LabelBox";
+import Box from "../../../../../components/Box/Box";
+import LimitedLengthInput from "../../../../../components/LimitedLengthInput/LimitedLengthInput";
 
 interface CardNumberInputProps {
   onChange?: (value: CardNumber) => void;

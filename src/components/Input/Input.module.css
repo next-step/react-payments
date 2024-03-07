@@ -1,0 +1,24 @@
+.input {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+}
+
+.input__underbar {
+  border-bottom: 1px solid black;
+}
+.input__underbar:focus {
+  outline: none;
+}
+
+.input__textalign-left {
+  text-align: left;
+}
+
+.input__textalign-center {
+  text-align: center;
+}
+
+.input__textalign-right {
+  text-align: right;
+}

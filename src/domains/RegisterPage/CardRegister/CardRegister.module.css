@@ -16,6 +16,8 @@
 .card__dummy {
   margin: 6px 0 6px 0;
   width: 100%;
+  border: none;
+  background-color: transparent;
   display: flex;
   justify-content: center;
 }

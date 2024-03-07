@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Box from "../../../../components/Box/Box";
-import LabelBox from "../../../../components/LabelBox/LabelBox";
-import LimitedLengthInput from "../../../../components/LimitedLengthInput/LimitedLengthInput";
+import Box from "../../../../../components/Box/Box";
+import LabelBox from "../../../../../components/LabelBox/LabelBox";
+import LimitedLengthInput from "../../../../../components/LimitedLengthInput/LimitedLengthInput";
 
 interface CvcInputProps {
   value?: string;

@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import Modal from "../../../../components/Modal/Modal";
+import Modal from "../../../../../components/Modal/Modal";
 import { CardType } from "../../types";
 import styles from "./SelectCardType.module.css";
 import { cardColor } from "../../constants";

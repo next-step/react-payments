@@ -31,3 +31,10 @@
   font-weight: 700;
   color: #04c09e;
 }
+
+.result__name {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

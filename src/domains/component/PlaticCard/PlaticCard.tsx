@@ -1,4 +1,8 @@
-import { CardNumber, CardType, ExpirationDate } from "../../cardRegister/types";
+import {
+  CardNumber,
+  CardType,
+  ExpirationDate,
+} from "../../RegisterPage/CardRegister/types";
 import styles from "./PlasticCard.module.css";
 
 interface PlasticCardProps {
