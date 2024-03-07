@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { ReactNode } from "react";
-import { Width } from "../../utils";
+import { InputWidth } from "../../utils";
 import {
 	findComponentFromChildren,
 	findRestFromChildren
@@ -14,7 +14,7 @@ import { FlexibleInputProvider } from "./provider/FlexibleInputProvider";
 
 export interface FlexibleInputProps {
 	children: ReactNode;
-	width?: Width;
+	width?: InputWidth;
 }
 
 const FlexibleInput = ({ children, width = 100 }: FlexibleInputProps) => {
@@ -44,7 +44,7 @@ FlexibleInput.Separator = Separator;
 export default FlexibleInput;
 
 interface InputContainerProps {
-	width: Width;
+	width: InputWidth;
 }
 
 const InputContainer = styled.label<InputContainerProps>`

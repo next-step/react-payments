@@ -1,4 +1,4 @@
-import { Width } from "@/common/utils";
+import { InputWidth } from "@/common/utils";
 import { css } from "@emotion/react";
 import { Children, ReactNode, isValidElement } from "react";
 import Input from "./Input";
@@ -6,7 +6,7 @@ import Separator from "./Separator";
 
 interface InputBoxProps {
 	children: ReactNode;
-	width?: Width;
+	width?: InputWidth;
 }
 
 const InputBox = ({ children, width = 100 }: InputBoxProps) => {

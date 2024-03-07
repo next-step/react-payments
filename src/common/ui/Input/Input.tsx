@@ -1,9 +1,9 @@
 import { css } from "@emotion/react";
 import { InputHTMLAttributes, forwardRef } from "react";
-import { TextAlign, Width, theme } from "../../utils";
+import { InputWidth, TextAlign, theme } from "../../utils";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-	width?: Width;
+	width?: InputWidth;
 	underline?: boolean;
 	textAlign?: TextAlign;
 }

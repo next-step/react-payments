@@ -1,6 +1,6 @@
 import { useArgs } from "@storybook/client-api";
 import { Meta, StoryObj } from "@storybook/react";
-import { Width, widthVariable } from "../../utils";
+import { InputWidth, widthVariable } from "../../utils";
 import FlexibleInput from "./FlexibleInput";
 import { InputProps } from "./core/Input";
 
@@ -14,7 +14,7 @@ export default meta;
 interface StoryArgs {
 	title: string;
 	input: InputProps;
-	width?: Width;
+	width?: InputWidth;
 }
 
 type Story = StoryObj<StoryArgs>;
@@ -109,7 +109,7 @@ interface ManyInputStoryArgs {
 	firstInput: InputProps;
 	secondInput: InputProps;
 	thirdInput: InputProps;
-	width?: Width;
+	width?: InputWidth;
 }
 
 type ManyInputStory = StoryObj<ManyInputStoryArgs>;
