@@ -17,3 +17,7 @@ export const CARD_COMPANY_LIST: CardCompanyData[] = [
 export const getCardCompanyClassNameByCode = (code: string) => {
 	return CARD_COMPANY_LIST.find(card => card.code === code)?.className ?? '';
 };
+
+export const getCardCompanyNameByCode = (code: string) => {
+	return CARD_COMPANY_LIST.find(card => card.code === code)?.name ?? '';
+};

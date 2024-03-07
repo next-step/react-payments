@@ -12,6 +12,16 @@ import SelectCardCompanyModal from 'src/components/SelectCardCompanyModal.tsx';
 export default function AddCardForm() {
 	const [state, send] = useAddCardMachineActor();
 
+	const {
+		cardCompanyCode,
+		cardOwnerName,
+		cardNumberFirstSegment,
+		cardNumberSecondSegment,
+		cardNumberThirdSegment,
+		cardNumberFourthSegment,
+		cardExpirationDate,
+	} = state.context.cardInfo;
+
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
@@ -33,7 +43,15 @@ export default function AddCardForm() {
 						<h2 className="page-title">카드 추가</h2>
 					</div>
 					<form onSubmit={handleSubmit} data-testid="card-form">
-						<CardImage />
+						<CardImage
+							cardCompanyCode={cardCompanyCode}
+							cardOwnerName={cardOwnerName}
+							cardNumberFirstSegment={cardNumberFirstSegment}
+							cardNumberSecondSegment={cardNumberSecondSegment}
+							cardNumberThirdSegment={cardNumberThirdSegment}
+							cardNumberFourthSegment={cardNumberFourthSegment}
+							cardExpirationDate={cardExpirationDate}
+						/>
 						<CardNumberInput />
 						<CardOwnerNameInput />
 						<CardExpirationDateInput />

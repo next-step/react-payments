@@ -6,6 +6,10 @@
 @import 'password.css';
 @import 'form.css';
 
+*{
+	box-sizing: border-box;
+}
+
 body {
 	display: flex;
 	flex-direction: column;

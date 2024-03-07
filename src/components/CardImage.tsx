@@ -1,37 +1,63 @@
-import { useAddCardMachineSelector } from 'src/state/addCardMachine.ts';
-import { getCardCompanyClassNameByCode } from 'src/constants/card.ts';
+import { CardInfo } from 'src/state/addCardMachine.ts';
+import { getCardCompanyClassNameByCode, getCardCompanyNameByCode } from 'src/constants/card.ts';
 
-export default function CardImage() {
-	const {
-		cardExpirationDate,
-		cardNumberFirstSegment,
-		cardNumberSecondSegment,
-		cardNumberThirdSegment,
-		cardNumberFourthSegment,
-		cardOwnerName,
-		cardCompanyCode,
-	} = useAddCardMachineSelector(state => state.context.cardInfo);
+interface CardImageProps
+	extends Pick<
+		CardInfo,
+		| 'cardExpirationDate'
+		| 'cardNumberFirstSegment'
+		| 'cardNumberSecondSegment'
+		| 'cardNumberThirdSegment'
+		| 'cardNumberFourthSegment'
+		| 'cardOwnerName'
+		| 'cardCompanyCode'
+	> {
+	size?: 'small' | 'big';
+}
+
+export default function CardImage({
+	cardExpirationDate,
+	cardNumberFirstSegment,
+	cardNumberSecondSegment,
+	cardNumberThirdSegment,
+	cardNumberFourthSegment,
+	cardOwnerName,
+	cardCompanyCode,
+	size = 'small',
+}: CardImageProps) {
+	const classNameBySize = {
+		small: { card: 'small-card', chip: 'small-card__chip', text: 'card-text' },
+		big: { card: 'big-card', chip: 'big-card__chip', text: 'card-text__big' },
+	};
 
 	return (
 		<div className="card-box">
 			<div
-				className={cardCompanyCode ? `small-card ${getCardCompanyClassNameByCode(cardCompanyCode)}` : 'empty-card'}
+				className={
+					cardCompanyCode
+						? `${classNameBySize[size].card} ${getCardCompanyClassNameByCode(cardCompanyCode)}`
+						: `${classNameBySize[size].card} empty-card`
+				}
 				data-testid="card-image"
 			>
-				<div className="card-top"></div>
+				<div className="card-top">
+					<div className={classNameBySize[size].text}>
+						{cardCompanyCode ? getCardCompanyNameByCode(cardCompanyCode) : null}
+					</div>
+				</div>
 				<div className="card-middle">
-					<div className="small-card__chip"></div>
+					<div className={classNameBySize[size].chip}></div>
 				</div>
 				<div className="card-bottom">
 					<div className="card-bottom__number">
-						<span className="card-text">
+						<span className={classNameBySize[size].text}>
 							{cardNumberFirstSegment} {cardNumberSecondSegment} {'∙'.repeat(cardNumberThirdSegment.length)}{' '}
 							{'∙'.repeat(cardNumberFourthSegment.length)}
 						</span>
 					</div>
 					<div className="card-bottom__info">
-						<span className="card-text">{cardOwnerName || 'NAME'}</span>
-						<span className="card-text">{cardExpirationDate || 'MM / YY'}</span>
+						<span className={classNameBySize[size].text}>{cardOwnerName || 'NAME'}</span>
+						<span className={classNameBySize[size].text}>{cardExpirationDate || 'MM / YY'}</span>
 					</div>
 				</div>
 			</div>

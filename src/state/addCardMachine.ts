@@ -1,6 +1,8 @@
 import { createMachine, assign } from 'xstate';
 import { createActorContext } from '@xstate/react';
 
+import { getCardCompanyNameByCode } from 'src/constants/card.ts';
+
 export interface CardInfo {
 	cardNumberFirstSegment: string;
 	cardNumberSecondSegment: string;
@@ -152,7 +154,15 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 				return {
 					...context,
 					selectedCard: { ...initialCardInfo, id: '' },
-					cardList: context.cardList.map(card => (card.id === context.selectedCard.id ? context.selectedCard : card)),
+					cardList: context.cardList.map(card =>
+						card.id === context.selectedCard.id
+							? {
+									...context.selectedCard,
+									cardNickname:
+										context.selectedCard.cardNickname || getCardCompanyNameByCode(context.selectedCard.cardCompanyCode),
+								}
+							: card,
+					),
 				};
 			}),
 		},
