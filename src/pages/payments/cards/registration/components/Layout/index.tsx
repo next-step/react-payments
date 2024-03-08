@@ -14,6 +14,7 @@ export const PaymentsLayout = (props: PaymentsLayoutProps) => {
       <div className="app">
         <div style={{ display: 'flex', gap: 5, alignItems: 'center' }}>
           <button
+            type='button'
             onClick={() => navigate('/payments/cards')}
             style={{
               backgroundColor: 'transparent',
