@@ -9,7 +9,7 @@ import {
 
 const checkExpirationDate = (expirationDate: string) => {
   if (!EXPIRATION_DATE_INPUT_REG.test(expirationDate)) {
-    return false;
+    return false
   }
 
   const [expirationMonth, expirationYear] = expirationDate.split('/')
