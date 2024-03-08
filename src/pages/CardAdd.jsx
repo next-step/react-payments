@@ -1,7 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import Card from "../components/Card";
-import { FIRST_NUMBER, SECOND_NUMBER } from "../constants/cardNumber";
 import CardNumberInput from "../components/card-add/CardNumberInput";
 import { MONTH, YEAR } from "../constants/expirationDate";
 import ExpirationDateInput from "../components/card-add/ExpirationDateInput";
@@ -17,20 +16,35 @@ import { CardContext } from "../../providers/CardState/CardStateProvider";
 
 export default function CardAdd({ onNext }) {
   const { cardState } = useContext(CardContext);
-  console.log(cardState);
-  // 카드 번호
+  const { cardNumber, expirationDate, securityCode, cardOwnerName, password } =
+    cardState;
 
-  // 만료일
+  // 카드 번호 16자리
+  const isCardNumberValidate =
+    Object.values(cardNumber).reduce((total, nowValue) => {
+      return total + nowValue.length;
+    }, 0) === 16;
 
-  // 카드 소유자 이름(선택)
+  // 만료일 2자리 + 2자리
+  const isExpirationDateValidate =
+    Object.values(expirationDate).reduce((total, nowValue) => {
+      return total + nowValue.length;
+    }, 0) === 4;
 
-  // 보안코드
+  // 보안코드 3자리
+  const isSecurityCodeValidate = securityCode.length === 3;
+  // 카드 비밀번호 2자리
+  const isPasswordValidate =
+    Object.values(password).reduce((total, nowValue) => {
+      return total + nowValue.length;
+    }, 0) === 2;
 
-  // 카드 비밀번호
-  const [password, setPassword] = useState({
-    [FIRST_NUMBER]: "",
-    [SECOND_NUMBER]: "",
-  });
+  // 다음 버튼 보여줄지
+  const isShowNextButton =
+    isCardNumberValidate &&
+    isExpirationDateValidate &&
+    isSecurityCodeValidate &&
+    isPasswordValidate;
 
   return (
     <>
@@ -40,16 +54,14 @@ export default function CardAdd({ onNext }) {
         </Link>
         <span className="ml-10">카드 추가</span>
       </h2>
-
       {/* 카드 */}
       <Card
         alias={"카드 별칭"}
-        cardNumber={cardState.cardNumber}
-        expirationDateMM={cardState.expirationDate[MONTH]}
-        expirationDateYY={cardState.expirationDate[YEAR]}
-        cardOwnerName={cardState.cardOwnerName}
+        cardNumber={cardNumber}
+        expirationDateMM={expirationDate[MONTH]}
+        expirationDateYY={expirationDate[YEAR]}
+        cardOwnerName={cardOwnerName}
       />
-
       {/* 카드 번호 */}
       <InputContainer>
         <InputTitle>카드 번호</InputTitle>
@@ -65,7 +77,7 @@ export default function CardAdd({ onNext }) {
         <InputGroup>
           <InputTitle>카드 소유자 이름(선택)</InputTitle>
           <InputTitle>
-            {cardState.cardOwnerName.length} / {CARD_OWNER_NAME_MAX_LENGTH}
+            {cardOwnerName.length} / {CARD_OWNER_NAME_MAX_LENGTH}
           </InputTitle>
         </InputGroup>
         <CardOwnerNameInput />
@@ -78,11 +90,13 @@ export default function CardAdd({ onNext }) {
       {/* 카드 비밀번호 */}
       <InputContainer>
         <InputTitle>카드 비밀번호</InputTitle>
-        <PasswordInput password={password} setPassword={setPassword} />
+        <PasswordInput />
       </InputContainer>
-      <div className="button-box">
-        <Button onClick={onNext}>다음</Button>
-      </div>
+      {isShowNextButton && (
+        <div className="button-box">
+          <Button onClick={onNext}>다음</Button>
+        </div>
+      )}
     </>
   );
 }

@@ -2,13 +2,15 @@ import { FIRST_NUMBER, SECOND_NUMBER } from "../../constants/cardNumber";
 import { getNumberString } from "../../util/regExp";
 import { useAutoFocus } from "../../hook/useAutoFocus";
 import Input from "../atomic-design-pattern/atom/Input";
+import { useCardState } from "../../hook/useCardState";
 
 const nextRefMap = {
   [FIRST_NUMBER]: SECOND_NUMBER,
   [SECOND_NUMBER]: null,
 };
 
-export default function PasswordInput({ password, setPassword }) {
+export default function PasswordInput() {
+  const { cardState, setCardState } = useCardState();
   const [passwordRef, changeFocus] = useAutoFocus(nextRefMap);
   const onChangePassword = (event) => {
     const { value, name, maxLength } = event.target;
@@ -17,15 +19,16 @@ export default function PasswordInput({ password, setPassword }) {
 
     changeFocus(onlyNumberValue.length === maxLength, name);
 
-    setPassword((prev) => {
-      return { ...prev, [name]: onlyNumberValue };
+    setCardState((prev) => {
+      const newPassword = { ...prev.password, [name]: onlyNumberValue };
+      return { ...prev, password: newPassword };
     });
   };
 
   return (
     <>
       <Input
-        value={password[FIRST_NUMBER]}
+        value={cardState.password[FIRST_NUMBER]}
         name={FIRST_NUMBER}
         ref={(el) => (passwordRef.current[FIRST_NUMBER] = el)}
         onChange={onChangePassword}
@@ -35,7 +38,7 @@ export default function PasswordInput({ password, setPassword }) {
       />
 
       <Input
-        value={password[SECOND_NUMBER]}
+        value={cardState.password[SECOND_NUMBER]}
         name={SECOND_NUMBER}
         ref={(el) => (passwordRef.current[SECOND_NUMBER] = el)}
         onChange={onChangePassword}
