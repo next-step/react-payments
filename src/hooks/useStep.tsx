@@ -1,0 +1,56 @@
+import {
+  ReactNode,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState
+} from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+
+type StepperProps = { children: ReactNode }
+type StepProps = { children: ReactNode; name: string }
+
+type StepperContextProps = [string, (step: string) => void]
+const StepperContext = createContext<StepperContextProps>(['', () => {}])
+
+export const useStep = (steps: string[]) => {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const stepQuery = new URLSearchParams(location.search).get('step')
+
+  const initialStep = stepQuery || steps[0]
+  const [currentStep, setCurrentStep] = useState(initialStep)
+
+  useEffect(() => {
+    if (stepQuery && steps.includes(stepQuery)) {
+      setCurrentStep(stepQuery)
+    }
+  }, [location.search, steps, stepQuery])
+
+  const setStep = useCallback(
+    (step: string) => {
+      if (!steps.includes(step)) {
+        return
+      }
+
+      setCurrentStep(step)
+      navigate(`?step=${step}`)
+    },
+    [steps, navigate]
+  )
+
+  const Stepper = ({ children }: StepperProps) => (
+    <StepperContext.Provider value={[currentStep, setCurrentStep]}>
+      {children}
+    </StepperContext.Provider>
+  )
+
+  const Step = ({ name, children }: StepProps) => {
+    const [step] = useContext(StepperContext)
+    return step === name ? children : null
+  }
+  Stepper.Step = Step
+
+  return [Stepper, setStep] as const
+}
