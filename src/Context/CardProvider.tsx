@@ -4,19 +4,19 @@ import { ActionType } from "../type/ActionType";
 
 const initialCardInfo: CardInfoType = {
   cardNumber: {
-    section1: null,
-    section2: null,
-    section3: null,
-    section4: null,
+    section1: "",
+    section2: "",
+    section3: "",
+    section4: "",
   },
-  expiryDate: { MM: null, YY: null },
+  expiryDate: { MM: "", YY: "" },
   cardOwnerName: "",
-  securityCode: null,
+  securityCode: "",
   cardPassword: {
-    section1: null,
-    section2: null,
-    section3: null,
-    section4: null,
+    section1: "",
+    section2: "",
+    section3: "",
+    section4: "",
   },
   cardName: "",
   cardNickName: "",
@@ -31,9 +31,6 @@ const CardContext = createContext<{
 });
 
 const cardReducer = (state: CardInfoType, action: ActionType) => {
-  console.log("check", state, action, {
-    [action.payload.key]: action.payload.value,
-  });
   switch (action.type) {
     case "SET_CARD_INFO":
       return {
@@ -43,6 +40,7 @@ const cardReducer = (state: CardInfoType, action: ActionType) => {
           [action.payload.key]: action.payload.value,
         },
       };
+
     case "SET_EXPIRE_DATE":
       return {
         ...state,

@@ -7,13 +7,16 @@ import Flex from "../Components/Layout/Flex";
 import { useCardInfo } from "../Context/CardProvider";
 import { useEffect } from "react";
 import { useRegisteredCards } from "../Context/RegisteredCardsProvider";
+import { v4 as uuidv4 } from "uuid";
 
 const Page5 = () => {
-  const { state } = useCardInfo();
   const { cards, handleCard } = useRegisteredCards();
+
+  const { state } = useCardInfo();
   useEffect(() => {
     handleCard(state);
   }, []);
+
   return (
     <>
       <H2Text>5️⃣ 카드 목록</H2Text>
@@ -27,9 +30,9 @@ const Page5 = () => {
             cardNumber={card.cardNumber}
             cardOwnerName={card.cardOwnerName}
             expiryDate={card.expiryDate}
+            key={uuidv4()}
           />
         ))}
-
         <CardLayout>
           <EmptyCardLayout>+</EmptyCardLayout>
         </CardLayout>

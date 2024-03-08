@@ -1,39 +1,39 @@
 export type CardInfoType = {
   cardNumber: {
-    section1: number | null;
-    section2: number | null;
-    section3: number | null;
-    section4: number | null;
+    section1: number | "";
+    section2: number | "";
+    section3: number | "";
+    section4: number | "";
   };
   expiryDate: {
-    MM: number | null;
-    YY: number | null;
+    MM: number | "";
+    YY: number | "";
   };
   cardOwnerName: string;
-  securityCode: number | null;
+  securityCode: number | "";
   cardPassword: {
-    section1: number | null;
-    section2: number | null;
-    section3: number | null;
-    section4: number | null;
+    section1: number | "";
+    section2: number | "";
+    section3: number | "";
+    section4: number | "";
   };
   cardName: string | null;
   cardNickName: string | null;
 };
 
 type CardNumberType = {
-  section1: number | null;
-  section2: number | null;
-  section3: number | null;
-  section4: number | null;
+  section1: number | "";
+  section2: number | "";
+  section3: number | "";
+  section4: number | "";
 };
 
 export type SmallCreditCardType = {
   cardName: string | null;
-  cardNumber: CardNumberType | null;
+  cardNumber: CardNumberType | "";
   cardOwnerName: string | null;
   expiryDate: {
-    MM: number | null;
-    YY: number | null;
+    MM: number | "";
+    YY: number | "";
   };
 };

@@ -11,27 +11,31 @@ const CardPassword = () => {
         type="password"
         value={cardPassword.section1 || ""}
         onChange={handlePasswordChange("section1")}
-      />{" "}
+        maxLength={1}
+      />
       -
       <input
         className="input-basic w-15"
         type="password"
         value={cardPassword.section2 || ""}
         onChange={handlePasswordChange("section2")}
-      />{" "}
+        maxLength={1}
+      />
       -
       <input
         className="input-basic w-15"
         type="password"
         value={cardPassword.section3 || ""}
         onChange={handlePasswordChange("section3")}
-      />{" "}
+        maxLength={1}
+      />
       -
       <input
         className="input-basic w-15"
         type="password"
         value={cardPassword.section4 || ""}
         onChange={handlePasswordChange("section4")}
+        maxLength={1}
       />
     </div>
   );

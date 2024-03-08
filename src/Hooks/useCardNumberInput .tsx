@@ -2,20 +2,19 @@ import { useCardInfo } from "../Context/CardProvider";
 import { Validaton } from "../Util/Validation";
 import useValidationInput from "./Input/useValidationInput ";
 
-export const useExpireDateInput = (dateKey: "MM" | "YY") => {
+export const useCardNumberInput = (
+  sectionKey: "section1" | "section2" | "section3" | "section4"
+) => {
   const { state, dispatch } = useCardInfo();
   const input = useValidationInput(
-    state.expiryDate[dateKey],
-    (ExpireDate) => {
+    state.cardNumber[sectionKey],
+    (cardNumber) => {
       dispatch({
-        type: "SET_EXPIRE_DATE",
-        payload: { key: dateKey, value: ExpireDate },
+        type: "SET_CARD_INFO",
+        payload: { key: sectionKey, value: cardNumber },
       });
     },
-    Validaton.ExpireDateVal
+    Validaton.NumberVal
   );
-
   return input;
 };
-
-export default useExpireDateInput;

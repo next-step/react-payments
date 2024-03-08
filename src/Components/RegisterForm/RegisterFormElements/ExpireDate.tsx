@@ -10,14 +10,15 @@ const ExpireDate = () => {
       <div className="input-box w-50">
         <input
           className="input-basic"
-          type="text"
+          type="number"
           placeholder="MM"
           value={MMInput.value || ""}
           onChange={MMInput.handleChange}
         />
+        /
         <input
           className="input-basic"
-          type="text"
+          type="number"
           placeholder="YY"
           value={YYInput.value || ""}
           onChange={YYInput.handleChange}

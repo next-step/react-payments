@@ -35,6 +35,13 @@
   border-radius: 0.25rem;
 }
 
+/* Chrome, Safari, Edge, Opera 화살표 제거 */
+.input-basic::-webkit-inner-spin-button,
+.input-basic::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .input-underline {
   text-align: center;
   border: none;
