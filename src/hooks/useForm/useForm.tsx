@@ -7,7 +7,7 @@ import {
   Values,
 } from './useForm.type';
 
-export interface formMethodsProps {
+export interface FormMethodsProps {
   formMethods: ReturnType<typeof useForm>;
 }
 
@@ -28,6 +28,18 @@ export const useForm = () => {
         onChange,
       }: Partial<RegisterConfig> = {}
     ) => {
+      if (readOnly) {
+        fieldsRef.current[name] = {
+          value: defaultValue || '',
+          error: false,
+        };
+
+        return {
+          name,
+          value: fieldsRef.current[name].value,
+          readOnly: true,
+        };
+      }
       const field = fieldsRef.current[name];
 
       if (!field) {
@@ -46,7 +58,8 @@ export const useForm = () => {
         value: fieldsRef.current[name].value,
         onChange: ({ target }: React.ChangeEvent<HTMLInputElement>) => {
           const onChangeValue = onChange && onChange(target.value);
-          const value = onChangeValue || target.value;
+          const value =
+            onChangeValue === undefined ? target.value : onChangeValue;
 
           fieldsRef.current[name] = {
             ...fieldsRef.current[name],

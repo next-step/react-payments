@@ -1,39 +1,35 @@
 import { INPUT } from '@/components/input/input.constant';
-import { INPUT_FIELDS } from '@/hooks/useInputFields';
 import { Validation } from '@/utils/validation';
+import { InputFields } from '../number/cardNumber.constant';
 
-export const PASSWORD = {
+export const PASSWORD: InputFields = {
   FIELDS: {
     FIRST: {
-      ID: 'first',
-      TYPE: INPUT.TYPE.TEXT,
-      fieldType: INPUT_FIELDS.NUMBER.TYPE,
-      validation: Validation.password,
+      id: 'passwordFirst',
+      type: INPUT.TYPE.TEXT,
+      validate: Validation.password,
       maxLength: 1,
     },
 
     SECOND: {
-      ID: 'second',
-      TYPE: INPUT.TYPE.TEXT,
-      fieldType: INPUT_FIELDS.NUMBER.TYPE,
-      validation: Validation.password,
+      id: 'passwordSecond',
+      type: INPUT.TYPE.TEXT,
+      validate: Validation.password,
       maxLength: 1,
     },
 
     THIRD: {
-      ID: 'third',
-      TYPE: INPUT.TYPE.READONLY_PASSWORD,
-      fieldType: INPUT_FIELDS.NUMBER.TYPE,
-      validation: undefined,
-      maxLength: 0,
+      id: 'passwordThird',
+      type: INPUT.TYPE.TEXT,
+      readOnly: true,
+      defaultValue: '●',
     },
 
     FOURTH: {
-      ID: 'fourth',
-      TYPE: INPUT.TYPE.READONLY_PASSWORD,
-      fieldType: INPUT_FIELDS.NUMBER.TYPE,
-      validation: undefined,
-      maxLength: 0,
+      id: 'passwordFourth',
+      type: INPUT.TYPE.TEXT,
+      readOnly: true,
+      defaultValue: '●',
     },
   },
 

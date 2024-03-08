@@ -1,52 +1,59 @@
-import { useInputFields } from '@/hooks/useInputFields';
+import { useAutoFocus } from '@/hooks/useAutoFocus/useAutoFocus';
 import { PASSWORD } from './password.constant';
 import { Input } from '@/components/input/Input';
-import { useEffect } from 'react';
-import {
-  CardFulfilledAction,
-  CardFulfilledForm,
-} from '@/pages/Payments/funnel';
+import { FormMethodsProps } from '@/hooks/useForm/useForm';
+import { INPUT } from '@/components/input/input.constant';
 
-export const Password = ({
-  onFulfilled,
-}: {
-  onFulfilled: CardFulfilledAction;
-}) => {
-  const {
-    fields: passwordFields,
-    autoFocusRefs,
-    onFieldChange,
-    fieldsFulfilled,
-  } = useInputFields(Object.values(PASSWORD.FIELDS));
+export const Password = ({ formMethods }: FormMethodsProps) => {
+  const { register, errors } = formMethods;
+  const { autoFocusRefs, handleAutoFocus } = useAutoFocus({
+    amount: Object.values(PASSWORD.FIELDS).length,
+  });
 
+  const fieldKeys = Object.values(PASSWORD.FIELDS)
+    .filter(({ readOnly }) => !readOnly)
+    .map(({ id }) => id);
+  const fieldsFulfilled = Object.values(fieldKeys).map((key) => !errors[key]);
   const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
-
-  useEffect(() => {
-    onFulfilled((fields: CardFulfilledForm) => {
-      return {
-        ...fields,
-        password: allFieldsFulfilled,
-      };
-    });
-  }, [allFieldsFulfilled]);
-
   const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
 
   return (
     <Input.Container>
       <Input.Title>{PASSWORD.TITLE}</Input.Title>
-      {Object.values(PASSWORD.FIELDS).map((field, fieldIndex) => (
-        <Input
-          key={field.ID}
-          type={field.TYPE}
-          ref={autoFocusRefs[fieldIndex]}
-          value={passwordFields[fieldIndex]}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            onFieldChange(event, fieldIndex)
-          }
-          className={`w-15 ${optionalClassName}`}
-        />
-      ))}
+      {Object.values(PASSWORD.FIELDS).map(
+        (
+          { id, type, validate, maxLength, readOnly, defaultValue },
+          fieldIndex
+        ) => (
+          <Input
+            key={id}
+            type={type}
+            ref={autoFocusRefs[fieldIndex]}
+            {...register(id, {
+              maxLength,
+              validate,
+              readOnly,
+              defaultValue,
+              onChange: (value: string) => {
+                const parsedValue = value.replace(INPUT.REGEX.DIGIT, '');
+
+                if (maxLength) {
+                  handleAutoFocus({
+                    value: parsedValue,
+                    index: fieldIndex,
+                    maxLength,
+                  });
+                }
+
+                return parsedValue;
+              },
+            })}
+            className={`w-15 ${optionalClassName} ${
+              readOnly ? 'input-readonly' : ''
+            }`}
+          />
+        )
+      )}
     </Input.Container>
   );
 };

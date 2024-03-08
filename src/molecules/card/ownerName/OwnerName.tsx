@@ -1,34 +1,18 @@
 import { Input } from '@/components/input/Input';
-import { useInputFields } from '@/hooks/useInputFields';
 import { OWNER_NAME } from './ownerName.constant';
-import { useEffect } from 'react';
-import {
-  CardFulfilledAction,
-  CardFulfilledForm,
-} from '@/pages/Payments/funnel';
+import { FormMethodsProps } from '@/hooks/useForm/useForm';
+import { INPUT } from '@/components/input/input.constant';
 
-export const OwnerName = ({
-  onFulfilled,
-}: {
-  onFulfilled: CardFulfilledAction;
-}) => {
-  const { fields, autoFocusRefs, onFieldChange, fieldsFulfilled } =
-    useInputFields(Object.values(OWNER_NAME.FIELDS));
+export const OwnerName = ({ formMethods }: FormMethodsProps) => {
+  const { register, values, errors } = formMethods;
 
+  const fieldKeys = Object.values(OWNER_NAME.FIELDS).map(({ id }) => id);
+  const fieldsFulfilled = Object.values(fieldKeys).map((key) => !errors[key]);
   const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
-
-  useEffect(() => {
-    onFulfilled((fields: CardFulfilledForm) => {
-      return {
-        ...fields,
-        ownerName: allFieldsFulfilled,
-      };
-    });
-  }, [allFieldsFulfilled]);
-
   const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
 
-  const ownerNameLength = fields[0].length;
+  const ownerNameLength = values[OWNER_NAME.FIELDS.OWNER_NAME.id]?.length;
+
   return (
     <Input.Container>
       <div className='flex-row-between'>
@@ -38,19 +22,21 @@ export const OwnerName = ({
         )}
       </div>
       <Input.Box>
-        {Object.values(OWNER_NAME.FIELDS).map((field, fieldIndex) => (
-          <Input
-            key={field.ID}
-            type={field.TYPE}
-            ref={autoFocusRefs[fieldIndex]}
-            value={fields[fieldIndex]}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              onFieldChange(event, fieldIndex)
-            }
-            placeholder={field.PLACEHOLDER}
-            className={optionalClassName}
-          />
-        ))}
+        {Object.values(OWNER_NAME.FIELDS).map(
+          ({ id, type, placeholder, maxLength }) => (
+            <Input
+              key={id}
+              type={type}
+              placeholder={placeholder}
+              className={optionalClassName}
+              {...register(id, {
+                maxLength,
+                onChange: (value: string) =>
+                  value.replace(INPUT.REGEX.ALPHABET, ''),
+              })}
+            />
+          )
+        )}
       </Input.Box>
     </Input.Container>
   );

@@ -1,15 +1,13 @@
 import { INPUT } from '@/components/input/input.constant';
-import { INPUT_FIELDS } from '@/hooks/useInputFields';
 import { Validation } from '@/utils/validation';
 
 export const SECURITY_CODE = {
   FIELDS: {
     SECURITY_CODE: {
-      ID: 'card-security-code',
-      PLACEHOLDER: 'CVC',
-      TYPE: INPUT.TYPE.PASSWORD,
-      fieldType: INPUT_FIELDS.NUMBER.TYPE,
-      validation: Validation.securityCode,
+      id: 'securityCode',
+      placeholder: 'CVC',
+      type: INPUT.TYPE.PASSWORD,
+      validate: Validation.securityCode,
       maxLength: 3,
     },
   },

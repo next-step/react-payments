@@ -1,23 +1,21 @@
 import { INPUT } from '@/components/input/input.constant';
-import { INPUT_FIELDS } from '@/hooks/useInputFields';
 import { Validation } from '@/utils/validation';
+import { InputFields } from '../number/cardNumber.constant';
 
-export const EXPIRE_DATE = {
+export const EXPIRE_DATE: InputFields = {
   FIELDS: {
     MONTH: {
-      ID: 'expire-date-month',
-      PLACEHOLDER: 'MM',
-      TYPE: INPUT.TYPE.TEXT,
-      fieldType: INPUT_FIELDS.NUMBER.TYPE,
-      validation: Validation.expireDateMonth,
+      id: 'expireMonth',
+      placeholder: 'MM',
+      type: INPUT.TYPE.TEXT,
+      validate: Validation.expireDateMonth,
       maxLength: 2,
     },
     YEAR: {
-      ID: 'expire-date-year',
-      PLACEHOLDER: 'YY',
-      TYPE: INPUT.TYPE.TEXT,
-      fieldType: INPUT_FIELDS.NUMBER.TYPE,
-      validation: Validation.expireDateYear,
+      id: 'expireYear',
+      placeholder: 'YY',
+      type: INPUT.TYPE.TEXT,
+      validate: Validation.expireDateYear,
       maxLength: 2,
     },
   },

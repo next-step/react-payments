@@ -1,32 +1,18 @@
 import { Input } from '@/components/input/Input';
 import { INPUT } from '@/components/input/input.constant';
-import { useInputFields } from '@/hooks/useInputFields';
+import { FormMethodsProps } from '@/hooks/useForm/useForm';
+import { useAutoFocus } from '@/hooks/useAutoFocus/useAutoFocus';
 import { EXPIRE_DATE } from './expireDate.constant';
-import {
-  CardFulfilledAction,
-  CardFulfilledForm,
-} from '@/pages/Payments/funnel';
-import { useEffect } from 'react';
 
-export const ExpireDate = ({
-  onFulfilled,
-}: {
-  onFulfilled: CardFulfilledAction;
-}) => {
-  const { fields, autoFocusRefs, onFieldChange, fieldsFulfilled } =
-    useInputFields(Object.values(EXPIRE_DATE.FIELDS));
+export const ExpireDate = ({ formMethods }: FormMethodsProps) => {
+  const { register, errors } = formMethods;
+  const { autoFocusRefs, handleAutoFocus } = useAutoFocus({
+    amount: Object.values(EXPIRE_DATE.FIELDS).length,
+  });
 
+  const fieldKeys = Object.values(EXPIRE_DATE.FIELDS).map(({ id }) => id);
+  const fieldsFulfilled = Object.values(fieldKeys).map((key) => !errors[key]);
   const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
-
-  useEffect(() => {
-    onFulfilled((fields: CardFulfilledForm) => {
-      return {
-        ...fields,
-        expireDate: allFieldsFulfilled,
-      };
-    });
-  }, [allFieldsFulfilled]);
-
   const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
 
   return (
@@ -39,19 +25,34 @@ export const ExpireDate = ({
         }}
         className='w-50'
       >
-        {Object.values(EXPIRE_DATE.FIELDS).map((field, fieldIndex) => (
-          <Input
-            key={field.ID}
-            type={field.TYPE}
-            ref={autoFocusRefs[fieldIndex]}
-            value={fields[fieldIndex]}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              onFieldChange(event, fieldIndex)
-            }
-            placeholder={field.PLACEHOLDER}
-            className={optionalClassName}
-          />
-        ))}
+        {Object.values(EXPIRE_DATE.FIELDS).map(
+          ({ id, type, validate, maxLength, placeholder }, fieldIndex) => (
+            <Input
+              key={id}
+              type={type}
+              ref={autoFocusRefs[fieldIndex]}
+              placeholder={placeholder}
+              className={optionalClassName}
+              {...register(id, {
+                maxLength,
+                validate,
+                onChange: (value: string) => {
+                  const parsedValue = value.replace(INPUT.REGEX.DIGIT, '');
+
+                  if (maxLength) {
+                    handleAutoFocus({
+                      value: parsedValue,
+                      index: fieldIndex,
+                      maxLength,
+                    });
+                  }
+
+                  return parsedValue;
+                },
+              })}
+            />
+          )
+        )}
       </Input.Box>
     </Input.Container>
   );

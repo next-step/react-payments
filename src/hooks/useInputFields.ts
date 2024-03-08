@@ -13,7 +13,7 @@ export const INPUT_FIELDS = {
 
 type InputFieldType = (typeof INPUT_FIELDS)[keyof typeof INPUT_FIELDS]['TYPE'];
 
-interface FieldConfig {
+export interface FieldConfig {
   fieldType: InputFieldType;
   maxLength?: number;
   validation?: (fields: string) => boolean;

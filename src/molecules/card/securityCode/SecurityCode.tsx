@@ -1,49 +1,32 @@
-import { useInputFields } from '@/hooks/useInputFields';
-import { SECURITY_CODE } from './securityCode.constant';
 import { Input } from '@/components/input/Input';
-import { useEffect } from 'react';
-import {
-  CardFulfilledAction,
-  CardFulfilledForm,
-} from '@/pages/Payments/funnel';
+import { FormMethodsProps } from '@/hooks/useForm/useForm';
+import { SECURITY_CODE } from './securityCode.constant';
 
-export const SecurityCode = ({
-  onFulfilled,
-}: {
-  onFulfilled: CardFulfilledAction;
-}) => {
-  const { fields, autoFocusRefs, onFieldChange, fieldsFulfilled } =
-    useInputFields(Object.values(SECURITY_CODE.FIELDS));
+export const SecurityCode = ({ formMethods }: FormMethodsProps) => {
+  const { register, errors } = formMethods;
 
+  const fieldKeys = Object.values(SECURITY_CODE.FIELDS).map(({ id }) => id);
+  const fieldsFulfilled = Object.values(fieldKeys).map((key) => !errors[key]);
   const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
-
-  useEffect(() => {
-    onFulfilled((fields: CardFulfilledForm) => {
-      return {
-        ...fields,
-        securityCode: allFieldsFulfilled,
-      };
-    });
-  }, [allFieldsFulfilled]);
-
   const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
 
   return (
     <Input.Container>
       <Input.Title>{SECURITY_CODE.TITLE}</Input.Title>
-      {Object.values(SECURITY_CODE.FIELDS).map((field, fieldIndex) => (
-        <Input
-          key={field.ID}
-          type={field.TYPE}
-          ref={autoFocusRefs[fieldIndex]}
-          value={fields[fieldIndex]}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            onFieldChange(event, fieldIndex)
-          }
-          placeholder={field.PLACEHOLDER}
-          className={`w-25 ${optionalClassName}`}
-        />
-      ))}
+      {Object.values(SECURITY_CODE.FIELDS).map(
+        ({ id, type, validate, maxLength, placeholder }) => (
+          <Input
+            key={id}
+            type={type}
+            placeholder={placeholder}
+            className={`w-25 ${optionalClassName}`}
+            {...register(id, {
+              maxLength,
+              validate,
+            })}
+          />
+        )
+      )}
     </Input.Container>
   );
 };

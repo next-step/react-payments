@@ -1,14 +1,12 @@
 import { INPUT } from '@/components/input/input.constant';
-import { INPUT_FIELDS } from '@/hooks/useInputFields';
+import { InputFields } from '../number/cardNumber.constant';
 
-export const OWNER_NAME = {
+export const OWNER_NAME: InputFields = {
   FIELDS: {
     OWNER_NAME: {
-      ID: 'card-user-name',
-      PLACEHOLDER: '카드에 표시된 이름과 동일하게 입력하세요.',
-      TYPE: INPUT.TYPE.TEXT,
-      fieldType: INPUT_FIELDS.STRING.TYPE,
-      validation: undefined,
+      id: 'ownerName',
+      placeholder: '카드에 표시된 이름과 동일하게 입력하세요.',
+      type: INPUT.TYPE.TEXT,
       maxLength: 30,
     },
   },

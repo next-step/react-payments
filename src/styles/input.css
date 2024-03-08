@@ -43,6 +43,7 @@
   outline-offset: 2px;
   border: none;
   border-radius: 0.25rem;
+  background: transparent;
 }
 
 .input-underline {

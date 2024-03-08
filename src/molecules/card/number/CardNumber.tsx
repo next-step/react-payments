@@ -1,17 +1,18 @@
 import { Input } from '@/components/input/Input';
-import { CARD_NUMBER } from './cardNumber.constant';
 import { INPUT } from '@/components/input/input.constant';
-import { formMethodsProps } from '@/hooks/useForm/useForm';
+import { FormMethodsProps } from '@/hooks/useForm/useForm';
 import { useAutoFocus } from '@/hooks/useAutoFocus/useAutoFocus';
+import { CARD_NUMBER } from './cardNumber.constant';
 
-export const CardNumber = ({ formMethods }: formMethodsProps) => {
+export const CardNumber = ({ formMethods }: FormMethodsProps) => {
   const { register, errors } = formMethods;
   const { autoFocusRefs, handleAutoFocus } = useAutoFocus({
     amount: Object.values(CARD_NUMBER.FIELDS).length,
   });
 
-  const allFieldsFulfilled = Object.values(errors).every((error) => !error);
-
+  const fieldKeys = Object.values(CARD_NUMBER.FIELDS).map(({ id }) => id);
+  const fieldsFulfilled = Object.values(fieldKeys).map((key) => !errors[key]);
+  const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
   const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
 
   return (
@@ -20,27 +21,30 @@ export const CardNumber = ({ formMethods }: formMethodsProps) => {
       <Input.Box
         separator={{
           symbol: INPUT.BOX.SEPARATOR.HYPHEN,
-          fieldsFulfilled: Array.from({ length: 4 }, () => allFieldsFulfilled),
+          fieldsFulfilled,
         }}
       >
         {Object.values(CARD_NUMBER.FIELDS).map(
-          ({ ID, TYPE, validate, maxLength }, fieldIndex) => (
+          ({ id, type, validate, maxLength }, fieldIndex) => (
             <Input
-              key={`${ID}_${fieldIndex}`}
-              type={TYPE}
+              key={`${id}_${fieldIndex}`}
+              type={type}
               className={`w-25 ${optionalClassName}`}
               ref={autoFocusRefs[fieldIndex]}
-              {...register(ID, {
+              {...register(id, {
                 maxLength,
                 validate,
                 onChange: (value: string) => {
                   const parsedValue = value.replace(INPUT.REGEX.DIGIT, '');
 
-                  handleAutoFocus({
-                    value: parsedValue,
-                    index: fieldIndex,
-                    maxLength: maxLength,
-                  });
+                  if (maxLength) {
+                    handleAutoFocus({
+                      value: parsedValue,
+                      index: fieldIndex,
+                      maxLength,
+                    });
+                  }
+
                   return parsedValue;
                 },
               })}
