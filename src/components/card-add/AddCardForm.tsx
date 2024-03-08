@@ -29,9 +29,9 @@ export default function AddCardForm() {
     year: '',
   });
 
-  const [ownerName, setOwnerName] = useState('');
+  const [ownerName, setOwnerName] = useState<string>('');
 
-  const [securityCode, setSecurityCode] = useState('');
+  const [securityCode, setSecurityCode] = useState<string>('');
 
   const [cardPassword, setCardPassword] = useState<CardPasswordNumberType>({
     firstNumber: '',

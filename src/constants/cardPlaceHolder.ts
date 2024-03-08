@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 export const EXPIRATION_DATE_MONTH_PLACEHOLDER = 'MM';
 export const EXPIRATION_DATE_YEAR_PLACEHOLDER = 'YY';
 export const OWNER_NAME_PLACEHOLDER =

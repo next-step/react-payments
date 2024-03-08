@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/naming-convention */
+import React, { Dispatch, SetStateAction } from 'react';
+
 import Input from '../Input';
 
 import updateValidValue from '../../utils/updateValidValue';
@@ -13,11 +14,7 @@ import {
 
 type ExpirationDateProps = {
   expirationDate: ExpirationDateType;
-  setExpirationDate: (
-    prevState:
-      | ExpirationDateType
-      | ((prevState: ExpirationDateType) => ExpirationDateType)
-  ) => void;
+  setExpirationDate: Dispatch<SetStateAction<ExpirationDateType>>;
 };
 
 export default function ExpirationDate({

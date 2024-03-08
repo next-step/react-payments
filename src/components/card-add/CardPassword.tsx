@@ -1,3 +1,5 @@
+import React, { Dispatch, SetStateAction } from 'react';
+
 import Input from '../Input';
 
 import updateValidValue from '../../utils/updateValidValue';
@@ -8,11 +10,7 @@ import { type CardPasswordNumberType } from '../../types/CardFormType';
 
 type CardPasswordProps = {
   cardPassword: CardPasswordNumberType;
-  setCardPassword: (
-    prevState:
-      | CardPasswordNumberType
-      | ((prevState: CardPasswordNumberType) => CardPasswordNumberType)
-  ) => void;
+  setCardPassword: Dispatch<SetStateAction<CardPasswordNumberType>>;
 };
 
 export default function CardPassword({

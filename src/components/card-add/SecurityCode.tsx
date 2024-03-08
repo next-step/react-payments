@@ -1,3 +1,5 @@
+import React, { Dispatch, SetStateAction } from 'react';
+
 import Input from '../Input';
 
 import updateValidValue from '../../utils/updateValidValue';
@@ -6,7 +8,7 @@ import { SECURITY_CODE_LIMIT } from '../../constants/cardLimit';
 
 type SecurityCodeProps = {
   securityCode: string;
-  setSecurityCode: (value: string) => void;
+  setSecurityCode: Dispatch<SetStateAction<string>>;
 };
 
 export default function SecurityCode({

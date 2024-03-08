@@ -1,3 +1,5 @@
+import React, { Dispatch, SetStateAction } from 'react';
+
 import Input from '../Input';
 
 import updateValidValue from '../../utils/updateValidValue';
@@ -7,7 +9,7 @@ import { OWNER_NAME_PLACEHOLDER } from '../../constants/cardPlaceHolder';
 
 type OwnerNameProps = {
   ownerName: string;
-  setOwnerName: (value: string) => void;
+  setOwnerName: Dispatch<SetStateAction<string>>;
 };
 
 export default function OwnerName({ ownerName, setOwnerName }: OwnerNameProps) {

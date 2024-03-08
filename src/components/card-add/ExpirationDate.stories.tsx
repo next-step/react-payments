@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import type { Meta } from '@storybook/react';
 
@@ -8,11 +8,7 @@ import { type ExpirationDateType } from '../../types/CardFormType';
 
 type ExpirationDateProps = {
   expirationDate: ExpirationDateType;
-  setExpirationDate: (
-    prevState:
-      | ExpirationDateType
-      | ((prevState: ExpirationDateType) => ExpirationDateType)
-  ) => void;
+  setExpirationDate: Dispatch<SetStateAction<ExpirationDateType>>;
 };
 
 const meta = {

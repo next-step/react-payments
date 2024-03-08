@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import type { Meta } from '@storybook/react';
 
@@ -6,7 +6,7 @@ import SecurityCode from './SecurityCode';
 
 type SecurityCoderops = {
   securityCode: string;
-  setSecurityCode: (value: string) => void;
+  setSecurityCode: Dispatch<SetStateAction<string>>;
 };
 
 const meta = {

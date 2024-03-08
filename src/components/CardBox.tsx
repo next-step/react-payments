@@ -1,3 +1,5 @@
+import React from 'react';
+
 type CardBoxProps = {
   children?: React.ReactNode | string;
 };

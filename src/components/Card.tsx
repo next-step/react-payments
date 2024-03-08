@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import type { CardNumberType } from '../types/CardFormType';
 import type { ExpirationDateType } from '../types/CardFormType';
 

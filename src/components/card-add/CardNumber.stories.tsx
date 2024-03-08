@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import type { Meta } from '@storybook/react';
 
@@ -8,9 +8,7 @@ import type { CardNumberType } from '../../types/CardFormType';
 
 type CardNumberProps = {
   cardNumber: CardNumberType;
-  setCardNumber: (
-    prevState: CardNumberType | ((prevState: CardNumberType) => CardNumberType)
-  ) => void;
+  setCardNumber: Dispatch<SetStateAction<CardNumberType>>;
 };
 
 const meta = {
