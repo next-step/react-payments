@@ -11,6 +11,11 @@ import {
 } from '../../constants/regularExpressions';
 import { LABEL_EXPIRATION } from '../../constants/labels';
 
+const expirationCheck = {
+  mm: CARD_EXPIRATION_MM_REG_EXP,
+  yy: CARD_EXPIRATION_YY_REG_EXP,
+};
+
 function CardExpiration(props) {
   const { onData } = props;
 
@@ -18,11 +23,7 @@ function CardExpiration(props) {
     const { value } = event.target;
     const newValue = value.replace(NUMBER_REG_EXP, '');
     event.target.value = newValue;
-    if (
-      newValue === '' ||
-      (type === 'mm' && CARD_EXPIRATION_MM_REG_EXP.test(newValue)) ||
-      (type === 'yy' && CARD_EXPIRATION_YY_REG_EXP.test(newValue))
-    ) {
+    if (newValue === '' || expirationCheck[type].test(newValue)) {
       onData(type, newValue);
     }
   };
