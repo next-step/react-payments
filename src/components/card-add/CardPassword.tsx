@@ -44,7 +44,7 @@ export default function CardPassword({
         className="w-15"
         type="password"
         value={cardPassword.firstNumber}
-        name={'firstNumber'}
+        name="firstNumber"
         onChange={handleChangeCardPassword}
       />
       <Input
@@ -52,7 +52,7 @@ export default function CardPassword({
         className="w-15"
         type="password"
         value={cardPassword.secondNumber}
-        name={'secondNumber'}
+        name="secondNumber"
         onChange={handleChangeCardPassword}
       />
       <input

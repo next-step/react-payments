@@ -44,28 +44,28 @@ export default function CardNumber({
           variant="basic"
           type="text"
           value={cardNumber.firstNumber}
-          name={'firstNumber'}
+          name="firstNumber"
           onChange={handleChangeCardNumber}
         />
         <Input
           variant="basic"
           type="text"
           value={cardNumber.secondNumber}
-          name={'secondNumber'}
+          name="secondNumber"
           onChange={handleChangeCardNumber}
         />
         <Input
           variant="basic"
           type="password"
           value={cardNumber.thirdNumber}
-          name={'thirdNumber'}
+          name="thirdNumber"
           onChange={handleChangeCardNumber}
         />
         <Input
           variant="basic"
           type="password"
           value={cardNumber.fourthNumber}
-          name={'fourthNumber'}
+          name="fourthNumber"
           onChange={handleChangeCardNumber}
         />
       </div>
