@@ -1,0 +1,141 @@
+{
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "prettier",
+    "plugin:storybook/recommended"
+  ],
+  "plugins": [
+    "react",
+    "react-hooks",
+    "@typescript-eslint",
+    "unused-imports"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "import/extensions": [
+      "off"
+    ],
+    "import/prefer-default-export": "off",
+    "no-plusplus": "off",
+    "semi": [
+      "error",
+      "always"
+    ],
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [
+          ".tsx",
+          ".jsx"
+        ]
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "@[a-zA-Z]*/[a-zA-Z]*",
+            "group": "external",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": [
+          "builtin"
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "@typescript-eslint/type-annotation-spacing": [
+      "error"
+    ],
+    "@typescript-eslint/method-signature-style": [
+      "error"
+    ],
+    "unused-imports/no-unused-imports": [
+      "error"
+    ],
+    "react/jsx-indent-props": [
+      "error",
+      "first"
+    ],
+    "react/jsx-curly-newline": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/jsx-wrap-multilines": "off",
+    "no-unused-vars": "off",
+    "no-proto": "off",
+    "camelcase": "off",
+    "class-methods-use-this": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "max-classes-per-file": "off",
+    "max-len": "off",
+    "no-param-reassign": "off",
+    "no-shadow": "off",
+    "no-undef": "off",
+    "no-underscore-dangle": "off",
+    "no-use-before-define": "off",
+    "no-useless-escape": "off",
+    "react/jsx-no-useless-fragment": "off",
+    "react/no-array-index-key": "off",
+    "react/no-unused-prop-types": "off",
+    "react/require-default-props": "off",
+    "react/function-component-definition": "off",
+    "react/react-in-jsx-scope": "off",
+    "no-console": "off",
+    "no-alert": "off",
+    "import/no-unresolved": "off",
+    "import/no-extraneous-dependencies": "off"
+  },
+  "overrides": [
+    {
+      "files": [
+        "src/**/*.spec.ts",
+        "src/**/*.spec.tsx"
+      ],
+      "plugins": [
+        "vitest"
+      ],
+      "extends": [
+        "plugin:vitest/recommended"
+      ],
+      "rules": {
+        "vitest/expect-expect": "off"
+      },
+      "globals": {
+        "globalThis": true,
+        "describe": true,
+        "it": true,
+        "expect": true,
+        "beforeEach": true,
+        "afterEach": true,
+        "beforeAll": true,
+        "afterAll": true,
+        "vi": true
+      }
+    }
+  ]
+}
