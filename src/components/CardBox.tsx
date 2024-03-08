@@ -1,7 +1,7 @@
-import React from 'react';
+import { PropsWithChildren } from 'react';
 
 type CardBoxProps = {
-  children?: React.ReactNode | string;
+  children?: PropsWithChildren<object>;
 };
 
 export default function CardBox({ children }: CardBoxProps) {
