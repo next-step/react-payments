@@ -10,6 +10,7 @@ function CardItem(props) {
         <>
           <div className="card-box">
             <CardPreview
+              key={card.id}
               size="small"
               name={card.name}
               expiration={card.expiration}
