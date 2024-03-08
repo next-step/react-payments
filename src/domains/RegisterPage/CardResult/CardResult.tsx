@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface CardResultProps {
@@ -6,7 +7,11 @@ interface CardResultProps {
 
 export default function CardResult({ store }: CardResultProps) {
   const navigate = useNavigate();
-  console.log(store);
-  navigate("/mycards");
+  useEffect(() => {
+    console.log(store);
+
+    navigate("/mycards");
+  }, []);
+
   return <></>;
 }

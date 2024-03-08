@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import LimitedLengthInput from "./LimitedLengthInput";
-import { within } from "@testing-library/react";
+import { within } from "@storybook/testing-library";
 import { userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 
@@ -37,12 +37,12 @@ TextInput.play = async ({ canvasElement, step }) => {
 
   await step("일반 타이핑", async () => {
     await userEvent.type(input, "1");
-    expect(input.value).toBe("1");
+    await expect(input.value).toBe("1");
   });
 
   await step("글자수를 초과하는 타이핑", async () => {
     await userEvent.type(input, "1111111");
-    expect(input.value.length <= maxLength).toBe(true);
+    await expect(input.value.length <= maxLength).toBe(true);
   });
 
   await step("글자수를 초과해서 타이핑 후 삭제", async () => {
@@ -50,7 +50,7 @@ TextInput.play = async ({ canvasElement, step }) => {
     await userEvent.type(input, willTypingWords);
     await userEvent.type(input, "{backspace}");
 
-    expect(input.value.length).toBe(6);
+    await expect(input.value.length).toBe(6);
   });
 };
 
@@ -59,12 +59,12 @@ PasswordInput.play = async ({ canvasElement, step }) => {
   const input = canvas.getByTitle<HTMLInputElement>("limited length input");
 
   await step("password 설정 확인", async () => {
-    expect(input.type).toBe("password");
+    await expect(input.type).toBe("password");
   });
 
   await step("글자수를 초과하는 타이핑", async () => {
     await userEvent.type(input, "1111111");
-    expect(input.value.length <= maxLength).toBe(true);
+    await expect(input.value.length <= maxLength).toBe(true);
   });
 
   await step("글자수를 초과해서 타이핑 후 삭제", async () => {
@@ -72,6 +72,6 @@ PasswordInput.play = async ({ canvasElement, step }) => {
     await userEvent.type(input, willTypingWords);
     await userEvent.type(input, "{backspace}");
 
-    expect(input.value.length).toBe(6);
+    await expect(input.value.length).toBe(6);
   });
 };
