@@ -25,7 +25,6 @@ export default function CardAdd({ onNext }) {
   // 카드 소유자 이름(선택)
 
   // 보안코드
-  const [securityCode, setSecurityCode] = useState("");
 
   // 카드 비밀번호
   const [password, setPassword] = useState({
@@ -74,10 +73,7 @@ export default function CardAdd({ onNext }) {
       {/* 보안 코드 */}
       <InputContainer>
         <InputTitle>보안코드(CVC/CVV)</InputTitle>
-        <SecurityCodeInput
-          securityCode={securityCode}
-          setSecurityCode={setSecurityCode}
-        />
+        <SecurityCodeInput />
       </InputContainer>
       {/* 카드 비밀번호 */}
       <InputContainer>
