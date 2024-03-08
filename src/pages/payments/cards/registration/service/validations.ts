@@ -3,15 +3,18 @@ import {
   CARD_HOLDER_NAME_MAX_LENGTH,
   CARD_NUMBER_INPUT_REGEX,
   CARD_PASSWORD_REGEX,
+  EXPIRATION_DATE_INPUT_REG,
   SECURITY_CODE_REG,
 } from './const'
 
-const checkExpirationDate = (month: string, year: string) => {
-  const parsedMonth = parseInt(month)
-
-  if (!parsedMonth || !year) {
-    return false
+const checkExpirationDate = (expirationDate: string) => {
+  if (!EXPIRATION_DATE_INPUT_REG.test(expirationDate)) {
+    return false;
   }
+
+  const [expirationMonth, expirationYear] = expirationDate.split('/')
+
+  const parsedMonth = parseInt(expirationMonth)
 
   if (parsedMonth < 1 || parsedMonth > 12) {
     return false
@@ -49,9 +52,7 @@ export const Step1Validate = (values: FormType) => {
     securityCode: '',
   }
 
-  const [expirationMonth, expirationYear] = values.expirationDate.split('/')
-
-  if (!checkExpirationDate(expirationMonth, expirationYear)) {
+  if (!checkExpirationDate(values.expirationDate)) {
     errors.expirationDate = '월은 1이상 12이하 숫자를 입력해 주세요.'
   }
 
