@@ -1,4 +1,3 @@
-import { createElement } from "react";
 import PropTypes from "prop-types";
 
 const Text = (props) => {
@@ -6,12 +5,10 @@ const Text = (props) => {
 
   const classes = Array.isArray(className) ? className.join(" ") : className;
 
-  return createElement(
-    as,
-    {
-      className: classes,
-    },
-    children
+  return (
+    <p className={classes} as={as}>
+      {children}
+    </p>
   );
 };
 

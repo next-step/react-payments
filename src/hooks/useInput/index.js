@@ -1,11 +1,20 @@
 import { useFormContext } from "../useFormProvider";
 
 const useInput = (props) => {
-  const { name, required, length, maxLength, max, min, digit } = props;
+  const { name, type, required, length, maxLength, max, min, digit } = props;
   const { register, getValues } = useFormContext();
 
   const checkValue = (value) => {
     const currentValue = getValues(name);
+
+    if (type === "number") {
+      const reg = /[^0-9]/g;
+
+      // 밖 조건식과 한번에  쓰는게 좋을까?
+      if (value.match(reg)) {
+        value = currentValue;
+      }
+    }
 
     if (value.length > length) {
       value = currentValue;

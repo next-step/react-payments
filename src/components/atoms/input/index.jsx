@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import useInput from "../../../hooks/useInput";
-import { createElement } from "react";
 
 const Input = (props) => {
   const {
@@ -21,6 +20,7 @@ const Input = (props) => {
   } = props;
   const input = useInput({
     name,
+    type,
     length,
     required,
     maxLength,
@@ -31,24 +31,13 @@ const Input = (props) => {
 
   const classes = Array.isArray(className) ? className.join(" ") : className;
 
-  const handleKeyPress = (e) => {
-    if (type === "number") {
-      if (e.which < 48 || e.which > 57) {
-        e.preventDefault();
-      }
-    }
-  };
-
-  return createElement(
-    as,
-    {
-      className: classes + (secret ? " input-secret" : ""),
-      type,
-      onKeyPress: handleKeyPress,
-      ...rest,
-      ...input,
-    },
-    null
+  return (
+    <input
+      className={classes + (secret ? " input-secret" : "")}
+      type={type}
+      {...rest}
+      {...input}
+    />
   );
 };
 

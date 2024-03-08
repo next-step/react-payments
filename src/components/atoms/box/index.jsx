@@ -1,4 +1,3 @@
-import { createElement } from "react";
 import PropTypes from "prop-types";
 
 const Box = (props) => {
@@ -6,7 +5,11 @@ const Box = (props) => {
 
   const classes = Array.isArray(className) ? className.join(" ") : className;
 
-  return createElement(as, { className: classes }, children);
+  return (
+    <div as={as} className={classes}>
+      {children}
+    </div>
+  );
 };
 
 Box.propTypes = {
