@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Input from '../atoms/Input';
 import Text from '../atoms/Text';
 import { LABEL_CARD_PASSWORD } from '../../constants/labels';
@@ -6,14 +7,19 @@ const numberRegExp = /[^\d]/g;
 
 function CardPassword(props) {
   const { password, onData } = props;
+  const [newPassword, setNewPassword] = useState(password);
+
+  useEffect(() => {
+    onData('password', newPassword);
+  }, [newPassword]);
 
   const handleChange = (event, index) => {
     const { value } = event.target;
-    const newValue = value.replace(numberRegExp, '');
-    const newPassword = [...password];
-    newPassword[index] = newValue;
-    event.target.value = newValue;
-    onData('password', newPassword);
+    setNewPassword(() => {
+      const inputPassword = [...password];
+      inputPassword[index] = value.replace(numberRegExp, '');
+      return inputPassword;
+    });
   };
 
   return (
@@ -25,6 +31,7 @@ function CardPassword(props) {
           className="input-basic"
           extraClassName="w-15"
           type="password"
+          value={newPassword[index]}
           onChange={(e) => handleChange(e, index)}
           maxLength={1}
         />

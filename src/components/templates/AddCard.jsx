@@ -24,8 +24,10 @@ import {
 
 const INITIAL_STATE = {
   cardNumber: ['', '', '', ''],
-  mm: '',
-  yy: '',
+  expiration: {
+    mm: '',
+    yy: '',
+  },
   user: '',
   securityCode: '',
   password: ['', ''],
@@ -48,8 +50,8 @@ function AddCard(props) {
     }
 
     if (
-      card.mm.length !== CARD_EXPIRATION_MM_DIGIT ||
-      card.yy.length !== CARD_EXPIRATION_YY_DIGIT
+      card.mm.length !== CARD_EXPIRATION_MM_DIGIT
+      || card.yy.length !== CARD_EXPIRATION_YY_DIGIT
     ) {
       alert(MSG_CHECK_CARD_EXPIRATION);
       return false;
@@ -92,7 +94,7 @@ function AddCard(props) {
         <CardNumber cardNumber={card.cardNumber} onData={handleCard} />
       </div>
       <div className="input-container">
-        <CardExpiration mm={card.mm} yy={card.yy} onData={handleCard} />
+        <CardExpiration expiration={card.expiration} onData={handleCard} />
       </div>
       <div className="input-container">
         <CardHolder onData={handleCard} />

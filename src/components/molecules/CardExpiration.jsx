@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Input from '../atoms/Input';
 import Text from '../atoms/Text';
 import {
@@ -17,15 +18,24 @@ const expirationCheck = {
 };
 
 function CardExpiration(props) {
-  const { onData } = props;
+  const { expiration, onData } = props;
+  const [newExpiration, setNewExpiration] = useState(expiration);
+  const [expirationKey, setExpirationKey] = useState('mm');
+
+  useEffect(() => {
+    if (
+      newExpiration[expirationKey] === '' ||
+      expirationCheck[expirationKey].test(newExpiration[expirationKey])
+    ) {
+      onData('expiration', newExpiration);
+    }
+  }, [newExpiration, expirationKey]);
 
   const handleChange = (event, type) => {
     const { value } = event.target;
-    const newValue = value.replace(NUMBER_REG_EXP, '');
-    event.target.value = newValue;
-    if (newValue === '' || expirationCheck[type].test(newValue)) {
-      onData(type, newValue);
-    }
+    setExpirationKey(type);
+    const inputExpiration = value.replace(NUMBER_REG_EXP, '');
+    setNewExpiration({ ...expiration, [type]: inputExpiration });
   };
 
   return (
@@ -35,6 +45,7 @@ function CardExpiration(props) {
         <Input
           className="input-basic"
           type="text"
+          value={newExpiration.mm}
           placeholder="MM"
           onChange={(e) => handleChange(e, 'mm')}
           maxLength={CARD_EXPIRATION_MM_DIGIT}
@@ -42,6 +53,7 @@ function CardExpiration(props) {
         <Input
           className="input-basic"
           type="text"
+          value={newExpiration.yy}
           placeholder="YY"
           onChange={(e) => handleChange(e, 'yy')}
           maxLength={CARD_EXPIRATION_YY_DIGIT}

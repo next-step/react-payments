@@ -8,25 +8,25 @@ import { MSG_INPUT_CARD_HOLDER } from '../../constants/messages';
 
 function CardHolder(props) {
   const { onData } = props;
-  const [newValue, setNewValue] = useState('');
+  const [newCardHolder, setNewCardHolder] = useState('');
 
   const handleChange = (event) => {
     const { value } = event.target;
-    const newName = value.replace(NAME_REG_EXP, '');
-    event.target.value = newName;
-    setNewValue(newName);
-    onData('user', newName);
+    const inputCardHolder = value.replace(NAME_REG_EXP, '');
+    setNewCardHolder(inputCardHolder);
+    onData('user', inputCardHolder);
   };
 
   return (
     <>
       <Text
         className="input-title"
-        text={`${LABEL_CARD_HOLDER} [${newValue.length}/${CARD_HOLDER_NAME_MAX_LENGTH}]`}
+        text={`${LABEL_CARD_HOLDER} [${newCardHolder.length}/${CARD_HOLDER_NAME_MAX_LENGTH}]`}
       />
       <Input
         className="input-basic"
         type="type"
+        value={newCardHolder}
         placeholder={MSG_INPUT_CARD_HOLDER}
         onChange={handleChange}
         maxLength={CARD_HOLDER_NAME_MAX_LENGTH}

@@ -30,7 +30,7 @@ function CardPreview(props) {
           />
           <Text
             className={`card-text${size === 'big' ? '__big' : ''}`}
-            text={`${card?.mm || 'MM'} / ${card?.yy || 'YY'}`}
+            text={`${card?.expiration.mm || 'MM'} / ${card?.expiration.yy || 'YY'}`}
           />
         </div>
       </div>
