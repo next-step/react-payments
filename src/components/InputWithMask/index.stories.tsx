@@ -40,6 +40,21 @@ export const MaskingTest: Story = {
     await expect(maskInput).toHaveValue('11')
 
     await userEvent.type(maskInput, '1')
-    await expect(maskInput).toHaveValue('11 1') // error
+    await expect(maskInput).toHaveValue('11 1')
+
+    await userEvent.type(maskInput, '1')
+    await expect(maskInput).toHaveValue('11 11')
+
+    await userEvent.type(maskInput, '{backspace}')
+    await expect(maskInput).toHaveValue('11 1')
+
+    await userEvent.type(maskInput, '{backspace}')
+    await expect(maskInput).toHaveValue('11')
+
+    await userEvent.type(maskInput, '{backspace}')
+    await expect(maskInput).toHaveValue('1')
+
+    await userEvent.type(maskInput, '{backspace}')
+    await expect(maskInput).toHaveValue('')
   },
 }
