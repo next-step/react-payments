@@ -1,15 +1,8 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 
 import type { Meta } from '@storybook/react';
 
 import CardNumber from './CardNumber';
-
-import type { CardNumberType } from '../../types/CardFormType';
-
-type CardNumberProps = {
-  cardNumber: CardNumberType;
-  setCardNumber: Dispatch<SetStateAction<CardNumberType>>;
-};
 
 const meta = {
   title: 'CARD-ADD/CardNumber',
@@ -18,7 +11,7 @@ const meta = {
 
 export default meta;
 
-export function Basic(args: CardNumberProps) {
+export function Basic() {
   const [cardNumber, setCardNumber] = useState({
     firstNumber: '1234',
     secondNumber: '5678',
@@ -26,11 +19,5 @@ export function Basic(args: CardNumberProps) {
     fourthNumber: '2468',
   });
 
-  return (
-    <CardNumber
-      {...args}
-      cardNumber={cardNumber}
-      setCardNumber={setCardNumber}
-    />
-  );
+  return <CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />;
 }

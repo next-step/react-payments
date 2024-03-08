@@ -1,15 +1,8 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 
 import type { Meta } from '@storybook/react';
 
 import ExpirationDate from './ExpirationDate';
-
-import { type ExpirationDateType } from '../../types/CardFormType';
-
-type ExpirationDateProps = {
-  expirationDate: ExpirationDateType;
-  setExpirationDate: Dispatch<SetStateAction<ExpirationDateType>>;
-};
 
 const meta = {
   title: 'CARD-ADD/ExpirationDate',
@@ -18,7 +11,7 @@ const meta = {
 
 export default meta;
 
-export function Basic(args: ExpirationDateProps) {
+export function Basic() {
   const [expirationDate, setExpirationDate] = useState({
     month: '12',
     year: '23',
@@ -26,7 +19,6 @@ export function Basic(args: ExpirationDateProps) {
 
   return (
     <ExpirationDate
-      {...args}
       expirationDate={expirationDate}
       setExpirationDate={setExpirationDate}
     />

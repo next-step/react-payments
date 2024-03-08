@@ -1,13 +1,8 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 
 import type { Meta } from '@storybook/react';
 
 import SecurityCode from './SecurityCode';
-
-type SecurityCoderops = {
-  securityCode: string;
-  setSecurityCode: Dispatch<SetStateAction<string>>;
-};
 
 const meta = {
   title: 'CARD-ADD/SecurityCode',
@@ -16,12 +11,11 @@ const meta = {
 
 export default meta;
 
-export function Basic(args: SecurityCoderops) {
+export function Basic() {
   const [securityCode, setSecurityCode] = useState('');
 
   return (
     <SecurityCode
-      {...args}
       securityCode={securityCode}
       setSecurityCode={setSecurityCode}
     />

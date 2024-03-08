@@ -1,13 +1,8 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 
 import type { Meta } from '@storybook/react';
 
 import OwnerName from './OwnerName';
-
-type OwnerNameProps = {
-  ownerName: string;
-  setOwnerName: Dispatch<SetStateAction<string>>;
-};
 
 const meta = {
   title: 'CARD-ADD/OwnerName',
@@ -16,10 +11,8 @@ const meta = {
 
 export default meta;
 
-export function Basic(args: OwnerNameProps) {
+export function Basic() {
   const [ownerName, setOwnerName] = useState('');
 
-  return (
-    <OwnerName {...args} ownerName={ownerName} setOwnerName={setOwnerName} />
-  );
+  return <OwnerName ownerName={ownerName} setOwnerName={setOwnerName} />;
 }
