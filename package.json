@@ -19,7 +19,6 @@
   },
   "devDependencies": {
     "@emotion/css": "^11.11.2",
-    "@emotion/react": "^11.11.4",
     "@storybook/addon-essentials": "^7.6.17",
     "@storybook/addon-interactions": "^7.6.17",
     "@storybook/addon-links": "^7.6.17",
