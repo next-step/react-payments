@@ -1,23 +1,29 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
-import type {Meta} from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import CardPassword from './CardPassword';
 
-import {type CardPasswordNumberType} from '../../types/CardFormType';
+import { type CardPasswordNumberType } from '../../types/CardFormType';
 
 const meta = {
-	title: 'CARD-ADD/CardPassword',
-	component: CardPassword,
+  title: 'CARD-ADD/CardPassword',
+  component: CardPassword,
 } satisfies Meta<typeof CardPassword>;
 
 export default meta;
 
 export function Basic(args: CardPasswordNumberType) {
-	const [cardPassword, setCardPassword] = useState({
-		firstNumber: '1',
-		secondNumber: '5',
-	});
+  const [cardPassword, setCardPassword] = useState({
+    firstNumber: '1',
+    secondNumber: '5',
+  });
 
-	return <CardPassword {...args} cardPassword={cardPassword} setCardPassword={setCardPassword} />;
+  return (
+    <CardPassword
+      {...args}
+      cardPassword={cardPassword}
+      setCardPassword={setCardPassword}
+    />
+  );
 }

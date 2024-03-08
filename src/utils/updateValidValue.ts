@@ -1,35 +1,35 @@
-import {isValidNumber, isValidLength, isValidMonth} from './Validation';
+import { isValidNumber, isValidLength, isValidMonth } from './Validation';
 
 type UpdateValidValueProps = {
-	limit: number;
-	setter: (value: string) => void;
-	value: string;
-	isMonth: boolean;
-	isNumber: boolean;
+  limit: number;
+  setter: (value: string) => void;
+  value: string;
+  isMonth: boolean;
+  isNumber: boolean;
 };
 
 export default function updateValidValue({
-	limit,
-	setter,
-	value,
-	isMonth,
-	isNumber,
+  limit,
+  setter,
+  value,
+  isMonth,
+  isNumber,
 }: UpdateValidValueProps) {
-	let isValid = true;
+  let isValid = true;
 
-	if (isNumber && !isValidNumber(limit, value)) {
-		isValid = false;
-	}
+  if (isNumber && !isValidNumber(limit, value)) {
+    isValid = false;
+  }
 
-	if (!isValidLength(limit, value)) {
-		isValid = false;
-	}
+  if (!isValidLength(limit, value)) {
+    isValid = false;
+  }
 
-	if (isMonth && !isValidMonth(value)) {
-		isValid = false;
-	}
+  if (isMonth && !isValidMonth(value)) {
+    isValid = false;
+  }
 
-	if (isValid || value === '') {
-		setter(value);
-	}
+  if (isValid || value === '') {
+    setter(value);
+  }
 }

@@ -1,27 +1,32 @@
 module.exports = {
-	env: {
-		browser: true,
-		es2021: true,
-	},
-	extends: ['plugin:react/recommended', 'plugin:react/jsx-runtime', 'xo', 'plugin:storybook/recommended'],
-	overrides: [
-		{
-			extends: [
-				'xo-typescript',
-			],
-			files: [
-				'*.ts',
-				'*.tsx',
-			],
-		},
-	],
-	parserOptions: {
-		ecmaVersion: 'latest',
-		sourceType: 'module',
-	},
-	plugins: [
-		'react',
-	],
-	rules: {
-	},
+  env: {
+    browser: true,
+    es2021: true,
+    node: true,
+  },
+  extends: [
+    'eslint:recommended',
+    'plugin:prettier/recommended',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'plugin:storybook/recommended',
+  ],
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+    },
+  ],
+  parser: '@typescript-eslint/eslint-plugin',
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
+  plugins: ['react', 'prettier'],
+  ignorePatterns: ['node_modules/'],
+  rules: {
+    'prettier/prettier': 'error',
+  },
 };
