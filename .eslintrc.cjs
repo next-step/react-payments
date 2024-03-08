@@ -17,6 +17,7 @@ module.exports = {
   plugins: ['eslint-plugin-import'],
   rules: {
     'func-style': ['error', 'expression'],
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/no-explicit-any': 'warn'
   }
 }

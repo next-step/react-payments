@@ -1,4 +1,4 @@
-export const color = {
+export const colors = {
   actError: '#F36140',
 
   brandPrimary: '#2AC1BC',

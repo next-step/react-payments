@@ -1,6 +1,6 @@
 import { css } from '@emotion/css'
 
-export const font = {
+export const fonts = {
   subtitle01R: css`
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
