@@ -1,5 +1,7 @@
+import Payments from './pages/Payments';
+
 function App() {
-  return <>React Payments</>;
+  return <Payments />;
 }
 
 export default App;
