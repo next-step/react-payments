@@ -1,13 +1,13 @@
-import CardAddPage from './pages/CardAddPage';
-import CardCompletePage from './pages/CardCompletePage';
-import CardListPage from './pages/CardListPage';
+import CardList from './components/card-list/CardList';
+import AddCardForm from './components/card-add/AddCardForm';
+import CompletedCard from './components/card-complete/CompletedCardForm';
 
 const routes = [
   {
     children: [
-      { path: '/', element: <CardListPage /> },
-      { path: '/add', element: <CardAddPage /> },
-      { path: '/add/complete', element: <CardCompletePage /> },
+      { path: '/', element: <CardList /> },
+      { path: '/add', element: <AddCardForm /> },
+      { path: '/add/complete', element: <CompletedCard /> },
     ],
   },
 ];
