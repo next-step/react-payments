@@ -1,11 +1,11 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
 
-type InputProps = ComponentPropsWithoutRef<'input'> & {
+export type InputProps = ComponentPropsWithoutRef<'input'> & {
   theme?: 'basic' | 'underline'
 }
 
 export const Input = forwardRef<ElementRef<'input'>, InputProps>(
-  ({ className, theme = 'basic', ...props }, forwardedRef) => {
+  ({ className = '', theme = 'basic', ...props }, forwardedRef) => {
     return (
       <input
         type="text"

@@ -22,7 +22,8 @@ type Story = StoryObj<typeof meta>
 export const Basic: Story = {
   args: {
     theme: 'basic',
-    type: 'text'
+    type: 'text',
+    width: '300px'
   }
 }
 export const Underline: Story = {
