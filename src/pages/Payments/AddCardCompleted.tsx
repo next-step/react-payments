@@ -55,7 +55,7 @@ export default function AddCardCompleted({ onNext }: AddCardCompletedProps) {
           </HStack>
         </InputContainer>
 
-        <Button className='mt-50' onButtonClick={onNext}>
+        <Button className='mt-50' onClick={onNext}>
           다음
         </Button>
       </div>
