@@ -7,9 +7,9 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
     "stylelint",
-    "prettier",
     "plugin:jsx-a11y/recommended",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "prettier",
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
@@ -17,8 +17,8 @@ module.exports = {
     'react-refresh', 
     'simple-import-sort',
     '@typescript-eslint',
-    "prettier",
-    "jsx-a11y"
+    "jsx-a11y",
+    "prettier"
   ],
   rules: {
     "prettier/prettier": [
