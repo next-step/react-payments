@@ -23,7 +23,6 @@ export default function CardAdd({ onNext }) {
   // 만료일
 
   // 카드 소유자 이름(선택)
-  const [cardOwnerName, setCardOwnerName] = useState("");
 
   // 보안코드
   const [securityCode, setSecurityCode] = useState("");
@@ -49,7 +48,7 @@ export default function CardAdd({ onNext }) {
         cardNumber={cardState.cardNumber}
         expirationDateMM={cardState.expirationDate[MONTH]}
         expirationDateYY={cardState.expirationDate[YEAR]}
-        cardOwnerName={cardOwnerName}
+        cardOwnerName={cardState.cardOwnerName}
       />
 
       {/* 카드 번호 */}
@@ -67,14 +66,10 @@ export default function CardAdd({ onNext }) {
         <InputGroup>
           <InputTitle>카드 소유자 이름(선택)</InputTitle>
           <InputTitle>
-            {cardOwnerName.length} / {CARD_OWNER_NAME_MAX_LENGTH}
+            {cardState.cardOwnerName.length} / {CARD_OWNER_NAME_MAX_LENGTH}
           </InputTitle>
         </InputGroup>
-
-        <CardOwnerNameInput
-          cardOwnerName={cardOwnerName}
-          setCardOwnerName={setCardOwnerName}
-        />
+        <CardOwnerNameInput />
       </InputContainer>
       {/* 보안 코드 */}
       <InputContainer>

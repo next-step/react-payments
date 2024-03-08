@@ -15,7 +15,7 @@ const initalCardState = {
     [THIRD_NUMBER]: "",
     [FOURTH_NUMBER]: "",
   },
-  cardOwner: "",
+  cardOwnerName: "",
   expirationDate: { [MONTH]: "", [YEAR]: "" },
   password: { [FIRST_NUMBER]: "", [SECOND_NUMBER]: "" },
   securityCode: "",
