@@ -1,8 +1,13 @@
 import classNames from "classnames";
 
-export default function Button({ className, children, ...props }) {
+export default function Button({
+  variant = "text",
+  className,
+  children,
+  ...props
+}) {
   return (
-    <button className={classNames("button-basic", className)}>
+    <button className={classNames(`button-${variant}`, className)} {...props}>
       {children}
     </button>
   );
