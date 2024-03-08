@@ -1,12 +1,7 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Card from "../components/Card";
-import {
-  FIRST_NUMBER,
-  FOURTH_NUMBER,
-  SECOND_NUMBER,
-  THIRD_NUMBER,
-} from "../constants/cardNumber";
+import { FIRST_NUMBER, SECOND_NUMBER } from "../constants/cardNumber";
 import CardNumberInput from "../components/card-add/CardNumberInput";
 import { MONTH, YEAR } from "../constants/expirationDate";
 import ExpirationDateInput from "../components/card-add/ExpirationDateInput";
@@ -23,19 +18,9 @@ import { CardContext } from "../../providers/CardState/CardStateProvider";
 export default function CardAdd({ onNext }) {
   const { cardState } = useContext(CardContext);
   console.log(cardState);
-  // 카드번호
-  const [cardNumber, setCardNumber] = useState({
-    [FIRST_NUMBER]: "",
-    [SECOND_NUMBER]: "",
-    [THIRD_NUMBER]: "",
-    [FOURTH_NUMBER]: "",
-  });
+  // 카드 번호
 
   // 만료일
-  const [expirationDate, setExpirationDate] = useState({
-    [MONTH]: "",
-    [YEAR]: "",
-  });
 
   // 카드 소유자 이름(선택)
   const [cardOwnerName, setCardOwnerName] = useState("");
@@ -61,27 +46,21 @@ export default function CardAdd({ onNext }) {
       {/* 카드 */}
       <Card
         alias={"카드 별칭"}
-        cardNumber={cardNumber}
-        expirationDateMM={expirationDate[MONTH]}
-        expirationDateYY={expirationDate[YEAR]}
+        cardNumber={cardState.cardNumber}
+        expirationDateMM={cardState.expirationDate[MONTH]}
+        expirationDateYY={cardState.expirationDate[YEAR]}
         cardOwnerName={cardOwnerName}
       />
 
       {/* 카드 번호 */}
       <InputContainer>
         <InputTitle>카드 번호</InputTitle>
-        <CardNumberInput
-          cardNumber={cardNumber}
-          setCardNumber={setCardNumber}
-        />
+        <CardNumberInput />
       </InputContainer>
       {/* 만료일 */}
       <InputContainer>
         <InputTitle>만료일</InputTitle>
-        <ExpirationDateInput
-          expirationDate={expirationDate}
-          setExpirationDate={setExpirationDate}
-        />
+        <ExpirationDateInput />
       </InputContainer>
       {/* 카드 소유자 이름 */}
       <InputContainer>

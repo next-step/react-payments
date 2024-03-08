@@ -5,6 +5,7 @@ import {
   YEAR_MAX_LENGTH,
 } from "../../constants/expirationDate";
 import { useAutoFocus } from "../../hook/useAutoFocus";
+import { useCardState } from "../../hook/useCardState";
 import { getNumberString } from "../../util/regExp";
 import Input from "../atomic-design-pattern/atom/Input";
 import InputBox from "../atomic-design-pattern/molecule/InputBox";
@@ -14,11 +15,10 @@ const expirationDateRefMap = {
   [YEAR]: null,
 };
 
-export default function ExpirationDateInput({
-  expirationDate,
-  setExpirationDate,
-}) {
+export default function ExpirationDateInput() {
+  const { cardState, setCardState } = useCardState();
   const [expirationDateRef, changeFocus] = useAutoFocus(expirationDateRefMap);
+
   const onChangeExpirationDate = (event) => {
     const { name, value, maxLength } = event.target;
     const onlyNumberValue = getNumberString(value);
@@ -29,16 +29,20 @@ export default function ExpirationDateInput({
     }
 
     changeFocus(onlyNumberValue.length === maxLength, name);
+    setCardState((prev) => {
+      const newExpirationDate = {
+        ...prev.expirationDate,
+        [name]: onlyNumberValue,
+      };
 
-    setExpirationDate((prev) => {
-      return { ...prev, [name]: onlyNumberValue };
+      return { ...prev, expirationDate: newExpirationDate };
     });
   };
 
   return (
     <InputBox className="w-50">
       <Input
-        value={expirationDate[MONTH]}
+        value={cardState.expirationDate[MONTH]}
         onChange={onChangeExpirationDate}
         name={MONTH}
         ref={(el) => (expirationDateRef.current[MONTH] = el)}
@@ -47,7 +51,7 @@ export default function ExpirationDateInput({
         maxLength={MONTH_MAX_LENGTH}
       />
       <Input
-        value={expirationDate[YEAR]}
+        value={cardState.expirationDate[YEAR]}
         name={YEAR}
         ref={(el) => (expirationDateRef.current[YEAR] = el)}
         onChange={onChangeExpirationDate}
