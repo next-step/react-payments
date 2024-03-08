@@ -25,7 +25,7 @@ function CardPassword(props) {
           className="input-basic"
           extraClassName="w-15"
           type="password"
-          onChange={(e) => handleChange(e, 0)}
+          onChange={(e) => handleChange(e, index)}
           maxLength={1}
         />
       ))}
