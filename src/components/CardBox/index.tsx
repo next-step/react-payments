@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { CardInfoContext } from '../../context/paymentContext'
 import ui from '../../styles/index.module.css'
+
 export const CardBox = () => {
   const cardInfo = useContext(CardInfoContext)
 
