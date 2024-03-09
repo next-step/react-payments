@@ -1,19 +1,11 @@
 import { useCallback } from "react";
+import { insertAtInterval, replaceTo } from "../../../utils/stringUtils";
 
 export default function useCardNumberInput() {
-  const toMaskedCardNumber = useCallback(
-    (value: string) =>
-      value
-        .split("")
-        .map((str, index) => {
-          const displayedStr = index > 7 ? "*" : str;
-          return index !== 0 && index % 4 === 0
-            ? `-${displayedStr}`
-            : displayedStr;
-        })
-        .join(""),
-    []
-  );
+  const toMaskedCardNumber = useCallback((value: string) => {
+    const masked = replaceTo(value, "*", 8, value.length);
+    return insertAtInterval(masked, "-", 4);
+  }, []);
 
   return { toMaskedCardNumber };
 }
