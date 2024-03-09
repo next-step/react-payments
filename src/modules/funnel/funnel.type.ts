@@ -1,4 +1,5 @@
-type DefaultStep = null;
+import { Dispatch, SetStateAction } from 'react';
+
 type DefaultSetState = () => never;
 
 /**
@@ -7,15 +8,18 @@ type DefaultSetState = () => never;
  * @property {T} step - 현재 Step
  * @property {(step: T) => void} setStep - Step 변경 함수
  */
-export interface FunnelContextProps<T> {
-  step: T | DefaultStep;
+export interface FunnelContextProps<T, D> {
+  step: T | null;
+  data?: D | null;
   setStep: ((step: T) => void) | DefaultSetState;
+  setData: Dispatch<SetStateAction<D | undefined>>;
 }
 
 export interface FunnelStepProps<T> extends React.PropsWithChildren {
   name: T;
 }
 
-export interface GetFunnelProps<T> {
+export interface GetFunnelProps<T, D> {
   initialStep: T;
+  initialData?: D;
 }

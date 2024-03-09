@@ -1,4 +1,4 @@
-import { createFunnel } from '@/components/funnel/Funnel';
+import { createFunnel } from '@/modules/funnel/Funnel';
 import { PaymentsStep } from './payments.type';
 import { STEP } from './payments.constant';
 
