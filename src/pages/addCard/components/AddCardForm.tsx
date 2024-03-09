@@ -6,6 +6,7 @@ import CardHolderNameInput from "./CardHolderNameInput";
 import CardPasswordInput from "./CardPasswordInput";
 import useCardNumberInput from "../hooks/useCardNumberInput";
 import useCardExpiredDateInput from "../hooks/useCardExpiredDateInput";
+import useCardHolderNameInput from "../hooks/useCardHolderNameInput";
 
 export default function AddCardForm() {
   const {
@@ -20,7 +21,9 @@ export default function AddCardForm() {
     handleChange: handleCardExpiredDateChange,
   } = useCardExpiredDateInput();
 
-  const [cardHolderName, setCardHolderName] = useState<string>("");
+  const { cardHolderName, handleChange: handleCardHolderNameChange } =
+    useCardHolderNameInput();
+
   const [cardSecurityCode, setCardSecurityCode] = useState<string>("");
   const [cardPassword, setCardPassword] = useState<string>("");
 
@@ -37,10 +40,10 @@ export default function AddCardForm() {
         value={displayedExpiredDate}
         onChange={handleCardExpiredDateChange}
       />
-      {/* <CardHolderNameInput
-        cardHolderName={cardHolderName}
-        setCardHolderName={setCardHolderName}
-      /> */}
+      <CardHolderNameInput
+        value={cardHolderName}
+        onChange={handleCardHolderNameChange}
+      />
       {/* <CardSecurityCodeInput cardSecurityCodeRef={cardSecurityCodeRef} />
       <CardPasswordInput
         firstLetterRef={firstLetterOfPasswordRef}

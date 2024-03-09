@@ -1,32 +1,28 @@
-import { Dispatch, SetStateAction, useCallback } from "react";
-import Input from "../../../components/input/Input";
+import Input, { InputProps } from "../../../components/input/Input";
+import InputTitle from "../../../components/input/InputTitle";
 
 const MAX_CARD_HOLDER_NAME_LENGTH = 30;
 
 interface CardHolderNameInputProps {
-  cardHolderName: string;
-  setCardHolderName: Dispatch<SetStateAction<string>>;
+  value: string;
+  onChange: InputProps["onChange"];
 }
 
 export default function CardHolderNameInput({
-  cardHolderName,
-  setCardHolderName,
+  value,
+  onChange,
 }: CardHolderNameInputProps) {
-  const handleChange = useCallback(
-    (value: string) => {
-      setCardHolderName(value);
-    },
-    [setCardHolderName]
-  );
   return (
     <Input
-      label="카드 소유자 이름(선택)"
+      variant="basic"
       placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-      // onChange={handleChange}
-      value={cardHolderName}
+      onChange={onChange}
+      value={value}
       maxLength={MAX_CARD_HOLDER_NAME_LENGTH}
     >
-      {`${cardHolderName.length}/${MAX_CARD_HOLDER_NAME_LENGTH}`}
+      <InputTitle label="카드 소유자 이름(선택)">
+        {`${value.length}/${MAX_CARD_HOLDER_NAME_LENGTH}`}
+      </InputTitle>
     </Input>
   );
 }
