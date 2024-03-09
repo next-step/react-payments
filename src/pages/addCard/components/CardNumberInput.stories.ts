@@ -15,6 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Basic: Story = {
   args: {
-    cardNumber: "1234567812345678",
+    value: "1234567812345678",
+    onChange: () => {},
   },
 };

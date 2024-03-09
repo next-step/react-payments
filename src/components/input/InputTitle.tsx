@@ -5,7 +5,7 @@ interface LabelProps {
   children?: ReactNode;
 }
 
-export default function Label({ label, children }: LabelProps) {
+export default function InputTitle({ label, children }: LabelProps) {
   return (
     <label className="input-title">
       {label}

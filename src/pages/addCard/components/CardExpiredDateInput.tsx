@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useCallback, useState } from "react";
-import BasicInput from "../../../components/input/BasicInput";
+import Input from "../../../components/input/Input";
 
 const EXPIRED_DATE_LENGTH = 6;
 
@@ -41,12 +41,12 @@ export default function CardExpiredDateInput({
   );
 
   return (
-    <BasicInput
+    <Input
       label="만료일"
       value={displayedExpiredDate}
       onChange={handleChange}
-      onKeydown={handleKeydown}
-      placeHolder="MM/YY"
+      // onKeydown={handleKeydown}
+      placeholder="MM/YY"
     />
   );
 }

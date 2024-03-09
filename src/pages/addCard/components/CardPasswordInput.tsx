@@ -1,5 +1,5 @@
 import { RefObject } from "react";
-import Label from "../../../components/input/Label";
+import InputTitle from "../../../components/input/InputTitle";
 import Input from "../../../components/input/Input";
 
 const MAX_CARD_PASSWORD_LETTER_LENGTH = 1;
@@ -16,7 +16,7 @@ export default function CardPasswordInput({
 }: CardPasswordInputProps) {
   return (
     <div className="input-container">
-      <Label label="카드 비밀번호" />
+      <InputTitle label="카드 비밀번호" />
       <div className="input-box">
         {[firstLetterRef, secondLetterRef].map((ref, index) => (
           <Input

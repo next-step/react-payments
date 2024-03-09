@@ -1,5 +1,5 @@
 import { RefObject } from "react";
-import BasicInput from "../../../components/input/BasicInput";
+import Input from "../../../components/input/Input";
 
 const MAX_CARD_SECURITY_CODE_LENGTH = 3;
 
@@ -11,9 +11,9 @@ export default function CardSecurityCodeInput({
   cardSecurityCodeRef,
 }: CardSecurityCodeInputProps) {
   return (
-    <BasicInput
+    <Input
       label="보안 코드(CVC/CVV)"
-      inputRef={cardSecurityCodeRef}
+      // inputRef={cardSecurityCodeRef}
       type="password"
       maxLength={MAX_CARD_SECURITY_CODE_LENGTH}
     />

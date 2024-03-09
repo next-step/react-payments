@@ -1,36 +1,51 @@
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useMemo, useRef, useState } from "react";
 import CardNumberInput from "./CardNumberInput";
 import CardExpiredDateInput from "./CardExpiredDateInput";
 import CardSecurityCodeInput from "./CardSecurityCodeInput";
 import CardHolderNameInput from "./CardHolderNameInput";
 import CardPasswordInput from "./CardPasswordInput";
+import useCardNumberInput from "../hooks/useCardNumberInput";
+
+const CARN_NUMBER_LENGTH = 16;
 
 export default function AddCardForm() {
   const [cardNumber, setCardNumber] = useState<string>("");
+
   const [cardExpiredDate, setCardExpiredDate] = useState<string>("");
   const [cardHolderName, setCardHolderName] = useState<string>("");
-  const cardSecurityCodeRef = useRef<HTMLInputElement>(null);
-  const firstLetterOfPasswordRef = useRef<HTMLInputElement>(null);
-  const secondLetterOfPasswordRef = useRef<HTMLInputElement>(null);
+  const [cardSecurityCode, setCardSecurityCode] = useState<string>("");
+  const [cardPassword, setCardPassword] = useState<string>("");
+
+  const { toMaskedCardNumber } = useCardNumberInput();
+
+  const displayedCardNumber = useMemo(
+    () => toMaskedCardNumber(cardNumber),
+    [cardNumber, toMaskedCardNumber]
+  );
+
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const lastInputKey = value.slice(value.length - 1);
+    console.log(value.length);
+    console.log(displayedCardNumber.length);
+    if (cardNumber.length === CARN_NUMBER_LENGTH) return;
+    if (value.length > displayedCardNumber.length) {
+      if (isNaN(Number(lastInputKey))) return;
+      setCardNumber((prev) => prev + lastInputKey);
+      return;
+    }
+    setCardNumber((prev) => prev.slice(0, cardNumber.length - 1));
+  };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("cardNumber", cardNumber);
-    console.log("cardExpiredDate", cardExpiredDate);
-    console.log("cardHolderName", cardHolderName);
-    console.log("securityCodeRef", cardSecurityCodeRef.current?.value);
-    console.log(
-      "firstLetterOfPasswordRef",
-      firstLetterOfPasswordRef.current?.value
-    );
-    console.log(
-      "secondLetterOfPasswordRef",
-      secondLetterOfPasswordRef.current?.value
-    );
   };
   return (
     <form onSubmit={handleSubmit}>
-      <CardNumberInput cardNumber={cardNumber} setCardNumber={setCardNumber} />
+      <CardNumberInput
+        value={displayedCardNumber}
+        onChange={handleCardNumberChange}
+      />
       <CardExpiredDateInput
         cardExpiredDate={cardExpiredDate}
         setCardExpiredDate={setCardExpiredDate}
@@ -39,11 +54,11 @@ export default function AddCardForm() {
         cardHolderName={cardHolderName}
         setCardHolderName={setCardHolderName}
       />
-      <CardSecurityCodeInput cardSecurityCodeRef={cardSecurityCodeRef} />
+      {/* <CardSecurityCodeInput cardSecurityCodeRef={cardSecurityCodeRef} />
       <CardPasswordInput
         firstLetterRef={firstLetterOfPasswordRef}
         secondLetterRef={secondLetterOfPasswordRef}
-      />
+      /> */}
       <button type="submit">다음</button>
     </form>
   );

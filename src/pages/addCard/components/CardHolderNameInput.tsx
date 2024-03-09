@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useCallback } from "react";
-import BasicInput from "../../../components/input/BasicInput";
+import Input from "../../../components/input/Input";
 
 const MAX_CARD_HOLDER_NAME_LENGTH = 30;
 
@@ -19,14 +19,14 @@ export default function CardHolderNameInput({
     [setCardHolderName]
   );
   return (
-    <BasicInput
+    <Input
       label="카드 소유자 이름(선택)"
-      placeHolder="카드에 표시된 이름과 동일하게 입력하세요."
-      onChange={handleChange}
+      placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+      // onChange={handleChange}
       value={cardHolderName}
       maxLength={MAX_CARD_HOLDER_NAME_LENGTH}
     >
       {`${cardHolderName.length}/${MAX_CARD_HOLDER_NAME_LENGTH}`}
-    </BasicInput>
+    </Input>
   );
 }
