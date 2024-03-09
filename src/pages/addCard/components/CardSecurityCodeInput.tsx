@@ -1,5 +1,4 @@
 import { Input, InputProps } from "../../../components/input/Input";
-import InputTitle from "../../../components/input/InputTitle";
 
 const MAX_CARD_SECURITY_CODE_LENGTH = 3;
 
@@ -19,7 +18,7 @@ export default function CardSecurityCodeInput({
       value={value}
       onChange={onChange}
       maxLength={MAX_CARD_SECURITY_CODE_LENGTH}
-      label={<InputTitle label="보안 코드(CVC/CVV)" />}
+      label={<Input.Label label="보안 코드(CVC/CVV)" />}
     />
   );
 }
