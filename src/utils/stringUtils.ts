@@ -22,9 +22,3 @@ export const insertAtInterval = (
       index !== 0 && index % interval === 0 ? `${insertStr}${str}` : str
     )
     .join("");
-
-export const insertAt = (value: string, insertStr: string, position: number) =>
-  value
-    .split("")
-    .map((str, index) => (index === position ? `${insertStr}${str}` : str))
-    .join("");

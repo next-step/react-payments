@@ -1,13 +1,14 @@
 import { useCallback, useMemo, useState } from "react";
-import { insertAt } from "../../../utils/stringUtils";
+import { insertAtInterval } from "../../../utils/stringUtils";
 
-const EXPIRED_DATE_LENGTH = 6;
+const EXPIRED_DATE_LENGTH = 4;
+const EXPIRED_MONTH_LENGTH = 2;
 
 export default function useCardExpiredDateInput() {
   const [cardExpiredDate, setCardExpiredDate] = useState("");
 
   const displayedExpiredDate = useMemo(
-    () => insertAt(cardExpiredDate, "/", 2),
+    () => insertAtInterval(cardExpiredDate, "/", EXPIRED_MONTH_LENGTH),
     [cardExpiredDate]
   );
 

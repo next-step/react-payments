@@ -1,8 +1,5 @@
-import { Dispatch, SetStateAction, useCallback, useState } from "react";
 import Input, { InputProps } from "../../../components/input/Input";
 import InputTitle from "../../../components/input/InputTitle";
-
-const EXPIRED_DATE_LENGTH = 6;
 
 interface CardExpiredDateInputProps {
   value: string;
@@ -18,7 +15,7 @@ export default function CardExpiredDateInput({
       variant="basic"
       value={value}
       onChange={onChange}
-      placeholder="MM/YYYY"
+      placeholder="MM/YY"
     >
       <InputTitle label="만료일" />
     </Input>
