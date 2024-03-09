@@ -1,5 +1,4 @@
-export { useOverlay } from './use-overlay/use-overlay'
-export { OverlayContextProvider } from './use-overlay/overlay-context'
-
+export { useOverlay } from './use-overlay'
 export { useFunnel } from './use-funnel'
 export { useUncontrolledInputState } from './use-uncontrolled-input-state'
+export { useClickOutside } from './use-click-outside'
