@@ -5,10 +5,8 @@ const CardList = () => {
       <h2>5️⃣ 카드 목록</h2>
       <div className={ui['root']}>
         <div className={`${ui['app']} ${ui['flex-column-center']}`}>
-          <div className={ui['flex-center']} flex-center>
-            <h2 className={ui['page-title']} mb-10>
-              보유 카드
-            </h2>
+          <div className={ui['flex-center']}>
+            <h2 className={`${ui['page-title']} ${ui['mb-10']}`}>보유 카드</h2>
           </div>
           <div className={ui['card-box']}>
             <div className={ui['small-card']}>
