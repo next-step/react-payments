@@ -1,7 +1,7 @@
 import { BottomSheet, BottomSheetContentProps } from '@/components/molecule/bottom-sheet'
 import * as styles from './card-type-pick-bottom-sheet.css'
-import { Text, Flex, FlexProps, FlexElements } from '@/components'
-import { CardType } from '@/types/card'
+import { Text, Flex, FlexProps } from '@/components'
+import { CardType } from '@/constants/card-type.ts'
 import { IconCheck } from '@tabler/icons-react'
 import { vars } from '@/styles'
 
@@ -27,39 +27,34 @@ export const CardTypePickBottomSheet = ({
     <BottomSheet.Root>
       <BottomSheet.Dimmer />
       <BottomSheet.Content className={styles.content} onClose={onClose}>
-        {cardTypeList.map(cardType => {
-          const { id, brandName: name, color } = cardType
-          return (
-            <CardTypeItem
-              as="button"
-              key={id}
-              name={name}
-              isSelectedCardType={selectedCardType?.id === id}
-              cardTypeColor={color}
-              onClick={handleClickCardTypeItem(cardType)}
-            />
-          )
-        })}
+        {cardTypeList.map(({ id, name, color }, idx) => (
+          <CardTypeItem
+            key={id}
+            name={name}
+            isSelectedCardType={selectedCardType?.id === id}
+            cardTypeColor={color}
+            onClick={handleClickCardTypeItem(cardTypeList[idx])}
+          />
+        ))}
       </BottomSheet.Content>
     </BottomSheet.Root>
   )
 }
 
-export type CardTypeItemProps<C extends FlexElements> = FlexProps<C> & {
+export interface CardTypeItemProps extends FlexProps {
   name: string
   isSelectedCardType?: boolean
   cardTypeColor: FlexProps['backgroundColor']
 }
 
-export const CardTypeItem = <C extends FlexElements = 'div'>({
-  as,
+export const CardTypeItem = ({
   name,
   isSelectedCardType = false,
   cardTypeColor,
   ...props
-}: CardTypeItemProps<C>) => {
+}: CardTypeItemProps) => {
   return (
-    <Flex as={as} direction="column" gap="10px" cursor="pointer" alignItems="center" {...props}>
+    <Flex direction="column" gap="10px" cursor="pointer" alignItems="center" {...props}>
       <Flex
         width="40px"
         height="40px"
