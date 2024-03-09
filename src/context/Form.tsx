@@ -1,18 +1,6 @@
-import useForm from '@/hooks/useForm';
 import { createContext, ReactNode, useContext } from 'react';
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type FormValues = Record<string, any>;
-
-type FormErrors<T extends FormValues> = {
-  [P in keyof T]: string;
-};
-
-export interface UseFormProps<T extends FormValues> {
-  initialValue: T;
-  validate: (values: T) => FormErrors<T>;
-  onSubmit: (values: T) => void;
-}
+import useForm from '@/hooks/useForm';
+import { FormValues, UseFormProps } from '@/type/formType';
 
 const FormContext = createContext({});
 
