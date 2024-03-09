@@ -1,13 +1,16 @@
-import useMasking from '../../hooks/useMasking'
+import { useContext } from 'react'
+import { CardInfoContext, UpdateCardInfoContext } from '../../context/paymentContext'
+import { checkAllMasking } from '../../utils/check'
 import { Input } from '../../stories/Input'
 
 export const CardCvc = () => {
-  const [, maskingValue, , checkAllMasking] = useMasking({ totalText: 3, number: 3, divider: 0, isMasking: true })
+  const cardInfo = useContext(CardInfoContext)
+  const updateCardInfo = useContext(UpdateCardInfoContext)
   return (
     <Input
       type="text"
-      value={maskingValue.join('-')} //
-      onChange={(e) => checkAllMasking(e.target.value)}
+      value={cardInfo.cvc ? checkAllMasking(cardInfo.cvc, cardInfo.cvc.length)?.join() : ''} //
+      onChange={(e) => updateCardInfo({ ...cardInfo, cvc: e.target.value })}
       maxLength={3}
       size="small"
       label="보안코드(CVC/CVV)"

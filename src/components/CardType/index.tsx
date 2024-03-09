@@ -1,8 +1,9 @@
 import { useContext } from 'react'
-import { UpdateCardInfoContext } from '../../context/paymentContext'
+import { CardInfoContext, UpdateCardInfoContext } from '../../context/paymentContext'
 import ui from '../../styles/index.module.css'
 
 export const CardType = ({ closeModal }: { closeModal: () => void }) => {
+  const cardInfo = useContext(CardInfoContext)
   const updateCardInfo = useContext(UpdateCardInfoContext)
 
   return (
@@ -15,7 +16,7 @@ export const CardType = ({ closeModal }: { closeModal: () => void }) => {
               <button
                 className={ui['modal-item-name']}
                 onClick={() => {
-                  updateCardInfo({ cardType: value })
+                  updateCardInfo({ ...cardInfo, cardType: value })
                   closeModal
                 }}
               >
