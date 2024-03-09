@@ -18,8 +18,8 @@ export default function AddCardForm() {
   } = useCardNumberInput();
 
   const {
-    cardExpiredDate,
-    displayedExpiredDate,
+    value: cardExpiredDate,
+    displayedValue: displayedExpiredDate,
     handleChange: handleCardExpiredDateChange,
   } = useCardExpiredDateInput();
 
