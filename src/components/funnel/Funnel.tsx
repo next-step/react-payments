@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from 'react';
-import { ContainerProps } from '@/types';
 import { FUNNEL } from './funnel.constant';
 import {
   GetFunnelProps,
@@ -32,7 +31,7 @@ export const createFunnel = <StepKey,>({
     return null;
   };
 
-  const FunnelContainer = ({ children }: ContainerProps) => {
+  const FunnelContainer = ({ children }: React.PropsWithChildren) => {
     const [step, setStep] = useState<StepKey>(initialStep);
 
     return (

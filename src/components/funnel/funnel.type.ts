@@ -1,5 +1,3 @@
-import { ContainerProps } from '@/types';
-
 type DefaultStep = null;
 type DefaultSetState = () => never;
 
@@ -14,7 +12,7 @@ export interface FunnelContextProps<T> {
   setStep: ((step: T) => void) | DefaultSetState;
 }
 
-export interface FunnelStepProps<T> extends ContainerProps {
+export interface FunnelStepProps<T> extends React.PropsWithChildren {
   name: T;
 }
 
