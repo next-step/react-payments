@@ -41,15 +41,11 @@ const formMachine = setup({
     cardName: {
       on: {
         NEXT_STEP: {
-          target: 'finish',
           actions: 'UPDATE',
         },
       },
-      description: '카드 이름 입력',
-    },
-    finish: {
       type: 'final',
-      description: '카드 등록 완료',
+      description: '카드 이름 입력',
     },
   },
 });

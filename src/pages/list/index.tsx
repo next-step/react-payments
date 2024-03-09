@@ -1,12 +1,29 @@
-import { Link } from 'react-router-dom';
-import { getLocalStorage } from '@/utils';
+import { Link, useNavigate } from 'react-router-dom';
+import { getLocalStorage, objToMap, setLocalStorage } from '@/utils';
 import { CARD_LIST_KEY } from '@/constants/key';
 import { Card, Header } from '@/components';
 import * as styles from './index.css';
 import type { FormItems } from '@/types/form';
+import { useState } from 'react';
 
 const List = () => {
-  const datas: FormItems[] = getLocalStorage(CARD_LIST_KEY) || [];
+  const navigate = useNavigate();
+  const [datas, setDatas] = useState<FormItems[]>(
+    getLocalStorage(CARD_LIST_KEY) || []
+  );
+
+  const handleClickCard = (data: FormItems) => {
+    navigate('/new', { state: { data: objToMap(data) } });
+  };
+  const handleClickDelete = (cardNum: string) => {
+    const deleted = datas.filter(
+      (item) =>
+        `${item.cardNumber1}${item.cardNumber2}${item.cardNumber3}${item.cardNumber4}` !==
+        cardNum
+    );
+    setLocalStorage(CARD_LIST_KEY, deleted);
+    setDatas(deleted);
+  };
   return (
     <>
       <Header>
@@ -14,8 +31,15 @@ const List = () => {
       </Header>
       <main className={styles.flexGrow}>
         <ul className={styles.listContainer}>
-          {datas.map(
-            ({
+          <Link
+            to='/new'
+            className={styles.link}
+            aria-label='카드 추가 페이지로 이동'
+          >
+            +
+          </Link>
+          {datas.map((data) => {
+            const {
               cardNumber1,
               cardNumber2,
               cardNumber3,
@@ -24,36 +48,30 @@ const List = () => {
               expireDateMonth,
               expireDateYear,
               cardName,
-            }) => {
-              const cardNum = `${cardNumber1}${cardNumber2}${cardNumber3}${cardNumber4}`;
-              return (
-                <li key={cardNum} className={styles.listItem}>
-                  <div>{cardName}</div>
-                  <Card
-                    size='small'
-                    cardNumber={[
-                      cardNumber1,
-                      cardNumber2,
-                      cardNumber3,
-                      cardNumber4,
-                    ]}
-                    owner={cardOwner || ''}
-                    expirationDate={{
-                      month: expireDateMonth,
-                      year: expireDateYear,
-                    }}
-                  />
-                </li>
-              );
-            }
-          )}
-          <Link
-            to='/new'
-            className={styles.link}
-            aria-label='카드 추가 페이지로 이동'
-          >
-            +
-          </Link>
+            } = data;
+            const cardNum = `${cardNumber1}${cardNumber2}${cardNumber3}${cardNumber4}`;
+            return (
+              <li key={cardNum} className={styles.listItem}>
+                <div>{cardName}</div>
+                <Card
+                  onClick={() => handleClickCard(data)}
+                  size='small'
+                  cardNumber={[
+                    cardNumber1,
+                    cardNumber2,
+                    cardNumber3,
+                    cardNumber4,
+                  ]}
+                  owner={cardOwner || ''}
+                  expirationDate={{
+                    month: expireDateMonth,
+                    year: expireDateYear,
+                  }}
+                />
+                <button onClick={() => handleClickDelete(cardNum)}>삭제</button>
+              </li>
+            );
+          })}
         </ul>
       </main>
     </>

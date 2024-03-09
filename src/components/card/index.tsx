@@ -12,6 +12,7 @@ interface CardProps {
     month: string;
     year: string;
   };
+  onClick?: () => void;
 }
 const Chip = ({ size }: Required<Pick<CardProps, 'size'>>) => (
   <div className={styles.chip[size]} />
@@ -22,6 +23,7 @@ const Card = ({
   cardNumber,
   owner,
   expirationDate,
+  onClick,
 }: CardProps) => {
   const firstCardNumber = cardNumber[0];
   const [cardBrand, setCardBrand] = useState<CardBrand | 'UNKNOWN'>('UNKNOWN');
@@ -54,7 +56,7 @@ const Card = ({
   const className = cn([styles.cardBox[size], styles.cardColor[cardBrand]]);
 
   return (
-    <div className={className}>
+    <div className={className} onClick={onClick}>
       <span className={styles.brand}>{cardBrand || ' '}</span>
       <Chip size={size} />
       <span style={{ textAlign: 'center' }}>{fullCardNumber}</span>

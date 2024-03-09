@@ -5,7 +5,6 @@ import * as styles from './cardInfo.css';
 import Arrow from '@/assets/arrow.svg?react';
 import type { FormEvent } from 'react';
 import type { FormItems, FormItemKeys, FormItemValues } from '@/types/form';
-
 interface CardInfoProps {
   next: (data: Map<Partial<FormItemKeys>, FormItemValues<FormItems>>) => void;
 }
@@ -14,6 +13,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const [formItems, setFormItems] = useState<HTMLFormControlsCollection>();
   const [formData, setFormData] = useState(new Map());
+
   useEffect(() => {
     if (!formRef.current) return;
     const formItems = formRef.current.elements;
