@@ -1,15 +1,15 @@
 import { useState, ChangeEvent } from "react";
 
-const useValidationInput = (
+const useNumberValidation = (
   initialstate: "" | number,
   onChange: (input: "" | number) => void,
   validation: (input: number) => boolean
 ) => {
   const [value, setValue] = useState<number | "">(initialstate);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log("e", isNaN(Number(e.target.value)), e.target.value);
     const newValue = Number(e.target.value);
-
-    if (isNaN(Number(e.target.value))) {
+    if (isNaN(Number(newValue)) === true) {
       setValue(value);
       onChange(value);
       return;
@@ -31,4 +31,4 @@ const useValidationInput = (
   };
 };
 
-export default useValidationInput;
+export default useNumberValidation;

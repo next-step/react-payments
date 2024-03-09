@@ -15,13 +15,16 @@ const CardNumber = () => {
           value={section1.value}
           onChange={section1.handleChange}
           maxLength={4}
+          ref={focus}
         />
+        <span> </span>
         <input
           className="input-basic"
           type="number"
           value={section2.value}
           onChange={section2.handleChange}
           maxLength={4}
+          ref={focus}
         />
         <input
           className="input-basic"
@@ -29,6 +32,7 @@ const CardNumber = () => {
           value={section3.value}
           onChange={section3.handleChange}
           maxLength={4}
+          ref={focus}
         />
         <input
           className="input-basic"
@@ -36,6 +40,7 @@ const CardNumber = () => {
           value={section4.value}
           onChange={section4.handleChange}
           maxLength={4}
+          ref={focus}
         />
       </div>
     </div>
