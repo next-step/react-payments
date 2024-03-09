@@ -1,17 +1,27 @@
-import { createContext } from 'react';
-import type { Dispatch } from 'react';
-import { setup } from 'xstate';
+import { setup, assign } from 'xstate';
+import type { FormItemKeys, FormItemValues, FormItems } from '@/types/form';
 
-export const formMachine = setup({
+const formMachine = setup({
   types: {
     context: {} as {
-      totalFormData: Map<string, any>;
+      totalFormData: Map<FormItemKeys, FormItemValues<FormItems>>;
     },
-    events: {
-      type: 'NEXT_STEP',
+    events: {} as {
+      type: 'NEXT_STEP';
+      data?: Map<Partial<FormItemKeys>, FormItemValues<FormItems>>;
     },
   },
-  actions: {},
+  actions: {
+    UPDATE: assign({
+      totalFormData: ({ context, event }) => {
+        if (!event.data) {
+          return context.totalFormData;
+        }
+        const newFormData = new Map([...context.totalFormData, ...event.data]);
+        return newFormData;
+      },
+    }),
+  },
 }).createMachine({
   id: 'form',
   initial: 'cardInfo',
@@ -20,20 +30,28 @@ export const formMachine = setup({
   },
   states: {
     cardInfo: {
-      on: { NEXT_STEP: 'cardName' },
+      on: {
+        NEXT_STEP: {
+          target: 'cardName',
+          actions: 'UPDATE',
+        },
+      },
+      description: '카드 정보 입력',
     },
-    cardName: {},
+    cardName: {
+      on: {
+        NEXT_STEP: {
+          target: 'finish',
+          actions: 'UPDATE',
+        },
+      },
+      description: '카드 이름 입력',
+    },
+    finish: {
+      type: 'final',
+      description: '카드 등록 완료',
+    },
   },
 });
 
-type FormContext = {
-  totalFormData: Map<string, any>;
-  setTotalFormData: Dispatch<React.SetStateAction<Map<string, unknown>>>;
-};
-
-const FormContext = createContext<FormContext>({
-  totalFormData: new Map(),
-  setTotalFormData: () => {},
-});
-
-export default FormContext;
+export default formMachine;

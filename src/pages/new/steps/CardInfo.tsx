@@ -1,21 +1,19 @@
-import { useEffect, useState, useRef, useContext } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Header, Card } from '@/components';
-import FormContext from '@/pages/new/context';
 import * as styles from './cardInfo.css';
 import Arrow from '@/assets/arrow.svg?react';
 import type { FormEvent } from 'react';
+import type { FormItems, FormItemKeys, FormItemValues } from '@/types/form';
 
 interface CardInfoProps {
-  next: () => void;
+  next: (data: Map<Partial<FormItemKeys>, FormItemValues<FormItems>>) => void;
 }
 const CardInfo = ({ next }: CardInfoProps) => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement | null>(null);
   const [formItems, setFormItems] = useState<HTMLFormControlsCollection>();
   const [formData, setFormData] = useState(new Map());
-  const { totalFormData, setTotalFormData } = useContext(FormContext);
-
   useEffect(() => {
     if (!formRef.current) return;
     const formItems = formRef.current.elements;
@@ -61,9 +59,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
 
   const handleSubmitForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const totalNewData = new Map([...totalFormData, ...formData]);
-    setTotalFormData(totalNewData);
-    next();
+    next(formData);
   };
   return (
     <>
