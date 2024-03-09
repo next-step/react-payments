@@ -9,27 +9,30 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom'
 
 type StepperProps = { children: ReactNode }
-type StepProps = { children: ReactNode; name: string }
+type StepProps<T extends readonly string[]> = {
+  children: Exclude<ReactNode, null | undefined>
+  name: T[number]
+}
 
 type StepperContextProps = [string, (step: string) => void]
 const StepperContext = createContext<StepperContextProps>(['', () => {}])
 
-export const useStep = (steps: string[]) => {
+export const useStep = <T extends readonly string[]>(steps: T) => {
   const location = useLocation()
   const navigate = useNavigate()
   const stepQuery = new URLSearchParams(location.search).get('step')
 
   const initialStep = stepQuery || steps[0]
-  const [currentStep, setCurrentStep] = useState(initialStep)
+  const [currentStep, setCurrentStep] = useState<string>(initialStep)
 
   useEffect(() => {
-    if (stepQuery && steps.includes(stepQuery)) {
+    if (stepQuery && steps.includes(stepQuery as T[number])) {
       setCurrentStep(stepQuery)
     }
   }, [location.search, steps, stepQuery])
 
   const setStep = useCallback(
-    (step: string) => {
+    (step: T[number]) => {
       if (!steps.includes(step)) {
         return
       }
@@ -46,7 +49,7 @@ export const useStep = (steps: string[]) => {
     </StepperContext.Provider>
   )
 
-  const Step = ({ name, children }: StepProps) => {
+  const Step = <U extends T>({ name, children }: StepProps<U>) => {
     const [step] = useContext(StepperContext)
     return step === name ? children : null
   }
