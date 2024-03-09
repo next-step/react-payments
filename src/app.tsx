@@ -1,5 +1,5 @@
 import { useFunnel } from '@/hooks/use-funnel'
-import { CardInputContextProvider } from '@/steps/card-register/contexts/card-input-context'
+import { CardInputContextProvider } from '@/contexts/card-input-context'
 import { CardInputFormStep } from '@/steps/card-register'
 import { CardListStep } from './steps/card-list'
 import { CardRegisterCompleteStep } from '@/steps/card-register-complete'

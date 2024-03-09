@@ -1,5 +1,5 @@
 import { PropsWithChildren, createContext, useContext } from 'react'
-import { useCardInputState } from '@/hooks/use-card-input-state'
+import { useCardInputState } from '@/steps/card-register/hooks/use-card-input-state'
 
 export interface CardInputContextValue {
   cardInput: ReturnType<typeof useCardInputState>['cardInput']
