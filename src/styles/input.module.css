@@ -1,5 +1,19 @@
 .input-container {
   margin: 16px 0;
+
+  p {
+    display: flex;
+    margin: 0;
+    justify-content: space-between;
+    align-items: center;
+  }
+  span {
+    font-size: 12px;
+    color: #525252;
+  }
+  div {
+    margin: 0;
+  }
 }
 
 .input-box {
