@@ -1,4 +1,5 @@
 import { Input, InputProps } from "../../../components/input/Input";
+import { SlQuestion } from "react-icons/sl";
 
 const MAX_CARD_SECURITY_CODE_LENGTH = 3;
 
@@ -19,6 +20,8 @@ export default function CardSecurityCodeInput({
       onChange={onChange}
       maxLength={MAX_CARD_SECURITY_CODE_LENGTH}
       label={<Input.Label label="보안 코드(CVC/CVV)" />}
-    />
+    >
+      <SlQuestion size={28} style={{ paddingLeft: 8 }} />
+    </Input>
   );
 }
