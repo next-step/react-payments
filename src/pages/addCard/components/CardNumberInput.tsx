@@ -1,5 +1,4 @@
-import Input, { InputProps } from "../../../components/input/Input";
-import InputTitle from "../../../components/input/InputTitle";
+import { Input, InputProps } from "../../../components/input/Input";
 
 interface CardNumberInputProps {
   value: string;
@@ -11,8 +10,11 @@ export default function CardNumberInput({
   onChange,
 }: CardNumberInputProps) {
   return (
-    <Input variant="basic" value={value} onChange={onChange}>
-      <InputTitle label="카드번호" />
-    </Input>
+    <Input
+      variant="basic"
+      value={value}
+      onChange={onChange}
+      label={<Input.Label label="카드번호" />}
+    />
   );
 }

@@ -1,5 +1,4 @@
-import Input, { InputProps } from "../../../components/input/Input";
-import InputTitle from "../../../components/input/InputTitle";
+import { Input, InputProps } from "../../../components/input/Input";
 
 interface CardExpiredDateInputProps {
   value: string;
@@ -17,8 +16,7 @@ export default function CardExpiredDateInput({
       onChange={onChange}
       placeholder="MM/YY"
       width="40%"
-    >
-      <InputTitle label="만료일" />
-    </Input>
+      label={<Input.Label label="만료일" />}
+    />
   );
 }

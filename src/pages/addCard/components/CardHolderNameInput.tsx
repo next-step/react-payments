@@ -1,5 +1,4 @@
-import Input, { InputProps } from "../../../components/input/Input";
-import InputTitle from "../../../components/input/InputTitle";
+import { Input, InputProps } from "../../../components/input/Input";
 
 const MAX_CARD_HOLDER_NAME_LENGTH = 30;
 
@@ -19,10 +18,11 @@ export default function CardHolderNameInput({
       onChange={onChange}
       value={value}
       maxLength={MAX_CARD_HOLDER_NAME_LENGTH}
-    >
-      <InputTitle label="카드 소유자 이름(선택)">
-        {`${value.length}/${MAX_CARD_HOLDER_NAME_LENGTH}`}
-      </InputTitle>
-    </Input>
+      label={
+        <Input.Label label="카드 소유자 이름(선택)">
+          {`${value.length}/${MAX_CARD_HOLDER_NAME_LENGTH}`}
+        </Input.Label>
+      }
+    />
   );
 }
