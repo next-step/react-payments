@@ -6,15 +6,15 @@ export const PinInput = ({ mask, ...props }: TPinInputProps) => {
     <>
       <Input
         className="pin-input"
-        {...props}
         maxLength={1}
         {...(mask && { type: "password" })}
         style={{
-          width: "2.5rem",
-          height: "2.5rem",
+          width: "45px",
+          height: "45px",
           padding: 0,
           textAlign: "center",
         }}
+        {...props}
       />
     </>
   );

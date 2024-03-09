@@ -1,8 +1,6 @@
 import { Card } from "@/components/Card";
-import { Input } from "@/components/atom/forms/Input";
 import { REGEX } from "@/constants/regex";
-import { FormInput } from "@/pages/RegisterCard/components/FormInput";
-import { addDashAndMask, formatCardExpireDay } from "@/utils";
+import { addDashAndMask } from "@/utils";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -81,8 +79,7 @@ export const RegisterCard = () => {
             expireDay={cardInfo.expireDay}
             name={cardInfo.name}
           />
-          <Input />
-          <div className="input-container">
+          {/* <div className="input-container">
             <FormInput
               label="카드 번호"
               inputStyle={{ color: "#0f9c82" }}
@@ -123,8 +120,8 @@ export const RegisterCard = () => {
               inputStyle={{ textAlign: "center", color: "#0f9c82" }}
               onChange={(value: string) => handleChange("securityCode", value)}
             />
-          </div>
-          <div className="input-container">
+          </div> */}
+          {/* <div className="input-container">
             <span className="input-title">카드 비밀번호</span>
             <PasswordInputContainer>
               <FormInput
@@ -159,7 +156,7 @@ export const RegisterCard = () => {
                 type="password"
               />
             </PasswordInputContainer>
-          </div>
+          </div> */}
           <Link to={"/complete/register"}>
             <button className="button-box">
               <span className="button-text">다음</span>
