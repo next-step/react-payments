@@ -37,8 +37,8 @@ const Stepper = () => {
             formActorRef.send({ type: 'NEXT_STEP', data });
             const newData = new Map([...totalFormData, ...data]);
             const newList = [
-              ...(getLocalStorage(CARD_LIST_KEY) || []),
               mapToObj(newData),
+              ...(getLocalStorage(CARD_LIST_KEY) || []),
             ];
             setLocalStorage(CARD_LIST_KEY, newList);
             navigate('/');
