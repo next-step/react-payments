@@ -3,7 +3,6 @@ type InputType = "basic" | "underline" | "empty";
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   variant?: InputType;
-  label: string;
   children?: React.ReactNode;
 }
 

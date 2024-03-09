@@ -11,7 +11,7 @@ export default function CardNumberInput({
   onChange,
 }: CardNumberInputProps) {
   return (
-    <Input variant="basic" label="카드 번호" value={value} onChange={onChange}>
+    <Input variant="basic" value={value} onChange={onChange}>
       <InputTitle label="카드번호" />
     </Input>
   );
