@@ -10,13 +10,15 @@ export default function CardExpiredDateInput({
   onChange,
 }: CardExpiredDateInputProps) {
   return (
-    <Input
-      variant="basic"
-      value={value}
-      onChange={onChange}
-      placeholder="MM/YY"
-      width="40%"
-      label={<Input.Label label="만료일" />}
-    />
+    <Input.Wrapper>
+      <Input
+        variant="basic"
+        value={value}
+        onChange={onChange}
+        placeholder="MM/YY"
+        width="40%"
+        label={<Input.Label label="만료일" />}
+      />
+    </Input.Wrapper>
   );
 }

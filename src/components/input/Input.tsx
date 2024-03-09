@@ -16,12 +16,13 @@ function InputMain({
   ...rest
 }: InputProps) {
   return (
-    <div className="input-container" style={{ width: width }}>
+    <>
       {label}
       <div
         style={{
           display: children ? "flex" : "block",
           alignItems: "center",
+          width,
         }}
       >
         <div className="input-box">
@@ -29,7 +30,7 @@ function InputMain({
         </div>
         {children}
       </div>
-    </div>
+    </>
   );
 }
 
@@ -47,4 +48,12 @@ function Label({ label, children }: LabelProps) {
   );
 }
 
-export const Input = Object.assign(InputMain, { Label });
+interface WrapperProps {
+  children: React.ReactNode;
+}
+
+function Wrapper({ children }: WrapperProps) {
+  return <div className="input-container">{children}</div>;
+}
+
+export const Input = Object.assign(InputMain, { Label, Wrapper });

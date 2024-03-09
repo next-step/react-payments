@@ -13,15 +13,17 @@ export default function CardSecurityCodeInput({
   onChange,
 }: CardSecurityCodeInputProps) {
   return (
-    <Input
-      variant="basic"
-      type="password"
-      value={value}
-      onChange={onChange}
-      maxLength={MAX_CARD_SECURITY_CODE_LENGTH}
-      label={<Input.Label label="보안 코드(CVC/CVV)" />}
-    >
-      <SlQuestion size={28} style={{ paddingLeft: 8 }} />
-    </Input>
+    <Input.Wrapper>
+      <Input
+        variant="basic"
+        type="password"
+        value={value}
+        onChange={onChange}
+        maxLength={MAX_CARD_SECURITY_CODE_LENGTH}
+        label={<Input.Label label="보안 코드(CVC/CVV)" />}
+      >
+        <SlQuestion size={28} style={{ paddingLeft: 8 }} />
+      </Input>
+    </Input.Wrapper>
   );
 }
