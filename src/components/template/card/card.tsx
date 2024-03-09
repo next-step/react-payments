@@ -2,13 +2,14 @@ import { Flex, FlexProps } from '@/components/atom/flex'
 import { Text } from '@/components/atom/text'
 import * as styles from './card.css'
 import { createDisplayCardCode } from '@/utils/create-display-card-code'
+import { CardType } from '@/constants/card-type.ts'
 
 export interface CardProps extends FlexProps {
-  cardType?: string
   cardSize?: styles.Size
   cardCode: string
   cardName: string
   cardExpDate: string
+  cardType?: CardType
 }
 
 export const Card = ({
@@ -24,10 +25,17 @@ export const Card = ({
   const displayCardCode =
     cardCode.length === 0 ? '\n' : createDisplayCardCode({ value: cardCode, separator: ' ' })
 
+  const displayCardBackgroundColor = cardType?.color ?? 'gray100'
+
   return (
-    <Flex direction="column" className={styles.CardContainer({ size: cardSize })} {...flexProps}>
+    <Flex
+      direction="column"
+      className={styles.CardContainer({ size: cardSize })}
+      backgroundColor={displayCardBackgroundColor}
+      {...flexProps}
+    >
       <Flex alignItems="center" className={styles.CardHeader({ size: cardSize })}>
-        <Text variant="body3">{cardType}&nbsp;</Text>
+        <Text variant="body3">{cardType?.name}&nbsp;</Text>
       </Flex>
       <Flex
         className={styles.CardBody({ size: cardSize })}

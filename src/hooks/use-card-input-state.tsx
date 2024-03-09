@@ -22,9 +22,10 @@ const INITIAL_CARD_STATE: CardInputState = {
 export const useCardInputState = () => {
   const [cardInput, setCardInput] = useState<CardInputState>(INITIAL_CARD_STATE)
 
-  const handleChangeCardInput = (name: keyof CardInputState) => (value: string) => {
-    setCardInput(prev => ({ ...prev, [name]: value }))
-  }
+  const handleChangeCardInput =
+    (name: keyof CardInputState) => (value: CardInputState[typeof name]) => {
+      setCardInput(prev => ({ ...prev, [name]: value }))
+    }
 
   const resetCardInput = () => {
     setCardInput(INITIAL_CARD_STATE)
