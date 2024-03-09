@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { ReactNode } from "react";
-import { findComponentFromChildren } from "../../../common/utils";
 import { CardSize } from "../../utils/style";
 import {
 	CardBottom,
@@ -22,32 +21,19 @@ interface CardProps {
 }
 
 const Card = ({ size, children }: CardProps) => {
-	const cardNameComponent = findComponentFromChildren(children, CardCompany);
-	const chipComponent = findComponentFromChildren(children, Chip);
-	const cardNumberComponent = findComponentFromChildren(children, CardNumber);
-	const nameComponent = findComponentFromChildren(children, Name);
-	const expirationDateComponent = findComponentFromChildren(
-		children,
-		ExpirationDate
-	);
 	return (
 		<CardProvider size={size}>
 			<CardBox>
-				<CardWrapper size={size}>
-					<CardTop>{cardNameComponent}</CardTop>
-					<CardMiddle>{chipComponent}</CardMiddle>
-					<CardBottom>
-						{cardNumberComponent}
-						<CardBottomInfo>
-							{nameComponent}
-							{expirationDateComponent}
-						</CardBottomInfo>
-					</CardBottom>
-				</CardWrapper>
+				<CardWrapper size={size}>{children}</CardWrapper>
 			</CardBox>
 		</CardProvider>
 	);
 };
+
+Card.Top = CardTop;
+Card.Middle = CardMiddle;
+Card.Bottom = CardBottom;
+Card.BottomInfo = CardBottomInfo;
 
 Card.CardCompany = CardCompany;
 Card.Chip = Chip;
