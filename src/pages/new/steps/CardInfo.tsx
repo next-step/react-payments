@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Input, Button, Header, Card } from '@/components';
+import { Form, Input, Button, Header, Card, Footer } from '@/components';
 import * as styles from './cardInfo.css';
 import Arrow from '@/assets/arrow.svg?react';
 import type { FormEvent } from 'react';
@@ -108,7 +108,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
                       id={`cardNumber${i}`}
                       name={`cardNumber${i}`}
                       className={styles.textCenter}
-                      type={i > 2 ? 'password' : 'text'}
+                      htmpType={i > 2 ? 'password' : 'text'}
                       inputMode='numeric'
                       minLength={4}
                       maxLength={4}
@@ -130,7 +130,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
                 id='expireDateMonth'
                 name='expireDateMonth'
                 className={styles.textCenter}
-                type='number'
+                htmpType='number'
                 inputMode='numeric'
                 placeholder='MM'
                 maxLength={2}
@@ -151,7 +151,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
               </span>
               <Input
                 required
-                type='number'
+                htmpType='number'
                 inputMode='numeric'
                 placeholder='YY'
                 name='expireDateYear'
@@ -173,7 +173,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
             <Input
               id='cardOwner'
               name='cardOwner'
-              type='text'
+              htmpType='text'
               placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
               maxLength={30}
             />
@@ -185,7 +185,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
                 id='cvc'
                 name='cvc'
                 className={styles.cvcInputElem}
-                type='password'
+                htmpType='password'
                 inputMode='numeric'
                 maxLength={3}
                 data-rule={'^[0-9]{3}$'}
@@ -203,7 +203,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
                     id={`password${i}`}
                     name={`password${i}`}
                     className={styles.textCenter}
-                    type='password'
+                    htmpType='password'
                     inputMode='numeric'
                     maxLength={1}
                     data-rule={'^[0-9]$'}
@@ -215,15 +215,11 @@ const CardInfo = ({ next }: CardInfoProps) => {
               <div className={styles.passwordPinBox}>•</div>
             </div>
           </Form.Item>
-          <div className={styles.textEnd}>
-            <Button
-              htmlType='submit'
-              type='text'
-              className={styles.textPrimary}
-            >
+          <Footer className={styles.textEnd}>
+            <Button htmlType='submit' type='text'>
               다음
             </Button>
-          </div>
+          </Footer>
         </Form>
       </main>
     </>

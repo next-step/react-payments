@@ -15,6 +15,10 @@ const meta: Meta<typeof Input> = {
     // showCount: { control: 'boolean' },
     type: {
       control: 'select',
+      options: ['default', 'underline'],
+    },
+    htmpType: {
+      control: 'select',
       options: ['text', 'number', 'password', 'tel', 'email', 'url'],
     },
     inputMode: {

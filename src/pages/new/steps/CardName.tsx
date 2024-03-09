@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
-import { Button, Form, Card } from '@/components';
+import { Button, Form, Card, Input, Footer } from '@/components';
 import { FormMachineContext } from '@/pages/new';
+import * as styles from './cardName.css';
 import type { FormItems, FormItemKeys, FormItemValues } from '@/types/form';
 
 interface CardNameProps {
@@ -27,7 +28,7 @@ const CardName = ({ next }: CardNameProps) => {
 
   return (
     <main>
-      <h1>카드 등록이 완료되었습니다.</h1>
+      <p>카드 등록이 완료되었습니다.</p>
       <Card
         size='large'
         cardNumber={[
@@ -54,14 +55,20 @@ const CardName = ({ next }: CardNameProps) => {
         }}
       >
         <Form.Item>
-          <input
+          <Input
+            block
+            type='underline'
             placeholder='카드 별칭 (선택)'
             value={cardName}
             maxLength={10}
             onChange={(e) => setCardName(e.target.value)}
           />
-          <Button htmlType='submit'>확인</Button>
         </Form.Item>
+        <Footer className={styles.textEnd}>
+          <Button htmlType='submit' type='text'>
+            확인
+          </Button>
+        </Footer>
       </Form>
     </main>
   );

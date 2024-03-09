@@ -32,8 +32,10 @@ export const buttonType = styleVariants({
   text: [
     buttonBase,
     {
+      color: '#04C09E',
       ':hover': {
         backgroundColor: 'rgba(0, 0, 0, 0.1)',
+        color: 'white',
       },
     },
   ],
