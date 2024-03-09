@@ -1,5 +1,6 @@
 import { INPUT } from '@/components/input/input.constant';
 import { Validation } from '@/utils/validation';
+import { InputFields } from '../card.type';
 
 export const CARD_NUMBER: InputFields = {
   FIELDS: {
@@ -50,19 +51,3 @@ export const CARD_NUMBER: InputFields = {
 
   TITLE: '카드 번호',
 };
-
-interface InputField {
-  id: string;
-  type: string;
-  validate?: (field: string) => boolean;
-  maxLength?: number;
-  placeholder?: string;
-  readOnly?: boolean;
-  required?: boolean;
-  defaultValue?: string;
-}
-
-export interface InputFields {
-  FIELDS: Record<string, InputField>;
-  TITLE: string;
-}

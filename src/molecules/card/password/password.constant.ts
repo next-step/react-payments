@@ -1,20 +1,24 @@
 import { INPUT } from '@/components/input/input.constant';
 import { Validation } from '@/utils/validation';
-import { InputFields } from '../number/cardNumber.constant';
+import { InputFields } from '../card.type';
 
 export const PASSWORD: InputFields = {
   FIELDS: {
     FIRST: {
       id: 'passwordFirst',
       type: INPUT.TYPE.TEXT,
-      validate: Validation.password,
+      validate: (field: string) => {
+        return Validation.checkLength(field, 1);
+      },
       maxLength: 1,
     },
 
     SECOND: {
       id: 'passwordSecond',
       type: INPUT.TYPE.TEXT,
-      validate: Validation.password,
+      validate: (field: string) => {
+        return Validation.checkLength(field, 1);
+      },
       maxLength: 1,
     },
 

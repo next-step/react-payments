@@ -7,7 +7,9 @@ export const SECURITY_CODE = {
       id: 'securityCode',
       placeholder: 'CVC',
       type: INPUT.TYPE.PASSWORD,
-      validate: Validation.securityCode,
+      validate: (field: string) => {
+        return Validation.checkLength(field, 3);
+      },
       maxLength: 3,
     },
   },

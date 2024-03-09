@@ -1,6 +1,6 @@
 import { INPUT } from '@/components/input/input.constant';
 import { Validation } from '@/utils/validation';
-import { InputFields } from '../number/cardNumber.constant';
+import { InputFields } from '../card.type';
 
 export const EXPIRE_DATE: InputFields = {
   FIELDS: {
@@ -8,14 +8,26 @@ export const EXPIRE_DATE: InputFields = {
       id: 'expireMonth',
       placeholder: 'MM',
       type: INPUT.TYPE.TEXT,
-      validate: Validation.expireDateMonth,
+      validate: (field: string) => {
+        return (
+          Validation.checkLength(field, 2) &&
+          Number(field) > 0 &&
+          Number(field) < 13
+        );
+      },
       maxLength: 2,
     },
     YEAR: {
       id: 'expireYear',
       placeholder: 'YY',
       type: INPUT.TYPE.TEXT,
-      validate: Validation.expireDateYear,
+      validate: (field: string) => {
+        return (
+          Validation.checkLength(field, 2) &&
+          Number(field) > 0 &&
+          Number(field) < 32
+        );
+      },
       maxLength: 2,
     },
   },
