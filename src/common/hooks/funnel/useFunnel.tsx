@@ -7,9 +7,9 @@ import {
 	useMemo
 } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { NonEmptyArray } from "./models";
+import { ValidArray } from "./models";
 
-interface FunnelProps<Steps extends NonEmptyArray<string>> {
+interface FunnelProps<Steps extends ValidArray<string>> {
 	steps: Steps;
 	step: Steps[number];
 	children:
@@ -17,24 +17,24 @@ interface FunnelProps<Steps extends NonEmptyArray<string>> {
 		| ReactElement<StepProps<Steps>>;
 }
 
-interface StepProps<Steps extends NonEmptyArray<string>> {
+interface StepProps<Steps extends ValidArray<string>> {
 	name: Steps[number];
 	onEnter?: () => void;
 	children: React.ReactNode;
 }
 
-type RouteFunnelProps<Steps extends NonEmptyArray<string>> = Omit<
+type RouteFunnelProps<Steps extends ValidArray<string>> = Omit<
 	FunnelProps<Steps>,
 	"steps" | "step"
 >;
 
-type FunnelComponent<Steps extends NonEmptyArray<string>> = ((
+type FunnelComponent<Steps extends ValidArray<string>> = ((
 	props: RouteFunnelProps<Steps>
 ) => JSX.Element) & {
 	Step: (props: StepProps<Steps>) => JSX.Element;
 };
 
-const Funnel = <Steps extends NonEmptyArray<string>>({
+const Funnel = <Steps extends ValidArray<string>>({
 	steps,
 	step,
 	children
@@ -51,7 +51,7 @@ const Funnel = <Steps extends NonEmptyArray<string>>({
 	return <>{targetStep}</>;
 };
 
-const Step = <Steps extends NonEmptyArray<string>>({
+const Step = <Steps extends ValidArray<string>>({
 	name,
 	onEnter,
 	children
@@ -65,7 +65,7 @@ const Step = <Steps extends NonEmptyArray<string>>({
 	return <>{children}</>;
 };
 
-export const useFunnel = <Steps extends NonEmptyArray<string>>(
+export const useFunnel = <Steps extends ValidArray<string>>(
 	steps: Steps
 ): readonly [FunnelComponent<Steps>, (step: Steps[number]) => void] => {
 	const navigate = useNavigate();
