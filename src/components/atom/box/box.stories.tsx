@@ -14,7 +14,6 @@ export default meta
 type Story = StoryObj<typeof Box>
 
 export const Default: Story = {
-  render: args => <Box {...args} />,
   args: {
     children: 'Box - Create Whatever you need',
     as: 'button',
