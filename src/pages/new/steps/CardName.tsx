@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { Button, Form, Card } from '@/components';
 import { FormMachineContext } from '@/pages/new';
 import type { FormItems, FormItemKeys, FormItemValues } from '@/types/form';
@@ -8,11 +8,23 @@ interface CardNameProps {
 }
 
 const CardName = ({ next }: CardNameProps) => {
+  const [cardName, setCardName] = useState('');
   const totalFormData = FormMachineContext.useSelector(
     (state) => state.context.totalFormData
   );
 
-  const [cardName, setCardName] = useState('');
+  const cardBrand = useMemo(() => {
+    const cardNumer1 = totalFormData.get('cardNumber1');
+    if (!cardNumer1) {
+      return 'UNKNOWN';
+    }
+    const firstNumber = cardNumer1[0];
+    if (firstNumber === '9' || firstNumber === '0') {
+      return 'UNKNOWN';
+    }
+    return `BRAND${cardNumer1[0]}`;
+  }, [totalFormData]);
+
   return (
     <main>
       <h1>카드 등록이 완료되었습니다.</h1>
@@ -34,15 +46,16 @@ const CardName = ({ next }: CardNameProps) => {
       <Form
         onSubmit={(e) => {
           e.preventDefault();
-          const myMap = new Map([
-            ['cardName', cardName || '카드브랜드'],
-          ]) as Map<Partial<FormItemKeys>, FormItemValues<FormItems>>;
+          const myMap = new Map([['cardName', cardName || cardBrand]]) as Map<
+            Partial<FormItemKeys>,
+            FormItemValues<FormItems>
+          >;
           next(myMap);
         }}
       >
         <Form.Item>
           <input
-            placeholder='카드 이름'
+            placeholder='카드 별칭 (선택)'
             value={cardName}
             maxLength={10}
             onChange={(e) => setCardName(e.target.value)}

@@ -44,7 +44,7 @@ const Card = ({
       return;
     }
     const firstNum = firstCardNumber[0];
-    if (firstNum === '9') {
+    if (firstNum === '9' || firstNum === '0') {
       setCardBrand('UNKNOWN');
       return;
     }
