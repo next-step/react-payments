@@ -1,9 +1,9 @@
 import AddCard from "@/Card/Add/AddCard";
 import CardList from "@/Card/List/CardList";
 import SuccessAddCard from "@/Card/Success/SuccessAddCard";
-import { NEW_CARD } from "@/Card/constants";
 import { CardInfo } from "@/Card/types/card";
-import { extractNonEmptyArrayKeys } from "@/common/hooks/funnel/models";
+import { makeNewCard } from "@/Card/utils";
+import { extractNonEmptyArrayKeys } from "@/common/hooks/funnel";
 import { useFunnel } from "@/common/hooks/funnel/useFunnel";
 import navigationPath, {
 	CARD_LIST_FUNNEL_KEY
@@ -18,7 +18,9 @@ export interface CardFunnelProps {
 
 const CardFunnel = () => {
 	const [cardList, setCardList] = useState<CardInfo[]>(TEMP_CARD_LIST);
-	const [newCard, setNewCard] = useState<CardInfo>(NEW_CARD);
+	const [newCard, setNewCard] = useState<CardInfo>(
+		makeNewCard(cardList.length)
+	);
 
 	const [Funnel, setStep] = useFunnel(
 		extractNonEmptyArrayKeys(navigationPath.ADD_CARD_FUNNEL)
@@ -50,7 +52,7 @@ const CardFunnel = () => {
 					onNext={() => {
 						setStep("CARD_LIST");
 						setCardList([...cardList, newCard]);
-						setNewCard(NEW_CARD);
+						setNewCard(makeNewCard(cardList.length));
 					}}
 					onChange={onChangeCardInput}
 				/>

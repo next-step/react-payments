@@ -3,7 +3,7 @@ import { useArgs } from "@storybook/client-api";
 import { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
 import { ChangeEvent } from "react";
-import { NEW_CARD } from "../constants";
+import { makeNewCard } from "../utils";
 import AddCard, { AddCardProps } from "./AddCard";
 
 // Storybook 메타 설정
@@ -30,7 +30,7 @@ const DefaultRender = (args: AddCardProps) => {
 // 기본 스토리
 export const Default: Story = {
 	args: {
-		card: NEW_CARD,
+		card: makeNewCard(0),
 		onNext: () => {
 			alert("다음으로");
 		}
