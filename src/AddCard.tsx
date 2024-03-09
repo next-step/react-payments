@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react'
 import { CardInfoContext } from './context/paymentContext'
-import { Button } from './stories/Button'
 import { CardBox, CardCvc, CardName, CardNumber, CardPassword, CardType, CardDate } from './components'
 import ui from './styles/index.module.css'
 
@@ -26,16 +25,14 @@ const AddCard = ({ onBack, onNext }: AddCardProps) => {
           <CardCvc />
           <CardPassword />
           <div className={ui['button-box']}>
-            <Button
-              primary
-              size="small"
-              backgroundColor="#efefef"
+            <button
               onClick={() => {
                 if (cardInfo.cardType) onNext()
                 else setIsShowModal((state) => !state)
               }}
-              label="다음"
-            ></Button>
+            >
+              다음
+            </button>
           </div>
         </div>
       </div>
