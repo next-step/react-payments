@@ -10,7 +10,10 @@ import {
   Card,
 } from '@/components'
 import { FormEventHandler } from 'react'
-import { useCardInputContext } from '@/steps/card-register/contexts/card-input-context'
+import { useCardInputContext } from '@/contexts/card-input-context.tsx'
+import { useOverlay } from '@/hooks'
+import { CardTypePickBottomSheet } from '@/components'
+import { CARD_TYPE } from '@/constants/card-type.ts'
 
 export interface CardInputFormStepProps {
   onClickPrev: () => void
@@ -19,18 +22,37 @@ export interface CardInputFormStepProps {
 
 export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepProps) => {
   const {
-    cardInput: { cardCode, cardExpDate, cardName, cardCVC, cardPin },
+    cardInput: { cardCode, cardExpDate, cardName, cardCVC, cardPin, cardType },
     setCardInput,
+    resetCardInput,
   } = useCardInputContext()
+
+  const [openBottomSheet, closeBottomSheet] = useOverlay()
+
+  const handleClickPrev = () => {
+    resetCardInput()
+    onClickPrev()
+  }
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault()
     onSubmit()
   }
 
+  const handleClickCard = () => {
+    openBottomSheet(
+      <CardTypePickBottomSheet
+        cardTypeList={Object.values(CARD_TYPE)}
+        onClose={closeBottomSheet}
+        selectedCardType={cardType}
+        onSelectCardType={setCardInput('cardType')}
+      />,
+    )
+  }
+
   return (
     <Flex direction="column" width="100%" height="100vh">
-      <Header title="카드 추가" onClickPrev={onClickPrev} />
+      <Header title="카드 추가" onClickPrev={handleClickPrev} />
       <Flex
         as="main"
         direction="column"
@@ -41,7 +63,13 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
         onSubmit={handleSubmit}
       >
         <Flex justifyContent="center" marginBottom="32px">
-          <Card cardCode={cardCode} cardName={cardName} cardExpDate={cardExpDate} />
+          <Card
+            cardCode={cardCode}
+            cardName={cardName}
+            cardExpDate={cardExpDate}
+            cardType={cardType}
+            onClick={handleClickCard}
+          />
         </Flex>
         <Flex id="card-register-form" as="form" direction="column" width="100%" gap="36px">
           <CardCodeInput

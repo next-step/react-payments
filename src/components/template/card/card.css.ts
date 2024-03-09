@@ -4,9 +4,9 @@ import { vars } from '@/styles'
 
 export const CardContainer = recipe({
   base: {
-    background: vars.color.gray100,
     color: vars.color.gray500,
     borderRadius: vars.space['4px'],
+    cursor: 'pointer',
   },
   variants: {
     size: {
