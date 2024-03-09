@@ -3,17 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { useFunnel } from '@/hooks';
 import { CardInfo, CardName } from './';
 import { FormMachineContext } from '@/pages/new';
+import { setLocalStorage, getLocalStorage, mapToObj } from '@/utils';
+import { CARD_LIST_KEY } from '@/constants/key';
 import type { FormItems, FormItemKeys, FormItemValues } from '@/types/form';
 
 const Stepper = () => {
-  const formState = FormMachineContext.useSelector((state) => state);
-  const step = formState.value;
-  const totalFormData = FormMachineContext.useSelector(
-    (state) => state.context.totalFormData
+  const formActorRef = FormMachineContext.useActorRef();
+  const { value: step, context } = FormMachineContext.useSelector(
+    (state) => state
   );
+  const { totalFormData } = context;
   const navigate = useNavigate();
   const [Funnel, setStep] = useFunnel(step);
-  const formActorRef = FormMachineContext.useActorRef();
 
   useEffect(() => {
     setStep(step);
@@ -34,14 +35,13 @@ const Stepper = () => {
             data: Map<Partial<FormItemKeys>, FormItemValues<FormItems>>
           ) => {
             formActorRef.send({ type: 'NEXT_STEP', data });
-            const newData = data
-              ? new Map([...totalFormData, ...data])
-              : totalFormData;
-            navigate('/', {
-              state: {
-                data: newData,
-              },
-            });
+            const newData = new Map([...totalFormData, ...data]);
+            const newList = [
+              ...(getLocalStorage(CARD_LIST_KEY) || []),
+              mapToObj(newData),
+            ];
+            setLocalStorage(CARD_LIST_KEY, newList);
+            navigate('/');
           }}
         />
       </Funnel.Step>
