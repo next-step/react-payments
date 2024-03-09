@@ -16,6 +16,7 @@ export default function CardExpiredDateInput({
       value={value}
       onChange={onChange}
       placeholder="MM/YY"
+      width="40%"
     >
       <InputTitle label="만료일" />
     </Input>
