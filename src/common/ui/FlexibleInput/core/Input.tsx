@@ -1,5 +1,5 @@
+import useUniqueId from "@/common/context/useUniqueId";
 import { useEffect, useRef } from "react";
-import { useUniqueId } from "../../../hooks";
 import CommonInput, { InputProps as CommonInputProps } from "../../Input/Input";
 import useFlexibleInputContext from "../provider/useFlexibleInputContext";
 
