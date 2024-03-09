@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { insertAtInterval, replaceTo } from "../../../utils/stringUtils";
-import useDisplayedInput from "./useDisplayedInput";
+import useDisplayedInput from "../../../hooks/useDisplayedInput";
 
 const CARN_NUMBER_LENGTH = 16;
 const CARD_NUMBER_HYPHEN_INTERVAL = 4;

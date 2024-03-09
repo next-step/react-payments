@@ -7,8 +7,8 @@ import CardPasswordInput from "./CardPasswordInput";
 import useCardNumberInput from "../hooks/useCardNumberInput";
 import useCardExpiredDateInput from "../hooks/useCardExpiredDateInput";
 import useCardHolderNameInput from "../hooks/useCardHolderNameInput";
-import useInput from "../hooks/useInput";
-import useDisplayedInput from "../hooks/useDisplayedInput";
+import useInput from "../../../hooks/useInput";
+import useDisplayedInput from "../../../hooks/useDisplayedInput";
 
 export default function AddCardForm() {
   const {
