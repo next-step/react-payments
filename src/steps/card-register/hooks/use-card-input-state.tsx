@@ -8,18 +8,24 @@ export interface CardInputState {
   cardPin: string
 }
 
+const INITIAL_CARD_STATE: CardInputState = {
+  cardCode: '',
+  cardExpDate: '',
+  cardName: '',
+  cardCVC: '',
+  cardPin: '',
+}
+
 export const useCardInputState = () => {
-  const [cardInput, setCardInput] = useState<CardInputState>({
-    cardCode: '',
-    cardExpDate: '',
-    cardName: '',
-    cardCVC: '',
-    cardPin: '',
-  })
+  const [cardInput, setCardInput] = useState<CardInputState>(INITIAL_CARD_STATE)
 
   const handleChangeCardInput = (name: keyof CardInputState) => (value: string) => {
     setCardInput(prev => ({ ...prev, [name]: value }))
   }
 
-  return [cardInput, handleChangeCardInput] as const
+  const resetCardInput = () => {
+    setCardInput(INITIAL_CARD_STATE)
+  }
+
+  return { cardInput, setCardInput: handleChangeCardInput, resetCardInput } as const
 }

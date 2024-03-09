@@ -2,17 +2,18 @@ import { PropsWithChildren, createContext, useContext } from 'react'
 import { useCardInputState } from '@/steps/card-register/hooks/use-card-input-state'
 
 export interface CardInputContextValue {
-  cardInput: ReturnType<typeof useCardInputState>[0]
-  setCardInput: ReturnType<typeof useCardInputState>[1]
+  cardInput: ReturnType<typeof useCardInputState>['cardInput']
+  setCardInput: ReturnType<typeof useCardInputState>['setCardInput']
+  resetCardInput: ReturnType<typeof useCardInputState>['resetCardInput']
 }
 
 export const CardInputContext = createContext<CardInputContextValue | null>(null)
 
 export const CardInputContextProvider = ({ children }: PropsWithChildren) => {
-  const [cardInput, setCardInput] = useCardInputState()
+  const { cardInput, setCardInput, resetCardInput } = useCardInputState()
 
   return (
-    <CardInputContext.Provider value={{ cardInput, setCardInput }}>
+    <CardInputContext.Provider value={{ cardInput, setCardInput, resetCardInput }}>
       {children}
     </CardInputContext.Provider>
   )
