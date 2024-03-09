@@ -1,10 +1,9 @@
-import { Flex } from '@/components/atom/flex'
+import { Flex, FlexProps } from '@/components/atom/flex'
 import { Text } from '@/components/atom/text'
 import * as styles from './card.css'
 import { createDisplayCardCode } from '@/utils/create-display-card-code'
-import { LayoutProps } from '@/types'
 
-export interface CardProps extends LayoutProps {
+export interface CardProps extends FlexProps {
   cardType?: string
   cardSize?: styles.Size
   cardCode: string
@@ -18,7 +17,7 @@ export const Card = ({
   cardCode,
   cardName,
   cardExpDate,
-  ...layoutProps
+  ...flexProps
 }: CardProps) => {
   const displayCardName = cardName.length === 0 ? 'NAME' : cardName
   const displayCardExpDate = cardExpDate.length === 0 ? 'MM/YY' : cardExpDate
@@ -26,7 +25,7 @@ export const Card = ({
     cardCode.length === 0 ? '\n' : createDisplayCardCode({ value: cardCode, separator: ' ' })
 
   return (
-    <Flex direction="column" className={styles.CardContainer({ size: cardSize })} {...layoutProps}>
+    <Flex direction="column" className={styles.CardContainer({ size: cardSize })} {...flexProps}>
       <Flex alignItems="center" className={styles.CardHeader({ size: cardSize })}>
         <Text variant="body3">{cardType}&nbsp;</Text>
       </Flex>
