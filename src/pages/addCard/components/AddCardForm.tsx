@@ -7,6 +7,7 @@ import CardPasswordInput from "./CardPasswordInput";
 import useCardNumberInput from "../hooks/useCardNumberInput";
 import useCardExpiredDateInput from "../hooks/useCardExpiredDateInput";
 import useCardHolderNameInput from "../hooks/useCardHolderNameInput";
+import useInput from "../hooks/useInput";
 
 export default function AddCardForm() {
   const {
@@ -21,10 +22,13 @@ export default function AddCardForm() {
     handleChange: handleCardExpiredDateChange,
   } = useCardExpiredDateInput();
 
-  const { cardHolderName, handleChange: handleCardHolderNameChange } =
-    useCardHolderNameInput();
+  const { value: cardHolderName, handleChange: handleCardHolderNameChange } =
+    useInput();
+  const {
+    value: cardSecurityCode,
+    handleChange: handleCardSecurityCodeChange,
+  } = useInput();
 
-  const [cardSecurityCode, setCardSecurityCode] = useState<string>("");
   const [cardPassword, setCardPassword] = useState<string>("");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -44,8 +48,11 @@ export default function AddCardForm() {
         value={cardHolderName}
         onChange={handleCardHolderNameChange}
       />
-      {/* <CardSecurityCodeInput cardSecurityCodeRef={cardSecurityCodeRef} />
-      <CardPasswordInput
+      <CardSecurityCodeInput
+        value={cardSecurityCode}
+        onChange={handleCardSecurityCodeChange}
+      />
+      {/* <CardPasswordInput
         firstLetterRef={firstLetterOfPasswordRef}
         secondLetterRef={secondLetterOfPasswordRef}
       /> */}
