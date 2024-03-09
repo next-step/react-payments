@@ -60,3 +60,9 @@
 
   border-bottom: 1px solid #383838;
 }
+
+.input-row-container {
+  display: flex;
+  gap: 8px;
+  align-items: end;
+}
