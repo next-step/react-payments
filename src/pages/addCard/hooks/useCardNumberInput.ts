@@ -1,12 +1,12 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback } from "react";
 import { insertAtInterval, replaceTo } from "../../../utils/stringUtils";
+import useDisplayedInput from "./useDisplayedInput";
 
 const CARN_NUMBER_LENGTH = 16;
 const CARD_NUMBER_HYPHEN_INTERVAL = 4;
 const CARD_NUMBER_NOT_MASKED_LENGTH = 8;
 
 export default function useCardNumberInput() {
-  const [cardNumber, setCardNumber] = useState("");
   const toMaskedCardNumber = useCallback((value: string) => {
     const masked = replaceTo(
       value,
@@ -17,30 +17,10 @@ export default function useCardNumberInput() {
     return insertAtInterval(masked, "-", CARD_NUMBER_HYPHEN_INTERVAL);
   }, []);
 
-  const displayedCardNumber = useMemo(
-    () => toMaskedCardNumber(cardNumber),
-    [cardNumber, toMaskedCardNumber]
-  );
+  const { value, displayedValue, handleChange } = useDisplayedInput({
+    toDisplayed: toMaskedCardNumber,
+    maxLength: CARN_NUMBER_LENGTH,
+  });
 
-  const deleteCardNumber = useCallback(
-    () => setCardNumber((prev) => prev.slice(0, cardNumber.length - 1)),
-    [cardNumber]
-  );
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const lastInputKey = value.slice(value.length - 1);
-
-    const isBackspace = value.length < displayedCardNumber.length;
-    if (isBackspace) {
-      deleteCardNumber();
-      return;
-    }
-
-    if (isNaN(Number(lastInputKey))) return;
-    if (cardNumber.length === CARN_NUMBER_LENGTH) return;
-    setCardNumber((prev) => prev + lastInputKey);
-  };
-
-  return { cardNumber, displayedCardNumber, handleChange };
+  return { value, displayedValue, handleChange };
 }
