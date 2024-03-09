@@ -1,5 +1,5 @@
 import { Card } from "@/components/Card";
-import { Input } from "@/components/primitive/Input";
+import { Input } from "@/components/atom/forms/Input";
 import { REGEX } from "@/constants/regex";
 import { FormInput } from "@/pages/RegisterCard/components/FormInput";
 import { addDashAndMask, formatCardExpireDay } from "@/utils";
@@ -81,7 +81,7 @@ export const RegisterCard = () => {
             expireDay={cardInfo.expireDay}
             name={cardInfo.name}
           />
-
+          <Input />
           <div className="input-container">
             <FormInput
               label="카드 번호"
