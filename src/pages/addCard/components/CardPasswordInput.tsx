@@ -1,45 +1,45 @@
-import { RefObject } from "react";
-import InputTitle from "../../../components/input/InputTitle";
-import Input from "../../../components/input/Input";
+import { Input, InputProps } from "../../../components/input/Input";
+import { GoDotFill } from "react-icons/go";
+import Dot from "./Dot";
 
-const MAX_CARD_PASSWORD_LETTER_LENGTH = 1;
-const MASKED_CARD_PASSWORD_LETTER = "*";
+const INPUT_WIDTH = "40px";
+const INPUT_MAX_LENGTH = 1;
 
 interface CardPasswordInputProps {
-  firstLetterRef: RefObject<HTMLInputElement>;
-  secondLetterRef: RefObject<HTMLInputElement>;
+  firstValue: string;
+  secondValue: string;
+  onFirstValueChange: InputProps["onChange"];
+  onSecondValueChange: InputProps["onChange"];
 }
 
 export default function CardPasswordInput({
-  firstLetterRef,
-  secondLetterRef,
+  firstValue,
+  secondValue,
+  onFirstValueChange,
+  onSecondValueChange,
 }: CardPasswordInputProps) {
   return (
-    <div className="input-container">
-      <InputTitle label="카드 비밀번호" />
-      <div className="input-box">
-        {[firstLetterRef, secondLetterRef].map((ref, index) => (
-          <Input
-            key={`${Date()}-${index}`}
-            style="basic"
-            inputRef={ref}
-            maxLength={MAX_CARD_PASSWORD_LETTER_LENGTH}
-            type="password"
-          />
-        ))}
-        {Array(2)
-          .fill(MASKED_CARD_PASSWORD_LETTER)
-          .map((letter, index) => (
-            <Input
-              key={`${Date()}-${index}`}
-              style="empty"
-              value={letter}
-              maxLength={MAX_CARD_PASSWORD_LETTER_LENGTH}
-              type="password"
-              readOnly
-            />
-          ))}
-      </div>
-    </div>
+    <Input.Wrapper>
+      <Input.Label label="카드 비밀번호" />
+      <Input
+        variant="basic"
+        value={firstValue}
+        onChange={onFirstValueChange}
+        type="password"
+        maxLength={INPUT_MAX_LENGTH}
+        width={INPUT_WIDTH}
+      >
+        <Input
+          variant="basic"
+          value={secondValue}
+          onChange={onSecondValueChange}
+          type="password"
+          maxLength={INPUT_MAX_LENGTH}
+          width={INPUT_WIDTH}
+        />
+        <Dot width={INPUT_WIDTH} color="#94dacd" />
+        <Dot width={INPUT_WIDTH} color="#94dacd" />
+      </Input>
+    </Input.Wrapper>
   );
 }

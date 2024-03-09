@@ -1,14 +1,12 @@
-import { FormEvent, useState } from "react";
-import CardNumberInput from "./CardNumberInput";
-import CardExpiredDateInput from "./CardExpiredDateInput";
-import CardSecurityCodeInput from "./CardSecurityCodeInput";
-import CardHolderNameInput from "./CardHolderNameInput";
-import CardPasswordInput from "./CardPasswordInput";
-import useCardNumberInput from "../hooks/useCardNumberInput";
-import useCardExpiredDateInput from "../hooks/useCardExpiredDateInput";
-import useCardHolderNameInput from "../hooks/useCardHolderNameInput";
+import { FormEvent } from "react";
 import useInput from "../../../hooks/useInput";
-import useDisplayedInput from "../../../hooks/useDisplayedInput";
+import useCardExpiredDateInput from "../hooks/useCardExpiredDateInput";
+import useCardNumberInput from "../hooks/useCardNumberInput";
+import CardExpiredDateInput from "./CardExpiredDateInput";
+import CardHolderNameInput from "./CardHolderNameInput";
+import CardNumberInput from "./CardNumberInput";
+import CardPasswordInput from "./CardPasswordInput";
+import CardSecurityCodeInput from "./CardSecurityCodeInput";
 
 export default function AddCardForm() {
   const {
@@ -30,7 +28,15 @@ export default function AddCardForm() {
     handleChange: handleCardSecurityCodeChange,
   } = useInput();
 
-  const [cardPassword, setCardPassword] = useState<string>("");
+  const {
+    value: firstCardPassword,
+    handleChange: handleFirstCardPasswordChange,
+  } = useInput();
+
+  const {
+    value: secondCardPassword,
+    handleChange: handleSecondCardPasswordChange,
+  } = useInput();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,10 +59,12 @@ export default function AddCardForm() {
         value={cardSecurityCode}
         onChange={handleCardSecurityCodeChange}
       />
-      {/* <CardPasswordInput
-        firstLetterRef={firstLetterOfPasswordRef}
-        secondLetterRef={secondLetterOfPasswordRef}
-      /> */}
+      <CardPasswordInput
+        firstValue={firstCardPassword}
+        secondValue={secondCardPassword}
+        onFirstValueChange={handleFirstCardPasswordChange}
+        onSecondValueChange={handleSecondCardPasswordChange}
+      />
       <button type="submit">다음</button>
     </form>
   );
