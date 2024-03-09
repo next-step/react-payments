@@ -16,18 +16,19 @@ function InputMain({
   ...rest
 }: InputProps) {
   return (
-    <div
-      className="input-container"
-      style={{
-        width: width,
-        display: children ? "flex" : "block",
-      }}
-    >
+    <div className="input-container" style={{ width: width }}>
       {label}
-      <div className="input-box">
-        <input className={`input-${variant}`} {...rest} />
+      <div
+        style={{
+          display: children ? "flex" : "block",
+          alignItems: "center",
+        }}
+      >
+        <div className="input-box">
+          <input className={`input-${variant}`} {...rest} />
+        </div>
+        {children}
       </div>
-      {children}
     </div>
   );
 }
