@@ -1,0 +1,40 @@
+.result__container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.result__description {
+  margin-bottom: 70px;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.result__card {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.result__check {
+  width: 100%;
+  margin-top: 172px;
+  text-align: end;
+}
+
+.result__check_btn {
+  border: none;
+  background-color: transparent;
+  font-size: 14px;
+  font-weight: 700;
+  color: #04c09e;
+}
+
+.result__name {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}

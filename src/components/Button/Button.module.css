@@ -1,0 +1,16 @@
+.basic {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.non_outline {
+  border: none;
+  background-color: transparent;
+  color: #04c09e;
+}
+
+.outline {
+  border: none;
+  color: white;
+  background-color: #04c09e;
+}

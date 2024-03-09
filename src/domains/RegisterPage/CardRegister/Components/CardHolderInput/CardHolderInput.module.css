@@ -1,0 +1,8 @@
+.word_count {
+  position: absolute;
+  top: -17px;
+  right: 0px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+}
