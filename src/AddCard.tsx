@@ -4,11 +4,11 @@ import { Button } from './stories/Button'
 import { CardBox, CardCvc, CardName, CardNumber, CardPassword, CardType, CardDate } from './components'
 import ui from './styles/index.module.css'
 
-type StepProps = {
+type AddCardProps = {
   onBack: () => void
   onNext: () => void
 }
-const AddCard = ({ onBack, onNext }: StepProps) => {
+const AddCard = ({ onBack, onNext }: AddCardProps) => {
   const cardInfo = useContext(CardInfoContext)
   const [isShowModal, setIsShowModal] = useState(false)
 
