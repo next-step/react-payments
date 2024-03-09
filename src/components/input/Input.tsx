@@ -22,10 +22,10 @@ function InputMain({
         style={{
           display: children ? "flex" : "block",
           alignItems: "center",
-          width,
+          gap: children ? "8px" : "0",
         }}
       >
-        <div className="input-box">
+        <div className="input-box" style={{ width }}>
           <input className={`input-${variant}`} {...rest} />
         </div>
         {children}

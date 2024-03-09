@@ -21,8 +21,9 @@ export default function CardSecurityCodeInput({
         onChange={onChange}
         maxLength={MAX_CARD_SECURITY_CODE_LENGTH}
         label={<Input.Label label="보안 코드(CVC/CVV)" />}
+        width="40%"
       >
-        <SlQuestion size={28} style={{ paddingLeft: 8 }} />
+        <SlQuestion size={28} />
       </Input>
     </Input.Wrapper>
   );
