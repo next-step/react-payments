@@ -1,13 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFunnel } from '@/hooks';
 import FormContext from './context';
 import { CardInfo, CardName } from './steps';
+import { formMachine } from './context';
+import { useMachine } from '@xstate/react';
 
 const New = () => {
   const navigate = useNavigate();
   const [totalFormData, setTotalFormData] = useState(new Map());
-  const [Funnel, setStep] = useFunnel('cardInfo');
+  const [state, send] = useMachine(formMachine);
+  const step = state.value;
+  const [Funnel, setStep] = useFunnel(step);
+
+  useEffect(() => {
+    setStep(step);
+  }, [step, setStep]);
 
   return (
     <FormContext.Provider
@@ -18,7 +26,7 @@ const New = () => {
     >
       <Funnel>
         <Funnel.Step name='cardInfo'>
-          <CardInfo next={() => setStep('cardName')} />
+          <CardInfo next={() => send({ type: 'NEXT_STEP' })} />
         </Funnel.Step>
         <Funnel.Step name='cardName'>
           <CardName
