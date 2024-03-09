@@ -49,6 +49,9 @@ export const properties = {
   whiteSpace: ['normal', 'nowrap', 'pre', 'pre-line', 'pre-wrap', 'initial', 'inherit'],
   wordBreak: ['normal', 'break-all', 'keep-all', 'break-word'],
   wordWrap: ['normal', 'break-word', 'initial', 'inherit'],
+
+  // other props
+  cursor: ['auto', 'default', 'none', 'pointer'],
 } as const
 
 export type Properties = typeof properties

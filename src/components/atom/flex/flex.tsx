@@ -59,6 +59,8 @@ interface FlexStyleProps {
   borderBottomLeftRadius?: AtomicProps['borderBottomLeftRadius']
   /** css border-bottom-right-radius property */
   borderBottomRightRadius?: AtomicProps['borderBottomRightRadius']
+  /** css cursor property */
+  cursor?: AtomicProps['cursor']
 }
 
 export type FlexProps<C extends FlexElements = 'div'> = PolymorphicComponentPropWithRef<
