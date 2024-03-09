@@ -8,7 +8,13 @@ export interface CardRegisterCompleteStepProps {
 export const CardRegisterCompleteStep = ({ onClickConfirm }: CardRegisterCompleteStepProps) => {
   const {
     cardInput: { cardName, cardExpDate, cardCode },
+    resetCardInput,
   } = useCardInputContext()
+
+  const handleclickConfirm = () => {
+    resetCardInput()
+    onClickConfirm()
+  }
 
   return (
     <Flex width="100%" height="100vh" direction="column">
@@ -27,7 +33,7 @@ export const CardRegisterCompleteStep = ({ onClickConfirm }: CardRegisterComplet
       </Flex>
 
       <Flex justifyContent="flex-end" paddingX="24px" paddingY="32px" marginTop="auto">
-        <Text as="button" variant="body1" color="aqua" onClick={onClickConfirm}>
+        <Text as="button" variant="body1" color="aqua" onClick={handleclickConfirm}>
           확인
         </Text>
       </Flex>
