@@ -1,9 +1,12 @@
 import { TInputProps } from "@/types/input";
+import { forwardRef } from "react";
 import styled from "styled-components";
 
-export const Input = ({ variant = "default", ...props }: TInputProps) => {
-  return <InputComponent {...props} variant={variant} />;
-};
+export const Input = forwardRef<HTMLInputElement, TInputProps>(
+  ({ variant = "default", ...props }, ref) => {
+    return <InputComponent {...props} variant={variant} ref={ref} />;
+  }
+);
 
 const InputComponent = styled.input<{ variant: TInputProps["variant"] }>`
   width: 100%;

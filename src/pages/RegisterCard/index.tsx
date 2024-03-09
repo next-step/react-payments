@@ -1,5 +1,6 @@
 import { Card } from "@/components/Card";
 import { REGEX } from "@/constants/regex";
+import { CardNumberInput } from "@/pages/RegisterCard/components/CardNumberInput";
 import { addDashAndMask } from "@/utils";
 import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -79,6 +80,7 @@ export const RegisterCard = () => {
             expireDay={cardInfo.expireDay}
             name={cardInfo.name}
           />
+          <CardNumberInput />
           {/* <div className="input-container">
             <FormInput
               label="카드 번호"
