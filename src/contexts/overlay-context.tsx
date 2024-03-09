@@ -1,5 +1,6 @@
 import {
   createContext,
+  Fragment,
   PropsWithChildren,
   ReactNode,
   useCallback,
@@ -47,7 +48,9 @@ export const OverlayContextProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <OverlayContext.Provider value={contextValue}>
-      {overlay.map(({ element: OverlayElement }) => OverlayElement)}
+      {overlay.map(({ element: OverlayElement }, key) => (
+        <Fragment key={key}>{OverlayElement}</Fragment>
+      ))}
       {children}
     </OverlayContext.Provider>
   )
