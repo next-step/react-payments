@@ -1,4 +1,4 @@
-import { useOverlayContext } from '@/hooks/use-overlay/overlay-context.tsx'
+import { useOverlayContext } from '@/contexts/overlay-context'
 
 let overlayId = 0
 export const useOverlay = () => {
