@@ -4,14 +4,6 @@ import { UpdateCardInfoContext } from '../../context/paymentContext'
 import { Input } from '../../stories/Input'
 import ui from '../../styles/index.module.css'
 
-export type TInputProps = {
-  number?: number //-로 묶일 자리수
-  divider: number //마스킹할 자리수
-  placeholder?: string
-  totalText: number //총 자리수
-  isMasking?: boolean
-  maxLength?: number
-}
 export const CardNumber = () => {
   const [, masking, checkPartMasking] = useMasking({
     totalText: 19,

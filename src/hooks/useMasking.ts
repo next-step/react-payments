@@ -1,7 +1,13 @@
 import { useCallback, useState } from 'react'
-import { TInputProps } from '../components'
-
-const useMasking = (props: Partial<TInputProps>) => {
+export type InputProps = {
+  number?: number //-로 묶일 자리수
+  divider: number //마스킹할 자리수
+  placeholder?: string
+  totalText: number //총 자리수
+  isMasking?: boolean
+  maxLength?: number
+}
+const useMasking = (props: Partial<InputProps>) => {
   const [masking, setMasking] = useState<Array<String>>([])
   const [originValue, setOriginValue] = useState('')
 
