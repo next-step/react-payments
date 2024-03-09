@@ -10,7 +10,7 @@ export const CardNumber = ({ formMethods }: FormMethodsProps) => {
     amount: Object.values(CARD_NUMBER.FIELDS).length,
   });
 
-  const fieldKeys = Object.values(CARD_NUMBER.FIELDS).map(({ id }) => id);
+  const fieldKeys = Object.values(CARD_NUMBER.FIELDS).map(({ name }) => name);
   const fieldsFulfilled = Object.values(fieldKeys).map((key) => !errors[key]);
   const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
   const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
@@ -25,13 +25,13 @@ export const CardNumber = ({ formMethods }: FormMethodsProps) => {
         }}
       >
         {Object.values(CARD_NUMBER.FIELDS).map(
-          ({ id, type, validate, maxLength }, fieldIndex) => (
+          ({ name, type, validate, maxLength }, fieldIndex) => (
             <Input
-              key={`${id}_${fieldIndex}`}
+              key={name}
               type={type}
               className={`w-25 ${optionalClassName}`}
               ref={autoFocusRefs[fieldIndex]}
-              {...register(id, {
+              {...register(name, {
                 maxLength,
                 validate,
                 onChange: (value: string) => {

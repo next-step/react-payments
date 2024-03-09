@@ -12,7 +12,7 @@ export const Password = ({ formMethods }: FormMethodsProps) => {
 
   const fieldKeys = Object.values(PASSWORD.FIELDS)
     .filter(({ readOnly }) => !readOnly)
-    .map(({ id }) => id);
+    .map(({ name }) => name);
   const fieldsFulfilled = Object.values(fieldKeys).map((key) => !errors[key]);
   const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
   const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
@@ -22,14 +22,14 @@ export const Password = ({ formMethods }: FormMethodsProps) => {
       <Input.Title>{PASSWORD.TITLE}</Input.Title>
       {Object.values(PASSWORD.FIELDS).map(
         (
-          { id, type, validate, maxLength, readOnly, defaultValue },
+          { name, type, validate, maxLength, readOnly, defaultValue },
           fieldIndex
         ) => (
           <Input
-            key={id}
+            key={name}
             type={type}
             ref={autoFocusRefs[fieldIndex]}
-            {...register(id, {
+            {...register(name, {
               maxLength,
               validate,
               readOnly,

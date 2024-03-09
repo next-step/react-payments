@@ -6,12 +6,12 @@ import { INPUT } from '@/components/input/input.constant';
 export const OwnerName = ({ formMethods }: FormMethodsProps) => {
   const { register, values, errors } = formMethods;
 
-  const fieldKeys = Object.values(OWNER_NAME.FIELDS).map(({ id }) => id);
+  const fieldKeys = Object.values(OWNER_NAME.FIELDS).map(({ name }) => name);
   const fieldsFulfilled = Object.values(fieldKeys).map((key) => !errors[key]);
   const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
   const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
 
-  const ownerNameLength = values[OWNER_NAME.FIELDS.OWNER_NAME.id]?.length;
+  const ownerNameLength = values[OWNER_NAME.FIELDS.OWNER_NAME.name]?.length;
 
   return (
     <Input.Container>
@@ -23,13 +23,13 @@ export const OwnerName = ({ formMethods }: FormMethodsProps) => {
       </div>
       <Input.Box>
         {Object.values(OWNER_NAME.FIELDS).map(
-          ({ id, type, placeholder, maxLength }) => (
+          ({ name, type, placeholder, maxLength }) => (
             <Input
-              key={id}
+              key={name}
               type={type}
               placeholder={placeholder}
               className={optionalClassName}
-              {...register(id, {
+              {...register(name, {
                 maxLength,
                 onChange: (value: string) =>
                   value.replace(INPUT.REGEX.ALPHABET, ''),

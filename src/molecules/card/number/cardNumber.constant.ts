@@ -5,7 +5,7 @@ import { InputFields } from '../card.type';
 export const CARD_NUMBER: InputFields = {
   FIELDS: {
     FIRST: {
-      id: 'numberFirst',
+      name: 'numberFirst',
       type: INPUT.TYPE.TEXT,
       validate: (field: string) =>
         Validation.checkLength(
@@ -16,7 +16,7 @@ export const CARD_NUMBER: InputFields = {
     },
 
     SECOND: {
-      id: 'numberSecond',
+      name: 'numberSecond',
       type: INPUT.TYPE.TEXT,
       validate: (field: string) =>
         Validation.checkLength(
@@ -27,7 +27,7 @@ export const CARD_NUMBER: InputFields = {
     },
 
     THIRD: {
-      id: 'numberThird',
+      name: 'numberThird',
       type: INPUT.TYPE.PASSWORD,
       validate: (field: string) =>
         Validation.checkLength(
@@ -38,7 +38,7 @@ export const CARD_NUMBER: InputFields = {
     },
 
     FOURTH: {
-      id: 'numberFourth',
+      name: 'numberFourth',
       type: INPUT.TYPE.PASSWORD,
       validate: (field: string) =>
         Validation.checkLength(

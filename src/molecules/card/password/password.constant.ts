@@ -5,7 +5,7 @@ import { InputFields } from '../card.type';
 export const PASSWORD: InputFields = {
   FIELDS: {
     FIRST: {
-      id: 'passwordFirst',
+      name: 'passwordFirst',
       type: INPUT.TYPE.TEXT,
       validate: (field: string) => {
         return Validation.checkLength(field, 1);
@@ -14,7 +14,7 @@ export const PASSWORD: InputFields = {
     },
 
     SECOND: {
-      id: 'passwordSecond',
+      name: 'passwordSecond',
       type: INPUT.TYPE.TEXT,
       validate: (field: string) => {
         return Validation.checkLength(field, 1);
@@ -23,14 +23,14 @@ export const PASSWORD: InputFields = {
     },
 
     THIRD: {
-      id: 'passwordThird',
+      name: 'passwordThird',
       type: INPUT.TYPE.TEXT,
       readOnly: true,
       defaultValue: '●',
     },
 
     FOURTH: {
-      id: 'passwordFourth',
+      name: 'passwordFourth',
       type: INPUT.TYPE.TEXT,
       readOnly: true,
       defaultValue: '●',

@@ -5,7 +5,7 @@ import { InputFields } from '../card.type';
 export const EXPIRE_DATE: InputFields = {
   FIELDS: {
     MONTH: {
-      id: 'expireMonth',
+      name: 'expireMonth',
       placeholder: 'MM',
       type: INPUT.TYPE.TEXT,
       validate: (field: string) => {
@@ -18,7 +18,7 @@ export const EXPIRE_DATE: InputFields = {
       maxLength: 2,
     },
     YEAR: {
-      id: 'expireYear',
+      name: 'expireYear',
       placeholder: 'YY',
       type: INPUT.TYPE.TEXT,
       validate: (field: string) => {

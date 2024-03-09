@@ -1,10 +1,11 @@
 import { INPUT } from '@/components/input/input.constant';
 import { Validation } from '@/utils/validation';
+import { InputFields } from '../card.type';
 
-export const SECURITY_CODE = {
+export const SECURITY_CODE: InputFields = {
   FIELDS: {
     SECURITY_CODE: {
-      id: 'securityCode',
+      name: 'securityCode',
       placeholder: 'CVC',
       type: INPUT.TYPE.PASSWORD,
       validate: (field: string) => {

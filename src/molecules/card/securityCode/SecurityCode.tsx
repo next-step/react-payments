@@ -5,7 +5,7 @@ import { SECURITY_CODE } from './securityCode.constant';
 export const SecurityCode = ({ formMethods }: FormMethodsProps) => {
   const { register, errors } = formMethods;
 
-  const fieldKeys = Object.values(SECURITY_CODE.FIELDS).map(({ id }) => id);
+  const fieldKeys = Object.values(SECURITY_CODE.FIELDS).map(({ name }) => name);
   const fieldsFulfilled = Object.values(fieldKeys).map((key) => !errors[key]);
   const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
   const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
@@ -14,13 +14,13 @@ export const SecurityCode = ({ formMethods }: FormMethodsProps) => {
     <Input.Container>
       <Input.Title>{SECURITY_CODE.TITLE}</Input.Title>
       {Object.values(SECURITY_CODE.FIELDS).map(
-        ({ id, type, validate, maxLength, placeholder }) => (
+        ({ name, type, validate, maxLength, placeholder }) => (
           <Input
-            key={id}
+            key={name}
             type={type}
             placeholder={placeholder}
             className={`w-25 ${optionalClassName}`}
-            {...register(id, {
+            {...register(name, {
               maxLength,
               validate,
             })}

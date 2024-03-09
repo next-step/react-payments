@@ -10,7 +10,7 @@ export const ExpireDate = ({ formMethods }: FormMethodsProps) => {
     amount: Object.values(EXPIRE_DATE.FIELDS).length,
   });
 
-  const fieldKeys = Object.values(EXPIRE_DATE.FIELDS).map(({ id }) => id);
+  const fieldKeys = Object.values(EXPIRE_DATE.FIELDS).map(({ name }) => name);
   const fieldsFulfilled = Object.values(fieldKeys).map((key) => !errors[key]);
   const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
   const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
@@ -26,14 +26,14 @@ export const ExpireDate = ({ formMethods }: FormMethodsProps) => {
         className='w-50'
       >
         {Object.values(EXPIRE_DATE.FIELDS).map(
-          ({ id, type, validate, maxLength, placeholder }, fieldIndex) => (
+          ({ name, type, validate, maxLength, placeholder }, fieldIndex) => (
             <Input
-              key={id}
+              key={name}
               type={type}
               ref={autoFocusRefs[fieldIndex]}
               placeholder={placeholder}
               className={optionalClassName}
-              {...register(id, {
+              {...register(name, {
                 maxLength,
                 validate,
                 onChange: (value: string) => {
