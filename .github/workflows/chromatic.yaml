@@ -14,8 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0  # 전체 Git 이력을 가져오도록 설정
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
