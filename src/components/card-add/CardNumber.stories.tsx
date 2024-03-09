@@ -18,6 +18,5 @@ export function Basic() {
     thirdNumber: '1357',
     fourthNumber: '2468',
   });
-
   return <CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />;
 }
