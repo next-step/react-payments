@@ -36,7 +36,7 @@ const AddCard = ({ onBack, onNext }: AddCardProps) => {
           </div>
         </div>
       </div>
-      {isShowModal && <CardType setIsShowModal={() => setIsShowModal(false)} />}
+      {isShowModal && <CardType closeModal={() => setIsShowModal(false)} />}
     </main>
   )
 }
