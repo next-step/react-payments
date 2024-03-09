@@ -1,6 +1,8 @@
+import { InputType } from '@/components/input/input.type';
+
 interface InputField {
   id: string;
-  type: string;
+  type: InputType;
   validate?: (field: string) => boolean;
   maxLength?: number;
   placeholder?: string;

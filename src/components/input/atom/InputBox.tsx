@@ -9,12 +9,11 @@ export const InputBox = ({ separator, className, children }: InputBoxProps) => {
     );
   }
 
-  const childrenArray = Children.toArray(children);
-  const lastChildIndex = childrenArray.length - 1;
+  const lastChildIndex = Children.count(children) - 1;
 
   return (
     <div className={`input-box ${className}`}>
-      {childrenArray.map((child, index) => {
+      {Children.map(children, (child, index) => {
         if (index === lastChildIndex) {
           return child;
         }
