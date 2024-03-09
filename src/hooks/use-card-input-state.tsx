@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { CardType } from '@/constants/card-type.ts'
 
 export interface CardInputState {
   cardCode: string
@@ -6,6 +7,7 @@ export interface CardInputState {
   cardName: string
   cardCVC: string
   cardPin: string
+  cardType?: CardType
 }
 
 const INITIAL_CARD_STATE: CardInputState = {
@@ -14,6 +16,7 @@ const INITIAL_CARD_STATE: CardInputState = {
   cardName: '',
   cardCVC: '',
   cardPin: '',
+  cardType: undefined,
 }
 
 export const useCardInputState = () => {

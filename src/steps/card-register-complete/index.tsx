@@ -1,5 +1,5 @@
 import { Card, Flex, Text, UnderlineInput } from '@/components'
-import { useCardInputContext } from '@/steps/card-register/contexts/card-input-context'
+import { useCardInputContext } from '@/contexts'
 
 export interface CardRegisterCompleteStepProps {
   onClickConfirm: () => void
