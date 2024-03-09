@@ -1,11 +1,14 @@
-import { Flex, Header } from '@/components'
-import { IconPlus } from '@tabler/icons-react'
+import { Card, Flex, Text, Header } from '@/components'
+import { IconPlus, IconTrash } from '@tabler/icons-react'
+import { useCardState } from '@/hooks/use-card-state.tsx'
 
 export interface CardListStepProps {
   onClickRegister: () => void
 }
 
 export const CardListStep = ({ onClickRegister }: CardListStepProps) => {
+  const { cardList, removeCard } = useCardState()
+
   return (
     <Flex
       direction="column"
@@ -21,8 +24,27 @@ export const CardListStep = ({ onClickRegister }: CardListStepProps) => {
         direction="column"
         gap="24px"
         justifyContent="center"
+        alignItems="center"
         paddingX="40px"
       >
+        {cardList
+          .sort((card1, card2) => card2.updatedAt.getTime() - card1.updatedAt.getTime())
+          .map(card => (
+            <Flex direction="column" alignItems="center" key={card.id}>
+              <Card
+                cardSize="lg"
+                cardCode={card.cardCode}
+                cardName={card.cardName}
+                cardExpDate={card.cardExpDate}
+                cardType={card.cardType}
+                marginBottom="8px"
+              />
+              <Flex alignItems="center" gap="8px">
+                <Text variant="body2">{card.cardNickName}</Text>
+                <IconTrash size={24} onClick={() => removeCard(card.id)} />
+              </Flex>
+            </Flex>
+          ))}
         <Flex
           as="button"
           width="100%"

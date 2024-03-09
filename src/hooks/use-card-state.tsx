@@ -11,11 +11,16 @@ const CARD_STATE_LOCALSTORAGE_KEY = 'CARD_STATE'
 
 const loadCardListFromLocalStorage = () => {
   const itemFromStorage = localStorage.getItem(CARD_STATE_LOCALSTORAGE_KEY)
-  return (itemFromStorage ? JSON.parse(itemFromStorage) : []) as CardState[]
+  if (!itemFromStorage) return []
+
+  return (JSON.parse(itemFromStorage) as CardState[]).map(({ updatedAt, ...rest }) => ({
+    ...rest,
+    updatedAt: new Date(updatedAt),
+  }))
 }
 
 const saveCardListToLocalStorage = (card: CardState[]) => {
-  localStorage.setITem(CARD_STATE_LOCALSTORAGE_KEY, JSON.stringify(card))
+  localStorage.setItem(CARD_STATE_LOCALSTORAGE_KEY, JSON.stringify(card))
 }
 export const useCardState = () => {
   const [cardList, setCardList] = useState<CardState[]>(loadCardListFromLocalStorage)
