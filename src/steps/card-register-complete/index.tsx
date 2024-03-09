@@ -1,17 +1,22 @@
 import { Card, Flex, Text, UnderlineInput } from '@/components'
 import { useCardInputContext } from '@/contexts'
+import { useCardState } from '@/hooks/use-card-state.tsx'
 
 export interface CardRegisterCompleteStepProps {
   onClickConfirm: () => void
 }
 
 export const CardRegisterCompleteStep = ({ onClickConfirm }: CardRegisterCompleteStepProps) => {
-  const {
-    cardInput: { cardName, cardExpDate, cardCode, cardType },
-    resetCardInput,
-  } = useCardInputContext()
+  const { addCard } = useCardState()
+  const { cardInput, setCardInput, resetCardInput } = useCardInputContext()
+  const { cardName, cardExpDate, cardCode, cardType, cardNickName } = cardInput
 
-  const handleclickConfirm = () => {
+  const handleClickConfirm = () => {
+    if (!cardType) return
+    addCard({
+      ...cardInput,
+      cardNickName: cardNickName === '' ? cardType.name : cardNickName,
+    })
     resetCardInput()
     onClickConfirm()
   }
@@ -30,11 +35,18 @@ export const CardRegisterCompleteStep = ({ onClickConfirm }: CardRegisterComplet
           cardType={cardType}
           marginBottom="24px"
         />
-        <UnderlineInput width="240px" placeholder="카드 별명" contentAlign="center" />
+        <UnderlineInput
+          width="240px"
+          placeholder="카드 별칭(선택)"
+          contentAlign="center"
+          maxLength={10}
+          value={cardNickName}
+          onChange={e => setCardInput('cardNickName')(e.target.value)}
+        />
       </Flex>
 
       <Flex justifyContent="flex-end" paddingX="24px" paddingY="32px" marginTop="auto">
-        <Text as="button" variant="body1" color="aqua" onClick={handleclickConfirm}>
+        <Text as="button" variant="body1" color="aqua" onClick={handleClickConfirm}>
           확인
         </Text>
       </Flex>

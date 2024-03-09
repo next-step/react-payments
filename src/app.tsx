@@ -11,7 +11,7 @@ const 카드_입력_폼 = 'card-input-form'
 const 카드_등록_완료 = 'card-register-complete'
 
 function App() {
-  const [Funnel, step, setStep] = useFunnel(카드_입력_폼)
+  const [Funnel, step, setStep] = useFunnel(카드_목록)
 
   return (
     <OverlayContextProvider>
