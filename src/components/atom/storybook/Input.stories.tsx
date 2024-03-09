@@ -1,4 +1,4 @@
-import { Input } from "@/components/atom/forms/Input";
+import { Input } from "@/components/atom/Input";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof Input> = {

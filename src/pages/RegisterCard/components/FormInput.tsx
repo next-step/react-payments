@@ -1,4 +1,4 @@
-import { Input } from "@/components/atom/forms/Input";
+import { Input } from "@/components/atom/Input";
 import { TInputProps } from "@/types/input";
 import React, { CSSProperties, useState } from "react";
 import styled from "styled-components";
