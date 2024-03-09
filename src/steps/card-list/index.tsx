@@ -7,15 +7,21 @@ export interface CardListStepProps {
 
 export const CardListStep = ({ onClickRegister }: CardListStepProps) => {
   return (
-    <Flex direction="column" height="100vh" alignItems="center" justifyContent="center">
+    <Flex
+      direction="column"
+      height="100vh"
+      alignItems="center"
+      justifyContent="center"
+      width="100%"
+    >
       <Header title="보유카드" />
       <Flex
-        as="main"
-        width="60vw"
+        width="100%"
         height="100%"
         direction="column"
         gap="24px"
         justifyContent="center"
+        paddingX="40px"
       >
         <Flex
           as="button"
