@@ -27,14 +27,22 @@ type Story = StoryObj<StoryArgs>;
 const CardRender = (args: StoryArgs) => {
 	return (
 		<Card size={args.size}>
-			<Card.CardCompany text={args["CardCompany.text"]} />
-			<Card.Chip />
-			<Card.CardNumber text={args["CardNumber.text"]} />
-			<Card.Name text={args["Name.text"]} />
-			<Card.ExpirationDate
-				month={args["ExpirationDate.month"]}
-				year={args["ExpirationDate.year"]}
-			/>
+			<Card.Top>
+				<Card.CardCompany text={args["CardCompany.text"]} />
+			</Card.Top>
+			<Card.Middle>
+				<Card.Chip />
+			</Card.Middle>
+			<Card.Bottom>
+				<Card.CardNumber text={args["CardNumber.text"]} />
+				<Card.BottomInfo>
+					<Card.Name text={args["Name.text"]} />
+					<Card.ExpirationDate
+						month={args["ExpirationDate.month"]}
+						year={args["ExpirationDate.year"]}
+					/>
+				</Card.BottomInfo>
+			</Card.Bottom>
 		</Card>
 	);
 };

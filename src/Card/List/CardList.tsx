@@ -21,19 +21,27 @@ const CardList = ({ cardList, onNext }: CardListProps) => {
 					return (
 						<CardWrapper key={card.id}>
 							<Card size={"small"}>
-								<Card.CardCompany text={card.bankName} />
-								<Card.Chip />
-								<Card.CardNumber
-									text={maskStringAfterIndex(
-										convertObjectValuesToString(card.cardNumber),
-										2
-									)}
-								/>
-								<Card.Name text={card.ownerName} />
-								<Card.ExpirationDate
-									month={card.expirationDate.month}
-									year={card.expirationDate.year}
-								/>
+								<Card.Top>
+									<Card.CardCompany text={card.bankName} />
+								</Card.Top>
+								<Card.Middle>
+									<Card.Chip />
+								</Card.Middle>
+								<Card.Bottom>
+									<Card.CardNumber
+										text={maskStringAfterIndex(
+											convertObjectValuesToString(card.cardNumber),
+											2
+										)}
+									/>
+									<Card.BottomInfo>
+										<Card.Name text={card.ownerName} />
+										<Card.ExpirationDate
+											month={card.expirationDate.month}
+											year={card.expirationDate.year}
+										/>
+									</Card.BottomInfo>
+								</Card.Bottom>
 							</Card>
 							<Text.Span>{card.cardName}</Text.Span>
 						</CardWrapper>
