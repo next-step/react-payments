@@ -26,7 +26,8 @@
     "@vanilla-extract/sprinkles": "^1.6.1",
     "clsx": "^2.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.17",
@@ -44,6 +45,7 @@
     "@types/node": "^20.11.24",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
+    "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
     "@vanilla-extract/vite-plugin": "^4.0.4",
