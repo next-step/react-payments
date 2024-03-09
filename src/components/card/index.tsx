@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { cn } from '@/utils';
 import * as styles from './index.css';
 
 import type { CardBrand } from '@/types/card';
@@ -50,24 +51,23 @@ const Card = ({
     const brand = `BRAND${firstNum}` as CardBrand;
     setCardBrand(brand);
   }, [firstCardNumber]);
+  const className = cn([styles.cardBox[size], styles.cardColor[cardBrand]]);
 
   return (
-    <div className={styles.cardBox[size]}>
-      <div className={styles.cardColor[cardBrand]}>
-        <div className={styles.brand}>{cardBrand || ' '}</div>
-        <Chip size={size} />
-        <div style={{ textAlign: 'center' }}>{fullCardNumber}</div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginTop: 'auto',
-          }}
-        >
-          <span>{owner || 'NAME'}</span>
-          <span>{fullExpirationDate || 'MM / YY'}</span>
-        </div>
-      </div>
+    <div className={className}>
+      <span className={styles.brand}>{cardBrand || ' '}</span>
+      <Chip size={size} />
+      <span style={{ textAlign: 'center' }}>{fullCardNumber}</span>
+      <span
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          // marginTop: 'auto',
+        }}
+      >
+        <span>{owner || 'NAME'}</span>
+        <span>{fullExpirationDate || 'MM / YY'}</span>
+      </span>
     </div>
   );
 };

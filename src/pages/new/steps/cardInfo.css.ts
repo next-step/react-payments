@@ -41,6 +41,7 @@ export const passwordPinBox = style({
 
 export const wFull = style({
   width: '100%',
+  flexGrow: 1,
 });
 
 export const textCenter = style({
