@@ -1,22 +1,22 @@
-import { useState } from 'react'
+import { useContext } from 'react'
 import AddCard from './AddCard'
-// import AddCardType from './AddCardType'
 import CardList from './CardList'
-
-export type FunnelStep =
-  | {
-      step: 'add'
-    }
-  | { step: 'select' }
-  | { step: 'list' }
+import { Stepper } from './Stepper'
+import { UpdateFunnelStepContext } from './context/funnelStepContext'
 
 const Payments = () => {
-  const [funnelState, setFunnelState] = useState<FunnelStep>({ step: 'add' })
+  const updateFunnelStep = useContext(UpdateFunnelStepContext)
   return (
     <>
-      {funnelState.step === 'add' && <AddCard onBack={() => setFunnelState({ step: 'list' })} onNext={() => setFunnelState({ step: 'select' })} />}
-      {/* {funnelState.step === 'select' && <AddCardType />} */}
-      {funnelState.step === 'list' && <CardList />}
+      <Stepper>
+        <Stepper.Step step="add">
+          <AddCard onBack={() => updateFunnelStep({ step: 'list' })} onNext={() => updateFunnelStep({ step: 'select' })} />
+        </Stepper.Step>
+
+        <Stepper.Step step="list">
+          <CardList />
+        </Stepper.Step>
+      </Stepper>
     </>
   )
 }

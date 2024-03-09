@@ -1,5 +1,3 @@
-export const CARD_ADD_INSERT_STEP = 'add'
-export const CARD_SELECT_COMPANY_STEP = 'select'
-// export const CARD_ADD_INSERT_COMPLETE = ''
-// export const CARD_ADD_COMPLETE = ''
-export const CARD_LIST = 'list'
+type Step = 'add' | 'select' | 'list'
+
+export type FunnelStep = { step: Step }
