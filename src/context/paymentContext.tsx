@@ -1,11 +1,19 @@
 import { createContext, useState } from 'react'
 
+export type CardNumber = {
+  first?: string
+  second?: string
+  third?: string
+  fourth?: string
+}
 export type CardInfo = {
-  cardNumber?: string
-  month?: number
-  year?: number
+  cardNumber?: CardNumber
+  month?: string
+  year?: string
   name?: string
   cardType?: string
+  password?: string
+  cvc?: string
 }
 
 export const CardInfoContext = createContext<CardInfo>({})
