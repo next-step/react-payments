@@ -1,5 +1,7 @@
 import { createMachine, assign } from 'xstate';
 import { createActorContext } from '@xstate/react';
+import { nanoid } from 'nanoid';
+
 import { CARD_COMPANY_MAP } from 'src/constants/card.ts';
 
 export interface CardInfo {
@@ -101,7 +103,7 @@ export const addCardMachine = createMachine({
 				ADD_CARD: {
 					target: 'AddCardFinish',
 					actions: assign(({ context }) => ({
-						cardList: [...context.cardList, { ...context.cardInfo, id: Date.now().toString() }],
+						cardList: [...context.cardList, { ...context.cardInfo, id: nanoid() }],
 					})),
 				},
 				CHANGE_FIELD: {
