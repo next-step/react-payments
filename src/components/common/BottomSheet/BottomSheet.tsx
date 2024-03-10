@@ -1,5 +1,5 @@
 import { css } from '@emotion/css'
-import { ReactNode } from 'react'
+import { MouseEventHandler, ReactNode } from 'react'
 
 type BottomSheetProps = {
   isOpen: boolean
@@ -16,8 +16,10 @@ export const BottomSheet = ({
     display: ${isOpen ? 'flex' : 'none'};
   `
 
-  const handleClose = () => {
-    onClose()
+  const handleClose: MouseEventHandler<HTMLDivElement> = e => {
+    if (e.target === e.currentTarget) {
+      onClose()
+    }
   }
 
   return (
