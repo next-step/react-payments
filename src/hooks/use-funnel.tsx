@@ -1,4 +1,14 @@
-import { Children, PropsWithChildren, ReactElement, isValidElement, useState } from 'react'
+import {
+  Children,
+  PropsWithChildren,
+  ReactElement,
+  isValidElement,
+  useState,
+  Dispatch,
+  SetStateAction,
+  useMemo,
+} from 'react'
+import { FunnelContextProvider, FunnelState } from '@/contexts/funnel-context.tsx'
 
 type StepProps = PropsWithChildren<{ name: string }>
 
@@ -7,27 +17,41 @@ export const Step = ({ children }: StepProps) => {
 }
 
 export interface FunnelProps {
-  step: string
   children: Array<ReactElement<StepProps>> | ReactElement<StepProps>
 }
 
-export const FunnelRoot = ({ step, children }: FunnelProps) => {
-  const validChildren = Children.toArray(children).filter(isValidElement) as Array<
-    ReactElement<StepProps>
-  >
+export const FunnelRoot =
+  <T,>(funnelState: FunnelState<T>, setFunnelState: Dispatch<SetStateAction<FunnelState<T>>>) =>
+  ({ children }: FunnelProps) => {
+    const validChildren = Children.toArray(children).filter(isValidElement) as Array<
+      ReactElement<StepProps>
+    >
 
-  const targetStep = validChildren.find(childStep => childStep.props.name === step)
+    const targetStep = validChildren.find(childStep => childStep.props.name === funnelState.step)
 
-  return targetStep
-}
+    const contextValue = useMemo(
+      () => ({
+        state: funnelState,
+        setState: setFunnelState,
+      }),
+      [funnelState, setFunnelState],
+    )
 
-export const Funnel = {
-  Root: FunnelRoot,
+    return <FunnelContextProvider value={contextValue}>{targetStep}</FunnelContextProvider>
+  }
+
+export const Funnel = <T,>(args: Parameters<typeof FunnelRoot<T>>) => ({
+  Root: FunnelRoot(...args),
   Step,
-}
+})
 
-export const useFunnel = (initialStep: string) => {
-  const [step, setStep] = useState<string>(initialStep)
+export const useFunnel = <T,>(steps: readonly string[], initialState: T) => {
+  const funnelStateResult = useState<FunnelState<T>>({
+    step: steps[0],
+    ...initialState,
+  })
 
-  return [Funnel, step, setStep] as const
+  const FunnelComponent = Funnel(funnelStateResult)
+
+  return [FunnelComponent, ...funnelStateResult] as const
 }
