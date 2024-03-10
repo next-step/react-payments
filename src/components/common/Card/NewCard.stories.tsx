@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { Card } from './index'
 
 const meta: Meta<typeof Card.New> = {
-  title: 'common/Card/New',
+  title: 'common/NewCard',
   component: Card.New
 }
 
