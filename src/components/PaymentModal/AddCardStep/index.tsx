@@ -1,4 +1,4 @@
-import { Card } from '@/components/Card'
+import { Card } from '@/components/common/Card'
 import { BottomSheet } from '@/components/common/BottomSheet'
 import { CardDateInput } from '@/components/common/CardDateInput'
 import { CardNumberInput } from '@/components/common/CardNumberInput'
