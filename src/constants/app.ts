@@ -4,3 +4,8 @@ export const CARD_NUMBER = {
   VISIBLE_COUNT: 2,
   LAST_INPUT_INDEX: 3
 }
+
+export const CARD_DATE = {
+  INPUT_COUNT: 2,
+  MAX_LENGTH: 2
+}
