@@ -7,9 +7,8 @@ const useNumberValidation = (
 ) => {
   const [value, setValue] = useState<number | "">(initialstate);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log("e", isNaN(Number(e.target.value)), e.target.value);
     const newValue = Number(e.target.value);
-    if (isNaN(Number(newValue)) === true) {
+    if (isNaN(newValue) === true) {
       setValue(value);
       onChange(value);
       return;
@@ -22,7 +21,7 @@ const useNumberValidation = (
     if (validation(newValue) === true) {
       setValue(newValue);
       onChange(newValue);
-    }
+    } else return;
   };
 
   return {

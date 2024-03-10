@@ -13,4 +13,19 @@ export const Validaton = {
       return true;
     }
   },
+  OwnerName: (input: string) => {
+    if (input.length > 30) {
+      return false;
+    } else {
+      return true;
+    }
+  },
+  PassWord: (input: string) => {
+    console.log("input check", input);
+    if (isNaN(Number(input))) {
+      return false;
+    } else {
+      return true;
+    }
+  },
 };
