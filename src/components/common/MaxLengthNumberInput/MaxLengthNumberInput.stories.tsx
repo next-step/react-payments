@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { MaxLengthNumberInput } from './MaxLengthNumberInput'
+import { MaxLengthNumberInput } from './index'
 import { ChangeEvent, useState } from 'react'
 
 const meta: Meta<typeof MaxLengthNumberInput> = {
