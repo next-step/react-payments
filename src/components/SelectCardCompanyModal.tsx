@@ -5,7 +5,7 @@ import { CARD_COMPANY_LIST } from 'src/constants/card.ts';
 export default function SelectCardCompanyModal() {
 	const { send } = useAddCardMachineActorRef();
 
-	const isStateSelectCardCompany = useAddCardMachineSelector(state => state.matches('form.selectCardCompany'));
+	const isStateSelectCardCompany = useAddCardMachineSelector(state => state.matches('AddCardForm.selectCardCompany'));
 
 	const handleDimmedClick = () => {
 		send({ type: 'TOGGLE' });

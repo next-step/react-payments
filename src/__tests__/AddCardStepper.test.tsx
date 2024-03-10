@@ -38,7 +38,7 @@ describe('카드 추가 step 테스트', () => {
 				result.current.send({ type: 'SELECT_CARD', value: MOCK_CARD_INFO_LIST[0] });
 			});
 
-			expect(result.current.getSnapshot().matches('nickname')).toBe(true);
+			expect(result.current.getSnapshot().matches('AddCardFinish')).toBe(true);
 		});
 	});
 

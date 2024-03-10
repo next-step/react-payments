@@ -6,7 +6,7 @@ export default function CardList() {
 
 	const cardList = useAddCardMachineSelector(state => state.context.cardList);
 
-	const isStateSelect = useAddCardMachineSelector(state => state.matches('select'));
+	const isStateSelect = useAddCardMachineSelector(state => state.matches('CardList'));
 
 	const handleClickAddCard = () => {
 		send({ type: 'GO_TO_FORM' });

@@ -13,7 +13,7 @@ export default function AddCardFinish() {
 		cardCompanyCode,
 	} = useAddCardMachineSelector(state => state.context.selectedCard);
 
-	const isStateNickname = useAddCardMachineSelector(state => state.matches('nickname'));
+	const isStateNickname = useAddCardMachineSelector(state => state.matches('AddCardFinish'));
 
 	if (isStateNickname) {
 		return (

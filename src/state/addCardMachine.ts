@@ -56,20 +56,20 @@ export const addCardMachine = createMachine({
 		events: {} as CardMachineEvent,
 		context: {} as CardMachineContext,
 	},
-	initial: 'select',
+	initial: 'CardList',
 	context: {
 		cardInfo: { ...initialCardInfo },
 		cardList: [],
 		selectedCard: { ...initialCardInfo, id: '' },
 	},
 	states: {
-		select: {
+		CardList: {
 			on: {
 				GO_TO_FORM: {
-					target: 'form',
+					target: 'AddCardForm',
 				},
 				SELECT_CARD: {
-					target: 'nickname',
+					target: 'AddCardFinish',
 					actions: assign(({ event }) => ({ selectedCard: event.value })),
 				},
 				DELETE_CARD: {
@@ -79,7 +79,7 @@ export const addCardMachine = createMachine({
 				},
 			},
 		},
-		form: {
+		AddCardForm: {
 			initial: 'selectCardCompany',
 			states: {
 				selectCardCompany: {
@@ -99,27 +99,27 @@ export const addCardMachine = createMachine({
 			},
 			on: {
 				ADD_CARD: {
-					target: 'nickname',
+					target: 'AddCardFinish',
 					actions: assign(({ context }) => ({
 						cardList: [...context.cardList, { ...context.cardInfo, id: Date.now().toString() }],
 					})),
 				},
 				CHANGE_FIELD: {
-					target: 'form.enterCardInfo',
+					target: 'AddCardForm.enterCardInfo',
 					actions: assign(({ context, event }) => ({
 						cardInfo: { ...context.cardInfo, [event.field]: event.value },
 					})),
 				},
 				BACK: {
-					target: 'select',
+					target: 'CardList',
 					actions: assign({ cardInfo: { ...initialCardInfo } }),
 				},
 			},
 		},
-		nickname: {
+		AddCardFinish: {
 			on: {
 				EDIT_CARD: {
-					target: 'select',
+					target: 'CardList',
 					actions: assign(({ context }) => ({
 						cardList: context.cardList.map(card =>
 							card.id === context.selectedCard.id
