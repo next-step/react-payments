@@ -1,4 +1,4 @@
-import { Input, InputProps } from "../../../components/input/Input";
+import { Input, InputProps } from "../../../components/ui-kit/Input";
 
 const MAX_CARD_HOLDER_NAME_LENGTH = 30;
 

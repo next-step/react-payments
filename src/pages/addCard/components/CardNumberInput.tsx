@@ -1,4 +1,4 @@
-import { Input, InputProps } from "../../../components/input/Input";
+import { Input, InputProps } from "../../../components/ui-kit/Input";
 
 interface CardNumberInputProps {
   value: string;
