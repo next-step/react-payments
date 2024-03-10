@@ -1,66 +1,39 @@
-export const PaymentPage = () => {
-  return (
-    <div>
-      <h2>1️⃣ 카드 추가</h2>
-      <div className="root">
-        <div className="app">
-          <h2 className="page-title">카드 추가</h2>
-          <div className="card-box">
-            <div className="empty-card">
-              <div className="card-top"></div>
-              <div className="card-middle">
-                <div className="small-card__chip"></div>
-              </div>
-              <div className="card-bottom">
-                <div className="card-bottom__info">
-                  <span className="card-text">NAME</span>
-                  <span className="card-text">MM / YY</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="input-container">
-            <span className="input-title">카드 번호</span>
-            <div className="input-box">
-              <input className="input-basic" type="text" />
-              <input className="input-basic" type="text" />
-              <input className="input-basic" type="password" />
-              <input className="input-basic" type="password" />
-            </div>
-          </div>
-          <div className="input-container">
-            <span className="input-title">만료일</span>
-            <div className="input-box w-50">
-              <input className="input-basic" type="text" placeholder="MM" />
-              <input className="input-basic" type="text" placeholder="YY" />
-            </div>
-          </div>
-          <div className="input-container">
-            <span className="input-title">카드 소유자 이름(선택)</span>
-            <input
-              type="text"
-              className="input-basic"
-              placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-            />
-          </div>
-          <div className="input-container">
-            <span className="input-title">보안코드(CVC/CVV)</span>
-            <input className="input-basic w-25" type="password" />
-          </div>
-          <div className="input-container">
-            <span className="input-title">카드 비밀번호</span>
-            <input className="input-basic w-15" type="password" />
-            <input className="input-basic w-15" type="password" />
-            <input className="input-basic w-15" type="password" />
-            <input className="input-basic w-15" type="password" />
-          </div>
-          <div className="button-box">
-            <span className="button-text">다음</span>
-          </div>
-        </div>
-      </div>
+import { AddCardStep } from '@/components/PaymentModal/AddCardStep/AddCardStep'
+import { CardListStep } from '@/components/PaymentModal/CardListStep/CardListStep'
+import { CompletedAddCardStep } from '@/components/PaymentModal/CompletedAddCardStep/CompletedAddCardStep'
+import { useStep } from '@/hooks/useStep'
 
-      <h2>2️⃣ 카드 추가 - 카드사 선택</h2>
+export const PAYMENT_STEPS = [
+  'add card',
+  'completed add card',
+  'card list'
+] as const
+
+export const PaymentPage = () => {
+  const [Stepper, setStep] = useStep(PAYMENT_STEPS)
+
+  return (
+    <Stepper>
+      <button type="button" onClick={() => setStep('add card')}>
+        Add Card
+      </button>
+      <button type="button" onClick={() => setStep('completed add card')}>
+        Completed add card
+      </button>
+      <button type="button" onClick={() => setStep('card list')}>
+        Card list
+      </button>
+      <Stepper.Step name="add card">
+        <AddCardStep />
+      </Stepper.Step>
+      <Stepper.Step name="completed add card">
+        <CompletedAddCardStep />
+      </Stepper.Step>
+      <Stepper.Step name="card list">
+        <CardListStep />
+      </Stepper.Step>
+
+      {/* <h2>2️⃣ 카드 추가 - 카드사 선택</h2>
       <div className="root">
         <div className="app">
           <h2 className="page-title">카드 추가</h2>
@@ -232,79 +205,7 @@ export const PaymentPage = () => {
             <span className="button-text">다음</span>
           </div>
         </div>
-      </div>
-
-      <h2>4️⃣ 카드 추가 완료</h2>
-      <div className="root">
-        <div className="app flex-column-center">
-          <div className="flex-center">
-            <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
-          </div>
-          <div className="card-box">
-            <div className="big-card">
-              <div className="card-top">
-                <span className="card-text__big">클린카드</span>
-              </div>
-              <div className="card-middle">
-                <div className="big-card__chip"></div>
-              </div>
-              <div className="card-bottom">
-                <div className="card-bottom__number">
-                  <span className="card-text__big">
-                    1111 - 2222 - oooo - oooo
-                  </span>
-                </div>
-                <div className="card-bottom__info">
-                  <span className="card-text__big">YUJO</span>
-                  <span className="card-text__big">12 / 23</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="input-container flex-center w-100">
-            <input
-              className="input-underline w-75"
-              type="text"
-              placeholder="카드의 별칭을 입력해주세요."
-            />
-          </div>
-          <div className="button-box mt-50">
-            <span className="button-text">다음</span>
-          </div>
-        </div>
-      </div>
-
-      <h2>5️⃣ 카드 목록</h2>
-      <div className="root">
-        <div className="app flex-column-center">
-          <div className="flex-center">
-            <h2 className="page-title mb-10">보유 카드</h2>
-          </div>
-          <div className="card-box">
-            <div className="small-card">
-              <div className="card-top">
-                <span className="card-text">클린카드</span>
-              </div>
-              <div className="card-middle">
-                <div className="small-card__chip"></div>
-              </div>
-              <div className="card-bottom">
-                <div className="card-bottom__number">
-                  <span className="card-text">1111 - 2222 - oooo - oooo</span>
-                </div>
-                <div className="card-bottom__info">
-                  <span className="card-text">YUJO</span>
-                  <span className="card-text">12 / 23</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <span className="card-nickname">법인카드</span>
-          <div className="card-box">
-            <div className="empty-card">+</div>
-          </div>
-        </div>
-      </div>
-    </div>
+      </div> */}
+    </Stepper>
   )
 }
