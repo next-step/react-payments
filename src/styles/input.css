@@ -11,7 +11,7 @@
   background-color: #ecebf1;
 }
 
-.input-title {
+.input-label {
   display: flex;
   align-items: center;
 
@@ -33,6 +33,11 @@
   border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;
+  color: #04c09e;
+}
+
+.input-basic:read-only {
+  background-color: transparent;
 }
 
 .input-underline {
@@ -45,4 +50,22 @@
   padding: 4px 0;
 
   border-bottom: 1px solid #383838;
+}
+
+.input-limit-tracker {
+  width: 34px;
+  height: 18px;
+
+  color: #525252;
+  font-size: 12px;
+  font-weight: 500;
+
+  line-height: 14px;
+  letter-spacing: -0.05em;
+  text-align: right;
+}
+
+.input-labe-limit-tracker-container {
+  display: flex;
+  justify-content: space-between;
 }

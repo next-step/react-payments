@@ -3,6 +3,11 @@
     "browser": true,
     "es2021": true
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -32,6 +37,7 @@
     "react/jsx-filename-extension": ["error", { "extensions": [".tsx"] }],
     "react/jsx-no-duplicate-props": "error",
     "react/react-in-jsx-scope": "off",
-    "react/jsx-key": "error"
+    "react/jsx-key": "error",
+    "eol-last": ["error", "always"]
   }
 }

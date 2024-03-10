@@ -134,3 +134,10 @@
   vertical-align: middle;
   font-weight: 400;
 }
+
+.text-overflow {
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

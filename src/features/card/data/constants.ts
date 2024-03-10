@@ -1,0 +1,5 @@
+export const MAX_CARD_NUMBER_FIELD_LENGTH = 4;
+export const MAX_CARD_EXPIRED_DATE_LENGTH = 5;
+export const MAX_CARD_OWNER_LENGTH = 30;
+export const MAX_CARD_CVC_LENGTH = 3;
+export const MAX_CARD_PASSWORD_FIELD_LENGTH = 1;
