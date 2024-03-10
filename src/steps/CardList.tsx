@@ -6,13 +6,13 @@ export default function CardList() {
 
 	const cardList = useAddCardMachineSelector(state => state.context.cardList);
 
-	const isStateSelect = useAddCardMachineSelector(state => state.matches('CardList'));
+	const isStateCardList = useAddCardMachineSelector(state => state.matches('CardList'));
 
 	const handleClickAddCard = () => {
 		send({ type: 'GO_TO_FORM' });
 	};
 
-	if (isStateSelect) {
+	if (isStateCardList) {
 		return (
 			<div className="h-100 flex-column-center">
 				<div className="flex-center">

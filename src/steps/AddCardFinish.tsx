@@ -13,9 +13,9 @@ export default function AddCardFinish() {
 		cardCompanyCode,
 	} = useAddCardMachineSelector(state => state.context.selectedCard);
 
-	const isStateNickname = useAddCardMachineSelector(state => state.matches('AddCardFinish'));
+	const isStateAddCardFinish = useAddCardMachineSelector(state => state.matches('AddCardFinish'));
 
-	if (isStateNickname) {
+	if (isStateAddCardFinish) {
 		return (
 			<div className="flex-column-center h-100">
 				<div className="flex-center">

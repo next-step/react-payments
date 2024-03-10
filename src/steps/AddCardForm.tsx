@@ -22,7 +22,7 @@ export default function AddCardForm() {
 		cardExpirationDate,
 	} = useAddCardMachineSelector(state => state.context.cardInfo);
 
-	const isStateForm = useAddCardMachineSelector(state => state.matches('AddCardForm'));
+	const isStateAddCardForm = useAddCardMachineSelector(state => state.matches('AddCardForm'));
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -34,7 +34,7 @@ export default function AddCardForm() {
 		send({ type: 'BACK' });
 	};
 
-	if (isStateForm) {
+	if (isStateAddCardForm) {
 		return (
 			<>
 				<div>
