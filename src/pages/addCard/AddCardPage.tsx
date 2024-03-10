@@ -1,4 +1,4 @@
-import AddCardForm from "./components/AddCardForm";
+import AddCardForm from "./components/addCard/AddCardForm";
 import Header from "./components/Header";
 
 export default function AddCardPage() {

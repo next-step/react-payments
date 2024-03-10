@@ -1,5 +1,5 @@
-import Button from "../../../components/ui-kit/Button";
-import useAddCardForm from "../hooks/useAddCardForm";
+import Button from "../../../../components/ui-kit/Button";
+import useAddCardForm from "../../hooks/useAddCardForm";
 import CardExpiredDateInput from "./CardExpiredDateInput";
 import CardHolderNameInput from "./CardHolderNameInput";
 import CardNumberInput from "./CardNumberInput";

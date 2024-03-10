@@ -1,4 +1,4 @@
-import { Input, InputProps } from "../../../components/ui-kit/Input";
+import { Input, InputProps } from "../../../../components/ui-kit/Input";
 import { SlQuestion } from "react-icons/sl";
 
 const MAX_CARD_SECURITY_CODE_LENGTH = 3;

@@ -1,4 +1,4 @@
-import { Input, InputProps } from "../../../components/ui-kit/Input";
+import { Input, InputProps } from "../../../../components/ui-kit/Input";
 import { GoDotFill } from "react-icons/go";
 import Dot from "./Dot";
 
