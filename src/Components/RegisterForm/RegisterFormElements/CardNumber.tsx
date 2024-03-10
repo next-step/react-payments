@@ -17,7 +17,6 @@ const CardNumber = () => {
           maxLength={4}
           ref={focus}
         />
-        <span> </span>
         <input
           className="input-basic"
           type="number"

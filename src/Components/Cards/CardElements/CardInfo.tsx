@@ -9,11 +9,12 @@ const CardInfo = () => {
   } = useCardInfo();
   return (
     <div className="card-bottom__info">
-      <span className="card-text">
-        <div className="card-namebox">
+      <div className="card-namebox">
+        <span className="card-text">
           {cardOwnerName ? cardOwnerName : "NAME"}
-        </div>
-      </span>
+        </span>
+      </div>
+
       <span className="card-text">
         {MM && YY ? `${MM} / ${YY}` : "MM / YY"}
       </span>
