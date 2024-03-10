@@ -3,7 +3,7 @@ import { BottomSheet } from '@/components/common/BottomSheet'
 import { CardDateInput } from '@/components/common/CardDateInput'
 import { CardNumberInput } from '@/components/common/CardNumberInput'
 import { CardPasswordInput } from '@/components/common/CardPasswordInput'
-import { Input } from '@/components/common/Input/Input'
+import { Input } from '@/components/common/Input'
 import { MaxLengthNumberInput } from '@/components/common/MaxLengthNumberInput/MaxLengthNumberInput'
 import { useDialog } from '@/hooks/useDialog'
 
