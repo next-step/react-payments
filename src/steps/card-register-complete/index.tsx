@@ -1,22 +1,31 @@
 import { Card, Flex, Text, UnderlineInput } from '@/components'
 import { useCardInputContext } from '@/contexts'
-import { useCardState } from '@/hooks/use-card-state.tsx'
+import { CardState, useCardState } from '@/hooks/use-card-state.tsx'
 
 export interface CardRegisterCompleteStepProps {
   onClickConfirm: () => void
+  editableCardId?: CardState['id']
 }
 
-export const CardRegisterCompleteStep = ({ onClickConfirm }: CardRegisterCompleteStepProps) => {
-  const { addCard } = useCardState()
+export const CardRegisterCompleteStep = ({
+  onClickConfirm,
+  editableCardId,
+}: CardRegisterCompleteStepProps) => {
+  const { addCard, editCard } = useCardState()
   const { cardInput, setCardInput, resetCardInput } = useCardInputContext()
   const { cardName, cardExpDate, cardCode, cardType, cardNickName } = cardInput
 
   const handleClickConfirm = () => {
     if (!cardType) return
-    addCard({
+    const completedCardInput = {
       ...cardInput,
       cardNickName: cardNickName === '' ? cardType.name : cardNickName,
-    })
+    }
+    if (editableCardId) {
+      editCard({ id: editableCardId, updatedAt: new Date(), ...completedCardInput })
+    } else {
+      addCard(completedCardInput)
+    }
     resetCardInput()
     onClickConfirm()
   }

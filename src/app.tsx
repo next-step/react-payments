@@ -5,15 +5,17 @@ import { CardInputFormStep } from '@/steps/card-register'
 import { CardListStep } from './steps/card-list'
 import { CardRegisterCompleteStep } from '@/steps/card-register-complete'
 import { Flex } from '@/components'
+import { CardState } from '@/hooks/use-card-state.tsx'
 
 const 카드_목록 = 'card-list'
 const 카드_입력_폼 = 'card-input-form'
 const 카드_등록_완료 = 'card-register-complete'
 
 function App() {
-  const [Funnel, , setFunnelState] = useFunnel([카드_목록, 카드_입력_폼, 카드_등록_완료] as const, {
-    editMode: false,
-  })
+  const [Funnel, funnelState, setFunnelState] = useFunnel<{ editableCardId?: CardState['id'] }>(
+    [카드_목록, 카드_입력_폼, 카드_등록_완료] as const,
+    {},
+  )
 
   return (
     <OverlayContextProvider>
@@ -23,18 +25,39 @@ function App() {
             <Funnel.Root>
               <Funnel.Step name={카드_목록}>
                 <CardListStep
-                  onClickRegister={() => setFunnelState(prev => ({ ...prev, step: 카드_입력_폼 }))}
+                  onNavigateToRegister={() =>
+                    setFunnelState(prev => ({ ...prev, step: 카드_입력_폼 }))
+                  }
+                  onNavigateToEdit={(id: CardState['id']) =>
+                    setFunnelState(prev => ({
+                      ...prev,
+                      step: 카드_등록_완료,
+                      editableCardId: id,
+                    }))
+                  }
                 />
               </Funnel.Step>
               <Funnel.Step name={카드_입력_폼}>
                 <CardInputFormStep
                   onClickPrev={() => setFunnelState(prev => ({ ...prev, step: 카드_목록 }))}
-                  onSubmit={() => setFunnelState(prev => ({ ...prev, step: 카드_등록_완료 }))}
+                  onSubmit={() =>
+                    setFunnelState(prev => ({
+                      ...prev,
+                      step: 카드_등록_완료,
+                    }))
+                  }
                 />
               </Funnel.Step>
               <Funnel.Step name={카드_등록_완료}>
                 <CardRegisterCompleteStep
-                  onClickConfirm={() => setFunnelState(prev => ({ ...prev, step: 카드_목록 }))}
+                  editableCardId={funnelState?.editableCardId}
+                  onClickConfirm={() =>
+                    setFunnelState(prev => ({
+                      ...prev,
+                      step: 카드_목록,
+                      editableCardId: undefined,
+                    }))
+                  }
                 />
               </Funnel.Step>
             </Funnel.Root>

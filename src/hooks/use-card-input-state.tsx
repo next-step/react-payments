@@ -29,8 +29,8 @@ export const useCardInputState = () => {
       setCardInput(prev => ({ ...prev, [name]: value }))
     }
 
-  const resetCardInput = () => {
-    setCardInput(INITIAL_CARD_INPUT_STATE)
+  const resetCardInput = (value?: CardInputState) => {
+    setCardInput(value ?? INITIAL_CARD_INPUT_STATE)
   }
 
   return { cardInput, setCardInput: handleChangeCardInput, resetCardInput } as const
