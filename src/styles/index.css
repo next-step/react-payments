@@ -1,8 +1,9 @@
-@import "./card.css";
-@import "./input.css";
-@import "./button.css";
-@import "./modal.css";
-@import "./utils.css";
+@import './card.css';
+@import './input.css';
+@import './button.css';
+@import './modal.css';
+@import './utils.css';
+@import './text.css';
 
 body {
   display: flex;
@@ -17,6 +18,15 @@ input {
   font-size: 16px;
 }
 
+.page-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  color: #383838;
+}
+
 .root {
   background-color: #fff;
   width: 375px;
@@ -29,14 +39,4 @@ input {
 .app {
   height: 100%;
   padding: 16px 24px;
-}
-
-.page-title {
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 22px;
-  display: flex;
-  align-items: center;
-
-  color: #383838;
 }
