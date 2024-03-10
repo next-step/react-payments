@@ -1,6 +1,7 @@
-import { Card, Flex, Text, Header } from '@/components'
+import { Card, Flex, Text, Header, Box } from '@/components'
 import { IconPlus, IconTrash } from '@tabler/icons-react'
 import { useCardState } from '@/hooks/use-card-state.tsx'
+import { vars } from '@/styles'
 
 export interface CardListStepProps {
   onClickRegister: () => void
@@ -41,19 +42,25 @@ export const CardListStep = ({ onClickRegister }: CardListStepProps) => {
               />
               <Flex alignItems="center" gap="8px">
                 <Text variant="body2">{card.cardNickName}</Text>
-                <IconTrash size={24} onClick={() => removeCard(card.id)} />
+                <Box as="button">
+                  <IconTrash
+                    size={24}
+                    color={vars.color.gray500}
+                    onClick={() => removeCard(card.id)}
+                  />
+                </Box>
               </Flex>
             </Flex>
           ))}
         <Flex
           as="button"
-          width="100%"
+          width="300px"
           borderRadius="4px"
           backgroundColor="gray100"
           color="gray500"
           justifyContent="center"
           alignItems="center"
-          aspectRatio="2/1"
+          aspectRatio="3/2"
           onClick={onClickRegister}
         >
           <IconPlus size={24} />
