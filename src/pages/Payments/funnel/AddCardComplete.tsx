@@ -3,7 +3,8 @@ import { STEP } from '../payments.constant';
 import { PaymentsStepKey } from '../payments.type';
 
 export const AddCardComplete = () => {
-  const { setStep } = usePaymentsFunnel();
+  const { setStep, data } = usePaymentsFunnel();
+  console.log(data);
 
   return (
     <div>

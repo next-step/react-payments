@@ -1,7 +1,9 @@
 import { Card } from '@/molecules/card/Card';
+import { Formatter } from '@/utils/formatter';
 import { useForm } from '@/hooks/useForm/useForm';
 import { usePaymentsFunnel } from '../payments.context';
 import { STEP } from '../payments.constant';
+import { SYMBOL } from '@/constants/symbol';
 
 // FIXME: 리팩터링 전, 코드 동작을 위한 임시 타입이기에 분리하지 않았습니다.
 export interface CardFulfilledForm {
@@ -65,20 +67,26 @@ export const AddCard = () => {
             <div className='card-bottom__number'>
               <span className='card-text__big'>
                 <span>
-                  {numberFirst || ''}
-                  {numberFirst?.length === 4 && <span>-</span>}
+                  {Formatter.segment(numberFirst, {
+                    separator: SYMBOL.HYPHEN,
+                    length: 4,
+                  })}
                 </span>
-
                 <span>
-                  {numberSecond || ''}
-                  {numberSecond?.length === 4 && <span>-</span>}
+                  {Formatter.segment(numberSecond, {
+                    separator: SYMBOL.HYPHEN,
+                    length: 4,
+                  })}
                 </span>
-
                 <span>
-                  {(numberThird && Formatter.masking(numberThird)) || ''}
-                  {numberThird?.length === 4 && <span>-</span>}
+                  {Formatter.segment(
+                    numberThird && Formatter.masking(numberThird),
+                    {
+                      separator: SYMBOL.HYPHEN,
+                      length: 4,
+                    }
+                  )}
                 </span>
-
                 <span>
                   {(numberFourth && Formatter.masking(numberFourth)) || ''}
                 </span>
@@ -112,18 +120,4 @@ export const AddCard = () => {
       )}
     </div>
   );
-};
-
-const Formatter = {
-  ellipsis(text: string, n: number) {
-    if (text.length > n) {
-      return `${text.slice(0, n)}...`;
-    }
-
-    return text;
-  },
-
-  masking(text: string) {
-    return text.replace(/./g, '*');
-  },
 };

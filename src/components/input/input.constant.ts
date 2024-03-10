@@ -1,3 +1,5 @@
+import { SYMBOL } from '@/constants/symbol';
+
 const TYPE = {
   TEXT: 'text',
   PASSWORD: 'password',
@@ -6,8 +8,8 @@ const TYPE = {
 
 const BOX = {
   SEPARATOR: {
-    HYPHEN: '-',
-    SLASH: '/',
+    HYPHEN: SYMBOL.HYPHEN,
+    SLASH: SYMBOL.SLASH,
   },
 } as const;
 
