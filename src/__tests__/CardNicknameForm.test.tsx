@@ -1,20 +1,10 @@
-import { createMachine } from 'xstate';
 import { screen, act } from '@testing-library/react';
 
-import { addCardMachine, initialCardInfo, useAddCardMachineActorRef } from 'src/state/addCardMachine.ts';
+import { useAddCardMachineActorRef } from 'src/state/addCardMachine.ts';
 import CardNicknameForm from 'src/components/CardNicknameForm.tsx';
 import { CARD_COMPANY_MAP } from 'src/constants/card.ts';
-import { MOCK_CARD_INFO_LIST } from 'src/mocks/card.ts';
+import { MOCK_CARD_INFO_LIST, mockCardListMachine } from 'src/mocks/card.ts';
 import { renderWithAddCardMachineProvider, renderHookWithAddCardMachineProvider } from 'src/utils/render.tsx';
-
-const mockCardListMachine = createMachine({
-	...addCardMachine.config,
-	context: {
-		cardInfo: { ...initialCardInfo },
-		cardList: [...MOCK_CARD_INFO_LIST],
-		selectedCard: { ...initialCardInfo, id: '' },
-	},
-});
 
 describe('카드 별칭 입력 테스트', () => {
 	beforeEach(() => {

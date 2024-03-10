@@ -1,4 +1,5 @@
-import { CardInfoWithId } from 'src/state/addCardMachine.ts';
+import { createMachine } from 'xstate';
+import { addCardMachine, CardInfoWithId, initialCardInfo } from 'src/state/addCardMachine.ts';
 
 export const MOCK_CARD_INFO_LIST: CardInfoWithId[] = [
 	{
@@ -72,3 +73,12 @@ export const MOCK_CARD_INFO_LIST: CardInfoWithId[] = [
 		cardCompanyCode: 'hwan',
 	},
 ];
+
+export const mockCardListMachine = createMachine({
+	...addCardMachine.config,
+	context: {
+		cardInfo: { ...initialCardInfo },
+		cardList: [...MOCK_CARD_INFO_LIST],
+		selectedCard: { ...initialCardInfo, id: '' },
+	},
+});
