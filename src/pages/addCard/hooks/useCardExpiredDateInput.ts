@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { insertAtInterval } from "../../../utils/stringUtils";
 import useDisplayedInput from "../../../hooks/useDisplayedInput";
-import { isNumber } from "../../../utils/validation";
+import { isNumber } from "../../../utils/validationUtils";
 
 const EXPIRED_DATE_LENGTH = 4;
 const EXPIRED_MONTH_LENGTH = 2;

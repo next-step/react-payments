@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useInput from "../../../hooks/useInput";
-import { isNumber } from "../../../utils/validation";
+import { isNumber } from "../../../utils/validationUtils";
 import useCardExpiredDateInput from "./useCardExpiredDateInput";
 import useCardNumberInput from "./useCardNumberInput";
 
