@@ -27,7 +27,7 @@ const TestCardSecurityCodeInput = () => {
   );
 };
 
-export const Basic: Story = {
+export const Default: Story = {
   render: () => <TestCardSecurityCodeInput />,
 };
 

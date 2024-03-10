@@ -13,7 +13,7 @@ const meta = {
 
 type Story = StoryObj<typeof AddCardForm>;
 
-export const Basic: Story = {
+export const Default: Story = {
   render: () => (
     <BrowserRouter>
       <AddCardForm />

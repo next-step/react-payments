@@ -26,7 +26,7 @@ const TestCardNumberInput = () => {
   );
 };
 
-export const Basic: Story = {
+export const Default: Story = {
   render: () => <TestCardNumberInput />,
 };
 

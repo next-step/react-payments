@@ -27,7 +27,7 @@ const TestCardExpiredDateInput = () => {
   );
 };
 
-export const Basic: Story = {
+export const Default: Story = {
   render: () => <TestCardExpiredDateInput />,
 };
 

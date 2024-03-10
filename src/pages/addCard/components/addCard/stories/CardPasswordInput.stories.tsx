@@ -34,7 +34,7 @@ const TestCarPasswordInput = () => {
   );
 };
 
-export const Basic: Story = {
+export const Default: Story = {
   render: () => <TestCarPasswordInput />,
 };
 

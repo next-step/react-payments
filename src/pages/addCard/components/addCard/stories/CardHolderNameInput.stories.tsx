@@ -25,6 +25,6 @@ const TestCardHolderNameInput = () => {
   );
 };
 
-export const Basic: Story = {
+export const Default: Story = {
   render: () => <TestCardHolderNameInput />,
 };
