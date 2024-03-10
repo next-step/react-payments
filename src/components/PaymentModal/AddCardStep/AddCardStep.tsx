@@ -1,6 +1,6 @@
 import { Card } from '@/components/Card'
 import { BottomSheet } from '@/components/common/BottomSheet'
-import { CardDateInput } from '@/components/common/CardDateInput/CardDateInput'
+import { CardDateInput } from '@/components/common/CardDateInput'
 import { CardNumberInput } from '@/components/common/CardNumberInput/CardNumberInput'
 import { CardPasswordInput } from '@/components/common/CardPasswordInput/CardPasswordInput'
 import { Input } from '@/components/common/Input/Input'

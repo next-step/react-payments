@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { CardDateInput } from './CardDateInput'
+import { CardDateInput } from './index'
 import { useState } from 'react'
 
 const meta: Meta<typeof CardDateInput> = {
