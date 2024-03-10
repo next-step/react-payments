@@ -14,10 +14,11 @@ export const CARD_COMPANY_LIST: CardCompanyData[] = [
 	{ name: '준일카드', code: 'joonil', className: 'card-joonil' },
 	{ name: '은규카드', code: 'eunkyu', className: 'card-eunkyu' },
 ];
-export const getCardCompanyClassNameByCode = (code: string) => {
-	return CARD_COMPANY_LIST.find(card => card.code === code)?.className ?? '';
-};
 
-export const getCardCompanyNameByCode = (code: string) => {
-	return CARD_COMPANY_LIST.find(card => card.code === code)?.name ?? '';
-};
+export const CARD_COMPANY_MAP = CARD_COMPANY_LIST.reduce(
+	(acc, card) => {
+		acc[card.code] = card;
+		return acc;
+	},
+	{} as Record<string, CardCompanyData>,
+);

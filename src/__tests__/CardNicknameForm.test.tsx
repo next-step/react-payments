@@ -8,7 +8,7 @@ import {
 	initialCardInfo,
 } from 'src/state/addCardMachine.ts';
 import CardNicknameForm from 'src/components/CardNicknameForm.tsx';
-import { getCardCompanyNameByCode } from 'src/constants/card.ts';
+import { CARD_COMPANY_MAP } from 'src/constants/card.ts';
 import { MOCK_CARD_INFO_LIST } from 'src/mocks/card.ts';
 
 function MockCardListProvider({ children }: { children?: ReactNode }) {
@@ -73,7 +73,7 @@ describe('카드 별칭 입력 테스트', () => {
 		});
 
 		expect(state.context.cardList[0].cardNickname).toBe(
-			getCardCompanyNameByCode(state.context.cardList[0].cardCompanyCode),
+			CARD_COMPANY_MAP[state.context.cardList[0].cardCompanyCode]?.name,
 		);
 	});
 });

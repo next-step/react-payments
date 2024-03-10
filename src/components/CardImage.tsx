@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 
 import { CardInfo } from 'src/state/addCardMachine.ts';
-import { getCardCompanyClassNameByCode, getCardCompanyNameByCode } from 'src/constants/card.ts';
+import { CARD_COMPANY_MAP } from 'src/constants/card.ts';
 
 interface CardImageProps
 	extends Pick<
@@ -39,14 +39,14 @@ export default function CardImage({
 			<div
 				className={
 					cardCompanyCode
-						? `${classNameBySize[size].card} ${getCardCompanyClassNameByCode(cardCompanyCode)}`
+						? `${classNameBySize[size].card} ${CARD_COMPANY_MAP[cardCompanyCode]?.className}`
 						: `${classNameBySize[size].card} empty-card`
 				}
 				data-testid="card-image"
 			>
 				<div className="card-top">
 					<div className={classNameBySize[size].text}>
-						{cardCompanyCode ? getCardCompanyNameByCode(cardCompanyCode) : null}
+						{cardCompanyCode ? CARD_COMPANY_MAP[cardCompanyCode]?.name : null}
 					</div>
 				</div>
 				<div className="card-middle">

@@ -1,7 +1,7 @@
 import { createMachine, assign } from 'xstate';
 import { createActorContext } from '@xstate/react';
 
-import { getCardCompanyNameByCode } from 'src/constants/card.ts';
+import { CARD_COMPANY_MAP } from 'src/constants/card.ts';
 
 export interface CardInfo {
 	cardNumberFirstSegment: string;
@@ -172,7 +172,9 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 							? {
 									...context.selectedCard,
 									cardNickname:
-										context.selectedCard.cardNickname || getCardCompanyNameByCode(context.selectedCard.cardCompanyCode),
+										context.selectedCard.cardNickname ||
+										CARD_COMPANY_MAP[context.selectedCard.cardCompanyCode]?.name ||
+										'',
 								}
 							: card,
 					),
