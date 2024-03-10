@@ -1,15 +1,17 @@
-import { useAddCardMachineActor } from 'src/state/addCardMachine.ts';
+import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/state/addCardMachine.ts';
 import SelectCardCompanyItem from 'src/components/SelectCardCompanyItem.tsx';
 import { CARD_COMPANY_LIST } from 'src/constants/card.ts';
 
 export default function SelectCardCompanyModal() {
-	const [state, set] = useAddCardMachineActor();
+	const { send } = useAddCardMachineActorRef();
+
+	const isStateSelectCardCompany = useAddCardMachineSelector(state => state.matches('form.selectCardCompany'));
 
 	const handleDimmedClick = () => {
-		set({ type: 'TOGGLE' });
+		send({ type: 'TOGGLE' });
 	};
 
-	if (state.matches('form.selectCardCompany')) {
+	if (isStateSelectCardCompany) {
 		return (
 			<div className="modal-dimmed" onClick={handleDimmedClick} data-testid="modal-dimmed">
 				<div className="modal" data-testid="company-modal">

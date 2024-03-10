@@ -1,6 +1,6 @@
 import { useId, ChangeEvent } from 'react';
 
-import { useAddCardMachineActor } from 'src/state/addCardMachine.ts';
+import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/state/addCardMachine.ts';
 
 interface CardSecurityCodeInputProps {
 	maxLength?: number;
@@ -9,7 +9,7 @@ interface CardSecurityCodeInputProps {
 export default function CardOwnerNameInput({ maxLength = 30 }: CardSecurityCodeInputProps) {
 	const cardOwnerNameInputId = useId();
 
-	const [state, send] = useAddCardMachineActor();
+	const { send } = useAddCardMachineActorRef();
 
 	const handleCardOwnerNameChange = (event: ChangeEvent<HTMLInputElement>) => {
 		send({
@@ -19,7 +19,7 @@ export default function CardOwnerNameInput({ maxLength = 30 }: CardSecurityCodeI
 		});
 	};
 
-	const cardOwnerName = state.context.cardInfo.cardOwnerName;
+	const cardOwnerName = useAddCardMachineSelector(state => state.context.cardInfo.cardOwnerName);
 
 	return (
 		<div className="input-container">

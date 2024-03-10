@@ -1,14 +1,14 @@
 import { useId, ChangeEvent } from 'react';
 
-import { useAddCardMachineActor } from 'src/state/addCardMachine.ts';
+import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/state/addCardMachine.ts';
 import REGEX from 'src/constants/regex.ts';
 
 export default function CardSecurityCodeInput() {
 	const cardSecurityCodeInputId = useId();
 
-	const [state, send] = useAddCardMachineActor();
+	const { send } = useAddCardMachineActorRef();
 
-	const { cardSecurityCode } = state.context.cardInfo;
+	const { cardSecurityCode } = useAddCardMachineSelector(state => state.context.cardInfo);
 
 	const handleCardSecurityCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
 		send({

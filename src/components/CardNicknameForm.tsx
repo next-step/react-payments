@@ -1,15 +1,15 @@
 import { FormEvent, ChangeEvent } from 'react';
 
-import { useAddCardMachineActor } from 'src/state/addCardMachine.ts';
+import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/state/addCardMachine.ts';
 
 interface CardNicknameFormProps {
 	maxLength?: number;
 }
 
 export default function CardNicknameForm({ maxLength = 10 }: CardNicknameFormProps) {
-	const [state, send] = useAddCardMachineActor();
+	const { send } = useAddCardMachineActorRef();
 
-	const { cardNickname } = state.context.selectedCard;
+	const selectedCardNickname = useAddCardMachineSelector(state => state.context.selectedCard.cardNickname);
 
 	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -28,7 +28,7 @@ export default function CardNicknameForm({ maxLength = 10 }: CardNicknameFormPro
 					type="text"
 					placeholder="카드 별칭 (선택)"
 					onChange={handleNicknameChange}
-					value={cardNickname}
+					value={selectedCardNickname}
 					maxLength={maxLength}
 					data-testid="nickname-input"
 				/>

@@ -1,6 +1,5 @@
 import { createMachine, assign } from 'xstate';
 import { createActorContext } from '@xstate/react';
-
 import { CARD_COMPANY_MAP } from 'src/constants/card.ts';
 
 export interface CardInfo {
@@ -51,135 +50,103 @@ type CardMachineEvent =
 	| { type: 'SELECT_CARD'; value: CardInfoWithId }
 	| { type: 'DELETE_CARD'; value: string };
 
-export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent>(
-	{
-		predictableActionArguments: true,
-		id: 'addCard',
-		initial: 'select',
-		context: {
-			cardInfo: { ...initialCardInfo },
-			cardList: [],
-			selectedCard: { ...initialCardInfo, id: '' },
+export const addCardMachine = createMachine({
+	id: 'addCard',
+	types: {
+		events: {} as CardMachineEvent,
+		context: {} as CardMachineContext,
+	},
+	initial: 'select',
+	context: {
+		cardInfo: { ...initialCardInfo },
+		cardList: [],
+		selectedCard: { ...initialCardInfo, id: '' },
+	},
+	states: {
+		select: {
+			on: {
+				GO_TO_FORM: {
+					target: 'form',
+				},
+				SELECT_CARD: {
+					target: 'nickname',
+					actions: assign(({ event }) => ({ selectedCard: event.value })),
+				},
+				DELETE_CARD: {
+					actions: assign(({ context, event }) => ({
+						cardList: context.cardList.filter(card => card.id !== event.value),
+					})),
+				},
+			},
 		},
-		states: {
-			select: {
-				on: {
-					GO_TO_FORM: {
-						target: 'form',
-					},
-					SELECT_CARD: {
-						target: 'nickname',
-						actions: ['selectCard'],
-					},
-					DELETE_CARD: {
-						actions: ['deleteCard'],
-					},
-				},
-			},
-			form: {
-				initial: 'selectCardCompany',
-				states: {
-					selectCardCompany: {
-						on: {
-							TOGGLE: {
-								target: 'enterCardInfo',
-							},
-						},
-					},
-					enterCardInfo: {
-						on: {
-							TOGGLE: {
-								target: 'selectCardCompany',
-							},
+		form: {
+			initial: 'selectCardCompany',
+			states: {
+				selectCardCompany: {
+					on: {
+						TOGGLE: {
+							target: 'enterCardInfo',
 						},
 					},
 				},
-				on: {
-					ADD_CARD: {
-						target: 'nickname',
-						actions: ['addCard'],
-					},
-					CHANGE_FIELD: {
-						target: 'form.enterCardInfo',
-						actions: ['changeField'],
-					},
-					BACK: {
-						target: 'select',
-						actions: ['resetCardInfo'],
+				enterCardInfo: {
+					on: {
+						TOGGLE: {
+							target: 'selectCardCompany',
+						},
 					},
 				},
 			},
-			nickname: {
-				on: {
-					EDIT_CARD: {
-						target: 'select',
-						actions: ['editCard'],
-					},
-					CHANGE_FIELD: {
-						actions: ['changeSelectedCardField'],
-					},
+			on: {
+				ADD_CARD: {
+					target: 'nickname',
+					actions: assign(({ context }) => ({
+						cardList: [...context.cardList, { ...context.cardInfo, id: Date.now().toString() }],
+					})),
+				},
+				CHANGE_FIELD: {
+					target: 'form.enterCardInfo',
+					actions: assign(({ context, event }) => ({
+						cardInfo: { ...context.cardInfo, [event.field]: event.value },
+					})),
+				},
+				BACK: {
+					target: 'select',
+					actions: assign({ cardInfo: { ...initialCardInfo } }),
+				},
+			},
+		},
+		nickname: {
+			on: {
+				EDIT_CARD: {
+					target: 'select',
+					actions: assign(({ context }) => ({
+						cardList: context.cardList.map(card =>
+							card.id === context.selectedCard.id
+								? {
+										...context.selectedCard,
+										cardNickname:
+											context.selectedCard.cardNickname ||
+											CARD_COMPANY_MAP[context.selectedCard.cardCompanyCode]?.name ||
+											'',
+									}
+								: card,
+						),
+						selectedCard: { ...initialCardInfo, id: '' },
+					})),
+				},
+				CHANGE_FIELD: {
+					actions: assign(({ context, event }) => ({
+						selectedCard: { ...context.selectedCard, [event.field]: event.value },
+					})),
 				},
 			},
 		},
 	},
-	{
-		actions: {
-			changeField: assign({
-				cardInfo: (context, event) =>
-					event.type === 'CHANGE_FIELD' ? { ...context.cardInfo, [event.field]: event.value } : context.cardInfo,
-			}),
-			resetCardInfo: assign({
-				cardInfo: { ...initialCardInfo },
-			}),
-			changeSelectedCardField: assign({
-				selectedCard: (context, event) =>
-					event.type === 'CHANGE_FIELD'
-						? { ...context.selectedCard, [event.field]: event.value }
-						: context.selectedCard,
-			}),
-			addCard: assign(context => {
-				const newCardInfo = { ...context.cardInfo, id: Date.now().toString() };
-
-				return {
-					...context,
-					cardList: [newCardInfo, ...context.cardList],
-					selectedCard: newCardInfo,
-					cardInfo: { ...initialCardInfo },
-				};
-			}),
-			editCard: assign(context => {
-				return {
-					...context,
-					selectedCard: { ...initialCardInfo, id: '' },
-					cardList: context.cardList.map(card =>
-						card.id === context.selectedCard.id
-							? {
-									...context.selectedCard,
-									cardNickname:
-										context.selectedCard.cardNickname ||
-										CARD_COMPANY_MAP[context.selectedCard.cardCompanyCode]?.name ||
-										'',
-								}
-							: card,
-					),
-				};
-			}),
-			selectCard: assign({
-				selectedCard: (context, event) => (event.type === 'SELECT_CARD' ? event.value : context.selectedCard),
-			}),
-			deleteCard: assign({
-				cardList: (context, event) =>
-					event.type === 'DELETE_CARD' ? context.cardList.filter(card => card.id !== event.value) : context.cardList,
-			}),
-		},
-	},
-);
-
-export type CardMachineType = typeof addCardMachine;
+});
 
 export const {
 	Provider: AddCardMachineProvider,
 	useSelector: useAddCardMachineSelector,
-	useActor: useAddCardMachineActor,
 	useActorRef: useAddCardMachineActorRef,
 } = createActorContext(addCardMachine);

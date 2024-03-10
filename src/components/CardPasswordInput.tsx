@@ -1,6 +1,6 @@
 import { ChangeEvent, useId, useRef } from 'react';
 
-import { useAddCardMachineActor } from 'src/state/addCardMachine.ts';
+import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/state/addCardMachine.ts';
 import REGEX from 'src/constants/regex.ts';
 
 interface CardPasswordInputProps {
@@ -8,9 +8,11 @@ interface CardPasswordInputProps {
 }
 
 export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPasswordInputProps) {
-	const [state, send] = useAddCardMachineActor();
+	const { send } = useAddCardMachineActorRef();
 
-	const { cardPasswordFirstDigit, cardPasswordSecondDigit } = state.context.cardInfo;
+	const { cardPasswordFirstDigit, cardPasswordSecondDigit } = useAddCardMachineSelector(
+		state => state.context.cardInfo,
+	);
 
 	const cardPasswordInputId = useId();
 

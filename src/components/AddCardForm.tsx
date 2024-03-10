@@ -6,11 +6,11 @@ import CardOwnerNameInput from 'src/components/CardOwnerNameInput.tsx';
 import CardExpirationDateInput from 'src/components/CardExpirationDateInput.tsx';
 import CardSecurityCodeInput from 'src/components/CardSecurityCodeInput.tsx';
 import CardPasswordInput from 'src/components/CardPasswordInput.tsx';
-import { useAddCardMachineActor } from 'src/state/addCardMachine.ts';
+import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/state/addCardMachine.ts';
 import SelectCardCompanyModal from 'src/components/SelectCardCompanyModal.tsx';
 
 export default function AddCardForm() {
-	const [state, send] = useAddCardMachineActor();
+	const { send } = useAddCardMachineActorRef();
 
 	const {
 		cardCompanyCode,
@@ -20,7 +20,9 @@ export default function AddCardForm() {
 		cardNumberThirdSegment,
 		cardNumberFourthSegment,
 		cardExpirationDate,
-	} = state.context.cardInfo;
+	} = useAddCardMachineSelector(state => state.context.cardInfo);
+
+	const isStateForm = useAddCardMachineSelector(state => state.matches('form'));
 
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -32,7 +34,7 @@ export default function AddCardForm() {
 		send({ type: 'BACK' });
 	};
 
-	if (state.matches('form')) {
+	if (isStateForm) {
 		return (
 			<>
 				<div>

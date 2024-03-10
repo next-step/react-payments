@@ -1,16 +1,18 @@
-import { useAddCardMachineActor } from 'src/state/addCardMachine.ts';
+import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/state/addCardMachine.ts';
 import CardListItem from 'src/components/CardListItem.tsx';
 
 export default function CardList() {
-	const [state, send] = useAddCardMachineActor();
+	const { send } = useAddCardMachineActorRef();
 
-	const { cardList } = state.context;
+	const cardList = useAddCardMachineSelector(state => state.context.cardList);
+
+	const isStateSelect = useAddCardMachineSelector(state => state.matches('select'));
 
 	const handleClickAddCard = () => {
 		send({ type: 'GO_TO_FORM' });
 	};
 
-	if (state.matches('select')) {
+	if (isStateSelect) {
 		return (
 			<div className="h-100 flex-column-center">
 				<div className="flex-center">

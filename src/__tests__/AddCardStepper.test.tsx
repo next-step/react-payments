@@ -2,7 +2,7 @@ import { render, screen, renderHook, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import AddCardStepper from 'src/components/AddCardStepper.tsx';
-import { AddCardMachineProvider, useAddCardMachineActor } from 'src/state/addCardMachine.ts';
+import { AddCardMachineProvider, useAddCardMachineActorRef } from 'src/state/addCardMachine.ts';
 import { MOCK_CARD_INFO_LIST } from 'src/mocks/card.ts';
 
 const setup = () => {
@@ -32,13 +32,13 @@ describe('카드 추가 step 테스트', () => {
 		});
 
 		it('카드를 클릭하면, 카드 추가 확인 화면으로 이동한다.', async () => {
-			const { result } = renderHook(() => useAddCardMachineActor(), { wrapper: AddCardMachineProvider });
+			const { result } = renderHook(() => useAddCardMachineActorRef(), { wrapper: AddCardMachineProvider });
 
 			act(() => {
-				result.current[1]({ type: 'SELECT_CARD', value: MOCK_CARD_INFO_LIST[0] });
+				result.current.send({ type: 'SELECT_CARD', value: MOCK_CARD_INFO_LIST[0] });
 			});
 
-			expect(result.current[0].matches('nickname')).toBe(true);
+			expect(result.current.getSnapshot().matches('nickname')).toBe(true);
 		});
 	});
 

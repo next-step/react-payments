@@ -1,10 +1,8 @@
-import { useAddCardMachineActor } from 'src/state/addCardMachine.ts';
+import { useAddCardMachineSelector } from 'src/state/addCardMachine.ts';
 import CardImage from 'src/components/CardImage.tsx';
 import CardNicknameForm from 'src/components/CardNicknameForm.tsx';
 
 export default function AddCardFinish() {
-	const [state] = useAddCardMachineActor();
-
 	const {
 		cardNumberFirstSegment,
 		cardNumberSecondSegment,
@@ -13,9 +11,11 @@ export default function AddCardFinish() {
 		cardOwnerName,
 		cardExpirationDate,
 		cardCompanyCode,
-	} = state.context.selectedCard;
+	} = useAddCardMachineSelector(state => state.context.selectedCard);
 
-	if (state.matches('nickname')) {
+	const isStateNickname = useAddCardMachineSelector(state => state.matches('nickname'));
+
+	if (isStateNickname) {
 		return (
 			<div className="flex-column-center h-100">
 				<div className="flex-center">

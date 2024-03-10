@@ -1,7 +1,7 @@
 import { ChangeEvent, useId } from 'react';
 
 import REGEX from 'src/constants/regex.ts';
-import { useAddCardMachineActor } from 'src/state/addCardMachine.ts';
+import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/state/addCardMachine.ts';
 
 interface CardExpirationDateInputProps {
 	separator?: string;
@@ -20,9 +20,9 @@ const formatExpirationDate = (separator: string) => (value: string) => {
 };
 
 export default function CardExpirationDateInput({ separator = '/' }: CardExpirationDateInputProps) {
-	const [state, send] = useAddCardMachineActor();
+	const { send } = useAddCardMachineActorRef();
 
-	const { cardExpirationDate } = state.context.cardInfo;
+	const cardExpirationDate = useAddCardMachineSelector(state => state.context.cardInfo.cardExpirationDate);
 
 	const cardExpirationDateInputId = useId();
 

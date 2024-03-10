@@ -1,6 +1,6 @@
 import { useId, useRef, ChangeEvent } from 'react';
 
-import { useAddCardMachineActor } from 'src/state/addCardMachine.ts';
+import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/state/addCardMachine.ts';
 import REGEX from 'src/constants/regex.ts';
 
 interface CardNumberInputProps {
@@ -8,10 +8,10 @@ interface CardNumberInputProps {
 }
 
 export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputProps) {
-	const [state, send] = useAddCardMachineActor();
+	const { send } = useAddCardMachineActorRef();
 
 	const { cardNumberFirstSegment, cardNumberSecondSegment, cardNumberThirdSegment, cardNumberFourthSegment } =
-		state.context.cardInfo;
+		useAddCardMachineSelector(state => state.context.cardInfo);
 
 	const secondSegmentInputRef = useRef<HTMLInputElement>(null);
 	const thirdSegmentInputRef = useRef<HTMLInputElement>(null);
