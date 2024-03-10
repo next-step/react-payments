@@ -5,12 +5,12 @@ export const FunnelStepContext = createContext<FunnelStep>({ step: 'add' })
 export const UpdateFunnelStepContext = createContext<(payload: FunnelStep) => void>(() => {})
 
 const FunnelStepProvider = ({ children }: { children: React.ReactNode }) => {
-  const [cardInfo, setCardInfo] = useState<FunnelStep>({ step: 'add' })
+  const [step, setStep] = useState<FunnelStep>({ step: 'add' })
 
   return (
     <>
-      <UpdateFunnelStepContext.Provider value={setCardInfo}>
-        <FunnelStepContext.Provider value={cardInfo}>{children}</FunnelStepContext.Provider>
+      <UpdateFunnelStepContext.Provider value={setStep}>
+        <FunnelStepContext.Provider value={step}>{children}</FunnelStepContext.Provider>
       </UpdateFunnelStepContext.Provider>
     </>
   )
