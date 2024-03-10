@@ -125,33 +125,17 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 	{
 		actions: {
 			changeField: assign({
-				cardInfo: (context, event) => {
-					if (event.type === 'CHANGE_FIELD') {
-						const { field, value } = event;
-						return {
-							...context.cardInfo,
-							[field]: value,
-						};
-					}
-
-					return { ...context.cardInfo };
-				},
+				cardInfo: (context, event) =>
+					event.type === 'CHANGE_FIELD' ? { ...context.cardInfo, [event.field]: event.value } : context.cardInfo,
 			}),
 			resetCardInfo: assign({
 				cardInfo: { ...initialCardInfo },
 			}),
 			changeSelectedCardField: assign({
-				selectedCard: (context, event) => {
-					if (event.type === 'CHANGE_FIELD') {
-						const { field, value } = event;
-						return {
-							...context.selectedCard,
-							[field]: value,
-						};
-					}
-
-					return { ...context.selectedCard };
-				},
+				selectedCard: (context, event) =>
+					event.type === 'CHANGE_FIELD'
+						? { ...context.selectedCard, [event.field]: event.value }
+						: context.selectedCard,
 			}),
 			addCard: assign(context => {
 				const newCardInfo = { ...context.cardInfo, id: Date.now().toString() };
@@ -181,22 +165,11 @@ export const addCardMachine = createMachine<CardMachineContext, CardMachineEvent
 				};
 			}),
 			selectCard: assign({
-				selectedCard: (context, event) => {
-					if (event.type === 'SELECT_CARD') {
-						return event.value;
-					}
-
-					return { ...context.selectedCard };
-				},
+				selectedCard: (context, event) => (event.type === 'SELECT_CARD' ? event.value : context.selectedCard),
 			}),
 			deleteCard: assign({
-				cardList: (context, event) => {
-					if (event.type === 'DELETE_CARD') {
-						return context.cardList.filter(card => card.id !== event.value);
-					}
-
-					return context.cardList;
-				},
+				cardList: (context, event) =>
+					event.type === 'DELETE_CARD' ? context.cardList.filter(card => card.id !== event.value) : context.cardList,
 			}),
 		},
 	},
