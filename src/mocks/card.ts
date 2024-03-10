@@ -1,5 +1,5 @@
 import { createMachine } from 'xstate';
-import { addCardMachine, CardInfoWithId, initialCardInfo } from 'src/state/addCardMachine.ts';
+import { addCardMachine, CardInfoWithId, initialCardInfo } from 'src/machines/addCardMachine.ts';
 
 export const MOCK_CARD_INFO_LIST: CardInfoWithId[] = [
 	{
