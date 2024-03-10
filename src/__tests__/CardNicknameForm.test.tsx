@@ -8,7 +8,8 @@ import {
 	initialCardInfo,
 } from 'src/state/addCardMachine.ts';
 import CardNicknameForm from 'src/components/CardNicknameForm.tsx';
-import { getCardCompanyNameByCode, MOCK_CARD_INFO_LIST } from 'src/constants/card.ts';
+import { getCardCompanyNameByCode } from 'src/constants/card.ts';
+import { MOCK_CARD_INFO_LIST } from 'src/mocks/card.ts';
 
 function MockCardListProvider({ children }: { children?: ReactNode }) {
 	return (

@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 
 import AddCardStepper from 'src/components/AddCardStepper.tsx';
 import { AddCardMachineProvider, useAddCardMachineActor } from 'src/state/addCardMachine.ts';
-import { MOCK_CARD_INFO_LIST } from 'src/constants/card.ts';
+import { MOCK_CARD_INFO_LIST } from 'src/mocks/card.ts';
 
 const setup = () => {
 	const formNextButton = screen.getByTestId('form-next');

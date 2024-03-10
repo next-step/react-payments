@@ -7,7 +7,7 @@ import {
 	initialCardInfo,
 	useAddCardMachineActor,
 } from 'src/state/addCardMachine.ts';
-import { MOCK_CARD_INFO_LIST } from 'src/constants/card.ts';
+import { MOCK_CARD_INFO_LIST } from 'src/mocks/card.ts';
 
 function MockCardListProvider({ children }: { children?: ReactNode }) {
 	return (
