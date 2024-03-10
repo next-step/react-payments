@@ -1,3 +1,4 @@
+import Button from "../../../components/button/Button";
 import useAddCardForm from "../hooks/useAddCardForm";
 import CardExpiredDateInput from "./CardExpiredDateInput";
 import CardHolderNameInput from "./CardHolderNameInput";
@@ -46,7 +47,9 @@ export default function AddCardForm() {
         onFirstValueChange={handleFirstCardPasswordChange}
         onSecondValueChange={handleSecondCardPasswordChange}
       />
-      <button type="submit">다음</button>
+      <div style={{ width: "100%", textAlign: "right" }}>
+        <Button type="submit">다음</Button>
+      </div>
     </form>
   );
 }
