@@ -1,0 +1,6 @@
+export const CARD_NUMBER = {
+  INPUT_COUNT: 4,
+  MAX_LENGTH: 4,
+  VISIBLE_COUNT: 2,
+  LAST_INPUT_INDEX: 3
+}
