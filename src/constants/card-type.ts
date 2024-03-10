@@ -9,7 +9,7 @@ export const CARD_TYPE: Record<string, CardType> = {
   POCO: {
     id: 1,
     name: '포코 카드',
-    color: 'gray500',
+    color: 'red',
   },
   JUNE: {
     id: 2,

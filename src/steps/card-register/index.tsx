@@ -36,6 +36,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault()
+    if (!cardType) return
     onSubmit()
   }
 
