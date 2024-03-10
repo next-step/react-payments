@@ -30,7 +30,6 @@ export const Card = React.memo(
             </div>
           </div>
         </div>
-        <span className="card-nickname">법인카드</span>
       </>
     );
   }

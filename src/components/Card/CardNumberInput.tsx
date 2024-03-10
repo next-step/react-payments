@@ -1,14 +1,36 @@
 import { NumberInput } from "@/components/atom/NumberInput";
-import { inputProps } from "@/pages/RegisterCard/helper";
-import { ChangeEvent, Fragment, useRef } from "react";
+import { ComponentProps, Fragment, useRef } from "react";
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
+
+const commonProps: ComponentProps<typeof NumberInput> = {
+  variant: "borderLess",
+  maxLength: 4,
+  style: { textAlign: "center" },
+};
+
+export const inputProps: ComponentProps<typeof NumberInput>[] = [
+  {
+    ...commonProps,
+  },
+  {
+    ...commonProps,
+  },
+  {
+    ...commonProps,
+    mask: true,
+  },
+  {
+    ...commonProps,
+    mask: true,
+  },
+];
 
 export const CardNumberInput = () => {
   const inputRef = useRef<HTMLInputElement[]>([]);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
-    if (e.target.value.length === 4) {
+  const onChange = (value: string, index: number) => {
+    if (value.length === 4) {
       inputRef.current[index + 1].focus();
     }
   };
@@ -22,7 +44,7 @@ export const CardNumberInput = () => {
               ref={(elem) => {
                 elem && (inputRef.current[i] = elem);
               }}
-              onChange={(e) => onChange(e, i)}
+              onChange={(value: string) => onChange(value, i)}
             />
             {i !== inputProps.length - 1 && <span>-</span>}
           </Fragment>
@@ -36,6 +58,4 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ecebf1;
-  border-radius: 5px;
 `;
