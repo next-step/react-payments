@@ -54,16 +54,3 @@
 .w-15 {
   width: 15%;
 }
-
-.d-flex {
-  display: flex;
-}
-.direction-column {
-  flex-direction: column;
-}
-.align-items {
-  align-items: center;
-}
-/*.gap-5 {
-  gap: 5px;
-} */

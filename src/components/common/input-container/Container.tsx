@@ -1,15 +1,16 @@
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+import classNames from 'classnames';
+import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren, ReactNode } from 'react';
 
 type BaseContainerProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
-interface ContainerProps extends BaseContainerProps {
+interface ContainerProps extends BaseContainerProps, PropsWithChildren {
   title?: string;
-  children: ReactNode;
+  className?: string;
 }
 
-const Container = ({ title, children }: ContainerProps) => {
+const Container = ({ title, className, children }: ContainerProps) => {
   return (
-    <div className="input-container">
+    <div className={classNames('input-container', className)}>
       {title && (
         <span title={title} className="input-title">
           {title}

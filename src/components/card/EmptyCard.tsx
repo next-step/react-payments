@@ -1,5 +1,5 @@
-import CardBox from './CardBox';
-import CardForm from './CardForm';
+import CardBox from './parts/CardBox';
+import CardForm from './parts/CardForm';
 
 interface EmptyCardProps {
   onClick: () => void;

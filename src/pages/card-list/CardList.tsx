@@ -1,5 +1,7 @@
 import Card from '@/components/card/Card';
 import EmptyCard from '@/components/card/EmptyCard';
+import FlexCenter from '@/components/common/flex-center/FlexCenter';
+import PageTitle from '@/components/common/page-title/PageTitle';
 import { MyCardsContext } from '@/provider/my-cards-provider/MyCardsProvider';
 import { StepContext } from '@/provider/step-provider/StepProvider';
 import { useContext } from 'react';
@@ -11,11 +13,14 @@ const CardList = () => {
     navigate(path);
   };
   return (
-    <div>
+    <div className="app flex-column-center">
+      <FlexCenter>
+        <PageTitle className="mb-10">보유 카드</PageTitle>
+      </FlexCenter>
       {myCardList.map((cardState, i) => (
         <>
           <Card key={i} onClick={() => goToPage('COMPLETE')} {...cardState} />
-          <p>{cardState.nickname}</p>
+          <span className="card-nickname">{cardState.nickname}</span>
         </>
       ))}
       <EmptyCard onClick={() => goToPage('CARD')} />

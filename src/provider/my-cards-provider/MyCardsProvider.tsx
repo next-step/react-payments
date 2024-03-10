@@ -14,7 +14,7 @@ export const MyCardsContext = createContext(initialState);
 const MyCardsProvider = ({ children }: PropsWithChildren) => {
   const [myCardList, setMyCardList] = useState<CardStateType[]>([]);
   const addCard = (card: CardStateType) => {
-    setMyCardList((prev) => [...prev, card]);
+    setMyCardList((prev) => [card, ...prev]);
   };
   return (
     <MyCardsContext.Provider value={{ myCardList, addCard }}>{children}</MyCardsContext.Provider>

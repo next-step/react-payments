@@ -7,21 +7,19 @@ import StepProvider from './provider/step-provider/StepProvider';
 
 const App = () => (
   <div className="root">
-    <div className="app">
-      <MyCardsProvider>
-        <StepProvider>
-          {(route) => (
-            <>
-              {'LIST' === route && <CardList />}
-              <CardInfoProvider>
-                {'CARD' === route && <AddCard />}
-                {'COMPLETE' === route && <CardRegisterComplete />}
-              </CardInfoProvider>
-            </>
-          )}
-        </StepProvider>
-      </MyCardsProvider>
-    </div>
+    <MyCardsProvider>
+      <StepProvider>
+        {(route) => (
+          <>
+            {'LIST' === route && <CardList />}
+            <CardInfoProvider>
+              {'CARD' === route && <AddCard />}
+              {'COMPLETE' === route && <CardRegisterComplete />}
+            </CardInfoProvider>
+          </>
+        )}
+      </StepProvider>
+    </MyCardsProvider>
   </div>
 );
 

@@ -16,22 +16,22 @@ const AddCard = () => {
   };
 
   return (
-    <>
+    <div className="app">
       <PageTitle>
         <div onClick={() => goToPage('LIST')}>{'< 카드 추가'}</div>
       </PageTitle>
       <Card {...cardState} />
       <CardForm />
-      <ButtonBox className="mt-10">
+      <ButtonBox>
         <Button
           type="button"
-          onClick={() => goToPage('COMPLETE')}
           className="button-text button-border-none"
+          onClick={() => goToPage('COMPLETE')}
         >
-          다음
+          <span className="button-text">다음</span>
         </Button>
       </ButtonBox>
-    </>
+    </div>
   );
 };
 
