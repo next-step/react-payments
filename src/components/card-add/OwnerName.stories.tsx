@@ -1,8 +1,11 @@
 import { useState } from 'react';
 
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import OwnerName from './OwnerName';
+
+const ownerName = 'SoJeong';
+const setOwnerName = () => {};
 
 const meta = {
   title: 'CARD-ADD/OwnerName',
@@ -11,8 +14,11 @@ const meta = {
 
 export default meta;
 
-export function Basic() {
-  const [ownerName, setOwnerName] = useState('');
+type Story = StoryObj<typeof meta>;
 
-  return <OwnerName ownerName={ownerName} setOwnerName={setOwnerName} />;
-}
+export const Default: Story = {
+  args: {
+    ownerName,
+    setOwnerName,
+  },
+};

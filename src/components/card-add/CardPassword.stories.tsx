@@ -1,8 +1,13 @@
-import { useState } from 'react';
-
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import CardPassword from './CardPassword';
+
+const cardPassword = {
+  firstNumber: '1',
+  secondNumber: '5',
+};
+
+const setCardPassword = () => {};
 
 const meta = {
   title: 'CARD-ADD/CardPassword',
@@ -11,16 +16,11 @@ const meta = {
 
 export default meta;
 
-export function Basic() {
-  const [cardPassword, setCardPassword] = useState({
-    firstNumber: '1',
-    secondNumber: '5',
-  });
+type Story = StoryObj<typeof meta>;
 
-  return (
-    <CardPassword
-      cardPassword={cardPassword}
-      setCardPassword={setCardPassword}
-    />
-  );
-}
+export const Default: Story = {
+  args: {
+    cardPassword,
+    setCardPassword,
+  },
+};

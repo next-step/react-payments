@@ -1,8 +1,9 @@
-import { useState } from 'react';
-
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import SecurityCode from './SecurityCode';
+
+const securityCode = '123';
+const setSecurityCode = () => {};
 
 const meta = {
   title: 'CARD-ADD/SecurityCode',
@@ -11,13 +12,11 @@ const meta = {
 
 export default meta;
 
-export function Basic() {
-  const [securityCode, setSecurityCode] = useState('');
+type Story = StoryObj<typeof meta>;
 
-  return (
-    <SecurityCode
-      securityCode={securityCode}
-      setSecurityCode={setSecurityCode}
-    />
-  );
-}
+export const Default: Story = {
+  args: {
+    securityCode,
+    setSecurityCode,
+  },
+};

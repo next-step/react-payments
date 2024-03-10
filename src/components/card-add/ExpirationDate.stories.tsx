@@ -1,8 +1,15 @@
 import { useState } from 'react';
 
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import ExpirationDate from './ExpirationDate';
+
+const expirationDate = {
+  month: '12',
+  year: '23',
+};
+
+const setExpirationDate = () => {};
 
 const meta = {
   title: 'CARD-ADD/ExpirationDate',
@@ -11,16 +18,11 @@ const meta = {
 
 export default meta;
 
-export function Basic() {
-  const [expirationDate, setExpirationDate] = useState({
-    month: '12',
-    year: '23',
-  });
+type Story = StoryObj<typeof meta>;
 
-  return (
-    <ExpirationDate
-      expirationDate={expirationDate}
-      setExpirationDate={setExpirationDate}
-    />
-  );
-}
+export const Default: Story = {
+  args: {
+    expirationDate,
+    setExpirationDate,
+  },
+};
