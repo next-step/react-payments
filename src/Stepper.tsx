@@ -1,9 +1,9 @@
 import { PropsWithChildren, useContext } from 'react'
 import { FunnelStep } from './constant/step'
-import { FunnelStepContext } from './context/funnelStepContext'
+import FunnelStepProvider, { FunnelStepContext } from './context/funnelStepContext'
 
 const Stepper = ({ children }: PropsWithChildren<{}>) => {
-  return <>{children}</>
+  return <FunnelStepProvider>{children}</FunnelStepProvider>
 }
 
 const Step = ({ step, children }: PropsWithChildren<FunnelStep>) => {
