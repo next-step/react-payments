@@ -1,20 +1,29 @@
 import { useContext } from 'react'
 import { CardInfoContext } from '../../context/paymentContext'
-import ui from '../../styles/index.module.css'
 import { checkAllMasking } from '../../utils/check'
+import ui from '../../styles/index.module.css'
 
 export const CardBox = () => {
   const cardInfo = useContext(CardInfoContext)
 
+  const cardNumberValue = () => {
+    const cardNumber = cardInfo.cardNumber
+    return {
+      first: cardNumber?.first || '',
+      second: cardNumber?.second || '',
+      third: cardNumber?.third ? checkAllMasking(cardNumber.third, cardNumber.third.length) : '',
+      fourth: cardNumber?.fourth ? checkAllMasking(cardNumber.fourth, cardNumber.fourth.length) : '',
+    }
+  }
   return (
     <div className={ui['card-box']}>
       <div className={ui['empty-card']}>
         <div className={ui['card-top']}>{cardInfo.cardType}</div>
         <div className={ui['card-middle']}>
           <div className={ui['small-card__chip']}></div>
-          <p>{` ${cardInfo.cardNumber?.first ?? ''} ${cardInfo.cardNumber?.second ?? ''} ${cardInfo.cardNumber?.third ? checkAllMasking(cardInfo.cardNumber.third || '', cardInfo.cardNumber.third?.length) : ''} ${
-            cardInfo.cardNumber?.fourth ? checkAllMasking(cardInfo.cardNumber.fourth || '', cardInfo.cardNumber?.fourth.length) : ''
-          }`}</p>
+          <p>{` 
+          ${cardNumberValue().first} ${cardNumberValue().second} ${cardNumberValue().third} ${cardNumberValue().fourth}
+          `}</p>
         </div>
         <div className={ui['card-bottom']}>
           <div className={ui['card-bottom__info']}>
