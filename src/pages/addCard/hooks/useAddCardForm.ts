@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import useInput from "../../../hooks/useInput";
 import { isNumber } from "../../../utils/validation";
 import useCardExpiredDateInput from "./useCardExpiredDateInput";
 import useCardNumberInput from "./useCardNumberInput";
 
 export default function useAddCardForm() {
+  const navigate = useNavigate();
   const {
     value: cardNumber,
     displayedValue: displayedCardNumber,
@@ -35,6 +37,7 @@ export default function useAddCardForm() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    navigate("/");
   };
   return {
     displayedCardNumber,
