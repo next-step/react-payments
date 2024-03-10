@@ -1,4 +1,3 @@
-import InputBox from '@/components/common/input-box/InputBox';
 import Input from '@/components/common/input/Input';
 import useNumbers from './hook/useCardNumbers';
 
@@ -17,7 +16,7 @@ const CardNumbers = () => {
         type="text"
         name="first"
         onChange={handleChange}
-        value={cardNumbers?.first ?? ''}
+        value={cardNumbers?.first}
         maxLength={MAX_LENGTH}
       />
       {cardNumbers && createHyphen(Object.values(cardNumbers)[0])}
@@ -25,7 +24,7 @@ const CardNumbers = () => {
         type="text"
         name="second"
         onChange={handleChange}
-        value={cardNumbers?.second ?? ''}
+        value={cardNumbers?.second}
         maxLength={MAX_LENGTH}
       />
       {cardNumbers && createHyphen(Object.values(cardNumbers)[1])}
@@ -33,7 +32,7 @@ const CardNumbers = () => {
         type="password"
         name="third"
         onChange={handleChange}
-        value={cardNumbers?.third ?? ''}
+        value={cardNumbers?.third}
         maxLength={MAX_LENGTH}
       />
       {cardNumbers && createHyphen(Object.values(cardNumbers)[2])}

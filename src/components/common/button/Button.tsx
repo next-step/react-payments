@@ -5,7 +5,7 @@ type BaseButtonProps = DetailedHTMLProps<
   HTMLButtonElement
 >;
 
-interface ButtonProps extends BaseButtonProps {
+interface ButtonProps extends BaseButtonProps, PropsWithChildren {
   type: 'button' | 'submit' | 'reset';
 }
 const Button = ({ type = 'button', className, children, ...props }: ButtonProps) => {

@@ -13,4 +13,5 @@ export type CardStateType = {
   ownerName?: string;
   month?: string;
   year?: string;
+  nickname?: string;
 };

@@ -1,9 +1,16 @@
-import { CardStateType } from '@/provider/CardInfoProvider';
 import CardNumbers from './CardNumbers';
 import CardBox from './CardBox';
 import CardForm from './CardForm';
+import CardTitle from './CardTitle';
+import { CardStateType } from '@/domain/type';
 
-type CardProps = { status?: string } & CardStateType;
+import CardText from './CardText';
+import Chip from './Chip';
+
+interface CardProps extends CardStateType {
+  status?: 'small' | 'big' | 'empty';
+  onClick?: () => void;
+}
 
 const Card = ({
   ownerName = 'NAME',
@@ -11,25 +18,27 @@ const Card = ({
   year = '',
   cardNumbers,
   status = 'small',
+  onClick,
 }: CardProps) => {
   const displayMonth = month ? `${month} / ` : '';
   const expirationDate = `${displayMonth}${year}`;
 
   return (
-    <CardBox>
+    <CardBox onClick={onClick}>
       <CardForm status={status}>
-        <div className="card-top"></div>
+        <CardTitle>
+          <CardText status={status}>123123</CardText>
+        </CardTitle>
         <div className="card-middle">
-          <div className="small-card__chip"></div>
+          <Chip status={status} />
         </div>
-
         <div className="card-bottom">
-          <span className="card-text">
+          <CardText status={status}>
             <CardNumbers {...cardNumbers} />
-          </span>
+          </CardText>
           <div className="card-bottom__info">
-            <span className="card-text">{ownerName}</span>
-            <span className="card-text">{expirationDate || 'MM/YY'}</span>
+            <CardText status={status}>{ownerName}</CardText>
+            <CardText status={status}>{expirationDate || 'MM/YY'}</CardText>
           </div>
         </div>
       </CardForm>

@@ -1,4 +1,4 @@
-import { CardInfoContext } from '@/provider/CardInfoProvider';
+import { CardInfoContext } from '@/provider/card-info-provider/CardInfoProvider';
 import { ChangeEvent, useContext } from 'react';
 
 const useCardOwner = () => {

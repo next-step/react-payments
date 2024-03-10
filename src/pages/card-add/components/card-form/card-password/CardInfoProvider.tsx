@@ -1,4 +1,4 @@
-import { CardStateType } from '@/provider/CardInfoProvider';
+import { CardStateType } from '@/provider/card-info-provider/CardInfoProvider';
 import { createContext, useState, type PropsWithChildren } from 'react';
 
 interface CardInfoType {

@@ -1,7 +1,10 @@
 import classNames from 'classnames';
-import React, { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 
-const CardForm = ({ status, children }: { status: string; children: ReactNode }) => {
+interface CardFormProps extends PropsWithChildren {
+  status: string;
+}
+const CardForm = ({ status, children }: CardFormProps) => {
   return <div className={classNames(`${status}-card`)}>{children}</div>;
 };
 

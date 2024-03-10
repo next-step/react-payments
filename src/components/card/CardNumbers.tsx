@@ -1,4 +1,4 @@
-import { CardNumbersType } from '@/provider/CardInfoProvider';
+import { CardNumbersType } from '@/domain/type';
 
 const REGEX = /[1-9]/gi;
 
