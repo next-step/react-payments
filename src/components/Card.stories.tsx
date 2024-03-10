@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Card from './Card';
+import CardBox from './CardBox';
 
 const cardNumber = {
   firstNumber: '1111',
@@ -14,9 +15,17 @@ const expirationDate = {
   year: '23',
 };
 
+const CardContainer = (props: typeof Card) => {
+  return (
+    <CardBox>
+      <Card {...props} />
+    </CardBox>
+  );
+};
+
 const meta = {
   title: 'CARD/Card',
-  component: Card,
+  component: CardContainer,
   argTypes: {
     variant: {
       options: ['small', 'big'],
@@ -26,26 +35,17 @@ const meta = {
       control: { type: 'object' },
     },
   },
-} satisfies Meta<typeof Card>;
+} satisfies Meta<typeof CardContainer>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Small: Story = {
+export const Default: Story = {
   args: {
     variant: 'small',
     cardNumber,
-    ownerName: 'SoJeong Yoo',
-    expirationDate,
-  },
-};
-
-export const Big: Story = {
-  args: {
-    variant: 'big',
-    cardNumber,
-    ownerName: 'SoJeong Yoo',
+    ownerName: 'SoJeong',
     expirationDate,
   },
 };
