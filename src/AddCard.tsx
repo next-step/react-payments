@@ -12,11 +12,13 @@ const AddCard = () => {
 
   return (
     <main>
-      <button onClick={() => updateFunnelStep({ step: 'list' })}>뒤로가기</button>
       <h2>1️⃣ 카드 추가</h2>
       <div className={ui['root']}>
         <div className={ui['app']}>
-          <h2 className={ui['page-title']}>카드 추가</h2>
+          <h2 className={ui['page-title']}>
+            <button onClick={() => updateFunnelStep({ step: 'list' })}>&lt;</button>
+            &nbsp; 카드 추가
+          </h2>
           <CardBox />
           <CardNumber />
           <CardDate />
