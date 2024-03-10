@@ -17,7 +17,7 @@ export const CardType = ({ closeModal }: { closeModal: () => void }) => {
                 className={ui['modal-item-name']}
                 onClick={() => {
                   updateCardInfo({ ...cardInfo, cardType: value })
-                  closeModal
+                  closeModal()
                 }}
               >
                 {value} 카드
