@@ -40,3 +40,10 @@ input {
 
   color: #383838;
 }
+
+.header {
+  color: #383838;
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+}
