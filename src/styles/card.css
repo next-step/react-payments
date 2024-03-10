@@ -1,9 +1,18 @@
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
 .card-box {
   display: flex;
   align-items: center;
   justify-content: center;
 
   margin: 10px 0;
+  margin-bottom: 40px;
 }
 
 .empty-card {

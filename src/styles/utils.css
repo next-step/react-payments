@@ -62,3 +62,19 @@
   /* FIXME: 추후 margin right 속성을 컴포넌트에 이식 */
   margin-right: 4px;
 }
+
+.gap-5 {
+  gap: 1.25rem;
+}
+
+.gap-10 {
+  gap: 2.5rem;
+}
+
+.gap-20 {
+  gap: 5rem;
+}
+
+.gap-30 {
+  gap: 7.5rem;
+}
