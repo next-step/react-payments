@@ -1,5 +1,5 @@
-import { Input, InputProps } from '../../../../components/ui-kit/Input';
-import Dot from './Dot';
+import { Input, InputProps } from '@components/ui-kit';
+import { Dot } from '@pages/addCard/components';
 
 const INPUT_WIDTH = '40px';
 const INPUT_MAX_LENGTH = 1;

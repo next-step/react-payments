@@ -1,7 +1,6 @@
+import { Button, Card } from '@components/ui-kit';
+import { FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import Card from '../../../components/ui-kit/Card';
-import { FaPlus } from 'react-icons/fa6';
-import Button from '../../../components/ui-kit/Button';
 
 export default function AddCardButton() {
 	const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardHolderNameInput from '../CardHolderNameInput';
-import useInput from '../../../../../hooks/useInput';
+import { CardHolderNameInput } from '@pages/addCard/components';
+import { useInput } from '@hooks';
 
 const meta = {
 	title: 'AddCard/CardHolderNameInput',

@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardSecurityCodeInput from '../CardSecurityCodeInput';
-import useInput from '../../../../../hooks/useInput';
-import { isNumber } from '../../../../../utils/validationUtils';
+import { CardSecurityCodeInput } from '@pages/addCard/components';
+import { useInput } from '@hooks';
+import { isNumber } from '@utils';
 
 const meta = {
 	title: 'AddCard/CardSecurityCodeInput',

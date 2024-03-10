@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardNumberInput from '../CardNumberInput';
-import useCardNumberInput from '../../../hooks/useCardNumberInput';
+import { CardNumberInput } from '@pages/addCard/components';
+import { useCardNumberInput } from '@pages/addCard/hooks';
 
 const meta = {
 	title: 'AddCard/CardNumberInput',

@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import Button from '../Button';
 import { FaChevronLeft } from 'react-icons/fa';
+import { Button } from '@components/ui-kit';
 
 const meta = {
 	title: 'UI-KIT/Button',

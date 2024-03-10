@@ -1,8 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { Input } from '../Input';
-import useInput from '../../../hooks/useInput';
-import useDisplayedInput from '../../../hooks/useDisplayedInput';
+import { Input } from '@components/ui-kit';
 import { SlQuestion } from 'react-icons/sl';
+import { useInput, useDisplayedInput } from '@hooks';
 
 const meta = {
 	title: 'UI-KIT/Input',

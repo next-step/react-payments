@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import useInput from '../../../hooks/useInput';
-import { isNumber } from '../../../utils/validationUtils';
-import useCardExpiredDateInput from './useCardExpiredDateInput';
-import useCardNumberInput from './useCardNumberInput';
+import {
+	useCardExpiredDateInput,
+	useCardNumberInput,
+} from '@pages/addCard/hooks';
+import { useInput } from '@hooks';
+import { isNumber } from '@utils';
 
 export default function useAddCardForm() {
 	const navigate = useNavigate();

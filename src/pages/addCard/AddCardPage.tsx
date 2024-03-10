@@ -1,5 +1,4 @@
-import AddCardForm from './components/addCard/AddCardForm';
-import Header from './components/Header';
+import { Header, AddCardForm } from '@pages/addCard/components';
 
 export default function AddCardPage() {
 	return (

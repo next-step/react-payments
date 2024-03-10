@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import CardExpiredDateInput from '../CardExpiredDateInput';
-import useCardExpiredDateInput from '../../../hooks/useCardExpiredDateInput';
+import { CardExpiredDateInput } from '@pages/addCard/components';
+import { useCardExpiredDateInput } from '@pages/addCard/hooks';
 
 const meta = {
 	title: 'AddCard/CardExpiredDateInput',

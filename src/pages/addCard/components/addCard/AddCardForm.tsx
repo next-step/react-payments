@@ -1,10 +1,12 @@
-import Button from '../../../../components/ui-kit/Button';
-import useAddCardForm from '../../hooks/useAddCardForm';
-import CardExpiredDateInput from './CardExpiredDateInput';
-import CardHolderNameInput from './CardHolderNameInput';
-import CardNumberInput from './CardNumberInput';
-import CardPasswordInput from './CardPasswordInput';
-import CardSecurityCodeInput from './CardSecurityCodeInput';
+import { useAddCardForm } from '@pages/addCard/hooks';
+import {
+	CardNumberInput,
+	CardExpiredDateInput,
+	CardHolderNameInput,
+	CardSecurityCodeInput,
+	CardPasswordInput,
+} from '@pages/addCard/components';
+import { Button } from '@components/ui-kit';
 
 export default function AddCardForm() {
 	const {

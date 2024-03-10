@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
-import AddCardForm from '../AddCardForm';
 import { BrowserRouter } from 'react-router-dom';
+import { AddCardForm } from '@pages/addCard/components';
 
 const meta = {
 	title: 'AddCard/AddCardForm',
