@@ -32,6 +32,7 @@ export const useCardState = () => {
   }
 
   const editCard = (editedCard: CardState) => {
+    console.log(editedCard.updatedAt)
     const resultedCardList = cardList.map(card => {
       if (card.id === editedCard.id) {
         return editedCard
