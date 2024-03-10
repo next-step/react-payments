@@ -22,7 +22,7 @@ export const CardRegisterCompleteStep = ({
       cardNickName: cardNickName === '' ? cardType.name : cardNickName,
     }
     if (editableCardId) {
-      editCard({ id: editableCardId, updatedAt: new Date(), ...completedCardInput })
+      editCard({ ...completedCardInput, id: editableCardId, updatedAt: new Date() })
     } else {
       addCard(completedCardInput)
     }
