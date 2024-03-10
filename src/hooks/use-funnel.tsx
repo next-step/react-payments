@@ -1,16 +1,10 @@
-import {
-  Children,
-  PropsWithChildren,
-  ReactElement,
-  isValidElement,
-  useState,
-  Dispatch,
-  SetStateAction,
-  useMemo,
-} from 'react'
-import { FunnelContextProvider, FunnelState } from '@/contexts/funnel-context.tsx'
+import { Children, PropsWithChildren, ReactElement, isValidElement, useState } from 'react'
 
 type StepProps = PropsWithChildren<{ name: string }>
+
+export type FunnelState<T> = T & {
+  step: string
+}
 
 export const Step = ({ children }: StepProps) => {
   return <>{children}</>
@@ -21,7 +15,7 @@ export interface FunnelProps {
 }
 
 export const FunnelRoot =
-  <T,>(funnelState: FunnelState<T>, setFunnelState: Dispatch<SetStateAction<FunnelState<T>>>) =>
+  <T,>(funnelState: FunnelState<T>) =>
   ({ children }: FunnelProps) => {
     const validChildren = Children.toArray(children).filter(isValidElement) as Array<
       ReactElement<StepProps>
@@ -29,29 +23,21 @@ export const FunnelRoot =
 
     const targetStep = validChildren.find(childStep => childStep.props.name === funnelState.step)
 
-    const contextValue = useMemo(
-      () => ({
-        state: funnelState,
-        setState: setFunnelState,
-      }),
-      [funnelState, setFunnelState],
-    )
-
-    return <FunnelContextProvider value={contextValue}>{targetStep}</FunnelContextProvider>
+    return <>{targetStep}</>
   }
 
-export const Funnel = <T,>(args: Parameters<typeof FunnelRoot<T>>) => ({
-  Root: FunnelRoot(...args),
+export const Funnel = <T,>(funnelState: FunnelState<T>) => ({
+  Root: FunnelRoot(funnelState),
   Step,
 })
 
 export const useFunnel = <T,>(steps: readonly string[], initialState: T) => {
-  const funnelStateResult = useState<FunnelState<T>>({
+  const [funnelState, setFunnelState] = useState<FunnelState<T>>({
     step: steps[0],
     ...initialState,
   })
 
-  const FunnelComponent = Funnel(funnelStateResult)
+  const FunnelComponent = Funnel(funnelState)
 
-  return [FunnelComponent, ...funnelStateResult] as const
+  return [FunnelComponent, funnelState, setFunnelState] as const
 }
