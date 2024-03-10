@@ -2,7 +2,7 @@ import AddCardButton from "./components/AddCardButton";
 
 export default function CardsPage() {
   return (
-    <div>
+    <div className="flex-center">
       <AddCardButton />
     </div>
   );
