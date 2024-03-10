@@ -7,6 +7,7 @@ import CardHolderNameInput from "./CardHolderNameInput";
 import CardNumberInput from "./CardNumberInput";
 import CardPasswordInput from "./CardPasswordInput";
 import CardSecurityCodeInput from "./CardSecurityCodeInput";
+import { isNumber } from "../../../utils/validation";
 
 export default function AddCardForm() {
   const {
@@ -22,21 +23,21 @@ export default function AddCardForm() {
   } = useCardExpiredDateInput();
 
   const { value: cardHolderName, handleChange: handleCardHolderNameChange } =
-    useInput();
+    useInput({});
   const {
     value: cardSecurityCode,
     handleChange: handleCardSecurityCodeChange,
-  } = useInput();
+  } = useInput({ validate: isNumber });
 
   const {
     value: firstCardPassword,
     handleChange: handleFirstCardPasswordChange,
-  } = useInput();
+  } = useInput({ validate: isNumber });
 
   const {
     value: secondCardPassword,
     handleChange: handleSecondCardPasswordChange,
-  } = useInput();
+  } = useInput({ validate: isNumber });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

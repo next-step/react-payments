@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { insertAtInterval, replaceTo } from "../../../utils/stringUtils";
 import useDisplayedInput from "../../../hooks/useDisplayedInput";
+import { isNumber } from "../../../utils/validation";
 
 const CARN_NUMBER_LENGTH = 16;
 const CARD_NUMBER_HYPHEN_INTERVAL = 4;
@@ -20,6 +21,7 @@ export default function useCardNumberInput() {
   const { value, displayedValue, handleChange } = useDisplayedInput({
     toDisplayed: toMaskedCardNumber,
     maxLength: CARN_NUMBER_LENGTH,
+    validate: isNumber,
   });
 
   return { value, displayedValue, handleChange };

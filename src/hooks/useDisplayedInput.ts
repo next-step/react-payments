@@ -3,9 +3,11 @@ import { useCallback, useMemo, useState } from "react";
 export default function useDisplayedInput({
   toDisplayed,
   maxLength,
+  validate,
 }: {
   toDisplayed: (value: string) => string;
   maxLength?: number;
+  validate?: (value: string) => boolean;
 }) {
   const [value, setValue] = useState("");
   const displayedValue = useMemo(
@@ -28,11 +30,11 @@ export default function useDisplayedInput({
         return;
       }
 
-      if (isNaN(Number(lastInputKey))) return;
+      if (validate && !validate(lastInputKey)) return;
       if (maxLength && value.length === maxLength) return;
       setValue((prev) => prev + lastInputKey);
     },
-    [displayedValue, deleteValue, maxLength, value]
+    [displayedValue, deleteValue, maxLength, value, validate]
   );
 
   return { value, displayedValue, handleChange };
