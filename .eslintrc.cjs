@@ -18,6 +18,8 @@ module.exports = {
   rules: {
     'func-style': ['error', 'expression'],
     'react/react-in-jsx-scope': 'off',
-    '@typescript-eslint/no-explicit-any': 'warn'
+    '@typescript-eslint/no-explicit-any': 'warn',
+    'jsx-a11y/click-events-have-key-events': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off'
   }
 }
