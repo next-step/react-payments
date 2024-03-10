@@ -9,11 +9,14 @@
   color: #d3d3d3;
   border-radius: 0.25rem;
   background-color: #ecebf1;
+  gap: 20px;
 }
 
 .input-title {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
 
   font-size: 12px;
   line-height: 14px;
@@ -21,6 +24,16 @@
   margin-bottom: 4px;
 
   color: #525252;
+}
+
+.input-empty {
+  height: 45px;
+  width: 100%;
+  text-align: center;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  border: none;
+  border-radius: 0.25rem;
 }
 
 .input-basic {
@@ -33,6 +46,7 @@
   border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;
+  color: #94dacd;
 }
 
 .input-underline {
