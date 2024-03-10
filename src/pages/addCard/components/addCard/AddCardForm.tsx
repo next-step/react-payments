@@ -7,6 +7,7 @@ import {
 	CardPasswordInput,
 } from '@pages/addCard/components';
 import { Button } from '@components/ui-kit';
+import { PaymentCard } from '@components/domain';
 
 export default function AddCardForm() {
 	const {
@@ -27,6 +28,11 @@ export default function AddCardForm() {
 
 	return (
 		<form onSubmit={handleSubmit}>
+			<PaymentCard
+				cardNumber={displayedCardNumber}
+				cardExpiredDate={displayedExpiredDate}
+				cardHolderName={cardHolderName}
+			/>
 			<CardNumberInput
 				value={displayedCardNumber}
 				onChange={handleCardNumberChange}
