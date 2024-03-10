@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { BottomSheet } from './BottomSheet'
+import { BottomSheet } from './index'
 import { css } from '@emotion/css'
 
 const meta: Meta<typeof BottomSheet> = {
@@ -20,7 +20,7 @@ export const Basic: Story = {
 
     return (
       <div className={containerStyle}>
-        <BottomSheet>
+        <BottomSheet isOpen onClose={() => {}}>
           <div className="flex-center">
             <div className="modal-item-container">
               <div className="modal-item-dot"></div>

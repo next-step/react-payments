@@ -1,6 +1,6 @@
 import { ChangeEvent, MutableRefObject, useRef, useState } from 'react'
 import { CARD_PASSWORD } from '@/constants/app'
-import { MaxLengthNumberInput } from '../MaxLengthNumberInput/MaxLengthNumberInput'
+import { MaxLengthNumberInput } from '../MaxLengthNumberInput'
 import { css } from '@emotion/css'
 
 type CardPasswordValues = {

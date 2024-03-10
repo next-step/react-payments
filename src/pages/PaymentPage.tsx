@@ -1,6 +1,6 @@
-import { AddCardStep } from '@/components/PaymentModal/AddCardStep/AddCardStep'
-import { CardListStep } from '@/components/PaymentModal/CardListStep/CardListStep'
-import { CompletedAddCardStep } from '@/components/PaymentModal/CompletedAddCardStep/CompletedAddCardStep'
+import { AddCardStep } from '@/components/PaymentModal/AddCardStep'
+import { CardListStep } from '@/components/PaymentModal/CardListStep'
+import { CompletedAddCardStep } from '@/components/PaymentModal/CompletedAddCardStep'
 import { useStep } from '@/hooks/useStep'
 
 export const PAYMENT_STEPS = [

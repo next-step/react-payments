@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { CardPasswordInput } from './CardPasswordInput'
+import { CardPasswordInput } from './index'
 import { useState } from 'react'
 
 const meta: Meta<typeof CardPasswordInput> = {
