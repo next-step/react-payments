@@ -8,7 +8,13 @@ export type InputProps = ComponentPropsWithoutRef<'input'> & {
 
 export const Input = forwardRef<ElementRef<'input'>, InputProps>(
   (
-    { className = '', theme = 'basic', width = '100%', ...props },
+    {
+      className = '',
+      type = 'text',
+      theme = 'basic',
+      width = '100%',
+      ...props
+    },
     forwardedRef
   ) => {
     const inputStyle = css`
@@ -17,7 +23,7 @@ export const Input = forwardRef<ElementRef<'input'>, InputProps>(
 
     return (
       <input
-        type="text"
+        type={type}
         ref={forwardedRef}
         className={` ${inputStyle} input-${theme} ${className}`}
         {...props}
