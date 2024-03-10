@@ -1,14 +1,14 @@
 .button-box {
-  width: 100%;
+	width: 100%;
 }
 
 .button-text {
-  margin-right: 10px;
+	margin-right: 10px;
 }
 
 .button {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  font-size: 16px;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+	font-size: 16px;
 }

@@ -1,24 +1,24 @@
-import { Input, InputProps } from "../../../../components/ui-kit/Input";
+import { Input, InputProps } from '../../../../components/ui-kit/Input';
 
 interface CardExpiredDateInputProps {
-  value: string;
-  onChange: InputProps["onChange"];
+	value: string;
+	onChange: InputProps['onChange'];
 }
 
 export default function CardExpiredDateInput({
-  value,
-  onChange,
+	value,
+	onChange,
 }: CardExpiredDateInputProps) {
-  return (
-    <Input.Wrapper>
-      <Input
-        variant="basic"
-        value={value}
-        onChange={onChange}
-        placeholder="MM/YY"
-        width="40%"
-        label={<Input.Label label="만료일" />}
-      />
-    </Input.Wrapper>
-  );
+	return (
+		<Input.Wrapper>
+			<Input
+				variant="basic"
+				value={value}
+				onChange={onChange}
+				placeholder="MM/YY"
+				width="40%"
+				label={<Input.Label label="만료일" />}
+			/>
+		</Input.Wrapper>
+	);
 }

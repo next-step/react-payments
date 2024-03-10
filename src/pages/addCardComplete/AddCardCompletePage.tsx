@@ -1,3 +1,3 @@
 export default function AddCardCompletePage() {
-  return <div>AddCardComplete</div>;
+	return <div>AddCardComplete</div>;
 }

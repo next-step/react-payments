@@ -1,9 +1,9 @@
-import AddCardButton from "./components/AddCardButton";
+import AddCardButton from './components/AddCardButton';
 
 export default function CardsPage() {
-  return (
-    <div className="flex-center">
-      <AddCardButton />
-    </div>
-  );
+	return (
+		<div className="flex-center">
+			<AddCardButton />
+		</div>
+	);
 }
