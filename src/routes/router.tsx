@@ -1,9 +1,14 @@
-import { createBrowserRouter } from 'react-router-dom'
-import { App } from '../App.tsx'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { PaymentPage } from '@/pages/PaymentPage.tsx'
+import { PATH } from '@/constants/path'
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />
+    element: <Navigate to={PATH.PAYMENT} />
+  },
+  {
+    path: PATH.PAYMENT,
+    element: <PaymentPage />
   }
 ])

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { useStep } from '@/hooks/useStep'
 
 const meta: Meta = {
-  title: 'hooks/useStepper'
+  title: 'hooks/useStep'
 }
 
 export default meta
