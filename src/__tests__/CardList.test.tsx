@@ -1,36 +1,21 @@
-import { ReactNode } from 'react';
-import { renderHook, act } from '@testing-library/react';
+import { act } from '@testing-library/react';
 import { createMachine } from 'xstate';
 
-import {
-	addCardMachine,
-	AddCardMachineProvider,
-	initialCardInfo,
-	useAddCardMachineActorRef,
-} from 'src/state/addCardMachine.ts';
+import { addCardMachine, initialCardInfo, useAddCardMachineActorRef } from 'src/state/addCardMachine.ts';
 import { MOCK_CARD_INFO_LIST } from 'src/mocks/card.ts';
+import { renderHookWithAddCardMachineProvider } from 'src/utils/render.tsx';
 
-function MockCardListProvider({ children }: { children?: ReactNode }) {
-	return (
-		<AddCardMachineProvider
-			logic={createMachine({
+describe('카드 목록 테스트', () => {
+	it('카드 삭제가 가능하다', () => {
+		const { result } = renderHookWithAddCardMachineProvider(() => useAddCardMachineActorRef(), {
+			providerLogic: createMachine({
 				...addCardMachine.config,
 				context: {
 					cardInfo: { ...initialCardInfo },
 					cardList: [...MOCK_CARD_INFO_LIST],
 					selectedCard: { ...initialCardInfo, id: '' },
 				},
-			})}
-		>
-			{children}
-		</AddCardMachineProvider>
-	);
-}
-
-describe('카드 목록 테스트', () => {
-	it('카드 삭제가 가능하다', () => {
-		const { result } = renderHook(() => useAddCardMachineActorRef(), {
-			wrapper: MockCardListProvider,
+			}),
 		});
 
 		act(() => {

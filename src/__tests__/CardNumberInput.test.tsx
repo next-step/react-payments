@@ -1,23 +1,11 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import CardNumberInput from 'src/components/CardNumberInput.tsx';
-import { AddCardMachineProvider } from 'src/state/addCardMachine.ts';
 import { SelectToFormLayer } from 'src/components/SelectToFormLayer.tsx';
-
-export function TestContainer() {
-	return (
-		<AddCardMachineProvider>
-			<SelectToFormLayer>
-				<CardNumberInput />
-			</SelectToFormLayer>
-		</AddCardMachineProvider>
-	);
-}
+import { renderWithAddCardMachineProvider } from 'src/utils/render.tsx';
 
 const setup = () => {
-	const utils = render(<TestContainer />);
-
 	const firstInput = screen.getByTestId<HTMLInputElement>('first-segment');
 	const secondInput = screen.getByTestId<HTMLInputElement>('second-segment');
 	const thirdInput = screen.getByTestId<HTMLInputElement>('third-segment');
@@ -28,11 +16,18 @@ const setup = () => {
 		secondInput,
 		thirdInput,
 		fourthInput,
-		...utils,
 	};
 };
 
 describe('카드 번호 입력', () => {
+	beforeEach(() => {
+		renderWithAddCardMachineProvider(
+			<SelectToFormLayer>
+				<CardNumberInput />
+			</SelectToFormLayer>,
+		);
+	});
+
 	it('세번째, 네번째 input의 type은 password이다.', () => {
 		const { thirdInput, fourthInput } = setup();
 

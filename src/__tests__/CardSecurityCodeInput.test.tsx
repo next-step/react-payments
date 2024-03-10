@@ -1,22 +1,16 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import CardSecurityCodeInput from 'src/components/CardSecurityCodeInput.tsx';
-import { AddCardMachineProvider } from 'src/state/addCardMachine.ts';
 import { SelectToFormLayer } from 'src/components/SelectToFormLayer.tsx';
-
-export function TestContainer() {
-	return (
-		<AddCardMachineProvider>
-			<SelectToFormLayer>
-				<CardSecurityCodeInput />
-			</SelectToFormLayer>
-		</AddCardMachineProvider>
-	);
-}
+import { renderWithAddCardMachineProvider } from 'src/utils/render.tsx';
 
 const setup = () => {
-	const utils = render(<TestContainer />);
+	const utils = renderWithAddCardMachineProvider(
+		<SelectToFormLayer>
+			<CardSecurityCodeInput />
+		</SelectToFormLayer>,
+	);
 
 	const cardSecurityCodeInput = screen.getByTestId<HTMLInputElement>('card-security-code');
 

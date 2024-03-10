@@ -1,32 +1,27 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import CardOwnerNameInput from 'src/components/CardOwnerNameInput.tsx';
-import { AddCardMachineProvider } from 'src/state/addCardMachine.ts';
 import { SelectToFormLayer } from 'src/components/SelectToFormLayer.tsx';
-
-export function TestContainer() {
-	return (
-		<AddCardMachineProvider>
-			<SelectToFormLayer>
-				<CardOwnerNameInput />
-			</SelectToFormLayer>
-		</AddCardMachineProvider>
-	);
-}
+import { renderWithAddCardMachineProvider } from 'src/utils/render.tsx';
 
 const setup = () => {
-	const utils = render(<TestContainer />);
-
 	const cardOwnerNameInput = screen.getByTestId<HTMLInputElement>('card-owner-name');
 
 	return {
 		cardOwnerNameInput,
-		...utils,
 	};
 };
 
 describe('카드 소유자 입력', () => {
+	beforeEach(() => {
+		renderWithAddCardMachineProvider(
+			<SelectToFormLayer>
+				<CardOwnerNameInput />
+			</SelectToFormLayer>,
+		);
+	});
+
 	it('"카드에 표시된 이름과 동일하게 입력하세요." 라는 placeholder가 표시된다.', async () => {
 		const { cardOwnerNameInput } = setup();
 

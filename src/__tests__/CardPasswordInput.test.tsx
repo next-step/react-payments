@@ -1,34 +1,29 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import CardPasswordInput from 'src/components/CardPasswordInput.tsx';
-import { AddCardMachineProvider } from 'src/state/addCardMachine.ts';
 import { SelectToFormLayer } from 'src/components/SelectToFormLayer.tsx';
-
-export function TestContainer() {
-	return (
-		<AddCardMachineProvider>
-			<SelectToFormLayer>
-				<CardPasswordInput />
-			</SelectToFormLayer>
-		</AddCardMachineProvider>
-	);
-}
+import { renderWithAddCardMachineProvider } from 'src/utils/render.tsx';
 
 const setup = () => {
-	const utils = render(<TestContainer />);
-
 	const firstInput = screen.getByTestId<HTMLInputElement>('first-password');
 	const secondInput = screen.getByTestId<HTMLInputElement>('second-password');
 
 	return {
 		firstInput,
 		secondInput,
-		...utils,
 	};
 };
 
 describe('카드 비밀번호 입력', () => {
+	beforeEach(() => {
+		renderWithAddCardMachineProvider(
+			<SelectToFormLayer>
+				<CardPasswordInput />
+			</SelectToFormLayer>,
+		);
+	});
+
 	it('첫 번째 input의 type은 password이다.', () => {
 		const { firstInput } = setup();
 

@@ -1,37 +1,26 @@
-import { ReactNode } from 'react';
 import { createMachine } from 'xstate';
-import { render, screen, renderHook, act } from '@testing-library/react';
+import { screen, act } from '@testing-library/react';
 
-import {
-	AddCardMachineProvider,
-	addCardMachine,
-	initialCardInfo,
-	useAddCardMachineActorRef,
-} from 'src/state/addCardMachine.ts';
+import { addCardMachine, initialCardInfo, useAddCardMachineActorRef } from 'src/state/addCardMachine.ts';
 import CardNicknameForm from 'src/components/CardNicknameForm.tsx';
 import { CARD_COMPANY_MAP } from 'src/constants/card.ts';
 import { MOCK_CARD_INFO_LIST } from 'src/mocks/card.ts';
+import { renderWithAddCardMachineProvider, renderHookWithAddCardMachineProvider } from 'src/utils/render.tsx';
 
-function MockCardListProvider({ children }: { children?: ReactNode }) {
-	return (
-		<AddCardMachineProvider
-			logic={createMachine({
-				...addCardMachine.config,
-				context: {
-					cardInfo: { ...initialCardInfo },
-					cardList: [...MOCK_CARD_INFO_LIST],
-					selectedCard: { ...initialCardInfo, id: '' },
-				},
-			})}
-		>
-			{children}
-		</AddCardMachineProvider>
-	);
-}
+const mockCardListMachine = createMachine({
+	...addCardMachine.config,
+	context: {
+		cardInfo: { ...initialCardInfo },
+		cardList: [...MOCK_CARD_INFO_LIST],
+		selectedCard: { ...initialCardInfo, id: '' },
+	},
+});
 
 describe('카드 별칭 입력 테스트', () => {
 	beforeEach(() => {
-		render(<CardNicknameForm />, { wrapper: MockCardListProvider });
+		renderWithAddCardMachineProvider(<CardNicknameForm />, {
+			providerLogic: mockCardListMachine,
+		});
 	});
 
 	it('카드 별칭 입력 input의 placeholder는 "카드 별칭 (선택)" 이다.', () => {
@@ -45,8 +34,8 @@ describe('카드 별칭 입력 테스트', () => {
 	});
 
 	it('별칭을 입력하지 않고 확인 버튼을 누르면 카드사 이름이 별칭으로 저장된다.', () => {
-		const { result } = renderHook(() => useAddCardMachineActorRef(), {
-			wrapper: MockCardListProvider,
+		const { result } = renderHookWithAddCardMachineProvider(() => useAddCardMachineActorRef(), {
+			providerLogic: mockCardListMachine,
 		});
 
 		const mockCardInfo = MOCK_CARD_INFO_LIST[0];

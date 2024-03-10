@@ -1,28 +1,21 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import CardExpirationDateInput from 'src/components/CardExpirationDateInput.tsx';
-import { AddCardMachineProvider } from 'src/state/addCardMachine.ts';
 import { SelectToFormLayer } from 'src/components/SelectToFormLayer.tsx';
-
-export function TestContainer() {
-	return (
-		<AddCardMachineProvider>
-			<SelectToFormLayer>
-				<CardExpirationDateInput />
-			</SelectToFormLayer>
-		</AddCardMachineProvider>
-	);
-}
+import { renderWithAddCardMachineProvider } from 'src/utils/render.tsx';
 
 const setup = () => {
-	const utils = render(<TestContainer />);
+	renderWithAddCardMachineProvider(
+		<SelectToFormLayer>
+			<CardExpirationDateInput />
+		</SelectToFormLayer>,
+	);
 
 	const expirationDateInput = screen.getByTestId<HTMLInputElement>('card-expiration-date');
 
 	return {
 		expirationDateInput,
-		...utils,
 	};
 };
 
