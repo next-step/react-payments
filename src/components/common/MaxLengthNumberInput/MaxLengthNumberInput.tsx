@@ -23,7 +23,7 @@ export const MaxLengthNumberInput = forwardRef<
     {
       className = '',
       width = '100%',
-      value: controlledValue,
+      value: controlledValue = '',
       onChange,
       type = 'text',
       maxLength,
