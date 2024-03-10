@@ -1,0 +1,10 @@
+export const FIRST_STEP = 0;
+export const LAST_STEP = 2;
+export const CARD_NUMBER_PART_DIGIT = 4;
+export const CARD_NUMBER_TOTAL_DIGIT = 16;
+export const CARD_EXPIRATION_MM_DIGIT = 2;
+export const CARD_EXPIRATION_YY_DIGIT = 2;
+export const CARD_HOLDER_NAME_MAX_LENGTH = 30;
+export const CARD_SECURITY_CODE_DIGIT = 3;
+export const CARD_PASSWORD_INPUT_DIGIT = 2;
+export const CARD_SEPARATOR = '-';
