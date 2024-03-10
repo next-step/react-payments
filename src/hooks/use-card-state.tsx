@@ -31,7 +31,16 @@ export const useCardState = () => {
     saveCardListToLocalStorage(resultedCardList)
   }
 
-  // const editCard = (editedCard: CardState) => {}
+  const editCard = (editedCard: CardState) => {
+    const resultedCardList = cardList.map(card => {
+      if (card.id === editedCard.id) {
+        return editedCard
+      }
+      return card
+    })
+    setCardList(resultedCardList)
+    saveCardListToLocalStorage(resultedCardList)
+  }
 
   const removeCard = (targetId: CardState['id']) => {
     const resultedCardList = cardList.filter(({ id }) => id !== targetId)
@@ -42,6 +51,7 @@ export const useCardState = () => {
   return {
     cardList,
     addCard,
+    editCard,
     removeCard,
   }
 }

@@ -1,14 +1,22 @@
 import { Card, Flex, Text, Header, Box } from '@/components'
 import { IconPlus, IconTrash } from '@tabler/icons-react'
-import { useCardState } from '@/hooks/use-card-state.tsx'
+import { CardState, useCardState } from '@/hooks/use-card-state'
 import { vars } from '@/styles'
+import { useCardInputContext } from '@/contexts'
 
 export interface CardListStepProps {
-  onClickRegister: () => void
+  onNavigateToRegister: () => void
+  onNavigateToEdit: (id: CardState['id']) => void
 }
 
-export const CardListStep = ({ onClickRegister }: CardListStepProps) => {
+export const CardListStep = ({ onNavigateToRegister, onNavigateToEdit }: CardListStepProps) => {
+  const { resetCardInput } = useCardInputContext()
   const { cardList, removeCard } = useCardState()
+
+  const handleStartEditCard = (card: CardState) => () => {
+    resetCardInput(card)
+    onNavigateToEdit(card.id)
+  }
 
   return (
     <Flex
@@ -30,28 +38,32 @@ export const CardListStep = ({ onClickRegister }: CardListStepProps) => {
       >
         {cardList
           .sort((card1, card2) => card2.updatedAt.getTime() - card1.updatedAt.getTime())
-          .map(card => (
-            <Flex direction="column" alignItems="center" key={card.id}>
-              <Card
-                cardSize="lg"
-                cardCode={card.cardCode}
-                cardName={card.cardName}
-                cardExpDate={card.cardExpDate}
-                cardType={card.cardType}
-                marginBottom="8px"
-              />
-              <Flex alignItems="center" gap="8px">
-                <Text variant="body2">{card.cardNickName}</Text>
-                <Box as="button">
-                  <IconTrash
-                    size={24}
-                    color={vars.color.gray500}
-                    onClick={() => removeCard(card.id)}
-                  />
-                </Box>
+          .map(card => {
+            const { id, cardCode, cardName, cardExpDate, cardType, cardNickName } = card
+            return (
+              <Flex key={id} direction="column" alignItems="center">
+                <Card
+                  cardSize="lg"
+                  cardCode={cardCode}
+                  cardName={cardName}
+                  cardExpDate={cardExpDate}
+                  cardType={cardType}
+                  marginBottom="8px"
+                  onClick={handleStartEditCard(card)}
+                />
+                <Flex alignItems="center" gap="8px">
+                  <Text variant="body2">{cardNickName}</Text>
+                  <Box as="button">
+                    <IconTrash
+                      size={24}
+                      color={vars.color.gray500}
+                      onClick={() => removeCard(id)}
+                    />
+                  </Box>
+                </Flex>
               </Flex>
-            </Flex>
-          ))}
+            )
+          })}
         <Flex
           as="button"
           width="300px"
@@ -61,7 +73,7 @@ export const CardListStep = ({ onClickRegister }: CardListStepProps) => {
           justifyContent="center"
           alignItems="center"
           aspectRatio="3/2"
-          onClick={onClickRegister}
+          onClick={onNavigateToRegister}
         >
           <IconPlus size={24} />
         </Flex>
