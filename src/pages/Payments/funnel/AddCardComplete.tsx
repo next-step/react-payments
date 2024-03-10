@@ -1,10 +1,58 @@
+import { Formatter } from '@/utils/formatter';
+import { SYMBOL } from '@/constants/symbol';
+import { useForm } from '@/hooks/useForm/useForm';
 import { usePaymentsFunnel } from '../payments.context';
 import { STEP } from '../payments.constant';
-import { PaymentsStepKey } from '../payments.type';
+
+const ELLIPSIS_LENGTH = 11;
 
 export const AddCardComplete = () => {
-  const { setStep, data } = usePaymentsFunnel();
-  console.log(data);
+  const { register, values, errors } = useForm();
+  const { setStep, data, setData } = usePaymentsFunnel();
+
+  if (!data?.tempCard) {
+    setStep(STEP.CARD_LIST);
+
+    return null;
+  }
+
+  const { tempCard, cardList } = data;
+  const {
+    numberFirst,
+    numberSecond,
+    numberThird,
+    numberFourth,
+    expireMonth,
+    expireYear,
+    ownerName,
+  } = tempCard;
+
+  const isAllFieldsFulfilled = Object.values(errors).every((error) => !error);
+
+  const onNext = () => {
+    if (!isAllFieldsFulfilled) return;
+
+    const { cardName } = values;
+
+    setData((prevData) => {
+      if (!prevData) return;
+
+      const newPaymentCard = {
+        ...tempCard,
+        cardName: cardName || ownerName,
+        createdAt: new Date(),
+      };
+
+      return {
+        cardList: [...cardList, newPaymentCard],
+        tempCard: null,
+      };
+    });
+
+    setStep(STEP.CARD_LIST);
+  };
+
+  const expireDate = `${expireMonth} / ${expireYear}`;
 
   return (
     <div>
@@ -21,14 +69,37 @@ export const AddCardComplete = () => {
               <div className='big-card__chip'></div>
             </div>
             <div className='card-bottom'>
-              <div className='card-bottom__number'>
-                <span className='card-text__big'>
-                  1111 - 2222 - oooo - oooo
+              <div className='card-bottom__number card-text__big'>
+                <span>
+                  {Formatter.segment(numberFirst, {
+                    separator: SYMBOL.HYPHEN,
+                    length: 4,
+                  })}
+                </span>
+                <span>
+                  {Formatter.segment(numberSecond, {
+                    separator: SYMBOL.HYPHEN,
+                    length: 4,
+                  })}
+                </span>
+                <span>
+                  {Formatter.segment(
+                    numberThird && Formatter.masking(numberThird),
+                    {
+                      separator: SYMBOL.HYPHEN,
+                      length: 4,
+                    }
+                  )}
+                </span>
+                <span>
+                  {(numberFourth && Formatter.masking(numberFourth)) || ''}
                 </span>
               </div>
               <div className='card-bottom__info'>
-                <span className='card-text__big'>YUJO</span>
-                <span className='card-text__big'>12 / 23</span>
+                <span className='card-text'>
+                  {Formatter.ellipsis(ownerName, ELLIPSIS_LENGTH)}
+                </span>
+                <span className='card-text'>{expireDate}</span>
               </div>
             </div>
           </div>
@@ -37,24 +108,18 @@ export const AddCardComplete = () => {
           <input
             className='input-underline w-75'
             type='text'
-            placeholder='카드의 별칭을 입력해주세요.'
+            placeholder='카드의 별칭을 입력해주세요.(선택)'
+            {...register('cardName', {
+              maxLength: 10,
+            })}
           />
         </div>
-        <div className='button-box mt-50'>
-          <span className='button-text'>다음</span>
-        </div>
+        {isAllFieldsFulfilled && (
+          <div onClick={onNext} className='button-box mt-50'>
+            <span className='button-text'>다음</span>
+          </div>
+        )}
       </div>
-
-      {Object.keys(STEP).map((key) => {
-        return (
-          <button
-            key={key}
-            onClick={() => setStep(STEP[key as PaymentsStepKey])}
-          >
-            {key}
-          </button>
-        );
-      })}
     </div>
   );
 };

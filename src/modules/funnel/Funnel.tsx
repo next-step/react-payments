@@ -23,10 +23,10 @@ export const createFunnel = <StepKey, Data = undefined>({
     step: null,
     data: initialData,
     setStep: () => {
-      throw new Error(FUNNEL.MESSAGE.ERROR.NOT_INITIALIZED);
+      throw new Error(FUNNEL.MESSAGE.ERROR.STEP_NOT_INITIALIZED);
     },
     setData: () => {
-      throw new Error(FUNNEL.MESSAGE.ERROR.NOT_INITIALIZED);
+      throw new Error(FUNNEL.MESSAGE.ERROR.DATA_NOT_INITIALIZED);
     },
   });
 
@@ -40,7 +40,9 @@ export const createFunnel = <StepKey, Data = undefined>({
 
   const FunnelContainer = ({ children }: React.PropsWithChildren) => {
     const [step, setStep] = useState<StepKey>(initialStep);
-    const [data, setData] = useState<Data | undefined>(initialData);
+    const [data, setData] = useState<typeof initialData | undefined>(
+      initialData
+    );
 
     return (
       <FunnelContext.Provider value={{ data, setData, step, setStep }}>

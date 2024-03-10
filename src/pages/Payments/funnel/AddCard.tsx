@@ -26,29 +26,47 @@ const DEFAULT_VALUE = {
 } as const;
 
 export const AddCard = () => {
-  const { setStep } = usePaymentsFunnel();
+  const { setStep, setData } = usePaymentsFunnel();
   const formMethods = useForm();
-  const { values, errors } = formMethods;
+  const {
+    values: {
+      numberFirst,
+      numberSecond,
+      numberThird,
+      numberFourth,
+      expireMonth,
+      expireYear,
+      ownerName,
+    },
+    errors,
+  } = formMethods;
 
   const handlePrev = () => setStep(STEP.CARD_LIST);
   const handleNext = () => {
     if (!isAllFieldsFulfilled) return;
+
+    setData((prevData) => {
+      if (!prevData) return;
+
+      return {
+        ...prevData,
+        tempCard: {
+          numberFirst,
+          numberSecond,
+          numberThird,
+          numberFourth,
+          expireMonth,
+          expireYear,
+          ownerName,
+        },
+      };
+    });
 
     setStep(STEP.ADD_CARD_COMPLETE);
   };
 
   const isAllFieldsFulfilled = Object.values(errors).every((error) => !error);
   const optaionalClassName = isAllFieldsFulfilled ? 'text-fulfilled' : '';
-
-  const {
-    numberFirst,
-    numberSecond,
-    numberThird,
-    numberFourth,
-    expireMonth,
-    expireYear,
-    ownerName,
-  } = values;
 
   const expireDate = `${expireMonth || DEFAULT_VALUE.EXPIRE_MONTH} / ${
     expireYear || DEFAULT_VALUE.EXPIRE_YEAR
@@ -64,32 +82,30 @@ export const AddCard = () => {
             <div className='small-card__chip'></div>
           </div>
           <div className='card-bottom'>
-            <div className='card-bottom__number'>
-              <span className='card-text__big'>
-                <span>
-                  {Formatter.segment(numberFirst, {
+            <div className='card-bottom__number card-text__big'>
+              <span>
+                {Formatter.segment(numberFirst, {
+                  separator: SYMBOL.HYPHEN,
+                  length: 4,
+                })}
+              </span>
+              <span>
+                {Formatter.segment(numberSecond, {
+                  separator: SYMBOL.HYPHEN,
+                  length: 4,
+                })}
+              </span>
+              <span>
+                {Formatter.segment(
+                  numberThird && Formatter.masking(numberThird),
+                  {
                     separator: SYMBOL.HYPHEN,
                     length: 4,
-                  })}
-                </span>
-                <span>
-                  {Formatter.segment(numberSecond, {
-                    separator: SYMBOL.HYPHEN,
-                    length: 4,
-                  })}
-                </span>
-                <span>
-                  {Formatter.segment(
-                    numberThird && Formatter.masking(numberThird),
-                    {
-                      separator: SYMBOL.HYPHEN,
-                      length: 4,
-                    }
-                  )}
-                </span>
-                <span>
-                  {(numberFourth && Formatter.masking(numberFourth)) || ''}
-                </span>
+                  }
+                )}
+              </span>
+              <span>
+                {(numberFourth && Formatter.masking(numberFourth)) || ''}
               </span>
             </div>
             <div className='card-bottom__info'>

@@ -10,7 +10,7 @@ type DefaultSetState = () => never;
  */
 export interface FunnelContextProps<T, D> {
   step: T | null;
-  data?: D | undefined;
+  data?: D;
   setStep: ((step: T) => void) | DefaultSetState;
   setData: Dispatch<SetStateAction<D | undefined>>;
 }
