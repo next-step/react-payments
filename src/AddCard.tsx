@@ -2,18 +2,17 @@ import { useContext, useState } from 'react'
 import { CardInfoContext } from './context/paymentContext'
 import { CardBox, CardCvc, CardName, CardNumber, CardPassword, CardType, CardDate } from './components'
 import ui from './styles/index.module.css'
+import { UpdateFunnelStepContext } from './context/funnelStepContext'
 
-type AddCardProps = {
-  onBack: () => void
-  onNext: () => void
-}
-const AddCard = ({ onBack, onNext }: AddCardProps) => {
+const AddCard = () => {
   const cardInfo = useContext(CardInfoContext)
+  const updateFunnelStep = useContext(UpdateFunnelStepContext)
+
   const [isShowModal, setIsShowModal] = useState(false)
 
   return (
     <main>
-      <button onClick={() => onBack()}>뒤로가기</button>
+      <button onClick={() => updateFunnelStep({ step: 'list' })}>뒤로가기</button>
       <h2>1️⃣ 카드 추가</h2>
       <div className={ui['root']}>
         <div className={ui['app']}>
@@ -27,7 +26,7 @@ const AddCard = ({ onBack, onNext }: AddCardProps) => {
           <div className={ui['button-box']}>
             <button
               onClick={() => {
-                if (cardInfo.cardType) onNext()
+                if (cardInfo.cardType) updateFunnelStep({ step: 'select' })
                 else setIsShowModal((state) => !state)
               }}
             >
