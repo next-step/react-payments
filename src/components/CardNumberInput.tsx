@@ -2,68 +2,44 @@ import React from 'react'
 import { InputStyle } from './DateInput.tsx'
 import styled from 'styled-components'
 
-const CARD_ONE_SECTION_NUMBER_LENGTH = 4
-
+interface CardNumberInput {
+  type: 'text' | 'password'
+  maxLength: number
+  value: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
 const Slash = styled.span`
   color: #94dacd;
   font-weight: 700;
 `
+
 const CardNumberInput = ({
-  one,
-  two,
-  three,
-  four,
-  onChangeOne,
-  onChangeTwo,
-  onChangeThree,
-  onChangeFour,
+  divider,
+  inputs,
 }: {
-  one: string
-  two: string
-  three: string
-  four: string
-  onChangeOne: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onChangeTwo: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onChangeThree: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onChangeFour: (e: React.ChangeEvent<HTMLInputElement>) => void
+  divider: string
+  inputs: CardNumberInput[]
 }) => {
   return (
     <div className="input-box">
-      <InputStyle>
-        <input
-          type="text"
-          value={one}
-          onChange={onChangeOne}
-          maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
-        />
-      </InputStyle>
-      {one.length === CARD_ONE_SECTION_NUMBER_LENGTH && <Slash>-</Slash>}
-      <InputStyle>
-        <input
-          type="text"
-          value={two}
-          onChange={onChangeTwo}
-          maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
-        />
-      </InputStyle>
-      {two.length === CARD_ONE_SECTION_NUMBER_LENGTH && <Slash>-</Slash>}
-      <InputStyle>
-        <input
-          type="password"
-          value={three}
-          onChange={onChangeThree}
-          maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
-        />
-      </InputStyle>
-      {three.length === CARD_ONE_SECTION_NUMBER_LENGTH && <Slash>-</Slash>}
-      <InputStyle>
-        <input
-          type="password"
-          value={four}
-          onChange={onChangeFour}
-          maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
-        />
-      </InputStyle>
+      {inputs.map((input, index) => {
+        return (
+          <>
+            <InputStyle key={index}>
+              <input
+                type={input.type}
+                value={input.value}
+                onChange={input.onChange}
+                maxLength={input.maxLength}
+              />
+            </InputStyle>
+            {index + 1 < inputs.length &&
+              input.value.length === input.maxLength && (
+                <Slash>{divider}</Slash>
+              )}
+          </>
+        )
+      })}
     </div>
   )
 }

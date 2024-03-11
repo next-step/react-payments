@@ -8,6 +8,8 @@ import IconButton from '../../components/IconButton.tsx'
 import { useNavigate } from 'react-router-dom'
 import { CardData } from './index.tsx'
 
+const CARD_ONE_SECTION_NUMBER_LENGTH = 4
+
 const AddCardInfo = ({
   onNext,
   inputs,
@@ -145,22 +147,41 @@ const AddCardInfo = ({
           <div className="input-container">
             <span className="input-title">카드 번호</span>
             <CardNumberInput
-              one={inputs.cardNumberOne}
-              two={inputs.cardNumberTwo}
-              three={inputs.cardNumberThree}
-              four={inputs.cardNumberFour}
-              onChangeOne={(e) => {
-                setInputs({ ...inputs, cardNumberOne: e.target.value })
-              }}
-              onChangeTwo={(e) => {
-                setInputs({ ...inputs, cardNumberTwo: e.target.value })
-              }}
-              onChangeThree={(e) => {
-                setInputs({ ...inputs, cardNumberThree: e.target.value })
-              }}
-              onChangeFour={(e) => {
-                setInputs({ ...inputs, cardNumberFour: e.target.value })
-              }}
+              divider="-"
+              inputs={[
+                {
+                  type: 'text',
+                  maxLength: CARD_ONE_SECTION_NUMBER_LENGTH,
+                  value: inputs.cardNumberOne,
+                  onChange: (e) => {
+                    setInputs({ ...inputs, cardNumberOne: e.target.value })
+                  },
+                },
+                {
+                  type: 'text',
+                  maxLength: CARD_ONE_SECTION_NUMBER_LENGTH,
+                  value: inputs.cardNumberTwo,
+                  onChange: (e) => {
+                    setInputs({ ...inputs, cardNumberTwo: e.target.value })
+                  },
+                },
+                {
+                  type: 'password',
+                  maxLength: CARD_ONE_SECTION_NUMBER_LENGTH,
+                  value: inputs.cardNumberThree,
+                  onChange: (e) => {
+                    setInputs({ ...inputs, cardNumberThree: e.target.value })
+                  },
+                },
+                {
+                  type: 'password',
+                  maxLength: CARD_ONE_SECTION_NUMBER_LENGTH,
+                  value: inputs.cardNumberFour,
+                  onChange: (e) => {
+                    setInputs({ ...inputs, cardNumberFour: e.target.value })
+                  },
+                },
+              ]}
             />
           </div>
           <div className="input-container">
@@ -198,7 +219,7 @@ const AddCardInfo = ({
           />
           <div className="input-container">
             <span className="input-title">카드 비밀번호</span>
-            <div className="flex-center gap-4">
+            <div className="flex-center gap-CARD_ONE_SECTION_NUMBER_LENGTH">
               <Input
                 type="password"
                 maxLength={1}
