@@ -11,9 +11,10 @@ export type CardInfo = {
   month?: string
   year?: string
   name?: string
-  cardType?: string
   password?: string
   cvc?: string
+  cardType?: string
+  cardAlias?: string
 }
 
 export const CardInfoContext = createContext<CardInfo>({})
