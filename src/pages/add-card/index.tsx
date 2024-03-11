@@ -1,5 +1,13 @@
 // import { CardBox } from '@/components/Card/CardBox';
 import { IconArrowBack } from '@/assets/IconArrowBack';
+import { CardBox } from '@/components/Card/CardBox';
+import { Button } from '@/components/atoms/Button';
+import { HFlex } from '@/components/atoms/HFlex';
+import { Heading } from '@/components/atoms/Heading';
+import { Input } from '@/components/atoms/Input';
+import { Label } from '@/components/atoms/Label';
+import { Text } from '@/components/atoms/Text';
+import { VFlex } from '@/components/atoms/VFlex';
 import { RootLayout } from '@/shared/layout/RootLayout';
 
 interface Props {
@@ -11,66 +19,77 @@ export const AddCardPage = ({ onPrev, onNext }: Props) => {
   return (
     <RootLayout>
       <div className="app">
-        <div>
-          <button type={'button'} onClick={onPrev}>
+        <HFlex>
+          <Button type={'button'} onClick={onPrev}>
             <IconArrowBack />
-          </button>
-          <h2 className="page-title"> 카드 추가</h2>
-        </div>
+          </Button>
+          <Heading as={'h2'} className="page-title">
+            {'카드 추가'}
+          </Heading>
+        </HFlex>
 
-        {/* <CardBox /> */}
-        <div className="card-box">
-          <div className="empty-card">
-            <div className="card-top"></div>
-            <div className="card-middle">
-              <div className="small-card__chip"></div>
-            </div>
-            <div className="card-bottom">
-              <div className="card-bottom__info">
-                <span className="card-text">NAME</span>
-                <span className="card-text">MM / YY</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="input-container">
-          <span className="input-title">카드 번호</span>
-          <div className="input-box">
-            <input className="input-basic" type="text" />
-            <input className="input-basic" type="text" />
-            <input className="input-basic" type="password" />
-            <input className="input-basic" type="password" />
-          </div>
-        </div>
-        <div className="input-container">
-          <span className="input-title">만료일</span>
-          <div className="input-box w-50">
-            <input className="input-basic" type="text" placeholder="MM" />
-            <input className="input-basic" type="text" placeholder="YY" />
-          </div>
-        </div>
-        <div className="input-container">
-          <span className="input-title">카드 소유자 이름(선택)</span>
-          <input
-            type="text"
-            className="input-basic"
-            placeholder="카드에 표시된 이름과 동일하게 입력하세요."
+        <CardBox cardName={''} companyName={''} MM={12} YY={23} />
+        <VFlex className={'input-container'}>
+          <Label htmlFor={'card-number'}>{'카드 번호'}</Label>
+          <HFlex className={'input-box'}>
+            <Input id={'card-number'} value={1234} type={'text'} onChange={() => {}} />
+            <Input value={2345} type={'text'} onChange={() => {}} />
+            <Input value={3456} type={'text'} onChange={() => {}} />
+            <Input value={7890} type={'text'} onChange={() => {}} />
+          </HFlex>
+        </VFlex>
+        <VFlex className={'input-container'}>
+          <Label htmlFor={'card-expiration-date'}>{'만료일'}</Label>
+          <HFlex className={'input-box w-50'}>
+            <Input
+              id={'card-expiration-date'}
+              value={''}
+              type={'text'}
+              placeholder={'MM'}
+              maxLength={2}
+              onChange={() => {}}
+            />
+            <Input value={''} type={'text'} placeholder={'YY'} maxLength={2} onChange={() => {}} />
+          </HFlex>
+        </VFlex>
+        <VFlex className={'input-container'}>
+          <Label htmlFor={'card-owner'}>{'카드 소유자 이름(선택)'}</Label>
+          <Input
+            id={'card-owner'}
+            value={''}
+            type={'text'}
+            placeholder={'카드에 표시된 이름과 동일하게 입력하세요.'}
+            onChange={() => {}}
           />
-        </div>
-        <div className="input-container">
-          <span className="input-title">보안코드(CVC/CVV)</span>
-          <input className="input-basic w-25" type="password" />
-        </div>
-        <div className="input-container">
-          <span className="input-title">카드 비밀번호</span>
-          <input className="input-basic w-15" type="password" />
-          <input className="input-basic w-15" type="password" />
-          <input className="input-basic w-15" type="password" />
-          <input className="input-basic w-15" type="password" />
-        </div>
-        <button className="button-box" type={'button'} onClick={onNext}>
-          <span className="button-text">다음</span>
-        </button>
+        </VFlex>
+        <VFlex className={'input-container'}>
+          <Label htmlFor={'card-security-code'}>{'보안코드(CVC/CVV)'}</Label>
+          <Input
+            id={'card-security-code'}
+            value={''}
+            type={'password'}
+            className={'w-25'}
+            onChange={() => {}}
+          />
+        </VFlex>
+        <VFlex className={'input-container'}>
+          <Label htmlFor={'card-password'}>{'카드 비밀번호'}</Label>
+          <HFlex className={'input-box'}>
+            <Input
+              id={'card-password'}
+              value={''}
+              type={'password'}
+              className={'w-15'}
+              onChange={() => {}}
+            />
+            <Input value={''} type={'password'} className={'w-15'} onChange={() => {}} />
+            <Input value={''} type={'password'} className={'w-15'} onChange={() => {}} />
+            <Input value={''} type={'password'} className={'w-15'} onChange={() => {}} />
+          </HFlex>
+        </VFlex>
+        <Button type={'button'} onClick={onNext} className={'ml-auto'}>
+          <Text className={'button-text'}>{'다음'}</Text>
+        </Button>
       </div>
     </RootLayout>
   );

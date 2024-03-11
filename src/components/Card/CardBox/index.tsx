@@ -1,4 +1,5 @@
-import { CardTop } from '@/components/Card/CardTop';
+import { Box } from '@/components/atoms/Box';
+import { Text } from '@/components/atoms/Text';
 
 interface Props {
   companyName: string;
@@ -9,22 +10,21 @@ interface Props {
 
 export const CardBox = ({ companyName, cardName, MM, YY }: Props) => {
   return (
-    <div className="card-box">
-      <div className="empty-card">
-        <CardTop>{companyName}</CardTop>
-        <div className="card-top">{companyName}</div>
-        <div className="card-middle">
-          <div className="small-card__chip"></div>
-        </div>
-        <div className="card-bottom">
-          <div className="card-bottom__info">
-            <span className="card-text">{cardName}</span>
-            <span className="card-text">
+    <Box className={'card-box'}>
+      <Box className={'empty-card'}>
+        <Box className={'card-top'}>{companyName}</Box>
+        <Box className={'card-middle'}>
+          <Box className="small-card__chip" />
+        </Box>
+        <Box className={'card-bottom'}>
+          <Box className={'card-bottom__info'}>
+            <Text className={'card-text'}>{cardName}</Text>
+            <Text className={'card-text'}>
               {MM} / {YY}
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+            </Text>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 };

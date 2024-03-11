@@ -14,12 +14,7 @@ export const Button = ({
   ...buttonProps
 }: Props & ComponentProps<'button'>) => {
   return (
-    <button
-      className={clsx('button-box', className)}
-      type={type}
-      onClick={onClick}
-      {...buttonProps}
-    >
+    <button className={clsx(className)} type={type} onClick={onClick} {...buttonProps}>
       {children}
     </button>
   );
