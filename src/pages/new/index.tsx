@@ -1,4 +1,4 @@
-import formMachine from './context';
+import formMachine from '@/context/newCard';
 import { createActorContext } from '@xstate/react';
 import { Stepper } from './steps';
 

@@ -5,7 +5,7 @@ import * as styles from './cardName.css';
 import type { FormItems, FormItemKeys, FormItemValues } from '@/types/form';
 
 interface CardNameProps {
-  next: (data: Map<Partial<FormItemKeys>, FormItemValues<FormItems>>) => void;
+  next: () => void;
 }
 
 const CardName = ({ next }: CardNameProps) => {
@@ -13,6 +13,8 @@ const CardName = ({ next }: CardNameProps) => {
   const totalFormData = FormMachineContext.useSelector(
     (state) => state.context.totalFormData
   );
+  const formActorRef = FormMachineContext.useActorRef();
+
   const cardBrand = useMemo(() => {
     const cardNumer1 = totalFormData.get('cardNumber1');
     if (!cardNumer1) {
@@ -56,7 +58,8 @@ const CardName = ({ next }: CardNameProps) => {
             Partial<FormItemKeys>,
             FormItemValues<FormItems>
           >;
-          next(myMap);
+          formActorRef.send({ type: 'UPDATE', data: myMap });
+          next();
         }}
       >
         <Form.Item>
