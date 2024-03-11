@@ -9,7 +9,7 @@ import PlasticCard from "../../component/PlaticCard/PlaticCard";
 import Input from "../../../components/Input/Input";
 import { ChangeEvent, useState } from "react";
 
-type CardQuery = {
+export type CardQuery = {
   cardNumber: CardNumber;
   expiration: ExpirationDate;
   holder: string;
@@ -18,18 +18,24 @@ type CardQuery = {
   cardType: CardType;
 };
 
+export type NameQuery = {
+  cardName: string;
+};
+
 interface CardNamingProps {
   card?: CardQuery;
-  onSubmit: (value: { cardName: string }) => void;
+  onSubmit: (value: NameQuery) => void;
 }
 
 export default function CardNaming({
   onSubmit,
   card,
 }: Readonly<CardNamingProps>) {
+  console.log("card", card);
   const [cardName, setCardName] = useState<string>("");
   function completeRegist() {
-    onSubmit({ cardName });
+    console.log(cardName ?? card?.cardType);
+    onSubmit({ cardName: cardName ?? card?.cardType });
   }
 
   function changeCardName(event: ChangeEvent<HTMLInputElement>) {
@@ -52,6 +58,7 @@ export default function CardNaming({
         </div>
         <div className={styles.result__name}>
           <Input
+            placeholder="카드 별칭 (선택)"
             textAlign="center"
             hasUnderbar
             value={cardName}

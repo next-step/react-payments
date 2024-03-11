@@ -17,13 +17,13 @@ import SelectCardType from "./Components/SelectCardtype/SelectCardType";
 import Button from "../../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 
-type CardRegistration = {
+export type CardRegistration = {
+  cardType: CardType;
   cardNumber: CardNumber;
-  expirationDate: ExpirationDate;
   cardHolder: string;
   cvc: string;
+  expirationDate: ExpirationDate;
   password: TwoPasswordDigits;
-  cardType: CardType;
 };
 
 interface CardRegisterProps {

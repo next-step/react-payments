@@ -9,8 +9,11 @@ export const initialCards: Card[] = [
       thirdNumber: "2121",
       fourthNumber: "1111",
     },
+    cardHolder: "SUN",
+    cvc: "111",
     holderName: "SUM",
     expiration: { month: "12", year: "12" },
+    createdAt: new Date(),
   },
   {
     cardType: "은규",
@@ -20,7 +23,10 @@ export const initialCards: Card[] = [
       thirdNumber: "2222",
       fourthNumber: "2222",
     },
+    cardHolder: "SUN",
+    cvc: "111",
     holderName: "KYU",
     expiration: { month: "11", year: "11" },
+    createdAt: new Date(),
   },
 ];

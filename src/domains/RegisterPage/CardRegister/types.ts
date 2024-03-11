@@ -2,7 +2,10 @@ export type Card = {
   cardType: CardType;
   cardNumber: CardNumber;
   holderName: string;
+  cardHolder: string;
+  cvc: string;
   expiration: ExpirationDate;
+  createdAt: Date;
 };
 
 export type CardNumber = {
