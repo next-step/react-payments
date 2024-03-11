@@ -1,0 +1,1 @@
+export { paymentsMachine } from './paymentMachine'
