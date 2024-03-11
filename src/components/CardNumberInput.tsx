@@ -2,6 +2,8 @@ import React from 'react'
 import { StyledInput } from './DateInput.tsx'
 import styled from 'styled-components'
 
+const CARD_ONE_SECTION_NUMBER_LENGTH = 4
+
 const Slash = styled.span`
   color: #94dacd;
   font-weight: 700;
@@ -31,28 +33,28 @@ const CardNumberInput = ({
         type="text"
         value={one}
         onChange={onChangeOne}
-        maxLength={4}
+        maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
       />
-      {one.length === 4 && <Slash>-</Slash>}
+      {one.length === CARD_ONE_SECTION_NUMBER_LENGTH && <Slash>-</Slash>}
       <StyledInput
         type="text"
         value={two}
         onChange={onChangeTwo}
-        maxLength={4}
+        maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
       />
-      {two.length === 4 && <Slash>-</Slash>}
+      {two.length === CARD_ONE_SECTION_NUMBER_LENGTH && <Slash>-</Slash>}
       <StyledInput
         type="password"
         value={three}
         onChange={onChangeThree}
-        maxLength={4}
+        maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
       />
-      {three.length === 4 && <Slash>-</Slash>}
+      {three.length === CARD_ONE_SECTION_NUMBER_LENGTH && <Slash>-</Slash>}
       <StyledInput
         type="password"
         value={four}
         onChange={onChangeFour}
-        maxLength={4}
+        maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
       />
     </div>
   )
