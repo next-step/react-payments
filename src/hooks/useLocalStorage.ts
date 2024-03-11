@@ -1,20 +1,17 @@
-import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 
 export default function useLocalStorage<T>(key: string, initialValue: T) {
   const [store, setStore] = useState<T>(initialValue);
 
   const setStorage = useCallback((value: T) => {
     setStore(value);
+    localStorage.setItem(key, JSON.stringify(value));
   }, []);
 
   useLayoutEffect(() => {
-    const existedValue = JSON.parse(localStorage.getItem(key)!) as T;
-    existedValue && setStore(existedValue);
+    const existed = localStorage.getItem(key);
+    if (existed) return setStore(JSON.parse(existed));
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(store));
-  }, [key, store]);
 
   return [store, setStorage] as const;
 }

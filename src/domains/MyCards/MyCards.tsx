@@ -10,13 +10,13 @@ export default function MyCards() {
   return (
     <section className={styles.cards__layout}>
       <div className={styles.cards__list}>
-        {cards.map((card) => {
+        {cards?.map((card) => {
           return (
             <PlasticCard
               key={JSON.stringify(card.cardNumber)}
               cardType={card.cardType}
               cardNumber={card.cardNumber}
-              holderName={card.holderName}
+              holderName={card.cardHolder}
               expiration={card.expiration}
             />
           );
