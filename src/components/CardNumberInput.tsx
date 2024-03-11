@@ -22,21 +22,20 @@ const CardNumberInput = ({
 }) => {
   return (
     <div className="input-box">
-      {inputs.map((input, index) => {
+      {inputs.map(({ type, value, onChange, maxLength }, index) => {
         return (
           <>
             <InputStyle key={index}>
               <input
-                type={input.type}
-                value={input.value}
-                onChange={input.onChange}
-                maxLength={input.maxLength}
+                type={type}
+                value={value}
+                onChange={onChange}
+                maxLength={maxLength}
               />
             </InputStyle>
-            {index + 1 < inputs.length &&
-              input.value.length === input.maxLength && (
-                <Slash>{divider}</Slash>
-              )}
+            {index + 1 < inputs.length && value.length === maxLength && (
+              <Slash>{divider}</Slash>
+            )}
           </>
         )
       })}
