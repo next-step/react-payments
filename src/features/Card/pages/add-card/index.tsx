@@ -1,13 +1,13 @@
 // import { CardBox } from '@/components/Card/CardBox';
 import { IconArrowBack } from '@/assets/IconArrowBack';
 import { CardBox } from '@/components/Card/CardBox';
-import { Button } from '@/components/atoms/Button';
-import { HFlex } from '@/components/atoms/HFlex';
-import { Heading } from '@/components/atoms/Heading';
-import { Input } from '@/components/atoms/Input';
-import { Label } from '@/components/atoms/Label';
-import { Text } from '@/components/atoms/Text';
-import { VFlex } from '@/components/atoms/VFlex';
+import { Button } from '@/shared/components/atoms/Button';
+import { HFlex } from '@/shared/components/atoms/HFlex';
+import { Heading } from '@/shared/components/atoms/Heading';
+import { Input } from '@/shared/components/atoms/Input';
+import { Label } from '@/shared/components/atoms/Label';
+import { Text } from '@/shared/components/atoms/Text';
+import { VFlex } from '@/shared/components/atoms/VFlex';
 import { RootLayout } from '@/shared/layout/RootLayout';
 
 interface Props {

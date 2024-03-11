@@ -1,5 +1,5 @@
-import { Box } from '@/components/atoms/Box';
-import { Text } from '@/components/atoms/Text';
+import { Box } from '@/shared/components/atoms/Box';
+import { Text } from '@/shared/components/atoms/Text';
 
 interface Props {
   companyName: string;

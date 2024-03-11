@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { CardManagement } from '@/pages/card-management';
+import { CardManagement } from '@/features/Card/pages/card-management';
 
 export const App = () => {
   return (

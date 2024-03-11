@@ -1,8 +1,8 @@
 import { CARD_REGISTRATION_STEPS } from '@/constants/stepConstants';
 import { useStepper } from '@/hooks/useStepper';
-import { CardInventoryPage } from '@/pages/card-inventory';
-import { AddCardPage } from '@/pages/add-card';
-import { CompleteAddPage } from '@/pages/complete-add';
+import { CardInventoryPage } from '@/features/Card/pages/card-inventory';
+import { AddCardPage } from '@/features/Card/pages/add-card';
+import { CompleteAddPage } from '@/features/Card/pages/complete-add';
 
 export const CardManagement = () => {
   const { Stepper, Step, setStep } = useStepper(CARD_REGISTRATION_STEPS);
