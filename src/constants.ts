@@ -1,7 +1,9 @@
+import { v4 } from "uuid";
 import { Card } from "./domains/RegisterPage/CardRegister/types";
 
 export const initialCards: Card[] = [
   {
+    uuid: v4(),
     cardType: "윤호",
     cardNumber: {
       firstNumber: "1234",
@@ -16,6 +18,7 @@ export const initialCards: Card[] = [
     createdAt: new Date(),
   },
   {
+    uuid: v4(),
     cardType: "은규",
     cardNumber: {
       firstNumber: "2222",

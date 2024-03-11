@@ -15293,6 +15293,7 @@ __metadata:
     react-scripts: ^5.0.1
     storybook: ^7.6.17
     typescript: ^5.2.2
+    uuid: ^9.0.1
     vite: ^5.1.4
   languageName: unknown
   linkType: soft
@@ -17916,7 +17917,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^9.0.0":
+"uuid@npm:^9.0.0, uuid@npm:^9.0.1":
   version: 9.0.1
   resolution: "uuid@npm:9.0.1"
   bin:

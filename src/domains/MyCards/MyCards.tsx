@@ -13,9 +13,9 @@ export default function MyCards() {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 
-  function deleteCard(keyIndex: number) {
+  function deleteCard(uuid: string) {
     return function deleteCard() {
-      const filtered = latest.filter((value, index) => keyIndex !== index);
+      const filtered = latest.filter((value) => uuid !== value.uuid);
       setCards(filtered);
     };
   }
@@ -26,21 +26,24 @@ export default function MyCards() {
         <Link to="/mycards/register">
           <div className={styles.card__link}>+</div>
         </Link>
-        {latest.map((card, index) => {
+        {latest.map((card) => {
           return (
             <div
               key={JSON.stringify(card.cardNumber)}
               className={styles.card__box}
             >
               <div className={styles.card__delBtn}>
-                <Button onClick={deleteCard(index)}>지우기</Button>
+                <Button onClick={deleteCard(card.uuid)}>지우기</Button>
               </div>
-              <PlasticCard
-                cardType={card.cardType}
-                cardNumber={card.cardNumber}
-                holderName={card.cardHolder}
-                expiration={card.expiration}
-              />
+              <Link to={`modify?uuid=${card.uuid}`}>
+                <PlasticCard
+                  cardType={card.cardType}
+                  cardNumber={card.cardNumber}
+                  holderName={card.cardHolder}
+                  expiration={card.expiration}
+                />
+              </Link>
+              <div>{card.holderName}</div>
             </div>
           );
         })}
