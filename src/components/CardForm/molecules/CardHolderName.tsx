@@ -1,9 +1,7 @@
 import { FormType } from '@/type/formType';
-import Input from '../atoms/Input';
-import InputContainer from '../atoms/InputContainer';
-import InputTitle from '../atoms/InputTitle';
 import { useFormContext } from '@/context/Form';
 import { CARD_HOLDER_NAEM_MAX_LENGTH } from '@/utils/cardValidations';
+import { Input } from '../atoms/Input';
 
 export default function CardHolderName() {
   const {
@@ -15,10 +13,10 @@ export default function CardHolderName() {
 
   return (
     <>
-      <InputContainer>
+      <Input.Container>
         <div className='input-space-between'>
-          <InputTitle>카드 소유자 이름(선택)</InputTitle>
-          <InputTitle>{`${cardHolderName.length}/${CARD_HOLDER_NAEM_MAX_LENGTH}`}</InputTitle>
+          <Input.Title>카드 소유자 이름(선택)</Input.Title>
+          <Input.Title>{`${cardHolderName.length}/${CARD_HOLDER_NAEM_MAX_LENGTH}`}</Input.Title>
         </div>
         <Input
           type='text'
@@ -26,7 +24,7 @@ export default function CardHolderName() {
           placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
           {...getFieldProps('cardHolderName')}
         />
-      </InputContainer>
+      </Input.Container>
 
       {errors.cardHolderName && touched.cardHolderName && (
         <span>{errors.cardHolderName}</span>

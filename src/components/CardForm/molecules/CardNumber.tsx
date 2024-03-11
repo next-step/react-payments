@@ -1,18 +1,15 @@
 import { useFormContext } from '@/context/Form';
-import Input from '../atoms/Input';
-import InputBox from '../atoms/InputBox';
-import InputContainer from '../atoms/InputContainer';
-import InputTitle from '../atoms/InputTitle';
 import { FormType } from '@/type/formType';
+import { Input } from '../atoms/Input';
 
 export default function CardNumber() {
   const { getFieldProps, touched, errors } = useFormContext<FormType>();
 
   return (
     <>
-      <InputContainer>
-        <InputTitle>카드 번호</InputTitle>
-        <InputBox>
+      <Input.Container>
+        <Input.Title>카드 번호</Input.Title>
+        <Input.Box>
           <Input type='text' maxLength={4} {...getFieldProps('cardNumber1')} />
           <div>-</div>
           <Input type='text' maxLength={4} {...getFieldProps('cardNumber2')} />
@@ -28,8 +25,8 @@ export default function CardNumber() {
             maxLength={4}
             {...getFieldProps('cardNumber4')}
           />
-        </InputBox>
-      </InputContainer>
+        </Input.Box>
+      </Input.Container>
 
       {touched.cardNumber1 && errors.cardNumber1 && (
         <span>{errors.cardNumber1}</span>

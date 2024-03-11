@@ -1,18 +1,15 @@
 import { useFormContext } from '@/context/Form';
-import Input from '../atoms/Input';
-import InputBox from '../atoms/InputBox';
-import InputContainer from '../atoms/InputContainer';
-import InputTitle from '../atoms/InputTitle';
 import { FormType } from '@/type/formType';
+import { Input } from '../atoms/Input';
 
 export default function ExpirationDate() {
   const { getFieldProps, touched, errors } = useFormContext<FormType>();
 
   return (
     <>
-      <InputContainer>
-        <InputTitle>만료일</InputTitle>
-        <InputBox className='w-50'>
+      <Input.Container>
+        <Input.Title>만료일</Input.Title>
+        <Input.Box className='w-50'>
           <Input
             type='text'
             placeholder='MM'
@@ -26,8 +23,8 @@ export default function ExpirationDate() {
             maxLength={2}
             {...getFieldProps('expirationYear')}
           />
-        </InputBox>
-      </InputContainer>
+        </Input.Box>
+      </Input.Container>
 
       {errors.expirationMonth && touched.expirationMonth && (
         <span>{errors.expirationMonth}</span>
