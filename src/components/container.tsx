@@ -3,13 +3,14 @@ import { ReactNode } from 'react'
 type ContainerPropsType = {
   title: string
   children: ReactNode
+  className?: string
 }
 
-function Container({ title, children }: ContainerPropsType) {
+function Container({ title, children, className = '' }: ContainerPropsType) {
   return (
-    <div className="input-container">
+    <div className={`input-container ${className}`}>
       <span className="input-title">{title}</span>
-      <div className="input-box">{children}</div>
+      <div>{children}</div>
     </div>
   )
 }

@@ -1,16 +1,24 @@
-import useInput from "../../hooks/useInput"
+import { ChangeEvent } from 'react'
 
 type InputPropsType = {
-    type: 'text' | 'password',
-    placeholder?: string
+  // type: 'text' | 'password'
+  value: string
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void
+  placeholder?: string
+  className?: string
 }
 
 function Input(props: InputPropsType) {
-    const {value, onChange} = useInput()
-
-    return (
+  const { value, onChange, placeholder } = props
+  return (
     <>
-      <input className="input-basic" type={props.type} value={value} onChange={onChange} placeholder={props.placeholder} />
+      <input
+        className="input-basic input-color-highlight input-box"
+        type="text"
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+      />
     </>
   )
 }

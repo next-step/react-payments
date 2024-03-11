@@ -1,0 +1,30 @@
+.input-color-highlight {
+  color: #04c09e;
+}
+
+.dot-hightlight {
+  background: #04c09e;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  text-align: center;
+}
+.dot-align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.auto-sizing-width-container {
+  display: flex;
+  gap: 10px;
+}
+
+.auto-sizing-width-item {
+  /* flex-grow: 1;
+  flex-basis: 0; */
+  width: 10%;
+}
+
+.auto-sizing-width-item-35 {
+  width: 35%;
+}
