@@ -38,11 +38,7 @@ const Stepper = () => {
       ...(getLocalStorage(CARD_LIST_KEY) || []),
     ];
     const uniqueList = newList.reduce((acc: FormItems[], cur: FormItems) => {
-      const isExist = acc.find(
-        (item) =>
-          `${item.cardNumber1}${item.cardNumber2}${item.cardNumber3}${item.cardNumber4}` ===
-          `${cur.cardNumber1}${cur.cardNumber2}${cur.cardNumber3}${cur.cardNumber4}`
-      );
+      const isExist = acc.find((item) => item.id === cur.id);
       if (!isExist) {
         acc.push(cur);
       }

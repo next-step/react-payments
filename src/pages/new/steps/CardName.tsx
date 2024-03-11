@@ -54,10 +54,10 @@ const CardName = ({ next }: CardNameProps) => {
       <Form
         onSubmit={(e) => {
           e.preventDefault();
-          const myMap = new Map([['cardName', cardName || cardBrand]]) as Map<
-            Partial<FormItemKeys>,
-            FormItemValues<FormItems>
-          >;
+          const myMap = new Map([
+            ['cardName', cardName || cardBrand],
+            ['id', totalFormData.get('id') || crypto.randomUUID()],
+          ]) as Map<Partial<FormItemKeys>, FormItemValues<FormItems>>;
           formActorRef.send({ type: 'UPDATE', data: myMap });
           next();
         }}
