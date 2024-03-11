@@ -25,7 +25,7 @@ export default function CreditCard() {
         <Card.Top />
 
         <Card.Middle>
-          <Card.Size size='small' chip />
+          <Card.Size size='small' hasChip />
         </Card.Middle>
 
         <Card.Bottom>

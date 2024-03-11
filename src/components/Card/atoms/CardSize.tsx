@@ -1,15 +1,15 @@
 type CardSizeProps = {
   size: 'small' | 'big';
-  chip?: boolean;
+  hasChip?: boolean;
   children?: React.ReactNode;
 };
 
 export default function CardSize({
   size,
-  chip = false,
+  hasChip = false,
   children,
 }: CardSizeProps) {
   return (
-    <div className={`${size}-card${chip ? '__chip' : ''}`}>{children}</div>
+    <div className={`${size}-card${hasChip ? '__chip' : ''}`}>{children}</div>
   );
 }
