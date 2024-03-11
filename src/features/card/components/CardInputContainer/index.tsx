@@ -1,31 +1,41 @@
-import { useState } from 'react';
-import { CardInputInterface } from '@/features/card/types/cardInputTypes';
 import { CardInput } from '@/features/card/components/CardInput';
-import { CARD_INPUT } from '@/features/card/constants/cardInputValue';
+import { useCardInput } from '@/features/card/hooks/useCardInput';
+import { VFlex } from '@/shared/components/atoms/VFlex';
+import { Button } from '@/shared/components/atoms/Button';
+import { Text } from '@/shared/components/atoms/Text';
 
-export const CardInputContainer = () => {
-  const [input, setInput] = useState(CARD_INPUT);
-
-  const onChangeInput = <T extends keyof CardInputInterface>(
-    prop: keyof CardInputInterface,
-    nextVal: CardInputInterface[T],
-  ) => {
-    setInput((prev) => ({ ...prev, [prop]: nextVal }));
-  };
+interface Props {
+  onNext: () => void;
+}
+export const CardInputContainer = ({ onNext }: Props) => {
+  const {
+    input,
+    onChangeNumber,
+    onChangeExpirationDate,
+    onChangeOwner,
+    onChangeSecurityCode,
+    onChangePassword,
+  } = useCardInput();
 
   return (
-    <>
+    <VFlex className={'gap-4'}>
       <CardInput.Display
-        cardName={input.cardName}
         companyName={input.companyName}
+        ownerName={input.ownerName}
         cardNumber={input.cardNumber}
         expirationDate={input.expirationDate}
       />
-      <CardInput.Number cardNumber={input.cardNumber} onChange={onChangeInput} />
-      <CardInput.ExpirationDate expirationDate={input.expirationDate} onChange={onChangeInput} />
-      <CardInput.Owner ownerName={input.ownerName} onChange={onChangeInput} />
-      <CardInput.SecurityCode securityCode={input.securityCode} onChange={onChangeInput} />
-      <CardInput.Password password={input.password} onChange={onChangeInput} />
-    </>
+      <CardInput.Number cardNumber={input.cardNumber} onChange={onChangeNumber} />
+      <CardInput.ExpirationDate
+        expirationDate={input.expirationDate}
+        onChange={onChangeExpirationDate}
+      />
+      <CardInput.Owner ownerName={input.ownerName} onChange={onChangeOwner} />
+      <CardInput.SecurityCode securityCode={input.securityCode} onChange={onChangeSecurityCode} />
+      <CardInput.Password password={input.password} onChange={onChangePassword} />
+      <Button type={'button'} onClick={onNext} className={'ml-auto'}>
+        <Text>{'다음'}</Text>
+      </Button>
+    </VFlex>
   );
 };

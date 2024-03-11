@@ -1,4 +1,4 @@
-import { CARD_REGISTRATION_STEPS } from '@/constants/stepConstants';
+import { CARD_REGISTRATION_STEPS } from '@/features/card/constants/step';
 import { useStepper } from '@/hooks/useStepper';
 import { CardInventoryPage } from '@/features/card/pages/card-inventory';
 import { AddCardPage } from '@/features/card/pages/add-card';

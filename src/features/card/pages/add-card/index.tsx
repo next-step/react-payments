@@ -1,11 +1,10 @@
+import { CardInputContainer } from '@/features/card/components/CardInputContainer';
 import { IconArrowBack } from '@/assets/IconArrowBack';
 import { Header } from '@/shared/components/molecules/Header';
 import { Button } from '@/shared/components/atoms/Button';
 import { Heading } from '@/shared/components/atoms/Heading';
 import { RootLayout } from '@/shared/layout/RootLayout';
-import { Text } from '@/shared/components/atoms/Text';
 import { AppLayout } from '@/shared/layout/AppLayout';
-import { CardInputContainer } from '@/features/card/components/CardInputContainer';
 
 interface Props {
   onPrev: () => void;
@@ -29,12 +28,7 @@ export const AddCardPage = ({ onPrev, onNext }: Props) => {
             </Heading>
           }
         />
-
-        <CardInputContainer />
-
-        <Button type={'button'} onClick={onNext} className={'ml-auto'}>
-          <Text className={'button-text'}>{'다음'}</Text>
-        </Button>
+        <CardInputContainer onNext={onNext} />
       </AppLayout>
     </RootLayout>
   );

@@ -1,55 +1,25 @@
 import { ChangeEvent } from 'react';
 import { CardInputInterface } from '@/features/card/types/cardInputTypes';
+import { DISPLAY_EXPIRATION_DATE_COUPLER } from '@/features/card/constants/display';
+import { MAX_LENGTH_PIECE_EXPIRATION_DATE } from '@/features/card/constants/maxLength';
 import { HFlex } from '@/shared/components/atoms/HFlex';
 import { Input } from '@/shared/components/atoms/Input';
 import { Label } from '@/shared/components/atoms/Label';
 import { VFlex } from '@/shared/components/atoms/VFlex';
-import { formattedExpirationDateMM } from '@/features/utils/formattedString';
-import { Validator } from '@/features/lib/Validator';
-import { EXPIRATION_DATE_COUPLER } from '@/features/card/constants/display';
 
 interface Props {
   expirationDate: CardInputInterface['expirationDate'];
-  onChange: (prop: 'expirationDate', nextVal: CardInputInterface['expirationDate']) => void;
+  onChange: (
+    e: ChangeEvent<HTMLInputElement>,
+    section: keyof CardInputInterface['expirationDate'],
+  ) => void;
 }
 
 const INPUT_ID = 'card-expiration-date';
 
 export const CardInputExpirationDate = ({ expirationDate, onChange }: Props) => {
-  const onChangeExpirationDateMM = (e: ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-      nativeEvent,
-    } = e;
-
-    if (
-      !Validator.checkIsValidExpirationDateMM(value) &&
-      (nativeEvent as InputEvent).inputType !== 'deleteContentBackward'
-    ) {
-      return;
-    }
-
-    onChange('expirationDate', { ...expirationDate, ['MM']: formattedExpirationDateMM(value) });
-  };
-
-  const onChangeExpirationDateYY = (e: ChangeEvent<HTMLInputElement>) => {
-    const {
-      target: { value },
-      nativeEvent,
-    } = e;
-
-    if (
-      !Validator.checkIsNumberParsableString(value) &&
-      (nativeEvent as InputEvent).inputType !== 'deleteContentBackward'
-    ) {
-      return;
-    }
-
-    onChange('expirationDate', { ...expirationDate, ['YY']: value });
-  };
-
   return (
-    <VFlex className={'input-container'}>
+    <VFlex>
       <Label htmlFor={INPUT_ID}>{'만료일'}</Label>
       <HFlex className={'input-box w-50'}>
         <Input
@@ -57,16 +27,17 @@ export const CardInputExpirationDate = ({ expirationDate, onChange }: Props) => 
           value={expirationDate.MM}
           type={'text'}
           placeholder={'MM'}
-          maxLength={2}
-          onChange={onChangeExpirationDateMM}
+          maxLength={MAX_LENGTH_PIECE_EXPIRATION_DATE}
+          onChange={(e) => onChange(e, 'MM')}
         />
-        {expirationDate.MM.length >= 2 && EXPIRATION_DATE_COUPLER}
+        {expirationDate.MM.length >= MAX_LENGTH_PIECE_EXPIRATION_DATE &&
+          DISPLAY_EXPIRATION_DATE_COUPLER}
         <Input
           value={expirationDate.YY}
           type={'text'}
           placeholder={'YY'}
-          maxLength={2}
-          onChange={onChangeExpirationDateYY}
+          maxLength={MAX_LENGTH_PIECE_EXPIRATION_DATE}
+          onChange={(e) => onChange(e, 'YY')}
         />
       </HFlex>
     </VFlex>

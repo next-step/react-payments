@@ -16,7 +16,6 @@ export interface CardPassword {
 }
 
 export interface CardInputInterface {
-  cardName: string;
   companyName: string;
   cardNumber: CardNumber;
   expirationDate: CardExpirationDate;

@@ -1,7 +1,7 @@
-import { SECURITY_CHARACTER } from '@/features/card/constants/display';
+import { DISPLAY_SECURITY_CHARACTER } from '@/features/card/constants/display';
 
 const formattedPaddedValue = (value: string, length: number) => value.padEnd(length, ' ');
-const formattedPasswordStyle = (value: string) => value.replace(/./g, SECURITY_CHARACTER);
+const formattedPasswordStyle = (value: string) => value.replace(/./g, DISPLAY_SECURITY_CHARACTER);
 
 export const formattedDisplayCardNumber = (cardNumber: {
   first: string;
