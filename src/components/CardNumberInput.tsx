@@ -8,6 +8,11 @@ interface CardNumberInput {
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
+
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
 const Slash = styled.span`
   color: #94dacd;
   font-weight: 700;
@@ -18,25 +23,21 @@ const CardNumberInput = ({
   inputs,
 }: {
   divider: string
-  inputs: CardNumberInput[]
+  inputs: React.ComponentPropsWithoutRef<'input'>[]
 }) => {
   return (
     <div className="input-box">
-      {inputs.map(({ type, value, onChange, maxLength }, index) => {
+      {inputs.map((input, index) => {
         return (
-          <>
-            <InputStyle key={index}>
-              <input
-                type={type}
-                value={value}
-                onChange={onChange}
-                maxLength={maxLength}
-              />
+          <Wrapper key={index}>
+            <InputStyle>
+              <input {...input} />
             </InputStyle>
-            {index + 1 < inputs.length && value.length === maxLength && (
-              <Slash>{divider}</Slash>
-            )}
-          </>
+            {index + 1 < inputs.length &&
+              String(input.value).length === input.maxLength && (
+                <Slash>{divider}</Slash>
+              )}
+          </Wrapper>
         )
       })}
     </div>
