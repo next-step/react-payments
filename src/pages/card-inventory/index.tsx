@@ -1,7 +1,10 @@
-import { Link } from 'react-router-dom';
 import { RootLayout } from '@/shared/layout/RootLayout';
 
-export const CardInventoryPage = () => {
+interface Props {
+  onNext: () => void;
+}
+
+export const CardInventoryPage = ({ onNext }: Props) => {
   return (
     <RootLayout>
       <div className="app flex-column-center">
@@ -29,9 +32,9 @@ export const CardInventoryPage = () => {
         </div>
         <span className="card-nickname">법인카드</span>
         <div className="card-box">
-          <Link to={'/add-card'} className="empty-card">
+          <button className="empty-card" type={'button'} onClick={onNext}>
             +
-          </Link>
+          </button>
         </div>
       </div>
     </RootLayout>

@@ -1,11 +1,23 @@
 // import { CardBox } from '@/components/Card/CardBox';
+import { IconArrowBack } from '@/assets/IconArrowBack';
 import { RootLayout } from '@/shared/layout/RootLayout';
 
-export const AddCardPage = () => {
+interface Props {
+  onPrev: () => void;
+  onNext: () => void;
+}
+
+export const AddCardPage = ({ onPrev, onNext }: Props) => {
   return (
     <RootLayout>
       <div className="app">
-        <h2 className="page-title"> 카드 추가</h2>
+        <div>
+          <button type={'button'} onClick={onPrev}>
+            <IconArrowBack />
+          </button>
+          <h2 className="page-title"> 카드 추가</h2>
+        </div>
+
         {/* <CardBox /> */}
         <div className="card-box">
           <div className="empty-card">
@@ -56,9 +68,9 @@ export const AddCardPage = () => {
           <input className="input-basic w-15" type="password" />
           <input className="input-basic w-15" type="password" />
         </div>
-        <div className="button-box">
+        <button className="button-box" type={'button'} onClick={onNext}>
           <span className="button-text">다음</span>
-        </div>
+        </button>
       </div>
     </RootLayout>
   );

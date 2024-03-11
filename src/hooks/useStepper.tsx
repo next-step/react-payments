@@ -12,17 +12,17 @@ interface StepperProps<T> {
 
 export const useStepper = <T extends TSteps>(steps: T) => {
   const initialStep = steps[0];
-  const [currentStep, setCurrentStep] = useState<T[number]>(initialStep);
+  const [step, setStep] = useState<T[number]>(initialStep);
 
   const Step = (props: StepProps<T[number]>): ReactElement => {
     return <>{props.children}</>;
   };
 
   const Stepper = ({ children }: StepperProps<T[number]>) => {
-    const targetStep = children.find((childStep) => childStep.props.name === currentStep);
+    const targetStep = children.find((childStep) => childStep.props.name === step);
 
     return <>{targetStep}</>;
   };
 
-  return { Stepper, Step, currentStep, setCurrentStep };
+  return { Stepper, Step, step, setStep };
 };
