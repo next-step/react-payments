@@ -31,7 +31,6 @@ export default function CardNaming({
   onSubmit,
   card,
 }: Readonly<CardNamingProps>) {
-  console.log("card", card);
   const [cardName, setCardName] = useState<string>("");
   function completeRegist() {
     console.log(cardName ?? card?.cardType);
