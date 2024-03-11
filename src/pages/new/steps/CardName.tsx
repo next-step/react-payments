@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, Form, Card, Input, Footer } from '@/components';
 import { FormMachineContext } from '@/pages/new';
 import * as styles from './cardName.css';
@@ -15,7 +15,7 @@ const CardName = ({ next }: CardNameProps) => {
   );
   const formActorRef = FormMachineContext.useActorRef();
 
-  const cardBrand = useMemo(() => {
+  const cardBrand = () => {
     const cardNumer1 = totalFormData.get('cardNumber1');
     if (!cardNumer1) {
       return 'UNKNOWN';
@@ -25,7 +25,7 @@ const CardName = ({ next }: CardNameProps) => {
       return 'UNKNOWN';
     }
     return `BRAND${cardNumer1[0]}`;
-  }, [totalFormData]);
+  };
 
   useEffect(() => {
     if (totalFormData.get('cardName')) {
