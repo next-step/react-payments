@@ -35,9 +35,7 @@ export default function CreditCard() {
           <Card.Bottom as='info'>
             <Card.Text>{cardHolderName || 'NAME'}</Card.Text>
             <Card.Text>
-              {expirationMonth || expirationYear
-                ? `${expirationMonth} / ${expirationYear}`
-                : 'MM / YY'}
+              {`${expirationMonth || 'MM'} / ${expirationYear || 'YY'}`}
             </Card.Text>
           </Card.Bottom>
         </Card.Bottom>
