@@ -1,7 +1,6 @@
 import PageTitle from '@components/@common/PageTitle';
 import HStack from '@components/@common/layout/HStack';
-import CardBox from '@components/Card/atoms/CardBox';
-import EmptyCard from '@components/Card/atoms/EmptyCard';
+import { Card } from '@components/Card/atoms/Card';
 
 type CardListProps = {
   onFirstStep: () => void;
@@ -15,9 +14,9 @@ export default function CardList({ onFirstStep }: CardListProps) {
           <PageTitle className='mb-10'>보유 카드</PageTitle>
         </HStack>
 
-        <CardBox>
-          <EmptyCard onCardClick={onFirstStep}>+</EmptyCard>
-        </CardBox>
+        <Card.Box>
+          <Card.Empty onCardClick={onFirstStep}>+</Card.Empty>
+        </Card.Box>
       </div>
     </div>
   );

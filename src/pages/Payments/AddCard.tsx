@@ -1,6 +1,6 @@
 import PageTitle from '@components/@common/PageTitle';
 import Button from '@components/@common/button/molecules/Button';
-import Card from '@components/Card/organisms/Card';
+import Card from '@components/Card/organisms/CreditCard';
 import CardHolderName from '@components/CardForm/molecules/CardHolderName';
 import CardNumber from '@components/CardForm/molecules/CardNumber';
 import ExpirationDate from '@components/CardForm/molecules/ExpirationDate';
