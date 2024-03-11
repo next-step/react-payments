@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import PlasticCard from "../component/PlaticCard/PlaticCard";
 import styles from "./MyCards.module.css";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import { initialCards } from "../../constants";
-import { Card } from "../RegisterPage/CardRegister/types";
 import Button from "../../components/Button/Button";
+import useCards from "../../hooks/useCards";
 
 export default function MyCards() {
-  const [cards, setCards] = useLocalStorage<Card[]>("mycards", initialCards);
+  const { cards, setCards } = useCards({
+    sortByKey: "createdAt",
+    sortMethod: "asc",
+  });
 
   const latest = cards.sort((a, b) => {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
