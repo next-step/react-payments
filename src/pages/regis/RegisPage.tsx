@@ -1,21 +1,38 @@
-import Header from '../../components/common/header/Header.tsx';
-import * as S from './RegisPage.style.ts';
-import Button from '../../components/common/button/Button.tsx';
-import RegisForm from '../../components/regis/RegisForm.tsx';
-import { useNavigate } from 'react-router-dom';
-import { PAGES } from '../../routes/route.constant.ts';
-const RegisPage = () => {
-  const navigation = useNavigate();
+import { useState } from 'react';
+import Step1Registration from '../../components/regis/Step1Registration';
+import Step2Complete from '../../components/regis/Step2Complete';
+import useForm from '../../hooks/useForm.tsx';
+import { RegisFormType } from '../../components/regis/RegisFormType.ts';
 
-  return (
-    <>
-      <Header prev>카드 추가</Header>
-      <RegisForm />
-      <S.Bottom>
-        <Button onClick={() => navigation(PAGES.COMPLETE)}>다음</Button>
-      </S.Bottom>
-    </>
-  );
+const RegisPage = () => {
+  const [step, setStep] = useState(0);
+
+  const { form, setValue, regis } = useForm<RegisFormType>({
+    initialValue: {
+      number: '',
+      expireMonthYear: '',
+      ownerName: '',
+      secretCode: '',
+      password1: '',
+      password2: '',
+    },
+  });
+
+  switch (step) {
+    case 0:
+      return (
+        <Step1Registration
+          {...form}
+          setValue={setValue}
+          regis={regis}
+          onClickNextStep={() => setStep(step + 1)}
+        />
+      );
+    case 1:
+      return <Step2Complete onClickPrevStep={() => setStep(step - 1)} />;
+    default:
+      return null;
+  }
 };
 
 export default RegisPage;

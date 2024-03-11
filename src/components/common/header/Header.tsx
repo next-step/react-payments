@@ -10,7 +10,7 @@ const Header: FC<PropsWithChildren<Props>> = ({ prev, children }) => {
   return (
     <S.Container>
       {prev && (
-        <S.PrevButton onClick={() => history.back()}>
+        <S.PrevButton onClick={() => history.back()} type={'button'}>
           <ArrowLeft />
         </S.PrevButton>
       )}

@@ -1,22 +1,23 @@
 import * as S from './Input.style.ts';
-import { InputHTMLAttributes } from 'react';
+import { ChangeEvent, forwardRef, InputHTMLAttributes } from 'react';
 import { InputVariantType } from './Input.type.ts';
 import { INPUT_VARIANT } from './Input.constant.ts';
 
-interface Props {
+export interface Props {
   variant?: InputVariantType;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export type TextFieldProps = Props & Omit<InputHTMLAttributes<HTMLInputElement>, keyof Props>;
 
-const Input = (props: TextFieldProps) => {
-  const { title, style, variant = INPUT_VARIANT.DEFAULT, ...rest } = props;
+const Input = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
+  const { style, variant = INPUT_VARIANT.DEFAULT, onChange, ...rest } = props;
 
   return (
     <S.Container style={style}>
-      <S.TextField variant={variant} {...rest} />
+      <S.TextField {...rest} variant={variant} onChange={onChange} ref={ref} />
     </S.Container>
   );
-};
+});
 
 export default Input;
