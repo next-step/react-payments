@@ -1,6 +1,5 @@
 // import { CardBox } from '@/components/Card/CardBox';
 import { IconArrowBack } from '@/assets/IconArrowBack';
-import { CardBox } from '@/components/Card/CardBox';
 import { Button } from '@/shared/components/atoms/Button';
 import { HFlex } from '@/shared/components/atoms/HFlex';
 import { Heading } from '@/shared/components/atoms/Heading';
@@ -9,6 +8,7 @@ import { Label } from '@/shared/components/atoms/Label';
 import { Text } from '@/shared/components/atoms/Text';
 import { VFlex } from '@/shared/components/atoms/VFlex';
 import { RootLayout } from '@/shared/layout/RootLayout';
+import { CardBox } from '@/features/card2/components/CardBox';
 
 interface Props {
   onPrev: () => void;
