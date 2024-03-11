@@ -9,7 +9,7 @@ export default function CardDisplay() {
         </Card.Top>
 
         <Card.Middle>
-          <Card.Size size='small' chip></Card.Size>
+          <Card.Size size='small' chip />
         </Card.Middle>
 
         <Card.Bottom>

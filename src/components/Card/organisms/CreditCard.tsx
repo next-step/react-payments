@@ -22,10 +22,10 @@ export default function CreditCard() {
   return (
     <Card.Box>
       <Card.Empty>
-        <Card.Top></Card.Top>
+        <Card.Top />
 
         <Card.Middle>
-          <Card.Size size='small' chip></Card.Size>
+          <Card.Size size='small' chip />
         </Card.Middle>
 
         <Card.Bottom>
