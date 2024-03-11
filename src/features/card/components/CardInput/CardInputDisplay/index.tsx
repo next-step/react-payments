@@ -8,7 +8,7 @@ interface Props {
   YY: number;
 }
 
-export const CardBox = ({ companyName, cardName, MM, YY }: Props) => {
+export const CardInputDisplay = ({ companyName, cardName, MM, YY }: Props) => {
   return (
     <Box className={'card-box'}>
       <Box className={'empty-card'}>

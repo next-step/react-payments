@@ -5,6 +5,6 @@ interface Props {
   children: ReactNode;
 }
 
-export const RootLayout = ({ children }: Props) => {
-  return <Box className={'root'}>{children}</Box>;
+export const AppLayout = ({ children }: Props) => {
+  return <Box className={'app'}>{children}</Box>;
 };

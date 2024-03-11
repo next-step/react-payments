@@ -14,7 +14,7 @@ export const Button = ({
   ...buttonProps
 }: Props & ComponentProps<'button'>) => {
   return (
-    <button className={clsx(className)} type={type} onClick={onClick} {...buttonProps}>
+    <button className={clsx('btn-init', className)} type={type} onClick={onClick} {...buttonProps}>
       {children}
     </button>
   );
