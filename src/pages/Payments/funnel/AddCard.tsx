@@ -1,4 +1,4 @@
-import { Card } from '@/molecules/card/Card';
+import { Card } from '@/components/input/molecules/card/Card';
 import { Formatter } from '@/utils/formatter';
 import { useForm } from '@/hooks/useForm/useForm';
 import { usePaymentsFunnel } from '../payments.context';
