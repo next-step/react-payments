@@ -33,7 +33,6 @@ export default function CardNaming({
 }: Readonly<CardNamingProps>) {
   const [cardName, setCardName] = useState<string>("");
   function completeRegist() {
-    console.log(cardName ?? card?.cardType);
     onSubmit({ cardName: cardName ?? card?.cardType });
   }
 
@@ -57,6 +56,7 @@ export default function CardNaming({
         </div>
         <div className={styles.result__name}>
           <Input
+            maxLength={10}
             placeholder="카드 별칭 (선택)"
             textAlign="center"
             hasUnderbar
