@@ -9,9 +9,9 @@ import { FormType } from '../type'
 import { Step1 } from './components/Step1'
 import { Step1Validate } from './service/validations'
 
-const paymentsStepper = setup({}).createMachine({
+const paymentsMachine = setup({}).createMachine({
   /** @xstate-layout N4IgpgJg5mDOIC5QAcCGBPAtmAdgF1gGU8xlkwAnAOgGNUKIBaCsKAS1jwtTzYHscjTvTwBiQgFUAQgFkAkgBUA2gAYAuohR9YbXgM0gAHogBMAZgDsVEwBYTADgCMjgJwmVFi3ZMAaEOkR7EwBfUL8cPgg4AzQsXAJiUnIKGO1dfhwDYwRGG0cqIIA2SwBWGxUbEpMLexK-AJySqhKVVsczR3sLFRNHFTKwkFjsfCISMkpaeiYWdk5uPUFhCjxUnUWsxEKqRwszQtsSlzKLXpt7esCQ4L9h+LGkyboGZlYOLh4Mxho+TGQAGzAJDW6X0SCMiDMQWsKg6Jjq-iuoVCQA */
-  id: 'paymentsStepper',
+  id: 'payments',
   initial: 'card-registration-start',
   states: {
     'card-registration-start': {
@@ -32,7 +32,7 @@ const paymentsStepper = setup({}).createMachine({
 })
 
 export const AddingCard = () => {
-  const [state, send, service] = useMachine(paymentsStepper)
+  const [state, send, service] = useMachine(paymentsMachine)
 
   const stepValue = useRef<{ step1: FormType }>({ step1: formInitialValues })
 
