@@ -1,5 +1,8 @@
-import ui from './styles/index.module.css'
+import { useContext } from 'react'
+import ui from '../styles/index.module.css'
+import { UpdateFunnelStepContext } from '../context/funnelStepContext'
 const CardList = () => {
+  const updateFunnelStep = useContext(UpdateFunnelStepContext)
   return (
     <>
       <h2>5️⃣ 카드 목록</h2>
@@ -29,7 +32,9 @@ const CardList = () => {
           </div>
           <span className={ui['card-nickname']}>법인카드</span>
           <div className={ui['card-box']}>
-            <div className={ui['empty-card']}>+</div>
+            <button className={ui['empty-card']} onClick={() => updateFunnelStep({ step: 'add' })}>
+              +
+            </button>
           </div>
         </div>
       </div>

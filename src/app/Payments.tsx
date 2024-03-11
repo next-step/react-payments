@@ -1,6 +1,7 @@
 import AddCard from './AddCard'
+import AddComplete from './AddComplete'
 import CardList from './CardList'
-import { Stepper } from './Stepper'
+import { Stepper } from './common/Stepper'
 
 const Payments = () => {
   return (
@@ -11,6 +12,10 @@ const Payments = () => {
 
       <Stepper.Step step="list">
         <CardList />
+      </Stepper.Step>
+
+      <Stepper.Step step="complete">
+        <AddComplete />
       </Stepper.Step>
     </Stepper>
   )

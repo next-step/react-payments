@@ -1,4 +1,4 @@
-import Payments from '.'
+import Payments from './app/Payments'
 import CardInfoProvider from './context/paymentContext'
 
 function App() {
