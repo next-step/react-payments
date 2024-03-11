@@ -1,3 +1,10 @@
+export type Card = {
+  cardType: CardType;
+  cardNumber: CardNumber;
+  holderName: string;
+  expiration: ExpirationDate;
+};
+
 export type CardNumber = {
   firstNumber?: string;
   secondNumber?: string;
