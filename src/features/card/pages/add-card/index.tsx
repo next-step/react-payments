@@ -8,7 +8,7 @@ import { Label } from '@/shared/components/atoms/Label';
 import { Text } from '@/shared/components/atoms/Text';
 import { VFlex } from '@/shared/components/atoms/VFlex';
 import { RootLayout } from '@/shared/layout/RootLayout';
-import { CardBox } from '@/features/card2/components/CardBox';
+import { CardBox } from '@/features/card/components/CardBox';
 
 interface Props {
   onPrev: () => void;
