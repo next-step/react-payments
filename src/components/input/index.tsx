@@ -8,14 +8,13 @@ interface InputProps extends ComponentProps<'input'> {
   block?: boolean;
 }
 
-const Input = (props: InputProps) => {
-  const {
-    className,
-    htmpType = 'text',
-    type = 'default',
-    block = false,
-    ...rest
-  } = props;
+const Input = ({
+  className,
+  htmpType = 'text',
+  type = 'default',
+  block = false,
+  ...rest
+}: InputProps) => {
   const classNames = cn([styles.inputElement, className]);
   return (
     <div className={cn([styles.inputBox[type], styles.inputBlock[`${block}`]])}>
