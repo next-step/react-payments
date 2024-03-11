@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledInput } from './DateInput.tsx'
+import { InputStyle } from './DateInput.tsx'
 import styled from 'styled-components'
 
 const CARD_ONE_SECTION_NUMBER_LENGTH = 4
@@ -29,33 +29,41 @@ const CardNumberInput = ({
 }) => {
   return (
     <div className="input-box">
-      <StyledInput
-        type="text"
-        value={one}
-        onChange={onChangeOne}
-        maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
-      />
+      <InputStyle>
+        <input
+          type="text"
+          value={one}
+          onChange={onChangeOne}
+          maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
+        />
+      </InputStyle>
       {one.length === CARD_ONE_SECTION_NUMBER_LENGTH && <Slash>-</Slash>}
-      <StyledInput
-        type="text"
-        value={two}
-        onChange={onChangeTwo}
-        maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
-      />
+      <InputStyle>
+        <input
+          type="text"
+          value={two}
+          onChange={onChangeTwo}
+          maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
+        />
+      </InputStyle>
       {two.length === CARD_ONE_SECTION_NUMBER_LENGTH && <Slash>-</Slash>}
-      <StyledInput
-        type="password"
-        value={three}
-        onChange={onChangeThree}
-        maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
-      />
+      <InputStyle>
+        <input
+          type="password"
+          value={three}
+          onChange={onChangeThree}
+          maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
+        />
+      </InputStyle>
       {three.length === CARD_ONE_SECTION_NUMBER_LENGTH && <Slash>-</Slash>}
-      <StyledInput
-        type="password"
-        value={four}
-        onChange={onChangeFour}
-        maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
-      />
+      <InputStyle>
+        <input
+          type="password"
+          value={four}
+          onChange={onChangeFour}
+          maxLength={CARD_ONE_SECTION_NUMBER_LENGTH}
+        />
+      </InputStyle>
     </div>
   )
 }
