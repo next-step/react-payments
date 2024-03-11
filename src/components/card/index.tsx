@@ -60,13 +60,7 @@ const Card = ({
       <span className={styles.brand}>{cardBrand || ' '}</span>
       <Chip size={size} />
       <span style={{ textAlign: 'center' }}>{fullCardNumber}</span>
-      <span
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          // marginTop: 'auto',
-        }}
-      >
+      <span className={styles.cardText}>
         <span>{owner || 'NAME'}</span>
         <span>{fullExpirationDate || 'MM / YY'}</span>
       </span>

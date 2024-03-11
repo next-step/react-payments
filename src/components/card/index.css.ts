@@ -70,3 +70,8 @@ export const chip = styleVariants({
     },
   ],
 });
+
+export const cardText = style({
+  display: 'flex',
+  justifyContent: 'space-between',
+});
