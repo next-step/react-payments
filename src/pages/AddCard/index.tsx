@@ -44,7 +44,17 @@ const AddCard = () => {
         />
       )}
       {/* {step==='카드선택'&& <ChooseCard />} */}
-      {step === '생성완료' && <FinishAddingCard inputs={inputs} />}
+      {step === '생성완료' && (
+        <FinishAddingCard
+          props={{
+            cardNumberOne: inputs.cardNumberOne,
+            cardNumberTwo: inputs.cardNumberTwo,
+            ownerName: inputs.ownerName,
+            expiredMonth: inputs.expiredMonth,
+            expiredYear: inputs.expiredYear,
+          }}
+        />
+      )}
     </div>
   )
 }

@@ -10,7 +10,7 @@ const StyledButtonWrapper = styled.button`
   cursor: pointer;
 `
 
-const StyledButtonText = styled.div`
+const StyledButtonText = styled.span`
   margin-right: 10px;
   font-size: 14px;
   color: #04c09e;
