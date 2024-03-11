@@ -83,3 +83,29 @@
 .items-center {
   align-items: center;
 }
+
+.gap-2 {
+  gap: 0.5rem; /* 8px */
+}
+
+.gap-4 {
+  gap: 1rem; /* 16px */
+}
+
+.btn-init {
+  background: inherit;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  overflow: visible;
+  cursor: pointer;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.bg-white {
+  background-color: #fff;
+}
