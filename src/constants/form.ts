@@ -1,4 +1,4 @@
-export const initialFormData = {
+export const initialFormData = Object.freeze({
   cardNumber1: '',
   cardNumber2: '',
   cardNumber3: '',
@@ -9,4 +9,4 @@ export const initialFormData = {
   verificationCode: '',
   pinNumber1: '',
   pinNumber2: '',
-};
+});
