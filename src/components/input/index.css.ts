@@ -17,6 +17,7 @@ export const inputBlock = styleVariants({
   },
   false: {},
 });
+
 export const inputElement = style({
   border: 'none',
   backgroundColor: 'transparent',
