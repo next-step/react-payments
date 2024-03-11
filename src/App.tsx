@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from "react-router-dom";
 import MyCards from "./domains/MyCards/MyCards";
 import RegisterPage from "./domains/RegisterPage/RegisterPage";
+import ModifyPage from "./domains/MyCards/ModifyPage/ModifyPage";
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
           <Route index element={<MyCards />} />
           <Route path="register">
             <Route index element={<RegisterPage />} />
+          </Route>
+          <Route path="modify">
+            <Route index element={<ModifyPage />} />
           </Route>
         </Route>
       </Routes>

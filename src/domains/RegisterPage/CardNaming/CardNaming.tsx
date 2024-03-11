@@ -12,10 +12,10 @@ import { ChangeEvent, useState } from "react";
 export type CardQuery = {
   cardNumber: CardNumber;
   expiration: ExpirationDate;
-  holder: string;
+  cardHolder: string;
   cvc: string;
-  password: TwoPasswordDigits;
   cardType: CardType;
+  password?: TwoPasswordDigits;
 };
 
 export type NameQuery = {
@@ -23,7 +23,7 @@ export type NameQuery = {
 };
 
 interface CardNamingProps {
-  card?: CardQuery;
+  card?: Omit<CardQuery, "password">;
   onSubmit: (value: NameQuery) => void;
 }
 
@@ -51,7 +51,7 @@ export default function CardNaming({
           <PlasticCard
             cardNumber={card?.cardNumber}
             cardType={card?.cardType}
-            holderName={card?.holder}
+            holderName={card?.cardHolder}
             expiration={card?.expiration}
           />
         </div>

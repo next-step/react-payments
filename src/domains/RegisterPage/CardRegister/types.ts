@@ -1,4 +1,5 @@
 export type Card = {
+  uuid: string;
   cardType: CardType;
   cardNumber: CardNumber;
   holderName: string;
