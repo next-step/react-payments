@@ -1,5 +1,5 @@
-import AddCard from './pages/card-add/AddCard';
 import CardList from './pages/card-list/CardList';
+import AddCard from './pages/card-add/AddCard';
 import CardRegisterComplete from './pages/card-register-complete/CardRegisterComplete';
 import CardInfoProvider from './provider/card-info-provider/CardInfoProvider';
 import MyCardsProvider from './provider/my-cards-provider/MyCardsProvider';

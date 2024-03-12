@@ -5,12 +5,14 @@ interface MyCardListType {
   myCardList: CardStateType[];
   addCard: (card: CardStateType) => void;
 }
-const initialState: MyCardListType = {
+
+const initialContext: MyCardListType = {
   myCardList: [],
   addCard: () => undefined,
 };
 
-export const MyCardsContext = createContext(initialState);
+export const MyCardsContext = createContext(initialContext);
+
 const MyCardsProvider = ({ children }: PropsWithChildren) => {
   const [myCardList, setMyCardList] = useState<CardStateType[]>([]);
   const addCard = (card: CardStateType) => {

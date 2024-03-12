@@ -30,6 +30,7 @@ const CardInfoProvider = ({ children }: PropsWithChildren) => {
   const handleCardState = (data: CardStateType) => {
     setCardState((prev) => ({ ...prev, ...data }));
   };
+
   const reset = () => {
     setCardState(initialState);
   };

@@ -6,7 +6,7 @@ const useCardContext = () => {
   if (!cardInfoContext) {
     return null;
   }
-  return useContext(CardInfoContext);
+  return cardInfoContext;
 };
 
 export default useCardContext;
