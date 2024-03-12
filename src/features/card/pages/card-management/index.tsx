@@ -4,7 +4,7 @@ import { CardInventoryPage } from '@/features/card/pages/card-inventory';
 import { AddCardPage } from '@/features/card/pages/add-card';
 import { CompleteAddPage } from '@/features/card/pages/complete-add';
 
-export const CardManagement = () => {
+export const CardManagementPage = () => {
   const { Stepper, Step, setStep } = useStepper(CARD_REGISTRATION_STEPS);
 
   return (
