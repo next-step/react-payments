@@ -211,7 +211,7 @@ const AddCardInfo = ({
             label="보안코드(CVC/CVV)"
             type="password"
             maxLength={3}
-            size="md"
+            widthSize="md"
             value={inputs.CVC}
             onChange={(e) => {
               setInputs({ ...inputs, CVC: e.target.value })
@@ -223,7 +223,7 @@ const AddCardInfo = ({
               <Input
                 type="password"
                 maxLength={1}
-                size="sm"
+                widthSize="sm"
                 value={inputs.cardPasswordOne}
                 onChange={(e) => {
                   setInputs({ ...inputs, cardPasswordOne: e.target.value })
@@ -232,7 +232,7 @@ const AddCardInfo = ({
               <Input
                 type="password"
                 maxLength={1}
-                size="sm"
+                widthSize="sm"
                 value={inputs.cardPasswordTwo}
                 onChange={(e) => {
                   setInputs({ ...inputs, cardPasswordTwo: e.target.value })
