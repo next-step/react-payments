@@ -5,7 +5,6 @@ import {
   SECOND_NUMBER,
   THIRD_NUMBER,
 } from "../constants/cardNumber";
-import { MONTH, YEAR } from "../constants/expirationDate";
 import Card from "./Card";
 
 export default {
