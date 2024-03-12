@@ -8,7 +8,7 @@ import {
 import { MONTH, YEAR } from "../../src/constants/expirationDate";
 export const CardContext = createContext();
 
-const initalCardState = {
+const initialCardState = {
   cardNumber: {
     [FIRST_NUMBER]: "",
     [SECOND_NUMBER]: "",
@@ -23,10 +23,10 @@ const initalCardState = {
 };
 
 export const CardStateProvider = ({ children }) => {
-  const [cardState, setCardState] = useState(initalCardState);
+  const [cardState, setCardState] = useState(initialCardState);
 
   const resetCardState = () => {
-    setCardState(initalCardState);
+    setCardState(initialCardState);
   };
 
   const value = useMemo(
