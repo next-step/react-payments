@@ -60,6 +60,19 @@ const Card = ({ data }: PaymentsCardProps) => {
     setStep(STEP.ADD_CARD_COMPLETE);
   };
 
+  const handleDelete = () => {
+    setData((prev) => {
+      if (!prev) return;
+
+      return {
+        ...prev,
+        cardList: prev.cardList.filter(
+          (card) => card.createdAt !== data.createdAt
+        ),
+      };
+    });
+  };
+
   return (
     <div className='flex-column-center'>
       <div className='card-box'>
@@ -98,17 +111,21 @@ const Card = ({ data }: PaymentsCardProps) => {
               </span>
             </div>
             <div className='card-bottom__info'>
-              <div className='card-bottom__info'>
-                <span className='card-text'>
-                  {Formatter.ellipsis(ownerName, 10)}
-                </span>
-                <span className='card-text'>{`${expireMonth} / ${expireYear}`}</span>
-              </div>
+              <span className='card-text'>
+                {Formatter.ellipsis(ownerName, 10)}
+              </span>
+              <span className='card-text'>{`${expireMonth} / ${expireYear}`}</span>
             </div>
           </div>
         </div>
       </div>
-      <div className='card-name'>{cardName}</div>
+      <div className='flex-row-between w-50'>
+        <div className='card-name'>{cardName}</div>
+        <span>|</span>
+        <div className='card-name' onClick={handleDelete}>
+          삭제
+        </div>
+      </div>
     </div>
   );
 };
