@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { useCardState } from '../../../hooks/useCardState';
 
+const PASSWORD_INPUT_MAX_LENGTH = 2;
 const useCardPassword = () => {
   const { cardState, setCardState } = useCardState();
 
@@ -9,7 +10,7 @@ const useCardPassword = () => {
       const { value, name } = e.target;
 
       const isNumber = !Number.isNaN(Number(value));
-      if (!isNumber || value.length > 1) return;
+      if (!isNumber || value.length > PASSWORD_INPUT_MAX_LENGTH) return;
 
       setCardState((prev) => ({
         ...prev,

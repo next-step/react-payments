@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
 import { useCardState } from '../../../hooks/useCardState';
 
+const SECURITY_CODE_MAX_LENGTH = 3;
+
 const useCardSecurityCode = () => {
   const { cardState, setCardState } = useCardState();
 
@@ -9,7 +11,7 @@ const useCardSecurityCode = () => {
       const { value } = e.target;
 
       const isNumber = !Number.isNaN(Number(value));
-      if (!isNumber || value.length > 3) return;
+      if (!isNumber || value.length > SECURITY_CODE_MAX_LENGTH) return;
 
       setCardState((prev) => ({
         ...prev,
