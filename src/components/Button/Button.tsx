@@ -12,9 +12,9 @@ const Button = ({
   ...props
 }: PropsWithChildren<Props>) => {
   return (
-    <span className={classNames(`button-${variant}`, className)} {...props}>
+    <button className={classNames(`button-${variant}`, className)} {...props}>
       {children}
-    </span>
+    </button>
   );
 };
 

@@ -19,7 +19,7 @@ const Card = ({ brand, numbers, owner, expiration, size = 'small' }: Props) => {
           <span className='card-text'>{brand}</span>
         </div>
         <div className='card-middle'>
-          <div className={`${size}-card__chip`}></div>
+          <div className={`${size}-card__chip`} />
         </div>
         <div className='card-bottom'>
           <div className='card-bottom__number'>
