@@ -13,7 +13,6 @@ import InputContainer from "../components/atomic-design-pattern/organism/InputCo
 import InputTitle from "../components/atomic-design-pattern/atom/InputTitle";
 import InputGroup from "../components/atomic-design-pattern/molecule/InputGroup";
 import { CardContext } from "../../providers/CardState/CardStateProvider";
-import Link from "../components/atomic-design-pattern/atom/Link";
 
 export default function CardAdd({ onList, onNext }) {
   const { cardState } = useContext(CardContext);
@@ -50,9 +49,9 @@ export default function CardAdd({ onList, onNext }) {
   return (
     <form>
       <h2 className="page-title">
-        <Link className="button-basic" onClick={onList}>
+        <Button variant="link" onClick={onList}>
           {"<"}
-        </Link>
+        </Button>
         <span className="ml-10">카드 추가</span>
       </h2>
       {/* 카드 */}
@@ -95,7 +94,9 @@ export default function CardAdd({ onList, onNext }) {
       </InputContainer>
       {isShowNextButton && (
         <div className="button-box">
-          <Button onClick={onNext}>다음</Button>
+          <Button variant="link" onClick={onNext}>
+            다음
+          </Button>
         </div>
       )}
     </form>

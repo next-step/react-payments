@@ -11,3 +11,8 @@
   text-decoration: none;
   color: black;
 }
+
+.button-link {
+  border: none;
+  cursor: pointer;
+}
