@@ -11,13 +11,14 @@ interface InputProps {
   maxLength?: number
   disabled?: boolean
   label?: string
+  className?: string
 }
 
 export const Input = ({ type, primary, size = 'large', backgroundColor, ...props }: InputProps) => {
   return (
     <div className={'input-container'}>
       <span className={'input-title'}>{props.label}</span>
-      <input type={type} className={['input-basic', `input-${size}`].join(' ')} style={{ backgroundColor }} {...props} />
+      <input type={type} className={[`${props.className ?? 'input-basic'}`, `input-${size}`].join(' ')} style={{ backgroundColor }} {...props} />
     </div>
   )
 }
