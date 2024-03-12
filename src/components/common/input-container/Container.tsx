@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren, ReactNode } from 'react';
+import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren } from 'react';
 
 type BaseContainerProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 

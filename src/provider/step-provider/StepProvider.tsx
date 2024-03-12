@@ -12,7 +12,6 @@ interface StepProviderProps {
   children: (route: string) => ReactNode;
 }
 export const StepContext = createContext(initialState);
-
 const StepProvider = ({ children }: StepProviderProps) => {
   const [route, setRoute] = useState<string>('CARD');
   const navigate = (path: string) => setRoute(path);
