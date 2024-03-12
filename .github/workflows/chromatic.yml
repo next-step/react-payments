@@ -6,17 +6,29 @@ on: push
 
 # List of jobs
 jobs:
-  test:
+  chromatic-deployment:
     # Operating System
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [15]
     # Job steps
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
           version: 8
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
       - run: pnpm install
         #👇 Adds Chromatic as a step in the workflow
       - uses: chromaui/action@v1
