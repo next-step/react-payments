@@ -23,7 +23,7 @@ export default function AddCardCompleted({ onNext }: AddCardCompletedProps) {
             </Card.Top>
 
             <Card.Middle>
-              <Card.Size size='big' hasChip></Card.Size>
+              <Card.Size size='big' hasChip />
             </Card.Middle>
 
             <Card.Bottom>
