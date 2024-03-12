@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import Card from "../components/Card";
-import { Link } from "react-router-dom";
 import { CardContext } from "../../providers/CardState/CardStateProvider";
 import { MONTH, YEAR } from "../constants/expirationDate";
 import CardAliasInput from "../components/card-complete/CardAliasInput";
+import Button from "../components/atomic-design-pattern/atom/Button";
 
-export default function CardComplete() {
+export default function CardComplete({ onNext }) {
   const { cardState } = useContext(CardContext);
   const { cardNumber, expirationDate, cardOwnerName, alias } = cardState;
 
@@ -25,11 +25,9 @@ export default function CardComplete() {
         <CardAliasInput />
 
         <div className="button-box">
-          <span className="button-text">
-            <Link to={location} className="button-basic">
-              다음
-            </Link>
-          </span>
+          <Button variant="link" onClick={onNext}>
+            다음
+          </Button>
         </div>
       </div>
     </div>
