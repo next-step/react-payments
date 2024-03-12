@@ -4,7 +4,7 @@ import { OwnerName } from './ownerName/OwnerName';
 import { SecurityCode } from './securityCode/SecurityCode';
 import { Password } from './password/Password';
 
-export const Card = {
+export const CardInput = {
   Number: CardNumber,
   ExpireDate,
   OwnerName,

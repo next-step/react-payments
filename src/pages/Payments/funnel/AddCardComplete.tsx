@@ -1,10 +1,8 @@
-import { Formatter } from '@/utils/formatter';
-import { SYMBOL } from '@/constants/symbol';
 import { useForm } from '@/hooks/useForm/useForm';
 import { usePaymentsFunnel } from '../payments.context';
 import { STEP } from '../payments.constant';
-
-const ELLIPSIS_LENGTH = 11;
+import { Card } from '@/components/card/Card';
+import { Card as CardData } from '../payments.type';
 
 export const AddCardComplete = () => {
   const { register, values, errors } = useForm();
@@ -17,15 +15,7 @@ export const AddCardComplete = () => {
   }
 
   const { tempCard, cardList } = data;
-  const {
-    numberFirst,
-    numberSecond,
-    numberThird,
-    numberFourth,
-    expireMonth,
-    expireYear,
-    ownerName,
-  } = tempCard;
+  const { ownerName } = tempCard;
 
   const isAllFieldsFulfilled = Object.values(errors).every((error) => !error);
 
@@ -54,58 +44,13 @@ export const AddCardComplete = () => {
     setStep(STEP.CARD_LIST);
   };
 
-  const expireDate = `${expireMonth} / ${expireYear}`;
-
   return (
     <div>
       <div className='app flex-column-center'>
         <div className='flex-center'>
           <h2 className='page-title mb-10'>카드등록이 완료되었습니다.</h2>
         </div>
-        <div className='card-box'>
-          <div className='big-card'>
-            <div className='card-top'>
-              <span className='card-text__big'>클린카드</span>
-            </div>
-            <div className='card-middle'>
-              <div className='big-card__chip'></div>
-            </div>
-            <div className='card-bottom'>
-              <div className='card-bottom__number card-text__big'>
-                <span>
-                  {Formatter.segment(numberFirst, {
-                    separator: SYMBOL.HYPHEN,
-                    length: 4,
-                  })}
-                </span>
-                <span>
-                  {Formatter.segment(numberSecond, {
-                    separator: SYMBOL.HYPHEN,
-                    length: 4,
-                  })}
-                </span>
-                <span>
-                  {Formatter.segment(
-                    numberThird && Formatter.masking(numberThird),
-                    {
-                      separator: SYMBOL.HYPHEN,
-                      length: 4,
-                    }
-                  )}
-                </span>
-                <span>
-                  {(numberFourth && Formatter.masking(numberFourth)) || ''}
-                </span>
-              </div>
-              <div className='card-bottom__info'>
-                <span className='card-text'>
-                  {Formatter.ellipsis(ownerName, ELLIPSIS_LENGTH)}
-                </span>
-                <span className='card-text'>{expireDate}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Card data={tempCard as unknown as CardData} isComplete={true} />
         <div className='input-container flex-center w-100'>
           <input
             className='input-underline w-75'

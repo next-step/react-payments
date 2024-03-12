@@ -1,6 +1,6 @@
 import { INPUT } from '@/components/input/input.constant';
 import { Validation } from '@/utils/validation';
-import { InputFields } from '../card.type';
+import { InputFields } from '../cardInput.type';
 
 export const SECURITY_CODE: InputFields = {
   FIELDS: {

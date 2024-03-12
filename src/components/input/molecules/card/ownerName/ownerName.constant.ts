@@ -1,5 +1,5 @@
 import { INPUT } from '@/components/input/input.constant';
-import { InputFields } from '../card.type';
+import { InputFields } from '../cardInput.type';
 
 export const OWNER_NAME: InputFields = {
   FIELDS: {

@@ -1,9 +1,9 @@
-import { Card } from '@/components/input/molecules/card/Card';
-import { Formatter } from '@/utils/formatter';
+import { CardInput } from '@/components/input/molecules/card/CardInput';
 import { useForm } from '@/hooks/useForm/useForm';
 import { usePaymentsFunnel } from '../payments.context';
 import { STEP } from '../payments.constant';
-import { SYMBOL } from '@/constants/symbol';
+import { Card } from '@/components/card/Card';
+import { Card as CardData } from '../payments.type';
 
 export interface CardFulfilledForm {
   number: boolean;
@@ -17,28 +17,11 @@ export type CardFulfilledAction = React.Dispatch<
   React.SetStateAction<CardFulfilledForm>
 >;
 
-const ELLIPSIS_LENGTH = 11;
-const DEFAULT_VALUE = {
-  OWNER_NAME: 'NAME',
-  EXPIRE_MONTH: 'MM',
-  EXPIRE_YEAR: 'YY',
-} as const;
-
 export const AddCard = () => {
   const { setStep, setData } = usePaymentsFunnel();
   const formMethods = useForm();
-  const {
-    values: {
-      numberFirst,
-      numberSecond,
-      numberThird,
-      numberFourth,
-      expireMonth,
-      expireYear,
-      ownerName,
-    },
-    errors,
-  } = formMethods;
+  const values = formMethods.values as unknown as CardData;
+  const { errors } = formMethods;
 
   const handlePrev = () => setStep(STEP.CARD_LIST);
   const handleNext = () => {
@@ -50,13 +33,7 @@ export const AddCard = () => {
       return {
         ...prevData,
         tempCard: {
-          numberFirst,
-          numberSecond,
-          numberThird,
-          numberFourth,
-          expireMonth,
-          expireYear,
-          ownerName,
+          ...values,
           createdAt: new Date(),
         },
       };
@@ -68,64 +45,16 @@ export const AddCard = () => {
   const isAllFieldsFulfilled = Object.values(errors).every((error) => !error);
   const optaionalClassName = isAllFieldsFulfilled ? 'text-fulfilled' : '';
 
-  const expireDate = `${expireMonth || DEFAULT_VALUE.EXPIRE_MONTH} / ${
-    expireYear || DEFAULT_VALUE.EXPIRE_YEAR
-  }`;
-
   return (
     <div>
       <h2 className='page-title' onClick={handlePrev}>{`< 카드 추가`}</h2>
-      <div className='card-box'>
-        <div className='empty-card'>
-          <div className='card-top'></div>
-          <div className='card-middle'>
-            <div className='small-card__chip'></div>
-          </div>
-          <div className='card-bottom'>
-            <div className='card-bottom__number card-text__big'>
-              <span>
-                {Formatter.segment(numberFirst, {
-                  separator: SYMBOL.HYPHEN,
-                  length: 4,
-                })}
-              </span>
-              <span>
-                {Formatter.segment(numberSecond, {
-                  separator: SYMBOL.HYPHEN,
-                  length: 4,
-                })}
-              </span>
-              <span>
-                {Formatter.segment(
-                  numberThird && Formatter.masking(numberThird),
-                  {
-                    separator: SYMBOL.HYPHEN,
-                    length: 4,
-                  }
-                )}
-              </span>
-              <span>
-                {(numberFourth && Formatter.masking(numberFourth)) || ''}
-              </span>
-            </div>
-            <div className='card-bottom__info'>
-              <span className='card-text'>
-                {Formatter.ellipsis(
-                  ownerName || DEFAULT_VALUE.OWNER_NAME,
-                  ELLIPSIS_LENGTH
-                )}
-              </span>
-              <span className='card-text'>{expireDate}</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Card data={values as unknown as CardData} isComplete={false} />
 
-      <Card.Number formMethods={formMethods} />
-      <Card.ExpireDate formMethods={formMethods} />
-      <Card.OwnerName formMethods={formMethods} />
-      <Card.SecurityCode formMethods={formMethods} />
-      <Card.Password formMethods={formMethods} />
+      <CardInput.Number formMethods={formMethods} />
+      <CardInput.ExpireDate formMethods={formMethods} />
+      <CardInput.OwnerName formMethods={formMethods} />
+      <CardInput.SecurityCode formMethods={formMethods} />
+      <CardInput.Password formMethods={formMethods} />
 
       {isAllFieldsFulfilled && (
         <div className='button-box' onClick={handleNext}>
