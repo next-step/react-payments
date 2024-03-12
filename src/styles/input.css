@@ -46,3 +46,12 @@
 
   border-bottom: 1px solid #383838;
 }
+
+.input-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-disabled {
+  background-color: transparent;
+}

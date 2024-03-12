@@ -6,3 +6,8 @@
 .button-text {
   margin-right: 10px;
 }
+
+.button-basic {
+  text-decoration: none;
+  color: black;
+}
