@@ -18,7 +18,7 @@ const AddCardSuccess = ({ onNext }: Props) => {
   const { cardState, resetCardState } = useCardState();
 
   const handleAddCard = () => {
-    const storedCards = getLocalStorageItem<CardInfo>({
+    const storedCards = getLocalStorageItem<CardInfo[]>({
       key: CARD_STORAGE_KEY,
     });
 

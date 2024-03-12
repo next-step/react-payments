@@ -12,7 +12,9 @@ interface Props {
 }
 
 const CardList = ({ onNext }: Props) => {
-  const cards: CardInfo[] = getLocalStorageItem({ key: CARD_STORAGE_KEY });
+  const cards =
+    getLocalStorageItem<CardInfo[]>({ key: CARD_STORAGE_KEY }) || [];
+
   return (
     <>
       <Header className='mb-10'>

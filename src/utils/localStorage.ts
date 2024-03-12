@@ -1,10 +1,9 @@
 export const CARD_STORAGE_KEY = 'cards';
 
-export const getLocalStorageItem = <T>({ key }: { key: string }): T[] => {
+export const getLocalStorageItem = <T>({ key }: { key: string }): T => {
   const storedData = localStorage.getItem(key);
-  if (!storedData) return [];
 
-  return JSON.parse(storedData);
+  return JSON.parse(storedData || 'null');
 };
 
 export const setLocalStorageItem = ({
