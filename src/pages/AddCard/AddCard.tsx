@@ -6,7 +6,7 @@ import CardExpiration from './components/CardExpiration';
 import CardOwner from './components/CardOwner';
 import CardSecurityCode from './components/CardSecurityCode';
 import CardPassword from './components/CardPassword';
-import { useCardState } from '../../hooks/useCardState';
+import { useCardState } from '../../providers/CardState/hooks/useCardState';
 
 interface Props {
   onNext: () => void;

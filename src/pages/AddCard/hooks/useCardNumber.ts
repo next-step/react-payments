@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useCardState } from '../../../hooks/useCardState';
+import { useCardState } from '../../../providers/CardState/hooks/useCardState';
 
 const CARD_NUMBER_MAX_LENGTH = 4;
 

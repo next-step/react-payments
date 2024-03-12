@@ -1,7 +1,7 @@
 import Button from '../../components/Button/Button';
 import Card from '../../components/Card/Card';
 import Header from '../../components/Header/Header';
-import { useCardState } from '../../hooks/useCardState';
+import { useCardState } from '../../providers/CardState/hooks/useCardState';
 import { CardInfo } from '../../types';
 import {
   setLocalStorageItem,
