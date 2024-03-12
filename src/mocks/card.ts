@@ -1,5 +1,5 @@
 import { CardInfoWithId } from 'src/machines/addCardMachine.ts';
-import { addCardMachineSetup } from 'src/machines/addCardMachine.ts';
+import { addCardMachineSetup, initialCardInfo } from 'src/machines/addCardMachine.ts';
 
 export const MOCK_CARD_INFO_LIST: CardInfoWithId[] = [
 	{
@@ -79,20 +79,10 @@ export const mockCardListMachine = addCardMachineSetup.createMachine({
 	initial: 'CardList',
 	context: {
 		cardInfo: {
-			cardNumberFirstSegment: '',
-			cardNumberSecondSegment: '',
-			cardNumberThirdSegment: '',
-			cardNumberFourthSegment: '',
-			cardOwnerName: '',
-			cardExpirationDate: '',
-			cardPasswordFirstDigit: '',
-			cardPasswordSecondDigit: '',
-			cardSecurityCode: '',
-			cardNickname: '',
-			cardCompanyCode: '',
+			...initialCardInfo,
 		},
 		cardList: MOCK_CARD_INFO_LIST,
-		selectedCard: { ...MOCK_CARD_INFO_LIST[0] },
+		selectedCard: { ...initialCardInfo, id: '' },
 	},
 	states: {
 		CardList: {
