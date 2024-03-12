@@ -11,6 +11,12 @@
 	align-items: center;
 }
 
+.flex-column-align-center {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 .mt-10 {
 	margin-top: 2.5rem;
 }
@@ -51,6 +57,26 @@
 	width: 25%;
 }
 
+.w-fit {
+	width: fit-content;
+}
+
 .w-15 {
 	width: 15%;
+}
+
+.h-100 {
+	height: 100%;
+}
+
+.overflow-auto {
+	overflow: auto;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.gap-16 {
+	gap: 16px;
 }
