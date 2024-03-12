@@ -17,10 +17,10 @@ export const CardBox = () => {
   }
   return (
     <div className={ui['card-box']}>
-      <div className={ui['empty-card']}>
-        <div className={ui['card-top']}>{cardInfo.cardType}</div>
+      <div className={ui[`${cardInfo ? 'big-card' : 'empty-card'}`]}>
+        <div className={ui['card-top']}>{cardInfo.cardType ? cardInfo.cardType + '카드' : ''}</div>
         <div className={ui['card-middle']}>
-          <div className={ui['small-card__chip']}></div>
+          <div className={ui[`${cardInfo ? 'big-card__chip' : 'small-card__chip'}`]}></div>
           <p>{` 
           ${cardNumberValue().first} ${cardNumberValue().second} ${cardNumberValue().third} ${cardNumberValue().fourth}
           `}</p>
