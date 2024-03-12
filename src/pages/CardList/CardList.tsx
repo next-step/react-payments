@@ -13,7 +13,6 @@ interface Props {
 
 const CardList = ({ onNext }: Props) => {
   const cards: CardInfo[] = getLocalStorageItem({ key: CARD_STORAGE_KEY });
-
   return (
     <>
       <Header className='mb-10'>
@@ -21,14 +20,19 @@ const CardList = ({ onNext }: Props) => {
       </Header>
 
       <div className='flex-column-center'>
-        {cards?.map((card) => (
-          <Fragment key={card.nickname}>
-            <div className='card-box'>
-              <Card {...card} />
-            </div>
-            <span className='card-nickname'>{card.nickname}</span>
-          </Fragment>
-        ))}
+        {cards?.map((card) => {
+          const { first, second } = card.numbers;
+          const { month, year } = card.expiration;
+          const key = first + second + month + year;
+          return (
+            <Fragment key={key}>
+              <div className='card-box'>
+                <Card {...card} />
+              </div>
+              <span className='card-nickname'>{card.nickname}</span>
+            </Fragment>
+          );
+        })}
 
         <div className='card-box'>
           <div className='empty-card' onClick={onNext}>
