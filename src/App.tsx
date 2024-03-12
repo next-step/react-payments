@@ -5,8 +5,10 @@ import CardList from './pages/CardList/CardList';
 import AddCardSuccess from './pages/AddCardSuccess/AddCardSuccess';
 import { CardStateProvider } from './providers/CardState/CardStateProvider';
 
+type PagesType = (typeof PAGES)[keyof typeof PAGES];
+
 function App() {
-  const [step, setStep] = useState<string>(PAGES.CARD_LIST);
+  const [step, setStep] = useState<PagesType>(PAGES.CARD_LIST);
 
   return (
     <div className='app'>

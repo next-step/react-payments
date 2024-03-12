@@ -9,8 +9,8 @@ const CardNickname = () => {
     <InputContainer className='input-container flex-center w-100'>
       <Input
         className='input-underline w-75'
-        type='text'
         placeholder='카드 별칭 (선택)'
+        variant='underline'
         maxLength={10}
         value={nickname || brand}
         onChange={handleNickname}
