@@ -20,12 +20,6 @@ const AddCardInfo = ({
   inputs: CardData
   setInputs: React.Dispatch<React.SetStateAction<CardData>>
 }) => {
-  // const cardNumRef = useRef(null)
-  // const expiredDateRef = useRef(null)
-  // const ownerNameRef = useRef(null)
-  // const CVCRef = useRef(null)
-  // const cardPasswordRef = useRef<HTMLInputElement | null>(null)
-
   useEffect(() => {
     if (!numeric_only_regex.test(inputs.CVC)) {
       alert('CVC 형식이 틀렸습니다.')
@@ -127,9 +121,9 @@ const AddCardInfo = ({
                   {inputs.cardNumberOne && '-'}
                   {inputs.cardNumberTwo}
                   {inputs.cardNumberTwo && '-'}
-                  {inputs.cardNumberThree.split('').map(() => '*')}
+                  {'*'.repeat(inputs.cardNumberThree.length)}
                   {inputs.cardNumberThree && '-'}
-                  {inputs.cardNumberFour.split('').map(() => '*')}
+                  {'*'.repeat(inputs.cardNumberFour.length)}
                 </span>
                 <div className="card-bottom__info">
                   <span className="card-text">{inputs.ownerName}</span>
