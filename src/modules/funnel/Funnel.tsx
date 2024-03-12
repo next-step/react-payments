@@ -9,6 +9,7 @@ import {
 /**
  * Funnel을 생성하는 함수
  * @template StepKey - Step의 name들의 유니온 타입
+ * @template Data - Funnel에서 사용할 데이터 타입
  * @param {GetFunnelProps<StepKey>} param0 - 초기 Step
  * @returns {{
  *  Funnel: React.FC<React.PropsWithChildren>;

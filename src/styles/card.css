@@ -4,6 +4,8 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
+  overflow-y: auto;
+  height: 580px;
 }
 
 .card-box {
@@ -12,7 +14,6 @@
   justify-content: center;
 
   margin: 10px 0;
-  margin-bottom: 40px;
 }
 
 .empty-card {

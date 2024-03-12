@@ -1,6 +1,8 @@
+import { Formatter } from '@/utils/formatter';
 import { STEP } from '../payments.constant';
 import { usePaymentsFunnel } from '../payments.context';
-import { PaymentsCard } from '../payments.type';
+import { PaymentsCardProps } from '../payments.type';
+import { SYMBOL } from '@/constants/symbol';
 
 export const CardList = () => {
   const { setStep, data } = usePaymentsFunnel();
@@ -11,26 +13,32 @@ export const CardList = () => {
     setStep(STEP.ADD_CARD);
   };
 
+  const sortedCardList = cardList.sort((a, b) =>
+    a.createdAt < b.createdAt ? 1 : -1
+  );
+
   return (
     <div>
-      <div className='flex-center'>
-        <h2 className='page-title mb-10'>보유 카드</h2>
-      </div>
+      <h2 className='page-title mb-10'>보유 카드</h2>
 
-      {cardList.map((card, idx) => (
-        <Card key={idx} data={card} />
-      ))}
-
-      <div className='card-box' onClick={handleAddCard}>
-        <div className='empty-card'>+</div>
+      <div className='card-list'>
+        {sortedCardList.map((card, idx) => (
+          <Card key={idx} data={card} />
+        ))}
+        <div className='card-box' onClick={handleAddCard}>
+          <div className='empty-card'>+</div>
+        </div>
       </div>
     </div>
   );
 };
 
-const Card = ({ data }: { data: PaymentsCard }) => {
+const Card = ({ data }: PaymentsCardProps) => {
+  const { setStep, setData } = usePaymentsFunnel();
+
   const {
     cardName,
+    ownerName,
     numberFirst,
     numberSecond,
     numberThird,
@@ -39,32 +47,68 @@ const Card = ({ data }: { data: PaymentsCard }) => {
     expireYear,
   } = data;
 
-  const handleSelect = () => {
-    console.log('card selected');
+  const handleCardClick = () => {
+    setData((prev) => {
+      if (!prev) return;
+
+      return {
+        ...prev,
+        tempCard: data,
+      };
+    });
+
+    setStep(STEP.ADD_CARD_COMPLETE);
   };
 
   return (
-    <div className='card-box flex-column-center gap-5'>
-      <div className='small-card' onClick={handleSelect}>
-        <div className='card-top'>
-          <span className='card-text'>{cardName}</span>
-        </div>
-        <div className='card-middle'>
-          <div className='small-card__chip'></div>
-        </div>
-        <div className='card-bottom'>
-          <div className='card-bottom__number'>
-            <span className='card-text'>
-              {numberFirst} - {numberSecond} - {numberThird} - {numberFourth}
-            </span>
+    <div className='flex-column-center'>
+      <div className='card-box'>
+        <div className='small-card' onClick={handleCardClick}>
+          <div className='card-top'>
+            <span className='card-text'>펭구카드</span>
           </div>
-          <div className='card-bottom__info'>
-            <span className='card-text'>
-              {expireMonth} / {expireYear}
-            </span>
+          <div className='card-middle'>
+            <div className='small-card__chip'></div>
+          </div>
+          <div className='card-bottom'>
+            <div className='card-bottom__number'>
+              <span>
+                {Formatter.segment(numberFirst, {
+                  separator: SYMBOL.HYPHEN,
+                  length: 4,
+                })}
+              </span>
+              <span>
+                {Formatter.segment(numberSecond, {
+                  separator: SYMBOL.HYPHEN,
+                  length: 4,
+                })}
+              </span>
+              <span>
+                {Formatter.segment(
+                  numberThird && Formatter.masking(numberThird),
+                  {
+                    separator: SYMBOL.HYPHEN,
+                    length: 4,
+                  }
+                )}
+              </span>
+              <span>
+                {(numberFourth && Formatter.masking(numberFourth)) || ''}
+              </span>
+            </div>
+            <div className='card-bottom__info'>
+              <div className='card-bottom__info'>
+                <span className='card-text'>
+                  {Formatter.ellipsis(ownerName, 10)}
+                </span>
+                <span className='card-text'>{`${expireMonth} / ${expireYear}`}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      <div className='card-name'>{cardName}</div>
     </div>
   );
 };

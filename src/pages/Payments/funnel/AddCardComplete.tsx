@@ -40,11 +40,13 @@ export const AddCardComplete = () => {
       const newPaymentCard = {
         ...tempCard,
         cardName: cardName || ownerName,
-        createdAt: new Date(),
       };
 
       return {
-        cardList: [...cardList, newPaymentCard],
+        cardList: [
+          ...cardList.filter((card) => card.createdAt !== tempCard.createdAt),
+          newPaymentCard,
+        ],
         tempCard: null,
       };
     });
