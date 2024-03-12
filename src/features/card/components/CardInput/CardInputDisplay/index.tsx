@@ -1,8 +1,8 @@
 import { DISPLAY_MAX_LENGTH_CARD_OWNER_NAME } from '@/features/card/constants/display';
 import { CardInputInterface } from '@/features/card/types/cardInputTypes';
 import { formattedDisplayCardNumber } from '@/features/card/utils/formattedString';
-import { Box } from '@/shared/components/atoms/Box';
-import { Text } from '@/shared/components/atoms/Text';
+import { Box } from '@/components/atoms/Box';
+import { Text } from '@/components/atoms/Text';
 import { useMemo } from 'react';
 
 interface Props {

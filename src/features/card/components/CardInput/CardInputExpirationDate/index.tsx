@@ -2,10 +2,10 @@ import { ChangeEvent } from 'react';
 import { CardInputInterface } from '@/features/card/types/cardInputTypes';
 import { DISPLAY_EXPIRATION_DATE_COUPLER } from '@/features/card/constants/display';
 import { MAX_LENGTH_PIECE_EXPIRATION_DATE } from '@/features/card/constants/maxLength';
-import { HFlex } from '@/shared/components/atoms/HFlex';
-import { Input } from '@/shared/components/atoms/Input';
-import { Label } from '@/shared/components/atoms/Label';
-import { VFlex } from '@/shared/components/atoms/VFlex';
+import { HFlex } from '@/components/atoms/HFlex';
+import { Input } from '@/components/atoms/Input';
+import { Label } from '@/components/atoms/Label';
+import { VFlex } from '@/components/atoms/VFlex';
 
 interface Props {
   expirationDate: CardInputInterface['expirationDate'];

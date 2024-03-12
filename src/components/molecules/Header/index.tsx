@@ -1,4 +1,4 @@
-import { HFlex } from '@/shared/components/atoms/HFlex';
+import { HFlex } from '@/components/atoms/HFlex';
 import clsx from 'clsx';
 import { ComponentProps, ReactNode } from 'react';
 

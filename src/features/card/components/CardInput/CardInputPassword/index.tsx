@@ -2,11 +2,11 @@ import { ChangeEvent } from 'react';
 import { CardInputInterface } from '@/features/card/types/cardInputTypes';
 import { MAX_LENGTH_PIECE_PASSWORD } from '@/features/card/constants/maxLength';
 import { DISPLAY_SECURITY_CHARACTER } from '@/features/card/constants/display';
-import { HFlex } from '@/shared/components/atoms/HFlex';
-import { Input } from '@/shared/components/atoms/Input';
-import { Label } from '@/shared/components/atoms/Label';
-import { VFlex } from '@/shared/components/atoms/VFlex';
-import { Box } from '@/shared/components/atoms/Box';
+import { HFlex } from '@/components/atoms/HFlex';
+import { Input } from '@/components/atoms/Input';
+import { Label } from '@/components/atoms/Label';
+import { VFlex } from '@/components/atoms/VFlex';
+import { Box } from '@/components/atoms/Box';
 
 interface Props {
   password: CardInputInterface['password'];

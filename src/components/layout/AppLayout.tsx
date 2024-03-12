@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { Box } from '@/shared/components/atoms/Box';
+import { Box } from '@/components/atoms/Box';
 
 interface Props {
   children: ReactNode;

@@ -1,8 +1,8 @@
 import { ChangeEvent } from 'react';
 import { CardInputInterface } from '@/features/card/types/cardInputTypes';
-import { Input } from '@/shared/components/atoms/Input';
-import { Label } from '@/shared/components/atoms/Label';
-import { VFlex } from '@/shared/components/atoms/VFlex';
+import { Input } from '@/components/atoms/Input';
+import { Label } from '@/components/atoms/Label';
+import { VFlex } from '@/components/atoms/VFlex';
 
 interface Props {
   securityCode: CardInputInterface['securityCode'];

@@ -1,8 +1,8 @@
 import { CardInput } from '@/features/card/components/CardInput';
 import { useCardInput } from '@/features/card/hooks/useCardInput';
-import { VFlex } from '@/shared/components/atoms/VFlex';
-import { Button } from '@/shared/components/atoms/Button';
-import { Text } from '@/shared/components/atoms/Text';
+import { VFlex } from '@/components/atoms/VFlex';
+import { Button } from '@/components/atoms/Button';
+import { Text } from '@/components/atoms/Text';
 
 interface Props {
   onNext: () => void;

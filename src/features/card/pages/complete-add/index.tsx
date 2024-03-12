@@ -1,4 +1,4 @@
-import { RootLayout } from '@/shared/layout/RootLayout';
+import { RootLayout } from '@/components/layout/RootLayout';
 
 interface Props {
   onNext: () => void;
