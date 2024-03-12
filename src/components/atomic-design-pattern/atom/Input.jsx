@@ -12,18 +12,7 @@ const Input = forwardRef(
     );
 
     return (
-      <input
-        type={type}
-        className={classNames(
-          "input-basic",
-          {
-            "input-hidden": isHidden,
-          },
-          className
-        )}
-        {...props}
-        ref={ref}
-      />
+      <input type={type} className={combinedClassNames} {...props} ref={ref} />
     );
   }
 );
