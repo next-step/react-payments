@@ -48,7 +48,7 @@ export default function CardAdd({ onList, onNext }) {
     isPasswordValidate;
 
   return (
-    <>
+    <form>
       <h2 className="page-title">
         <Link className="button-basic" onClick={onList}>
           {"<"}
@@ -98,6 +98,6 @@ export default function CardAdd({ onList, onNext }) {
           <Button onClick={onNext}>다음</Button>
         </div>
       )}
-    </>
+    </form>
   );
 }
