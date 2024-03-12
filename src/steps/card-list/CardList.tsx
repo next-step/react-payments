@@ -1,5 +1,5 @@
 import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine.ts';
-import CardListItem from 'src/components/card-list/CardListItem.tsx';
+import CardListItem from 'src/steps/card-list/CardListItem.tsx';
 
 export default function CardList() {
 	const { send } = useAddCardMachineActorRef();

@@ -1,6 +1,6 @@
 import 'src/styles/index.css';
 
-import AddCardStepper from 'src/pages/AddCardStepper.tsx';
+import AddCardStepper from 'src/steps/AddCardStepper.tsx';
 
 function App() {
 	return (

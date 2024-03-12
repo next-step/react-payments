@@ -1,13 +1,13 @@
 import { FormEvent } from 'react';
 
 import CardImage from 'src/components/common/CardImage.tsx';
-import CardNumberInput from 'src/components/add-card-form/CardNumberInput.tsx';
-import CardOwnerNameInput from 'src/components/add-card-form/CardOwnerNameInput.tsx';
-import CardExpirationDateInput from 'src/components/add-card-form/CardExpirationDateInput.tsx';
-import CardSecurityCodeInput from 'src/components/add-card-form/CardSecurityCodeInput.tsx';
-import CardPasswordInput from 'src/components/add-card-form/CardPasswordInput.tsx';
+import CardNumberInput from 'src/steps/add-card-form/CardNumberInput.tsx';
+import CardOwnerNameInput from 'src/steps/add-card-form/CardOwnerNameInput.tsx';
+import CardExpirationDateInput from 'src/steps/add-card-form/CardExpirationDateInput.tsx';
+import CardSecurityCodeInput from 'src/steps/add-card-form/CardSecurityCodeInput.tsx';
+import CardPasswordInput from 'src/steps/add-card-form/CardPasswordInput.tsx';
 import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
-import SelectCardCompanyModal from 'src/components/add-card-form/SelectCardCompanyModal.tsx';
+import SelectCardCompanyModal from 'src/steps/add-card-form/SelectCardCompanyModal.tsx';
 
 export default function AddCardForm() {
 	const { send } = useAddCardMachineActorRef();

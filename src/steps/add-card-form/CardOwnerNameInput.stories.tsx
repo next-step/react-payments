@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CardOwnerNameInputComponent from 'src/components/add-card-form/CardOwnerNameInput.tsx';
+import CardOwnerNameInputComponent from 'src/steps/add-card-form/CardOwnerNameInput.tsx';
 import { SelectToFormLayer } from 'src/components/utils/SelectToFormLayer.tsx';
 import { AddCardMachineDecorator } from 'src/stories/Decorators.tsx';
 

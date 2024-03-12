@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import AddCardStepper from 'src/pages/AddCardStepper.tsx';
+import AddCardStepper from 'src/steps/AddCardStepper.tsx';
 import { CARD_COMPANY_LIST } from 'src/constants/card.ts';
 
 describe('카드 회사 선택 모달 기능 테스트', () => {

@@ -1,6 +1,6 @@
 import { useAddCardMachineSelector } from 'src/machines/addCardMachine.ts';
 import CardImage from 'src/components/common/CardImage.tsx';
-import CardNicknameForm from 'src/components/add-card-finish/CardNicknameForm.tsx';
+import CardNicknameForm from 'src/steps/add-card-finish/CardNicknameForm.tsx';
 
 export default function AddCardFinish() {
 	const {

@@ -1,7 +1,7 @@
 import { render, screen, renderHook, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import AddCardStepper from 'src/pages/AddCardStepper.tsx';
+import AddCardStepper from 'src/steps/AddCardStepper.tsx';
 import { AddCardMachineProvider, useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
 import { MOCK_CARD_INFO_LIST } from 'src/mocks/card.ts';
 

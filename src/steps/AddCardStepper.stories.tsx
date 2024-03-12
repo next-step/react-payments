@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import AddCardStepperComponent from 'src/pages/AddCardStepper.tsx';
+import AddCardStepperComponent from 'src/steps/AddCardStepper.tsx';
 
 const meta: Meta<typeof AddCardStepperComponent> = {
 	title: 'step/AddCardStepper',

@@ -1,24 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import AddCardFormComponent from 'src/steps/AddCardForm.tsx';
+import CardNumberInputComponent from 'src/steps/add-card-form/CardNumberInput.tsx';
 import { SelectToFormLayer } from 'src/components/utils/SelectToFormLayer.tsx';
 import { AddCardMachineDecorator } from 'src/stories/Decorators.tsx';
 
-const meta: Meta<typeof AddCardFormComponent> = {
-	title: 'card/AddCardForm',
-	component: AddCardFormComponent,
+const meta: Meta<typeof CardNumberInputComponent> = {
+	title: 'card/CardNumberInput',
+	component: CardNumberInputComponent,
 	decorators: [AddCardMachineDecorator],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof AddCardFormComponent>;
+type Story = StoryObj<typeof CardNumberInputComponent>;
 
-export const AddCardForm: Story = {
+export const CardNumberInput: Story = {
 	render: () => {
 		return (
 			<SelectToFormLayer>
-				<AddCardFormComponent />
+				<CardNumberInputComponent />
 			</SelectToFormLayer>
 		);
 	},

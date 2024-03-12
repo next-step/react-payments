@@ -1,7 +1,7 @@
 import { screen, act } from '@testing-library/react';
 
 import { useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
-import CardNicknameForm from 'src/components/add-card-finish/CardNicknameForm.tsx';
+import CardNicknameForm from 'src/steps/add-card-finish/CardNicknameForm.tsx';
 import { CARD_COMPANY_MAP } from 'src/constants/card.ts';
 import { MOCK_CARD_INFO_LIST, mockCardListMachine } from 'src/mocks/card.ts';
 import { renderWithAddCardMachineProvider, renderHookWithAddCardMachineProvider } from 'src/utils/render.tsx';
