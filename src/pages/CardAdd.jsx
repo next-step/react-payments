@@ -16,8 +16,14 @@ import { CardContext } from "../../providers/CardState/CardStateProvider";
 
 export default function CardAdd({ onList, onNext }) {
   const { cardState } = useContext(CardContext);
-  const { cardNumber, expirationDate, securityCode, cardOwnerName, password } =
-    cardState;
+  const {
+    cardNumber,
+    expirationDate,
+    securityCode,
+    cardOwnerName,
+    password,
+    alias,
+  } = cardState;
 
   // 카드 번호 16자리
   const isCardNumberValidate =
@@ -56,7 +62,7 @@ export default function CardAdd({ onList, onNext }) {
       </h2>
       {/* 카드 */}
       <Card
-        alias={"카드 별칭"}
+        alias={alias}
         cardNumber={cardNumber}
         expirationDateMM={expirationDate[MONTH]}
         expirationDateYY={expirationDate[YEAR]}

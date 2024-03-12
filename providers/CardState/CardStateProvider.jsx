@@ -19,6 +19,7 @@ const initalCardState = {
   expirationDate: { [MONTH]: "", [YEAR]: "" },
   password: { [FIRST_NUMBER]: "", [SECOND_NUMBER]: "" },
   securityCode: "",
+  alias: "",
 };
 
 export const CardStateProvider = ({ children }) => {
