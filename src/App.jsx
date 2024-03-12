@@ -13,7 +13,10 @@ function App() {
           <CardList onNext={() => setStep(PAGE.ADD_CARD)} />
         )}
         {step === PAGE.ADD_CARD && (
-          <CardAdd onNext={() => setStep(PAGE.ADD_CARD_SUCCESS)} />
+          <CardAdd
+            onList={() => setStep(PAGE.CARD_LIST)}
+            onNext={() => setStep(PAGE.ADD_CARD_SUCCESS)}
+          />
         )}
         {step === PAGE.ADD_CARD_SUCCESS && (
           <CardComplete onNext={() => setStep(PAGE.CARD_LIST)} />

@@ -1,3 +1,3 @@
 export default function InputTitle({ children }) {
-  return <span className="input-title">{children}</span>;
+  return <label className="input-title">{children}</label>;
 }

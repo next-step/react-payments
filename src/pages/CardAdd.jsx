@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+
 import Card from "../components/Card";
 import CardNumberInput from "../components/card-add/CardNumberInput";
 import { MONTH, YEAR } from "../constants/expirationDate";
@@ -13,8 +13,9 @@ import InputContainer from "../components/atomic-design-pattern/organism/InputCo
 import InputTitle from "../components/atomic-design-pattern/atom/InputTitle";
 import InputGroup from "../components/atomic-design-pattern/molecule/InputGroup";
 import { CardContext } from "../../providers/CardState/CardStateProvider";
+import Link from "../components/atomic-design-pattern/atom/Link";
 
-export default function CardAdd({ onNext }) {
+export default function CardAdd({ onList, onNext }) {
   const { cardState } = useContext(CardContext);
   const { cardNumber, expirationDate, securityCode, cardOwnerName, password } =
     cardState;
@@ -49,7 +50,7 @@ export default function CardAdd({ onNext }) {
   return (
     <>
       <h2 className="page-title">
-        <Link to="/" className="button-basic">
+        <Link className="button-basic" onClick={onList}>
           {"<"}
         </Link>
         <span className="ml-10">카드 추가</span>
