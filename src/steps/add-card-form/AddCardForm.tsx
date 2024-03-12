@@ -1,6 +1,5 @@
 import { FormEvent } from 'react';
 
-import CardImage from 'src/components/common/CardImage.tsx';
 import CardNumberInput from 'src/steps/add-card-form/CardNumberInput.tsx';
 import CardOwnerNameInput from 'src/steps/add-card-form/CardOwnerNameInput.tsx';
 import CardExpirationDateInput from 'src/steps/add-card-form/CardExpirationDateInput.tsx';
@@ -8,19 +7,10 @@ import CardSecurityCodeInput from 'src/steps/add-card-form/CardSecurityCodeInput
 import CardPasswordInput from 'src/steps/add-card-form/CardPasswordInput.tsx';
 import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
 import SelectCardCompanyModal from 'src/steps/add-card-form/SelectCardCompanyModal.tsx';
+import EnteredCardImage from 'src/steps/add-card-form/EnteredCardImage.tsx';
 
 export default function AddCardForm() {
 	const { send } = useAddCardMachineActorRef();
-
-	const {
-		cardCompanyCode,
-		cardOwnerName,
-		cardNumberFirstSegment,
-		cardNumberSecondSegment,
-		cardNumberThirdSegment,
-		cardNumberFourthSegment,
-		cardExpirationDate,
-	} = useAddCardMachineSelector(state => state.context.cardInfo);
 
 	const isStateAddCardForm = useAddCardMachineSelector(state => state.matches('AddCardForm'));
 
@@ -45,15 +35,7 @@ export default function AddCardForm() {
 						<h2 className="page-title">카드 추가</h2>
 					</div>
 					<form onSubmit={handleSubmit} data-testid="card-form">
-						<CardImage
-							cardCompanyCode={cardCompanyCode}
-							cardOwnerName={cardOwnerName}
-							cardNumberFirstSegment={cardNumberFirstSegment}
-							cardNumberSecondSegment={cardNumberSecondSegment}
-							cardNumberThirdSegment={cardNumberThirdSegment}
-							cardNumberFourthSegment={cardNumberFourthSegment}
-							cardExpirationDate={cardExpirationDate}
-						/>
+						<EnteredCardImage />
 						<CardNumberInput />
 						<CardOwnerNameInput />
 						<CardExpirationDateInput />

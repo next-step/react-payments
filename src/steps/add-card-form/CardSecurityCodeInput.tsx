@@ -8,7 +8,7 @@ export default function CardSecurityCodeInput() {
 
 	const { send } = useAddCardMachineActorRef();
 
-	const { cardSecurityCode } = useAddCardMachineSelector(state => state.context.cardInfo);
+	const cardSecurityCode = useAddCardMachineSelector(state => state.context.cardInfo.cardSecurityCode);
 
 	const handleCardSecurityCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
 		send({

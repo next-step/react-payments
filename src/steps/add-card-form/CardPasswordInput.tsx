@@ -1,4 +1,5 @@
 import { ChangeEvent, useId, useRef } from 'react';
+import { shallowEqual } from '@xstate/react';
 
 import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
 import REGEX from 'src/constants/regex.ts';
@@ -11,7 +12,11 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 	const { send } = useAddCardMachineActorRef();
 
 	const { cardPasswordFirstDigit, cardPasswordSecondDigit } = useAddCardMachineSelector(
-		state => state.context.cardInfo,
+		state => ({
+			cardPasswordFirstDigit: state.context.cardInfo.cardPasswordFirstDigit,
+			cardPasswordSecondDigit: state.context.cardInfo.cardPasswordSecondDigit,
+		}),
+		shallowEqual,
 	);
 
 	const cardPasswordInputId = useId();

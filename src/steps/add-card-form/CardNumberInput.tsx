@@ -1,4 +1,5 @@
 import { useId, useRef, ChangeEvent } from 'react';
+import { shallowEqual } from '@xstate/react';
 
 import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine.ts';
 import REGEX from 'src/constants/regex.ts';
@@ -11,7 +12,15 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 	const { send } = useAddCardMachineActorRef();
 
 	const { cardNumberFirstSegment, cardNumberSecondSegment, cardNumberThirdSegment, cardNumberFourthSegment } =
-		useAddCardMachineSelector(state => state.context.cardInfo);
+		useAddCardMachineSelector(
+			state => ({
+				cardNumberFirstSegment: state.context.cardInfo.cardNumberFirstSegment,
+				cardNumberSecondSegment: state.context.cardInfo.cardNumberSecondSegment,
+				cardNumberThirdSegment: state.context.cardInfo.cardNumberThirdSegment,
+				cardNumberFourthSegment: state.context.cardInfo.cardNumberFourthSegment,
+			}),
+			shallowEqual,
+		);
 
 	const secondSegmentInputRef = useRef<HTMLInputElement>(null);
 	const thirdSegmentInputRef = useRef<HTMLInputElement>(null);
