@@ -1,10 +1,10 @@
 import {
   createContext,
   useState,
-  ReactNode,
   useMemo,
   SetStateAction,
   Dispatch,
+  PropsWithChildren,
 } from 'react';
 import { CardInfo } from '../../types';
 
@@ -28,11 +28,7 @@ const initialCardState: CardInfo = {
   nickname: '',
 };
 
-interface CardProviderProps {
-  children: ReactNode;
-}
-
-export const CardStateProvider = ({ children }: CardProviderProps) => {
+export const CardStateProvider = ({ children }: PropsWithChildren) => {
   const [cardState, setCardState] = useState<CardInfo>(initialCardState);
 
   const resetCardState = () => {
