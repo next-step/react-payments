@@ -1,4 +1,4 @@
-import { createMachine, assign } from 'xstate';
+import { assign, setup } from 'xstate';
 import { createActorContext } from '@xstate/react';
 import { nanoid } from 'nanoid';
 
@@ -52,12 +52,53 @@ type CardMachineEvent =
 	| { type: 'SELECT_CARD'; value: CardInfoWithId }
 	| { type: 'DELETE_CARD'; value: string };
 
-export const addCardMachine = createMachine({
-	id: 'addCard',
+export const addCardMachineSetup = setup({
 	types: {
 		events: {} as CardMachineEvent,
 		context: {} as CardMachineContext,
 	},
+	actions: {
+		selectCard: assign(({ event, context }) =>
+			event.type === 'SELECT_CARD' ? { selectedCard: event.value } : { selectedCard: context.selectedCard },
+		),
+		deleteCard: assign(({ context, event }) =>
+			event.type === 'DELETE_CARD'
+				? {
+						cardList: context.cardList.filter(card => card.id !== event.value),
+					}
+				: { cardList: context.cardList },
+		),
+		addCard: assign(({ context }) => ({
+			cardList: [...context.cardList, { ...context.cardInfo, id: nanoid() }],
+		})),
+		editCard: assign(({ context }) => ({
+			cardList: context.cardList.map(card =>
+				card.id === context.selectedCard.id
+					? {
+							...context.selectedCard,
+							cardNickname:
+								context.selectedCard.cardNickname || CARD_COMPANY_MAP[context.selectedCard.cardCompanyCode]?.name || '',
+						}
+					: card,
+			),
+			selectedCard: { ...initialCardInfo, id: '' },
+		})),
+		changeFieldAddCardForm: assign(({ context, event }) =>
+			event.type === 'CHANGE_FIELD'
+				? { cardInfo: { ...context.cardInfo, [event.field]: event.value } }
+				: { cardInfo: { ...context.cardInfo } },
+		),
+		changeFieldAddCardFinish: assign(({ context, event }) =>
+			event.type === 'CHANGE_FIELD'
+				? { selectedCard: { ...context.selectedCard, [event.field]: event.value } }
+				: { selectedCard: { ...context.selectedCard } },
+		),
+		resetAddCardForm: assign({ cardInfo: { ...initialCardInfo } }),
+	},
+});
+
+export const addCardMachine = addCardMachineSetup.createMachine({
+	id: 'addCard',
 	initial: 'CardList',
 	context: {
 		cardInfo: { ...initialCardInfo },
@@ -72,12 +113,10 @@ export const addCardMachine = createMachine({
 				},
 				SELECT_CARD: {
 					target: 'AddCardFinish',
-					actions: assign(({ event }) => ({ selectedCard: event.value })),
+					actions: [{ type: 'selectCard' }],
 				},
 				DELETE_CARD: {
-					actions: assign(({ context, event }) => ({
-						cardList: context.cardList.filter(card => card.id !== event.value),
-					})),
+					actions: [{ type: 'deleteCard' }],
 				},
 			},
 		},
@@ -102,19 +141,15 @@ export const addCardMachine = createMachine({
 			on: {
 				ADD_CARD: {
 					target: 'AddCardFinish',
-					actions: assign(({ context }) => ({
-						cardList: [...context.cardList, { ...context.cardInfo, id: nanoid() }],
-					})),
+					actions: [{ type: 'addCard' }],
 				},
 				CHANGE_FIELD: {
 					target: 'AddCardForm.enterCardInfo',
-					actions: assign(({ context, event }) => ({
-						cardInfo: { ...context.cardInfo, [event.field]: event.value },
-					})),
+					actions: [{ type: 'changeFieldAddCardForm' }],
 				},
 				BACK: {
 					target: 'CardList',
-					actions: assign({ cardInfo: { ...initialCardInfo } }),
+					actions: [{ type: 'resetAddCardForm' }],
 				},
 			},
 		},
@@ -122,33 +157,20 @@ export const addCardMachine = createMachine({
 			on: {
 				EDIT_CARD: {
 					target: 'CardList',
-					actions: assign(({ context }) => ({
-						cardList: context.cardList.map(card =>
-							card.id === context.selectedCard.id
-								? {
-										...context.selectedCard,
-										cardNickname:
-											context.selectedCard.cardNickname ||
-											CARD_COMPANY_MAP[context.selectedCard.cardCompanyCode]?.name ||
-											'',
-									}
-								: card,
-						),
-						selectedCard: { ...initialCardInfo, id: '' },
-					})),
+					actions: [{ type: 'editCard' }],
 				},
 				CHANGE_FIELD: {
-					actions: assign(({ context, event }) => ({
-						selectedCard: { ...context.selectedCard, [event.field]: event.value },
-					})),
+					actions: [{ type: 'changeFieldAddCardFinish' }],
 				},
 			},
 		},
 	},
 });
 
+export const addCardMachineActor = createActorContext(addCardMachine);
+
 export const {
 	Provider: AddCardMachineProvider,
 	useSelector: useAddCardMachineSelector,
 	useActorRef: useAddCardMachineActorRef,
-} = createActorContext(addCardMachine);
+} = addCardMachineActor;

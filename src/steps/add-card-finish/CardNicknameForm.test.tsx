@@ -3,14 +3,12 @@ import { screen, act } from '@testing-library/react';
 import { useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
 import CardNicknameForm from 'src/steps/add-card-finish/CardNicknameForm.tsx';
 import { CARD_COMPANY_MAP } from 'src/constants/card.ts';
-import { MOCK_CARD_INFO_LIST, mockCardListMachine } from 'src/mocks/card.ts';
+import { mockCardListMachine, MOCK_CARD_INFO_LIST } from 'src/mocks/card.ts';
 import { renderWithAddCardMachineProvider, renderHookWithAddCardMachineProvider } from 'src/utils/render.tsx';
 
 describe('카드 별칭 입력 테스트', () => {
 	beforeEach(() => {
-		renderWithAddCardMachineProvider(<CardNicknameForm />, {
-			providerLogic: mockCardListMachine,
-		});
+		renderWithAddCardMachineProvider(<CardNicknameForm />);
 	});
 
 	it('카드 별칭 입력 input의 placeholder는 "카드 별칭 (선택)" 이다.', () => {
