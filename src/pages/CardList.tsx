@@ -3,10 +3,10 @@ import HStack from '@components/@common/layout/HStack';
 import { Card } from '@components/Card/atoms/Card';
 
 type CardListProps = {
-  onFirstStep: () => void;
+  onNext: () => void;
 };
 
-export default function CardList({ onFirstStep }: CardListProps) {
+export default function CardList({ onNext }: CardListProps) {
   return (
     <div className='root'>
       <div className='app flex-column-center'>
@@ -15,7 +15,7 @@ export default function CardList({ onFirstStep }: CardListProps) {
         </HStack>
 
         <Card.Box>
-          <Card.Empty onCardClick={onFirstStep}>+</Card.Empty>
+          <Card.Empty onCardClick={onNext}>+</Card.Empty>
         </Card.Box>
       </div>
     </div>
