@@ -38,7 +38,7 @@ const AddCard = () => {
         <AddCardInfo
           inputs={inputs}
           setInputs={setInputs}
-          onNext={() => {
+          handleSubmit={() => {
             setStep('생성완료')
           }}
         />

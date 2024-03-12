@@ -9,13 +9,14 @@ import { useNavigate } from 'react-router-dom'
 import { CardData } from './index.tsx'
 
 const CARD_ONE_SECTION_NUMBER_LENGTH = 4
+const numeric_only_regex = /^[0-9]*$/
 
 const AddCardInfo = ({
-  onNext,
+  handleSubmit,
   inputs,
   setInputs,
 }: {
-  onNext: () => void
+  handleSubmit: () => void
   inputs: CardData
   setInputs: React.Dispatch<React.SetStateAction<CardData>>
 }) => {
@@ -26,7 +27,7 @@ const AddCardInfo = ({
   // const cardPasswordRef = useRef<HTMLInputElement | null>(null)
 
   useEffect(() => {
-    if (!/^[0-9]*$/.test(inputs.CVC)) {
+    if (!numeric_only_regex.test(inputs.CVC)) {
       alert('CVC 형식이 틀렸습니다.')
 
       setInputs({
@@ -40,7 +41,7 @@ const AddCardInfo = ({
 
   useEffect(() => {
     if (
-      !/^[0-9]*$/.test(String(inputs.expiredMonth)) ||
+      !numeric_only_regex.test(String(inputs.expiredMonth)) ||
       parseInt(inputs.expiredMonth) > 12
     ) {
       alert('카드 만료 날짜 - 월을 확인해주세요.')
@@ -55,7 +56,7 @@ const AddCardInfo = ({
   }, [inputs.expiredMonth])
 
   useEffect(() => {
-    if (!/^[0-9]*$/.test(inputs.cardNumberOne)) {
+    if (!numeric_only_regex.test(inputs.cardNumberOne)) {
       alert('카드 번호는 숫자만 입력 가능합니다.')
 
       setInputs({
@@ -64,7 +65,7 @@ const AddCardInfo = ({
       })
       return
     }
-    if (!/^[0-9]*$/.test(inputs.cardNumberTwo)) {
+    if (!numeric_only_regex.test(inputs.cardNumberTwo)) {
       alert('카드 번호는 숫자만 입력 가능합니다.')
 
       setInputs({
@@ -73,7 +74,7 @@ const AddCardInfo = ({
       })
       return
     }
-    if (!/^[0-9]*$/.test(inputs.cardNumberThree)) {
+    if (!numeric_only_regex.test(inputs.cardNumberThree)) {
       alert('카드 번호는 숫자만 입력 가능합니다.')
 
       setInputs({
@@ -82,7 +83,7 @@ const AddCardInfo = ({
       })
       return
     }
-    if (!/^[0-9]*$/.test(inputs.cardNumberFour)) {
+    if (!numeric_only_regex.test(inputs.cardNumberFour)) {
       alert('카드 번호는 숫자만 입력 가능합니다.')
 
       setInputs({
@@ -98,11 +99,6 @@ const AddCardInfo = ({
     inputs.cardNumberFour,
   ])
 
-  const handleSubmit = () => {
-    // 모든 Input 정보가 올바를 때
-    console.log(inputs)
-    onNext()
-  }
   const navigate = useNavigate()
   const handleOnClick = () => {
     navigate('/list')
