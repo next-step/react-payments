@@ -37,3 +37,18 @@ button {
   cursor: pointer;
   border: 1px solid #dddddd;
 }
+
+.close-button {
+  display: inline-block;
+  display: inline;
+  position: absolute;
+  background-color: unset;
+  border: none;
+  cursor: pointer;
+}
+
+.close-button:after {
+  display: inline-block;
+  content: '\00d7';
+  font-size: 15pt;
+}

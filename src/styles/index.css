@@ -40,3 +40,7 @@ input {
 
   color: #383838;
 }
+
+.relative-box {
+  position: relative;
+}
