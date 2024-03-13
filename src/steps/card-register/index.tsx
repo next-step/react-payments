@@ -9,35 +9,34 @@ import {
   BaseInput,
   Card,
 } from '@/components'
+import { CardInputState } from '@/hooks/use-card-input-state'
 import { FormEventHandler } from 'react'
 import { useCardInputContext } from '@/contexts/card-input-context.tsx'
 import { useOverlay } from '@/hooks'
 import { CardTypePickBottomSheet } from '@/components'
 import { CARD_TYPE } from '@/constants/card-type.ts'
+import { CardState } from '@/hooks/use-card-state'
 
 export interface CardInputFormStepProps {
-  onClickPrev: () => void
-  onSubmit: () => void
+  onClickPrev?: () => void
+  onSubmit?: (cardState: CardInputState) => void
 }
 
 export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepProps) => {
-  const {
-    cardInput: { cardCode, cardExpDate, cardName, cardCVC, cardPin, cardType },
-    setCardInput,
-    resetCardInput,
-  } = useCardInputContext()
+  const { cardInput, setCardInput, resetCardInput } = useCardInputContext()
 
+  const { cardCode, cardExpDate, cardName, cardCVC, cardPin, cardType } = cardInput
   const [openBottomSheet, closeBottomSheet] = useOverlay()
 
   const handleClickPrev = () => {
     resetCardInput()
-    onClickPrev()
+    onClickPrev?.()
   }
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault()
     if (!cardType) return
-    onSubmit()
+    onSubmit?.({ ...cardInput, cardType })
   }
 
   const handleClickCard = () => {

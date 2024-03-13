@@ -5,17 +5,29 @@ import { vars } from '@/styles'
 import { useCardInputContext } from '@/contexts'
 
 export interface CardListStepProps {
+  cardList: CardState[]
   onNavigateToRegister: () => void
-  onNavigateToEdit: (id: CardState['id']) => void
+  onNavigateToEdit?: (id: CardState['id']) => void
+  onClickRemoveButton: (targetId: string) => void
 }
 
-export const CardListStep = ({ onNavigateToRegister, onNavigateToEdit }: CardListStepProps) => {
+export const CardListStep = ({
+  cardList,
+  onNavigateToRegister,
+  onNavigateToEdit,
+  onClickRemoveButton,
+}: CardListStepProps) => {
   const { resetCardInput } = useCardInputContext()
-  const { cardList, removeCard } = useCardState()
+  // const { cardList, removeCard } = useCardState()
 
   const handleStartEditCard = (card: CardState) => () => {
     resetCardInput(card)
-    onNavigateToEdit(card.id)
+    onNavigateToEdit?.(card.id)
+  }
+
+  const handleClickRemoveCardButton = (id: string) => () => {
+    console.log('remove id : ', id)
+    onClickRemoveButton(id)
   }
 
   return (
@@ -57,7 +69,7 @@ export const CardListStep = ({ onNavigateToRegister, onNavigateToEdit }: CardLis
                     <IconTrash
                       size={24}
                       color={vars.color.gray500}
-                      onClick={() => removeCard(id)}
+                      onClick={handleClickRemoveCardButton(id)}
                     />
                   </Box>
                 </Flex>
