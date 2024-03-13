@@ -14,6 +14,7 @@ export default function CompletedCard() {
     month: '12',
     year: '23',
   };
+
   return (
     <div className="root">
       <div className="app flex-column-center">
