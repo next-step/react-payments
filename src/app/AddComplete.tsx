@@ -10,6 +10,8 @@ const AddComplete = () => {
   const updateCardInfo = useContext(UpdateCardInfoContext)
   const updateFunnelStep = useContext(UpdateFunnelStepContext)
 
+  const { cardList, ...rest } = cardInfo
+
   return (
     <main>
       <h2>4️⃣ 카드 추가 완료</h2>
@@ -35,6 +37,19 @@ const AddComplete = () => {
               className={ui['button-text']}
               onClick={() => {
                 if (!cardInfo.cardAlias) updateCardInfo({ ...cardInfo, cardAlias: cardInfo.cardType })
+
+                if (cardInfo.cardList) {
+                  const index = cardInfo.cardList.findIndex((item) => item.cardNo === cardInfo.cardNo)
+                  const result = cardInfo.cardList.map((item, idx) => {
+                    if (idx === index) item.cardAlias = cardInfo.cardAlias
+                    return item
+                  })
+                  if (index >= 0) updateCardInfo({ cardList: [...result] })
+                  else updateCardInfo({ cardList: [...result, { ...rest }] })
+                } else {
+                  updateCardInfo({ cardList: [{ ...rest }] })
+                }
+
                 updateFunnelStep({ step: 'list' })
               }}
             >
