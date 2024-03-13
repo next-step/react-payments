@@ -1,4 +1,4 @@
-import { getMonthRange, getOnlyNumber } from '../../../utils';
+import { getFormattedMonth, getOnlyNumber } from 'src/utils';
 
 interface CardState {
   ownerName: string;
@@ -72,7 +72,7 @@ export function cardReducer(state: CardState, action: CardAction) {
         ...state,
         expiration: {
           ...state.expiration,
-          month: getMonthRange(getOnlyNumber(param)),
+          month: getFormattedMonth(getOnlyNumber(param)),
         },
       };
     case 'expirationYear':

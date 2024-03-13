@@ -1,5 +1,5 @@
-import { InputContainer } from '../../../components';
-import { MARK } from '../../../constant';
+import { InputContainer } from 'src/components';
+import { MARK } from 'src/constant';
 import { CardAction } from '../reducer';
 
 interface OwnerName {

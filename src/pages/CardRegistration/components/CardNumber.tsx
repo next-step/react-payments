@@ -1,5 +1,5 @@
-import { ConditionalMark, InputContainer } from '../../../components';
-import { MARK } from '../../../constant';
+import { InputContainer, Mark } from 'src/components';
+import { MARK } from 'src/constant';
 import type { CardAction } from '../reducer';
 
 interface CardNumber {
@@ -29,7 +29,7 @@ export default function CardNumber({ cardNumber, cardNumberDispatch }: CardNumbe
           value={cardNumber.first}
           onChange={(e) => cardNumberDispatch({ type: 'cardNumberFirst', param: e.target.value })}
         />
-        <ConditionalMark isShow={isMarkShow.first} mark={MARK.dash} />
+        <Mark isShow={isMarkShow.first} mark={MARK.dash} />
         <input
           className="input-basic"
           type="text"
@@ -37,7 +37,7 @@ export default function CardNumber({ cardNumber, cardNumberDispatch }: CardNumbe
           value={cardNumber.second}
           onChange={(e) => cardNumberDispatch({ type: 'cardNumberSecond', param: e.target.value })}
         />
-        <ConditionalMark isShow={isMarkShow.second} mark={MARK.dash} />
+        <Mark isShow={isMarkShow.second} mark={MARK.dash} />
         <input
           className="input-basic"
           type="password"
@@ -45,7 +45,7 @@ export default function CardNumber({ cardNumber, cardNumberDispatch }: CardNumbe
           value={cardNumber.third}
           onChange={(e) => cardNumberDispatch({ type: 'cardNumberThird', param: e.target.value })}
         />
-        <ConditionalMark isShow={isMarkShow.third} mark={MARK.dash} />
+        <Mark isShow={isMarkShow.third} mark={MARK.dash} />
         <input
           className="input-basic"
           type="password"

@@ -1,5 +1,5 @@
-import { InputContainer, Mark } from '../../../components';
-import { MARK } from '../../../constant';
+import { InputContainer, Mark } from 'src/components';
+import { MARK } from 'src/constant';
 import { CardAction } from '../reducer';
 
 interface CardExpiration {

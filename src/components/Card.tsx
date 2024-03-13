@@ -1,4 +1,4 @@
-import { MARK } from '../constant';
+import { MARK } from 'src/constant';
 
 interface Card {
   cardNumber: {
