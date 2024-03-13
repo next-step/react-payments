@@ -1,10 +1,5 @@
-import { vars } from '@/styles'
+import { CardType } from '@/types/card'
 
-export interface CardType {
-  id: number
-  name: string
-  color: keyof typeof vars.color
-}
 export const CARD_TYPE: Record<string, CardType> = {
   POCO: {
     id: 1,

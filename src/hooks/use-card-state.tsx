@@ -1,4 +1,4 @@
-import { CardInputState } from '@/hooks/use-card-input-state'
+import { CardInputState } from '@/types/card'
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
