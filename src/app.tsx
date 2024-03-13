@@ -4,39 +4,17 @@ import { CardInputFormStep } from '@/steps/card-register'
 import { CardListStep } from './steps/card-list'
 import { CardNicknameInputStep } from '@/steps/card-nickname-input'
 import { Flex, Stepper } from '@/components'
-import { useMachine } from '@xstate/react'
-import { paymentsMachine } from '@/xstate/payments-machine'
-import { useEffect } from 'react'
-import { Snapshot } from 'xstate'
-
-const storageValue = localStorage.getItem('payments')
-const persistedState = storageValue ? (JSON.parse(storageValue) as Snapshot<unknown>) : undefined
+import { usePaymentsStepMachine } from '@/hooks/use-payments-step-machine'
 
 function App() {
-  const [
-    {
-      value: currentStep,
-      context: { cardList, cardBeforeRegister },
-    },
-    send,
-    actorRef,
-  ] = useMachine(paymentsMachine, {
-    snapshot: persistedState,
-  })
-
-  useEffect(() => {
-    const subscription = actorRef.subscribe(snapshot => {
-      localStorage.setItem('payments', JSON.stringify(snapshot))
-    })
-    return () => subscription.unsubscribe()
-  }, [actorRef])
+  const [currentStep, { cardList, cardBeforeRegister }, send] = usePaymentsStepMachine()
 
   return (
     <OverlayContextProvider>
       <CardInputContextProvider>
         <Flex justifyContent="center" backgroundColor="gray500">
           <Flex width="450px" height="100%" backgroundColor="white">
-            <Stepper currentStep={currentStep as string}>
+            <Stepper currentStep={currentStep}>
               <Stepper.Step name="카드_목록">
                 <CardListStep
                   cardList={cardList}
