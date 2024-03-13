@@ -1,4 +1,4 @@
-import { getFormattedMonth, getOnlyNumber } from '../../../utils';
+import { getFormattedMonth, getOnlyNumber } from 'src/utils';
 
 interface CardState {
   ownerName: string;
