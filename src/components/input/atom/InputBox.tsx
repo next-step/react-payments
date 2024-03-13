@@ -14,9 +14,7 @@ export const InputBox = ({ separator, className, children }: InputBoxProps) => {
   return (
     <div className={`input-box ${className}`}>
       {Children.map(children, (child, index) => {
-        if (index === lastChildIndex) {
-          return child;
-        }
+        if (index === lastChildIndex) return child;
 
         const { fieldsFulfilled, symbol } = separator;
 
