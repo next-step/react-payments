@@ -3,7 +3,7 @@ import useOutsideClick from '@/hooks/useOutsideClick';
 import chevronLeft from '@assets/icon/chevron_left_24.svg';
 import { Box, Button, Container, HFlex, Text } from '@components/atoms';
 import { Header } from '@components/molecules';
-import { CreditCardColorPicker, CreditCardTextFields } from '@components/organisms';
+import { CreditCardCompanyPicker, CreditCardTextFields } from '@components/organisms';
 import { useRef, useState } from 'react';
 
 interface Props {
@@ -77,7 +77,7 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
           다음
         </Button>
       </Box>
-      {showColorPicker && <CreditCardColorPicker ref={colorPickerRef} onSubmit={onNext} />}
+      {showColorPicker && <CreditCardCompanyPicker ref={colorPickerRef} onClick={onNext} />}
     </Container>
   );
 }

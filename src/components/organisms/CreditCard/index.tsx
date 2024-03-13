@@ -1,5 +1,5 @@
 import { Box, Text } from '@/components/atoms';
-import { availableCreditCards } from '../CreditCardColorPicker';
+import { availableCreditCards } from '../CreditCardCompanyPicker';
 
 interface Props {
   cardNumber: string;

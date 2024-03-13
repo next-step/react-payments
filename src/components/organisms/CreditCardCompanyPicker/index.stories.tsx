@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CreditCardColorPicker from './index';
+import CreditCardCompanyPicker from './index';
 
 const meta = {
-  title: 'organisms/CreditCardColorPicker',
-  component: CreditCardColorPicker,
+  title: 'organisms/CreditCardCompanyPicker',
+  component: CreditCardCompanyPicker,
   tags: ['autodocs'],
   parameters: {
     layout: 'padded',
   },
-} satisfies Meta<typeof CreditCardColorPicker>;
+} satisfies Meta<typeof CreditCardCompanyPicker>;
 
 export default meta;
 

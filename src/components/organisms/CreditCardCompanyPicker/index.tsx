@@ -15,10 +15,10 @@ export const availableCreditCards = [
 ] as const;
 
 interface Props extends ComponentProps<'div'> {
-  onSubmit: () => void;
+  onClick: () => void;
 }
 
-const CreditCardColorPicker = forwardRef<HTMLDivElement, Props>(({ onSubmit, ...restProps }, ref) => {
+const CreditCardCompanyPicker = forwardRef<HTMLDivElement, Props>(({ onClick, ...restProps }, ref) => {
   const { updateCardCompany } = useCardOption();
 
   return (
@@ -28,7 +28,7 @@ const CreditCardColorPicker = forwardRef<HTMLDivElement, Props>(({ onSubmit, ...
           <Button
             onClick={() => {
               updateCardCompany(card.label);
-              onSubmit();
+              onClick();
             }}
             key={card.label}
             className={`justify-self-center`}
@@ -44,4 +44,4 @@ const CreditCardColorPicker = forwardRef<HTMLDivElement, Props>(({ onSubmit, ...
   );
 });
 
-export default CreditCardColorPicker;
+export default CreditCardCompanyPicker;
