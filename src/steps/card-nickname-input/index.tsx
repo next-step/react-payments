@@ -27,8 +27,7 @@ export const CardNicknameInputStep = ({
   const handleClickConfirm = () => {
     if (!cardTypeValue || !inputRef.current) return
     const nickNameInputValue = inputRef.current.value
-    const cardNickname =
-      nickNameInputValue.length > 0 ? nickNameInputValue : cardTypeValue.brandName
+    const cardNickname = nickNameInputValue.length > 0 ? nickNameInputValue : cardTypeValue.name
     onClickConfirm?.(cardNickname)
     resetCardInput()
   }

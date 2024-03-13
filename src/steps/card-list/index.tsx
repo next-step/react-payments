@@ -1,32 +1,26 @@
 import { Card, Flex, Text, Header, Box } from '@/components'
 import { IconPlus, IconTrash } from '@tabler/icons-react'
-import { CardState, useCardState } from '@/hooks/use-card-state'
+import { CardState } from '@/types/card'
 import { vars } from '@/styles'
-import { useCardInputContext } from '@/contexts'
 
 export interface CardListStepProps {
   cardList: CardState[]
-  onNavigateToRegister: () => void
-  onNavigateToEdit?: (id: CardState['id']) => void
+  onClickRegisterButton: () => void
+  onClickStartEditButton: (card: CardState) => void
   onClickRemoveButton: (targetId: string) => void
 }
 
 export const CardListStep = ({
   cardList,
-  onNavigateToRegister,
-  onNavigateToEdit,
+  onClickRegisterButton,
+  onClickStartEditButton,
   onClickRemoveButton,
 }: CardListStepProps) => {
-  const { resetCardInput } = useCardInputContext()
-  // const { cardList, removeCard } = useCardState()
-
   const handleStartEditCard = (card: CardState) => () => {
-    resetCardInput(card)
-    onNavigateToEdit?.(card.id)
+    onClickStartEditButton(card)
   }
 
   const handleClickRemoveCardButton = (id: string) => () => {
-    console.log('remove id : ', id)
     onClickRemoveButton(id)
   }
 
@@ -85,7 +79,7 @@ export const CardListStep = ({
           justifyContent="center"
           alignItems="center"
           aspectRatio="3/2"
-          onClick={onNavigateToRegister}
+          onClick={onClickRegisterButton}
         >
           <IconPlus size={24} />
         </Flex>
