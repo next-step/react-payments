@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import Header from './Header';
 import CardBox from '../CardBox';
@@ -37,6 +37,8 @@ export default function AddCardForm() {
     firstNumber: '',
     secondNumber: '',
   });
+
+  const cards = useContext(CardContext);
 
   return (
     <div className="root">
