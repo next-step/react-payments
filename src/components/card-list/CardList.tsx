@@ -1,14 +1,8 @@
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import CardBox from '../CardBox';
-import { CardContext } from '../../context/CardContext';
 
 export default function CardList() {
-  const { cardState } = useContext(CardContext);
-
-  console.log(cardState);
-
   return (
     <div className="root">
       <div className="app flex-column-center">

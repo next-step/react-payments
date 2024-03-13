@@ -5,7 +5,7 @@ import Card from '../Card';
 import Button from '../card-add/ClickableLink';
 import Input from '../Input';
 
-import { CardContext } from '../../context/CardContext';
+import { useCardContext } from '../hooks/useCardContext';
 
 import updateValidValue from '../../utils/updateValidValue';
 import { CARD_ALIAS_LIMIT } from '../../constants/cardLimit';
@@ -13,7 +13,7 @@ import { CARD_ALIAS_LIMIT } from '../../constants/cardLimit';
 export default function CompletedCard() {
   const [cardAlias, setCardAlias] = useState('');
 
-  const { cardState, handleChangeCardState } = useContext(CardContext);
+  const { cardState, handleChangeCardState } = useCardContext();
 
   if (!cardState) {
     return;

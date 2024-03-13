@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
 import Header from './Header';
 import CardBox from '../CardBox';
@@ -10,13 +10,12 @@ import SecurityCode from './SecurityCode';
 import CardPassword from './CardPassword';
 import ClickableLink from './ClickableLink';
 
-import { CardContext } from '../../context/CardContext';
-
 import type {
   CardNumberType,
   ExpirationDateType,
   CardPasswordNumberType,
 } from '../../types/CardFormType';
+import { useCardContext } from '../hooks/useCardContext';
 
 export default function AddCardForm() {
   const [cardNumber, setCardNumber] = useState<CardNumberType>({
@@ -40,7 +39,7 @@ export default function AddCardForm() {
     secondNumber: '',
   });
 
-  const { handleChangeCardState } = useContext(CardContext);
+  const { handleChangeCardState } = useCardContext();
 
   const handleClickButton = () => {
     handleChangeCardState({
