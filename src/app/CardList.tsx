@@ -1,8 +1,20 @@
-import { useContext } from 'react'
-import ui from '../styles/index.module.css'
+import { useCallback, useContext } from 'react'
 import { UpdateFunnelStepContext } from '../context/funnelStepContext'
+import { CardInfo, CardInfoContext, UpdateCardInfoContext } from '../context/paymentContext'
+import { CardBox } from '../components'
+import ui from '../styles/index.module.css'
+
 const CardList = () => {
+  const cardInfo = useContext(CardInfoContext)
+  const updateCardInfo = useContext(UpdateCardInfoContext)
+
   const updateFunnelStep = useContext(UpdateFunnelStepContext)
+
+  const deleteCard = useCallback((item: CardInfo) => {
+    const deleteCard = cardInfo.cardList?.filter((card) => card.cardNo !== item.cardNo)
+    updateCardInfo({ cardList: deleteCard })
+  }, [])
+
   return (
     <>
       <h2>5️⃣ 카드 목록</h2>
@@ -11,28 +23,31 @@ const CardList = () => {
           <div className={ui['flex-center']}>
             <h2 className={`${ui['page-title']} ${ui['mb-10']}`}>보유 카드</h2>
           </div>
-          <div className={ui['card-box']}>
-            <div className={ui['small-card']}>
-              <div className={ui['card-top']}>
-                <span className={ui['card-text']}>클린카드</span>
-              </div>
-              <div className={ui['card-middle']}>
-                <div className={ui['small-card__chip']}></div>
-              </div>
-              <div className={ui['card-bottom']}>
-                <div className={ui['card-bottom__number']}>
-                  <span className={ui['card-text']}>1111 - 2222 - oooo - oooo</span>
+          <div className={ui['card-list-container']}>
+            {cardInfo.cardList?.reverse().map((item, idx) => (
+              <div key={idx} className={ui['card-item']}>
+                <a
+                  onClick={() => {
+                    updateCardInfo({ ...item, cardList: cardInfo.cardList })
+                    updateFunnelStep({ step: 'complete' })
+                  }}
+                >
+                  <div>
+                    <CardBox card={item} />
+                    <span className={ui['card-nickname']}>{item.cardAlias}</span>
+                  </div>
+                </a>
+                <div className={ui['card-delete-wrapper']}>
+                  <button className={ui['delete-button']} onClick={() => deleteCard(item)}>
+                    x
+                  </button>
                 </div>
-                <div className={ui['card-bottom__info']}>
-                  <span className={ui['card-text']}>YUJO</span>
-                  <span className={ui['card-text']}>12 / 23</span>
-                </div>
               </div>
-            </div>
+            ))}
           </div>
-          <span className={ui['card-nickname']}>법인카드</span>
-          <div className={ui['card-box']}>
-            <button className={ui['empty-card']} onClick={() => updateFunnelStep({ step: 'add' })}>
+
+          <div className={ui['card-add-wrapper']}>
+            <button className={ui['add-button']} onClick={() => updateFunnelStep({ step: 'add' })}>
               +
             </button>
           </div>
