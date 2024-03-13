@@ -1,6 +1,10 @@
 import { createMachine, assign } from 'xstate'
 import { v4 as uuidv4 } from 'uuid'
 import { CardState, CardBeforeRegister, CardInputState } from '@/types/card'
+import {
+  loadCardListFromLocalStorage,
+  updateCardListOfLocalStorage,
+} from '@/utils/card-local-storage'
 
 const INITIAL_CARD = {
   id: '',
@@ -11,22 +15,6 @@ const INITIAL_CARD = {
   cardName: '',
   cardNickName: '',
   cardPin: '',
-}
-
-const CARD_STATE_LOCALSTORAGE_KEY = 'CARD_STATE'
-
-const loadCardListFromLocalStorage = () => {
-  const itemFromStorage = localStorage.getItem(CARD_STATE_LOCALSTORAGE_KEY)
-  if (!itemFromStorage) return []
-
-  return (JSON.parse(itemFromStorage) as CardState[]).map(({ updatedAt, ...rest }) => ({
-    ...rest,
-    updatedAt: new Date(updatedAt),
-  }))
-}
-
-const updateCardListOfLocalStorage = (cardList: CardState[]) => {
-  localStorage.setItem(CARD_STATE_LOCALSTORAGE_KEY, JSON.stringify(cardList))
 }
 
 export const paymentsMachine = createMachine({
