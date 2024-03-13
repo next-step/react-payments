@@ -9,13 +9,12 @@ import {
   BaseInput,
   Card,
 } from '@/components'
-import { CardInputState } from '@/hooks/use-card-input-state'
+import { CardInputState } from '@/types/card'
 import { FormEventHandler } from 'react'
 import { useCardInputContext } from '@/contexts/card-input-context.tsx'
 import { useOverlay } from '@/hooks'
 import { CardTypePickBottomSheet } from '@/components'
 import { CARD_TYPE } from '@/constants/card-type.ts'
-import { CardState } from '@/hooks/use-card-state'
 
 export interface CardInputFormStepProps {
   onClickPrev?: () => void

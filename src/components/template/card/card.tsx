@@ -2,7 +2,7 @@ import { Flex, FlexProps } from '@/components/atom/flex'
 import { Text } from '@/components/atom/text'
 import * as styles from './card.css'
 import { createDisplayCardCode } from '@/utils/create-display-card-code'
-import { CardType } from '@/constants/card-type.ts'
+import { CardType } from '@/types/card'
 
 export interface CardProps extends FlexProps {
   cardSize?: styles.Size

@@ -1,4 +1,4 @@
-import { Children, PropsWithChildren, ReactElement, isValidElement, useState } from 'react'
+import { Children, PropsWithChildren, ReactElement, isValidElement } from 'react'
 
 export interface StepProps extends PropsWithChildren {
   name: string

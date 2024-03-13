@@ -1,7 +1,7 @@
 import { BottomSheet, BottomSheetContentProps } from '@/components/molecule/bottom-sheet'
 import * as styles from './card-type-pick-bottom-sheet.css'
 import { Text, Flex, FlexProps } from '@/components'
-import { CardType } from '@/constants/card-type.ts'
+import { CardType } from '@/types/card'
 import { IconCheck } from '@tabler/icons-react'
 import { vars } from '@/styles'
 
