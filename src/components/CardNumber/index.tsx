@@ -8,6 +8,7 @@ export const CardNumber = () => {
   const updateCardInfo = useContext(UpdateCardInfoContext)
 
   const handleInputChange = (key: string, value: string) => {
+    // if (!value.match(/[0-9]/g)) return null
     return updateCardInfo({ ...cardInfo, cardNumber: { ...cardInfo.cardNumber, [key]: value } })
   }
 
