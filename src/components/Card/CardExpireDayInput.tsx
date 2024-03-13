@@ -1,5 +1,5 @@
 import { NumberInput } from "@/components/atom/NumberInput";
-import { ComponentProps, useRef, useState } from "react";
+import { ComponentProps, useRef } from "react";
 import styled from "styled-components";
 
 const commonProps: ComponentProps<typeof NumberInput> = {
@@ -9,14 +9,14 @@ const commonProps: ComponentProps<typeof NumberInput> = {
 };
 
 export const CardExpireDayInput = () => {
-  const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement[]>([]);
 
   const handleChange = (value: string) => {
     if (!+value || (+value >= 1 && +value <= 12)) {
-      setValue(value);
+      return value;
     } else {
-      //   setValue("");
+      alert("만기월은 1~12사이의 숫자만 가능합니다.");
+      return "";
     }
   };
 
@@ -29,7 +29,6 @@ export const CardExpireDayInput = () => {
         ref={(elem) => {
           elem && (inputRef.current[0] = elem);
         }}
-        value={value}
         onChange={handleChange}
       />
       <p>/</p>

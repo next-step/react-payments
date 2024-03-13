@@ -9,14 +9,11 @@ export const NumberInput = forwardRef<HTMLInputElement, TNumberInputProps>(
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       const inputValue = e.target.value;
-      console.log("number input", value);
       const isNumber = REGEX.ONLY_NUMBER.test(inputValue);
       if (isNumber) {
-        setValue(inputValue);
-        onChange?.(inputValue);
+        setValue(onChange?.(inputValue) ?? inputValue);
       }
     };
-    console.log("value", value);
     return (
       <Input
         {...(mask && { type: "password" })}

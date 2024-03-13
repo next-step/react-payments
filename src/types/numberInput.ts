@@ -6,5 +6,5 @@ export type TNumberInputProps = Omit<
   "onChange"
 > & {
   mask?: boolean;
-  onChange?: (value: string) => void;
+  onChange?: (value: string) => void | string;
 };
