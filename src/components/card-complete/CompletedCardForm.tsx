@@ -56,7 +56,7 @@ export default function CompletedCard() {
             variant="underline"
             className="w-75"
             type="text"
-            placeholder="카드의 별칭을 입력해주세요."
+            placeholder="카드 별칭 (선택)"
             value={cardAlias}
             onChange={handleChangeCardAlias}
           />
