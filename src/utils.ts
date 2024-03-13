@@ -15,3 +15,11 @@ export function isNumberFromString(number: string) {
 export function compareShallowValues<T>(obj1: T, obj2: T) {
   return JSON.stringify(obj1) === JSON.stringify(obj2);
 }
+
+export function omitObj<T>(obj: Record<string, unknown>, keys: string[]) {
+  const copied = { ...obj };
+
+  keys.forEach((key) => delete copied[key]);
+
+  return copied as T;
+}

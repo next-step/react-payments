@@ -1,36 +1,53 @@
 import { Link } from "react-router-dom";
 import PlasticCard from "../component/PlaticCard/PlaticCard";
 import styles from "./MyCards.module.css";
+import Button from "../../components/Button/Button";
+import useCards from "../../hooks/useCards";
 
 export default function MyCards() {
+  const { cards, setCards } = useCards({
+    sortByKey: "createdAt",
+    sortMethod: "asc",
+  });
+
+  const latest = cards.sort((a, b) => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  });
+
+  function deleteCard(uuid: string) {
+    return function deleteCard() {
+      const filtered = latest.filter((value) => uuid !== value.uuid);
+      setCards(filtered);
+    };
+  }
+
   return (
     <section className={styles.cards__layout}>
       <div className={styles.cards__list}>
-        <PlasticCard
-          cardType="윤호"
-          cardNumber={{
-            firstNumber: "1234",
-            secondNumber: "1234",
-            thirdNumber: "1234",
-            fourthNumber: "1234",
-          }}
-          holderName="SUN"
-          expiration={{ month: "12", year: "12" }}
-        />
-        <PlasticCard
-          cardType="은규"
-          cardNumber={{
-            firstNumber: "1234",
-            secondNumber: "1234",
-            thirdNumber: "1234",
-            fourthNumber: "1234",
-          }}
-          holderName="SUN"
-          expiration={{ month: "12", year: "12" }}
-        />
         <Link to="/mycards/register">
           <div className={styles.card__link}>+</div>
         </Link>
+        {latest.map((card) => {
+          return (
+            <div
+              key={JSON.stringify(card.cardNumber)}
+              className={styles.card__box}
+            >
+              <div className={styles.card__delBtn}>
+                <Button onClick={deleteCard(card.uuid)}>지우기</Button>
+              </div>
+              <Link to={`modify?uuid=${card.uuid}`}>
+                <PlasticCard
+                  cardType={card.cardType}
+                  cardNumber={card.cardNumber}
+                  holderName={card.cardHolder}
+                  expiration={card.expiration}
+                />
+              </Link>
+              <div>{card.holderName}</div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

@@ -1,3 +1,14 @@
+export type Card = {
+  uuid: string;
+  cardType: CardType;
+  cardNumber: CardNumber;
+  holderName: string;
+  cardHolder: string;
+  cvc: string;
+  expiration: ExpirationDate;
+  createdAt: Date;
+};
+
 export type CardNumber = {
   firstNumber?: string;
   secondNumber?: string;

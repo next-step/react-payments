@@ -1,6 +1,6 @@
 import useFunnel from "../../hooks/useFunnel/useFunnel";
 import CardRegister from "./CardRegister/CardRegister";
-import CardNaming from "./CardNaming/CardNaming";
+import CardNaming, { CardQuery } from "./CardNaming/CardNaming";
 import CardResult from "./CardResult/CardResult";
 
 export default function RegisterPage() {
@@ -21,6 +21,7 @@ export default function RegisterPage() {
       </Funnel.Page>
       <Funnel.Page step="naming">
         <CardNaming
+          card={stepStore["register"] as CardQuery}
           onSubmit={(value) => {
             setStep("result", value);
           }}

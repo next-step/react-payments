@@ -28,6 +28,22 @@
   font-size: 20px;
 }
 
+.card__box {
+  position: relative;
+}
+
+.card__delBtn {
+  position: absolute;
+  z-index: 2;
+  right: -15px;
+  top: -5px;
+  padding: 3px 5px;
+
+  border: 1px solid #04c09e;
+  background-color: white;
+  border-radius: 20px;
+}
+
 a {
   color: #000;
   text-decoration: none;
