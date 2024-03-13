@@ -43,7 +43,10 @@ export const CardListStep = ({
         paddingX="40px"
       >
         {cardList
-          .sort((card1, card2) => card2.updatedAt.getTime() - card1.updatedAt.getTime())
+          .sort(
+            (card1, card2) =>
+              new Date(card2.updatedAt).getTime() - new Date(card1.updatedAt).getTime(),
+          )
           .map(card => {
             const { id, cardCode, cardName, cardExpDate, cardType, cardNickName } = card
             return (
