@@ -4,25 +4,75 @@ import { CardInputContextProvider } from '@/contexts/card-input-context'
 import { CardInputFormStep } from '@/steps/card-register'
 import { CardListStep } from './steps/card-list'
 import { CardRegisterCompleteStep } from '@/steps/card-register-complete'
-import { Flex } from '@/components'
+import { Flex, Stepper } from '@/components'
+import { useMachine, useActor } from '@xstate/react'
 import { CardState } from '@/hooks/use-card-state.tsx'
+import { paymentsMachine } from '@/xstate/payments-machine'
 
 const 카드_목록 = 'card-list'
 const 카드_입력_폼 = 'card-input-form'
 const 카드_등록_완료 = 'card-register-complete'
 
 function App() {
-  const [Funnel, funnelState, setFunnelState] = useFunnel<{ editableCardId?: CardState['id'] }>(
-    [카드_목록, 카드_입력_폼, 카드_등록_완료] as const,
-    {},
-  )
+  // const [Funnel, funnelState, setFunnelState] = useFunnel<{ editableCardId?: CardState['id'] }>(
+  //   [카드_목록, 카드_입력_폼, 카드_등록_완료] as const,
+  //   {},
+  // )
+  const [state, send, actor] = useMachine(paymentsMachine)
+
+  const currentStep = state.value as string
+
+  const [Funnel] = useFunnel(['카드_목록', 'EDIT', 'CREATE', 'CREATE_CONFIRM'] as const, {})
 
   return (
     <OverlayContextProvider>
       <CardInputContextProvider>
         <Flex justifyContent="center" backgroundColor="gray500">
           <Flex width="450px" height="100%" backgroundColor="white">
-            <Funnel.Root>
+            <Stepper currentStep={currentStep}>
+              <Stepper.Step name="카드_목록">
+                <CardListStep
+                  cardList={state.context.cardList}
+                  onNavigateToRegister={() =>
+                    send({
+                      type: 'create_start',
+                    })
+                  }
+                  onClickRemoveButton={targetId =>
+                    send({
+                      type: 'remove',
+                      targetId,
+                    })
+                  }
+                />
+              </Stepper.Step>
+              <Stepper.Step name="카드_등록">
+                <CardInputFormStep
+                  onClickPrev={() =>
+                    send({
+                      type: 'create_cancel',
+                    })
+                  }
+                  onSubmit={cardInput =>
+                    send({
+                      type: 'create_step1',
+                      cardInput,
+                    })
+                  }
+                />
+              </Stepper.Step>
+              <Stepper.Step name="카드_등록_확인">
+                <CardRegisterCompleteStep
+                  onClickConfirm={nickName =>
+                    send({
+                      type: 'create_step2',
+                      nickName,
+                    })
+                  }
+                />
+              </Stepper.Step>
+            </Stepper>
+            {/* <Funnel.Root>
               <Funnel.Step name={카드_목록}>
                 <CardListStep
                   onNavigateToRegister={() =>
@@ -60,7 +110,7 @@ function App() {
                   }
                 />
               </Funnel.Step>
-            </Funnel.Root>
+            </Funnel.Root> */}
           </Flex>
         </Flex>
       </CardInputContextProvider>

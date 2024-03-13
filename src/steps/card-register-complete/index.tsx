@@ -3,7 +3,7 @@ import { useCardInputContext } from '@/contexts'
 import { CardState, useCardState } from '@/hooks/use-card-state.tsx'
 
 export interface CardRegisterCompleteStepProps {
-  onClickConfirm: () => void
+  onClickConfirm?: (nickName: string) => void
   editableCardId?: CardState['id']
 }
 
@@ -27,7 +27,7 @@ export const CardRegisterCompleteStep = ({
       addCard(completedCardInput)
     }
     resetCardInput()
-    onClickConfirm()
+    onClickConfirm?.(cardNickName)
   }
 
   return (
