@@ -12,18 +12,15 @@ const useCustomForm = (props = {}) => {
   const [formState, setFormState] = useState({});
 
   const updateFormState = () => {
-    if (mode === "onChange") {
-      let isValid = true;
-      Object.entries(formOption.current).forEach(([key, value]) => {
-        if (value.required && !valueRefs.current[key]) {
-          isValid = false;
-        }
-      });
+    if (mode !== "onChange") return;
 
-      setFormState({
-        isValid,
-      });
-    }
+    const isValid = Object.entries(formOption.current).every(
+      ([key, option]) => {
+        return !option.required || !!valueRefs.current[key];
+      }
+    );
+
+    setFormState({ isValid });
   };
 
   const updateWatch = (name, value) => {
