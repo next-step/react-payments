@@ -97,16 +97,12 @@ export const paymentsMachine = createMachine({
           target: '카드_목록',
           actions: assign({
             cardList: ({ event: { nickName }, context }) => {
-              const newCardNickname =
-                nickName.length > 0
-                  ? nickName
-                  : (context.cardBeforeRegister.cardType?.name as string)
               const newCardList = [
                 ...context.cardList,
                 {
                   ...context.cardBeforeRegister,
                   updatedAt: new Date(),
-                  cardNickName: newCardNickname,
+                  cardNickName: nickName,
                 },
               ]
               updateCardListOfLocalStorage(newCardList)
