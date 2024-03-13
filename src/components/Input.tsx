@@ -7,7 +7,7 @@ type BaseInputProps = DetailedHTMLProps<
   HTMLInputElement
 >;
 type InputProps = {
-  variant: 'basic' | 'secondary';
+  variant: 'basic' | 'secondary' | 'underline';
   className?: string;
 } & BaseInputProps;
 
