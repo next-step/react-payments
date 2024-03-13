@@ -1,4 +1,4 @@
-import { useCardInput } from '@/components/pages/CardForm/useCardInput';
+import { useCardInput } from '@/components/pages/CardCreate/useCardInput';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import chevronLeft from '@assets/icon/chevron_left_24.svg';
 import { Box, Button, Container, HFlex, Text } from '@components/atoms';

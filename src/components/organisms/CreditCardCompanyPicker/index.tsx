@@ -1,6 +1,6 @@
 import { Box, Button, Text } from '@/components/atoms';
 import BottomSheet from '@/components/molecules/BottomSheet';
-import { useCardOption } from '@/components/pages/CardForm/useCardOption';
+import { useCardOption } from '@/components/pages/CardCreate/useCardOption';
 import { ComponentProps, forwardRef } from 'react';
 
 export const availableCreditCards = [

@@ -2,7 +2,7 @@ import { MobilePanel } from '@/components/atoms';
 import CardRegistrationSuccessTemplate from '@/components/templates/CardRegistrationSuccess';
 import CreditCardRepository from '@/repositories/CreditCardRepository';
 import { redirect, useNavigate, useParams } from 'react-router-dom';
-import { CardFormProvider } from '../CardForm/CardFormContext';
+import { CardFormProvider } from '../CardCreate/CardFormContext';
 
 export default function CardEdit() {
   const navigate = useNavigate();

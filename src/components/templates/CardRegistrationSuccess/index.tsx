@@ -1,9 +1,9 @@
 import { Box, Button, Container, Text } from '@/components/atoms';
 import { Header, TextField } from '@/components/molecules';
 import { CreditCard } from '@/components/organisms';
-import { CardFormFields, CardFormOptions } from '@/components/pages/CardForm/CardFormContext';
-import { useCardInput } from '@/components/pages/CardForm/useCardInput';
-import { useCardOption } from '@/components/pages/CardForm/useCardOption';
+import { CardFormFields, CardFormOptions } from '@/components/pages/CardCreate/CardFormContext';
+import { useCardInput } from '@/components/pages/CardCreate/useCardInput';
+import { useCardOption } from '@/components/pages/CardCreate/useCardOption';
 import chevronLeft from '@assets/icon/chevron_left_24.svg';
 
 interface Props {

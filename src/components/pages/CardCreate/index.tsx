@@ -14,7 +14,7 @@ export const CARD_FORMS = {
 
 type CardForm = (typeof CARD_FORMS)[keyof typeof CARD_FORMS];
 
-export default function CardForm() {
+export default function CardCreate() {
   const [forms, setForms] = useState<CardForm[]>([CARD_FORMS.CreateCardForm]);
   const navigate = useNavigate();
 
