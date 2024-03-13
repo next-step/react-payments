@@ -1,20 +1,15 @@
-import { createContext, useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import routes from './routes';
 
-import { CardType } from './types/CardFormType';
+import CardContext from './context/CardContext';
 
 export default function App() {
-  const [cards, setCards] = useState<CardType[]>();
-
-  const CardContext = createContext(cards);
-
   const router = createBrowserRouter(routes);
 
   return (
-    <CardContext.Provider value={cards}>
+    <CardContext>
       <RouterProvider router={router} />
-    </CardContext.Provider>
+    </CardContext>
   );
 }

@@ -10,6 +10,8 @@ import SecurityCode from './SecurityCode';
 import CardPassword from './CardPassword';
 import ClickableLink from './ClickableLink';
 
+import { CardContext } from '../../context/CardContext';
+
 import type {
   CardNumberType,
   ExpirationDateType,
@@ -39,6 +41,7 @@ export default function AddCardForm() {
   });
 
   const cards = useContext(CardContext);
+  console.log(cards);
 
   return (
     <div className="root">
