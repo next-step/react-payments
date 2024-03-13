@@ -1,12 +1,6 @@
 import { INPUT } from './input.constant';
 import { InputFactoryProps } from './input.type';
-import {
-  DefaultInput,
-  InputBox,
-  InputContainer,
-  InputTitle,
-  ReadOnlyPasswordInput,
-} from './atom';
+import { DefaultInput, InputBox, InputContainer, InputTitle } from './atom';
 import { forwardRef } from 'react';
 
 const InputFactory = forwardRef<HTMLInputElement, InputFactoryProps>(
@@ -15,17 +9,6 @@ const InputFactory = forwardRef<HTMLInputElement, InputFactoryProps>(
       case INPUT.TYPE.TEXT:
       case INPUT.TYPE.PASSWORD: {
         return <DefaultInput ref={ref} type={type} {...rest} />;
-      }
-
-      case INPUT.TYPE.READONLY_PASSWORD: {
-        return (
-          <ReadOnlyPasswordInput
-            ref={ref}
-            type='password'
-            {...rest}
-            value={'*'}
-          />
-        );
       }
 
       default: {
