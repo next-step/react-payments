@@ -3,19 +3,19 @@ import Card from '../Card';
 import Button from '../card-add/ClickableLink';
 import Input from '../Input';
 
+const cardNumber = {
+  firstNumber: '1111',
+  secondNumber: '1111',
+  thirdNumber: '1111',
+  fourthNumber: '1111',
+};
+
+const expirationDate = {
+  month: '12',
+  year: '23',
+};
+
 export default function CompletedCard() {
-  const cardNumber = {
-    firstNumber: '1111',
-    secondNumber: '1111',
-    thirdNumber: '1111',
-    fourthNumber: '1111',
-  };
-
-  const expirationDate = {
-    month: '12',
-    year: '23',
-  };
-
   return (
     <div className="root">
       <div className="app flex-column-center">
