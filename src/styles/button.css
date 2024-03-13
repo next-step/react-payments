@@ -1,0 +1,54 @@
+button {
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.button-box {
+  width: 100%;
+  text-align: right;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.button-text {
+  margin-right: 10px;
+  color: #2bc1bc;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.button-contained {
+  background-color: #2bc1bc;
+  color: white;
+  margin: 10px;
+  padding: 10px 24px;
+  cursor: pointer;
+}
+
+.button-outlined {
+  background-color: #dddddd;
+  color: white;
+  margin: 10px;
+  padding: 10px 24px;
+  cursor: pointer;
+  border: 1px solid #dddddd;
+}
+
+.close-button {
+  display: inline-block;
+  display: inline;
+  position: absolute;
+  background-color: unset;
+  border: none;
+  cursor: pointer;
+}
+
+.close-button:after {
+  display: inline-block;
+  content: '\00d7';
+  font-size: 15pt;
+}

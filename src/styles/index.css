@@ -1,8 +1,8 @@
-@import "./card.css";
-@import "./input.css";
-@import "./button.css";
-@import "./modal.css";
-@import "./utils.css";
+@import './card.css';
+@import './input.css';
+@import './button.css';
+@import './modal.css';
+@import './utils.css';
 
 body {
   display: flex;
@@ -17,7 +17,7 @@ input {
   font-size: 16px;
 }
 
-.root {
+#root {
   background-color: #fff;
   width: 375px;
   min-width: 375px;
@@ -39,4 +39,8 @@ input {
   align-items: center;
 
   color: #383838;
+}
+
+.relative-box {
+  position: relative;
 }
