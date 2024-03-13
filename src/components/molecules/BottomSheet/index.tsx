@@ -1,9 +1,7 @@
 import { Box } from '@/components/atoms';
-import { ReactNode, forwardRef } from 'react';
+import { PropsWithChildren, forwardRef } from 'react';
 
-interface Props {
-  onClose?: () => void;
-  children: ReactNode;
+interface Props extends PropsWithChildren {
   fullHeight?: boolean;
 }
 
