@@ -1,27 +1,24 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import CardBox from '../CardBox';
 import Card from '../Card';
 import Button from '../card-add/ClickableLink';
 import Input from '../Input';
 
+import { CardContext } from '../../context/CardContext';
+
 import updateValidValue from '../../utils/updateValidValue';
 import { CARD_ALIAS_LIMIT } from '../../constants/cardLimit';
 
-const cardNumber = {
-  firstNumber: '1111',
-  secondNumber: '1111',
-  thirdNumber: '1111',
-  fourthNumber: '1111',
-};
-
-const expirationDate = {
-  month: '12',
-  year: '23',
-};
-
 export default function CompletedCard() {
   const [cardAlias, setCardAlias] = useState('');
+
+  const { cardState } = useContext(CardContext);
+
+  console.log(cardState);
+  if (!cardState) {
+    return;
+  }
 
   const handleChangeCardAlias = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -46,9 +43,9 @@ export default function CompletedCard() {
         <CardBox>
           <Card
             variant="big"
-            cardNumber={cardNumber}
-            ownerName="YUJO"
-            expirationDate={expirationDate}
+            cardNumber={cardState.cardNumber}
+            ownerName={cardState.ownerName}
+            expirationDate={cardState.expirationDate}
           />
         </CardBox>
         <div className="input-container flex-center w-100">
