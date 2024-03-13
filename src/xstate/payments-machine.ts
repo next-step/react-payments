@@ -1,10 +1,6 @@
 import { createMachine, assign } from 'xstate'
 import { v4 as uuidv4 } from 'uuid'
 import { CardState, CardBeforeRegister, CardInputState } from '@/types/card'
-import {
-  loadCardListFromLocalStorage,
-  updateCardListOfLocalStorage,
-} from '@/utils/card-local-storage'
 
 const INITIAL_CARD = {
   id: '',
@@ -57,7 +53,7 @@ export const paymentsMachine = createMachine({
   id: 'payments',
   context: {
     cardBeforeRegister: INITIAL_CARD,
-    cardList: loadCardListFromLocalStorage(),
+    cardList: [],
   },
   states: {
     카드_등록: {
@@ -81,18 +77,14 @@ export const paymentsMachine = createMachine({
         create_confirm: {
           target: '카드_목록',
           actions: assign({
-            cardList: ({ event: { nickName }, context }) => {
-              const newCardList = [
-                ...context.cardList,
-                {
-                  ...context.cardBeforeRegister,
-                  updatedAt: new Date(),
-                  cardNickName: nickName,
-                },
-              ]
-              updateCardListOfLocalStorage(newCardList)
-              return newCardList
-            },
+            cardList: ({ event: { nickName }, context }) => [
+              ...context.cardList,
+              {
+                ...context.cardBeforeRegister,
+                updatedAt: new Date(),
+                cardNickName: nickName,
+              },
+            ],
             cardBeforeRegister: INITIAL_CARD,
           }),
         },
@@ -130,9 +122,7 @@ export const paymentsMachine = createMachine({
         remove: {
           actions: assign({
             cardList: ({ context: { cardList }, event: { targetId } }) => {
-              const filteredCardList = cardList.filter(({ id }) => id !== targetId)
-              updateCardListOfLocalStorage(filteredCardList)
-              return filteredCardList
+              return cardList.filter(({ id }) => id !== targetId)
             },
           }),
         },

@@ -6,6 +6,11 @@ import { CardNicknameInputStep } from '@/steps/card-nickname-input'
 import { Flex, Stepper } from '@/components'
 import { useMachine } from '@xstate/react'
 import { paymentsMachine } from '@/xstate/payments-machine'
+import { useEffect } from 'react'
+import { Snapshot } from 'xstate'
+
+const storageValue = localStorage.getItem('payments')
+const persistedState = storageValue ? (JSON.parse(storageValue) as Snapshot<unknown>) : undefined
 
 function App() {
   const [
@@ -14,7 +19,17 @@ function App() {
       context: { cardList, cardBeforeRegister },
     },
     send,
-  ] = useMachine(paymentsMachine)
+    actorRef,
+  ] = useMachine(paymentsMachine, {
+    snapshot: persistedState,
+  })
+
+  useEffect(() => {
+    const subscription = actorRef.subscribe(snapshot => {
+      localStorage.setItem('payments', JSON.stringify(snapshot))
+    })
+    return () => subscription.unsubscribe()
+  }, [actorRef])
 
   return (
     <OverlayContextProvider>
