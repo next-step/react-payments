@@ -7,6 +7,7 @@ export type CardNumber = {
   fourth?: string
 }
 export type CardInfo = {
+  cardNo?: number
   cardNumber?: CardNumber
   month?: string
   year?: string
@@ -15,6 +16,7 @@ export type CardInfo = {
   cvc?: string
   cardType?: string
   cardAlias?: string
+  cardList?: Array<Omit<CardInfo, 'cardList'>>
 }
 
 export const CardInfoContext = createContext<CardInfo>({})
