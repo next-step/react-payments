@@ -1,5 +1,5 @@
-import { ChangeEvent, useContext } from 'react';
-import { CardFormContext, CardFormOptions } from './CardFormContext';
+import { ChangeEvent } from 'react';
+import { CardFormOptions, useProvidedCardFormContext } from './CardFormContext';
 
 type UseCardOptionHook = {
   options: CardFormOptions;
@@ -12,7 +12,7 @@ export const useCardOption = (): UseCardOptionHook => {
     state: { options },
     updateCardCompany,
     handleCardNicknameInputChange,
-  } = useContext(CardFormContext);
+  } = useProvidedCardFormContext();
 
   return {
     options,

@@ -1,5 +1,5 @@
-import { ChangeEvent, useContext } from 'react';
-import { CardFormContext, CardFormFields } from './CardFormContext';
+import { ChangeEvent } from 'react';
+import { CardFormFields, useProvidedCardFormContext } from './CardFormContext';
 
 type UseCardInputHook = {
   fields: CardFormFields;
@@ -19,7 +19,7 @@ export const useCardInput = (): UseCardInputHook => {
     handleExpirationYearInputChange,
     handleOwnerNameInputChange,
     handleVerificationCodeInputChange,
-  } = useContext(CardFormContext);
+  } = useProvidedCardFormContext();
 
   return {
     fields,
