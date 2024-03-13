@@ -1,5 +1,5 @@
 import { MobilePanel } from '@/components/atoms';
-import CardRegistrationSuccessTemplate from '@/components/templates/CardRegistrationSuccess';
+import CardRegistrationEditTemplate from '@/components/templates/CardRegistrationEdit';
 import CreditCardRepository from '@/repositories/CreditCardRepository';
 import { redirect, useNavigate, useParams } from 'react-router-dom';
 import { CardFormProvider } from '../CardCreate/CardFormContext';
@@ -44,7 +44,7 @@ export default function CardEdit() {
           },
         }}
       >
-        <CardRegistrationSuccessTemplate onPrev={navigateToCardList} onEdit={handleSubmitFinal} />
+        <CardRegistrationEditTemplate onPrev={navigateToCardList} onEdit={handleSubmitFinal} />
       </CardFormProvider>
     </MobilePanel>
   );
