@@ -40,8 +40,17 @@ export default function AddCardForm() {
     secondNumber: '',
   });
 
-  const cards = useContext(CardContext);
-  console.log(cards);
+  const { handleChangeCardState } = useContext(CardContext);
+
+  const handleChangeState = () => {
+    handleChangeCardState({
+      cardNumber,
+      expirationDate,
+      ownerName,
+      securityCode,
+      cardPassword,
+    });
+  };
 
   return (
     <div className="root">
@@ -69,7 +78,11 @@ export default function AddCardForm() {
           cardPassword={cardPassword}
           setCardPassword={setCardPassword}
         />
-        <ClickableLink location="/add/complete" text="다음" />
+        <ClickableLink
+          location="/add/complete"
+          text="다음"
+          onClick={handleChangeState}
+        />
       </div>
     </div>
   );
