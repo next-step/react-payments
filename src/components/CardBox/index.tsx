@@ -1,13 +1,13 @@
 import { useContext } from 'react'
-import { CardInfoContext } from '../../context/paymentContext'
+import { CardInfo, CardInfoContext } from '../../context/paymentContext'
 import { checkAllMasking } from '../../utils/check'
 import ui from '../../styles/index.module.css'
 
-export const CardBox = () => {
+export const CardBox = ({ card }: { card?: CardInfo }) => {
   const cardInfo = useContext(CardInfoContext)
 
   const cardNumberValue = () => {
-    const cardNumber = cardInfo.cardNumber
+    const cardNumber = cardInfo.cardNumber || card?.cardNumber
     return {
       first: cardNumber?.first || '',
       second: cardNumber?.second || '',
@@ -17,8 +17,8 @@ export const CardBox = () => {
   }
   return (
     <div className={ui['card-box']}>
-      <div className={ui[`${cardInfo ? 'big-card' : 'empty-card'}`]}>
-        <div className={ui['card-top']}>{cardInfo.cardType ? cardInfo.cardType + '카드' : ''}</div>
+      <div className={ui[`${'empty-card'}`]}>
+        <div className={ui['card-top']}>{cardInfo.cardType ? cardInfo.cardType + '카드' : card ? card.cardType + '카드' : ''}</div>
         <div className={ui['card-middle']}>
           <div className={ui[`${cardInfo ? 'big-card__chip' : 'small-card__chip'}`]}></div>
           <p>{` 
@@ -28,9 +28,9 @@ export const CardBox = () => {
         <div className={ui['card-bottom']}>
           <div className={ui['card-bottom__info']}>
             <div>
-              <span className={ui['card-text']}>{cardInfo.name || 'NAME'}</span>
+              <span className={ui['card-text']}>{card?.name ? card.name : cardInfo.name || 'NAME'}</span>
               <span className={ui['card-text']}>
-                {cardInfo.month || 'MM'} / {cardInfo.year || 'YY'}
+                {card?.month ? card.month : cardInfo.month || 'MM'} / {card?.year ? card.year : cardInfo.year || 'YY'}
               </span>
             </div>
           </div>
