@@ -1,4 +1,10 @@
-import { Children, ReactElement, ReactNode, isValidElement } from 'react';
+import {
+  Children,
+  ReactElement,
+  ReactNode,
+  isValidElement,
+  useState,
+} from 'react';
 import { PAGES } from '../constants/pages';
 
 export interface StepperProps<Step extends PagesType> {
@@ -15,12 +21,18 @@ export interface StepProps<Step extends PagesType> {
 export type PagesType = (typeof PAGES)[keyof typeof PAGES];
 
 const useStepper = <Step extends PagesType>(initialStep: Step) => {
+  const [currentStep, setCurrentStep] = useState<PagesType>(initialStep);
   const searchParams = new URLSearchParams(location.search);
-  const step = searchParams.get('step') ?? initialStep;
+  const step = searchParams.get('step') ?? currentStep;
 
-  const setStep = (step: PagesType) => {
-    searchParams.set('step', step);
-    location.search = searchParams.toString();
+  const setStep = (newStep: PagesType) => {
+    const currentSearchParams = new URLSearchParams(location.search);
+    currentSearchParams.set('step', newStep);
+
+    const newUrl = `${location.pathname}?${currentSearchParams.toString()}`;
+
+    history.pushState({ step: newStep }, '', newUrl);
+    setCurrentStep(newStep);
   };
 
   const Stepper = <Step extends PagesType>({
