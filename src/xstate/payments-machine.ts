@@ -1,7 +1,6 @@
 import { createMachine, assign } from 'xstate'
 import { v4 as uuidv4 } from 'uuid'
-import { CardState } from '@/hooks/use-card-state'
-import { CardBeforeRegister, CardInputState } from '@/types/card'
+import { CardState, CardBeforeRegister, CardInputState } from '@/types/card'
 
 const INITIAL_CARD = {
   id: '',
