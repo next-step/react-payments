@@ -42,7 +42,7 @@ export default function AddCardForm() {
 
   const { handleChangeCardState } = useContext(CardContext);
 
-  const handleChangeState = () => {
+  const handleClickButton = () => {
     handleChangeCardState({
       cardNumber,
       expirationDate,
@@ -81,7 +81,7 @@ export default function AddCardForm() {
         <ClickableLink
           location="/add/complete"
           text="다음"
-          onClick={handleChangeState}
+          onClick={handleClickButton}
         />
       </div>
     </div>

@@ -13,9 +13,8 @@ import { CARD_ALIAS_LIMIT } from '../../constants/cardLimit';
 export default function CompletedCard() {
   const [cardAlias, setCardAlias] = useState('');
 
-  const { cardState } = useContext(CardContext);
+  const { cardState, handleChangeCardState } = useContext(CardContext);
 
-  console.log(cardState);
   if (!cardState) {
     return;
   }
@@ -31,6 +30,12 @@ export default function CompletedCard() {
       value,
       isMonth: false,
       isNumber: false,
+    });
+  };
+
+  const handleClickButton = () => {
+    handleChangeCardState({
+      cardAlias,
     });
   };
 
@@ -58,7 +63,12 @@ export default function CompletedCard() {
             onChange={handleChangeCardAlias}
           />
         </div>
-        <Button className="mt-55" location="/" text="다음" />
+        <Button
+          className="mt-55"
+          location="/"
+          text="다음"
+          onClick={handleClickButton}
+        />
       </div>
     </div>
   );
