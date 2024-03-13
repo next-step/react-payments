@@ -47,11 +47,11 @@ export const paymentsMachine = createMachine({
           type: 'create_start'
         }
       | {
-          type: 'create_step1'
+          type: 'create_card_input'
           cardInput: CardInputState
         }
       | {
-          type: 'create_step2'
+          type: 'create_confirm'
           nickName: string
         }
       | {
@@ -64,7 +64,7 @@ export const paymentsMachine = createMachine({
         }
       | {
           type: 'edit_confirm'
-          nickname: string
+          nickName: string
         }
   },
 
@@ -83,30 +83,30 @@ export const paymentsMachine = createMachine({
             cardBeforeRegister: INITIAL_CARD,
           }),
         },
-        create_step1: {
+        create_card_input: {
           target: '카드_등록_확인',
           actions: assign({
-            cardBeforeRegister: ({ event, context }) => ({ ...event.cardInput, id: uuidv4() }),
+            cardBeforeRegister: ({ event: { cardInput } }) => ({ ...cardInput, id: uuidv4() }),
           }),
         },
       },
     },
     카드_등록_확인: {
       on: {
-        create_step2: {
+        create_confirm: {
           target: '카드_목록',
           actions: assign({
-            cardList: ({ event, context }) => {
+            cardList: ({ event: { nickName }, context }) => {
+              const newCardNickname =
+                nickName.length > 0
+                  ? nickName
+                  : (context.cardBeforeRegister.cardType?.name as string)
               const newCardList = [
                 ...context.cardList,
                 {
                   ...context.cardBeforeRegister,
                   updatedAt: new Date(),
-                  id: uuidv4(),
-                  cardNickName:
-                    event.nickName.length > 0
-                      ? event.nickName
-                      : (context.cardBeforeRegister.cardType?.name as string),
+                  cardNickName: newCardNickname,
                 },
               ]
               updateCardListOfLocalStorage(newCardList)
@@ -122,16 +122,15 @@ export const paymentsMachine = createMachine({
         edit_confirm: {
           target: '카드_목록',
           actions: assign({
-            cardList: ({ event, context }) =>
-              context.cardList.map(card => {
-                if (card.id === context.cardBeforeRegister.id) {
-                  return {
-                    ...context.cardBeforeRegister,
-                    cardNickName: event.nickname,
-                    updatedAt: new Date(),
-                  }
-                }
-                return card
+            cardList: ({ event: { nickName }, context: { cardList, cardBeforeRegister } }) =>
+              cardList.map(card => {
+                return card.id === cardBeforeRegister.id
+                  ? {
+                      ...cardBeforeRegister,
+                      cardNickName: nickName,
+                      updatedAt: new Date(),
+                    }
+                  : card
               }),
             cardBeforeRegister: INITIAL_CARD,
           }),
@@ -149,8 +148,10 @@ export const paymentsMachine = createMachine({
         },
         remove: {
           actions: assign({
-            cardList: ({ context, event }) => {
-              return context.cardList.filter(({ id }) => id !== event.targetId)
+            cardList: ({ context: { cardList }, event: { targetId } }) => {
+              const filteredCardList = cardList.filter(({ id }) => id !== targetId)
+              updateCardListOfLocalStorage(filteredCardList)
+              return filteredCardList
             },
           }),
         },
