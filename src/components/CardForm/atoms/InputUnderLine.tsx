@@ -1,6 +1,4 @@
-type InputUnderLineProps = React.InputHTMLAttributes<HTMLInputElement> & {
-  className?: string;
-};
+type InputUnderLineProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 export default function InputUnderLine({
   className,
