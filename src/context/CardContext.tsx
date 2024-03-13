@@ -1,17 +1,28 @@
 import { PropsWithChildren, createContext, useState } from 'react';
+
 import { CardType } from '../types/CardFormType';
 
-export const CardContext = createContext<CardType[]>([]);
+type initialCardStateType = {
+  cardState: CardType;
+  handleChangeCardState: (data: CardType) => void;
+};
+
+const initialState: initialCardStateType = {
+  cardState: {},
+  handleChangeCardState: () => null,
+};
+
+export const CardContext = createContext(initialState);
 
 export default function CardProvider({ children }: PropsWithChildren) {
-  const [cards, setCards] = useState<CardType[]>([]);
+  const [cardState, setCardState] = useState<CardType>({});
 
-  const handleChangeCards = (cards: CardType[]) => {
-    setCards(cards);
+  const handleChangeCardState = (data: CardType) => {
+    setCardState((cardState) => ({ ...cardState, ...data }));
   };
 
   return (
-    <CardContext.Provider value={{ cards, handleChangeCards }}>
+    <CardContext.Provider value={{ cardState, handleChangeCardState }}>
       {children}
     </CardContext.Provider>
   );

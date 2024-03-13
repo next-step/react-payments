@@ -14,10 +14,10 @@ export type ExpirationDateType = {
 };
 
 export type CardType = {
-  cardNumber: CardNumberType;
-  expirationDate: ExpirationDateType;
-  ownerName: string;
-  securityCode: string;
-  cardPassword: CardPasswordNumberType;
-  cardAlias: string;
+  cardNumber?: CardNumberType;
+  expirationDate?: ExpirationDateType;
+  ownerName?: string;
+  securityCode?: string;
+  cardPassword?: CardPasswordNumberType;
+  cardAlias?: string;
 };
