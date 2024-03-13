@@ -1,9 +1,11 @@
-import { ComponentProps } from 'react';
+import { ComponentProps, forwardRef } from 'react';
 
-export default function Box({ children, className, ...restProps }: ComponentProps<'div'>) {
+const Box = forwardRef<HTMLDivElement, ComponentProps<'div'>>(({ children, className, ...restProps }, ref) => {
   return (
-    <div className={className} {...restProps}>
+    <div className={className} {...restProps} ref={ref}>
       {children}
     </div>
   );
-}
+});
+
+export default Box;

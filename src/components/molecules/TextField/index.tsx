@@ -1,13 +1,16 @@
 import { HFlex, Text, VFlex } from '@/components/atoms';
 import { TYPOGRAPHY_SIZE_MAP } from '@/styles/guide';
 import { ComponentProps, useId } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { twJoin, twMerge } from 'tailwind-merge';
+
+type Variant = 'solid' | 'underline';
 
 export interface TextFieldProps extends ComponentProps<'div'> {
   value: string;
   name: string;
   onChange: NonNullable<ComponentProps<'input'>['onChange']>;
   type: NonNullable<ComponentProps<'input'>['type']>;
+  variant?: Variant;
   placeholder?: string;
   lengthLimit?: {
     show?: boolean;
@@ -23,6 +26,7 @@ export default function TextField({
   name,
   onChange,
   label,
+  variant = 'solid',
   placeholder,
   inputProps,
   lengthLimit,
@@ -52,7 +56,13 @@ export default function TextField({
         placeholder={placeholder}
         maxLength={lengthLimit?.maxLength}
         {...inputProps}
-        className={twMerge('focus:outline-none bg-[#ecebf1] h-[45px] rounded-md px-4', inputProps?.className)}
+        className={twMerge(
+          'focus:outline-none h-[45px] px-4',
+          twJoin(variant === 'underline' && 'border-b border-black'),
+          twJoin(variant === 'solid' && 'bg-[#ecebf1] rounded-md'),
+
+          inputProps?.className
+        )}
       />
     </VFlex>
   );

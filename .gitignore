@@ -18,8 +18,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# These files are in progress
-src/entities
-src/hooks
-src/components/organisms/CreditCard
