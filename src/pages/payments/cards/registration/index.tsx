@@ -1,7 +1,7 @@
 import { useMachine } from '@xstate/react'
 
 import { Form } from '@/hooks/form/formContext'
-import { paymentsMachine } from '@/service/paymentMachine'
+import { paymentsMachine } from '@/service/payments'
 
 import { Step1 } from './components/Step1'
 import { Step1Validate } from './service/validations'

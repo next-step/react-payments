@@ -1,6 +1,6 @@
 import { TextCounter } from '@/components/TextCounter'
 import { useFormContext } from '@/hooks/form/formContext'
-import { FormType } from '@/pages/payments/cards/type'
+import { FormType } from '@/service/payments/payments.type'
 
 import { CARD_HOLDER_NAME_MAX_LENGTH } from '../../../../service/const'
 

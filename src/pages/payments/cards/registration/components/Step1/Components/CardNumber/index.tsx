@@ -1,5 +1,5 @@
 import { useFormContext } from '@/hooks/form/formContext'
-import { FormType } from '@/pages/payments/cards/type'
+import { FormType } from '@/service/payments/payments.type'
 
 export const CardNumber = () => {
   const { getFieldProps, errors, touched } = useFormContext<FormType>()

@@ -1,4 +1,5 @@
-import { FormType } from '../../type'
+import { FormType } from '@/service/payments/payments.type'
+
 import {
   CARD_HOLDER_NAME_MAX_LENGTH,
   CARD_NUMBER_INPUT_REGEX,
