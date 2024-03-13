@@ -50,9 +50,11 @@ export const CardList = () => {
           const { cardName } = card;
 
           return (
-            <div className='flex-column-center gap-5'>
+            <div
+              key={card.createdAt.toString()}
+              className='flex-column-center gap-5'
+            >
               <Card
-                key={card.cardName}
                 data={card}
                 onClick={() => handleCardClick(card)}
                 isComplete={true}
