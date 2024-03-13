@@ -1,4 +1,4 @@
-import { ChangeEvent, FocusEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FocusEvent, FormEvent, useState } from 'react';
 import {
   FormErrors,
   FormTouched,
@@ -16,9 +16,21 @@ export default function useForm<T extends FormValues>({
   const [touched, setTouched] = useState<FormTouched<T>>({} as FormTouched<T>);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target;
     setValues({
       ...values,
-      [e.target.name]: e.target.value,
+      [name]: value,
+    });
+
+    const fieldName = name;
+    const fieldErrors = validate({
+      ...values,
+      [fieldName]: value,
+    });
+
+    setErrors({
+      ...errors,
+      [fieldName]: fieldErrors[fieldName],
     });
   };
 
@@ -31,8 +43,6 @@ export default function useForm<T extends FormValues>({
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
-    console.log('UseForm@@@', e);
 
     // 필드 방문 표시
     const nextTouched = Object.keys(values).reduce(
@@ -54,10 +64,6 @@ export default function useForm<T extends FormValues>({
 
     onSubmit(values);
   };
-
-  useEffect(() => {
-    setErrors(validate(values));
-  }, [values]);
 
   const getFieldProps = (name: keyof T) => {
     const value = values[name];
