@@ -9,6 +9,7 @@ type BaseInputProps = DetailedHTMLProps<
 type InputProps = {
   variant: 'basic' | 'secondary' | 'underline';
   className?: string;
+  type: string;
 } & BaseInputProps;
 
 export default function Input({ variant, className, ...props }: InputProps) {
