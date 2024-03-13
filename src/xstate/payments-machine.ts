@@ -1,7 +1,7 @@
 import { createMachine, assign } from 'xstate'
-import { CardInputState } from '@/hooks/use-card-input-state'
 import { v4 as uuidv4 } from 'uuid'
 import { CardState } from '@/hooks/use-card-state'
+import { CardBeforeRegister, CardInputState } from '@/types/card'
 
 const INITIAL_CARD = {
   id: '',
@@ -13,8 +13,6 @@ const INITIAL_CARD = {
   cardNickName: '',
   cardPin: '',
 }
-
-interface CardBeforeReigster extends Omit<CardState, 'updatedAt'> {}
 
 const CARD_STATE_LOCALSTORAGE_KEY = 'CARD_STATE'
 
@@ -33,10 +31,10 @@ const updateCardListOfLocalStorage = (cardList: CardState[]) => {
 }
 
 export const paymentsMachine = createMachine({
-  /** @xstate-layout N4IgpgJg5mDOIC5QAcCGBPAtmAdgF1gDpAXOcB2WgfUEeWwXQ6BiAYwCcxU8xz7Ud6wAbAbQAMAXUQoA9rACWeKeJxiQAD0QBaAEwBGAMyFNADkPqAbNv2bj+9foDsAGhDpEAFkH7C1m9u-PNNgKymFgC+wQ5oWLgEJBQ0DMys7LBsyJpCokggyJIycgqZKgjq-h7amjr6xqYmggCcztoOTgjGfoTOxf6G+rWC6s4DoeEY2PhEZFTU5ICqa4Ae4-EsbOTJYMjq6YrZ0rLyioWq2v3tmv6n+trONoLO-upNiP71hMa1vcX6HZqu+kNZI1HjCiADCHAKgTtEgMg48gAZlJGJgNpktrldgU1Np-DZCP4bhibhZtLVDvcinV2rVHmYbNTBGZBP5fhFRtEJoBKrroTEWSTwqEYeEREm2eT2anUgmM2JsFk04u0NjFpkajkQZU0Hi8OL8xiuzmMjP+Yxi5HZ4IgkOSvP5Ik2OR2+VA+1O6meXRu2vF6lq6iVzTFtXJlNsNLpPzCf0ihrZdGYmHEADcwAKsrbhWiEKpLs7apZPTYPqZKST-II1bZteVzjYOvoGb8cOIIHBNgaCDahaiHWpjIJBC6PoErsZPd6SZp-dpBDZLMWXlLaaHhhGWbFqG2UfblIgDIQayculP-GPxbqSR1dArJ1K5RPjJd9UvAZMZrM13aRemvs5sbUqw1LH0rFpElWixDpAl8V5DhMBdw2ZR9QVfVNO3TG5exLWlagsJ1LB9LdxR3S8SzKWp9B7b17zgo12UQjtNxQspCFeZxDCHG5AisElr2xZwKQpasdE0dRQlCIA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QAcCGBPAtmAdgF1gDpAXOcB2WgfUEeWwXQ6BiAYwCcxU8xz7Ud6wAbAbQAMAXUQoA9rACWeKeJxiQAD0QBaAEwBGAMyFNATnUB2QUYAsADm1mArNu0WANCHSIzZ3QDZNJuxZvqFuaangC+oc5oWLgEJBQ0DMys7JyMEORSOMgArnhCokggyJIycgqFKghGnoTGZqb69ppmnmaaNs6uCDb6NoSCZsaenvqegYI2muGRGNj4RGRU1OSAqmuAHuOJLGwc8gBmUoyY+YrF0rLyipWq2kZ9gRa26p4W-q36nYg9fQOB9S0PIWmRVmMQWFEAGEOAVAnaJAZDscPtDsdCqdShcKmoPEZCEZRpZBI0gjZ3B8EOoCYQzL1CUZaYIHBMgVE5rFFoBKrroTC27FgeFQjDyIhOJXO5VAV3JNRsRhCmkEnhukvspO0mk0tSM2mJPk8JhaTJB8zi5A5MIgcN5-MFBQkZzKlzUNgChE8NgeNl18vUhm0pPJ+kp1IctJMDIsBuiRvZdGYmHEADcwMjbWixcpHe5CEFyZpjL0xoJ1KSbIJBFmJu16Z4ftpwhEQDhxBA4CdDQRhXb0eK1NWy673Z6xj7SQZKQ8jNntDmJmYIyywUsO6mHQh7IR9JorPjhv5tPonC5EA5dJNXXZ7HiHnPQcaaKs1kvRSvVM0zIQeuYPM9CxZyb7Dwg3jYoMHptPojTqE84b1syN6LFCj72hiCCqLYZaCHKe4hE6UH-l0co1BYpgmDoBhEYWtYwW2C4cohXbpihHjquBlgWGMtger+Kqau+VJfIMFikeodahEAA */
   types: {} as {
     context: {
-      cardBeforeRegister: CardBeforeReigster
+      cardBeforeRegister: CardBeforeRegister
       cardList: CardState[]
     }
     events:
@@ -60,7 +58,7 @@ export const paymentsMachine = createMachine({
         }
       | {
           type: 'edit_start'
-          targetCard: CardState
+          targetCard: CardBeforeRegister
         }
       | {
           type: 'edit_confirm'
