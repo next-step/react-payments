@@ -3,8 +3,8 @@ import CardAdd from './pages/AddCard/AddCard';
 import CardList from './pages/CardList/CardList';
 import AddCardSuccess from './pages/AddCardSuccess/AddCardSuccess';
 import { CardStateProvider } from './providers/CardState/CardStateProvider';
-import useStepper from './hooks/useStepper';
 import { CardListProvider } from './providers/CardList/CardListProvider';
+import useStepper from './hooks/useStepper';
 
 function App() {
   const { Stepper, setStep } = useStepper(PAGES.CARD_LIST);
@@ -18,7 +18,7 @@ function App() {
               <CardList
                 onNext={() => setStep(PAGES.ADD_CARD)}
                 onEdit={(id) => {
-                  setStep(PAGES.ADD_CARD_SUCCESS);
+                  setStep(PAGES.ADD_CARD_SUCCESS, id);
                 }}
               />
             </Stepper.Step>

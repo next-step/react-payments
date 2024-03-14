@@ -17,7 +17,7 @@ interface CardListContextType {
   cardList: CardInfo[];
   saveCardList: (newCard: CardInfo) => void;
   deleteCard: (id: string) => void;
-  getCard: (id: string) => void;
+  getCard: (id: string) => CardInfo;
 }
 
 export const CardListContext = createContext<CardListContextType | undefined>(
