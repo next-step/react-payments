@@ -10,19 +10,16 @@ import { useCardState } from '../../providers/CardState/hooks/useCardState';
 
 interface Props {
   onNext: () => void;
+  onGoBack: () => void;
 }
 
-const AddCard = ({ onNext }: Props) => {
+const AddCard = ({ onNext, onGoBack }: Props) => {
   const { cardState } = useCardState();
-
-  const handleAddCard = () => {
-    onNext();
-  };
 
   return (
     <>
       <Header className='mb-10'>
-        <div onClick={onNext}>{'<'}&nbsp;</div>
+        <div onClick={onGoBack}>{'<'}&nbsp;</div>
         <span>카드추가</span>
       </Header>
 
@@ -34,7 +31,7 @@ const AddCard = ({ onNext }: Props) => {
       <CardPassword />
 
       <div className='button-box'>
-        <Button onClick={handleAddCard}>다음</Button>
+        <Button onClick={onNext}>다음</Button>
       </div>
     </>
   );
