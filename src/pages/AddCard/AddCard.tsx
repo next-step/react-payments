@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Button from '../../components/Button/Button';
 import Card from '../../components/Card/Card';
 import Header from '../../components/Header/Header';
@@ -14,7 +15,11 @@ interface Props {
 }
 
 const AddCard = ({ onNext, onGoBack }: Props) => {
-  const { cardState } = useCardState();
+  const { cardState, resetCardState } = useCardState();
+
+  useEffect(() => {
+    resetCardState();
+  }, [resetCardState]);
 
   return (
     <>
