@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 import { DefaultInput } from './DefaultInput';
 
 const meta = {
-  title: 'Atom/Input/DefaultInput',
+  title: 'Input/Atom/DefaultInput',
   component: DefaultInput,
   argTypes: {
     className: { control: 'text' },
