@@ -53,7 +53,8 @@ export default function CardAdd({ onList, onNext }) {
     isSecurityCodeValidate &&
     isPasswordValidate;
 
-  const onClickNextBtn = () => {
+  const onClickNextBtn = (event) => {
+    event.preventDefault();
     CardStorage.addCard(cardState);
     onNext();
   };

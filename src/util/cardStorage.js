@@ -1,23 +1,17 @@
-import { MONTH, YEAR } from "../constants/expirationDate";
-
 const CARD_LIST = "cardList";
+
+function getLocalStorageKeyByCardNumber(cardNumber) {
+  const cardNumberString = Object.values(cardNumber).join("_");
+  return "card_" + cardNumberString;
+}
 export class CardStorage {
-  static addCard({
-    cardNumber,
-    cardOwnerName,
-    expirationDate,
-    password,
-    securityCode,
-  }) {
+  static addCard(cardInfo) {
     const cardList = JSON.parse(localStorage.getItem(CARD_LIST)) || [];
-    cardList.push({
-      cardNumber,
-      cardOwnerName,
-      expirationDateMM: expirationDate[MONTH],
-      expirationDateYY: expirationDate[YEAR],
-      password,
-      securityCode,
-    });
+
+    const key = getLocalStorageKeyByCardNumber(cardInfo.cardNumber);
+    cardList.push(key);
+
+    localStorage.setItem(key, JSON.stringify(cardInfo));
     localStorage.setItem(CARD_LIST, JSON.stringify(cardList));
   }
 }
