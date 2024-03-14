@@ -23,6 +23,10 @@
   color: #525252;
 }
 
+.input-secret {
+  -webkit-text-security: disc;
+}
+
 .input-basic {
   background-color: #ecebf1;
   height: 45px;
