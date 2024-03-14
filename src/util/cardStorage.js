@@ -1,12 +1,13 @@
 const CARD_LIST = "cardList";
 
-function getLocalStorageKeyByCardNumber(cardNumber) {
+export function getLocalStorageKeyByCardNumber(cardNumber) {
   const cardNumberString = Object.values(cardNumber).join("_");
   return "card_" + cardNumberString;
 }
+
 export class CardStorage {
   static getCardInfoList() {
-    const cardKeyList = JSON.parse(localStorage.getItem(CARD_LIST));
+    const cardKeyList = JSON.parse(localStorage.getItem(CARD_LIST)) || [];
 
     return cardKeyList.map((cardKey) => {
       return JSON.parse(localStorage.getItem(cardKey));
