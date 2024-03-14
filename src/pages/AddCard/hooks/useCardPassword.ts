@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
 import { useCardState } from '../../../providers/CardState/hooks/useCardState';
 
-const PASSWORD_INPUT_MAX_LENGTH = 2;
+const PASSWORD_INPUT_MAX_LENGTH = 1;
+
 const useCardPassword = () => {
   const { cardState, setCardState } = useCardState();
 
