@@ -3,7 +3,7 @@ import Text from ".";
 import { render } from "@testing-library/react";
 
 describe("Text 테스트", () => {
-  it("특정 태그를 넣었을 때 해당 태그로 렌더링된다", () => {
+  it("h1 태그를 넣었을 때 h1 태그로 렌더링된다", () => {
     render(<Text as="h1"></Text>);
 
     const box = document.querySelector("h1");

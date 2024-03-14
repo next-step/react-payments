@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import Box from ".";
 
 describe("Box 테스트", () => {
-  it("특정 태그를 넣었을 때 해당 태그로 렌더링된다", () => {
+  it("label 태그를 넣었을 때 label 태그로 렌더링된다", () => {
     render(<Box as="label"></Box>);
 
     const box = document.querySelector("label");

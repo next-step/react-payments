@@ -38,7 +38,7 @@ describe("Input 입력 테스트", () => {
   });
 
   // 비슷한 유형의 테스트를 다른 곳에서 작성했는데 또 할 필요가 있을까?
-  it("특정 태그를 넣었을 때 해당 태그로 렌더링된다.", () => {
+  it("textarea 태그를 넣었을 때 textarea 태그로 렌더링된다.", () => {
     render(
       <Form>
         <Input as="textarea" type={"number"} name={"number"} />
