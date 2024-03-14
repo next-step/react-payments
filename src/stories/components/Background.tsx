@@ -1,7 +1,11 @@
 import React from 'react';
 
 interface BackgroundProps {
+  title?: string;
   config?: {
+    display?: string;
+    alignItems?: string;
+    justifyContent?: string;
     width?: string;
     height?: string;
     backgroundColor?: string;
@@ -12,16 +16,23 @@ interface BackgroundProps {
 }
 
 const DEFAULT_CONFIG = {
-  width: '300px',
-  height: '100px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: 'auto',
+  height: 'auto',
   backgroundColor: 'rgba(0, 0, 0, 0.1)',
-  padding: '5px 20px',
+  padding: '20px',
   borderRadius: '10px',
 } as const;
 
 export const Background = ({
+  title,
   children,
   config: {
+    display = DEFAULT_CONFIG.display,
+    alignItems = DEFAULT_CONFIG.alignItems,
+    justifyContent = DEFAULT_CONFIG.justifyContent,
     width = DEFAULT_CONFIG.width,
     height = DEFAULT_CONFIG.height,
     backgroundColor = DEFAULT_CONFIG.backgroundColor,
@@ -30,8 +41,22 @@ export const Background = ({
   } = DEFAULT_CONFIG,
 }: BackgroundProps) => {
   return (
-    <div style={{ width, height, backgroundColor, padding, borderRadius }}>
-      {children}
-    </div>
+    <>
+      {title && <h3>{title}</h3>}
+      <div
+        style={{
+          display,
+          alignItems,
+          justifyContent,
+          width,
+          height,
+          backgroundColor,
+          padding,
+          borderRadius,
+        }}
+      >
+        {children}
+      </div>
+    </>
   );
 };
