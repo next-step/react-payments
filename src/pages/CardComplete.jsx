@@ -4,6 +4,7 @@ import { CardContext } from "../../providers/CardState/CardStateProvider";
 import { MONTH, YEAR } from "../constants/expirationDate";
 import Input from "../components/atomic-design-pattern/atom/Input";
 import Button from "../components/atomic-design-pattern/atom/Button";
+import { CardStorage } from "../util/cardStorage";
 
 export default function CardComplete({ onNext }) {
   const { cardState } = useContext(CardContext);
@@ -12,8 +13,11 @@ export default function CardComplete({ onNext }) {
 
   const onSubmitCardComplete = (event) => {
     event.preventDefault();
-    const alias = aliasInputRef.current.value || "카드사 이름";
-    console.log(alias);
+    const alias = aliasInputRef.current.value;
+    if (alias) {
+      CardStorage.changeCardInfo(cardNumber, "alias", alias);
+    }
+
     onNext();
   };
 
