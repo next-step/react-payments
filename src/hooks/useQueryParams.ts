@@ -8,7 +8,7 @@ export const useQueryParams = () => {
 
     for (const key in newParams) {
       // eslint-disable-next-line no-prototype-builtins
-      if (newParams.hasOwnProperty(key)) {
+      if (newParams.hasOwnProperty(key) && newParams[key]) {
         searchParams.set(key, newParams[key]);
       }
     }
