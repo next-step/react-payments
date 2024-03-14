@@ -14,6 +14,7 @@ export default function CardComplete({ onNext }) {
     event.preventDefault();
     const alias = aliasInputRef.current.value || "카드사 이름";
     console.log(alias);
+    onNext();
   };
 
   return (

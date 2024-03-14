@@ -5,7 +5,7 @@ import { CardStateProvider } from "../providers/CardState/CardStateProvider.jsx"
 import { useState } from "react";
 import { PAGE } from "./constants/page.js";
 function App() {
-  const [step, setStep] = useState(PAGE.ADD_CARD_SUCCESS);
+  const [step, setStep] = useState(PAGE.ADD_CARD);
   return (
     <div className="app">
       <CardStateProvider>

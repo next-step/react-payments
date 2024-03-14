@@ -13,6 +13,7 @@ import InputContainer from "../components/atomic-design-pattern/organism/InputCo
 import InputTitle from "../components/atomic-design-pattern/atom/InputTitle";
 import InputGroup from "../components/atomic-design-pattern/molecule/InputGroup";
 import { CardContext } from "../../providers/CardState/CardStateProvider";
+import { CardStorage } from "../util/cardStorage";
 
 export default function CardAdd({ onList, onNext }) {
   const { cardState } = useContext(CardContext);
@@ -51,6 +52,11 @@ export default function CardAdd({ onList, onNext }) {
     isExpirationDateValidate &&
     isSecurityCodeValidate &&
     isPasswordValidate;
+
+  const onClickNextBtn = () => {
+    CardStorage.addCard(cardState);
+    onNext();
+  };
 
   return (
     <form>
@@ -100,7 +106,7 @@ export default function CardAdd({ onList, onNext }) {
       </InputContainer>
       {isShowNextButton && (
         <div className="button-box">
-          <Button variant="link" onClick={onNext}>
+          <Button variant="link" onClick={onClickNextBtn}>
             다음
           </Button>
         </div>
