@@ -1,16 +1,16 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
+import { ButtonHTMLAttributes, DetailedHTMLProps, PropsWithChildren } from 'react';
 
 type BaseButtonProps = DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 >;
 
-interface ButtonProps extends BaseButtonProps {
+interface ButtonProps extends BaseButtonProps, PropsWithChildren {
   type: 'button' | 'submit' | 'reset';
 }
-const Button = ({ type, className, children, ...props }: ButtonProps) => {
+const Button = ({ type = 'button', className, children, ...props }: ButtonProps) => {
   return (
-    <button type={type} {...props}>
+    <button type={type} className={className} {...props}>
       {children}
     </button>
   );

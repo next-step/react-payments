@@ -1,23 +1,20 @@
 import { validCardPassword } from '@/domain/validate';
-import { CardInfoContext } from '@/provider/CardInfoProvider';
-import { ChangeEvent, useContext, useRef } from 'react';
+import { CardInfoContext } from '@/provider/card-info-provider/CardInfoProvider';
+import { ChangeEvent, useContext } from 'react';
 
 const useCardPassword = () => {
-  const inputRefs = useRef<Array<HTMLInputElement>>([]);
-
-  const { cardState, handleCardState } = useContext(CardInfoContext);
-  const handleCardPassword = (e: ChangeEvent<HTMLInputElement>, idx: number) => {
+  const {
+    cardState: { firstCardPassword, secondCardPassword },
+    handleCardState,
+  } = useContext(CardInfoContext);
+  const handleCardPassword = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    const result = validCardPassword(value.replace(/\D/g, ''));
-    const displayValue = result ? value : cardState[name];
-
-    if (inputRefs.current[idx]) {
-      inputRefs.current[idx].value = displayValue;
+    if (validCardPassword(value)) {
+      handleCardState({ [name]: value });
     }
-    handleCardState({ [name]: displayValue });
   };
-  return { handleChange: handleCardPassword, refs: inputRefs };
+  return { firstCardPassword, secondCardPassword, handleChange: handleCardPassword };
 };
 
 export default useCardPassword;

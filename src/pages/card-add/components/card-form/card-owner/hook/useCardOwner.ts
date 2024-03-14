@@ -1,4 +1,4 @@
-import { CardInfoContext } from '@/provider/CardInfoProvider';
+import { CardInfoContext } from '@/provider/card-info-provider/CardInfoProvider';
 import { ChangeEvent, useContext } from 'react';
 
 const useCardOwner = () => {
@@ -11,7 +11,7 @@ const useCardOwner = () => {
     handleCardState({ [name]: value });
   };
 
-  return { state: ownerName, handleChange: handleOwnerName };
+  return { ownerName, handleChange: handleOwnerName };
 };
 
 export default useCardOwner;

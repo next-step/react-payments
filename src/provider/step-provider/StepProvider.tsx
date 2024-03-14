@@ -6,7 +6,7 @@ interface StepType {
 }
 const initialState: StepType = {
   route: 'CARD',
-  navigate: () => null,
+  navigate: () => undefined,
 };
 interface StepProviderProps {
   children: (route: string) => ReactNode;

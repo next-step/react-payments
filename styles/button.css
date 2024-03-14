@@ -6,3 +6,8 @@
 .button-text {
   margin-right: 10px;
 }
+
+.button-border-none {
+  border: none;
+  background-color: #fff;
+}

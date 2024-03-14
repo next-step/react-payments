@@ -4,15 +4,15 @@ import useSecurityCode from './hook/useSecurityCode';
 const MAX_LENGTH = 3;
 
 const CardSecurityCode = () => {
-  const { handleScurityCode, inputRef } = useSecurityCode();
+  const { securityCode, handleScurityCode } = useSecurityCode();
   return (
     <Input
-      className="w-25"
       type="password"
-      maxLength={MAX_LENGTH}
+      className="w-25"
       name="securityCode"
-      onInput={handleScurityCode}
-      ref={inputRef}
+      value={securityCode}
+      onChange={handleScurityCode}
+      maxLength={MAX_LENGTH}
     />
   );
 };

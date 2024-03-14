@@ -1,6 +1,6 @@
 import { validCardNumber } from '@/domain/validate';
-import { CardInfoContext } from '@/provider/CardInfoProvider';
-import { ChangeEvent, useContext, useRef } from 'react';
+import { CardInfoContext } from '@/provider/card-info-provider/CardInfoProvider';
+import { ChangeEvent, useContext } from 'react';
 
 const useNumbers = () => {
   const {
@@ -8,20 +8,14 @@ const useNumbers = () => {
     handleCardState,
   } = useContext(CardInfoContext);
 
-  const handleCardNumbers = (e: ChangeEvent<HTMLInputElement>, idx: number) => {
+  const handleCardNumbers = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    const result = validCardNumber(value.replace(/\D/g, ''));
-    const displayValue = result ? value : cardNumbers?.[name];
-
-    if (inputRefs.current[idx]) {
-      inputRefs.current[idx].value = displayValue || '';
+    if (validCardNumber(value)) {
+      handleCardState({ cardNumbers: { ...cardNumbers, [name]: value } });
     }
-
-    handleCardState({ cardNumbers: { ...cardNumbers, [name]: value } });
   };
 
-  const inputRefs = useRef<Array<HTMLInputElement>>([]);
-  return { state: cardNumbers, handleChange: handleCardNumbers, refs: inputRefs };
+  return { cardNumbers, handleChange: handleCardNumbers };
 };
 
 export default useNumbers;

@@ -1,31 +1,45 @@
-import { CardStateType } from '@/provider/CardInfoProvider';
-import CardNumbers from './CardNumbers';
-import CardBox from './CardBox';
-import CardForm from './CardForm';
+import CardNumbers from './parts/CardNumbers';
+import CardBox from './parts/CardBox';
+import CardForm from './parts/CardForm';
+import CardTitle from './parts/CardTitle';
+import { CardStateType } from '@/domain/type';
 
-type CardProps = CardStateType;
+import CardText from './parts/CardText';
+import Chip from './parts/Chip';
+import CardBottom from './parts/CardBottom';
 
-const Card = ({ ownerName, month, year, cardNumbers }: CardProps) => {
+interface CardProps extends CardStateType {
+  status?: 'small' | 'big' | 'empty';
+  onClick?: () => void;
+}
+
+const Card = ({
+  ownerName = 'NAME',
+  month,
+  year = '',
+  cardNumbers,
+  status = 'small',
+  onClick,
+}: CardProps) => {
   const displayMonth = month ? `${month} / ` : '';
-  const expirationDate = `${displayMonth}${year || ''}`;
+  const expirationDate = `${displayMonth}${year}`;
 
   return (
-    <CardBox>
-      <CardForm status="small">
-        <div className="card-top"></div>
+    <CardBox onClick={onClick}>
+      <CardForm status={status}>
+        <CardTitle>
+          <CardText status={status}>타이틀</CardText>
+        </CardTitle>
         <div className="card-middle">
-          <div className="small-card__chip"></div>
+          <Chip status={status} />
         </div>
-
-        <div className="card-bottom">
-          <span className="card-text">
-            <CardNumbers {...cardNumbers} />
-          </span>
+        <CardBottom>
+          <CardNumbers status={status} {...cardNumbers} />
           <div className="card-bottom__info">
-            <span className="card-text">{ownerName || 'NAME'}</span>
-            <span className="card-text">{expirationDate || 'MM/YY'}</span>
+            <CardText status={status}>{ownerName}</CardText>
+            <CardText status={status}>{expirationDate || 'MM/YY'}</CardText>
           </div>
-        </div>
+        </CardBottom>
       </CardForm>
     </CardBox>
   );

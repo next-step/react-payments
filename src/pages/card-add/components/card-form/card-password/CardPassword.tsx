@@ -4,29 +4,25 @@ import useCardPassword from './hook/useCardPassword';
 const MAX_LENGTH = 1;
 
 const CardPassword = () => {
-  const { handleChange, refs } = useCardPassword();
+  const { firstCardPassword, secondCardPassword, handleChange } = useCardPassword();
 
   return (
     <div style={{ display: 'flex', gap: '5px' }}>
       <Input
-        className="w-15"
         type="password"
+        className="w-15"
         name="firstCardPassword"
-        onChange={(e) => handleChange(e, 0)}
+        value={firstCardPassword}
+        onChange={handleChange}
         maxLength={MAX_LENGTH}
-        ref={(el) => {
-          if (el) refs.current[0] = el;
-        }}
       />
       <Input
-        className="w-15"
         type="password"
+        className="w-15"
         name="secondCardPassword"
-        onChange={(e) => handleChange(e, 1)}
+        value={secondCardPassword}
+        onChange={handleChange}
         maxLength={MAX_LENGTH}
-        ref={(el) => {
-          if (el) refs.current[1] = el;
-        }}
       />
       <div className="flex-center w-15">•</div>
       <div className="flex-center w-15">•</div>
