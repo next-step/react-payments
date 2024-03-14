@@ -15,9 +15,9 @@ import type {
   ExpirationDateType,
   CardPasswordNumberType,
 } from '../../types/CardFormType';
-import { useCardContext } from '../hooks/useCardContext';
 
-const isFilledInput = true;
+import { useCardContext } from '../hooks/useCardContext';
+import useCardFormData from '../hooks/useCardForm';
 
 export default function AddCardForm() {
   const [cardNumber, setCardNumber] = useState<CardNumberType>({
@@ -43,6 +43,15 @@ export default function AddCardForm() {
 
   const { handleChangeCardState } = useCardContext();
 
+  const isFulledForm = useCardFormData({
+    cardNumber,
+    cardPassword,
+    securityCode,
+    expirationDate,
+  });
+
+  const isFormFilled = isFulledForm();
+
   const handleClickButton = () => {
     handleChangeCardState({
       cardNumber,
@@ -53,7 +62,6 @@ export default function AddCardForm() {
     });
   };
 
-  console.log(isFilledInput);
   return (
     <div className="root">
       <div className="app">
@@ -84,7 +92,7 @@ export default function AddCardForm() {
           location="/add/complete"
           text="다음"
           onClick={handleClickButton}
-          disable={!isFilledInput}
+          disable={!isFormFilled}
         />
       </div>
     </div>
