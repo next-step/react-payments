@@ -2,9 +2,17 @@ import type { CardInfo } from '../../types';
 
 interface Props extends CardInfo {
   size?: 'small' | 'big';
+  onClick?: () => void;
 }
 
-const Card = ({ brand, numbers, owner, expiration, size = 'small' }: Props) => {
+const Card = ({
+  brand,
+  numbers,
+  owner,
+  expiration,
+  size = 'small',
+  onClick,
+}: Props) => {
   const cardNumbers = Object.values(numbers)
     .map((number, index) => {
       if (index > 1) return number.replace(/\d/g, '*');
@@ -13,7 +21,7 @@ const Card = ({ brand, numbers, owner, expiration, size = 'small' }: Props) => {
     .join(' ');
 
   return (
-    <div className='card-box'>
+    <div className='card-box' onClick={onClick}>
       <div className={`${size}-card`}>
         <div className='card-top'>
           <span className='card-text'>{brand}</span>

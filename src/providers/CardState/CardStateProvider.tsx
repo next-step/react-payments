@@ -19,6 +19,7 @@ export const CardContext = createContext<CardContextType | undefined>(
 );
 
 const initialCardState: CardInfo = {
+  id: '',
   brand: '',
   numbers: { first: '', second: '', third: '', fourth: '' },
   owner: '',
@@ -26,6 +27,7 @@ const initialCardState: CardInfo = {
   password: { first: '', second: '' },
   securityCode: '',
   nickname: '',
+  createdAt: '',
 };
 
 export const CardStateProvider = ({ children }: PropsWithChildren) => {

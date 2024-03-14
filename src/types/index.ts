@@ -1,4 +1,5 @@
 export interface CardInfo {
+  id: string;
   brand: string;
   numbers: { first: string; second: string; third: string; fourth: string };
   owner: string;
@@ -6,4 +7,5 @@ export interface CardInfo {
   password: { first: string; second: string };
   securityCode: string;
   nickname: string;
+  createdAt: string;
 }

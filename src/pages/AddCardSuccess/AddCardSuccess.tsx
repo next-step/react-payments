@@ -2,13 +2,8 @@ import Button from '../../components/Button/Button';
 import Card from '../../components/Card/Card';
 import Header from '../../components/Header/Header';
 import { useCardState } from '../../providers/CardState/hooks/useCardState';
-import { CardInfo } from '../../types';
-import {
-  setLocalStorageItem,
-  CARD_STORAGE_KEY,
-  getLocalStorageItem,
-} from '../../utils/localStorage';
 import CardNickname from './components/CardNickname';
+import { useCardList } from '../../providers/CardList/hooks/useCardList';
 
 interface Props {
   onNext: () => void;
@@ -16,18 +11,10 @@ interface Props {
 
 const AddCardSuccess = ({ onNext }: Props) => {
   const { cardState, resetCardState } = useCardState();
+  const { saveCardList } = useCardList();
 
   const handleAddCard = () => {
-    const storedCards =
-      getLocalStorageItem<CardInfo[]>({
-        key: CARD_STORAGE_KEY,
-      }) || [];
-
-    setLocalStorageItem({
-      key: CARD_STORAGE_KEY,
-      item: [...storedCards, cardState],
-    });
-
+    saveCardList(cardState);
     resetCardState();
     onNext();
   };
