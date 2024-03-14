@@ -32,14 +32,16 @@ export default function AddCardForm() {
     year: '',
   });
 
-  const [ownerName, setOwnerName] = useState<string>('');
+  const [ownerName, setOwnerName] = useState('');
 
-  const [securityCode, setSecurityCode] = useState<string>('');
+  const [securityCode, setSecurityCode] = useState('');
 
   const [cardPassword, setCardPassword] = useState<CardPasswordNumberType>({
     firstNumber: '',
     secondNumber: '',
   });
+
+  const [isClick, setIsClick] = useState(false);
 
   const { handleChangeCardState } = useCardContext();
 
@@ -53,6 +55,8 @@ export default function AddCardForm() {
   const isFormFilled = isFulledForm();
 
   const handleClickButton = () => {
+    setIsClick(true);
+
     handleChangeCardState({
       cardNumber,
       expirationDate,
@@ -93,6 +97,7 @@ export default function AddCardForm() {
           text="다음"
           onClick={handleClickButton}
           disable={!isFormFilled}
+          isClick={isClick}
         />
       </div>
     </div>

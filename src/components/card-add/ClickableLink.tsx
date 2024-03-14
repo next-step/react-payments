@@ -8,6 +8,7 @@ type ClickableLinkProps = {
   text: string;
   disable?: boolean;
   onClick?: () => void;
+  isClick: boolean;
 };
 
 export default function ClickableLink({
@@ -16,6 +17,7 @@ export default function ClickableLink({
   text,
   disable,
   onClick,
+  isClick,
 }: ClickableLinkProps) {
   return (
     <div className={classnames('button-box', className)}>
@@ -28,6 +30,7 @@ export default function ClickableLink({
           {text}
         </Link>
       </span>
+      {isClick && disable ? <p>카드 필드를 모두 채워주세요</p> : ''}
     </div>
   );
 }
