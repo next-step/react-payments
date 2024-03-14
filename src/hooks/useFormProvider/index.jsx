@@ -14,7 +14,11 @@ FormProvider.propTypes = {
 };
 
 export const useFormContext = () => {
-  // 에러처리 필요
+  const context = useContext(FormContext);
+  if (!context) {
+    throw new Error("Cannot find FormProvider");
+  }
+
   const {
     formState,
     register,
@@ -23,7 +27,7 @@ export const useFormContext = () => {
     watch,
     reset,
     handleSubmit,
-  } = useContext(FormContext);
+  } = context;
 
   return {
     formState,
