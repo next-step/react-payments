@@ -22,9 +22,9 @@ const Card = ({
 
   return (
     <div className='card-box' onClick={onClick}>
-      <div className={`${size}-card`}>
+      <div className={`${size}-card`} style={{ backgroundColor: brand.color }}>
         <div className='card-top'>
-          <span className='card-text'>{brand}</span>
+          <span className='card-text'>{brand?.label}</span>
         </div>
         <div className='card-middle'>
           <div className={`${size}-card__chip`} />

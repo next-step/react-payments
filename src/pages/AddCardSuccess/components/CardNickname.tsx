@@ -3,7 +3,7 @@ import InputContainer from '../../../components/InputContainer/InputContainer';
 import useCardNickname from '../hooks/useNickname';
 
 const CardNickname = () => {
-  const { brand, nickname, handleNickname } = useCardNickname();
+  const { nickname, handleNickname } = useCardNickname();
 
   return (
     <InputContainer className='input-container flex-center w-100'>
@@ -12,7 +12,7 @@ const CardNickname = () => {
         placeholder='카드 별칭 (선택)'
         variant='underline'
         maxLength={10}
-        value={nickname || brand}
+        value={nickname}
         onChange={handleNickname}
       />
     </InputContainer>

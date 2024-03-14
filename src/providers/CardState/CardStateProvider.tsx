@@ -20,7 +20,7 @@ export const CardContext = createContext<CardContextType | undefined>(
 
 const initialCardState: CardInfo = {
   id: '',
-  brand: '',
+  brand: { label: '', color: '' },
   numbers: { first: '', second: '', third: '', fourth: '' },
   owner: '',
   expiration: { month: '', year: '' },

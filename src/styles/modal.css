@@ -45,6 +45,7 @@
   width: 2.8rem;
   height: 2.8rem;
   background-color: #94dacd;
+  cursor: pointer;
 }
 
 .modal-item-name {

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '../../components/Button/Button';
 import Card from '../../components/Card/Card';
 import Header from '../../components/Header/Header';
@@ -8,6 +8,9 @@ import CardOwner from './components/CardOwner';
 import CardSecurityCode from './components/CardSecurityCode';
 import CardPassword from './components/CardPassword';
 import { useCardState } from '../../providers/CardState/hooks/useCardState';
+import { Modal } from '../../components/Modal/Modal';
+import { BrandList } from './components/BrandList';
+import { useCardBrands } from './hooks/useCardBrands';
 
 interface Props {
   onNext: () => void;
@@ -16,10 +19,15 @@ interface Props {
 
 const AddCard = ({ onNext, onGoBack }: Props) => {
   const { cardState, resetCardState } = useCardState();
+  const { selectBrand } = useCardBrands();
+  const [showModal, setShowModal] = useState<boolean>(true);
+
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
 
   useEffect(() => {
     resetCardState();
-  }, [resetCardState]);
+  }, []);
 
   return (
     <>
@@ -28,7 +36,7 @@ const AddCard = ({ onNext, onGoBack }: Props) => {
         <span>카드추가</span>
       </Header>
 
-      <Card {...cardState} />
+      <Card {...cardState} onClick={openModal} />
       <CardNumbers />
       <CardExpiration />
       <CardOwner />
@@ -38,6 +46,12 @@ const AddCard = ({ onNext, onGoBack }: Props) => {
       <div className='button-box'>
         <Button onClick={onNext}>다음</Button>
       </div>
+
+      {showModal && (
+        <Modal onClickDimmed={closeModal}>
+          <BrandList onClick={selectBrand} />
+        </Modal>
+      )}
     </>
   );
 };

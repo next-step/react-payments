@@ -17,18 +17,19 @@ const AddCardSuccess = ({ onNext }: Props) => {
   const { cardState, resetCardState, setCardState } = useCardState();
   const { saveCardList, getCard } = useCardList();
 
-  useEffect(() => {
-    if (id) {
-      const card = getCard(id);
-      setCardState({ ...card, nickname: '' });
-    }
-  }, [getCard, id, setCardState]);
-
   const handleAddCard = () => {
     saveCardList(cardState);
     resetCardState();
     onNext();
   };
+
+  useEffect(() => {
+    if (id) {
+      const card = getCard(id);
+      if (!card) return;
+      setCardState({ ...card, nickname: '' });
+    }
+  }, [getCard, id, setCardState]);
 
   return (
     <div className='app flex-column-center'>

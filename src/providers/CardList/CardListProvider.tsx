@@ -17,7 +17,7 @@ interface CardListContextType {
   cardList: CardInfo[];
   saveCardList: (newCard: CardInfo) => void;
   deleteCard: (id: string) => void;
-  getCard: (id: string) => CardInfo;
+  getCard: (id: string) => CardInfo | undefined;
 }
 
 export const CardListContext = createContext<CardListContextType | undefined>(
@@ -30,6 +30,9 @@ export const CardListProvider = ({ children }: PropsWithChildren) => {
   );
 
   const saveCardList = useCallback((newCard: CardInfo) => {
+    if (!newCard.nickname) {
+      newCard.nickname = newCard.brand.label;
+    }
     newCard.id = Object.values(newCard.numbers).join('');
     newCard.createdAt = new Date().toISOString();
 
