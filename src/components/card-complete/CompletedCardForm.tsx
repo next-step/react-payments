@@ -1,8 +1,8 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
 import CardBox from '../CardBox';
 import Card from '../Card';
-import Button from '../card-add/ClickableLink';
+import ClickableLink from '../card-add/ClickableLink';
 import Input from '../Input';
 
 import { useCardContext } from '../hooks/useCardContext';
@@ -12,12 +12,7 @@ import { CARD_ALIAS_LIMIT } from '../../constants/cardLimit';
 
 export default function CompletedCard() {
   const [cardAlias, setCardAlias] = useState('');
-
   const { cardState, handleChangeCardState } = useCardContext();
-
-  if (!cardState) {
-    return;
-  }
 
   const handleChangeCardAlias = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -63,7 +58,7 @@ export default function CompletedCard() {
             onChange={handleChangeCardAlias}
           />
         </div>
-        <Button
+        <ClickableLink
           className="mt-55"
           location="/"
           text="다음"

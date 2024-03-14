@@ -17,6 +17,8 @@ import type {
 } from '../../types/CardFormType';
 import { useCardContext } from '../hooks/useCardContext';
 
+const isFilledInput = true;
+
 export default function AddCardForm() {
   const [cardNumber, setCardNumber] = useState<CardNumberType>({
     firstNumber: '',
@@ -51,6 +53,7 @@ export default function AddCardForm() {
     });
   };
 
+  console.log(isFilledInput);
   return (
     <div className="root">
       <div className="app">
@@ -81,6 +84,7 @@ export default function AddCardForm() {
           location="/add/complete"
           text="다음"
           onClick={handleClickButton}
+          disable={!isFilledInput}
         />
       </div>
     </div>
