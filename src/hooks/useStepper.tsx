@@ -6,6 +6,7 @@ import {
   useState,
 } from 'react';
 import { PAGES } from '../constants/pages';
+import { useQueryParams } from './useQueryParams';
 
 export interface StepperProps<Step extends PagesType> {
   children:
@@ -22,16 +23,11 @@ export type PagesType = (typeof PAGES)[keyof typeof PAGES];
 
 const useStepper = <Step extends PagesType>(initialStep: Step) => {
   const [currentStep, setCurrentStep] = useState<PagesType>(initialStep);
-  const searchParams = new URLSearchParams(location.search);
-  const step = searchParams.get('step') ?? currentStep;
+  const { params, setQueryParams } = useQueryParams();
+  const step = params.get('step') ?? currentStep;
 
-  const setStep = (newStep: PagesType) => {
-    const currentSearchParams = new URLSearchParams(location.search);
-    currentSearchParams.set('step', newStep);
-
-    const newUrl = `${location.pathname}?${currentSearchParams.toString()}`;
-
-    history.pushState({ step: newStep }, '', newUrl);
+  const setStep = (newStep: PagesType, id?: string) => {
+    setQueryParams({ step: newStep, id: id || '' });
     setCurrentStep(newStep);
   };
 
