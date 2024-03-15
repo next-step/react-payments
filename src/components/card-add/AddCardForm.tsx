@@ -45,6 +45,8 @@ export default function AddCardForm() {
 
   const { handleChangeCardState } = useCardContext();
 
+  // 카드 리스트 컨텍스트 호출
+
   const isFulledForm = useCardFormData({
     cardNumber,
     cardPassword,
@@ -64,6 +66,8 @@ export default function AddCardForm() {
       securityCode,
       cardPassword,
     });
+
+    // 카드 리스트에 단일 카드 저장
   };
 
   return (
