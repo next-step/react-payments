@@ -8,7 +8,7 @@ type CardsType = {
 
 type initialCardStateType = {
   cardsState: CardsType;
-  handleChangeCardsState: (data: CardsType[]) => void;
+  handleChangeCardsState: (data: CardType) => void;
 };
 
 const initialState: initialCardStateType = {
@@ -21,7 +21,7 @@ export const CardsContext = createContext(initialState);
 export default function CardProvider({ children }: PropsWithChildren) {
   const [cardsState, setCardsState] = useState<CardsType>({} as CardsType);
 
-  const handleChangeCardsState = (data: CardsType[]) => {
+  const handleChangeCardsState = (data: CardType) => {
     setCardsState((cardsState) => ({ ...cardsState, ...data }));
   };
 
