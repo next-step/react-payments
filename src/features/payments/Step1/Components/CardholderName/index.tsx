@@ -1,8 +1,7 @@
 import { TextCounter } from '@/components/TextCounter'
 import { useFormContext } from '@/hooks/form/formContext'
+import { CARD_HOLDER_NAME_MAX_LENGTH } from '@/service/payments/payments.const'
 import { RegistrationInitialValues } from '@/service/payments/payments.type'
-
-import { CARD_HOLDER_NAME_MAX_LENGTH } from '../../../../service/const'
 
 export const CardholderName = () => {
   const { getFieldProps, errors, touched, values } = useFormContext<RegistrationInitialValues>()

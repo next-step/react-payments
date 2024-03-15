@@ -1,16 +1,15 @@
 import {
-  CardAdditionalInitialValues,
-  RegistrationInitialValues,
-} from '@/service/payments/payments.type'
-
-import {
   CARD_HOLDER_NAME_MAX_LENGTH,
   CARD_NICKNAME_NAX_LENGTH,
   CARD_NUMBER_INPUT_REGEX,
   CARD_PASSWORD_REGEX,
   EXPIRATION_DATE_INPUT_REG,
   SECURITY_CODE_REG,
-} from './const'
+} from '@/service/payments/payments.const'
+import {
+  CardAdditionalInitialValues,
+  RegistrationInitialValues,
+} from '@/service/payments/payments.type'
 
 const checkExpirationDate = (expirationDate: string) => {
   if (!EXPIRATION_DATE_INPUT_REG.test(expirationDate)) {

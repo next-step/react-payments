@@ -1,9 +1,9 @@
 import { Form } from '@/hooks/form/formContext'
 import { PaymentsMachineContext } from '@/service/payments/payments.machine'
 
-import { Step1 } from './components/Step1'
-import { Step2 } from './components/Step2/Step2'
-import { Step1Validate, step2Validate } from './service/validations'
+import { Step1 } from '../../../../features/payments/Step1'
+import { Step2 } from '../../../../features/payments/Step2/Step2'
+import { Step1Validate, step2Validate } from '../../../../service/payments/validations'
 
 export const AddingCard = () => {
   const paymentsMachine = PaymentsMachineContext.useSelector((state) => state)

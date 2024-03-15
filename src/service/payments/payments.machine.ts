@@ -1,7 +1,7 @@
 import { createActorContext } from '@xstate/react'
 import { assign, fromPromise, setup } from 'xstate'
 
-import { cardAdditionalInfo } from './payments.const'
+import { cardAdditionalInfo, formInitialValues } from './payments.const'
 import { CardAdditionalInitialValues, RegistrationInitialValues } from './payments.type'
 
 export const paymentsMachine = setup({
