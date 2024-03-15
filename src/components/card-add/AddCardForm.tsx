@@ -19,6 +19,8 @@ import type {
 import { useCardContext } from '../hooks/useCardContext';
 import useCardFormData from '../hooks/useCardForm';
 
+import CardProvider from '../../context/CardProvider';
+
 export default function AddCardForm() {
   const [cardNumber, setCardNumber] = useState<CardNumberType>({
     firstNumber: '',

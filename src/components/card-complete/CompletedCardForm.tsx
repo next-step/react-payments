@@ -32,8 +32,6 @@ export default function CompletedCard() {
       isMonth: false,
       isNumber: false,
     });
-
-    console.log(cardAlias);
   };
 
   const handleClickButton = () => {
