@@ -1,8 +1,8 @@
 import { useFormContext } from '@/hooks/form/formContext'
-import { FormType } from '@/service/payments/payments.type'
+import { RegistrationInitialValues } from '@/service/payments/payments.type'
 
 export const SecurityCode = () => {
-  const { getFieldProps, errors, touched } = useFormContext<FormType>()
+  const { getFieldProps, errors, touched } = useFormContext<RegistrationInitialValues>()
 
   return (
     <>

@@ -9,3 +9,7 @@ export const formInitialValues = {
   cardPassword1: '',
   cardPassword2: '',
 }
+
+export const cardAdditionalInfo = {
+  nickName: '',
+}

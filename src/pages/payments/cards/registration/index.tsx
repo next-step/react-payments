@@ -1,19 +1,20 @@
-import { useMachine } from '@xstate/react'
-
 import { Form } from '@/hooks/form/formContext'
-import { paymentsMachine } from '@/service/payments'
+import { PaymentsMachineContext } from '@/service/payments/payments.machine'
 
 import { Step1 } from './components/Step1'
-import { Step1Validate } from './service/validations'
+import { Step2 } from './components/Step2/Step2'
+import { Step1Validate, step2Validate } from './service/validations'
 
 export const AddingCard = () => {
-  const [state, send, service] = useMachine(paymentsMachine)
+  const paymentsMachine = PaymentsMachineContext.useSelector((state) => state)
 
-  if (state.value === 'card-registration-start') {
+  const paymentActorRef = PaymentsMachineContext.useActorRef()
+
+  if (paymentsMachine.value === 'card-registration-start') {
     return (
       <Form
-        initialValues={state.context.registration}
-        onSubmit={(values) => send({ type: 'SUBMIT', value: values })}
+        initialValues={paymentsMachine.context.registration}
+        onSubmit={(values) => paymentActorRef.send({ type: 'SUBMIT', value: values })}
         validate={Step1Validate}
       >
         <Step1 />
@@ -21,12 +22,20 @@ export const AddingCard = () => {
     )
   }
 
-  if (state.value === 'card-registration-complete') {
+  if (['card-registration-complete', 'card-nickname-submitting'].includes(paymentsMachine.value)) {
     return (
-      <>
-        <button onClick={() => send({ type: 'PREV' })}> 이전</button>
-        <div>등록 완료 페이지 입니다.</div>
-      </>
+      <Form
+        initialValues={paymentsMachine.context.cardAdditionalInfo}
+        validate={step2Validate}
+        onSubmit={(values) => paymentActorRef.send({ type: 'POST_NICKNAME', value: values })}
+      >
+        {paymentsMachine.value}
+        <Step2 />
+      </Form>
     )
+  }
+
+  if (paymentsMachine.value === 'card-list') {
+    return <div>card list</div>
   }
 }

@@ -1,14 +1,19 @@
+import { createActorContext } from '@xstate/react'
 import { assign, fromPromise, setup } from 'xstate'
 
-import { formInitialValues } from './payments.const'
+import { cardAdditionalInfo } from './payments.const'
+import { CardAdditionalInitialValues, RegistrationInitialValues } from './payments.type'
 
 export const paymentsMachine = setup({
   types: {} as {
-    context: { registration: typeof formInitialValues }
+    context: {
+      registration: RegistrationInitialValues
+      cardAdditionalInfo: CardAdditionalInitialValues
+    }
     events:
       | {
           type: 'SUBMIT'
-          value: typeof formInitialValues
+          value: RegistrationInitialValues
         }
       | {
           type: 'PREV'
@@ -16,18 +21,26 @@ export const paymentsMachine = setup({
       | {
           type: 'NEXT'
         }
+      | {
+          type: 'POST_NICKNAME'
+          value: CardAdditionalInitialValues
+        }
   },
   actors: {
-    submitting: fromPromise(async ({ input }: { input: typeof formInitialValues }) => {
+    submitting: fromPromise(async ({ input }: { input: RegistrationInitialValues }) => {
+      return true
+    }),
+    postNickname: fromPromise(async ({ input }: { input: CardAdditionalInitialValues }) => {
       return true
     }),
   },
   actions: {},
 }).createMachine({
-  /** @xstate-layout N4IgpgJg5mDOIC5QAcCGBPAtmAdgF1gDoBjVAJwgFoywoBLWPM1POgex0sfLwGIBlAKoAhALIBJACoBtAAwBdRCjaw6rDkpAAPRACYAbAFZCATgAcAFgDMJ62YCMFs7ssAaEOj2yrhXQHYrCz8TWxNZfX1bAF8o9zQsXAIScioaekZmdU5YAFcAI0w1VhwoXggOMEI6HAA3NgBrStyCouqoOUUkEGQVNXYcTR0EIxNCfT97E10nC0NdWUN9d08EezMzQlkzKx2TP3CXe30rGLiMbHwiUgpqWgYmFn6ufMK8YtKwMjI2MkJkABsWAAzH6YQjNV7vDqaHqqLKDRAjMYTKYzOYLJYePQWeybWT4qy6Rx+Wa2QynbrnRJXFK3dIPLKUYhsTAAsB4MC8AAKACUAKIANWhXVhfQ0XSGAVxfgCVmc9nssgs4wsy0QDkIhnx+MsSpx9is5NilISl2SNzS90yT2ZrP+7M5ADk+QANGQKGG9eESxCKsz6QgWIlTAL6abKtWrMyyUwhEJrXSLWZ+CnxC5Ja6pO4ZR4cJkcIF0MiYXjOt3C5Rw-oI1bWGP2RZWWS6EyGYImOWRtYxuPmKxrEwRLW6GLGnBsCBwGFUy6eqvi0BDSiYlbLvHajeblPGtPU81Z+nWvPcMh4OdigY+hBByNEvxjCJ+eYGWQBQdmVMzjO0y05xkQ1oSnPb1F0QOVjHmfstTMKUYNVLEEGfXwtWbOVIgVaMRx3L8aQtbMGSeIFUDoe0IGA6sr22CxCCOCxwgiIJZi2W86PXWRHAVMI-G2bczlNb88MPXNOFtNkOXIhdtHVQIaP0OiIjkkloK7DULDjbYByHZtP343CDytYT8xwQtiwky9QNWAdTHCJt9iscY-BXX0NRQ7VlSOAwrF4k10z0yh-nuMyawbHYxnk5xjl0Ql4JWNZcVc-F3LDY5txiIA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QAcCGBPAtmAdgF1gDoBjVAJwgFoywoBLWPM1POgex0sfLwGIBlAKoAhALIBJACoBtAAwBdRCjaw6rDkpAAPRACYAbAFZCATgAcAFguzDugIwmb5wwBoQ6PbN2FdAdgDM-ra+dnb65mb6AL5RbmhYuAQk5FQ09IzM6pywAK4ARphqrDhQvBAcYIR0OABubADWlbkFRdVQcopIIMgqauw4mjoI+vp2hPohjmZ2Fv6yJhZ2bh4IdmZmhLJm-gaRO4bmFoYxcRjY+ESkFNS0DEws-Vz5hXjFpWBkZGxkhMgANiwAGbfTCEZovN4dTQ9VRZQaIEZjCYOLYzOYLJbuPTWUwmPEhOyGQwOCy+XwnbpnRKXFI3dL3LKUYhsTD-MB4MC8AAKACUAKIANShXRhfQ0XSGAX8hDJ-lmXishgmvmWiGmhAseIWo3ChjMuh2FPi5ySV1StwyDw4TJZbI53IA8vxJAB9ABy4gAwgBpN0AQVEfOFylh-Xhqy2Gws9hMui1shmxNVqz1mwN-jMZNk1jMtjMRqpF2S1xwdGI9RwqGwTxarzaZQqVVqDUqMLwbrLFarYGD3V6cIliDCCcIdl85jmtn0sl862TDn0Ms1Jl8snC08MvgMBYSRbNlFL5cr1fBrRKvA+Xx+-yBIN+KnbnePPYU0P7YcHq2nYzHE5sBhnOcsVWDMfGXVd7BnVd-BMGJYhAHA2AgOBoULAg31DcVQCGSh9GTXCdxNGlrjSO5MkebgyDwDCxQGT9o2TexfHGEYlSJIxQgCcl4ONali3NelyOtU86xKGiB2wxAM2Y3RZH8Md-H0GD9EsJVGK8MC8QsfRFl0PTN2405d1NWlSMtRlAVQOg-kgcSP0khBtkXMJFhnWQthXXxXGAg0TFxLT9D8RZx3zHi0OIgSyKtThmVZGyOTsrDtDVRTRx0uw3I8slvJWNYxmXBZN3WMxY1jQi+P3Q8uxPZ4zygRK6Icuw-D8gIjjjMwtgzQx-HnTd-MKkwesjbcwuMiKDyfbsawhNpKEs6zbJFd8kqGX8-MJJTdGjLwRhsed-Bkwx3LCA1dE6wJyr3Wk-juBrw3W0clR2HaDA3echqXLS9UJbM9NCmIgA */
   id: 'payments',
   context: {
     registration: formInitialValues,
+    cardAdditionalInfo,
   },
   initial: 'card-registration-start',
   states: {
@@ -66,20 +79,39 @@ export const paymentsMachine = setup({
         PREV: {
           target: 'card-registration-start',
         },
-        NEXT: {
-          target: 'card-registration-confirm',
+        POST_NICKNAME: {
+          target: 'card-nickname-submitting',
+          actions: assign(({ context, event }) => {
+            return {
+              cardAdditionalInfo: Object.assign(context.cardAdditionalInfo, event.value),
+            }
+          }),
         },
       },
     },
-    'card-registration-confirm': {
-      on: {
-        NEXT: {
+
+    'card-nickname-submitting': {
+      invoke: {
+        id: 'postNickname',
+        input: ({ context }) => {
+          return context.cardAdditionalInfo
+        },
+        src: 'postNickname',
+        onDone: {
           target: 'card-list',
         },
+        onError: {
+          target: 'card-nickname-submitting-failed',
+        },
       },
+    },
+    'card-nickname-submitting-failed': {
+      on: {},
     },
     'card-list': {
       on: {},
     },
   },
 })
+
+export const PaymentsMachineContext = createActorContext(paymentsMachine)

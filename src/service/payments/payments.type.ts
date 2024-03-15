@@ -1,3 +1,5 @@
-import { formInitialValues } from './payments.const'
+import { cardAdditionalInfo, formInitialValues } from './payments.const'
 
-export type FormType = typeof formInitialValues
+export type RegistrationInitialValues = typeof formInitialValues
+
+export type CardAdditionalInitialValues = typeof cardAdditionalInfo
