@@ -25,7 +25,9 @@
 			"@components/*": ["src/components/*"],
 			"@pages/*": ["src/pages/*"],
 			"@hooks": ["src/hooks/index.ts"],
-			"@utils": ["src/utils/index.ts"]
+			"@utils": ["src/utils/index.ts"],
+			"@contexts/*": ["src/contexts/*"],
+			"@reducers/*": ["src/reducers/*"]
 		}
 	},
 	"include": ["src"],
