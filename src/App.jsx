@@ -10,7 +10,10 @@ function App() {
     <div className="app">
       <CardStateProvider>
         {step === PAGE.CARD_LIST && (
-          <CardList onNext={() => setStep(PAGE.ADD_CARD)} />
+          <CardList
+            onNext={() => setStep(PAGE.ADD_CARD)}
+            goToCompletePage={() => setStep(PAGE.ADD_CARD_SUCCESS)}
+          />
         )}
         {step === PAGE.ADD_CARD && (
           <CardAdd

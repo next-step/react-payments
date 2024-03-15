@@ -8,7 +8,7 @@ import { CardStorage } from "../util/cardStorage";
 
 export default function CardComplete({ onNext }) {
   const { cardState } = useContext(CardContext);
-  const { cardNumber, expirationDate, cardOwnerName } = cardState;
+  const { cardNumber, expirationDate, cardOwnerName, alias } = cardState;
   const aliasInputRef = useRef(null);
 
   const onSubmitCardComplete = (event) => {
@@ -27,6 +27,7 @@ export default function CardComplete({ onNext }) {
         <h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
       </div>
       <Card
+        alias={alias}
         cardNumber={cardNumber}
         expirationDateMM={expirationDate[MONTH]}
         expirationDateYY={expirationDate[YEAR]}

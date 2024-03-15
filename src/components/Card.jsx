@@ -9,6 +9,7 @@ export default function Card({
   expirationDateMM = "",
   expirationDateYY = "",
   cardOwnerName = "",
+  ...props
 }) {
   // 카드 번호
   const displayCardNumber = getSplitString4(Object.values(cardNumber).join(""))
@@ -28,7 +29,7 @@ export default function Card({
   const displayCardOwnerName = cardOwnerName;
 
   return (
-    <CardBox>
+    <CardBox {...props}>
       <div className="card-top">
         <Text>{alias}</Text>
       </div>
