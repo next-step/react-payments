@@ -5,9 +5,10 @@ import {
 } from '@pages/addCard/hooks';
 import { useInput } from '@hooks';
 import { isNumber } from '@utils';
+import { useStepper } from '@contexts/StepperContext';
 
 export default function useAddCardForm() {
-	const navigate = useNavigate();
+	const { dispatch } = useStepper();
 	const {
 		value: cardNumber,
 		displayedValue: displayedCardNumber,
@@ -39,7 +40,7 @@ export default function useAddCardForm() {
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		navigate('/');
+		dispatch({ type: 'toAddCardComplete' });
 	};
 	return {
 		displayedCardNumber,

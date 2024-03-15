@@ -1,12 +1,12 @@
 import { FaChevronLeft } from 'react-icons/fa';
 import Button from '@components/ui-kit/Button';
-import { useNavigate } from 'react-router-dom';
+import { useStepper } from '@contexts/StepperContext';
 
 export default function Header() {
-	const navigate = useNavigate();
+	const { dispatch } = useStepper();
 
 	const handleClick = () => {
-		navigate('/');
+		dispatch({ type: 'toCards' });
 	};
 	return (
 		<header className="header">
