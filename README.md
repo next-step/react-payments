@@ -91,43 +91,8 @@
 - [x] 카드 목록은 최신순(내림차순)으로 정렬된다.
 - [x] 목록 최상단에 +을 누르면 카드 추가 페이지로 이동한다.
 - [x] 카드를 클릭하면, 카드 별칭 수정(카드 추가 완료 페이지)로 이동한다.
-- [ ] 카드를 삭제할 수 있다.
+- [x] 카드를 삭제할 수 있다.
 
 ---
 
-## 구현 목표
-
-- [x] useForm을 이용하여 Input에 주입할 로직을 관리한다.
-- [x] form 내부의 input값들은 하나의 해시맵에서 관리한다. useInput 단위로 추상화한다면 최상단 Layer(form)에서 각 input들의 값을 다시 동기화해야하기 때문이다.
-- [x] ref는 register에서 포함하지 않는다. autoFocus를 사용하기 위해 forwardRef를 래핑해야하는데, 모든 컴포넌트에서 autoFocus를 사용하는 것은 아니기 때문이다.
-
----
-
-## +a
-
-### 1. inputAPI를 사용한다면? (추후에 코드로 구현해보기)
-
-- constraint validation check validity override
-- setCustomValidity
-- https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation#complex_constraints_using_the_constraint_validation_api
-- https://developer.mozilla.org/en-US/docs/Web/API/ValidityState
-- customError {@link https://developer.mozilla.org/en-US/docs/Web/API/ValidityState#customerror}
-
-### 2. TSDoc 좋으니 잘 쓰기
-
-```ts
-/**
- * {@link HTMLElement}
- * {@link useManager}
- * @template T 어쩌고 저쩌고 타입을 위한 제네릭 {@link useManager}
- * @exampl
- * ExtractSelectors<typeof {}>
- */
-```
-
-### 3. 재남님 스터디 기회되면 참여하기
-
-### 4. 오픈소스 참여하기
-
-- zod
-- https://blueskyproject.io/bluesky/contributing.html
+[Storybook](https://65f3ed588e68d95b1294b999-qxfuwtggjt.chromatic.com/?path=/docs/configure-your-project--docs)
