@@ -33,7 +33,6 @@ export default function Card({
   ownerName,
   expirationDate,
 }: CardProps) {
-
   const cardClassName = `card-text${variant === 'big' ? '__big' : ''}`;
 
   return (

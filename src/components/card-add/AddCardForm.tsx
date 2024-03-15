@@ -43,7 +43,7 @@ export default function AddCardForm() {
 
   const [isClick, setIsClick] = useState(false);
 
-  const { cardState, handleChangeCardState } = useCardContext();
+  const { addCard } = useCardContext();
 
   const isFulledForm = useCardFormData({
     cardNumber,
@@ -57,17 +57,13 @@ export default function AddCardForm() {
   const handleClickButton = () => {
     setIsClick(true);
 
-    handleChangeCardState({
+    addCard({
       cardNumber,
       expirationDate,
       ownerName,
       securityCode,
       cardPassword,
     });
-
-    handleChangeCardsState(cardState);
-
-    console.log(cardsState);
   };
 
   return (

@@ -6,18 +6,24 @@ import ClickableLink from '../card-add/ClickableLink';
 import Input from '../Input';
 
 import { useCardContext } from '../hooks/useCardContext';
+import { useCardsContext } from '../hooks/useCardsContext';
 
 import updateValidValue from '../../utils/updateValidValue';
+
 import { CARD_ALIAS_LIMIT } from '../../constants/cardLimit';
 
 export default function CompletedCard() {
   const [cardAlias, setCardAlias] = useState('');
-  const { cardState, handleChangeCardState } = useCardContext();
+
+  const { card } = useCardContext();
+  const { cards, addCardInList } = useCardsContext();
 
   const handleChangeCardAlias = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { value } = event.target;
+
+    console.log(card);
 
     updateValidValue({
       limit: CARD_ALIAS_LIMIT,
@@ -26,12 +32,17 @@ export default function CompletedCard() {
       isMonth: false,
       isNumber: false,
     });
+
+    console.log(cardAlias);
   };
 
   const handleClickButton = () => {
-    handleChangeCardState({
+    addCardInList({
+      ...card,
       cardAlias,
     });
+    console.log(card);
+    console.log(cards);
   };
 
   return (
@@ -43,9 +54,9 @@ export default function CompletedCard() {
         <CardBox>
           <Card
             variant="big"
-            cardNumber={cardState.cardNumber}
-            ownerName={cardState.ownerName}
-            expirationDate={cardState.expirationDate}
+            cardNumber={card.cardNumber}
+            ownerName={card.ownerName}
+            expirationDate={card.expirationDate}
           />
         </CardBox>
         <div className="input-container flex-center w-100">
@@ -62,6 +73,8 @@ export default function CompletedCard() {
           className="mt-55"
           location="/"
           text="다음"
+          disable={false}
+          isClick={true}
           onClick={handleClickButton}
         />
       </div>
