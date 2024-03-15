@@ -1,5 +1,6 @@
+import { createMachine } from 'xstate';
 import { CardInfoWithId } from 'src/machines/addCardMachine.ts';
-import { addCardMachineSetup, initialCardInfo } from 'src/machines/addCardMachine.ts';
+import { addCardMachine, initialCardInfo } from 'src/machines/addCardMachine.ts';
 
 export const MOCK_CARD_INFO_LIST: CardInfoWithId[] = [
 	{
@@ -74,74 +75,14 @@ export const MOCK_CARD_INFO_LIST: CardInfoWithId[] = [
 	},
 ];
 
-export const mockCardListMachine = addCardMachineSetup.createMachine({
-	id: 'addCard',
-	initial: 'CardList',
-	context: {
-		cardInfo: {
-			...initialCardInfo,
-		},
-		cardList: MOCK_CARD_INFO_LIST,
-		selectedCard: { ...initialCardInfo, id: '' },
-	},
-	states: {
-		CardList: {
-			on: {
-				GO_TO_FORM: {
-					target: 'AddCardForm',
-				},
-				SELECT_CARD: {
-					target: 'AddCardFinish',
-					actions: [{ type: 'selectCard' }],
-				},
-				DELETE_CARD: {
-					actions: [{ type: 'deleteCard' }],
-				},
-			},
-		},
-		AddCardForm: {
-			initial: 'selectCardCompany',
-			states: {
-				selectCardCompany: {
-					on: {
-						TOGGLE: {
-							target: 'enterCardInfo',
-						},
-					},
-				},
-				enterCardInfo: {
-					on: {
-						TOGGLE: {
-							target: 'selectCardCompany',
-						},
-					},
-				},
-			},
-			on: {
-				ADD_CARD: {
-					target: 'AddCardFinish',
-					actions: [{ type: 'addCard' }],
-				},
-				CHANGE_FIELD: {
-					target: 'AddCardForm.enterCardInfo',
-					actions: [{ type: 'changeFieldAddCardForm' }],
-				},
-				BACK: {
-					target: 'CardList',
-					actions: [{ type: 'resetAddCardForm' }],
-				},
-			},
-		},
-		AddCardFinish: {
-			on: {
-				EDIT_CARD: {
-					target: 'CardList',
-					actions: [{ type: 'editCard' }],
-				},
-				CHANGE_FIELD: {
-					actions: [{ type: 'changeFieldAddCardFinish' }],
-				},
-			},
+export const mockCardListMachine = createMachine(
+	{
+		...addCardMachine.config,
+		context: {
+			cardInfo: { ...initialCardInfo },
+			cardList: MOCK_CARD_INFO_LIST,
+			selectedCard: { ...initialCardInfo, id: '' },
 		},
 	},
-});
+	{ actions: { ...addCardMachine.implementations.actions } },
+);
