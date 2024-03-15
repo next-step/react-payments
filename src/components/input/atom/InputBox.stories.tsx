@@ -5,10 +5,12 @@ import { createFields } from '@/stories/utils/createFields';
 import { INPUT } from '../input.constant';
 import { DefaultInput, InputBox } from '.';
 import { Background } from '@/stories/components/Background';
+import { InputType } from '../input.type';
 
 const meta = {
   title: 'Input/Atom/InputBox',
   component: InputBox,
+  tags: ['autodocs'],
   argTypes: {
     maxLength: { control: 'number' },
     amount: { control: 'number' },
@@ -19,25 +21,31 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const InputBoxWithUseForm: Story = (args: ArgTypes) => {
-  const inputBoxWithUseFormFields = createFields({
+export const TextInputs: Story = (args: ArgTypes) => {
+  const textInputs = createFields({
     type: INPUT.TYPE.TEXT,
-    amount: 3,
-    maxLength: 4,
+    // 사용처에서 동적으로 Input의 개수를 컨트롤 할 수 있도록 구현해봤는데, 타입에서 에러가 발생하는 것을 보니 좋은 방식인지는 잘 모르겠습니다.
+    // 다른 좋은 방법이 있을까요? :)
+    amount: args.amount as unknown as number,
+    maxLength: args.maxLength as unknown as number,
   });
 
   const { register, errors } = useForm();
   const { autoFocusRefs, handleAutoFocus } = useAutoFocus({
-    amount: Object.values(inputBoxWithUseFormFields).length,
+    amount: Object.values(textInputs).length,
   });
 
-  const fieldKeys = Object.values(inputBoxWithUseFormFields).map(
-    ({ name }) => name
-  );
+  const fieldKeys = Object.values(textInputs).map(({ name }) => name);
   const fieldsFulfilled = Object.values(fieldKeys).map((key) => !errors[key]);
+  const optionalClass = fieldsFulfilled.every((field) => field)
+    ? 'text-fulfilled'
+    : '';
 
   return (
-    <Background>
+    <Background
+      title={`
+    maxLength가 ${args.maxLength}이고, Input(Text)가 ${args.amount}개 들어있는 경우`}
+    >
       <InputBox
         separator={{
           symbol: INPUT.BOX.SEPARATOR.HYPHEN,
@@ -45,11 +53,12 @@ export const InputBoxWithUseForm: Story = (args: ArgTypes) => {
         }}
         {...args}
       >
-        {Object.values(inputBoxWithUseFormFields).map(
+        {Object.values(textInputs).map(
           ({ name, type, validate, maxLength }, fieldIndex) => (
             <DefaultInput
+              className={optionalClass}
               key={name}
-              type={type}
+              type={type as InputType}
               ref={autoFocusRefs[fieldIndex]}
               {...register(name, {
                 maxLength,
@@ -76,4 +85,4 @@ export const InputBoxWithUseForm: Story = (args: ArgTypes) => {
   );
 };
 
-InputBoxWithUseForm.args = {};
+TextInputs.args = {};
