@@ -46,5 +46,6 @@ export default function CardComplete({ onNext }) {
         </Button>
       </div>
     </form>
+
   );
 }

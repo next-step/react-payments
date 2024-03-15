@@ -14,6 +14,7 @@ function App() {
             onNext={() => setStep(PAGE.ADD_CARD)}
             goToCompletePage={() => setStep(PAGE.ADD_CARD_SUCCESS)}
           />
+
         )}
         {step === PAGE.ADD_CARD && (
           <CardAdd

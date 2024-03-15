@@ -53,11 +53,13 @@ export default function CardAdd({ onList, onNext }) {
     isSecurityCodeValidate &&
     isPasswordValidate;
 
+
   const onClickNextBtn = (event) => {
     event.preventDefault();
     CardStorage.addCard(cardState);
     onNext();
   };
+
 
   return (
     <form>
