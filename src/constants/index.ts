@@ -1,0 +1,6 @@
+export const CARN_NUMBER_LENGTH = 16;
+export const CARD_NUMBER_HYPHEN_INTERVAL = 4;
+export const CARD_NUMBER_NOT_MASKED_LENGTH = 8;
+
+export const EXPIRED_DATE_LENGTH = 4;
+export const EXPIRED_MONTH_LENGTH = 2;

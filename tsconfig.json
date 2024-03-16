@@ -28,7 +28,8 @@
 			"@utils": ["src/utils/index.ts"],
 			"@contexts/*": ["src/contexts/*"],
 			"@reducers/*": ["src/reducers/*"],
-			"@types": ["src/types/index.ts"]
+			"@types": ["src/types/index.ts"],
+			"@constants": ["src/constants/index.ts"]
 		}
 	},
 	"include": ["src"],

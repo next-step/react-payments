@@ -1,10 +1,11 @@
+import {
+	CARD_NUMBER_HYPHEN_INTERVAL,
+	CARD_NUMBER_NOT_MASKED_LENGTH,
+	CARN_NUMBER_LENGTH,
+} from '@constants';
 import { useDisplayedInput } from '@hooks';
 import { insertAtInterval, isNumber, replaceTo } from '@utils';
 import { useCallback } from 'react';
-
-const CARN_NUMBER_LENGTH = 16;
-const CARD_NUMBER_HYPHEN_INTERVAL = 4;
-const CARD_NUMBER_NOT_MASKED_LENGTH = 8;
 
 export default function useCardNumberInput() {
 	const toMaskedCardNumber = useCallback((value: string) => {
