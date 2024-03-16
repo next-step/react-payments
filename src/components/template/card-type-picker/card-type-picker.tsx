@@ -1,23 +1,23 @@
 import { BottomSheet, BottomSheetContentProps } from '@/components/molecule/bottom-sheet'
-import * as styles from './card-type-pick-bottom-sheet.css'
+import * as styles from './card-type-picker.css'
 import { Text, Flex, FlexProps } from '@/components'
 import { CardType } from '@/types/card'
 import { IconCheck } from '@tabler/icons-react'
 import { vars } from '@/styles'
 
-export interface CardTypePickBottomSheetProps {
+export interface CardTypePickerProps {
   onClose: BottomSheetContentProps['onClose']
   cardTypeList: CardType[]
   selectedCardType?: CardType
   onSelectCardType: (value: CardType) => void
 }
 
-export const CardTypePickBottomSheet = ({
+export const CardTypePicker = ({
   cardTypeList,
   onClose,
   selectedCardType,
   onSelectCardType,
-}: CardTypePickBottomSheetProps) => {
+}: CardTypePickerProps) => {
   const handleClickCardTypeItem = (cardType: CardType) => () => {
     onSelectCardType?.(cardType)
     onClose()
