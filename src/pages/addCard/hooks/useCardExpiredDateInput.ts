@@ -1,16 +1,12 @@
-import { EXPIRED_DATE_LENGTH, EXPIRED_MONTH_LENGTH } from '@constants';
-import { useDisplayedInput } from '@hooks';
-import { insertAtInterval, isNumber } from '@utils';
-import { useCallback } from 'react';
+import { EXPIRED_DATE_LENGTH } from '@constants';
+import { useDisplayedCard, useDisplayedInput } from '@hooks';
+import { isNumber } from '@utils';
 
 export default function useCardExpiredDateInput() {
-	const toDisplayed = useCallback(
-		(value: string) => insertAtInterval(value, '/', EXPIRED_MONTH_LENGTH),
-		[],
-	);
+	const { toDisplayedCardExpiredDate } = useDisplayedCard();
 
 	const { value, displayedValue, handleChange } = useDisplayedInput({
-		toDisplayed,
+		toDisplayed: toDisplayedCardExpiredDate,
 		maxLength: EXPIRED_DATE_LENGTH,
 		validate: isNumber,
 	});
