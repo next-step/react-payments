@@ -15,7 +15,7 @@ export default function CardList() {
           <h1 className="page-title mb-10">보유 카드</h1>
         </div>
         <Link to="/add" className="button-basic">
-          {cards.map((card, index) => (
+          {cards.reverse().map((card, index) => (
             <CardBox key={index}>
               <Card
                 variant="small"
