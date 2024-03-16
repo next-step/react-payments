@@ -3,6 +3,14 @@
 @import "./button.css";
 @import "./modal.css";
 @import "./utils.css";
+@import "./reset.css";
+
+#root {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 body {
   display: flex;

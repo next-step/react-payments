@@ -1,0 +1,3 @@
+export enum RULE {
+  ONLY_HYPHEN_AND_NUMBER = "ONLY_HYPHEN_AND_NUMBER",
+}
