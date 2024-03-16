@@ -1,4 +1,4 @@
-import { createFunnel } from '@/modules/funnel/Funnel';
+import { createFunnel } from '@pengoose/funnel';
 import { CardFunnelData, PaymentsStep } from './payments.type';
 import { STEP } from './payments.constant';
 
