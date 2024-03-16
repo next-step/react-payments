@@ -1,4 +1,5 @@
 export default interface PaymentCardType {
+	id: string;
 	cardNumber: string;
 	cardExpiredDate: string;
 	cardHolderName: string;

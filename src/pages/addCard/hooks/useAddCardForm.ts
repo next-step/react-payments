@@ -5,6 +5,7 @@ import {
 } from '@pages/addCard/hooks';
 import { PaymentCardType } from '@types';
 import { isNumber } from '@utils';
+import { v4 as uuid } from 'uuid';
 
 export default function useAddCardForm() {
 	const { dispatch } = useStepper();
@@ -35,6 +36,7 @@ export default function useAddCardForm() {
 		e.preventDefault();
 		const cardPassword = `${firstCardPassword}${secondCardPassword}`;
 		const paymentCard: PaymentCardType = {
+			id: uuid(),
 			cardNumber,
 			cardExpiredDate,
 			cardHolderName,
