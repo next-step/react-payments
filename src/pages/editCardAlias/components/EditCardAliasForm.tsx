@@ -11,9 +11,9 @@ interface EditCardAliasFormProps {
 export default function EditCardAliasForm({
 	data: paymentCard,
 }: EditCardAliasFormProps) {
-	const { value: cardAlias, handleChange: handleCardAliasChange } = useInput(
-		{},
-	);
+	const { value: cardAlias, handleChange: handleCardAliasChange } = useInput({
+		initialValue: paymentCard.cardAlias,
+	});
 	const { dispatch } = useStepper();
 	const setCards = useSetCards();
 	const handleSubmit = useCallback(() => {
