@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react';
+import {type Meta, type StoryObj} from '@storybook/react';
 import Card from './Card';
 import '../../../styles/card.css';
 const meta = {
@@ -7,7 +7,7 @@ const meta = {
   argTypes: {
     status: {
       options: ['big', 'small', 'empty'],
-      control: { type: 'radio' },
+      control: {type: 'radio'},
     },
   },
 } satisfies Meta<typeof Card>;

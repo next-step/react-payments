@@ -1,11 +1,9 @@
 import classNames from 'classnames';
-import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren } from 'react';
+import {type DetailedHTMLProps, type HTMLAttributes, type PropsWithChildren} from 'react';
 
 type BaseButtonBox = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
-interface ButtonBoxProps extends BaseButtonBox, PropsWithChildren {}
+type ButtonBoxProps = Record<string, unknown> & BaseButtonBox & PropsWithChildren;
 
-const ButtonBox = ({ className, children }: ButtonBoxProps) => {
-  return <div className={classNames(className, 'button-box')}>{children}</div>;
-};
+const ButtonBox = ({className, children}: ButtonBoxProps) => <div className={classNames(className, 'button-box')}>{children}</div>;
 
 export default ButtonBox;

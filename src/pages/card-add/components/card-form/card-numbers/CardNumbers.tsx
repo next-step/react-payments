@@ -1,15 +1,13 @@
 import Input from '@/components/common/input/Input';
 import { CARD_NUMBER_LIMIT } from '@/domain/constant';
-import { ForwardedRef, createRef, forwardRef } from 'react';
+import { type ForwardedRef, forwardRef } from 'react';
 import useNumbers from './hook/useCardNumbers';
 
-export const createHyphen = (value: string) => {
-  return value && value.length === CARD_NUMBER_LIMIT && '-';
-};
+export const createHyphen = (value: string) => value && value.length === CARD_NUMBER_LIMIT && '-';
 
-interface CardNumberProps {
+type CardNumberProps = {
   nextFocus: any;
-}
+};
 const CardNumbers = forwardRef(
   ({ nextFocus }: CardNumberProps, ref: ForwardedRef<HTMLInputElement>) => {
     const { inputRef, cardNumbers, handleChange } = useNumbers({ nextFocus });

@@ -1,5 +1,7 @@
-import { Route } from '@/domain/type';
-import { ReactNode, createContext, useState } from 'react';
+import {type Route} from '@/domain/type';
+import {
+  type PropsWithChildren, ReactNode, createContext, useState,
+} from 'react';
 
 type StepType = {
   route: Route;
@@ -11,17 +13,15 @@ const initialState: StepType = {
   navigate: () => undefined,
 };
 
-interface StepProviderProps {
-  children: (route: string) => ReactNode;
-}
-
 export const StepContext = createContext(initialState);
 
-const StepProvider = ({ children }: StepProviderProps) => {
+const StepProvider = ({children}: PropsWithChildren) => {
   const [route, setRoute] = useState<Route>('CARD');
-  const navigate = (path: Route) => setRoute(path);
+  const navigate = (path: Route) => {
+    setRoute(path);
+  };
 
-  return <StepContext.Provider value={{ route, navigate }}>{children(route)}</StepContext.Provider>;
+  return <StepContext.Provider value={{route, navigate}}>{children}</StepContext.Provider>;
 };
 
 export default StepProvider;

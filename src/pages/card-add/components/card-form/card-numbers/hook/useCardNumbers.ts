@@ -2,7 +2,7 @@ import { CARD_NUMBER_LIMIT } from '@/domain/constant';
 import { validCardNumber } from '@/domain/validate';
 import useInputFocus from '@/pages/card-add/hook/useInputFocus';
 import useCardContext from '@/provider/card-info-provider/hook/useCardContext';
-import { ChangeEvent } from 'react';
+import { type ChangeEvent } from 'react';
 
 const REF_SIZE = 3;
 const useNumbers = ({ nextFocus }: { nextFocus: any }) => {
@@ -22,12 +22,15 @@ const useNumbers = ({ nextFocus }: { nextFocus: any }) => {
       if (name === 'first' && value.length === CARD_NUMBER_LIMIT) {
         second.current?.focus();
       }
+
       if (name === 'second' && value.length === CARD_NUMBER_LIMIT) {
         third.current?.focus();
       }
+
       if (name === 'third' && value.length === CARD_NUMBER_LIMIT) {
         fourth.current?.focus();
       }
+
       if (name === 'fourth' && value.length === CARD_NUMBER_LIMIT) {
         nextFocus.current.focus();
       }

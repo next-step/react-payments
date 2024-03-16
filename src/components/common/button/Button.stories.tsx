@@ -1,11 +1,11 @@
-import { Meta, StoryObj } from '@storybook/react';
+import {type Meta, type StoryObj} from '@storybook/react';
 import Button from './Button';
 import '../../../../styles/button.css';
 
 const meta: Meta<typeof Button> = {
   title: 'Button',
   component: Button,
-  // decorators: [
+  // Decorators: [
   //   (Story) => (
   //     <ButtonBox>
   //       <Story />

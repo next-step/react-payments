@@ -1,22 +1,20 @@
-import { PropsWithChildren } from 'react';
+import {type PropsWithChildren} from 'react';
 
-interface ModalProps extends PropsWithChildren {
+type ModalProps = {
   onToggle: () => void;
   isOpen: boolean;
-}
-const Modal = ({ onToggle, isOpen, children }: ModalProps) => {
-  return isOpen ? (
-    <div className="modal-dimmed" onClick={onToggle}>
-      <div
-        className="modal"
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        {children}
-      </div>
+} & PropsWithChildren;
+const Modal = ({onToggle, isOpen, children}: ModalProps) => isOpen ? (
+  <div className='modal-dimmed' onClick={onToggle}>
+    <div
+      className='modal'
+      onClick={e => {
+        e.stopPropagation();
+      }}
+    >
+      {children}
     </div>
-  ) : null;
-};
+  </div>
+) : null;
 
 export default Modal;

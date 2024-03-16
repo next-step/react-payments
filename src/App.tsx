@@ -1,26 +1,12 @@
-import CardList from './pages/card-list/CardList';
-import AddCard from './pages/card-add/AddCard';
-import CardRegisterComplete from './pages/card-register-complete/CardRegisterComplete';
-import CardInfoProvider from './provider/card-info-provider/CardInfoProvider';
+import Stepper from './pages/Stepper';
 import MyCardsProvider from './provider/my-cards-provider/MyCardsProvider';
 import StepProvider from './provider/step-provider/StepProvider';
-import ModalProvider from './provider/modal-provider/ModalProvider';
 
 const App = () => (
-  <div className="root">
+  <div className='root'>
     <MyCardsProvider>
       <StepProvider>
-        {(route) => (
-          <>
-            {'LIST' === route && <CardList />}
-            <CardInfoProvider>
-              <ModalProvider>
-                {'CARD' === route && <AddCard />}
-                {'COMPLETE' === route && <CardRegisterComplete />}
-              </ModalProvider>
-            </CardInfoProvider>
-          </>
-        )}
+        <Stepper />
       </StepProvider>
     </MyCardsProvider>
   </div>

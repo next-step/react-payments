@@ -1,15 +1,13 @@
 import classNames from 'classnames';
-import { DetailedHTMLProps, HTMLAttributes, PropsWithChildren } from 'react';
+import {type DetailedHTMLProps, type HTMLAttributes, type PropsWithChildren} from 'react';
 type BaseCardFormProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
-interface CardFormProps extends BaseCardFormProps, PropsWithChildren {
+type CardFormProps = {
   status: string;
-}
-const CardForm = ({ status, children, style }: CardFormProps) => {
-  return (
-    <div className={classNames(`${status}-card`)} style={style}>
-      {children}
-    </div>
-  );
-};
+} & BaseCardFormProps & PropsWithChildren;
+const CardForm = ({status, children, style}: CardFormProps) => (
+  <div className={classNames(`${status}-card`)} style={style}>
+    {children}
+  </div>
+);
 
 export default CardForm;

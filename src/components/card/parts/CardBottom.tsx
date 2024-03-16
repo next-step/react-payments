@@ -1,7 +1,5 @@
-import { PropsWithChildren } from 'react';
+import {type PropsWithChildren} from 'react';
 
-const CardBottom = ({ children }: PropsWithChildren) => {
-  return <div className="card-bottom">{children}</div>;
-};
+const CardBottom = ({children}: PropsWithChildren) => <div className='card-bottom'>{children}</div>;
 
 export default CardBottom;

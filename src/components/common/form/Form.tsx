@@ -1,7 +1,5 @@
-import { PropsWithChildren } from 'react';
+import {type PropsWithChildren} from 'react';
 
-const Form = ({ children }: PropsWithChildren) => {
-  return <form>{children}</form>;
-};
+const Form = ({children}: PropsWithChildren) => <form>{children}</form>;
 
 export default Form;
