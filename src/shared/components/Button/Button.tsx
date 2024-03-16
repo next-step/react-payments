@@ -9,18 +9,6 @@ type ButtonProps = PropsWithChildren<
   StyleProps & AsProps & HTMLProps<HTMLButtonElement> & ButtonOptionalProps & ButtonHoverProps
 >;
 
-export const Button = ({
-  children,
-  type = 'button',
-  variant = 'solid',
-  colorScheme = 'teal',
-  ...rest
-}: ButtonProps) => (
-  <Root type={type} variant={variant} colorScheme={colorScheme} {...rest}>
-    {children}
-  </Root>
-);
-
 const Root = styled.button<ButtonProps & Required<ButtonOptionalProps> & ButtonHoverProps>`
   width: ${({ width }) => width || 'auto'};
   height: ${({ height }) => height || 'auto'};
@@ -69,5 +57,17 @@ const Root = styled.button<ButtonProps & Required<ButtonOptionalProps> & ButtonH
   ${({ fontSize }) => fontSize && `background-color: ${fontSize};`};
   ${({ padding }) => padding && `padding: ${padding};`};
 `;
+
+export const Button = ({
+  children,
+  type = 'button',
+  variant = 'solid',
+  colorScheme = 'teal',
+  ...rest
+}: ButtonProps) => (
+  <Root variant={variant} colorScheme={colorScheme} {...rest}>
+    {children}
+  </Root>
+);
 
 Button.displayName = 'Button';

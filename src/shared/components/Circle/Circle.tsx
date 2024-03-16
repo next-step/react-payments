@@ -5,6 +5,8 @@ import type { AsProps, StyleProps } from '@/shared/types';
 
 type CircleProps = PropsWithChildren<StyleProps & AsProps>;
 
+const Root = styled(DefaultStyled)<CircleProps>``;
+
 export const Circle = ({
   children,
   display = 'flex',
@@ -30,7 +32,5 @@ export const Circle = ({
     {children}
   </Root>
 );
-
-const Root = styled(DefaultStyled)<CircleProps>``;
 
 Circle.displayName = 'Circle';

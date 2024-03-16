@@ -2,6 +2,8 @@ import styled from '@emotion/styled';
 
 import type { AsProps, StyleProps } from '@/shared/types';
 
+type DefaultStyledProps = StyleProps & AsProps;
+
 export const DefaultStyled = styled.div<DefaultStyledProps>`
   ${({ display }) => display && `display: ${display};`};
   ${({ flex }) => flex && `flex: ${flex};`};
@@ -69,5 +71,3 @@ export const DefaultStyled = styled.div<DefaultStyledProps>`
   ${({ overflow }) => overflow && `overflow: ${overflow};`};
   ${({ transition }) => transition && `transition: ${transition};`};
 `;
-
-type DefaultStyledProps = StyleProps & AsProps;

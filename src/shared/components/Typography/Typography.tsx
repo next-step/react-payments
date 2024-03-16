@@ -21,28 +21,6 @@ type TypographyProps = PropsWithChildren<
     }
 >;
 
-export const Typography = ({
-  children,
-  as = 'span',
-  variant = 'body',
-  whiteSpace = 'pre-wrap',
-  fontSize,
-  fontWeight,
-  ...props
-}: TypographyProps) => {
-  const typographyProps = {
-    fontSize: fontSize || typographyVariantStyle[variant].fontSize,
-    fontWeight: fontWeight || typographyVariantStyle[variant].fontWeight,
-    lineHeight: typographyVariantStyle[variant].lineHeight,
-    letterSpacing: typographyVariantStyle[variant].letterSpacing,
-  };
-  return (
-    <Root as={as} variant={variant} whiteSpace={whiteSpace} {...typographyProps} {...props}>
-      {children}
-    </Root>
-  );
-};
-
 const Root = styled(DefaultStyled)<TypographyProps>``;
 
 export const typographyVariantStyle = {
@@ -83,5 +61,27 @@ export const typographyVariantStyle = {
     letterSpacing: '0.1rem',
   },
 } as const;
+
+export const Typography = ({
+  children,
+  as = 'span',
+  variant = 'body',
+  whiteSpace = 'pre-wrap',
+  fontSize,
+  fontWeight,
+  ...props
+}: TypographyProps) => {
+  const typographyProps = {
+    fontSize: fontSize || typographyVariantStyle[variant].fontSize,
+    fontWeight: fontWeight || typographyVariantStyle[variant].fontWeight,
+    lineHeight: typographyVariantStyle[variant].lineHeight,
+    letterSpacing: typographyVariantStyle[variant].letterSpacing,
+  };
+  return (
+    <Root as={as} variant={variant} whiteSpace={whiteSpace} {...typographyProps} {...props}>
+      {children}
+    </Root>
+  );
+};
 
 Typography.displayName = 'Typography';
