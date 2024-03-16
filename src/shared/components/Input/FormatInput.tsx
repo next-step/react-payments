@@ -7,11 +7,13 @@ import {
   ReactElement,
   InputHTMLAttributes,
   ChangeEvent,
+  useEffect,
+  useState,
 } from 'react';
 import { useInputFieldsValues, useInputRefs } from './hooks';
 import { findComponentsInChildren, isValidateInputValueByType, isValidInputRef } from './utils';
-import type { StyleProps } from '@/shared';
 import {
+  StyleProps,
   styleToken,
   Box,
   HStack,
@@ -75,7 +77,7 @@ export const FormatInput = ({
       separator,
       showCompletedSeparator,
     }),
-    [id, values, inputElementCount, type, mask, separator, showCompletedSeparator],
+    [id, values, inputElementCount, updateValue, inputRefs, type, mask, separator, showCompletedSeparator],
   );
 
   return (
@@ -200,13 +202,26 @@ const FormatInputTextCounter = ({ index, ...props }: PropsWithChildren<{ index: 
   }
   const { inputRefs } = context;
   const inputRef = inputRefs[index];
-  const valueLength = inputRef.current?.value.length;
-  const maxLength = inputRef.current?.maxLength;
-  const counter = `${valueLength} / ${maxLength}`;
+
+  const [{ maxLength, currentLength }, setCounterState] = useState({
+    maxLength: 0,
+    currentLength: 0,
+  });
+
+  const counterText = `${currentLength} / ${maxLength}`;
+
+  useEffect(() => {
+    if (inputRef.current) {
+      setCounterState({
+        maxLength: inputRef.current?.maxLength ?? 0,
+        currentLength: inputRef.current?.value.length ?? 0,
+      });
+    }
+  }, [inputRef]);
 
   return (
     <Typography variant="caption" color={styleToken.color.gray400} {...props}>
-      {counter}
+      {counterText}
     </Typography>
   );
 };
