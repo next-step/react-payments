@@ -1,4 +1,4 @@
-import { useId, useRef, ChangeEvent } from 'react';
+import { useId, useRef, ChangeEvent, useEffect } from 'react';
 import { shallowEqual } from '@xstate/react';
 
 import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine.ts';
@@ -22,6 +22,18 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 			shallowEqual,
 		);
 
+	const isSecondSegmentFocus = useAddCardMachineSelector(state =>
+		state.matches({ AddCardForm: { enterCardInfo: 'cardNumberSecondSegment' } }),
+	);
+
+	const isThirdSegmentFocus = useAddCardMachineSelector(state =>
+		state.matches({ AddCardForm: { enterCardInfo: 'cardNumberThirdSegment' } }),
+	);
+
+	const isFourthSegmentFocus = useAddCardMachineSelector(state =>
+		state.matches({ AddCardForm: { enterCardInfo: 'cardNumberFourthSegment' } }),
+	);
+
 	const secondSegmentInputRef = useRef<HTMLInputElement>(null);
 	const thirdSegmentInputRef = useRef<HTMLInputElement>(null);
 	const fourthSegmentInputRef = useRef<HTMLInputElement>(null);
@@ -31,31 +43,31 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 	const handleFirstSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
 
-		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberFirstSegment' });
+		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberFirstSegment', maxLength: segmentLength });
+	};
 
-		if (formattedValue.length === segmentLength) {
-			secondSegmentInputRef.current?.focus();
-		}
+	const handleFirstSegmentFocus = () => {
+		send({ type: 'FOCUS_CARD_NUMBER_FIRST_SEGMENT' });
 	};
 
 	const handleSecondSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
 
-		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberSecondSegment' });
+		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberSecondSegment', maxLength: segmentLength });
+	};
 
-		if (formattedValue.length === segmentLength) {
-			thirdSegmentInputRef.current?.focus();
-		}
+	const handleSecondSegmentFocus = () => {
+		send({ type: 'FOCUS_CARD_NUMBER_SECOND_SEGMENT' });
 	};
 
 	const handleThirdSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
 
-		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberThirdSegment' });
+		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberThirdSegment', maxLength: segmentLength });
+	};
 
-		if (formattedValue.length === segmentLength) {
-			fourthSegmentInputRef.current?.focus();
-		}
+	const handleThirdSegmentFocus = () => {
+		send({ type: 'FOCUS_CARD_NUMBER_THIRD_SEGMENT' });
 	};
 
 	const handleFourthSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -63,8 +75,34 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 			type: 'CHANGE_FIELD',
 			value: event.target.value.replace(REGEX.EXCLUDE_NUMBER, ''),
 			field: 'cardNumberFourthSegment',
+			maxLength: segmentLength,
 		});
 	};
+
+	const handleFourthSegmentFocus = () => {
+		send({ type: 'FOCUS_CARD_NUMBER_FOURTH_SEGMENT' });
+	};
+
+	useEffect(() => {
+		if (isSecondSegmentFocus && secondSegmentInputRef.current) {
+			secondSegmentInputRef.current.focus();
+		}
+
+		if (isThirdSegmentFocus && thirdSegmentInputRef.current) {
+			thirdSegmentInputRef.current.focus();
+		}
+
+		if (isFourthSegmentFocus && fourthSegmentInputRef.current) {
+			fourthSegmentInputRef.current.focus();
+		}
+	}, [
+		isSecondSegmentFocus,
+		secondSegmentInputRef,
+		isThirdSegmentFocus,
+		thirdSegmentInputRef,
+		isFourthSegmentFocus,
+		fourthSegmentInputRef,
+	]);
 
 	return (
 		<div className="input-container">
@@ -79,6 +117,7 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 					onChange={handleFirstSegmentChange}
 					id={cardNumberInputId}
 					maxLength={segmentLength}
+					onFocus={handleFirstSegmentFocus}
 				/>
 				<div>-</div>
 				<input
@@ -88,6 +127,7 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 					onChange={handleSecondSegmentChange}
 					ref={secondSegmentInputRef}
 					maxLength={segmentLength}
+					onFocus={handleSecondSegmentFocus}
 				/>
 				<div>-</div>
 				<input
@@ -98,6 +138,7 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 					onChange={handleThirdSegmentChange}
 					ref={thirdSegmentInputRef}
 					maxLength={segmentLength}
+					onFocus={handleThirdSegmentFocus}
 				/>
 				<div>-</div>
 				<input
@@ -108,6 +149,7 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 					onChange={handleFourthSegmentChange}
 					ref={fourthSegmentInputRef}
 					maxLength={segmentLength}
+					onFocus={handleFourthSegmentFocus}
 				/>
 			</div>
 		</div>

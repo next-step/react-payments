@@ -31,7 +31,12 @@ export default function CardExpirationDateInput({ separator = '/' }: CardExpirat
 			type: 'CHANGE_FIELD',
 			value: formatExpirationDate(separator)(event.target.value),
 			field: 'cardExpirationDate',
+			maxLength: 7,
 		});
+	};
+
+	const handleExpirationDateFocus = () => {
+		send({ type: 'FOCUS_CARD_EXPIRATION_DATE' });
 	};
 
 	return (
@@ -46,6 +51,7 @@ export default function CardExpirationDateInput({ separator = '/' }: CardExpirat
 				value={cardExpirationDate}
 				onChange={handleExpirationDateChange}
 				data-testid="card-expiration-date"
+				onFocus={handleExpirationDateFocus}
 			/>
 		</div>
 	);

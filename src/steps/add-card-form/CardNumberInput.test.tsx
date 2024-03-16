@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import CardNumberInput from 'src/steps/add-card-form/CardNumberInput.tsx';
@@ -54,7 +54,9 @@ describe('카드 번호 입력', () => {
 
 		await userEvent.type(firstInput, '12345');
 
-		expect(document.activeElement).toBe(secondInput);
+		await waitFor(() => {
+			expect(document.activeElement).toBe(secondInput);
+		});
 	});
 
 	it('두번째 input에 4자리 이상 입력 시, 세번째 input으로 포커스가 이동된다.', async () => {

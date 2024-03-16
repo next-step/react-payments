@@ -1,4 +1,4 @@
-import { ChangeEvent, useId, useRef } from 'react';
+import { ChangeEvent, useEffect, useId, useRef } from 'react';
 import { shallowEqual } from '@xstate/react';
 
 import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
@@ -11,6 +11,19 @@ interface CardPasswordInputProps {
 export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPasswordInputProps) {
 	const { send } = useAddCardMachineActorRef();
 
+	const cardPasswordInputId = useId();
+
+	const firstPasswordInputRef = useRef<HTMLInputElement>(null);
+	const secondPasswordInputRef = useRef<HTMLInputElement>(null);
+
+	const isFirstPasswordFocus = useAddCardMachineSelector(state =>
+		state.matches({ AddCardForm: { enterCardInfo: 'cardPasswordFirstDigit' } }),
+	);
+
+	const isSecondPasswordFocus = useAddCardMachineSelector(state =>
+		state.matches({ AddCardForm: { enterCardInfo: 'cardPasswordSecondDigit' } }),
+	);
+
 	const { cardPasswordFirstDigit, cardPasswordSecondDigit } = useAddCardMachineSelector(
 		state => ({
 			cardPasswordFirstDigit: state.context.cardInfo.cardPasswordFirstDigit,
@@ -18,19 +31,14 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 		}),
 		shallowEqual,
 	);
-
-	const cardPasswordInputId = useId();
-
-	const secondPasswordInputRef = useRef<HTMLInputElement>(null);
-
 	const handleFirstPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
 
-		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardPasswordFirstDigit' });
+		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardPasswordFirstDigit', maxLength: segmentMaxLength });
+	};
 
-		if (formattedValue.length === segmentMaxLength) {
-			secondPasswordInputRef.current?.focus();
-		}
+	const handleFirstPasswordFocus = () => {
+		send({ type: 'FOCUS_CARD_PASSWORD_FIRST_DIGIT' });
 	};
 
 	const handleSecondPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -38,8 +46,23 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 			type: 'CHANGE_FIELD',
 			value: event.target.value.replace(REGEX.EXCLUDE_NUMBER, ''),
 			field: 'cardPasswordSecondDigit',
+			maxLength: segmentMaxLength,
 		});
 	};
+
+	const handleSecondPasswordFocus = () => {
+		send({ type: 'FOCUS_CARD_PASSWORD_SECOND_DIGIT' });
+	};
+
+	useEffect(() => {
+		if (isFirstPasswordFocus && firstPasswordInputRef.current) {
+			firstPasswordInputRef.current.focus();
+		}
+
+		if (isSecondPasswordFocus && secondPasswordInputRef.current) {
+			secondPasswordInputRef.current.focus();
+		}
+	}, [isSecondPasswordFocus, secondPasswordInputRef, isFirstPasswordFocus, firstPasswordInputRef]);
 
 	return (
 		<div className="input-container">
@@ -55,6 +78,8 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 					onChange={handleFirstPasswordChange}
 					id={cardPasswordInputId}
 					maxLength={segmentMaxLength}
+					onFocus={handleFirstPasswordFocus}
+					ref={firstPasswordInputRef}
 				/>
 				<input
 					data-testid="second-password"
@@ -64,6 +89,7 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 					onChange={handleSecondPasswordChange}
 					ref={secondPasswordInputRef}
 					maxLength={segmentMaxLength}
+					onFocus={handleSecondPasswordFocus}
 				/>
 				<input readOnly value=" " type="password" className="input-basic w-15 password-readonly" />
 				<input readOnly value=" " type="password" className="input-basic w-15 password-readonly" />
