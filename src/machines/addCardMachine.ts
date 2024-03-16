@@ -299,7 +299,11 @@ export const addCardMachine = createMachine(
 					});
 				}
 
-				if (event.type === 'CHANGE_FIELD' && event.field !== 'cardCompanyCode') {
+				if (
+					event.type === 'CHANGE_FIELD' &&
+					event.field !== 'cardCompanyCode' &&
+					context.cardInfo.cardCompanyCode === ''
+				) {
 					enqueue.raise({ type: 'INFER_CARD_COMPANY_CODE' });
 				}
 
