@@ -12,8 +12,8 @@ import {
  * @template Data - Funnel에서 사용할 데이터 타입
  * @param {GetFunnelProps<StepKey>} param0 - 초기 Step
  * @returns {{
- *  Funnel: React.FC<React.PropsWithChildren>;
- *  useFunnel: () => FunnelContextProps<StepKey>;
+ *  Funnel: React.FC<React.PropsWithChildren<{}>>;
+ *  useFunnel: () => FunnelContextProps<StepKey, Data>;
  * }}
  */
 export const createFunnel = <StepKey, Data = undefined>({
@@ -52,13 +52,8 @@ export const createFunnel = <StepKey, Data = undefined>({
     );
   };
 
-  return {
-    Funnel: Object.assign(FunnelContainer, {
-      Step,
-    }),
-
-    useFunnel: () => useContext(FunnelContext),
-  };
+  return Object.assign(FunnelContainer, {
+    Step,
+    useContext: () => useContext(FunnelContext),
+  });
 };
-
-// FunnelClient 인스턴스 생성해서 Provider에 주입하는 형식으로 해도 됨.

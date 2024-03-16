@@ -1,9 +1,9 @@
 import { CardInput } from '@/components/input/molecules/card/CardInput';
 import { useForm } from '@/hooks/useForm/useForm';
-import { usePaymentsFunnel } from '../payments.context';
 import { STEP } from '../payments.constant';
 import { Card } from '@/components/card/Card';
 import { Card as CardData } from '../payments.type';
+import { Funnel } from '../payments.context';
 
 export interface CardFulfilledForm {
   number: boolean;
@@ -18,7 +18,7 @@ export type CardFulfilledAction = React.Dispatch<
 >;
 
 export const AddCard = () => {
-  const { setStep, setData } = usePaymentsFunnel();
+  const { setStep, setData } = Funnel.useContext();
   const formMethods = useForm();
   const values = formMethods.values as unknown as CardData;
   const { errors } = formMethods;
