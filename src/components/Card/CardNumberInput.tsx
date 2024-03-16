@@ -44,7 +44,9 @@ export const CardNumberInput = () => {
               ref={(elem) => {
                 elem && (inputRef.current[i] = elem);
               }}
-              onChange={(value: string) => onChange(value, i)}
+              {...(i !== inputProps.length - 1 && {
+                onChange: (value: string) => onChange(value, i),
+              })}
             />
             {i !== inputProps.length - 1 && <span>-</span>}
           </Fragment>

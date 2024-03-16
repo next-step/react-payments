@@ -11,8 +11,14 @@ const commonProps: ComponentProps<typeof NumberInput> = {
 export const CardExpireDayInput = () => {
   const inputRef = useRef<HTMLInputElement[]>([]);
 
+  const passInputFocus = (value: string, index: number) => {
+    if (value.length === 2) {
+      inputRef.current[index + 1].focus();
+    }
+  };
   const handleChange = (value: string) => {
     if (!+value || (+value >= 1 && +value <= 12)) {
+      passInputFocus(value, 0);
       return value;
     } else {
       alert("만기월은 1~12사이의 숫자만 가능합니다.");
