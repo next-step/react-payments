@@ -1,10 +1,10 @@
 import { STEP } from '../payments.constant';
-import { usePaymentsFunnel } from '../payments.context';
 import { Card } from '@/components/card/Card';
 import { Card as CardData } from '../payments.type';
+import { Funnel } from '../payments.context';
 
 export const CardList = () => {
-  const { setStep, setData, data } = usePaymentsFunnel();
+  const { setStep, setData, data } = Funnel.useContext();
 
   const cardList = data?.cardList || [];
 

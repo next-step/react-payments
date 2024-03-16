@@ -7,10 +7,7 @@ export const initialData: CardFunnelData = {
   tempCard: null,
 };
 
-export const { Funnel, useFunnel: usePaymentsFunnel } = createFunnel<
-  PaymentsStep,
-  typeof initialData
->({
+export const Funnel = createFunnel<PaymentsStep, typeof initialData>({
   initialStep: STEP.INITIAL_STEP,
   initialData,
 });

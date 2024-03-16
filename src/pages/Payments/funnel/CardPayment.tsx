@@ -1,9 +1,9 @@
-import { usePaymentsFunnel } from '../payments.context';
 import { STEP } from '../payments.constant';
+import { Funnel } from '../payments.context';
 import { PaymentsStepKey } from '../payments.type';
 
 export const CardPayment = () => {
-  const { setStep } = usePaymentsFunnel();
+  const { setStep } = Funnel.useContext();
 
   return (
     <div>
