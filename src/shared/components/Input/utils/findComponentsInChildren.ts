@@ -1,9 +1,6 @@
 import { Children, isValidElement, ReactElement, ReactNode } from 'react';
 
-export const findComponentsInChildren = (
-  children: ReactNode,
-  targetComponentName: string,
-): ReactElement<{ index: number }>[] =>
+export const findComponentsInChildren = (children: ReactNode, targetComponentName: string) =>
   Children.toArray(children).flatMap((child): ReactElement<{ index: number }>[] => {
     if (isValidElement(child) && typeof child.type !== 'string') {
       const componentName = (child.type as any)?.name;

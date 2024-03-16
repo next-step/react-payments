@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - bytrustu
     paths:
       - 'src/card/components/**'
       - 'src/shared/components/**'

@@ -109,7 +109,7 @@ const PinInputField = ({
   const { id, inputElementCount, placeholder, values, updateValue, inputRefs, type, mask } = context;
   const inputRef = inputRefs[index];
 
-  const onChange = (e: FormEvent<HTMLInputElement>) => {
+  const handleChange = (e: FormEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value;
     if (!isValidateInputValueByType(type, inputValue)) {
       return;
@@ -142,7 +142,7 @@ const PinInputField = ({
       fontWeight={fontWeight}
       textAlign="center"
       marginRight={marginRight}
-      onChange={onChange}
+      onChange={handleChange}
       {...(isValidInputRef(inputRef) && { ref: inputRef })}
       {...props}
     />

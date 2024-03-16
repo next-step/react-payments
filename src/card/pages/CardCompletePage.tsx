@@ -22,7 +22,7 @@ export const CardCompletePage = () => {
     setCardDescriptionInputValue(e.target.value.trim());
   };
 
-  const onCardCompleteClick = () => {
+  const completeCardRegistry = () => {
     const description = removeAllSpaces(cardDescriptionInputValue) ? cardDescriptionInputValue : cardBrandName;
 
     if (isCardExist(card)) {
@@ -68,7 +68,7 @@ export const CardCompletePage = () => {
       </AppDisplay.Body>
       <AppDisplay.Footer>
         <HStack justifyContent="flex-end">
-          <Button variant="solid" color="teal" fontSize="100px" onClick={onCardCompleteClick}>
+          <Button variant="solid" color="teal" fontSize="100px" onClick={completeCardRegistry}>
             완료
           </Button>
         </HStack>
