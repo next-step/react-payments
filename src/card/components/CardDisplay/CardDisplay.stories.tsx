@@ -3,7 +3,7 @@ import { CardDisplay } from '@/card';
 import { AppDisplay, VStack, styleToken } from '@/shared';
 
 const meta: Meta<typeof CardDisplay> = {
-  title: 'CardComponents/CardDisplay',
+  title: 'CARD/CardDisplay',
   component: CardDisplay,
   parameters: {
     layout: 'centered',

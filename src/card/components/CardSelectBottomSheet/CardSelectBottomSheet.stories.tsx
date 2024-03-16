@@ -3,7 +3,7 @@ import { CardBrand, CardSelectBottomSheet } from '@/card';
 import { AppDisplay } from '@/shared';
 
 const meta: Meta<typeof CardSelectBottomSheet> = {
-  title: 'Components/CardSelectBottomSheet',
+  title: 'CARD/CardSelectBottomSheet',
   component: CardSelectBottomSheet,
   parameters: {
     layout: 'centered',
