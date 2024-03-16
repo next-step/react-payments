@@ -3,7 +3,7 @@ import {
   Typography,
   TypographyVariants,
   typographyVariantStyle,
-  AppLayout,
+  AppDisplay,
   VStack,
   storybookControls,
   styleToken,
@@ -24,9 +24,9 @@ const meta: Meta<typeof Typography> = {
   },
   decorators: [
     (Story) => (
-      <AppLayout>
+      <AppDisplay>
         <Story />
-      </AppLayout>
+      </AppDisplay>
     ),
   ],
 };

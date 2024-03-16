@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { AppLayout, FormatInput, styleToken, Typography, isValidateMonthString } from '@/shared';
+import { AppDisplay, FormatInput, styleToken, Typography, isValidateMonthString } from '@/shared';
 
 const meta: Meta<typeof FormatInput> = {
   title: 'Components/FormatInput',
@@ -11,9 +11,9 @@ const meta: Meta<typeof FormatInput> = {
   argTypes: {},
   decorators: [
     (Story) => (
-      <AppLayout>
+      <AppDisplay>
         <Story />
-      </AppLayout>
+      </AppDisplay>
     ),
   ],
 };

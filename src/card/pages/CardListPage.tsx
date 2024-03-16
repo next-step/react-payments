@@ -1,5 +1,5 @@
 import { CardDisplay, CardPageIndex, CardState, useCard } from '@/card';
-import { AppLayout, Typography, VStack, useFunnel, Button, HStack } from '@/shared';
+import { AppDisplay, Typography, VStack, useFunnel, Button, HStack } from '@/shared';
 
 export const CardListPage = () => {
   const { ownerCards, setCard, resetCurrentCard, removeCardFromOwner } = useCard();
@@ -25,12 +25,12 @@ export const CardListPage = () => {
 
   return (
     <>
-      <AppLayout.Header>
+      <AppDisplay.Header>
         <Typography as="h1" variant="headline" padding="10px 0" margin="0">
           보유 카드
         </Typography>
-      </AppLayout.Header>
-      <AppLayout.Body>
+      </AppDisplay.Header>
+      <AppDisplay.Body>
         <VStack width="100%" spacing="20px" padding="20px 0">
           {ownerCardsDescending.map((ownerCard, index) => (
             <HStack
@@ -60,12 +60,12 @@ export const CardListPage = () => {
             </HStack>
           ))}
         </VStack>
-      </AppLayout.Body>
-      <AppLayout.Footer height="300px">
+      </AppDisplay.Body>
+      <AppDisplay.Footer height="300px">
         <VStack paddingTop="20px" alignItems="center">
           <CardDisplay.Add onClick={moveCardAddPage} />
         </VStack>
-      </AppLayout.Footer>
+      </AppDisplay.Footer>
     </>
   );
 };

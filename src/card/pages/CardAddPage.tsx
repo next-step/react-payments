@@ -20,7 +20,7 @@ import {
   styleToken,
   isValidateMonthString,
   useFunnel,
-  AppLayout,
+  AppDisplay,
   FormatInput,
   Tooltip,
   PinInput,
@@ -107,7 +107,7 @@ export const CardAddPage = () => {
         onCardBrandClick={onCardBrandClick}
         onOverlayClick={closeCardSelect}
       />
-      <AppLayout.Header>
+      <AppDisplay.Header>
         <Button
           variant="ghost"
           color="teal"
@@ -128,8 +128,8 @@ export const CardAddPage = () => {
             카드 추가
           </Typography>
         </Button>
-      </AppLayout.Header>
-      <AppLayout.Body>
+      </AppDisplay.Header>
+      <AppDisplay.Body>
         <VStack spacing="18px" marginTop="20px">
           <Box margin="0 auto">
             <CardDisplay
@@ -252,8 +252,8 @@ export const CardAddPage = () => {
             </PinInput.Control>
           </PinInput.Root>
         </VStack>
-      </AppLayout.Body>
-      <AppLayout.Footer>
+      </AppDisplay.Body>
+      <AppDisplay.Footer>
         <HStack justifyContent="flex-end">
           {isValidateCardState && (
             <Button variant="solid" color="teal" fontSize="100px" onClick={updateCardWithGoToNextPage}>
@@ -261,7 +261,7 @@ export const CardAddPage = () => {
             </Button>
           )}
         </HStack>
-      </AppLayout.Footer>
+      </AppDisplay.Footer>
     </>
   );
 };

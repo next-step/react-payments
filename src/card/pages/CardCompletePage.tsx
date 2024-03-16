@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { CardDisplay, useCard } from '@/card';
-import { AppLayout, Button, HStack, TextField, Typography, VStack, removeAllSpaces, useFunnel } from '@/shared';
+import { AppDisplay, Button, HStack, TextField, Typography, VStack, removeAllSpaces, useFunnel } from '@/shared';
 
 const CARD_DESCRIPTION_MAX_LENGTH = 10;
 
@@ -38,8 +38,8 @@ export const CardCompletePage = () => {
 
   return (
     <>
-      <AppLayout.Header />
-      <AppLayout.Body>
+      <AppDisplay.Header />
+      <AppDisplay.Body>
         <VStack spacing="20px" marginTop="20px">
           <Typography variant="headline" textAlign="center" margin="40px 0">
             카드 등록이 완료되었습니다.
@@ -65,14 +65,14 @@ export const CardCompletePage = () => {
             />
           </HStack>
         </VStack>
-      </AppLayout.Body>
-      <AppLayout.Footer>
+      </AppDisplay.Body>
+      <AppDisplay.Footer>
         <HStack justifyContent="flex-end">
           <Button variant="solid" color="teal" fontSize="100px" onClick={onCardCompleteClick}>
             완료
           </Button>
         </HStack>
-      </AppLayout.Footer>
+      </AppDisplay.Footer>
     </>
   );
 };

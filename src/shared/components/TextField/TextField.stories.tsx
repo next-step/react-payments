@@ -1,6 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { AppLayout, TextField, letterSpacingValue, storybookControls, styleToken } from '@/shared';
-import { TEXT_FIELD_VARIANTS } from '@/shared/components/TextField/TextField.type.ts';
+import {
+  AppDisplay,
+  TextField,
+  letterSpacingValue,
+  storybookControls,
+  styleToken,
+  TEXT_FIELD_VARIANTS,
+} from '@/shared';
 
 const FONT_SIZE = 18;
 const LETTER_SPACING = letterSpacingValue(FONT_SIZE, -8.5);
@@ -38,9 +44,9 @@ const meta: Meta = {
   },
   decorators: [
     (Story) => (
-      <AppLayout>
+      <AppDisplay>
         <Story />
-      </AppLayout>
+      </AppDisplay>
     ),
   ],
 } satisfies Meta<typeof TextField>;

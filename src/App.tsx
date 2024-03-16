@@ -1,9 +1,9 @@
 import { CardProvider } from 'src/card/providers';
 import { CardAddPage, CardCompletePage, CardListPage, CardPageIndex } from '@/card';
-import { AppLayout, Funnel } from '@/shared';
+import { AppDisplay, Funnel } from '@/shared';
 
 const App = () => (
-  <AppLayout.Root>
+  <AppDisplay.Root>
     <CardProvider>
       <Funnel.Root>
         <Funnel.Step index={CardPageIndex.CardListPage}>
@@ -17,6 +17,6 @@ const App = () => (
         </Funnel.Step>
       </Funnel.Root>
     </CardProvider>
-  </AppLayout.Root>
+  </AppDisplay.Root>
 );
 export default App;

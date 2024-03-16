@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { AppLayout, TextField, TypographyVariants, VStack, Label, storybookControls } from '@/shared';
+import { AppDisplay, TextField, TypographyVariants, VStack, Label, storybookControls } from '@/shared';
 
 const meta: Meta<typeof Label> = {
   title: 'Primitive/Label',
@@ -19,9 +19,9 @@ const meta: Meta<typeof Label> = {
   },
   decorators: [
     (Story) => (
-      <AppLayout>
+      <AppDisplay>
         <Story />
-      </AppLayout>
+      </AppDisplay>
     ),
   ],
 };

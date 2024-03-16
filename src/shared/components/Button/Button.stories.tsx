@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { AppLayout, Button, storybookControls } from '@/shared';
+import { AppDisplay, Button, storybookControls } from '@/shared';
 
 const meta: Meta<typeof Button> = {
   title: 'Primitive/Button',
@@ -31,9 +31,9 @@ const meta: Meta<typeof Button> = {
   },
   decorators: [
     (Story) => (
-      <AppLayout>
+      <AppDisplay>
         <Story />
-      </AppLayout>
+      </AppDisplay>
     ),
   ],
 };

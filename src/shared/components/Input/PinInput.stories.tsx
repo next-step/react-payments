@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { AppLayout, PinInput } from '@/shared';
+import { AppDisplay, PinInput } from '@/shared';
 
 const meta: Meta<typeof PinInput> = {
   title: 'Components/PinInput',
@@ -11,9 +11,9 @@ const meta: Meta<typeof PinInput> = {
   argTypes: {},
   decorators: [
     (Story) => (
-      <AppLayout>
+      <AppDisplay>
         <Story />
-      </AppLayout>
+      </AppDisplay>
     ),
   ],
 };

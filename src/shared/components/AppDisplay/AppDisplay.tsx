@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import { Box, VStack } from '@/shared/components';
 import { styleToken } from '@/shared/styles';
 
-export const AppLayout = ({ children }: PropsWithChildren) => (
+export const AppDisplay = ({ children }: PropsWithChildren) => (
   <Box
     as="main"
     position="relative"
@@ -13,37 +13,37 @@ export const AppLayout = ({ children }: PropsWithChildren) => (
     borderRadius="15px"
     border={`1px solid ${styleToken.color.body}`}
   >
-    <AppLayoutDisplay>{children}</AppLayoutDisplay>
+    <AppDisplayLayout>{children}</AppDisplayLayout>
   </Box>
 );
 
-const AppLayoutDisplay = ({ children }: PropsWithChildren) => (
+const AppDisplayLayout = ({ children }: PropsWithChildren) => (
   <VStack as="section" height="100%" padding="16px 24px">
     {children}
   </VStack>
 );
 
-const AppLayoutHeader = ({ children }: PropsWithChildren) => (
+const AppDisplayHeader = ({ children }: PropsWithChildren) => (
   <Box as="header" width={styleToken.width.w100} minHeight="30px">
     {children}
   </Box>
 );
 
-const AppLayoutBody = ({ children }: PropsWithChildren) => (
+const AppDisplayBody = ({ children }: PropsWithChildren) => (
   <VStack as="section" width={styleToken.width.w100} height="100%" flexGrow={1} overflow="auto">
     <VStack flex="1 0 auto">{children}</VStack>
   </VStack>
 );
 
-const AppLayoutFooter = ({ children, ...props }: PropsWithChildren<{ height?: string }>) => (
+const AppDisplayFooter = ({ children, ...props }: PropsWithChildren<{ height?: string }>) => (
   <Box as="footer" width={styleToken.width.w100} minHeight="30px" {...props}>
     {children}
   </Box>
 );
 
-AppLayout.Root = AppLayout;
-AppLayout.Header = AppLayoutHeader;
-AppLayout.Body = AppLayoutBody;
-AppLayout.Footer = AppLayoutFooter;
+AppDisplay.Root = AppDisplay;
+AppDisplay.Header = AppDisplayHeader;
+AppDisplay.Body = AppDisplayBody;
+AppDisplay.Footer = AppDisplayFooter;
 
-AppLayout.displayName = 'AppLayout';
+AppDisplay.displayName = 'AppDisplay';

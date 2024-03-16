@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { AppLayout, Tooltip } from '@/shared';
+import { AppDisplay, Tooltip } from '@/shared';
 
 const meta: Meta<typeof Tooltip> = {
   title: 'Primitive/Tooltip',
@@ -10,9 +10,9 @@ const meta: Meta<typeof Tooltip> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <AppLayout>
+      <AppDisplay>
         <Story />
-      </AppLayout>
+      </AppDisplay>
     ),
   ],
 };

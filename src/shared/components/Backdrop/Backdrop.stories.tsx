@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { AppLayout, Backdrop } from '@/shared';
+import { AppDisplay, Backdrop } from '@/shared';
 
 const meta: Meta<typeof Backdrop> = {
   title: 'Primitive/Backdrop',
@@ -10,9 +10,9 @@ const meta: Meta<typeof Backdrop> = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <AppLayout>
+      <AppDisplay>
         <Story />
-      </AppLayout>
+      </AppDisplay>
     ),
   ],
 };

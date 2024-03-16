@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { CardDisplay } from '@/card';
-import { AppLayout, VStack, styleToken } from '@/shared';
+import { AppDisplay, VStack, styleToken } from '@/shared';
 
 const meta: Meta<typeof CardDisplay> = {
   title: 'CardComponents/CardDisplay',
@@ -12,11 +12,11 @@ const meta: Meta<typeof CardDisplay> = {
   argTypes: {},
   decorators: [
     (Story) => (
-      <AppLayout>
+      <AppDisplay>
         <VStack justifyContent="center" alignItems="center">
           <Story />
         </VStack>
-      </AppLayout>
+      </AppDisplay>
     ),
   ],
 };

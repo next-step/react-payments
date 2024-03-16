@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Typography, AppLayout } from '@/shared';
+import { Typography, AppDisplay } from '@/shared';
 
 const meta = {
-  title: 'Components/AppLayout',
-  component: AppLayout,
+  title: 'Components/AppDisplay',
+  component: AppDisplay,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof AppLayout>;
+} satisfies Meta<typeof AppDisplay>;
 
 export default meta;
 
@@ -16,16 +16,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   render: () => (
-    <AppLayout.Root>
-      <AppLayout.Header>
+    <AppDisplay.Root>
+      <AppDisplay.Header>
         <Typography variant="headline">Header</Typography>
-      </AppLayout.Header>
-      <AppLayout.Body>
+      </AppDisplay.Header>
+      <AppDisplay.Body>
         <Typography variant="headline">Body</Typography>
-      </AppLayout.Body>
-      <AppLayout.Footer>
+      </AppDisplay.Body>
+      <AppDisplay.Footer>
         <Typography variant="headline">Footer</Typography>
-      </AppLayout.Footer>
-    </AppLayout.Root>
+      </AppDisplay.Footer>
+    </AppDisplay.Root>
   ),
 };

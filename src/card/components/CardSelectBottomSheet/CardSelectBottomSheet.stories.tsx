@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { CardBrand, CardSelectBottomSheet } from '@/card';
-import { AppLayout } from '@/shared';
+import { AppDisplay } from '@/shared';
 
 const meta: Meta<typeof CardSelectBottomSheet> = {
   title: 'Components/CardSelectBottomSheet',
@@ -17,9 +17,9 @@ const meta: Meta<typeof CardSelectBottomSheet> = {
   },
   decorators: [
     (Story) => (
-      <AppLayout>
+      <AppDisplay>
         <Story />
-      </AppLayout>
+      </AppDisplay>
     ),
   ],
 };
