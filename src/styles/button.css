@@ -4,7 +4,10 @@
 
 .bottom-button-box {
 	text-align: right;
-	width: 100%;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 12px 24px;
 }
 
 .button-text {
