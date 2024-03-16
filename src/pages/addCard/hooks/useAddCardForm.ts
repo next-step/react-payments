@@ -9,17 +9,11 @@ import { isNumber } from '@utils';
 
 export default function useAddCardForm() {
 	const { dispatch } = useStepper();
-	const {
-		value: cardNumber,
-		displayedValue: displayedCardNumber,
-		handleChange: handleCardNumberChange,
-	} = useCardNumberInput();
+	const { value: cardNumber, handleChange: handleCardNumberChange } =
+		useCardNumberInput();
 
-	const {
-		value: cardExpiredDate,
-		displayedValue: displayedExpiredDate,
-		handleChange: handleCardExpiredDateChange,
-	} = useCardExpiredDateInput();
+	const { value: cardExpiredDate, handleChange: handleCardExpiredDateChange } =
+		useCardExpiredDateInput();
 
 	const { value: cardHolderName, handleChange: handleCardHolderNameChange } =
 		useInput({});
@@ -51,8 +45,8 @@ export default function useAddCardForm() {
 		dispatch({ type: 'toAddCardComplete', payload: paymentCard });
 	};
 	return {
-		displayedCardNumber,
-		displayedExpiredDate,
+		cardNumber,
+		cardExpiredDate,
 		cardHolderName,
 		cardSecurityCode,
 		firstCardPassword,

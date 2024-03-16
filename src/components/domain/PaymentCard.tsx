@@ -1,4 +1,6 @@
 import { Card, CardProps } from '@components/ui-kit';
+import { useDisplayedCard } from '@hooks';
+import { useMemo } from 'react';
 
 interface PaymentCardProps {
 	variant: CardProps['variant'];
@@ -13,6 +15,17 @@ export default function PaymentCard({
 	cardExpiredDate,
 	cardHolderName,
 }: PaymentCardProps) {
+	const { toDisplayedCardExpiredDate, toDisplayedCardNumber } =
+		useDisplayedCard();
+	const displayedCardNumber = useMemo(
+		() => toDisplayedCardNumber(cardNumber),
+		[cardNumber, toDisplayedCardNumber],
+	);
+	const displayedCardExpiredDate = useMemo(
+		() => toDisplayedCardExpiredDate(cardExpiredDate),
+		[cardExpiredDate, toDisplayedCardExpiredDate],
+	);
+
 	return (
 		<Card variant={variant}>
 			<Card.Top />
@@ -20,10 +33,10 @@ export default function PaymentCard({
 				<div className={`${variant}__chip`}></div>
 			</Card.Middle>
 			<Card.Bottom>
-				<div className="card-bottom__number">{cardNumber}</div>
+				<div className="card-bottom__number">{displayedCardNumber}</div>
 				<div className="card-bottom__info">
 					<Card.Text text={cardHolderName} />
-					<Card.Text text={cardExpiredDate} />
+					<Card.Text text={displayedCardExpiredDate} />
 				</div>
 			</Card.Bottom>
 		</Card>
