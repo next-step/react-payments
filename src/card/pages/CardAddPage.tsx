@@ -1,45 +1,46 @@
 import { CardBrand } from 'src/card/types';
 import ArrowLeft from '@/assets/arrow-left.svg';
 import {
+  CardDisplay,
+  CardSelectBottomSheet,
   isValidateCardBrand,
   isValidateCardNumber,
   isValidateExpirationDate,
-  isValidateSecurityCode,
+  isValidateMonthInput,
   isValidatePassword,
-  CardDisplay,
-  CardSelectBottomSheet,
-  useSelectCardBrand,
+  isValidateSecurityCode,
   useCard,
+  useSelectCardBrand,
+  CARD_NUMBER_ID,
+  CARD_EXPIRATION_DATE_ID,
+  CARD_SECURITY_CODE_ID,
+  CARD_PASSWORD_ID,
+  CARD_NUMBER_DEFAULT_VALUE,
+  EXPIRATION_DATE_DEFAULT_VALUE,
+  OWNER_NAME_DEFAULT_VALUE,
+  SECURITY_CODE_DEFAULT_VALUE,
+  PASSWORD_DEFAULT_VALUE,
+  CARD_NUMBER_LABEL,
+  EXPIRATION_DATE_LABEL,
+  OWNER_NAME_LABEL,
+  SECURITY_CODE_LABEL,
+  PASSWORD_LABEL,
 } from '@/card';
 import {
+  AppDisplay,
   Box,
   Button,
-  HStack,
-  Typography,
-  VStack,
-  styleToken,
-  isValidateMonthString,
-  useFunnel,
-  AppDisplay,
   FormatInput,
-  Tooltip,
+  HStack,
   PinInput,
-  useToggle,
+  styleToken,
+  Tooltip,
+  Typography,
+  useFunnel,
   useInputValues,
+  useToggle,
+  VStack,
 } from '@/shared';
-
-const CARD_NUMBER_ID = 'card-number';
-const CARD_EXPIRATION_DATE_ID = 'expiration-date';
-const CARD_SECURITY_CODE_ID = 'security-code';
-const CARD_PASSWORD_ID = 'password';
-
-const isValidateMonthInput = (monthString: string) => {
-  if (monthString.length >= 2 && !isValidateMonthString(monthString)) {
-    console.warn('월 형식이 올바르지 않습니다. (01 ~ 12)');
-    return false;
-  }
-  return true;
-};
 
 export const CardAddPage = () => {
   const { goToPrev, goToNext } = useFunnel();
@@ -48,11 +49,12 @@ export const CardAddPage = () => {
   const { value: selectedCardBrandValue, select: selectCardBrand } = useSelectCardBrand();
   const { value: openedCardSelect, open: openCardSelect, close: closeCardSelect } = useToggle(true);
 
-  const { value: cardNumberInputValues, update: updateCardNumber } = useInputValues(['', '', '', '']);
-  const { value: expirationDateInputValues, update: updateExpirationDate } = useInputValues(['', '']);
-  const { value: ownerNameInputValues, update: updateOwnerName } = useInputValues(['']);
-  const { value: securityCodeInputValues, update: updateSecurityCode } = useInputValues(['']);
-  const { value: passwordInputValues, update: updatePassword } = useInputValues(['', '', '']);
+  const { value: cardNumberInputValues, update: updateCardNumber } = useInputValues(CARD_NUMBER_DEFAULT_VALUE);
+  const { value: expirationDateInputValues, update: updateExpirationDate } =
+    useInputValues(EXPIRATION_DATE_DEFAULT_VALUE);
+  const { value: ownerNameInputValues, update: updateOwnerName } = useInputValues(OWNER_NAME_DEFAULT_VALUE);
+  const { value: securityCodeInputValues, update: updateSecurityCode } = useInputValues(SECURITY_CODE_DEFAULT_VALUE);
+  const { value: passwordInputValues, update: updatePassword } = useInputValues(PASSWORD_DEFAULT_VALUE);
 
   const cardBrandName = selectedCardBrandValue.label;
   const cardBrandColor = selectedCardBrandValue.color;
@@ -146,7 +148,7 @@ export const CardAddPage = () => {
           <FormatInput.Root
             id={CARD_NUMBER_ID}
             type="numeric"
-            defaultValue={['', '', '', '']}
+            defaultValue={CARD_NUMBER_DEFAULT_VALUE}
             separator={
               <Typography variant="headline" color={styleToken.color.black}>
                 -
@@ -155,7 +157,7 @@ export const CardAddPage = () => {
             showCompletedSeparator
             onValueChange={updateCardNumber}
           >
-            <FormatInput.Label>카드 번호</FormatInput.Label>
+            <FormatInput.Label>{CARD_NUMBER_LABEL}</FormatInput.Label>
             <FormatInput.Control padding="0 20px" gap="6px">
               <FormatInput.Input index={0} maxLength={4} padding="0 0 0 10px" />
               <FormatInput.Input index={1} maxLength={4} padding="0 0 0 10px" />
@@ -180,7 +182,7 @@ export const CardAddPage = () => {
 
           <FormatInput.Root
             id={CARD_EXPIRATION_DATE_ID}
-            defaultValue={['', '']}
+            defaultValue={EXPIRATION_DATE_DEFAULT_VALUE}
             type="numeric"
             separator={
               <Typography variant="headline" color={styleToken.color.black}>
@@ -190,7 +192,7 @@ export const CardAddPage = () => {
             width="140px"
             onValueChange={updateExpirationDate}
           >
-            <FormatInput.Label>만료일</FormatInput.Label>
+            <FormatInput.Label>{EXPIRATION_DATE_LABEL}</FormatInput.Label>
             <FormatInput.Control padding="0 0 0 32px" gap="6px">
               <FormatInput.Input
                 index={0}
@@ -204,9 +206,15 @@ export const CardAddPage = () => {
             </FormatInput.Control>
           </FormatInput.Root>
 
-          <FormatInput.Root id="owner-name" defaultValue={['']} type="all" onValueChange={updateOwnerName} padding="0">
+          <FormatInput.Root
+            id="owner-name"
+            defaultValue={OWNER_NAME_DEFAULT_VALUE}
+            type="all"
+            onValueChange={updateOwnerName}
+            padding="0"
+          >
             <FormatInput.Control padding="0" backgroundColor="none">
-              <FormatInput.Label>카드 소유자 이름(선택)</FormatInput.Label>
+              <FormatInput.Label>{OWNER_NAME_LABEL}</FormatInput.Label>
               <FormatInput.TextCounter index={0} />
             </FormatInput.Control>
             <FormatInput.Control padding="0 10px" gap="6px">
@@ -221,12 +229,12 @@ export const CardAddPage = () => {
 
           <FormatInput.Root
             id={CARD_SECURITY_CODE_ID}
-            defaultValue={['']}
+            defaultValue={SECURITY_CODE_DEFAULT_VALUE}
             type="numeric"
             padding="0"
             onValueChange={updateSecurityCode}
           >
-            <FormatInput.Label>보안 코드(CVC/CVV)</FormatInput.Label>
+            <FormatInput.Label>{SECURITY_CODE_LABEL}</FormatInput.Label>
             <HStack spacing="10px" alignItems="center">
               <FormatInput.Control width="85px" padding="0 10px" gap="6px">
                 <FormatInput.Input
@@ -242,8 +250,13 @@ export const CardAddPage = () => {
             </HStack>
           </FormatInput.Root>
 
-          <PinInput.Root id={CARD_PASSWORD_ID} mask defaultValue={['', '', '0', '0']} onValueChange={updatePassword}>
-            <PinInput.Label>카드 비밀번호</PinInput.Label>
+          <PinInput.Root
+            id={CARD_PASSWORD_ID}
+            mask
+            defaultValue={PASSWORD_DEFAULT_VALUE}
+            onValueChange={updatePassword}
+          >
+            <PinInput.Label>{PASSWORD_LABEL}</PinInput.Label>
             <PinInput.Control>
               <PinInput.Input index={0} fontSize="20px" />
               <PinInput.Input index={1} fontSize="20px" />

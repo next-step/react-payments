@@ -69,6 +69,7 @@ export const PinInput = ({
     }),
     [id, values, inputElementCount, placeholder, updateValue, type, mask],
   );
+
   return <PinInputContext.Provider value={contextValue}>{children}</PinInputContext.Provider>;
 };
 

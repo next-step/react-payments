@@ -3,3 +3,4 @@ export * from './isValidateCardNumber';
 export * from './isValidateExpirationDate';
 export * from './isValidateSecurityCode';
 export * from './isValidatePassword';
+export * from './isValidateMonthInput';
