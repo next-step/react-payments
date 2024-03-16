@@ -1,8 +1,8 @@
 import { useId, ChangeEvent, useRef, useEffect } from 'react';
 
-import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine.ts';
-import REGEX from 'src/constants/regex.ts';
-import Tooltip from 'src/components/common/Tooltip.tsx';
+import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine';
+import REGEX from 'src/constants/regex';
+import Tooltip from 'src/components/common/Tooltip';
 
 interface CardSecurityCodeInputProps {
 	maxLength?: number;

@@ -1,9 +1,9 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import CardNumberInput from 'src/steps/add-card-form/CardNumberInput.tsx';
-import { SelectToFormLayer } from 'src/components/utils/SelectToFormLayer.tsx';
-import { renderWithAddCardMachineProvider } from 'src/utils/render.tsx';
+import CardNumberInput from 'src/steps/add-card-form/CardNumberInput';
+import { SelectToFormLayer } from 'src/components/utils/SelectToFormLayer';
+import { renderWithAddCardMachineProvider } from 'src/utils/render';
 
 const setup = () => {
 	const firstInput = screen.getByTestId<HTMLInputElement>('first-segment');

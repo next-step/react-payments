@@ -1,6 +1,6 @@
 import { useId, ChangeEvent, useRef, useEffect } from 'react';
 
-import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine.ts';
+import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine';
 
 interface CardSecurityCodeInputProps {
 	maxLength?: number;

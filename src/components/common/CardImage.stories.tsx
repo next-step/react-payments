@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CardImageComponent from 'src/components/common/CardImage.tsx';
-import { CardInfo } from 'src/machines/addCardMachine.ts';
-import { CARD_COMPANY_LIST } from 'src/constants/card.ts';
+import CardImageComponent from 'src/components/common/CardImage';
+import { CardInfo } from 'src/machines/addCardMachine';
+import { CARD_COMPANY_LIST } from 'src/constants/card';
 
 type CardImageStoryComponentProps = Pick<
 	CardInfo,

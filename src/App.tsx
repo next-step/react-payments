@@ -1,6 +1,6 @@
 import 'src/styles/index.css';
 
-import AddCard from 'src/pages/AddCard.tsx';
+import AddCard from 'src/pages/AddCard';
 
 function App() {
 	return (

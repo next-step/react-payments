@@ -1,5 +1,5 @@
-import { useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
-import { CardCompanyData } from 'src/constants/card.ts';
+import { useAddCardMachineActorRef } from 'src/machines/addCardMachine';
+import { CardCompanyData } from 'src/constants/card';
 
 export default function SelectCardCompanyItem({ code, name, className }: CardCompanyData) {
 	const { send } = useAddCardMachineActorRef();

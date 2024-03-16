@@ -1,6 +1,6 @@
 import { ReactNode, useState, useRef } from 'react';
 
-import useOutsideClick from 'src/hooks/useOutsideClick.ts';
+import useOutsideClick from 'src/hooks/useOutsideClick';
 
 interface TooltipProps {
 	description?: ReactNode;

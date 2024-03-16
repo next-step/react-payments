@@ -1,6 +1,6 @@
-import { CardInfoWithId } from 'src/machines/addCardMachine.ts';
-import { useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
-import CardImage from 'src/components/common/CardImage.tsx';
+import { CardInfoWithId } from 'src/machines/addCardMachine';
+import { useAddCardMachineActorRef } from 'src/machines/addCardMachine';
+import CardImage from 'src/components/common/CardImage';
 
 export default function CardListItem({ ...card }: CardInfoWithId) {
 	const { send } = useAddCardMachineActorRef();

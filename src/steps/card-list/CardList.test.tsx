@@ -1,8 +1,8 @@
 import { act } from '@testing-library/react';
 
-import { useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
-import { MOCK_CARD_INFO_LIST, mockCardListMachine } from 'src/mocks/card.ts';
-import { renderHookWithAddCardMachineProvider } from 'src/utils/render.tsx';
+import { useAddCardMachineActorRef } from 'src/machines/addCardMachine';
+import { MOCK_CARD_INFO_LIST, mockCardListMachine } from 'src/mocks/card';
+import { renderHookWithAddCardMachineProvider } from 'src/utils/render';
 
 describe('카드 목록 테스트', () => {
 	it('카드 삭제가 가능하다', () => {

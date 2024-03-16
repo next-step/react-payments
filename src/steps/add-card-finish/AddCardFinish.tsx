@@ -1,6 +1,6 @@
-import { useAddCardMachineSelector } from 'src/machines/addCardMachine.ts';
-import CardNicknameForm from 'src/steps/add-card-finish/CardNicknameForm.tsx';
-import SelectedCardImage from 'src/steps/add-card-finish/SelectedCardImage.tsx';
+import { useAddCardMachineSelector } from 'src/machines/addCardMachine';
+import CardNicknameForm from 'src/steps/add-card-finish/CardNicknameForm';
+import SelectedCardImage from 'src/steps/add-card-finish/SelectedCardImage';
 
 export default function AddCardFinish() {
 	const isStateAddCardFinish = useAddCardMachineSelector(state => state.matches('AddCardFinish'));

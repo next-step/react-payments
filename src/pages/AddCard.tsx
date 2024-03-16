@@ -1,5 +1,5 @@
-import { AddCardMachineProvider } from 'src/machines/addCardMachine.ts';
-import AddCardStepper from 'src/steps/AddCardStepper.tsx';
+import { AddCardMachineProvider } from 'src/machines/addCardMachine';
+import AddCardStepper from 'src/steps/AddCardStepper';
 
 export default function AddCard() {
 	return (

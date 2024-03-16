@@ -1,6 +1,6 @@
 import { FormEvent, ChangeEvent } from 'react';
 
-import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
+import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine';
 
 interface CardNicknameFormProps {
 	maxLength?: number;

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CardNumberInputComponent from 'src/steps/add-card-form/CardNumberInput.tsx';
-import { SelectToFormLayer } from 'src/components/utils/SelectToFormLayer.tsx';
-import { AddCardMachineDecorator } from 'src/stories/Decorators.tsx';
+import CardNumberInputComponent from 'src/steps/add-card-form/CardNumberInput';
+import { SelectToFormLayer } from 'src/components/utils/SelectToFormLayer';
+import { AddCardMachineDecorator } from 'src/stories/Decorators';
 
 const meta: Meta<typeof CardNumberInputComponent> = {
 	title: 'card/CardNumberInput',

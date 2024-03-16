@@ -1,8 +1,8 @@
 import { useId, useRef, ChangeEvent, useEffect } from 'react';
 import { shallowEqual } from '@xstate/react';
 
-import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine.ts';
-import REGEX from 'src/constants/regex.ts';
+import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine';
+import REGEX from 'src/constants/regex';
 
 interface CardNumberInputProps {
 	segmentLength?: number;

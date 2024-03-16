@@ -1,4 +1,4 @@
-import { useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
+import { useAddCardMachineActorRef } from 'src/machines/addCardMachine';
 import { useEffect, ReactNode } from 'react';
 
 interface MockAddCardFormProviderProps {

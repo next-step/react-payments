@@ -1,7 +1,7 @@
 import { MouseEvent } from 'react';
 
-import { CardInfo } from 'src/machines/addCardMachine.ts';
-import { CARD_COMPANY_MAP } from 'src/constants/card.ts';
+import { CardInfo } from 'src/machines/addCardMachine';
+import { CARD_COMPANY_MAP } from 'src/constants/card';
 
 interface CardImageProps
 	extends Pick<

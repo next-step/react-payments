@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import AddCardFormComponent from 'src/steps/add-card-form/AddCardForm.tsx';
-import { SelectToFormLayer } from 'src/components/utils/SelectToFormLayer.tsx';
-import { AddCardMachineDecorator } from 'src/stories/Decorators.tsx';
+import AddCardFormComponent from 'src/steps/add-card-form/AddCardForm';
+import { SelectToFormLayer } from 'src/components/utils/SelectToFormLayer';
+import { AddCardMachineDecorator } from 'src/stories/Decorators';
 
 const meta: Meta<typeof AddCardFormComponent> = {
 	title: 'card/AddCardForm',

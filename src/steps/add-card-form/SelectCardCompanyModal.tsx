@@ -1,6 +1,6 @@
-import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine.ts';
-import SelectCardCompanyItem from 'src/steps/add-card-form/SelectCardCompanyItem.tsx';
-import { CARD_COMPANY_LIST } from 'src/constants/card.ts';
+import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine';
+import SelectCardCompanyItem from 'src/steps/add-card-form/SelectCardCompanyItem';
+import { CARD_COMPANY_LIST } from 'src/constants/card';
 
 export default function SelectCardCompanyModal() {
 	const { send } = useAddCardMachineActorRef();

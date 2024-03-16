@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CardPasswordInputComponent from 'src/steps/add-card-form/CardPasswordInput.tsx';
-import { SelectToFormLayer } from 'src/components/utils/SelectToFormLayer.tsx';
-import { AddCardMachineDecorator } from 'src/stories/Decorators.tsx';
+import CardPasswordInputComponent from 'src/steps/add-card-form/CardPasswordInput';
+import { SelectToFormLayer } from 'src/components/utils/SelectToFormLayer';
+import { AddCardMachineDecorator } from 'src/stories/Decorators';
 
 const meta: Meta<typeof CardPasswordInputComponent> = {
 	title: 'card/CardPasswordInput',

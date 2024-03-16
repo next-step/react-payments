@@ -1,7 +1,7 @@
 import { ChangeEvent, useId } from 'react';
 
-import REGEX from 'src/constants/regex.ts';
-import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
+import REGEX from 'src/constants/regex';
+import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine';
 
 interface CardExpirationDateInputProps {
 	separator?: string;

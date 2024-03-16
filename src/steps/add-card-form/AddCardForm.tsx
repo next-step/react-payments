@@ -1,13 +1,13 @@
 import { FormEvent } from 'react';
 
-import CardNumberInput from 'src/steps/add-card-form/CardNumberInput.tsx';
-import CardOwnerNameInput from 'src/steps/add-card-form/CardOwnerNameInput.tsx';
-import CardExpirationDateInput from 'src/steps/add-card-form/CardExpirationDateInput.tsx';
-import CardSecurityCodeInput from 'src/steps/add-card-form/CardSecurityCodeInput.tsx';
-import CardPasswordInput from 'src/steps/add-card-form/CardPasswordInput.tsx';
-import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
-import SelectCardCompanyModal from 'src/steps/add-card-form/SelectCardCompanyModal.tsx';
-import EnteredCardImage from 'src/steps/add-card-form/EnteredCardImage.tsx';
+import CardNumberInput from 'src/steps/add-card-form/CardNumberInput';
+import CardOwnerNameInput from 'src/steps/add-card-form/CardOwnerNameInput';
+import CardExpirationDateInput from 'src/steps/add-card-form/CardExpirationDateInput';
+import CardSecurityCodeInput from 'src/steps/add-card-form/CardSecurityCodeInput';
+import CardPasswordInput from 'src/steps/add-card-form/CardPasswordInput';
+import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine';
+import SelectCardCompanyModal from 'src/steps/add-card-form/SelectCardCompanyModal';
+import EnteredCardImage from 'src/steps/add-card-form/EnteredCardImage';
 
 interface AddCardFormProps {
 	cardNumberSegmentLength?: number;

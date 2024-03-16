@@ -1,11 +1,11 @@
 import { screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import AddCardStepper from 'src/steps/AddCardStepper.tsx';
-import { useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
-import { MOCK_CARD_INFO_LIST } from 'src/mocks/card.ts';
-import { renderWithAddCardMachineProvider, renderHookWithAddCardMachineProvider } from 'src/utils/render.tsx';
-import { mockCardInfoMachine } from 'src/mocks/card.ts';
+import AddCardStepper from 'src/steps/AddCardStepper';
+import { useAddCardMachineActorRef } from 'src/machines/addCardMachine';
+import { MOCK_CARD_INFO_LIST } from 'src/mocks/card';
+import { renderWithAddCardMachineProvider, renderHookWithAddCardMachineProvider } from 'src/utils/render';
+import { mockCardInfoMachine } from 'src/mocks/card';
 
 const setup = () => {
 	const formNextButton = screen.getByTestId('form-next');

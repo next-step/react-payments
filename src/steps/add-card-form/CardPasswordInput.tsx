@@ -1,8 +1,8 @@
 import { ChangeEvent, useEffect, useId, useRef } from 'react';
 import { shallowEqual } from '@xstate/react';
 
-import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
-import REGEX from 'src/constants/regex.ts';
+import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine';
+import REGEX from 'src/constants/regex';
 
 interface CardPasswordInputProps {
 	segmentMaxLength?: number;
