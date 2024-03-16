@@ -4,7 +4,7 @@ import {
 	initialState,
 	stepperReducer,
 } from '@reducers/stepperReducer';
-import { Children, createContext, useContext, useReducer } from 'react';
+import { Children, createContext, useReducer } from 'react';
 
 interface ContextType {
 	state: StepperState;
@@ -20,7 +20,7 @@ interface StepperProviderProps {
 	children: React.ReactNode;
 }
 
-export const StepperProvider = ({ children }: StepperProviderProps) => {
+export function StepperProvider({ children }: StepperProviderProps) {
 	const [state, dispatch] = useReducer(stepperReducer, initialState);
 
 	const childrenArray = Children.toArray(children).filter(
@@ -32,6 +32,4 @@ export const StepperProvider = ({ children }: StepperProviderProps) => {
 			{childrenArray[state.currentStep]}
 		</StepperContext.Provider>
 	);
-};
-
-export const useStepper = () => useContext(StepperContext);
+}

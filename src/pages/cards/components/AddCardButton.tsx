@@ -1,5 +1,5 @@
 import { Button, Card } from '@components/ui-kit';
-import { useStepper } from '@contexts/StepperContext';
+import { useStepper } from '@hooks';
 import { FaPlus } from 'react-icons/fa';
 
 export default function AddCardButton() {

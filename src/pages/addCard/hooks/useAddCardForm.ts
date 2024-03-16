@@ -1,5 +1,4 @@
-import { useStepper } from '@contexts/StepperContext';
-import { useInput } from '@hooks';
+import { useInput, useStepper } from '@hooks';
 import {
 	useCardExpiredDateInput,
 	useCardNumberInput,
@@ -41,6 +40,7 @@ export default function useAddCardForm() {
 			cardHolderName,
 			cardPassword,
 			cardSecurityCode,
+			createdAt: new Date(),
 		};
 		dispatch({ type: 'toAddCardComplete', payload: paymentCard });
 	};

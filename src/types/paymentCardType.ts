@@ -4,4 +4,5 @@ export default interface PaymentCardType {
 	cardHolderName: string;
 	cardSecurityCode: string;
 	cardPassword: string;
+	createdAt: Date;
 }

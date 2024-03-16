@@ -1,4 +1,4 @@
-import { useStepper } from '@contexts/StepperContext';
+import { useStepper } from '@hooks';
 import AddCardAliasForm from './components/AddCardAliasForm';
 
 export default function AddCardCompletePage() {

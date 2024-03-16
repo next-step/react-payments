@@ -1,6 +1,6 @@
 import { FaChevronLeft } from 'react-icons/fa';
 import Button from '@components/ui-kit/Button';
-import { useStepper } from '@contexts/StepperContext';
+import { useStepper } from '@hooks';
 
 export default function Header() {
 	const { dispatch } = useStepper();
