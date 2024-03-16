@@ -2,8 +2,12 @@ import Input from '../../../components/Input/Input';
 import InputContainer from '../../../components/InputContainer/InputContainer';
 import useCardNickname from '../hooks/useNickname';
 
-const CardNickname = () => {
-  const { nickname, handleNickname } = useCardNickname();
+interface Props {
+  nickname: string;
+}
+
+const CardNickname = ({ nickname }: Props) => {
+  const { handleNickname } = useCardNickname();
 
   return (
     <InputContainer className='input-container flex-center w-100'>

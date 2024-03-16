@@ -1,11 +1,12 @@
 import { useCallback } from 'react';
-import { useCardState } from '../../../providers/CardState/hooks/useCardState';
+import { CardContext } from '../../../App';
 
 const EXPIRATION_MAX_LENGTH = 2;
 const MAX_MONTH = 12;
 
 const useCardExpiration = () => {
-  const { cardState, setCardState } = useCardState();
+  const cardState = CardContext.useSelector(({ context }) => context.cardState);
+  const { send } = CardContext.useActorRef();
 
   const handleExpirationDate = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,12 +16,12 @@ const useCardExpiration = () => {
       if (!isNumber || value.length > EXPIRATION_MAX_LENGTH) return;
       if (name === 'month' && Number(value) > MAX_MONTH) return;
 
-      setCardState((prev) => ({
-        ...prev,
-        expiration: { ...prev.expiration, [name]: value },
-      }));
+      send({
+        type: 'cardState.updateExpirationDate',
+        value: { ...cardState.expiration, [name]: value },
+      });
     },
-    [setCardState]
+    [cardState.expiration, send]
   );
 
   return {

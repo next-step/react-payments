@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
-import { useCardState } from '../../../providers/CardState/hooks/useCardState';
+import { CardContext } from '../../../App';
 
 const SECURITY_CODE_MAX_LENGTH = 3;
 
 const useCardSecurityCode = () => {
-  const { cardState, setCardState } = useCardState();
+  const cardState = CardContext.useSelector(({ context }) => context.cardState);
+  const { send } = CardContext.useActorRef();
 
   const handleSecurityCode = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,12 +14,12 @@ const useCardSecurityCode = () => {
       const isNumber = !Number.isNaN(Number(value));
       if (!isNumber || value.length > SECURITY_CODE_MAX_LENGTH) return;
 
-      setCardState((prev) => ({
-        ...prev,
-        securityCode: value,
-      }));
+      send({
+        type: 'cardState.updateSecurityCode',
+        value,
+      });
     },
-    [setCardState]
+    [send]
   );
 
   return {

@@ -1,15 +1,15 @@
 import { useCallback } from 'react';
 import { Brand } from '../../../types';
-import { useCardState } from '../../../providers/CardState/hooks/useCardState';
+import { CardContext } from '../../../App';
 
 export const useCardBrands = () => {
-  const { setCardState } = useCardState();
+  const { send } = CardContext.useActorRef();
 
   const selectBrand = useCallback(
     (brand: Brand) => {
-      setCardState((prev) => ({ ...prev, brand }));
+      send({ type: 'cardState.updateCardBrand', value: brand });
     },
-    [setCardState]
+    [send]
   );
 
   return {

@@ -2,7 +2,7 @@ import Card from '../../components/Card/Card';
 import Header from '../../components/Header/Header';
 import AddNewCard from './components/AddNewCard';
 import CloseButton from '../../components/CloseButton/CloseButton';
-import { useCardList } from '../../providers/CardList/hooks/useCardList';
+import { CardContext } from '../../App';
 
 interface Props {
   onNext: () => void;
@@ -10,7 +10,12 @@ interface Props {
 }
 
 const CardList = ({ onNext, onEdit }: Props) => {
-  const { cardList, deleteCard } = useCardList();
+  const cardList = CardContext.useSelector(({ context }) => context.cardList);
+  const { send } = CardContext.useActorRef();
+
+  const deleteCard = (id: string) => {
+    send({ type: 'cardList.deleteCard', value: id });
+  };
 
   return (
     <>

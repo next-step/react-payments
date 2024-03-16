@@ -1,24 +1,19 @@
 import { useCallback } from 'react';
-import { useCardState } from '../../../providers/CardState/hooks/useCardState';
+import { CardContext } from '../../../App';
 
 const useCardNickname = () => {
-  const { cardState, setCardState } = useCardState();
+  const { send } = CardContext.useActorRef();
 
   const handleNickname = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
 
-      setCardState((prev) => ({
-        ...prev,
-        nickname: value,
-      }));
+      send({ type: 'cardState.updateNickname', value });
     },
-    [setCardState]
+    [send]
   );
 
   return {
-    brand: cardState.brand,
-    nickname: cardState.nickname,
     handleNickname,
   };
 };

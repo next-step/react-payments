@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from '../../components/Button/Button';
 import Card from '../../components/Card/Card';
 import Header from '../../components/Header/Header';
@@ -7,10 +7,10 @@ import CardExpiration from './components/CardExpiration';
 import CardOwner from './components/CardOwner';
 import CardSecurityCode from './components/CardSecurityCode';
 import CardPassword from './components/CardPassword';
-import { useCardState } from '../../providers/CardState/hooks/useCardState';
 import { Modal } from '../../components/Modal/Modal';
 import { BrandList } from './components/BrandList';
 import { useCardBrands } from './hooks/useCardBrands';
+import { CardContext } from '../../App';
 
 interface Props {
   onNext: () => void;
@@ -18,16 +18,12 @@ interface Props {
 }
 
 const AddCard = ({ onNext, onGoBack }: Props) => {
-  const { cardState, resetCardState } = useCardState();
+  const cardState = CardContext.useSelector(({ context }) => context.cardState);
   const { selectBrand } = useCardBrands();
   const [showModal, setShowModal] = useState<boolean>(true);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
-
-  useEffect(() => {
-    resetCardState();
-  }, []);
 
   return (
     <>

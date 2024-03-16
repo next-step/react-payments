@@ -1,10 +1,11 @@
 import { useCallback } from 'react';
-import { useCardState } from '../../../providers/CardState/hooks/useCardState';
+import { CardContext } from '../../../App';
 
 const PASSWORD_INPUT_MAX_LENGTH = 1;
 
 const useCardPassword = () => {
-  const { cardState, setCardState } = useCardState();
+  const cardState = CardContext.useSelector(({ context }) => context.cardState);
+ const { send } = CardContext.useActorRef();
 
   const handlePassword = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,12 +14,12 @@ const useCardPassword = () => {
       const isNumber = !Number.isNaN(Number(value));
       if (!isNumber || value.length > PASSWORD_INPUT_MAX_LENGTH) return;
 
-      setCardState((prev) => ({
-        ...prev,
-        password: { ...prev.password, [name]: value },
-      }));
+      send({
+        type: 'cardState.updatePassword',
+        value: { ...cardState.password, [name]: value },
+      });
     },
-    [setCardState]
+    [cardState.password, send]
   );
 
   return {
