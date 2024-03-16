@@ -44,7 +44,37 @@ export const WithBorder: Story = {
 export const WithChildren: Story = {
   args: {
     padding: '40px',
-    gap: '20px',
+    width: 'auto',
+    height: 'auto',
+    children: (
+      <>
+        <VStack
+          alignItems="center"
+          justifyContent="center"
+          backgroundColor={styleToken.color.mustard}
+          width="100px"
+          height="100px"
+        >
+          VStack 1
+        </VStack>
+        <VStack
+          alignItems="center"
+          justifyContent="center"
+          backgroundColor={styleToken.color.teal100}
+          width="100px"
+          height="100px"
+        >
+          VStack 2
+        </VStack>
+      </>
+    ),
+  },
+};
+
+export const WithSpacing: Story = {
+  args: {
+    padding: '40px',
+    spacing: '20px',
     width: 'auto',
     height: 'auto',
     children: (

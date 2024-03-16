@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { AppLayout, Backdrop } from '@/shared';
+import { AppLayout, Tooltip } from '@/shared';
 
-const meta: Meta<typeof Backdrop> = {
-  title: 'Primitive/Backdrop',
-  component: Backdrop,
+const meta: Meta<typeof Tooltip> = {
+  title: 'Primitive/Tooltip',
+  component: Tooltip,
   parameters: {
     layout: 'centered',
   },
@@ -19,14 +19,8 @@ const meta: Meta<typeof Backdrop> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Backdrop>;
+type Story = StoryObj<typeof Tooltip>;
 
 export const Primary: Story = {
   args: {},
-};
-
-export const WithClick: Story = {
-  args: {
-    onClick: () => alert('Clicked'),
-  },
 };

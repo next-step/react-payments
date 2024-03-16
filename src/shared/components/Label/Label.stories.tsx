@@ -1,7 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { AppLayout } from '@/components';
-import { TextField, TypographyVariants, VStack, Label } from '@/shared/components';
-import { storybookControls } from '@/shared/styles';
+import { AppLayout, TextField, TypographyVariants, VStack, Label, storybookControls } from '@/shared';
 
 const meta: Meta<typeof Label> = {
   title: 'Primitive/Label',
@@ -38,7 +36,7 @@ export const Primary: Story = {
       <Label htmlFor="payment-input" {...args}>
         Label
       </Label>
-      <TextField id="payment-input" placeholder="Placeholder" />
+      <TextField id="payment-input" placeholder="Placeholder" variant="filled" />
     </VStack>
   ),
 };

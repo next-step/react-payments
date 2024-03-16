@@ -1,7 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { AppLayout } from '@/components';
-import { Button } from '@/shared/components';
-import { storybookControls } from '@/shared/styles';
+import { AppLayout, Button, storybookControls } from '@/shared';
 
 const meta: Meta<typeof Button> = {
   title: 'Primitive/Button',

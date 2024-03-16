@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Flex } from '@/shared/components/Flex/Flex.tsx';
-import { storybookControls, styleToken } from '@/shared/styles';
+import { Flex, storybookControls, styleToken } from '@/shared';
 
 const meta: Meta = {
   title: 'Primitive/Flex',
@@ -12,8 +11,8 @@ const meta: Meta = {
   argTypes: storybookControls.argTypes,
   args: {
     as: 'div',
-    width: '300px',
-    height: '100px',
+    width: '100%',
+    height: 'auto',
     backgroundColor: styleToken.color.gray100,
     children: 'Hello Flex',
   },
@@ -37,18 +36,66 @@ export const WithBorder: Story = {
   },
 };
 
-export const WithChildren: Story = {
+export const Row: Story = {
   args: {
-    padding: '40px',
+    flexDirection: 'row',
     gap: '20px',
-    width: 'auto',
-    height: 'auto',
     children: (
       <>
         <Flex backgroundColor={styleToken.color.mustard} width="100px" height="100px">
           Flex 1
         </Flex>
         <Flex backgroundColor={styleToken.color.teal100} width="100px" height="100px">
+          Flex 2
+        </Flex>
+      </>
+    ),
+  },
+};
+
+export const WithColumn: Story = {
+  args: {
+    flexDirection: 'column',
+    gap: '20px',
+    children: (
+      <>
+        <Flex backgroundColor={styleToken.color.mustard} width="100%" height="100px">
+          Flex 1
+        </Flex>
+        <Flex backgroundColor={styleToken.color.teal100} width="100%" height="100px">
+          Flex 2
+        </Flex>
+      </>
+    ),
+  },
+};
+
+export const WithJustifyContent: Story = {
+  args: {
+    justifyContent: 'space-between',
+    children: (
+      <>
+        <Flex backgroundColor={styleToken.color.mustard} width="100px" height="100px">
+          Flex 1
+        </Flex>
+        <Flex backgroundColor={styleToken.color.teal100} width="100px" height="100px">
+          Flex 2
+        </Flex>
+      </>
+    ),
+  },
+};
+
+export const WithAlignItems: Story = {
+  args: {
+    alignItems: 'center',
+    height: '200px',
+    children: (
+      <>
+        <Flex backgroundColor={styleToken.color.mustard} width="100px" height="100px">
+          Flex 1
+        </Flex>
+        <Flex backgroundColor={styleToken.color.teal100} width="100px" height="50px">
           Flex 2
         </Flex>
       </>
