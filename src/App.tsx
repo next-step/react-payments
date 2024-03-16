@@ -1,5 +1,5 @@
 import AddCardPage from '@pages/addCard/AddCardPage';
-import AddCardCompletePage from '@pages/addCardComplete/AddCardCompletePage';
+import EditCardAliasPage from '@pages/editCardAlias/EditCardAliasPage';
 import CardsPage from '@pages/cards/CardsPage';
 import { CardsProvider, StepperProvider } from '@contexts';
 
@@ -10,7 +10,7 @@ function App() {
 				<StepperProvider>
 					<CardsPage />
 					<AddCardPage />
-					<AddCardCompletePage />
+					<EditCardAliasPage />
 				</StepperProvider>
 			</CardsProvider>
 		</main>

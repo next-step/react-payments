@@ -3,13 +3,13 @@ import { Button, Input } from '@components/ui-kit';
 import { useInput, useSetCards, useStepper } from '@hooks';
 import { PaymentCardType } from '@types';
 
-interface AddCardAliasFormProps {
+interface EditCardAliasFormProps {
 	data: PaymentCardType;
 }
 
-export default function AddCardAliasForm({
+export default function EditCardAliasForm({
 	data: paymentCard,
-}: AddCardAliasFormProps) {
+}: EditCardAliasFormProps) {
 	const { value: cardAlias, handleChange: handleCardAliasChange } = useInput(
 		{},
 	);

@@ -1,7 +1,7 @@
 import { useStepper } from '@hooks';
-import AddCardAliasForm from './components/AddCardAliasForm';
+import EditCardAliasForm from './components/EditCardAliasForm';
 
-export default function AddCardCompletePage() {
+export default function EditCardAliasPage() {
 	const { state } = useStepper();
 	const paymentCard = state.data;
 
@@ -12,7 +12,7 @@ export default function AddCardCompletePage() {
 					<div className="page-title-box">
 						<p className="page-title">카드 등록이 완료되었습니다.</p>
 					</div>
-					<AddCardAliasForm data={paymentCard} />
+					<EditCardAliasForm data={paymentCard} />
 				</div>
 			)}
 		</>

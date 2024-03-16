@@ -16,7 +16,7 @@ export type Action =
 	| {
 			type: 'toAddCard';
 	  }
-	| { type: 'toAddCardComplete'; payload: PaymentCardType };
+	| { type: 'toEditCardAlias'; payload: PaymentCardType };
 
 export function stepperReducer(state: StepperState, action: Action) {
 	switch (action.type) {
@@ -28,7 +28,7 @@ export function stepperReducer(state: StepperState, action: Action) {
 			return {
 				currentStep: 1,
 			};
-		case 'toAddCardComplete':
+		case 'toEditCardAlias':
 			return { currentStep: 2, data: action.payload };
 		default:
 			return state;
