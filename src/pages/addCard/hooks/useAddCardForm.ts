@@ -1,4 +1,4 @@
-import { useInput, useStepper } from '@hooks';
+import { useInput, useSetCards, useStepper } from '@hooks';
 import {
 	useCardExpiredDateInput,
 	useCardNumberInput,
@@ -9,6 +9,8 @@ import { v4 as uuid } from 'uuid';
 
 export default function useAddCardForm() {
 	const { dispatch } = useStepper();
+	const setCards = useSetCards();
+
 	const { value: cardNumber, handleChange: handleCardNumberChange } =
 		useCardNumberInput();
 
@@ -45,7 +47,8 @@ export default function useAddCardForm() {
 			createdAt: new Date(),
 			cardAlias: '',
 		};
-		dispatch({ type: 'toAddCardComplete', payload: paymentCard });
+		setCards((prev) => [...prev, paymentCard]);
+		dispatch({ type: 'toEditCardAlias', payload: paymentCard });
 	};
 	return {
 		cardNumber,

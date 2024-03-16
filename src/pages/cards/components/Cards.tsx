@@ -1,6 +1,6 @@
 import { PaymentCard } from '@components/domain';
 import PaymentCardLabel from '@components/domain/PaymentCardLabel';
-import { useCards } from '@hooks';
+import { useCards, useStepper } from '@hooks';
 import { useMemo } from 'react';
 
 export default function Cards() {
@@ -9,6 +9,8 @@ export default function Cards() {
 		() => cards.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime()),
 		[cards],
 	);
+	const { dispatch } = useStepper();
+	const handleClick = () => {};
 	return (
 		<div>
 			{sortedCards.map((card) => (
