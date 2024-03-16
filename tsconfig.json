@@ -27,7 +27,8 @@
 			"@hooks": ["src/hooks/index.ts"],
 			"@utils": ["src/utils/index.ts"],
 			"@contexts/*": ["src/contexts/*"],
-			"@reducers/*": ["src/reducers/*"]
+			"@reducers/*": ["src/reducers/*"],
+			"@types": ["src/types/index.ts"]
 		}
 	},
 	"include": ["src"],

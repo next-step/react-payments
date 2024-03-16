@@ -12,6 +12,7 @@ export default defineConfig({
 			{ find: '@utils', replacement: '/src/utils' },
 			{ find: '@contexts', replacement: '/src/contexts' },
 			{ find: '@reducers', replacement: '/src/reducers' },
+			{ find: '@types', replacement: '/src/types' },
 		],
 	},
 });

@@ -4,7 +4,7 @@ import {
 	useCardExpiredDateInput,
 	useCardNumberInput,
 } from '@pages/addCard/hooks';
-import { PaymentCard } from '@pages/addCardComplete/AddCardCompletePage';
+import { PaymentCardType } from '@types';
 import { isNumber } from '@utils';
 
 export default function useAddCardForm() {
@@ -41,7 +41,7 @@ export default function useAddCardForm() {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const cardPassword = `${firstCardPassword}${secondCardPassword}`;
-		const paymentCard: PaymentCard = {
+		const paymentCard: PaymentCardType = {
 			cardNumber,
 			cardExpiredDate,
 			cardHolderName,
