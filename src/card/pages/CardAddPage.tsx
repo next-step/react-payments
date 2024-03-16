@@ -45,7 +45,7 @@ export const CardAddPage = () => {
   const { goToPrev, goToNext } = useFunnel();
   const { card, setCard, isCardExist } = useCard();
 
-  const { value: selectedCardBrand, select: handleCardBrandSelect } = useSelectCardBrand();
+  const { value: selectedCardBrandValue, select: selectCardBrand } = useSelectCardBrand();
   const { value: openedCardSelect, open: openCardSelect, close: closeCardSelect } = useToggle(true);
 
   const { value: cardNumberInputValues, update: updateCardNumber } = useInputValues(['', '', '', '']);
@@ -54,8 +54,8 @@ export const CardAddPage = () => {
   const { value: securityCodeInputValues, update: updateSecurityCode } = useInputValues(['']);
   const { value: passwordInputValues, update: updatePassword } = useInputValues(['', '', '']);
 
-  const cardBrandName = selectedCardBrand.label;
-  const cardBrandColor = selectedCardBrand.color;
+  const cardBrandName = selectedCardBrandValue.label;
+  const cardBrandColor = selectedCardBrandValue.color;
   const cardNumber = cardNumberInputValues.join(' ');
   const expirationDate = expirationDateInputValues.join(' ');
   const ownerName = ownerNameInputValues.join('');
@@ -70,8 +70,8 @@ export const CardAddPage = () => {
   const isValidateCardState =
     validatedCardBrand && validatedCardNumber && validatedExpirationDate && validatedSecurityCode && validatedPassword;
 
-  const cardSelectSubmit = (cardBrand: CardBrand) => {
-    handleCardBrandSelect(cardBrand);
+  const onCardBrandClick = (cardBrand: CardBrand) => {
+    selectCardBrand(cardBrand);
     closeCardSelect();
   };
 
@@ -102,7 +102,11 @@ export const CardAddPage = () => {
 
   return (
     <>
-      <CardSelectBottomSheet opened={openedCardSelect} onSubmit={cardSelectSubmit} onOverlayClick={closeCardSelect} />
+      <CardSelectBottomSheet
+        opened={openedCardSelect}
+        onCardBrandClick={onCardBrandClick}
+        onOverlayClick={closeCardSelect}
+      />
       <AppLayout.Header>
         <Button
           variant="ghost"
@@ -130,8 +134,8 @@ export const CardAddPage = () => {
           <Box margin="0 auto">
             <CardDisplay
               size="small"
-              label={selectedCardBrand.label}
-              color={selectedCardBrand.color}
+              label={selectedCardBrandValue.label}
+              color={selectedCardBrandValue.color}
               cardNumber={cardNumber}
               expirationDate={expirationDate}
               ownerName={ownerName}

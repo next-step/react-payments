@@ -6,26 +6,33 @@ const CARD_DESCRIPTION_MAX_LENGTH = 10;
 
 export const CardCompletePage = () => {
   const { goToNext } = useFunnel();
-  const { card, addCardToOwner } = useCard();
+  const { card, addCardToOwner, editCardToOwner, isCardExist } = useCard();
   const {
     label: cardBrandName,
     color: cardBrandColor,
     cardNumber,
     expirationDate: cardExpirationDate,
     ownerName: cardOwnerName,
+    description,
   } = card;
 
-  const [cardDescriptionInputValue, setCardDescriptionInputValue] = useState('');
+  const [cardDescriptionInputValue, setCardDescriptionInputValue] = useState<string>(description ?? '');
+
   const handleCardDescriptionChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCardDescriptionInputValue(e.target.value.trim());
   };
 
-  const handleCardCreateSubmit = () => {
+  const onCardCompleteClick = () => {
     const description = removeAllSpaces(cardDescriptionInputValue) ? cardDescriptionInputValue : cardBrandName;
-    addCardToOwner({
-      ...card,
-      description,
-    });
+
+    if (isCardExist(card)) {
+      editCardToOwner({ ...card, description });
+    } else {
+      addCardToOwner({
+        ...card,
+        description,
+      });
+    }
     goToNext();
   };
 
@@ -52,6 +59,7 @@ export const CardCompletePage = () => {
               variant="flushed"
               maxLength={CARD_DESCRIPTION_MAX_LENGTH}
               autoFocus
+              value={cardDescriptionInputValue}
               onChange={handleCardDescriptionChange}
               textAlign="center"
             />
@@ -60,7 +68,7 @@ export const CardCompletePage = () => {
       </AppLayout.Body>
       <AppLayout.Footer>
         <HStack justifyContent="flex-end">
-          <Button variant="solid" color="teal" fontSize="100px" onClick={handleCardCreateSubmit}>
+          <Button variant="solid" color="teal" fontSize="100px" onClick={onCardCompleteClick}>
             완료
           </Button>
         </HStack>
