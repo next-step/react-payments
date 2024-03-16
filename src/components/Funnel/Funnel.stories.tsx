@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react';
 import { Funnel } from './Funnel';
-import { CardProvider } from '@/components';
 import { CardAddPage, CardCompletePage, CardListPage } from '@/pages';
+import { CardProvider } from '@/providers';
 
 const meta: Meta<typeof Funnel> = {
   title: 'Components/Funnel',
