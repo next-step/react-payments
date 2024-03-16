@@ -2,7 +2,7 @@ import { assign, createMachine, enqueueActions } from 'xstate';
 import { createActorContext } from '@xstate/react';
 import { nanoid } from 'nanoid';
 
-import { CARD_COMPANY_MAP } from 'src/constants/card.ts';
+import { CARD_COMPANY_MAP, getCardCompanyCodeByCardNumber } from 'src/constants/card.ts';
 
 export interface CardInfo {
 	cardNumberFirstSegment: string;
@@ -63,7 +63,8 @@ type CardMachineEvent =
 	| { type: 'FOCUS_CARD_EXPIRATION_DATE' }
 	| { type: 'FOCUS_CARD_PASSWORD_FIRST_DIGIT' }
 	| { type: 'FOCUS_CARD_PASSWORD_SECOND_DIGIT' }
-	| { type: 'FOCUS_CARD_SECURITY_CODE' };
+	| { type: 'FOCUS_CARD_SECURITY_CODE' }
+	| { type: 'INFER_CARD_COMPANY_CODE' };
 
 type CardMachineActions =
 	| { type: 'selectCard' }
@@ -73,7 +74,8 @@ type CardMachineActions =
 	| { type: 'changeFieldAddCardForm' }
 	| { type: 'changeFieldAddCardFinish' }
 	| { type: 'resetAddCardForm' }
-	| { type: 'alertAddCardForm'; params: { message: string } };
+	| { type: 'alertAddCardForm'; params: { message: string } }
+	| { type: 'inferCardCompanyCode' };
 
 type CardMachineGuards = { type: 'hasMaxLength' } | { type: 'isAddCardFormValid' };
 
@@ -239,6 +241,9 @@ export const addCardMachine = createMachine(
 					CHANGE_FIELD: {
 						actions: [{ type: 'changeFieldAddCardForm' }],
 					},
+					INFER_CARD_COMPANY_CODE: {
+						actions: [{ type: 'inferCardCompanyCode' }],
+					},
 				},
 			},
 			AddCardFinish: {
@@ -292,6 +297,8 @@ export const addCardMachine = createMachine(
 						maxLength: event?.maxLength || Infinity,
 						field: event.field,
 					});
+
+					enqueue.raise({ type: 'INFER_CARD_COMPANY_CODE' });
 				}
 			}),
 			changeFieldAddCardFinish: assign(({ context, event }) =>
@@ -303,6 +310,13 @@ export const addCardMachine = createMachine(
 			alertAddCardForm: (_, params) => {
 				alert(params.message);
 			},
+			inferCardCompanyCode: assign(({ context }) => {
+				const { cardNumberFirstSegment, cardNumberSecondSegment } = context.cardInfo;
+
+				const cardCompanyCode = getCardCompanyCodeByCardNumber({ cardNumberSecondSegment, cardNumberFirstSegment });
+
+				return { cardInfo: { ...context.cardInfo, cardCompanyCode } };
+			}),
 		},
 		guards: {
 			hasMaxLength: ({ context, event }) => {
