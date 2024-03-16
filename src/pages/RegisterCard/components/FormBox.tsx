@@ -20,7 +20,9 @@ export const FormBox = ({ label, style, render, maxLength }: TProps) => {
         <label>{label}</label>
         {maxLength && <label>{`${value.length} / ${maxLength}`}</label>}
       </div>
-      <div className="render-container">{render(value, handleChange)}</div>
+      <div className="render-container" style={style}>
+        {render(value, handleChange)}
+      </div>
     </Container>
   );
 };

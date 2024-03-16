@@ -1,6 +1,8 @@
 import { Card } from "@/components/Card";
 import { CardExpireDayInput } from "@/components/Card/CardExpireDayInput";
 import { CardNumberInput } from "@/components/Card/CardNumberInput";
+import { CardPassword } from "@/components/Card/CardPassword";
+import { NumberInput } from "@/components/atom/NumberInput";
 import { TextInput } from "@/components/atom/storybook/TextInput";
 import { REGEX } from "@/constants/regex";
 import { FormBox } from "@/pages/RegisterCard/components/FormBox";
@@ -96,12 +98,35 @@ export const RegisterCard = () => {
             maxLength={30}
             render={(value, handleChange) => (
               <TextInput
-                style={{ border: "none" }}
+                variant="borderLess"
                 onChange={handleChange}
                 maxLength={30}
               />
             )}
           />
+          <FormBox
+            label="보안코드(CVC/CVV)"
+            render={() => (
+              <NumberInput
+                variant="borderLess"
+                maxLength={3}
+                mask
+                style={{ textAlign: "center", fontSize: "20px" }}
+              />
+            )}
+            style={{ width: "100px" }}
+          />
+          <FormBox
+            label="카드 비밀번호"
+            style={{ width: "fit-content", background: "unset" }}
+            render={() => (
+              <CardPassword
+                variant="borderLess"
+                style={{ background: "#ecebf1" }}
+              />
+            )}
+          />
+
           {/* <div className="input-container">
             <FormInput
               label="카드 번호"

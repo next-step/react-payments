@@ -29,7 +29,7 @@ export const inputProps: ComponentProps<typeof NumberInput>[] = [
 export const CardNumberInput = () => {
   const inputRef = useRef<HTMLInputElement[]>([]);
 
-  const onChange = (value: string, index: number) => {
+  const handleChange = (value: string, index: number) => {
     if (value.length === 4) {
       inputRef.current[index + 1].focus();
     }
@@ -45,7 +45,7 @@ export const CardNumberInput = () => {
                 elem && (inputRef.current[i] = elem);
               }}
               {...(i !== inputProps.length - 1 && {
-                onChange: (value: string) => onChange(value, i),
+                onChange: (value: string) => handleChange(value, i),
               })}
             />
             {i !== inputProps.length - 1 && <span>-</span>}
