@@ -1,18 +1,13 @@
 import { style, styleVariants } from '@vanilla-extract/css';
 
-const base = style({
+const cardBoxBase = style({
+  display: 'flex',
+  flexDirection: 'column',
   padding: '16px',
   borderRadius: '4px',
-  display: 'flex',
-  width: '100%',
-  flexDirection: 'column',
-  height: '100%',
   boxShadow: '3px 3px 5px rgba(0, 0, 0, 0.25)',
-});
-
-const cardBoxBase = style({
-  margin: 'auto',
-  marginBottom: '48px',
+  height: '100%',
+  margin: '0 auto',
 });
 
 export const cardBox = styleVariants({
@@ -33,24 +28,21 @@ export const cardBox = styleVariants({
 });
 
 export const cardColor = styleVariants({
-  BRAND1: [base, { backgroundColor: '#94dacd' }],
-  BRAND2: [base, { backgroundColor: '#00FF00' }],
-  BRAND3: [base, { backgroundColor: '#0000FF' }],
-  BRAND4: [base, { backgroundColor: '#FFFF00' }],
-  BRAND5: [base, { backgroundColor: '#FF00FF' }],
-  BRAND6: [base, { backgroundColor: '#00FFFF' }],
-  BRAND7: [base, { backgroundColor: '#800080' }],
-  BRAND8: [base, { backgroundColor: '#008080' }],
-  UNKNOWN: [
-    base,
-    {
-      backgroundColor: 'gray',
-    },
-  ],
+  BRAND1: { backgroundColor: '#94dacd' },
+  BRAND2: { backgroundColor: '#00FF00' },
+  BRAND3: { backgroundColor: '#0000FF' },
+  BRAND4: { backgroundColor: '#FFFF00' },
+  BRAND5: { backgroundColor: '#FF00FF' },
+  BRAND6: { backgroundColor: '#00FFFF' },
+  BRAND7: { backgroundColor: '#800080' },
+  BRAND8: { backgroundColor: '#008080' },
+  UNKNOWN: {
+    backgroundColor: 'gray',
+  },
 });
 
 export const brand = style({
-  // fontSize: '10px',
+  fontSize: '10px',
   fontWeight: '500',
 });
 const chipBase = style({
@@ -77,4 +69,9 @@ export const chip = styleVariants({
       marginBottom: '20px',
     },
   ],
+});
+
+export const cardText = style({
+  display: 'flex',
+  justifyContent: 'space-between',
 });

@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { New, List, Example } from '@/pages';
+import { New, List } from '@/pages';
 import Layout from '@/layout';
 import { Outlet } from 'react-router-dom';
 
@@ -19,10 +19,6 @@ const router = createBrowserRouter(
         {
           path: '/new',
           element: <New />,
-        },
-        {
-          path: '/example',
-          element: <Example />,
         },
       ],
     },

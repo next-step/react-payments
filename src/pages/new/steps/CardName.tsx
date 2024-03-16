@@ -1,16 +1,41 @@
-import { useContext, useState } from 'react';
-import FormContext from '@/pages/new/context';
-import { Button, Form, Card } from '@/components';
+import { useState, useEffect } from 'react';
+import { Button, Form, Card, Input, Footer } from '@/components';
+import { FormMachineContext } from '@/pages/new';
+import * as styles from './cardName.css';
+import type { FormItems, FormItemKeys, FormItemValues } from '@/types/form';
 
 interface CardNameProps {
   next: () => void;
 }
+
 const CardName = ({ next }: CardNameProps) => {
-  const { totalFormData, setTotalFormData } = useContext(FormContext);
   const [cardName, setCardName] = useState('');
+  const totalFormData = FormMachineContext.useSelector(
+    (state) => state.context.totalFormData
+  );
+  const formActorRef = FormMachineContext.useActorRef();
+
+  const cardBrand = () => {
+    const cardNumer1 = totalFormData.get('cardNumber1');
+    if (!cardNumer1) {
+      return 'UNKNOWN';
+    }
+    const firstNumber = cardNumer1[0];
+    if (firstNumber === '9' || firstNumber === '0') {
+      return 'UNKNOWN';
+    }
+    return `BRAND${cardNumer1[0]}`;
+  };
+
+  useEffect(() => {
+    if (totalFormData.get('cardName')) {
+      setCardName(totalFormData.get('cardName') || '');
+    }
+  }, [totalFormData]);
+
   return (
     <main>
-      <h1>카드 등록이 완료되었습니다.</h1>
+      <p>카드 등록이 완료되었습니다.</p>
       <Card
         size='large'
         cardNumber={[
@@ -20,29 +45,38 @@ const CardName = ({ next }: CardNameProps) => {
           totalFormData.get('cardNumber4') || '',
         ]}
         expirationDate={{
-          month: totalFormData.get('expireDateMonth'),
-          year: totalFormData.get('expireDateYear'),
+          month: totalFormData.get('expireDateMonth') || '',
+          year: totalFormData.get('expireDateYear') || '',
         }}
-        owner={totalFormData.get('cardOwner')}
+        owner={totalFormData.get('cardOwner') || ''}
       />
 
       <Form
-        onSubmit={() => {
-          if (cardName) {
-            setTotalFormData((prev) => {
-              prev.set('cardName', cardName);
-              return prev;
-            });
-          }
+        onSubmit={(e) => {
+          e.preventDefault();
+          const myMap = new Map([
+            ['cardName', cardName || cardBrand],
+            ['id', totalFormData.get('id') || crypto.randomUUID()],
+          ]) as Map<Partial<FormItemKeys>, FormItemValues<FormItems>>;
+          formActorRef.send({ type: 'UPDATE', data: myMap });
           next();
         }}
       >
-        <input
-          placeholder='카드 이름'
-          value={cardName}
-          onChange={(e) => setCardName(e.target.value)}
-        />
-        <Button htmlType='submit'>확인</Button>
+        <Form.Item>
+          <Input
+            block
+            type='underline'
+            placeholder='카드 별칭 (선택)'
+            value={cardName}
+            maxLength={10}
+            onChange={(e) => setCardName(e.target.value)}
+          />
+        </Form.Item>
+        <Footer className={styles.textEnd}>
+          <Button htmlType='submit' type='text'>
+            확인
+          </Button>
+        </Footer>
       </Form>
     </main>
   );

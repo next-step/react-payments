@@ -1,9 +1,21 @@
-import { style } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 
-export const inputBox = style({
-  backgroundColor: '#ecebf1',
-  borderRadius: '8px',
-  display: 'flex',
+export const inputBox = styleVariants({
+  default: {
+    backgroundColor: '#ecebf1',
+    borderRadius: '8px',
+    display: 'flex',
+  },
+  underline: {
+    borderBottom: '1px solid black',
+  },
+});
+
+export const inputBlock = styleVariants({
+  true: {
+    flexGrow: 1,
+  },
+  false: {},
 });
 
 export const inputElement = style({
