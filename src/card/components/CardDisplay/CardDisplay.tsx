@@ -20,6 +20,7 @@ export const CardDisplay = ({
 }: CardDisplayProps) => {
   const { cardDisplayProps, cardChipProps, typographyVariant, maskFontSize } = getCardStyles(size);
   const [expirationMonth, expirationYear] = expirationDate.split(' ');
+
   return (
     <Button onClick={onClick} padding="0">
       <VStack
@@ -63,6 +64,7 @@ const CardNumberDisplay = ({
     {cardNumber.split(' ').map((number, index) => {
       const isTextMaskIndex = index > 1;
       const text = isTextMaskIndex ? replaceMaskText(number) : number;
+
       return (
         <Typography
           key={`card-number-${index}`}
