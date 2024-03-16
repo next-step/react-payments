@@ -7,7 +7,7 @@ import { AsProps, StyleProps } from '@/shared/types';
 export type TextFieldProps = StyleProps &
   AsProps &
   HTMLProps<HTMLInputElement> & {
-    variant?: TextFieldVariant;
+    variant: TextFieldVariant;
     _placeholder?: PlaceholderProps;
     _focus?: FocusProps;
   };
@@ -42,12 +42,12 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 );
 
 const Root = styled(DefaultStyled)<TextFieldProps>`
-  ${({ width }) => width || styleToken.width.w100};
-  ${({ height }) => height || '45px'};
-  ${({ padding }) => padding || '13px 12px 13px 11px'};
-  ${({ borderRadius }) => borderRadius || '6px'};
-  ${({ fontSize }) => fontSize || '18px'};
-  ${({ variant }) => variantStyles[variant || 'outline']};
+  ${({ variant }) => variantStyles[variant]};
+  ${({ width }) => width && { width }};
+  ${({ height }) => height && { height }};
+  ${({ padding }) => padding && { padding }};
+  ${({ borderRadius }) => borderRadius && { borderRadius }};
+  ${({ fontSize }) => fontSize && { fontSize }};
 
   &::placeholder {
     font-size: ${({ _placeholder }) => _placeholder?.fontSize};
