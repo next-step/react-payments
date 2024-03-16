@@ -26,7 +26,7 @@ export default function AddCardAliasForm({
 				value={cardAlias}
 				onChange={handleCardAliasChange}
 				maxLength={10}
-				placeholder="카드 별칭(선택)"
+				placeholder="카드 별칭"
 			/>
 			<div className="bottom-button-box">
 				<Button type="submit">확인</Button>
