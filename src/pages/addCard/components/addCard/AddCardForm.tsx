@@ -29,6 +29,7 @@ export default function AddCardForm() {
 	return (
 		<form onSubmit={handleSubmit}>
 			<PaymentCard
+				variant="small-card"
 				cardNumber={displayedCardNumber}
 				cardExpiredDate={displayedExpiredDate}
 				cardHolderName={cardHolderName}
@@ -55,7 +56,7 @@ export default function AddCardForm() {
 				onFirstValueChange={handleFirstCardPasswordChange}
 				onSecondValueChange={handleSecondCardPasswordChange}
 			/>
-			<div style={{ width: '100%', textAlign: 'right' }}>
+			<div className="bottom-button-box">
 				<Button type="submit">다음</Button>
 			</div>
 		</form>

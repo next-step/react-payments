@@ -2,6 +2,11 @@
 	width: 100%;
 }
 
+.bottom-button-box {
+	text-align: right;
+	width: 100%;
+}
+
 .button-text {
 	margin-right: 10px;
 }

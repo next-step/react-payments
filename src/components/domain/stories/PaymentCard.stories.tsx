@@ -12,9 +12,10 @@ const meta = {
 
 type Story = StoryObj<typeof PaymentCard>;
 
-export const Default: Story = {
+export const SmallCard: Story = {
 	render: () => (
 		<PaymentCard
+			variant="small-card"
 			cardNumber="1234-5678-1234-5678"
 			cardExpiredDate="12/26"
 			cardHolderName="이파란"
