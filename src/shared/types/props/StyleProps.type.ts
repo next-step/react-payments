@@ -15,40 +15,21 @@ type PickCSSProperties<Properties extends keyof CSSProperties> = Partial<Pick<CS
 export type FlexboxProps = PickCSSProperties<
   | 'display'
   | 'flex'
-  | 'flexDirection'
+  | `flex${'Wrap' | 'Basis' | 'Grow' | 'Shrink' | 'Direction'}`
   | 'justifyContent'
-  | 'alignItems'
-  | 'alignContent'
-  | 'flexWrap'
-  | 'flexBasis'
-  | 'flexGrow'
-  | 'flexShrink'
+  | `align${'Items' | 'Content' | 'Self'}`
   | 'order'
-  | 'alignSelf'
   | 'gap'
 >;
 
-export type GridProps = PickCSSProperties<
-  | 'gridGap'
-  | 'gridRowGap'
-  | 'gridColumnGap'
-  | 'gridTemplateRows'
-  | 'gridTemplateColumns'
-  | 'gridTemplateAreas'
-  | 'gridArea'
->;
+export type GridProps =
+  PickCSSProperties<`grid${'Gap' | 'RowGap' | 'ColumnGap' | 'TemplateRows' | 'TemplateColumns' | 'TemplateAreas' | 'Area'}`>;
 
 export type SpacingProps = PickCSSProperties<
   | 'margin'
-  | 'marginTop'
-  | 'marginRight'
-  | 'marginBottom'
-  | 'marginLeft'
+  | `margin${'Top' | 'Right' | 'Bottom' | 'Left'}`
   | 'padding'
-  | 'paddingTop'
-  | 'paddingRight'
-  | 'paddingBottom'
-  | 'paddingLeft'
+  | `padding${'Top' | 'Right' | 'Bottom' | 'Left'}`
 >;
 
 export type SizeProps = PickCSSProperties<'width' | 'height' | 'minWidth' | 'maxWidth' | 'minHeight' | 'maxHeight'>;
@@ -57,12 +38,10 @@ export type TypographyProps = PickCSSProperties<
   'color' | 'fontSize' | 'fontWeight' | 'lineHeight' | 'textAlign' | 'letterSpacing' | 'whiteSpace' | 'textOverflow'
 >;
 
-export type BackgroundProps = PickCSSProperties<
-  'backgroundColor' | 'backgroundImage' | 'backgroundSize' | 'backgroundPosition' | 'backgroundRepeat'
->;
+export type BackgroundProps = PickCSSProperties<`background${'Color' | 'Image' | 'Size' | 'Position' | 'Repeat'}`>;
 
 export type BoxModelProps = PickCSSProperties<
-  'boxShadow' | 'borderRadius' | 'border' | 'borderWidth' | 'borderColor' | 'borderStyle'
+  'boxShadow' | 'border' | `border${`Radius` | 'Width' | 'Color' | 'Style'}`
 >;
 
 export type PositionProps = PickCSSProperties<'position' | 'top' | 'right' | 'bottom' | 'left'>;
