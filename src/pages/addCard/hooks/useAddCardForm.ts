@@ -43,6 +43,7 @@ export default function useAddCardForm() {
 			cardPassword,
 			cardSecurityCode,
 			createdAt: new Date(),
+			cardAlias: '',
 		};
 		dispatch({ type: 'toAddCardComplete', payload: paymentCard });
 	};

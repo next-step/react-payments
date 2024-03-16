@@ -16,6 +16,7 @@ const getCards = () => [
 		cardSecurityCode: '123',
 		cardPassword: '12',
 		createdAt: new Date('2024-01-01'),
+		cardAlias: '삼성카드',
 	},
 	{
 		id: '2',
@@ -25,6 +26,7 @@ const getCards = () => [
 		cardSecurityCode: '123',
 		cardPassword: '12',
 		createdAt: new Date('2023-01-01'),
+		cardAlias: '현대카드',
 	},
 ];
 
