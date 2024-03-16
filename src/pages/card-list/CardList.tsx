@@ -2,16 +2,17 @@ import Card from '@/components/card/Card';
 import EmptyCard from '@/components/card/EmptyCard';
 import FlexCenter from '@/components/common/flex-center/FlexCenter';
 import PageTitle from '@/components/common/page-title/PageTitle';
-import { MyCardsContext } from '@/provider/my-cards-provider/MyCardsProvider';
-import { StepContext } from '@/provider/step-provider/StepProvider';
-import { useContext } from 'react';
+import { Route } from '@/domain/type';
+
+import useMyCardsContext from '@/provider/my-cards-provider/hook/useMyCardsContext';
+import useStepContext from '@/provider/step-provider/useStepContext';
 
 const CardList = () => {
-  const { myCardList } = useContext(MyCardsContext);
-  const { navigate } = useContext(StepContext);
-  const goToPage = (path: string) => {
-    navigate(path);
-  };
+  const { myCardList } = useMyCardsContext();
+
+  const { navigate } = useStepContext();
+  const goToPage = (path: Route) => navigate(path);
+
   return (
     <div className="app flex-column-center">
       <FlexCenter>

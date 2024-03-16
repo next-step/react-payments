@@ -1,9 +1,10 @@
-import { CardStateType } from '@/domain/type';
+import { CardBrand, CardStateType } from '@/domain/type';
 import { PropsWithChildren, createContext, useState } from 'react';
 
+type CardListType = CardStateType & CardBrand;
 interface MyCardListType {
-  myCardList: CardStateType[];
-  addCard: (card: CardStateType) => void;
+  myCardList: CardListType[];
+  addCard: (card: CardListType) => void;
 }
 
 const initialContext: MyCardListType = {
@@ -14,8 +15,8 @@ const initialContext: MyCardListType = {
 export const MyCardsContext = createContext(initialContext);
 
 const MyCardsProvider = ({ children }: PropsWithChildren) => {
-  const [myCardList, setMyCardList] = useState<CardStateType[]>([]);
-  const addCard = (card: CardStateType) => {
+  const [myCardList, setMyCardList] = useState<CardListType[]>([]);
+  const addCard = (card: CardListType) => {
     setMyCardList((prev) => [card, ...prev]);
   };
   return (

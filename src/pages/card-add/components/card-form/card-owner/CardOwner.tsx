@@ -1,11 +1,10 @@
 import Input from '@/components/common/input/Input';
+import { CARD_OWNER_NAME_LIMIT } from '@/domain/constant';
 import useCardOwner from './hook/useCardOwner';
-import { useRef } from 'react';
+import { ForwardedRef, forwardRef } from 'react';
 
-const MAX_LENGTH = 30;
-const CardOwner = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const { ownerName, handleChange } = useCardOwner();
+const CardOwner = forwardRef(({}, ref: ForwardedRef<HTMLInputElement>) => {
+  const { ownerName = '', handleChange } = useCardOwner();
 
   return (
     <>
@@ -21,11 +20,11 @@ const CardOwner = () => {
         value={ownerName}
         onChange={handleChange}
         placeholder="카드에 표시된 이름과 동일하게 입력하세요."
-        maxLength={MAX_LENGTH}
-        ref={inputRef}
+        maxLength={CARD_OWNER_NAME_LIMIT}
+        ref={ref}
       />
     </>
   );
-};
+});
 
 export default CardOwner;

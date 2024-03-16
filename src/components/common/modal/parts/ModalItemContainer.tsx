@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import { PropsWithChildren } from 'react';
 
 const ModalItemContainer = ({ children }: PropsWithChildren) => {
   return <div className="modal-item-container">{children}</div>;

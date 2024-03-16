@@ -1,28 +1,35 @@
 import Card from '@/components/card/Card';
-import FlexCenter from '@/components/common/flex-center/FlexCenter';
-import Button from '@/components/common/button/Button';
-import Input from '@/components/common/input/Input';
-import PageTitle from '@/components/common/page-title/PageTitle';
-import { CardInfoContext } from '@/provider/card-info-provider/CardInfoProvider';
-import { MyCardsContext } from '@/provider/my-cards-provider/MyCardsProvider';
-import { StepContext } from '@/provider/step-provider/StepProvider';
-import { ChangeEvent, useContext } from 'react';
 import ButtonBox from '@/components/common/button-box/ButtonBox';
-import Container from '@/components/common/input-container/Container';
+import Button from '@/components/common/button/Button';
+import FlexCenter from '@/components/common/flex-center/FlexCenter';
+import PageTitle from '@/components/common/page-title/PageTitle';
 
-const MAX_LENGTH = 10;
+import { isLimitFailed } from '@/domain/validate';
+import useCardContext from '@/provider/card-info-provider/hook/useCardContext';
+import useMyCardsContext from '@/provider/my-cards-provider/hook/useMyCardsContext';
+import useStepContext from '@/provider/step-provider/useStepContext';
+import CardNickname from './components/card-nickname/CardNickname';
+import useModalContext from '@/provider/modal-provider/hook/useModalContext';
+
 const CardRegisterComplete = () => {
-  const { addCard } = useContext(MyCardsContext);
-  const { navigate } = useContext(StepContext);
-  const { cardState, handleCardState, reset } = useContext(CardInfoContext);
+  const { addCard } = useMyCardsContext();
+  const { navigate } = useStepContext();
+
+  const { cardState, reset } = useCardContext();
+  const { nickname } = cardState;
+
+  const { cardBrand, toggle, resetCardBrand } = useModalContext();
+
+  const isNickNameValid = (nickname: string = '') => isLimitFailed(nickname, 10);
 
   const goToPage = () => {
+    const isVaild = isNickNameValid(nickname);
+    const { cardBrandName } = cardBrand;
+    const cardDefaultNickname = isVaild ? nickname : cardBrandName;
+    addCard({ ...cardState, ...cardBrand, nickname: cardDefaultNickname });
     reset();
+    resetCardBrand();
     navigate('LIST');
-  };
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    handleCardState({ [name]: value });
   };
 
   return (
@@ -30,30 +37,10 @@ const CardRegisterComplete = () => {
       <FlexCenter>
         <PageTitle className="mb-10">카드 등록이 완료되었습니다.</PageTitle>
       </FlexCenter>
-      <Card status="big" {...cardState} />
-      <Container className="flex-center w-100">
-        <Input
-          type="text"
-          boxType="input-underline"
-          className="w-75"
-          name="nickname"
-          placeholder="카드 별칭 (선택)"
-          maxLength={MAX_LENGTH}
-          onChange={handleChange}
-        />
-      </Container>
+      <Card status="big" {...cardBrand} {...cardState} onClick={toggle} />
+      <CardNickname />
       <ButtonBox className="mt-50">
-        <Button
-          type="button"
-          onClick={() => {
-            addCard(cardState);
-            goToPage();
-          }}
-          style={{
-            border: 'none',
-            background: 'white',
-          }}
-        >
+        <Button type="button" className="button-border-none" onClick={goToPage}>
           <span className="button-text">다음</span>
         </Button>
       </ButtonBox>

@@ -1,20 +1,24 @@
 import Input from '@/components/common/input/Input';
+import { CARD_SECURITY_CODE_LIMIT } from '@/domain/constant';
 import useSecurityCode from './hook/useSecurityCode';
+import { ForwardedRef, forwardRef } from 'react';
 
-const MAX_LENGTH = 3;
+const CardSecurityCode = forwardRef(
+  ({ nextFocus }: { nextFocus: any }, ref: ForwardedRef<HTMLInputElement>) => {
+    const { securityCode = '', handleScurityCode } = useSecurityCode({ nextFocus });
 
-const CardSecurityCode = () => {
-  const { securityCode, handleScurityCode } = useSecurityCode();
-  return (
-    <Input
-      type="password"
-      className="w-25"
-      name="securityCode"
-      value={securityCode}
-      onChange={handleScurityCode}
-      maxLength={MAX_LENGTH}
-    />
-  );
-};
+    return (
+      <Input
+        type="password"
+        className="w-25"
+        name="securityCode"
+        value={securityCode}
+        onChange={handleScurityCode}
+        maxLength={CARD_SECURITY_CODE_LIMIT}
+        ref={ref}
+      />
+    );
+  },
+);
 
 export default CardSecurityCode;

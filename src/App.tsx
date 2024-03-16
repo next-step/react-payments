@@ -4,6 +4,7 @@ import CardRegisterComplete from './pages/card-register-complete/CardRegisterCom
 import CardInfoProvider from './provider/card-info-provider/CardInfoProvider';
 import MyCardsProvider from './provider/my-cards-provider/MyCardsProvider';
 import StepProvider from './provider/step-provider/StepProvider';
+import ModalProvider from './provider/modal-provider/ModalProvider';
 
 const App = () => (
   <div className="root">
@@ -13,8 +14,10 @@ const App = () => (
           <>
             {'LIST' === route && <CardList />}
             <CardInfoProvider>
-              {'CARD' === route && <AddCard />}
-              {'COMPLETE' === route && <CardRegisterComplete />}
+              <ModalProvider>
+                {'CARD' === route && <AddCard />}
+                {'COMPLETE' === route && <CardRegisterComplete />}
+              </ModalProvider>
             </CardInfoProvider>
           </>
         )}

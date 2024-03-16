@@ -1,16 +1,18 @@
-import CardNumbers from './parts/CardNumbers';
+import { CardStateType } from '@/domain/type';
 import CardBox from './parts/CardBox';
 import CardForm from './parts/CardForm';
+import CardNumbers from './parts/CardNumbers';
 import CardTitle from './parts/CardTitle';
-import { CardStateType } from '@/domain/type';
 
+import { CardBrand } from '@/provider/modal-provider/ModalProvider';
+import CardBottom from './parts/CardBottom';
 import CardText from './parts/CardText';
 import Chip from './parts/Chip';
-import CardBottom from './parts/CardBottom';
 
-interface CardProps extends CardStateType {
+interface CardProps extends CardStateType, CardBrand {
   status?: 'small' | 'big' | 'empty';
   onClick?: () => void;
+  cardBrandName: string;
 }
 
 const Card = ({
@@ -18,7 +20,10 @@ const Card = ({
   month,
   year = '',
   cardNumbers,
-  status = 'small',
+  status = 'empty',
+
+  color,
+  cardBrandName,
   onClick,
 }: CardProps) => {
   const displayMonth = month ? `${month} / ` : '';
@@ -26,9 +31,9 @@ const Card = ({
 
   return (
     <CardBox onClick={onClick}>
-      <CardForm status={status}>
+      <CardForm status={status} style={{ backgroundColor: color }}>
         <CardTitle>
-          <CardText status={status}>타이틀</CardText>
+          <CardText status={status}>{cardBrandName}</CardText>
         </CardTitle>
         <div className="card-middle">
           <Chip status={status} />

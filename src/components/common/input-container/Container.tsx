@@ -11,11 +11,11 @@ interface ContainerProps extends BaseContainerProps, PropsWithChildren {
 const Container = ({ title, className, children }: ContainerProps) => {
   return (
     <div className={classNames('input-container', className)}>
-      {title && (
+      {title ? (
         <span title={title} className="input-title">
           {title}
         </span>
-      )}
+      ) : null}
       {children}
     </div>
   );

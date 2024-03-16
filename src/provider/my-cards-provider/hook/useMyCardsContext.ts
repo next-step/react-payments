@@ -4,7 +4,7 @@ import { MyCardsContext } from '../MyCardsProvider';
 const useMyCardsContext = () => {
   const myCardsContext = useContext(MyCardsContext);
   if (!myCardsContext) {
-    return null;
+    throw new Error('카드 리스트 컨텍스트 입니다!');
   }
   return myCardsContext;
 };
