@@ -139,3 +139,18 @@
 	overflow-y: scroll;
 	height: 80%;
 }
+
+.card-bottom-button-box {
+	text-align: right;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+.card-bottom-button {
+	color: red;
+	font-size: 12px;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+}

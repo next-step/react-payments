@@ -11,6 +11,10 @@
 	align-items: center;
 }
 
+.relative {
+	position: relative;
+}
+
 .mt-10 {
 	margin-top: 2.5rem;
 }

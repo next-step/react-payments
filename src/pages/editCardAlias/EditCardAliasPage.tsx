@@ -10,7 +10,7 @@ export default function EditCardAliasPage() {
 			{paymentCard && (
 				<div className="flex-column-center">
 					<div className="page-title-box">
-						<p className="page-title">카드 등록이 완료되었습니다.</p>
+						<p className="page-title">카드 별칭을 입력해주세요</p>
 					</div>
 					<EditCardAliasForm data={paymentCard} />
 				</div>
