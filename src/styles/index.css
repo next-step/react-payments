@@ -5,6 +5,7 @@
 @import 'utils.css';
 @import 'password.css';
 @import 'form.css';
+@import 'tooltip.css';
 
 *{
 	box-sizing: border-box;
