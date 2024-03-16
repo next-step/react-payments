@@ -14,6 +14,7 @@ export type ExpirationDateType = {
 };
 
 export type CardType = {
+  cardCompany: string;
   cardNumber: CardNumberType;
   expirationDate: ExpirationDateType;
   ownerName: string;

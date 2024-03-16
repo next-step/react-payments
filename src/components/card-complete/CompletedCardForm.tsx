@@ -35,9 +35,11 @@ export default function CompletedCard() {
   };
 
   const handleClickButton = () => {
+    const newCardAlias = cardAlias || card.cardCompany;
+
     addCardInList({
       ...card,
-      cardAlias,
+      cardAlias: newCardAlias,
     });
     console.log(card);
     console.log(cards);

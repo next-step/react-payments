@@ -3,9 +3,9 @@ import {
   CARD_PASSWORD_LIMIT,
   EXPIRATION_DATE_LIMIT,
   SECURITY_CODE_LIMIT,
-} from '../../constants/cardLimit';
+} from '../constants/cardLimit';
 
-import { CardFulledType } from '../../types/CardFormType';
+import { CardFulledType } from '../types/CardFormType';
 
 const isFilled = (value: string, limit: number) => value.length === limit;
 

@@ -9,6 +9,7 @@ import OwnerName from './OwnerName';
 import SecurityCode from './SecurityCode';
 import CardPassword from './CardPassword';
 import ClickableLink from './ClickableLink';
+import CardCompanyList from './CardCompanyList';
 
 import type {
   CardNumberType,
@@ -17,9 +18,8 @@ import type {
 } from '../../types/CardFormType';
 
 import { useCardContext } from '../hooks/useCardContext';
-import useCardFormData from '../hooks/useCardForm';
 
-import CardProvider from '../../context/CardProvider';
+import isFulledForm from '../../utils/isFulledForm';
 
 export default function AddCardForm() {
   const [cardNumber, setCardNumber] = useState<CardNumberType>({
@@ -43,18 +43,18 @@ export default function AddCardForm() {
     secondNumber: '',
   });
 
+  const [cardCompany, setCardCompany] = useState('');
+
   const [isClick, setIsClick] = useState(false);
 
   const { addCard } = useCardContext();
 
-  const isFulledForm = useCardFormData({
+  const isFormFilled = isFulledForm({
     cardNumber,
     cardPassword,
     securityCode,
     expirationDate,
   });
-
-  const isFormFilled = isFulledForm();
 
   const handleClickButton = () => {
     setIsClick(true);
@@ -65,6 +65,7 @@ export default function AddCardForm() {
       ownerName,
       securityCode,
       cardPassword,
+      cardCompany,
     });
   };
 
@@ -102,6 +103,7 @@ export default function AddCardForm() {
           isClick={isClick}
         />
       </div>
+      {cardCompany ? '' : <CardCompanyList setCardCompany={setCardCompany} />}
     </div>
   );
 }
