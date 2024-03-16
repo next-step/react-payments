@@ -1,5 +1,8 @@
+import { PaymentCard } from '@pages/addCardComplete/AddCardCompletePage';
+
 export interface StepperState {
 	currentStep: number;
+	data?: PaymentCard;
 }
 
 export const initialState: StepperState = {
@@ -13,7 +16,7 @@ export type Action =
 	| {
 			type: 'toAddCard';
 	  }
-	| { type: 'toAddCardComplete' };
+	| { type: 'toAddCardComplete'; payload: PaymentCard };
 
 export function stepperReducer(state: StepperState, action: Action) {
 	switch (action.type) {
@@ -26,7 +29,7 @@ export function stepperReducer(state: StepperState, action: Action) {
 				currentStep: 1,
 			};
 		case 'toAddCardComplete':
-			return { currentStep: 2 };
+			return { currentStep: 2, data: action.payload };
 		default:
 			return state;
 	}

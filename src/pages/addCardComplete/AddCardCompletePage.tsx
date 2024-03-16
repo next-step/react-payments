@@ -2,7 +2,7 @@ import { PaymentCard } from '@components/domain';
 import { Button } from '@components/ui-kit';
 import { useStepper } from '@contexts/StepperContext';
 
-interface PaymentCard {
+export interface PaymentCard {
 	cardNumber: string;
 	cardExpiredDate: string;
 	cardHolderName: string;
@@ -10,26 +10,29 @@ interface PaymentCard {
 	cardPassword: string;
 }
 
-interface AddCardCompletePageProps {
-	data: PaymentCard;
-}
-
 export default function AddCardCompletePage() {
-	const { dispatch } = useStepper();
+	const { state, dispatch } = useStepper();
+	const paymentCard = state.data;
+
 	const handleClick = () => {
 		dispatch({ type: 'toCards' });
 	};
 	return (
-		<div className="flex-column-center">
-			<p className="page-title">카드 등록이 완료되었습니다.</p>
-			{/* <PaymentCard
-				cardNumber={cardNumber}
-				cardExpiredDate={cardExpiredDate}
-				cardHolderName={cardHolderName}
-			/> */}
-			<div style={{ width: '100%', textAlign: 'right' }}>
-				<Button onClick={handleClick}>다음</Button>
-			</div>
-		</div>
+		<>
+			{paymentCard && (
+				<div className="flex-column-center">
+					<p className="page-title">카드 등록이 완료되었습니다.</p>
+					<PaymentCard
+						variant="big-card"
+						cardNumber={paymentCard.cardNumber}
+						cardExpiredDate={paymentCard.cardExpiredDate}
+						cardHolderName={paymentCard.cardHolderName}
+					/>
+					<div className="bottom-button-box">
+						<Button onClick={handleClick}>확인</Button>
+					</div>
+				</div>
+			)}
+		</>
 	);
 }

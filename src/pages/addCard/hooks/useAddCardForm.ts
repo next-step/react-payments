@@ -1,11 +1,11 @@
-import { useNavigate } from 'react-router-dom';
+import { useStepper } from '@contexts/StepperContext';
+import { useInput } from '@hooks';
 import {
 	useCardExpiredDateInput,
 	useCardNumberInput,
 } from '@pages/addCard/hooks';
-import { useInput } from '@hooks';
+import { PaymentCard } from '@pages/addCardComplete/AddCardCompletePage';
 import { isNumber } from '@utils';
-import { useStepper } from '@contexts/StepperContext';
 
 export default function useAddCardForm() {
 	const { dispatch } = useStepper();
@@ -40,7 +40,15 @@ export default function useAddCardForm() {
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		dispatch({ type: 'toAddCardComplete' });
+		const cardPassword = `${firstCardPassword}${secondCardPassword}`;
+		const paymentCard: PaymentCard = {
+			cardNumber,
+			cardExpiredDate,
+			cardHolderName,
+			cardPassword,
+			cardSecurityCode,
+		};
+		dispatch({ type: 'toAddCardComplete', payload: paymentCard });
 	};
 	return {
 		displayedCardNumber,
