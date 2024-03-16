@@ -5,6 +5,7 @@ import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machin
 
 interface CardExpirationDateInputProps {
 	separator?: string;
+	maxLength?: number;
 }
 
 const formatExpirationDate = (separator: string) => (value: string) => {
@@ -19,7 +20,7 @@ const formatExpirationDate = (separator: string) => (value: string) => {
 	return year === '' ? formattedMonth : `${formattedMonth} ${separator} ${formattedYear}`;
 };
 
-export default function CardExpirationDateInput({ separator = '/' }: CardExpirationDateInputProps) {
+export default function CardExpirationDateInput({ separator = '/', maxLength }: CardExpirationDateInputProps) {
 	const { send } = useAddCardMachineActorRef();
 
 	const cardExpirationDate = useAddCardMachineSelector(state => state.context.cardInfo.cardExpirationDate);
@@ -31,7 +32,7 @@ export default function CardExpirationDateInput({ separator = '/' }: CardExpirat
 			type: 'CHANGE_FIELD',
 			value: formatExpirationDate(separator)(event.target.value),
 			field: 'cardExpirationDate',
-			maxLength: 7,
+			maxLength,
 		});
 	};
 
@@ -52,6 +53,7 @@ export default function CardExpirationDateInput({ separator = '/' }: CardExpirat
 				onChange={handleExpirationDateChange}
 				data-testid="card-expiration-date"
 				onFocus={handleExpirationDateFocus}
+				maxLength={maxLength}
 			/>
 		</div>
 	);

@@ -9,7 +9,21 @@ import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machin
 import SelectCardCompanyModal from 'src/steps/add-card-form/SelectCardCompanyModal.tsx';
 import EnteredCardImage from 'src/steps/add-card-form/EnteredCardImage.tsx';
 
-export default function AddCardForm() {
+interface AddCardFormProps {
+	cardNumberSegmentLength?: number;
+	cardOwnerNameMaxLength?: number;
+	cardExpirationDateMaxLength?: number;
+	cardSecurityCodeMaxLength?: number;
+	cardPasswordSegmentLength?: number;
+}
+
+export default function AddCardForm({
+	cardNumberSegmentLength = 4,
+	cardOwnerNameMaxLength = 30,
+	cardExpirationDateMaxLength = 7,
+	cardSecurityCodeMaxLength = 3,
+	cardPasswordSegmentLength = 1,
+}: AddCardFormProps) {
 	const { send } = useAddCardMachineActorRef();
 
 	const isStateAddCardForm = useAddCardMachineSelector(state => state.matches('AddCardForm'));
@@ -17,7 +31,19 @@ export default function AddCardForm() {
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		send({ type: 'ADD_CARD' });
+		send({
+			type: 'ADD_CARD',
+			maxLengths: {
+				cardNumberFirstSegment: cardNumberSegmentLength,
+				cardNumberSecondSegment: cardNumberSegmentLength,
+				cardNumberThirdSegment: cardNumberSegmentLength,
+				cardNumberFourthSegment: cardNumberSegmentLength,
+				cardExpirationDate: cardExpirationDateMaxLength,
+				cardSecurityCode: cardSecurityCodeMaxLength,
+				cardPasswordFirstDigit: cardPasswordSegmentLength,
+				cardPasswordSecondDigit: cardPasswordSegmentLength,
+			},
+		});
 	};
 
 	const handleClickBack = () => {
@@ -36,11 +62,11 @@ export default function AddCardForm() {
 					</div>
 					<form onSubmit={handleSubmit} data-testid="card-form">
 						<EnteredCardImage />
-						<CardNumberInput />
-						<CardOwnerNameInput />
-						<CardExpirationDateInput />
-						<CardSecurityCodeInput />
-						<CardPasswordInput />
+						<CardNumberInput segmentLength={cardNumberSegmentLength} />
+						<CardOwnerNameInput maxLength={cardOwnerNameMaxLength} />
+						<CardExpirationDateInput maxLength={cardExpirationDateMaxLength} />
+						<CardSecurityCodeInput maxLength={cardSecurityCodeMaxLength} />
+						<CardPasswordInput segmentMaxLength={cardPasswordSegmentLength} />
 						<div className="button-box">
 							<button type="submit" className="button-text" data-testid="form-next">
 								다음

@@ -45,7 +45,10 @@ interface CardMachineContext {
 type CardMachineEvent =
 	| { type: 'CHANGE_FIELD'; field: keyof CardInfo; value: string; maxLength?: number }
 	| { type: 'GO_TO_FORM' }
-	| { type: 'ADD_CARD' }
+	| {
+			type: 'ADD_CARD';
+			maxLengths: Record<keyof Omit<CardInfo, 'cardNickname' | 'cardCompanyCode' | 'cardOwnerName'>, number>;
+	  }
 	| { type: 'EDIT_CARD' }
 	| { type: 'BACK' }
 	| { type: 'TOGGLE' }
@@ -69,9 +72,10 @@ type CardMachineActions =
 	| { type: 'editCard' }
 	| { type: 'changeFieldAddCardForm' }
 	| { type: 'changeFieldAddCardFinish' }
-	| { type: 'resetAddCardForm' };
+	| { type: 'resetAddCardForm' }
+	| { type: 'alertAddCardForm'; params: { message: string } };
 
-type CardMachineGuards = { type: 'hasMaxLength' };
+type CardMachineGuards = { type: 'hasMaxLength' } | { type: 'isAddCardFormValid' };
 
 export const addCardMachine = createMachine(
 	{
@@ -217,10 +221,17 @@ export const addCardMachine = createMachine(
 					},
 				},
 				on: {
-					ADD_CARD: {
-						target: 'AddCardFinish',
-						actions: [{ type: 'addCard' }],
-					},
+					ADD_CARD: [
+						{
+							target: 'AddCardFinish',
+							actions: [{ type: 'addCard' }],
+							guard: { type: 'isAddCardFormValid' },
+						},
+						{
+							target: 'AddCardForm.enterCardInfo',
+							actions: [{ type: 'alertAddCardForm', params: { message: '카드 정보를 모두 입력해주세요.' } }],
+						},
+					],
 					BACK: {
 						target: 'CardList',
 						actions: [{ type: 'resetAddCardForm' }],
@@ -289,6 +300,9 @@ export const addCardMachine = createMachine(
 					: { selectedCard: { ...context.selectedCard } },
 			),
 			resetAddCardForm: assign({ cardInfo: { ...initialCardInfo } }),
+			alertAddCardForm: (_, params) => {
+				alert(params.message);
+			},
 		},
 		guards: {
 			hasMaxLength: ({ context, event }) => {
@@ -297,6 +311,19 @@ export const addCardMachine = createMachine(
 				const { maxLength, field } = event;
 
 				return context.cardInfo[field].length === maxLength;
+			},
+			isAddCardFormValid: ({ context, event }) => {
+				if (event.type !== 'ADD_CARD') return false;
+
+				const { cardInfo } = context;
+
+				const { maxLengths } = event;
+
+				return Object.entries(maxLengths).every(([key, value]) => {
+					const target = cardInfo[key as keyof CardInfo];
+
+					return target.length > 0 && target.length === value;
+				});
 			},
 		},
 	},

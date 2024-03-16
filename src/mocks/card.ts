@@ -10,7 +10,7 @@ export const MOCK_CARD_INFO_LIST: CardInfoWithId[] = [
 		cardNumberThirdSegment: '1234',
 		cardNumberFourthSegment: '5678',
 		cardOwnerName: '김포코',
-		cardExpirationDate: '12/24',
+		cardExpirationDate: '12 / 24',
 		cardPasswordFirstDigit: '1',
 		cardPasswordSecondDigit: '2',
 		cardSecurityCode: '123',
@@ -24,7 +24,7 @@ export const MOCK_CARD_INFO_LIST: CardInfoWithId[] = [
 		cardNumberThirdSegment: '1234',
 		cardNumberFourthSegment: '5678',
 		cardOwnerName: '김준',
-		cardExpirationDate: '12/24',
+		cardExpirationDate: '12 / 24',
 		cardPasswordFirstDigit: '1',
 		cardPasswordSecondDigit: '2',
 		cardSecurityCode: '123',
@@ -38,7 +38,7 @@ export const MOCK_CARD_INFO_LIST: CardInfoWithId[] = [
 		cardNumberThirdSegment: '1234',
 		cardNumberFourthSegment: '5678',
 		cardOwnerName: '김현석',
-		cardExpirationDate: '12/24',
+		cardExpirationDate: '12 / 24',
 		cardPasswordFirstDigit: '1',
 		cardPasswordSecondDigit: '2',
 		cardSecurityCode: '123',
@@ -52,7 +52,7 @@ export const MOCK_CARD_INFO_LIST: CardInfoWithId[] = [
 		cardNumberThirdSegment: '1234',
 		cardNumberFourthSegment: '5678',
 		cardOwnerName: '김윤호',
-		cardExpirationDate: '12/24',
+		cardExpirationDate: '12 / 24',
 		cardPasswordFirstDigit: '1',
 		cardPasswordSecondDigit: '2',
 		cardSecurityCode: '123',
@@ -66,7 +66,7 @@ export const MOCK_CARD_INFO_LIST: CardInfoWithId[] = [
 		cardNumberThirdSegment: '1234',
 		cardNumberFourthSegment: '5678',
 		cardOwnerName: '김환오',
-		cardExpirationDate: '12/24',
+		cardExpirationDate: '12 / 24',
 		cardPasswordFirstDigit: '1',
 		cardPasswordSecondDigit: '2',
 		cardSecurityCode: '123',
@@ -85,4 +85,16 @@ export const mockCardListMachine = createMachine(
 		},
 	},
 	{ actions: { ...addCardMachine.implementations.actions } },
+);
+
+export const mockCardInfoMachine = createMachine(
+	{
+		...addCardMachine.config,
+		context: {
+			cardInfo: { ...MOCK_CARD_INFO_LIST[0] },
+			cardList: [],
+			selectedCard: { ...initialCardInfo, id: '' },
+		},
+	},
+	{ actions: { ...addCardMachine.implementations.actions }, guards: { ...addCardMachine.implementations.guards } },
 );
