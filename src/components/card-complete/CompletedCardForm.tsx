@@ -13,10 +13,10 @@ import updateValidValue from '../../utils/updateValidValue';
 import { CARD_ALIAS_LIMIT } from '../../constants/cardLimit';
 
 export default function CompletedCard() {
-  const [cardAlias, setCardAlias] = useState('');
-
   const { card } = useCardContext();
   const { cards, addCardInList } = useCardsContext();
+
+  const [cardAlias, setCardAlias] = useState(card.cardAlias);
 
   const handleChangeCardAlias = (
     event: React.ChangeEvent<HTMLInputElement>
