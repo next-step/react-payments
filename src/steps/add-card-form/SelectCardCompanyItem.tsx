@@ -6,7 +6,7 @@ export default function SelectCardCompanyItem({ code, name, className }: CardCom
 
 	const handleSelectCardCompany = () => {
 		send({ type: 'CHANGE_FIELD', value: code, field: 'cardCompanyCode' });
-		send({ type: 'TOGGLE' });
+		// send({ type: 'TOGGLE' });
 	};
 
 	return (

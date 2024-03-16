@@ -1,4 +1,4 @@
-import { CardInfo } from 'src/machines/addCardMachine.ts';
+import { CardInfo } from 'src/machines/addCardMachine';
 
 export interface CardCompanyData {
 	name: string;

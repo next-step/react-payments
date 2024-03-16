@@ -2,7 +2,7 @@ import { assign, createMachine, enqueueActions } from 'xstate';
 import { createActorContext } from '@xstate/react';
 import { nanoid } from 'nanoid';
 
-import { CARD_COMPANY_MAP, getCardCompanyCodeByCardNumber } from 'src/constants/card.ts';
+import { CARD_COMPANY_MAP, getCardCompanyCodeByCardNumber } from 'src/constants/card';
 
 export interface CardInfo {
 	cardNumberFirstSegment: string;
@@ -297,8 +297,14 @@ export const addCardMachine = createMachine(
 						maxLength: event?.maxLength || Infinity,
 						field: event.field,
 					});
+				}
 
+				if (event.type === 'CHANGE_FIELD' && event.field !== 'cardCompanyCode') {
 					enqueue.raise({ type: 'INFER_CARD_COMPANY_CODE' });
+				}
+
+				if (event.type === 'CHANGE_FIELD' && event.field === 'cardCompanyCode') {
+					enqueue.raise({ type: 'TOGGLE' });
 				}
 			}),
 			changeFieldAddCardFinish: assign(({ context, event }) =>

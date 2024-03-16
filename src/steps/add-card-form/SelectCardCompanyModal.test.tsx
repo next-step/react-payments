@@ -33,5 +33,7 @@ describe('카드 회사 선택 모달 기능 테스트', () => {
 		await userEvent.click(cardCompanyButtons);
 
 		expect(screen.queryByTestId('card-image')?.className.includes(firstCardCompanyInfo.className)).toBeTruthy();
+
+		expect(screen.queryByTestId('company-modal')).toBeNull();
 	});
 });
