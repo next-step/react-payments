@@ -78,6 +78,7 @@ const PinInputLabel = ({ children }: PropsWithChildren) => {
     throw new Error('FormatInput.Input 컴포넌트는 FormatInput.Root 하위에서 사용되어야 합니다.');
   }
   const { id } = context;
+
   return (
     <Label htmlFor={`pin-input-${id}-0`} variant="caption" color={styleToken.color.gray700}>
       {children}

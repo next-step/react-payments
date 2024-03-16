@@ -77,6 +77,7 @@ export const Typography = ({
     lineHeight: typographyVariantStyle[variant].lineHeight,
     letterSpacing: typographyVariantStyle[variant].letterSpacing,
   };
+
   return (
     <Root as={as} variant={variant} whiteSpace={whiteSpace} {...typographyProps} {...props}>
       {children}

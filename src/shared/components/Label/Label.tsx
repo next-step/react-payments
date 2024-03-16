@@ -23,6 +23,7 @@ export const Label = ({ children, ...props }: LabelProps) => {
     color,
     letterSpacing: letterSpacing || letterSpacingValue(typographyVariantStyle[variant].fontSize, -8.5),
   };
+
   return (
     <Root as="label" {...restProps}>
       <Typography {...typographyProps}>{children}</Typography>

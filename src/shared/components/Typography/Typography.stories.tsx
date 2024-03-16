@@ -47,6 +47,7 @@ export const WithVariants: Story = {
     <VStack spacing="24px">
       {Object.entries(TypographyVariants).map(([key, value]) => {
         const { fontSize, fontWeight, lineHeight, letterSpacing } = typographyVariantStyle[value];
+
         return (
           <VStack>
             <Typography key={`${key}-name`} variant={value} color={styleToken.color.black}>
