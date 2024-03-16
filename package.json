@@ -11,6 +11,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@pengoose/funnel": "^1.0.0",
     "@xstate/react": "^4.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

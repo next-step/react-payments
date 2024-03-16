@@ -2157,6 +2157,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@pengoose/funnel@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@pengoose/funnel@npm:1.0.0"
+  dependencies:
+    react: "npm:^18.2.0"
+  checksum: 10c0/963ca74fa2947ad342ff866fe897e8da49abad1024d0f6e9a057907c1f08b28a9433610a3a3d013693a44e195ef3b1228671837005ac47e1b4d467fd28297178
+  languageName: node
+  linkType: hard
+
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
@@ -9181,6 +9190,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "react-payments@workspace:."
   dependencies:
+    "@pengoose/funnel": "npm:^1.0.0"
     "@storybook/addon-essentials": "npm:^7.6.17"
     "@storybook/addon-interactions": "npm:^7.6.17"
     "@storybook/addon-links": "npm:^7.6.17"
