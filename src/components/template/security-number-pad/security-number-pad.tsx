@@ -13,18 +13,21 @@ import { IconX, IconShieldLock } from '@tabler/icons-react'
 import { vars } from '@/styles'
 import { useRef } from 'react'
 
-export interface SecurityNumberPadProps extends Omit<BottomSheetContentProps, 'onChange'> {
+export interface SecurityNumberPadProps
+  extends Omit<BottomSheetContentProps, 'onChange' | 'onInput'> {
   title: string
   defaultValue: string
-  onInputComplete: (value: string) => void
+  onInput: (value: string) => void
+  onInputComplete: () => void
   maxLength: number
 }
 
 export const SecurityNumberPad = ({
   title,
   defaultValue,
-  onInputComplete,
   onClose,
+  onInput,
+  onInputComplete,
   maxLength,
 }: SecurityNumberPadProps) => {
   const numberPadValueRef = useRef(defaultValue)
@@ -36,7 +39,11 @@ export const SecurityNumberPad = ({
       padValue === DELETE
         ? prevNumberPadValue.slice(0, -1)
         : (prevNumberPadValue + String(padValue)).slice(0, maxLength)
-    onInputComplete(numberPadValueRef.current)
+    onInput(numberPadValueRef.current)
+
+    if (numberPadValueRef.current.length >= maxLength) {
+      onInputComplete?.()
+    }
   }
 
   return (

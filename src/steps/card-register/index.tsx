@@ -63,7 +63,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
     )
   }
 
-  const handleOpenCVCInput = () => {
+  const handleopenCVCNumberPad = () => {
     openOverlay(
       <SecurityNumberPad
         key="card-cvc"
@@ -71,18 +71,16 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
         defaultValue={cardCVC}
         maxLength={3}
         onClose={closeOverlay}
-        onInputComplete={value => {
-          setCardInput('cardCVC')(value)
-          if (value.length >= 3) {
-            closeOverlay()
-            cardPinInputRef.current?.focus()
-          }
+        onInput={setCardInput('cardCVC')}
+        onInputComplete={() => {
+          closeOverlay()
+          cardPinInputRef.current?.focus()
         }}
       />,
     )
   }
 
-  const handleOpenCardPinInput = () => {
+  const handleOpenCardPinNumberPad = () => {
     openOverlay(
       <SecurityNumberPad
         key="card-pin"
@@ -90,12 +88,8 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
         defaultValue={cardPin}
         maxLength={2}
         onClose={closeOverlay}
-        onInputComplete={value => {
-          setCardInput('cardPin')(value)
-          if (value.length >= 2) {
-            closeOverlay()
-          }
-        }}
+        onInput={setCardInput('cardPin')}
+        onInputComplete={closeOverlay}
       />,
     )
   }
@@ -158,7 +152,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
               value={cardCVC}
               readOnly
               onKeyDown={e => e.preventDefault()}
-              onFocus={handleOpenCVCInput}
+              onFocus={handleopenCVCNumberPad}
             />
             <Tooltip label="카드 뒷면의 CVC란을 확인하세요">
               <IconHelpCircle color={vars.color.aqua} size={32} />
@@ -171,7 +165,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
             value={cardPin}
             ref={cardPinInputRef}
             readOnly
-            onFocus={handleOpenCardPinInput}
+            onFocus={handleOpenCardPinNumberPad}
           />
         </Flex>
         <Flex justifyContent="flex-end" paddingX="24px" paddingY="32px" marginTop="auto">
