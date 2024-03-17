@@ -1,5 +1,4 @@
-import { AddCardButton } from '@pages/cards/components';
-import Cards from './components/Cards';
+import { AddCardButton, Cards } from '@pages/cards/components';
 import { Header } from '@components/layout';
 
 export default function CardsPage() {
