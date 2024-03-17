@@ -37,6 +37,7 @@ export const SecurityNumberPad = ({
 
   return (
     <BottomSheet.Root>
+      <BottomSheet.Dimmer />
       <BottomSheet.Content direction="column" paddingTop="36px" onClose={onClose}>
         <Text as="h2" variant="heading2" marginBottom="24px" textAlign="center">
           {title}
