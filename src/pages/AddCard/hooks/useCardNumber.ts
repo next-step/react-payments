@@ -15,7 +15,7 @@ const useCardNumber = () => {
       if (!isNumber || value.length > CARD_NUMBER_MAX_LENGTH) return;
 
       send({
-        type: 'cardState.updateCardNumber',
+        type: 'UPDATE_CARD_NUMBER',
         value: { ...cardState.numbers, [name]: value },
       });
     },

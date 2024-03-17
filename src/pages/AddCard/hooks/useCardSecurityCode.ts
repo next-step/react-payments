@@ -15,7 +15,7 @@ const useCardSecurityCode = () => {
       if (!isNumber || value.length > SECURITY_CODE_MAX_LENGTH) return;
 
       send({
-        type: 'cardState.updateSecurityCode',
+        type: 'UPDATE_SECURITY_CODE',
         value,
       });
     },

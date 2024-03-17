@@ -7,8 +7,7 @@ const useCardNickname = () => {
   const handleNickname = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
-
-      send({ type: 'cardState.updateNickname', value });
+      send({ type: 'UPDATE_NICKNAME', value });
     },
     [send]
   );

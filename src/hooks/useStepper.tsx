@@ -1,12 +1,7 @@
-import {
-  Children,
-  ReactElement,
-  ReactNode,
-  isValidElement,
-  useState,
-} from 'react';
+import { Children, ReactElement, ReactNode, isValidElement } from 'react';
 import { PAGES } from '../constants/pages';
 import { useQueryParams } from './useQueryParams';
+import { CardContext } from '../App';
 
 export interface StepperProps<Step extends PagesType> {
   children:
@@ -21,14 +16,15 @@ export interface StepProps<Step extends PagesType> {
 
 export type PagesType = (typeof PAGES)[keyof typeof PAGES];
 
-const useStepper = <Step extends PagesType>(initialStep: Step) => {
-  const [currentStep, setCurrentStep] = useState<PagesType>(initialStep);
+const useStepper = () => {
+  const state = CardContext.useSelector(({ value }) => value);
+  const { send } = CardContext.useActorRef();
   const { params, setQueryParams } = useQueryParams();
-  const step = params.get('step') ?? currentStep;
+  const step = params.get('step') ?? state;
 
   const setStep = (newStep: PagesType, id?: string) => {
     setQueryParams({ step: newStep, id: id || '' });
-    setCurrentStep(newStep);
+    send({ type: newStep });
   };
 
   const Stepper = <Step extends PagesType>({
@@ -38,7 +34,9 @@ const useStepper = <Step extends PagesType>(initialStep: Step) => {
       isValidElement
     ) as Array<ReactElement<StepProps<Step>>>;
 
-    const targetStep = validChildren.find((child) => child.props.name === step);
+    const targetStep = validChildren.find(({ props }) => {
+      return props.name === step;
+    });
 
     return targetStep;
   };

@@ -13,7 +13,7 @@ const AddCardSuccess = ({ onNext }: Props) => {
   const { send } = CardContext.useActorRef();
 
   const handleAddCard = () => {
-    send({ type: 'cardList.saveCardList', value: cardState });
+    send({ type: 'SAVE_CARD_LIST', value: cardState });
     onNext();
   };
 

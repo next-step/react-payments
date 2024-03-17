@@ -5,7 +5,7 @@ const PASSWORD_INPUT_MAX_LENGTH = 1;
 
 const useCardPassword = () => {
   const cardState = CardContext.useSelector(({ context }) => context.cardState);
- const { send } = CardContext.useActorRef();
+  const { send } = CardContext.useActorRef();
 
   const handlePassword = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -15,7 +15,7 @@ const useCardPassword = () => {
       if (!isNumber || value.length > PASSWORD_INPUT_MAX_LENGTH) return;
 
       send({
-        type: 'cardState.updatePassword',
+        type: 'UPDATE_PASSWORD',
         value: { ...cardState.password, [name]: value },
       });
     },

@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
+import { CardContext } from '../App';
+import { PAGES } from '../constants/pages';
 
 export const useQueryParams = () => {
   const [params, setParams] = useState(new URLSearchParams(location.search));
+  const { send } = CardContext.useActorRef();
 
   const setQueryParams = (newParams: { [key: string]: string }) => {
     const searchParams = new URLSearchParams();
@@ -19,14 +22,21 @@ export const useQueryParams = () => {
 
   useEffect(() => {
     const handlePopState = () => {
-      setParams(new URLSearchParams(location.search));
+      const newParams = new URLSearchParams(location.search);
+      const newStep = newParams.get('step') as PAGES;
+
+      if (newStep) {
+        send({ type: newStep });
+      }
+
+      setParams(newParams);
     };
 
     window.addEventListener('popstate', handlePopState);
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
-  }, []);
+  }, [send]);
 
   return { params, setQueryParams };
 };

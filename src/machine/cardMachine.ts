@@ -5,6 +5,7 @@ import {
   CARD_STORAGE_KEY,
   getLocalStorageItem,
 } from '../utils/localStorage';
+import { PAGES } from '../constants/pages';
 
 const initialCardState: CardInfo = {
   id: '',
@@ -25,31 +26,34 @@ export const cardMachine = setup({
       cardList: CardInfo[];
     };
     events:
-      | { type: 'cardState.updateCardNumber'; value: CardInfo['numbers'] }
+      | { type: 'UPDATE_CARD_NUMBER'; value: CardInfo['numbers'] }
       | {
-          type: 'cardState.updateExpirationDate';
+          type: 'UPDATE_EXPIRATION_DATE';
           value: CardInfo['expiration'];
         }
-      | { type: 'cardState.updateOwner'; value: CardInfo['owner'] }
+      | { type: 'UPDATE_OWNER'; value: CardInfo['owner'] }
       | {
-          type: 'cardState.updateSecurityCode';
+          type: 'UPDATE_SECURITY_CODE';
           value: CardInfo['securityCode'];
         }
-      | { type: 'cardState.updatePassword'; value: CardInfo['password'] }
-      | { type: 'cardState.updateNickname'; value: CardInfo['nickname'] }
-      | { type: 'cardState.updateCardBrand'; value: CardInfo['brand'] }
-      | { type: 'cardState.resetCardState' }
-      | { type: 'cardState.submit' }
-      | { type: 'cardList.saveCardList'; value: CardInfo }
-      | { type: 'cardList.deleteCard'; value: string }
-      | { type: 'cardList.getCard'; value: string }
-      | { type: 'cardList.saveToLocalStorage'; value: CardInfo[] }
-      | { type: 'cardList.addNewCard' };
+      | { type: 'UPDATE_PASSWORD'; value: CardInfo['password'] }
+      | { type: 'UPDATE_NICKNAME'; value: CardInfo['nickname'] }
+      | { type: 'UPDATE_BRAND'; value: CardInfo['brand'] }
+      | { type: 'RESET_CARD_INFO' }
+      | { type: 'SUBMIT_CARD' }
+      | { type: 'SAVE_CARD_LIST'; value: CardInfo }
+      | { type: 'DELETE_CARD'; value: string }
+      | { type: 'GET_CARD_INFO'; value: string }
+      | { type: 'SAVE_TO_LOCALSTORAGE'; value: CardInfo[] }
+      | { type: PAGES.CARD_LIST }
+      | { type: PAGES.ADD_CARD }
+      | { type: PAGES.ADD_CARD_SUCCESS }
+      | { type: PAGES.EDIT_CARD_NAME };
   },
   actions: {
     updateNickname: assign({
       cardState: ({ context, event }) => {
-        if (event.type === 'cardState.updateNickname') {
+        if (event.type === 'UPDATE_NICKNAME') {
           return { ...context.cardState, nickname: event.value };
         }
 
@@ -57,35 +61,35 @@ export const cardMachine = setup({
       },
     }),
     resetCardState: assign({
-      cardState: initialCardState,
+      cardState: () => {
+        return initialCardState;
+      },
     }),
     saveToLocalStorage: ({ context }) => {
       const { cardList } = context;
-      console.log('🚀 ~ localstorage:', cardList);
       setLocalStorageItem({ key: CARD_STORAGE_KEY, item: cardList });
     },
   },
 }).createMachine({
-  /** @xstate-layout N4IgpgJg5mDOIC5QGMCGAnCBlALqnYAdIC5zgOy0AEgjy2C6HeYCJjgMx0DEamu+RArgA4QcByAS2QBrAHaoAtmADaABgC6iUNwD2sQTkGqxykAA9EARiMBOAGyFzAJgCsADnMBmI9blyALB9MAaEAE9Ec3sPQjNTWwdXJ1trEwBfeL9WbDwCEgoaemYUgBlBWBxCWFQANzAAYQwIfML5JSQQNQ0tHT1DBAB2U1MrTyMPbsd7d18AxHsjQidra1Mje2tOr1jO60Tk6vZ0snJAEZ7AWznyQAwhwFQJli20rl4BYXEpWUU9Zs1tXUaOqMJJjycPWZiI0WfkCCFMf0IFic5nB7iMDmcGxAKW2RF2gEqu6gXTC1IowHBVTD1Z7qV5tD6IGbWQidJzufquOQWUweEHGOTWUJyOkRJzLDmmexIlFXDLkTHYmoFIqoCAQfhgADuhIgxMaL1a71AHTs1PsTgNRmWiyc9gsbIQizkYUcy3MZns+vstmFlw4YoleWlhAgYAANmACCq1SpSZr2ogALSOQj02ydOTme2RRxGC1J2yx2y-Dww5ym6Gutii3Y0SWowg8PhB6oAIXQqDEqqe6rDbwjCFiTkIsR6nNz5g8jmsFrWnWmHlcv06wwi5iLqXdpaxIvdVY4Kv4nEkACMwOgQ002+TtYhbPDIZ0jAbfgt451bOmZrHnT0zDOFhYFxXl+XReuCAAUX0bhBAbTUABEOEPDV2wpTs5Hsb5AXBEwPFiI0LVsaFkLkbp0KcQVCPWJJkTdHZMhXcjrmrMAAHlFTEfcYOPLUDDPU1pkQ7M5EiZZBRHcYEC8KZ40if5aRMQ1Om-EtKL-NcbgILAwGQTh0E0fwKlUX0WJaODT07VwaTtN97X7JwLT+SwZm5dC5iWRZTFkpd5NXdIALAAAFVBYFgRVVCJFtQ30k92M7axLH1NYFn1NwTEE0E7CmRNzyMcwZ1scx7yFUj3LRNzqOKTgd0kTQ9LJNiOm6XpzH6QZBWCUYLUWcccwsPDgmCXLSLEHS4D0fKSVCqqo2vLl3HjRNkwRC1I0zHoehnZ0ePPOwXIoqhaEYYbKo7IxE3HeFfkFFlXGzVkhOi6Z0sHQYXCTU0NoK-YjjOXbw3gwdLATa8-lag0HAtA7c0ISdTXhbCYka56PWoD6DPC+xx3tZ1IcTa9JkSiZkdjA1ePCUwZyevKiuXBGws+HowbiZ0DU6e1uUfK6lh7CwRNmWJ0OcxJ4iAA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QGMCGAnCBlALqnYAdKhBALRqZmwCuyycsAxAKoAKAIgIIAqAogH0AcgEkAwgGkhXALJ8A2gAYAuolAAHAPawAljh2aAdmpAAPRGQBMARkLXrATgCsANgAczxdfcPrAGhAAT0QAFksHQgB2N0tFSycAZkUQt2s4pwBfDIDKbDwCYlIKDHJaekYmLC4ANUExLgAlDgEAGREsHiVVJBAtXX0jE3MESxDIwkUnWPdFBOtIp0iHBIDghBdFRUJY1JdLfZCEh2WsnJLcfCISclzqOgZYZluAGx1YHC6TPr0DYx7h0bjSbTNyzeaLZarRBOJxbI6uBzpNyReJuU4gXIXAqQPTFKiGVAAWzArE4vEEokk0jknx63wGf1AwzcqUITg8C1B3iWCUiUIQrIS+0RLhc815kUi6Mx+SILzeOCY1zxEFpGm0P0G-0QewiUw2NkRIXsbhc-JRIQmc0ULgW8RSQul51lhHl7yYHD4LT4-AE9Saat6GoZQ1CCTc2w8yRCDltyzcKyC0P2hATiycYz2KMy2QxzsurpKZFe7oA4j6-Y1miIhAAxADygfpv1D63CbMsBscyRNZqTCGsTlsITGsxCGeRm0HTswWKuRVypO4voAQg0uEIOE3gy3tQKUYQEiOHKlB7FrHNzd5D4cXCFRTYHw4Z3kC8rF+xl3Uq8IWDIV3wDTbv0u5MogbhhHYMQ2JYCQwsksb8nstiKCy96ipENopGiuYym+C4lEu5ICHwAAabAiOuPAiPWQgCF+wGaoyZjgUkUQJC4vhzCe8S+PyUxOKmCRCqakSOC4R44Wcs4uu+hGfsR9YAOpCIBjEhnuk6EC4UyWBB7hhCOiZrIcWyLKkNqRO4eyKFKuH5gUcmYERvpYHwYgsA0Ig8AAmn69aeupoEsQKHHbLGqTImKHFTPywmCUK4SdqkVk2hJL5zoUNzyWSvpsFwWBYEp9YBioXw7lqYECjCqamrqxpOM4R78qMWyWe4koooiObSa+jkEc5TmlPcjBBZVIW6h2XZGr2-KpBEel7GMmYxiiGWyQNEBMG6HxlXSFXMcMmGWIe4b3ss3hxKkSExmyI6KBdRqxiEWS5oYmgQHAJh4QQ5UgeNwxkJxdiOK4Hiwt4Hj+P2QMTJsXj7BsjXCTpPV5jJ+HZVQZQPPA+3-Yd0JmciozWCEyRzCOSFTNskwZrGCzPc+9kY9iEC4rcBLEn9TGtoibWNaCsHIokhz8tYrLmfYEsOGE5kJOtBY7TzGlVZmh6RDGd6JD2yJ8v2d4RJhMJa4zhuK-1WMQCrwXDPzEyC3E4YLEexngdegtWZr0QnrLr0ZEAA */
   id: 'cardState',
-  initial: '카드 목록',
+  initial: 'card-list',
   context: {
     cardState: initialCardState,
     cardList: getLocalStorageItem({ key: CARD_STORAGE_KEY }) || [],
   },
   states: {
-    '카드 등록 완료': {
+    'add-card-success': {
       on: {
-        'cardState.updateNickname': {
+        UPDATE_NICKNAME: {
           actions: assign({
-            cardState: ({ context, event }) => ({
-              ...context.cardState,
-              nickname: event.value,
-            }),
+            cardState: ({ context, event }) => {
+              return { ...context.cardState, nickname: event.value };
+            },
           }),
         },
-        'cardList.saveCardList': {
-          target: '카드 목록',
+        SAVE_CARD_LIST: {
+          target: 'card-list',
           actions: [
             assign({
               cardList: ({ context, event }) => {
@@ -114,29 +118,40 @@ export const cardMachine = setup({
               },
             }),
             'saveToLocalStorage',
-            'resetCardState',
+            assign({
+              cardState: () => {
+                return initialCardState;
+              },
+            }),
           ],
         },
+        'card-list': 'card-list',
       },
     },
 
-    '카드 별칭 수정': {
-      target: '카드 목록',
-
+    'edit-card-name': {
       on: {
-        'cardState.updateNickname': {
-          target: '카드 목록',
+        UPDATE_NICKNAME: {
+          actions: ['updateNickname'],
+        },
+        'card-list': {
+          target: 'card-list',
           reenter: true,
-          actions: 'updateNickname',
         },
       },
     },
 
-    '카드 목록': {
+    'card-list': {
       on: {
-        'cardList.addNewCard': '카드 등록',
-
-        'cardList.deleteCard': {
+        'add-card': {
+          target: 'add-card',
+          actions: assign({
+            cardState: () => {
+              return initialCardState;
+            },
+          }),
+        },
+        DELETE_CARD: {
           actions: [
             assign({
               cardList: ({ context, event }) => {
@@ -151,10 +166,9 @@ export const cardMachine = setup({
           ],
         },
 
-        'cardList.getCard': {
+        GET_CARD_INFO: {
           actions: assign({
             cardState: ({ context, event }) => {
-              console.log('get card');
               const { cardList } = context;
               const { value: id } = event;
               const targetCard = cardList.filter((card) => card.id === id);
@@ -162,13 +176,15 @@ export const cardMachine = setup({
               return targetCard[0];
             },
           }),
+
+          target: 'edit-card-name',
         },
       },
     },
 
-    '카드 등록': {
+    'add-card': {
       on: {
-        'cardState.updateCardBrand': {
+        UPDATE_BRAND: {
           actions: assign({
             cardState: ({ context, event }) => ({
               ...context.cardState,
@@ -176,7 +192,8 @@ export const cardMachine = setup({
             }),
           }),
         },
-        'cardState.updateCardNumber': {
+
+        UPDATE_CARD_NUMBER: {
           actions: assign({
             cardState: ({ context, event }) => ({
               ...context.cardState,
@@ -184,7 +201,8 @@ export const cardMachine = setup({
             }),
           }),
         },
-        'cardState.updateExpirationDate': {
+
+        UPDATE_EXPIRATION_DATE: {
           actions: assign({
             cardState: ({ context, event }) => ({
               ...context.cardState,
@@ -192,7 +210,8 @@ export const cardMachine = setup({
             }),
           }),
         },
-        'cardState.updateOwner': {
+
+        UPDATE_OWNER: {
           actions: assign({
             cardState: ({ context, event }) => ({
               ...context.cardState,
@@ -201,7 +220,7 @@ export const cardMachine = setup({
           }),
         },
 
-        'cardState.updateSecurityCode': {
+        UPDATE_SECURITY_CODE: {
           actions: assign({
             cardState: ({ context, event }) => ({
               ...context.cardState,
@@ -209,7 +228,8 @@ export const cardMachine = setup({
             }),
           }),
         },
-        'cardState.updatePassword': {
+
+        UPDATE_PASSWORD: {
           actions: assign({
             cardState: ({ context, event }) => ({
               ...context.cardState,
@@ -217,7 +237,12 @@ export const cardMachine = setup({
             }),
           }),
         },
-        'cardState.submit': '#cardState.카드 등록 완료',
+
+        'add-card-success': 'add-card-success',
+        'card-list': {
+          target: 'card-list',
+          reenter: true,
+        },
       },
     },
   },

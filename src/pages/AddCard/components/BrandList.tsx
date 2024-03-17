@@ -1,6 +1,6 @@
 import { Brand } from '../../../types';
 
-export const CardBrandList: Brand[] = [
+const CardBrandList: Brand[] = [
   {
     label: '포코 카드',
     color: '#E24141',

@@ -17,7 +17,7 @@ const useCardExpiration = () => {
       if (name === 'month' && Number(value) > MAX_MONTH) return;
 
       send({
-        type: 'cardState.updateExpirationDate',
+        type: 'UPDATE_EXPIRATION_DATE',
         value: { ...cardState.expiration, [name]: value },
       });
     },

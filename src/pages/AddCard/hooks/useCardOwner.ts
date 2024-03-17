@@ -8,7 +8,7 @@ const useCardOwner = () => {
   const handleOwner = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       send({
-        type: 'cardState.updateOwner',
+        type: 'UPDATE_OWNER',
         value: e.target.value,
       });
     },

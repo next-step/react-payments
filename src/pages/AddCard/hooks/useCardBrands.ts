@@ -7,7 +7,7 @@ export const useCardBrands = () => {
 
   const selectBrand = useCallback(
     (brand: Brand) => {
-      send({ type: 'cardState.updateCardBrand', value: brand });
+      send({ type: 'UPDATE_BRAND', value: brand });
     },
     [send]
   );

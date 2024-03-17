@@ -14,7 +14,7 @@ const CardList = ({ onNext, onEdit }: Props) => {
   const { send } = CardContext.useActorRef();
 
   const deleteCard = (id: string) => {
-    send({ type: 'cardList.deleteCard', value: id });
+    send({ type: 'DELETE_CARD', value: id });
   };
 
   return (
