@@ -5,4 +5,6 @@ export interface InputProps {
     placeHolder?: string
     inputRule?: (value: string) => boolean
     inputChange?: (value: string) => void
+    disabled?: boolean
+    defaultState?: string
 }
