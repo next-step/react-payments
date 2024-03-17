@@ -1,5 +1,4 @@
-import { PaymentCard } from '@components/domain';
-import PaymentCardLabel from '@components/domain/PaymentCardLabel';
+import { PaymentCard, PaymentCardLabel } from '@components/domain';
 import { Button } from '@components/ui-kit';
 import { useCards, useSetCards, useStepper } from '@hooks';
 import { PaymentCardType } from '@types';
