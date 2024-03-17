@@ -29,12 +29,17 @@ export default function CardList() {
           <h1 className="page-title mb-10">보유 카드</h1>
         </div>
         {reversedCards.map((card) => (
-          <CardBox key={card.id} onClick={() => handleClickEdit(card.id)}>
+          <CardBox
+            key={card.id}
+            onClick={() => handleClickEdit(card.id)}
+            backgroundColor={card.cardCompanyColor}
+          >
             <Card
               variant="small"
               cardNumber={card.cardNumber}
               ownerName={card.ownerName}
               expirationDate={card.expirationDate}
+              cardCompany={card.cardCompany}
             />
           </CardBox>
         ))}

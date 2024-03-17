@@ -16,6 +16,7 @@ type CardProps = {
   cardNumber: CardNumberType;
   ownerName: string;
   expirationDate: ExpirationDateType;
+  cardCompany: string;
 };
 
 const SLASH = '/';
@@ -32,13 +33,14 @@ export default function Card({
   cardNumber,
   ownerName,
   expirationDate,
+  cardCompany,
 }: CardProps) {
   const cardClassName = `card-text${variant === 'big' ? '__big' : ''}`;
 
   return (
     <>
       <div className="card-top">
-        <span className={cardClassName}>클린카드</span>
+        <span className={cardClassName}>{cardCompany} 카드</span>
       </div>
       <div className="card-middle">
         <div className={`${variant}-card__chip`}></div>

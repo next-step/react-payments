@@ -48,6 +48,7 @@ export default function AddCardForm() {
   });
 
   const [cardCompany, setCardCompany] = useState('');
+  const [cardCompanyColor, setCardCompanyColor] = useState('#e5e5e5');
 
   const [isClick, setIsClick] = useState(false);
 
@@ -63,6 +64,8 @@ export default function AddCardForm() {
   const handleClickButton = () => {
     setIsClick(true);
 
+    if (!isFormFilled) return;
+
     addCardInList({
       id,
       cardNumber,
@@ -71,6 +74,7 @@ export default function AddCardForm() {
       securityCode,
       cardPassword,
       cardCompany,
+      cardCompanyColor,
       cardAlias,
     });
   };
@@ -79,12 +83,13 @@ export default function AddCardForm() {
     <div className="root">
       <div className="app">
         <Header />
-        <CardBox>
+        <CardBox backgroundColor={cardCompanyColor}>
           <Card
             variant="small"
             cardNumber={cardNumber}
             ownerName={ownerName}
             expirationDate={expirationDate}
+            cardCompany={cardCompany}
           />
         </CardBox>
         <CardNumber cardNumber={cardNumber} setCardNumber={setCardNumber} />
@@ -109,7 +114,12 @@ export default function AddCardForm() {
           isClick={isClick}
         />
       </div>
-      {!cardCompany && <CardCompanyList setCardCompany={setCardCompany} />}
+      {!cardCompany && (
+        <CardCompanyList
+          setCardCompany={setCardCompany}
+          setCardCompanyColor={setCardCompanyColor}
+        />
+      )}
     </div>
   );
 }

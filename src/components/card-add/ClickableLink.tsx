@@ -7,8 +7,8 @@ type ClickableLinkProps = {
   location: string;
   text: string;
   disable?: boolean;
+  isClick?: boolean;
   onClick?: () => void;
-  isClick: boolean;
 };
 
 export default function ClickableLink({
