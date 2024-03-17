@@ -17,15 +17,14 @@ import type {
   CardPasswordNumberType,
 } from '../../types/CardFormType';
 
-import { useCardContext } from '../hooks/useCardContext';
+import { useCardsContext } from '../hooks/useCardsContext';
 
 import isFulledForm from '../../utils/isFulledForm';
-import { useCardsContext } from '../hooks/useCardsContext';
 
 const cardAlias = '';
 
 export default function AddCardForm() {
-  const id = useRef(Math.floor(Math.random() * 1000000)).current;
+  const id = useRef(Math.floor(Math.random() * 1_000_000)).current;
 
   const [cardNumber, setCardNumber] = useState<CardNumberType>({
     firstNumber: '',
@@ -52,7 +51,6 @@ export default function AddCardForm() {
 
   const [isClick, setIsClick] = useState(false);
 
-  const { addCard } = useCardContext();
   const { addCardInList } = useCardsContext();
 
   const isFormFilled = isFulledForm({
@@ -62,21 +60,8 @@ export default function AddCardForm() {
     expirationDate,
   });
 
-  console.log(isFormFilled);
-
   const handleClickButton = () => {
     setIsClick(true);
-
-    addCard({
-      id,
-      cardNumber,
-      expirationDate,
-      ownerName,
-      securityCode,
-      cardPassword,
-      cardCompany,
-      cardAlias,
-    });
 
     addCardInList({
       id,
@@ -124,7 +109,7 @@ export default function AddCardForm() {
           isClick={isClick}
         />
       </div>
-      {cardCompany ? '' : <CardCompanyList setCardCompany={setCardCompany} />}
+      {!cardCompany && <CardCompanyList setCardCompany={setCardCompany} />}
     </div>
   );
 }
