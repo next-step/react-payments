@@ -19,11 +19,6 @@ export interface SecurityNumberPadProps extends Omit<BottomSheetContentProps, 'o
   onInputComplete: (value: string) => void
 }
 
-/**
- * [ ] useOverlay 개선하기 -> snapshot...
- *
- */
-
 export const SecurityNumberPad = ({
   title,
   defaultValue,

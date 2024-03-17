@@ -10,12 +10,14 @@ import {
   Card,
   CardCodeInputHandle,
   CardExpDateInputHandle,
+  CardTypePicker,
+  SecurityNumberPad,
+  CardPinInputHandle,
 } from '@/components'
 import { CardInputState } from '@/types/card'
 import { FormEventHandler, useRef } from 'react'
 import { useCardInputContext } from '@/contexts/card-input-context.tsx'
 import { useOverlay } from '@/hooks'
-import { CardTypePicker } from '@/components'
 import { CARD_TYPE } from '@/constants/card-type.ts'
 
 export interface CardInputFormStepProps {
@@ -25,13 +27,13 @@ export interface CardInputFormStepProps {
 
 export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepProps) => {
   const { cardInput, setCardInput, resetCardInput } = useCardInputContext()
-
   const { cardCode, cardExpDate, cardName, cardCVC, cardPin, cardType } = cardInput
-  const [openCardTypePicker, closeCardTypePicker] = useOverlay()
-
   const cardCodeInputRef = useRef<CardCodeInputHandle>(null)
   const cardExpDateInputRef = useRef<CardExpDateInputHandle>(null)
   const cardNameInputRef = useRef<HTMLInputElement>(null)
+  const cardPinInputRef = useRef<CardPinInputHandle>(null)
+
+  const [openOverlay, closeOverlay] = useOverlay()
 
   const handleClickPrev = () => {
     resetCardInput()
@@ -45,14 +47,49 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
   }
 
   const handleClickCard = () => {
-    openCardTypePicker(
+    openOverlay(
       <CardTypePicker
         cardTypeList={Object.values(CARD_TYPE)}
-        onClose={closeCardTypePicker}
+        onClose={closeOverlay}
         selectedCardType={cardType}
         onSelectCardType={value => {
           setCardInput('cardType')(value)
           cardCodeInputRef.current?.focus()
+        }}
+      />,
+    )
+  }
+
+  const handleOpenCVCInput = () => {
+    openOverlay(
+      <SecurityNumberPad
+        key="card-cvc"
+        title="보안 코드(CVC/CVV)를 입력하세요."
+        defaultValue={cardCVC}
+        onClose={closeOverlay}
+        onInputComplete={value => {
+          setCardInput('cardCVC')(value)
+          if (value.length >= 3) {
+            closeOverlay()
+            cardPinInputRef.current?.focus()
+          }
+        }}
+      />,
+    )
+  }
+
+  const handleOpenCardPinInput = () => {
+    openOverlay(
+      <SecurityNumberPad
+        key="card-pin"
+        title="카드 비밀번호를 입력하세요."
+        defaultValue={cardPin}
+        onClose={closeOverlay}
+        onInputComplete={value => {
+          setCardInput('cardPin')(value)
+          if (value.length >= 2) {
+            closeOverlay()
+          }
         }}
       />,
     )
@@ -96,7 +133,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
             label="만료일"
             value={cardExpDate}
             onChange={setCardInput('cardExpDate')}
-            onInputComplete={() => cardNameInputRef?.current?.focus()}
+            onInputComplete={() => cardNameInputRef.current?.focus()}
           />
           <CardNameInput
             id="card-name"
@@ -113,13 +150,17 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
             width="100px"
             textAlign="center"
             value={cardCVC}
-            onChange={e => setCardInput('cardCVC')(e.target.value)}
+            readOnly
+            onKeyDown={e => e.preventDefault()}
+            onFocus={handleOpenCVCInput}
           />
           <CardPinInput
             id="card-pin"
             label="카드 비밀번호"
             value={cardPin}
-            onChange={setCardInput('cardPin')}
+            ref={cardPinInputRef}
+            readOnly
+            onFocus={handleOpenCardPinInput}
           />
         </Flex>
         <Flex justifyContent="flex-end" paddingX="24px" paddingY="32px" marginTop="auto">
