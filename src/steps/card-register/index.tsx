@@ -13,12 +13,15 @@ import {
   CardTypePicker,
   SecurityNumberPad,
   CardPinInputHandle,
+  Tooltip,
 } from '@/components'
 import { CardInputState } from '@/types/card'
 import { FormEventHandler, useRef } from 'react'
 import { useCardInputContext } from '@/contexts/card-input-context.tsx'
 import { useOverlay } from '@/hooks'
 import { CARD_TYPE } from '@/constants/card-type.ts'
+import { IconHelpCircle } from '@tabler/icons-react'
+import { vars } from '@/styles'
 
 export interface CardInputFormStepProps {
   onClickPrev?: () => void
@@ -142,18 +145,24 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
             value={cardName}
             onChange={setCardInput('cardName')}
           />
-          <BaseInput
-            id="card-cvc"
-            label="보안 코드(CVC/CVV)"
-            type="password"
-            maxLength={3}
-            width="100px"
-            textAlign="center"
-            value={cardCVC}
-            readOnly
-            onKeyDown={e => e.preventDefault()}
-            onFocus={handleOpenCVCInput}
-          />
+          <Flex alignItems="center" gap="24px">
+            <BaseInput
+              id="card-cvc"
+              label="보안 코드(CVC/CVV)"
+              type="password"
+              maxLength={3}
+              width="100px"
+              textAlign="center"
+              value={cardCVC}
+              readOnly
+              onKeyDown={e => e.preventDefault()}
+              onFocus={handleOpenCVCInput}
+            />
+            <Tooltip label="카드 뒷면의 CVC란을 확인하세요">
+              <IconHelpCircle color={vars.color.aqua} size={32} />
+            </Tooltip>
+          </Flex>
+
           <CardPinInput
             id="card-pin"
             label="카드 비밀번호"
