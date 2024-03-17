@@ -50,14 +50,14 @@ function CardFlexCenter({ start, end, setCardCompany }: CardFlexCenterProps) {
   return (
     <div className="flex-center">
       {CARD_COMPANY_LIST.slice(start, end).map((cardCompany) => {
-        const { name } = cardCompany;
+        const { name, backgroundColor } = cardCompany;
         return (
           <div
             className="modal-item-container"
             key={name}
             onClick={() => handleClickCompany(name)}
           >
-            <div className="modal-item-dot"></div>
+            <div className="modal-item-dot" style={{ backgroundColor }}></div>
             <span className="modal-item-name">{name} 카드</span>
           </div>
         );
