@@ -15,7 +15,7 @@ const INITIAL_CARD = {
 }
 
 export const paymentsMachine = createMachine({
-  /** @xstate-layout N4IgpgJg5mDOIC5QAcCGBPAtmAdgF1gDpAXOcB2WgfUEeWwXQ6BiAYwCcxU8xz7Ud6wAbAbQAMAXUQoA9rACWeKeJxiQAD0QBaAEwBGAMyFNATnUB2QUYAsADm1mArNu0WANCHSIzZ3QDZNJuxZvqFuaangC+oc5oWLgEJBQ0DMys7JyMEORSOMgArnhCokggyJIycgqFKghGnoTGZqb69ppmnmaaNs6uCDb6NoSCZsaenvqegYI2muGRGNj4RGRU1OSAqmuAHuOJLGwc8gBmUoyY+YrF0rLyipWq2kZ9gRa26p4W-q36nYg9fQOB9S0PIWmRVmMQWFEAGEOAVAnaJAZDscPtDsdCqdShcKmoPEZCEZRpZBI0gjZ3B8EOoCYQzL1CUZaYIHBMgVE5rFFoBKrroTC27FgeFQjDyIhOJXO5VAV3JNRsRhCmkEnhukvspO0mk0tSM2mJPk8JhaTJB8zi5A5MIgcN5-MFBQkZzKlzUNgChE8NgeNl18vUhm0pPJ+kp1IctJMDIsBuiRvZdGYmHEADcwMjbWixcpHe5CEFyZpjL0xoJ1KSbIJBFmJu16Z4ftpwhEQDhxBA4CdDQRhXb0eK1NWy673Z6xj7SQZKQ8jNntDmJmYIyywUsO6mHQh7IR9JorPjhv5tPonC5EA5dJNXXZ7HiHnPQcaaKs1kvRSvVM0zIQeuYPM9CxZyb7Dwg3jYoMHptPojTqE84b1syN6LFCj72hiCCqLYZaCHKe4hE6UH-l0co1BYpgmDoBhEYWtYwW2C4cohXbpihHjquBlgWGMtger+Kqau+VJfIMFikeodahEAA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QAcCGBPAtmAdgF1gDpAXOcB2WgfUEeWwXQ6BiMq68wC9nAYwYG0AGAXURQHtYASzxD+OPiAAeiALQAmeQE5CSzgA4A7JoBsnTgBYdAVm0GANCHSJ5nFcuM6AzOvk6D8gIxLj6gL5+lmhYuAQkFDT0FICoE4AvPeSAoeOApB1cvEggyIIiYhLpMgie8oTGBuo6PvLGSk6GdpqW1ggeBoR2zpoa6koGnt46AUEY2PhEDDTkgKprgB7jUeSAIz2AoV2JKTySmcKi4pL5sgYGToQ6HQaOTh1u7hZWiFUt5UqehupOj4YDGUOhoxSAGEPRs4tyH9UmssptcqAdsZoaoekpql4vDpKg1EL11IRNN0ejp1L47E4Su9gsMwgxAJVddDGTEAO0OARPGQel1tktnk5PInDpWhzkYSDJpPJonEZUQhhSoTJ4DA9OE41LZOcTPiNwuRKbM-uR6YyBBscts5Jp+YQnIpkcZPDVnsYnKL0ZjsZavJ4bV5NEqQiqKVSKIBagcAOBM6jJg-VshCyHTI1pqXqaC36E6265NYycVTlRSccoudSeEwBQIgHD8CBwNbKgigvWsyGGnwms2VS0aQlJxqyEqtKWRuOvTgc-yFklfVU0KssiHSG7FTRuTx4jyVAVx0XyfaEE4mUrbzhSpwe0nfRiTKbj8EG8NSlpVI37XH91yy0U6QUbyrubwItyDwaesm-aIz1DWtw1MIoamMWwji0IVFFFJwDlKV0lCxOwqiJIcKyPSkgJrKdQI0VpUz0YVnAeYU20QcVDgtaVHjlfs3gLIA */
   types: {} as {
     context: {
       cardBeforeRegister: CardBeforeRegister
@@ -23,29 +23,29 @@ export const paymentsMachine = createMachine({
     }
     events:
       | {
-          type: 'create_cancel'
+          type: '카드_등록_취소'
         }
       | {
-          type: 'create_start'
+          type: '카드_등록_시작'
         }
       | {
-          type: 'create_card_input'
+          type: '카드_정보_입력'
           cardInput: CardInputState
         }
       | {
-          type: 'create_confirm'
+          type: '카드_별명_입력'
           nickName: string
         }
       | {
-          type: 'remove'
+          type: '카드_삭제'
           targetId: CardState['id']
         }
       | {
-          type: 'edit_start'
+          type: '카드_수정_시작'
           targetCard: CardBeforeRegister
         }
       | {
-          type: 'edit_confirm'
+          type: '카드_별명_수정'
           nickName: string
         }
   },
@@ -59,13 +59,13 @@ export const paymentsMachine = createMachine({
   states: {
     카드_등록: {
       on: {
-        create_cancel: {
+        카드_등록_취소: {
           target: '카드_목록',
           actions: assign({
             cardBeforeRegister: INITIAL_CARD,
           }),
         },
-        create_card_input: {
+        카드_정보_입력: {
           target: '카드_등록_확인',
           actions: assign({
             cardBeforeRegister: ({ event: { cardInput } }) => ({ ...cardInput, id: uuidv4() }),
@@ -75,7 +75,7 @@ export const paymentsMachine = createMachine({
     },
     카드_등록_확인: {
       on: {
-        create_confirm: {
+        카드_별명_입력: {
           target: '카드_목록',
           actions: assign({
             cardList: ({ event: { nickName }, context }) => [
@@ -93,7 +93,7 @@ export const paymentsMachine = createMachine({
     },
     카드_수정: {
       on: {
-        edit_confirm: {
+        카드_별명_수정: {
           target: '카드_목록',
           actions: assign({
             cardList: ({ event: { nickName }, context: { cardList, cardBeforeRegister } }) =>
@@ -113,14 +113,14 @@ export const paymentsMachine = createMachine({
     },
     카드_목록: {
       on: {
-        create_start: { target: '카드_등록' },
-        edit_start: {
+        카드_등록_시작: { target: '카드_등록' },
+        카드_수정_시작: {
           target: '카드_수정',
           actions: assign({
             cardBeforeRegister: ({ event }) => event.targetCard,
           }),
         },
-        remove: {
+        카드_삭제: {
           actions: assign({
             cardList: ({ context: { cardList }, event: { targetId } }) => {
               return cardList.filter(({ id }) => id !== targetId)
