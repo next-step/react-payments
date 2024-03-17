@@ -4,11 +4,12 @@ const Text = (props) => {
   const { as = "p", className, children } = props;
 
   const classes = Array.isArray(className) ? className.join(" ") : className;
+const As = as;
 
   return (
-    <p className={classes} as={as}>
+    <As className={classes}>
       {children}
-    </p>
+    </As>
   );
 };
 

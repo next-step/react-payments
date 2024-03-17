@@ -30,9 +30,10 @@ const Input = (props) => {
   });
 
   const classes = Array.isArray(className) ? className.join(" ") : className;
+  const As = as;
 
   return (
-    <input
+    <As
       className={classes + (secret ? " input-secret" : "")}
       type={type}
       {...rest}
