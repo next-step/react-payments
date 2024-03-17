@@ -1,7 +1,7 @@
 import { ChangeEvent, ElementRef, forwardRef, useState } from 'react'
 import { Input, InputProps } from '../Input'
 import { css } from '@emotion/css'
-import { REGEXP } from '@/constants/regexp'
+import { REGEXP } from '@/constants'
 
 type MaxLengthNumberInputProps = {
   className?: string

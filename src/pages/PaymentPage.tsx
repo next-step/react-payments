@@ -1,13 +1,6 @@
-import { AddCardStep } from '@/components/PaymentModal/AddCardStep'
-import { CardListStep } from '@/components/PaymentModal/CardListStep'
-import { CompletedAddCardStep } from '@/components/PaymentModal/CompletedAddCardStep'
-import { useStep } from '@/hooks/useStep'
-
-export const PAYMENT_STEPS = [
-  'add card',
-  'completed add card',
-  'card list'
-] as const
+import { AddCardStep, CardListStep, CompletedAddCardStep } from '@/components'
+import { PAYMENT_STEPS } from '@/constants'
+import { useStep } from '@/hooks'
 
 export const PaymentPage = () => {
   const [Stepper, setStep] = useStep(PAYMENT_STEPS)

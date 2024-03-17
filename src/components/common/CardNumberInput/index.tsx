@@ -1,6 +1,6 @@
 import { ChangeEvent, MutableRefObject, useRef, useState } from 'react'
 import { css } from '@emotion/css'
-import { CARD_NUMBER } from '@/constants/app'
+import { CARD_NUMBER } from '@/constants'
 import { MaxLengthNumberInput } from '../MaxLengthNumberInput'
 
 type CardNumberValues = {
