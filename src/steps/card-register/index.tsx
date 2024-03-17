@@ -22,6 +22,7 @@ import { useOverlay } from '@/hooks'
 import { CARD_TYPE } from '@/constants/card-type.ts'
 import { IconHelpCircle } from '@tabler/icons-react'
 import { vars } from '@/styles'
+import { getCardTypeFromCardCode } from '@/utils/get-card-type-from-card-code'
 
 export interface CardInputFormStepProps {
   onClickPrev?: () => void
@@ -61,6 +62,13 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
         }}
       />,
     )
+  }
+
+  const handleChangeCardCodeInput = (value: string) => {
+    if (value.length === 8) {
+      setCardInput('cardType')(getCardTypeFromCardCode(value))
+    }
+    setCardInput('cardCode')(value)
   }
 
   const handleopenCVCNumberPad = () => {
@@ -123,7 +131,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
             textAlign="center"
             ref={cardCodeInputRef}
             value={cardCode}
-            onChange={setCardInput('cardCode')}
+            onChange={handleChangeCardCodeInput}
             onInputComplete={cardExpDateInputRef.current?.focus}
           />
           <CardExpDateInput
@@ -158,7 +166,6 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
               <IconHelpCircle color={vars.color.aqua} size={32} />
             </Tooltip>
           </Flex>
-
           <CardPinInput
             id="card-pin"
             label="카드 비밀번호"
