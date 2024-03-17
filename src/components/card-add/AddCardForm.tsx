@@ -48,6 +48,7 @@ export default function AddCardForm() {
   });
 
   const [cardCompany, setCardCompany] = useState('');
+
   const [cardCompanyColor, setCardCompanyColor] = useState('#e5e5e5');
 
   const [isClick, setIsClick] = useState(false);
