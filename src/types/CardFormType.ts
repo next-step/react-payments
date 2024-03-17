@@ -14,13 +14,14 @@ export type ExpirationDateType = {
 };
 
 export type CardType = {
+  id: number;
   cardCompany: string;
   cardNumber: CardNumberType;
   expirationDate: ExpirationDateType;
   ownerName: string;
   securityCode: string;
   cardPassword: CardPasswordNumberType;
-  cardAlias?: string;
+  cardAlias: string;
 };
 
 export type CardFulledType = {

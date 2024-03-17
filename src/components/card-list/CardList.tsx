@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import CardBox from '../CardBox';
 import Card from '../Card';
@@ -10,13 +10,17 @@ export default function CardList() {
 
   const navigate = useNavigate();
 
-  const handleClickEdit = () => {
-    navigate('/add/complete');
+  const handleClickEdit = (id: number) => {
+    navigate(`/add/complete/${String(id)}`);
   };
 
   const handleClickAdd = () => {
     navigate('/add');
   };
+
+  console.log(cards);
+  const reversedCards = cards.reverse();
+  console.log(reversedCards);
 
   return (
     <div className="root">
@@ -24,8 +28,8 @@ export default function CardList() {
         <div className="flex-center">
           <h1 className="page-title mb-10">보유 카드</h1>
         </div>
-        {cards.reverse().map((card, index) => (
-          <CardBox key={index} onClick={handleClickEdit}>
+        {reversedCards.map((card) => (
+          <CardBox key={card.id} onClick={() => handleClickEdit(card.id)}>
             <Card
               variant="small"
               cardNumber={card.cardNumber}

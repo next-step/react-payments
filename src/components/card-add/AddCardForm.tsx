@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import Header from './Header';
 import CardBox from '../CardBox';
@@ -20,8 +20,13 @@ import type {
 import { useCardContext } from '../hooks/useCardContext';
 
 import isFulledForm from '../../utils/isFulledForm';
+import { useCardsContext } from '../hooks/useCardsContext';
+
+const cardAlias = '';
 
 export default function AddCardForm() {
+  const id = useRef(Math.floor(Math.random() * 1000000)).current;
+
   const [cardNumber, setCardNumber] = useState<CardNumberType>({
     firstNumber: '',
     secondNumber: '',
@@ -48,6 +53,7 @@ export default function AddCardForm() {
   const [isClick, setIsClick] = useState(false);
 
   const { addCard } = useCardContext();
+  const { addCardInList } = useCardsContext();
 
   const isFormFilled = isFulledForm({
     cardNumber,
@@ -56,16 +62,31 @@ export default function AddCardForm() {
     expirationDate,
   });
 
+  console.log(isFormFilled);
+
   const handleClickButton = () => {
     setIsClick(true);
 
     addCard({
+      id,
       cardNumber,
       expirationDate,
       ownerName,
       securityCode,
       cardPassword,
       cardCompany,
+      cardAlias,
+    });
+
+    addCardInList({
+      id,
+      cardNumber,
+      expirationDate,
+      ownerName,
+      securityCode,
+      cardPassword,
+      cardCompany,
+      cardAlias,
     });
   };
 
@@ -96,7 +117,7 @@ export default function AddCardForm() {
           setCardPassword={setCardPassword}
         />
         <ClickableLink
-          location="/add/complete"
+          location={`/add/complete/${String(id)}`}
           text="다음"
           onClick={handleClickButton}
           disable={!isFormFilled}

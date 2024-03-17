@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 type CardBoxProps = {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export default function CardBox({ children, onClick }: CardBoxProps) {

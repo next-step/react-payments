@@ -1,20 +1,25 @@
 import { useState } from 'react';
-
 import CardBox from '../CardBox';
 import Card from '../Card';
 import ClickableLink from '../card-add/ClickableLink';
 import Input from '../Input';
-
-import { useCardContext } from '../hooks/useCardContext';
 import { useCardsContext } from '../hooks/useCardsContext';
-
 import updateValidValue from '../../utils/updateValidValue';
-
 import { CARD_ALIAS_LIMIT } from '../../constants/cardLimit';
 
 export default function CompletedCard() {
-  const { card } = useCardContext();
-  const { cards, addCardInList } = useCardsContext();
+  const url = window.location.href;
+  const parts = url.split('/');
+  const lastPart = parts[parts.length - 1];
+  const id = parseInt(lastPart, 10);
+
+  const { cards, getCardInList, editCardInList, deleteCardInList } =
+    useCardsContext();
+  const card = getCardInList(id);
+
+  console.log(cards);
+  console.log(card);
+  console.log(id);
 
   const [cardAlias, setCardAlias] = useState(card.cardAlias);
 
@@ -22,9 +27,6 @@ export default function CompletedCard() {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { value } = event.target;
-
-    console.log(card);
-
     updateValidValue({
       limit: CARD_ALIAS_LIMIT,
       setter: setCardAlias,
@@ -34,22 +36,27 @@ export default function CompletedCard() {
     });
   };
 
-  const handleClickButton = () => {
+  const handleClickEdit = () => {
     const newCardAlias = cardAlias || card.cardCompany;
 
-    addCardInList({
+    editCardInList({
       ...card,
       cardAlias: newCardAlias,
     });
+
     console.log(card);
-    console.log(cards);
+  };
+
+  const handleClickDelete = () => {
+    console.log(card.id);
+    deleteCardInList(card.id);
   };
 
   return (
     <div className="root">
       <div className="app flex-column-center">
         <div className="flex-center">
-          <h1 className="page-title mb-10">카드등록이 완료되었습니다.</h1>
+          <h1 className="page-title mb-10">카드 등록이 완료되었습니다.</h1>
         </div>
         <CardBox>
           <Card
@@ -75,7 +82,15 @@ export default function CompletedCard() {
           text="다음"
           disable={false}
           isClick={true}
-          onClick={handleClickButton}
+          onClick={handleClickEdit}
+        />
+        <ClickableLink
+          className="mt-5"
+          location="/"
+          text="삭제"
+          disable={false}
+          isClick={true}
+          onClick={handleClickDelete}
         />
       </div>
     </div>

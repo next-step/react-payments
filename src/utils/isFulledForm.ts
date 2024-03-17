@@ -12,20 +12,16 @@ const isFilled = (value: string, limit: number) => value.length === limit;
 const isObjectFilled = (object: Record<string, string>, limit: number) =>
   Object.values(object).every((value) => isFilled(value, limit));
 
-export default function useCardFormData({
+export default function isFulledForm({
   cardNumber,
   cardPassword,
   securityCode,
   expirationDate,
 }: CardFulledType) {
-  const isFulledForm = () => {
-    return (
-      isObjectFilled(cardNumber, CARD_NUMBER_LIMIT) &&
-      isObjectFilled(cardPassword, CARD_PASSWORD_LIMIT) &&
-      isObjectFilled(expirationDate, EXPIRATION_DATE_LIMIT) &&
-      isFilled(securityCode, SECURITY_CODE_LIMIT)
-    );
-  };
-
-  return isFulledForm;
+  return (
+    isObjectFilled(cardNumber, CARD_NUMBER_LIMIT) &&
+    isObjectFilled(cardPassword, CARD_PASSWORD_LIMIT) &&
+    isObjectFilled(expirationDate, EXPIRATION_DATE_LIMIT) &&
+    isFilled(securityCode, SECURITY_CODE_LIMIT)
+  );
 }

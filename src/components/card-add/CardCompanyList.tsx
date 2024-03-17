@@ -42,7 +42,7 @@ type CardFlexCenterProps = {
 };
 
 function CardFlexCenter({ start, end, setCardCompany }: CardFlexCenterProps) {
-  const hanldeClickCompany = (name: string) => {
+  const handleClickCompany = (name: string) => {
     setCardCompany(name);
     console.log(name);
   };
@@ -55,7 +55,7 @@ function CardFlexCenter({ start, end, setCardCompany }: CardFlexCenterProps) {
           <div
             className="modal-item-container"
             key={name}
-            onClick={() => hanldeClickCompany(name)}
+            onClick={() => handleClickCompany(name)}
           >
             <div className="modal-item-dot"></div>
             <span className="modal-item-name">{name} 카드</span>

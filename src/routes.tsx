@@ -7,7 +7,7 @@ const routes = [
     children: [
       { path: '/', element: <CardList /> },
       { path: '/add', element: <AddCardForm /> },
-      { path: '/add/complete', element: <CompletedCard /> },
+      { path: `/add/complete/:id`, element: <CompletedCard /> },
     ],
   },
 ];
