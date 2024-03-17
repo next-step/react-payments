@@ -1,4 +1,4 @@
-import useCardInfo from "features/card/hooks/useCardInput";
+import { CardContext } from "../../../App";
 
 type CardDisplayMode = "preview" | "complete";
 
@@ -7,13 +7,23 @@ interface CardProps {
 }
 
 export default function Card({ mode }: CardProps) {
-  const { cardInfo } = useCardInfo();
+  const cardState = CardContext.useSelector((state) => state.context.card);
 
-  const { cardName, cardNumber1, cardNumber2, cardNumber3, cardNumber4, cardOwner, expireDate } = cardInfo;
+  const {
+    cardNumber1,
+    cardNumber2,
+    cardNumber3,
+    cardNumber4,
+    cardName,
+    expireDate,
+    cardOwner,
+  } = cardState;
 
-  const cardContentContainerClass = mode === "preview" ? "empty-card" : "big-card";
+  const cardContentContainerClass =
+    mode === "preview" ? "empty-card" : "big-card";
   const cardTextClass = mode === "preview" ? "card-text" : "card-text__big";
-  const cardChipClass = mode === "preview" ? "small-card__chip" : "big-card__chip";
+  const cardChipClass =
+    mode === "preview" ? "small-card__chip" : "big-card__chip";
 
   return (
     <div className="card-box">
@@ -27,7 +37,8 @@ export default function Card({ mode }: CardProps) {
         <div className="card-bottom">
           <div className="card-bottom__number">
             <span className={cardTextClass}>
-              {cardNumber1} {cardNumber2} {'・'.repeat(cardNumber3.length)} {'・'.repeat(cardNumber4.length)}
+              {cardNumber1} {cardNumber2} {"・".repeat(cardNumber3.length)}{" "}
+              {"・".repeat(cardNumber4.length)}
             </span>
           </div>
           <div className="card-bottom__info">

@@ -37,6 +37,7 @@
     "vite": "^5.1.4"
   },
   "dependencies": {
+    "@xstate/react": "^4.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "xstate": "^5.9.1"

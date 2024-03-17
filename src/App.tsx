@@ -1,11 +1,15 @@
+import { createActorContext } from "@xstate/react";
+
 import PaymentCard from "pages/PaymentCard";
 
-import CardInfoProvider from "features/card/context/CardInputContext";
+import { cardMachine } from "features/card/state/cardMachine";
+
+export const CardContext = createActorContext(cardMachine);
 
 export default function App() {
   return (
-    <CardInfoProvider>
+    <CardContext.Provider>
       <PaymentCard />
-    </CardInfoProvider>
+    </CardContext.Provider>
   );
 }
