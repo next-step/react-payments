@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { CardInfoContext, UpdateCardInfoContext } from '../../context/paymentContext'
-import { Input } from '../../stories/Input'
 import ui from '../../styles/index.module.css'
+import { Input } from '../common/Input'
 
 export const CardName = () => {
   const cardInfo = useContext(CardInfoContext)

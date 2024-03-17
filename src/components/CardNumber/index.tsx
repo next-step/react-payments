@@ -1,14 +1,13 @@
 import { useContext } from 'react'
 import { CardInfoContext, UpdateCardInfoContext } from '../../context/paymentContext'
-import { Input } from '../../stories/Input'
 import ui from '../../styles/index.module.css'
+import { Input } from '../common/Input'
 
 export const CardNumber = () => {
   const cardInfo = useContext(CardInfoContext)
   const updateCardInfo = useContext(UpdateCardInfoContext)
 
   const handleInputChange = (key: string, value: string) => {
-    // if (!value.match(/[0-9]/g)) return null
     return updateCardInfo({ ...cardInfo, cardNumber: { ...cardInfo.cardNumber, [key]: value } })
   }
 
