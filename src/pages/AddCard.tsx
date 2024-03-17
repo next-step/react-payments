@@ -8,6 +8,7 @@ import Card from "common/components/card/Card";
 import InputCardForm from "features/card/components/InputCardForm";
 
 export default function AddCard() {
+  const cardState = CardContext.useSelector((state) => state.context.card);
   const cardActionRef = CardContext.useActorRef();
 
   return (
@@ -26,7 +27,7 @@ export default function AddCard() {
       >
         카드 추가
       </Title>
-      <Card mode="preview" />
+      <Card mode="preview" {...cardState} />
       <InputCardForm />
       <Button
         onClick={() => {

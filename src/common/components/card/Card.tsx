@@ -1,14 +1,13 @@
-import { CardContext } from "../../../App";
+import { CardInfo } from "features/card/types/card.type";
 
 type CardDisplayMode = "preview" | "complete";
 
-interface CardProps {
+interface CardProps extends CardInfo {
   mode: CardDisplayMode;
+  onClick?: () => void;
 }
 
-export default function Card({ mode }: CardProps) {
-  const cardState = CardContext.useSelector((state) => state.context.card);
-
+export default function Card({ mode, onClick, ...cardInfo }: CardProps) {
   const {
     cardNumber1,
     cardNumber2,
@@ -17,7 +16,7 @@ export default function Card({ mode }: CardProps) {
     cardName,
     expireDate,
     cardOwner,
-  } = cardState;
+  } = cardInfo;
 
   const cardContentContainerClass =
     mode === "preview" ? "empty-card" : "big-card";
@@ -26,7 +25,7 @@ export default function Card({ mode }: CardProps) {
     mode === "preview" ? "small-card__chip" : "big-card__chip";
 
   return (
-    <div className="card-box">
+    <div className="card-box" onClick={onClick}>
       <div className={cardContentContainerClass}>
         <div className="card-top">
           <span className={cardTextClass}>{cardName}</span>

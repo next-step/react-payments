@@ -1,4 +1,5 @@
 import { assign, setup } from "xstate";
+import { v4 as uuidv4 } from "uuid";
 
 import { CardInfo } from "features/card/types/card.type";
 
@@ -10,19 +11,22 @@ export const cardMachine = setup({
       cardList: CardInfo[];
     };
     events:
+      | { type: "INITIALIZE" }
       | { type: "STEP"; value: string }
       | { type: "SET_CARD_NUMBER"; field: string; value: string }
       | { type: "SET_EXPIRE_DATE"; value: string }
       | { type: "SET_CARD_OWNER"; value: string }
       | { type: "SET_CARD_CVC"; value: string }
       | { type: "SET_CARD_PASSWORD"; field: string; value: string }
-      | { type: "CONFIRM"; value: CardInfo };
+      | { type: "CONFIRM"; value: CardInfo }
+      | { type: "DELETE"; value: CardInfo };
   },
 }).createMachine({
   id: "card",
   context: {
     step: "addCard",
     card: {
+      id: "",
       cardName: "",
       cardNumber1: "",
       cardNumber2: "",
@@ -37,6 +41,23 @@ export const cardMachine = setup({
     cardList: [] as CardInfo[],
   },
   on: {
+    INITIALIZE: {
+      actions: assign({
+        card: {
+          id: "",
+          cardName: "",
+          cardNumber1: "",
+          cardNumber2: "",
+          cardNumber3: "",
+          cardNumber4: "",
+          expireDate: "",
+          cardOwner: "",
+          cvc: "",
+          firstPassword: "",
+          secondPassword: "",
+        },
+      }),
+    },
     STEP: {
       actions: assign({
         step: ({ event }) => event.value,
@@ -78,9 +99,19 @@ export const cardMachine = setup({
       }),
     },
     CONFIRM: {
+      actions: [
+        assign({
+          cardList: ({ context, event }) => {
+            const newCardInfoWithId = { ...event.value, id: uuidv4() };
+            return [newCardInfoWithId, ...context.cardList];
+          },
+        }),
+      ],
+    },
+    DELETE: {
       actions: assign({
         cardList: ({ context, event }) => {
-          return [...context.cardList, event.value];
+          return context.cardList.filter((card) => card.id !== event.value.id);
         },
       }),
     },
