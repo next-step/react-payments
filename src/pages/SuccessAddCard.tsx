@@ -9,15 +9,16 @@ export default function SuccessAddCard() {
   const cardState = CardContext.useSelector((state) => state.context.card);
   const cardActionRef = CardContext.useActorRef();
 
+  const handleConfirmButtonClick = () => {
+    cardActionRef.send({ type: "STEP", value: "cardList" });
+    cardActionRef.send({ type: "CONFIRM", value: cardState });
+  };
+
   return (
     <Layout.Success>
       <Title className="page-title mb-10">카드등록이 완료되었습니다.</Title>
       <Card mode="complete" {...cardState} />
-      <Button
-        onClick={() => cardActionRef.send({ type: "STEP", value: "cardList" })}
-      >
-        확인
-      </Button>
+      <Button onClick={handleConfirmButtonClick}>확인</Button>
     </Layout.Success>
   );
 }

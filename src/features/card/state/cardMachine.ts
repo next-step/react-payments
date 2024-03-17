@@ -10,7 +10,6 @@ export const cardMachine = setup({
       cardList: CardInfo[];
     };
     events:
-      | { type: "ADD_CARD"; value: CardInfo }
       | { type: "STEP"; value: string }
       | { type: "SET_CARD_NUMBER"; field: string; value: string }
       | { type: "SET_EXPIRE_DATE"; value: string }
@@ -76,11 +75,6 @@ export const cardMachine = setup({
         card: ({ context, event }) => {
           return { ...context.card, [event.field]: event.value };
         },
-      }),
-    },
-    ADD_CARD: {
-      actions: assign({
-        card: ({ event }) => event.value,
       }),
     },
     CONFIRM: {
