@@ -7,10 +7,10 @@ import {
   Input,
   MaxLengthNumberInput
 } from '@/components/common'
-import { useDialog } from '@/hooks'
+import { useDisclosure } from '@/hooks'
 
 export const AddCardStep = () => {
-  const { isOpen, close, open } = useDialog()
+  const { opened, close, open } = useDisclosure()
 
   return (
     <div className="root">
@@ -50,7 +50,7 @@ export const AddCardStep = () => {
           </span>
         </div>
       </div>
-      <BottomSheet isOpen={isOpen} onClose={close}>
+      <BottomSheet isOpen={opened} onClose={close}>
         <div className="flex-center">
           <div
             className="modal-item-container"

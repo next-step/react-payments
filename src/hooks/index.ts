@@ -1,2 +1,2 @@
-export * from './useDialog'
+export * from './useDisclosure'
 export * from './useStep'
