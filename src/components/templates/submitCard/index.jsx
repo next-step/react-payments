@@ -7,10 +7,12 @@ import { useFormContext } from "../../../hooks/useFormProvider";
 
 const SubmitCard = (props) => {
   const { setCardList, update } = props;
-  const { handleSubmit, reset, watch } = useFormContext();
+  const { handleSubmit, reset } = useFormContext();
 
   const handleAddCard = (data) => {
     update("list");
+
+    data.nickname = data.nickname || data.cardCompany;
     setCardList((prev) => [...prev, data]);
     reset();
   };
@@ -30,8 +32,9 @@ const SubmitCard = (props) => {
       <Box className={["input-container", "flex-center", "w-100"]}>
         <Input
           name="nickname"
+          placeholder={"카드 별칭 (선택)"}
           className={["input-underline", "w-75"]}
-          required
+          length={10}
         />
       </Box>
 

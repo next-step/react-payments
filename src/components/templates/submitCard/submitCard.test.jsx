@@ -62,6 +62,6 @@ describe("Submit Card 테스트", () => {
 
     fireEvent.click(submitButton);
 
-    expect(submitData.nickname).toBe("kb");
+    expect(submitData[0].nickname).toBe("kb");
   });
 });
