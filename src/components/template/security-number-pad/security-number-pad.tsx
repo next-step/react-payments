@@ -19,7 +19,7 @@ export interface SecurityNumberPadProps
   defaultValue: string
   onInput: (value: string) => void
   onInputComplete: () => void
-  maxLength: number
+  maxLength?: number
 }
 
 export const SecurityNumberPad = ({
@@ -28,7 +28,7 @@ export const SecurityNumberPad = ({
   onClose,
   onInput,
   onInputComplete,
-  maxLength,
+  maxLength = 3,
 }: SecurityNumberPadProps) => {
   const numberPadValueRef = useRef(defaultValue)
 
