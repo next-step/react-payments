@@ -47,5 +47,6 @@ export const Default: Story = {
     cardNumber,
     ownerName: 'SoJeong',
     expirationDate,
+    cardCompany: '포코',
   },
 };
