@@ -5,7 +5,7 @@ import {
   CARD_STORAGE_KEY,
   getLocalStorageItem,
 } from '../utils/localStorage';
-import { ACTIONS, PAGES } from '../constants/pages';
+import { PAGES } from '../constants/pages';
 
 const initialCardState: CardInfo = {
   id: '',
@@ -45,10 +45,10 @@ export const cardMachine = setup({
       | { type: 'DELETE_CARD'; value: string }
       | { type: 'GET_CARD_INFO'; value: string }
       | { type: 'SAVE_TO_LOCALSTORAGE'; value: CardInfo[] }
-      | { type: ACTIONS.TO_CARD_LIST }
-      | { type: ACTIONS.TO_ADD_CARD }
-      | { type: ACTIONS.TO_ADD_CARD_SUCCESS }
-      | { type: ACTIONS.TO_EDIT_CARD_NAME };
+      | { type: PAGES.CARD_LIST }
+      | { type: PAGES.ADD_CARD }
+      | { type: PAGES.ADD_CARD_SUCCESS }
+      | { type: PAGES.EDIT_CARD_NAME };
   },
   actions: {
     saveCard: assign({
@@ -103,45 +103,45 @@ export const cardMachine = setup({
 }).createMachine({
   /** @xstate-layout N4IgpgJg5mDOIC5QGMCGAnCBlALqnYAdKhBALRqZmwCuyycsAxAKoAKAIgIIAqAogH0AcgEkAwgGkhXALJ8A2gAYAuolAAHAPawAljh2aAdmpAAPRGQBMARkLXrATgCsANgAczxdfcPrAGhAAT0QAFksHQgB2N0tFSycAZkUQt2s4pwBfDIDKbDwCYlIKDHJaekYmLC4ANUExLgAlDgEAGREsHiVVJBAtXX0jE3MESxDIwkUnWPdFBOtIp0iHBIDghBdFRUJY1JdLfZCEh2WsnJLcfCISclzqOgZYZluAGx1YHC6TPr0DYx7h0bjSbTNyzeaLZarRBOJxbI6uBzpNyReJuU4gXIXAqQPTFKiGVAAWzArE4vEEokk0jknx63wGf1AwzcqUITg8C1B3iWCUiUIQrIS+0RLhc815kUi6Mx+SILzeOCY1zxEFpGm0P0G-0QewiUw2NkRIXsbhc-JRIQmc0ULgW8RSQul51lhHl7yYHD4LT4-AE9Saat6GoZQ1CCTc2w8yRCDltyzcKyC0P2hATiycYz2KMy2QxzsurpKZFe7oA4j6-Y1miIhAAxADygfpv1D63CbMsBscyRNZqTCGsTlsITGsxCGeRm0HTswWKuRVypO4voAQg0uEIOE3gy3tQKUYQEiOHKlB7FrHNzd5D4cXCFRTYHw4Z3kC8rF+xl3Uq8IWDIV3wDTbv0u5MogbhhHYMQ2JYCQwsksb8nstiKCy96ipENopGiuYym+C4lEu5ICHwAAabAiOuPAiPWQgCF+wGaoyZjgUkUQJC4vhzCe8S+PyUxOKmCRCqakSOC4R44Wcs4uu+hGfsR9YAOpCIBjEhnuk6EC4UyWBB7hhCOiZrIcWyLKkNqRO4eyKFKuH5gUcmYERvpYHwYgsA0Ig8AAmn69aeupoEsQKHHbLGqTImKHFTPywmCUK4SdqkVk2hJL5zoUNzyWSvpsFwWBYEp9YBioXw7lqYECjCqamrqxpOM4R78qMWyWe4koooiObSa+jkEc5TmlPcjBBZVIW6h2XZGr2-KpBEel7GMmYxiiGWyQNEBMG6HxlXSFXMcMmGWIe4b3ss3hxKkSExmyI6KBdRqxiEWS5oYmgQHAJh4QQ5UgeNwxkJxdiOK4Hiwt4Hj+P2QMTJsXj7BsjXCTpPV5jJ+HZVQZQPPA+3-Yd0JmciozWCEyRzCOSFTNskwZrGCzPc+9kY9iEC4rcBLEn9TGtoibWNaCsHIokhz8tYrLmfYEsOGE5kJOtBY7TzGlVZmh6RDGd6JD2yJ8v2d4RJhMJa4zhuK-1WMQCrwXDPzEyC3E4YLEexngdegtWZr0QnrLr0ZEAA */
   id: 'cardState',
-  initial: PAGES.CARD_LIST,
+  initial: 'card-list',
   context: {
     cardState: initialCardState,
     cardList: getLocalStorageItem({ key: CARD_STORAGE_KEY }) || [],
   },
   states: {
-    [PAGES.ADD_CARD_SUCCESS]: {
+    'add-card-success': {
       on: {
         UPDATE_NICKNAME: {
           actions: 'updateNickname',
         },
         SAVE_CARD_LIST: {
-          target: PAGES.CARD_LIST,
+          target: 'card-list',
           actions: ['saveCard', 'saveToLocalStorage', 'resetCardState'],
         },
-        [ACTIONS.TO_CARD_LIST]: PAGES.CARD_LIST,
+        'card-list': 'card-list',
       },
     },
 
-    [PAGES.EDIT_CARD_NAME]: {
+    'edit-card-name': {
       on: {
         UPDATE_NICKNAME: {
           actions: 'updateNickname',
         },
         SAVE_CARD_LIST: {
-          target: PAGES.CARD_LIST,
+          target: 'card-list',
           actions: ['saveCard', 'saveToLocalStorage', 'resetCardState'],
         },
-        [ACTIONS.TO_CARD_LIST]: {
-          target: PAGES.CARD_LIST,
+        'card-list': {
+          target: 'card-list',
           reenter: true,
         },
       },
     },
 
-    [PAGES.CARD_LIST]: {
+    'card-list': {
       on: {
-        [ACTIONS.TO_ADD_CARD]: {
-          target: PAGES.ADD_CARD,
+        'add-card': {
+          target: 'add-card',
           actions: 'resetCardState',
         },
         DELETE_CARD: {
@@ -170,12 +170,12 @@ export const cardMachine = setup({
             },
           }),
 
-          target: PAGES.EDIT_CARD_NAME,
+          target: 'edit-card-name',
         },
       },
     },
 
-    [PAGES.ADD_CARD]: {
+    'add-card': {
       on: {
         UPDATE_BRAND: {
           actions: assign({
@@ -231,9 +231,9 @@ export const cardMachine = setup({
           }),
         },
 
-        [ACTIONS.TO_ADD_CARD_SUCCESS]: PAGES.ADD_CARD_SUCCESS,
-        [ACTIONS.TO_CARD_LIST]: {
-          target: PAGES.CARD_LIST,
+        'add-card-success': 'add-card-success',
+        'card-list': {
+          target: 'card-list',
           reenter: true,
         },
       },
