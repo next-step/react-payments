@@ -1,14 +1,18 @@
 import { PropsWithChildren, useContext } from 'react'
 import { FunnelStep } from '../../constant/step'
-import FunnelStepProvider, { FunnelStepContext } from '../../context/funnelStepContext'
+import FunnelStepProvider, { FunnelStepContext, UpdateFunnelStepContext } from '../../context/funnelStepContext'
 
 const Stepper = ({ children }: PropsWithChildren<{}>) => {
   return <FunnelStepProvider>{children}</FunnelStepProvider>
 }
 
-const Step = ({ step, children }: PropsWithChildren<FunnelStep>) => {
+const Step = ({ step, renderStep }: PropsWithChildren<Required<FunnelStep>>) => {
   const funnelStep = useContext(FunnelStepContext)
-  return <>{funnelStep.step === step && children}</>
+  const updateFunnelStep = useContext(UpdateFunnelStepContext)
+
+  if (!renderStep || funnelStep.step !== step) return null
+
+  return renderStep(updateFunnelStep)
 }
 
 Stepper.Step = Step
