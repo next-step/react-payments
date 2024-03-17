@@ -4,6 +4,7 @@ import Input from "../../atoms/input";
 import Text from "../../atoms/text";
 import Card from "../../molecules/card";
 import { useFormContext } from "../../../hooks/useFormProvider";
+import random from "../../../utils/func/random";
 
 const SubmitCard = (props) => {
   const { setCardList, update } = props;
@@ -12,8 +13,17 @@ const SubmitCard = (props) => {
   const handleAddCard = (data) => {
     update("list");
 
-    data.nickname = data.nickname || data.cardCompany;
-    setCardList((prev) => [...prev, data]);
+    if (data.id) {
+      setCardList((prev) => ({ ...prev, [data.id]: data }));
+    } else {
+      const randomId = random(8);
+
+      data.id = randomId;
+      data.nickname = data.nickname || data.cardCompany;
+
+      setCardList((prev) => ({ [randomId]: data, ...prev }));
+    }
+
     reset();
   };
 
