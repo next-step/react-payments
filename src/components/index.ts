@@ -3,6 +3,8 @@ export * from '@/components/atom/text'
 export * from '@/components/atom/flex'
 
 export * from '@/components/molecule/input'
+export * from '@/components/molecule/bottom-sheet'
+export * from '@/components/molecule/tooltip'
 
 export * from '@/components/organism/base-input'
 export * from '@/components/organism/underline-input'
