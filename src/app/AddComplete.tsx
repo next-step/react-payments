@@ -1,16 +1,36 @@
 import { useContext } from 'react'
-import ui from '../styles/index.module.css'
-import { UpdateFunnelStepContext } from '../context/funnelStepContext'
 import { CardInfoContext, UpdateCardInfoContext } from '../context/paymentContext'
-import { Input } from '../stories/Input'
+import { CardListContext, UpdateCardListContext } from '../context/cardListContext'
 import { CardBox } from '../components'
+import { Input } from '../components/common/Input'
+import { StepProps } from './Payments'
+import ui from '../styles/index.module.css'
 
-const AddComplete = () => {
+const AddComplete = ({ onStep }: StepProps) => {
   const cardInfo = useContext(CardInfoContext)
   const updateCardInfo = useContext(UpdateCardInfoContext)
-  const updateFunnelStep = useContext(UpdateFunnelStepContext)
 
-  const { cardList, ...rest } = cardInfo
+  const cardList = useContext(CardListContext)
+  const updateCardList = useContext(UpdateCardListContext)
+
+  const handleClick = () => {
+    if (!cardInfo.cardAlias) updateCardInfo({ ...cardInfo, cardAlias: cardInfo.cardType })
+
+    if (cardList) {
+      const index = cardList.findIndex((item) => item.cardNo === cardInfo.cardNo)
+      const result = cardList.map((item, idx) => {
+        if (idx === index) item.cardAlias = cardInfo.cardAlias
+        return item
+      })
+
+      if (index >= 0) updateCardList(result)
+      else updateCardList([...result, { ...cardInfo }])
+    } else {
+      updateCardList([{ ...cardInfo }])
+    }
+    updateCardInfo({})
+    if (onStep) onStep({ step: 'list' })
+  }
 
   return (
     <main>
@@ -33,26 +53,7 @@ const AddComplete = () => {
             />
           </div>
           <div className={`${ui['button-box']} ${ui['mt-50']}`}>
-            <button
-              className={ui['button-text']}
-              onClick={() => {
-                if (!cardInfo.cardAlias) updateCardInfo({ ...cardInfo, cardAlias: cardInfo.cardType })
-
-                if (cardInfo.cardList) {
-                  const index = cardInfo.cardList.findIndex((item) => item.cardNo === cardInfo.cardNo)
-                  const result = cardInfo.cardList.map((item, idx) => {
-                    if (idx === index) item.cardAlias = cardInfo.cardAlias
-                    return item
-                  })
-                  if (index >= 0) updateCardInfo({ cardList: [...result] })
-                  else updateCardInfo({ cardList: [...result, { ...rest }] })
-                } else {
-                  updateCardInfo({ cardList: [{ ...rest }] })
-                }
-
-                updateFunnelStep({ step: 'list' })
-              }}
-            >
+            <button className={ui['button-text']} onClick={handleClick}>
               확인
             </button>
           </div>

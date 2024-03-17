@@ -16,7 +16,6 @@ export type CardInfo = {
   cvc?: string
   cardType?: string
   cardAlias?: string
-  cardList?: Array<Omit<CardInfo, 'cardList'>>
 }
 
 export const CardInfoContext = createContext<CardInfo>({})
