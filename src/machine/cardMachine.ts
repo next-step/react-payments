@@ -51,6 +51,36 @@ export const cardMachine = setup({
       | { type: PAGES.EDIT_CARD_NAME };
   },
   actions: {
+    saveCard: assign({
+      cardList: ({ context, event }) => {
+        const { cardList } = context;
+        if (event.type === 'SAVE_CARD_LIST') {
+          const { value: newCardState } = event;
+
+          if (!newCardState.nickname) {
+            newCardState.nickname = newCardState.brand.label;
+          }
+          newCardState.id = Object.values(newCardState.numbers).join('');
+          newCardState.createdAt = new Date().toISOString();
+
+          const existsCard = cardList.find(
+            (card) => card.id === newCardState.id
+          );
+
+          if (existsCard) {
+            return cardList
+              .map((card) => (card === existsCard ? newCardState : card))
+              .sort((a, b) =>
+                new Date(b.createdAt) > new Date(a.createdAt) ? 1 : -1
+              );
+          } else {
+            return [newCardState, ...cardList];
+          }
+        }
+
+        return context.cardList;
+      },
+    }),
     updateNickname: assign({
       cardState: ({ context, event }) => {
         if (event.type === 'UPDATE_NICKNAME') {
@@ -82,48 +112,11 @@ export const cardMachine = setup({
     'add-card-success': {
       on: {
         UPDATE_NICKNAME: {
-          actions: assign({
-            cardState: ({ context, event }) => {
-              return { ...context.cardState, nickname: event.value };
-            },
-          }),
+          actions: 'updateNickname',
         },
         SAVE_CARD_LIST: {
           target: 'card-list',
-          actions: [
-            assign({
-              cardList: ({ context, event }) => {
-                const { cardList } = context;
-                const { value: newCardState } = event;
-
-                if (!newCardState.nickname) {
-                  newCardState.nickname = newCardState.brand.label;
-                }
-                newCardState.id = Object.values(newCardState.numbers).join('');
-                newCardState.createdAt = new Date().toISOString();
-
-                const existsCard = cardList.find(
-                  (card) => card.id === newCardState.id
-                );
-
-                if (existsCard) {
-                  return cardList
-                    .map((card) => (card === existsCard ? newCardState : card))
-                    .sort((a, b) =>
-                      new Date(b.createdAt) > new Date(a.createdAt) ? 1 : -1
-                    );
-                } else {
-                  return [newCardState, ...cardList];
-                }
-              },
-            }),
-            'saveToLocalStorage',
-            assign({
-              cardState: () => {
-                return initialCardState;
-              },
-            }),
-          ],
+          actions: ['saveCard', 'saveToLocalStorage', 'resetCardState'],
         },
         'card-list': 'card-list',
       },
@@ -132,7 +125,11 @@ export const cardMachine = setup({
     'edit-card-name': {
       on: {
         UPDATE_NICKNAME: {
-          actions: ['updateNickname'],
+          actions: 'updateNickname',
+        },
+        SAVE_CARD_LIST: {
+          target: 'card-list',
+          actions: ['saveCard', 'saveToLocalStorage', 'resetCardState'],
         },
         'card-list': {
           target: 'card-list',
@@ -145,11 +142,7 @@ export const cardMachine = setup({
       on: {
         'add-card': {
           target: 'add-card',
-          actions: assign({
-            cardState: () => {
-              return initialCardState;
-            },
-          }),
+          actions: 'resetCardState',
         },
         DELETE_CARD: {
           actions: [
@@ -173,7 +166,7 @@ export const cardMachine = setup({
               const { value: id } = event;
               const targetCard = cardList.filter((card) => card.id === id);
 
-              return targetCard[0];
+              return { ...targetCard[0], nickname: '' };
             },
           }),
 

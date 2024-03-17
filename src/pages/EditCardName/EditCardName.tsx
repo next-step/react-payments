@@ -37,7 +37,7 @@ const EditCardName = ({ onNext }: Props) => {
       </div>
 
       <Card size='big' {...cardState} />
-      <CardNickname nickname='' />
+      <CardNickname />
 
       <div className='button-box mt-50'>
         <Button onClick={handleAddCard}>확인</Button>

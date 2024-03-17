@@ -26,7 +26,7 @@ const AddCardSuccess = ({ onNext }: Props) => {
       </div>
 
       <Card size='big' {...cardState} />
-      <CardNickname nickname={cardState.nickname} />
+      <CardNickname />
 
       <div className='button-box mt-50'>
         <Button onClick={handleAddCard}>확인</Button>
