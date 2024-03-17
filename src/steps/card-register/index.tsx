@@ -30,7 +30,8 @@ export interface CardInputFormStepProps {
 }
 
 export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepProps) => {
-  const { cardInput, setCardInput, resetCardInput } = useCardInputContext()
+  const { cardInput, cardInputError, validateCardInput, setCardInput, resetCardInput } =
+    useCardInputContext()
   const { cardCode, cardExpDate, cardName, cardCVC, cardPin, cardType } = cardInput
   const cardCodeInputRef = useRef<CardCodeInputHandle>(null)
   const cardExpDateInputRef = useRef<CardExpDateInputHandle>(null)
@@ -46,7 +47,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault()
-    if (!cardType) return
+    if (!validateCardInput(cardInput)) return
     onSubmit?.({ ...cardInput, cardType })
   }
 
@@ -133,6 +134,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
             value={cardCode}
             onChange={handleChangeCardCodeInput}
             onInputComplete={cardExpDateInputRef.current?.focus}
+            error={cardInputError.cardCode}
           />
           <CardExpDateInput
             id="card-exp-date"
@@ -141,6 +143,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
             value={cardExpDate}
             onChange={setCardInput('cardExpDate')}
             onInputComplete={() => cardNameInputRef.current?.focus()}
+            error={cardInputError.cardExpDate}
           />
           <CardNameInput
             id="card-name"
@@ -148,6 +151,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
             ref={cardNameInputRef}
             value={cardName}
             onChange={setCardInput('cardName')}
+            error={cardInputError.cardName}
           />
           <Flex alignItems="center" gap="24px">
             <BaseInput
@@ -161,6 +165,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
               readOnly
               onKeyDown={e => e.preventDefault()}
               onFocus={handleopenCVCNumberPad}
+              error={cardInputError.cardCVC}
             />
             <Tooltip label="카드 뒷면의 CVC란을 확인하세요">
               <IconHelpCircle color={vars.color.aqua} size={32} />
@@ -173,6 +178,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
             ref={cardPinInputRef}
             readOnly
             onFocus={handleOpenCardPinNumberPad}
+            error={cardInputError.cardPin}
           />
         </Flex>
         <Flex justifyContent="flex-end" paddingX="24px" paddingY="32px" marginTop="auto">

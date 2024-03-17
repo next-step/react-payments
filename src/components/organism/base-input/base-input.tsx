@@ -125,5 +125,7 @@ export interface BaseInputBottomSectionProps {
 const BaseInputBottomSection = ({ error, errorRender }: BaseInputBottomSectionProps) => {
   const isBottomSectionEnabled = !isNil(error)
 
-  return isBottomSectionEnabled ? <Input.Error error={error} errorRender={errorRender} /> : null
+  return isBottomSectionEnabled ? (
+    <Input.Error error={error} errorRender={errorRender} marginTop="4px" />
+  ) : null
 }
