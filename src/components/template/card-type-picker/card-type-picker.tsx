@@ -27,15 +27,18 @@ export const CardTypePicker = ({
     <BottomSheet.Root>
       <BottomSheet.Dimmer />
       <BottomSheet.Content className={styles.content} onClose={onClose}>
-        {cardTypeList.map(({ id, name, color }, idx) => (
-          <CardTypeItem
-            key={id}
-            name={name}
-            isSelectedCardType={selectedCardType?.id === id}
-            cardTypeColor={color}
-            onClick={handleClickCardTypeItem(cardTypeList[idx])}
-          />
-        ))}
+        {cardTypeList.map(cardType => {
+          const { id, name, color } = cardType
+          return (
+            <CardTypeItem
+              key={id}
+              name={name}
+              isSelectedCardType={selectedCardType?.id === id}
+              cardTypeColor={color}
+              onClick={handleClickCardTypeItem(cardType)}
+            />
+          )
+        })}
       </BottomSheet.Content>
     </BottomSheet.Root>
   )
