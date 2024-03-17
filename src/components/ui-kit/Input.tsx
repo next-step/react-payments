@@ -29,7 +29,7 @@ function InputMain({
 					className={variant === 'basic' ? 'input-box' : ''}
 					style={{ width }}
 				>
-					<input className={`input-${variant}`} {...rest} />
+					<input className={`input-${variant}`} style={{ width }} {...rest} />
 				</div>
 				{children}
 			</div>

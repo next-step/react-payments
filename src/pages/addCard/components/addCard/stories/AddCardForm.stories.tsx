@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { BrowserRouter } from 'react-router-dom';
+
 import { AddCardForm } from '@pages/addCard/components';
 
 const meta = {
@@ -14,11 +14,7 @@ const meta = {
 type Story = StoryObj<typeof AddCardForm>;
 
 export const Default: Story = {
-	render: () => (
-		<BrowserRouter>
-			<AddCardForm />
-		</BrowserRouter>
-	),
+	render: () => <AddCardForm />,
 };
 
 export default meta;
