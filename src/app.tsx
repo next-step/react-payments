@@ -20,18 +20,18 @@ function App() {
                   cardList={cardList}
                   onClickRegisterButton={() =>
                     send({
-                      type: 'create_start',
+                      type: '카드_등록_시작',
                     })
                   }
                   onClickStartEditButton={targetCard => {
                     send({
-                      type: 'edit_start',
+                      type: '카드_수정_시작',
                       targetCard,
                     })
                   }}
                   onClickRemoveButton={targetId =>
                     send({
-                      type: 'remove',
+                      type: '카드_삭제',
                       targetId,
                     })
                   }
@@ -41,12 +41,12 @@ function App() {
                 <CardInputFormStep
                   onClickPrev={() =>
                     send({
-                      type: 'create_cancel',
+                      type: '카드_등록_취소',
                     })
                   }
                   onSubmit={cardInput =>
                     send({
-                      type: 'create_card_input',
+                      type: '카드_정보_입력',
                       cardInput,
                     })
                   }
@@ -56,7 +56,7 @@ function App() {
                 <CardNicknameInputStep
                   onClickConfirm={nickName =>
                     send({
-                      type: 'create_confirm',
+                      type: '카드_별명_입력',
                       nickName,
                     })
                   }
@@ -67,7 +67,7 @@ function App() {
                   defaultCard={cardBeforeRegister}
                   onClickConfirm={nickName =>
                     send({
-                      type: 'edit_confirm',
+                      type: '카드_별명_수정',
                       nickName,
                     })
                   }
