@@ -13,8 +13,13 @@ export interface CardInputState {
   cardCVC: string
   cardPin: string
   cardNickName: string
-  cardType?: CardType
+  cardType: CardType | undefined
 }
+
+export type CardInputErrorState = Record<
+  keyof Omit<CardInputState, 'cardNickName'>,
+  string | undefined
+>
 
 export interface CardState extends CardInputState {
   id: string
