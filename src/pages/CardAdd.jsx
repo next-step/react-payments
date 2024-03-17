@@ -1,6 +1,5 @@
 import { useContext } from "react";
-
-import Card from "../components/Card";
+import Card from "../components/atomic-design-pattern/molecule/Card";
 import CardNumberInput from "../components/card-add/CardNumberInput";
 import { MONTH, YEAR } from "../constants/expirationDate";
 import ExpirationDateInput from "../components/card-add/ExpirationDateInput";
@@ -53,13 +52,11 @@ export default function CardAdd({ onList, onNext }) {
     isSecurityCodeValidate &&
     isPasswordValidate;
 
-
   const onClickNextBtn = (event) => {
     event.preventDefault();
     CardStorage.addCard(cardState);
     onNext();
   };
-
 
   return (
     <form>

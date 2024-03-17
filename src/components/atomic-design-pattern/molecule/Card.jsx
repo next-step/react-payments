@@ -1,7 +1,7 @@
-import { getSplitString4 } from "../util/regExp";
-import CardBox from "./CardBox";
-import Chip from "./atomic-design-pattern/atom/Chip";
-import Text from "./atomic-design-pattern/atom/Text";
+import { getSplitString4 } from "../../../util/regExp";
+import CardBox from "../../CardBox";
+import Chip from "../atom/Chip";
+import Text from "../atom/Text";
 
 export default function Card({
   alias = "",
@@ -9,8 +9,9 @@ export default function Card({
   expirationDateMM = "",
   expirationDateYY = "",
   cardOwnerName = "",
+  key = "",
+  onClick = () => {},
   ...props
-
 }) {
   // 카드 번호
   const displayCardNumber = getSplitString4(Object.values(cardNumber).join(""))
@@ -30,7 +31,7 @@ export default function Card({
   const displayCardOwnerName = cardOwnerName;
 
   return (
-    <CardBox {...props}>
+    <CardBox key={key} onClick={onClick} {...props}>
       <div className="card-top">
         <Text>{alias}</Text>
       </div>

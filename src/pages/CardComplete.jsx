@@ -1,5 +1,5 @@
 import { useContext, useRef } from "react";
-import Card from "../components/Card";
+import Card from "../components/atomic-design-pattern/molecule/Card";
 import { CardContext } from "../../providers/CardState/CardStateProvider";
 import { MONTH, YEAR } from "../constants/expirationDate";
 import Input from "../components/atomic-design-pattern/atom/Input";
@@ -46,6 +46,5 @@ export default function CardComplete({ onNext }) {
         </Button>
       </div>
     </form>
-
   );
 }

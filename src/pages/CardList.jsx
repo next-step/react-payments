@@ -1,4 +1,4 @@
-import Card from "../components/Card";
+import Card from "../components/atomic-design-pattern/molecule/Card";
 import CardBox from "../components/CardBox";
 import {
   CardStorage,
@@ -25,13 +25,13 @@ export default function CardList({ onNext, goToCompletePage }) {
           const { cardNumber, expirationDate, cardOwnerName, alias } = cardInfo;
           return (
             <Card
-              onClick={() => onClickCard(cardInfo)}
-              key={getLocalStorageKeyByCardNumber(cardNumber)}
+              alias={alias}
               cardNumber={cardNumber}
               expirationDateMM={expirationDate[MONTH]}
               expirationDateYY={expirationDate[YEAR]}
               cardOwnerName={cardOwnerName}
-              alias={alias}
+              key={getLocalStorageKeyByCardNumber(cardNumber)}
+              onClick={() => onClickCard(cardInfo)}
             />
           );
         })}
