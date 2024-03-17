@@ -52,14 +52,14 @@ export default function CardAdd({ onList, onNext }) {
     isSecurityCodeValidate &&
     isPasswordValidate;
 
-  const onClickNextBtn = (event) => {
+  const onSubmitCallbackFn = (event) => {
     event.preventDefault();
     CardStorage.addCard(cardState);
     onNext();
   };
 
   return (
-    <form>
+    <form onSubmit={onSubmitCallbackFn}>
       <h2 className="page-title">
         <Button variant="link" onClick={onList}>
           {"<"}
@@ -106,7 +106,7 @@ export default function CardAdd({ onList, onNext }) {
       </InputContainer>
       {isShowNextButton && (
         <div className="button-box">
-          <Button variant="link" onClick={onClickNextBtn}>
+          <Button variant="link" type="submit">
             다음
           </Button>
         </div>
