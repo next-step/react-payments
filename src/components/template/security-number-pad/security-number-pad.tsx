@@ -17,6 +17,7 @@ export interface SecurityNumberPadProps extends Omit<BottomSheetContentProps, 'o
   title: string
   defaultValue: string
   onInputComplete: (value: string) => void
+  maxLength: number
 }
 
 export const SecurityNumberPad = ({
@@ -24,6 +25,7 @@ export const SecurityNumberPad = ({
   defaultValue,
   onInputComplete,
   onClose,
+  maxLength,
 }: SecurityNumberPadProps) => {
   const numberPadValueRef = useRef(defaultValue)
 
@@ -31,7 +33,9 @@ export const SecurityNumberPad = ({
     if (padValue === EMPTY) return
     const prevNumberPadValue = numberPadValueRef.current
     numberPadValueRef.current =
-      padValue === DELETE ? prevNumberPadValue.slice(0, -1) : prevNumberPadValue + String(padValue)
+      padValue === DELETE
+        ? prevNumberPadValue.slice(0, -1)
+        : (prevNumberPadValue + String(padValue)).slice(0, maxLength)
     onInputComplete(numberPadValueRef.current)
   }
 

@@ -34,7 +34,8 @@ export const CardPinInput = forwardRef<CardPinInputHandle, CardPinInputProps>(
     useImperativeHandle(ref, () => {
       return {
         focus: () => {
-          inputsRef.current?.[pinValue.length]?.focus()
+          const pinInputRefIndex = pinValue.length < inputDigit ? pinValue.length : inputDigit - 1
+          inputsRef.current?.[pinInputRefIndex]?.focus()
         },
       }
     })

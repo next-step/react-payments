@@ -69,6 +69,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
         key="card-cvc"
         title="보안 코드(CVC/CVV)를 입력하세요."
         defaultValue={cardCVC}
+        maxLength={3}
         onClose={closeOverlay}
         onInputComplete={value => {
           setCardInput('cardCVC')(value)
@@ -87,6 +88,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
         key="card-pin"
         title="카드 비밀번호를 입력하세요."
         defaultValue={cardPin}
+        maxLength={2}
         onClose={closeOverlay}
         onInputComplete={value => {
           setCardInput('cardPin')(value)
