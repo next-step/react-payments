@@ -3,7 +3,7 @@ import { CardHolderNameInput } from '@pages/addCard/components';
 import { useInput } from '@hooks';
 
 const meta = {
-	title: 'AddCard/CardHolderNameInput',
+	title: 'PAGES/AddCard/CardHolderNameInput',
 	component: CardHolderNameInput,
 	parameters: {
 		layout: 'centered',

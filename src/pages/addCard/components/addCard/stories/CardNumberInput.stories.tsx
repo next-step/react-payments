@@ -3,7 +3,7 @@ import { CardNumberInput } from '@pages/addCard/components';
 import { useCardNumberInput } from '@pages/addCard/hooks';
 
 const meta = {
-	title: 'AddCard/CardNumberInput',
+	title: 'PAGES/AddCard/CardNumberInput',
 	component: CardNumberInput,
 	parameters: {
 		layout: 'centered',

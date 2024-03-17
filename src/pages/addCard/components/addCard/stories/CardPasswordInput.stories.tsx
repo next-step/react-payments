@@ -4,7 +4,7 @@ import { useInput } from '@hooks';
 import { isNumber } from '@utils';
 
 const meta = {
-	title: 'AddCard/CardPasswordInput',
+	title: 'PAGES/AddCard/CardPasswordInput',
 	component: CardPasswordInput,
 	parameters: {
 		layout: 'centered',
