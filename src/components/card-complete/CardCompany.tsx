@@ -2,7 +2,7 @@ import Input from '../Input';
 
 type CardCompanyProps = {
   cardAlias: string;
-  onChange: () => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function CardCompany({ cardAlias, onChange }: CardCompanyProps) {
