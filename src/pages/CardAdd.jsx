@@ -52,14 +52,14 @@ export default function CardAdd({ onList, onNext }) {
     isSecurityCodeValidate &&
     isPasswordValidate;
 
-  const onSubmitCallbackFn = (event) => {
+  const onSubmitCardAdd = (event) => {
     event.preventDefault();
     CardStorage.addCard(cardState);
     onNext();
   };
 
   return (
-    <form onSubmit={onSubmitCallbackFn}>
+    <form onSubmit={onSubmitCardAdd}>
       <h2 className="page-title">
         <Button variant="link" onClick={onList}>
           {"<"}
