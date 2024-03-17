@@ -9,6 +9,7 @@ import { useCardsContext } from '../hooks/useCardsContext';
 import updateValidValue from '../../utils/updateValidValue';
 
 import { CARD_ALIAS_LIMIT } from '../../constants/cardLimit';
+import CardCompany from './CardCompany';
 
 export default function CompletedCard() {
   const url = window.location.href;
@@ -63,14 +64,7 @@ export default function CompletedCard() {
           />
         </CardBox>
         <div className="input-container flex-center w-100">
-          <Input
-            variant="underline"
-            className="w-75"
-            type="text"
-            placeholder="카드 별칭 (선택)"
-            value={cardAlias}
-            onChange={handleChangeCardAlias}
-          />
+          <CardCompany cardAlias={cardAlias} onChange={handleChangeCardAlias} />
         </div>
         <ClickableLink
           className="mt-55"
