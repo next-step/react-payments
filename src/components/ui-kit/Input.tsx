@@ -15,6 +15,7 @@ function InputMain({
 	children,
 	...rest
 }: InputProps) {
+	const isWithInputBox = variant === 'basic';
 	return (
 		<>
 			{label}
@@ -25,11 +26,12 @@ function InputMain({
 					gap: children ? '8px' : '0',
 				}}
 			>
-				<div
-					className={variant === 'basic' ? 'input-box' : ''}
-					style={{ width }}
-				>
-					<input className={`input-${variant}`} style={{ width }} {...rest} />
+				<div className={isWithInputBox ? 'input-box' : ''} style={{ width }}>
+					<input
+						className={`input-${variant}`}
+						style={{ width: isWithInputBox ? '100%' : width }}
+						{...rest}
+					/>
 				</div>
 				{children}
 			</div>
