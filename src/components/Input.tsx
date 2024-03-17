@@ -1,11 +1,15 @@
 import React, {ChangeEvent, useState} from "react";
 import {InputProps} from "../interface/InputProps.ts";
 
-const Input: React.FC<InputProps> = ({type, className, maxLength, placeHolder}) => {
+const Input: React.FC<InputProps> = ({type, className, maxLength, placeHolder, inputChange}) => {
     const [inputValue, setInputValue] = useState('');
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setInputValue(event.target.value);
+        let value = event.target.value;
+        setInputValue(value)
+        if (inputChange) {
+            inputChange(value)
+        }
     };
 
     return (

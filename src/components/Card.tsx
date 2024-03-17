@@ -1,10 +1,31 @@
-import React, {useState} from "react";
+import React from "react";
 import Display from "./Display.tsx";
+import {CardProps} from "../interface/CardProps.ts";
 
-const Card: React.FC = () => {
-    const [cardNumber, setCardNumber] = useState<string>("")
-    const [cardName, setCardName] = useState<string>("")
-    const [cardExpireDate, setCardExpireDate] = useState<string>("")
+const Card: React.FC<CardProps> = ({cardNumber, name, cardExpireDate}) => {
+
+    const formattedExpireDate = () => {
+        if (cardExpireDate) {
+            const {month, year} = cardExpireDate;
+            return month && year ? `${month} / ${year}` : `${month}${year}`
+        }
+        return ''
+    }
+    const formattedCardNumber = () => {
+        if (cardNumber) {
+            let {first, second, third, fourth} = cardNumber;
+            if (first.length === 4) {
+                first = first + "-"
+            }
+            if (second.length === 4) {
+                second = second + "-"
+            }
+            let thirdSecret = third.length === 4 ? "****-" : "*".repeat(third.length);
+            let fourthSecret = fourth.length === 4 ? "****" : "*".repeat(fourth.length);
+            return `${first} ${second} ${thirdSecret} ${fourthSecret}`
+        }
+        return ''
+    }
 
     return (
         <div className={"card-box"}>
@@ -17,11 +38,11 @@ const Card: React.FC = () => {
                 </div>
                 <div className={"card-bottom"}>
                     <div className="card-bottom__number">
-                        <Display className={"card-text"} value={cardNumber}></Display>
+                        <Display className={"card-text"} value={formattedCardNumber()}></Display>
                     </div>
                     <div className={"card-bottom__info"}>
-                        <Display className={"card-text"} value={cardName} defaultValue={"NAME"}></Display>
-                        <Display className={"card-text"} value={cardExpireDate} defaultValue={"MM / YY"}></Display>
+                        <Display className={"card-text"} value={name} defaultValue={"NAME"}></Display>
+                        <Display className={"card-text"} value={formattedExpireDate()} defaultValue={"MM / YY"}></Display>
                     </div>
                 </div>
             </div>
