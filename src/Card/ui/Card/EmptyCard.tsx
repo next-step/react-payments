@@ -69,7 +69,7 @@ EmptyCard.Name = Name;
 EmptyCard.ExpirationDate = ExpirationDate;
 EmptyCard.CardNumber = CardNumber;
 
-const EmptyCardWrapper = styled.div`
+const EmptyCardWrapper = styled.button`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
