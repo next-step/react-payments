@@ -11,7 +11,7 @@ import { assertEvent, assign, setup } from "xstate";
 const TEMP_CARD_LIST: CardInfo[] = [
 	{
 		id: 1,
-		bankName: "포코카드",
+		bankName: "포코",
 		cardNumber: {
 			first: "1111",
 			second: "2222",
@@ -32,7 +32,7 @@ const TEMP_CARD_LIST: CardInfo[] = [
 	},
 	{
 		id: 2,
-		bankName: "현석카드",
+		bankName: "현석",
 		cardNumber: {
 			first: "1111",
 			second: "2222",
