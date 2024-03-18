@@ -15,9 +15,20 @@ const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
 export const DateInput: Story = {
   args: {
-    expiredMonth: '',
-    expiredYear: '',
-    onChangeMonth: onChange,
-    onChangeYear: onChange,
+    divider: '/',
+    inputs: [
+      {
+        value: '12',
+        onChange,
+        placeholder: 'MM',
+        maxLength: 2,
+      },
+      {
+        value: '09',
+        onChange,
+        placeholder: 'YY',
+        maxLength: 2,
+      },
+    ],
   },
 }

@@ -20,6 +20,16 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
 `
+
+const InputBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 0.375rem;
+  color: #d3d3d3;
+  border-radius: 0.25rem;
+  background-color: #ecebf1;
+  width: 50%;
+`
 const DateInput = ({
   divider,
   inputs,
@@ -28,7 +38,7 @@ const DateInput = ({
   inputs: React.ComponentPropsWithoutRef<'input'>[]
 }) => {
   return (
-    <div className="input-box w-50">
+    <InputBox>
       {inputs.map((input, index) => {
         return (
           <Wrapper key={index}>
@@ -42,7 +52,7 @@ const DateInput = ({
           </Wrapper>
         )
       })}
-    </div>
+    </InputBox>
   )
 }
 export default DateInput

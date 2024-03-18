@@ -18,6 +18,14 @@ const Slash = styled.span`
   font-weight: 700;
 `
 
+const InputBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 0.375rem;
+  color: #d3d3d3;
+  border-radius: 0.25rem;
+  background-color: #ecebf1;
+`
 const CardNumberInput = ({
   divider,
   inputs,
@@ -26,7 +34,7 @@ const CardNumberInput = ({
   inputs: React.ComponentPropsWithoutRef<'input'>[]
 }) => {
   return (
-    <div className="input-box">
+    <InputBox>
       {inputs.map((input, index) => {
         return (
           <Wrapper key={index}>
@@ -40,7 +48,7 @@ const CardNumberInput = ({
           </Wrapper>
         )
       })}
-    </div>
+    </InputBox>
   )
 }
 export default CardNumberInput
