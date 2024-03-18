@@ -1,4 +1,4 @@
 export * from './AddCard';
 export * from './CardList';
-export * from './AddCardComplete';
+export * from './CardConfig';
 export * from './CardPayment';

@@ -2,13 +2,13 @@ import { ArgTypes, Meta, StoryObj } from '@storybook/react';
 import { useForm } from '@/hooks/useForm/useForm';
 import { useAutoFocus } from '@/hooks/useAutoFocus/useAutoFocus';
 import { createFields } from '@/stories/utils/createFields';
-import { INPUT } from '../input.constant';
-import { DefaultInput, InputBox } from '.';
+import { INPUT } from '../../input.constant';
+import { DefaultInput, InputBox } from '../../atom';
 import { Background } from '@/stories/components/Background';
-import { InputType } from '../input.type';
+import { InputType } from '../../input.type';
 
 const meta = {
-  title: 'Input/Atom/InputBox',
+  title: 'Input/Molecule/InputGroup',
   component: InputBox,
   tags: ['autodocs'],
   argTypes: {
@@ -21,11 +21,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const TextInputs: Story = (args: ArgTypes) => {
+export const InputGroup: Story = (args: ArgTypes) => {
   const textInputs = createFields({
     type: INPUT.TYPE.TEXT,
-    // 사용처에서 동적으로 Input의 개수를 컨트롤 할 수 있도록 구현해봤는데, 타입에서 에러가 발생하는 것을 보니 좋은 방식인지는 잘 모르겠습니다.
-    // 다른 좋은 방법이 있을까요? :)
     amount: args.amount as unknown as number,
     maxLength: args.maxLength as unknown as number,
   });
@@ -85,4 +83,4 @@ export const TextInputs: Story = (args: ArgTypes) => {
   );
 };
 
-TextInputs.args = {};
+InputGroup.args = {};

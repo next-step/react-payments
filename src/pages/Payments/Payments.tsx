@@ -1,4 +1,4 @@
-import { AddCard, CardList, AddCardComplete, CardPayment } from './funnel';
+import { AddCard, CardList, CardConfig, CardPayment } from './funnel';
 import { Funnel } from './payments.context';
 import { STEP } from './payments.constant';
 
@@ -11,8 +11,8 @@ export const Payments = () => {
       <Funnel.Step name={STEP.ADD_CARD}>
         <AddCard />
       </Funnel.Step>
-      <Funnel.Step name={STEP.ADD_CARD_COMPLETE}>
-        <AddCardComplete />
+      <Funnel.Step name={STEP.CARD_CONFIG}>
+        <CardConfig />
       </Funnel.Step>
       <Funnel.Step name={STEP.CARD_PAYMENT}>
         <CardPayment />

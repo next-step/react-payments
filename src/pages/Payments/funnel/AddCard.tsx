@@ -4,6 +4,7 @@ import { STEP } from '../payments.constant';
 import { Card } from '@/components/card/Card';
 import { Card as CardData } from '../payments.type';
 import { Funnel } from '../payments.context';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface CardFulfilledForm {
   number: boolean;
@@ -35,11 +36,12 @@ export const AddCard = () => {
         tempCard: {
           ...values,
           createdAt: new Date(),
+          id: uuidv4(),
         },
       };
     });
 
-    setStep(STEP.ADD_CARD_COMPLETE);
+    setStep(STEP.CARD_CONFIG);
   };
 
   const isAllFieldsFulfilled = Object.values(errors).every((error) => !error);
@@ -47,7 +49,9 @@ export const AddCard = () => {
 
   return (
     <div>
-      <h2 className='page-title' onClick={handlePrev}>{`< 카드 추가`}</h2>
+      <button onClick={handlePrev} className='button-reset'>
+        <h2 className='page-title'>{`< 카드 추가`}</h2>
+      </button>
       <Card data={values as unknown as CardData} isComplete={false} />
 
       <CardInput.Number formMethods={formMethods} />
@@ -58,9 +62,11 @@ export const AddCard = () => {
 
       {isAllFieldsFulfilled && (
         <div className='button-box' onClick={handleNext}>
-          <span className={`button-text button-activate ${optaionalClassName}`}>
+          <button
+            className={`button-text button-reset button-activate ${optaionalClassName}`}
+          >
             다음
-          </span>
+          </button>
         </div>
       )}
     </div>

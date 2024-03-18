@@ -12,6 +12,7 @@ export interface Card {
   expireYear: string;
   ownerName: string;
   createdAt: Date;
+  id: string;
 }
 
 export interface PaymentsCard extends Card {

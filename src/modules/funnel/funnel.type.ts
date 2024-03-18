@@ -11,7 +11,7 @@ type DefaultSetState = () => never;
  * @property {Dispatch<SetStateAction<D | undefined>>} setData - 데이터 변경 함수
  */
 export interface FunnelContextProps<T, D> {
-  step: T | null;
+  step: T;
   data?: D;
   setStep: ((step: T) => void) | DefaultSetState;
   setData: Dispatch<SetStateAction<D | undefined>>;
