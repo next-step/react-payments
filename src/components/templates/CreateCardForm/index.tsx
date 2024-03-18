@@ -38,7 +38,8 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
 
   const expirationYearRef = useRef<HTMLInputElement>(null);
   const handleExpirationMonthInputKeyUp = () => {
-    if (isErrorField.expirationMonth) return;
+    if (isErrorField.expirationMonth || fields.expirationMonth === '') return;
+
     expirationYearRef.current?.focus();
   };
 
