@@ -3,7 +3,7 @@ import { CARD_SECURITY_CODE_LIMIT } from '@/domain/constant';
 import useSecurityCode from './hook/useSecurityCode';
 import { type ForwardedRef, forwardRef, RefObject } from 'react';
 import questionIcon from '@/assets/question.svg';
-import Tooltip from '@/components/Tooltip';
+import Tooltip from '@/components/common/tooltip/Tooltip';
 
 type CardSecurityCodeProps = {
   nextFocus: RefObject<HTMLInputElement>;

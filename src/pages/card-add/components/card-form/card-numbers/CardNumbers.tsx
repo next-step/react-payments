@@ -3,7 +3,7 @@ import { CARD_NUMBER_LIMIT } from '@/domain/constant';
 import { forwardRef, type RefObject } from 'react';
 import useNumbers from './hook/useCardNumbers';
 
-const createHyphen = (value: string) => (value.length === CARD_NUMBER_LIMIT ? '-' : '');
+const createHyphen = (value: string = '') => (value.length === CARD_NUMBER_LIMIT ? '-' : '');
 
 type CardNumberProps = {
   nextFocus: RefObject<HTMLInputElement>;
@@ -12,6 +12,9 @@ type CardNumberProps = {
 const CardNumbers = forwardRef(({ nextFocus }: CardNumberProps) => {
   const { inputRef, cardNumbers, handleChange } = useNumbers({ nextFocus });
   const [second, third, fourth] = inputRef;
+  const firstHypen = cardNumbers ? createHyphen(Object.values(cardNumbers)[0]) : '';
+  const secondHypen = cardNumbers ? createHyphen(Object.values(cardNumbers)[1]) : '';
+  const thridHypen = cardNumbers ? createHyphen(Object.values(cardNumbers)[2]) : '';
 
   return (
     <>
@@ -22,7 +25,7 @@ const CardNumbers = forwardRef(({ nextFocus }: CardNumberProps) => {
         value={cardNumbers?.first ?? ''}
         maxLength={CARD_NUMBER_LIMIT}
       />
-      {cardNumbers && createHyphen(Object.values(cardNumbers)[0])}
+      {firstHypen}
       <Input
         type="text"
         name="second"
@@ -31,7 +34,7 @@ const CardNumbers = forwardRef(({ nextFocus }: CardNumberProps) => {
         maxLength={CARD_NUMBER_LIMIT}
         ref={second}
       />
-      {cardNumbers && createHyphen(Object.values(cardNumbers)[1])}
+      {secondHypen}
       <Input
         type="password"
         name="third"
@@ -40,7 +43,7 @@ const CardNumbers = forwardRef(({ nextFocus }: CardNumberProps) => {
         maxLength={CARD_NUMBER_LIMIT}
         ref={third}
       />
-      {cardNumbers && createHyphen(Object.values(cardNumbers)[2])}
+      {thridHypen}
       <Input
         type="password"
         name="fourth"
