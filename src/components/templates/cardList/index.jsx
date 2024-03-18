@@ -2,10 +2,17 @@ import PropTypes from "prop-types";
 import Box from "../../atoms/box";
 import Text from "../../atoms/text";
 import Card from "../../molecules/card";
-import { Fragment } from "react";
+import { useFormContext } from "../../../hooks/useFormProvider";
 
 const CardList = (props) => {
-  const { cardList, next } = props;
+  const { cardData, next } = props;
+  const { reset } = useFormContext();
+  const cardList = Object.values(cardData);
+
+  const handleUpdateCard = (data) => {
+    reset(data);
+    next();
+  };
 
   return (
     <Box className={["app", "flex-column-center"]}>
@@ -13,25 +20,14 @@ const CardList = (props) => {
         <Text className={["page-title", "mb-10"]}>보유 카드</Text>
       </Box>
 
-      {cardList.map(
-        (
-          { name, year, month, cardNumberSplit, cardCompany, nickname },
-          idx
-        ) => (
-          <Fragment key={idx}>
-            <Card
-              name={name}
-              year={year}
-              month={month}
-              cardNumberSplit={cardNumberSplit}
-              cardCompany={cardCompany}
-            />
-            <Text as="span" className={"card-nickname"}>
-              {nickname}
-            </Text>
-          </Fragment>
-        )
-      )}
+      {cardList.map((data, idx) => (
+        <button key={idx} onClick={() => handleUpdateCard(data)}>
+          <Card {...data} />
+          <Text as="span" className={"card-nickname"}>
+            {data.nickname}
+          </Text>
+        </button>
+      ))}
 
       <button onClick={next}>
         <Card empty />
@@ -41,7 +37,7 @@ const CardList = (props) => {
 };
 
 CardList.propTypes = {
-  cardList: PropTypes.array,
+  cardData: PropTypes.object,
   next: PropTypes.func,
 };
 

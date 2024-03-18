@@ -16,7 +16,12 @@ const useCustomForm = (props = {}) => {
 
     const isValid = Object.entries(formOption.current).every(
       ([key, option]) => {
-        return !option.required || !!valueRefs.current[key];
+        const { required = false, minLength = 0 } = option;
+
+        return (
+          !(required && !valueRefs.current[key]) &&
+          minLength <= valueRefs.current[key].length
+        );
       }
     );
 
@@ -40,6 +45,7 @@ const useCustomForm = (props = {}) => {
       ref: (el) => {
         elementRefs.current[name] = el;
       },
+      value: valueRefs.current[name],
       onChange: (e) => {
         const { value } = onChange(e).target;
         valueRefs.current[name] = value;
@@ -77,10 +83,10 @@ const useCustomForm = (props = {}) => {
     }
   };
 
-  const reset = () => {
-    valueRefs.current = defaultValues;
+  const reset = (defValue = defaultValues) => {
+    valueRefs.current = defValue;
     formOption.current = {};
-    setWatchValue(defaultValues);
+    setWatchValue(defValue);
   };
 
   const handleSubmit = (callback) => () => {
