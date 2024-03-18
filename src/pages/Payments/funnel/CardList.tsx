@@ -62,9 +62,12 @@ export const CardList = () => {
               <div className='flex-row-between w-50'>
                 <div className='card-name'>{cardName}</div>
                 <span>|</span>
-                <div className='card-name' onClick={() => handleDelete(card)}>
+                <button
+                  className='card-name button-reset'
+                  onClick={() => handleDelete(card)}
+                >
                   삭제
-                </div>
+                </button>
               </div>
             </div>
           );

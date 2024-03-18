@@ -47,7 +47,9 @@ export const AddCard = () => {
 
   return (
     <div>
-      <h2 className='page-title' onClick={handlePrev}>{`< 카드 추가`}</h2>
+      <button onClick={handlePrev} className='button-reset'>
+        <h2 className='page-title'>{`< 카드 추가`}</h2>
+      </button>
       <Card data={values as unknown as CardData} isComplete={false} />
 
       <CardInput.Number formMethods={formMethods} />
@@ -58,9 +60,11 @@ export const AddCard = () => {
 
       {isAllFieldsFulfilled && (
         <div className='button-box' onClick={handleNext}>
-          <span className={`button-text button-activate ${optaionalClassName}`}>
+          <button
+            className={`button-text button-reset button-activate ${optaionalClassName}`}
+          >
             다음
-          </span>
+          </button>
         </div>
       )}
     </div>

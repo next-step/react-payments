@@ -10,3 +10,8 @@
 .button-activate:hover {
   cursor: pointer;
 }
+
+.button-reset {
+  border: none;
+  background: transparent;
+}
