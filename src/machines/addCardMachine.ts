@@ -301,8 +301,7 @@ export const addCardMachine = createMachine(
 
 				if (
 					event.type === 'CHANGE_FIELD' &&
-					event.field !== 'cardCompanyCode' &&
-					context.cardInfo.cardCompanyCode === ''
+					(event.field === 'cardNumberSecondSegment' || event.field === 'cardNumberFirstSegment')
 				) {
 					enqueue.raise({ type: 'INFER_CARD_COMPANY_CODE' });
 				}
