@@ -87,7 +87,7 @@ const CardList = ({ cardList, onNext }: CardListProps) => {
 									onClick={() => {
 										send({ type: "DELETE_CARD", value: card.id });
 									}}
-									buttonColor='main'
+									buttonColor='blue400'
 									color='white'
 									height={2}
 									width={65}

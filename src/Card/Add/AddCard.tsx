@@ -288,7 +288,7 @@ const AddCard = ({ card, onNext, onPrev }: AddCardProps) => {
 			</BottomSheet>
 			{!!isAllInputFilled && (
 				<BottomFixedButton width={20} onClick={onClickNext}>
-					<Text.Span color='cyan' fontSize={14}>
+					<Text.Span color='cyan500' fontSize={14}>
 						다음
 					</Text.Span>
 				</BottomFixedButton>

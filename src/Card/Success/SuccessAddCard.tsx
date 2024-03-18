@@ -62,7 +62,7 @@ const SuccessAddCard = ({ card, onNext }: SuccessAddCardProps) => {
 				/>
 			</CardWrapper>
 			<BottomFixedButton width={20} onClick={onNext}>
-				<Text.Span color='cyan' fontSize={14}>
+				<Text.Span color='cyan500' fontSize={14}>
 					다음
 				</Text.Span>
 			</BottomFixedButton>

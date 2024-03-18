@@ -26,7 +26,7 @@ interface CardProps {
 const Card = ({
 	size,
 	children,
-	color = theme.colors.cyan[500],
+	color = theme.colors.cyan500,
 	onClick
 }: CardProps) => {
 	return (
