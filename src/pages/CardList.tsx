@@ -1,7 +1,8 @@
 import React from 'react'
 import Title from '../components/Title.tsx'
+import { PAGE_TYPE } from '../App.tsx'
 
-const CardList = () => {
+const CardList = ({ setPage }: { setPage: (step: PAGE_TYPE) => void }) => {
   return (
     <>
       <h2>5️⃣ 카드 목록</h2>
@@ -31,7 +32,9 @@ const CardList = () => {
           </div>
           <span className="card-nickname">법인카드</span>
           <div className="card-box">
-            <div className="empty-card">+</div>
+            <button onClick={() => setPage('카드추가')} className="empty-card">
+              +
+            </button>
           </div>
         </div>
       </div>

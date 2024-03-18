@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import Card, { CardInputProps } from '../../components/Card.tsx'
 import Button from '../../components/Button.tsx'
-import { useNavigate } from 'react-router-dom'
 import Title from '../../components/Title.tsx'
 
-const FinishAddingCard = ({ props }: { props: CardInputProps }) => {
+const FinishAddingCard = ({
+  props,
+  handleSubmit,
+}: {
+  props: CardInputProps
+  handleSubmit: () => void
+}) => {
   const [cardNickname, setCardNickname] = useState<string>('')
-  const navigate = useNavigate()
-  const handleOnClick = () => {
-    navigate('/list')
-  }
 
   return (
     <>
@@ -27,7 +28,7 @@ const FinishAddingCard = ({ props }: { props: CardInputProps }) => {
               onChange={(e) => setCardNickname(e.target.value)}
             />
           </div>
-          <Button onClick={handleOnClick}>확인</Button>
+          <Button onClick={handleSubmit}>확인</Button>
         </div>
       </div>
     </>

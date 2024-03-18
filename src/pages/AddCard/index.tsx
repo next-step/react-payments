@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import AddCardInfo from './AddCard.tsx'
 import FinishAddingCard from './FinishAddingCard.tsx'
+import { PAGE_TYPE } from '../../App.tsx'
 
 export interface CardData {
   cardNumberOne: string
@@ -14,7 +15,7 @@ export interface CardData {
   cardPasswordOne: string
   cardPasswordTwo: string
 }
-const AddCard = () => {
+const AddCard = ({ setPage }: { setPage: (step: PAGE_TYPE) => void }) => {
   const [step, setStep] = useState<'카드정보' | '카드선택' | '생성완료'>(
     '카드정보'
   )
@@ -41,6 +42,9 @@ const AddCard = () => {
           handleSubmit={() => {
             setStep('생성완료')
           }}
+          handleBack={() => {
+            setPage('카드목록')
+          }}
         />
       )}
       {/* {step==='카드선택'&& <ChooseCard />} */}
@@ -52,6 +56,9 @@ const AddCard = () => {
             ownerName: inputs.ownerName,
             expiredMonth: inputs.expiredMonth,
             expiredYear: inputs.expiredYear,
+          }}
+          handleSubmit={() => {
+            setPage('카드목록')
           }}
         />
       )}

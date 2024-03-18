@@ -5,7 +5,6 @@ import Input from '../../components/Input.tsx'
 import Button from '../../components/Button.tsx'
 import Title from '../../components/Title.tsx'
 import IconButton from '../../components/IconButton.tsx'
-import { useNavigate } from 'react-router-dom'
 import { CardData } from './index.tsx'
 
 const CARD_ONE_SECTION_NUMBER_LENGTH = 4
@@ -15,10 +14,12 @@ const AddCardInfo = ({
   handleSubmit,
   inputs,
   setInputs,
+  handleBack,
 }: {
   handleSubmit: () => void
   inputs: CardData
   setInputs: (cardData: CardData) => void
+  handleBack: () => void
 }) => {
   const handleChangeExpiredMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (
@@ -35,18 +36,13 @@ const AddCardInfo = ({
     setInputs({ ...inputs, expiredYear: e.target.value })
   }
 
-  const navigate = useNavigate()
-  const handleOnClick = () => {
-    navigate('/list')
-  }
-
   return (
     <>
       <div className="root">
         <div className="app">
           <Title>
             <IconButton
-              onClick={handleOnClick}
+              onClick={handleBack}
               file={'/icons/back.svg'}
             ></IconButton>
             카드 추가
