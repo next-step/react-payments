@@ -102,7 +102,8 @@ type CardEvent =
 	| { type: "CHANGE_CARD_NAME"; value: string }
 	| { type: "CARD_INFO_CHECK" }
 	| { type: "CARD_NAME_CHECK" }
-	| { type: "SET_CARD_COMPANY_NAME_TO_CARD_NAME" };
+	| { type: "SET_CARD_COMPANY_NAME_TO_CARD_NAME" }
+	| { type: "DELETE_CARD"; value: number };
 
 export const cardMachine = setup({
 	types: {} as {
@@ -209,6 +210,12 @@ export const cardMachine = setup({
 					cardName: context.card.companyName
 				};
 			}
+		}),
+		DELETE_CARD: assign({
+			cards: ({ context, event }) => {
+				assertEvent(event, "DELETE_CARD");
+				return context.cards.filter((card) => card.id !== event.value);
+			}
 		})
 	},
 	schemas: {
@@ -259,6 +266,11 @@ export const cardMachine = setup({
 			initial: "info",
 			onDone: {
 				target: "ADD"
+			},
+			on: {
+				DELETE_CARD: {
+					actions: "DELETE_CARD"
+				}
 			},
 			states: {
 				info: {
