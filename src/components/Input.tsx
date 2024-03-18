@@ -64,7 +64,7 @@ const Input = (props: InputProps) => {
       <StyledInput
         id={props?.label}
         value={props?.value}
-        type={props?.type ? props?.type : 'text'}
+        type={props?.type ?? 'text'}
         className="input-basic"
         placeholder={props?.placeholder ? props?.placeholder : ''}
         maxLength={props?.maxLength}

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import CardNumberInput from '../../components/CardNumberInput.tsx'
 import DateInput from '../../components/DateInput.tsx'
 import Input from '../../components/Input.tsx'
@@ -18,80 +18,22 @@ const AddCardInfo = ({
 }: {
   handleSubmit: () => void
   inputs: CardData
-  setInputs: React.Dispatch<React.SetStateAction<CardData>>
+  setInputs: (cardData: CardData) => void
 }) => {
-  useEffect(() => {
-    if (!numeric_only_regex.test(inputs.CVC)) {
-      alert('CVC 형식이 틀렸습니다.')
-
-      setInputs({
-        ...inputs,
-        CVC: '',
-      })
-
-      return
-    }
-  }, [inputs.CVC])
-
-  useEffect(() => {
+  const handleChangeExpiredMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (
       !numeric_only_regex.test(String(inputs.expiredMonth)) ||
       parseInt(inputs.expiredMonth) > 12
     ) {
       alert('카드 만료 날짜 - 월을 확인해주세요.')
-
-      setInputs({
-        ...inputs,
-        expiredMonth: '',
-      })
-
       return
     }
-  }, [inputs.expiredMonth])
+    setInputs({ ...inputs, expiredMonth: e.target.value })
+  }
 
-  useEffect(() => {
-    if (!numeric_only_regex.test(inputs.cardNumberOne)) {
-      alert('카드 번호는 숫자만 입력 가능합니다.')
-
-      setInputs({
-        ...inputs,
-        cardNumberOne: '',
-      })
-      return
-    }
-    if (!numeric_only_regex.test(inputs.cardNumberTwo)) {
-      alert('카드 번호는 숫자만 입력 가능합니다.')
-
-      setInputs({
-        ...inputs,
-        cardNumberTwo: '',
-      })
-      return
-    }
-    if (!numeric_only_regex.test(inputs.cardNumberThree)) {
-      alert('카드 번호는 숫자만 입력 가능합니다.')
-
-      setInputs({
-        ...inputs,
-        cardNumberThree: '',
-      })
-      return
-    }
-    if (!numeric_only_regex.test(inputs.cardNumberFour)) {
-      alert('카드 번호는 숫자만 입력 가능합니다.')
-
-      setInputs({
-        ...inputs,
-        cardNumberFour: '',
-      })
-      return
-    }
-  }, [
-    inputs.cardNumberOne,
-    inputs.cardNumberTwo,
-    inputs.cardNumberThree,
-    inputs.cardNumberFour,
-  ])
+  const handleChangeExpiredYear = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputs({ ...inputs, expiredYear: e.target.value })
+  }
 
   const navigate = useNavigate()
   const handleOnClick = () => {
@@ -144,7 +86,9 @@ const AddCardInfo = ({
                   maxLength: CARD_ONE_SECTION_NUMBER_LENGTH,
                   value: inputs.cardNumberOne,
                   onChange: (e) => {
-                    setInputs({ ...inputs, cardNumberOne: e.target.value })
+                    if (numeric_only_regex.test(e.target.value)) {
+                      setInputs({ ...inputs, cardNumberOne: e.target.value })
+                    }
                   },
                 },
                 {
@@ -152,7 +96,9 @@ const AddCardInfo = ({
                   maxLength: CARD_ONE_SECTION_NUMBER_LENGTH,
                   value: inputs.cardNumberTwo,
                   onChange: (e) => {
-                    setInputs({ ...inputs, cardNumberTwo: e.target.value })
+                    if (numeric_only_regex.test(e.target.value)) {
+                      setInputs({ ...inputs, cardNumberTwo: e.target.value })
+                    }
                   },
                 },
                 {
@@ -160,7 +106,9 @@ const AddCardInfo = ({
                   maxLength: CARD_ONE_SECTION_NUMBER_LENGTH,
                   value: inputs.cardNumberThree,
                   onChange: (e) => {
-                    setInputs({ ...inputs, cardNumberThree: e.target.value })
+                    if (numeric_only_regex.test(e.target.value)) {
+                      setInputs({ ...inputs, cardNumberThree: e.target.value })
+                    }
                   },
                 },
                 {
@@ -168,7 +116,9 @@ const AddCardInfo = ({
                   maxLength: CARD_ONE_SECTION_NUMBER_LENGTH,
                   value: inputs.cardNumberFour,
                   onChange: (e) => {
-                    setInputs({ ...inputs, cardNumberFour: e.target.value })
+                    if (numeric_only_regex.test(e.target.value)) {
+                      setInputs({ ...inputs, cardNumberFour: e.target.value })
+                    }
                   },
                 },
               ]}
@@ -179,12 +129,8 @@ const AddCardInfo = ({
             <DateInput
               expiredMonth={inputs.expiredMonth}
               expiredYear={inputs.expiredYear}
-              onChangeMonth={(e) => {
-                setInputs({ ...inputs, expiredMonth: e.target.value })
-              }}
-              onChangeYear={(e) => {
-                setInputs({ ...inputs, expiredYear: e.target.value })
-              }}
+              onChangeMonth={handleChangeExpiredMonth}
+              onChangeYear={handleChangeExpiredYear}
             />
           </div>
           <Input
@@ -204,7 +150,9 @@ const AddCardInfo = ({
             widthSize="md"
             value={inputs.CVC}
             onChange={(e) => {
-              setInputs({ ...inputs, CVC: e.target.value })
+              if (numeric_only_regex.test(e.target.value)) {
+                setInputs({ ...inputs, CVC: e.target.value })
+              }
             }}
           />
           <div className="input-container">
