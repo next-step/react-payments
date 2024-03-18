@@ -1,8 +1,8 @@
 import { useCardInput } from '@/components/pages/CardCreate/useCardInput';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import chevronLeft from '@assets/icon/chevron_left_24.svg';
-import { Box, Button, Container, HFlex, Text } from '@components/atoms';
-import { Header } from '@components/molecules';
+import { Box, Button, Container, HFlex, Text, VFlex } from '@components/atoms';
+import { Header, TextField } from '@components/molecules';
 import { CreditCardCompanyPicker, CreditCardTextFields } from '@components/organisms';
 import { useRef, useState } from 'react';
 
@@ -14,6 +14,7 @@ interface Props {
 export default function CreateCardForm({ onNext, onPrev }: Props) {
   const {
     fields,
+    isErrorField,
     handleCardNumberInputChange,
     handleCardPasswordInputChange,
     handleExpirationMonthInputChange,
@@ -25,8 +26,9 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
   const colorPickerRef = useRef<HTMLDivElement>(null);
   const [showColorPicker, setShowColorPicker] = useState(false);
 
-  const areAllInputsFilled = Object.values(fields).some((value) => value === '');
-  const disableNextButton = areAllInputsFilled;
+  const areAllInputsFilled = Object.values(fields).every((value) => value.trim() !== '');
+  const areAllInputsValid = Object.values(isErrorField).every((value) => !value);
+  const disableNextButton = !areAllInputsFilled || !areAllInputsValid;
 
   const handleNextClick = () => {
     setShowColorPicker(true);
@@ -52,18 +54,27 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
 
       <Box className="my-4 space-y-6">
         <CreditCardTextFields.CardNumber value={fields.cardNumber} onChange={handleCardNumberInputChange} />
-        <HFlex className="gap-4">
-          <CreditCardTextFields.ExpirationDate
-            dateType="month"
-            value={fields.expirationMonth}
-            onChange={handleExpirationMonthInputChange}
-          />
-          <CreditCardTextFields.ExpirationDate
-            dateType="year"
-            value={fields.expirationYear}
-            onChange={handleExpirationYearInputChange}
-          />
-        </HFlex>
+
+        <VFlex className="gap-2">
+          <HFlex className="gap-4">
+            <CreditCardTextFields.ExpirationDate
+              dateType="month"
+              value={fields.expirationMonth}
+              onChange={handleExpirationMonthInputChange}
+            />
+
+            <CreditCardTextFields.ExpirationDate
+              dateType="year"
+              value={fields.expirationYear}
+              onChange={handleExpirationYearInputChange}
+            />
+          </HFlex>
+          {isErrorField.expirationMonth && (
+            <TextField.HelperText error size="sm">
+              유효한 월을 입력해주세요.
+            </TextField.HelperText>
+          )}
+        </VFlex>
         <CreditCardTextFields.OwnerName value={fields.ownerName} onChange={handleOwnerNameInputChange} />
         <CreditCardTextFields.VerificationCode
           value={fields.verificationCode}

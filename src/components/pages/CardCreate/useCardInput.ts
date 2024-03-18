@@ -1,8 +1,9 @@
 import { ChangeEvent } from 'react';
-import { CardFormFields, useProvidedCardFormContext } from './CardFormContext';
+import { CardFormFieldErrors, CardFormFields, useProvidedCardFormContext } from './CardFormContext';
 
 type UseCardInputHook = {
   fields: CardFormFields;
+  isErrorField: CardFormFieldErrors;
   handleCardNumberInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleExpirationMonthInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleExpirationYearInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -12,7 +13,7 @@ type UseCardInputHook = {
 };
 export const useCardInput = (): UseCardInputHook => {
   const {
-    state: { fields },
+    state: { fields, isErrorField },
     handleCardNumberInputChange,
     handleCardPasswordInputChange,
     handleExpirationMonthInputChange,
@@ -23,6 +24,7 @@ export const useCardInput = (): UseCardInputHook => {
 
   return {
     fields,
+    isErrorField,
     handleCardNumberInputChange,
     handleCardPasswordInputChange,
     handleExpirationMonthInputChange,

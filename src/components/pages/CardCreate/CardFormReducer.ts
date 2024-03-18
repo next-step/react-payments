@@ -1,3 +1,4 @@
+import { isMonth } from '@/utils/is';
 import { keepOnlyAlphabetHangulAndSpace, keepOnlyNumeric } from '@/utils/regex';
 import { CardFormState } from './CardFormContext';
 
@@ -35,10 +36,15 @@ const reducer = (state: CardFormState, action: ReducerAction) => {
     case REDUCER_ACTION_TYPE.UPDATE_EXPIRATION_MONTH:
       if (!action.payload) {
         clonedState.fields.expirationMonth = '';
+        clonedState.isErrorField.expirationMonth = false;
+        return clonedState;
+      } else {
+        clonedState.fields.expirationMonth = keepOnlyNumeric(action.payload);
+        const monthValue = clonedState.fields.expirationMonth;
+        clonedState.isErrorField.expirationMonth = !isMonth(monthValue) || monthValue.length < 2;
+
         return clonedState;
       }
-      clonedState.fields.expirationMonth = keepOnlyNumeric(action.payload);
-      return clonedState;
 
     case REDUCER_ACTION_TYPE.UPDATE_EXPIRATION_YEAR:
       if (!action.payload) {

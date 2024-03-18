@@ -1,4 +1,5 @@
 import { HFlex, Text, VFlex } from '@/components/atoms';
+import { TextProps } from '@/components/atoms/Text';
 import { TYPOGRAPHY_SIZE_MAP } from '@/styles/guide';
 import { ComponentProps, useId } from 'react';
 import { twJoin, twMerge } from 'tailwind-merge';
@@ -67,3 +68,15 @@ export default function TextField({
     </VFlex>
   );
 }
+
+interface HelperTextProps extends TextProps {
+  error?: boolean;
+}
+
+const HelperText = ({ children, error, size = 'base', className, ...rest }: HelperTextProps) => (
+  <Text size={size} className={twMerge(twJoin(error ? 'text-red-600' : 'text-[#525252]'), className)} {...rest}>
+    {children}
+  </Text>
+);
+
+TextField.HelperText = HelperText;
