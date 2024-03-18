@@ -22,10 +22,9 @@ const AddCardInfo = ({
   handleBack: () => void
 }) => {
   const handleChangeExpiredMonth = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (
-      !numeric_only_regex.test(String(inputs.expiredMonth)) ||
-      parseInt(inputs.expiredMonth) > 12
-    ) {
+    if (!numeric_only_regex.test(String(e.target.value))) {
+      return
+    } else if (parseInt(e.target.value) > 12) {
       alert('카드 만료 날짜 - 월을 확인해주세요.')
       return
     }
@@ -123,10 +122,21 @@ const AddCardInfo = ({
           <div className="input-container">
             <span className="input-title">만료일</span>
             <DateInput
-              expiredMonth={inputs.expiredMonth}
-              expiredYear={inputs.expiredYear}
-              onChangeMonth={handleChangeExpiredMonth}
-              onChangeYear={handleChangeExpiredYear}
+              divider="/"
+              inputs={[
+                {
+                  value: inputs.expiredMonth,
+                  onChange: handleChangeExpiredMonth,
+                  placeholder: 'MM',
+                  maxLength: 2,
+                },
+                {
+                  value: inputs.expiredYear,
+                  onChange: handleChangeExpiredYear,
+                  placeholder: 'YY',
+                  maxLength: 2,
+                },
+              ]}
             />
           </div>
           <Input

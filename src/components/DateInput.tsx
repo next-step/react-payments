@@ -16,38 +16,32 @@ export const InputStyle = styled.span`
     border-radius: 0.25rem;
   }
 `
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
 const DateInput = ({
-  expiredMonth,
-  expiredYear,
-  onChangeMonth,
-  onChangeYear,
+  divider,
+  inputs,
 }: {
-  expiredMonth: string
-  expiredYear: string
-  onChangeMonth: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onChangeYear: (e: React.ChangeEvent<HTMLInputElement>) => void
+  divider: string
+  inputs: React.ComponentPropsWithoutRef<'input'>[]
 }) => {
   return (
     <div className="input-box w-50">
-      <InputStyle>
-        <input
-          type="text"
-          value={expiredMonth}
-          maxLength={2}
-          placeholder="MM"
-          onChange={onChangeMonth}
-        />
-      </InputStyle>
-      {expiredMonth && '/'}
-      <InputStyle>
-        <input
-          type="text"
-          value={expiredYear}
-          maxLength={2}
-          placeholder="YY"
-          onChange={onChangeYear}
-        />
-      </InputStyle>
+      {inputs.map((input, index) => {
+        return (
+          <Wrapper key={index}>
+            <InputStyle>
+              <input {...input} type="text" />
+            </InputStyle>
+            {index + 1 < inputs.length &&
+              String(input.value).length === input.maxLength && (
+                <span>{divider}</span>
+              )}
+          </Wrapper>
+        )
+      })}
     </div>
   )
 }
