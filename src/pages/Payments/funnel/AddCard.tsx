@@ -41,7 +41,7 @@ export const AddCard = () => {
       };
     });
 
-    setStep(STEP.ADD_CARD_COMPLETE);
+    setStep(STEP.CARD_CONFIG);
   };
 
   const isAllFieldsFulfilled = Object.values(errors).every((error) => !error);

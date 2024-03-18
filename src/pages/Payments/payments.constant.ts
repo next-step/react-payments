@@ -6,6 +6,6 @@ export const STEP = {
   INITIAL_STEP: 'cardList',
   CARD_LIST: 'cardList',
   ADD_CARD: 'addCard',
-  ADD_CARD_COMPLETE: 'addCardComplete',
+  CARD_CONFIG: 'cardConfig',
   CARD_PAYMENT: 'cardPayment',
 } as const;

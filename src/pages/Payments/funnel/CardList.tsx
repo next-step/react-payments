@@ -26,7 +26,7 @@ export const CardList = () => {
       };
     });
 
-    setStep(STEP.ADD_CARD_COMPLETE);
+    setStep(STEP.CARD_CONFIG);
   };
 
   const handleDelete = (card: CardData) => {
