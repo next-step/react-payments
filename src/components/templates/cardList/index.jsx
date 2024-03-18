@@ -5,13 +5,21 @@ import Card from "../../molecules/card";
 import { useFormContext } from "../../../hooks/useFormProvider";
 
 const CardList = (props) => {
-  const { cardData, next } = props;
+  const { cardData, setCardData, next } = props;
   const { reset } = useFormContext();
   const cardList = Object.values(cardData);
 
   const handleUpdateCard = (data) => {
     reset(data);
     next();
+  };
+
+  const handleDeleteCard = (id) => {
+    setCardData((prev) => {
+      delete prev[id];
+
+      return { ...prev };
+    });
   };
 
   return (
@@ -21,12 +29,20 @@ const CardList = (props) => {
       </Box>
 
       {cardList.map((data, idx) => (
-        <button key={idx} onClick={() => handleUpdateCard(data)}>
-          <Card {...data} />
-          <Text as="span" className={"card-nickname"}>
-            {data.nickname}
-          </Text>
-        </button>
+        <Box className="card-item" key={idx}>
+          <button onClick={() => handleUpdateCard(data)}>
+            <Card {...data} />
+            <Text as="span" className={"card-nickname"}>
+              {data.nickname}
+            </Text>
+          </button>
+          <button
+            className="card-delete-button"
+            onClick={() => handleDeleteCard(data.id)}
+          >
+            X
+          </button>
+        </Box>
       ))}
 
       <button onClick={next}>
@@ -37,6 +53,7 @@ const CardList = (props) => {
 };
 
 CardList.propTypes = {
+  setCardData: PropTypes.func,
   cardData: PropTypes.object,
   next: PropTypes.func,
 };

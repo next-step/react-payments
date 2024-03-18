@@ -26,7 +26,7 @@ const Home = () => {
     <FormProvider {...form}>
       <Funnel steps={["list", "form", "success"]}>
         <Funnel.Step name="list">
-          <CardList cardData={cardData} />
+          <CardList cardData={cardData} setCardData={setCardData} />
         </Funnel.Step>
         <Funnel.Step name="form">
           <CardForm />
