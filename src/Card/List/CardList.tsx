@@ -4,7 +4,9 @@ import { maskStringAfterIndex } from "@/common/utils";
 import { convertObjectValuesToString } from "@/common/utils/object";
 import { CardFunnelProps } from "@/pages/CardFunnel";
 import styled from "@emotion/styled";
+import { CARD_COLOR_MAP } from "../constants/cardCompany";
 import { CardInfo } from "../types/card";
+import { CARD_COMPANY } from "../types/cardCompany";
 import Card from "../ui/Card/Card";
 import EmptyCard from "../ui/Card/EmptyCard";
 
@@ -20,7 +22,10 @@ const CardList = ({ cardList, onNext }: CardListProps) => {
 				{cardList.map((card) => {
 					return (
 						<CardWrapper key={card.id}>
-							<Card size={"small"}>
+							<Card
+								size={"small"}
+								color={CARD_COLOR_MAP[card.bankName as CARD_COMPANY]}
+							>
 								<Card.Top>
 									<Card.CardCompany text={card.bankName} />
 								</Card.Top>
