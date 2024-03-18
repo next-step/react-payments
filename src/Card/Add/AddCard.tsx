@@ -58,7 +58,7 @@ const AddCard = ({ card, onNext, onPrev }: AddCardProps) => {
 	};
 
 	const isAllInputFilled =
-		card.bankName.length &&
+		card.companyName.length &&
 		Object.values(card.cardNumber).every(
 			(value) => value.length === CARD_NUMBER_LENGTH
 		) &&
@@ -77,9 +77,9 @@ const AddCard = ({ card, onNext, onPrev }: AddCardProps) => {
 					onPrev();
 				}}
 			/>
-			{!card.bankName.length && (
+			{!card.companyName.length && (
 				<EmptyCard mode='add' onClick={open}>
-					<EmptyCard.CardCompany text={`${card.bankName}`} />
+					<EmptyCard.CardCompany text={`${card.companyName}`} />
 					<EmptyCard.Chip />
 					<EmptyCard.CardNumber
 						text={maskStringAfterIndex(
@@ -91,14 +91,14 @@ const AddCard = ({ card, onNext, onPrev }: AddCardProps) => {
 					<EmptyCard.ExpirationDate month={month || "MM"} year={year || "YY"} />
 				</EmptyCard>
 			)}
-			{!!card.bankName.length && (
+			{!!card.companyName.length && (
 				<Card
 					size='small'
 					onClick={open}
-					color={CARD_COLOR_MAP[card.bankName as CARD_COMPANY]}
+					color={CARD_COLOR_MAP[card.companyName as CARD_COMPANY]}
 				>
 					<Card.Top>
-						<Card.CardCompany text={`${card.bankName}카드`} />
+						<Card.CardCompany text={`${card.companyName}카드`} />
 					</Card.Top>
 					<Card.Middle>
 						<Card.Chip />
@@ -278,7 +278,10 @@ const AddCard = ({ card, onNext, onPrev }: AddCardProps) => {
 			<BottomSheet isOpen={isOpen} onClose={close}>
 				<CardCompanyList
 					onClick={(cardCompany) => {
-						send({ type: "CHANGE_BANK_NAME", value: cardCompany.bankName });
+						send({
+							type: "CHANGE_CARD_COMPANY_NAME",
+							value: cardCompany.companyName
+						});
 						close();
 					}}
 				/>

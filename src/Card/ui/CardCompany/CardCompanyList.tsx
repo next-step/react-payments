@@ -11,11 +11,11 @@ const CardCompanyList = ({ onClick }: CardCompanyListProps) => {
 	return (
 		<CardListContainer>
 			{CARD_COMPANIES.map((card) => (
-				<CardCompanyWrapper key={card.bankName}>
+				<CardCompanyWrapper key={card.companyName}>
 					<CardCompany
 						onClick={() => onClick(card)}
 						color={card.color}
-						company={card.bankName}
+						company={card.companyName}
 					/>
 				</CardCompanyWrapper>
 			))}

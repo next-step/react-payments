@@ -24,10 +24,10 @@ const CardList = ({ cardList, onNext }: CardListProps) => {
 						<CardWrapper key={card.id}>
 							<Card
 								size={"small"}
-								color={CARD_COLOR_MAP[card.bankName as CARD_COMPANY]}
+								color={CARD_COLOR_MAP[card.companyName as CARD_COMPANY]}
 							>
 								<Card.Top>
-									<Card.CardCompany text={`${card.bankName}카드`} />
+									<Card.CardCompany text={`${card.companyName}카드`} />
 								</Card.Top>
 								<Card.Middle>
 									<Card.Chip />

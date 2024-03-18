@@ -3,7 +3,7 @@ import { CardInfo } from "../types/card";
 export const makeNewCard = (currentCardLength: number) =>
 	({
 		id: currentCardLength + 1,
-		bankName: "",
+		companyName: "",
 		cardNumber: {
 			first: "",
 			second: "",

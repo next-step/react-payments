@@ -11,7 +11,7 @@ import { assertEvent, assign, setup } from "xstate";
 const TEMP_CARD_LIST: CardInfo[] = [
 	{
 		id: 1,
-		bankName: "포코",
+		companyName: "포코",
 		cardNumber: {
 			first: "1111",
 			second: "2222",
@@ -32,7 +32,7 @@ const TEMP_CARD_LIST: CardInfo[] = [
 	},
 	{
 		id: 2,
-		bankName: "현석",
+		companyName: "현석",
 		cardNumber: {
 			first: "1111",
 			second: "2222",
@@ -55,7 +55,7 @@ const TEMP_CARD_LIST: CardInfo[] = [
 
 const DEFAULT_CARD: CardInfo = {
 	id: 0,
-	bankName: "",
+	companyName: "",
 	cardNumber: {
 		first: "",
 		second: "",
@@ -85,7 +85,7 @@ type CardEvent =
 	| { type: "MAKE_NEW_CARD" }
 	| { type: "RESET_CARD" }
 	| { type: "NEXT" }
-	| { type: "CHANGE_BANK_NAME"; value: string }
+	| { type: "CHANGE_CARD_COMPANY_NAME"; value: string }
 	| {
 			type: "CHANGE_CARD_NUMBER";
 			name: keyof CardInfo["cardNumber"];
@@ -102,7 +102,7 @@ type CardEvent =
 	| { type: "CHANGE_CARD_NAME"; value: string }
 	| { type: "CARD_INFO_CHECK" }
 	| { type: "CARD_NAME_CHECK" }
-	| { type: "SET_BANK_NAME_TO_CARD_NAME" };
+	| { type: "SET_CARD_COMPANY_NAME_TO_CARD_NAME" };
 
 export const cardMachine = setup({
 	types: {} as {
@@ -130,12 +130,12 @@ export const cardMachine = setup({
 				};
 			}
 		}),
-		CHANGE_BANK_NAME: assign({
+		CHANGE_CARD_COMPANY_NAME: assign({
 			card: ({ context, event }) => {
-				assertEvent(event, "CHANGE_BANK_NAME");
+				assertEvent(event, "CHANGE_CARD_COMPANY_NAME");
 				return {
 					...context.card,
-					bankName: event.value
+					companyName: event.value
 				};
 			}
 		}),
@@ -202,11 +202,11 @@ export const cardMachine = setup({
 				};
 			}
 		}),
-		SET_BANK_NAME_TO_CARD_NAME: assign({
+		SET_CARD_COMPANY_NAME_TO_CARD_NAME: assign({
 			card: ({ context }) => {
 				return {
 					...context.card,
-					cardName: context.card.bankName
+					cardName: context.card.companyName
 				};
 			}
 		})
@@ -263,8 +263,8 @@ export const cardMachine = setup({
 			states: {
 				info: {
 					on: {
-						CHANGE_BANK_NAME: {
-							actions: "CHANGE_BANK_NAME"
+						CHANGE_CARD_COMPANY_NAME: {
+							actions: "CHANGE_CARD_COMPANY_NAME"
 						},
 						CHANGE_CARD_NUMBER: {
 							actions: "CHANGE_CARD_NUMBER"
@@ -307,7 +307,7 @@ export const cardMachine = setup({
 							},
 							{
 								target: "FINISH",
-								actions: "SET_BANK_NAME_TO_CARD_NAME"
+								actions: "SET_CARD_COMPANY_NAME_TO_CARD_NAME"
 							}
 						]
 					}

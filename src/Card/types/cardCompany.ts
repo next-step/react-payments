@@ -9,6 +9,6 @@ export type CARD_COMPANY =
 	| "신냥";
 
 export interface CardCompanyInfo {
-	bankName: CARD_COMPANY;
+	companyName: CARD_COMPANY;
 	color: string;
 }
