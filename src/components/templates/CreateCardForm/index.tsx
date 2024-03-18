@@ -28,7 +28,7 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
 
   const expirationYearRef = useRef<HTMLInputElement>(null);
 
-  const handleExpirationMonthKeyUp = () => {
+  const handleExpirationMonthInputKeyUp = () => {
     if (isErrorField.expirationMonth) return;
 
     expirationYearRef.current?.focus();
@@ -69,7 +69,7 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
               dateType="month"
               value={fields.expirationMonth}
               onChange={handleExpirationMonthInputChange}
-              onKeyUp={handleExpirationMonthKeyUp}
+              onKeyUp={handleExpirationMonthInputKeyUp}
             />
 
             <CreditCardTextFields.ExpirationDate
