@@ -1,11 +1,10 @@
-import useStepContext from '@/provider/step-provider/useStepContext';
-
+import useStepContext from '@/provider/step-provider/hook/useStepContext';
 import CardInfoProvider from '@/provider/card-info-provider/CardInfoProvider';
 import ModalProvider from '@/provider/modal-provider/ModalProvider';
-import {AddCard, CardList, CardRegisterComplete} from '.';
+import { AddCard, CardList, CardRegisterComplete } from '.';
 
 const Stepper = () => {
-  const {route} = useStepContext();
+  const { route } = useStepContext();
 
   if (route === 'LIST') {
     return <CardList />;

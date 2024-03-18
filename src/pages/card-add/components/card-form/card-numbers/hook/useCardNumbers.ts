@@ -2,10 +2,14 @@ import { CARD_NUMBER_LIMIT } from '@/domain/constant';
 import { validCardNumber } from '@/domain/validate';
 import useInputFocus from '@/pages/card-add/hook/useInputFocus';
 import useCardContext from '@/provider/card-info-provider/hook/useCardContext';
-import { type ChangeEvent } from 'react';
+import { RefObject, type ChangeEvent } from 'react';
 
 const REF_SIZE = 3;
-const useNumbers = ({ nextFocus }: { nextFocus: any }) => {
+
+type UseNumbers = {
+  nextFocus: RefObject<HTMLInputElement>;
+};
+const useNumbers = ({ nextFocus }: UseNumbers) => {
   const {
     cardState: { cardNumbers },
     handleCardState,
@@ -32,7 +36,7 @@ const useNumbers = ({ nextFocus }: { nextFocus: any }) => {
       }
 
       if (name === 'fourth' && value.length === CARD_NUMBER_LIMIT) {
-        nextFocus.current.focus();
+        nextFocus?.current?.focus();
       }
     }
   };

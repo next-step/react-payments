@@ -2,10 +2,15 @@ import { CARD_EXPIRATION_DATE_LIMIT, REGEX } from '@/domain/constant';
 import { validExpirationDate } from '@/domain/validate';
 import useInputFocus from '@/pages/card-add/hook/useInputFocus';
 import useCardContext from '@/provider/card-info-provider/hook/useCardContext';
-import { type ChangeEvent } from 'react';
+import { type RefObject, type ChangeEvent } from 'react';
 
 const REF_SIZE = 1;
-const useCardExpirationDate = ({ nextFocus }: { nextFocus: any }) => {
+
+type UseCardExpirationDate = {
+  nextFocus: RefObject<HTMLInputElement>;
+};
+
+const useCardExpirationDate = ({ nextFocus }: UseCardExpirationDate) => {
   const {
     cardState: { month, year },
     handleCardState,
@@ -35,7 +40,7 @@ const useCardExpirationDate = ({ nextFocus }: { nextFocus: any }) => {
       }
 
       if (value.length === CARD_EXPIRATION_DATE_LIMIT) {
-        nextFocus.current.focus();
+        nextFocus?.current?.focus();
       }
     }
   };

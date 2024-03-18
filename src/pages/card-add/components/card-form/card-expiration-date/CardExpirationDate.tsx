@@ -1,10 +1,14 @@
 import Input from '@/components/common/input/Input';
 import useCardExpirationDate from './hook/useCardExpirationDate';
 import { CARD_EXPIRATION_DATE_LIMIT } from '@/domain/constant';
-import { type ForwardedRef, forwardRef } from 'react';
+import { type ForwardedRef, forwardRef, type RefObject } from 'react';
+
+type CardExpirationDateProps = {
+  nextFocus: RefObject<HTMLInputElement>;
+};
 
 const CardExpirationDate = forwardRef(
-  ({ nextFocus }: { nextFocus: any }, ref: ForwardedRef<HTMLInputElement>) => {
+  ({ nextFocus }: CardExpirationDateProps, ref: ForwardedRef<HTMLInputElement>) => {
     const { inputRef, month = '', year = '', handleChange } = useCardExpirationDate({ nextFocus });
     const [yearRef] = inputRef;
     return (
