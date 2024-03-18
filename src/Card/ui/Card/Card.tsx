@@ -1,3 +1,4 @@
+import { theme } from "@/common/utils";
 import styled from "@emotion/styled";
 import { ReactNode } from "react";
 import { CardSize } from "../../utils/style";
@@ -18,13 +19,22 @@ import { CardProvider } from "./provider/CardProvider";
 interface CardProps {
 	size: CardSize;
 	children: ReactNode;
+	color?: string;
+	onClick?: () => void;
 }
 
-const Card = ({ size, children }: CardProps) => {
+const Card = ({
+	size,
+	children,
+	color = theme.colors.cyan[500],
+	onClick
+}: CardProps) => {
 	return (
 		<CardProvider size={size}>
 			<CardBox>
-				<CardWrapper size={size}>{children}</CardWrapper>
+				<CardWrapper onClick={onClick} size={size} color={color}>
+					{children}
+				</CardWrapper>
 			</CardBox>
 		</CardProvider>
 	);
@@ -50,7 +60,7 @@ const CardWrapper = styled.div<CardProps>`
 	justify-content: center;
 	width: ${({ size }) => (size === "small" ? "208px" : "290px")};
 	height: ${({ size }) => (size === "small" ? "130px" : "180px")};
-	background: #94dacd;
+	background: ${({ color }) => color};
 	box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
 	border-radius: 5px;
 `;
