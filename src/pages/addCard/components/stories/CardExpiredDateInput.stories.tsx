@@ -3,7 +3,7 @@ import { CardExpiredDateInput } from '@pages/addCard/components';
 import { useCardExpiredDateInput } from '@pages/addCard/hooks';
 
 const meta = {
-	title: 'AddCard/CardExpiredDateInput',
+	title: 'PAGES/AddCard/CardExpiredDateInput',
 	component: CardExpiredDateInput,
 	parameters: {
 		layout: 'centered',

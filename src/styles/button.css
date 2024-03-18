@@ -2,6 +2,14 @@
 	width: 100%;
 }
 
+.bottom-button-box {
+	text-align: right;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 12px 24px;
+}
+
 .button-text {
 	margin-right: 10px;
 }

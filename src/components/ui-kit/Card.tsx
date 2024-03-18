@@ -1,4 +1,4 @@
-interface CardProps {
+export interface CardProps {
 	variant: 'empty-card' | 'small-card' | 'big-card';
 	children: React.ReactNode;
 }

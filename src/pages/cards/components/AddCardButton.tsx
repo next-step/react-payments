@@ -1,12 +1,12 @@
 import { Button, Card } from '@components/ui-kit';
+import { useStepper } from '@hooks';
 import { FaPlus } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
 
 export default function AddCardButton() {
-	const navigate = useNavigate();
+	const { dispatch } = useStepper();
 
 	const handleClick = () => {
-		navigate('/register');
+		dispatch({ type: 'toAddCard' });
 	};
 	return (
 		<Button onClick={handleClick}>

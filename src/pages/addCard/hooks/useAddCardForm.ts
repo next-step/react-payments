@@ -1,24 +1,21 @@
-import { useNavigate } from 'react-router-dom';
+import { useInput, useSetCards, useStepper } from '@hooks';
 import {
 	useCardExpiredDateInput,
 	useCardNumberInput,
 } from '@pages/addCard/hooks';
-import { useInput } from '@hooks';
+import { PaymentCardType } from '@types';
 import { isNumber } from '@utils';
+import { v4 as uuid } from 'uuid';
 
 export default function useAddCardForm() {
-	const navigate = useNavigate();
-	const {
-		value: cardNumber,
-		displayedValue: displayedCardNumber,
-		handleChange: handleCardNumberChange,
-	} = useCardNumberInput();
+	const { dispatch } = useStepper();
+	const setCards = useSetCards();
 
-	const {
-		value: cardExpiredDate,
-		displayedValue: displayedExpiredDate,
-		handleChange: handleCardExpiredDateChange,
-	} = useCardExpiredDateInput();
+	const { value: cardNumber, handleChange: handleCardNumberChange } =
+		useCardNumberInput();
+
+	const { value: cardExpiredDate, handleChange: handleCardExpiredDateChange } =
+		useCardExpiredDateInput();
 
 	const { value: cardHolderName, handleChange: handleCardHolderNameChange } =
 		useInput({});
@@ -39,11 +36,23 @@ export default function useAddCardForm() {
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		navigate('/');
+		const cardPassword = `${firstCardPassword}${secondCardPassword}`;
+		const paymentCard: PaymentCardType = {
+			id: uuid(),
+			cardNumber,
+			cardExpiredDate,
+			cardHolderName,
+			cardPassword,
+			cardSecurityCode,
+			createdAt: new Date(),
+			cardAlias: '',
+		};
+		setCards((prev) => [...prev, paymentCard]);
+		dispatch({ type: 'toEditCardAlias', payload: paymentCard });
 	};
 	return {
-		displayedCardNumber,
-		displayedExpiredDate,
+		cardNumber,
+		cardExpiredDate,
 		cardHolderName,
 		cardSecurityCode,
 		firstCardPassword,

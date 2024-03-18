@@ -8,11 +8,13 @@ import {
 } from '@pages/addCard/components';
 import { Button } from '@components/ui-kit';
 import { PaymentCard } from '@components/domain';
+import { useDisplayedCard } from '@hooks';
+import { useMemo } from 'react';
 
 export default function AddCardForm() {
 	const {
-		displayedCardNumber,
-		displayedExpiredDate,
+		cardNumber,
+		cardExpiredDate,
 		cardHolderName,
 		cardSecurityCode,
 		firstCardPassword,
@@ -26,11 +28,23 @@ export default function AddCardForm() {
 		handleSubmit,
 	} = useAddCardForm();
 
+	const { toDisplayedCardExpiredDate, toDisplayedCardNumber } =
+		useDisplayedCard();
+	const displayedCardNumber = useMemo(
+		() => toDisplayedCardNumber(cardNumber),
+		[cardNumber, toDisplayedCardNumber],
+	);
+	const displayedCardExpiredDate = useMemo(
+		() => toDisplayedCardExpiredDate(cardExpiredDate),
+		[cardExpiredDate, toDisplayedCardExpiredDate],
+	);
+
 	return (
 		<form onSubmit={handleSubmit}>
 			<PaymentCard
-				cardNumber={displayedCardNumber}
-				cardExpiredDate={displayedExpiredDate}
+				variant="small-card"
+				cardNumber={cardNumber}
+				cardExpiredDate={cardExpiredDate}
 				cardHolderName={cardHolderName}
 			/>
 			<CardNumberInput
@@ -38,7 +52,7 @@ export default function AddCardForm() {
 				onChange={handleCardNumberChange}
 			/>
 			<CardExpiredDateInput
-				value={displayedExpiredDate}
+				value={displayedCardExpiredDate}
 				onChange={handleCardExpiredDateChange}
 			/>
 			<CardHolderNameInput
@@ -55,7 +69,7 @@ export default function AddCardForm() {
 				onFirstValueChange={handleFirstCardPasswordChange}
 				onSecondValueChange={handleSecondCardPasswordChange}
 			/>
-			<div style={{ width: '100%', textAlign: 'right' }}>
+			<div className="bottom-button-box">
 				<Button type="submit">다음</Button>
 			</div>
 		</form>

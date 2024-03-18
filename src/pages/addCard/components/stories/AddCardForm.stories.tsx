@@ -1,9 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { BrowserRouter } from 'react-router-dom';
+
 import { AddCardForm } from '@pages/addCard/components';
+import { CardsProvider, StepperProvider } from '@contexts';
 
 const meta = {
-	title: 'AddCard/AddCardForm',
+	title: 'PAGES/AddCard/AddCardForm',
 	component: AddCardForm,
 	parameters: {
 		layout: 'centered',
@@ -15,9 +16,11 @@ type Story = StoryObj<typeof AddCardForm>;
 
 export const Default: Story = {
 	render: () => (
-		<BrowserRouter>
-			<AddCardForm />
-		</BrowserRouter>
+		<CardsProvider>
+			<StepperProvider>
+				<AddCardForm />
+			</StepperProvider>
+		</CardsProvider>
 	),
 };
 
