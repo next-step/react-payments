@@ -21,7 +21,7 @@ export const createFunnel = <StepKey, Data = undefined>({
   initialData,
 }: GetFunnelProps<StepKey, Data>) => {
   const FunnelContext = createContext<FunnelContextProps<StepKey, Data>>({
-    step: null,
+    step: initialStep,
     data: initialData,
     setStep: () => {
       throw new Error(FUNNEL.MESSAGE.ERROR.STEP_NOT_INITIALIZED);
