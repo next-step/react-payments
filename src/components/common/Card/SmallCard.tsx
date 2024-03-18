@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import { CardExpiry, CardNumber } from './index'
+import { CardExpiry, CardNumber } from './types'
 
 export type SmallCardProps = ComponentPropsWithoutRef<'div'> & {
   number: CardNumber
