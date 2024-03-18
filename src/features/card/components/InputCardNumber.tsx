@@ -25,7 +25,7 @@ export default function InputCardNumber() {
       const currentField = CARD_NUMBER_FIELD[index];
 
       cardActionRef.send({
-        type: "SET_CARD_NUMBER",
+        type: "SET_CARD_INFO",
         field: currentField,
         value: e.target.value,
       });

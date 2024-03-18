@@ -1,8 +1,4 @@
-export interface CardType {
-  id: number;
-  type: string;
-  color: string;
-}
+import { CardType } from "features/card/types/card.type";
 
 export const CARD_TYPE_LIST: CardType[] = [
   { id: 1, type: "포코 카드", color: "red" },

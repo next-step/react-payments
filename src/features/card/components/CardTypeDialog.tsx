@@ -1,12 +1,17 @@
-import { CARD_TYPE_LIST, CardType } from "features/card/data/cardTypes";
-
 import { CardContext } from "../../../App";
+
+import { CARD_TYPE_LIST } from "features/card/data/cardTypes";
+import { CardType } from "features/card/types/card.type";
 
 export default function CardTypeDialog() {
   const cardActionRef = CardContext.useActorRef();
 
   const handleCardTypeClick = (cardType: CardType) => {
-    cardActionRef.send({ type: "SET_CARD_TYPE", value: cardType.type });
+    cardActionRef.send({
+      type: "SET_CARD_INFO",
+      field: "cardType",
+      value: cardType.type,
+    });
     cardActionRef.send({ type: "TOGGLE", value: false });
   };
 

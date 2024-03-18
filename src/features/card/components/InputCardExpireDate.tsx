@@ -13,7 +13,8 @@ export default function InputCardExpiredDate() {
 
   const handleCardExpireDateChange = (e: ChangeEvent<HTMLInputElement>) => {
     cardActionRef.send({
-      type: "SET_EXPIRE_DATE",
+      type: "SET_CARD_INFO",
+      field: "expireDate",
       value: formattedCardExpireDate(e.target.value),
     });
   };

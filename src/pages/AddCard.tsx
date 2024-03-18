@@ -17,7 +17,7 @@ export default function AddCard() {
 
   const handleNextButtonClick = () => {
     if (cardState.cardType !== "") {
-      cardActionRef.send({ type: "STEP", value: "addCardSuccess" });
+      cardActionRef.send({ type: "SET_STEP", value: "addCardSuccess" });
     } else {
       cardActionRef.send({ type: "TOGGLE", value: true });
     }
@@ -30,7 +30,7 @@ export default function AddCard() {
           <span
             className="button-text"
             onClick={() =>
-              cardActionRef.send({ type: "STEP", value: "cardList" })
+              cardActionRef.send({ type: "SET_STEP", value: "cardList" })
             }
           >
             &lt;

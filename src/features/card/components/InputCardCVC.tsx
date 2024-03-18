@@ -11,7 +11,11 @@ export default function InputCardCVC() {
   const cardActionRef = CardContext.useActorRef();
 
   const handleCardSecurityCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    cardActionRef.send({ type: "SET_CARD_CVC", value: e.target.value });
+    cardActionRef.send({
+      type: "SET_CARD_INFO",
+      field: "cvc",
+      value: e.target.value,
+    });
   };
 
   return (

@@ -11,7 +11,11 @@ export default function InputCardOwner() {
   const cardActionRef = CardContext.useActorRef();
 
   const handleCardOwnerChange = (e: ChangeEvent<HTMLInputElement>) => {
-    cardActionRef.send({ type: "SET_CARD_OWNER", value: e.target.value });
+    cardActionRef.send({
+      type: "SET_CARD_INFO",
+      field: "cardOwner",
+      value: e.target.value,
+    });
   };
 
   return (

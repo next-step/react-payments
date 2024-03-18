@@ -3,6 +3,21 @@ import { v4 as uuidv4 } from "uuid";
 
 import { CardInfo } from "features/card/types/card.type";
 
+const initialCardInfo: CardInfo = {
+  id: "",
+  cardName: "",
+  cardType: "",
+  cardNumber1: "",
+  cardNumber2: "",
+  cardNumber3: "",
+  cardNumber4: "",
+  expireDate: "",
+  cardOwner: "",
+  cvc: "",
+  firstPassword: "",
+  secondPassword: "",
+};
+
 export const cardMachine = setup({
   types: {} as {
     context: {
@@ -13,122 +28,62 @@ export const cardMachine = setup({
     };
     events:
       | { type: "INITIALIZE" }
-      | { type: "STEP"; value: string }
-      | { type: "SET_CARD_NUMBER"; field: string; value: string }
-      | { type: "SET_EXPIRE_DATE"; value: string }
-      | { type: "SET_CARD_OWNER"; value: string }
-      | { type: "SET_CARD_CVC"; value: string }
-      | { type: "SET_CARD_PASSWORD"; field: string; value: string }
-      | { type: "SET_CARD_TYPE"; value: string }
-      | { type: "SET_CARD_NAME"; value: string }
+      | { type: "SET_STEP"; value: string }
+      | { type: "SET_CARD_INFO"; value: string; field: string }
       | { type: "TOGGLE"; value: boolean }
       | { type: "CONFIRM"; value: CardInfo }
+      | { type: "SELECT_CARD"; value: string }
       | { type: "DELETE"; value: CardInfo };
   },
 }).createMachine({
   id: "card",
   context: {
     step: "addCard",
-    card: {
-      id: "",
-      cardName: "",
-      cardType: "",
-      cardNumber1: "",
-      cardNumber2: "",
-      cardNumber3: "",
-      cardNumber4: "",
-      expireDate: "",
-      cardOwner: "",
-      cvc: "",
-      firstPassword: "",
-      secondPassword: "",
-    } as CardInfo,
+    card: initialCardInfo,
     cardList: [] as CardInfo[],
     showCardTypeDialog: false,
   },
   on: {
     INITIALIZE: {
       actions: assign({
-        card: {
-          id: "",
-          cardType: "",
-          cardName: "",
-          cardNumber1: "",
-          cardNumber2: "",
-          cardNumber3: "",
-          cardNumber4: "",
-          expireDate: "",
-          cardOwner: "",
-          cvc: "",
-          firstPassword: "",
-          secondPassword: "",
+        card: initialCardInfo,
+      }),
+    },
+    SET_CARD_INFO: {
+      actions: assign({
+        card: ({ context, event }) => {
+          return { ...context.card, [event.field]: event.value };
         },
       }),
     },
-    STEP: {
+    SET_STEP: {
       actions: assign({
         step: ({ event }) => event.value,
-      }),
-    },
-    SET_CARD_NUMBER: {
-      actions: assign({
-        card: ({ context, event }) => {
-          return { ...context.card, [event.field]: event.value };
-        },
-      }),
-    },
-    SET_EXPIRE_DATE: {
-      actions: assign({
-        card: ({ context, event }) => {
-          return { ...context.card, expireDate: event.value };
-        },
-      }),
-    },
-    SET_CARD_OWNER: {
-      actions: assign({
-        card: ({ context, event }) => {
-          return { ...context.card, cardOwner: event.value };
-        },
-      }),
-    },
-    SET_CARD_CVC: {
-      actions: assign({
-        card: ({ context, event }) => {
-          return { ...context.card, cvc: event.value };
-        },
-      }),
-    },
-    SET_CARD_PASSWORD: {
-      actions: assign({
-        card: ({ context, event }) => {
-          return { ...context.card, [event.field]: event.value };
-        },
       }),
     },
     CONFIRM: {
       actions: [
         assign({
           cardList: ({ context, event }) => {
-            const newCardInfoWithId = { ...event.value, id: uuidv4() };
-            return [newCardInfoWithId, ...context.cardList];
-          },
-        }),
-      ],
-    },
-    SET_CARD_TYPE: {
-      actions: [
-        assign({
-          card: ({ context, event }) => {
-            return { ...context.card, cardType: event.value };
-          },
-        }),
-      ],
-    },
-    SET_CARD_NAME: {
-      actions: [
-        assign({
-          card: ({ context, event }) => {
-            return { ...context.card, cardName: event.value };
+            const existCardIndex = context.cardList.findIndex(
+              (card) => card.id === event.value.id
+            );
+
+            if (existCardIndex !== -1) {
+              return context.cardList.map((card, index) =>
+                index === existCardIndex
+                  ? { ...card, cardName: event.value.cardName }
+                  : card
+              );
+            }
+
+            const newCardItem = {
+              ...event.value,
+              id: uuidv4(),
+              cardName: context.card.cardName || context.card.cardType,
+            };
+
+            return [newCardItem, ...context.cardList];
           },
         }),
       ],
@@ -137,6 +92,19 @@ export const cardMachine = setup({
       actions: [
         assign({
           showCardTypeDialog: ({ event }) => event.value,
+        }),
+      ],
+    },
+    SELECT_CARD: {
+      actions: [
+        assign({
+          card: ({ context, event }) => {
+            return (
+              context.cardList.find((card) => card.id === event.value) ||
+              context.card
+            );
+          },
+          step: "addCardSuccess",
         }),
       ],
     },

@@ -23,7 +23,7 @@ export default function InputCardPassword() {
       const currentField = CARD_PASSWORD_FIELD[index];
 
       cardActionRef.send({
-        type: "SET_CARD_PASSWORD",
+        type: "SET_CARD_INFO",
         field: currentField,
         value: e.target.value,
       });

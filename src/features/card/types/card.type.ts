@@ -1,4 +1,8 @@
-import { Dispatch, SetStateAction } from "react";
+export interface CardType {
+  id: number;
+  type: string;
+  color: string;
+}
 
 export interface CardInfo {
   id: string;
@@ -14,9 +18,3 @@ export interface CardInfo {
   firstPassword: string;
   secondPassword: string;
 }
-
-export type CardInputContextType = {
-  cardInfo: CardInfo;
-  setCardInfo: Dispatch<SetStateAction<CardInfo>>;
-  handleCardInfoChange: (key: keyof CardInfo, value: string) => void;
-};
