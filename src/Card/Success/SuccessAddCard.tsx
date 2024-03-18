@@ -31,7 +31,7 @@ const SuccessAddCard = ({ card, onNext }: SuccessAddCardProps) => {
 					color={CARD_COLOR_MAP[card.bankName as CARD_COMPANY]}
 				>
 					<Card.Top>
-						<Card.CardCompany text={card.bankName} />
+						<Card.CardCompany text={`${card.bankName}카드`} />
 					</Card.Top>
 					<Card.Middle>
 						<Card.Chip />
