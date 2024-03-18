@@ -51,3 +51,40 @@
   font-size: 12px;
   letter-spacing: -0.085rem;
 }
+
+.red {
+  background-color: #e24141;
+}
+
+.blue {
+  background-color: #547ce4;
+}
+
+.green {
+  background-color: #73bc6d;
+}
+
+.violet {
+  background-color: #de59b9;
+}
+
+.gradient {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(4, 192, 158, 0.31) 0%,
+    rgba(4, 192, 158, 0.457344) 65.1%,
+    #04c09e 100%
+  );
+}
+
+.pink {
+  background-color: #e76e9a;
+}
+
+.orange {
+  background-color: #f37d3b;
+}
+
+.yellow {
+  background-color: #fbcd58;
+}

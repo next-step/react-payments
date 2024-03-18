@@ -9,6 +9,7 @@ export const cardMachine = setup({
       step: string;
       card: CardInfo;
       cardList: CardInfo[];
+      showCardTypeDialog: boolean;
     };
     events:
       | { type: "INITIALIZE" }
@@ -18,6 +19,9 @@ export const cardMachine = setup({
       | { type: "SET_CARD_OWNER"; value: string }
       | { type: "SET_CARD_CVC"; value: string }
       | { type: "SET_CARD_PASSWORD"; field: string; value: string }
+      | { type: "SET_CARD_TYPE"; value: string }
+      | { type: "SET_CARD_NAME"; value: string }
+      | { type: "TOGGLE"; value: boolean }
       | { type: "CONFIRM"; value: CardInfo }
       | { type: "DELETE"; value: CardInfo };
   },
@@ -28,6 +32,7 @@ export const cardMachine = setup({
     card: {
       id: "",
       cardName: "",
+      cardType: "",
       cardNumber1: "",
       cardNumber2: "",
       cardNumber3: "",
@@ -39,12 +44,14 @@ export const cardMachine = setup({
       secondPassword: "",
     } as CardInfo,
     cardList: [] as CardInfo[],
+    showCardTypeDialog: false,
   },
   on: {
     INITIALIZE: {
       actions: assign({
         card: {
           id: "",
+          cardType: "",
           cardName: "",
           cardNumber1: "",
           cardNumber2: "",
@@ -105,6 +112,31 @@ export const cardMachine = setup({
             const newCardInfoWithId = { ...event.value, id: uuidv4() };
             return [newCardInfoWithId, ...context.cardList];
           },
+        }),
+      ],
+    },
+    SET_CARD_TYPE: {
+      actions: [
+        assign({
+          card: ({ context, event }) => {
+            return { ...context.card, cardType: event.value };
+          },
+        }),
+      ],
+    },
+    SET_CARD_NAME: {
+      actions: [
+        assign({
+          card: ({ context, event }) => {
+            return { ...context.card, cardName: event.value };
+          },
+        }),
+      ],
+    },
+    TOGGLE: {
+      actions: [
+        assign({
+          showCardTypeDialog: ({ event }) => event.value,
         }),
       ],
     },

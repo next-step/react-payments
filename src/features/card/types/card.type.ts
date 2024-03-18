@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction } from "react";
 export interface CardInfo {
   id: string;
   cardName: string;
+  cardType: string;
   cardNumber1: string;
   cardNumber2: string;
   cardNumber3: string;

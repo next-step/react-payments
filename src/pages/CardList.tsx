@@ -14,8 +14,6 @@ export default function CardList() {
     cardActionRef.send({ type: "INITIALIZE" });
   };
 
-  console.log(cardState);
-
   return (
     <div>
       <Button onClick={handleAddCardButtonClick}>추가</Button>

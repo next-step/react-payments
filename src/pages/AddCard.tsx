@@ -6,10 +6,22 @@ import Title from "common/components/title/Title";
 import Card from "common/components/card/Card";
 
 import InputCardForm from "features/card/components/InputCardForm";
+import CardTypeDialog from "features/card/components/CardTypeDialog";
 
 export default function AddCard() {
   const cardState = CardContext.useSelector((state) => state.context.card);
+  const dialogState = CardContext.useSelector(
+    (state) => state.context.showCardTypeDialog
+  );
   const cardActionRef = CardContext.useActorRef();
+
+  const handleNextButtonClick = () => {
+    if (cardState.cardType !== "") {
+      cardActionRef.send({ type: "STEP", value: "addCardSuccess" });
+    } else {
+      cardActionRef.send({ type: "TOGGLE", value: true });
+    }
+  };
 
   return (
     <Layout.Basic>
@@ -29,13 +41,8 @@ export default function AddCard() {
       </Title>
       <Card mode="preview" {...cardState} />
       <InputCardForm />
-      <Button
-        onClick={() => {
-          cardActionRef.send({ type: "STEP", value: "addCardSuccess" });
-        }}
-      >
-        다음
-      </Button>
+      <Button onClick={handleNextButtonClick}>다음</Button>
+      {dialogState && <CardTypeDialog />}
     </Layout.Basic>
   );
 }
