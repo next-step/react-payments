@@ -2,7 +2,7 @@ import { useCardInput } from '@/components/pages/CardCreate/useCardInput';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import chevronLeft from '@assets/icon/chevron_left_24.svg';
 import { Box, Button, Container, HFlex, Text, VFlex } from '@components/atoms';
-import { Header, TextField } from '@components/molecules';
+import { Header } from '@components/molecules';
 import { CreditCardCompanyPicker, CreditCardTextFields } from '@components/organisms';
 import { useRef, useState } from 'react';
 
@@ -70,9 +70,9 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
             />
           </HFlex>
           {isErrorField.expirationMonth && (
-            <TextField.HelperText error size="sm">
+            <Text error size="sm">
               유효한 월을 입력해주세요.
-            </TextField.HelperText>
+            </Text>
           )}
         </VFlex>
         <CreditCardTextFields.OwnerName value={fields.ownerName} onChange={handleOwnerNameInputChange} />
