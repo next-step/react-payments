@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { createActorContext } from "@xstate/react";
 
 import PaymentCard from "pages/PaymentCard";
@@ -11,5 +12,16 @@ export default function App() {
     <CardContext.Provider>
       <PaymentCard />
     </CardContext.Provider>
+=======
+import PaymentCard from "pages/PaymentCard";
+
+import CardInfoProvider from "features/card/context/CardInputContext";
+
+export default function App() {
+  return (
+    <CardInfoProvider>
+      <PaymentCard />
+    </CardInfoProvider>
+>>>>>>> main
   );
 }
