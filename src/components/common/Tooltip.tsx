@@ -1,4 +1,4 @@
-import { ReactNode, useState, useRef } from 'react';
+import { ReactNode, useState } from 'react';
 
 import useOutsideClick from 'src/hooks/useOutsideClick';
 
@@ -8,17 +8,17 @@ interface TooltipProps {
 }
 
 export default function Tooltip({ description, children }: TooltipProps) {
-	const tooltipRef = useRef<HTMLDivElement>(null);
-
 	const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
+
+	const tooltipRef = useOutsideClick<HTMLDivElement>({
+		callback: () => {
+			setIsDescriptionVisible(false);
+		},
+	});
 
 	const handleButtonClick = () => {
 		setIsDescriptionVisible(prevState => !prevState);
 	};
-
-	useOutsideClick(tooltipRef, () => {
-		setIsDescriptionVisible(false);
-	});
 
 	return (
 		<div className="tooltip-container" ref={tooltipRef}>

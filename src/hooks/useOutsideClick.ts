@@ -1,13 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, RefObject } from 'react';
 
-export default function useOutsideClick(
-	target: React.RefObject<Element> | null,
-	callback: () => void,
-	elementsToIgnore?: (React.RefObject<Element> | null)[],
-) {
+interface UseOutsideClickOptions {
+	callback: () => void;
+	elementsToIgnore?: (RefObject<Element> | null)[];
+}
+
+export default function useOutsideClick<TargetElement extends Element>({
+	elementsToIgnore,
+	callback,
+}: UseOutsideClickOptions) {
+	const targetRef = useRef<TargetElement>(null);
+
 	useEffect(() => {
 		function handleClickOutside(e: React.BaseSyntheticEvent | globalThis.MouseEvent) {
-			const isRefNotIncludeTarget = target?.current && !target.current.contains(e.target);
+			const isRefNotIncludeTarget = targetRef?.current && !targetRef.current.contains(e.target);
 
 			const isExceptRefsNotIncludeTarget = elementsToIgnore
 				? elementsToIgnore.every(exceptElement => exceptElement?.current && !exceptElement.current.contains(e.target))
@@ -21,5 +27,7 @@ export default function useOutsideClick(
 		return () => {
 			document.removeEventListener('click', handleClickOutside, true);
 		};
-	}, [target, callback, elementsToIgnore]);
+	}, [targetRef, callback, elementsToIgnore]);
+
+	return targetRef;
 }
