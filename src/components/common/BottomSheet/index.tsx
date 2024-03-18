@@ -3,12 +3,12 @@ import { MouseEventHandler, PropsWithChildren } from 'react'
 
 type BottomSheetProps = {
   isOpen: boolean
-  onClose: () => void
+  close: () => void
 }
 
 export const BottomSheet = ({
   isOpen = false,
-  onClose,
+  close,
   children
 }: PropsWithChildren<BottomSheetProps>) => {
   const bottomSheetStyle = css`
@@ -17,7 +17,7 @@ export const BottomSheet = ({
 
   const handleClose: MouseEventHandler<HTMLDivElement> = e => {
     if (e.target === e.currentTarget) {
-      onClose()
+      close()
     }
   }
 

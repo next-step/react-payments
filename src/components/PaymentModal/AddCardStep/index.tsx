@@ -50,7 +50,7 @@ export const AddCardStep = () => {
           </span>
         </div>
       </div>
-      <BottomSheet isOpen={opened} onClose={close}>
+      <BottomSheet isOpen={opened} close={close}>
         <div className="flex-center">
           <div
             className="modal-item-container"

@@ -20,7 +20,7 @@ export const Basic: Story = {
 
     return (
       <div className={containerStyle}>
-        <BottomSheet isOpen onClose={() => {}}>
+        <BottomSheet isOpen close={() => {}}>
           <div className="flex-center">
             <div className="modal-item-container">
               <div className="modal-item-dot"></div>
