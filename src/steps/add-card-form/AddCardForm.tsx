@@ -8,6 +8,8 @@ import CardPasswordInput from 'src/steps/add-card-form/CardPasswordInput';
 import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine';
 import SelectCardCompanyModal from 'src/steps/add-card-form/SelectCardCompanyModal';
 import EnteredCardImage from 'src/steps/add-card-form/EnteredCardImage';
+import { useAutoFocus } from 'src/hooks/useAutoFocus';
+import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
 
 interface AddCardFormProps {
 	cardNumberSegmentLength?: number;
@@ -25,6 +27,8 @@ export default function AddCardForm({
 	cardPasswordSegmentLength = 1,
 }: AddCardFormProps) {
 	const { send } = useAddCardMachineActorRef();
+
+	const { ref: nextButtonRef } = useAutoFocus<HTMLButtonElement>(AUTO_FOCUS_INDEX.NEXT_BUTTON);
 
 	const isStateAddCardForm = useAddCardMachineSelector(state => state.matches('AddCardForm'));
 
@@ -63,12 +67,12 @@ export default function AddCardForm({
 					<form onSubmit={handleSubmit} data-testid="card-form">
 						<EnteredCardImage />
 						<CardNumberInput segmentLength={cardNumberSegmentLength} />
-						<CardOwnerNameInput maxLength={cardOwnerNameMaxLength} />
 						<CardExpirationDateInput maxLength={cardExpirationDateMaxLength} />
+						<CardOwnerNameInput maxLength={cardOwnerNameMaxLength} />
 						<CardSecurityCodeInput maxLength={cardSecurityCodeMaxLength} />
 						<CardPasswordInput segmentMaxLength={cardPasswordSegmentLength} />
 						<div className="button-box">
-							<button type="submit" className="button-text" data-testid="form-next">
+							<button type="submit" className="button-text" data-testid="form-next" ref={nextButtonRef}>
 								다음
 							</button>
 						</div>

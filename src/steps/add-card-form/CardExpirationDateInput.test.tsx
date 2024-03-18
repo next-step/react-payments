@@ -2,14 +2,14 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import CardExpirationDateInput from 'src/steps/add-card-form/CardExpirationDateInput';
-import { SelectToFormLayer } from 'src/components/utils/SelectToFormLayer';
+import { AutoFocusWrapperWithSelectToForm } from 'src/components/utils/Wrapper';
 import { renderWithAddCardMachineProvider } from 'src/utils/render';
 
 const setup = () => {
 	renderWithAddCardMachineProvider(
-		<SelectToFormLayer>
+		<AutoFocusWrapperWithSelectToForm>
 			<CardExpirationDateInput />
-		</SelectToFormLayer>,
+		</AutoFocusWrapperWithSelectToForm>,
 	);
 
 	const expirationDateInput = screen.getByTestId<HTMLInputElement>('card-expiration-date');

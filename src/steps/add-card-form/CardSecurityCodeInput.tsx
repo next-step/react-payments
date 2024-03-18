@@ -1,8 +1,10 @@
-import { useId, ChangeEvent, useRef, useEffect } from 'react';
+import { useId, ChangeEvent } from 'react';
 
 import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine';
 import REGEX from 'src/constants/regex';
 import Tooltip from 'src/components/common/Tooltip';
+import { useAutoFocus } from 'src/hooks/useAutoFocus';
+import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
 
 interface CardSecurityCodeInputProps {
 	maxLength?: number;
@@ -11,34 +13,26 @@ interface CardSecurityCodeInputProps {
 export default function CardSecurityCodeInput({ maxLength = 3 }: CardSecurityCodeInputProps) {
 	const cardSecurityCodeInputId = useId();
 
-	const cardSecurityCodeInputRef = useRef<HTMLInputElement>(null);
-
 	const { send } = useAddCardMachineActorRef();
+
+	const { focusNextInput: focusCardExpirationDateInput, ref: cardSecurityCodeInputRef } =
+		useAutoFocus<HTMLInputElement>(AUTO_FOCUS_INDEX.CARD_SECURITY_CODE);
 
 	const cardSecurityCode = useAddCardMachineSelector(state => state.context.cardInfo.cardSecurityCode);
 
-	const isCardSecurityCodeFocus = useAddCardMachineSelector(state =>
-		state.matches({ AddCardForm: { enterCardInfo: 'cardSecurityCode' } }),
-	);
-
 	const handleCardSecurityCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
+
 		send({
 			type: 'CHANGE_FIELD',
-			value: event.target.value.replace(REGEX.EXCLUDE_NUMBER, ''),
+			value: formattedValue,
 			field: 'cardSecurityCode',
-			maxLength,
 		});
-	};
 
-	const handleCardSecurityCodeFocus = () => {
-		send({ type: 'FOCUS_CARD_SECURITY_CODE' });
-	};
-
-	useEffect(() => {
-		if (isCardSecurityCodeFocus && cardSecurityCodeInputRef.current) {
-			cardSecurityCodeInputRef.current.focus();
+		if (formattedValue.length === maxLength) {
+			focusCardExpirationDateInput();
 		}
-	}, [isCardSecurityCodeFocus, cardSecurityCodeInputRef]);
+	};
 
 	return (
 		<div className="input-container">
@@ -53,7 +47,6 @@ export default function CardSecurityCodeInput({ maxLength = 3 }: CardSecurityCod
 					onChange={handleCardSecurityCodeChange}
 					id={cardSecurityCodeInputId}
 					data-testid="card-security-code"
-					onFocus={handleCardSecurityCodeFocus}
 					ref={cardSecurityCodeInputRef}
 					maxLength={maxLength}
 				/>

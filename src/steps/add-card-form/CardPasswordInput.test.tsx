@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import CardPasswordInput from 'src/steps/add-card-form/CardPasswordInput';
-import { SelectToFormLayer } from 'src/components/utils/SelectToFormLayer';
+import { AutoFocusWrapperWithSelectToForm } from 'src/components/utils/Wrapper';
 import { renderWithAddCardMachineProvider } from 'src/utils/render';
 
 const setup = () => {
@@ -18,9 +18,9 @@ const setup = () => {
 describe('카드 비밀번호 입력', () => {
 	beforeEach(() => {
 		renderWithAddCardMachineProvider(
-			<SelectToFormLayer>
+			<AutoFocusWrapperWithSelectToForm>
 				<CardPasswordInput />
-			</SelectToFormLayer>,
+			</AutoFocusWrapperWithSelectToForm>,
 		);
 	});
 

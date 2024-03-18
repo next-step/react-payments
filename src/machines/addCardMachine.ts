@@ -54,16 +54,6 @@ type CardMachineEvent =
 	| { type: 'TOGGLE' }
 	| { type: 'SELECT_CARD'; value: CardInfoWithId }
 	| { type: 'DELETE_CARD'; value: string }
-	| { type: 'AUTO_FOCUS'; maxLength: number; field: keyof CardInfo }
-	| { type: 'FOCUS_CARD_NUMBER_FIRST_SEGMENT' }
-	| { type: 'FOCUS_CARD_NUMBER_SECOND_SEGMENT' }
-	| { type: 'FOCUS_CARD_NUMBER_THIRD_SEGMENT' }
-	| { type: 'FOCUS_CARD_NUMBER_FOURTH_SEGMENT' }
-	| { type: 'FOCUS_CARD_OWNER_NAME' }
-	| { type: 'FOCUS_CARD_EXPIRATION_DATE' }
-	| { type: 'FOCUS_CARD_PASSWORD_FIRST_DIGIT' }
-	| { type: 'FOCUS_CARD_PASSWORD_SECOND_DIGIT' }
-	| { type: 'FOCUS_CARD_SECURITY_CODE' }
 	| { type: 'INFER_CARD_COMPANY_CODE' };
 
 type CardMachineActions =
@@ -77,7 +67,7 @@ type CardMachineActions =
 	| { type: 'alertAddCardForm'; params: { message: string } }
 	| { type: 'inferCardCompanyCode' };
 
-type CardMachineGuards = { type: 'hasMaxLength' } | { type: 'isAddCardFormValid' };
+type CardMachineGuards = { type: 'isAddCardFormValid' };
 
 export const addCardMachine = createMachine(
 	{
@@ -120,104 +110,9 @@ export const addCardMachine = createMachine(
 						},
 					},
 					enterCardInfo: {
-						initial: 'cardNumberFirstSegment',
 						on: {
 							TOGGLE: {
 								target: 'selectCardCompany',
-							},
-							FOCUS_CARD_NUMBER_FIRST_SEGMENT: {
-								target: '.cardNumberFirstSegment',
-							},
-							FOCUS_CARD_NUMBER_SECOND_SEGMENT: {
-								target: '.cardNumberSecondSegment',
-							},
-							FOCUS_CARD_NUMBER_THIRD_SEGMENT: {
-								target: '.cardNumberThirdSegment',
-							},
-							FOCUS_CARD_NUMBER_FOURTH_SEGMENT: {
-								target: '.cardNumberFourthSegment',
-							},
-							FOCUS_CARD_OWNER_NAME: {
-								target: '.cardOwnerName',
-							},
-							FOCUS_CARD_EXPIRATION_DATE: {
-								target: '.cardExpirationDate',
-							},
-							FOCUS_CARD_PASSWORD_FIRST_DIGIT: {
-								target: '.cardPasswordFirstDigit',
-							},
-							FOCUS_CARD_PASSWORD_SECOND_DIGIT: {
-								target: '.cardPasswordSecondDigit',
-							},
-							FOCUS_CARD_SECURITY_CODE: {
-								target: '.cardSecurityCode',
-							},
-						},
-						states: {
-							cardNumberFirstSegment: {
-								on: {
-									AUTO_FOCUS: {
-										target: 'cardNumberSecondSegment',
-										guard: { type: 'hasMaxLength' },
-									},
-								},
-							},
-							cardNumberSecondSegment: {
-								on: {
-									AUTO_FOCUS: {
-										target: 'cardNumberThirdSegment',
-										guard: { type: 'hasMaxLength' },
-									},
-								},
-							},
-							cardNumberThirdSegment: {
-								on: {
-									AUTO_FOCUS: {
-										target: 'cardNumberFourthSegment',
-										guard: { type: 'hasMaxLength' },
-									},
-								},
-							},
-							cardNumberFourthSegment: {
-								on: {
-									AUTO_FOCUS: {
-										target: 'cardOwnerName',
-										guard: { type: 'hasMaxLength' },
-									},
-								},
-							},
-							cardOwnerName: {
-								on: {
-									AUTO_FOCUS: {
-										target: 'cardExpirationDate',
-										guard: { type: 'hasMaxLength' },
-									},
-								},
-							},
-							cardExpirationDate: {
-								on: {
-									AUTO_FOCUS: {
-										target: 'cardSecurityCode',
-										guard: { type: 'hasMaxLength' },
-									},
-								},
-							},
-							cardPasswordFirstDigit: {
-								on: {
-									AUTO_FOCUS: {
-										target: 'cardPasswordSecondDigit',
-										guard: { type: 'hasMaxLength' },
-									},
-								},
-							},
-							cardPasswordSecondDigit: {},
-							cardSecurityCode: {
-								on: {
-									AUTO_FOCUS: {
-										target: 'cardPasswordFirstDigit',
-										guard: { type: 'hasMaxLength' },
-									},
-								},
 							},
 						},
 					},
@@ -291,12 +186,6 @@ export const addCardMachine = createMachine(
 			changeFieldAddCardForm: enqueueActions(({ enqueue, event, context }) => {
 				if (event.type === 'CHANGE_FIELD') {
 					enqueue.assign({ cardInfo: { ...context.cardInfo, [event.field]: event.value } });
-
-					enqueue.raise({
-						type: 'AUTO_FOCUS',
-						maxLength: event?.maxLength || Infinity,
-						field: event.field,
-					});
 				}
 
 				if (
@@ -328,13 +217,6 @@ export const addCardMachine = createMachine(
 			}),
 		},
 		guards: {
-			hasMaxLength: ({ context, event }) => {
-				if (event.type !== 'AUTO_FOCUS') return false;
-
-				const { maxLength, field } = event;
-
-				return context.cardInfo[field].length === maxLength;
-			},
 			isAddCardFormValid: ({ context, event }) => {
 				if (event.type !== 'ADD_CARD') return false;
 

@@ -2,6 +2,8 @@ import { ChangeEvent, useId } from 'react';
 
 import REGEX from 'src/constants/regex';
 import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine';
+import { useAutoFocus } from 'src/hooks/useAutoFocus';
+import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
 
 interface CardExpirationDateInputProps {
 	separator?: string;
@@ -27,17 +29,22 @@ export default function CardExpirationDateInput({ separator = '/', maxLength }: 
 
 	const cardExpirationDateInputId = useId();
 
+	const { ref: cardExpirationDateInputRef, focusNextInput } = useAutoFocus<HTMLInputElement>(
+		AUTO_FOCUS_INDEX.CARD_EXPIRATION_DATE,
+	);
+
 	const handleExpirationDateChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const formattedValue = formatExpirationDate(separator)(event.target.value);
+
 		send({
 			type: 'CHANGE_FIELD',
-			value: formatExpirationDate(separator)(event.target.value),
+			value: formattedValue,
 			field: 'cardExpirationDate',
-			maxLength,
 		});
-	};
 
-	const handleExpirationDateFocus = () => {
-		send({ type: 'FOCUS_CARD_EXPIRATION_DATE' });
+		if (formattedValue.length === maxLength) {
+			focusNextInput();
+		}
 	};
 
 	return (
@@ -52,8 +59,8 @@ export default function CardExpirationDateInput({ separator = '/', maxLength }: 
 				value={cardExpirationDate}
 				onChange={handleExpirationDateChange}
 				data-testid="card-expiration-date"
-				onFocus={handleExpirationDateFocus}
 				maxLength={maxLength}
+				ref={cardExpirationDateInputRef}
 			/>
 		</div>
 	);

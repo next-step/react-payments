@@ -1,8 +1,10 @@
-import { ChangeEvent, useEffect, useId, useRef } from 'react';
+import { ChangeEvent, useId } from 'react';
 import { shallowEqual } from '@xstate/react';
 
 import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine';
 import REGEX from 'src/constants/regex';
+import { useAutoFocus } from 'src/hooks/useAutoFocus';
+import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
 
 interface CardPasswordInputProps {
 	segmentMaxLength?: number;
@@ -13,15 +15,12 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 
 	const cardPasswordInputId = useId();
 
-	const firstPasswordInputRef = useRef<HTMLInputElement>(null);
-	const secondPasswordInputRef = useRef<HTMLInputElement>(null);
-
-	const isFirstPasswordFocus = useAddCardMachineSelector(state =>
-		state.matches({ AddCardForm: { enterCardInfo: 'cardPasswordFirstDigit' } }),
+	const { focusNextInput: focusSecondPassword, ref: firstPasswordInputRef } = useAutoFocus<HTMLInputElement>(
+		AUTO_FOCUS_INDEX.CARD_PASSWORD.FIRST,
 	);
 
-	const isSecondPasswordFocus = useAddCardMachineSelector(state =>
-		state.matches({ AddCardForm: { enterCardInfo: 'cardPasswordSecondDigit' } }),
+	const { ref: secondPasswordInputRef, focusNextInput: focusNextButton } = useAutoFocus<HTMLInputElement>(
+		AUTO_FOCUS_INDEX.CARD_PASSWORD.SECOND,
 	);
 
 	const { cardPasswordFirstDigit, cardPasswordSecondDigit } = useAddCardMachineSelector(
@@ -35,34 +34,25 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
 
 		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardPasswordFirstDigit', maxLength: segmentMaxLength });
-	};
 
-	const handleFirstPasswordFocus = () => {
-		send({ type: 'FOCUS_CARD_PASSWORD_FIRST_DIGIT' });
+		if (formattedValue.length === segmentMaxLength) {
+			focusSecondPassword();
+		}
 	};
 
 	const handleSecondPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
+
 		send({
 			type: 'CHANGE_FIELD',
-			value: event.target.value.replace(REGEX.EXCLUDE_NUMBER, ''),
+			value: formattedValue,
 			field: 'cardPasswordSecondDigit',
-			maxLength: segmentMaxLength,
 		});
-	};
 
-	const handleSecondPasswordFocus = () => {
-		send({ type: 'FOCUS_CARD_PASSWORD_SECOND_DIGIT' });
-	};
-
-	useEffect(() => {
-		if (isFirstPasswordFocus && firstPasswordInputRef.current) {
-			firstPasswordInputRef.current.focus();
+		if (formattedValue.length === segmentMaxLength) {
+			focusNextButton();
 		}
-
-		if (isSecondPasswordFocus && secondPasswordInputRef.current) {
-			secondPasswordInputRef.current.focus();
-		}
-	}, [isSecondPasswordFocus, secondPasswordInputRef, isFirstPasswordFocus, firstPasswordInputRef]);
+	};
 
 	return (
 		<div className="input-container">
@@ -78,7 +68,6 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 					onChange={handleFirstPasswordChange}
 					id={cardPasswordInputId}
 					maxLength={segmentMaxLength}
-					onFocus={handleFirstPasswordFocus}
 					ref={firstPasswordInputRef}
 				/>
 				<input
@@ -89,7 +78,6 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 					onChange={handleSecondPasswordChange}
 					ref={secondPasswordInputRef}
 					maxLength={segmentMaxLength}
-					onFocus={handleSecondPasswordFocus}
 				/>
 				<input readOnly value=" " type="password" className="input-basic w-15 password-readonly" />
 				<input readOnly value=" " type="password" className="input-basic w-15 password-readonly" />

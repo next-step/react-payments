@@ -1,0 +1,16 @@
+export const AUTO_FOCUS_INDEX = Object.freeze({
+	CARD_NUMBER: {
+		FIRST: 0,
+		SECOND: 1,
+		THIRD: 2,
+		FOURTH: 3,
+	},
+	CARD_EXPIRATION_DATE: 4,
+	CARD_OWNER_NAME: 5,
+	CARD_SECURITY_CODE: 6,
+	CARD_PASSWORD: {
+		FIRST: 7,
+		SECOND: 8,
+	},
+	NEXT_BUTTON: 9,
+});

@@ -28,7 +28,6 @@ button {
 	border: none;
 	background-color: inherit;
 	cursor: pointer;
-	outline: none;
 }
 
 .sb-show-main.sb-main-padded {
