@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Header, Card, Footer } from '@/components';
 import * as styles from './cardInfo.css';
@@ -6,21 +6,71 @@ import Arrow from '@/assets/arrow.svg?react';
 import { FormMachineContext } from '@/pages/new';
 import type { FormEvent } from 'react';
 import type { FormItems, FormItemKeys, FormItemValues } from '@/types/form';
+import { useMachine } from '@xstate/react';
+import formMachine from '@/machine/cardInfoForm';
+
 interface CardInfoProps {
   next: (data?: Map<Partial<FormItemKeys>, FormItemValues<FormItems>>) => void;
 }
 const CardInfo = ({ next }: CardInfoProps) => {
   const navigate = useNavigate();
+  const [snapshot, send, actorRef] = useMachine(formMachine);
   const formRef = useRef<HTMLFormElement | null>(null);
-  const [formItems, setFormItems] = useState<HTMLFormControlsCollection>();
-  const [formData, setFormData] = useState(new Map());
   const formActorRef = FormMachineContext.useActorRef();
+  const cardNumber1Ref = useRef<HTMLInputElement | null>(null);
+  const cardNumber2Ref = useRef<HTMLInputElement | null>(null);
+  const cardNumber3Ref = useRef<HTMLInputElement | null>(null);
+  const cardNumber4Ref = useRef<HTMLInputElement | null>(null);
+  const expireDateMonthRef = useRef<HTMLInputElement | null>(null);
+  const expireDateYearRef = useRef<HTMLInputElement | null>(null);
+  const cardOwnerRef = useRef<HTMLInputElement | null>(null);
+  const cvcRef = useRef<HTMLInputElement | null>(null);
+  const password1Ref = useRef<HTMLInputElement | null>(null);
+  const password2Ref = useRef<HTMLInputElement | null>(null);
+  const password3Ref = useRef<HTMLInputElement | null>(null);
+  const password4Ref = useRef<HTMLInputElement | null>(null);
 
-  useEffect(() => {
-    if (!formRef.current) return;
-    const formItems = formRef.current.elements;
-    setFormItems(formItems);
-  }, []);
+  const formItemRefList = useMemo<
+    Record<string, React.MutableRefObject<HTMLInputElement | null>>
+  >(() => {
+    return {
+      cardNumber1Ref,
+      cardNumber2Ref,
+      cardNumber3Ref,
+      cardNumber4Ref,
+      expireDateMonthRef,
+      expireDateYearRef,
+      cardOwnerRef,
+      cvcRef,
+      password1Ref,
+      password2Ref,
+      password3Ref,
+      password4Ref,
+    };
+  }, [
+    cardNumber1Ref,
+    cardNumber2Ref,
+    cardNumber3Ref,
+    cardNumber4Ref,
+    expireDateMonthRef,
+    expireDateYearRef,
+    cardOwnerRef,
+    cvcRef,
+    password1Ref,
+    password2Ref,
+    password3Ref,
+    password4Ref,
+  ]);
+  const canSave = snapshot.status === 'done';
+
+  actorRef.subscribe((snapshot) => {
+    const Ref = formItemRefList[`${snapshot.value}Ref`];
+    if (!Ref) return;
+    Ref.current?.focus();
+  });
+  const {
+    context: { data },
+  } = snapshot;
 
   const handleCustomValidity = (target: HTMLInputElement) => {
     if (!target.dataset.rule) {
@@ -38,32 +88,21 @@ const CardInfo = ({ next }: CardInfoProps) => {
 
   const handleChangeForm = (e: FormEvent<HTMLFormElement>) => {
     const target = e.target as HTMLInputElement;
-    const currentIndex = Array.from(formItems!).findIndex(
-      (item) => item === target
-    );
-    const isInputEnd = target.maxLength === target.value.length;
-
     handleCustomValidity(target);
-
-    if (isInputEnd) {
-      const NextFormItem = formItems?.item(currentIndex + 1);
-      if (NextFormItem instanceof HTMLInputElement) {
-        NextFormItem.focus();
-      }
-    }
-
-    setFormData((prev) => {
-      const next = new Map(prev);
-      next.set(target.name, target.value);
-      return next;
-    });
   };
 
   const handleSubmitForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    formActorRef.send({ type: 'UPDATE', data: formData });
+    formActorRef.send({
+      type: 'UPDATE',
+      data: new Map(Object.entries(data)) as Map<
+        FormItemKeys,
+        FormItemValues<FormItems>
+      >,
+    });
     next();
   };
+
   return (
     <>
       <Header
@@ -82,16 +121,16 @@ const CardInfo = ({ next }: CardInfoProps) => {
       <main className={styles.wFull}>
         <Card
           cardNumber={[
-            formData.get('cardNumber1') || '',
-            formData.get('cardNumber2') || '',
-            formData.get('cardNumber3') || '',
-            formData.get('cardNumber4') || '',
+            data.cardNumber1 || '',
+            data.cardNumber2 || '',
+            data.cardNumber3 || '',
+            data.cardNumber4 || '',
           ]}
           expirationDate={{
-            month: formData.get('expireDateMonth'),
-            year: formData.get('expireDateYear'),
+            month: data.expireDateMonth || '',
+            year: data.expireDateYear || '',
           }}
-          owner={formData.get('cardOwner')}
+          owner={data.cardOwner || ''}
         />
         <Form
           ref={formRef}
@@ -101,13 +140,13 @@ const CardInfo = ({ next }: CardInfoProps) => {
           <Form.Item vertical label={'카드번호'} inputId={'cardNumber1'}>
             <div className={styles.cardNumberInputContainer}>
               {[1, 2, 3, 4].map((i) => {
-                const showDelimiter = `${formData.get(
-                  `cardNumber${i}`?.length === 4
-                )}` as 'true' | 'false';
+                const showDelimiter =
+                  data[`cardNumber${i}` as FormItemKeys]?.length === 4;
                 return (
                   <div key={i} className={styles.cardNumberInputBox}>
                     <Input
                       required
+                      ref={formItemRefList[`cardNumber${i}Ref`]}
                       id={`cardNumber${i}`}
                       name={`cardNumber${i}`}
                       className={styles.textCenter}
@@ -117,9 +156,19 @@ const CardInfo = ({ next }: CardInfoProps) => {
                       maxLength={4}
                       data-rule={'^[0-9]{4}$'}
                       data-message={'숫자 4자리를 입력해주세요'}
+                      onChange={(e) => {
+                        send({
+                          type: 'UPDATE',
+                          data: {
+                            [`cardNumber${i}`]: e.target.value,
+                          },
+                        });
+                      }}
                     />
                     {i !== 4 && (
-                      <span className={styles.delimiter[showDelimiter]}>-</span>
+                      <span className={styles.delimiter[`${showDelimiter}`]}>
+                        -
+                      </span>
                     )}
                   </div>
                 );
@@ -130,6 +179,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
             <div className={styles.expireDateInputContainer}>
               <Input
                 required
+                ref={expireDateMonthRef}
                 id='expireDateMonth'
                 name='expireDateMonth'
                 className={styles.textCenter}
@@ -139,12 +189,18 @@ const CardInfo = ({ next }: CardInfoProps) => {
                 maxLength={2}
                 data-rule={'^(0[1-9]|1[0-2])$'}
                 data-message={'01~12월 사이의 숫자만 입력해주세요'}
+                onChange={(e) => {
+                  send({
+                    type: 'UPDATE',
+                    data: {
+                      [`expireDateMonth`]: e.target.value,
+                    },
+                  });
+                }}
               />
               <span
                 className={
-                  styles.delimiter[
-                    `${formData.get('expireDateMonth')?.length === 2}`
-                  ]
+                  styles.delimiter[`${data['expireDateMonth']?.length === 2}`]
                 }
                 style={{
                   transform: 'translateX(-6px)',
@@ -154,12 +210,22 @@ const CardInfo = ({ next }: CardInfoProps) => {
               </span>
               <Input
                 required
+                id='expireDateYear'
+                ref={expireDateYearRef}
                 htmpType='number'
                 inputMode='numeric'
                 placeholder='YY'
                 name='expireDateYear'
                 minLength={2}
                 maxLength={2}
+                onChange={(e) => {
+                  send({
+                    type: 'UPDATE',
+                    data: {
+                      [`expireDateYear`]: e.target.value,
+                    },
+                  });
+                }}
               />
             </div>
           </Form.Item>
@@ -168,7 +234,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
             label={
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <span>카드 소유자 이름(선택)</span>
-                <span>{formData.get('cardOwner')?.length || 0}/30</span>
+                <span>{data['cardOwner']?.length || 0}/30</span>
               </div>
             }
             inputId='cardOwner'
@@ -176,9 +242,19 @@ const CardInfo = ({ next }: CardInfoProps) => {
             <Input
               id='cardOwner'
               name='cardOwner'
+              ref={cardOwnerRef}
               htmpType='text'
               placeholder='카드에 표시된 이름과 동일하게 입력하세요.'
               maxLength={30}
+              onChange={(e) => {
+                send({
+                  type: 'UPDATE',
+                  data: {
+                    [`cardOwner`]: e.target.value,
+                  },
+                });
+              }}
+              onBlur={() => send({ type: 'NEXT' })}
             />
           </Form.Item>
           <Form.Item vertical label={'보안코드(CVC/CVV)'} inputId={'cvc'}>
@@ -187,12 +263,21 @@ const CardInfo = ({ next }: CardInfoProps) => {
                 required
                 id='cvc'
                 name='cvc'
+                ref={cvcRef}
                 className={styles.cvcInputElem}
                 htmpType='password'
                 inputMode='numeric'
                 maxLength={3}
                 data-rule={'^[0-9]{3}$'}
                 data-message={'숫자 3자리를 입력해주세요'}
+                onChange={(e) => {
+                  send({
+                    type: 'UPDATE',
+                    data: {
+                      [`cvc`]: e.target.value,
+                    },
+                  });
+                }}
               />
               <div className={styles.toolTipBox}>툴팁</div>
             </div>
@@ -205,12 +290,21 @@ const CardInfo = ({ next }: CardInfoProps) => {
                     required
                     id={`password${i}`}
                     name={`password${i}`}
+                    ref={formItemRefList[`password${i}Ref`]}
                     className={styles.textCenter}
                     htmpType='password'
                     inputMode='numeric'
                     maxLength={1}
                     data-rule={'^[0-9]$'}
                     data-message={'숫자만 입력해주세요'}
+                    onChange={(e) => {
+                      send({
+                        type: 'UPDATE',
+                        data: {
+                          [`password${i}`]: e.target.value,
+                        },
+                      });
+                    }}
                   />
                 </div>
               ))}
@@ -219,7 +313,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
             </div>
           </Form.Item>
           <Footer className={styles.textEnd}>
-            <Button htmlType='submit' type='text'>
+            <Button htmlType='submit' type='text' disabled={!canSave}>
               다음
             </Button>
           </Footer>
