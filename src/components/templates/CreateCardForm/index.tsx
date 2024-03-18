@@ -123,3 +123,4 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
     </Container>
   );
 }
+

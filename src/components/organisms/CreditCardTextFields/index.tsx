@@ -107,3 +107,4 @@ export default Object.assign(
     CardPassword,
   }
 );
+
