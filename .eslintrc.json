@@ -1,0 +1,34 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "prettier",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:storybook/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "react"],
+  "rules": {
+    "react/prop-types": "off",
+    "prettier/prettier": [
+      "warn",
+      {
+        "tabWidth": 2,
+        "useTabs": false,
+        "endOfLine": "auto",
+        "semi": false,
+        "singleQuote": true
+      }
+    ]
+  }
+}

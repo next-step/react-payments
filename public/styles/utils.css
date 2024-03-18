@@ -11,6 +11,7 @@
   align-items: center;
 }
 
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -53,4 +54,8 @@
 
 .w-15 {
   width: 15%;
+}
+
+.gap-4{
+  gap:4px;
 }
