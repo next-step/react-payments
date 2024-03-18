@@ -4,9 +4,10 @@ import { CardContext } from "../../providers/CardState/CardStateProvider";
 import { MONTH, YEAR } from "../constants/expirationDate";
 import Input from "../components/atomic-design-pattern/atom/Input";
 import Button from "../components/atomic-design-pattern/atom/Button";
-import { CardStorage } from "../util/cardStorage";
+import { useLocalStorage } from "../hook/useLocalStorage";
 
 export default function CardComplete({ onNext }) {
+  const { changeCardInfo } = useLocalStorage();
   const { cardState } = useContext(CardContext);
   const { cardNumber, expirationDate, cardOwnerName, alias } = cardState;
 
@@ -16,7 +17,7 @@ export default function CardComplete({ onNext }) {
     const alias = formData.get("alias");
 
     if (alias) {
-      CardStorage.changeCardInfo(cardNumber, "alias", alias);
+      changeCardInfo(cardNumber, "alias", alias);
     }
 
     onNext();

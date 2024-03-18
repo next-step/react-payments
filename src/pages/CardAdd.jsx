@@ -12,10 +12,11 @@ import InputContainer from "../components/atomic-design-pattern/organism/InputCo
 import InputTitle from "../components/atomic-design-pattern/atom/InputTitle";
 import InputGroup from "../components/atomic-design-pattern/molecule/InputGroup";
 import { CardContext } from "../../providers/CardState/CardStateProvider";
-import { CardStorage } from "../util/cardStorage";
+import { useLocalStorage } from "../hook/useLocalStorage";
 
 export default function CardAdd({ onList, onNext }) {
   const { cardState } = useContext(CardContext);
+  const { addCard } = useLocalStorage();
   const {
     cardNumber,
     expirationDate,
@@ -54,7 +55,7 @@ export default function CardAdd({ onList, onNext }) {
 
   const onSubmitCardAdd = (event) => {
     event.preventDefault();
-    CardStorage.addCard(cardState);
+    addCard(cardState);
     onNext();
   };
 
