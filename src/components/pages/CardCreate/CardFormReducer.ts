@@ -37,11 +37,12 @@ const reducer = (state: CardFormState, action: ReducerAction) => {
       if (!action.payload) {
         clonedState.fields.expirationMonth = '';
         clonedState.isErrorField.expirationMonth = false;
+
         return clonedState;
       } else {
         clonedState.fields.expirationMonth = keepOnlyNumeric(action.payload);
         const monthValue = clonedState.fields.expirationMonth;
-        clonedState.isErrorField.expirationMonth = !isMonth(monthValue) || monthValue.length < 2;
+        clonedState.isErrorField.expirationMonth = !isMonth(monthValue) || monthValue.length !== 2;
 
         return clonedState;
       }

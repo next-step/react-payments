@@ -26,6 +26,14 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
   const colorPickerRef = useRef<HTMLDivElement>(null);
   const [showColorPicker, setShowColorPicker] = useState(false);
 
+  const expirationYearRef = useRef<HTMLInputElement>(null);
+
+  const handleExpirationMonthKeyUp = () => {
+    if (isErrorField.expirationMonth) return;
+
+    expirationYearRef.current?.focus();
+  };
+
   const areAllInputsFilled = Object.values(fields).every((value) => value.trim() !== '');
   const areAllInputsValid = Object.values(isErrorField).every((value) => !value);
   const disableNextButton = !areAllInputsFilled || !areAllInputsValid;
@@ -61,11 +69,13 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
               dateType="month"
               value={fields.expirationMonth}
               onChange={handleExpirationMonthInputChange}
+              onKeyUp={handleExpirationMonthKeyUp}
             />
 
             <CreditCardTextFields.ExpirationDate
               dateType="year"
               value={fields.expirationYear}
+              inputRef={expirationYearRef}
               onChange={handleExpirationYearInputChange}
             />
           </HFlex>
