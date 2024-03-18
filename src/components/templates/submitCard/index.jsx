@@ -4,14 +4,26 @@ import Input from "../../atoms/input";
 import Text from "../../atoms/text";
 import Card from "../../molecules/card";
 import { useFormContext } from "../../../hooks/useFormProvider";
+import random from "../../../utils/func/random";
 
 const SubmitCard = (props) => {
-  const { setCardList, update } = props;
-  const { handleSubmit, reset, watch } = useFormContext();
+  const { setCardData, update } = props;
+  const { handleSubmit, reset } = useFormContext();
 
   const handleAddCard = (data) => {
     update("list");
-    setCardList((prev) => [...prev, data]);
+
+    if (data.id) {
+      setCardData((prev) => ({ ...prev, [data.id]: data }));
+    } else {
+      const randomId = random(8);
+
+      data.id = randomId;
+      data.nickname = data.nickname || data.cardCompany;
+
+      setCardData((prev) => ({ [randomId]: data, ...prev }));
+    }
+
     reset();
   };
 
@@ -30,8 +42,9 @@ const SubmitCard = (props) => {
       <Box className={["input-container", "flex-center", "w-100"]}>
         <Input
           name="nickname"
+          placeholder={"카드 별칭 (선택)"}
           className={["input-underline", "w-75"]}
-          required
+          length={10}
         />
       </Box>
 
@@ -45,7 +58,7 @@ const SubmitCard = (props) => {
 };
 
 SubmitCard.propTypes = {
-  setCardList: PropTypes.func,
+  setCardData: PropTypes.func,
   update: PropTypes.func,
 };
 

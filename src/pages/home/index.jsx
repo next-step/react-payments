@@ -7,7 +7,7 @@ import useCustomForm from "../../hooks/useForm";
 import FormProvider from "../../hooks/useFormProvider";
 
 const Home = () => {
-  const [cardList, setCardList] = useState([]);
+  const [cardData, setCardData] = useState({});
   const form = useCustomForm({
     mode: "onChange",
     defaultValues: {
@@ -26,13 +26,13 @@ const Home = () => {
     <FormProvider {...form}>
       <Funnel steps={["list", "form", "success"]}>
         <Funnel.Step name="list">
-          <CardList cardList={cardList} />
+          <CardList cardData={cardData} setCardData={setCardData} />
         </Funnel.Step>
         <Funnel.Step name="form">
           <CardForm />
         </Funnel.Step>
         <Funnel.Step name="success">
-          <SubmitCard setCardList={setCardList} />
+          <SubmitCard setCardData={setCardData} />
         </Funnel.Step>
       </Funnel>
     </FormProvider>
