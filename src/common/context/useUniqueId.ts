@@ -1,6 +1,6 @@
 import useContextHook from "@/common/hooks/useContextHook";
+import { useEffect, useRef } from "react";
 import { UniqueIdContext } from "../context/UniqueIdProvider";
-import { useRef } from "react";
 
 const useUniqueId = () => {
 	const uniqueIdRef = useRef<string | null>(null);
@@ -10,9 +10,11 @@ const useUniqueId = () => {
 		"UniqueIdContext"
 	);
 
-	if (!uniqueIdRef.current) {
-		uniqueIdRef.current = generateUniqueId();
-	}
+	useEffect(() => {
+		if (!uniqueIdRef.current) {
+			uniqueIdRef.current = generateUniqueId();
+		}
+	}, [generateUniqueId]);
 
 	return uniqueIdRef.current;
 };
