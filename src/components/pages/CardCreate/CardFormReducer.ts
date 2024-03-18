@@ -31,6 +31,7 @@ const reducer = (state: CardFormState, action: ReducerAction) => {
       clonedState.fields.cardNumber = replacedText;
       return clonedState;
     }
+
     case REDUCER_ACTION_TYPE.UPDATE_EXPIRATION_MONTH:
       if (!action.payload) {
         clonedState.fields.expirationMonth = '';
@@ -38,6 +39,7 @@ const reducer = (state: CardFormState, action: ReducerAction) => {
       }
       clonedState.fields.expirationMonth = keepOnlyNumeric(action.payload);
       return clonedState;
+
     case REDUCER_ACTION_TYPE.UPDATE_EXPIRATION_YEAR:
       if (!action.payload) {
         clonedState.fields.expirationYear = '';
@@ -45,6 +47,7 @@ const reducer = (state: CardFormState, action: ReducerAction) => {
       }
       clonedState.fields.expirationYear = keepOnlyNumeric(action.payload);
       return clonedState;
+
     case REDUCER_ACTION_TYPE.UPDATE_OWNER_NAME:
       if (!action.payload) {
         clonedState.fields.ownerName = '';
@@ -52,6 +55,7 @@ const reducer = (state: CardFormState, action: ReducerAction) => {
       }
       clonedState.fields.ownerName = keepOnlyAlphabetHangulAndSpace(action.payload);
       return clonedState;
+
     case REDUCER_ACTION_TYPE.UPDATE_VERIFICATION_CODE:
       if (!action.payload) {
         clonedState.fields.verificationCode = '';
@@ -67,6 +71,7 @@ const reducer = (state: CardFormState, action: ReducerAction) => {
       }
       clonedState.fields.cardPassword = keepOnlyNumeric(action.payload);
       return clonedState;
+
     case REDUCER_ACTION_TYPE.UPDATE_CARD_COMPANY:
       if (!action.payload) {
         clonedState.options.cardCompany = '';
@@ -74,6 +79,7 @@ const reducer = (state: CardFormState, action: ReducerAction) => {
       }
       clonedState.options.cardCompany = action.payload;
       return clonedState;
+
     case REDUCER_ACTION_TYPE.UPDATE_CARD_NICKNAME:
       if (!action.payload) {
         clonedState.options.cardNickname = '';
