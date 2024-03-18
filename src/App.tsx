@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { CardManageContextProvider } from "./Card/machine/card/CardManageContext";
 import { UniqueIdProvider } from "./common/context/UniqueIdProvider";
 import navigationPath from "./common/navigation/navigationPath";
 import CardFunnel from "./pages/CardFunnel";
@@ -11,7 +12,11 @@ function App() {
 					<Routes>
 						<Route
 							path={navigationPath.ADD_CARD_FUNNEL["CARD_LIST"]}
-							element={<CardFunnel />}
+							element={
+								<CardManageContextProvider>
+									<CardFunnel />
+								</CardManageContextProvider>
+							}
 						/>
 					</Routes>
 				</BrowserRouter>
