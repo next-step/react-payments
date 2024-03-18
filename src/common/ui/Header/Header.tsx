@@ -21,7 +21,6 @@ const Header = ({
 	backButtonCallback
 }: HeaderProps) => {
 	const onClickBackButton = () => {
-		window.history.back();
 		backButtonCallback && backButtonCallback();
 	};
 	return (
