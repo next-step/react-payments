@@ -34,7 +34,7 @@ export const AddCardComplete = () => {
 
       return {
         cardList: [
-          ...cardList.filter((card) => card.createdAt !== tempCard.createdAt),
+          ...cardList.filter((card) => card.id !== tempCard.id),
           newPaymentCard,
         ],
         tempCard: null,

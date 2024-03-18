@@ -4,6 +4,7 @@ import { STEP } from '../payments.constant';
 import { Card } from '@/components/card/Card';
 import { Card as CardData } from '../payments.type';
 import { Funnel } from '../payments.context';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface CardFulfilledForm {
   number: boolean;
@@ -35,6 +36,7 @@ export const AddCard = () => {
         tempCard: {
           ...values,
           createdAt: new Date(),
+          id: uuidv4(),
         },
       };
     });
