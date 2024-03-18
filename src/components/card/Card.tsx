@@ -8,7 +8,6 @@ interface CardProps {
   onClick?: () => void;
 }
 
-const ELLIPSIS_LENGTH = 11;
 const DEFAULT_VALUE = {
   OWNER_NAME: 'NAME',
   EXPIRE_MONTH: 'MM',
@@ -69,11 +68,8 @@ export const Card = ({ data, onClick, isComplete }: CardProps) => {
             </span>
           </div>
           <div className='card-bottom__info'>
-            <span className='card-text'>
-              {Formatter.ellipsis(
-                ownerName || DEFAULT_VALUE.OWNER_NAME,
-                ELLIPSIS_LENGTH
-              )}
+            <span className='card-text text-ellipsis w-50'>
+              {ownerName || DEFAULT_VALUE.OWNER_NAME}
             </span>
             <span className='card-text'>{expireDate}</span>
           </div>
