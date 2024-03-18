@@ -39,14 +39,19 @@ function VerificationCode({ value, onChange }: CreditCardTextFieldProps) {
   );
 }
 
-function CardPassword({ value, onChange }: CreditCardTextFieldProps) {
+interface CardPasswordProps extends Omit<CreditCardTextFieldProps, 'onChange'> {
+  onClick: () => void;
+}
+
+function CardPassword({ value, onClick }: CardPasswordProps) {
   return (
     <TextField
       name="cardPassword"
       className="w-28"
       type="text"
       value={value}
-      onChange={onChange}
+      onClick={onClick}
+      onChange={() => {}}
       label="카드 비밀번호"
       lengthLimit={{ show: false, maxLength: 2 }}
       inputProps={{ inputMode: 'numeric', type: 'password', className: 'text-center' }}

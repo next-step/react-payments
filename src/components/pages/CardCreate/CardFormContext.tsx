@@ -107,6 +107,19 @@ const useCardFormContext = (initialState: CardFormState) => {
     });
   }, []);
 
+  const handleNumPadClick = useCallback((value: string) => {
+    dispatch({
+      type: REDUCER_ACTION_TYPE.UPDATE_CARD_PASSWORD,
+      payload: value,
+    });
+  }, []);
+
+  const handleBackspaceClick = useCallback(() => {
+    dispatch({
+      type: REDUCER_ACTION_TYPE.DELETE_CARD_PASSWORD,
+    });
+  }, []);
+
   return {
     state,
     handleCardNumberInputChange,
@@ -117,6 +130,8 @@ const useCardFormContext = (initialState: CardFormState) => {
     handleCardPasswordInputChange,
     updateCardCompany,
     handleCardNicknameInputChange,
+    handleNumPadClick,
+    handleBackspaceClick,
   };
 };
 

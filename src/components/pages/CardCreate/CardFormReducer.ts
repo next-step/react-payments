@@ -9,6 +9,7 @@ export enum REDUCER_ACTION_TYPE {
   UPDATE_OWNER_NAME = 'UPDATE_OWNER_NAME',
   UPDATE_VERIFICATION_CODE = 'UPDATE_VERIFICATION_CODE',
   UPDATE_CARD_PASSWORD = 'UPDATE_CARD_PASSWORD',
+  DELETE_CARD_PASSWORD = 'DELETE_CARD_PASSWORD',
   UPDATE_CARD_COMPANY = 'UPDATE_CARD_COMPANY',
   UPDATE_CARD_NICKNAME = 'UPDATE_CARD_NICKNAME',
 }
@@ -76,7 +77,12 @@ const reducer = (state: CardFormState, action: ReducerAction) => {
         clonedState.fields.cardPassword = '';
         return clonedState;
       }
-      clonedState.fields.cardPassword = keepOnlyNumeric(action.payload);
+      if (clonedState.fields.cardPassword.length >= 2) return clonedState;
+      clonedState.fields.cardPassword += keepOnlyNumeric(action.payload);
+      return clonedState;
+
+    case REDUCER_ACTION_TYPE.DELETE_CARD_PASSWORD:
+      clonedState.fields.cardPassword = clonedState.fields.cardPassword.slice(0, -1);
       return clonedState;
 
     case REDUCER_ACTION_TYPE.UPDATE_CARD_COMPANY:

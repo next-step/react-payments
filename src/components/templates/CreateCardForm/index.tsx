@@ -1,4 +1,6 @@
+import CreditCardPasswordKeyboard from '@/components/organisms/CreditCardPasswordKeyboard';
 import { useCardInput } from '@/components/pages/CardCreate/useCardInput';
+import useCardPasswordKeyboard from '@/components/pages/CardCreate/useCardPasswordKeyboard';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import chevronLeft from '@assets/icon/chevron_left_24.svg';
 import { Box, Button, Container, HFlex, Text, VFlex } from '@components/atoms';
@@ -16,21 +18,27 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
     fields,
     isErrorField,
     handleCardNumberInputChange,
-    handleCardPasswordInputChange,
     handleExpirationMonthInputChange,
     handleExpirationYearInputChange,
     handleOwnerNameInputChange,
     handleVerificationCodeInputChange,
   } = useCardInput();
 
+  const {
+    showPasswordKeyboard,
+    passwordKeyboardRef,
+    handleCardPasswordClick,
+    hidePasswordKeyboard,
+    handleNumPadClick,
+    handleBackspaceClick,
+  } = useCardPasswordKeyboard();
+
   const colorPickerRef = useRef<HTMLDivElement>(null);
   const [showColorPicker, setShowColorPicker] = useState(false);
 
   const expirationYearRef = useRef<HTMLInputElement>(null);
-
   const handleExpirationMonthInputKeyUp = () => {
     if (isErrorField.expirationMonth) return;
-
     expirationYearRef.current?.focus();
   };
 
@@ -49,6 +57,11 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
   useOutsideClick({
     ref: colorPickerRef,
     handler: hideColorPicker,
+  });
+
+  useOutsideClick({
+    ref: passwordKeyboardRef,
+    handler: hidePasswordKeyboard,
   });
 
   return (
@@ -90,7 +103,7 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
           value={fields.verificationCode}
           onChange={handleVerificationCodeInputChange}
         />
-        <CreditCardTextFields.CardPassword value={fields.cardPassword} onChange={handleCardPasswordInputChange} />
+        <CreditCardTextFields.CardPassword value={fields.cardPassword} onClick={handleCardPasswordClick} />
       </Box>
 
       <Box className="w-full">
@@ -99,6 +112,13 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
         </Button>
       </Box>
       {showColorPicker && <CreditCardCompanyPicker ref={colorPickerRef} onClick={onNext} />}
+      {showPasswordKeyboard && (
+        <CreditCardPasswordKeyboard
+          onClick={handleNumPadClick}
+          onDelete={handleBackspaceClick}
+          ref={passwordKeyboardRef}
+        />
+      )}
     </Container>
   );
 }
