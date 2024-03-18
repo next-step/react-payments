@@ -5,16 +5,19 @@ import { maskStringAfterIndex } from "@/common/utils";
 import { convertObjectValuesToString } from "@/common/utils/object";
 import { CardFunnelProps } from "@/pages/CardFunnel";
 import styled from "@emotion/styled";
-import { ChangeEvent } from "react";
+import { CARD_COLOR_MAP } from "../constants/cardCompany";
+import { useManageCardContext } from "../machine/card/useCardContext";
 import { CardInfo } from "../types/card";
+import { CARD_COMPANY } from "../types/cardCompany";
 import Card from "../ui/Card/Card";
 
 interface SuccessAddCardProps extends CardFunnelProps {
 	card: CardInfo;
-	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SuccessAddCard = ({ card, onNext, onChange }: SuccessAddCardProps) => {
+const SuccessAddCard = ({ card, onNext }: SuccessAddCardProps) => {
+	const { send } = useManageCardContext();
+
 	return (
 		<Container>
 			<TitleWrapper>
@@ -23,7 +26,10 @@ const SuccessAddCard = ({ card, onNext, onChange }: SuccessAddCardProps) => {
 				</Title>
 			</TitleWrapper>
 			<CardWrapper>
-				<Card size={"big"}>
+				<Card
+					size={"big"}
+					color={CARD_COLOR_MAP[card.bankName as CARD_COMPANY]}
+				>
 					<Card.Top>
 						<Card.CardCompany text={card.bankName} />
 					</Card.Top>
@@ -46,7 +52,14 @@ const SuccessAddCard = ({ card, onNext, onChange }: SuccessAddCardProps) => {
 						</Card.BottomInfo>
 					</Card.Bottom>
 				</Card>
-				<Input underline name='cardName' onChange={onChange} />
+				<Input
+					underline
+					name='cardName'
+					maxLength={10}
+					onChange={(e) => {
+						send({ type: "CHANGE_CARD_NAME", value: e.target.value });
+					}}
+				/>
 			</CardWrapper>
 			<BottomFixedButton width={20} onClick={onNext}>
 				<Text.Span color='cyan' fontSize={14}>
