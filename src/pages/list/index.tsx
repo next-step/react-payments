@@ -40,6 +40,7 @@ const List = () => {
           </Link>
           {datas.map((data) => {
             const {
+              id,
               cardNumber1,
               cardNumber2,
               cardNumber3,
@@ -51,7 +52,7 @@ const List = () => {
             } = data;
             const cardNum = `${cardNumber1}${cardNumber2}${cardNumber3}${cardNumber4}`;
             return (
-              <li key={cardNum} className={styles.listItem}>
+              <li key={id} className={styles.listItem}>
                 <div>{cardName}</div>
                 <Card
                   onClick={() => handleClickCard(data)}
