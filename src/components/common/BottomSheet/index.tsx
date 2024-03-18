@@ -1,17 +1,16 @@
 import { css } from '@emotion/css'
-import { MouseEventHandler, ReactNode } from 'react'
+import { MouseEventHandler, PropsWithChildren } from 'react'
 
 type BottomSheetProps = {
   isOpen: boolean
   onClose: () => void
-  children: ReactNode
 }
 
 export const BottomSheet = ({
-  isOpen,
+  isOpen = false,
   onClose,
   children
-}: BottomSheetProps) => {
+}: PropsWithChildren<BottomSheetProps>) => {
   const bottomSheetStyle = css`
     display: ${isOpen ? 'flex' : 'none'};
   `
