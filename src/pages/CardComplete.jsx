@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import Card from "../components/atomic-design-pattern/molecule/Card";
 import { CardContext } from "../../providers/CardState/CardStateProvider";
 import { MONTH, YEAR } from "../constants/expirationDate";
@@ -9,11 +9,12 @@ import { CardStorage } from "../util/cardStorage";
 export default function CardComplete({ onNext }) {
   const { cardState } = useContext(CardContext);
   const { cardNumber, expirationDate, cardOwnerName, alias } = cardState;
-  const aliasInputRef = useRef(null);
 
   const onSubmitCardComplete = (event) => {
     event.preventDefault();
-    const alias = aliasInputRef.current.value;
+    const formData = new FormData(event.currentTarget);
+    const alias = formData.get("alias");
+
     if (alias) {
       CardStorage.changeCardInfo(cardNumber, "alias", alias);
     }
@@ -37,7 +38,8 @@ export default function CardComplete({ onNext }) {
         className="input-underline w-75"
         placeholder="카드 별칭 (선택)"
         maxLength={10}
-        ref={aliasInputRef}
+        type="text"
+        name="alias"
       />
 
       <div className="button-box">
