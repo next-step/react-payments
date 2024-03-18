@@ -1,25 +1,13 @@
 import { HTMLProps, PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
 import { ButtonHoverProps, ButtonOptionalProps } from './Button.type';
-import { getButtonColor } from './Button.utils.ts';
-import { styleToken } from '@/shared/styles';
-import type { AsProps, StyleProps } from '@/shared/types';
+import { getButtonColor } from './Button.utils';
+import { styleToken } from '@/shared';
+import type { AsProps, StyleProps } from '@/shared';
 
 type ButtonProps = PropsWithChildren<
   StyleProps & AsProps & HTMLProps<HTMLButtonElement> & ButtonOptionalProps & ButtonHoverProps
 >;
-
-export const Button = ({
-  children,
-  type = 'button',
-  variant = 'solid',
-  colorScheme = 'teal',
-  ...rest
-}: ButtonProps) => (
-  <Root type={type} variant={variant} colorScheme={colorScheme} {...rest}>
-    {children}
-  </Root>
-);
 
 const Root = styled.button<ButtonProps & Required<ButtonOptionalProps> & ButtonHoverProps>`
   width: ${({ width }) => width || 'auto'};
@@ -68,6 +56,19 @@ const Root = styled.button<ButtonProps & Required<ButtonOptionalProps> & ButtonH
   ${({ backgroundColor }) => backgroundColor && `background-color: ${backgroundColor}`};
   ${({ fontSize }) => fontSize && `background-color: ${fontSize};`};
   ${({ padding }) => padding && `padding: ${padding};`};
+  ${({ margin }) => margin && `margin: ${margin};`};
 `;
+
+export const Button = ({
+  children,
+  type = 'button',
+  variant = 'solid',
+  colorScheme = 'teal',
+  ...rest
+}: ButtonProps) => (
+  <Root variant={variant} colorScheme={colorScheme} {...rest}>
+    {children}
+  </Root>
+);
 
 Button.displayName = 'Button';

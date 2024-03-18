@@ -12,8 +12,11 @@ type LabelProps = PropsWithChildren<
     }
 >;
 
+const Root = styled(DefaultStyled)<LabelProps>``;
+
 export const Label = ({ children, ...props }: LabelProps) => {
   const { as, variant = 'caption', fontSize, fontWeight, color, letterSpacing, whiteSpace, ...restProps } = props;
+
   const typographyProps = {
     variant,
     fontWeight,
@@ -27,7 +30,5 @@ export const Label = ({ children, ...props }: LabelProps) => {
     </Root>
   );
 };
-
-const Root = styled(DefaultStyled)<LabelProps>``;
 
 Label.displayName = 'Label';

@@ -1,21 +1,22 @@
-import { AppLayout, CardProvider, Funnel } from '@/components';
-import { CardAddPage, CardCompletePage, CardListPage } from '@/pages';
+import { CardProvider } from 'src/card/providers';
+import { CardAddPage, CardCompletePage, CardListPage, CardPageIndex } from '@/card';
+import { AppDisplay, Funnel } from '@/shared';
 
 const App = () => (
-  <AppLayout.Root>
+  <AppDisplay.Root>
     <CardProvider>
       <Funnel.Root>
-        <Funnel.Step index={0}>
+        <Funnel.Step index={CardPageIndex.CardListPage}>
           <CardListPage />
         </Funnel.Step>
-        <Funnel.Step index={1}>
+        <Funnel.Step index={CardPageIndex.CardAddPage}>
           <CardAddPage />
         </Funnel.Step>
-        <Funnel.Step index={2}>
+        <Funnel.Step index={CardPageIndex.CardCompletePage}>
           <CardCompletePage />
         </Funnel.Step>
       </Funnel.Root>
     </CardProvider>
-  </AppLayout.Root>
+  </AppDisplay.Root>
 );
 export default App;

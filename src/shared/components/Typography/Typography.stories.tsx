@@ -1,8 +1,13 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { Typography, TypographyVariants, typographyVariantStyle } from './Typography';
-import { AppLayout } from '@/components';
-import { VStack } from '@/shared/components';
-import { storybookControls, styleToken } from '@/shared/styles';
+import {
+  Typography,
+  TypographyVariants,
+  typographyVariantStyle,
+  AppDisplay,
+  VStack,
+  storybookControls,
+  styleToken,
+} from '@/shared';
 
 const meta: Meta<typeof Typography> = {
   title: 'Primitive/Typography',
@@ -19,9 +24,9 @@ const meta: Meta<typeof Typography> = {
   },
   decorators: [
     (Story) => (
-      <AppLayout>
+      <AppDisplay>
         <Story />
-      </AppLayout>
+      </AppDisplay>
     ),
   ],
 };
@@ -42,6 +47,7 @@ export const WithVariants: Story = {
     <VStack spacing="24px">
       {Object.entries(TypographyVariants).map(([key, value]) => {
         const { fontSize, fontWeight, lineHeight, letterSpacing } = typographyVariantStyle[value];
+
         return (
           <VStack>
             <Typography key={`${key}-name`} variant={value} color={styleToken.color.black}>

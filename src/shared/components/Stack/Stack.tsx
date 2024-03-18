@@ -10,11 +10,9 @@ type StackProps = PropsWithChildren<
       spacing?: string;
     }
 >;
-export const Stack = ({ children, flexDirection = 'column', spacing, ...props }: StackProps) => (
-  <Root flexDirection={flexDirection} spacing={spacing} {...props}>
-    {children}
-  </Root>
-);
+
+const isValidFlexDirection = (flexDirection: string): flexDirection is keyof typeof marginMapping =>
+  flexDirection in marginMapping;
 
 const Root = styled(DefaultStyled)<StackProps>`
   display: flex;
@@ -29,14 +27,17 @@ const Root = styled(DefaultStyled)<StackProps>`
   `}
 `;
 
+export const Stack = ({ children, flexDirection = 'column', spacing, ...props }: StackProps) => (
+  <Root flexDirection={flexDirection} spacing={spacing} {...props}>
+    {children}
+  </Root>
+);
+
 const marginMapping = {
   column: 'margin-top',
   'column-reverse': 'margin-bottom',
   row: 'margin-left',
   'row-reverse': 'margin-right',
 } as const;
-
-const isValidFlexDirection = (flexDirection: string): flexDirection is keyof typeof marginMapping =>
-  flexDirection in marginMapping;
 
 Stack.displayName = 'Stack';

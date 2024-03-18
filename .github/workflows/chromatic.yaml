@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - main
+      - bytrustu
     paths:
-      - 'src/components/**'
+      - 'src/card/components/**'
       - 'src/shared/components/**'
       - 'src/shared/styles/**'
 
@@ -15,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # 전체 Git 이력을 가져오도록 설정
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
