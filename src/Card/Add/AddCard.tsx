@@ -1,4 +1,6 @@
+import { useManageCardContext } from "@/Card/machine/card/useCardContext";
 import { useInputState } from "@/common/hooks";
+import useBottomSheet from "@/common/ui/BottomSheet/useBottomSheet";
 import BottomFixedButton from "@/common/ui/Button/BottomFixedButton";
 import FlexibleInput from "@/common/ui/FlexibleInput/FlexibleInput";
 import Header from "@/common/ui/Header/Header";
@@ -6,7 +8,6 @@ import Text from "@/common/ui/Text/Text";
 import { maskStringAfterIndex } from "@/common/utils";
 import { convertObjectValuesToString } from "@/common/utils/object";
 import styled from "@emotion/styled";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import {
 	CARD_EXPIRATION_DATE_LENGTH,
 	CARD_NUMBER_LENGTH,
@@ -14,8 +15,12 @@ import {
 	CARD_PASSWORD_LENGTH,
 	CARD_SECURITY_CODE_LENGTH
 } from "../constants";
+import { CARD_COLOR_MAP } from "../constants/cardCompany";
 import { CardInfo } from "../types/card";
+import { CARD_COMPANY } from "../types/cardCompany";
+import Card from "../ui/Card/Card";
 import EmptyCard from "../ui/Card/EmptyCard";
+import CardCompanyList from "../ui/CardCompany/CardCompanyList";
 import {
 	formatExpiryDate,
 	onlyNumber,
@@ -24,12 +29,15 @@ import {
 
 export interface AddCardProps {
 	card: CardInfo;
-	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 	onNext: () => void;
-	setCard: Dispatch<SetStateAction<CardInfo>>;
+	onPrev: () => void;
 }
 
-const AddCard = ({ card, onChange, onNext, setCard }: AddCardProps) => {
+const AddCard = ({ card, onNext, onPrev }: AddCardProps) => {
+	const { send } = useManageCardContext();
+
+	const { BottomSheet, isOpen, open, close } = useBottomSheet();
+
 	const [expirationDate, onChangeExpirationDate, onKeyDownExpirationDate] =
 		useInputState(
 			"",
@@ -42,15 +50,15 @@ const AddCard = ({ card, onChange, onNext, setCard }: AddCardProps) => {
 	const [securityCode, onChangeSecurityCode] = useInputState("", onlyNumber);
 
 	const onClickNext = () => {
-		setCard((prev) => ({
-			...prev,
-			expirationDate: { month, year },
-			securityCode
-		}));
+		send({ type: "CHANGE_EXPIRATION_DATE", name: "month", value: month });
+		send({ type: "CHANGE_EXPIRATION_DATE", name: "year", value: year });
+		send({ type: "CHANGE_SECURITY_CODE", value: securityCode });
+		send({ type: "CARD_INFO_CHECK" });
 		onNext();
 	};
 
 	const isAllInputFilled =
+		card.bankName.length &&
 		Object.values(card.cardNumber).every(
 			(value) => value.length === CARD_NUMBER_LENGTH
 		) &&
@@ -61,19 +69,54 @@ const AddCard = ({ card, onChange, onNext, setCard }: AddCardProps) => {
 
 	return (
 		<Container>
-			<Header showBackButton title='카드 추가' />
-			<EmptyCard mode='add'>
-				<EmptyCard.CardCompany text={""} />
-				<EmptyCard.Chip />
-				<EmptyCard.CardNumber
-					text={maskStringAfterIndex(
-						convertObjectValuesToString(card.cardNumber),
-						2
-					)}
-				/>
-				<EmptyCard.Name text={card.ownerName || "NAME"} />
-				<EmptyCard.ExpirationDate month={month || "MM"} year={year || "YY"} />
-			</EmptyCard>
+			<Header
+				showBackButton
+				title='카드 추가'
+				backButtonCallback={() => {
+					send({ type: "RESET_CARD" });
+					onPrev();
+				}}
+			/>
+			{!card.bankName.length && (
+				<EmptyCard mode='add' onClick={open}>
+					<EmptyCard.CardCompany text={`${card.bankName}`} />
+					<EmptyCard.Chip />
+					<EmptyCard.CardNumber
+						text={maskStringAfterIndex(
+							convertObjectValuesToString(card.cardNumber),
+							2
+						)}
+					/>
+					<EmptyCard.Name text={card.ownerName || "NAME"} />
+					<EmptyCard.ExpirationDate month={month || "MM"} year={year || "YY"} />
+				</EmptyCard>
+			)}
+			{!!card.bankName.length && (
+				<Card
+					size='small'
+					onClick={open}
+					color={CARD_COLOR_MAP[card.bankName as CARD_COMPANY]}
+				>
+					<Card.Top>
+						<Card.CardCompany text={`${card.bankName}카드`} />
+					</Card.Top>
+					<Card.Middle>
+						<Card.Chip />
+					</Card.Middle>
+					<Card.Bottom>
+						<Card.CardNumber
+							text={maskStringAfterIndex(
+								convertObjectValuesToString(card.cardNumber),
+								2
+							)}
+						/>
+						<Card.BottomInfo>
+							<Card.Name text={card.ownerName || "NAME"} />
+							<Card.ExpirationDate month={month || "MM"} year={year || "YY"} />
+						</Card.BottomInfo>
+					</Card.Bottom>
+				</Card>
+			)}
 			{/** 카드 번호 */}
 			<FlexibleInput>
 				<FlexibleInput.Title>카드 번호</FlexibleInput.Title>
@@ -81,7 +124,13 @@ const AddCard = ({ card, onChange, onNext, setCard }: AddCardProps) => {
 					<FlexibleInput.Input
 						name='cardNumber.first'
 						value={card.cardNumber.first}
-						onChange={onChange}
+						onChange={(e) => {
+							send({
+								type: "CHANGE_CARD_NUMBER",
+								name: "first",
+								value: e.target.value
+							});
+						}}
 						maxLength={CARD_NUMBER_LENGTH}
 					/>
 					{card.cardNumber.first.length === CARD_NUMBER_LENGTH && (
@@ -91,7 +140,13 @@ const AddCard = ({ card, onChange, onNext, setCard }: AddCardProps) => {
 						type='text'
 						name='cardNumber.second'
 						value={card.cardNumber.second}
-						onChange={onChange}
+						onChange={(e) => {
+							send({
+								type: "CHANGE_CARD_NUMBER",
+								name: "second",
+								value: e.target.value
+							});
+						}}
 						maxLength={CARD_NUMBER_LENGTH}
 					/>
 					{card.cardNumber.second.length === CARD_NUMBER_LENGTH && (
@@ -101,7 +156,13 @@ const AddCard = ({ card, onChange, onNext, setCard }: AddCardProps) => {
 						type='password'
 						name='cardNumber.third'
 						value={card.cardNumber.third}
-						onChange={onChange}
+						onChange={(e) => {
+							send({
+								type: "CHANGE_CARD_NUMBER",
+								name: "third",
+								value: e.target.value
+							});
+						}}
 						maxLength={CARD_NUMBER_LENGTH}
 					/>
 					{card.cardNumber.third.length === CARD_NUMBER_LENGTH && (
@@ -111,7 +172,13 @@ const AddCard = ({ card, onChange, onNext, setCard }: AddCardProps) => {
 						type='password'
 						name='cardNumber.fourth'
 						value={card.cardNumber.fourth}
-						onChange={onChange}
+						onChange={(e) => {
+							send({
+								type: "CHANGE_CARD_NUMBER",
+								name: "fourth",
+								value: e.target.value
+							});
+						}}
 						maxLength={CARD_NUMBER_LENGTH}
 					/>
 				</FlexibleInput.InputBox>
@@ -137,7 +204,12 @@ const AddCard = ({ card, onChange, onNext, setCard }: AddCardProps) => {
 					<FlexibleInput.Input
 						name='ownerName'
 						value={card.ownerName}
-						onChange={onChange}
+						onChange={(e) => {
+							send({
+								type: "CHANGE_OWNER_NAME",
+								value: e.target.value
+							});
+						}}
 						textAlign='left'
 						maxLength={CARD_OWNER_NAME_LENGTH}
 					/>
@@ -163,7 +235,13 @@ const AddCard = ({ card, onChange, onNext, setCard }: AddCardProps) => {
 						type='password'
 						name='password.first'
 						value={card.password.first}
-						onChange={onChange}
+						onChange={(e) => {
+							send({
+								type: "CHANGE_PASSWORD",
+								name: "first",
+								value: e.target.value
+							});
+						}}
 						width={15}
 						maxLength={CARD_PASSWORD_LENGTH}
 					/>
@@ -171,7 +249,13 @@ const AddCard = ({ card, onChange, onNext, setCard }: AddCardProps) => {
 						type='password'
 						name='password.second'
 						value={card.password.second}
-						onChange={onChange}
+						onChange={(e) => {
+							send({
+								type: "CHANGE_PASSWORD",
+								name: "second",
+								value: e.target.value
+							});
+						}}
 						width={15}
 						maxLength={CARD_PASSWORD_LENGTH}
 					/>
@@ -191,6 +275,14 @@ const AddCard = ({ card, onChange, onNext, setCard }: AddCardProps) => {
 					/>
 				</PasswordWrapper>
 			</FlexibleInput>
+			<BottomSheet isOpen={isOpen} onClose={close}>
+				<CardCompanyList
+					onClick={(cardCompany) => {
+						send({ type: "CHANGE_BANK_NAME", value: cardCompany.bankName });
+						close();
+					}}
+				/>
+			</BottomSheet>
 			{!!isAllInputFilled && (
 				<BottomFixedButton width={20} onClick={onClickNext}>
 					<Text.Span color='cyan' fontSize={14}>
