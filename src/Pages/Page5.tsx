@@ -4,35 +4,56 @@ import EmptyCardLayout from "../Components/Cards/CardElements/Layout/EmptyCardLa
 import H2Text from "../Components/Text/H2Text";
 import Layout45 from "../Components/Layout/Layout45";
 import Flex from "../Components/Layout/Flex";
-import { useCardInfo } from "../Context/CardProvider";
-import { useEffect } from "react";
 import { useRegisteredCards } from "../Context/RegisteredCardsProvider";
-import { v4 as uuidv4 } from "uuid";
+import { useContext, useEffect } from "react";
+import { PageStepContext } from "../Context/PageStepProvider";
+import usePushCardInfo from "../Hooks/usePushCardInfo ";
+import { useCardInfo } from "../Context/CardProvider";
+import { CardInfoType } from "../type/CardInfoType";
+import useResetCardInfo from "../Hooks/useResetCardInfo";
 
 const Page5 = () => {
-  const { cards, handleCard } = useRegisteredCards();
+  const { cards } = useRegisteredCards();
+  const { handleProvise } = useContext(PageStepContext);
+  const { handlePushCardInfo } = usePushCardInfo();
+  const { dispatch } = useCardInfo();
+  const { handleResetCardInfo } = useResetCardInfo();
+  const handleClick = (key: string) => {
+    const foundCard = cards.find((card) => card.key === key)!;
+    dispatch({
+      type: "TOTAL",
+      payload: { key: "total", value: foundCard },
+    });
+    handleProvise();
+  };
 
-  const { state } = useCardInfo();
   useEffect(() => {
-    handleCard(state);
+    handlePushCardInfo();
+    return handleResetCardInfo();
   }, []);
 
   return (
     <>
-      <H2Text>5️⃣ 카드 목록</H2Text>
       <Layout45>
-        <Flex>
+        <Flex className="flex-container">
           <H2Text className="page-title mb-10"> 보유 카드</H2Text>
         </Flex>
-        {cards.map((card) => (
-          <NewSmallCreditcard
-            cardName={card.cardName}
-            cardNumber={card.cardNumber}
-            cardOwnerName={card.cardOwnerName}
-            expiryDate={card.expiryDate}
-            key={uuidv4()}
-          />
-        ))}
+        {cards
+          .sort(
+            (a: CardInfoType, b: CardInfoType) =>
+              Number(b.createdAt) - Number(a.createdAt)
+          )
+          .map((card) => (
+            <NewSmallCreditcard
+              cardName={card.cardName}
+              cardNumber={card.cardNumber}
+              cardOwnerName={card.cardOwnerName}
+              expiryDate={card.expiryDate}
+              cardNickName={card.cardNickName}
+              key={card.key}
+              onClick={() => handleClick(card.key)}
+            />
+          ))}
         <CardLayout>
           <EmptyCardLayout>+</EmptyCardLayout>
         </CardLayout>

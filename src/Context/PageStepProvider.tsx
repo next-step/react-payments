@@ -8,6 +8,7 @@ export const PageStepContext = createContext({
     idx: 0,
   },
   handleCurrentStep: () => {},
+  handleProvise: () => {},
 });
 
 const PageStepProvider = ({ children }: { children: ReactElement | null }) => {
@@ -15,7 +16,12 @@ const PageStepProvider = ({ children }: { children: ReactElement | null }) => {
     currentPage: TotalPage[0],
     idx: 0,
   });
-
+  const handleProvise = () => {
+    setCurrentStep({
+      currentPage: TotalPage[3],
+      idx: 3,
+    });
+  };
   const handleCurrentStep = () => {
     if (currentStep.idx + 1 === TotalPage.length) {
       setCurrentStep({
@@ -31,7 +37,8 @@ const PageStepProvider = ({ children }: { children: ReactElement | null }) => {
   };
 
   return (
-    <PageStepContext.Provider value={{ currentStep, handleCurrentStep }}>
+    <PageStepContext.Provider
+      value={{ currentStep, handleCurrentStep, handleProvise }}>
       {children}
     </PageStepContext.Provider>
   );
