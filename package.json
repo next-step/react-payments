@@ -23,6 +23,7 @@
 	},
 	"devDependencies": {
 		"@emotion/babel-plugin": "^11.11.0",
+		"@statelyai/inspect": "^0.2.5",
 		"@storybook/addon-essentials": "^7.6.17",
 		"@storybook/addon-interactions": "^7.6.17",
 		"@storybook/addon-links": "^7.6.17",
