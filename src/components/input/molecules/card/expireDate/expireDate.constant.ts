@@ -16,6 +16,7 @@ export const EXPIRE_DATE: InputFields = {
         );
       },
       maxLength: 2,
+      autoFocusIndex: 5,
     },
     YEAR: {
       name: 'expireYear',
@@ -29,6 +30,7 @@ export const EXPIRE_DATE: InputFields = {
         );
       },
       maxLength: 2,
+      autoFocusIndex: 6,
     },
   },
   TITLE: '만료일',

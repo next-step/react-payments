@@ -13,6 +13,7 @@ export const CARD_NUMBER: InputFields = {
           CARD_NUMBER.FIELDS.FIRST.maxLength as number
         ),
       maxLength: 4,
+      autoFocusIndex: 1,
     },
 
     SECOND: {
@@ -24,6 +25,7 @@ export const CARD_NUMBER: InputFields = {
           CARD_NUMBER.FIELDS.SECOND.maxLength as number
         ),
       maxLength: 4,
+      autoFocusIndex: 2,
     },
 
     THIRD: {
@@ -35,6 +37,7 @@ export const CARD_NUMBER: InputFields = {
           CARD_NUMBER.FIELDS.THIRD.maxLength as number
         ),
       maxLength: 4,
+      autoFocusIndex: 3,
     },
 
     FOURTH: {
@@ -46,6 +49,7 @@ export const CARD_NUMBER: InputFields = {
           CARD_NUMBER.FIELDS.FOURTH.maxLength as number
         ),
       maxLength: 4,
+      autoFocusIndex: 4,
     },
   },
 

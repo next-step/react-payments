@@ -12,6 +12,7 @@ export const SECURITY_CODE: InputFields = {
         return Validation.checkLength(field, 3);
       },
       maxLength: 3,
+      autoFocusIndex: 8,
     },
   },
   TITLE: '보안 코드(CVC/CVV)',

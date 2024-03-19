@@ -11,6 +11,7 @@ export const PASSWORD: InputFields = {
         return Validation.checkLength(field, 1);
       },
       maxLength: 1,
+      autoFocusIndex: 9,
     },
 
     SECOND: {
@@ -20,6 +21,7 @@ export const PASSWORD: InputFields = {
         return Validation.checkLength(field, 1);
       },
       maxLength: 1,
+      autoFocusIndex: 10,
     },
 
     THIRD: {
