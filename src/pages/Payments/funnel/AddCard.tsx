@@ -32,7 +32,6 @@ export const AddCard = () => {
     (amount, field) => (amount += Object.values(field).length),
     0
   );
-
   const autoFocusMethods = useAutoFocus({
     amount: fieldAmount,
   });

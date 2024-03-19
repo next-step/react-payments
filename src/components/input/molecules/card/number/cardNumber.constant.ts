@@ -11,7 +11,9 @@ export const CARD_NUMBER: InputFields = {
         Validation.checkLength(
           field,
           CARD_NUMBER.FIELDS.FIRST.maxLength as number
-        ),
+        )
+          ? false
+          : '첫 번째 카드 번호를 입력해주세요',
       maxLength: 4,
       autoFocusIndex: 1,
     },
@@ -23,7 +25,9 @@ export const CARD_NUMBER: InputFields = {
         Validation.checkLength(
           field,
           CARD_NUMBER.FIELDS.SECOND.maxLength as number
-        ),
+        )
+          ? false
+          : '두 번째 카드 번호를 입력해주세요',
       maxLength: 4,
       autoFocusIndex: 2,
     },
@@ -35,7 +39,9 @@ export const CARD_NUMBER: InputFields = {
         Validation.checkLength(
           field,
           CARD_NUMBER.FIELDS.THIRD.maxLength as number
-        ),
+        )
+          ? false
+          : '세 번째 카드 번호를 입력해주세요',
       maxLength: 4,
       autoFocusIndex: 3,
     },
@@ -47,7 +53,9 @@ export const CARD_NUMBER: InputFields = {
         Validation.checkLength(
           field,
           CARD_NUMBER.FIELDS.FOURTH.maxLength as number
-        ),
+        )
+          ? false
+          : '네 번째 카드 번호를 입력해주세요',
       maxLength: 4,
       autoFocusIndex: 4,
     },

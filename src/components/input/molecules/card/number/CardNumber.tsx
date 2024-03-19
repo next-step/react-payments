@@ -12,12 +12,18 @@ export const CardNumber = ({
 
   const fieldKeys = Object.values(fields.FIELDS).map(({ name }) => name);
   const fieldsFulfilled = Object.values(fieldKeys).map((key) => !errors[key]);
+  const fieldErrors = Object.values(fieldKeys)
+    .map((key) => errors[key])
+    .filter((error) => error);
   const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
   const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
 
   return (
     <Input.Container>
-      <Input.Title>{fields.TITLE}</Input.Title>
+      <Input.Title>
+        <span>{fields.TITLE}</span>
+        <Input.Error errors={fieldErrors} />
+      </Input.Title>
       <Input.Box
         separator={{
           symbol: INPUT.BOX.SEPARATOR.HYPHEN,

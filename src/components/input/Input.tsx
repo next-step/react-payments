@@ -1,6 +1,12 @@
 import { INPUT } from './input.constant';
 import { InputFactoryProps } from './input.type';
-import { DefaultInput, InputBox, InputContainer, InputTitle } from './atom';
+import {
+  DefaultInput,
+  InputBox,
+  InputContainer,
+  InputError,
+  InputTitle,
+} from './atom';
 import { forwardRef } from 'react';
 
 const InputFactory = forwardRef<HTMLInputElement, InputFactoryProps>(
@@ -22,4 +28,5 @@ export const Input = Object.assign(InputFactory, {
   Container: InputContainer,
   Title: InputTitle,
   Box: InputBox,
+  Error: InputError,
 });
