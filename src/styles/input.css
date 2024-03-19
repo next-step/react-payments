@@ -22,7 +22,10 @@
 
   color: #525252;
 }
-
+.input-length {
+  display: flex;
+  justify-content: space-between;
+}
 .input-basic {
   background-color: #ecebf1;
   height: 45px;
