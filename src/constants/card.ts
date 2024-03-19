@@ -15,9 +15,3 @@ export const CARD_PASSWORD = {
   MAX_LENGTH: 1,
   LAST_INPUT_INDEX: 3
 }
-
-export const PAYMENT_STEPS = [
-  'add card',
-  'completed add card',
-  'card list'
-] as const
