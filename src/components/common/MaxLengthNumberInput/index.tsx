@@ -4,16 +4,10 @@ import { css } from '@emotion/css'
 import { REGEXP } from '@/constants'
 
 type MaxLengthNumberInputProps = {
-  className?: string
   type?: 'text' | 'password'
-  width?: string
-  name?: string
-  id?: string
-  placeholder?: string
   value?: string
-  onChange?: InputProps['onChange']
   maxLength: number
-}
+} & InputProps
 
 export const MaxLengthNumberInput = forwardRef<
   ElementRef<'input'>,
