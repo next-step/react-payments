@@ -57,10 +57,6 @@ export const cardFunnelMachine = setup({
 	states: {
 		PAGES: {
 			initial: "CARD_LIST",
-			invoke: {
-				src: "cardMachine",
-				id: "cardMachine"
-			},
 			states: {
 				ADD_CARD: {
 					on: {
