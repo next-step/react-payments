@@ -1,26 +1,27 @@
-import { useExpireDateInput } from "../../../Hooks/useExpireDateInput";
+import { useCardInfo } from "../../../Context/CardProvider";
+import { useExpireDateInput } from "../../../Hooks/Input/useExpireDateInput";
 
 const ExpireDate = () => {
   const MMInput = useExpireDateInput("MM");
   const YYInput = useExpireDateInput("YY");
-
+  const { state } = useCardInfo();
   return (
     <div className="input-container">
       <span className="input-title">만료일</span>
       <div className="input-box w-50">
         <input
           className="input-basic"
-          type="number"
+          type="text"
           placeholder="MM"
-          value={MMInput.value || ""}
+          value={state.expiryDate.MM || ""}
           onChange={MMInput.handleChange}
         />
         /
         <input
           className="input-basic"
-          type="number"
+          type="text"
           placeholder="YY"
-          value={YYInput.value || ""}
+          value={state.expiryDate.YY || ""}
           onChange={YYInput.handleChange}
         />
       </div>
