@@ -91,7 +91,7 @@ export const cardMachine = setup({
           target: 'card-list',
           actions: ['saveCard', 'saveToLocalStorage', 'resetCardState'],
         },
-        'card-list': 'card-list',
+        GO_CARD_LIST: 'card-list',
       },
     },
 
@@ -104,7 +104,7 @@ export const cardMachine = setup({
           target: 'card-list',
           actions: ['saveCard', 'saveToLocalStorage', 'resetCardState'],
         },
-        'card-list': {
+        GO_CARD_LIST: {
           target: 'card-list',
           reenter: true,
         },
@@ -113,7 +113,7 @@ export const cardMachine = setup({
 
     'card-list': {
       on: {
-        'add-card': {
+        GO_ADD_CARD: {
           target: 'add-card',
           actions: 'resetCardState',
         },
@@ -204,8 +204,8 @@ export const cardMachine = setup({
           }),
         },
 
-        'add-card-success': 'add-card-success',
-        'card-list': {
+        GO_ADD_CARD_SUCCESS: 'add-card-success',
+        GO_CARD_LIST: {
           target: 'card-list',
           reenter: true,
         },

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { CardContext } from '../App';
 import { PagesType } from '../constants/pages';
+import { goPageEventTypeMap } from '../types';
 
 export const useQueryParams = () => {
   const [params, setParams] = useState(new URLSearchParams(location.search));
@@ -25,10 +26,10 @@ export const useQueryParams = () => {
   useEffect(() => {
     const handlePopState = () => {
       const newParams = new URLSearchParams(location.search);
-      const newStep = newParams.get('step');
+      const newStep = newParams.get('step') as PagesType;
 
       if (newStep) {
-        send({ type: newStep as PagesType });
+        send({ type: goPageEventTypeMap[newStep] });
       }
 
       setParams(newParams);

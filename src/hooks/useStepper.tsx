@@ -2,6 +2,7 @@ import { Children, ReactElement, ReactNode, isValidElement } from 'react';
 import { PagesType } from '../constants/pages';
 import { useQueryParams } from './useQueryParams';
 import { CardContext } from '../App';
+import { goPageEventTypeMap } from '../types';
 
 export interface StepperProps<Step extends PagesType> {
   children:
@@ -22,7 +23,7 @@ const useStepper = () => {
 
   const setStep = (newStep: PagesType, id?: string) => {
     setQueryParams({ step: newStep, id: id || '' });
-    send({ type: newStep });
+    send({ type: goPageEventTypeMap[newStep] });
   };
 
   const Stepper = <Step extends PagesType>({
