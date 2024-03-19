@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { PaymentPage } from '@/pages/PaymentPage.tsx'
-import { PATH } from '@/constants/path'
+import { PATH } from '@/constants'
 
 export const router = createBrowserRouter([
   {

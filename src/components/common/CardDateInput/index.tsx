@@ -1,6 +1,6 @@
 import { ChangeEvent, useRef, useState } from 'react'
 import { css } from '@emotion/css'
-import { CARD_DATE } from '@/constants/app'
+import { CARD_DATE } from '@/constants'
 import { MaxLengthNumberInput } from '../MaxLengthNumberInput'
 
 type CardDateValues = {
