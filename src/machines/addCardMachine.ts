@@ -4,6 +4,9 @@ import { nanoid } from 'nanoid';
 
 import { CARD_COMPANY_MAP, getCardCompanyCodeByCardNumber } from 'src/constants/card';
 import { cardInfoSchema } from 'src/schema/cardInfoSchema';
+import type { CardListItemProps } from 'src/steps/card-list/CardListItem';
+import type { AddCardFormProps } from 'src/steps/add-card-form/AddCardForm';
+import type { AddCardFinishProps } from 'src/steps/add-card-finish/AddCardFinish';
 
 export interface CardInfo {
 	cardNumberFirstSegment: string;
@@ -46,15 +49,16 @@ interface CardMachineContext {
 type CardMachineEvent =
 	| { type: 'CHANGE_FIELD'; field: keyof CardInfo; value: string; maxLength?: number }
 	| { type: 'GO_TO_FORM' }
-	| {
-			type: 'ADD_CARD';
-	  }
-	| { type: 'EDIT_CARD' }
+	| { type: 'ADD_CARD'; onSubmit?: AddCardFormProps['onSubmit'] }
+	| { type: 'ALERT'; message: string }
+	| { type: 'EDIT_CARD'; onUpdate?: AddCardFinishProps['onUpdate'] }
 	| { type: 'BACK' }
 	| { type: 'TOGGLE' }
 	| { type: 'SELECT_CARD'; value: CardInfoWithId }
-	| { type: 'DELETE_CARD'; value: string }
-	| { type: 'INFER_CARD_COMPANY_CODE' };
+	| { type: 'DELETE_CARD'; value: string; onDelete?: CardListItemProps['onDelete'] }
+	| { type: 'INFER_CARD_COMPANY_CODE' }
+	| { type: 'GO_TO_FINISH' }
+	| { type: 'INITIALIZE_CARD_LIST'; value?: CardInfoWithId[] };
 
 type CardMachineActions =
 	| { type: 'selectCard' }
@@ -64,8 +68,9 @@ type CardMachineActions =
 	| { type: 'changeFieldAddCardForm' }
 	| { type: 'changeFieldAddCardFinish' }
 	| { type: 'resetAddCardForm' }
-	| { type: 'alertAddCardForm'; params: { message: string } }
-	| { type: 'inferCardCompanyCode' };
+	| { type: 'alertAddCardForm' }
+	| { type: 'inferCardCompanyCode' }
+	| { type: 'initializeCardList' };
 
 type CardMachineGuards = { type: 'isAddCardFormValid' };
 
@@ -98,6 +103,18 @@ export const addCardMachine = createMachine(
 						actions: [{ type: 'deleteCard' }],
 					},
 				},
+				initial: 'beforeInitialize',
+				states: {
+					beforeInitialize: {
+						on: {
+							INITIALIZE_CARD_LIST: {
+								target: 'afterInitialize',
+								actions: [{ type: 'initializeCardList' }],
+							},
+						},
+					},
+					afterInitialize: {},
+				},
 			},
 			AddCardForm: {
 				initial: 'selectCardCompany',
@@ -120,17 +137,11 @@ export const addCardMachine = createMachine(
 				on: {
 					ADD_CARD: [
 						{
-							target: 'AddCardFinish',
 							actions: [{ type: 'addCard' }],
-							guard: { type: 'isAddCardFormValid' },
-						},
-						{
-							target: 'AddCardForm.enterCardInfo',
-							actions: [{ type: 'alertAddCardForm', params: { message: '카드 정보를 모두 입력해주세요.' } }],
 						},
 					],
 					BACK: {
-						target: 'CardList',
+						target: 'CardList.afterInitialize',
 						actions: [{ type: 'resetAddCardForm' }],
 					},
 					CHANGE_FIELD: {
@@ -139,12 +150,18 @@ export const addCardMachine = createMachine(
 					INFER_CARD_COMPANY_CODE: {
 						actions: [{ type: 'inferCardCompanyCode' }],
 					},
+					ALERT: {
+						actions: [{ type: 'alertAddCardForm' }],
+					},
+					GO_TO_FINISH: {
+						target: 'AddCardFinish',
+					},
 				},
 			},
 			AddCardFinish: {
 				on: {
 					EDIT_CARD: {
-						target: 'CardList',
+						target: 'CardList.afterInitialize',
 						actions: [{ type: 'editCard' }],
 					},
 					CHANGE_FIELD: {
@@ -159,36 +176,64 @@ export const addCardMachine = createMachine(
 			selectCard: assign(({ event, context }) =>
 				event.type === 'SELECT_CARD' ? { selectedCard: event.value } : { selectedCard: context.selectedCard },
 			),
-			deleteCard: assign(({ context, event }) =>
-				event.type === 'DELETE_CARD'
-					? {
-							cardList: context.cardList.filter(card => card.id !== event.value),
+			deleteCard: enqueueActions(async ({ event, enqueue, context }) => {
+				if (event.type === 'DELETE_CARD') {
+					try {
+						if (event.onDelete) {
+							await event.onDelete(event.value);
 						}
-					: { cardList: context.cardList },
-			),
-			addCard: assign(({ context }) => {
-				const newId = nanoid();
 
-				return {
-					cardList: [...context.cardList, { ...context.cardInfo, id: newId }],
-					selectedCard: { ...context.cardInfo, id: newId },
-					cardInfo: { ...initialCardInfo },
-				};
+						enqueue.assign({ cardList: context.cardList.filter(card => card.id !== event.value) });
+					} catch (e) {
+						enqueue.raise({ type: 'ALERT', message: '카드 삭제에 실패하였습니다.' });
+					}
+				}
 			}),
-			editCard: assign(({ context }) => ({
-				cardList: context.cardList.map(card =>
-					card.id === context.selectedCard.id
-						? {
-								...context.selectedCard,
-								cardNickname:
-									context.selectedCard.cardNickname ||
-									CARD_COMPANY_MAP[context.selectedCard.cardCompanyCode]?.name ||
-									'',
-							}
-						: card,
-				),
-				selectedCard: { ...initialCardInfo, id: '' },
-			})),
+			addCard: enqueueActions(async ({ enqueue, event, context, check }) => {
+				if (event.type === 'ADD_CARD' && check({ type: 'isAddCardFormValid' })) {
+					try {
+						if (event.onSubmit) {
+							await event.onSubmit(context.cardInfo);
+						}
+
+						const newId = nanoid();
+
+						enqueue.assign({
+							cardList: [...context.cardList, { ...context.cardInfo, id: newId }],
+							selectedCard: { ...context.cardInfo, id: newId },
+							cardInfo: { ...initialCardInfo },
+						});
+
+						enqueue.raise({ type: 'GO_TO_FINISH' });
+					} catch (e) {
+						enqueue.raise({ type: 'ALERT', message: '카드 등록에 실패하였습니다.' });
+					}
+				} else {
+					enqueue.raise({ type: 'ALERT', message: '카드 정보를 모두 입력해주세요.' });
+				}
+			}),
+			editCard: enqueueActions(async ({ enqueue, context, event }) => {
+				if (event.type === 'EDIT_CARD') {
+					try {
+						const newCardInfo = {
+							...context.selectedCard,
+							cardNickname:
+								context.selectedCard.cardNickname || CARD_COMPANY_MAP[context.selectedCard.cardCompanyCode]?.name || '',
+						};
+
+						if (event.onUpdate) {
+							await event.onUpdate(newCardInfo);
+						}
+
+						assign({
+							cardList: context.cardList.map(card => (card.id === context.selectedCard.id ? newCardInfo : card)),
+							selectedCard: { ...initialCardInfo, id: '' },
+						});
+					} catch (e) {
+						enqueue.raise({ type: 'ALERT', message: '카드 수정에 실패하였습니다.' });
+					}
+				}
+			}),
 			changeFieldAddCardForm: enqueueActions(({ enqueue, event, context }) => {
 				if (event.type === 'CHANGE_FIELD') {
 					enqueue.assign({ cardInfo: { ...context.cardInfo, [event.field]: event.value } });
@@ -211,8 +256,10 @@ export const addCardMachine = createMachine(
 					: { selectedCard: { ...context.selectedCard } },
 			),
 			resetAddCardForm: assign({ cardInfo: { ...initialCardInfo } }),
-			alertAddCardForm: (_, params) => {
-				alert(params.message);
+			alertAddCardForm: ({ event }) => {
+				if (event.type === 'ALERT') {
+					alert(event.message);
+				}
 			},
 			inferCardCompanyCode: assign(({ context }) => {
 				const { cardNumberFirstSegment, cardNumberSecondSegment } = context.cardInfo;
@@ -221,6 +268,9 @@ export const addCardMachine = createMachine(
 
 				return { cardInfo: { ...context.cardInfo, cardCompanyCode } };
 			}),
+			initializeCardList: assign(({ event }) =>
+				event.type === 'INITIALIZE_CARD_LIST' ? { cardList: event.value ?? [] } : { cardList: [] },
+			),
 		},
 		guards: {
 			isAddCardFormValid: ({ context, event }) => {

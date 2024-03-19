@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import AddCardFormComponent from 'src/steps/add-card-form/AddCardForm';
-import { AddCardMachineDecorator, AutoFocusWithSelectToFormDecorator } from 'src/stories/Decorators';
+import { AddCardMachineDecorator, SelectToFormDecorator } from 'src/stories/Decorators';
 
 const meta: Meta<typeof AddCardFormComponent> = {
 	title: 'card/AddCardForm',
 	component: AddCardFormComponent,
-	decorators: [AutoFocusWithSelectToFormDecorator, AddCardMachineDecorator],
+	decorators: [SelectToFormDecorator, AddCardMachineDecorator],
 };
 
 export default meta;

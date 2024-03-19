@@ -1,19 +1,20 @@
 import { FormEvent, ChangeEvent } from 'react';
 
 import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine';
+import { AddCardFinishProps } from 'src/steps/add-card-finish/AddCardFinish';
 
-interface CardNicknameFormProps {
+interface CardNicknameFormProps extends Pick<AddCardFinishProps, 'onUpdate'> {
 	maxLength?: number;
 }
 
-export default function CardNicknameForm({ maxLength = 10 }: CardNicknameFormProps) {
+export default function CardNicknameForm({ maxLength = 10, onUpdate }: CardNicknameFormProps) {
 	const { send } = useAddCardMachineActorRef();
 
 	const selectedCardNickname = useAddCardMachineSelector(state => state.context.selectedCard.cardNickname);
 
 	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		send({ type: 'EDIT_CARD' });
+		send({ type: 'EDIT_CARD', onUpdate });
 	};
 
 	const handleNicknameChange = (e: ChangeEvent<HTMLInputElement>) => {

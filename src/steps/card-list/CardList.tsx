@@ -1,16 +1,13 @@
-import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine';
-import CardListItem from 'src/steps/card-list/CardListItem';
+import { useAddCardMachineSelector } from 'src/machines/addCardMachine';
+import CardListItem, { CardListItemProps } from 'src/steps/card-list/CardListItem';
+import AddCardButton from 'src/steps/card-list/AddCardButton';
 
-export default function CardList() {
-	const { send } = useAddCardMachineActorRef();
+export interface CardListProps extends Pick<CardListItemProps, 'onDelete'> {}
 
+export default function CardList({ onDelete }: CardListProps) {
 	const cardList = useAddCardMachineSelector(state => state.context.cardList);
 
-	const isStateCardList = useAddCardMachineSelector(state => state.matches('CardList'));
-
-	const handleClickAddCard = () => {
-		send({ type: 'GO_TO_FORM' });
-	};
+	const isStateCardList = useAddCardMachineSelector(state => state.matches({ CardList: 'afterInitialize' }));
 
 	if (isStateCardList) {
 		return (
@@ -19,15 +16,9 @@ export default function CardList() {
 					<h2 className="page-title mb-10">보유 카드</h2>
 				</div>
 				<div className="overflow-auto w-100 flex-column-align-center gap-16" data-testid="card-select">
-					<div className="card-list-item">
-						<button className="card-box " onClick={handleClickAddCard} data-testid="add-card-button">
-							<div className="empty-card small-card">
-								<div className="add-card">+</div>
-							</div>
-						</button>
-					</div>
+					<AddCardButton />
 					{cardList.map(card => (
-						<CardListItem key={card.id} {...card} />
+						<CardListItem key={card.id} onDelete={onDelete} {...card} />
 					))}
 				</div>
 			</div>

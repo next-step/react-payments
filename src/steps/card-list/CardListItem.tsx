@@ -2,7 +2,11 @@ import { CardInfoWithId } from 'src/machines/addCardMachine';
 import { useAddCardMachineActorRef } from 'src/machines/addCardMachine';
 import CardImage from 'src/components/common/CardImage';
 
-export default function CardListItem({ ...card }: CardInfoWithId) {
+export interface CardListItemProps extends CardInfoWithId {
+	onDelete?: (id: string) => Promise<void>;
+}
+
+export default function CardListItem({ onDelete, ...card }: CardListItemProps) {
 	const { send } = useAddCardMachineActorRef();
 
 	const handleClickCard = () => {
@@ -11,7 +15,7 @@ export default function CardListItem({ ...card }: CardInfoWithId) {
 
 	const handleDeleteCard = () => {
 		if (confirm('정말 삭제하시겠습니까?')) {
-			send({ type: 'DELETE_CARD', value: card.id });
+			send({ type: 'DELETE_CARD', value: card.id, onDelete });
 		}
 	};
 

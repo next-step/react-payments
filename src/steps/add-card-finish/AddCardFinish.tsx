@@ -1,8 +1,13 @@
 import { useAddCardMachineSelector } from 'src/machines/addCardMachine';
 import CardNicknameForm from 'src/steps/add-card-finish/CardNicknameForm';
 import SelectedCardImage from 'src/steps/add-card-finish/SelectedCardImage';
+import type { CardInfoWithId } from 'src/machines/addCardMachine';
 
-export default function AddCardFinish() {
+export interface AddCardFinishProps {
+	onUpdate?: (card: CardInfoWithId) => Promise<void>;
+}
+
+export default function AddCardFinish({ onUpdate }: AddCardFinishProps) {
 	const isStateAddCardFinish = useAddCardMachineSelector(state => state.matches('AddCardFinish'));
 
 	if (isStateAddCardFinish) {
@@ -12,7 +17,7 @@ export default function AddCardFinish() {
 					<h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
 				</div>
 				<SelectedCardImage />
-				<CardNicknameForm />
+				<CardNicknameForm onUpdate={onUpdate} />
 			</div>
 		);
 	}

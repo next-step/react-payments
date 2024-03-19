@@ -8,13 +8,16 @@ import CardPasswordInput from 'src/steps/add-card-form/CardPasswordInput';
 import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine';
 import SelectCardCompanyModal from 'src/steps/add-card-form/SelectCardCompanyModal';
 import EnteredCardImage from 'src/steps/add-card-form/EnteredCardImage';
-import { useAutoFocus } from 'src/hooks/useAutoFocus';
-import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
+import NextButton from 'src/steps/add-card-form/NextButton';
+import AutoFocusProvider from 'src/components/common/AutoFocus';
+import { CardInfo } from 'src/machines/addCardMachine';
 
-export default function AddCardForm() {
+export interface AddCardFormProps {
+	onSubmit?: (card: CardInfo) => Promise<void>;
+}
+
+export default function AddCardForm({ onSubmit }: AddCardFormProps) {
 	const { send } = useAddCardMachineActorRef();
-
-	const { ref: nextButtonRef } = useAutoFocus<HTMLButtonElement>(AUTO_FOCUS_INDEX.NEXT_BUTTON);
 
 	const isStateAddCardForm = useAddCardMachineSelector(state => state.matches('AddCardForm'));
 
@@ -23,6 +26,7 @@ export default function AddCardForm() {
 
 		send({
 			type: 'ADD_CARD',
+			onSubmit,
 		});
 	};
 
@@ -32,7 +36,7 @@ export default function AddCardForm() {
 
 	if (isStateAddCardForm) {
 		return (
-			<>
+			<AutoFocusProvider>
 				<div>
 					<div className="header-box">
 						<button type="button" onClick={handleClickBack} data-testid="back-to-select">
@@ -47,15 +51,11 @@ export default function AddCardForm() {
 						<CardOwnerNameInput />
 						<CardSecurityCodeInput />
 						<CardPasswordInput />
-						<div className="button-box">
-							<button type="submit" className="button-text" data-testid="form-next" ref={nextButtonRef}>
-								다음
-							</button>
-						</div>
+						<NextButton />
 					</form>
 				</div>
 				<SelectCardCompanyModal />
-			</>
+			</AutoFocusProvider>
 		);
 	}
 
