@@ -1,3 +1,4 @@
+import { HEADER_HEIGHT } from "@/common/constants";
 import Button from "@/common/ui/Button/Button";
 import IconButton from "@/common/ui/Button/IconButton";
 import Header from "@/common/ui/Header/Header";
@@ -37,7 +38,7 @@ const CardList = ({ cardList, onNext, onClickCard }: CardListProps) => {
 	};
 
 	return (
-		<>
+		<Container>
 			<Header
 				title='보유카드'
 				rightButton={
@@ -110,30 +111,34 @@ const CardList = ({ cardList, onNext, onClickCard }: CardListProps) => {
 				})}
 				<EmptyCard mode='blank' onClick={onNext} />
 			</Wrapper>
-		</>
+		</Container>
 	);
 };
 
 export default CardList;
 
+const Container = styled.div`
+	min-height: calc(100vh - ${HEADER_HEIGHT}px);
+`;
+
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	row-gap: 20px;
+	max-height: 85dvh;
 	overflow-y: scroll;
-	max-height: 610px;
+	row-gap: 20px;
 `;
 
 const TextWrapper = styled.div`
-	height: 2rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	height: 2rem;
 `;
 
 const CardWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	row-gap: 4px;
 	align-items: center;
+	row-gap: 4px;
 `;

@@ -1,3 +1,4 @@
+import { HEADER_HEIGHT } from "@/common/constants";
 import BottomFixedButton from "@/common/ui/Button/BottomFixedButton";
 import Input from "@/common/ui/Input/Input";
 import Text from "@/common/ui/Text/Text";
@@ -74,8 +75,8 @@ const SuccessAddCard = ({ card, onNext }: SuccessAddCardProps) => {
 export default SuccessAddCard;
 
 const Container = styled.div`
+	min-height: calc(100dvh - ${HEADER_HEIGHT}px);
 	display: flex;
-	height: 100%;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
