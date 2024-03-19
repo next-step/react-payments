@@ -20,7 +20,7 @@ interface Props {
 const AddCard = ({ onNext, onGoBack }: Props) => {
   const cardState = CardContext.useSelector(({ context }) => context.cardState);
   const { selectBrand } = useCardBrands();
-  const [showModal, setShowModal] = useState<boolean>(true);
+  const [showModal, setShowModal] = useState(true);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);

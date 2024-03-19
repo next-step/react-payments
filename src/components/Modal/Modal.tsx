@@ -1,6 +1,7 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 
 interface Props extends PropsWithChildren {
+  children: ReactNode;
   onClickDimmed: () => void;
 }
 
