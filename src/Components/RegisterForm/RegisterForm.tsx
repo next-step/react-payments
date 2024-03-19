@@ -3,7 +3,6 @@ import ExpireDate from "./RegisterFormElements/ExpireDate";
 import CardOwner from "./RegisterFormElements/CardOwner";
 import CvcCcv from "./RegisterFormElements/CvcCcv";
 import CardPassword from "./RegisterFormElements/CardPassword";
-import NextButton from "../Button/NextButton";
 
 const RegisterForm = () => {
   return (
@@ -13,7 +12,6 @@ const RegisterForm = () => {
       <CardOwner />
       <CvcCcv />
       <CardPassword />
-      <NextButton />
     </>
   );
 };
