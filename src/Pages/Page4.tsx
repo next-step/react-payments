@@ -33,7 +33,7 @@ const Page4 = () => {
 
   return (
     <Layout45>
-      <Flex>
+      <Flex className="flex-container">
         <H2Text className="page-title mb-10">카드등록이 완료되었습니다.</H2Text>
       </Flex>
       <BigCreditCard />
