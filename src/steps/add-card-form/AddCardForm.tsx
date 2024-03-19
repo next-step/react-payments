@@ -11,21 +11,7 @@ import EnteredCardImage from 'src/steps/add-card-form/EnteredCardImage';
 import { useAutoFocus } from 'src/hooks/useAutoFocus';
 import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
 
-interface AddCardFormProps {
-	cardNumberSegmentLength?: number;
-	cardOwnerNameMaxLength?: number;
-	cardExpirationDateMaxLength?: number;
-	cardSecurityCodeMaxLength?: number;
-	cardPasswordSegmentLength?: number;
-}
-
-export default function AddCardForm({
-	cardNumberSegmentLength = 4,
-	cardOwnerNameMaxLength = 30,
-	cardExpirationDateMaxLength = 7,
-	cardSecurityCodeMaxLength = 3,
-	cardPasswordSegmentLength = 1,
-}: AddCardFormProps) {
+export default function AddCardForm() {
 	const { send } = useAddCardMachineActorRef();
 
 	const { ref: nextButtonRef } = useAutoFocus<HTMLButtonElement>(AUTO_FOCUS_INDEX.NEXT_BUTTON);
@@ -37,16 +23,6 @@ export default function AddCardForm({
 
 		send({
 			type: 'ADD_CARD',
-			maxLengths: {
-				cardNumberFirstSegment: cardNumberSegmentLength,
-				cardNumberSecondSegment: cardNumberSegmentLength,
-				cardNumberThirdSegment: cardNumberSegmentLength,
-				cardNumberFourthSegment: cardNumberSegmentLength,
-				cardExpirationDate: cardExpirationDateMaxLength,
-				cardSecurityCode: cardSecurityCodeMaxLength,
-				cardPasswordFirstDigit: cardPasswordSegmentLength,
-				cardPasswordSecondDigit: cardPasswordSegmentLength,
-			},
 		});
 	};
 
@@ -66,11 +42,11 @@ export default function AddCardForm({
 					</div>
 					<form onSubmit={handleSubmit} data-testid="card-form">
 						<EnteredCardImage />
-						<CardNumberInput segmentLength={cardNumberSegmentLength} />
-						<CardExpirationDateInput maxLength={cardExpirationDateMaxLength} />
-						<CardOwnerNameInput maxLength={cardOwnerNameMaxLength} />
-						<CardSecurityCodeInput maxLength={cardSecurityCodeMaxLength} />
-						<CardPasswordInput segmentMaxLength={cardPasswordSegmentLength} />
+						<CardNumberInput />
+						<CardExpirationDateInput />
+						<CardOwnerNameInput />
+						<CardSecurityCodeInput />
+						<CardPasswordInput />
 						<div className="button-box">
 							<button type="submit" className="button-text" data-testid="form-next" ref={nextButtonRef}>
 								다음

@@ -49,3 +49,10 @@
 
 	border-bottom: 1px solid #383838;
 }
+
+.input-error {
+	color: #ff0000;
+	font-size: 12px;
+	line-height: 14px;
+	margin-top: 4px;
+}

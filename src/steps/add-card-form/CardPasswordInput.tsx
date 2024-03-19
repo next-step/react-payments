@@ -1,10 +1,11 @@
-import { ChangeEvent, useId } from 'react';
+import { ChangeEvent, useId, useState } from 'react';
 import { shallowEqual } from '@xstate/react';
 
 import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine';
 import REGEX from 'src/constants/regex';
 import { useAutoFocus } from 'src/hooks/useAutoFocus';
 import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
+import { cardPasswordSchema } from 'src/schema/cardInfoSchema';
 
 interface CardPasswordInputProps {
 	segmentMaxLength?: number;
@@ -23,6 +24,8 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 		AUTO_FOCUS_INDEX.CARD_PASSWORD.SECOND,
 	);
 
+	const [isCardPasswordChanged, setIsCardPasswordChanged] = useState(false);
+
 	const { cardPasswordFirstDigit, cardPasswordSecondDigit } = useAddCardMachineSelector(
 		state => ({
 			cardPasswordFirstDigit: state.context.cardInfo.cardPasswordFirstDigit,
@@ -30,10 +33,18 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 		}),
 		shallowEqual,
 	);
+
+	const isCardPasswordValid = cardPasswordSchema.safeParse({
+		cardPasswordFirstDigit,
+		cardPasswordSecondDigit,
+	}).success;
+
 	const handleFirstPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
 
 		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardPasswordFirstDigit', maxLength: segmentMaxLength });
+
+		setIsCardPasswordChanged(true);
 
 		if (formattedValue.length === segmentMaxLength) {
 			focusSecondPassword();
@@ -48,6 +59,8 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 			value: formattedValue,
 			field: 'cardPasswordSecondDigit',
 		});
+
+		setIsCardPasswordChanged(true);
 
 		if (formattedValue.length === segmentMaxLength) {
 			focusNextButton();
@@ -82,6 +95,9 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 				<input readOnly value=" " type="password" className="input-basic w-15 password-readonly" />
 				<input readOnly value=" " type="password" className="input-basic w-15 password-readonly" />
 			</div>
+			{isCardPasswordChanged && !isCardPasswordValid && (
+				<div className="input-error">카드 비밀번호를 입력해주세요.</div>
+			)}
 		</div>
 	);
 }

@@ -17,6 +17,8 @@ export default function CardOwnerNameInput({ maxLength = 30 }: CardSecurityCodeI
 		AUTO_FOCUS_INDEX.CARD_OWNER_NAME,
 	);
 
+	const cardOwnerName = useAddCardMachineSelector(state => state.context.cardInfo.cardOwnerName);
+
 	const handleCardOwnerNameChange = (event: ChangeEvent<HTMLInputElement>) => {
 		send({
 			type: 'CHANGE_FIELD',
@@ -28,8 +30,6 @@ export default function CardOwnerNameInput({ maxLength = 30 }: CardSecurityCodeI
 			focusCardSecurityCodeInput();
 		}
 	};
-
-	const cardOwnerName = useAddCardMachineSelector(state => state.context.cardInfo.cardOwnerName);
 
 	return (
 		<div className="input-container">

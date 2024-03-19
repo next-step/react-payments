@@ -1,9 +1,10 @@
-import { ChangeEvent, useId } from 'react';
+import { ChangeEvent, useId, useState } from 'react';
 
 import REGEX from 'src/constants/regex';
 import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine';
 import { useAutoFocus } from 'src/hooks/useAutoFocus';
 import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
+import { cardExpirationDateSchema } from 'src/schema/cardInfoSchema';
 
 interface CardExpirationDateInputProps {
 	separator?: string;
@@ -22,10 +23,14 @@ const formatExpirationDate = (separator: string) => (value: string) => {
 	return year === '' ? formattedMonth : `${formattedMonth} ${separator} ${formattedYear}`;
 };
 
-export default function CardExpirationDateInput({ separator = '/', maxLength }: CardExpirationDateInputProps) {
+export default function CardExpirationDateInput({ separator = '/', maxLength = 7 }: CardExpirationDateInputProps) {
 	const { send } = useAddCardMachineActorRef();
 
+	const [isCardExpirationDateChange, setIsCardExpirationDateChange] = useState(false);
+
 	const cardExpirationDate = useAddCardMachineSelector(state => state.context.cardInfo.cardExpirationDate);
+
+	const isCardExpirationDateValid = cardExpirationDateSchema.safeParse({ cardExpirationDate }).success;
 
 	const cardExpirationDateInputId = useId();
 
@@ -41,6 +46,8 @@ export default function CardExpirationDateInput({ separator = '/', maxLength }: 
 			value: formattedValue,
 			field: 'cardExpirationDate',
 		});
+
+		setIsCardExpirationDateChange(true);
 
 		if (formattedValue.length === maxLength) {
 			focusNextInput();
@@ -62,6 +69,9 @@ export default function CardExpirationDateInput({ separator = '/', maxLength }: 
 				maxLength={maxLength}
 				ref={cardExpirationDateInputRef}
 			/>
+			{!isCardExpirationDateValid && isCardExpirationDateChange && (
+				<div className="input-error">만료일을 입력해 주세요.</div>
+			)}
 		</div>
 	);
 }

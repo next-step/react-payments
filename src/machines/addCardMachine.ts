@@ -3,6 +3,7 @@ import { createActorContext } from '@xstate/react';
 import { nanoid } from 'nanoid';
 
 import { CARD_COMPANY_MAP, getCardCompanyCodeByCardNumber } from 'src/constants/card';
+import { cardInfoSchema } from 'src/schema/cardInfoSchema';
 
 export interface CardInfo {
 	cardNumberFirstSegment: string;
@@ -47,7 +48,6 @@ type CardMachineEvent =
 	| { type: 'GO_TO_FORM' }
 	| {
 			type: 'ADD_CARD';
-			maxLengths: Record<keyof Omit<CardInfo, 'cardNickname' | 'cardCompanyCode' | 'cardOwnerName'>, number>;
 	  }
 	| { type: 'EDIT_CARD' }
 	| { type: 'BACK' }
@@ -166,9 +166,15 @@ export const addCardMachine = createMachine(
 						}
 					: { cardList: context.cardList },
 			),
-			addCard: assign(({ context }) => ({
-				cardList: [...context.cardList, { ...context.cardInfo, id: nanoid() }],
-			})),
+			addCard: assign(({ context }) => {
+				const newId = nanoid();
+
+				return {
+					cardList: [...context.cardList, { ...context.cardInfo, id: newId }],
+					selectedCard: { ...context.cardInfo, id: newId },
+					cardInfo: { ...initialCardInfo },
+				};
+			}),
 			editCard: assign(({ context }) => ({
 				cardList: context.cardList.map(card =>
 					card.id === context.selectedCard.id
@@ -222,13 +228,7 @@ export const addCardMachine = createMachine(
 
 				const { cardInfo } = context;
 
-				const { maxLengths } = event;
-
-				return Object.entries(maxLengths).every(([key, value]) => {
-					const target = cardInfo[key as keyof CardInfo];
-
-					return target.length > 0 && target.length === value;
-				});
+				return cardInfoSchema.safeParse({ ...cardInfo }).success;
 			},
 		},
 	},

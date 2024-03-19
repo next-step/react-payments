@@ -1,10 +1,11 @@
-import { useId, ChangeEvent } from 'react';
+import { useId, ChangeEvent, useState } from 'react';
 import { shallowEqual } from '@xstate/react';
 
 import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine';
 import REGEX from 'src/constants/regex';
 import { useAutoFocus } from 'src/hooks/useAutoFocus';
 import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
+import { cardNumberSchema } from 'src/schema/cardInfoSchema';
 
 interface CardNumberInputProps {
 	segmentLength?: number;
@@ -27,6 +28,8 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 		AUTO_FOCUS_INDEX.CARD_NUMBER.FOURTH,
 	);
 
+	const [isCardNumberChange, setIsCardNumberChange] = useState(false);
+
 	const { cardNumberFirstSegment, cardNumberSecondSegment, cardNumberThirdSegment, cardNumberFourthSegment } =
 		useAddCardMachineSelector(
 			state => ({
@@ -38,12 +41,21 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 			shallowEqual,
 		);
 
+	const isCardNumberValid = cardNumberSchema.safeParse({
+		cardNumberFirstSegment,
+		cardNumberSecondSegment,
+		cardNumberThirdSegment,
+		cardNumberFourthSegment,
+	}).success;
+
 	const cardNumberInputId = useId();
 
 	const handleFirstSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
 
 		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberFirstSegment' });
+
+		setIsCardNumberChange(true);
 
 		if (formattedValue.length === segmentLength) {
 			focusSecondSegmentInput();
@@ -55,6 +67,8 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 
 		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberSecondSegment' });
 
+		setIsCardNumberChange(true);
+
 		if (formattedValue.length === segmentLength) {
 			focusThirdSegmentInput();
 		}
@@ -64,6 +78,8 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
 
 		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberThirdSegment' });
+
+		setIsCardNumberChange(true);
 
 		if (formattedValue.length === segmentLength) {
 			focusFourthSegmentInput();
@@ -78,6 +94,8 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 			value: formattedValue,
 			field: 'cardNumberFourthSegment',
 		});
+
+		setIsCardNumberChange(true);
 
 		if (formattedValue.length === segmentLength) {
 			focusCardExpirationDateInput();
@@ -97,7 +115,6 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 					onChange={handleFirstSegmentChange}
 					id={cardNumberInputId}
 					maxLength={segmentLength}
-					// onFocus={handleFirstSegmentFocus}
 				/>
 				<div>-</div>
 				<input
@@ -107,7 +124,6 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 					onChange={handleSecondSegmentChange}
 					ref={secondSegmentInputRef}
 					maxLength={segmentLength}
-					// onFocus={handleSecondSegmentFocus}
 				/>
 				<div>-</div>
 				<input
@@ -118,7 +134,6 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 					onChange={handleThirdSegmentChange}
 					ref={thirdSegmentInputRef}
 					maxLength={segmentLength}
-					// onFocus={handleThirdSegmentFocus}
 				/>
 				<div>-</div>
 				<input
@@ -129,9 +144,9 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 					onChange={handleFourthSegmentChange}
 					ref={fourthSegmentInputRef}
 					maxLength={segmentLength}
-					// onFocus={handleFourthSegmentFocus}
 				/>
 			</div>
+			{isCardNumberChange && !isCardNumberValid && <div className="input-error">카드 번호가 올바르지 않습니다.</div>}
 		</div>
 	);
 }

@@ -1,10 +1,11 @@
-import { useId, ChangeEvent } from 'react';
+import { useId, ChangeEvent, useState } from 'react';
 
 import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine';
 import REGEX from 'src/constants/regex';
 import Tooltip from 'src/components/common/Tooltip';
 import { useAutoFocus } from 'src/hooks/useAutoFocus';
 import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
+import { cardSecurityCodeSchema } from 'src/schema/cardInfoSchema';
 
 interface CardSecurityCodeInputProps {
 	maxLength?: number;
@@ -18,7 +19,11 @@ export default function CardSecurityCodeInput({ maxLength = 3 }: CardSecurityCod
 	const { focusNextInput: focusCardExpirationDateInput, ref: cardSecurityCodeInputRef } =
 		useAutoFocus<HTMLInputElement>(AUTO_FOCUS_INDEX.CARD_SECURITY_CODE);
 
+	const [isCardSecurityCodeChanged, setIsCardSecurityCodeChanged] = useState(false);
+
 	const cardSecurityCode = useAddCardMachineSelector(state => state.context.cardInfo.cardSecurityCode);
+
+	const isCardSecurityCodeValid = cardSecurityCodeSchema.safeParse({ cardSecurityCode }).success;
 
 	const handleCardSecurityCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
@@ -28,6 +33,8 @@ export default function CardSecurityCodeInput({ maxLength = 3 }: CardSecurityCod
 			value: formattedValue,
 			field: 'cardSecurityCode',
 		});
+
+		setIsCardSecurityCodeChanged(true);
 
 		if (formattedValue.length === maxLength) {
 			focusCardExpirationDateInput();
@@ -54,6 +61,9 @@ export default function CardSecurityCodeInput({ maxLength = 3 }: CardSecurityCod
 					<img src="/question.png" alt="notice" />
 				</Tooltip>
 			</div>
+			{!isCardSecurityCodeValid && isCardSecurityCodeChanged && (
+				<div className="input-error">보안 코드를 확인해주세요.</div>
+			)}
 		</div>
 	);
 }
