@@ -24,6 +24,7 @@ input {
   height: 700px;
   position: relative;
   border-radius: 15px;
+  overflow: auto;
 }
 
 .app {
