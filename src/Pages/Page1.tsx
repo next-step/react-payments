@@ -1,3 +1,4 @@
+import NextButton from "../Components/Button/NextButton";
 import EmptyCreditcard from "../Components/Cards/Card/EmptyCreditcard";
 import Layout from "../Components/Layout/Layout";
 import RegisterForm from "../Components/RegisterForm/RegisterForm";
@@ -9,6 +10,7 @@ const Page1 = () => {
       <H2Text> 1️⃣ 카드 추가</H2Text>
       <EmptyCreditcard />
       <RegisterForm />
+      <NextButton />
     </Layout>
   );
 };
