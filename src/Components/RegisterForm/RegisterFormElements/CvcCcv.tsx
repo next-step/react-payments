@@ -1,4 +1,4 @@
-import useSecurityCode from "../../../Hooks/useSecurityCode";
+import useSecurityCode from "../../../Hooks/Input/useSecurityCode";
 
 const CvcCcv = () => {
   const { securityCode, handleCodeChange } = useSecurityCode();
