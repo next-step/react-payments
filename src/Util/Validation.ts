@@ -1,31 +1,16 @@
-export const Validaton = {
-  NumberVal: (input: number) => {
-    if (input.toString().length > 4) {
-      return false;
-    } else {
-      return true;
-    }
+export const Validation = {
+  NumberVal: (input: number) => (input.toString().length > 4 ? false : true),
+  ExpireDate: {
+    monthCheck: (input: number) => (input > 12 ? false : true),
+    dayCheck: (input: number) => (input.toString().length > 2 ? false : true),
   },
-  ExpireDateVal: (input: number) => {
-    if (input.toString().length > 1) {
-      return false;
-    } else {
-      return true;
-    }
+  OwnerName: (input: string) => (input.length > 30 ? false : true),
+  PassWord: (input: string) => (isNaN(Number(input)) ? false : true),
+  CvcCcv: {
+    NumberCheck: (input: string) => (isNaN(Number(input)) ? false : true),
+    lengthCheck: (input: string) => (input.length > 2 ? false : true),
   },
-  OwnerName: (input: string) => {
-    if (input.length > 30) {
-      return false;
-    } else {
-      return true;
-    }
-  },
-  PassWord: (input: string) => {
-    console.log("input check", input);
-    if (isNaN(Number(input))) {
-      return false;
-    } else {
-      return true;
-    }
+  CardNickName: {
+    lengthCheck: (input: string) => (input.length > 10 ? false : true),
   },
 };
