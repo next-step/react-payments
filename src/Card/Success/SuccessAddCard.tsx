@@ -55,6 +55,7 @@ const SuccessAddCard = ({ card, onNext }: SuccessAddCardProps) => {
 				<Input
 					underline
 					name='cardName'
+					value={card.cardName}
 					maxLength={10}
 					onChange={(e) => {
 						send({ type: "CHANGE_CARD_NAME", value: e.target.value });

@@ -21,6 +21,7 @@ const CardFunnel = () => {
 				<CardList
 					cardList={state.cards}
 					onNext={() => setStep("GO_TO_ADD_CARD")}
+					onClickCard={() => setStep("GO_TO_ADD_CARD_SUCCESS")}
 				/>
 			</Funnel.Step>
 			<Funnel.Step name='ADD_CARD'>
@@ -40,7 +41,7 @@ const CardFunnel = () => {
 					card={state.card}
 					onNext={() => {
 						send({ type: "CARD_NAME_CHECK" });
-						send({ type: "ADD_CARD_TO_LIST" });
+						send({ type: "SAVE_CARD" });
 						send({ type: "RESET_CARD" });
 						setStep("GO_TO_CARD_LIST");
 					}}

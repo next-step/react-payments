@@ -8,6 +8,7 @@ import { CardInfo } from "@/Card/types/card";
 import { makeNewCard } from "@/Card/utils";
 import { assertEvent, assign, setup } from "xstate";
 
+// TODO : API 연동 후 삭제
 const TEMP_CARD_LIST: CardInfo[] = [
 	{
 		id: 1,
@@ -78,10 +79,11 @@ const DEFAULT_CARD: CardInfo = {
 interface CardContext {
 	cards: CardInfo[];
 	card: CardInfo;
+	mode: "ADD" | "EDIT";
 }
 
 type CardEvent =
-	| { type: "ADD_CARD_TO_LIST" }
+	| { type: "SAVE_CARD" }
 	| { type: "MAKE_NEW_CARD" }
 	| { type: "RESET_CARD" }
 	| { type: "NEXT" }
@@ -103,25 +105,31 @@ type CardEvent =
 	| { type: "CARD_INFO_CHECK" }
 	| { type: "CARD_NAME_CHECK" }
 	| { type: "SET_CARD_COMPANY_NAME_TO_CARD_NAME" }
-	| { type: "DELETE_CARD"; value: number };
+	| { type: "DELETE_CARD"; value: number }
+	| { type: "SELECT_CARD"; value: number }
+	| { type: "EDIT_CARD_NAME"; value: string }
+	| { type: "SAVE_CARD_EDITED_CARD" };
 
 export const cardMachine = setup({
 	types: {} as {
 		context: CardContext;
 		events: CardEvent;
+		mode: "ADD" | "EDIT";
 	},
 	actions: {
-		ADD_CARD_TO_LIST: assign({
+		SAVE_CARD: assign({
 			cards: ({ context, event }) => {
-				assertEvent(event, "ADD_CARD_TO_LIST");
+				assertEvent(event, "SAVE_CARD");
 				return [...context.cards, context.card];
 			}
 		}),
 		RESET_CARD: assign({
-			card: ({ event }) => {
+			card: ({ context, event }) => {
 				assertEvent(event, "RESET_CARD");
-				return DEFAULT_CARD;
-			}
+				if (context.mode === "EDIT") return DEFAULT_CARD;
+				return makeNewCard(context.cards.length);
+			},
+			mode: "ADD"
 		}),
 		NEXT: assign({
 			card: ({ context, event }) => {
@@ -216,6 +224,41 @@ export const cardMachine = setup({
 				assertEvent(event, "DELETE_CARD");
 				return context.cards.filter((card) => card.id !== event.value);
 			}
+		}),
+		SELECT_CARD: assign({
+			card: ({ context, event }) => {
+				assertEvent(event, "SELECT_CARD");
+				return (
+					context.cards.find((card) => card.id === event.value) || DEFAULT_CARD
+				);
+			},
+			mode: "EDIT"
+		}),
+		EDIT_CARD_NAME: assign({
+			card: ({ context, event }) => {
+				assertEvent(event, "EDIT_CARD_NAME");
+				return {
+					...context.card,
+					cardName: event.value
+				};
+			}
+		}),
+		SAVE_CARD_EDITED_CARD: assign({
+			cards: ({ context }) => {
+				return context.cards.map((card) => {
+					if (card.id === context.card.id) {
+						return context.card;
+					}
+					return card;
+				});
+			}
+		}),
+		CARD_INFO_CHECK: assign({
+			card: ({ context }) => {
+				return {
+					...context.card
+				};
+			}
 		})
 	},
 	schemas: {
@@ -251,6 +294,9 @@ export const cardMachine = setup({
 		},
 		isAllCardNameFilled: ({ context }) => {
 			return context.card.cardName.length > 0;
+		},
+		isAddMode: ({ context }) => {
+			return context.mode === "ADD";
 		}
 	}
 }).createMachine({
@@ -259,21 +305,27 @@ export const cardMachine = setup({
 	id: "cardMachine",
 	context: {
 		cards: TEMP_CARD_LIST,
-		card: makeNewCard(TEMP_CARD_LIST.length)
+		card: makeNewCard(TEMP_CARD_LIST.length + 1),
+		mode: "ADD"
 	},
+
 	states: {
 		MAKE_NEW_CARD: {
-			initial: "info",
+			initial: "INFO",
 			onDone: {
 				target: "ADD"
 			},
 			on: {
 				DELETE_CARD: {
 					actions: "DELETE_CARD"
+				},
+				SELECT_CARD: {
+					actions: "SELECT_CARD",
+					target: "#cardMachine.MAKE_NEW_CARD.CARD_NAME"
 				}
 			},
 			states: {
-				info: {
+				INFO: {
 					on: {
 						CHANGE_CARD_COMPANY_NAME: {
 							actions: "CHANGE_CARD_COMPANY_NAME"
@@ -295,11 +347,11 @@ export const cardMachine = setup({
 						},
 						CARD_INFO_CHECK: [
 							{
-								target: "cardName",
+								target: "CARD_NAME",
 								guard: "isAllCardInfoFilled"
 							},
 							{
-								target: "info"
+								target: "INFO"
 							}
 						],
 						RESET_CARD: {
@@ -307,11 +359,17 @@ export const cardMachine = setup({
 						}
 					}
 				},
-				cardName: {
+				CARD_NAME: {
 					on: {
-						CHANGE_CARD_NAME: {
-							actions: "CHANGE_CARD_NAME"
-						},
+						CHANGE_CARD_NAME: [
+							{
+								guard: "isAddMode",
+								actions: "CHANGE_CARD_NAME"
+							},
+							{
+								actions: "CHANGE_CARD_NAME"
+							}
+						],
 						CARD_NAME_CHECK: [
 							{
 								target: "FINISH",
@@ -332,10 +390,17 @@ export const cardMachine = setup({
 		},
 		ADD: {
 			on: {
-				ADD_CARD_TO_LIST: {
-					actions: "ADD_CARD_TO_LIST",
-					target: "RESET"
-				}
+				SAVE_CARD: [
+					{
+						actions: "SAVE_CARD",
+						target: "RESET",
+						guard: "isAddMode"
+					},
+					{
+						actions: "SAVE_CARD_EDITED_CARD",
+						target: "RESET"
+					}
+				]
 			}
 		},
 		RESET: {

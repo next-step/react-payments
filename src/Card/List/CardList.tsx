@@ -17,6 +17,7 @@ import EmptyCard from "../ui/Card/EmptyCard";
 
 interface CardListProps extends CardFunnelProps {
 	cardList: CardInfo[];
+	onClickCard: () => void;
 }
 
 type MODE = "ADD" | "DELETE";
@@ -26,7 +27,7 @@ const ICON_MAPPER: Record<MODE, IconName> = {
 	DELETE: "close"
 };
 
-const CardList = ({ cardList, onNext }: CardListProps) => {
+const CardList = ({ cardList, onNext, onClickCard }: CardListProps) => {
 	const { send } = useManageCardContext();
 	const [mode, setMode] = useState<MODE>("ADD");
 
@@ -50,7 +51,13 @@ const CardList = ({ cardList, onNext }: CardListProps) => {
 			<Wrapper>
 				{cardList.map((card) => {
 					return (
-						<CardWrapper key={card.id}>
+						<CardWrapper
+							onClick={() => {
+								send({ type: "SELECT_CARD", value: card.id });
+								onClickCard();
+							}}
+							key={card.id}
+						>
 							<Card
 								size={"small"}
 								color={CARD_COLOR_MAP[card.companyName as CARD_COMPANY]}
@@ -84,7 +91,8 @@ const CardList = ({ cardList, onNext }: CardListProps) => {
 							)}
 							{mode === "DELETE" && (
 								<Button
-									onClick={() => {
+									onClick={(e) => {
+										e.stopPropagation();
 										send({ type: "DELETE_CARD", value: card.id });
 									}}
 									buttonColor='blue400'

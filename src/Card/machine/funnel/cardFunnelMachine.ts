@@ -89,6 +89,10 @@ export const cardFunnelMachine = setup({
 						GO_TO_ADD_CARD: {
 							actions: "GO_TO_ADD_CARD",
 							target: "ADD_CARD"
+						},
+						GO_TO_ADD_CARD_SUCCESS: {
+							actions: "GO_TO_ADD_CARD_SUCCESS",
+							target: "ADD_CARD_SUCCESS"
 						}
 					}
 				}
