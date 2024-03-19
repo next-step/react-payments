@@ -1,4 +1,4 @@
-import useCardPassword from "../../../Hooks/useCardPassword";
+import useCardPassword from "../../../Hooks/Input/useCardPassword";
 
 const CardPassword = () => {
   const { cardPassword, handlePasswordChange } = useCardPassword();
