@@ -2,7 +2,7 @@
 
 type CardProps = {
   name?: string
-  expirationDate?: string,
+  expirationDate?: string
   // expirationDate?: [string, string]
   cardNumber?: string
 }

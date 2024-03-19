@@ -9,8 +9,8 @@ type FunnelProps = {
   children: Array<ReactElement<StepProps>>
 }
 
-function useFunnel(defaultStep: string) {
-  const [step, setStep] = useState<string>(defaultStep)
+function useFunnel<T>(defaultStep: T) {
+  const [step, setStep] = useState<T>(defaultStep)
 
   const Step = (props: StepProps): ReactElement => {
     return <>{props.children}</>

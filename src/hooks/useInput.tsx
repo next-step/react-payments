@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useState } from 'react'
 
 /*
 [input 버튼]
@@ -11,11 +11,7 @@ import { ChangeEvent, useState } from 'react'
     * 입력 된 상태
         * value를 가짐.   
 */
-export default function useInput(
-  initialValue = '',
-  constraint?: (value: string) => boolean, //or validator
-  formatter?: (value: string) => string,
-) {
+export default function useInput(initialValue = '') {
   // 입력 제약 로직을 커스텀 훅으로 분리 => 30자 제한 등에 사용 예정
   const [value, setValue] = useState(initialValue)
 
@@ -24,17 +20,6 @@ export default function useInput(
     //constraint 제약조건 추가시 validation 필요할 수 있음 -> 이에 따라 input 컴포넌트에서는 빨간 테두리 처리
     console.log('inputValue', currentInput)
 
-    // 제약 조건이 존재하고, 그 조건이 false 일때,
-    // 제약 조건이 없으면 true
-
-    if (constraint && !constraint(currentInput)) return
-
-    if (formatter) {
-      setValue(formatter(currentInput))
-      return
-    }
-
-    // trim() ?
     setValue(currentInput)
   }
 

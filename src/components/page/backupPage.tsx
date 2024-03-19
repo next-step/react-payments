@@ -11,7 +11,7 @@ function BackUpPage() {
   const [registerData, setRegisterData] = useState({})
   // const [step, setStep] = useState<Step>('카드추가')
   // const { step, setStep, Funnel, Step } = useFunnel<Step>('카드추가')
-  const { step, setStep, Funnel, Step } = useFunnel('카드추가')
+  const { step, setStep, Funnel, Step } = useFunnel<Step>('카드추가')
 
   // const [stepNum, setStepNum] = useState<number>(0)
 

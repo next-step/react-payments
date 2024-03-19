@@ -28,3 +28,7 @@
 .auto-sizing-width-item-35 {
   width: 35%;
 }
+
+.container-flex {
+  display: flex;
+}
