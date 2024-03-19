@@ -197,12 +197,12 @@ const GlobalStyle = () => (
 				background-color: #fff;
 				width: 375px;
 				min-width: 375px;
-				height: 700px;
+				height: "100%";
 				position: relative;
 				border-radius: 15px;
 			}
 			#app {
-				height: 100%;
+				min-height: 100vh;
 				padding: 16px 24px;
 			}
 		`}

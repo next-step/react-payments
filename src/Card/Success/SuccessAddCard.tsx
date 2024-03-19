@@ -1,3 +1,4 @@
+import { HEADER_HEIGHT } from "@/common/constants";
 import BottomFixedButton from "@/common/ui/Button/BottomFixedButton";
 import Input from "@/common/ui/Input/Input";
 import Text from "@/common/ui/Text/Text";
@@ -5,16 +6,19 @@ import { maskStringAfterIndex } from "@/common/utils";
 import { convertObjectValuesToString } from "@/common/utils/object";
 import { CardFunnelProps } from "@/pages/CardFunnel";
 import styled from "@emotion/styled";
-import { ChangeEvent } from "react";
+import { CARD_COLOR_MAP } from "../constants/cardCompany";
+import { useManageCardContext } from "../machine/card/useCardContext";
 import { CardInfo } from "../types/card";
+import { CARD_COMPANY } from "../types/cardCompany";
 import Card from "../ui/Card/Card";
 
 interface SuccessAddCardProps extends CardFunnelProps {
 	card: CardInfo;
-	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SuccessAddCard = ({ card, onNext, onChange }: SuccessAddCardProps) => {
+const SuccessAddCard = ({ card, onNext }: SuccessAddCardProps) => {
+	const { send } = useManageCardContext();
+
 	return (
 		<Container>
 			<TitleWrapper>
@@ -23,9 +27,12 @@ const SuccessAddCard = ({ card, onNext, onChange }: SuccessAddCardProps) => {
 				</Title>
 			</TitleWrapper>
 			<CardWrapper>
-				<Card size={"big"}>
+				<Card
+					size={"big"}
+					color={CARD_COLOR_MAP[card.companyName as CARD_COMPANY]}
+				>
 					<Card.Top>
-						<Card.CardCompany text={card.bankName} />
+						<Card.CardCompany text={`${card.companyName}카드`} />
 					</Card.Top>
 					<Card.Middle>
 						<Card.Chip />
@@ -46,10 +53,18 @@ const SuccessAddCard = ({ card, onNext, onChange }: SuccessAddCardProps) => {
 						</Card.BottomInfo>
 					</Card.Bottom>
 				</Card>
-				<Input underline name='cardName' onChange={onChange} />
+				<Input
+					underline
+					name='cardName'
+					value={card.cardName}
+					maxLength={10}
+					onChange={(e) => {
+						send({ type: "CHANGE_CARD_NAME", value: e.target.value });
+					}}
+				/>
 			</CardWrapper>
 			<BottomFixedButton width={20} onClick={onNext}>
-				<Text.Span color='cyan' fontSize={14}>
+				<Text.Span color='cyan500' fontSize={14}>
 					다음
 				</Text.Span>
 			</BottomFixedButton>
@@ -60,8 +75,8 @@ const SuccessAddCard = ({ card, onNext, onChange }: SuccessAddCardProps) => {
 export default SuccessAddCard;
 
 const Container = styled.div`
+	min-height: calc(100dvh - ${HEADER_HEIGHT}px);
 	display: flex;
-	height: 100%;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
