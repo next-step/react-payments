@@ -4,10 +4,12 @@ import { CardContext } from "../../providers/CardState/CardStateProvider";
 import { MONTH, YEAR } from "../constants/expirationDate";
 import Input from "../components/atomic-design-pattern/atom/Input";
 import Button from "../components/atomic-design-pattern/atom/Button";
-import { useLocalStorage } from "../hook/useLocalStorage";
 
-export default function CardComplete({ onNext }) {
-  const { changeCardInfo } = useLocalStorage();
+export default function CardComplete({
+  goToListPage,
+  cardInfoList,
+  setCardInfoList,
+}) {
   const { cardState } = useContext(CardContext);
   const { cardNumber, expirationDate, cardOwnerName, alias } = cardState;
 
@@ -17,10 +19,20 @@ export default function CardComplete({ onNext }) {
     const alias = formData.get("alias");
 
     if (alias) {
-      changeCardInfo(cardNumber, "alias", alias);
-    }
+      const index = cardInfoList.findIndex((cardInfo) => {
+        return (
+          Object.values(cardInfo.cardNumber).join("_") ===
+          Object.values(cardNumber).join("_")
+        );
+      });
 
-    onNext();
+      if (index !== -1) {
+        const newCardInfoList = [...cardInfoList];
+        newCardInfoList[index].alias = alias;
+        setCardInfoList(newCardInfoList);
+        goToListPage();
+      }
+    }
   };
 
   return (

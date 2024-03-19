@@ -1,33 +1,16 @@
-import { getLocalStorageKeyByCardNumber } from "../util/cardStorage";
-import { CARD_LIST } from "../constants/cardNumber";
+import { useEffect, useState } from "react";
 
-export const useLocalStorage = () => {
-  const getCardInfoList = () => {
-    const cardKeyList = JSON.parse(localStorage.getItem(CARD_LIST)) || [];
+const CARD_INFO_LIST = "cardInfoList";
 
-    return cardKeyList.map((cardKey) => {
-      return JSON.parse(localStorage.getItem(cardKey));
-    });
-  };
+export const useLocalStorage = (key, initialValue) => {
+  const [storedValue, setStoredValue] = useState(() => {
+    const item = localStorage.getItem(CARD_INFO_LIST);
+    return item ? JSON.parse(item) : initialValue;
+  });
 
-  const addCard = (cardInfo) => {
-    const cardList = JSON.parse(localStorage.getItem(CARD_LIST)) || [];
+  useEffect(() => {
+    localStorage.setItem(CARD_INFO_LIST, JSON.stringify(storedValue));
+  }, [key, storedValue]);
 
-    const key = getLocalStorageKeyByCardNumber(cardInfo.cardNumber);
-    cardList.push(key);
-
-    localStorage.setItem(key, JSON.stringify(cardInfo));
-    localStorage.setItem(CARD_LIST, JSON.stringify(cardList));
-  };
-
-  const changeCardInfo = (cardNumber, attrName, attrValue) => {
-    const key = getLocalStorageKeyByCardNumber(cardNumber);
-
-    const cardInfo = JSON.parse(localStorage.getItem(key));
-    cardInfo[attrName] = attrValue;
-
-    localStorage.setItem(key, JSON.stringify(cardInfo));
-  };
-
-  return { getCardInfoList, addCard, changeCardInfo };
+  return [storedValue, setStoredValue];
 };

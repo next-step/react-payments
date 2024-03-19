@@ -4,12 +4,14 @@ import { getLocalStorageKeyByCardNumber } from "../util/cardStorage";
 import { MONTH, YEAR } from "../constants/expirationDate";
 import { useContext } from "react";
 import { CardContext } from "../../providers/CardState/CardStateProvider";
-import { useLocalStorage } from "../hook/useLocalStorage";
 
-export default function CardList({ onNext, goToCompletePage }) {
-  const { getCardInfoList } = useLocalStorage();
+export default function CardList({
+  goToAddPage,
+  goToCompletePage,
+  cardInfoList,
+}) {
   const { setCardState } = useContext(CardContext);
-  const cardInfoList = getCardInfoList();
+
   const onClickCard = (cardInfo) => {
     setCardState(cardInfo);
     goToCompletePage();
@@ -34,7 +36,7 @@ export default function CardList({ onNext, goToCompletePage }) {
             />
           );
         })}
-        <div className="button-basic" onClick={onNext}>
+        <div className="button-basic" onClick={goToAddPage}>
           <CardBox>+</CardBox>
         </div>
       </div>

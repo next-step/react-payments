@@ -12,11 +12,14 @@ import InputContainer from "../components/atomic-design-pattern/organism/InputCo
 import InputTitle from "../components/atomic-design-pattern/atom/InputTitle";
 import InputGroup from "../components/atomic-design-pattern/molecule/InputGroup";
 import { CardContext } from "../../providers/CardState/CardStateProvider";
-import { useLocalStorage } from "../hook/useLocalStorage";
 
-export default function CardAdd({ onList, onNext }) {
+export default function CardAdd({
+  goToListPage,
+  goToCompletePage,
+  setCardInfoList,
+}) {
   const { cardState } = useContext(CardContext);
-  const { addCard } = useLocalStorage();
+
   const {
     cardNumber,
     expirationDate,
@@ -55,14 +58,18 @@ export default function CardAdd({ onList, onNext }) {
 
   const onSubmitCardAdd = (event) => {
     event.preventDefault();
-    addCard(cardState);
-    onNext();
+    console.log(cardState);
+    setCardInfoList((prev) => {
+      return [...prev, cardState];
+    });
+
+    goToCompletePage();
   };
 
   return (
     <form onSubmit={onSubmitCardAdd}>
       <h2 className="page-title">
-        <Button variant="link" onClick={onList}>
+        <Button variant="link" onClick={goToListPage}>
           {"<"}
         </Button>
         <span className="ml-10">카드 추가</span>
