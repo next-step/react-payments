@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { CardContext } from '../App';
-import { PAGES } from '../constants/pages';
+import { PagesType } from '../constants/pages';
 
 export const useQueryParams = () => {
   const [params, setParams] = useState(new URLSearchParams(location.search));
@@ -10,8 +10,10 @@ export const useQueryParams = () => {
     const searchParams = new URLSearchParams();
 
     for (const key in newParams) {
-      // eslint-disable-next-line no-prototype-builtins
-      if (newParams.hasOwnProperty(key) && newParams[key]) {
+      if (
+        Object.prototype.hasOwnProperty.call(newParams, key) &&
+        newParams[key]
+      ) {
         searchParams.set(key, newParams[key]);
       }
     }
@@ -23,10 +25,10 @@ export const useQueryParams = () => {
   useEffect(() => {
     const handlePopState = () => {
       const newParams = new URLSearchParams(location.search);
-      const newStep = newParams.get('step') as PAGES;
+      const newStep = newParams.get('step');
 
       if (newStep) {
-        send({ type: newStep });
+        send({ type: newStep as PagesType });
       }
 
       setParams(newParams);

@@ -1,5 +1,5 @@
 import { Children, ReactElement, ReactNode, isValidElement } from 'react';
-import { PAGES } from '../constants/pages';
+import { PagesType } from '../constants/pages';
 import { useQueryParams } from './useQueryParams';
 import { CardContext } from '../App';
 
@@ -13,8 +13,6 @@ export interface StepProps<Step extends PagesType> {
   name: Step;
   children: ReactNode;
 }
-
-export type PagesType = (typeof PAGES)[keyof typeof PAGES];
 
 const useStepper = () => {
   const state = CardContext.useSelector(({ value }) => value);
