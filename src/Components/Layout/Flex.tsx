@@ -1,11 +1,12 @@
 import { ReactNode } from "react";
 
-const Flex = ({ children }: { children: ReactNode }) => {
-  return (
-    <>
-      <div className="flex-center">{children}</div>
-    </>
-  );
+interface FlexProps {
+  children: ReactNode;
+  className: string;
+}
+
+const Flex = ({ children, className }: FlexProps) => {
+  return <div className={className}>{children}</div>;
 };
 
 export default Flex;
