@@ -1,11 +1,6 @@
 import SpanText from "../../../Text/SpanText";
-import { useCardInfo } from "../../../../Context/CardProvider";
 
-const CardNickName = () => {
-  const {
-    state: { cardNickName },
-  } = useCardInfo();
-
+const CardNickName = ({ cardNickName }: { cardNickName: string | null }) => {
   return <SpanText className="card-nickname">{cardNickName}</SpanText>;
 };
 

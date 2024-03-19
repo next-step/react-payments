@@ -1,11 +1,11 @@
 import { useState, ChangeEvent } from "react";
 
 const useValidationInput = (
-  initialstate: "" | number,
+  initialState: "" | number,
   onChange: (input: "" | number) => void,
   validation: (input: number) => boolean
 ) => {
-  const [value, setValue] = useState<number | "">(initialstate);
+  const [value, setValue] = useState<number | "">(initialState);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = Number(e.target.value);
 
