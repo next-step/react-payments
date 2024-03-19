@@ -38,7 +38,7 @@ export const CardNumberInput = ({
     useRef<HTMLInputElement>
   )
 
-  const handleChange =
+  const createChangeHandlerByIndex =
     (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
       const { name, value } = e.target
 
@@ -70,7 +70,7 @@ export const CardNumberInput = ({
               type={index < CARD_NUMBER.VISIBLE_COUNT ? 'text' : 'password'}
               ref={inputRefs[index] as MutableRefObject<HTMLInputElement>}
               value={uncontrolledValue[inputName]}
-              onChange={handleChange(index)}
+              onChange={createChangeHandlerByIndex(index)}
               maxLength={CARD_NUMBER.MAX_LENGTH}
             />
           )
