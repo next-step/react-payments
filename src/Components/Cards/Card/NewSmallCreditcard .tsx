@@ -5,18 +5,20 @@ import CardTop from "../Body/Top/CardTop";
 import CardMiddle from "../Body/Middle/CardMiddle";
 import CardChip from "../CardElements/CardChip";
 import CardBottom from "../Body/Bottom/CardBottom";
-import { SmallCreditCardType } from "../../../type/CardInfoType";
+import { EnhancedSmallCreditCardType } from "../../../type/CardInfoType";
 
 const NewSmallCreditcard = ({
   cardName,
   cardNumber,
   cardOwnerName,
   expiryDate,
-}: SmallCreditCardType) => {
+  cardNickName,
+  onClick,
+}: EnhancedSmallCreditCardType) => {
   return (
     <>
       <CardLayout>
-        <SmallCardLayout>
+        <SmallCardLayout onClick={onClick}>
           <CardTop>
             <span className={`card-text`}>{cardName}</span>
           </CardTop>
@@ -39,7 +41,7 @@ const NewSmallCreditcard = ({
           </CardBottom>
         </SmallCardLayout>
       </CardLayout>
-      <CardNickName />
+      <CardNickName cardNickName={cardNickName} />
     </>
   );
 };
