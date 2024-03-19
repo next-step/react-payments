@@ -63,23 +63,23 @@ export const CardPasswordInput = ({
 
   return (
     <div className={`${inputContainerStyle} ${className}`}>
-      {Object.keys(uncontrolledValue).map((key, index) => {
-        const inputName = key as keyof CardPasswordValues
-
-        return (
-          <MaxLengthNumberInput
-            key={inputName}
-            name={inputName}
-            className="input-basic"
-            type="password"
-            width={inputWidth}
-            ref={inputRefs[index] as MutableRefObject<HTMLInputElement>}
-            value={uncontrolledValue[inputName]}
-            onChange={handleChange(index)}
-            maxLength={CARD_PASSWORD.MAX_LENGTH}
-          />
-        )
-      })}
+      {Object.keys<KeyOf<CardPasswordValues>>(uncontrolledValue).map(
+        (inputName, index) => {
+          return (
+            <MaxLengthNumberInput
+              key={inputName}
+              name={inputName}
+              className="input-basic"
+              type="password"
+              width={inputWidth}
+              ref={inputRefs[index] as MutableRefObject<HTMLInputElement>}
+              value={uncontrolledValue[inputName]}
+              onChange={handleChange(index)}
+              maxLength={CARD_PASSWORD.MAX_LENGTH}
+            />
+          )
+        }
+      )}
     </div>
   )
 }
