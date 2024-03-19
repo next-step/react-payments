@@ -1,12 +1,15 @@
 import { useContext, useState } from 'react'
-import { CardInfoContext } from './context/paymentContext'
-import { CardBox, CardCvc, CardName, CardNumber, CardPassword, CardType, CardDate } from './components'
-import ui from './styles/index.module.css'
-import { UpdateFunnelStepContext } from './context/funnelStepContext'
+import { CardInfoContext, UpdateCardInfoContext } from '../context/paymentContext'
+import { CardBox, CardCvc, CardName, CardNumber, CardPassword, CardType, CardDate } from '../components'
+import { StepProps } from './Payments'
+import { CardListContext } from '../context/cardListContext'
+import ui from '../styles/index.module.css'
 
-const AddCard = () => {
+const AddCard = ({ onStep }: StepProps) => {
   const cardInfo = useContext(CardInfoContext)
-  const updateFunnelStep = useContext(UpdateFunnelStepContext)
+  const updateCardInfo = useContext(UpdateCardInfoContext)
+
+  const cardList = useContext(CardListContext)
 
   const [isShowModal, setIsShowModal] = useState(false)
 
@@ -16,7 +19,7 @@ const AddCard = () => {
       <div className={ui['root']}>
         <div className={ui['app']}>
           <h2 className={ui['page-title']}>
-            <button onClick={() => updateFunnelStep({ step: 'list' })}>&lt;</button>
+            <button onClick={() => onStep && onStep({ step: 'list' })}>&lt;</button>
             &nbsp; 카드 추가
           </h2>
           <CardBox />
@@ -28,8 +31,10 @@ const AddCard = () => {
           <div className={ui['button-box']}>
             <button
               onClick={() => {
-                if (cardInfo.cardType) updateFunnelStep({ step: 'select' })
-                else setIsShowModal((state) => !state)
+                if (!cardInfo.cardType) return setIsShowModal((state) => !state)
+
+                updateCardInfo({ ...cardInfo, cardNo: cardList.length || 0 })
+                if (onStep) onStep({ step: 'complete' })
               }}
             >
               다음

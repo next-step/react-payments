@@ -7,13 +7,15 @@ export type CardNumber = {
   fourth?: string
 }
 export type CardInfo = {
+  cardNo?: number
   cardNumber?: CardNumber
   month?: string
   year?: string
   name?: string
-  cardType?: string
   password?: string
   cvc?: string
+  cardType?: string
+  cardAlias?: string
 }
 
 export const CardInfoContext = createContext<CardInfo>({})
