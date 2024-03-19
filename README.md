@@ -18,10 +18,10 @@
 
 # 필수 요구사항
 
-- [ ] 원시적인 형태의 Primitive UI 형태의 컴포넌트 작성
+- [x] 원시적인 형태의 Primitive UI 형태의 컴포넌트 작성
 - [x] Funnel 기반의 애플리케이션 설계
-- [ ] Storybook 상호 작용 테스트
-- [ ] Controlled & Uncontrolled Components를 명확하게 구분하거나 선택하여 구현
+- [x] Storybook 상호 작용 테스트
+- [x] Controlled & Uncontrolled Components를 명확하게 구분하거나 선택하여 구현
 
 ## 카드 추가
 
@@ -58,23 +58,7 @@
 
 ---
 
-# 개선되어야 하는 사항
-
-각 객체(컴포넌트와 훅)들의 역할과 책임이 너무 과중하다는 느낌을 지울 수 없습니다.
-
-## Input 핸들링 로직(useInputFields)
-
-- 현재의 useInputFields는 여러개의 input을 관리하려는 도메인이 들어가있어 다른 Input 컴포넌트에서 범용적으로 사용이 어려워보입니다. 우선, 현재 PR에선 useInputFields를 완료한 상태로 PR을 날린 뒤, 시간이 허락하는대로 아래의 것들을 새로운 브랜치에서 다시 작업해보겠습니다.
-
-1. useForm : 단일 Input에 대한 useForm을 구현하여 단일 Input에서 사용될 로직들을 주입할 수 있는 validation, value, onChange를 관리.
-2. useAutoFocus : Atomic Pattern에 조금 더 입각하여 useForm를 각 컴포넌트 주입 후 molecule 컴포넌트 Layer에서 useAutofocus를 조합하여 이를 관리.
-3. 부끄럽지만 이미 구현되어있는 input 태그 내부의 API를 전혀 고려하지 못하고 구현하였습니다. MDN을 다시 정독하며 input 태그의 API를 고려하여 다시 구현하겠습니다.
-
-## Funnel
-
-여러 곳에서 사용할 수 있는 형식을 취하고 TS를 잘 써보고싶은 욕심 때문에 추상화가 너무 과도하게 이루어졌습니다.
-간단하게 커스텀 훅으로 관리할 수 있는 구조이지만, 타입을 주입받기 위해 불필요하게 함수의 형태를 취하게 되었고, 좋은 구조라고 말하긴 어려운 것 같습니다.(코드의 가독성이 낮고 오버엔지니어링이라는 생각을 지울 수 없는 것 같습니다.)
-코드를 다시 한 번 리팩터링하며 손익을 고려해보고, 간단한 커스텀 훅으로 변경하는 것을 고려하겠습니다.
+## Step2
 
 ## 카드 추가 확인
 
@@ -94,5 +78,36 @@
 - [x] 카드를 삭제할 수 있다.
 
 ---
+
+## Step3
+
+## npm
+
+- [ ] 라이브러리 사용 방법이 담긴 스토리북 문서 배포
+- [x] React 프로젝트에서 사용할 수 있는 패키지 NPM 출시 (Fork X, 개인 저장소를 기반)
+
+#### [> @pengoose/funnel](https://www.npmjs.com/package/@pengoose/funnel)
+
+## 유효성 검증
+
+- [ ] 유효성 검증 실패에 대한 UI/UX 추가
+- [ ] 유효한 값 입력시 다음 필드로 Input Focusing
+
+## 카드
+
+- [ ] 카드 번호 앞 8자리로 카드사를 추정하여 그 테마를 카드 UI에 반영한다.
+- [ ] 카드사를 선택하지 않아도 모달을 닫을 수 있다.
+- [ ] 카드사가 선택되고 유효한 카드 번호 16자리를 모두 입력하면, 자동으로 만료일로 focus된다.
+- [ ] 별칭 수정 가능
+
+## 보안코드 툴팁
+
+- [ ] 클릭 시, 보안코드 관련 안내 메시지를 보여준다.
+- [ ] focusout 시, 툴팁이 닫힌다.
+
+## 가상 키보드
+
+- [ ] 마스킹 처리된 값 입력시 사용
+- [ ] 숫자를 랜덤으로 배열
 
 [Storybook](https://65f3ed588e68d95b1294b999-qxfuwtggjt.chromatic.com/?path=/docs/configure-your-project--docs)
