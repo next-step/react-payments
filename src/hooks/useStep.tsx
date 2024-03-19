@@ -6,7 +6,7 @@ import {
   useEffect,
   useState
 } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { NavigateFunction } from 'react-router-dom'
 
 type StepperProps = { children: ReactNode }
 type StepProps<T extends readonly string[]> = {
@@ -17,10 +17,12 @@ type StepProps<T extends readonly string[]> = {
 type StepperContextProps = [string, (step: string) => void]
 const StepperContext = createContext<StepperContextProps>(['', () => {}])
 
-export const useStep = <T extends readonly string[]>(steps: T) => {
-  const location = useLocation()
-  const navigate = useNavigate()
-  const stepQuery = new URLSearchParams(location.search).get('step')
+export const useStep = <T extends readonly string[]>(
+  steps: T,
+  location?: Location,
+  navigate?: NavigateFunction
+) => {
+  const stepQuery = new URLSearchParams(location?.search).get('step')
 
   const initialStep = stepQuery || steps[0]
   const [currentStep, setCurrentStep] = useState<string>(initialStep)
@@ -29,7 +31,7 @@ export const useStep = <T extends readonly string[]>(steps: T) => {
     if (stepQuery && steps.includes(stepQuery as T[number])) {
       setCurrentStep(stepQuery)
     }
-  }, [location.search, steps, stepQuery])
+  }, [location?.search, steps, stepQuery])
 
   const setStep = useCallback(
     (step: T[number]) => {
@@ -38,7 +40,7 @@ export const useStep = <T extends readonly string[]>(steps: T) => {
       }
 
       setCurrentStep(step)
-      navigate(`?step=${step}`)
+      navigate?.(`?step=${step}`)
     },
     [steps, navigate]
   )
