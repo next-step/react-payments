@@ -16,7 +16,7 @@ const useCardSecurityCode = () => {
 
       send({
         type: 'UPDATE_SECURITY_CODE',
-        value,
+        payload: { key: 'securityCode', value },
       });
     },
     [send]

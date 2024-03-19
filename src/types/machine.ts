@@ -11,19 +11,28 @@ export type GoPageEvent = {
 };
 
 type ActionEvent =
-  | { type: 'UPDATE_CARD_NUMBER'; value: CardInfo['numbers'] }
+  | {
+      type: 'UPDATE_CARD_NUMBER';
+      payload: { key: string; value: CardInfo['numbers'] };
+    }
   | {
       type: 'UPDATE_EXPIRATION_DATE';
-      value: CardInfo['expiration'];
+      payload: { key: string; value: CardInfo['expiration'] };
     }
-  | { type: 'UPDATE_OWNER'; value: CardInfo['owner'] }
+  | { type: 'UPDATE_OWNER'; payload: { key: string; value: CardInfo['owner'] } }
   | {
       type: 'UPDATE_SECURITY_CODE';
-      value: CardInfo['securityCode'];
+      payload: { key: string; value: CardInfo['securityCode'] };
     }
-  | { type: 'UPDATE_PASSWORD'; value: CardInfo['password'] }
-  | { type: 'UPDATE_NICKNAME'; value: CardInfo['nickname'] }
-  | { type: 'UPDATE_BRAND'; value: CardInfo['brand'] }
+  | {
+      type: 'UPDATE_PASSWORD';
+      payload: { key: string; value: CardInfo['password'] };
+    }
+  | {
+      type: 'UPDATE_NICKNAME';
+      payload: { key: string; value: CardInfo['nickname'] };
+    }
+  | { type: 'UPDATE_BRAND'; payload: { key: string; value: CardInfo['brand'] } }
   | { type: 'RESET_CARD_INFO' }
   | { type: 'SUBMIT_CARD' }
   | { type: 'SAVE_CARD_LIST'; value: CardInfo }

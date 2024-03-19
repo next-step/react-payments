@@ -24,6 +24,39 @@ export const cardMachine = setup({
     events: CardMachineEvent;
   },
   actions: {
+    updateCardState: assign({
+      cardState: ({ context, event }) => {
+        const { type } = event;
+        if (
+          type === 'UPDATE_EXPIRATION_DATE' ||
+          type === 'UPDATE_CARD_NUMBER' ||
+          type === 'UPDATE_PASSWORD'
+        ) {
+          const { key, value } = event.payload;
+
+          return {
+            ...context.cardState,
+            [key]: { ...value },
+          };
+        }
+
+        if (
+          type === 'UPDATE_OWNER' ||
+          type === 'UPDATE_SECURITY_CODE' ||
+          type === 'UPDATE_NICKNAME' ||
+          type === 'UPDATE_BRAND'
+        ) {
+          const { key, value } = event.payload;
+
+          return {
+            ...context.cardState,
+            [key]: value,
+          };
+        }
+
+        return context.cardState;
+      },
+    }),
     saveCard: assign({
       cardList: ({ context, event }) => {
         const { cardList } = context;
@@ -54,15 +87,6 @@ export const cardMachine = setup({
         return context.cardList;
       },
     }),
-    updateNickname: assign({
-      cardState: ({ context, event }) => {
-        if (event.type === 'UPDATE_NICKNAME') {
-          return { ...context.cardState, nickname: event.value };
-        }
-
-        return context.cardState;
-      },
-    }),
     resetCardState: assign({
       cardState: () => {
         return initialCardState;
@@ -85,7 +109,7 @@ export const cardMachine = setup({
     'add-card-success': {
       on: {
         UPDATE_NICKNAME: {
-          actions: 'updateNickname',
+          actions: 'updateCardState',
         },
         SAVE_CARD_LIST: {
           target: 'card-list',
@@ -98,7 +122,7 @@ export const cardMachine = setup({
     'edit-card-name': {
       on: {
         UPDATE_NICKNAME: {
-          actions: 'updateNickname',
+          actions: 'updateCardState',
         },
         SAVE_CARD_LIST: {
           target: 'card-list',
@@ -151,57 +175,26 @@ export const cardMachine = setup({
     'add-card': {
       on: {
         UPDATE_BRAND: {
-          actions: assign({
-            cardState: ({ context, event }) => ({
-              ...context.cardState,
-              brand: { ...event.value },
-            }),
-          }),
+          actions: 'updateCardState',
         },
-
         UPDATE_CARD_NUMBER: {
-          actions: assign({
-            cardState: ({ context, event }) => ({
-              ...context.cardState,
-              numbers: { ...event.value },
-            }),
-          }),
+          actions: 'updateCardState',
         },
 
         UPDATE_EXPIRATION_DATE: {
-          actions: assign({
-            cardState: ({ context, event }) => ({
-              ...context.cardState,
-              expiration: { ...event.value },
-            }),
-          }),
+          actions: 'updateCardState',
         },
 
         UPDATE_OWNER: {
-          actions: assign({
-            cardState: ({ context, event }) => ({
-              ...context.cardState,
-              owner: event.value,
-            }),
-          }),
+          actions: 'updateCardState',
         },
 
         UPDATE_SECURITY_CODE: {
-          actions: assign({
-            cardState: ({ context, event }) => ({
-              ...context.cardState,
-              securityCode: event.value,
-            }),
-          }),
+          actions: 'updateCardState',
         },
 
         UPDATE_PASSWORD: {
-          actions: assign({
-            cardState: ({ context, event }) => ({
-              ...context.cardState,
-              password: { ...event.value },
-            }),
-          }),
+          actions: 'updateCardState',
         },
 
         GO_ADD_CARD_SUCCESS: 'add-card-success',

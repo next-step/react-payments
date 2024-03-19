@@ -16,7 +16,10 @@ const useCardPassword = () => {
 
       send({
         type: 'UPDATE_PASSWORD',
-        value: { ...cardState.password, [name]: value },
+        payload: {
+          key: 'password',
+          value: { ...cardState.password, [name]: value },
+        },
       });
     },
     [cardState.password, send]

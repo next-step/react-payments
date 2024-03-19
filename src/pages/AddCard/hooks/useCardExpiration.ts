@@ -18,7 +18,10 @@ const useCardExpiration = () => {
 
       send({
         type: 'UPDATE_EXPIRATION_DATE',
-        value: { ...cardState.expiration, [name]: value },
+        payload: {
+          key: 'expiration',
+          value: { ...cardState.expiration, [name]: value },
+        },
       });
     },
     [cardState.expiration, send]

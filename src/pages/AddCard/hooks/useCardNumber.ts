@@ -16,7 +16,10 @@ const useCardNumber = () => {
 
       send({
         type: 'UPDATE_CARD_NUMBER',
-        value: { ...cardState.numbers, [name]: value },
+        payload: {
+          key: 'numbers',
+          value: { ...cardState.numbers, [name]: value },
+        },
       });
     },
     [cardState.numbers, send]

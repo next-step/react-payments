@@ -10,7 +10,7 @@ const useCardNickname = () => {
   const handleNickname = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target;
-      send({ type: 'UPDATE_NICKNAME', value });
+      send({ type: 'UPDATE_NICKNAME', payload: { key: 'nickname', value } });
     },
     [send]
   );
