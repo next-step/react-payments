@@ -1,4 +1,4 @@
-import {type CardBrand, type CardStateType} from '@/domain/type';
+import { type CardBrand, type CardStateType } from '@/domain/type';
 import CardBox from './parts/CardBox';
 import CardForm from './parts/CardForm';
 import CardNumbers from './parts/CardNumbers';
@@ -12,7 +12,8 @@ type CardProps = {
   status?: 'small' | 'big' | 'empty';
   onClick?: () => void;
   cardBrandName: string;
-} & CardStateType & CardBrand;
+} & CardStateType &
+  CardBrand;
 
 const Card = ({
   ownerName = 'NAME',
@@ -29,16 +30,16 @@ const Card = ({
 
   return (
     <CardBox onClick={onClick}>
-      <CardForm status={status} style={{backgroundColor: color}}>
+      <CardForm status={status} style={{ backgroundColor: color }}>
         <CardTitle>
           <CardText status={status}>{cardBrandName}</CardText>
         </CardTitle>
-        <div className='card-middle'>
+        <div className="card-middle">
           <Chip status={status} />
         </div>
         <CardBottom>
           <CardNumbers status={status} {...cardNumbers} />
-          <div className='card-bottom__info'>
+          <div className="card-bottom__info">
             <CardText status={status}>{ownerName}</CardText>
             <CardText status={status}>{expirationDate || 'MM/YY'}</CardText>
           </div>

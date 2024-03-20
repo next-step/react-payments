@@ -18,7 +18,7 @@ import useStepContext from '@/provider/step-provider/hook/useStepContext';
 
 const REF_SIZE = 3;
 const CardForm = () => {
-  const { cardValidation, myCardList, handleCardState } = useCardContext();
+  const { cardValidation } = useCardContext();
   const { navigate } = useStepContext();
   const {
     cardBrand: { cardBrandName, color },
@@ -31,8 +31,8 @@ const CardForm = () => {
     const isValid = cardValidation();
     const isCardBrandVaild = isObjectFailed({ cardBrandName, color });
     if (isValid && isCardBrandVaild) {
-      const id = myCardList.length + 1;
-      handleCardState({ id });
+      // const id = myCardList.length + 1;
+      // handleCardState({ id });
       navigate('COMPLETE');
     }
   };

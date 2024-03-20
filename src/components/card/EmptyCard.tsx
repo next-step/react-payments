@@ -4,9 +4,9 @@ import CardForm from './parts/CardForm';
 type EmptyCardProps = {
   onClick: () => void;
 };
-const EmptyCard = ({onClick}: EmptyCardProps) => (
+const EmptyCard = ({ onClick }: EmptyCardProps) => (
   <CardBox onClick={onClick}>
-    <CardForm status='empty'>
+    <CardForm status="empty">
       <div>+</div>
     </CardForm>
   </CardBox>

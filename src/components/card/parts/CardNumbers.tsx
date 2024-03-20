@@ -1,4 +1,4 @@
-import {type CardNumbersType} from '@/domain/type';
+import { type CardNumbersType } from '@/domain/type';
 import CardText from './CardText';
 
 const REGEX = /[1-9]/gi;
@@ -12,7 +12,7 @@ const CardNumbers = ({
   third = '',
   fourth = '',
 }: CardNumbersProps) => (
-  <div className='card-bottom__number'>
+  <div className="card-bottom__number">
     <CardText
       status={status}
     >{`${first} ${second} ${third.replace(REGEX, '*')} ${fourth.replace(REGEX, '*')}`}</CardText>

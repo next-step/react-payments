@@ -1,5 +1,6 @@
 import Stepper from './pages/Stepper';
-import CardInfoProvider from './provider/card-info-provider/CardInfoProvider';
+import CardInfoProvider from './pages/card-add/components/card-form/card-password/CardInfoProvider';
+
 import StepProvider from './provider/step-provider/StepProvider';
 
 const App = () => (

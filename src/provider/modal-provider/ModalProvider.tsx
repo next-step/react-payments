@@ -3,10 +3,10 @@ import Modal from '@/components/common/modal/Modal';
 import ModalItemContainer from '@/components/common/modal/parts/ModalItemContainer';
 import ModalItemDot from '@/components/common/modal/parts/ModalItemDot';
 import ModalItemName from '@/components/common/modal/parts/ModalItemName';
-import {CARD_COMPANY_LIST} from '@/domain/cardItem';
-import {type CardBrand} from '@/domain/type';
+import { CARD_COMPANY_LIST } from '@/domain/cardItem';
+import { type CardBrand } from '@/domain/type';
 
-import {type PropsWithChildren, createContext, useState} from 'react';
+import { type PropsWithChildren, createContext, useState } from 'react';
 
 type ModalType = {
   cardBrand: CardBrand;
@@ -15,7 +15,7 @@ type ModalType = {
 };
 
 const initialContext: ModalType = {
-  cardBrand: {cardBrandName: '', color: '', pattern: []},
+  cardBrand: { cardBrandName: '', color: '', pattern: [] },
   toggle: () => undefined,
   resetCardBrand: () => undefined,
 };
@@ -27,7 +27,7 @@ const initialState = {
 };
 export const ModalContext = createContext(initialContext);
 
-const ModalProvider = ({children}: PropsWithChildren) => {
+const ModalProvider = ({ children }: PropsWithChildren) => {
   const [isOpen, setIsOpen] = useState(false);
   const [cardBrand, setCardBrand] = useState({} as CardBrand);
 
@@ -35,8 +35,8 @@ const ModalProvider = ({children}: PropsWithChildren) => {
     setIsOpen(!isOpen);
   };
 
-  const clickCardDot = ({cardBrandName, color, pattern}: CardBrand) => {
-    setCardBrand({cardBrandName, color, pattern});
+  const clickCardDot = ({ cardBrandName, color, pattern }: CardBrand) => {
+    setCardBrand({ cardBrandName, color, pattern });
     toggle();
   };
 
@@ -45,17 +45,17 @@ const ModalProvider = ({children}: PropsWithChildren) => {
   };
 
   return (
-    <ModalContext.Provider value={{cardBrand, toggle, resetCardBrand}}>
+    <ModalContext.Provider value={{ cardBrand, toggle, resetCardBrand }}>
       {children}
       <Modal onToggle={toggle} isOpen={isOpen}>
         {CARD_COMPANY_LIST.map((item, i) => (
           <FlexCenter key={i}>
-            {item.map(({cardBrandName, color, pattern}, i) => (
+            {item.map(({ cardBrandName, color, pattern }, i) => (
               <ModalItemContainer key={`${cardBrandName}_${i}`}>
                 <ModalItemDot
-                  style={{backgroundColor: color}}
+                  style={{ backgroundColor: color }}
                   onClick={() => {
-                    clickCardDot({cardBrandName, color, pattern});
+                    clickCardDot({ cardBrandName, color, pattern });
                   }}
                 />
                 <ModalItemName name={cardBrandName} />

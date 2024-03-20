@@ -1,4 +1,4 @@
-import {type Meta, type StoryObj} from '@storybook/react';
+import { type Meta, type StoryObj } from '@storybook/react';
 import Input from './Input';
 import '../../../../styles/input.css';
 
@@ -7,8 +7,8 @@ const meta: Meta<typeof Input> = {
   component: Input,
 
   decorators: [
-    Story => (
-      <div style={{width: '200px'}}>
+    (Story) => (
+      <div style={{ width: '200px' }}>
         <Story />
       </div>
     ),
@@ -16,7 +16,7 @@ const meta: Meta<typeof Input> = {
   argTypes: {
     boxType: {
       options: ['input-basic', 'input-underline'],
-      control: {type: 'radio'},
+      control: { type: 'radio' },
     },
   },
 };
