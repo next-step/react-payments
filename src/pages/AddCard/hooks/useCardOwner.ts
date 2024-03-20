@@ -1,17 +1,20 @@
 import { useCallback } from 'react';
-import { useCardState } from '../../../providers/CardState/hooks/useCardState';
+import { CardContext } from '../../../App';
 
 const useCardOwner = () => {
-  const { cardState, setCardState } = useCardState();
+  const cardState = CardContext.useSelector(({ context }) => context.cardState);
+  const { send } = CardContext.useActorRef();
 
   const handleOwner = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      setCardState((prev) => ({
-        ...prev,
-        owner: e.target.value,
-      }));
+      const { value } = e.target;
+
+      send({
+        type: 'UPDATE_OWNER',
+        payload: { key: 'owner', value },
+      });
     },
-    [setCardState]
+    [send]
   );
 
   return {

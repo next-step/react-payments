@@ -1,22 +1,32 @@
 import type { CardInfo } from '../../types';
 
+const MASK_START_INDEX = 2;
+
 interface Props extends CardInfo {
   size?: 'small' | 'big';
+  onClick?: () => void;
 }
 
-const Card = ({ brand, numbers, owner, expiration, size = 'small' }: Props) => {
+const Card = ({
+  brand,
+  numbers,
+  owner,
+  expiration,
+  size = 'small',
+  onClick,
+}: Props) => {
   const cardNumbers = Object.values(numbers)
     .map((number, index) => {
-      if (index > 1) return number.replace(/\d/g, '*');
+      if (index >= MASK_START_INDEX) return number.replace(/\d/g, '*');
       return number;
     })
     .join(' ');
 
   return (
-    <div className='card-box'>
-      <div className={`${size}-card`}>
+    <div className='card-box' onClick={onClick}>
+      <div className={`${size}-card`} style={{ backgroundColor: brand.color }}>
         <div className='card-top'>
-          <span className='card-text'>{brand}</span>
+          <span className='card-text'>{brand.label}</span>
         </div>
         <div className='card-middle'>
           <div className={`${size}-card__chip`} />

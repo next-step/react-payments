@@ -1,24 +1,28 @@
-import { useCallback } from 'react';
-import { useCardState } from '../../../providers/CardState/hooks/useCardState';
+import { ChangeEvent, useCallback } from 'react';
+import { CardContext } from '../../../App';
 
 const CARD_NUMBER_MAX_LENGTH = 4;
 
 const useCardNumber = () => {
-  const { cardState, setCardState } = useCardState();
+  const cardState = CardContext.useSelector(({ context }) => context.cardState);
+  const { send } = CardContext.useActorRef();
 
   const handleNumbers = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    (e: ChangeEvent<HTMLInputElement>) => {
       const { value, name } = e.target;
 
       const isNumber = !Number.isNaN(Number(value));
       if (!isNumber || value.length > CARD_NUMBER_MAX_LENGTH) return;
 
-      setCardState((prev) => ({
-        ...prev,
-        numbers: { ...prev.numbers, [name]: value },
-      }));
+      send({
+        type: 'UPDATE_CARD_NUMBER',
+        payload: {
+          key: 'numbers',
+          value: { ...cardState.numbers, [name]: value },
+        },
+      });
     },
-    [setCardState]
+    [cardState.numbers, send]
   );
 
   return {

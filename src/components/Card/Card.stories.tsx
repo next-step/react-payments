@@ -11,7 +11,7 @@ type Story = StoryObj<typeof Card>;
 
 export const Default: Story = {
   args: {
-    brand: '클린카드',
+    brand: { label: '클린 카드', color: '#E76E9A' },
     numbers: { first: '1234', second: '5678', third: '1234', fourth: '5672' },
     owner: 'NAME',
     expiration: { month: 'MM', year: 'YY' },

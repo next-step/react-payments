@@ -1,11 +1,8 @@
-import {
-  Children,
-  ReactElement,
-  ReactNode,
-  isValidElement,
-  useState,
-} from 'react';
-import { PAGES } from '../constants/pages';
+import { Children, ReactElement, ReactNode, isValidElement } from 'react';
+import { PagesType } from '../constants/pages';
+import { useQueryParams } from './useQueryParams';
+import { CardContext } from '../App';
+import { goPageEventTypeMap } from '../types';
 
 export interface StepperProps<Step extends PagesType> {
   children:
@@ -18,21 +15,15 @@ export interface StepProps<Step extends PagesType> {
   children: ReactNode;
 }
 
-export type PagesType = (typeof PAGES)[keyof typeof PAGES];
+const useStepper = () => {
+  const state = CardContext.useSelector(({ value }) => value);
+  const { send } = CardContext.useActorRef();
+  const { params, setQueryParams } = useQueryParams();
+  const step = params.get('step') ?? state;
 
-const useStepper = <Step extends PagesType>(initialStep: Step) => {
-  const [currentStep, setCurrentStep] = useState<PagesType>(initialStep);
-  const searchParams = new URLSearchParams(location.search);
-  const step = searchParams.get('step') ?? currentStep;
-
-  const setStep = (newStep: PagesType) => {
-    const currentSearchParams = new URLSearchParams(location.search);
-    currentSearchParams.set('step', newStep);
-
-    const newUrl = `${location.pathname}?${currentSearchParams.toString()}`;
-
-    history.pushState({ step: newStep }, '', newUrl);
-    setCurrentStep(newStep);
+  const setStep = (newStep: PagesType, id?: string) => {
+    setQueryParams({ step: newStep, id: id || '' });
+    send({ type: goPageEventTypeMap[newStep] });
   };
 
   const Stepper = <Step extends PagesType>({
@@ -42,7 +33,9 @@ const useStepper = <Step extends PagesType>(initialStep: Step) => {
       isValidElement
     ) as Array<ReactElement<StepProps<Step>>>;
 
-    const targetStep = validChildren.find((child) => child.props.name === step);
+    const targetStep = validChildren.find(({ props }) => {
+      return props.name === step;
+    });
 
     return targetStep;
   };
