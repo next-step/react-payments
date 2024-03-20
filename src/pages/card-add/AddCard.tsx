@@ -1,25 +1,27 @@
-import Card from '@/components/card/Card';
-import PageTitle from '@/components/common/page-title/PageTitle';
-import { useContext } from 'react';
-import CardForm from './components/card-form/CardForm';
+import useCardContext from '@/provider/card-info-provider/hook/useCardContext';
 
-import { CardInfoContext } from '@/provider/card-info-provider/CardInfoProvider';
-import ModalProvider from '@/provider/modal-provider/ModalProvider';
-import { StepContext } from '@/provider/step-provider/StepProvider';
+import useModalContext from '@/provider/modal-provider/hook/useModalContext';
+
+import CardForm from './components/card-form/CardForm';
+import { Card } from '@/components/card';
+import { PageTitle } from '@/components/common';
+import useStepContext from '@/provider/step-provider/hook/useStepContext';
 
 const AddCard = () => {
-  const { cardState } = useContext(CardInfoContext);
-  const { navigate } = useContext(StepContext);
-  const goToPage = () => navigate('LIST');
+  const { cardState } = useCardContext();
+  const { navigate } = useStepContext();
+  const { cardBrand, toggle } = useModalContext();
+  const goToPage = () => {
+    navigate('LIST');
+  };
+
   return (
     <div className="app">
-      <ModalProvider>
-        <PageTitle>
-          <div onClick={goToPage}>{'< 카드 추가'}</div>
-        </PageTitle>
-        <Card {...cardState} />
-        <CardForm />
-      </ModalProvider>
+      <PageTitle>
+        <div onClick={goToPage}>{'< 카드 추가'}</div>
+      </PageTitle>
+      <Card {...cardBrand} {...cardState} onClick={toggle} />
+      <CardForm />
     </div>
   );
 };

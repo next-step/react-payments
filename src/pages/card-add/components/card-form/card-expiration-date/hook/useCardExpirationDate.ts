@@ -1,14 +1,22 @@
-import { REGEX } from '@/domain/constant';
+import { CARD_EXPIRATION_DATE_LIMIT, REGEX } from '@/domain/constant';
 import { validExpirationDate } from '@/domain/validate';
-import { CardInfoContext } from '@/provider/card-info-provider/CardInfoProvider';
-import { ChangeEvent, useContext } from 'react';
+import useInputFocus from '@/pages/card-add/hook/useInputFocus';
+import useCardContext from '@/provider/card-info-provider/hook/useCardContext';
+import { type RefObject, type ChangeEvent } from 'react';
 
-const useCardExpirationDate = () => {
+const REF_SIZE = 1;
+
+type UseCardExpirationDate = {
+  nextFocus: RefObject<HTMLInputElement>;
+};
+
+const useCardExpirationDate = ({ nextFocus }: UseCardExpirationDate) => {
   const {
     cardState: { month, year },
     handleCardState,
-  } = useContext(CardInfoContext);
-
+  } = useCardContext();
+  const { inputRef } = useInputFocus(REF_SIZE);
+  const [yearRef] = inputRef;
   const handleExpirationDate = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
 
@@ -19,14 +27,30 @@ const useCardExpirationDate = () => {
 
     if (name === 'month' && validExpirationDate(value)) {
       handleCardState({ [name]: value });
+      if (value.length === CARD_EXPIRATION_DATE_LIMIT) {
+        yearRef.current?.focus();
+      }
+
       return;
     }
 
     if (name === 'year') {
-      if (!REGEX.test(value)) handleCardState({ [name]: value });
+      if (!REGEX.test(value)) {
+        handleCardState({ [name]: value });
+      }
+
+      if (value.length === CARD_EXPIRATION_DATE_LIMIT) {
+        nextFocus?.current?.focus();
+      }
     }
   };
-  return { month, year, handleChange: handleExpirationDate };
+
+  return {
+    inputRef,
+    month,
+    year,
+    handleChange: handleExpirationDate,
+  };
 };
 
 export default useCardExpirationDate;

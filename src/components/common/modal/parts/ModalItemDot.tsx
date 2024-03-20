@@ -1,7 +1,13 @@
-import React from 'react';
+import { type DetailedHTMLProps, type HTMLAttributes } from 'react';
 
-const ModalItemDot = () => {
-  return <div className="modal-item-dot" />;
-};
+type BaseModalItemDot = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+
+type ModalItemDotProps = {
+  onClick: () => void;
+} & BaseModalItemDot;
+
+const ModalItemDot = ({ onClick, style }: ModalItemDotProps) => (
+  <div className="modal-item-dot" style={style} onClick={onClick} />
+);
 
 export default ModalItemDot;

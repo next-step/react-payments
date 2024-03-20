@@ -1,14 +1,12 @@
-import { PropsWithChildren } from 'react';
+import { type PropsWithChildren } from 'react';
 
-interface CardBoxProps extends PropsWithChildren {
+type CardBoxProps = {
   onClick?: () => void;
-}
-const CardBox = ({ onClick, children }: CardBoxProps) => {
-  return (
-    <div onClick={onClick} className="card-box">
-      {children}
-    </div>
-  );
-};
+} & PropsWithChildren;
+const CardBox = ({ onClick, children }: CardBoxProps) => (
+  <div onClick={onClick} className="card-box">
+    {children}
+  </div>
+);
 
 export default CardBox;

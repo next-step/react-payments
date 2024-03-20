@@ -1,21 +1,47 @@
+import { CARD_NUMBER_LIMIT } from '@/domain/constant';
 import { validCardNumber } from '@/domain/validate';
-import { CardInfoContext } from '@/provider/card-info-provider/CardInfoProvider';
-import { ChangeEvent, useContext } from 'react';
+import useInputFocus from '@/pages/card-add/hook/useInputFocus';
+import useCardContext from '@/provider/card-info-provider/hook/useCardContext';
+import { RefObject, type ChangeEvent } from 'react';
 
-const useNumbers = () => {
+const REF_SIZE = 3;
+
+type UseNumbers = {
+  nextFocus: RefObject<HTMLInputElement>;
+};
+const useNumbers = ({ nextFocus }: UseNumbers) => {
   const {
     cardState: { cardNumbers },
     handleCardState,
-  } = useContext(CardInfoContext);
+  } = useCardContext();
+
+  const { inputRef } = useInputFocus(REF_SIZE);
+  const [second, third, fourth] = inputRef;
 
   const handleCardNumbers = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     if (validCardNumber(value)) {
       handleCardState({ cardNumbers: { ...cardNumbers, [name]: value } });
+
+      if (name === 'first' && value.length === CARD_NUMBER_LIMIT) {
+        second.current?.focus();
+      }
+
+      if (name === 'second' && value.length === CARD_NUMBER_LIMIT) {
+        third.current?.focus();
+      }
+
+      if (name === 'third' && value.length === CARD_NUMBER_LIMIT) {
+        fourth.current?.focus();
+      }
+
+      if (name === 'fourth' && value.length === CARD_NUMBER_LIMIT) {
+        nextFocus?.current?.focus();
+      }
     }
   };
 
-  return { cardNumbers, handleChange: handleCardNumbers };
+  return { inputRef, cardNumbers, handleChange: handleCardNumbers };
 };
 
 export default useNumbers;

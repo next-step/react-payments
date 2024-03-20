@@ -1,11 +1,12 @@
-import { CardInfoContext } from '@/provider/card-info-provider/CardInfoProvider';
-import { ChangeEvent, useContext } from 'react';
+import useCardContext from '@/provider/card-info-provider/hook/useCardContext';
+import { type ChangeEvent } from 'react';
 
 const useCardOwner = () => {
   const {
     cardState: { ownerName },
     handleCardState,
-  } = useContext(CardInfoContext);
+  } = useCardContext();
+
   const handleOwnerName = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     handleCardState({ [name]: value });
