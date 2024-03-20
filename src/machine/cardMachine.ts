@@ -5,6 +5,7 @@ import {
   CARD_STORAGE_KEY,
   getLocalStorageItem,
 } from '../utils/localStorage';
+import { deepFreeze } from '../utils/deepFreeze';
 
 const initialCardState: CardInfo = {
   id: '',
@@ -89,7 +90,7 @@ export const cardMachine = setup({
     }),
     resetCardState: assign({
       cardState: () => {
-        return initialCardState;
+        return deepFreeze(initialCardState);
       },
     }),
     saveToLocalStorage: ({ context }) => {
@@ -102,7 +103,7 @@ export const cardMachine = setup({
   id: 'cardState',
   initial: 'card-list',
   context: {
-    cardState: initialCardState,
+    cardState: deepFreeze(initialCardState),
     cardList: getLocalStorageItem({ key: CARD_STORAGE_KEY }) || [],
   },
   states: {
