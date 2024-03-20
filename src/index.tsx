@@ -1,3 +1,5 @@
+import './styles/index.css';
+
 import PaymentsProvider from 'src/components/npm/PaymentsProvider';
 
 import CardImage from 'src/components/common/CardImage';

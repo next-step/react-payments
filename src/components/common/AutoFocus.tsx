@@ -1,6 +1,6 @@
 import { RefObject, useRef, createContext, ReactNode, createRef } from 'react';
 
-interface AutoFocusContext {
+export interface AutoFocusContext {
 	registerInput<T extends HTMLElement>(index: number): RefObject<T>;
 	focusIndexOfInput: (index: number) => void;
 }

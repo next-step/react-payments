@@ -40,7 +40,7 @@ export const initialCardInfo: CardInfo = {
 	cardCompanyCode: '',
 };
 
-interface CardMachineContext {
+export interface CardMachineContext {
 	cardInfo: CardInfo;
 	cardList: CardInfoWithId[];
 	selectedCard: CardInfoWithId;
