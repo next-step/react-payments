@@ -14,7 +14,7 @@ export interface PaymentsProviderProps {
 	};
 }
 
-export default function PaymentsProvider({ children, initialSettings }: PaymentsProviderProps) {
+export function InitializeWrapper({ children, initialSettings }: PaymentsProviderProps) {
 	const { send } = useAddCardMachineActorRef();
 
 	const isStateBeforeInitialize = useAddCardMachineSelector(state => state.matches({ CardList: 'beforeInitialize' }));
@@ -27,5 +27,17 @@ export default function PaymentsProvider({ children, initialSettings }: Payments
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [initialSettings, isStateBeforeInitialize]);
 
-	return <AddCardMachineProvider>{children}</AddCardMachineProvider>;
+	return <>{children}</>;
+}
+
+export default function PaymentsProvider({ children, initialSettings }: PaymentsProviderProps) {
+	return (
+		<div className="root">
+			<div className="app">
+				<AddCardMachineProvider>
+					<InitializeWrapper initialSettings={initialSettings}>{children}</InitializeWrapper>
+				</AddCardMachineProvider>
+			</div>
+		</div>
+	);
 }

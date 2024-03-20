@@ -11,6 +11,7 @@ import EnteredCardImage from 'src/steps/add-card-form/EnteredCardImage';
 import NextButton from 'src/steps/add-card-form/NextButton';
 import AutoFocusProvider from 'src/components/common/AutoFocus';
 import { CardInfo } from 'src/machines/addCardMachine';
+import BackIcon from 'src/images/back.png';
 
 export interface AddCardFormProps {
 	onSubmit?: (card: CardInfo) => void;
@@ -40,7 +41,7 @@ export default function AddCardForm({ onSubmit }: AddCardFormProps) {
 				<div>
 					<div className="header-box">
 						<button type="button" onClick={handleClickBack} data-testid="back-to-select">
-							<img src="/back.png" alt="뒤로가기" />
+							<img src={BackIcon} alt="뒤로가기" />
 						</button>
 						<h2 className="page-title">카드 추가</h2>
 					</div>

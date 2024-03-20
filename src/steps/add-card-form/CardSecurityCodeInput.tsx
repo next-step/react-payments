@@ -6,6 +6,7 @@ import Tooltip from 'src/components/common/Tooltip';
 import { useAutoFocus } from 'src/hooks/useAutoFocus';
 import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
 import { cardSecurityCodeLengthSchema } from 'src/schema/cardInfoStringLengthSchema';
+import QuestionIcon from 'src/images/question.png';
 
 interface CardSecurityCodeInputProps {
 	maxLength?: number;
@@ -58,7 +59,7 @@ export default function CardSecurityCodeInput({ maxLength = 3 }: CardSecurityCod
 					maxLength={maxLength}
 				/>
 				<Tooltip description="카드 뒷면에 있는 3자리 숫자입니다.">
-					<img src="/question.png" alt="notice" />
+					<img src={QuestionIcon} alt="notice" />
 				</Tooltip>
 			</div>
 			{!isCardSecurityCodeValid && isCardSecurityCodeChanged && (

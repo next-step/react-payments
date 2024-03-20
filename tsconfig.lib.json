@@ -7,6 +7,6 @@
     "module": "ESNext",
     "target": "es6"
   },
-  "include": ["src/index.tsx"],
+  "include": ["src/index.tsx", "src/@types/**/*"],
   "exclude": ["node_modules", "vite.config.ts", "src/**/*.test.ts", "src/**/*.test.tsx", "src/**/*.spec.ts", "src/**/*.stories.tsx", "src/stories/**/*"]
 }

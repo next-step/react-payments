@@ -10,8 +10,8 @@ export default defineConfig({
 		lib: {
 			entry: path.resolve(__dirname, 'src/index.tsx'),
 			name: 'nextstep-payments-gn0lee',
-			formats: ['es', 'umd'],
-			fileName: format => `nextstep-payments-gn0lee.${format}.js`,
+			formats: ['es'],
+			fileName: () => 'index.js',
 		},
 		rollupOptions: {
 			external: ['react', 'react-dom', 'zod', '@xstate/react', 'xstate', 'nanoid'],
