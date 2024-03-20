@@ -21,7 +21,10 @@ const Page4 = () => {
         type: "SET_CARD_NICKNAME",
         payload: {
           key: "cardNickName",
-          value: inputRef.current ? inputRef.current.value : "nickname",
+          value:
+            inputRef.current && inputRef.current.value === ""
+              ? state.cardName
+              : inputRef.current!.value,
         },
       });
     }

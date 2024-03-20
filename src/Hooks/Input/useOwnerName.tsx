@@ -1,6 +1,7 @@
 import { useCardInfo } from "../../Context/CardProvider";
 import { ChangeEvent } from "react";
 import { Validation } from "../../Util/Validation";
+
 const useOwnerName = () => {
   const { state, dispatch } = useCardInfo();
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -11,6 +12,7 @@ const useOwnerName = () => {
       });
     }
   };
+
   return {
     ownerName: state.cardOwnerName,
     handleNameChange,
