@@ -13,7 +13,7 @@ import AutoFocusProvider from 'src/components/common/AutoFocus';
 import { CardInfo } from 'src/machines/addCardMachine';
 
 export interface AddCardFormProps {
-	onSubmit?: (card: CardInfo) => Promise<void>;
+	onSubmit?: (card: CardInfo) => void;
 }
 
 export default function AddCardForm({ onSubmit }: AddCardFormProps) {

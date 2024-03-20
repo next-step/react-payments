@@ -4,7 +4,7 @@ import SelectedCardImage from 'src/steps/add-card-finish/SelectedCardImage';
 import type { CardInfoWithId } from 'src/machines/addCardMachine';
 
 export interface AddCardFinishProps {
-	onUpdate?: (card: CardInfoWithId) => Promise<void>;
+	onUpdate?: (card: CardInfoWithId) => void;
 }
 
 export default function AddCardFinish({ onUpdate }: AddCardFinishProps) {

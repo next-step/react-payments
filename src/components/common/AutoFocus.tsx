@@ -13,8 +13,6 @@ export default function AutoFocusProvider({ children }: { children: ReactNode })
 	const registerInput = <T extends HTMLElement>(index: number): RefObject<T> => {
 		if (!inputRefs.current[index] || !inputRefs.current[index].current) {
 			inputRefs.current[index] = createRef<T>();
-		} else {
-			throw new Error('inputRef already exists');
 		}
 
 		return inputRefs.current[index] as RefObject<T>;

@@ -176,62 +176,44 @@ export const addCardMachine = createMachine(
 			selectCard: assign(({ event, context }) =>
 				event.type === 'SELECT_CARD' ? { selectedCard: event.value } : { selectedCard: context.selectedCard },
 			),
-			deleteCard: enqueueActions(async ({ event, enqueue, context }) => {
+			deleteCard: enqueueActions(({ event, enqueue, context }) => {
 				if (event.type === 'DELETE_CARD') {
-					try {
-						if (event.onDelete) {
-							await event.onDelete(event.value);
-						}
+					event.onDelete?.(event.value);
 
-						enqueue.assign({ cardList: context.cardList.filter(card => card.id !== event.value) });
-					} catch (e) {
-						enqueue.raise({ type: 'ALERT', message: '카드 삭제에 실패하였습니다.' });
-					}
+					enqueue.assign({ cardList: context.cardList.filter(card => card.id !== event.value) });
 				}
 			}),
-			addCard: enqueueActions(async ({ enqueue, event, context, check }) => {
+			addCard: enqueueActions(({ enqueue, event, context, check }) => {
 				if (event.type === 'ADD_CARD' && check({ type: 'isAddCardFormValid' })) {
-					try {
-						if (event.onSubmit) {
-							await event.onSubmit(context.cardInfo);
-						}
+					event.onSubmit?.(context.cardInfo);
 
-						const newId = nanoid();
+					const newId = nanoid();
 
-						enqueue.assign({
-							cardList: [...context.cardList, { ...context.cardInfo, id: newId }],
-							selectedCard: { ...context.cardInfo, id: newId },
-							cardInfo: { ...initialCardInfo },
-						});
+					enqueue.assign({
+						cardList: [...context.cardList, { ...context.cardInfo, id: newId }],
+						selectedCard: { ...context.cardInfo, id: newId },
+						cardInfo: { ...initialCardInfo },
+					});
 
-						enqueue.raise({ type: 'GO_TO_FINISH' });
-					} catch (e) {
-						enqueue.raise({ type: 'ALERT', message: '카드 등록에 실패하였습니다.' });
-					}
+					enqueue.raise({ type: 'GO_TO_FINISH' });
 				} else {
 					enqueue.raise({ type: 'ALERT', message: '카드 정보를 모두 입력해주세요.' });
 				}
 			}),
-			editCard: enqueueActions(async ({ enqueue, context, event }) => {
+			editCard: enqueueActions(({ enqueue, context, event }) => {
 				if (event.type === 'EDIT_CARD') {
-					try {
-						const newCardInfo = {
-							...context.selectedCard,
-							cardNickname:
-								context.selectedCard.cardNickname || CARD_COMPANY_MAP[context.selectedCard.cardCompanyCode]?.name || '',
-						};
+					const newCardInfo = {
+						...context.selectedCard,
+						cardNickname:
+							context.selectedCard.cardNickname || CARD_COMPANY_MAP[context.selectedCard.cardCompanyCode]?.name || '',
+					};
 
-						if (event.onUpdate) {
-							await event.onUpdate(newCardInfo);
-						}
+					event.onUpdate?.(newCardInfo);
 
-						assign({
-							cardList: context.cardList.map(card => (card.id === context.selectedCard.id ? newCardInfo : card)),
-							selectedCard: { ...initialCardInfo, id: '' },
-						});
-					} catch (e) {
-						enqueue.raise({ type: 'ALERT', message: '카드 수정에 실패하였습니다.' });
-					}
+					enqueue.assign({
+						cardList: context.cardList.map(card => (card.id === context.selectedCard.id ? newCardInfo : card)),
+						selectedCard: { ...initialCardInfo, id: '' },
+					});
 				}
 			}),
 			changeFieldAddCardForm: enqueueActions(({ enqueue, event, context }) => {

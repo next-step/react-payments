@@ -14,7 +14,7 @@ export const MOCK_CARD_INFO_LIST: CardInfoWithId[] = [
 		cardPasswordFirstDigit: '1',
 		cardPasswordSecondDigit: '2',
 		cardSecurityCode: '123',
-		cardNickname: '포코카드',
+		cardNickname: '포코 카드',
 		cardCompanyCode: 'poco',
 	},
 	{

@@ -3,7 +3,7 @@ import { useAddCardMachineActorRef } from 'src/machines/addCardMachine';
 import CardImage from 'src/components/common/CardImage';
 
 export interface CardListItemProps extends CardInfoWithId {
-	onDelete?: (id: string) => Promise<void>;
+	onDelete?: (id: string) => void;
 }
 
 export default function CardListItem({ onDelete, ...card }: CardListItemProps) {
