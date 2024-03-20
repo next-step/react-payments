@@ -37,7 +37,6 @@ type ActionEvent =
   | { type: 'SUBMIT_CARD' }
   | { type: 'SAVE_CARD_LIST'; value: CardInfo }
   | { type: 'DELETE_CARD'; value: string }
-  | { type: 'GET_CARD_INFO'; value: string }
   | { type: 'SAVE_TO_LOCALSTORAGE'; value: CardInfo[] };
 
 export type CardMachineEvent = GoPageEvent | ActionEvent;

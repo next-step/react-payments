@@ -1,32 +1,31 @@
-import { useEffect } from 'react';
+import { CardContext } from '../../App';
 import Button from '../../components/Button/Button';
 import Card from '../../components/Card/Card';
 import Header from '../../components/Header/Header';
-import { useQueryParams } from '../../hooks/useQueryParams';
-import { CardContext } from '../../App';
-import CardNickname from '../AddCardSuccess/components/CardNickname';
+import EditCardNameInput from './components/EditCardNameInput';
+import { useEditCardName } from './hooks/useEditCardName';
 
 interface Props {
   onNext: () => void;
 }
 
 const EditCardName = ({ onNext }: Props) => {
-  const { params } = useQueryParams();
-  const id = params.get('id');
-
-  const cardState = CardContext.useSelector(({ context }) => context.cardState);
+  const { cardState, handleNickname } = useEditCardName();
   const { send } = CardContext.useActorRef();
 
   const handleAddCard = () => {
+    if (!cardState) return;
     send({ type: 'SAVE_CARD_LIST', value: cardState });
     onNext();
   };
 
-  useEffect(() => {
-    if (id) {
-      send({ type: 'GET_CARD_INFO', value: id });
-    }
-  }, [id]);
+  if (!cardState) {
+    return (
+      <div className='app flex-column-center'>
+        <div>카드를 찾을 수 없습니다.</div>
+      </div>
+    );
+  }
 
   return (
     <div className='app flex-column-center'>
@@ -37,10 +36,13 @@ const EditCardName = ({ onNext }: Props) => {
       </div>
 
       <Card size='big' {...cardState} />
-      <CardNickname />
+      <EditCardNameInput
+        nickname={cardState.nickname}
+        onChange={handleNickname}
+      />
 
       <div className='button-box mt-50'>
-        <Button onClick={handleAddCard}>확인</Button>
+        <Button onClick={() => handleAddCard()}>확인</Button>
       </div>
     </div>
   );

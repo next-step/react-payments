@@ -155,18 +155,7 @@ export const cardMachine = setup({
             'saveToLocalStorage',
           ],
         },
-
-        GET_CARD_INFO: {
-          actions: assign({
-            cardState: ({ context, event }) => {
-              const { cardList } = context;
-              const { value: id } = event;
-              const targetCard = cardList.filter((card) => card.id === id);
-
-              return { ...targetCard[0], nickname: '' };
-            },
-          }),
-
+        GO_EDIT_CARD_NAME: {
           target: 'edit-card-name',
         },
       },
