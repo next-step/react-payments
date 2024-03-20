@@ -1,7 +1,7 @@
 import { createActorContext } from '@xstate/react'
 import { assign, fromPromise, setup } from 'xstate'
 
-import { cardAdditionalInfo, formInitialValues } from './payments.const'
+import { cardAdditionalInfo, formInitialValues, LOCAL_STORAGE_KEY_LIST } from './payments.const'
 import { CardAdditionalInitialValues, RegistrationInitialValues } from './payments.type'
 
 export const paymentsMachine = setup({
@@ -27,10 +27,14 @@ export const paymentsMachine = setup({
         }
   },
   actors: {
-    submitting: fromPromise(async ({ input }: { input: RegistrationInitialValues }) => {
+    postCardInfo: fromPromise(async ({ input }: { input: RegistrationInitialValues }) => {
+      window.localStorage.setItem(LOCAL_STORAGE_KEY_LIST.CARD_INFO, JSON.stringify(input))
+
       return true
     }),
     postNickname: fromPromise(async ({ input }: { input: CardAdditionalInitialValues }) => {
+      window.localStorage.setItem(LOCAL_STORAGE_KEY_LIST.CARD_NICKNAME, JSON.stringify(input))
+
       return true
     }),
   },
@@ -62,7 +66,7 @@ export const paymentsMachine = setup({
         input: ({ context }) => {
           return context.registration
         },
-        src: 'submitting',
+        src: 'postCardInfo',
         onDone: {
           target: 'card-registration-complete',
         },
