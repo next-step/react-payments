@@ -8,3 +8,5 @@ export type PaymentMachineContext = {
   registration: RegistrationInitialValues
   cardAdditionalInfo: CardAdditionalInitialValues
 }
+
+export type CardItem = RegistrationInitialValues & CardAdditionalInitialValues
