@@ -1,8 +1,8 @@
 import { CardContext } from '../../App';
 import Button from '../../components/Button/Button';
 import Card from '../../components/Card/Card';
+import CardNameInput from '../../components/CardNameInput/CardNameInput';
 import Header from '../../components/Header/Header';
-import EditCardNameInput from './components/EditCardNameInput';
 import { useEditCardName } from './hooks/useEditCardName';
 
 interface Props {
@@ -36,10 +36,7 @@ const EditCardName = ({ onNext }: Props) => {
       </div>
 
       <Card size='big' {...cardState} />
-      <EditCardNameInput
-        nickname={cardState.nickname}
-        onChange={handleNickname}
-      />
+      <CardNameInput nickname={cardState.nickname} onChange={handleNickname} />
 
       <div className='button-box mt-50'>
         <Button onClick={() => handleAddCard()}>확인</Button>

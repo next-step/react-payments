@@ -1,13 +1,13 @@
 import { ChangeEvent } from 'react';
-import Input from '../../../components/Input/Input';
-import InputContainer from '../../../components/InputContainer/InputContainer';
+import Input from '../Input/Input';
+import InputContainer from '../InputContainer/InputContainer';
 
 interface Props {
   nickname: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const EditCardNameInput = ({ nickname, onChange }: Props) => {
+const CardNameInput = ({ nickname, onChange }: Props) => {
   return (
     <InputContainer className='input-container flex-center w-100'>
       <Input
@@ -22,4 +22,4 @@ const EditCardNameInput = ({ nickname, onChange }: Props) => {
   );
 };
 
-export default EditCardNameInput;
+export default CardNameInput;

@@ -1,8 +1,9 @@
 import Button from '../../components/Button/Button';
 import Card from '../../components/Card/Card';
 import Header from '../../components/Header/Header';
-import CardNickname from './components/CardNickname';
 import { CardContext } from '../../App';
+import CardNameInput from '../../components/CardNameInput/CardNameInput';
+import useCardNickname from './hooks/useNickname';
 
 interface Props {
   onNext: () => void;
@@ -11,6 +12,7 @@ interface Props {
 const AddCardSuccess = ({ onNext }: Props) => {
   const cardState = CardContext.useSelector(({ context }) => context.cardState);
   const { send } = CardContext.useActorRef();
+  const { nickname, handleNickname } = useCardNickname();
 
   const handleAddCard = () => {
     send({ type: 'SAVE_CARD_LIST', value: cardState });
@@ -26,7 +28,7 @@ const AddCardSuccess = ({ onNext }: Props) => {
       </div>
 
       <Card size='big' {...cardState} />
-      <CardNickname />
+      <CardNameInput nickname={nickname} onChange={handleNickname} />
 
       <div className='button-box mt-50'>
         <Button onClick={handleAddCard}>확인</Button>
