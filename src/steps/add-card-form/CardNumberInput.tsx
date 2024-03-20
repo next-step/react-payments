@@ -5,7 +5,7 @@ import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machin
 import REGEX from 'src/constants/regex';
 import { useAutoFocus } from 'src/hooks/useAutoFocus';
 import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
-import { cardNumberSchema } from 'src/schema/cardInfoSchema';
+import { cardNumberLengthSchema } from 'src/schema/cardInfoStringLengthSchema';
 
 interface CardNumberInputProps {
 	segmentLength?: number;
@@ -41,7 +41,7 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 			shallowEqual,
 		);
 
-	const isCardNumberValid = cardNumberSchema.safeParse({
+	const isCardNumberValid = cardNumberLengthSchema.safeParse({
 		cardNumberFirstSegment,
 		cardNumberSecondSegment,
 		cardNumberThirdSegment,

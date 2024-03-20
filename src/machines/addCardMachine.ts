@@ -3,7 +3,7 @@ import { createActorContext } from '@xstate/react';
 import { nanoid } from 'nanoid';
 
 import { CARD_COMPANY_MAP, getCardCompanyCodeByCardNumber } from 'src/constants/card';
-import { cardInfoSchema } from 'src/schema/cardInfoSchema';
+import { cardInfoStringLengthSchema } from 'src/schema/cardInfoStringLengthSchema';
 import type { CardListItemProps } from 'src/steps/card-list/CardListItem';
 import type { AddCardFormProps } from 'src/steps/add-card-form/AddCardForm';
 import type { AddCardFinishProps } from 'src/steps/add-card-finish/AddCardFinish';
@@ -260,7 +260,7 @@ export const addCardMachine = createMachine(
 
 				const { cardInfo } = context;
 
-				return cardInfoSchema.safeParse({ ...cardInfo }).success;
+				return cardInfoStringLengthSchema.safeParse({ ...cardInfo }).success;
 			},
 		},
 	},

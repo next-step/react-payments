@@ -5,7 +5,7 @@ import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machin
 import REGEX from 'src/constants/regex';
 import { useAutoFocus } from 'src/hooks/useAutoFocus';
 import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
-import { cardPasswordSchema } from 'src/schema/cardInfoSchema';
+import { cardPasswordLengthSchema } from 'src/schema/cardInfoStringLengthSchema';
 
 interface CardPasswordInputProps {
 	segmentMaxLength?: number;
@@ -34,7 +34,7 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 		shallowEqual,
 	);
 
-	const isCardPasswordValid = cardPasswordSchema.safeParse({
+	const isCardPasswordValid = cardPasswordLengthSchema.safeParse({
 		cardPasswordFirstDigit,
 		cardPasswordSecondDigit,
 	}).success;

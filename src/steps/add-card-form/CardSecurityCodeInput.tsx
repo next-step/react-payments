@@ -5,7 +5,7 @@ import REGEX from 'src/constants/regex';
 import Tooltip from 'src/components/common/Tooltip';
 import { useAutoFocus } from 'src/hooks/useAutoFocus';
 import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
-import { cardSecurityCodeSchema } from 'src/schema/cardInfoSchema';
+import { cardSecurityCodeLengthSchema } from 'src/schema/cardInfoStringLengthSchema';
 
 interface CardSecurityCodeInputProps {
 	maxLength?: number;
@@ -23,7 +23,7 @@ export default function CardSecurityCodeInput({ maxLength = 3 }: CardSecurityCod
 
 	const cardSecurityCode = useAddCardMachineSelector(state => state.context.cardInfo.cardSecurityCode);
 
-	const isCardSecurityCodeValid = cardSecurityCodeSchema.safeParse({ cardSecurityCode }).success;
+	const isCardSecurityCodeValid = cardSecurityCodeLengthSchema.safeParse({ cardSecurityCode }).success;
 
 	const handleCardSecurityCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');

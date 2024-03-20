@@ -4,7 +4,7 @@ import REGEX from 'src/constants/regex';
 import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine';
 import { useAutoFocus } from 'src/hooks/useAutoFocus';
 import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
-import { cardExpirationDateSchema } from 'src/schema/cardInfoSchema';
+import { cardExpirationDateLengthSchema } from 'src/schema/cardInfoStringLengthSchema';
 
 interface CardExpirationDateInputProps {
 	separator?: string;
@@ -30,7 +30,7 @@ export default function CardExpirationDateInput({ separator = '/', maxLength = 7
 
 	const cardExpirationDate = useAddCardMachineSelector(state => state.context.cardInfo.cardExpirationDate);
 
-	const isCardExpirationDateValid = cardExpirationDateSchema.safeParse({ cardExpirationDate }).success;
+	const isCardExpirationDateValid = cardExpirationDateLengthSchema.safeParse({ cardExpirationDate }).success;
 
 	const cardExpirationDateInputId = useId();
 
