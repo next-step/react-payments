@@ -3,13 +3,12 @@ import EmptyCard from '@/components/card/EmptyCard';
 import FlexCenter from '@/components/common/flex-center/FlexCenter';
 import PageTitle from '@/components/common/page-title/PageTitle';
 import { type Route } from '@/domain/type';
+import useCardContext from '@/provider/card-info-provider/hook/useCardContext';
 
-import useMyCardsContext from '@/provider/my-cards-provider/hook/useMyCardsContext';
 import useStepContext from '@/provider/step-provider/hook/useStepContext';
 
 const CardList = () => {
-  const { myCardList } = useMyCardsContext();
-
+  const { myCardList, handleCardState } = useCardContext();
   const { navigate } = useStepContext();
   const goToPage = (path: Route) => {
     navigate(path);
@@ -23,8 +22,10 @@ const CardList = () => {
       {myCardList.map((cardState, i) => (
         <>
           <Card
-            key={i}
+            key={`${cardState.nickname}_${i}`}
             onClick={() => {
+              handleCardState(cardState);
+
               goToPage('COMPLETE');
             }}
             {...cardState}

@@ -18,19 +18,21 @@ import useStepContext from '@/provider/step-provider/hook/useStepContext';
 
 const REF_SIZE = 3;
 const CardForm = () => {
-  const { inputRef } = useInputFocus(REF_SIZE);
-
-  const [expirationDate, ownerName, password] = inputRef;
-
-  const { cardValidation } = useCardContext();
+  const { cardValidation, myCardList, handleCardState } = useCardContext();
   const { navigate } = useStepContext();
   const {
     cardBrand: { cardBrandName, color },
   } = useModalContext();
+
+  const { inputRef } = useInputFocus(REF_SIZE);
+  const [expirationDate, ownerName, password] = inputRef;
+
   const goToPage = () => {
     const isValid = cardValidation();
     const isCardBrandVaild = isObjectFailed({ cardBrandName, color });
     if (isValid && isCardBrandVaild) {
+      const id = myCardList.length + 1;
+      handleCardState({ id });
       navigate('COMPLETE');
     }
   };

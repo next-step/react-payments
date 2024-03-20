@@ -6,27 +6,25 @@ import PageTitle from '@/components/common/page-title/PageTitle';
 
 import { isLimitFailed } from '@/domain/validate';
 import useCardContext from '@/provider/card-info-provider/hook/useCardContext';
-import useMyCardsContext from '@/provider/my-cards-provider/hook/useMyCardsContext';
 
 import CardNickname from './components/card-nickname/CardNickname';
 import useModalContext from '@/provider/modal-provider/hook/useModalContext';
 import useStepContext from '@/provider/step-provider/hook/useStepContext';
 
 const CardRegisterComplete = () => {
-  const { addCard } = useMyCardsContext();
   const { navigate } = useStepContext();
-
-  const { cardState, reset } = useCardContext();
-  const { nickname } = cardState;
-
+  const { cardState, reset, addCard } = useCardContext();
   const { cardBrand, resetCardBrand } = useModalContext();
 
   const isNickNameValid = (nickname = '') => isLimitFailed(nickname, 10);
 
   const goToPage = () => {
-    const isVaild = isNickNameValid(nickname);
+    const { nickname } = cardState;
     const { cardBrandName } = cardBrand;
+
+    const isVaild = isNickNameValid(nickname);
     const cardDefaultNickname = isVaild ? nickname : cardBrandName;
+
     addCard({ ...cardState, ...cardBrand, nickname: cardDefaultNickname });
     reset();
     resetCardBrand();

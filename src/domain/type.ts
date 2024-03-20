@@ -6,6 +6,7 @@ export type CardNumbersType = Partial<{
 }>;
 
 export type CardStateType = Partial<{
+  id: number;
   cardNumbers: CardNumbersType;
   securityCode: string;
   firstCardPassword: string;

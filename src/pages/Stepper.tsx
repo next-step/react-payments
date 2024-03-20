@@ -1,6 +1,5 @@
-import useStepContext from '@/provider/step-provider/hook/useStepContext';
-import CardInfoProvider from '@/provider/card-info-provider/CardInfoProvider';
 import ModalProvider from '@/provider/modal-provider/ModalProvider';
+import useStepContext from '@/provider/step-provider/hook/useStepContext';
 import { AddCard, CardList, CardRegisterComplete } from '.';
 
 const Stepper = () => {
@@ -12,21 +11,17 @@ const Stepper = () => {
 
   if (route === 'CARD') {
     return (
-      <CardInfoProvider>
-        <ModalProvider>
-          <AddCard />
-        </ModalProvider>
-      </CardInfoProvider>
+      <ModalProvider>
+        <AddCard />
+      </ModalProvider>
     );
   }
 
   if (route === 'COMPLETE') {
     return (
-      <CardInfoProvider>
-        <ModalProvider>
-          <CardRegisterComplete />
-        </ModalProvider>
-      </CardInfoProvider>
+      <ModalProvider>
+        <CardRegisterComplete />
+      </ModalProvider>
     );
   }
 

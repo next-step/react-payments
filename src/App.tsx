@@ -1,14 +1,14 @@
 import Stepper from './pages/Stepper';
-import MyCardsProvider from './provider/my-cards-provider/MyCardsProvider';
+import CardInfoProvider from './provider/card-info-provider/CardInfoProvider';
 import StepProvider from './provider/step-provider/StepProvider';
 
 const App = () => (
-  <div className='root'>
-    <MyCardsProvider>
+  <div className="root">
+    <CardInfoProvider>
       <StepProvider>
         <Stepper />
       </StepProvider>
-    </MyCardsProvider>
+    </CardInfoProvider>
   </div>
 );
 
