@@ -3,9 +3,9 @@
  * 카드 목록, 카드 추가, 카드 추가 완료, 카드 결제로 구성되어 있습니다.
  */
 export const STEP = {
-  INITIAL_STEP: 'addCard',
+  INITIAL_STEP: 'cardList',
   CARD_LIST: 'cardList',
   ADD_CARD: 'addCard',
-  ADD_CARD_COMPLETE: 'addCardComplete',
+  CARD_CONFIG: 'cardConfig',
   CARD_PAYMENT: 'cardPayment',
 } as const;

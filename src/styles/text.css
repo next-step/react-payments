@@ -3,3 +3,9 @@
   font-weight: 600;
   transition: ease-in-out 0.15s;
 }
+
+.text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

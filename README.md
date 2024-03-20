@@ -31,14 +31,14 @@
 
   - [x] 카드 번호는 숫자만 입력가능하다.
   - [x] 카드 번호 4자리마다 -가 삽입된다.
-  - [ ] 카드 번호는 실시간으로 카드 UI에 반영된다.
+  - [x] 카드 번호는 실시간으로 카드 UI에 반영된다.
   - [x] 카드 번호는 앞 8자리만 숫자로 보여지고, 나머지 숫자는 \*로 보여진다.
 
 - [x] 만료일을 입력 받을 수 있다.
 
   - [x] MM / YY 로 placeholder를 적용한다.
   - [x] 월, 년 사이에 자동으로 /가 삽입된다.
-  - [ ] 만료일은 실시간으로 카드 UI에 반영된다.
+  - [x] 만료일은 실시간으로 카드 UI에 반영된다.
   - [x] 월은 1이상 12이하 숫자여야 한다.
 
 - [x] 보안코드를 입력 받을 수 있다.
@@ -76,41 +76,23 @@
 간단하게 커스텀 훅으로 관리할 수 있는 구조이지만, 타입을 주입받기 위해 불필요하게 함수의 형태를 취하게 되었고, 좋은 구조라고 말하긴 어려운 것 같습니다.(코드의 가독성이 낮고 오버엔지니어링이라는 생각을 지울 수 없는 것 같습니다.)
 코드를 다시 한 번 리팩터링하며 손익을 고려해보고, 간단한 커스텀 훅으로 변경하는 것을 고려하겠습니다.
 
+## 카드 추가 확인
+
+- [x] 이전 폼에서 입력된 카드를 보여준다.
+- [x] 카드 별칭을 입력할 수 있다.
+  - [x] placeholder는 카드 별칭 (선택)이다.
+  - [x] 빈 입력값인 경우, 카드사 이름이 별칭으로 저장된다.
+  - [x] 최대 길이는 10자리이다.
+- [x] 확인 버튼을 누르면, 카드 목록 페이지로 이동한다.
+
+## 카드 목록
+
+- [x] 카드 목록을 조회할 수 있다.
+- [x] 카드 목록은 최신순(내림차순)으로 정렬된다.
+- [x] 목록 최상단에 +을 누르면 카드 추가 페이지로 이동한다.
+- [x] 카드를 클릭하면, 카드 별칭 수정(카드 추가 완료 페이지)로 이동한다.
+- [x] 카드를 삭제할 수 있다.
+
 ---
 
-## 구현 목표
-
-- [ ] useForm을 이용하여 Input에 주입할 로직을 관리한다.
-- [ ] form 내부의 input값들은 하나의 해시맵에서 관리한다. useInput 단위로 추상화한다면 최상단 Layer(form)에서 각 input들의 값을 다시 동기화해야하기 때문이다.
-- [ ] ref는 register에서 포함하지 않는다. autoFocus를 사용하기 위해 forwardRef를 래핑해야하는데, 모든 컴포넌트에서 autoFocus를 사용하는 것은 아니기 때문이다.
-
----
-
-## +a
-
-### 1. inputAPI를 사용한다면? (추후에 코드로 구현해보기)
-
-- constraint validation check validity override
-- setCustomValidity
-- https://developer.mozilla.org/en-US/docs/Web/HTML/Constraint_validation#complex_constraints_using_the_constraint_validation_api
-- https://developer.mozilla.org/en-US/docs/Web/API/ValidityState
-- customError {@link https://developer.mozilla.org/en-US/docs/Web/API/ValidityState#customerror}
-
-### 2. TSDoc 좋으니 잘 쓰기
-
-```ts
-/**
- * {@link HTMLElement}
- * {@link useManager}
- * @template T 어쩌고 저쩌고 타입을 위한 제네릭 {@link useManager}
- * @exampl
- * ExtractSelectors<typeof {}>
- */
-```
-
-### 3. 재남님 스터디 기회되면 참여하기
-
-### 4. 오픈소스 참여하기
-
-- zod
-- https://blueskyproject.io/bluesky/contributing.html
+[Storybook](https://65f3ed588e68d95b1294b999-qxfuwtggjt.chromatic.com/?path=/docs/configure-your-project--docs)
