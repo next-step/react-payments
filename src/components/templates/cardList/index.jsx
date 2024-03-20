@@ -2,10 +2,25 @@ import PropTypes from "prop-types";
 import Box from "../../atoms/box";
 import Text from "../../atoms/text";
 import Card from "../../molecules/card";
-import { Fragment } from "react";
+import { useFormContext } from "../../../hooks/useFormProvider";
 
 const CardList = (props) => {
-  const { cardList, next } = props;
+  const { cardData, setCardData, next } = props;
+  const { reset } = useFormContext();
+  const cardList = Object.values(cardData);
+
+  const handleUpdateCard = (data) => {
+    reset(data);
+    next();
+  };
+
+  const handleDeleteCard = (id) => {
+    setCardData((prev) => {
+      delete prev[id];
+
+      return { ...prev };
+    });
+  };
 
   return (
     <Box className={["app", "flex-column-center"]}>
@@ -13,25 +28,22 @@ const CardList = (props) => {
         <Text className={["page-title", "mb-10"]}>보유 카드</Text>
       </Box>
 
-      {cardList.map(
-        (
-          { name, year, month, cardNumberSplit, cardCompany, nickname },
-          idx
-        ) => (
-          <Fragment key={idx}>
-            <Card
-              name={name}
-              year={year}
-              month={month}
-              cardNumberSplit={cardNumberSplit}
-              cardCompany={cardCompany}
-            />
+      {cardList.map((data, idx) => (
+        <Box className="card-item" key={idx}>
+          <button onClick={() => handleUpdateCard(data)}>
+            <Card {...data} />
             <Text as="span" className={"card-nickname"}>
-              {nickname}
+              {data.nickname}
             </Text>
-          </Fragment>
-        )
-      )}
+          </button>
+          <button
+            className="card-delete-button"
+            onClick={() => handleDeleteCard(data.id)}
+          >
+            X
+          </button>
+        </Box>
+      ))}
 
       <button onClick={next}>
         <Card empty />
@@ -41,7 +53,8 @@ const CardList = (props) => {
 };
 
 CardList.propTypes = {
-  cardList: PropTypes.array,
+  setCardData: PropTypes.func,
+  cardData: PropTypes.object,
   next: PropTypes.func,
 };
 

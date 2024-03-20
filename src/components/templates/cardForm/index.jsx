@@ -12,6 +12,7 @@ import { useFormContext } from "../../../hooks/useFormProvider";
 const CardForm = (props) => {
   const { next, back } = props;
   const {
+    reset,
     formState: { isValid },
   } = useFormContext();
 
@@ -23,9 +24,14 @@ const CardForm = (props) => {
     }
   };
 
+  const handleBack = () => {
+    back();
+    reset();
+  };
+
   return (
     <>
-      <button className="page-title" onClick={back}>
+      <button className="page-title" onClick={handleBack}>
         &lt; 카드 추가
       </button>
 
