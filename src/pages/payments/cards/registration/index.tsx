@@ -1,3 +1,6 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import { Form } from '@/hooks/form/formContext'
 import { PaymentsMachineContext } from '@/service/payments/payments.machine'
 
@@ -6,9 +9,16 @@ import { Step2 } from '../../../../features/payments/Step2/Step2'
 import { Step1Validate, step2Validate } from '../../../../service/payments/validations'
 
 export const AddingCard = () => {
+  const navigate = useNavigate()
   const paymentsMachine = PaymentsMachineContext.useSelector((state) => state)
 
   const paymentActorRef = PaymentsMachineContext.useActorRef()
+
+  useEffect(() => {
+    if (paymentsMachine.value === 'card-list') {
+      navigate('/payments/cards')
+    }
+  }, [paymentsMachine.value, navigate])
 
   if (paymentsMachine.value === 'card-registration-start') {
     return (
@@ -35,7 +45,5 @@ export const AddingCard = () => {
     )
   }
 
-  if (paymentsMachine.value === 'card-list') {
-    return <div>card list</div>
-  }
+  return null
 }
