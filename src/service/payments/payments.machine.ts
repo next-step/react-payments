@@ -2,14 +2,15 @@ import { createActorContext } from '@xstate/react'
 import { assign, fromPromise, setup } from 'xstate'
 
 import { cardAdditionalInfo, formInitialValues, LOCAL_STORAGE_KEY_LIST } from './payments.const'
-import { CardAdditionalInitialValues, RegistrationInitialValues } from './payments.type'
+import {
+  CardAdditionalInitialValues,
+  PaymentMachineContext,
+  RegistrationInitialValues,
+} from './payments.type'
 
 export const paymentsMachine = setup({
   types: {} as {
-    context: {
-      registration: RegistrationInitialValues
-      cardAdditionalInfo: CardAdditionalInitialValues
-    }
+    context: PaymentMachineContext
     events:
       | {
           type: 'SUBMIT'
@@ -28,12 +29,21 @@ export const paymentsMachine = setup({
   },
   actors: {
     postCardInfo: fromPromise(async ({ input }: { input: RegistrationInitialValues }) => {
-      window.localStorage.setItem(LOCAL_STORAGE_KEY_LIST.CARD_INFO, JSON.stringify(input))
-
       return true
     }),
-    postNickname: fromPromise(async ({ input }: { input: CardAdditionalInitialValues }) => {
-      window.localStorage.setItem(LOCAL_STORAGE_KEY_LIST.CARD_NICKNAME, JSON.stringify(input))
+    postNickname: fromPromise(async ({ input }: { input: PaymentMachineContext }) => {
+      const cardList = JSON.parse(
+        window.localStorage.getItem(LOCAL_STORAGE_KEY_LIST.CARD_INFO) || '[]'
+      )
+
+      if (!Array.isArray(cardList)) {
+        throw new Error('cardList is not array')
+      }
+
+      const newItem = { ...input.registration, ...input.cardAdditionalInfo, time: Date.now() }
+      const mergedList = [...cardList, newItem]
+
+      window.localStorage.setItem(LOCAL_STORAGE_KEY_LIST.CARD_INFO, JSON.stringify(mergedList))
 
       return true
     }),
@@ -93,12 +103,11 @@ export const paymentsMachine = setup({
         },
       },
     },
-
     'card-nickname-submitting': {
       invoke: {
         id: 'postNickname',
         input: ({ context }) => {
-          return context.cardAdditionalInfo
+          return context
         },
         src: 'postNickname',
         onDone: {
