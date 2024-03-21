@@ -15,26 +15,32 @@ export const CardsPage = () => {
         ].join('')
 
         return (
-          <Card backgroundColor="orange">
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                <Card.CardCompany name="Master" />
-              </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <Card backgroundColor="orange">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
+                  <Card.CardCompany name="Master" />
+                </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                <Card.CardChip />
-              </div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                  <Card.CardChip />
+                </div>
 
-              <div>
-                <Card.CarNumber creditCardNumber={cardNumbers} revealCount={8} />
-              </div>
+                <div>
+                  <Card.CarNumber creditCardNumber={cardNumbers} revealCount={8} />
+                </div>
 
-              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Card.CardExpirationDate expirationDate={card.expirationDate} />
-                <Card.CardHolderName name={card.cardholderName} />
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <Card.CardExpirationDate expirationDate={card.expirationDate} />
+                  <Card.CardHolderName name={card.cardholderName} />
+                </div>
               </div>
-            </div>
-          </Card>
+            </Card>
+
+            <span style={{ display: 'flex', justifyContent: 'center' }}>
+              {card.nickName || 'master'}
+            </span>
+          </div>
         )
       })}
     </div>
