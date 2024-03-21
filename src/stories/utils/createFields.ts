@@ -13,7 +13,10 @@ export const createFields = ({
       name: `field${i}`,
       type,
       maxLength,
-      validate: (field: string) => Validation.checkLength(field, maxLength),
+      validate: (field: string) =>
+        Validation.checkLength(field, maxLength)
+          ? false
+          : '카드 번호를 입력해주세요',
     };
   }
 

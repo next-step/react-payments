@@ -17,6 +17,10 @@
   align-items: center;
 }
 
+.hover {
+  cursor: pointer;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -77,4 +81,8 @@
 
 .gap-30 {
   gap: 7.5rem;
+}
+
+.transition {
+  transition: ease-in-out 0.15s;
 }

@@ -45,7 +45,9 @@ export const useForm = () => {
       if (!field) {
         fieldsRef.current[name] = {
           value: defaultValue || '',
-          error: validate ? !validate(defaultValue || '') : true,
+          error: validate
+            ? validate(defaultValue || '')
+            : 'should not be empty',
         };
       }
 
@@ -64,7 +66,7 @@ export const useForm = () => {
           fieldsRef.current[name] = {
             ...fieldsRef.current[name],
             value: value,
-            error: validate ? !validate(value) : false,
+            error: validate ? validate(value) : false,
           };
 
           forceUpdate({});

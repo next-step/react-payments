@@ -8,18 +8,24 @@ export const PASSWORD: InputFields = {
       name: 'passwordFirst',
       type: INPUT.TYPE.TEXT,
       validate: (field: string) => {
-        return Validation.checkLength(field, 1);
+        return Validation.checkLength(field, 1)
+          ? false
+          : '첫 번째 카드 비밀번호를 입력해주세요';
       },
       maxLength: 1,
+      autoFocusIndex: 9,
     },
 
     SECOND: {
       name: 'passwordSecond',
       type: INPUT.TYPE.TEXT,
       validate: (field: string) => {
-        return Validation.checkLength(field, 1);
+        return Validation.checkLength(field, 1)
+          ? false
+          : '두 번째 카드 비밀번호를 입력해주세요';
       },
       maxLength: 1,
+      autoFocusIndex: 10,
     },
 
     THIRD: {

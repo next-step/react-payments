@@ -1,7 +1,9 @@
+import { CARD_COMPANY } from '@/components/input/molecules/card/company/company.constant';
 import { STEP } from './payments.constant';
 
 export type PaymentsStep = (typeof STEP)[keyof typeof STEP];
 export type PaymentsStepKey = keyof typeof STEP;
+type CompanyKey = keyof typeof CARD_COMPANY;
 
 export interface Card {
   numberFirst: string;
@@ -13,6 +15,7 @@ export interface Card {
   ownerName: string;
   createdAt: Date;
   id: string;
+  company: CompanyKey;
 }
 
 export interface PaymentsCard extends Card {

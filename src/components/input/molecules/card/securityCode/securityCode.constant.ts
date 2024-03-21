@@ -9,9 +9,12 @@ export const SECURITY_CODE: InputFields = {
       placeholder: 'CVC',
       type: INPUT.TYPE.PASSWORD,
       validate: (field: string) => {
-        return Validation.checkLength(field, 3);
+        return Validation.checkLength(field, 3)
+          ? false
+          : '보안 코드를 입력해주세요';
       },
       maxLength: 3,
+      autoFocusIndex: 8,
     },
   },
   TITLE: '보안 코드(CVC/CVV)',
