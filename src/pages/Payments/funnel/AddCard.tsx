@@ -111,42 +111,7 @@ export const AddCard = () => {
       </div>
 
       <Modal isOpen={isOpen} closeModal={closeModal}>
-        <div className='flex-center'>
-          <div className='modal-item-container'>
-            <div className='modal-item-dot'></div>
-            <span className='modal-item-name'>클린 카드</span>
-          </div>
-          <div className='modal-item-container'>
-            <div className='modal-item-dot'></div>
-            <span className='modal-item-name'>클린 카드</span>
-          </div>
-          <div className='modal-item-container'>
-            <div className='modal-item-dot'></div>
-            <span className='modal-item-name'>클린 카드</span>
-          </div>
-          <div className='modal-item-container'>
-            <div className='modal-item-dot'></div>
-            <span className='modal-item-name'>클린 카드</span>
-          </div>
-        </div>
-        <div className='flex-center'>
-          <div className='modal-item-container'>
-            <div className='modal-item-dot'></div>
-            <span className='modal-item-name'>클린 카드</span>
-          </div>
-          <div className='modal-item-container'>
-            <div className='modal-item-dot'></div>
-            <span className='modal-item-name'>클린 카드</span>
-          </div>
-          <div className='modal-item-container'>
-            <div className='modal-item-dot'></div>
-            <span className='modal-item-name'>클린 카드</span>
-          </div>
-          <div className='modal-item-container'>
-            <div className='modal-item-dot'></div>
-            <span className='modal-item-name'>클린 카드</span>
-          </div>
-        </div>
+        <CardInput.Company formMethods={formMethods} closeModal={closeModal} />
       </Modal>
     </>
   );

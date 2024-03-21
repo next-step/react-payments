@@ -82,3 +82,7 @@
 .gap-30 {
   gap: 7.5rem;
 }
+
+.transition {
+  transition: ease-in-out 0.15s;
+}

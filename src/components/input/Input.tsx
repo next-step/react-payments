@@ -13,7 +13,8 @@ const InputFactory = forwardRef<HTMLInputElement, InputFactoryProps>(
   ({ type, ...rest }, ref) => {
     switch (type) {
       case INPUT.TYPE.TEXT:
-      case INPUT.TYPE.PASSWORD: {
+      case INPUT.TYPE.PASSWORD:
+      case INPUT.TYPE.RADIO: {
         return <DefaultInput ref={ref} type={type} {...rest} />;
       }
 
