@@ -17,6 +17,10 @@
   align-items: center;
 }
 
+.hover {
+  cursor: pointer;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }

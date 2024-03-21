@@ -32,7 +32,7 @@ export const Card = ({ data, onClick, isComplete }: CardProps) => {
   const optionalClassName = isComplete ? 'small-card' : 'empty-card';
 
   return (
-    <div className='card-box'>
+    <div className='card-box hover'>
       <div className={optionalClassName} onClick={onClick}>
         <div className='card-top'>
           {isComplete && <span className='card-text'>펭구카드</span>}

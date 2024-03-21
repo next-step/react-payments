@@ -19,12 +19,12 @@ export const OwnerName = ({
 
   return (
     <Input.Container>
-      <div className='flex-row-between'>
-        <Input.Title>{fields.TITLE}</Input.Title>
+      <Input.Title>
+        <span>{fields.TITLE}</span>
         {ownerNameLength > 0 && (
-          <Input.Title>{`${ownerNameLength}/${fields.FIELDS.OWNER_NAME.maxLength}`}</Input.Title>
+          <span className='input-title'>{`${ownerNameLength}/${fields.FIELDS.OWNER_NAME.maxLength}`}</span>
         )}
-      </div>
+      </Input.Title>
       <Input.Box>
         {Object.values(fields.FIELDS).map(
           ({ name, type, placeholder, maxLength, autoFocusIndex }) => (

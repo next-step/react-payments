@@ -7,6 +7,7 @@ import {
   CARD_FIELDS,
   CARD_FORM,
 } from '@/components/input/molecules/card/cardInput.constant';
+import { Modal } from '@/components/modal/Modal';
 import { STEP } from '../payments.constant';
 import { Card as CardData } from '../payments.type';
 import { Funnel } from '../payments.context';
@@ -24,6 +25,7 @@ export type CardFulfilledAction = React.Dispatch<
 >;
 
 export const AddCard = () => {
+  const { isOpen, openModal, closeModal } = Modal.use();
   const { setStep, setData } = Funnel.useContext();
   const formMethods = useForm();
   const values = formMethods.values as unknown as CardData;
@@ -60,47 +62,92 @@ export const AddCard = () => {
   const optaionalClassName = isAllFieldsFulfilled ? 'text-fulfilled' : '';
 
   return (
-    <div>
-      <button onClick={handlePrev} className='button-reset'>
-        <h2 className='page-title'>{`< 카드 추가`}</h2>
-      </button>
-      <Card data={values as unknown as CardData} isComplete={false} />
+    <>
+      <div>
+        <button onClick={handlePrev} className='button-reset'>
+          <h2 className='page-title'>{`< 카드 추가`}</h2>
+        </button>
+        <Card
+          onClick={openModal}
+          data={values as unknown as CardData}
+          isComplete={false}
+        />
 
-      <CardInput.Number
-        formMethods={formMethods}
-        autoFocusMethods={autoFocusMethods}
-        fields={CARD_FORM.CARD_NUMBER}
-      />
-      <CardInput.ExpireDate
-        formMethods={formMethods}
-        autoFocusMethods={autoFocusMethods}
-        fields={CARD_FORM.EXPIRE_DATE}
-      />
-      <CardInput.OwnerName
-        formMethods={formMethods}
-        autoFocusMethods={autoFocusMethods}
-        fields={CARD_FORM.OWNER_NAME}
-      />
-      <CardInput.SecurityCode
-        formMethods={formMethods}
-        autoFocusMethods={autoFocusMethods}
-        fields={CARD_FORM.SECURITY_CODE}
-      />
-      <CardInput.Password
-        formMethods={formMethods}
-        autoFocusMethods={autoFocusMethods}
-        fields={CARD_FORM.PASSWORD}
-      />
+        <CardInput.Number
+          formMethods={formMethods}
+          autoFocusMethods={autoFocusMethods}
+          fields={CARD_FORM.CARD_NUMBER}
+        />
+        <CardInput.ExpireDate
+          formMethods={formMethods}
+          autoFocusMethods={autoFocusMethods}
+          fields={CARD_FORM.EXPIRE_DATE}
+        />
+        <CardInput.OwnerName
+          formMethods={formMethods}
+          autoFocusMethods={autoFocusMethods}
+          fields={CARD_FORM.OWNER_NAME}
+        />
+        <CardInput.SecurityCode
+          formMethods={formMethods}
+          autoFocusMethods={autoFocusMethods}
+          fields={CARD_FORM.SECURITY_CODE}
+        />
+        <CardInput.Password
+          formMethods={formMethods}
+          autoFocusMethods={autoFocusMethods}
+          fields={CARD_FORM.PASSWORD}
+        />
 
-      {isAllFieldsFulfilled && (
-        <div className='button-box' onClick={handleNext}>
-          <button
-            className={`button-text button-reset button-activate ${optaionalClassName}`}
-          >
-            다음
-          </button>
+        {isAllFieldsFulfilled && (
+          <div className='button-box' onClick={handleNext}>
+            <button
+              className={`button-text button-reset button-activate ${optaionalClassName}`}
+            >
+              다음
+            </button>
+          </div>
+        )}
+      </div>
+
+      <Modal isOpen={isOpen} closeModal={closeModal}>
+        <div className='flex-center'>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot'></div>
+            <span className='modal-item-name'>클린 카드</span>
+          </div>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot'></div>
+            <span className='modal-item-name'>클린 카드</span>
+          </div>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot'></div>
+            <span className='modal-item-name'>클린 카드</span>
+          </div>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot'></div>
+            <span className='modal-item-name'>클린 카드</span>
+          </div>
         </div>
-      )}
-    </div>
+        <div className='flex-center'>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot'></div>
+            <span className='modal-item-name'>클린 카드</span>
+          </div>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot'></div>
+            <span className='modal-item-name'>클린 카드</span>
+          </div>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot'></div>
+            <span className='modal-item-name'>클린 카드</span>
+          </div>
+          <div className='modal-item-container'>
+            <div className='modal-item-dot'></div>
+            <span className='modal-item-name'>클린 카드</span>
+          </div>
+        </div>
+      </Modal>
+    </>
   );
 };
