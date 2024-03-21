@@ -39,7 +39,6 @@ export const AddingCard = () => {
         validate={step2Validate}
         onSubmit={(values) => paymentActorRef.send({ type: 'POST_NICKNAME', value: values })}
       >
-        {paymentsMachine.value}
         <Step2 />
       </Form>
     )
