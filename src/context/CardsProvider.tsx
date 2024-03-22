@@ -24,7 +24,7 @@ export default function CardsProvider({ children }: PropsWithChildren) {
   const [cards, setCards] = useState<CardType[]>([]);
 
   const getCardInList = (id: number) => {
-    const targetCard = cards.filter((preCard) => preCard.id === id)[0];
+    const targetCard = cards.find((preCard) => preCard.id === id);
 
     return targetCard;
   };
