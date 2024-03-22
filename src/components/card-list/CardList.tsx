@@ -18,9 +18,7 @@ export default function CardList() {
     navigate('/add');
   };
 
-  console.log(cards);
   const reversedCards = cards.reverse();
-  console.log(reversedCards);
 
   return (
     <div className="root">

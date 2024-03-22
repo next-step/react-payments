@@ -37,12 +37,10 @@ export default function CardsProvider({ children }: PropsWithChildren) {
     const newCards = cards.map((preCard) =>
       preCard.id != card.id ? preCard : card
     );
-    console.log(newCards);
     setCards(newCards);
   };
 
   const deleteCardInList = (id: number) => {
-    console.log(cards.filter((preCard) => preCard.id != id));
     setCards(cards.filter((preCard) => preCard.id != id));
   };
 
