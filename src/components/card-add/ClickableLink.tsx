@@ -31,7 +31,7 @@ export default function ClickableLink({
         </Link>
       </span>
       {isClick && disable ? (
-        <p className="p-error">카드 필드를 모두 채워주세요</p>
+        <p className="common-error">카드 필드를 모두 채워주세요</p>
       ) : (
         ''
       )}
