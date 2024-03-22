@@ -3,11 +3,6 @@ import { BrowserRouter } from 'react-router-dom';
 
 import ClickableLink from './ClickableLink';
 
-const className = 'mt-55';
-const text = '다음';
-const disable = false;
-const isClick = false;
-
 type ClickableLinkProps = {
   className?: string;
   location: string;
@@ -76,8 +71,8 @@ export const Default: Story = (args: ClickableLinkProps) => (
 );
 
 Default.args = {
-  className,
-  text,
-  disable,
-  isClick,
+  className: 'mt-55',
+  text: '다음',
+  disable: false,
+  isClick: false,
 };
