@@ -62,6 +62,8 @@ export default function AddCardForm() {
     expirationDate,
   });
 
+  const location = !isFormFilled ? '' : `/add/complete/${String(id)}`;
+
   const handleClickButton = () => {
     setIsClick(true);
 
@@ -108,7 +110,7 @@ export default function AddCardForm() {
           setCardPassword={setCardPassword}
         />
         <ClickableLink
-          location={`/add/complete/${String(id)}`}
+          location={location}
           text="다음"
           onClick={handleClickButton}
           disable={!isFormFilled}

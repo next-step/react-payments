@@ -22,18 +22,12 @@ export default function ClickableLink({
   return (
     <div className={classnames('button-box', className)}>
       <span className="button-text">
-        <Link
-          to={disable ? '' : location}
-          className="button-basic"
-          onClick={onClick}
-        >
+        <Link to={location} className="button-basic" onClick={onClick}>
           {text}
         </Link>
       </span>
-      {isClick && disable ? (
+      {isClick && disable && (
         <p className="common-error">카드 필드를 모두 채워주세요</p>
-      ) : (
-        ''
       )}
     </div>
   );

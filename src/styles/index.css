@@ -3,7 +3,7 @@
 @import './button.css';
 @import './modal.css';
 @import './utils.css';
-@import './p.css';
+@import './common.css';
 
 body {
   display: flex;
