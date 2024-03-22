@@ -19,7 +19,7 @@ import type {
 
 import { useCardsContext } from '../hooks/useCardsContext';
 
-import isFulledForm from '../../utils/isFulledForm';
+import isFulledCardForm from '../../utils/isFulledCardForm';
 
 const cardAlias = '';
 
@@ -55,7 +55,7 @@ export default function AddCardForm() {
 
   const { addCardInList } = useCardsContext();
 
-  const isFormFilled = isFulledForm({
+  const isFormFilled = isFulledCardForm({
     cardNumber,
     cardPassword,
     securityCode,

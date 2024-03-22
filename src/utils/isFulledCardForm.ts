@@ -12,7 +12,7 @@ const isFilled = (value: string, limit: number) => value.length === limit;
 const isObjectFilled = (object: Record<string, string>, limit: number) =>
   Object.values(object).every((value) => isFilled(value, limit));
 
-export default function isFulledForm({
+export default function isFulledCardForm({
   cardNumber,
   cardPassword,
   securityCode,
