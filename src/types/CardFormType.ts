@@ -13,21 +13,17 @@ export type ExpirationDateType = {
   year: string;
 };
 
-export type CardType = {
-  id: number;
-  cardCompany: string;
-  cardCompanyColor: string;
-  cardNumber: CardNumberType;
-  expirationDate: ExpirationDateType;
-  ownerName: string;
-  securityCode: string;
-  cardPassword: CardPasswordNumberType;
-  cardAlias: string;
-};
-
 export type CardFulledType = {
   cardNumber: CardNumberType;
   expirationDate: ExpirationDateType;
   securityCode: string;
   cardPassword: CardPasswordNumberType;
 };
+
+export type CardType = {
+  id: number;
+  cardCompany: string;
+  cardCompanyColor: string;
+  ownerName: string;
+  cardAlias: string;
+} & CardFulledType;
