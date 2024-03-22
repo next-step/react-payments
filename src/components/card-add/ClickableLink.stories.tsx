@@ -26,16 +26,14 @@ const ClickableLinkContainer = ({
   onClick,
 }: ClickableLinkProps) => {
   return (
-    <BrowserRouter>
-      <ClickableLink
-        className={className}
-        location={location}
-        text={text}
-        disable={disable}
-        isClick={isClick}
-        onClick={onClick}
-      />
-    </BrowserRouter>
+    <ClickableLink
+      className={className}
+      location={location}
+      text={text}
+      disable={disable}
+      isClick={isClick}
+      onClick={onClick}
+    />
   );
 };
 
@@ -60,6 +58,13 @@ const meta: Meta<typeof ClickableLinkContainer> = {
       control: { type: 'radio' },
     },
   },
+  decorators: [
+    (Story) => (
+      <BrowserRouter>
+        <Story />
+      </BrowserRouter>
+    ),
+  ],
 };
 
 export default meta;
