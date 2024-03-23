@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Form } from '@/hooks/form/formContext'
-import { PaymentsMachineContext } from '@/service/payments/payments.machine'
+import { PAYMENT_STATE, PaymentsMachineContext } from '@/service/payments/payments.machine'
 
 import { Step1 } from '../../../../features/payments/Step1'
 import { Step2 } from '../../../../features/payments/Step2/Step2'
@@ -13,9 +13,13 @@ export const AddingCard = () => {
   const paymentsMachine = PaymentsMachineContext.useSelector((state) => state)
 
   const paymentActorRef = PaymentsMachineContext.useActorRef()
+  const step2ConditionList: ReadonlyArray<(typeof PAYMENT_STATE)[keyof typeof PAYMENT_STATE]> = [
+    PAYMENT_STATE.CARD_NICKNAME_REGISTRATION,
+    PAYMENT_STATE.CARD_NICKNAME_SUBMITTING,
+  ]
 
   useEffect(() => {
-    if (paymentsMachine.value === 'card-list') {
+    if (paymentsMachine.value === 'card-registration-complete') {
       navigate('/payments/cards')
     }
   }, [paymentsMachine.value, navigate])
@@ -32,7 +36,7 @@ export const AddingCard = () => {
     )
   }
 
-  if (['card-registration-complete', 'card-nickname-submitting'].includes(paymentsMachine.value)) {
+  if (step2ConditionList.includes(paymentsMachine.value)) {
     return (
       <Form
         initialValues={paymentsMachine.context.cardAdditionalInfo}
