@@ -1,35 +1,36 @@
+import { Card } from '@/components'
+import { usePaymentStep } from '@/pages/hooks'
+import { CardNumber, MM, YY } from '@/components/common/Card/types'
+import React, { useContext } from 'react'
+import { PaymentContext } from '@/contexts/PaymentContext/PaymentProvider'
+import { css } from '@emotion/css'
+
 export const CardListStep = () => {
+  const [, setStep] = usePaymentStep()
+  const { cardList } = useContext(PaymentContext)
+
   return (
     <div>
-      <h2>5️⃣ 카드 목록</h2>
-      <div className="root">
+      <div
+        className={`root ${css`
+          height: ${cardList.length > 2 ? 'auto' : '700px'};
+        `}`}>
         <div className="app flex-column-center">
           <div className="flex-center">
             <h2 className="page-title mb-10">보유 카드</h2>
           </div>
-          <div className="card-box">
-            <div className="small-card">
-              <div className="card-top">
-                <span className="card-text">클린카드</span>
-              </div>
-              <div className="card-middle">
-                <div className="small-card__chip"></div>
-              </div>
-              <div className="card-bottom">
-                <div className="card-bottom__number">
-                  <span className="card-text">1111 - 2222 - oooo - oooo</span>
-                </div>
-                <div className="card-bottom__info">
-                  <span className="card-text">YUJO</span>
-                  <span className="card-text">12 / 23</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <span className="card-nickname">법인카드</span>
-          <div className="card-box">
-            <div className="empty-card">+</div>
-          </div>
+          {cardList.map((card, index) => (
+            <React.Fragment key={`${card.name}.${index}`}>
+              <Card.Small
+                name={card.name}
+                number={card.number as CardNumber[]}
+                owner={card.owner}
+                expiry={card.expiry as [MM, YY]}
+              />
+              <span className="card-nickname">{card.name}</span>
+            </React.Fragment>
+          ))}
+          <Card.New onClick={() => setStep('add card')} />
         </div>
       </div>
     </div>
