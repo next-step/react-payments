@@ -4115,7 +4115,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/uuid@npm:^9.0.1":
+"@types/uuid@npm:^9, @types/uuid@npm:^9.0.1":
   version: 9.0.8
   resolution: "@types/uuid@npm:9.0.8"
   checksum: 10c0/b411b93054cb1d4361919579ef3508a1f12bf15b5fdd97337d3d351bece6c921b52b6daeef89b62340fd73fd60da407878432a1af777f40648cbe53a01723489
@@ -9692,6 +9692,7 @@ __metadata:
     "@types/node": "npm:^20.11.20"
     "@types/react": "npm:^18.2.56"
     "@types/react-dom": "npm:^18.2.19"
+    "@types/uuid": "npm:^9"
     "@typescript-eslint/eslint-plugin": "npm:^7.0.2"
     "@typescript-eslint/parser": "npm:^7.0.2"
     "@vitejs/plugin-react": "npm:^4.2.1"
@@ -9716,6 +9717,7 @@ __metadata:
     storybook-addon-pseudo-states: "npm:^2.1.2"
     typescript: "npm:^5.3.3"
     typescript-eslint: "npm:^7.0.2"
+    uuid: "npm:^9.0.1"
     vite: "npm:^5.1.4"
     xstate: "npm:^5.9.1"
   languageName: unknown
@@ -11528,7 +11530,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"uuid@npm:^9.0.0":
+"uuid@npm:^9.0.0, uuid@npm:^9.0.1":
   version: 9.0.1
   resolution: "uuid@npm:9.0.1"
   bin:
