@@ -6,7 +6,7 @@ import {
   useEffect,
   useState
 } from 'react'
-import { NavigateFunction } from 'react-router-dom'
+import { NavigateFunction, Location } from 'react-router-dom'
 
 type StepperProps = { children: ReactNode }
 type StepProps<T extends readonly string[]> = {
