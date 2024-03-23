@@ -28,7 +28,7 @@ export const CardTypePicker = ({
       <BottomSheet.Dimmer />
       <BottomSheet.Content className={styles.content} onClose={onClose}>
         {cardTypeList.map(cardType => {
-          const { id, name, color } = cardType
+          const { id, brandName: name, color } = cardType
           return (
             <CardTypeItem
               as="button"
