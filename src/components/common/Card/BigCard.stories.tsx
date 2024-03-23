@@ -11,8 +11,8 @@ type Story = StoryObj<typeof meta>
 
 export const Basic: Story = {
   args: {
-    number: '1234 5678 1234 5678',
-    expiry: '12/22',
+    number: ['1234', '5678', '1234', '5678'],
+    expiry: ['12', '22'],
     owner: 'sonny',
     name: 'sonny card'
   }

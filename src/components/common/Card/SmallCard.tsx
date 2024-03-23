@@ -1,17 +1,18 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import { CardExpiry, CardNumber } from './types'
+import { CardNumber, MM, YY } from './types'
+import { css } from '@emotion/css'
 
 export type SmallCardProps = ComponentPropsWithoutRef<'div'> & {
-  number: CardNumber
-  expiry: CardExpiry
+  number: CardNumber[]
+  expiry: [MM, YY]
   owner: string
   name: string
 }
 
 export const SmallCard = forwardRef<ElementRef<'input'>, SmallCardProps>(
   ({ className = '', number, expiry, name, owner, ...props }, forwardedRef) => {
-    const [first, second] = number.split(' ')
-    const [month, year] = expiry.split('/')
+    const [first, second, third, fourth] = number
+    const [month, year] = expiry
 
     return (
       <div className="card-box">
@@ -28,13 +29,16 @@ export const SmallCard = forwardRef<ElementRef<'input'>, SmallCardProps>(
           <div className="card-bottom">
             <div className="card-bottom__number">
               <span className="card-text">
-                {first} {second} •••• ••••
+                {first} {second} {'•'.repeat(third.length)}{' '}
+                {'•'.repeat(fourth.length)}
               </span>
             </div>
             <div className="card-bottom__info">
-              <span className="card-text">{owner}</span>
+              <span className={css(['card-text', cardOwnerStyle])}>
+                {owner}
+              </span>
               <span className="card-text">
-                {month} / {year}
+                {month ? `${month} / ${year}` : ''}
               </span>
             </div>
           </div>
@@ -44,3 +48,10 @@ export const SmallCard = forwardRef<ElementRef<'input'>, SmallCardProps>(
   }
 )
 SmallCard.displayName = 'SmallCard'
+
+const cardOwnerStyle = css`
+  margin-left: 10px;
+  width: 115px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`

@@ -1,17 +1,17 @@
 import { ComponentPropsWithoutRef, ElementRef, forwardRef } from 'react'
-import { CardExpiry, CardNumber } from './types'
+import { CardNumber, MM, YY } from './types'
 
 export type BigCardProps = ComponentPropsWithoutRef<'div'> & {
-  number: CardNumber
-  expiry: CardExpiry
+  number: CardNumber[]
+  expiry: [MM, YY]
   owner: string
   name: string
 }
 
 export const BigCard = forwardRef<ElementRef<'input'>, BigCardProps>(
   ({ className = '', number, expiry, name, owner, ...props }, forwardedRef) => {
-    const [first, second] = number.split(' ')
-    const [month, year] = expiry.split('/')
+    const [first, second, third, fourth] = number
+    const [month, year] = expiry
 
     return (
       <div className="card-box">
@@ -25,13 +25,14 @@ export const BigCard = forwardRef<ElementRef<'input'>, BigCardProps>(
           <div className="card-bottom">
             <div className="card-bottom__number">
               <span className="card-text__big">
-                {first} {second} •••• ••••
+                {first} {second} {'•'.repeat(third.length)}{' '}
+                {'•'.repeat(fourth.length)}
               </span>
             </div>
             <div className="card-bottom__info">
               <span className="card-text__big">{owner}</span>
               <span className="card-text__big">
-                {month} / {year}
+                {month ? `${month} / ${year}` : ''}
               </span>
             </div>
           </div>
