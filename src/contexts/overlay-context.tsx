@@ -8,6 +8,7 @@ import {
   useMemo,
   useState,
 } from 'react'
+import { createPortal } from 'react-dom'
 
 export interface OverlayContextValue {
   open: (id: number) => (element: ReactNode) => void
@@ -48,9 +49,14 @@ export const OverlayContextProvider = ({ children }: PropsWithChildren) => {
 
   return (
     <OverlayContext.Provider value={contextValue}>
-      {overlay.map(({ element: OverlayElement }, key) => (
-        <Fragment key={key}>{OverlayElement}</Fragment>
-      ))}
+      {createPortal(
+        <>
+          {overlay.map(({ element: OverlayElement }, key) => (
+            <Fragment key={key}>{OverlayElement}</Fragment>
+          ))}
+        </>,
+        document.body,
+      )}
       {children}
     </OverlayContext.Provider>
   )
