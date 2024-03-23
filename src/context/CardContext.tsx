@@ -4,11 +4,13 @@ import {CardType} from "../type/CardType.ts";
 interface CardContextType {
     cards: CardType[]
     addCard: (newCard: CardType) => void
+    modifyCard: (newCard: CardType) => void
 }
 
 const CardContext = createContext<CardContextType>({
     cards: [],
-    addCard: () => {}
+    addCard: () => {},
+    modifyCard: () => {}
 });
 
 export const CardProvider: React.FC<{ children: React.ReactNode}> = ({ children }) => {
@@ -18,8 +20,15 @@ export const CardProvider: React.FC<{ children: React.ReactNode}> = ({ children 
         setCards(prevCards => [...prevCards, newCard]);
     }
 
+    const modifyCard = (newCard: CardType) => {
+        setCards(prevCards => {
+            const cards = prevCards.slice(0, prevCards.length -1);
+            return [...cards, newCard];
+        })
+    }
+
     return (
-        <CardContext.Provider value={{ cards, addCard }}>
+        <CardContext.Provider value={{ cards, addCard, modifyCard }}>
             {children}
         </CardContext.Provider>
     )
