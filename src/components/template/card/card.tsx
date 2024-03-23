@@ -35,7 +35,7 @@ export const Card = ({
       {...flexProps}
     >
       <Flex alignItems="center" className={styles.CardHeader({ size: cardSize })}>
-        <Text variant="body3">{cardType?.name}&nbsp;</Text>
+        <Text variant="body3">{cardType?.brandName}&nbsp;</Text>
       </Flex>
       <Flex
         className={styles.CardBody({ size: cardSize })}

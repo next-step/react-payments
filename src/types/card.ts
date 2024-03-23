@@ -2,7 +2,7 @@ import { vars } from '@/styles'
 
 export interface CardType {
   id: number
-  name: string
+  brandName: string
   color: keyof typeof vars.color
 }
 
