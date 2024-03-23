@@ -1,12 +1,9 @@
-import { useNavigate } from 'react-router-dom'
-
 import { Button } from '@/components/Button'
 import { Card } from '@/features/payments/Card'
 import { usePaymentCardList } from '@/service/payments/usePaymentCardList'
 
 export const CardsPage = () => {
-  const { getCardList } = usePaymentCardList()
-  const navigate = useNavigate()
+  const { getCardList, editCard, createCard } = usePaymentCardList()
 
   return (
     <div>
@@ -20,8 +17,8 @@ export const CardsPage = () => {
           ].join('')
 
           return (
-            <div key={card.cardholderName + card.expirationDate + i}>
-              <Card backgroundColor="orange">
+            <div key={card.id}>
+              <Card backgroundColor="orange" onClick={() => editCard(card)}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
                     <Card.CardCompany name="Master" />
@@ -54,7 +51,7 @@ export const CardsPage = () => {
         backgroundColor="#E5E5E5"
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       >
-        <Button style={{ fontSize: '30px' }} onClick={() => navigate('/payments/cards/new')}>
+        <Button style={{ fontSize: '30px' }} onClick={() => createCard()}>
           +
         </Button>
       </Card>

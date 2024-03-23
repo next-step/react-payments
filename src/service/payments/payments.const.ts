@@ -14,6 +14,14 @@ export const cardAdditionalInfo = {
   nickName: '',
 }
 
+export const cardEditingInfo = { ...formInitialValues, ...cardAdditionalInfo, id: '', time: 0 }
+
+export const PAYMENTS_MACHINE_INITIAL_VALUES = {
+  registration: formInitialValues,
+  cardAdditionalInfo,
+  cardEditingInfo,
+}
+
 export const CARD_HOLDER_NAME_MAX_LENGTH = 30
 
 export const CARD_NUMBER_INPUT_REGEX = /^\d{4}$/

@@ -19,7 +19,10 @@ export const AddingCard = () => {
   ]
 
   useEffect(() => {
-    if (paymentsMachine.value === 'card-registration-complete') {
+    if (
+      paymentsMachine.value === 'card-registration-complete' ||
+      paymentsMachine.value === 'card-editing-complete'
+    ) {
       navigate('/payments/cards')
     }
   }, [paymentsMachine.value, navigate])
@@ -42,6 +45,20 @@ export const AddingCard = () => {
         initialValues={paymentsMachine.context.cardAdditionalInfo}
         validate={step2Validate}
         onSubmit={(values) => paymentActorRef.send({ type: 'POST_NICKNAME', value: values })}
+      >
+        <Step2 />
+      </Form>
+    )
+  }
+
+  if (paymentsMachine.matches(PAYMENT_STATE.CARD_EDIT)) {
+    return (
+      <Form
+        initialValues={paymentsMachine.context.cardAdditionalInfo}
+        validate={step2Validate}
+        onSubmit={(values) => {
+          paymentActorRef.send({ type: 'EDIT_NICKNAME', value: values.nickName })
+        }}
       >
         <Step2 />
       </Form>
