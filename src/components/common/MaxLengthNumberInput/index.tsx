@@ -25,26 +25,32 @@ export const MaxLengthNumberInput = forwardRef<
     },
     forwardRef
   ) => {
+    const isControlled = typeof onChange !== 'undefined'
+
     const [uncontrolledValue, setUncontrolledValue] = useState(controlledValue)
+    const inputValue = isControlled ? controlledValue : uncontrolledValue
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
       const { value } = e.target
       const onlyNumber = value.replace(REGEXP.NOT_NUMBER, '')
+      e.target.value = onlyNumber
 
       onChange?.(e)
       setUncontrolledValue(onlyNumber)
     }
 
-    const containerStyle = css`
-      width: ${width};
-    `
-
     return (
       <Input
         type={type}
         ref={forwardRef}
-        className={`input-basic ${containerStyle} ${className}`}
-        value={uncontrolledValue?.substring(0, maxLength)}
+        className={css([
+          'input-basic',
+          css`
+            width: ${width};
+          `,
+          className
+        ])}
+        value={inputValue?.substring(0, maxLength)}
         onChange={handleChange}
         maxLength={maxLength}
         {...props}
