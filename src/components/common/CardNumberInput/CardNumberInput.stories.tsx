@@ -1,40 +1,34 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { CardNumberInput } from './index'
-import { useState } from 'react'
+import { ChangeEventHandler, useState } from 'react'
 
 const meta: Meta<typeof CardNumberInput> = {
   title: 'common/CardNumberInput',
-  component: CardNumberInput,
-  args: {
-    width: '100%'
-  },
-  argTypes: {
-    width: {
-      control: 'text'
-    }
-  }
+  component: CardNumberInput
 }
 
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Controlled: Story = {
-  render: args => {
-    const [inputValues, setInputValues] = useState({
-      'card_number-1': '1232',
-      'card_number-2': '3412',
-      'card_number-3': '1232',
-      'card_number-4': '1232'
-    })
+export const Basic: Story = {
+  render: () => {
+    const [numbers, setNumbers] = useState(['', '', '', ''])
+
+    const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
+      const { name, value: newValue } = e.target
+      const [, index] = name.split('.')
+
+      setNumbers(
+        numbers.map((value, idx) => (idx === Number(index) ? newValue : value))
+      )
+    }
 
     return (
       <CardNumberInput
-        value={inputValues}
-        onChange={setInputValues}
-        {...args}
+        name="card-number"
+        values={numbers}
+        onChange={handleChange}
       />
     )
   }
 }
-
-export const UnControlled: Story = {}

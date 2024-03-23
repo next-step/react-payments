@@ -1,81 +1,49 @@
-import { ChangeEvent, MutableRefObject, useRef, useState } from 'react'
-import { css } from '@emotion/css'
+import { ChangeEvent } from 'react'
 import { CARD_NUMBER } from '@/constants'
 import { MaxLengthNumberInput } from '../MaxLengthNumberInput'
-
-type CardNumberValues = {
-  'card_number-1': string
-  'card_number-2': string
-  'card_number-3': string
-  'card_number-4': string
-}
+import { useAutoFocus } from '@/hooks'
 
 type CardNumberInputProps = {
+  name: string
   className?: string
-  width?: string
-  value?: CardNumberValues
-  onChange?: (value: CardNumberValues) => void
+  values: string[]
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const CardNumberInput = ({
+  name,
   className = '',
-  width,
-  value: controlledValue = {
-    'card_number-1': '',
-    'card_number-2': '',
-    'card_number-3': '',
-    'card_number-4': ''
-  },
+  values = [],
   onChange
 }: CardNumberInputProps) => {
-  const cardNumberInputContainerStyle = css`
-    width: ${width};
-  `
+  const { inputRefs, focusNextInput } = useAutoFocus({
+    inputCount: CARD_NUMBER.INPUT_COUNT
+  })
 
-  const [uncontrolledValue, setUncontrolledValue] = useState(controlledValue)
-  const inputRefs = Array.from(
-    { length: CARD_NUMBER.INPUT_COUNT },
-    useRef<HTMLInputElement>
-  )
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const [, index] = e.target.name.split('.')
 
-  const createChangeHandlerByIndex =
-    (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
-      const { name, value } = e.target
-
-      const inputName = name as keyof CardNumberValues
-      const updatedValue = {
-        ...uncontrolledValue,
-        [inputName]: value
-      }
-
-      onChange?.(updatedValue)
-      setUncontrolledValue(updatedValue)
-
-      const isMaxlength = value.length === CARD_NUMBER.MAX_LENGTH
-      const isFocusable = index < CARD_NUMBER.LAST_INPUT_INDEX
-      if (isMaxlength && isFocusable) {
-        inputRefs[index + 1].current?.focus()
-      }
-    }
+    onChange?.(e)
+    focusNextInput(Number(index), e)
+  }
 
   return (
-    <div className={`input-box ${cardNumberInputContainerStyle} ${className}`}>
-      {Object.keys<KeyOf<CardNumberValues>>(uncontrolledValue).map(
-        (inputName, index) => {
-          return (
-            <MaxLengthNumberInput
-              key={inputName}
-              name={inputName}
-              className="input-basic"
-              type={index < CARD_NUMBER.VISIBLE_COUNT ? 'text' : 'password'}
-              ref={inputRefs[index] as MutableRefObject<HTMLInputElement>}
-              value={uncontrolledValue[inputName]}
-              onChange={createChangeHandlerByIndex(index)}
-              maxLength={CARD_NUMBER.MAX_LENGTH}
-            />
-          )
-        }
-      )}
+    <div className={`input-box ${className}`}>
+      {values.map((value, index) => (
+        <MaxLengthNumberInput
+          key={`${name}-${index}`}
+          name={`${name}.${index}`}
+          className="input-basic"
+          type={index < CARD_NUMBER.VISIBLE_COUNT ? 'text' : 'password'}
+          ref={inputRefs[index]}
+          value={value}
+          onChange={handleChange}
+          maxLength={CARD_NUMBER.MAX_LENGTH}
+          minLength={CARD_NUMBER.MAX_LENGTH}
+          pattern={`.{${CARD_NUMBER.MAX_LENGTH},${CARD_NUMBER.MAX_LENGTH}}`}
+          required
+        />
+      ))}
     </div>
   )
 }
