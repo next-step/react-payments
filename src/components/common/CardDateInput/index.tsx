@@ -1,74 +1,63 @@
-import { ChangeEvent, useRef, useState } from 'react'
+import { ChangeEvent } from 'react'
 import { css } from '@emotion/css'
 import { CARD_DATE } from '@/constants'
 import { MaxLengthNumberInput } from '../MaxLengthNumberInput'
-
-type CardDateValues = {
-  'card_date-month': string
-  'card_date-year': string
-}
+import { useAutoFocus } from '@/hooks'
 
 type CardDateInputProps = {
+  name: string
   className?: string
   width?: string
-  value?: CardDateValues
-  onChange?: (value: CardDateValues) => void
+  values: string[]
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const CardDateInput = ({
+  name,
   className = '',
   width = '50%',
-  value: controlledValue = {
-    'card_date-month': '',
-    'card_date-year': ''
-  },
+  values = [],
   onChange
 }: CardDateInputProps) => {
-  const inputContainerStyle = css`
-    width: ${width};
-  `
-
-  const [uncontrolledValue, setUncontrolledValue] = useState(controlledValue)
-  const monthInputRef = useRef<HTMLInputElement>(null)
-  const yearInputRef = useRef<HTMLInputElement>(null)
+  const { inputRefs, focusNextInput } = useAutoFocus({
+    inputCount: CARD_DATE.INPUT_COUNT
+  })
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const [, index] = e.target.name.split('.')
 
-    const inputName = name as keyof CardDateValues
-    const updatedValue = {
-      ...uncontrolledValue,
-      [inputName]: value
-    }
-
-    onChange?.(updatedValue)
-    setUncontrolledValue(updatedValue)
-
-    const isMaxlength = value.length === CARD_DATE.MAX_LENGTH
-    if (isMaxlength && name === 'card_date-month') {
-      yearInputRef.current?.focus()
-    }
+    onChange?.(e)
+    focusNextInput(Number(index), e)
   }
 
   return (
-    <div className={`input-box ${inputContainerStyle} ${className}`}>
+    <div
+      className={`input-box ${css`
+        width: ${width};
+      `} ${className}`}>
       <MaxLengthNumberInput
-        name="card_date-month"
+        name={`${name}.0`}
         className="input-basic"
         placeholder="MM"
-        ref={monthInputRef}
-        value={uncontrolledValue['card_date-month']}
+        ref={inputRefs[0]}
+        value={values[0]}
         onChange={handleChange}
+        minLength={CARD_DATE.MAX_LENGTH}
         maxLength={CARD_DATE.MAX_LENGTH}
+        pattern={`.{${CARD_DATE.MAX_LENGTH},${CARD_DATE.MAX_LENGTH}}`}
+        required
       />
       <MaxLengthNumberInput
-        name="card_date-year"
+        name={`${name}.1`}
         className="input-basic"
         placeholder="YY"
-        ref={yearInputRef}
-        value={uncontrolledValue['card_date-year']}
+        ref={inputRefs[1]}
+        value={values[1]}
         onChange={handleChange}
+        minLength={CARD_DATE.MAX_LENGTH}
         maxLength={CARD_DATE.MAX_LENGTH}
+        pattern={`.{${CARD_DATE.MAX_LENGTH},${CARD_DATE.MAX_LENGTH}}`}
+        required
       />
     </div>
   )
