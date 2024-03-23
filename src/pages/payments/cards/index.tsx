@@ -1,14 +1,16 @@
 import { Button } from '@/components/Button'
 import { Card } from '@/features/payments/Card'
+import { PaymentsMachineContext } from '@/service/payments/payments.machine'
 import { usePaymentCardList } from '@/service/payments/usePaymentCardList'
 
 export const CardsPage = () => {
-  const { getCardList, editCard, createCard } = usePaymentCardList()
+  const { getCardList, editCard, createCard, deleteCard } = usePaymentCardList()
+  const paymentsMachine = PaymentsMachineContext.useSelector((state) => state)
 
   return (
     <div>
-      <div>
-        {getCardList({ sortType: 'asc' }).map((card, i) => {
+      <div key={paymentsMachine.value}>
+        {getCardList({ sortType: 'asc' }).map((card) => {
           const cardNumbers = [
             card.cardNumber1,
             card.cardNumber2,
@@ -17,7 +19,15 @@ export const CardsPage = () => {
           ].join('')
 
           return (
-            <div key={card.id}>
+            <div key={card.id} style={{ position: 'relative' }}>
+              <Button
+                type="button"
+                onClick={() => deleteCard(card.id)}
+                style={{ position: 'absolute', top: '-13px', right: '-13px' }}
+              >
+                ❌
+              </Button>
+
               <Card backgroundColor="orange" onClick={() => editCard(card)}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
@@ -51,7 +61,7 @@ export const CardsPage = () => {
         backgroundColor="#E5E5E5"
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
       >
-        <Button style={{ fontSize: '30px' }} onClick={() => createCard()}>
+        <Button style={{ fontSize: '30px' }} onClick={() => createCard()} type="button">
           +
         </Button>
       </Card>

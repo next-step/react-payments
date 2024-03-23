@@ -22,6 +22,10 @@ export enum PAYMENT_STATE {
   CARD_EDITING = 'card-editing',
   CARD_EDITING_FAILED = 'card-editing-failed',
   CARD_EDITING_COMPLETE = 'card-editing-complete',
+  CARD_DELETE = 'card-delete',
+  CARD_DELETE_SUBMITTING = 'card-delete-submitting',
+  CARD_DELETE_COMPLETE = 'card-delete-complete',
+  CARD_DELETE_FAILED = 'card-delete-failed',
 }
 
 export const paymentsMachine = setup({
@@ -52,6 +56,10 @@ export const paymentsMachine = setup({
       | {
           type: 'EDIT_CARD'
           value: CardItem
+        }
+      | {
+          type: 'DELETE_CARD'
+          value: CardItem['id']
         }
   },
   actors: {
@@ -94,6 +102,18 @@ export const paymentsMachine = setup({
 
       return true
     }),
+    deleteCard: fromPromise(async ({ input }: { input: CardItem['id'] }) => {
+      const cardList = JSON.parse(
+        window.localStorage.getItem(LOCAL_STORAGE_KEY_LIST.CARD_INFO) || '[]'
+      ) as Array<CardItem>
+
+      // 서버 동작
+      const filteredList = cardList.filter((card) => card.id !== input)
+
+      window.localStorage.setItem(LOCAL_STORAGE_KEY_LIST.CARD_INFO, JSON.stringify(filteredList))
+
+      return true
+    }),
   },
   actions: {
     saveSelectedCardInfo: assign(({ context, event }) => {
@@ -123,7 +143,7 @@ export const paymentsMachine = setup({
     }),
   },
 }).createMachine({
-  /** @xstate-layout N4IgpgJg5mDOIC5QAcCGBPAtmAdgF1gDoBjVAJwgFoywoBLWPM1POgex0sfLwGIBlAKoAhALIBJACoBtAAwBdRCjaw6rDkpAAPRAHYAHLML6AnLIBsARhPnzs-ZYCsAJgA0IdIn0AWfcf3OJs6GAMzmjr4AvpHuaFi4BCTkVDT0jMzqnNxkfACiACJSAPoAcuIAwgDSJQCCorlyikggyCpq7DiaOggGRqYW1rb2Tm4eiHa6hCGOJt7musHOzhHe0bEY2PhEpBTUtAxMLB1cAK4ARphqrDhQvBAcYIR0OABubADWj7Dnl3jXUI1NK1VJkuohLMtvIRdI5erDzNN4e5PAh9DNCJZZCYXLDgg5YWsWhsEttkns0odMqcLldnrcwGQyGwyIRkAAbFgAM2ZmEI3xpfzpgOawPaGma3QhEWhsMM8MRunMyMQZnMhDs2NkwV03mWEUJcU2iR2VBwdGI7xwqGw5IOGQ6vAACgAlXIANWFyhBHTBCEs0xMhCCln05gcOv0ulkIWVPWCGKxjkslm8UYCBuJWySuzNFqtNtSdqOHCdAHl+JJShVqnUGgogW1QRLwQtJlrpj5nCFZJZzN5HLHdP7CM5e84hyH-bZVjEifEsybKLnLdawNTfv87g8nq8Po9gXgSuaV9hPS1Gz7m37W4R245O93e-3Y5jlsYZt4TCm5iYYRn58aZLLvma78hudK8AyTIsuyXI8qyKiHseIFnqKTagN0SxzIQ3j9lYszzGY3iDkmCYETqsiyDijj-kapK7IW6TFpwxBsJg7JgHgYC8K6-C5DI9Yihe4oYYg3aBssBjeBCFhzOYowoi4lhBo48k6s4upfkOtEktmKT7ExVKsexbKcdxBTFOUNTOvkqHCZ0V7iSOsrSc4sm2ApXjKZ+Ji+U4uG6CErY6QuZKQGovAWZWZRVLU9R2d6InaOC46TKq3YLEEVEQrGSyOCOzjhLC-qyLovnmCFgG7OFm73DgjzPG8nysiceDlMkCVig5ok9IYxiqoMdj4p5CDSZM-YhE4EQGCmgWVfRVA1RBUHMqyHJ4NyZC8sgrXtRQnXoclvV9ANNhDSMsZhIG2KTQYIQhOOpV-rOhq6YuS03JQxkcVxkWFJWVk2Qdl49VKUIwnCioKkqYyjaOhCOGEviGCYhi4RY816ZQH1QF9bE-dxvH8cDSXdGiULzCGXaBOOAT6LGSZGOlYTJj2gT6NEs44GwEBwECmYEA2iXdUdlAwyiYuY4ujGUsc2R4ELXW+ojzj+DqZi+ZCTgM-2OEPV+VgzKV95S2SMv2hw660jciuHd0Nj5YEYa6GVYQhKjsY+H4aKzDCk0s5YpsMQZsuW5yqB0KZEC2yDR2zark3LMs7upnMuixmY+Uai4iqyNJnZB6ayGrrahmx2hseSqmCdSsnvtp4OYTqkE+gPTClgwtGhdLsXNpgdbUAx6T4JBPllE9giLi2C7g6FeqWKpndQ73c43fASX-eCp94eR5AQ8i5huEhLeoZuUEbkRgOsOd2R0kdz4hG6N35vMXjJlmfvvq6i+TjvlNSZLBsHnCqL0BYLWxhANQn8rzxymLXRG9d5i5URgjRGTgbAuzcvMbuONoE9STMpBwScLB9kVPTWGGl8oPXDCEAIvYTD3RCDgyB-xKA7yjngo6DsRw2EjK7BEHtYZhD8DdMc+hTDqyYaAgC4CcZvwJpw+2kYRxXSTIjd20wYyw1wmPEqn5bCdgcJzSIQA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QAcCGBPAtmAdgF1gDoBjVAJwgFoywoBLWPM1POgex0sfLwGIBlAKoAhALIBJACoBtAAwBdRCjaw6rDkpAAPRAGZZAVkIBOABwAWXaYBsBgEzXTu2wBoQ6RAesBGQgHZZXW87b29dO2NjA1MAXxi3NCxcAhJyKhp6RmZ1Tm4yPgBRABEpAH0AOXEAYQBpcoBBUQK5RSQQZBU1dhxNHQR9IzNLG3tHZwM3DwRzc1kTCOtrP2tzA1lvYxm4hIxsfCJSCmpaBiYWbq48Hl4igoAZAskC0qr6gCUils0O1RzevUMJgsVlsDicrnciEidkIplMdlMGz8+jsumM3m27V2yQOaWOmTOOS4AFcAEaYNSsHBQXgQDhgQh0HAANzYAGsGbAyRS8FSoF82j8uho2n0-H5jLCDN4vAZoU5vJNENY7OZYeZrLpzMiVmZvNZMYk9ilDukTllzhwSeTKUyaWAyGQ2GRCMgADYsABmzswhC5Nt5doFyl+3X+CHFktM0tl8qCSoQBj8vmMCz8TmMtgMlkN2P2qSOODoxDZOFQ2Hxp2y3V4AAU3gUAGrB9qdP6ixDRlMGcKZ5NmVMJvwIwizFUIhxRdEY+JYpL502UIslssVjJVy04OsAeX4kgq1TqjWaCm+bbDHYQwVkksM5lMN-s2ZV1gT1kBUSC3j8lmC8LsubziaeLLqW5ZgNaPJ8rS9KMiy7IMj8eDlMWYHYC2QrtqAfTfiEsLBLYn6IrMEyQggiy3pmVgBPCujpgBs5GjiBZUKBq4Qf6UF2rwDpOi67pej6roqMhqHsRh54ithiC4b4iIOHKPbEYYb76oQ37GAEw5yt+ui6IBxq4kc64WkSxBsJg7pgHgYC8A2-CPBJoZSdoMkPpK+qWOE4SGMiugJvC1jqRK1hUaE2p+AYBnMYuJmEhc5mWW61m2cUZSvB8TnCj0l52HlRiLDMaIquYdjLOYb6WP4NgamiAQbOY0ULnicXVlaiVWTZNz3I8zwZZ8p6CpJOXSQgeV2AVKyWJmqplSsQ6zIQqJRNG0q6Emph+E1wFHJAai8Gl+6VLUDRNFlWGuWNyKmNV36GJtmxrP5ZHmN+Jg9t4sjmJEEprPq21GVQe3QXSOAMkyrIcq6xJ4FUaTnReo1zbosLorIdiyJqmymAFvjfZEZh3sYWpbIxeY7UDEBdNSPGOs6roeng3pkL6yAw3DFAIy5fRBEsS2LIYqayPVekJtehBouEZVBFR6xbWTQGA5QwN2pQHXJV1h0vO8A2tCG2XhuNk1FTNpXlQmeUo8OtgrBN6Lij+AMscrVN8mrFmdbZ9mOYN+sXTh7nqbbSwbBssg42RcIS5FgTSt4r0ROtTuLir1Lu0lKXdQ8Tza5lvuts5I2XUbhCFdNJVzRVZE+cFmbRg+E0qlFCuGc7EBgBrtm3NnfU61zRd9CXZfFbN5tkaEYSl+EiLptmNh5cneLt53kG2jToPg-BUPLylHMQP3hvXbdATRBKqyBAFZWENEwRlTRZg+IvRw7zZq+BjTvH0wJTNCS-YB7wfXKR90x3VPo9C+ZFhw3U8j4JY75AiIiflQP+6dPZZ16rnXWZ5C6H2zKXLwWZ9TolMJsIc4pCDh1CGYEh2Zhb6UxDgNg7d4CCnJiwv2iNLqUFfGRbhSDKymQuHkPA2CDaXlKmLCaS0ZilVlHlGUcJ+GtU3G-Pkoj-aIG+nMNEmNnBwgRBpKuUwvC+CWHXDG0oHyKJbjFFq5p4pWk9KgOgyUIDqM4X0KIaotQgmiHlWiEdjEBHmJmJYz5ibGH4WxcCAiHFF0wh4qEeCfEjH-AEt8ERRwLCou+aU4ooliRiZxNeUB3HcxkrMbRSw9G2GGPCN8H40xODWI+BiOxFbO2iRWYp78oCUCcS4yAZSB4yXRJKdMxMwjEw1JjVSRgNKLCsKsfKjUbHNWMvYtqnB1YpWGeGDYaIKGaSiGY0Ylg3zIlLiFVMtg4RfTaXOVuKdXZ7NyveFGsd3xEOlCRBMMw8YLAzGVbw0Z5btKeXiVOpSho4NyqmFGIKJmhExssPwCYoio28p9Zaqp0z8Khf05xrjXmjT0lIvKoVVjOFRWLDYEtiaojKvYEFn1VngtsbtV2qsdk2RJZdJEKNMz2C+gYNYSxaVyRjLYDYjhFj-TWRTSgf8+WD2FqY4cCJ-l1zRePcK6lp7fmjPecc-CUE9LUTCsRSMipLVDssdGj59RDgcEtGhm1ArTUiQqpWKCeVgBVYgCIqJ1LuunCi8VkDoylxWD2AIQRZCBC9ey9ZyCO4pUJYMtxlqNFjXhSGpFn04E6qmMOPwQdaoWB-JFHscQ4hAA */
   id: 'payments',
   context: PAYMENTS_MACHINE_INITIAL_VALUES,
   initial: PAYMENT_STATE.CARD_REGISTRATION_START,
@@ -134,12 +154,15 @@ export const paymentsMachine = setup({
           target: PAYMENT_STATE.CARD_REGISTRATION_SUBMITTING,
           actions: assign(({ context, event }) => {
             return {
-              registration: Object.assign(context.registration, event.value),
+              registration: { ...context.registration, ...event.value },
             }
           }),
         },
         EDIT_NICKNAME: {
           target: PAYMENT_STATE.CARD_EDIT,
+        },
+        DELETE_CARD: {
+          target: PAYMENT_STATE.CARD_DELETE_SUBMITTING,
         },
       },
     },
@@ -170,7 +193,7 @@ export const paymentsMachine = setup({
           target: PAYMENT_STATE.CARD_NICKNAME_SUBMITTING,
           actions: assign(({ context, event }) => {
             return {
-              cardAdditionalInfo: Object.assign(context.cardAdditionalInfo, event.value),
+              cardAdditionalInfo: { ...context.cardAdditionalInfo, ...event.value },
             }
           }),
         },
@@ -204,6 +227,9 @@ export const paymentsMachine = setup({
           target: PAYMENT_STATE.CARD_EDIT,
           actions: 'saveSelectedCardInfo',
         },
+        DELETE_CARD: {
+          target: PAYMENT_STATE.CARD_DELETE_SUBMITTING,
+        },
       },
     },
     [PAYMENT_STATE.CARD_EDIT]: {
@@ -212,7 +238,7 @@ export const paymentsMachine = setup({
           target: PAYMENT_STATE.CARD_EDITING,
           actions: assign(({ context, event }) => {
             return {
-              cardEditingInfo: Object.assign(context.cardEditingInfo, { nickName: event.value }),
+              cardEditingInfo: { ...context.cardEditingInfo, nickName: event.value },
             }
           }),
         },
@@ -258,8 +284,49 @@ export const paymentsMachine = setup({
           target: PAYMENT_STATE.CARD_REGISTRATION_START,
           actions: 'reset',
         },
+        DELETE_CARD: {
+          target: PAYMENT_STATE.CARD_DELETE_SUBMITTING,
+        },
       },
     },
+    [PAYMENT_STATE.CARD_DELETE]: {
+      on: {
+        DELETE_CARD: {
+          target: PAYMENT_STATE.CARD_DELETE_SUBMITTING,
+        },
+      },
+    },
+    [PAYMENT_STATE.CARD_DELETE_SUBMITTING]: {
+      invoke: {
+        id: 'deleteCard',
+        src: 'deleteCard',
+        input: ({ event }) => {
+          if (event.type !== 'DELETE_CARD') {
+            throw new Error('deleteCard: unknown event')
+          }
+
+          return event.value
+        },
+        onDone: {
+          target: PAYMENT_STATE.CARD_DELETE_COMPLETE,
+        },
+        onError: {
+          target: PAYMENT_STATE.CARD_DELETE_FAILED,
+        },
+      },
+    },
+    [PAYMENT_STATE.CARD_DELETE_COMPLETE]: {
+      on: {
+        DELETE_CARD: {
+          target: PAYMENT_STATE.CARD_DELETE_SUBMITTING,
+        },
+        RESET: {
+          target: PAYMENT_STATE.CARD_REGISTRATION_START,
+          actions: 'reset',
+        },
+      },
+    },
+    [PAYMENT_STATE.CARD_DELETE_FAILED]: {},
   },
 })
 

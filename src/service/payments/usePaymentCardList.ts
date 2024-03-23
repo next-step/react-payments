@@ -36,9 +36,14 @@ export const usePaymentCardList = () => {
     navigate('/payments/cards/new')
   }
 
+  const deleteCard = (id: string) => {
+    paymentActorRef.send({ type: 'DELETE_CARD', value: id })
+  }
+
   return {
     getCardList,
     editCard,
     createCard,
+    deleteCard,
   }
 }
