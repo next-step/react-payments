@@ -1,6 +1,6 @@
 import { BottomSheet, BottomSheetContentProps } from '@/components/molecule/bottom-sheet'
-import * as styles from './card-type-picker.css'
-import { Text, Flex, FlexProps } from '@/components'
+import * as styles from './card-type-pick-bottom-sheet.css'
+import { Text, Flex, FlexProps, FlexElements } from '@/components'
 import { CardType } from '@/types/card'
 import { IconCheck } from '@tabler/icons-react'
 import { vars } from '@/styles'
@@ -31,6 +31,7 @@ export const CardTypePicker = ({
           const { id, name, color } = cardType
           return (
             <CardTypeItem
+              as="button"
               key={id}
               name={name}
               isSelectedCardType={selectedCardType?.id === id}
@@ -44,20 +45,21 @@ export const CardTypePicker = ({
   )
 }
 
-export interface CardTypeItemProps extends FlexProps {
+export type CardTypeItemProps<C extends FlexElements> = FlexProps<C> & {
   name: string
   isSelectedCardType?: boolean
   cardTypeColor: FlexProps['backgroundColor']
 }
 
-export const CardTypeItem = ({
+export const CardTypeItem = <C extends FlexElements = 'div'>({
+  as,
   name,
   isSelectedCardType = false,
   cardTypeColor,
   ...props
-}: CardTypeItemProps) => {
+}: CardTypeItemProps<C>) => {
   return (
-    <Flex direction="column" gap="10px" cursor="pointer" alignItems="center" {...props}>
+    <Flex as={as} direction="column" gap="10px" cursor="pointer" alignItems="center" {...props}>
       <Flex
         width="40px"
         height="40px"
