@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { CardPasswordInput } from './index'
-import { useState } from 'react'
+import { ChangeEventHandler, useState } from 'react'
 
 const meta: Meta<typeof CardPasswordInput> = {
   title: 'common/CardPasswordInput',
@@ -15,23 +15,27 @@ const meta: Meta<typeof CardPasswordInput> = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Controlled: Story = {
-  render: args => {
-    const [inputValues, setInputValues] = useState({
-      'card_password-1': '1',
-      'card_password-2': '3',
-      'card_password-3': '1',
-      'card_password-4': '1'
-    })
+export const Basic: Story = {
+  render: () => {
+    const [passwords, setPasswords] = useState(['', '', '', ''])
+
+    const handleChange: ChangeEventHandler<HTMLInputElement> = e => {
+      const { name, value: newValue } = e.target
+      const [, index] = name.split('.')
+
+      setPasswords(
+        passwords.map((value, idx) =>
+          idx === Number(index) ? newValue : value
+        )
+      )
+    }
 
     return (
       <CardPasswordInput
-        value={inputValues}
-        onChange={setInputValues}
-        {...args}
+        name="card-password"
+        values={passwords}
+        onChange={handleChange}
       />
     )
   }
 }
-
-export const UnControlled: Story = {}
