@@ -1,5 +1,5 @@
 export const PAYMENT_STEPS = [
+  'card list',
   'add card',
-  'completed add card',
-  'card list'
+  'completed add card'
 ] as const
