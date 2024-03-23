@@ -5,6 +5,7 @@ import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
 interface CreditCardTextFieldProps {
   value: TextFieldProps['value'];
   onChange: TextFieldProps['onChange'];
+  onKeyUp?: TextFieldProps['onKeyUp'];
 }
 
 function CardNumber({ value, onChange }: CreditCardTextFieldProps) {
@@ -38,14 +39,19 @@ function VerificationCode({ value, onChange }: CreditCardTextFieldProps) {
   );
 }
 
-function CardPassword({ value, onChange }: CreditCardTextFieldProps) {
+interface CardPasswordProps extends Omit<CreditCardTextFieldProps, 'onChange'> {
+  onClick: () => void;
+}
+
+function CardPassword({ value, onClick }: CardPasswordProps) {
   return (
     <TextField
       name="cardPassword"
       className="w-28"
       type="text"
       value={value}
-      onChange={onChange}
+      onClick={onClick}
+      onChange={() => {}}
       label="카드 비밀번호"
       lengthLimit={{ show: false, maxLength: 2 }}
       inputProps={{ inputMode: 'numeric', type: 'password', className: 'text-center' }}
@@ -55,13 +61,15 @@ function CardPassword({ value, onChange }: CreditCardTextFieldProps) {
 
 interface ExpiractionDateProps extends CreditCardTextFieldProps {
   dateType: 'month' | 'year';
+  inputRef?: React.RefObject<HTMLInputElement>;
 }
 
-function ExpirationDate({ value, onChange, dateType }: ExpiractionDateProps) {
+function ExpirationDate({ value, onChange, dateType, inputRef, onKeyUp }: ExpiractionDateProps) {
   const isMonth = dateType === 'month';
 
   return (
     <TextField
+      ref={inputRef}
       name={'expiration' + capitalizeFirstLetter(dateType)}
       type="text"
       value={value}
@@ -70,7 +78,7 @@ function ExpirationDate({ value, onChange, dateType }: ExpiractionDateProps) {
       placeholder={isMonth ? 'MM' : 'YY'}
       className="w-16"
       lengthLimit={{ show: false, maxLength: 2 }}
-      inputProps={{ inputMode: 'numeric', className: 'text-center' }}
+      inputProps={{ inputMode: 'numeric', className: 'text-center', onKeyUp }}
     />
   );
 }

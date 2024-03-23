@@ -15,9 +15,19 @@ export type CardFormOptions = {
   cardNickname: string;
 };
 
+export type CardFormFieldErrors = {
+  cardNumber: boolean;
+  expirationMonth: boolean;
+  expirationYear: boolean;
+  ownerName: boolean;
+  verificationCode: boolean;
+  cardPassword: boolean;
+};
+
 export type CardFormState = {
   fields: CardFormFields;
   options: CardFormOptions;
+  isErrorField: CardFormFieldErrors;
 };
 
 export const INITIAL_CARD_FORM_STATE: CardFormState = {
@@ -32,6 +42,14 @@ export const INITIAL_CARD_FORM_STATE: CardFormState = {
   options: {
     cardCompany: '',
     cardNickname: '',
+  },
+  isErrorField: {
+    cardNumber: false,
+    expirationMonth: false,
+    expirationYear: false,
+    ownerName: false,
+    verificationCode: false,
+    cardPassword: false,
   },
 };
 
@@ -89,6 +107,19 @@ const useCardFormContext = (initialState: CardFormState) => {
     });
   }, []);
 
+  const handleNumPadClick = useCallback((value: string) => {
+    dispatch({
+      type: REDUCER_ACTION_TYPE.UPDATE_CARD_PASSWORD,
+      payload: value,
+    });
+  }, []);
+
+  const handleBackspaceClick = useCallback(() => {
+    dispatch({
+      type: REDUCER_ACTION_TYPE.DELETE_CARD_PASSWORD,
+    });
+  }, []);
+
   return {
     state,
     handleCardNumberInputChange,
@@ -99,6 +130,8 @@ const useCardFormContext = (initialState: CardFormState) => {
     handleCardPasswordInputChange,
     updateCardCompany,
     handleCardNicknameInputChange,
+    handleNumPadClick,
+    handleBackspaceClick,
   };
 };
 

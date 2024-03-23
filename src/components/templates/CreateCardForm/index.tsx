@@ -1,7 +1,9 @@
+import CreditCardPasswordKeyboard from '@/components/organisms/CreditCardPasswordKeyboard';
 import { useCardInput } from '@/components/pages/CardCreate/useCardInput';
+import useCardPasswordKeyboard from '@/components/pages/CardCreate/useCardPasswordKeyboard';
 import useOutsideClick from '@/hooks/useOutsideClick';
 import chevronLeft from '@assets/icon/chevron_left_24.svg';
-import { Box, Button, Container, HFlex, Text } from '@components/atoms';
+import { Box, Button, Container, HFlex, Text, VFlex } from '@components/atoms';
 import { Header } from '@components/molecules';
 import { CreditCardCompanyPicker, CreditCardTextFields } from '@components/organisms';
 import { useRef, useState } from 'react';
@@ -14,19 +16,36 @@ interface Props {
 export default function CreateCardForm({ onNext, onPrev }: Props) {
   const {
     fields,
+    isErrorField,
     handleCardNumberInputChange,
-    handleCardPasswordInputChange,
     handleExpirationMonthInputChange,
     handleExpirationYearInputChange,
     handleOwnerNameInputChange,
     handleVerificationCodeInputChange,
   } = useCardInput();
 
+  const {
+    showPasswordKeyboard,
+    passwordKeyboardRef,
+    handleCardPasswordClick,
+    hidePasswordKeyboard,
+    handleNumPadClick,
+    handleBackspaceClick,
+  } = useCardPasswordKeyboard();
+
   const colorPickerRef = useRef<HTMLDivElement>(null);
   const [showColorPicker, setShowColorPicker] = useState(false);
 
-  const areAllInputsFilled = Object.values(fields).some((value) => value === '');
-  const disableNextButton = areAllInputsFilled;
+  const expirationYearRef = useRef<HTMLInputElement>(null);
+  const handleExpirationMonthInputKeyUp = () => {
+    if (isErrorField.expirationMonth || fields.expirationMonth === '') return;
+
+    expirationYearRef.current?.focus();
+  };
+
+  const areAllInputsFilled = Object.values(fields).every((value) => value.trim() !== '');
+  const areAllInputsValid = Object.values(isErrorField).every((value) => !value);
+  const disableNextButton = !areAllInputsFilled || !areAllInputsValid;
 
   const handleNextClick = () => {
     setShowColorPicker(true);
@@ -41,6 +60,11 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
     handler: hideColorPicker,
   });
 
+  useOutsideClick({
+    ref: passwordKeyboardRef,
+    handler: hidePasswordKeyboard,
+  });
+
   return (
     <Container className="relative">
       <Header>
@@ -52,24 +76,35 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
 
       <Box className="my-4 space-y-6">
         <CreditCardTextFields.CardNumber value={fields.cardNumber} onChange={handleCardNumberInputChange} />
-        <HFlex className="gap-4">
-          <CreditCardTextFields.ExpirationDate
-            dateType="month"
-            value={fields.expirationMonth}
-            onChange={handleExpirationMonthInputChange}
-          />
-          <CreditCardTextFields.ExpirationDate
-            dateType="year"
-            value={fields.expirationYear}
-            onChange={handleExpirationYearInputChange}
-          />
-        </HFlex>
+
+        <VFlex className="gap-2">
+          <HFlex className="gap-4">
+            <CreditCardTextFields.ExpirationDate
+              dateType="month"
+              value={fields.expirationMonth}
+              onChange={handleExpirationMonthInputChange}
+              onKeyUp={handleExpirationMonthInputKeyUp}
+            />
+
+            <CreditCardTextFields.ExpirationDate
+              dateType="year"
+              value={fields.expirationYear}
+              inputRef={expirationYearRef}
+              onChange={handleExpirationYearInputChange}
+            />
+          </HFlex>
+          {isErrorField.expirationMonth && (
+            <Text error size="sm">
+              유효한 월을 입력해주세요.
+            </Text>
+          )}
+        </VFlex>
         <CreditCardTextFields.OwnerName value={fields.ownerName} onChange={handleOwnerNameInputChange} />
         <CreditCardTextFields.VerificationCode
           value={fields.verificationCode}
           onChange={handleVerificationCodeInputChange}
         />
-        <CreditCardTextFields.CardPassword value={fields.cardPassword} onChange={handleCardPasswordInputChange} />
+        <CreditCardTextFields.CardPassword value={fields.cardPassword} onClick={handleCardPasswordClick} />
       </Box>
 
       <Box className="w-full">
@@ -78,6 +113,14 @@ export default function CreateCardForm({ onNext, onPrev }: Props) {
         </Button>
       </Box>
       {showColorPicker && <CreditCardCompanyPicker ref={colorPickerRef} onClick={onNext} />}
+      {showPasswordKeyboard && (
+        <CreditCardPasswordKeyboard
+          onClick={handleNumPadClick}
+          onDelete={handleBackspaceClick}
+          ref={passwordKeyboardRef}
+        />
+      )}
     </Container>
   );
 }
+

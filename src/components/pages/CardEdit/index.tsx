@@ -42,6 +42,14 @@ export default function CardEdit() {
             cardCompany: targetCard.cardCompany,
             cardNickname: targetCard.cardNickname,
           },
+          isErrorField: {
+            cardNumber: false,
+            expirationMonth: false,
+            expirationYear: false,
+            ownerName: false,
+            verificationCode: false,
+            cardPassword: false,
+          },
         }}
       >
         <CardRegistrationEditTemplate onPrev={navigateToCardList} onEdit={handleSubmitFinal} />
@@ -49,3 +57,4 @@ export default function CardEdit() {
     </MobilePanel>
   );
 }
+
