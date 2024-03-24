@@ -1,5 +1,5 @@
 {
-  "name": "react-payments",
+  "name": "@sxungchxn/react-payments",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -14,9 +14,7 @@
     "check-types": "tsc --noEmit",
     "test": "vitest --run",
     "test:watch": "vitest --watch",
-    "chromatic": "npx chromatic --project-token=chpt_496b68d5c043834",
-    "predeploy": "pnpm build",
-    "deploy": "gh-pages -d dist"
+    "chromatic": "npx chromatic --project-token=chpt_496b68d5c043834"
   },
   "homepage": "https://sxungchxn.github.io/react-payments/",
   "main": "dist/index.cjs",

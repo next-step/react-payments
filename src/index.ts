@@ -1,6 +1,5 @@
-import App from './app'
-
-export { App as PaymentsApp }
+export { PaymentsApp } from './app'
 
 export * from './types'
 export * from './components'
+export * from './styles'
