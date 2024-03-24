@@ -4,9 +4,13 @@
 
 NEXTSTEP의 TDD, 클린 코드 with React 3기에서 진행하는 결제 시스템 프로젝트입니다.
 <br/>
+<br/>
 [NEXTSTEP](https://edu.nextstep.camp)
 <br/>
 [과제 저장소](https://github.com/next-step/react-payments)
+
+## 데모
+[데모링크](https://codesandbox.io/p/devbox/nextstep-payments-gn0lee-rp2ly6)
 
 ## 설치 방법
 
