@@ -1,3 +1,5 @@
+import { CardInfo } from 'src/types/card.type';
+
 export interface CardCompanyData {
 	name: string;
 	code: string;
@@ -22,3 +24,16 @@ export const CARD_COMPANY_MAP = CARD_COMPANY_LIST.reduce(
 	},
 	{} as Record<string, CardCompanyData>,
 );
+
+export const getCardCompanyCodeByCardNumber = ({
+	cardNumberFirstSegment,
+	cardNumberSecondSegment,
+}: Pick<CardInfo, 'cardNumberFirstSegment' | 'cardNumberSecondSegment'>) => {
+	if (cardNumberFirstSegment.length < 4 || cardNumberSecondSegment.length < 4) {
+		return '';
+	}
+
+	const firstEightDigitsNumber = Number(cardNumberFirstSegment + cardNumberSecondSegment);
+
+	return CARD_COMPANY_LIST[firstEightDigitsNumber % CARD_COMPANY_LIST.length]?.code || '';
+};

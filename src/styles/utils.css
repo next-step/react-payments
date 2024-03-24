@@ -17,6 +17,11 @@
 	align-items: center;
 }
 
+.flex-align-center {
+	display: flex;
+	align-items: center;
+}
+
 .mt-10 {
 	margin-top: 2.5rem;
 }

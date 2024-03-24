@@ -5,6 +5,7 @@
 @import 'utils.css';
 @import 'password.css';
 @import 'form.css';
+@import 'tooltip.css';
 
 *{
 	box-sizing: border-box;
@@ -27,7 +28,6 @@ button {
 	border: none;
 	background-color: inherit;
 	cursor: pointer;
-	outline: none;
 }
 
 .sb-show-main.sb-main-padded {

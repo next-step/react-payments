@@ -1,9 +1,9 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import CardOwnerNameInput from 'src/steps/add-card-form/CardOwnerNameInput.tsx';
-import { SelectToFormLayer } from 'src/components/utils/SelectToFormLayer.tsx';
-import { renderWithAddCardMachineProvider } from 'src/utils/render.tsx';
+import CardOwnerNameInput from 'src/steps/add-card-form/CardOwnerNameInput';
+import { AutoFocusWrapperWithSelectToForm } from 'src/components/utils/Wrapper';
+import { renderWithAddCardMachineProvider } from 'src/utils/render';
 
 const setup = () => {
 	const cardOwnerNameInput = screen.getByTestId<HTMLInputElement>('card-owner-name');
@@ -16,9 +16,9 @@ const setup = () => {
 describe('카드 소유자 입력', () => {
 	beforeEach(() => {
 		renderWithAddCardMachineProvider(
-			<SelectToFormLayer>
+			<AutoFocusWrapperWithSelectToForm>
 				<CardOwnerNameInput />
-			</SelectToFormLayer>,
+			</AutoFocusWrapperWithSelectToForm>,
 		);
 	});
 

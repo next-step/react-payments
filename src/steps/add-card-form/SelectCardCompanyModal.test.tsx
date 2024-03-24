@@ -1,12 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import AddCardStepper from 'src/steps/AddCardStepper.tsx';
-import { CARD_COMPANY_LIST } from 'src/constants/card.ts';
+import AddCardStepper from 'src/steps/AddCardStepper';
+import { CARD_COMPANY_LIST } from 'src/constants/card';
+import { renderWithAddCardMachineProvider } from 'src/utils/render';
 
 describe('카드 회사 선택 모달 기능 테스트', () => {
 	beforeEach(async () => {
-		render(<AddCardStepper />);
+		renderWithAddCardMachineProvider(<AddCardStepper />);
 
 		const addCardButton = screen.getByTestId('add-card-button');
 
@@ -32,5 +33,7 @@ describe('카드 회사 선택 모달 기능 테스트', () => {
 		await userEvent.click(cardCompanyButtons);
 
 		expect(screen.queryByTestId('card-image')?.className.includes(firstCardCompanyInfo.className)).toBeTruthy();
+
+		expect(screen.queryByTestId('company-modal')).toBeNull();
 	});
 });

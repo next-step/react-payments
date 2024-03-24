@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { render, renderHook, RenderOptions, RenderHookOptions } from '@testing-library/react';
 
-import { AddCardMachineProvider, addCardMachine } from 'src/machines/addCardMachine.ts';
+import { AddCardMachineProvider, addCardMachine } from 'src/machines/addCardMachine';
 
 interface RenderWithAddCardMachineProviderOptions {
 	renderOptions?: RenderOptions;

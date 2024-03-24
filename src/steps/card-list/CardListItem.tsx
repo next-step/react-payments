@@ -1,8 +1,20 @@
-import { CardInfoWithId } from 'src/machines/addCardMachine.ts';
-import { useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
-import CardImage from 'src/components/common/CardImage.tsx';
+import { CSSProperties } from 'react';
 
-export default function CardListItem({ ...card }: CardInfoWithId) {
+import { CardInfoWithId } from 'src/types/card.type';
+import { useAddCardMachineActorRef } from 'src/machines/addCardMachine';
+import CardImage, { CardImageProps } from 'src/components/common/CardImage';
+
+export interface CardListItemProps extends CardInfoWithId {
+	onDelete?: (id: string) => void;
+	styles?: {
+		container?: CSSProperties;
+		cardImage?: CardImageProps['styles'];
+		nickname?: CSSProperties;
+		deleteButton?: CSSProperties;
+	};
+}
+
+export default function CardListItem({ onDelete, styles, ...card }: CardListItemProps) {
 	const { send } = useAddCardMachineActorRef();
 
 	const handleClickCard = () => {
@@ -11,15 +23,17 @@ export default function CardListItem({ ...card }: CardInfoWithId) {
 
 	const handleDeleteCard = () => {
 		if (confirm('정말 삭제하시겠습니까?')) {
-			send({ type: 'DELETE_CARD', value: card.id });
+			send({ type: 'DELETE_CARD', value: card.id, onDelete });
 		}
 	};
 
 	return (
-		<div className="card-list-item cursor-pointer w-fit">
-			<CardImage {...card} onClick={handleClickCard} />
-			<span className="card-nickname">{card.cardNickname}</span>
-			<button className="delete-card" onClick={handleDeleteCard}>
+		<div className="card-list-item cursor-pointer w-fit" style={styles?.container}>
+			<CardImage {...card} onClick={handleClickCard} styles={styles?.cardImage} />
+			<span className="card-nickname" style={styles?.nickname}>
+				{card.cardNickname}
+			</span>
+			<button className="delete-card" onClick={handleDeleteCard} style={styles?.deleteButton}>
 				✕
 			</button>
 		</div>

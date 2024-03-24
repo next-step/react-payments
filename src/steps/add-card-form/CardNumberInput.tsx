@@ -1,8 +1,11 @@
-import { useId, useRef, ChangeEvent } from 'react';
+import { useId, ChangeEvent, useState } from 'react';
 import { shallowEqual } from '@xstate/react';
 
-import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine.ts';
-import REGEX from 'src/constants/regex.ts';
+import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine';
+import REGEX from 'src/constants/regex';
+import { useAutoFocus } from 'src/hooks/useAutoFocus';
+import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
+import { cardNumberLengthSchema } from 'src/schema/cardInfoStringLengthSchema';
 
 interface CardNumberInputProps {
 	segmentLength?: number;
@@ -10,6 +13,22 @@ interface CardNumberInputProps {
 
 export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputProps) {
 	const { send } = useAddCardMachineActorRef();
+
+	const { focusNextInput: focusSecondSegmentInput } = useAutoFocus(AUTO_FOCUS_INDEX.CARD_NUMBER.FIRST);
+
+	const { ref: secondSegmentInputRef, focusNextInput: focusThirdSegmentInput } = useAutoFocus<HTMLInputElement>(
+		AUTO_FOCUS_INDEX.CARD_NUMBER.SECOND,
+	);
+
+	const { ref: thirdSegmentInputRef, focusNextInput: focusFourthSegmentInput } = useAutoFocus<HTMLInputElement>(
+		AUTO_FOCUS_INDEX.CARD_NUMBER.THIRD,
+	);
+
+	const { ref: fourthSegmentInputRef, focusNextInput: focusCardExpirationDateInput } = useAutoFocus<HTMLInputElement>(
+		AUTO_FOCUS_INDEX.CARD_NUMBER.FOURTH,
+	);
+
+	const [isCardNumberChange, setIsCardNumberChange] = useState(false);
 
 	const { cardNumberFirstSegment, cardNumberSecondSegment, cardNumberThirdSegment, cardNumberFourthSegment } =
 		useAddCardMachineSelector(
@@ -22,9 +41,12 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 			shallowEqual,
 		);
 
-	const secondSegmentInputRef = useRef<HTMLInputElement>(null);
-	const thirdSegmentInputRef = useRef<HTMLInputElement>(null);
-	const fourthSegmentInputRef = useRef<HTMLInputElement>(null);
+	const isCardNumberValid = cardNumberLengthSchema.safeParse({
+		cardNumberFirstSegment,
+		cardNumberSecondSegment,
+		cardNumberThirdSegment,
+		cardNumberFourthSegment,
+	}).success;
 
 	const cardNumberInputId = useId();
 
@@ -33,8 +55,10 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 
 		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberFirstSegment' });
 
+		setIsCardNumberChange(true);
+
 		if (formattedValue.length === segmentLength) {
-			secondSegmentInputRef.current?.focus();
+			focusSecondSegmentInput();
 		}
 	};
 
@@ -43,8 +67,10 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 
 		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberSecondSegment' });
 
+		setIsCardNumberChange(true);
+
 		if (formattedValue.length === segmentLength) {
-			thirdSegmentInputRef.current?.focus();
+			focusThirdSegmentInput();
 		}
 	};
 
@@ -53,17 +79,27 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 
 		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardNumberThirdSegment' });
 
+		setIsCardNumberChange(true);
+
 		if (formattedValue.length === segmentLength) {
-			fourthSegmentInputRef.current?.focus();
+			focusFourthSegmentInput();
 		}
 	};
 
 	const handleFourthSegmentChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
+
 		send({
 			type: 'CHANGE_FIELD',
-			value: event.target.value.replace(REGEX.EXCLUDE_NUMBER, ''),
+			value: formattedValue,
 			field: 'cardNumberFourthSegment',
 		});
+
+		setIsCardNumberChange(true);
+
+		if (formattedValue.length === segmentLength) {
+			focusCardExpirationDateInput();
+		}
 	};
 
 	return (
@@ -110,6 +146,7 @@ export default function CardNumberInput({ segmentLength = 4 }: CardNumberInputPr
 					maxLength={segmentLength}
 				/>
 			</div>
+			{isCardNumberChange && !isCardNumberValid && <div className="input-error">카드 번호가 올바르지 않습니다.</div>}
 		</div>
 	);
 }

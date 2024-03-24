@@ -1,19 +1,27 @@
-import { FormEvent, ChangeEvent } from 'react';
+import { FormEvent, ChangeEvent, CSSProperties } from 'react';
 
-import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
+import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine';
+import { AddCardFinishProps } from 'src/steps/add-card-finish/AddCardFinish';
 
-interface CardNicknameFormProps {
+export interface CardNicknameFormProps extends Pick<AddCardFinishProps, 'onUpdate'> {
 	maxLength?: number;
+	styles?: {
+		container?: CSSProperties;
+		inputContainer?: CSSProperties;
+		input?: CSSProperties;
+		buttonBox?: CSSProperties;
+		button?: CSSProperties;
+	};
 }
 
-export default function CardNicknameForm({ maxLength = 10 }: CardNicknameFormProps) {
+export default function CardNicknameForm({ maxLength = 10, onUpdate, styles }: CardNicknameFormProps) {
 	const { send } = useAddCardMachineActorRef();
 
 	const selectedCardNickname = useAddCardMachineSelector(state => state.context.selectedCard.cardNickname);
 
 	const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		send({ type: 'EDIT_CARD' });
+		send({ type: 'EDIT_CARD', onUpdate });
 	};
 
 	const handleNicknameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -21,8 +29,8 @@ export default function CardNicknameForm({ maxLength = 10 }: CardNicknameFormPro
 	};
 
 	return (
-		<form onSubmit={handleFormSubmit} data-testid="nickname" className="w-100">
-			<div className="input-container flex-center w-100">
+		<form onSubmit={handleFormSubmit} data-testid="nickname" className="w-100" style={styles?.container}>
+			<div className="input-container flex-center w-100" style={styles?.inputContainer}>
 				<input
 					className="input-underline w-75"
 					type="text"
@@ -31,10 +39,11 @@ export default function CardNicknameForm({ maxLength = 10 }: CardNicknameFormPro
 					value={selectedCardNickname}
 					maxLength={maxLength}
 					data-testid="nickname-input"
+					style={styles?.input}
 				/>
 			</div>
-			<div className="button-box mt-50">
-				<button className="button-text" type="submit" data-testid="confirm">
+			<div className="button-box mt-50" style={styles?.buttonBox}>
+				<button className="button-text" type="submit" data-testid="confirm" style={styles?.button}>
 					확인
 				</button>
 			</div>

@@ -1,6 +1,8 @@
 import { useId, ChangeEvent } from 'react';
 
-import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine.ts';
+import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine';
+import { useAutoFocus } from 'src/hooks/useAutoFocus';
+import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
 
 interface CardSecurityCodeInputProps {
 	maxLength?: number;
@@ -11,15 +13,23 @@ export default function CardOwnerNameInput({ maxLength = 30 }: CardSecurityCodeI
 
 	const { send } = useAddCardMachineActorRef();
 
+	const { focusNextInput: focusCardSecurityCodeInput, ref: cardOwnerNameInputRef } = useAutoFocus<HTMLInputElement>(
+		AUTO_FOCUS_INDEX.CARD_OWNER_NAME,
+	);
+
+	const cardOwnerName = useAddCardMachineSelector(state => state.context.cardInfo.cardOwnerName);
+
 	const handleCardOwnerNameChange = (event: ChangeEvent<HTMLInputElement>) => {
 		send({
 			type: 'CHANGE_FIELD',
 			value: event.target.value,
 			field: 'cardOwnerName',
 		});
-	};
 
-	const cardOwnerName = useAddCardMachineSelector(state => state.context.cardInfo.cardOwnerName);
+		if (event.target.value.length === maxLength) {
+			focusCardSecurityCodeInput();
+		}
+	};
 
 	return (
 		<div className="input-container">
@@ -35,6 +45,7 @@ export default function CardOwnerNameInput({ maxLength = 30 }: CardSecurityCodeI
 				id={cardOwnerNameInputId}
 				data-testid="card-owner-name"
 				maxLength={maxLength}
+				ref={cardOwnerNameInputRef}
 			/>
 		</div>
 	);

@@ -1,15 +1,15 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import CardSecurityCodeInput from 'src/steps/add-card-form/CardSecurityCodeInput.tsx';
-import { SelectToFormLayer } from 'src/components/utils/SelectToFormLayer.tsx';
-import { renderWithAddCardMachineProvider } from 'src/utils/render.tsx';
+import CardSecurityCodeInput from 'src/steps/add-card-form/CardSecurityCodeInput';
+import { AutoFocusWrapperWithSelectToForm } from 'src/components/utils/Wrapper';
+import { renderWithAddCardMachineProvider } from 'src/utils/render';
 
 const setup = () => {
 	const utils = renderWithAddCardMachineProvider(
-		<SelectToFormLayer>
+		<AutoFocusWrapperWithSelectToForm>
 			<CardSecurityCodeInput />
-		</SelectToFormLayer>,
+		</AutoFocusWrapperWithSelectToForm>,
 	);
 
 	const cardSecurityCodeInput = screen.getByTestId<HTMLInputElement>('card-security-code');

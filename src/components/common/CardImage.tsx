@@ -1,9 +1,9 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, CSSProperties } from 'react';
 
-import { CardInfo } from 'src/machines/addCardMachine.ts';
-import { CARD_COMPANY_MAP } from 'src/constants/card.ts';
+import { CardInfo } from 'src/types/card.type';
+import { CARD_COMPANY_MAP } from 'src/constants/card';
 
-interface CardImageProps
+export interface CardImageProps
 	extends Pick<
 		CardInfo,
 		| 'cardExpirationDate'
@@ -16,6 +16,12 @@ interface CardImageProps
 	> {
 	size?: 'small' | 'big';
 	onClick?: (event: MouseEvent<HTMLDivElement>) => void;
+	styles?: {
+		card?: CSSProperties;
+		chip?: CSSProperties;
+		text?: CSSProperties;
+		container?: CSSProperties;
+	};
 }
 
 export default function CardImage({
@@ -28,6 +34,7 @@ export default function CardImage({
 	cardCompanyCode,
 	size = 'small',
 	onClick,
+	styles,
 }: CardImageProps) {
 	const classNameBySize = {
 		small: { card: 'small-card', chip: 'small-card__chip', text: 'card-text' },
@@ -35,7 +42,7 @@ export default function CardImage({
 	};
 
 	return (
-		<div className="card-box" onClick={onClick}>
+		<div className="card-box" onClick={onClick} style={styles?.container}>
 			<div
 				className={
 					cardCompanyCode
@@ -43,25 +50,30 @@ export default function CardImage({
 						: `${classNameBySize[size].card} empty-card`
 				}
 				data-testid="card-image"
+				style={styles?.card}
 			>
 				<div className="card-top">
-					<div className={classNameBySize[size].text}>
+					<div className={classNameBySize[size].text} style={styles?.text}>
 						{cardCompanyCode ? CARD_COMPANY_MAP[cardCompanyCode]?.name : null}
 					</div>
 				</div>
 				<div className="card-middle">
-					<div className={classNameBySize[size].chip}></div>
+					<div className={classNameBySize[size].chip} style={styles?.chip}></div>
 				</div>
 				<div className="card-bottom">
 					<div className="card-bottom__number">
-						<span className={classNameBySize[size].text}>
+						<span className={classNameBySize[size].text} style={styles?.text}>
 							{cardNumberFirstSegment} {cardNumberSecondSegment} {'∙'.repeat(cardNumberThirdSegment.length)}{' '}
 							{'∙'.repeat(cardNumberFourthSegment.length)}
 						</span>
 					</div>
 					<div className="card-bottom__info">
-						<span className={classNameBySize[size].text}>{cardOwnerName || 'NAME'}</span>
-						<span className={classNameBySize[size].text}>{cardExpirationDate || 'MM / YY'}</span>
+						<span className={classNameBySize[size].text} style={styles?.text}>
+							{cardOwnerName || 'NAME'}
+						</span>
+						<span className={classNameBySize[size].text} style={styles?.text}>
+							{cardExpirationDate || 'MM / YY'}
+						</span>
 					</div>
 				</div>
 			</div>

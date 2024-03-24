@@ -1,8 +1,11 @@
-import { ChangeEvent, useId, useRef } from 'react';
+import { ChangeEvent, useId, useState } from 'react';
 import { shallowEqual } from '@xstate/react';
 
-import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine.ts';
-import REGEX from 'src/constants/regex.ts';
+import { useAddCardMachineSelector, useAddCardMachineActorRef } from 'src/machines/addCardMachine';
+import REGEX from 'src/constants/regex';
+import { useAutoFocus } from 'src/hooks/useAutoFocus';
+import { AUTO_FOCUS_INDEX } from 'src/constants/auto-focus';
+import { cardPasswordLengthSchema } from 'src/schema/cardInfoStringLengthSchema';
 
 interface CardPasswordInputProps {
 	segmentMaxLength?: number;
@@ -10,6 +13,18 @@ interface CardPasswordInputProps {
 
 export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPasswordInputProps) {
 	const { send } = useAddCardMachineActorRef();
+
+	const cardPasswordInputId = useId();
+
+	const { focusNextInput: focusSecondPassword, ref: firstPasswordInputRef } = useAutoFocus<HTMLInputElement>(
+		AUTO_FOCUS_INDEX.CARD_PASSWORD.FIRST,
+	);
+
+	const { ref: secondPasswordInputRef, focusNextInput: focusNextButton } = useAutoFocus<HTMLInputElement>(
+		AUTO_FOCUS_INDEX.CARD_PASSWORD.SECOND,
+	);
+
+	const [isCardPasswordChanged, setIsCardPasswordChanged] = useState(false);
 
 	const { cardPasswordFirstDigit, cardPasswordSecondDigit } = useAddCardMachineSelector(
 		state => ({
@@ -19,26 +34,37 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 		shallowEqual,
 	);
 
-	const cardPasswordInputId = useId();
-
-	const secondPasswordInputRef = useRef<HTMLInputElement>(null);
+	const isCardPasswordValid = cardPasswordLengthSchema.safeParse({
+		cardPasswordFirstDigit,
+		cardPasswordSecondDigit,
+	}).success;
 
 	const handleFirstPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
 
-		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardPasswordFirstDigit' });
+		send({ type: 'CHANGE_FIELD', value: formattedValue, field: 'cardPasswordFirstDigit', maxLength: segmentMaxLength });
+
+		setIsCardPasswordChanged(true);
 
 		if (formattedValue.length === segmentMaxLength) {
-			secondPasswordInputRef.current?.focus();
+			focusSecondPassword();
 		}
 	};
 
 	const handleSecondPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const formattedValue = event.target.value.replace(REGEX.EXCLUDE_NUMBER, '');
+
 		send({
 			type: 'CHANGE_FIELD',
-			value: event.target.value.replace(REGEX.EXCLUDE_NUMBER, ''),
+			value: formattedValue,
 			field: 'cardPasswordSecondDigit',
 		});
+
+		setIsCardPasswordChanged(true);
+
+		if (formattedValue.length === segmentMaxLength) {
+			focusNextButton();
+		}
 	};
 
 	return (
@@ -55,6 +81,7 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 					onChange={handleFirstPasswordChange}
 					id={cardPasswordInputId}
 					maxLength={segmentMaxLength}
+					ref={firstPasswordInputRef}
 				/>
 				<input
 					data-testid="second-password"
@@ -68,6 +95,9 @@ export default function CardPasswordInput({ segmentMaxLength = 1 }: CardPassword
 				<input readOnly value=" " type="password" className="input-basic w-15 password-readonly" />
 				<input readOnly value=" " type="password" className="input-basic w-15 password-readonly" />
 			</div>
+			{isCardPasswordChanged && !isCardPasswordValid && (
+				<div className="input-error">카드 비밀번호를 입력해주세요.</div>
+			)}
 		</div>
 	);
 }
