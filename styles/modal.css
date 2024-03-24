@@ -1,5 +1,5 @@
 .modal {
-  width: 375px;
+  /* width: 375px; */
   height: 220px;
 
   border-radius: 5px 5px 15px 15px;
@@ -50,4 +50,5 @@
 .modal-item-name {
   font-size: 12px;
   letter-spacing: -0.085rem;
+  color:rgba(0, 0, 0)
 }
