@@ -4,6 +4,8 @@
 
 ## Getting Started
 
+You can also see detailed docs and components through [this storybook](https://65e6646cccf98da794739e61-dgflgcqxzn.chromatic.com/?path=/docs/getting-started--docs)
+
 <br/>
 
 ### Requirements
