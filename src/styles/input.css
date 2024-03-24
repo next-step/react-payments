@@ -22,7 +22,10 @@
 
   color: #525252;
 }
-
+.input-length {
+  display: flex;
+  justify-content: space-between;
+}
 .input-basic {
   background-color: #ecebf1;
   height: 45px;
@@ -33,6 +36,13 @@
   border-color: #9ca3af;
   border: none;
   border-radius: 0.25rem;
+}
+
+/* Chrome, Safari, Edge, Opera 화살표 제거 */
+.input-basic::-webkit-inner-spin-button,
+.input-basic::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 .input-underline {
