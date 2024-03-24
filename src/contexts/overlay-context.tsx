@@ -22,7 +22,11 @@ export interface OverlayState {
 
 export const OverlayContext = createContext<OverlayContextValue | null>(null)
 
-export const OverlayContextProvider = ({ children }: PropsWithChildren) => {
+export interface OverlayContextProviderProps extends PropsWithChildren {
+  container?: Element
+}
+
+export const OverlayContextProvider = ({ children, container }: OverlayContextProviderProps) => {
   const [overlay, setOverlay] = useState<OverlayState[]>([])
 
   const openOverlay = useCallback(
@@ -55,7 +59,7 @@ export const OverlayContextProvider = ({ children }: PropsWithChildren) => {
             <Fragment key={key}>{OverlayElement}</Fragment>
           ))}
         </>,
-        document.body,
+        container ?? document.body,
       )}
       {children}
     </OverlayContext.Provider>

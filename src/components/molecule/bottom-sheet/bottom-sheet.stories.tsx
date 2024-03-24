@@ -15,6 +15,7 @@ const meta: Meta<typeof BottomSheet.Content> = {
 
 const TRIGGER_TEXT = 'bottom-sheet 버튼'
 const CLOSE_TEXT = 'close 버튼'
+const OUTSIDE_TEXT = 'outside text'
 
 export default meta
 
@@ -38,6 +39,7 @@ const Template = (args: ComponentProps<typeof BottomSheet.Content>) => {
 
   return (
     <OverlayContextProvider>
+      <Text>{OUTSIDE_TEXT}</Text>
       <Text as="button" color="aqua" onClick={handleClickButton}>
         {TRIGGER_TEXT}
       </Text>
@@ -56,8 +58,8 @@ export const Default: Story = {
     borderTopLeftRadius: '16px',
     borderTopRightRadius: '16px',
   },
-  play: async ({ step, canvasElement }) => {
-    const canvas = within(canvasElement)
+  play: async ({ step }) => {
+    const canvas = within(document.body)
 
     const trigger = canvas.getByText(TRIGGER_TEXT)
 
@@ -65,10 +67,8 @@ export const Default: Story = {
       await userEvent.click(trigger)
     })
 
-    const closeButton = canvas.getByText(CLOSE_TEXT)
-
     await step('close bottomsheet', async () => {
-      await userEvent.click(closeButton)
+      await userEvent.click(await canvas.findByText(CLOSE_TEXT))
     })
 
     await step('open bottomsheet again', async () => {
@@ -76,7 +76,7 @@ export const Default: Story = {
     })
 
     await step('close bottom sheet by click outside of content', async () => {
-      await userEvent.click(document.querySelector('body')!)
+      await userEvent.click(canvas.getByText(OUTSIDE_TEXT))
     })
   },
 }
