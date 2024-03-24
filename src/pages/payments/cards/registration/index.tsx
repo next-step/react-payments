@@ -1,38 +1,69 @@
-import { useRef } from 'react'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Form } from '@/hooks/form/formContext'
-import { useFunnel } from '@/hooks/useFunnel'
+import { PAYMENT_STATE, PaymentsMachineContext } from '@/service/payments/payments.machine'
 
-import { formInitialValues } from '../const'
-import { FormType } from '../type'
-import { Step1 } from './components/Step1'
-import { Step1Validate } from './service/validations'
+import { Step1 } from '../../../../features/payments/Step1'
+import { Step2 } from '../../../../features/payments/Step2/Step2'
+import { Step1Validate, step2Validate } from '../../../../service/payments/validations'
 
 export const AddingCard = () => {
-  const { Funnel, changeStep } = useFunnel<'add-card' | 'complete-card'>('add-card')
+  const navigate = useNavigate()
+  const paymentsMachine = PaymentsMachineContext.useSelector((state) => state)
 
-  const stepValue = useRef<{ step1: FormType }>({ step1: formInitialValues })
+  const paymentActorRef = PaymentsMachineContext.useActorRef()
+  const step2ConditionList: ReadonlyArray<(typeof PAYMENT_STATE)[keyof typeof PAYMENT_STATE]> = [
+    PAYMENT_STATE.CARD_NICKNAME_REGISTRATION,
+    PAYMENT_STATE.CARD_NICKNAME_SUBMITTING,
+  ]
 
-  return (
-    <Funnel>
-      <Funnel.Step name="add-card">
-        <Form
-          initialValues={stepValue.current.step1}
-          onSubmit={(values) => {
-            stepValue.current.step1 = values
+  useEffect(() => {
+    if (
+      paymentsMachine.value === PAYMENT_STATE.CARD_REGISTRATION_COMPLETE ||
+      paymentsMachine.value === PAYMENT_STATE.CARD_EDITING_COMPLETE
+    ) {
+      navigate('/payments/cards')
+    }
+  }, [paymentsMachine.value, navigate])
 
-            changeStep('complete-card')
-          }}
-          validate={Step1Validate}
-        >
-          <Step1 />
-        </Form>
-      </Funnel.Step>
+  if (paymentsMachine.value === PAYMENT_STATE.CARD_REGISTRATION_START) {
+    return (
+      <Form
+        initialValues={paymentsMachine.context.registration}
+        onSubmit={(values) => paymentActorRef.send({ type: 'SUBMIT', value: values })}
+        validate={Step1Validate}
+      >
+        <Step1 />
+      </Form>
+    )
+  }
 
-      <Funnel.Step name="complete-card">
-        <button onClick={() => changeStep('add-card')}> 이전</button>
-        <div>등록 완료 페이지 입니다.</div>
-      </Funnel.Step>
-    </Funnel>
-  )
+  if (step2ConditionList.includes(paymentsMachine.value)) {
+    return (
+      <Form
+        initialValues={paymentsMachine.context.cardAdditionalInfo}
+        validate={step2Validate}
+        onSubmit={(values) => paymentActorRef.send({ type: 'POST_NICKNAME', value: values })}
+      >
+        <Step2 />
+      </Form>
+    )
+  }
+
+  if (paymentsMachine.matches(PAYMENT_STATE.CARD_EDIT)) {
+    return (
+      <Form
+        initialValues={paymentsMachine.context.cardAdditionalInfo}
+        validate={step2Validate}
+        onSubmit={(values) => {
+          paymentActorRef.send({ type: 'EDIT_NICKNAME', value: values.nickName })
+        }}
+      >
+        <Step2 />
+      </Form>
+    )
+  }
+
+  return null
 }

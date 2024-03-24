@@ -1,11 +1,15 @@
-import { FormType } from '../../type'
 import {
   CARD_HOLDER_NAME_MAX_LENGTH,
+  CARD_NICKNAME_NAX_LENGTH,
   CARD_NUMBER_INPUT_REGEX,
   CARD_PASSWORD_REGEX,
   EXPIRATION_DATE_INPUT_REG,
   SECURITY_CODE_REG,
-} from './const'
+} from '@/service/payments/payments.const'
+import {
+  CardAdditionalInitialValues,
+  RegistrationInitialValues,
+} from '@/service/payments/payments.type'
 
 const checkExpirationDate = (expirationDate: string) => {
   if (!EXPIRATION_DATE_INPUT_REG.test(expirationDate)) {
@@ -39,8 +43,8 @@ const checkCardPassword = (password: string) => {
   return CARD_PASSWORD_REGEX.test(password)
 }
 
-export const Step1Validate = (values: FormType) => {
-  const errors: Record<keyof FormType, string> = {
+export const Step1Validate = (values: RegistrationInitialValues) => {
+  const errors: Record<keyof RegistrationInitialValues, string> = {
     cardholderName: '',
     cardNumber1: '',
     cardNumber2: '',
@@ -86,6 +90,18 @@ export const Step1Validate = (values: FormType) => {
 
   if (!checkCardPassword(values.cardPassword2)) {
     errors.cardPassword2 = '카드 비밀번호의 앞 2자리를 입력해 주세요.'
+  }
+
+  return errors
+}
+
+export const step2Validate = (values: CardAdditionalInitialValues) => {
+  const errors: Record<keyof CardAdditionalInitialValues, string> = {
+    nickName: '',
+  }
+
+  if (values.nickName.length > CARD_NICKNAME_NAX_LENGTH) {
+    errors.nickName = '카드 별칭 최대 길이는 10자리입니다.'
   }
 
   return errors
