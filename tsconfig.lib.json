@@ -3,10 +3,9 @@
   "compilerOptions": {
     "outDir": "./dist",
     "declaration": true,
-    "declarationMap": true,
     "module": "ESNext",
     "target": "es6"
   },
-  "include": ["src/index.tsx", "src/@types/**/*"],
+  "include": ["src/index.tsx", "src/components/common/CardImage.tsx", "src/components/npm", "src/hooks/usePaymentInfo.ts", "src/steps", "src/@types", "src/types"],
   "exclude": ["node_modules", "vite.config.ts", "src/**/*.test.ts", "src/**/*.test.tsx", "src/**/*.spec.ts", "src/**/*.stories.tsx", "src/stories/**/*"]
 }

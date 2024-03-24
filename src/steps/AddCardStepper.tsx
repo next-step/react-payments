@@ -4,7 +4,7 @@ import AddCardForm from 'src/steps/add-card-form/AddCardForm';
 import CardList from 'src/steps/card-list/CardList';
 import AddCardFinish from 'src/steps/add-card-finish/AddCardFinish';
 import { useAddCardMachineActorRef, useAddCardMachineSelector } from 'src/machines/addCardMachine';
-import type { CardInfoWithId } from 'src/machines/addCardMachine';
+import type { CardInfoWithId } from 'src/types/card.type';
 
 export interface AddCardStepperProps {
 	cardList?: CardInfoWithId[];

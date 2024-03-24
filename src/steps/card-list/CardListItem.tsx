@@ -1,12 +1,20 @@
-import { CardInfoWithId } from 'src/machines/addCardMachine';
+import { CSSProperties } from 'react';
+
+import { CardInfoWithId } from 'src/types/card.type';
 import { useAddCardMachineActorRef } from 'src/machines/addCardMachine';
-import CardImage from 'src/components/common/CardImage';
+import CardImage, { CardImageProps } from 'src/components/common/CardImage';
 
 export interface CardListItemProps extends CardInfoWithId {
 	onDelete?: (id: string) => void;
+	styles?: {
+		container?: CSSProperties;
+		cardImage?: CardImageProps['styles'];
+		nickname?: CSSProperties;
+		deleteButton?: CSSProperties;
+	};
 }
 
-export default function CardListItem({ onDelete, ...card }: CardListItemProps) {
+export default function CardListItem({ onDelete, styles, ...card }: CardListItemProps) {
 	const { send } = useAddCardMachineActorRef();
 
 	const handleClickCard = () => {
@@ -20,10 +28,12 @@ export default function CardListItem({ onDelete, ...card }: CardListItemProps) {
 	};
 
 	return (
-		<div className="card-list-item cursor-pointer w-fit">
-			<CardImage {...card} onClick={handleClickCard} />
-			<span className="card-nickname">{card.cardNickname}</span>
-			<button className="delete-card" onClick={handleDeleteCard}>
+		<div className="card-list-item cursor-pointer w-fit" style={styles?.container}>
+			<CardImage {...card} onClick={handleClickCard} styles={styles?.cardImage} />
+			<span className="card-nickname" style={styles?.nickname}>
+				{card.cardNickname}
+			</span>
+			<button className="delete-card" onClick={handleDeleteCard} style={styles?.deleteButton}>
 				✕
 			</button>
 		</div>

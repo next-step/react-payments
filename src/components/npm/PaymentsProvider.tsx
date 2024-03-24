@@ -1,6 +1,6 @@
-import { useEffect, ReactNode } from 'react';
+import { useEffect, ReactNode, CSSProperties } from 'react';
 
-import type { CardInfoWithId } from 'src/machines/addCardMachine';
+import type { CardInfoWithId } from 'src/types/card.type';
 import {
 	AddCardMachineProvider,
 	useAddCardMachineActorRef,
@@ -11,6 +11,10 @@ export interface PaymentsProviderProps {
 	children: ReactNode;
 	initialSettings?: {
 		cardList?: CardInfoWithId[];
+	};
+	styles?: {
+		root?: CSSProperties;
+		app?: CSSProperties;
 	};
 }
 
@@ -30,10 +34,10 @@ export function InitializeWrapper({ children, initialSettings }: PaymentsProvide
 	return <>{children}</>;
 }
 
-export default function PaymentsProvider({ children, initialSettings }: PaymentsProviderProps) {
+export default function PaymentsProvider({ children, initialSettings, styles }: PaymentsProviderProps) {
 	return (
-		<div className="root">
-			<div className="app">
+		<div className="root" style={styles?.root}>
+			<div className="app" style={styles?.app}>
 				<AddCardMachineProvider>
 					<InitializeWrapper initialSettings={initialSettings}>{children}</InitializeWrapper>
 				</AddCardMachineProvider>

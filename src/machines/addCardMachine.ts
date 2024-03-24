@@ -7,24 +7,7 @@ import { cardInfoStringLengthSchema } from 'src/schema/cardInfoStringLengthSchem
 import type { CardListItemProps } from 'src/steps/card-list/CardListItem';
 import type { AddCardFormProps } from 'src/steps/add-card-form/AddCardForm';
 import type { AddCardFinishProps } from 'src/steps/add-card-finish/AddCardFinish';
-
-export interface CardInfo {
-	cardNumberFirstSegment: string;
-	cardNumberSecondSegment: string;
-	cardNumberThirdSegment: string;
-	cardNumberFourthSegment: string;
-	cardOwnerName: string;
-	cardExpirationDate: string;
-	cardPasswordFirstDigit: string;
-	cardPasswordSecondDigit: string;
-	cardSecurityCode: string;
-	cardNickname: string;
-	cardCompanyCode: string;
-}
-
-export interface CardInfoWithId extends CardInfo {
-	id: string;
-}
+import type { CardInfo, CardInfoWithId } from 'src/types/card.type';
 
 export const initialCardInfo: CardInfo = {
 	cardNumberFirstSegment: '',
@@ -185,13 +168,18 @@ export const addCardMachine = createMachine(
 			}),
 			addCard: enqueueActions(({ enqueue, event, context, check }) => {
 				if (event.type === 'ADD_CARD' && check({ type: 'isAddCardFormValid' })) {
-					event.onSubmit?.(context.cardInfo);
-
 					const newId = nanoid();
 
+					const newCardInfo = {
+						...context.cardInfo,
+						id: newId,
+					};
+
+					event.onSubmit?.(newCardInfo);
+
 					enqueue.assign({
-						cardList: [...context.cardList, { ...context.cardInfo, id: newId }],
-						selectedCard: { ...context.cardInfo, id: newId },
+						cardList: [...context.cardList, newCardInfo],
+						selectedCard: newCardInfo,
 						cardInfo: { ...initialCardInfo },
 					});
 

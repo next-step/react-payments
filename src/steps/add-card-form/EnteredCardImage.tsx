@@ -1,9 +1,13 @@
 import { shallowEqual } from '@xstate/react';
 
 import { useAddCardMachineSelector } from 'src/machines/addCardMachine';
-import CardImage from 'src/components/common/CardImage';
+import CardImage, { CardImageProps } from 'src/components/common/CardImage';
 
-export default function EnteredCardImage() {
+export interface EnteredCardImageProps {
+	styles?: CardImageProps['styles'];
+}
+
+export default function EnteredCardImage({ styles }: EnteredCardImageProps) {
 	const {
 		cardCompanyCode,
 		cardOwnerName,
@@ -34,6 +38,7 @@ export default function EnteredCardImage() {
 			cardNumberThirdSegment={cardNumberThirdSegment}
 			cardNumberFourthSegment={cardNumberFourthSegment}
 			cardExpirationDate={cardExpirationDate}
+			styles={styles}
 		/>
 	);
 }

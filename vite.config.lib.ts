@@ -5,7 +5,21 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
-	plugins: [react(), tsconfigPaths(), dts({ tsconfigPath: './tsconfig.lib.json' })],
+	plugins: [
+		react(),
+		tsconfigPaths(),
+		dts({
+			tsconfigPath: './tsconfig.lib.json',
+		}),
+	],
+	resolve: {
+		alias: [
+			{
+				find: 'src',
+				replacement: path.resolve(__dirname, 'src'),
+			},
+		],
+	},
 	build: {
 		lib: {
 			entry: path.resolve(__dirname, 'src/index.tsx'),

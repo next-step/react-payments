@@ -1,6 +1,16 @@
+import { CSSProperties } from 'react';
 import { useAddCardMachineActorRef } from 'src/machines/addCardMachine';
 
-export default function AddCardButton() {
+export interface AddCardButtonProps {
+	styles?: {
+		container?: CSSProperties;
+		cardBox?: CSSProperties;
+		plus?: CSSProperties;
+		emptyCard?: CSSProperties;
+	};
+}
+
+export default function AddCardButton({ styles }: AddCardButtonProps) {
 	const { send } = useAddCardMachineActorRef();
 
 	const handleClickAddCard = () => {
@@ -8,10 +18,12 @@ export default function AddCardButton() {
 	};
 
 	return (
-		<div className="card-list-item">
-			<button className="card-box " onClick={handleClickAddCard} data-testid="add-card-button">
-				<div className="empty-card small-card">
-					<div className="add-card">+</div>
+		<div className="card-list-item" style={styles?.container}>
+			<button className="card-box" onClick={handleClickAddCard} data-testid="add-card-button" style={styles?.cardBox}>
+				<div className="empty-card small-card" style={styles?.emptyCard}>
+					<div className="add-card" style={styles?.plus}>
+						+
+					</div>
 				</div>
 			</button>
 		</div>
