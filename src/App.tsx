@@ -1,6 +1,9 @@
-import { useState } from 'react'
 import './App.css'
-import RegistCard from './components/page/registCard'
+import useStepper from './hooks/useStepper'
+import RegistCard, { RegisterDataType } from './components/page/RegistCard'
+import Navigation from './components/navigation/navigation'
+import RegistEnd from './components/page/RegistEnd'
+import { useState } from 'react'
 
 /**
  * step 관리
@@ -12,12 +15,39 @@ import RegistCard from './components/page/registCard'
  * @returns
  */
 
+type Step = '카드목록' | '카드추가' | '카드등록완료'
+
+const INITIAL_CARD_STATE: RegisterDataType = {
+	cardNumber: '',
+	expirationDate: '',
+	ownerName: '',
+	placeholder: '',
+	securityCode: '',
+	secretCode: '',
+}
+
 function App() {
-  return (
-    <div className="app" id="app">
-      <RegistCard />
-    </div>
-  )
+	const { step, setStep, Stepper, Step } = useStepper<Step>('카드추가')
+	const [registerData, setRegisterData] = useState<RegisterDataType>(INITIAL_CARD_STATE)
+
+	return (
+		<div className="app" id="app">
+			<Navigation currentStageName={step!}></Navigation>
+
+			<Stepper>
+				<Step name="카드추가">
+					<RegistCard
+						setRegisterData={setRegisterData}
+						onPrev={() => setStep('카드목록')}
+						onNext={() => setStep('카드등록완료')}
+					/>
+				</Step>
+				<Step name="카드등록완료">
+					<RegistEnd registCardInfo={registerData} />
+				</Step>
+			</Stepper>
+		</div>
+	)
 }
 
 export default App
