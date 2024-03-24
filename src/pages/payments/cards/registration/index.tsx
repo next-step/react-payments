@@ -20,14 +20,14 @@ export const AddingCard = () => {
 
   useEffect(() => {
     if (
-      paymentsMachine.value === 'card-registration-complete' ||
-      paymentsMachine.value === 'card-editing-complete'
+      paymentsMachine.value === PAYMENT_STATE.CARD_REGISTRATION_COMPLETE ||
+      paymentsMachine.value === PAYMENT_STATE.CARD_EDITING_COMPLETE
     ) {
       navigate('/payments/cards')
     }
   }, [paymentsMachine.value, navigate])
 
-  if (paymentsMachine.value === 'card-registration-start') {
+  if (paymentsMachine.value === PAYMENT_STATE.CARD_REGISTRATION_START) {
     return (
       <Form
         initialValues={paymentsMachine.context.registration}
