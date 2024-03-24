@@ -1,6 +1,5 @@
 {
   "name": "@sxungchxn/react-payments",
-  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -16,7 +15,7 @@
     "test:watch": "vitest --watch",
     "chromatic": "npx chromatic --project-token=chpt_496b68d5c043834"
   },
-  "homepage": "https://sxungchxn.github.io/react-payments/",
+  "repository": "https://github.com/sxungchxn/react-payments",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
