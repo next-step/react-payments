@@ -5,16 +5,15 @@ import Container from '../container'
 import Input from '../input/input'
 import BasicLayout from '../layout/basicLayout'
 import './registCard.css'
-import CardBox from '../cardBox'
+import CardBox from '../CardBox'
 import useInput from '../../hooks/useInput'
 
 export type RegisterDataType = {
 	cardNumber: string
 	expirationDate: string
 	ownerName: string
-	placeholder?: string
-	securityCode: string
-	secretCode: string
+	securityCode?: string
+	secretCode?: string
 }
 
 type RegistCardProps = {
@@ -31,7 +30,6 @@ const CARD_NUMBER_LENGTH = 4
  */
 const RegistCard = (props: RegistCardProps) => {
 	const { setRegisterData, onPrev, onNext } = props
-	// const [registerData, setRegisterData] = useState<RegisterDataType>(INITIAL_CARD_STATE)
 
 	// 카드번호 - 1번째
 	const { value: firstCardNumber, handleChange: handleChangeCardNumberFirstFunc } = useInput('')
@@ -103,9 +101,9 @@ const RegistCard = (props: RegistCardProps) => {
 				</BasicLayout.Header>
 				<BasicLayout.Main>
 					<CardBox
-						name={ownerNameValue}
-						expirationDate={expirationDate}
 						cardNumber={`${firstCardNumber}${secondCardNumber}${thirdCardMaskedNumber}${fourthCardMaskedNumber}`}
+						expirationDate={expirationDate}
+						ownerName={ownerNameValue}
 					/>
 					<Container title="카드 번호">
 						<div className="container-flex">
@@ -313,7 +311,7 @@ const RegistCard = (props: RegistCardProps) => {
 					</Container>
 				</BasicLayout.Main>
 				<BasicLayout.Footer className="button-box">
-					{/* button - isActive 상태 넣기 */}
+					{/* @TODO: button - isActive 상태 넣기 */}
 					<button
 						type="button"
 						className="button-text"
