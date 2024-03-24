@@ -7,7 +7,7 @@ interface DisplayProps {
 
 const Display: React.FC<DisplayProps> = ({className, value, defaultValue}) => {
     return (
-        <span className={className}>{value !== undefined && value !== "" ? value : defaultValue}</span>
+        <span className={className}>{value || defaultValue}</span>
     )
 }
 

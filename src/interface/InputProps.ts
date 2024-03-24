@@ -1,10 +1,6 @@
-export interface InputProps {
-    type: string
-    className: string
-    maxLength?: number
-    placeHolder?: string
+import React from "react";
+
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>  {
     inputRule?: (value: string) => boolean
-    inputChange?: (value: string) => void
-    disabled?: boolean
     defaultState?: string
 }

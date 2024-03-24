@@ -14,15 +14,15 @@ const Card: React.FC<CardProps> = ({cardName, cardNumber, name, cardExpireDate, 
     const formattedCardNumber = () => {
         if (cardNumber) {
             let {first, second, third, fourth} = cardNumber
-            if (first.length === 4) {
+            if (first.length > 0) {
                 first = first + "-"
             }
-            if (second.length === 4) {
+            if (second.length > 0) {
                 second = second + "-"
             }
             const thirdSecret = third.length === 4 ? "****-" : "*".repeat(third.length)
             const fourthSecret = fourth.length === 4 ? "****" : "*".repeat(fourth.length)
-            return `${first} ${second} ${thirdSecret} ${fourthSecret}`
+            return `${first}${second}${thirdSecret}${fourthSecret}`
         }
         return ''
     }

@@ -1,6 +1,5 @@
-export interface AddCardProps {
-    cardName: string
-    cardNumber: { first: string, second: string, third: string, fourth: string }
-    name: string
+import {CardInfoProps} from "./CardInfoProps.ts";
+
+export interface AddCardProps extends CardInfoProps {
     expireDate: { month: string, year: string }
 }

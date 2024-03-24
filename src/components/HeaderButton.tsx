@@ -1,21 +1,16 @@
 import React from 'react';
-import {useStepper} from "../context/StepperContext.tsx";
 import IntrinsicElements = React.JSX.IntrinsicElements;
 
 export interface HeaderButtonProps {
     tag: string
     className: string
-    step?: string
     value?: string
+    event?: () => void
 }
 
-
-const HeaderButton: React.FC<HeaderButtonProps> = ({tag, className, step, value}) => {
-    const {setCurrentStep} = useStepper()
-    const handleClick = () => {
-        if (step) {
-            setCurrentStep(step)
-        }
+const HeaderButton: React.FC<HeaderButtonProps> = ({tag, className, value, event}) => {
+    const handleClickEvent = () => {
+        event?.()
     }
 
     const Tag = tag as keyof IntrinsicElements;
@@ -24,8 +19,7 @@ const HeaderButton: React.FC<HeaderButtonProps> = ({tag, className, step, value}
         <>
             <Tag
                 className={className}
-                onClick={handleClick}
-            >
+                onClick={handleClickEvent}>
                 {value}
             </Tag>
         </>

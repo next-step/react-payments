@@ -1,7 +1,6 @@
-export interface CardProps {
-    cardName?: string
-    cardNumber?: { first: string, second: string, third: string, fourth: string }
-    name?: string
+import {CardInfoProps} from "./CardInfoProps.ts";
+
+export interface CardProps extends CardInfoProps{
     cardExpireDate?: { month: string, year: string }
     onClick?: () => void
 }

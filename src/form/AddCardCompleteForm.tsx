@@ -7,6 +7,9 @@ import AddCardComplete from "../components/AddCardComplete.tsx";
 function AddCardCompleteForm() {
     const {cards} = useContext(CardContext)
     const [cardAlias, setCardAlias] = useState('')
+    if (cards.length === 0) {
+        return
+    }
     const card = cards[cards.length-1]
 
     const formattedCardNumber = () => {
@@ -43,8 +46,8 @@ function AddCardCompleteForm() {
                         <Input
                             className={"input-underline w-75"}
                             type={"text"}
-                            placeHolder={"카드의 별칭을 입력해주세요."}
-                            inputChange={setCardAlias}>
+                            placeholder={"카드의 별칭을 입력해주세요."}
+                            onChange={(event) => setCardAlias(event.target.value)}>
                         </Input>
                     </div>
                     <AddCardComplete

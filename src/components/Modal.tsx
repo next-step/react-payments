@@ -1,50 +1,33 @@
 import React from "react"
 import {ModalProps} from "../interface/ModalProps.ts";
+import {CardType} from "../enums/CardType.ts";
 
 const Modal: React.FC<ModalProps> = ({isOpen, selectCard}) => {
+    const cardNames = Object.keys(CardType);
+    const chunkSize = 4;
+    const chunkedCardNames: string[][] = [];
+    for (let i = 0; i < cardNames.length; i += chunkSize) {
+        chunkedCardNames.push(cardNames.slice(i, i + chunkSize));
+    }
     const cardSelect = (cardName: string) => {
         selectCard(cardName)
     }
 
     return (
-        <div className="modal-dimmed" style={{ display: isOpen ? "flex" : "none" }}>
+        <div className="modal-dimmed" style={{display: isOpen ? "flex" : "none"}}>
             <div className="modal">
-                <div className="flex-center">
-                    <div className="modal-item-container" onClick={() => cardSelect("포코 카드")}>
-                        <div className="modal-item-dot"></div>
-                        <span className="modal-item-name">포코 카드</span>
+                {chunkedCardNames.map((chunk, index) => (
+                    <div key={index} className="flex-center">
+                        {chunk.map((key) => (
+                            <div className="modal-item-container"
+                                 onClick={() => cardSelect(CardType[key as keyof typeof CardType])}>
+                                <div className="modal-item-dot"></div>
+                                <span
+                                    className="modal-item-name">{CardType[key as keyof typeof CardType]}</span>
+                            </div>
+                        ))}
                     </div>
-                    <div className="modal-item-container" onClick={() => cardSelect("준 카드")}>
-                        <div className="modal-item-dot"></div>
-                        <span className="modal-item-name">준 카드</span>
-                    </div>
-                    <div className="modal-item-container" onClick={() => cardSelect("현석 카드")}>
-                        <div className="modal-item-dot"></div>
-                        <span className="modal-item-name">현석 카드</span>
-                    </div>
-                    <div className="modal-item-container" onClick={() => cardSelect("윤호 카드")}>
-                        <div className="modal-item-dot"></div>
-                        <span className="modal-item-name">윤호 카드</span>
-                    </div>
-                </div>
-                <div className="flex-center">
-                    <div className="modal-item-container" onClick={() => cardSelect("환오 카드")}>
-                        <div className="modal-item-dot"></div>
-                        <span className="modal-item-name">환오 카드</span>
-                    </div>
-                    <div className="modal-item-container" onClick={() => cardSelect("태은 카드")}>
-                        <div className="modal-item-dot"></div>
-                        <span className="modal-item-name">태은 카드</span>
-                    </div>
-                    <div className="modal-item-container" onClick={() => cardSelect("준일 카드")}>
-                        <div className="modal-item-dot"></div>
-                        <span className="modal-item-name">준일 카드</span>
-                    </div>
-                    <div className="modal-item-container" onClick={() => cardSelect("은규 카드")}>
-                        <div className="modal-item-dot"></div>
-                        <span className="modal-item-name">은규 카드</span>
-                    </div>
-                </div>
+                ))}
             </div>
         </div>
     )
