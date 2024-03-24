@@ -10,7 +10,7 @@ import {
   Card,
   CardCodeInputHandle,
   CardExpDateInputHandle,
-  CardTypePicker,
+  CardTypePickBottomSheet,
   SecurityNumberPad,
   CardPinInputHandle,
   Tooltip,
@@ -53,7 +53,7 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
 
   const handleClickCard = () => {
     openOverlay(
-      <CardTypePicker
+      <CardTypePickBottomSheet
         cardTypeList={Object.values(CARD_TYPE)}
         onClose={closeOverlay}
         selectedCardType={cardType}

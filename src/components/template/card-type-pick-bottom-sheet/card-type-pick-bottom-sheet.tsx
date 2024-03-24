@@ -5,19 +5,19 @@ import { CardType } from '@/types/card'
 import { IconCheck } from '@tabler/icons-react'
 import { vars } from '@/styles'
 
-export interface CardTypePickerProps {
+export interface CardTypePickBottomSheetProps {
   onClose: BottomSheetContentProps['onClose']
   cardTypeList: CardType[]
   selectedCardType?: CardType
   onSelectCardType: (value: CardType) => void
 }
 
-export const CardTypePicker = ({
+export const CardTypePickBottomSheet = ({
   cardTypeList,
   onClose,
   selectedCardType,
   onSelectCardType,
-}: CardTypePickerProps) => {
+}: CardTypePickBottomSheetProps) => {
   const handleClickCardTypeItem = (cardType: CardType) => () => {
     onSelectCardType?.(cardType)
     onClose()
