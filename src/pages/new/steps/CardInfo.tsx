@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Header, Card, Footer } from '@/components';
 import * as styles from './cardInfo.css';
@@ -14,7 +14,7 @@ interface CardInfoProps {
 }
 const CardInfo = ({ next }: CardInfoProps) => {
   const navigate = useNavigate();
-  const [snapshot, send, actorRef] = useMachine(formMachine);
+  const [snapshot, send] = useMachine(formMachine);
   const formRef = useRef<HTMLFormElement | null>(null);
   const formActorRef = FormMachineContext.useActorRef();
   const cardNumber1Ref = useRef<HTMLInputElement | null>(null);
@@ -30,24 +30,9 @@ const CardInfo = ({ next }: CardInfoProps) => {
   const password3Ref = useRef<HTMLInputElement | null>(null);
   const password4Ref = useRef<HTMLInputElement | null>(null);
 
-  const formItemRefList = useMemo<
+  const formItemRefObj = useRef<
     Record<string, React.MutableRefObject<HTMLInputElement | null>>
-  >(() => {
-    return {
-      cardNumber1Ref,
-      cardNumber2Ref,
-      cardNumber3Ref,
-      cardNumber4Ref,
-      expireDateMonthRef,
-      expireDateYearRef,
-      cardOwnerRef,
-      cvcRef,
-      password1Ref,
-      password2Ref,
-      password3Ref,
-      password4Ref,
-    };
-  }, [
+  >({
     cardNumber1Ref,
     cardNumber2Ref,
     cardNumber3Ref,
@@ -60,14 +45,16 @@ const CardInfo = ({ next }: CardInfoProps) => {
     password2Ref,
     password3Ref,
     password4Ref,
-  ]);
+  });
   const canSave = snapshot.status === 'done';
 
-  actorRef.subscribe((snapshot) => {
-    const Ref = formItemRefList[`${snapshot.value}Ref`];
-    if (!Ref) return;
-    Ref.current?.focus();
-  });
+  useEffect(() => {
+    const target = `${snapshot.value}Ref`;
+    const refTarget = formItemRefObj?.current[target];
+    if (!refTarget) return;
+    refTarget.current?.focus();
+  }, [snapshot]);
+
   const {
     context: { data },
   } = snapshot;
@@ -146,7 +133,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
                   <div key={i} className={styles.cardNumberInputBox}>
                     <Input
                       required
-                      ref={formItemRefList[`cardNumber${i}Ref`]}
+                      ref={formItemRefObj?.current[`cardNumber${i}Ref`]}
                       id={`cardNumber${i}`}
                       name={`cardNumber${i}`}
                       className={styles.textCenter}
@@ -290,7 +277,7 @@ const CardInfo = ({ next }: CardInfoProps) => {
                     required
                     id={`password${i}`}
                     name={`password${i}`}
-                    ref={formItemRefList[`password${i}Ref`]}
+                    ref={formItemRefObj?.current[`password${i}Ref`]}
                     className={styles.textCenter}
                     htmpType='password'
                     inputMode='numeric'
