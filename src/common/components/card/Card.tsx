@@ -19,9 +19,8 @@ export default function Card({ mode, onClick, ...cardInfo }: CardProps) {
     cardType,
   } = cardInfo;
 
-  const cardTypeColor = CARD_TYPE_LIST.find(
-    (card) => card.type === cardType
-  )?.color;
+  const cardTypeColor =
+    CARD_TYPE_LIST.find((card) => card.type === cardType)?.color ?? "gray";
 
   const cardContentContainerClass =
     mode === "preview"

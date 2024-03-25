@@ -53,19 +53,19 @@
 }
 
 .red {
-  background-color: #e24141;
+  background-color: var(--color-red);
 }
 
 .blue {
-  background-color: #547ce4;
+  background-color: var(--color-blue);
 }
 
 .green {
-  background-color: #73bc6d;
+  background-color: var(--color-green);
 }
 
 .violet {
-  background-color: #de59b9;
+  background-color: var(--color-violet);
 }
 
 .gradient {
@@ -73,18 +73,22 @@
     50% 50% at 50% 50%,
     rgba(4, 192, 158, 0.31) 0%,
     rgba(4, 192, 158, 0.457344) 65.1%,
-    #04c09e 100%
+    var(--color-gradient) 100%
   );
 }
 
 .pink {
-  background-color: #e76e9a;
+  background-color: var(--color-pink);
 }
 
 .orange {
-  background-color: #f37d3b;
+  background-color: var(--color-orange);
 }
 
 .yellow {
-  background-color: #fbcd58;
+  background-color: var(--color-yellow);
+}
+
+.gray {
+  background-color: var(--color-gray);
 }

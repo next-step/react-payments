@@ -15,31 +15,25 @@ export default function CardTypeDialog() {
     cardActionRef.send({ type: "TOGGLE", value: false });
   };
 
+  const renderCardTypes = (cardTypes: CardType[]) => (
+    <div className="flex-center">
+      {cardTypes.map((cardType) => (
+        <div key={cardType.id} className="modal-item-container">
+          <div
+            className={`modal-item-dot ${cardType.color}`}
+            onClick={() => handleCardTypeClick(cardType)}
+          />
+          <span className="modal-item-name">{cardType.type}</span>
+        </div>
+      ))}
+    </div>
+  );
+
   return (
     <div className="modal-dimmed">
       <div className="modal">
-        <div className="flex-center">
-          {CARD_TYPE_LIST.slice(0, 4).map((cardType) => (
-            <div key={cardType.id} className="modal-item-container">
-              <div
-                className={`modal-item-dot ${cardType.color}`}
-                onClick={() => handleCardTypeClick(cardType)}
-              ></div>
-              <span className="modal-item-name">{cardType.type}</span>
-            </div>
-          ))}
-        </div>
-        <div className="flex-center">
-          {CARD_TYPE_LIST.slice(4).map((cardType) => (
-            <div key={cardType.id} className="modal-item-container">
-              <div
-                className={`modal-item-dot ${cardType.color}`}
-                onClick={() => handleCardTypeClick(cardType)}
-              ></div>
-              <span className="modal-item-name">{cardType.type}</span>
-            </div>
-          ))}
-        </div>
+        {renderCardTypes(CARD_TYPE_LIST.slice(0, 4))}
+        {renderCardTypes(CARD_TYPE_LIST.slice(4))}
       </div>
     </div>
   );
