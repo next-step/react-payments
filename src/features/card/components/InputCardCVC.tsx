@@ -1,23 +1,21 @@
 import { ChangeEvent } from "react";
 
+import { CardContext } from "../../../App";
+
 import Input from "common/components/input";
 
-import { CardInfo } from "features/card/types/card.type";
 import { MAX_CARD_CVC_LENGTH } from "features/card/data/constants";
 
-interface InputCardCVCProps {
-  cardInfo: CardInfo;
-  onChangeCardInfo: (field: keyof CardInfo, value: string) => void;
-}
-
-export default function InputCardCVC({
-  cardInfo,
-  onChangeCardInfo,
-}: InputCardCVCProps) {
-  const { cvc } = cardInfo;
+export default function InputCardCVC() {
+  const cardState = CardContext.useSelector((state) => state.context.card);
+  const cardActionRef = CardContext.useActorRef();
 
   const handleCardSecurityCodeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    onChangeCardInfo("cvc", e.target.value);
+    cardActionRef.send({
+      type: "SET_CARD_INFO",
+      field: "cvc",
+      value: e.target.value,
+    });
   };
 
   return (
@@ -25,7 +23,7 @@ export default function InputCardCVC({
       <Input.Label>보안코드 (CVC/CVV)</Input.Label>
       <Input.Basic
         type="password"
-        value={cvc}
+        value={cardState.cvc}
         className="input-basic w-25"
         maxLength={MAX_CARD_CVC_LENGTH}
         onChange={handleCardSecurityCodeChange}

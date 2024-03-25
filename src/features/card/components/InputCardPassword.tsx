@@ -1,31 +1,32 @@
 import { ChangeEvent, useRef } from "react";
 
+import { CardContext } from "../../../App";
+
 import Input from "common/components/input";
 
 import { CardInfo } from "features/card/types/card.type";
 import { MAX_CARD_PASSWORD_FIELD_LENGTH } from "features/card/data/constants";
-
-interface InputCardPasswordProps {
-  cardInfo: CardInfo;
-  onChangeCardInfo: (field: keyof CardInfo, value: string) => void;
-}
 
 const CARD_PASSWORD_FIELD: (keyof CardInfo)[] = [
   "firstPassword",
   "secondPassword",
 ];
 
-export default function InputCardPassword({
-  cardInfo,
-  onChangeCardInfo,
-}: InputCardPasswordProps) {
+export default function InputCardPassword() {
   const inputRefs = useRef<(HTMLElement | null)[]>([]);
+
+  const cardState = CardContext.useSelector((state) => state.context.card);
+  const cardActionRef = CardContext.useActorRef();
 
   const handleCardPasswordChange =
     (index: number) => (e: ChangeEvent<HTMLInputElement>) => {
       const currentField = CARD_PASSWORD_FIELD[index];
 
-      onChangeCardInfo(currentField, e.target.value);
+      cardActionRef.send({
+        type: "SET_CARD_INFO",
+        field: currentField,
+        value: e.target.value,
+      });
 
       if (
         e.target.value.length === MAX_CARD_PASSWORD_FIELD_LENGTH &&
@@ -44,7 +45,7 @@ export default function InputCardPassword({
             key={field}
             ref={(el) => (inputRefs.current[index] = el)}
             type="password"
-            value={cardInfo[field]}
+            value={cardState[field]}
             maxLength={MAX_CARD_PASSWORD_FIELD_LENGTH}
             className="input-basic w-15"
             onChange={handleCardPasswordChange(index)}

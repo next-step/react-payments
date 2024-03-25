@@ -51,3 +51,44 @@
   font-size: 12px;
   letter-spacing: -0.085rem;
 }
+
+.red {
+  background-color: var(--color-red);
+}
+
+.blue {
+  background-color: var(--color-blue);
+}
+
+.green {
+  background-color: var(--color-green);
+}
+
+.violet {
+  background-color: var(--color-violet);
+}
+
+.gradient {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    rgba(4, 192, 158, 0.31) 0%,
+    rgba(4, 192, 158, 0.457344) 65.1%,
+    var(--color-gradient) 100%
+  );
+}
+
+.pink {
+  background-color: var(--color-pink);
+}
+
+.orange {
+  background-color: var(--color-orange);
+}
+
+.yellow {
+  background-color: var(--color-yellow);
+}
+
+.gray {
+  background-color: var(--color-gray);
+}
