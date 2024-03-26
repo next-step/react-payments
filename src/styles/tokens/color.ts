@@ -10,6 +10,7 @@ export const palette = {
   blue: '#547CE4',
   green: '#73BC6D',
   aqua: '#04C09E',
+  blueberry: '#686de0',
   gold: '#CBBA64',
   pink: '#E76E9A',
   orange: '#F37D3B',
@@ -24,4 +25,5 @@ export const color = {
   inherit: 'inherit',
   /** transparent */
   transparent: 'transparent',
+  dimBlack: 'rgba(0, 0, 0, 0.4)',
 }

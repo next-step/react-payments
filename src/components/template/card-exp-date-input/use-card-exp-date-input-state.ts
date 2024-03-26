@@ -27,19 +27,18 @@ export const useCardExpDateInputState = ({
 
   const handleChangeMonth = (e: ChangeEvent<HTMLInputElement>) => {
     const inputMonth = e.target.value
-    if (isNaN(Number(inputMonth))) return
-    if (Number(inputMonth) > 12) return
-    handleChangeExpDate(
-      [inputMonth, yearInputValue].filter(v => !isNil(v) && v.length > 0).join(separator),
-    )
+    const isInvalidMonthValue =
+      isNaN(Number(inputMonth)) ||
+      Number(inputMonth) > 12 ||
+      (inputMonth.length == 2 && Number(inputMonth) === 0)
+    if (isInvalidMonthValue) return
+    handleChangeExpDate([inputMonth, yearInputValue].filter(v => !isNil(v)).join(separator))
   }
 
   const handleChangeYear = (e: ChangeEvent<HTMLInputElement>) => {
     const inputYear = e.target.value
     if (isNaN(Number(inputYear))) return
-    handleChangeExpDate(
-      [monthInputValue, inputYear].filter(v => !isNil(v) && v.length > 0).join(separator),
-    )
+    handleChangeExpDate([monthInputValue, inputYear].filter(v => !isNil(v)).join(separator))
   }
   return {
     expDate,
