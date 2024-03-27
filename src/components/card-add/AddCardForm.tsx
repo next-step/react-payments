@@ -67,10 +67,6 @@ export default function AddCardForm() {
   const handleClickButton = () => {
     setIsClick(true);
 
-    if (!isFormFilled) {
-      return;
-    }
-
     addCardInList({
       id,
       cardNumber,

@@ -2,9 +2,11 @@ import { PropsWithChildren, createContext, useState } from 'react';
 
 import { CardType } from '../types/CardFormType';
 
+import isFulledCardForm from '../utils/isFulledCardForm';
+
 type InitialCards = {
   cards: CardType[];
-  getCardInList: (id: number) => CardType;
+  getCardInList: (id: number) => CardType | [];
   addCardInList: (card: CardType) => void;
   editCardInList: (card: CardType) => void;
   deleteCardInList: (id: number) => void;
@@ -34,6 +36,19 @@ export default function CardsProvider({ children }: PropsWithChildren) {
   };
 
   const addCardInList = (card: CardType) => {
+    const { cardNumber, cardPassword, securityCode, expirationDate } = card;
+
+    const isFormFilled = isFulledCardForm({
+      cardNumber,
+      cardPassword,
+      securityCode,
+      expirationDate,
+    });
+
+    if (!isFormFilled) {
+      return;
+    }
+
     setCards([card, ...cards]);
   };
 
