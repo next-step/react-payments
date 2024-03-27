@@ -16,29 +16,31 @@ type CardProps = {
   cardNumber: CardNumberType;
   ownerName: string;
   expirationDate: ExpirationDateType;
+  cardCompany: string;
 };
+
+const SLASH = '/';
+const HYPHEN = '-';
+
+const specialCharacter = (
+  value: string,
+  limit: number,
+  specialCharacter: string
+) => (value.length === limit ? specialCharacter : '');
 
 export default function Card({
   variant,
   cardNumber,
   ownerName,
   expirationDate,
+  cardCompany,
 }: CardProps) {
-  const SLASH = '/';
-  const HYPHEN = '-';
-
   const cardClassName = `card-text${variant === 'big' ? '__big' : ''}`;
-
-  const specialCharacter = (
-    value: string,
-    limit: number,
-    specialCharacter: string
-  ) => (value.length === limit ? specialCharacter : '');
 
   return (
     <>
       <div className="card-top">
-        <span className={cardClassName}>클린카드</span>
+        <span className={cardClassName}>{cardCompany} 카드</span>
       </div>
       <div className="card-middle">
         <div className={`${variant}-card__chip`}></div>
