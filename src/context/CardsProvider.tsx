@@ -15,7 +15,7 @@ const initialCards: InitialCards = {
   getCardInList: () => [],
   addCardInList: () => null,
   editCardInList: () => null,
-  deleteCardInList: () => [],
+  deleteCardInList: () => null,
 };
 
 export const CardsContext = createContext(initialCards);
@@ -23,8 +23,12 @@ export const CardsContext = createContext(initialCards);
 export default function CardsProvider({ children }: PropsWithChildren) {
   const [cards, setCards] = useState<CardType[]>([]);
 
-  const getCardInList = (id: number) => {
+  const getCardInList = (id: number): CardType | [] => {
     const targetCard = cards.find((preCard) => preCard.id === id);
+
+    if (!targetCard) {
+      return [];
+    }
 
     return targetCard;
   };
