@@ -1,11 +1,12 @@
 {
-  "name": "react-payments",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@sxungchxn/react-payments",
+  "version": "0.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "rm -rf dist && tsc && vite build",
+    "build:lib": "rm -rf dist && tsc && vite build --config vite.lib.config.ts",
+    "publish:lib": "pnpm build:lib && pnpm publish",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
@@ -14,11 +15,27 @@
     "check-types": "tsc --noEmit",
     "test": "vitest --run",
     "test:watch": "vitest --watch",
-    "chromatic": "npx chromatic --project-token=chpt_496b68d5c043834",
-    "predeploy": "pnpm build",
-    "deploy": "gh-pages -d dist"
+    "chromatic": "npx chromatic --project-token=chpt_496b68d5c043834"
   },
-  "homepage": "https://sxungchxn.github.io/react-payments/",
+  "repository": "https://github.com/sxungchxn/react-payments",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "module": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles": {
+      "import": "./dist/style.css",
+      "require": "./dist/style.css"
+    }
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "dependencies": {
     "@tabler/icons-react": "^2.47.0",
     "@vanilla-extract/css": "^1.14.1",
@@ -26,12 +43,12 @@
     "@vanilla-extract/sprinkles": "^1.6.1",
     "@xstate/react": "^4.1.0",
     "clsx": "^2.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "uuid": "^9.0.1",
     "xstate": "^5.9.1"
   },
   "devDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "@storybook/addon-essentials": "^7.6.17",
     "@storybook/addon-interactions": "^7.6.17",
     "@storybook/addon-links": "^7.6.17",
@@ -67,6 +84,7 @@
     "storybook": "^7.6.17",
     "typescript": "^5.2.2",
     "vite": "^5.1.4",
+    "vite-plugin-dts": "^3.7.3",
     "vite-tsconfig-paths": "^4.3.1",
     "vitest": "^1.3.1"
   },

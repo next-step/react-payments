@@ -8,13 +8,21 @@ import {
   Header,
   BaseInput,
   Card,
+  CardCodeInputHandle,
+  CardExpDateInputHandle,
+  CardTypePickBottomSheet,
+  SecurityNumberPad,
+  CardPinInputHandle,
+  Tooltip,
 } from '@/components'
 import { CardInputState } from '@/types/card'
-import { FormEventHandler } from 'react'
+import { FormEventHandler, useRef } from 'react'
 import { useCardInputContext } from '@/contexts/card-input-context.tsx'
 import { useOverlay } from '@/hooks'
-import { CardTypePickBottomSheet } from '@/components'
 import { CARD_TYPE } from '@/constants/card-type.ts'
+import { IconHelpCircle } from '@tabler/icons-react'
+import { vars } from '@/styles'
+import { getCardTypeFromCardCode } from '@/utils/get-card-type-from-card-code'
 
 export interface CardInputFormStepProps {
   onClickPrev?: () => void
@@ -22,10 +30,15 @@ export interface CardInputFormStepProps {
 }
 
 export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepProps) => {
-  const { cardInput, setCardInput, resetCardInput } = useCardInputContext()
-
+  const { cardInput, cardInputError, validateCardInput, setCardInput, resetCardInput } =
+    useCardInputContext()
   const { cardCode, cardExpDate, cardName, cardCVC, cardPin, cardType } = cardInput
-  const [openBottomSheet, closeBottomSheet] = useOverlay()
+  const cardCodeInputRef = useRef<CardCodeInputHandle>(null)
+  const cardExpDateInputRef = useRef<CardExpDateInputHandle>(null)
+  const cardNameInputRef = useRef<HTMLInputElement>(null)
+  const cardPinInputRef = useRef<CardPinInputHandle>(null)
+
+  const [openOverlay, closeOverlay] = useOverlay()
 
   const handleClickPrev = () => {
     resetCardInput()
@@ -34,17 +47,58 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault()
-    if (!cardType) return
+    if (!validateCardInput(cardInput)) return
     onSubmit?.({ ...cardInput, cardType })
   }
 
   const handleClickCard = () => {
-    openBottomSheet(
+    openOverlay(
       <CardTypePickBottomSheet
         cardTypeList={Object.values(CARD_TYPE)}
-        onClose={closeBottomSheet}
+        onClose={closeOverlay}
         selectedCardType={cardType}
-        onSelectCardType={setCardInput('cardType')}
+        onSelectCardType={value => {
+          setCardInput('cardType')(value)
+          cardCodeInputRef.current?.focus()
+        }}
+      />,
+    )
+  }
+
+  const handleChangeCardCodeInput = (value: string) => {
+    if (value.length === 8) {
+      setCardInput('cardType')(getCardTypeFromCardCode(value))
+    }
+    setCardInput('cardCode')(value)
+  }
+
+  const handleopenCVCNumberPad = () => {
+    openOverlay(
+      <SecurityNumberPad
+        key="card-cvc"
+        title="보안 코드(CVC/CVV)를 입력하세요."
+        defaultValue={cardCVC}
+        maxLength={3}
+        onClose={closeOverlay}
+        onInput={setCardInput('cardCVC')}
+        onInputComplete={() => {
+          closeOverlay()
+          cardPinInputRef.current?.focus()
+        }}
+      />,
+    )
+  }
+
+  const handleOpenCardPinNumberPad = () => {
+    openOverlay(
+      <SecurityNumberPad
+        key="card-pin"
+        title="카드 비밀번호를 입력하세요."
+        defaultValue={cardPin}
+        maxLength={2}
+        onClose={closeOverlay}
+        onInput={setCardInput('cardPin')}
+        onInputComplete={closeOverlay}
       />,
     )
   }
@@ -76,36 +130,55 @@ export const CardInputFormStep = ({ onSubmit, onClickPrev }: CardInputFormStepPr
             label="카드 번호"
             width="100%"
             textAlign="center"
+            ref={cardCodeInputRef}
             value={cardCode}
-            onChange={setCardInput('cardCode')}
+            onChange={handleChangeCardCodeInput}
+            onInputComplete={cardExpDateInputRef.current?.focus}
+            error={cardInputError.cardCode}
           />
           <CardExpDateInput
             id="card-exp-date"
+            ref={cardExpDateInputRef}
             label="만료일"
             value={cardExpDate}
             onChange={setCardInput('cardExpDate')}
+            onInputComplete={() => cardNameInputRef.current?.focus()}
+            error={cardInputError.cardExpDate}
           />
           <CardNameInput
             id="card-name"
             label="카드 소유자 이름(선택)"
+            ref={cardNameInputRef}
             value={cardName}
             onChange={setCardInput('cardName')}
+            error={cardInputError.cardName}
           />
-          <BaseInput
-            id="card-cvc"
-            label="보안 코드(CVC/CVV)"
-            type="password"
-            maxLength={3}
-            width="100px"
-            textAlign="center"
-            value={cardCVC}
-            onChange={e => setCardInput('cardCVC')(e.target.value)}
-          />
+          <Flex alignItems="center" gap="24px">
+            <BaseInput
+              id="card-cvc"
+              label="보안 코드(CVC/CVV)"
+              type="password"
+              maxLength={3}
+              width="100px"
+              textAlign="center"
+              value={cardCVC}
+              readOnly
+              onKeyDown={e => e.preventDefault()}
+              onFocus={handleopenCVCNumberPad}
+              error={cardInputError.cardCVC}
+            />
+            <Tooltip label="카드 뒷면의 CVC란을 확인하세요">
+              <IconHelpCircle color={vars.color.aqua} size={32} />
+            </Tooltip>
+          </Flex>
           <CardPinInput
             id="card-pin"
             label="카드 비밀번호"
             value={cardPin}
-            onChange={setCardInput('cardPin')}
+            ref={cardPinInputRef}
+            readOnly
+            onFocus={handleOpenCardPinNumberPad}
+            error={cardInputError.cardPin}
           />
         </Flex>
         <Flex justifyContent="flex-end" paddingX="24px" paddingY="32px" marginTop="auto">

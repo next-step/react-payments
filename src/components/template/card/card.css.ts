@@ -16,7 +16,7 @@ export const CardContainer = recipe({
         padding: ` ${vars.space['8px']} ${vars.space['20px']}`,
       },
       md: {
-        width: '230px',
+        width: '250px',
         padding: ` ${vars.space['8px']} ${vars.space['14px']}`,
       },
     },
