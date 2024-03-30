@@ -1,6 +1,8 @@
 .button-box {
   width: 100%;
   text-align: right;
+  background: white;
+  border: 0;
 }
 
 .button-text {
