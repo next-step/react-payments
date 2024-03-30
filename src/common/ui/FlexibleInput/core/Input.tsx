@@ -14,6 +14,7 @@ const Input = ({ maxLength, value, onChange, ...rest }: InputProps) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	useEffect(() => {
+		if (!id) return;
 		addInput({ id, value: value ?? "", maxLength });
 	}, [value, maxLength, id, addInput]);
 

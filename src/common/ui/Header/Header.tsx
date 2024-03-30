@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { ReactNode } from "react";
 import IconButton from "../Button/IconButton";
 import Text from "../Text/Text";
+import { HEADER_HEIGHT } from "@/common/constants";
 
 export interface HeaderProps {
 	showBackButton?: boolean;
@@ -21,7 +22,6 @@ const Header = ({
 	backButtonCallback
 }: HeaderProps) => {
 	const onClickBackButton = () => {
-		window.history.back();
 		backButtonCallback && backButtonCallback();
 	};
 	return (
@@ -46,7 +46,7 @@ const HeaderContainer = styled.div`
 	left: 0;
 	background-color: ${theme.colors.white};
 
-	height: 56px;
+	height: ${HEADER_HEIGHT}px;
 	width: 100%;
 	display: flex;
 	align-items: center;

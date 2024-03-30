@@ -13,7 +13,7 @@ type Story = StoryObj<ButtonProps>;
 
 export const ButtonStory: Story = {
 	args: {
-		buttonColor: "cyan"
+		buttonColor: "grey400"
 	},
 	render: (args: ButtonProps) => {
 		return (

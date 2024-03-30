@@ -15,12 +15,15 @@
 	"dependencies": {
 		"@emotion/react": "^11.11.4",
 		"@emotion/styled": "^11.11.0",
+		"@xstate/react": "^4.1.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"react-router-dom": "^6.22.1"
+		"react-router-dom": "^6.22.1",
+		"xstate": "^5.9.1"
 	},
 	"devDependencies": {
 		"@emotion/babel-plugin": "^11.11.0",
+		"@statelyai/inspect": "^0.2.5",
 		"@storybook/addon-essentials": "^7.6.17",
 		"@storybook/addon-interactions": "^7.6.17",
 		"@storybook/addon-links": "^7.6.17",
@@ -45,7 +48,8 @@
 		"eslint-plugin-react-refresh": "^0.4.5",
 		"eslint-plugin-storybook": "^0.8.0",
 		"storybook": "^7.6.17",
-		"typescript": "^5.2.2",
+		"storybook-xstate-addon": "^2.3.9",
+		"typescript": "^5.4.2",
 		"vite": "^5.1.4"
 	}
 }

@@ -7,7 +7,7 @@ const sizeMap = {
 	xs: 15
 } as const;
 
-type IconName = "arrow-left";
+export type IconName = "arrow-left" | "setting" | "close";
 
 export interface IconProps {
 	name: IconName;

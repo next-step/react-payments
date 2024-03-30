@@ -3,6 +3,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import { InputWidth, widthVariable } from "../../utils";
 import FlexibleInput from "./FlexibleInput";
 import { InputProps } from "./core/Input";
+import { UniqueIdProvider } from "@/common/context/UniqueIdProvider";
 
 const meta: Meta<typeof FlexibleInput> = {
 	component: FlexibleInput,
@@ -27,16 +28,18 @@ const DefaultRender = (args: StoryArgs) => {
 		setInput({ ...input, inputValue: e.target.value });
 	};
 	return (
-		<FlexibleInput width={args.width}>
-			<FlexibleInput.Title>{args.title}</FlexibleInput.Title>
-			<FlexibleInput.InputBox>
-				<FlexibleInput.Input
-					value={args.input.value}
-					onChange={onChange}
-					maxLength={args.input.maxLength ?? 0}
-				/>
-			</FlexibleInput.InputBox>
-		</FlexibleInput>
+		<UniqueIdProvider>
+			<FlexibleInput width={args.width}>
+				<FlexibleInput.Title>{args.title}</FlexibleInput.Title>
+				<FlexibleInput.InputBox>
+					<FlexibleInput.Input
+						value={args.input.value}
+						onChange={onChange}
+						maxLength={args.input.maxLength ?? 0}
+					/>
+				</FlexibleInput.InputBox>
+			</FlexibleInput>
+		</UniqueIdProvider>
 	);
 };
 
@@ -69,6 +72,7 @@ const WithCountRender = (args: StoryArgs) => {
 		setInput({ ...input, inputValue: e.target.value });
 	};
 	return (
+		<UniqueIdProvider>
 		<FlexibleInput>
 			<FlexibleInput.Title>{args.title}</FlexibleInput.Title>
 			<FlexibleInput.Count />
@@ -80,6 +84,7 @@ const WithCountRender = (args: StoryArgs) => {
 				/>
 			</FlexibleInput.InputBox>
 		</FlexibleInput>
+		</UniqueIdProvider>
 	);
 };
 
@@ -135,6 +140,7 @@ const ManyInputsRender = (args: ManyInputStoryArgs) => {
 	};
 
 	return (
+		<UniqueIdProvider>
 		<FlexibleInput>
 			<FlexibleInput.Title>{args.title}</FlexibleInput.Title>
 			<FlexibleInput.Count />
@@ -163,6 +169,7 @@ const ManyInputsRender = (args: ManyInputStoryArgs) => {
 				/>
 			</FlexibleInput.InputBox>
 		</FlexibleInput>
+		</UniqueIdProvider>
 	);
 };
 

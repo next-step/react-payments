@@ -1,8 +1,8 @@
-import { updateNestedState } from "@/common/utils";
-import { useArgs } from "@storybook/client-api";
+import { UniqueIdProvider } from "@/common/context/UniqueIdProvider";
 import { Meta, StoryObj } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
-import { ChangeEvent } from "react";
+import { CardManageContextProvider } from "../machine/card/CardManageContext";
+import { useManageCardContext } from "../machine/card/useCardContext";
 import { makeNewCard } from "../utils";
 import AddCard, { AddCardProps } from "./AddCard";
 
@@ -16,18 +16,23 @@ export default meta;
 
 type Story = StoryObj<typeof AddCard>;
 
-const DefaultRender = (args: AddCardProps) => {
-	const [arg, setArg] = useArgs<AddCardProps>();
+interface XStateMachineProps {
+	children: React.ReactNode;
+}
 
-	const onChangeCardInput = (e: ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = e.target;
-		setArg({ ...arg, card: updateNestedState(arg.card, name, value) });
-	};
-
-	return <AddCard {...args} card={arg.card} onChange={onChangeCardInput} />;
+const XStateMachine = ({ children }: XStateMachineProps) => {
+	return <CardManageContextProvider>{children}</CardManageContextProvider>;
 };
 
-// 기본 스토리
+const DefaultRender = (args: AddCardProps) => {
+	const { state } = useManageCardContext();
+	return (
+		<UniqueIdProvider>
+			<AddCard {...args} card={state.card} />
+		</UniqueIdProvider>
+	);
+};
+
 export const Default: Story = {
 	args: {
 		card: makeNewCard(0),
@@ -35,9 +40,18 @@ export const Default: Story = {
 			alert("다음으로");
 		}
 	},
-	render: DefaultRender,
+	render: (args) => (
+		<XStateMachine>
+			<DefaultRender {...args} />
+		</XStateMachine>
+	),
 	play: async ({ canvasElement }) => {
 		const canvas = within(canvasElement);
+
+		// 카드사 선택
+		await userEvent.click(canvas.getAllByRole("button")[1]);
+		const card = await canvas.findByText("레냥 카드");
+		await userEvent.click(card);
 
 		// 카드 번호 입력
 		await userEvent.type(
@@ -57,7 +71,7 @@ export const Default: Story = {
 			"12"
 		);
 
-		// '다음' 버튼을 클릭하는 인터랙션을 시뮬레이션합니다.
-		await userEvent.click(canvas.getByText("다음"));
+		// 다음 버튼 클릭
+		await userEvent.click(canvas.getByRole("button", { name: "다음" }));
 	}
 };

@@ -4,6 +4,7 @@ import IconSprites from "../src/common/ui/assets/IconSprites";
 
 const preview: Preview = {
 	parameters: {
+		xstate: true,
 		actions: { argTypesRegex: "^on[A-Z].*" },
 		controls: {
 			matchers: {

@@ -14,7 +14,7 @@ type Story = StoryObj<ButtonProps>;
 
 export const BottomFixedButtonStory: Story = {
 	args: {
-		buttonColor: "cyan"
+		buttonColor: "cyan500"
 	},
 	render: (args: ButtonProps) => {
 		return (

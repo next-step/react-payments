@@ -1,6 +1,6 @@
 export interface CardInfo {
 	id: number;
-	bankName: string;
+	companyName: string;
 	cardNumber: {
 		first: string;
 		second: string;
