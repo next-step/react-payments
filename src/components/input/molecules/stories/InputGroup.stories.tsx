@@ -6,6 +6,7 @@ import { INPUT } from '../../input.constant';
 import { DefaultInput, InputBox } from '../../atom';
 import { Background } from '@/stories/components/Background';
 import { InputType } from '../../input.type';
+import { CardForm } from '@/pages/Payments/payments.type';
 
 const meta = {
   title: 'Input/Molecule/InputGroup',
@@ -28,13 +29,15 @@ export const InputGroup: Story = (args: ArgTypes) => {
     maxLength: args.maxLength as unknown as number,
   });
 
-  const { register, errors } = useForm();
+  const { register, errors } = useForm<CardForm>();
   const { autoFocusRefs, handleAutoFocus } = useAutoFocus({
     amount: Object.values(textInputs).length,
   });
 
   const fieldKeys = Object.values(textInputs).map(({ name }) => name);
-  const fieldsFulfilled = Object.values(fieldKeys).map((key) => !errors[key]);
+  const fieldsFulfilled = Object.values(fieldKeys).map(
+    (key) => !errors[key as keyof CardForm]
+  );
   const optionalClass = fieldsFulfilled.every((field) => field)
     ? 'text-fulfilled'
     : '';

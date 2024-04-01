@@ -1,11 +1,11 @@
 import { useForm } from '@/hooks/useForm/useForm';
 import { STEP } from '../payments.constant';
 import { Card } from '@/components/card/Card';
-import { Card as CardData } from '../payments.type';
+import { Card as CardData, PaymentsCard } from '../payments.type';
 import { Funnel } from '../payments.context';
 
 export const CardConfig = () => {
-  const { register, values, errors } = useForm();
+  const { register, values, errors } = useForm<PaymentsCard>();
   const { setStep, data, setData } = Funnel.useContext();
 
   if (!data?.tempCard) {

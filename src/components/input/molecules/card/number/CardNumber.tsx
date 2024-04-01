@@ -1,23 +1,32 @@
 import { Input } from '@/components/input/Input';
 import { INPUT } from '@/components/input/input.constant';
-import { FormMethodsProps } from '@/hooks/useForm/useForm';
-import { useAutoFocus } from '@/hooks/useAutoFocus/useAutoFocus';
+import { CardInputProps } from '../cardInput.type';
 import { CARD_NUMBER } from './cardNumber.constant';
 
-export const CardNumber = ({ formMethods }: FormMethodsProps) => {
+export const CardNumber = ({
+  formMethods,
+  autoFocusMethods,
+}: CardInputProps) => {
   const { register, errors } = formMethods;
-  const { autoFocusRefs, handleAutoFocus } = useAutoFocus({
-    amount: Object.values(CARD_NUMBER.FIELDS).length,
-  });
+  const { autoFocusRefs, handleAutoFocus } = autoFocusMethods;
 
   const fieldKeys = Object.values(CARD_NUMBER.FIELDS).map(({ name }) => name);
   const fieldsFulfilled = Object.values(fieldKeys).map((key) => !errors[key]);
+  const fieldErrors = Object.values(fieldKeys)
+    .map((key) => errors[key])
+    .filter((error) => error);
   const allFieldsFulfilled = fieldsFulfilled.every((field) => field);
   const optionalClassName = allFieldsFulfilled ? 'text-fulfilled' : '';
+  const errorMessage = fieldErrors.filter((error) => error)[0] as string;
 
   return (
     <Input.Container>
-      <Input.Title>{CARD_NUMBER.TITLE}</Input.Title>
+      <Input.Header
+        title={CARD_NUMBER.TITLE}
+        hasError={fieldErrors.length > 0}
+        errorMessage={errorMessage}
+      />
+
       <Input.Box
         separator={{
           symbol: INPUT.BOX.SEPARATOR.HYPHEN,
@@ -25,22 +34,22 @@ export const CardNumber = ({ formMethods }: FormMethodsProps) => {
         }}
       >
         {Object.values(CARD_NUMBER.FIELDS).map(
-          ({ name, type, validate, maxLength }, fieldIndex) => (
+          ({ name, type, validate, maxLength, autoFocusIndex }) => (
             <Input
               key={name}
               type={type}
               className={`w-25 ${optionalClassName}`}
-              ref={autoFocusRefs[fieldIndex]}
+              ref={autoFocusIndex ? autoFocusRefs[autoFocusIndex] : null}
               {...register(name, {
                 maxLength,
                 validate,
                 onChange: (value: string) => {
                   const parsedValue = value.replace(INPUT.REGEX.DIGIT, '');
 
-                  if (maxLength) {
+                  if (maxLength && autoFocusIndex) {
                     handleAutoFocus({
                       value: parsedValue,
-                      index: fieldIndex,
+                      index: autoFocusIndex,
                       maxLength,
                     });
                   }

@@ -9,3 +9,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.text-error {
+  color: #ff4d4f;
+  font-weight: 600;
+  transition: ease-in-out 0.15s;
+}

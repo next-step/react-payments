@@ -1,6 +1,7 @@
 import { SYMBOL } from '@/constants/symbol';
 import { Card as CardData } from '@/pages/Payments/payments.type';
 import { Formatter } from '@/utils/formatter';
+import { CARD_COMPANY } from '../input/molecules/card/company/company.constant';
 
 interface CardProps {
   data: CardData;
@@ -23,6 +24,7 @@ export const Card = ({ data, onClick, isComplete }: CardProps) => {
     numberFourth,
     expireMonth,
     expireYear,
+    company,
   } = data;
 
   const expireDate = `${expireMonth || DEFAULT_VALUE.EXPIRE_MONTH} / ${
@@ -30,12 +32,20 @@ export const Card = ({ data, onClick, isComplete }: CardProps) => {
   }`;
 
   const optionalClassName = isComplete ? 'small-card' : 'empty-card';
+  const optionalColor = company ? CARD_COMPANY[company]?.color : '';
+  const companyName = company || '기본 펭구 카드';
 
   return (
-    <div className='card-box'>
-      <div className={optionalClassName} onClick={onClick}>
+    <div className='card-box hover'>
+      <div
+        className={`${optionalClassName} transition`}
+        style={{
+          background: optionalColor,
+        }}
+        onClick={onClick}
+      >
         <div className='card-top'>
-          {isComplete && <span className='card-text'>펭구카드</span>}
+          {isComplete && <span className='card-text'>{companyName}</span>}
         </div>
         <div className='card-middle'>
           <div className='small-card__chip'></div>

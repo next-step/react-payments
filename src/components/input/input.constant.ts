@@ -3,6 +3,7 @@ import { SYMBOL } from '@/constants/symbol';
 const TYPE = {
   TEXT: 'text',
   PASSWORD: 'password',
+  RADIO: 'radio',
 } as const;
 
 const BOX = {

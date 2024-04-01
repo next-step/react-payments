@@ -11,6 +11,7 @@ export const GlobalLayout = ({ type, children }: GlobalLayoutProps) => {
     switch (layoutType) {
       case LAYOUT.TYPE.MOBILE: {
         return {
+          rootId: LAYOUT.ROOT_ID.MOBILE,
           rootStyle: style.rootMobile,
           appStyle: style.appMobile,
         };
@@ -18,6 +19,7 @@ export const GlobalLayout = ({ type, children }: GlobalLayoutProps) => {
 
       case LAYOUT.TYPE.DESKTOP: {
         return {
+          rootId: LAYOUT.ROOT_ID.DESKTOP,
           rootStyle: style.rootDesktop,
           appStyle: style.appDesktop,
         };
@@ -28,10 +30,10 @@ export const GlobalLayout = ({ type, children }: GlobalLayoutProps) => {
     }
   };
 
-  const { rootStyle, appStyle } = getLayoutStyle(type);
+  const { rootStyle, appStyle, rootId } = getLayoutStyle(type);
 
   return (
-    <main className={rootStyle}>
+    <main className={rootStyle} id={rootId}>
       <div className={appStyle}>{children}</div>
     </main>
   );

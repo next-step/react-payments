@@ -1,14 +1,20 @@
-export type OnSubmitCallback = (values: Values) => void;
+export type OnSubmitCallback = <T>(values: Values<T>) => void;
+
+type ErrorMessage = string;
+export type ValidateResult = false | ErrorMessage;
 
 export interface Field {
   value: string;
-  error: boolean;
+  error: ValidateResult;
   readonly?: boolean;
   required?: boolean;
 }
 
-export type Values = { [key: string]: string };
-export type Errors = { [key: string]: boolean };
+export type Values<T> = {
+  [K in keyof T]: T[K];
+};
+
+export type Errors<T> = { [K in keyof T]: ValidateResult };
 
 export interface RegisterConfig {
   defaultValue: string;
@@ -16,7 +22,7 @@ export interface RegisterConfig {
   maxLength: number;
   readOnly: boolean;
   required: boolean;
-  validate: (value: string) => boolean;
+  validate: (value: string) => ValidateResult;
   onChange: (value: string) => string | void;
 }
 
