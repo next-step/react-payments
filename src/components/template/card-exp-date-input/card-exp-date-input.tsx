@@ -1,6 +1,5 @@
-import { forwardRef } from 'react'
+import { forwardRef, useImperativeHandle, useRef } from 'react'
 import { BaseInput, BaseInputContent, BaseInputProps } from '@/components/organism/base-input'
-import { PolymorphicRef } from '@/types'
 import * as styles from './card-exp-date-input.css'
 import { Flex, Text } from '@/components'
 import {
@@ -9,14 +8,20 @@ import {
 } from '@/components/template/card-exp-date-input/use-card-exp-date-input-state.ts'
 import { getRepeatedPlaceholder } from './utils/get-date-placeholder.ts'
 
+export interface CardExpDateInputHandle {
+  focus: () => void
+}
+
 export interface CardExpDateInputProps
   extends UseCardExpDateInputStateParams,
     Omit<BaseInputProps, 'value' | 'onChange' | 'defaultValue'> {
   /** 입력 날짜값 자리수 */
   dateInputDigit?: number
+  /** 입력 완료시 액션 */
+  onInputComplete?: () => void
 }
 
-export const CardExpDateInput = forwardRef(
+export const CardExpDateInput = forwardRef<CardExpDateInputHandle, CardExpDateInputProps>(
   (
     {
       separator = '/',
@@ -26,25 +31,45 @@ export const CardExpDateInput = forwardRef(
       value,
       defaultValue,
       onChange,
+      onInputComplete,
       ...otherInputProps
     }: CardExpDateInputProps,
-    ref: PolymorphicRef<'input'>,
+    ref,
   ) => {
+    const monthInputRef = useRef<HTMLInputElement>(null)
+    const yearInputRef = useRef<HTMLInputElement>(null)
+
     const { expDate, monthInputValue, handleChangeMonth, yearInputValue, handleChangeYear } =
       useCardExpDateInputState({
         value,
         defaultValue,
         onChange,
+        digit: dateInputDigit,
+        onCompleteInputMonth: () => yearInputRef.current?.focus(),
+        onCompleteInputYear: onInputComplete,
       })
 
     const monthId = `${id}-month`
     const yearId = `${id}-year`
     const labelHtmlFor = monthInputValue.length >= dateInputDigit ? yearId : monthId
 
+    useImperativeHandle(ref, () => {
+      return {
+        focus: () => {
+          if (monthInputValue.length >= dateInputDigit) {
+            yearInputRef.current?.focus()
+          } else {
+            monthInputRef.current?.focus()
+          }
+        },
+      }
+    })
+
     return (
       <BaseInput htmlFor={labelHtmlFor} label={label} {...otherInputProps} width="180px">
         <div className={styles.wrapper}>
           <BaseInputContent
+            ref={monthInputRef}
             id={`${id}-month`}
             placeholder={getRepeatedPlaceholder('M', dateInputDigit)}
             textAlign="right"
@@ -60,6 +85,7 @@ export const CardExpDateInput = forwardRef(
             </Text>
           </Flex>
           <BaseInputContent
+            ref={yearInputRef}
             id={`${id}-year`}
             placeholder={getRepeatedPlaceholder('Y', dateInputDigit)}
             maxLength={dateInputDigit}
@@ -68,7 +94,7 @@ export const CardExpDateInput = forwardRef(
             borderTopLeftRadius="none"
             borderBottomLeftRadius="none"
           />
-          <input type="hidden" ref={ref} value={expDate} onChange={() => {}} />
+          <input type="hidden" value={expDate} onChange={() => {}} />
         </div>
       </BaseInput>
     )

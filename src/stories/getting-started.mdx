@@ -1,34 +1,39 @@
+import { Source, Meta } from '@storybook/blocks'
+
+<Meta title="Getting Started"/>
+
 # Payments App & components
 
 <br/>
 
 ## Getting Started
 
-You can also see detailed docs and components through [this storybook](https://65e6646cccf98da794739e61-dgflgcqxzn.chromatic.com/?path=/docs/getting-started--docs)
-
 <br/>
 
 ### Requirements
 
-```json
+<Source language="json" code={`
 "node": ">=20"
 
 "peerDependencies": {
   "react": "^18.2.0",
   "react-dom": "^18.2.0"
 }
-```
+
+`} />
 
 ### Installaion
 
 
-```bash
+<Source language="bash" code={`
+
 npm install @sxungchxn/react-payments
 
 yarn install @sxungchxn/react-payments
 
 pnpm install @sxungchxn/react-payments
-```
+
+`} />
 
 <br/>
 
@@ -36,14 +41,13 @@ pnpm install @sxungchxn/react-payments
 
 It is required to import style sheet before using app/components as below.
 
+<Source language="tsx" code={`
 
-```tsx
 import '@sxungchxn/react-payments/styles'
-
 ...
-
 import { ... } from '@sxungchxn/react-payments'
-```
+
+`}/>
 
 <br/>
 
@@ -51,7 +55,8 @@ import { ... } from '@sxungchxn/react-payments'
 
 - **Remember that setup step is required before usage.**
 
-```tsx
+<Source language="tsx" code={`
+
 /* Using payments app */
 import { PaymentsApp } from '@sxungchxn/react-payments'
 
@@ -64,7 +69,7 @@ import { Text, Flex } from '@sxungchxn/react-payments'
 
 /* Using theme */
 import { vars } from '@sxungchxn/react-payments'
-```
+`}/>
 
 <br/>
 

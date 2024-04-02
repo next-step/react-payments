@@ -11,6 +11,7 @@ const INITIAL_CARD = {
   cardName: '',
   cardNickName: '',
   cardPin: '',
+  cardType: undefined,
 }
 
 export const paymentsMachine = createMachine({

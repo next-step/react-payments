@@ -1,8 +1,11 @@
 import { BaseInput, BaseInputProps } from '@/components/organism/base-input'
 import { useUncontrolledInputState } from '@/hooks/use-uncontrolled-input-state'
-import { ChangeEvent, forwardRef } from 'react'
-import { PolymorphicRef } from '@/types'
+import { ChangeEvent, forwardRef, useImperativeHandle, useRef } from 'react'
 import { createDisplayCardCode } from '@/utils/create-display-card-code'
+
+export interface CardCodeInputHandle {
+  focus: () => void
+}
 
 export interface CardCodeInputProps
   extends Omit<BaseInputProps, 'value' | 'onChange' | 'defaultValue'> {
@@ -15,12 +18,14 @@ export interface CardCodeInputProps
   value?: string
   defaultValue?: string
   onChange?: (value: string) => void
+  /** input이 완료될때 수행할 액션 */
+  onInputComplete?: () => void
 }
 
 /**
  * 카드 번호를 입력한 input 컴포넌트
  */
-export const CardCodeInput = forwardRef(
+export const CardCodeInput = forwardRef<CardCodeInputHandle, CardCodeInputProps>(
   (
     {
       maskedLastDigit = 8,
@@ -31,15 +36,26 @@ export const CardCodeInput = forwardRef(
       separator = ' - ',
       label,
       placeholder,
+      onInputComplete,
       ...props
-    }: CardCodeInputProps,
-    ref: PolymorphicRef<'input'>,
+    },
+    ref,
   ) => {
     const [cardCode, onChangeCardCode] = useUncontrolledInputState<string>({
       value,
       defaultValue,
       finalValue: '',
       onChange,
+    })
+
+    const baseInputRef = useRef<HTMLInputElement>(null)
+
+    useImperativeHandle(ref, () => {
+      return {
+        focus: () => {
+          baseInputRef.current?.focus()
+        },
+      }
     })
 
     const displayCardCode = createDisplayCardCode({
@@ -60,18 +76,31 @@ export const CardCodeInput = forwardRef(
       const isOverMaxDigitCode = newCardCode.length > maxDigit
       if (isInvalidCardCode || isOverMaxDigitCode) return
       onChangeCardCode(newCardCode)
+
+      if (newCardCode.length >= maxDigit) {
+        onInputComplete?.()
+      }
     }
 
     return (
       <>
         <BaseInput
+          ref={baseInputRef}
           label={label}
           placeholder={placeholder}
           value={displayCardCode}
           onChange={handleChangeInput}
           {...props}
         />
-        <input type="hidden" ref={ref} value={cardCode} onChange={() => {}} />
+        <input
+          type="hidden"
+          value={cardCode}
+          onChange={() => {}}
+          onFocus={() => {
+            alert('focus?')
+            baseInputRef.current?.focus()
+          }}
+        />
       </>
     )
   },

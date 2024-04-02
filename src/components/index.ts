@@ -3,6 +3,8 @@ export * from '@/components/atom/text'
 export * from '@/components/atom/flex'
 
 export * from '@/components/molecule/input'
+export * from '@/components/molecule/bottom-sheet'
+export * from '@/components/molecule/tooltip'
 
 export * from '@/components/organism/base-input'
 export * from '@/components/organism/underline-input'
@@ -15,3 +17,4 @@ export * from '@/components/template/header/header'
 export * from '@/components/template/card/card'
 export * from '@/components/template/card-type-pick-bottom-sheet/card-type-pick-bottom-sheet'
 export * from '@/components/template/stepper/stepper'
+export * from '@/components/template/security-number-pad/security-number-pad'
