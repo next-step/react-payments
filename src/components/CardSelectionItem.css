@@ -1,0 +1,19 @@
+.red-theme {
+	background-image: linear-gradient(to bottom, red, yellow);
+}
+.pink-theme {
+	background-image: linear-gradient(to bottom, pink, yellow);
+}
+
+.orange-theme {
+	background-image: linear-gradient(to bottom, orange, yellow);
+}
+.green-theme {
+	background-image: linear-gradient(to bottom, rgb(79, 138, 79), rgb(215, 215, 147));
+}
+.blue-theme {
+	background-image: linear-gradient(to bottom, rgb(94, 94, 244), rgb(189, 189, 149));
+}
+.yellow-theme {
+	background-image: linear-gradient(to bottom, yellow, rgb(236, 236, 226));
+}

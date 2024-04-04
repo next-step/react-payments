@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import CardBox from '../components/CardBox'
+import CardBox from './CardBox'
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

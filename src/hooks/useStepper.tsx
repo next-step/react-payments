@@ -17,8 +17,7 @@ function useStepper<T>(defaultStep: T) {
 	}
 
 	const Stepper = ({ children }: StepperProps) => {
-		console.log('children', children)
-		const targetStep = children.find((childStep: any) => childStep.props.name === step)
+		const targetStep = children.find((childStep) => childStep.props.name === step)
 
 		return <>{targetStep}</>
 	}

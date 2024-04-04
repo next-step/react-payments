@@ -1,9 +1,9 @@
-import { useMemo, useState } from 'react'
-import { RegisterDataType } from './RegistCard'
+import { useState } from 'react'
+import { RegisteredDataType } from './RegistCard'
 import CardBox from '../CardBox'
 
 type RegistEndProps = {
-	registCardInfo: RegisterDataType
+	registCardInfo: RegisteredDataType
 	handleSetCardName: (value: string) => void
 	onPrev?: () => void
 	onNext?: () => void
@@ -12,11 +12,9 @@ function RegistEnd(props: RegistEndProps) {
 	const { registCardInfo, handleSetCardName, onNext } = props
 	const [cardName, setCardName] = useState('')
 
-	useMemo(() => {}, [registCardInfo])
-
 	const onClickButtonNextHandler = () => {
+		handleSetCardName(cardName ? cardName : registCardInfo.cardSelectionTypeName)
 		onNext && onNext()
-		handleSetCardName(cardName)
 	}
 	return (
 		<div className="app flex-column-center">
@@ -24,21 +22,23 @@ function RegistEnd(props: RegistEndProps) {
 				<h2 className="page-title mb-10">카드등록이 완료되었습니다.</h2>
 			</div>
 			<CardBox
-				size="big"
 				cardName={cardName}
 				ownerName={registCardInfo.ownerName}
 				expirationDate={registCardInfo.expirationDate}
 				cardNumber={registCardInfo.cardNumber}
+				theme={registCardInfo.theme}
+				cardSelectionTypeName={registCardInfo.cardSelectionTypeName}
 			/>
 			<div className="input-container flex-center w-100">
 				<input
 					className="input-underline w-75"
 					type="text"
-					placeholder="카드의 별칭을 입력해주세요."
+					placeholder="카드 별칭(선택)"
 					onChange={(e) => {
 						const { value } = e.target
 
 						setCardName(value)
+						// handleSetCardName(value)
 					}}
 				/>
 			</div>

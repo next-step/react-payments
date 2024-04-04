@@ -1,0 +1,6 @@
+export const CARD_NUMBER_LENGTH = 4
+export const CARD_HOLDER_NAME_LENGTH = 30
+export const EXPIRE_DATE_MAX_LENGTH = 3
+export const EXPIRE_DATE_MAX_LENGTH_WITH_DEVIDER = 5
+export const EXPIRE_DATE_DIVIDER_INDEX = 2
+export const SECRET_CODE_MAX_LENTGH = 1

@@ -1,6 +1,6 @@
 import './App.css'
 import useStepper from './hooks/useStepper'
-import RegistCard, { RegisterDataType } from './components/page/RegistCard'
+import RegistCard, { RegisteredDataType } from './components/page/RegistCard'
 import Navigation from './components/navigation/navigation'
 import RegistEnd from './components/page/RegistEnd'
 import { useState } from 'react'
@@ -18,48 +18,65 @@ import CardBox from './components/CardBox'
 
 type Step = '카드목록' | '카드추가' | '카드등록완료'
 
-const INITIAL_CARD_STATE: RegisterDataType = {
+const INITIAL_CARD_STATE: RegisteredDataType = {
 	cardNumber: '',
 	expirationDate: '',
 	ownerName: '',
 	securityCode: '',
 	secretCode: '',
+	cardSelectionTypeName: '',
 }
 
 function App() {
 	const { step, setStep, Stepper, Step } = useStepper<Step>('카드추가')
-	const [registerData, setRegisterData] = useState<RegisterDataType>(INITIAL_CARD_STATE)
-	const [cardName, setCardName] = useState<string>('')
+	const [registeredData, setRegisteredData] = useState<RegisteredDataType>(INITIAL_CARD_STATE)
+	const [cardName, setCardName] = useState<string>(registeredData.cardSelectionTypeName)
+	const [cardList, setCardList] = useState<Map<string, RegisteredDataType>>(new Map())
 
-	const handleSetCardName = (value: string) => {
-		setCardName(value)
+	const addMapElement = () => {
+		const newMap = new Map(cardList)
+
+		newMap.set(cardName, registeredData)
+		setCardList(newMap)
 	}
 
 	return (
 		<div className="app" id="app">
-			<Navigation currentStageName={step!}></Navigation>
+			<Navigation currentStageName={step}></Navigation>
 
 			<Stepper>
 				<Step name="카드목록">
-					<CardBox
-						cardName={cardName}
-						ownerName={registerData.ownerName}
-						expirationDate={registerData.expirationDate}
-						cardNumber={registerData.cardNumber}
-					/>
+					<button className="card-add-button" onClick={() => setStep('카드추가')}>
+						+
+					</button>
+					{[...cardList].map(([key, value]) => (
+						<>
+							<CardBox
+								ownerName={value.ownerName}
+								expirationDate={value.expirationDate}
+								cardNumber={value.cardNumber}
+								theme={value.theme}
+								cardSelectionTypeName={value.cardSelectionTypeName}
+							/>
+							<div>{key}</div>
+						</>
+					))}
 				</Step>
 				<Step name="카드추가">
 					<RegistCard
-						setRegisterData={setRegisterData}
+						setRegisterData={setRegisteredData}
 						onPrev={() => setStep('카드목록')}
 						onNext={() => setStep('카드등록완료')}
 					/>
 				</Step>
 				<Step name="카드등록완료">
 					<RegistEnd
-						handleSetCardName={handleSetCardName}
-						registCardInfo={registerData}
-						onNext={() => setStep('카드목록')}
+						handleSetCardName={setCardName}
+						registCardInfo={registeredData}
+						onNext={() => {
+							addMapElement()
+							setStep('카드목록')
+						}}
 					/>
 				</Step>
 			</Stepper>
