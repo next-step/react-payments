@@ -1,9 +1,9 @@
-import { CardStateType } from '@/provider/card-info-provider/CardInfoProvider';
+import { CardStateType } from '@/domain/type';
 import { createContext, useState, type PropsWithChildren } from 'react';
 
 interface CardInfoType {
   cardState: CardStateType;
-  handleCardState: (data: any) => void;
+  handleCardState: (data: CardStateType) => void;
 }
 
 const initialState: CardInfoType = {

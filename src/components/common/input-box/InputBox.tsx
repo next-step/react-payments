@@ -1,16 +1,12 @@
 import classNames from 'classnames';
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { type HTMLAttributes } from 'react';
 
-type BaseInputBoxProps = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+type BaseInputBoxProps = HTMLAttributes<HTMLDivElement>;
 
-interface InputBoxProps extends BaseInputBoxProps {}
+type InputBoxProps = Record<string, unknown> & BaseInputBoxProps;
 
-const InputBox = ({ className, children, ...props }: InputBoxProps) => {
-  return (
-    <div className={classNames('input-box', className)} {...props}>
-      {children}
-    </div>
-  );
-};
-
-export default InputBox;
+export const InputBox = ({ className, children, ...props }: InputBoxProps) => (
+  <div className={classNames('input-box', className)} {...props}>
+    {children}
+  </div>
+);

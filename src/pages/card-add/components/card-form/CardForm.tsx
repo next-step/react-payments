@@ -1,47 +1,61 @@
-import Container from '@/components/common/input-container/Container';
 import CardExpirationDate from './card-expiration-date/CardExpirationDate';
 import CardNumbers from './card-numbers/CardNumbers';
 import CardOwner from './card-owner/CardOwner';
 import CardPassword from './card-password/CardPassword';
 import CardSecurityCode from './card-security-code/CardSecurityCode';
-import InputBox from '@/components/common/input-box/InputBox';
-import ButtonBox from '@/components/common/button-box/ButtonBox';
+import { ButtonBox, Container, InputBox } from '@/components/common';
 
-import { StepContext } from '@/provider/step-provider/StepProvider';
-import { useContext } from 'react';
-import Button from '@/components/common/button/Button';
+import { isObjectFailed } from '@/domain/validate';
 
+import useCardContext from '@/provider/card-info-provider/hooks/useCardContext';
+import useModalContext from '@/provider/modal-provider/hooks/useModalContext';
+import useStepContext from '@/provider/step-provider/hook/useStepContext';
+import useInputFocus from '../../hook/useInputFocus';
+
+const REF_SIZE = 3;
 const CardForm = () => {
-  const { navigate } = useContext(StepContext);
-  // const { toggle } = useContext(ModalContext);
+  const { cardValidation } = useCardContext();
+  const { navigate } = useStepContext();
+  const {
+    cardBrand: { cardBrandName, color },
+  } = useModalContext();
+
+  const { inputRef } = useInputFocus(REF_SIZE);
+  const [expirationDate, ownerName, password] = inputRef;
+
   const goToPage = () => {
-    navigate('COMPLETE');
+    const isValid = cardValidation();
+    const isCardBrandVaild = isObjectFailed({ cardBrandName, color });
+    if (isValid && isCardBrandVaild) {
+      navigate('COMPLETE');
+    }
   };
+
   return (
     <>
       <Container title="카드 번호">
         <InputBox>
-          <CardNumbers />
+          <CardNumbers nextFocus={expirationDate} />
         </InputBox>
       </Container>
       <Container title="만료일">
         <InputBox className="w-50">
-          <CardExpirationDate />
+          <CardExpirationDate nextFocus={ownerName} ref={expirationDate} />
         </InputBox>
       </Container>
       <Container>
-        <CardOwner />
+        <CardOwner ref={ownerName} />
       </Container>
       <Container title="보안코드(CVC/CVV)">
-        <CardSecurityCode />
+        <CardSecurityCode nextFocus={password} />
       </Container>
       <Container title="카드 비밀번호">
-        <CardPassword />
+        <CardPassword ref={password} />
       </Container>
       <ButtonBox>
-        <Button type="button" className="button-text button-border-none" onClick={goToPage}>
+        <button type="button" className="button-text button-border-none" onClick={goToPage}>
           <span className="button-text">다음</span>
-        </Button>
+        </button>
       </ButtonBox>
     </>
   );
