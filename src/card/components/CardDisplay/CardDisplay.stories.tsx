@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from '@storybook/react';
-import { CardDisplay } from '@/card';
+import { CardDisplay } from '@/card/components/CardDisplay';
 import { AppDisplay, VStack, styleToken } from '@/shared';
 
 const meta: Meta<typeof CardDisplay> = {

@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react';
+import { StyleProps } from '@/shared';
 import { Box, VStack } from '@/shared/components';
 import { styleToken } from '@/shared/styles';
 
@@ -10,7 +11,6 @@ export const AppDisplay = ({ children }: PropsWithChildren) => (
     width="375px"
     minWidth="375px"
     height="700px"
-    borderRadius="15px"
     border={`1px solid ${styleToken.color.body}`}
   >
     <AppDisplayLayout>{children}</AppDisplayLayout>
@@ -18,7 +18,7 @@ export const AppDisplay = ({ children }: PropsWithChildren) => (
 );
 
 const AppDisplayLayout = ({ children }: PropsWithChildren) => (
-  <VStack as="section" height="100%" padding="16px 24px">
+  <VStack as="section" height="100%" padding="16px 24px" backgroundColor={styleToken.color.white}>
     {children}
   </VStack>
 );
@@ -29,8 +29,8 @@ const AppDisplayHeader = ({ children }: PropsWithChildren) => (
   </Box>
 );
 
-const AppDisplayBody = ({ children }: PropsWithChildren) => (
-  <VStack as="section" width={styleToken.width.w100} height="100%" flexGrow={1} overflow="auto">
+const AppDisplayBody = ({ children, ...props }: PropsWithChildren<StyleProps>) => (
+  <VStack as="section" width={styleToken.width.w100} height="100%" flexGrow={1} {...props}>
     <VStack flex="1 0 auto">{children}</VStack>
   </VStack>
 );

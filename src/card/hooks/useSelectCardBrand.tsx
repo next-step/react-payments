@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { CARD_BRANDS, CardBrand } from '@/card';
+import { CARD_BRANDS } from '@/card/constants';
+import type { CardBrand } from '@/card/types';
 
 export const useSelectCardBrand = () => {
   const [cardBrand, setCardBrand] = useState<CardBrand>({ label: '', color: '' });

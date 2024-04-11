@@ -1,2 +1,2 @@
 export * from './CardDisplay';
-export * from './CardSelectBottomSheet';
+export * from './CardPayments';

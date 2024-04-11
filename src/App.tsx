@@ -1,22 +1,33 @@
-import { CardProvider } from 'src/card/providers';
-import { CardAddPage, CardCompletePage, CardListPage, CardPageIndex } from '@/card';
-import { AppDisplay, Funnel } from '@/shared';
+import { PaymentCancel, PaymentResult, useLoadNearPayments } from '@/card';
+import { Box, Button } from '@/shared';
 
-const App = () => (
-  <AppDisplay.Root>
-    <CardProvider>
-      <Funnel.Root>
-        <Funnel.Step index={CardPageIndex.CardListPage}>
-          <CardListPage />
-        </Funnel.Step>
-        <Funnel.Step index={CardPageIndex.CardAddPage}>
-          <CardAddPage />
-        </Funnel.Step>
-        <Funnel.Step index={CardPageIndex.CardCompletePage}>
-          <CardCompletePage />
-        </Funnel.Step>
-      </Funnel.Root>
-    </CardProvider>
-  </AppDisplay.Root>
-);
+const App = () => {
+  const loadNearPayments = useLoadNearPayments({
+    clientId: 'test-1234',
+  });
+
+  const openPayments = async () => {
+    try {
+      loadNearPayments({
+        orderId: '1234',
+        totalAmount: 10000,
+        onPaymentComplete: (paymentResult: PaymentResult) => {
+          alert(`paymentResult:\n${JSON.stringify(paymentResult)}`);
+        },
+        onPaymentCancel: (paymentCancel: PaymentCancel) => {
+          alert(`paymentCancel:\n${JSON.stringify(paymentCancel)}`);
+        },
+      });
+    } catch (e) {
+      alert(`paymentError:\n${JSON.stringify(e)}`);
+      console.error('paymentError: ', e);
+    }
+  };
+
+  return (
+    <Box width="100%" height="100vh">
+      <Button onClick={openPayments}>열기</Button>
+    </Box>
+  );
+};
 export default App;

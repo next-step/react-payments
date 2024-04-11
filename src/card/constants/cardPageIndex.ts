@@ -1,5 +1,6 @@
 export enum CardPageIndex {
-  CardListPage,
-  CardAddPage,
-  CardCompletePage,
+  CardPayment,
+  CardList,
+  CardAdd,
+  CardComplete,
 }

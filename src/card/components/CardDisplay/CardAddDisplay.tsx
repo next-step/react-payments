@@ -3,6 +3,7 @@ import { styleToken, Button, Typography } from '@/shared';
 type CardAddDisplayProps = {
   onClick?: () => void;
 };
+
 export const CardAddDisplay = ({ onClick }: CardAddDisplayProps) => (
   <Button
     alignItems="center"

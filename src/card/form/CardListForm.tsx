@@ -1,7 +1,8 @@
+import Close from '@/assets/close.svg';
 import { CardDisplay, CardPageIndex, CardState, useCard } from '@/card';
-import { AppDisplay, Typography, VStack, useFunnel, Button, HStack } from '@/shared';
+import { AppDisplay, Typography, VStack, useFunnel, Button, HStack, Flex } from '@/shared';
 
-export const CardListPage = () => {
+export const CardListForm = () => {
   const { ownerCards, setCard, resetCurrentCard, removeCardFromOwner } = useCard();
   const { goToNext, goToIndex } = useFunnel();
 
@@ -10,9 +11,13 @@ export const CardListPage = () => {
     goToNext();
   };
 
+  const moveCardPaymentForm = () => {
+    goToIndex(CardPageIndex.CardPayment);
+  };
+
   const moveCardCompletePage = (card: CardState) => {
     setCard(card);
-    goToIndex(CardPageIndex.CardCompletePage);
+    goToIndex(CardPageIndex.CardComplete);
   };
 
   const onRemoveCardClick = (card: CardState) => {
@@ -26,11 +31,16 @@ export const CardListPage = () => {
   return (
     <>
       <AppDisplay.Header>
-        <Typography as="h1" variant="headline" padding="10px 0" margin="0">
-          보유 카드
-        </Typography>
+        <Flex flexDirection="row" alignItems="center" justifyContent="space-between">
+          <Typography as="h1" variant="headline" padding="10px 0" margin="0">
+            보유 카드
+          </Typography>
+          <Button variant="ghost" onClick={moveCardPaymentForm}>
+            <img src={Close} alt="닫기 버튼" width="32px" height="32px" />
+          </Button>
+        </Flex>
       </AppDisplay.Header>
-      <AppDisplay.Body>
+      <AppDisplay.Body maxHeight="438px" overflow="scroll">
         <VStack width="100%" spacing="20px" padding="20px 0">
           {ownerCardsDescending.map((ownerCard, index) => (
             <HStack
@@ -39,6 +49,7 @@ export const CardListPage = () => {
               justifyContent="center"
               alignItems="center"
               spacing="10px"
+              marginLeft="18px"
             >
               <VStack spacing="10px" alignItems="center" justifyContent="center">
                 <CardDisplay size="small" {...ownerCard} onClick={() => moveCardCompletePage(ownerCard)} />
@@ -55,13 +66,13 @@ export const CardListPage = () => {
                 backgroundColor="unset"
                 onClick={() => onRemoveCardClick(ownerCard)}
               >
-                삭제
+                <Typography variant="body">삭제</Typography>
               </Button>
             </HStack>
           ))}
         </VStack>
       </AppDisplay.Body>
-      <AppDisplay.Footer height="300px">
+      <AppDisplay.Footer>
         <VStack paddingTop="20px" alignItems="center">
           <CardDisplay.Add onClick={moveCardAddPage} />
         </VStack>

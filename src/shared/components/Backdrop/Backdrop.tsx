@@ -7,15 +7,19 @@ type BackdropProps = PropsWithChildren<{
 }>;
 
 const Root = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  z-index: 10;
-  transition: opacity 1s ease;
+  position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   background-color: ${styleToken.color.shadow};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: ${styleToken.zIndex.overlay};
+  transition: opacity 1s ease;
 `;
 
 export const Backdrop = ({ children, onClick }: BackdropProps) => <Root onClick={onClick}>{children}</Root>;
+
+Backdrop.displayName = 'Backdrop';

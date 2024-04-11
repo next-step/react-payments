@@ -55,10 +55,20 @@ const width = {
   w15: '15%',
 } as const;
 
+export const zIndex = {
+  overlay: 1300,
+  modal: 1400,
+  popover: 1500,
+  toast: 1600,
+  tooltip: 1700,
+  loading: 1800,
+} as const;
+
 export const styleToken = {
   color: colors,
   fontSize,
   fontWeight,
   spacing,
   width,
+  zIndex,
 } as const;

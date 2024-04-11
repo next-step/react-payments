@@ -1,7 +1,8 @@
 import { CardProvider } from 'src/card/providers';
 import { Meta, StoryObj } from '@storybook/react';
 import { Funnel } from './Funnel';
-import { CardCompletePage, CardAddPage, CardListPage } from '@/card';
+import { CardCompleteForm, CardAddForm, CardListForm, CardPageIndex } from '@/card';
+import { AppDisplay, OverlayProvider } from '@/shared';
 
 const meta: Meta<typeof Funnel> = {
   title: 'Components/Funnel',
@@ -10,14 +11,6 @@ const meta: Meta<typeof Funnel> = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  args: {},
-  decorators: [
-    (Story) => (
-      <CardProvider>
-        <Story />
-      </CardProvider>
-    ),
-  ],
 };
 
 export default meta;
@@ -26,32 +19,25 @@ type Story = StoryObj<typeof Funnel>;
 
 export const Primary: Story = {
   render: () => (
-    <Funnel.Root startIndex={1}>
-      <Funnel.Step index={0}>
-        <CardListPage />
-      </Funnel.Step>
-      <Funnel.Step index={1}>
-        <CardAddPage />
-      </Funnel.Step>
-      <Funnel.Step index={2}>
-        <CardCompletePage />
-      </Funnel.Step>
-    </Funnel.Root>
-  ),
-};
-
-export const WithStartIndex: Story = {
-  render: () => (
-    <Funnel.Root startIndex={0}>
-      <Funnel.Step index={0}>
-        <CardListPage />
-      </Funnel.Step>
-      <Funnel.Step index={1}>
-        <CardAddPage />
-      </Funnel.Step>
-      <Funnel.Step index={2}>
-        <CardCompletePage />
-      </Funnel.Step>
-    </Funnel.Root>
+    <AppDisplay.Root>
+      <OverlayProvider>
+        <CardProvider cardStorageKey="story">
+          <Funnel.Root>
+            <Funnel.Step index={CardPageIndex.CardPayment}>
+              <CardListForm />
+            </Funnel.Step>
+            <Funnel.Step index={CardPageIndex.CardList}>
+              <CardListForm />
+            </Funnel.Step>
+            <Funnel.Step index={CardPageIndex.CardAdd}>
+              <CardAddForm />
+            </Funnel.Step>
+            <Funnel.Step index={CardPageIndex.CardComplete}>
+              <CardCompleteForm />
+            </Funnel.Step>
+          </Funnel.Root>
+        </CardProvider>
+      </OverlayProvider>
+    </AppDisplay.Root>
   ),
 };

@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, PropsWithChildren, useMemo } from 'react';
-import { CardState } from '@/card';
+import type { CardState } from '@/card/types';
 
 const INITIAL_CARD_STATE: CardState = {
   cardNumber: '0000 0000 0000 0000',
@@ -26,10 +26,16 @@ type CardContextType = {
 
 const CardContext = createContext<CardContextType | null>(null);
 
-export const CardProvider = ({ children }: PropsWithChildren) => {
+export const CardProvider = ({
+  children,
+  initialOwnerCards,
+  cardStorageKey,
+}: PropsWithChildren & {
+  initialOwnerCards?: CardState[];
+  cardStorageKey: string;
+}) => {
   const [card, setCard] = useState<CardState>(INITIAL_CARD_STATE);
-
-  const [ownerCards, setOwnerCards] = useState<CardState[]>([]);
+  const [ownerCards, setOwnerCards] = useState<CardState[]>(initialOwnerCards || []);
 
   const resetCurrentCard = () => {
     setCard(INITIAL_CARD_STATE);
@@ -37,24 +43,34 @@ export const CardProvider = ({ children }: PropsWithChildren) => {
 
   const addCardToOwner = (card: CardState) => {
     setOwnerCards((prevCards) => [...prevCards, card]);
+    localStorage.setItem(cardStorageKey, JSON.stringify([...ownerCards, card]));
   };
 
   const editCardToOwner = (card: CardState) => {
-    setOwnerCards((prevCards) =>
-      prevCards.map((prevCard) => (prevCard.cardNumber === card.cardNumber ? { ...card } : prevCard)),
+    const editedOwnerCards = ownerCards.map((prevCard) =>
+      prevCard.cardNumber === card.cardNumber ? { ...card } : prevCard,
     );
+    setOwnerCards(editedOwnerCards);
+    localStorage.setItem(cardStorageKey, JSON.stringify(editedOwnerCards));
   };
 
   const removeCardFromOwner = (card: CardState) => {
-    setOwnerCards((prevCards) => prevCards.filter((prevCard) => prevCard.cardNumber !== card.cardNumber));
+    const removedOwnerCards = ownerCards.filter((prevCard) => prevCard.cardNumber !== card.cardNumber);
+    setOwnerCards(removedOwnerCards);
+    localStorage.setItem(cardStorageKey, JSON.stringify(removedOwnerCards));
   };
 
   const isCardExist = (card: CardState) => ownerCards.some((ownerCard) => ownerCard.cardNumber === card.cardNumber);
 
+  const ownerCardsDescending = useMemo(
+    () => ownerCards.sort((a, b) => b.createdTimestamp - a.createdTimestamp),
+    [ownerCards],
+  );
+
   const contextValue = useMemo(
     () => ({
       card,
-      ownerCards,
+      ownerCards: ownerCardsDescending,
       setCard,
       resetCurrentCard,
       addCardToOwner,

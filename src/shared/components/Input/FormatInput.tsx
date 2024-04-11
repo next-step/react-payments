@@ -1,88 +1,85 @@
 import {
   PropsWithChildren,
   useContext,
-  createContext,
   useMemo,
+  useRef,
   RefObject,
-  ReactElement,
   InputHTMLAttributes,
-  ChangeEvent,
-  useEffect,
-  useState,
+  FocusEvent,
+  forwardRef,
 } from 'react';
-import { useInputFieldsValues, useInputRefs } from './hooks';
-import { findComponentsInChildren, isValidateInputValueByType, isValidInputRef } from './utils';
-import {
-  StyleProps,
-  styleToken,
-  Box,
-  HStack,
-  Label,
-  TextField,
-  Typography,
-  INPUT_COLOR,
-  INPUT_FONT_SIZE,
-  INPUT_FONT_WEIGHT,
-  UpdateValueProps,
-  InputType,
-} from '@/shared';
-
-export type FormatInputContextValue = {
-  id: string;
-  values: string[];
-  inputElementCount: number;
-  updateValue: ({ index, value, inputRefs, maxLength, focus }: UpdateValueProps) => void;
-  inputRefs: RefObject<HTMLInputElement | null>[];
-  type: InputType;
-  mask: boolean;
-  separator: string | ReactElement;
-  showCompletedSeparator?: boolean;
-};
+import { FormatInputContext, FormatInputContextValue } from './FormatInput.context';
+import { useFormatInputTextCounter, useInputFieldsValues, useInputRefs } from './hooks';
+import { useFormatInputField } from './hooks/useFormatInputField';
+import { INPUT_COLOR, INPUT_FONT_SIZE, INPUT_FONT_WEIGHT } from './Input.constant';
+import { findComponentsInChildren } from './utils';
+import { StyleProps, styleToken, Box, HStack, Label, TextField, Typography } from '@/shared';
 
 type FormatInputProps = Partial<FormatInputContextValue> & {
-  defaultValue: string[];
+  value: string[];
+  pattern?: RegExp;
   onValueChange?: (payload: { values: string[] }) => void;
   onValueComplete?: (payload: { values: string[] }) => void;
 };
 
-const FormatInputContext = createContext<FormatInputContextValue | null>(null);
-
 export const FormatInput = ({
+  children,
   id = '',
-  defaultValue,
-  onValueChange,
-  onValueComplete,
+  value,
   type = 'alphanumeric',
   mask = false,
   separator = '',
   showCompletedSeparator = false,
-  children,
+  pattern,
+  onValueChange,
+  onValueComplete,
   ...props
 }: PropsWithChildren<FormatInputProps & StyleProps>) => {
   const formatFields = findComponentsInChildren(children, FormatField.name);
   const inputElementCount = formatFields.length;
 
-  const { value: values, update: updateValue } = useInputFieldsValues(defaultValue, onValueChange, onValueComplete);
+  const inputFields = useInputFieldsValues({ values: value, pattern, onValueChange, onValueComplete });
   const inputRefs = useInputRefs(inputElementCount);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleBlur = (event: FocusEvent<HTMLDivElement>) => {
+    if (containerRef.current && !containerRef.current.contains(event.relatedTarget as Node)) {
+      inputFields.validate();
+    }
+  };
 
   const contextValue = useMemo(
     () => ({
       id,
-      values,
+      values: inputFields.value,
+      updateValue: inputFields.update,
       inputElementCount,
-      updateValue,
       inputRefs,
       type,
       mask,
       separator,
       showCompletedSeparator,
+      error: inputFields.error,
     }),
-    [id, values, inputElementCount, updateValue, inputRefs, type, mask, separator, showCompletedSeparator],
+    [
+      id,
+      inputFields.value,
+      inputFields.update,
+      inputElementCount,
+      inputRefs,
+      type,
+      mask,
+      separator,
+      showCompletedSeparator,
+      inputFields.error,
+    ],
   );
 
   return (
     <FormatInputContext.Provider value={contextValue}>
-      <Box {...props}>{children}</Box>
+      <Box onBlur={handleBlur} ref={containerRef} {...props}>
+        {children}
+      </Box>
     </FormatInputContext.Provider>
   );
 };
@@ -97,89 +94,60 @@ type FormatFieldProps = StyleProps &
     validateInput?: (value: string) => boolean;
   };
 
-const FormatField = ({
-  index,
-  readOnly,
-  mask,
-  maxLength = Infinity,
-  pattern,
-  validateInput,
-  width = '100%',
-  color = INPUT_COLOR,
-  fontSize = INPUT_FONT_SIZE,
-  fontWeight = INPUT_FONT_WEIGHT,
-  textAlign = 'left',
-  ...props
-}: FormatFieldProps & StyleProps) => {
-  const context = useContext(FormatInputContext);
-  if (context === null) {
-    throw new Error('FormatInput.Input 컴포넌트는 FormatInput.Root 하위에서 사용되어야 합니다.');
-  }
-
-  const { id, inputElementCount, values, updateValue, inputRefs, type, separator, showCompletedSeparator } = context;
-  const inputRef = inputRefs[index];
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-
-    if (pattern && !pattern.test(inputValue)) {
-      console.warn('입력 형식이 올바르지 않습니다.');
-      return;
-    }
-
-    if (validateInput && !validateInput(inputValue)) {
-      console.warn('입력 값이 유효하지 않습니다.');
-      return;
-    }
-
-    if (!isValidateInputValueByType(type, inputValue)) {
-      return;
-    }
-
-    updateValue({
+const FormatField = forwardRef<HTMLInputElement, FormatFieldProps & StyleProps>(
+  (
+    {
       index,
-      value: inputValue,
-      inputRefs,
+      readOnly,
+      mask,
+      maxLength = Infinity,
+      pattern,
+      validateInput,
+      width = '100%',
+      color = INPUT_COLOR,
+      fontSize = INPUT_FONT_SIZE,
+      fontWeight = INPUT_FONT_WEIGHT,
+      textAlign = 'left',
+      ...props
+    }: FormatFieldProps & StyleProps,
+    ref,
+  ) => {
+    const { separator, validSeparator, showSeparator, ...restFormatInputField } = useFormatInputField({
+      ref,
+      index,
+      readOnly,
+      mask,
       maxLength,
-      focus: !readOnly,
+      pattern,
+      validateInput,
     });
-  };
 
-  const inputType = mask ? 'password' : 'text';
-  const inputValue = values[index];
-
-  const validSeparator = index < inputElementCount - 1 && separator && index <= inputElementCount - 1;
-  const showSeparator = !showCompletedSeparator || (showCompletedSeparator && maxLength === inputValue?.length);
-
-  return (
-    <>
-      <TextField
-        id={`formatted-input-${id}-${index}`}
-        type={inputType}
-        variant="unstyled"
-        maxLength={maxLength}
-        value={inputValue}
-        readOnly={readOnly}
-        width={width}
-        color={color}
-        fontSize={fontSize}
-        fontWeight={fontWeight}
-        textAlign={textAlign}
-        _placeholder={{
-          color: styleToken.color.gray400,
-        }}
-        onChange={onChange}
-        {...(isValidInputRef(inputRef) && { ref: inputRef })}
-        {...props}
-      />
-      {validSeparator && (
-        <Box display="flex" justifyContent="center" alignItems="center" minWidth="10px">
-          {showSeparator && separator}
-        </Box>
-      )}
-    </>
-  );
-};
+    return (
+      <>
+        <TextField
+          variant="unstyled"
+          maxLength={maxLength}
+          readOnly={readOnly}
+          width={width}
+          color={color}
+          fontSize={fontSize}
+          fontWeight={fontWeight}
+          textAlign={textAlign}
+          _placeholder={{
+            color: styleToken.color.gray400,
+          }}
+          {...restFormatInputField}
+          {...props}
+        />
+        {validSeparator && (
+          <Box display="flex" justifyContent="center" alignItems="center" minWidth="10px">
+            {showSeparator && separator}
+          </Box>
+        )}
+      </>
+    );
+  },
+);
 
 const FormatInputLabel = ({ children }: PropsWithChildren) => {
   const context = useContext(FormatInputContext);
@@ -195,33 +163,21 @@ const FormatInputLabel = ({ children }: PropsWithChildren) => {
   );
 };
 
-const FormatInputTextCounter = ({ index, ...props }: PropsWithChildren<{ index: number } & StyleProps>) => {
-  const context = useContext(FormatInputContext);
-  if (context === null) {
-    throw new Error('FormatInput.Input 컴포넌트는 FormatInput.Root 하위에서 사용되어야 합니다.');
-  }
-  const { inputRefs } = context;
-  const inputRef = inputRefs[index];
-
-  const [{ maxLength, currentLength }, setCounterState] = useState({
-    maxLength: 0,
-    currentLength: 0,
-  });
-
-  const counterText = `${currentLength} / ${maxLength}`;
-
-  useEffect(() => {
-    if (inputRef.current) {
-      setCounterState({
-        maxLength: inputRef.current?.maxLength ?? 0,
-        currentLength: inputRef.current?.value.length ?? 0,
-      });
-    }
-  }, [inputRef]);
+const FormatInputTextCounter = ({
+  index,
+  inputRef: propInputRef,
+  ...props
+}: PropsWithChildren<
+  {
+    index: number;
+    inputRef?: RefObject<HTMLInputElement | null>;
+  } & StyleProps
+>) => {
+  const inputTextCounter = useFormatInputTextCounter({ index, inputRef: propInputRef });
 
   return (
     <Typography variant="caption" color={styleToken.color.gray400} {...props}>
-      {counterText}
+      {inputTextCounter.value}
     </Typography>
   );
 };
@@ -233,17 +189,24 @@ const FormatInputControl = ({
   backgroundColor = styleToken.color.gray200,
   borderRadius = '7px',
   ...props
-}: PropsWithChildren<StyleProps>) => (
-  <HStack
-    justifyContent={justifyContent}
-    gap={gap}
-    backgroundColor={backgroundColor}
-    borderRadius={borderRadius}
-    {...props}
-  >
-    {children}
-  </HStack>
-);
+}: PropsWithChildren<StyleProps>) => {
+  const context = useContext(FormatInputContext);
+  if (context === null) {
+    throw new Error('FormatInput.Input 컴포넌트는 FormatInput.Root 하위에서 사용되어야 합니다.');
+  }
+  return (
+    <HStack
+      justifyContent={justifyContent}
+      gap={gap}
+      backgroundColor={backgroundColor}
+      borderRadius={borderRadius}
+      {...(context.error && { outline: `2px solid ${styleToken.color.rose}` })}
+      {...props}
+    >
+      {children}
+    </HStack>
+  );
+};
 
 FormatInput.displayName = 'FormatInput';
 

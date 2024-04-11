@@ -24,7 +24,7 @@ type Story = StoryObj<typeof FormatInput>;
 
 export const Primary: Story = {
   render: () => (
-    <FormatInput.Root id="input-story" type="all" defaultValue={['']} padding="0">
+    <FormatInput.Root id="input-story" type="all" value={['']} padding="0">
       <FormatInput.Control padding="0 10px" gap="6px">
         <FormatInput.Input index={0} maxLength={30} placeholder="텍스트를 입력해주세요" padding="0" />
       </FormatInput.Control>
@@ -34,7 +34,7 @@ export const Primary: Story = {
 
 export const WithValueTypeNumeric: Story = {
   render: () => (
-    <FormatInput.Root id="input-story" type="numeric" defaultValue={['']} padding="0">
+    <FormatInput.Root id="input-story" type="numeric" value={['']} padding="0">
       <FormatInput.Control padding="0 10px" gap="6px">
         <FormatInput.Input index={0} maxLength={30} placeholder="숫자를 입력해주세요" padding="0" />
       </FormatInput.Control>
@@ -44,7 +44,7 @@ export const WithValueTypeNumeric: Story = {
 
 export const WithValueTypeAlphabetic: Story = {
   render: () => (
-    <FormatInput.Root id="input-story" type="alphabetic" defaultValue={['']} padding="0">
+    <FormatInput.Root id="input-story" type="alphabetic" value={['']} padding="0">
       <FormatInput.Control padding="0 10px" gap="6px">
         <FormatInput.Input index={0} maxLength={30} placeholder="영문를 입력해주세요" padding="0" />
       </FormatInput.Control>
@@ -54,7 +54,7 @@ export const WithValueTypeAlphabetic: Story = {
 
 export const WithLabel: Story = {
   render: () => (
-    <FormatInput.Root id="input-story" type="all" defaultValue={['']} padding="0">
+    <FormatInput.Root id="input-story" type="all" value={['']} padding="0">
       <FormatInput.Label>FomatInput Label</FormatInput.Label>
       <FormatInput.Control padding="0 10px" gap="6px">
         <FormatInput.Input index={0} maxLength={30} placeholder="텍스트를 입력해주세요" padding="0" />
@@ -65,7 +65,7 @@ export const WithLabel: Story = {
 
 export const WithTextCounter: Story = {
   render: () => (
-    <FormatInput.Root id="input-story" type="all" defaultValue={['']} padding="0">
+    <FormatInput.Root id="input-story" type="all" value={['']} padding="0">
       <FormatInput.Control padding="0" backgroundColor="none">
         <FormatInput.Label>FomatInput Label</FormatInput.Label>
         <FormatInput.TextCounter index={0} />
@@ -87,7 +87,7 @@ const isValidateMonthInput = (monthString: string) => {
 
 export const WithValidateInput: Story = {
   render: () => (
-    <FormatInput.Root id="input-story" type="numeric" defaultValue={['']} padding="0">
+    <FormatInput.Root id="input-story" type="numeric" value={['']} padding="0">
       <FormatInput.Control padding="0 10px" gap="6px">
         <FormatInput.Input index={0} maxLength={2} placeholder="MM" padding="0" validateInput={isValidateMonthInput} />
       </FormatInput.Control>
@@ -100,7 +100,7 @@ export const WithSeparator: Story = {
     <FormatInput.Root
       id="input-story"
       type="numeric"
-      defaultValue={['', '', '', '']}
+      value={['', '', '', '']}
       separator={
         <Typography variant="headline" color={styleToken.color.black}>
           -
@@ -124,7 +124,7 @@ export const WithCompletedValueShowSeparator: Story = {
     <FormatInput.Root
       id="input-story"
       type="numeric"
-      defaultValue={['', '', '', '']}
+      value={['', '', '', '']}
       separator={
         <Typography variant="headline" color={styleToken.color.black}>
           -

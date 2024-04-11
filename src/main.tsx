@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from '@/App';
-import { GlobalStyles } from '@/shared/styles';
+import { NearPaymentsProvider } from '@/card';
+import { GlobalStyles } from '@/shared';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <GlobalStyles />
-    <App />
+    <NearPaymentsProvider>
+      <App />
+    </NearPaymentsProvider>
   </React.StrictMode>,
 );

@@ -1,5 +1,5 @@
 import { CardAddDisplay } from './CardAddDisplay';
-import { CardState } from '@/card';
+import type { CardState } from '@/card/types';
 import { Box, Button, Grid, HStack, Typography, VStack, styleToken, StyleProps, replaceMaskText } from '@/shared';
 
 type CardSize = 'big' | 'small';
@@ -26,7 +26,6 @@ export const CardDisplay = ({
       <VStack
         color={styleToken.color.gray600}
         backgroundColor={color}
-        boxShadow={`3px 3px 5px ${styleToken.color.shadow}`}
         borderRadius="5px"
         padding="10px 14px"
         spacing="0"
@@ -124,6 +123,7 @@ const getCardStyles = (size: CardSize) => {
   };
   const typographyVariant: CardTypographyVariant = size === 'big' ? 'headline' : 'body';
   const maskFontSize = size === 'big' ? '14px' : '10px';
+
   return { cardDisplayProps, cardChipProps, typographyVariant, maskFontSize };
 };
 
