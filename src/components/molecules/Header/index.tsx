@@ -1,6 +1,7 @@
-import { HFlex } from '@/components/atoms/HFlex';
 import clsx from 'clsx';
 import { ComponentProps, ReactNode } from 'react';
+
+import { HFlex } from '@/components/atoms/HFlex';
 
 interface Props {
   heading: ReactNode;

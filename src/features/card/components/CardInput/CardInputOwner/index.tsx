@@ -1,11 +1,12 @@
 import { ChangeEvent } from 'react';
-import { CardInputInterface } from '@/features/card/types/cardInputTypes';
-import { MAX_LENGTH_CARD_OWNER_NAME } from '@/features/card/constants/maxLength';
+
+import { HFlex } from '@/components/atoms/HFlex';
 import { Input } from '@/components/atoms/Input';
 import { Label } from '@/components/atoms/Label';
-import { VFlex } from '@/components/atoms/VFlex';
-import { HFlex } from '@/components/atoms/HFlex';
 import { Text } from '@/components/atoms/Text';
+import { VFlex } from '@/components/atoms/VFlex';
+import { MAX_LENGTH_CARD_OWNER_NAME } from '@/features/card/constants/maxLength';
+import { CardInputInterface } from '@/features/card/types/cardTypes';
 
 interface Props {
   ownerName: CardInputInterface['ownerName'];

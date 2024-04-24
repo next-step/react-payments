@@ -2,3 +2,13 @@
   width: 100%;
   text-align: right;
 }
+
+.delete-btn {
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgb(245, 245, 245);
+  top: 16px;
+  right: 16px;
+}

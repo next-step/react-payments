@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { ComponentProps, ReactNode, createElement } from 'react';
+import { ComponentProps, createElement,ReactNode } from 'react';
 
 interface Props<T> {
   as: T;

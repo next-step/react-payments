@@ -1,11 +1,12 @@
 import { ChangeEvent } from 'react';
-import { CardInputInterface } from '@/features/card/types/cardInputTypes';
-import { MAX_LENGTH_PIECE_CARD_NUMBER } from '@/features/card/constants/maxLength';
-import { DISPLAY_CARD_NUMBER_COUPLER } from '@/features/card/constants/display';
+
 import { HFlex } from '@/components/atoms/HFlex';
 import { Input } from '@/components/atoms/Input';
 import { Label } from '@/components/atoms/Label';
 import { VFlex } from '@/components/atoms/VFlex';
+import { DISPLAY_CARD_NUMBER_COUPLER } from '@/features/card/constants/display';
+import { MAX_LENGTH_PIECE_CARD_NUMBER } from '@/features/card/constants/maxLength';
+import { CardInputInterface } from '@/features/card/types/cardTypes';
 
 interface Props {
   cardNumber: CardInputInterface['cardNumber'];
@@ -17,7 +18,25 @@ interface Props {
 
 const INPUT_ID = 'card-number';
 
+const checkHasCoupler = (
+  cardNumber: CardInputInterface['cardNumber'],
+  order: Exclude<keyof CardInputInterface['cardNumber'], 'fourth'>,
+) => {
+  const hasTargetOrderValue = cardNumber[order].length >= MAX_LENGTH_PIECE_CARD_NUMBER;
+  if (order === 'first') {
+    return hasTargetOrderValue || cardNumber.second || cardNumber.third || cardNumber.fourth;
+  }
+  if (order === 'second') {
+    return hasTargetOrderValue || cardNumber.third || cardNumber.fourth;
+  }
+  return hasTargetOrderValue || cardNumber.fourth;
+};
+
 export const CardInputNumber = ({ cardNumber, onChange }: Props) => {
+  const hasFirstCoupler = checkHasCoupler(cardNumber, 'first');
+  const hasSecondCoupler = checkHasCoupler(cardNumber, 'second');
+  const hasThirdCoupler = checkHasCoupler(cardNumber, 'third');
+
   return (
     <VFlex>
       <Label htmlFor={INPUT_ID}>{'카드 번호'}</Label>
@@ -28,19 +47,11 @@ export const CardInputNumber = ({ cardNumber, onChange }: Props) => {
           type={'text'}
           onChange={(e) => onChange(e, 'first')}
         />
-        {(cardNumber.first.length >= MAX_LENGTH_PIECE_CARD_NUMBER ||
-          cardNumber.second ||
-          cardNumber.third ||
-          cardNumber.fourth) &&
-          DISPLAY_CARD_NUMBER_COUPLER}
+        {hasFirstCoupler && DISPLAY_CARD_NUMBER_COUPLER}
         <Input value={cardNumber.second} type={'text'} onChange={(e) => onChange(e, 'second')} />
-        {(cardNumber.second.length >= MAX_LENGTH_PIECE_CARD_NUMBER ||
-          cardNumber.third ||
-          cardNumber.fourth) &&
-          DISPLAY_CARD_NUMBER_COUPLER}
+        {hasSecondCoupler && DISPLAY_CARD_NUMBER_COUPLER}
         <Input value={cardNumber.third} type={'password'} onChange={(e) => onChange(e, 'third')} />
-        {cardNumber.third.length >= MAX_LENGTH_PIECE_CARD_NUMBER ||
-          (cardNumber.fourth && DISPLAY_CARD_NUMBER_COUPLER)}
+        {hasThirdCoupler && DISPLAY_CARD_NUMBER_COUPLER}
         <Input
           value={cardNumber.fourth}
           type={'password'}

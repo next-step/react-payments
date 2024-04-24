@@ -1,9 +1,10 @@
+import { ReactElement, ReactNode, useState } from 'react';
+
 import { TSteps } from '@/features/card/constants/step';
-import { ReactElement, useState } from 'react';
 
 interface StepProps<T> {
   name: T;
-  children: ReactElement;
+  children: ReactNode;
 }
 
 interface StepperProps<T> {
@@ -14,7 +15,7 @@ export const useStepper = <T extends TSteps>(steps: T) => {
   const initialStep = steps[0];
   const [step, setStep] = useState<T[number]>(initialStep);
 
-  const Step = (props: StepProps<T[number]>): ReactElement => {
+  const Step = (props: StepProps<T[number]>): ReactNode => {
     return <>{props.children}</>;
   };
 

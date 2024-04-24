@@ -7,7 +7,7 @@ interface Props {
 
 export const Text = ({ children, className, ...spanProps }: Props & ComponentProps<'span'>) => {
   return (
-    <span className={clsx(className)} {...spanProps}>
+    <span className={clsx('text-init', className)} {...spanProps}>
       {children}
     </span>
   );

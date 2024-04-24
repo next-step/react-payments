@@ -7,14 +7,12 @@ interface Props {
 }
 
 export const Button = ({
-  type,
-  onClick,
   children,
   className,
   ...buttonProps
 }: Props & ComponentProps<'button'>) => {
   return (
-    <button className={clsx('btn-init', className)} type={type} onClick={onClick} {...buttonProps}>
+    <button className={clsx('btn-init', className)} {...buttonProps}>
       {children}
     </button>
   );
