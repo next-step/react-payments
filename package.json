@@ -1,7 +1,32 @@
 {
-  "name": "react-payments",
-  "private": true,
-  "version": "0.0.0",
+  "name": "myfirstpackage-payments",
+  "private": false,
+  "version": "0.0.7",
+  "keywords": [
+    "react",
+    "myfirstpackage-payments"
+  ],
+  "author": {
+    "name": "jjieyon",
+    "email": "ejy1105@gmail.com"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/jjiyeon/myfirstpackage-payments/tree/jjiyeon-step3",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    },
+    "./browser/specific/main.js": {
+      "import": "./browser/specific/main.js",
+      "require": "./browser/specific/main.js"
+    }
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,7 +34,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepare": "rm -rf dist && tsc && vite build"
   },
   "dependencies": {
     "@xstate/react": "^4.1.0",
@@ -27,6 +53,7 @@
     "@storybook/react": "^7.6.17",
     "@storybook/react-vite": "^7.6.17",
     "@storybook/test": "^7.6.17",
+    "@types/node": "^20.12.7",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
@@ -36,9 +63,11 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "eslint-plugin-storybook": "^0.8.0",
+    "path": "^0.12.7",
     "storybook": "^7.6.17",
     "typescript": "^5.2.2",
-    "vite": "^5.1.0"
+    "vite": "^5.1.0",
+    "vite-plugin-dts": "^3.8.2"
   },
   "eslintConfig": {
     "extends": [

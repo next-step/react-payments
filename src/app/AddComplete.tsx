@@ -14,12 +14,12 @@ const AddComplete = ({ onStep }: StepProps) => {
   const updateCardList = useContext(UpdateCardListContext)
 
   const handleClick = () => {
-    if (!cardInfo.cardAlias) updateCardInfo({ ...cardInfo, cardAlias: cardInfo.cardType })
+    if (cardInfo && !cardInfo.cardAlias) updateCardInfo({ ...cardInfo, cardAlias: cardInfo.cardType?.name || '' })
 
     if (cardList) {
-      const index = cardList.findIndex((item) => item.cardNo === cardInfo.cardNo)
+      const index = cardList.findIndex((item) => item.cardNo === cardInfo?.cardNo)
       const result = cardList.map((item, idx) => {
-        if (idx === index) item.cardAlias = cardInfo.cardAlias
+        if (idx === index) item.cardAlias = cardInfo?.cardAlias
         return item
       })
 
@@ -28,13 +28,13 @@ const AddComplete = ({ onStep }: StepProps) => {
     } else {
       updateCardList([{ ...cardInfo }])
     }
-    updateCardInfo({})
+    updateCardInfo({}) //초기값 넣어주기
     if (onStep) onStep({ step: 'list' })
   }
 
+  if (!cardInfo) return null
   return (
     <main>
-      <h2>4️⃣ 카드 추가 완료</h2>
       <div className={ui['root']}>
         <div className={`${ui['app']} ${ui['flex-column-center']}`}>
           <div className={ui['flex-column-center']}>

@@ -1,9 +1,5 @@
-import { assign, createActor, createMachine, setup } from 'xstate'
-import { Step } from '../constant/step'
+import { assign, createActor, createMachine } from 'xstate'
 
-interface StepContext {
-  step: Step | null
-}
 export type StepEvent = { type: 'ADD' } | { type: 'LIST' } | { type: 'COMPLETE' }
 
 export const stepMachine = createMachine({

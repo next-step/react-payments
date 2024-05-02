@@ -18,8 +18,17 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@context/*": ["src/context/*"],
+      "@style/*": ["src/styles/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "vite.config.ts", "src/**/*.stories.tsx", "src/**/*.stories.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

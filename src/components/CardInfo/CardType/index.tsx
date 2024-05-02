@@ -1,18 +1,17 @@
-import { useContext } from 'react'
-import { CardInfoContext, UpdateCardInfoContext } from '../../context/paymentContext'
-import ui from '../../styles/index.module.css'
+import ui from '@/styles/index.module.css'
+import { cardCompanyList } from '@/constant/cardCompany'
+import useCardInfo from '@/hooks/useCardInfo'
 
 export const CardType = ({ closeModal }: { closeModal: () => void }) => {
-  const cardInfo = useContext(CardInfoContext)
-  const updateCardInfo = useContext(UpdateCardInfoContext)
+  const { cardInfo, updateCardInfo } = useCardInfo()
 
+  if (!cardInfo) return null
   return (
     <div className={ui['modal-dimmed']} onClick={closeModal}>
       <div className={ui['modal']}>
         <div className={ui['flex-center']}>
-          {['현대', '국민', '우리', '삼성', '비씨', '롯데', '신한', '하나'].map((value, _) => (
-            <div className={ui['modal-item-container']} key={value}>
-              <div className={ui['modal-item-dot']}></div>
+          {cardCompanyList.map((value, _) => (
+            <div className={ui[`modal-item-container`]} key={value.name}>
               <button
                 className={ui['modal-item-name']}
                 onClick={() => {
@@ -20,7 +19,8 @@ export const CardType = ({ closeModal }: { closeModal: () => void }) => {
                   closeModal()
                 }}
               >
-                {value} 카드
+                <div className={`${ui['modal-item-dot']} ${ui[value.theme || 'default']}`}></div>
+                {value.name}카드
               </button>
             </div>
           ))}
