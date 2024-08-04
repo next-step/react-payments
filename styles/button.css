@@ -5,4 +5,33 @@
 
 .button-text {
   margin-right: 10px;
+  font-weight: 600;
+}
+
+.button-active:hover {
+  cursor: pointer;
+  background-color: #218838;
+}
+
+.button-active:disabled {
+  background-color: #ccc;
+  border: 1px solid #ccc;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.button-success {
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background-color: #28a745;
+  border: 1px solid #218838;
+  color: white;
+}
+
+.button-delete {
+  color: #555;
+  cursor: pointer;
+  background-color: unset;
+  border: none;
 }

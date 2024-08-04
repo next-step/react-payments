@@ -5,22 +5,25 @@ import {
   FormValues,
   UseFormProps,
 } from '@/type/formType';
+import { FIELD_INDEX_MAP } from '@/constants/form';
 
 export default function useForm<T extends FormValues>({
-  initialValue,
+  values,
+  setValues,
   validate,
+  autoFocusMethods,
   onSubmit,
 }: UseFormProps<T>) {
-  const [values, setValues] = useState<T>(initialValue);
   const [errors, setErrors] = useState<FormErrors<T>>({} as FormErrors<T>);
   const [touched, setTouched] = useState<FormTouched<T>>({} as FormTouched<T>);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
-    setValues({
-      ...values,
+    const { value, name, maxLength } = e.target;
+
+    setValues((prevValues) => ({
+      ...prevValues,
       [name]: value,
-    });
+    }));
 
     const fieldName = name;
     const fieldErrors = validate({
@@ -28,16 +31,46 @@ export default function useForm<T extends FormValues>({
       [fieldName]: value,
     });
 
-    setErrors({
-      ...errors,
+    setErrors((prevErrors) => ({
+      ...prevErrors,
       [fieldName]: fieldErrors[fieldName],
+    }));
+
+    autoFocusMethods.handleAutoFocus({
+      index: FIELD_INDEX_MAP[name],
+      value,
+      maxLength,
     });
   };
 
-  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
-    setTouched({
-      ...touched,
-      [e.target.name]: true,
+  const handleBlur = (
+    e: FocusEvent<HTMLInputElement>,
+    options?: {
+      formatter?: (value: string) => string;
+    }
+  ) => {
+    // eslint-disable-next-line prefer-const
+    let { value, name, maxLength } = e.target;
+    const { formatter } = options ?? {};
+
+    if (formatter) {
+      value = formatter(value);
+    }
+
+    setValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+
+    setTouched((prevTouched) => ({
+      ...prevTouched,
+      [name]: true,
+    }));
+
+    autoFocusMethods.handleAutoFocus({
+      index: FIELD_INDEX_MAP[name],
+      value,
+      maxLength,
     });
   };
 
@@ -62,7 +95,7 @@ export default function useForm<T extends FormValues>({
       return;
     }
 
-    onSubmit(values);
+    onSubmit();
   };
 
   const getFieldProps = (name: keyof T) => {
@@ -79,12 +112,12 @@ export default function useForm<T extends FormValues>({
   };
 
   return {
-    values,
     errors,
     touched,
     handleBlur,
     handleChange,
     handleSubmit,
     getFieldProps,
+    autoFocusMethods,
   };
 }

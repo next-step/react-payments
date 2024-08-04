@@ -23,6 +23,19 @@
   color: #525252;
 }
 
+.input-error {
+  display: flex;
+  align-items: center;
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 14px;
+
+  margin-bottom: 4px;
+
+  color: #ff4d4f;
+}
+
 .input-basic {
   background-color: #ecebf1;
   height: 45px;
@@ -50,4 +63,10 @@
 .input-space-between {
   display: flex;
   justify-content: space-between;
+}
+
+.input-flex-end {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }

@@ -1,9 +1,17 @@
-.card-box {
+.card-box,
+.card-box--hover {
   display: flex;
   align-items: center;
   justify-content: center;
 
   margin: 10px 0;
+
+  transition: transform 0.3s ease;
+}
+
+.card-box--hover:hover {
+  cursor: pointer;
+  transform: translateY(-5px);
 }
 
 .empty-card {
@@ -34,9 +42,13 @@
   width: 208px;
   height: 130px;
 
-  background: #94dacd;
+  color: #575757;
+
+  background: #e5e5e5;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+
+  user-select: none;
 }
 
 .small-card__chip {
@@ -55,12 +67,15 @@
   align-items: center;
   justify-content: center;
 
+  color: #575757;
+
   width: 290px;
   height: 180px;
 
-  background: #94dacd;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
+
+  user-select: none;
 }
 
 .big-card__chip {
@@ -133,4 +148,22 @@
   line-height: 20px;
   vertical-align: middle;
   font-weight: 400;
+}
+
+.card-list-body {
+  max-height: 400px;
+  height: 100%;
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.card-list-footer {
+  padding-top: 20px;
+  height: 200px;
+}
+
+.text-overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

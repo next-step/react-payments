@@ -11,6 +11,21 @@
   align-items: center;
 }
 
+.flex-row-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mt-3 {
+  margin-top: 0.5rem;
+}
+
 .mt-10 {
   margin-top: 2.5rem;
 }
@@ -41,6 +56,10 @@
 
 .w-75 {
   width: 75%;
+}
+
+.w-60 {
+  width: 60%;
 }
 
 .w-50 {
